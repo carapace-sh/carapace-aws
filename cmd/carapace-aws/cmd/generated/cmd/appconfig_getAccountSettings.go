@@ -12,7 +12,9 @@ var appconfig_getAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_getAccountSettingsCmd).Standalone()
+	carapace.Gen(appconfig_getAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_getAccountSettingsCmd).Standalone()
 
+	})
 	appconfigCmd.AddCommand(appconfig_getAccountSettingsCmd)
 }

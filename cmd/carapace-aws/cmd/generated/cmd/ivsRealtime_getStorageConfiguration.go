@@ -12,9 +12,11 @@ var ivsRealtime_getStorageConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_getStorageConfigurationCmd).Standalone()
+	carapace.Gen(ivsRealtime_getStorageConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_getStorageConfigurationCmd).Standalone()
 
-	ivsRealtime_getStorageConfigurationCmd.Flags().String("arn", "", "ARN of the storage configuration to be retrieved.")
-	ivsRealtime_getStorageConfigurationCmd.MarkFlagRequired("arn")
+		ivsRealtime_getStorageConfigurationCmd.Flags().String("arn", "", "ARN of the storage configuration to be retrieved.")
+		ivsRealtime_getStorageConfigurationCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_getStorageConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var config_stopConfigurationRecorderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_stopConfigurationRecorderCmd).Standalone()
+	carapace.Gen(config_stopConfigurationRecorderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_stopConfigurationRecorderCmd).Standalone()
 
-	config_stopConfigurationRecorderCmd.Flags().String("configuration-recorder-name", "", "The name of the customer managed configuration recorder that you want to stop.")
-	config_stopConfigurationRecorderCmd.MarkFlagRequired("configuration-recorder-name")
+		config_stopConfigurationRecorderCmd.Flags().String("configuration-recorder-name", "", "The name of the customer managed configuration recorder that you want to stop.")
+		config_stopConfigurationRecorderCmd.MarkFlagRequired("configuration-recorder-name")
+	})
 	configCmd.AddCommand(config_stopConfigurationRecorderCmd)
 }

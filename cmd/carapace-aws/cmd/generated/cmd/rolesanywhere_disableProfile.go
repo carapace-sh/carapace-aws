@@ -12,9 +12,11 @@ var rolesanywhere_disableProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_disableProfileCmd).Standalone()
+	carapace.Gen(rolesanywhere_disableProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_disableProfileCmd).Standalone()
 
-	rolesanywhere_disableProfileCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
-	rolesanywhere_disableProfileCmd.MarkFlagRequired("profile-id")
+		rolesanywhere_disableProfileCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
+		rolesanywhere_disableProfileCmd.MarkFlagRequired("profile-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_disableProfileCmd)
 }

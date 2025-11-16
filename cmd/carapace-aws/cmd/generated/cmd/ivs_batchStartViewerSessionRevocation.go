@@ -12,9 +12,11 @@ var ivs_batchStartViewerSessionRevocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_batchStartViewerSessionRevocationCmd).Standalone()
+	carapace.Gen(ivs_batchStartViewerSessionRevocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_batchStartViewerSessionRevocationCmd).Standalone()
 
-	ivs_batchStartViewerSessionRevocationCmd.Flags().String("viewer-sessions", "", "Array of viewer sessions, one per channel-ARN and viewer-ID pair.")
-	ivs_batchStartViewerSessionRevocationCmd.MarkFlagRequired("viewer-sessions")
+		ivs_batchStartViewerSessionRevocationCmd.Flags().String("viewer-sessions", "", "Array of viewer sessions, one per channel-ARN and viewer-ID pair.")
+		ivs_batchStartViewerSessionRevocationCmd.MarkFlagRequired("viewer-sessions")
+	})
 	ivsCmd.AddCommand(ivs_batchStartViewerSessionRevocationCmd)
 }

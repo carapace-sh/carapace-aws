@@ -12,9 +12,11 @@ var redshift_rejectDataShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_rejectDataShareCmd).Standalone()
+	carapace.Gen(redshift_rejectDataShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_rejectDataShareCmd).Standalone()
 
-	redshift_rejectDataShareCmd.Flags().String("data-share-arn", "", "The Amazon Resource Name (ARN) of the datashare to reject.")
-	redshift_rejectDataShareCmd.MarkFlagRequired("data-share-arn")
+		redshift_rejectDataShareCmd.Flags().String("data-share-arn", "", "The Amazon Resource Name (ARN) of the datashare to reject.")
+		redshift_rejectDataShareCmd.MarkFlagRequired("data-share-arn")
+	})
 	redshiftCmd.AddCommand(redshift_rejectDataShareCmd)
 }

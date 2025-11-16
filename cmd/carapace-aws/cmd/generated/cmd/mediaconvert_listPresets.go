@@ -12,12 +12,14 @@ var mediaconvert_listPresetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_listPresetsCmd).Standalone()
+	carapace.Gen(mediaconvert_listPresetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_listPresetsCmd).Standalone()
 
-	mediaconvert_listPresetsCmd.Flags().String("category", "", "Optionally, specify a preset category to limit responses to only presets from that category.")
-	mediaconvert_listPresetsCmd.Flags().String("list-by", "", "Optional.")
-	mediaconvert_listPresetsCmd.Flags().String("max-results", "", "Optional.")
-	mediaconvert_listPresetsCmd.Flags().String("next-token", "", "Use this string, provided with the response to a previous request, to request the next batch of presets.")
-	mediaconvert_listPresetsCmd.Flags().String("order", "", "Optional.")
+		mediaconvert_listPresetsCmd.Flags().String("category", "", "Optionally, specify a preset category to limit responses to only presets from that category.")
+		mediaconvert_listPresetsCmd.Flags().String("list-by", "", "Optional.")
+		mediaconvert_listPresetsCmd.Flags().String("max-results", "", "Optional.")
+		mediaconvert_listPresetsCmd.Flags().String("next-token", "", "Use this string, provided with the response to a previous request, to request the next batch of presets.")
+		mediaconvert_listPresetsCmd.Flags().String("order", "", "Optional.")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_listPresetsCmd)
 }

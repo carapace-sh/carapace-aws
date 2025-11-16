@@ -12,9 +12,11 @@ var sesv2_getEmailTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getEmailTemplateCmd).Standalone()
+	carapace.Gen(sesv2_getEmailTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getEmailTemplateCmd).Standalone()
 
-	sesv2_getEmailTemplateCmd.Flags().String("template-name", "", "The name of the template.")
-	sesv2_getEmailTemplateCmd.MarkFlagRequired("template-name")
+		sesv2_getEmailTemplateCmd.Flags().String("template-name", "", "The name of the template.")
+		sesv2_getEmailTemplateCmd.MarkFlagRequired("template-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_getEmailTemplateCmd)
 }

@@ -12,10 +12,12 @@ var dms_describeEndpointTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeEndpointTypesCmd).Standalone()
+	carapace.Gen(dms_describeEndpointTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeEndpointTypesCmd).Standalone()
 
-	dms_describeEndpointTypesCmd.Flags().String("filters", "", "Filters applied to the endpoint types.")
-	dms_describeEndpointTypesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	dms_describeEndpointTypesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		dms_describeEndpointTypesCmd.Flags().String("filters", "", "Filters applied to the endpoint types.")
+		dms_describeEndpointTypesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		dms_describeEndpointTypesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	dmsCmd.AddCommand(dms_describeEndpointTypesCmd)
 }

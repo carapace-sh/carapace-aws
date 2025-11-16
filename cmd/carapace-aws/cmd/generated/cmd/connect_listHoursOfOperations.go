@@ -12,11 +12,13 @@ var connect_listHoursOfOperationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listHoursOfOperationsCmd).Standalone()
+	carapace.Gen(connect_listHoursOfOperationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listHoursOfOperationsCmd).Standalone()
 
-	connect_listHoursOfOperationsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listHoursOfOperationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listHoursOfOperationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listHoursOfOperationsCmd.MarkFlagRequired("instance-id")
+		connect_listHoursOfOperationsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listHoursOfOperationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listHoursOfOperationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listHoursOfOperationsCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listHoursOfOperationsCmd)
 }

@@ -12,11 +12,13 @@ var arcZonalShift_updateZonalShiftCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_updateZonalShiftCmd).Standalone()
+	carapace.Gen(arcZonalShift_updateZonalShiftCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_updateZonalShiftCmd).Standalone()
 
-	arcZonalShift_updateZonalShiftCmd.Flags().String("comment", "", "A comment that you enter about the zonal shift.")
-	arcZonalShift_updateZonalShiftCmd.Flags().String("expires-in", "", "The length of time that you want a zonal shift to be active, which ARC converts to an expiry time (expiration time).")
-	arcZonalShift_updateZonalShiftCmd.Flags().String("zonal-shift-id", "", "The identifier of a zonal shift.")
-	arcZonalShift_updateZonalShiftCmd.MarkFlagRequired("zonal-shift-id")
+		arcZonalShift_updateZonalShiftCmd.Flags().String("comment", "", "A comment that you enter about the zonal shift.")
+		arcZonalShift_updateZonalShiftCmd.Flags().String("expires-in", "", "The length of time that you want a zonal shift to be active, which ARC converts to an expiry time (expiration time).")
+		arcZonalShift_updateZonalShiftCmd.Flags().String("zonal-shift-id", "", "The identifier of a zonal shift.")
+		arcZonalShift_updateZonalShiftCmd.MarkFlagRequired("zonal-shift-id")
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_updateZonalShiftCmd)
 }

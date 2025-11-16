@@ -12,13 +12,15 @@ var qconnect_listContentAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_listContentAssociationsCmd).Standalone()
+	carapace.Gen(qconnect_listContentAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_listContentAssociationsCmd).Standalone()
 
-	qconnect_listContentAssociationsCmd.Flags().String("content-id", "", "The identifier of the content.")
-	qconnect_listContentAssociationsCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_listContentAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_listContentAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	qconnect_listContentAssociationsCmd.MarkFlagRequired("content-id")
-	qconnect_listContentAssociationsCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_listContentAssociationsCmd.Flags().String("content-id", "", "The identifier of the content.")
+		qconnect_listContentAssociationsCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_listContentAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_listContentAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_listContentAssociationsCmd.MarkFlagRequired("content-id")
+		qconnect_listContentAssociationsCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	qconnectCmd.AddCommand(qconnect_listContentAssociationsCmd)
 }

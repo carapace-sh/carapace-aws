@@ -12,9 +12,11 @@ var inspector_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_listTagsForResourceCmd).Standalone()
+	carapace.Gen(inspector_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_listTagsForResourceCmd).Standalone()
 
-	inspector_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN that specifies the assessment template whose tags you want to list.")
-	inspector_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		inspector_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN that specifies the assessment template whose tags you want to list.")
+		inspector_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	inspectorCmd.AddCommand(inspector_listTagsForResourceCmd)
 }

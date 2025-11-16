@@ -12,12 +12,14 @@ var finspace_updateKxEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_updateKxEnvironmentCmd).Standalone()
+	carapace.Gen(finspace_updateKxEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_updateKxEnvironmentCmd).Standalone()
 
-	finspace_updateKxEnvironmentCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
-	finspace_updateKxEnvironmentCmd.Flags().String("description", "", "A description of the kdb environment.")
-	finspace_updateKxEnvironmentCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_updateKxEnvironmentCmd.Flags().String("name", "", "The name of the kdb environment.")
-	finspace_updateKxEnvironmentCmd.MarkFlagRequired("environment-id")
+		finspace_updateKxEnvironmentCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
+		finspace_updateKxEnvironmentCmd.Flags().String("description", "", "A description of the kdb environment.")
+		finspace_updateKxEnvironmentCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_updateKxEnvironmentCmd.Flags().String("name", "", "The name of the kdb environment.")
+		finspace_updateKxEnvironmentCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_updateKxEnvironmentCmd)
 }

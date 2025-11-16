@@ -12,16 +12,18 @@ var connect_createPersistentContactAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_createPersistentContactAssociationCmd).Standalone()
+	carapace.Gen(connect_createPersistentContactAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_createPersistentContactAssociationCmd).Standalone()
 
-	connect_createPersistentContactAssociationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connect_createPersistentContactAssociationCmd.Flags().String("initial-contact-id", "", "This is the contactId of the current contact that the `CreatePersistentContactAssociation` API is being called from.")
-	connect_createPersistentContactAssociationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_createPersistentContactAssociationCmd.Flags().String("rehydration-type", "", "The contactId chosen for rehydration depends on the type chosen.")
-	connect_createPersistentContactAssociationCmd.Flags().String("source-contact-id", "", "The contactId from which a persistent chat session must be started.")
-	connect_createPersistentContactAssociationCmd.MarkFlagRequired("initial-contact-id")
-	connect_createPersistentContactAssociationCmd.MarkFlagRequired("instance-id")
-	connect_createPersistentContactAssociationCmd.MarkFlagRequired("rehydration-type")
-	connect_createPersistentContactAssociationCmd.MarkFlagRequired("source-contact-id")
+		connect_createPersistentContactAssociationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connect_createPersistentContactAssociationCmd.Flags().String("initial-contact-id", "", "This is the contactId of the current contact that the `CreatePersistentContactAssociation` API is being called from.")
+		connect_createPersistentContactAssociationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_createPersistentContactAssociationCmd.Flags().String("rehydration-type", "", "The contactId chosen for rehydration depends on the type chosen.")
+		connect_createPersistentContactAssociationCmd.Flags().String("source-contact-id", "", "The contactId from which a persistent chat session must be started.")
+		connect_createPersistentContactAssociationCmd.MarkFlagRequired("initial-contact-id")
+		connect_createPersistentContactAssociationCmd.MarkFlagRequired("instance-id")
+		connect_createPersistentContactAssociationCmd.MarkFlagRequired("rehydration-type")
+		connect_createPersistentContactAssociationCmd.MarkFlagRequired("source-contact-id")
+	})
 	connectCmd.AddCommand(connect_createPersistentContactAssociationCmd)
 }

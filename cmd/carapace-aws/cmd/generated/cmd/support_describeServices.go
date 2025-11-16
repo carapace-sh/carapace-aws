@@ -12,9 +12,11 @@ var support_describeServicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(support_describeServicesCmd).Standalone()
+	carapace.Gen(support_describeServicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(support_describeServicesCmd).Standalone()
 
-	support_describeServicesCmd.Flags().String("language", "", "The language in which Amazon Web Services Support handles the case.")
-	support_describeServicesCmd.Flags().String("service-code-list", "", "A JSON-formatted list of service codes available for Amazon Web Services services.")
+		support_describeServicesCmd.Flags().String("language", "", "The language in which Amazon Web Services Support handles the case.")
+		support_describeServicesCmd.Flags().String("service-code-list", "", "A JSON-formatted list of service codes available for Amazon Web Services services.")
+	})
 	supportCmd.AddCommand(support_describeServicesCmd)
 }

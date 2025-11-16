@@ -12,12 +12,14 @@ var connect_associateApprovedOriginCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_associateApprovedOriginCmd).Standalone()
+	carapace.Gen(connect_associateApprovedOriginCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_associateApprovedOriginCmd).Standalone()
 
-	connect_associateApprovedOriginCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connect_associateApprovedOriginCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_associateApprovedOriginCmd.Flags().String("origin", "", "The domain to add to your allow list.")
-	connect_associateApprovedOriginCmd.MarkFlagRequired("instance-id")
-	connect_associateApprovedOriginCmd.MarkFlagRequired("origin")
+		connect_associateApprovedOriginCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connect_associateApprovedOriginCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_associateApprovedOriginCmd.Flags().String("origin", "", "The domain to add to your allow list.")
+		connect_associateApprovedOriginCmd.MarkFlagRequired("instance-id")
+		connect_associateApprovedOriginCmd.MarkFlagRequired("origin")
+	})
 	connectCmd.AddCommand(connect_associateApprovedOriginCmd)
 }

@@ -12,12 +12,14 @@ var workmail_createIdentityCenterApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_createIdentityCenterApplicationCmd).Standalone()
+	carapace.Gen(workmail_createIdentityCenterApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_createIdentityCenterApplicationCmd).Standalone()
 
-	workmail_createIdentityCenterApplicationCmd.Flags().String("client-token", "", "The idempotency token associated with the request.")
-	workmail_createIdentityCenterApplicationCmd.Flags().String("instance-arn", "", "The Amazon Resource Name (ARN) of the instance.")
-	workmail_createIdentityCenterApplicationCmd.Flags().String("name", "", "The name of the IAM Identity Center application.")
-	workmail_createIdentityCenterApplicationCmd.MarkFlagRequired("instance-arn")
-	workmail_createIdentityCenterApplicationCmd.MarkFlagRequired("name")
+		workmail_createIdentityCenterApplicationCmd.Flags().String("client-token", "", "The idempotency token associated with the request.")
+		workmail_createIdentityCenterApplicationCmd.Flags().String("instance-arn", "", "The Amazon Resource Name (ARN) of the instance.")
+		workmail_createIdentityCenterApplicationCmd.Flags().String("name", "", "The name of the IAM Identity Center application.")
+		workmail_createIdentityCenterApplicationCmd.MarkFlagRequired("instance-arn")
+		workmail_createIdentityCenterApplicationCmd.MarkFlagRequired("name")
+	})
 	workmailCmd.AddCommand(workmail_createIdentityCenterApplicationCmd)
 }

@@ -12,9 +12,11 @@ var efs_describeFileSystemPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_describeFileSystemPolicyCmd).Standalone()
+	carapace.Gen(efs_describeFileSystemPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_describeFileSystemPolicyCmd).Standalone()
 
-	efs_describeFileSystemPolicyCmd.Flags().String("file-system-id", "", "Specifies which EFS file system to retrieve the `FileSystemPolicy` for.")
-	efs_describeFileSystemPolicyCmd.MarkFlagRequired("file-system-id")
+		efs_describeFileSystemPolicyCmd.Flags().String("file-system-id", "", "Specifies which EFS file system to retrieve the `FileSystemPolicy` for.")
+		efs_describeFileSystemPolicyCmd.MarkFlagRequired("file-system-id")
+	})
 	efsCmd.AddCommand(efs_describeFileSystemPolicyCmd)
 }

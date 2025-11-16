@@ -12,10 +12,12 @@ var resiliencehub_deleteAppAssessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_deleteAppAssessmentCmd).Standalone()
+	carapace.Gen(resiliencehub_deleteAppAssessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_deleteAppAssessmentCmd).Standalone()
 
-	resiliencehub_deleteAppAssessmentCmd.Flags().String("assessment-arn", "", "Amazon Resource Name (ARN) of the assessment.")
-	resiliencehub_deleteAppAssessmentCmd.Flags().String("client-token", "", "Used for an idempotency token.")
-	resiliencehub_deleteAppAssessmentCmd.MarkFlagRequired("assessment-arn")
+		resiliencehub_deleteAppAssessmentCmd.Flags().String("assessment-arn", "", "Amazon Resource Name (ARN) of the assessment.")
+		resiliencehub_deleteAppAssessmentCmd.Flags().String("client-token", "", "Used for an idempotency token.")
+		resiliencehub_deleteAppAssessmentCmd.MarkFlagRequired("assessment-arn")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_deleteAppAssessmentCmd)
 }

@@ -12,9 +12,11 @@ var cognitoSync_listIdentityPoolUsageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoSync_listIdentityPoolUsageCmd).Standalone()
+	carapace.Gen(cognitoSync_listIdentityPoolUsageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoSync_listIdentityPoolUsageCmd).Standalone()
 
-	cognitoSync_listIdentityPoolUsageCmd.Flags().String("max-results", "", "The maximum number of results to be returned.")
-	cognitoSync_listIdentityPoolUsageCmd.Flags().String("next-token", "", "A pagination token for obtaining the next page of results.")
+		cognitoSync_listIdentityPoolUsageCmd.Flags().String("max-results", "", "The maximum number of results to be returned.")
+		cognitoSync_listIdentityPoolUsageCmd.Flags().String("next-token", "", "A pagination token for obtaining the next page of results.")
+	})
 	cognitoSyncCmd.AddCommand(cognitoSync_listIdentityPoolUsageCmd)
 }

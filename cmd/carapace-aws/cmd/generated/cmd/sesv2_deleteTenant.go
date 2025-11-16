@@ -12,9 +12,11 @@ var sesv2_deleteTenantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteTenantCmd).Standalone()
+	carapace.Gen(sesv2_deleteTenantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteTenantCmd).Standalone()
 
-	sesv2_deleteTenantCmd.Flags().String("tenant-name", "", "The name of the tenant to delete.")
-	sesv2_deleteTenantCmd.MarkFlagRequired("tenant-name")
+		sesv2_deleteTenantCmd.Flags().String("tenant-name", "", "The name of the tenant to delete.")
+		sesv2_deleteTenantCmd.MarkFlagRequired("tenant-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteTenantCmd)
 }

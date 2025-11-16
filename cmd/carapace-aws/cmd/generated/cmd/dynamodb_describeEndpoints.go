@@ -12,7 +12,9 @@ var dynamodb_describeEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeEndpointsCmd).Standalone()
+	carapace.Gen(dynamodb_describeEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeEndpointsCmd).Standalone()
 
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeEndpointsCmd)
 }

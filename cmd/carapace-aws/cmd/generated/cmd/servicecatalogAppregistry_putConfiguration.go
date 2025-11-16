@@ -12,9 +12,11 @@ var servicecatalogAppregistry_putConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalogAppregistry_putConfigurationCmd).Standalone()
+	carapace.Gen(servicecatalogAppregistry_putConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalogAppregistry_putConfigurationCmd).Standalone()
 
-	servicecatalogAppregistry_putConfigurationCmd.Flags().String("configuration", "", "Associates a `TagKey` configuration to an account.")
-	servicecatalogAppregistry_putConfigurationCmd.MarkFlagRequired("configuration")
+		servicecatalogAppregistry_putConfigurationCmd.Flags().String("configuration", "", "Associates a `TagKey` configuration to an account.")
+		servicecatalogAppregistry_putConfigurationCmd.MarkFlagRequired("configuration")
+	})
 	servicecatalogAppregistryCmd.AddCommand(servicecatalogAppregistry_putConfigurationCmd)
 }

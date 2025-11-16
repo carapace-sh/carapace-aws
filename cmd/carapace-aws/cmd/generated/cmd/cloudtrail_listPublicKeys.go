@@ -12,10 +12,12 @@ var cloudtrail_listPublicKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_listPublicKeysCmd).Standalone()
+	carapace.Gen(cloudtrail_listPublicKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_listPublicKeysCmd).Standalone()
 
-	cloudtrail_listPublicKeysCmd.Flags().String("end-time", "", "Optionally specifies, in UTC, the end of the time range to look up public keys for CloudTrail digest files.")
-	cloudtrail_listPublicKeysCmd.Flags().String("next-token", "", "Reserved for future use.")
-	cloudtrail_listPublicKeysCmd.Flags().String("start-time", "", "Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files.")
+		cloudtrail_listPublicKeysCmd.Flags().String("end-time", "", "Optionally specifies, in UTC, the end of the time range to look up public keys for CloudTrail digest files.")
+		cloudtrail_listPublicKeysCmd.Flags().String("next-token", "", "Reserved for future use.")
+		cloudtrail_listPublicKeysCmd.Flags().String("start-time", "", "Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files.")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_listPublicKeysCmd)
 }

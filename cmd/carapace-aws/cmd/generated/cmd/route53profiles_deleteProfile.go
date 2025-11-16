@@ -12,9 +12,11 @@ var route53profiles_deleteProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53profiles_deleteProfileCmd).Standalone()
+	carapace.Gen(route53profiles_deleteProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53profiles_deleteProfileCmd).Standalone()
 
-	route53profiles_deleteProfileCmd.Flags().String("profile-id", "", "The ID of the Profile that you want to delete.")
-	route53profiles_deleteProfileCmd.MarkFlagRequired("profile-id")
+		route53profiles_deleteProfileCmd.Flags().String("profile-id", "", "The ID of the Profile that you want to delete.")
+		route53profiles_deleteProfileCmd.MarkFlagRequired("profile-id")
+	})
 	route53profilesCmd.AddCommand(route53profiles_deleteProfileCmd)
 }

@@ -12,13 +12,15 @@ var mediaconvert_updateQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_updateQueueCmd).Standalone()
+	carapace.Gen(mediaconvert_updateQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_updateQueueCmd).Standalone()
 
-	mediaconvert_updateQueueCmd.Flags().String("concurrent-jobs", "", "Specify the maximum number of jobs your queue can process concurrently.")
-	mediaconvert_updateQueueCmd.Flags().String("description", "", "The new description for the queue, if you are changing it.")
-	mediaconvert_updateQueueCmd.Flags().String("name", "", "The name of the queue that you are modifying.")
-	mediaconvert_updateQueueCmd.Flags().String("reservation-plan-settings", "", "The new details of your pricing plan for your reserved queue.")
-	mediaconvert_updateQueueCmd.Flags().String("status", "", "Pause or activate a queue by changing its status between ACTIVE and PAUSED.")
-	mediaconvert_updateQueueCmd.MarkFlagRequired("name")
+		mediaconvert_updateQueueCmd.Flags().String("concurrent-jobs", "", "Specify the maximum number of jobs your queue can process concurrently.")
+		mediaconvert_updateQueueCmd.Flags().String("description", "", "The new description for the queue, if you are changing it.")
+		mediaconvert_updateQueueCmd.Flags().String("name", "", "The name of the queue that you are modifying.")
+		mediaconvert_updateQueueCmd.Flags().String("reservation-plan-settings", "", "The new details of your pricing plan for your reserved queue.")
+		mediaconvert_updateQueueCmd.Flags().String("status", "", "Pause or activate a queue by changing its status between ACTIVE and PAUSED.")
+		mediaconvert_updateQueueCmd.MarkFlagRequired("name")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_updateQueueCmd)
 }

@@ -12,14 +12,16 @@ var ec2_associateTransitGatewayRouteTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_associateTransitGatewayRouteTableCmd).Standalone()
+	carapace.Gen(ec2_associateTransitGatewayRouteTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_associateTransitGatewayRouteTableCmd).Standalone()
 
-	ec2_associateTransitGatewayRouteTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_associateTransitGatewayRouteTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_associateTransitGatewayRouteTableCmd.Flags().String("transit-gateway-attachment-id", "", "The ID of the attachment.")
-	ec2_associateTransitGatewayRouteTableCmd.Flags().String("transit-gateway-route-table-id", "", "The ID of the transit gateway route table.")
-	ec2_associateTransitGatewayRouteTableCmd.Flag("no-dry-run").Hidden = true
-	ec2_associateTransitGatewayRouteTableCmd.MarkFlagRequired("transit-gateway-attachment-id")
-	ec2_associateTransitGatewayRouteTableCmd.MarkFlagRequired("transit-gateway-route-table-id")
+		ec2_associateTransitGatewayRouteTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_associateTransitGatewayRouteTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_associateTransitGatewayRouteTableCmd.Flags().String("transit-gateway-attachment-id", "", "The ID of the attachment.")
+		ec2_associateTransitGatewayRouteTableCmd.Flags().String("transit-gateway-route-table-id", "", "The ID of the transit gateway route table.")
+		ec2_associateTransitGatewayRouteTableCmd.Flag("no-dry-run").Hidden = true
+		ec2_associateTransitGatewayRouteTableCmd.MarkFlagRequired("transit-gateway-attachment-id")
+		ec2_associateTransitGatewayRouteTableCmd.MarkFlagRequired("transit-gateway-route-table-id")
+	})
 	ec2Cmd.AddCommand(ec2_associateTransitGatewayRouteTableCmd)
 }

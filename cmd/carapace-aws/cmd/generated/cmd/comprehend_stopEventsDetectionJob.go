@@ -12,9 +12,11 @@ var comprehend_stopEventsDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_stopEventsDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_stopEventsDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_stopEventsDetectionJobCmd).Standalone()
 
-	comprehend_stopEventsDetectionJobCmd.Flags().String("job-id", "", "The identifier of the events detection job to stop.")
-	comprehend_stopEventsDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_stopEventsDetectionJobCmd.Flags().String("job-id", "", "The identifier of the events detection job to stop.")
+		comprehend_stopEventsDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_stopEventsDetectionJobCmd)
 }

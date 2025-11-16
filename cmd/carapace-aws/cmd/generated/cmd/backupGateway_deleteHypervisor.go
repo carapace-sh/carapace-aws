@@ -12,9 +12,11 @@ var backupGateway_deleteHypervisorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_deleteHypervisorCmd).Standalone()
+	carapace.Gen(backupGateway_deleteHypervisorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_deleteHypervisorCmd).Standalone()
 
-	backupGateway_deleteHypervisorCmd.Flags().String("hypervisor-arn", "", "The Amazon Resource Name (ARN) of the hypervisor to delete.")
-	backupGateway_deleteHypervisorCmd.MarkFlagRequired("hypervisor-arn")
+		backupGateway_deleteHypervisorCmd.Flags().String("hypervisor-arn", "", "The Amazon Resource Name (ARN) of the hypervisor to delete.")
+		backupGateway_deleteHypervisorCmd.MarkFlagRequired("hypervisor-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_deleteHypervisorCmd)
 }

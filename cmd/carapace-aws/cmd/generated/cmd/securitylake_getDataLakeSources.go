@@ -12,10 +12,12 @@ var securitylake_getDataLakeSourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_getDataLakeSourcesCmd).Standalone()
+	carapace.Gen(securitylake_getDataLakeSourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_getDataLakeSourcesCmd).Standalone()
 
-	securitylake_getDataLakeSourcesCmd.Flags().String("accounts", "", "The Amazon Web Services account ID for which a static snapshot of the current Amazon Web Services Region, including enabled accounts and log sources, is retrieved.")
-	securitylake_getDataLakeSourcesCmd.Flags().String("max-results", "", "The maximum limit of accounts for which the static snapshot of the current Region, including enabled accounts and log sources, is retrieved.")
-	securitylake_getDataLakeSourcesCmd.Flags().String("next-token", "", "Lists if there are more results available.")
+		securitylake_getDataLakeSourcesCmd.Flags().String("accounts", "", "The Amazon Web Services account ID for which a static snapshot of the current Amazon Web Services Region, including enabled accounts and log sources, is retrieved.")
+		securitylake_getDataLakeSourcesCmd.Flags().String("max-results", "", "The maximum limit of accounts for which the static snapshot of the current Region, including enabled accounts and log sources, is retrieved.")
+		securitylake_getDataLakeSourcesCmd.Flags().String("next-token", "", "Lists if there are more results available.")
+	})
 	securitylakeCmd.AddCommand(securitylake_getDataLakeSourcesCmd)
 }

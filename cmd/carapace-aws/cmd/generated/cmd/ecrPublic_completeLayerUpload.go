@@ -12,14 +12,16 @@ var ecrPublic_completeLayerUploadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecrPublic_completeLayerUploadCmd).Standalone()
+	carapace.Gen(ecrPublic_completeLayerUploadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecrPublic_completeLayerUploadCmd).Standalone()
 
-	ecrPublic_completeLayerUploadCmd.Flags().String("layer-digests", "", "The `sha256` digest of the image layer.")
-	ecrPublic_completeLayerUploadCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID, or registry alias, associated with the registry where layers are uploaded.")
-	ecrPublic_completeLayerUploadCmd.Flags().String("repository-name", "", "The name of the repository in a public registry to associate with the image layer.")
-	ecrPublic_completeLayerUploadCmd.Flags().String("upload-id", "", "The upload ID from a previous [InitiateLayerUpload]() operation to associate with the image layer.")
-	ecrPublic_completeLayerUploadCmd.MarkFlagRequired("layer-digests")
-	ecrPublic_completeLayerUploadCmd.MarkFlagRequired("repository-name")
-	ecrPublic_completeLayerUploadCmd.MarkFlagRequired("upload-id")
+		ecrPublic_completeLayerUploadCmd.Flags().String("layer-digests", "", "The `sha256` digest of the image layer.")
+		ecrPublic_completeLayerUploadCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID, or registry alias, associated with the registry where layers are uploaded.")
+		ecrPublic_completeLayerUploadCmd.Flags().String("repository-name", "", "The name of the repository in a public registry to associate with the image layer.")
+		ecrPublic_completeLayerUploadCmd.Flags().String("upload-id", "", "The upload ID from a previous [InitiateLayerUpload]() operation to associate with the image layer.")
+		ecrPublic_completeLayerUploadCmd.MarkFlagRequired("layer-digests")
+		ecrPublic_completeLayerUploadCmd.MarkFlagRequired("repository-name")
+		ecrPublic_completeLayerUploadCmd.MarkFlagRequired("upload-id")
+	})
 	ecrPublicCmd.AddCommand(ecrPublic_completeLayerUploadCmd)
 }

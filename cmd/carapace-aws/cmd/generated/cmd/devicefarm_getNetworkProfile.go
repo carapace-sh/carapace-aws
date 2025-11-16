@@ -12,9 +12,11 @@ var devicefarm_getNetworkProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_getNetworkProfileCmd).Standalone()
+	carapace.Gen(devicefarm_getNetworkProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_getNetworkProfileCmd).Standalone()
 
-	devicefarm_getNetworkProfileCmd.Flags().String("arn", "", "The ARN of the network profile to return information about.")
-	devicefarm_getNetworkProfileCmd.MarkFlagRequired("arn")
+		devicefarm_getNetworkProfileCmd.Flags().String("arn", "", "The ARN of the network profile to return information about.")
+		devicefarm_getNetworkProfileCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_getNetworkProfileCmd)
 }

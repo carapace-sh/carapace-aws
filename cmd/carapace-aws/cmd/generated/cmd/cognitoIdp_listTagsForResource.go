@@ -12,9 +12,11 @@ var cognitoIdp_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_listTagsForResourceCmd).Standalone()
+	carapace.Gen(cognitoIdp_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_listTagsForResourceCmd).Standalone()
 
-	cognitoIdp_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.")
-	cognitoIdp_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		cognitoIdp_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.")
+		cognitoIdp_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_listTagsForResourceCmd)
 }

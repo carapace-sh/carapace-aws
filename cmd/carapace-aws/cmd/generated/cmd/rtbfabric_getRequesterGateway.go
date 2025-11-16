@@ -12,9 +12,11 @@ var rtbfabric_getRequesterGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_getRequesterGatewayCmd).Standalone()
+	carapace.Gen(rtbfabric_getRequesterGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_getRequesterGatewayCmd).Standalone()
 
-	rtbfabric_getRequesterGatewayCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
-	rtbfabric_getRequesterGatewayCmd.MarkFlagRequired("gateway-id")
+		rtbfabric_getRequesterGatewayCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
+		rtbfabric_getRequesterGatewayCmd.MarkFlagRequired("gateway-id")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_getRequesterGatewayCmd)
 }

@@ -12,9 +12,11 @@ var comprehendmedical_describeRxNormInferenceJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_describeRxNormInferenceJobCmd).Standalone()
+	carapace.Gen(comprehendmedical_describeRxNormInferenceJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_describeRxNormInferenceJobCmd).Standalone()
 
-	comprehendmedical_describeRxNormInferenceJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend Medical generated for the job.")
-	comprehendmedical_describeRxNormInferenceJobCmd.MarkFlagRequired("job-id")
+		comprehendmedical_describeRxNormInferenceJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend Medical generated for the job.")
+		comprehendmedical_describeRxNormInferenceJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_describeRxNormInferenceJobCmd)
 }

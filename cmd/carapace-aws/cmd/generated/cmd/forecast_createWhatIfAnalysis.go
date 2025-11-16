@@ -12,13 +12,15 @@ var forecast_createWhatIfAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_createWhatIfAnalysisCmd).Standalone()
+	carapace.Gen(forecast_createWhatIfAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_createWhatIfAnalysisCmd).Standalone()
 
-	forecast_createWhatIfAnalysisCmd.Flags().String("forecast-arn", "", "The Amazon Resource Name (ARN) of the baseline forecast.")
-	forecast_createWhatIfAnalysisCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the what if forecast.")
-	forecast_createWhatIfAnalysisCmd.Flags().String("time-series-selector", "", "Defines the set of time series that are used in the what-if analysis with a `TimeSeriesIdentifiers` object.")
-	forecast_createWhatIfAnalysisCmd.Flags().String("what-if-analysis-name", "", "The name of the what-if analysis.")
-	forecast_createWhatIfAnalysisCmd.MarkFlagRequired("forecast-arn")
-	forecast_createWhatIfAnalysisCmd.MarkFlagRequired("what-if-analysis-name")
+		forecast_createWhatIfAnalysisCmd.Flags().String("forecast-arn", "", "The Amazon Resource Name (ARN) of the baseline forecast.")
+		forecast_createWhatIfAnalysisCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the what if forecast.")
+		forecast_createWhatIfAnalysisCmd.Flags().String("time-series-selector", "", "Defines the set of time series that are used in the what-if analysis with a `TimeSeriesIdentifiers` object.")
+		forecast_createWhatIfAnalysisCmd.Flags().String("what-if-analysis-name", "", "The name of the what-if analysis.")
+		forecast_createWhatIfAnalysisCmd.MarkFlagRequired("forecast-arn")
+		forecast_createWhatIfAnalysisCmd.MarkFlagRequired("what-if-analysis-name")
+	})
 	forecastCmd.AddCommand(forecast_createWhatIfAnalysisCmd)
 }

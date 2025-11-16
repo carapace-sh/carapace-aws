@@ -12,9 +12,11 @@ var ivsRealtime_listPublicKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_listPublicKeysCmd).Standalone()
+	carapace.Gen(ivsRealtime_listPublicKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_listPublicKeysCmd).Standalone()
 
-	ivsRealtime_listPublicKeysCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	ivsRealtime_listPublicKeysCmd.Flags().String("next-token", "", "The first public key to retrieve.")
+		ivsRealtime_listPublicKeysCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		ivsRealtime_listPublicKeysCmd.Flags().String("next-token", "", "The first public key to retrieve.")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_listPublicKeysCmd)
 }

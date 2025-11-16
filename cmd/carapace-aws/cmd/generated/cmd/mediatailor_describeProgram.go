@@ -12,11 +12,13 @@ var mediatailor_describeProgramCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_describeProgramCmd).Standalone()
+	carapace.Gen(mediatailor_describeProgramCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_describeProgramCmd).Standalone()
 
-	mediatailor_describeProgramCmd.Flags().String("channel-name", "", "The name of the channel associated with this Program.")
-	mediatailor_describeProgramCmd.Flags().String("program-name", "", "The name of the program.")
-	mediatailor_describeProgramCmd.MarkFlagRequired("channel-name")
-	mediatailor_describeProgramCmd.MarkFlagRequired("program-name")
+		mediatailor_describeProgramCmd.Flags().String("channel-name", "", "The name of the channel associated with this Program.")
+		mediatailor_describeProgramCmd.Flags().String("program-name", "", "The name of the program.")
+		mediatailor_describeProgramCmd.MarkFlagRequired("channel-name")
+		mediatailor_describeProgramCmd.MarkFlagRequired("program-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_describeProgramCmd)
 }

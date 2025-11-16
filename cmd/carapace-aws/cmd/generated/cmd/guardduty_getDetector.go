@@ -12,9 +12,11 @@ var guardduty_getDetectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_getDetectorCmd).Standalone()
+	carapace.Gen(guardduty_getDetectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_getDetectorCmd).Standalone()
 
-	guardduty_getDetectorCmd.Flags().String("detector-id", "", "The unique ID of the detector that you want to get.")
-	guardduty_getDetectorCmd.MarkFlagRequired("detector-id")
+		guardduty_getDetectorCmd.Flags().String("detector-id", "", "The unique ID of the detector that you want to get.")
+		guardduty_getDetectorCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_getDetectorCmd)
 }

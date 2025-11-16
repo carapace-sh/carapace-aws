@@ -12,10 +12,12 @@ var datasync_listTaskExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_listTaskExecutionsCmd).Standalone()
+	carapace.Gen(datasync_listTaskExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_listTaskExecutionsCmd).Standalone()
 
-	datasync_listTaskExecutionsCmd.Flags().String("max-results", "", "Specifies how many results you want in the response.")
-	datasync_listTaskExecutionsCmd.Flags().String("next-token", "", "Specifies an opaque string that indicates the position at which to begin the next list of results in the response.")
-	datasync_listTaskExecutionsCmd.Flags().String("task-arn", "", "Specifies the Amazon Resource Name (ARN) of the task that you want execution information about.")
+		datasync_listTaskExecutionsCmd.Flags().String("max-results", "", "Specifies how many results you want in the response.")
+		datasync_listTaskExecutionsCmd.Flags().String("next-token", "", "Specifies an opaque string that indicates the position at which to begin the next list of results in the response.")
+		datasync_listTaskExecutionsCmd.Flags().String("task-arn", "", "Specifies the Amazon Resource Name (ARN) of the task that you want execution information about.")
+	})
 	datasyncCmd.AddCommand(datasync_listTaskExecutionsCmd)
 }

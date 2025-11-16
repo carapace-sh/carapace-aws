@@ -12,11 +12,13 @@ var evidently_testSegmentPatternCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_testSegmentPatternCmd).Standalone()
+	carapace.Gen(evidently_testSegmentPatternCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_testSegmentPatternCmd).Standalone()
 
-	evidently_testSegmentPatternCmd.Flags().String("pattern", "", "The pattern to test.")
-	evidently_testSegmentPatternCmd.Flags().String("payload", "", "A sample `evaluationContext` JSON block to test against the specified pattern.")
-	evidently_testSegmentPatternCmd.MarkFlagRequired("pattern")
-	evidently_testSegmentPatternCmd.MarkFlagRequired("payload")
+		evidently_testSegmentPatternCmd.Flags().String("pattern", "", "The pattern to test.")
+		evidently_testSegmentPatternCmd.Flags().String("payload", "", "A sample `evaluationContext` JSON block to test against the specified pattern.")
+		evidently_testSegmentPatternCmd.MarkFlagRequired("pattern")
+		evidently_testSegmentPatternCmd.MarkFlagRequired("payload")
+	})
 	evidentlyCmd.AddCommand(evidently_testSegmentPatternCmd)
 }

@@ -12,11 +12,13 @@ var timestreamWrite_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamWrite_untagResourceCmd).Standalone()
+	carapace.Gen(timestreamWrite_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamWrite_untagResourceCmd).Standalone()
 
-	timestreamWrite_untagResourceCmd.Flags().String("resource-arn", "", "The Timestream resource that the tags will be removed from.")
-	timestreamWrite_untagResourceCmd.Flags().String("tag-keys", "", "A list of tags keys.")
-	timestreamWrite_untagResourceCmd.MarkFlagRequired("resource-arn")
-	timestreamWrite_untagResourceCmd.MarkFlagRequired("tag-keys")
+		timestreamWrite_untagResourceCmd.Flags().String("resource-arn", "", "The Timestream resource that the tags will be removed from.")
+		timestreamWrite_untagResourceCmd.Flags().String("tag-keys", "", "A list of tags keys.")
+		timestreamWrite_untagResourceCmd.MarkFlagRequired("resource-arn")
+		timestreamWrite_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	timestreamWriteCmd.AddCommand(timestreamWrite_untagResourceCmd)
 }

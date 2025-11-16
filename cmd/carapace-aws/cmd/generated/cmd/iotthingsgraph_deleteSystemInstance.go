@@ -12,8 +12,10 @@ var iotthingsgraph_deleteSystemInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_deleteSystemInstanceCmd).Standalone()
+	carapace.Gen(iotthingsgraph_deleteSystemInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_deleteSystemInstanceCmd).Standalone()
 
-	iotthingsgraph_deleteSystemInstanceCmd.Flags().String("id", "", "The ID of the system instance to be deleted.")
+		iotthingsgraph_deleteSystemInstanceCmd.Flags().String("id", "", "The ID of the system instance to be deleted.")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_deleteSystemInstanceCmd)
 }

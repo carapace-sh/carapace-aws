@@ -12,9 +12,11 @@ var bedrock_getModelCopyJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getModelCopyJobCmd).Standalone()
+	carapace.Gen(bedrock_getModelCopyJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getModelCopyJobCmd).Standalone()
 
-	bedrock_getModelCopyJobCmd.Flags().String("job-arn", "", "The Amazon Resource Name (ARN) of the model copy job.")
-	bedrock_getModelCopyJobCmd.MarkFlagRequired("job-arn")
+		bedrock_getModelCopyJobCmd.Flags().String("job-arn", "", "The Amazon Resource Name (ARN) of the model copy job.")
+		bedrock_getModelCopyJobCmd.MarkFlagRequired("job-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_getModelCopyJobCmd)
 }

@@ -12,9 +12,11 @@ var glue_getResourcePoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getResourcePoliciesCmd).Standalone()
+	carapace.Gen(glue_getResourcePoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getResourcePoliciesCmd).Standalone()
 
-	glue_getResourcePoliciesCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
-	glue_getResourcePoliciesCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+		glue_getResourcePoliciesCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
+		glue_getResourcePoliciesCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+	})
 	glueCmd.AddCommand(glue_getResourcePoliciesCmd)
 }

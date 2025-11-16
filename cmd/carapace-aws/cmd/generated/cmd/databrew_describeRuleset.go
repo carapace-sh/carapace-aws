@@ -12,9 +12,11 @@ var databrew_describeRulesetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_describeRulesetCmd).Standalone()
+	carapace.Gen(databrew_describeRulesetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_describeRulesetCmd).Standalone()
 
-	databrew_describeRulesetCmd.Flags().String("name", "", "The name of the ruleset to be described.")
-	databrew_describeRulesetCmd.MarkFlagRequired("name")
+		databrew_describeRulesetCmd.Flags().String("name", "", "The name of the ruleset to be described.")
+		databrew_describeRulesetCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_describeRulesetCmd)
 }

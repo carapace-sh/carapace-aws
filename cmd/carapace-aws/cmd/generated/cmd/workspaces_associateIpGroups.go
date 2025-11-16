@@ -12,11 +12,13 @@ var workspaces_associateIpGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_associateIpGroupsCmd).Standalone()
+	carapace.Gen(workspaces_associateIpGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_associateIpGroupsCmd).Standalone()
 
-	workspaces_associateIpGroupsCmd.Flags().String("directory-id", "", "The identifier of the directory.")
-	workspaces_associateIpGroupsCmd.Flags().String("group-ids", "", "The identifiers of one or more IP access control groups.")
-	workspaces_associateIpGroupsCmd.MarkFlagRequired("directory-id")
-	workspaces_associateIpGroupsCmd.MarkFlagRequired("group-ids")
+		workspaces_associateIpGroupsCmd.Flags().String("directory-id", "", "The identifier of the directory.")
+		workspaces_associateIpGroupsCmd.Flags().String("group-ids", "", "The identifiers of one or more IP access control groups.")
+		workspaces_associateIpGroupsCmd.MarkFlagRequired("directory-id")
+		workspaces_associateIpGroupsCmd.MarkFlagRequired("group-ids")
+	})
 	workspacesCmd.AddCommand(workspaces_associateIpGroupsCmd)
 }

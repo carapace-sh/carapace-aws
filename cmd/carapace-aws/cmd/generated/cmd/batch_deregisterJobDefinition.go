@@ -12,9 +12,11 @@ var batch_deregisterJobDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_deregisterJobDefinitionCmd).Standalone()
+	carapace.Gen(batch_deregisterJobDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_deregisterJobDefinitionCmd).Standalone()
 
-	batch_deregisterJobDefinitionCmd.Flags().String("job-definition", "", "The name and revision (`name:revision`) or full Amazon Resource Name (ARN) of the job definition to deregister.")
-	batch_deregisterJobDefinitionCmd.MarkFlagRequired("job-definition")
+		batch_deregisterJobDefinitionCmd.Flags().String("job-definition", "", "The name and revision (`name:revision`) or full Amazon Resource Name (ARN) of the job definition to deregister.")
+		batch_deregisterJobDefinitionCmd.MarkFlagRequired("job-definition")
+	})
 	batchCmd.AddCommand(batch_deregisterJobDefinitionCmd)
 }

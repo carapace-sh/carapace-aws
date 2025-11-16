@@ -12,7 +12,9 @@ var macie2_getClassificationExportConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getClassificationExportConfigurationCmd).Standalone()
+	carapace.Gen(macie2_getClassificationExportConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getClassificationExportConfigurationCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_getClassificationExportConfigurationCmd)
 }

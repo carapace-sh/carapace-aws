@@ -12,13 +12,15 @@ var pinpoint_updateTemplateActiveVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateTemplateActiveVersionCmd).Standalone()
+	carapace.Gen(pinpoint_updateTemplateActiveVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateTemplateActiveVersionCmd).Standalone()
 
-	pinpoint_updateTemplateActiveVersionCmd.Flags().String("template-active-version-request", "", "")
-	pinpoint_updateTemplateActiveVersionCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_updateTemplateActiveVersionCmd.Flags().String("template-type", "", "The type of channel that the message template is designed for.")
-	pinpoint_updateTemplateActiveVersionCmd.MarkFlagRequired("template-active-version-request")
-	pinpoint_updateTemplateActiveVersionCmd.MarkFlagRequired("template-name")
-	pinpoint_updateTemplateActiveVersionCmd.MarkFlagRequired("template-type")
+		pinpoint_updateTemplateActiveVersionCmd.Flags().String("template-active-version-request", "", "")
+		pinpoint_updateTemplateActiveVersionCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_updateTemplateActiveVersionCmd.Flags().String("template-type", "", "The type of channel that the message template is designed for.")
+		pinpoint_updateTemplateActiveVersionCmd.MarkFlagRequired("template-active-version-request")
+		pinpoint_updateTemplateActiveVersionCmd.MarkFlagRequired("template-name")
+		pinpoint_updateTemplateActiveVersionCmd.MarkFlagRequired("template-type")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateTemplateActiveVersionCmd)
 }

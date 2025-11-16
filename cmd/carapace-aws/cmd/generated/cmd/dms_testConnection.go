@@ -12,11 +12,13 @@ var dms_testConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_testConnectionCmd).Standalone()
+	carapace.Gen(dms_testConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_testConnectionCmd).Standalone()
 
-	dms_testConnectionCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.")
-	dms_testConnectionCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
-	dms_testConnectionCmd.MarkFlagRequired("endpoint-arn")
-	dms_testConnectionCmd.MarkFlagRequired("replication-instance-arn")
+		dms_testConnectionCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.")
+		dms_testConnectionCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
+		dms_testConnectionCmd.MarkFlagRequired("endpoint-arn")
+		dms_testConnectionCmd.MarkFlagRequired("replication-instance-arn")
+	})
 	dmsCmd.AddCommand(dms_testConnectionCmd)
 }

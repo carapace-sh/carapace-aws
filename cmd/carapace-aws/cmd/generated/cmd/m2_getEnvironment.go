@@ -12,9 +12,11 @@ var m2_getEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_getEnvironmentCmd).Standalone()
+	carapace.Gen(m2_getEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_getEnvironmentCmd).Standalone()
 
-	m2_getEnvironmentCmd.Flags().String("environment-id", "", "The unique identifier of the runtime environment.")
-	m2_getEnvironmentCmd.MarkFlagRequired("environment-id")
+		m2_getEnvironmentCmd.Flags().String("environment-id", "", "The unique identifier of the runtime environment.")
+		m2_getEnvironmentCmd.MarkFlagRequired("environment-id")
+	})
 	m2Cmd.AddCommand(m2_getEnvironmentCmd)
 }

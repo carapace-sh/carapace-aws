@@ -12,11 +12,13 @@ var wafRegional_createRegexPatternSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_createRegexPatternSetCmd).Standalone()
+	carapace.Gen(wafRegional_createRegexPatternSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_createRegexPatternSetCmd).Standalone()
 
-	wafRegional_createRegexPatternSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	wafRegional_createRegexPatternSetCmd.Flags().String("name", "", "A friendly name or description of the [RegexPatternSet]().")
-	wafRegional_createRegexPatternSetCmd.MarkFlagRequired("change-token")
-	wafRegional_createRegexPatternSetCmd.MarkFlagRequired("name")
+		wafRegional_createRegexPatternSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		wafRegional_createRegexPatternSetCmd.Flags().String("name", "", "A friendly name or description of the [RegexPatternSet]().")
+		wafRegional_createRegexPatternSetCmd.MarkFlagRequired("change-token")
+		wafRegional_createRegexPatternSetCmd.MarkFlagRequired("name")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_createRegexPatternSetCmd)
 }

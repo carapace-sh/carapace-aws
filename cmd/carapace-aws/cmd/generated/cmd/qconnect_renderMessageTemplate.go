@@ -12,13 +12,15 @@ var qconnect_renderMessageTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_renderMessageTemplateCmd).Standalone()
+	carapace.Gen(qconnect_renderMessageTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_renderMessageTemplateCmd).Standalone()
 
-	qconnect_renderMessageTemplateCmd.Flags().String("attributes", "", "An object that specifies the values to use for variables in the message template.")
-	qconnect_renderMessageTemplateCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_renderMessageTemplateCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
-	qconnect_renderMessageTemplateCmd.MarkFlagRequired("attributes")
-	qconnect_renderMessageTemplateCmd.MarkFlagRequired("knowledge-base-id")
-	qconnect_renderMessageTemplateCmd.MarkFlagRequired("message-template-id")
+		qconnect_renderMessageTemplateCmd.Flags().String("attributes", "", "An object that specifies the values to use for variables in the message template.")
+		qconnect_renderMessageTemplateCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_renderMessageTemplateCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
+		qconnect_renderMessageTemplateCmd.MarkFlagRequired("attributes")
+		qconnect_renderMessageTemplateCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_renderMessageTemplateCmd.MarkFlagRequired("message-template-id")
+	})
 	qconnectCmd.AddCommand(qconnect_renderMessageTemplateCmd)
 }

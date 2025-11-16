@@ -12,10 +12,12 @@ var config_deleteRemediationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deleteRemediationConfigurationCmd).Standalone()
+	carapace.Gen(config_deleteRemediationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deleteRemediationConfigurationCmd).Standalone()
 
-	config_deleteRemediationConfigurationCmd.Flags().String("config-rule-name", "", "The name of the Config rule for which you want to delete remediation configuration.")
-	config_deleteRemediationConfigurationCmd.Flags().String("resource-type", "", "The type of a resource.")
-	config_deleteRemediationConfigurationCmd.MarkFlagRequired("config-rule-name")
+		config_deleteRemediationConfigurationCmd.Flags().String("config-rule-name", "", "The name of the Config rule for which you want to delete remediation configuration.")
+		config_deleteRemediationConfigurationCmd.Flags().String("resource-type", "", "The type of a resource.")
+		config_deleteRemediationConfigurationCmd.MarkFlagRequired("config-rule-name")
+	})
 	configCmd.AddCommand(config_deleteRemediationConfigurationCmd)
 }

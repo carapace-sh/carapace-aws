@@ -12,9 +12,11 @@ var athena_cancelCapacityReservationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_cancelCapacityReservationCmd).Standalone()
+	carapace.Gen(athena_cancelCapacityReservationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_cancelCapacityReservationCmd).Standalone()
 
-	athena_cancelCapacityReservationCmd.Flags().String("name", "", "The name of the capacity reservation to cancel.")
-	athena_cancelCapacityReservationCmd.MarkFlagRequired("name")
+		athena_cancelCapacityReservationCmd.Flags().String("name", "", "The name of the capacity reservation to cancel.")
+		athena_cancelCapacityReservationCmd.MarkFlagRequired("name")
+	})
 	athenaCmd.AddCommand(athena_cancelCapacityReservationCmd)
 }

@@ -12,9 +12,11 @@ var dms_stopReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_stopReplicationCmd).Standalone()
+	carapace.Gen(dms_stopReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_stopReplicationCmd).Standalone()
 
-	dms_stopReplicationCmd.Flags().String("replication-config-arn", "", "The Amazon Resource Name of the replication to stop.")
-	dms_stopReplicationCmd.MarkFlagRequired("replication-config-arn")
+		dms_stopReplicationCmd.Flags().String("replication-config-arn", "", "The Amazon Resource Name of the replication to stop.")
+		dms_stopReplicationCmd.MarkFlagRequired("replication-config-arn")
+	})
 	dmsCmd.AddCommand(dms_stopReplicationCmd)
 }

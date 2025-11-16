@@ -12,11 +12,13 @@ var inspector2_updateCodeSecurityIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_updateCodeSecurityIntegrationCmd).Standalone()
+	carapace.Gen(inspector2_updateCodeSecurityIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_updateCodeSecurityIntegrationCmd).Standalone()
 
-	inspector2_updateCodeSecurityIntegrationCmd.Flags().String("details", "", "The updated integration details specific to the repository provider type.")
-	inspector2_updateCodeSecurityIntegrationCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the code security integration to update.")
-	inspector2_updateCodeSecurityIntegrationCmd.MarkFlagRequired("details")
-	inspector2_updateCodeSecurityIntegrationCmd.MarkFlagRequired("integration-arn")
+		inspector2_updateCodeSecurityIntegrationCmd.Flags().String("details", "", "The updated integration details specific to the repository provider type.")
+		inspector2_updateCodeSecurityIntegrationCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the code security integration to update.")
+		inspector2_updateCodeSecurityIntegrationCmd.MarkFlagRequired("details")
+		inspector2_updateCodeSecurityIntegrationCmd.MarkFlagRequired("integration-arn")
+	})
 	inspector2Cmd.AddCommand(inspector2_updateCodeSecurityIntegrationCmd)
 }

@@ -12,7 +12,9 @@ var autoscalingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscalingCmd).Standalone()
+	carapace.Gen(autoscalingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscalingCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(autoscalingCmd)
 }

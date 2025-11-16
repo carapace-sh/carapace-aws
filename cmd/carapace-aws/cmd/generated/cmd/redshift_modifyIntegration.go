@@ -12,11 +12,13 @@ var redshift_modifyIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_modifyIntegrationCmd).Standalone()
+	carapace.Gen(redshift_modifyIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_modifyIntegrationCmd).Standalone()
 
-	redshift_modifyIntegrationCmd.Flags().String("description", "", "A new description for the integration.")
-	redshift_modifyIntegrationCmd.Flags().String("integration-arn", "", "The unique identifier of the integration to modify.")
-	redshift_modifyIntegrationCmd.Flags().String("integration-name", "", "A new name for the integration.")
-	redshift_modifyIntegrationCmd.MarkFlagRequired("integration-arn")
+		redshift_modifyIntegrationCmd.Flags().String("description", "", "A new description for the integration.")
+		redshift_modifyIntegrationCmd.Flags().String("integration-arn", "", "The unique identifier of the integration to modify.")
+		redshift_modifyIntegrationCmd.Flags().String("integration-name", "", "A new name for the integration.")
+		redshift_modifyIntegrationCmd.MarkFlagRequired("integration-arn")
+	})
 	redshiftCmd.AddCommand(redshift_modifyIntegrationCmd)
 }

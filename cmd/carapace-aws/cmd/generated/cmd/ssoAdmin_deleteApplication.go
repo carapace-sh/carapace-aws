@@ -12,9 +12,11 @@ var ssoAdmin_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_deleteApplicationCmd).Standalone()
+	carapace.Gen(ssoAdmin_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_deleteApplicationCmd).Standalone()
 
-	ssoAdmin_deleteApplicationCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
-	ssoAdmin_deleteApplicationCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_deleteApplicationCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
+		ssoAdmin_deleteApplicationCmd.MarkFlagRequired("application-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_deleteApplicationCmd)
 }

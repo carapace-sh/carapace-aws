@@ -12,13 +12,15 @@ var deadline_createQueueLimitAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_createQueueLimitAssociationCmd).Standalone()
+	carapace.Gen(deadline_createQueueLimitAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_createQueueLimitAssociationCmd).Standalone()
 
-	deadline_createQueueLimitAssociationCmd.Flags().String("farm-id", "", "The unique identifier of the farm that contains the queue and limit to associate.")
-	deadline_createQueueLimitAssociationCmd.Flags().String("limit-id", "", "The unique identifier of the limit to associate with the queue.")
-	deadline_createQueueLimitAssociationCmd.Flags().String("queue-id", "", "The unique identifier of the queue to associate with the limit.")
-	deadline_createQueueLimitAssociationCmd.MarkFlagRequired("farm-id")
-	deadline_createQueueLimitAssociationCmd.MarkFlagRequired("limit-id")
-	deadline_createQueueLimitAssociationCmd.MarkFlagRequired("queue-id")
+		deadline_createQueueLimitAssociationCmd.Flags().String("farm-id", "", "The unique identifier of the farm that contains the queue and limit to associate.")
+		deadline_createQueueLimitAssociationCmd.Flags().String("limit-id", "", "The unique identifier of the limit to associate with the queue.")
+		deadline_createQueueLimitAssociationCmd.Flags().String("queue-id", "", "The unique identifier of the queue to associate with the limit.")
+		deadline_createQueueLimitAssociationCmd.MarkFlagRequired("farm-id")
+		deadline_createQueueLimitAssociationCmd.MarkFlagRequired("limit-id")
+		deadline_createQueueLimitAssociationCmd.MarkFlagRequired("queue-id")
+	})
 	deadlineCmd.AddCommand(deadline_createQueueLimitAssociationCmd)
 }

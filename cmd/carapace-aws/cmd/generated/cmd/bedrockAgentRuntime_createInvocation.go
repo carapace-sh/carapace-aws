@@ -12,11 +12,13 @@ var bedrockAgentRuntime_createInvocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentRuntime_createInvocationCmd).Standalone()
+	carapace.Gen(bedrockAgentRuntime_createInvocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentRuntime_createInvocationCmd).Standalone()
 
-	bedrockAgentRuntime_createInvocationCmd.Flags().String("description", "", "A description for the interactions in the invocation.")
-	bedrockAgentRuntime_createInvocationCmd.Flags().String("invocation-id", "", "A unique identifier for the invocation in UUID format.")
-	bedrockAgentRuntime_createInvocationCmd.Flags().String("session-identifier", "", "The unique identifier for the associated session for the invocation.")
-	bedrockAgentRuntime_createInvocationCmd.MarkFlagRequired("session-identifier")
+		bedrockAgentRuntime_createInvocationCmd.Flags().String("description", "", "A description for the interactions in the invocation.")
+		bedrockAgentRuntime_createInvocationCmd.Flags().String("invocation-id", "", "A unique identifier for the invocation in UUID format.")
+		bedrockAgentRuntime_createInvocationCmd.Flags().String("session-identifier", "", "The unique identifier for the associated session for the invocation.")
+		bedrockAgentRuntime_createInvocationCmd.MarkFlagRequired("session-identifier")
+	})
 	bedrockAgentRuntimeCmd.AddCommand(bedrockAgentRuntime_createInvocationCmd)
 }

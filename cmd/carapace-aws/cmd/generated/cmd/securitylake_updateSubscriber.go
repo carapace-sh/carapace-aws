@@ -12,13 +12,15 @@ var securitylake_updateSubscriberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_updateSubscriberCmd).Standalone()
+	carapace.Gen(securitylake_updateSubscriberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_updateSubscriberCmd).Standalone()
 
-	securitylake_updateSubscriberCmd.Flags().String("sources", "", "The supported Amazon Web Services services from which logs and events are collected.")
-	securitylake_updateSubscriberCmd.Flags().String("subscriber-description", "", "The description of the Security Lake account subscriber.")
-	securitylake_updateSubscriberCmd.Flags().String("subscriber-id", "", "A value created by Security Lake that uniquely identifies your subscription.")
-	securitylake_updateSubscriberCmd.Flags().String("subscriber-identity", "", "The Amazon Web Services identity used to access your data.")
-	securitylake_updateSubscriberCmd.Flags().String("subscriber-name", "", "The name of the Security Lake account subscriber.")
-	securitylake_updateSubscriberCmd.MarkFlagRequired("subscriber-id")
+		securitylake_updateSubscriberCmd.Flags().String("sources", "", "The supported Amazon Web Services services from which logs and events are collected.")
+		securitylake_updateSubscriberCmd.Flags().String("subscriber-description", "", "The description of the Security Lake account subscriber.")
+		securitylake_updateSubscriberCmd.Flags().String("subscriber-id", "", "A value created by Security Lake that uniquely identifies your subscription.")
+		securitylake_updateSubscriberCmd.Flags().String("subscriber-identity", "", "The Amazon Web Services identity used to access your data.")
+		securitylake_updateSubscriberCmd.Flags().String("subscriber-name", "", "The name of the Security Lake account subscriber.")
+		securitylake_updateSubscriberCmd.MarkFlagRequired("subscriber-id")
+	})
 	securitylakeCmd.AddCommand(securitylake_updateSubscriberCmd)
 }

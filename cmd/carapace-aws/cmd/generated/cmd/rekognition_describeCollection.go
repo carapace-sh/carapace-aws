@@ -12,9 +12,11 @@ var rekognition_describeCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_describeCollectionCmd).Standalone()
+	carapace.Gen(rekognition_describeCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_describeCollectionCmd).Standalone()
 
-	rekognition_describeCollectionCmd.Flags().String("collection-id", "", "The ID of the collection to describe.")
-	rekognition_describeCollectionCmd.MarkFlagRequired("collection-id")
+		rekognition_describeCollectionCmd.Flags().String("collection-id", "", "The ID of the collection to describe.")
+		rekognition_describeCollectionCmd.MarkFlagRequired("collection-id")
+	})
 	rekognitionCmd.AddCommand(rekognition_describeCollectionCmd)
 }

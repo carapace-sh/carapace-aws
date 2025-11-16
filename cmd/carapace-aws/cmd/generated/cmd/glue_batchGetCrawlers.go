@@ -12,9 +12,11 @@ var glue_batchGetCrawlersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_batchGetCrawlersCmd).Standalone()
+	carapace.Gen(glue_batchGetCrawlersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_batchGetCrawlersCmd).Standalone()
 
-	glue_batchGetCrawlersCmd.Flags().String("crawler-names", "", "A list of crawler names, which might be the names returned from the `ListCrawlers` operation.")
-	glue_batchGetCrawlersCmd.MarkFlagRequired("crawler-names")
+		glue_batchGetCrawlersCmd.Flags().String("crawler-names", "", "A list of crawler names, which might be the names returned from the `ListCrawlers` operation.")
+		glue_batchGetCrawlersCmd.MarkFlagRequired("crawler-names")
+	})
 	glueCmd.AddCommand(glue_batchGetCrawlersCmd)
 }

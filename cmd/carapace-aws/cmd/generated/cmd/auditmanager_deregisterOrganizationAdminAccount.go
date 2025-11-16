@@ -12,8 +12,10 @@ var auditmanager_deregisterOrganizationAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_deregisterOrganizationAdminAccountCmd).Standalone()
+	carapace.Gen(auditmanager_deregisterOrganizationAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_deregisterOrganizationAdminAccountCmd).Standalone()
 
-	auditmanager_deregisterOrganizationAdminAccountCmd.Flags().String("admin-account-id", "", "The identifier for the administrator account.")
+		auditmanager_deregisterOrganizationAdminAccountCmd.Flags().String("admin-account-id", "", "The identifier for the administrator account.")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_deregisterOrganizationAdminAccountCmd)
 }

@@ -12,11 +12,13 @@ var detective_getInvestigationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_getInvestigationCmd).Standalone()
+	carapace.Gen(detective_getInvestigationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_getInvestigationCmd).Standalone()
 
-	detective_getInvestigationCmd.Flags().String("graph-arn", "", "The Amazon Resource Name (ARN) of the behavior graph.")
-	detective_getInvestigationCmd.Flags().String("investigation-id", "", "The investigation ID of the investigation report.")
-	detective_getInvestigationCmd.MarkFlagRequired("graph-arn")
-	detective_getInvestigationCmd.MarkFlagRequired("investigation-id")
+		detective_getInvestigationCmd.Flags().String("graph-arn", "", "The Amazon Resource Name (ARN) of the behavior graph.")
+		detective_getInvestigationCmd.Flags().String("investigation-id", "", "The investigation ID of the investigation report.")
+		detective_getInvestigationCmd.MarkFlagRequired("graph-arn")
+		detective_getInvestigationCmd.MarkFlagRequired("investigation-id")
+	})
 	detectiveCmd.AddCommand(detective_getInvestigationCmd)
 }

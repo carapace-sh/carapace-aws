@@ -12,9 +12,11 @@ var iotsecuretunneling_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsecuretunneling_listTagsForResourceCmd).Standalone()
+	carapace.Gen(iotsecuretunneling_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsecuretunneling_listTagsForResourceCmd).Standalone()
 
-	iotsecuretunneling_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
-	iotsecuretunneling_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		iotsecuretunneling_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
+		iotsecuretunneling_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	iotsecuretunnelingCmd.AddCommand(iotsecuretunneling_listTagsForResourceCmd)
 }

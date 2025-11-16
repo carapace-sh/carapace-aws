@@ -12,8 +12,10 @@ var shield_updateEmergencyContactSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_updateEmergencyContactSettingsCmd).Standalone()
+	carapace.Gen(shield_updateEmergencyContactSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_updateEmergencyContactSettingsCmd).Standalone()
 
-	shield_updateEmergencyContactSettingsCmd.Flags().String("emergency-contact-list", "", "A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.")
+		shield_updateEmergencyContactSettingsCmd.Flags().String("emergency-contact-list", "", "A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.")
+	})
 	shieldCmd.AddCommand(shield_updateEmergencyContactSettingsCmd)
 }

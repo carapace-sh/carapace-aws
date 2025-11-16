@@ -12,11 +12,13 @@ var vpcLattice_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_putResourcePolicyCmd).Standalone()
+	carapace.Gen(vpcLattice_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_putResourcePolicyCmd).Standalone()
 
-	vpcLattice_putResourcePolicyCmd.Flags().String("policy", "", "An IAM policy.")
-	vpcLattice_putResourcePolicyCmd.Flags().String("resource-arn", "", "The ID or ARN of the service network or service for which the policy is created.")
-	vpcLattice_putResourcePolicyCmd.MarkFlagRequired("policy")
-	vpcLattice_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		vpcLattice_putResourcePolicyCmd.Flags().String("policy", "", "An IAM policy.")
+		vpcLattice_putResourcePolicyCmd.Flags().String("resource-arn", "", "The ID or ARN of the service network or service for which the policy is created.")
+		vpcLattice_putResourcePolicyCmd.MarkFlagRequired("policy")
+		vpcLattice_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_putResourcePolicyCmd)
 }

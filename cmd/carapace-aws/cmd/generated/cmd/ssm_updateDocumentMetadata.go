@@ -12,12 +12,14 @@ var ssm_updateDocumentMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_updateDocumentMetadataCmd).Standalone()
+	carapace.Gen(ssm_updateDocumentMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_updateDocumentMetadataCmd).Standalone()
 
-	ssm_updateDocumentMetadataCmd.Flags().String("document-reviews", "", "The change template review details to update.")
-	ssm_updateDocumentMetadataCmd.Flags().String("document-version", "", "The version of a change template in which to update approval metadata.")
-	ssm_updateDocumentMetadataCmd.Flags().String("name", "", "The name of the change template for which a version's metadata is to be updated.")
-	ssm_updateDocumentMetadataCmd.MarkFlagRequired("document-reviews")
-	ssm_updateDocumentMetadataCmd.MarkFlagRequired("name")
+		ssm_updateDocumentMetadataCmd.Flags().String("document-reviews", "", "The change template review details to update.")
+		ssm_updateDocumentMetadataCmd.Flags().String("document-version", "", "The version of a change template in which to update approval metadata.")
+		ssm_updateDocumentMetadataCmd.Flags().String("name", "", "The name of the change template for which a version's metadata is to be updated.")
+		ssm_updateDocumentMetadataCmd.MarkFlagRequired("document-reviews")
+		ssm_updateDocumentMetadataCmd.MarkFlagRequired("name")
+	})
 	ssmCmd.AddCommand(ssm_updateDocumentMetadataCmd)
 }

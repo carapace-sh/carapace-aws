@@ -12,14 +12,16 @@ var datapipeline_queryObjectsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_queryObjectsCmd).Standalone()
+	carapace.Gen(datapipeline_queryObjectsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_queryObjectsCmd).Standalone()
 
-	datapipeline_queryObjectsCmd.Flags().String("limit", "", "The maximum number of object names that `QueryObjects` will return in a single call.")
-	datapipeline_queryObjectsCmd.Flags().String("marker", "", "The starting point for the results to be returned.")
-	datapipeline_queryObjectsCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
-	datapipeline_queryObjectsCmd.Flags().String("query", "", "The query that defines the objects to be returned.")
-	datapipeline_queryObjectsCmd.Flags().String("sphere", "", "Indicates whether the query applies to components or instances.")
-	datapipeline_queryObjectsCmd.MarkFlagRequired("pipeline-id")
-	datapipeline_queryObjectsCmd.MarkFlagRequired("sphere")
+		datapipeline_queryObjectsCmd.Flags().String("limit", "", "The maximum number of object names that `QueryObjects` will return in a single call.")
+		datapipeline_queryObjectsCmd.Flags().String("marker", "", "The starting point for the results to be returned.")
+		datapipeline_queryObjectsCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
+		datapipeline_queryObjectsCmd.Flags().String("query", "", "The query that defines the objects to be returned.")
+		datapipeline_queryObjectsCmd.Flags().String("sphere", "", "Indicates whether the query applies to components or instances.")
+		datapipeline_queryObjectsCmd.MarkFlagRequired("pipeline-id")
+		datapipeline_queryObjectsCmd.MarkFlagRequired("sphere")
+	})
 	datapipelineCmd.AddCommand(datapipeline_queryObjectsCmd)
 }

@@ -12,10 +12,12 @@ var ce_createAnomalySubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_createAnomalySubscriptionCmd).Standalone()
+	carapace.Gen(ce_createAnomalySubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_createAnomalySubscriptionCmd).Standalone()
 
-	ce_createAnomalySubscriptionCmd.Flags().String("anomaly-subscription", "", "The cost anomaly subscription object that you want to create.")
-	ce_createAnomalySubscriptionCmd.Flags().String("resource-tags", "", "An optional list of tags to associate with the specified [`AnomalySubscription`](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html) .")
-	ce_createAnomalySubscriptionCmd.MarkFlagRequired("anomaly-subscription")
+		ce_createAnomalySubscriptionCmd.Flags().String("anomaly-subscription", "", "The cost anomaly subscription object that you want to create.")
+		ce_createAnomalySubscriptionCmd.Flags().String("resource-tags", "", "An optional list of tags to associate with the specified [`AnomalySubscription`](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html) .")
+		ce_createAnomalySubscriptionCmd.MarkFlagRequired("anomaly-subscription")
+	})
 	ceCmd.AddCommand(ce_createAnomalySubscriptionCmd)
 }

@@ -12,8 +12,10 @@ var workspaces_describeAccountModificationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeAccountModificationsCmd).Standalone()
+	carapace.Gen(workspaces_describeAccountModificationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeAccountModificationsCmd).Standalone()
 
-	workspaces_describeAccountModificationsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+		workspaces_describeAccountModificationsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+	})
 	workspacesCmd.AddCommand(workspaces_describeAccountModificationsCmd)
 }

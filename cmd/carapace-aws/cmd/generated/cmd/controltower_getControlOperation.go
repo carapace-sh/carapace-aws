@@ -12,9 +12,11 @@ var controltower_getControlOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_getControlOperationCmd).Standalone()
+	carapace.Gen(controltower_getControlOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_getControlOperationCmd).Standalone()
 
-	controltower_getControlOperationCmd.Flags().String("operation-identifier", "", "The ID of the asynchronous operation, which is used to track status.")
-	controltower_getControlOperationCmd.MarkFlagRequired("operation-identifier")
+		controltower_getControlOperationCmd.Flags().String("operation-identifier", "", "The ID of the asynchronous operation, which is used to track status.")
+		controltower_getControlOperationCmd.MarkFlagRequired("operation-identifier")
+	})
 	controltowerCmd.AddCommand(controltower_getControlOperationCmd)
 }

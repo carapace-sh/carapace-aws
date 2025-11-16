@@ -12,11 +12,13 @@ var comprehend_detectPiiEntitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_detectPiiEntitiesCmd).Standalone()
+	carapace.Gen(comprehend_detectPiiEntitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_detectPiiEntitiesCmd).Standalone()
 
-	comprehend_detectPiiEntitiesCmd.Flags().String("language-code", "", "The language of the input text.")
-	comprehend_detectPiiEntitiesCmd.Flags().String("text", "", "A UTF-8 text string.")
-	comprehend_detectPiiEntitiesCmd.MarkFlagRequired("language-code")
-	comprehend_detectPiiEntitiesCmd.MarkFlagRequired("text")
+		comprehend_detectPiiEntitiesCmd.Flags().String("language-code", "", "The language of the input text.")
+		comprehend_detectPiiEntitiesCmd.Flags().String("text", "", "A UTF-8 text string.")
+		comprehend_detectPiiEntitiesCmd.MarkFlagRequired("language-code")
+		comprehend_detectPiiEntitiesCmd.MarkFlagRequired("text")
+	})
 	comprehendCmd.AddCommand(comprehend_detectPiiEntitiesCmd)
 }

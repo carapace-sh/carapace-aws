@@ -12,14 +12,16 @@ var cognitoIdp_adminSetUserMfapreferenceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_adminSetUserMfapreferenceCmd).Standalone()
+	carapace.Gen(cognitoIdp_adminSetUserMfapreferenceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_adminSetUserMfapreferenceCmd).Standalone()
 
-	cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("email-mfa-settings", "", "User preferences for email message MFA.")
-	cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("smsmfa-settings", "", "User preferences for SMS message MFA.")
-	cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("software-token-mfa-settings", "", "User preferences for time-based one-time password (TOTP) MFA.")
-	cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to set a user's MFA preferences.")
-	cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("username", "", "The name of the user that you want to query or modify.")
-	cognitoIdp_adminSetUserMfapreferenceCmd.MarkFlagRequired("user-pool-id")
-	cognitoIdp_adminSetUserMfapreferenceCmd.MarkFlagRequired("username")
+		cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("email-mfa-settings", "", "User preferences for email message MFA.")
+		cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("smsmfa-settings", "", "User preferences for SMS message MFA.")
+		cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("software-token-mfa-settings", "", "User preferences for time-based one-time password (TOTP) MFA.")
+		cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to set a user's MFA preferences.")
+		cognitoIdp_adminSetUserMfapreferenceCmd.Flags().String("username", "", "The name of the user that you want to query or modify.")
+		cognitoIdp_adminSetUserMfapreferenceCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_adminSetUserMfapreferenceCmd.MarkFlagRequired("username")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_adminSetUserMfapreferenceCmd)
 }

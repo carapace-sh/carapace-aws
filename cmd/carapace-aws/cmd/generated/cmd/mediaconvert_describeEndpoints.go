@@ -12,10 +12,12 @@ var mediaconvert_describeEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_describeEndpointsCmd).Standalone()
+	carapace.Gen(mediaconvert_describeEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_describeEndpointsCmd).Standalone()
 
-	mediaconvert_describeEndpointsCmd.Flags().String("max-results", "", "Optional.")
-	mediaconvert_describeEndpointsCmd.Flags().String("mode", "", "Optional field, defaults to DEFAULT.")
-	mediaconvert_describeEndpointsCmd.Flags().String("next-token", "", "Use this string, provided with the response to a previous request, to request the next batch of endpoints.")
+		mediaconvert_describeEndpointsCmd.Flags().String("max-results", "", "Optional.")
+		mediaconvert_describeEndpointsCmd.Flags().String("mode", "", "Optional field, defaults to DEFAULT.")
+		mediaconvert_describeEndpointsCmd.Flags().String("next-token", "", "Use this string, provided with the response to a previous request, to request the next batch of endpoints.")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_describeEndpointsCmd)
 }

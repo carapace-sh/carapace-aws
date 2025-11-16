@@ -12,9 +12,11 @@ var lightsail_updateDistributionBundleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_updateDistributionBundleCmd).Standalone()
+	carapace.Gen(lightsail_updateDistributionBundleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_updateDistributionBundleCmd).Standalone()
 
-	lightsail_updateDistributionBundleCmd.Flags().String("bundle-id", "", "The bundle ID of the new bundle to apply to your distribution.")
-	lightsail_updateDistributionBundleCmd.Flags().String("distribution-name", "", "The name of the distribution for which to update the bundle.")
+		lightsail_updateDistributionBundleCmd.Flags().String("bundle-id", "", "The bundle ID of the new bundle to apply to your distribution.")
+		lightsail_updateDistributionBundleCmd.Flags().String("distribution-name", "", "The name of the distribution for which to update the bundle.")
+	})
 	lightsailCmd.AddCommand(lightsail_updateDistributionBundleCmd)
 }

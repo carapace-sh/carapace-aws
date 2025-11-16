@@ -12,11 +12,13 @@ var elb_configureHealthCheckCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_configureHealthCheckCmd).Standalone()
+	carapace.Gen(elb_configureHealthCheckCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_configureHealthCheckCmd).Standalone()
 
-	elb_configureHealthCheckCmd.Flags().String("health-check", "", "The configuration information.")
-	elb_configureHealthCheckCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_configureHealthCheckCmd.MarkFlagRequired("health-check")
-	elb_configureHealthCheckCmd.MarkFlagRequired("load-balancer-name")
+		elb_configureHealthCheckCmd.Flags().String("health-check", "", "The configuration information.")
+		elb_configureHealthCheckCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_configureHealthCheckCmd.MarkFlagRequired("health-check")
+		elb_configureHealthCheckCmd.MarkFlagRequired("load-balancer-name")
+	})
 	elbCmd.AddCommand(elb_configureHealthCheckCmd)
 }

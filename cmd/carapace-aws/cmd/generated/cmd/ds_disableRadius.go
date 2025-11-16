@@ -12,9 +12,11 @@ var ds_disableRadiusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_disableRadiusCmd).Standalone()
+	carapace.Gen(ds_disableRadiusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_disableRadiusCmd).Standalone()
 
-	ds_disableRadiusCmd.Flags().String("directory-id", "", "The identifier of the directory for which to disable MFA.")
-	ds_disableRadiusCmd.MarkFlagRequired("directory-id")
+		ds_disableRadiusCmd.Flags().String("directory-id", "", "The identifier of the directory for which to disable MFA.")
+		ds_disableRadiusCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_disableRadiusCmd)
 }

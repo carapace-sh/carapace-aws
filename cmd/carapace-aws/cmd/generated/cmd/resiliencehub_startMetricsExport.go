@@ -12,9 +12,11 @@ var resiliencehub_startMetricsExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_startMetricsExportCmd).Standalone()
+	carapace.Gen(resiliencehub_startMetricsExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_startMetricsExportCmd).Standalone()
 
-	resiliencehub_startMetricsExportCmd.Flags().String("bucket-name", "", "(Optional) Specifies the name of the Amazon Simple Storage Service bucket where the exported metrics will be stored.")
-	resiliencehub_startMetricsExportCmd.Flags().String("client-token", "", "Used for an idempotency token.")
+		resiliencehub_startMetricsExportCmd.Flags().String("bucket-name", "", "(Optional) Specifies the name of the Amazon Simple Storage Service bucket where the exported metrics will be stored.")
+		resiliencehub_startMetricsExportCmd.Flags().String("client-token", "", "Used for an idempotency token.")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_startMetricsExportCmd)
 }

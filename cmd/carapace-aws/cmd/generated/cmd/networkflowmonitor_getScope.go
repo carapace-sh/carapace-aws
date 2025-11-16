@@ -12,9 +12,11 @@ var networkflowmonitor_getScopeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_getScopeCmd).Standalone()
+	carapace.Gen(networkflowmonitor_getScopeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_getScopeCmd).Standalone()
 
-	networkflowmonitor_getScopeCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
-	networkflowmonitor_getScopeCmd.MarkFlagRequired("scope-id")
+		networkflowmonitor_getScopeCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
+		networkflowmonitor_getScopeCmd.MarkFlagRequired("scope-id")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_getScopeCmd)
 }

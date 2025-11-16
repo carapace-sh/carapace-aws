@@ -12,10 +12,12 @@ var memorydb_describeSubnetGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_describeSubnetGroupsCmd).Standalone()
+	carapace.Gen(memorydb_describeSubnetGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_describeSubnetGroupsCmd).Standalone()
 
-	memorydb_describeSubnetGroupsCmd.Flags().String("max-results", "", "The maximum number of records to include in the response.")
-	memorydb_describeSubnetGroupsCmd.Flags().String("next-token", "", "An optional argument to pass in case the total number of records exceeds the value of MaxResults.")
-	memorydb_describeSubnetGroupsCmd.Flags().String("subnet-group-name", "", "The name of the subnet group to return details for.")
+		memorydb_describeSubnetGroupsCmd.Flags().String("max-results", "", "The maximum number of records to include in the response.")
+		memorydb_describeSubnetGroupsCmd.Flags().String("next-token", "", "An optional argument to pass in case the total number of records exceeds the value of MaxResults.")
+		memorydb_describeSubnetGroupsCmd.Flags().String("subnet-group-name", "", "The name of the subnet group to return details for.")
+	})
 	memorydbCmd.AddCommand(memorydb_describeSubnetGroupsCmd)
 }

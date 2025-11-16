@@ -12,9 +12,11 @@ var b2bi_listTransformersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_listTransformersCmd).Standalone()
+	carapace.Gen(b2bi_listTransformersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_listTransformersCmd).Standalone()
 
-	b2bi_listTransformersCmd.Flags().String("max-results", "", "Specifies the number of items to return for the API response.")
-	b2bi_listTransformersCmd.Flags().String("next-token", "", "When additional results are obtained from the command, a `NextToken` parameter is returned in the output.")
+		b2bi_listTransformersCmd.Flags().String("max-results", "", "Specifies the number of items to return for the API response.")
+		b2bi_listTransformersCmd.Flags().String("next-token", "", "When additional results are obtained from the command, a `NextToken` parameter is returned in the output.")
+	})
 	b2biCmd.AddCommand(b2bi_listTransformersCmd)
 }

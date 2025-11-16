@@ -12,12 +12,14 @@ var workmail_putEmailMonitoringConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_putEmailMonitoringConfigurationCmd).Standalone()
+	carapace.Gen(workmail_putEmailMonitoringConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_putEmailMonitoringConfigurationCmd).Standalone()
 
-	workmail_putEmailMonitoringConfigurationCmd.Flags().String("log-group-arn", "", "The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.")
-	workmail_putEmailMonitoringConfigurationCmd.Flags().String("organization-id", "", "The ID of the organization for which the email monitoring configuration is set.")
-	workmail_putEmailMonitoringConfigurationCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.")
-	workmail_putEmailMonitoringConfigurationCmd.MarkFlagRequired("log-group-arn")
-	workmail_putEmailMonitoringConfigurationCmd.MarkFlagRequired("organization-id")
+		workmail_putEmailMonitoringConfigurationCmd.Flags().String("log-group-arn", "", "The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.")
+		workmail_putEmailMonitoringConfigurationCmd.Flags().String("organization-id", "", "The ID of the organization for which the email monitoring configuration is set.")
+		workmail_putEmailMonitoringConfigurationCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.")
+		workmail_putEmailMonitoringConfigurationCmd.MarkFlagRequired("log-group-arn")
+		workmail_putEmailMonitoringConfigurationCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_putEmailMonitoringConfigurationCmd)
 }

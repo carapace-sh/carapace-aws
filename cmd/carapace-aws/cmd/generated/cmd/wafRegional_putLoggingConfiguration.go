@@ -12,9 +12,11 @@ var wafRegional_putLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_putLoggingConfigurationCmd).Standalone()
+	carapace.Gen(wafRegional_putLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_putLoggingConfigurationCmd).Standalone()
 
-	wafRegional_putLoggingConfigurationCmd.Flags().String("logging-configuration", "", "The Amazon Kinesis Data Firehose that contains the inspected traffic information, the redacted fields details, and the Amazon Resource Name (ARN) of the web ACL to monitor.")
-	wafRegional_putLoggingConfigurationCmd.MarkFlagRequired("logging-configuration")
+		wafRegional_putLoggingConfigurationCmd.Flags().String("logging-configuration", "", "The Amazon Kinesis Data Firehose that contains the inspected traffic information, the redacted fields details, and the Amazon Resource Name (ARN) of the web ACL to monitor.")
+		wafRegional_putLoggingConfigurationCmd.MarkFlagRequired("logging-configuration")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_putLoggingConfigurationCmd)
 }

@@ -12,10 +12,12 @@ var ds_deleteTrustCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_deleteTrustCmd).Standalone()
+	carapace.Gen(ds_deleteTrustCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_deleteTrustCmd).Standalone()
 
-	ds_deleteTrustCmd.Flags().String("delete-associated-conditional-forwarder", "", "Delete a conditional forwarder as part of a DeleteTrustRequest.")
-	ds_deleteTrustCmd.Flags().String("trust-id", "", "The Trust ID of the trust relationship to be deleted.")
-	ds_deleteTrustCmd.MarkFlagRequired("trust-id")
+		ds_deleteTrustCmd.Flags().String("delete-associated-conditional-forwarder", "", "Delete a conditional forwarder as part of a DeleteTrustRequest.")
+		ds_deleteTrustCmd.Flags().String("trust-id", "", "The Trust ID of the trust relationship to be deleted.")
+		ds_deleteTrustCmd.MarkFlagRequired("trust-id")
+	})
 	dsCmd.AddCommand(ds_deleteTrustCmd)
 }

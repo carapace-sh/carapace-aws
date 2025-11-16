@@ -12,11 +12,13 @@ var vpcLattice_listServiceNetworkVpcAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listServiceNetworkVpcAssociationsCmd).Standalone()
+	carapace.Gen(vpcLattice_listServiceNetworkVpcAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listServiceNetworkVpcAssociationsCmd).Standalone()
 
-	vpcLattice_listServiceNetworkVpcAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	vpcLattice_listServiceNetworkVpcAssociationsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
-	vpcLattice_listServiceNetworkVpcAssociationsCmd.Flags().String("service-network-identifier", "", "The ID or ARN of the service network.")
-	vpcLattice_listServiceNetworkVpcAssociationsCmd.Flags().String("vpc-identifier", "", "The ID or ARN of the VPC.")
+		vpcLattice_listServiceNetworkVpcAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		vpcLattice_listServiceNetworkVpcAssociationsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+		vpcLattice_listServiceNetworkVpcAssociationsCmd.Flags().String("service-network-identifier", "", "The ID or ARN of the service network.")
+		vpcLattice_listServiceNetworkVpcAssociationsCmd.Flags().String("vpc-identifier", "", "The ID or ARN of the VPC.")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listServiceNetworkVpcAssociationsCmd)
 }

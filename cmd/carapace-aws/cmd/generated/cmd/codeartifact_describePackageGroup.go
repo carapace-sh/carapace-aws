@@ -12,12 +12,14 @@ var codeartifact_describePackageGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeartifact_describePackageGroupCmd).Standalone()
+	carapace.Gen(codeartifact_describePackageGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeartifact_describePackageGroupCmd).Standalone()
 
-	codeartifact_describePackageGroupCmd.Flags().String("domain", "", "The name of the domain that contains the package group.")
-	codeartifact_describePackageGroupCmd.Flags().String("domain-owner", "", "The 12-digit account number of the Amazon Web Services account that owns the domain.")
-	codeartifact_describePackageGroupCmd.Flags().String("package-group", "", "The pattern of the requested package group.")
-	codeartifact_describePackageGroupCmd.MarkFlagRequired("domain")
-	codeartifact_describePackageGroupCmd.MarkFlagRequired("package-group")
+		codeartifact_describePackageGroupCmd.Flags().String("domain", "", "The name of the domain that contains the package group.")
+		codeartifact_describePackageGroupCmd.Flags().String("domain-owner", "", "The 12-digit account number of the Amazon Web Services account that owns the domain.")
+		codeartifact_describePackageGroupCmd.Flags().String("package-group", "", "The pattern of the requested package group.")
+		codeartifact_describePackageGroupCmd.MarkFlagRequired("domain")
+		codeartifact_describePackageGroupCmd.MarkFlagRequired("package-group")
+	})
 	codeartifactCmd.AddCommand(codeartifact_describePackageGroupCmd)
 }

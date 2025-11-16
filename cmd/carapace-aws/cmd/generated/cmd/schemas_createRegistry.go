@@ -12,11 +12,13 @@ var schemas_createRegistryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_createRegistryCmd).Standalone()
+	carapace.Gen(schemas_createRegistryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_createRegistryCmd).Standalone()
 
-	schemas_createRegistryCmd.Flags().String("description", "", "A description of the registry to be created.")
-	schemas_createRegistryCmd.Flags().String("registry-name", "", "The name of the registry.")
-	schemas_createRegistryCmd.Flags().String("tags", "", "Tags to associate with the registry.")
-	schemas_createRegistryCmd.MarkFlagRequired("registry-name")
+		schemas_createRegistryCmd.Flags().String("description", "", "A description of the registry to be created.")
+		schemas_createRegistryCmd.Flags().String("registry-name", "", "The name of the registry.")
+		schemas_createRegistryCmd.Flags().String("tags", "", "Tags to associate with the registry.")
+		schemas_createRegistryCmd.MarkFlagRequired("registry-name")
+	})
 	schemasCmd.AddCommand(schemas_createRegistryCmd)
 }

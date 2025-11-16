@@ -12,9 +12,11 @@ var personalize_deleteRecommenderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_deleteRecommenderCmd).Standalone()
+	carapace.Gen(personalize_deleteRecommenderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_deleteRecommenderCmd).Standalone()
 
-	personalize_deleteRecommenderCmd.Flags().String("recommender-arn", "", "The Amazon Resource Name (ARN) of the recommender to delete.")
-	personalize_deleteRecommenderCmd.MarkFlagRequired("recommender-arn")
+		personalize_deleteRecommenderCmd.Flags().String("recommender-arn", "", "The Amazon Resource Name (ARN) of the recommender to delete.")
+		personalize_deleteRecommenderCmd.MarkFlagRequired("recommender-arn")
+	})
 	personalizeCmd.AddCommand(personalize_deleteRecommenderCmd)
 }

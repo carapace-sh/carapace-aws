@@ -12,12 +12,14 @@ var sagemaker_batchAddClusterNodesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_batchAddClusterNodesCmd).Standalone()
+	carapace.Gen(sagemaker_batchAddClusterNodesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_batchAddClusterNodesCmd).Standalone()
 
-	sagemaker_batchAddClusterNodesCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	sagemaker_batchAddClusterNodesCmd.Flags().String("cluster-name", "", "The name of the HyperPod cluster to which you want to add nodes.")
-	sagemaker_batchAddClusterNodesCmd.Flags().String("nodes-to-add", "", "A list of instance groups and the number of nodes to add to each.")
-	sagemaker_batchAddClusterNodesCmd.MarkFlagRequired("cluster-name")
-	sagemaker_batchAddClusterNodesCmd.MarkFlagRequired("nodes-to-add")
+		sagemaker_batchAddClusterNodesCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		sagemaker_batchAddClusterNodesCmd.Flags().String("cluster-name", "", "The name of the HyperPod cluster to which you want to add nodes.")
+		sagemaker_batchAddClusterNodesCmd.Flags().String("nodes-to-add", "", "A list of instance groups and the number of nodes to add to each.")
+		sagemaker_batchAddClusterNodesCmd.MarkFlagRequired("cluster-name")
+		sagemaker_batchAddClusterNodesCmd.MarkFlagRequired("nodes-to-add")
+	})
 	sagemakerCmd.AddCommand(sagemaker_batchAddClusterNodesCmd)
 }

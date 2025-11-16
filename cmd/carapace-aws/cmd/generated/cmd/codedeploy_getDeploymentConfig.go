@@ -12,9 +12,11 @@ var codedeploy_getDeploymentConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_getDeploymentConfigCmd).Standalone()
+	carapace.Gen(codedeploy_getDeploymentConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_getDeploymentConfigCmd).Standalone()
 
-	codedeploy_getDeploymentConfigCmd.Flags().String("deployment-config-name", "", "The name of a deployment configuration associated with the user or Amazon Web Services account.")
-	codedeploy_getDeploymentConfigCmd.MarkFlagRequired("deployment-config-name")
+		codedeploy_getDeploymentConfigCmd.Flags().String("deployment-config-name", "", "The name of a deployment configuration associated with the user or Amazon Web Services account.")
+		codedeploy_getDeploymentConfigCmd.MarkFlagRequired("deployment-config-name")
+	})
 	codedeployCmd.AddCommand(codedeploy_getDeploymentConfigCmd)
 }

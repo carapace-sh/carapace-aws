@@ -12,11 +12,13 @@ var ses_updateConfigurationSetEventDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_updateConfigurationSetEventDestinationCmd).Standalone()
+	carapace.Gen(ses_updateConfigurationSetEventDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_updateConfigurationSetEventDestinationCmd).Standalone()
 
-	ses_updateConfigurationSetEventDestinationCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that contains the event destination.")
-	ses_updateConfigurationSetEventDestinationCmd.Flags().String("event-destination", "", "The event destination object.")
-	ses_updateConfigurationSetEventDestinationCmd.MarkFlagRequired("configuration-set-name")
-	ses_updateConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination")
+		ses_updateConfigurationSetEventDestinationCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that contains the event destination.")
+		ses_updateConfigurationSetEventDestinationCmd.Flags().String("event-destination", "", "The event destination object.")
+		ses_updateConfigurationSetEventDestinationCmd.MarkFlagRequired("configuration-set-name")
+		ses_updateConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination")
+	})
 	sesCmd.AddCommand(ses_updateConfigurationSetEventDestinationCmd)
 }

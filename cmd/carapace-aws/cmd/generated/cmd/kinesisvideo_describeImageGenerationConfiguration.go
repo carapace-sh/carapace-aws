@@ -12,9 +12,11 @@ var kinesisvideo_describeImageGenerationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_describeImageGenerationConfigurationCmd).Standalone()
+	carapace.Gen(kinesisvideo_describeImageGenerationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_describeImageGenerationConfigurationCmd).Standalone()
 
-	kinesisvideo_describeImageGenerationConfigurationCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the Kinesis video stream from which to retrieve the image generation configuration.")
-	kinesisvideo_describeImageGenerationConfigurationCmd.Flags().String("stream-name", "", "The name of the stream from which to retrieve the image generation configuration.")
+		kinesisvideo_describeImageGenerationConfigurationCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the Kinesis video stream from which to retrieve the image generation configuration.")
+		kinesisvideo_describeImageGenerationConfigurationCmd.Flags().String("stream-name", "", "The name of the stream from which to retrieve the image generation configuration.")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_describeImageGenerationConfigurationCmd)
 }

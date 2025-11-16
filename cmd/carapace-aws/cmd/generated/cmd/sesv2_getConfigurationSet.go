@@ -12,9 +12,11 @@ var sesv2_getConfigurationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getConfigurationSetCmd).Standalone()
+	carapace.Gen(sesv2_getConfigurationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getConfigurationSetCmd).Standalone()
 
-	sesv2_getConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
-	sesv2_getConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+		sesv2_getConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
+		sesv2_getConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_getConfigurationSetCmd)
 }

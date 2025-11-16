@@ -12,10 +12,12 @@ var opensearchserverless_deleteCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_deleteCollectionCmd).Standalone()
+	carapace.Gen(opensearchserverless_deleteCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_deleteCollectionCmd).Standalone()
 
-	opensearchserverless_deleteCollectionCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure idempotency of the request.")
-	opensearchserverless_deleteCollectionCmd.Flags().String("id", "", "The unique identifier of the collection.")
-	opensearchserverless_deleteCollectionCmd.MarkFlagRequired("id")
+		opensearchserverless_deleteCollectionCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure idempotency of the request.")
+		opensearchserverless_deleteCollectionCmd.Flags().String("id", "", "The unique identifier of the collection.")
+		opensearchserverless_deleteCollectionCmd.MarkFlagRequired("id")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_deleteCollectionCmd)
 }

@@ -12,17 +12,19 @@ var frauddetector_getEventPredictionMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getEventPredictionMetadataCmd).Standalone()
+	carapace.Gen(frauddetector_getEventPredictionMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getEventPredictionMetadataCmd).Standalone()
 
-	frauddetector_getEventPredictionMetadataCmd.Flags().String("detector-id", "", "The detector ID.")
-	frauddetector_getEventPredictionMetadataCmd.Flags().String("detector-version-id", "", "The detector version ID.")
-	frauddetector_getEventPredictionMetadataCmd.Flags().String("event-id", "", "The event ID.")
-	frauddetector_getEventPredictionMetadataCmd.Flags().String("event-type-name", "", "The event type associated with the detector specified for the prediction.")
-	frauddetector_getEventPredictionMetadataCmd.Flags().String("prediction-timestamp", "", "The timestamp that defines when the prediction was generated.")
-	frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("detector-id")
-	frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("detector-version-id")
-	frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("event-id")
-	frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("event-type-name")
-	frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("prediction-timestamp")
+		frauddetector_getEventPredictionMetadataCmd.Flags().String("detector-id", "", "The detector ID.")
+		frauddetector_getEventPredictionMetadataCmd.Flags().String("detector-version-id", "", "The detector version ID.")
+		frauddetector_getEventPredictionMetadataCmd.Flags().String("event-id", "", "The event ID.")
+		frauddetector_getEventPredictionMetadataCmd.Flags().String("event-type-name", "", "The event type associated with the detector specified for the prediction.")
+		frauddetector_getEventPredictionMetadataCmd.Flags().String("prediction-timestamp", "", "The timestamp that defines when the prediction was generated.")
+		frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("detector-id")
+		frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("detector-version-id")
+		frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("event-id")
+		frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("event-type-name")
+		frauddetector_getEventPredictionMetadataCmd.MarkFlagRequired("prediction-timestamp")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getEventPredictionMetadataCmd)
 }

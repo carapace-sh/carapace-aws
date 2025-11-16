@@ -12,13 +12,15 @@ var deadline_getJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_getJobCmd).Standalone()
+	carapace.Gen(deadline_getJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_getJobCmd).Standalone()
 
-	deadline_getJobCmd.Flags().String("farm-id", "", "The farm ID of the farm in the job.")
-	deadline_getJobCmd.Flags().String("job-id", "", "The job ID.")
-	deadline_getJobCmd.Flags().String("queue-id", "", "The queue ID associated with the job.")
-	deadline_getJobCmd.MarkFlagRequired("farm-id")
-	deadline_getJobCmd.MarkFlagRequired("job-id")
-	deadline_getJobCmd.MarkFlagRequired("queue-id")
+		deadline_getJobCmd.Flags().String("farm-id", "", "The farm ID of the farm in the job.")
+		deadline_getJobCmd.Flags().String("job-id", "", "The job ID.")
+		deadline_getJobCmd.Flags().String("queue-id", "", "The queue ID associated with the job.")
+		deadline_getJobCmd.MarkFlagRequired("farm-id")
+		deadline_getJobCmd.MarkFlagRequired("job-id")
+		deadline_getJobCmd.MarkFlagRequired("queue-id")
+	})
 	deadlineCmd.AddCommand(deadline_getJobCmd)
 }

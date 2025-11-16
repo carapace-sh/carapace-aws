@@ -12,11 +12,13 @@ var panorama_listApplicationInstanceDependenciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_listApplicationInstanceDependenciesCmd).Standalone()
+	carapace.Gen(panorama_listApplicationInstanceDependenciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_listApplicationInstanceDependenciesCmd).Standalone()
 
-	panorama_listApplicationInstanceDependenciesCmd.Flags().String("application-instance-id", "", "The application instance's ID.")
-	panorama_listApplicationInstanceDependenciesCmd.Flags().String("max-results", "", "The maximum number of application instance dependencies to return in one page of results.")
-	panorama_listApplicationInstanceDependenciesCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
-	panorama_listApplicationInstanceDependenciesCmd.MarkFlagRequired("application-instance-id")
+		panorama_listApplicationInstanceDependenciesCmd.Flags().String("application-instance-id", "", "The application instance's ID.")
+		panorama_listApplicationInstanceDependenciesCmd.Flags().String("max-results", "", "The maximum number of application instance dependencies to return in one page of results.")
+		panorama_listApplicationInstanceDependenciesCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		panorama_listApplicationInstanceDependenciesCmd.MarkFlagRequired("application-instance-id")
+	})
 	panoramaCmd.AddCommand(panorama_listApplicationInstanceDependenciesCmd)
 }

@@ -12,12 +12,14 @@ var fsx_associateFileSystemAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_associateFileSystemAliasesCmd).Standalone()
+	carapace.Gen(fsx_associateFileSystemAliasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_associateFileSystemAliasesCmd).Standalone()
 
-	fsx_associateFileSystemAliasesCmd.Flags().String("aliases", "", "An array of one or more DNS alias names to associate with the file system.")
-	fsx_associateFileSystemAliasesCmd.Flags().String("client-request-token", "", "")
-	fsx_associateFileSystemAliasesCmd.Flags().String("file-system-id", "", "Specifies the file system with which you want to associate one or more DNS aliases.")
-	fsx_associateFileSystemAliasesCmd.MarkFlagRequired("aliases")
-	fsx_associateFileSystemAliasesCmd.MarkFlagRequired("file-system-id")
+		fsx_associateFileSystemAliasesCmd.Flags().String("aliases", "", "An array of one or more DNS alias names to associate with the file system.")
+		fsx_associateFileSystemAliasesCmd.Flags().String("client-request-token", "", "")
+		fsx_associateFileSystemAliasesCmd.Flags().String("file-system-id", "", "Specifies the file system with which you want to associate one or more DNS aliases.")
+		fsx_associateFileSystemAliasesCmd.MarkFlagRequired("aliases")
+		fsx_associateFileSystemAliasesCmd.MarkFlagRequired("file-system-id")
+	})
 	fsxCmd.AddCommand(fsx_associateFileSystemAliasesCmd)
 }

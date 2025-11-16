@@ -12,9 +12,11 @@ var route53resolver_getFirewallConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_getFirewallConfigCmd).Standalone()
+	carapace.Gen(route53resolver_getFirewallConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_getFirewallConfigCmd).Standalone()
 
-	route53resolver_getFirewallConfigCmd.Flags().String("resource-id", "", "The ID of the VPC from Amazon VPC that the configuration is for.")
-	route53resolver_getFirewallConfigCmd.MarkFlagRequired("resource-id")
+		route53resolver_getFirewallConfigCmd.Flags().String("resource-id", "", "The ID of the VPC from Amazon VPC that the configuration is for.")
+		route53resolver_getFirewallConfigCmd.MarkFlagRequired("resource-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_getFirewallConfigCmd)
 }

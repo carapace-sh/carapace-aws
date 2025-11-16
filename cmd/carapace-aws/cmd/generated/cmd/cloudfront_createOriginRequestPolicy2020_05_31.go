@@ -12,9 +12,11 @@ var cloudfront_createOriginRequestPolicy2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_createOriginRequestPolicy2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createOriginRequestPolicy2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createOriginRequestPolicy2020_05_31Cmd).Standalone()
 
-	cloudfront_createOriginRequestPolicy2020_05_31Cmd.Flags().String("origin-request-policy-config", "", "An origin request policy configuration.")
-	cloudfront_createOriginRequestPolicy2020_05_31Cmd.MarkFlagRequired("origin-request-policy-config")
+		cloudfront_createOriginRequestPolicy2020_05_31Cmd.Flags().String("origin-request-policy-config", "", "An origin request policy configuration.")
+		cloudfront_createOriginRequestPolicy2020_05_31Cmd.MarkFlagRequired("origin-request-policy-config")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createOriginRequestPolicy2020_05_31Cmd)
 }

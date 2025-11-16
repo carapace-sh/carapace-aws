@@ -12,10 +12,12 @@ var kms_scheduleKeyDeletionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_scheduleKeyDeletionCmd).Standalone()
+	carapace.Gen(kms_scheduleKeyDeletionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_scheduleKeyDeletionCmd).Standalone()
 
-	kms_scheduleKeyDeletionCmd.Flags().String("key-id", "", "The unique identifier of the KMS key to delete.")
-	kms_scheduleKeyDeletionCmd.Flags().String("pending-window-in-days", "", "The waiting period, specified in number of days.")
-	kms_scheduleKeyDeletionCmd.MarkFlagRequired("key-id")
+		kms_scheduleKeyDeletionCmd.Flags().String("key-id", "", "The unique identifier of the KMS key to delete.")
+		kms_scheduleKeyDeletionCmd.Flags().String("pending-window-in-days", "", "The waiting period, specified in number of days.")
+		kms_scheduleKeyDeletionCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_scheduleKeyDeletionCmd)
 }

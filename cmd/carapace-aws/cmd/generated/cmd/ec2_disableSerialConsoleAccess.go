@@ -12,10 +12,12 @@ var ec2_disableSerialConsoleAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_disableSerialConsoleAccessCmd).Standalone()
+	carapace.Gen(ec2_disableSerialConsoleAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_disableSerialConsoleAccessCmd).Standalone()
 
-	ec2_disableSerialConsoleAccessCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disableSerialConsoleAccessCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disableSerialConsoleAccessCmd.Flag("no-dry-run").Hidden = true
+		ec2_disableSerialConsoleAccessCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disableSerialConsoleAccessCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disableSerialConsoleAccessCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_disableSerialConsoleAccessCmd)
 }

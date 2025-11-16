@@ -12,11 +12,13 @@ var connectcases_getTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_getTemplateCmd).Standalone()
+	carapace.Gen(connectcases_getTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_getTemplateCmd).Standalone()
 
-	connectcases_getTemplateCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_getTemplateCmd.Flags().String("template-id", "", "A unique identifier of a template.")
-	connectcases_getTemplateCmd.MarkFlagRequired("domain-id")
-	connectcases_getTemplateCmd.MarkFlagRequired("template-id")
+		connectcases_getTemplateCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_getTemplateCmd.Flags().String("template-id", "", "A unique identifier of a template.")
+		connectcases_getTemplateCmd.MarkFlagRequired("domain-id")
+		connectcases_getTemplateCmd.MarkFlagRequired("template-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_getTemplateCmd)
 }

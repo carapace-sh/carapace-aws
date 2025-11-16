@@ -12,11 +12,13 @@ var guardduty_getThreatEntitySetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_getThreatEntitySetCmd).Standalone()
+	carapace.Gen(guardduty_getThreatEntitySetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_getThreatEntitySetCmd).Standalone()
 
-	guardduty_getThreatEntitySetCmd.Flags().String("detector-id", "", "The unique ID of the detector associated with the threat entity set resource.")
-	guardduty_getThreatEntitySetCmd.Flags().String("threat-entity-set-id", "", "The unique ID that helps GuardDuty identify the threat entity set.")
-	guardduty_getThreatEntitySetCmd.MarkFlagRequired("detector-id")
-	guardduty_getThreatEntitySetCmd.MarkFlagRequired("threat-entity-set-id")
+		guardduty_getThreatEntitySetCmd.Flags().String("detector-id", "", "The unique ID of the detector associated with the threat entity set resource.")
+		guardduty_getThreatEntitySetCmd.Flags().String("threat-entity-set-id", "", "The unique ID that helps GuardDuty identify the threat entity set.")
+		guardduty_getThreatEntitySetCmd.MarkFlagRequired("detector-id")
+		guardduty_getThreatEntitySetCmd.MarkFlagRequired("threat-entity-set-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_getThreatEntitySetCmd)
 }

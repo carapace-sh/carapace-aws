@@ -12,11 +12,13 @@ var clouddirectory_createTypedLinkFacetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_createTypedLinkFacetCmd).Standalone()
+	carapace.Gen(clouddirectory_createTypedLinkFacetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_createTypedLinkFacetCmd).Standalone()
 
-	clouddirectory_createTypedLinkFacetCmd.Flags().String("facet", "", "[Facet]() structure that is associated with the typed link facet.")
-	clouddirectory_createTypedLinkFacetCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) that is associated with the schema.")
-	clouddirectory_createTypedLinkFacetCmd.MarkFlagRequired("facet")
-	clouddirectory_createTypedLinkFacetCmd.MarkFlagRequired("schema-arn")
+		clouddirectory_createTypedLinkFacetCmd.Flags().String("facet", "", "[Facet]() structure that is associated with the typed link facet.")
+		clouddirectory_createTypedLinkFacetCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) that is associated with the schema.")
+		clouddirectory_createTypedLinkFacetCmd.MarkFlagRequired("facet")
+		clouddirectory_createTypedLinkFacetCmd.MarkFlagRequired("schema-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_createTypedLinkFacetCmd)
 }

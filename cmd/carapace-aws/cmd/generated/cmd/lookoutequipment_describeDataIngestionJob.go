@@ -12,9 +12,11 @@ var lookoutequipment_describeDataIngestionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_describeDataIngestionJobCmd).Standalone()
+	carapace.Gen(lookoutequipment_describeDataIngestionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_describeDataIngestionJobCmd).Standalone()
 
-	lookoutequipment_describeDataIngestionJobCmd.Flags().String("job-id", "", "The job ID of the data ingestion job.")
-	lookoutequipment_describeDataIngestionJobCmd.MarkFlagRequired("job-id")
+		lookoutequipment_describeDataIngestionJobCmd.Flags().String("job-id", "", "The job ID of the data ingestion job.")
+		lookoutequipment_describeDataIngestionJobCmd.MarkFlagRequired("job-id")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_describeDataIngestionJobCmd)
 }

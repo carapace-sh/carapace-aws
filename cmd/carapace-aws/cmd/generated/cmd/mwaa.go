@@ -12,7 +12,9 @@ var mwaaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mwaaCmd).Standalone()
+	carapace.Gen(mwaaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mwaaCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(mwaaCmd)
 }

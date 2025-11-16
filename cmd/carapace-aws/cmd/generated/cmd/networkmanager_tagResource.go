@@ -12,11 +12,13 @@ var networkmanager_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_tagResourceCmd).Standalone()
+	carapace.Gen(networkmanager_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_tagResourceCmd).Standalone()
 
-	networkmanager_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	networkmanager_tagResourceCmd.Flags().String("tags", "", "The tags to apply to the specified resource.")
-	networkmanager_tagResourceCmd.MarkFlagRequired("resource-arn")
-	networkmanager_tagResourceCmd.MarkFlagRequired("tags")
+		networkmanager_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		networkmanager_tagResourceCmd.Flags().String("tags", "", "The tags to apply to the specified resource.")
+		networkmanager_tagResourceCmd.MarkFlagRequired("resource-arn")
+		networkmanager_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_tagResourceCmd)
 }

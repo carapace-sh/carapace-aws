@@ -12,9 +12,11 @@ var sagemaker_getLineageGroupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_getLineageGroupPolicyCmd).Standalone()
+	carapace.Gen(sagemaker_getLineageGroupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_getLineageGroupPolicyCmd).Standalone()
 
-	sagemaker_getLineageGroupPolicyCmd.Flags().String("lineage-group-name", "", "The name or Amazon Resource Name (ARN) of the lineage group.")
-	sagemaker_getLineageGroupPolicyCmd.MarkFlagRequired("lineage-group-name")
+		sagemaker_getLineageGroupPolicyCmd.Flags().String("lineage-group-name", "", "The name or Amazon Resource Name (ARN) of the lineage group.")
+		sagemaker_getLineageGroupPolicyCmd.MarkFlagRequired("lineage-group-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_getLineageGroupPolicyCmd)
 }

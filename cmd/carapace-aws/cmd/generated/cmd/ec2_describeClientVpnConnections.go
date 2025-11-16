@@ -12,15 +12,17 @@ var ec2_describeClientVpnConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeClientVpnConnectionsCmd).Standalone()
+	carapace.Gen(ec2_describeClientVpnConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeClientVpnConnectionsCmd).Standalone()
 
-	ec2_describeClientVpnConnectionsCmd.Flags().String("client-vpn-endpoint-id", "", "The ID of the Client VPN endpoint.")
-	ec2_describeClientVpnConnectionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeClientVpnConnectionsCmd.Flags().String("filters", "", "One or more filters.")
-	ec2_describeClientVpnConnectionsCmd.Flags().String("max-results", "", "The maximum number of results to return for the request in a single page.")
-	ec2_describeClientVpnConnectionsCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
-	ec2_describeClientVpnConnectionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeClientVpnConnectionsCmd.MarkFlagRequired("client-vpn-endpoint-id")
-	ec2_describeClientVpnConnectionsCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeClientVpnConnectionsCmd.Flags().String("client-vpn-endpoint-id", "", "The ID of the Client VPN endpoint.")
+		ec2_describeClientVpnConnectionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeClientVpnConnectionsCmd.Flags().String("filters", "", "One or more filters.")
+		ec2_describeClientVpnConnectionsCmd.Flags().String("max-results", "", "The maximum number of results to return for the request in a single page.")
+		ec2_describeClientVpnConnectionsCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+		ec2_describeClientVpnConnectionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeClientVpnConnectionsCmd.MarkFlagRequired("client-vpn-endpoint-id")
+		ec2_describeClientVpnConnectionsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeClientVpnConnectionsCmd)
 }

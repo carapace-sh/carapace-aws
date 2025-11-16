@@ -12,13 +12,15 @@ var codepipeline_deleteCustomActionTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_deleteCustomActionTypeCmd).Standalone()
+	carapace.Gen(codepipeline_deleteCustomActionTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_deleteCustomActionTypeCmd).Standalone()
 
-	codepipeline_deleteCustomActionTypeCmd.Flags().String("category", "", "The category of the custom action that you want to delete, such as source or deploy.")
-	codepipeline_deleteCustomActionTypeCmd.Flags().String("provider", "", "The provider of the service used in the custom action, such as CodeDeploy.")
-	codepipeline_deleteCustomActionTypeCmd.Flags().String("version", "", "The version of the custom action to delete.")
-	codepipeline_deleteCustomActionTypeCmd.MarkFlagRequired("category")
-	codepipeline_deleteCustomActionTypeCmd.MarkFlagRequired("provider")
-	codepipeline_deleteCustomActionTypeCmd.MarkFlagRequired("version")
+		codepipeline_deleteCustomActionTypeCmd.Flags().String("category", "", "The category of the custom action that you want to delete, such as source or deploy.")
+		codepipeline_deleteCustomActionTypeCmd.Flags().String("provider", "", "The provider of the service used in the custom action, such as CodeDeploy.")
+		codepipeline_deleteCustomActionTypeCmd.Flags().String("version", "", "The version of the custom action to delete.")
+		codepipeline_deleteCustomActionTypeCmd.MarkFlagRequired("category")
+		codepipeline_deleteCustomActionTypeCmd.MarkFlagRequired("provider")
+		codepipeline_deleteCustomActionTypeCmd.MarkFlagRequired("version")
+	})
 	codepipelineCmd.AddCommand(codepipeline_deleteCustomActionTypeCmd)
 }

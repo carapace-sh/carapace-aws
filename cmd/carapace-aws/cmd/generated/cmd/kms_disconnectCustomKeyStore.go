@@ -12,9 +12,11 @@ var kms_disconnectCustomKeyStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_disconnectCustomKeyStoreCmd).Standalone()
+	carapace.Gen(kms_disconnectCustomKeyStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_disconnectCustomKeyStoreCmd).Standalone()
 
-	kms_disconnectCustomKeyStoreCmd.Flags().String("custom-key-store-id", "", "Enter the ID of the custom key store you want to disconnect.")
-	kms_disconnectCustomKeyStoreCmd.MarkFlagRequired("custom-key-store-id")
+		kms_disconnectCustomKeyStoreCmd.Flags().String("custom-key-store-id", "", "Enter the ID of the custom key store you want to disconnect.")
+		kms_disconnectCustomKeyStoreCmd.MarkFlagRequired("custom-key-store-id")
+	})
 	kmsCmd.AddCommand(kms_disconnectCustomKeyStoreCmd)
 }

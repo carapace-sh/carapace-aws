@@ -12,9 +12,11 @@ var glue_getSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getSchemaCmd).Standalone()
+	carapace.Gen(glue_getSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getSchemaCmd).Standalone()
 
-	glue_getSchemaCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
-	glue_getSchemaCmd.MarkFlagRequired("schema-id")
+		glue_getSchemaCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
+		glue_getSchemaCmd.MarkFlagRequired("schema-id")
+	})
 	glueCmd.AddCommand(glue_getSchemaCmd)
 }

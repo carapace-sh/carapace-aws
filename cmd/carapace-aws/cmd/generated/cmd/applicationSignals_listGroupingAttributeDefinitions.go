@@ -12,8 +12,10 @@ var applicationSignals_listGroupingAttributeDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationSignals_listGroupingAttributeDefinitionsCmd).Standalone()
+	carapace.Gen(applicationSignals_listGroupingAttributeDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationSignals_listGroupingAttributeDefinitionsCmd).Standalone()
 
-	applicationSignals_listGroupingAttributeDefinitionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		applicationSignals_listGroupingAttributeDefinitionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	applicationSignalsCmd.AddCommand(applicationSignals_listGroupingAttributeDefinitionsCmd)
 }

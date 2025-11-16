@@ -12,9 +12,11 @@ var scheduler_getScheduleGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(scheduler_getScheduleGroupCmd).Standalone()
+	carapace.Gen(scheduler_getScheduleGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(scheduler_getScheduleGroupCmd).Standalone()
 
-	scheduler_getScheduleGroupCmd.Flags().String("name", "", "The name of the schedule group to retrieve.")
-	scheduler_getScheduleGroupCmd.MarkFlagRequired("name")
+		scheduler_getScheduleGroupCmd.Flags().String("name", "", "The name of the schedule group to retrieve.")
+		scheduler_getScheduleGroupCmd.MarkFlagRequired("name")
+	})
 	schedulerCmd.AddCommand(scheduler_getScheduleGroupCmd)
 }

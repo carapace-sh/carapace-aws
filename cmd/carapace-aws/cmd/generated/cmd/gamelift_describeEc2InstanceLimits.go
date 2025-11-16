@@ -12,9 +12,11 @@ var gamelift_describeEc2InstanceLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeEc2InstanceLimitsCmd).Standalone()
+	carapace.Gen(gamelift_describeEc2InstanceLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeEc2InstanceLimitsCmd).Standalone()
 
-	gamelift_describeEc2InstanceLimitsCmd.Flags().String("ec2-instance-type", "", "Name of an Amazon EC2 instance type that is supported in Amazon GameLift Servers.")
-	gamelift_describeEc2InstanceLimitsCmd.Flags().String("location", "", "The name of a remote location to request instance limits for, in the form of an Amazon Web Services Region code such as `us-west-2`.")
+		gamelift_describeEc2InstanceLimitsCmd.Flags().String("ec2-instance-type", "", "Name of an Amazon EC2 instance type that is supported in Amazon GameLift Servers.")
+		gamelift_describeEc2InstanceLimitsCmd.Flags().String("location", "", "The name of a remote location to request instance limits for, in the form of an Amazon Web Services Region code such as `us-west-2`.")
+	})
 	gameliftCmd.AddCommand(gamelift_describeEc2InstanceLimitsCmd)
 }

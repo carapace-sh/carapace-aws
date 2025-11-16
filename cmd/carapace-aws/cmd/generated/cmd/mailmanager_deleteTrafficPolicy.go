@@ -12,9 +12,11 @@ var mailmanager_deleteTrafficPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_deleteTrafficPolicyCmd).Standalone()
+	carapace.Gen(mailmanager_deleteTrafficPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_deleteTrafficPolicyCmd).Standalone()
 
-	mailmanager_deleteTrafficPolicyCmd.Flags().String("traffic-policy-id", "", "The identifier of the traffic policy that you want to delete.")
-	mailmanager_deleteTrafficPolicyCmd.MarkFlagRequired("traffic-policy-id")
+		mailmanager_deleteTrafficPolicyCmd.Flags().String("traffic-policy-id", "", "The identifier of the traffic policy that you want to delete.")
+		mailmanager_deleteTrafficPolicyCmd.MarkFlagRequired("traffic-policy-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_deleteTrafficPolicyCmd)
 }

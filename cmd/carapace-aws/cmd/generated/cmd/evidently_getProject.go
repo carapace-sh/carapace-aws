@@ -12,9 +12,11 @@ var evidently_getProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_getProjectCmd).Standalone()
+	carapace.Gen(evidently_getProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_getProjectCmd).Standalone()
 
-	evidently_getProjectCmd.Flags().String("project", "", "The name or ARN of the project that you want to see the details of.")
-	evidently_getProjectCmd.MarkFlagRequired("project")
+		evidently_getProjectCmd.Flags().String("project", "", "The name or ARN of the project that you want to see the details of.")
+		evidently_getProjectCmd.MarkFlagRequired("project")
+	})
 	evidentlyCmd.AddCommand(evidently_getProjectCmd)
 }

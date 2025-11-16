@@ -12,9 +12,11 @@ var comprehend_describePiiEntitiesDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describePiiEntitiesDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_describePiiEntitiesDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describePiiEntitiesDetectionJobCmd).Standalone()
 
-	comprehend_describePiiEntitiesDetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend generated for the job.")
-	comprehend_describePiiEntitiesDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_describePiiEntitiesDetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend generated for the job.")
+		comprehend_describePiiEntitiesDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_describePiiEntitiesDetectionJobCmd)
 }

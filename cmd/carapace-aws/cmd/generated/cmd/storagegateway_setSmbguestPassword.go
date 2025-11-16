@@ -12,11 +12,13 @@ var storagegateway_setSmbguestPasswordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_setSmbguestPasswordCmd).Standalone()
+	carapace.Gen(storagegateway_setSmbguestPasswordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_setSmbguestPasswordCmd).Standalone()
 
-	storagegateway_setSmbguestPasswordCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the S3 File Gateway the SMB file share is associated with.")
-	storagegateway_setSmbguestPasswordCmd.Flags().String("password", "", "The password that you want to set for your SMB server.")
-	storagegateway_setSmbguestPasswordCmd.MarkFlagRequired("gateway-arn")
-	storagegateway_setSmbguestPasswordCmd.MarkFlagRequired("password")
+		storagegateway_setSmbguestPasswordCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the S3 File Gateway the SMB file share is associated with.")
+		storagegateway_setSmbguestPasswordCmd.Flags().String("password", "", "The password that you want to set for your SMB server.")
+		storagegateway_setSmbguestPasswordCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_setSmbguestPasswordCmd.MarkFlagRequired("password")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_setSmbguestPasswordCmd)
 }

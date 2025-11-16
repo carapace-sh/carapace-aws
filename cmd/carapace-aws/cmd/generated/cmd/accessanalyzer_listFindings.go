@@ -12,13 +12,15 @@ var accessanalyzer_listFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_listFindingsCmd).Standalone()
+	carapace.Gen(accessanalyzer_listFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_listFindingsCmd).Standalone()
 
-	accessanalyzer_listFindingsCmd.Flags().String("analyzer-arn", "", "The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) to retrieve findings from.")
-	accessanalyzer_listFindingsCmd.Flags().String("filter", "", "A filter to match for the findings to return.")
-	accessanalyzer_listFindingsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	accessanalyzer_listFindingsCmd.Flags().String("next-token", "", "A token used for pagination of results returned.")
-	accessanalyzer_listFindingsCmd.Flags().String("sort", "", "The sort order for the findings returned.")
-	accessanalyzer_listFindingsCmd.MarkFlagRequired("analyzer-arn")
+		accessanalyzer_listFindingsCmd.Flags().String("analyzer-arn", "", "The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) to retrieve findings from.")
+		accessanalyzer_listFindingsCmd.Flags().String("filter", "", "A filter to match for the findings to return.")
+		accessanalyzer_listFindingsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		accessanalyzer_listFindingsCmd.Flags().String("next-token", "", "A token used for pagination of results returned.")
+		accessanalyzer_listFindingsCmd.Flags().String("sort", "", "The sort order for the findings returned.")
+		accessanalyzer_listFindingsCmd.MarkFlagRequired("analyzer-arn")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_listFindingsCmd)
 }

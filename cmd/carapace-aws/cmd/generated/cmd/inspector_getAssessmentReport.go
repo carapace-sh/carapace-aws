@@ -12,13 +12,15 @@ var inspector_getAssessmentReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_getAssessmentReportCmd).Standalone()
+	carapace.Gen(inspector_getAssessmentReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_getAssessmentReportCmd).Standalone()
 
-	inspector_getAssessmentReportCmd.Flags().String("assessment-run-arn", "", "The ARN that specifies the assessment run for which you want to generate a report.")
-	inspector_getAssessmentReportCmd.Flags().String("report-file-format", "", "Specifies the file format (html or pdf) of the assessment report that you want to generate.")
-	inspector_getAssessmentReportCmd.Flags().String("report-type", "", "Specifies the type of the assessment report that you want to generate.")
-	inspector_getAssessmentReportCmd.MarkFlagRequired("assessment-run-arn")
-	inspector_getAssessmentReportCmd.MarkFlagRequired("report-file-format")
-	inspector_getAssessmentReportCmd.MarkFlagRequired("report-type")
+		inspector_getAssessmentReportCmd.Flags().String("assessment-run-arn", "", "The ARN that specifies the assessment run for which you want to generate a report.")
+		inspector_getAssessmentReportCmd.Flags().String("report-file-format", "", "Specifies the file format (html or pdf) of the assessment report that you want to generate.")
+		inspector_getAssessmentReportCmd.Flags().String("report-type", "", "Specifies the type of the assessment report that you want to generate.")
+		inspector_getAssessmentReportCmd.MarkFlagRequired("assessment-run-arn")
+		inspector_getAssessmentReportCmd.MarkFlagRequired("report-file-format")
+		inspector_getAssessmentReportCmd.MarkFlagRequired("report-type")
+	})
 	inspectorCmd.AddCommand(inspector_getAssessmentReportCmd)
 }

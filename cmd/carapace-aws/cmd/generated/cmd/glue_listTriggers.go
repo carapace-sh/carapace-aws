@@ -12,11 +12,13 @@ var glue_listTriggersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listTriggersCmd).Standalone()
+	carapace.Gen(glue_listTriggersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listTriggersCmd).Standalone()
 
-	glue_listTriggersCmd.Flags().String("dependent-job-name", "", "The name of the job for which to retrieve triggers.")
-	glue_listTriggersCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
-	glue_listTriggersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
-	glue_listTriggersCmd.Flags().String("tags", "", "Specifies to return only these tagged resources.")
+		glue_listTriggersCmd.Flags().String("dependent-job-name", "", "The name of the job for which to retrieve triggers.")
+		glue_listTriggersCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
+		glue_listTriggersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+		glue_listTriggersCmd.Flags().String("tags", "", "Specifies to return only these tagged resources.")
+	})
 	glueCmd.AddCommand(glue_listTriggersCmd)
 }

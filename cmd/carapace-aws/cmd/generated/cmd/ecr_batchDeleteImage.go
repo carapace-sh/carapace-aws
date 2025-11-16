@@ -12,12 +12,14 @@ var ecr_batchDeleteImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_batchDeleteImageCmd).Standalone()
+	carapace.Gen(ecr_batchDeleteImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_batchDeleteImageCmd).Standalone()
 
-	ecr_batchDeleteImageCmd.Flags().String("image-ids", "", "A list of image ID references that correspond to images to delete.")
-	ecr_batchDeleteImageCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the image to delete.")
-	ecr_batchDeleteImageCmd.Flags().String("repository-name", "", "The repository that contains the image to delete.")
-	ecr_batchDeleteImageCmd.MarkFlagRequired("image-ids")
-	ecr_batchDeleteImageCmd.MarkFlagRequired("repository-name")
+		ecr_batchDeleteImageCmd.Flags().String("image-ids", "", "A list of image ID references that correspond to images to delete.")
+		ecr_batchDeleteImageCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the image to delete.")
+		ecr_batchDeleteImageCmd.Flags().String("repository-name", "", "The repository that contains the image to delete.")
+		ecr_batchDeleteImageCmd.MarkFlagRequired("image-ids")
+		ecr_batchDeleteImageCmd.MarkFlagRequired("repository-name")
+	})
 	ecrCmd.AddCommand(ecr_batchDeleteImageCmd)
 }

@@ -12,11 +12,13 @@ var cleanrooms_batchGetSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_batchGetSchemaCmd).Standalone()
+	carapace.Gen(cleanrooms_batchGetSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_batchGetSchemaCmd).Standalone()
 
-	cleanrooms_batchGetSchemaCmd.Flags().String("collaboration-identifier", "", "A unique identifier for the collaboration that the schemas belong to.")
-	cleanrooms_batchGetSchemaCmd.Flags().String("names", "", "The names for the schema objects to retrieve.")
-	cleanrooms_batchGetSchemaCmd.MarkFlagRequired("collaboration-identifier")
-	cleanrooms_batchGetSchemaCmd.MarkFlagRequired("names")
+		cleanrooms_batchGetSchemaCmd.Flags().String("collaboration-identifier", "", "A unique identifier for the collaboration that the schemas belong to.")
+		cleanrooms_batchGetSchemaCmd.Flags().String("names", "", "The names for the schema objects to retrieve.")
+		cleanrooms_batchGetSchemaCmd.MarkFlagRequired("collaboration-identifier")
+		cleanrooms_batchGetSchemaCmd.MarkFlagRequired("names")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_batchGetSchemaCmd)
 }

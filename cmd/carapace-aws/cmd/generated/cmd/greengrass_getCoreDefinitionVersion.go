@@ -12,11 +12,13 @@ var greengrass_getCoreDefinitionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getCoreDefinitionVersionCmd).Standalone()
+	carapace.Gen(greengrass_getCoreDefinitionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getCoreDefinitionVersionCmd).Standalone()
 
-	greengrass_getCoreDefinitionVersionCmd.Flags().String("core-definition-id", "", "The ID of the core definition.")
-	greengrass_getCoreDefinitionVersionCmd.Flags().String("core-definition-version-id", "", "The ID of the core definition version.")
-	greengrass_getCoreDefinitionVersionCmd.MarkFlagRequired("core-definition-id")
-	greengrass_getCoreDefinitionVersionCmd.MarkFlagRequired("core-definition-version-id")
+		greengrass_getCoreDefinitionVersionCmd.Flags().String("core-definition-id", "", "The ID of the core definition.")
+		greengrass_getCoreDefinitionVersionCmd.Flags().String("core-definition-version-id", "", "The ID of the core definition version.")
+		greengrass_getCoreDefinitionVersionCmd.MarkFlagRequired("core-definition-id")
+		greengrass_getCoreDefinitionVersionCmd.MarkFlagRequired("core-definition-version-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getCoreDefinitionVersionCmd)
 }

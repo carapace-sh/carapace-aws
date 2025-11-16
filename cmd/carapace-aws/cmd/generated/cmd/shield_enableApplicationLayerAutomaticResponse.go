@@ -12,11 +12,13 @@ var shield_enableApplicationLayerAutomaticResponseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_enableApplicationLayerAutomaticResponseCmd).Standalone()
+	carapace.Gen(shield_enableApplicationLayerAutomaticResponseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_enableApplicationLayerAutomaticResponseCmd).Standalone()
 
-	shield_enableApplicationLayerAutomaticResponseCmd.Flags().String("action", "", "Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks.")
-	shield_enableApplicationLayerAutomaticResponseCmd.Flags().String("resource-arn", "", "The ARN (Amazon Resource Name) of the protected resource.")
-	shield_enableApplicationLayerAutomaticResponseCmd.MarkFlagRequired("action")
-	shield_enableApplicationLayerAutomaticResponseCmd.MarkFlagRequired("resource-arn")
+		shield_enableApplicationLayerAutomaticResponseCmd.Flags().String("action", "", "Specifies the action setting that Shield Advanced should use in the WAF rules that it creates on behalf of the protected resource in response to DDoS attacks.")
+		shield_enableApplicationLayerAutomaticResponseCmd.Flags().String("resource-arn", "", "The ARN (Amazon Resource Name) of the protected resource.")
+		shield_enableApplicationLayerAutomaticResponseCmd.MarkFlagRequired("action")
+		shield_enableApplicationLayerAutomaticResponseCmd.MarkFlagRequired("resource-arn")
+	})
 	shieldCmd.AddCommand(shield_enableApplicationLayerAutomaticResponseCmd)
 }

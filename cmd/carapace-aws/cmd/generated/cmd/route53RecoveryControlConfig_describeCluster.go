@@ -12,9 +12,11 @@ var route53RecoveryControlConfig_describeClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_describeClusterCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_describeClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_describeClusterCmd).Standalone()
 
-	route53RecoveryControlConfig_describeClusterCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
-	route53RecoveryControlConfig_describeClusterCmd.MarkFlagRequired("cluster-arn")
+		route53RecoveryControlConfig_describeClusterCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
+		route53RecoveryControlConfig_describeClusterCmd.MarkFlagRequired("cluster-arn")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_describeClusterCmd)
 }

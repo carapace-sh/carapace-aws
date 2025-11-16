@@ -12,11 +12,13 @@ var bcmDashboards_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDashboards_tagResourceCmd).Standalone()
+	carapace.Gen(bcmDashboards_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDashboards_tagResourceCmd).Standalone()
 
-	bcmDashboards_tagResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
-	bcmDashboards_tagResourceCmd.Flags().String("resource-tags", "", "The tags to add to the dashboard resource.")
-	bcmDashboards_tagResourceCmd.MarkFlagRequired("resource-arn")
-	bcmDashboards_tagResourceCmd.MarkFlagRequired("resource-tags")
+		bcmDashboards_tagResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
+		bcmDashboards_tagResourceCmd.Flags().String("resource-tags", "", "The tags to add to the dashboard resource.")
+		bcmDashboards_tagResourceCmd.MarkFlagRequired("resource-arn")
+		bcmDashboards_tagResourceCmd.MarkFlagRequired("resource-tags")
+	})
 	bcmDashboardsCmd.AddCommand(bcmDashboards_tagResourceCmd)
 }

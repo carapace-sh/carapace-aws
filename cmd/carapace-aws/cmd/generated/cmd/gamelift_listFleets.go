@@ -12,11 +12,13 @@ var gamelift_listFleetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_listFleetsCmd).Standalone()
+	carapace.Gen(gamelift_listFleetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_listFleetsCmd).Standalone()
 
-	gamelift_listFleetsCmd.Flags().String("build-id", "", "A unique identifier for the build to request fleets for.")
-	gamelift_listFleetsCmd.Flags().String("limit", "", "The maximum number of results to return.")
-	gamelift_listFleetsCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
-	gamelift_listFleetsCmd.Flags().String("script-id", "", "A unique identifier for the Realtime script to request fleets for.")
+		gamelift_listFleetsCmd.Flags().String("build-id", "", "A unique identifier for the build to request fleets for.")
+		gamelift_listFleetsCmd.Flags().String("limit", "", "The maximum number of results to return.")
+		gamelift_listFleetsCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+		gamelift_listFleetsCmd.Flags().String("script-id", "", "A unique identifier for the Realtime script to request fleets for.")
+	})
 	gameliftCmd.AddCommand(gamelift_listFleetsCmd)
 }

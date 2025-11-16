@@ -12,11 +12,13 @@ var chimeSdkMediaPipelines_getSpeakerSearchTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_getSpeakerSearchTaskCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_getSpeakerSearchTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_getSpeakerSearchTaskCmd).Standalone()
 
-	chimeSdkMediaPipelines_getSpeakerSearchTaskCmd.Flags().String("identifier", "", "The unique identifier of the resource to be updated.")
-	chimeSdkMediaPipelines_getSpeakerSearchTaskCmd.Flags().String("speaker-search-task-id", "", "The ID of the speaker search task.")
-	chimeSdkMediaPipelines_getSpeakerSearchTaskCmd.MarkFlagRequired("identifier")
-	chimeSdkMediaPipelines_getSpeakerSearchTaskCmd.MarkFlagRequired("speaker-search-task-id")
+		chimeSdkMediaPipelines_getSpeakerSearchTaskCmd.Flags().String("identifier", "", "The unique identifier of the resource to be updated.")
+		chimeSdkMediaPipelines_getSpeakerSearchTaskCmd.Flags().String("speaker-search-task-id", "", "The ID of the speaker search task.")
+		chimeSdkMediaPipelines_getSpeakerSearchTaskCmd.MarkFlagRequired("identifier")
+		chimeSdkMediaPipelines_getSpeakerSearchTaskCmd.MarkFlagRequired("speaker-search-task-id")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_getSpeakerSearchTaskCmd)
 }

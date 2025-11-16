@@ -12,13 +12,15 @@ var ebs_getSnapshotBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ebs_getSnapshotBlockCmd).Standalone()
+	carapace.Gen(ebs_getSnapshotBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ebs_getSnapshotBlockCmd).Standalone()
 
-	ebs_getSnapshotBlockCmd.Flags().String("block-index", "", "The block index of the block in which to read the data.")
-	ebs_getSnapshotBlockCmd.Flags().String("block-token", "", "The block token of the block from which to get data.")
-	ebs_getSnapshotBlockCmd.Flags().String("snapshot-id", "", "The ID of the snapshot containing the block from which to get data.")
-	ebs_getSnapshotBlockCmd.MarkFlagRequired("block-index")
-	ebs_getSnapshotBlockCmd.MarkFlagRequired("block-token")
-	ebs_getSnapshotBlockCmd.MarkFlagRequired("snapshot-id")
+		ebs_getSnapshotBlockCmd.Flags().String("block-index", "", "The block index of the block in which to read the data.")
+		ebs_getSnapshotBlockCmd.Flags().String("block-token", "", "The block token of the block from which to get data.")
+		ebs_getSnapshotBlockCmd.Flags().String("snapshot-id", "", "The ID of the snapshot containing the block from which to get data.")
+		ebs_getSnapshotBlockCmd.MarkFlagRequired("block-index")
+		ebs_getSnapshotBlockCmd.MarkFlagRequired("block-token")
+		ebs_getSnapshotBlockCmd.MarkFlagRequired("snapshot-id")
+	})
 	ebsCmd.AddCommand(ebs_getSnapshotBlockCmd)
 }

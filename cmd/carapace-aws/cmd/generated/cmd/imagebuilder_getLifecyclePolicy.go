@@ -12,9 +12,11 @@ var imagebuilder_getLifecyclePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getLifecyclePolicyCmd).Standalone()
+	carapace.Gen(imagebuilder_getLifecyclePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getLifecyclePolicyCmd).Standalone()
 
-	imagebuilder_getLifecyclePolicyCmd.Flags().String("lifecycle-policy-arn", "", "Specifies the Amazon Resource Name (ARN) of the image lifecycle policy resource to get.")
-	imagebuilder_getLifecyclePolicyCmd.MarkFlagRequired("lifecycle-policy-arn")
+		imagebuilder_getLifecyclePolicyCmd.Flags().String("lifecycle-policy-arn", "", "Specifies the Amazon Resource Name (ARN) of the image lifecycle policy resource to get.")
+		imagebuilder_getLifecyclePolicyCmd.MarkFlagRequired("lifecycle-policy-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getLifecyclePolicyCmd)
 }

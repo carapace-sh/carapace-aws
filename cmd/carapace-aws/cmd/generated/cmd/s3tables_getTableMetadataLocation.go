@@ -12,13 +12,15 @@ var s3tables_getTableMetadataLocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_getTableMetadataLocationCmd).Standalone()
+	carapace.Gen(s3tables_getTableMetadataLocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_getTableMetadataLocationCmd).Standalone()
 
-	s3tables_getTableMetadataLocationCmd.Flags().String("name", "", "The name of the table.")
-	s3tables_getTableMetadataLocationCmd.Flags().String("namespace", "", "The namespace of the table.")
-	s3tables_getTableMetadataLocationCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
-	s3tables_getTableMetadataLocationCmd.MarkFlagRequired("name")
-	s3tables_getTableMetadataLocationCmd.MarkFlagRequired("namespace")
-	s3tables_getTableMetadataLocationCmd.MarkFlagRequired("table-bucket-arn")
+		s3tables_getTableMetadataLocationCmd.Flags().String("name", "", "The name of the table.")
+		s3tables_getTableMetadataLocationCmd.Flags().String("namespace", "", "The namespace of the table.")
+		s3tables_getTableMetadataLocationCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
+		s3tables_getTableMetadataLocationCmd.MarkFlagRequired("name")
+		s3tables_getTableMetadataLocationCmd.MarkFlagRequired("namespace")
+		s3tables_getTableMetadataLocationCmd.MarkFlagRequired("table-bucket-arn")
+	})
 	s3tablesCmd.AddCommand(s3tables_getTableMetadataLocationCmd)
 }

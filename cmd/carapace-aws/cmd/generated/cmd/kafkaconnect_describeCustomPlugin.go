@@ -12,9 +12,11 @@ var kafkaconnect_describeCustomPluginCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnect_describeCustomPluginCmd).Standalone()
+	carapace.Gen(kafkaconnect_describeCustomPluginCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnect_describeCustomPluginCmd).Standalone()
 
-	kafkaconnect_describeCustomPluginCmd.Flags().String("custom-plugin-arn", "", "Returns information about a custom plugin.")
-	kafkaconnect_describeCustomPluginCmd.MarkFlagRequired("custom-plugin-arn")
+		kafkaconnect_describeCustomPluginCmd.Flags().String("custom-plugin-arn", "", "Returns information about a custom plugin.")
+		kafkaconnect_describeCustomPluginCmd.MarkFlagRequired("custom-plugin-arn")
+	})
 	kafkaconnectCmd.AddCommand(kafkaconnect_describeCustomPluginCmd)
 }

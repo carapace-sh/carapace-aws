@@ -12,11 +12,13 @@ var bcmPricingCalculator_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_tagResourceCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_tagResourceCmd).Standalone()
 
-	bcmPricingCalculator_tagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource to add tags to.")
-	bcmPricingCalculator_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
-	bcmPricingCalculator_tagResourceCmd.MarkFlagRequired("arn")
-	bcmPricingCalculator_tagResourceCmd.MarkFlagRequired("tags")
+		bcmPricingCalculator_tagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource to add tags to.")
+		bcmPricingCalculator_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
+		bcmPricingCalculator_tagResourceCmd.MarkFlagRequired("arn")
+		bcmPricingCalculator_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_tagResourceCmd)
 }

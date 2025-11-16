@@ -12,9 +12,11 @@ var detective_batchGetMembershipDatasourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_batchGetMembershipDatasourcesCmd).Standalone()
+	carapace.Gen(detective_batchGetMembershipDatasourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_batchGetMembershipDatasourcesCmd).Standalone()
 
-	detective_batchGetMembershipDatasourcesCmd.Flags().String("graph-arns", "", "The ARN of the behavior graph.")
-	detective_batchGetMembershipDatasourcesCmd.MarkFlagRequired("graph-arns")
+		detective_batchGetMembershipDatasourcesCmd.Flags().String("graph-arns", "", "The ARN of the behavior graph.")
+		detective_batchGetMembershipDatasourcesCmd.MarkFlagRequired("graph-arns")
+	})
 	detectiveCmd.AddCommand(detective_batchGetMembershipDatasourcesCmd)
 }

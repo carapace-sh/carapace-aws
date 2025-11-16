@@ -12,9 +12,11 @@ var bedrock_getCustomModelDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getCustomModelDeploymentCmd).Standalone()
+	carapace.Gen(bedrock_getCustomModelDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getCustomModelDeploymentCmd).Standalone()
 
-	bedrock_getCustomModelDeploymentCmd.Flags().String("custom-model-deployment-identifier", "", "The Amazon Resource Name (ARN) or name of the custom model deployment to retrieve information about.")
-	bedrock_getCustomModelDeploymentCmd.MarkFlagRequired("custom-model-deployment-identifier")
+		bedrock_getCustomModelDeploymentCmd.Flags().String("custom-model-deployment-identifier", "", "The Amazon Resource Name (ARN) or name of the custom model deployment to retrieve information about.")
+		bedrock_getCustomModelDeploymentCmd.MarkFlagRequired("custom-model-deployment-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_getCustomModelDeploymentCmd)
 }

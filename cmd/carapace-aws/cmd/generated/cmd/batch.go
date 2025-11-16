@@ -12,7 +12,9 @@ var batchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batchCmd).Standalone()
+	carapace.Gen(batchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batchCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(batchCmd)
 }

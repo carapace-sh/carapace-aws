@@ -12,9 +12,11 @@ var rekognition_distributeDatasetEntriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_distributeDatasetEntriesCmd).Standalone()
+	carapace.Gen(rekognition_distributeDatasetEntriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_distributeDatasetEntriesCmd).Standalone()
 
-	rekognition_distributeDatasetEntriesCmd.Flags().String("datasets", "", "The ARNS for the training dataset and test dataset that you want to use.")
-	rekognition_distributeDatasetEntriesCmd.MarkFlagRequired("datasets")
+		rekognition_distributeDatasetEntriesCmd.Flags().String("datasets", "", "The ARNS for the training dataset and test dataset that you want to use.")
+		rekognition_distributeDatasetEntriesCmd.MarkFlagRequired("datasets")
+	})
 	rekognitionCmd.AddCommand(rekognition_distributeDatasetEntriesCmd)
 }

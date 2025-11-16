@@ -12,11 +12,13 @@ var customerProfiles_deleteIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_deleteIntegrationCmd).Standalone()
+	carapace.Gen(customerProfiles_deleteIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_deleteIntegrationCmd).Standalone()
 
-	customerProfiles_deleteIntegrationCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_deleteIntegrationCmd.Flags().String("uri", "", "The URI of the S3 bucket or any other type of data source.")
-	customerProfiles_deleteIntegrationCmd.MarkFlagRequired("domain-name")
-	customerProfiles_deleteIntegrationCmd.MarkFlagRequired("uri")
+		customerProfiles_deleteIntegrationCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_deleteIntegrationCmd.Flags().String("uri", "", "The URI of the S3 bucket or any other type of data source.")
+		customerProfiles_deleteIntegrationCmd.MarkFlagRequired("domain-name")
+		customerProfiles_deleteIntegrationCmd.MarkFlagRequired("uri")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_deleteIntegrationCmd)
 }

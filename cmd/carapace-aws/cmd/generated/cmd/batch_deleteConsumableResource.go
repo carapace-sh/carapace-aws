@@ -12,9 +12,11 @@ var batch_deleteConsumableResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_deleteConsumableResourceCmd).Standalone()
+	carapace.Gen(batch_deleteConsumableResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_deleteConsumableResourceCmd).Standalone()
 
-	batch_deleteConsumableResourceCmd.Flags().String("consumable-resource", "", "The name or ARN of the consumable resource that will be deleted.")
-	batch_deleteConsumableResourceCmd.MarkFlagRequired("consumable-resource")
+		batch_deleteConsumableResourceCmd.Flags().String("consumable-resource", "", "The name or ARN of the consumable resource that will be deleted.")
+		batch_deleteConsumableResourceCmd.MarkFlagRequired("consumable-resource")
+	})
 	batchCmd.AddCommand(batch_deleteConsumableResourceCmd)
 }

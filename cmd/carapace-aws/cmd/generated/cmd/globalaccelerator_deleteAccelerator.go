@@ -12,9 +12,11 @@ var globalaccelerator_deleteAcceleratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_deleteAcceleratorCmd).Standalone()
+	carapace.Gen(globalaccelerator_deleteAcceleratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_deleteAcceleratorCmd).Standalone()
 
-	globalaccelerator_deleteAcceleratorCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of an accelerator.")
-	globalaccelerator_deleteAcceleratorCmd.MarkFlagRequired("accelerator-arn")
+		globalaccelerator_deleteAcceleratorCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of an accelerator.")
+		globalaccelerator_deleteAcceleratorCmd.MarkFlagRequired("accelerator-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_deleteAcceleratorCmd)
 }

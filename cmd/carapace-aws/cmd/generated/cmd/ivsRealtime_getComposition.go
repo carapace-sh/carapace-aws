@@ -12,9 +12,11 @@ var ivsRealtime_getCompositionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_getCompositionCmd).Standalone()
+	carapace.Gen(ivsRealtime_getCompositionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_getCompositionCmd).Standalone()
 
-	ivsRealtime_getCompositionCmd.Flags().String("arn", "", "ARN of the Composition resource.")
-	ivsRealtime_getCompositionCmd.MarkFlagRequired("arn")
+		ivsRealtime_getCompositionCmd.Flags().String("arn", "", "ARN of the Composition resource.")
+		ivsRealtime_getCompositionCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_getCompositionCmd)
 }

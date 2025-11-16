@@ -12,9 +12,11 @@ var licenseManager_acceptGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_acceptGrantCmd).Standalone()
+	carapace.Gen(licenseManager_acceptGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_acceptGrantCmd).Standalone()
 
-	licenseManager_acceptGrantCmd.Flags().String("grant-arn", "", "Amazon Resource Name (ARN) of the grant.")
-	licenseManager_acceptGrantCmd.MarkFlagRequired("grant-arn")
+		licenseManager_acceptGrantCmd.Flags().String("grant-arn", "", "Amazon Resource Name (ARN) of the grant.")
+		licenseManager_acceptGrantCmd.MarkFlagRequired("grant-arn")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_acceptGrantCmd)
 }

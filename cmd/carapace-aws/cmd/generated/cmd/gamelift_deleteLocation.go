@@ -12,9 +12,11 @@ var gamelift_deleteLocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteLocationCmd).Standalone()
+	carapace.Gen(gamelift_deleteLocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteLocationCmd).Standalone()
 
-	gamelift_deleteLocationCmd.Flags().String("location-name", "", "The location name of the custom location to be deleted.")
-	gamelift_deleteLocationCmd.MarkFlagRequired("location-name")
+		gamelift_deleteLocationCmd.Flags().String("location-name", "", "The location name of the custom location to be deleted.")
+		gamelift_deleteLocationCmd.MarkFlagRequired("location-name")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteLocationCmd)
 }

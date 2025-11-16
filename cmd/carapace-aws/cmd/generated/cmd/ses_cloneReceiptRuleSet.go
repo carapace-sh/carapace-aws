@@ -12,11 +12,13 @@ var ses_cloneReceiptRuleSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_cloneReceiptRuleSetCmd).Standalone()
+	carapace.Gen(ses_cloneReceiptRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_cloneReceiptRuleSetCmd).Standalone()
 
-	ses_cloneReceiptRuleSetCmd.Flags().String("original-rule-set-name", "", "The name of the rule set to clone.")
-	ses_cloneReceiptRuleSetCmd.Flags().String("rule-set-name", "", "The name of the rule set to create.")
-	ses_cloneReceiptRuleSetCmd.MarkFlagRequired("original-rule-set-name")
-	ses_cloneReceiptRuleSetCmd.MarkFlagRequired("rule-set-name")
+		ses_cloneReceiptRuleSetCmd.Flags().String("original-rule-set-name", "", "The name of the rule set to clone.")
+		ses_cloneReceiptRuleSetCmd.Flags().String("rule-set-name", "", "The name of the rule set to create.")
+		ses_cloneReceiptRuleSetCmd.MarkFlagRequired("original-rule-set-name")
+		ses_cloneReceiptRuleSetCmd.MarkFlagRequired("rule-set-name")
+	})
 	sesCmd.AddCommand(ses_cloneReceiptRuleSetCmd)
 }

@@ -12,13 +12,15 @@ var amplifybackend_getBackendApimodelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_getBackendApimodelsCmd).Standalone()
+	carapace.Gen(amplifybackend_getBackendApimodelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_getBackendApimodelsCmd).Standalone()
 
-	amplifybackend_getBackendApimodelsCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_getBackendApimodelsCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
-	amplifybackend_getBackendApimodelsCmd.Flags().String("resource-name", "", "The name of this resource.")
-	amplifybackend_getBackendApimodelsCmd.MarkFlagRequired("app-id")
-	amplifybackend_getBackendApimodelsCmd.MarkFlagRequired("backend-environment-name")
-	amplifybackend_getBackendApimodelsCmd.MarkFlagRequired("resource-name")
+		amplifybackend_getBackendApimodelsCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_getBackendApimodelsCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
+		amplifybackend_getBackendApimodelsCmd.Flags().String("resource-name", "", "The name of this resource.")
+		amplifybackend_getBackendApimodelsCmd.MarkFlagRequired("app-id")
+		amplifybackend_getBackendApimodelsCmd.MarkFlagRequired("backend-environment-name")
+		amplifybackend_getBackendApimodelsCmd.MarkFlagRequired("resource-name")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_getBackendApimodelsCmd)
 }

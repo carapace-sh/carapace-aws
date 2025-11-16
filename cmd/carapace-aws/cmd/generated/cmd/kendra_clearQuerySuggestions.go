@@ -12,9 +12,11 @@ var kendra_clearQuerySuggestionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_clearQuerySuggestionsCmd).Standalone()
+	carapace.Gen(kendra_clearQuerySuggestionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_clearQuerySuggestionsCmd).Standalone()
 
-	kendra_clearQuerySuggestionsCmd.Flags().String("index-id", "", "The identifier of the index you want to clear query suggestions from.")
-	kendra_clearQuerySuggestionsCmd.MarkFlagRequired("index-id")
+		kendra_clearQuerySuggestionsCmd.Flags().String("index-id", "", "The identifier of the index you want to clear query suggestions from.")
+		kendra_clearQuerySuggestionsCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_clearQuerySuggestionsCmd)
 }

@@ -12,11 +12,13 @@ var voiceId_deleteWatchlistCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_deleteWatchlistCmd).Standalone()
+	carapace.Gen(voiceId_deleteWatchlistCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_deleteWatchlistCmd).Standalone()
 
-	voiceId_deleteWatchlistCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the watchlist.")
-	voiceId_deleteWatchlistCmd.Flags().String("watchlist-id", "", "The identifier of the watchlist to be deleted.")
-	voiceId_deleteWatchlistCmd.MarkFlagRequired("domain-id")
-	voiceId_deleteWatchlistCmd.MarkFlagRequired("watchlist-id")
+		voiceId_deleteWatchlistCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the watchlist.")
+		voiceId_deleteWatchlistCmd.Flags().String("watchlist-id", "", "The identifier of the watchlist to be deleted.")
+		voiceId_deleteWatchlistCmd.MarkFlagRequired("domain-id")
+		voiceId_deleteWatchlistCmd.MarkFlagRequired("watchlist-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_deleteWatchlistCmd)
 }

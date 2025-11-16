@@ -12,11 +12,13 @@ var connect_listUserHierarchyGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listUserHierarchyGroupsCmd).Standalone()
+	carapace.Gen(connect_listUserHierarchyGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listUserHierarchyGroupsCmd).Standalone()
 
-	connect_listUserHierarchyGroupsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listUserHierarchyGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listUserHierarchyGroupsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listUserHierarchyGroupsCmd.MarkFlagRequired("instance-id")
+		connect_listUserHierarchyGroupsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listUserHierarchyGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listUserHierarchyGroupsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listUserHierarchyGroupsCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listUserHierarchyGroupsCmd)
 }

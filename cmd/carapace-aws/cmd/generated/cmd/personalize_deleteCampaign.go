@@ -12,9 +12,11 @@ var personalize_deleteCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_deleteCampaignCmd).Standalone()
+	carapace.Gen(personalize_deleteCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_deleteCampaignCmd).Standalone()
 
-	personalize_deleteCampaignCmd.Flags().String("campaign-arn", "", "The Amazon Resource Name (ARN) of the campaign to delete.")
-	personalize_deleteCampaignCmd.MarkFlagRequired("campaign-arn")
+		personalize_deleteCampaignCmd.Flags().String("campaign-arn", "", "The Amazon Resource Name (ARN) of the campaign to delete.")
+		personalize_deleteCampaignCmd.MarkFlagRequired("campaign-arn")
+	})
 	personalizeCmd.AddCommand(personalize_deleteCampaignCmd)
 }

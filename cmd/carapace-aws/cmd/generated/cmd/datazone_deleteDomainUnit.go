@@ -12,11 +12,13 @@ var datazone_deleteDomainUnitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteDomainUnitCmd).Standalone()
+	carapace.Gen(datazone_deleteDomainUnitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteDomainUnitCmd).Standalone()
 
-	datazone_deleteDomainUnitCmd.Flags().String("domain-identifier", "", "The ID of the domain where you want to delete a domain unit.")
-	datazone_deleteDomainUnitCmd.Flags().String("identifier", "", "The ID of the domain unit that you want to delete.")
-	datazone_deleteDomainUnitCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteDomainUnitCmd.MarkFlagRequired("identifier")
+		datazone_deleteDomainUnitCmd.Flags().String("domain-identifier", "", "The ID of the domain where you want to delete a domain unit.")
+		datazone_deleteDomainUnitCmd.Flags().String("identifier", "", "The ID of the domain unit that you want to delete.")
+		datazone_deleteDomainUnitCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteDomainUnitCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteDomainUnitCmd)
 }

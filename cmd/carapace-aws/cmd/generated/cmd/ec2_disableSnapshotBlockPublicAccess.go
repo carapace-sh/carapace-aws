@@ -12,10 +12,12 @@ var ec2_disableSnapshotBlockPublicAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_disableSnapshotBlockPublicAccessCmd).Standalone()
+	carapace.Gen(ec2_disableSnapshotBlockPublicAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_disableSnapshotBlockPublicAccessCmd).Standalone()
 
-	ec2_disableSnapshotBlockPublicAccessCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disableSnapshotBlockPublicAccessCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disableSnapshotBlockPublicAccessCmd.Flag("no-dry-run").Hidden = true
+		ec2_disableSnapshotBlockPublicAccessCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disableSnapshotBlockPublicAccessCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disableSnapshotBlockPublicAccessCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_disableSnapshotBlockPublicAccessCmd)
 }

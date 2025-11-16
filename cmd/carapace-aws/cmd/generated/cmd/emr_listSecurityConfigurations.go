@@ -12,8 +12,10 @@ var emr_listSecurityConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_listSecurityConfigurationsCmd).Standalone()
+	carapace.Gen(emr_listSecurityConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_listSecurityConfigurationsCmd).Standalone()
 
-	emr_listSecurityConfigurationsCmd.Flags().String("marker", "", "The pagination token that indicates the set of results to retrieve.")
+		emr_listSecurityConfigurationsCmd.Flags().String("marker", "", "The pagination token that indicates the set of results to retrieve.")
+	})
 	emrCmd.AddCommand(emr_listSecurityConfigurationsCmd)
 }

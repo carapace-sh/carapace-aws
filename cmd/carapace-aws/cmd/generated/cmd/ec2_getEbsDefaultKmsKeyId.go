@@ -12,10 +12,12 @@ var ec2_getEbsDefaultKmsKeyIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getEbsDefaultKmsKeyIdCmd).Standalone()
+	carapace.Gen(ec2_getEbsDefaultKmsKeyIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getEbsDefaultKmsKeyIdCmd).Standalone()
 
-	ec2_getEbsDefaultKmsKeyIdCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getEbsDefaultKmsKeyIdCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getEbsDefaultKmsKeyIdCmd.Flag("no-dry-run").Hidden = true
+		ec2_getEbsDefaultKmsKeyIdCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getEbsDefaultKmsKeyIdCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getEbsDefaultKmsKeyIdCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_getEbsDefaultKmsKeyIdCmd)
 }

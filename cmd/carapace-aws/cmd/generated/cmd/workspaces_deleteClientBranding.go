@@ -12,11 +12,13 @@ var workspaces_deleteClientBrandingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_deleteClientBrandingCmd).Standalone()
+	carapace.Gen(workspaces_deleteClientBrandingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_deleteClientBrandingCmd).Standalone()
 
-	workspaces_deleteClientBrandingCmd.Flags().String("platforms", "", "The device type for which you want to delete client branding.")
-	workspaces_deleteClientBrandingCmd.Flags().String("resource-id", "", "The directory identifier of the WorkSpace for which you want to delete client branding.")
-	workspaces_deleteClientBrandingCmd.MarkFlagRequired("platforms")
-	workspaces_deleteClientBrandingCmd.MarkFlagRequired("resource-id")
+		workspaces_deleteClientBrandingCmd.Flags().String("platforms", "", "The device type for which you want to delete client branding.")
+		workspaces_deleteClientBrandingCmd.Flags().String("resource-id", "", "The directory identifier of the WorkSpace for which you want to delete client branding.")
+		workspaces_deleteClientBrandingCmd.MarkFlagRequired("platforms")
+		workspaces_deleteClientBrandingCmd.MarkFlagRequired("resource-id")
+	})
 	workspacesCmd.AddCommand(workspaces_deleteClientBrandingCmd)
 }

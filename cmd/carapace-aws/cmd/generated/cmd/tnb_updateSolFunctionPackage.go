@@ -12,11 +12,13 @@ var tnb_updateSolFunctionPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_updateSolFunctionPackageCmd).Standalone()
+	carapace.Gen(tnb_updateSolFunctionPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_updateSolFunctionPackageCmd).Standalone()
 
-	tnb_updateSolFunctionPackageCmd.Flags().String("operational-state", "", "Operational state of the function package.")
-	tnb_updateSolFunctionPackageCmd.Flags().String("vnf-pkg-id", "", "ID of the function package.")
-	tnb_updateSolFunctionPackageCmd.MarkFlagRequired("operational-state")
-	tnb_updateSolFunctionPackageCmd.MarkFlagRequired("vnf-pkg-id")
+		tnb_updateSolFunctionPackageCmd.Flags().String("operational-state", "", "Operational state of the function package.")
+		tnb_updateSolFunctionPackageCmd.Flags().String("vnf-pkg-id", "", "ID of the function package.")
+		tnb_updateSolFunctionPackageCmd.MarkFlagRequired("operational-state")
+		tnb_updateSolFunctionPackageCmd.MarkFlagRequired("vnf-pkg-id")
+	})
 	tnbCmd.AddCommand(tnb_updateSolFunctionPackageCmd)
 }

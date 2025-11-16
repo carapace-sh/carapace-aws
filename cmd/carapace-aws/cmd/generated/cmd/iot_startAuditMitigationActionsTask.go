@@ -12,15 +12,17 @@ var iot_startAuditMitigationActionsTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_startAuditMitigationActionsTaskCmd).Standalone()
+	carapace.Gen(iot_startAuditMitigationActionsTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_startAuditMitigationActionsTaskCmd).Standalone()
 
-	iot_startAuditMitigationActionsTaskCmd.Flags().String("audit-check-to-actions-mapping", "", "For an audit check, specifies which mitigation actions to apply.")
-	iot_startAuditMitigationActionsTaskCmd.Flags().String("client-request-token", "", "Each audit mitigation task must have a unique client request token.")
-	iot_startAuditMitigationActionsTaskCmd.Flags().String("target", "", "Specifies the audit findings to which the mitigation actions are applied.")
-	iot_startAuditMitigationActionsTaskCmd.Flags().String("task-id", "", "A unique identifier for the task.")
-	iot_startAuditMitigationActionsTaskCmd.MarkFlagRequired("audit-check-to-actions-mapping")
-	iot_startAuditMitigationActionsTaskCmd.MarkFlagRequired("client-request-token")
-	iot_startAuditMitigationActionsTaskCmd.MarkFlagRequired("target")
-	iot_startAuditMitigationActionsTaskCmd.MarkFlagRequired("task-id")
+		iot_startAuditMitigationActionsTaskCmd.Flags().String("audit-check-to-actions-mapping", "", "For an audit check, specifies which mitigation actions to apply.")
+		iot_startAuditMitigationActionsTaskCmd.Flags().String("client-request-token", "", "Each audit mitigation task must have a unique client request token.")
+		iot_startAuditMitigationActionsTaskCmd.Flags().String("target", "", "Specifies the audit findings to which the mitigation actions are applied.")
+		iot_startAuditMitigationActionsTaskCmd.Flags().String("task-id", "", "A unique identifier for the task.")
+		iot_startAuditMitigationActionsTaskCmd.MarkFlagRequired("audit-check-to-actions-mapping")
+		iot_startAuditMitigationActionsTaskCmd.MarkFlagRequired("client-request-token")
+		iot_startAuditMitigationActionsTaskCmd.MarkFlagRequired("target")
+		iot_startAuditMitigationActionsTaskCmd.MarkFlagRequired("task-id")
+	})
 	iotCmd.AddCommand(iot_startAuditMitigationActionsTaskCmd)
 }

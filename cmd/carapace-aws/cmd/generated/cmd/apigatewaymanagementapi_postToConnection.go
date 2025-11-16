@@ -12,11 +12,13 @@ var apigatewaymanagementapi_postToConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewaymanagementapi_postToConnectionCmd).Standalone()
+	carapace.Gen(apigatewaymanagementapi_postToConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewaymanagementapi_postToConnectionCmd).Standalone()
 
-	apigatewaymanagementapi_postToConnectionCmd.Flags().String("connection-id", "", "The identifier of the connection that a specific client is using.")
-	apigatewaymanagementapi_postToConnectionCmd.Flags().String("data", "", "The data to be sent to the client specified by its connection id.")
-	apigatewaymanagementapi_postToConnectionCmd.MarkFlagRequired("connection-id")
-	apigatewaymanagementapi_postToConnectionCmd.MarkFlagRequired("data")
+		apigatewaymanagementapi_postToConnectionCmd.Flags().String("connection-id", "", "The identifier of the connection that a specific client is using.")
+		apigatewaymanagementapi_postToConnectionCmd.Flags().String("data", "", "The data to be sent to the client specified by its connection id.")
+		apigatewaymanagementapi_postToConnectionCmd.MarkFlagRequired("connection-id")
+		apigatewaymanagementapi_postToConnectionCmd.MarkFlagRequired("data")
+	})
 	apigatewaymanagementapiCmd.AddCommand(apigatewaymanagementapi_postToConnectionCmd)
 }

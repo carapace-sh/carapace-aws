@@ -12,11 +12,13 @@ var config_putExternalEvaluationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_putExternalEvaluationCmd).Standalone()
+	carapace.Gen(config_putExternalEvaluationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_putExternalEvaluationCmd).Standalone()
 
-	config_putExternalEvaluationCmd.Flags().String("config-rule-name", "", "The name of the Config rule.")
-	config_putExternalEvaluationCmd.Flags().String("external-evaluation", "", "An `ExternalEvaluation` object that provides details about compliance.")
-	config_putExternalEvaluationCmd.MarkFlagRequired("config-rule-name")
-	config_putExternalEvaluationCmd.MarkFlagRequired("external-evaluation")
+		config_putExternalEvaluationCmd.Flags().String("config-rule-name", "", "The name of the Config rule.")
+		config_putExternalEvaluationCmd.Flags().String("external-evaluation", "", "An `ExternalEvaluation` object that provides details about compliance.")
+		config_putExternalEvaluationCmd.MarkFlagRequired("config-rule-name")
+		config_putExternalEvaluationCmd.MarkFlagRequired("external-evaluation")
+	})
 	configCmd.AddCommand(config_putExternalEvaluationCmd)
 }

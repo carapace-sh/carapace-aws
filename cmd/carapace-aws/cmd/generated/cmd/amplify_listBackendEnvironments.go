@@ -12,12 +12,14 @@ var amplify_listBackendEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_listBackendEnvironmentsCmd).Standalone()
+	carapace.Gen(amplify_listBackendEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_listBackendEnvironmentsCmd).Standalone()
 
-	amplify_listBackendEnvironmentsCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_listBackendEnvironmentsCmd.Flags().String("environment-name", "", "The name of the backend environment")
-	amplify_listBackendEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
-	amplify_listBackendEnvironmentsCmd.Flags().String("next-token", "", "A pagination token.")
-	amplify_listBackendEnvironmentsCmd.MarkFlagRequired("app-id")
+		amplify_listBackendEnvironmentsCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_listBackendEnvironmentsCmd.Flags().String("environment-name", "", "The name of the backend environment")
+		amplify_listBackendEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
+		amplify_listBackendEnvironmentsCmd.Flags().String("next-token", "", "A pagination token.")
+		amplify_listBackendEnvironmentsCmd.MarkFlagRequired("app-id")
+	})
 	amplifyCmd.AddCommand(amplify_listBackendEnvironmentsCmd)
 }

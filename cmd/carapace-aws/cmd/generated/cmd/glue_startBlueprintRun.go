@@ -12,12 +12,14 @@ var glue_startBlueprintRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_startBlueprintRunCmd).Standalone()
+	carapace.Gen(glue_startBlueprintRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_startBlueprintRunCmd).Standalone()
 
-	glue_startBlueprintRunCmd.Flags().String("blueprint-name", "", "The name of the blueprint.")
-	glue_startBlueprintRunCmd.Flags().String("parameters", "", "Specifies the parameters as a `BlueprintParameters` object.")
-	glue_startBlueprintRunCmd.Flags().String("role-arn", "", "Specifies the IAM role used to create the workflow.")
-	glue_startBlueprintRunCmd.MarkFlagRequired("blueprint-name")
-	glue_startBlueprintRunCmd.MarkFlagRequired("role-arn")
+		glue_startBlueprintRunCmd.Flags().String("blueprint-name", "", "The name of the blueprint.")
+		glue_startBlueprintRunCmd.Flags().String("parameters", "", "Specifies the parameters as a `BlueprintParameters` object.")
+		glue_startBlueprintRunCmd.Flags().String("role-arn", "", "Specifies the IAM role used to create the workflow.")
+		glue_startBlueprintRunCmd.MarkFlagRequired("blueprint-name")
+		glue_startBlueprintRunCmd.MarkFlagRequired("role-arn")
+	})
 	glueCmd.AddCommand(glue_startBlueprintRunCmd)
 }

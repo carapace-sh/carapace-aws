@@ -12,7 +12,9 @@ var opensearchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchCmd).Standalone()
+	carapace.Gen(opensearchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(opensearchCmd)
 }

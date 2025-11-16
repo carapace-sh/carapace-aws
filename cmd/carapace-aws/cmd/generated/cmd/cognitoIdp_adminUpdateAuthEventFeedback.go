@@ -12,15 +12,17 @@ var cognitoIdp_adminUpdateAuthEventFeedbackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_adminUpdateAuthEventFeedbackCmd).Standalone()
+	carapace.Gen(cognitoIdp_adminUpdateAuthEventFeedbackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_adminUpdateAuthEventFeedbackCmd).Standalone()
 
-	cognitoIdp_adminUpdateAuthEventFeedbackCmd.Flags().String("event-id", "", "The ID of the threat protection authentication event that you want to update.")
-	cognitoIdp_adminUpdateAuthEventFeedbackCmd.Flags().String("feedback-value", "", "Your feedback to the authentication event.")
-	cognitoIdp_adminUpdateAuthEventFeedbackCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to submit authentication-event feedback.")
-	cognitoIdp_adminUpdateAuthEventFeedbackCmd.Flags().String("username", "", "The name of the user that you want to query or modify.")
-	cognitoIdp_adminUpdateAuthEventFeedbackCmd.MarkFlagRequired("event-id")
-	cognitoIdp_adminUpdateAuthEventFeedbackCmd.MarkFlagRequired("feedback-value")
-	cognitoIdp_adminUpdateAuthEventFeedbackCmd.MarkFlagRequired("user-pool-id")
-	cognitoIdp_adminUpdateAuthEventFeedbackCmd.MarkFlagRequired("username")
+		cognitoIdp_adminUpdateAuthEventFeedbackCmd.Flags().String("event-id", "", "The ID of the threat protection authentication event that you want to update.")
+		cognitoIdp_adminUpdateAuthEventFeedbackCmd.Flags().String("feedback-value", "", "Your feedback to the authentication event.")
+		cognitoIdp_adminUpdateAuthEventFeedbackCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to submit authentication-event feedback.")
+		cognitoIdp_adminUpdateAuthEventFeedbackCmd.Flags().String("username", "", "The name of the user that you want to query or modify.")
+		cognitoIdp_adminUpdateAuthEventFeedbackCmd.MarkFlagRequired("event-id")
+		cognitoIdp_adminUpdateAuthEventFeedbackCmd.MarkFlagRequired("feedback-value")
+		cognitoIdp_adminUpdateAuthEventFeedbackCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_adminUpdateAuthEventFeedbackCmd.MarkFlagRequired("username")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_adminUpdateAuthEventFeedbackCmd)
 }

@@ -12,10 +12,12 @@ var personalize_listBatchSegmentJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_listBatchSegmentJobsCmd).Standalone()
+	carapace.Gen(personalize_listBatchSegmentJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_listBatchSegmentJobsCmd).Standalone()
 
-	personalize_listBatchSegmentJobsCmd.Flags().String("max-results", "", "The maximum number of batch segment job results to return in each page.")
-	personalize_listBatchSegmentJobsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
-	personalize_listBatchSegmentJobsCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version that the batch segment jobs used to generate batch segments.")
+		personalize_listBatchSegmentJobsCmd.Flags().String("max-results", "", "The maximum number of batch segment job results to return in each page.")
+		personalize_listBatchSegmentJobsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		personalize_listBatchSegmentJobsCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version that the batch segment jobs used to generate batch segments.")
+	})
 	personalizeCmd.AddCommand(personalize_listBatchSegmentJobsCmd)
 }

@@ -12,9 +12,11 @@ var mediatailor_getChannelPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_getChannelPolicyCmd).Standalone()
+	carapace.Gen(mediatailor_getChannelPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_getChannelPolicyCmd).Standalone()
 
-	mediatailor_getChannelPolicyCmd.Flags().String("channel-name", "", "The name of the channel associated with this Channel Policy.")
-	mediatailor_getChannelPolicyCmd.MarkFlagRequired("channel-name")
+		mediatailor_getChannelPolicyCmd.Flags().String("channel-name", "", "The name of the channel associated with this Channel Policy.")
+		mediatailor_getChannelPolicyCmd.MarkFlagRequired("channel-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_getChannelPolicyCmd)
 }

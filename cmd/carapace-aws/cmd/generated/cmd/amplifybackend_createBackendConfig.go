@@ -12,10 +12,12 @@ var amplifybackend_createBackendConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_createBackendConfigCmd).Standalone()
+	carapace.Gen(amplifybackend_createBackendConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_createBackendConfigCmd).Standalone()
 
-	amplifybackend_createBackendConfigCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_createBackendConfigCmd.Flags().String("backend-manager-app-id", "", "The app ID for the backend manager.")
-	amplifybackend_createBackendConfigCmd.MarkFlagRequired("app-id")
+		amplifybackend_createBackendConfigCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_createBackendConfigCmd.Flags().String("backend-manager-app-id", "", "The app ID for the backend manager.")
+		amplifybackend_createBackendConfigCmd.MarkFlagRequired("app-id")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_createBackendConfigCmd)
 }

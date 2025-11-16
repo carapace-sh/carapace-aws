@@ -12,9 +12,11 @@ var storagegateway_describeSnapshotScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeSnapshotScheduleCmd).Standalone()
+	carapace.Gen(storagegateway_describeSnapshotScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeSnapshotScheduleCmd).Standalone()
 
-	storagegateway_describeSnapshotScheduleCmd.Flags().String("volume-arn", "", "The Amazon Resource Name (ARN) of the volume.")
-	storagegateway_describeSnapshotScheduleCmd.MarkFlagRequired("volume-arn")
+		storagegateway_describeSnapshotScheduleCmd.Flags().String("volume-arn", "", "The Amazon Resource Name (ARN) of the volume.")
+		storagegateway_describeSnapshotScheduleCmd.MarkFlagRequired("volume-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeSnapshotScheduleCmd)
 }

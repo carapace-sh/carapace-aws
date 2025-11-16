@@ -12,12 +12,14 @@ var medialive_createSdiSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_createSdiSourceCmd).Standalone()
+	carapace.Gen(medialive_createSdiSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_createSdiSourceCmd).Standalone()
 
-	medialive_createSdiSourceCmd.Flags().String("mode", "", "Applies only if the type is QUAD.")
-	medialive_createSdiSourceCmd.Flags().String("name", "", "Specify a name that is unique in the AWS account.")
-	medialive_createSdiSourceCmd.Flags().String("request-id", "", "An ID that you assign to a create request.")
-	medialive_createSdiSourceCmd.Flags().String("tags", "", "A collection of key-value pairs.")
-	medialive_createSdiSourceCmd.Flags().String("type", "", "Specify the type of the SDI source: SINGLE: The source is a single-link source.")
+		medialive_createSdiSourceCmd.Flags().String("mode", "", "Applies only if the type is QUAD.")
+		medialive_createSdiSourceCmd.Flags().String("name", "", "Specify a name that is unique in the AWS account.")
+		medialive_createSdiSourceCmd.Flags().String("request-id", "", "An ID that you assign to a create request.")
+		medialive_createSdiSourceCmd.Flags().String("tags", "", "A collection of key-value pairs.")
+		medialive_createSdiSourceCmd.Flags().String("type", "", "Specify the type of the SDI source: SINGLE: The source is a single-link source.")
+	})
 	medialiveCmd.AddCommand(medialive_createSdiSourceCmd)
 }

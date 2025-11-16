@@ -12,11 +12,13 @@ var customerProfiles_getSegmentEstimateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getSegmentEstimateCmd).Standalone()
+	carapace.Gen(customerProfiles_getSegmentEstimateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getSegmentEstimateCmd).Standalone()
 
-	customerProfiles_getSegmentEstimateCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getSegmentEstimateCmd.Flags().String("estimate-id", "", "The query Id passed by a previous `CreateSegmentEstimate` operation.")
-	customerProfiles_getSegmentEstimateCmd.MarkFlagRequired("domain-name")
-	customerProfiles_getSegmentEstimateCmd.MarkFlagRequired("estimate-id")
+		customerProfiles_getSegmentEstimateCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getSegmentEstimateCmd.Flags().String("estimate-id", "", "The query Id passed by a previous `CreateSegmentEstimate` operation.")
+		customerProfiles_getSegmentEstimateCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getSegmentEstimateCmd.MarkFlagRequired("estimate-id")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getSegmentEstimateCmd)
 }

@@ -12,9 +12,11 @@ var glue_startTriggerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_startTriggerCmd).Standalone()
+	carapace.Gen(glue_startTriggerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_startTriggerCmd).Standalone()
 
-	glue_startTriggerCmd.Flags().String("name", "", "The name of the trigger to start.")
-	glue_startTriggerCmd.MarkFlagRequired("name")
+		glue_startTriggerCmd.Flags().String("name", "", "The name of the trigger to start.")
+		glue_startTriggerCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_startTriggerCmd)
 }

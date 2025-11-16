@@ -12,9 +12,11 @@ var deadline_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_listTagsForResourceCmd).Standalone()
+	carapace.Gen(deadline_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_listTagsForResourceCmd).Standalone()
 
-	deadline_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource ARN to list tags for.")
-	deadline_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		deadline_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource ARN to list tags for.")
+		deadline_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	deadlineCmd.AddCommand(deadline_listTagsForResourceCmd)
 }

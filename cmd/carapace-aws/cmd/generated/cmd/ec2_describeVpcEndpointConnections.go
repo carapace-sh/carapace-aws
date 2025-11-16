@@ -12,13 +12,15 @@ var ec2_describeVpcEndpointConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeVpcEndpointConnectionsCmd).Standalone()
+	carapace.Gen(ec2_describeVpcEndpointConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeVpcEndpointConnectionsCmd).Standalone()
 
-	ec2_describeVpcEndpointConnectionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeVpcEndpointConnectionsCmd.Flags().String("filters", "", "The filters.")
-	ec2_describeVpcEndpointConnectionsCmd.Flags().String("max-results", "", "The maximum number of results to return for the request in a single page.")
-	ec2_describeVpcEndpointConnectionsCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
-	ec2_describeVpcEndpointConnectionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeVpcEndpointConnectionsCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeVpcEndpointConnectionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeVpcEndpointConnectionsCmd.Flags().String("filters", "", "The filters.")
+		ec2_describeVpcEndpointConnectionsCmd.Flags().String("max-results", "", "The maximum number of results to return for the request in a single page.")
+		ec2_describeVpcEndpointConnectionsCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+		ec2_describeVpcEndpointConnectionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeVpcEndpointConnectionsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeVpcEndpointConnectionsCmd)
 }

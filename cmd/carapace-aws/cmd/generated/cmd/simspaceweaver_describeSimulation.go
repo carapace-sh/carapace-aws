@@ -12,9 +12,11 @@ var simspaceweaver_describeSimulationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_describeSimulationCmd).Standalone()
+	carapace.Gen(simspaceweaver_describeSimulationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_describeSimulationCmd).Standalone()
 
-	simspaceweaver_describeSimulationCmd.Flags().String("simulation", "", "The name of the simulation.")
-	simspaceweaver_describeSimulationCmd.MarkFlagRequired("simulation")
+		simspaceweaver_describeSimulationCmd.Flags().String("simulation", "", "The name of the simulation.")
+		simspaceweaver_describeSimulationCmd.MarkFlagRequired("simulation")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_describeSimulationCmd)
 }

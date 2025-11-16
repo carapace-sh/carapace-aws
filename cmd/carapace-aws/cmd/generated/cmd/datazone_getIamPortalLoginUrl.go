@@ -12,9 +12,11 @@ var datazone_getIamPortalLoginUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getIamPortalLoginUrlCmd).Standalone()
+	carapace.Gen(datazone_getIamPortalLoginUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getIamPortalLoginUrlCmd).Standalone()
 
-	datazone_getIamPortalLoginUrlCmd.Flags().String("domain-identifier", "", "the ID of the Amazon DataZone domain the data portal of which you want to get.")
-	datazone_getIamPortalLoginUrlCmd.MarkFlagRequired("domain-identifier")
+		datazone_getIamPortalLoginUrlCmd.Flags().String("domain-identifier", "", "the ID of the Amazon DataZone domain the data portal of which you want to get.")
+		datazone_getIamPortalLoginUrlCmd.MarkFlagRequired("domain-identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getIamPortalLoginUrlCmd)
 }

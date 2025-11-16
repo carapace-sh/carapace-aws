@@ -12,8 +12,10 @@ var finspaceData_getWorkingLocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_getWorkingLocationCmd).Standalone()
+	carapace.Gen(finspaceData_getWorkingLocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_getWorkingLocationCmd).Standalone()
 
-	finspaceData_getWorkingLocationCmd.Flags().String("location-type", "", "Specify the type of the working location.")
+		finspaceData_getWorkingLocationCmd.Flags().String("location-type", "", "Specify the type of the working location.")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_getWorkingLocationCmd)
 }

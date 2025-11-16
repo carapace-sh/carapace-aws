@@ -12,9 +12,11 @@ var personalize_deleteMetricAttributionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_deleteMetricAttributionCmd).Standalone()
+	carapace.Gen(personalize_deleteMetricAttributionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_deleteMetricAttributionCmd).Standalone()
 
-	personalize_deleteMetricAttributionCmd.Flags().String("metric-attribution-arn", "", "The metric attribution's Amazon Resource Name (ARN).")
-	personalize_deleteMetricAttributionCmd.MarkFlagRequired("metric-attribution-arn")
+		personalize_deleteMetricAttributionCmd.Flags().String("metric-attribution-arn", "", "The metric attribution's Amazon Resource Name (ARN).")
+		personalize_deleteMetricAttributionCmd.MarkFlagRequired("metric-attribution-arn")
+	})
 	personalizeCmd.AddCommand(personalize_deleteMetricAttributionCmd)
 }

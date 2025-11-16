@@ -12,9 +12,11 @@ var route53_getReusableDelegationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getReusableDelegationSetCmd).Standalone()
+	carapace.Gen(route53_getReusableDelegationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getReusableDelegationSetCmd).Standalone()
 
-	route53_getReusableDelegationSetCmd.Flags().String("id", "", "The ID of the reusable delegation set that you want to get a list of name servers for.")
-	route53_getReusableDelegationSetCmd.MarkFlagRequired("id")
+		route53_getReusableDelegationSetCmd.Flags().String("id", "", "The ID of the reusable delegation set that you want to get a list of name servers for.")
+		route53_getReusableDelegationSetCmd.MarkFlagRequired("id")
+	})
 	route53Cmd.AddCommand(route53_getReusableDelegationSetCmd)
 }

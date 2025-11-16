@@ -12,14 +12,16 @@ var dms_createFleetAdvisorCollectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_createFleetAdvisorCollectorCmd).Standalone()
+	carapace.Gen(dms_createFleetAdvisorCollectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_createFleetAdvisorCollectorCmd).Standalone()
 
-	dms_createFleetAdvisorCollectorCmd.Flags().String("collector-name", "", "The name of your Fleet Advisor collector (for example, `sample-collector`).")
-	dms_createFleetAdvisorCollectorCmd.Flags().String("description", "", "A summary description of your Fleet Advisor collector.")
-	dms_createFleetAdvisorCollectorCmd.Flags().String("s3-bucket-name", "", "The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.")
-	dms_createFleetAdvisorCollectorCmd.Flags().String("service-access-role-arn", "", "The IAM role that grants permissions to access the specified Amazon S3 bucket.")
-	dms_createFleetAdvisorCollectorCmd.MarkFlagRequired("collector-name")
-	dms_createFleetAdvisorCollectorCmd.MarkFlagRequired("s3-bucket-name")
-	dms_createFleetAdvisorCollectorCmd.MarkFlagRequired("service-access-role-arn")
+		dms_createFleetAdvisorCollectorCmd.Flags().String("collector-name", "", "The name of your Fleet Advisor collector (for example, `sample-collector`).")
+		dms_createFleetAdvisorCollectorCmd.Flags().String("description", "", "A summary description of your Fleet Advisor collector.")
+		dms_createFleetAdvisorCollectorCmd.Flags().String("s3-bucket-name", "", "The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.")
+		dms_createFleetAdvisorCollectorCmd.Flags().String("service-access-role-arn", "", "The IAM role that grants permissions to access the specified Amazon S3 bucket.")
+		dms_createFleetAdvisorCollectorCmd.MarkFlagRequired("collector-name")
+		dms_createFleetAdvisorCollectorCmd.MarkFlagRequired("s3-bucket-name")
+		dms_createFleetAdvisorCollectorCmd.MarkFlagRequired("service-access-role-arn")
+	})
 	dmsCmd.AddCommand(dms_createFleetAdvisorCollectorCmd)
 }

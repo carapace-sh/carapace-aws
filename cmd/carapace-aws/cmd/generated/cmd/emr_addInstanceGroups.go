@@ -12,11 +12,13 @@ var emr_addInstanceGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_addInstanceGroupsCmd).Standalone()
+	carapace.Gen(emr_addInstanceGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_addInstanceGroupsCmd).Standalone()
 
-	emr_addInstanceGroupsCmd.Flags().String("instance-groups", "", "Instance groups to add.")
-	emr_addInstanceGroupsCmd.Flags().String("job-flow-id", "", "Job flow in which to add the instance groups.")
-	emr_addInstanceGroupsCmd.MarkFlagRequired("instance-groups")
-	emr_addInstanceGroupsCmd.MarkFlagRequired("job-flow-id")
+		emr_addInstanceGroupsCmd.Flags().String("instance-groups", "", "Instance groups to add.")
+		emr_addInstanceGroupsCmd.Flags().String("job-flow-id", "", "Job flow in which to add the instance groups.")
+		emr_addInstanceGroupsCmd.MarkFlagRequired("instance-groups")
+		emr_addInstanceGroupsCmd.MarkFlagRequired("job-flow-id")
+	})
 	emrCmd.AddCommand(emr_addInstanceGroupsCmd)
 }

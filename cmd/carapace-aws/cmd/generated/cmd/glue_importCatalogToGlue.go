@@ -12,8 +12,10 @@ var glue_importCatalogToGlueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_importCatalogToGlueCmd).Standalone()
+	carapace.Gen(glue_importCatalogToGlueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_importCatalogToGlueCmd).Standalone()
 
-	glue_importCatalogToGlueCmd.Flags().String("catalog-id", "", "The ID of the catalog to import.")
+		glue_importCatalogToGlueCmd.Flags().String("catalog-id", "", "The ID of the catalog to import.")
+	})
 	glueCmd.AddCommand(glue_importCatalogToGlueCmd)
 }

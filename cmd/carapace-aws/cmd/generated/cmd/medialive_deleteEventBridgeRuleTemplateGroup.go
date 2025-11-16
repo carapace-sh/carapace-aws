@@ -12,9 +12,11 @@ var medialive_deleteEventBridgeRuleTemplateGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteEventBridgeRuleTemplateGroupCmd).Standalone()
+	carapace.Gen(medialive_deleteEventBridgeRuleTemplateGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteEventBridgeRuleTemplateGroupCmd).Standalone()
 
-	medialive_deleteEventBridgeRuleTemplateGroupCmd.Flags().String("identifier", "", "An eventbridge rule template group's identifier.")
-	medialive_deleteEventBridgeRuleTemplateGroupCmd.MarkFlagRequired("identifier")
+		medialive_deleteEventBridgeRuleTemplateGroupCmd.Flags().String("identifier", "", "An eventbridge rule template group's identifier.")
+		medialive_deleteEventBridgeRuleTemplateGroupCmd.MarkFlagRequired("identifier")
+	})
 	medialiveCmd.AddCommand(medialive_deleteEventBridgeRuleTemplateGroupCmd)
 }

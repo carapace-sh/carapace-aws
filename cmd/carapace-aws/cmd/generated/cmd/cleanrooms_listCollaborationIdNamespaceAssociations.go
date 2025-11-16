@@ -12,11 +12,13 @@ var cleanrooms_listCollaborationIdNamespaceAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_listCollaborationIdNamespaceAssociationsCmd).Standalone()
+	carapace.Gen(cleanrooms_listCollaborationIdNamespaceAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_listCollaborationIdNamespaceAssociationsCmd).Standalone()
 
-	cleanrooms_listCollaborationIdNamespaceAssociationsCmd.Flags().String("collaboration-identifier", "", "The unique identifier of the collaboration that contains the ID namespace associations that you want to retrieve.")
-	cleanrooms_listCollaborationIdNamespaceAssociationsCmd.Flags().String("max-results", "", "The maximum size of the results that is returned per call.")
-	cleanrooms_listCollaborationIdNamespaceAssociationsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	cleanrooms_listCollaborationIdNamespaceAssociationsCmd.MarkFlagRequired("collaboration-identifier")
+		cleanrooms_listCollaborationIdNamespaceAssociationsCmd.Flags().String("collaboration-identifier", "", "The unique identifier of the collaboration that contains the ID namespace associations that you want to retrieve.")
+		cleanrooms_listCollaborationIdNamespaceAssociationsCmd.Flags().String("max-results", "", "The maximum size of the results that is returned per call.")
+		cleanrooms_listCollaborationIdNamespaceAssociationsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		cleanrooms_listCollaborationIdNamespaceAssociationsCmd.MarkFlagRequired("collaboration-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_listCollaborationIdNamespaceAssociationsCmd)
 }

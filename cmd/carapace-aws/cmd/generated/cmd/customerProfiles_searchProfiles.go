@@ -12,17 +12,19 @@ var customerProfiles_searchProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_searchProfilesCmd).Standalone()
+	carapace.Gen(customerProfiles_searchProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_searchProfilesCmd).Standalone()
 
-	customerProfiles_searchProfilesCmd.Flags().String("additional-search-keys", "", "A list of `AdditionalSearchKey` objects that are each searchable identifiers of a profile.")
-	customerProfiles_searchProfilesCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_searchProfilesCmd.Flags().String("key-name", "", "A searchable identifier of a customer profile.")
-	customerProfiles_searchProfilesCmd.Flags().String("logical-operator", "", "Relationship between all specified search keys that will be used to search for profiles.")
-	customerProfiles_searchProfilesCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	customerProfiles_searchProfilesCmd.Flags().String("next-token", "", "The pagination token from the previous SearchProfiles API call.")
-	customerProfiles_searchProfilesCmd.Flags().String("values", "", "A list of key values.")
-	customerProfiles_searchProfilesCmd.MarkFlagRequired("domain-name")
-	customerProfiles_searchProfilesCmd.MarkFlagRequired("key-name")
-	customerProfiles_searchProfilesCmd.MarkFlagRequired("values")
+		customerProfiles_searchProfilesCmd.Flags().String("additional-search-keys", "", "A list of `AdditionalSearchKey` objects that are each searchable identifiers of a profile.")
+		customerProfiles_searchProfilesCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_searchProfilesCmd.Flags().String("key-name", "", "A searchable identifier of a customer profile.")
+		customerProfiles_searchProfilesCmd.Flags().String("logical-operator", "", "Relationship between all specified search keys that will be used to search for profiles.")
+		customerProfiles_searchProfilesCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		customerProfiles_searchProfilesCmd.Flags().String("next-token", "", "The pagination token from the previous SearchProfiles API call.")
+		customerProfiles_searchProfilesCmd.Flags().String("values", "", "A list of key values.")
+		customerProfiles_searchProfilesCmd.MarkFlagRequired("domain-name")
+		customerProfiles_searchProfilesCmd.MarkFlagRequired("key-name")
+		customerProfiles_searchProfilesCmd.MarkFlagRequired("values")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_searchProfilesCmd)
 }

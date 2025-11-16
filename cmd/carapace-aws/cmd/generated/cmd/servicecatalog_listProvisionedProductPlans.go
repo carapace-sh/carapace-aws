@@ -12,12 +12,14 @@ var servicecatalog_listProvisionedProductPlansCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_listProvisionedProductPlansCmd).Standalone()
+	carapace.Gen(servicecatalog_listProvisionedProductPlansCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_listProvisionedProductPlansCmd).Standalone()
 
-	servicecatalog_listProvisionedProductPlansCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_listProvisionedProductPlansCmd.Flags().String("access-level-filter", "", "The access level to use to obtain results.")
-	servicecatalog_listProvisionedProductPlansCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_listProvisionedProductPlansCmd.Flags().String("page-token", "", "The page token for the next set of results.")
-	servicecatalog_listProvisionedProductPlansCmd.Flags().String("provision-product-id", "", "The product identifier.")
+		servicecatalog_listProvisionedProductPlansCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_listProvisionedProductPlansCmd.Flags().String("access-level-filter", "", "The access level to use to obtain results.")
+		servicecatalog_listProvisionedProductPlansCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_listProvisionedProductPlansCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_listProvisionedProductPlansCmd.Flags().String("provision-product-id", "", "The product identifier.")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_listProvisionedProductPlansCmd)
 }

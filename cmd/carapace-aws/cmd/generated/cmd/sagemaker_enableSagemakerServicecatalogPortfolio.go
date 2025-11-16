@@ -12,7 +12,9 @@ var sagemaker_enableSagemakerServicecatalogPortfolioCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_enableSagemakerServicecatalogPortfolioCmd).Standalone()
+	carapace.Gen(sagemaker_enableSagemakerServicecatalogPortfolioCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_enableSagemakerServicecatalogPortfolioCmd).Standalone()
 
+	})
 	sagemakerCmd.AddCommand(sagemaker_enableSagemakerServicecatalogPortfolioCmd)
 }

@@ -12,11 +12,13 @@ var transfer_describeAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_describeAccessCmd).Standalone()
+	carapace.Gen(transfer_describeAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_describeAccessCmd).Standalone()
 
-	transfer_describeAccessCmd.Flags().String("external-id", "", "A unique identifier that is required to identify specific groups within your directory.")
-	transfer_describeAccessCmd.Flags().String("server-id", "", "A system-assigned unique identifier for a server that has this access assigned.")
-	transfer_describeAccessCmd.MarkFlagRequired("external-id")
-	transfer_describeAccessCmd.MarkFlagRequired("server-id")
+		transfer_describeAccessCmd.Flags().String("external-id", "", "A unique identifier that is required to identify specific groups within your directory.")
+		transfer_describeAccessCmd.Flags().String("server-id", "", "A system-assigned unique identifier for a server that has this access assigned.")
+		transfer_describeAccessCmd.MarkFlagRequired("external-id")
+		transfer_describeAccessCmd.MarkFlagRequired("server-id")
+	})
 	transferCmd.AddCommand(transfer_describeAccessCmd)
 }

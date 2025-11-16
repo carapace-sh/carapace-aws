@@ -12,10 +12,12 @@ var servicecatalog_listTagOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_listTagOptionsCmd).Standalone()
+	carapace.Gen(servicecatalog_listTagOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_listTagOptionsCmd).Standalone()
 
-	servicecatalog_listTagOptionsCmd.Flags().String("filters", "", "The search filters.")
-	servicecatalog_listTagOptionsCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_listTagOptionsCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_listTagOptionsCmd.Flags().String("filters", "", "The search filters.")
+		servicecatalog_listTagOptionsCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_listTagOptionsCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_listTagOptionsCmd)
 }

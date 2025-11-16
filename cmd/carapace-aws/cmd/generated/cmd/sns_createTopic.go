@@ -12,12 +12,14 @@ var sns_createTopicCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_createTopicCmd).Standalone()
+	carapace.Gen(sns_createTopicCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_createTopicCmd).Standalone()
 
-	sns_createTopicCmd.Flags().String("attributes", "", "A map of attributes with their corresponding values.")
-	sns_createTopicCmd.Flags().String("data-protection-policy", "", "The body of the policy document you want to use for this topic.")
-	sns_createTopicCmd.Flags().String("name", "", "The name of the topic you want to create.")
-	sns_createTopicCmd.Flags().String("tags", "", "The list of tags to add to a new topic.")
-	sns_createTopicCmd.MarkFlagRequired("name")
+		sns_createTopicCmd.Flags().String("attributes", "", "A map of attributes with their corresponding values.")
+		sns_createTopicCmd.Flags().String("data-protection-policy", "", "The body of the policy document you want to use for this topic.")
+		sns_createTopicCmd.Flags().String("name", "", "The name of the topic you want to create.")
+		sns_createTopicCmd.Flags().String("tags", "", "The list of tags to add to a new topic.")
+		sns_createTopicCmd.MarkFlagRequired("name")
+	})
 	snsCmd.AddCommand(sns_createTopicCmd)
 }

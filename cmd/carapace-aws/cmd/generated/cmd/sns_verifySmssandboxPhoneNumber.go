@@ -12,11 +12,13 @@ var sns_verifySmssandboxPhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_verifySmssandboxPhoneNumberCmd).Standalone()
+	carapace.Gen(sns_verifySmssandboxPhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_verifySmssandboxPhoneNumberCmd).Standalone()
 
-	sns_verifySmssandboxPhoneNumberCmd.Flags().String("one-time-password", "", "The OTP sent to the destination number from the `CreateSMSSandBoxPhoneNumber` call.")
-	sns_verifySmssandboxPhoneNumberCmd.Flags().String("phone-number", "", "The destination phone number to verify.")
-	sns_verifySmssandboxPhoneNumberCmd.MarkFlagRequired("one-time-password")
-	sns_verifySmssandboxPhoneNumberCmd.MarkFlagRequired("phone-number")
+		sns_verifySmssandboxPhoneNumberCmd.Flags().String("one-time-password", "", "The OTP sent to the destination number from the `CreateSMSSandBoxPhoneNumber` call.")
+		sns_verifySmssandboxPhoneNumberCmd.Flags().String("phone-number", "", "The destination phone number to verify.")
+		sns_verifySmssandboxPhoneNumberCmd.MarkFlagRequired("one-time-password")
+		sns_verifySmssandboxPhoneNumberCmd.MarkFlagRequired("phone-number")
+	})
 	snsCmd.AddCommand(sns_verifySmssandboxPhoneNumberCmd)
 }

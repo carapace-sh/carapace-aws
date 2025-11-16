@@ -12,9 +12,11 @@ var ssm_getAutomationExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getAutomationExecutionCmd).Standalone()
+	carapace.Gen(ssm_getAutomationExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getAutomationExecutionCmd).Standalone()
 
-	ssm_getAutomationExecutionCmd.Flags().String("automation-execution-id", "", "The unique identifier for an existing automation execution to examine.")
-	ssm_getAutomationExecutionCmd.MarkFlagRequired("automation-execution-id")
+		ssm_getAutomationExecutionCmd.Flags().String("automation-execution-id", "", "The unique identifier for an existing automation execution to examine.")
+		ssm_getAutomationExecutionCmd.MarkFlagRequired("automation-execution-id")
+	})
 	ssmCmd.AddCommand(ssm_getAutomationExecutionCmd)
 }

@@ -12,9 +12,11 @@ var dynamodb_deleteTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_deleteTableCmd).Standalone()
+	carapace.Gen(dynamodb_deleteTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_deleteTableCmd).Standalone()
 
-	dynamodb_deleteTableCmd.Flags().String("table-name", "", "The name of the table to delete.")
-	dynamodb_deleteTableCmd.MarkFlagRequired("table-name")
+		dynamodb_deleteTableCmd.Flags().String("table-name", "", "The name of the table to delete.")
+		dynamodb_deleteTableCmd.MarkFlagRequired("table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_deleteTableCmd)
 }

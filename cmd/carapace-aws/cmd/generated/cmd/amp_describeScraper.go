@@ -12,9 +12,11 @@ var amp_describeScraperCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_describeScraperCmd).Standalone()
+	carapace.Gen(amp_describeScraperCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_describeScraperCmd).Standalone()
 
-	amp_describeScraperCmd.Flags().String("scraper-id", "", "The ID of the scraper to describe.")
-	amp_describeScraperCmd.MarkFlagRequired("scraper-id")
+		amp_describeScraperCmd.Flags().String("scraper-id", "", "The ID of the scraper to describe.")
+		amp_describeScraperCmd.MarkFlagRequired("scraper-id")
+	})
 	ampCmd.AddCommand(amp_describeScraperCmd)
 }

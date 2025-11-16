@@ -12,9 +12,11 @@ var imagebuilder_getImagePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getImagePolicyCmd).Standalone()
+	carapace.Gen(imagebuilder_getImagePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getImagePolicyCmd).Standalone()
 
-	imagebuilder_getImagePolicyCmd.Flags().String("image-arn", "", "The Amazon Resource Name (ARN) of the image whose policy you want to retrieve.")
-	imagebuilder_getImagePolicyCmd.MarkFlagRequired("image-arn")
+		imagebuilder_getImagePolicyCmd.Flags().String("image-arn", "", "The Amazon Resource Name (ARN) of the image whose policy you want to retrieve.")
+		imagebuilder_getImagePolicyCmd.MarkFlagRequired("image-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getImagePolicyCmd)
 }

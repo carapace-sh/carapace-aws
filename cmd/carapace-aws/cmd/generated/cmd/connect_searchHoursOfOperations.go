@@ -12,13 +12,15 @@ var connect_searchHoursOfOperationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_searchHoursOfOperationsCmd).Standalone()
+	carapace.Gen(connect_searchHoursOfOperationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_searchHoursOfOperationsCmd).Standalone()
 
-	connect_searchHoursOfOperationsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_searchHoursOfOperationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_searchHoursOfOperationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_searchHoursOfOperationsCmd.Flags().String("search-criteria", "", "The search criteria to be used to return hours of operations.")
-	connect_searchHoursOfOperationsCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
-	connect_searchHoursOfOperationsCmd.MarkFlagRequired("instance-id")
+		connect_searchHoursOfOperationsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_searchHoursOfOperationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_searchHoursOfOperationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_searchHoursOfOperationsCmd.Flags().String("search-criteria", "", "The search criteria to be used to return hours of operations.")
+		connect_searchHoursOfOperationsCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
+		connect_searchHoursOfOperationsCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_searchHoursOfOperationsCmd)
 }

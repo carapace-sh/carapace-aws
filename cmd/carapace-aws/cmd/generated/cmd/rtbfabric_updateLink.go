@@ -12,12 +12,14 @@ var rtbfabric_updateLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_updateLinkCmd).Standalone()
+	carapace.Gen(rtbfabric_updateLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_updateLinkCmd).Standalone()
 
-	rtbfabric_updateLinkCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
-	rtbfabric_updateLinkCmd.Flags().String("link-id", "", "The unique identifier of the link.")
-	rtbfabric_updateLinkCmd.Flags().String("log-settings", "", "Settings for the application logs.")
-	rtbfabric_updateLinkCmd.MarkFlagRequired("gateway-id")
-	rtbfabric_updateLinkCmd.MarkFlagRequired("link-id")
+		rtbfabric_updateLinkCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
+		rtbfabric_updateLinkCmd.Flags().String("link-id", "", "The unique identifier of the link.")
+		rtbfabric_updateLinkCmd.Flags().String("log-settings", "", "Settings for the application logs.")
+		rtbfabric_updateLinkCmd.MarkFlagRequired("gateway-id")
+		rtbfabric_updateLinkCmd.MarkFlagRequired("link-id")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_updateLinkCmd)
 }

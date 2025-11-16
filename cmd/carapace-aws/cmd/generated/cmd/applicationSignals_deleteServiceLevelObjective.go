@@ -12,9 +12,11 @@ var applicationSignals_deleteServiceLevelObjectiveCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationSignals_deleteServiceLevelObjectiveCmd).Standalone()
+	carapace.Gen(applicationSignals_deleteServiceLevelObjectiveCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationSignals_deleteServiceLevelObjectiveCmd).Standalone()
 
-	applicationSignals_deleteServiceLevelObjectiveCmd.Flags().String("id", "", "The ARN or name of the service level objective to delete.")
-	applicationSignals_deleteServiceLevelObjectiveCmd.MarkFlagRequired("id")
+		applicationSignals_deleteServiceLevelObjectiveCmd.Flags().String("id", "", "The ARN or name of the service level objective to delete.")
+		applicationSignals_deleteServiceLevelObjectiveCmd.MarkFlagRequired("id")
+	})
 	applicationSignalsCmd.AddCommand(applicationSignals_deleteServiceLevelObjectiveCmd)
 }

@@ -12,11 +12,13 @@ var customerProfiles_listIdentityResolutionJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_listIdentityResolutionJobsCmd).Standalone()
+	carapace.Gen(customerProfiles_listIdentityResolutionJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_listIdentityResolutionJobsCmd).Standalone()
 
-	customerProfiles_listIdentityResolutionJobsCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_listIdentityResolutionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	customerProfiles_listIdentityResolutionJobsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	customerProfiles_listIdentityResolutionJobsCmd.MarkFlagRequired("domain-name")
+		customerProfiles_listIdentityResolutionJobsCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_listIdentityResolutionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		customerProfiles_listIdentityResolutionJobsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		customerProfiles_listIdentityResolutionJobsCmd.MarkFlagRequired("domain-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_listIdentityResolutionJobsCmd)
 }

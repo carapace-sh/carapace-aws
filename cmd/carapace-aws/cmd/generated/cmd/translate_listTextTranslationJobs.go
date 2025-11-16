@@ -12,10 +12,12 @@ var translate_listTextTranslationJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_listTextTranslationJobsCmd).Standalone()
+	carapace.Gen(translate_listTextTranslationJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_listTextTranslationJobsCmd).Standalone()
 
-	translate_listTextTranslationJobsCmd.Flags().String("filter", "", "The parameters that specify which batch translation jobs to retrieve.")
-	translate_listTextTranslationJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
-	translate_listTextTranslationJobsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		translate_listTextTranslationJobsCmd.Flags().String("filter", "", "The parameters that specify which batch translation jobs to retrieve.")
+		translate_listTextTranslationJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
+		translate_listTextTranslationJobsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+	})
 	translateCmd.AddCommand(translate_listTextTranslationJobsCmd)
 }

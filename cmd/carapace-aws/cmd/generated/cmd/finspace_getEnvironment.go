@@ -12,9 +12,11 @@ var finspace_getEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_getEnvironmentCmd).Standalone()
+	carapace.Gen(finspace_getEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_getEnvironmentCmd).Standalone()
 
-	finspace_getEnvironmentCmd.Flags().String("environment-id", "", "The identifier of the FinSpace environment.")
-	finspace_getEnvironmentCmd.MarkFlagRequired("environment-id")
+		finspace_getEnvironmentCmd.Flags().String("environment-id", "", "The identifier of the FinSpace environment.")
+		finspace_getEnvironmentCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_getEnvironmentCmd)
 }

@@ -12,12 +12,14 @@ var ec2_getLaunchTemplateDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getLaunchTemplateDataCmd).Standalone()
+	carapace.Gen(ec2_getLaunchTemplateDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getLaunchTemplateDataCmd).Standalone()
 
-	ec2_getLaunchTemplateDataCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getLaunchTemplateDataCmd.Flags().String("instance-id", "", "The ID of the instance.")
-	ec2_getLaunchTemplateDataCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getLaunchTemplateDataCmd.MarkFlagRequired("instance-id")
-	ec2_getLaunchTemplateDataCmd.Flag("no-dry-run").Hidden = true
+		ec2_getLaunchTemplateDataCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getLaunchTemplateDataCmd.Flags().String("instance-id", "", "The ID of the instance.")
+		ec2_getLaunchTemplateDataCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getLaunchTemplateDataCmd.MarkFlagRequired("instance-id")
+		ec2_getLaunchTemplateDataCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_getLaunchTemplateDataCmd)
 }

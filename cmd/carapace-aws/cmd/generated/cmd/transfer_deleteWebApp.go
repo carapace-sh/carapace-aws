@@ -12,9 +12,11 @@ var transfer_deleteWebAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_deleteWebAppCmd).Standalone()
+	carapace.Gen(transfer_deleteWebAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_deleteWebAppCmd).Standalone()
 
-	transfer_deleteWebAppCmd.Flags().String("web-app-id", "", "Provide the unique identifier for the web app that you are deleting.")
-	transfer_deleteWebAppCmd.MarkFlagRequired("web-app-id")
+		transfer_deleteWebAppCmd.Flags().String("web-app-id", "", "Provide the unique identifier for the web app that you are deleting.")
+		transfer_deleteWebAppCmd.MarkFlagRequired("web-app-id")
+	})
 	transferCmd.AddCommand(transfer_deleteWebAppCmd)
 }

@@ -12,9 +12,11 @@ var omics_getRunGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getRunGroupCmd).Standalone()
+	carapace.Gen(omics_getRunGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getRunGroupCmd).Standalone()
 
-	omics_getRunGroupCmd.Flags().String("id", "", "The group's ID.")
-	omics_getRunGroupCmd.MarkFlagRequired("id")
+		omics_getRunGroupCmd.Flags().String("id", "", "The group's ID.")
+		omics_getRunGroupCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_getRunGroupCmd)
 }

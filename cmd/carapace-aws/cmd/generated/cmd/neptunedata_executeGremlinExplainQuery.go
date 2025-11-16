@@ -12,9 +12,11 @@ var neptunedata_executeGremlinExplainQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_executeGremlinExplainQueryCmd).Standalone()
+	carapace.Gen(neptunedata_executeGremlinExplainQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_executeGremlinExplainQueryCmd).Standalone()
 
-	neptunedata_executeGremlinExplainQueryCmd.Flags().String("gremlin-query", "", "The Gremlin explain query string.")
-	neptunedata_executeGremlinExplainQueryCmd.MarkFlagRequired("gremlin-query")
+		neptunedata_executeGremlinExplainQueryCmd.Flags().String("gremlin-query", "", "The Gremlin explain query string.")
+		neptunedata_executeGremlinExplainQueryCmd.MarkFlagRequired("gremlin-query")
+	})
 	neptunedataCmd.AddCommand(neptunedata_executeGremlinExplainQueryCmd)
 }

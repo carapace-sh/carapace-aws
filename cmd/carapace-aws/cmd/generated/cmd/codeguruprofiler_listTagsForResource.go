@@ -12,9 +12,11 @@ var codeguruprofiler_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruprofiler_listTagsForResourceCmd).Standalone()
+	carapace.Gen(codeguruprofiler_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruprofiler_listTagsForResourceCmd).Standalone()
 
-	codeguruprofiler_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that contains the tags to return.")
-	codeguruprofiler_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		codeguruprofiler_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that contains the tags to return.")
+		codeguruprofiler_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	codeguruprofilerCmd.AddCommand(codeguruprofiler_listTagsForResourceCmd)
 }

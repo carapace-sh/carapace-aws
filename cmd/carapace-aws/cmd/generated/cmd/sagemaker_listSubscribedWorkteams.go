@@ -12,10 +12,12 @@ var sagemaker_listSubscribedWorkteamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_listSubscribedWorkteamsCmd).Standalone()
+	carapace.Gen(sagemaker_listSubscribedWorkteamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_listSubscribedWorkteamsCmd).Standalone()
 
-	sagemaker_listSubscribedWorkteamsCmd.Flags().String("max-results", "", "The maximum number of work teams to return in each page of the response.")
-	sagemaker_listSubscribedWorkteamsCmd.Flags().String("name-contains", "", "A string in the work team name.")
-	sagemaker_listSubscribedWorkteamsCmd.Flags().String("next-token", "", "If the result of the previous `ListSubscribedWorkteams` request was truncated, the response includes a `NextToken`.")
+		sagemaker_listSubscribedWorkteamsCmd.Flags().String("max-results", "", "The maximum number of work teams to return in each page of the response.")
+		sagemaker_listSubscribedWorkteamsCmd.Flags().String("name-contains", "", "A string in the work team name.")
+		sagemaker_listSubscribedWorkteamsCmd.Flags().String("next-token", "", "If the result of the previous `ListSubscribedWorkteams` request was truncated, the response includes a `NextToken`.")
+	})
 	sagemakerCmd.AddCommand(sagemaker_listSubscribedWorkteamsCmd)
 }

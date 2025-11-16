@@ -12,11 +12,13 @@ var securityhub_updateStandardsControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_updateStandardsControlCmd).Standalone()
+	carapace.Gen(securityhub_updateStandardsControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_updateStandardsControlCmd).Standalone()
 
-	securityhub_updateStandardsControlCmd.Flags().String("control-status", "", "The updated status of the security standard control.")
-	securityhub_updateStandardsControlCmd.Flags().String("disabled-reason", "", "A description of the reason why you are disabling a security standard control.")
-	securityhub_updateStandardsControlCmd.Flags().String("standards-control-arn", "", "The ARN of the security standard control to enable or disable.")
-	securityhub_updateStandardsControlCmd.MarkFlagRequired("standards-control-arn")
+		securityhub_updateStandardsControlCmd.Flags().String("control-status", "", "The updated status of the security standard control.")
+		securityhub_updateStandardsControlCmd.Flags().String("disabled-reason", "", "A description of the reason why you are disabling a security standard control.")
+		securityhub_updateStandardsControlCmd.Flags().String("standards-control-arn", "", "The ARN of the security standard control to enable or disable.")
+		securityhub_updateStandardsControlCmd.MarkFlagRequired("standards-control-arn")
+	})
 	securityhubCmd.AddCommand(securityhub_updateStandardsControlCmd)
 }

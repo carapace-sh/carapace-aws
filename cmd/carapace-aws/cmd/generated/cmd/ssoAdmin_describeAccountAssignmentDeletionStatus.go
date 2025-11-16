@@ -12,11 +12,13 @@ var ssoAdmin_describeAccountAssignmentDeletionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_describeAccountAssignmentDeletionStatusCmd).Standalone()
+	carapace.Gen(ssoAdmin_describeAccountAssignmentDeletionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_describeAccountAssignmentDeletionStatusCmd).Standalone()
 
-	ssoAdmin_describeAccountAssignmentDeletionStatusCmd.Flags().String("account-assignment-deletion-request-id", "", "The identifier that is used to track the request operation progress.")
-	ssoAdmin_describeAccountAssignmentDeletionStatusCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_describeAccountAssignmentDeletionStatusCmd.MarkFlagRequired("account-assignment-deletion-request-id")
-	ssoAdmin_describeAccountAssignmentDeletionStatusCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_describeAccountAssignmentDeletionStatusCmd.Flags().String("account-assignment-deletion-request-id", "", "The identifier that is used to track the request operation progress.")
+		ssoAdmin_describeAccountAssignmentDeletionStatusCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_describeAccountAssignmentDeletionStatusCmd.MarkFlagRequired("account-assignment-deletion-request-id")
+		ssoAdmin_describeAccountAssignmentDeletionStatusCmd.MarkFlagRequired("instance-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_describeAccountAssignmentDeletionStatusCmd)
 }

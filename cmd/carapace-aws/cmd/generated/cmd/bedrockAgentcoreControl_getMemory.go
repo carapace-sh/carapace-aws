@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_getMemoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_getMemoryCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_getMemoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_getMemoryCmd).Standalone()
 
-	bedrockAgentcoreControl_getMemoryCmd.Flags().String("memory-id", "", "The unique identifier of the memory to retrieve.")
-	bedrockAgentcoreControl_getMemoryCmd.MarkFlagRequired("memory-id")
+		bedrockAgentcoreControl_getMemoryCmd.Flags().String("memory-id", "", "The unique identifier of the memory to retrieve.")
+		bedrockAgentcoreControl_getMemoryCmd.MarkFlagRequired("memory-id")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_getMemoryCmd)
 }

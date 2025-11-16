@@ -12,10 +12,12 @@ var datapipeline_getPipelineDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_getPipelineDefinitionCmd).Standalone()
+	carapace.Gen(datapipeline_getPipelineDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_getPipelineDefinitionCmd).Standalone()
 
-	datapipeline_getPipelineDefinitionCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
-	datapipeline_getPipelineDefinitionCmd.Flags().String("version", "", "The version of the pipeline definition to retrieve.")
-	datapipeline_getPipelineDefinitionCmd.MarkFlagRequired("pipeline-id")
+		datapipeline_getPipelineDefinitionCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
+		datapipeline_getPipelineDefinitionCmd.Flags().String("version", "", "The version of the pipeline definition to retrieve.")
+		datapipeline_getPipelineDefinitionCmd.MarkFlagRequired("pipeline-id")
+	})
 	datapipelineCmd.AddCommand(datapipeline_getPipelineDefinitionCmd)
 }

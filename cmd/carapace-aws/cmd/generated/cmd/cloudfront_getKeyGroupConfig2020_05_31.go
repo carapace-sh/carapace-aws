@@ -12,9 +12,11 @@ var cloudfront_getKeyGroupConfig2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_getKeyGroupConfig2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getKeyGroupConfig2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getKeyGroupConfig2020_05_31Cmd).Standalone()
 
-	cloudfront_getKeyGroupConfig2020_05_31Cmd.Flags().String("id", "", "The identifier of the key group whose configuration you are getting.")
-	cloudfront_getKeyGroupConfig2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getKeyGroupConfig2020_05_31Cmd.Flags().String("id", "", "The identifier of the key group whose configuration you are getting.")
+		cloudfront_getKeyGroupConfig2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getKeyGroupConfig2020_05_31Cmd)
 }

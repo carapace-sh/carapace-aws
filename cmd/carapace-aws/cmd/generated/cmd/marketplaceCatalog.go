@@ -12,7 +12,9 @@ var marketplaceCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceCatalogCmd).Standalone()
+	carapace.Gen(marketplaceCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceCatalogCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(marketplaceCatalogCmd)
 }

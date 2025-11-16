@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_setDefaultMessageTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_setDefaultMessageTypeCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_setDefaultMessageTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_setDefaultMessageTypeCmd).Standalone()
 
-	pinpointSmsVoiceV2_setDefaultMessageTypeCmd.Flags().String("configuration-set-name", "", "The configuration set to update with a new default message type.")
-	pinpointSmsVoiceV2_setDefaultMessageTypeCmd.Flags().String("message-type", "", "The type of message.")
-	pinpointSmsVoiceV2_setDefaultMessageTypeCmd.MarkFlagRequired("configuration-set-name")
-	pinpointSmsVoiceV2_setDefaultMessageTypeCmd.MarkFlagRequired("message-type")
+		pinpointSmsVoiceV2_setDefaultMessageTypeCmd.Flags().String("configuration-set-name", "", "The configuration set to update with a new default message type.")
+		pinpointSmsVoiceV2_setDefaultMessageTypeCmd.Flags().String("message-type", "", "The type of message.")
+		pinpointSmsVoiceV2_setDefaultMessageTypeCmd.MarkFlagRequired("configuration-set-name")
+		pinpointSmsVoiceV2_setDefaultMessageTypeCmd.MarkFlagRequired("message-type")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_setDefaultMessageTypeCmd)
 }

@@ -12,11 +12,13 @@ var databrew_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_tagResourceCmd).Standalone()
+	carapace.Gen(databrew_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_tagResourceCmd).Standalone()
 
-	databrew_tagResourceCmd.Flags().String("resource-arn", "", "The DataBrew resource to which tags should be added.")
-	databrew_tagResourceCmd.Flags().String("tags", "", "One or more tags to be assigned to the resource.")
-	databrew_tagResourceCmd.MarkFlagRequired("resource-arn")
-	databrew_tagResourceCmd.MarkFlagRequired("tags")
+		databrew_tagResourceCmd.Flags().String("resource-arn", "", "The DataBrew resource to which tags should be added.")
+		databrew_tagResourceCmd.Flags().String("tags", "", "One or more tags to be assigned to the resource.")
+		databrew_tagResourceCmd.MarkFlagRequired("resource-arn")
+		databrew_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	databrewCmd.AddCommand(databrew_tagResourceCmd)
 }

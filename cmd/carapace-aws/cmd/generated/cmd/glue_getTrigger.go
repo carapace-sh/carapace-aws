@@ -12,9 +12,11 @@ var glue_getTriggerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getTriggerCmd).Standalone()
+	carapace.Gen(glue_getTriggerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getTriggerCmd).Standalone()
 
-	glue_getTriggerCmd.Flags().String("name", "", "The name of the trigger to retrieve.")
-	glue_getTriggerCmd.MarkFlagRequired("name")
+		glue_getTriggerCmd.Flags().String("name", "", "The name of the trigger to retrieve.")
+		glue_getTriggerCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_getTriggerCmd)
 }

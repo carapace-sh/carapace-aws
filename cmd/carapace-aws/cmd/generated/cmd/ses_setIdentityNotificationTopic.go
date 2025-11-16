@@ -12,12 +12,14 @@ var ses_setIdentityNotificationTopicCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_setIdentityNotificationTopicCmd).Standalone()
+	carapace.Gen(ses_setIdentityNotificationTopicCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_setIdentityNotificationTopicCmd).Standalone()
 
-	ses_setIdentityNotificationTopicCmd.Flags().String("identity", "", "The identity (email address or domain) for the Amazon SNS topic.")
-	ses_setIdentityNotificationTopicCmd.Flags().String("notification-type", "", "The type of notifications that are published to the specified Amazon SNS topic.")
-	ses_setIdentityNotificationTopicCmd.Flags().String("sns-topic", "", "The Amazon Resource Name (ARN) of the Amazon SNS topic.")
-	ses_setIdentityNotificationTopicCmd.MarkFlagRequired("identity")
-	ses_setIdentityNotificationTopicCmd.MarkFlagRequired("notification-type")
+		ses_setIdentityNotificationTopicCmd.Flags().String("identity", "", "The identity (email address or domain) for the Amazon SNS topic.")
+		ses_setIdentityNotificationTopicCmd.Flags().String("notification-type", "", "The type of notifications that are published to the specified Amazon SNS topic.")
+		ses_setIdentityNotificationTopicCmd.Flags().String("sns-topic", "", "The Amazon Resource Name (ARN) of the Amazon SNS topic.")
+		ses_setIdentityNotificationTopicCmd.MarkFlagRequired("identity")
+		ses_setIdentityNotificationTopicCmd.MarkFlagRequired("notification-type")
+	})
 	sesCmd.AddCommand(ses_setIdentityNotificationTopicCmd)
 }

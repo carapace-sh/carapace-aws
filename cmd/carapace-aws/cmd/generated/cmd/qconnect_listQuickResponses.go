@@ -12,11 +12,13 @@ var qconnect_listQuickResponsesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_listQuickResponsesCmd).Standalone()
+	carapace.Gen(qconnect_listQuickResponsesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_listQuickResponsesCmd).Standalone()
 
-	qconnect_listQuickResponsesCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_listQuickResponsesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_listQuickResponsesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	qconnect_listQuickResponsesCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_listQuickResponsesCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_listQuickResponsesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_listQuickResponsesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_listQuickResponsesCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	qconnectCmd.AddCommand(qconnect_listQuickResponsesCmd)
 }

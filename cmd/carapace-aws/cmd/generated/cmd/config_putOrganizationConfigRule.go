@@ -12,13 +12,15 @@ var config_putOrganizationConfigRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_putOrganizationConfigRuleCmd).Standalone()
+	carapace.Gen(config_putOrganizationConfigRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_putOrganizationConfigRuleCmd).Standalone()
 
-	config_putOrganizationConfigRuleCmd.Flags().String("excluded-accounts", "", "A comma-separated list of accounts that you want to exclude from an organization Config rule.")
-	config_putOrganizationConfigRuleCmd.Flags().String("organization-config-rule-name", "", "The name that you assign to an organization Config rule.")
-	config_putOrganizationConfigRuleCmd.Flags().String("organization-custom-policy-rule-metadata", "", "An `OrganizationCustomPolicyRuleMetadata` object.")
-	config_putOrganizationConfigRuleCmd.Flags().String("organization-custom-rule-metadata", "", "An `OrganizationCustomRuleMetadata` object.")
-	config_putOrganizationConfigRuleCmd.Flags().String("organization-managed-rule-metadata", "", "An `OrganizationManagedRuleMetadata` object.")
-	config_putOrganizationConfigRuleCmd.MarkFlagRequired("organization-config-rule-name")
+		config_putOrganizationConfigRuleCmd.Flags().String("excluded-accounts", "", "A comma-separated list of accounts that you want to exclude from an organization Config rule.")
+		config_putOrganizationConfigRuleCmd.Flags().String("organization-config-rule-name", "", "The name that you assign to an organization Config rule.")
+		config_putOrganizationConfigRuleCmd.Flags().String("organization-custom-policy-rule-metadata", "", "An `OrganizationCustomPolicyRuleMetadata` object.")
+		config_putOrganizationConfigRuleCmd.Flags().String("organization-custom-rule-metadata", "", "An `OrganizationCustomRuleMetadata` object.")
+		config_putOrganizationConfigRuleCmd.Flags().String("organization-managed-rule-metadata", "", "An `OrganizationManagedRuleMetadata` object.")
+		config_putOrganizationConfigRuleCmd.MarkFlagRequired("organization-config-rule-name")
+	})
 	configCmd.AddCommand(config_putOrganizationConfigRuleCmd)
 }

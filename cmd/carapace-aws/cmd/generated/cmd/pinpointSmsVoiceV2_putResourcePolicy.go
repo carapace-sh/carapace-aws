@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_putResourcePolicyCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_putResourcePolicyCmd).Standalone()
 
-	pinpointSmsVoiceV2_putResourcePolicyCmd.Flags().String("policy", "", "The JSON formatted resource-based policy to attach.")
-	pinpointSmsVoiceV2_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the End User MessagingSMS resource to attach the resource-based policy to.")
-	pinpointSmsVoiceV2_putResourcePolicyCmd.MarkFlagRequired("policy")
-	pinpointSmsVoiceV2_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		pinpointSmsVoiceV2_putResourcePolicyCmd.Flags().String("policy", "", "The JSON formatted resource-based policy to attach.")
+		pinpointSmsVoiceV2_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the End User MessagingSMS resource to attach the resource-based policy to.")
+		pinpointSmsVoiceV2_putResourcePolicyCmd.MarkFlagRequired("policy")
+		pinpointSmsVoiceV2_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_putResourcePolicyCmd)
 }

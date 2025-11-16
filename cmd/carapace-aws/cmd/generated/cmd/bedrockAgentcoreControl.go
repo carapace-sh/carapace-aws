@@ -12,7 +12,9 @@ var bedrockAgentcoreControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControlCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControlCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(bedrockAgentcoreControlCmd)
 }

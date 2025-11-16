@@ -12,10 +12,12 @@ var inspector_createAssessmentTargetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_createAssessmentTargetCmd).Standalone()
+	carapace.Gen(inspector_createAssessmentTargetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_createAssessmentTargetCmd).Standalone()
 
-	inspector_createAssessmentTargetCmd.Flags().String("assessment-target-name", "", "The user-defined name that identifies the assessment target that you want to create.")
-	inspector_createAssessmentTargetCmd.Flags().String("resource-group-arn", "", "The ARN that specifies the resource group that is used to create the assessment target.")
-	inspector_createAssessmentTargetCmd.MarkFlagRequired("assessment-target-name")
+		inspector_createAssessmentTargetCmd.Flags().String("assessment-target-name", "", "The user-defined name that identifies the assessment target that you want to create.")
+		inspector_createAssessmentTargetCmd.Flags().String("resource-group-arn", "", "The ARN that specifies the resource group that is used to create the assessment target.")
+		inspector_createAssessmentTargetCmd.MarkFlagRequired("assessment-target-name")
+	})
 	inspectorCmd.AddCommand(inspector_createAssessmentTargetCmd)
 }

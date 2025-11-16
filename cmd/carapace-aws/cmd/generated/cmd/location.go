@@ -12,7 +12,9 @@ var locationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(locationCmd).Standalone()
+	carapace.Gen(locationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(locationCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(locationCmd)
 }

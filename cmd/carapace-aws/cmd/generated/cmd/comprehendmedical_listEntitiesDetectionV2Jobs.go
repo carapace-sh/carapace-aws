@@ -12,10 +12,12 @@ var comprehendmedical_listEntitiesDetectionV2JobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_listEntitiesDetectionV2JobsCmd).Standalone()
+	carapace.Gen(comprehendmedical_listEntitiesDetectionV2JobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_listEntitiesDetectionV2JobsCmd).Standalone()
 
-	comprehendmedical_listEntitiesDetectionV2JobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
-	comprehendmedical_listEntitiesDetectionV2JobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
-	comprehendmedical_listEntitiesDetectionV2JobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehendmedical_listEntitiesDetectionV2JobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
+		comprehendmedical_listEntitiesDetectionV2JobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
+		comprehendmedical_listEntitiesDetectionV2JobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_listEntitiesDetectionV2JobsCmd)
 }

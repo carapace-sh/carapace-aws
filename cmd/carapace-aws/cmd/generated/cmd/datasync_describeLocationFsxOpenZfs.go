@@ -12,9 +12,11 @@ var datasync_describeLocationFsxOpenZfsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeLocationFsxOpenZfsCmd).Standalone()
+	carapace.Gen(datasync_describeLocationFsxOpenZfsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeLocationFsxOpenZfsCmd).Standalone()
 
-	datasync_describeLocationFsxOpenZfsCmd.Flags().String("location-arn", "", "The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.")
-	datasync_describeLocationFsxOpenZfsCmd.MarkFlagRequired("location-arn")
+		datasync_describeLocationFsxOpenZfsCmd.Flags().String("location-arn", "", "The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.")
+		datasync_describeLocationFsxOpenZfsCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeLocationFsxOpenZfsCmd)
 }

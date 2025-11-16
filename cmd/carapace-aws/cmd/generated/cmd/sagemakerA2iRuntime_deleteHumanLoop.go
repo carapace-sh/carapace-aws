@@ -12,9 +12,11 @@ var sagemakerA2iRuntime_deleteHumanLoopCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerA2iRuntime_deleteHumanLoopCmd).Standalone()
+	carapace.Gen(sagemakerA2iRuntime_deleteHumanLoopCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerA2iRuntime_deleteHumanLoopCmd).Standalone()
 
-	sagemakerA2iRuntime_deleteHumanLoopCmd.Flags().String("human-loop-name", "", "The name of the human loop that you want to delete.")
-	sagemakerA2iRuntime_deleteHumanLoopCmd.MarkFlagRequired("human-loop-name")
+		sagemakerA2iRuntime_deleteHumanLoopCmd.Flags().String("human-loop-name", "", "The name of the human loop that you want to delete.")
+		sagemakerA2iRuntime_deleteHumanLoopCmd.MarkFlagRequired("human-loop-name")
+	})
 	sagemakerA2iRuntimeCmd.AddCommand(sagemakerA2iRuntime_deleteHumanLoopCmd)
 }

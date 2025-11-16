@@ -12,15 +12,17 @@ var lexv2Models_stopBotRecommendationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_stopBotRecommendationCmd).Standalone()
+	carapace.Gen(lexv2Models_stopBotRecommendationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_stopBotRecommendationCmd).Standalone()
 
-	lexv2Models_stopBotRecommendationCmd.Flags().String("bot-id", "", "The unique identifier of the bot containing the bot recommendation to be stopped.")
-	lexv2Models_stopBotRecommendationCmd.Flags().String("bot-recommendation-id", "", "The unique identifier of the bot recommendation to be stopped.")
-	lexv2Models_stopBotRecommendationCmd.Flags().String("bot-version", "", "The version of the bot containing the bot recommendation.")
-	lexv2Models_stopBotRecommendationCmd.Flags().String("locale-id", "", "The identifier of the language and locale of the bot recommendation to stop.")
-	lexv2Models_stopBotRecommendationCmd.MarkFlagRequired("bot-id")
-	lexv2Models_stopBotRecommendationCmd.MarkFlagRequired("bot-recommendation-id")
-	lexv2Models_stopBotRecommendationCmd.MarkFlagRequired("bot-version")
-	lexv2Models_stopBotRecommendationCmd.MarkFlagRequired("locale-id")
+		lexv2Models_stopBotRecommendationCmd.Flags().String("bot-id", "", "The unique identifier of the bot containing the bot recommendation to be stopped.")
+		lexv2Models_stopBotRecommendationCmd.Flags().String("bot-recommendation-id", "", "The unique identifier of the bot recommendation to be stopped.")
+		lexv2Models_stopBotRecommendationCmd.Flags().String("bot-version", "", "The version of the bot containing the bot recommendation.")
+		lexv2Models_stopBotRecommendationCmd.Flags().String("locale-id", "", "The identifier of the language and locale of the bot recommendation to stop.")
+		lexv2Models_stopBotRecommendationCmd.MarkFlagRequired("bot-id")
+		lexv2Models_stopBotRecommendationCmd.MarkFlagRequired("bot-recommendation-id")
+		lexv2Models_stopBotRecommendationCmd.MarkFlagRequired("bot-version")
+		lexv2Models_stopBotRecommendationCmd.MarkFlagRequired("locale-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_stopBotRecommendationCmd)
 }

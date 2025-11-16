@@ -12,13 +12,15 @@ var athena_updateDataCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_updateDataCatalogCmd).Standalone()
+	carapace.Gen(athena_updateDataCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_updateDataCatalogCmd).Standalone()
 
-	athena_updateDataCatalogCmd.Flags().String("description", "", "New or modified text that describes the data catalog.")
-	athena_updateDataCatalogCmd.Flags().String("name", "", "The name of the data catalog to update.")
-	athena_updateDataCatalogCmd.Flags().String("parameters", "", "Specifies the Lambda function or functions to use for updating the data catalog.")
-	athena_updateDataCatalogCmd.Flags().String("type", "", "Specifies the type of data catalog to update.")
-	athena_updateDataCatalogCmd.MarkFlagRequired("name")
-	athena_updateDataCatalogCmd.MarkFlagRequired("type")
+		athena_updateDataCatalogCmd.Flags().String("description", "", "New or modified text that describes the data catalog.")
+		athena_updateDataCatalogCmd.Flags().String("name", "", "The name of the data catalog to update.")
+		athena_updateDataCatalogCmd.Flags().String("parameters", "", "Specifies the Lambda function or functions to use for updating the data catalog.")
+		athena_updateDataCatalogCmd.Flags().String("type", "", "Specifies the type of data catalog to update.")
+		athena_updateDataCatalogCmd.MarkFlagRequired("name")
+		athena_updateDataCatalogCmd.MarkFlagRequired("type")
+	})
 	athenaCmd.AddCommand(athena_updateDataCatalogCmd)
 }

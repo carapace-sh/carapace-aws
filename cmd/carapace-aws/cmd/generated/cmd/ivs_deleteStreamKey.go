@@ -12,9 +12,11 @@ var ivs_deleteStreamKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_deleteStreamKeyCmd).Standalone()
+	carapace.Gen(ivs_deleteStreamKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_deleteStreamKeyCmd).Standalone()
 
-	ivs_deleteStreamKeyCmd.Flags().String("arn", "", "ARN of the stream key to be deleted.")
-	ivs_deleteStreamKeyCmd.MarkFlagRequired("arn")
+		ivs_deleteStreamKeyCmd.Flags().String("arn", "", "ARN of the stream key to be deleted.")
+		ivs_deleteStreamKeyCmd.MarkFlagRequired("arn")
+	})
 	ivsCmd.AddCommand(ivs_deleteStreamKeyCmd)
 }

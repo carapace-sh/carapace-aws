@@ -12,9 +12,11 @@ var mailmanager_getTrafficPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_getTrafficPolicyCmd).Standalone()
+	carapace.Gen(mailmanager_getTrafficPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_getTrafficPolicyCmd).Standalone()
 
-	mailmanager_getTrafficPolicyCmd.Flags().String("traffic-policy-id", "", "The identifier of the traffic policy resource.")
-	mailmanager_getTrafficPolicyCmd.MarkFlagRequired("traffic-policy-id")
+		mailmanager_getTrafficPolicyCmd.Flags().String("traffic-policy-id", "", "The identifier of the traffic policy resource.")
+		mailmanager_getTrafficPolicyCmd.MarkFlagRequired("traffic-policy-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_getTrafficPolicyCmd)
 }

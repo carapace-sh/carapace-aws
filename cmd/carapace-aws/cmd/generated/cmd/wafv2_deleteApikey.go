@@ -12,11 +12,13 @@ var wafv2_deleteApikeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_deleteApikeyCmd).Standalone()
+	carapace.Gen(wafv2_deleteApikeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_deleteApikeyCmd).Standalone()
 
-	wafv2_deleteApikeyCmd.Flags().String("apikey", "", "The encrypted API key that you want to delete.")
-	wafv2_deleteApikeyCmd.Flags().String("scope", "", "Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.")
-	wafv2_deleteApikeyCmd.MarkFlagRequired("apikey")
-	wafv2_deleteApikeyCmd.MarkFlagRequired("scope")
+		wafv2_deleteApikeyCmd.Flags().String("apikey", "", "The encrypted API key that you want to delete.")
+		wafv2_deleteApikeyCmd.Flags().String("scope", "", "Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.")
+		wafv2_deleteApikeyCmd.MarkFlagRequired("apikey")
+		wafv2_deleteApikeyCmd.MarkFlagRequired("scope")
+	})
 	wafv2Cmd.AddCommand(wafv2_deleteApikeyCmd)
 }

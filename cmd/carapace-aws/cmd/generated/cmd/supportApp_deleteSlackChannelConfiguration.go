@@ -12,11 +12,13 @@ var supportApp_deleteSlackChannelConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supportApp_deleteSlackChannelConfigurationCmd).Standalone()
+	carapace.Gen(supportApp_deleteSlackChannelConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supportApp_deleteSlackChannelConfigurationCmd).Standalone()
 
-	supportApp_deleteSlackChannelConfigurationCmd.Flags().String("channel-id", "", "The channel ID in Slack.")
-	supportApp_deleteSlackChannelConfigurationCmd.Flags().String("team-id", "", "The team ID in Slack.")
-	supportApp_deleteSlackChannelConfigurationCmd.MarkFlagRequired("channel-id")
-	supportApp_deleteSlackChannelConfigurationCmd.MarkFlagRequired("team-id")
+		supportApp_deleteSlackChannelConfigurationCmd.Flags().String("channel-id", "", "The channel ID in Slack.")
+		supportApp_deleteSlackChannelConfigurationCmd.Flags().String("team-id", "", "The team ID in Slack.")
+		supportApp_deleteSlackChannelConfigurationCmd.MarkFlagRequired("channel-id")
+		supportApp_deleteSlackChannelConfigurationCmd.MarkFlagRequired("team-id")
+	})
 	supportAppCmd.AddCommand(supportApp_deleteSlackChannelConfigurationCmd)
 }

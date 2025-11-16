@@ -12,12 +12,14 @@ var glue_getWorkflowRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getWorkflowRunCmd).Standalone()
+	carapace.Gen(glue_getWorkflowRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getWorkflowRunCmd).Standalone()
 
-	glue_getWorkflowRunCmd.Flags().String("include-graph", "", "Specifies whether to include the workflow graph in response or not.")
-	glue_getWorkflowRunCmd.Flags().String("name", "", "Name of the workflow being run.")
-	glue_getWorkflowRunCmd.Flags().String("run-id", "", "The ID of the workflow run.")
-	glue_getWorkflowRunCmd.MarkFlagRequired("name")
-	glue_getWorkflowRunCmd.MarkFlagRequired("run-id")
+		glue_getWorkflowRunCmd.Flags().String("include-graph", "", "Specifies whether to include the workflow graph in response or not.")
+		glue_getWorkflowRunCmd.Flags().String("name", "", "Name of the workflow being run.")
+		glue_getWorkflowRunCmd.Flags().String("run-id", "", "The ID of the workflow run.")
+		glue_getWorkflowRunCmd.MarkFlagRequired("name")
+		glue_getWorkflowRunCmd.MarkFlagRequired("run-id")
+	})
 	glueCmd.AddCommand(glue_getWorkflowRunCmd)
 }

@@ -12,9 +12,11 @@ var es_deleteElasticsearchDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_deleteElasticsearchDomainCmd).Standalone()
+	carapace.Gen(es_deleteElasticsearchDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_deleteElasticsearchDomainCmd).Standalone()
 
-	es_deleteElasticsearchDomainCmd.Flags().String("domain-name", "", "The name of the Elasticsearch domain that you want to permanently delete.")
-	es_deleteElasticsearchDomainCmd.MarkFlagRequired("domain-name")
+		es_deleteElasticsearchDomainCmd.Flags().String("domain-name", "", "The name of the Elasticsearch domain that you want to permanently delete.")
+		es_deleteElasticsearchDomainCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_deleteElasticsearchDomainCmd)
 }

@@ -12,13 +12,15 @@ var dsql_updateClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsql_updateClusterCmd).Standalone()
+	carapace.Gen(dsql_updateClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsql_updateClusterCmd).Standalone()
 
-	dsql_updateClusterCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	dsql_updateClusterCmd.Flags().String("deletion-protection-enabled", "", "Specifies whether to enable deletion protection in your cluster.")
-	dsql_updateClusterCmd.Flags().String("identifier", "", "The ID of the cluster you want to update.")
-	dsql_updateClusterCmd.Flags().String("kms-encryption-key", "", "The KMS key that encrypts and protects the data on your cluster.")
-	dsql_updateClusterCmd.Flags().String("multi-region-properties", "", "The new multi-Region cluster configuration settings to be applied during an update operation.")
-	dsql_updateClusterCmd.MarkFlagRequired("identifier")
+		dsql_updateClusterCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		dsql_updateClusterCmd.Flags().String("deletion-protection-enabled", "", "Specifies whether to enable deletion protection in your cluster.")
+		dsql_updateClusterCmd.Flags().String("identifier", "", "The ID of the cluster you want to update.")
+		dsql_updateClusterCmd.Flags().String("kms-encryption-key", "", "The KMS key that encrypts and protects the data on your cluster.")
+		dsql_updateClusterCmd.Flags().String("multi-region-properties", "", "The new multi-Region cluster configuration settings to be applied during an update operation.")
+		dsql_updateClusterCmd.MarkFlagRequired("identifier")
+	})
 	dsqlCmd.AddCommand(dsql_updateClusterCmd)
 }

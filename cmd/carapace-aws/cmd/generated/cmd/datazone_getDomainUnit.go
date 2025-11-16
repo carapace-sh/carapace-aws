@@ -12,11 +12,13 @@ var datazone_getDomainUnitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getDomainUnitCmd).Standalone()
+	carapace.Gen(datazone_getDomainUnitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getDomainUnitCmd).Standalone()
 
-	datazone_getDomainUnitCmd.Flags().String("domain-identifier", "", "The ID of the domain where you want to get a domain unit.")
-	datazone_getDomainUnitCmd.Flags().String("identifier", "", "The identifier of the domain unit that you want to get.")
-	datazone_getDomainUnitCmd.MarkFlagRequired("domain-identifier")
-	datazone_getDomainUnitCmd.MarkFlagRequired("identifier")
+		datazone_getDomainUnitCmd.Flags().String("domain-identifier", "", "The ID of the domain where you want to get a domain unit.")
+		datazone_getDomainUnitCmd.Flags().String("identifier", "", "The identifier of the domain unit that you want to get.")
+		datazone_getDomainUnitCmd.MarkFlagRequired("domain-identifier")
+		datazone_getDomainUnitCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getDomainUnitCmd)
 }

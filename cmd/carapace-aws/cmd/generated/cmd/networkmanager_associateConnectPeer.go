@@ -12,14 +12,16 @@ var networkmanager_associateConnectPeerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_associateConnectPeerCmd).Standalone()
+	carapace.Gen(networkmanager_associateConnectPeerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_associateConnectPeerCmd).Standalone()
 
-	networkmanager_associateConnectPeerCmd.Flags().String("connect-peer-id", "", "The ID of the Connect peer.")
-	networkmanager_associateConnectPeerCmd.Flags().String("device-id", "", "The ID of the device.")
-	networkmanager_associateConnectPeerCmd.Flags().String("global-network-id", "", "The ID of your global network.")
-	networkmanager_associateConnectPeerCmd.Flags().String("link-id", "", "The ID of the link.")
-	networkmanager_associateConnectPeerCmd.MarkFlagRequired("connect-peer-id")
-	networkmanager_associateConnectPeerCmd.MarkFlagRequired("device-id")
-	networkmanager_associateConnectPeerCmd.MarkFlagRequired("global-network-id")
+		networkmanager_associateConnectPeerCmd.Flags().String("connect-peer-id", "", "The ID of the Connect peer.")
+		networkmanager_associateConnectPeerCmd.Flags().String("device-id", "", "The ID of the device.")
+		networkmanager_associateConnectPeerCmd.Flags().String("global-network-id", "", "The ID of your global network.")
+		networkmanager_associateConnectPeerCmd.Flags().String("link-id", "", "The ID of the link.")
+		networkmanager_associateConnectPeerCmd.MarkFlagRequired("connect-peer-id")
+		networkmanager_associateConnectPeerCmd.MarkFlagRequired("device-id")
+		networkmanager_associateConnectPeerCmd.MarkFlagRequired("global-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_associateConnectPeerCmd)
 }

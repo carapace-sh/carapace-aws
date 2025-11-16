@@ -12,9 +12,11 @@ var transcribe_deleteLanguageModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_deleteLanguageModelCmd).Standalone()
+	carapace.Gen(transcribe_deleteLanguageModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_deleteLanguageModelCmd).Standalone()
 
-	transcribe_deleteLanguageModelCmd.Flags().String("model-name", "", "The name of the custom language model you want to delete.")
-	transcribe_deleteLanguageModelCmd.MarkFlagRequired("model-name")
+		transcribe_deleteLanguageModelCmd.Flags().String("model-name", "", "The name of the custom language model you want to delete.")
+		transcribe_deleteLanguageModelCmd.MarkFlagRequired("model-name")
+	})
 	transcribeCmd.AddCommand(transcribe_deleteLanguageModelCmd)
 }

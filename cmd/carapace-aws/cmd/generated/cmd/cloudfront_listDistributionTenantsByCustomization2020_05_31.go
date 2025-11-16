@@ -12,11 +12,13 @@ var cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd).Standalone()
 
-	cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd.Flags().String("certificate-arn", "", "Filter by the ARN of the associated ACM certificate.")
-	cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd.Flags().String("marker", "", "The marker for the next set of results.")
-	cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of distribution tenants to return by the specified customization.")
-	cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd.Flags().String("web-aclarn", "", "Filter by the ARN of the associated WAF web ACL.")
+		cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd.Flags().String("certificate-arn", "", "Filter by the ARN of the associated ACM certificate.")
+		cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd.Flags().String("marker", "", "The marker for the next set of results.")
+		cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of distribution tenants to return by the specified customization.")
+		cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd.Flags().String("web-aclarn", "", "Filter by the ARN of the associated WAF web ACL.")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listDistributionTenantsByCustomization2020_05_31Cmd)
 }

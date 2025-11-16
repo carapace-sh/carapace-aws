@@ -12,11 +12,13 @@ var chime_associateSigninDelegateGroupsWithAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_associateSigninDelegateGroupsWithAccountCmd).Standalone()
+	carapace.Gen(chime_associateSigninDelegateGroupsWithAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_associateSigninDelegateGroupsWithAccountCmd).Standalone()
 
-	chime_associateSigninDelegateGroupsWithAccountCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_associateSigninDelegateGroupsWithAccountCmd.Flags().String("signin-delegate-groups", "", "The sign-in delegate groups.")
-	chime_associateSigninDelegateGroupsWithAccountCmd.MarkFlagRequired("account-id")
-	chime_associateSigninDelegateGroupsWithAccountCmd.MarkFlagRequired("signin-delegate-groups")
+		chime_associateSigninDelegateGroupsWithAccountCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_associateSigninDelegateGroupsWithAccountCmd.Flags().String("signin-delegate-groups", "", "The sign-in delegate groups.")
+		chime_associateSigninDelegateGroupsWithAccountCmd.MarkFlagRequired("account-id")
+		chime_associateSigninDelegateGroupsWithAccountCmd.MarkFlagRequired("signin-delegate-groups")
+	})
 	chimeCmd.AddCommand(chime_associateSigninDelegateGroupsWithAccountCmd)
 }

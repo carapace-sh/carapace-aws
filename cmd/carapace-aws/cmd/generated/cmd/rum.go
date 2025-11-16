@@ -12,7 +12,9 @@ var rumCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rumCmd).Standalone()
+	carapace.Gen(rumCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rumCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(rumCmd)
 }

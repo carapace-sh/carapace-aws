@@ -12,11 +12,13 @@ var neptuneGraph_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_untagResourceCmd).Standalone()
+	carapace.Gen(neptuneGraph_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_untagResourceCmd).Standalone()
 
-	neptuneGraph_untagResourceCmd.Flags().String("resource-arn", "", "ARN of the resource whose tag needs to be removed.")
-	neptuneGraph_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys for the tags to be removed.")
-	neptuneGraph_untagResourceCmd.MarkFlagRequired("resource-arn")
-	neptuneGraph_untagResourceCmd.MarkFlagRequired("tag-keys")
+		neptuneGraph_untagResourceCmd.Flags().String("resource-arn", "", "ARN of the resource whose tag needs to be removed.")
+		neptuneGraph_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys for the tags to be removed.")
+		neptuneGraph_untagResourceCmd.MarkFlagRequired("resource-arn")
+		neptuneGraph_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_untagResourceCmd)
 }

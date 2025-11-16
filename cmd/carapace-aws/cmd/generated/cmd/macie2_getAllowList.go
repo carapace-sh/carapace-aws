@@ -12,9 +12,11 @@ var macie2_getAllowListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getAllowListCmd).Standalone()
+	carapace.Gen(macie2_getAllowListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getAllowListCmd).Standalone()
 
-	macie2_getAllowListCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
-	macie2_getAllowListCmd.MarkFlagRequired("id")
+		macie2_getAllowListCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
+		macie2_getAllowListCmd.MarkFlagRequired("id")
+	})
 	macie2Cmd.AddCommand(macie2_getAllowListCmd)
 }

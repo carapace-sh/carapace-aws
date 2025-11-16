@@ -12,11 +12,13 @@ var qapps_deleteQappCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_deleteQappCmd).Standalone()
+	carapace.Gen(qapps_deleteQappCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_deleteQappCmd).Standalone()
 
-	qapps_deleteQappCmd.Flags().String("app-id", "", "The unique identifier of the Q App to delete.")
-	qapps_deleteQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_deleteQappCmd.MarkFlagRequired("app-id")
-	qapps_deleteQappCmd.MarkFlagRequired("instance-id")
+		qapps_deleteQappCmd.Flags().String("app-id", "", "The unique identifier of the Q App to delete.")
+		qapps_deleteQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_deleteQappCmd.MarkFlagRequired("app-id")
+		qapps_deleteQappCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_deleteQappCmd)
 }

@@ -12,11 +12,13 @@ var marketplaceAgreement_getAgreementTermsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceAgreement_getAgreementTermsCmd).Standalone()
+	carapace.Gen(marketplaceAgreement_getAgreementTermsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceAgreement_getAgreementTermsCmd).Standalone()
 
-	marketplaceAgreement_getAgreementTermsCmd.Flags().String("agreement-id", "", "The unique identifier of the agreement.")
-	marketplaceAgreement_getAgreementTermsCmd.Flags().String("max-results", "", "The maximum number of agreements to return in the response.")
-	marketplaceAgreement_getAgreementTermsCmd.Flags().String("next-token", "", "A token to specify where to start pagination")
-	marketplaceAgreement_getAgreementTermsCmd.MarkFlagRequired("agreement-id")
+		marketplaceAgreement_getAgreementTermsCmd.Flags().String("agreement-id", "", "The unique identifier of the agreement.")
+		marketplaceAgreement_getAgreementTermsCmd.Flags().String("max-results", "", "The maximum number of agreements to return in the response.")
+		marketplaceAgreement_getAgreementTermsCmd.Flags().String("next-token", "", "A token to specify where to start pagination")
+		marketplaceAgreement_getAgreementTermsCmd.MarkFlagRequired("agreement-id")
+	})
 	marketplaceAgreementCmd.AddCommand(marketplaceAgreement_getAgreementTermsCmd)
 }

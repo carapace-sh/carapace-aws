@@ -12,9 +12,11 @@ var backupGateway_getHypervisorPropertyMappingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_getHypervisorPropertyMappingsCmd).Standalone()
+	carapace.Gen(backupGateway_getHypervisorPropertyMappingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_getHypervisorPropertyMappingsCmd).Standalone()
 
-	backupGateway_getHypervisorPropertyMappingsCmd.Flags().String("hypervisor-arn", "", "The Amazon Resource Name (ARN) of the hypervisor.")
-	backupGateway_getHypervisorPropertyMappingsCmd.MarkFlagRequired("hypervisor-arn")
+		backupGateway_getHypervisorPropertyMappingsCmd.Flags().String("hypervisor-arn", "", "The Amazon Resource Name (ARN) of the hypervisor.")
+		backupGateway_getHypervisorPropertyMappingsCmd.MarkFlagRequired("hypervisor-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_getHypervisorPropertyMappingsCmd)
 }

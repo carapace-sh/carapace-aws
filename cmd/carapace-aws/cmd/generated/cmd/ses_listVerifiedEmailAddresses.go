@@ -12,7 +12,9 @@ var ses_listVerifiedEmailAddressesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_listVerifiedEmailAddressesCmd).Standalone()
+	carapace.Gen(ses_listVerifiedEmailAddressesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_listVerifiedEmailAddressesCmd).Standalone()
 
+	})
 	sesCmd.AddCommand(ses_listVerifiedEmailAddressesCmd)
 }

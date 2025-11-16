@@ -12,9 +12,11 @@ var b2bi_deleteCapabilityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_deleteCapabilityCmd).Standalone()
+	carapace.Gen(b2bi_deleteCapabilityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_deleteCapabilityCmd).Standalone()
 
-	b2bi_deleteCapabilityCmd.Flags().String("capability-id", "", "Specifies a system-assigned unique identifier for the capability.")
-	b2bi_deleteCapabilityCmd.MarkFlagRequired("capability-id")
+		b2bi_deleteCapabilityCmd.Flags().String("capability-id", "", "Specifies a system-assigned unique identifier for the capability.")
+		b2bi_deleteCapabilityCmd.MarkFlagRequired("capability-id")
+	})
 	b2biCmd.AddCommand(b2bi_deleteCapabilityCmd)
 }

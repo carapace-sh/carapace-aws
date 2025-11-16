@@ -12,7 +12,9 @@ var ses_getSendStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_getSendStatisticsCmd).Standalone()
+	carapace.Gen(ses_getSendStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_getSendStatisticsCmd).Standalone()
 
+	})
 	sesCmd.AddCommand(ses_getSendStatisticsCmd)
 }

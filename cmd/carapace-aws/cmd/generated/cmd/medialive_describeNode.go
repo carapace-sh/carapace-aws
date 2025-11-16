@@ -12,11 +12,13 @@ var medialive_describeNodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeNodeCmd).Standalone()
+	carapace.Gen(medialive_describeNodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeNodeCmd).Standalone()
 
-	medialive_describeNodeCmd.Flags().String("cluster-id", "", "The ID of the cluster")
-	medialive_describeNodeCmd.Flags().String("node-id", "", "The ID of the node.")
-	medialive_describeNodeCmd.MarkFlagRequired("cluster-id")
-	medialive_describeNodeCmd.MarkFlagRequired("node-id")
+		medialive_describeNodeCmd.Flags().String("cluster-id", "", "The ID of the cluster")
+		medialive_describeNodeCmd.Flags().String("node-id", "", "The ID of the node.")
+		medialive_describeNodeCmd.MarkFlagRequired("cluster-id")
+		medialive_describeNodeCmd.MarkFlagRequired("node-id")
+	})
 	medialiveCmd.AddCommand(medialive_describeNodeCmd)
 }

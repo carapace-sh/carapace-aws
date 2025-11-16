@@ -12,9 +12,11 @@ var wafRegional_getRegexPatternSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_getRegexPatternSetCmd).Standalone()
+	carapace.Gen(wafRegional_getRegexPatternSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_getRegexPatternSetCmd).Standalone()
 
-	wafRegional_getRegexPatternSetCmd.Flags().String("regex-pattern-set-id", "", "The `RegexPatternSetId` of the [RegexPatternSet]() that you want to get.")
-	wafRegional_getRegexPatternSetCmd.MarkFlagRequired("regex-pattern-set-id")
+		wafRegional_getRegexPatternSetCmd.Flags().String("regex-pattern-set-id", "", "The `RegexPatternSetId` of the [RegexPatternSet]() that you want to get.")
+		wafRegional_getRegexPatternSetCmd.MarkFlagRequired("regex-pattern-set-id")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_getRegexPatternSetCmd)
 }

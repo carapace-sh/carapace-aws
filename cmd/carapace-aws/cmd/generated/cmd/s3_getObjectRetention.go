@@ -12,14 +12,16 @@ var s3_getObjectRetentionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getObjectRetentionCmd).Standalone()
+	carapace.Gen(s3_getObjectRetentionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getObjectRetentionCmd).Standalone()
 
-	s3_getObjectRetentionCmd.Flags().String("bucket", "", "The bucket name containing the object whose retention settings you want to retrieve.")
-	s3_getObjectRetentionCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getObjectRetentionCmd.Flags().String("key", "", "The key name for the object whose retention settings you want to retrieve.")
-	s3_getObjectRetentionCmd.Flags().String("request-payer", "", "")
-	s3_getObjectRetentionCmd.Flags().String("version-id", "", "The version ID for the object whose retention settings you want to retrieve.")
-	s3_getObjectRetentionCmd.MarkFlagRequired("bucket")
-	s3_getObjectRetentionCmd.MarkFlagRequired("key")
+		s3_getObjectRetentionCmd.Flags().String("bucket", "", "The bucket name containing the object whose retention settings you want to retrieve.")
+		s3_getObjectRetentionCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getObjectRetentionCmd.Flags().String("key", "", "The key name for the object whose retention settings you want to retrieve.")
+		s3_getObjectRetentionCmd.Flags().String("request-payer", "", "")
+		s3_getObjectRetentionCmd.Flags().String("version-id", "", "The version ID for the object whose retention settings you want to retrieve.")
+		s3_getObjectRetentionCmd.MarkFlagRequired("bucket")
+		s3_getObjectRetentionCmd.MarkFlagRequired("key")
+	})
 	s3Cmd.AddCommand(s3_getObjectRetentionCmd)
 }

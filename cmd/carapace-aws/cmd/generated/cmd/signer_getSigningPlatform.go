@@ -12,9 +12,11 @@ var signer_getSigningPlatformCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(signer_getSigningPlatformCmd).Standalone()
+	carapace.Gen(signer_getSigningPlatformCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(signer_getSigningPlatformCmd).Standalone()
 
-	signer_getSigningPlatformCmd.Flags().String("platform-id", "", "The ID of the target signing platform.")
-	signer_getSigningPlatformCmd.MarkFlagRequired("platform-id")
+		signer_getSigningPlatformCmd.Flags().String("platform-id", "", "The ID of the target signing platform.")
+		signer_getSigningPlatformCmd.MarkFlagRequired("platform-id")
+	})
 	signerCmd.AddCommand(signer_getSigningPlatformCmd)
 }

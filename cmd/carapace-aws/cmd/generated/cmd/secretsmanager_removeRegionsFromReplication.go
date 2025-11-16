@@ -12,11 +12,13 @@ var secretsmanager_removeRegionsFromReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_removeRegionsFromReplicationCmd).Standalone()
+	carapace.Gen(secretsmanager_removeRegionsFromReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_removeRegionsFromReplicationCmd).Standalone()
 
-	secretsmanager_removeRegionsFromReplicationCmd.Flags().String("remove-replica-regions", "", "The Regions of the replicas to remove.")
-	secretsmanager_removeRegionsFromReplicationCmd.Flags().String("secret-id", "", "The ARN or name of the secret.")
-	secretsmanager_removeRegionsFromReplicationCmd.MarkFlagRequired("remove-replica-regions")
-	secretsmanager_removeRegionsFromReplicationCmd.MarkFlagRequired("secret-id")
+		secretsmanager_removeRegionsFromReplicationCmd.Flags().String("remove-replica-regions", "", "The Regions of the replicas to remove.")
+		secretsmanager_removeRegionsFromReplicationCmd.Flags().String("secret-id", "", "The ARN or name of the secret.")
+		secretsmanager_removeRegionsFromReplicationCmd.MarkFlagRequired("remove-replica-regions")
+		secretsmanager_removeRegionsFromReplicationCmd.MarkFlagRequired("secret-id")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_removeRegionsFromReplicationCmd)
 }

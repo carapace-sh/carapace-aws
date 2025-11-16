@@ -12,17 +12,19 @@ var bedrockDataAutomation_createBlueprintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockDataAutomation_createBlueprintCmd).Standalone()
+	carapace.Gen(bedrockDataAutomation_createBlueprintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockDataAutomation_createBlueprintCmd).Standalone()
 
-	bedrockDataAutomation_createBlueprintCmd.Flags().String("blueprint-name", "", "")
-	bedrockDataAutomation_createBlueprintCmd.Flags().String("blueprint-stage", "", "")
-	bedrockDataAutomation_createBlueprintCmd.Flags().String("client-token", "", "")
-	bedrockDataAutomation_createBlueprintCmd.Flags().String("encryption-configuration", "", "")
-	bedrockDataAutomation_createBlueprintCmd.Flags().String("schema", "", "")
-	bedrockDataAutomation_createBlueprintCmd.Flags().String("tags", "", "")
-	bedrockDataAutomation_createBlueprintCmd.Flags().String("type", "", "")
-	bedrockDataAutomation_createBlueprintCmd.MarkFlagRequired("blueprint-name")
-	bedrockDataAutomation_createBlueprintCmd.MarkFlagRequired("schema")
-	bedrockDataAutomation_createBlueprintCmd.MarkFlagRequired("type")
+		bedrockDataAutomation_createBlueprintCmd.Flags().String("blueprint-name", "", "")
+		bedrockDataAutomation_createBlueprintCmd.Flags().String("blueprint-stage", "", "")
+		bedrockDataAutomation_createBlueprintCmd.Flags().String("client-token", "", "")
+		bedrockDataAutomation_createBlueprintCmd.Flags().String("encryption-configuration", "", "")
+		bedrockDataAutomation_createBlueprintCmd.Flags().String("schema", "", "")
+		bedrockDataAutomation_createBlueprintCmd.Flags().String("tags", "", "")
+		bedrockDataAutomation_createBlueprintCmd.Flags().String("type", "", "")
+		bedrockDataAutomation_createBlueprintCmd.MarkFlagRequired("blueprint-name")
+		bedrockDataAutomation_createBlueprintCmd.MarkFlagRequired("schema")
+		bedrockDataAutomation_createBlueprintCmd.MarkFlagRequired("type")
+	})
 	bedrockDataAutomationCmd.AddCommand(bedrockDataAutomation_createBlueprintCmd)
 }

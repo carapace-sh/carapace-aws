@@ -12,9 +12,11 @@ var cloudwatch_putManagedInsightRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_putManagedInsightRulesCmd).Standalone()
+	carapace.Gen(cloudwatch_putManagedInsightRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_putManagedInsightRulesCmd).Standalone()
 
-	cloudwatch_putManagedInsightRulesCmd.Flags().String("managed-rules", "", "A list of `ManagedRules` to enable.")
-	cloudwatch_putManagedInsightRulesCmd.MarkFlagRequired("managed-rules")
+		cloudwatch_putManagedInsightRulesCmd.Flags().String("managed-rules", "", "A list of `ManagedRules` to enable.")
+		cloudwatch_putManagedInsightRulesCmd.MarkFlagRequired("managed-rules")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_putManagedInsightRulesCmd)
 }

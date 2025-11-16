@@ -12,12 +12,14 @@ var apigateway_updateStageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_updateStageCmd).Standalone()
+	carapace.Gen(apigateway_updateStageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_updateStageCmd).Standalone()
 
-	apigateway_updateStageCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
-	apigateway_updateStageCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_updateStageCmd.Flags().String("stage-name", "", "The name of the Stage resource to change information about.")
-	apigateway_updateStageCmd.MarkFlagRequired("rest-api-id")
-	apigateway_updateStageCmd.MarkFlagRequired("stage-name")
+		apigateway_updateStageCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
+		apigateway_updateStageCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_updateStageCmd.Flags().String("stage-name", "", "The name of the Stage resource to change information about.")
+		apigateway_updateStageCmd.MarkFlagRequired("rest-api-id")
+		apigateway_updateStageCmd.MarkFlagRequired("stage-name")
+	})
 	apigatewayCmd.AddCommand(apigateway_updateStageCmd)
 }

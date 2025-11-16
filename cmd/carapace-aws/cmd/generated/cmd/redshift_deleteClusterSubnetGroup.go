@@ -12,9 +12,11 @@ var redshift_deleteClusterSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteClusterSubnetGroupCmd).Standalone()
+	carapace.Gen(redshift_deleteClusterSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteClusterSubnetGroupCmd).Standalone()
 
-	redshift_deleteClusterSubnetGroupCmd.Flags().String("cluster-subnet-group-name", "", "The name of the cluster subnet group name to be deleted.")
-	redshift_deleteClusterSubnetGroupCmd.MarkFlagRequired("cluster-subnet-group-name")
+		redshift_deleteClusterSubnetGroupCmd.Flags().String("cluster-subnet-group-name", "", "The name of the cluster subnet group name to be deleted.")
+		redshift_deleteClusterSubnetGroupCmd.MarkFlagRequired("cluster-subnet-group-name")
+	})
 	redshiftCmd.AddCommand(redshift_deleteClusterSubnetGroupCmd)
 }

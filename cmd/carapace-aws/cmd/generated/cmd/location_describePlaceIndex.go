@@ -12,9 +12,11 @@ var location_describePlaceIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_describePlaceIndexCmd).Standalone()
+	carapace.Gen(location_describePlaceIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_describePlaceIndexCmd).Standalone()
 
-	location_describePlaceIndexCmd.Flags().String("index-name", "", "The name of the place index resource.")
-	location_describePlaceIndexCmd.MarkFlagRequired("index-name")
+		location_describePlaceIndexCmd.Flags().String("index-name", "", "The name of the place index resource.")
+		location_describePlaceIndexCmd.MarkFlagRequired("index-name")
+	})
 	locationCmd.AddCommand(location_describePlaceIndexCmd)
 }

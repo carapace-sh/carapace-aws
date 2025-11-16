@@ -12,11 +12,13 @@ var comprehend_describeFlywheelIterationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeFlywheelIterationCmd).Standalone()
+	carapace.Gen(comprehend_describeFlywheelIterationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeFlywheelIterationCmd).Standalone()
 
-	comprehend_describeFlywheelIterationCmd.Flags().String("flywheel-arn", "", "")
-	comprehend_describeFlywheelIterationCmd.Flags().String("flywheel-iteration-id", "", "")
-	comprehend_describeFlywheelIterationCmd.MarkFlagRequired("flywheel-arn")
-	comprehend_describeFlywheelIterationCmd.MarkFlagRequired("flywheel-iteration-id")
+		comprehend_describeFlywheelIterationCmd.Flags().String("flywheel-arn", "", "")
+		comprehend_describeFlywheelIterationCmd.Flags().String("flywheel-iteration-id", "", "")
+		comprehend_describeFlywheelIterationCmd.MarkFlagRequired("flywheel-arn")
+		comprehend_describeFlywheelIterationCmd.MarkFlagRequired("flywheel-iteration-id")
+	})
 	comprehendCmd.AddCommand(comprehend_describeFlywheelIterationCmd)
 }

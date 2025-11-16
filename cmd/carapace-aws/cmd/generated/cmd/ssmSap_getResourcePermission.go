@@ -12,10 +12,12 @@ var ssmSap_getResourcePermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_getResourcePermissionCmd).Standalone()
+	carapace.Gen(ssmSap_getResourcePermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_getResourcePermissionCmd).Standalone()
 
-	ssmSap_getResourcePermissionCmd.Flags().String("action-type", "", "")
-	ssmSap_getResourcePermissionCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	ssmSap_getResourcePermissionCmd.MarkFlagRequired("resource-arn")
+		ssmSap_getResourcePermissionCmd.Flags().String("action-type", "", "")
+		ssmSap_getResourcePermissionCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		ssmSap_getResourcePermissionCmd.MarkFlagRequired("resource-arn")
+	})
 	ssmSapCmd.AddCommand(ssmSap_getResourcePermissionCmd)
 }

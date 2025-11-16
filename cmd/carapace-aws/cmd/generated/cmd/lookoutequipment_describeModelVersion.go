@@ -12,11 +12,13 @@ var lookoutequipment_describeModelVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_describeModelVersionCmd).Standalone()
+	carapace.Gen(lookoutequipment_describeModelVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_describeModelVersionCmd).Standalone()
 
-	lookoutequipment_describeModelVersionCmd.Flags().String("model-name", "", "The name of the machine learning model that this version belongs to.")
-	lookoutequipment_describeModelVersionCmd.Flags().String("model-version", "", "The version of the machine learning model.")
-	lookoutequipment_describeModelVersionCmd.MarkFlagRequired("model-name")
-	lookoutequipment_describeModelVersionCmd.MarkFlagRequired("model-version")
+		lookoutequipment_describeModelVersionCmd.Flags().String("model-name", "", "The name of the machine learning model that this version belongs to.")
+		lookoutequipment_describeModelVersionCmd.Flags().String("model-version", "", "The version of the machine learning model.")
+		lookoutequipment_describeModelVersionCmd.MarkFlagRequired("model-name")
+		lookoutequipment_describeModelVersionCmd.MarkFlagRequired("model-version")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_describeModelVersionCmd)
 }

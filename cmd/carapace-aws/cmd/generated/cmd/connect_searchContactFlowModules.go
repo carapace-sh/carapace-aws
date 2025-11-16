@@ -12,13 +12,15 @@ var connect_searchContactFlowModulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_searchContactFlowModulesCmd).Standalone()
+	carapace.Gen(connect_searchContactFlowModulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_searchContactFlowModulesCmd).Standalone()
 
-	connect_searchContactFlowModulesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_searchContactFlowModulesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_searchContactFlowModulesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_searchContactFlowModulesCmd.Flags().String("search-criteria", "", "The search criteria to be used to return flow modules.")
-	connect_searchContactFlowModulesCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
-	connect_searchContactFlowModulesCmd.MarkFlagRequired("instance-id")
+		connect_searchContactFlowModulesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_searchContactFlowModulesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_searchContactFlowModulesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_searchContactFlowModulesCmd.Flags().String("search-criteria", "", "The search criteria to be used to return flow modules.")
+		connect_searchContactFlowModulesCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
+		connect_searchContactFlowModulesCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_searchContactFlowModulesCmd)
 }

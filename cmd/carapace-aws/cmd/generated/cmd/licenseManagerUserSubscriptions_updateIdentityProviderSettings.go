@@ -12,12 +12,14 @@ var licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd = &cobra.C
 }
 
 func init() {
-	carapace.Gen(licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd).Standalone()
+	carapace.Gen(licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd).Standalone()
 
-	licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.Flags().String("identity-provider", "", "")
-	licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.Flags().String("identity-provider-arn", "", "The Amazon Resource Name (ARN) of the identity provider to update.")
-	licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.Flags().String("product", "", "The name of the user-based subscription product.")
-	licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.Flags().String("update-settings", "", "Updates the registered identity provider’s product related configuration settings.")
-	licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.MarkFlagRequired("update-settings")
+		licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.Flags().String("identity-provider", "", "")
+		licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.Flags().String("identity-provider-arn", "", "The Amazon Resource Name (ARN) of the identity provider to update.")
+		licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.Flags().String("product", "", "The name of the user-based subscription product.")
+		licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.Flags().String("update-settings", "", "Updates the registered identity provider’s product related configuration settings.")
+		licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd.MarkFlagRequired("update-settings")
+	})
 	licenseManagerUserSubscriptionsCmd.AddCommand(licenseManagerUserSubscriptions_updateIdentityProviderSettingsCmd)
 }

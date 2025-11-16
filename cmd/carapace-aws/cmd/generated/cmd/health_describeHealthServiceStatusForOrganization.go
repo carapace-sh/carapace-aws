@@ -12,7 +12,9 @@ var health_describeHealthServiceStatusForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(health_describeHealthServiceStatusForOrganizationCmd).Standalone()
+	carapace.Gen(health_describeHealthServiceStatusForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(health_describeHealthServiceStatusForOrganizationCmd).Standalone()
 
+	})
 	healthCmd.AddCommand(health_describeHealthServiceStatusForOrganizationCmd)
 }

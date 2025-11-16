@@ -12,12 +12,14 @@ var greengrass_getDeviceDefinitionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getDeviceDefinitionVersionCmd).Standalone()
+	carapace.Gen(greengrass_getDeviceDefinitionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getDeviceDefinitionVersionCmd).Standalone()
 
-	greengrass_getDeviceDefinitionVersionCmd.Flags().String("device-definition-id", "", "The ID of the device definition.")
-	greengrass_getDeviceDefinitionVersionCmd.Flags().String("device-definition-version-id", "", "The ID of the device definition version.")
-	greengrass_getDeviceDefinitionVersionCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
-	greengrass_getDeviceDefinitionVersionCmd.MarkFlagRequired("device-definition-id")
-	greengrass_getDeviceDefinitionVersionCmd.MarkFlagRequired("device-definition-version-id")
+		greengrass_getDeviceDefinitionVersionCmd.Flags().String("device-definition-id", "", "The ID of the device definition.")
+		greengrass_getDeviceDefinitionVersionCmd.Flags().String("device-definition-version-id", "", "The ID of the device definition version.")
+		greengrass_getDeviceDefinitionVersionCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
+		greengrass_getDeviceDefinitionVersionCmd.MarkFlagRequired("device-definition-id")
+		greengrass_getDeviceDefinitionVersionCmd.MarkFlagRequired("device-definition-version-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getDeviceDefinitionVersionCmd)
 }

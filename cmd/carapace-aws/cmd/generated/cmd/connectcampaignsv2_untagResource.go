@@ -12,11 +12,13 @@ var connectcampaignsv2_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_untagResourceCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_untagResourceCmd).Standalone()
 
-	connectcampaignsv2_untagResourceCmd.Flags().String("arn", "", "")
-	connectcampaignsv2_untagResourceCmd.Flags().String("tag-keys", "", "")
-	connectcampaignsv2_untagResourceCmd.MarkFlagRequired("arn")
-	connectcampaignsv2_untagResourceCmd.MarkFlagRequired("tag-keys")
+		connectcampaignsv2_untagResourceCmd.Flags().String("arn", "", "")
+		connectcampaignsv2_untagResourceCmd.Flags().String("tag-keys", "", "")
+		connectcampaignsv2_untagResourceCmd.MarkFlagRequired("arn")
+		connectcampaignsv2_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_untagResourceCmd)
 }

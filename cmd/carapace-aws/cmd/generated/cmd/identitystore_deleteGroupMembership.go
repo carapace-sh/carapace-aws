@@ -12,11 +12,13 @@ var identitystore_deleteGroupMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(identitystore_deleteGroupMembershipCmd).Standalone()
+	carapace.Gen(identitystore_deleteGroupMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(identitystore_deleteGroupMembershipCmd).Standalone()
 
-	identitystore_deleteGroupMembershipCmd.Flags().String("identity-store-id", "", "The globally unique identifier for the identity store.")
-	identitystore_deleteGroupMembershipCmd.Flags().String("membership-id", "", "The identifier for a `GroupMembership` in an identity store.")
-	identitystore_deleteGroupMembershipCmd.MarkFlagRequired("identity-store-id")
-	identitystore_deleteGroupMembershipCmd.MarkFlagRequired("membership-id")
+		identitystore_deleteGroupMembershipCmd.Flags().String("identity-store-id", "", "The globally unique identifier for the identity store.")
+		identitystore_deleteGroupMembershipCmd.Flags().String("membership-id", "", "The identifier for a `GroupMembership` in an identity store.")
+		identitystore_deleteGroupMembershipCmd.MarkFlagRequired("identity-store-id")
+		identitystore_deleteGroupMembershipCmd.MarkFlagRequired("membership-id")
+	})
 	identitystoreCmd.AddCommand(identitystore_deleteGroupMembershipCmd)
 }

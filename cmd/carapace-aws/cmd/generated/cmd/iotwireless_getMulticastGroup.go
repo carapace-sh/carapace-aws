@@ -12,9 +12,11 @@ var iotwireless_getMulticastGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getMulticastGroupCmd).Standalone()
+	carapace.Gen(iotwireless_getMulticastGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getMulticastGroupCmd).Standalone()
 
-	iotwireless_getMulticastGroupCmd.Flags().String("id", "", "")
-	iotwireless_getMulticastGroupCmd.MarkFlagRequired("id")
+		iotwireless_getMulticastGroupCmd.Flags().String("id", "", "")
+		iotwireless_getMulticastGroupCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getMulticastGroupCmd)
 }

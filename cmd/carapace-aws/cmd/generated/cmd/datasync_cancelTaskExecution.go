@@ -12,9 +12,11 @@ var datasync_cancelTaskExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_cancelTaskExecutionCmd).Standalone()
+	carapace.Gen(datasync_cancelTaskExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_cancelTaskExecutionCmd).Standalone()
 
-	datasync_cancelTaskExecutionCmd.Flags().String("task-execution-arn", "", "The Amazon Resource Name (ARN) of the task execution to stop.")
-	datasync_cancelTaskExecutionCmd.MarkFlagRequired("task-execution-arn")
+		datasync_cancelTaskExecutionCmd.Flags().String("task-execution-arn", "", "The Amazon Resource Name (ARN) of the task execution to stop.")
+		datasync_cancelTaskExecutionCmd.MarkFlagRequired("task-execution-arn")
+	})
 	datasyncCmd.AddCommand(datasync_cancelTaskExecutionCmd)
 }

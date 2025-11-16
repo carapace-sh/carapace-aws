@@ -12,19 +12,21 @@ var greengrass_createSoftwareUpdateJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createSoftwareUpdateJobCmd).Standalone()
+	carapace.Gen(greengrass_createSoftwareUpdateJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createSoftwareUpdateJobCmd).Standalone()
 
-	greengrass_createSoftwareUpdateJobCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createSoftwareUpdateJobCmd.Flags().String("s3-url-signer-role", "", "")
-	greengrass_createSoftwareUpdateJobCmd.Flags().String("software-to-update", "", "")
-	greengrass_createSoftwareUpdateJobCmd.Flags().String("update-agent-log-level", "", "")
-	greengrass_createSoftwareUpdateJobCmd.Flags().String("update-targets", "", "")
-	greengrass_createSoftwareUpdateJobCmd.Flags().String("update-targets-architecture", "", "")
-	greengrass_createSoftwareUpdateJobCmd.Flags().String("update-targets-operating-system", "", "")
-	greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("s3-url-signer-role")
-	greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("software-to-update")
-	greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("update-targets")
-	greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("update-targets-architecture")
-	greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("update-targets-operating-system")
+		greengrass_createSoftwareUpdateJobCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createSoftwareUpdateJobCmd.Flags().String("s3-url-signer-role", "", "")
+		greengrass_createSoftwareUpdateJobCmd.Flags().String("software-to-update", "", "")
+		greengrass_createSoftwareUpdateJobCmd.Flags().String("update-agent-log-level", "", "")
+		greengrass_createSoftwareUpdateJobCmd.Flags().String("update-targets", "", "")
+		greengrass_createSoftwareUpdateJobCmd.Flags().String("update-targets-architecture", "", "")
+		greengrass_createSoftwareUpdateJobCmd.Flags().String("update-targets-operating-system", "", "")
+		greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("s3-url-signer-role")
+		greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("software-to-update")
+		greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("update-targets")
+		greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("update-targets-architecture")
+		greengrass_createSoftwareUpdateJobCmd.MarkFlagRequired("update-targets-operating-system")
+	})
 	greengrassCmd.AddCommand(greengrass_createSoftwareUpdateJobCmd)
 }

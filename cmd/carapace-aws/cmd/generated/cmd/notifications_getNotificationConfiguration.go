@@ -12,9 +12,11 @@ var notifications_getNotificationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_getNotificationConfigurationCmd).Standalone()
+	carapace.Gen(notifications_getNotificationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_getNotificationConfigurationCmd).Standalone()
 
-	notifications_getNotificationConfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `NotificationConfiguration` to return.")
-	notifications_getNotificationConfigurationCmd.MarkFlagRequired("arn")
+		notifications_getNotificationConfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `NotificationConfiguration` to return.")
+		notifications_getNotificationConfigurationCmd.MarkFlagRequired("arn")
+	})
 	notificationsCmd.AddCommand(notifications_getNotificationConfigurationCmd)
 }

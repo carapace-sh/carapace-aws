@@ -12,9 +12,11 @@ var lookoutequipment_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(lookoutequipment_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_deleteResourcePolicyCmd).Standalone()
 
-	lookoutequipment_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which the resource policy should be deleted.")
-	lookoutequipment_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		lookoutequipment_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which the resource policy should be deleted.")
+		lookoutequipment_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_deleteResourcePolicyCmd)
 }

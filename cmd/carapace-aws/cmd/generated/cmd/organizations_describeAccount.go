@@ -12,9 +12,11 @@ var organizations_describeAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_describeAccountCmd).Standalone()
+	carapace.Gen(organizations_describeAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_describeAccountCmd).Standalone()
 
-	organizations_describeAccountCmd.Flags().String("account-id", "", "The unique identifier (ID) of the Amazon Web Services account that you want information about.")
-	organizations_describeAccountCmd.MarkFlagRequired("account-id")
+		organizations_describeAccountCmd.Flags().String("account-id", "", "The unique identifier (ID) of the Amazon Web Services account that you want information about.")
+		organizations_describeAccountCmd.MarkFlagRequired("account-id")
+	})
 	organizationsCmd.AddCommand(organizations_describeAccountCmd)
 }

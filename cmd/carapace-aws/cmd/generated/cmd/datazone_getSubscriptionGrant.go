@@ -12,11 +12,13 @@ var datazone_getSubscriptionGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getSubscriptionGrantCmd).Standalone()
+	carapace.Gen(datazone_getSubscriptionGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getSubscriptionGrantCmd).Standalone()
 
-	datazone_getSubscriptionGrantCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the subscription grant exists.")
-	datazone_getSubscriptionGrantCmd.Flags().String("identifier", "", "The ID of the subscription grant.")
-	datazone_getSubscriptionGrantCmd.MarkFlagRequired("domain-identifier")
-	datazone_getSubscriptionGrantCmd.MarkFlagRequired("identifier")
+		datazone_getSubscriptionGrantCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the subscription grant exists.")
+		datazone_getSubscriptionGrantCmd.Flags().String("identifier", "", "The ID of the subscription grant.")
+		datazone_getSubscriptionGrantCmd.MarkFlagRequired("domain-identifier")
+		datazone_getSubscriptionGrantCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getSubscriptionGrantCmd)
 }

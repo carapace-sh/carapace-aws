@@ -12,9 +12,11 @@ var dsql_getClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsql_getClusterCmd).Standalone()
+	carapace.Gen(dsql_getClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsql_getClusterCmd).Standalone()
 
-	dsql_getClusterCmd.Flags().String("identifier", "", "The ID of the cluster to retrieve.")
-	dsql_getClusterCmd.MarkFlagRequired("identifier")
+		dsql_getClusterCmd.Flags().String("identifier", "", "The ID of the cluster to retrieve.")
+		dsql_getClusterCmd.MarkFlagRequired("identifier")
+	})
 	dsqlCmd.AddCommand(dsql_getClusterCmd)
 }

@@ -12,13 +12,15 @@ var ds_describeUpdateDirectoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_describeUpdateDirectoryCmd).Standalone()
+	carapace.Gen(ds_describeUpdateDirectoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_describeUpdateDirectoryCmd).Standalone()
 
-	ds_describeUpdateDirectoryCmd.Flags().String("directory-id", "", "The unique identifier of the directory.")
-	ds_describeUpdateDirectoryCmd.Flags().String("next-token", "", "The `DescribeUpdateDirectoryResult`.")
-	ds_describeUpdateDirectoryCmd.Flags().String("region-name", "", "The name of the Region.")
-	ds_describeUpdateDirectoryCmd.Flags().String("update-type", "", "The type of updates you want to describe for the directory.")
-	ds_describeUpdateDirectoryCmd.MarkFlagRequired("directory-id")
-	ds_describeUpdateDirectoryCmd.MarkFlagRequired("update-type")
+		ds_describeUpdateDirectoryCmd.Flags().String("directory-id", "", "The unique identifier of the directory.")
+		ds_describeUpdateDirectoryCmd.Flags().String("next-token", "", "The `DescribeUpdateDirectoryResult`.")
+		ds_describeUpdateDirectoryCmd.Flags().String("region-name", "", "The name of the Region.")
+		ds_describeUpdateDirectoryCmd.Flags().String("update-type", "", "The type of updates you want to describe for the directory.")
+		ds_describeUpdateDirectoryCmd.MarkFlagRequired("directory-id")
+		ds_describeUpdateDirectoryCmd.MarkFlagRequired("update-type")
+	})
 	dsCmd.AddCommand(ds_describeUpdateDirectoryCmd)
 }

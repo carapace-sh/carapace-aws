@@ -12,9 +12,11 @@ var odb_deleteCloudExadataInfrastructureCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_deleteCloudExadataInfrastructureCmd).Standalone()
+	carapace.Gen(odb_deleteCloudExadataInfrastructureCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_deleteCloudExadataInfrastructureCmd).Standalone()
 
-	odb_deleteCloudExadataInfrastructureCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Exadata infrastructure to delete.")
-	odb_deleteCloudExadataInfrastructureCmd.MarkFlagRequired("cloud-exadata-infrastructure-id")
+		odb_deleteCloudExadataInfrastructureCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Exadata infrastructure to delete.")
+		odb_deleteCloudExadataInfrastructureCmd.MarkFlagRequired("cloud-exadata-infrastructure-id")
+	})
 	odbCmd.AddCommand(odb_deleteCloudExadataInfrastructureCmd)
 }

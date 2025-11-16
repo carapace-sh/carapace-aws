@@ -12,10 +12,12 @@ var neptunedata_getMlendpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_getMlendpointCmd).Standalone()
+	carapace.Gen(neptunedata_getMlendpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_getMlendpointCmd).Standalone()
 
-	neptunedata_getMlendpointCmd.Flags().String("id", "", "The unique identifier of the inference endpoint.")
-	neptunedata_getMlendpointCmd.Flags().String("neptune-iam-role-arn", "", "The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.")
-	neptunedata_getMlendpointCmd.MarkFlagRequired("id")
+		neptunedata_getMlendpointCmd.Flags().String("id", "", "The unique identifier of the inference endpoint.")
+		neptunedata_getMlendpointCmd.Flags().String("neptune-iam-role-arn", "", "The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.")
+		neptunedata_getMlendpointCmd.MarkFlagRequired("id")
+	})
 	neptunedataCmd.AddCommand(neptunedata_getMlendpointCmd)
 }

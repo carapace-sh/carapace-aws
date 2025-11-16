@@ -12,14 +12,16 @@ var rds_copyOptionGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_copyOptionGroupCmd).Standalone()
+	carapace.Gen(rds_copyOptionGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_copyOptionGroupCmd).Standalone()
 
-	rds_copyOptionGroupCmd.Flags().String("source-option-group-identifier", "", "The identifier for the source option group.")
-	rds_copyOptionGroupCmd.Flags().String("tags", "", "")
-	rds_copyOptionGroupCmd.Flags().String("target-option-group-description", "", "The description for the copied option group.")
-	rds_copyOptionGroupCmd.Flags().String("target-option-group-identifier", "", "The identifier for the copied option group.")
-	rds_copyOptionGroupCmd.MarkFlagRequired("source-option-group-identifier")
-	rds_copyOptionGroupCmd.MarkFlagRequired("target-option-group-description")
-	rds_copyOptionGroupCmd.MarkFlagRequired("target-option-group-identifier")
+		rds_copyOptionGroupCmd.Flags().String("source-option-group-identifier", "", "The identifier for the source option group.")
+		rds_copyOptionGroupCmd.Flags().String("tags", "", "")
+		rds_copyOptionGroupCmd.Flags().String("target-option-group-description", "", "The description for the copied option group.")
+		rds_copyOptionGroupCmd.Flags().String("target-option-group-identifier", "", "The identifier for the copied option group.")
+		rds_copyOptionGroupCmd.MarkFlagRequired("source-option-group-identifier")
+		rds_copyOptionGroupCmd.MarkFlagRequired("target-option-group-description")
+		rds_copyOptionGroupCmd.MarkFlagRequired("target-option-group-identifier")
+	})
 	rdsCmd.AddCommand(rds_copyOptionGroupCmd)
 }

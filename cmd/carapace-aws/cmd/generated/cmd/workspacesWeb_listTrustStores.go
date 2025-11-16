@@ -12,9 +12,11 @@ var workspacesWeb_listTrustStoresCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_listTrustStoresCmd).Standalone()
+	carapace.Gen(workspacesWeb_listTrustStoresCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_listTrustStoresCmd).Standalone()
 
-	workspacesWeb_listTrustStoresCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
-	workspacesWeb_listTrustStoresCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		workspacesWeb_listTrustStoresCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
+		workspacesWeb_listTrustStoresCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_listTrustStoresCmd)
 }

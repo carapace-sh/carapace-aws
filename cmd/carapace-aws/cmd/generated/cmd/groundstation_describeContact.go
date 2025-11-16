@@ -12,9 +12,11 @@ var groundstation_describeContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_describeContactCmd).Standalone()
+	carapace.Gen(groundstation_describeContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_describeContactCmd).Standalone()
 
-	groundstation_describeContactCmd.Flags().String("contact-id", "", "UUID of a contact.")
-	groundstation_describeContactCmd.MarkFlagRequired("contact-id")
+		groundstation_describeContactCmd.Flags().String("contact-id", "", "UUID of a contact.")
+		groundstation_describeContactCmd.MarkFlagRequired("contact-id")
+	})
 	groundstationCmd.AddCommand(groundstation_describeContactCmd)
 }

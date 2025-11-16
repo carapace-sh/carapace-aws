@@ -12,13 +12,15 @@ var connect_searchSecurityProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_searchSecurityProfilesCmd).Standalone()
+	carapace.Gen(connect_searchSecurityProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_searchSecurityProfilesCmd).Standalone()
 
-	connect_searchSecurityProfilesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_searchSecurityProfilesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_searchSecurityProfilesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_searchSecurityProfilesCmd.Flags().String("search-criteria", "", "The search criteria to be used to return security profiles.")
-	connect_searchSecurityProfilesCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
-	connect_searchSecurityProfilesCmd.MarkFlagRequired("instance-id")
+		connect_searchSecurityProfilesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_searchSecurityProfilesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_searchSecurityProfilesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_searchSecurityProfilesCmd.Flags().String("search-criteria", "", "The search criteria to be used to return security profiles.")
+		connect_searchSecurityProfilesCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
+		connect_searchSecurityProfilesCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_searchSecurityProfilesCmd)
 }

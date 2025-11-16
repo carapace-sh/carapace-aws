@@ -12,11 +12,13 @@ var qapps_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_untagResourceCmd).Standalone()
+	carapace.Gen(qapps_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_untagResourceCmd).Standalone()
 
-	qapps_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to disassociate the tag from.")
-	qapps_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to disassociate from the resource.")
-	qapps_untagResourceCmd.MarkFlagRequired("resource-arn")
-	qapps_untagResourceCmd.MarkFlagRequired("tag-keys")
+		qapps_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to disassociate the tag from.")
+		qapps_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to disassociate from the resource.")
+		qapps_untagResourceCmd.MarkFlagRequired("resource-arn")
+		qapps_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	qappsCmd.AddCommand(qapps_untagResourceCmd)
 }

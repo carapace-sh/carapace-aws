@@ -12,7 +12,9 @@ var securityhub_disassociateFromAdministratorAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_disassociateFromAdministratorAccountCmd).Standalone()
+	carapace.Gen(securityhub_disassociateFromAdministratorAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_disassociateFromAdministratorAccountCmd).Standalone()
 
+	})
 	securityhubCmd.AddCommand(securityhub_disassociateFromAdministratorAccountCmd)
 }

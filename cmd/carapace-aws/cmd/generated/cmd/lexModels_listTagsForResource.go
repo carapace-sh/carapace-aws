@@ -12,9 +12,11 @@ var lexModels_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_listTagsForResourceCmd).Standalone()
+	carapace.Gen(lexModels_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_listTagsForResourceCmd).Standalone()
 
-	lexModels_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to get a list of tags for.")
-	lexModels_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		lexModels_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to get a list of tags for.")
+		lexModels_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	lexModelsCmd.AddCommand(lexModels_listTagsForResourceCmd)
 }

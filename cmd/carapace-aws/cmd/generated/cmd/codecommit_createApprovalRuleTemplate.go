@@ -12,12 +12,14 @@ var codecommit_createApprovalRuleTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_createApprovalRuleTemplateCmd).Standalone()
+	carapace.Gen(codecommit_createApprovalRuleTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_createApprovalRuleTemplateCmd).Standalone()
 
-	codecommit_createApprovalRuleTemplateCmd.Flags().String("approval-rule-template-content", "", "The content of the approval rule that is created on pull requests in associated repositories.")
-	codecommit_createApprovalRuleTemplateCmd.Flags().String("approval-rule-template-description", "", "The description of the approval rule template.")
-	codecommit_createApprovalRuleTemplateCmd.Flags().String("approval-rule-template-name", "", "The name of the approval rule template.")
-	codecommit_createApprovalRuleTemplateCmd.MarkFlagRequired("approval-rule-template-content")
-	codecommit_createApprovalRuleTemplateCmd.MarkFlagRequired("approval-rule-template-name")
+		codecommit_createApprovalRuleTemplateCmd.Flags().String("approval-rule-template-content", "", "The content of the approval rule that is created on pull requests in associated repositories.")
+		codecommit_createApprovalRuleTemplateCmd.Flags().String("approval-rule-template-description", "", "The description of the approval rule template.")
+		codecommit_createApprovalRuleTemplateCmd.Flags().String("approval-rule-template-name", "", "The name of the approval rule template.")
+		codecommit_createApprovalRuleTemplateCmd.MarkFlagRequired("approval-rule-template-content")
+		codecommit_createApprovalRuleTemplateCmd.MarkFlagRequired("approval-rule-template-name")
+	})
 	codecommitCmd.AddCommand(codecommit_createApprovalRuleTemplateCmd)
 }

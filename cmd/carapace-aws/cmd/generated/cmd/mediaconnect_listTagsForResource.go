@@ -12,9 +12,11 @@ var mediaconnect_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_listTagsForResourceCmd).Standalone()
+	carapace.Gen(mediaconnect_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_listTagsForResourceCmd).Standalone()
 
-	mediaconnect_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the MediaConnect resource for which to list the tags.")
-	mediaconnect_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		mediaconnect_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the MediaConnect resource for which to list the tags.")
+		mediaconnect_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_listTagsForResourceCmd)
 }

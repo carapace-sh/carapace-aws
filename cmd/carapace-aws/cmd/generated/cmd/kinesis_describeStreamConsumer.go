@@ -12,10 +12,12 @@ var kinesis_describeStreamConsumerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_describeStreamConsumerCmd).Standalone()
+	carapace.Gen(kinesis_describeStreamConsumerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_describeStreamConsumerCmd).Standalone()
 
-	kinesis_describeStreamConsumerCmd.Flags().String("consumer-arn", "", "The ARN returned by Kinesis Data Streams when you registered the consumer.")
-	kinesis_describeStreamConsumerCmd.Flags().String("consumer-name", "", "The name that you gave to the consumer.")
-	kinesis_describeStreamConsumerCmd.Flags().String("stream-arn", "", "The ARN of the Kinesis data stream that the consumer is registered with.")
+		kinesis_describeStreamConsumerCmd.Flags().String("consumer-arn", "", "The ARN returned by Kinesis Data Streams when you registered the consumer.")
+		kinesis_describeStreamConsumerCmd.Flags().String("consumer-name", "", "The name that you gave to the consumer.")
+		kinesis_describeStreamConsumerCmd.Flags().String("stream-arn", "", "The ARN of the Kinesis data stream that the consumer is registered with.")
+	})
 	kinesisCmd.AddCommand(kinesis_describeStreamConsumerCmd)
 }

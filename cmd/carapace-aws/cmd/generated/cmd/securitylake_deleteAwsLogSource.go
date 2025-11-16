@@ -12,9 +12,11 @@ var securitylake_deleteAwsLogSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_deleteAwsLogSourceCmd).Standalone()
+	carapace.Gen(securitylake_deleteAwsLogSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_deleteAwsLogSourceCmd).Standalone()
 
-	securitylake_deleteAwsLogSourceCmd.Flags().String("sources", "", "Specify the natively-supported Amazon Web Services service to remove as a source in Security Lake.")
-	securitylake_deleteAwsLogSourceCmd.MarkFlagRequired("sources")
+		securitylake_deleteAwsLogSourceCmd.Flags().String("sources", "", "Specify the natively-supported Amazon Web Services service to remove as a source in Security Lake.")
+		securitylake_deleteAwsLogSourceCmd.MarkFlagRequired("sources")
+	})
 	securitylakeCmd.AddCommand(securitylake_deleteAwsLogSourceCmd)
 }

@@ -12,9 +12,11 @@ var gameliftstreams_deleteStreamGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftstreams_deleteStreamGroupCmd).Standalone()
+	carapace.Gen(gameliftstreams_deleteStreamGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftstreams_deleteStreamGroupCmd).Standalone()
 
-	gameliftstreams_deleteStreamGroupCmd.Flags().String("identifier", "", "An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.")
-	gameliftstreams_deleteStreamGroupCmd.MarkFlagRequired("identifier")
+		gameliftstreams_deleteStreamGroupCmd.Flags().String("identifier", "", "An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.")
+		gameliftstreams_deleteStreamGroupCmd.MarkFlagRequired("identifier")
+	})
 	gameliftstreamsCmd.AddCommand(gameliftstreams_deleteStreamGroupCmd)
 }

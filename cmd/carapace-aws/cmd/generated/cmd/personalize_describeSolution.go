@@ -12,9 +12,11 @@ var personalize_describeSolutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeSolutionCmd).Standalone()
+	carapace.Gen(personalize_describeSolutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeSolutionCmd).Standalone()
 
-	personalize_describeSolutionCmd.Flags().String("solution-arn", "", "The Amazon Resource Name (ARN) of the solution to describe.")
-	personalize_describeSolutionCmd.MarkFlagRequired("solution-arn")
+		personalize_describeSolutionCmd.Flags().String("solution-arn", "", "The Amazon Resource Name (ARN) of the solution to describe.")
+		personalize_describeSolutionCmd.MarkFlagRequired("solution-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeSolutionCmd)
 }

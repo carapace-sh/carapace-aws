@@ -12,9 +12,11 @@ var sagemaker_deleteProcessingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteProcessingJobCmd).Standalone()
+	carapace.Gen(sagemaker_deleteProcessingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteProcessingJobCmd).Standalone()
 
-	sagemaker_deleteProcessingJobCmd.Flags().String("processing-job-name", "", "The name of the processing job to delete.")
-	sagemaker_deleteProcessingJobCmd.MarkFlagRequired("processing-job-name")
+		sagemaker_deleteProcessingJobCmd.Flags().String("processing-job-name", "", "The name of the processing job to delete.")
+		sagemaker_deleteProcessingJobCmd.MarkFlagRequired("processing-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteProcessingJobCmd)
 }

@@ -12,7 +12,9 @@ var lakeformationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformationCmd).Standalone()
+	carapace.Gen(lakeformationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformationCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(lakeformationCmd)
 }

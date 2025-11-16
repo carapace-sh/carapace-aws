@@ -12,14 +12,16 @@ var cognitoIdp_updateResourceServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_updateResourceServerCmd).Standalone()
+	carapace.Gen(cognitoIdp_updateResourceServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_updateResourceServerCmd).Standalone()
 
-	cognitoIdp_updateResourceServerCmd.Flags().String("identifier", "", "A unique resource server identifier for the resource server.")
-	cognitoIdp_updateResourceServerCmd.Flags().String("name", "", "The updated name of the resource server.")
-	cognitoIdp_updateResourceServerCmd.Flags().String("scopes", "", "An array of updated custom scope names and descriptions that you want to associate with your resource server.")
-	cognitoIdp_updateResourceServerCmd.Flags().String("user-pool-id", "", "The ID of the user pool that contains the resource server that you want to update.")
-	cognitoIdp_updateResourceServerCmd.MarkFlagRequired("identifier")
-	cognitoIdp_updateResourceServerCmd.MarkFlagRequired("name")
-	cognitoIdp_updateResourceServerCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_updateResourceServerCmd.Flags().String("identifier", "", "A unique resource server identifier for the resource server.")
+		cognitoIdp_updateResourceServerCmd.Flags().String("name", "", "The updated name of the resource server.")
+		cognitoIdp_updateResourceServerCmd.Flags().String("scopes", "", "An array of updated custom scope names and descriptions that you want to associate with your resource server.")
+		cognitoIdp_updateResourceServerCmd.Flags().String("user-pool-id", "", "The ID of the user pool that contains the resource server that you want to update.")
+		cognitoIdp_updateResourceServerCmd.MarkFlagRequired("identifier")
+		cognitoIdp_updateResourceServerCmd.MarkFlagRequired("name")
+		cognitoIdp_updateResourceServerCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_updateResourceServerCmd)
 }

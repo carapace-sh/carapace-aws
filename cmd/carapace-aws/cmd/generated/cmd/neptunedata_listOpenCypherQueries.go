@@ -12,10 +12,12 @@ var neptunedata_listOpenCypherQueriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_listOpenCypherQueriesCmd).Standalone()
+	carapace.Gen(neptunedata_listOpenCypherQueriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_listOpenCypherQueriesCmd).Standalone()
 
-	neptunedata_listOpenCypherQueriesCmd.Flags().Bool("include-waiting", false, "When set to `TRUE` and other parameters are not present, causes status information to be returned for waiting queries as well as for running queries.")
-	neptunedata_listOpenCypherQueriesCmd.Flags().Bool("no-include-waiting", false, "When set to `TRUE` and other parameters are not present, causes status information to be returned for waiting queries as well as for running queries.")
-	neptunedata_listOpenCypherQueriesCmd.Flag("no-include-waiting").Hidden = true
+		neptunedata_listOpenCypherQueriesCmd.Flags().Bool("include-waiting", false, "When set to `TRUE` and other parameters are not present, causes status information to be returned for waiting queries as well as for running queries.")
+		neptunedata_listOpenCypherQueriesCmd.Flags().Bool("no-include-waiting", false, "When set to `TRUE` and other parameters are not present, causes status information to be returned for waiting queries as well as for running queries.")
+		neptunedata_listOpenCypherQueriesCmd.Flag("no-include-waiting").Hidden = true
+	})
 	neptunedataCmd.AddCommand(neptunedata_listOpenCypherQueriesCmd)
 }

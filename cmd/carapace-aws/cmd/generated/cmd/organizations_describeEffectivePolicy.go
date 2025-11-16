@@ -12,10 +12,12 @@ var organizations_describeEffectivePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_describeEffectivePolicyCmd).Standalone()
+	carapace.Gen(organizations_describeEffectivePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_describeEffectivePolicyCmd).Standalone()
 
-	organizations_describeEffectivePolicyCmd.Flags().String("policy-type", "", "The type of policy that you want information about.")
-	organizations_describeEffectivePolicyCmd.Flags().String("target-id", "", "When you're signed in as the management account, specify the ID of the account that you want details about.")
-	organizations_describeEffectivePolicyCmd.MarkFlagRequired("policy-type")
+		organizations_describeEffectivePolicyCmd.Flags().String("policy-type", "", "The type of policy that you want information about.")
+		organizations_describeEffectivePolicyCmd.Flags().String("target-id", "", "When you're signed in as the management account, specify the ID of the account that you want details about.")
+		organizations_describeEffectivePolicyCmd.MarkFlagRequired("policy-type")
+	})
 	organizationsCmd.AddCommand(organizations_describeEffectivePolicyCmd)
 }

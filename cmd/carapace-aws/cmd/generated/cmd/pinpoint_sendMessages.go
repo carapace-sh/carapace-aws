@@ -12,11 +12,13 @@ var pinpoint_sendMessagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_sendMessagesCmd).Standalone()
+	carapace.Gen(pinpoint_sendMessagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_sendMessagesCmd).Standalone()
 
-	pinpoint_sendMessagesCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_sendMessagesCmd.Flags().String("message-request", "", "")
-	pinpoint_sendMessagesCmd.MarkFlagRequired("application-id")
-	pinpoint_sendMessagesCmd.MarkFlagRequired("message-request")
+		pinpoint_sendMessagesCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_sendMessagesCmd.Flags().String("message-request", "", "")
+		pinpoint_sendMessagesCmd.MarkFlagRequired("application-id")
+		pinpoint_sendMessagesCmd.MarkFlagRequired("message-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_sendMessagesCmd)
 }

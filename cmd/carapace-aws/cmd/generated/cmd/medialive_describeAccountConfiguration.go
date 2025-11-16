@@ -12,7 +12,9 @@ var medialive_describeAccountConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeAccountConfigurationCmd).Standalone()
+	carapace.Gen(medialive_describeAccountConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeAccountConfigurationCmd).Standalone()
 
+	})
 	medialiveCmd.AddCommand(medialive_describeAccountConfigurationCmd)
 }

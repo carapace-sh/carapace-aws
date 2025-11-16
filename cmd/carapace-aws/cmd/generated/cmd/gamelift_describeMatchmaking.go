@@ -12,9 +12,11 @@ var gamelift_describeMatchmakingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeMatchmakingCmd).Standalone()
+	carapace.Gen(gamelift_describeMatchmakingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeMatchmakingCmd).Standalone()
 
-	gamelift_describeMatchmakingCmd.Flags().String("ticket-ids", "", "A unique identifier for a matchmaking ticket.")
-	gamelift_describeMatchmakingCmd.MarkFlagRequired("ticket-ids")
+		gamelift_describeMatchmakingCmd.Flags().String("ticket-ids", "", "A unique identifier for a matchmaking ticket.")
+		gamelift_describeMatchmakingCmd.MarkFlagRequired("ticket-ids")
+	})
 	gameliftCmd.AddCommand(gamelift_describeMatchmakingCmd)
 }

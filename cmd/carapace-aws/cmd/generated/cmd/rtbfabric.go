@@ -12,7 +12,9 @@ var rtbfabricCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabricCmd).Standalone()
+	carapace.Gen(rtbfabricCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabricCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(rtbfabricCmd)
 }

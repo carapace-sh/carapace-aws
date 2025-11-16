@@ -12,14 +12,16 @@ var accessanalyzer_listAccessPreviewFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_listAccessPreviewFindingsCmd).Standalone()
+	carapace.Gen(accessanalyzer_listAccessPreviewFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_listAccessPreviewFindingsCmd).Standalone()
 
-	accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("access-preview-id", "", "The unique ID for the access preview.")
-	accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("analyzer-arn", "", "The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access.")
-	accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("filter", "", "Criteria to filter the returned findings.")
-	accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("next-token", "", "A token used for pagination of results returned.")
-	accessanalyzer_listAccessPreviewFindingsCmd.MarkFlagRequired("access-preview-id")
-	accessanalyzer_listAccessPreviewFindingsCmd.MarkFlagRequired("analyzer-arn")
+		accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("access-preview-id", "", "The unique ID for the access preview.")
+		accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("analyzer-arn", "", "The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access.")
+		accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("filter", "", "Criteria to filter the returned findings.")
+		accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		accessanalyzer_listAccessPreviewFindingsCmd.Flags().String("next-token", "", "A token used for pagination of results returned.")
+		accessanalyzer_listAccessPreviewFindingsCmd.MarkFlagRequired("access-preview-id")
+		accessanalyzer_listAccessPreviewFindingsCmd.MarkFlagRequired("analyzer-arn")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_listAccessPreviewFindingsCmd)
 }

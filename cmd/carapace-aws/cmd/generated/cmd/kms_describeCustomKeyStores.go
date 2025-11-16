@@ -12,11 +12,13 @@ var kms_describeCustomKeyStoresCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_describeCustomKeyStoresCmd).Standalone()
+	carapace.Gen(kms_describeCustomKeyStoresCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_describeCustomKeyStoresCmd).Standalone()
 
-	kms_describeCustomKeyStoresCmd.Flags().String("custom-key-store-id", "", "Gets only information about the specified custom key store.")
-	kms_describeCustomKeyStoresCmd.Flags().String("custom-key-store-name", "", "Gets only information about the specified custom key store.")
-	kms_describeCustomKeyStoresCmd.Flags().String("limit", "", "Use this parameter to specify the maximum number of items to return.")
-	kms_describeCustomKeyStoresCmd.Flags().String("marker", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
+		kms_describeCustomKeyStoresCmd.Flags().String("custom-key-store-id", "", "Gets only information about the specified custom key store.")
+		kms_describeCustomKeyStoresCmd.Flags().String("custom-key-store-name", "", "Gets only information about the specified custom key store.")
+		kms_describeCustomKeyStoresCmd.Flags().String("limit", "", "Use this parameter to specify the maximum number of items to return.")
+		kms_describeCustomKeyStoresCmd.Flags().String("marker", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
+	})
 	kmsCmd.AddCommand(kms_describeCustomKeyStoresCmd)
 }

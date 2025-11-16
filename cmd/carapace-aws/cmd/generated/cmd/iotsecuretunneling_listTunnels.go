@@ -12,10 +12,12 @@ var iotsecuretunneling_listTunnelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsecuretunneling_listTunnelsCmd).Standalone()
+	carapace.Gen(iotsecuretunneling_listTunnelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsecuretunneling_listTunnelsCmd).Standalone()
 
-	iotsecuretunneling_listTunnelsCmd.Flags().String("max-results", "", "The maximum number of results to return at once.")
-	iotsecuretunneling_listTunnelsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.")
-	iotsecuretunneling_listTunnelsCmd.Flags().String("thing-name", "", "The name of the IoT thing associated with the destination device.")
+		iotsecuretunneling_listTunnelsCmd.Flags().String("max-results", "", "The maximum number of results to return at once.")
+		iotsecuretunneling_listTunnelsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.")
+		iotsecuretunneling_listTunnelsCmd.Flags().String("thing-name", "", "The name of the IoT thing associated with the destination device.")
+	})
 	iotsecuretunnelingCmd.AddCommand(iotsecuretunneling_listTunnelsCmd)
 }

@@ -12,9 +12,11 @@ var iotManagedIntegrations_getNotificationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getNotificationConfigurationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getNotificationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getNotificationConfigurationCmd).Standalone()
 
-	iotManagedIntegrations_getNotificationConfigurationCmd.Flags().String("event-type", "", "The type of event triggering a device notification to the customer-managed destination.")
-	iotManagedIntegrations_getNotificationConfigurationCmd.MarkFlagRequired("event-type")
+		iotManagedIntegrations_getNotificationConfigurationCmd.Flags().String("event-type", "", "The type of event triggering a device notification to the customer-managed destination.")
+		iotManagedIntegrations_getNotificationConfigurationCmd.MarkFlagRequired("event-type")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getNotificationConfigurationCmd)
 }

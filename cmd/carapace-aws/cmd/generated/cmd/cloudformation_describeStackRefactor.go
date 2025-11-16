@@ -12,9 +12,11 @@ var cloudformation_describeStackRefactorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeStackRefactorCmd).Standalone()
+	carapace.Gen(cloudformation_describeStackRefactorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeStackRefactorCmd).Standalone()
 
-	cloudformation_describeStackRefactorCmd.Flags().String("stack-refactor-id", "", "The ID associated with the stack refactor created from the [CreateStackRefactor]() action.")
-	cloudformation_describeStackRefactorCmd.MarkFlagRequired("stack-refactor-id")
+		cloudformation_describeStackRefactorCmd.Flags().String("stack-refactor-id", "", "The ID associated with the stack refactor created from the [CreateStackRefactor]() action.")
+		cloudformation_describeStackRefactorCmd.MarkFlagRequired("stack-refactor-id")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeStackRefactorCmd)
 }

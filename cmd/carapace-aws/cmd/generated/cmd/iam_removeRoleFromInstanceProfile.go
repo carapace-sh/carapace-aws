@@ -12,11 +12,13 @@ var iam_removeRoleFromInstanceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_removeRoleFromInstanceProfileCmd).Standalone()
+	carapace.Gen(iam_removeRoleFromInstanceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_removeRoleFromInstanceProfileCmd).Standalone()
 
-	iam_removeRoleFromInstanceProfileCmd.Flags().String("instance-profile-name", "", "The name of the instance profile to update.")
-	iam_removeRoleFromInstanceProfileCmd.Flags().String("role-name", "", "The name of the role to remove.")
-	iam_removeRoleFromInstanceProfileCmd.MarkFlagRequired("instance-profile-name")
-	iam_removeRoleFromInstanceProfileCmd.MarkFlagRequired("role-name")
+		iam_removeRoleFromInstanceProfileCmd.Flags().String("instance-profile-name", "", "The name of the instance profile to update.")
+		iam_removeRoleFromInstanceProfileCmd.Flags().String("role-name", "", "The name of the role to remove.")
+		iam_removeRoleFromInstanceProfileCmd.MarkFlagRequired("instance-profile-name")
+		iam_removeRoleFromInstanceProfileCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_removeRoleFromInstanceProfileCmd)
 }

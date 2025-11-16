@@ -12,9 +12,11 @@ var route53domains_getDomainDetailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_getDomainDetailCmd).Standalone()
+	carapace.Gen(route53domains_getDomainDetailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_getDomainDetailCmd).Standalone()
 
-	route53domains_getDomainDetailCmd.Flags().String("domain-name", "", "The name of the domain that you want to get detailed information about.")
-	route53domains_getDomainDetailCmd.MarkFlagRequired("domain-name")
+		route53domains_getDomainDetailCmd.Flags().String("domain-name", "", "The name of the domain that you want to get detailed information about.")
+		route53domains_getDomainDetailCmd.MarkFlagRequired("domain-name")
+	})
 	route53domainsCmd.AddCommand(route53domains_getDomainDetailCmd)
 }

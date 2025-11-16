@@ -12,11 +12,13 @@ var datazone_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_tagResourceCmd).Standalone()
+	carapace.Gen(datazone_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_tagResourceCmd).Standalone()
 
-	datazone_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be tagged in Amazon DataZone.")
-	datazone_tagResourceCmd.Flags().String("tags", "", "Specifies the tags for the `TagResource` action.")
-	datazone_tagResourceCmd.MarkFlagRequired("resource-arn")
-	datazone_tagResourceCmd.MarkFlagRequired("tags")
+		datazone_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be tagged in Amazon DataZone.")
+		datazone_tagResourceCmd.Flags().String("tags", "", "Specifies the tags for the `TagResource` action.")
+		datazone_tagResourceCmd.MarkFlagRequired("resource-arn")
+		datazone_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	datazoneCmd.AddCommand(datazone_tagResourceCmd)
 }

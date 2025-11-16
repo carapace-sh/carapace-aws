@@ -12,9 +12,11 @@ var ses_createConfigurationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_createConfigurationSetCmd).Standalone()
+	carapace.Gen(ses_createConfigurationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_createConfigurationSetCmd).Standalone()
 
-	ses_createConfigurationSetCmd.Flags().String("configuration-set", "", "A data structure that contains the name of the configuration set.")
-	ses_createConfigurationSetCmd.MarkFlagRequired("configuration-set")
+		ses_createConfigurationSetCmd.Flags().String("configuration-set", "", "A data structure that contains the name of the configuration set.")
+		ses_createConfigurationSetCmd.MarkFlagRequired("configuration-set")
+	})
 	sesCmd.AddCommand(ses_createConfigurationSetCmd)
 }

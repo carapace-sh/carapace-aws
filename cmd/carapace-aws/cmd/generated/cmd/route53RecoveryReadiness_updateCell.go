@@ -12,11 +12,13 @@ var route53RecoveryReadiness_updateCellCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_updateCellCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_updateCellCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_updateCellCmd).Standalone()
 
-	route53RecoveryReadiness_updateCellCmd.Flags().String("cell-name", "", "The name of the cell.")
-	route53RecoveryReadiness_updateCellCmd.Flags().String("cells", "", "A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.")
-	route53RecoveryReadiness_updateCellCmd.MarkFlagRequired("cell-name")
-	route53RecoveryReadiness_updateCellCmd.MarkFlagRequired("cells")
+		route53RecoveryReadiness_updateCellCmd.Flags().String("cell-name", "", "The name of the cell.")
+		route53RecoveryReadiness_updateCellCmd.Flags().String("cells", "", "A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.")
+		route53RecoveryReadiness_updateCellCmd.MarkFlagRequired("cell-name")
+		route53RecoveryReadiness_updateCellCmd.MarkFlagRequired("cells")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_updateCellCmd)
 }

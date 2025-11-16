@@ -12,10 +12,12 @@ var bedrockDataAutomation_createBlueprintVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockDataAutomation_createBlueprintVersionCmd).Standalone()
+	carapace.Gen(bedrockDataAutomation_createBlueprintVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockDataAutomation_createBlueprintVersionCmd).Standalone()
 
-	bedrockDataAutomation_createBlueprintVersionCmd.Flags().String("blueprint-arn", "", "ARN generated at the server side when a Blueprint is created")
-	bedrockDataAutomation_createBlueprintVersionCmd.Flags().String("client-token", "", "")
-	bedrockDataAutomation_createBlueprintVersionCmd.MarkFlagRequired("blueprint-arn")
+		bedrockDataAutomation_createBlueprintVersionCmd.Flags().String("blueprint-arn", "", "ARN generated at the server side when a Blueprint is created")
+		bedrockDataAutomation_createBlueprintVersionCmd.Flags().String("client-token", "", "")
+		bedrockDataAutomation_createBlueprintVersionCmd.MarkFlagRequired("blueprint-arn")
+	})
 	bedrockDataAutomationCmd.AddCommand(bedrockDataAutomation_createBlueprintVersionCmd)
 }

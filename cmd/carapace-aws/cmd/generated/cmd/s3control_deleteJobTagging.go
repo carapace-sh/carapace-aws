@@ -12,11 +12,13 @@ var s3control_deleteJobTaggingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_deleteJobTaggingCmd).Standalone()
+	carapace.Gen(s3control_deleteJobTaggingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_deleteJobTaggingCmd).Standalone()
 
-	s3control_deleteJobTaggingCmd.Flags().String("account-id", "", "The Amazon Web Services account ID associated with the S3 Batch Operations job.")
-	s3control_deleteJobTaggingCmd.Flags().String("job-id", "", "The ID for the S3 Batch Operations job whose tags you want to delete.")
-	s3control_deleteJobTaggingCmd.MarkFlagRequired("account-id")
-	s3control_deleteJobTaggingCmd.MarkFlagRequired("job-id")
+		s3control_deleteJobTaggingCmd.Flags().String("account-id", "", "The Amazon Web Services account ID associated with the S3 Batch Operations job.")
+		s3control_deleteJobTaggingCmd.Flags().String("job-id", "", "The ID for the S3 Batch Operations job whose tags you want to delete.")
+		s3control_deleteJobTaggingCmd.MarkFlagRequired("account-id")
+		s3control_deleteJobTaggingCmd.MarkFlagRequired("job-id")
+	})
 	s3controlCmd.AddCommand(s3control_deleteJobTaggingCmd)
 }

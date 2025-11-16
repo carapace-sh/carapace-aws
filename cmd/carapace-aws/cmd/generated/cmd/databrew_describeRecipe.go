@@ -12,10 +12,12 @@ var databrew_describeRecipeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_describeRecipeCmd).Standalone()
+	carapace.Gen(databrew_describeRecipeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_describeRecipeCmd).Standalone()
 
-	databrew_describeRecipeCmd.Flags().String("name", "", "The name of the recipe to be described.")
-	databrew_describeRecipeCmd.Flags().String("recipe-version", "", "The recipe version identifier.")
-	databrew_describeRecipeCmd.MarkFlagRequired("name")
+		databrew_describeRecipeCmd.Flags().String("name", "", "The name of the recipe to be described.")
+		databrew_describeRecipeCmd.Flags().String("recipe-version", "", "The recipe version identifier.")
+		databrew_describeRecipeCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_describeRecipeCmd)
 }

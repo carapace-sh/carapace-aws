@@ -12,11 +12,13 @@ var iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd = &cobra.C
 }
 
 func init() {
-	carapace.Gen(iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd).Standalone()
+	carapace.Gen(iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd).Standalone()
 
-	iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd.Flags().String("id", "", "")
-	iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd.Flags().String("query-string", "", "")
-	iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd.Flags().String("tags", "", "")
-	iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd.MarkFlagRequired("id")
+		iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd.Flags().String("id", "", "")
+		iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd.Flags().String("query-string", "", "")
+		iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd.Flags().String("tags", "", "")
+		iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_startBulkAssociateWirelessDeviceWithMulticastGroupCmd)
 }

@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_getCodeInterpreterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_getCodeInterpreterCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_getCodeInterpreterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_getCodeInterpreterCmd).Standalone()
 
-	bedrockAgentcoreControl_getCodeInterpreterCmd.Flags().String("code-interpreter-id", "", "The unique identifier of the code interpreter to retrieve.")
-	bedrockAgentcoreControl_getCodeInterpreterCmd.MarkFlagRequired("code-interpreter-id")
+		bedrockAgentcoreControl_getCodeInterpreterCmd.Flags().String("code-interpreter-id", "", "The unique identifier of the code interpreter to retrieve.")
+		bedrockAgentcoreControl_getCodeInterpreterCmd.MarkFlagRequired("code-interpreter-id")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_getCodeInterpreterCmd)
 }

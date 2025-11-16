@@ -12,9 +12,11 @@ var oam_listSinksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_listSinksCmd).Standalone()
+	carapace.Gen(oam_listSinksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_listSinksCmd).Standalone()
 
-	oam_listSinksCmd.Flags().String("max-results", "", "Limits the number of returned links to the specified number.")
-	oam_listSinksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		oam_listSinksCmd.Flags().String("max-results", "", "Limits the number of returned links to the specified number.")
+		oam_listSinksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	oamCmd.AddCommand(oam_listSinksCmd)
 }

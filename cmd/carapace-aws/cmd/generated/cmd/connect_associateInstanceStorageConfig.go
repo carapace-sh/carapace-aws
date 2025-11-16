@@ -12,14 +12,16 @@ var connect_associateInstanceStorageConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_associateInstanceStorageConfigCmd).Standalone()
+	carapace.Gen(connect_associateInstanceStorageConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_associateInstanceStorageConfigCmd).Standalone()
 
-	connect_associateInstanceStorageConfigCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connect_associateInstanceStorageConfigCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_associateInstanceStorageConfigCmd.Flags().String("resource-type", "", "A valid resource type.")
-	connect_associateInstanceStorageConfigCmd.Flags().String("storage-config", "", "A valid storage type.")
-	connect_associateInstanceStorageConfigCmd.MarkFlagRequired("instance-id")
-	connect_associateInstanceStorageConfigCmd.MarkFlagRequired("resource-type")
-	connect_associateInstanceStorageConfigCmd.MarkFlagRequired("storage-config")
+		connect_associateInstanceStorageConfigCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connect_associateInstanceStorageConfigCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_associateInstanceStorageConfigCmd.Flags().String("resource-type", "", "A valid resource type.")
+		connect_associateInstanceStorageConfigCmd.Flags().String("storage-config", "", "A valid storage type.")
+		connect_associateInstanceStorageConfigCmd.MarkFlagRequired("instance-id")
+		connect_associateInstanceStorageConfigCmd.MarkFlagRequired("resource-type")
+		connect_associateInstanceStorageConfigCmd.MarkFlagRequired("storage-config")
+	})
 	connectCmd.AddCommand(connect_associateInstanceStorageConfigCmd)
 }

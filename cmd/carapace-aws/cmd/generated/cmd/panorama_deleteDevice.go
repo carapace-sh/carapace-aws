@@ -12,9 +12,11 @@ var panorama_deleteDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_deleteDeviceCmd).Standalone()
+	carapace.Gen(panorama_deleteDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_deleteDeviceCmd).Standalone()
 
-	panorama_deleteDeviceCmd.Flags().String("device-id", "", "The device's ID.")
-	panorama_deleteDeviceCmd.MarkFlagRequired("device-id")
+		panorama_deleteDeviceCmd.Flags().String("device-id", "", "The device's ID.")
+		panorama_deleteDeviceCmd.MarkFlagRequired("device-id")
+	})
 	panoramaCmd.AddCommand(panorama_deleteDeviceCmd)
 }

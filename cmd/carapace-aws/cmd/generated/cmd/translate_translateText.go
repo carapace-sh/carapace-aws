@@ -12,15 +12,17 @@ var translate_translateTextCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_translateTextCmd).Standalone()
+	carapace.Gen(translate_translateTextCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_translateTextCmd).Standalone()
 
-	translate_translateTextCmd.Flags().String("settings", "", "Settings to configure your translation output.")
-	translate_translateTextCmd.Flags().String("source-language-code", "", "The language code for the language of the source text.")
-	translate_translateTextCmd.Flags().String("target-language-code", "", "The language code requested for the language of the target text.")
-	translate_translateTextCmd.Flags().String("terminology-names", "", "The name of a terminology list file to add to the translation job.")
-	translate_translateTextCmd.Flags().String("text", "", "The text to translate.")
-	translate_translateTextCmd.MarkFlagRequired("source-language-code")
-	translate_translateTextCmd.MarkFlagRequired("target-language-code")
-	translate_translateTextCmd.MarkFlagRequired("text")
+		translate_translateTextCmd.Flags().String("settings", "", "Settings to configure your translation output.")
+		translate_translateTextCmd.Flags().String("source-language-code", "", "The language code for the language of the source text.")
+		translate_translateTextCmd.Flags().String("target-language-code", "", "The language code requested for the language of the target text.")
+		translate_translateTextCmd.Flags().String("terminology-names", "", "The name of a terminology list file to add to the translation job.")
+		translate_translateTextCmd.Flags().String("text", "", "The text to translate.")
+		translate_translateTextCmd.MarkFlagRequired("source-language-code")
+		translate_translateTextCmd.MarkFlagRequired("target-language-code")
+		translate_translateTextCmd.MarkFlagRequired("text")
+	})
 	translateCmd.AddCommand(translate_translateTextCmd)
 }

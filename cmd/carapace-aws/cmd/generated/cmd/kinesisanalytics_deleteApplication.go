@@ -12,11 +12,13 @@ var kinesisanalytics_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_deleteApplicationCmd).Standalone()
+	carapace.Gen(kinesisanalytics_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_deleteApplicationCmd).Standalone()
 
-	kinesisanalytics_deleteApplicationCmd.Flags().String("application-name", "", "Name of the Amazon Kinesis Analytics application to delete.")
-	kinesisanalytics_deleteApplicationCmd.Flags().String("create-timestamp", "", "You can use the `DescribeApplication` operation to get this value.")
-	kinesisanalytics_deleteApplicationCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_deleteApplicationCmd.MarkFlagRequired("create-timestamp")
+		kinesisanalytics_deleteApplicationCmd.Flags().String("application-name", "", "Name of the Amazon Kinesis Analytics application to delete.")
+		kinesisanalytics_deleteApplicationCmd.Flags().String("create-timestamp", "", "You can use the `DescribeApplication` operation to get this value.")
+		kinesisanalytics_deleteApplicationCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_deleteApplicationCmd.MarkFlagRequired("create-timestamp")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_deleteApplicationCmd)
 }

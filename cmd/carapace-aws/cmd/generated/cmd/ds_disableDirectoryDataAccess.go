@@ -12,9 +12,11 @@ var ds_disableDirectoryDataAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_disableDirectoryDataAccessCmd).Standalone()
+	carapace.Gen(ds_disableDirectoryDataAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_disableDirectoryDataAccessCmd).Standalone()
 
-	ds_disableDirectoryDataAccessCmd.Flags().String("directory-id", "", "The directory identifier.")
-	ds_disableDirectoryDataAccessCmd.MarkFlagRequired("directory-id")
+		ds_disableDirectoryDataAccessCmd.Flags().String("directory-id", "", "The directory identifier.")
+		ds_disableDirectoryDataAccessCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_disableDirectoryDataAccessCmd)
 }

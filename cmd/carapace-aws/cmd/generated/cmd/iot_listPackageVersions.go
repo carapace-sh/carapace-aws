@@ -12,12 +12,14 @@ var iot_listPackageVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listPackageVersionsCmd).Standalone()
+	carapace.Gen(iot_listPackageVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listPackageVersionsCmd).Standalone()
 
-	iot_listPackageVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_listPackageVersionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	iot_listPackageVersionsCmd.Flags().String("package-name", "", "The name of the target software package.")
-	iot_listPackageVersionsCmd.Flags().String("status", "", "The status of the package version.")
-	iot_listPackageVersionsCmd.MarkFlagRequired("package-name")
+		iot_listPackageVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_listPackageVersionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iot_listPackageVersionsCmd.Flags().String("package-name", "", "The name of the target software package.")
+		iot_listPackageVersionsCmd.Flags().String("status", "", "The status of the package version.")
+		iot_listPackageVersionsCmd.MarkFlagRequired("package-name")
+	})
 	iotCmd.AddCommand(iot_listPackageVersionsCmd)
 }

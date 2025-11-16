@@ -12,11 +12,13 @@ var customerProfiles_listEventTriggersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_listEventTriggersCmd).Standalone()
+	carapace.Gen(customerProfiles_listEventTriggersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_listEventTriggersCmd).Standalone()
 
-	customerProfiles_listEventTriggersCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_listEventTriggersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	customerProfiles_listEventTriggersCmd.Flags().String("next-token", "", "The pagination token to use with ListEventTriggers.")
-	customerProfiles_listEventTriggersCmd.MarkFlagRequired("domain-name")
+		customerProfiles_listEventTriggersCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_listEventTriggersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		customerProfiles_listEventTriggersCmd.Flags().String("next-token", "", "The pagination token to use with ListEventTriggers.")
+		customerProfiles_listEventTriggersCmd.MarkFlagRequired("domain-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_listEventTriggersCmd)
 }

@@ -12,8 +12,10 @@ var networkFirewall_describeFirewallMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_describeFirewallMetadataCmd).Standalone()
+	carapace.Gen(networkFirewall_describeFirewallMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_describeFirewallMetadataCmd).Standalone()
 
-	networkFirewall_describeFirewallMetadataCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
+		networkFirewall_describeFirewallMetadataCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_describeFirewallMetadataCmd)
 }

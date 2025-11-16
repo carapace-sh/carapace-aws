@@ -12,12 +12,14 @@ var ec2_acceptVpcPeeringConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_acceptVpcPeeringConnectionCmd).Standalone()
+	carapace.Gen(ec2_acceptVpcPeeringConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_acceptVpcPeeringConnectionCmd).Standalone()
 
-	ec2_acceptVpcPeeringConnectionCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_acceptVpcPeeringConnectionCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_acceptVpcPeeringConnectionCmd.Flags().String("vpc-peering-connection-id", "", "The ID of the VPC peering connection.")
-	ec2_acceptVpcPeeringConnectionCmd.Flag("no-dry-run").Hidden = true
-	ec2_acceptVpcPeeringConnectionCmd.MarkFlagRequired("vpc-peering-connection-id")
+		ec2_acceptVpcPeeringConnectionCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_acceptVpcPeeringConnectionCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_acceptVpcPeeringConnectionCmd.Flags().String("vpc-peering-connection-id", "", "The ID of the VPC peering connection.")
+		ec2_acceptVpcPeeringConnectionCmd.Flag("no-dry-run").Hidden = true
+		ec2_acceptVpcPeeringConnectionCmd.MarkFlagRequired("vpc-peering-connection-id")
+	})
 	ec2Cmd.AddCommand(ec2_acceptVpcPeeringConnectionCmd)
 }

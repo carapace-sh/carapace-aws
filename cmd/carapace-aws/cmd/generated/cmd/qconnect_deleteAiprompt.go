@@ -12,11 +12,13 @@ var qconnect_deleteAipromptCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_deleteAipromptCmd).Standalone()
+	carapace.Gen(qconnect_deleteAipromptCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_deleteAipromptCmd).Standalone()
 
-	qconnect_deleteAipromptCmd.Flags().String("ai-prompt-id", "", "The identifier of the Amazon Q in Connect AI prompt.")
-	qconnect_deleteAipromptCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_deleteAipromptCmd.MarkFlagRequired("ai-prompt-id")
-	qconnect_deleteAipromptCmd.MarkFlagRequired("assistant-id")
+		qconnect_deleteAipromptCmd.Flags().String("ai-prompt-id", "", "The identifier of the Amazon Q in Connect AI prompt.")
+		qconnect_deleteAipromptCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_deleteAipromptCmd.MarkFlagRequired("ai-prompt-id")
+		qconnect_deleteAipromptCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_deleteAipromptCmd)
 }

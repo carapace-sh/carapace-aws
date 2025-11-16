@@ -12,12 +12,14 @@ var ec2_describeSecurityGroupReferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeSecurityGroupReferencesCmd).Standalone()
+	carapace.Gen(ec2_describeSecurityGroupReferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeSecurityGroupReferencesCmd).Standalone()
 
-	ec2_describeSecurityGroupReferencesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeSecurityGroupReferencesCmd.Flags().String("group-id", "", "The IDs of the security groups in your account.")
-	ec2_describeSecurityGroupReferencesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeSecurityGroupReferencesCmd.MarkFlagRequired("group-id")
-	ec2_describeSecurityGroupReferencesCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeSecurityGroupReferencesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeSecurityGroupReferencesCmd.Flags().String("group-id", "", "The IDs of the security groups in your account.")
+		ec2_describeSecurityGroupReferencesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeSecurityGroupReferencesCmd.MarkFlagRequired("group-id")
+		ec2_describeSecurityGroupReferencesCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeSecurityGroupReferencesCmd)
 }

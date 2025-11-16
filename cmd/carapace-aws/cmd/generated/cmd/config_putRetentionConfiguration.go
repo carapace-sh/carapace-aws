@@ -12,9 +12,11 @@ var config_putRetentionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_putRetentionConfigurationCmd).Standalone()
+	carapace.Gen(config_putRetentionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_putRetentionConfigurationCmd).Standalone()
 
-	config_putRetentionConfigurationCmd.Flags().String("retention-period-in-days", "", "Number of days Config stores your historical information.")
-	config_putRetentionConfigurationCmd.MarkFlagRequired("retention-period-in-days")
+		config_putRetentionConfigurationCmd.Flags().String("retention-period-in-days", "", "Number of days Config stores your historical information.")
+		config_putRetentionConfigurationCmd.MarkFlagRequired("retention-period-in-days")
+	})
 	configCmd.AddCommand(config_putRetentionConfigurationCmd)
 }

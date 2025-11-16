@@ -12,11 +12,13 @@ var partnercentralSelling_getEngagementInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(partnercentralSelling_getEngagementInvitationCmd).Standalone()
+	carapace.Gen(partnercentralSelling_getEngagementInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSelling_getEngagementInvitationCmd).Standalone()
 
-	partnercentralSelling_getEngagementInvitationCmd.Flags().String("catalog", "", "Specifies the catalog associated with the request.")
-	partnercentralSelling_getEngagementInvitationCmd.Flags().String("identifier", "", "Specifies the unique identifier for the retrieved engagement invitation.")
-	partnercentralSelling_getEngagementInvitationCmd.MarkFlagRequired("catalog")
-	partnercentralSelling_getEngagementInvitationCmd.MarkFlagRequired("identifier")
+		partnercentralSelling_getEngagementInvitationCmd.Flags().String("catalog", "", "Specifies the catalog associated with the request.")
+		partnercentralSelling_getEngagementInvitationCmd.Flags().String("identifier", "", "Specifies the unique identifier for the retrieved engagement invitation.")
+		partnercentralSelling_getEngagementInvitationCmd.MarkFlagRequired("catalog")
+		partnercentralSelling_getEngagementInvitationCmd.MarkFlagRequired("identifier")
+	})
 	partnercentralSellingCmd.AddCommand(partnercentralSelling_getEngagementInvitationCmd)
 }

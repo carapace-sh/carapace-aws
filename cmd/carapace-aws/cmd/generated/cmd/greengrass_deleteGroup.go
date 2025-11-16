@@ -12,9 +12,11 @@ var greengrass_deleteGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_deleteGroupCmd).Standalone()
+	carapace.Gen(greengrass_deleteGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_deleteGroupCmd).Standalone()
 
-	greengrass_deleteGroupCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
-	greengrass_deleteGroupCmd.MarkFlagRequired("group-id")
+		greengrass_deleteGroupCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
+		greengrass_deleteGroupCmd.MarkFlagRequired("group-id")
+	})
 	greengrassCmd.AddCommand(greengrass_deleteGroupCmd)
 }

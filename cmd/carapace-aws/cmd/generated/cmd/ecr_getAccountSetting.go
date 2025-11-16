@@ -12,9 +12,11 @@ var ecr_getAccountSettingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_getAccountSettingCmd).Standalone()
+	carapace.Gen(ecr_getAccountSettingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_getAccountSettingCmd).Standalone()
 
-	ecr_getAccountSettingCmd.Flags().String("name", "", "The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION` or `REGISTRY_POLICY_SCOPE`.")
-	ecr_getAccountSettingCmd.MarkFlagRequired("name")
+		ecr_getAccountSettingCmd.Flags().String("name", "", "The name of the account setting, such as `BASIC_SCAN_TYPE_VERSION` or `REGISTRY_POLICY_SCOPE`.")
+		ecr_getAccountSettingCmd.MarkFlagRequired("name")
+	})
 	ecrCmd.AddCommand(ecr_getAccountSettingCmd)
 }

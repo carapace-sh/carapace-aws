@@ -12,9 +12,11 @@ var config_deleteConformancePackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deleteConformancePackCmd).Standalone()
+	carapace.Gen(config_deleteConformancePackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deleteConformancePackCmd).Standalone()
 
-	config_deleteConformancePackCmd.Flags().String("conformance-pack-name", "", "Name of the conformance pack you want to delete.")
-	config_deleteConformancePackCmd.MarkFlagRequired("conformance-pack-name")
+		config_deleteConformancePackCmd.Flags().String("conformance-pack-name", "", "Name of the conformance pack you want to delete.")
+		config_deleteConformancePackCmd.MarkFlagRequired("conformance-pack-name")
+	})
 	configCmd.AddCommand(config_deleteConformancePackCmd)
 }

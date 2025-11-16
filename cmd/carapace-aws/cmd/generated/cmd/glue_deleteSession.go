@@ -12,10 +12,12 @@ var glue_deleteSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteSessionCmd).Standalone()
+	carapace.Gen(glue_deleteSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteSessionCmd).Standalone()
 
-	glue_deleteSessionCmd.Flags().String("id", "", "The ID of the session to be deleted.")
-	glue_deleteSessionCmd.Flags().String("request-origin", "", "The name of the origin of the delete session request.")
-	glue_deleteSessionCmd.MarkFlagRequired("id")
+		glue_deleteSessionCmd.Flags().String("id", "", "The ID of the session to be deleted.")
+		glue_deleteSessionCmd.Flags().String("request-origin", "", "The name of the origin of the delete session request.")
+		glue_deleteSessionCmd.MarkFlagRequired("id")
+	})
 	glueCmd.AddCommand(glue_deleteSessionCmd)
 }

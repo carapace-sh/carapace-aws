@@ -12,9 +12,11 @@ var transcribe_deleteCallAnalyticsCategoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_deleteCallAnalyticsCategoryCmd).Standalone()
+	carapace.Gen(transcribe_deleteCallAnalyticsCategoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_deleteCallAnalyticsCategoryCmd).Standalone()
 
-	transcribe_deleteCallAnalyticsCategoryCmd.Flags().String("category-name", "", "The name of the Call Analytics category you want to delete.")
-	transcribe_deleteCallAnalyticsCategoryCmd.MarkFlagRequired("category-name")
+		transcribe_deleteCallAnalyticsCategoryCmd.Flags().String("category-name", "", "The name of the Call Analytics category you want to delete.")
+		transcribe_deleteCallAnalyticsCategoryCmd.MarkFlagRequired("category-name")
+	})
 	transcribeCmd.AddCommand(transcribe_deleteCallAnalyticsCategoryCmd)
 }

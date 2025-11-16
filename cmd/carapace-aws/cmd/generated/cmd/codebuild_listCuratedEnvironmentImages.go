@@ -12,7 +12,9 @@ var codebuild_listCuratedEnvironmentImagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_listCuratedEnvironmentImagesCmd).Standalone()
+	carapace.Gen(codebuild_listCuratedEnvironmentImagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_listCuratedEnvironmentImagesCmd).Standalone()
 
+	})
 	codebuildCmd.AddCommand(codebuild_listCuratedEnvironmentImagesCmd)
 }

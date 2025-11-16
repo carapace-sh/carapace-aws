@@ -12,9 +12,11 @@ var bedrockAgentRuntime_getSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentRuntime_getSessionCmd).Standalone()
+	carapace.Gen(bedrockAgentRuntime_getSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentRuntime_getSessionCmd).Standalone()
 
-	bedrockAgentRuntime_getSessionCmd.Flags().String("session-identifier", "", "A unique identifier for the session to retrieve.")
-	bedrockAgentRuntime_getSessionCmd.MarkFlagRequired("session-identifier")
+		bedrockAgentRuntime_getSessionCmd.Flags().String("session-identifier", "", "A unique identifier for the session to retrieve.")
+		bedrockAgentRuntime_getSessionCmd.MarkFlagRequired("session-identifier")
+	})
 	bedrockAgentRuntimeCmd.AddCommand(bedrockAgentRuntime_getSessionCmd)
 }

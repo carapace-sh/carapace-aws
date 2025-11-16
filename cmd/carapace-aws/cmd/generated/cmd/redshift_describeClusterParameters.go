@@ -12,12 +12,14 @@ var redshift_describeClusterParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeClusterParametersCmd).Standalone()
+	carapace.Gen(redshift_describeClusterParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeClusterParametersCmd).Standalone()
 
-	redshift_describeClusterParametersCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
-	redshift_describeClusterParametersCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
-	redshift_describeClusterParametersCmd.Flags().String("parameter-group-name", "", "The name of a cluster parameter group for which to return details.")
-	redshift_describeClusterParametersCmd.Flags().String("source", "", "The parameter types to return.")
-	redshift_describeClusterParametersCmd.MarkFlagRequired("parameter-group-name")
+		redshift_describeClusterParametersCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
+		redshift_describeClusterParametersCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
+		redshift_describeClusterParametersCmd.Flags().String("parameter-group-name", "", "The name of a cluster parameter group for which to return details.")
+		redshift_describeClusterParametersCmd.Flags().String("source", "", "The parameter types to return.")
+		redshift_describeClusterParametersCmd.MarkFlagRequired("parameter-group-name")
+	})
 	redshiftCmd.AddCommand(redshift_describeClusterParametersCmd)
 }

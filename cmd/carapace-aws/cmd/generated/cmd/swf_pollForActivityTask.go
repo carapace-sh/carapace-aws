@@ -12,12 +12,14 @@ var swf_pollForActivityTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_pollForActivityTaskCmd).Standalone()
+	carapace.Gen(swf_pollForActivityTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_pollForActivityTaskCmd).Standalone()
 
-	swf_pollForActivityTaskCmd.Flags().String("domain", "", "The name of the domain that contains the task lists being polled.")
-	swf_pollForActivityTaskCmd.Flags().String("identity", "", "Identity of the worker making the request, recorded in the `ActivityTaskStarted` event in the workflow history.")
-	swf_pollForActivityTaskCmd.Flags().String("task-list", "", "Specifies the task list to poll for activity tasks.")
-	swf_pollForActivityTaskCmd.MarkFlagRequired("domain")
-	swf_pollForActivityTaskCmd.MarkFlagRequired("task-list")
+		swf_pollForActivityTaskCmd.Flags().String("domain", "", "The name of the domain that contains the task lists being polled.")
+		swf_pollForActivityTaskCmd.Flags().String("identity", "", "Identity of the worker making the request, recorded in the `ActivityTaskStarted` event in the workflow history.")
+		swf_pollForActivityTaskCmd.Flags().String("task-list", "", "Specifies the task list to poll for activity tasks.")
+		swf_pollForActivityTaskCmd.MarkFlagRequired("domain")
+		swf_pollForActivityTaskCmd.MarkFlagRequired("task-list")
+	})
 	swfCmd.AddCommand(swf_pollForActivityTaskCmd)
 }

@@ -12,11 +12,13 @@ var datazone_deleteAssetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteAssetCmd).Standalone()
+	carapace.Gen(datazone_deleteAssetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteAssetCmd).Standalone()
 
-	datazone_deleteAssetCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the asset is deleted.")
-	datazone_deleteAssetCmd.Flags().String("identifier", "", "The identifier of the asset that is deleted.")
-	datazone_deleteAssetCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteAssetCmd.MarkFlagRequired("identifier")
+		datazone_deleteAssetCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the asset is deleted.")
+		datazone_deleteAssetCmd.Flags().String("identifier", "", "The identifier of the asset that is deleted.")
+		datazone_deleteAssetCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteAssetCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteAssetCmd)
 }

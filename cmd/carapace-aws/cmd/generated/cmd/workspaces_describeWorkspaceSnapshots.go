@@ -12,9 +12,11 @@ var workspaces_describeWorkspaceSnapshotsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeWorkspaceSnapshotsCmd).Standalone()
+	carapace.Gen(workspaces_describeWorkspaceSnapshotsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeWorkspaceSnapshotsCmd).Standalone()
 
-	workspaces_describeWorkspaceSnapshotsCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
-	workspaces_describeWorkspaceSnapshotsCmd.MarkFlagRequired("workspace-id")
+		workspaces_describeWorkspaceSnapshotsCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
+		workspaces_describeWorkspaceSnapshotsCmd.MarkFlagRequired("workspace-id")
+	})
 	workspacesCmd.AddCommand(workspaces_describeWorkspaceSnapshotsCmd)
 }

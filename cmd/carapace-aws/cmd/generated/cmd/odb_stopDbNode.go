@@ -12,11 +12,13 @@ var odb_stopDbNodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_stopDbNodeCmd).Standalone()
+	carapace.Gen(odb_stopDbNodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_stopDbNodeCmd).Standalone()
 
-	odb_stopDbNodeCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster that contains the DB node to stop.")
-	odb_stopDbNodeCmd.Flags().String("db-node-id", "", "The unique identifier of the DB node to stop.")
-	odb_stopDbNodeCmd.MarkFlagRequired("cloud-vm-cluster-id")
-	odb_stopDbNodeCmd.MarkFlagRequired("db-node-id")
+		odb_stopDbNodeCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster that contains the DB node to stop.")
+		odb_stopDbNodeCmd.Flags().String("db-node-id", "", "The unique identifier of the DB node to stop.")
+		odb_stopDbNodeCmd.MarkFlagRequired("cloud-vm-cluster-id")
+		odb_stopDbNodeCmd.MarkFlagRequired("db-node-id")
+	})
 	odbCmd.AddCommand(odb_stopDbNodeCmd)
 }

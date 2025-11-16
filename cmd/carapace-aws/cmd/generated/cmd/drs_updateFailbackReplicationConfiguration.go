@@ -12,14 +12,16 @@ var drs_updateFailbackReplicationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_updateFailbackReplicationConfigurationCmd).Standalone()
+	carapace.Gen(drs_updateFailbackReplicationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_updateFailbackReplicationConfigurationCmd).Standalone()
 
-	drs_updateFailbackReplicationConfigurationCmd.Flags().String("bandwidth-throttling", "", "Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.")
-	drs_updateFailbackReplicationConfigurationCmd.Flags().String("name", "", "The name of the Failback Replication Configuration.")
-	drs_updateFailbackReplicationConfigurationCmd.Flags().Bool("no-use-private-ip", false, "Whether to use Private IP for the failback replication of the Recovery Instance.")
-	drs_updateFailbackReplicationConfigurationCmd.Flags().String("recovery-instance-id", "", "The ID of the Recovery Instance.")
-	drs_updateFailbackReplicationConfigurationCmd.Flags().Bool("use-private-ip", false, "Whether to use Private IP for the failback replication of the Recovery Instance.")
-	drs_updateFailbackReplicationConfigurationCmd.Flag("no-use-private-ip").Hidden = true
-	drs_updateFailbackReplicationConfigurationCmd.MarkFlagRequired("recovery-instance-id")
+		drs_updateFailbackReplicationConfigurationCmd.Flags().String("bandwidth-throttling", "", "Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.")
+		drs_updateFailbackReplicationConfigurationCmd.Flags().String("name", "", "The name of the Failback Replication Configuration.")
+		drs_updateFailbackReplicationConfigurationCmd.Flags().Bool("no-use-private-ip", false, "Whether to use Private IP for the failback replication of the Recovery Instance.")
+		drs_updateFailbackReplicationConfigurationCmd.Flags().String("recovery-instance-id", "", "The ID of the Recovery Instance.")
+		drs_updateFailbackReplicationConfigurationCmd.Flags().Bool("use-private-ip", false, "Whether to use Private IP for the failback replication of the Recovery Instance.")
+		drs_updateFailbackReplicationConfigurationCmd.Flag("no-use-private-ip").Hidden = true
+		drs_updateFailbackReplicationConfigurationCmd.MarkFlagRequired("recovery-instance-id")
+	})
 	drsCmd.AddCommand(drs_updateFailbackReplicationConfigurationCmd)
 }

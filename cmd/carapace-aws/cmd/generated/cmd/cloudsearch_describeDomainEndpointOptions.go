@@ -12,12 +12,14 @@ var cloudsearch_describeDomainEndpointOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_describeDomainEndpointOptionsCmd).Standalone()
+	carapace.Gen(cloudsearch_describeDomainEndpointOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_describeDomainEndpointOptionsCmd).Standalone()
 
-	cloudsearch_describeDomainEndpointOptionsCmd.Flags().Bool("deployed", false, "Whether to retrieve the latest configuration (which might be in a Processing state) or the current, active configuration.")
-	cloudsearch_describeDomainEndpointOptionsCmd.Flags().String("domain-name", "", "A string that represents the name of a domain.")
-	cloudsearch_describeDomainEndpointOptionsCmd.Flags().Bool("no-deployed", false, "Whether to retrieve the latest configuration (which might be in a Processing state) or the current, active configuration.")
-	cloudsearch_describeDomainEndpointOptionsCmd.MarkFlagRequired("domain-name")
-	cloudsearch_describeDomainEndpointOptionsCmd.Flag("no-deployed").Hidden = true
+		cloudsearch_describeDomainEndpointOptionsCmd.Flags().Bool("deployed", false, "Whether to retrieve the latest configuration (which might be in a Processing state) or the current, active configuration.")
+		cloudsearch_describeDomainEndpointOptionsCmd.Flags().String("domain-name", "", "A string that represents the name of a domain.")
+		cloudsearch_describeDomainEndpointOptionsCmd.Flags().Bool("no-deployed", false, "Whether to retrieve the latest configuration (which might be in a Processing state) or the current, active configuration.")
+		cloudsearch_describeDomainEndpointOptionsCmd.MarkFlagRequired("domain-name")
+		cloudsearch_describeDomainEndpointOptionsCmd.Flag("no-deployed").Hidden = true
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_describeDomainEndpointOptionsCmd)
 }

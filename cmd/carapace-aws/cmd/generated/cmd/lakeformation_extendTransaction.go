@@ -12,8 +12,10 @@ var lakeformation_extendTransactionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_extendTransactionCmd).Standalone()
+	carapace.Gen(lakeformation_extendTransactionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_extendTransactionCmd).Standalone()
 
-	lakeformation_extendTransactionCmd.Flags().String("transaction-id", "", "The transaction to extend.")
+		lakeformation_extendTransactionCmd.Flags().String("transaction-id", "", "The transaction to extend.")
+	})
 	lakeformationCmd.AddCommand(lakeformation_extendTransactionCmd)
 }

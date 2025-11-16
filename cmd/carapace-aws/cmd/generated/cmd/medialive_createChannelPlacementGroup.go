@@ -12,13 +12,15 @@ var medialive_createChannelPlacementGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_createChannelPlacementGroupCmd).Standalone()
+	carapace.Gen(medialive_createChannelPlacementGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_createChannelPlacementGroupCmd).Standalone()
 
-	medialive_createChannelPlacementGroupCmd.Flags().String("cluster-id", "", "The ID of the cluster.")
-	medialive_createChannelPlacementGroupCmd.Flags().String("name", "", "Specify a name that is unique in the Cluster.")
-	medialive_createChannelPlacementGroupCmd.Flags().String("nodes", "", "An array of one ID for the Node that you want to associate with the ChannelPlacementGroup.")
-	medialive_createChannelPlacementGroupCmd.Flags().String("request-id", "", "An ID that you assign to a create request.")
-	medialive_createChannelPlacementGroupCmd.Flags().String("tags", "", "A collection of key-value pairs.")
-	medialive_createChannelPlacementGroupCmd.MarkFlagRequired("cluster-id")
+		medialive_createChannelPlacementGroupCmd.Flags().String("cluster-id", "", "The ID of the cluster.")
+		medialive_createChannelPlacementGroupCmd.Flags().String("name", "", "Specify a name that is unique in the Cluster.")
+		medialive_createChannelPlacementGroupCmd.Flags().String("nodes", "", "An array of one ID for the Node that you want to associate with the ChannelPlacementGroup.")
+		medialive_createChannelPlacementGroupCmd.Flags().String("request-id", "", "An ID that you assign to a create request.")
+		medialive_createChannelPlacementGroupCmd.Flags().String("tags", "", "A collection of key-value pairs.")
+		medialive_createChannelPlacementGroupCmd.MarkFlagRequired("cluster-id")
+	})
 	medialiveCmd.AddCommand(medialive_createChannelPlacementGroupCmd)
 }

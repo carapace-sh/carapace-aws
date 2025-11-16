@@ -12,9 +12,11 @@ var redshift_getIdentityCenterAuthTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_getIdentityCenterAuthTokenCmd).Standalone()
+	carapace.Gen(redshift_getIdentityCenterAuthTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_getIdentityCenterAuthTokenCmd).Standalone()
 
-	redshift_getIdentityCenterAuthTokenCmd.Flags().String("cluster-ids", "", "A list of cluster identifiers that the generated token can be used with.")
-	redshift_getIdentityCenterAuthTokenCmd.MarkFlagRequired("cluster-ids")
+		redshift_getIdentityCenterAuthTokenCmd.Flags().String("cluster-ids", "", "A list of cluster identifiers that the generated token can be used with.")
+		redshift_getIdentityCenterAuthTokenCmd.MarkFlagRequired("cluster-ids")
+	})
 	redshiftCmd.AddCommand(redshift_getIdentityCenterAuthTokenCmd)
 }

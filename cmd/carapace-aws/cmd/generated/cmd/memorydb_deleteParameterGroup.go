@@ -12,9 +12,11 @@ var memorydb_deleteParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_deleteParameterGroupCmd).Standalone()
+	carapace.Gen(memorydb_deleteParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_deleteParameterGroupCmd).Standalone()
 
-	memorydb_deleteParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to delete.")
-	memorydb_deleteParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+		memorydb_deleteParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to delete.")
+		memorydb_deleteParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+	})
 	memorydbCmd.AddCommand(memorydb_deleteParameterGroupCmd)
 }

@@ -12,11 +12,13 @@ var bedrock_listFoundationModelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_listFoundationModelsCmd).Standalone()
+	carapace.Gen(bedrock_listFoundationModelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_listFoundationModelsCmd).Standalone()
 
-	bedrock_listFoundationModelsCmd.Flags().String("by-customization-type", "", "Return models that support the customization type that you specify.")
-	bedrock_listFoundationModelsCmd.Flags().String("by-inference-type", "", "Return models that support the inference type that you specify.")
-	bedrock_listFoundationModelsCmd.Flags().String("by-output-modality", "", "Return models that support the output modality that you specify.")
-	bedrock_listFoundationModelsCmd.Flags().String("by-provider", "", "Return models belonging to the model provider that you specify.")
+		bedrock_listFoundationModelsCmd.Flags().String("by-customization-type", "", "Return models that support the customization type that you specify.")
+		bedrock_listFoundationModelsCmd.Flags().String("by-inference-type", "", "Return models that support the inference type that you specify.")
+		bedrock_listFoundationModelsCmd.Flags().String("by-output-modality", "", "Return models that support the output modality that you specify.")
+		bedrock_listFoundationModelsCmd.Flags().String("by-provider", "", "Return models belonging to the model provider that you specify.")
+	})
 	bedrockCmd.AddCommand(bedrock_listFoundationModelsCmd)
 }

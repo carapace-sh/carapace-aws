@@ -12,9 +12,11 @@ var securityIr_listMembershipsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityIr_listMembershipsCmd).Standalone()
+	carapace.Gen(securityIr_listMembershipsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityIr_listMembershipsCmd).Standalone()
 
-	securityIr_listMembershipsCmd.Flags().String("max-results", "", "Request element for ListMemberships to limit the number of responses.")
-	securityIr_listMembershipsCmd.Flags().String("next-token", "", "An optional string that, if supplied, must be copied from the output of a previous call to ListMemberships.")
+		securityIr_listMembershipsCmd.Flags().String("max-results", "", "Request element for ListMemberships to limit the number of responses.")
+		securityIr_listMembershipsCmd.Flags().String("next-token", "", "An optional string that, if supplied, must be copied from the output of a previous call to ListMemberships.")
+	})
 	securityIrCmd.AddCommand(securityIr_listMembershipsCmd)
 }

@@ -12,9 +12,11 @@ var apigatewayv2_getApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_getApiCmd).Standalone()
+	carapace.Gen(apigatewayv2_getApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_getApiCmd).Standalone()
 
-	apigatewayv2_getApiCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_getApiCmd.MarkFlagRequired("api-id")
+		apigatewayv2_getApiCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_getApiCmd.MarkFlagRequired("api-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_getApiCmd)
 }

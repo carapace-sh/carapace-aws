@@ -12,9 +12,11 @@ var dms_describeEventCategoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeEventCategoriesCmd).Standalone()
+	carapace.Gen(dms_describeEventCategoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeEventCategoriesCmd).Standalone()
 
-	dms_describeEventCategoriesCmd.Flags().String("filters", "", "Filters applied to the event categories.")
-	dms_describeEventCategoriesCmd.Flags().String("source-type", "", "The type of DMS resource that generates events.")
+		dms_describeEventCategoriesCmd.Flags().String("filters", "", "Filters applied to the event categories.")
+		dms_describeEventCategoriesCmd.Flags().String("source-type", "", "The type of DMS resource that generates events.")
+	})
 	dmsCmd.AddCommand(dms_describeEventCategoriesCmd)
 }

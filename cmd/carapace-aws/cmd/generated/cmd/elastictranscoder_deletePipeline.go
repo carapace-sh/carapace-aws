@@ -12,9 +12,11 @@ var elastictranscoder_deletePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elastictranscoder_deletePipelineCmd).Standalone()
+	carapace.Gen(elastictranscoder_deletePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elastictranscoder_deletePipelineCmd).Standalone()
 
-	elastictranscoder_deletePipelineCmd.Flags().String("id", "", "The identifier of the pipeline that you want to delete.")
-	elastictranscoder_deletePipelineCmd.MarkFlagRequired("id")
+		elastictranscoder_deletePipelineCmd.Flags().String("id", "", "The identifier of the pipeline that you want to delete.")
+		elastictranscoder_deletePipelineCmd.MarkFlagRequired("id")
+	})
 	elastictranscoderCmd.AddCommand(elastictranscoder_deletePipelineCmd)
 }

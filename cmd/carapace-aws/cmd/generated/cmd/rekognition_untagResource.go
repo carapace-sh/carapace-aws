@@ -12,11 +12,13 @@ var rekognition_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_untagResourceCmd).Standalone()
+	carapace.Gen(rekognition_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_untagResourceCmd).Standalone()
 
-	rekognition_untagResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to remove the tags from.")
-	rekognition_untagResourceCmd.Flags().String("tag-keys", "", "A list of the tags that you want to remove.")
-	rekognition_untagResourceCmd.MarkFlagRequired("resource-arn")
-	rekognition_untagResourceCmd.MarkFlagRequired("tag-keys")
+		rekognition_untagResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to remove the tags from.")
+		rekognition_untagResourceCmd.Flags().String("tag-keys", "", "A list of the tags that you want to remove.")
+		rekognition_untagResourceCmd.MarkFlagRequired("resource-arn")
+		rekognition_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	rekognitionCmd.AddCommand(rekognition_untagResourceCmd)
 }

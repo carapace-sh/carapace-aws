@@ -12,12 +12,14 @@ var chime_createRoomCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_createRoomCmd).Standalone()
+	carapace.Gen(chime_createRoomCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_createRoomCmd).Standalone()
 
-	chime_createRoomCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_createRoomCmd.Flags().String("client-request-token", "", "The idempotency token for the request.")
-	chime_createRoomCmd.Flags().String("name", "", "The room name.")
-	chime_createRoomCmd.MarkFlagRequired("account-id")
-	chime_createRoomCmd.MarkFlagRequired("name")
+		chime_createRoomCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_createRoomCmd.Flags().String("client-request-token", "", "The idempotency token for the request.")
+		chime_createRoomCmd.Flags().String("name", "", "The room name.")
+		chime_createRoomCmd.MarkFlagRequired("account-id")
+		chime_createRoomCmd.MarkFlagRequired("name")
+	})
 	chimeCmd.AddCommand(chime_createRoomCmd)
 }

@@ -12,11 +12,13 @@ var bedrockAgentcoreControl_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_tagResourceCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_tagResourceCmd).Standalone()
 
-	bedrockAgentcoreControl_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
-	bedrockAgentcoreControl_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
-	bedrockAgentcoreControl_tagResourceCmd.MarkFlagRequired("resource-arn")
-	bedrockAgentcoreControl_tagResourceCmd.MarkFlagRequired("tags")
+		bedrockAgentcoreControl_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
+		bedrockAgentcoreControl_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
+		bedrockAgentcoreControl_tagResourceCmd.MarkFlagRequired("resource-arn")
+		bedrockAgentcoreControl_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_tagResourceCmd)
 }

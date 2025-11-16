@@ -12,13 +12,15 @@ var s3tables_getTableMaintenanceConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_getTableMaintenanceConfigurationCmd).Standalone()
+	carapace.Gen(s3tables_getTableMaintenanceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_getTableMaintenanceConfigurationCmd).Standalone()
 
-	s3tables_getTableMaintenanceConfigurationCmd.Flags().String("name", "", "The name of the table.")
-	s3tables_getTableMaintenanceConfigurationCmd.Flags().String("namespace", "", "The namespace associated with the table.")
-	s3tables_getTableMaintenanceConfigurationCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
-	s3tables_getTableMaintenanceConfigurationCmd.MarkFlagRequired("name")
-	s3tables_getTableMaintenanceConfigurationCmd.MarkFlagRequired("namespace")
-	s3tables_getTableMaintenanceConfigurationCmd.MarkFlagRequired("table-bucket-arn")
+		s3tables_getTableMaintenanceConfigurationCmd.Flags().String("name", "", "The name of the table.")
+		s3tables_getTableMaintenanceConfigurationCmd.Flags().String("namespace", "", "The namespace associated with the table.")
+		s3tables_getTableMaintenanceConfigurationCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
+		s3tables_getTableMaintenanceConfigurationCmd.MarkFlagRequired("name")
+		s3tables_getTableMaintenanceConfigurationCmd.MarkFlagRequired("namespace")
+		s3tables_getTableMaintenanceConfigurationCmd.MarkFlagRequired("table-bucket-arn")
+	})
 	s3tablesCmd.AddCommand(s3tables_getTableMaintenanceConfigurationCmd)
 }

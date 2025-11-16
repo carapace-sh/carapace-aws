@@ -12,15 +12,17 @@ var wisdom_createAssistantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_createAssistantCmd).Standalone()
+	carapace.Gen(wisdom_createAssistantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_createAssistantCmd).Standalone()
 
-	wisdom_createAssistantCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	wisdom_createAssistantCmd.Flags().String("description", "", "The description of the assistant.")
-	wisdom_createAssistantCmd.Flags().String("name", "", "The name of the assistant.")
-	wisdom_createAssistantCmd.Flags().String("server-side-encryption-configuration", "", "The configuration information for the customer managed key used for encryption.")
-	wisdom_createAssistantCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
-	wisdom_createAssistantCmd.Flags().String("type", "", "The type of assistant.")
-	wisdom_createAssistantCmd.MarkFlagRequired("name")
-	wisdom_createAssistantCmd.MarkFlagRequired("type")
+		wisdom_createAssistantCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		wisdom_createAssistantCmd.Flags().String("description", "", "The description of the assistant.")
+		wisdom_createAssistantCmd.Flags().String("name", "", "The name of the assistant.")
+		wisdom_createAssistantCmd.Flags().String("server-side-encryption-configuration", "", "The configuration information for the customer managed key used for encryption.")
+		wisdom_createAssistantCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
+		wisdom_createAssistantCmd.Flags().String("type", "", "The type of assistant.")
+		wisdom_createAssistantCmd.MarkFlagRequired("name")
+		wisdom_createAssistantCmd.MarkFlagRequired("type")
+	})
 	wisdomCmd.AddCommand(wisdom_createAssistantCmd)
 }

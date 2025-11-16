@@ -12,11 +12,13 @@ var iot_deleteOtaupdateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteOtaupdateCmd).Standalone()
+	carapace.Gen(iot_deleteOtaupdateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteOtaupdateCmd).Standalone()
 
-	iot_deleteOtaupdateCmd.Flags().String("delete-stream", "", "When true, the stream created by the OTAUpdate process is deleted when the OTA update is deleted.")
-	iot_deleteOtaupdateCmd.Flags().String("force-delete-awsjob", "", "When true, deletes the IoT job created by the OTAUpdate process even if it is \"IN\\_PROGRESS\".")
-	iot_deleteOtaupdateCmd.Flags().String("ota-update-id", "", "The ID of the OTA update to delete.")
-	iot_deleteOtaupdateCmd.MarkFlagRequired("ota-update-id")
+		iot_deleteOtaupdateCmd.Flags().String("delete-stream", "", "When true, the stream created by the OTAUpdate process is deleted when the OTA update is deleted.")
+		iot_deleteOtaupdateCmd.Flags().String("force-delete-awsjob", "", "When true, deletes the IoT job created by the OTAUpdate process even if it is \"IN\\_PROGRESS\".")
+		iot_deleteOtaupdateCmd.Flags().String("ota-update-id", "", "The ID of the OTA update to delete.")
+		iot_deleteOtaupdateCmd.MarkFlagRequired("ota-update-id")
+	})
 	iotCmd.AddCommand(iot_deleteOtaupdateCmd)
 }

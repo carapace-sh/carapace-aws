@@ -12,11 +12,13 @@ var omics_listAnnotationStoresCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_listAnnotationStoresCmd).Standalone()
+	carapace.Gen(omics_listAnnotationStoresCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_listAnnotationStoresCmd).Standalone()
 
-	omics_listAnnotationStoresCmd.Flags().String("filter", "", "A filter to apply to the list.")
-	omics_listAnnotationStoresCmd.Flags().String("ids", "", "IDs of stores to list.")
-	omics_listAnnotationStoresCmd.Flags().String("max-results", "", "The maximum number of stores to return in one page of results.")
-	omics_listAnnotationStoresCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		omics_listAnnotationStoresCmd.Flags().String("filter", "", "A filter to apply to the list.")
+		omics_listAnnotationStoresCmd.Flags().String("ids", "", "IDs of stores to list.")
+		omics_listAnnotationStoresCmd.Flags().String("max-results", "", "The maximum number of stores to return in one page of results.")
+		omics_listAnnotationStoresCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+	})
 	omicsCmd.AddCommand(omics_listAnnotationStoresCmd)
 }

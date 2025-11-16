@@ -12,9 +12,11 @@ var rds_deleteDbclusterAutomatedBackupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteDbclusterAutomatedBackupCmd).Standalone()
+	carapace.Gen(rds_deleteDbclusterAutomatedBackupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteDbclusterAutomatedBackupCmd).Standalone()
 
-	rds_deleteDbclusterAutomatedBackupCmd.Flags().String("db-cluster-resource-id", "", "The identifier for the source DB cluster, which can't be changed and which is unique to an Amazon Web Services Region.")
-	rds_deleteDbclusterAutomatedBackupCmd.MarkFlagRequired("db-cluster-resource-id")
+		rds_deleteDbclusterAutomatedBackupCmd.Flags().String("db-cluster-resource-id", "", "The identifier for the source DB cluster, which can't be changed and which is unique to an Amazon Web Services Region.")
+		rds_deleteDbclusterAutomatedBackupCmd.MarkFlagRequired("db-cluster-resource-id")
+	})
 	rdsCmd.AddCommand(rds_deleteDbclusterAutomatedBackupCmd)
 }

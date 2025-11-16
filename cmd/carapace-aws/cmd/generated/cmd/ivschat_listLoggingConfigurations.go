@@ -12,9 +12,11 @@ var ivschat_listLoggingConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_listLoggingConfigurationsCmd).Standalone()
+	carapace.Gen(ivschat_listLoggingConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_listLoggingConfigurationsCmd).Standalone()
 
-	ivschat_listLoggingConfigurationsCmd.Flags().String("max-results", "", "Maximum number of logging configurations to return.")
-	ivschat_listLoggingConfigurationsCmd.Flags().String("next-token", "", "The first logging configurations to retrieve.")
+		ivschat_listLoggingConfigurationsCmd.Flags().String("max-results", "", "Maximum number of logging configurations to return.")
+		ivschat_listLoggingConfigurationsCmd.Flags().String("next-token", "", "The first logging configurations to retrieve.")
+	})
 	ivschatCmd.AddCommand(ivschat_listLoggingConfigurationsCmd)
 }

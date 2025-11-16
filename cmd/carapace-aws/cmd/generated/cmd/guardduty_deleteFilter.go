@@ -12,11 +12,13 @@ var guardduty_deleteFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_deleteFilterCmd).Standalone()
+	carapace.Gen(guardduty_deleteFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_deleteFilterCmd).Standalone()
 
-	guardduty_deleteFilterCmd.Flags().String("detector-id", "", "The unique ID of the detector that is associated with the filter.")
-	guardduty_deleteFilterCmd.Flags().String("filter-name", "", "The name of the filter that you want to delete.")
-	guardduty_deleteFilterCmd.MarkFlagRequired("detector-id")
-	guardduty_deleteFilterCmd.MarkFlagRequired("filter-name")
+		guardduty_deleteFilterCmd.Flags().String("detector-id", "", "The unique ID of the detector that is associated with the filter.")
+		guardduty_deleteFilterCmd.Flags().String("filter-name", "", "The name of the filter that you want to delete.")
+		guardduty_deleteFilterCmd.MarkFlagRequired("detector-id")
+		guardduty_deleteFilterCmd.MarkFlagRequired("filter-name")
+	})
 	guarddutyCmd.AddCommand(guardduty_deleteFilterCmd)
 }

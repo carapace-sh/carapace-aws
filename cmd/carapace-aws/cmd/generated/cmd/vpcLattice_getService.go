@@ -12,9 +12,11 @@ var vpcLattice_getServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getServiceCmd).Standalone()
+	carapace.Gen(vpcLattice_getServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getServiceCmd).Standalone()
 
-	vpcLattice_getServiceCmd.Flags().String("service-identifier", "", "The ID or ARN of the service.")
-	vpcLattice_getServiceCmd.MarkFlagRequired("service-identifier")
+		vpcLattice_getServiceCmd.Flags().String("service-identifier", "", "The ID or ARN of the service.")
+		vpcLattice_getServiceCmd.MarkFlagRequired("service-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getServiceCmd)
 }

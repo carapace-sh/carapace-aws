@@ -12,13 +12,15 @@ var networkmanager_getCoreNetworkChangeSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getCoreNetworkChangeSetCmd).Standalone()
+	carapace.Gen(networkmanager_getCoreNetworkChangeSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getCoreNetworkChangeSetCmd).Standalone()
 
-	networkmanager_getCoreNetworkChangeSetCmd.Flags().String("core-network-id", "", "The ID of a core network.")
-	networkmanager_getCoreNetworkChangeSetCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	networkmanager_getCoreNetworkChangeSetCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	networkmanager_getCoreNetworkChangeSetCmd.Flags().String("policy-version-id", "", "The ID of the policy version.")
-	networkmanager_getCoreNetworkChangeSetCmd.MarkFlagRequired("core-network-id")
-	networkmanager_getCoreNetworkChangeSetCmd.MarkFlagRequired("policy-version-id")
+		networkmanager_getCoreNetworkChangeSetCmd.Flags().String("core-network-id", "", "The ID of a core network.")
+		networkmanager_getCoreNetworkChangeSetCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		networkmanager_getCoreNetworkChangeSetCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		networkmanager_getCoreNetworkChangeSetCmd.Flags().String("policy-version-id", "", "The ID of the policy version.")
+		networkmanager_getCoreNetworkChangeSetCmd.MarkFlagRequired("core-network-id")
+		networkmanager_getCoreNetworkChangeSetCmd.MarkFlagRequired("policy-version-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getCoreNetworkChangeSetCmd)
 }

@@ -12,11 +12,13 @@ var sesv2_deleteContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteContactCmd).Standalone()
+	carapace.Gen(sesv2_deleteContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteContactCmd).Standalone()
 
-	sesv2_deleteContactCmd.Flags().String("contact-list-name", "", "The name of the contact list from which the contact should be removed.")
-	sesv2_deleteContactCmd.Flags().String("email-address", "", "The contact's email address.")
-	sesv2_deleteContactCmd.MarkFlagRequired("contact-list-name")
-	sesv2_deleteContactCmd.MarkFlagRequired("email-address")
+		sesv2_deleteContactCmd.Flags().String("contact-list-name", "", "The name of the contact list from which the contact should be removed.")
+		sesv2_deleteContactCmd.Flags().String("email-address", "", "The contact's email address.")
+		sesv2_deleteContactCmd.MarkFlagRequired("contact-list-name")
+		sesv2_deleteContactCmd.MarkFlagRequired("email-address")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteContactCmd)
 }

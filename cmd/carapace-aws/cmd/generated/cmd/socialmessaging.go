@@ -12,7 +12,9 @@ var socialmessagingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(socialmessagingCmd).Standalone()
+	carapace.Gen(socialmessagingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessagingCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(socialmessagingCmd)
 }

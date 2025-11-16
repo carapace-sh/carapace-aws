@@ -12,9 +12,11 @@ var cleanroomsml_getAudienceGenerationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_getAudienceGenerationJobCmd).Standalone()
+	carapace.Gen(cleanroomsml_getAudienceGenerationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_getAudienceGenerationJobCmd).Standalone()
 
-	cleanroomsml_getAudienceGenerationJobCmd.Flags().String("audience-generation-job-arn", "", "The Amazon Resource Name (ARN) of the audience generation job that you are interested in.")
-	cleanroomsml_getAudienceGenerationJobCmd.MarkFlagRequired("audience-generation-job-arn")
+		cleanroomsml_getAudienceGenerationJobCmd.Flags().String("audience-generation-job-arn", "", "The Amazon Resource Name (ARN) of the audience generation job that you are interested in.")
+		cleanroomsml_getAudienceGenerationJobCmd.MarkFlagRequired("audience-generation-job-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_getAudienceGenerationJobCmd)
 }

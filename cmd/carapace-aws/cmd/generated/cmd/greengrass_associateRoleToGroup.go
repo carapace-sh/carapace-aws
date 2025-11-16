@@ -12,11 +12,13 @@ var greengrass_associateRoleToGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_associateRoleToGroupCmd).Standalone()
+	carapace.Gen(greengrass_associateRoleToGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_associateRoleToGroupCmd).Standalone()
 
-	greengrass_associateRoleToGroupCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
-	greengrass_associateRoleToGroupCmd.Flags().String("role-arn", "", "The ARN of the role you wish to associate with this group.")
-	greengrass_associateRoleToGroupCmd.MarkFlagRequired("group-id")
-	greengrass_associateRoleToGroupCmd.MarkFlagRequired("role-arn")
+		greengrass_associateRoleToGroupCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
+		greengrass_associateRoleToGroupCmd.Flags().String("role-arn", "", "The ARN of the role you wish to associate with this group.")
+		greengrass_associateRoleToGroupCmd.MarkFlagRequired("group-id")
+		greengrass_associateRoleToGroupCmd.MarkFlagRequired("role-arn")
+	})
 	greengrassCmd.AddCommand(greengrass_associateRoleToGroupCmd)
 }

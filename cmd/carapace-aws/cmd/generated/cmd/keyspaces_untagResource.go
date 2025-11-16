@@ -12,11 +12,13 @@ var keyspaces_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspaces_untagResourceCmd).Standalone()
+	carapace.Gen(keyspaces_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspaces_untagResourceCmd).Standalone()
 
-	keyspaces_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Keyspaces resource that the tags will be removed from.")
-	keyspaces_untagResourceCmd.Flags().String("tags", "", "A list of existing tags to be removed from the Amazon Keyspaces resource.")
-	keyspaces_untagResourceCmd.MarkFlagRequired("resource-arn")
-	keyspaces_untagResourceCmd.MarkFlagRequired("tags")
+		keyspaces_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Keyspaces resource that the tags will be removed from.")
+		keyspaces_untagResourceCmd.Flags().String("tags", "", "A list of existing tags to be removed from the Amazon Keyspaces resource.")
+		keyspaces_untagResourceCmd.MarkFlagRequired("resource-arn")
+		keyspaces_untagResourceCmd.MarkFlagRequired("tags")
+	})
 	keyspacesCmd.AddCommand(keyspaces_untagResourceCmd)
 }

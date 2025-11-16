@@ -12,8 +12,10 @@ var xray_getGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getGroupsCmd).Standalone()
+	carapace.Gen(xray_getGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getGroupsCmd).Standalone()
 
-	xray_getGroupsCmd.Flags().String("next-token", "", "Pagination token.")
+		xray_getGroupsCmd.Flags().String("next-token", "", "Pagination token.")
+	})
 	xrayCmd.AddCommand(xray_getGroupsCmd)
 }

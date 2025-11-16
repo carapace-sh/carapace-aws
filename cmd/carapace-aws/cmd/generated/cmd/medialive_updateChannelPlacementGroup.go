@@ -12,13 +12,15 @@ var medialive_updateChannelPlacementGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_updateChannelPlacementGroupCmd).Standalone()
+	carapace.Gen(medialive_updateChannelPlacementGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_updateChannelPlacementGroupCmd).Standalone()
 
-	medialive_updateChannelPlacementGroupCmd.Flags().String("channel-placement-group-id", "", "The ID of the channel placement group.")
-	medialive_updateChannelPlacementGroupCmd.Flags().String("cluster-id", "", "The ID of the cluster.")
-	medialive_updateChannelPlacementGroupCmd.Flags().String("name", "", "Include this parameter only if you want to change the current name of the ChannelPlacementGroup.")
-	medialive_updateChannelPlacementGroupCmd.Flags().String("nodes", "", "Include this parameter only if you want to change the list of Nodes that are associated with the ChannelPlacementGroup.")
-	medialive_updateChannelPlacementGroupCmd.MarkFlagRequired("channel-placement-group-id")
-	medialive_updateChannelPlacementGroupCmd.MarkFlagRequired("cluster-id")
+		medialive_updateChannelPlacementGroupCmd.Flags().String("channel-placement-group-id", "", "The ID of the channel placement group.")
+		medialive_updateChannelPlacementGroupCmd.Flags().String("cluster-id", "", "The ID of the cluster.")
+		medialive_updateChannelPlacementGroupCmd.Flags().String("name", "", "Include this parameter only if you want to change the current name of the ChannelPlacementGroup.")
+		medialive_updateChannelPlacementGroupCmd.Flags().String("nodes", "", "Include this parameter only if you want to change the list of Nodes that are associated with the ChannelPlacementGroup.")
+		medialive_updateChannelPlacementGroupCmd.MarkFlagRequired("channel-placement-group-id")
+		medialive_updateChannelPlacementGroupCmd.MarkFlagRequired("cluster-id")
+	})
 	medialiveCmd.AddCommand(medialive_updateChannelPlacementGroupCmd)
 }

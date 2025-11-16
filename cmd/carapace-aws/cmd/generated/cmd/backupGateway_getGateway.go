@@ -12,9 +12,11 @@ var backupGateway_getGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_getGatewayCmd).Standalone()
+	carapace.Gen(backupGateway_getGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_getGatewayCmd).Standalone()
 
-	backupGateway_getGatewayCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway.")
-	backupGateway_getGatewayCmd.MarkFlagRequired("gateway-arn")
+		backupGateway_getGatewayCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway.")
+		backupGateway_getGatewayCmd.MarkFlagRequired("gateway-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_getGatewayCmd)
 }

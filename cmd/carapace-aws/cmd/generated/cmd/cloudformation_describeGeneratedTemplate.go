@@ -12,9 +12,11 @@ var cloudformation_describeGeneratedTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeGeneratedTemplateCmd).Standalone()
+	carapace.Gen(cloudformation_describeGeneratedTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeGeneratedTemplateCmd).Standalone()
 
-	cloudformation_describeGeneratedTemplateCmd.Flags().String("generated-template-name", "", "The name or Amazon Resource Name (ARN) of a generated template.")
-	cloudformation_describeGeneratedTemplateCmd.MarkFlagRequired("generated-template-name")
+		cloudformation_describeGeneratedTemplateCmd.Flags().String("generated-template-name", "", "The name or Amazon Resource Name (ARN) of a generated template.")
+		cloudformation_describeGeneratedTemplateCmd.MarkFlagRequired("generated-template-name")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeGeneratedTemplateCmd)
 }

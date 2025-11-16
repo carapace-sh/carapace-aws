@@ -12,11 +12,13 @@ var auditmanager_listControlDomainInsightsByAssessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_listControlDomainInsightsByAssessmentCmd).Standalone()
+	carapace.Gen(auditmanager_listControlDomainInsightsByAssessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_listControlDomainInsightsByAssessmentCmd).Standalone()
 
-	auditmanager_listControlDomainInsightsByAssessmentCmd.Flags().String("assessment-id", "", "The unique identifier for the active assessment.")
-	auditmanager_listControlDomainInsightsByAssessmentCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
-	auditmanager_listControlDomainInsightsByAssessmentCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	auditmanager_listControlDomainInsightsByAssessmentCmd.MarkFlagRequired("assessment-id")
+		auditmanager_listControlDomainInsightsByAssessmentCmd.Flags().String("assessment-id", "", "The unique identifier for the active assessment.")
+		auditmanager_listControlDomainInsightsByAssessmentCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
+		auditmanager_listControlDomainInsightsByAssessmentCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		auditmanager_listControlDomainInsightsByAssessmentCmd.MarkFlagRequired("assessment-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_listControlDomainInsightsByAssessmentCmd)
 }

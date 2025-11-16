@@ -12,10 +12,12 @@ var codepipeline_createPipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_createPipelineCmd).Standalone()
+	carapace.Gen(codepipeline_createPipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_createPipelineCmd).Standalone()
 
-	codepipeline_createPipelineCmd.Flags().String("pipeline", "", "Represents the structure of actions and stages to be performed in the pipeline.")
-	codepipeline_createPipelineCmd.Flags().String("tags", "", "The tags for the pipeline.")
-	codepipeline_createPipelineCmd.MarkFlagRequired("pipeline")
+		codepipeline_createPipelineCmd.Flags().String("pipeline", "", "Represents the structure of actions and stages to be performed in the pipeline.")
+		codepipeline_createPipelineCmd.Flags().String("tags", "", "The tags for the pipeline.")
+		codepipeline_createPipelineCmd.MarkFlagRequired("pipeline")
+	})
 	codepipelineCmd.AddCommand(codepipeline_createPipelineCmd)
 }

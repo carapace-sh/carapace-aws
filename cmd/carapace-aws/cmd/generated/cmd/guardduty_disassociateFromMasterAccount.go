@@ -12,9 +12,11 @@ var guardduty_disassociateFromMasterAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_disassociateFromMasterAccountCmd).Standalone()
+	carapace.Gen(guardduty_disassociateFromMasterAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_disassociateFromMasterAccountCmd).Standalone()
 
-	guardduty_disassociateFromMasterAccountCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty member account.")
-	guardduty_disassociateFromMasterAccountCmd.MarkFlagRequired("detector-id")
+		guardduty_disassociateFromMasterAccountCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty member account.")
+		guardduty_disassociateFromMasterAccountCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_disassociateFromMasterAccountCmd)
 }

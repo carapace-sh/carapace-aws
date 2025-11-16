@@ -12,10 +12,12 @@ var gamelift_describeFleetAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeFleetAttributesCmd).Standalone()
+	carapace.Gen(gamelift_describeFleetAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeFleetAttributesCmd).Standalone()
 
-	gamelift_describeFleetAttributesCmd.Flags().String("fleet-ids", "", "A list of unique fleet identifiers to retrieve attributes for.")
-	gamelift_describeFleetAttributesCmd.Flags().String("limit", "", "The maximum number of results to return.")
-	gamelift_describeFleetAttributesCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+		gamelift_describeFleetAttributesCmd.Flags().String("fleet-ids", "", "A list of unique fleet identifiers to retrieve attributes for.")
+		gamelift_describeFleetAttributesCmd.Flags().String("limit", "", "The maximum number of results to return.")
+		gamelift_describeFleetAttributesCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+	})
 	gameliftCmd.AddCommand(gamelift_describeFleetAttributesCmd)
 }

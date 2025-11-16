@@ -12,10 +12,12 @@ var artifact_getReportMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(artifact_getReportMetadataCmd).Standalone()
+	carapace.Gen(artifact_getReportMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(artifact_getReportMetadataCmd).Standalone()
 
-	artifact_getReportMetadataCmd.Flags().String("report-id", "", "Unique resource ID for the report resource.")
-	artifact_getReportMetadataCmd.Flags().String("report-version", "", "Version for the report resource.")
-	artifact_getReportMetadataCmd.MarkFlagRequired("report-id")
+		artifact_getReportMetadataCmd.Flags().String("report-id", "", "Unique resource ID for the report resource.")
+		artifact_getReportMetadataCmd.Flags().String("report-version", "", "Version for the report resource.")
+		artifact_getReportMetadataCmd.MarkFlagRequired("report-id")
+	})
 	artifactCmd.AddCommand(artifact_getReportMetadataCmd)
 }

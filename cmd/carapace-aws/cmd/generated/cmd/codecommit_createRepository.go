@@ -12,12 +12,14 @@ var codecommit_createRepositoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_createRepositoryCmd).Standalone()
+	carapace.Gen(codecommit_createRepositoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_createRepositoryCmd).Standalone()
 
-	codecommit_createRepositoryCmd.Flags().String("kms-key-id", "", "The ID of the encryption key.")
-	codecommit_createRepositoryCmd.Flags().String("repository-description", "", "A comment or description about the new repository.")
-	codecommit_createRepositoryCmd.Flags().String("repository-name", "", "The name of the new repository to be created.")
-	codecommit_createRepositoryCmd.Flags().String("tags", "", "One or more tag key-value pairs to use when tagging this repository.")
-	codecommit_createRepositoryCmd.MarkFlagRequired("repository-name")
+		codecommit_createRepositoryCmd.Flags().String("kms-key-id", "", "The ID of the encryption key.")
+		codecommit_createRepositoryCmd.Flags().String("repository-description", "", "A comment or description about the new repository.")
+		codecommit_createRepositoryCmd.Flags().String("repository-name", "", "The name of the new repository to be created.")
+		codecommit_createRepositoryCmd.Flags().String("tags", "", "One or more tag key-value pairs to use when tagging this repository.")
+		codecommit_createRepositoryCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_createRepositoryCmd)
 }

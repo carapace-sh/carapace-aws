@@ -12,14 +12,16 @@ var mgh_putResourceAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgh_putResourceAttributesCmd).Standalone()
+	carapace.Gen(mgh_putResourceAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgh_putResourceAttributesCmd).Standalone()
 
-	mgh_putResourceAttributesCmd.Flags().String("dry-run", "", "Optional boolean flag to indicate whether any effect should take place.")
-	mgh_putResourceAttributesCmd.Flags().String("migration-task-name", "", "Unique identifier that references the migration task.")
-	mgh_putResourceAttributesCmd.Flags().String("progress-update-stream", "", "The name of the ProgressUpdateStream.")
-	mgh_putResourceAttributesCmd.Flags().String("resource-attribute-list", "", "Information about the resource that is being migrated.")
-	mgh_putResourceAttributesCmd.MarkFlagRequired("migration-task-name")
-	mgh_putResourceAttributesCmd.MarkFlagRequired("progress-update-stream")
-	mgh_putResourceAttributesCmd.MarkFlagRequired("resource-attribute-list")
+		mgh_putResourceAttributesCmd.Flags().String("dry-run", "", "Optional boolean flag to indicate whether any effect should take place.")
+		mgh_putResourceAttributesCmd.Flags().String("migration-task-name", "", "Unique identifier that references the migration task.")
+		mgh_putResourceAttributesCmd.Flags().String("progress-update-stream", "", "The name of the ProgressUpdateStream.")
+		mgh_putResourceAttributesCmd.Flags().String("resource-attribute-list", "", "Information about the resource that is being migrated.")
+		mgh_putResourceAttributesCmd.MarkFlagRequired("migration-task-name")
+		mgh_putResourceAttributesCmd.MarkFlagRequired("progress-update-stream")
+		mgh_putResourceAttributesCmd.MarkFlagRequired("resource-attribute-list")
+	})
 	mghCmd.AddCommand(mgh_putResourceAttributesCmd)
 }

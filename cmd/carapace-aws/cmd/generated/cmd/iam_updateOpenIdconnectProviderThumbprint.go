@@ -12,11 +12,13 @@ var iam_updateOpenIdconnectProviderThumbprintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_updateOpenIdconnectProviderThumbprintCmd).Standalone()
+	carapace.Gen(iam_updateOpenIdconnectProviderThumbprintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_updateOpenIdconnectProviderThumbprintCmd).Standalone()
 
-	iam_updateOpenIdconnectProviderThumbprintCmd.Flags().String("open-idconnect-provider-arn", "", "The Amazon Resource Name (ARN) of the IAM OIDC provider resource object for which you want to update the thumbprint.")
-	iam_updateOpenIdconnectProviderThumbprintCmd.Flags().String("thumbprint-list", "", "A list of certificate thumbprints that are associated with the specified IAM OpenID Connect provider.")
-	iam_updateOpenIdconnectProviderThumbprintCmd.MarkFlagRequired("open-idconnect-provider-arn")
-	iam_updateOpenIdconnectProviderThumbprintCmd.MarkFlagRequired("thumbprint-list")
+		iam_updateOpenIdconnectProviderThumbprintCmd.Flags().String("open-idconnect-provider-arn", "", "The Amazon Resource Name (ARN) of the IAM OIDC provider resource object for which you want to update the thumbprint.")
+		iam_updateOpenIdconnectProviderThumbprintCmd.Flags().String("thumbprint-list", "", "A list of certificate thumbprints that are associated with the specified IAM OpenID Connect provider.")
+		iam_updateOpenIdconnectProviderThumbprintCmd.MarkFlagRequired("open-idconnect-provider-arn")
+		iam_updateOpenIdconnectProviderThumbprintCmd.MarkFlagRequired("thumbprint-list")
+	})
 	iamCmd.AddCommand(iam_updateOpenIdconnectProviderThumbprintCmd)
 }

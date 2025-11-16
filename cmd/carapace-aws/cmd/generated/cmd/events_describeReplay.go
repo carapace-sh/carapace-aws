@@ -12,9 +12,11 @@ var events_describeReplayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_describeReplayCmd).Standalone()
+	carapace.Gen(events_describeReplayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_describeReplayCmd).Standalone()
 
-	events_describeReplayCmd.Flags().String("replay-name", "", "The name of the replay to retrieve.")
-	events_describeReplayCmd.MarkFlagRequired("replay-name")
+		events_describeReplayCmd.Flags().String("replay-name", "", "The name of the replay to retrieve.")
+		events_describeReplayCmd.MarkFlagRequired("replay-name")
+	})
 	eventsCmd.AddCommand(events_describeReplayCmd)
 }

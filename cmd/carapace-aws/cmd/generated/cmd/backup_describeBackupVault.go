@@ -12,10 +12,12 @@ var backup_describeBackupVaultCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_describeBackupVaultCmd).Standalone()
+	carapace.Gen(backup_describeBackupVaultCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_describeBackupVaultCmd).Standalone()
 
-	backup_describeBackupVaultCmd.Flags().String("backup-vault-account-id", "", "The account ID of the specified backup vault.")
-	backup_describeBackupVaultCmd.Flags().String("backup-vault-name", "", "The name of a logical container where backups are stored.")
-	backup_describeBackupVaultCmd.MarkFlagRequired("backup-vault-name")
+		backup_describeBackupVaultCmd.Flags().String("backup-vault-account-id", "", "The account ID of the specified backup vault.")
+		backup_describeBackupVaultCmd.Flags().String("backup-vault-name", "", "The name of a logical container where backups are stored.")
+		backup_describeBackupVaultCmd.MarkFlagRequired("backup-vault-name")
+	})
 	backupCmd.AddCommand(backup_describeBackupVaultCmd)
 }

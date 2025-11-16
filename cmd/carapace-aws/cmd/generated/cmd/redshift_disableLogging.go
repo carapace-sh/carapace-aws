@@ -12,9 +12,11 @@ var redshift_disableLoggingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_disableLoggingCmd).Standalone()
+	carapace.Gen(redshift_disableLoggingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_disableLoggingCmd).Standalone()
 
-	redshift_disableLoggingCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster on which logging is to be stopped.")
-	redshift_disableLoggingCmd.MarkFlagRequired("cluster-identifier")
+		redshift_disableLoggingCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster on which logging is to be stopped.")
+		redshift_disableLoggingCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_disableLoggingCmd)
 }

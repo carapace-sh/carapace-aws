@@ -12,7 +12,9 @@ var servicecatalogAppregistryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalogAppregistryCmd).Standalone()
+	carapace.Gen(servicecatalogAppregistryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalogAppregistryCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(servicecatalogAppregistryCmd)
 }

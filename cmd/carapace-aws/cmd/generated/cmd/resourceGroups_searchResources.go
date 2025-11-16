@@ -12,11 +12,13 @@ var resourceGroups_searchResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceGroups_searchResourcesCmd).Standalone()
+	carapace.Gen(resourceGroups_searchResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceGroups_searchResourcesCmd).Standalone()
 
-	resourceGroups_searchResourcesCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	resourceGroups_searchResourcesCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
-	resourceGroups_searchResourcesCmd.Flags().String("resource-query", "", "The search query, using the same formats that are supported for resource group definition.")
-	resourceGroups_searchResourcesCmd.MarkFlagRequired("resource-query")
+		resourceGroups_searchResourcesCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		resourceGroups_searchResourcesCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		resourceGroups_searchResourcesCmd.Flags().String("resource-query", "", "The search query, using the same formats that are supported for resource group definition.")
+		resourceGroups_searchResourcesCmd.MarkFlagRequired("resource-query")
+	})
 	resourceGroupsCmd.AddCommand(resourceGroups_searchResourcesCmd)
 }

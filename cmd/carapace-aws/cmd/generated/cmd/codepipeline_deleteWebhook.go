@@ -12,9 +12,11 @@ var codepipeline_deleteWebhookCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_deleteWebhookCmd).Standalone()
+	carapace.Gen(codepipeline_deleteWebhookCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_deleteWebhookCmd).Standalone()
 
-	codepipeline_deleteWebhookCmd.Flags().String("name", "", "The name of the webhook you want to delete.")
-	codepipeline_deleteWebhookCmd.MarkFlagRequired("name")
+		codepipeline_deleteWebhookCmd.Flags().String("name", "", "The name of the webhook you want to delete.")
+		codepipeline_deleteWebhookCmd.MarkFlagRequired("name")
+	})
 	codepipelineCmd.AddCommand(codepipeline_deleteWebhookCmd)
 }

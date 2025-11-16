@@ -12,9 +12,11 @@ var omics_cancelVariantImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_cancelVariantImportJobCmd).Standalone()
+	carapace.Gen(omics_cancelVariantImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_cancelVariantImportJobCmd).Standalone()
 
-	omics_cancelVariantImportJobCmd.Flags().String("job-id", "", "The job's ID.")
-	omics_cancelVariantImportJobCmd.MarkFlagRequired("job-id")
+		omics_cancelVariantImportJobCmd.Flags().String("job-id", "", "The job's ID.")
+		omics_cancelVariantImportJobCmd.MarkFlagRequired("job-id")
+	})
 	omicsCmd.AddCommand(omics_cancelVariantImportJobCmd)
 }

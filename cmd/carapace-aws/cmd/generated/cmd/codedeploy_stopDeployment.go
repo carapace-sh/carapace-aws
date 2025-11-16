@@ -12,10 +12,12 @@ var codedeploy_stopDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_stopDeploymentCmd).Standalone()
+	carapace.Gen(codedeploy_stopDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_stopDeploymentCmd).Standalone()
 
-	codedeploy_stopDeploymentCmd.Flags().String("auto-rollback-enabled", "", "Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.")
-	codedeploy_stopDeploymentCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
-	codedeploy_stopDeploymentCmd.MarkFlagRequired("deployment-id")
+		codedeploy_stopDeploymentCmd.Flags().String("auto-rollback-enabled", "", "Indicates, when a deployment is stopped, whether instances that have been updated should be rolled back to the previous version of the application revision.")
+		codedeploy_stopDeploymentCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
+		codedeploy_stopDeploymentCmd.MarkFlagRequired("deployment-id")
+	})
 	codedeployCmd.AddCommand(codedeploy_stopDeploymentCmd)
 }

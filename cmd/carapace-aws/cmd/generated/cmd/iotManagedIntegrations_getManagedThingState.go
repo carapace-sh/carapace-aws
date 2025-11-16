@@ -12,9 +12,11 @@ var iotManagedIntegrations_getManagedThingStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getManagedThingStateCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getManagedThingStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getManagedThingStateCmd).Standalone()
 
-	iotManagedIntegrations_getManagedThingStateCmd.Flags().String("managed-thing-id", "", "The id of the device.")
-	iotManagedIntegrations_getManagedThingStateCmd.MarkFlagRequired("managed-thing-id")
+		iotManagedIntegrations_getManagedThingStateCmd.Flags().String("managed-thing-id", "", "The id of the device.")
+		iotManagedIntegrations_getManagedThingStateCmd.MarkFlagRequired("managed-thing-id")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getManagedThingStateCmd)
 }

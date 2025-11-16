@@ -12,9 +12,11 @@ var pinpointEmail_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_listTagsForResourceCmd).Standalone()
+	carapace.Gen(pinpointEmail_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_listTagsForResourceCmd).Standalone()
 
-	pinpointEmail_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.")
-	pinpointEmail_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		pinpointEmail_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.")
+		pinpointEmail_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_listTagsForResourceCmd)
 }

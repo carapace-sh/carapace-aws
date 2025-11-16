@@ -12,10 +12,12 @@ var pinpoint_deleteVoiceTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteVoiceTemplateCmd).Standalone()
+	carapace.Gen(pinpoint_deleteVoiceTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteVoiceTemplateCmd).Standalone()
 
-	pinpoint_deleteVoiceTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_deleteVoiceTemplateCmd.Flags().String("version", "", "The unique identifier for the version of the message template to update, retrieve information about, or delete.")
-	pinpoint_deleteVoiceTemplateCmd.MarkFlagRequired("template-name")
+		pinpoint_deleteVoiceTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_deleteVoiceTemplateCmd.Flags().String("version", "", "The unique identifier for the version of the message template to update, retrieve information about, or delete.")
+		pinpoint_deleteVoiceTemplateCmd.MarkFlagRequired("template-name")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteVoiceTemplateCmd)
 }

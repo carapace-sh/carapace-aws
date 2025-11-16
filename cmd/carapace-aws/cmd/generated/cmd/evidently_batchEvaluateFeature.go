@@ -12,11 +12,13 @@ var evidently_batchEvaluateFeatureCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_batchEvaluateFeatureCmd).Standalone()
+	carapace.Gen(evidently_batchEvaluateFeatureCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_batchEvaluateFeatureCmd).Standalone()
 
-	evidently_batchEvaluateFeatureCmd.Flags().String("project", "", "The name or ARN of the project that contains the feature being evaluated.")
-	evidently_batchEvaluateFeatureCmd.Flags().String("requests", "", "An array of structures, where each structure assigns a feature variation to one user session.")
-	evidently_batchEvaluateFeatureCmd.MarkFlagRequired("project")
-	evidently_batchEvaluateFeatureCmd.MarkFlagRequired("requests")
+		evidently_batchEvaluateFeatureCmd.Flags().String("project", "", "The name or ARN of the project that contains the feature being evaluated.")
+		evidently_batchEvaluateFeatureCmd.Flags().String("requests", "", "An array of structures, where each structure assigns a feature variation to one user session.")
+		evidently_batchEvaluateFeatureCmd.MarkFlagRequired("project")
+		evidently_batchEvaluateFeatureCmd.MarkFlagRequired("requests")
+	})
 	evidentlyCmd.AddCommand(evidently_batchEvaluateFeatureCmd)
 }

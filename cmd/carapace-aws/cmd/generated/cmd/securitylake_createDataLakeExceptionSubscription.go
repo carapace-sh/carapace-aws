@@ -12,12 +12,14 @@ var securitylake_createDataLakeExceptionSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_createDataLakeExceptionSubscriptionCmd).Standalone()
+	carapace.Gen(securitylake_createDataLakeExceptionSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_createDataLakeExceptionSubscriptionCmd).Standalone()
 
-	securitylake_createDataLakeExceptionSubscriptionCmd.Flags().String("exception-time-to-live", "", "The expiration period and time-to-live (TTL).")
-	securitylake_createDataLakeExceptionSubscriptionCmd.Flags().String("notification-endpoint", "", "The Amazon Web Services account where you want to receive exception notifications.")
-	securitylake_createDataLakeExceptionSubscriptionCmd.Flags().String("subscription-protocol", "", "The subscription protocol to which exception notifications are posted.")
-	securitylake_createDataLakeExceptionSubscriptionCmd.MarkFlagRequired("notification-endpoint")
-	securitylake_createDataLakeExceptionSubscriptionCmd.MarkFlagRequired("subscription-protocol")
+		securitylake_createDataLakeExceptionSubscriptionCmd.Flags().String("exception-time-to-live", "", "The expiration period and time-to-live (TTL).")
+		securitylake_createDataLakeExceptionSubscriptionCmd.Flags().String("notification-endpoint", "", "The Amazon Web Services account where you want to receive exception notifications.")
+		securitylake_createDataLakeExceptionSubscriptionCmd.Flags().String("subscription-protocol", "", "The subscription protocol to which exception notifications are posted.")
+		securitylake_createDataLakeExceptionSubscriptionCmd.MarkFlagRequired("notification-endpoint")
+		securitylake_createDataLakeExceptionSubscriptionCmd.MarkFlagRequired("subscription-protocol")
+	})
 	securitylakeCmd.AddCommand(securitylake_createDataLakeExceptionSubscriptionCmd)
 }

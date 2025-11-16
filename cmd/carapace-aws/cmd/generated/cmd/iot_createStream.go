@@ -12,15 +12,17 @@ var iot_createStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createStreamCmd).Standalone()
+	carapace.Gen(iot_createStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createStreamCmd).Standalone()
 
-	iot_createStreamCmd.Flags().String("description", "", "A description of the stream.")
-	iot_createStreamCmd.Flags().String("files", "", "The files to stream.")
-	iot_createStreamCmd.Flags().String("role-arn", "", "An IAM role that allows the IoT service principal to access your S3 files.")
-	iot_createStreamCmd.Flags().String("stream-id", "", "The stream ID.")
-	iot_createStreamCmd.Flags().String("tags", "", "Metadata which can be used to manage streams.")
-	iot_createStreamCmd.MarkFlagRequired("files")
-	iot_createStreamCmd.MarkFlagRequired("role-arn")
-	iot_createStreamCmd.MarkFlagRequired("stream-id")
+		iot_createStreamCmd.Flags().String("description", "", "A description of the stream.")
+		iot_createStreamCmd.Flags().String("files", "", "The files to stream.")
+		iot_createStreamCmd.Flags().String("role-arn", "", "An IAM role that allows the IoT service principal to access your S3 files.")
+		iot_createStreamCmd.Flags().String("stream-id", "", "The stream ID.")
+		iot_createStreamCmd.Flags().String("tags", "", "Metadata which can be used to manage streams.")
+		iot_createStreamCmd.MarkFlagRequired("files")
+		iot_createStreamCmd.MarkFlagRequired("role-arn")
+		iot_createStreamCmd.MarkFlagRequired("stream-id")
+	})
 	iotCmd.AddCommand(iot_createStreamCmd)
 }

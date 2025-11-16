@@ -12,10 +12,12 @@ var xray_createSamplingRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_createSamplingRuleCmd).Standalone()
+	carapace.Gen(xray_createSamplingRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_createSamplingRuleCmd).Standalone()
 
-	xray_createSamplingRuleCmd.Flags().String("sampling-rule", "", "The rule definition.")
-	xray_createSamplingRuleCmd.Flags().String("tags", "", "A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule.")
-	xray_createSamplingRuleCmd.MarkFlagRequired("sampling-rule")
+		xray_createSamplingRuleCmd.Flags().String("sampling-rule", "", "The rule definition.")
+		xray_createSamplingRuleCmd.Flags().String("tags", "", "A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule.")
+		xray_createSamplingRuleCmd.MarkFlagRequired("sampling-rule")
+	})
 	xrayCmd.AddCommand(xray_createSamplingRuleCmd)
 }

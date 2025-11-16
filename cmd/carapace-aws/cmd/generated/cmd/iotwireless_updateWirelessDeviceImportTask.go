@@ -12,11 +12,13 @@ var iotwireless_updateWirelessDeviceImportTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_updateWirelessDeviceImportTaskCmd).Standalone()
+	carapace.Gen(iotwireless_updateWirelessDeviceImportTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_updateWirelessDeviceImportTaskCmd).Standalone()
 
-	iotwireless_updateWirelessDeviceImportTaskCmd.Flags().String("id", "", "The identifier of the import task to be updated.")
-	iotwireless_updateWirelessDeviceImportTaskCmd.Flags().String("sidewalk", "", "The Sidewalk-related parameters of the import task to be updated.")
-	iotwireless_updateWirelessDeviceImportTaskCmd.MarkFlagRequired("id")
-	iotwireless_updateWirelessDeviceImportTaskCmd.MarkFlagRequired("sidewalk")
+		iotwireless_updateWirelessDeviceImportTaskCmd.Flags().String("id", "", "The identifier of the import task to be updated.")
+		iotwireless_updateWirelessDeviceImportTaskCmd.Flags().String("sidewalk", "", "The Sidewalk-related parameters of the import task to be updated.")
+		iotwireless_updateWirelessDeviceImportTaskCmd.MarkFlagRequired("id")
+		iotwireless_updateWirelessDeviceImportTaskCmd.MarkFlagRequired("sidewalk")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_updateWirelessDeviceImportTaskCmd)
 }

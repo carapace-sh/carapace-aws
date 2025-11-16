@@ -12,9 +12,11 @@ var securityhub_createMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_createMembersCmd).Standalone()
+	carapace.Gen(securityhub_createMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_createMembersCmd).Standalone()
 
-	securityhub_createMembersCmd.Flags().String("account-details", "", "The list of accounts to associate with the Security Hub administrator account.")
-	securityhub_createMembersCmd.MarkFlagRequired("account-details")
+		securityhub_createMembersCmd.Flags().String("account-details", "", "The list of accounts to associate with the Security Hub administrator account.")
+		securityhub_createMembersCmd.MarkFlagRequired("account-details")
+	})
 	securityhubCmd.AddCommand(securityhub_createMembersCmd)
 }

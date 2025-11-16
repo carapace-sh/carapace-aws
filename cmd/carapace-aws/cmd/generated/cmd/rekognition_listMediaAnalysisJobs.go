@@ -12,9 +12,11 @@ var rekognition_listMediaAnalysisJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_listMediaAnalysisJobsCmd).Standalone()
+	carapace.Gen(rekognition_listMediaAnalysisJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_listMediaAnalysisJobsCmd).Standalone()
 
-	rekognition_listMediaAnalysisJobsCmd.Flags().String("max-results", "", "The maximum number of results to return per paginated call.")
-	rekognition_listMediaAnalysisJobsCmd.Flags().String("next-token", "", "Pagination token, if the previous response was incomplete.")
+		rekognition_listMediaAnalysisJobsCmd.Flags().String("max-results", "", "The maximum number of results to return per paginated call.")
+		rekognition_listMediaAnalysisJobsCmd.Flags().String("next-token", "", "Pagination token, if the previous response was incomplete.")
+	})
 	rekognitionCmd.AddCommand(rekognition_listMediaAnalysisJobsCmd)
 }

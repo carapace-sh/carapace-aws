@@ -12,12 +12,14 @@ var wellarchitected_listLensesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listLensesCmd).Standalone()
+	carapace.Gen(wellarchitected_listLensesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listLensesCmd).Standalone()
 
-	wellarchitected_listLensesCmd.Flags().String("lens-name", "", "")
-	wellarchitected_listLensesCmd.Flags().String("lens-status", "", "The status of lenses to be returned.")
-	wellarchitected_listLensesCmd.Flags().String("lens-type", "", "The type of lenses to be returned.")
-	wellarchitected_listLensesCmd.Flags().String("max-results", "", "")
-	wellarchitected_listLensesCmd.Flags().String("next-token", "", "")
+		wellarchitected_listLensesCmd.Flags().String("lens-name", "", "")
+		wellarchitected_listLensesCmd.Flags().String("lens-status", "", "The status of lenses to be returned.")
+		wellarchitected_listLensesCmd.Flags().String("lens-type", "", "The type of lenses to be returned.")
+		wellarchitected_listLensesCmd.Flags().String("max-results", "", "")
+		wellarchitected_listLensesCmd.Flags().String("next-token", "", "")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listLensesCmd)
 }

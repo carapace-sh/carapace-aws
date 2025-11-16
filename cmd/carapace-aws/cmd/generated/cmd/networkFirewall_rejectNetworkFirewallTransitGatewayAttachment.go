@@ -12,9 +12,11 @@ var networkFirewall_rejectNetworkFirewallTransitGatewayAttachmentCmd = &cobra.Co
 }
 
 func init() {
-	carapace.Gen(networkFirewall_rejectNetworkFirewallTransitGatewayAttachmentCmd).Standalone()
+	carapace.Gen(networkFirewall_rejectNetworkFirewallTransitGatewayAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_rejectNetworkFirewallTransitGatewayAttachmentCmd).Standalone()
 
-	networkFirewall_rejectNetworkFirewallTransitGatewayAttachmentCmd.Flags().String("transit-gateway-attachment-id", "", "Required.")
-	networkFirewall_rejectNetworkFirewallTransitGatewayAttachmentCmd.MarkFlagRequired("transit-gateway-attachment-id")
+		networkFirewall_rejectNetworkFirewallTransitGatewayAttachmentCmd.Flags().String("transit-gateway-attachment-id", "", "Required.")
+		networkFirewall_rejectNetworkFirewallTransitGatewayAttachmentCmd.MarkFlagRequired("transit-gateway-attachment-id")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_rejectNetworkFirewallTransitGatewayAttachmentCmd)
 }

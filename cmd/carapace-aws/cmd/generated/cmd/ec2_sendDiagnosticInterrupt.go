@@ -12,12 +12,14 @@ var ec2_sendDiagnosticInterruptCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_sendDiagnosticInterruptCmd).Standalone()
+	carapace.Gen(ec2_sendDiagnosticInterruptCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_sendDiagnosticInterruptCmd).Standalone()
 
-	ec2_sendDiagnosticInterruptCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_sendDiagnosticInterruptCmd.Flags().String("instance-id", "", "The ID of the instance.")
-	ec2_sendDiagnosticInterruptCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_sendDiagnosticInterruptCmd.MarkFlagRequired("instance-id")
-	ec2_sendDiagnosticInterruptCmd.Flag("no-dry-run").Hidden = true
+		ec2_sendDiagnosticInterruptCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_sendDiagnosticInterruptCmd.Flags().String("instance-id", "", "The ID of the instance.")
+		ec2_sendDiagnosticInterruptCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_sendDiagnosticInterruptCmd.MarkFlagRequired("instance-id")
+		ec2_sendDiagnosticInterruptCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_sendDiagnosticInterruptCmd)
 }

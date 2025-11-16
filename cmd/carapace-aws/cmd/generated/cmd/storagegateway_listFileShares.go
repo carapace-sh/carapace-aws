@@ -12,10 +12,12 @@ var storagegateway_listFileSharesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_listFileSharesCmd).Standalone()
+	carapace.Gen(storagegateway_listFileSharesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_listFileSharesCmd).Standalone()
 
-	storagegateway_listFileSharesCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway whose file shares you want to list.")
-	storagegateway_listFileSharesCmd.Flags().String("limit", "", "The maximum number of file shares to return in the response.")
-	storagegateway_listFileSharesCmd.Flags().String("marker", "", "Opaque pagination token returned from a previous ListFileShares operation.")
+		storagegateway_listFileSharesCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway whose file shares you want to list.")
+		storagegateway_listFileSharesCmd.Flags().String("limit", "", "The maximum number of file shares to return in the response.")
+		storagegateway_listFileSharesCmd.Flags().String("marker", "", "Opaque pagination token returned from a previous ListFileShares operation.")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_listFileSharesCmd)
 }

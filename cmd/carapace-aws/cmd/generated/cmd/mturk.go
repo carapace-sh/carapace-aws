@@ -12,7 +12,9 @@ var mturkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturkCmd).Standalone()
+	carapace.Gen(mturkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturkCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(mturkCmd)
 }

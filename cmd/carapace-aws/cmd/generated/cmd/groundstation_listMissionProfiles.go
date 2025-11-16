@@ -12,9 +12,11 @@ var groundstation_listMissionProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_listMissionProfilesCmd).Standalone()
+	carapace.Gen(groundstation_listMissionProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_listMissionProfilesCmd).Standalone()
 
-	groundstation_listMissionProfilesCmd.Flags().String("max-results", "", "Maximum number of mission profiles returned.")
-	groundstation_listMissionProfilesCmd.Flags().String("next-token", "", "Next token returned in the request of a previous `ListMissionProfiles` call.")
+		groundstation_listMissionProfilesCmd.Flags().String("max-results", "", "Maximum number of mission profiles returned.")
+		groundstation_listMissionProfilesCmd.Flags().String("next-token", "", "Next token returned in the request of a previous `ListMissionProfiles` call.")
+	})
 	groundstationCmd.AddCommand(groundstation_listMissionProfilesCmd)
 }

@@ -12,9 +12,11 @@ var proton_cancelServicePipelineDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_cancelServicePipelineDeploymentCmd).Standalone()
+	carapace.Gen(proton_cancelServicePipelineDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_cancelServicePipelineDeploymentCmd).Standalone()
 
-	proton_cancelServicePipelineDeploymentCmd.Flags().String("service-name", "", "The name of the service with the service pipeline deployment to cancel.")
-	proton_cancelServicePipelineDeploymentCmd.MarkFlagRequired("service-name")
+		proton_cancelServicePipelineDeploymentCmd.Flags().String("service-name", "", "The name of the service with the service pipeline deployment to cancel.")
+		proton_cancelServicePipelineDeploymentCmd.MarkFlagRequired("service-name")
+	})
 	protonCmd.AddCommand(proton_cancelServicePipelineDeploymentCmd)
 }

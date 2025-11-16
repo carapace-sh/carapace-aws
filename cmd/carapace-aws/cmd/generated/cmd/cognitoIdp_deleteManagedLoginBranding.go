@@ -12,11 +12,13 @@ var cognitoIdp_deleteManagedLoginBrandingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_deleteManagedLoginBrandingCmd).Standalone()
+	carapace.Gen(cognitoIdp_deleteManagedLoginBrandingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_deleteManagedLoginBrandingCmd).Standalone()
 
-	cognitoIdp_deleteManagedLoginBrandingCmd.Flags().String("managed-login-branding-id", "", "The ID of the managed login branding style that you want to delete.")
-	cognitoIdp_deleteManagedLoginBrandingCmd.Flags().String("user-pool-id", "", "The ID of the user pool that contains the managed login branding style that you want to delete.")
-	cognitoIdp_deleteManagedLoginBrandingCmd.MarkFlagRequired("managed-login-branding-id")
-	cognitoIdp_deleteManagedLoginBrandingCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_deleteManagedLoginBrandingCmd.Flags().String("managed-login-branding-id", "", "The ID of the managed login branding style that you want to delete.")
+		cognitoIdp_deleteManagedLoginBrandingCmd.Flags().String("user-pool-id", "", "The ID of the user pool that contains the managed login branding style that you want to delete.")
+		cognitoIdp_deleteManagedLoginBrandingCmd.MarkFlagRequired("managed-login-branding-id")
+		cognitoIdp_deleteManagedLoginBrandingCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_deleteManagedLoginBrandingCmd)
 }

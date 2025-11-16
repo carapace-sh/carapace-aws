@@ -12,9 +12,11 @@ var workspacesInstances_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_listTagsForResourceCmd).Standalone()
+	carapace.Gen(workspacesInstances_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_listTagsForResourceCmd).Standalone()
 
-	workspacesInstances_listTagsForResourceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpace Instance.")
-	workspacesInstances_listTagsForResourceCmd.MarkFlagRequired("workspace-instance-id")
+		workspacesInstances_listTagsForResourceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpace Instance.")
+		workspacesInstances_listTagsForResourceCmd.MarkFlagRequired("workspace-instance-id")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_listTagsForResourceCmd)
 }

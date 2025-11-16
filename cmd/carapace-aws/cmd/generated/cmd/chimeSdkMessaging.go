@@ -12,7 +12,9 @@ var chimeSdkMessagingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessagingCmd).Standalone()
+	carapace.Gen(chimeSdkMessagingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessagingCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(chimeSdkMessagingCmd)
 }

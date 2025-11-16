@@ -12,9 +12,11 @@ var opensearchserverless_getSecurityConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_getSecurityConfigCmd).Standalone()
+	carapace.Gen(opensearchserverless_getSecurityConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_getSecurityConfigCmd).Standalone()
 
-	opensearchserverless_getSecurityConfigCmd.Flags().String("id", "", "The unique identifier of the security configuration.")
-	opensearchserverless_getSecurityConfigCmd.MarkFlagRequired("id")
+		opensearchserverless_getSecurityConfigCmd.Flags().String("id", "", "The unique identifier of the security configuration.")
+		opensearchserverless_getSecurityConfigCmd.MarkFlagRequired("id")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_getSecurityConfigCmd)
 }

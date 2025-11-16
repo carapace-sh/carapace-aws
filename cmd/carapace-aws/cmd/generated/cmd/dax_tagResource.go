@@ -12,11 +12,13 @@ var dax_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_tagResourceCmd).Standalone()
+	carapace.Gen(dax_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_tagResourceCmd).Standalone()
 
-	dax_tagResourceCmd.Flags().String("resource-name", "", "The name of the DAX resource to which tags should be added.")
-	dax_tagResourceCmd.Flags().String("tags", "", "The tags to be assigned to the DAX resource.")
-	dax_tagResourceCmd.MarkFlagRequired("resource-name")
-	dax_tagResourceCmd.MarkFlagRequired("tags")
+		dax_tagResourceCmd.Flags().String("resource-name", "", "The name of the DAX resource to which tags should be added.")
+		dax_tagResourceCmd.Flags().String("tags", "", "The tags to be assigned to the DAX resource.")
+		dax_tagResourceCmd.MarkFlagRequired("resource-name")
+		dax_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	daxCmd.AddCommand(dax_tagResourceCmd)
 }

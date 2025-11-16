@@ -12,11 +12,13 @@ var marketplaceDeployment_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceDeployment_untagResourceCmd).Standalone()
+	carapace.Gen(marketplaceDeployment_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceDeployment_untagResourceCmd).Standalone()
 
-	marketplaceDeployment_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.")
-	marketplaceDeployment_untagResourceCmd.Flags().String("tag-keys", "", "A list of key names of tags to be removed.")
-	marketplaceDeployment_untagResourceCmd.MarkFlagRequired("resource-arn")
-	marketplaceDeployment_untagResourceCmd.MarkFlagRequired("tag-keys")
+		marketplaceDeployment_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.")
+		marketplaceDeployment_untagResourceCmd.Flags().String("tag-keys", "", "A list of key names of tags to be removed.")
+		marketplaceDeployment_untagResourceCmd.MarkFlagRequired("resource-arn")
+		marketplaceDeployment_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	marketplaceDeploymentCmd.AddCommand(marketplaceDeployment_untagResourceCmd)
 }

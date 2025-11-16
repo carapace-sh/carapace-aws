@@ -12,9 +12,11 @@ var amplify_getWebhookCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_getWebhookCmd).Standalone()
+	carapace.Gen(amplify_getWebhookCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_getWebhookCmd).Standalone()
 
-	amplify_getWebhookCmd.Flags().String("webhook-id", "", "The unique ID for a webhook.")
-	amplify_getWebhookCmd.MarkFlagRequired("webhook-id")
+		amplify_getWebhookCmd.Flags().String("webhook-id", "", "The unique ID for a webhook.")
+		amplify_getWebhookCmd.MarkFlagRequired("webhook-id")
+	})
 	amplifyCmd.AddCommand(amplify_getWebhookCmd)
 }

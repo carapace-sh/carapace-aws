@@ -12,14 +12,16 @@ var ec2_confirmProductInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_confirmProductInstanceCmd).Standalone()
+	carapace.Gen(ec2_confirmProductInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_confirmProductInstanceCmd).Standalone()
 
-	ec2_confirmProductInstanceCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_confirmProductInstanceCmd.Flags().String("instance-id", "", "The ID of the instance.")
-	ec2_confirmProductInstanceCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_confirmProductInstanceCmd.Flags().String("product-code", "", "The product code.")
-	ec2_confirmProductInstanceCmd.MarkFlagRequired("instance-id")
-	ec2_confirmProductInstanceCmd.Flag("no-dry-run").Hidden = true
-	ec2_confirmProductInstanceCmd.MarkFlagRequired("product-code")
+		ec2_confirmProductInstanceCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_confirmProductInstanceCmd.Flags().String("instance-id", "", "The ID of the instance.")
+		ec2_confirmProductInstanceCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_confirmProductInstanceCmd.Flags().String("product-code", "", "The product code.")
+		ec2_confirmProductInstanceCmd.MarkFlagRequired("instance-id")
+		ec2_confirmProductInstanceCmd.Flag("no-dry-run").Hidden = true
+		ec2_confirmProductInstanceCmd.MarkFlagRequired("product-code")
+	})
 	ec2Cmd.AddCommand(ec2_confirmProductInstanceCmd)
 }

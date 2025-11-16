@@ -12,11 +12,13 @@ var sagemaker_deleteUserProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteUserProfileCmd).Standalone()
+	carapace.Gen(sagemaker_deleteUserProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteUserProfileCmd).Standalone()
 
-	sagemaker_deleteUserProfileCmd.Flags().String("domain-id", "", "The domain ID.")
-	sagemaker_deleteUserProfileCmd.Flags().String("user-profile-name", "", "The user profile name.")
-	sagemaker_deleteUserProfileCmd.MarkFlagRequired("domain-id")
-	sagemaker_deleteUserProfileCmd.MarkFlagRequired("user-profile-name")
+		sagemaker_deleteUserProfileCmd.Flags().String("domain-id", "", "The domain ID.")
+		sagemaker_deleteUserProfileCmd.Flags().String("user-profile-name", "", "The user profile name.")
+		sagemaker_deleteUserProfileCmd.MarkFlagRequired("domain-id")
+		sagemaker_deleteUserProfileCmd.MarkFlagRequired("user-profile-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteUserProfileCmd)
 }

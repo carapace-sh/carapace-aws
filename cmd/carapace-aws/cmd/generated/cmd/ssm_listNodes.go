@@ -12,11 +12,13 @@ var ssm_listNodesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_listNodesCmd).Standalone()
+	carapace.Gen(ssm_listNodesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_listNodesCmd).Standalone()
 
-	ssm_listNodesCmd.Flags().String("filters", "", "One or more filters.")
-	ssm_listNodesCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_listNodesCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	ssm_listNodesCmd.Flags().String("sync-name", "", "The name of the Amazon Web Services managed resource data sync to retrieve information about.")
+		ssm_listNodesCmd.Flags().String("filters", "", "One or more filters.")
+		ssm_listNodesCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_listNodesCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_listNodesCmd.Flags().String("sync-name", "", "The name of the Amazon Web Services managed resource data sync to retrieve information about.")
+	})
 	ssmCmd.AddCommand(ssm_listNodesCmd)
 }

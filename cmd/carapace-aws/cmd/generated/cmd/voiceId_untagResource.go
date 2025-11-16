@@ -12,11 +12,13 @@ var voiceId_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_untagResourceCmd).Standalone()
+	carapace.Gen(voiceId_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_untagResourceCmd).Standalone()
 
-	voiceId_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Voice ID resource you want to remove tags from.")
-	voiceId_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys you want to remove from the specified resource.")
-	voiceId_untagResourceCmd.MarkFlagRequired("resource-arn")
-	voiceId_untagResourceCmd.MarkFlagRequired("tag-keys")
+		voiceId_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Voice ID resource you want to remove tags from.")
+		voiceId_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys you want to remove from the specified resource.")
+		voiceId_untagResourceCmd.MarkFlagRequired("resource-arn")
+		voiceId_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	voiceIdCmd.AddCommand(voiceId_untagResourceCmd)
 }

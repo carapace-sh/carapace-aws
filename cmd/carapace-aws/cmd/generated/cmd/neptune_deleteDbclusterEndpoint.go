@@ -12,9 +12,11 @@ var neptune_deleteDbclusterEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_deleteDbclusterEndpointCmd).Standalone()
+	carapace.Gen(neptune_deleteDbclusterEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_deleteDbclusterEndpointCmd).Standalone()
 
-	neptune_deleteDbclusterEndpointCmd.Flags().String("dbcluster-endpoint-identifier", "", "The identifier associated with the custom endpoint.")
-	neptune_deleteDbclusterEndpointCmd.MarkFlagRequired("dbcluster-endpoint-identifier")
+		neptune_deleteDbclusterEndpointCmd.Flags().String("dbcluster-endpoint-identifier", "", "The identifier associated with the custom endpoint.")
+		neptune_deleteDbclusterEndpointCmd.MarkFlagRequired("dbcluster-endpoint-identifier")
+	})
 	neptuneCmd.AddCommand(neptune_deleteDbclusterEndpointCmd)
 }

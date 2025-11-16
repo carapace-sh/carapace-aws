@@ -12,11 +12,13 @@ var workdocs_describeNotificationSubscriptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_describeNotificationSubscriptionsCmd).Standalone()
+	carapace.Gen(workdocs_describeNotificationSubscriptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_describeNotificationSubscriptionsCmd).Standalone()
 
-	workdocs_describeNotificationSubscriptionsCmd.Flags().String("limit", "", "The maximum number of items to return with this call.")
-	workdocs_describeNotificationSubscriptionsCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	workdocs_describeNotificationSubscriptionsCmd.Flags().String("organization-id", "", "The ID of the organization.")
-	workdocs_describeNotificationSubscriptionsCmd.MarkFlagRequired("organization-id")
+		workdocs_describeNotificationSubscriptionsCmd.Flags().String("limit", "", "The maximum number of items to return with this call.")
+		workdocs_describeNotificationSubscriptionsCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		workdocs_describeNotificationSubscriptionsCmd.Flags().String("organization-id", "", "The ID of the organization.")
+		workdocs_describeNotificationSubscriptionsCmd.MarkFlagRequired("organization-id")
+	})
 	workdocsCmd.AddCommand(workdocs_describeNotificationSubscriptionsCmd)
 }

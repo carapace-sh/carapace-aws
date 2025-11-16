@@ -12,9 +12,11 @@ var logs_deleteTransformerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteTransformerCmd).Standalone()
+	carapace.Gen(logs_deleteTransformerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteTransformerCmd).Standalone()
 
-	logs_deleteTransformerCmd.Flags().String("log-group-identifier", "", "Specify either the name or ARN of the log group to delete the transformer for.")
-	logs_deleteTransformerCmd.MarkFlagRequired("log-group-identifier")
+		logs_deleteTransformerCmd.Flags().String("log-group-identifier", "", "Specify either the name or ARN of the log group to delete the transformer for.")
+		logs_deleteTransformerCmd.MarkFlagRequired("log-group-identifier")
+	})
 	logsCmd.AddCommand(logs_deleteTransformerCmd)
 }

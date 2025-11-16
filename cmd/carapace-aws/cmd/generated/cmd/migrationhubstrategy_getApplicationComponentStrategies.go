@@ -12,9 +12,11 @@ var migrationhubstrategy_getApplicationComponentStrategiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubstrategy_getApplicationComponentStrategiesCmd).Standalone()
+	carapace.Gen(migrationhubstrategy_getApplicationComponentStrategiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubstrategy_getApplicationComponentStrategiesCmd).Standalone()
 
-	migrationhubstrategy_getApplicationComponentStrategiesCmd.Flags().String("application-component-id", "", "The ID of the application component.")
-	migrationhubstrategy_getApplicationComponentStrategiesCmd.MarkFlagRequired("application-component-id")
+		migrationhubstrategy_getApplicationComponentStrategiesCmd.Flags().String("application-component-id", "", "The ID of the application component.")
+		migrationhubstrategy_getApplicationComponentStrategiesCmd.MarkFlagRequired("application-component-id")
+	})
 	migrationhubstrategyCmd.AddCommand(migrationhubstrategy_getApplicationComponentStrategiesCmd)
 }

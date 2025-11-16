@@ -12,9 +12,11 @@ var sagemaker_deleteFeatureGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteFeatureGroupCmd).Standalone()
+	carapace.Gen(sagemaker_deleteFeatureGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteFeatureGroupCmd).Standalone()
 
-	sagemaker_deleteFeatureGroupCmd.Flags().String("feature-group-name", "", "The name of the `FeatureGroup` you want to delete.")
-	sagemaker_deleteFeatureGroupCmd.MarkFlagRequired("feature-group-name")
+		sagemaker_deleteFeatureGroupCmd.Flags().String("feature-group-name", "", "The name of the `FeatureGroup` you want to delete.")
+		sagemaker_deleteFeatureGroupCmd.MarkFlagRequired("feature-group-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteFeatureGroupCmd)
 }

@@ -12,9 +12,11 @@ var notifications_deleteEventRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_deleteEventRuleCmd).Standalone()
+	carapace.Gen(notifications_deleteEventRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_deleteEventRuleCmd).Standalone()
 
-	notifications_deleteEventRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `EventRule` to delete.")
-	notifications_deleteEventRuleCmd.MarkFlagRequired("arn")
+		notifications_deleteEventRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `EventRule` to delete.")
+		notifications_deleteEventRuleCmd.MarkFlagRequired("arn")
+	})
 	notificationsCmd.AddCommand(notifications_deleteEventRuleCmd)
 }

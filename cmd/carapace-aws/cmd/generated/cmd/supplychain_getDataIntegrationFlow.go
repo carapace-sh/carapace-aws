@@ -12,11 +12,13 @@ var supplychain_getDataIntegrationFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_getDataIntegrationFlowCmd).Standalone()
+	carapace.Gen(supplychain_getDataIntegrationFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_getDataIntegrationFlowCmd).Standalone()
 
-	supplychain_getDataIntegrationFlowCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
-	supplychain_getDataIntegrationFlowCmd.Flags().String("name", "", "The name of the DataIntegrationFlow created.")
-	supplychain_getDataIntegrationFlowCmd.MarkFlagRequired("instance-id")
-	supplychain_getDataIntegrationFlowCmd.MarkFlagRequired("name")
+		supplychain_getDataIntegrationFlowCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
+		supplychain_getDataIntegrationFlowCmd.Flags().String("name", "", "The name of the DataIntegrationFlow created.")
+		supplychain_getDataIntegrationFlowCmd.MarkFlagRequired("instance-id")
+		supplychain_getDataIntegrationFlowCmd.MarkFlagRequired("name")
+	})
 	supplychainCmd.AddCommand(supplychain_getDataIntegrationFlowCmd)
 }

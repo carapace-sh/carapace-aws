@@ -12,11 +12,13 @@ var vpcLattice_updateTargetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_updateTargetGroupCmd).Standalone()
+	carapace.Gen(vpcLattice_updateTargetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_updateTargetGroupCmd).Standalone()
 
-	vpcLattice_updateTargetGroupCmd.Flags().String("health-check", "", "The health check configuration.")
-	vpcLattice_updateTargetGroupCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
-	vpcLattice_updateTargetGroupCmd.MarkFlagRequired("health-check")
-	vpcLattice_updateTargetGroupCmd.MarkFlagRequired("target-group-identifier")
+		vpcLattice_updateTargetGroupCmd.Flags().String("health-check", "", "The health check configuration.")
+		vpcLattice_updateTargetGroupCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
+		vpcLattice_updateTargetGroupCmd.MarkFlagRequired("health-check")
+		vpcLattice_updateTargetGroupCmd.MarkFlagRequired("target-group-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_updateTargetGroupCmd)
 }

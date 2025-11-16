@@ -12,10 +12,12 @@ var synthetics_createGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_createGroupCmd).Standalone()
+	carapace.Gen(synthetics_createGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_createGroupCmd).Standalone()
 
-	synthetics_createGroupCmd.Flags().String("name", "", "The name for the group.")
-	synthetics_createGroupCmd.Flags().String("tags", "", "A list of key-value pairs to associate with the group.")
-	synthetics_createGroupCmd.MarkFlagRequired("name")
+		synthetics_createGroupCmd.Flags().String("name", "", "The name for the group.")
+		synthetics_createGroupCmd.Flags().String("tags", "", "A list of key-value pairs to associate with the group.")
+		synthetics_createGroupCmd.MarkFlagRequired("name")
+	})
 	syntheticsCmd.AddCommand(synthetics_createGroupCmd)
 }

@@ -12,7 +12,9 @@ var emr_getBlockPublicAccessConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_getBlockPublicAccessConfigurationCmd).Standalone()
+	carapace.Gen(emr_getBlockPublicAccessConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_getBlockPublicAccessConfigurationCmd).Standalone()
 
+	})
 	emrCmd.AddCommand(emr_getBlockPublicAccessConfigurationCmd)
 }

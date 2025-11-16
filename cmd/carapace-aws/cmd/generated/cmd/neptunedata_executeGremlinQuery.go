@@ -12,10 +12,12 @@ var neptunedata_executeGremlinQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_executeGremlinQueryCmd).Standalone()
+	carapace.Gen(neptunedata_executeGremlinQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_executeGremlinQueryCmd).Standalone()
 
-	neptunedata_executeGremlinQueryCmd.Flags().String("gremlin-query", "", "Using this API, you can run Gremlin queries in string format much as you can using the HTTP endpoint.")
-	neptunedata_executeGremlinQueryCmd.Flags().String("serializer", "", "If non-null, the query results are returned in a serialized response message in the format specified by this parameter.")
-	neptunedata_executeGremlinQueryCmd.MarkFlagRequired("gremlin-query")
+		neptunedata_executeGremlinQueryCmd.Flags().String("gremlin-query", "", "Using this API, you can run Gremlin queries in string format much as you can using the HTTP endpoint.")
+		neptunedata_executeGremlinQueryCmd.Flags().String("serializer", "", "If non-null, the query results are returned in a serialized response message in the format specified by this parameter.")
+		neptunedata_executeGremlinQueryCmd.MarkFlagRequired("gremlin-query")
+	})
 	neptunedataCmd.AddCommand(neptunedata_executeGremlinQueryCmd)
 }

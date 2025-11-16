@@ -12,13 +12,15 @@ var iotfleetwise_updateModelManifestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_updateModelManifestCmd).Standalone()
+	carapace.Gen(iotfleetwise_updateModelManifestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_updateModelManifestCmd).Standalone()
 
-	iotfleetwise_updateModelManifestCmd.Flags().String("description", "", "A brief description of the vehicle model.")
-	iotfleetwise_updateModelManifestCmd.Flags().String("name", "", "The name of the vehicle model to update.")
-	iotfleetwise_updateModelManifestCmd.Flags().String("nodes-to-add", "", "A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to add to the vehicle model.")
-	iotfleetwise_updateModelManifestCmd.Flags().String("nodes-to-remove", "", "A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to remove from the vehicle model.")
-	iotfleetwise_updateModelManifestCmd.Flags().String("status", "", "The state of the vehicle model.")
-	iotfleetwise_updateModelManifestCmd.MarkFlagRequired("name")
+		iotfleetwise_updateModelManifestCmd.Flags().String("description", "", "A brief description of the vehicle model.")
+		iotfleetwise_updateModelManifestCmd.Flags().String("name", "", "The name of the vehicle model to update.")
+		iotfleetwise_updateModelManifestCmd.Flags().String("nodes-to-add", "", "A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to add to the vehicle model.")
+		iotfleetwise_updateModelManifestCmd.Flags().String("nodes-to-remove", "", "A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to remove from the vehicle model.")
+		iotfleetwise_updateModelManifestCmd.Flags().String("status", "", "The state of the vehicle model.")
+		iotfleetwise_updateModelManifestCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_updateModelManifestCmd)
 }

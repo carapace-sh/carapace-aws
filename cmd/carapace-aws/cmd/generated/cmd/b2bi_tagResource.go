@@ -12,11 +12,13 @@ var b2bi_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_tagResourceCmd).Standalone()
+	carapace.Gen(b2bi_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_tagResourceCmd).Standalone()
 
-	b2bi_tagResourceCmd.Flags().String("resource-arn", "", "Specifies an Amazon Resource Name (ARN) for a specific Amazon Web Services resource, such as a capability, partnership, profile, or transformer.")
-	b2bi_tagResourceCmd.Flags().String("tags", "", "Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type.")
-	b2bi_tagResourceCmd.MarkFlagRequired("resource-arn")
-	b2bi_tagResourceCmd.MarkFlagRequired("tags")
+		b2bi_tagResourceCmd.Flags().String("resource-arn", "", "Specifies an Amazon Resource Name (ARN) for a specific Amazon Web Services resource, such as a capability, partnership, profile, or transformer.")
+		b2bi_tagResourceCmd.Flags().String("tags", "", "Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type.")
+		b2bi_tagResourceCmd.MarkFlagRequired("resource-arn")
+		b2bi_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	b2biCmd.AddCommand(b2bi_tagResourceCmd)
 }

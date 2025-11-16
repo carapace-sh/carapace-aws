@@ -12,7 +12,9 @@ var trustedadvisorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(trustedadvisorCmd).Standalone()
+	carapace.Gen(trustedadvisorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(trustedadvisorCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(trustedadvisorCmd)
 }

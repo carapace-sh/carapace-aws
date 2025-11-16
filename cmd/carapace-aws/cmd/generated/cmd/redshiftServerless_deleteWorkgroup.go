@@ -12,9 +12,11 @@ var redshiftServerless_deleteWorkgroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_deleteWorkgroupCmd).Standalone()
+	carapace.Gen(redshiftServerless_deleteWorkgroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_deleteWorkgroupCmd).Standalone()
 
-	redshiftServerless_deleteWorkgroupCmd.Flags().String("workgroup-name", "", "The name of the workgroup to be deleted.")
-	redshiftServerless_deleteWorkgroupCmd.MarkFlagRequired("workgroup-name")
+		redshiftServerless_deleteWorkgroupCmd.Flags().String("workgroup-name", "", "The name of the workgroup to be deleted.")
+		redshiftServerless_deleteWorkgroupCmd.MarkFlagRequired("workgroup-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_deleteWorkgroupCmd)
 }

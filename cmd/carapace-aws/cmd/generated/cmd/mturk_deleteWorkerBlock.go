@@ -12,10 +12,12 @@ var mturk_deleteWorkerBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_deleteWorkerBlockCmd).Standalone()
+	carapace.Gen(mturk_deleteWorkerBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_deleteWorkerBlockCmd).Standalone()
 
-	mturk_deleteWorkerBlockCmd.Flags().String("reason", "", "A message that explains the reason for unblocking the Worker.")
-	mturk_deleteWorkerBlockCmd.Flags().String("worker-id", "", "The ID of the Worker to unblock.")
-	mturk_deleteWorkerBlockCmd.MarkFlagRequired("worker-id")
+		mturk_deleteWorkerBlockCmd.Flags().String("reason", "", "A message that explains the reason for unblocking the Worker.")
+		mturk_deleteWorkerBlockCmd.Flags().String("worker-id", "", "The ID of the Worker to unblock.")
+		mturk_deleteWorkerBlockCmd.MarkFlagRequired("worker-id")
+	})
 	mturkCmd.AddCommand(mturk_deleteWorkerBlockCmd)
 }

@@ -12,9 +12,11 @@ var deadline_getFarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_getFarmCmd).Standalone()
+	carapace.Gen(deadline_getFarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_getFarmCmd).Standalone()
 
-	deadline_getFarmCmd.Flags().String("farm-id", "", "The farm ID of the farm.")
-	deadline_getFarmCmd.MarkFlagRequired("farm-id")
+		deadline_getFarmCmd.Flags().String("farm-id", "", "The farm ID of the farm.")
+		deadline_getFarmCmd.MarkFlagRequired("farm-id")
+	})
 	deadlineCmd.AddCommand(deadline_getFarmCmd)
 }

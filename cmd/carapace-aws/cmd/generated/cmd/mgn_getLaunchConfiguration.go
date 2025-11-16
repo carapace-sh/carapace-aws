@@ -12,10 +12,12 @@ var mgn_getLaunchConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_getLaunchConfigurationCmd).Standalone()
+	carapace.Gen(mgn_getLaunchConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_getLaunchConfigurationCmd).Standalone()
 
-	mgn_getLaunchConfigurationCmd.Flags().String("account-id", "", "Request to get Launch Configuration information by Account ID.")
-	mgn_getLaunchConfigurationCmd.Flags().String("source-server-id", "", "Request to get Launch Configuration information by Source Server ID.")
-	mgn_getLaunchConfigurationCmd.MarkFlagRequired("source-server-id")
+		mgn_getLaunchConfigurationCmd.Flags().String("account-id", "", "Request to get Launch Configuration information by Account ID.")
+		mgn_getLaunchConfigurationCmd.Flags().String("source-server-id", "", "Request to get Launch Configuration information by Source Server ID.")
+		mgn_getLaunchConfigurationCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_getLaunchConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var apprunner_deleteVpcConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_deleteVpcConnectorCmd).Standalone()
+	carapace.Gen(apprunner_deleteVpcConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_deleteVpcConnectorCmd).Standalone()
 
-	apprunner_deleteVpcConnectorCmd.Flags().String("vpc-connector-arn", "", "The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to delete.")
-	apprunner_deleteVpcConnectorCmd.MarkFlagRequired("vpc-connector-arn")
+		apprunner_deleteVpcConnectorCmd.Flags().String("vpc-connector-arn", "", "The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to delete.")
+		apprunner_deleteVpcConnectorCmd.MarkFlagRequired("vpc-connector-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_deleteVpcConnectorCmd)
 }

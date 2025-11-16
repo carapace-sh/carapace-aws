@@ -12,13 +12,15 @@ var connect_listPhoneNumbersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listPhoneNumbersCmd).Standalone()
+	carapace.Gen(connect_listPhoneNumbersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listPhoneNumbersCmd).Standalone()
 
-	connect_listPhoneNumbersCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listPhoneNumbersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listPhoneNumbersCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listPhoneNumbersCmd.Flags().String("phone-number-country-codes", "", "The ISO country code.")
-	connect_listPhoneNumbersCmd.Flags().String("phone-number-types", "", "The type of phone number.")
-	connect_listPhoneNumbersCmd.MarkFlagRequired("instance-id")
+		connect_listPhoneNumbersCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listPhoneNumbersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listPhoneNumbersCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listPhoneNumbersCmd.Flags().String("phone-number-country-codes", "", "The ISO country code.")
+		connect_listPhoneNumbersCmd.Flags().String("phone-number-types", "", "The type of phone number.")
+		connect_listPhoneNumbersCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listPhoneNumbersCmd)
 }

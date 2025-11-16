@@ -12,11 +12,13 @@ var pcs_registerComputeNodeGroupInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcs_registerComputeNodeGroupInstanceCmd).Standalone()
+	carapace.Gen(pcs_registerComputeNodeGroupInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcs_registerComputeNodeGroupInstanceCmd).Standalone()
 
-	pcs_registerComputeNodeGroupInstanceCmd.Flags().String("bootstrap-id", "", "The client-generated token to allow for retries.")
-	pcs_registerComputeNodeGroupInstanceCmd.Flags().String("cluster-identifier", "", "The name or ID of the cluster to register the compute node group instance in.")
-	pcs_registerComputeNodeGroupInstanceCmd.MarkFlagRequired("bootstrap-id")
-	pcs_registerComputeNodeGroupInstanceCmd.MarkFlagRequired("cluster-identifier")
+		pcs_registerComputeNodeGroupInstanceCmd.Flags().String("bootstrap-id", "", "The client-generated token to allow for retries.")
+		pcs_registerComputeNodeGroupInstanceCmd.Flags().String("cluster-identifier", "", "The name or ID of the cluster to register the compute node group instance in.")
+		pcs_registerComputeNodeGroupInstanceCmd.MarkFlagRequired("bootstrap-id")
+		pcs_registerComputeNodeGroupInstanceCmd.MarkFlagRequired("cluster-identifier")
+	})
 	pcsCmd.AddCommand(pcs_registerComputeNodeGroupInstanceCmd)
 }

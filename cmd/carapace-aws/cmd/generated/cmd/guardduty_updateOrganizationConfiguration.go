@@ -12,15 +12,17 @@ var guardduty_updateOrganizationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_updateOrganizationConfigurationCmd).Standalone()
+	carapace.Gen(guardduty_updateOrganizationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_updateOrganizationConfigurationCmd).Standalone()
 
-	guardduty_updateOrganizationConfigurationCmd.Flags().Bool("auto-enable", false, "Represents whether to automatically enable member accounts in the organization.")
-	guardduty_updateOrganizationConfigurationCmd.Flags().String("auto-enable-organization-members", "", "Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.")
-	guardduty_updateOrganizationConfigurationCmd.Flags().String("data-sources", "", "Describes which data sources will be updated.")
-	guardduty_updateOrganizationConfigurationCmd.Flags().String("detector-id", "", "The ID of the detector that configures the delegated administrator.")
-	guardduty_updateOrganizationConfigurationCmd.Flags().String("features", "", "A list of features that will be configured for the organization.")
-	guardduty_updateOrganizationConfigurationCmd.Flags().Bool("no-auto-enable", false, "Represents whether to automatically enable member accounts in the organization.")
-	guardduty_updateOrganizationConfigurationCmd.MarkFlagRequired("detector-id")
-	guardduty_updateOrganizationConfigurationCmd.Flag("no-auto-enable").Hidden = true
+		guardduty_updateOrganizationConfigurationCmd.Flags().Bool("auto-enable", false, "Represents whether to automatically enable member accounts in the organization.")
+		guardduty_updateOrganizationConfigurationCmd.Flags().String("auto-enable-organization-members", "", "Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.")
+		guardduty_updateOrganizationConfigurationCmd.Flags().String("data-sources", "", "Describes which data sources will be updated.")
+		guardduty_updateOrganizationConfigurationCmd.Flags().String("detector-id", "", "The ID of the detector that configures the delegated administrator.")
+		guardduty_updateOrganizationConfigurationCmd.Flags().String("features", "", "A list of features that will be configured for the organization.")
+		guardduty_updateOrganizationConfigurationCmd.Flags().Bool("no-auto-enable", false, "Represents whether to automatically enable member accounts in the organization.")
+		guardduty_updateOrganizationConfigurationCmd.MarkFlagRequired("detector-id")
+		guardduty_updateOrganizationConfigurationCmd.Flag("no-auto-enable").Hidden = true
+	})
 	guarddutyCmd.AddCommand(guardduty_updateOrganizationConfigurationCmd)
 }

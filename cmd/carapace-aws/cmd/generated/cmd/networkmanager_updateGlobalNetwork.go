@@ -12,10 +12,12 @@ var networkmanager_updateGlobalNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_updateGlobalNetworkCmd).Standalone()
+	carapace.Gen(networkmanager_updateGlobalNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_updateGlobalNetworkCmd).Standalone()
 
-	networkmanager_updateGlobalNetworkCmd.Flags().String("description", "", "A description of the global network.")
-	networkmanager_updateGlobalNetworkCmd.Flags().String("global-network-id", "", "The ID of your global network.")
-	networkmanager_updateGlobalNetworkCmd.MarkFlagRequired("global-network-id")
+		networkmanager_updateGlobalNetworkCmd.Flags().String("description", "", "A description of the global network.")
+		networkmanager_updateGlobalNetworkCmd.Flags().String("global-network-id", "", "The ID of your global network.")
+		networkmanager_updateGlobalNetworkCmd.MarkFlagRequired("global-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_updateGlobalNetworkCmd)
 }

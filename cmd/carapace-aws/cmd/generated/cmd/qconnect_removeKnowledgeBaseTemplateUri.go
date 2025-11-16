@@ -12,9 +12,11 @@ var qconnect_removeKnowledgeBaseTemplateUriCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_removeKnowledgeBaseTemplateUriCmd).Standalone()
+	carapace.Gen(qconnect_removeKnowledgeBaseTemplateUriCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_removeKnowledgeBaseTemplateUriCmd).Standalone()
 
-	qconnect_removeKnowledgeBaseTemplateUriCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_removeKnowledgeBaseTemplateUriCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_removeKnowledgeBaseTemplateUriCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_removeKnowledgeBaseTemplateUriCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	qconnectCmd.AddCommand(qconnect_removeKnowledgeBaseTemplateUriCmd)
 }

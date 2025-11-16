@@ -12,9 +12,11 @@ var serviceQuotas_listServicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_listServicesCmd).Standalone()
+	carapace.Gen(serviceQuotas_listServicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_listServicesCmd).Standalone()
 
-	serviceQuotas_listServicesCmd.Flags().String("max-results", "", "Specifies the maximum number of results that you want included on each page of the response.")
-	serviceQuotas_listServicesCmd.Flags().String("next-token", "", "Specifies a value for receiving additional results after you receive a `NextToken` response in a previous request.")
+		serviceQuotas_listServicesCmd.Flags().String("max-results", "", "Specifies the maximum number of results that you want included on each page of the response.")
+		serviceQuotas_listServicesCmd.Flags().String("next-token", "", "Specifies a value for receiving additional results after you receive a `NextToken` response in a previous request.")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_listServicesCmd)
 }

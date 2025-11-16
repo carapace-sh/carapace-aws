@@ -12,9 +12,11 @@ var sagemaker_deleteComputeQuotaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteComputeQuotaCmd).Standalone()
+	carapace.Gen(sagemaker_deleteComputeQuotaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteComputeQuotaCmd).Standalone()
 
-	sagemaker_deleteComputeQuotaCmd.Flags().String("compute-quota-id", "", "ID of the compute allocation definition.")
-	sagemaker_deleteComputeQuotaCmd.MarkFlagRequired("compute-quota-id")
+		sagemaker_deleteComputeQuotaCmd.Flags().String("compute-quota-id", "", "ID of the compute allocation definition.")
+		sagemaker_deleteComputeQuotaCmd.MarkFlagRequired("compute-quota-id")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteComputeQuotaCmd)
 }

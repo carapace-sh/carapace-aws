@@ -12,9 +12,11 @@ var securitylake_deleteDataLakeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_deleteDataLakeCmd).Standalone()
+	carapace.Gen(securitylake_deleteDataLakeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_deleteDataLakeCmd).Standalone()
 
-	securitylake_deleteDataLakeCmd.Flags().String("regions", "", "The list of Regions where Security Lake is enabled.")
-	securitylake_deleteDataLakeCmd.MarkFlagRequired("regions")
+		securitylake_deleteDataLakeCmd.Flags().String("regions", "", "The list of Regions where Security Lake is enabled.")
+		securitylake_deleteDataLakeCmd.MarkFlagRequired("regions")
+	})
 	securitylakeCmd.AddCommand(securitylake_deleteDataLakeCmd)
 }

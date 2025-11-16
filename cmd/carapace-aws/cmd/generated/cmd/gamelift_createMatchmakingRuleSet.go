@@ -12,12 +12,14 @@ var gamelift_createMatchmakingRuleSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_createMatchmakingRuleSetCmd).Standalone()
+	carapace.Gen(gamelift_createMatchmakingRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_createMatchmakingRuleSetCmd).Standalone()
 
-	gamelift_createMatchmakingRuleSetCmd.Flags().String("name", "", "A unique identifier for the matchmaking rule set.")
-	gamelift_createMatchmakingRuleSetCmd.Flags().String("rule-set-body", "", "A collection of matchmaking rules, formatted as a JSON string.")
-	gamelift_createMatchmakingRuleSetCmd.Flags().String("tags", "", "A list of labels to assign to the new matchmaking rule set resource.")
-	gamelift_createMatchmakingRuleSetCmd.MarkFlagRequired("name")
-	gamelift_createMatchmakingRuleSetCmd.MarkFlagRequired("rule-set-body")
+		gamelift_createMatchmakingRuleSetCmd.Flags().String("name", "", "A unique identifier for the matchmaking rule set.")
+		gamelift_createMatchmakingRuleSetCmd.Flags().String("rule-set-body", "", "A collection of matchmaking rules, formatted as a JSON string.")
+		gamelift_createMatchmakingRuleSetCmd.Flags().String("tags", "", "A list of labels to assign to the new matchmaking rule set resource.")
+		gamelift_createMatchmakingRuleSetCmd.MarkFlagRequired("name")
+		gamelift_createMatchmakingRuleSetCmd.MarkFlagRequired("rule-set-body")
+	})
 	gameliftCmd.AddCommand(gamelift_createMatchmakingRuleSetCmd)
 }

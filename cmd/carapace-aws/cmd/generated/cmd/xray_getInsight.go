@@ -12,9 +12,11 @@ var xray_getInsightCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getInsightCmd).Standalone()
+	carapace.Gen(xray_getInsightCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getInsightCmd).Standalone()
 
-	xray_getInsightCmd.Flags().String("insight-id", "", "The insight's unique identifier.")
-	xray_getInsightCmd.MarkFlagRequired("insight-id")
+		xray_getInsightCmd.Flags().String("insight-id", "", "The insight's unique identifier.")
+		xray_getInsightCmd.MarkFlagRequired("insight-id")
+	})
 	xrayCmd.AddCommand(xray_getInsightCmd)
 }

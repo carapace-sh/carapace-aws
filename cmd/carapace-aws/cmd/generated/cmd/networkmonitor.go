@@ -12,7 +12,9 @@ var networkmonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmonitorCmd).Standalone()
+	carapace.Gen(networkmonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmonitorCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(networkmonitorCmd)
 }

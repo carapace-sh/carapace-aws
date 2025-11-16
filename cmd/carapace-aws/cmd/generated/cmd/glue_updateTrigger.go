@@ -12,11 +12,13 @@ var glue_updateTriggerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_updateTriggerCmd).Standalone()
+	carapace.Gen(glue_updateTriggerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_updateTriggerCmd).Standalone()
 
-	glue_updateTriggerCmd.Flags().String("name", "", "The name of the trigger to update.")
-	glue_updateTriggerCmd.Flags().String("trigger-update", "", "The new values with which to update the trigger.")
-	glue_updateTriggerCmd.MarkFlagRequired("name")
-	glue_updateTriggerCmd.MarkFlagRequired("trigger-update")
+		glue_updateTriggerCmd.Flags().String("name", "", "The name of the trigger to update.")
+		glue_updateTriggerCmd.Flags().String("trigger-update", "", "The new values with which to update the trigger.")
+		glue_updateTriggerCmd.MarkFlagRequired("name")
+		glue_updateTriggerCmd.MarkFlagRequired("trigger-update")
+	})
 	glueCmd.AddCommand(glue_updateTriggerCmd)
 }

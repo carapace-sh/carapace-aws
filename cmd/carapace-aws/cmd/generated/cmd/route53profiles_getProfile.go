@@ -12,9 +12,11 @@ var route53profiles_getProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53profiles_getProfileCmd).Standalone()
+	carapace.Gen(route53profiles_getProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53profiles_getProfileCmd).Standalone()
 
-	route53profiles_getProfileCmd.Flags().String("profile-id", "", "ID of the Profile.")
-	route53profiles_getProfileCmd.MarkFlagRequired("profile-id")
+		route53profiles_getProfileCmd.Flags().String("profile-id", "", "ID of the Profile.")
+		route53profiles_getProfileCmd.MarkFlagRequired("profile-id")
+	})
 	route53profilesCmd.AddCommand(route53profiles_getProfileCmd)
 }

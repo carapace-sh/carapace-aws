@@ -12,9 +12,11 @@ var applicationcostprofiler_importApplicationUsageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationcostprofiler_importApplicationUsageCmd).Standalone()
+	carapace.Gen(applicationcostprofiler_importApplicationUsageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationcostprofiler_importApplicationUsageCmd).Standalone()
 
-	applicationcostprofiler_importApplicationUsageCmd.Flags().String("source-s3-location", "", "Amazon S3 location to import application usage data from.")
-	applicationcostprofiler_importApplicationUsageCmd.MarkFlagRequired("source-s3-location")
+		applicationcostprofiler_importApplicationUsageCmd.Flags().String("source-s3-location", "", "Amazon S3 location to import application usage data from.")
+		applicationcostprofiler_importApplicationUsageCmd.MarkFlagRequired("source-s3-location")
+	})
 	applicationcostprofilerCmd.AddCommand(applicationcostprofiler_importApplicationUsageCmd)
 }

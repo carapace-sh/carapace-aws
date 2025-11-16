@@ -12,9 +12,11 @@ var iot_confirmTopicRuleDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_confirmTopicRuleDestinationCmd).Standalone()
+	carapace.Gen(iot_confirmTopicRuleDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_confirmTopicRuleDestinationCmd).Standalone()
 
-	iot_confirmTopicRuleDestinationCmd.Flags().String("confirmation-token", "", "The token used to confirm ownership or access to the topic rule confirmation URL.")
-	iot_confirmTopicRuleDestinationCmd.MarkFlagRequired("confirmation-token")
+		iot_confirmTopicRuleDestinationCmd.Flags().String("confirmation-token", "", "The token used to confirm ownership or access to the topic rule confirmation URL.")
+		iot_confirmTopicRuleDestinationCmd.MarkFlagRequired("confirmation-token")
+	})
 	iotCmd.AddCommand(iot_confirmTopicRuleDestinationCmd)
 }

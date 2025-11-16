@@ -12,10 +12,12 @@ var codepipeline_putWebhookCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_putWebhookCmd).Standalone()
+	carapace.Gen(codepipeline_putWebhookCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_putWebhookCmd).Standalone()
 
-	codepipeline_putWebhookCmd.Flags().String("tags", "", "The tags for the webhook.")
-	codepipeline_putWebhookCmd.Flags().String("webhook", "", "The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name.")
-	codepipeline_putWebhookCmd.MarkFlagRequired("webhook")
+		codepipeline_putWebhookCmd.Flags().String("tags", "", "The tags for the webhook.")
+		codepipeline_putWebhookCmd.Flags().String("webhook", "", "The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name.")
+		codepipeline_putWebhookCmd.MarkFlagRequired("webhook")
+	})
 	codepipelineCmd.AddCommand(codepipeline_putWebhookCmd)
 }

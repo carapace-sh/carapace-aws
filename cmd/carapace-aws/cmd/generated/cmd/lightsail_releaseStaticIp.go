@@ -12,9 +12,11 @@ var lightsail_releaseStaticIpCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_releaseStaticIpCmd).Standalone()
+	carapace.Gen(lightsail_releaseStaticIpCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_releaseStaticIpCmd).Standalone()
 
-	lightsail_releaseStaticIpCmd.Flags().String("static-ip-name", "", "The name of the static IP to delete.")
-	lightsail_releaseStaticIpCmd.MarkFlagRequired("static-ip-name")
+		lightsail_releaseStaticIpCmd.Flags().String("static-ip-name", "", "The name of the static IP to delete.")
+		lightsail_releaseStaticIpCmd.MarkFlagRequired("static-ip-name")
+	})
 	lightsailCmd.AddCommand(lightsail_releaseStaticIpCmd)
 }

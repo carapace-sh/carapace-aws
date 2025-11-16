@@ -12,11 +12,13 @@ var mediastore_putMetricPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_putMetricPolicyCmd).Standalone()
+	carapace.Gen(mediastore_putMetricPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_putMetricPolicyCmd).Standalone()
 
-	mediastore_putMetricPolicyCmd.Flags().String("container-name", "", "The name of the container that you want to add the metric policy to.")
-	mediastore_putMetricPolicyCmd.Flags().String("metric-policy", "", "The metric policy that you want to associate with the container.")
-	mediastore_putMetricPolicyCmd.MarkFlagRequired("container-name")
-	mediastore_putMetricPolicyCmd.MarkFlagRequired("metric-policy")
+		mediastore_putMetricPolicyCmd.Flags().String("container-name", "", "The name of the container that you want to add the metric policy to.")
+		mediastore_putMetricPolicyCmd.Flags().String("metric-policy", "", "The metric policy that you want to associate with the container.")
+		mediastore_putMetricPolicyCmd.MarkFlagRequired("container-name")
+		mediastore_putMetricPolicyCmd.MarkFlagRequired("metric-policy")
+	})
 	mediastoreCmd.AddCommand(mediastore_putMetricPolicyCmd)
 }

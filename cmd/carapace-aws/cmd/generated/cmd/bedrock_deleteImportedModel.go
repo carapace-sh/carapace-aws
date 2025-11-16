@@ -12,9 +12,11 @@ var bedrock_deleteImportedModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deleteImportedModelCmd).Standalone()
+	carapace.Gen(bedrock_deleteImportedModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deleteImportedModelCmd).Standalone()
 
-	bedrock_deleteImportedModelCmd.Flags().String("model-identifier", "", "Name of the imported model to delete.")
-	bedrock_deleteImportedModelCmd.MarkFlagRequired("model-identifier")
+		bedrock_deleteImportedModelCmd.Flags().String("model-identifier", "", "Name of the imported model to delete.")
+		bedrock_deleteImportedModelCmd.MarkFlagRequired("model-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_deleteImportedModelCmd)
 }

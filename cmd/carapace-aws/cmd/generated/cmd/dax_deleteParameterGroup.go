@@ -12,9 +12,11 @@ var dax_deleteParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_deleteParameterGroupCmd).Standalone()
+	carapace.Gen(dax_deleteParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_deleteParameterGroupCmd).Standalone()
 
-	dax_deleteParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to delete.")
-	dax_deleteParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+		dax_deleteParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to delete.")
+		dax_deleteParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+	})
 	daxCmd.AddCommand(dax_deleteParameterGroupCmd)
 }

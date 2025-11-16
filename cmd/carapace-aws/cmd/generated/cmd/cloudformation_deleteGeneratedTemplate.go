@@ -12,9 +12,11 @@ var cloudformation_deleteGeneratedTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_deleteGeneratedTemplateCmd).Standalone()
+	carapace.Gen(cloudformation_deleteGeneratedTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_deleteGeneratedTemplateCmd).Standalone()
 
-	cloudformation_deleteGeneratedTemplateCmd.Flags().String("generated-template-name", "", "The name or Amazon Resource Name (ARN) of a generated template.")
-	cloudformation_deleteGeneratedTemplateCmd.MarkFlagRequired("generated-template-name")
+		cloudformation_deleteGeneratedTemplateCmd.Flags().String("generated-template-name", "", "The name or Amazon Resource Name (ARN) of a generated template.")
+		cloudformation_deleteGeneratedTemplateCmd.MarkFlagRequired("generated-template-name")
+	})
 	cloudformationCmd.AddCommand(cloudformation_deleteGeneratedTemplateCmd)
 }

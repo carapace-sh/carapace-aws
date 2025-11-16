@@ -12,12 +12,14 @@ var elasticache_describeCacheClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_describeCacheClustersCmd).Standalone()
+	carapace.Gen(elasticache_describeCacheClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_describeCacheClustersCmd).Standalone()
 
-	elasticache_describeCacheClustersCmd.Flags().String("cache-cluster-id", "", "The user-supplied cluster identifier.")
-	elasticache_describeCacheClustersCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
-	elasticache_describeCacheClustersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	elasticache_describeCacheClustersCmd.Flags().String("show-cache-clusters-not-in-replication-groups", "", "An optional flag that can be included in the `DescribeCacheCluster` request to show only nodes (API/CLI: clusters) that are not members of a replication group.")
-	elasticache_describeCacheClustersCmd.Flags().String("show-cache-node-info", "", "An optional flag that can be included in the `DescribeCacheCluster` request to retrieve information about the individual cache nodes.")
+		elasticache_describeCacheClustersCmd.Flags().String("cache-cluster-id", "", "The user-supplied cluster identifier.")
+		elasticache_describeCacheClustersCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
+		elasticache_describeCacheClustersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		elasticache_describeCacheClustersCmd.Flags().String("show-cache-clusters-not-in-replication-groups", "", "An optional flag that can be included in the `DescribeCacheCluster` request to show only nodes (API/CLI: clusters) that are not members of a replication group.")
+		elasticache_describeCacheClustersCmd.Flags().String("show-cache-node-info", "", "An optional flag that can be included in the `DescribeCacheCluster` request to retrieve information about the individual cache nodes.")
+	})
 	elasticacheCmd.AddCommand(elasticache_describeCacheClustersCmd)
 }

@@ -12,14 +12,16 @@ var xray_getInsightImpactGraphCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getInsightImpactGraphCmd).Standalone()
+	carapace.Gen(xray_getInsightImpactGraphCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getInsightImpactGraphCmd).Standalone()
 
-	xray_getInsightImpactGraphCmd.Flags().String("end-time", "", "The estimated end time of the insight, in Unix time seconds.")
-	xray_getInsightImpactGraphCmd.Flags().String("insight-id", "", "The insight's unique identifier.")
-	xray_getInsightImpactGraphCmd.Flags().String("next-token", "", "Specify the pagination token returned by a previous request to retrieve the next page of results.")
-	xray_getInsightImpactGraphCmd.Flags().String("start-time", "", "The estimated start time of the insight, in Unix time seconds.")
-	xray_getInsightImpactGraphCmd.MarkFlagRequired("end-time")
-	xray_getInsightImpactGraphCmd.MarkFlagRequired("insight-id")
-	xray_getInsightImpactGraphCmd.MarkFlagRequired("start-time")
+		xray_getInsightImpactGraphCmd.Flags().String("end-time", "", "The estimated end time of the insight, in Unix time seconds.")
+		xray_getInsightImpactGraphCmd.Flags().String("insight-id", "", "The insight's unique identifier.")
+		xray_getInsightImpactGraphCmd.Flags().String("next-token", "", "Specify the pagination token returned by a previous request to retrieve the next page of results.")
+		xray_getInsightImpactGraphCmd.Flags().String("start-time", "", "The estimated start time of the insight, in Unix time seconds.")
+		xray_getInsightImpactGraphCmd.MarkFlagRequired("end-time")
+		xray_getInsightImpactGraphCmd.MarkFlagRequired("insight-id")
+		xray_getInsightImpactGraphCmd.MarkFlagRequired("start-time")
+	})
 	xrayCmd.AddCommand(xray_getInsightImpactGraphCmd)
 }

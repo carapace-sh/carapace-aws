@@ -12,9 +12,11 @@ var personalize_describeDatasetImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeDatasetImportJobCmd).Standalone()
+	carapace.Gen(personalize_describeDatasetImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeDatasetImportJobCmd).Standalone()
 
-	personalize_describeDatasetImportJobCmd.Flags().String("dataset-import-job-arn", "", "The Amazon Resource Name (ARN) of the dataset import job to describe.")
-	personalize_describeDatasetImportJobCmd.MarkFlagRequired("dataset-import-job-arn")
+		personalize_describeDatasetImportJobCmd.Flags().String("dataset-import-job-arn", "", "The Amazon Resource Name (ARN) of the dataset import job to describe.")
+		personalize_describeDatasetImportJobCmd.MarkFlagRequired("dataset-import-job-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeDatasetImportJobCmd)
 }

@@ -12,9 +12,11 @@ var logs_getTransformerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_getTransformerCmd).Standalone()
+	carapace.Gen(logs_getTransformerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_getTransformerCmd).Standalone()
 
-	logs_getTransformerCmd.Flags().String("log-group-identifier", "", "Specify either the name or ARN of the log group to return transformer information for.")
-	logs_getTransformerCmd.MarkFlagRequired("log-group-identifier")
+		logs_getTransformerCmd.Flags().String("log-group-identifier", "", "Specify either the name or ARN of the log group to return transformer information for.")
+		logs_getTransformerCmd.MarkFlagRequired("log-group-identifier")
+	})
 	logsCmd.AddCommand(logs_getTransformerCmd)
 }

@@ -12,9 +12,11 @@ var bedrock_stopModelCustomizationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_stopModelCustomizationJobCmd).Standalone()
+	carapace.Gen(bedrock_stopModelCustomizationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_stopModelCustomizationJobCmd).Standalone()
 
-	bedrock_stopModelCustomizationJobCmd.Flags().String("job-identifier", "", "Job identifier of the job to stop.")
-	bedrock_stopModelCustomizationJobCmd.MarkFlagRequired("job-identifier")
+		bedrock_stopModelCustomizationJobCmd.Flags().String("job-identifier", "", "Job identifier of the job to stop.")
+		bedrock_stopModelCustomizationJobCmd.MarkFlagRequired("job-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_stopModelCustomizationJobCmd)
 }

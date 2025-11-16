@@ -12,12 +12,14 @@ var networkFirewall_disassociateAvailabilityZonesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_disassociateAvailabilityZonesCmd).Standalone()
+	carapace.Gen(networkFirewall_disassociateAvailabilityZonesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_disassociateAvailabilityZonesCmd).Standalone()
 
-	networkFirewall_disassociateAvailabilityZonesCmd.Flags().String("availability-zone-mappings", "", "Required.")
-	networkFirewall_disassociateAvailabilityZonesCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
-	networkFirewall_disassociateAvailabilityZonesCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
-	networkFirewall_disassociateAvailabilityZonesCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
-	networkFirewall_disassociateAvailabilityZonesCmd.MarkFlagRequired("availability-zone-mappings")
+		networkFirewall_disassociateAvailabilityZonesCmd.Flags().String("availability-zone-mappings", "", "Required.")
+		networkFirewall_disassociateAvailabilityZonesCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
+		networkFirewall_disassociateAvailabilityZonesCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
+		networkFirewall_disassociateAvailabilityZonesCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
+		networkFirewall_disassociateAvailabilityZonesCmd.MarkFlagRequired("availability-zone-mappings")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_disassociateAvailabilityZonesCmd)
 }

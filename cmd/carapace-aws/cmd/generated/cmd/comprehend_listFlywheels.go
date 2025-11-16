@@ -12,10 +12,12 @@ var comprehend_listFlywheelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_listFlywheelsCmd).Standalone()
+	carapace.Gen(comprehend_listFlywheelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_listFlywheelsCmd).Standalone()
 
-	comprehend_listFlywheelsCmd.Flags().String("filter", "", "Filters the flywheels that are returned.")
-	comprehend_listFlywheelsCmd.Flags().String("max-results", "", "Maximum number of results to return in a response.")
-	comprehend_listFlywheelsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehend_listFlywheelsCmd.Flags().String("filter", "", "Filters the flywheels that are returned.")
+		comprehend_listFlywheelsCmd.Flags().String("max-results", "", "Maximum number of results to return in a response.")
+		comprehend_listFlywheelsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendCmd.AddCommand(comprehend_listFlywheelsCmd)
 }

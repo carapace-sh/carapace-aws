@@ -12,9 +12,11 @@ var workspaces_terminateWorkspacesPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_terminateWorkspacesPoolCmd).Standalone()
+	carapace.Gen(workspaces_terminateWorkspacesPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_terminateWorkspacesPoolCmd).Standalone()
 
-	workspaces_terminateWorkspacesPoolCmd.Flags().String("pool-id", "", "The identifier of the pool.")
-	workspaces_terminateWorkspacesPoolCmd.MarkFlagRequired("pool-id")
+		workspaces_terminateWorkspacesPoolCmd.Flags().String("pool-id", "", "The identifier of the pool.")
+		workspaces_terminateWorkspacesPoolCmd.MarkFlagRequired("pool-id")
+	})
 	workspacesCmd.AddCommand(workspaces_terminateWorkspacesPoolCmd)
 }

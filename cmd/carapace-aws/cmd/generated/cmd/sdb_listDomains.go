@@ -12,9 +12,11 @@ var sdb_listDomainsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sdb_listDomainsCmd).Standalone()
+	carapace.Gen(sdb_listDomainsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sdb_listDomainsCmd).Standalone()
 
-	sdb_listDomainsCmd.Flags().String("max-number-of-domains", "", "The maximum number of domain names you want returned.")
-	sdb_listDomainsCmd.Flags().String("next-token", "", "A string informing Amazon SimpleDB where to start the next list of domain names.")
+		sdb_listDomainsCmd.Flags().String("max-number-of-domains", "", "The maximum number of domain names you want returned.")
+		sdb_listDomainsCmd.Flags().String("next-token", "", "A string informing Amazon SimpleDB where to start the next list of domain names.")
+	})
 	sdbCmd.AddCommand(sdb_listDomainsCmd)
 }

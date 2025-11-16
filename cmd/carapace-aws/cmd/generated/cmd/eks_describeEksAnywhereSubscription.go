@@ -12,9 +12,11 @@ var eks_describeEksAnywhereSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_describeEksAnywhereSubscriptionCmd).Standalone()
+	carapace.Gen(eks_describeEksAnywhereSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_describeEksAnywhereSubscriptionCmd).Standalone()
 
-	eks_describeEksAnywhereSubscriptionCmd.Flags().String("id", "", "The ID of the subscription.")
-	eks_describeEksAnywhereSubscriptionCmd.MarkFlagRequired("id")
+		eks_describeEksAnywhereSubscriptionCmd.Flags().String("id", "", "The ID of the subscription.")
+		eks_describeEksAnywhereSubscriptionCmd.MarkFlagRequired("id")
+	})
 	eksCmd.AddCommand(eks_describeEksAnywhereSubscriptionCmd)
 }

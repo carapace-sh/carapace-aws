@@ -12,10 +12,12 @@ var finspaceData_resetUserPasswordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_resetUserPasswordCmd).Standalone()
+	carapace.Gen(finspaceData_resetUserPasswordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_resetUserPasswordCmd).Standalone()
 
-	finspaceData_resetUserPasswordCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
-	finspaceData_resetUserPasswordCmd.Flags().String("user-id", "", "The unique identifier of the user that a temporary password is requested for.")
-	finspaceData_resetUserPasswordCmd.MarkFlagRequired("user-id")
+		finspaceData_resetUserPasswordCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
+		finspaceData_resetUserPasswordCmd.Flags().String("user-id", "", "The unique identifier of the user that a temporary password is requested for.")
+		finspaceData_resetUserPasswordCmd.MarkFlagRequired("user-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_resetUserPasswordCmd)
 }

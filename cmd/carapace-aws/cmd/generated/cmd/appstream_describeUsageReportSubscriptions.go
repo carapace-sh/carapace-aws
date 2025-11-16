@@ -12,9 +12,11 @@ var appstream_describeUsageReportSubscriptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_describeUsageReportSubscriptionsCmd).Standalone()
+	carapace.Gen(appstream_describeUsageReportSubscriptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_describeUsageReportSubscriptionsCmd).Standalone()
 
-	appstream_describeUsageReportSubscriptionsCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
-	appstream_describeUsageReportSubscriptionsCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+		appstream_describeUsageReportSubscriptionsCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
+		appstream_describeUsageReportSubscriptionsCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+	})
 	appstreamCmd.AddCommand(appstream_describeUsageReportSubscriptionsCmd)
 }

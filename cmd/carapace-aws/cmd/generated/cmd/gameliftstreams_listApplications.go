@@ -12,9 +12,11 @@ var gameliftstreams_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftstreams_listApplicationsCmd).Standalone()
+	carapace.Gen(gameliftstreams_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftstreams_listApplicationsCmd).Standalone()
 
-	gameliftstreams_listApplicationsCmd.Flags().String("max-results", "", "The number of results to return.")
-	gameliftstreams_listApplicationsCmd.Flags().String("next-token", "", "The token that marks the start of the next set of results.")
+		gameliftstreams_listApplicationsCmd.Flags().String("max-results", "", "The number of results to return.")
+		gameliftstreams_listApplicationsCmd.Flags().String("next-token", "", "The token that marks the start of the next set of results.")
+	})
 	gameliftstreamsCmd.AddCommand(gameliftstreams_listApplicationsCmd)
 }

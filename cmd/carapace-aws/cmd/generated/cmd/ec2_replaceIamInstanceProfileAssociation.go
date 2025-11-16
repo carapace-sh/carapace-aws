@@ -12,11 +12,13 @@ var ec2_replaceIamInstanceProfileAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_replaceIamInstanceProfileAssociationCmd).Standalone()
+	carapace.Gen(ec2_replaceIamInstanceProfileAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_replaceIamInstanceProfileAssociationCmd).Standalone()
 
-	ec2_replaceIamInstanceProfileAssociationCmd.Flags().String("association-id", "", "The ID of the existing IAM instance profile association.")
-	ec2_replaceIamInstanceProfileAssociationCmd.Flags().String("iam-instance-profile", "", "The IAM instance profile.")
-	ec2_replaceIamInstanceProfileAssociationCmd.MarkFlagRequired("association-id")
-	ec2_replaceIamInstanceProfileAssociationCmd.MarkFlagRequired("iam-instance-profile")
+		ec2_replaceIamInstanceProfileAssociationCmd.Flags().String("association-id", "", "The ID of the existing IAM instance profile association.")
+		ec2_replaceIamInstanceProfileAssociationCmd.Flags().String("iam-instance-profile", "", "The IAM instance profile.")
+		ec2_replaceIamInstanceProfileAssociationCmd.MarkFlagRequired("association-id")
+		ec2_replaceIamInstanceProfileAssociationCmd.MarkFlagRequired("iam-instance-profile")
+	})
 	ec2Cmd.AddCommand(ec2_replaceIamInstanceProfileAssociationCmd)
 }

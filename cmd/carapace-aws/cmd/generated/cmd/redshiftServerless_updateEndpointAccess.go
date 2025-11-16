@@ -12,10 +12,12 @@ var redshiftServerless_updateEndpointAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_updateEndpointAccessCmd).Standalone()
+	carapace.Gen(redshiftServerless_updateEndpointAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_updateEndpointAccessCmd).Standalone()
 
-	redshiftServerless_updateEndpointAccessCmd.Flags().String("endpoint-name", "", "The name of the VPC endpoint to update.")
-	redshiftServerless_updateEndpointAccessCmd.Flags().String("vpc-security-group-ids", "", "The list of VPC security groups associated with the endpoint after the endpoint is modified.")
-	redshiftServerless_updateEndpointAccessCmd.MarkFlagRequired("endpoint-name")
+		redshiftServerless_updateEndpointAccessCmd.Flags().String("endpoint-name", "", "The name of the VPC endpoint to update.")
+		redshiftServerless_updateEndpointAccessCmd.Flags().String("vpc-security-group-ids", "", "The list of VPC security groups associated with the endpoint after the endpoint is modified.")
+		redshiftServerless_updateEndpointAccessCmd.MarkFlagRequired("endpoint-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_updateEndpointAccessCmd)
 }

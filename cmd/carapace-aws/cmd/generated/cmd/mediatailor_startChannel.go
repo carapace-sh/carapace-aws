@@ -12,9 +12,11 @@ var mediatailor_startChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_startChannelCmd).Standalone()
+	carapace.Gen(mediatailor_startChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_startChannelCmd).Standalone()
 
-	mediatailor_startChannelCmd.Flags().String("channel-name", "", "The name of the channel.")
-	mediatailor_startChannelCmd.MarkFlagRequired("channel-name")
+		mediatailor_startChannelCmd.Flags().String("channel-name", "", "The name of the channel.")
+		mediatailor_startChannelCmd.MarkFlagRequired("channel-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_startChannelCmd)
 }

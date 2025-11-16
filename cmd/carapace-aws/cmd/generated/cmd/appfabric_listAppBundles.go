@@ -12,9 +12,11 @@ var appfabric_listAppBundlesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appfabric_listAppBundlesCmd).Standalone()
+	carapace.Gen(appfabric_listAppBundlesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appfabric_listAppBundlesCmd).Standalone()
 
-	appfabric_listAppBundlesCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	appfabric_listAppBundlesCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		appfabric_listAppBundlesCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		appfabric_listAppBundlesCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+	})
 	appfabricCmd.AddCommand(appfabric_listAppBundlesCmd)
 }

@@ -12,10 +12,12 @@ var fsx_deleteSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_deleteSnapshotCmd).Standalone()
+	carapace.Gen(fsx_deleteSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_deleteSnapshotCmd).Standalone()
 
-	fsx_deleteSnapshotCmd.Flags().String("client-request-token", "", "")
-	fsx_deleteSnapshotCmd.Flags().String("snapshot-id", "", "The ID of the snapshot that you want to delete.")
-	fsx_deleteSnapshotCmd.MarkFlagRequired("snapshot-id")
+		fsx_deleteSnapshotCmd.Flags().String("client-request-token", "", "")
+		fsx_deleteSnapshotCmd.Flags().String("snapshot-id", "", "The ID of the snapshot that you want to delete.")
+		fsx_deleteSnapshotCmd.MarkFlagRequired("snapshot-id")
+	})
 	fsxCmd.AddCommand(fsx_deleteSnapshotCmd)
 }

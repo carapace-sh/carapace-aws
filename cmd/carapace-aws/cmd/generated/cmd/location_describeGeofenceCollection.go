@@ -12,9 +12,11 @@ var location_describeGeofenceCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_describeGeofenceCollectionCmd).Standalone()
+	carapace.Gen(location_describeGeofenceCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_describeGeofenceCollectionCmd).Standalone()
 
-	location_describeGeofenceCollectionCmd.Flags().String("collection-name", "", "The name of the geofence collection.")
-	location_describeGeofenceCollectionCmd.MarkFlagRequired("collection-name")
+		location_describeGeofenceCollectionCmd.Flags().String("collection-name", "", "The name of the geofence collection.")
+		location_describeGeofenceCollectionCmd.MarkFlagRequired("collection-name")
+	})
 	locationCmd.AddCommand(location_describeGeofenceCollectionCmd)
 }

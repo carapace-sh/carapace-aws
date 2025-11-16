@@ -12,9 +12,11 @@ var pcaConnectorScep_getConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorScep_getConnectorCmd).Standalone()
+	carapace.Gen(pcaConnectorScep_getConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorScep_getConnectorCmd).Standalone()
 
-	pcaConnectorScep_getConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector.")
-	pcaConnectorScep_getConnectorCmd.MarkFlagRequired("connector-arn")
+		pcaConnectorScep_getConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector.")
+		pcaConnectorScep_getConnectorCmd.MarkFlagRequired("connector-arn")
+	})
 	pcaConnectorScepCmd.AddCommand(pcaConnectorScep_getConnectorCmd)
 }

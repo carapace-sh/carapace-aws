@@ -12,10 +12,12 @@ var devicefarm_listUniqueProblemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_listUniqueProblemsCmd).Standalone()
+	carapace.Gen(devicefarm_listUniqueProblemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_listUniqueProblemsCmd).Standalone()
 
-	devicefarm_listUniqueProblemsCmd.Flags().String("arn", "", "The unique problems' ARNs.")
-	devicefarm_listUniqueProblemsCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
-	devicefarm_listUniqueProblemsCmd.MarkFlagRequired("arn")
+		devicefarm_listUniqueProblemsCmd.Flags().String("arn", "", "The unique problems' ARNs.")
+		devicefarm_listUniqueProblemsCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+		devicefarm_listUniqueProblemsCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_listUniqueProblemsCmd)
 }

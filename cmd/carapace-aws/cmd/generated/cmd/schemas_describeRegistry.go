@@ -12,9 +12,11 @@ var schemas_describeRegistryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_describeRegistryCmd).Standalone()
+	carapace.Gen(schemas_describeRegistryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_describeRegistryCmd).Standalone()
 
-	schemas_describeRegistryCmd.Flags().String("registry-name", "", "The name of the registry.")
-	schemas_describeRegistryCmd.MarkFlagRequired("registry-name")
+		schemas_describeRegistryCmd.Flags().String("registry-name", "", "The name of the registry.")
+		schemas_describeRegistryCmd.MarkFlagRequired("registry-name")
+	})
 	schemasCmd.AddCommand(schemas_describeRegistryCmd)
 }

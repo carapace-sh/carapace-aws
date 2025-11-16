@@ -12,15 +12,17 @@ var lakeformation_listTableStorageOptimizersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_listTableStorageOptimizersCmd).Standalone()
+	carapace.Gen(lakeformation_listTableStorageOptimizersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_listTableStorageOptimizersCmd).Standalone()
 
-	lakeformation_listTableStorageOptimizersCmd.Flags().String("catalog-id", "", "The Catalog ID of the table.")
-	lakeformation_listTableStorageOptimizersCmd.Flags().String("database-name", "", "Name of the database where the table is present.")
-	lakeformation_listTableStorageOptimizersCmd.Flags().String("max-results", "", "The number of storage optimizers to return on each call.")
-	lakeformation_listTableStorageOptimizersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
-	lakeformation_listTableStorageOptimizersCmd.Flags().String("storage-optimizer-type", "", "The specific type of storage optimizers to list.")
-	lakeformation_listTableStorageOptimizersCmd.Flags().String("table-name", "", "Name of the table.")
-	lakeformation_listTableStorageOptimizersCmd.MarkFlagRequired("database-name")
-	lakeformation_listTableStorageOptimizersCmd.MarkFlagRequired("table-name")
+		lakeformation_listTableStorageOptimizersCmd.Flags().String("catalog-id", "", "The Catalog ID of the table.")
+		lakeformation_listTableStorageOptimizersCmd.Flags().String("database-name", "", "Name of the database where the table is present.")
+		lakeformation_listTableStorageOptimizersCmd.Flags().String("max-results", "", "The number of storage optimizers to return on each call.")
+		lakeformation_listTableStorageOptimizersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		lakeformation_listTableStorageOptimizersCmd.Flags().String("storage-optimizer-type", "", "The specific type of storage optimizers to list.")
+		lakeformation_listTableStorageOptimizersCmd.Flags().String("table-name", "", "Name of the table.")
+		lakeformation_listTableStorageOptimizersCmd.MarkFlagRequired("database-name")
+		lakeformation_listTableStorageOptimizersCmd.MarkFlagRequired("table-name")
+	})
 	lakeformationCmd.AddCommand(lakeformation_listTableStorageOptimizersCmd)
 }

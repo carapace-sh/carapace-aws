@@ -12,8 +12,10 @@ var lightsail_getContainerServicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getContainerServicesCmd).Standalone()
+	carapace.Gen(lightsail_getContainerServicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getContainerServicesCmd).Standalone()
 
-	lightsail_getContainerServicesCmd.Flags().String("service-name", "", "The name of the container service for which to return information.")
+		lightsail_getContainerServicesCmd.Flags().String("service-name", "", "The name of the container service for which to return information.")
+	})
 	lightsailCmd.AddCommand(lightsail_getContainerServicesCmd)
 }

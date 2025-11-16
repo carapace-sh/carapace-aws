@@ -12,9 +12,11 @@ var organizations_deleteOrganizationalUnitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_deleteOrganizationalUnitCmd).Standalone()
+	carapace.Gen(organizations_deleteOrganizationalUnitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_deleteOrganizationalUnitCmd).Standalone()
 
-	organizations_deleteOrganizationalUnitCmd.Flags().String("organizational-unit-id", "", "The unique identifier (ID) of the organizational unit that you want to delete.")
-	organizations_deleteOrganizationalUnitCmd.MarkFlagRequired("organizational-unit-id")
+		organizations_deleteOrganizationalUnitCmd.Flags().String("organizational-unit-id", "", "The unique identifier (ID) of the organizational unit that you want to delete.")
+		organizations_deleteOrganizationalUnitCmd.MarkFlagRequired("organizational-unit-id")
+	})
 	organizationsCmd.AddCommand(organizations_deleteOrganizationalUnitCmd)
 }

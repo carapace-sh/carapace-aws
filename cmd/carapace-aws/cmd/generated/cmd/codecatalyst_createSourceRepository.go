@@ -12,14 +12,16 @@ var codecatalyst_createSourceRepositoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_createSourceRepositoryCmd).Standalone()
+	carapace.Gen(codecatalyst_createSourceRepositoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_createSourceRepositoryCmd).Standalone()
 
-	codecatalyst_createSourceRepositoryCmd.Flags().String("description", "", "The description of the source repository.")
-	codecatalyst_createSourceRepositoryCmd.Flags().String("name", "", "The name of the source repository.")
-	codecatalyst_createSourceRepositoryCmd.Flags().String("project-name", "", "The name of the project in the space.")
-	codecatalyst_createSourceRepositoryCmd.Flags().String("space-name", "", "The name of the space.")
-	codecatalyst_createSourceRepositoryCmd.MarkFlagRequired("name")
-	codecatalyst_createSourceRepositoryCmd.MarkFlagRequired("project-name")
-	codecatalyst_createSourceRepositoryCmd.MarkFlagRequired("space-name")
+		codecatalyst_createSourceRepositoryCmd.Flags().String("description", "", "The description of the source repository.")
+		codecatalyst_createSourceRepositoryCmd.Flags().String("name", "", "The name of the source repository.")
+		codecatalyst_createSourceRepositoryCmd.Flags().String("project-name", "", "The name of the project in the space.")
+		codecatalyst_createSourceRepositoryCmd.Flags().String("space-name", "", "The name of the space.")
+		codecatalyst_createSourceRepositoryCmd.MarkFlagRequired("name")
+		codecatalyst_createSourceRepositoryCmd.MarkFlagRequired("project-name")
+		codecatalyst_createSourceRepositoryCmd.MarkFlagRequired("space-name")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_createSourceRepositoryCmd)
 }

@@ -12,12 +12,14 @@ var connectcampaigns_updateCampaignOutboundCallConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaigns_updateCampaignOutboundCallConfigCmd).Standalone()
+	carapace.Gen(connectcampaigns_updateCampaignOutboundCallConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaigns_updateCampaignOutboundCallConfigCmd).Standalone()
 
-	connectcampaigns_updateCampaignOutboundCallConfigCmd.Flags().String("answer-machine-detection-config", "", "")
-	connectcampaigns_updateCampaignOutboundCallConfigCmd.Flags().String("connect-contact-flow-id", "", "")
-	connectcampaigns_updateCampaignOutboundCallConfigCmd.Flags().String("connect-source-phone-number", "", "")
-	connectcampaigns_updateCampaignOutboundCallConfigCmd.Flags().String("id", "", "")
-	connectcampaigns_updateCampaignOutboundCallConfigCmd.MarkFlagRequired("id")
+		connectcampaigns_updateCampaignOutboundCallConfigCmd.Flags().String("answer-machine-detection-config", "", "")
+		connectcampaigns_updateCampaignOutboundCallConfigCmd.Flags().String("connect-contact-flow-id", "", "")
+		connectcampaigns_updateCampaignOutboundCallConfigCmd.Flags().String("connect-source-phone-number", "", "")
+		connectcampaigns_updateCampaignOutboundCallConfigCmd.Flags().String("id", "", "")
+		connectcampaigns_updateCampaignOutboundCallConfigCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsCmd.AddCommand(connectcampaigns_updateCampaignOutboundCallConfigCmd)
 }

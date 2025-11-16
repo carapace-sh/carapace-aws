@@ -12,15 +12,17 @@ var swf_countClosedWorkflowExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_countClosedWorkflowExecutionsCmd).Standalone()
+	carapace.Gen(swf_countClosedWorkflowExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_countClosedWorkflowExecutionsCmd).Standalone()
 
-	swf_countClosedWorkflowExecutionsCmd.Flags().String("close-status-filter", "", "If specified, only workflow executions that match this close status are counted.")
-	swf_countClosedWorkflowExecutionsCmd.Flags().String("close-time-filter", "", "If specified, only workflow executions that meet the close time criteria of the filter are counted.")
-	swf_countClosedWorkflowExecutionsCmd.Flags().String("domain", "", "The name of the domain containing the workflow executions to count.")
-	swf_countClosedWorkflowExecutionsCmd.Flags().String("execution-filter", "", "If specified, only workflow executions matching the `WorkflowId` in the filter are counted.")
-	swf_countClosedWorkflowExecutionsCmd.Flags().String("start-time-filter", "", "If specified, only workflow executions that meet the start time criteria of the filter are counted.")
-	swf_countClosedWorkflowExecutionsCmd.Flags().String("tag-filter", "", "If specified, only executions that have a tag that matches the filter are counted.")
-	swf_countClosedWorkflowExecutionsCmd.Flags().String("type-filter", "", "If specified, indicates the type of the workflow executions to be counted.")
-	swf_countClosedWorkflowExecutionsCmd.MarkFlagRequired("domain")
+		swf_countClosedWorkflowExecutionsCmd.Flags().String("close-status-filter", "", "If specified, only workflow executions that match this close status are counted.")
+		swf_countClosedWorkflowExecutionsCmd.Flags().String("close-time-filter", "", "If specified, only workflow executions that meet the close time criteria of the filter are counted.")
+		swf_countClosedWorkflowExecutionsCmd.Flags().String("domain", "", "The name of the domain containing the workflow executions to count.")
+		swf_countClosedWorkflowExecutionsCmd.Flags().String("execution-filter", "", "If specified, only workflow executions matching the `WorkflowId` in the filter are counted.")
+		swf_countClosedWorkflowExecutionsCmd.Flags().String("start-time-filter", "", "If specified, only workflow executions that meet the start time criteria of the filter are counted.")
+		swf_countClosedWorkflowExecutionsCmd.Flags().String("tag-filter", "", "If specified, only executions that have a tag that matches the filter are counted.")
+		swf_countClosedWorkflowExecutionsCmd.Flags().String("type-filter", "", "If specified, indicates the type of the workflow executions to be counted.")
+		swf_countClosedWorkflowExecutionsCmd.MarkFlagRequired("domain")
+	})
 	swfCmd.AddCommand(swf_countClosedWorkflowExecutionsCmd)
 }

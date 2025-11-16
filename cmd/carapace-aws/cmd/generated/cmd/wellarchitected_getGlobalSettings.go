@@ -12,7 +12,9 @@ var wellarchitected_getGlobalSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_getGlobalSettingsCmd).Standalone()
+	carapace.Gen(wellarchitected_getGlobalSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_getGlobalSettingsCmd).Standalone()
 
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_getGlobalSettingsCmd)
 }

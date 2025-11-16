@@ -12,9 +12,11 @@ var chimeSdkMediaPipelines_getMediaCapturePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_getMediaCapturePipelineCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_getMediaCapturePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_getMediaCapturePipelineCmd).Standalone()
 
-	chimeSdkMediaPipelines_getMediaCapturePipelineCmd.Flags().String("media-pipeline-id", "", "The ID of the pipeline that you want to get.")
-	chimeSdkMediaPipelines_getMediaCapturePipelineCmd.MarkFlagRequired("media-pipeline-id")
+		chimeSdkMediaPipelines_getMediaCapturePipelineCmd.Flags().String("media-pipeline-id", "", "The ID of the pipeline that you want to get.")
+		chimeSdkMediaPipelines_getMediaCapturePipelineCmd.MarkFlagRequired("media-pipeline-id")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_getMediaCapturePipelineCmd)
 }

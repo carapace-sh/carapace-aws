@@ -12,7 +12,9 @@ var neptunedata_getSparqlStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_getSparqlStatisticsCmd).Standalone()
+	carapace.Gen(neptunedata_getSparqlStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_getSparqlStatisticsCmd).Standalone()
 
+	})
 	neptunedataCmd.AddCommand(neptunedata_getSparqlStatisticsCmd)
 }

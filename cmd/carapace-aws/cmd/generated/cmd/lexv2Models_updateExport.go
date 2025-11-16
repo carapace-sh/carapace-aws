@@ -12,10 +12,12 @@ var lexv2Models_updateExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_updateExportCmd).Standalone()
+	carapace.Gen(lexv2Models_updateExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_updateExportCmd).Standalone()
 
-	lexv2Models_updateExportCmd.Flags().String("export-id", "", "The unique identifier Amazon Lex assigned to the export.")
-	lexv2Models_updateExportCmd.Flags().String("file-password", "", "The new password to use to encrypt the export zip archive.")
-	lexv2Models_updateExportCmd.MarkFlagRequired("export-id")
+		lexv2Models_updateExportCmd.Flags().String("export-id", "", "The unique identifier Amazon Lex assigned to the export.")
+		lexv2Models_updateExportCmd.Flags().String("file-password", "", "The new password to use to encrypt the export zip archive.")
+		lexv2Models_updateExportCmd.MarkFlagRequired("export-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_updateExportCmd)
 }

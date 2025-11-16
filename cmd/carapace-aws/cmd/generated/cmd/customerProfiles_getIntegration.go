@@ -12,11 +12,13 @@ var customerProfiles_getIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getIntegrationCmd).Standalone()
+	carapace.Gen(customerProfiles_getIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getIntegrationCmd).Standalone()
 
-	customerProfiles_getIntegrationCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getIntegrationCmd.Flags().String("uri", "", "The URI of the S3 bucket or any other type of data source.")
-	customerProfiles_getIntegrationCmd.MarkFlagRequired("domain-name")
-	customerProfiles_getIntegrationCmd.MarkFlagRequired("uri")
+		customerProfiles_getIntegrationCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getIntegrationCmd.Flags().String("uri", "", "The URI of the S3 bucket or any other type of data source.")
+		customerProfiles_getIntegrationCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getIntegrationCmd.MarkFlagRequired("uri")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getIntegrationCmd)
 }

@@ -12,11 +12,13 @@ var arcZonalShift_listZonalShiftsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_listZonalShiftsCmd).Standalone()
+	carapace.Gen(arcZonalShift_listZonalShiftsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_listZonalShiftsCmd).Standalone()
 
-	arcZonalShift_listZonalShiftsCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
-	arcZonalShift_listZonalShiftsCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
-	arcZonalShift_listZonalShiftsCmd.Flags().String("resource-identifier", "", "The identifier for the resource that you want to list zonal shifts for.")
-	arcZonalShift_listZonalShiftsCmd.Flags().String("status", "", "A status for a zonal shift.")
+		arcZonalShift_listZonalShiftsCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
+		arcZonalShift_listZonalShiftsCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		arcZonalShift_listZonalShiftsCmd.Flags().String("resource-identifier", "", "The identifier for the resource that you want to list zonal shifts for.")
+		arcZonalShift_listZonalShiftsCmd.Flags().String("status", "", "A status for a zonal shift.")
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_listZonalShiftsCmd)
 }

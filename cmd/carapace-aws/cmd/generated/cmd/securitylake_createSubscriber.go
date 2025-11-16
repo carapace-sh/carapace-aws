@@ -12,16 +12,18 @@ var securitylake_createSubscriberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_createSubscriberCmd).Standalone()
+	carapace.Gen(securitylake_createSubscriberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_createSubscriberCmd).Standalone()
 
-	securitylake_createSubscriberCmd.Flags().String("access-types", "", "The Amazon S3 or Lake Formation access type.")
-	securitylake_createSubscriberCmd.Flags().String("sources", "", "The supported Amazon Web Services services from which logs and events are collected.")
-	securitylake_createSubscriberCmd.Flags().String("subscriber-description", "", "The description for your subscriber account in Security Lake.")
-	securitylake_createSubscriberCmd.Flags().String("subscriber-identity", "", "The Amazon Web Services identity used to access your data.")
-	securitylake_createSubscriberCmd.Flags().String("subscriber-name", "", "The name of your Security Lake subscriber account.")
-	securitylake_createSubscriberCmd.Flags().String("tags", "", "An array of objects, one for each tag to associate with the subscriber.")
-	securitylake_createSubscriberCmd.MarkFlagRequired("sources")
-	securitylake_createSubscriberCmd.MarkFlagRequired("subscriber-identity")
-	securitylake_createSubscriberCmd.MarkFlagRequired("subscriber-name")
+		securitylake_createSubscriberCmd.Flags().String("access-types", "", "The Amazon S3 or Lake Formation access type.")
+		securitylake_createSubscriberCmd.Flags().String("sources", "", "The supported Amazon Web Services services from which logs and events are collected.")
+		securitylake_createSubscriberCmd.Flags().String("subscriber-description", "", "The description for your subscriber account in Security Lake.")
+		securitylake_createSubscriberCmd.Flags().String("subscriber-identity", "", "The Amazon Web Services identity used to access your data.")
+		securitylake_createSubscriberCmd.Flags().String("subscriber-name", "", "The name of your Security Lake subscriber account.")
+		securitylake_createSubscriberCmd.Flags().String("tags", "", "An array of objects, one for each tag to associate with the subscriber.")
+		securitylake_createSubscriberCmd.MarkFlagRequired("sources")
+		securitylake_createSubscriberCmd.MarkFlagRequired("subscriber-identity")
+		securitylake_createSubscriberCmd.MarkFlagRequired("subscriber-name")
+	})
 	securitylakeCmd.AddCommand(securitylake_createSubscriberCmd)
 }

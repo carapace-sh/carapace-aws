@@ -12,12 +12,14 @@ var entityresolution_generateMatchIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_generateMatchIdCmd).Standalone()
+	carapace.Gen(entityresolution_generateMatchIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_generateMatchIdCmd).Standalone()
 
-	entityresolution_generateMatchIdCmd.Flags().String("processing-type", "", "The processing mode that determines how Match IDs are generated and results are saved.")
-	entityresolution_generateMatchIdCmd.Flags().String("records", "", "The records to match.")
-	entityresolution_generateMatchIdCmd.Flags().String("workflow-name", "", "The name of the rule-based matching workflow.")
-	entityresolution_generateMatchIdCmd.MarkFlagRequired("records")
-	entityresolution_generateMatchIdCmd.MarkFlagRequired("workflow-name")
+		entityresolution_generateMatchIdCmd.Flags().String("processing-type", "", "The processing mode that determines how Match IDs are generated and results are saved.")
+		entityresolution_generateMatchIdCmd.Flags().String("records", "", "The records to match.")
+		entityresolution_generateMatchIdCmd.Flags().String("workflow-name", "", "The name of the rule-based matching workflow.")
+		entityresolution_generateMatchIdCmd.MarkFlagRequired("records")
+		entityresolution_generateMatchIdCmd.MarkFlagRequired("workflow-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_generateMatchIdCmd)
 }

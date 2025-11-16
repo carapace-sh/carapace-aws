@@ -12,12 +12,14 @@ var location_updateGeofenceCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_updateGeofenceCollectionCmd).Standalone()
+	carapace.Gen(location_updateGeofenceCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_updateGeofenceCollectionCmd).Standalone()
 
-	location_updateGeofenceCollectionCmd.Flags().String("collection-name", "", "The name of the geofence collection to update.")
-	location_updateGeofenceCollectionCmd.Flags().String("description", "", "Updates the description for the geofence collection.")
-	location_updateGeofenceCollectionCmd.Flags().String("pricing-plan", "", "No longer used.")
-	location_updateGeofenceCollectionCmd.Flags().String("pricing-plan-data-source", "", "This parameter is no longer used.")
-	location_updateGeofenceCollectionCmd.MarkFlagRequired("collection-name")
+		location_updateGeofenceCollectionCmd.Flags().String("collection-name", "", "The name of the geofence collection to update.")
+		location_updateGeofenceCollectionCmd.Flags().String("description", "", "Updates the description for the geofence collection.")
+		location_updateGeofenceCollectionCmd.Flags().String("pricing-plan", "", "No longer used.")
+		location_updateGeofenceCollectionCmd.Flags().String("pricing-plan-data-source", "", "This parameter is no longer used.")
+		location_updateGeofenceCollectionCmd.MarkFlagRequired("collection-name")
+	})
 	locationCmd.AddCommand(location_updateGeofenceCollectionCmd)
 }

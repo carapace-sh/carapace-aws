@@ -12,15 +12,17 @@ var migrationhuborchestrator_updateWorkflowStepGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_updateWorkflowStepGroupCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_updateWorkflowStepGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_updateWorkflowStepGroupCmd).Standalone()
 
-	migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("description", "", "The description of the step group.")
-	migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("id", "", "The ID of the step group.")
-	migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("name", "", "The name of the step group.")
-	migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("next", "", "The next step group.")
-	migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("previous", "", "The previous step group.")
-	migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("workflow-id", "", "The ID of the migration workflow.")
-	migrationhuborchestrator_updateWorkflowStepGroupCmd.MarkFlagRequired("id")
-	migrationhuborchestrator_updateWorkflowStepGroupCmd.MarkFlagRequired("workflow-id")
+		migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("description", "", "The description of the step group.")
+		migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("id", "", "The ID of the step group.")
+		migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("name", "", "The name of the step group.")
+		migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("next", "", "The next step group.")
+		migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("previous", "", "The previous step group.")
+		migrationhuborchestrator_updateWorkflowStepGroupCmd.Flags().String("workflow-id", "", "The ID of the migration workflow.")
+		migrationhuborchestrator_updateWorkflowStepGroupCmd.MarkFlagRequired("id")
+		migrationhuborchestrator_updateWorkflowStepGroupCmd.MarkFlagRequired("workflow-id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_updateWorkflowStepGroupCmd)
 }

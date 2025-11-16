@@ -12,8 +12,10 @@ var iot_describeEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeEndpointCmd).Standalone()
+	carapace.Gen(iot_describeEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeEndpointCmd).Standalone()
 
-	iot_describeEndpointCmd.Flags().String("endpoint-type", "", "The endpoint type.")
+		iot_describeEndpointCmd.Flags().String("endpoint-type", "", "The endpoint type.")
+	})
 	iotCmd.AddCommand(iot_describeEndpointCmd)
 }

@@ -12,10 +12,12 @@ var comprehend_listTargetedSentimentDetectionJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_listTargetedSentimentDetectionJobsCmd).Standalone()
+	carapace.Gen(comprehend_listTargetedSentimentDetectionJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_listTargetedSentimentDetectionJobsCmd).Standalone()
 
-	comprehend_listTargetedSentimentDetectionJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
-	comprehend_listTargetedSentimentDetectionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
-	comprehend_listTargetedSentimentDetectionJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehend_listTargetedSentimentDetectionJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
+		comprehend_listTargetedSentimentDetectionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
+		comprehend_listTargetedSentimentDetectionJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendCmd.AddCommand(comprehend_listTargetedSentimentDetectionJobsCmd)
 }

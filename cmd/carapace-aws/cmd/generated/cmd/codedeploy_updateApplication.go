@@ -12,9 +12,11 @@ var codedeploy_updateApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_updateApplicationCmd).Standalone()
+	carapace.Gen(codedeploy_updateApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_updateApplicationCmd).Standalone()
 
-	codedeploy_updateApplicationCmd.Flags().String("application-name", "", "The current name of the application you want to change.")
-	codedeploy_updateApplicationCmd.Flags().String("new-application-name", "", "The new name to give the application.")
+		codedeploy_updateApplicationCmd.Flags().String("application-name", "", "The current name of the application you want to change.")
+		codedeploy_updateApplicationCmd.Flags().String("new-application-name", "", "The new name to give the application.")
+	})
 	codedeployCmd.AddCommand(codedeploy_updateApplicationCmd)
 }

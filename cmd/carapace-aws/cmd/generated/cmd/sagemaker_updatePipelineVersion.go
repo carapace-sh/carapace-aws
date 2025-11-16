@@ -12,13 +12,15 @@ var sagemaker_updatePipelineVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_updatePipelineVersionCmd).Standalone()
+	carapace.Gen(sagemaker_updatePipelineVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_updatePipelineVersionCmd).Standalone()
 
-	sagemaker_updatePipelineVersionCmd.Flags().String("pipeline-arn", "", "The Amazon Resource Name (ARN) of the pipeline.")
-	sagemaker_updatePipelineVersionCmd.Flags().String("pipeline-version-description", "", "The description of the pipeline version.")
-	sagemaker_updatePipelineVersionCmd.Flags().String("pipeline-version-display-name", "", "The display name of the pipeline version.")
-	sagemaker_updatePipelineVersionCmd.Flags().String("pipeline-version-id", "", "The pipeline version ID to update.")
-	sagemaker_updatePipelineVersionCmd.MarkFlagRequired("pipeline-arn")
-	sagemaker_updatePipelineVersionCmd.MarkFlagRequired("pipeline-version-id")
+		sagemaker_updatePipelineVersionCmd.Flags().String("pipeline-arn", "", "The Amazon Resource Name (ARN) of the pipeline.")
+		sagemaker_updatePipelineVersionCmd.Flags().String("pipeline-version-description", "", "The description of the pipeline version.")
+		sagemaker_updatePipelineVersionCmd.Flags().String("pipeline-version-display-name", "", "The display name of the pipeline version.")
+		sagemaker_updatePipelineVersionCmd.Flags().String("pipeline-version-id", "", "The pipeline version ID to update.")
+		sagemaker_updatePipelineVersionCmd.MarkFlagRequired("pipeline-arn")
+		sagemaker_updatePipelineVersionCmd.MarkFlagRequired("pipeline-version-id")
+	})
 	sagemakerCmd.AddCommand(sagemaker_updatePipelineVersionCmd)
 }

@@ -12,10 +12,12 @@ var organizations_updateOrganizationalUnitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_updateOrganizationalUnitCmd).Standalone()
+	carapace.Gen(organizations_updateOrganizationalUnitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_updateOrganizationalUnitCmd).Standalone()
 
-	organizations_updateOrganizationalUnitCmd.Flags().String("name", "", "The new name that you want to assign to the OU.")
-	organizations_updateOrganizationalUnitCmd.Flags().String("organizational-unit-id", "", "The unique identifier (ID) of the OU that you want to rename.")
-	organizations_updateOrganizationalUnitCmd.MarkFlagRequired("organizational-unit-id")
+		organizations_updateOrganizationalUnitCmd.Flags().String("name", "", "The new name that you want to assign to the OU.")
+		organizations_updateOrganizationalUnitCmd.Flags().String("organizational-unit-id", "", "The unique identifier (ID) of the OU that you want to rename.")
+		organizations_updateOrganizationalUnitCmd.MarkFlagRequired("organizational-unit-id")
+	})
 	organizationsCmd.AddCommand(organizations_updateOrganizationalUnitCmd)
 }

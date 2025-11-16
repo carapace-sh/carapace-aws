@@ -12,9 +12,11 @@ var taxsettings_batchDeleteTaxRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_batchDeleteTaxRegistrationCmd).Standalone()
+	carapace.Gen(taxsettings_batchDeleteTaxRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_batchDeleteTaxRegistrationCmd).Standalone()
 
-	taxsettings_batchDeleteTaxRegistrationCmd.Flags().String("account-ids", "", "List of unique account identifiers.")
-	taxsettings_batchDeleteTaxRegistrationCmd.MarkFlagRequired("account-ids")
+		taxsettings_batchDeleteTaxRegistrationCmd.Flags().String("account-ids", "", "List of unique account identifiers.")
+		taxsettings_batchDeleteTaxRegistrationCmd.MarkFlagRequired("account-ids")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_batchDeleteTaxRegistrationCmd)
 }

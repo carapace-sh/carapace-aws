@@ -12,10 +12,12 @@ var entityresolution_listProviderServicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_listProviderServicesCmd).Standalone()
+	carapace.Gen(entityresolution_listProviderServicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_listProviderServicesCmd).Standalone()
 
-	entityresolution_listProviderServicesCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	entityresolution_listProviderServicesCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
-	entityresolution_listProviderServicesCmd.Flags().String("provider-name", "", "The name of the provider.")
+		entityresolution_listProviderServicesCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		entityresolution_listProviderServicesCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
+		entityresolution_listProviderServicesCmd.Flags().String("provider-name", "", "The name of the provider.")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_listProviderServicesCmd)
 }

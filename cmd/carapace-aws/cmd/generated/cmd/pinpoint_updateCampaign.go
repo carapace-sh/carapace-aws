@@ -12,13 +12,15 @@ var pinpoint_updateCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateCampaignCmd).Standalone()
+	carapace.Gen(pinpoint_updateCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateCampaignCmd).Standalone()
 
-	pinpoint_updateCampaignCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_updateCampaignCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
-	pinpoint_updateCampaignCmd.Flags().String("write-campaign-request", "", "")
-	pinpoint_updateCampaignCmd.MarkFlagRequired("application-id")
-	pinpoint_updateCampaignCmd.MarkFlagRequired("campaign-id")
-	pinpoint_updateCampaignCmd.MarkFlagRequired("write-campaign-request")
+		pinpoint_updateCampaignCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_updateCampaignCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
+		pinpoint_updateCampaignCmd.Flags().String("write-campaign-request", "", "")
+		pinpoint_updateCampaignCmd.MarkFlagRequired("application-id")
+		pinpoint_updateCampaignCmd.MarkFlagRequired("campaign-id")
+		pinpoint_updateCampaignCmd.MarkFlagRequired("write-campaign-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateCampaignCmd)
 }

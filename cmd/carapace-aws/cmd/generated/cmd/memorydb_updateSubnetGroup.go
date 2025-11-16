@@ -12,11 +12,13 @@ var memorydb_updateSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_updateSubnetGroupCmd).Standalone()
+	carapace.Gen(memorydb_updateSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_updateSubnetGroupCmd).Standalone()
 
-	memorydb_updateSubnetGroupCmd.Flags().String("description", "", "A description of the subnet group")
-	memorydb_updateSubnetGroupCmd.Flags().String("subnet-group-name", "", "The name of the subnet group")
-	memorydb_updateSubnetGroupCmd.Flags().String("subnet-ids", "", "The EC2 subnet IDs for the subnet group.")
-	memorydb_updateSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
+		memorydb_updateSubnetGroupCmd.Flags().String("description", "", "A description of the subnet group")
+		memorydb_updateSubnetGroupCmd.Flags().String("subnet-group-name", "", "The name of the subnet group")
+		memorydb_updateSubnetGroupCmd.Flags().String("subnet-ids", "", "The EC2 subnet IDs for the subnet group.")
+		memorydb_updateSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
+	})
 	memorydbCmd.AddCommand(memorydb_updateSubnetGroupCmd)
 }

@@ -12,9 +12,11 @@ var storagegateway_describeCachediScsivolumesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeCachediScsivolumesCmd).Standalone()
+	carapace.Gen(storagegateway_describeCachediScsivolumesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeCachediScsivolumesCmd).Standalone()
 
-	storagegateway_describeCachediScsivolumesCmd.Flags().String("volume-arns", "", "An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume.")
-	storagegateway_describeCachediScsivolumesCmd.MarkFlagRequired("volume-arns")
+		storagegateway_describeCachediScsivolumesCmd.Flags().String("volume-arns", "", "An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume.")
+		storagegateway_describeCachediScsivolumesCmd.MarkFlagRequired("volume-arns")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeCachediScsivolumesCmd)
 }

@@ -12,11 +12,13 @@ var mediatailor_describeVodSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_describeVodSourceCmd).Standalone()
+	carapace.Gen(mediatailor_describeVodSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_describeVodSourceCmd).Standalone()
 
-	mediatailor_describeVodSourceCmd.Flags().String("source-location-name", "", "The name of the source location associated with this VOD Source.")
-	mediatailor_describeVodSourceCmd.Flags().String("vod-source-name", "", "The name of the VOD Source.")
-	mediatailor_describeVodSourceCmd.MarkFlagRequired("source-location-name")
-	mediatailor_describeVodSourceCmd.MarkFlagRequired("vod-source-name")
+		mediatailor_describeVodSourceCmd.Flags().String("source-location-name", "", "The name of the source location associated with this VOD Source.")
+		mediatailor_describeVodSourceCmd.Flags().String("vod-source-name", "", "The name of the VOD Source.")
+		mediatailor_describeVodSourceCmd.MarkFlagRequired("source-location-name")
+		mediatailor_describeVodSourceCmd.MarkFlagRequired("vod-source-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_describeVodSourceCmd)
 }

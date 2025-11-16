@@ -12,9 +12,11 @@ var lightsail_getBucketAccessKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getBucketAccessKeysCmd).Standalone()
+	carapace.Gen(lightsail_getBucketAccessKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getBucketAccessKeysCmd).Standalone()
 
-	lightsail_getBucketAccessKeysCmd.Flags().String("bucket-name", "", "The name of the bucket for which to return access keys.")
-	lightsail_getBucketAccessKeysCmd.MarkFlagRequired("bucket-name")
+		lightsail_getBucketAccessKeysCmd.Flags().String("bucket-name", "", "The name of the bucket for which to return access keys.")
+		lightsail_getBucketAccessKeysCmd.MarkFlagRequired("bucket-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getBucketAccessKeysCmd)
 }

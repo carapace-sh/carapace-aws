@@ -12,13 +12,15 @@ var connect_stopContactStreamingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_stopContactStreamingCmd).Standalone()
+	carapace.Gen(connect_stopContactStreamingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_stopContactStreamingCmd).Standalone()
 
-	connect_stopContactStreamingCmd.Flags().String("contact-id", "", "The identifier of the contact.")
-	connect_stopContactStreamingCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_stopContactStreamingCmd.Flags().String("streaming-id", "", "The identifier of the streaming configuration enabled.")
-	connect_stopContactStreamingCmd.MarkFlagRequired("contact-id")
-	connect_stopContactStreamingCmd.MarkFlagRequired("instance-id")
-	connect_stopContactStreamingCmd.MarkFlagRequired("streaming-id")
+		connect_stopContactStreamingCmd.Flags().String("contact-id", "", "The identifier of the contact.")
+		connect_stopContactStreamingCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_stopContactStreamingCmd.Flags().String("streaming-id", "", "The identifier of the streaming configuration enabled.")
+		connect_stopContactStreamingCmd.MarkFlagRequired("contact-id")
+		connect_stopContactStreamingCmd.MarkFlagRequired("instance-id")
+		connect_stopContactStreamingCmd.MarkFlagRequired("streaming-id")
+	})
 	connectCmd.AddCommand(connect_stopContactStreamingCmd)
 }

@@ -12,11 +12,13 @@ var iam_putUserPermissionsBoundaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_putUserPermissionsBoundaryCmd).Standalone()
+	carapace.Gen(iam_putUserPermissionsBoundaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_putUserPermissionsBoundaryCmd).Standalone()
 
-	iam_putUserPermissionsBoundaryCmd.Flags().String("permissions-boundary", "", "The ARN of the managed policy that is used to set the permissions boundary for the user.")
-	iam_putUserPermissionsBoundaryCmd.Flags().String("user-name", "", "The name (friendly name, not ARN) of the IAM user for which you want to set the permissions boundary.")
-	iam_putUserPermissionsBoundaryCmd.MarkFlagRequired("permissions-boundary")
-	iam_putUserPermissionsBoundaryCmd.MarkFlagRequired("user-name")
+		iam_putUserPermissionsBoundaryCmd.Flags().String("permissions-boundary", "", "The ARN of the managed policy that is used to set the permissions boundary for the user.")
+		iam_putUserPermissionsBoundaryCmd.Flags().String("user-name", "", "The name (friendly name, not ARN) of the IAM user for which you want to set the permissions boundary.")
+		iam_putUserPermissionsBoundaryCmd.MarkFlagRequired("permissions-boundary")
+		iam_putUserPermissionsBoundaryCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_putUserPermissionsBoundaryCmd)
 }

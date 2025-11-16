@@ -12,8 +12,10 @@ var amplifybackend_listS3BucketsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_listS3BucketsCmd).Standalone()
+	carapace.Gen(amplifybackend_listS3BucketsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_listS3BucketsCmd).Standalone()
 
-	amplifybackend_listS3BucketsCmd.Flags().String("next-token", "", "Reserved for future use.")
+		amplifybackend_listS3BucketsCmd.Flags().String("next-token", "", "Reserved for future use.")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_listS3BucketsCmd)
 }

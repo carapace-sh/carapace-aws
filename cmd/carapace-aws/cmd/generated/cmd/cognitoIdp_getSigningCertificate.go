@@ -12,9 +12,11 @@ var cognitoIdp_getSigningCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_getSigningCertificateCmd).Standalone()
+	carapace.Gen(cognitoIdp_getSigningCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_getSigningCertificateCmd).Standalone()
 
-	cognitoIdp_getSigningCertificateCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to view the signing certificate.")
-	cognitoIdp_getSigningCertificateCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_getSigningCertificateCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to view the signing certificate.")
+		cognitoIdp_getSigningCertificateCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_getSigningCertificateCmd)
 }

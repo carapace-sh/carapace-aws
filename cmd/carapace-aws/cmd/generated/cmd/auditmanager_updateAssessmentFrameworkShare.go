@@ -12,13 +12,15 @@ var auditmanager_updateAssessmentFrameworkShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_updateAssessmentFrameworkShareCmd).Standalone()
+	carapace.Gen(auditmanager_updateAssessmentFrameworkShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_updateAssessmentFrameworkShareCmd).Standalone()
 
-	auditmanager_updateAssessmentFrameworkShareCmd.Flags().String("action", "", "Specifies the update action for the share request.")
-	auditmanager_updateAssessmentFrameworkShareCmd.Flags().String("request-id", "", "The unique identifier for the share request.")
-	auditmanager_updateAssessmentFrameworkShareCmd.Flags().String("request-type", "", "Specifies whether the share request is a sent request or a received request.")
-	auditmanager_updateAssessmentFrameworkShareCmd.MarkFlagRequired("action")
-	auditmanager_updateAssessmentFrameworkShareCmd.MarkFlagRequired("request-id")
-	auditmanager_updateAssessmentFrameworkShareCmd.MarkFlagRequired("request-type")
+		auditmanager_updateAssessmentFrameworkShareCmd.Flags().String("action", "", "Specifies the update action for the share request.")
+		auditmanager_updateAssessmentFrameworkShareCmd.Flags().String("request-id", "", "The unique identifier for the share request.")
+		auditmanager_updateAssessmentFrameworkShareCmd.Flags().String("request-type", "", "Specifies whether the share request is a sent request or a received request.")
+		auditmanager_updateAssessmentFrameworkShareCmd.MarkFlagRequired("action")
+		auditmanager_updateAssessmentFrameworkShareCmd.MarkFlagRequired("request-id")
+		auditmanager_updateAssessmentFrameworkShareCmd.MarkFlagRequired("request-type")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_updateAssessmentFrameworkShareCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_stopMonitoringScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopMonitoringScheduleCmd).Standalone()
+	carapace.Gen(sagemaker_stopMonitoringScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopMonitoringScheduleCmd).Standalone()
 
-	sagemaker_stopMonitoringScheduleCmd.Flags().String("monitoring-schedule-name", "", "The name of the schedule to stop.")
-	sagemaker_stopMonitoringScheduleCmd.MarkFlagRequired("monitoring-schedule-name")
+		sagemaker_stopMonitoringScheduleCmd.Flags().String("monitoring-schedule-name", "", "The name of the schedule to stop.")
+		sagemaker_stopMonitoringScheduleCmd.MarkFlagRequired("monitoring-schedule-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopMonitoringScheduleCmd)
 }

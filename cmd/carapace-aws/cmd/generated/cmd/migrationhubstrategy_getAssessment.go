@@ -12,9 +12,11 @@ var migrationhubstrategy_getAssessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubstrategy_getAssessmentCmd).Standalone()
+	carapace.Gen(migrationhubstrategy_getAssessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubstrategy_getAssessmentCmd).Standalone()
 
-	migrationhubstrategy_getAssessmentCmd.Flags().String("id", "", "The `assessmentid` returned by [StartAssessment]().")
-	migrationhubstrategy_getAssessmentCmd.MarkFlagRequired("id")
+		migrationhubstrategy_getAssessmentCmd.Flags().String("id", "", "The `assessmentid` returned by [StartAssessment]().")
+		migrationhubstrategy_getAssessmentCmd.MarkFlagRequired("id")
+	})
 	migrationhubstrategyCmd.AddCommand(migrationhubstrategy_getAssessmentCmd)
 }

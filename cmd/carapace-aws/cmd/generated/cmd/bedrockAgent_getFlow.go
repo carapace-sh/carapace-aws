@@ -12,9 +12,11 @@ var bedrockAgent_getFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_getFlowCmd).Standalone()
+	carapace.Gen(bedrockAgent_getFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_getFlowCmd).Standalone()
 
-	bedrockAgent_getFlowCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow.")
-	bedrockAgent_getFlowCmd.MarkFlagRequired("flow-identifier")
+		bedrockAgent_getFlowCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow.")
+		bedrockAgent_getFlowCmd.MarkFlagRequired("flow-identifier")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_getFlowCmd)
 }

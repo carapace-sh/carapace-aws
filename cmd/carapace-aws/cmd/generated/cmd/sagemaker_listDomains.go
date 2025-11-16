@@ -12,9 +12,11 @@ var sagemaker_listDomainsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_listDomainsCmd).Standalone()
+	carapace.Gen(sagemaker_listDomainsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_listDomainsCmd).Standalone()
 
-	sagemaker_listDomainsCmd.Flags().String("max-results", "", "This parameter defines the maximum number of results that can be return in a single response.")
-	sagemaker_listDomainsCmd.Flags().String("next-token", "", "If the previous response was truncated, you will receive this token.")
+		sagemaker_listDomainsCmd.Flags().String("max-results", "", "This parameter defines the maximum number of results that can be return in a single response.")
+		sagemaker_listDomainsCmd.Flags().String("next-token", "", "If the previous response was truncated, you will receive this token.")
+	})
 	sagemakerCmd.AddCommand(sagemaker_listDomainsCmd)
 }

@@ -12,9 +12,11 @@ var oam_deleteSinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_deleteSinkCmd).Standalone()
+	carapace.Gen(oam_deleteSinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_deleteSinkCmd).Standalone()
 
-	oam_deleteSinkCmd.Flags().String("identifier", "", "The ARN of the sink to delete.")
-	oam_deleteSinkCmd.MarkFlagRequired("identifier")
+		oam_deleteSinkCmd.Flags().String("identifier", "", "The ARN of the sink to delete.")
+		oam_deleteSinkCmd.MarkFlagRequired("identifier")
+	})
 	oamCmd.AddCommand(oam_deleteSinkCmd)
 }

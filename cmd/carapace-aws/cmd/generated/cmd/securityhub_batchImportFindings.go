@@ -12,9 +12,11 @@ var securityhub_batchImportFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_batchImportFindingsCmd).Standalone()
+	carapace.Gen(securityhub_batchImportFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_batchImportFindingsCmd).Standalone()
 
-	securityhub_batchImportFindingsCmd.Flags().String("findings", "", "A list of findings to import.")
-	securityhub_batchImportFindingsCmd.MarkFlagRequired("findings")
+		securityhub_batchImportFindingsCmd.Flags().String("findings", "", "A list of findings to import.")
+		securityhub_batchImportFindingsCmd.MarkFlagRequired("findings")
+	})
 	securityhubCmd.AddCommand(securityhub_batchImportFindingsCmd)
 }

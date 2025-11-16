@@ -12,11 +12,13 @@ var cloudfront_tagResource2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_tagResource2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_tagResource2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_tagResource2020_05_31Cmd).Standalone()
 
-	cloudfront_tagResource2020_05_31Cmd.Flags().String("resource", "", "An ARN of a CloudFront resource.")
-	cloudfront_tagResource2020_05_31Cmd.Flags().String("tags", "", "A complex type that contains zero or more `Tag` elements.")
-	cloudfront_tagResource2020_05_31Cmd.MarkFlagRequired("resource")
-	cloudfront_tagResource2020_05_31Cmd.MarkFlagRequired("tags")
+		cloudfront_tagResource2020_05_31Cmd.Flags().String("resource", "", "An ARN of a CloudFront resource.")
+		cloudfront_tagResource2020_05_31Cmd.Flags().String("tags", "", "A complex type that contains zero or more `Tag` elements.")
+		cloudfront_tagResource2020_05_31Cmd.MarkFlagRequired("resource")
+		cloudfront_tagResource2020_05_31Cmd.MarkFlagRequired("tags")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_tagResource2020_05_31Cmd)
 }

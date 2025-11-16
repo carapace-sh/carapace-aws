@@ -12,11 +12,13 @@ var codecommit_updateRepositoryEncryptionKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_updateRepositoryEncryptionKeyCmd).Standalone()
+	carapace.Gen(codecommit_updateRepositoryEncryptionKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_updateRepositoryEncryptionKeyCmd).Standalone()
 
-	codecommit_updateRepositoryEncryptionKeyCmd.Flags().String("kms-key-id", "", "The ID of the encryption key.")
-	codecommit_updateRepositoryEncryptionKeyCmd.Flags().String("repository-name", "", "The name of the repository for which you want to update the KMS encryption key used to encrypt and decrypt the repository.")
-	codecommit_updateRepositoryEncryptionKeyCmd.MarkFlagRequired("kms-key-id")
-	codecommit_updateRepositoryEncryptionKeyCmd.MarkFlagRequired("repository-name")
+		codecommit_updateRepositoryEncryptionKeyCmd.Flags().String("kms-key-id", "", "The ID of the encryption key.")
+		codecommit_updateRepositoryEncryptionKeyCmd.Flags().String("repository-name", "", "The name of the repository for which you want to update the KMS encryption key used to encrypt and decrypt the repository.")
+		codecommit_updateRepositoryEncryptionKeyCmd.MarkFlagRequired("kms-key-id")
+		codecommit_updateRepositoryEncryptionKeyCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_updateRepositoryEncryptionKeyCmd)
 }

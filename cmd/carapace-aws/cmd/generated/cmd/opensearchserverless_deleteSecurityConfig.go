@@ -12,10 +12,12 @@ var opensearchserverless_deleteSecurityConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_deleteSecurityConfigCmd).Standalone()
+	carapace.Gen(opensearchserverless_deleteSecurityConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_deleteSecurityConfigCmd).Standalone()
 
-	opensearchserverless_deleteSecurityConfigCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
-	opensearchserverless_deleteSecurityConfigCmd.Flags().String("id", "", "The security configuration identifier.")
-	opensearchserverless_deleteSecurityConfigCmd.MarkFlagRequired("id")
+		opensearchserverless_deleteSecurityConfigCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
+		opensearchserverless_deleteSecurityConfigCmd.Flags().String("id", "", "The security configuration identifier.")
+		opensearchserverless_deleteSecurityConfigCmd.MarkFlagRequired("id")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_deleteSecurityConfigCmd)
 }

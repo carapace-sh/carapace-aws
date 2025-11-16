@@ -12,12 +12,14 @@ var glue_createUserDefinedFunctionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_createUserDefinedFunctionCmd).Standalone()
+	carapace.Gen(glue_createUserDefinedFunctionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_createUserDefinedFunctionCmd).Standalone()
 
-	glue_createUserDefinedFunctionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog in which to create the function.")
-	glue_createUserDefinedFunctionCmd.Flags().String("database-name", "", "The name of the catalog database in which to create the function.")
-	glue_createUserDefinedFunctionCmd.Flags().String("function-input", "", "A `FunctionInput` object that defines the function to create in the Data Catalog.")
-	glue_createUserDefinedFunctionCmd.MarkFlagRequired("database-name")
-	glue_createUserDefinedFunctionCmd.MarkFlagRequired("function-input")
+		glue_createUserDefinedFunctionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog in which to create the function.")
+		glue_createUserDefinedFunctionCmd.Flags().String("database-name", "", "The name of the catalog database in which to create the function.")
+		glue_createUserDefinedFunctionCmd.Flags().String("function-input", "", "A `FunctionInput` object that defines the function to create in the Data Catalog.")
+		glue_createUserDefinedFunctionCmd.MarkFlagRequired("database-name")
+		glue_createUserDefinedFunctionCmd.MarkFlagRequired("function-input")
+	})
 	glueCmd.AddCommand(glue_createUserDefinedFunctionCmd)
 }

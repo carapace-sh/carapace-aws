@@ -12,11 +12,13 @@ var macie2_updateMemberSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_updateMemberSessionCmd).Standalone()
+	carapace.Gen(macie2_updateMemberSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_updateMemberSessionCmd).Standalone()
 
-	macie2_updateMemberSessionCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
-	macie2_updateMemberSessionCmd.Flags().String("status", "", "Specifies the new status for the account.")
-	macie2_updateMemberSessionCmd.MarkFlagRequired("id")
-	macie2_updateMemberSessionCmd.MarkFlagRequired("status")
+		macie2_updateMemberSessionCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
+		macie2_updateMemberSessionCmd.Flags().String("status", "", "Specifies the new status for the account.")
+		macie2_updateMemberSessionCmd.MarkFlagRequired("id")
+		macie2_updateMemberSessionCmd.MarkFlagRequired("status")
+	})
 	macie2Cmd.AddCommand(macie2_updateMemberSessionCmd)
 }

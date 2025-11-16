@@ -12,7 +12,9 @@ var bedrock_deleteModelInvocationLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deleteModelInvocationLoggingConfigurationCmd).Standalone()
+	carapace.Gen(bedrock_deleteModelInvocationLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deleteModelInvocationLoggingConfigurationCmd).Standalone()
 
+	})
 	bedrockCmd.AddCommand(bedrock_deleteModelInvocationLoggingConfigurationCmd)
 }

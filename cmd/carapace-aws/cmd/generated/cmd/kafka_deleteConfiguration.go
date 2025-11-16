@@ -12,9 +12,11 @@ var kafka_deleteConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_deleteConfigurationCmd).Standalone()
+	carapace.Gen(kafka_deleteConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_deleteConfigurationCmd).Standalone()
 
-	kafka_deleteConfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.")
-	kafka_deleteConfigurationCmd.MarkFlagRequired("arn")
+		kafka_deleteConfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.")
+		kafka_deleteConfigurationCmd.MarkFlagRequired("arn")
+	})
 	kafkaCmd.AddCommand(kafka_deleteConfigurationCmd)
 }

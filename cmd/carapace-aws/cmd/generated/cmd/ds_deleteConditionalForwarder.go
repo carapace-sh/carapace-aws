@@ -12,11 +12,13 @@ var ds_deleteConditionalForwarderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_deleteConditionalForwarderCmd).Standalone()
+	carapace.Gen(ds_deleteConditionalForwarderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_deleteConditionalForwarderCmd).Standalone()
 
-	ds_deleteConditionalForwarderCmd.Flags().String("directory-id", "", "The directory ID for which you are deleting the conditional forwarder.")
-	ds_deleteConditionalForwarderCmd.Flags().String("remote-domain-name", "", "The fully qualified domain name (FQDN) of the remote domain with which you are deleting the conditional forwarder.")
-	ds_deleteConditionalForwarderCmd.MarkFlagRequired("directory-id")
-	ds_deleteConditionalForwarderCmd.MarkFlagRequired("remote-domain-name")
+		ds_deleteConditionalForwarderCmd.Flags().String("directory-id", "", "The directory ID for which you are deleting the conditional forwarder.")
+		ds_deleteConditionalForwarderCmd.Flags().String("remote-domain-name", "", "The fully qualified domain name (FQDN) of the remote domain with which you are deleting the conditional forwarder.")
+		ds_deleteConditionalForwarderCmd.MarkFlagRequired("directory-id")
+		ds_deleteConditionalForwarderCmd.MarkFlagRequired("remote-domain-name")
+	})
 	dsCmd.AddCommand(ds_deleteConditionalForwarderCmd)
 }

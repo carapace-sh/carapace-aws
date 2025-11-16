@@ -12,9 +12,11 @@ var chimeSdkVoice_createVoiceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_createVoiceProfileCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_createVoiceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_createVoiceProfileCmd).Standalone()
 
-	chimeSdkVoice_createVoiceProfileCmd.Flags().String("speaker-search-task-id", "", "The ID of the speaker search task.")
-	chimeSdkVoice_createVoiceProfileCmd.MarkFlagRequired("speaker-search-task-id")
+		chimeSdkVoice_createVoiceProfileCmd.Flags().String("speaker-search-task-id", "", "The ID of the speaker search task.")
+		chimeSdkVoice_createVoiceProfileCmd.MarkFlagRequired("speaker-search-task-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_createVoiceProfileCmd)
 }

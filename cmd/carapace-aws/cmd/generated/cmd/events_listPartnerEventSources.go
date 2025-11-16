@@ -12,11 +12,13 @@ var events_listPartnerEventSourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_listPartnerEventSourcesCmd).Standalone()
+	carapace.Gen(events_listPartnerEventSourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_listPartnerEventSourcesCmd).Standalone()
 
-	events_listPartnerEventSourcesCmd.Flags().String("limit", "", "pecifying this limits the number of results returned by this operation.")
-	events_listPartnerEventSourcesCmd.Flags().String("name-prefix", "", "If you specify this, the results are limited to only those partner event sources that start with the string you specify.")
-	events_listPartnerEventSourcesCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
-	events_listPartnerEventSourcesCmd.MarkFlagRequired("name-prefix")
+		events_listPartnerEventSourcesCmd.Flags().String("limit", "", "pecifying this limits the number of results returned by this operation.")
+		events_listPartnerEventSourcesCmd.Flags().String("name-prefix", "", "If you specify this, the results are limited to only those partner event sources that start with the string you specify.")
+		events_listPartnerEventSourcesCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
+		events_listPartnerEventSourcesCmd.MarkFlagRequired("name-prefix")
+	})
 	eventsCmd.AddCommand(events_listPartnerEventSourcesCmd)
 }

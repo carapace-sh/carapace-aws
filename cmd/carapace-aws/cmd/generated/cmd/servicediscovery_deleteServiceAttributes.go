@@ -12,11 +12,13 @@ var servicediscovery_deleteServiceAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_deleteServiceAttributesCmd).Standalone()
+	carapace.Gen(servicediscovery_deleteServiceAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_deleteServiceAttributesCmd).Standalone()
 
-	servicediscovery_deleteServiceAttributesCmd.Flags().String("attributes", "", "A list of keys corresponding to each attribute that you want to delete.")
-	servicediscovery_deleteServiceAttributesCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service from which the attributes will be deleted.")
-	servicediscovery_deleteServiceAttributesCmd.MarkFlagRequired("attributes")
-	servicediscovery_deleteServiceAttributesCmd.MarkFlagRequired("service-id")
+		servicediscovery_deleteServiceAttributesCmd.Flags().String("attributes", "", "A list of keys corresponding to each attribute that you want to delete.")
+		servicediscovery_deleteServiceAttributesCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service from which the attributes will be deleted.")
+		servicediscovery_deleteServiceAttributesCmd.MarkFlagRequired("attributes")
+		servicediscovery_deleteServiceAttributesCmd.MarkFlagRequired("service-id")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_deleteServiceAttributesCmd)
 }

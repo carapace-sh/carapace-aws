@@ -12,10 +12,12 @@ var ecr_deletePullThroughCacheRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_deletePullThroughCacheRuleCmd).Standalone()
+	carapace.Gen(ecr_deletePullThroughCacheRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_deletePullThroughCacheRuleCmd).Standalone()
 
-	ecr_deletePullThroughCacheRuleCmd.Flags().String("ecr-repository-prefix", "", "The Amazon ECR repository prefix associated with the pull through cache rule to delete.")
-	ecr_deletePullThroughCacheRuleCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the pull through cache rule.")
-	ecr_deletePullThroughCacheRuleCmd.MarkFlagRequired("ecr-repository-prefix")
+		ecr_deletePullThroughCacheRuleCmd.Flags().String("ecr-repository-prefix", "", "The Amazon ECR repository prefix associated with the pull through cache rule to delete.")
+		ecr_deletePullThroughCacheRuleCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the pull through cache rule.")
+		ecr_deletePullThroughCacheRuleCmd.MarkFlagRequired("ecr-repository-prefix")
+	})
 	ecrCmd.AddCommand(ecr_deletePullThroughCacheRuleCmd)
 }

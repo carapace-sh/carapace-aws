@@ -12,7 +12,9 @@ var finspaceDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceDataCmd).Standalone()
+	carapace.Gen(finspaceDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceDataCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(finspaceDataCmd)
 }

@@ -12,9 +12,11 @@ var elasticache_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_listTagsForResourceCmd).Standalone()
+	carapace.Gen(elasticache_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_listTagsForResourceCmd).Standalone()
 
-	elasticache_listTagsForResourceCmd.Flags().String("resource-name", "", "The Amazon Resource Name (ARN) of the resource for which you want the list of tags, for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.")
-	elasticache_listTagsForResourceCmd.MarkFlagRequired("resource-name")
+		elasticache_listTagsForResourceCmd.Flags().String("resource-name", "", "The Amazon Resource Name (ARN) of the resource for which you want the list of tags, for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.")
+		elasticache_listTagsForResourceCmd.MarkFlagRequired("resource-name")
+	})
 	elasticacheCmd.AddCommand(elasticache_listTagsForResourceCmd)
 }

@@ -12,10 +12,12 @@ var deadline_listFarmsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_listFarmsCmd).Standalone()
+	carapace.Gen(deadline_listFarmsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_listFarmsCmd).Standalone()
 
-	deadline_listFarmsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	deadline_listFarmsCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
-	deadline_listFarmsCmd.Flags().String("principal-id", "", "The principal ID of the member to list on the farm.")
+		deadline_listFarmsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		deadline_listFarmsCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
+		deadline_listFarmsCmd.Flags().String("principal-id", "", "The principal ID of the member to list on the farm.")
+	})
 	deadlineCmd.AddCommand(deadline_listFarmsCmd)
 }

@@ -12,13 +12,15 @@ var finspace_updateEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_updateEnvironmentCmd).Standalone()
+	carapace.Gen(finspace_updateEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_updateEnvironmentCmd).Standalone()
 
-	finspace_updateEnvironmentCmd.Flags().String("description", "", "The description of the environment.")
-	finspace_updateEnvironmentCmd.Flags().String("environment-id", "", "The identifier of the FinSpace environment.")
-	finspace_updateEnvironmentCmd.Flags().String("federation-mode", "", "Authentication mode for the environment.")
-	finspace_updateEnvironmentCmd.Flags().String("federation-parameters", "", "")
-	finspace_updateEnvironmentCmd.Flags().String("name", "", "The name of the environment.")
-	finspace_updateEnvironmentCmd.MarkFlagRequired("environment-id")
+		finspace_updateEnvironmentCmd.Flags().String("description", "", "The description of the environment.")
+		finspace_updateEnvironmentCmd.Flags().String("environment-id", "", "The identifier of the FinSpace environment.")
+		finspace_updateEnvironmentCmd.Flags().String("federation-mode", "", "Authentication mode for the environment.")
+		finspace_updateEnvironmentCmd.Flags().String("federation-parameters", "", "")
+		finspace_updateEnvironmentCmd.Flags().String("name", "", "The name of the environment.")
+		finspace_updateEnvironmentCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_updateEnvironmentCmd)
 }

@@ -12,9 +12,11 @@ var inspector2_deleteCodeSecurityIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_deleteCodeSecurityIntegrationCmd).Standalone()
+	carapace.Gen(inspector2_deleteCodeSecurityIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_deleteCodeSecurityIntegrationCmd).Standalone()
 
-	inspector2_deleteCodeSecurityIntegrationCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the code security integration to delete.")
-	inspector2_deleteCodeSecurityIntegrationCmd.MarkFlagRequired("integration-arn")
+		inspector2_deleteCodeSecurityIntegrationCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the code security integration to delete.")
+		inspector2_deleteCodeSecurityIntegrationCmd.MarkFlagRequired("integration-arn")
+	})
 	inspector2Cmd.AddCommand(inspector2_deleteCodeSecurityIntegrationCmd)
 }

@@ -12,8 +12,10 @@ var securitylake_listDataLakesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_listDataLakesCmd).Standalone()
+	carapace.Gen(securitylake_listDataLakesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_listDataLakesCmd).Standalone()
 
-	securitylake_listDataLakesCmd.Flags().String("regions", "", "The list of Regions where Security Lake is enabled.")
+		securitylake_listDataLakesCmd.Flags().String("regions", "", "The list of Regions where Security Lake is enabled.")
+	})
 	securitylakeCmd.AddCommand(securitylake_listDataLakesCmd)
 }

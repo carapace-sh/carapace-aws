@@ -12,7 +12,9 @@ var wafv2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2Cmd).Standalone()
+	carapace.Gen(wafv2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2Cmd).Standalone()
 
+	})
 	rootCmd.AddCommand(wafv2Cmd)
 }

@@ -12,12 +12,14 @@ var applicationInsights_describeComponentConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_describeComponentConfigurationCmd).Standalone()
+	carapace.Gen(applicationInsights_describeComponentConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_describeComponentConfigurationCmd).Standalone()
 
-	applicationInsights_describeComponentConfigurationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the resource group owner.")
-	applicationInsights_describeComponentConfigurationCmd.Flags().String("component-name", "", "The name of the component.")
-	applicationInsights_describeComponentConfigurationCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
-	applicationInsights_describeComponentConfigurationCmd.MarkFlagRequired("component-name")
-	applicationInsights_describeComponentConfigurationCmd.MarkFlagRequired("resource-group-name")
+		applicationInsights_describeComponentConfigurationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the resource group owner.")
+		applicationInsights_describeComponentConfigurationCmd.Flags().String("component-name", "", "The name of the component.")
+		applicationInsights_describeComponentConfigurationCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
+		applicationInsights_describeComponentConfigurationCmd.MarkFlagRequired("component-name")
+		applicationInsights_describeComponentConfigurationCmd.MarkFlagRequired("resource-group-name")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_describeComponentConfigurationCmd)
 }

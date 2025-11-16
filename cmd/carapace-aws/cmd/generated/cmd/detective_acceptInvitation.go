@@ -12,9 +12,11 @@ var detective_acceptInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_acceptInvitationCmd).Standalone()
+	carapace.Gen(detective_acceptInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_acceptInvitationCmd).Standalone()
 
-	detective_acceptInvitationCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph that the member account is accepting the invitation for.")
-	detective_acceptInvitationCmd.MarkFlagRequired("graph-arn")
+		detective_acceptInvitationCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph that the member account is accepting the invitation for.")
+		detective_acceptInvitationCmd.MarkFlagRequired("graph-arn")
+	})
 	detectiveCmd.AddCommand(detective_acceptInvitationCmd)
 }

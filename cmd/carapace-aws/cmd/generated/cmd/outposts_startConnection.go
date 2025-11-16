@@ -12,14 +12,16 @@ var outposts_startConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_startConnectionCmd).Standalone()
+	carapace.Gen(outposts_startConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_startConnectionCmd).Standalone()
 
-	outposts_startConnectionCmd.Flags().String("asset-id", "", "The ID of the Outpost server.")
-	outposts_startConnectionCmd.Flags().String("client-public-key", "", "The public key of the client.")
-	outposts_startConnectionCmd.Flags().String("device-serial-number", "", "The serial number of the dongle.")
-	outposts_startConnectionCmd.Flags().String("network-interface-device-index", "", "The device index of the network interface on the Outpost server.")
-	outposts_startConnectionCmd.MarkFlagRequired("asset-id")
-	outposts_startConnectionCmd.MarkFlagRequired("client-public-key")
-	outposts_startConnectionCmd.MarkFlagRequired("network-interface-device-index")
+		outposts_startConnectionCmd.Flags().String("asset-id", "", "The ID of the Outpost server.")
+		outposts_startConnectionCmd.Flags().String("client-public-key", "", "The public key of the client.")
+		outposts_startConnectionCmd.Flags().String("device-serial-number", "", "The serial number of the dongle.")
+		outposts_startConnectionCmd.Flags().String("network-interface-device-index", "", "The device index of the network interface on the Outpost server.")
+		outposts_startConnectionCmd.MarkFlagRequired("asset-id")
+		outposts_startConnectionCmd.MarkFlagRequired("client-public-key")
+		outposts_startConnectionCmd.MarkFlagRequired("network-interface-device-index")
+	})
 	outpostsCmd.AddCommand(outposts_startConnectionCmd)
 }

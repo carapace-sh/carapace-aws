@@ -12,10 +12,12 @@ var cloudwatch_getMetricWidgetImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_getMetricWidgetImageCmd).Standalone()
+	carapace.Gen(cloudwatch_getMetricWidgetImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_getMetricWidgetImageCmd).Standalone()
 
-	cloudwatch_getMetricWidgetImageCmd.Flags().String("metric-widget", "", "A JSON string that defines the bitmap graph to be retrieved.")
-	cloudwatch_getMetricWidgetImageCmd.Flags().String("output-format", "", "The format of the resulting image.")
-	cloudwatch_getMetricWidgetImageCmd.MarkFlagRequired("metric-widget")
+		cloudwatch_getMetricWidgetImageCmd.Flags().String("metric-widget", "", "A JSON string that defines the bitmap graph to be retrieved.")
+		cloudwatch_getMetricWidgetImageCmd.Flags().String("output-format", "", "The format of the resulting image.")
+		cloudwatch_getMetricWidgetImageCmd.MarkFlagRequired("metric-widget")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_getMetricWidgetImageCmd)
 }

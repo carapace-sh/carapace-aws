@@ -12,9 +12,11 @@ var wellarchitected_listReviewTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listReviewTemplatesCmd).Standalone()
+	carapace.Gen(wellarchitected_listReviewTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listReviewTemplatesCmd).Standalone()
 
-	wellarchitected_listReviewTemplatesCmd.Flags().String("max-results", "", "")
-	wellarchitected_listReviewTemplatesCmd.Flags().String("next-token", "", "")
+		wellarchitected_listReviewTemplatesCmd.Flags().String("max-results", "", "")
+		wellarchitected_listReviewTemplatesCmd.Flags().String("next-token", "", "")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listReviewTemplatesCmd)
 }

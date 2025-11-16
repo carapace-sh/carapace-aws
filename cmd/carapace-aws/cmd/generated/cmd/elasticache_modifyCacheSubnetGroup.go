@@ -12,11 +12,13 @@ var elasticache_modifyCacheSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_modifyCacheSubnetGroupCmd).Standalone()
+	carapace.Gen(elasticache_modifyCacheSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_modifyCacheSubnetGroupCmd).Standalone()
 
-	elasticache_modifyCacheSubnetGroupCmd.Flags().String("cache-subnet-group-description", "", "A description of the cache subnet group.")
-	elasticache_modifyCacheSubnetGroupCmd.Flags().String("cache-subnet-group-name", "", "The name for the cache subnet group.")
-	elasticache_modifyCacheSubnetGroupCmd.Flags().String("subnet-ids", "", "The EC2 subnet IDs for the cache subnet group.")
-	elasticache_modifyCacheSubnetGroupCmd.MarkFlagRequired("cache-subnet-group-name")
+		elasticache_modifyCacheSubnetGroupCmd.Flags().String("cache-subnet-group-description", "", "A description of the cache subnet group.")
+		elasticache_modifyCacheSubnetGroupCmd.Flags().String("cache-subnet-group-name", "", "The name for the cache subnet group.")
+		elasticache_modifyCacheSubnetGroupCmd.Flags().String("subnet-ids", "", "The EC2 subnet IDs for the cache subnet group.")
+		elasticache_modifyCacheSubnetGroupCmd.MarkFlagRequired("cache-subnet-group-name")
+	})
 	elasticacheCmd.AddCommand(elasticache_modifyCacheSubnetGroupCmd)
 }

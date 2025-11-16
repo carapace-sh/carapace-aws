@@ -12,7 +12,9 @@ var detective_disableOrganizationAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_disableOrganizationAdminAccountCmd).Standalone()
+	carapace.Gen(detective_disableOrganizationAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_disableOrganizationAdminAccountCmd).Standalone()
 
+	})
 	detectiveCmd.AddCommand(detective_disableOrganizationAdminAccountCmd)
 }

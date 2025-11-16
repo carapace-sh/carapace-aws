@@ -12,9 +12,11 @@ var workspaces_modifyAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_modifyAccountCmd).Standalone()
+	carapace.Gen(workspaces_modifyAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_modifyAccountCmd).Standalone()
 
-	workspaces_modifyAccountCmd.Flags().String("dedicated-tenancy-management-cidr-range", "", "The IP address range, specified as an IPv4 CIDR block, for the management network interface.")
-	workspaces_modifyAccountCmd.Flags().String("dedicated-tenancy-support", "", "The status of BYOL.")
+		workspaces_modifyAccountCmd.Flags().String("dedicated-tenancy-management-cidr-range", "", "The IP address range, specified as an IPv4 CIDR block, for the management network interface.")
+		workspaces_modifyAccountCmd.Flags().String("dedicated-tenancy-support", "", "The status of BYOL.")
+	})
 	workspacesCmd.AddCommand(workspaces_modifyAccountCmd)
 }

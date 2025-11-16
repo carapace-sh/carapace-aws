@@ -12,7 +12,9 @@ var medialive_listVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listVersionsCmd).Standalone()
+	carapace.Gen(medialive_listVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listVersionsCmd).Standalone()
 
+	})
 	medialiveCmd.AddCommand(medialive_listVersionsCmd)
 }

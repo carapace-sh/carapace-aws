@@ -12,13 +12,15 @@ var kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd).Standalone()
 
-	kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.Flags().String("application-name", "", "The name of an existing application.")
-	kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.Flags().String("conditional-token", "", "A value you use to implement strong concurrency for application updates.")
-	kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.Flags().String("current-application-version-id", "", "The current application version ID.")
-	kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.Flags().String("vpc-configuration-id", "", "The ID of the VPC configuration to delete.")
-	kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.MarkFlagRequired("application-name")
-	kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.MarkFlagRequired("vpc-configuration-id")
+		kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.Flags().String("application-name", "", "The name of an existing application.")
+		kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.Flags().String("conditional-token", "", "A value you use to implement strong concurrency for application updates.")
+		kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.Flags().String("current-application-version-id", "", "The current application version ID.")
+		kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.Flags().String("vpc-configuration-id", "", "The ID of the VPC configuration to delete.")
+		kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd.MarkFlagRequired("vpc-configuration-id")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_deleteApplicationVpcConfigurationCmd)
 }

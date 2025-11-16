@@ -12,12 +12,14 @@ var servicecatalog_describeServiceActionExecutionParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_describeServiceActionExecutionParametersCmd).Standalone()
+	carapace.Gen(servicecatalog_describeServiceActionExecutionParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_describeServiceActionExecutionParametersCmd).Standalone()
 
-	servicecatalog_describeServiceActionExecutionParametersCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_describeServiceActionExecutionParametersCmd.Flags().String("provisioned-product-id", "", "The identifier of the provisioned product.")
-	servicecatalog_describeServiceActionExecutionParametersCmd.Flags().String("service-action-id", "", "The self-service action identifier.")
-	servicecatalog_describeServiceActionExecutionParametersCmd.MarkFlagRequired("provisioned-product-id")
-	servicecatalog_describeServiceActionExecutionParametersCmd.MarkFlagRequired("service-action-id")
+		servicecatalog_describeServiceActionExecutionParametersCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_describeServiceActionExecutionParametersCmd.Flags().String("provisioned-product-id", "", "The identifier of the provisioned product.")
+		servicecatalog_describeServiceActionExecutionParametersCmd.Flags().String("service-action-id", "", "The self-service action identifier.")
+		servicecatalog_describeServiceActionExecutionParametersCmd.MarkFlagRequired("provisioned-product-id")
+		servicecatalog_describeServiceActionExecutionParametersCmd.MarkFlagRequired("service-action-id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_describeServiceActionExecutionParametersCmd)
 }

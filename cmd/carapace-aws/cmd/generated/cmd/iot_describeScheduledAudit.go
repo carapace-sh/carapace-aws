@@ -12,9 +12,11 @@ var iot_describeScheduledAuditCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeScheduledAuditCmd).Standalone()
+	carapace.Gen(iot_describeScheduledAuditCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeScheduledAuditCmd).Standalone()
 
-	iot_describeScheduledAuditCmd.Flags().String("scheduled-audit-name", "", "The name of the scheduled audit whose information you want to get.")
-	iot_describeScheduledAuditCmd.MarkFlagRequired("scheduled-audit-name")
+		iot_describeScheduledAuditCmd.Flags().String("scheduled-audit-name", "", "The name of the scheduled audit whose information you want to get.")
+		iot_describeScheduledAuditCmd.MarkFlagRequired("scheduled-audit-name")
+	})
 	iotCmd.AddCommand(iot_describeScheduledAuditCmd)
 }

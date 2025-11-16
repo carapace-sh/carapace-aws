@@ -12,7 +12,9 @@ var servicecatalog_getAwsorganizationsAccessStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_getAwsorganizationsAccessStatusCmd).Standalone()
+	carapace.Gen(servicecatalog_getAwsorganizationsAccessStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_getAwsorganizationsAccessStatusCmd).Standalone()
 
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_getAwsorganizationsAccessStatusCmd)
 }

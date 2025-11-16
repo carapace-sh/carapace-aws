@@ -12,9 +12,11 @@ var migrationHubRefactorSpaces_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpaces_listTagsForResourceCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpaces_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpaces_listTagsForResourceCmd).Standalone()
 
-	migrationHubRefactorSpaces_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	migrationHubRefactorSpaces_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		migrationHubRefactorSpaces_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		migrationHubRefactorSpaces_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_listTagsForResourceCmd)
 }

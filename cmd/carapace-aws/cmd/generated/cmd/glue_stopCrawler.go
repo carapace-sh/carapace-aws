@@ -12,9 +12,11 @@ var glue_stopCrawlerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_stopCrawlerCmd).Standalone()
+	carapace.Gen(glue_stopCrawlerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_stopCrawlerCmd).Standalone()
 
-	glue_stopCrawlerCmd.Flags().String("name", "", "Name of the crawler to stop.")
-	glue_stopCrawlerCmd.MarkFlagRequired("name")
+		glue_stopCrawlerCmd.Flags().String("name", "", "Name of the crawler to stop.")
+		glue_stopCrawlerCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_stopCrawlerCmd)
 }

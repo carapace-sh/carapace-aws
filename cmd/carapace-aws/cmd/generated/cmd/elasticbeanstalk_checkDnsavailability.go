@@ -12,9 +12,11 @@ var elasticbeanstalk_checkDnsavailabilityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_checkDnsavailabilityCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_checkDnsavailabilityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_checkDnsavailabilityCmd).Standalone()
 
-	elasticbeanstalk_checkDnsavailabilityCmd.Flags().String("cnameprefix", "", "The prefix used when this CNAME is reserved.")
-	elasticbeanstalk_checkDnsavailabilityCmd.MarkFlagRequired("cnameprefix")
+		elasticbeanstalk_checkDnsavailabilityCmd.Flags().String("cnameprefix", "", "The prefix used when this CNAME is reserved.")
+		elasticbeanstalk_checkDnsavailabilityCmd.MarkFlagRequired("cnameprefix")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_checkDnsavailabilityCmd)
 }

@@ -12,9 +12,11 @@ var securitylake_deleteSubscriberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_deleteSubscriberCmd).Standalone()
+	carapace.Gen(securitylake_deleteSubscriberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_deleteSubscriberCmd).Standalone()
 
-	securitylake_deleteSubscriberCmd.Flags().String("subscriber-id", "", "A value created by Security Lake that uniquely identifies your `DeleteSubscriber` API request.")
-	securitylake_deleteSubscriberCmd.MarkFlagRequired("subscriber-id")
+		securitylake_deleteSubscriberCmd.Flags().String("subscriber-id", "", "A value created by Security Lake that uniquely identifies your `DeleteSubscriber` API request.")
+		securitylake_deleteSubscriberCmd.MarkFlagRequired("subscriber-id")
+	})
 	securitylakeCmd.AddCommand(securitylake_deleteSubscriberCmd)
 }

@@ -12,9 +12,11 @@ var mturk_getAssignmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_getAssignmentCmd).Standalone()
+	carapace.Gen(mturk_getAssignmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_getAssignmentCmd).Standalone()
 
-	mturk_getAssignmentCmd.Flags().String("assignment-id", "", "The ID of the Assignment to be retrieved.")
-	mturk_getAssignmentCmd.MarkFlagRequired("assignment-id")
+		mturk_getAssignmentCmd.Flags().String("assignment-id", "", "The ID of the Assignment to be retrieved.")
+		mturk_getAssignmentCmd.MarkFlagRequired("assignment-id")
+	})
 	mturkCmd.AddCommand(mturk_getAssignmentCmd)
 }

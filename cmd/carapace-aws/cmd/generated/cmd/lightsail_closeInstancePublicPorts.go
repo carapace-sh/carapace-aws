@@ -12,11 +12,13 @@ var lightsail_closeInstancePublicPortsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_closeInstancePublicPortsCmd).Standalone()
+	carapace.Gen(lightsail_closeInstancePublicPortsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_closeInstancePublicPortsCmd).Standalone()
 
-	lightsail_closeInstancePublicPortsCmd.Flags().String("instance-name", "", "The name of the instance for which to close ports.")
-	lightsail_closeInstancePublicPortsCmd.Flags().String("port-info", "", "An object to describe the ports to close for the specified instance.")
-	lightsail_closeInstancePublicPortsCmd.MarkFlagRequired("instance-name")
-	lightsail_closeInstancePublicPortsCmd.MarkFlagRequired("port-info")
+		lightsail_closeInstancePublicPortsCmd.Flags().String("instance-name", "", "The name of the instance for which to close ports.")
+		lightsail_closeInstancePublicPortsCmd.Flags().String("port-info", "", "An object to describe the ports to close for the specified instance.")
+		lightsail_closeInstancePublicPortsCmd.MarkFlagRequired("instance-name")
+		lightsail_closeInstancePublicPortsCmd.MarkFlagRequired("port-info")
+	})
 	lightsailCmd.AddCommand(lightsail_closeInstancePublicPortsCmd)
 }

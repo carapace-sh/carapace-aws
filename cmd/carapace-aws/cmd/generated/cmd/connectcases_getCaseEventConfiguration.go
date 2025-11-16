@@ -12,9 +12,11 @@ var connectcases_getCaseEventConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_getCaseEventConfigurationCmd).Standalone()
+	carapace.Gen(connectcases_getCaseEventConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_getCaseEventConfigurationCmd).Standalone()
 
-	connectcases_getCaseEventConfigurationCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_getCaseEventConfigurationCmd.MarkFlagRequired("domain-id")
+		connectcases_getCaseEventConfigurationCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_getCaseEventConfigurationCmd.MarkFlagRequired("domain-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_getCaseEventConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var events_describeApiDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_describeApiDestinationCmd).Standalone()
+	carapace.Gen(events_describeApiDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_describeApiDestinationCmd).Standalone()
 
-	events_describeApiDestinationCmd.Flags().String("name", "", "The name of the API destination to retrieve.")
-	events_describeApiDestinationCmd.MarkFlagRequired("name")
+		events_describeApiDestinationCmd.Flags().String("name", "", "The name of the API destination to retrieve.")
+		events_describeApiDestinationCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_describeApiDestinationCmd)
 }

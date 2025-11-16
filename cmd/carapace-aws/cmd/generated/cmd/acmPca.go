@@ -12,7 +12,9 @@ var acmPcaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acmPcaCmd).Standalone()
+	carapace.Gen(acmPcaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acmPcaCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(acmPcaCmd)
 }

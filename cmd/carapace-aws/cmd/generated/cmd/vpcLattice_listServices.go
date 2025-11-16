@@ -12,9 +12,11 @@ var vpcLattice_listServicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listServicesCmd).Standalone()
+	carapace.Gen(vpcLattice_listServicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listServicesCmd).Standalone()
 
-	vpcLattice_listServicesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	vpcLattice_listServicesCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+		vpcLattice_listServicesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		vpcLattice_listServicesCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listServicesCmd)
 }

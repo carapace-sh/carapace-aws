@@ -12,12 +12,14 @@ var ssmSap_listOperationEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_listOperationEventsCmd).Standalone()
+	carapace.Gen(ssmSap_listOperationEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_listOperationEventsCmd).Standalone()
 
-	ssmSap_listOperationEventsCmd.Flags().String("filters", "", "Optionally specify filters to narrow the returned operation event items.")
-	ssmSap_listOperationEventsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	ssmSap_listOperationEventsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
-	ssmSap_listOperationEventsCmd.Flags().String("operation-id", "", "The ID of the operation.")
-	ssmSap_listOperationEventsCmd.MarkFlagRequired("operation-id")
+		ssmSap_listOperationEventsCmd.Flags().String("filters", "", "Optionally specify filters to narrow the returned operation event items.")
+		ssmSap_listOperationEventsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		ssmSap_listOperationEventsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+		ssmSap_listOperationEventsCmd.Flags().String("operation-id", "", "The ID of the operation.")
+		ssmSap_listOperationEventsCmd.MarkFlagRequired("operation-id")
+	})
 	ssmSapCmd.AddCommand(ssmSap_listOperationEventsCmd)
 }

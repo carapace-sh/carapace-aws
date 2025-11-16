@@ -12,11 +12,13 @@ var migrationHubRefactorSpaces_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpaces_untagResourceCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpaces_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpaces_untagResourceCmd).Standalone()
 
-	migrationHubRefactorSpaces_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	migrationHubRefactorSpaces_untagResourceCmd.Flags().String("tag-keys", "", "The list of keys of the tags to be removed from the resource.")
-	migrationHubRefactorSpaces_untagResourceCmd.MarkFlagRequired("resource-arn")
-	migrationHubRefactorSpaces_untagResourceCmd.MarkFlagRequired("tag-keys")
+		migrationHubRefactorSpaces_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		migrationHubRefactorSpaces_untagResourceCmd.Flags().String("tag-keys", "", "The list of keys of the tags to be removed from the resource.")
+		migrationHubRefactorSpaces_untagResourceCmd.MarkFlagRequired("resource-arn")
+		migrationHubRefactorSpaces_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_untagResourceCmd)
 }

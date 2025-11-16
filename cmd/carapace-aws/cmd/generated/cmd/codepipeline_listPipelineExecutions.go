@@ -12,12 +12,14 @@ var codepipeline_listPipelineExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_listPipelineExecutionsCmd).Standalone()
+	carapace.Gen(codepipeline_listPipelineExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_listPipelineExecutionsCmd).Standalone()
 
-	codepipeline_listPipelineExecutionsCmd.Flags().String("filter", "", "The pipeline execution to filter on.")
-	codepipeline_listPipelineExecutionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	codepipeline_listPipelineExecutionsCmd.Flags().String("next-token", "", "The token that was returned from the previous `ListPipelineExecutions` call, which can be used to return the next set of pipeline executions in the list.")
-	codepipeline_listPipelineExecutionsCmd.Flags().String("pipeline-name", "", "The name of the pipeline for which you want to get execution summary information.")
-	codepipeline_listPipelineExecutionsCmd.MarkFlagRequired("pipeline-name")
+		codepipeline_listPipelineExecutionsCmd.Flags().String("filter", "", "The pipeline execution to filter on.")
+		codepipeline_listPipelineExecutionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		codepipeline_listPipelineExecutionsCmd.Flags().String("next-token", "", "The token that was returned from the previous `ListPipelineExecutions` call, which can be used to return the next set of pipeline executions in the list.")
+		codepipeline_listPipelineExecutionsCmd.Flags().String("pipeline-name", "", "The name of the pipeline for which you want to get execution summary information.")
+		codepipeline_listPipelineExecutionsCmd.MarkFlagRequired("pipeline-name")
+	})
 	codepipelineCmd.AddCommand(codepipeline_listPipelineExecutionsCmd)
 }

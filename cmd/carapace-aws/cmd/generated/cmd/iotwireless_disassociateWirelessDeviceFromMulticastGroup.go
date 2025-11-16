@@ -12,11 +12,13 @@ var iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd).Standalone()
+	carapace.Gen(iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd).Standalone()
 
-	iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd.Flags().String("id", "", "")
-	iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd.Flags().String("wireless-device-id", "", "")
-	iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd.MarkFlagRequired("id")
-	iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd.MarkFlagRequired("wireless-device-id")
+		iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd.Flags().String("id", "", "")
+		iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd.Flags().String("wireless-device-id", "", "")
+		iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd.MarkFlagRequired("id")
+		iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd.MarkFlagRequired("wireless-device-id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_disassociateWirelessDeviceFromMulticastGroupCmd)
 }

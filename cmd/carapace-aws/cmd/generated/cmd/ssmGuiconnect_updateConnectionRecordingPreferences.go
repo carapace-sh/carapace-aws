@@ -12,10 +12,12 @@ var ssmGuiconnect_updateConnectionRecordingPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmGuiconnect_updateConnectionRecordingPreferencesCmd).Standalone()
+	carapace.Gen(ssmGuiconnect_updateConnectionRecordingPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmGuiconnect_updateConnectionRecordingPreferencesCmd).Standalone()
 
-	ssmGuiconnect_updateConnectionRecordingPreferencesCmd.Flags().String("client-token", "", "User-provided idempotency token.")
-	ssmGuiconnect_updateConnectionRecordingPreferencesCmd.Flags().String("connection-recording-preferences", "", "The set of preferences used for recording RDP connections in the requesting Amazon Web Services account and Amazon Web Services Region.")
-	ssmGuiconnect_updateConnectionRecordingPreferencesCmd.MarkFlagRequired("connection-recording-preferences")
+		ssmGuiconnect_updateConnectionRecordingPreferencesCmd.Flags().String("client-token", "", "User-provided idempotency token.")
+		ssmGuiconnect_updateConnectionRecordingPreferencesCmd.Flags().String("connection-recording-preferences", "", "The set of preferences used for recording RDP connections in the requesting Amazon Web Services account and Amazon Web Services Region.")
+		ssmGuiconnect_updateConnectionRecordingPreferencesCmd.MarkFlagRequired("connection-recording-preferences")
+	})
 	ssmGuiconnectCmd.AddCommand(ssmGuiconnect_updateConnectionRecordingPreferencesCmd)
 }

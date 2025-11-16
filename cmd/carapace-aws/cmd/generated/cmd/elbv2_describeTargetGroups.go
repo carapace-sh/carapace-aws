@@ -12,12 +12,14 @@ var elbv2_describeTargetGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_describeTargetGroupsCmd).Standalone()
+	carapace.Gen(elbv2_describeTargetGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_describeTargetGroupsCmd).Standalone()
 
-	elbv2_describeTargetGroupsCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
-	elbv2_describeTargetGroupsCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	elbv2_describeTargetGroupsCmd.Flags().String("names", "", "The names of the target groups.")
-	elbv2_describeTargetGroupsCmd.Flags().String("page-size", "", "The maximum number of results to return with this call.")
-	elbv2_describeTargetGroupsCmd.Flags().String("target-group-arns", "", "The Amazon Resource Names (ARN) of the target groups.")
+		elbv2_describeTargetGroupsCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
+		elbv2_describeTargetGroupsCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		elbv2_describeTargetGroupsCmd.Flags().String("names", "", "The names of the target groups.")
+		elbv2_describeTargetGroupsCmd.Flags().String("page-size", "", "The maximum number of results to return with this call.")
+		elbv2_describeTargetGroupsCmd.Flags().String("target-group-arns", "", "The Amazon Resource Names (ARN) of the target groups.")
+	})
 	elbv2Cmd.AddCommand(elbv2_describeTargetGroupsCmd)
 }

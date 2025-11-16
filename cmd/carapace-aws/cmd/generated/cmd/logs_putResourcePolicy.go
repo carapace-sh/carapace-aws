@@ -12,11 +12,13 @@ var logs_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_putResourcePolicyCmd).Standalone()
+	carapace.Gen(logs_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_putResourcePolicyCmd).Standalone()
 
-	logs_putResourcePolicyCmd.Flags().String("expected-revision-id", "", "The expected revision ID of the resource policy.")
-	logs_putResourcePolicyCmd.Flags().String("policy-document", "", "Details of the new policy, including the identity of the principal that is enabled to put logs to this account.")
-	logs_putResourcePolicyCmd.Flags().String("policy-name", "", "Name of the new policy.")
-	logs_putResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch Logs resource to which the resource policy needs to be added or attached.")
+		logs_putResourcePolicyCmd.Flags().String("expected-revision-id", "", "The expected revision ID of the resource policy.")
+		logs_putResourcePolicyCmd.Flags().String("policy-document", "", "Details of the new policy, including the identity of the principal that is enabled to put logs to this account.")
+		logs_putResourcePolicyCmd.Flags().String("policy-name", "", "Name of the new policy.")
+		logs_putResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch Logs resource to which the resource policy needs to be added or attached.")
+	})
 	logsCmd.AddCommand(logs_putResourcePolicyCmd)
 }

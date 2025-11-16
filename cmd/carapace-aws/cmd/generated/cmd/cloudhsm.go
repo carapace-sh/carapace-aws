@@ -12,7 +12,9 @@ var cloudhsmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsmCmd).Standalone()
+	carapace.Gen(cloudhsmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsmCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cloudhsmCmd)
 }

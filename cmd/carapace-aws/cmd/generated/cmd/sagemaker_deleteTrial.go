@@ -12,9 +12,11 @@ var sagemaker_deleteTrialCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteTrialCmd).Standalone()
+	carapace.Gen(sagemaker_deleteTrialCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteTrialCmd).Standalone()
 
-	sagemaker_deleteTrialCmd.Flags().String("trial-name", "", "The name of the trial to delete.")
-	sagemaker_deleteTrialCmd.MarkFlagRequired("trial-name")
+		sagemaker_deleteTrialCmd.Flags().String("trial-name", "", "The name of the trial to delete.")
+		sagemaker_deleteTrialCmd.MarkFlagRequired("trial-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteTrialCmd)
 }

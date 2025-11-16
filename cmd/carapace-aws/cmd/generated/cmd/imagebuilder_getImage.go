@@ -12,9 +12,11 @@ var imagebuilder_getImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getImageCmd).Standalone()
+	carapace.Gen(imagebuilder_getImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getImageCmd).Standalone()
 
-	imagebuilder_getImageCmd.Flags().String("image-build-version-arn", "", "The Amazon Resource Name (ARN) of the image that you want to get.")
-	imagebuilder_getImageCmd.MarkFlagRequired("image-build-version-arn")
+		imagebuilder_getImageCmd.Flags().String("image-build-version-arn", "", "The Amazon Resource Name (ARN) of the image that you want to get.")
+		imagebuilder_getImageCmd.MarkFlagRequired("image-build-version-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getImageCmd)
 }

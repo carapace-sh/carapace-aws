@@ -12,9 +12,11 @@ var docdb_deleteDbclusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_deleteDbclusterParameterGroupCmd).Standalone()
+	carapace.Gen(docdb_deleteDbclusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_deleteDbclusterParameterGroupCmd).Standalone()
 
-	docdb_deleteDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the cluster parameter group.")
-	docdb_deleteDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
+		docdb_deleteDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the cluster parameter group.")
+		docdb_deleteDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
+	})
 	docdbCmd.AddCommand(docdb_deleteDbclusterParameterGroupCmd)
 }

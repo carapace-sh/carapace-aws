@@ -12,11 +12,13 @@ var directconnect_disassociateMacSecKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_disassociateMacSecKeyCmd).Standalone()
+	carapace.Gen(directconnect_disassociateMacSecKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_disassociateMacSecKeyCmd).Standalone()
 
-	directconnect_disassociateMacSecKeyCmd.Flags().String("connection-id", "", "The ID of the dedicated connection (dxcon-xxxx), interconnect (dxcon-xxxx), or LAG (dxlag-xxxx).")
-	directconnect_disassociateMacSecKeyCmd.Flags().String("secret-arn", "", "The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.")
-	directconnect_disassociateMacSecKeyCmd.MarkFlagRequired("connection-id")
-	directconnect_disassociateMacSecKeyCmd.MarkFlagRequired("secret-arn")
+		directconnect_disassociateMacSecKeyCmd.Flags().String("connection-id", "", "The ID of the dedicated connection (dxcon-xxxx), interconnect (dxcon-xxxx), or LAG (dxlag-xxxx).")
+		directconnect_disassociateMacSecKeyCmd.Flags().String("secret-arn", "", "The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.")
+		directconnect_disassociateMacSecKeyCmd.MarkFlagRequired("connection-id")
+		directconnect_disassociateMacSecKeyCmd.MarkFlagRequired("secret-arn")
+	})
 	directconnectCmd.AddCommand(directconnect_disassociateMacSecKeyCmd)
 }

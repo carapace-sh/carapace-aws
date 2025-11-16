@@ -12,9 +12,11 @@ var iotwireless_listMulticastGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_listMulticastGroupsCmd).Standalone()
+	carapace.Gen(iotwireless_listMulticastGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_listMulticastGroupsCmd).Standalone()
 
-	iotwireless_listMulticastGroupsCmd.Flags().String("max-results", "", "")
-	iotwireless_listMulticastGroupsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+		iotwireless_listMulticastGroupsCmd.Flags().String("max-results", "", "")
+		iotwireless_listMulticastGroupsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_listMulticastGroupsCmd)
 }

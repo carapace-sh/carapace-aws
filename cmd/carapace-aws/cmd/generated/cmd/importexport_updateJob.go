@@ -12,16 +12,18 @@ var importexport_updateJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(importexport_updateJobCmd).Standalone()
+	carapace.Gen(importexport_updateJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(importexport_updateJobCmd).Standalone()
 
-	importexport_updateJobCmd.Flags().String("apiversion", "", "")
-	importexport_updateJobCmd.Flags().String("job-id", "", "")
-	importexport_updateJobCmd.Flags().String("job-type", "", "")
-	importexport_updateJobCmd.Flags().String("manifest", "", "")
-	importexport_updateJobCmd.Flags().String("validate-only", "", "")
-	importexport_updateJobCmd.MarkFlagRequired("job-id")
-	importexport_updateJobCmd.MarkFlagRequired("job-type")
-	importexport_updateJobCmd.MarkFlagRequired("manifest")
-	importexport_updateJobCmd.MarkFlagRequired("validate-only")
+		importexport_updateJobCmd.Flags().String("apiversion", "", "")
+		importexport_updateJobCmd.Flags().String("job-id", "", "")
+		importexport_updateJobCmd.Flags().String("job-type", "", "")
+		importexport_updateJobCmd.Flags().String("manifest", "", "")
+		importexport_updateJobCmd.Flags().String("validate-only", "", "")
+		importexport_updateJobCmd.MarkFlagRequired("job-id")
+		importexport_updateJobCmd.MarkFlagRequired("job-type")
+		importexport_updateJobCmd.MarkFlagRequired("manifest")
+		importexport_updateJobCmd.MarkFlagRequired("validate-only")
+	})
 	importexportCmd.AddCommand(importexport_updateJobCmd)
 }

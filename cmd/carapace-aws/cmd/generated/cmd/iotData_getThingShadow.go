@@ -12,10 +12,12 @@ var iotData_getThingShadowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotData_getThingShadowCmd).Standalone()
+	carapace.Gen(iotData_getThingShadowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotData_getThingShadowCmd).Standalone()
 
-	iotData_getThingShadowCmd.Flags().String("shadow-name", "", "The name of the shadow.")
-	iotData_getThingShadowCmd.Flags().String("thing-name", "", "The name of the thing.")
-	iotData_getThingShadowCmd.MarkFlagRequired("thing-name")
+		iotData_getThingShadowCmd.Flags().String("shadow-name", "", "The name of the shadow.")
+		iotData_getThingShadowCmd.Flags().String("thing-name", "", "The name of the thing.")
+		iotData_getThingShadowCmd.MarkFlagRequired("thing-name")
+	})
 	iotDataCmd.AddCommand(iotData_getThingShadowCmd)
 }

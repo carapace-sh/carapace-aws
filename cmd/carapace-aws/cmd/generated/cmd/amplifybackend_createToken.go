@@ -12,9 +12,11 @@ var amplifybackend_createTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_createTokenCmd).Standalone()
+	carapace.Gen(amplifybackend_createTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_createTokenCmd).Standalone()
 
-	amplifybackend_createTokenCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_createTokenCmd.MarkFlagRequired("app-id")
+		amplifybackend_createTokenCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_createTokenCmd.MarkFlagRequired("app-id")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_createTokenCmd)
 }

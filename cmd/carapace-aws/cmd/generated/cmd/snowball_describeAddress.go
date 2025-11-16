@@ -12,9 +12,11 @@ var snowball_describeAddressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_describeAddressCmd).Standalone()
+	carapace.Gen(snowball_describeAddressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_describeAddressCmd).Standalone()
 
-	snowball_describeAddressCmd.Flags().String("address-id", "", "The automatically generated ID for a specific address.")
-	snowball_describeAddressCmd.MarkFlagRequired("address-id")
+		snowball_describeAddressCmd.Flags().String("address-id", "", "The automatically generated ID for a specific address.")
+		snowball_describeAddressCmd.MarkFlagRequired("address-id")
+	})
 	snowballCmd.AddCommand(snowball_describeAddressCmd)
 }

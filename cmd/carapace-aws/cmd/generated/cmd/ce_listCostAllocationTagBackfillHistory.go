@@ -12,9 +12,11 @@ var ce_listCostAllocationTagBackfillHistoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_listCostAllocationTagBackfillHistoryCmd).Standalone()
+	carapace.Gen(ce_listCostAllocationTagBackfillHistoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_listCostAllocationTagBackfillHistoryCmd).Standalone()
 
-	ce_listCostAllocationTagBackfillHistoryCmd.Flags().String("max-results", "", "The maximum number of objects that are returned for this request.")
-	ce_listCostAllocationTagBackfillHistoryCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+		ce_listCostAllocationTagBackfillHistoryCmd.Flags().String("max-results", "", "The maximum number of objects that are returned for this request.")
+		ce_listCostAllocationTagBackfillHistoryCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+	})
 	ceCmd.AddCommand(ce_listCostAllocationTagBackfillHistoryCmd)
 }

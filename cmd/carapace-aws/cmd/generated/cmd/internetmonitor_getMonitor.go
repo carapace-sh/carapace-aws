@@ -12,10 +12,12 @@ var internetmonitor_getMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(internetmonitor_getMonitorCmd).Standalone()
+	carapace.Gen(internetmonitor_getMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(internetmonitor_getMonitorCmd).Standalone()
 
-	internetmonitor_getMonitorCmd.Flags().String("linked-account-id", "", "The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.")
-	internetmonitor_getMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor.")
-	internetmonitor_getMonitorCmd.MarkFlagRequired("monitor-name")
+		internetmonitor_getMonitorCmd.Flags().String("linked-account-id", "", "The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.")
+		internetmonitor_getMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor.")
+		internetmonitor_getMonitorCmd.MarkFlagRequired("monitor-name")
+	})
 	internetmonitorCmd.AddCommand(internetmonitor_getMonitorCmd)
 }

@@ -12,11 +12,13 @@ var ssm_updateOpsMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_updateOpsMetadataCmd).Standalone()
+	carapace.Gen(ssm_updateOpsMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_updateOpsMetadataCmd).Standalone()
 
-	ssm_updateOpsMetadataCmd.Flags().String("keys-to-delete", "", "The metadata keys to delete from the OpsMetadata object.")
-	ssm_updateOpsMetadataCmd.Flags().String("metadata-to-update", "", "Metadata to add to an OpsMetadata object.")
-	ssm_updateOpsMetadataCmd.Flags().String("ops-metadata-arn", "", "The Amazon Resource Name (ARN) of the OpsMetadata Object to update.")
-	ssm_updateOpsMetadataCmd.MarkFlagRequired("ops-metadata-arn")
+		ssm_updateOpsMetadataCmd.Flags().String("keys-to-delete", "", "The metadata keys to delete from the OpsMetadata object.")
+		ssm_updateOpsMetadataCmd.Flags().String("metadata-to-update", "", "Metadata to add to an OpsMetadata object.")
+		ssm_updateOpsMetadataCmd.Flags().String("ops-metadata-arn", "", "The Amazon Resource Name (ARN) of the OpsMetadata Object to update.")
+		ssm_updateOpsMetadataCmd.MarkFlagRequired("ops-metadata-arn")
+	})
 	ssmCmd.AddCommand(ssm_updateOpsMetadataCmd)
 }

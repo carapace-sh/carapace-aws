@@ -12,11 +12,13 @@ var greengrass_getGroupCertificateAuthorityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getGroupCertificateAuthorityCmd).Standalone()
+	carapace.Gen(greengrass_getGroupCertificateAuthorityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getGroupCertificateAuthorityCmd).Standalone()
 
-	greengrass_getGroupCertificateAuthorityCmd.Flags().String("certificate-authority-id", "", "The ID of the certificate authority.")
-	greengrass_getGroupCertificateAuthorityCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
-	greengrass_getGroupCertificateAuthorityCmd.MarkFlagRequired("certificate-authority-id")
-	greengrass_getGroupCertificateAuthorityCmd.MarkFlagRequired("group-id")
+		greengrass_getGroupCertificateAuthorityCmd.Flags().String("certificate-authority-id", "", "The ID of the certificate authority.")
+		greengrass_getGroupCertificateAuthorityCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
+		greengrass_getGroupCertificateAuthorityCmd.MarkFlagRequired("certificate-authority-id")
+		greengrass_getGroupCertificateAuthorityCmd.MarkFlagRequired("group-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getGroupCertificateAuthorityCmd)
 }

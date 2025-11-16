@@ -12,11 +12,13 @@ var lambda_listProvisionedConcurrencyConfigsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_listProvisionedConcurrencyConfigsCmd).Standalone()
+	carapace.Gen(lambda_listProvisionedConcurrencyConfigsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_listProvisionedConcurrencyConfigsCmd).Standalone()
 
-	lambda_listProvisionedConcurrencyConfigsCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_listProvisionedConcurrencyConfigsCmd.Flags().String("marker", "", "Specify the pagination token that's returned by a previous request to retrieve the next page of results.")
-	lambda_listProvisionedConcurrencyConfigsCmd.Flags().String("max-items", "", "Specify a number to limit the number of configurations returned.")
-	lambda_listProvisionedConcurrencyConfigsCmd.MarkFlagRequired("function-name")
+		lambda_listProvisionedConcurrencyConfigsCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_listProvisionedConcurrencyConfigsCmd.Flags().String("marker", "", "Specify the pagination token that's returned by a previous request to retrieve the next page of results.")
+		lambda_listProvisionedConcurrencyConfigsCmd.Flags().String("max-items", "", "Specify a number to limit the number of configurations returned.")
+		lambda_listProvisionedConcurrencyConfigsCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_listProvisionedConcurrencyConfigsCmd)
 }

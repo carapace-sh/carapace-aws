@@ -12,9 +12,11 @@ var licenseManager_deleteTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_deleteTokenCmd).Standalone()
+	carapace.Gen(licenseManager_deleteTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_deleteTokenCmd).Standalone()
 
-	licenseManager_deleteTokenCmd.Flags().String("token-id", "", "Token ID.")
-	licenseManager_deleteTokenCmd.MarkFlagRequired("token-id")
+		licenseManager_deleteTokenCmd.Flags().String("token-id", "", "Token ID.")
+		licenseManager_deleteTokenCmd.MarkFlagRequired("token-id")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_deleteTokenCmd)
 }

@@ -12,7 +12,9 @@ var shield_describeAttackStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_describeAttackStatisticsCmd).Standalone()
+	carapace.Gen(shield_describeAttackStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_describeAttackStatisticsCmd).Standalone()
 
+	})
 	shieldCmd.AddCommand(shield_describeAttackStatisticsCmd)
 }

@@ -12,11 +12,13 @@ var deadline_deleteLimitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_deleteLimitCmd).Standalone()
+	carapace.Gen(deadline_deleteLimitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_deleteLimitCmd).Standalone()
 
-	deadline_deleteLimitCmd.Flags().String("farm-id", "", "The unique identifier of the farm that contains the limit to delete.")
-	deadline_deleteLimitCmd.Flags().String("limit-id", "", "The unique identifier of the limit to delete.")
-	deadline_deleteLimitCmd.MarkFlagRequired("farm-id")
-	deadline_deleteLimitCmd.MarkFlagRequired("limit-id")
+		deadline_deleteLimitCmd.Flags().String("farm-id", "", "The unique identifier of the farm that contains the limit to delete.")
+		deadline_deleteLimitCmd.Flags().String("limit-id", "", "The unique identifier of the limit to delete.")
+		deadline_deleteLimitCmd.MarkFlagRequired("farm-id")
+		deadline_deleteLimitCmd.MarkFlagRequired("limit-id")
+	})
 	deadlineCmd.AddCommand(deadline_deleteLimitCmd)
 }

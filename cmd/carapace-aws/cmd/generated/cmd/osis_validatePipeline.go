@@ -12,9 +12,11 @@ var osis_validatePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_validatePipelineCmd).Standalone()
+	carapace.Gen(osis_validatePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_validatePipelineCmd).Standalone()
 
-	osis_validatePipelineCmd.Flags().String("pipeline-configuration-body", "", "The pipeline configuration in YAML format.")
-	osis_validatePipelineCmd.MarkFlagRequired("pipeline-configuration-body")
+		osis_validatePipelineCmd.Flags().String("pipeline-configuration-body", "", "The pipeline configuration in YAML format.")
+		osis_validatePipelineCmd.MarkFlagRequired("pipeline-configuration-body")
+	})
 	osisCmd.AddCommand(osis_validatePipelineCmd)
 }

@@ -12,11 +12,13 @@ var sesv2_deleteEmailIdentityPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteEmailIdentityPolicyCmd).Standalone()
+	carapace.Gen(sesv2_deleteEmailIdentityPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteEmailIdentityPolicyCmd).Standalone()
 
-	sesv2_deleteEmailIdentityPolicyCmd.Flags().String("email-identity", "", "The email identity.")
-	sesv2_deleteEmailIdentityPolicyCmd.Flags().String("policy-name", "", "The name of the policy.")
-	sesv2_deleteEmailIdentityPolicyCmd.MarkFlagRequired("email-identity")
-	sesv2_deleteEmailIdentityPolicyCmd.MarkFlagRequired("policy-name")
+		sesv2_deleteEmailIdentityPolicyCmd.Flags().String("email-identity", "", "The email identity.")
+		sesv2_deleteEmailIdentityPolicyCmd.Flags().String("policy-name", "", "The name of the policy.")
+		sesv2_deleteEmailIdentityPolicyCmd.MarkFlagRequired("email-identity")
+		sesv2_deleteEmailIdentityPolicyCmd.MarkFlagRequired("policy-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteEmailIdentityPolicyCmd)
 }

@@ -12,11 +12,13 @@ var cleanroomsml_getTrainedModelInferenceJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_getTrainedModelInferenceJobCmd).Standalone()
+	carapace.Gen(cleanroomsml_getTrainedModelInferenceJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_getTrainedModelInferenceJobCmd).Standalone()
 
-	cleanroomsml_getTrainedModelInferenceJobCmd.Flags().String("membership-identifier", "", "Provides the membership ID of the membership that contains the trained model inference job that you are interested in.")
-	cleanroomsml_getTrainedModelInferenceJobCmd.Flags().String("trained-model-inference-job-arn", "", "Provides the Amazon Resource Name (ARN) of the trained model inference job that you are interested in.")
-	cleanroomsml_getTrainedModelInferenceJobCmd.MarkFlagRequired("membership-identifier")
-	cleanroomsml_getTrainedModelInferenceJobCmd.MarkFlagRequired("trained-model-inference-job-arn")
+		cleanroomsml_getTrainedModelInferenceJobCmd.Flags().String("membership-identifier", "", "Provides the membership ID of the membership that contains the trained model inference job that you are interested in.")
+		cleanroomsml_getTrainedModelInferenceJobCmd.Flags().String("trained-model-inference-job-arn", "", "Provides the Amazon Resource Name (ARN) of the trained model inference job that you are interested in.")
+		cleanroomsml_getTrainedModelInferenceJobCmd.MarkFlagRequired("membership-identifier")
+		cleanroomsml_getTrainedModelInferenceJobCmd.MarkFlagRequired("trained-model-inference-job-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_getTrainedModelInferenceJobCmd)
 }

@@ -12,9 +12,11 @@ var wafv2_putLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_putLoggingConfigurationCmd).Standalone()
+	carapace.Gen(wafv2_putLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_putLoggingConfigurationCmd).Standalone()
 
-	wafv2_putLoggingConfigurationCmd.Flags().String("logging-configuration", "", "")
-	wafv2_putLoggingConfigurationCmd.MarkFlagRequired("logging-configuration")
+		wafv2_putLoggingConfigurationCmd.Flags().String("logging-configuration", "", "")
+		wafv2_putLoggingConfigurationCmd.MarkFlagRequired("logging-configuration")
+	})
 	wafv2Cmd.AddCommand(wafv2_putLoggingConfigurationCmd)
 }

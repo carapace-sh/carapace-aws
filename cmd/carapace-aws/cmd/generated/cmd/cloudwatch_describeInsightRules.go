@@ -12,9 +12,11 @@ var cloudwatch_describeInsightRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_describeInsightRulesCmd).Standalone()
+	carapace.Gen(cloudwatch_describeInsightRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_describeInsightRulesCmd).Standalone()
 
-	cloudwatch_describeInsightRulesCmd.Flags().String("max-results", "", "The maximum number of results to return in one operation.")
-	cloudwatch_describeInsightRulesCmd.Flags().String("next-token", "", "Include this value, if it was returned by the previous operation, to get the next set of rules.")
+		cloudwatch_describeInsightRulesCmd.Flags().String("max-results", "", "The maximum number of results to return in one operation.")
+		cloudwatch_describeInsightRulesCmd.Flags().String("next-token", "", "Include this value, if it was returned by the previous operation, to get the next set of rules.")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_describeInsightRulesCmd)
 }

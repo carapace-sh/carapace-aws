@@ -12,9 +12,11 @@ var mediaconnect_deleteGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_deleteGatewayCmd).Standalone()
+	carapace.Gen(mediaconnect_deleteGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_deleteGatewayCmd).Standalone()
 
-	mediaconnect_deleteGatewayCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway that you want to delete.")
-	mediaconnect_deleteGatewayCmd.MarkFlagRequired("gateway-arn")
+		mediaconnect_deleteGatewayCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway that you want to delete.")
+		mediaconnect_deleteGatewayCmd.MarkFlagRequired("gateway-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_deleteGatewayCmd)
 }

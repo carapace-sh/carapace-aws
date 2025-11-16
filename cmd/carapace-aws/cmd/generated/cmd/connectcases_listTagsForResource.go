@@ -12,9 +12,11 @@ var connectcases_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_listTagsForResourceCmd).Standalone()
+	carapace.Gen(connectcases_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_listTagsForResourceCmd).Standalone()
 
-	connectcases_listTagsForResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN)")
-	connectcases_listTagsForResourceCmd.MarkFlagRequired("arn")
+		connectcases_listTagsForResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN)")
+		connectcases_listTagsForResourceCmd.MarkFlagRequired("arn")
+	})
 	connectcasesCmd.AddCommand(connectcases_listTagsForResourceCmd)
 }

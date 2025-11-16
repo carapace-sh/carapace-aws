@@ -12,7 +12,9 @@ var rekognitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognitionCmd).Standalone()
+	carapace.Gen(rekognitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognitionCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(rekognitionCmd)
 }

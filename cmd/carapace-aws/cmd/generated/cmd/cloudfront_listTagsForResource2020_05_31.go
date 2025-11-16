@@ -12,9 +12,11 @@ var cloudfront_listTagsForResource2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_listTagsForResource2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listTagsForResource2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listTagsForResource2020_05_31Cmd).Standalone()
 
-	cloudfront_listTagsForResource2020_05_31Cmd.Flags().String("resource", "", "An ARN of a CloudFront resource.")
-	cloudfront_listTagsForResource2020_05_31Cmd.MarkFlagRequired("resource")
+		cloudfront_listTagsForResource2020_05_31Cmd.Flags().String("resource", "", "An ARN of a CloudFront resource.")
+		cloudfront_listTagsForResource2020_05_31Cmd.MarkFlagRequired("resource")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listTagsForResource2020_05_31Cmd)
 }

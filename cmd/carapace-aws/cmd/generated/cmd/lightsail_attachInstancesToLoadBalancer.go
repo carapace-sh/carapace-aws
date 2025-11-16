@@ -12,11 +12,13 @@ var lightsail_attachInstancesToLoadBalancerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_attachInstancesToLoadBalancerCmd).Standalone()
+	carapace.Gen(lightsail_attachInstancesToLoadBalancerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_attachInstancesToLoadBalancerCmd).Standalone()
 
-	lightsail_attachInstancesToLoadBalancerCmd.Flags().String("instance-names", "", "An array of strings representing the instance name(s) you want to attach to your load balancer.")
-	lightsail_attachInstancesToLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	lightsail_attachInstancesToLoadBalancerCmd.MarkFlagRequired("instance-names")
-	lightsail_attachInstancesToLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+		lightsail_attachInstancesToLoadBalancerCmd.Flags().String("instance-names", "", "An array of strings representing the instance name(s) you want to attach to your load balancer.")
+		lightsail_attachInstancesToLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		lightsail_attachInstancesToLoadBalancerCmd.MarkFlagRequired("instance-names")
+		lightsail_attachInstancesToLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+	})
 	lightsailCmd.AddCommand(lightsail_attachInstancesToLoadBalancerCmd)
 }

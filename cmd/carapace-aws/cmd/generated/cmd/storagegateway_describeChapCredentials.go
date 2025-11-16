@@ -12,9 +12,11 @@ var storagegateway_describeChapCredentialsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeChapCredentialsCmd).Standalone()
+	carapace.Gen(storagegateway_describeChapCredentialsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeChapCredentialsCmd).Standalone()
 
-	storagegateway_describeChapCredentialsCmd.Flags().String("target-arn", "", "The Amazon Resource Name (ARN) of the iSCSI volume target.")
-	storagegateway_describeChapCredentialsCmd.MarkFlagRequired("target-arn")
+		storagegateway_describeChapCredentialsCmd.Flags().String("target-arn", "", "The Amazon Resource Name (ARN) of the iSCSI volume target.")
+		storagegateway_describeChapCredentialsCmd.MarkFlagRequired("target-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeChapCredentialsCmd)
 }

@@ -12,9 +12,11 @@ var taxsettings_listTaxExemptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_listTaxExemptionsCmd).Standalone()
+	carapace.Gen(taxsettings_listTaxExemptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_listTaxExemptionsCmd).Standalone()
 
-	taxsettings_listTaxExemptionsCmd.Flags().String("max-results", "", "The number of results you want in one response.")
-	taxsettings_listTaxExemptionsCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+		taxsettings_listTaxExemptionsCmd.Flags().String("max-results", "", "The number of results you want in one response.")
+		taxsettings_listTaxExemptionsCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_listTaxExemptionsCmd)
 }

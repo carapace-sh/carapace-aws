@@ -12,14 +12,16 @@ var verifiedpermissions_updateIdentitySourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(verifiedpermissions_updateIdentitySourceCmd).Standalone()
+	carapace.Gen(verifiedpermissions_updateIdentitySourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(verifiedpermissions_updateIdentitySourceCmd).Standalone()
 
-	verifiedpermissions_updateIdentitySourceCmd.Flags().String("identity-source-id", "", "Specifies the ID of the identity source that you want to update.")
-	verifiedpermissions_updateIdentitySourceCmd.Flags().String("policy-store-id", "", "Specifies the ID of the policy store that contains the identity source that you want to update.")
-	verifiedpermissions_updateIdentitySourceCmd.Flags().String("principal-entity-type", "", "Specifies the data type of principals generated for identities authenticated by the identity source.")
-	verifiedpermissions_updateIdentitySourceCmd.Flags().String("update-configuration", "", "Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.")
-	verifiedpermissions_updateIdentitySourceCmd.MarkFlagRequired("identity-source-id")
-	verifiedpermissions_updateIdentitySourceCmd.MarkFlagRequired("policy-store-id")
-	verifiedpermissions_updateIdentitySourceCmd.MarkFlagRequired("update-configuration")
+		verifiedpermissions_updateIdentitySourceCmd.Flags().String("identity-source-id", "", "Specifies the ID of the identity source that you want to update.")
+		verifiedpermissions_updateIdentitySourceCmd.Flags().String("policy-store-id", "", "Specifies the ID of the policy store that contains the identity source that you want to update.")
+		verifiedpermissions_updateIdentitySourceCmd.Flags().String("principal-entity-type", "", "Specifies the data type of principals generated for identities authenticated by the identity source.")
+		verifiedpermissions_updateIdentitySourceCmd.Flags().String("update-configuration", "", "Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.")
+		verifiedpermissions_updateIdentitySourceCmd.MarkFlagRequired("identity-source-id")
+		verifiedpermissions_updateIdentitySourceCmd.MarkFlagRequired("policy-store-id")
+		verifiedpermissions_updateIdentitySourceCmd.MarkFlagRequired("update-configuration")
+	})
 	verifiedpermissionsCmd.AddCommand(verifiedpermissions_updateIdentitySourceCmd)
 }

@@ -12,11 +12,13 @@ var sqs_startMessageMoveTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_startMessageMoveTaskCmd).Standalone()
+	carapace.Gen(sqs_startMessageMoveTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_startMessageMoveTaskCmd).Standalone()
 
-	sqs_startMessageMoveTaskCmd.Flags().String("destination-arn", "", "The ARN of the queue that receives the moved messages.")
-	sqs_startMessageMoveTaskCmd.Flags().String("max-number-of-messages-per-second", "", "The number of messages to be moved per second (the message movement rate).")
-	sqs_startMessageMoveTaskCmd.Flags().String("source-arn", "", "The ARN of the queue that contains the messages to be moved to another queue.")
-	sqs_startMessageMoveTaskCmd.MarkFlagRequired("source-arn")
+		sqs_startMessageMoveTaskCmd.Flags().String("destination-arn", "", "The ARN of the queue that receives the moved messages.")
+		sqs_startMessageMoveTaskCmd.Flags().String("max-number-of-messages-per-second", "", "The number of messages to be moved per second (the message movement rate).")
+		sqs_startMessageMoveTaskCmd.Flags().String("source-arn", "", "The ARN of the queue that contains the messages to be moved to another queue.")
+		sqs_startMessageMoveTaskCmd.MarkFlagRequired("source-arn")
+	})
 	sqsCmd.AddCommand(sqs_startMessageMoveTaskCmd)
 }

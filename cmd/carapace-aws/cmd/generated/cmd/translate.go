@@ -12,7 +12,9 @@ var translateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translateCmd).Standalone()
+	carapace.Gen(translateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translateCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(translateCmd)
 }

@@ -12,11 +12,13 @@ var deadline_deleteBudgetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_deleteBudgetCmd).Standalone()
+	carapace.Gen(deadline_deleteBudgetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_deleteBudgetCmd).Standalone()
 
-	deadline_deleteBudgetCmd.Flags().String("budget-id", "", "The budget ID of the budget to delete.")
-	deadline_deleteBudgetCmd.Flags().String("farm-id", "", "The farm ID of the farm to remove from the budget.")
-	deadline_deleteBudgetCmd.MarkFlagRequired("budget-id")
-	deadline_deleteBudgetCmd.MarkFlagRequired("farm-id")
+		deadline_deleteBudgetCmd.Flags().String("budget-id", "", "The budget ID of the budget to delete.")
+		deadline_deleteBudgetCmd.Flags().String("farm-id", "", "The farm ID of the farm to remove from the budget.")
+		deadline_deleteBudgetCmd.MarkFlagRequired("budget-id")
+		deadline_deleteBudgetCmd.MarkFlagRequired("farm-id")
+	})
 	deadlineCmd.AddCommand(deadline_deleteBudgetCmd)
 }

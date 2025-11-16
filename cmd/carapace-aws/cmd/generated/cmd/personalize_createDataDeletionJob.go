@@ -12,16 +12,18 @@ var personalize_createDataDeletionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_createDataDeletionJobCmd).Standalone()
+	carapace.Gen(personalize_createDataDeletionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_createDataDeletionJobCmd).Standalone()
 
-	personalize_createDataDeletionJobCmd.Flags().String("data-source", "", "The Amazon S3 bucket that contains the list of userIds of the users to delete.")
-	personalize_createDataDeletionJobCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the dataset group that has the datasets you want to delete records from.")
-	personalize_createDataDeletionJobCmd.Flags().String("job-name", "", "The name for the data deletion job.")
-	personalize_createDataDeletionJobCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3 data source.")
-	personalize_createDataDeletionJobCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the data deletion job.")
-	personalize_createDataDeletionJobCmd.MarkFlagRequired("data-source")
-	personalize_createDataDeletionJobCmd.MarkFlagRequired("dataset-group-arn")
-	personalize_createDataDeletionJobCmd.MarkFlagRequired("job-name")
-	personalize_createDataDeletionJobCmd.MarkFlagRequired("role-arn")
+		personalize_createDataDeletionJobCmd.Flags().String("data-source", "", "The Amazon S3 bucket that contains the list of userIds of the users to delete.")
+		personalize_createDataDeletionJobCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the dataset group that has the datasets you want to delete records from.")
+		personalize_createDataDeletionJobCmd.Flags().String("job-name", "", "The name for the data deletion job.")
+		personalize_createDataDeletionJobCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3 data source.")
+		personalize_createDataDeletionJobCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the data deletion job.")
+		personalize_createDataDeletionJobCmd.MarkFlagRequired("data-source")
+		personalize_createDataDeletionJobCmd.MarkFlagRequired("dataset-group-arn")
+		personalize_createDataDeletionJobCmd.MarkFlagRequired("job-name")
+		personalize_createDataDeletionJobCmd.MarkFlagRequired("role-arn")
+	})
 	personalizeCmd.AddCommand(personalize_createDataDeletionJobCmd)
 }

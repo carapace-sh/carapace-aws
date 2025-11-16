@@ -12,11 +12,13 @@ var cognitoIdp_deleteUserPoolClientCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_deleteUserPoolClientCmd).Standalone()
+	carapace.Gen(cognitoIdp_deleteUserPoolClientCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_deleteUserPoolClientCmd).Standalone()
 
-	cognitoIdp_deleteUserPoolClientCmd.Flags().String("client-id", "", "The ID of the user pool app client that you want to delete.")
-	cognitoIdp_deleteUserPoolClientCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to delete the client.")
-	cognitoIdp_deleteUserPoolClientCmd.MarkFlagRequired("client-id")
-	cognitoIdp_deleteUserPoolClientCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_deleteUserPoolClientCmd.Flags().String("client-id", "", "The ID of the user pool app client that you want to delete.")
+		cognitoIdp_deleteUserPoolClientCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to delete the client.")
+		cognitoIdp_deleteUserPoolClientCmd.MarkFlagRequired("client-id")
+		cognitoIdp_deleteUserPoolClientCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_deleteUserPoolClientCmd)
 }

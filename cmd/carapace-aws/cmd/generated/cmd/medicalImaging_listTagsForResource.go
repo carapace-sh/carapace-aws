@@ -12,9 +12,11 @@ var medicalImaging_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medicalImaging_listTagsForResourceCmd).Standalone()
+	carapace.Gen(medicalImaging_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medicalImaging_listTagsForResourceCmd).Standalone()
 
-	medicalImaging_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the medical imaging resource to list tags for.")
-	medicalImaging_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		medicalImaging_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the medical imaging resource to list tags for.")
+		medicalImaging_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	medicalImagingCmd.AddCommand(medicalImaging_listTagsForResourceCmd)
 }

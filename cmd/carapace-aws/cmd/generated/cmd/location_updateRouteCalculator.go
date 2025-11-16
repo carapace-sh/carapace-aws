@@ -12,11 +12,13 @@ var location_updateRouteCalculatorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_updateRouteCalculatorCmd).Standalone()
+	carapace.Gen(location_updateRouteCalculatorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_updateRouteCalculatorCmd).Standalone()
 
-	location_updateRouteCalculatorCmd.Flags().String("calculator-name", "", "The name of the route calculator resource to update.")
-	location_updateRouteCalculatorCmd.Flags().String("description", "", "Updates the description for the route calculator resource.")
-	location_updateRouteCalculatorCmd.Flags().String("pricing-plan", "", "No longer used.")
-	location_updateRouteCalculatorCmd.MarkFlagRequired("calculator-name")
+		location_updateRouteCalculatorCmd.Flags().String("calculator-name", "", "The name of the route calculator resource to update.")
+		location_updateRouteCalculatorCmd.Flags().String("description", "", "Updates the description for the route calculator resource.")
+		location_updateRouteCalculatorCmd.Flags().String("pricing-plan", "", "No longer used.")
+		location_updateRouteCalculatorCmd.MarkFlagRequired("calculator-name")
+	})
 	locationCmd.AddCommand(location_updateRouteCalculatorCmd)
 }

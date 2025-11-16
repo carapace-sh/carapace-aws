@@ -12,7 +12,9 @@ var wafRegional_getChangeTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_getChangeTokenCmd).Standalone()
+	carapace.Gen(wafRegional_getChangeTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_getChangeTokenCmd).Standalone()
 
+	})
 	wafRegionalCmd.AddCommand(wafRegional_getChangeTokenCmd)
 }

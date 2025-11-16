@@ -12,11 +12,13 @@ var fsx_createBackupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_createBackupCmd).Standalone()
+	carapace.Gen(fsx_createBackupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_createBackupCmd).Standalone()
 
-	fsx_createBackupCmd.Flags().String("client-request-token", "", "(Optional) A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent creation.")
-	fsx_createBackupCmd.Flags().String("file-system-id", "", "The ID of the file system to back up.")
-	fsx_createBackupCmd.Flags().String("tags", "", "(Optional) The tags to apply to the backup at backup creation.")
-	fsx_createBackupCmd.Flags().String("volume-id", "", "(Optional) The ID of the FSx for ONTAP volume to back up.")
+		fsx_createBackupCmd.Flags().String("client-request-token", "", "(Optional) A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent creation.")
+		fsx_createBackupCmd.Flags().String("file-system-id", "", "The ID of the file system to back up.")
+		fsx_createBackupCmd.Flags().String("tags", "", "(Optional) The tags to apply to the backup at backup creation.")
+		fsx_createBackupCmd.Flags().String("volume-id", "", "(Optional) The ID of the FSx for ONTAP volume to back up.")
+	})
 	fsxCmd.AddCommand(fsx_createBackupCmd)
 }

@@ -12,15 +12,17 @@ var sagemaker_createClusterSchedulerConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_createClusterSchedulerConfigCmd).Standalone()
+	carapace.Gen(sagemaker_createClusterSchedulerConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_createClusterSchedulerConfigCmd).Standalone()
 
-	sagemaker_createClusterSchedulerConfigCmd.Flags().String("cluster-arn", "", "ARN of the cluster.")
-	sagemaker_createClusterSchedulerConfigCmd.Flags().String("description", "", "Description of the cluster policy.")
-	sagemaker_createClusterSchedulerConfigCmd.Flags().String("name", "", "Name for the cluster policy.")
-	sagemaker_createClusterSchedulerConfigCmd.Flags().String("scheduler-config", "", "Configuration about the monitoring schedule.")
-	sagemaker_createClusterSchedulerConfigCmd.Flags().String("tags", "", "Tags of the cluster policy.")
-	sagemaker_createClusterSchedulerConfigCmd.MarkFlagRequired("cluster-arn")
-	sagemaker_createClusterSchedulerConfigCmd.MarkFlagRequired("name")
-	sagemaker_createClusterSchedulerConfigCmd.MarkFlagRequired("scheduler-config")
+		sagemaker_createClusterSchedulerConfigCmd.Flags().String("cluster-arn", "", "ARN of the cluster.")
+		sagemaker_createClusterSchedulerConfigCmd.Flags().String("description", "", "Description of the cluster policy.")
+		sagemaker_createClusterSchedulerConfigCmd.Flags().String("name", "", "Name for the cluster policy.")
+		sagemaker_createClusterSchedulerConfigCmd.Flags().String("scheduler-config", "", "Configuration about the monitoring schedule.")
+		sagemaker_createClusterSchedulerConfigCmd.Flags().String("tags", "", "Tags of the cluster policy.")
+		sagemaker_createClusterSchedulerConfigCmd.MarkFlagRequired("cluster-arn")
+		sagemaker_createClusterSchedulerConfigCmd.MarkFlagRequired("name")
+		sagemaker_createClusterSchedulerConfigCmd.MarkFlagRequired("scheduler-config")
+	})
 	sagemakerCmd.AddCommand(sagemaker_createClusterSchedulerConfigCmd)
 }

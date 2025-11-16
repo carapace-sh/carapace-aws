@@ -12,11 +12,13 @@ var drs_deleteLaunchActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_deleteLaunchActionCmd).Standalone()
+	carapace.Gen(drs_deleteLaunchActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_deleteLaunchActionCmd).Standalone()
 
-	drs_deleteLaunchActionCmd.Flags().String("action-id", "", "")
-	drs_deleteLaunchActionCmd.Flags().String("resource-id", "", "")
-	drs_deleteLaunchActionCmd.MarkFlagRequired("action-id")
-	drs_deleteLaunchActionCmd.MarkFlagRequired("resource-id")
+		drs_deleteLaunchActionCmd.Flags().String("action-id", "", "")
+		drs_deleteLaunchActionCmd.Flags().String("resource-id", "", "")
+		drs_deleteLaunchActionCmd.MarkFlagRequired("action-id")
+		drs_deleteLaunchActionCmd.MarkFlagRequired("resource-id")
+	})
 	drsCmd.AddCommand(drs_deleteLaunchActionCmd)
 }

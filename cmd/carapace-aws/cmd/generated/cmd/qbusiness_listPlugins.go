@@ -12,11 +12,13 @@ var qbusiness_listPluginsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_listPluginsCmd).Standalone()
+	carapace.Gen(qbusiness_listPluginsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_listPluginsCmd).Standalone()
 
-	qbusiness_listPluginsCmd.Flags().String("application-id", "", "The identifier of the application the plugin is attached to.")
-	qbusiness_listPluginsCmd.Flags().String("max-results", "", "The maximum number of documents to return.")
-	qbusiness_listPluginsCmd.Flags().String("next-token", "", "If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.")
-	qbusiness_listPluginsCmd.MarkFlagRequired("application-id")
+		qbusiness_listPluginsCmd.Flags().String("application-id", "", "The identifier of the application the plugin is attached to.")
+		qbusiness_listPluginsCmd.Flags().String("max-results", "", "The maximum number of documents to return.")
+		qbusiness_listPluginsCmd.Flags().String("next-token", "", "If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.")
+		qbusiness_listPluginsCmd.MarkFlagRequired("application-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_listPluginsCmd)
 }

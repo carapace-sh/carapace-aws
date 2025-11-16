@@ -12,13 +12,15 @@ var chime_associatePhoneNumberWithUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_associatePhoneNumberWithUserCmd).Standalone()
+	carapace.Gen(chime_associatePhoneNumberWithUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_associatePhoneNumberWithUserCmd).Standalone()
 
-	chime_associatePhoneNumberWithUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_associatePhoneNumberWithUserCmd.Flags().String("e164-phone-number", "", "The phone number, in E.164 format.")
-	chime_associatePhoneNumberWithUserCmd.Flags().String("user-id", "", "The user ID.")
-	chime_associatePhoneNumberWithUserCmd.MarkFlagRequired("account-id")
-	chime_associatePhoneNumberWithUserCmd.MarkFlagRequired("e164-phone-number")
-	chime_associatePhoneNumberWithUserCmd.MarkFlagRequired("user-id")
+		chime_associatePhoneNumberWithUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_associatePhoneNumberWithUserCmd.Flags().String("e164-phone-number", "", "The phone number, in E.164 format.")
+		chime_associatePhoneNumberWithUserCmd.Flags().String("user-id", "", "The user ID.")
+		chime_associatePhoneNumberWithUserCmd.MarkFlagRequired("account-id")
+		chime_associatePhoneNumberWithUserCmd.MarkFlagRequired("e164-phone-number")
+		chime_associatePhoneNumberWithUserCmd.MarkFlagRequired("user-id")
+	})
 	chimeCmd.AddCommand(chime_associatePhoneNumberWithUserCmd)
 }

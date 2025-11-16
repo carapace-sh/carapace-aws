@@ -12,9 +12,11 @@ var sagemaker_deleteHubCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteHubCmd).Standalone()
+	carapace.Gen(sagemaker_deleteHubCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteHubCmd).Standalone()
 
-	sagemaker_deleteHubCmd.Flags().String("hub-name", "", "The name of the hub to delete.")
-	sagemaker_deleteHubCmd.MarkFlagRequired("hub-name")
+		sagemaker_deleteHubCmd.Flags().String("hub-name", "", "The name of the hub to delete.")
+		sagemaker_deleteHubCmd.MarkFlagRequired("hub-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteHubCmd)
 }

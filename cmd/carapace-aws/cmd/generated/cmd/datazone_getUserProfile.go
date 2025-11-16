@@ -12,12 +12,14 @@ var datazone_getUserProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getUserProfileCmd).Standalone()
+	carapace.Gen(datazone_getUserProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getUserProfileCmd).Standalone()
 
-	datazone_getUserProfileCmd.Flags().String("domain-identifier", "", "the ID of the Amazon DataZone domain the data portal of which you want to get.")
-	datazone_getUserProfileCmd.Flags().String("type", "", "The type of the user profile.")
-	datazone_getUserProfileCmd.Flags().String("user-identifier", "", "The identifier of the user for which you want to get the user profile.")
-	datazone_getUserProfileCmd.MarkFlagRequired("domain-identifier")
-	datazone_getUserProfileCmd.MarkFlagRequired("user-identifier")
+		datazone_getUserProfileCmd.Flags().String("domain-identifier", "", "the ID of the Amazon DataZone domain the data portal of which you want to get.")
+		datazone_getUserProfileCmd.Flags().String("type", "", "The type of the user profile.")
+		datazone_getUserProfileCmd.Flags().String("user-identifier", "", "The identifier of the user for which you want to get the user profile.")
+		datazone_getUserProfileCmd.MarkFlagRequired("domain-identifier")
+		datazone_getUserProfileCmd.MarkFlagRequired("user-identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getUserProfileCmd)
 }

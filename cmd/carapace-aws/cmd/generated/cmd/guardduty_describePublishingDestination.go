@@ -12,11 +12,13 @@ var guardduty_describePublishingDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_describePublishingDestinationCmd).Standalone()
+	carapace.Gen(guardduty_describePublishingDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_describePublishingDestinationCmd).Standalone()
 
-	guardduty_describePublishingDestinationCmd.Flags().String("destination-id", "", "The ID of the publishing destination to retrieve.")
-	guardduty_describePublishingDestinationCmd.Flags().String("detector-id", "", "The unique ID of the detector associated with the publishing destination to retrieve.")
-	guardduty_describePublishingDestinationCmd.MarkFlagRequired("destination-id")
-	guardduty_describePublishingDestinationCmd.MarkFlagRequired("detector-id")
+		guardduty_describePublishingDestinationCmd.Flags().String("destination-id", "", "The ID of the publishing destination to retrieve.")
+		guardduty_describePublishingDestinationCmd.Flags().String("detector-id", "", "The unique ID of the detector associated with the publishing destination to retrieve.")
+		guardduty_describePublishingDestinationCmd.MarkFlagRequired("destination-id")
+		guardduty_describePublishingDestinationCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_describePublishingDestinationCmd)
 }

@@ -12,12 +12,14 @@ var dynamodb_enableKinesisStreamingDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_enableKinesisStreamingDestinationCmd).Standalone()
+	carapace.Gen(dynamodb_enableKinesisStreamingDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_enableKinesisStreamingDestinationCmd).Standalone()
 
-	dynamodb_enableKinesisStreamingDestinationCmd.Flags().String("enable-kinesis-streaming-configuration", "", "The source for the Kinesis streaming information that is being enabled.")
-	dynamodb_enableKinesisStreamingDestinationCmd.Flags().String("stream-arn", "", "The ARN for a Kinesis data stream.")
-	dynamodb_enableKinesisStreamingDestinationCmd.Flags().String("table-name", "", "The name of the DynamoDB table.")
-	dynamodb_enableKinesisStreamingDestinationCmd.MarkFlagRequired("stream-arn")
-	dynamodb_enableKinesisStreamingDestinationCmd.MarkFlagRequired("table-name")
+		dynamodb_enableKinesisStreamingDestinationCmd.Flags().String("enable-kinesis-streaming-configuration", "", "The source for the Kinesis streaming information that is being enabled.")
+		dynamodb_enableKinesisStreamingDestinationCmd.Flags().String("stream-arn", "", "The ARN for a Kinesis data stream.")
+		dynamodb_enableKinesisStreamingDestinationCmd.Flags().String("table-name", "", "The name of the DynamoDB table.")
+		dynamodb_enableKinesisStreamingDestinationCmd.MarkFlagRequired("stream-arn")
+		dynamodb_enableKinesisStreamingDestinationCmd.MarkFlagRequired("table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_enableKinesisStreamingDestinationCmd)
 }

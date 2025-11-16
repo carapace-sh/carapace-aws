@@ -12,9 +12,11 @@ var batch_describeServiceJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_describeServiceJobCmd).Standalone()
+	carapace.Gen(batch_describeServiceJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_describeServiceJobCmd).Standalone()
 
-	batch_describeServiceJobCmd.Flags().String("job-id", "", "The job ID for the service job to describe.")
-	batch_describeServiceJobCmd.MarkFlagRequired("job-id")
+		batch_describeServiceJobCmd.Flags().String("job-id", "", "The job ID for the service job to describe.")
+		batch_describeServiceJobCmd.MarkFlagRequired("job-id")
+	})
 	batchCmd.AddCommand(batch_describeServiceJobCmd)
 }

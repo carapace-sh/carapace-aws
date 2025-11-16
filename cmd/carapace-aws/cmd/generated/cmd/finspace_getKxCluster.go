@@ -12,11 +12,13 @@ var finspace_getKxClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_getKxClusterCmd).Standalone()
+	carapace.Gen(finspace_getKxClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_getKxClusterCmd).Standalone()
 
-	finspace_getKxClusterCmd.Flags().String("cluster-name", "", "The name of the cluster that you want to retrieve.")
-	finspace_getKxClusterCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_getKxClusterCmd.MarkFlagRequired("cluster-name")
-	finspace_getKxClusterCmd.MarkFlagRequired("environment-id")
+		finspace_getKxClusterCmd.Flags().String("cluster-name", "", "The name of the cluster that you want to retrieve.")
+		finspace_getKxClusterCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_getKxClusterCmd.MarkFlagRequired("cluster-name")
+		finspace_getKxClusterCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_getKxClusterCmd)
 }

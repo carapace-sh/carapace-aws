@@ -12,9 +12,11 @@ var serviceQuotas_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_listTagsForResourceCmd).Standalone()
+	carapace.Gen(serviceQuotas_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_listTagsForResourceCmd).Standalone()
 
-	serviceQuotas_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the applied quota for which you want to list tags.")
-	serviceQuotas_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		serviceQuotas_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the applied quota for which you want to list tags.")
+		serviceQuotas_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_listTagsForResourceCmd)
 }

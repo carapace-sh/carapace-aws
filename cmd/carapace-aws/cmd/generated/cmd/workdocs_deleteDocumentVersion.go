@@ -12,14 +12,16 @@ var workdocs_deleteDocumentVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_deleteDocumentVersionCmd).Standalone()
+	carapace.Gen(workdocs_deleteDocumentVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_deleteDocumentVersionCmd).Standalone()
 
-	workdocs_deleteDocumentVersionCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_deleteDocumentVersionCmd.Flags().String("delete-prior-versions", "", "Deletes all versions of a document prior to the current version.")
-	workdocs_deleteDocumentVersionCmd.Flags().String("document-id", "", "The ID of the document associated with the version being deleted.")
-	workdocs_deleteDocumentVersionCmd.Flags().String("version-id", "", "The ID of the version being deleted.")
-	workdocs_deleteDocumentVersionCmd.MarkFlagRequired("delete-prior-versions")
-	workdocs_deleteDocumentVersionCmd.MarkFlagRequired("document-id")
-	workdocs_deleteDocumentVersionCmd.MarkFlagRequired("version-id")
+		workdocs_deleteDocumentVersionCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_deleteDocumentVersionCmd.Flags().String("delete-prior-versions", "", "Deletes all versions of a document prior to the current version.")
+		workdocs_deleteDocumentVersionCmd.Flags().String("document-id", "", "The ID of the document associated with the version being deleted.")
+		workdocs_deleteDocumentVersionCmd.Flags().String("version-id", "", "The ID of the version being deleted.")
+		workdocs_deleteDocumentVersionCmd.MarkFlagRequired("delete-prior-versions")
+		workdocs_deleteDocumentVersionCmd.MarkFlagRequired("document-id")
+		workdocs_deleteDocumentVersionCmd.MarkFlagRequired("version-id")
+	})
 	workdocsCmd.AddCommand(workdocs_deleteDocumentVersionCmd)
 }

@@ -12,9 +12,11 @@ var observabilityadmin_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_listTagsForResourceCmd).Standalone()
+	carapace.Gen(observabilityadmin_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_listTagsForResourceCmd).Standalone()
 
-	observabilityadmin_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the telemetry rule resource whose tags you want to list.")
-	observabilityadmin_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		observabilityadmin_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the telemetry rule resource whose tags you want to list.")
+		observabilityadmin_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_listTagsForResourceCmd)
 }

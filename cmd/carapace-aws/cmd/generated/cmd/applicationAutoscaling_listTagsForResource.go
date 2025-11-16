@@ -12,9 +12,11 @@ var applicationAutoscaling_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationAutoscaling_listTagsForResourceCmd).Standalone()
+	carapace.Gen(applicationAutoscaling_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationAutoscaling_listTagsForResourceCmd).Standalone()
 
-	applicationAutoscaling_listTagsForResourceCmd.Flags().String("resource-arn", "", "Specify the ARN of the scalable target.")
-	applicationAutoscaling_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		applicationAutoscaling_listTagsForResourceCmd.Flags().String("resource-arn", "", "Specify the ARN of the scalable target.")
+		applicationAutoscaling_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	applicationAutoscalingCmd.AddCommand(applicationAutoscaling_listTagsForResourceCmd)
 }

@@ -12,10 +12,12 @@ var launchWizard_listDeploymentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(launchWizard_listDeploymentsCmd).Standalone()
+	carapace.Gen(launchWizard_listDeploymentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(launchWizard_listDeploymentsCmd).Standalone()
 
-	launchWizard_listDeploymentsCmd.Flags().String("filters", "", "Filters to scope the results.")
-	launchWizard_listDeploymentsCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	launchWizard_listDeploymentsCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		launchWizard_listDeploymentsCmd.Flags().String("filters", "", "Filters to scope the results.")
+		launchWizard_listDeploymentsCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		launchWizard_listDeploymentsCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+	})
 	launchWizardCmd.AddCommand(launchWizard_listDeploymentsCmd)
 }

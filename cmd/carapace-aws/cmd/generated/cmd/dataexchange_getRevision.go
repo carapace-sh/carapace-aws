@@ -12,11 +12,13 @@ var dataexchange_getRevisionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_getRevisionCmd).Standalone()
+	carapace.Gen(dataexchange_getRevisionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_getRevisionCmd).Standalone()
 
-	dataexchange_getRevisionCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
-	dataexchange_getRevisionCmd.Flags().String("revision-id", "", "The unique identifier for a revision.")
-	dataexchange_getRevisionCmd.MarkFlagRequired("data-set-id")
-	dataexchange_getRevisionCmd.MarkFlagRequired("revision-id")
+		dataexchange_getRevisionCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
+		dataexchange_getRevisionCmd.Flags().String("revision-id", "", "The unique identifier for a revision.")
+		dataexchange_getRevisionCmd.MarkFlagRequired("data-set-id")
+		dataexchange_getRevisionCmd.MarkFlagRequired("revision-id")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_getRevisionCmd)
 }

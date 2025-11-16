@@ -12,11 +12,13 @@ var drs_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_tagResourceCmd).Standalone()
+	carapace.Gen(drs_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_tagResourceCmd).Standalone()
 
-	drs_tagResourceCmd.Flags().String("resource-arn", "", "ARN of the resource for which tags are to be added or updated.")
-	drs_tagResourceCmd.Flags().String("tags", "", "Array of tags to be added or updated.")
-	drs_tagResourceCmd.MarkFlagRequired("resource-arn")
-	drs_tagResourceCmd.MarkFlagRequired("tags")
+		drs_tagResourceCmd.Flags().String("resource-arn", "", "ARN of the resource for which tags are to be added or updated.")
+		drs_tagResourceCmd.Flags().String("tags", "", "Array of tags to be added or updated.")
+		drs_tagResourceCmd.MarkFlagRequired("resource-arn")
+		drs_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	drsCmd.AddCommand(drs_tagResourceCmd)
 }

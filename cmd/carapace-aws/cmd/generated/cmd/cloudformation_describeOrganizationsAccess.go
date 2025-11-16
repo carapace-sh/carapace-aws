@@ -12,8 +12,10 @@ var cloudformation_describeOrganizationsAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeOrganizationsAccessCmd).Standalone()
+	carapace.Gen(cloudformation_describeOrganizationsAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeOrganizationsAccessCmd).Standalone()
 
-	cloudformation_describeOrganizationsAccessCmd.Flags().String("call-as", "", "\\[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.")
+		cloudformation_describeOrganizationsAccessCmd.Flags().String("call-as", "", "\\[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeOrganizationsAccessCmd)
 }

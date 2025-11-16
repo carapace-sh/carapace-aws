@@ -12,12 +12,14 @@ var apprunner_associateCustomDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_associateCustomDomainCmd).Standalone()
+	carapace.Gen(apprunner_associateCustomDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_associateCustomDomainCmd).Standalone()
 
-	apprunner_associateCustomDomainCmd.Flags().String("domain-name", "", "A custom domain endpoint to associate.")
-	apprunner_associateCustomDomainCmd.Flags().String("enable-wwwsubdomain", "", "Set to `true` to associate the subdomain `www.DomainName` with the App Runner service in addition to the base domain.")
-	apprunner_associateCustomDomainCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to associate a custom domain name with.")
-	apprunner_associateCustomDomainCmd.MarkFlagRequired("domain-name")
-	apprunner_associateCustomDomainCmd.MarkFlagRequired("service-arn")
+		apprunner_associateCustomDomainCmd.Flags().String("domain-name", "", "A custom domain endpoint to associate.")
+		apprunner_associateCustomDomainCmd.Flags().String("enable-wwwsubdomain", "", "Set to `true` to associate the subdomain `www.DomainName` with the App Runner service in addition to the base domain.")
+		apprunner_associateCustomDomainCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to associate a custom domain name with.")
+		apprunner_associateCustomDomainCmd.MarkFlagRequired("domain-name")
+		apprunner_associateCustomDomainCmd.MarkFlagRequired("service-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_associateCustomDomainCmd)
 }

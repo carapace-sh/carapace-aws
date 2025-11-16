@@ -12,9 +12,11 @@ var clouddirectory_createSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_createSchemaCmd).Standalone()
+	carapace.Gen(clouddirectory_createSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_createSchemaCmd).Standalone()
 
-	clouddirectory_createSchemaCmd.Flags().String("name", "", "The name that is associated with the schema.")
-	clouddirectory_createSchemaCmd.MarkFlagRequired("name")
+		clouddirectory_createSchemaCmd.Flags().String("name", "", "The name that is associated with the schema.")
+		clouddirectory_createSchemaCmd.MarkFlagRequired("name")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_createSchemaCmd)
 }

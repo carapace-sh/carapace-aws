@@ -12,9 +12,11 @@ var medialive_rejectInputDeviceTransferCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_rejectInputDeviceTransferCmd).Standalone()
+	carapace.Gen(medialive_rejectInputDeviceTransferCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_rejectInputDeviceTransferCmd).Standalone()
 
-	medialive_rejectInputDeviceTransferCmd.Flags().String("input-device-id", "", "The unique ID of the input device to reject.")
-	medialive_rejectInputDeviceTransferCmd.MarkFlagRequired("input-device-id")
+		medialive_rejectInputDeviceTransferCmd.Flags().String("input-device-id", "", "The unique ID of the input device to reject.")
+		medialive_rejectInputDeviceTransferCmd.MarkFlagRequired("input-device-id")
+	})
 	medialiveCmd.AddCommand(medialive_rejectInputDeviceTransferCmd)
 }

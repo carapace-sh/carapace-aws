@@ -12,9 +12,11 @@ var appconfig_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_deleteApplicationCmd).Standalone()
+	carapace.Gen(appconfig_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_deleteApplicationCmd).Standalone()
 
-	appconfig_deleteApplicationCmd.Flags().String("application-id", "", "The ID of the application to delete.")
-	appconfig_deleteApplicationCmd.MarkFlagRequired("application-id")
+		appconfig_deleteApplicationCmd.Flags().String("application-id", "", "The ID of the application to delete.")
+		appconfig_deleteApplicationCmd.MarkFlagRequired("application-id")
+	})
 	appconfigCmd.AddCommand(appconfig_deleteApplicationCmd)
 }

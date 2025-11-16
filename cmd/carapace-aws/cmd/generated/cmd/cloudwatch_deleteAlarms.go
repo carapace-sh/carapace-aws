@@ -12,9 +12,11 @@ var cloudwatch_deleteAlarmsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_deleteAlarmsCmd).Standalone()
+	carapace.Gen(cloudwatch_deleteAlarmsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_deleteAlarmsCmd).Standalone()
 
-	cloudwatch_deleteAlarmsCmd.Flags().String("alarm-names", "", "The alarms to be deleted.")
-	cloudwatch_deleteAlarmsCmd.MarkFlagRequired("alarm-names")
+		cloudwatch_deleteAlarmsCmd.Flags().String("alarm-names", "", "The alarms to be deleted.")
+		cloudwatch_deleteAlarmsCmd.MarkFlagRequired("alarm-names")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_deleteAlarmsCmd)
 }

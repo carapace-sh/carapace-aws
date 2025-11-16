@@ -12,9 +12,11 @@ var evidently_listProjectsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_listProjectsCmd).Standalone()
+	carapace.Gen(evidently_listProjectsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_listProjectsCmd).Standalone()
 
-	evidently_listProjectsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	evidently_listProjectsCmd.Flags().String("next-token", "", "The token to use when requesting the next set of results.")
+		evidently_listProjectsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		evidently_listProjectsCmd.Flags().String("next-token", "", "The token to use when requesting the next set of results.")
+	})
 	evidentlyCmd.AddCommand(evidently_listProjectsCmd)
 }

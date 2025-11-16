@@ -12,11 +12,13 @@ var iotsecuretunneling_openTunnelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsecuretunneling_openTunnelCmd).Standalone()
+	carapace.Gen(iotsecuretunneling_openTunnelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsecuretunneling_openTunnelCmd).Standalone()
 
-	iotsecuretunneling_openTunnelCmd.Flags().String("description", "", "A short text description of the tunnel.")
-	iotsecuretunneling_openTunnelCmd.Flags().String("destination-config", "", "The destination configuration for the OpenTunnel request.")
-	iotsecuretunneling_openTunnelCmd.Flags().String("tags", "", "A collection of tag metadata.")
-	iotsecuretunneling_openTunnelCmd.Flags().String("timeout-config", "", "Timeout configuration for a tunnel.")
+		iotsecuretunneling_openTunnelCmd.Flags().String("description", "", "A short text description of the tunnel.")
+		iotsecuretunneling_openTunnelCmd.Flags().String("destination-config", "", "The destination configuration for the OpenTunnel request.")
+		iotsecuretunneling_openTunnelCmd.Flags().String("tags", "", "A collection of tag metadata.")
+		iotsecuretunneling_openTunnelCmd.Flags().String("timeout-config", "", "Timeout configuration for a tunnel.")
+	})
 	iotsecuretunnelingCmd.AddCommand(iotsecuretunneling_openTunnelCmd)
 }

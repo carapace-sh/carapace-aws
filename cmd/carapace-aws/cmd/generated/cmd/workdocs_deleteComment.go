@@ -12,14 +12,16 @@ var workdocs_deleteCommentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_deleteCommentCmd).Standalone()
+	carapace.Gen(workdocs_deleteCommentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_deleteCommentCmd).Standalone()
 
-	workdocs_deleteCommentCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_deleteCommentCmd.Flags().String("comment-id", "", "The ID of the comment.")
-	workdocs_deleteCommentCmd.Flags().String("document-id", "", "The ID of the document.")
-	workdocs_deleteCommentCmd.Flags().String("version-id", "", "The ID of the document version.")
-	workdocs_deleteCommentCmd.MarkFlagRequired("comment-id")
-	workdocs_deleteCommentCmd.MarkFlagRequired("document-id")
-	workdocs_deleteCommentCmd.MarkFlagRequired("version-id")
+		workdocs_deleteCommentCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_deleteCommentCmd.Flags().String("comment-id", "", "The ID of the comment.")
+		workdocs_deleteCommentCmd.Flags().String("document-id", "", "The ID of the document.")
+		workdocs_deleteCommentCmd.Flags().String("version-id", "", "The ID of the document version.")
+		workdocs_deleteCommentCmd.MarkFlagRequired("comment-id")
+		workdocs_deleteCommentCmd.MarkFlagRequired("document-id")
+		workdocs_deleteCommentCmd.MarkFlagRequired("version-id")
+	})
 	workdocsCmd.AddCommand(workdocs_deleteCommentCmd)
 }

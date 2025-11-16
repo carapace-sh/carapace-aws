@@ -12,10 +12,12 @@ var panorama_listDevicesJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_listDevicesJobsCmd).Standalone()
+	carapace.Gen(panorama_listDevicesJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_listDevicesJobsCmd).Standalone()
 
-	panorama_listDevicesJobsCmd.Flags().String("device-id", "", "Filter results by the job's target device ID.")
-	panorama_listDevicesJobsCmd.Flags().String("max-results", "", "The maximum number of device jobs to return in one page of results.")
-	panorama_listDevicesJobsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		panorama_listDevicesJobsCmd.Flags().String("device-id", "", "Filter results by the job's target device ID.")
+		panorama_listDevicesJobsCmd.Flags().String("max-results", "", "The maximum number of device jobs to return in one page of results.")
+		panorama_listDevicesJobsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+	})
 	panoramaCmd.AddCommand(panorama_listDevicesJobsCmd)
 }

@@ -12,9 +12,11 @@ var organizations_enableAwsserviceAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_enableAwsserviceAccessCmd).Standalone()
+	carapace.Gen(organizations_enableAwsserviceAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_enableAwsserviceAccessCmd).Standalone()
 
-	organizations_enableAwsserviceAccessCmd.Flags().String("service-principal", "", "The service principal name of the Amazon Web Services service for which you want to enable integration with your organization.")
-	organizations_enableAwsserviceAccessCmd.MarkFlagRequired("service-principal")
+		organizations_enableAwsserviceAccessCmd.Flags().String("service-principal", "", "The service principal name of the Amazon Web Services service for which you want to enable integration with your organization.")
+		organizations_enableAwsserviceAccessCmd.MarkFlagRequired("service-principal")
+	})
 	organizationsCmd.AddCommand(organizations_enableAwsserviceAccessCmd)
 }

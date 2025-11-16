@@ -12,11 +12,13 @@ var ssmSap_getDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_getDatabaseCmd).Standalone()
+	carapace.Gen(ssmSap_getDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_getDatabaseCmd).Standalone()
 
-	ssmSap_getDatabaseCmd.Flags().String("application-id", "", "The ID of the application.")
-	ssmSap_getDatabaseCmd.Flags().String("component-id", "", "The ID of the component.")
-	ssmSap_getDatabaseCmd.Flags().String("database-arn", "", "The Amazon Resource Name (ARN) of the database.")
-	ssmSap_getDatabaseCmd.Flags().String("database-id", "", "The ID of the database.")
+		ssmSap_getDatabaseCmd.Flags().String("application-id", "", "The ID of the application.")
+		ssmSap_getDatabaseCmd.Flags().String("component-id", "", "The ID of the component.")
+		ssmSap_getDatabaseCmd.Flags().String("database-arn", "", "The Amazon Resource Name (ARN) of the database.")
+		ssmSap_getDatabaseCmd.Flags().String("database-id", "", "The ID of the database.")
+	})
 	ssmSapCmd.AddCommand(ssmSap_getDatabaseCmd)
 }

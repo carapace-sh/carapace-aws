@@ -12,11 +12,13 @@ var acm_exportCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acm_exportCertificateCmd).Standalone()
+	carapace.Gen(acm_exportCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acm_exportCertificateCmd).Standalone()
 
-	acm_exportCertificateCmd.Flags().String("certificate-arn", "", "An Amazon Resource Name (ARN) of the issued certificate.")
-	acm_exportCertificateCmd.Flags().String("passphrase", "", "Passphrase to associate with the encrypted exported private key.")
-	acm_exportCertificateCmd.MarkFlagRequired("certificate-arn")
-	acm_exportCertificateCmd.MarkFlagRequired("passphrase")
+		acm_exportCertificateCmd.Flags().String("certificate-arn", "", "An Amazon Resource Name (ARN) of the issued certificate.")
+		acm_exportCertificateCmd.Flags().String("passphrase", "", "Passphrase to associate with the encrypted exported private key.")
+		acm_exportCertificateCmd.MarkFlagRequired("certificate-arn")
+		acm_exportCertificateCmd.MarkFlagRequired("passphrase")
+	})
 	acmCmd.AddCommand(acm_exportCertificateCmd)
 }

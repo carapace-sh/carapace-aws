@@ -12,7 +12,9 @@ var notifications_enableNotificationsAccessForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_enableNotificationsAccessForOrganizationCmd).Standalone()
+	carapace.Gen(notifications_enableNotificationsAccessForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_enableNotificationsAccessForOrganizationCmd).Standalone()
 
+	})
 	notificationsCmd.AddCommand(notifications_enableNotificationsAccessForOrganizationCmd)
 }

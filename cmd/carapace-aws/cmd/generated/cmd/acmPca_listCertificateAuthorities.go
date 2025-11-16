@@ -12,10 +12,12 @@ var acmPca_listCertificateAuthoritiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acmPca_listCertificateAuthoritiesCmd).Standalone()
+	carapace.Gen(acmPca_listCertificateAuthoritiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acmPca_listCertificateAuthoritiesCmd).Standalone()
 
-	acmPca_listCertificateAuthoritiesCmd.Flags().String("max-results", "", "Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.")
-	acmPca_listCertificateAuthoritiesCmd.Flags().String("next-token", "", "Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.")
-	acmPca_listCertificateAuthoritiesCmd.Flags().String("resource-owner", "", "Use this parameter to filter the returned set of certificate authorities based on their owner.")
+		acmPca_listCertificateAuthoritiesCmd.Flags().String("max-results", "", "Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.")
+		acmPca_listCertificateAuthoritiesCmd.Flags().String("next-token", "", "Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.")
+		acmPca_listCertificateAuthoritiesCmd.Flags().String("resource-owner", "", "Use this parameter to filter the returned set of certificate authorities based on their owner.")
+	})
 	acmPcaCmd.AddCommand(acmPca_listCertificateAuthoritiesCmd)
 }

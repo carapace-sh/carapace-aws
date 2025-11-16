@@ -12,11 +12,13 @@ var iam_createServiceLinkedRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_createServiceLinkedRoleCmd).Standalone()
+	carapace.Gen(iam_createServiceLinkedRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_createServiceLinkedRoleCmd).Standalone()
 
-	iam_createServiceLinkedRoleCmd.Flags().String("awsservice-name", "", "The service principal for the Amazon Web Services service to which this role is attached.")
-	iam_createServiceLinkedRoleCmd.Flags().String("custom-suffix", "", "A string that you provide, which is combined with the service-provided prefix to form the complete role name.")
-	iam_createServiceLinkedRoleCmd.Flags().String("description", "", "The description of the role.")
-	iam_createServiceLinkedRoleCmd.MarkFlagRequired("awsservice-name")
+		iam_createServiceLinkedRoleCmd.Flags().String("awsservice-name", "", "The service principal for the Amazon Web Services service to which this role is attached.")
+		iam_createServiceLinkedRoleCmd.Flags().String("custom-suffix", "", "A string that you provide, which is combined with the service-provided prefix to form the complete role name.")
+		iam_createServiceLinkedRoleCmd.Flags().String("description", "", "The description of the role.")
+		iam_createServiceLinkedRoleCmd.MarkFlagRequired("awsservice-name")
+	})
 	iamCmd.AddCommand(iam_createServiceLinkedRoleCmd)
 }

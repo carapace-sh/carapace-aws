@@ -12,11 +12,13 @@ var secretsmanager_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_tagResourceCmd).Standalone()
+	carapace.Gen(secretsmanager_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_tagResourceCmd).Standalone()
 
-	secretsmanager_tagResourceCmd.Flags().String("secret-id", "", "The identifier for the secret to attach tags to.")
-	secretsmanager_tagResourceCmd.Flags().String("tags", "", "The tags to attach to the secret as a JSON text string argument.")
-	secretsmanager_tagResourceCmd.MarkFlagRequired("secret-id")
-	secretsmanager_tagResourceCmd.MarkFlagRequired("tags")
+		secretsmanager_tagResourceCmd.Flags().String("secret-id", "", "The identifier for the secret to attach tags to.")
+		secretsmanager_tagResourceCmd.Flags().String("tags", "", "The tags to attach to the secret as a JSON text string argument.")
+		secretsmanager_tagResourceCmd.MarkFlagRequired("secret-id")
+		secretsmanager_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_tagResourceCmd)
 }

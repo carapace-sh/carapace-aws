@@ -12,9 +12,11 @@ var lookoutequipment_describeInferenceSchedulerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_describeInferenceSchedulerCmd).Standalone()
+	carapace.Gen(lookoutequipment_describeInferenceSchedulerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_describeInferenceSchedulerCmd).Standalone()
 
-	lookoutequipment_describeInferenceSchedulerCmd.Flags().String("inference-scheduler-name", "", "The name of the inference scheduler being described.")
-	lookoutequipment_describeInferenceSchedulerCmd.MarkFlagRequired("inference-scheduler-name")
+		lookoutequipment_describeInferenceSchedulerCmd.Flags().String("inference-scheduler-name", "", "The name of the inference scheduler being described.")
+		lookoutequipment_describeInferenceSchedulerCmd.MarkFlagRequired("inference-scheduler-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_describeInferenceSchedulerCmd)
 }

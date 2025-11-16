@@ -12,9 +12,11 @@ var vpcLattice_deleteDomainVerificationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deleteDomainVerificationCmd).Standalone()
+	carapace.Gen(vpcLattice_deleteDomainVerificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deleteDomainVerificationCmd).Standalone()
 
-	vpcLattice_deleteDomainVerificationCmd.Flags().String("domain-verification-identifier", "", "The ID of the domain verification to delete.")
-	vpcLattice_deleteDomainVerificationCmd.MarkFlagRequired("domain-verification-identifier")
+		vpcLattice_deleteDomainVerificationCmd.Flags().String("domain-verification-identifier", "", "The ID of the domain verification to delete.")
+		vpcLattice_deleteDomainVerificationCmd.MarkFlagRequired("domain-verification-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deleteDomainVerificationCmd)
 }

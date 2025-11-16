@@ -12,7 +12,9 @@ var mailmanagerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanagerCmd).Standalone()
+	carapace.Gen(mailmanagerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanagerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(mailmanagerCmd)
 }

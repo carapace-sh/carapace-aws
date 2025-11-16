@@ -12,9 +12,11 @@ var snowball_describeClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_describeClusterCmd).Standalone()
+	carapace.Gen(snowball_describeClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_describeClusterCmd).Standalone()
 
-	snowball_describeClusterCmd.Flags().String("cluster-id", "", "The automatically generated ID for a cluster.")
-	snowball_describeClusterCmd.MarkFlagRequired("cluster-id")
+		snowball_describeClusterCmd.Flags().String("cluster-id", "", "The automatically generated ID for a cluster.")
+		snowball_describeClusterCmd.MarkFlagRequired("cluster-id")
+	})
 	snowballCmd.AddCommand(snowball_describeClusterCmd)
 }

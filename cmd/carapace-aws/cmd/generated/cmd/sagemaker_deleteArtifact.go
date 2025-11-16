@@ -12,9 +12,11 @@ var sagemaker_deleteArtifactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteArtifactCmd).Standalone()
+	carapace.Gen(sagemaker_deleteArtifactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteArtifactCmd).Standalone()
 
-	sagemaker_deleteArtifactCmd.Flags().String("artifact-arn", "", "The Amazon Resource Name (ARN) of the artifact to delete.")
-	sagemaker_deleteArtifactCmd.Flags().String("source", "", "The URI of the source.")
+		sagemaker_deleteArtifactCmd.Flags().String("artifact-arn", "", "The Amazon Resource Name (ARN) of the artifact to delete.")
+		sagemaker_deleteArtifactCmd.Flags().String("source", "", "The URI of the source.")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteArtifactCmd)
 }

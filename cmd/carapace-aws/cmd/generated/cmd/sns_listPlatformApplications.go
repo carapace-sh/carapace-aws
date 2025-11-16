@@ -12,8 +12,10 @@ var sns_listPlatformApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_listPlatformApplicationsCmd).Standalone()
+	carapace.Gen(sns_listPlatformApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_listPlatformApplicationsCmd).Standalone()
 
-	sns_listPlatformApplicationsCmd.Flags().String("next-token", "", "`NextToken` string is used when calling `ListPlatformApplications` action to retrieve additional records that are available after the first page results.")
+		sns_listPlatformApplicationsCmd.Flags().String("next-token", "", "`NextToken` string is used when calling `ListPlatformApplications` action to retrieve additional records that are available after the first page results.")
+	})
 	snsCmd.AddCommand(sns_listPlatformApplicationsCmd)
 }

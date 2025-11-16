@@ -12,9 +12,11 @@ var waf_listIpsetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_listIpsetsCmd).Standalone()
+	carapace.Gen(waf_listIpsetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_listIpsetsCmd).Standalone()
 
-	waf_listIpsetsCmd.Flags().String("limit", "", "Specifies the number of `IPSet` objects that you want AWS WAF to return for this request.")
-	waf_listIpsetsCmd.Flags().String("next-marker", "", "AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `IPSets`.")
+		waf_listIpsetsCmd.Flags().String("limit", "", "Specifies the number of `IPSet` objects that you want AWS WAF to return for this request.")
+		waf_listIpsetsCmd.Flags().String("next-marker", "", "AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `IPSets`.")
+	})
 	wafCmd.AddCommand(waf_listIpsetsCmd)
 }

@@ -12,9 +12,11 @@ var ssm_getServiceSettingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getServiceSettingCmd).Standalone()
+	carapace.Gen(ssm_getServiceSettingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getServiceSettingCmd).Standalone()
 
-	ssm_getServiceSettingCmd.Flags().String("setting-id", "", "The ID of the service setting to get.")
-	ssm_getServiceSettingCmd.MarkFlagRequired("setting-id")
+		ssm_getServiceSettingCmd.Flags().String("setting-id", "", "The ID of the service setting to get.")
+		ssm_getServiceSettingCmd.MarkFlagRequired("setting-id")
+	})
 	ssmCmd.AddCommand(ssm_getServiceSettingCmd)
 }

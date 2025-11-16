@@ -12,13 +12,15 @@ var apigatewayv2_getIntegrationResponseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_getIntegrationResponseCmd).Standalone()
+	carapace.Gen(apigatewayv2_getIntegrationResponseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_getIntegrationResponseCmd).Standalone()
 
-	apigatewayv2_getIntegrationResponseCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_getIntegrationResponseCmd.Flags().String("integration-id", "", "The integration ID.")
-	apigatewayv2_getIntegrationResponseCmd.Flags().String("integration-response-id", "", "The integration response ID.")
-	apigatewayv2_getIntegrationResponseCmd.MarkFlagRequired("api-id")
-	apigatewayv2_getIntegrationResponseCmd.MarkFlagRequired("integration-id")
-	apigatewayv2_getIntegrationResponseCmd.MarkFlagRequired("integration-response-id")
+		apigatewayv2_getIntegrationResponseCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_getIntegrationResponseCmd.Flags().String("integration-id", "", "The integration ID.")
+		apigatewayv2_getIntegrationResponseCmd.Flags().String("integration-response-id", "", "The integration response ID.")
+		apigatewayv2_getIntegrationResponseCmd.MarkFlagRequired("api-id")
+		apigatewayv2_getIntegrationResponseCmd.MarkFlagRequired("integration-id")
+		apigatewayv2_getIntegrationResponseCmd.MarkFlagRequired("integration-response-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_getIntegrationResponseCmd)
 }

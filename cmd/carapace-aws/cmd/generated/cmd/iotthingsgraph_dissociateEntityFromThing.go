@@ -12,11 +12,13 @@ var iotthingsgraph_dissociateEntityFromThingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_dissociateEntityFromThingCmd).Standalone()
+	carapace.Gen(iotthingsgraph_dissociateEntityFromThingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_dissociateEntityFromThingCmd).Standalone()
 
-	iotthingsgraph_dissociateEntityFromThingCmd.Flags().String("entity-type", "", "The entity type from which to disassociate the thing.")
-	iotthingsgraph_dissociateEntityFromThingCmd.Flags().String("thing-name", "", "The name of the thing to disassociate.")
-	iotthingsgraph_dissociateEntityFromThingCmd.MarkFlagRequired("entity-type")
-	iotthingsgraph_dissociateEntityFromThingCmd.MarkFlagRequired("thing-name")
+		iotthingsgraph_dissociateEntityFromThingCmd.Flags().String("entity-type", "", "The entity type from which to disassociate the thing.")
+		iotthingsgraph_dissociateEntityFromThingCmd.Flags().String("thing-name", "", "The name of the thing to disassociate.")
+		iotthingsgraph_dissociateEntityFromThingCmd.MarkFlagRequired("entity-type")
+		iotthingsgraph_dissociateEntityFromThingCmd.MarkFlagRequired("thing-name")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_dissociateEntityFromThingCmd)
 }

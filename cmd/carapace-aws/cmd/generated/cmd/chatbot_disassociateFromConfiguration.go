@@ -12,11 +12,13 @@ var chatbot_disassociateFromConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_disassociateFromConfigurationCmd).Standalone()
+	carapace.Gen(chatbot_disassociateFromConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_disassociateFromConfigurationCmd).Standalone()
 
-	chatbot_disassociateFromConfigurationCmd.Flags().String("chat-configuration", "", "The channel configuration the resource is being disassociated from.")
-	chatbot_disassociateFromConfigurationCmd.Flags().String("resource", "", "The resource (for example, a custom action) Amazon Resource Name (ARN) to unlink.")
-	chatbot_disassociateFromConfigurationCmd.MarkFlagRequired("chat-configuration")
-	chatbot_disassociateFromConfigurationCmd.MarkFlagRequired("resource")
+		chatbot_disassociateFromConfigurationCmd.Flags().String("chat-configuration", "", "The channel configuration the resource is being disassociated from.")
+		chatbot_disassociateFromConfigurationCmd.Flags().String("resource", "", "The resource (for example, a custom action) Amazon Resource Name (ARN) to unlink.")
+		chatbot_disassociateFromConfigurationCmd.MarkFlagRequired("chat-configuration")
+		chatbot_disassociateFromConfigurationCmd.MarkFlagRequired("resource")
+	})
 	chatbotCmd.AddCommand(chatbot_disassociateFromConfigurationCmd)
 }

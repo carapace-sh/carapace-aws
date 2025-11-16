@@ -12,14 +12,16 @@ var acmPca_createPermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acmPca_createPermissionCmd).Standalone()
+	carapace.Gen(acmPca_createPermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acmPca_createPermissionCmd).Standalone()
 
-	acmPca_createPermissionCmd.Flags().String("actions", "", "The actions that the specified Amazon Web Services service principal can use.")
-	acmPca_createPermissionCmd.Flags().String("certificate-authority-arn", "", "The Amazon Resource Name (ARN) of the CA that grants the permissions.")
-	acmPca_createPermissionCmd.Flags().String("principal", "", "The Amazon Web Services service or identity that receives the permission.")
-	acmPca_createPermissionCmd.Flags().String("source-account", "", "The ID of the calling account.")
-	acmPca_createPermissionCmd.MarkFlagRequired("actions")
-	acmPca_createPermissionCmd.MarkFlagRequired("certificate-authority-arn")
-	acmPca_createPermissionCmd.MarkFlagRequired("principal")
+		acmPca_createPermissionCmd.Flags().String("actions", "", "The actions that the specified Amazon Web Services service principal can use.")
+		acmPca_createPermissionCmd.Flags().String("certificate-authority-arn", "", "The Amazon Resource Name (ARN) of the CA that grants the permissions.")
+		acmPca_createPermissionCmd.Flags().String("principal", "", "The Amazon Web Services service or identity that receives the permission.")
+		acmPca_createPermissionCmd.Flags().String("source-account", "", "The ID of the calling account.")
+		acmPca_createPermissionCmd.MarkFlagRequired("actions")
+		acmPca_createPermissionCmd.MarkFlagRequired("certificate-authority-arn")
+		acmPca_createPermissionCmd.MarkFlagRequired("principal")
+	})
 	acmPcaCmd.AddCommand(acmPca_createPermissionCmd)
 }

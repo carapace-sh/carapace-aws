@@ -12,11 +12,13 @@ var kendra_describeFeaturedResultsSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_describeFeaturedResultsSetCmd).Standalone()
+	carapace.Gen(kendra_describeFeaturedResultsSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_describeFeaturedResultsSetCmd).Standalone()
 
-	kendra_describeFeaturedResultsSetCmd.Flags().String("featured-results-set-id", "", "The identifier of the set of featured results that you want to get information on.")
-	kendra_describeFeaturedResultsSetCmd.Flags().String("index-id", "", "The identifier of the index used for featuring results.")
-	kendra_describeFeaturedResultsSetCmd.MarkFlagRequired("featured-results-set-id")
-	kendra_describeFeaturedResultsSetCmd.MarkFlagRequired("index-id")
+		kendra_describeFeaturedResultsSetCmd.Flags().String("featured-results-set-id", "", "The identifier of the set of featured results that you want to get information on.")
+		kendra_describeFeaturedResultsSetCmd.Flags().String("index-id", "", "The identifier of the index used for featuring results.")
+		kendra_describeFeaturedResultsSetCmd.MarkFlagRequired("featured-results-set-id")
+		kendra_describeFeaturedResultsSetCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_describeFeaturedResultsSetCmd)
 }

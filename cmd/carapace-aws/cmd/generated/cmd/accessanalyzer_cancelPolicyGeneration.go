@@ -12,9 +12,11 @@ var accessanalyzer_cancelPolicyGenerationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_cancelPolicyGenerationCmd).Standalone()
+	carapace.Gen(accessanalyzer_cancelPolicyGenerationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_cancelPolicyGenerationCmd).Standalone()
 
-	accessanalyzer_cancelPolicyGenerationCmd.Flags().String("job-id", "", "The `JobId` that is returned by the `StartPolicyGeneration` operation.")
-	accessanalyzer_cancelPolicyGenerationCmd.MarkFlagRequired("job-id")
+		accessanalyzer_cancelPolicyGenerationCmd.Flags().String("job-id", "", "The `JobId` that is returned by the `StartPolicyGeneration` operation.")
+		accessanalyzer_cancelPolicyGenerationCmd.MarkFlagRequired("job-id")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_cancelPolicyGenerationCmd)
 }

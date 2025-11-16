@@ -12,9 +12,11 @@ var lexv2Models_listBotReplicasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_listBotReplicasCmd).Standalone()
+	carapace.Gen(lexv2Models_listBotReplicasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_listBotReplicasCmd).Standalone()
 
-	lexv2Models_listBotReplicasCmd.Flags().String("bot-id", "", "The request for the unique bot IDs in the list of replicated bots.")
-	lexv2Models_listBotReplicasCmd.MarkFlagRequired("bot-id")
+		lexv2Models_listBotReplicasCmd.Flags().String("bot-id", "", "The request for the unique bot IDs in the list of replicated bots.")
+		lexv2Models_listBotReplicasCmd.MarkFlagRequired("bot-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_listBotReplicasCmd)
 }

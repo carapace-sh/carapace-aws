@@ -12,9 +12,11 @@ var macie2_getResourceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getResourceProfileCmd).Standalone()
+	carapace.Gen(macie2_getResourceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getResourceProfileCmd).Standalone()
 
-	macie2_getResourceProfileCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.")
-	macie2_getResourceProfileCmd.MarkFlagRequired("resource-arn")
+		macie2_getResourceProfileCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.")
+		macie2_getResourceProfileCmd.MarkFlagRequired("resource-arn")
+	})
 	macie2Cmd.AddCommand(macie2_getResourceProfileCmd)
 }

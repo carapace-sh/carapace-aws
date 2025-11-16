@@ -12,11 +12,13 @@ var appmesh_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appmesh_listTagsForResourceCmd).Standalone()
+	carapace.Gen(appmesh_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appmesh_listTagsForResourceCmd).Standalone()
 
-	appmesh_listTagsForResourceCmd.Flags().String("limit", "", "The maximum number of tag results returned by `ListTagsForResource` in paginated output.")
-	appmesh_listTagsForResourceCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `ListTagsForResource` request where `limit` was used and the results exceeded the value of that parameter.")
-	appmesh_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to list the tags for.")
-	appmesh_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		appmesh_listTagsForResourceCmd.Flags().String("limit", "", "The maximum number of tag results returned by `ListTagsForResource` in paginated output.")
+		appmesh_listTagsForResourceCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `ListTagsForResource` request where `limit` was used and the results exceeded the value of that parameter.")
+		appmesh_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to list the tags for.")
+		appmesh_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	appmeshCmd.AddCommand(appmesh_listTagsForResourceCmd)
 }

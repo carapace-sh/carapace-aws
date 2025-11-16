@@ -12,13 +12,15 @@ var kinesis_mergeShardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_mergeShardsCmd).Standalone()
+	carapace.Gen(kinesis_mergeShardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_mergeShardsCmd).Standalone()
 
-	kinesis_mergeShardsCmd.Flags().String("adjacent-shard-to-merge", "", "The shard ID of the adjacent shard for the merge.")
-	kinesis_mergeShardsCmd.Flags().String("shard-to-merge", "", "The shard ID of the shard to combine with the adjacent shard for the merge.")
-	kinesis_mergeShardsCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
-	kinesis_mergeShardsCmd.Flags().String("stream-name", "", "The name of the stream for the merge.")
-	kinesis_mergeShardsCmd.MarkFlagRequired("adjacent-shard-to-merge")
-	kinesis_mergeShardsCmd.MarkFlagRequired("shard-to-merge")
+		kinesis_mergeShardsCmd.Flags().String("adjacent-shard-to-merge", "", "The shard ID of the adjacent shard for the merge.")
+		kinesis_mergeShardsCmd.Flags().String("shard-to-merge", "", "The shard ID of the shard to combine with the adjacent shard for the merge.")
+		kinesis_mergeShardsCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
+		kinesis_mergeShardsCmd.Flags().String("stream-name", "", "The name of the stream for the merge.")
+		kinesis_mergeShardsCmd.MarkFlagRequired("adjacent-shard-to-merge")
+		kinesis_mergeShardsCmd.MarkFlagRequired("shard-to-merge")
+	})
 	kinesisCmd.AddCommand(kinesis_mergeShardsCmd)
 }

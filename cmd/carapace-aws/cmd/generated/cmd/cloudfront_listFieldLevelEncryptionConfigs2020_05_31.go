@@ -12,9 +12,11 @@ var cloudfront_listFieldLevelEncryptionConfigs2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_listFieldLevelEncryptionConfigs2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listFieldLevelEncryptionConfigs2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listFieldLevelEncryptionConfigs2020_05_31Cmd).Standalone()
 
-	cloudfront_listFieldLevelEncryptionConfigs2020_05_31Cmd.Flags().String("marker", "", "Use this when paginating results to indicate where to begin in your list of configurations.")
-	cloudfront_listFieldLevelEncryptionConfigs2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of field-level encryption configurations you want in the response body.")
+		cloudfront_listFieldLevelEncryptionConfigs2020_05_31Cmd.Flags().String("marker", "", "Use this when paginating results to indicate where to begin in your list of configurations.")
+		cloudfront_listFieldLevelEncryptionConfigs2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of field-level encryption configurations you want in the response body.")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listFieldLevelEncryptionConfigs2020_05_31Cmd)
 }

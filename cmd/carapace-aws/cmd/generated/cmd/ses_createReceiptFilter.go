@@ -12,9 +12,11 @@ var ses_createReceiptFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_createReceiptFilterCmd).Standalone()
+	carapace.Gen(ses_createReceiptFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_createReceiptFilterCmd).Standalone()
 
-	ses_createReceiptFilterCmd.Flags().String("filter", "", "A data structure that describes the IP address filter to create, which consists of a name, an IP address range, and whether to allow or block mail from it.")
-	ses_createReceiptFilterCmd.MarkFlagRequired("filter")
+		ses_createReceiptFilterCmd.Flags().String("filter", "", "A data structure that describes the IP address filter to create, which consists of a name, an IP address range, and whether to allow or block mail from it.")
+		ses_createReceiptFilterCmd.MarkFlagRequired("filter")
+	})
 	sesCmd.AddCommand(ses_createReceiptFilterCmd)
 }

@@ -12,8 +12,10 @@ var support_describeSeverityLevelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(support_describeSeverityLevelsCmd).Standalone()
+	carapace.Gen(support_describeSeverityLevelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(support_describeSeverityLevelsCmd).Standalone()
 
-	support_describeSeverityLevelsCmd.Flags().String("language", "", "The language in which Amazon Web Services Support handles the case.")
+		support_describeSeverityLevelsCmd.Flags().String("language", "", "The language in which Amazon Web Services Support handles the case.")
+	})
 	supportCmd.AddCommand(support_describeSeverityLevelsCmd)
 }

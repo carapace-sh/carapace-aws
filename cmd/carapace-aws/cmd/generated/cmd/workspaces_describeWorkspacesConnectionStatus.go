@@ -12,9 +12,11 @@ var workspaces_describeWorkspacesConnectionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeWorkspacesConnectionStatusCmd).Standalone()
+	carapace.Gen(workspaces_describeWorkspacesConnectionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeWorkspacesConnectionStatusCmd).Standalone()
 
-	workspaces_describeWorkspacesConnectionStatusCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
-	workspaces_describeWorkspacesConnectionStatusCmd.Flags().String("workspace-ids", "", "The identifiers of the WorkSpaces.")
+		workspaces_describeWorkspacesConnectionStatusCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+		workspaces_describeWorkspacesConnectionStatusCmd.Flags().String("workspace-ids", "", "The identifiers of the WorkSpaces.")
+	})
 	workspacesCmd.AddCommand(workspaces_describeWorkspacesConnectionStatusCmd)
 }

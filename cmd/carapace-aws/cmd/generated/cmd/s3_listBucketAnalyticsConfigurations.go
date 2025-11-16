@@ -12,11 +12,13 @@ var s3_listBucketAnalyticsConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_listBucketAnalyticsConfigurationsCmd).Standalone()
+	carapace.Gen(s3_listBucketAnalyticsConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_listBucketAnalyticsConfigurationsCmd).Standalone()
 
-	s3_listBucketAnalyticsConfigurationsCmd.Flags().String("bucket", "", "The name of the bucket from which analytics configurations are retrieved.")
-	s3_listBucketAnalyticsConfigurationsCmd.Flags().String("continuation-token", "", "The `ContinuationToken` that represents a placeholder from where this request should begin.")
-	s3_listBucketAnalyticsConfigurationsCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_listBucketAnalyticsConfigurationsCmd.MarkFlagRequired("bucket")
+		s3_listBucketAnalyticsConfigurationsCmd.Flags().String("bucket", "", "The name of the bucket from which analytics configurations are retrieved.")
+		s3_listBucketAnalyticsConfigurationsCmd.Flags().String("continuation-token", "", "The `ContinuationToken` that represents a placeholder from where this request should begin.")
+		s3_listBucketAnalyticsConfigurationsCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_listBucketAnalyticsConfigurationsCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_listBucketAnalyticsConfigurationsCmd)
 }

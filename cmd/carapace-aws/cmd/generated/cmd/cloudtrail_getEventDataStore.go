@@ -12,9 +12,11 @@ var cloudtrail_getEventDataStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_getEventDataStoreCmd).Standalone()
+	carapace.Gen(cloudtrail_getEventDataStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_getEventDataStoreCmd).Standalone()
 
-	cloudtrail_getEventDataStoreCmd.Flags().String("event-data-store", "", "The ARN (or ID suffix of the ARN) of the event data store about which you want information.")
-	cloudtrail_getEventDataStoreCmd.MarkFlagRequired("event-data-store")
+		cloudtrail_getEventDataStoreCmd.Flags().String("event-data-store", "", "The ARN (or ID suffix of the ARN) of the event data store about which you want information.")
+		cloudtrail_getEventDataStoreCmd.MarkFlagRequired("event-data-store")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_getEventDataStoreCmd)
 }

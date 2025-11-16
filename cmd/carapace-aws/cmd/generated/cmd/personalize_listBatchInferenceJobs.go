@@ -12,10 +12,12 @@ var personalize_listBatchInferenceJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_listBatchInferenceJobsCmd).Standalone()
+	carapace.Gen(personalize_listBatchInferenceJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_listBatchInferenceJobsCmd).Standalone()
 
-	personalize_listBatchInferenceJobsCmd.Flags().String("max-results", "", "The maximum number of batch inference job results to return in each page.")
-	personalize_listBatchInferenceJobsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
-	personalize_listBatchInferenceJobsCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version from which the batch inference jobs were created.")
+		personalize_listBatchInferenceJobsCmd.Flags().String("max-results", "", "The maximum number of batch inference job results to return in each page.")
+		personalize_listBatchInferenceJobsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		personalize_listBatchInferenceJobsCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version from which the batch inference jobs were created.")
+	})
 	personalizeCmd.AddCommand(personalize_listBatchInferenceJobsCmd)
 }

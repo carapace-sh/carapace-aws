@@ -12,7 +12,9 @@ var resourceGroups_getAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceGroups_getAccountSettingsCmd).Standalone()
+	carapace.Gen(resourceGroups_getAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceGroups_getAccountSettingsCmd).Standalone()
 
+	})
 	resourceGroupsCmd.AddCommand(resourceGroups_getAccountSettingsCmd)
 }

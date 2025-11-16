@@ -12,13 +12,15 @@ var lambda_removePermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_removePermissionCmd).Standalone()
+	carapace.Gen(lambda_removePermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_removePermissionCmd).Standalone()
 
-	lambda_removePermissionCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
-	lambda_removePermissionCmd.Flags().String("qualifier", "", "Specify a version or alias to remove permissions from a published version of the function.")
-	lambda_removePermissionCmd.Flags().String("revision-id", "", "Update the policy only if the revision ID matches the ID that's specified.")
-	lambda_removePermissionCmd.Flags().String("statement-id", "", "Statement ID of the permission to remove.")
-	lambda_removePermissionCmd.MarkFlagRequired("function-name")
-	lambda_removePermissionCmd.MarkFlagRequired("statement-id")
+		lambda_removePermissionCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
+		lambda_removePermissionCmd.Flags().String("qualifier", "", "Specify a version or alias to remove permissions from a published version of the function.")
+		lambda_removePermissionCmd.Flags().String("revision-id", "", "Update the policy only if the revision ID matches the ID that's specified.")
+		lambda_removePermissionCmd.Flags().String("statement-id", "", "Statement ID of the permission to remove.")
+		lambda_removePermissionCmd.MarkFlagRequired("function-name")
+		lambda_removePermissionCmd.MarkFlagRequired("statement-id")
+	})
 	lambdaCmd.AddCommand(lambda_removePermissionCmd)
 }

@@ -12,11 +12,13 @@ var iotsitewise_updateGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_updateGatewayCmd).Standalone()
+	carapace.Gen(iotsitewise_updateGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_updateGatewayCmd).Standalone()
 
-	iotsitewise_updateGatewayCmd.Flags().String("gateway-id", "", "The ID of the gateway to update.")
-	iotsitewise_updateGatewayCmd.Flags().String("gateway-name", "", "A unique name for the gateway.")
-	iotsitewise_updateGatewayCmd.MarkFlagRequired("gateway-id")
-	iotsitewise_updateGatewayCmd.MarkFlagRequired("gateway-name")
+		iotsitewise_updateGatewayCmd.Flags().String("gateway-id", "", "The ID of the gateway to update.")
+		iotsitewise_updateGatewayCmd.Flags().String("gateway-name", "", "A unique name for the gateway.")
+		iotsitewise_updateGatewayCmd.MarkFlagRequired("gateway-id")
+		iotsitewise_updateGatewayCmd.MarkFlagRequired("gateway-name")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_updateGatewayCmd)
 }

@@ -12,8 +12,10 @@ var iam_getLoginProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getLoginProfileCmd).Standalone()
+	carapace.Gen(iam_getLoginProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getLoginProfileCmd).Standalone()
 
-	iam_getLoginProfileCmd.Flags().String("user-name", "", "The name of the user whose login profile you want to retrieve.")
+		iam_getLoginProfileCmd.Flags().String("user-name", "", "The name of the user whose login profile you want to retrieve.")
+	})
 	iamCmd.AddCommand(iam_getLoginProfileCmd)
 }

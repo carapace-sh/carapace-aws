@@ -12,9 +12,11 @@ var databrew_deleteProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_deleteProjectCmd).Standalone()
+	carapace.Gen(databrew_deleteProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_deleteProjectCmd).Standalone()
 
-	databrew_deleteProjectCmd.Flags().String("name", "", "The name of the project to be deleted.")
-	databrew_deleteProjectCmd.MarkFlagRequired("name")
+		databrew_deleteProjectCmd.Flags().String("name", "", "The name of the project to be deleted.")
+		databrew_deleteProjectCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_deleteProjectCmd)
 }

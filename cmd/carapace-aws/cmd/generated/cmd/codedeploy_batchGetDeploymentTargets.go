@@ -12,11 +12,13 @@ var codedeploy_batchGetDeploymentTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_batchGetDeploymentTargetsCmd).Standalone()
+	carapace.Gen(codedeploy_batchGetDeploymentTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_batchGetDeploymentTargetsCmd).Standalone()
 
-	codedeploy_batchGetDeploymentTargetsCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
-	codedeploy_batchGetDeploymentTargetsCmd.Flags().String("target-ids", "", "The unique IDs of the deployment targets.")
-	codedeploy_batchGetDeploymentTargetsCmd.MarkFlagRequired("deployment-id")
-	codedeploy_batchGetDeploymentTargetsCmd.MarkFlagRequired("target-ids")
+		codedeploy_batchGetDeploymentTargetsCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
+		codedeploy_batchGetDeploymentTargetsCmd.Flags().String("target-ids", "", "The unique IDs of the deployment targets.")
+		codedeploy_batchGetDeploymentTargetsCmd.MarkFlagRequired("deployment-id")
+		codedeploy_batchGetDeploymentTargetsCmd.MarkFlagRequired("target-ids")
+	})
 	codedeployCmd.AddCommand(codedeploy_batchGetDeploymentTargetsCmd)
 }

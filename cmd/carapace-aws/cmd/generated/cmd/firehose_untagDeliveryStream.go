@@ -12,11 +12,13 @@ var firehose_untagDeliveryStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(firehose_untagDeliveryStreamCmd).Standalone()
+	carapace.Gen(firehose_untagDeliveryStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(firehose_untagDeliveryStreamCmd).Standalone()
 
-	firehose_untagDeliveryStreamCmd.Flags().String("delivery-stream-name", "", "The name of the Firehose stream.")
-	firehose_untagDeliveryStreamCmd.Flags().String("tag-keys", "", "A list of tag keys.")
-	firehose_untagDeliveryStreamCmd.MarkFlagRequired("delivery-stream-name")
-	firehose_untagDeliveryStreamCmd.MarkFlagRequired("tag-keys")
+		firehose_untagDeliveryStreamCmd.Flags().String("delivery-stream-name", "", "The name of the Firehose stream.")
+		firehose_untagDeliveryStreamCmd.Flags().String("tag-keys", "", "A list of tag keys.")
+		firehose_untagDeliveryStreamCmd.MarkFlagRequired("delivery-stream-name")
+		firehose_untagDeliveryStreamCmd.MarkFlagRequired("tag-keys")
+	})
 	firehoseCmd.AddCommand(firehose_untagDeliveryStreamCmd)
 }

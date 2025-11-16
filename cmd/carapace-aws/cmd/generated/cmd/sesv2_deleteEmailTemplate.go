@@ -12,9 +12,11 @@ var sesv2_deleteEmailTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteEmailTemplateCmd).Standalone()
+	carapace.Gen(sesv2_deleteEmailTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteEmailTemplateCmd).Standalone()
 
-	sesv2_deleteEmailTemplateCmd.Flags().String("template-name", "", "The name of the template to be deleted.")
-	sesv2_deleteEmailTemplateCmd.MarkFlagRequired("template-name")
+		sesv2_deleteEmailTemplateCmd.Flags().String("template-name", "", "The name of the template to be deleted.")
+		sesv2_deleteEmailTemplateCmd.MarkFlagRequired("template-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteEmailTemplateCmd)
 }

@@ -12,9 +12,11 @@ var gamelift_getGameSessionLogUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_getGameSessionLogUrlCmd).Standalone()
+	carapace.Gen(gamelift_getGameSessionLogUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_getGameSessionLogUrlCmd).Standalone()
 
-	gamelift_getGameSessionLogUrlCmd.Flags().String("game-session-id", "", "A unique identifier for the game session to get logs for.")
-	gamelift_getGameSessionLogUrlCmd.MarkFlagRequired("game-session-id")
+		gamelift_getGameSessionLogUrlCmd.Flags().String("game-session-id", "", "A unique identifier for the game session to get logs for.")
+		gamelift_getGameSessionLogUrlCmd.MarkFlagRequired("game-session-id")
+	})
 	gameliftCmd.AddCommand(gamelift_getGameSessionLogUrlCmd)
 }

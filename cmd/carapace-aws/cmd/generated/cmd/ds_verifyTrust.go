@@ -12,9 +12,11 @@ var ds_verifyTrustCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_verifyTrustCmd).Standalone()
+	carapace.Gen(ds_verifyTrustCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_verifyTrustCmd).Standalone()
 
-	ds_verifyTrustCmd.Flags().String("trust-id", "", "The unique Trust ID of the trust relationship to verify.")
-	ds_verifyTrustCmd.MarkFlagRequired("trust-id")
+		ds_verifyTrustCmd.Flags().String("trust-id", "", "The unique Trust ID of the trust relationship to verify.")
+		ds_verifyTrustCmd.MarkFlagRequired("trust-id")
+	})
 	dsCmd.AddCommand(ds_verifyTrustCmd)
 }

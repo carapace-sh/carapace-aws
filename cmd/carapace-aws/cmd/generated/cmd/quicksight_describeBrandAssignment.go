@@ -12,9 +12,11 @@ var quicksight_describeBrandAssignmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeBrandAssignmentCmd).Standalone()
+	carapace.Gen(quicksight_describeBrandAssignmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeBrandAssignmentCmd).Standalone()
 
-	quicksight_describeBrandAssignmentCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that owns the brand assignment.")
-	quicksight_describeBrandAssignmentCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeBrandAssignmentCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that owns the brand assignment.")
+		quicksight_describeBrandAssignmentCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeBrandAssignmentCmd)
 }

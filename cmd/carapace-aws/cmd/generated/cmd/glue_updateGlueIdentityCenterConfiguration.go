@@ -12,9 +12,11 @@ var glue_updateGlueIdentityCenterConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_updateGlueIdentityCenterConfigurationCmd).Standalone()
+	carapace.Gen(glue_updateGlueIdentityCenterConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_updateGlueIdentityCenterConfigurationCmd).Standalone()
 
-	glue_updateGlueIdentityCenterConfigurationCmd.Flags().String("scopes", "", "A list of Identity Center scopes that define the updated permissions and access levels for the Glue configuration.")
-	glue_updateGlueIdentityCenterConfigurationCmd.Flags().String("user-background-sessions-enabled", "", "Specifies whether users can run background sessions when using Identity Center authentication with Glue services.")
+		glue_updateGlueIdentityCenterConfigurationCmd.Flags().String("scopes", "", "A list of Identity Center scopes that define the updated permissions and access levels for the Glue configuration.")
+		glue_updateGlueIdentityCenterConfigurationCmd.Flags().String("user-background-sessions-enabled", "", "Specifies whether users can run background sessions when using Identity Center authentication with Glue services.")
+	})
 	glueCmd.AddCommand(glue_updateGlueIdentityCenterConfigurationCmd)
 }

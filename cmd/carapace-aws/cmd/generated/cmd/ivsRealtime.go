@@ -12,7 +12,9 @@ var ivsRealtimeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtimeCmd).Standalone()
+	carapace.Gen(ivsRealtimeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtimeCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ivsRealtimeCmd)
 }

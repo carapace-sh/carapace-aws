@@ -12,10 +12,12 @@ var mgn_stopReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_stopReplicationCmd).Standalone()
+	carapace.Gen(mgn_stopReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_stopReplicationCmd).Standalone()
 
-	mgn_stopReplicationCmd.Flags().String("account-id", "", "Stop Replication Request account ID.")
-	mgn_stopReplicationCmd.Flags().String("source-server-id", "", "Stop Replication Request source server ID.")
-	mgn_stopReplicationCmd.MarkFlagRequired("source-server-id")
+		mgn_stopReplicationCmd.Flags().String("account-id", "", "Stop Replication Request account ID.")
+		mgn_stopReplicationCmd.Flags().String("source-server-id", "", "Stop Replication Request source server ID.")
+		mgn_stopReplicationCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_stopReplicationCmd)
 }

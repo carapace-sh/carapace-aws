@@ -12,9 +12,11 @@ var ds_describeAdassessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_describeAdassessmentCmd).Standalone()
+	carapace.Gen(ds_describeAdassessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_describeAdassessmentCmd).Standalone()
 
-	ds_describeAdassessmentCmd.Flags().String("assessment-id", "", "The identifier of the directory assessment to describe.")
-	ds_describeAdassessmentCmd.MarkFlagRequired("assessment-id")
+		ds_describeAdassessmentCmd.Flags().String("assessment-id", "", "The identifier of the directory assessment to describe.")
+		ds_describeAdassessmentCmd.MarkFlagRequired("assessment-id")
+	})
 	dsCmd.AddCommand(ds_describeAdassessmentCmd)
 }

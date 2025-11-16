@@ -12,14 +12,16 @@ var customerProfiles_createEventStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_createEventStreamCmd).Standalone()
+	carapace.Gen(customerProfiles_createEventStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_createEventStreamCmd).Standalone()
 
-	customerProfiles_createEventStreamCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_createEventStreamCmd.Flags().String("event-stream-name", "", "The name of the event stream.")
-	customerProfiles_createEventStreamCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
-	customerProfiles_createEventStreamCmd.Flags().String("uri", "", "The StreamARN of the destination to deliver profile events to.")
-	customerProfiles_createEventStreamCmd.MarkFlagRequired("domain-name")
-	customerProfiles_createEventStreamCmd.MarkFlagRequired("event-stream-name")
-	customerProfiles_createEventStreamCmd.MarkFlagRequired("uri")
+		customerProfiles_createEventStreamCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_createEventStreamCmd.Flags().String("event-stream-name", "", "The name of the event stream.")
+		customerProfiles_createEventStreamCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
+		customerProfiles_createEventStreamCmd.Flags().String("uri", "", "The StreamARN of the destination to deliver profile events to.")
+		customerProfiles_createEventStreamCmd.MarkFlagRequired("domain-name")
+		customerProfiles_createEventStreamCmd.MarkFlagRequired("event-stream-name")
+		customerProfiles_createEventStreamCmd.MarkFlagRequired("uri")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_createEventStreamCmd)
 }

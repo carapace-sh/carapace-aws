@@ -12,11 +12,13 @@ var dax_updateSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_updateSubnetGroupCmd).Standalone()
+	carapace.Gen(dax_updateSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_updateSubnetGroupCmd).Standalone()
 
-	dax_updateSubnetGroupCmd.Flags().String("description", "", "A description of the subnet group.")
-	dax_updateSubnetGroupCmd.Flags().String("subnet-group-name", "", "The name of the subnet group.")
-	dax_updateSubnetGroupCmd.Flags().String("subnet-ids", "", "A list of subnet IDs in the subnet group.")
-	dax_updateSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
+		dax_updateSubnetGroupCmd.Flags().String("description", "", "A description of the subnet group.")
+		dax_updateSubnetGroupCmd.Flags().String("subnet-group-name", "", "The name of the subnet group.")
+		dax_updateSubnetGroupCmd.Flags().String("subnet-ids", "", "A list of subnet IDs in the subnet group.")
+		dax_updateSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
+	})
 	daxCmd.AddCommand(dax_updateSubnetGroupCmd)
 }

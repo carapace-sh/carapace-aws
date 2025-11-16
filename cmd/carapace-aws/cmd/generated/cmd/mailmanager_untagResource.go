@@ -12,11 +12,13 @@ var mailmanager_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_untagResourceCmd).Standalone()
+	carapace.Gen(mailmanager_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_untagResourceCmd).Standalone()
 
-	mailmanager_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to untag.")
-	mailmanager_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.")
-	mailmanager_untagResourceCmd.MarkFlagRequired("resource-arn")
-	mailmanager_untagResourceCmd.MarkFlagRequired("tag-keys")
+		mailmanager_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to untag.")
+		mailmanager_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.")
+		mailmanager_untagResourceCmd.MarkFlagRequired("resource-arn")
+		mailmanager_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_untagResourceCmd)
 }

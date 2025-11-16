@@ -12,11 +12,13 @@ var s3control_getAccessPointForObjectLambdaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_getAccessPointForObjectLambdaCmd).Standalone()
+	carapace.Gen(s3control_getAccessPointForObjectLambdaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_getAccessPointForObjectLambdaCmd).Standalone()
 
-	s3control_getAccessPointForObjectLambdaCmd.Flags().String("account-id", "", "The account ID for the account that owns the specified Object Lambda Access Point.")
-	s3control_getAccessPointForObjectLambdaCmd.Flags().String("name", "", "The name of the Object Lambda Access Point.")
-	s3control_getAccessPointForObjectLambdaCmd.MarkFlagRequired("account-id")
-	s3control_getAccessPointForObjectLambdaCmd.MarkFlagRequired("name")
+		s3control_getAccessPointForObjectLambdaCmd.Flags().String("account-id", "", "The account ID for the account that owns the specified Object Lambda Access Point.")
+		s3control_getAccessPointForObjectLambdaCmd.Flags().String("name", "", "The name of the Object Lambda Access Point.")
+		s3control_getAccessPointForObjectLambdaCmd.MarkFlagRequired("account-id")
+		s3control_getAccessPointForObjectLambdaCmd.MarkFlagRequired("name")
+	})
 	s3controlCmd.AddCommand(s3control_getAccessPointForObjectLambdaCmd)
 }

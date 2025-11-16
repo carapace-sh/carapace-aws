@@ -12,10 +12,12 @@ var iot_registerThingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_registerThingCmd).Standalone()
+	carapace.Gen(iot_registerThingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_registerThingCmd).Standalone()
 
-	iot_registerThingCmd.Flags().String("parameters", "", "The parameters for provisioning a thing.")
-	iot_registerThingCmd.Flags().String("template-body", "", "The provisioning template.")
-	iot_registerThingCmd.MarkFlagRequired("template-body")
+		iot_registerThingCmd.Flags().String("parameters", "", "The parameters for provisioning a thing.")
+		iot_registerThingCmd.Flags().String("template-body", "", "The provisioning template.")
+		iot_registerThingCmd.MarkFlagRequired("template-body")
+	})
 	iotCmd.AddCommand(iot_registerThingCmd)
 }

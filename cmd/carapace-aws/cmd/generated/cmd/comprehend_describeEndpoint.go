@@ -12,9 +12,11 @@ var comprehend_describeEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeEndpointCmd).Standalone()
+	carapace.Gen(comprehend_describeEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeEndpointCmd).Standalone()
 
-	comprehend_describeEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Number (ARN) of the endpoint being described.")
-	comprehend_describeEndpointCmd.MarkFlagRequired("endpoint-arn")
+		comprehend_describeEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Number (ARN) of the endpoint being described.")
+		comprehend_describeEndpointCmd.MarkFlagRequired("endpoint-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_describeEndpointCmd)
 }

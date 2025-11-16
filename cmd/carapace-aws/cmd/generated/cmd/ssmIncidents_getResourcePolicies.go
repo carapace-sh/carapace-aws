@@ -12,11 +12,13 @@ var ssmIncidents_getResourcePoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_getResourcePoliciesCmd).Standalone()
+	carapace.Gen(ssmIncidents_getResourcePoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_getResourcePoliciesCmd).Standalone()
 
-	ssmIncidents_getResourcePoliciesCmd.Flags().String("max-results", "", "The maximum number of resource policies to display for each page of results.")
-	ssmIncidents_getResourcePoliciesCmd.Flags().String("next-token", "", "The pagination token for the next set of items to return.")
-	ssmIncidents_getResourcePoliciesCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the response plan with the attached resource policy.")
-	ssmIncidents_getResourcePoliciesCmd.MarkFlagRequired("resource-arn")
+		ssmIncidents_getResourcePoliciesCmd.Flags().String("max-results", "", "The maximum number of resource policies to display for each page of results.")
+		ssmIncidents_getResourcePoliciesCmd.Flags().String("next-token", "", "The pagination token for the next set of items to return.")
+		ssmIncidents_getResourcePoliciesCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the response plan with the attached resource policy.")
+		ssmIncidents_getResourcePoliciesCmd.MarkFlagRequired("resource-arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_getResourcePoliciesCmd)
 }

@@ -12,9 +12,11 @@ var snowball_getSoftwareUpdatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_getSoftwareUpdatesCmd).Standalone()
+	carapace.Gen(snowball_getSoftwareUpdatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_getSoftwareUpdatesCmd).Standalone()
 
-	snowball_getSoftwareUpdatesCmd.Flags().String("job-id", "", "The ID for a job that you want to get the software update file for, for example `JID123e4567-e89b-12d3-a456-426655440000`.")
-	snowball_getSoftwareUpdatesCmd.MarkFlagRequired("job-id")
+		snowball_getSoftwareUpdatesCmd.Flags().String("job-id", "", "The ID for a job that you want to get the software update file for, for example `JID123e4567-e89b-12d3-a456-426655440000`.")
+		snowball_getSoftwareUpdatesCmd.MarkFlagRequired("job-id")
+	})
 	snowballCmd.AddCommand(snowball_getSoftwareUpdatesCmd)
 }

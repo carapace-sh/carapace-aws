@@ -12,9 +12,11 @@ var mpa_listApprovalTeamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_listApprovalTeamsCmd).Standalone()
+	carapace.Gen(mpa_listApprovalTeamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_listApprovalTeamsCmd).Standalone()
 
-	mpa_listApprovalTeamsCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
-	mpa_listApprovalTeamsCmd.Flags().String("next-token", "", "If present, indicates that more output is available than is included in the current response.")
+		mpa_listApprovalTeamsCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
+		mpa_listApprovalTeamsCmd.Flags().String("next-token", "", "If present, indicates that more output is available than is included in the current response.")
+	})
 	mpaCmd.AddCommand(mpa_listApprovalTeamsCmd)
 }

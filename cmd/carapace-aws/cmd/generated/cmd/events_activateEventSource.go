@@ -12,9 +12,11 @@ var events_activateEventSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_activateEventSourceCmd).Standalone()
+	carapace.Gen(events_activateEventSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_activateEventSourceCmd).Standalone()
 
-	events_activateEventSourceCmd.Flags().String("name", "", "The name of the partner event source to activate.")
-	events_activateEventSourceCmd.MarkFlagRequired("name")
+		events_activateEventSourceCmd.Flags().String("name", "", "The name of the partner event source to activate.")
+		events_activateEventSourceCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_activateEventSourceCmd)
 }

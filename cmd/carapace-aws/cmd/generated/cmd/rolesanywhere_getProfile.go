@@ -12,9 +12,11 @@ var rolesanywhere_getProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_getProfileCmd).Standalone()
+	carapace.Gen(rolesanywhere_getProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_getProfileCmd).Standalone()
 
-	rolesanywhere_getProfileCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
-	rolesanywhere_getProfileCmd.MarkFlagRequired("profile-id")
+		rolesanywhere_getProfileCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
+		rolesanywhere_getProfileCmd.MarkFlagRequired("profile-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_getProfileCmd)
 }

@@ -12,10 +12,12 @@ var s3_getBucketAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketAclCmd).Standalone()
+	carapace.Gen(s3_getBucketAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketAclCmd).Standalone()
 
-	s3_getBucketAclCmd.Flags().String("bucket", "", "Specifies the S3 bucket whose ACL is being requested.")
-	s3_getBucketAclCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketAclCmd.MarkFlagRequired("bucket")
+		s3_getBucketAclCmd.Flags().String("bucket", "", "Specifies the S3 bucket whose ACL is being requested.")
+		s3_getBucketAclCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketAclCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getBucketAclCmd)
 }

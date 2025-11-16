@@ -12,7 +12,9 @@ var greengrass_getServiceRoleForAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getServiceRoleForAccountCmd).Standalone()
+	carapace.Gen(greengrass_getServiceRoleForAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getServiceRoleForAccountCmd).Standalone()
 
+	})
 	greengrassCmd.AddCommand(greengrass_getServiceRoleForAccountCmd)
 }

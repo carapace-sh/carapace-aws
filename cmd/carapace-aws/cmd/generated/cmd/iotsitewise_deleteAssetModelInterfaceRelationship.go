@@ -12,12 +12,14 @@ var iotsitewise_deleteAssetModelInterfaceRelationshipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_deleteAssetModelInterfaceRelationshipCmd).Standalone()
+	carapace.Gen(iotsitewise_deleteAssetModelInterfaceRelationshipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_deleteAssetModelInterfaceRelationshipCmd).Standalone()
 
-	iotsitewise_deleteAssetModelInterfaceRelationshipCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
-	iotsitewise_deleteAssetModelInterfaceRelationshipCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_deleteAssetModelInterfaceRelationshipCmd.Flags().String("interface-asset-model-id", "", "The ID of the interface asset model.")
-	iotsitewise_deleteAssetModelInterfaceRelationshipCmd.MarkFlagRequired("asset-model-id")
-	iotsitewise_deleteAssetModelInterfaceRelationshipCmd.MarkFlagRequired("interface-asset-model-id")
+		iotsitewise_deleteAssetModelInterfaceRelationshipCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
+		iotsitewise_deleteAssetModelInterfaceRelationshipCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_deleteAssetModelInterfaceRelationshipCmd.Flags().String("interface-asset-model-id", "", "The ID of the interface asset model.")
+		iotsitewise_deleteAssetModelInterfaceRelationshipCmd.MarkFlagRequired("asset-model-id")
+		iotsitewise_deleteAssetModelInterfaceRelationshipCmd.MarkFlagRequired("interface-asset-model-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_deleteAssetModelInterfaceRelationshipCmd)
 }

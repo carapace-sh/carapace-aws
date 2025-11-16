@@ -12,9 +12,11 @@ var securityhub_declineInvitationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_declineInvitationsCmd).Standalone()
+	carapace.Gen(securityhub_declineInvitationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_declineInvitationsCmd).Standalone()
 
-	securityhub_declineInvitationsCmd.Flags().String("account-ids", "", "The list of prospective member account IDs for which to decline an invitation.")
-	securityhub_declineInvitationsCmd.MarkFlagRequired("account-ids")
+		securityhub_declineInvitationsCmd.Flags().String("account-ids", "", "The list of prospective member account IDs for which to decline an invitation.")
+		securityhub_declineInvitationsCmd.MarkFlagRequired("account-ids")
+	})
 	securityhubCmd.AddCommand(securityhub_declineInvitationsCmd)
 }

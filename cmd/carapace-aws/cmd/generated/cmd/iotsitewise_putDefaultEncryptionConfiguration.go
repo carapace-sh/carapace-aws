@@ -12,10 +12,12 @@ var iotsitewise_putDefaultEncryptionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_putDefaultEncryptionConfigurationCmd).Standalone()
+	carapace.Gen(iotsitewise_putDefaultEncryptionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_putDefaultEncryptionConfigurationCmd).Standalone()
 
-	iotsitewise_putDefaultEncryptionConfigurationCmd.Flags().String("encryption-type", "", "The type of encryption used for the encryption configuration.")
-	iotsitewise_putDefaultEncryptionConfigurationCmd.Flags().String("kms-key-id", "", "The Key ID of the customer managed key used for KMS encryption.")
-	iotsitewise_putDefaultEncryptionConfigurationCmd.MarkFlagRequired("encryption-type")
+		iotsitewise_putDefaultEncryptionConfigurationCmd.Flags().String("encryption-type", "", "The type of encryption used for the encryption configuration.")
+		iotsitewise_putDefaultEncryptionConfigurationCmd.Flags().String("kms-key-id", "", "The Key ID of the customer managed key used for KMS encryption.")
+		iotsitewise_putDefaultEncryptionConfigurationCmd.MarkFlagRequired("encryption-type")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_putDefaultEncryptionConfigurationCmd)
 }

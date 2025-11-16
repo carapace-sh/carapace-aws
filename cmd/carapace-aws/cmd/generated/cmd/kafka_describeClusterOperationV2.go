@@ -12,9 +12,11 @@ var kafka_describeClusterOperationV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_describeClusterOperationV2Cmd).Standalone()
+	carapace.Gen(kafka_describeClusterOperationV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_describeClusterOperationV2Cmd).Standalone()
 
-	kafka_describeClusterOperationV2Cmd.Flags().String("cluster-operation-arn", "", "ARN of the cluster operation to describe.")
-	kafka_describeClusterOperationV2Cmd.MarkFlagRequired("cluster-operation-arn")
+		kafka_describeClusterOperationV2Cmd.Flags().String("cluster-operation-arn", "", "ARN of the cluster operation to describe.")
+		kafka_describeClusterOperationV2Cmd.MarkFlagRequired("cluster-operation-arn")
+	})
 	kafkaCmd.AddCommand(kafka_describeClusterOperationV2Cmd)
 }

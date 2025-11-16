@@ -12,9 +12,11 @@ var forecast_deleteForecastExportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_deleteForecastExportJobCmd).Standalone()
+	carapace.Gen(forecast_deleteForecastExportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_deleteForecastExportJobCmd).Standalone()
 
-	forecast_deleteForecastExportJobCmd.Flags().String("forecast-export-job-arn", "", "The Amazon Resource Name (ARN) of the forecast export job to delete.")
-	forecast_deleteForecastExportJobCmd.MarkFlagRequired("forecast-export-job-arn")
+		forecast_deleteForecastExportJobCmd.Flags().String("forecast-export-job-arn", "", "The Amazon Resource Name (ARN) of the forecast export job to delete.")
+		forecast_deleteForecastExportJobCmd.MarkFlagRequired("forecast-export-job-arn")
+	})
 	forecastCmd.AddCommand(forecast_deleteForecastExportJobCmd)
 }

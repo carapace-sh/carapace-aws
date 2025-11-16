@@ -12,10 +12,12 @@ var route53RecoveryReadiness_listRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_listRulesCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_listRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_listRulesCmd).Standalone()
 
-	route53RecoveryReadiness_listRulesCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
-	route53RecoveryReadiness_listRulesCmd.Flags().String("next-token", "", "The token that identifies which batch of results you want to see.")
-	route53RecoveryReadiness_listRulesCmd.Flags().String("resource-type", "", "The resource type that a readiness rule applies to.")
+		route53RecoveryReadiness_listRulesCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
+		route53RecoveryReadiness_listRulesCmd.Flags().String("next-token", "", "The token that identifies which batch of results you want to see.")
+		route53RecoveryReadiness_listRulesCmd.Flags().String("resource-type", "", "The resource type that a readiness rule applies to.")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_listRulesCmd)
 }

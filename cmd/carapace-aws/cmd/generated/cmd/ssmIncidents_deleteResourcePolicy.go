@@ -12,11 +12,13 @@ var ssmIncidents_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(ssmIncidents_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_deleteResourcePolicyCmd).Standalone()
 
-	ssmIncidents_deleteResourcePolicyCmd.Flags().String("policy-id", "", "The ID of the resource policy you're deleting.")
-	ssmIncidents_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you're deleting the policy from.")
-	ssmIncidents_deleteResourcePolicyCmd.MarkFlagRequired("policy-id")
-	ssmIncidents_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		ssmIncidents_deleteResourcePolicyCmd.Flags().String("policy-id", "", "The ID of the resource policy you're deleting.")
+		ssmIncidents_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you're deleting the policy from.")
+		ssmIncidents_deleteResourcePolicyCmd.MarkFlagRequired("policy-id")
+		ssmIncidents_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_deleteResourcePolicyCmd)
 }

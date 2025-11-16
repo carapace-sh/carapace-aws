@@ -12,14 +12,16 @@ var ec2_describeOutpostLagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeOutpostLagsCmd).Standalone()
+	carapace.Gen(ec2_describeOutpostLagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeOutpostLagsCmd).Standalone()
 
-	ec2_describeOutpostLagsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeOutpostLagsCmd.Flags().String("filters", "", "The filters to use for narrowing down the request.")
-	ec2_describeOutpostLagsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	ec2_describeOutpostLagsCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	ec2_describeOutpostLagsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeOutpostLagsCmd.Flags().String("outpost-lag-ids", "", "The IDs of the Outpost LAGs.")
-	ec2_describeOutpostLagsCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeOutpostLagsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeOutpostLagsCmd.Flags().String("filters", "", "The filters to use for narrowing down the request.")
+		ec2_describeOutpostLagsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		ec2_describeOutpostLagsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		ec2_describeOutpostLagsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeOutpostLagsCmd.Flags().String("outpost-lag-ids", "", "The IDs of the Outpost LAGs.")
+		ec2_describeOutpostLagsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeOutpostLagsCmd)
 }

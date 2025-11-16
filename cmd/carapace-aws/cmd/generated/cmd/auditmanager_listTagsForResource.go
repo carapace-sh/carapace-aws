@@ -12,9 +12,11 @@ var auditmanager_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_listTagsForResourceCmd).Standalone()
+	carapace.Gen(auditmanager_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_listTagsForResourceCmd).Standalone()
 
-	auditmanager_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	auditmanager_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		auditmanager_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		auditmanager_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_listTagsForResourceCmd)
 }

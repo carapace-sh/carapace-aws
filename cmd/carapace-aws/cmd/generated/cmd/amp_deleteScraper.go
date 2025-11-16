@@ -12,10 +12,12 @@ var amp_deleteScraperCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_deleteScraperCmd).Standalone()
+	carapace.Gen(amp_deleteScraperCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_deleteScraperCmd).Standalone()
 
-	amp_deleteScraperCmd.Flags().String("client-token", "", "(Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	amp_deleteScraperCmd.Flags().String("scraper-id", "", "The ID of the scraper to delete.")
-	amp_deleteScraperCmd.MarkFlagRequired("scraper-id")
+		amp_deleteScraperCmd.Flags().String("client-token", "", "(Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		amp_deleteScraperCmd.Flags().String("scraper-id", "", "The ID of the scraper to delete.")
+		amp_deleteScraperCmd.MarkFlagRequired("scraper-id")
+	})
 	ampCmd.AddCommand(amp_deleteScraperCmd)
 }

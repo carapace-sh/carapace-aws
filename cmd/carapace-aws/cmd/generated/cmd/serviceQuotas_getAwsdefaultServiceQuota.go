@@ -12,11 +12,13 @@ var serviceQuotas_getAwsdefaultServiceQuotaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_getAwsdefaultServiceQuotaCmd).Standalone()
+	carapace.Gen(serviceQuotas_getAwsdefaultServiceQuotaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_getAwsdefaultServiceQuotaCmd).Standalone()
 
-	serviceQuotas_getAwsdefaultServiceQuotaCmd.Flags().String("quota-code", "", "Specifies the quota identifier.")
-	serviceQuotas_getAwsdefaultServiceQuotaCmd.Flags().String("service-code", "", "Specifies the service identifier.")
-	serviceQuotas_getAwsdefaultServiceQuotaCmd.MarkFlagRequired("quota-code")
-	serviceQuotas_getAwsdefaultServiceQuotaCmd.MarkFlagRequired("service-code")
+		serviceQuotas_getAwsdefaultServiceQuotaCmd.Flags().String("quota-code", "", "Specifies the quota identifier.")
+		serviceQuotas_getAwsdefaultServiceQuotaCmd.Flags().String("service-code", "", "Specifies the service identifier.")
+		serviceQuotas_getAwsdefaultServiceQuotaCmd.MarkFlagRequired("quota-code")
+		serviceQuotas_getAwsdefaultServiceQuotaCmd.MarkFlagRequired("service-code")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_getAwsdefaultServiceQuotaCmd)
 }

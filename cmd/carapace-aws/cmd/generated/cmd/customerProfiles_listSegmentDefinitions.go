@@ -12,11 +12,13 @@ var customerProfiles_listSegmentDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_listSegmentDefinitionsCmd).Standalone()
+	carapace.Gen(customerProfiles_listSegmentDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_listSegmentDefinitionsCmd).Standalone()
 
-	customerProfiles_listSegmentDefinitionsCmd.Flags().String("domain-name", "", "The unique identifier of the domain.")
-	customerProfiles_listSegmentDefinitionsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	customerProfiles_listSegmentDefinitionsCmd.Flags().String("next-token", "", "The pagination token from the previous call.")
-	customerProfiles_listSegmentDefinitionsCmd.MarkFlagRequired("domain-name")
+		customerProfiles_listSegmentDefinitionsCmd.Flags().String("domain-name", "", "The unique identifier of the domain.")
+		customerProfiles_listSegmentDefinitionsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		customerProfiles_listSegmentDefinitionsCmd.Flags().String("next-token", "", "The pagination token from the previous call.")
+		customerProfiles_listSegmentDefinitionsCmd.MarkFlagRequired("domain-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_listSegmentDefinitionsCmd)
 }

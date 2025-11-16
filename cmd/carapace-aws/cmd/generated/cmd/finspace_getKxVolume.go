@@ -12,11 +12,13 @@ var finspace_getKxVolumeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_getKxVolumeCmd).Standalone()
+	carapace.Gen(finspace_getKxVolumeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_getKxVolumeCmd).Standalone()
 
-	finspace_getKxVolumeCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment, whose clusters can attach to the volume.")
-	finspace_getKxVolumeCmd.Flags().String("volume-name", "", "A unique identifier for the volume.")
-	finspace_getKxVolumeCmd.MarkFlagRequired("environment-id")
-	finspace_getKxVolumeCmd.MarkFlagRequired("volume-name")
+		finspace_getKxVolumeCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment, whose clusters can attach to the volume.")
+		finspace_getKxVolumeCmd.Flags().String("volume-name", "", "A unique identifier for the volume.")
+		finspace_getKxVolumeCmd.MarkFlagRequired("environment-id")
+		finspace_getKxVolumeCmd.MarkFlagRequired("volume-name")
+	})
 	finspaceCmd.AddCommand(finspace_getKxVolumeCmd)
 }

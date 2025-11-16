@@ -12,9 +12,11 @@ var guardduty_listOrganizationAdminAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_listOrganizationAdminAccountsCmd).Standalone()
+	carapace.Gen(guardduty_listOrganizationAdminAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_listOrganizationAdminAccountsCmd).Standalone()
 
-	guardduty_listOrganizationAdminAccountsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	guardduty_listOrganizationAdminAccountsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
+		guardduty_listOrganizationAdminAccountsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		guardduty_listOrganizationAdminAccountsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
+	})
 	guarddutyCmd.AddCommand(guardduty_listOrganizationAdminAccountsCmd)
 }

@@ -12,9 +12,11 @@ var entityresolution_deleteSchemaMappingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_deleteSchemaMappingCmd).Standalone()
+	carapace.Gen(entityresolution_deleteSchemaMappingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_deleteSchemaMappingCmd).Standalone()
 
-	entityresolution_deleteSchemaMappingCmd.Flags().String("schema-name", "", "The name of the schema to delete.")
-	entityresolution_deleteSchemaMappingCmd.MarkFlagRequired("schema-name")
+		entityresolution_deleteSchemaMappingCmd.Flags().String("schema-name", "", "The name of the schema to delete.")
+		entityresolution_deleteSchemaMappingCmd.MarkFlagRequired("schema-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_deleteSchemaMappingCmd)
 }

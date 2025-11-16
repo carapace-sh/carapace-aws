@@ -12,9 +12,11 @@ var rekognition_stopStreamProcessorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_stopStreamProcessorCmd).Standalone()
+	carapace.Gen(rekognition_stopStreamProcessorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_stopStreamProcessorCmd).Standalone()
 
-	rekognition_stopStreamProcessorCmd.Flags().String("name", "", "The name of a stream processor created by [CreateStreamProcessor]().")
-	rekognition_stopStreamProcessorCmd.MarkFlagRequired("name")
+		rekognition_stopStreamProcessorCmd.Flags().String("name", "", "The name of a stream processor created by [CreateStreamProcessor]().")
+		rekognition_stopStreamProcessorCmd.MarkFlagRequired("name")
+	})
 	rekognitionCmd.AddCommand(rekognition_stopStreamProcessorCmd)
 }

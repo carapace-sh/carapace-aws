@@ -12,11 +12,13 @@ var ssmIncidents_batchGetIncidentFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_batchGetIncidentFindingsCmd).Standalone()
+	carapace.Gen(ssmIncidents_batchGetIncidentFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_batchGetIncidentFindingsCmd).Standalone()
 
-	ssmIncidents_batchGetIncidentFindingsCmd.Flags().String("finding-ids", "", "A list of IDs of findings for which you want to view details.")
-	ssmIncidents_batchGetIncidentFindingsCmd.Flags().String("incident-record-arn", "", "The Amazon Resource Name (ARN) of the incident for which you want to view finding details.")
-	ssmIncidents_batchGetIncidentFindingsCmd.MarkFlagRequired("finding-ids")
-	ssmIncidents_batchGetIncidentFindingsCmd.MarkFlagRequired("incident-record-arn")
+		ssmIncidents_batchGetIncidentFindingsCmd.Flags().String("finding-ids", "", "A list of IDs of findings for which you want to view details.")
+		ssmIncidents_batchGetIncidentFindingsCmd.Flags().String("incident-record-arn", "", "The Amazon Resource Name (ARN) of the incident for which you want to view finding details.")
+		ssmIncidents_batchGetIncidentFindingsCmd.MarkFlagRequired("finding-ids")
+		ssmIncidents_batchGetIncidentFindingsCmd.MarkFlagRequired("incident-record-arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_batchGetIncidentFindingsCmd)
 }

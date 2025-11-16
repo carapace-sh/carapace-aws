@@ -12,10 +12,12 @@ var iotData_deleteThingShadowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotData_deleteThingShadowCmd).Standalone()
+	carapace.Gen(iotData_deleteThingShadowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotData_deleteThingShadowCmd).Standalone()
 
-	iotData_deleteThingShadowCmd.Flags().String("shadow-name", "", "The name of the shadow.")
-	iotData_deleteThingShadowCmd.Flags().String("thing-name", "", "The name of the thing.")
-	iotData_deleteThingShadowCmd.MarkFlagRequired("thing-name")
+		iotData_deleteThingShadowCmd.Flags().String("shadow-name", "", "The name of the shadow.")
+		iotData_deleteThingShadowCmd.Flags().String("thing-name", "", "The name of the thing.")
+		iotData_deleteThingShadowCmd.MarkFlagRequired("thing-name")
+	})
 	iotDataCmd.AddCommand(iotData_deleteThingShadowCmd)
 }

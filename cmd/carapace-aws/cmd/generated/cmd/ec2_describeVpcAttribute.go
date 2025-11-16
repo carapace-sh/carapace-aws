@@ -12,14 +12,16 @@ var ec2_describeVpcAttributeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeVpcAttributeCmd).Standalone()
+	carapace.Gen(ec2_describeVpcAttributeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeVpcAttributeCmd).Standalone()
 
-	ec2_describeVpcAttributeCmd.Flags().String("attribute", "", "The VPC attribute.")
-	ec2_describeVpcAttributeCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeVpcAttributeCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeVpcAttributeCmd.Flags().String("vpc-id", "", "The ID of the VPC.")
-	ec2_describeVpcAttributeCmd.MarkFlagRequired("attribute")
-	ec2_describeVpcAttributeCmd.Flag("no-dry-run").Hidden = true
-	ec2_describeVpcAttributeCmd.MarkFlagRequired("vpc-id")
+		ec2_describeVpcAttributeCmd.Flags().String("attribute", "", "The VPC attribute.")
+		ec2_describeVpcAttributeCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeVpcAttributeCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeVpcAttributeCmd.Flags().String("vpc-id", "", "The ID of the VPC.")
+		ec2_describeVpcAttributeCmd.MarkFlagRequired("attribute")
+		ec2_describeVpcAttributeCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeVpcAttributeCmd.MarkFlagRequired("vpc-id")
+	})
 	ec2Cmd.AddCommand(ec2_describeVpcAttributeCmd)
 }

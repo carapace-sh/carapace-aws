@@ -12,7 +12,9 @@ var observabilityadmin_getTelemetryEvaluationStatusForOrganizationCmd = &cobra.C
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_getTelemetryEvaluationStatusForOrganizationCmd).Standalone()
+	carapace.Gen(observabilityadmin_getTelemetryEvaluationStatusForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_getTelemetryEvaluationStatusForOrganizationCmd).Standalone()
 
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_getTelemetryEvaluationStatusForOrganizationCmd)
 }

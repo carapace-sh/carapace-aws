@@ -12,9 +12,11 @@ var migrationhuborchestrator_listPluginsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_listPluginsCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_listPluginsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_listPluginsCmd).Standalone()
 
-	migrationhuborchestrator_listPluginsCmd.Flags().String("max-results", "", "The maximum number of plugins that can be returned.")
-	migrationhuborchestrator_listPluginsCmd.Flags().String("next-token", "", "The pagination token.")
+		migrationhuborchestrator_listPluginsCmd.Flags().String("max-results", "", "The maximum number of plugins that can be returned.")
+		migrationhuborchestrator_listPluginsCmd.Flags().String("next-token", "", "The pagination token.")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_listPluginsCmd)
 }

@@ -12,7 +12,9 @@ var organizations_deleteOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_deleteOrganizationCmd).Standalone()
+	carapace.Gen(organizations_deleteOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_deleteOrganizationCmd).Standalone()
 
+	})
 	organizationsCmd.AddCommand(organizations_deleteOrganizationCmd)
 }

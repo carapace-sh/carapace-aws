@@ -12,13 +12,15 @@ var apigateway_importRestApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_importRestApiCmd).Standalone()
+	carapace.Gen(apigateway_importRestApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_importRestApiCmd).Standalone()
 
-	apigateway_importRestApiCmd.Flags().String("body", "", "The POST request body containing external API definitions.")
-	apigateway_importRestApiCmd.Flags().Bool("fail-on-warnings", false, "A query parameter to indicate whether to rollback the API creation (`true`) or not (`false`) when a warning is encountered.")
-	apigateway_importRestApiCmd.Flags().Bool("no-fail-on-warnings", false, "A query parameter to indicate whether to rollback the API creation (`true`) or not (`false`) when a warning is encountered.")
-	apigateway_importRestApiCmd.Flags().String("parameters", "", "A key-value map of context-specific query string parameters specifying the behavior of different API importing operations.")
-	apigateway_importRestApiCmd.MarkFlagRequired("body")
-	apigateway_importRestApiCmd.Flag("no-fail-on-warnings").Hidden = true
+		apigateway_importRestApiCmd.Flags().String("body", "", "The POST request body containing external API definitions.")
+		apigateway_importRestApiCmd.Flags().Bool("fail-on-warnings", false, "A query parameter to indicate whether to rollback the API creation (`true`) or not (`false`) when a warning is encountered.")
+		apigateway_importRestApiCmd.Flags().Bool("no-fail-on-warnings", false, "A query parameter to indicate whether to rollback the API creation (`true`) or not (`false`) when a warning is encountered.")
+		apigateway_importRestApiCmd.Flags().String("parameters", "", "A key-value map of context-specific query string parameters specifying the behavior of different API importing operations.")
+		apigateway_importRestApiCmd.MarkFlagRequired("body")
+		apigateway_importRestApiCmd.Flag("no-fail-on-warnings").Hidden = true
+	})
 	apigatewayCmd.AddCommand(apigateway_importRestApiCmd)
 }

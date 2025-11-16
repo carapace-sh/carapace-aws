@@ -12,11 +12,13 @@ var amplify_getBackendEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_getBackendEnvironmentCmd).Standalone()
+	carapace.Gen(amplify_getBackendEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_getBackendEnvironmentCmd).Standalone()
 
-	amplify_getBackendEnvironmentCmd.Flags().String("app-id", "", "The unique id for an Amplify app.")
-	amplify_getBackendEnvironmentCmd.Flags().String("environment-name", "", "The name for the backend environment.")
-	amplify_getBackendEnvironmentCmd.MarkFlagRequired("app-id")
-	amplify_getBackendEnvironmentCmd.MarkFlagRequired("environment-name")
+		amplify_getBackendEnvironmentCmd.Flags().String("app-id", "", "The unique id for an Amplify app.")
+		amplify_getBackendEnvironmentCmd.Flags().String("environment-name", "", "The name for the backend environment.")
+		amplify_getBackendEnvironmentCmd.MarkFlagRequired("app-id")
+		amplify_getBackendEnvironmentCmd.MarkFlagRequired("environment-name")
+	})
 	amplifyCmd.AddCommand(amplify_getBackendEnvironmentCmd)
 }

@@ -12,9 +12,11 @@ var elasticache_deleteCacheSecurityGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_deleteCacheSecurityGroupCmd).Standalone()
+	carapace.Gen(elasticache_deleteCacheSecurityGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_deleteCacheSecurityGroupCmd).Standalone()
 
-	elasticache_deleteCacheSecurityGroupCmd.Flags().String("cache-security-group-name", "", "The name of the cache security group to delete.")
-	elasticache_deleteCacheSecurityGroupCmd.MarkFlagRequired("cache-security-group-name")
+		elasticache_deleteCacheSecurityGroupCmd.Flags().String("cache-security-group-name", "", "The name of the cache security group to delete.")
+		elasticache_deleteCacheSecurityGroupCmd.MarkFlagRequired("cache-security-group-name")
+	})
 	elasticacheCmd.AddCommand(elasticache_deleteCacheSecurityGroupCmd)
 }

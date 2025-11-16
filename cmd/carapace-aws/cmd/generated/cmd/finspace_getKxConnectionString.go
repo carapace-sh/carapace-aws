@@ -12,13 +12,15 @@ var finspace_getKxConnectionStringCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_getKxConnectionStringCmd).Standalone()
+	carapace.Gen(finspace_getKxConnectionStringCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_getKxConnectionStringCmd).Standalone()
 
-	finspace_getKxConnectionStringCmd.Flags().String("cluster-name", "", "A name of the kdb cluster.")
-	finspace_getKxConnectionStringCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_getKxConnectionStringCmd.Flags().String("user-arn", "", "The Amazon Resource Name (ARN) that identifies the user.")
-	finspace_getKxConnectionStringCmd.MarkFlagRequired("cluster-name")
-	finspace_getKxConnectionStringCmd.MarkFlagRequired("environment-id")
-	finspace_getKxConnectionStringCmd.MarkFlagRequired("user-arn")
+		finspace_getKxConnectionStringCmd.Flags().String("cluster-name", "", "A name of the kdb cluster.")
+		finspace_getKxConnectionStringCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_getKxConnectionStringCmd.Flags().String("user-arn", "", "The Amazon Resource Name (ARN) that identifies the user.")
+		finspace_getKxConnectionStringCmd.MarkFlagRequired("cluster-name")
+		finspace_getKxConnectionStringCmd.MarkFlagRequired("environment-id")
+		finspace_getKxConnectionStringCmd.MarkFlagRequired("user-arn")
+	})
 	finspaceCmd.AddCommand(finspace_getKxConnectionStringCmd)
 }

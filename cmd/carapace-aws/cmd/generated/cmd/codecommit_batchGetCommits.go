@@ -12,11 +12,13 @@ var codecommit_batchGetCommitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_batchGetCommitsCmd).Standalone()
+	carapace.Gen(codecommit_batchGetCommitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_batchGetCommitsCmd).Standalone()
 
-	codecommit_batchGetCommitsCmd.Flags().String("commit-ids", "", "The full commit IDs of the commits to get information about.")
-	codecommit_batchGetCommitsCmd.Flags().String("repository-name", "", "The name of the repository that contains the commits.")
-	codecommit_batchGetCommitsCmd.MarkFlagRequired("commit-ids")
-	codecommit_batchGetCommitsCmd.MarkFlagRequired("repository-name")
+		codecommit_batchGetCommitsCmd.Flags().String("commit-ids", "", "The full commit IDs of the commits to get information about.")
+		codecommit_batchGetCommitsCmd.Flags().String("repository-name", "", "The name of the repository that contains the commits.")
+		codecommit_batchGetCommitsCmd.MarkFlagRequired("commit-ids")
+		codecommit_batchGetCommitsCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_batchGetCommitsCmd)
 }

@@ -12,13 +12,15 @@ var grafana_listWorkspaceServiceAccountTokensCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_listWorkspaceServiceAccountTokensCmd).Standalone()
+	carapace.Gen(grafana_listWorkspaceServiceAccountTokensCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_listWorkspaceServiceAccountTokensCmd).Standalone()
 
-	grafana_listWorkspaceServiceAccountTokensCmd.Flags().String("max-results", "", "The maximum number of tokens to include in the results.")
-	grafana_listWorkspaceServiceAccountTokensCmd.Flags().String("next-token", "", "The token for the next set of service accounts to return.")
-	grafana_listWorkspaceServiceAccountTokensCmd.Flags().String("service-account-id", "", "The ID of the service account for which to return tokens.")
-	grafana_listWorkspaceServiceAccountTokensCmd.Flags().String("workspace-id", "", "The ID of the workspace for which to return tokens.")
-	grafana_listWorkspaceServiceAccountTokensCmd.MarkFlagRequired("service-account-id")
-	grafana_listWorkspaceServiceAccountTokensCmd.MarkFlagRequired("workspace-id")
+		grafana_listWorkspaceServiceAccountTokensCmd.Flags().String("max-results", "", "The maximum number of tokens to include in the results.")
+		grafana_listWorkspaceServiceAccountTokensCmd.Flags().String("next-token", "", "The token for the next set of service accounts to return.")
+		grafana_listWorkspaceServiceAccountTokensCmd.Flags().String("service-account-id", "", "The ID of the service account for which to return tokens.")
+		grafana_listWorkspaceServiceAccountTokensCmd.Flags().String("workspace-id", "", "The ID of the workspace for which to return tokens.")
+		grafana_listWorkspaceServiceAccountTokensCmd.MarkFlagRequired("service-account-id")
+		grafana_listWorkspaceServiceAccountTokensCmd.MarkFlagRequired("workspace-id")
+	})
 	grafanaCmd.AddCommand(grafana_listWorkspaceServiceAccountTokensCmd)
 }

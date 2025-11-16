@@ -12,9 +12,11 @@ var bedrock_getFoundationModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getFoundationModelCmd).Standalone()
+	carapace.Gen(bedrock_getFoundationModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getFoundationModelCmd).Standalone()
 
-	bedrock_getFoundationModelCmd.Flags().String("model-identifier", "", "The model identifier.")
-	bedrock_getFoundationModelCmd.MarkFlagRequired("model-identifier")
+		bedrock_getFoundationModelCmd.Flags().String("model-identifier", "", "The model identifier.")
+		bedrock_getFoundationModelCmd.MarkFlagRequired("model-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_getFoundationModelCmd)
 }

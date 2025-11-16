@@ -12,10 +12,12 @@ var cloudfront_deleteDistribution2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_deleteDistribution2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_deleteDistribution2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_deleteDistribution2020_05_31Cmd).Standalone()
 
-	cloudfront_deleteDistribution2020_05_31Cmd.Flags().String("id", "", "The distribution ID.")
-	cloudfront_deleteDistribution2020_05_31Cmd.Flags().String("if-match", "", "The value of the `ETag` header that you received when you disabled the distribution.")
-	cloudfront_deleteDistribution2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_deleteDistribution2020_05_31Cmd.Flags().String("id", "", "The distribution ID.")
+		cloudfront_deleteDistribution2020_05_31Cmd.Flags().String("if-match", "", "The value of the `ETag` header that you received when you disabled the distribution.")
+		cloudfront_deleteDistribution2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_deleteDistribution2020_05_31Cmd)
 }

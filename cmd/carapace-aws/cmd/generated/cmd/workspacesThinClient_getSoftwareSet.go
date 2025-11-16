@@ -12,9 +12,11 @@ var workspacesThinClient_getSoftwareSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClient_getSoftwareSetCmd).Standalone()
+	carapace.Gen(workspacesThinClient_getSoftwareSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClient_getSoftwareSetCmd).Standalone()
 
-	workspacesThinClient_getSoftwareSetCmd.Flags().String("id", "", "The ID of the software set for which to return information.")
-	workspacesThinClient_getSoftwareSetCmd.MarkFlagRequired("id")
+		workspacesThinClient_getSoftwareSetCmd.Flags().String("id", "", "The ID of the software set for which to return information.")
+		workspacesThinClient_getSoftwareSetCmd.MarkFlagRequired("id")
+	})
 	workspacesThinClientCmd.AddCommand(workspacesThinClient_getSoftwareSetCmd)
 }

@@ -12,9 +12,11 @@ var sns_deleteSmssandboxPhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_deleteSmssandboxPhoneNumberCmd).Standalone()
+	carapace.Gen(sns_deleteSmssandboxPhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_deleteSmssandboxPhoneNumberCmd).Standalone()
 
-	sns_deleteSmssandboxPhoneNumberCmd.Flags().String("phone-number", "", "The destination phone number to delete.")
-	sns_deleteSmssandboxPhoneNumberCmd.MarkFlagRequired("phone-number")
+		sns_deleteSmssandboxPhoneNumberCmd.Flags().String("phone-number", "", "The destination phone number to delete.")
+		sns_deleteSmssandboxPhoneNumberCmd.MarkFlagRequired("phone-number")
+	})
 	snsCmd.AddCommand(sns_deleteSmssandboxPhoneNumberCmd)
 }

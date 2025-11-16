@@ -12,7 +12,9 @@ var dlmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dlmCmd).Standalone()
+	carapace.Gen(dlmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dlmCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(dlmCmd)
 }

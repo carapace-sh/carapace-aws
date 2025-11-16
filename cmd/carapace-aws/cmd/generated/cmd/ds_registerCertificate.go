@@ -12,13 +12,15 @@ var ds_registerCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_registerCertificateCmd).Standalone()
+	carapace.Gen(ds_registerCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_registerCertificateCmd).Standalone()
 
-	ds_registerCertificateCmd.Flags().String("certificate-data", "", "The certificate PEM string that needs to be registered.")
-	ds_registerCertificateCmd.Flags().String("client-cert-auth-settings", "", "A `ClientCertAuthSettings` object that contains client certificate authentication settings.")
-	ds_registerCertificateCmd.Flags().String("directory-id", "", "The identifier of the directory.")
-	ds_registerCertificateCmd.Flags().String("type", "", "The function that the registered certificate performs.")
-	ds_registerCertificateCmd.MarkFlagRequired("certificate-data")
-	ds_registerCertificateCmd.MarkFlagRequired("directory-id")
+		ds_registerCertificateCmd.Flags().String("certificate-data", "", "The certificate PEM string that needs to be registered.")
+		ds_registerCertificateCmd.Flags().String("client-cert-auth-settings", "", "A `ClientCertAuthSettings` object that contains client certificate authentication settings.")
+		ds_registerCertificateCmd.Flags().String("directory-id", "", "The identifier of the directory.")
+		ds_registerCertificateCmd.Flags().String("type", "", "The function that the registered certificate performs.")
+		ds_registerCertificateCmd.MarkFlagRequired("certificate-data")
+		ds_registerCertificateCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_registerCertificateCmd)
 }

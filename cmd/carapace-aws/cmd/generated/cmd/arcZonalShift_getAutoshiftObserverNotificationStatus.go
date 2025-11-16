@@ -12,7 +12,9 @@ var arcZonalShift_getAutoshiftObserverNotificationStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_getAutoshiftObserverNotificationStatusCmd).Standalone()
+	carapace.Gen(arcZonalShift_getAutoshiftObserverNotificationStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_getAutoshiftObserverNotificationStatusCmd).Standalone()
 
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_getAutoshiftObserverNotificationStatusCmd)
 }

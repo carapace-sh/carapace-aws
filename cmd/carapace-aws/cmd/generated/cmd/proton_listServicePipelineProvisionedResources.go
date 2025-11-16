@@ -12,10 +12,12 @@ var proton_listServicePipelineProvisionedResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_listServicePipelineProvisionedResourcesCmd).Standalone()
+	carapace.Gen(proton_listServicePipelineProvisionedResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_listServicePipelineProvisionedResourcesCmd).Standalone()
 
-	proton_listServicePipelineProvisionedResourcesCmd.Flags().String("next-token", "", "A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the list of provisioned resources that was previously requested.")
-	proton_listServicePipelineProvisionedResourcesCmd.Flags().String("service-name", "", "The name of the service whose pipeline's provisioned resources you want.")
-	proton_listServicePipelineProvisionedResourcesCmd.MarkFlagRequired("service-name")
+		proton_listServicePipelineProvisionedResourcesCmd.Flags().String("next-token", "", "A token that indicates the location of the next provisioned resource in the array of provisioned resources, after the list of provisioned resources that was previously requested.")
+		proton_listServicePipelineProvisionedResourcesCmd.Flags().String("service-name", "", "The name of the service whose pipeline's provisioned resources you want.")
+		proton_listServicePipelineProvisionedResourcesCmd.MarkFlagRequired("service-name")
+	})
 	protonCmd.AddCommand(proton_listServicePipelineProvisionedResourcesCmd)
 }

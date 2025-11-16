@@ -12,11 +12,13 @@ var amplifybackend_deleteBackendCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_deleteBackendCmd).Standalone()
+	carapace.Gen(amplifybackend_deleteBackendCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_deleteBackendCmd).Standalone()
 
-	amplifybackend_deleteBackendCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_deleteBackendCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
-	amplifybackend_deleteBackendCmd.MarkFlagRequired("app-id")
-	amplifybackend_deleteBackendCmd.MarkFlagRequired("backend-environment-name")
+		amplifybackend_deleteBackendCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_deleteBackendCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
+		amplifybackend_deleteBackendCmd.MarkFlagRequired("app-id")
+		amplifybackend_deleteBackendCmd.MarkFlagRequired("backend-environment-name")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_deleteBackendCmd)
 }

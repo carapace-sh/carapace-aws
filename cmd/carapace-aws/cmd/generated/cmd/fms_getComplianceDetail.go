@@ -12,11 +12,13 @@ var fms_getComplianceDetailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_getComplianceDetailCmd).Standalone()
+	carapace.Gen(fms_getComplianceDetailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_getComplianceDetailCmd).Standalone()
 
-	fms_getComplianceDetailCmd.Flags().String("member-account", "", "The Amazon Web Services account that owns the resources that you want to get the details for.")
-	fms_getComplianceDetailCmd.Flags().String("policy-id", "", "The ID of the policy that you want to get the details for.")
-	fms_getComplianceDetailCmd.MarkFlagRequired("member-account")
-	fms_getComplianceDetailCmd.MarkFlagRequired("policy-id")
+		fms_getComplianceDetailCmd.Flags().String("member-account", "", "The Amazon Web Services account that owns the resources that you want to get the details for.")
+		fms_getComplianceDetailCmd.Flags().String("policy-id", "", "The ID of the policy that you want to get the details for.")
+		fms_getComplianceDetailCmd.MarkFlagRequired("member-account")
+		fms_getComplianceDetailCmd.MarkFlagRequired("policy-id")
+	})
 	fmsCmd.AddCommand(fms_getComplianceDetailCmd)
 }

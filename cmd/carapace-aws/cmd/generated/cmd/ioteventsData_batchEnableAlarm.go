@@ -12,9 +12,11 @@ var ioteventsData_batchEnableAlarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ioteventsData_batchEnableAlarmCmd).Standalone()
+	carapace.Gen(ioteventsData_batchEnableAlarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ioteventsData_batchEnableAlarmCmd).Standalone()
 
-	ioteventsData_batchEnableAlarmCmd.Flags().String("enable-action-requests", "", "The list of enable action requests.")
-	ioteventsData_batchEnableAlarmCmd.MarkFlagRequired("enable-action-requests")
+		ioteventsData_batchEnableAlarmCmd.Flags().String("enable-action-requests", "", "The list of enable action requests.")
+		ioteventsData_batchEnableAlarmCmd.MarkFlagRequired("enable-action-requests")
+	})
 	ioteventsDataCmd.AddCommand(ioteventsData_batchEnableAlarmCmd)
 }

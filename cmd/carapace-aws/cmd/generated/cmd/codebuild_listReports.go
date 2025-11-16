@@ -12,11 +12,13 @@ var codebuild_listReportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_listReportsCmd).Standalone()
+	carapace.Gen(codebuild_listReportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_listReportsCmd).Standalone()
 
-	codebuild_listReportsCmd.Flags().String("filter", "", "A `ReportFilter` object used to filter the returned reports.")
-	codebuild_listReportsCmd.Flags().String("max-results", "", "The maximum number of paginated reports returned per response.")
-	codebuild_listReportsCmd.Flags().String("next-token", "", "During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.")
-	codebuild_listReportsCmd.Flags().String("sort-order", "", "Specifies the sort order for the list of returned reports.")
+		codebuild_listReportsCmd.Flags().String("filter", "", "A `ReportFilter` object used to filter the returned reports.")
+		codebuild_listReportsCmd.Flags().String("max-results", "", "The maximum number of paginated reports returned per response.")
+		codebuild_listReportsCmd.Flags().String("next-token", "", "During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.")
+		codebuild_listReportsCmd.Flags().String("sort-order", "", "Specifies the sort order for the list of returned reports.")
+	})
 	codebuildCmd.AddCommand(codebuild_listReportsCmd)
 }

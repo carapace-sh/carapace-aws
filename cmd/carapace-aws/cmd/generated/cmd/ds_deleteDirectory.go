@@ -12,9 +12,11 @@ var ds_deleteDirectoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_deleteDirectoryCmd).Standalone()
+	carapace.Gen(ds_deleteDirectoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_deleteDirectoryCmd).Standalone()
 
-	ds_deleteDirectoryCmd.Flags().String("directory-id", "", "The identifier of the directory to delete.")
-	ds_deleteDirectoryCmd.MarkFlagRequired("directory-id")
+		ds_deleteDirectoryCmd.Flags().String("directory-id", "", "The identifier of the directory to delete.")
+		ds_deleteDirectoryCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_deleteDirectoryCmd)
 }

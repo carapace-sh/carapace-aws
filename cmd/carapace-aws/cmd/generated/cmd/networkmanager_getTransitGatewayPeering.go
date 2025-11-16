@@ -12,9 +12,11 @@ var networkmanager_getTransitGatewayPeeringCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getTransitGatewayPeeringCmd).Standalone()
+	carapace.Gen(networkmanager_getTransitGatewayPeeringCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getTransitGatewayPeeringCmd).Standalone()
 
-	networkmanager_getTransitGatewayPeeringCmd.Flags().String("peering-id", "", "The ID of the peering request.")
-	networkmanager_getTransitGatewayPeeringCmd.MarkFlagRequired("peering-id")
+		networkmanager_getTransitGatewayPeeringCmd.Flags().String("peering-id", "", "The ID of the peering request.")
+		networkmanager_getTransitGatewayPeeringCmd.MarkFlagRequired("peering-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getTransitGatewayPeeringCmd)
 }

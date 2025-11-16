@@ -12,9 +12,11 @@ var lightsail_getInstanceSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getInstanceSnapshotCmd).Standalone()
+	carapace.Gen(lightsail_getInstanceSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getInstanceSnapshotCmd).Standalone()
 
-	lightsail_getInstanceSnapshotCmd.Flags().String("instance-snapshot-name", "", "The name of the snapshot for which you are requesting information.")
-	lightsail_getInstanceSnapshotCmd.MarkFlagRequired("instance-snapshot-name")
+		lightsail_getInstanceSnapshotCmd.Flags().String("instance-snapshot-name", "", "The name of the snapshot for which you are requesting information.")
+		lightsail_getInstanceSnapshotCmd.MarkFlagRequired("instance-snapshot-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getInstanceSnapshotCmd)
 }

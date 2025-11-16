@@ -12,10 +12,12 @@ var paymentCryptography_createAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_createAliasCmd).Standalone()
+	carapace.Gen(paymentCryptography_createAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_createAliasCmd).Standalone()
 
-	paymentCryptography_createAliasCmd.Flags().String("alias-name", "", "A friendly name that you can use to refer to a key.")
-	paymentCryptography_createAliasCmd.Flags().String("key-arn", "", "The `KeyARN` of the key to associate with the alias.")
-	paymentCryptography_createAliasCmd.MarkFlagRequired("alias-name")
+		paymentCryptography_createAliasCmd.Flags().String("alias-name", "", "A friendly name that you can use to refer to a key.")
+		paymentCryptography_createAliasCmd.Flags().String("key-arn", "", "The `KeyARN` of the key to associate with the alias.")
+		paymentCryptography_createAliasCmd.MarkFlagRequired("alias-name")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_createAliasCmd)
 }

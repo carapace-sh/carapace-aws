@@ -12,9 +12,11 @@ var inspector2_batchGetFindingDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_batchGetFindingDetailsCmd).Standalone()
+	carapace.Gen(inspector2_batchGetFindingDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_batchGetFindingDetailsCmd).Standalone()
 
-	inspector2_batchGetFindingDetailsCmd.Flags().String("finding-arns", "", "A list of finding ARNs.")
-	inspector2_batchGetFindingDetailsCmd.MarkFlagRequired("finding-arns")
+		inspector2_batchGetFindingDetailsCmd.Flags().String("finding-arns", "", "A list of finding ARNs.")
+		inspector2_batchGetFindingDetailsCmd.MarkFlagRequired("finding-arns")
+	})
 	inspector2Cmd.AddCommand(inspector2_batchGetFindingDetailsCmd)
 }

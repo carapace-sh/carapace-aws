@@ -12,11 +12,13 @@ var pinpoint_getSegmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getSegmentCmd).Standalone()
+	carapace.Gen(pinpoint_getSegmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getSegmentCmd).Standalone()
 
-	pinpoint_getSegmentCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getSegmentCmd.Flags().String("segment-id", "", "The unique identifier for the segment.")
-	pinpoint_getSegmentCmd.MarkFlagRequired("application-id")
-	pinpoint_getSegmentCmd.MarkFlagRequired("segment-id")
+		pinpoint_getSegmentCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getSegmentCmd.Flags().String("segment-id", "", "The unique identifier for the segment.")
+		pinpoint_getSegmentCmd.MarkFlagRequired("application-id")
+		pinpoint_getSegmentCmd.MarkFlagRequired("segment-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getSegmentCmd)
 }

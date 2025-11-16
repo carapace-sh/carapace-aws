@@ -12,7 +12,9 @@ var appsyncCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsyncCmd).Standalone()
+	carapace.Gen(appsyncCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsyncCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(appsyncCmd)
 }

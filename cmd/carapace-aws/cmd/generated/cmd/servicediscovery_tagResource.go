@@ -12,11 +12,13 @@ var servicediscovery_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_tagResourceCmd).Standalone()
+	carapace.Gen(servicediscovery_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_tagResourceCmd).Standalone()
 
-	servicediscovery_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.")
-	servicediscovery_tagResourceCmd.Flags().String("tags", "", "The tags to add to the specified resource.")
-	servicediscovery_tagResourceCmd.MarkFlagRequired("resource-arn")
-	servicediscovery_tagResourceCmd.MarkFlagRequired("tags")
+		servicediscovery_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.")
+		servicediscovery_tagResourceCmd.Flags().String("tags", "", "The tags to add to the specified resource.")
+		servicediscovery_tagResourceCmd.MarkFlagRequired("resource-arn")
+		servicediscovery_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_tagResourceCmd)
 }

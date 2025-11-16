@@ -12,9 +12,11 @@ var workspacesWeb_deleteDataProtectionSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_deleteDataProtectionSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_deleteDataProtectionSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_deleteDataProtectionSettingsCmd).Standalone()
 
-	workspacesWeb_deleteDataProtectionSettingsCmd.Flags().String("data-protection-settings-arn", "", "The ARN of the data protection settings.")
-	workspacesWeb_deleteDataProtectionSettingsCmd.MarkFlagRequired("data-protection-settings-arn")
+		workspacesWeb_deleteDataProtectionSettingsCmd.Flags().String("data-protection-settings-arn", "", "The ARN of the data protection settings.")
+		workspacesWeb_deleteDataProtectionSettingsCmd.MarkFlagRequired("data-protection-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_deleteDataProtectionSettingsCmd)
 }

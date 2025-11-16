@@ -12,13 +12,15 @@ var pinpoint_getSegmentVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getSegmentVersionCmd).Standalone()
+	carapace.Gen(pinpoint_getSegmentVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getSegmentVersionCmd).Standalone()
 
-	pinpoint_getSegmentVersionCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getSegmentVersionCmd.Flags().String("segment-id", "", "The unique identifier for the segment.")
-	pinpoint_getSegmentVersionCmd.Flags().String("version", "", "The unique version number (Version property) for the campaign version.")
-	pinpoint_getSegmentVersionCmd.MarkFlagRequired("application-id")
-	pinpoint_getSegmentVersionCmd.MarkFlagRequired("segment-id")
-	pinpoint_getSegmentVersionCmd.MarkFlagRequired("version")
+		pinpoint_getSegmentVersionCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getSegmentVersionCmd.Flags().String("segment-id", "", "The unique identifier for the segment.")
+		pinpoint_getSegmentVersionCmd.Flags().String("version", "", "The unique version number (Version property) for the campaign version.")
+		pinpoint_getSegmentVersionCmd.MarkFlagRequired("application-id")
+		pinpoint_getSegmentVersionCmd.MarkFlagRequired("segment-id")
+		pinpoint_getSegmentVersionCmd.MarkFlagRequired("version")
+	})
 	pinpointCmd.AddCommand(pinpoint_getSegmentVersionCmd)
 }

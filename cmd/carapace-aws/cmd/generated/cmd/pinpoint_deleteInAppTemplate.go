@@ -12,10 +12,12 @@ var pinpoint_deleteInAppTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteInAppTemplateCmd).Standalone()
+	carapace.Gen(pinpoint_deleteInAppTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteInAppTemplateCmd).Standalone()
 
-	pinpoint_deleteInAppTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_deleteInAppTemplateCmd.Flags().String("version", "", "The unique identifier for the version of the message template to update, retrieve information about, or delete.")
-	pinpoint_deleteInAppTemplateCmd.MarkFlagRequired("template-name")
+		pinpoint_deleteInAppTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_deleteInAppTemplateCmd.Flags().String("version", "", "The unique identifier for the version of the message template to update, retrieve information about, or delete.")
+		pinpoint_deleteInAppTemplateCmd.MarkFlagRequired("template-name")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteInAppTemplateCmd)
 }

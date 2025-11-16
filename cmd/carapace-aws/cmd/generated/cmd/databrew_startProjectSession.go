@@ -12,10 +12,12 @@ var databrew_startProjectSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_startProjectSessionCmd).Standalone()
+	carapace.Gen(databrew_startProjectSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_startProjectSessionCmd).Standalone()
 
-	databrew_startProjectSessionCmd.Flags().String("assume-control", "", "A value that, if true, enables you to take control of a session, even if a different client is currently accessing the project.")
-	databrew_startProjectSessionCmd.Flags().String("name", "", "The name of the project to act upon.")
-	databrew_startProjectSessionCmd.MarkFlagRequired("name")
+		databrew_startProjectSessionCmd.Flags().String("assume-control", "", "A value that, if true, enables you to take control of a session, even if a different client is currently accessing the project.")
+		databrew_startProjectSessionCmd.Flags().String("name", "", "The name of the project to act upon.")
+		databrew_startProjectSessionCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_startProjectSessionCmd)
 }

@@ -12,12 +12,14 @@ var cleanroomsml_getCollaborationTrainedModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_getCollaborationTrainedModelCmd).Standalone()
+	carapace.Gen(cleanroomsml_getCollaborationTrainedModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_getCollaborationTrainedModelCmd).Standalone()
 
-	cleanroomsml_getCollaborationTrainedModelCmd.Flags().String("collaboration-identifier", "", "The collaboration ID that contains the trained model that you want to return information about.")
-	cleanroomsml_getCollaborationTrainedModelCmd.Flags().String("trained-model-arn", "", "The Amazon Resource Name (ARN) of the trained model that you want to return information about.")
-	cleanroomsml_getCollaborationTrainedModelCmd.Flags().String("version-identifier", "", "The version identifier of the trained model to retrieve.")
-	cleanroomsml_getCollaborationTrainedModelCmd.MarkFlagRequired("collaboration-identifier")
-	cleanroomsml_getCollaborationTrainedModelCmd.MarkFlagRequired("trained-model-arn")
+		cleanroomsml_getCollaborationTrainedModelCmd.Flags().String("collaboration-identifier", "", "The collaboration ID that contains the trained model that you want to return information about.")
+		cleanroomsml_getCollaborationTrainedModelCmd.Flags().String("trained-model-arn", "", "The Amazon Resource Name (ARN) of the trained model that you want to return information about.")
+		cleanroomsml_getCollaborationTrainedModelCmd.Flags().String("version-identifier", "", "The version identifier of the trained model to retrieve.")
+		cleanroomsml_getCollaborationTrainedModelCmd.MarkFlagRequired("collaboration-identifier")
+		cleanroomsml_getCollaborationTrainedModelCmd.MarkFlagRequired("trained-model-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_getCollaborationTrainedModelCmd)
 }

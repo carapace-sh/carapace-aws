@@ -12,9 +12,11 @@ var rds_deleteOptionGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteOptionGroupCmd).Standalone()
+	carapace.Gen(rds_deleteOptionGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteOptionGroupCmd).Standalone()
 
-	rds_deleteOptionGroupCmd.Flags().String("option-group-name", "", "The name of the option group to be deleted.")
-	rds_deleteOptionGroupCmd.MarkFlagRequired("option-group-name")
+		rds_deleteOptionGroupCmd.Flags().String("option-group-name", "", "The name of the option group to be deleted.")
+		rds_deleteOptionGroupCmd.MarkFlagRequired("option-group-name")
+	})
 	rdsCmd.AddCommand(rds_deleteOptionGroupCmd)
 }

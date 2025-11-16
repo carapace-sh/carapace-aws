@@ -12,11 +12,13 @@ var chimeSdkVoice_updateVoiceProfileDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_updateVoiceProfileDomainCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_updateVoiceProfileDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_updateVoiceProfileDomainCmd).Standalone()
 
-	chimeSdkVoice_updateVoiceProfileDomainCmd.Flags().String("description", "", "The description of the voice profile domain.")
-	chimeSdkVoice_updateVoiceProfileDomainCmd.Flags().String("name", "", "The name of the voice profile domain.")
-	chimeSdkVoice_updateVoiceProfileDomainCmd.Flags().String("voice-profile-domain-id", "", "The domain ID.")
-	chimeSdkVoice_updateVoiceProfileDomainCmd.MarkFlagRequired("voice-profile-domain-id")
+		chimeSdkVoice_updateVoiceProfileDomainCmd.Flags().String("description", "", "The description of the voice profile domain.")
+		chimeSdkVoice_updateVoiceProfileDomainCmd.Flags().String("name", "", "The name of the voice profile domain.")
+		chimeSdkVoice_updateVoiceProfileDomainCmd.Flags().String("voice-profile-domain-id", "", "The domain ID.")
+		chimeSdkVoice_updateVoiceProfileDomainCmd.MarkFlagRequired("voice-profile-domain-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_updateVoiceProfileDomainCmd)
 }

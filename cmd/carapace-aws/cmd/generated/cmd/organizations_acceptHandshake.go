@@ -12,9 +12,11 @@ var organizations_acceptHandshakeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_acceptHandshakeCmd).Standalone()
+	carapace.Gen(organizations_acceptHandshakeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_acceptHandshakeCmd).Standalone()
 
-	organizations_acceptHandshakeCmd.Flags().String("handshake-id", "", "The unique identifier (ID) of the handshake that you want to accept.")
-	organizations_acceptHandshakeCmd.MarkFlagRequired("handshake-id")
+		organizations_acceptHandshakeCmd.Flags().String("handshake-id", "", "The unique identifier (ID) of the handshake that you want to accept.")
+		organizations_acceptHandshakeCmd.MarkFlagRequired("handshake-id")
+	})
 	organizationsCmd.AddCommand(organizations_acceptHandshakeCmd)
 }

@@ -12,11 +12,13 @@ var detective_getMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_getMembersCmd).Standalone()
+	carapace.Gen(detective_getMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_getMembersCmd).Standalone()
 
-	detective_getMembersCmd.Flags().String("account-ids", "", "The list of Amazon Web Services account identifiers for the member account for which to return member details.")
-	detective_getMembersCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph for which to request the member details.")
-	detective_getMembersCmd.MarkFlagRequired("account-ids")
-	detective_getMembersCmd.MarkFlagRequired("graph-arn")
+		detective_getMembersCmd.Flags().String("account-ids", "", "The list of Amazon Web Services account identifiers for the member account for which to return member details.")
+		detective_getMembersCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph for which to request the member details.")
+		detective_getMembersCmd.MarkFlagRequired("account-ids")
+		detective_getMembersCmd.MarkFlagRequired("graph-arn")
+	})
 	detectiveCmd.AddCommand(detective_getMembersCmd)
 }

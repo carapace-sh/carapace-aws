@@ -12,10 +12,12 @@ var route53RecoveryCluster_listRoutingControlsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryCluster_listRoutingControlsCmd).Standalone()
+	carapace.Gen(route53RecoveryCluster_listRoutingControlsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryCluster_listRoutingControlsCmd).Standalone()
 
-	route53RecoveryCluster_listRoutingControlsCmd.Flags().String("control-panel-arn", "", "The Amazon Resource Name (ARN) of the control panel of the routing controls to list.")
-	route53RecoveryCluster_listRoutingControlsCmd.Flags().String("max-results", "", "The number of routing controls objects that you want to return with this call.")
-	route53RecoveryCluster_listRoutingControlsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		route53RecoveryCluster_listRoutingControlsCmd.Flags().String("control-panel-arn", "", "The Amazon Resource Name (ARN) of the control panel of the routing controls to list.")
+		route53RecoveryCluster_listRoutingControlsCmd.Flags().String("max-results", "", "The number of routing controls objects that you want to return with this call.")
+		route53RecoveryCluster_listRoutingControlsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	route53RecoveryClusterCmd.AddCommand(route53RecoveryCluster_listRoutingControlsCmd)
 }

@@ -12,12 +12,14 @@ var gamelift_describeGameServerInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeGameServerInstancesCmd).Standalone()
+	carapace.Gen(gamelift_describeGameServerInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeGameServerInstancesCmd).Standalone()
 
-	gamelift_describeGameServerInstancesCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group.")
-	gamelift_describeGameServerInstancesCmd.Flags().String("instance-ids", "", "The Amazon EC2 instance IDs that you want to retrieve status on.")
-	gamelift_describeGameServerInstancesCmd.Flags().String("limit", "", "The maximum number of results to return.")
-	gamelift_describeGameServerInstancesCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
-	gamelift_describeGameServerInstancesCmd.MarkFlagRequired("game-server-group-name")
+		gamelift_describeGameServerInstancesCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group.")
+		gamelift_describeGameServerInstancesCmd.Flags().String("instance-ids", "", "The Amazon EC2 instance IDs that you want to retrieve status on.")
+		gamelift_describeGameServerInstancesCmd.Flags().String("limit", "", "The maximum number of results to return.")
+		gamelift_describeGameServerInstancesCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+		gamelift_describeGameServerInstancesCmd.MarkFlagRequired("game-server-group-name")
+	})
 	gameliftCmd.AddCommand(gamelift_describeGameServerInstancesCmd)
 }

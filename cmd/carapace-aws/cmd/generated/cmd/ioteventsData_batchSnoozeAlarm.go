@@ -12,9 +12,11 @@ var ioteventsData_batchSnoozeAlarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ioteventsData_batchSnoozeAlarmCmd).Standalone()
+	carapace.Gen(ioteventsData_batchSnoozeAlarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ioteventsData_batchSnoozeAlarmCmd).Standalone()
 
-	ioteventsData_batchSnoozeAlarmCmd.Flags().String("snooze-action-requests", "", "The list of snooze action requests.")
-	ioteventsData_batchSnoozeAlarmCmd.MarkFlagRequired("snooze-action-requests")
+		ioteventsData_batchSnoozeAlarmCmd.Flags().String("snooze-action-requests", "", "The list of snooze action requests.")
+		ioteventsData_batchSnoozeAlarmCmd.MarkFlagRequired("snooze-action-requests")
+	})
 	ioteventsDataCmd.AddCommand(ioteventsData_batchSnoozeAlarmCmd)
 }

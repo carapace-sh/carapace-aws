@@ -12,9 +12,11 @@ var dms_deleteCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteCertificateCmd).Standalone()
+	carapace.Gen(dms_deleteCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteCertificateCmd).Standalone()
 
-	dms_deleteCertificateCmd.Flags().String("certificate-arn", "", "The Amazon Resource Name (ARN) of the certificate.")
-	dms_deleteCertificateCmd.MarkFlagRequired("certificate-arn")
+		dms_deleteCertificateCmd.Flags().String("certificate-arn", "", "The Amazon Resource Name (ARN) of the certificate.")
+		dms_deleteCertificateCmd.MarkFlagRequired("certificate-arn")
+	})
 	dmsCmd.AddCommand(dms_deleteCertificateCmd)
 }

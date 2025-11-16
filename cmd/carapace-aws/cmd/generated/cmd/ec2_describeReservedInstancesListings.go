@@ -12,10 +12,12 @@ var ec2_describeReservedInstancesListingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeReservedInstancesListingsCmd).Standalone()
+	carapace.Gen(ec2_describeReservedInstancesListingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeReservedInstancesListingsCmd).Standalone()
 
-	ec2_describeReservedInstancesListingsCmd.Flags().String("filters", "", "One or more filters.")
-	ec2_describeReservedInstancesListingsCmd.Flags().String("reserved-instances-id", "", "One or more Reserved Instance IDs.")
-	ec2_describeReservedInstancesListingsCmd.Flags().String("reserved-instances-listing-id", "", "One or more Reserved Instance listing IDs.")
+		ec2_describeReservedInstancesListingsCmd.Flags().String("filters", "", "One or more filters.")
+		ec2_describeReservedInstancesListingsCmd.Flags().String("reserved-instances-id", "", "One or more Reserved Instance IDs.")
+		ec2_describeReservedInstancesListingsCmd.Flags().String("reserved-instances-listing-id", "", "One or more Reserved Instance listing IDs.")
+	})
 	ec2Cmd.AddCommand(ec2_describeReservedInstancesListingsCmd)
 }

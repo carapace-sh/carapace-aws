@@ -12,9 +12,11 @@ var codecommit_deleteCommentContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_deleteCommentContentCmd).Standalone()
+	carapace.Gen(codecommit_deleteCommentContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_deleteCommentContentCmd).Standalone()
 
-	codecommit_deleteCommentContentCmd.Flags().String("comment-id", "", "The unique, system-generated ID of the comment.")
-	codecommit_deleteCommentContentCmd.MarkFlagRequired("comment-id")
+		codecommit_deleteCommentContentCmd.Flags().String("comment-id", "", "The unique, system-generated ID of the comment.")
+		codecommit_deleteCommentContentCmd.MarkFlagRequired("comment-id")
+	})
 	codecommitCmd.AddCommand(codecommit_deleteCommentContentCmd)
 }

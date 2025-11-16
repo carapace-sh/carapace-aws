@@ -12,9 +12,11 @@ var neptunedata_getGremlinQueryStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_getGremlinQueryStatusCmd).Standalone()
+	carapace.Gen(neptunedata_getGremlinQueryStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_getGremlinQueryStatusCmd).Standalone()
 
-	neptunedata_getGremlinQueryStatusCmd.Flags().String("query-id", "", "The unique identifier that identifies the Gremlin query.")
-	neptunedata_getGremlinQueryStatusCmd.MarkFlagRequired("query-id")
+		neptunedata_getGremlinQueryStatusCmd.Flags().String("query-id", "", "The unique identifier that identifies the Gremlin query.")
+		neptunedata_getGremlinQueryStatusCmd.MarkFlagRequired("query-id")
+	})
 	neptunedataCmd.AddCommand(neptunedata_getGremlinQueryStatusCmd)
 }

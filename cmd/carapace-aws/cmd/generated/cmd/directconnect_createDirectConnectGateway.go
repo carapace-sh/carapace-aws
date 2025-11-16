@@ -12,11 +12,13 @@ var directconnect_createDirectConnectGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_createDirectConnectGatewayCmd).Standalone()
+	carapace.Gen(directconnect_createDirectConnectGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_createDirectConnectGatewayCmd).Standalone()
 
-	directconnect_createDirectConnectGatewayCmd.Flags().String("amazon-side-asn", "", "The autonomous system number (ASN) for Border Gateway Protocol (BGP) to be configured on the Amazon side of the connection.")
-	directconnect_createDirectConnectGatewayCmd.Flags().String("direct-connect-gateway-name", "", "The name of the Direct Connect gateway.")
-	directconnect_createDirectConnectGatewayCmd.Flags().String("tags", "", "The key-value pair tags associated with the request.")
-	directconnect_createDirectConnectGatewayCmd.MarkFlagRequired("direct-connect-gateway-name")
+		directconnect_createDirectConnectGatewayCmd.Flags().String("amazon-side-asn", "", "The autonomous system number (ASN) for Border Gateway Protocol (BGP) to be configured on the Amazon side of the connection.")
+		directconnect_createDirectConnectGatewayCmd.Flags().String("direct-connect-gateway-name", "", "The name of the Direct Connect gateway.")
+		directconnect_createDirectConnectGatewayCmd.Flags().String("tags", "", "The key-value pair tags associated with the request.")
+		directconnect_createDirectConnectGatewayCmd.MarkFlagRequired("direct-connect-gateway-name")
+	})
 	directconnectCmd.AddCommand(directconnect_createDirectConnectGatewayCmd)
 }

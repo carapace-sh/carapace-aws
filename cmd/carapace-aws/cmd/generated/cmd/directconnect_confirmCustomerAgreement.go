@@ -12,8 +12,10 @@ var directconnect_confirmCustomerAgreementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_confirmCustomerAgreementCmd).Standalone()
+	carapace.Gen(directconnect_confirmCustomerAgreementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_confirmCustomerAgreementCmd).Standalone()
 
-	directconnect_confirmCustomerAgreementCmd.Flags().String("agreement-name", "", "The name of the customer agreement.")
+		directconnect_confirmCustomerAgreementCmd.Flags().String("agreement-name", "", "The name of the customer agreement.")
+	})
 	directconnectCmd.AddCommand(directconnect_confirmCustomerAgreementCmd)
 }

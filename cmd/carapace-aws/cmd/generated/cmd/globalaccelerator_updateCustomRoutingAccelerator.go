@@ -12,13 +12,15 @@ var globalaccelerator_updateCustomRoutingAcceleratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_updateCustomRoutingAcceleratorCmd).Standalone()
+	carapace.Gen(globalaccelerator_updateCustomRoutingAcceleratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_updateCustomRoutingAcceleratorCmd).Standalone()
 
-	globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the accelerator to update.")
-	globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("enabled", "", "Indicates whether an accelerator is enabled.")
-	globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("ip-address-type", "", "The IP address type that an accelerator supports.")
-	globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("ip-addresses", "", "The IP addresses for an accelerator.")
-	globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("name", "", "The name of the accelerator.")
-	globalaccelerator_updateCustomRoutingAcceleratorCmd.MarkFlagRequired("accelerator-arn")
+		globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the accelerator to update.")
+		globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("enabled", "", "Indicates whether an accelerator is enabled.")
+		globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("ip-address-type", "", "The IP address type that an accelerator supports.")
+		globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("ip-addresses", "", "The IP addresses for an accelerator.")
+		globalaccelerator_updateCustomRoutingAcceleratorCmd.Flags().String("name", "", "The name of the accelerator.")
+		globalaccelerator_updateCustomRoutingAcceleratorCmd.MarkFlagRequired("accelerator-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_updateCustomRoutingAcceleratorCmd)
 }

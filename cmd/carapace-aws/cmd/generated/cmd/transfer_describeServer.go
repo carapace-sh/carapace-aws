@@ -12,9 +12,11 @@ var transfer_describeServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_describeServerCmd).Standalone()
+	carapace.Gen(transfer_describeServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_describeServerCmd).Standalone()
 
-	transfer_describeServerCmd.Flags().String("server-id", "", "A system-assigned unique identifier for a server.")
-	transfer_describeServerCmd.MarkFlagRequired("server-id")
+		transfer_describeServerCmd.Flags().String("server-id", "", "A system-assigned unique identifier for a server.")
+		transfer_describeServerCmd.MarkFlagRequired("server-id")
+	})
 	transferCmd.AddCommand(transfer_describeServerCmd)
 }

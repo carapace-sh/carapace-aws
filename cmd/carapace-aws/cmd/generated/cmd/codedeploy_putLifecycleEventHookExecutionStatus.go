@@ -12,10 +12,12 @@ var codedeploy_putLifecycleEventHookExecutionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_putLifecycleEventHookExecutionStatusCmd).Standalone()
+	carapace.Gen(codedeploy_putLifecycleEventHookExecutionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_putLifecycleEventHookExecutionStatusCmd).Standalone()
 
-	codedeploy_putLifecycleEventHookExecutionStatusCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
-	codedeploy_putLifecycleEventHookExecutionStatusCmd.Flags().String("lifecycle-event-hook-execution-id", "", "The execution ID of a deployment's lifecycle hook.")
-	codedeploy_putLifecycleEventHookExecutionStatusCmd.Flags().String("status", "", "The result of a Lambda function that validates a deployment lifecycle event.")
+		codedeploy_putLifecycleEventHookExecutionStatusCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
+		codedeploy_putLifecycleEventHookExecutionStatusCmd.Flags().String("lifecycle-event-hook-execution-id", "", "The execution ID of a deployment's lifecycle hook.")
+		codedeploy_putLifecycleEventHookExecutionStatusCmd.Flags().String("status", "", "The result of a Lambda function that validates a deployment lifecycle event.")
+	})
 	codedeployCmd.AddCommand(codedeploy_putLifecycleEventHookExecutionStatusCmd)
 }

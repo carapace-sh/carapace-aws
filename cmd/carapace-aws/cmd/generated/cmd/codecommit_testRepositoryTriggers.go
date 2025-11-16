@@ -12,11 +12,13 @@ var codecommit_testRepositoryTriggersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_testRepositoryTriggersCmd).Standalone()
+	carapace.Gen(codecommit_testRepositoryTriggersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_testRepositoryTriggersCmd).Standalone()
 
-	codecommit_testRepositoryTriggersCmd.Flags().String("repository-name", "", "The name of the repository in which to test the triggers.")
-	codecommit_testRepositoryTriggersCmd.Flags().String("triggers", "", "The list of triggers to test.")
-	codecommit_testRepositoryTriggersCmd.MarkFlagRequired("repository-name")
-	codecommit_testRepositoryTriggersCmd.MarkFlagRequired("triggers")
+		codecommit_testRepositoryTriggersCmd.Flags().String("repository-name", "", "The name of the repository in which to test the triggers.")
+		codecommit_testRepositoryTriggersCmd.Flags().String("triggers", "", "The list of triggers to test.")
+		codecommit_testRepositoryTriggersCmd.MarkFlagRequired("repository-name")
+		codecommit_testRepositoryTriggersCmd.MarkFlagRequired("triggers")
+	})
 	codecommitCmd.AddCommand(codecommit_testRepositoryTriggersCmd)
 }

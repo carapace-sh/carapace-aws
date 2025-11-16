@@ -12,7 +12,9 @@ var pinpointSmsVoiceV2_deleteAccountDefaultProtectConfigurationCmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteAccountDefaultProtectConfigurationCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteAccountDefaultProtectConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteAccountDefaultProtectConfigurationCmd).Standalone()
 
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteAccountDefaultProtectConfigurationCmd)
 }

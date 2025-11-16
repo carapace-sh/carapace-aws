@@ -12,11 +12,13 @@ var auditmanager_listKeywordsForDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_listKeywordsForDataSourceCmd).Standalone()
+	carapace.Gen(auditmanager_listKeywordsForDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_listKeywordsForDataSourceCmd).Standalone()
 
-	auditmanager_listKeywordsForDataSourceCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
-	auditmanager_listKeywordsForDataSourceCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	auditmanager_listKeywordsForDataSourceCmd.Flags().String("source", "", "The control mapping data source that the keywords apply to.")
-	auditmanager_listKeywordsForDataSourceCmd.MarkFlagRequired("source")
+		auditmanager_listKeywordsForDataSourceCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
+		auditmanager_listKeywordsForDataSourceCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		auditmanager_listKeywordsForDataSourceCmd.Flags().String("source", "", "The control mapping data source that the keywords apply to.")
+		auditmanager_listKeywordsForDataSourceCmd.MarkFlagRequired("source")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_listKeywordsForDataSourceCmd)
 }

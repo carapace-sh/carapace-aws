@@ -12,9 +12,11 @@ var medialive_startChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_startChannelCmd).Standalone()
+	carapace.Gen(medialive_startChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_startChannelCmd).Standalone()
 
-	medialive_startChannelCmd.Flags().String("channel-id", "", "A request to start a channel")
-	medialive_startChannelCmd.MarkFlagRequired("channel-id")
+		medialive_startChannelCmd.Flags().String("channel-id", "", "A request to start a channel")
+		medialive_startChannelCmd.MarkFlagRequired("channel-id")
+	})
 	medialiveCmd.AddCommand(medialive_startChannelCmd)
 }

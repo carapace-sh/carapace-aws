@@ -12,9 +12,11 @@ var bedrockDataAutomationRuntime_getDataAutomationStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockDataAutomationRuntime_getDataAutomationStatusCmd).Standalone()
+	carapace.Gen(bedrockDataAutomationRuntime_getDataAutomationStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockDataAutomationRuntime_getDataAutomationStatusCmd).Standalone()
 
-	bedrockDataAutomationRuntime_getDataAutomationStatusCmd.Flags().String("invocation-arn", "", "Invocation arn.")
-	bedrockDataAutomationRuntime_getDataAutomationStatusCmd.MarkFlagRequired("invocation-arn")
+		bedrockDataAutomationRuntime_getDataAutomationStatusCmd.Flags().String("invocation-arn", "", "Invocation arn.")
+		bedrockDataAutomationRuntime_getDataAutomationStatusCmd.MarkFlagRequired("invocation-arn")
+	})
 	bedrockDataAutomationRuntimeCmd.AddCommand(bedrockDataAutomationRuntime_getDataAutomationStatusCmd)
 }

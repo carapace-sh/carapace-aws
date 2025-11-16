@@ -12,9 +12,11 @@ var iotManagedIntegrations_deleteConnectorDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_deleteConnectorDestinationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_deleteConnectorDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_deleteConnectorDestinationCmd).Standalone()
 
-	iotManagedIntegrations_deleteConnectorDestinationCmd.Flags().String("identifier", "", "The identifier of the connector destination.")
-	iotManagedIntegrations_deleteConnectorDestinationCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_deleteConnectorDestinationCmd.Flags().String("identifier", "", "The identifier of the connector destination.")
+		iotManagedIntegrations_deleteConnectorDestinationCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_deleteConnectorDestinationCmd)
 }

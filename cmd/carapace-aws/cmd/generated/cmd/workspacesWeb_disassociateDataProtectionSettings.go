@@ -12,9 +12,11 @@ var workspacesWeb_disassociateDataProtectionSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_disassociateDataProtectionSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_disassociateDataProtectionSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_disassociateDataProtectionSettingsCmd).Standalone()
 
-	workspacesWeb_disassociateDataProtectionSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
-	workspacesWeb_disassociateDataProtectionSettingsCmd.MarkFlagRequired("portal-arn")
+		workspacesWeb_disassociateDataProtectionSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
+		workspacesWeb_disassociateDataProtectionSettingsCmd.MarkFlagRequired("portal-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_disassociateDataProtectionSettingsCmd)
 }

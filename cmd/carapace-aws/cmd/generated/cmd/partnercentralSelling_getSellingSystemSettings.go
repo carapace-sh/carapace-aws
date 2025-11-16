@@ -12,9 +12,11 @@ var partnercentralSelling_getSellingSystemSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(partnercentralSelling_getSellingSystemSettingsCmd).Standalone()
+	carapace.Gen(partnercentralSelling_getSellingSystemSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSelling_getSellingSystemSettingsCmd).Standalone()
 
-	partnercentralSelling_getSellingSystemSettingsCmd.Flags().String("catalog", "", "Specifies the catalog in which the settings are defined.")
-	partnercentralSelling_getSellingSystemSettingsCmd.MarkFlagRequired("catalog")
+		partnercentralSelling_getSellingSystemSettingsCmd.Flags().String("catalog", "", "Specifies the catalog in which the settings are defined.")
+		partnercentralSelling_getSellingSystemSettingsCmd.MarkFlagRequired("catalog")
+	})
 	partnercentralSellingCmd.AddCommand(partnercentralSelling_getSellingSystemSettingsCmd)
 }

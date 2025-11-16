@@ -12,7 +12,9 @@ var codebuild_listSourceCredentialsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_listSourceCredentialsCmd).Standalone()
+	carapace.Gen(codebuild_listSourceCredentialsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_listSourceCredentialsCmd).Standalone()
 
+	})
 	codebuildCmd.AddCommand(codebuild_listSourceCredentialsCmd)
 }

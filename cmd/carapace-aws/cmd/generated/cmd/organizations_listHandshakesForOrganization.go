@@ -12,10 +12,12 @@ var organizations_listHandshakesForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listHandshakesForOrganizationCmd).Standalone()
+	carapace.Gen(organizations_listHandshakesForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listHandshakesForOrganizationCmd).Standalone()
 
-	organizations_listHandshakesForOrganizationCmd.Flags().String("filter", "", "A filter of the handshakes that you want included in the response.")
-	organizations_listHandshakesForOrganizationCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	organizations_listHandshakesForOrganizationCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listHandshakesForOrganizationCmd.Flags().String("filter", "", "A filter of the handshakes that you want included in the response.")
+		organizations_listHandshakesForOrganizationCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		organizations_listHandshakesForOrganizationCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+	})
 	organizationsCmd.AddCommand(organizations_listHandshakesForOrganizationCmd)
 }

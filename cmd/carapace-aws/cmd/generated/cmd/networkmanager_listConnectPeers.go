@@ -12,11 +12,13 @@ var networkmanager_listConnectPeersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_listConnectPeersCmd).Standalone()
+	carapace.Gen(networkmanager_listConnectPeersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_listConnectPeersCmd).Standalone()
 
-	networkmanager_listConnectPeersCmd.Flags().String("connect-attachment-id", "", "The ID of the attachment.")
-	networkmanager_listConnectPeersCmd.Flags().String("core-network-id", "", "The ID of a core network.")
-	networkmanager_listConnectPeersCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	networkmanager_listConnectPeersCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		networkmanager_listConnectPeersCmd.Flags().String("connect-attachment-id", "", "The ID of the attachment.")
+		networkmanager_listConnectPeersCmd.Flags().String("core-network-id", "", "The ID of a core network.")
+		networkmanager_listConnectPeersCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		networkmanager_listConnectPeersCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_listConnectPeersCmd)
 }

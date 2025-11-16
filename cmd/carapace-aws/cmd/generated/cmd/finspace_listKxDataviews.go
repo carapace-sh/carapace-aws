@@ -12,13 +12,15 @@ var finspace_listKxDataviewsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_listKxDataviewsCmd).Standalone()
+	carapace.Gen(finspace_listKxDataviewsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_listKxDataviewsCmd).Standalone()
 
-	finspace_listKxDataviewsCmd.Flags().String("database-name", "", "The name of the database where the dataviews were created.")
-	finspace_listKxDataviewsCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment, for which you want to retrieve a list of dataviews.")
-	finspace_listKxDataviewsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	finspace_listKxDataviewsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
-	finspace_listKxDataviewsCmd.MarkFlagRequired("database-name")
-	finspace_listKxDataviewsCmd.MarkFlagRequired("environment-id")
+		finspace_listKxDataviewsCmd.Flags().String("database-name", "", "The name of the database where the dataviews were created.")
+		finspace_listKxDataviewsCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment, for which you want to retrieve a list of dataviews.")
+		finspace_listKxDataviewsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		finspace_listKxDataviewsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+		finspace_listKxDataviewsCmd.MarkFlagRequired("database-name")
+		finspace_listKxDataviewsCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_listKxDataviewsCmd)
 }

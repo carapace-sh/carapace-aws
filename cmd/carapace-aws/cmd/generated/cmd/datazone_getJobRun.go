@@ -12,11 +12,13 @@ var datazone_getJobRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getJobRunCmd).Standalone()
+	carapace.Gen(datazone_getJobRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getJobRunCmd).Standalone()
 
-	datazone_getJobRunCmd.Flags().String("domain-identifier", "", "The ID of the domain.")
-	datazone_getJobRunCmd.Flags().String("identifier", "", "The ID of the job run.")
-	datazone_getJobRunCmd.MarkFlagRequired("domain-identifier")
-	datazone_getJobRunCmd.MarkFlagRequired("identifier")
+		datazone_getJobRunCmd.Flags().String("domain-identifier", "", "The ID of the domain.")
+		datazone_getJobRunCmd.Flags().String("identifier", "", "The ID of the job run.")
+		datazone_getJobRunCmd.MarkFlagRequired("domain-identifier")
+		datazone_getJobRunCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getJobRunCmd)
 }

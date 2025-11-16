@@ -12,9 +12,11 @@ var applicationcostprofiler_listReportDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationcostprofiler_listReportDefinitionsCmd).Standalone()
+	carapace.Gen(applicationcostprofiler_listReportDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationcostprofiler_listReportDefinitionsCmd).Standalone()
 
-	applicationcostprofiler_listReportDefinitionsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	applicationcostprofiler_listReportDefinitionsCmd.Flags().String("next-token", "", "The token value from a previous call to access the next page of results.")
+		applicationcostprofiler_listReportDefinitionsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		applicationcostprofiler_listReportDefinitionsCmd.Flags().String("next-token", "", "The token value from a previous call to access the next page of results.")
+	})
 	applicationcostprofilerCmd.AddCommand(applicationcostprofiler_listReportDefinitionsCmd)
 }

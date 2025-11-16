@@ -12,11 +12,13 @@ var iotfleetwise_listModelManifestNodesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_listModelManifestNodesCmd).Standalone()
+	carapace.Gen(iotfleetwise_listModelManifestNodesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_listModelManifestNodesCmd).Standalone()
 
-	iotfleetwise_listModelManifestNodesCmd.Flags().String("max-results", "", "The maximum number of items to return, between 1 and 100, inclusive.")
-	iotfleetwise_listModelManifestNodesCmd.Flags().String("name", "", "The name of the vehicle model to list information about.")
-	iotfleetwise_listModelManifestNodesCmd.Flags().String("next-token", "", "A pagination token for the next set of results.")
-	iotfleetwise_listModelManifestNodesCmd.MarkFlagRequired("name")
+		iotfleetwise_listModelManifestNodesCmd.Flags().String("max-results", "", "The maximum number of items to return, between 1 and 100, inclusive.")
+		iotfleetwise_listModelManifestNodesCmd.Flags().String("name", "", "The name of the vehicle model to list information about.")
+		iotfleetwise_listModelManifestNodesCmd.Flags().String("next-token", "", "A pagination token for the next set of results.")
+		iotfleetwise_listModelManifestNodesCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_listModelManifestNodesCmd)
 }

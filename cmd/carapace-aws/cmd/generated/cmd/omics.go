@@ -12,7 +12,9 @@ var omicsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omicsCmd).Standalone()
+	carapace.Gen(omicsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omicsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(omicsCmd)
 }

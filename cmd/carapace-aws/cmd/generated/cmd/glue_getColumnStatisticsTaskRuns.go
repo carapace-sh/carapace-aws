@@ -12,13 +12,15 @@ var glue_getColumnStatisticsTaskRunsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getColumnStatisticsTaskRunsCmd).Standalone()
+	carapace.Gen(glue_getColumnStatisticsTaskRunsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getColumnStatisticsTaskRunsCmd).Standalone()
 
-	glue_getColumnStatisticsTaskRunsCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
-	glue_getColumnStatisticsTaskRunsCmd.Flags().String("max-results", "", "The maximum size of the response.")
-	glue_getColumnStatisticsTaskRunsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
-	glue_getColumnStatisticsTaskRunsCmd.Flags().String("table-name", "", "The name of the table.")
-	glue_getColumnStatisticsTaskRunsCmd.MarkFlagRequired("database-name")
-	glue_getColumnStatisticsTaskRunsCmd.MarkFlagRequired("table-name")
+		glue_getColumnStatisticsTaskRunsCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
+		glue_getColumnStatisticsTaskRunsCmd.Flags().String("max-results", "", "The maximum size of the response.")
+		glue_getColumnStatisticsTaskRunsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		glue_getColumnStatisticsTaskRunsCmd.Flags().String("table-name", "", "The name of the table.")
+		glue_getColumnStatisticsTaskRunsCmd.MarkFlagRequired("database-name")
+		glue_getColumnStatisticsTaskRunsCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_getColumnStatisticsTaskRunsCmd)
 }

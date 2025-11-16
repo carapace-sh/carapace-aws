@@ -12,9 +12,11 @@ var sagemaker_describeTransformJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeTransformJobCmd).Standalone()
+	carapace.Gen(sagemaker_describeTransformJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeTransformJobCmd).Standalone()
 
-	sagemaker_describeTransformJobCmd.Flags().String("transform-job-name", "", "The name of the transform job that you want to view details of.")
-	sagemaker_describeTransformJobCmd.MarkFlagRequired("transform-job-name")
+		sagemaker_describeTransformJobCmd.Flags().String("transform-job-name", "", "The name of the transform job that you want to view details of.")
+		sagemaker_describeTransformJobCmd.MarkFlagRequired("transform-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeTransformJobCmd)
 }

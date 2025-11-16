@@ -12,11 +12,13 @@ var connectcampaigns_putDialRequestBatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaigns_putDialRequestBatchCmd).Standalone()
+	carapace.Gen(connectcampaigns_putDialRequestBatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaigns_putDialRequestBatchCmd).Standalone()
 
-	connectcampaigns_putDialRequestBatchCmd.Flags().String("dial-requests", "", "")
-	connectcampaigns_putDialRequestBatchCmd.Flags().String("id", "", "")
-	connectcampaigns_putDialRequestBatchCmd.MarkFlagRequired("dial-requests")
-	connectcampaigns_putDialRequestBatchCmd.MarkFlagRequired("id")
+		connectcampaigns_putDialRequestBatchCmd.Flags().String("dial-requests", "", "")
+		connectcampaigns_putDialRequestBatchCmd.Flags().String("id", "", "")
+		connectcampaigns_putDialRequestBatchCmd.MarkFlagRequired("dial-requests")
+		connectcampaigns_putDialRequestBatchCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsCmd.AddCommand(connectcampaigns_putDialRequestBatchCmd)
 }

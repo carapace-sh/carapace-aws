@@ -12,9 +12,11 @@ var organizations_declineHandshakeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_declineHandshakeCmd).Standalone()
+	carapace.Gen(organizations_declineHandshakeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_declineHandshakeCmd).Standalone()
 
-	organizations_declineHandshakeCmd.Flags().String("handshake-id", "", "The unique identifier (ID) of the handshake that you want to decline.")
-	organizations_declineHandshakeCmd.MarkFlagRequired("handshake-id")
+		organizations_declineHandshakeCmd.Flags().String("handshake-id", "", "The unique identifier (ID) of the handshake that you want to decline.")
+		organizations_declineHandshakeCmd.MarkFlagRequired("handshake-id")
+	})
 	organizationsCmd.AddCommand(organizations_declineHandshakeCmd)
 }

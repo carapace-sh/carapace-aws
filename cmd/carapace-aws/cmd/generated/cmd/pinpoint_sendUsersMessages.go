@@ -12,11 +12,13 @@ var pinpoint_sendUsersMessagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_sendUsersMessagesCmd).Standalone()
+	carapace.Gen(pinpoint_sendUsersMessagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_sendUsersMessagesCmd).Standalone()
 
-	pinpoint_sendUsersMessagesCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_sendUsersMessagesCmd.Flags().String("send-users-message-request", "", "")
-	pinpoint_sendUsersMessagesCmd.MarkFlagRequired("application-id")
-	pinpoint_sendUsersMessagesCmd.MarkFlagRequired("send-users-message-request")
+		pinpoint_sendUsersMessagesCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_sendUsersMessagesCmd.Flags().String("send-users-message-request", "", "")
+		pinpoint_sendUsersMessagesCmd.MarkFlagRequired("application-id")
+		pinpoint_sendUsersMessagesCmd.MarkFlagRequired("send-users-message-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_sendUsersMessagesCmd)
 }

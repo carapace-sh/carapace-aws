@@ -12,9 +12,11 @@ var sagemaker_describePipelineExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describePipelineExecutionCmd).Standalone()
+	carapace.Gen(sagemaker_describePipelineExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describePipelineExecutionCmd).Standalone()
 
-	sagemaker_describePipelineExecutionCmd.Flags().String("pipeline-execution-arn", "", "The Amazon Resource Name (ARN) of the pipeline execution.")
-	sagemaker_describePipelineExecutionCmd.MarkFlagRequired("pipeline-execution-arn")
+		sagemaker_describePipelineExecutionCmd.Flags().String("pipeline-execution-arn", "", "The Amazon Resource Name (ARN) of the pipeline execution.")
+		sagemaker_describePipelineExecutionCmd.MarkFlagRequired("pipeline-execution-arn")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describePipelineExecutionCmd)
 }

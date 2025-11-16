@@ -12,11 +12,13 @@ var connect_describeEmailAddressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeEmailAddressCmd).Standalone()
+	carapace.Gen(connect_describeEmailAddressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeEmailAddressCmd).Standalone()
 
-	connect_describeEmailAddressCmd.Flags().String("email-address-id", "", "The identifier of the email address.")
-	connect_describeEmailAddressCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeEmailAddressCmd.MarkFlagRequired("email-address-id")
-	connect_describeEmailAddressCmd.MarkFlagRequired("instance-id")
+		connect_describeEmailAddressCmd.Flags().String("email-address-id", "", "The identifier of the email address.")
+		connect_describeEmailAddressCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeEmailAddressCmd.MarkFlagRequired("email-address-id")
+		connect_describeEmailAddressCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_describeEmailAddressCmd)
 }

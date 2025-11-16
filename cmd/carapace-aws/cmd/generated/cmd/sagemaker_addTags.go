@@ -12,11 +12,13 @@ var sagemaker_addTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_addTagsCmd).Standalone()
+	carapace.Gen(sagemaker_addTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_addTagsCmd).Standalone()
 
-	sagemaker_addTagsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
-	sagemaker_addTagsCmd.Flags().String("tags", "", "An array of key-value pairs.")
-	sagemaker_addTagsCmd.MarkFlagRequired("resource-arn")
-	sagemaker_addTagsCmd.MarkFlagRequired("tags")
+		sagemaker_addTagsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
+		sagemaker_addTagsCmd.Flags().String("tags", "", "An array of key-value pairs.")
+		sagemaker_addTagsCmd.MarkFlagRequired("resource-arn")
+		sagemaker_addTagsCmd.MarkFlagRequired("tags")
+	})
 	sagemakerCmd.AddCommand(sagemaker_addTagsCmd)
 }

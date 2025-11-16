@@ -12,9 +12,11 @@ var machinelearning_deleteEvaluationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_deleteEvaluationCmd).Standalone()
+	carapace.Gen(machinelearning_deleteEvaluationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_deleteEvaluationCmd).Standalone()
 
-	machinelearning_deleteEvaluationCmd.Flags().String("evaluation-id", "", "A user-supplied ID that uniquely identifies the `Evaluation` to delete.")
-	machinelearning_deleteEvaluationCmd.MarkFlagRequired("evaluation-id")
+		machinelearning_deleteEvaluationCmd.Flags().String("evaluation-id", "", "A user-supplied ID that uniquely identifies the `Evaluation` to delete.")
+		machinelearning_deleteEvaluationCmd.MarkFlagRequired("evaluation-id")
+	})
 	machinelearningCmd.AddCommand(machinelearning_deleteEvaluationCmd)
 }

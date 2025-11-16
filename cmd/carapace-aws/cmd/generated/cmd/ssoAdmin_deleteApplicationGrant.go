@@ -12,11 +12,13 @@ var ssoAdmin_deleteApplicationGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_deleteApplicationGrantCmd).Standalone()
+	carapace.Gen(ssoAdmin_deleteApplicationGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_deleteApplicationGrantCmd).Standalone()
 
-	ssoAdmin_deleteApplicationGrantCmd.Flags().String("application-arn", "", "Specifies the ARN of the application with the grant to delete.")
-	ssoAdmin_deleteApplicationGrantCmd.Flags().String("grant-type", "", "Specifies the type of grant to delete from the application.")
-	ssoAdmin_deleteApplicationGrantCmd.MarkFlagRequired("application-arn")
-	ssoAdmin_deleteApplicationGrantCmd.MarkFlagRequired("grant-type")
+		ssoAdmin_deleteApplicationGrantCmd.Flags().String("application-arn", "", "Specifies the ARN of the application with the grant to delete.")
+		ssoAdmin_deleteApplicationGrantCmd.Flags().String("grant-type", "", "Specifies the type of grant to delete from the application.")
+		ssoAdmin_deleteApplicationGrantCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_deleteApplicationGrantCmd.MarkFlagRequired("grant-type")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_deleteApplicationGrantCmd)
 }

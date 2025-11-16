@@ -12,7 +12,9 @@ var marketplaceEntitlementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceEntitlementCmd).Standalone()
+	carapace.Gen(marketplaceEntitlementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceEntitlementCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(marketplaceEntitlementCmd)
 }

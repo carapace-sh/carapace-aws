@@ -12,9 +12,11 @@ var auditmanager_getSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getSettingsCmd).Standalone()
+	carapace.Gen(auditmanager_getSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getSettingsCmd).Standalone()
 
-	auditmanager_getSettingsCmd.Flags().String("attribute", "", "The list of setting attribute enum values.")
-	auditmanager_getSettingsCmd.MarkFlagRequired("attribute")
+		auditmanager_getSettingsCmd.Flags().String("attribute", "", "The list of setting attribute enum values.")
+		auditmanager_getSettingsCmd.MarkFlagRequired("attribute")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getSettingsCmd)
 }

@@ -12,11 +12,13 @@ var logs_testTransformerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_testTransformerCmd).Standalone()
+	carapace.Gen(logs_testTransformerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_testTransformerCmd).Standalone()
 
-	logs_testTransformerCmd.Flags().String("log-event-messages", "", "An array of the raw log events that you want to use to test this transformer.")
-	logs_testTransformerCmd.Flags().String("transformer-config", "", "This structure contains the configuration of this log transformer that you want to test.")
-	logs_testTransformerCmd.MarkFlagRequired("log-event-messages")
-	logs_testTransformerCmd.MarkFlagRequired("transformer-config")
+		logs_testTransformerCmd.Flags().String("log-event-messages", "", "An array of the raw log events that you want to use to test this transformer.")
+		logs_testTransformerCmd.Flags().String("transformer-config", "", "This structure contains the configuration of this log transformer that you want to test.")
+		logs_testTransformerCmd.MarkFlagRequired("log-event-messages")
+		logs_testTransformerCmd.MarkFlagRequired("transformer-config")
+	})
 	logsCmd.AddCommand(logs_testTransformerCmd)
 }

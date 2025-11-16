@@ -12,11 +12,13 @@ var es_listPackagesForDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_listPackagesForDomainCmd).Standalone()
+	carapace.Gen(es_listPackagesForDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_listPackagesForDomainCmd).Standalone()
 
-	es_listPackagesForDomainCmd.Flags().String("domain-name", "", "The name of the domain for which you want to list associated packages.")
-	es_listPackagesForDomainCmd.Flags().String("max-results", "", "Limits results to a maximum number of packages.")
-	es_listPackagesForDomainCmd.Flags().String("next-token", "", "Used for pagination.")
-	es_listPackagesForDomainCmd.MarkFlagRequired("domain-name")
+		es_listPackagesForDomainCmd.Flags().String("domain-name", "", "The name of the domain for which you want to list associated packages.")
+		es_listPackagesForDomainCmd.Flags().String("max-results", "", "Limits results to a maximum number of packages.")
+		es_listPackagesForDomainCmd.Flags().String("next-token", "", "Used for pagination.")
+		es_listPackagesForDomainCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_listPackagesForDomainCmd)
 }

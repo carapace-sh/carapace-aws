@@ -12,11 +12,13 @@ var auditmanager_deleteAssessmentFrameworkShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_deleteAssessmentFrameworkShareCmd).Standalone()
+	carapace.Gen(auditmanager_deleteAssessmentFrameworkShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_deleteAssessmentFrameworkShareCmd).Standalone()
 
-	auditmanager_deleteAssessmentFrameworkShareCmd.Flags().String("request-id", "", "The unique identifier for the share request to be deleted.")
-	auditmanager_deleteAssessmentFrameworkShareCmd.Flags().String("request-type", "", "Specifies whether the share request is a sent request or a received request.")
-	auditmanager_deleteAssessmentFrameworkShareCmd.MarkFlagRequired("request-id")
-	auditmanager_deleteAssessmentFrameworkShareCmd.MarkFlagRequired("request-type")
+		auditmanager_deleteAssessmentFrameworkShareCmd.Flags().String("request-id", "", "The unique identifier for the share request to be deleted.")
+		auditmanager_deleteAssessmentFrameworkShareCmd.Flags().String("request-type", "", "Specifies whether the share request is a sent request or a received request.")
+		auditmanager_deleteAssessmentFrameworkShareCmd.MarkFlagRequired("request-id")
+		auditmanager_deleteAssessmentFrameworkShareCmd.MarkFlagRequired("request-type")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_deleteAssessmentFrameworkShareCmd)
 }

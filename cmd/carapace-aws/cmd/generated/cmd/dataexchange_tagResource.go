@@ -12,11 +12,13 @@ var dataexchange_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_tagResourceCmd).Standalone()
+	carapace.Gen(dataexchange_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_tagResourceCmd).Standalone()
 
-	dataexchange_tagResourceCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.")
-	dataexchange_tagResourceCmd.Flags().String("tags", "", "A label that consists of a customer-defined key and an optional value.")
-	dataexchange_tagResourceCmd.MarkFlagRequired("resource-arn")
-	dataexchange_tagResourceCmd.MarkFlagRequired("tags")
+		dataexchange_tagResourceCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.")
+		dataexchange_tagResourceCmd.Flags().String("tags", "", "A label that consists of a customer-defined key and an optional value.")
+		dataexchange_tagResourceCmd.MarkFlagRequired("resource-arn")
+		dataexchange_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_tagResourceCmd)
 }

@@ -12,9 +12,11 @@ var sesv2_deleteConfigurationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteConfigurationSetCmd).Standalone()
+	carapace.Gen(sesv2_deleteConfigurationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteConfigurationSetCmd).Standalone()
 
-	sesv2_deleteConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
-	sesv2_deleteConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+		sesv2_deleteConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
+		sesv2_deleteConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteConfigurationSetCmd)
 }

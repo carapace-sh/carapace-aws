@@ -12,7 +12,9 @@ var lightsail_getContainerServicePowersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getContainerServicePowersCmd).Standalone()
+	carapace.Gen(lightsail_getContainerServicePowersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getContainerServicePowersCmd).Standalone()
 
+	})
 	lightsailCmd.AddCommand(lightsail_getContainerServicePowersCmd)
 }

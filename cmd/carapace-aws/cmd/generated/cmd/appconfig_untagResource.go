@@ -12,11 +12,13 @@ var appconfig_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_untagResourceCmd).Standalone()
+	carapace.Gen(appconfig_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_untagResourceCmd).Standalone()
 
-	appconfig_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which to remove tags.")
-	appconfig_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to delete.")
-	appconfig_untagResourceCmd.MarkFlagRequired("resource-arn")
-	appconfig_untagResourceCmd.MarkFlagRequired("tag-keys")
+		appconfig_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which to remove tags.")
+		appconfig_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to delete.")
+		appconfig_untagResourceCmd.MarkFlagRequired("resource-arn")
+		appconfig_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	appconfigCmd.AddCommand(appconfig_untagResourceCmd)
 }

@@ -12,7 +12,9 @@ var snowballCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowballCmd).Standalone()
+	carapace.Gen(snowballCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowballCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(snowballCmd)
 }

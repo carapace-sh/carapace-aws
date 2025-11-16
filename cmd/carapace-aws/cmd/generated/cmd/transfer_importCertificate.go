@@ -12,17 +12,19 @@ var transfer_importCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_importCertificateCmd).Standalone()
+	carapace.Gen(transfer_importCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_importCertificateCmd).Standalone()
 
-	transfer_importCertificateCmd.Flags().String("active-date", "", "An optional date that specifies when the certificate becomes active.")
-	transfer_importCertificateCmd.Flags().String("certificate", "", "- For the CLI, provide a file path for a certificate in URI format.")
-	transfer_importCertificateCmd.Flags().String("certificate-chain", "", "An optional list of certificates that make up the chain for the certificate that's being imported.")
-	transfer_importCertificateCmd.Flags().String("description", "", "A short description that helps identify the certificate.")
-	transfer_importCertificateCmd.Flags().String("inactive-date", "", "An optional date that specifies when the certificate becomes inactive.")
-	transfer_importCertificateCmd.Flags().String("private-key", "", "- For the CLI, provide a file path for a private key in URI format.")
-	transfer_importCertificateCmd.Flags().String("tags", "", "Key-value pairs that can be used to group and search for certificates.")
-	transfer_importCertificateCmd.Flags().String("usage", "", "Specifies how this certificate is used.")
-	transfer_importCertificateCmd.MarkFlagRequired("certificate")
-	transfer_importCertificateCmd.MarkFlagRequired("usage")
+		transfer_importCertificateCmd.Flags().String("active-date", "", "An optional date that specifies when the certificate becomes active.")
+		transfer_importCertificateCmd.Flags().String("certificate", "", "- For the CLI, provide a file path for a certificate in URI format.")
+		transfer_importCertificateCmd.Flags().String("certificate-chain", "", "An optional list of certificates that make up the chain for the certificate that's being imported.")
+		transfer_importCertificateCmd.Flags().String("description", "", "A short description that helps identify the certificate.")
+		transfer_importCertificateCmd.Flags().String("inactive-date", "", "An optional date that specifies when the certificate becomes inactive.")
+		transfer_importCertificateCmd.Flags().String("private-key", "", "- For the CLI, provide a file path for a private key in URI format.")
+		transfer_importCertificateCmd.Flags().String("tags", "", "Key-value pairs that can be used to group and search for certificates.")
+		transfer_importCertificateCmd.Flags().String("usage", "", "Specifies how this certificate is used.")
+		transfer_importCertificateCmd.MarkFlagRequired("certificate")
+		transfer_importCertificateCmd.MarkFlagRequired("usage")
+	})
 	transferCmd.AddCommand(transfer_importCertificateCmd)
 }

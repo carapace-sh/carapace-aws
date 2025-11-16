@@ -12,10 +12,12 @@ var evs_listEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evs_listEnvironmentsCmd).Standalone()
+	carapace.Gen(evs_listEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evs_listEnvironmentsCmd).Standalone()
 
-	evs_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	evs_listEnvironmentsCmd.Flags().String("next-token", "", "A unique pagination token for each page.")
-	evs_listEnvironmentsCmd.Flags().String("state", "", "The state of an environment.")
+		evs_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		evs_listEnvironmentsCmd.Flags().String("next-token", "", "A unique pagination token for each page.")
+		evs_listEnvironmentsCmd.Flags().String("state", "", "The state of an environment.")
+	})
 	evsCmd.AddCommand(evs_listEnvironmentsCmd)
 }

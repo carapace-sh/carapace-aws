@@ -12,7 +12,9 @@ var signerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(signerCmd).Standalone()
+	carapace.Gen(signerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(signerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(signerCmd)
 }

@@ -12,8 +12,10 @@ var opensearchserverless_updateAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_updateAccountSettingsCmd).Standalone()
+	carapace.Gen(opensearchserverless_updateAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_updateAccountSettingsCmd).Standalone()
 
-	opensearchserverless_updateAccountSettingsCmd.Flags().String("capacity-limits", "", "")
+		opensearchserverless_updateAccountSettingsCmd.Flags().String("capacity-limits", "", "")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_updateAccountSettingsCmd)
 }

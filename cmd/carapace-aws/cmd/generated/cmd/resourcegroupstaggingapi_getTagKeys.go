@@ -12,8 +12,10 @@ var resourcegroupstaggingapi_getTagKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourcegroupstaggingapi_getTagKeysCmd).Standalone()
+	carapace.Gen(resourcegroupstaggingapi_getTagKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourcegroupstaggingapi_getTagKeysCmd).Standalone()
 
-	resourcegroupstaggingapi_getTagKeysCmd.Flags().String("pagination-token", "", "Specifies a `PaginationToken` response value from a previous request to indicate that you want the next page of results.")
+		resourcegroupstaggingapi_getTagKeysCmd.Flags().String("pagination-token", "", "Specifies a `PaginationToken` response value from a previous request to indicate that you want the next page of results.")
+	})
 	resourcegroupstaggingapiCmd.AddCommand(resourcegroupstaggingapi_getTagKeysCmd)
 }

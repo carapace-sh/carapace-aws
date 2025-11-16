@@ -12,9 +12,11 @@ var sesv2_listContactListsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listContactListsCmd).Standalone()
+	carapace.Gen(sesv2_listContactListsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listContactListsCmd).Standalone()
 
-	sesv2_listContactListsCmd.Flags().String("next-token", "", "A string token indicating that there might be additional contact lists available to be listed.")
-	sesv2_listContactListsCmd.Flags().String("page-size", "", "Maximum number of contact lists to return at once.")
+		sesv2_listContactListsCmd.Flags().String("next-token", "", "A string token indicating that there might be additional contact lists available to be listed.")
+		sesv2_listContactListsCmd.Flags().String("page-size", "", "Maximum number of contact lists to return at once.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listContactListsCmd)
 }

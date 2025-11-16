@@ -12,7 +12,9 @@ var sagemakerEdgeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerEdgeCmd).Standalone()
+	carapace.Gen(sagemakerEdgeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerEdgeCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(sagemakerEdgeCmd)
 }

@@ -12,9 +12,11 @@ var apprunner_deleteVpcIngressConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_deleteVpcIngressConnectionCmd).Standalone()
+	carapace.Gen(apprunner_deleteVpcIngressConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_deleteVpcIngressConnectionCmd).Standalone()
 
-	apprunner_deleteVpcIngressConnectionCmd.Flags().String("vpc-ingress-connection-arn", "", "The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want to delete.")
-	apprunner_deleteVpcIngressConnectionCmd.MarkFlagRequired("vpc-ingress-connection-arn")
+		apprunner_deleteVpcIngressConnectionCmd.Flags().String("vpc-ingress-connection-arn", "", "The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want to delete.")
+		apprunner_deleteVpcIngressConnectionCmd.MarkFlagRequired("vpc-ingress-connection-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_deleteVpcIngressConnectionCmd)
 }

@@ -12,9 +12,11 @@ var macie2_disableOrganizationAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_disableOrganizationAdminAccountCmd).Standalone()
+	carapace.Gen(macie2_disableOrganizationAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_disableOrganizationAdminAccountCmd).Standalone()
 
-	macie2_disableOrganizationAdminAccountCmd.Flags().String("admin-account-id", "", "The Amazon Web Services account ID of the delegated Amazon Macie administrator account.")
-	macie2_disableOrganizationAdminAccountCmd.MarkFlagRequired("admin-account-id")
+		macie2_disableOrganizationAdminAccountCmd.Flags().String("admin-account-id", "", "The Amazon Web Services account ID of the delegated Amazon Macie administrator account.")
+		macie2_disableOrganizationAdminAccountCmd.MarkFlagRequired("admin-account-id")
+	})
 	macie2Cmd.AddCommand(macie2_disableOrganizationAdminAccountCmd)
 }

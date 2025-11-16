@@ -12,11 +12,13 @@ var apigateway_getDocumentationVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getDocumentationVersionCmd).Standalone()
+	carapace.Gen(apigateway_getDocumentationVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getDocumentationVersionCmd).Standalone()
 
-	apigateway_getDocumentationVersionCmd.Flags().String("documentation-version", "", "The version identifier of the to-be-retrieved documentation snapshot.")
-	apigateway_getDocumentationVersionCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getDocumentationVersionCmd.MarkFlagRequired("documentation-version")
-	apigateway_getDocumentationVersionCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getDocumentationVersionCmd.Flags().String("documentation-version", "", "The version identifier of the to-be-retrieved documentation snapshot.")
+		apigateway_getDocumentationVersionCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getDocumentationVersionCmd.MarkFlagRequired("documentation-version")
+		apigateway_getDocumentationVersionCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getDocumentationVersionCmd)
 }

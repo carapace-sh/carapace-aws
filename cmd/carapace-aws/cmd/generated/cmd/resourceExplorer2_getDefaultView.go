@@ -12,7 +12,9 @@ var resourceExplorer2_getDefaultViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_getDefaultViewCmd).Standalone()
+	carapace.Gen(resourceExplorer2_getDefaultViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_getDefaultViewCmd).Standalone()
 
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_getDefaultViewCmd)
 }

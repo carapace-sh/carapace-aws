@@ -12,11 +12,13 @@ var ssoAdmin_putApplicationAssignmentConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_putApplicationAssignmentConfigurationCmd).Standalone()
+	carapace.Gen(ssoAdmin_putApplicationAssignmentConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_putApplicationAssignmentConfigurationCmd).Standalone()
 
-	ssoAdmin_putApplicationAssignmentConfigurationCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
-	ssoAdmin_putApplicationAssignmentConfigurationCmd.Flags().String("assignment-required", "", "If `AssignmentsRequired` is `true` (default value), users don’t have access to the application unless an assignment is created using the [CreateApplicationAssignment API](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html).")
-	ssoAdmin_putApplicationAssignmentConfigurationCmd.MarkFlagRequired("application-arn")
-	ssoAdmin_putApplicationAssignmentConfigurationCmd.MarkFlagRequired("assignment-required")
+		ssoAdmin_putApplicationAssignmentConfigurationCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
+		ssoAdmin_putApplicationAssignmentConfigurationCmd.Flags().String("assignment-required", "", "If `AssignmentsRequired` is `true` (default value), users don’t have access to the application unless an assignment is created using the [CreateApplicationAssignment API](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html).")
+		ssoAdmin_putApplicationAssignmentConfigurationCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_putApplicationAssignmentConfigurationCmd.MarkFlagRequired("assignment-required")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_putApplicationAssignmentConfigurationCmd)
 }

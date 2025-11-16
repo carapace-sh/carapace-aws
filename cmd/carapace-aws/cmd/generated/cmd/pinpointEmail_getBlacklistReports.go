@@ -12,9 +12,11 @@ var pinpointEmail_getBlacklistReportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getBlacklistReportsCmd).Standalone()
+	carapace.Gen(pinpointEmail_getBlacklistReportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getBlacklistReportsCmd).Standalone()
 
-	pinpointEmail_getBlacklistReportsCmd.Flags().String("blacklist-item-names", "", "A list of IP addresses that you want to retrieve blacklist information about.")
-	pinpointEmail_getBlacklistReportsCmd.MarkFlagRequired("blacklist-item-names")
+		pinpointEmail_getBlacklistReportsCmd.Flags().String("blacklist-item-names", "", "A list of IP addresses that you want to retrieve blacklist information about.")
+		pinpointEmail_getBlacklistReportsCmd.MarkFlagRequired("blacklist-item-names")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getBlacklistReportsCmd)
 }

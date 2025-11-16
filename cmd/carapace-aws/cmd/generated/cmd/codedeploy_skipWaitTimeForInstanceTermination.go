@@ -12,8 +12,10 @@ var codedeploy_skipWaitTimeForInstanceTerminationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_skipWaitTimeForInstanceTerminationCmd).Standalone()
+	carapace.Gen(codedeploy_skipWaitTimeForInstanceTerminationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_skipWaitTimeForInstanceTerminationCmd).Standalone()
 
-	codedeploy_skipWaitTimeForInstanceTerminationCmd.Flags().String("deployment-id", "", "The unique ID of a blue/green deployment for which you want to skip the instance termination wait time.")
+		codedeploy_skipWaitTimeForInstanceTerminationCmd.Flags().String("deployment-id", "", "The unique ID of a blue/green deployment for which you want to skip the instance termination wait time.")
+	})
 	codedeployCmd.AddCommand(codedeploy_skipWaitTimeForInstanceTerminationCmd)
 }

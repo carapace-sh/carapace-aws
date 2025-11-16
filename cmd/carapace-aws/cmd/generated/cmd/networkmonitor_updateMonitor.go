@@ -12,11 +12,13 @@ var networkmonitor_updateMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmonitor_updateMonitorCmd).Standalone()
+	carapace.Gen(networkmonitor_updateMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmonitor_updateMonitorCmd).Standalone()
 
-	networkmonitor_updateMonitorCmd.Flags().String("aggregation-period", "", "The aggregation time, in seconds, to change to.")
-	networkmonitor_updateMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor to update.")
-	networkmonitor_updateMonitorCmd.MarkFlagRequired("aggregation-period")
-	networkmonitor_updateMonitorCmd.MarkFlagRequired("monitor-name")
+		networkmonitor_updateMonitorCmd.Flags().String("aggregation-period", "", "The aggregation time, in seconds, to change to.")
+		networkmonitor_updateMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor to update.")
+		networkmonitor_updateMonitorCmd.MarkFlagRequired("aggregation-period")
+		networkmonitor_updateMonitorCmd.MarkFlagRequired("monitor-name")
+	})
 	networkmonitorCmd.AddCommand(networkmonitor_updateMonitorCmd)
 }

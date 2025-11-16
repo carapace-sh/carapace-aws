@@ -12,7 +12,9 @@ var applicationcostprofilerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationcostprofilerCmd).Standalone()
+	carapace.Gen(applicationcostprofilerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationcostprofilerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(applicationcostprofilerCmd)
 }

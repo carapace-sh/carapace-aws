@@ -12,7 +12,9 @@ var ssmGuiconnect_getConnectionRecordingPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmGuiconnect_getConnectionRecordingPreferencesCmd).Standalone()
+	carapace.Gen(ssmGuiconnect_getConnectionRecordingPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmGuiconnect_getConnectionRecordingPreferencesCmd).Standalone()
 
+	})
 	ssmGuiconnectCmd.AddCommand(ssmGuiconnect_getConnectionRecordingPreferencesCmd)
 }

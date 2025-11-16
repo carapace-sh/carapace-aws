@@ -12,13 +12,15 @@ var dms_describeMetadataModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeMetadataModelCmd).Standalone()
+	carapace.Gen(dms_describeMetadataModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeMetadataModelCmd).Standalone()
 
-	dms_describeMetadataModelCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
-	dms_describeMetadataModelCmd.Flags().String("origin", "", "Specifies whether to retrieve metadata from the source or target tree.")
-	dms_describeMetadataModelCmd.Flags().String("selection-rules", "", "The JSON string that specifies which metadata model to retrieve.")
-	dms_describeMetadataModelCmd.MarkFlagRequired("migration-project-identifier")
-	dms_describeMetadataModelCmd.MarkFlagRequired("origin")
-	dms_describeMetadataModelCmd.MarkFlagRequired("selection-rules")
+		dms_describeMetadataModelCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
+		dms_describeMetadataModelCmd.Flags().String("origin", "", "Specifies whether to retrieve metadata from the source or target tree.")
+		dms_describeMetadataModelCmd.Flags().String("selection-rules", "", "The JSON string that specifies which metadata model to retrieve.")
+		dms_describeMetadataModelCmd.MarkFlagRequired("migration-project-identifier")
+		dms_describeMetadataModelCmd.MarkFlagRequired("origin")
+		dms_describeMetadataModelCmd.MarkFlagRequired("selection-rules")
+	})
 	dmsCmd.AddCommand(dms_describeMetadataModelCmd)
 }

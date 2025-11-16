@@ -12,13 +12,15 @@ var mgh_notifyApplicationStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgh_notifyApplicationStateCmd).Standalone()
+	carapace.Gen(mgh_notifyApplicationStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgh_notifyApplicationStateCmd).Standalone()
 
-	mgh_notifyApplicationStateCmd.Flags().String("application-id", "", "The configurationId in Application Discovery Service that uniquely identifies the grouped application.")
-	mgh_notifyApplicationStateCmd.Flags().String("dry-run", "", "Optional boolean flag to indicate whether any effect should take place.")
-	mgh_notifyApplicationStateCmd.Flags().String("status", "", "Status of the application - Not Started, In-Progress, Complete.")
-	mgh_notifyApplicationStateCmd.Flags().String("update-date-time", "", "The timestamp when the application state changed.")
-	mgh_notifyApplicationStateCmd.MarkFlagRequired("application-id")
-	mgh_notifyApplicationStateCmd.MarkFlagRequired("status")
+		mgh_notifyApplicationStateCmd.Flags().String("application-id", "", "The configurationId in Application Discovery Service that uniquely identifies the grouped application.")
+		mgh_notifyApplicationStateCmd.Flags().String("dry-run", "", "Optional boolean flag to indicate whether any effect should take place.")
+		mgh_notifyApplicationStateCmd.Flags().String("status", "", "Status of the application - Not Started, In-Progress, Complete.")
+		mgh_notifyApplicationStateCmd.Flags().String("update-date-time", "", "The timestamp when the application state changed.")
+		mgh_notifyApplicationStateCmd.MarkFlagRequired("application-id")
+		mgh_notifyApplicationStateCmd.MarkFlagRequired("status")
+	})
 	mghCmd.AddCommand(mgh_notifyApplicationStateCmd)
 }

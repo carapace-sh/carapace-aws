@@ -12,13 +12,15 @@ var quicksight_listDashboardVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_listDashboardVersionsCmd).Standalone()
+	carapace.Gen(quicksight_listDashboardVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_listDashboardVersionsCmd).Standalone()
 
-	quicksight_listDashboardVersionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard that you're listing versions for.")
-	quicksight_listDashboardVersionsCmd.Flags().String("dashboard-id", "", "The ID for the dashboard.")
-	quicksight_listDashboardVersionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	quicksight_listDashboardVersionsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
-	quicksight_listDashboardVersionsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_listDashboardVersionsCmd.MarkFlagRequired("dashboard-id")
+		quicksight_listDashboardVersionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard that you're listing versions for.")
+		quicksight_listDashboardVersionsCmd.Flags().String("dashboard-id", "", "The ID for the dashboard.")
+		quicksight_listDashboardVersionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		quicksight_listDashboardVersionsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
+		quicksight_listDashboardVersionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_listDashboardVersionsCmd.MarkFlagRequired("dashboard-id")
+	})
 	quicksightCmd.AddCommand(quicksight_listDashboardVersionsCmd)
 }

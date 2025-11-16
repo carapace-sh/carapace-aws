@@ -12,7 +12,9 @@ var iot_describeEncryptionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeEncryptionConfigurationCmd).Standalone()
+	carapace.Gen(iot_describeEncryptionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeEncryptionConfigurationCmd).Standalone()
 
+	})
 	iotCmd.AddCommand(iot_describeEncryptionConfigurationCmd)
 }

@@ -12,11 +12,13 @@ var ram_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ram_untagResourceCmd).Standalone()
+	carapace.Gen(ram_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ram_untagResourceCmd).Standalone()
 
-	ram_untagResourceCmd.Flags().String("resource-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the managed permission that you want to remove tags from.")
-	ram_untagResourceCmd.Flags().String("resource-share-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share that you want to remove tags from.")
-	ram_untagResourceCmd.Flags().String("tag-keys", "", "Specifies a list of one or more tag keys that you want to remove.")
-	ram_untagResourceCmd.MarkFlagRequired("tag-keys")
+		ram_untagResourceCmd.Flags().String("resource-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the managed permission that you want to remove tags from.")
+		ram_untagResourceCmd.Flags().String("resource-share-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share that you want to remove tags from.")
+		ram_untagResourceCmd.Flags().String("tag-keys", "", "Specifies a list of one or more tag keys that you want to remove.")
+		ram_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	ramCmd.AddCommand(ram_untagResourceCmd)
 }

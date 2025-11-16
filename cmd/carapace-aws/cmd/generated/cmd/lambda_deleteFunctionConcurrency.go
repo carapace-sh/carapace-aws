@@ -12,9 +12,11 @@ var lambda_deleteFunctionConcurrencyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_deleteFunctionConcurrencyCmd).Standalone()
+	carapace.Gen(lambda_deleteFunctionConcurrencyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_deleteFunctionConcurrencyCmd).Standalone()
 
-	lambda_deleteFunctionConcurrencyCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_deleteFunctionConcurrencyCmd.MarkFlagRequired("function-name")
+		lambda_deleteFunctionConcurrencyCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_deleteFunctionConcurrencyCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_deleteFunctionConcurrencyCmd)
 }

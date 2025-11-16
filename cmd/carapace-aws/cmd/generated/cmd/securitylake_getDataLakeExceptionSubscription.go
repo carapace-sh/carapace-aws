@@ -12,7 +12,9 @@ var securitylake_getDataLakeExceptionSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_getDataLakeExceptionSubscriptionCmd).Standalone()
+	carapace.Gen(securitylake_getDataLakeExceptionSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_getDataLakeExceptionSubscriptionCmd).Standalone()
 
+	})
 	securitylakeCmd.AddCommand(securitylake_getDataLakeExceptionSubscriptionCmd)
 }

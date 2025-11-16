@@ -12,11 +12,13 @@ var secretsmanager_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_untagResourceCmd).Standalone()
+	carapace.Gen(secretsmanager_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_untagResourceCmd).Standalone()
 
-	secretsmanager_untagResourceCmd.Flags().String("secret-id", "", "The ARN or name of the secret.")
-	secretsmanager_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag key names to remove from the secret.")
-	secretsmanager_untagResourceCmd.MarkFlagRequired("secret-id")
-	secretsmanager_untagResourceCmd.MarkFlagRequired("tag-keys")
+		secretsmanager_untagResourceCmd.Flags().String("secret-id", "", "The ARN or name of the secret.")
+		secretsmanager_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag key names to remove from the secret.")
+		secretsmanager_untagResourceCmd.MarkFlagRequired("secret-id")
+		secretsmanager_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_untagResourceCmd)
 }

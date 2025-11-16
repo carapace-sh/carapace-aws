@@ -12,13 +12,15 @@ var voiceId_disassociateFraudsterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_disassociateFraudsterCmd).Standalone()
+	carapace.Gen(voiceId_disassociateFraudsterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_disassociateFraudsterCmd).Standalone()
 
-	voiceId_disassociateFraudsterCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the fraudster.")
-	voiceId_disassociateFraudsterCmd.Flags().String("fraudster-id", "", "The identifier of the fraudster to be disassociated from the watchlist.")
-	voiceId_disassociateFraudsterCmd.Flags().String("watchlist-id", "", "The identifier of the watchlist that you want to disassociate from the fraudster.")
-	voiceId_disassociateFraudsterCmd.MarkFlagRequired("domain-id")
-	voiceId_disassociateFraudsterCmd.MarkFlagRequired("fraudster-id")
-	voiceId_disassociateFraudsterCmd.MarkFlagRequired("watchlist-id")
+		voiceId_disassociateFraudsterCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the fraudster.")
+		voiceId_disassociateFraudsterCmd.Flags().String("fraudster-id", "", "The identifier of the fraudster to be disassociated from the watchlist.")
+		voiceId_disassociateFraudsterCmd.Flags().String("watchlist-id", "", "The identifier of the watchlist that you want to disassociate from the fraudster.")
+		voiceId_disassociateFraudsterCmd.MarkFlagRequired("domain-id")
+		voiceId_disassociateFraudsterCmd.MarkFlagRequired("fraudster-id")
+		voiceId_disassociateFraudsterCmd.MarkFlagRequired("watchlist-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_disassociateFraudsterCmd)
 }

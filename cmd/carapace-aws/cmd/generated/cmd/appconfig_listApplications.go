@@ -12,9 +12,11 @@ var appconfig_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_listApplicationsCmd).Standalone()
+	carapace.Gen(appconfig_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_listApplicationsCmd).Standalone()
 
-	appconfig_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	appconfig_listApplicationsCmd.Flags().String("next-token", "", "A token to start the list.")
+		appconfig_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		appconfig_listApplicationsCmd.Flags().String("next-token", "", "A token to start the list.")
+	})
 	appconfigCmd.AddCommand(appconfig_listApplicationsCmd)
 }

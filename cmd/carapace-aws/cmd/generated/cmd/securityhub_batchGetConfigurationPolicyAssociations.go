@@ -12,9 +12,11 @@ var securityhub_batchGetConfigurationPolicyAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_batchGetConfigurationPolicyAssociationsCmd).Standalone()
+	carapace.Gen(securityhub_batchGetConfigurationPolicyAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_batchGetConfigurationPolicyAssociationsCmd).Standalone()
 
-	securityhub_batchGetConfigurationPolicyAssociationsCmd.Flags().String("configuration-policy-association-identifiers", "", "Specifies one or more target account IDs, organizational unit (OU) IDs, or the root ID to retrieve associations for.")
-	securityhub_batchGetConfigurationPolicyAssociationsCmd.MarkFlagRequired("configuration-policy-association-identifiers")
+		securityhub_batchGetConfigurationPolicyAssociationsCmd.Flags().String("configuration-policy-association-identifiers", "", "Specifies one or more target account IDs, organizational unit (OU) IDs, or the root ID to retrieve associations for.")
+		securityhub_batchGetConfigurationPolicyAssociationsCmd.MarkFlagRequired("configuration-policy-association-identifiers")
+	})
 	securityhubCmd.AddCommand(securityhub_batchGetConfigurationPolicyAssociationsCmd)
 }

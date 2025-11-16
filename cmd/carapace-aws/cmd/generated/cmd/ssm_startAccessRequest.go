@@ -12,12 +12,14 @@ var ssm_startAccessRequestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_startAccessRequestCmd).Standalone()
+	carapace.Gen(ssm_startAccessRequestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_startAccessRequestCmd).Standalone()
 
-	ssm_startAccessRequestCmd.Flags().String("reason", "", "A brief description explaining why you are requesting access to the node.")
-	ssm_startAccessRequestCmd.Flags().String("tags", "", "Key-value pairs of metadata you want to assign to the access request.")
-	ssm_startAccessRequestCmd.Flags().String("targets", "", "The node you are requesting access to.")
-	ssm_startAccessRequestCmd.MarkFlagRequired("reason")
-	ssm_startAccessRequestCmd.MarkFlagRequired("targets")
+		ssm_startAccessRequestCmd.Flags().String("reason", "", "A brief description explaining why you are requesting access to the node.")
+		ssm_startAccessRequestCmd.Flags().String("tags", "", "Key-value pairs of metadata you want to assign to the access request.")
+		ssm_startAccessRequestCmd.Flags().String("targets", "", "The node you are requesting access to.")
+		ssm_startAccessRequestCmd.MarkFlagRequired("reason")
+		ssm_startAccessRequestCmd.MarkFlagRequired("targets")
+	})
 	ssmCmd.AddCommand(ssm_startAccessRequestCmd)
 }

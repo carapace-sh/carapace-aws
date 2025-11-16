@@ -12,9 +12,11 @@ var ds_removeRegionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_removeRegionCmd).Standalone()
+	carapace.Gen(ds_removeRegionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_removeRegionCmd).Standalone()
 
-	ds_removeRegionCmd.Flags().String("directory-id", "", "The identifier of the directory for which you want to remove Region replication.")
-	ds_removeRegionCmd.MarkFlagRequired("directory-id")
+		ds_removeRegionCmd.Flags().String("directory-id", "", "The identifier of the directory for which you want to remove Region replication.")
+		ds_removeRegionCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_removeRegionCmd)
 }

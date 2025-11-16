@@ -12,9 +12,11 @@ var connectcampaignsv2_deleteInstanceOnboardingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_deleteInstanceOnboardingJobCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_deleteInstanceOnboardingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_deleteInstanceOnboardingJobCmd).Standalone()
 
-	connectcampaignsv2_deleteInstanceOnboardingJobCmd.Flags().String("connect-instance-id", "", "")
-	connectcampaignsv2_deleteInstanceOnboardingJobCmd.MarkFlagRequired("connect-instance-id")
+		connectcampaignsv2_deleteInstanceOnboardingJobCmd.Flags().String("connect-instance-id", "", "")
+		connectcampaignsv2_deleteInstanceOnboardingJobCmd.MarkFlagRequired("connect-instance-id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_deleteInstanceOnboardingJobCmd)
 }

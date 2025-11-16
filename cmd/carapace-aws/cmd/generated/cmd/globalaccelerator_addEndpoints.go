@@ -12,11 +12,13 @@ var globalaccelerator_addEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_addEndpointsCmd).Standalone()
+	carapace.Gen(globalaccelerator_addEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_addEndpointsCmd).Standalone()
 
-	globalaccelerator_addEndpointsCmd.Flags().String("endpoint-configurations", "", "The list of endpoint objects.")
-	globalaccelerator_addEndpointsCmd.Flags().String("endpoint-group-arn", "", "The Amazon Resource Name (ARN) of the endpoint group.")
-	globalaccelerator_addEndpointsCmd.MarkFlagRequired("endpoint-configurations")
-	globalaccelerator_addEndpointsCmd.MarkFlagRequired("endpoint-group-arn")
+		globalaccelerator_addEndpointsCmd.Flags().String("endpoint-configurations", "", "The list of endpoint objects.")
+		globalaccelerator_addEndpointsCmd.Flags().String("endpoint-group-arn", "", "The Amazon Resource Name (ARN) of the endpoint group.")
+		globalaccelerator_addEndpointsCmd.MarkFlagRequired("endpoint-configurations")
+		globalaccelerator_addEndpointsCmd.MarkFlagRequired("endpoint-group-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_addEndpointsCmd)
 }

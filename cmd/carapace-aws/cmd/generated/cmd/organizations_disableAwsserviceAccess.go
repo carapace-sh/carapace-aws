@@ -12,9 +12,11 @@ var organizations_disableAwsserviceAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_disableAwsserviceAccessCmd).Standalone()
+	carapace.Gen(organizations_disableAwsserviceAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_disableAwsserviceAccessCmd).Standalone()
 
-	organizations_disableAwsserviceAccessCmd.Flags().String("service-principal", "", "The service principal name of the Amazon Web Services service for which you want to disable integration with your organization.")
-	organizations_disableAwsserviceAccessCmd.MarkFlagRequired("service-principal")
+		organizations_disableAwsserviceAccessCmd.Flags().String("service-principal", "", "The service principal name of the Amazon Web Services service for which you want to disable integration with your organization.")
+		organizations_disableAwsserviceAccessCmd.MarkFlagRequired("service-principal")
+	})
 	organizationsCmd.AddCommand(organizations_disableAwsserviceAccessCmd)
 }

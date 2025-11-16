@@ -12,10 +12,12 @@ var ecs_describeTaskDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_describeTaskDefinitionCmd).Standalone()
+	carapace.Gen(ecs_describeTaskDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_describeTaskDefinitionCmd).Standalone()
 
-	ecs_describeTaskDefinitionCmd.Flags().String("include", "", "Determines whether to see the resource tags for the task definition.")
-	ecs_describeTaskDefinitionCmd.Flags().String("task-definition", "", "The `family` for the latest `ACTIVE` revision, `family` and `revision` (`family:revision`) for a specific revision in the family, or full Amazon Resource Name (ARN) of the task definition to describe.")
-	ecs_describeTaskDefinitionCmd.MarkFlagRequired("task-definition")
+		ecs_describeTaskDefinitionCmd.Flags().String("include", "", "Determines whether to see the resource tags for the task definition.")
+		ecs_describeTaskDefinitionCmd.Flags().String("task-definition", "", "The `family` for the latest `ACTIVE` revision, `family` and `revision` (`family:revision`) for a specific revision in the family, or full Amazon Resource Name (ARN) of the task definition to describe.")
+		ecs_describeTaskDefinitionCmd.MarkFlagRequired("task-definition")
+	})
 	ecsCmd.AddCommand(ecs_describeTaskDefinitionCmd)
 }

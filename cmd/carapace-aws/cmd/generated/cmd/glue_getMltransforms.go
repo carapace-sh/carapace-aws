@@ -12,11 +12,13 @@ var glue_getMltransformsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getMltransformsCmd).Standalone()
+	carapace.Gen(glue_getMltransformsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getMltransformsCmd).Standalone()
 
-	glue_getMltransformsCmd.Flags().String("filter", "", "The filter transformation criteria.")
-	glue_getMltransformsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	glue_getMltransformsCmd.Flags().String("next-token", "", "A paginated token to offset the results.")
-	glue_getMltransformsCmd.Flags().String("sort", "", "The sorting criteria.")
+		glue_getMltransformsCmd.Flags().String("filter", "", "The filter transformation criteria.")
+		glue_getMltransformsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		glue_getMltransformsCmd.Flags().String("next-token", "", "A paginated token to offset the results.")
+		glue_getMltransformsCmd.Flags().String("sort", "", "The sorting criteria.")
+	})
 	glueCmd.AddCommand(glue_getMltransformsCmd)
 }

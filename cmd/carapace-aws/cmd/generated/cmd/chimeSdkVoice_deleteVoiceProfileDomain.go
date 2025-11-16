@@ -12,9 +12,11 @@ var chimeSdkVoice_deleteVoiceProfileDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteVoiceProfileDomainCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteVoiceProfileDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteVoiceProfileDomainCmd).Standalone()
 
-	chimeSdkVoice_deleteVoiceProfileDomainCmd.Flags().String("voice-profile-domain-id", "", "The voice profile domain ID.")
-	chimeSdkVoice_deleteVoiceProfileDomainCmd.MarkFlagRequired("voice-profile-domain-id")
+		chimeSdkVoice_deleteVoiceProfileDomainCmd.Flags().String("voice-profile-domain-id", "", "The voice profile domain ID.")
+		chimeSdkVoice_deleteVoiceProfileDomainCmd.MarkFlagRequired("voice-profile-domain-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteVoiceProfileDomainCmd)
 }

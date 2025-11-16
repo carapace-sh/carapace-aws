@@ -12,9 +12,11 @@ var outposts_getOutpostCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_getOutpostCmd).Standalone()
+	carapace.Gen(outposts_getOutpostCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_getOutpostCmd).Standalone()
 
-	outposts_getOutpostCmd.Flags().String("outpost-id", "", "The ID or ARN of the Outpost.")
-	outposts_getOutpostCmd.MarkFlagRequired("outpost-id")
+		outposts_getOutpostCmd.Flags().String("outpost-id", "", "The ID or ARN of the Outpost.")
+		outposts_getOutpostCmd.MarkFlagRequired("outpost-id")
+	})
 	outpostsCmd.AddCommand(outposts_getOutpostCmd)
 }

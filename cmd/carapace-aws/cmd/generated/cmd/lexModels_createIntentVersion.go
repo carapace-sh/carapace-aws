@@ -12,10 +12,12 @@ var lexModels_createIntentVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_createIntentVersionCmd).Standalone()
+	carapace.Gen(lexModels_createIntentVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_createIntentVersionCmd).Standalone()
 
-	lexModels_createIntentVersionCmd.Flags().String("checksum", "", "Checksum of the `$LATEST` version of the intent that should be used to create the new version.")
-	lexModels_createIntentVersionCmd.Flags().String("name", "", "The name of the intent that you want to create a new version of.")
-	lexModels_createIntentVersionCmd.MarkFlagRequired("name")
+		lexModels_createIntentVersionCmd.Flags().String("checksum", "", "Checksum of the `$LATEST` version of the intent that should be used to create the new version.")
+		lexModels_createIntentVersionCmd.Flags().String("name", "", "The name of the intent that you want to create a new version of.")
+		lexModels_createIntentVersionCmd.MarkFlagRequired("name")
+	})
 	lexModelsCmd.AddCommand(lexModels_createIntentVersionCmd)
 }

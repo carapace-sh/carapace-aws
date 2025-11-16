@@ -12,11 +12,13 @@ var databrew_listRecipeVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_listRecipeVersionsCmd).Standalone()
+	carapace.Gen(databrew_listRecipeVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_listRecipeVersionsCmd).Standalone()
 
-	databrew_listRecipeVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	databrew_listRecipeVersionsCmd.Flags().String("name", "", "The name of the recipe for which to return version information.")
-	databrew_listRecipeVersionsCmd.Flags().String("next-token", "", "The token returned by a previous call to retrieve the next set of results.")
-	databrew_listRecipeVersionsCmd.MarkFlagRequired("name")
+		databrew_listRecipeVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		databrew_listRecipeVersionsCmd.Flags().String("name", "", "The name of the recipe for which to return version information.")
+		databrew_listRecipeVersionsCmd.Flags().String("next-token", "", "The token returned by a previous call to retrieve the next set of results.")
+		databrew_listRecipeVersionsCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_listRecipeVersionsCmd)
 }

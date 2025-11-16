@@ -12,13 +12,15 @@ var ses_putIdentityPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_putIdentityPolicyCmd).Standalone()
+	carapace.Gen(ses_putIdentityPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_putIdentityPolicyCmd).Standalone()
 
-	ses_putIdentityPolicyCmd.Flags().String("identity", "", "The identity to which that the policy applies.")
-	ses_putIdentityPolicyCmd.Flags().String("policy", "", "The text of the policy in JSON format.")
-	ses_putIdentityPolicyCmd.Flags().String("policy-name", "", "The name of the policy.")
-	ses_putIdentityPolicyCmd.MarkFlagRequired("identity")
-	ses_putIdentityPolicyCmd.MarkFlagRequired("policy")
-	ses_putIdentityPolicyCmd.MarkFlagRequired("policy-name")
+		ses_putIdentityPolicyCmd.Flags().String("identity", "", "The identity to which that the policy applies.")
+		ses_putIdentityPolicyCmd.Flags().String("policy", "", "The text of the policy in JSON format.")
+		ses_putIdentityPolicyCmd.Flags().String("policy-name", "", "The name of the policy.")
+		ses_putIdentityPolicyCmd.MarkFlagRequired("identity")
+		ses_putIdentityPolicyCmd.MarkFlagRequired("policy")
+		ses_putIdentityPolicyCmd.MarkFlagRequired("policy-name")
+	})
 	sesCmd.AddCommand(ses_putIdentityPolicyCmd)
 }

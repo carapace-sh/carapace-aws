@@ -12,9 +12,11 @@ var servicecatalogAppregistry_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalogAppregistry_deleteApplicationCmd).Standalone()
+	carapace.Gen(servicecatalogAppregistry_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalogAppregistry_deleteApplicationCmd).Standalone()
 
-	servicecatalogAppregistry_deleteApplicationCmd.Flags().String("application", "", "The name, ID, or ARN of the application.")
-	servicecatalogAppregistry_deleteApplicationCmd.MarkFlagRequired("application")
+		servicecatalogAppregistry_deleteApplicationCmd.Flags().String("application", "", "The name, ID, or ARN of the application.")
+		servicecatalogAppregistry_deleteApplicationCmd.MarkFlagRequired("application")
+	})
 	servicecatalogAppregistryCmd.AddCommand(servicecatalogAppregistry_deleteApplicationCmd)
 }

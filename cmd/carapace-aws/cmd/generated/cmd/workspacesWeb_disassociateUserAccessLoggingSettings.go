@@ -12,9 +12,11 @@ var workspacesWeb_disassociateUserAccessLoggingSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_disassociateUserAccessLoggingSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_disassociateUserAccessLoggingSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_disassociateUserAccessLoggingSettingsCmd).Standalone()
 
-	workspacesWeb_disassociateUserAccessLoggingSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
-	workspacesWeb_disassociateUserAccessLoggingSettingsCmd.MarkFlagRequired("portal-arn")
+		workspacesWeb_disassociateUserAccessLoggingSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
+		workspacesWeb_disassociateUserAccessLoggingSettingsCmd.MarkFlagRequired("portal-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_disassociateUserAccessLoggingSettingsCmd)
 }

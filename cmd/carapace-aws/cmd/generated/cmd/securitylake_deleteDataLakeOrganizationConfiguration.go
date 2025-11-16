@@ -12,8 +12,10 @@ var securitylake_deleteDataLakeOrganizationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_deleteDataLakeOrganizationConfigurationCmd).Standalone()
+	carapace.Gen(securitylake_deleteDataLakeOrganizationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_deleteDataLakeOrganizationConfigurationCmd).Standalone()
 
-	securitylake_deleteDataLakeOrganizationConfigurationCmd.Flags().String("auto-enable-new-account", "", "Turns off automatic enablement of Security Lake for member accounts that are added to an organization.")
+		securitylake_deleteDataLakeOrganizationConfigurationCmd.Flags().String("auto-enable-new-account", "", "Turns off automatic enablement of Security Lake for member accounts that are added to an organization.")
+	})
 	securitylakeCmd.AddCommand(securitylake_deleteDataLakeOrganizationConfigurationCmd)
 }

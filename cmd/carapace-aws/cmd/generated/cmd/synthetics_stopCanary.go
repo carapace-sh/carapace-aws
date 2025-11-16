@@ -12,9 +12,11 @@ var synthetics_stopCanaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_stopCanaryCmd).Standalone()
+	carapace.Gen(synthetics_stopCanaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_stopCanaryCmd).Standalone()
 
-	synthetics_stopCanaryCmd.Flags().String("name", "", "The name of the canary that you want to stop.")
-	synthetics_stopCanaryCmd.MarkFlagRequired("name")
+		synthetics_stopCanaryCmd.Flags().String("name", "", "The name of the canary that you want to stop.")
+		synthetics_stopCanaryCmd.MarkFlagRequired("name")
+	})
 	syntheticsCmd.AddCommand(synthetics_stopCanaryCmd)
 }

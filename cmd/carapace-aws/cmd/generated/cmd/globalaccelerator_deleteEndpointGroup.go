@@ -12,9 +12,11 @@ var globalaccelerator_deleteEndpointGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_deleteEndpointGroupCmd).Standalone()
+	carapace.Gen(globalaccelerator_deleteEndpointGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_deleteEndpointGroupCmd).Standalone()
 
-	globalaccelerator_deleteEndpointGroupCmd.Flags().String("endpoint-group-arn", "", "The Amazon Resource Name (ARN) of the endpoint group to delete.")
-	globalaccelerator_deleteEndpointGroupCmd.MarkFlagRequired("endpoint-group-arn")
+		globalaccelerator_deleteEndpointGroupCmd.Flags().String("endpoint-group-arn", "", "The Amazon Resource Name (ARN) of the endpoint group to delete.")
+		globalaccelerator_deleteEndpointGroupCmd.MarkFlagRequired("endpoint-group-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_deleteEndpointGroupCmd)
 }

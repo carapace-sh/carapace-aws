@@ -12,9 +12,11 @@ var bedrock_getMarketplaceModelEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getMarketplaceModelEndpointCmd).Standalone()
+	carapace.Gen(bedrock_getMarketplaceModelEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getMarketplaceModelEndpointCmd).Standalone()
 
-	bedrock_getMarketplaceModelEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) of the endpoint you want to get information about.")
-	bedrock_getMarketplaceModelEndpointCmd.MarkFlagRequired("endpoint-arn")
+		bedrock_getMarketplaceModelEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) of the endpoint you want to get information about.")
+		bedrock_getMarketplaceModelEndpointCmd.MarkFlagRequired("endpoint-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_getMarketplaceModelEndpointCmd)
 }

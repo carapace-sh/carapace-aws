@@ -12,12 +12,14 @@ var dsData_disableUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsData_disableUserCmd).Standalone()
+	carapace.Gen(dsData_disableUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsData_disableUserCmd).Standalone()
 
-	dsData_disableUserCmd.Flags().String("client-token", "", "A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.")
-	dsData_disableUserCmd.Flags().String("directory-id", "", "The identifier (ID) of the directory that's associated with the user.")
-	dsData_disableUserCmd.Flags().String("samaccount-name", "", "The name of the user.")
-	dsData_disableUserCmd.MarkFlagRequired("directory-id")
-	dsData_disableUserCmd.MarkFlagRequired("samaccount-name")
+		dsData_disableUserCmd.Flags().String("client-token", "", "A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.")
+		dsData_disableUserCmd.Flags().String("directory-id", "", "The identifier (ID) of the directory that's associated with the user.")
+		dsData_disableUserCmd.Flags().String("samaccount-name", "", "The name of the user.")
+		dsData_disableUserCmd.MarkFlagRequired("directory-id")
+		dsData_disableUserCmd.MarkFlagRequired("samaccount-name")
+	})
 	dsDataCmd.AddCommand(dsData_disableUserCmd)
 }

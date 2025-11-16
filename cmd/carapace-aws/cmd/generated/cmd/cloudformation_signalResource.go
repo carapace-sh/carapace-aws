@@ -12,15 +12,17 @@ var cloudformation_signalResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_signalResourceCmd).Standalone()
+	carapace.Gen(cloudformation_signalResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_signalResourceCmd).Standalone()
 
-	cloudformation_signalResourceCmd.Flags().String("logical-resource-id", "", "The logical ID of the resource that you want to signal.")
-	cloudformation_signalResourceCmd.Flags().String("stack-name", "", "The stack name or unique stack ID that includes the resource that you want to signal.")
-	cloudformation_signalResourceCmd.Flags().String("status", "", "The status of the signal, which is either success or failure.")
-	cloudformation_signalResourceCmd.Flags().String("unique-id", "", "A unique ID of the signal.")
-	cloudformation_signalResourceCmd.MarkFlagRequired("logical-resource-id")
-	cloudformation_signalResourceCmd.MarkFlagRequired("stack-name")
-	cloudformation_signalResourceCmd.MarkFlagRequired("status")
-	cloudformation_signalResourceCmd.MarkFlagRequired("unique-id")
+		cloudformation_signalResourceCmd.Flags().String("logical-resource-id", "", "The logical ID of the resource that you want to signal.")
+		cloudformation_signalResourceCmd.Flags().String("stack-name", "", "The stack name or unique stack ID that includes the resource that you want to signal.")
+		cloudformation_signalResourceCmd.Flags().String("status", "", "The status of the signal, which is either success or failure.")
+		cloudformation_signalResourceCmd.Flags().String("unique-id", "", "A unique ID of the signal.")
+		cloudformation_signalResourceCmd.MarkFlagRequired("logical-resource-id")
+		cloudformation_signalResourceCmd.MarkFlagRequired("stack-name")
+		cloudformation_signalResourceCmd.MarkFlagRequired("status")
+		cloudformation_signalResourceCmd.MarkFlagRequired("unique-id")
+	})
 	cloudformationCmd.AddCommand(cloudformation_signalResourceCmd)
 }

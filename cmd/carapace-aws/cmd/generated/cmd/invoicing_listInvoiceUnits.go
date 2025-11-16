@@ -12,11 +12,13 @@ var invoicing_listInvoiceUnitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(invoicing_listInvoiceUnitsCmd).Standalone()
+	carapace.Gen(invoicing_listInvoiceUnitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(invoicing_listInvoiceUnitsCmd).Standalone()
 
-	invoicing_listInvoiceUnitsCmd.Flags().String("as-of", "", "The state of an invoice unit at a specified time.")
-	invoicing_listInvoiceUnitsCmd.Flags().String("filters", "", "An optional input to the list API.")
-	invoicing_listInvoiceUnitsCmd.Flags().String("max-results", "", "The maximum number of invoice units that can be returned.")
-	invoicing_listInvoiceUnitsCmd.Flags().String("next-token", "", "The next token used to indicate where the returned list should start from.")
+		invoicing_listInvoiceUnitsCmd.Flags().String("as-of", "", "The state of an invoice unit at a specified time.")
+		invoicing_listInvoiceUnitsCmd.Flags().String("filters", "", "An optional input to the list API.")
+		invoicing_listInvoiceUnitsCmd.Flags().String("max-results", "", "The maximum number of invoice units that can be returned.")
+		invoicing_listInvoiceUnitsCmd.Flags().String("next-token", "", "The next token used to indicate where the returned list should start from.")
+	})
 	invoicingCmd.AddCommand(invoicing_listInvoiceUnitsCmd)
 }

@@ -12,11 +12,13 @@ var ds_registerEventTopicCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_registerEventTopicCmd).Standalone()
+	carapace.Gen(ds_registerEventTopicCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_registerEventTopicCmd).Standalone()
 
-	ds_registerEventTopicCmd.Flags().String("directory-id", "", "The Directory ID that will publish status messages to the Amazon SNS topic.")
-	ds_registerEventTopicCmd.Flags().String("topic-name", "", "The Amazon SNS topic name to which the directory will publish status messages.")
-	ds_registerEventTopicCmd.MarkFlagRequired("directory-id")
-	ds_registerEventTopicCmd.MarkFlagRequired("topic-name")
+		ds_registerEventTopicCmd.Flags().String("directory-id", "", "The Directory ID that will publish status messages to the Amazon SNS topic.")
+		ds_registerEventTopicCmd.Flags().String("topic-name", "", "The Amazon SNS topic name to which the directory will publish status messages.")
+		ds_registerEventTopicCmd.MarkFlagRequired("directory-id")
+		ds_registerEventTopicCmd.MarkFlagRequired("topic-name")
+	})
 	dsCmd.AddCommand(ds_registerEventTopicCmd)
 }

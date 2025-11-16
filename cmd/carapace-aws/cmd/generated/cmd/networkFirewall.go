@@ -12,7 +12,9 @@ var networkFirewallCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewallCmd).Standalone()
+	carapace.Gen(networkFirewallCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewallCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(networkFirewallCmd)
 }

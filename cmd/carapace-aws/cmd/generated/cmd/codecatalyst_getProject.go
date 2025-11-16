@@ -12,11 +12,13 @@ var codecatalyst_getProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_getProjectCmd).Standalone()
+	carapace.Gen(codecatalyst_getProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_getProjectCmd).Standalone()
 
-	codecatalyst_getProjectCmd.Flags().String("name", "", "The name of the project in the space.")
-	codecatalyst_getProjectCmd.Flags().String("space-name", "", "The name of the space.")
-	codecatalyst_getProjectCmd.MarkFlagRequired("name")
-	codecatalyst_getProjectCmd.MarkFlagRequired("space-name")
+		codecatalyst_getProjectCmd.Flags().String("name", "", "The name of the project in the space.")
+		codecatalyst_getProjectCmd.Flags().String("space-name", "", "The name of the space.")
+		codecatalyst_getProjectCmd.MarkFlagRequired("name")
+		codecatalyst_getProjectCmd.MarkFlagRequired("space-name")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_getProjectCmd)
 }

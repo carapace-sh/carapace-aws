@@ -12,15 +12,17 @@ var forecast_createPredictorBacktestExportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_createPredictorBacktestExportJobCmd).Standalone()
+	carapace.Gen(forecast_createPredictorBacktestExportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_createPredictorBacktestExportJobCmd).Standalone()
 
-	forecast_createPredictorBacktestExportJobCmd.Flags().String("destination", "", "")
-	forecast_createPredictorBacktestExportJobCmd.Flags().String("format", "", "The format of the exported data, CSV or PARQUET.")
-	forecast_createPredictorBacktestExportJobCmd.Flags().String("predictor-arn", "", "The Amazon Resource Name (ARN) of the predictor that you want to export.")
-	forecast_createPredictorBacktestExportJobCmd.Flags().String("predictor-backtest-export-job-name", "", "The name for the backtest export job.")
-	forecast_createPredictorBacktestExportJobCmd.Flags().String("tags", "", "Optional metadata to help you categorize and organize your backtests.")
-	forecast_createPredictorBacktestExportJobCmd.MarkFlagRequired("destination")
-	forecast_createPredictorBacktestExportJobCmd.MarkFlagRequired("predictor-arn")
-	forecast_createPredictorBacktestExportJobCmd.MarkFlagRequired("predictor-backtest-export-job-name")
+		forecast_createPredictorBacktestExportJobCmd.Flags().String("destination", "", "")
+		forecast_createPredictorBacktestExportJobCmd.Flags().String("format", "", "The format of the exported data, CSV or PARQUET.")
+		forecast_createPredictorBacktestExportJobCmd.Flags().String("predictor-arn", "", "The Amazon Resource Name (ARN) of the predictor that you want to export.")
+		forecast_createPredictorBacktestExportJobCmd.Flags().String("predictor-backtest-export-job-name", "", "The name for the backtest export job.")
+		forecast_createPredictorBacktestExportJobCmd.Flags().String("tags", "", "Optional metadata to help you categorize and organize your backtests.")
+		forecast_createPredictorBacktestExportJobCmd.MarkFlagRequired("destination")
+		forecast_createPredictorBacktestExportJobCmd.MarkFlagRequired("predictor-arn")
+		forecast_createPredictorBacktestExportJobCmd.MarkFlagRequired("predictor-backtest-export-job-name")
+	})
 	forecastCmd.AddCommand(forecast_createPredictorBacktestExportJobCmd)
 }

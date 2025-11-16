@@ -12,9 +12,11 @@ var cloudwatch_enableAlarmActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_enableAlarmActionsCmd).Standalone()
+	carapace.Gen(cloudwatch_enableAlarmActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_enableAlarmActionsCmd).Standalone()
 
-	cloudwatch_enableAlarmActionsCmd.Flags().String("alarm-names", "", "The names of the alarms.")
-	cloudwatch_enableAlarmActionsCmd.MarkFlagRequired("alarm-names")
+		cloudwatch_enableAlarmActionsCmd.Flags().String("alarm-names", "", "The names of the alarms.")
+		cloudwatch_enableAlarmActionsCmd.MarkFlagRequired("alarm-names")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_enableAlarmActionsCmd)
 }

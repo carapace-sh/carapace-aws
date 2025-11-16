@@ -12,13 +12,15 @@ var ec2_deprovisionIpamPoolCidrCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deprovisionIpamPoolCidrCmd).Standalone()
+	carapace.Gen(ec2_deprovisionIpamPoolCidrCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deprovisionIpamPoolCidrCmd).Standalone()
 
-	ec2_deprovisionIpamPoolCidrCmd.Flags().String("cidr", "", "The CIDR which you want to deprovision from the pool.")
-	ec2_deprovisionIpamPoolCidrCmd.Flags().Bool("dry-run", false, "A check for whether you have the required permissions for the action without actually making the request and provides an error response.")
-	ec2_deprovisionIpamPoolCidrCmd.Flags().String("ipam-pool-id", "", "The ID of the pool that has the CIDR you want to deprovision.")
-	ec2_deprovisionIpamPoolCidrCmd.Flags().Bool("no-dry-run", false, "A check for whether you have the required permissions for the action without actually making the request and provides an error response.")
-	ec2_deprovisionIpamPoolCidrCmd.MarkFlagRequired("ipam-pool-id")
-	ec2_deprovisionIpamPoolCidrCmd.Flag("no-dry-run").Hidden = true
+		ec2_deprovisionIpamPoolCidrCmd.Flags().String("cidr", "", "The CIDR which you want to deprovision from the pool.")
+		ec2_deprovisionIpamPoolCidrCmd.Flags().Bool("dry-run", false, "A check for whether you have the required permissions for the action without actually making the request and provides an error response.")
+		ec2_deprovisionIpamPoolCidrCmd.Flags().String("ipam-pool-id", "", "The ID of the pool that has the CIDR you want to deprovision.")
+		ec2_deprovisionIpamPoolCidrCmd.Flags().Bool("no-dry-run", false, "A check for whether you have the required permissions for the action without actually making the request and provides an error response.")
+		ec2_deprovisionIpamPoolCidrCmd.MarkFlagRequired("ipam-pool-id")
+		ec2_deprovisionIpamPoolCidrCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_deprovisionIpamPoolCidrCmd)
 }

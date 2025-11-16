@@ -12,11 +12,13 @@ var gamelift_resumeGameServerGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_resumeGameServerGroupCmd).Standalone()
+	carapace.Gen(gamelift_resumeGameServerGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_resumeGameServerGroupCmd).Standalone()
 
-	gamelift_resumeGameServerGroupCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group.")
-	gamelift_resumeGameServerGroupCmd.Flags().String("resume-actions", "", "The activity to resume for this game server group.")
-	gamelift_resumeGameServerGroupCmd.MarkFlagRequired("game-server-group-name")
-	gamelift_resumeGameServerGroupCmd.MarkFlagRequired("resume-actions")
+		gamelift_resumeGameServerGroupCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group.")
+		gamelift_resumeGameServerGroupCmd.Flags().String("resume-actions", "", "The activity to resume for this game server group.")
+		gamelift_resumeGameServerGroupCmd.MarkFlagRequired("game-server-group-name")
+		gamelift_resumeGameServerGroupCmd.MarkFlagRequired("resume-actions")
+	})
 	gameliftCmd.AddCommand(gamelift_resumeGameServerGroupCmd)
 }

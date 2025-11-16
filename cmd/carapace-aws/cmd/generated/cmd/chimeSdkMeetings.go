@@ -12,7 +12,9 @@ var chimeSdkMeetingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMeetingsCmd).Standalone()
+	carapace.Gen(chimeSdkMeetingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMeetingsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(chimeSdkMeetingsCmd)
 }

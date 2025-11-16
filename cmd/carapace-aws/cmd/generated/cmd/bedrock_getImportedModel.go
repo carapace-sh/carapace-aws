@@ -12,9 +12,11 @@ var bedrock_getImportedModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getImportedModelCmd).Standalone()
+	carapace.Gen(bedrock_getImportedModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getImportedModelCmd).Standalone()
 
-	bedrock_getImportedModelCmd.Flags().String("model-identifier", "", "Name or Amazon Resource Name (ARN) of the imported model.")
-	bedrock_getImportedModelCmd.MarkFlagRequired("model-identifier")
+		bedrock_getImportedModelCmd.Flags().String("model-identifier", "", "Name or Amazon Resource Name (ARN) of the imported model.")
+		bedrock_getImportedModelCmd.MarkFlagRequired("model-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_getImportedModelCmd)
 }

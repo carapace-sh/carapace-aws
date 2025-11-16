@@ -12,9 +12,11 @@ var clouddirectory_getDirectoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_getDirectoryCmd).Standalone()
+	carapace.Gen(clouddirectory_getDirectoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_getDirectoryCmd).Standalone()
 
-	clouddirectory_getDirectoryCmd.Flags().String("directory-arn", "", "The ARN of the directory.")
-	clouddirectory_getDirectoryCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_getDirectoryCmd.Flags().String("directory-arn", "", "The ARN of the directory.")
+		clouddirectory_getDirectoryCmd.MarkFlagRequired("directory-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_getDirectoryCmd)
 }

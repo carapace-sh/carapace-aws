@@ -12,9 +12,11 @@ var resourceExplorer2_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_listTagsForResourceCmd).Standalone()
+	carapace.Gen(resourceExplorer2_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_listTagsForResourceCmd).Standalone()
 
-	resourceExplorer2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The [Amazon resource name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the view or index that you want to attach tags to.")
-	resourceExplorer2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		resourceExplorer2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The [Amazon resource name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the view or index that you want to attach tags to.")
+		resourceExplorer2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_listTagsForResourceCmd)
 }

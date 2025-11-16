@@ -12,9 +12,11 @@ var osis_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(osis_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_deleteResourcePolicyCmd).Standalone()
 
-	osis_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource from which to delete the policy.")
-	osis_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		osis_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource from which to delete the policy.")
+		osis_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	osisCmd.AddCommand(osis_deleteResourcePolicyCmd)
 }

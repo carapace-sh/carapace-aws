@@ -12,12 +12,14 @@ var backup_listRecoveryPointsByResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_listRecoveryPointsByResourceCmd).Standalone()
+	carapace.Gen(backup_listRecoveryPointsByResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_listRecoveryPointsByResourceCmd).Standalone()
 
-	backup_listRecoveryPointsByResourceCmd.Flags().String("managed-by-awsbackup-only", "", "This attribute filters recovery points based on ownership.")
-	backup_listRecoveryPointsByResourceCmd.Flags().String("max-results", "", "The maximum number of items to be returned.")
-	backup_listRecoveryPointsByResourceCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
-	backup_listRecoveryPointsByResourceCmd.Flags().String("resource-arn", "", "An ARN that uniquely identifies a resource.")
-	backup_listRecoveryPointsByResourceCmd.MarkFlagRequired("resource-arn")
+		backup_listRecoveryPointsByResourceCmd.Flags().String("managed-by-awsbackup-only", "", "This attribute filters recovery points based on ownership.")
+		backup_listRecoveryPointsByResourceCmd.Flags().String("max-results", "", "The maximum number of items to be returned.")
+		backup_listRecoveryPointsByResourceCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
+		backup_listRecoveryPointsByResourceCmd.Flags().String("resource-arn", "", "An ARN that uniquely identifies a resource.")
+		backup_listRecoveryPointsByResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	backupCmd.AddCommand(backup_listRecoveryPointsByResourceCmd)
 }

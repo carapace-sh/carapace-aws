@@ -12,10 +12,12 @@ var panorama_createPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_createPackageCmd).Standalone()
+	carapace.Gen(panorama_createPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_createPackageCmd).Standalone()
 
-	panorama_createPackageCmd.Flags().String("package-name", "", "A name for the package.")
-	panorama_createPackageCmd.Flags().String("tags", "", "Tags for the package.")
-	panorama_createPackageCmd.MarkFlagRequired("package-name")
+		panorama_createPackageCmd.Flags().String("package-name", "", "A name for the package.")
+		panorama_createPackageCmd.Flags().String("tags", "", "Tags for the package.")
+		panorama_createPackageCmd.MarkFlagRequired("package-name")
+	})
 	panoramaCmd.AddCommand(panorama_createPackageCmd)
 }

@@ -12,9 +12,11 @@ var medialive_deleteSdiSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteSdiSourceCmd).Standalone()
+	carapace.Gen(medialive_deleteSdiSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteSdiSourceCmd).Standalone()
 
-	medialive_deleteSdiSourceCmd.Flags().String("sdi-source-id", "", "The ID of the SdiSource.")
-	medialive_deleteSdiSourceCmd.MarkFlagRequired("sdi-source-id")
+		medialive_deleteSdiSourceCmd.Flags().String("sdi-source-id", "", "The ID of the SdiSource.")
+		medialive_deleteSdiSourceCmd.MarkFlagRequired("sdi-source-id")
+	})
 	medialiveCmd.AddCommand(medialive_deleteSdiSourceCmd)
 }

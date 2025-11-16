@@ -12,9 +12,11 @@ var personalize_stopRecommenderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_stopRecommenderCmd).Standalone()
+	carapace.Gen(personalize_stopRecommenderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_stopRecommenderCmd).Standalone()
 
-	personalize_stopRecommenderCmd.Flags().String("recommender-arn", "", "The Amazon Resource Name (ARN) of the recommender to stop.")
-	personalize_stopRecommenderCmd.MarkFlagRequired("recommender-arn")
+		personalize_stopRecommenderCmd.Flags().String("recommender-arn", "", "The Amazon Resource Name (ARN) of the recommender to stop.")
+		personalize_stopRecommenderCmd.MarkFlagRequired("recommender-arn")
+	})
 	personalizeCmd.AddCommand(personalize_stopRecommenderCmd)
 }

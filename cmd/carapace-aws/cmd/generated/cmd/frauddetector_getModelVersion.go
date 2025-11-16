@@ -12,13 +12,15 @@ var frauddetector_getModelVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getModelVersionCmd).Standalone()
+	carapace.Gen(frauddetector_getModelVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getModelVersionCmd).Standalone()
 
-	frauddetector_getModelVersionCmd.Flags().String("model-id", "", "The model ID.")
-	frauddetector_getModelVersionCmd.Flags().String("model-type", "", "The model type.")
-	frauddetector_getModelVersionCmd.Flags().String("model-version-number", "", "The model version number.")
-	frauddetector_getModelVersionCmd.MarkFlagRequired("model-id")
-	frauddetector_getModelVersionCmd.MarkFlagRequired("model-type")
-	frauddetector_getModelVersionCmd.MarkFlagRequired("model-version-number")
+		frauddetector_getModelVersionCmd.Flags().String("model-id", "", "The model ID.")
+		frauddetector_getModelVersionCmd.Flags().String("model-type", "", "The model type.")
+		frauddetector_getModelVersionCmd.Flags().String("model-version-number", "", "The model version number.")
+		frauddetector_getModelVersionCmd.MarkFlagRequired("model-id")
+		frauddetector_getModelVersionCmd.MarkFlagRequired("model-type")
+		frauddetector_getModelVersionCmd.MarkFlagRequired("model-version-number")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getModelVersionCmd)
 }

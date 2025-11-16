@@ -12,9 +12,11 @@ var glue_startCrawlerScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_startCrawlerScheduleCmd).Standalone()
+	carapace.Gen(glue_startCrawlerScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_startCrawlerScheduleCmd).Standalone()
 
-	glue_startCrawlerScheduleCmd.Flags().String("crawler-name", "", "Name of the crawler to schedule.")
-	glue_startCrawlerScheduleCmd.MarkFlagRequired("crawler-name")
+		glue_startCrawlerScheduleCmd.Flags().String("crawler-name", "", "Name of the crawler to schedule.")
+		glue_startCrawlerScheduleCmd.MarkFlagRequired("crawler-name")
+	})
 	glueCmd.AddCommand(glue_startCrawlerScheduleCmd)
 }

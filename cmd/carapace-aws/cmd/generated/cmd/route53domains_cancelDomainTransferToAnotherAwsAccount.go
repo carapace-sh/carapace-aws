@@ -12,9 +12,11 @@ var route53domains_cancelDomainTransferToAnotherAwsAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_cancelDomainTransferToAnotherAwsAccountCmd).Standalone()
+	carapace.Gen(route53domains_cancelDomainTransferToAnotherAwsAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_cancelDomainTransferToAnotherAwsAccountCmd).Standalone()
 
-	route53domains_cancelDomainTransferToAnotherAwsAccountCmd.Flags().String("domain-name", "", "The name of the domain for which you want to cancel the transfer to another Amazon Web Services account.")
-	route53domains_cancelDomainTransferToAnotherAwsAccountCmd.MarkFlagRequired("domain-name")
+		route53domains_cancelDomainTransferToAnotherAwsAccountCmd.Flags().String("domain-name", "", "The name of the domain for which you want to cancel the transfer to another Amazon Web Services account.")
+		route53domains_cancelDomainTransferToAnotherAwsAccountCmd.MarkFlagRequired("domain-name")
+	})
 	route53domainsCmd.AddCommand(route53domains_cancelDomainTransferToAnotherAwsAccountCmd)
 }

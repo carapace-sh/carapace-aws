@@ -12,13 +12,15 @@ var networkFirewall_describeRuleGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_describeRuleGroupCmd).Standalone()
+	carapace.Gen(networkFirewall_describeRuleGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_describeRuleGroupCmd).Standalone()
 
-	networkFirewall_describeRuleGroupCmd.Flags().Bool("analyze-rule-group", false, "Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing.")
-	networkFirewall_describeRuleGroupCmd.Flags().Bool("no-analyze-rule-group", false, "Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing.")
-	networkFirewall_describeRuleGroupCmd.Flags().String("rule-group-arn", "", "The Amazon Resource Name (ARN) of the rule group.")
-	networkFirewall_describeRuleGroupCmd.Flags().String("rule-group-name", "", "The descriptive name of the rule group.")
-	networkFirewall_describeRuleGroupCmd.Flags().String("type", "", "Indicates whether the rule group is stateless or stateful.")
-	networkFirewall_describeRuleGroupCmd.Flag("no-analyze-rule-group").Hidden = true
+		networkFirewall_describeRuleGroupCmd.Flags().Bool("analyze-rule-group", false, "Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing.")
+		networkFirewall_describeRuleGroupCmd.Flags().Bool("no-analyze-rule-group", false, "Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing.")
+		networkFirewall_describeRuleGroupCmd.Flags().String("rule-group-arn", "", "The Amazon Resource Name (ARN) of the rule group.")
+		networkFirewall_describeRuleGroupCmd.Flags().String("rule-group-name", "", "The descriptive name of the rule group.")
+		networkFirewall_describeRuleGroupCmd.Flags().String("type", "", "Indicates whether the rule group is stateless or stateful.")
+		networkFirewall_describeRuleGroupCmd.Flag("no-analyze-rule-group").Hidden = true
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_describeRuleGroupCmd)
 }

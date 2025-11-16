@@ -12,11 +12,13 @@ var lightsail_attachCertificateToDistributionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_attachCertificateToDistributionCmd).Standalone()
+	carapace.Gen(lightsail_attachCertificateToDistributionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_attachCertificateToDistributionCmd).Standalone()
 
-	lightsail_attachCertificateToDistributionCmd.Flags().String("certificate-name", "", "The name of the certificate to attach to a distribution.")
-	lightsail_attachCertificateToDistributionCmd.Flags().String("distribution-name", "", "The name of the distribution that the certificate will be attached to.")
-	lightsail_attachCertificateToDistributionCmd.MarkFlagRequired("certificate-name")
-	lightsail_attachCertificateToDistributionCmd.MarkFlagRequired("distribution-name")
+		lightsail_attachCertificateToDistributionCmd.Flags().String("certificate-name", "", "The name of the certificate to attach to a distribution.")
+		lightsail_attachCertificateToDistributionCmd.Flags().String("distribution-name", "", "The name of the distribution that the certificate will be attached to.")
+		lightsail_attachCertificateToDistributionCmd.MarkFlagRequired("certificate-name")
+		lightsail_attachCertificateToDistributionCmd.MarkFlagRequired("distribution-name")
+	})
 	lightsailCmd.AddCommand(lightsail_attachCertificateToDistributionCmd)
 }

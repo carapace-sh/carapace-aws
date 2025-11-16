@@ -12,8 +12,10 @@ var iam_getUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getUserCmd).Standalone()
+	carapace.Gen(iam_getUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getUserCmd).Standalone()
 
-	iam_getUserCmd.Flags().String("user-name", "", "The name of the user to get information about.")
+		iam_getUserCmd.Flags().String("user-name", "", "The name of the user to get information about.")
+	})
 	iamCmd.AddCommand(iam_getUserCmd)
 }

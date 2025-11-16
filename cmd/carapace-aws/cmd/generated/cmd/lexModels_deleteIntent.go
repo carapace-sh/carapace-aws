@@ -12,9 +12,11 @@ var lexModels_deleteIntentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_deleteIntentCmd).Standalone()
+	carapace.Gen(lexModels_deleteIntentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_deleteIntentCmd).Standalone()
 
-	lexModels_deleteIntentCmd.Flags().String("name", "", "The name of the intent.")
-	lexModels_deleteIntentCmd.MarkFlagRequired("name")
+		lexModels_deleteIntentCmd.Flags().String("name", "", "The name of the intent.")
+		lexModels_deleteIntentCmd.MarkFlagRequired("name")
+	})
 	lexModelsCmd.AddCommand(lexModels_deleteIntentCmd)
 }

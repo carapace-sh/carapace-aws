@@ -12,7 +12,9 @@ var kinesisanalyticsv2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2Cmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2Cmd).Standalone()
 
+	})
 	rootCmd.AddCommand(kinesisanalyticsv2Cmd)
 }

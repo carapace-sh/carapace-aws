@@ -12,7 +12,9 @@ var codestarNotificationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarNotificationsCmd).Standalone()
+	carapace.Gen(codestarNotificationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarNotificationsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(codestarNotificationsCmd)
 }

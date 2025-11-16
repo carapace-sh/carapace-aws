@@ -12,10 +12,12 @@ var dynamodb_batchGetItemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_batchGetItemCmd).Standalone()
+	carapace.Gen(dynamodb_batchGetItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_batchGetItemCmd).Standalone()
 
-	dynamodb_batchGetItemCmd.Flags().String("request-items", "", "A map of one or more table names or table ARNs and, for each table, a map that describes one or more items to retrieve from that table.")
-	dynamodb_batchGetItemCmd.Flags().String("return-consumed-capacity", "", "")
-	dynamodb_batchGetItemCmd.MarkFlagRequired("request-items")
+		dynamodb_batchGetItemCmd.Flags().String("request-items", "", "A map of one or more table names or table ARNs and, for each table, a map that describes one or more items to retrieve from that table.")
+		dynamodb_batchGetItemCmd.Flags().String("return-consumed-capacity", "", "")
+		dynamodb_batchGetItemCmd.MarkFlagRequired("request-items")
+	})
 	dynamodbCmd.AddCommand(dynamodb_batchGetItemCmd)
 }

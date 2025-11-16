@@ -12,8 +12,10 @@ var redshift_describeAuthenticationProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeAuthenticationProfilesCmd).Standalone()
+	carapace.Gen(redshift_describeAuthenticationProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeAuthenticationProfilesCmd).Standalone()
 
-	redshift_describeAuthenticationProfilesCmd.Flags().String("authentication-profile-name", "", "The name of the authentication profile to describe.")
+		redshift_describeAuthenticationProfilesCmd.Flags().String("authentication-profile-name", "", "The name of the authentication profile to describe.")
+	})
 	redshiftCmd.AddCommand(redshift_describeAuthenticationProfilesCmd)
 }

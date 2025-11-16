@@ -12,13 +12,15 @@ var wellarchitected_deleteTemplateShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_deleteTemplateShareCmd).Standalone()
+	carapace.Gen(wellarchitected_deleteTemplateShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_deleteTemplateShareCmd).Standalone()
 
-	wellarchitected_deleteTemplateShareCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_deleteTemplateShareCmd.Flags().String("share-id", "", "")
-	wellarchitected_deleteTemplateShareCmd.Flags().String("template-arn", "", "The review template ARN.")
-	wellarchitected_deleteTemplateShareCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_deleteTemplateShareCmd.MarkFlagRequired("share-id")
-	wellarchitected_deleteTemplateShareCmd.MarkFlagRequired("template-arn")
+		wellarchitected_deleteTemplateShareCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_deleteTemplateShareCmd.Flags().String("share-id", "", "")
+		wellarchitected_deleteTemplateShareCmd.Flags().String("template-arn", "", "The review template ARN.")
+		wellarchitected_deleteTemplateShareCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_deleteTemplateShareCmd.MarkFlagRequired("share-id")
+		wellarchitected_deleteTemplateShareCmd.MarkFlagRequired("template-arn")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_deleteTemplateShareCmd)
 }

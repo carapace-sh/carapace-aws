@@ -12,11 +12,13 @@ var route53_listTagsForResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_listTagsForResourcesCmd).Standalone()
+	carapace.Gen(route53_listTagsForResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_listTagsForResourcesCmd).Standalone()
 
-	route53_listTagsForResourcesCmd.Flags().String("resource-ids", "", "A complex type that contains the ResourceId element for each resource for which you want to get a list of tags.")
-	route53_listTagsForResourcesCmd.Flags().String("resource-type", "", "The type of the resources.")
-	route53_listTagsForResourcesCmd.MarkFlagRequired("resource-ids")
-	route53_listTagsForResourcesCmd.MarkFlagRequired("resource-type")
+		route53_listTagsForResourcesCmd.Flags().String("resource-ids", "", "A complex type that contains the ResourceId element for each resource for which you want to get a list of tags.")
+		route53_listTagsForResourcesCmd.Flags().String("resource-type", "", "The type of the resources.")
+		route53_listTagsForResourcesCmd.MarkFlagRequired("resource-ids")
+		route53_listTagsForResourcesCmd.MarkFlagRequired("resource-type")
+	})
 	route53Cmd.AddCommand(route53_listTagsForResourcesCmd)
 }

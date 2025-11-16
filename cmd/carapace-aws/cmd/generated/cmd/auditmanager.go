@@ -12,7 +12,9 @@ var auditmanagerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanagerCmd).Standalone()
+	carapace.Gen(auditmanagerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanagerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(auditmanagerCmd)
 }

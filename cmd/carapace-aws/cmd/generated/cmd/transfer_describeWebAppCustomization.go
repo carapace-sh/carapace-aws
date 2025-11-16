@@ -12,9 +12,11 @@ var transfer_describeWebAppCustomizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_describeWebAppCustomizationCmd).Standalone()
+	carapace.Gen(transfer_describeWebAppCustomizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_describeWebAppCustomizationCmd).Standalone()
 
-	transfer_describeWebAppCustomizationCmd.Flags().String("web-app-id", "", "Provide the unique identifier for the web app.")
-	transfer_describeWebAppCustomizationCmd.MarkFlagRequired("web-app-id")
+		transfer_describeWebAppCustomizationCmd.Flags().String("web-app-id", "", "Provide the unique identifier for the web app.")
+		transfer_describeWebAppCustomizationCmd.MarkFlagRequired("web-app-id")
+	})
 	transferCmd.AddCommand(transfer_describeWebAppCustomizationCmd)
 }

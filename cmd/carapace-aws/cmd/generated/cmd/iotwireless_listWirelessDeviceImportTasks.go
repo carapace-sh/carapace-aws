@@ -12,9 +12,11 @@ var iotwireless_listWirelessDeviceImportTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_listWirelessDeviceImportTasksCmd).Standalone()
+	carapace.Gen(iotwireless_listWirelessDeviceImportTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_listWirelessDeviceImportTasksCmd).Standalone()
 
-	iotwireless_listWirelessDeviceImportTasksCmd.Flags().String("max-results", "", "")
-	iotwireless_listWirelessDeviceImportTasksCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise `null` to receive the first set of results.")
+		iotwireless_listWirelessDeviceImportTasksCmd.Flags().String("max-results", "", "")
+		iotwireless_listWirelessDeviceImportTasksCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise `null` to receive the first set of results.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_listWirelessDeviceImportTasksCmd)
 }

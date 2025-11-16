@@ -12,13 +12,15 @@ var connectcases_batchPutFieldOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_batchPutFieldOptionsCmd).Standalone()
+	carapace.Gen(connectcases_batchPutFieldOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_batchPutFieldOptionsCmd).Standalone()
 
-	connectcases_batchPutFieldOptionsCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_batchPutFieldOptionsCmd.Flags().String("field-id", "", "The unique identifier of a field.")
-	connectcases_batchPutFieldOptionsCmd.Flags().String("options", "", "A list of `FieldOption` objects.")
-	connectcases_batchPutFieldOptionsCmd.MarkFlagRequired("domain-id")
-	connectcases_batchPutFieldOptionsCmd.MarkFlagRequired("field-id")
-	connectcases_batchPutFieldOptionsCmd.MarkFlagRequired("options")
+		connectcases_batchPutFieldOptionsCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_batchPutFieldOptionsCmd.Flags().String("field-id", "", "The unique identifier of a field.")
+		connectcases_batchPutFieldOptionsCmd.Flags().String("options", "", "A list of `FieldOption` objects.")
+		connectcases_batchPutFieldOptionsCmd.MarkFlagRequired("domain-id")
+		connectcases_batchPutFieldOptionsCmd.MarkFlagRequired("field-id")
+		connectcases_batchPutFieldOptionsCmd.MarkFlagRequired("options")
+	})
 	connectcasesCmd.AddCommand(connectcases_batchPutFieldOptionsCmd)
 }

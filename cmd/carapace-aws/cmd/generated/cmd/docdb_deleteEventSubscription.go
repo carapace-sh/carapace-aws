@@ -12,9 +12,11 @@ var docdb_deleteEventSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_deleteEventSubscriptionCmd).Standalone()
+	carapace.Gen(docdb_deleteEventSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_deleteEventSubscriptionCmd).Standalone()
 
-	docdb_deleteEventSubscriptionCmd.Flags().String("subscription-name", "", "The name of the Amazon DocumentDB event notification subscription that you want to delete.")
-	docdb_deleteEventSubscriptionCmd.MarkFlagRequired("subscription-name")
+		docdb_deleteEventSubscriptionCmd.Flags().String("subscription-name", "", "The name of the Amazon DocumentDB event notification subscription that you want to delete.")
+		docdb_deleteEventSubscriptionCmd.MarkFlagRequired("subscription-name")
+	})
 	docdbCmd.AddCommand(docdb_deleteEventSubscriptionCmd)
 }

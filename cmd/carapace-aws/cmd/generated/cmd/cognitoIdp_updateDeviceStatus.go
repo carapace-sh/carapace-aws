@@ -12,12 +12,14 @@ var cognitoIdp_updateDeviceStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_updateDeviceStatusCmd).Standalone()
+	carapace.Gen(cognitoIdp_updateDeviceStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_updateDeviceStatusCmd).Standalone()
 
-	cognitoIdp_updateDeviceStatusCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_updateDeviceStatusCmd.Flags().String("device-key", "", "The device key of the device you want to update, for example `us-west-2_a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.")
-	cognitoIdp_updateDeviceStatusCmd.Flags().String("device-remembered-status", "", "To enable device authentication with the specified device, set to `remembered`.To disable, set to `not_remembered`.")
-	cognitoIdp_updateDeviceStatusCmd.MarkFlagRequired("access-token")
-	cognitoIdp_updateDeviceStatusCmd.MarkFlagRequired("device-key")
+		cognitoIdp_updateDeviceStatusCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_updateDeviceStatusCmd.Flags().String("device-key", "", "The device key of the device you want to update, for example `us-west-2_a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.")
+		cognitoIdp_updateDeviceStatusCmd.Flags().String("device-remembered-status", "", "To enable device authentication with the specified device, set to `remembered`.To disable, set to `not_remembered`.")
+		cognitoIdp_updateDeviceStatusCmd.MarkFlagRequired("access-token")
+		cognitoIdp_updateDeviceStatusCmd.MarkFlagRequired("device-key")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_updateDeviceStatusCmd)
 }

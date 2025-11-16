@@ -12,9 +12,11 @@ var personalize_describeFeatureTransformationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeFeatureTransformationCmd).Standalone()
+	carapace.Gen(personalize_describeFeatureTransformationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeFeatureTransformationCmd).Standalone()
 
-	personalize_describeFeatureTransformationCmd.Flags().String("feature-transformation-arn", "", "The Amazon Resource Name (ARN) of the feature transformation to describe.")
-	personalize_describeFeatureTransformationCmd.MarkFlagRequired("feature-transformation-arn")
+		personalize_describeFeatureTransformationCmd.Flags().String("feature-transformation-arn", "", "The Amazon Resource Name (ARN) of the feature transformation to describe.")
+		personalize_describeFeatureTransformationCmd.MarkFlagRequired("feature-transformation-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeFeatureTransformationCmd)
 }

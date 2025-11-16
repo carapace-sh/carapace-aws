@@ -12,12 +12,14 @@ var ssm_getInventorySchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getInventorySchemaCmd).Standalone()
+	carapace.Gen(ssm_getInventorySchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getInventorySchemaCmd).Standalone()
 
-	ssm_getInventorySchemaCmd.Flags().String("aggregator", "", "Returns inventory schemas that support aggregation.")
-	ssm_getInventorySchemaCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_getInventorySchemaCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	ssm_getInventorySchemaCmd.Flags().String("sub-type", "", "Returns the sub-type schema for a specified inventory type.")
-	ssm_getInventorySchemaCmd.Flags().String("type-name", "", "The type of inventory item to return.")
+		ssm_getInventorySchemaCmd.Flags().String("aggregator", "", "Returns inventory schemas that support aggregation.")
+		ssm_getInventorySchemaCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_getInventorySchemaCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_getInventorySchemaCmd.Flags().String("sub-type", "", "Returns the sub-type schema for a specified inventory type.")
+		ssm_getInventorySchemaCmd.Flags().String("type-name", "", "The type of inventory item to return.")
+	})
 	ssmCmd.AddCommand(ssm_getInventorySchemaCmd)
 }

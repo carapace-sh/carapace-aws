@@ -12,9 +12,11 @@ var billingconductor_deleteBillingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billingconductor_deleteBillingGroupCmd).Standalone()
+	carapace.Gen(billingconductor_deleteBillingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_deleteBillingGroupCmd).Standalone()
 
-	billingconductor_deleteBillingGroupCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the billing group that you're deleting.")
-	billingconductor_deleteBillingGroupCmd.MarkFlagRequired("arn")
+		billingconductor_deleteBillingGroupCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the billing group that you're deleting.")
+		billingconductor_deleteBillingGroupCmd.MarkFlagRequired("arn")
+	})
 	billingconductorCmd.AddCommand(billingconductor_deleteBillingGroupCmd)
 }

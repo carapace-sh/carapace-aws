@@ -12,12 +12,14 @@ var serviceQuotas_getServiceQuotaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_getServiceQuotaCmd).Standalone()
+	carapace.Gen(serviceQuotas_getServiceQuotaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_getServiceQuotaCmd).Standalone()
 
-	serviceQuotas_getServiceQuotaCmd.Flags().String("context-id", "", "Specifies the resource with an Amazon Resource Name (ARN).")
-	serviceQuotas_getServiceQuotaCmd.Flags().String("quota-code", "", "Specifies the quota identifier.")
-	serviceQuotas_getServiceQuotaCmd.Flags().String("service-code", "", "Specifies the service identifier.")
-	serviceQuotas_getServiceQuotaCmd.MarkFlagRequired("quota-code")
-	serviceQuotas_getServiceQuotaCmd.MarkFlagRequired("service-code")
+		serviceQuotas_getServiceQuotaCmd.Flags().String("context-id", "", "Specifies the resource with an Amazon Resource Name (ARN).")
+		serviceQuotas_getServiceQuotaCmd.Flags().String("quota-code", "", "Specifies the quota identifier.")
+		serviceQuotas_getServiceQuotaCmd.Flags().String("service-code", "", "Specifies the service identifier.")
+		serviceQuotas_getServiceQuotaCmd.MarkFlagRequired("quota-code")
+		serviceQuotas_getServiceQuotaCmd.MarkFlagRequired("service-code")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_getServiceQuotaCmd)
 }

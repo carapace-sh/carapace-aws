@@ -12,9 +12,11 @@ var proton_getComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getComponentCmd).Standalone()
+	carapace.Gen(proton_getComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getComponentCmd).Standalone()
 
-	proton_getComponentCmd.Flags().String("name", "", "The name of the component that you want to get the detailed data for.")
-	proton_getComponentCmd.MarkFlagRequired("name")
+		proton_getComponentCmd.Flags().String("name", "", "The name of the component that you want to get the detailed data for.")
+		proton_getComponentCmd.MarkFlagRequired("name")
+	})
 	protonCmd.AddCommand(proton_getComponentCmd)
 }

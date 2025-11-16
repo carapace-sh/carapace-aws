@@ -12,9 +12,11 @@ var iotwireless_deleteDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_deleteDestinationCmd).Standalone()
+	carapace.Gen(iotwireless_deleteDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_deleteDestinationCmd).Standalone()
 
-	iotwireless_deleteDestinationCmd.Flags().String("name", "", "The name of the resource to delete.")
-	iotwireless_deleteDestinationCmd.MarkFlagRequired("name")
+		iotwireless_deleteDestinationCmd.Flags().String("name", "", "The name of the resource to delete.")
+		iotwireless_deleteDestinationCmd.MarkFlagRequired("name")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_deleteDestinationCmd)
 }

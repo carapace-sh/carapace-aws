@@ -12,11 +12,13 @@ var codebuild_listBuildBatchesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_listBuildBatchesCmd).Standalone()
+	carapace.Gen(codebuild_listBuildBatchesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_listBuildBatchesCmd).Standalone()
 
-	codebuild_listBuildBatchesCmd.Flags().String("filter", "", "A `BuildBatchFilter` object that specifies the filters for the search.")
-	codebuild_listBuildBatchesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	codebuild_listBuildBatchesCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous call to `ListBuildBatches`.")
-	codebuild_listBuildBatchesCmd.Flags().String("sort-order", "", "Specifies the sort order of the returned items.")
+		codebuild_listBuildBatchesCmd.Flags().String("filter", "", "A `BuildBatchFilter` object that specifies the filters for the search.")
+		codebuild_listBuildBatchesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		codebuild_listBuildBatchesCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous call to `ListBuildBatches`.")
+		codebuild_listBuildBatchesCmd.Flags().String("sort-order", "", "Specifies the sort order of the returned items.")
+	})
 	codebuildCmd.AddCommand(codebuild_listBuildBatchesCmd)
 }

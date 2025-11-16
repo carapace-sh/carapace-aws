@@ -12,11 +12,13 @@ var glue_listSchemaVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listSchemaVersionsCmd).Standalone()
+	carapace.Gen(glue_listSchemaVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listSchemaVersionsCmd).Standalone()
 
-	glue_listSchemaVersionsCmd.Flags().String("max-results", "", "Maximum number of results required per page.")
-	glue_listSchemaVersionsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
-	glue_listSchemaVersionsCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
-	glue_listSchemaVersionsCmd.MarkFlagRequired("schema-id")
+		glue_listSchemaVersionsCmd.Flags().String("max-results", "", "Maximum number of results required per page.")
+		glue_listSchemaVersionsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		glue_listSchemaVersionsCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
+		glue_listSchemaVersionsCmd.MarkFlagRequired("schema-id")
+	})
 	glueCmd.AddCommand(glue_listSchemaVersionsCmd)
 }

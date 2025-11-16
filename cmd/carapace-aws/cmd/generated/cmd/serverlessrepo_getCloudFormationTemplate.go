@@ -12,11 +12,13 @@ var serverlessrepo_getCloudFormationTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serverlessrepo_getCloudFormationTemplateCmd).Standalone()
+	carapace.Gen(serverlessrepo_getCloudFormationTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serverlessrepo_getCloudFormationTemplateCmd).Standalone()
 
-	serverlessrepo_getCloudFormationTemplateCmd.Flags().String("application-id", "", "The Amazon Resource Name (ARN) of the application.")
-	serverlessrepo_getCloudFormationTemplateCmd.Flags().String("template-id", "", "The UUID returned by CreateCloudFormationTemplate.")
-	serverlessrepo_getCloudFormationTemplateCmd.MarkFlagRequired("application-id")
-	serverlessrepo_getCloudFormationTemplateCmd.MarkFlagRequired("template-id")
+		serverlessrepo_getCloudFormationTemplateCmd.Flags().String("application-id", "", "The Amazon Resource Name (ARN) of the application.")
+		serverlessrepo_getCloudFormationTemplateCmd.Flags().String("template-id", "", "The UUID returned by CreateCloudFormationTemplate.")
+		serverlessrepo_getCloudFormationTemplateCmd.MarkFlagRequired("application-id")
+		serverlessrepo_getCloudFormationTemplateCmd.MarkFlagRequired("template-id")
+	})
 	serverlessrepoCmd.AddCommand(serverlessrepo_getCloudFormationTemplateCmd)
 }

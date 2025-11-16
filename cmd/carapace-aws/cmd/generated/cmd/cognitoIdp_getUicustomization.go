@@ -12,10 +12,12 @@ var cognitoIdp_getUicustomizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_getUicustomizationCmd).Standalone()
+	carapace.Gen(cognitoIdp_getUicustomizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_getUicustomizationCmd).Standalone()
 
-	cognitoIdp_getUicustomizationCmd.Flags().String("client-id", "", "The ID of the app client that you want to query for branding settings.")
-	cognitoIdp_getUicustomizationCmd.Flags().String("user-pool-id", "", "The ID of the user pool that you want to query for branding settings.")
-	cognitoIdp_getUicustomizationCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_getUicustomizationCmd.Flags().String("client-id", "", "The ID of the app client that you want to query for branding settings.")
+		cognitoIdp_getUicustomizationCmd.Flags().String("user-pool-id", "", "The ID of the user pool that you want to query for branding settings.")
+		cognitoIdp_getUicustomizationCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_getUicustomizationCmd)
 }

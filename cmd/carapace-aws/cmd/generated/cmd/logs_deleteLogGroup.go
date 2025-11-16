@@ -12,9 +12,11 @@ var logs_deleteLogGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteLogGroupCmd).Standalone()
+	carapace.Gen(logs_deleteLogGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteLogGroupCmd).Standalone()
 
-	logs_deleteLogGroupCmd.Flags().String("log-group-name", "", "The name of the log group.")
-	logs_deleteLogGroupCmd.MarkFlagRequired("log-group-name")
+		logs_deleteLogGroupCmd.Flags().String("log-group-name", "", "The name of the log group.")
+		logs_deleteLogGroupCmd.MarkFlagRequired("log-group-name")
+	})
 	logsCmd.AddCommand(logs_deleteLogGroupCmd)
 }

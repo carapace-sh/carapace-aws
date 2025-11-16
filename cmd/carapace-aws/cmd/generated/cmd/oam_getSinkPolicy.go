@@ -12,9 +12,11 @@ var oam_getSinkPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_getSinkPolicyCmd).Standalone()
+	carapace.Gen(oam_getSinkPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_getSinkPolicyCmd).Standalone()
 
-	oam_getSinkPolicyCmd.Flags().String("sink-identifier", "", "The ARN of the sink to retrieve the policy of.")
-	oam_getSinkPolicyCmd.MarkFlagRequired("sink-identifier")
+		oam_getSinkPolicyCmd.Flags().String("sink-identifier", "", "The ARN of the sink to retrieve the policy of.")
+		oam_getSinkPolicyCmd.MarkFlagRequired("sink-identifier")
+	})
 	oamCmd.AddCommand(oam_getSinkPolicyCmd)
 }

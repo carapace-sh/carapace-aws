@@ -12,10 +12,12 @@ var dms_describeFleetAdvisorSchemasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeFleetAdvisorSchemasCmd).Standalone()
+	carapace.Gen(dms_describeFleetAdvisorSchemasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeFleetAdvisorSchemasCmd).Standalone()
 
-	dms_describeFleetAdvisorSchemasCmd.Flags().String("filters", "", "If you specify any of the following filters, the output includes information for only those schemas that meet the filter criteria:")
-	dms_describeFleetAdvisorSchemasCmd.Flags().String("max-records", "", "Sets the maximum number of records returned in the response.")
-	dms_describeFleetAdvisorSchemasCmd.Flags().String("next-token", "", "If `NextToken` is returned by a previous response, there are more results available.")
+		dms_describeFleetAdvisorSchemasCmd.Flags().String("filters", "", "If you specify any of the following filters, the output includes information for only those schemas that meet the filter criteria:")
+		dms_describeFleetAdvisorSchemasCmd.Flags().String("max-records", "", "Sets the maximum number of records returned in the response.")
+		dms_describeFleetAdvisorSchemasCmd.Flags().String("next-token", "", "If `NextToken` is returned by a previous response, there are more results available.")
+	})
 	dmsCmd.AddCommand(dms_describeFleetAdvisorSchemasCmd)
 }

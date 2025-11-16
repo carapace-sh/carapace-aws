@@ -12,15 +12,17 @@ var trustedadvisor_listOrganizationRecommendationResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(trustedadvisor_listOrganizationRecommendationResourcesCmd).Standalone()
+	carapace.Gen(trustedadvisor_listOrganizationRecommendationResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(trustedadvisor_listOrganizationRecommendationResourcesCmd).Standalone()
 
-	trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("affected-account-id", "", "An account affected by this organization recommendation")
-	trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("exclusion-status", "", "The exclusion status of the resource")
-	trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("organization-recommendation-identifier", "", "The AWS Organization organization's Recommendation identifier")
-	trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("region-code", "", "The AWS Region code of the resource")
-	trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("status", "", "The status of the resource")
-	trustedadvisor_listOrganizationRecommendationResourcesCmd.MarkFlagRequired("organization-recommendation-identifier")
+		trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("affected-account-id", "", "An account affected by this organization recommendation")
+		trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("exclusion-status", "", "The exclusion status of the resource")
+		trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("organization-recommendation-identifier", "", "The AWS Organization organization's Recommendation identifier")
+		trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("region-code", "", "The AWS Region code of the resource")
+		trustedadvisor_listOrganizationRecommendationResourcesCmd.Flags().String("status", "", "The status of the resource")
+		trustedadvisor_listOrganizationRecommendationResourcesCmd.MarkFlagRequired("organization-recommendation-identifier")
+	})
 	trustedadvisorCmd.AddCommand(trustedadvisor_listOrganizationRecommendationResourcesCmd)
 }

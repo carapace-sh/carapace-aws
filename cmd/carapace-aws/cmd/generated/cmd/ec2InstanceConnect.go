@@ -12,7 +12,9 @@ var ec2InstanceConnectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2InstanceConnectCmd).Standalone()
+	carapace.Gen(ec2InstanceConnectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2InstanceConnectCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ec2InstanceConnectCmd)
 }

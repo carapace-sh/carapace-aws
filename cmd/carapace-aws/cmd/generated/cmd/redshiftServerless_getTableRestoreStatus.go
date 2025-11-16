@@ -12,9 +12,11 @@ var redshiftServerless_getTableRestoreStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getTableRestoreStatusCmd).Standalone()
+	carapace.Gen(redshiftServerless_getTableRestoreStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getTableRestoreStatusCmd).Standalone()
 
-	redshiftServerless_getTableRestoreStatusCmd.Flags().String("table-restore-request-id", "", "The ID of the `RestoreTableFromSnapshot` request to return status for.")
-	redshiftServerless_getTableRestoreStatusCmd.MarkFlagRequired("table-restore-request-id")
+		redshiftServerless_getTableRestoreStatusCmd.Flags().String("table-restore-request-id", "", "The ID of the `RestoreTableFromSnapshot` request to return status for.")
+		redshiftServerless_getTableRestoreStatusCmd.MarkFlagRequired("table-restore-request-id")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getTableRestoreStatusCmd)
 }

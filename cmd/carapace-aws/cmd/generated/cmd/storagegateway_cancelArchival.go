@@ -12,11 +12,13 @@ var storagegateway_cancelArchivalCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_cancelArchivalCmd).Standalone()
+	carapace.Gen(storagegateway_cancelArchivalCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_cancelArchivalCmd).Standalone()
 
-	storagegateway_cancelArchivalCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_cancelArchivalCmd.Flags().String("tape-arn", "", "The Amazon Resource Name (ARN) of the virtual tape you want to cancel archiving for.")
-	storagegateway_cancelArchivalCmd.MarkFlagRequired("gateway-arn")
-	storagegateway_cancelArchivalCmd.MarkFlagRequired("tape-arn")
+		storagegateway_cancelArchivalCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_cancelArchivalCmd.Flags().String("tape-arn", "", "The Amazon Resource Name (ARN) of the virtual tape you want to cancel archiving for.")
+		storagegateway_cancelArchivalCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_cancelArchivalCmd.MarkFlagRequired("tape-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_cancelArchivalCmd)
 }

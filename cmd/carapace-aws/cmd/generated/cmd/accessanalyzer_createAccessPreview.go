@@ -12,12 +12,14 @@ var accessanalyzer_createAccessPreviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_createAccessPreviewCmd).Standalone()
+	carapace.Gen(accessanalyzer_createAccessPreviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_createAccessPreviewCmd).Standalone()
 
-	accessanalyzer_createAccessPreviewCmd.Flags().String("analyzer-arn", "", "The [ARN of the account analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access preview.")
-	accessanalyzer_createAccessPreviewCmd.Flags().String("client-token", "", "A client token.")
-	accessanalyzer_createAccessPreviewCmd.Flags().String("configurations", "", "Access control configuration for your resource that is used to generate the access preview.")
-	accessanalyzer_createAccessPreviewCmd.MarkFlagRequired("analyzer-arn")
-	accessanalyzer_createAccessPreviewCmd.MarkFlagRequired("configurations")
+		accessanalyzer_createAccessPreviewCmd.Flags().String("analyzer-arn", "", "The [ARN of the account analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the access preview.")
+		accessanalyzer_createAccessPreviewCmd.Flags().String("client-token", "", "A client token.")
+		accessanalyzer_createAccessPreviewCmd.Flags().String("configurations", "", "Access control configuration for your resource that is used to generate the access preview.")
+		accessanalyzer_createAccessPreviewCmd.MarkFlagRequired("analyzer-arn")
+		accessanalyzer_createAccessPreviewCmd.MarkFlagRequired("configurations")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_createAccessPreviewCmd)
 }

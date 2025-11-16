@@ -12,10 +12,12 @@ var ecs_submitAttachmentStateChangesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_submitAttachmentStateChangesCmd).Standalone()
+	carapace.Gen(ecs_submitAttachmentStateChangesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_submitAttachmentStateChangesCmd).Standalone()
 
-	ecs_submitAttachmentStateChangesCmd.Flags().String("attachments", "", "Any attachments associated with the state change request.")
-	ecs_submitAttachmentStateChangesCmd.Flags().String("cluster", "", "The short name or full ARN of the cluster that hosts the container instance the attachment belongs to.")
-	ecs_submitAttachmentStateChangesCmd.MarkFlagRequired("attachments")
+		ecs_submitAttachmentStateChangesCmd.Flags().String("attachments", "", "Any attachments associated with the state change request.")
+		ecs_submitAttachmentStateChangesCmd.Flags().String("cluster", "", "The short name or full ARN of the cluster that hosts the container instance the attachment belongs to.")
+		ecs_submitAttachmentStateChangesCmd.MarkFlagRequired("attachments")
+	})
 	ecsCmd.AddCommand(ecs_submitAttachmentStateChangesCmd)
 }

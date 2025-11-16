@@ -12,10 +12,12 @@ var macie2_enableMacieCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_enableMacieCmd).Standalone()
+	carapace.Gen(macie2_enableMacieCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_enableMacieCmd).Standalone()
 
-	macie2_enableMacieCmd.Flags().String("client-token", "", "A unique, case-sensitive token that you provide to ensure the idempotency of the request.")
-	macie2_enableMacieCmd.Flags().String("finding-publishing-frequency", "", "Specifies how often to publish updates to policy findings for the account.")
-	macie2_enableMacieCmd.Flags().String("status", "", "Specifies the new status for the account.")
+		macie2_enableMacieCmd.Flags().String("client-token", "", "A unique, case-sensitive token that you provide to ensure the idempotency of the request.")
+		macie2_enableMacieCmd.Flags().String("finding-publishing-frequency", "", "Specifies how often to publish updates to policy findings for the account.")
+		macie2_enableMacieCmd.Flags().String("status", "", "Specifies the new status for the account.")
+	})
 	macie2Cmd.AddCommand(macie2_enableMacieCmd)
 }

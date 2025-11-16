@@ -12,7 +12,9 @@ var geoRoutesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(geoRoutesCmd).Standalone()
+	carapace.Gen(geoRoutesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(geoRoutesCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(geoRoutesCmd)
 }

@@ -12,11 +12,13 @@ var wisdom_deleteContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_deleteContentCmd).Standalone()
+	carapace.Gen(wisdom_deleteContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_deleteContentCmd).Standalone()
 
-	wisdom_deleteContentCmd.Flags().String("content-id", "", "The identifier of the content.")
-	wisdom_deleteContentCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	wisdom_deleteContentCmd.MarkFlagRequired("content-id")
-	wisdom_deleteContentCmd.MarkFlagRequired("knowledge-base-id")
+		wisdom_deleteContentCmd.Flags().String("content-id", "", "The identifier of the content.")
+		wisdom_deleteContentCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		wisdom_deleteContentCmd.MarkFlagRequired("content-id")
+		wisdom_deleteContentCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	wisdomCmd.AddCommand(wisdom_deleteContentCmd)
 }

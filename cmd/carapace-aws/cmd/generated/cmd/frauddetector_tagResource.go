@@ -12,11 +12,13 @@ var frauddetector_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_tagResourceCmd).Standalone()
+	carapace.Gen(frauddetector_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_tagResourceCmd).Standalone()
 
-	frauddetector_tagResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
-	frauddetector_tagResourceCmd.Flags().String("tags", "", "The tags to assign to the resource.")
-	frauddetector_tagResourceCmd.MarkFlagRequired("resource-arn")
-	frauddetector_tagResourceCmd.MarkFlagRequired("tags")
+		frauddetector_tagResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
+		frauddetector_tagResourceCmd.Flags().String("tags", "", "The tags to assign to the resource.")
+		frauddetector_tagResourceCmd.MarkFlagRequired("resource-arn")
+		frauddetector_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_tagResourceCmd)
 }

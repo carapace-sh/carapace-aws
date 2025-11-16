@@ -12,11 +12,13 @@ var pinpoint_getImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getImportJobCmd).Standalone()
+	carapace.Gen(pinpoint_getImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getImportJobCmd).Standalone()
 
-	pinpoint_getImportJobCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getImportJobCmd.Flags().String("job-id", "", "The unique identifier for the job.")
-	pinpoint_getImportJobCmd.MarkFlagRequired("application-id")
-	pinpoint_getImportJobCmd.MarkFlagRequired("job-id")
+		pinpoint_getImportJobCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getImportJobCmd.Flags().String("job-id", "", "The unique identifier for the job.")
+		pinpoint_getImportJobCmd.MarkFlagRequired("application-id")
+		pinpoint_getImportJobCmd.MarkFlagRequired("job-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getImportJobCmd)
 }

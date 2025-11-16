@@ -12,10 +12,12 @@ var sagemaker_describeComputeQuotaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeComputeQuotaCmd).Standalone()
+	carapace.Gen(sagemaker_describeComputeQuotaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeComputeQuotaCmd).Standalone()
 
-	sagemaker_describeComputeQuotaCmd.Flags().String("compute-quota-id", "", "ID of the compute allocation definition.")
-	sagemaker_describeComputeQuotaCmd.Flags().String("compute-quota-version", "", "Version of the compute allocation definition.")
-	sagemaker_describeComputeQuotaCmd.MarkFlagRequired("compute-quota-id")
+		sagemaker_describeComputeQuotaCmd.Flags().String("compute-quota-id", "", "ID of the compute allocation definition.")
+		sagemaker_describeComputeQuotaCmd.Flags().String("compute-quota-version", "", "Version of the compute allocation definition.")
+		sagemaker_describeComputeQuotaCmd.MarkFlagRequired("compute-quota-id")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeComputeQuotaCmd)
 }

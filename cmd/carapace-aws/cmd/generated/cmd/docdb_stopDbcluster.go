@@ -12,9 +12,11 @@ var docdb_stopDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_stopDbclusterCmd).Standalone()
+	carapace.Gen(docdb_stopDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_stopDbclusterCmd).Standalone()
 
-	docdb_stopDbclusterCmd.Flags().String("dbcluster-identifier", "", "The identifier of the cluster to stop.")
-	docdb_stopDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+		docdb_stopDbclusterCmd.Flags().String("dbcluster-identifier", "", "The identifier of the cluster to stop.")
+		docdb_stopDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+	})
 	docdbCmd.AddCommand(docdb_stopDbclusterCmd)
 }

@@ -12,10 +12,12 @@ var finspaceData_listPermissionGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_listPermissionGroupsCmd).Standalone()
+	carapace.Gen(finspaceData_listPermissionGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_listPermissionGroupsCmd).Standalone()
 
-	finspaceData_listPermissionGroupsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
-	finspaceData_listPermissionGroupsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
-	finspaceData_listPermissionGroupsCmd.MarkFlagRequired("max-results")
+		finspaceData_listPermissionGroupsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
+		finspaceData_listPermissionGroupsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+		finspaceData_listPermissionGroupsCmd.MarkFlagRequired("max-results")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_listPermissionGroupsCmd)
 }

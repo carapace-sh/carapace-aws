@@ -12,12 +12,14 @@ var apigateway_getResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getResourceCmd).Standalone()
+	carapace.Gen(apigateway_getResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getResourceCmd).Standalone()
 
-	apigateway_getResourceCmd.Flags().String("embed", "", "A query parameter to retrieve the specified resources embedded in the returned Resource representation in the response.")
-	apigateway_getResourceCmd.Flags().String("resource-id", "", "The identifier for the Resource resource.")
-	apigateway_getResourceCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getResourceCmd.MarkFlagRequired("resource-id")
-	apigateway_getResourceCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getResourceCmd.Flags().String("embed", "", "A query parameter to retrieve the specified resources embedded in the returned Resource representation in the response.")
+		apigateway_getResourceCmd.Flags().String("resource-id", "", "The identifier for the Resource resource.")
+		apigateway_getResourceCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getResourceCmd.MarkFlagRequired("resource-id")
+		apigateway_getResourceCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getResourceCmd)
 }

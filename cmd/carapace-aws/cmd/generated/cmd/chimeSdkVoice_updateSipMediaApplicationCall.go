@@ -12,13 +12,15 @@ var chimeSdkVoice_updateSipMediaApplicationCallCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_updateSipMediaApplicationCallCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_updateSipMediaApplicationCallCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_updateSipMediaApplicationCallCmd).Standalone()
 
-	chimeSdkVoice_updateSipMediaApplicationCallCmd.Flags().String("arguments", "", "Arguments made available to the Lambda function as part of the `CALL_UPDATE_REQUESTED` event.")
-	chimeSdkVoice_updateSipMediaApplicationCallCmd.Flags().String("sip-media-application-id", "", "The ID of the SIP media application handling the call.")
-	chimeSdkVoice_updateSipMediaApplicationCallCmd.Flags().String("transaction-id", "", "The ID of the call transaction.")
-	chimeSdkVoice_updateSipMediaApplicationCallCmd.MarkFlagRequired("arguments")
-	chimeSdkVoice_updateSipMediaApplicationCallCmd.MarkFlagRequired("sip-media-application-id")
-	chimeSdkVoice_updateSipMediaApplicationCallCmd.MarkFlagRequired("transaction-id")
+		chimeSdkVoice_updateSipMediaApplicationCallCmd.Flags().String("arguments", "", "Arguments made available to the Lambda function as part of the `CALL_UPDATE_REQUESTED` event.")
+		chimeSdkVoice_updateSipMediaApplicationCallCmd.Flags().String("sip-media-application-id", "", "The ID of the SIP media application handling the call.")
+		chimeSdkVoice_updateSipMediaApplicationCallCmd.Flags().String("transaction-id", "", "The ID of the call transaction.")
+		chimeSdkVoice_updateSipMediaApplicationCallCmd.MarkFlagRequired("arguments")
+		chimeSdkVoice_updateSipMediaApplicationCallCmd.MarkFlagRequired("sip-media-application-id")
+		chimeSdkVoice_updateSipMediaApplicationCallCmd.MarkFlagRequired("transaction-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_updateSipMediaApplicationCallCmd)
 }

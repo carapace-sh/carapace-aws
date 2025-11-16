@@ -12,9 +12,11 @@ var mailmanager_deleteRuleSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_deleteRuleSetCmd).Standalone()
+	carapace.Gen(mailmanager_deleteRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_deleteRuleSetCmd).Standalone()
 
-	mailmanager_deleteRuleSetCmd.Flags().String("rule-set-id", "", "The identifier of an existing rule set resource to delete.")
-	mailmanager_deleteRuleSetCmd.MarkFlagRequired("rule-set-id")
+		mailmanager_deleteRuleSetCmd.Flags().String("rule-set-id", "", "The identifier of an existing rule set resource to delete.")
+		mailmanager_deleteRuleSetCmd.MarkFlagRequired("rule-set-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_deleteRuleSetCmd)
 }

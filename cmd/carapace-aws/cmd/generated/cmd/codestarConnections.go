@@ -12,7 +12,9 @@ var codestarConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarConnectionsCmd).Standalone()
+	carapace.Gen(codestarConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarConnectionsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(codestarConnectionsCmd)
 }

@@ -12,9 +12,11 @@ var lookoutequipment_deleteLabelGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_deleteLabelGroupCmd).Standalone()
+	carapace.Gen(lookoutequipment_deleteLabelGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_deleteLabelGroupCmd).Standalone()
 
-	lookoutequipment_deleteLabelGroupCmd.Flags().String("label-group-name", "", "The name of the label group that you want to delete.")
-	lookoutequipment_deleteLabelGroupCmd.MarkFlagRequired("label-group-name")
+		lookoutequipment_deleteLabelGroupCmd.Flags().String("label-group-name", "", "The name of the label group that you want to delete.")
+		lookoutequipment_deleteLabelGroupCmd.MarkFlagRequired("label-group-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_deleteLabelGroupCmd)
 }

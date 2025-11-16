@@ -12,14 +12,16 @@ var cloudwatch_setAlarmStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_setAlarmStateCmd).Standalone()
+	carapace.Gen(cloudwatch_setAlarmStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_setAlarmStateCmd).Standalone()
 
-	cloudwatch_setAlarmStateCmd.Flags().String("alarm-name", "", "The name of the alarm.")
-	cloudwatch_setAlarmStateCmd.Flags().String("state-reason", "", "The reason that this alarm is set to this specific state, in text format.")
-	cloudwatch_setAlarmStateCmd.Flags().String("state-reason-data", "", "The reason that this alarm is set to this specific state, in JSON format.")
-	cloudwatch_setAlarmStateCmd.Flags().String("state-value", "", "The value of the state.")
-	cloudwatch_setAlarmStateCmd.MarkFlagRequired("alarm-name")
-	cloudwatch_setAlarmStateCmd.MarkFlagRequired("state-reason")
-	cloudwatch_setAlarmStateCmd.MarkFlagRequired("state-value")
+		cloudwatch_setAlarmStateCmd.Flags().String("alarm-name", "", "The name of the alarm.")
+		cloudwatch_setAlarmStateCmd.Flags().String("state-reason", "", "The reason that this alarm is set to this specific state, in text format.")
+		cloudwatch_setAlarmStateCmd.Flags().String("state-reason-data", "", "The reason that this alarm is set to this specific state, in JSON format.")
+		cloudwatch_setAlarmStateCmd.Flags().String("state-value", "", "The value of the state.")
+		cloudwatch_setAlarmStateCmd.MarkFlagRequired("alarm-name")
+		cloudwatch_setAlarmStateCmd.MarkFlagRequired("state-reason")
+		cloudwatch_setAlarmStateCmd.MarkFlagRequired("state-value")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_setAlarmStateCmd)
 }

@@ -12,9 +12,11 @@ var networkFirewall_deleteFirewallPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_deleteFirewallPolicyCmd).Standalone()
+	carapace.Gen(networkFirewall_deleteFirewallPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_deleteFirewallPolicyCmd).Standalone()
 
-	networkFirewall_deleteFirewallPolicyCmd.Flags().String("firewall-policy-arn", "", "The Amazon Resource Name (ARN) of the firewall policy.")
-	networkFirewall_deleteFirewallPolicyCmd.Flags().String("firewall-policy-name", "", "The descriptive name of the firewall policy.")
+		networkFirewall_deleteFirewallPolicyCmd.Flags().String("firewall-policy-arn", "", "The Amazon Resource Name (ARN) of the firewall policy.")
+		networkFirewall_deleteFirewallPolicyCmd.Flags().String("firewall-policy-name", "", "The descriptive name of the firewall policy.")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_deleteFirewallPolicyCmd)
 }

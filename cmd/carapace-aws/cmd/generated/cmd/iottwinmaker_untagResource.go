@@ -12,11 +12,13 @@ var iottwinmaker_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_untagResourceCmd).Standalone()
+	carapace.Gen(iottwinmaker_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_untagResourceCmd).Standalone()
 
-	iottwinmaker_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	iottwinmaker_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag key names to remove from the resource.")
-	iottwinmaker_untagResourceCmd.MarkFlagRequired("resource-arn")
-	iottwinmaker_untagResourceCmd.MarkFlagRequired("tag-keys")
+		iottwinmaker_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		iottwinmaker_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag key names to remove from the resource.")
+		iottwinmaker_untagResourceCmd.MarkFlagRequired("resource-arn")
+		iottwinmaker_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_untagResourceCmd)
 }

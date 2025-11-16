@@ -12,12 +12,14 @@ var lakeformation_addLftagsToResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_addLftagsToResourceCmd).Standalone()
+	carapace.Gen(lakeformation_addLftagsToResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_addLftagsToResourceCmd).Standalone()
 
-	lakeformation_addLftagsToResourceCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
-	lakeformation_addLftagsToResourceCmd.Flags().String("lftags", "", "The LF-tags to attach to the resource.")
-	lakeformation_addLftagsToResourceCmd.Flags().String("resource", "", "The database, table, or column resource to which to attach an LF-tag.")
-	lakeformation_addLftagsToResourceCmd.MarkFlagRequired("lftags")
-	lakeformation_addLftagsToResourceCmd.MarkFlagRequired("resource")
+		lakeformation_addLftagsToResourceCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+		lakeformation_addLftagsToResourceCmd.Flags().String("lftags", "", "The LF-tags to attach to the resource.")
+		lakeformation_addLftagsToResourceCmd.Flags().String("resource", "", "The database, table, or column resource to which to attach an LF-tag.")
+		lakeformation_addLftagsToResourceCmd.MarkFlagRequired("lftags")
+		lakeformation_addLftagsToResourceCmd.MarkFlagRequired("resource")
+	})
 	lakeformationCmd.AddCommand(lakeformation_addLftagsToResourceCmd)
 }

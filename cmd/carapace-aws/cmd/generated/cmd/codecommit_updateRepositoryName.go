@@ -12,11 +12,13 @@ var codecommit_updateRepositoryNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_updateRepositoryNameCmd).Standalone()
+	carapace.Gen(codecommit_updateRepositoryNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_updateRepositoryNameCmd).Standalone()
 
-	codecommit_updateRepositoryNameCmd.Flags().String("new-name", "", "The new name for the repository.")
-	codecommit_updateRepositoryNameCmd.Flags().String("old-name", "", "The current name of the repository.")
-	codecommit_updateRepositoryNameCmd.MarkFlagRequired("new-name")
-	codecommit_updateRepositoryNameCmd.MarkFlagRequired("old-name")
+		codecommit_updateRepositoryNameCmd.Flags().String("new-name", "", "The new name for the repository.")
+		codecommit_updateRepositoryNameCmd.Flags().String("old-name", "", "The current name of the repository.")
+		codecommit_updateRepositoryNameCmd.MarkFlagRequired("new-name")
+		codecommit_updateRepositoryNameCmd.MarkFlagRequired("old-name")
+	})
 	codecommitCmd.AddCommand(codecommit_updateRepositoryNameCmd)
 }

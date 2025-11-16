@@ -12,11 +12,13 @@ var kendra_deleteExperienceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_deleteExperienceCmd).Standalone()
+	carapace.Gen(kendra_deleteExperienceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_deleteExperienceCmd).Standalone()
 
-	kendra_deleteExperienceCmd.Flags().String("id", "", "The identifier of your Amazon Kendra experience you want to delete.")
-	kendra_deleteExperienceCmd.Flags().String("index-id", "", "The identifier of the index for your Amazon Kendra experience.")
-	kendra_deleteExperienceCmd.MarkFlagRequired("id")
-	kendra_deleteExperienceCmd.MarkFlagRequired("index-id")
+		kendra_deleteExperienceCmd.Flags().String("id", "", "The identifier of your Amazon Kendra experience you want to delete.")
+		kendra_deleteExperienceCmd.Flags().String("index-id", "", "The identifier of the index for your Amazon Kendra experience.")
+		kendra_deleteExperienceCmd.MarkFlagRequired("id")
+		kendra_deleteExperienceCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_deleteExperienceCmd)
 }

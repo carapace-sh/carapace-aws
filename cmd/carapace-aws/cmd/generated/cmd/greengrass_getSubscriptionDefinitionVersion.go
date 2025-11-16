@@ -12,12 +12,14 @@ var greengrass_getSubscriptionDefinitionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getSubscriptionDefinitionVersionCmd).Standalone()
+	carapace.Gen(greengrass_getSubscriptionDefinitionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getSubscriptionDefinitionVersionCmd).Standalone()
 
-	greengrass_getSubscriptionDefinitionVersionCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
-	greengrass_getSubscriptionDefinitionVersionCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
-	greengrass_getSubscriptionDefinitionVersionCmd.Flags().String("subscription-definition-version-id", "", "The ID of the subscription definition version.")
-	greengrass_getSubscriptionDefinitionVersionCmd.MarkFlagRequired("subscription-definition-id")
-	greengrass_getSubscriptionDefinitionVersionCmd.MarkFlagRequired("subscription-definition-version-id")
+		greengrass_getSubscriptionDefinitionVersionCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
+		greengrass_getSubscriptionDefinitionVersionCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
+		greengrass_getSubscriptionDefinitionVersionCmd.Flags().String("subscription-definition-version-id", "", "The ID of the subscription definition version.")
+		greengrass_getSubscriptionDefinitionVersionCmd.MarkFlagRequired("subscription-definition-id")
+		greengrass_getSubscriptionDefinitionVersionCmd.MarkFlagRequired("subscription-definition-version-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getSubscriptionDefinitionVersionCmd)
 }

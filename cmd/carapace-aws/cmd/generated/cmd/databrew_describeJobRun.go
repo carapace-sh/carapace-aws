@@ -12,11 +12,13 @@ var databrew_describeJobRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_describeJobRunCmd).Standalone()
+	carapace.Gen(databrew_describeJobRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_describeJobRunCmd).Standalone()
 
-	databrew_describeJobRunCmd.Flags().String("name", "", "The name of the job being processed during this run.")
-	databrew_describeJobRunCmd.Flags().String("run-id", "", "The unique identifier of the job run.")
-	databrew_describeJobRunCmd.MarkFlagRequired("name")
-	databrew_describeJobRunCmd.MarkFlagRequired("run-id")
+		databrew_describeJobRunCmd.Flags().String("name", "", "The name of the job being processed during this run.")
+		databrew_describeJobRunCmd.Flags().String("run-id", "", "The unique identifier of the job run.")
+		databrew_describeJobRunCmd.MarkFlagRequired("name")
+		databrew_describeJobRunCmd.MarkFlagRequired("run-id")
+	})
 	databrewCmd.AddCommand(databrew_describeJobRunCmd)
 }

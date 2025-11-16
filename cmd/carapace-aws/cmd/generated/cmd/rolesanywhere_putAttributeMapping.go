@@ -12,13 +12,15 @@ var rolesanywhere_putAttributeMappingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_putAttributeMappingCmd).Standalone()
+	carapace.Gen(rolesanywhere_putAttributeMappingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_putAttributeMappingCmd).Standalone()
 
-	rolesanywhere_putAttributeMappingCmd.Flags().String("certificate-field", "", "Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.")
-	rolesanywhere_putAttributeMappingCmd.Flags().String("mapping-rules", "", "A list of mapping entries for every supported specifier or sub-field.")
-	rolesanywhere_putAttributeMappingCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
-	rolesanywhere_putAttributeMappingCmd.MarkFlagRequired("certificate-field")
-	rolesanywhere_putAttributeMappingCmd.MarkFlagRequired("mapping-rules")
-	rolesanywhere_putAttributeMappingCmd.MarkFlagRequired("profile-id")
+		rolesanywhere_putAttributeMappingCmd.Flags().String("certificate-field", "", "Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.")
+		rolesanywhere_putAttributeMappingCmd.Flags().String("mapping-rules", "", "A list of mapping entries for every supported specifier or sub-field.")
+		rolesanywhere_putAttributeMappingCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
+		rolesanywhere_putAttributeMappingCmd.MarkFlagRequired("certificate-field")
+		rolesanywhere_putAttributeMappingCmd.MarkFlagRequired("mapping-rules")
+		rolesanywhere_putAttributeMappingCmd.MarkFlagRequired("profile-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_putAttributeMappingCmd)
 }

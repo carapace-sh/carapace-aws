@@ -12,9 +12,11 @@ var sagemaker_deleteDataQualityJobDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteDataQualityJobDefinitionCmd).Standalone()
+	carapace.Gen(sagemaker_deleteDataQualityJobDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteDataQualityJobDefinitionCmd).Standalone()
 
-	sagemaker_deleteDataQualityJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the data quality monitoring job definition to delete.")
-	sagemaker_deleteDataQualityJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+		sagemaker_deleteDataQualityJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the data quality monitoring job definition to delete.")
+		sagemaker_deleteDataQualityJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteDataQualityJobDefinitionCmd)
 }

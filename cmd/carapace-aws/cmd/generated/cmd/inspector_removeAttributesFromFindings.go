@@ -12,11 +12,13 @@ var inspector_removeAttributesFromFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_removeAttributesFromFindingsCmd).Standalone()
+	carapace.Gen(inspector_removeAttributesFromFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_removeAttributesFromFindingsCmd).Standalone()
 
-	inspector_removeAttributesFromFindingsCmd.Flags().String("attribute-keys", "", "The array of attribute keys that you want to remove from specified findings.")
-	inspector_removeAttributesFromFindingsCmd.Flags().String("finding-arns", "", "The ARNs that specify the findings that you want to remove attributes from.")
-	inspector_removeAttributesFromFindingsCmd.MarkFlagRequired("attribute-keys")
-	inspector_removeAttributesFromFindingsCmd.MarkFlagRequired("finding-arns")
+		inspector_removeAttributesFromFindingsCmd.Flags().String("attribute-keys", "", "The array of attribute keys that you want to remove from specified findings.")
+		inspector_removeAttributesFromFindingsCmd.Flags().String("finding-arns", "", "The ARNs that specify the findings that you want to remove attributes from.")
+		inspector_removeAttributesFromFindingsCmd.MarkFlagRequired("attribute-keys")
+		inspector_removeAttributesFromFindingsCmd.MarkFlagRequired("finding-arns")
+	})
 	inspectorCmd.AddCommand(inspector_removeAttributesFromFindingsCmd)
 }

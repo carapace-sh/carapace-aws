@@ -12,9 +12,11 @@ var config_getResourceEvaluationSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getResourceEvaluationSummaryCmd).Standalone()
+	carapace.Gen(config_getResourceEvaluationSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getResourceEvaluationSummaryCmd).Standalone()
 
-	config_getResourceEvaluationSummaryCmd.Flags().String("resource-evaluation-id", "", "The unique `ResourceEvaluationId` of Amazon Web Services resource execution for which you want to retrieve the evaluation summary.")
-	config_getResourceEvaluationSummaryCmd.MarkFlagRequired("resource-evaluation-id")
+		config_getResourceEvaluationSummaryCmd.Flags().String("resource-evaluation-id", "", "The unique `ResourceEvaluationId` of Amazon Web Services resource execution for which you want to retrieve the evaluation summary.")
+		config_getResourceEvaluationSummaryCmd.MarkFlagRequired("resource-evaluation-id")
+	})
 	configCmd.AddCommand(config_getResourceEvaluationSummaryCmd)
 }

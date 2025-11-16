@@ -12,11 +12,13 @@ var cloudsearch_defineAnalysisSchemeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_defineAnalysisSchemeCmd).Standalone()
+	carapace.Gen(cloudsearch_defineAnalysisSchemeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_defineAnalysisSchemeCmd).Standalone()
 
-	cloudsearch_defineAnalysisSchemeCmd.Flags().String("analysis-scheme", "", "")
-	cloudsearch_defineAnalysisSchemeCmd.Flags().String("domain-name", "", "")
-	cloudsearch_defineAnalysisSchemeCmd.MarkFlagRequired("analysis-scheme")
-	cloudsearch_defineAnalysisSchemeCmd.MarkFlagRequired("domain-name")
+		cloudsearch_defineAnalysisSchemeCmd.Flags().String("analysis-scheme", "", "")
+		cloudsearch_defineAnalysisSchemeCmd.Flags().String("domain-name", "", "")
+		cloudsearch_defineAnalysisSchemeCmd.MarkFlagRequired("analysis-scheme")
+		cloudsearch_defineAnalysisSchemeCmd.MarkFlagRequired("domain-name")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_defineAnalysisSchemeCmd)
 }

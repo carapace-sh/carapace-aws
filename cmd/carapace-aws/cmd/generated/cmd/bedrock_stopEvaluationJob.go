@@ -12,9 +12,11 @@ var bedrock_stopEvaluationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_stopEvaluationJobCmd).Standalone()
+	carapace.Gen(bedrock_stopEvaluationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_stopEvaluationJobCmd).Standalone()
 
-	bedrock_stopEvaluationJobCmd.Flags().String("job-identifier", "", "The Amazon Resource Name (ARN) of the evaluation job you want to stop.")
-	bedrock_stopEvaluationJobCmd.MarkFlagRequired("job-identifier")
+		bedrock_stopEvaluationJobCmd.Flags().String("job-identifier", "", "The Amazon Resource Name (ARN) of the evaluation job you want to stop.")
+		bedrock_stopEvaluationJobCmd.MarkFlagRequired("job-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_stopEvaluationJobCmd)
 }

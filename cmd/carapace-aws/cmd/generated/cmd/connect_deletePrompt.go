@@ -12,11 +12,13 @@ var connect_deletePromptCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deletePromptCmd).Standalone()
+	carapace.Gen(connect_deletePromptCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deletePromptCmd).Standalone()
 
-	connect_deletePromptCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deletePromptCmd.Flags().String("prompt-id", "", "A unique identifier for the prompt.")
-	connect_deletePromptCmd.MarkFlagRequired("instance-id")
-	connect_deletePromptCmd.MarkFlagRequired("prompt-id")
+		connect_deletePromptCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deletePromptCmd.Flags().String("prompt-id", "", "A unique identifier for the prompt.")
+		connect_deletePromptCmd.MarkFlagRequired("instance-id")
+		connect_deletePromptCmd.MarkFlagRequired("prompt-id")
+	})
 	connectCmd.AddCommand(connect_deletePromptCmd)
 }

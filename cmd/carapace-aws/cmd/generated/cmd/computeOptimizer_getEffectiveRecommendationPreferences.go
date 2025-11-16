@@ -12,9 +12,11 @@ var computeOptimizer_getEffectiveRecommendationPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(computeOptimizer_getEffectiveRecommendationPreferencesCmd).Standalone()
+	carapace.Gen(computeOptimizer_getEffectiveRecommendationPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(computeOptimizer_getEffectiveRecommendationPreferencesCmd).Standalone()
 
-	computeOptimizer_getEffectiveRecommendationPreferencesCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which to confirm effective recommendation preferences.")
-	computeOptimizer_getEffectiveRecommendationPreferencesCmd.MarkFlagRequired("resource-arn")
+		computeOptimizer_getEffectiveRecommendationPreferencesCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which to confirm effective recommendation preferences.")
+		computeOptimizer_getEffectiveRecommendationPreferencesCmd.MarkFlagRequired("resource-arn")
+	})
 	computeOptimizerCmd.AddCommand(computeOptimizer_getEffectiveRecommendationPreferencesCmd)
 }

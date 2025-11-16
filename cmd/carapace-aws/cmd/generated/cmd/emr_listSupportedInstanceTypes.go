@@ -12,10 +12,12 @@ var emr_listSupportedInstanceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_listSupportedInstanceTypesCmd).Standalone()
+	carapace.Gen(emr_listSupportedInstanceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_listSupportedInstanceTypesCmd).Standalone()
 
-	emr_listSupportedInstanceTypesCmd.Flags().String("marker", "", "The pagination token that marks the next set of results to retrieve.")
-	emr_listSupportedInstanceTypesCmd.Flags().String("release-label", "", "The Amazon EMR release label determines the [versions of open-source application packages](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-app-versions-6.x.html) that Amazon EMR has installed on the cluster.")
-	emr_listSupportedInstanceTypesCmd.MarkFlagRequired("release-label")
+		emr_listSupportedInstanceTypesCmd.Flags().String("marker", "", "The pagination token that marks the next set of results to retrieve.")
+		emr_listSupportedInstanceTypesCmd.Flags().String("release-label", "", "The Amazon EMR release label determines the [versions of open-source application packages](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-app-versions-6.x.html) that Amazon EMR has installed on the cluster.")
+		emr_listSupportedInstanceTypesCmd.MarkFlagRequired("release-label")
+	})
 	emrCmd.AddCommand(emr_listSupportedInstanceTypesCmd)
 }

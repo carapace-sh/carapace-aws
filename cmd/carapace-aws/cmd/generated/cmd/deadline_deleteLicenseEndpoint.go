@@ -12,9 +12,11 @@ var deadline_deleteLicenseEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_deleteLicenseEndpointCmd).Standalone()
+	carapace.Gen(deadline_deleteLicenseEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_deleteLicenseEndpointCmd).Standalone()
 
-	deadline_deleteLicenseEndpointCmd.Flags().String("license-endpoint-id", "", "The license endpoint ID of the license endpoint to delete.")
-	deadline_deleteLicenseEndpointCmd.MarkFlagRequired("license-endpoint-id")
+		deadline_deleteLicenseEndpointCmd.Flags().String("license-endpoint-id", "", "The license endpoint ID of the license endpoint to delete.")
+		deadline_deleteLicenseEndpointCmd.MarkFlagRequired("license-endpoint-id")
+	})
 	deadlineCmd.AddCommand(deadline_deleteLicenseEndpointCmd)
 }

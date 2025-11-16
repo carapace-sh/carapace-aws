@@ -12,9 +12,11 @@ var voiceId_describeDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_describeDomainCmd).Standalone()
+	carapace.Gen(voiceId_describeDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_describeDomainCmd).Standalone()
 
-	voiceId_describeDomainCmd.Flags().String("domain-id", "", "The identifier of the domain that you are describing.")
-	voiceId_describeDomainCmd.MarkFlagRequired("domain-id")
+		voiceId_describeDomainCmd.Flags().String("domain-id", "", "The identifier of the domain that you are describing.")
+		voiceId_describeDomainCmd.MarkFlagRequired("domain-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_describeDomainCmd)
 }

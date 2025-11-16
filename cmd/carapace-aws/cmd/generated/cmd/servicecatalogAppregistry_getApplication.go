@@ -12,9 +12,11 @@ var servicecatalogAppregistry_getApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalogAppregistry_getApplicationCmd).Standalone()
+	carapace.Gen(servicecatalogAppregistry_getApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalogAppregistry_getApplicationCmd).Standalone()
 
-	servicecatalogAppregistry_getApplicationCmd.Flags().String("application", "", "The name, ID, or ARN of the application.")
-	servicecatalogAppregistry_getApplicationCmd.MarkFlagRequired("application")
+		servicecatalogAppregistry_getApplicationCmd.Flags().String("application", "", "The name, ID, or ARN of the application.")
+		servicecatalogAppregistry_getApplicationCmd.MarkFlagRequired("application")
+	})
 	servicecatalogAppregistryCmd.AddCommand(servicecatalogAppregistry_getApplicationCmd)
 }

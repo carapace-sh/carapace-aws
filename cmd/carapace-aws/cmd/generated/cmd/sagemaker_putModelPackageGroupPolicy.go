@@ -12,11 +12,13 @@ var sagemaker_putModelPackageGroupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_putModelPackageGroupPolicyCmd).Standalone()
+	carapace.Gen(sagemaker_putModelPackageGroupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_putModelPackageGroupPolicyCmd).Standalone()
 
-	sagemaker_putModelPackageGroupPolicyCmd.Flags().String("model-package-group-name", "", "The name of the model group to add a resource policy to.")
-	sagemaker_putModelPackageGroupPolicyCmd.Flags().String("resource-policy", "", "The resource policy for the model group.")
-	sagemaker_putModelPackageGroupPolicyCmd.MarkFlagRequired("model-package-group-name")
-	sagemaker_putModelPackageGroupPolicyCmd.MarkFlagRequired("resource-policy")
+		sagemaker_putModelPackageGroupPolicyCmd.Flags().String("model-package-group-name", "", "The name of the model group to add a resource policy to.")
+		sagemaker_putModelPackageGroupPolicyCmd.Flags().String("resource-policy", "", "The resource policy for the model group.")
+		sagemaker_putModelPackageGroupPolicyCmd.MarkFlagRequired("model-package-group-name")
+		sagemaker_putModelPackageGroupPolicyCmd.MarkFlagRequired("resource-policy")
+	})
 	sagemakerCmd.AddCommand(sagemaker_putModelPackageGroupPolicyCmd)
 }

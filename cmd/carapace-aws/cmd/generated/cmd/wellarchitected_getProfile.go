@@ -12,10 +12,12 @@ var wellarchitected_getProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_getProfileCmd).Standalone()
+	carapace.Gen(wellarchitected_getProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_getProfileCmd).Standalone()
 
-	wellarchitected_getProfileCmd.Flags().String("profile-arn", "", "The profile ARN.")
-	wellarchitected_getProfileCmd.Flags().String("profile-version", "", "The profile version.")
-	wellarchitected_getProfileCmd.MarkFlagRequired("profile-arn")
+		wellarchitected_getProfileCmd.Flags().String("profile-arn", "", "The profile ARN.")
+		wellarchitected_getProfileCmd.Flags().String("profile-version", "", "The profile version.")
+		wellarchitected_getProfileCmd.MarkFlagRequired("profile-arn")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_getProfileCmd)
 }

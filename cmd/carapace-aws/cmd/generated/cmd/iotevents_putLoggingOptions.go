@@ -12,9 +12,11 @@ var iotevents_putLoggingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_putLoggingOptionsCmd).Standalone()
+	carapace.Gen(iotevents_putLoggingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_putLoggingOptionsCmd).Standalone()
 
-	iotevents_putLoggingOptionsCmd.Flags().String("logging-options", "", "The new values of the AWS IoT Events logging options.")
-	iotevents_putLoggingOptionsCmd.MarkFlagRequired("logging-options")
+		iotevents_putLoggingOptionsCmd.Flags().String("logging-options", "", "The new values of the AWS IoT Events logging options.")
+		iotevents_putLoggingOptionsCmd.MarkFlagRequired("logging-options")
+	})
 	ioteventsCmd.AddCommand(iotevents_putLoggingOptionsCmd)
 }

@@ -12,9 +12,11 @@ var omics_getRunCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getRunCacheCmd).Standalone()
+	carapace.Gen(omics_getRunCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getRunCacheCmd).Standalone()
 
-	omics_getRunCacheCmd.Flags().String("id", "", "The identifier of the run cache to retrieve.")
-	omics_getRunCacheCmd.MarkFlagRequired("id")
+		omics_getRunCacheCmd.Flags().String("id", "", "The identifier of the run cache to retrieve.")
+		omics_getRunCacheCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_getRunCacheCmd)
 }

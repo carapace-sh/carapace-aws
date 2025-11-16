@@ -12,9 +12,11 @@ var iottwinmaker_getWorkspaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_getWorkspaceCmd).Standalone()
+	carapace.Gen(iottwinmaker_getWorkspaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_getWorkspaceCmd).Standalone()
 
-	iottwinmaker_getWorkspaceCmd.Flags().String("workspace-id", "", "The ID of the workspace.")
-	iottwinmaker_getWorkspaceCmd.MarkFlagRequired("workspace-id")
+		iottwinmaker_getWorkspaceCmd.Flags().String("workspace-id", "", "The ID of the workspace.")
+		iottwinmaker_getWorkspaceCmd.MarkFlagRequired("workspace-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_getWorkspaceCmd)
 }

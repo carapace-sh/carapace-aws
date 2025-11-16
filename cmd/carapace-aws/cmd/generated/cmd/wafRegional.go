@@ -12,7 +12,9 @@ var wafRegionalCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegionalCmd).Standalone()
+	carapace.Gen(wafRegionalCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegionalCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(wafRegionalCmd)
 }

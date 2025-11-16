@@ -12,11 +12,13 @@ var redshift_describeIntegrationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeIntegrationsCmd).Standalone()
+	carapace.Gen(redshift_describeIntegrationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeIntegrationsCmd).Standalone()
 
-	redshift_describeIntegrationsCmd.Flags().String("filters", "", "A filter that specifies one or more resources to return.")
-	redshift_describeIntegrationsCmd.Flags().String("integration-arn", "", "The unique identifier of the integration.")
-	redshift_describeIntegrationsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeIntegrations` request.")
-	redshift_describeIntegrationsCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
+		redshift_describeIntegrationsCmd.Flags().String("filters", "", "A filter that specifies one or more resources to return.")
+		redshift_describeIntegrationsCmd.Flags().String("integration-arn", "", "The unique identifier of the integration.")
+		redshift_describeIntegrationsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeIntegrations` request.")
+		redshift_describeIntegrationsCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
+	})
 	redshiftCmd.AddCommand(redshift_describeIntegrationsCmd)
 }

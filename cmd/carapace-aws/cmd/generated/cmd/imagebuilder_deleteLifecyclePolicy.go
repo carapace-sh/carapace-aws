@@ -12,9 +12,11 @@ var imagebuilder_deleteLifecyclePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_deleteLifecyclePolicyCmd).Standalone()
+	carapace.Gen(imagebuilder_deleteLifecyclePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_deleteLifecyclePolicyCmd).Standalone()
 
-	imagebuilder_deleteLifecyclePolicyCmd.Flags().String("lifecycle-policy-arn", "", "The Amazon Resource Name (ARN) of the lifecycle policy resource to delete.")
-	imagebuilder_deleteLifecyclePolicyCmd.MarkFlagRequired("lifecycle-policy-arn")
+		imagebuilder_deleteLifecyclePolicyCmd.Flags().String("lifecycle-policy-arn", "", "The Amazon Resource Name (ARN) of the lifecycle policy resource to delete.")
+		imagebuilder_deleteLifecyclePolicyCmd.MarkFlagRequired("lifecycle-policy-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_deleteLifecyclePolicyCmd)
 }

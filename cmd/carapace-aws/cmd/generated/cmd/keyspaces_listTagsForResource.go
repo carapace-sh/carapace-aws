@@ -12,11 +12,13 @@ var keyspaces_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspaces_listTagsForResourceCmd).Standalone()
+	carapace.Gen(keyspaces_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspaces_listTagsForResourceCmd).Standalone()
 
-	keyspaces_listTagsForResourceCmd.Flags().String("max-results", "", "The total number of tags to return in the output.")
-	keyspaces_listTagsForResourceCmd.Flags().String("next-token", "", "The pagination token.")
-	keyspaces_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Keyspaces resource.")
-	keyspaces_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		keyspaces_listTagsForResourceCmd.Flags().String("max-results", "", "The total number of tags to return in the output.")
+		keyspaces_listTagsForResourceCmd.Flags().String("next-token", "", "The pagination token.")
+		keyspaces_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Keyspaces resource.")
+		keyspaces_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	keyspacesCmd.AddCommand(keyspaces_listTagsForResourceCmd)
 }

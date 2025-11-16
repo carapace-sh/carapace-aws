@@ -12,11 +12,13 @@ var storagegateway_deleteChapCredentialsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_deleteChapCredentialsCmd).Standalone()
+	carapace.Gen(storagegateway_deleteChapCredentialsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_deleteChapCredentialsCmd).Standalone()
 
-	storagegateway_deleteChapCredentialsCmd.Flags().String("initiator-name", "", "The iSCSI initiator that connects to the target.")
-	storagegateway_deleteChapCredentialsCmd.Flags().String("target-arn", "", "The Amazon Resource Name (ARN) of the iSCSI volume target.")
-	storagegateway_deleteChapCredentialsCmd.MarkFlagRequired("initiator-name")
-	storagegateway_deleteChapCredentialsCmd.MarkFlagRequired("target-arn")
+		storagegateway_deleteChapCredentialsCmd.Flags().String("initiator-name", "", "The iSCSI initiator that connects to the target.")
+		storagegateway_deleteChapCredentialsCmd.Flags().String("target-arn", "", "The Amazon Resource Name (ARN) of the iSCSI volume target.")
+		storagegateway_deleteChapCredentialsCmd.MarkFlagRequired("initiator-name")
+		storagegateway_deleteChapCredentialsCmd.MarkFlagRequired("target-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_deleteChapCredentialsCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_describeModelExplainabilityJobDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeModelExplainabilityJobDefinitionCmd).Standalone()
+	carapace.Gen(sagemaker_describeModelExplainabilityJobDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeModelExplainabilityJobDefinitionCmd).Standalone()
 
-	sagemaker_describeModelExplainabilityJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the model explainability job definition.")
-	sagemaker_describeModelExplainabilityJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+		sagemaker_describeModelExplainabilityJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the model explainability job definition.")
+		sagemaker_describeModelExplainabilityJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeModelExplainabilityJobDefinitionCmd)
 }

@@ -12,9 +12,11 @@ var redshift_deleteClusterSecurityGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteClusterSecurityGroupCmd).Standalone()
+	carapace.Gen(redshift_deleteClusterSecurityGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteClusterSecurityGroupCmd).Standalone()
 
-	redshift_deleteClusterSecurityGroupCmd.Flags().String("cluster-security-group-name", "", "The name of the cluster security group to be deleted.")
-	redshift_deleteClusterSecurityGroupCmd.MarkFlagRequired("cluster-security-group-name")
+		redshift_deleteClusterSecurityGroupCmd.Flags().String("cluster-security-group-name", "", "The name of the cluster security group to be deleted.")
+		redshift_deleteClusterSecurityGroupCmd.MarkFlagRequired("cluster-security-group-name")
+	})
 	redshiftCmd.AddCommand(redshift_deleteClusterSecurityGroupCmd)
 }

@@ -12,7 +12,9 @@ var workmailmessageflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmailmessageflowCmd).Standalone()
+	carapace.Gen(workmailmessageflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmailmessageflowCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(workmailmessageflowCmd)
 }

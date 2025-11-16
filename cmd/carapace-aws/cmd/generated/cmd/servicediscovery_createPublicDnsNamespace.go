@@ -12,13 +12,15 @@ var servicediscovery_createPublicDnsNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_createPublicDnsNamespaceCmd).Standalone()
+	carapace.Gen(servicediscovery_createPublicDnsNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_createPublicDnsNamespaceCmd).Standalone()
 
-	servicediscovery_createPublicDnsNamespaceCmd.Flags().String("creator-request-id", "", "A unique string that identifies the request and that allows failed `CreatePublicDnsNamespace` requests to be retried without the risk of running the operation twice.")
-	servicediscovery_createPublicDnsNamespaceCmd.Flags().String("description", "", "A description for the namespace.")
-	servicediscovery_createPublicDnsNamespaceCmd.Flags().String("name", "", "The name that you want to assign to this namespace.")
-	servicediscovery_createPublicDnsNamespaceCmd.Flags().String("properties", "", "Properties for the public DNS namespace.")
-	servicediscovery_createPublicDnsNamespaceCmd.Flags().String("tags", "", "The tags to add to the namespace.")
-	servicediscovery_createPublicDnsNamespaceCmd.MarkFlagRequired("name")
+		servicediscovery_createPublicDnsNamespaceCmd.Flags().String("creator-request-id", "", "A unique string that identifies the request and that allows failed `CreatePublicDnsNamespace` requests to be retried without the risk of running the operation twice.")
+		servicediscovery_createPublicDnsNamespaceCmd.Flags().String("description", "", "A description for the namespace.")
+		servicediscovery_createPublicDnsNamespaceCmd.Flags().String("name", "", "The name that you want to assign to this namespace.")
+		servicediscovery_createPublicDnsNamespaceCmd.Flags().String("properties", "", "Properties for the public DNS namespace.")
+		servicediscovery_createPublicDnsNamespaceCmd.Flags().String("tags", "", "The tags to add to the namespace.")
+		servicediscovery_createPublicDnsNamespaceCmd.MarkFlagRequired("name")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_createPublicDnsNamespaceCmd)
 }

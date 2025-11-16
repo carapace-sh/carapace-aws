@@ -12,11 +12,13 @@ var marketplaceCatalog_cancelChangeSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceCatalog_cancelChangeSetCmd).Standalone()
+	carapace.Gen(marketplaceCatalog_cancelChangeSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceCatalog_cancelChangeSetCmd).Standalone()
 
-	marketplaceCatalog_cancelChangeSetCmd.Flags().String("catalog", "", "Required.")
-	marketplaceCatalog_cancelChangeSetCmd.Flags().String("change-set-id", "", "Required.")
-	marketplaceCatalog_cancelChangeSetCmd.MarkFlagRequired("catalog")
-	marketplaceCatalog_cancelChangeSetCmd.MarkFlagRequired("change-set-id")
+		marketplaceCatalog_cancelChangeSetCmd.Flags().String("catalog", "", "Required.")
+		marketplaceCatalog_cancelChangeSetCmd.Flags().String("change-set-id", "", "Required.")
+		marketplaceCatalog_cancelChangeSetCmd.MarkFlagRequired("catalog")
+		marketplaceCatalog_cancelChangeSetCmd.MarkFlagRequired("change-set-id")
+	})
 	marketplaceCatalogCmd.AddCommand(marketplaceCatalog_cancelChangeSetCmd)
 }

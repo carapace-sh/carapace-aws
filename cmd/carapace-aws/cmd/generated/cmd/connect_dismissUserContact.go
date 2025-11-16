@@ -12,13 +12,15 @@ var connect_dismissUserContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_dismissUserContactCmd).Standalone()
+	carapace.Gen(connect_dismissUserContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_dismissUserContactCmd).Standalone()
 
-	connect_dismissUserContactCmd.Flags().String("contact-id", "", "The identifier of the contact.")
-	connect_dismissUserContactCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_dismissUserContactCmd.Flags().String("user-id", "", "The identifier of the user account.")
-	connect_dismissUserContactCmd.MarkFlagRequired("contact-id")
-	connect_dismissUserContactCmd.MarkFlagRequired("instance-id")
-	connect_dismissUserContactCmd.MarkFlagRequired("user-id")
+		connect_dismissUserContactCmd.Flags().String("contact-id", "", "The identifier of the contact.")
+		connect_dismissUserContactCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_dismissUserContactCmd.Flags().String("user-id", "", "The identifier of the user account.")
+		connect_dismissUserContactCmd.MarkFlagRequired("contact-id")
+		connect_dismissUserContactCmd.MarkFlagRequired("instance-id")
+		connect_dismissUserContactCmd.MarkFlagRequired("user-id")
+	})
 	connectCmd.AddCommand(connect_dismissUserContactCmd)
 }

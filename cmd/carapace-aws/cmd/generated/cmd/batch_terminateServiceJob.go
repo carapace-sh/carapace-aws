@@ -12,11 +12,13 @@ var batch_terminateServiceJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_terminateServiceJobCmd).Standalone()
+	carapace.Gen(batch_terminateServiceJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_terminateServiceJobCmd).Standalone()
 
-	batch_terminateServiceJobCmd.Flags().String("job-id", "", "The service job ID of the service job to terminate.")
-	batch_terminateServiceJobCmd.Flags().String("reason", "", "A message to attach to the service job that explains the reason for canceling it.")
-	batch_terminateServiceJobCmd.MarkFlagRequired("job-id")
-	batch_terminateServiceJobCmd.MarkFlagRequired("reason")
+		batch_terminateServiceJobCmd.Flags().String("job-id", "", "The service job ID of the service job to terminate.")
+		batch_terminateServiceJobCmd.Flags().String("reason", "", "A message to attach to the service job that explains the reason for canceling it.")
+		batch_terminateServiceJobCmd.MarkFlagRequired("job-id")
+		batch_terminateServiceJobCmd.MarkFlagRequired("reason")
+	})
 	batchCmd.AddCommand(batch_terminateServiceJobCmd)
 }

@@ -12,8 +12,10 @@ var xray_getIndexingRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getIndexingRulesCmd).Standalone()
+	carapace.Gen(xray_getIndexingRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getIndexingRulesCmd).Standalone()
 
-	xray_getIndexingRulesCmd.Flags().String("next-token", "", "Specify the pagination token returned by a previous request to retrieve the next page of indexes.")
+		xray_getIndexingRulesCmd.Flags().String("next-token", "", "Specify the pagination token returned by a previous request to retrieve the next page of indexes.")
+	})
 	xrayCmd.AddCommand(xray_getIndexingRulesCmd)
 }

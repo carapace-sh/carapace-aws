@@ -12,12 +12,14 @@ var config_putAggregationAuthorizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_putAggregationAuthorizationCmd).Standalone()
+	carapace.Gen(config_putAggregationAuthorizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_putAggregationAuthorizationCmd).Standalone()
 
-	config_putAggregationAuthorizationCmd.Flags().String("authorized-account-id", "", "The 12-digit account ID of the account authorized to aggregate data.")
-	config_putAggregationAuthorizationCmd.Flags().String("authorized-aws-region", "", "The region authorized to collect aggregated data.")
-	config_putAggregationAuthorizationCmd.Flags().String("tags", "", "An array of tag object.")
-	config_putAggregationAuthorizationCmd.MarkFlagRequired("authorized-account-id")
-	config_putAggregationAuthorizationCmd.MarkFlagRequired("authorized-aws-region")
+		config_putAggregationAuthorizationCmd.Flags().String("authorized-account-id", "", "The 12-digit account ID of the account authorized to aggregate data.")
+		config_putAggregationAuthorizationCmd.Flags().String("authorized-aws-region", "", "The region authorized to collect aggregated data.")
+		config_putAggregationAuthorizationCmd.Flags().String("tags", "", "An array of tag object.")
+		config_putAggregationAuthorizationCmd.MarkFlagRequired("authorized-account-id")
+		config_putAggregationAuthorizationCmd.MarkFlagRequired("authorized-aws-region")
+	})
 	configCmd.AddCommand(config_putAggregationAuthorizationCmd)
 }

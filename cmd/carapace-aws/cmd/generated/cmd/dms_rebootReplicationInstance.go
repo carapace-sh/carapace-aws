@@ -12,11 +12,13 @@ var dms_rebootReplicationInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_rebootReplicationInstanceCmd).Standalone()
+	carapace.Gen(dms_rebootReplicationInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_rebootReplicationInstanceCmd).Standalone()
 
-	dms_rebootReplicationInstanceCmd.Flags().String("force-failover", "", "If this parameter is `true`, the reboot is conducted through a Multi-AZ failover.")
-	dms_rebootReplicationInstanceCmd.Flags().String("force-planned-failover", "", "If this parameter is `true`, the reboot is conducted through a planned Multi-AZ failover where resources are released and cleaned up prior to conducting the failover.")
-	dms_rebootReplicationInstanceCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
-	dms_rebootReplicationInstanceCmd.MarkFlagRequired("replication-instance-arn")
+		dms_rebootReplicationInstanceCmd.Flags().String("force-failover", "", "If this parameter is `true`, the reboot is conducted through a Multi-AZ failover.")
+		dms_rebootReplicationInstanceCmd.Flags().String("force-planned-failover", "", "If this parameter is `true`, the reboot is conducted through a planned Multi-AZ failover where resources are released and cleaned up prior to conducting the failover.")
+		dms_rebootReplicationInstanceCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
+		dms_rebootReplicationInstanceCmd.MarkFlagRequired("replication-instance-arn")
+	})
 	dmsCmd.AddCommand(dms_rebootReplicationInstanceCmd)
 }

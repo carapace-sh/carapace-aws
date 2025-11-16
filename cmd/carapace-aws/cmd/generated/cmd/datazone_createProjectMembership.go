@@ -12,15 +12,17 @@ var datazone_createProjectMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_createProjectMembershipCmd).Standalone()
+	carapace.Gen(datazone_createProjectMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_createProjectMembershipCmd).Standalone()
 
-	datazone_createProjectMembershipCmd.Flags().String("designation", "", "The designation of the project membership.")
-	datazone_createProjectMembershipCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which project membership is created.")
-	datazone_createProjectMembershipCmd.Flags().String("member", "", "The project member whose project membership was created.")
-	datazone_createProjectMembershipCmd.Flags().String("project-identifier", "", "The ID of the project for which this project membership was created.")
-	datazone_createProjectMembershipCmd.MarkFlagRequired("designation")
-	datazone_createProjectMembershipCmd.MarkFlagRequired("domain-identifier")
-	datazone_createProjectMembershipCmd.MarkFlagRequired("member")
-	datazone_createProjectMembershipCmd.MarkFlagRequired("project-identifier")
+		datazone_createProjectMembershipCmd.Flags().String("designation", "", "The designation of the project membership.")
+		datazone_createProjectMembershipCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which project membership is created.")
+		datazone_createProjectMembershipCmd.Flags().String("member", "", "The project member whose project membership was created.")
+		datazone_createProjectMembershipCmd.Flags().String("project-identifier", "", "The ID of the project for which this project membership was created.")
+		datazone_createProjectMembershipCmd.MarkFlagRequired("designation")
+		datazone_createProjectMembershipCmd.MarkFlagRequired("domain-identifier")
+		datazone_createProjectMembershipCmd.MarkFlagRequired("member")
+		datazone_createProjectMembershipCmd.MarkFlagRequired("project-identifier")
+	})
 	datazoneCmd.AddCommand(datazone_createProjectMembershipCmd)
 }

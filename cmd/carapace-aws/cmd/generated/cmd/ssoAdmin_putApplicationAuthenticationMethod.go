@@ -12,13 +12,15 @@ var ssoAdmin_putApplicationAuthenticationMethodCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_putApplicationAuthenticationMethodCmd).Standalone()
+	carapace.Gen(ssoAdmin_putApplicationAuthenticationMethodCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_putApplicationAuthenticationMethodCmd).Standalone()
 
-	ssoAdmin_putApplicationAuthenticationMethodCmd.Flags().String("application-arn", "", "Specifies the ARN of the application with the authentication method to add or update.")
-	ssoAdmin_putApplicationAuthenticationMethodCmd.Flags().String("authentication-method", "", "Specifies a structure that describes the authentication method to add or update.")
-	ssoAdmin_putApplicationAuthenticationMethodCmd.Flags().String("authentication-method-type", "", "Specifies the type of the authentication method that you want to add or update.")
-	ssoAdmin_putApplicationAuthenticationMethodCmd.MarkFlagRequired("application-arn")
-	ssoAdmin_putApplicationAuthenticationMethodCmd.MarkFlagRequired("authentication-method")
-	ssoAdmin_putApplicationAuthenticationMethodCmd.MarkFlagRequired("authentication-method-type")
+		ssoAdmin_putApplicationAuthenticationMethodCmd.Flags().String("application-arn", "", "Specifies the ARN of the application with the authentication method to add or update.")
+		ssoAdmin_putApplicationAuthenticationMethodCmd.Flags().String("authentication-method", "", "Specifies a structure that describes the authentication method to add or update.")
+		ssoAdmin_putApplicationAuthenticationMethodCmd.Flags().String("authentication-method-type", "", "Specifies the type of the authentication method that you want to add or update.")
+		ssoAdmin_putApplicationAuthenticationMethodCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_putApplicationAuthenticationMethodCmd.MarkFlagRequired("authentication-method")
+		ssoAdmin_putApplicationAuthenticationMethodCmd.MarkFlagRequired("authentication-method-type")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_putApplicationAuthenticationMethodCmd)
 }

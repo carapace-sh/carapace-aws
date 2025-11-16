@@ -12,10 +12,12 @@ var mediapackage_listOriginEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackage_listOriginEndpointsCmd).Standalone()
+	carapace.Gen(mediapackage_listOriginEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackage_listOriginEndpointsCmd).Standalone()
 
-	mediapackage_listOriginEndpointsCmd.Flags().String("channel-id", "", "When specified, the request will return only OriginEndpoints associated with the given Channel ID.")
-	mediapackage_listOriginEndpointsCmd.Flags().String("max-results", "", "The upper bound on the number of records to return.")
-	mediapackage_listOriginEndpointsCmd.Flags().String("next-token", "", "A token used to resume pagination from the end of a previous request.")
+		mediapackage_listOriginEndpointsCmd.Flags().String("channel-id", "", "When specified, the request will return only OriginEndpoints associated with the given Channel ID.")
+		mediapackage_listOriginEndpointsCmd.Flags().String("max-results", "", "The upper bound on the number of records to return.")
+		mediapackage_listOriginEndpointsCmd.Flags().String("next-token", "", "A token used to resume pagination from the end of a previous request.")
+	})
 	mediapackageCmd.AddCommand(mediapackage_listOriginEndpointsCmd)
 }

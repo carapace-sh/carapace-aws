@@ -12,9 +12,11 @@ var omics_deleteReferenceStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_deleteReferenceStoreCmd).Standalone()
+	carapace.Gen(omics_deleteReferenceStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_deleteReferenceStoreCmd).Standalone()
 
-	omics_deleteReferenceStoreCmd.Flags().String("id", "", "The store's ID.")
-	omics_deleteReferenceStoreCmd.MarkFlagRequired("id")
+		omics_deleteReferenceStoreCmd.Flags().String("id", "", "The store's ID.")
+		omics_deleteReferenceStoreCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_deleteReferenceStoreCmd)
 }

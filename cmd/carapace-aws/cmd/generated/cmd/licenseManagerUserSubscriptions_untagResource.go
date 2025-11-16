@@ -12,11 +12,13 @@ var licenseManagerUserSubscriptions_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManagerUserSubscriptions_untagResourceCmd).Standalone()
+	carapace.Gen(licenseManagerUserSubscriptions_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerUserSubscriptions_untagResourceCmd).Standalone()
 
-	licenseManagerUserSubscriptions_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
-	licenseManagerUserSubscriptions_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to remove from the resource.")
-	licenseManagerUserSubscriptions_untagResourceCmd.MarkFlagRequired("resource-arn")
-	licenseManagerUserSubscriptions_untagResourceCmd.MarkFlagRequired("tag-keys")
+		licenseManagerUserSubscriptions_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
+		licenseManagerUserSubscriptions_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to remove from the resource.")
+		licenseManagerUserSubscriptions_untagResourceCmd.MarkFlagRequired("resource-arn")
+		licenseManagerUserSubscriptions_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	licenseManagerUserSubscriptionsCmd.AddCommand(licenseManagerUserSubscriptions_untagResourceCmd)
 }

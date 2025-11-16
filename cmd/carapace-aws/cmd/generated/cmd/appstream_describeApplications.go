@@ -12,10 +12,12 @@ var appstream_describeApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_describeApplicationsCmd).Standalone()
+	carapace.Gen(appstream_describeApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_describeApplicationsCmd).Standalone()
 
-	appstream_describeApplicationsCmd.Flags().String("arns", "", "The ARNs for the applications.")
-	appstream_describeApplicationsCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
-	appstream_describeApplicationsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		appstream_describeApplicationsCmd.Flags().String("arns", "", "The ARNs for the applications.")
+		appstream_describeApplicationsCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
+		appstream_describeApplicationsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+	})
 	appstreamCmd.AddCommand(appstream_describeApplicationsCmd)
 }

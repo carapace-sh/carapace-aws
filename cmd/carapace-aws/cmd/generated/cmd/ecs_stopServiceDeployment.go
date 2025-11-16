@@ -12,10 +12,12 @@ var ecs_stopServiceDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_stopServiceDeploymentCmd).Standalone()
+	carapace.Gen(ecs_stopServiceDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_stopServiceDeploymentCmd).Standalone()
 
-	ecs_stopServiceDeploymentCmd.Flags().String("service-deployment-arn", "", "The ARN of the service deployment that you want to stop.")
-	ecs_stopServiceDeploymentCmd.Flags().String("stop-type", "", "How you want Amazon ECS to stop the service.")
-	ecs_stopServiceDeploymentCmd.MarkFlagRequired("service-deployment-arn")
+		ecs_stopServiceDeploymentCmd.Flags().String("service-deployment-arn", "", "The ARN of the service deployment that you want to stop.")
+		ecs_stopServiceDeploymentCmd.Flags().String("stop-type", "", "How you want Amazon ECS to stop the service.")
+		ecs_stopServiceDeploymentCmd.MarkFlagRequired("service-deployment-arn")
+	})
 	ecsCmd.AddCommand(ecs_stopServiceDeploymentCmd)
 }

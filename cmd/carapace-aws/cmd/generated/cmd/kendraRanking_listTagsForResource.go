@@ -12,9 +12,11 @@ var kendraRanking_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendraRanking_listTagsForResourceCmd).Standalone()
+	carapace.Gen(kendraRanking_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendraRanking_listTagsForResourceCmd).Standalone()
 
-	kendraRanking_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the rescore execution plan to get a list of tags for.")
-	kendraRanking_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		kendraRanking_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the rescore execution plan to get a list of tags for.")
+		kendraRanking_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	kendraRankingCmd.AddCommand(kendraRanking_listTagsForResourceCmd)
 }

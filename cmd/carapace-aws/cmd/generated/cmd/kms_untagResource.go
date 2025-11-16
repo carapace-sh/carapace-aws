@@ -12,11 +12,13 @@ var kms_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_untagResourceCmd).Standalone()
+	carapace.Gen(kms_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_untagResourceCmd).Standalone()
 
-	kms_untagResourceCmd.Flags().String("key-id", "", "Identifies the KMS key from which you are removing tags.")
-	kms_untagResourceCmd.Flags().String("tag-keys", "", "One or more tag keys.")
-	kms_untagResourceCmd.MarkFlagRequired("key-id")
-	kms_untagResourceCmd.MarkFlagRequired("tag-keys")
+		kms_untagResourceCmd.Flags().String("key-id", "", "Identifies the KMS key from which you are removing tags.")
+		kms_untagResourceCmd.Flags().String("tag-keys", "", "One or more tag keys.")
+		kms_untagResourceCmd.MarkFlagRequired("key-id")
+		kms_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	kmsCmd.AddCommand(kms_untagResourceCmd)
 }

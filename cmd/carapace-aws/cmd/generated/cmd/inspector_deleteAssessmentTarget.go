@@ -12,9 +12,11 @@ var inspector_deleteAssessmentTargetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_deleteAssessmentTargetCmd).Standalone()
+	carapace.Gen(inspector_deleteAssessmentTargetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_deleteAssessmentTargetCmd).Standalone()
 
-	inspector_deleteAssessmentTargetCmd.Flags().String("assessment-target-arn", "", "The ARN that specifies the assessment target that you want to delete.")
-	inspector_deleteAssessmentTargetCmd.MarkFlagRequired("assessment-target-arn")
+		inspector_deleteAssessmentTargetCmd.Flags().String("assessment-target-arn", "", "The ARN that specifies the assessment target that you want to delete.")
+		inspector_deleteAssessmentTargetCmd.MarkFlagRequired("assessment-target-arn")
+	})
 	inspectorCmd.AddCommand(inspector_deleteAssessmentTargetCmd)
 }

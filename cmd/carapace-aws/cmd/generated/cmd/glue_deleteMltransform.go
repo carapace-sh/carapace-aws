@@ -12,9 +12,11 @@ var glue_deleteMltransformCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteMltransformCmd).Standalone()
+	carapace.Gen(glue_deleteMltransformCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteMltransformCmd).Standalone()
 
-	glue_deleteMltransformCmd.Flags().String("transform-id", "", "The unique identifier of the transform to delete.")
-	glue_deleteMltransformCmd.MarkFlagRequired("transform-id")
+		glue_deleteMltransformCmd.Flags().String("transform-id", "", "The unique identifier of the transform to delete.")
+		glue_deleteMltransformCmd.MarkFlagRequired("transform-id")
+	})
 	glueCmd.AddCommand(glue_deleteMltransformCmd)
 }

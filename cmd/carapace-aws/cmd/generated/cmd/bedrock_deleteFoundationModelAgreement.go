@@ -12,9 +12,11 @@ var bedrock_deleteFoundationModelAgreementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deleteFoundationModelAgreementCmd).Standalone()
+	carapace.Gen(bedrock_deleteFoundationModelAgreementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deleteFoundationModelAgreementCmd).Standalone()
 
-	bedrock_deleteFoundationModelAgreementCmd.Flags().String("model-id", "", "Model Id of the model access to delete.")
-	bedrock_deleteFoundationModelAgreementCmd.MarkFlagRequired("model-id")
+		bedrock_deleteFoundationModelAgreementCmd.Flags().String("model-id", "", "Model Id of the model access to delete.")
+		bedrock_deleteFoundationModelAgreementCmd.MarkFlagRequired("model-id")
+	})
 	bedrockCmd.AddCommand(bedrock_deleteFoundationModelAgreementCmd)
 }

@@ -12,9 +12,11 @@ var medialive_listInputSecurityGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listInputSecurityGroupsCmd).Standalone()
+	carapace.Gen(medialive_listInputSecurityGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listInputSecurityGroupsCmd).Standalone()
 
-	medialive_listInputSecurityGroupsCmd.Flags().String("max-results", "", "")
-	medialive_listInputSecurityGroupsCmd.Flags().String("next-token", "", "")
+		medialive_listInputSecurityGroupsCmd.Flags().String("max-results", "", "")
+		medialive_listInputSecurityGroupsCmd.Flags().String("next-token", "", "")
+	})
 	medialiveCmd.AddCommand(medialive_listInputSecurityGroupsCmd)
 }

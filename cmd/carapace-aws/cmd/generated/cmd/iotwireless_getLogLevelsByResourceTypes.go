@@ -12,7 +12,9 @@ var iotwireless_getLogLevelsByResourceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getLogLevelsByResourceTypesCmd).Standalone()
+	carapace.Gen(iotwireless_getLogLevelsByResourceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getLogLevelsByResourceTypesCmd).Standalone()
 
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getLogLevelsByResourceTypesCmd)
 }

@@ -12,10 +12,12 @@ var auditmanager_listAssessmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_listAssessmentsCmd).Standalone()
+	carapace.Gen(auditmanager_listAssessmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_listAssessmentsCmd).Standalone()
 
-	auditmanager_listAssessmentsCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
-	auditmanager_listAssessmentsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	auditmanager_listAssessmentsCmd.Flags().String("status", "", "The current status of the assessment.")
+		auditmanager_listAssessmentsCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
+		auditmanager_listAssessmentsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		auditmanager_listAssessmentsCmd.Flags().String("status", "", "The current status of the assessment.")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_listAssessmentsCmd)
 }

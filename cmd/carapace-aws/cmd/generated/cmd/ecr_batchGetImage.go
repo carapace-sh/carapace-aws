@@ -12,13 +12,15 @@ var ecr_batchGetImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_batchGetImageCmd).Standalone()
+	carapace.Gen(ecr_batchGetImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_batchGetImageCmd).Standalone()
 
-	ecr_batchGetImageCmd.Flags().String("accepted-media-types", "", "The accepted media types for the request.")
-	ecr_batchGetImageCmd.Flags().String("image-ids", "", "A list of image ID references that correspond to images to describe.")
-	ecr_batchGetImageCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the images to describe.")
-	ecr_batchGetImageCmd.Flags().String("repository-name", "", "The repository that contains the images to describe.")
-	ecr_batchGetImageCmd.MarkFlagRequired("image-ids")
-	ecr_batchGetImageCmd.MarkFlagRequired("repository-name")
+		ecr_batchGetImageCmd.Flags().String("accepted-media-types", "", "The accepted media types for the request.")
+		ecr_batchGetImageCmd.Flags().String("image-ids", "", "A list of image ID references that correspond to images to describe.")
+		ecr_batchGetImageCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the images to describe.")
+		ecr_batchGetImageCmd.Flags().String("repository-name", "", "The repository that contains the images to describe.")
+		ecr_batchGetImageCmd.MarkFlagRequired("image-ids")
+		ecr_batchGetImageCmd.MarkFlagRequired("repository-name")
+	})
 	ecrCmd.AddCommand(ecr_batchGetImageCmd)
 }

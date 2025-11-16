@@ -12,9 +12,11 @@ var drs_terminateRecoveryInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_terminateRecoveryInstancesCmd).Standalone()
+	carapace.Gen(drs_terminateRecoveryInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_terminateRecoveryInstancesCmd).Standalone()
 
-	drs_terminateRecoveryInstancesCmd.Flags().String("recovery-instance-ids", "", "The IDs of the Recovery Instances that should be terminated.")
-	drs_terminateRecoveryInstancesCmd.MarkFlagRequired("recovery-instance-ids")
+		drs_terminateRecoveryInstancesCmd.Flags().String("recovery-instance-ids", "", "The IDs of the Recovery Instances that should be terminated.")
+		drs_terminateRecoveryInstancesCmd.MarkFlagRequired("recovery-instance-ids")
+	})
 	drsCmd.AddCommand(drs_terminateRecoveryInstancesCmd)
 }

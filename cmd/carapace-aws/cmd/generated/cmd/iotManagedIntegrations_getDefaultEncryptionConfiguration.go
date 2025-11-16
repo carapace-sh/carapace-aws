@@ -12,7 +12,9 @@ var iotManagedIntegrations_getDefaultEncryptionConfigurationCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getDefaultEncryptionConfigurationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getDefaultEncryptionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getDefaultEncryptionConfigurationCmd).Standalone()
 
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getDefaultEncryptionConfigurationCmd)
 }

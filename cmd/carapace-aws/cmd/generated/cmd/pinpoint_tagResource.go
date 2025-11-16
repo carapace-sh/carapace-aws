@@ -12,11 +12,13 @@ var pinpoint_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_tagResourceCmd).Standalone()
+	carapace.Gen(pinpoint_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_tagResourceCmd).Standalone()
 
-	pinpoint_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	pinpoint_tagResourceCmd.Flags().String("tags-model", "", "")
-	pinpoint_tagResourceCmd.MarkFlagRequired("resource-arn")
-	pinpoint_tagResourceCmd.MarkFlagRequired("tags-model")
+		pinpoint_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		pinpoint_tagResourceCmd.Flags().String("tags-model", "", "")
+		pinpoint_tagResourceCmd.MarkFlagRequired("resource-arn")
+		pinpoint_tagResourceCmd.MarkFlagRequired("tags-model")
+	})
 	pinpointCmd.AddCommand(pinpoint_tagResourceCmd)
 }

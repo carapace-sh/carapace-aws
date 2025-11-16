@@ -12,12 +12,14 @@ var apigatewayv2_getRoutingRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_getRoutingRuleCmd).Standalone()
+	carapace.Gen(apigatewayv2_getRoutingRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_getRoutingRuleCmd).Standalone()
 
-	apigatewayv2_getRoutingRuleCmd.Flags().String("domain-name", "", "The domain name.")
-	apigatewayv2_getRoutingRuleCmd.Flags().String("domain-name-id", "", "The domain name ID.")
-	apigatewayv2_getRoutingRuleCmd.Flags().String("routing-rule-id", "", "The routing rule ID.")
-	apigatewayv2_getRoutingRuleCmd.MarkFlagRequired("domain-name")
-	apigatewayv2_getRoutingRuleCmd.MarkFlagRequired("routing-rule-id")
+		apigatewayv2_getRoutingRuleCmd.Flags().String("domain-name", "", "The domain name.")
+		apigatewayv2_getRoutingRuleCmd.Flags().String("domain-name-id", "", "The domain name ID.")
+		apigatewayv2_getRoutingRuleCmd.Flags().String("routing-rule-id", "", "The routing rule ID.")
+		apigatewayv2_getRoutingRuleCmd.MarkFlagRequired("domain-name")
+		apigatewayv2_getRoutingRuleCmd.MarkFlagRequired("routing-rule-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_getRoutingRuleCmd)
 }

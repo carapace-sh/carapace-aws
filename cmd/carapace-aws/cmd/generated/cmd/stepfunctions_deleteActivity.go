@@ -12,9 +12,11 @@ var stepfunctions_deleteActivityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_deleteActivityCmd).Standalone()
+	carapace.Gen(stepfunctions_deleteActivityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_deleteActivityCmd).Standalone()
 
-	stepfunctions_deleteActivityCmd.Flags().String("activity-arn", "", "The Amazon Resource Name (ARN) of the activity to delete.")
-	stepfunctions_deleteActivityCmd.MarkFlagRequired("activity-arn")
+		stepfunctions_deleteActivityCmd.Flags().String("activity-arn", "", "The Amazon Resource Name (ARN) of the activity to delete.")
+		stepfunctions_deleteActivityCmd.MarkFlagRequired("activity-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_deleteActivityCmd)
 }

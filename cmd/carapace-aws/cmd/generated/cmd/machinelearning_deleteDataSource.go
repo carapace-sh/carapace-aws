@@ -12,9 +12,11 @@ var machinelearning_deleteDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_deleteDataSourceCmd).Standalone()
+	carapace.Gen(machinelearning_deleteDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_deleteDataSourceCmd).Standalone()
 
-	machinelearning_deleteDataSourceCmd.Flags().String("data-source-id", "", "A user-supplied ID that uniquely identifies the `DataSource`.")
-	machinelearning_deleteDataSourceCmd.MarkFlagRequired("data-source-id")
+		machinelearning_deleteDataSourceCmd.Flags().String("data-source-id", "", "A user-supplied ID that uniquely identifies the `DataSource`.")
+		machinelearning_deleteDataSourceCmd.MarkFlagRequired("data-source-id")
+	})
 	machinelearningCmd.AddCommand(machinelearning_deleteDataSourceCmd)
 }

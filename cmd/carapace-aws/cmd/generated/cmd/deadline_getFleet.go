@@ -12,11 +12,13 @@ var deadline_getFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_getFleetCmd).Standalone()
+	carapace.Gen(deadline_getFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_getFleetCmd).Standalone()
 
-	deadline_getFleetCmd.Flags().String("farm-id", "", "The farm ID of the farm in the fleet.")
-	deadline_getFleetCmd.Flags().String("fleet-id", "", "The fleet ID of the fleet to get.")
-	deadline_getFleetCmd.MarkFlagRequired("farm-id")
-	deadline_getFleetCmd.MarkFlagRequired("fleet-id")
+		deadline_getFleetCmd.Flags().String("farm-id", "", "The farm ID of the farm in the fleet.")
+		deadline_getFleetCmd.Flags().String("fleet-id", "", "The fleet ID of the fleet to get.")
+		deadline_getFleetCmd.MarkFlagRequired("farm-id")
+		deadline_getFleetCmd.MarkFlagRequired("fleet-id")
+	})
 	deadlineCmd.AddCommand(deadline_getFleetCmd)
 }

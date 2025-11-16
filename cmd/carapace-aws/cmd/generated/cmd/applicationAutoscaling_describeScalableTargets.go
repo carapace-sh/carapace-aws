@@ -12,13 +12,15 @@ var applicationAutoscaling_describeScalableTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationAutoscaling_describeScalableTargetsCmd).Standalone()
+	carapace.Gen(applicationAutoscaling_describeScalableTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationAutoscaling_describeScalableTargetsCmd).Standalone()
 
-	applicationAutoscaling_describeScalableTargetsCmd.Flags().String("max-results", "", "The maximum number of scalable targets.")
-	applicationAutoscaling_describeScalableTargetsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	applicationAutoscaling_describeScalableTargetsCmd.Flags().String("resource-ids", "", "The identifier of the resource associated with the scalable target.")
-	applicationAutoscaling_describeScalableTargetsCmd.Flags().String("scalable-dimension", "", "The scalable dimension associated with the scalable target.")
-	applicationAutoscaling_describeScalableTargetsCmd.Flags().String("service-namespace", "", "The namespace of the Amazon Web Services service that provides the resource.")
-	applicationAutoscaling_describeScalableTargetsCmd.MarkFlagRequired("service-namespace")
+		applicationAutoscaling_describeScalableTargetsCmd.Flags().String("max-results", "", "The maximum number of scalable targets.")
+		applicationAutoscaling_describeScalableTargetsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		applicationAutoscaling_describeScalableTargetsCmd.Flags().String("resource-ids", "", "The identifier of the resource associated with the scalable target.")
+		applicationAutoscaling_describeScalableTargetsCmd.Flags().String("scalable-dimension", "", "The scalable dimension associated with the scalable target.")
+		applicationAutoscaling_describeScalableTargetsCmd.Flags().String("service-namespace", "", "The namespace of the Amazon Web Services service that provides the resource.")
+		applicationAutoscaling_describeScalableTargetsCmd.MarkFlagRequired("service-namespace")
+	})
 	applicationAutoscalingCmd.AddCommand(applicationAutoscaling_describeScalableTargetsCmd)
 }

@@ -12,9 +12,11 @@ var chimeSdkVoice_deleteVoiceConnectorExternalSystemsConfigurationCmd = &cobra.C
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorExternalSystemsConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorExternalSystemsConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteVoiceConnectorExternalSystemsConfigurationCmd).Standalone()
 
-	chimeSdkVoice_deleteVoiceConnectorExternalSystemsConfigurationCmd.Flags().String("voice-connector-id", "", "The ID of the Voice Connector for which to delete the external system configuration.")
-	chimeSdkVoice_deleteVoiceConnectorExternalSystemsConfigurationCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_deleteVoiceConnectorExternalSystemsConfigurationCmd.Flags().String("voice-connector-id", "", "The ID of the Voice Connector for which to delete the external system configuration.")
+		chimeSdkVoice_deleteVoiceConnectorExternalSystemsConfigurationCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteVoiceConnectorExternalSystemsConfigurationCmd)
 }

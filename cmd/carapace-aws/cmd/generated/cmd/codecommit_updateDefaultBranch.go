@@ -12,11 +12,13 @@ var codecommit_updateDefaultBranchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_updateDefaultBranchCmd).Standalone()
+	carapace.Gen(codecommit_updateDefaultBranchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_updateDefaultBranchCmd).Standalone()
 
-	codecommit_updateDefaultBranchCmd.Flags().String("default-branch-name", "", "The name of the branch to set as the default branch.")
-	codecommit_updateDefaultBranchCmd.Flags().String("repository-name", "", "The name of the repository for which you want to set or change the default branch.")
-	codecommit_updateDefaultBranchCmd.MarkFlagRequired("default-branch-name")
-	codecommit_updateDefaultBranchCmd.MarkFlagRequired("repository-name")
+		codecommit_updateDefaultBranchCmd.Flags().String("default-branch-name", "", "The name of the branch to set as the default branch.")
+		codecommit_updateDefaultBranchCmd.Flags().String("repository-name", "", "The name of the repository for which you want to set or change the default branch.")
+		codecommit_updateDefaultBranchCmd.MarkFlagRequired("default-branch-name")
+		codecommit_updateDefaultBranchCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_updateDefaultBranchCmd)
 }

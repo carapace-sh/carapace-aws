@@ -12,9 +12,11 @@ var sesv2_getDedicatedIpCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getDedicatedIpCmd).Standalone()
+	carapace.Gen(sesv2_getDedicatedIpCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getDedicatedIpCmd).Standalone()
 
-	sesv2_getDedicatedIpCmd.Flags().String("ip", "", "The IP address that you want to obtain more information about.")
-	sesv2_getDedicatedIpCmd.MarkFlagRequired("ip")
+		sesv2_getDedicatedIpCmd.Flags().String("ip", "", "The IP address that you want to obtain more information about.")
+		sesv2_getDedicatedIpCmd.MarkFlagRequired("ip")
+	})
 	sesv2Cmd.AddCommand(sesv2_getDedicatedIpCmd)
 }

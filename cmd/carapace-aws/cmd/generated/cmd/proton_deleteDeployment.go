@@ -12,9 +12,11 @@ var proton_deleteDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_deleteDeploymentCmd).Standalone()
+	carapace.Gen(proton_deleteDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_deleteDeploymentCmd).Standalone()
 
-	proton_deleteDeploymentCmd.Flags().String("id", "", "The ID of the deployment to delete.")
-	proton_deleteDeploymentCmd.MarkFlagRequired("id")
+		proton_deleteDeploymentCmd.Flags().String("id", "", "The ID of the deployment to delete.")
+		proton_deleteDeploymentCmd.MarkFlagRequired("id")
+	})
 	protonCmd.AddCommand(proton_deleteDeploymentCmd)
 }

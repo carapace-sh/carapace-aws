@@ -12,9 +12,11 @@ var location_deleteMapCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_deleteMapCmd).Standalone()
+	carapace.Gen(location_deleteMapCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_deleteMapCmd).Standalone()
 
-	location_deleteMapCmd.Flags().String("map-name", "", "The name of the map resource to be deleted.")
-	location_deleteMapCmd.MarkFlagRequired("map-name")
+		location_deleteMapCmd.Flags().String("map-name", "", "The name of the map resource to be deleted.")
+		location_deleteMapCmd.MarkFlagRequired("map-name")
+	})
 	locationCmd.AddCommand(location_deleteMapCmd)
 }

@@ -12,11 +12,13 @@ var devicefarm_installToRemoteAccessSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_installToRemoteAccessSessionCmd).Standalone()
+	carapace.Gen(devicefarm_installToRemoteAccessSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_installToRemoteAccessSessionCmd).Standalone()
 
-	devicefarm_installToRemoteAccessSessionCmd.Flags().String("app-arn", "", "The ARN of the app about which you are requesting information.")
-	devicefarm_installToRemoteAccessSessionCmd.Flags().String("remote-access-session-arn", "", "The Amazon Resource Name (ARN) of the remote access session about which you are requesting information.")
-	devicefarm_installToRemoteAccessSessionCmd.MarkFlagRequired("app-arn")
-	devicefarm_installToRemoteAccessSessionCmd.MarkFlagRequired("remote-access-session-arn")
+		devicefarm_installToRemoteAccessSessionCmd.Flags().String("app-arn", "", "The ARN of the app about which you are requesting information.")
+		devicefarm_installToRemoteAccessSessionCmd.Flags().String("remote-access-session-arn", "", "The Amazon Resource Name (ARN) of the remote access session about which you are requesting information.")
+		devicefarm_installToRemoteAccessSessionCmd.MarkFlagRequired("app-arn")
+		devicefarm_installToRemoteAccessSessionCmd.MarkFlagRequired("remote-access-session-arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_installToRemoteAccessSessionCmd)
 }

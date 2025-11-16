@@ -12,9 +12,11 @@ var ses_getIdentityVerificationAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_getIdentityVerificationAttributesCmd).Standalone()
+	carapace.Gen(ses_getIdentityVerificationAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_getIdentityVerificationAttributesCmd).Standalone()
 
-	ses_getIdentityVerificationAttributesCmd.Flags().String("identities", "", "A list of identities.")
-	ses_getIdentityVerificationAttributesCmd.MarkFlagRequired("identities")
+		ses_getIdentityVerificationAttributesCmd.Flags().String("identities", "", "A list of identities.")
+		ses_getIdentityVerificationAttributesCmd.MarkFlagRequired("identities")
+	})
 	sesCmd.AddCommand(ses_getIdentityVerificationAttributesCmd)
 }

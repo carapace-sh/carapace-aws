@@ -12,7 +12,9 @@ var iam_getAccountPasswordPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getAccountPasswordPolicyCmd).Standalone()
+	carapace.Gen(iam_getAccountPasswordPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getAccountPasswordPolicyCmd).Standalone()
 
+	})
 	iamCmd.AddCommand(iam_getAccountPasswordPolicyCmd)
 }

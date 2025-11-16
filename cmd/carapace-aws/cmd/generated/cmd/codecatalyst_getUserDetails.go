@@ -12,9 +12,11 @@ var codecatalyst_getUserDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_getUserDetailsCmd).Standalone()
+	carapace.Gen(codecatalyst_getUserDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_getUserDetailsCmd).Standalone()
 
-	codecatalyst_getUserDetailsCmd.Flags().String("id", "", "The system-generated unique ID of the user.")
-	codecatalyst_getUserDetailsCmd.Flags().String("user-name", "", "The name of the user as displayed in Amazon CodeCatalyst.")
+		codecatalyst_getUserDetailsCmd.Flags().String("id", "", "The system-generated unique ID of the user.")
+		codecatalyst_getUserDetailsCmd.Flags().String("user-name", "", "The name of the user as displayed in Amazon CodeCatalyst.")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_getUserDetailsCmd)
 }

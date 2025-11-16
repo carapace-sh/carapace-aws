@@ -12,11 +12,13 @@ var servicecatalogAppregistry_syncResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalogAppregistry_syncResourceCmd).Standalone()
+	carapace.Gen(servicecatalogAppregistry_syncResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalogAppregistry_syncResourceCmd).Standalone()
 
-	servicecatalogAppregistry_syncResourceCmd.Flags().String("resource", "", "An entity you can work with and specify with a name or ID.")
-	servicecatalogAppregistry_syncResourceCmd.Flags().String("resource-type", "", "The type of resource of which the application will be associated.")
-	servicecatalogAppregistry_syncResourceCmd.MarkFlagRequired("resource")
-	servicecatalogAppregistry_syncResourceCmd.MarkFlagRequired("resource-type")
+		servicecatalogAppregistry_syncResourceCmd.Flags().String("resource", "", "An entity you can work with and specify with a name or ID.")
+		servicecatalogAppregistry_syncResourceCmd.Flags().String("resource-type", "", "The type of resource of which the application will be associated.")
+		servicecatalogAppregistry_syncResourceCmd.MarkFlagRequired("resource")
+		servicecatalogAppregistry_syncResourceCmd.MarkFlagRequired("resource-type")
+	})
 	servicecatalogAppregistryCmd.AddCommand(servicecatalogAppregistry_syncResourceCmd)
 }

@@ -12,10 +12,12 @@ var licenseManager_getAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_getAccessTokenCmd).Standalone()
+	carapace.Gen(licenseManager_getAccessTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_getAccessTokenCmd).Standalone()
 
-	licenseManager_getAccessTokenCmd.Flags().String("token", "", "Refresh token, encoded as a JWT token.")
-	licenseManager_getAccessTokenCmd.Flags().String("token-properties", "", "Token properties to validate against those present in the JWT token.")
-	licenseManager_getAccessTokenCmd.MarkFlagRequired("token")
+		licenseManager_getAccessTokenCmd.Flags().String("token", "", "Refresh token, encoded as a JWT token.")
+		licenseManager_getAccessTokenCmd.Flags().String("token-properties", "", "Token properties to validate against those present in the JWT token.")
+		licenseManager_getAccessTokenCmd.MarkFlagRequired("token")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_getAccessTokenCmd)
 }

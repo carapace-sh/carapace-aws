@@ -12,7 +12,9 @@ var serverlessrepoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serverlessrepoCmd).Standalone()
+	carapace.Gen(serverlessrepoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serverlessrepoCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(serverlessrepoCmd)
 }

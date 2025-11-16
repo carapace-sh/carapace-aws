@@ -12,9 +12,11 @@ var customerProfiles_deleteDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_deleteDomainCmd).Standalone()
+	carapace.Gen(customerProfiles_deleteDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_deleteDomainCmd).Standalone()
 
-	customerProfiles_deleteDomainCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_deleteDomainCmd.MarkFlagRequired("domain-name")
+		customerProfiles_deleteDomainCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_deleteDomainCmd.MarkFlagRequired("domain-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_deleteDomainCmd)
 }

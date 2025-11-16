@@ -12,10 +12,12 @@ var neptune_describeGlobalClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_describeGlobalClustersCmd).Standalone()
+	carapace.Gen(neptune_describeGlobalClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_describeGlobalClustersCmd).Standalone()
 
-	neptune_describeGlobalClustersCmd.Flags().String("global-cluster-identifier", "", "The user-supplied DB cluster identifier.")
-	neptune_describeGlobalClustersCmd.Flags().String("marker", "", "(*Optional*) A pagination token returned by a previous call to `DescribeGlobalClusters`.")
-	neptune_describeGlobalClustersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		neptune_describeGlobalClustersCmd.Flags().String("global-cluster-identifier", "", "The user-supplied DB cluster identifier.")
+		neptune_describeGlobalClustersCmd.Flags().String("marker", "", "(*Optional*) A pagination token returned by a previous call to `DescribeGlobalClusters`.")
+		neptune_describeGlobalClustersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	neptuneCmd.AddCommand(neptune_describeGlobalClustersCmd)
 }

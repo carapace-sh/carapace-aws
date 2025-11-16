@@ -12,11 +12,13 @@ var servicediscovery_updateServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_updateServiceCmd).Standalone()
+	carapace.Gen(servicediscovery_updateServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_updateServiceCmd).Standalone()
 
-	servicediscovery_updateServiceCmd.Flags().String("id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to update.")
-	servicediscovery_updateServiceCmd.Flags().String("service", "", "A complex type that contains the new settings for the service.")
-	servicediscovery_updateServiceCmd.MarkFlagRequired("id")
-	servicediscovery_updateServiceCmd.MarkFlagRequired("service")
+		servicediscovery_updateServiceCmd.Flags().String("id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to update.")
+		servicediscovery_updateServiceCmd.Flags().String("service", "", "A complex type that contains the new settings for the service.")
+		servicediscovery_updateServiceCmd.MarkFlagRequired("id")
+		servicediscovery_updateServiceCmd.MarkFlagRequired("service")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_updateServiceCmd)
 }

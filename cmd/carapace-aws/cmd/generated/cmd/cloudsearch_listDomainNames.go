@@ -12,7 +12,9 @@ var cloudsearch_listDomainNamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_listDomainNamesCmd).Standalone()
+	carapace.Gen(cloudsearch_listDomainNamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_listDomainNamesCmd).Standalone()
 
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_listDomainNamesCmd)
 }

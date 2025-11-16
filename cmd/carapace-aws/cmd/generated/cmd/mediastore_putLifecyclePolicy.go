@@ -12,11 +12,13 @@ var mediastore_putLifecyclePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_putLifecyclePolicyCmd).Standalone()
+	carapace.Gen(mediastore_putLifecyclePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_putLifecyclePolicyCmd).Standalone()
 
-	mediastore_putLifecyclePolicyCmd.Flags().String("container-name", "", "The name of the container that you want to assign the object lifecycle policy to.")
-	mediastore_putLifecyclePolicyCmd.Flags().String("lifecycle-policy", "", "The object lifecycle policy to apply to the container.")
-	mediastore_putLifecyclePolicyCmd.MarkFlagRequired("container-name")
-	mediastore_putLifecyclePolicyCmd.MarkFlagRequired("lifecycle-policy")
+		mediastore_putLifecyclePolicyCmd.Flags().String("container-name", "", "The name of the container that you want to assign the object lifecycle policy to.")
+		mediastore_putLifecyclePolicyCmd.Flags().String("lifecycle-policy", "", "The object lifecycle policy to apply to the container.")
+		mediastore_putLifecyclePolicyCmd.MarkFlagRequired("container-name")
+		mediastore_putLifecyclePolicyCmd.MarkFlagRequired("lifecycle-policy")
+	})
 	mediastoreCmd.AddCommand(mediastore_putLifecyclePolicyCmd)
 }

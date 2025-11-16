@@ -12,9 +12,11 @@ var ecr_deleteRepositoryCreationTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_deleteRepositoryCreationTemplateCmd).Standalone()
+	carapace.Gen(ecr_deleteRepositoryCreationTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_deleteRepositoryCreationTemplateCmd).Standalone()
 
-	ecr_deleteRepositoryCreationTemplateCmd.Flags().String("prefix", "", "The repository namespace prefix associated with the repository creation template.")
-	ecr_deleteRepositoryCreationTemplateCmd.MarkFlagRequired("prefix")
+		ecr_deleteRepositoryCreationTemplateCmd.Flags().String("prefix", "", "The repository namespace prefix associated with the repository creation template.")
+		ecr_deleteRepositoryCreationTemplateCmd.MarkFlagRequired("prefix")
+	})
 	ecrCmd.AddCommand(ecr_deleteRepositoryCreationTemplateCmd)
 }

@@ -12,11 +12,13 @@ var qbusiness_getChatResponseConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_getChatResponseConfigurationCmd).Standalone()
+	carapace.Gen(qbusiness_getChatResponseConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_getChatResponseConfigurationCmd).Standalone()
 
-	qbusiness_getChatResponseConfigurationCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application containing the chat response configuration to retrieve.")
-	qbusiness_getChatResponseConfigurationCmd.Flags().String("chat-response-configuration-id", "", "The unique identifier of the chat response configuration to retrieve from the specified application.")
-	qbusiness_getChatResponseConfigurationCmd.MarkFlagRequired("application-id")
-	qbusiness_getChatResponseConfigurationCmd.MarkFlagRequired("chat-response-configuration-id")
+		qbusiness_getChatResponseConfigurationCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application containing the chat response configuration to retrieve.")
+		qbusiness_getChatResponseConfigurationCmd.Flags().String("chat-response-configuration-id", "", "The unique identifier of the chat response configuration to retrieve from the specified application.")
+		qbusiness_getChatResponseConfigurationCmd.MarkFlagRequired("application-id")
+		qbusiness_getChatResponseConfigurationCmd.MarkFlagRequired("chat-response-configuration-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_getChatResponseConfigurationCmd)
 }

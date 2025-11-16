@@ -12,7 +12,9 @@ var elbv2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2Cmd).Standalone()
+	carapace.Gen(elbv2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2Cmd).Standalone()
 
+	})
 	rootCmd.AddCommand(elbv2Cmd)
 }

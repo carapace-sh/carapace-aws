@@ -12,10 +12,12 @@ var s3_getBucketPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketPolicyCmd).Standalone()
+	carapace.Gen(s3_getBucketPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketPolicyCmd).Standalone()
 
-	s3_getBucketPolicyCmd.Flags().String("bucket", "", "The bucket name to get the bucket policy for.")
-	s3_getBucketPolicyCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketPolicyCmd.MarkFlagRequired("bucket")
+		s3_getBucketPolicyCmd.Flags().String("bucket", "", "The bucket name to get the bucket policy for.")
+		s3_getBucketPolicyCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketPolicyCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getBucketPolicyCmd)
 }

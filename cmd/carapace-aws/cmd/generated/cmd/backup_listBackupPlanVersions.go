@@ -12,11 +12,13 @@ var backup_listBackupPlanVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_listBackupPlanVersionsCmd).Standalone()
+	carapace.Gen(backup_listBackupPlanVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_listBackupPlanVersionsCmd).Standalone()
 
-	backup_listBackupPlanVersionsCmd.Flags().String("backup-plan-id", "", "Uniquely identifies a backup plan.")
-	backup_listBackupPlanVersionsCmd.Flags().String("max-results", "", "The maximum number of items to be returned.")
-	backup_listBackupPlanVersionsCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
-	backup_listBackupPlanVersionsCmd.MarkFlagRequired("backup-plan-id")
+		backup_listBackupPlanVersionsCmd.Flags().String("backup-plan-id", "", "Uniquely identifies a backup plan.")
+		backup_listBackupPlanVersionsCmd.Flags().String("max-results", "", "The maximum number of items to be returned.")
+		backup_listBackupPlanVersionsCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
+		backup_listBackupPlanVersionsCmd.MarkFlagRequired("backup-plan-id")
+	})
 	backupCmd.AddCommand(backup_listBackupPlanVersionsCmd)
 }

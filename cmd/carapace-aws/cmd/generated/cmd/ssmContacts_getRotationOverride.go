@@ -12,11 +12,13 @@ var ssmContacts_getRotationOverrideCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_getRotationOverrideCmd).Standalone()
+	carapace.Gen(ssmContacts_getRotationOverrideCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_getRotationOverrideCmd).Standalone()
 
-	ssmContacts_getRotationOverrideCmd.Flags().String("rotation-id", "", "The Amazon Resource Name (ARN) of the overridden rotation to retrieve information about.")
-	ssmContacts_getRotationOverrideCmd.Flags().String("rotation-override-id", "", "The Amazon Resource Name (ARN) of the on-call rotation override to retrieve information about.")
-	ssmContacts_getRotationOverrideCmd.MarkFlagRequired("rotation-id")
-	ssmContacts_getRotationOverrideCmd.MarkFlagRequired("rotation-override-id")
+		ssmContacts_getRotationOverrideCmd.Flags().String("rotation-id", "", "The Amazon Resource Name (ARN) of the overridden rotation to retrieve information about.")
+		ssmContacts_getRotationOverrideCmd.Flags().String("rotation-override-id", "", "The Amazon Resource Name (ARN) of the on-call rotation override to retrieve information about.")
+		ssmContacts_getRotationOverrideCmd.MarkFlagRequired("rotation-id")
+		ssmContacts_getRotationOverrideCmd.MarkFlagRequired("rotation-override-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_getRotationOverrideCmd)
 }

@@ -12,7 +12,9 @@ var mgn_initializeServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_initializeServiceCmd).Standalone()
+	carapace.Gen(mgn_initializeServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_initializeServiceCmd).Standalone()
 
+	})
 	mgnCmd.AddCommand(mgn_initializeServiceCmd)
 }

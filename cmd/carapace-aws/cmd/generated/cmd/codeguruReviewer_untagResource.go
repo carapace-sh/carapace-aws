@@ -12,11 +12,13 @@ var codeguruReviewer_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruReviewer_untagResourceCmd).Standalone()
+	carapace.Gen(codeguruReviewer_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruReviewer_untagResourceCmd).Standalone()
 
-	codeguruReviewer_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.")
-	codeguruReviewer_untagResourceCmd.Flags().String("tag-keys", "", "A list of the keys for each tag you want to remove from an associated repository.")
-	codeguruReviewer_untagResourceCmd.MarkFlagRequired("resource-arn")
-	codeguruReviewer_untagResourceCmd.MarkFlagRequired("tag-keys")
+		codeguruReviewer_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.")
+		codeguruReviewer_untagResourceCmd.Flags().String("tag-keys", "", "A list of the keys for each tag you want to remove from an associated repository.")
+		codeguruReviewer_untagResourceCmd.MarkFlagRequired("resource-arn")
+		codeguruReviewer_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	codeguruReviewerCmd.AddCommand(codeguruReviewer_untagResourceCmd)
 }

@@ -12,10 +12,12 @@ var iam_deactivateMfadeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deactivateMfadeviceCmd).Standalone()
+	carapace.Gen(iam_deactivateMfadeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deactivateMfadeviceCmd).Standalone()
 
-	iam_deactivateMfadeviceCmd.Flags().String("serial-number", "", "The serial number that uniquely identifies the MFA device.")
-	iam_deactivateMfadeviceCmd.Flags().String("user-name", "", "The name of the user whose MFA device you want to deactivate.")
-	iam_deactivateMfadeviceCmd.MarkFlagRequired("serial-number")
+		iam_deactivateMfadeviceCmd.Flags().String("serial-number", "", "The serial number that uniquely identifies the MFA device.")
+		iam_deactivateMfadeviceCmd.Flags().String("user-name", "", "The name of the user whose MFA device you want to deactivate.")
+		iam_deactivateMfadeviceCmd.MarkFlagRequired("serial-number")
+	})
 	iamCmd.AddCommand(iam_deactivateMfadeviceCmd)
 }

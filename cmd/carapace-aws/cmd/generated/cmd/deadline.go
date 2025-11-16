@@ -12,7 +12,9 @@ var deadlineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadlineCmd).Standalone()
+	carapace.Gen(deadlineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadlineCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(deadlineCmd)
 }

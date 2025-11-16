@@ -12,14 +12,16 @@ var proton_listRepositorySyncDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_listRepositorySyncDefinitionsCmd).Standalone()
+	carapace.Gen(proton_listRepositorySyncDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_listRepositorySyncDefinitionsCmd).Standalone()
 
-	proton_listRepositorySyncDefinitionsCmd.Flags().String("next-token", "", "A token that indicates the location of the next repository sync definition in the array of repository sync definitions, after the list of repository sync definitions previously requested.")
-	proton_listRepositorySyncDefinitionsCmd.Flags().String("repository-name", "", "The repository name.")
-	proton_listRepositorySyncDefinitionsCmd.Flags().String("repository-provider", "", "The repository provider.")
-	proton_listRepositorySyncDefinitionsCmd.Flags().String("sync-type", "", "The sync type.")
-	proton_listRepositorySyncDefinitionsCmd.MarkFlagRequired("repository-name")
-	proton_listRepositorySyncDefinitionsCmd.MarkFlagRequired("repository-provider")
-	proton_listRepositorySyncDefinitionsCmd.MarkFlagRequired("sync-type")
+		proton_listRepositorySyncDefinitionsCmd.Flags().String("next-token", "", "A token that indicates the location of the next repository sync definition in the array of repository sync definitions, after the list of repository sync definitions previously requested.")
+		proton_listRepositorySyncDefinitionsCmd.Flags().String("repository-name", "", "The repository name.")
+		proton_listRepositorySyncDefinitionsCmd.Flags().String("repository-provider", "", "The repository provider.")
+		proton_listRepositorySyncDefinitionsCmd.Flags().String("sync-type", "", "The sync type.")
+		proton_listRepositorySyncDefinitionsCmd.MarkFlagRequired("repository-name")
+		proton_listRepositorySyncDefinitionsCmd.MarkFlagRequired("repository-provider")
+		proton_listRepositorySyncDefinitionsCmd.MarkFlagRequired("sync-type")
+	})
 	protonCmd.AddCommand(proton_listRepositorySyncDefinitionsCmd)
 }

@@ -12,12 +12,14 @@ var connect_getTaskTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_getTaskTemplateCmd).Standalone()
+	carapace.Gen(connect_getTaskTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_getTaskTemplateCmd).Standalone()
 
-	connect_getTaskTemplateCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_getTaskTemplateCmd.Flags().String("snapshot-version", "", "The system generated version of a task template that is associated with a task, when the task is created.")
-	connect_getTaskTemplateCmd.Flags().String("task-template-id", "", "A unique identifier for the task template.")
-	connect_getTaskTemplateCmd.MarkFlagRequired("instance-id")
-	connect_getTaskTemplateCmd.MarkFlagRequired("task-template-id")
+		connect_getTaskTemplateCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_getTaskTemplateCmd.Flags().String("snapshot-version", "", "The system generated version of a task template that is associated with a task, when the task is created.")
+		connect_getTaskTemplateCmd.Flags().String("task-template-id", "", "A unique identifier for the task template.")
+		connect_getTaskTemplateCmd.MarkFlagRequired("instance-id")
+		connect_getTaskTemplateCmd.MarkFlagRequired("task-template-id")
+	})
 	connectCmd.AddCommand(connect_getTaskTemplateCmd)
 }

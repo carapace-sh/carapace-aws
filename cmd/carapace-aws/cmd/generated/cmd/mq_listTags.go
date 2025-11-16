@@ -12,9 +12,11 @@ var mq_listTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mq_listTagsCmd).Standalone()
+	carapace.Gen(mq_listTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mq_listTagsCmd).Standalone()
 
-	mq_listTagsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource tag.")
-	mq_listTagsCmd.MarkFlagRequired("resource-arn")
+		mq_listTagsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource tag.")
+		mq_listTagsCmd.MarkFlagRequired("resource-arn")
+	})
 	mqCmd.AddCommand(mq_listTagsCmd)
 }

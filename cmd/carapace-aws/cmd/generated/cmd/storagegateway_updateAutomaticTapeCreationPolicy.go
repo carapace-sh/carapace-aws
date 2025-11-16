@@ -12,11 +12,13 @@ var storagegateway_updateAutomaticTapeCreationPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_updateAutomaticTapeCreationPolicyCmd).Standalone()
+	carapace.Gen(storagegateway_updateAutomaticTapeCreationPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_updateAutomaticTapeCreationPolicyCmd).Standalone()
 
-	storagegateway_updateAutomaticTapeCreationPolicyCmd.Flags().String("automatic-tape-creation-rules", "", "An automatic tape creation policy consists of a list of automatic tape creation rules.")
-	storagegateway_updateAutomaticTapeCreationPolicyCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_updateAutomaticTapeCreationPolicyCmd.MarkFlagRequired("automatic-tape-creation-rules")
-	storagegateway_updateAutomaticTapeCreationPolicyCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_updateAutomaticTapeCreationPolicyCmd.Flags().String("automatic-tape-creation-rules", "", "An automatic tape creation policy consists of a list of automatic tape creation rules.")
+		storagegateway_updateAutomaticTapeCreationPolicyCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_updateAutomaticTapeCreationPolicyCmd.MarkFlagRequired("automatic-tape-creation-rules")
+		storagegateway_updateAutomaticTapeCreationPolicyCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_updateAutomaticTapeCreationPolicyCmd)
 }

@@ -12,12 +12,14 @@ var workdocs_abortDocumentVersionUploadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_abortDocumentVersionUploadCmd).Standalone()
+	carapace.Gen(workdocs_abortDocumentVersionUploadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_abortDocumentVersionUploadCmd).Standalone()
 
-	workdocs_abortDocumentVersionUploadCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_abortDocumentVersionUploadCmd.Flags().String("document-id", "", "The ID of the document.")
-	workdocs_abortDocumentVersionUploadCmd.Flags().String("version-id", "", "The ID of the version.")
-	workdocs_abortDocumentVersionUploadCmd.MarkFlagRequired("document-id")
-	workdocs_abortDocumentVersionUploadCmd.MarkFlagRequired("version-id")
+		workdocs_abortDocumentVersionUploadCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_abortDocumentVersionUploadCmd.Flags().String("document-id", "", "The ID of the document.")
+		workdocs_abortDocumentVersionUploadCmd.Flags().String("version-id", "", "The ID of the version.")
+		workdocs_abortDocumentVersionUploadCmd.MarkFlagRequired("document-id")
+		workdocs_abortDocumentVersionUploadCmd.MarkFlagRequired("version-id")
+	})
 	workdocsCmd.AddCommand(workdocs_abortDocumentVersionUploadCmd)
 }

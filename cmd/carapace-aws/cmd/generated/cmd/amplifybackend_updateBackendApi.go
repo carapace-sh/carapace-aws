@@ -12,14 +12,16 @@ var amplifybackend_updateBackendApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_updateBackendApiCmd).Standalone()
+	carapace.Gen(amplifybackend_updateBackendApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_updateBackendApiCmd).Standalone()
 
-	amplifybackend_updateBackendApiCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_updateBackendApiCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
-	amplifybackend_updateBackendApiCmd.Flags().String("resource-config", "", "Defines the resource configuration for the data model in your Amplify project.")
-	amplifybackend_updateBackendApiCmd.Flags().String("resource-name", "", "The name of this resource.")
-	amplifybackend_updateBackendApiCmd.MarkFlagRequired("app-id")
-	amplifybackend_updateBackendApiCmd.MarkFlagRequired("backend-environment-name")
-	amplifybackend_updateBackendApiCmd.MarkFlagRequired("resource-name")
+		amplifybackend_updateBackendApiCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_updateBackendApiCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
+		amplifybackend_updateBackendApiCmd.Flags().String("resource-config", "", "Defines the resource configuration for the data model in your Amplify project.")
+		amplifybackend_updateBackendApiCmd.Flags().String("resource-name", "", "The name of this resource.")
+		amplifybackend_updateBackendApiCmd.MarkFlagRequired("app-id")
+		amplifybackend_updateBackendApiCmd.MarkFlagRequired("backend-environment-name")
+		amplifybackend_updateBackendApiCmd.MarkFlagRequired("resource-name")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_updateBackendApiCmd)
 }

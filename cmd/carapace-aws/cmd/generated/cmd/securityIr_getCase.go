@@ -12,9 +12,11 @@ var securityIr_getCaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityIr_getCaseCmd).Standalone()
+	carapace.Gen(securityIr_getCaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityIr_getCaseCmd).Standalone()
 
-	securityIr_getCaseCmd.Flags().String("case-id", "", "Required element for GetCase to identify the requested case ID.")
-	securityIr_getCaseCmd.MarkFlagRequired("case-id")
+		securityIr_getCaseCmd.Flags().String("case-id", "", "Required element for GetCase to identify the requested case ID.")
+		securityIr_getCaseCmd.MarkFlagRequired("case-id")
+	})
 	securityIrCmd.AddCommand(securityIr_getCaseCmd)
 }

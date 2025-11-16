@@ -12,9 +12,11 @@ var pinpoint_getApnsVoipSandboxChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getApnsVoipSandboxChannelCmd).Standalone()
+	carapace.Gen(pinpoint_getApnsVoipSandboxChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getApnsVoipSandboxChannelCmd).Standalone()
 
-	pinpoint_getApnsVoipSandboxChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getApnsVoipSandboxChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_getApnsVoipSandboxChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getApnsVoipSandboxChannelCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getApnsVoipSandboxChannelCmd)
 }

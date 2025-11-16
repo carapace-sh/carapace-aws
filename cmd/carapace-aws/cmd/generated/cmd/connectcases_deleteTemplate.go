@@ -12,11 +12,13 @@ var connectcases_deleteTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_deleteTemplateCmd).Standalone()
+	carapace.Gen(connectcases_deleteTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_deleteTemplateCmd).Standalone()
 
-	connectcases_deleteTemplateCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_deleteTemplateCmd.Flags().String("template-id", "", "A unique identifier of a template.")
-	connectcases_deleteTemplateCmd.MarkFlagRequired("domain-id")
-	connectcases_deleteTemplateCmd.MarkFlagRequired("template-id")
+		connectcases_deleteTemplateCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_deleteTemplateCmd.Flags().String("template-id", "", "A unique identifier of a template.")
+		connectcases_deleteTemplateCmd.MarkFlagRequired("domain-id")
+		connectcases_deleteTemplateCmd.MarkFlagRequired("template-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_deleteTemplateCmd)
 }

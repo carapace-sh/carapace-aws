@@ -12,13 +12,15 @@ var codeguruReviewer_listRepositoryAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruReviewer_listRepositoryAssociationsCmd).Standalone()
+	carapace.Gen(codeguruReviewer_listRepositoryAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruReviewer_listRepositoryAssociationsCmd).Standalone()
 
-	codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("max-results", "", "The maximum number of repository association results returned by `ListRepositoryAssociations` in paginated output.")
-	codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("names", "", "List of repository names to use as a filter.")
-	codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `ListRepositoryAssociations` request where `maxResults` was used and the results exceeded the value of that parameter.")
-	codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("owners", "", "List of owners to use as a filter.")
-	codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("provider-types", "", "List of provider types to use as a filter.")
-	codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("states", "", "List of repository association states to use as a filter.")
+		codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("max-results", "", "The maximum number of repository association results returned by `ListRepositoryAssociations` in paginated output.")
+		codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("names", "", "List of repository names to use as a filter.")
+		codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `ListRepositoryAssociations` request where `maxResults` was used and the results exceeded the value of that parameter.")
+		codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("owners", "", "List of owners to use as a filter.")
+		codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("provider-types", "", "List of provider types to use as a filter.")
+		codeguruReviewer_listRepositoryAssociationsCmd.Flags().String("states", "", "List of repository association states to use as a filter.")
+	})
 	codeguruReviewerCmd.AddCommand(codeguruReviewer_listRepositoryAssociationsCmd)
 }

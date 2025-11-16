@@ -12,14 +12,16 @@ var networkmanager_updateConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_updateConnectionCmd).Standalone()
+	carapace.Gen(networkmanager_updateConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_updateConnectionCmd).Standalone()
 
-	networkmanager_updateConnectionCmd.Flags().String("connected-link-id", "", "The ID of the link for the second device in the connection.")
-	networkmanager_updateConnectionCmd.Flags().String("connection-id", "", "The ID of the connection.")
-	networkmanager_updateConnectionCmd.Flags().String("description", "", "A description of the connection.")
-	networkmanager_updateConnectionCmd.Flags().String("global-network-id", "", "The ID of the global network.")
-	networkmanager_updateConnectionCmd.Flags().String("link-id", "", "The ID of the link for the first device in the connection.")
-	networkmanager_updateConnectionCmd.MarkFlagRequired("connection-id")
-	networkmanager_updateConnectionCmd.MarkFlagRequired("global-network-id")
+		networkmanager_updateConnectionCmd.Flags().String("connected-link-id", "", "The ID of the link for the second device in the connection.")
+		networkmanager_updateConnectionCmd.Flags().String("connection-id", "", "The ID of the connection.")
+		networkmanager_updateConnectionCmd.Flags().String("description", "", "A description of the connection.")
+		networkmanager_updateConnectionCmd.Flags().String("global-network-id", "", "The ID of the global network.")
+		networkmanager_updateConnectionCmd.Flags().String("link-id", "", "The ID of the link for the first device in the connection.")
+		networkmanager_updateConnectionCmd.MarkFlagRequired("connection-id")
+		networkmanager_updateConnectionCmd.MarkFlagRequired("global-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_updateConnectionCmd)
 }

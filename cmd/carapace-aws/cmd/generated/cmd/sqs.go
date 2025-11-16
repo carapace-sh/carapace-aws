@@ -12,7 +12,9 @@ var sqsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqsCmd).Standalone()
+	carapace.Gen(sqsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(sqsCmd)
 }

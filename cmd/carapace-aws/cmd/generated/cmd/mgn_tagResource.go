@@ -12,11 +12,13 @@ var mgn_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_tagResourceCmd).Standalone()
+	carapace.Gen(mgn_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_tagResourceCmd).Standalone()
 
-	mgn_tagResourceCmd.Flags().String("resource-arn", "", "Tag resource by ARN.")
-	mgn_tagResourceCmd.Flags().String("tags", "", "Tag resource by Tags.")
-	mgn_tagResourceCmd.MarkFlagRequired("resource-arn")
-	mgn_tagResourceCmd.MarkFlagRequired("tags")
+		mgn_tagResourceCmd.Flags().String("resource-arn", "", "Tag resource by ARN.")
+		mgn_tagResourceCmd.Flags().String("tags", "", "Tag resource by Tags.")
+		mgn_tagResourceCmd.MarkFlagRequired("resource-arn")
+		mgn_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	mgnCmd.AddCommand(mgn_tagResourceCmd)
 }

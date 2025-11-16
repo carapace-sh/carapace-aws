@@ -12,11 +12,13 @@ var ivsRealtime_getStageSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_getStageSessionCmd).Standalone()
+	carapace.Gen(ivsRealtime_getStageSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_getStageSessionCmd).Standalone()
 
-	ivsRealtime_getStageSessionCmd.Flags().String("session-id", "", "ID of a session within the stage.")
-	ivsRealtime_getStageSessionCmd.Flags().String("stage-arn", "", "ARN of the stage for which the information is to be retrieved.")
-	ivsRealtime_getStageSessionCmd.MarkFlagRequired("session-id")
-	ivsRealtime_getStageSessionCmd.MarkFlagRequired("stage-arn")
+		ivsRealtime_getStageSessionCmd.Flags().String("session-id", "", "ID of a session within the stage.")
+		ivsRealtime_getStageSessionCmd.Flags().String("stage-arn", "", "ARN of the stage for which the information is to be retrieved.")
+		ivsRealtime_getStageSessionCmd.MarkFlagRequired("session-id")
+		ivsRealtime_getStageSessionCmd.MarkFlagRequired("stage-arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_getStageSessionCmd)
 }

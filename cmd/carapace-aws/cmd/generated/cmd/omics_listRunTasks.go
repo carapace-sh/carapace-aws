@@ -12,12 +12,14 @@ var omics_listRunTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_listRunTasksCmd).Standalone()
+	carapace.Gen(omics_listRunTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_listRunTasksCmd).Standalone()
 
-	omics_listRunTasksCmd.Flags().String("id", "", "The run's ID.")
-	omics_listRunTasksCmd.Flags().String("max-results", "", "The maximum number of run tasks to return in one page of results.")
-	omics_listRunTasksCmd.Flags().String("starting-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
-	omics_listRunTasksCmd.Flags().String("status", "", "Filter the list by status.")
-	omics_listRunTasksCmd.MarkFlagRequired("id")
+		omics_listRunTasksCmd.Flags().String("id", "", "The run's ID.")
+		omics_listRunTasksCmd.Flags().String("max-results", "", "The maximum number of run tasks to return in one page of results.")
+		omics_listRunTasksCmd.Flags().String("starting-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		omics_listRunTasksCmd.Flags().String("status", "", "Filter the list by status.")
+		omics_listRunTasksCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_listRunTasksCmd)
 }

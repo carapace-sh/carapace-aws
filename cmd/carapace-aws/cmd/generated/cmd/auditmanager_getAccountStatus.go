@@ -12,7 +12,9 @@ var auditmanager_getAccountStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getAccountStatusCmd).Standalone()
+	carapace.Gen(auditmanager_getAccountStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getAccountStatusCmd).Standalone()
 
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getAccountStatusCmd)
 }

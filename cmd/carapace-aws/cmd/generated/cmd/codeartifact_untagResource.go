@@ -12,11 +12,13 @@ var codeartifact_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeartifact_untagResourceCmd).Standalone()
+	carapace.Gen(codeartifact_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeartifact_untagResourceCmd).Standalone()
 
-	codeartifact_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
-	codeartifact_untagResourceCmd.Flags().String("tag-keys", "", "The tag key for each tag that you want to remove from the resource.")
-	codeartifact_untagResourceCmd.MarkFlagRequired("resource-arn")
-	codeartifact_untagResourceCmd.MarkFlagRequired("tag-keys")
+		codeartifact_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
+		codeartifact_untagResourceCmd.Flags().String("tag-keys", "", "The tag key for each tag that you want to remove from the resource.")
+		codeartifact_untagResourceCmd.MarkFlagRequired("resource-arn")
+		codeartifact_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	codeartifactCmd.AddCommand(codeartifact_untagResourceCmd)
 }

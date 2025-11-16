@@ -12,9 +12,11 @@ var rds_rebootDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_rebootDbclusterCmd).Standalone()
+	carapace.Gen(rds_rebootDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_rebootDbclusterCmd).Standalone()
 
-	rds_rebootDbclusterCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier.")
-	rds_rebootDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+		rds_rebootDbclusterCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier.")
+		rds_rebootDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+	})
 	rdsCmd.AddCommand(rds_rebootDbclusterCmd)
 }

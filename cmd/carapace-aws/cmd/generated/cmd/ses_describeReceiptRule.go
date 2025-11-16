@@ -12,11 +12,13 @@ var ses_describeReceiptRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_describeReceiptRuleCmd).Standalone()
+	carapace.Gen(ses_describeReceiptRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_describeReceiptRuleCmd).Standalone()
 
-	ses_describeReceiptRuleCmd.Flags().String("rule-name", "", "The name of the receipt rule.")
-	ses_describeReceiptRuleCmd.Flags().String("rule-set-name", "", "The name of the receipt rule set that the receipt rule belongs to.")
-	ses_describeReceiptRuleCmd.MarkFlagRequired("rule-name")
-	ses_describeReceiptRuleCmd.MarkFlagRequired("rule-set-name")
+		ses_describeReceiptRuleCmd.Flags().String("rule-name", "", "The name of the receipt rule.")
+		ses_describeReceiptRuleCmd.Flags().String("rule-set-name", "", "The name of the receipt rule set that the receipt rule belongs to.")
+		ses_describeReceiptRuleCmd.MarkFlagRequired("rule-name")
+		ses_describeReceiptRuleCmd.MarkFlagRequired("rule-set-name")
+	})
 	sesCmd.AddCommand(ses_describeReceiptRuleCmd)
 }

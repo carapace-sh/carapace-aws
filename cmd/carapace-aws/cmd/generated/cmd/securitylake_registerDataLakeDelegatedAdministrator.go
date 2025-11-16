@@ -12,9 +12,11 @@ var securitylake_registerDataLakeDelegatedAdministratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_registerDataLakeDelegatedAdministratorCmd).Standalone()
+	carapace.Gen(securitylake_registerDataLakeDelegatedAdministratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_registerDataLakeDelegatedAdministratorCmd).Standalone()
 
-	securitylake_registerDataLakeDelegatedAdministratorCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Security Lake delegated administrator.")
-	securitylake_registerDataLakeDelegatedAdministratorCmd.MarkFlagRequired("account-id")
+		securitylake_registerDataLakeDelegatedAdministratorCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Security Lake delegated administrator.")
+		securitylake_registerDataLakeDelegatedAdministratorCmd.MarkFlagRequired("account-id")
+	})
 	securitylakeCmd.AddCommand(securitylake_registerDataLakeDelegatedAdministratorCmd)
 }

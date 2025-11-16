@@ -12,10 +12,12 @@ var frauddetector_getEventTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getEventTypesCmd).Standalone()
+	carapace.Gen(frauddetector_getEventTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getEventTypesCmd).Standalone()
 
-	frauddetector_getEventTypesCmd.Flags().String("max-results", "", "The maximum number of objects to return for the request.")
-	frauddetector_getEventTypesCmd.Flags().String("name", "", "The name.")
-	frauddetector_getEventTypesCmd.Flags().String("next-token", "", "The next token for the subsequent request.")
+		frauddetector_getEventTypesCmd.Flags().String("max-results", "", "The maximum number of objects to return for the request.")
+		frauddetector_getEventTypesCmd.Flags().String("name", "", "The name.")
+		frauddetector_getEventTypesCmd.Flags().String("next-token", "", "The next token for the subsequent request.")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getEventTypesCmd)
 }

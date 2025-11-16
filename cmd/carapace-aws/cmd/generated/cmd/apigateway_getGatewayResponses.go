@@ -12,11 +12,13 @@ var apigateway_getGatewayResponsesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getGatewayResponsesCmd).Standalone()
+	carapace.Gen(apigateway_getGatewayResponsesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getGatewayResponsesCmd).Standalone()
 
-	apigateway_getGatewayResponsesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getGatewayResponsesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
-	apigateway_getGatewayResponsesCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getGatewayResponsesCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getGatewayResponsesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getGatewayResponsesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getGatewayResponsesCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getGatewayResponsesCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getGatewayResponsesCmd)
 }

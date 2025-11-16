@@ -12,9 +12,11 @@ var codestarNotifications_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarNotifications_listTagsForResourceCmd).Standalone()
+	carapace.Gen(codestarNotifications_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarNotifications_listTagsForResourceCmd).Standalone()
 
-	codestarNotifications_listTagsForResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) for the notification rule.")
-	codestarNotifications_listTagsForResourceCmd.MarkFlagRequired("arn")
+		codestarNotifications_listTagsForResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) for the notification rule.")
+		codestarNotifications_listTagsForResourceCmd.MarkFlagRequired("arn")
+	})
 	codestarNotificationsCmd.AddCommand(codestarNotifications_listTagsForResourceCmd)
 }

@@ -12,9 +12,11 @@ var vpcLattice_deleteAccessLogSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deleteAccessLogSubscriptionCmd).Standalone()
+	carapace.Gen(vpcLattice_deleteAccessLogSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deleteAccessLogSubscriptionCmd).Standalone()
 
-	vpcLattice_deleteAccessLogSubscriptionCmd.Flags().String("access-log-subscription-identifier", "", "The ID or ARN of the access log subscription.")
-	vpcLattice_deleteAccessLogSubscriptionCmd.MarkFlagRequired("access-log-subscription-identifier")
+		vpcLattice_deleteAccessLogSubscriptionCmd.Flags().String("access-log-subscription-identifier", "", "The ID or ARN of the access log subscription.")
+		vpcLattice_deleteAccessLogSubscriptionCmd.MarkFlagRequired("access-log-subscription-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deleteAccessLogSubscriptionCmd)
 }

@@ -12,9 +12,11 @@ var glue_batchGetTriggersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_batchGetTriggersCmd).Standalone()
+	carapace.Gen(glue_batchGetTriggersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_batchGetTriggersCmd).Standalone()
 
-	glue_batchGetTriggersCmd.Flags().String("trigger-names", "", "A list of trigger names, which may be the names returned from the `ListTriggers` operation.")
-	glue_batchGetTriggersCmd.MarkFlagRequired("trigger-names")
+		glue_batchGetTriggersCmd.Flags().String("trigger-names", "", "A list of trigger names, which may be the names returned from the `ListTriggers` operation.")
+		glue_batchGetTriggersCmd.MarkFlagRequired("trigger-names")
+	})
 	glueCmd.AddCommand(glue_batchGetTriggersCmd)
 }

@@ -12,11 +12,13 @@ var quicksight_updateApplicationWithTokenExchangeGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_updateApplicationWithTokenExchangeGrantCmd).Standalone()
+	carapace.Gen(quicksight_updateApplicationWithTokenExchangeGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_updateApplicationWithTokenExchangeGrantCmd).Standalone()
 
-	quicksight_updateApplicationWithTokenExchangeGrantCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account to be updated with a token exchange grant.")
-	quicksight_updateApplicationWithTokenExchangeGrantCmd.Flags().String("namespace", "", "The namespace of the Quick Suite application.")
-	quicksight_updateApplicationWithTokenExchangeGrantCmd.MarkFlagRequired("aws-account-id")
-	quicksight_updateApplicationWithTokenExchangeGrantCmd.MarkFlagRequired("namespace")
+		quicksight_updateApplicationWithTokenExchangeGrantCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account to be updated with a token exchange grant.")
+		quicksight_updateApplicationWithTokenExchangeGrantCmd.Flags().String("namespace", "", "The namespace of the Quick Suite application.")
+		quicksight_updateApplicationWithTokenExchangeGrantCmd.MarkFlagRequired("aws-account-id")
+		quicksight_updateApplicationWithTokenExchangeGrantCmd.MarkFlagRequired("namespace")
+	})
 	quicksightCmd.AddCommand(quicksight_updateApplicationWithTokenExchangeGrantCmd)
 }

@@ -12,13 +12,15 @@ var kms_getParametersForImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_getParametersForImportCmd).Standalone()
+	carapace.Gen(kms_getParametersForImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_getParametersForImportCmd).Standalone()
 
-	kms_getParametersForImportCmd.Flags().String("key-id", "", "The identifier of the KMS key that will be associated with the imported key material.")
-	kms_getParametersForImportCmd.Flags().String("wrapping-algorithm", "", "The algorithm you will use with the RSA public key (`PublicKey`) in the response to protect your key material during import.")
-	kms_getParametersForImportCmd.Flags().String("wrapping-key-spec", "", "The type of RSA public key to return in the response.")
-	kms_getParametersForImportCmd.MarkFlagRequired("key-id")
-	kms_getParametersForImportCmd.MarkFlagRequired("wrapping-algorithm")
-	kms_getParametersForImportCmd.MarkFlagRequired("wrapping-key-spec")
+		kms_getParametersForImportCmd.Flags().String("key-id", "", "The identifier of the KMS key that will be associated with the imported key material.")
+		kms_getParametersForImportCmd.Flags().String("wrapping-algorithm", "", "The algorithm you will use with the RSA public key (`PublicKey`) in the response to protect your key material during import.")
+		kms_getParametersForImportCmd.Flags().String("wrapping-key-spec", "", "The type of RSA public key to return in the response.")
+		kms_getParametersForImportCmd.MarkFlagRequired("key-id")
+		kms_getParametersForImportCmd.MarkFlagRequired("wrapping-algorithm")
+		kms_getParametersForImportCmd.MarkFlagRequired("wrapping-key-spec")
+	})
 	kmsCmd.AddCommand(kms_getParametersForImportCmd)
 }

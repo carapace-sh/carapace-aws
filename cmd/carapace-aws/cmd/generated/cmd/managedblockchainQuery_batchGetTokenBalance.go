@@ -12,8 +12,10 @@ var managedblockchainQuery_batchGetTokenBalanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchainQuery_batchGetTokenBalanceCmd).Standalone()
+	carapace.Gen(managedblockchainQuery_batchGetTokenBalanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchainQuery_batchGetTokenBalanceCmd).Standalone()
 
-	managedblockchainQuery_batchGetTokenBalanceCmd.Flags().String("get-token-balance-inputs", "", "An array of `BatchGetTokenBalanceInputItem` objects whose balance is being requested.")
+		managedblockchainQuery_batchGetTokenBalanceCmd.Flags().String("get-token-balance-inputs", "", "An array of `BatchGetTokenBalanceInputItem` objects whose balance is being requested.")
+	})
 	managedblockchainQueryCmd.AddCommand(managedblockchainQuery_batchGetTokenBalanceCmd)
 }

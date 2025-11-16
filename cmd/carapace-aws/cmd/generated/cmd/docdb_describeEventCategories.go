@@ -12,9 +12,11 @@ var docdb_describeEventCategoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_describeEventCategoriesCmd).Standalone()
+	carapace.Gen(docdb_describeEventCategoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_describeEventCategoriesCmd).Standalone()
 
-	docdb_describeEventCategoriesCmd.Flags().String("filters", "", "This parameter is not currently supported.")
-	docdb_describeEventCategoriesCmd.Flags().String("source-type", "", "The type of source that is generating the events.")
+		docdb_describeEventCategoriesCmd.Flags().String("filters", "", "This parameter is not currently supported.")
+		docdb_describeEventCategoriesCmd.Flags().String("source-type", "", "The type of source that is generating the events.")
+	})
 	docdbCmd.AddCommand(docdb_describeEventCategoriesCmd)
 }

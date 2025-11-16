@@ -12,12 +12,14 @@ var medicalImaging_searchImageSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medicalImaging_searchImageSetsCmd).Standalone()
+	carapace.Gen(medicalImaging_searchImageSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medicalImaging_searchImageSetsCmd).Standalone()
 
-	medicalImaging_searchImageSetsCmd.Flags().String("datastore-id", "", "The identifier of the data store where the image sets reside.")
-	medicalImaging_searchImageSetsCmd.Flags().String("max-results", "", "The maximum number of results that can be returned in a search.")
-	medicalImaging_searchImageSetsCmd.Flags().String("next-token", "", "The token used for pagination of results returned in the response.")
-	medicalImaging_searchImageSetsCmd.Flags().String("search-criteria", "", "The search criteria that filters by applying a maximum of 1 item to `SearchByAttribute`.")
-	medicalImaging_searchImageSetsCmd.MarkFlagRequired("datastore-id")
+		medicalImaging_searchImageSetsCmd.Flags().String("datastore-id", "", "The identifier of the data store where the image sets reside.")
+		medicalImaging_searchImageSetsCmd.Flags().String("max-results", "", "The maximum number of results that can be returned in a search.")
+		medicalImaging_searchImageSetsCmd.Flags().String("next-token", "", "The token used for pagination of results returned in the response.")
+		medicalImaging_searchImageSetsCmd.Flags().String("search-criteria", "", "The search criteria that filters by applying a maximum of 1 item to `SearchByAttribute`.")
+		medicalImaging_searchImageSetsCmd.MarkFlagRequired("datastore-id")
+	})
 	medicalImagingCmd.AddCommand(medicalImaging_searchImageSetsCmd)
 }

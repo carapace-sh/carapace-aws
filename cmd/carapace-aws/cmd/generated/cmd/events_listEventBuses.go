@@ -12,10 +12,12 @@ var events_listEventBusesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_listEventBusesCmd).Standalone()
+	carapace.Gen(events_listEventBusesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_listEventBusesCmd).Standalone()
 
-	events_listEventBusesCmd.Flags().String("limit", "", "Specifying this limits the number of results returned by this operation.")
-	events_listEventBusesCmd.Flags().String("name-prefix", "", "Specifying this limits the results to only those event buses with names that start with the specified prefix.")
-	events_listEventBusesCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
+		events_listEventBusesCmd.Flags().String("limit", "", "Specifying this limits the number of results returned by this operation.")
+		events_listEventBusesCmd.Flags().String("name-prefix", "", "Specifying this limits the results to only those event buses with names that start with the specified prefix.")
+		events_listEventBusesCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
+	})
 	eventsCmd.AddCommand(events_listEventBusesCmd)
 }

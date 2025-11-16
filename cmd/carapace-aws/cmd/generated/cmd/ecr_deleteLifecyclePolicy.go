@@ -12,10 +12,12 @@ var ecr_deleteLifecyclePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_deleteLifecyclePolicyCmd).Standalone()
+	carapace.Gen(ecr_deleteLifecyclePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_deleteLifecyclePolicyCmd).Standalone()
 
-	ecr_deleteLifecyclePolicyCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the repository.")
-	ecr_deleteLifecyclePolicyCmd.Flags().String("repository-name", "", "The name of the repository.")
-	ecr_deleteLifecyclePolicyCmd.MarkFlagRequired("repository-name")
+		ecr_deleteLifecyclePolicyCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the repository.")
+		ecr_deleteLifecyclePolicyCmd.Flags().String("repository-name", "", "The name of the repository.")
+		ecr_deleteLifecyclePolicyCmd.MarkFlagRequired("repository-name")
+	})
 	ecrCmd.AddCommand(ecr_deleteLifecyclePolicyCmd)
 }

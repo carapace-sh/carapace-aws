@@ -12,11 +12,13 @@ var sagemaker_deleteImageVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteImageVersionCmd).Standalone()
+	carapace.Gen(sagemaker_deleteImageVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteImageVersionCmd).Standalone()
 
-	sagemaker_deleteImageVersionCmd.Flags().String("alias", "", "The alias of the image to delete.")
-	sagemaker_deleteImageVersionCmd.Flags().String("image-name", "", "The name of the image to delete.")
-	sagemaker_deleteImageVersionCmd.Flags().String("version", "", "The version to delete.")
-	sagemaker_deleteImageVersionCmd.MarkFlagRequired("image-name")
+		sagemaker_deleteImageVersionCmd.Flags().String("alias", "", "The alias of the image to delete.")
+		sagemaker_deleteImageVersionCmd.Flags().String("image-name", "", "The name of the image to delete.")
+		sagemaker_deleteImageVersionCmd.Flags().String("version", "", "The version to delete.")
+		sagemaker_deleteImageVersionCmd.MarkFlagRequired("image-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteImageVersionCmd)
 }

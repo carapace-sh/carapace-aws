@@ -12,13 +12,15 @@ var quicksight_listIngestionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_listIngestionsCmd).Standalone()
+	carapace.Gen(quicksight_listIngestionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_listIngestionsCmd).Standalone()
 
-	quicksight_listIngestionsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
-	quicksight_listIngestionsCmd.Flags().String("data-set-id", "", "The ID of the dataset used in the ingestion.")
-	quicksight_listIngestionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	quicksight_listIngestionsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
-	quicksight_listIngestionsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_listIngestionsCmd.MarkFlagRequired("data-set-id")
+		quicksight_listIngestionsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
+		quicksight_listIngestionsCmd.Flags().String("data-set-id", "", "The ID of the dataset used in the ingestion.")
+		quicksight_listIngestionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		quicksight_listIngestionsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
+		quicksight_listIngestionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_listIngestionsCmd.MarkFlagRequired("data-set-id")
+	})
 	quicksightCmd.AddCommand(quicksight_listIngestionsCmd)
 }

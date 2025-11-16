@@ -12,9 +12,11 @@ var sagemakerGeospatial_deleteVectorEnrichmentJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerGeospatial_deleteVectorEnrichmentJobCmd).Standalone()
+	carapace.Gen(sagemakerGeospatial_deleteVectorEnrichmentJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerGeospatial_deleteVectorEnrichmentJobCmd).Standalone()
 
-	sagemakerGeospatial_deleteVectorEnrichmentJobCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Vector Enrichment job being deleted.")
-	sagemakerGeospatial_deleteVectorEnrichmentJobCmd.MarkFlagRequired("arn")
+		sagemakerGeospatial_deleteVectorEnrichmentJobCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Vector Enrichment job being deleted.")
+		sagemakerGeospatial_deleteVectorEnrichmentJobCmd.MarkFlagRequired("arn")
+	})
 	sagemakerGeospatialCmd.AddCommand(sagemakerGeospatial_deleteVectorEnrichmentJobCmd)
 }

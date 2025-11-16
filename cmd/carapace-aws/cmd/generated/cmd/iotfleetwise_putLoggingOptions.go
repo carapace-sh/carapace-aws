@@ -12,9 +12,11 @@ var iotfleetwise_putLoggingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_putLoggingOptionsCmd).Standalone()
+	carapace.Gen(iotfleetwise_putLoggingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_putLoggingOptionsCmd).Standalone()
 
-	iotfleetwise_putLoggingOptionsCmd.Flags().String("cloud-watch-log-delivery", "", "Creates or updates the log delivery option to Amazon CloudWatch Logs.")
-	iotfleetwise_putLoggingOptionsCmd.MarkFlagRequired("cloud-watch-log-delivery")
+		iotfleetwise_putLoggingOptionsCmd.Flags().String("cloud-watch-log-delivery", "", "Creates or updates the log delivery option to Amazon CloudWatch Logs.")
+		iotfleetwise_putLoggingOptionsCmd.MarkFlagRequired("cloud-watch-log-delivery")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_putLoggingOptionsCmd)
 }

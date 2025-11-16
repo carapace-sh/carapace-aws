@@ -12,11 +12,13 @@ var glue_batchStopJobRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_batchStopJobRunCmd).Standalone()
+	carapace.Gen(glue_batchStopJobRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_batchStopJobRunCmd).Standalone()
 
-	glue_batchStopJobRunCmd.Flags().String("job-name", "", "The name of the job definition for which to stop job runs.")
-	glue_batchStopJobRunCmd.Flags().String("job-run-ids", "", "A list of the `JobRunIds` that should be stopped for that job definition.")
-	glue_batchStopJobRunCmd.MarkFlagRequired("job-name")
-	glue_batchStopJobRunCmd.MarkFlagRequired("job-run-ids")
+		glue_batchStopJobRunCmd.Flags().String("job-name", "", "The name of the job definition for which to stop job runs.")
+		glue_batchStopJobRunCmd.Flags().String("job-run-ids", "", "A list of the `JobRunIds` that should be stopped for that job definition.")
+		glue_batchStopJobRunCmd.MarkFlagRequired("job-name")
+		glue_batchStopJobRunCmd.MarkFlagRequired("job-run-ids")
+	})
 	glueCmd.AddCommand(glue_batchStopJobRunCmd)
 }

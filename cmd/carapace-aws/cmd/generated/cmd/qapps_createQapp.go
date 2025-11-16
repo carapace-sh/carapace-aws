@@ -12,15 +12,17 @@ var qapps_createQappCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_createQappCmd).Standalone()
+	carapace.Gen(qapps_createQappCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_createQappCmd).Standalone()
 
-	qapps_createQappCmd.Flags().String("app-definition", "", "The definition of the new Q App, specifying the cards and flow.")
-	qapps_createQappCmd.Flags().String("description", "", "The description of the new Q App.")
-	qapps_createQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_createQappCmd.Flags().String("tags", "", "Optional tags to associate with the new Q App.")
-	qapps_createQappCmd.Flags().String("title", "", "The title of the new Q App.")
-	qapps_createQappCmd.MarkFlagRequired("app-definition")
-	qapps_createQappCmd.MarkFlagRequired("instance-id")
-	qapps_createQappCmd.MarkFlagRequired("title")
+		qapps_createQappCmd.Flags().String("app-definition", "", "The definition of the new Q App, specifying the cards and flow.")
+		qapps_createQappCmd.Flags().String("description", "", "The description of the new Q App.")
+		qapps_createQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_createQappCmd.Flags().String("tags", "", "Optional tags to associate with the new Q App.")
+		qapps_createQappCmd.Flags().String("title", "", "The title of the new Q App.")
+		qapps_createQappCmd.MarkFlagRequired("app-definition")
+		qapps_createQappCmd.MarkFlagRequired("instance-id")
+		qapps_createQappCmd.MarkFlagRequired("title")
+	})
 	qappsCmd.AddCommand(qapps_createQappCmd)
 }

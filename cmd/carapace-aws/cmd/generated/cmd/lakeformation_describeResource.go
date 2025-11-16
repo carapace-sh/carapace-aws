@@ -12,9 +12,11 @@ var lakeformation_describeResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_describeResourceCmd).Standalone()
+	carapace.Gen(lakeformation_describeResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_describeResourceCmd).Standalone()
 
-	lakeformation_describeResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
-	lakeformation_describeResourceCmd.MarkFlagRequired("resource-arn")
+		lakeformation_describeResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
+		lakeformation_describeResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	lakeformationCmd.AddCommand(lakeformation_describeResourceCmd)
 }

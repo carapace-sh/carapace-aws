@@ -12,9 +12,11 @@ var docdb_deleteDbinstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_deleteDbinstanceCmd).Standalone()
+	carapace.Gen(docdb_deleteDbinstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_deleteDbinstanceCmd).Standalone()
 
-	docdb_deleteDbinstanceCmd.Flags().String("dbinstance-identifier", "", "The instance identifier for the instance to be deleted.")
-	docdb_deleteDbinstanceCmd.MarkFlagRequired("dbinstance-identifier")
+		docdb_deleteDbinstanceCmd.Flags().String("dbinstance-identifier", "", "The instance identifier for the instance to be deleted.")
+		docdb_deleteDbinstanceCmd.MarkFlagRequired("dbinstance-identifier")
+	})
 	docdbCmd.AddCommand(docdb_deleteDbinstanceCmd)
 }

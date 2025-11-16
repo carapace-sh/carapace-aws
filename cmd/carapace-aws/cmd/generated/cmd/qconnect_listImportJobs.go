@@ -12,11 +12,13 @@ var qconnect_listImportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_listImportJobsCmd).Standalone()
+	carapace.Gen(qconnect_listImportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_listImportJobsCmd).Standalone()
 
-	qconnect_listImportJobsCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_listImportJobsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_listImportJobsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	qconnect_listImportJobsCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_listImportJobsCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_listImportJobsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_listImportJobsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_listImportJobsCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	qconnectCmd.AddCommand(qconnect_listImportJobsCmd)
 }

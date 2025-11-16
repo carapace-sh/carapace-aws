@@ -12,7 +12,9 @@ var textractCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(textractCmd).Standalone()
+	carapace.Gen(textractCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(textractCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(textractCmd)
 }

@@ -12,13 +12,15 @@ var autoscalingPlans_updateScalingPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscalingPlans_updateScalingPlanCmd).Standalone()
+	carapace.Gen(autoscalingPlans_updateScalingPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscalingPlans_updateScalingPlanCmd).Standalone()
 
-	autoscalingPlans_updateScalingPlanCmd.Flags().String("application-source", "", "A CloudFormation stack or set of tags.")
-	autoscalingPlans_updateScalingPlanCmd.Flags().String("scaling-instructions", "", "The scaling instructions.")
-	autoscalingPlans_updateScalingPlanCmd.Flags().String("scaling-plan-name", "", "The name of the scaling plan.")
-	autoscalingPlans_updateScalingPlanCmd.Flags().String("scaling-plan-version", "", "The version number of the scaling plan.")
-	autoscalingPlans_updateScalingPlanCmd.MarkFlagRequired("scaling-plan-name")
-	autoscalingPlans_updateScalingPlanCmd.MarkFlagRequired("scaling-plan-version")
+		autoscalingPlans_updateScalingPlanCmd.Flags().String("application-source", "", "A CloudFormation stack or set of tags.")
+		autoscalingPlans_updateScalingPlanCmd.Flags().String("scaling-instructions", "", "The scaling instructions.")
+		autoscalingPlans_updateScalingPlanCmd.Flags().String("scaling-plan-name", "", "The name of the scaling plan.")
+		autoscalingPlans_updateScalingPlanCmd.Flags().String("scaling-plan-version", "", "The version number of the scaling plan.")
+		autoscalingPlans_updateScalingPlanCmd.MarkFlagRequired("scaling-plan-name")
+		autoscalingPlans_updateScalingPlanCmd.MarkFlagRequired("scaling-plan-version")
+	})
 	autoscalingPlansCmd.AddCommand(autoscalingPlans_updateScalingPlanCmd)
 }

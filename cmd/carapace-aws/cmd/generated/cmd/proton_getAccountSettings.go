@@ -12,7 +12,9 @@ var proton_getAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getAccountSettingsCmd).Standalone()
+	carapace.Gen(proton_getAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getAccountSettingsCmd).Standalone()
 
+	})
 	protonCmd.AddCommand(proton_getAccountSettingsCmd)
 }

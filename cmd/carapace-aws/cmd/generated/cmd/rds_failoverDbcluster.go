@@ -12,10 +12,12 @@ var rds_failoverDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_failoverDbclusterCmd).Standalone()
+	carapace.Gen(rds_failoverDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_failoverDbclusterCmd).Standalone()
 
-	rds_failoverDbclusterCmd.Flags().String("dbcluster-identifier", "", "The identifier of the DB cluster to force a failover for.")
-	rds_failoverDbclusterCmd.Flags().String("target-dbinstance-identifier", "", "The name of the DB instance to promote to the primary DB instance.")
-	rds_failoverDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+		rds_failoverDbclusterCmd.Flags().String("dbcluster-identifier", "", "The identifier of the DB cluster to force a failover for.")
+		rds_failoverDbclusterCmd.Flags().String("target-dbinstance-identifier", "", "The name of the DB instance to promote to the primary DB instance.")
+		rds_failoverDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+	})
 	rdsCmd.AddCommand(rds_failoverDbclusterCmd)
 }

@@ -12,9 +12,11 @@ var iotsitewise_describeBulkImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeBulkImportJobCmd).Standalone()
+	carapace.Gen(iotsitewise_describeBulkImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeBulkImportJobCmd).Standalone()
 
-	iotsitewise_describeBulkImportJobCmd.Flags().String("job-id", "", "The ID of the job.")
-	iotsitewise_describeBulkImportJobCmd.MarkFlagRequired("job-id")
+		iotsitewise_describeBulkImportJobCmd.Flags().String("job-id", "", "The ID of the job.")
+		iotsitewise_describeBulkImportJobCmd.MarkFlagRequired("job-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeBulkImportJobCmd)
 }

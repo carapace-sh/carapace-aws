@@ -12,11 +12,13 @@ var config_deleteRemediationExceptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deleteRemediationExceptionsCmd).Standalone()
+	carapace.Gen(config_deleteRemediationExceptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deleteRemediationExceptionsCmd).Standalone()
 
-	config_deleteRemediationExceptionsCmd.Flags().String("config-rule-name", "", "The name of the Config rule for which you want to delete remediation exception configuration.")
-	config_deleteRemediationExceptionsCmd.Flags().String("resource-keys", "", "An exception list of resource exception keys to be processed with the current request.")
-	config_deleteRemediationExceptionsCmd.MarkFlagRequired("config-rule-name")
-	config_deleteRemediationExceptionsCmd.MarkFlagRequired("resource-keys")
+		config_deleteRemediationExceptionsCmd.Flags().String("config-rule-name", "", "The name of the Config rule for which you want to delete remediation exception configuration.")
+		config_deleteRemediationExceptionsCmd.Flags().String("resource-keys", "", "An exception list of resource exception keys to be processed with the current request.")
+		config_deleteRemediationExceptionsCmd.MarkFlagRequired("config-rule-name")
+		config_deleteRemediationExceptionsCmd.MarkFlagRequired("resource-keys")
+	})
 	configCmd.AddCommand(config_deleteRemediationExceptionsCmd)
 }

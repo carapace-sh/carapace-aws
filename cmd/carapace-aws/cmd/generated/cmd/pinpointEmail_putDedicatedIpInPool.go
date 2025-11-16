@@ -12,11 +12,13 @@ var pinpointEmail_putDedicatedIpInPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_putDedicatedIpInPoolCmd).Standalone()
+	carapace.Gen(pinpointEmail_putDedicatedIpInPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_putDedicatedIpInPoolCmd).Standalone()
 
-	pinpointEmail_putDedicatedIpInPoolCmd.Flags().String("destination-pool-name", "", "The name of the IP pool that you want to add the dedicated IP address to.")
-	pinpointEmail_putDedicatedIpInPoolCmd.Flags().String("ip", "", "The IP address that you want to move to the dedicated IP pool.")
-	pinpointEmail_putDedicatedIpInPoolCmd.MarkFlagRequired("destination-pool-name")
-	pinpointEmail_putDedicatedIpInPoolCmd.MarkFlagRequired("ip")
+		pinpointEmail_putDedicatedIpInPoolCmd.Flags().String("destination-pool-name", "", "The name of the IP pool that you want to add the dedicated IP address to.")
+		pinpointEmail_putDedicatedIpInPoolCmd.Flags().String("ip", "", "The IP address that you want to move to the dedicated IP pool.")
+		pinpointEmail_putDedicatedIpInPoolCmd.MarkFlagRequired("destination-pool-name")
+		pinpointEmail_putDedicatedIpInPoolCmd.MarkFlagRequired("ip")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_putDedicatedIpInPoolCmd)
 }

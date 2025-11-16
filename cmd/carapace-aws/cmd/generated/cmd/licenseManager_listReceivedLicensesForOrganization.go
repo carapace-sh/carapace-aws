@@ -12,10 +12,12 @@ var licenseManager_listReceivedLicensesForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_listReceivedLicensesForOrganizationCmd).Standalone()
+	carapace.Gen(licenseManager_listReceivedLicensesForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_listReceivedLicensesForOrganizationCmd).Standalone()
 
-	licenseManager_listReceivedLicensesForOrganizationCmd.Flags().String("filters", "", "Filters to scope the results.")
-	licenseManager_listReceivedLicensesForOrganizationCmd.Flags().String("max-results", "", "Maximum number of results to return in a single call.")
-	licenseManager_listReceivedLicensesForOrganizationCmd.Flags().String("next-token", "", "Token for the next set of results.")
+		licenseManager_listReceivedLicensesForOrganizationCmd.Flags().String("filters", "", "Filters to scope the results.")
+		licenseManager_listReceivedLicensesForOrganizationCmd.Flags().String("max-results", "", "Maximum number of results to return in a single call.")
+		licenseManager_listReceivedLicensesForOrganizationCmd.Flags().String("next-token", "", "Token for the next set of results.")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_listReceivedLicensesForOrganizationCmd)
 }

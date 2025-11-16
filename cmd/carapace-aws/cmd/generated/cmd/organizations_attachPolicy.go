@@ -12,11 +12,13 @@ var organizations_attachPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_attachPolicyCmd).Standalone()
+	carapace.Gen(organizations_attachPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_attachPolicyCmd).Standalone()
 
-	organizations_attachPolicyCmd.Flags().String("policy-id", "", "The unique identifier (ID) of the policy that you want to attach to the target.")
-	organizations_attachPolicyCmd.Flags().String("target-id", "", "The unique identifier (ID) of the root, OU, or account that you want to attach the policy to.")
-	organizations_attachPolicyCmd.MarkFlagRequired("policy-id")
-	organizations_attachPolicyCmd.MarkFlagRequired("target-id")
+		organizations_attachPolicyCmd.Flags().String("policy-id", "", "The unique identifier (ID) of the policy that you want to attach to the target.")
+		organizations_attachPolicyCmd.Flags().String("target-id", "", "The unique identifier (ID) of the root, OU, or account that you want to attach the policy to.")
+		organizations_attachPolicyCmd.MarkFlagRequired("policy-id")
+		organizations_attachPolicyCmd.MarkFlagRequired("target-id")
+	})
 	organizationsCmd.AddCommand(organizations_attachPolicyCmd)
 }

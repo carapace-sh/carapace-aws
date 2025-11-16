@@ -12,11 +12,13 @@ var lightsail_attachLoadBalancerTlsCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_attachLoadBalancerTlsCertificateCmd).Standalone()
+	carapace.Gen(lightsail_attachLoadBalancerTlsCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_attachLoadBalancerTlsCertificateCmd).Standalone()
 
-	lightsail_attachLoadBalancerTlsCertificateCmd.Flags().String("certificate-name", "", "The name of your SSL/TLS certificate.")
-	lightsail_attachLoadBalancerTlsCertificateCmd.Flags().String("load-balancer-name", "", "The name of the load balancer to which you want to associate the SSL/TLS certificate.")
-	lightsail_attachLoadBalancerTlsCertificateCmd.MarkFlagRequired("certificate-name")
-	lightsail_attachLoadBalancerTlsCertificateCmd.MarkFlagRequired("load-balancer-name")
+		lightsail_attachLoadBalancerTlsCertificateCmd.Flags().String("certificate-name", "", "The name of your SSL/TLS certificate.")
+		lightsail_attachLoadBalancerTlsCertificateCmd.Flags().String("load-balancer-name", "", "The name of the load balancer to which you want to associate the SSL/TLS certificate.")
+		lightsail_attachLoadBalancerTlsCertificateCmd.MarkFlagRequired("certificate-name")
+		lightsail_attachLoadBalancerTlsCertificateCmd.MarkFlagRequired("load-balancer-name")
+	})
 	lightsailCmd.AddCommand(lightsail_attachLoadBalancerTlsCertificateCmd)
 }

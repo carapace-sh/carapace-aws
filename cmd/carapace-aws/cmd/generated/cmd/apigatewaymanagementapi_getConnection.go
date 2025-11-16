@@ -12,9 +12,11 @@ var apigatewaymanagementapi_getConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewaymanagementapi_getConnectionCmd).Standalone()
+	carapace.Gen(apigatewaymanagementapi_getConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewaymanagementapi_getConnectionCmd).Standalone()
 
-	apigatewaymanagementapi_getConnectionCmd.Flags().String("connection-id", "", "")
-	apigatewaymanagementapi_getConnectionCmd.MarkFlagRequired("connection-id")
+		apigatewaymanagementapi_getConnectionCmd.Flags().String("connection-id", "", "")
+		apigatewaymanagementapi_getConnectionCmd.MarkFlagRequired("connection-id")
+	})
 	apigatewaymanagementapiCmd.AddCommand(apigatewaymanagementapi_getConnectionCmd)
 }

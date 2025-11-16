@@ -12,9 +12,11 @@ var codebuild_batchGetFleetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_batchGetFleetsCmd).Standalone()
+	carapace.Gen(codebuild_batchGetFleetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_batchGetFleetsCmd).Standalone()
 
-	codebuild_batchGetFleetsCmd.Flags().String("names", "", "The names or ARNs of the compute fleets.")
-	codebuild_batchGetFleetsCmd.MarkFlagRequired("names")
+		codebuild_batchGetFleetsCmd.Flags().String("names", "", "The names or ARNs of the compute fleets.")
+		codebuild_batchGetFleetsCmd.MarkFlagRequired("names")
+	})
 	codebuildCmd.AddCommand(codebuild_batchGetFleetsCmd)
 }

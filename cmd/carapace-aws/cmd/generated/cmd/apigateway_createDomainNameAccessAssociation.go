@@ -12,14 +12,16 @@ var apigateway_createDomainNameAccessAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_createDomainNameAccessAssociationCmd).Standalone()
+	carapace.Gen(apigateway_createDomainNameAccessAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_createDomainNameAccessAssociationCmd).Standalone()
 
-	apigateway_createDomainNameAccessAssociationCmd.Flags().String("access-association-source", "", "The identifier of the domain name access association source.")
-	apigateway_createDomainNameAccessAssociationCmd.Flags().String("access-association-source-type", "", "The type of the domain name access association source.")
-	apigateway_createDomainNameAccessAssociationCmd.Flags().String("domain-name-arn", "", "The ARN of the domain name.")
-	apigateway_createDomainNameAccessAssociationCmd.Flags().String("tags", "", "The key-value map of strings.")
-	apigateway_createDomainNameAccessAssociationCmd.MarkFlagRequired("access-association-source")
-	apigateway_createDomainNameAccessAssociationCmd.MarkFlagRequired("access-association-source-type")
-	apigateway_createDomainNameAccessAssociationCmd.MarkFlagRequired("domain-name-arn")
+		apigateway_createDomainNameAccessAssociationCmd.Flags().String("access-association-source", "", "The identifier of the domain name access association source.")
+		apigateway_createDomainNameAccessAssociationCmd.Flags().String("access-association-source-type", "", "The type of the domain name access association source.")
+		apigateway_createDomainNameAccessAssociationCmd.Flags().String("domain-name-arn", "", "The ARN of the domain name.")
+		apigateway_createDomainNameAccessAssociationCmd.Flags().String("tags", "", "The key-value map of strings.")
+		apigateway_createDomainNameAccessAssociationCmd.MarkFlagRequired("access-association-source")
+		apigateway_createDomainNameAccessAssociationCmd.MarkFlagRequired("access-association-source-type")
+		apigateway_createDomainNameAccessAssociationCmd.MarkFlagRequired("domain-name-arn")
+	})
 	apigatewayCmd.AddCommand(apigateway_createDomainNameAccessAssociationCmd)
 }

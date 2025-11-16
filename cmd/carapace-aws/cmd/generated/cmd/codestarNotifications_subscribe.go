@@ -12,12 +12,14 @@ var codestarNotifications_subscribeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarNotifications_subscribeCmd).Standalone()
+	carapace.Gen(codestarNotifications_subscribeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarNotifications_subscribeCmd).Standalone()
 
-	codestarNotifications_subscribeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the notification rule for which you want to create the association.")
-	codestarNotifications_subscribeCmd.Flags().String("client-request-token", "", "An enumeration token that, when provided in a request, returns the next batch of the results.")
-	codestarNotifications_subscribeCmd.Flags().String("target", "", "")
-	codestarNotifications_subscribeCmd.MarkFlagRequired("arn")
-	codestarNotifications_subscribeCmd.MarkFlagRequired("target")
+		codestarNotifications_subscribeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the notification rule for which you want to create the association.")
+		codestarNotifications_subscribeCmd.Flags().String("client-request-token", "", "An enumeration token that, when provided in a request, returns the next batch of the results.")
+		codestarNotifications_subscribeCmd.Flags().String("target", "", "")
+		codestarNotifications_subscribeCmd.MarkFlagRequired("arn")
+		codestarNotifications_subscribeCmd.MarkFlagRequired("target")
+	})
 	codestarNotificationsCmd.AddCommand(codestarNotifications_subscribeCmd)
 }

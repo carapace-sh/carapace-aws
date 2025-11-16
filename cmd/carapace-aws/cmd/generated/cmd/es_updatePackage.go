@@ -12,13 +12,15 @@ var es_updatePackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_updatePackageCmd).Standalone()
+	carapace.Gen(es_updatePackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_updatePackageCmd).Standalone()
 
-	es_updatePackageCmd.Flags().String("commit-message", "", "An info message for the new version which will be shown as part of `GetPackageVersionHistoryResponse`.")
-	es_updatePackageCmd.Flags().String("package-description", "", "New description of the package.")
-	es_updatePackageCmd.Flags().String("package-id", "", "Unique identifier for the package.")
-	es_updatePackageCmd.Flags().String("package-source", "", "")
-	es_updatePackageCmd.MarkFlagRequired("package-id")
-	es_updatePackageCmd.MarkFlagRequired("package-source")
+		es_updatePackageCmd.Flags().String("commit-message", "", "An info message for the new version which will be shown as part of `GetPackageVersionHistoryResponse`.")
+		es_updatePackageCmd.Flags().String("package-description", "", "New description of the package.")
+		es_updatePackageCmd.Flags().String("package-id", "", "Unique identifier for the package.")
+		es_updatePackageCmd.Flags().String("package-source", "", "")
+		es_updatePackageCmd.MarkFlagRequired("package-id")
+		es_updatePackageCmd.MarkFlagRequired("package-source")
+	})
 	esCmd.AddCommand(es_updatePackageCmd)
 }

@@ -12,9 +12,11 @@ var s3tables_getTableBucketEncryptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_getTableBucketEncryptionCmd).Standalone()
+	carapace.Gen(s3tables_getTableBucketEncryptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_getTableBucketEncryptionCmd).Standalone()
 
-	s3tables_getTableBucketEncryptionCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
-	s3tables_getTableBucketEncryptionCmd.MarkFlagRequired("table-bucket-arn")
+		s3tables_getTableBucketEncryptionCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
+		s3tables_getTableBucketEncryptionCmd.MarkFlagRequired("table-bucket-arn")
+	})
 	s3tablesCmd.AddCommand(s3tables_getTableBucketEncryptionCmd)
 }

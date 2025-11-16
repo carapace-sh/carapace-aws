@@ -12,8 +12,10 @@ var iotwireless_updateMetricConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_updateMetricConfigurationCmd).Standalone()
+	carapace.Gen(iotwireless_updateMetricConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_updateMetricConfigurationCmd).Standalone()
 
-	iotwireless_updateMetricConfigurationCmd.Flags().String("summary-metric", "", "The value to be used to set summary metric configuration.")
+		iotwireless_updateMetricConfigurationCmd.Flags().String("summary-metric", "", "The value to be used to set summary metric configuration.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_updateMetricConfigurationCmd)
 }

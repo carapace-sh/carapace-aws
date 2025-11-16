@@ -12,11 +12,13 @@ var route53RecoveryControlConfig_updateControlPanelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_updateControlPanelCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_updateControlPanelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_updateControlPanelCmd).Standalone()
 
-	route53RecoveryControlConfig_updateControlPanelCmd.Flags().String("control-panel-arn", "", "The Amazon Resource Name (ARN) of the control panel.")
-	route53RecoveryControlConfig_updateControlPanelCmd.Flags().String("control-panel-name", "", "The name of the control panel.")
-	route53RecoveryControlConfig_updateControlPanelCmd.MarkFlagRequired("control-panel-arn")
-	route53RecoveryControlConfig_updateControlPanelCmd.MarkFlagRequired("control-panel-name")
+		route53RecoveryControlConfig_updateControlPanelCmd.Flags().String("control-panel-arn", "", "The Amazon Resource Name (ARN) of the control panel.")
+		route53RecoveryControlConfig_updateControlPanelCmd.Flags().String("control-panel-name", "", "The name of the control panel.")
+		route53RecoveryControlConfig_updateControlPanelCmd.MarkFlagRequired("control-panel-arn")
+		route53RecoveryControlConfig_updateControlPanelCmd.MarkFlagRequired("control-panel-name")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_updateControlPanelCmd)
 }

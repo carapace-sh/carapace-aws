@@ -12,11 +12,13 @@ var organizations_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_tagResourceCmd).Standalone()
+	carapace.Gen(organizations_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_tagResourceCmd).Standalone()
 
-	organizations_tagResourceCmd.Flags().String("resource-id", "", "The ID of the resource to add a tag to.")
-	organizations_tagResourceCmd.Flags().String("tags", "", "A list of tags to add to the specified resource.")
-	organizations_tagResourceCmd.MarkFlagRequired("resource-id")
-	organizations_tagResourceCmd.MarkFlagRequired("tags")
+		organizations_tagResourceCmd.Flags().String("resource-id", "", "The ID of the resource to add a tag to.")
+		organizations_tagResourceCmd.Flags().String("tags", "", "A list of tags to add to the specified resource.")
+		organizations_tagResourceCmd.MarkFlagRequired("resource-id")
+		organizations_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	organizationsCmd.AddCommand(organizations_tagResourceCmd)
 }

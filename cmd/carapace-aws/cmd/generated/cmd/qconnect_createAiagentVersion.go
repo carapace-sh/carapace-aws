@@ -12,13 +12,15 @@ var qconnect_createAiagentVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_createAiagentVersionCmd).Standalone()
+	carapace.Gen(qconnect_createAiagentVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_createAiagentVersionCmd).Standalone()
 
-	qconnect_createAiagentVersionCmd.Flags().String("ai-agent-id", "", "The identifier of the Amazon Q in Connect AI Agent.")
-	qconnect_createAiagentVersionCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_createAiagentVersionCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	qconnect_createAiagentVersionCmd.Flags().String("modified-time", "", "The modification time of the AI Agent should be tracked for version creation.")
-	qconnect_createAiagentVersionCmd.MarkFlagRequired("ai-agent-id")
-	qconnect_createAiagentVersionCmd.MarkFlagRequired("assistant-id")
+		qconnect_createAiagentVersionCmd.Flags().String("ai-agent-id", "", "The identifier of the Amazon Q in Connect AI Agent.")
+		qconnect_createAiagentVersionCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_createAiagentVersionCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		qconnect_createAiagentVersionCmd.Flags().String("modified-time", "", "The modification time of the AI Agent should be tracked for version creation.")
+		qconnect_createAiagentVersionCmd.MarkFlagRequired("ai-agent-id")
+		qconnect_createAiagentVersionCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_createAiagentVersionCmd)
 }

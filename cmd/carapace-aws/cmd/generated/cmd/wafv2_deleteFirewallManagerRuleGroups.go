@@ -12,11 +12,13 @@ var wafv2_deleteFirewallManagerRuleGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_deleteFirewallManagerRuleGroupsCmd).Standalone()
+	carapace.Gen(wafv2_deleteFirewallManagerRuleGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_deleteFirewallManagerRuleGroupsCmd).Standalone()
 
-	wafv2_deleteFirewallManagerRuleGroupsCmd.Flags().String("web-aclarn", "", "The Amazon Resource Name (ARN) of the web ACL.")
-	wafv2_deleteFirewallManagerRuleGroupsCmd.Flags().String("web-acllock-token", "", "A token used for optimistic locking.")
-	wafv2_deleteFirewallManagerRuleGroupsCmd.MarkFlagRequired("web-aclarn")
-	wafv2_deleteFirewallManagerRuleGroupsCmd.MarkFlagRequired("web-acllock-token")
+		wafv2_deleteFirewallManagerRuleGroupsCmd.Flags().String("web-aclarn", "", "The Amazon Resource Name (ARN) of the web ACL.")
+		wafv2_deleteFirewallManagerRuleGroupsCmd.Flags().String("web-acllock-token", "", "A token used for optimistic locking.")
+		wafv2_deleteFirewallManagerRuleGroupsCmd.MarkFlagRequired("web-aclarn")
+		wafv2_deleteFirewallManagerRuleGroupsCmd.MarkFlagRequired("web-acllock-token")
+	})
 	wafv2Cmd.AddCommand(wafv2_deleteFirewallManagerRuleGroupsCmd)
 }

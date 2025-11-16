@@ -12,12 +12,14 @@ var ec2_deleteManagedPrefixListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteManagedPrefixListCmd).Standalone()
+	carapace.Gen(ec2_deleteManagedPrefixListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteManagedPrefixListCmd).Standalone()
 
-	ec2_deleteManagedPrefixListCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteManagedPrefixListCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteManagedPrefixListCmd.Flags().String("prefix-list-id", "", "The ID of the prefix list.")
-	ec2_deleteManagedPrefixListCmd.Flag("no-dry-run").Hidden = true
-	ec2_deleteManagedPrefixListCmd.MarkFlagRequired("prefix-list-id")
+		ec2_deleteManagedPrefixListCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteManagedPrefixListCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteManagedPrefixListCmd.Flags().String("prefix-list-id", "", "The ID of the prefix list.")
+		ec2_deleteManagedPrefixListCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteManagedPrefixListCmd.MarkFlagRequired("prefix-list-id")
+	})
 	ec2Cmd.AddCommand(ec2_deleteManagedPrefixListCmd)
 }

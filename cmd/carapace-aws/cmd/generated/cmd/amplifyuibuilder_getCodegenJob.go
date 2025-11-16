@@ -12,13 +12,15 @@ var amplifyuibuilder_getCodegenJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_getCodegenJobCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_getCodegenJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_getCodegenJobCmd).Standalone()
 
-	amplifyuibuilder_getCodegenJobCmd.Flags().String("app-id", "", "The unique ID of the Amplify app associated with the code generation job.")
-	amplifyuibuilder_getCodegenJobCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app associated with the code generation job.")
-	amplifyuibuilder_getCodegenJobCmd.Flags().String("id", "", "The unique ID of the code generation job.")
-	amplifyuibuilder_getCodegenJobCmd.MarkFlagRequired("app-id")
-	amplifyuibuilder_getCodegenJobCmd.MarkFlagRequired("environment-name")
-	amplifyuibuilder_getCodegenJobCmd.MarkFlagRequired("id")
+		amplifyuibuilder_getCodegenJobCmd.Flags().String("app-id", "", "The unique ID of the Amplify app associated with the code generation job.")
+		amplifyuibuilder_getCodegenJobCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app associated with the code generation job.")
+		amplifyuibuilder_getCodegenJobCmd.Flags().String("id", "", "The unique ID of the code generation job.")
+		amplifyuibuilder_getCodegenJobCmd.MarkFlagRequired("app-id")
+		amplifyuibuilder_getCodegenJobCmd.MarkFlagRequired("environment-name")
+		amplifyuibuilder_getCodegenJobCmd.MarkFlagRequired("id")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_getCodegenJobCmd)
 }

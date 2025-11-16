@@ -12,7 +12,9 @@ var notificationscontactsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notificationscontactsCmd).Standalone()
+	carapace.Gen(notificationscontactsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notificationscontactsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(notificationscontactsCmd)
 }

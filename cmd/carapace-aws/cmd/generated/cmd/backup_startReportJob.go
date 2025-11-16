@@ -12,10 +12,12 @@ var backup_startReportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_startReportJobCmd).Standalone()
+	carapace.Gen(backup_startReportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_startReportJobCmd).Standalone()
 
-	backup_startReportJobCmd.Flags().String("idempotency-token", "", "A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartReportJobInput`.")
-	backup_startReportJobCmd.Flags().String("report-plan-name", "", "The unique name of a report plan.")
-	backup_startReportJobCmd.MarkFlagRequired("report-plan-name")
+		backup_startReportJobCmd.Flags().String("idempotency-token", "", "A customer-chosen string that you can use to distinguish between otherwise identical calls to `StartReportJobInput`.")
+		backup_startReportJobCmd.Flags().String("report-plan-name", "", "The unique name of a report plan.")
+		backup_startReportJobCmd.MarkFlagRequired("report-plan-name")
+	})
 	backupCmd.AddCommand(backup_startReportJobCmd)
 }

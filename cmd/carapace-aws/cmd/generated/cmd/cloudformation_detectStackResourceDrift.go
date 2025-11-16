@@ -12,11 +12,13 @@ var cloudformation_detectStackResourceDriftCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_detectStackResourceDriftCmd).Standalone()
+	carapace.Gen(cloudformation_detectStackResourceDriftCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_detectStackResourceDriftCmd).Standalone()
 
-	cloudformation_detectStackResourceDriftCmd.Flags().String("logical-resource-id", "", "The logical name of the resource for which to return drift information.")
-	cloudformation_detectStackResourceDriftCmd.Flags().String("stack-name", "", "The name of the stack to which the resource belongs.")
-	cloudformation_detectStackResourceDriftCmd.MarkFlagRequired("logical-resource-id")
-	cloudformation_detectStackResourceDriftCmd.MarkFlagRequired("stack-name")
+		cloudformation_detectStackResourceDriftCmd.Flags().String("logical-resource-id", "", "The logical name of the resource for which to return drift information.")
+		cloudformation_detectStackResourceDriftCmd.Flags().String("stack-name", "", "The name of the stack to which the resource belongs.")
+		cloudformation_detectStackResourceDriftCmd.MarkFlagRequired("logical-resource-id")
+		cloudformation_detectStackResourceDriftCmd.MarkFlagRequired("stack-name")
+	})
 	cloudformationCmd.AddCommand(cloudformation_detectStackResourceDriftCmd)
 }

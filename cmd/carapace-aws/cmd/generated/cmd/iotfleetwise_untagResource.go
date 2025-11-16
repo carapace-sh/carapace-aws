@@ -12,11 +12,13 @@ var iotfleetwise_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_untagResourceCmd).Standalone()
+	carapace.Gen(iotfleetwise_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_untagResourceCmd).Standalone()
 
-	iotfleetwise_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	iotfleetwise_untagResourceCmd.Flags().String("tag-keys", "", "A list of the keys of the tags to be removed from the resource.")
-	iotfleetwise_untagResourceCmd.MarkFlagRequired("resource-arn")
-	iotfleetwise_untagResourceCmd.MarkFlagRequired("tag-keys")
+		iotfleetwise_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		iotfleetwise_untagResourceCmd.Flags().String("tag-keys", "", "A list of the keys of the tags to be removed from the resource.")
+		iotfleetwise_untagResourceCmd.MarkFlagRequired("resource-arn")
+		iotfleetwise_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_untagResourceCmd)
 }

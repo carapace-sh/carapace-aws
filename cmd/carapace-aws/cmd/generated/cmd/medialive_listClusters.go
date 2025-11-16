@@ -12,9 +12,11 @@ var medialive_listClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listClustersCmd).Standalone()
+	carapace.Gen(medialive_listClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listClustersCmd).Standalone()
 
-	medialive_listClustersCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	medialive_listClustersCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+		medialive_listClustersCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		medialive_listClustersCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+	})
 	medialiveCmd.AddCommand(medialive_listClustersCmd)
 }

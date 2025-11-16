@@ -12,9 +12,11 @@ var lakeformation_getQueryStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_getQueryStatisticsCmd).Standalone()
+	carapace.Gen(lakeformation_getQueryStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_getQueryStatisticsCmd).Standalone()
 
-	lakeformation_getQueryStatisticsCmd.Flags().String("query-id", "", "The ID of the plan query operation.")
-	lakeformation_getQueryStatisticsCmd.MarkFlagRequired("query-id")
+		lakeformation_getQueryStatisticsCmd.Flags().String("query-id", "", "The ID of the plan query operation.")
+		lakeformation_getQueryStatisticsCmd.MarkFlagRequired("query-id")
+	})
 	lakeformationCmd.AddCommand(lakeformation_getQueryStatisticsCmd)
 }

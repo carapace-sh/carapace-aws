@@ -12,9 +12,11 @@ var pinpointEmail_getDedicatedIpCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getDedicatedIpCmd).Standalone()
+	carapace.Gen(pinpointEmail_getDedicatedIpCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getDedicatedIpCmd).Standalone()
 
-	pinpointEmail_getDedicatedIpCmd.Flags().String("ip", "", "The IP address that you want to obtain more information about.")
-	pinpointEmail_getDedicatedIpCmd.MarkFlagRequired("ip")
+		pinpointEmail_getDedicatedIpCmd.Flags().String("ip", "", "The IP address that you want to obtain more information about.")
+		pinpointEmail_getDedicatedIpCmd.MarkFlagRequired("ip")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getDedicatedIpCmd)
 }

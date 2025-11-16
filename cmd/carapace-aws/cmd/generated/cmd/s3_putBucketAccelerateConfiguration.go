@@ -12,13 +12,15 @@ var s3_putBucketAccelerateConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_putBucketAccelerateConfigurationCmd).Standalone()
+	carapace.Gen(s3_putBucketAccelerateConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_putBucketAccelerateConfigurationCmd).Standalone()
 
-	s3_putBucketAccelerateConfigurationCmd.Flags().String("accelerate-configuration", "", "Container for setting the transfer acceleration state.")
-	s3_putBucketAccelerateConfigurationCmd.Flags().String("bucket", "", "The name of the bucket for which the accelerate configuration is set.")
-	s3_putBucketAccelerateConfigurationCmd.Flags().String("checksum-algorithm", "", "Indicates the algorithm used to create the checksum for the request when you use the SDK.")
-	s3_putBucketAccelerateConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_putBucketAccelerateConfigurationCmd.MarkFlagRequired("accelerate-configuration")
-	s3_putBucketAccelerateConfigurationCmd.MarkFlagRequired("bucket")
+		s3_putBucketAccelerateConfigurationCmd.Flags().String("accelerate-configuration", "", "Container for setting the transfer acceleration state.")
+		s3_putBucketAccelerateConfigurationCmd.Flags().String("bucket", "", "The name of the bucket for which the accelerate configuration is set.")
+		s3_putBucketAccelerateConfigurationCmd.Flags().String("checksum-algorithm", "", "Indicates the algorithm used to create the checksum for the request when you use the SDK.")
+		s3_putBucketAccelerateConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_putBucketAccelerateConfigurationCmd.MarkFlagRequired("accelerate-configuration")
+		s3_putBucketAccelerateConfigurationCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_putBucketAccelerateConfigurationCmd)
 }

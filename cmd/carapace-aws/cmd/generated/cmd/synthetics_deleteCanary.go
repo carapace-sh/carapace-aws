@@ -12,10 +12,12 @@ var synthetics_deleteCanaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_deleteCanaryCmd).Standalone()
+	carapace.Gen(synthetics_deleteCanaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_deleteCanaryCmd).Standalone()
 
-	synthetics_deleteCanaryCmd.Flags().String("delete-lambda", "", "Specifies whether to also delete the Lambda functions and layers used by this canary.")
-	synthetics_deleteCanaryCmd.Flags().String("name", "", "The name of the canary that you want to delete.")
-	synthetics_deleteCanaryCmd.MarkFlagRequired("name")
+		synthetics_deleteCanaryCmd.Flags().String("delete-lambda", "", "Specifies whether to also delete the Lambda functions and layers used by this canary.")
+		synthetics_deleteCanaryCmd.Flags().String("name", "", "The name of the canary that you want to delete.")
+		synthetics_deleteCanaryCmd.MarkFlagRequired("name")
+	})
 	syntheticsCmd.AddCommand(synthetics_deleteCanaryCmd)
 }

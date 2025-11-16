@@ -12,9 +12,11 @@ var arcRegionSwitch_getPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcRegionSwitch_getPlanCmd).Standalone()
+	carapace.Gen(arcRegionSwitch_getPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcRegionSwitch_getPlanCmd).Standalone()
 
-	arcRegionSwitch_getPlanCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the plan.")
-	arcRegionSwitch_getPlanCmd.MarkFlagRequired("arn")
+		arcRegionSwitch_getPlanCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the plan.")
+		arcRegionSwitch_getPlanCmd.MarkFlagRequired("arn")
+	})
 	arcRegionSwitchCmd.AddCommand(arcRegionSwitch_getPlanCmd)
 }

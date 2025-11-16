@@ -12,12 +12,14 @@ var iot_registerCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_registerCertificateCmd).Standalone()
+	carapace.Gen(iot_registerCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_registerCertificateCmd).Standalone()
 
-	iot_registerCertificateCmd.Flags().String("ca-certificate-pem", "", "The CA certificate used to sign the device certificate being registered.")
-	iot_registerCertificateCmd.Flags().String("certificate-pem", "", "The certificate data, in PEM format.")
-	iot_registerCertificateCmd.Flags().String("set-as-active", "", "A boolean value that specifies if the certificate is set to active.")
-	iot_registerCertificateCmd.Flags().String("status", "", "The status of the register certificate request.")
-	iot_registerCertificateCmd.MarkFlagRequired("certificate-pem")
+		iot_registerCertificateCmd.Flags().String("ca-certificate-pem", "", "The CA certificate used to sign the device certificate being registered.")
+		iot_registerCertificateCmd.Flags().String("certificate-pem", "", "The certificate data, in PEM format.")
+		iot_registerCertificateCmd.Flags().String("set-as-active", "", "A boolean value that specifies if the certificate is set to active.")
+		iot_registerCertificateCmd.Flags().String("status", "", "The status of the register certificate request.")
+		iot_registerCertificateCmd.MarkFlagRequired("certificate-pem")
+	})
 	iotCmd.AddCommand(iot_registerCertificateCmd)
 }

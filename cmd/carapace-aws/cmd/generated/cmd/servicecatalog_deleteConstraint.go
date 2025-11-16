@@ -12,10 +12,12 @@ var servicecatalog_deleteConstraintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_deleteConstraintCmd).Standalone()
+	carapace.Gen(servicecatalog_deleteConstraintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_deleteConstraintCmd).Standalone()
 
-	servicecatalog_deleteConstraintCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_deleteConstraintCmd.Flags().String("id", "", "The identifier of the constraint.")
-	servicecatalog_deleteConstraintCmd.MarkFlagRequired("id")
+		servicecatalog_deleteConstraintCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_deleteConstraintCmd.Flags().String("id", "", "The identifier of the constraint.")
+		servicecatalog_deleteConstraintCmd.MarkFlagRequired("id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_deleteConstraintCmd)
 }

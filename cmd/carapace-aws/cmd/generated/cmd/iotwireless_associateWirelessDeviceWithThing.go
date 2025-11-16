@@ -12,11 +12,13 @@ var iotwireless_associateWirelessDeviceWithThingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_associateWirelessDeviceWithThingCmd).Standalone()
+	carapace.Gen(iotwireless_associateWirelessDeviceWithThingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_associateWirelessDeviceWithThingCmd).Standalone()
 
-	iotwireless_associateWirelessDeviceWithThingCmd.Flags().String("id", "", "The ID of the resource to update.")
-	iotwireless_associateWirelessDeviceWithThingCmd.Flags().String("thing-arn", "", "The ARN of the thing to associate with the wireless device.")
-	iotwireless_associateWirelessDeviceWithThingCmd.MarkFlagRequired("id")
-	iotwireless_associateWirelessDeviceWithThingCmd.MarkFlagRequired("thing-arn")
+		iotwireless_associateWirelessDeviceWithThingCmd.Flags().String("id", "", "The ID of the resource to update.")
+		iotwireless_associateWirelessDeviceWithThingCmd.Flags().String("thing-arn", "", "The ARN of the thing to associate with the wireless device.")
+		iotwireless_associateWirelessDeviceWithThingCmd.MarkFlagRequired("id")
+		iotwireless_associateWirelessDeviceWithThingCmd.MarkFlagRequired("thing-arn")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_associateWirelessDeviceWithThingCmd)
 }

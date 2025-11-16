@@ -12,7 +12,9 @@ var glacierCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacierCmd).Standalone()
+	carapace.Gen(glacierCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacierCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(glacierCmd)
 }

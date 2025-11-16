@@ -12,12 +12,14 @@ var sesv2_sendCustomVerificationEmailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_sendCustomVerificationEmailCmd).Standalone()
+	carapace.Gen(sesv2_sendCustomVerificationEmailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_sendCustomVerificationEmailCmd).Standalone()
 
-	sesv2_sendCustomVerificationEmailCmd.Flags().String("configuration-set-name", "", "Name of a configuration set to use when sending the verification email.")
-	sesv2_sendCustomVerificationEmailCmd.Flags().String("email-address", "", "The email address to verify.")
-	sesv2_sendCustomVerificationEmailCmd.Flags().String("template-name", "", "The name of the custom verification email template to use when sending the verification email.")
-	sesv2_sendCustomVerificationEmailCmd.MarkFlagRequired("email-address")
-	sesv2_sendCustomVerificationEmailCmd.MarkFlagRequired("template-name")
+		sesv2_sendCustomVerificationEmailCmd.Flags().String("configuration-set-name", "", "Name of a configuration set to use when sending the verification email.")
+		sesv2_sendCustomVerificationEmailCmd.Flags().String("email-address", "", "The email address to verify.")
+		sesv2_sendCustomVerificationEmailCmd.Flags().String("template-name", "", "The name of the custom verification email template to use when sending the verification email.")
+		sesv2_sendCustomVerificationEmailCmd.MarkFlagRequired("email-address")
+		sesv2_sendCustomVerificationEmailCmd.MarkFlagRequired("template-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_sendCustomVerificationEmailCmd)
 }

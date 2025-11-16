@@ -12,9 +12,11 @@ var securityhub_batchEnableStandardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_batchEnableStandardsCmd).Standalone()
+	carapace.Gen(securityhub_batchEnableStandardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_batchEnableStandardsCmd).Standalone()
 
-	securityhub_batchEnableStandardsCmd.Flags().String("standards-subscription-requests", "", "The list of standards checks to enable.")
-	securityhub_batchEnableStandardsCmd.MarkFlagRequired("standards-subscription-requests")
+		securityhub_batchEnableStandardsCmd.Flags().String("standards-subscription-requests", "", "The list of standards checks to enable.")
+		securityhub_batchEnableStandardsCmd.MarkFlagRequired("standards-subscription-requests")
+	})
 	securityhubCmd.AddCommand(securityhub_batchEnableStandardsCmd)
 }

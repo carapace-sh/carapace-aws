@@ -12,13 +12,15 @@ var s3control_putBucketTaggingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_putBucketTaggingCmd).Standalone()
+	carapace.Gen(s3control_putBucketTaggingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_putBucketTaggingCmd).Standalone()
 
-	s3control_putBucketTaggingCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Outposts bucket.")
-	s3control_putBucketTaggingCmd.Flags().String("bucket", "", "The Amazon Resource Name (ARN) of the bucket.")
-	s3control_putBucketTaggingCmd.Flags().String("tagging", "", "")
-	s3control_putBucketTaggingCmd.MarkFlagRequired("account-id")
-	s3control_putBucketTaggingCmd.MarkFlagRequired("bucket")
-	s3control_putBucketTaggingCmd.MarkFlagRequired("tagging")
+		s3control_putBucketTaggingCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Outposts bucket.")
+		s3control_putBucketTaggingCmd.Flags().String("bucket", "", "The Amazon Resource Name (ARN) of the bucket.")
+		s3control_putBucketTaggingCmd.Flags().String("tagging", "", "")
+		s3control_putBucketTaggingCmd.MarkFlagRequired("account-id")
+		s3control_putBucketTaggingCmd.MarkFlagRequired("bucket")
+		s3control_putBucketTaggingCmd.MarkFlagRequired("tagging")
+	})
 	s3controlCmd.AddCommand(s3control_putBucketTaggingCmd)
 }

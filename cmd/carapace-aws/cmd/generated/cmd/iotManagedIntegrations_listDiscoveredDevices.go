@@ -12,11 +12,13 @@ var iotManagedIntegrations_listDiscoveredDevicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_listDiscoveredDevicesCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_listDiscoveredDevicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_listDiscoveredDevicesCmd).Standalone()
 
-	iotManagedIntegrations_listDiscoveredDevicesCmd.Flags().String("identifier", "", "The identifier of the device discovery job to list discovered devices for.")
-	iotManagedIntegrations_listDiscoveredDevicesCmd.Flags().String("max-results", "", "The maximum number of discovered devices to return in a single response.")
-	iotManagedIntegrations_listDiscoveredDevicesCmd.Flags().String("next-token", "", "A token used for pagination of results.")
-	iotManagedIntegrations_listDiscoveredDevicesCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_listDiscoveredDevicesCmd.Flags().String("identifier", "", "The identifier of the device discovery job to list discovered devices for.")
+		iotManagedIntegrations_listDiscoveredDevicesCmd.Flags().String("max-results", "", "The maximum number of discovered devices to return in a single response.")
+		iotManagedIntegrations_listDiscoveredDevicesCmd.Flags().String("next-token", "", "A token used for pagination of results.")
+		iotManagedIntegrations_listDiscoveredDevicesCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_listDiscoveredDevicesCmd)
 }

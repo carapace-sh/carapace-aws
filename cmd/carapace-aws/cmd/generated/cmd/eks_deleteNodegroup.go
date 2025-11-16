@@ -12,11 +12,13 @@ var eks_deleteNodegroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_deleteNodegroupCmd).Standalone()
+	carapace.Gen(eks_deleteNodegroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_deleteNodegroupCmd).Standalone()
 
-	eks_deleteNodegroupCmd.Flags().String("cluster-name", "", "The name of your cluster.")
-	eks_deleteNodegroupCmd.Flags().String("nodegroup-name", "", "The name of the node group to delete.")
-	eks_deleteNodegroupCmd.MarkFlagRequired("cluster-name")
-	eks_deleteNodegroupCmd.MarkFlagRequired("nodegroup-name")
+		eks_deleteNodegroupCmd.Flags().String("cluster-name", "", "The name of your cluster.")
+		eks_deleteNodegroupCmd.Flags().String("nodegroup-name", "", "The name of the node group to delete.")
+		eks_deleteNodegroupCmd.MarkFlagRequired("cluster-name")
+		eks_deleteNodegroupCmd.MarkFlagRequired("nodegroup-name")
+	})
 	eksCmd.AddCommand(eks_deleteNodegroupCmd)
 }

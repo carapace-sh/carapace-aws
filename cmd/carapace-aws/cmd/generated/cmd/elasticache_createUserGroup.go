@@ -12,13 +12,15 @@ var elasticache_createUserGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_createUserGroupCmd).Standalone()
+	carapace.Gen(elasticache_createUserGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_createUserGroupCmd).Standalone()
 
-	elasticache_createUserGroupCmd.Flags().String("engine", "", "Sets the engine listed in a user group.")
-	elasticache_createUserGroupCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
-	elasticache_createUserGroupCmd.Flags().String("user-group-id", "", "The ID of the user group.")
-	elasticache_createUserGroupCmd.Flags().String("user-ids", "", "The list of user IDs that belong to the user group.")
-	elasticache_createUserGroupCmd.MarkFlagRequired("engine")
-	elasticache_createUserGroupCmd.MarkFlagRequired("user-group-id")
+		elasticache_createUserGroupCmd.Flags().String("engine", "", "Sets the engine listed in a user group.")
+		elasticache_createUserGroupCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
+		elasticache_createUserGroupCmd.Flags().String("user-group-id", "", "The ID of the user group.")
+		elasticache_createUserGroupCmd.Flags().String("user-ids", "", "The list of user IDs that belong to the user group.")
+		elasticache_createUserGroupCmd.MarkFlagRequired("engine")
+		elasticache_createUserGroupCmd.MarkFlagRequired("user-group-id")
+	})
 	elasticacheCmd.AddCommand(elasticache_createUserGroupCmd)
 }

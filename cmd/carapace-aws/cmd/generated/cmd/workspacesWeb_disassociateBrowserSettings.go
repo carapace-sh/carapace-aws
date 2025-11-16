@@ -12,9 +12,11 @@ var workspacesWeb_disassociateBrowserSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_disassociateBrowserSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_disassociateBrowserSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_disassociateBrowserSettingsCmd).Standalone()
 
-	workspacesWeb_disassociateBrowserSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
-	workspacesWeb_disassociateBrowserSettingsCmd.MarkFlagRequired("portal-arn")
+		workspacesWeb_disassociateBrowserSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
+		workspacesWeb_disassociateBrowserSettingsCmd.MarkFlagRequired("portal-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_disassociateBrowserSettingsCmd)
 }

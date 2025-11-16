@@ -12,9 +12,11 @@ var mediaconvert_getJobTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_getJobTemplateCmd).Standalone()
+	carapace.Gen(mediaconvert_getJobTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_getJobTemplateCmd).Standalone()
 
-	mediaconvert_getJobTemplateCmd.Flags().String("name", "", "The name of the job template.")
-	mediaconvert_getJobTemplateCmd.MarkFlagRequired("name")
+		mediaconvert_getJobTemplateCmd.Flags().String("name", "", "The name of the job template.")
+		mediaconvert_getJobTemplateCmd.MarkFlagRequired("name")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_getJobTemplateCmd)
 }

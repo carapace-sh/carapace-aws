@@ -12,10 +12,12 @@ var account_deleteAlternateContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(account_deleteAlternateContactCmd).Standalone()
+	carapace.Gen(account_deleteAlternateContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(account_deleteAlternateContactCmd).Standalone()
 
-	account_deleteAlternateContactCmd.Flags().String("account-id", "", "Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
-	account_deleteAlternateContactCmd.Flags().String("alternate-contact-type", "", "Specifies which of the alternate contacts to delete.")
-	account_deleteAlternateContactCmd.MarkFlagRequired("alternate-contact-type")
+		account_deleteAlternateContactCmd.Flags().String("account-id", "", "Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
+		account_deleteAlternateContactCmd.Flags().String("alternate-contact-type", "", "Specifies which of the alternate contacts to delete.")
+		account_deleteAlternateContactCmd.MarkFlagRequired("alternate-contact-type")
+	})
 	accountCmd.AddCommand(account_deleteAlternateContactCmd)
 }

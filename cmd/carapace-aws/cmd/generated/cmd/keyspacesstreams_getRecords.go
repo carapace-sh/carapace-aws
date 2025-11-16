@@ -12,10 +12,12 @@ var keyspacesstreams_getRecordsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspacesstreams_getRecordsCmd).Standalone()
+	carapace.Gen(keyspacesstreams_getRecordsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspacesstreams_getRecordsCmd).Standalone()
 
-	keyspacesstreams_getRecordsCmd.Flags().String("max-results", "", "The maximum number of records to return in a single `GetRecords` request.")
-	keyspacesstreams_getRecordsCmd.Flags().String("shard-iterator", "", "The unique identifier of the shard iterator.")
-	keyspacesstreams_getRecordsCmd.MarkFlagRequired("shard-iterator")
+		keyspacesstreams_getRecordsCmd.Flags().String("max-results", "", "The maximum number of records to return in a single `GetRecords` request.")
+		keyspacesstreams_getRecordsCmd.Flags().String("shard-iterator", "", "The unique identifier of the shard iterator.")
+		keyspacesstreams_getRecordsCmd.MarkFlagRequired("shard-iterator")
+	})
 	keyspacesstreamsCmd.AddCommand(keyspacesstreams_getRecordsCmd)
 }

@@ -12,11 +12,13 @@ var accessanalyzer_getFindingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_getFindingCmd).Standalone()
+	carapace.Gen(accessanalyzer_getFindingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_getFindingCmd).Standalone()
 
-	accessanalyzer_getFindingCmd.Flags().String("analyzer-arn", "", "The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) that generated the finding.")
-	accessanalyzer_getFindingCmd.Flags().String("id", "", "The ID of the finding to retrieve.")
-	accessanalyzer_getFindingCmd.MarkFlagRequired("analyzer-arn")
-	accessanalyzer_getFindingCmd.MarkFlagRequired("id")
+		accessanalyzer_getFindingCmd.Flags().String("analyzer-arn", "", "The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) that generated the finding.")
+		accessanalyzer_getFindingCmd.Flags().String("id", "", "The ID of the finding to retrieve.")
+		accessanalyzer_getFindingCmd.MarkFlagRequired("analyzer-arn")
+		accessanalyzer_getFindingCmd.MarkFlagRequired("id")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_getFindingCmd)
 }

@@ -12,9 +12,11 @@ var mturk_listWorkerBlocksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_listWorkerBlocksCmd).Standalone()
+	carapace.Gen(mturk_listWorkerBlocksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_listWorkerBlocksCmd).Standalone()
 
-	mturk_listWorkerBlocksCmd.Flags().String("max-results", "", "")
-	mturk_listWorkerBlocksCmd.Flags().String("next-token", "", "Pagination token")
+		mturk_listWorkerBlocksCmd.Flags().String("max-results", "", "")
+		mturk_listWorkerBlocksCmd.Flags().String("next-token", "", "Pagination token")
+	})
 	mturkCmd.AddCommand(mturk_listWorkerBlocksCmd)
 }

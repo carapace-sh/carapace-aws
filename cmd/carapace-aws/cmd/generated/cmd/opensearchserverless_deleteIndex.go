@@ -12,11 +12,13 @@ var opensearchserverless_deleteIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_deleteIndexCmd).Standalone()
+	carapace.Gen(opensearchserverless_deleteIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_deleteIndexCmd).Standalone()
 
-	opensearchserverless_deleteIndexCmd.Flags().String("id", "", "The unique identifier of the collection containing the index to delete.")
-	opensearchserverless_deleteIndexCmd.Flags().String("index-name", "", "The name of the index to delete.")
-	opensearchserverless_deleteIndexCmd.MarkFlagRequired("id")
-	opensearchserverless_deleteIndexCmd.MarkFlagRequired("index-name")
+		opensearchserverless_deleteIndexCmd.Flags().String("id", "", "The unique identifier of the collection containing the index to delete.")
+		opensearchserverless_deleteIndexCmd.Flags().String("index-name", "", "The name of the index to delete.")
+		opensearchserverless_deleteIndexCmd.MarkFlagRequired("id")
+		opensearchserverless_deleteIndexCmd.MarkFlagRequired("index-name")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_deleteIndexCmd)
 }

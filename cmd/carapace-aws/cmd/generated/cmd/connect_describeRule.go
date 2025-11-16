@@ -12,11 +12,13 @@ var connect_describeRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeRuleCmd).Standalone()
+	carapace.Gen(connect_describeRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeRuleCmd).Standalone()
 
-	connect_describeRuleCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeRuleCmd.Flags().String("rule-id", "", "A unique identifier for the rule.")
-	connect_describeRuleCmd.MarkFlagRequired("instance-id")
-	connect_describeRuleCmd.MarkFlagRequired("rule-id")
+		connect_describeRuleCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeRuleCmd.Flags().String("rule-id", "", "A unique identifier for the rule.")
+		connect_describeRuleCmd.MarkFlagRequired("instance-id")
+		connect_describeRuleCmd.MarkFlagRequired("rule-id")
+	})
 	connectCmd.AddCommand(connect_describeRuleCmd)
 }

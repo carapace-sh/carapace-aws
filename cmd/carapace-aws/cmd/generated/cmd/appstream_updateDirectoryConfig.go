@@ -12,12 +12,14 @@ var appstream_updateDirectoryConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_updateDirectoryConfigCmd).Standalone()
+	carapace.Gen(appstream_updateDirectoryConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_updateDirectoryConfigCmd).Standalone()
 
-	appstream_updateDirectoryConfigCmd.Flags().String("certificate-based-auth-properties", "", "The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances.")
-	appstream_updateDirectoryConfigCmd.Flags().String("directory-name", "", "The name of the Directory Config object.")
-	appstream_updateDirectoryConfigCmd.Flags().String("organizational-unit-distinguished-names", "", "The distinguished names of the organizational units for computer accounts.")
-	appstream_updateDirectoryConfigCmd.Flags().String("service-account-credentials", "", "The credentials for the service account used by the fleet or image builder to connect to the directory.")
-	appstream_updateDirectoryConfigCmd.MarkFlagRequired("directory-name")
+		appstream_updateDirectoryConfigCmd.Flags().String("certificate-based-auth-properties", "", "The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances.")
+		appstream_updateDirectoryConfigCmd.Flags().String("directory-name", "", "The name of the Directory Config object.")
+		appstream_updateDirectoryConfigCmd.Flags().String("organizational-unit-distinguished-names", "", "The distinguished names of the organizational units for computer accounts.")
+		appstream_updateDirectoryConfigCmd.Flags().String("service-account-credentials", "", "The credentials for the service account used by the fleet or image builder to connect to the directory.")
+		appstream_updateDirectoryConfigCmd.MarkFlagRequired("directory-name")
+	})
 	appstreamCmd.AddCommand(appstream_updateDirectoryConfigCmd)
 }

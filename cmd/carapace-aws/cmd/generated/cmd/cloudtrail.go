@@ -12,7 +12,9 @@ var cloudtrailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrailCmd).Standalone()
+	carapace.Gen(cloudtrailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrailCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cloudtrailCmd)
 }

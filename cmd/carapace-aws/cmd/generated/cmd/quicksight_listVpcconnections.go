@@ -12,11 +12,13 @@ var quicksight_listVpcconnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_listVpcconnectionsCmd).Standalone()
+	carapace.Gen(quicksight_listVpcconnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_listVpcconnectionsCmd).Standalone()
 
-	quicksight_listVpcconnectionsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID of the account that contains the VPC connections that you want to list.")
-	quicksight_listVpcconnectionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	quicksight_listVpcconnectionsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
-	quicksight_listVpcconnectionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_listVpcconnectionsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID of the account that contains the VPC connections that you want to list.")
+		quicksight_listVpcconnectionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		quicksight_listVpcconnectionsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
+		quicksight_listVpcconnectionsCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_listVpcconnectionsCmd)
 }

@@ -12,9 +12,11 @@ var athena_deleteNamedQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_deleteNamedQueryCmd).Standalone()
+	carapace.Gen(athena_deleteNamedQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_deleteNamedQueryCmd).Standalone()
 
-	athena_deleteNamedQueryCmd.Flags().String("named-query-id", "", "The unique ID of the query to delete.")
-	athena_deleteNamedQueryCmd.MarkFlagRequired("named-query-id")
+		athena_deleteNamedQueryCmd.Flags().String("named-query-id", "", "The unique ID of the query to delete.")
+		athena_deleteNamedQueryCmd.MarkFlagRequired("named-query-id")
+	})
 	athenaCmd.AddCommand(athena_deleteNamedQueryCmd)
 }

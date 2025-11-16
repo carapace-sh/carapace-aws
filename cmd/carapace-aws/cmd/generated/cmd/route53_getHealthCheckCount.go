@@ -12,7 +12,9 @@ var route53_getHealthCheckCountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getHealthCheckCountCmd).Standalone()
+	carapace.Gen(route53_getHealthCheckCountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getHealthCheckCountCmd).Standalone()
 
+	})
 	route53Cmd.AddCommand(route53_getHealthCheckCountCmd)
 }

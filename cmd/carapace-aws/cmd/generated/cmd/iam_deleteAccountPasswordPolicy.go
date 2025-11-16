@@ -12,7 +12,9 @@ var iam_deleteAccountPasswordPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteAccountPasswordPolicyCmd).Standalone()
+	carapace.Gen(iam_deleteAccountPasswordPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteAccountPasswordPolicyCmd).Standalone()
 
+	})
 	iamCmd.AddCommand(iam_deleteAccountPasswordPolicyCmd)
 }

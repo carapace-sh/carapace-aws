@@ -12,12 +12,14 @@ var codepipeline_startPipelineExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_startPipelineExecutionCmd).Standalone()
+	carapace.Gen(codepipeline_startPipelineExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_startPipelineExecutionCmd).Standalone()
 
-	codepipeline_startPipelineExecutionCmd.Flags().String("client-request-token", "", "The system-generated unique ID used to identify a unique execution request.")
-	codepipeline_startPipelineExecutionCmd.Flags().String("name", "", "The name of the pipeline to start.")
-	codepipeline_startPipelineExecutionCmd.Flags().String("source-revisions", "", "A list that allows you to specify, or override, the source revision for a pipeline execution that's being started.")
-	codepipeline_startPipelineExecutionCmd.Flags().String("variables", "", "A list that overrides pipeline variables for a pipeline execution that's being started.")
-	codepipeline_startPipelineExecutionCmd.MarkFlagRequired("name")
+		codepipeline_startPipelineExecutionCmd.Flags().String("client-request-token", "", "The system-generated unique ID used to identify a unique execution request.")
+		codepipeline_startPipelineExecutionCmd.Flags().String("name", "", "The name of the pipeline to start.")
+		codepipeline_startPipelineExecutionCmd.Flags().String("source-revisions", "", "A list that allows you to specify, or override, the source revision for a pipeline execution that's being started.")
+		codepipeline_startPipelineExecutionCmd.Flags().String("variables", "", "A list that overrides pipeline variables for a pipeline execution that's being started.")
+		codepipeline_startPipelineExecutionCmd.MarkFlagRequired("name")
+	})
 	codepipelineCmd.AddCommand(codepipeline_startPipelineExecutionCmd)
 }

@@ -12,9 +12,11 @@ var groundstation_deleteDataflowEndpointGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_deleteDataflowEndpointGroupCmd).Standalone()
+	carapace.Gen(groundstation_deleteDataflowEndpointGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_deleteDataflowEndpointGroupCmd).Standalone()
 
-	groundstation_deleteDataflowEndpointGroupCmd.Flags().String("dataflow-endpoint-group-id", "", "UUID of a dataflow endpoint group.")
-	groundstation_deleteDataflowEndpointGroupCmd.MarkFlagRequired("dataflow-endpoint-group-id")
+		groundstation_deleteDataflowEndpointGroupCmd.Flags().String("dataflow-endpoint-group-id", "", "UUID of a dataflow endpoint group.")
+		groundstation_deleteDataflowEndpointGroupCmd.MarkFlagRequired("dataflow-endpoint-group-id")
+	})
 	groundstationCmd.AddCommand(groundstation_deleteDataflowEndpointGroupCmd)
 }

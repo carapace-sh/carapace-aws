@@ -12,9 +12,11 @@ var pinpoint_deleteGcmChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteGcmChannelCmd).Standalone()
+	carapace.Gen(pinpoint_deleteGcmChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteGcmChannelCmd).Standalone()
 
-	pinpoint_deleteGcmChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_deleteGcmChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_deleteGcmChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_deleteGcmChannelCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteGcmChannelCmd)
 }

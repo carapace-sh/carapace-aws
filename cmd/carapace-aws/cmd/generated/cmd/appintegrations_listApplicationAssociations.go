@@ -12,11 +12,13 @@ var appintegrations_listApplicationAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_listApplicationAssociationsCmd).Standalone()
+	carapace.Gen(appintegrations_listApplicationAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_listApplicationAssociationsCmd).Standalone()
 
-	appintegrations_listApplicationAssociationsCmd.Flags().String("application-id", "", "A unique identifier for the Application.")
-	appintegrations_listApplicationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	appintegrations_listApplicationAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	appintegrations_listApplicationAssociationsCmd.MarkFlagRequired("application-id")
+		appintegrations_listApplicationAssociationsCmd.Flags().String("application-id", "", "A unique identifier for the Application.")
+		appintegrations_listApplicationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		appintegrations_listApplicationAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		appintegrations_listApplicationAssociationsCmd.MarkFlagRequired("application-id")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_listApplicationAssociationsCmd)
 }

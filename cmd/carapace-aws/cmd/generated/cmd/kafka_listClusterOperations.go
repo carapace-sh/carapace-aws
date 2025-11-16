@@ -12,11 +12,13 @@ var kafka_listClusterOperationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_listClusterOperationsCmd).Standalone()
+	carapace.Gen(kafka_listClusterOperationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_listClusterOperationsCmd).Standalone()
 
-	kafka_listClusterOperationsCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the cluster.")
-	kafka_listClusterOperationsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	kafka_listClusterOperationsCmd.Flags().String("next-token", "", "The paginated results marker.")
-	kafka_listClusterOperationsCmd.MarkFlagRequired("cluster-arn")
+		kafka_listClusterOperationsCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the cluster.")
+		kafka_listClusterOperationsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		kafka_listClusterOperationsCmd.Flags().String("next-token", "", "The paginated results marker.")
+		kafka_listClusterOperationsCmd.MarkFlagRequired("cluster-arn")
+	})
 	kafkaCmd.AddCommand(kafka_listClusterOperationsCmd)
 }

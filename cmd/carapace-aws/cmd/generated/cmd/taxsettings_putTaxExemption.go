@@ -12,15 +12,17 @@ var taxsettings_putTaxExemptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_putTaxExemptionCmd).Standalone()
+	carapace.Gen(taxsettings_putTaxExemptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_putTaxExemptionCmd).Standalone()
 
-	taxsettings_putTaxExemptionCmd.Flags().String("account-ids", "", "The list of unique account identifiers.")
-	taxsettings_putTaxExemptionCmd.Flags().String("authority", "", "")
-	taxsettings_putTaxExemptionCmd.Flags().String("exemption-certificate", "", "")
-	taxsettings_putTaxExemptionCmd.Flags().String("exemption-type", "", "The exemption type.")
-	taxsettings_putTaxExemptionCmd.MarkFlagRequired("account-ids")
-	taxsettings_putTaxExemptionCmd.MarkFlagRequired("authority")
-	taxsettings_putTaxExemptionCmd.MarkFlagRequired("exemption-certificate")
-	taxsettings_putTaxExemptionCmd.MarkFlagRequired("exemption-type")
+		taxsettings_putTaxExemptionCmd.Flags().String("account-ids", "", "The list of unique account identifiers.")
+		taxsettings_putTaxExemptionCmd.Flags().String("authority", "", "")
+		taxsettings_putTaxExemptionCmd.Flags().String("exemption-certificate", "", "")
+		taxsettings_putTaxExemptionCmd.Flags().String("exemption-type", "", "The exemption type.")
+		taxsettings_putTaxExemptionCmd.MarkFlagRequired("account-ids")
+		taxsettings_putTaxExemptionCmd.MarkFlagRequired("authority")
+		taxsettings_putTaxExemptionCmd.MarkFlagRequired("exemption-certificate")
+		taxsettings_putTaxExemptionCmd.MarkFlagRequired("exemption-type")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_putTaxExemptionCmd)
 }

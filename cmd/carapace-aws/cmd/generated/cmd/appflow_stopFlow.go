@@ -12,9 +12,11 @@ var appflow_stopFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appflow_stopFlowCmd).Standalone()
+	carapace.Gen(appflow_stopFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appflow_stopFlowCmd).Standalone()
 
-	appflow_stopFlowCmd.Flags().String("flow-name", "", "The specified name of the flow.")
-	appflow_stopFlowCmd.MarkFlagRequired("flow-name")
+		appflow_stopFlowCmd.Flags().String("flow-name", "", "The specified name of the flow.")
+		appflow_stopFlowCmd.MarkFlagRequired("flow-name")
+	})
 	appflowCmd.AddCommand(appflow_stopFlowCmd)
 }

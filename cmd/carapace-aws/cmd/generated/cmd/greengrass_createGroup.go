@@ -12,12 +12,14 @@ var greengrass_createGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createGroupCmd).Standalone()
+	carapace.Gen(greengrass_createGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createGroupCmd).Standalone()
 
-	greengrass_createGroupCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createGroupCmd.Flags().String("initial-version", "", "Information about the initial version of the group.")
-	greengrass_createGroupCmd.Flags().String("name", "", "The name of the group.")
-	greengrass_createGroupCmd.Flags().String("tags", "", "Tag(s) to add to the new resource.")
-	greengrass_createGroupCmd.MarkFlagRequired("name")
+		greengrass_createGroupCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createGroupCmd.Flags().String("initial-version", "", "Information about the initial version of the group.")
+		greengrass_createGroupCmd.Flags().String("name", "", "The name of the group.")
+		greengrass_createGroupCmd.Flags().String("tags", "", "Tag(s) to add to the new resource.")
+		greengrass_createGroupCmd.MarkFlagRequired("name")
+	})
 	greengrassCmd.AddCommand(greengrass_createGroupCmd)
 }

@@ -12,9 +12,11 @@ var iot_describeJobTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeJobTemplateCmd).Standalone()
+	carapace.Gen(iot_describeJobTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeJobTemplateCmd).Standalone()
 
-	iot_describeJobTemplateCmd.Flags().String("job-template-id", "", "The unique identifier of the job template.")
-	iot_describeJobTemplateCmd.MarkFlagRequired("job-template-id")
+		iot_describeJobTemplateCmd.Flags().String("job-template-id", "", "The unique identifier of the job template.")
+		iot_describeJobTemplateCmd.MarkFlagRequired("job-template-id")
+	})
 	iotCmd.AddCommand(iot_describeJobTemplateCmd)
 }

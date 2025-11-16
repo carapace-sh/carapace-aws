@@ -12,9 +12,11 @@ var licenseManagerLinuxSubscriptions_deregisterSubscriptionProviderCmd = &cobra.
 }
 
 func init() {
-	carapace.Gen(licenseManagerLinuxSubscriptions_deregisterSubscriptionProviderCmd).Standalone()
+	carapace.Gen(licenseManagerLinuxSubscriptions_deregisterSubscriptionProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerLinuxSubscriptions_deregisterSubscriptionProviderCmd).Standalone()
 
-	licenseManagerLinuxSubscriptions_deregisterSubscriptionProviderCmd.Flags().String("subscription-provider-arn", "", "The Amazon Resource Name (ARN) of the subscription provider resource to deregister.")
-	licenseManagerLinuxSubscriptions_deregisterSubscriptionProviderCmd.MarkFlagRequired("subscription-provider-arn")
+		licenseManagerLinuxSubscriptions_deregisterSubscriptionProviderCmd.Flags().String("subscription-provider-arn", "", "The Amazon Resource Name (ARN) of the subscription provider resource to deregister.")
+		licenseManagerLinuxSubscriptions_deregisterSubscriptionProviderCmd.MarkFlagRequired("subscription-provider-arn")
+	})
 	licenseManagerLinuxSubscriptionsCmd.AddCommand(licenseManagerLinuxSubscriptions_deregisterSubscriptionProviderCmd)
 }

@@ -12,9 +12,11 @@ var finspace_getKxEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_getKxEnvironmentCmd).Standalone()
+	carapace.Gen(finspace_getKxEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_getKxEnvironmentCmd).Standalone()
 
-	finspace_getKxEnvironmentCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_getKxEnvironmentCmd.MarkFlagRequired("environment-id")
+		finspace_getKxEnvironmentCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_getKxEnvironmentCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_getKxEnvironmentCmd)
 }

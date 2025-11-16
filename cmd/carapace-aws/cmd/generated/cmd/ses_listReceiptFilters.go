@@ -12,7 +12,9 @@ var ses_listReceiptFiltersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_listReceiptFiltersCmd).Standalone()
+	carapace.Gen(ses_listReceiptFiltersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_listReceiptFiltersCmd).Standalone()
 
+	})
 	sesCmd.AddCommand(ses_listReceiptFiltersCmd)
 }

@@ -12,11 +12,13 @@ var inspector2_listCodeSecurityScanConfigurationAssociationsCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(inspector2_listCodeSecurityScanConfigurationAssociationsCmd).Standalone()
+	carapace.Gen(inspector2_listCodeSecurityScanConfigurationAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_listCodeSecurityScanConfigurationAssociationsCmd).Standalone()
 
-	inspector2_listCodeSecurityScanConfigurationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	inspector2_listCodeSecurityScanConfigurationAssociationsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
-	inspector2_listCodeSecurityScanConfigurationAssociationsCmd.Flags().String("scan-configuration-arn", "", "The Amazon Resource Name (ARN) of the scan configuration to list associations for.")
-	inspector2_listCodeSecurityScanConfigurationAssociationsCmd.MarkFlagRequired("scan-configuration-arn")
+		inspector2_listCodeSecurityScanConfigurationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		inspector2_listCodeSecurityScanConfigurationAssociationsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
+		inspector2_listCodeSecurityScanConfigurationAssociationsCmd.Flags().String("scan-configuration-arn", "", "The Amazon Resource Name (ARN) of the scan configuration to list associations for.")
+		inspector2_listCodeSecurityScanConfigurationAssociationsCmd.MarkFlagRequired("scan-configuration-arn")
+	})
 	inspector2Cmd.AddCommand(inspector2_listCodeSecurityScanConfigurationAssociationsCmd)
 }

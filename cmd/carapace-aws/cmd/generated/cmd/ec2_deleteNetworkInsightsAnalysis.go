@@ -12,12 +12,14 @@ var ec2_deleteNetworkInsightsAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteNetworkInsightsAnalysisCmd).Standalone()
+	carapace.Gen(ec2_deleteNetworkInsightsAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteNetworkInsightsAnalysisCmd).Standalone()
 
-	ec2_deleteNetworkInsightsAnalysisCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteNetworkInsightsAnalysisCmd.Flags().String("network-insights-analysis-id", "", "The ID of the network insights analysis.")
-	ec2_deleteNetworkInsightsAnalysisCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteNetworkInsightsAnalysisCmd.MarkFlagRequired("network-insights-analysis-id")
-	ec2_deleteNetworkInsightsAnalysisCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteNetworkInsightsAnalysisCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteNetworkInsightsAnalysisCmd.Flags().String("network-insights-analysis-id", "", "The ID of the network insights analysis.")
+		ec2_deleteNetworkInsightsAnalysisCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteNetworkInsightsAnalysisCmd.MarkFlagRequired("network-insights-analysis-id")
+		ec2_deleteNetworkInsightsAnalysisCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_deleteNetworkInsightsAnalysisCmd)
 }

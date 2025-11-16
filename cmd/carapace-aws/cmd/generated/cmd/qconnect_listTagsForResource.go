@@ -12,9 +12,11 @@ var qconnect_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_listTagsForResourceCmd).Standalone()
+	carapace.Gen(qconnect_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_listTagsForResourceCmd).Standalone()
 
-	qconnect_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	qconnect_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		qconnect_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		qconnect_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	qconnectCmd.AddCommand(qconnect_listTagsForResourceCmd)
 }

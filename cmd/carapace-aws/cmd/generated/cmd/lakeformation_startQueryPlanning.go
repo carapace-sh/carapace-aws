@@ -12,11 +12,13 @@ var lakeformation_startQueryPlanningCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_startQueryPlanningCmd).Standalone()
+	carapace.Gen(lakeformation_startQueryPlanningCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_startQueryPlanningCmd).Standalone()
 
-	lakeformation_startQueryPlanningCmd.Flags().String("query-planning-context", "", "A structure containing information about the query plan.")
-	lakeformation_startQueryPlanningCmd.Flags().String("query-string", "", "A PartiQL query statement used as an input to the planner service.")
-	lakeformation_startQueryPlanningCmd.MarkFlagRequired("query-planning-context")
-	lakeformation_startQueryPlanningCmd.MarkFlagRequired("query-string")
+		lakeformation_startQueryPlanningCmd.Flags().String("query-planning-context", "", "A structure containing information about the query plan.")
+		lakeformation_startQueryPlanningCmd.Flags().String("query-string", "", "A PartiQL query statement used as an input to the planner service.")
+		lakeformation_startQueryPlanningCmd.MarkFlagRequired("query-planning-context")
+		lakeformation_startQueryPlanningCmd.MarkFlagRequired("query-string")
+	})
 	lakeformationCmd.AddCommand(lakeformation_startQueryPlanningCmd)
 }

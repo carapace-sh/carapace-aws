@@ -12,14 +12,16 @@ var migrationhuborchestrator_createTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_createTemplateCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_createTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_createTemplateCmd).Standalone()
 
-	migrationhuborchestrator_createTemplateCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	migrationhuborchestrator_createTemplateCmd.Flags().String("tags", "", "The tags to add to the migration workflow template.")
-	migrationhuborchestrator_createTemplateCmd.Flags().String("template-description", "", "A description of the migration workflow template.")
-	migrationhuborchestrator_createTemplateCmd.Flags().String("template-name", "", "The name of the migration workflow template.")
-	migrationhuborchestrator_createTemplateCmd.Flags().String("template-source", "", "The source of the migration workflow template.")
-	migrationhuborchestrator_createTemplateCmd.MarkFlagRequired("template-name")
-	migrationhuborchestrator_createTemplateCmd.MarkFlagRequired("template-source")
+		migrationhuborchestrator_createTemplateCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		migrationhuborchestrator_createTemplateCmd.Flags().String("tags", "", "The tags to add to the migration workflow template.")
+		migrationhuborchestrator_createTemplateCmd.Flags().String("template-description", "", "A description of the migration workflow template.")
+		migrationhuborchestrator_createTemplateCmd.Flags().String("template-name", "", "The name of the migration workflow template.")
+		migrationhuborchestrator_createTemplateCmd.Flags().String("template-source", "", "The source of the migration workflow template.")
+		migrationhuborchestrator_createTemplateCmd.MarkFlagRequired("template-name")
+		migrationhuborchestrator_createTemplateCmd.MarkFlagRequired("template-source")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_createTemplateCmd)
 }

@@ -12,7 +12,9 @@ var fms_disassociateAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_disassociateAdminAccountCmd).Standalone()
+	carapace.Gen(fms_disassociateAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_disassociateAdminAccountCmd).Standalone()
 
+	})
 	fmsCmd.AddCommand(fms_disassociateAdminAccountCmd)
 }

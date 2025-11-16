@@ -12,11 +12,13 @@ var mediatailor_deleteVodSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_deleteVodSourceCmd).Standalone()
+	carapace.Gen(mediatailor_deleteVodSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_deleteVodSourceCmd).Standalone()
 
-	mediatailor_deleteVodSourceCmd.Flags().String("source-location-name", "", "The name of the source location associated with this VOD Source.")
-	mediatailor_deleteVodSourceCmd.Flags().String("vod-source-name", "", "The name of the VOD source.")
-	mediatailor_deleteVodSourceCmd.MarkFlagRequired("source-location-name")
-	mediatailor_deleteVodSourceCmd.MarkFlagRequired("vod-source-name")
+		mediatailor_deleteVodSourceCmd.Flags().String("source-location-name", "", "The name of the source location associated with this VOD Source.")
+		mediatailor_deleteVodSourceCmd.Flags().String("vod-source-name", "", "The name of the VOD source.")
+		mediatailor_deleteVodSourceCmd.MarkFlagRequired("source-location-name")
+		mediatailor_deleteVodSourceCmd.MarkFlagRequired("vod-source-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_deleteVodSourceCmd)
 }

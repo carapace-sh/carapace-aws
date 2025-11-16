@@ -12,7 +12,9 @@ var macie2_disassociateFromAdministratorAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_disassociateFromAdministratorAccountCmd).Standalone()
+	carapace.Gen(macie2_disassociateFromAdministratorAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_disassociateFromAdministratorAccountCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_disassociateFromAdministratorAccountCmd)
 }

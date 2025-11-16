@@ -12,9 +12,11 @@ var redshift_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(redshift_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteResourcePolicyCmd).Standalone()
 
-	redshift_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource of which its resource policy is deleted.")
-	redshift_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		redshift_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource of which its resource policy is deleted.")
+		redshift_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	redshiftCmd.AddCommand(redshift_deleteResourcePolicyCmd)
 }

@@ -12,9 +12,11 @@ var taxsettings_deleteSupplementalTaxRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_deleteSupplementalTaxRegistrationCmd).Standalone()
+	carapace.Gen(taxsettings_deleteSupplementalTaxRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_deleteSupplementalTaxRegistrationCmd).Standalone()
 
-	taxsettings_deleteSupplementalTaxRegistrationCmd.Flags().String("authority-id", "", "The unique authority Id for the supplemental TRN information that needs to be deleted.")
-	taxsettings_deleteSupplementalTaxRegistrationCmd.MarkFlagRequired("authority-id")
+		taxsettings_deleteSupplementalTaxRegistrationCmd.Flags().String("authority-id", "", "The unique authority Id for the supplemental TRN information that needs to be deleted.")
+		taxsettings_deleteSupplementalTaxRegistrationCmd.MarkFlagRequired("authority-id")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_deleteSupplementalTaxRegistrationCmd)
 }

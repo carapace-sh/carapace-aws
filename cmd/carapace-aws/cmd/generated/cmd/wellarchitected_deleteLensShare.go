@@ -12,13 +12,15 @@ var wellarchitected_deleteLensShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_deleteLensShareCmd).Standalone()
+	carapace.Gen(wellarchitected_deleteLensShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_deleteLensShareCmd).Standalone()
 
-	wellarchitected_deleteLensShareCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_deleteLensShareCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_deleteLensShareCmd.Flags().String("share-id", "", "")
-	wellarchitected_deleteLensShareCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_deleteLensShareCmd.MarkFlagRequired("lens-alias")
-	wellarchitected_deleteLensShareCmd.MarkFlagRequired("share-id")
+		wellarchitected_deleteLensShareCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_deleteLensShareCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_deleteLensShareCmd.Flags().String("share-id", "", "")
+		wellarchitected_deleteLensShareCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_deleteLensShareCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_deleteLensShareCmd.MarkFlagRequired("share-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_deleteLensShareCmd)
 }

@@ -12,10 +12,12 @@ var iotsitewise_describeComputationModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeComputationModelCmd).Standalone()
+	carapace.Gen(iotsitewise_describeComputationModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeComputationModelCmd).Standalone()
 
-	iotsitewise_describeComputationModelCmd.Flags().String("computation-model-id", "", "The ID of the computation model.")
-	iotsitewise_describeComputationModelCmd.Flags().String("computation-model-version", "", "The version of the computation model.")
-	iotsitewise_describeComputationModelCmd.MarkFlagRequired("computation-model-id")
+		iotsitewise_describeComputationModelCmd.Flags().String("computation-model-id", "", "The ID of the computation model.")
+		iotsitewise_describeComputationModelCmd.Flags().String("computation-model-version", "", "The version of the computation model.")
+		iotsitewise_describeComputationModelCmd.MarkFlagRequired("computation-model-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeComputationModelCmd)
 }

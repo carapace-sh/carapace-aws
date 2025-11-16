@@ -12,9 +12,11 @@ var devopsGuru_deleteInsightCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_deleteInsightCmd).Standalone()
+	carapace.Gen(devopsGuru_deleteInsightCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_deleteInsightCmd).Standalone()
 
-	devopsGuru_deleteInsightCmd.Flags().String("id", "", "The ID of the insight.")
-	devopsGuru_deleteInsightCmd.MarkFlagRequired("id")
+		devopsGuru_deleteInsightCmd.Flags().String("id", "", "The ID of the insight.")
+		devopsGuru_deleteInsightCmd.MarkFlagRequired("id")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_deleteInsightCmd)
 }

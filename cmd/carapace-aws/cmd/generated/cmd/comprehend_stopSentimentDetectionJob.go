@@ -12,9 +12,11 @@ var comprehend_stopSentimentDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_stopSentimentDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_stopSentimentDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_stopSentimentDetectionJobCmd).Standalone()
 
-	comprehend_stopSentimentDetectionJobCmd.Flags().String("job-id", "", "The identifier of the sentiment detection job to stop.")
-	comprehend_stopSentimentDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_stopSentimentDetectionJobCmd.Flags().String("job-id", "", "The identifier of the sentiment detection job to stop.")
+		comprehend_stopSentimentDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_stopSentimentDetectionJobCmd)
 }

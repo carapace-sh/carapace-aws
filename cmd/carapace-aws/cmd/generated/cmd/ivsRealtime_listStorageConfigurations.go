@@ -12,9 +12,11 @@ var ivsRealtime_listStorageConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_listStorageConfigurationsCmd).Standalone()
+	carapace.Gen(ivsRealtime_listStorageConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_listStorageConfigurationsCmd).Standalone()
 
-	ivsRealtime_listStorageConfigurationsCmd.Flags().String("max-results", "", "Maximum number of storage configurations to return.")
-	ivsRealtime_listStorageConfigurationsCmd.Flags().String("next-token", "", "The first storage configuration to retrieve.")
+		ivsRealtime_listStorageConfigurationsCmd.Flags().String("max-results", "", "Maximum number of storage configurations to return.")
+		ivsRealtime_listStorageConfigurationsCmd.Flags().String("next-token", "", "The first storage configuration to retrieve.")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_listStorageConfigurationsCmd)
 }

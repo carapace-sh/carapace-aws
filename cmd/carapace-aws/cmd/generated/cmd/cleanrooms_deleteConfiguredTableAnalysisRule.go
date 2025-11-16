@@ -12,11 +12,13 @@ var cleanrooms_deleteConfiguredTableAnalysisRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_deleteConfiguredTableAnalysisRuleCmd).Standalone()
+	carapace.Gen(cleanrooms_deleteConfiguredTableAnalysisRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_deleteConfiguredTableAnalysisRuleCmd).Standalone()
 
-	cleanrooms_deleteConfiguredTableAnalysisRuleCmd.Flags().String("analysis-rule-type", "", "The analysis rule type to be deleted.")
-	cleanrooms_deleteConfiguredTableAnalysisRuleCmd.Flags().String("configured-table-identifier", "", "The unique identifier for the configured table that the analysis rule applies to.")
-	cleanrooms_deleteConfiguredTableAnalysisRuleCmd.MarkFlagRequired("analysis-rule-type")
-	cleanrooms_deleteConfiguredTableAnalysisRuleCmd.MarkFlagRequired("configured-table-identifier")
+		cleanrooms_deleteConfiguredTableAnalysisRuleCmd.Flags().String("analysis-rule-type", "", "The analysis rule type to be deleted.")
+		cleanrooms_deleteConfiguredTableAnalysisRuleCmd.Flags().String("configured-table-identifier", "", "The unique identifier for the configured table that the analysis rule applies to.")
+		cleanrooms_deleteConfiguredTableAnalysisRuleCmd.MarkFlagRequired("analysis-rule-type")
+		cleanrooms_deleteConfiguredTableAnalysisRuleCmd.MarkFlagRequired("configured-table-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_deleteConfiguredTableAnalysisRuleCmd)
 }

@@ -12,11 +12,13 @@ var cloudsearch_deleteSuggesterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_deleteSuggesterCmd).Standalone()
+	carapace.Gen(cloudsearch_deleteSuggesterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_deleteSuggesterCmd).Standalone()
 
-	cloudsearch_deleteSuggesterCmd.Flags().String("domain-name", "", "")
-	cloudsearch_deleteSuggesterCmd.Flags().String("suggester-name", "", "Specifies the name of the suggester you want to delete.")
-	cloudsearch_deleteSuggesterCmd.MarkFlagRequired("domain-name")
-	cloudsearch_deleteSuggesterCmd.MarkFlagRequired("suggester-name")
+		cloudsearch_deleteSuggesterCmd.Flags().String("domain-name", "", "")
+		cloudsearch_deleteSuggesterCmd.Flags().String("suggester-name", "", "Specifies the name of the suggester you want to delete.")
+		cloudsearch_deleteSuggesterCmd.MarkFlagRequired("domain-name")
+		cloudsearch_deleteSuggesterCmd.MarkFlagRequired("suggester-name")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_deleteSuggesterCmd)
 }

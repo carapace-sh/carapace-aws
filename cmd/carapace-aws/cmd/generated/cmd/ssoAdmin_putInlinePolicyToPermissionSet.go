@@ -12,13 +12,15 @@ var ssoAdmin_putInlinePolicyToPermissionSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_putInlinePolicyToPermissionSetCmd).Standalone()
+	carapace.Gen(ssoAdmin_putInlinePolicyToPermissionSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_putInlinePolicyToPermissionSetCmd).Standalone()
 
-	ssoAdmin_putInlinePolicyToPermissionSetCmd.Flags().String("inline-policy", "", "The inline policy to attach to a [PermissionSet]().")
-	ssoAdmin_putInlinePolicyToPermissionSetCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_putInlinePolicyToPermissionSetCmd.Flags().String("permission-set-arn", "", "The ARN of the permission set.")
-	ssoAdmin_putInlinePolicyToPermissionSetCmd.MarkFlagRequired("inline-policy")
-	ssoAdmin_putInlinePolicyToPermissionSetCmd.MarkFlagRequired("instance-arn")
-	ssoAdmin_putInlinePolicyToPermissionSetCmd.MarkFlagRequired("permission-set-arn")
+		ssoAdmin_putInlinePolicyToPermissionSetCmd.Flags().String("inline-policy", "", "The inline policy to attach to a [PermissionSet]().")
+		ssoAdmin_putInlinePolicyToPermissionSetCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_putInlinePolicyToPermissionSetCmd.Flags().String("permission-set-arn", "", "The ARN of the permission set.")
+		ssoAdmin_putInlinePolicyToPermissionSetCmd.MarkFlagRequired("inline-policy")
+		ssoAdmin_putInlinePolicyToPermissionSetCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_putInlinePolicyToPermissionSetCmd.MarkFlagRequired("permission-set-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_putInlinePolicyToPermissionSetCmd)
 }

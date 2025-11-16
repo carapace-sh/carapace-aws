@@ -12,9 +12,11 @@ var cognitoIdentity_deleteIdentityPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdentity_deleteIdentityPoolCmd).Standalone()
+	carapace.Gen(cognitoIdentity_deleteIdentityPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdentity_deleteIdentityPoolCmd).Standalone()
 
-	cognitoIdentity_deleteIdentityPoolCmd.Flags().String("identity-pool-id", "", "An identity pool ID in the format REGION:GUID.")
-	cognitoIdentity_deleteIdentityPoolCmd.MarkFlagRequired("identity-pool-id")
+		cognitoIdentity_deleteIdentityPoolCmd.Flags().String("identity-pool-id", "", "An identity pool ID in the format REGION:GUID.")
+		cognitoIdentity_deleteIdentityPoolCmd.MarkFlagRequired("identity-pool-id")
+	})
 	cognitoIdentityCmd.AddCommand(cognitoIdentity_deleteIdentityPoolCmd)
 }

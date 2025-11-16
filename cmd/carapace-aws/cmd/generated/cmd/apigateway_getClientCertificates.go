@@ -12,9 +12,11 @@ var apigateway_getClientCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getClientCertificatesCmd).Standalone()
+	carapace.Gen(apigateway_getClientCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getClientCertificatesCmd).Standalone()
 
-	apigateway_getClientCertificatesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getClientCertificatesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getClientCertificatesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getClientCertificatesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+	})
 	apigatewayCmd.AddCommand(apigateway_getClientCertificatesCmd)
 }

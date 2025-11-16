@@ -12,9 +12,11 @@ var licenseManagerLinuxSubscriptions_getRegisteredSubscriptionProviderCmd = &cob
 }
 
 func init() {
-	carapace.Gen(licenseManagerLinuxSubscriptions_getRegisteredSubscriptionProviderCmd).Standalone()
+	carapace.Gen(licenseManagerLinuxSubscriptions_getRegisteredSubscriptionProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerLinuxSubscriptions_getRegisteredSubscriptionProviderCmd).Standalone()
 
-	licenseManagerLinuxSubscriptions_getRegisteredSubscriptionProviderCmd.Flags().String("subscription-provider-arn", "", "The Amazon Resource Name (ARN) of the BYOL registration resource to get details for.")
-	licenseManagerLinuxSubscriptions_getRegisteredSubscriptionProviderCmd.MarkFlagRequired("subscription-provider-arn")
+		licenseManagerLinuxSubscriptions_getRegisteredSubscriptionProviderCmd.Flags().String("subscription-provider-arn", "", "The Amazon Resource Name (ARN) of the BYOL registration resource to get details for.")
+		licenseManagerLinuxSubscriptions_getRegisteredSubscriptionProviderCmd.MarkFlagRequired("subscription-provider-arn")
+	})
 	licenseManagerLinuxSubscriptionsCmd.AddCommand(licenseManagerLinuxSubscriptions_getRegisteredSubscriptionProviderCmd)
 }

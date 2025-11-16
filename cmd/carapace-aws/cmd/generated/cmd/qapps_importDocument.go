@@ -12,20 +12,22 @@ var qapps_importDocumentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_importDocumentCmd).Standalone()
+	carapace.Gen(qapps_importDocumentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_importDocumentCmd).Standalone()
 
-	qapps_importDocumentCmd.Flags().String("app-id", "", "The unique identifier of the Q App the file is associated with.")
-	qapps_importDocumentCmd.Flags().String("card-id", "", "The unique identifier of the card the file is associated with.")
-	qapps_importDocumentCmd.Flags().String("file-contents-base64", "", "The base64-encoded contents of the file to upload.")
-	qapps_importDocumentCmd.Flags().String("file-name", "", "The name of the file being uploaded.")
-	qapps_importDocumentCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_importDocumentCmd.Flags().String("scope", "", "Whether the file is associated with a Q App definition or a specific Q App session.")
-	qapps_importDocumentCmd.Flags().String("session-id", "", "The unique identifier of the Q App session the file is associated with, if applicable.")
-	qapps_importDocumentCmd.MarkFlagRequired("app-id")
-	qapps_importDocumentCmd.MarkFlagRequired("card-id")
-	qapps_importDocumentCmd.MarkFlagRequired("file-contents-base64")
-	qapps_importDocumentCmd.MarkFlagRequired("file-name")
-	qapps_importDocumentCmd.MarkFlagRequired("instance-id")
-	qapps_importDocumentCmd.MarkFlagRequired("scope")
+		qapps_importDocumentCmd.Flags().String("app-id", "", "The unique identifier of the Q App the file is associated with.")
+		qapps_importDocumentCmd.Flags().String("card-id", "", "The unique identifier of the card the file is associated with.")
+		qapps_importDocumentCmd.Flags().String("file-contents-base64", "", "The base64-encoded contents of the file to upload.")
+		qapps_importDocumentCmd.Flags().String("file-name", "", "The name of the file being uploaded.")
+		qapps_importDocumentCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_importDocumentCmd.Flags().String("scope", "", "Whether the file is associated with a Q App definition or a specific Q App session.")
+		qapps_importDocumentCmd.Flags().String("session-id", "", "The unique identifier of the Q App session the file is associated with, if applicable.")
+		qapps_importDocumentCmd.MarkFlagRequired("app-id")
+		qapps_importDocumentCmd.MarkFlagRequired("card-id")
+		qapps_importDocumentCmd.MarkFlagRequired("file-contents-base64")
+		qapps_importDocumentCmd.MarkFlagRequired("file-name")
+		qapps_importDocumentCmd.MarkFlagRequired("instance-id")
+		qapps_importDocumentCmd.MarkFlagRequired("scope")
+	})
 	qappsCmd.AddCommand(qapps_importDocumentCmd)
 }

@@ -12,13 +12,15 @@ var emr_putAutoScalingPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_putAutoScalingPolicyCmd).Standalone()
+	carapace.Gen(emr_putAutoScalingPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_putAutoScalingPolicyCmd).Standalone()
 
-	emr_putAutoScalingPolicyCmd.Flags().String("auto-scaling-policy", "", "Specifies the definition of the automatic scaling policy.")
-	emr_putAutoScalingPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of a cluster.")
-	emr_putAutoScalingPolicyCmd.Flags().String("instance-group-id", "", "Specifies the ID of the instance group to which the automatic scaling policy is applied.")
-	emr_putAutoScalingPolicyCmd.MarkFlagRequired("auto-scaling-policy")
-	emr_putAutoScalingPolicyCmd.MarkFlagRequired("cluster-id")
-	emr_putAutoScalingPolicyCmd.MarkFlagRequired("instance-group-id")
+		emr_putAutoScalingPolicyCmd.Flags().String("auto-scaling-policy", "", "Specifies the definition of the automatic scaling policy.")
+		emr_putAutoScalingPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of a cluster.")
+		emr_putAutoScalingPolicyCmd.Flags().String("instance-group-id", "", "Specifies the ID of the instance group to which the automatic scaling policy is applied.")
+		emr_putAutoScalingPolicyCmd.MarkFlagRequired("auto-scaling-policy")
+		emr_putAutoScalingPolicyCmd.MarkFlagRequired("cluster-id")
+		emr_putAutoScalingPolicyCmd.MarkFlagRequired("instance-group-id")
+	})
 	emrCmd.AddCommand(emr_putAutoScalingPolicyCmd)
 }

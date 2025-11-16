@@ -12,9 +12,11 @@ var config_deleteRetentionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deleteRetentionConfigurationCmd).Standalone()
+	carapace.Gen(config_deleteRetentionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deleteRetentionConfigurationCmd).Standalone()
 
-	config_deleteRetentionConfigurationCmd.Flags().String("retention-configuration-name", "", "The name of the retention configuration to delete.")
-	config_deleteRetentionConfigurationCmd.MarkFlagRequired("retention-configuration-name")
+		config_deleteRetentionConfigurationCmd.Flags().String("retention-configuration-name", "", "The name of the retention configuration to delete.")
+		config_deleteRetentionConfigurationCmd.MarkFlagRequired("retention-configuration-name")
+	})
 	configCmd.AddCommand(config_deleteRetentionConfigurationCmd)
 }

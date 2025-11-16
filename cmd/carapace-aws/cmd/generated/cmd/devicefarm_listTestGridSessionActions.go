@@ -12,11 +12,13 @@ var devicefarm_listTestGridSessionActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_listTestGridSessionActionsCmd).Standalone()
+	carapace.Gen(devicefarm_listTestGridSessionActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_listTestGridSessionActionsCmd).Standalone()
 
-	devicefarm_listTestGridSessionActionsCmd.Flags().String("max-result", "", "The maximum number of sessions to return per response.")
-	devicefarm_listTestGridSessionActionsCmd.Flags().String("next-token", "", "Pagination token.")
-	devicefarm_listTestGridSessionActionsCmd.Flags().String("session-arn", "", "The ARN of the session to retrieve.")
-	devicefarm_listTestGridSessionActionsCmd.MarkFlagRequired("session-arn")
+		devicefarm_listTestGridSessionActionsCmd.Flags().String("max-result", "", "The maximum number of sessions to return per response.")
+		devicefarm_listTestGridSessionActionsCmd.Flags().String("next-token", "", "Pagination token.")
+		devicefarm_listTestGridSessionActionsCmd.Flags().String("session-arn", "", "The ARN of the session to retrieve.")
+		devicefarm_listTestGridSessionActionsCmd.MarkFlagRequired("session-arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_listTestGridSessionActionsCmd)
 }

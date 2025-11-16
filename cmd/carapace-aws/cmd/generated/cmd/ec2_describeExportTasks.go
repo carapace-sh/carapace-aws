@@ -12,9 +12,11 @@ var ec2_describeExportTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeExportTasksCmd).Standalone()
+	carapace.Gen(ec2_describeExportTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeExportTasksCmd).Standalone()
 
-	ec2_describeExportTasksCmd.Flags().String("export-task-ids", "", "The export task IDs.")
-	ec2_describeExportTasksCmd.Flags().String("filters", "", "the filters for the export tasks.")
+		ec2_describeExportTasksCmd.Flags().String("export-task-ids", "", "The export task IDs.")
+		ec2_describeExportTasksCmd.Flags().String("filters", "", "the filters for the export tasks.")
+	})
 	ec2Cmd.AddCommand(ec2_describeExportTasksCmd)
 }

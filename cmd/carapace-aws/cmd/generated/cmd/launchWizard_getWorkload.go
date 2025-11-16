@@ -12,9 +12,11 @@ var launchWizard_getWorkloadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(launchWizard_getWorkloadCmd).Standalone()
+	carapace.Gen(launchWizard_getWorkloadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(launchWizard_getWorkloadCmd).Standalone()
 
-	launchWizard_getWorkloadCmd.Flags().String("workload-name", "", "The name of the workload.")
-	launchWizard_getWorkloadCmd.MarkFlagRequired("workload-name")
+		launchWizard_getWorkloadCmd.Flags().String("workload-name", "", "The name of the workload.")
+		launchWizard_getWorkloadCmd.MarkFlagRequired("workload-name")
+	})
 	launchWizardCmd.AddCommand(launchWizard_getWorkloadCmd)
 }

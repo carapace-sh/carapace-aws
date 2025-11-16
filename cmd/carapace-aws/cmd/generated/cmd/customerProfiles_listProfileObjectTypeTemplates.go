@@ -12,9 +12,11 @@ var customerProfiles_listProfileObjectTypeTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_listProfileObjectTypeTemplatesCmd).Standalone()
+	carapace.Gen(customerProfiles_listProfileObjectTypeTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_listProfileObjectTypeTemplatesCmd).Standalone()
 
-	customerProfiles_listProfileObjectTypeTemplatesCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	customerProfiles_listProfileObjectTypeTemplatesCmd.Flags().String("next-token", "", "The pagination token from the previous ListObjectTypeTemplates API call.")
+		customerProfiles_listProfileObjectTypeTemplatesCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		customerProfiles_listProfileObjectTypeTemplatesCmd.Flags().String("next-token", "", "The pagination token from the previous ListObjectTypeTemplates API call.")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_listProfileObjectTypeTemplatesCmd)
 }

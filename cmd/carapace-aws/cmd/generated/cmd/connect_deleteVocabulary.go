@@ -12,11 +12,13 @@ var connect_deleteVocabularyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteVocabularyCmd).Standalone()
+	carapace.Gen(connect_deleteVocabularyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteVocabularyCmd).Standalone()
 
-	connect_deleteVocabularyCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteVocabularyCmd.Flags().String("vocabulary-id", "", "The identifier of the custom vocabulary.")
-	connect_deleteVocabularyCmd.MarkFlagRequired("instance-id")
-	connect_deleteVocabularyCmd.MarkFlagRequired("vocabulary-id")
+		connect_deleteVocabularyCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteVocabularyCmd.Flags().String("vocabulary-id", "", "The identifier of the custom vocabulary.")
+		connect_deleteVocabularyCmd.MarkFlagRequired("instance-id")
+		connect_deleteVocabularyCmd.MarkFlagRequired("vocabulary-id")
+	})
 	connectCmd.AddCommand(connect_deleteVocabularyCmd)
 }

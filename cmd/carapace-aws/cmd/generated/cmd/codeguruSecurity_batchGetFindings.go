@@ -12,9 +12,11 @@ var codeguruSecurity_batchGetFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruSecurity_batchGetFindingsCmd).Standalone()
+	carapace.Gen(codeguruSecurity_batchGetFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruSecurity_batchGetFindingsCmd).Standalone()
 
-	codeguruSecurity_batchGetFindingsCmd.Flags().String("finding-identifiers", "", "A list of finding identifiers.")
-	codeguruSecurity_batchGetFindingsCmd.MarkFlagRequired("finding-identifiers")
+		codeguruSecurity_batchGetFindingsCmd.Flags().String("finding-identifiers", "", "A list of finding identifiers.")
+		codeguruSecurity_batchGetFindingsCmd.MarkFlagRequired("finding-identifiers")
+	})
 	codeguruSecurityCmd.AddCommand(codeguruSecurity_batchGetFindingsCmd)
 }

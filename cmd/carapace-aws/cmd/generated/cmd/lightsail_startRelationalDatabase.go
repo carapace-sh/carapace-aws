@@ -12,9 +12,11 @@ var lightsail_startRelationalDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_startRelationalDatabaseCmd).Standalone()
+	carapace.Gen(lightsail_startRelationalDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_startRelationalDatabaseCmd).Standalone()
 
-	lightsail_startRelationalDatabaseCmd.Flags().String("relational-database-name", "", "The name of your database to start.")
-	lightsail_startRelationalDatabaseCmd.MarkFlagRequired("relational-database-name")
+		lightsail_startRelationalDatabaseCmd.Flags().String("relational-database-name", "", "The name of your database to start.")
+		lightsail_startRelationalDatabaseCmd.MarkFlagRequired("relational-database-name")
+	})
 	lightsailCmd.AddCommand(lightsail_startRelationalDatabaseCmd)
 }

@@ -12,9 +12,11 @@ var snowball_cancelClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_cancelClusterCmd).Standalone()
+	carapace.Gen(snowball_cancelClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_cancelClusterCmd).Standalone()
 
-	snowball_cancelClusterCmd.Flags().String("cluster-id", "", "The 39-character ID for the cluster that you want to cancel, for example `CID123e4567-e89b-12d3-a456-426655440000`.")
-	snowball_cancelClusterCmd.MarkFlagRequired("cluster-id")
+		snowball_cancelClusterCmd.Flags().String("cluster-id", "", "The 39-character ID for the cluster that you want to cancel, for example `CID123e4567-e89b-12d3-a456-426655440000`.")
+		snowball_cancelClusterCmd.MarkFlagRequired("cluster-id")
+	})
 	snowballCmd.AddCommand(snowball_cancelClusterCmd)
 }

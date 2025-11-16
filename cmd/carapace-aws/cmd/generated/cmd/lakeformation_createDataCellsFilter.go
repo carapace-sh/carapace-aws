@@ -12,9 +12,11 @@ var lakeformation_createDataCellsFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_createDataCellsFilterCmd).Standalone()
+	carapace.Gen(lakeformation_createDataCellsFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_createDataCellsFilterCmd).Standalone()
 
-	lakeformation_createDataCellsFilterCmd.Flags().String("table-data", "", "A `DataCellsFilter` structure containing information about the data cells filter.")
-	lakeformation_createDataCellsFilterCmd.MarkFlagRequired("table-data")
+		lakeformation_createDataCellsFilterCmd.Flags().String("table-data", "", "A `DataCellsFilter` structure containing information about the data cells filter.")
+		lakeformation_createDataCellsFilterCmd.MarkFlagRequired("table-data")
+	})
 	lakeformationCmd.AddCommand(lakeformation_createDataCellsFilterCmd)
 }

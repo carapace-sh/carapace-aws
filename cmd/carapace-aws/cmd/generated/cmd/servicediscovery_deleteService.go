@@ -12,9 +12,11 @@ var servicediscovery_deleteServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_deleteServiceCmd).Standalone()
+	carapace.Gen(servicediscovery_deleteServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_deleteServiceCmd).Standalone()
 
-	servicediscovery_deleteServiceCmd.Flags().String("id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to delete.")
-	servicediscovery_deleteServiceCmd.MarkFlagRequired("id")
+		servicediscovery_deleteServiceCmd.Flags().String("id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to delete.")
+		servicediscovery_deleteServiceCmd.MarkFlagRequired("id")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_deleteServiceCmd)
 }

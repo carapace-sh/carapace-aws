@@ -12,9 +12,11 @@ var proton_listRepositoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_listRepositoriesCmd).Standalone()
+	carapace.Gen(proton_listRepositoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_listRepositoriesCmd).Standalone()
 
-	proton_listRepositoriesCmd.Flags().String("max-results", "", "The maximum number of repositories to list.")
-	proton_listRepositoriesCmd.Flags().String("next-token", "", "A token that indicates the location of the next repository in the array of repositories, after the list of repositories previously requested.")
+		proton_listRepositoriesCmd.Flags().String("max-results", "", "The maximum number of repositories to list.")
+		proton_listRepositoriesCmd.Flags().String("next-token", "", "A token that indicates the location of the next repository in the array of repositories, after the list of repositories previously requested.")
+	})
 	protonCmd.AddCommand(proton_listRepositoriesCmd)
 }

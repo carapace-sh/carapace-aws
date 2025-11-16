@@ -12,16 +12,18 @@ var glue_getColumnStatisticsForPartitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getColumnStatisticsForPartitionCmd).Standalone()
+	carapace.Gen(glue_getColumnStatisticsForPartitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getColumnStatisticsForPartitionCmd).Standalone()
 
-	glue_getColumnStatisticsForPartitionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the partitions in question reside.")
-	glue_getColumnStatisticsForPartitionCmd.Flags().String("column-names", "", "A list of the column names.")
-	glue_getColumnStatisticsForPartitionCmd.Flags().String("database-name", "", "The name of the catalog database where the partitions reside.")
-	glue_getColumnStatisticsForPartitionCmd.Flags().String("partition-values", "", "A list of partition values identifying the partition.")
-	glue_getColumnStatisticsForPartitionCmd.Flags().String("table-name", "", "The name of the partitions' table.")
-	glue_getColumnStatisticsForPartitionCmd.MarkFlagRequired("column-names")
-	glue_getColumnStatisticsForPartitionCmd.MarkFlagRequired("database-name")
-	glue_getColumnStatisticsForPartitionCmd.MarkFlagRequired("partition-values")
-	glue_getColumnStatisticsForPartitionCmd.MarkFlagRequired("table-name")
+		glue_getColumnStatisticsForPartitionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the partitions in question reside.")
+		glue_getColumnStatisticsForPartitionCmd.Flags().String("column-names", "", "A list of the column names.")
+		glue_getColumnStatisticsForPartitionCmd.Flags().String("database-name", "", "The name of the catalog database where the partitions reside.")
+		glue_getColumnStatisticsForPartitionCmd.Flags().String("partition-values", "", "A list of partition values identifying the partition.")
+		glue_getColumnStatisticsForPartitionCmd.Flags().String("table-name", "", "The name of the partitions' table.")
+		glue_getColumnStatisticsForPartitionCmd.MarkFlagRequired("column-names")
+		glue_getColumnStatisticsForPartitionCmd.MarkFlagRequired("database-name")
+		glue_getColumnStatisticsForPartitionCmd.MarkFlagRequired("partition-values")
+		glue_getColumnStatisticsForPartitionCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_getColumnStatisticsForPartitionCmd)
 }

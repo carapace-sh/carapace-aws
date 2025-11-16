@@ -12,10 +12,12 @@ var emr_describeReleaseLabelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_describeReleaseLabelCmd).Standalone()
+	carapace.Gen(emr_describeReleaseLabelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_describeReleaseLabelCmd).Standalone()
 
-	emr_describeReleaseLabelCmd.Flags().String("max-results", "", "Reserved for future use.")
-	emr_describeReleaseLabelCmd.Flags().String("next-token", "", "The pagination token.")
-	emr_describeReleaseLabelCmd.Flags().String("release-label", "", "The target release label to be described.")
+		emr_describeReleaseLabelCmd.Flags().String("max-results", "", "Reserved for future use.")
+		emr_describeReleaseLabelCmd.Flags().String("next-token", "", "The pagination token.")
+		emr_describeReleaseLabelCmd.Flags().String("release-label", "", "The target release label to be described.")
+	})
 	emrCmd.AddCommand(emr_describeReleaseLabelCmd)
 }

@@ -12,11 +12,13 @@ var lakeformation_getWorkUnitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_getWorkUnitsCmd).Standalone()
+	carapace.Gen(lakeformation_getWorkUnitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_getWorkUnitsCmd).Standalone()
 
-	lakeformation_getWorkUnitsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
-	lakeformation_getWorkUnitsCmd.Flags().String("page-size", "", "The size of each page to get in the Amazon Web Services service call.")
-	lakeformation_getWorkUnitsCmd.Flags().String("query-id", "", "The ID of the plan query operation.")
-	lakeformation_getWorkUnitsCmd.MarkFlagRequired("query-id")
+		lakeformation_getWorkUnitsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		lakeformation_getWorkUnitsCmd.Flags().String("page-size", "", "The size of each page to get in the Amazon Web Services service call.")
+		lakeformation_getWorkUnitsCmd.Flags().String("query-id", "", "The ID of the plan query operation.")
+		lakeformation_getWorkUnitsCmd.MarkFlagRequired("query-id")
+	})
 	lakeformationCmd.AddCommand(lakeformation_getWorkUnitsCmd)
 }

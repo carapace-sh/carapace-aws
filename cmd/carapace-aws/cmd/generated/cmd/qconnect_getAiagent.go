@@ -12,11 +12,13 @@ var qconnect_getAiagentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_getAiagentCmd).Standalone()
+	carapace.Gen(qconnect_getAiagentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_getAiagentCmd).Standalone()
 
-	qconnect_getAiagentCmd.Flags().String("ai-agent-id", "", "The identifier of the Amazon Q in Connect AI Agent (with or without a version qualifier).")
-	qconnect_getAiagentCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_getAiagentCmd.MarkFlagRequired("ai-agent-id")
-	qconnect_getAiagentCmd.MarkFlagRequired("assistant-id")
+		qconnect_getAiagentCmd.Flags().String("ai-agent-id", "", "The identifier of the Amazon Q in Connect AI Agent (with or without a version qualifier).")
+		qconnect_getAiagentCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_getAiagentCmd.MarkFlagRequired("ai-agent-id")
+		qconnect_getAiagentCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_getAiagentCmd)
 }

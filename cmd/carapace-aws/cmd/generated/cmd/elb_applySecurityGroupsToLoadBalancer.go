@@ -12,11 +12,13 @@ var elb_applySecurityGroupsToLoadBalancerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_applySecurityGroupsToLoadBalancerCmd).Standalone()
+	carapace.Gen(elb_applySecurityGroupsToLoadBalancerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_applySecurityGroupsToLoadBalancerCmd).Standalone()
 
-	elb_applySecurityGroupsToLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_applySecurityGroupsToLoadBalancerCmd.Flags().String("security-groups", "", "The IDs of the security groups to associate with the load balancer.")
-	elb_applySecurityGroupsToLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
-	elb_applySecurityGroupsToLoadBalancerCmd.MarkFlagRequired("security-groups")
+		elb_applySecurityGroupsToLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_applySecurityGroupsToLoadBalancerCmd.Flags().String("security-groups", "", "The IDs of the security groups to associate with the load balancer.")
+		elb_applySecurityGroupsToLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+		elb_applySecurityGroupsToLoadBalancerCmd.MarkFlagRequired("security-groups")
+	})
 	elbCmd.AddCommand(elb_applySecurityGroupsToLoadBalancerCmd)
 }

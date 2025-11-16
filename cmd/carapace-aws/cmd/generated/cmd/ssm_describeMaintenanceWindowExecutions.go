@@ -12,12 +12,14 @@ var ssm_describeMaintenanceWindowExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeMaintenanceWindowExecutionsCmd).Standalone()
+	carapace.Gen(ssm_describeMaintenanceWindowExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeMaintenanceWindowExecutionsCmd).Standalone()
 
-	ssm_describeMaintenanceWindowExecutionsCmd.Flags().String("filters", "", "Each entry in the array is a structure containing:")
-	ssm_describeMaintenanceWindowExecutionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_describeMaintenanceWindowExecutionsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	ssm_describeMaintenanceWindowExecutionsCmd.Flags().String("window-id", "", "The ID of the maintenance window whose executions should be retrieved.")
-	ssm_describeMaintenanceWindowExecutionsCmd.MarkFlagRequired("window-id")
+		ssm_describeMaintenanceWindowExecutionsCmd.Flags().String("filters", "", "Each entry in the array is a structure containing:")
+		ssm_describeMaintenanceWindowExecutionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_describeMaintenanceWindowExecutionsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_describeMaintenanceWindowExecutionsCmd.Flags().String("window-id", "", "The ID of the maintenance window whose executions should be retrieved.")
+		ssm_describeMaintenanceWindowExecutionsCmd.MarkFlagRequired("window-id")
+	})
 	ssmCmd.AddCommand(ssm_describeMaintenanceWindowExecutionsCmd)
 }

@@ -12,9 +12,11 @@ var ce_deleteAnomalyMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_deleteAnomalyMonitorCmd).Standalone()
+	carapace.Gen(ce_deleteAnomalyMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_deleteAnomalyMonitorCmd).Standalone()
 
-	ce_deleteAnomalyMonitorCmd.Flags().String("monitor-arn", "", "The unique identifier of the cost anomaly monitor that you want to delete.")
-	ce_deleteAnomalyMonitorCmd.MarkFlagRequired("monitor-arn")
+		ce_deleteAnomalyMonitorCmd.Flags().String("monitor-arn", "", "The unique identifier of the cost anomaly monitor that you want to delete.")
+		ce_deleteAnomalyMonitorCmd.MarkFlagRequired("monitor-arn")
+	})
 	ceCmd.AddCommand(ce_deleteAnomalyMonitorCmd)
 }

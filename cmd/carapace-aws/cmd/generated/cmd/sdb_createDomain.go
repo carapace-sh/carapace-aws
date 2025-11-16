@@ -12,9 +12,11 @@ var sdb_createDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sdb_createDomainCmd).Standalone()
+	carapace.Gen(sdb_createDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sdb_createDomainCmd).Standalone()
 
-	sdb_createDomainCmd.Flags().String("domain-name", "", "The name of the domain to create.")
-	sdb_createDomainCmd.MarkFlagRequired("domain-name")
+		sdb_createDomainCmd.Flags().String("domain-name", "", "The name of the domain to create.")
+		sdb_createDomainCmd.MarkFlagRequired("domain-name")
+	})
 	sdbCmd.AddCommand(sdb_createDomainCmd)
 }

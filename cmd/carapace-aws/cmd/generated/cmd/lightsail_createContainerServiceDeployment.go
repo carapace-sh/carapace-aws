@@ -12,11 +12,13 @@ var lightsail_createContainerServiceDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_createContainerServiceDeploymentCmd).Standalone()
+	carapace.Gen(lightsail_createContainerServiceDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_createContainerServiceDeploymentCmd).Standalone()
 
-	lightsail_createContainerServiceDeploymentCmd.Flags().String("containers", "", "An object that describes the settings of the containers that will be launched on the container service.")
-	lightsail_createContainerServiceDeploymentCmd.Flags().String("public-endpoint", "", "An object that describes the settings of the public endpoint for the container service.")
-	lightsail_createContainerServiceDeploymentCmd.Flags().String("service-name", "", "The name of the container service for which to create the deployment.")
-	lightsail_createContainerServiceDeploymentCmd.MarkFlagRequired("service-name")
+		lightsail_createContainerServiceDeploymentCmd.Flags().String("containers", "", "An object that describes the settings of the containers that will be launched on the container service.")
+		lightsail_createContainerServiceDeploymentCmd.Flags().String("public-endpoint", "", "An object that describes the settings of the public endpoint for the container service.")
+		lightsail_createContainerServiceDeploymentCmd.Flags().String("service-name", "", "The name of the container service for which to create the deployment.")
+		lightsail_createContainerServiceDeploymentCmd.MarkFlagRequired("service-name")
+	})
 	lightsailCmd.AddCommand(lightsail_createContainerServiceDeploymentCmd)
 }

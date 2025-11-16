@@ -12,10 +12,12 @@ var imagebuilder_listLifecyclePoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_listLifecyclePoliciesCmd).Standalone()
+	carapace.Gen(imagebuilder_listLifecyclePoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_listLifecyclePoliciesCmd).Standalone()
 
-	imagebuilder_listLifecyclePoliciesCmd.Flags().String("filters", "", "Streamline results based on one of the following values: `Name`, `Status`.")
-	imagebuilder_listLifecyclePoliciesCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
-	imagebuilder_listLifecyclePoliciesCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		imagebuilder_listLifecyclePoliciesCmd.Flags().String("filters", "", "Streamline results based on one of the following values: `Name`, `Status`.")
+		imagebuilder_listLifecyclePoliciesCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
+		imagebuilder_listLifecyclePoliciesCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_listLifecyclePoliciesCmd)
 }

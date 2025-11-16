@@ -12,12 +12,14 @@ var config_describeAggregateComplianceByConfigRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_describeAggregateComplianceByConfigRulesCmd).Standalone()
+	carapace.Gen(config_describeAggregateComplianceByConfigRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_describeAggregateComplianceByConfigRulesCmd).Standalone()
 
-	config_describeAggregateComplianceByConfigRulesCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
-	config_describeAggregateComplianceByConfigRulesCmd.Flags().String("filters", "", "Filters the results by ConfigRuleComplianceFilters object.")
-	config_describeAggregateComplianceByConfigRulesCmd.Flags().String("limit", "", "The maximum number of evaluation results returned on each page.")
-	config_describeAggregateComplianceByConfigRulesCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
-	config_describeAggregateComplianceByConfigRulesCmd.MarkFlagRequired("configuration-aggregator-name")
+		config_describeAggregateComplianceByConfigRulesCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
+		config_describeAggregateComplianceByConfigRulesCmd.Flags().String("filters", "", "Filters the results by ConfigRuleComplianceFilters object.")
+		config_describeAggregateComplianceByConfigRulesCmd.Flags().String("limit", "", "The maximum number of evaluation results returned on each page.")
+		config_describeAggregateComplianceByConfigRulesCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+		config_describeAggregateComplianceByConfigRulesCmd.MarkFlagRequired("configuration-aggregator-name")
+	})
 	configCmd.AddCommand(config_describeAggregateComplianceByConfigRulesCmd)
 }

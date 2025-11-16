@@ -12,7 +12,9 @@ var appstream_deleteUsageReportSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_deleteUsageReportSubscriptionCmd).Standalone()
+	carapace.Gen(appstream_deleteUsageReportSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_deleteUsageReportSubscriptionCmd).Standalone()
 
+	})
 	appstreamCmd.AddCommand(appstream_deleteUsageReportSubscriptionCmd)
 }

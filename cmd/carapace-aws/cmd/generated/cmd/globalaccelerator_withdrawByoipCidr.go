@@ -12,9 +12,11 @@ var globalaccelerator_withdrawByoipCidrCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_withdrawByoipCidrCmd).Standalone()
+	carapace.Gen(globalaccelerator_withdrawByoipCidrCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_withdrawByoipCidrCmd).Standalone()
 
-	globalaccelerator_withdrawByoipCidrCmd.Flags().String("cidr", "", "The address range, in CIDR notation.")
-	globalaccelerator_withdrawByoipCidrCmd.MarkFlagRequired("cidr")
+		globalaccelerator_withdrawByoipCidrCmd.Flags().String("cidr", "", "The address range, in CIDR notation.")
+		globalaccelerator_withdrawByoipCidrCmd.MarkFlagRequired("cidr")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_withdrawByoipCidrCmd)
 }

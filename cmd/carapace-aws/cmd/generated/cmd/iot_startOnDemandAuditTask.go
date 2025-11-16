@@ -12,9 +12,11 @@ var iot_startOnDemandAuditTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_startOnDemandAuditTaskCmd).Standalone()
+	carapace.Gen(iot_startOnDemandAuditTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_startOnDemandAuditTaskCmd).Standalone()
 
-	iot_startOnDemandAuditTaskCmd.Flags().String("target-check-names", "", "Which checks are performed during the audit.")
-	iot_startOnDemandAuditTaskCmd.MarkFlagRequired("target-check-names")
+		iot_startOnDemandAuditTaskCmd.Flags().String("target-check-names", "", "Which checks are performed during the audit.")
+		iot_startOnDemandAuditTaskCmd.MarkFlagRequired("target-check-names")
+	})
 	iotCmd.AddCommand(iot_startOnDemandAuditTaskCmd)
 }

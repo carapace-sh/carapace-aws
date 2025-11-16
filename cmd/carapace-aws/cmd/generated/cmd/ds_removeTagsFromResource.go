@@ -12,11 +12,13 @@ var ds_removeTagsFromResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_removeTagsFromResourceCmd).Standalone()
+	carapace.Gen(ds_removeTagsFromResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_removeTagsFromResourceCmd).Standalone()
 
-	ds_removeTagsFromResourceCmd.Flags().String("resource-id", "", "Identifier (ID) of the directory from which to remove the tag.")
-	ds_removeTagsFromResourceCmd.Flags().String("tag-keys", "", "The tag key (name) of the tag to be removed.")
-	ds_removeTagsFromResourceCmd.MarkFlagRequired("resource-id")
-	ds_removeTagsFromResourceCmd.MarkFlagRequired("tag-keys")
+		ds_removeTagsFromResourceCmd.Flags().String("resource-id", "", "Identifier (ID) of the directory from which to remove the tag.")
+		ds_removeTagsFromResourceCmd.Flags().String("tag-keys", "", "The tag key (name) of the tag to be removed.")
+		ds_removeTagsFromResourceCmd.MarkFlagRequired("resource-id")
+		ds_removeTagsFromResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	dsCmd.AddCommand(ds_removeTagsFromResourceCmd)
 }

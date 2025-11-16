@@ -12,9 +12,11 @@ var sesv2_cancelExportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_cancelExportJobCmd).Standalone()
+	carapace.Gen(sesv2_cancelExportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_cancelExportJobCmd).Standalone()
 
-	sesv2_cancelExportJobCmd.Flags().String("job-id", "", "The export job ID.")
-	sesv2_cancelExportJobCmd.MarkFlagRequired("job-id")
+		sesv2_cancelExportJobCmd.Flags().String("job-id", "", "The export job ID.")
+		sesv2_cancelExportJobCmd.MarkFlagRequired("job-id")
+	})
 	sesv2Cmd.AddCommand(sesv2_cancelExportJobCmd)
 }

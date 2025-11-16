@@ -12,9 +12,11 @@ var apprunner_describeObservabilityConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_describeObservabilityConfigurationCmd).Standalone()
+	carapace.Gen(apprunner_describeObservabilityConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_describeObservabilityConfigurationCmd).Standalone()
 
-	apprunner_describeObservabilityConfigurationCmd.Flags().String("observability-configuration-arn", "", "The Amazon Resource Name (ARN) of the App Runner observability configuration that you want a description for.")
-	apprunner_describeObservabilityConfigurationCmd.MarkFlagRequired("observability-configuration-arn")
+		apprunner_describeObservabilityConfigurationCmd.Flags().String("observability-configuration-arn", "", "The Amazon Resource Name (ARN) of the App Runner observability configuration that you want a description for.")
+		apprunner_describeObservabilityConfigurationCmd.MarkFlagRequired("observability-configuration-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_describeObservabilityConfigurationCmd)
 }

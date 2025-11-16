@@ -12,13 +12,15 @@ var location_getPlaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_getPlaceCmd).Standalone()
+	carapace.Gen(location_getPlaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_getPlaceCmd).Standalone()
 
-	location_getPlaceCmd.Flags().String("index-name", "", "The name of the place index resource that you want to use for the search.")
-	location_getPlaceCmd.Flags().String("key", "", "The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.")
-	location_getPlaceCmd.Flags().String("language", "", "The preferred language used to return results.")
-	location_getPlaceCmd.Flags().String("place-id", "", "The identifier of the place to find.")
-	location_getPlaceCmd.MarkFlagRequired("index-name")
-	location_getPlaceCmd.MarkFlagRequired("place-id")
+		location_getPlaceCmd.Flags().String("index-name", "", "The name of the place index resource that you want to use for the search.")
+		location_getPlaceCmd.Flags().String("key", "", "The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.")
+		location_getPlaceCmd.Flags().String("language", "", "The preferred language used to return results.")
+		location_getPlaceCmd.Flags().String("place-id", "", "The identifier of the place to find.")
+		location_getPlaceCmd.MarkFlagRequired("index-name")
+		location_getPlaceCmd.MarkFlagRequired("place-id")
+	})
 	locationCmd.AddCommand(location_getPlaceCmd)
 }

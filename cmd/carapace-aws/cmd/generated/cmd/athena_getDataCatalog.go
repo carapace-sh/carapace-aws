@@ -12,10 +12,12 @@ var athena_getDataCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_getDataCatalogCmd).Standalone()
+	carapace.Gen(athena_getDataCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_getDataCatalogCmd).Standalone()
 
-	athena_getDataCatalogCmd.Flags().String("name", "", "The name of the data catalog to return.")
-	athena_getDataCatalogCmd.Flags().String("work-group", "", "The name of the workgroup.")
-	athena_getDataCatalogCmd.MarkFlagRequired("name")
+		athena_getDataCatalogCmd.Flags().String("name", "", "The name of the data catalog to return.")
+		athena_getDataCatalogCmd.Flags().String("work-group", "", "The name of the workgroup.")
+		athena_getDataCatalogCmd.MarkFlagRequired("name")
+	})
 	athenaCmd.AddCommand(athena_getDataCatalogCmd)
 }

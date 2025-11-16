@@ -12,10 +12,12 @@ var mgn_startImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_startImportCmd).Standalone()
+	carapace.Gen(mgn_startImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_startImportCmd).Standalone()
 
-	mgn_startImportCmd.Flags().String("client-token", "", "Start import request client token.")
-	mgn_startImportCmd.Flags().String("s3-bucket-source", "", "Start import request s3 bucket source.")
-	mgn_startImportCmd.MarkFlagRequired("s3-bucket-source")
+		mgn_startImportCmd.Flags().String("client-token", "", "Start import request client token.")
+		mgn_startImportCmd.Flags().String("s3-bucket-source", "", "Start import request s3 bucket source.")
+		mgn_startImportCmd.MarkFlagRequired("s3-bucket-source")
+	})
 	mgnCmd.AddCommand(mgn_startImportCmd)
 }

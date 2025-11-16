@@ -12,12 +12,14 @@ var logs_describeQueriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_describeQueriesCmd).Standalone()
+	carapace.Gen(logs_describeQueriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_describeQueriesCmd).Standalone()
 
-	logs_describeQueriesCmd.Flags().String("log-group-name", "", "Limits the returned queries to only those for the specified log group.")
-	logs_describeQueriesCmd.Flags().String("max-results", "", "Limits the number of returned queries to the specified number.")
-	logs_describeQueriesCmd.Flags().String("next-token", "", "")
-	logs_describeQueriesCmd.Flags().String("query-language", "", "Limits the returned queries to only the queries that use the specified query language.")
-	logs_describeQueriesCmd.Flags().String("status", "", "Limits the returned queries to only those that have the specified status.")
+		logs_describeQueriesCmd.Flags().String("log-group-name", "", "Limits the returned queries to only those for the specified log group.")
+		logs_describeQueriesCmd.Flags().String("max-results", "", "Limits the number of returned queries to the specified number.")
+		logs_describeQueriesCmd.Flags().String("next-token", "", "")
+		logs_describeQueriesCmd.Flags().String("query-language", "", "Limits the returned queries to only the queries that use the specified query language.")
+		logs_describeQueriesCmd.Flags().String("status", "", "Limits the returned queries to only those that have the specified status.")
+	})
 	logsCmd.AddCommand(logs_describeQueriesCmd)
 }

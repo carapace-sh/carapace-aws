@@ -12,8 +12,10 @@ var health_describeEntityAggregatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(health_describeEntityAggregatesCmd).Standalone()
+	carapace.Gen(health_describeEntityAggregatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(health_describeEntityAggregatesCmd).Standalone()
 
-	health_describeEntityAggregatesCmd.Flags().String("event-arns", "", "A list of event ARNs (unique identifiers).")
+		health_describeEntityAggregatesCmd.Flags().String("event-arns", "", "A list of event ARNs (unique identifiers).")
+	})
 	healthCmd.AddCommand(health_describeEntityAggregatesCmd)
 }

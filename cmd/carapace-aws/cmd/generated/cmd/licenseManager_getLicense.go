@@ -12,10 +12,12 @@ var licenseManager_getLicenseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_getLicenseCmd).Standalone()
+	carapace.Gen(licenseManager_getLicenseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_getLicenseCmd).Standalone()
 
-	licenseManager_getLicenseCmd.Flags().String("license-arn", "", "Amazon Resource Name (ARN) of the license.")
-	licenseManager_getLicenseCmd.Flags().String("version", "", "License version.")
-	licenseManager_getLicenseCmd.MarkFlagRequired("license-arn")
+		licenseManager_getLicenseCmd.Flags().String("license-arn", "", "Amazon Resource Name (ARN) of the license.")
+		licenseManager_getLicenseCmd.Flags().String("version", "", "License version.")
+		licenseManager_getLicenseCmd.MarkFlagRequired("license-arn")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_getLicenseCmd)
 }

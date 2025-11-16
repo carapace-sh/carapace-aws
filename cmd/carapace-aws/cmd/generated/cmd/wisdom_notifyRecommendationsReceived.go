@@ -12,13 +12,15 @@ var wisdom_notifyRecommendationsReceivedCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_notifyRecommendationsReceivedCmd).Standalone()
+	carapace.Gen(wisdom_notifyRecommendationsReceivedCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_notifyRecommendationsReceivedCmd).Standalone()
 
-	wisdom_notifyRecommendationsReceivedCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
-	wisdom_notifyRecommendationsReceivedCmd.Flags().String("recommendation-ids", "", "The identifiers of the recommendations.")
-	wisdom_notifyRecommendationsReceivedCmd.Flags().String("session-id", "", "The identifier of the session.")
-	wisdom_notifyRecommendationsReceivedCmd.MarkFlagRequired("assistant-id")
-	wisdom_notifyRecommendationsReceivedCmd.MarkFlagRequired("recommendation-ids")
-	wisdom_notifyRecommendationsReceivedCmd.MarkFlagRequired("session-id")
+		wisdom_notifyRecommendationsReceivedCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
+		wisdom_notifyRecommendationsReceivedCmd.Flags().String("recommendation-ids", "", "The identifiers of the recommendations.")
+		wisdom_notifyRecommendationsReceivedCmd.Flags().String("session-id", "", "The identifier of the session.")
+		wisdom_notifyRecommendationsReceivedCmd.MarkFlagRequired("assistant-id")
+		wisdom_notifyRecommendationsReceivedCmd.MarkFlagRequired("recommendation-ids")
+		wisdom_notifyRecommendationsReceivedCmd.MarkFlagRequired("session-id")
+	})
 	wisdomCmd.AddCommand(wisdom_notifyRecommendationsReceivedCmd)
 }

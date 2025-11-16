@@ -12,9 +12,11 @@ var wafRegional_listSizeConstraintSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_listSizeConstraintSetsCmd).Standalone()
+	carapace.Gen(wafRegional_listSizeConstraintSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_listSizeConstraintSetsCmd).Standalone()
 
-	wafRegional_listSizeConstraintSetsCmd.Flags().String("limit", "", "Specifies the number of `SizeConstraintSet` objects that you want AWS WAF to return for this request.")
-	wafRegional_listSizeConstraintSetsCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `SizeConstraintSets` than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `SizeConstraintSets`.")
+		wafRegional_listSizeConstraintSetsCmd.Flags().String("limit", "", "Specifies the number of `SizeConstraintSet` objects that you want AWS WAF to return for this request.")
+		wafRegional_listSizeConstraintSetsCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `SizeConstraintSets` than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `SizeConstraintSets`.")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_listSizeConstraintSetsCmd)
 }

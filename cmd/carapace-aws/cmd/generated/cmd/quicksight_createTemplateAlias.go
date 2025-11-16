@@ -12,15 +12,17 @@ var quicksight_createTemplateAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_createTemplateAliasCmd).Standalone()
+	carapace.Gen(quicksight_createTemplateAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_createTemplateAliasCmd).Standalone()
 
-	quicksight_createTemplateAliasCmd.Flags().String("alias-name", "", "The name that you want to give to the template alias that you're creating.")
-	quicksight_createTemplateAliasCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the template that you creating an alias for.")
-	quicksight_createTemplateAliasCmd.Flags().String("template-id", "", "An ID for the template.")
-	quicksight_createTemplateAliasCmd.Flags().String("template-version-number", "", "The version number of the template.")
-	quicksight_createTemplateAliasCmd.MarkFlagRequired("alias-name")
-	quicksight_createTemplateAliasCmd.MarkFlagRequired("aws-account-id")
-	quicksight_createTemplateAliasCmd.MarkFlagRequired("template-id")
-	quicksight_createTemplateAliasCmd.MarkFlagRequired("template-version-number")
+		quicksight_createTemplateAliasCmd.Flags().String("alias-name", "", "The name that you want to give to the template alias that you're creating.")
+		quicksight_createTemplateAliasCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the template that you creating an alias for.")
+		quicksight_createTemplateAliasCmd.Flags().String("template-id", "", "An ID for the template.")
+		quicksight_createTemplateAliasCmd.Flags().String("template-version-number", "", "The version number of the template.")
+		quicksight_createTemplateAliasCmd.MarkFlagRequired("alias-name")
+		quicksight_createTemplateAliasCmd.MarkFlagRequired("aws-account-id")
+		quicksight_createTemplateAliasCmd.MarkFlagRequired("template-id")
+		quicksight_createTemplateAliasCmd.MarkFlagRequired("template-version-number")
+	})
 	quicksightCmd.AddCommand(quicksight_createTemplateAliasCmd)
 }

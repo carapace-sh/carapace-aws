@@ -12,11 +12,13 @@ var auditmanager_listAssessmentFrameworksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_listAssessmentFrameworksCmd).Standalone()
+	carapace.Gen(auditmanager_listAssessmentFrameworksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_listAssessmentFrameworksCmd).Standalone()
 
-	auditmanager_listAssessmentFrameworksCmd.Flags().String("framework-type", "", "The type of framework, such as a standard framework or a custom framework.")
-	auditmanager_listAssessmentFrameworksCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
-	auditmanager_listAssessmentFrameworksCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	auditmanager_listAssessmentFrameworksCmd.MarkFlagRequired("framework-type")
+		auditmanager_listAssessmentFrameworksCmd.Flags().String("framework-type", "", "The type of framework, such as a standard framework or a custom framework.")
+		auditmanager_listAssessmentFrameworksCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
+		auditmanager_listAssessmentFrameworksCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		auditmanager_listAssessmentFrameworksCmd.MarkFlagRequired("framework-type")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_listAssessmentFrameworksCmd)
 }

@@ -12,9 +12,11 @@ var bedrock_getProvisionedModelThroughputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getProvisionedModelThroughputCmd).Standalone()
+	carapace.Gen(bedrock_getProvisionedModelThroughputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getProvisionedModelThroughputCmd).Standalone()
 
-	bedrock_getProvisionedModelThroughputCmd.Flags().String("provisioned-model-id", "", "The Amazon Resource Name (ARN) or name of the Provisioned Throughput.")
-	bedrock_getProvisionedModelThroughputCmd.MarkFlagRequired("provisioned-model-id")
+		bedrock_getProvisionedModelThroughputCmd.Flags().String("provisioned-model-id", "", "The Amazon Resource Name (ARN) or name of the Provisioned Throughput.")
+		bedrock_getProvisionedModelThroughputCmd.MarkFlagRequired("provisioned-model-id")
+	})
 	bedrockCmd.AddCommand(bedrock_getProvisionedModelThroughputCmd)
 }

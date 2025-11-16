@@ -12,9 +12,11 @@ var detective_describeOrganizationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_describeOrganizationConfigurationCmd).Standalone()
+	carapace.Gen(detective_describeOrganizationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_describeOrganizationConfigurationCmd).Standalone()
 
-	detective_describeOrganizationConfigurationCmd.Flags().String("graph-arn", "", "The ARN of the organization behavior graph.")
-	detective_describeOrganizationConfigurationCmd.MarkFlagRequired("graph-arn")
+		detective_describeOrganizationConfigurationCmd.Flags().String("graph-arn", "", "The ARN of the organization behavior graph.")
+		detective_describeOrganizationConfigurationCmd.MarkFlagRequired("graph-arn")
+	})
 	detectiveCmd.AddCommand(detective_describeOrganizationConfigurationCmd)
 }

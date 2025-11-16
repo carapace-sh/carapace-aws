@@ -12,7 +12,9 @@ var swfCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swfCmd).Standalone()
+	carapace.Gen(swfCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swfCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(swfCmd)
 }

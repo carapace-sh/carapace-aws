@@ -12,8 +12,10 @@ var macie2_getBucketStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getBucketStatisticsCmd).Standalone()
+	carapace.Gen(macie2_getBucketStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getBucketStatisticsCmd).Standalone()
 
-	macie2_getBucketStatisticsCmd.Flags().String("account-id", "", "The unique identifier for the Amazon Web Services account.")
+		macie2_getBucketStatisticsCmd.Flags().String("account-id", "", "The unique identifier for the Amazon Web Services account.")
+	})
 	macie2Cmd.AddCommand(macie2_getBucketStatisticsCmd)
 }

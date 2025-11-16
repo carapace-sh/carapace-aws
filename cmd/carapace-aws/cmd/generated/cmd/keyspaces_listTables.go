@@ -12,11 +12,13 @@ var keyspaces_listTablesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspaces_listTablesCmd).Standalone()
+	carapace.Gen(keyspaces_listTablesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspaces_listTablesCmd).Standalone()
 
-	keyspaces_listTablesCmd.Flags().String("keyspace-name", "", "The name of the keyspace.")
-	keyspaces_listTablesCmd.Flags().String("max-results", "", "The total number of tables to return in the output.")
-	keyspaces_listTablesCmd.Flags().String("next-token", "", "The pagination token.")
-	keyspaces_listTablesCmd.MarkFlagRequired("keyspace-name")
+		keyspaces_listTablesCmd.Flags().String("keyspace-name", "", "The name of the keyspace.")
+		keyspaces_listTablesCmd.Flags().String("max-results", "", "The total number of tables to return in the output.")
+		keyspaces_listTablesCmd.Flags().String("next-token", "", "The pagination token.")
+		keyspaces_listTablesCmd.MarkFlagRequired("keyspace-name")
+	})
 	keyspacesCmd.AddCommand(keyspaces_listTablesCmd)
 }

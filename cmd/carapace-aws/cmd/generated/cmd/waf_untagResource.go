@@ -12,11 +12,13 @@ var waf_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_untagResourceCmd).Standalone()
+	carapace.Gen(waf_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_untagResourceCmd).Standalone()
 
-	waf_untagResourceCmd.Flags().String("resource-arn", "", "")
-	waf_untagResourceCmd.Flags().String("tag-keys", "", "")
-	waf_untagResourceCmd.MarkFlagRequired("resource-arn")
-	waf_untagResourceCmd.MarkFlagRequired("tag-keys")
+		waf_untagResourceCmd.Flags().String("resource-arn", "", "")
+		waf_untagResourceCmd.Flags().String("tag-keys", "", "")
+		waf_untagResourceCmd.MarkFlagRequired("resource-arn")
+		waf_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	wafCmd.AddCommand(waf_untagResourceCmd)
 }

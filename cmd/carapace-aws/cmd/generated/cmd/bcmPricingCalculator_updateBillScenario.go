@@ -12,11 +12,13 @@ var bcmPricingCalculator_updateBillScenarioCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_updateBillScenarioCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_updateBillScenarioCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_updateBillScenarioCmd).Standalone()
 
-	bcmPricingCalculator_updateBillScenarioCmd.Flags().String("expires-at", "", "The new expiration date for the bill scenario.")
-	bcmPricingCalculator_updateBillScenarioCmd.Flags().String("identifier", "", "The unique identifier of the bill scenario to update.")
-	bcmPricingCalculator_updateBillScenarioCmd.Flags().String("name", "", "The new name for the bill scenario.")
-	bcmPricingCalculator_updateBillScenarioCmd.MarkFlagRequired("identifier")
+		bcmPricingCalculator_updateBillScenarioCmd.Flags().String("expires-at", "", "The new expiration date for the bill scenario.")
+		bcmPricingCalculator_updateBillScenarioCmd.Flags().String("identifier", "", "The unique identifier of the bill scenario to update.")
+		bcmPricingCalculator_updateBillScenarioCmd.Flags().String("name", "", "The new name for the bill scenario.")
+		bcmPricingCalculator_updateBillScenarioCmd.MarkFlagRequired("identifier")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_updateBillScenarioCmd)
 }

@@ -12,10 +12,12 @@ var iottwinmaker_getSyncJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_getSyncJobCmd).Standalone()
+	carapace.Gen(iottwinmaker_getSyncJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_getSyncJobCmd).Standalone()
 
-	iottwinmaker_getSyncJobCmd.Flags().String("sync-source", "", "The sync source.")
-	iottwinmaker_getSyncJobCmd.Flags().String("workspace-id", "", "The workspace ID.")
-	iottwinmaker_getSyncJobCmd.MarkFlagRequired("sync-source")
+		iottwinmaker_getSyncJobCmd.Flags().String("sync-source", "", "The sync source.")
+		iottwinmaker_getSyncJobCmd.Flags().String("workspace-id", "", "The workspace ID.")
+		iottwinmaker_getSyncJobCmd.MarkFlagRequired("sync-source")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_getSyncJobCmd)
 }

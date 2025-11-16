@@ -12,11 +12,13 @@ var directconnect_describeVirtualInterfacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_describeVirtualInterfacesCmd).Standalone()
+	carapace.Gen(directconnect_describeVirtualInterfacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_describeVirtualInterfacesCmd).Standalone()
 
-	directconnect_describeVirtualInterfacesCmd.Flags().String("connection-id", "", "The ID of the connection.")
-	directconnect_describeVirtualInterfacesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	directconnect_describeVirtualInterfacesCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	directconnect_describeVirtualInterfacesCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
+		directconnect_describeVirtualInterfacesCmd.Flags().String("connection-id", "", "The ID of the connection.")
+		directconnect_describeVirtualInterfacesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		directconnect_describeVirtualInterfacesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		directconnect_describeVirtualInterfacesCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
+	})
 	directconnectCmd.AddCommand(directconnect_describeVirtualInterfacesCmd)
 }

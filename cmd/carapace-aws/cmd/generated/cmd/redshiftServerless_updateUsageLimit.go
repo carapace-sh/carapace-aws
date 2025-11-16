@@ -12,11 +12,13 @@ var redshiftServerless_updateUsageLimitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_updateUsageLimitCmd).Standalone()
+	carapace.Gen(redshiftServerless_updateUsageLimitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_updateUsageLimitCmd).Standalone()
 
-	redshiftServerless_updateUsageLimitCmd.Flags().String("amount", "", "The new limit amount.")
-	redshiftServerless_updateUsageLimitCmd.Flags().String("breach-action", "", "The new action that Amazon Redshift Serverless takes when the limit is reached.")
-	redshiftServerless_updateUsageLimitCmd.Flags().String("usage-limit-id", "", "The identifier of the usage limit to update.")
-	redshiftServerless_updateUsageLimitCmd.MarkFlagRequired("usage-limit-id")
+		redshiftServerless_updateUsageLimitCmd.Flags().String("amount", "", "The new limit amount.")
+		redshiftServerless_updateUsageLimitCmd.Flags().String("breach-action", "", "The new action that Amazon Redshift Serverless takes when the limit is reached.")
+		redshiftServerless_updateUsageLimitCmd.Flags().String("usage-limit-id", "", "The identifier of the usage limit to update.")
+		redshiftServerless_updateUsageLimitCmd.MarkFlagRequired("usage-limit-id")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_updateUsageLimitCmd)
 }

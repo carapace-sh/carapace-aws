@@ -12,10 +12,12 @@ var sesv2_putConfigurationSetVdmOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putConfigurationSetVdmOptionsCmd).Standalone()
+	carapace.Gen(sesv2_putConfigurationSetVdmOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putConfigurationSetVdmOptionsCmd).Standalone()
 
-	sesv2_putConfigurationSetVdmOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
-	sesv2_putConfigurationSetVdmOptionsCmd.Flags().String("vdm-options", "", "The VDM options to apply to the configuration set.")
-	sesv2_putConfigurationSetVdmOptionsCmd.MarkFlagRequired("configuration-set-name")
+		sesv2_putConfigurationSetVdmOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
+		sesv2_putConfigurationSetVdmOptionsCmd.Flags().String("vdm-options", "", "The VDM options to apply to the configuration set.")
+		sesv2_putConfigurationSetVdmOptionsCmd.MarkFlagRequired("configuration-set-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_putConfigurationSetVdmOptionsCmd)
 }

@@ -12,13 +12,15 @@ var config_getAggregateConfigRuleComplianceSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getAggregateConfigRuleComplianceSummaryCmd).Standalone()
+	carapace.Gen(config_getAggregateConfigRuleComplianceSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getAggregateConfigRuleComplianceSummaryCmd).Standalone()
 
-	config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
-	config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("filters", "", "Filters the results based on the ConfigRuleComplianceSummaryFilters object.")
-	config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("group-by-key", "", "Groups the result based on ACCOUNT\\_ID or AWS\\_REGION.")
-	config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("limit", "", "The maximum number of evaluation results returned on each page.")
-	config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
-	config_getAggregateConfigRuleComplianceSummaryCmd.MarkFlagRequired("configuration-aggregator-name")
+		config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
+		config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("filters", "", "Filters the results based on the ConfigRuleComplianceSummaryFilters object.")
+		config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("group-by-key", "", "Groups the result based on ACCOUNT\\_ID or AWS\\_REGION.")
+		config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("limit", "", "The maximum number of evaluation results returned on each page.")
+		config_getAggregateConfigRuleComplianceSummaryCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+		config_getAggregateConfigRuleComplianceSummaryCmd.MarkFlagRequired("configuration-aggregator-name")
+	})
 	configCmd.AddCommand(config_getAggregateConfigRuleComplianceSummaryCmd)
 }

@@ -12,10 +12,12 @@ var ec2_getAllowedImagesSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getAllowedImagesSettingsCmd).Standalone()
+	carapace.Gen(ec2_getAllowedImagesSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getAllowedImagesSettingsCmd).Standalone()
 
-	ec2_getAllowedImagesSettingsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getAllowedImagesSettingsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getAllowedImagesSettingsCmd.Flag("no-dry-run").Hidden = true
+		ec2_getAllowedImagesSettingsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getAllowedImagesSettingsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getAllowedImagesSettingsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_getAllowedImagesSettingsCmd)
 }

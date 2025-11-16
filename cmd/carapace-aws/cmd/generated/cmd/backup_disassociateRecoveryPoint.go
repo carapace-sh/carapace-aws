@@ -12,11 +12,13 @@ var backup_disassociateRecoveryPointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_disassociateRecoveryPointCmd).Standalone()
+	carapace.Gen(backup_disassociateRecoveryPointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_disassociateRecoveryPointCmd).Standalone()
 
-	backup_disassociateRecoveryPointCmd.Flags().String("backup-vault-name", "", "The unique name of an Backup vault.")
-	backup_disassociateRecoveryPointCmd.Flags().String("recovery-point-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies an Backup recovery point.")
-	backup_disassociateRecoveryPointCmd.MarkFlagRequired("backup-vault-name")
-	backup_disassociateRecoveryPointCmd.MarkFlagRequired("recovery-point-arn")
+		backup_disassociateRecoveryPointCmd.Flags().String("backup-vault-name", "", "The unique name of an Backup vault.")
+		backup_disassociateRecoveryPointCmd.Flags().String("recovery-point-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies an Backup recovery point.")
+		backup_disassociateRecoveryPointCmd.MarkFlagRequired("backup-vault-name")
+		backup_disassociateRecoveryPointCmd.MarkFlagRequired("recovery-point-arn")
+	})
 	backupCmd.AddCommand(backup_disassociateRecoveryPointCmd)
 }

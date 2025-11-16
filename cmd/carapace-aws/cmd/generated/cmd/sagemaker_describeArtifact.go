@@ -12,9 +12,11 @@ var sagemaker_describeArtifactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeArtifactCmd).Standalone()
+	carapace.Gen(sagemaker_describeArtifactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeArtifactCmd).Standalone()
 
-	sagemaker_describeArtifactCmd.Flags().String("artifact-arn", "", "The Amazon Resource Name (ARN) of the artifact to describe.")
-	sagemaker_describeArtifactCmd.MarkFlagRequired("artifact-arn")
+		sagemaker_describeArtifactCmd.Flags().String("artifact-arn", "", "The Amazon Resource Name (ARN) of the artifact to describe.")
+		sagemaker_describeArtifactCmd.MarkFlagRequired("artifact-arn")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeArtifactCmd)
 }

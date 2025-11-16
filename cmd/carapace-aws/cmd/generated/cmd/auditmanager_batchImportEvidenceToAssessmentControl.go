@@ -12,15 +12,17 @@ var auditmanager_batchImportEvidenceToAssessmentControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_batchImportEvidenceToAssessmentControlCmd).Standalone()
+	carapace.Gen(auditmanager_batchImportEvidenceToAssessmentControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_batchImportEvidenceToAssessmentControlCmd).Standalone()
 
-	auditmanager_batchImportEvidenceToAssessmentControlCmd.Flags().String("assessment-id", "", "The identifier for the assessment.")
-	auditmanager_batchImportEvidenceToAssessmentControlCmd.Flags().String("control-id", "", "The identifier for the control.")
-	auditmanager_batchImportEvidenceToAssessmentControlCmd.Flags().String("control-set-id", "", "The identifier for the control set.")
-	auditmanager_batchImportEvidenceToAssessmentControlCmd.Flags().String("manual-evidence", "", "The list of manual evidence objects.")
-	auditmanager_batchImportEvidenceToAssessmentControlCmd.MarkFlagRequired("assessment-id")
-	auditmanager_batchImportEvidenceToAssessmentControlCmd.MarkFlagRequired("control-id")
-	auditmanager_batchImportEvidenceToAssessmentControlCmd.MarkFlagRequired("control-set-id")
-	auditmanager_batchImportEvidenceToAssessmentControlCmd.MarkFlagRequired("manual-evidence")
+		auditmanager_batchImportEvidenceToAssessmentControlCmd.Flags().String("assessment-id", "", "The identifier for the assessment.")
+		auditmanager_batchImportEvidenceToAssessmentControlCmd.Flags().String("control-id", "", "The identifier for the control.")
+		auditmanager_batchImportEvidenceToAssessmentControlCmd.Flags().String("control-set-id", "", "The identifier for the control set.")
+		auditmanager_batchImportEvidenceToAssessmentControlCmd.Flags().String("manual-evidence", "", "The list of manual evidence objects.")
+		auditmanager_batchImportEvidenceToAssessmentControlCmd.MarkFlagRequired("assessment-id")
+		auditmanager_batchImportEvidenceToAssessmentControlCmd.MarkFlagRequired("control-id")
+		auditmanager_batchImportEvidenceToAssessmentControlCmd.MarkFlagRequired("control-set-id")
+		auditmanager_batchImportEvidenceToAssessmentControlCmd.MarkFlagRequired("manual-evidence")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_batchImportEvidenceToAssessmentControlCmd)
 }

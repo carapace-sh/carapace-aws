@@ -12,13 +12,15 @@ var identitystore_getGroupMembershipIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(identitystore_getGroupMembershipIdCmd).Standalone()
+	carapace.Gen(identitystore_getGroupMembershipIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(identitystore_getGroupMembershipIdCmd).Standalone()
 
-	identitystore_getGroupMembershipIdCmd.Flags().String("group-id", "", "The identifier for a group in the identity store.")
-	identitystore_getGroupMembershipIdCmd.Flags().String("identity-store-id", "", "The globally unique identifier for the identity store.")
-	identitystore_getGroupMembershipIdCmd.Flags().String("member-id", "", "An object that contains the identifier of a group member.")
-	identitystore_getGroupMembershipIdCmd.MarkFlagRequired("group-id")
-	identitystore_getGroupMembershipIdCmd.MarkFlagRequired("identity-store-id")
-	identitystore_getGroupMembershipIdCmd.MarkFlagRequired("member-id")
+		identitystore_getGroupMembershipIdCmd.Flags().String("group-id", "", "The identifier for a group in the identity store.")
+		identitystore_getGroupMembershipIdCmd.Flags().String("identity-store-id", "", "The globally unique identifier for the identity store.")
+		identitystore_getGroupMembershipIdCmd.Flags().String("member-id", "", "An object that contains the identifier of a group member.")
+		identitystore_getGroupMembershipIdCmd.MarkFlagRequired("group-id")
+		identitystore_getGroupMembershipIdCmd.MarkFlagRequired("identity-store-id")
+		identitystore_getGroupMembershipIdCmd.MarkFlagRequired("member-id")
+	})
 	identitystoreCmd.AddCommand(identitystore_getGroupMembershipIdCmd)
 }

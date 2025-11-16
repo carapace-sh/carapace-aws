@@ -12,11 +12,13 @@ var iam_updateLoginProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_updateLoginProfileCmd).Standalone()
+	carapace.Gen(iam_updateLoginProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_updateLoginProfileCmd).Standalone()
 
-	iam_updateLoginProfileCmd.Flags().String("password", "", "The new password for the specified IAM user.")
-	iam_updateLoginProfileCmd.Flags().String("password-reset-required", "", "Allows this new password to be used only once by requiring the specified IAM user to set a new password on next sign-in.")
-	iam_updateLoginProfileCmd.Flags().String("user-name", "", "The name of the user whose password you want to update.")
-	iam_updateLoginProfileCmd.MarkFlagRequired("user-name")
+		iam_updateLoginProfileCmd.Flags().String("password", "", "The new password for the specified IAM user.")
+		iam_updateLoginProfileCmd.Flags().String("password-reset-required", "", "Allows this new password to be used only once by requiring the specified IAM user to set a new password on next sign-in.")
+		iam_updateLoginProfileCmd.Flags().String("user-name", "", "The name of the user whose password you want to update.")
+		iam_updateLoginProfileCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_updateLoginProfileCmd)
 }

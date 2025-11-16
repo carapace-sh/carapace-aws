@@ -12,9 +12,11 @@ var sesv2_getBlacklistReportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getBlacklistReportsCmd).Standalone()
+	carapace.Gen(sesv2_getBlacklistReportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getBlacklistReportsCmd).Standalone()
 
-	sesv2_getBlacklistReportsCmd.Flags().String("blacklist-item-names", "", "A list of IP addresses that you want to retrieve blacklist information about.")
-	sesv2_getBlacklistReportsCmd.MarkFlagRequired("blacklist-item-names")
+		sesv2_getBlacklistReportsCmd.Flags().String("blacklist-item-names", "", "A list of IP addresses that you want to retrieve blacklist information about.")
+		sesv2_getBlacklistReportsCmd.MarkFlagRequired("blacklist-item-names")
+	})
 	sesv2Cmd.AddCommand(sesv2_getBlacklistReportsCmd)
 }

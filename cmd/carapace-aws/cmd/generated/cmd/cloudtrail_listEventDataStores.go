@@ -12,9 +12,11 @@ var cloudtrail_listEventDataStoresCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_listEventDataStoresCmd).Standalone()
+	carapace.Gen(cloudtrail_listEventDataStoresCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_listEventDataStoresCmd).Standalone()
 
-	cloudtrail_listEventDataStoresCmd.Flags().String("max-results", "", "The maximum number of event data stores to display on a single page.")
-	cloudtrail_listEventDataStoresCmd.Flags().String("next-token", "", "A token you can use to get the next page of event data store results.")
+		cloudtrail_listEventDataStoresCmd.Flags().String("max-results", "", "The maximum number of event data stores to display on a single page.")
+		cloudtrail_listEventDataStoresCmd.Flags().String("next-token", "", "A token you can use to get the next page of event data store results.")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_listEventDataStoresCmd)
 }

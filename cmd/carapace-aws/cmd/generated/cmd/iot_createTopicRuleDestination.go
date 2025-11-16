@@ -12,9 +12,11 @@ var iot_createTopicRuleDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createTopicRuleDestinationCmd).Standalone()
+	carapace.Gen(iot_createTopicRuleDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createTopicRuleDestinationCmd).Standalone()
 
-	iot_createTopicRuleDestinationCmd.Flags().String("destination-configuration", "", "The topic rule destination configuration.")
-	iot_createTopicRuleDestinationCmd.MarkFlagRequired("destination-configuration")
+		iot_createTopicRuleDestinationCmd.Flags().String("destination-configuration", "", "The topic rule destination configuration.")
+		iot_createTopicRuleDestinationCmd.MarkFlagRequired("destination-configuration")
+	})
 	iotCmd.AddCommand(iot_createTopicRuleDestinationCmd)
 }

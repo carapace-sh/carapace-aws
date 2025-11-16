@@ -12,9 +12,11 @@ var location_deletePlaceIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_deletePlaceIndexCmd).Standalone()
+	carapace.Gen(location_deletePlaceIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_deletePlaceIndexCmd).Standalone()
 
-	location_deletePlaceIndexCmd.Flags().String("index-name", "", "The name of the place index resource to be deleted.")
-	location_deletePlaceIndexCmd.MarkFlagRequired("index-name")
+		location_deletePlaceIndexCmd.Flags().String("index-name", "", "The name of the place index resource to be deleted.")
+		location_deletePlaceIndexCmd.MarkFlagRequired("index-name")
+	})
 	locationCmd.AddCommand(location_deletePlaceIndexCmd)
 }

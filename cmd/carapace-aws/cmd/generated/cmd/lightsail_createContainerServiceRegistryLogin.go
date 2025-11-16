@@ -12,7 +12,9 @@ var lightsail_createContainerServiceRegistryLoginCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_createContainerServiceRegistryLoginCmd).Standalone()
+	carapace.Gen(lightsail_createContainerServiceRegistryLoginCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_createContainerServiceRegistryLoginCmd).Standalone()
 
+	})
 	lightsailCmd.AddCommand(lightsail_createContainerServiceRegistryLoginCmd)
 }

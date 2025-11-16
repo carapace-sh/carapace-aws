@@ -12,13 +12,15 @@ var frauddetector_deleteModelVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteModelVersionCmd).Standalone()
+	carapace.Gen(frauddetector_deleteModelVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteModelVersionCmd).Standalone()
 
-	frauddetector_deleteModelVersionCmd.Flags().String("model-id", "", "The model ID of the model version to delete.")
-	frauddetector_deleteModelVersionCmd.Flags().String("model-type", "", "The model type of the model version to delete.")
-	frauddetector_deleteModelVersionCmd.Flags().String("model-version-number", "", "The model version number of the model version to delete.")
-	frauddetector_deleteModelVersionCmd.MarkFlagRequired("model-id")
-	frauddetector_deleteModelVersionCmd.MarkFlagRequired("model-type")
-	frauddetector_deleteModelVersionCmd.MarkFlagRequired("model-version-number")
+		frauddetector_deleteModelVersionCmd.Flags().String("model-id", "", "The model ID of the model version to delete.")
+		frauddetector_deleteModelVersionCmd.Flags().String("model-type", "", "The model type of the model version to delete.")
+		frauddetector_deleteModelVersionCmd.Flags().String("model-version-number", "", "The model version number of the model version to delete.")
+		frauddetector_deleteModelVersionCmd.MarkFlagRequired("model-id")
+		frauddetector_deleteModelVersionCmd.MarkFlagRequired("model-type")
+		frauddetector_deleteModelVersionCmd.MarkFlagRequired("model-version-number")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteModelVersionCmd)
 }

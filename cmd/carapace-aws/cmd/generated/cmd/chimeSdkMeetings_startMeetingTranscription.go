@@ -12,11 +12,13 @@ var chimeSdkMeetings_startMeetingTranscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMeetings_startMeetingTranscriptionCmd).Standalone()
+	carapace.Gen(chimeSdkMeetings_startMeetingTranscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMeetings_startMeetingTranscriptionCmd).Standalone()
 
-	chimeSdkMeetings_startMeetingTranscriptionCmd.Flags().String("meeting-id", "", "The unique ID of the meeting being transcribed.")
-	chimeSdkMeetings_startMeetingTranscriptionCmd.Flags().String("transcription-configuration", "", "The configuration for the current transcription operation.")
-	chimeSdkMeetings_startMeetingTranscriptionCmd.MarkFlagRequired("meeting-id")
-	chimeSdkMeetings_startMeetingTranscriptionCmd.MarkFlagRequired("transcription-configuration")
+		chimeSdkMeetings_startMeetingTranscriptionCmd.Flags().String("meeting-id", "", "The unique ID of the meeting being transcribed.")
+		chimeSdkMeetings_startMeetingTranscriptionCmd.Flags().String("transcription-configuration", "", "The configuration for the current transcription operation.")
+		chimeSdkMeetings_startMeetingTranscriptionCmd.MarkFlagRequired("meeting-id")
+		chimeSdkMeetings_startMeetingTranscriptionCmd.MarkFlagRequired("transcription-configuration")
+	})
 	chimeSdkMeetingsCmd.AddCommand(chimeSdkMeetings_startMeetingTranscriptionCmd)
 }

@@ -12,14 +12,16 @@ var ec2_describeInstanceTypeOfferingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeInstanceTypeOfferingsCmd).Standalone()
+	carapace.Gen(ec2_describeInstanceTypeOfferingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeInstanceTypeOfferingsCmd).Standalone()
 
-	ec2_describeInstanceTypeOfferingsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeInstanceTypeOfferingsCmd.Flags().String("filters", "", "One or more filters.")
-	ec2_describeInstanceTypeOfferingsCmd.Flags().String("location-type", "", "The location type.")
-	ec2_describeInstanceTypeOfferingsCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	ec2_describeInstanceTypeOfferingsCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
-	ec2_describeInstanceTypeOfferingsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeInstanceTypeOfferingsCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeInstanceTypeOfferingsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeInstanceTypeOfferingsCmd.Flags().String("filters", "", "One or more filters.")
+		ec2_describeInstanceTypeOfferingsCmd.Flags().String("location-type", "", "The location type.")
+		ec2_describeInstanceTypeOfferingsCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		ec2_describeInstanceTypeOfferingsCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		ec2_describeInstanceTypeOfferingsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeInstanceTypeOfferingsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeInstanceTypeOfferingsCmd)
 }

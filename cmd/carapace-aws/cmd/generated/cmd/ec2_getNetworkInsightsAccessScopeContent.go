@@ -12,12 +12,14 @@ var ec2_getNetworkInsightsAccessScopeContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getNetworkInsightsAccessScopeContentCmd).Standalone()
+	carapace.Gen(ec2_getNetworkInsightsAccessScopeContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getNetworkInsightsAccessScopeContentCmd).Standalone()
 
-	ec2_getNetworkInsightsAccessScopeContentCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getNetworkInsightsAccessScopeContentCmd.Flags().String("network-insights-access-scope-id", "", "The ID of the Network Access Scope.")
-	ec2_getNetworkInsightsAccessScopeContentCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getNetworkInsightsAccessScopeContentCmd.MarkFlagRequired("network-insights-access-scope-id")
-	ec2_getNetworkInsightsAccessScopeContentCmd.Flag("no-dry-run").Hidden = true
+		ec2_getNetworkInsightsAccessScopeContentCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getNetworkInsightsAccessScopeContentCmd.Flags().String("network-insights-access-scope-id", "", "The ID of the Network Access Scope.")
+		ec2_getNetworkInsightsAccessScopeContentCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getNetworkInsightsAccessScopeContentCmd.MarkFlagRequired("network-insights-access-scope-id")
+		ec2_getNetworkInsightsAccessScopeContentCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_getNetworkInsightsAccessScopeContentCmd)
 }

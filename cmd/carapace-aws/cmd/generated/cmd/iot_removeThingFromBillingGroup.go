@@ -12,11 +12,13 @@ var iot_removeThingFromBillingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_removeThingFromBillingGroupCmd).Standalone()
+	carapace.Gen(iot_removeThingFromBillingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_removeThingFromBillingGroupCmd).Standalone()
 
-	iot_removeThingFromBillingGroupCmd.Flags().String("billing-group-arn", "", "The ARN of the billing group.")
-	iot_removeThingFromBillingGroupCmd.Flags().String("billing-group-name", "", "The name of the billing group.")
-	iot_removeThingFromBillingGroupCmd.Flags().String("thing-arn", "", "The ARN of the thing to be removed from the billing group.")
-	iot_removeThingFromBillingGroupCmd.Flags().String("thing-name", "", "The name of the thing to be removed from the billing group.")
+		iot_removeThingFromBillingGroupCmd.Flags().String("billing-group-arn", "", "The ARN of the billing group.")
+		iot_removeThingFromBillingGroupCmd.Flags().String("billing-group-name", "", "The name of the billing group.")
+		iot_removeThingFromBillingGroupCmd.Flags().String("thing-arn", "", "The ARN of the thing to be removed from the billing group.")
+		iot_removeThingFromBillingGroupCmd.Flags().String("thing-name", "", "The name of the thing to be removed from the billing group.")
+	})
 	iotCmd.AddCommand(iot_removeThingFromBillingGroupCmd)
 }

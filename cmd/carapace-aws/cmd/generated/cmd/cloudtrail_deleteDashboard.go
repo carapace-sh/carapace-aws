@@ -12,9 +12,11 @@ var cloudtrail_deleteDashboardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_deleteDashboardCmd).Standalone()
+	carapace.Gen(cloudtrail_deleteDashboardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_deleteDashboardCmd).Standalone()
 
-	cloudtrail_deleteDashboardCmd.Flags().String("dashboard-id", "", "The name or ARN for the dashboard.")
-	cloudtrail_deleteDashboardCmd.MarkFlagRequired("dashboard-id")
+		cloudtrail_deleteDashboardCmd.Flags().String("dashboard-id", "", "The name or ARN for the dashboard.")
+		cloudtrail_deleteDashboardCmd.MarkFlagRequired("dashboard-id")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_deleteDashboardCmd)
 }

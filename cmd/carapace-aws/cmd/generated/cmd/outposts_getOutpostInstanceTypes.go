@@ -12,11 +12,13 @@ var outposts_getOutpostInstanceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_getOutpostInstanceTypesCmd).Standalone()
+	carapace.Gen(outposts_getOutpostInstanceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_getOutpostInstanceTypesCmd).Standalone()
 
-	outposts_getOutpostInstanceTypesCmd.Flags().String("max-results", "", "")
-	outposts_getOutpostInstanceTypesCmd.Flags().String("next-token", "", "")
-	outposts_getOutpostInstanceTypesCmd.Flags().String("outpost-id", "", "The ID or ARN of the Outpost.")
-	outposts_getOutpostInstanceTypesCmd.MarkFlagRequired("outpost-id")
+		outposts_getOutpostInstanceTypesCmd.Flags().String("max-results", "", "")
+		outposts_getOutpostInstanceTypesCmd.Flags().String("next-token", "", "")
+		outposts_getOutpostInstanceTypesCmd.Flags().String("outpost-id", "", "The ID or ARN of the Outpost.")
+		outposts_getOutpostInstanceTypesCmd.MarkFlagRequired("outpost-id")
+	})
 	outpostsCmd.AddCommand(outposts_getOutpostInstanceTypesCmd)
 }

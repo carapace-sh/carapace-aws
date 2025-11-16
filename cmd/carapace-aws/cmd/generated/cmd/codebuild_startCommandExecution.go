@@ -12,12 +12,14 @@ var codebuild_startCommandExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_startCommandExecutionCmd).Standalone()
+	carapace.Gen(codebuild_startCommandExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_startCommandExecutionCmd).Standalone()
 
-	codebuild_startCommandExecutionCmd.Flags().String("command", "", "The command that needs to be executed.")
-	codebuild_startCommandExecutionCmd.Flags().String("sandbox-id", "", "A `sandboxId` or `sandboxArn`.")
-	codebuild_startCommandExecutionCmd.Flags().String("type", "", "The command type.")
-	codebuild_startCommandExecutionCmd.MarkFlagRequired("command")
-	codebuild_startCommandExecutionCmd.MarkFlagRequired("sandbox-id")
+		codebuild_startCommandExecutionCmd.Flags().String("command", "", "The command that needs to be executed.")
+		codebuild_startCommandExecutionCmd.Flags().String("sandbox-id", "", "A `sandboxId` or `sandboxArn`.")
+		codebuild_startCommandExecutionCmd.Flags().String("type", "", "The command type.")
+		codebuild_startCommandExecutionCmd.MarkFlagRequired("command")
+		codebuild_startCommandExecutionCmd.MarkFlagRequired("sandbox-id")
+	})
 	codebuildCmd.AddCommand(codebuild_startCommandExecutionCmd)
 }

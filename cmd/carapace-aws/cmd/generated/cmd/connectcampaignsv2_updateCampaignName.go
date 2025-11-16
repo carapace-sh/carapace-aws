@@ -12,11 +12,13 @@ var connectcampaignsv2_updateCampaignNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_updateCampaignNameCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_updateCampaignNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_updateCampaignNameCmd).Standalone()
 
-	connectcampaignsv2_updateCampaignNameCmd.Flags().String("id", "", "")
-	connectcampaignsv2_updateCampaignNameCmd.Flags().String("name", "", "")
-	connectcampaignsv2_updateCampaignNameCmd.MarkFlagRequired("id")
-	connectcampaignsv2_updateCampaignNameCmd.MarkFlagRequired("name")
+		connectcampaignsv2_updateCampaignNameCmd.Flags().String("id", "", "")
+		connectcampaignsv2_updateCampaignNameCmd.Flags().String("name", "", "")
+		connectcampaignsv2_updateCampaignNameCmd.MarkFlagRequired("id")
+		connectcampaignsv2_updateCampaignNameCmd.MarkFlagRequired("name")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_updateCampaignNameCmd)
 }

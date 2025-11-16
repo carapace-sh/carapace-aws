@@ -12,11 +12,13 @@ var customerProfiles_stopUploadJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_stopUploadJobCmd).Standalone()
+	carapace.Gen(customerProfiles_stopUploadJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_stopUploadJobCmd).Standalone()
 
-	customerProfiles_stopUploadJobCmd.Flags().String("domain-name", "", "The unique name of the domain containing the upload job to stop.")
-	customerProfiles_stopUploadJobCmd.Flags().String("job-id", "", "The unique identifier of the upload job to stop.")
-	customerProfiles_stopUploadJobCmd.MarkFlagRequired("domain-name")
-	customerProfiles_stopUploadJobCmd.MarkFlagRequired("job-id")
+		customerProfiles_stopUploadJobCmd.Flags().String("domain-name", "", "The unique name of the domain containing the upload job to stop.")
+		customerProfiles_stopUploadJobCmd.Flags().String("job-id", "", "The unique identifier of the upload job to stop.")
+		customerProfiles_stopUploadJobCmd.MarkFlagRequired("domain-name")
+		customerProfiles_stopUploadJobCmd.MarkFlagRequired("job-id")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_stopUploadJobCmd)
 }

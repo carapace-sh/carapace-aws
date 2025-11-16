@@ -12,11 +12,13 @@ var bedrock_updateProvisionedModelThroughputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_updateProvisionedModelThroughputCmd).Standalone()
+	carapace.Gen(bedrock_updateProvisionedModelThroughputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_updateProvisionedModelThroughputCmd).Standalone()
 
-	bedrock_updateProvisionedModelThroughputCmd.Flags().String("desired-model-id", "", "The Amazon Resource Name (ARN) of the new model to associate with this Provisioned Throughput.")
-	bedrock_updateProvisionedModelThroughputCmd.Flags().String("desired-provisioned-model-name", "", "The new name for this Provisioned Throughput.")
-	bedrock_updateProvisionedModelThroughputCmd.Flags().String("provisioned-model-id", "", "The Amazon Resource Name (ARN) or name of the Provisioned Throughput to update.")
-	bedrock_updateProvisionedModelThroughputCmd.MarkFlagRequired("provisioned-model-id")
+		bedrock_updateProvisionedModelThroughputCmd.Flags().String("desired-model-id", "", "The Amazon Resource Name (ARN) of the new model to associate with this Provisioned Throughput.")
+		bedrock_updateProvisionedModelThroughputCmd.Flags().String("desired-provisioned-model-name", "", "The new name for this Provisioned Throughput.")
+		bedrock_updateProvisionedModelThroughputCmd.Flags().String("provisioned-model-id", "", "The Amazon Resource Name (ARN) or name of the Provisioned Throughput to update.")
+		bedrock_updateProvisionedModelThroughputCmd.MarkFlagRequired("provisioned-model-id")
+	})
 	bedrockCmd.AddCommand(bedrock_updateProvisionedModelThroughputCmd)
 }

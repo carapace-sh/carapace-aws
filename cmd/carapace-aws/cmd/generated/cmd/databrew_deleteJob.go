@@ -12,9 +12,11 @@ var databrew_deleteJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_deleteJobCmd).Standalone()
+	carapace.Gen(databrew_deleteJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_deleteJobCmd).Standalone()
 
-	databrew_deleteJobCmd.Flags().String("name", "", "The name of the job to be deleted.")
-	databrew_deleteJobCmd.MarkFlagRequired("name")
+		databrew_deleteJobCmd.Flags().String("name", "", "The name of the job to be deleted.")
+		databrew_deleteJobCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_deleteJobCmd)
 }

@@ -12,9 +12,11 @@ var apprunner_describeAutoScalingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_describeAutoScalingConfigurationCmd).Standalone()
+	carapace.Gen(apprunner_describeAutoScalingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_describeAutoScalingConfigurationCmd).Standalone()
 
-	apprunner_describeAutoScalingConfigurationCmd.Flags().String("auto-scaling-configuration-arn", "", "The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want a description for.")
-	apprunner_describeAutoScalingConfigurationCmd.MarkFlagRequired("auto-scaling-configuration-arn")
+		apprunner_describeAutoScalingConfigurationCmd.Flags().String("auto-scaling-configuration-arn", "", "The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want a description for.")
+		apprunner_describeAutoScalingConfigurationCmd.MarkFlagRequired("auto-scaling-configuration-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_describeAutoScalingConfigurationCmd)
 }

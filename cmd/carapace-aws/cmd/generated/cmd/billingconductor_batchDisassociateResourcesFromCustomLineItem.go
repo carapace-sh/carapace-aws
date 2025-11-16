@@ -12,12 +12,14 @@ var billingconductor_batchDisassociateResourcesFromCustomLineItemCmd = &cobra.Co
 }
 
 func init() {
-	carapace.Gen(billingconductor_batchDisassociateResourcesFromCustomLineItemCmd).Standalone()
+	carapace.Gen(billingconductor_batchDisassociateResourcesFromCustomLineItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_batchDisassociateResourcesFromCustomLineItemCmd).Standalone()
 
-	billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.Flags().String("billing-period-range", "", "")
-	billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.Flags().String("resource-arns", "", "A list containing the ARNs of resources to be disassociated.")
-	billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.Flags().String("target-arn", "", "A percentage custom line item ARN to disassociate the resources from.")
-	billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.MarkFlagRequired("resource-arns")
-	billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.MarkFlagRequired("target-arn")
+		billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.Flags().String("billing-period-range", "", "")
+		billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.Flags().String("resource-arns", "", "A list containing the ARNs of resources to be disassociated.")
+		billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.Flags().String("target-arn", "", "A percentage custom line item ARN to disassociate the resources from.")
+		billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.MarkFlagRequired("resource-arns")
+		billingconductor_batchDisassociateResourcesFromCustomLineItemCmd.MarkFlagRequired("target-arn")
+	})
 	billingconductorCmd.AddCommand(billingconductor_batchDisassociateResourcesFromCustomLineItemCmd)
 }

@@ -12,9 +12,11 @@ var cloudsearch_indexDocumentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_indexDocumentsCmd).Standalone()
+	carapace.Gen(cloudsearch_indexDocumentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_indexDocumentsCmd).Standalone()
 
-	cloudsearch_indexDocumentsCmd.Flags().String("domain-name", "", "")
-	cloudsearch_indexDocumentsCmd.MarkFlagRequired("domain-name")
+		cloudsearch_indexDocumentsCmd.Flags().String("domain-name", "", "")
+		cloudsearch_indexDocumentsCmd.MarkFlagRequired("domain-name")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_indexDocumentsCmd)
 }

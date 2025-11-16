@@ -12,9 +12,11 @@ var frauddetector_deleteExternalModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteExternalModelCmd).Standalone()
+	carapace.Gen(frauddetector_deleteExternalModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteExternalModelCmd).Standalone()
 
-	frauddetector_deleteExternalModelCmd.Flags().String("model-endpoint", "", "The endpoint of the Amazon Sagemaker model to delete.")
-	frauddetector_deleteExternalModelCmd.MarkFlagRequired("model-endpoint")
+		frauddetector_deleteExternalModelCmd.Flags().String("model-endpoint", "", "The endpoint of the Amazon Sagemaker model to delete.")
+		frauddetector_deleteExternalModelCmd.MarkFlagRequired("model-endpoint")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteExternalModelCmd)
 }

@@ -12,9 +12,11 @@ var bedrock_getAutomatedReasoningPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getAutomatedReasoningPolicyCmd).Standalone()
+	carapace.Gen(bedrock_getAutomatedReasoningPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getAutomatedReasoningPolicyCmd).Standalone()
 
-	bedrock_getAutomatedReasoningPolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy to retrieve.")
-	bedrock_getAutomatedReasoningPolicyCmd.MarkFlagRequired("policy-arn")
+		bedrock_getAutomatedReasoningPolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy to retrieve.")
+		bedrock_getAutomatedReasoningPolicyCmd.MarkFlagRequired("policy-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_getAutomatedReasoningPolicyCmd)
 }

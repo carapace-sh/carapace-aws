@@ -12,11 +12,13 @@ var location_batchEvaluateGeofencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_batchEvaluateGeofencesCmd).Standalone()
+	carapace.Gen(location_batchEvaluateGeofencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_batchEvaluateGeofencesCmd).Standalone()
 
-	location_batchEvaluateGeofencesCmd.Flags().String("collection-name", "", "The geofence collection used in evaluating the position of devices against its geofences.")
-	location_batchEvaluateGeofencesCmd.Flags().String("device-position-updates", "", "Contains device details for each device to be evaluated against the given geofence collection.")
-	location_batchEvaluateGeofencesCmd.MarkFlagRequired("collection-name")
-	location_batchEvaluateGeofencesCmd.MarkFlagRequired("device-position-updates")
+		location_batchEvaluateGeofencesCmd.Flags().String("collection-name", "", "The geofence collection used in evaluating the position of devices against its geofences.")
+		location_batchEvaluateGeofencesCmd.Flags().String("device-position-updates", "", "Contains device details for each device to be evaluated against the given geofence collection.")
+		location_batchEvaluateGeofencesCmd.MarkFlagRequired("collection-name")
+		location_batchEvaluateGeofencesCmd.MarkFlagRequired("device-position-updates")
+	})
 	locationCmd.AddCommand(location_batchEvaluateGeofencesCmd)
 }

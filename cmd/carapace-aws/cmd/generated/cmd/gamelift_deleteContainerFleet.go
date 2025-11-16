@@ -12,9 +12,11 @@ var gamelift_deleteContainerFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteContainerFleetCmd).Standalone()
+	carapace.Gen(gamelift_deleteContainerFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteContainerFleetCmd).Standalone()
 
-	gamelift_deleteContainerFleetCmd.Flags().String("fleet-id", "", "A unique identifier for the container fleet to delete.")
-	gamelift_deleteContainerFleetCmd.MarkFlagRequired("fleet-id")
+		gamelift_deleteContainerFleetCmd.Flags().String("fleet-id", "", "A unique identifier for the container fleet to delete.")
+		gamelift_deleteContainerFleetCmd.MarkFlagRequired("fleet-id")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteContainerFleetCmd)
 }

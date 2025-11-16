@@ -12,9 +12,11 @@ var iotwireless_getWirelessDeviceStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getWirelessDeviceStatisticsCmd).Standalone()
+	carapace.Gen(iotwireless_getWirelessDeviceStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getWirelessDeviceStatisticsCmd).Standalone()
 
-	iotwireless_getWirelessDeviceStatisticsCmd.Flags().String("wireless-device-id", "", "The ID of the wireless device for which to get the data.")
-	iotwireless_getWirelessDeviceStatisticsCmd.MarkFlagRequired("wireless-device-id")
+		iotwireless_getWirelessDeviceStatisticsCmd.Flags().String("wireless-device-id", "", "The ID of the wireless device for which to get the data.")
+		iotwireless_getWirelessDeviceStatisticsCmd.MarkFlagRequired("wireless-device-id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getWirelessDeviceStatisticsCmd)
 }

@@ -12,7 +12,9 @@ var discovery_exportConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_exportConfigurationsCmd).Standalone()
+	carapace.Gen(discovery_exportConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_exportConfigurationsCmd).Standalone()
 
+	})
 	discoveryCmd.AddCommand(discovery_exportConfigurationsCmd)
 }

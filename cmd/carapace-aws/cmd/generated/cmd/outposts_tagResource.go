@@ -12,11 +12,13 @@ var outposts_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_tagResourceCmd).Standalone()
+	carapace.Gen(outposts_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_tagResourceCmd).Standalone()
 
-	outposts_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	outposts_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
-	outposts_tagResourceCmd.MarkFlagRequired("resource-arn")
-	outposts_tagResourceCmd.MarkFlagRequired("tags")
+		outposts_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		outposts_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
+		outposts_tagResourceCmd.MarkFlagRequired("resource-arn")
+		outposts_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	outpostsCmd.AddCommand(outposts_tagResourceCmd)
 }

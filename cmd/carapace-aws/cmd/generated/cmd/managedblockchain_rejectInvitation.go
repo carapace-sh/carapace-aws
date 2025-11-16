@@ -12,9 +12,11 @@ var managedblockchain_rejectInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchain_rejectInvitationCmd).Standalone()
+	carapace.Gen(managedblockchain_rejectInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchain_rejectInvitationCmd).Standalone()
 
-	managedblockchain_rejectInvitationCmd.Flags().String("invitation-id", "", "The unique identifier of the invitation to reject.")
-	managedblockchain_rejectInvitationCmd.MarkFlagRequired("invitation-id")
+		managedblockchain_rejectInvitationCmd.Flags().String("invitation-id", "", "The unique identifier of the invitation to reject.")
+		managedblockchain_rejectInvitationCmd.MarkFlagRequired("invitation-id")
+	})
 	managedblockchainCmd.AddCommand(managedblockchain_rejectInvitationCmd)
 }

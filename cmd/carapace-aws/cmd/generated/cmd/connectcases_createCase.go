@@ -12,15 +12,17 @@ var connectcases_createCaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_createCaseCmd).Standalone()
+	carapace.Gen(connectcases_createCaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_createCaseCmd).Standalone()
 
-	connectcases_createCaseCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connectcases_createCaseCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_createCaseCmd.Flags().String("fields", "", "An array of objects with field ID (matching ListFields/DescribeField) and value union data.")
-	connectcases_createCaseCmd.Flags().String("performed-by", "", "")
-	connectcases_createCaseCmd.Flags().String("template-id", "", "A unique identifier of a template.")
-	connectcases_createCaseCmd.MarkFlagRequired("domain-id")
-	connectcases_createCaseCmd.MarkFlagRequired("fields")
-	connectcases_createCaseCmd.MarkFlagRequired("template-id")
+		connectcases_createCaseCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connectcases_createCaseCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_createCaseCmd.Flags().String("fields", "", "An array of objects with field ID (matching ListFields/DescribeField) and value union data.")
+		connectcases_createCaseCmd.Flags().String("performed-by", "", "")
+		connectcases_createCaseCmd.Flags().String("template-id", "", "A unique identifier of a template.")
+		connectcases_createCaseCmd.MarkFlagRequired("domain-id")
+		connectcases_createCaseCmd.MarkFlagRequired("fields")
+		connectcases_createCaseCmd.MarkFlagRequired("template-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_createCaseCmd)
 }

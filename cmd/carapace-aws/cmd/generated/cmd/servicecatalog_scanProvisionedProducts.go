@@ -12,11 +12,13 @@ var servicecatalog_scanProvisionedProductsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_scanProvisionedProductsCmd).Standalone()
+	carapace.Gen(servicecatalog_scanProvisionedProductsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_scanProvisionedProductsCmd).Standalone()
 
-	servicecatalog_scanProvisionedProductsCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_scanProvisionedProductsCmd.Flags().String("access-level-filter", "", "The access level to use to obtain results.")
-	servicecatalog_scanProvisionedProductsCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_scanProvisionedProductsCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_scanProvisionedProductsCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_scanProvisionedProductsCmd.Flags().String("access-level-filter", "", "The access level to use to obtain results.")
+		servicecatalog_scanProvisionedProductsCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_scanProvisionedProductsCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_scanProvisionedProductsCmd)
 }

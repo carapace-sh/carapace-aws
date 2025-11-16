@@ -12,12 +12,14 @@ var eks_listInsightsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_listInsightsCmd).Standalone()
+	carapace.Gen(eks_listInsightsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_listInsightsCmd).Standalone()
 
-	eks_listInsightsCmd.Flags().String("cluster-name", "", "The name of the Amazon EKS cluster associated with the insights.")
-	eks_listInsightsCmd.Flags().String("filter", "", "The criteria to filter your list of insights for your cluster.")
-	eks_listInsightsCmd.Flags().String("max-results", "", "The maximum number of identity provider configurations returned by `ListInsights` in paginated output.")
-	eks_listInsightsCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `ListInsights` request.")
-	eks_listInsightsCmd.MarkFlagRequired("cluster-name")
+		eks_listInsightsCmd.Flags().String("cluster-name", "", "The name of the Amazon EKS cluster associated with the insights.")
+		eks_listInsightsCmd.Flags().String("filter", "", "The criteria to filter your list of insights for your cluster.")
+		eks_listInsightsCmd.Flags().String("max-results", "", "The maximum number of identity provider configurations returned by `ListInsights` in paginated output.")
+		eks_listInsightsCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `ListInsights` request.")
+		eks_listInsightsCmd.MarkFlagRequired("cluster-name")
+	})
 	eksCmd.AddCommand(eks_listInsightsCmd)
 }

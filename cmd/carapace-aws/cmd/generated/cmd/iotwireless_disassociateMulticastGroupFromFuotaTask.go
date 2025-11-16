@@ -12,11 +12,13 @@ var iotwireless_disassociateMulticastGroupFromFuotaTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_disassociateMulticastGroupFromFuotaTaskCmd).Standalone()
+	carapace.Gen(iotwireless_disassociateMulticastGroupFromFuotaTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_disassociateMulticastGroupFromFuotaTaskCmd).Standalone()
 
-	iotwireless_disassociateMulticastGroupFromFuotaTaskCmd.Flags().String("id", "", "")
-	iotwireless_disassociateMulticastGroupFromFuotaTaskCmd.Flags().String("multicast-group-id", "", "")
-	iotwireless_disassociateMulticastGroupFromFuotaTaskCmd.MarkFlagRequired("id")
-	iotwireless_disassociateMulticastGroupFromFuotaTaskCmd.MarkFlagRequired("multicast-group-id")
+		iotwireless_disassociateMulticastGroupFromFuotaTaskCmd.Flags().String("id", "", "")
+		iotwireless_disassociateMulticastGroupFromFuotaTaskCmd.Flags().String("multicast-group-id", "", "")
+		iotwireless_disassociateMulticastGroupFromFuotaTaskCmd.MarkFlagRequired("id")
+		iotwireless_disassociateMulticastGroupFromFuotaTaskCmd.MarkFlagRequired("multicast-group-id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_disassociateMulticastGroupFromFuotaTaskCmd)
 }

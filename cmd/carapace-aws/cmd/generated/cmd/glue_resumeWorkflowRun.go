@@ -12,13 +12,15 @@ var glue_resumeWorkflowRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_resumeWorkflowRunCmd).Standalone()
+	carapace.Gen(glue_resumeWorkflowRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_resumeWorkflowRunCmd).Standalone()
 
-	glue_resumeWorkflowRunCmd.Flags().String("name", "", "The name of the workflow to resume.")
-	glue_resumeWorkflowRunCmd.Flags().String("node-ids", "", "A list of the node IDs for the nodes you want to restart.")
-	glue_resumeWorkflowRunCmd.Flags().String("run-id", "", "The ID of the workflow run to resume.")
-	glue_resumeWorkflowRunCmd.MarkFlagRequired("name")
-	glue_resumeWorkflowRunCmd.MarkFlagRequired("node-ids")
-	glue_resumeWorkflowRunCmd.MarkFlagRequired("run-id")
+		glue_resumeWorkflowRunCmd.Flags().String("name", "", "The name of the workflow to resume.")
+		glue_resumeWorkflowRunCmd.Flags().String("node-ids", "", "A list of the node IDs for the nodes you want to restart.")
+		glue_resumeWorkflowRunCmd.Flags().String("run-id", "", "The ID of the workflow run to resume.")
+		glue_resumeWorkflowRunCmd.MarkFlagRequired("name")
+		glue_resumeWorkflowRunCmd.MarkFlagRequired("node-ids")
+		glue_resumeWorkflowRunCmd.MarkFlagRequired("run-id")
+	})
 	glueCmd.AddCommand(glue_resumeWorkflowRunCmd)
 }

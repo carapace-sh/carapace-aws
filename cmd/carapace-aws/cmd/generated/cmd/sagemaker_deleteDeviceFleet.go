@@ -12,9 +12,11 @@ var sagemaker_deleteDeviceFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteDeviceFleetCmd).Standalone()
+	carapace.Gen(sagemaker_deleteDeviceFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteDeviceFleetCmd).Standalone()
 
-	sagemaker_deleteDeviceFleetCmd.Flags().String("device-fleet-name", "", "The name of the fleet to delete.")
-	sagemaker_deleteDeviceFleetCmd.MarkFlagRequired("device-fleet-name")
+		sagemaker_deleteDeviceFleetCmd.Flags().String("device-fleet-name", "", "The name of the fleet to delete.")
+		sagemaker_deleteDeviceFleetCmd.MarkFlagRequired("device-fleet-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteDeviceFleetCmd)
 }

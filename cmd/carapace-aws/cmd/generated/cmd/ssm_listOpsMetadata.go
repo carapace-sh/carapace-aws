@@ -12,10 +12,12 @@ var ssm_listOpsMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_listOpsMetadataCmd).Standalone()
+	carapace.Gen(ssm_listOpsMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_listOpsMetadataCmd).Standalone()
 
-	ssm_listOpsMetadataCmd.Flags().String("filters", "", "One or more filters to limit the number of OpsMetadata objects returned by the call.")
-	ssm_listOpsMetadataCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_listOpsMetadataCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_listOpsMetadataCmd.Flags().String("filters", "", "One or more filters to limit the number of OpsMetadata objects returned by the call.")
+		ssm_listOpsMetadataCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_listOpsMetadataCmd.Flags().String("next-token", "", "A token to start the list.")
+	})
 	ssmCmd.AddCommand(ssm_listOpsMetadataCmd)
 }

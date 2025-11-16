@@ -12,9 +12,11 @@ var route53RecoveryReadiness_deleteRecoveryGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_deleteRecoveryGroupCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_deleteRecoveryGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_deleteRecoveryGroupCmd).Standalone()
 
-	route53RecoveryReadiness_deleteRecoveryGroupCmd.Flags().String("recovery-group-name", "", "The name of a recovery group.")
-	route53RecoveryReadiness_deleteRecoveryGroupCmd.MarkFlagRequired("recovery-group-name")
+		route53RecoveryReadiness_deleteRecoveryGroupCmd.Flags().String("recovery-group-name", "", "The name of a recovery group.")
+		route53RecoveryReadiness_deleteRecoveryGroupCmd.MarkFlagRequired("recovery-group-name")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_deleteRecoveryGroupCmd)
 }

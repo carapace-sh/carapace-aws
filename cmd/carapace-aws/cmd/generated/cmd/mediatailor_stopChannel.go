@@ -12,9 +12,11 @@ var mediatailor_stopChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_stopChannelCmd).Standalone()
+	carapace.Gen(mediatailor_stopChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_stopChannelCmd).Standalone()
 
-	mediatailor_stopChannelCmd.Flags().String("channel-name", "", "The name of the channel.")
-	mediatailor_stopChannelCmd.MarkFlagRequired("channel-name")
+		mediatailor_stopChannelCmd.Flags().String("channel-name", "", "The name of the channel.")
+		mediatailor_stopChannelCmd.MarkFlagRequired("channel-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_stopChannelCmd)
 }

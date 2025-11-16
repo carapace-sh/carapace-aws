@@ -12,12 +12,14 @@ var omics_updateAnnotationStoreVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_updateAnnotationStoreVersionCmd).Standalone()
+	carapace.Gen(omics_updateAnnotationStoreVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_updateAnnotationStoreVersionCmd).Standalone()
 
-	omics_updateAnnotationStoreVersionCmd.Flags().String("description", "", "The description of an annotation store.")
-	omics_updateAnnotationStoreVersionCmd.Flags().String("name", "", "The name of an annotation store.")
-	omics_updateAnnotationStoreVersionCmd.Flags().String("version-name", "", "The name of an annotation store version.")
-	omics_updateAnnotationStoreVersionCmd.MarkFlagRequired("name")
-	omics_updateAnnotationStoreVersionCmd.MarkFlagRequired("version-name")
+		omics_updateAnnotationStoreVersionCmd.Flags().String("description", "", "The description of an annotation store.")
+		omics_updateAnnotationStoreVersionCmd.Flags().String("name", "", "The name of an annotation store.")
+		omics_updateAnnotationStoreVersionCmd.Flags().String("version-name", "", "The name of an annotation store version.")
+		omics_updateAnnotationStoreVersionCmd.MarkFlagRequired("name")
+		omics_updateAnnotationStoreVersionCmd.MarkFlagRequired("version-name")
+	})
 	omicsCmd.AddCommand(omics_updateAnnotationStoreVersionCmd)
 }

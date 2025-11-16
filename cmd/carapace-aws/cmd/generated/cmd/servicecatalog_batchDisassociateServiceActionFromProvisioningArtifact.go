@@ -12,10 +12,12 @@ var servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd = &
 }
 
 func init() {
-	carapace.Gen(servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd).Standalone()
+	carapace.Gen(servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd).Standalone()
 
-	servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd.Flags().String("service-action-associations", "", "One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.")
-	servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd.MarkFlagRequired("service-action-associations")
+		servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd.Flags().String("service-action-associations", "", "One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.")
+		servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd.MarkFlagRequired("service-action-associations")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_batchDisassociateServiceActionFromProvisioningArtifactCmd)
 }

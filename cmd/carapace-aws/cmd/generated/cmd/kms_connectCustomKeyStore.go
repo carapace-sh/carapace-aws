@@ -12,9 +12,11 @@ var kms_connectCustomKeyStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_connectCustomKeyStoreCmd).Standalone()
+	carapace.Gen(kms_connectCustomKeyStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_connectCustomKeyStoreCmd).Standalone()
 
-	kms_connectCustomKeyStoreCmd.Flags().String("custom-key-store-id", "", "Enter the key store ID of the custom key store that you want to connect.")
-	kms_connectCustomKeyStoreCmd.MarkFlagRequired("custom-key-store-id")
+		kms_connectCustomKeyStoreCmd.Flags().String("custom-key-store-id", "", "Enter the key store ID of the custom key store that you want to connect.")
+		kms_connectCustomKeyStoreCmd.MarkFlagRequired("custom-key-store-id")
+	})
 	kmsCmd.AddCommand(kms_connectCustomKeyStoreCmd)
 }

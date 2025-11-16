@@ -12,11 +12,13 @@ var groundstation_getAgentTaskResponseUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_getAgentTaskResponseUrlCmd).Standalone()
+	carapace.Gen(groundstation_getAgentTaskResponseUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_getAgentTaskResponseUrlCmd).Standalone()
 
-	groundstation_getAgentTaskResponseUrlCmd.Flags().String("agent-id", "", "UUID of agent requesting the response URL.")
-	groundstation_getAgentTaskResponseUrlCmd.Flags().String("task-id", "", "GUID of the agent task for which the response URL is being requested.")
-	groundstation_getAgentTaskResponseUrlCmd.MarkFlagRequired("agent-id")
-	groundstation_getAgentTaskResponseUrlCmd.MarkFlagRequired("task-id")
+		groundstation_getAgentTaskResponseUrlCmd.Flags().String("agent-id", "", "UUID of agent requesting the response URL.")
+		groundstation_getAgentTaskResponseUrlCmd.Flags().String("task-id", "", "GUID of the agent task for which the response URL is being requested.")
+		groundstation_getAgentTaskResponseUrlCmd.MarkFlagRequired("agent-id")
+		groundstation_getAgentTaskResponseUrlCmd.MarkFlagRequired("task-id")
+	})
 	groundstationCmd.AddCommand(groundstation_getAgentTaskResponseUrlCmd)
 }

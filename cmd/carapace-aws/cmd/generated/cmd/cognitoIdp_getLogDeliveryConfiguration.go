@@ -12,9 +12,11 @@ var cognitoIdp_getLogDeliveryConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_getLogDeliveryConfigurationCmd).Standalone()
+	carapace.Gen(cognitoIdp_getLogDeliveryConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_getLogDeliveryConfigurationCmd).Standalone()
 
-	cognitoIdp_getLogDeliveryConfigurationCmd.Flags().String("user-pool-id", "", "The ID of the user pool that has the logging configuration that you want to view.")
-	cognitoIdp_getLogDeliveryConfigurationCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_getLogDeliveryConfigurationCmd.Flags().String("user-pool-id", "", "The ID of the user pool that has the logging configuration that you want to view.")
+		cognitoIdp_getLogDeliveryConfigurationCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_getLogDeliveryConfigurationCmd)
 }

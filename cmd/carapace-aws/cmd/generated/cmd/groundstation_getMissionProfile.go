@@ -12,9 +12,11 @@ var groundstation_getMissionProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_getMissionProfileCmd).Standalone()
+	carapace.Gen(groundstation_getMissionProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_getMissionProfileCmd).Standalone()
 
-	groundstation_getMissionProfileCmd.Flags().String("mission-profile-id", "", "UUID of a mission profile.")
-	groundstation_getMissionProfileCmd.MarkFlagRequired("mission-profile-id")
+		groundstation_getMissionProfileCmd.Flags().String("mission-profile-id", "", "UUID of a mission profile.")
+		groundstation_getMissionProfileCmd.MarkFlagRequired("mission-profile-id")
+	})
 	groundstationCmd.AddCommand(groundstation_getMissionProfileCmd)
 }

@@ -12,13 +12,15 @@ var chime_redactRoomMessageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_redactRoomMessageCmd).Standalone()
+	carapace.Gen(chime_redactRoomMessageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_redactRoomMessageCmd).Standalone()
 
-	chime_redactRoomMessageCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_redactRoomMessageCmd.Flags().String("message-id", "", "The message ID.")
-	chime_redactRoomMessageCmd.Flags().String("room-id", "", "The room ID.")
-	chime_redactRoomMessageCmd.MarkFlagRequired("account-id")
-	chime_redactRoomMessageCmd.MarkFlagRequired("message-id")
-	chime_redactRoomMessageCmd.MarkFlagRequired("room-id")
+		chime_redactRoomMessageCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_redactRoomMessageCmd.Flags().String("message-id", "", "The message ID.")
+		chime_redactRoomMessageCmd.Flags().String("room-id", "", "The room ID.")
+		chime_redactRoomMessageCmd.MarkFlagRequired("account-id")
+		chime_redactRoomMessageCmd.MarkFlagRequired("message-id")
+		chime_redactRoomMessageCmd.MarkFlagRequired("room-id")
+	})
 	chimeCmd.AddCommand(chime_redactRoomMessageCmd)
 }

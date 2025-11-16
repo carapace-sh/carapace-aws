@@ -12,7 +12,9 @@ var proton_getResourcesSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getResourcesSummaryCmd).Standalone()
+	carapace.Gen(proton_getResourcesSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getResourcesSummaryCmd).Standalone()
 
+	})
 	protonCmd.AddCommand(proton_getResourcesSummaryCmd)
 }

@@ -12,9 +12,11 @@ var events_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_listTagsForResourceCmd).Standalone()
+	carapace.Gen(events_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_listTagsForResourceCmd).Standalone()
 
-	events_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the EventBridge resource for which you want to view tags.")
-	events_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		events_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the EventBridge resource for which you want to view tags.")
+		events_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	eventsCmd.AddCommand(events_listTagsForResourceCmd)
 }

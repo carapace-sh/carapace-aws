@@ -12,11 +12,13 @@ var greengrass_resetDeploymentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_resetDeploymentsCmd).Standalone()
+	carapace.Gen(greengrass_resetDeploymentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_resetDeploymentsCmd).Standalone()
 
-	greengrass_resetDeploymentsCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_resetDeploymentsCmd.Flags().String("force", "", "If true, performs a best-effort only core reset.")
-	greengrass_resetDeploymentsCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
-	greengrass_resetDeploymentsCmd.MarkFlagRequired("group-id")
+		greengrass_resetDeploymentsCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_resetDeploymentsCmd.Flags().String("force", "", "If true, performs a best-effort only core reset.")
+		greengrass_resetDeploymentsCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
+		greengrass_resetDeploymentsCmd.MarkFlagRequired("group-id")
+	})
 	greengrassCmd.AddCommand(greengrass_resetDeploymentsCmd)
 }

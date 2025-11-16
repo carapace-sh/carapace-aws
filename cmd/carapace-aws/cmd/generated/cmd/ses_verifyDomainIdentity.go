@@ -12,9 +12,11 @@ var ses_verifyDomainIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_verifyDomainIdentityCmd).Standalone()
+	carapace.Gen(ses_verifyDomainIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_verifyDomainIdentityCmd).Standalone()
 
-	ses_verifyDomainIdentityCmd.Flags().String("domain", "", "The domain to be verified.")
-	ses_verifyDomainIdentityCmd.MarkFlagRequired("domain")
+		ses_verifyDomainIdentityCmd.Flags().String("domain", "", "The domain to be verified.")
+		ses_verifyDomainIdentityCmd.MarkFlagRequired("domain")
+	})
 	sesCmd.AddCommand(ses_verifyDomainIdentityCmd)
 }

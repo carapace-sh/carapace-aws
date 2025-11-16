@@ -12,7 +12,9 @@ var connectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectCmd).Standalone()
+	carapace.Gen(connectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(connectCmd)
 }

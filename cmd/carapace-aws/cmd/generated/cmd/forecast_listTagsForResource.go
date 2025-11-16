@@ -12,9 +12,11 @@ var forecast_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_listTagsForResourceCmd).Standalone()
+	carapace.Gen(forecast_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_listTagsForResourceCmd).Standalone()
 
-	forecast_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.")
-	forecast_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		forecast_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.")
+		forecast_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	forecastCmd.AddCommand(forecast_listTagsForResourceCmd)
 }

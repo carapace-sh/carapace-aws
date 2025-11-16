@@ -12,11 +12,13 @@ var cognitoIdp_listIdentityProvidersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_listIdentityProvidersCmd).Standalone()
+	carapace.Gen(cognitoIdp_listIdentityProvidersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_listIdentityProvidersCmd).Standalone()
 
-	cognitoIdp_listIdentityProvidersCmd.Flags().String("max-results", "", "The maximum number of IdPs that you want Amazon Cognito to return in the response.")
-	cognitoIdp_listIdentityProvidersCmd.Flags().String("next-token", "", "This API operation returns a limited number of results.")
-	cognitoIdp_listIdentityProvidersCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to list IdPs.")
-	cognitoIdp_listIdentityProvidersCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_listIdentityProvidersCmd.Flags().String("max-results", "", "The maximum number of IdPs that you want Amazon Cognito to return in the response.")
+		cognitoIdp_listIdentityProvidersCmd.Flags().String("next-token", "", "This API operation returns a limited number of results.")
+		cognitoIdp_listIdentityProvidersCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to list IdPs.")
+		cognitoIdp_listIdentityProvidersCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_listIdentityProvidersCmd)
 }

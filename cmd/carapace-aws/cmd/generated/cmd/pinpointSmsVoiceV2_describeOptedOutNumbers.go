@@ -12,13 +12,15 @@ var pinpointSmsVoiceV2_describeOptedOutNumbersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_describeOptedOutNumbersCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_describeOptedOutNumbersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_describeOptedOutNumbersCmd).Standalone()
 
-	pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("filters", "", "An array of OptedOutFilter objects to filter the results on.")
-	pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
-	pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("opt-out-list-name", "", "The OptOutListName or OptOutListArn of the OptOutList.")
-	pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("opted-out-numbers", "", "An array of phone numbers to search for in the OptOutList.")
-	pinpointSmsVoiceV2_describeOptedOutNumbersCmd.MarkFlagRequired("opt-out-list-name")
+		pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("filters", "", "An array of OptedOutFilter objects to filter the results on.")
+		pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
+		pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("opt-out-list-name", "", "The OptOutListName or OptOutListArn of the OptOutList.")
+		pinpointSmsVoiceV2_describeOptedOutNumbersCmd.Flags().String("opted-out-numbers", "", "An array of phone numbers to search for in the OptOutList.")
+		pinpointSmsVoiceV2_describeOptedOutNumbersCmd.MarkFlagRequired("opt-out-list-name")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_describeOptedOutNumbersCmd)
 }

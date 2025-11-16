@@ -12,9 +12,11 @@ var ivsRealtime_deleteStorageConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_deleteStorageConfigurationCmd).Standalone()
+	carapace.Gen(ivsRealtime_deleteStorageConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_deleteStorageConfigurationCmd).Standalone()
 
-	ivsRealtime_deleteStorageConfigurationCmd.Flags().String("arn", "", "ARN of the storage configuration to be deleted.")
-	ivsRealtime_deleteStorageConfigurationCmd.MarkFlagRequired("arn")
+		ivsRealtime_deleteStorageConfigurationCmd.Flags().String("arn", "", "ARN of the storage configuration to be deleted.")
+		ivsRealtime_deleteStorageConfigurationCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_deleteStorageConfigurationCmd)
 }

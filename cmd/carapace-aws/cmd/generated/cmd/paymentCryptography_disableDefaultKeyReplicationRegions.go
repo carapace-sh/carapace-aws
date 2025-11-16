@@ -12,9 +12,11 @@ var paymentCryptography_disableDefaultKeyReplicationRegionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_disableDefaultKeyReplicationRegionsCmd).Standalone()
+	carapace.Gen(paymentCryptography_disableDefaultKeyReplicationRegionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_disableDefaultKeyReplicationRegionsCmd).Standalone()
 
-	paymentCryptography_disableDefaultKeyReplicationRegionsCmd.Flags().String("replication-regions", "", "The list of Amazon Web Services Regions to remove from the account's default replication regions.")
-	paymentCryptography_disableDefaultKeyReplicationRegionsCmd.MarkFlagRequired("replication-regions")
+		paymentCryptography_disableDefaultKeyReplicationRegionsCmd.Flags().String("replication-regions", "", "The list of Amazon Web Services Regions to remove from the account's default replication regions.")
+		paymentCryptography_disableDefaultKeyReplicationRegionsCmd.MarkFlagRequired("replication-regions")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_disableDefaultKeyReplicationRegionsCmd)
 }

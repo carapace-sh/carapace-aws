@@ -12,9 +12,11 @@ var rds_promoteReadReplicaDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_promoteReadReplicaDbclusterCmd).Standalone()
+	carapace.Gen(rds_promoteReadReplicaDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_promoteReadReplicaDbclusterCmd).Standalone()
 
-	rds_promoteReadReplicaDbclusterCmd.Flags().String("dbcluster-identifier", "", "The identifier of the DB cluster read replica to promote.")
-	rds_promoteReadReplicaDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+		rds_promoteReadReplicaDbclusterCmd.Flags().String("dbcluster-identifier", "", "The identifier of the DB cluster read replica to promote.")
+		rds_promoteReadReplicaDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+	})
 	rdsCmd.AddCommand(rds_promoteReadReplicaDbclusterCmd)
 }

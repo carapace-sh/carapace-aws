@@ -12,9 +12,11 @@ var sagemaker_describeModelCardExportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeModelCardExportJobCmd).Standalone()
+	carapace.Gen(sagemaker_describeModelCardExportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeModelCardExportJobCmd).Standalone()
 
-	sagemaker_describeModelCardExportJobCmd.Flags().String("model-card-export-job-arn", "", "The Amazon Resource Name (ARN) of the model card export job to describe.")
-	sagemaker_describeModelCardExportJobCmd.MarkFlagRequired("model-card-export-job-arn")
+		sagemaker_describeModelCardExportJobCmd.Flags().String("model-card-export-job-arn", "", "The Amazon Resource Name (ARN) of the model card export job to describe.")
+		sagemaker_describeModelCardExportJobCmd.MarkFlagRequired("model-card-export-job-arn")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeModelCardExportJobCmd)
 }

@@ -12,12 +12,14 @@ var ec2_deleteTransitGatewayRouteTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteTransitGatewayRouteTableCmd).Standalone()
+	carapace.Gen(ec2_deleteTransitGatewayRouteTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteTransitGatewayRouteTableCmd).Standalone()
 
-	ec2_deleteTransitGatewayRouteTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteTransitGatewayRouteTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteTransitGatewayRouteTableCmd.Flags().String("transit-gateway-route-table-id", "", "The ID of the transit gateway route table.")
-	ec2_deleteTransitGatewayRouteTableCmd.Flag("no-dry-run").Hidden = true
-	ec2_deleteTransitGatewayRouteTableCmd.MarkFlagRequired("transit-gateway-route-table-id")
+		ec2_deleteTransitGatewayRouteTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteTransitGatewayRouteTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteTransitGatewayRouteTableCmd.Flags().String("transit-gateway-route-table-id", "", "The ID of the transit gateway route table.")
+		ec2_deleteTransitGatewayRouteTableCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteTransitGatewayRouteTableCmd.MarkFlagRequired("transit-gateway-route-table-id")
+	})
 	ec2Cmd.AddCommand(ec2_deleteTransitGatewayRouteTableCmd)
 }

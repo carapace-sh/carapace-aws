@@ -12,8 +12,10 @@ var elb_describeLoadBalancerPolicyTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_describeLoadBalancerPolicyTypesCmd).Standalone()
+	carapace.Gen(elb_describeLoadBalancerPolicyTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_describeLoadBalancerPolicyTypesCmd).Standalone()
 
-	elb_describeLoadBalancerPolicyTypesCmd.Flags().String("policy-type-names", "", "The names of the policy types.")
+		elb_describeLoadBalancerPolicyTypesCmd.Flags().String("policy-type-names", "", "The names of the policy types.")
+	})
 	elbCmd.AddCommand(elb_describeLoadBalancerPolicyTypesCmd)
 }

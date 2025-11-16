@@ -12,11 +12,13 @@ var elasticache_startMigrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_startMigrationCmd).Standalone()
+	carapace.Gen(elasticache_startMigrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_startMigrationCmd).Standalone()
 
-	elasticache_startMigrationCmd.Flags().String("customer-node-endpoint-list", "", "List of endpoints from which data should be migrated.")
-	elasticache_startMigrationCmd.Flags().String("replication-group-id", "", "The ID of the replication group to which data should be migrated.")
-	elasticache_startMigrationCmd.MarkFlagRequired("customer-node-endpoint-list")
-	elasticache_startMigrationCmd.MarkFlagRequired("replication-group-id")
+		elasticache_startMigrationCmd.Flags().String("customer-node-endpoint-list", "", "List of endpoints from which data should be migrated.")
+		elasticache_startMigrationCmd.Flags().String("replication-group-id", "", "The ID of the replication group to which data should be migrated.")
+		elasticache_startMigrationCmd.MarkFlagRequired("customer-node-endpoint-list")
+		elasticache_startMigrationCmd.MarkFlagRequired("replication-group-id")
+	})
 	elasticacheCmd.AddCommand(elasticache_startMigrationCmd)
 }

@@ -12,11 +12,13 @@ var wisdom_getImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_getImportJobCmd).Standalone()
+	carapace.Gen(wisdom_getImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_getImportJobCmd).Standalone()
 
-	wisdom_getImportJobCmd.Flags().String("import-job-id", "", "The identifier of the import job to retrieve.")
-	wisdom_getImportJobCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base that the import job belongs to.")
-	wisdom_getImportJobCmd.MarkFlagRequired("import-job-id")
-	wisdom_getImportJobCmd.MarkFlagRequired("knowledge-base-id")
+		wisdom_getImportJobCmd.Flags().String("import-job-id", "", "The identifier of the import job to retrieve.")
+		wisdom_getImportJobCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base that the import job belongs to.")
+		wisdom_getImportJobCmd.MarkFlagRequired("import-job-id")
+		wisdom_getImportJobCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	wisdomCmd.AddCommand(wisdom_getImportJobCmd)
 }

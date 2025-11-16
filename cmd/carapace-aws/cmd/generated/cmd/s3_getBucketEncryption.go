@@ -12,10 +12,12 @@ var s3_getBucketEncryptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketEncryptionCmd).Standalone()
+	carapace.Gen(s3_getBucketEncryptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketEncryptionCmd).Standalone()
 
-	s3_getBucketEncryptionCmd.Flags().String("bucket", "", "The name of the bucket from which the server-side encryption configuration is retrieved.")
-	s3_getBucketEncryptionCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketEncryptionCmd.MarkFlagRequired("bucket")
+		s3_getBucketEncryptionCmd.Flags().String("bucket", "", "The name of the bucket from which the server-side encryption configuration is retrieved.")
+		s3_getBucketEncryptionCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketEncryptionCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getBucketEncryptionCmd)
 }

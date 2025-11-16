@@ -12,9 +12,11 @@ var resourcegroupstaggingapi_startReportCreationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourcegroupstaggingapi_startReportCreationCmd).Standalone()
+	carapace.Gen(resourcegroupstaggingapi_startReportCreationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourcegroupstaggingapi_startReportCreationCmd).Standalone()
 
-	resourcegroupstaggingapi_startReportCreationCmd.Flags().String("s3-bucket", "", "The name of the Amazon S3 bucket where the report will be stored; for example:")
-	resourcegroupstaggingapi_startReportCreationCmd.MarkFlagRequired("s3-bucket")
+		resourcegroupstaggingapi_startReportCreationCmd.Flags().String("s3-bucket", "", "The name of the Amazon S3 bucket where the report will be stored; for example:")
+		resourcegroupstaggingapi_startReportCreationCmd.MarkFlagRequired("s3-bucket")
+	})
 	resourcegroupstaggingapiCmd.AddCommand(resourcegroupstaggingapi_startReportCreationCmd)
 }

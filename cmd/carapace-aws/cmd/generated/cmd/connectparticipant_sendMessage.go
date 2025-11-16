@@ -12,14 +12,16 @@ var connectparticipant_sendMessageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectparticipant_sendMessageCmd).Standalone()
+	carapace.Gen(connectparticipant_sendMessageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectparticipant_sendMessageCmd).Standalone()
 
-	connectparticipant_sendMessageCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connectparticipant_sendMessageCmd.Flags().String("connection-token", "", "The authentication token associated with the connection.")
-	connectparticipant_sendMessageCmd.Flags().String("content", "", "The content of the message.")
-	connectparticipant_sendMessageCmd.Flags().String("content-type", "", "The type of the content.")
-	connectparticipant_sendMessageCmd.MarkFlagRequired("connection-token")
-	connectparticipant_sendMessageCmd.MarkFlagRequired("content")
-	connectparticipant_sendMessageCmd.MarkFlagRequired("content-type")
+		connectparticipant_sendMessageCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connectparticipant_sendMessageCmd.Flags().String("connection-token", "", "The authentication token associated with the connection.")
+		connectparticipant_sendMessageCmd.Flags().String("content", "", "The content of the message.")
+		connectparticipant_sendMessageCmd.Flags().String("content-type", "", "The type of the content.")
+		connectparticipant_sendMessageCmd.MarkFlagRequired("connection-token")
+		connectparticipant_sendMessageCmd.MarkFlagRequired("content")
+		connectparticipant_sendMessageCmd.MarkFlagRequired("content-type")
+	})
 	connectparticipantCmd.AddCommand(connectparticipant_sendMessageCmd)
 }

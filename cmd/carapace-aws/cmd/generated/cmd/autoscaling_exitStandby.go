@@ -12,10 +12,12 @@ var autoscaling_exitStandbyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_exitStandbyCmd).Standalone()
+	carapace.Gen(autoscaling_exitStandbyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_exitStandbyCmd).Standalone()
 
-	autoscaling_exitStandbyCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_exitStandbyCmd.Flags().String("instance-ids", "", "The IDs of the instances.")
-	autoscaling_exitStandbyCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_exitStandbyCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_exitStandbyCmd.Flags().String("instance-ids", "", "The IDs of the instances.")
+		autoscaling_exitStandbyCmd.MarkFlagRequired("auto-scaling-group-name")
+	})
 	autoscalingCmd.AddCommand(autoscaling_exitStandbyCmd)
 }

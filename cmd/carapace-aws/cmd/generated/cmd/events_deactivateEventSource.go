@@ -12,9 +12,11 @@ var events_deactivateEventSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_deactivateEventSourceCmd).Standalone()
+	carapace.Gen(events_deactivateEventSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_deactivateEventSourceCmd).Standalone()
 
-	events_deactivateEventSourceCmd.Flags().String("name", "", "The name of the partner event source to deactivate.")
-	events_deactivateEventSourceCmd.MarkFlagRequired("name")
+		events_deactivateEventSourceCmd.Flags().String("name", "", "The name of the partner event source to deactivate.")
+		events_deactivateEventSourceCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_deactivateEventSourceCmd)
 }

@@ -12,10 +12,12 @@ var ec2_createDefaultVpcCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_createDefaultVpcCmd).Standalone()
+	carapace.Gen(ec2_createDefaultVpcCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_createDefaultVpcCmd).Standalone()
 
-	ec2_createDefaultVpcCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_createDefaultVpcCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_createDefaultVpcCmd.Flag("no-dry-run").Hidden = true
+		ec2_createDefaultVpcCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_createDefaultVpcCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_createDefaultVpcCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_createDefaultVpcCmd)
 }

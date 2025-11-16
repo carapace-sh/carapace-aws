@@ -12,10 +12,12 @@ var docdb_rebootDbinstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_rebootDbinstanceCmd).Standalone()
+	carapace.Gen(docdb_rebootDbinstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_rebootDbinstanceCmd).Standalone()
 
-	docdb_rebootDbinstanceCmd.Flags().String("dbinstance-identifier", "", "The instance identifier.")
-	docdb_rebootDbinstanceCmd.Flags().String("force-failover", "", "When `true`, the reboot is conducted through a Multi-AZ failover.")
-	docdb_rebootDbinstanceCmd.MarkFlagRequired("dbinstance-identifier")
+		docdb_rebootDbinstanceCmd.Flags().String("dbinstance-identifier", "", "The instance identifier.")
+		docdb_rebootDbinstanceCmd.Flags().String("force-failover", "", "When `true`, the reboot is conducted through a Multi-AZ failover.")
+		docdb_rebootDbinstanceCmd.MarkFlagRequired("dbinstance-identifier")
+	})
 	docdbCmd.AddCommand(docdb_rebootDbinstanceCmd)
 }

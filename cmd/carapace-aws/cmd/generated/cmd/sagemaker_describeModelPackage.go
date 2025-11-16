@@ -12,9 +12,11 @@ var sagemaker_describeModelPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeModelPackageCmd).Standalone()
+	carapace.Gen(sagemaker_describeModelPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeModelPackageCmd).Standalone()
 
-	sagemaker_describeModelPackageCmd.Flags().String("model-package-name", "", "The name or Amazon Resource Name (ARN) of the model package to describe.")
-	sagemaker_describeModelPackageCmd.MarkFlagRequired("model-package-name")
+		sagemaker_describeModelPackageCmd.Flags().String("model-package-name", "", "The name or Amazon Resource Name (ARN) of the model package to describe.")
+		sagemaker_describeModelPackageCmd.MarkFlagRequired("model-package-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeModelPackageCmd)
 }

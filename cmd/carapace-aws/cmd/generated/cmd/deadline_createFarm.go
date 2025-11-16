@@ -12,13 +12,15 @@ var deadline_createFarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_createFarmCmd).Standalone()
+	carapace.Gen(deadline_createFarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_createFarmCmd).Standalone()
 
-	deadline_createFarmCmd.Flags().String("client-token", "", "The unique token which the server uses to recognize retries of the same request.")
-	deadline_createFarmCmd.Flags().String("description", "", "The description of the farm.")
-	deadline_createFarmCmd.Flags().String("display-name", "", "The display name of the farm.")
-	deadline_createFarmCmd.Flags().String("kms-key-arn", "", "The ARN of the KMS key to use on the farm.")
-	deadline_createFarmCmd.Flags().String("tags", "", "The tags to add to your farm.")
-	deadline_createFarmCmd.MarkFlagRequired("display-name")
+		deadline_createFarmCmd.Flags().String("client-token", "", "The unique token which the server uses to recognize retries of the same request.")
+		deadline_createFarmCmd.Flags().String("description", "", "The description of the farm.")
+		deadline_createFarmCmd.Flags().String("display-name", "", "The display name of the farm.")
+		deadline_createFarmCmd.Flags().String("kms-key-arn", "", "The ARN of the KMS key to use on the farm.")
+		deadline_createFarmCmd.Flags().String("tags", "", "The tags to add to your farm.")
+		deadline_createFarmCmd.MarkFlagRequired("display-name")
+	})
 	deadlineCmd.AddCommand(deadline_createFarmCmd)
 }

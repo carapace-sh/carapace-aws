@@ -12,11 +12,13 @@ var greengrass_createResourceDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createResourceDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_createResourceDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createResourceDefinitionCmd).Standalone()
 
-	greengrass_createResourceDefinitionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createResourceDefinitionCmd.Flags().String("initial-version", "", "Information about the initial version of the resource definition.")
-	greengrass_createResourceDefinitionCmd.Flags().String("name", "", "The name of the resource definition.")
-	greengrass_createResourceDefinitionCmd.Flags().String("tags", "", "Tag(s) to add to the new resource.")
+		greengrass_createResourceDefinitionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createResourceDefinitionCmd.Flags().String("initial-version", "", "Information about the initial version of the resource definition.")
+		greengrass_createResourceDefinitionCmd.Flags().String("name", "", "The name of the resource definition.")
+		greengrass_createResourceDefinitionCmd.Flags().String("tags", "", "Tag(s) to add to the new resource.")
+	})
 	greengrassCmd.AddCommand(greengrass_createResourceDefinitionCmd)
 }

@@ -12,9 +12,11 @@ var batch_describeConsumableResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_describeConsumableResourceCmd).Standalone()
+	carapace.Gen(batch_describeConsumableResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_describeConsumableResourceCmd).Standalone()
 
-	batch_describeConsumableResourceCmd.Flags().String("consumable-resource", "", "The name or ARN of the consumable resource whose description will be returned.")
-	batch_describeConsumableResourceCmd.MarkFlagRequired("consumable-resource")
+		batch_describeConsumableResourceCmd.Flags().String("consumable-resource", "", "The name or ARN of the consumable resource whose description will be returned.")
+		batch_describeConsumableResourceCmd.MarkFlagRequired("consumable-resource")
+	})
 	batchCmd.AddCommand(batch_describeConsumableResourceCmd)
 }

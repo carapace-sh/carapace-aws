@@ -12,9 +12,11 @@ var greengrassv2_getDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrassv2_getDeploymentCmd).Standalone()
+	carapace.Gen(greengrassv2_getDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrassv2_getDeploymentCmd).Standalone()
 
-	greengrassv2_getDeploymentCmd.Flags().String("deployment-id", "", "The ID of the deployment.")
-	greengrassv2_getDeploymentCmd.MarkFlagRequired("deployment-id")
+		greengrassv2_getDeploymentCmd.Flags().String("deployment-id", "", "The ID of the deployment.")
+		greengrassv2_getDeploymentCmd.MarkFlagRequired("deployment-id")
+	})
 	greengrassv2Cmd.AddCommand(greengrassv2_getDeploymentCmd)
 }

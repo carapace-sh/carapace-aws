@@ -12,9 +12,11 @@ var ssmIncidents_getIncidentRecordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_getIncidentRecordCmd).Standalone()
+	carapace.Gen(ssmIncidents_getIncidentRecordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_getIncidentRecordCmd).Standalone()
 
-	ssmIncidents_getIncidentRecordCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the incident record.")
-	ssmIncidents_getIncidentRecordCmd.MarkFlagRequired("arn")
+		ssmIncidents_getIncidentRecordCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the incident record.")
+		ssmIncidents_getIncidentRecordCmd.MarkFlagRequired("arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_getIncidentRecordCmd)
 }

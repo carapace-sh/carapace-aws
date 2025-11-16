@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_deletePoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deletePoolCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deletePoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deletePoolCmd).Standalone()
 
-	pinpointSmsVoiceV2_deletePoolCmd.Flags().String("pool-id", "", "The PoolId or PoolArn of the pool to delete.")
-	pinpointSmsVoiceV2_deletePoolCmd.MarkFlagRequired("pool-id")
+		pinpointSmsVoiceV2_deletePoolCmd.Flags().String("pool-id", "", "The PoolId or PoolArn of the pool to delete.")
+		pinpointSmsVoiceV2_deletePoolCmd.MarkFlagRequired("pool-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deletePoolCmd)
 }

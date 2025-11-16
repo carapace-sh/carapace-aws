@@ -12,12 +12,14 @@ var glue_deleteUserDefinedFunctionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteUserDefinedFunctionCmd).Standalone()
+	carapace.Gen(glue_deleteUserDefinedFunctionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteUserDefinedFunctionCmd).Standalone()
 
-	glue_deleteUserDefinedFunctionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the function to be deleted is located.")
-	glue_deleteUserDefinedFunctionCmd.Flags().String("database-name", "", "The name of the catalog database where the function is located.")
-	glue_deleteUserDefinedFunctionCmd.Flags().String("function-name", "", "The name of the function definition to be deleted.")
-	glue_deleteUserDefinedFunctionCmd.MarkFlagRequired("database-name")
-	glue_deleteUserDefinedFunctionCmd.MarkFlagRequired("function-name")
+		glue_deleteUserDefinedFunctionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the function to be deleted is located.")
+		glue_deleteUserDefinedFunctionCmd.Flags().String("database-name", "", "The name of the catalog database where the function is located.")
+		glue_deleteUserDefinedFunctionCmd.Flags().String("function-name", "", "The name of the function definition to be deleted.")
+		glue_deleteUserDefinedFunctionCmd.MarkFlagRequired("database-name")
+		glue_deleteUserDefinedFunctionCmd.MarkFlagRequired("function-name")
+	})
 	glueCmd.AddCommand(glue_deleteUserDefinedFunctionCmd)
 }

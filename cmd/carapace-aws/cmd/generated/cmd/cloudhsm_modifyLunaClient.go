@@ -12,11 +12,13 @@ var cloudhsm_modifyLunaClientCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_modifyLunaClientCmd).Standalone()
+	carapace.Gen(cloudhsm_modifyLunaClientCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_modifyLunaClientCmd).Standalone()
 
-	cloudhsm_modifyLunaClientCmd.Flags().String("certificate", "", "The new certificate for the client.")
-	cloudhsm_modifyLunaClientCmd.Flags().String("client-arn", "", "The ARN of the client.")
-	cloudhsm_modifyLunaClientCmd.MarkFlagRequired("certificate")
-	cloudhsm_modifyLunaClientCmd.MarkFlagRequired("client-arn")
+		cloudhsm_modifyLunaClientCmd.Flags().String("certificate", "", "The new certificate for the client.")
+		cloudhsm_modifyLunaClientCmd.Flags().String("client-arn", "", "The ARN of the client.")
+		cloudhsm_modifyLunaClientCmd.MarkFlagRequired("certificate")
+		cloudhsm_modifyLunaClientCmd.MarkFlagRequired("client-arn")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_modifyLunaClientCmd)
 }

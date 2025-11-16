@@ -12,13 +12,15 @@ var quicksight_describeDashboardSnapshotJobResultCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeDashboardSnapshotJobResultCmd).Standalone()
+	carapace.Gen(quicksight_describeDashboardSnapshotJobResultCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeDashboardSnapshotJobResultCmd).Standalone()
 
-	quicksight_describeDashboardSnapshotJobResultCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.")
-	quicksight_describeDashboardSnapshotJobResultCmd.Flags().String("dashboard-id", "", "The ID of the dashboard that you have started a snapshot job for.")
-	quicksight_describeDashboardSnapshotJobResultCmd.Flags().String("snapshot-job-id", "", "The ID of the job to be described.")
-	quicksight_describeDashboardSnapshotJobResultCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeDashboardSnapshotJobResultCmd.MarkFlagRequired("dashboard-id")
-	quicksight_describeDashboardSnapshotJobResultCmd.MarkFlagRequired("snapshot-job-id")
+		quicksight_describeDashboardSnapshotJobResultCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.")
+		quicksight_describeDashboardSnapshotJobResultCmd.Flags().String("dashboard-id", "", "The ID of the dashboard that you have started a snapshot job for.")
+		quicksight_describeDashboardSnapshotJobResultCmd.Flags().String("snapshot-job-id", "", "The ID of the job to be described.")
+		quicksight_describeDashboardSnapshotJobResultCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeDashboardSnapshotJobResultCmd.MarkFlagRequired("dashboard-id")
+		quicksight_describeDashboardSnapshotJobResultCmd.MarkFlagRequired("snapshot-job-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeDashboardSnapshotJobResultCmd)
 }

@@ -12,9 +12,11 @@ var redshift_deleteAuthenticationProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteAuthenticationProfileCmd).Standalone()
+	carapace.Gen(redshift_deleteAuthenticationProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteAuthenticationProfileCmd).Standalone()
 
-	redshift_deleteAuthenticationProfileCmd.Flags().String("authentication-profile-name", "", "The name of the authentication profile to delete.")
-	redshift_deleteAuthenticationProfileCmd.MarkFlagRequired("authentication-profile-name")
+		redshift_deleteAuthenticationProfileCmd.Flags().String("authentication-profile-name", "", "The name of the authentication profile to delete.")
+		redshift_deleteAuthenticationProfileCmd.MarkFlagRequired("authentication-profile-name")
+	})
 	redshiftCmd.AddCommand(redshift_deleteAuthenticationProfileCmd)
 }

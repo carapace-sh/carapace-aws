@@ -12,13 +12,15 @@ var iotJobsData_describeJobExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotJobsData_describeJobExecutionCmd).Standalone()
+	carapace.Gen(iotJobsData_describeJobExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotJobsData_describeJobExecutionCmd).Standalone()
 
-	iotJobsData_describeJobExecutionCmd.Flags().String("execution-number", "", "Optional.")
-	iotJobsData_describeJobExecutionCmd.Flags().String("include-job-document", "", "Optional.")
-	iotJobsData_describeJobExecutionCmd.Flags().String("job-id", "", "The unique identifier assigned to this job when it was created.")
-	iotJobsData_describeJobExecutionCmd.Flags().String("thing-name", "", "The thing name associated with the device the job execution is running on.")
-	iotJobsData_describeJobExecutionCmd.MarkFlagRequired("job-id")
-	iotJobsData_describeJobExecutionCmd.MarkFlagRequired("thing-name")
+		iotJobsData_describeJobExecutionCmd.Flags().String("execution-number", "", "Optional.")
+		iotJobsData_describeJobExecutionCmd.Flags().String("include-job-document", "", "Optional.")
+		iotJobsData_describeJobExecutionCmd.Flags().String("job-id", "", "The unique identifier assigned to this job when it was created.")
+		iotJobsData_describeJobExecutionCmd.Flags().String("thing-name", "", "The thing name associated with the device the job execution is running on.")
+		iotJobsData_describeJobExecutionCmd.MarkFlagRequired("job-id")
+		iotJobsData_describeJobExecutionCmd.MarkFlagRequired("thing-name")
+	})
 	iotJobsDataCmd.AddCommand(iotJobsData_describeJobExecutionCmd)
 }

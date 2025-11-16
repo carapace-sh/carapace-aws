@@ -12,9 +12,11 @@ var migrationhuborchestrator_startWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_startWorkflowCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_startWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_startWorkflowCmd).Standalone()
 
-	migrationhuborchestrator_startWorkflowCmd.Flags().String("id", "", "The ID of the migration workflow.")
-	migrationhuborchestrator_startWorkflowCmd.MarkFlagRequired("id")
+		migrationhuborchestrator_startWorkflowCmd.Flags().String("id", "", "The ID of the migration workflow.")
+		migrationhuborchestrator_startWorkflowCmd.MarkFlagRequired("id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_startWorkflowCmd)
 }

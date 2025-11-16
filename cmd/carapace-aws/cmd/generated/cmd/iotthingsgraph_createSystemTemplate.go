@@ -12,10 +12,12 @@ var iotthingsgraph_createSystemTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_createSystemTemplateCmd).Standalone()
+	carapace.Gen(iotthingsgraph_createSystemTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_createSystemTemplateCmd).Standalone()
 
-	iotthingsgraph_createSystemTemplateCmd.Flags().String("compatible-namespace-version", "", "The namespace version in which the system is to be created.")
-	iotthingsgraph_createSystemTemplateCmd.Flags().String("definition", "", "The `DefinitionDocument` used to create the system.")
-	iotthingsgraph_createSystemTemplateCmd.MarkFlagRequired("definition")
+		iotthingsgraph_createSystemTemplateCmd.Flags().String("compatible-namespace-version", "", "The namespace version in which the system is to be created.")
+		iotthingsgraph_createSystemTemplateCmd.Flags().String("definition", "", "The `DefinitionDocument` used to create the system.")
+		iotthingsgraph_createSystemTemplateCmd.MarkFlagRequired("definition")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_createSystemTemplateCmd)
 }

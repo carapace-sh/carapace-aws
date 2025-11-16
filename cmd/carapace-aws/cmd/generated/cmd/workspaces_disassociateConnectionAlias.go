@@ -12,9 +12,11 @@ var workspaces_disassociateConnectionAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_disassociateConnectionAliasCmd).Standalone()
+	carapace.Gen(workspaces_disassociateConnectionAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_disassociateConnectionAliasCmd).Standalone()
 
-	workspaces_disassociateConnectionAliasCmd.Flags().String("alias-id", "", "The identifier of the connection alias to disassociate.")
-	workspaces_disassociateConnectionAliasCmd.MarkFlagRequired("alias-id")
+		workspaces_disassociateConnectionAliasCmd.Flags().String("alias-id", "", "The identifier of the connection alias to disassociate.")
+		workspaces_disassociateConnectionAliasCmd.MarkFlagRequired("alias-id")
+	})
 	workspacesCmd.AddCommand(workspaces_disassociateConnectionAliasCmd)
 }

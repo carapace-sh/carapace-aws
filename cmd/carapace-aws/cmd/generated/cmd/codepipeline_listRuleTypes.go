@@ -12,9 +12,11 @@ var codepipeline_listRuleTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_listRuleTypesCmd).Standalone()
+	carapace.Gen(codepipeline_listRuleTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_listRuleTypesCmd).Standalone()
 
-	codepipeline_listRuleTypesCmd.Flags().String("region-filter", "", "The rule Region to filter on.")
-	codepipeline_listRuleTypesCmd.Flags().String("rule-owner-filter", "", "The rule owner to filter on.")
+		codepipeline_listRuleTypesCmd.Flags().String("region-filter", "", "The rule Region to filter on.")
+		codepipeline_listRuleTypesCmd.Flags().String("rule-owner-filter", "", "The rule owner to filter on.")
+	})
 	codepipelineCmd.AddCommand(codepipeline_listRuleTypesCmd)
 }

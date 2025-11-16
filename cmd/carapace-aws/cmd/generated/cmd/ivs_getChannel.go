@@ -12,9 +12,11 @@ var ivs_getChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_getChannelCmd).Standalone()
+	carapace.Gen(ivs_getChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_getChannelCmd).Standalone()
 
-	ivs_getChannelCmd.Flags().String("arn", "", "ARN of the channel for which the configuration is to be retrieved.")
-	ivs_getChannelCmd.MarkFlagRequired("arn")
+		ivs_getChannelCmd.Flags().String("arn", "", "ARN of the channel for which the configuration is to be retrieved.")
+		ivs_getChannelCmd.MarkFlagRequired("arn")
+	})
 	ivsCmd.AddCommand(ivs_getChannelCmd)
 }

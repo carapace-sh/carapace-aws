@@ -12,7 +12,9 @@ var devopsGuru_describeAccountHealthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeAccountHealthCmd).Standalone()
+	carapace.Gen(devopsGuru_describeAccountHealthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeAccountHealthCmd).Standalone()
 
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeAccountHealthCmd)
 }

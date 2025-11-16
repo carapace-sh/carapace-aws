@@ -12,9 +12,11 @@ var codepipeline_updateActionTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_updateActionTypeCmd).Standalone()
+	carapace.Gen(codepipeline_updateActionTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_updateActionTypeCmd).Standalone()
 
-	codepipeline_updateActionTypeCmd.Flags().String("action-type", "", "The action type definition for the action type to be updated.")
-	codepipeline_updateActionTypeCmd.MarkFlagRequired("action-type")
+		codepipeline_updateActionTypeCmd.Flags().String("action-type", "", "The action type definition for the action type to be updated.")
+		codepipeline_updateActionTypeCmd.MarkFlagRequired("action-type")
+	})
 	codepipelineCmd.AddCommand(codepipeline_updateActionTypeCmd)
 }

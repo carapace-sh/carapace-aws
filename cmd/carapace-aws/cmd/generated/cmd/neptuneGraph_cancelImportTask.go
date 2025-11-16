@@ -12,9 +12,11 @@ var neptuneGraph_cancelImportTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_cancelImportTaskCmd).Standalone()
+	carapace.Gen(neptuneGraph_cancelImportTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_cancelImportTaskCmd).Standalone()
 
-	neptuneGraph_cancelImportTaskCmd.Flags().String("task-identifier", "", "The unique identifier of the import task.")
-	neptuneGraph_cancelImportTaskCmd.MarkFlagRequired("task-identifier")
+		neptuneGraph_cancelImportTaskCmd.Flags().String("task-identifier", "", "The unique identifier of the import task.")
+		neptuneGraph_cancelImportTaskCmd.MarkFlagRequired("task-identifier")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_cancelImportTaskCmd)
 }

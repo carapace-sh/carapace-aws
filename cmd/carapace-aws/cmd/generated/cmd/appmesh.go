@@ -12,7 +12,9 @@ var appmeshCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appmeshCmd).Standalone()
+	carapace.Gen(appmeshCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appmeshCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(appmeshCmd)
 }

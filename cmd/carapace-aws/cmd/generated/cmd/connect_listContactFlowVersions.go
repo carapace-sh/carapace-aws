@@ -12,13 +12,15 @@ var connect_listContactFlowVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listContactFlowVersionsCmd).Standalone()
+	carapace.Gen(connect_listContactFlowVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listContactFlowVersionsCmd).Standalone()
 
-	connect_listContactFlowVersionsCmd.Flags().String("contact-flow-id", "", "The identifier of the flow.")
-	connect_listContactFlowVersionsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listContactFlowVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listContactFlowVersionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listContactFlowVersionsCmd.MarkFlagRequired("contact-flow-id")
-	connect_listContactFlowVersionsCmd.MarkFlagRequired("instance-id")
+		connect_listContactFlowVersionsCmd.Flags().String("contact-flow-id", "", "The identifier of the flow.")
+		connect_listContactFlowVersionsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listContactFlowVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listContactFlowVersionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listContactFlowVersionsCmd.MarkFlagRequired("contact-flow-id")
+		connect_listContactFlowVersionsCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listContactFlowVersionsCmd)
 }

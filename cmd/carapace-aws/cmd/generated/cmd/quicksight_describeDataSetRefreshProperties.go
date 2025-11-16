@@ -12,11 +12,13 @@ var quicksight_describeDataSetRefreshPropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeDataSetRefreshPropertiesCmd).Standalone()
+	carapace.Gen(quicksight_describeDataSetRefreshPropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeDataSetRefreshPropertiesCmd).Standalone()
 
-	quicksight_describeDataSetRefreshPropertiesCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
-	quicksight_describeDataSetRefreshPropertiesCmd.Flags().String("data-set-id", "", "The ID of the dataset.")
-	quicksight_describeDataSetRefreshPropertiesCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeDataSetRefreshPropertiesCmd.MarkFlagRequired("data-set-id")
+		quicksight_describeDataSetRefreshPropertiesCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
+		quicksight_describeDataSetRefreshPropertiesCmd.Flags().String("data-set-id", "", "The ID of the dataset.")
+		quicksight_describeDataSetRefreshPropertiesCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeDataSetRefreshPropertiesCmd.MarkFlagRequired("data-set-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeDataSetRefreshPropertiesCmd)
 }

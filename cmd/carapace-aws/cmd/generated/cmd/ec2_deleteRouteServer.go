@@ -12,12 +12,14 @@ var ec2_deleteRouteServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteRouteServerCmd).Standalone()
+	carapace.Gen(ec2_deleteRouteServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteRouteServerCmd).Standalone()
 
-	ec2_deleteRouteServerCmd.Flags().Bool("dry-run", false, "A check for whether you have the required permissions for the action without actually making the request and provides an error response.")
-	ec2_deleteRouteServerCmd.Flags().Bool("no-dry-run", false, "A check for whether you have the required permissions for the action without actually making the request and provides an error response.")
-	ec2_deleteRouteServerCmd.Flags().String("route-server-id", "", "The ID of the route server to delete.")
-	ec2_deleteRouteServerCmd.Flag("no-dry-run").Hidden = true
-	ec2_deleteRouteServerCmd.MarkFlagRequired("route-server-id")
+		ec2_deleteRouteServerCmd.Flags().Bool("dry-run", false, "A check for whether you have the required permissions for the action without actually making the request and provides an error response.")
+		ec2_deleteRouteServerCmd.Flags().Bool("no-dry-run", false, "A check for whether you have the required permissions for the action without actually making the request and provides an error response.")
+		ec2_deleteRouteServerCmd.Flags().String("route-server-id", "", "The ID of the route server to delete.")
+		ec2_deleteRouteServerCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteRouteServerCmd.MarkFlagRequired("route-server-id")
+	})
 	ec2Cmd.AddCommand(ec2_deleteRouteServerCmd)
 }

@@ -12,11 +12,13 @@ var m2_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_listApplicationsCmd).Standalone()
+	carapace.Gen(m2_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_listApplicationsCmd).Standalone()
 
-	m2_listApplicationsCmd.Flags().String("environment-id", "", "The unique identifier of the runtime environment where the applications are deployed.")
-	m2_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of applications to return.")
-	m2_listApplicationsCmd.Flags().String("names", "", "The names of the applications.")
-	m2_listApplicationsCmd.Flags().String("next-token", "", "A pagination token to control the number of applications displayed in the list.")
+		m2_listApplicationsCmd.Flags().String("environment-id", "", "The unique identifier of the runtime environment where the applications are deployed.")
+		m2_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of applications to return.")
+		m2_listApplicationsCmd.Flags().String("names", "", "The names of the applications.")
+		m2_listApplicationsCmd.Flags().String("next-token", "", "A pagination token to control the number of applications displayed in the list.")
+	})
 	m2Cmd.AddCommand(m2_listApplicationsCmd)
 }

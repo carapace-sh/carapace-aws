@@ -12,7 +12,9 @@ var migrationhubstrategy_getPortfolioPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubstrategy_getPortfolioPreferencesCmd).Standalone()
+	carapace.Gen(migrationhubstrategy_getPortfolioPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubstrategy_getPortfolioPreferencesCmd).Standalone()
 
+	})
 	migrationhubstrategyCmd.AddCommand(migrationhubstrategy_getPortfolioPreferencesCmd)
 }

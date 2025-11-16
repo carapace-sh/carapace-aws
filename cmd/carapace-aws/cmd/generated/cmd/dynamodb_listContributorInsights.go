@@ -12,10 +12,12 @@ var dynamodb_listContributorInsightsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_listContributorInsightsCmd).Standalone()
+	carapace.Gen(dynamodb_listContributorInsightsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_listContributorInsightsCmd).Standalone()
 
-	dynamodb_listContributorInsightsCmd.Flags().String("max-results", "", "Maximum number of results to return per page.")
-	dynamodb_listContributorInsightsCmd.Flags().String("next-token", "", "A token to for the desired page, if there is one.")
-	dynamodb_listContributorInsightsCmd.Flags().String("table-name", "", "The name of the table.")
+		dynamodb_listContributorInsightsCmd.Flags().String("max-results", "", "Maximum number of results to return per page.")
+		dynamodb_listContributorInsightsCmd.Flags().String("next-token", "", "A token to for the desired page, if there is one.")
+		dynamodb_listContributorInsightsCmd.Flags().String("table-name", "", "The name of the table.")
+	})
 	dynamodbCmd.AddCommand(dynamodb_listContributorInsightsCmd)
 }

@@ -12,12 +12,14 @@ var codepipeline_listActionExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_listActionExecutionsCmd).Standalone()
+	carapace.Gen(codepipeline_listActionExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_listActionExecutionsCmd).Standalone()
 
-	codepipeline_listActionExecutionsCmd.Flags().String("filter", "", "Input information used to filter action execution history.")
-	codepipeline_listActionExecutionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	codepipeline_listActionExecutionsCmd.Flags().String("next-token", "", "The token that was returned from the previous `ListActionExecutions` call, which can be used to return the next set of action executions in the list.")
-	codepipeline_listActionExecutionsCmd.Flags().String("pipeline-name", "", "The name of the pipeline for which you want to list action execution history.")
-	codepipeline_listActionExecutionsCmd.MarkFlagRequired("pipeline-name")
+		codepipeline_listActionExecutionsCmd.Flags().String("filter", "", "Input information used to filter action execution history.")
+		codepipeline_listActionExecutionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		codepipeline_listActionExecutionsCmd.Flags().String("next-token", "", "The token that was returned from the previous `ListActionExecutions` call, which can be used to return the next set of action executions in the list.")
+		codepipeline_listActionExecutionsCmd.Flags().String("pipeline-name", "", "The name of the pipeline for which you want to list action execution history.")
+		codepipeline_listActionExecutionsCmd.MarkFlagRequired("pipeline-name")
+	})
 	codepipelineCmd.AddCommand(codepipeline_listActionExecutionsCmd)
 }

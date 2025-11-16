@@ -12,9 +12,11 @@ var organizations_describeOrganizationalUnitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_describeOrganizationalUnitCmd).Standalone()
+	carapace.Gen(organizations_describeOrganizationalUnitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_describeOrganizationalUnitCmd).Standalone()
 
-	organizations_describeOrganizationalUnitCmd.Flags().String("organizational-unit-id", "", "The unique identifier (ID) of the organizational unit that you want details about.")
-	organizations_describeOrganizationalUnitCmd.MarkFlagRequired("organizational-unit-id")
+		organizations_describeOrganizationalUnitCmd.Flags().String("organizational-unit-id", "", "The unique identifier (ID) of the organizational unit that you want details about.")
+		organizations_describeOrganizationalUnitCmd.MarkFlagRequired("organizational-unit-id")
+	})
 	organizationsCmd.AddCommand(organizations_describeOrganizationalUnitCmd)
 }

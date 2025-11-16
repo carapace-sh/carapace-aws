@@ -12,9 +12,11 @@ var snowDeviceManagement_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowDeviceManagement_listTagsForResourceCmd).Standalone()
+	carapace.Gen(snowDeviceManagement_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowDeviceManagement_listTagsForResourceCmd).Standalone()
 
-	snowDeviceManagement_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the device or task.")
-	snowDeviceManagement_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		snowDeviceManagement_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the device or task.")
+		snowDeviceManagement_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	snowDeviceManagementCmd.AddCommand(snowDeviceManagement_listTagsForResourceCmd)
 }

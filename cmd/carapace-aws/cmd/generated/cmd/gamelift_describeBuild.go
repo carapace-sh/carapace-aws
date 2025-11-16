@@ -12,9 +12,11 @@ var gamelift_describeBuildCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeBuildCmd).Standalone()
+	carapace.Gen(gamelift_describeBuildCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeBuildCmd).Standalone()
 
-	gamelift_describeBuildCmd.Flags().String("build-id", "", "A unique identifier for the build to retrieve properties for.")
-	gamelift_describeBuildCmd.MarkFlagRequired("build-id")
+		gamelift_describeBuildCmd.Flags().String("build-id", "", "A unique identifier for the build to retrieve properties for.")
+		gamelift_describeBuildCmd.MarkFlagRequired("build-id")
+	})
 	gameliftCmd.AddCommand(gamelift_describeBuildCmd)
 }

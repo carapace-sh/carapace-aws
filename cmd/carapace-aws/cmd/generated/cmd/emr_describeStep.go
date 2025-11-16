@@ -12,11 +12,13 @@ var emr_describeStepCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_describeStepCmd).Standalone()
+	carapace.Gen(emr_describeStepCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_describeStepCmd).Standalone()
 
-	emr_describeStepCmd.Flags().String("cluster-id", "", "The identifier of the cluster with steps to describe.")
-	emr_describeStepCmd.Flags().String("step-id", "", "The identifier of the step to describe.")
-	emr_describeStepCmd.MarkFlagRequired("cluster-id")
-	emr_describeStepCmd.MarkFlagRequired("step-id")
+		emr_describeStepCmd.Flags().String("cluster-id", "", "The identifier of the cluster with steps to describe.")
+		emr_describeStepCmd.Flags().String("step-id", "", "The identifier of the step to describe.")
+		emr_describeStepCmd.MarkFlagRequired("cluster-id")
+		emr_describeStepCmd.MarkFlagRequired("step-id")
+	})
 	emrCmd.AddCommand(emr_describeStepCmd)
 }

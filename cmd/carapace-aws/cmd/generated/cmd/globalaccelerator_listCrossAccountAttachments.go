@@ -12,9 +12,11 @@ var globalaccelerator_listCrossAccountAttachmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_listCrossAccountAttachmentsCmd).Standalone()
+	carapace.Gen(globalaccelerator_listCrossAccountAttachmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_listCrossAccountAttachmentsCmd).Standalone()
 
-	globalaccelerator_listCrossAccountAttachmentsCmd.Flags().String("max-results", "", "The number of cross-account attachment objects that you want to return with this call.")
-	globalaccelerator_listCrossAccountAttachmentsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		globalaccelerator_listCrossAccountAttachmentsCmd.Flags().String("max-results", "", "The number of cross-account attachment objects that you want to return with this call.")
+		globalaccelerator_listCrossAccountAttachmentsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_listCrossAccountAttachmentsCmd)
 }

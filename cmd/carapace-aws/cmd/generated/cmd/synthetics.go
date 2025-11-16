@@ -12,7 +12,9 @@ var syntheticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(syntheticsCmd).Standalone()
+	carapace.Gen(syntheticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(syntheticsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(syntheticsCmd)
 }

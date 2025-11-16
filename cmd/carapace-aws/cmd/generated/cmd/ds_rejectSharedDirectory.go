@@ -12,9 +12,11 @@ var ds_rejectSharedDirectoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_rejectSharedDirectoryCmd).Standalone()
+	carapace.Gen(ds_rejectSharedDirectoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_rejectSharedDirectoryCmd).Standalone()
 
-	ds_rejectSharedDirectoryCmd.Flags().String("shared-directory-id", "", "Identifier of the shared directory in the directory consumer account.")
-	ds_rejectSharedDirectoryCmd.MarkFlagRequired("shared-directory-id")
+		ds_rejectSharedDirectoryCmd.Flags().String("shared-directory-id", "", "Identifier of the shared directory in the directory consumer account.")
+		ds_rejectSharedDirectoryCmd.MarkFlagRequired("shared-directory-id")
+	})
 	dsCmd.AddCommand(ds_rejectSharedDirectoryCmd)
 }

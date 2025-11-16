@@ -12,7 +12,9 @@ var discovery_startContinuousExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_startContinuousExportCmd).Standalone()
+	carapace.Gen(discovery_startContinuousExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_startContinuousExportCmd).Standalone()
 
+	})
 	discoveryCmd.AddCommand(discovery_startContinuousExportCmd)
 }

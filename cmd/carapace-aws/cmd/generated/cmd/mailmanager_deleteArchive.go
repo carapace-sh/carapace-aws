@@ -12,9 +12,11 @@ var mailmanager_deleteArchiveCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_deleteArchiveCmd).Standalone()
+	carapace.Gen(mailmanager_deleteArchiveCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_deleteArchiveCmd).Standalone()
 
-	mailmanager_deleteArchiveCmd.Flags().String("archive-id", "", "The identifier of the archive to delete.")
-	mailmanager_deleteArchiveCmd.MarkFlagRequired("archive-id")
+		mailmanager_deleteArchiveCmd.Flags().String("archive-id", "", "The identifier of the archive to delete.")
+		mailmanager_deleteArchiveCmd.MarkFlagRequired("archive-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_deleteArchiveCmd)
 }

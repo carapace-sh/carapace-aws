@@ -12,11 +12,13 @@ var lightsail_disableAddOnCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_disableAddOnCmd).Standalone()
+	carapace.Gen(lightsail_disableAddOnCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_disableAddOnCmd).Standalone()
 
-	lightsail_disableAddOnCmd.Flags().String("add-on-type", "", "The add-on type to disable.")
-	lightsail_disableAddOnCmd.Flags().String("resource-name", "", "The name of the source resource for which to disable the add-on.")
-	lightsail_disableAddOnCmd.MarkFlagRequired("add-on-type")
-	lightsail_disableAddOnCmd.MarkFlagRequired("resource-name")
+		lightsail_disableAddOnCmd.Flags().String("add-on-type", "", "The add-on type to disable.")
+		lightsail_disableAddOnCmd.Flags().String("resource-name", "", "The name of the source resource for which to disable the add-on.")
+		lightsail_disableAddOnCmd.MarkFlagRequired("add-on-type")
+		lightsail_disableAddOnCmd.MarkFlagRequired("resource-name")
+	})
 	lightsailCmd.AddCommand(lightsail_disableAddOnCmd)
 }

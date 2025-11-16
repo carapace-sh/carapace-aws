@@ -12,11 +12,13 @@ var account_startPrimaryEmailUpdateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(account_startPrimaryEmailUpdateCmd).Standalone()
+	carapace.Gen(account_startPrimaryEmailUpdateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(account_startPrimaryEmailUpdateCmd).Standalone()
 
-	account_startPrimaryEmailUpdateCmd.Flags().String("account-id", "", "Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
-	account_startPrimaryEmailUpdateCmd.Flags().String("primary-email", "", "The new primary email address (also known as the root user email address) to use in the specified account.")
-	account_startPrimaryEmailUpdateCmd.MarkFlagRequired("account-id")
-	account_startPrimaryEmailUpdateCmd.MarkFlagRequired("primary-email")
+		account_startPrimaryEmailUpdateCmd.Flags().String("account-id", "", "Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
+		account_startPrimaryEmailUpdateCmd.Flags().String("primary-email", "", "The new primary email address (also known as the root user email address) to use in the specified account.")
+		account_startPrimaryEmailUpdateCmd.MarkFlagRequired("account-id")
+		account_startPrimaryEmailUpdateCmd.MarkFlagRequired("primary-email")
+	})
 	accountCmd.AddCommand(account_startPrimaryEmailUpdateCmd)
 }

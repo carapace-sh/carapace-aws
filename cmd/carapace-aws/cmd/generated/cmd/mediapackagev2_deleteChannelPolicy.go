@@ -12,11 +12,13 @@ var mediapackagev2_deleteChannelPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackagev2_deleteChannelPolicyCmd).Standalone()
+	carapace.Gen(mediapackagev2_deleteChannelPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackagev2_deleteChannelPolicyCmd).Standalone()
 
-	mediapackagev2_deleteChannelPolicyCmd.Flags().String("channel-group-name", "", "The name that describes the channel group.")
-	mediapackagev2_deleteChannelPolicyCmd.Flags().String("channel-name", "", "The name that describes the channel.")
-	mediapackagev2_deleteChannelPolicyCmd.MarkFlagRequired("channel-group-name")
-	mediapackagev2_deleteChannelPolicyCmd.MarkFlagRequired("channel-name")
+		mediapackagev2_deleteChannelPolicyCmd.Flags().String("channel-group-name", "", "The name that describes the channel group.")
+		mediapackagev2_deleteChannelPolicyCmd.Flags().String("channel-name", "", "The name that describes the channel.")
+		mediapackagev2_deleteChannelPolicyCmd.MarkFlagRequired("channel-group-name")
+		mediapackagev2_deleteChannelPolicyCmd.MarkFlagRequired("channel-name")
+	})
 	mediapackagev2Cmd.AddCommand(mediapackagev2_deleteChannelPolicyCmd)
 }

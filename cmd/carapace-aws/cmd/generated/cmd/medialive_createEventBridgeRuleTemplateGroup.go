@@ -12,12 +12,14 @@ var medialive_createEventBridgeRuleTemplateGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_createEventBridgeRuleTemplateGroupCmd).Standalone()
+	carapace.Gen(medialive_createEventBridgeRuleTemplateGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_createEventBridgeRuleTemplateGroupCmd).Standalone()
 
-	medialive_createEventBridgeRuleTemplateGroupCmd.Flags().String("description", "", "A resource's optional description.")
-	medialive_createEventBridgeRuleTemplateGroupCmd.Flags().String("name", "", "A resource's name.")
-	medialive_createEventBridgeRuleTemplateGroupCmd.Flags().String("request-id", "", "An ID that you assign to a create request.")
-	medialive_createEventBridgeRuleTemplateGroupCmd.Flags().String("tags", "", "")
-	medialive_createEventBridgeRuleTemplateGroupCmd.MarkFlagRequired("name")
+		medialive_createEventBridgeRuleTemplateGroupCmd.Flags().String("description", "", "A resource's optional description.")
+		medialive_createEventBridgeRuleTemplateGroupCmd.Flags().String("name", "", "A resource's name.")
+		medialive_createEventBridgeRuleTemplateGroupCmd.Flags().String("request-id", "", "An ID that you assign to a create request.")
+		medialive_createEventBridgeRuleTemplateGroupCmd.Flags().String("tags", "", "")
+		medialive_createEventBridgeRuleTemplateGroupCmd.MarkFlagRequired("name")
+	})
 	medialiveCmd.AddCommand(medialive_createEventBridgeRuleTemplateGroupCmd)
 }

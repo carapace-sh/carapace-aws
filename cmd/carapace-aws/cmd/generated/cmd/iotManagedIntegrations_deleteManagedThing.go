@@ -12,12 +12,14 @@ var iotManagedIntegrations_deleteManagedThingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_deleteManagedThingCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_deleteManagedThingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_deleteManagedThingCmd).Standalone()
 
-	iotManagedIntegrations_deleteManagedThingCmd.Flags().Bool("force", false, "When set to `TRUE`, a forceful deteletion of the managed thing will occur.")
-	iotManagedIntegrations_deleteManagedThingCmd.Flags().String("identifier", "", "The id of the managed thing.")
-	iotManagedIntegrations_deleteManagedThingCmd.Flags().Bool("no-force", false, "When set to `TRUE`, a forceful deteletion of the managed thing will occur.")
-	iotManagedIntegrations_deleteManagedThingCmd.MarkFlagRequired("identifier")
-	iotManagedIntegrations_deleteManagedThingCmd.Flag("no-force").Hidden = true
+		iotManagedIntegrations_deleteManagedThingCmd.Flags().Bool("force", false, "When set to `TRUE`, a forceful deteletion of the managed thing will occur.")
+		iotManagedIntegrations_deleteManagedThingCmd.Flags().String("identifier", "", "The id of the managed thing.")
+		iotManagedIntegrations_deleteManagedThingCmd.Flags().Bool("no-force", false, "When set to `TRUE`, a forceful deteletion of the managed thing will occur.")
+		iotManagedIntegrations_deleteManagedThingCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_deleteManagedThingCmd.Flag("no-force").Hidden = true
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_deleteManagedThingCmd)
 }

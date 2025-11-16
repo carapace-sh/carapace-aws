@@ -12,11 +12,13 @@ var notifications_updateEventRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_updateEventRuleCmd).Standalone()
+	carapace.Gen(notifications_updateEventRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_updateEventRuleCmd).Standalone()
 
-	notifications_updateEventRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) to use to update the `EventRule`.")
-	notifications_updateEventRuleCmd.Flags().String("event-pattern", "", "An additional event pattern used to further filter the events this `EventRule` receives.")
-	notifications_updateEventRuleCmd.Flags().String("regions", "", "A list of Amazon Web Services Regions that sends events to this `EventRule`.")
-	notifications_updateEventRuleCmd.MarkFlagRequired("arn")
+		notifications_updateEventRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) to use to update the `EventRule`.")
+		notifications_updateEventRuleCmd.Flags().String("event-pattern", "", "An additional event pattern used to further filter the events this `EventRule` receives.")
+		notifications_updateEventRuleCmd.Flags().String("regions", "", "A list of Amazon Web Services Regions that sends events to this `EventRule`.")
+		notifications_updateEventRuleCmd.MarkFlagRequired("arn")
+	})
 	notificationsCmd.AddCommand(notifications_updateEventRuleCmd)
 }

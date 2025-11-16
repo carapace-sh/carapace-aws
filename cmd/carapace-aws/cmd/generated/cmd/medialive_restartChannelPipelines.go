@@ -12,10 +12,12 @@ var medialive_restartChannelPipelinesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_restartChannelPipelinesCmd).Standalone()
+	carapace.Gen(medialive_restartChannelPipelinesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_restartChannelPipelinesCmd).Standalone()
 
-	medialive_restartChannelPipelinesCmd.Flags().String("channel-id", "", "ID of channel")
-	medialive_restartChannelPipelinesCmd.Flags().String("pipeline-ids", "", "An array of pipelines to restart in this channel.")
-	medialive_restartChannelPipelinesCmd.MarkFlagRequired("channel-id")
+		medialive_restartChannelPipelinesCmd.Flags().String("channel-id", "", "ID of channel")
+		medialive_restartChannelPipelinesCmd.Flags().String("pipeline-ids", "", "An array of pipelines to restart in this channel.")
+		medialive_restartChannelPipelinesCmd.MarkFlagRequired("channel-id")
+	})
 	medialiveCmd.AddCommand(medialive_restartChannelPipelinesCmd)
 }

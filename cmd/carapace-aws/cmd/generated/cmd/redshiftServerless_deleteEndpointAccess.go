@@ -12,9 +12,11 @@ var redshiftServerless_deleteEndpointAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_deleteEndpointAccessCmd).Standalone()
+	carapace.Gen(redshiftServerless_deleteEndpointAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_deleteEndpointAccessCmd).Standalone()
 
-	redshiftServerless_deleteEndpointAccessCmd.Flags().String("endpoint-name", "", "The name of the VPC endpoint to delete.")
-	redshiftServerless_deleteEndpointAccessCmd.MarkFlagRequired("endpoint-name")
+		redshiftServerless_deleteEndpointAccessCmd.Flags().String("endpoint-name", "", "The name of the VPC endpoint to delete.")
+		redshiftServerless_deleteEndpointAccessCmd.MarkFlagRequired("endpoint-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_deleteEndpointAccessCmd)
 }

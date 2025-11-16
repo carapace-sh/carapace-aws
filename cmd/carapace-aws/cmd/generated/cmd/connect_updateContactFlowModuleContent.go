@@ -12,13 +12,15 @@ var connect_updateContactFlowModuleContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateContactFlowModuleContentCmd).Standalone()
+	carapace.Gen(connect_updateContactFlowModuleContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateContactFlowModuleContentCmd).Standalone()
 
-	connect_updateContactFlowModuleContentCmd.Flags().String("contact-flow-module-id", "", "The identifier of the flow module.")
-	connect_updateContactFlowModuleContentCmd.Flags().String("content", "", "The JSON string that represents the content of the flow.")
-	connect_updateContactFlowModuleContentCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateContactFlowModuleContentCmd.MarkFlagRequired("contact-flow-module-id")
-	connect_updateContactFlowModuleContentCmd.MarkFlagRequired("content")
-	connect_updateContactFlowModuleContentCmd.MarkFlagRequired("instance-id")
+		connect_updateContactFlowModuleContentCmd.Flags().String("contact-flow-module-id", "", "The identifier of the flow module.")
+		connect_updateContactFlowModuleContentCmd.Flags().String("content", "", "The JSON string that represents the content of the flow.")
+		connect_updateContactFlowModuleContentCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateContactFlowModuleContentCmd.MarkFlagRequired("contact-flow-module-id")
+		connect_updateContactFlowModuleContentCmd.MarkFlagRequired("content")
+		connect_updateContactFlowModuleContentCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_updateContactFlowModuleContentCmd)
 }

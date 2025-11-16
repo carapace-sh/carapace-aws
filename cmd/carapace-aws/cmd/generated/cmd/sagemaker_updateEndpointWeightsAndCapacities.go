@@ -12,11 +12,13 @@ var sagemaker_updateEndpointWeightsAndCapacitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_updateEndpointWeightsAndCapacitiesCmd).Standalone()
+	carapace.Gen(sagemaker_updateEndpointWeightsAndCapacitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_updateEndpointWeightsAndCapacitiesCmd).Standalone()
 
-	sagemaker_updateEndpointWeightsAndCapacitiesCmd.Flags().String("desired-weights-and-capacities", "", "An object that provides new capacity and weight values for a variant.")
-	sagemaker_updateEndpointWeightsAndCapacitiesCmd.Flags().String("endpoint-name", "", "The name of an existing SageMaker endpoint.")
-	sagemaker_updateEndpointWeightsAndCapacitiesCmd.MarkFlagRequired("desired-weights-and-capacities")
-	sagemaker_updateEndpointWeightsAndCapacitiesCmd.MarkFlagRequired("endpoint-name")
+		sagemaker_updateEndpointWeightsAndCapacitiesCmd.Flags().String("desired-weights-and-capacities", "", "An object that provides new capacity and weight values for a variant.")
+		sagemaker_updateEndpointWeightsAndCapacitiesCmd.Flags().String("endpoint-name", "", "The name of an existing SageMaker endpoint.")
+		sagemaker_updateEndpointWeightsAndCapacitiesCmd.MarkFlagRequired("desired-weights-and-capacities")
+		sagemaker_updateEndpointWeightsAndCapacitiesCmd.MarkFlagRequired("endpoint-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_updateEndpointWeightsAndCapacitiesCmd)
 }

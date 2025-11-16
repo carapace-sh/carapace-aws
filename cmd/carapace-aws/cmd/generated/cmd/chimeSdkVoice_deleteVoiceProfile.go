@@ -12,9 +12,11 @@ var chimeSdkVoice_deleteVoiceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteVoiceProfileCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteVoiceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteVoiceProfileCmd).Standalone()
 
-	chimeSdkVoice_deleteVoiceProfileCmd.Flags().String("voice-profile-id", "", "The voice profile ID.")
-	chimeSdkVoice_deleteVoiceProfileCmd.MarkFlagRequired("voice-profile-id")
+		chimeSdkVoice_deleteVoiceProfileCmd.Flags().String("voice-profile-id", "", "The voice profile ID.")
+		chimeSdkVoice_deleteVoiceProfileCmd.MarkFlagRequired("voice-profile-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteVoiceProfileCmd)
 }

@@ -12,7 +12,9 @@ var mediastoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastoreCmd).Standalone()
+	carapace.Gen(mediastoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastoreCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(mediastoreCmd)
 }

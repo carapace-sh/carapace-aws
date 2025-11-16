@@ -12,11 +12,13 @@ var chimeSdkMessaging_listChannelFlowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_listChannelFlowsCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_listChannelFlowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_listChannelFlowsCmd).Standalone()
 
-	chimeSdkMessaging_listChannelFlowsCmd.Flags().String("app-instance-arn", "", "The ARN of the app instance.")
-	chimeSdkMessaging_listChannelFlowsCmd.Flags().String("max-results", "", "The maximum number of channel flows that you want to return.")
-	chimeSdkMessaging_listChannelFlowsCmd.Flags().String("next-token", "", "The token passed by previous API calls until all requested channel flows are returned.")
-	chimeSdkMessaging_listChannelFlowsCmd.MarkFlagRequired("app-instance-arn")
+		chimeSdkMessaging_listChannelFlowsCmd.Flags().String("app-instance-arn", "", "The ARN of the app instance.")
+		chimeSdkMessaging_listChannelFlowsCmd.Flags().String("max-results", "", "The maximum number of channel flows that you want to return.")
+		chimeSdkMessaging_listChannelFlowsCmd.Flags().String("next-token", "", "The token passed by previous API calls until all requested channel flows are returned.")
+		chimeSdkMessaging_listChannelFlowsCmd.MarkFlagRequired("app-instance-arn")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_listChannelFlowsCmd)
 }

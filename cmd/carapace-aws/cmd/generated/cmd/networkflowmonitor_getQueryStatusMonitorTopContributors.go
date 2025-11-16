@@ -12,11 +12,13 @@ var networkflowmonitor_getQueryStatusMonitorTopContributorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_getQueryStatusMonitorTopContributorsCmd).Standalone()
+	carapace.Gen(networkflowmonitor_getQueryStatusMonitorTopContributorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_getQueryStatusMonitorTopContributorsCmd).Standalone()
 
-	networkflowmonitor_getQueryStatusMonitorTopContributorsCmd.Flags().String("monitor-name", "", "The name of the monitor.")
-	networkflowmonitor_getQueryStatusMonitorTopContributorsCmd.Flags().String("query-id", "", "The identifier for the query.")
-	networkflowmonitor_getQueryStatusMonitorTopContributorsCmd.MarkFlagRequired("monitor-name")
-	networkflowmonitor_getQueryStatusMonitorTopContributorsCmd.MarkFlagRequired("query-id")
+		networkflowmonitor_getQueryStatusMonitorTopContributorsCmd.Flags().String("monitor-name", "", "The name of the monitor.")
+		networkflowmonitor_getQueryStatusMonitorTopContributorsCmd.Flags().String("query-id", "", "The identifier for the query.")
+		networkflowmonitor_getQueryStatusMonitorTopContributorsCmd.MarkFlagRequired("monitor-name")
+		networkflowmonitor_getQueryStatusMonitorTopContributorsCmd.MarkFlagRequired("query-id")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_getQueryStatusMonitorTopContributorsCmd)
 }

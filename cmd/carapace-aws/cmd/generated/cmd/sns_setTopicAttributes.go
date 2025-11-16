@@ -12,12 +12,14 @@ var sns_setTopicAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_setTopicAttributesCmd).Standalone()
+	carapace.Gen(sns_setTopicAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_setTopicAttributesCmd).Standalone()
 
-	sns_setTopicAttributesCmd.Flags().String("attribute-name", "", "A map of attributes with their corresponding values.")
-	sns_setTopicAttributesCmd.Flags().String("attribute-value", "", "The new value for the attribute.")
-	sns_setTopicAttributesCmd.Flags().String("topic-arn", "", "The ARN of the topic to modify.")
-	sns_setTopicAttributesCmd.MarkFlagRequired("attribute-name")
-	sns_setTopicAttributesCmd.MarkFlagRequired("topic-arn")
+		sns_setTopicAttributesCmd.Flags().String("attribute-name", "", "A map of attributes with their corresponding values.")
+		sns_setTopicAttributesCmd.Flags().String("attribute-value", "", "The new value for the attribute.")
+		sns_setTopicAttributesCmd.Flags().String("topic-arn", "", "The ARN of the topic to modify.")
+		sns_setTopicAttributesCmd.MarkFlagRequired("attribute-name")
+		sns_setTopicAttributesCmd.MarkFlagRequired("topic-arn")
+	})
 	snsCmd.AddCommand(sns_setTopicAttributesCmd)
 }

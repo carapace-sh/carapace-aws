@@ -12,9 +12,11 @@ var comprehendmedical_describeIcd10CminferenceJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_describeIcd10CminferenceJobCmd).Standalone()
+	carapace.Gen(comprehendmedical_describeIcd10CminferenceJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_describeIcd10CminferenceJobCmd).Standalone()
 
-	comprehendmedical_describeIcd10CminferenceJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend Medical generated for the job.")
-	comprehendmedical_describeIcd10CminferenceJobCmd.MarkFlagRequired("job-id")
+		comprehendmedical_describeIcd10CminferenceJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend Medical generated for the job.")
+		comprehendmedical_describeIcd10CminferenceJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_describeIcd10CminferenceJobCmd)
 }

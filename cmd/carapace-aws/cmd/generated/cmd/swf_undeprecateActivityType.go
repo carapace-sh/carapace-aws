@@ -12,11 +12,13 @@ var swf_undeprecateActivityTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_undeprecateActivityTypeCmd).Standalone()
+	carapace.Gen(swf_undeprecateActivityTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_undeprecateActivityTypeCmd).Standalone()
 
-	swf_undeprecateActivityTypeCmd.Flags().String("activity-type", "", "The activity type to undeprecate.")
-	swf_undeprecateActivityTypeCmd.Flags().String("domain", "", "The name of the domain of the deprecated activity type.")
-	swf_undeprecateActivityTypeCmd.MarkFlagRequired("activity-type")
-	swf_undeprecateActivityTypeCmd.MarkFlagRequired("domain")
+		swf_undeprecateActivityTypeCmd.Flags().String("activity-type", "", "The activity type to undeprecate.")
+		swf_undeprecateActivityTypeCmd.Flags().String("domain", "", "The name of the domain of the deprecated activity type.")
+		swf_undeprecateActivityTypeCmd.MarkFlagRequired("activity-type")
+		swf_undeprecateActivityTypeCmd.MarkFlagRequired("domain")
+	})
 	swfCmd.AddCommand(swf_undeprecateActivityTypeCmd)
 }

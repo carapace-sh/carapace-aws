@@ -12,12 +12,14 @@ var controltower_updateEnabledBaselineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_updateEnabledBaselineCmd).Standalone()
+	carapace.Gen(controltower_updateEnabledBaselineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_updateEnabledBaselineCmd).Standalone()
 
-	controltower_updateEnabledBaselineCmd.Flags().String("baseline-version", "", "Specifies the new `Baseline` version, to which the `EnabledBaseline` should be updated.")
-	controltower_updateEnabledBaselineCmd.Flags().String("enabled-baseline-identifier", "", "Specifies the `EnabledBaseline` resource to be updated.")
-	controltower_updateEnabledBaselineCmd.Flags().String("parameters", "", "Parameters to apply when making an update.")
-	controltower_updateEnabledBaselineCmd.MarkFlagRequired("baseline-version")
-	controltower_updateEnabledBaselineCmd.MarkFlagRequired("enabled-baseline-identifier")
+		controltower_updateEnabledBaselineCmd.Flags().String("baseline-version", "", "Specifies the new `Baseline` version, to which the `EnabledBaseline` should be updated.")
+		controltower_updateEnabledBaselineCmd.Flags().String("enabled-baseline-identifier", "", "Specifies the `EnabledBaseline` resource to be updated.")
+		controltower_updateEnabledBaselineCmd.Flags().String("parameters", "", "Parameters to apply when making an update.")
+		controltower_updateEnabledBaselineCmd.MarkFlagRequired("baseline-version")
+		controltower_updateEnabledBaselineCmd.MarkFlagRequired("enabled-baseline-identifier")
+	})
 	controltowerCmd.AddCommand(controltower_updateEnabledBaselineCmd)
 }

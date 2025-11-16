@@ -12,11 +12,13 @@ var evidently_getFeatureCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_getFeatureCmd).Standalone()
+	carapace.Gen(evidently_getFeatureCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_getFeatureCmd).Standalone()
 
-	evidently_getFeatureCmd.Flags().String("feature", "", "The name of the feature that you want to retrieve information for.")
-	evidently_getFeatureCmd.Flags().String("project", "", "The name or ARN of the project that contains the feature.")
-	evidently_getFeatureCmd.MarkFlagRequired("feature")
-	evidently_getFeatureCmd.MarkFlagRequired("project")
+		evidently_getFeatureCmd.Flags().String("feature", "", "The name of the feature that you want to retrieve information for.")
+		evidently_getFeatureCmd.Flags().String("project", "", "The name or ARN of the project that contains the feature.")
+		evidently_getFeatureCmd.MarkFlagRequired("feature")
+		evidently_getFeatureCmd.MarkFlagRequired("project")
+	})
 	evidentlyCmd.AddCommand(evidently_getFeatureCmd)
 }

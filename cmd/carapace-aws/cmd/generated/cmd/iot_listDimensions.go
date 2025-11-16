@@ -12,9 +12,11 @@ var iot_listDimensionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listDimensionsCmd).Standalone()
+	carapace.Gen(iot_listDimensionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listDimensionsCmd).Standalone()
 
-	iot_listDimensionsCmd.Flags().String("max-results", "", "The maximum number of results to retrieve at one time.")
-	iot_listDimensionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iot_listDimensionsCmd.Flags().String("max-results", "", "The maximum number of results to retrieve at one time.")
+		iot_listDimensionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	iotCmd.AddCommand(iot_listDimensionsCmd)
 }

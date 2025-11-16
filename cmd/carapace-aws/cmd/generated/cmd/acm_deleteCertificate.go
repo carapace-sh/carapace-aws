@@ -12,9 +12,11 @@ var acm_deleteCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acm_deleteCertificateCmd).Standalone()
+	carapace.Gen(acm_deleteCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acm_deleteCertificateCmd).Standalone()
 
-	acm_deleteCertificateCmd.Flags().String("certificate-arn", "", "String that contains the ARN of the ACM certificate to be deleted.")
-	acm_deleteCertificateCmd.MarkFlagRequired("certificate-arn")
+		acm_deleteCertificateCmd.Flags().String("certificate-arn", "", "String that contains the ARN of the ACM certificate to be deleted.")
+		acm_deleteCertificateCmd.MarkFlagRequired("certificate-arn")
+	})
 	acmCmd.AddCommand(acm_deleteCertificateCmd)
 }

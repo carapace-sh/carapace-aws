@@ -12,7 +12,9 @@ var bcmDashboardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDashboardsCmd).Standalone()
+	carapace.Gen(bcmDashboardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDashboardsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(bcmDashboardsCmd)
 }

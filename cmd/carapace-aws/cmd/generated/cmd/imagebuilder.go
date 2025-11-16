@@ -12,7 +12,9 @@ var imagebuilderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilderCmd).Standalone()
+	carapace.Gen(imagebuilderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilderCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(imagebuilderCmd)
 }

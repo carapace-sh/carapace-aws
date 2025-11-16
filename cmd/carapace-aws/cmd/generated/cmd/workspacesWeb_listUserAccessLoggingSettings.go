@@ -12,9 +12,11 @@ var workspacesWeb_listUserAccessLoggingSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_listUserAccessLoggingSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_listUserAccessLoggingSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_listUserAccessLoggingSettingsCmd).Standalone()
 
-	workspacesWeb_listUserAccessLoggingSettingsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
-	workspacesWeb_listUserAccessLoggingSettingsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		workspacesWeb_listUserAccessLoggingSettingsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
+		workspacesWeb_listUserAccessLoggingSettingsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_listUserAccessLoggingSettingsCmd)
 }

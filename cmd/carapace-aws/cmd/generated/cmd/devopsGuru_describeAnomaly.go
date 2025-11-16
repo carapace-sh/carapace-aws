@@ -12,10 +12,12 @@ var devopsGuru_describeAnomalyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeAnomalyCmd).Standalone()
+	carapace.Gen(devopsGuru_describeAnomalyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeAnomalyCmd).Standalone()
 
-	devopsGuru_describeAnomalyCmd.Flags().String("account-id", "", "The ID of the member account.")
-	devopsGuru_describeAnomalyCmd.Flags().String("id", "", "The ID of the anomaly.")
-	devopsGuru_describeAnomalyCmd.MarkFlagRequired("id")
+		devopsGuru_describeAnomalyCmd.Flags().String("account-id", "", "The ID of the member account.")
+		devopsGuru_describeAnomalyCmd.Flags().String("id", "", "The ID of the anomaly.")
+		devopsGuru_describeAnomalyCmd.MarkFlagRequired("id")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeAnomalyCmd)
 }

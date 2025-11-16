@@ -12,9 +12,11 @@ var iam_deleteOpenIdconnectProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteOpenIdconnectProviderCmd).Standalone()
+	carapace.Gen(iam_deleteOpenIdconnectProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteOpenIdconnectProviderCmd).Standalone()
 
-	iam_deleteOpenIdconnectProviderCmd.Flags().String("open-idconnect-provider-arn", "", "The Amazon Resource Name (ARN) of the IAM OpenID Connect provider resource object to delete.")
-	iam_deleteOpenIdconnectProviderCmd.MarkFlagRequired("open-idconnect-provider-arn")
+		iam_deleteOpenIdconnectProviderCmd.Flags().String("open-idconnect-provider-arn", "", "The Amazon Resource Name (ARN) of the IAM OpenID Connect provider resource object to delete.")
+		iam_deleteOpenIdconnectProviderCmd.MarkFlagRequired("open-idconnect-provider-arn")
+	})
 	iamCmd.AddCommand(iam_deleteOpenIdconnectProviderCmd)
 }

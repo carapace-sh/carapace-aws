@@ -12,9 +12,11 @@ var transcribe_getMedicalScribeJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_getMedicalScribeJobCmd).Standalone()
+	carapace.Gen(transcribe_getMedicalScribeJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_getMedicalScribeJobCmd).Standalone()
 
-	transcribe_getMedicalScribeJobCmd.Flags().String("medical-scribe-job-name", "", "The name of the Medical Scribe job you want information about.")
-	transcribe_getMedicalScribeJobCmd.MarkFlagRequired("medical-scribe-job-name")
+		transcribe_getMedicalScribeJobCmd.Flags().String("medical-scribe-job-name", "", "The name of the Medical Scribe job you want information about.")
+		transcribe_getMedicalScribeJobCmd.MarkFlagRequired("medical-scribe-job-name")
+	})
 	transcribeCmd.AddCommand(transcribe_getMedicalScribeJobCmd)
 }

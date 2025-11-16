@@ -12,11 +12,13 @@ var ssmIncidents_getTimelineEventCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_getTimelineEventCmd).Standalone()
+	carapace.Gen(ssmIncidents_getTimelineEventCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_getTimelineEventCmd).Standalone()
 
-	ssmIncidents_getTimelineEventCmd.Flags().String("event-id", "", "The ID of the event.")
-	ssmIncidents_getTimelineEventCmd.Flags().String("incident-record-arn", "", "The Amazon Resource Name (ARN) of the incident that includes the timeline event.")
-	ssmIncidents_getTimelineEventCmd.MarkFlagRequired("event-id")
-	ssmIncidents_getTimelineEventCmd.MarkFlagRequired("incident-record-arn")
+		ssmIncidents_getTimelineEventCmd.Flags().String("event-id", "", "The ID of the event.")
+		ssmIncidents_getTimelineEventCmd.Flags().String("incident-record-arn", "", "The Amazon Resource Name (ARN) of the incident that includes the timeline event.")
+		ssmIncidents_getTimelineEventCmd.MarkFlagRequired("event-id")
+		ssmIncidents_getTimelineEventCmd.MarkFlagRequired("incident-record-arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_getTimelineEventCmd)
 }

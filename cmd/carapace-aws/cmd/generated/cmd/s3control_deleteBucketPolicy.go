@@ -12,11 +12,13 @@ var s3control_deleteBucketPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_deleteBucketPolicyCmd).Standalone()
+	carapace.Gen(s3control_deleteBucketPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_deleteBucketPolicyCmd).Standalone()
 
-	s3control_deleteBucketPolicyCmd.Flags().String("account-id", "", "The account ID of the Outposts bucket.")
-	s3control_deleteBucketPolicyCmd.Flags().String("bucket", "", "Specifies the bucket.")
-	s3control_deleteBucketPolicyCmd.MarkFlagRequired("account-id")
-	s3control_deleteBucketPolicyCmd.MarkFlagRequired("bucket")
+		s3control_deleteBucketPolicyCmd.Flags().String("account-id", "", "The account ID of the Outposts bucket.")
+		s3control_deleteBucketPolicyCmd.Flags().String("bucket", "", "Specifies the bucket.")
+		s3control_deleteBucketPolicyCmd.MarkFlagRequired("account-id")
+		s3control_deleteBucketPolicyCmd.MarkFlagRequired("bucket")
+	})
 	s3controlCmd.AddCommand(s3control_deleteBucketPolicyCmd)
 }

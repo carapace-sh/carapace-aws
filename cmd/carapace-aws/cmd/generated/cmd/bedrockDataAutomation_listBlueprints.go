@@ -12,13 +12,15 @@ var bedrockDataAutomation_listBlueprintsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockDataAutomation_listBlueprintsCmd).Standalone()
+	carapace.Gen(bedrockDataAutomation_listBlueprintsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockDataAutomation_listBlueprintsCmd).Standalone()
 
-	bedrockDataAutomation_listBlueprintsCmd.Flags().String("blueprint-arn", "", "")
-	bedrockDataAutomation_listBlueprintsCmd.Flags().String("blueprint-stage-filter", "", "")
-	bedrockDataAutomation_listBlueprintsCmd.Flags().String("max-results", "", "")
-	bedrockDataAutomation_listBlueprintsCmd.Flags().String("next-token", "", "")
-	bedrockDataAutomation_listBlueprintsCmd.Flags().String("project-filter", "", "")
-	bedrockDataAutomation_listBlueprintsCmd.Flags().String("resource-owner", "", "")
+		bedrockDataAutomation_listBlueprintsCmd.Flags().String("blueprint-arn", "", "")
+		bedrockDataAutomation_listBlueprintsCmd.Flags().String("blueprint-stage-filter", "", "")
+		bedrockDataAutomation_listBlueprintsCmd.Flags().String("max-results", "", "")
+		bedrockDataAutomation_listBlueprintsCmd.Flags().String("next-token", "", "")
+		bedrockDataAutomation_listBlueprintsCmd.Flags().String("project-filter", "", "")
+		bedrockDataAutomation_listBlueprintsCmd.Flags().String("resource-owner", "", "")
+	})
 	bedrockDataAutomationCmd.AddCommand(bedrockDataAutomation_listBlueprintsCmd)
 }

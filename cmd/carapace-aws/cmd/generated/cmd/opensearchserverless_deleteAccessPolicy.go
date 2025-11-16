@@ -12,12 +12,14 @@ var opensearchserverless_deleteAccessPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_deleteAccessPolicyCmd).Standalone()
+	carapace.Gen(opensearchserverless_deleteAccessPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_deleteAccessPolicyCmd).Standalone()
 
-	opensearchserverless_deleteAccessPolicyCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
-	opensearchserverless_deleteAccessPolicyCmd.Flags().String("name", "", "The name of the policy to delete.")
-	opensearchserverless_deleteAccessPolicyCmd.Flags().String("type", "", "The type of policy.")
-	opensearchserverless_deleteAccessPolicyCmd.MarkFlagRequired("name")
-	opensearchserverless_deleteAccessPolicyCmd.MarkFlagRequired("type")
+		opensearchserverless_deleteAccessPolicyCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
+		opensearchserverless_deleteAccessPolicyCmd.Flags().String("name", "", "The name of the policy to delete.")
+		opensearchserverless_deleteAccessPolicyCmd.Flags().String("type", "", "The type of policy.")
+		opensearchserverless_deleteAccessPolicyCmd.MarkFlagRequired("name")
+		opensearchserverless_deleteAccessPolicyCmd.MarkFlagRequired("type")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_deleteAccessPolicyCmd)
 }

@@ -12,11 +12,13 @@ var gameliftstreams_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftstreams_untagResourceCmd).Standalone()
+	carapace.Gen(gameliftstreams_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftstreams_untagResourceCmd).Standalone()
 
-	gameliftstreams_untagResourceCmd.Flags().String("resource-arn", "", "The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) of the Amazon GameLift Streams resource that you want to remove tags from.")
-	gameliftstreams_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the specified Amazon GameLift Streams resource.")
-	gameliftstreams_untagResourceCmd.MarkFlagRequired("resource-arn")
-	gameliftstreams_untagResourceCmd.MarkFlagRequired("tag-keys")
+		gameliftstreams_untagResourceCmd.Flags().String("resource-arn", "", "The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) of the Amazon GameLift Streams resource that you want to remove tags from.")
+		gameliftstreams_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the specified Amazon GameLift Streams resource.")
+		gameliftstreams_untagResourceCmd.MarkFlagRequired("resource-arn")
+		gameliftstreams_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	gameliftstreamsCmd.AddCommand(gameliftstreams_untagResourceCmd)
 }

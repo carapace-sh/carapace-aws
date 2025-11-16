@@ -12,11 +12,13 @@ var auditmanager_getAssessmentReportUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getAssessmentReportUrlCmd).Standalone()
+	carapace.Gen(auditmanager_getAssessmentReportUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getAssessmentReportUrlCmd).Standalone()
 
-	auditmanager_getAssessmentReportUrlCmd.Flags().String("assessment-id", "", "The unique identifier for the assessment.")
-	auditmanager_getAssessmentReportUrlCmd.Flags().String("assessment-report-id", "", "The unique identifier for the assessment report.")
-	auditmanager_getAssessmentReportUrlCmd.MarkFlagRequired("assessment-id")
-	auditmanager_getAssessmentReportUrlCmd.MarkFlagRequired("assessment-report-id")
+		auditmanager_getAssessmentReportUrlCmd.Flags().String("assessment-id", "", "The unique identifier for the assessment.")
+		auditmanager_getAssessmentReportUrlCmd.Flags().String("assessment-report-id", "", "The unique identifier for the assessment report.")
+		auditmanager_getAssessmentReportUrlCmd.MarkFlagRequired("assessment-id")
+		auditmanager_getAssessmentReportUrlCmd.MarkFlagRequired("assessment-report-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getAssessmentReportUrlCmd)
 }

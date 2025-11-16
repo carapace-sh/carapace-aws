@@ -12,13 +12,15 @@ var datazone_getEnvironmentActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getEnvironmentActionCmd).Standalone()
+	carapace.Gen(datazone_getEnvironmentActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getEnvironmentActionCmd).Standalone()
 
-	datazone_getEnvironmentActionCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the `GetEnvironmentAction` API is invoked.")
-	datazone_getEnvironmentActionCmd.Flags().String("environment-identifier", "", "The environment ID of the environment action.")
-	datazone_getEnvironmentActionCmd.Flags().String("identifier", "", "The ID of the environment action")
-	datazone_getEnvironmentActionCmd.MarkFlagRequired("domain-identifier")
-	datazone_getEnvironmentActionCmd.MarkFlagRequired("environment-identifier")
-	datazone_getEnvironmentActionCmd.MarkFlagRequired("identifier")
+		datazone_getEnvironmentActionCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the `GetEnvironmentAction` API is invoked.")
+		datazone_getEnvironmentActionCmd.Flags().String("environment-identifier", "", "The environment ID of the environment action.")
+		datazone_getEnvironmentActionCmd.Flags().String("identifier", "", "The ID of the environment action")
+		datazone_getEnvironmentActionCmd.MarkFlagRequired("domain-identifier")
+		datazone_getEnvironmentActionCmd.MarkFlagRequired("environment-identifier")
+		datazone_getEnvironmentActionCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getEnvironmentActionCmd)
 }

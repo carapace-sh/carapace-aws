@@ -12,14 +12,16 @@ var connect_resumeContactRecordingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_resumeContactRecordingCmd).Standalone()
+	carapace.Gen(connect_resumeContactRecordingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_resumeContactRecordingCmd).Standalone()
 
-	connect_resumeContactRecordingCmd.Flags().String("contact-id", "", "The identifier of the contact.")
-	connect_resumeContactRecordingCmd.Flags().String("contact-recording-type", "", "The type of recording being operated on.")
-	connect_resumeContactRecordingCmd.Flags().String("initial-contact-id", "", "The identifier of the contact.")
-	connect_resumeContactRecordingCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_resumeContactRecordingCmd.MarkFlagRequired("contact-id")
-	connect_resumeContactRecordingCmd.MarkFlagRequired("initial-contact-id")
-	connect_resumeContactRecordingCmd.MarkFlagRequired("instance-id")
+		connect_resumeContactRecordingCmd.Flags().String("contact-id", "", "The identifier of the contact.")
+		connect_resumeContactRecordingCmd.Flags().String("contact-recording-type", "", "The type of recording being operated on.")
+		connect_resumeContactRecordingCmd.Flags().String("initial-contact-id", "", "The identifier of the contact.")
+		connect_resumeContactRecordingCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_resumeContactRecordingCmd.MarkFlagRequired("contact-id")
+		connect_resumeContactRecordingCmd.MarkFlagRequired("initial-contact-id")
+		connect_resumeContactRecordingCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_resumeContactRecordingCmd)
 }

@@ -12,12 +12,14 @@ var organizations_createOrganizationalUnitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_createOrganizationalUnitCmd).Standalone()
+	carapace.Gen(organizations_createOrganizationalUnitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_createOrganizationalUnitCmd).Standalone()
 
-	organizations_createOrganizationalUnitCmd.Flags().String("name", "", "The friendly name to assign to the new OU.")
-	organizations_createOrganizationalUnitCmd.Flags().String("parent-id", "", "The unique identifier (ID) of the parent root or OU that you want to create the new OU in.")
-	organizations_createOrganizationalUnitCmd.Flags().String("tags", "", "A list of tags that you want to attach to the newly created OU.")
-	organizations_createOrganizationalUnitCmd.MarkFlagRequired("name")
-	organizations_createOrganizationalUnitCmd.MarkFlagRequired("parent-id")
+		organizations_createOrganizationalUnitCmd.Flags().String("name", "", "The friendly name to assign to the new OU.")
+		organizations_createOrganizationalUnitCmd.Flags().String("parent-id", "", "The unique identifier (ID) of the parent root or OU that you want to create the new OU in.")
+		organizations_createOrganizationalUnitCmd.Flags().String("tags", "", "A list of tags that you want to attach to the newly created OU.")
+		organizations_createOrganizationalUnitCmd.MarkFlagRequired("name")
+		organizations_createOrganizationalUnitCmd.MarkFlagRequired("parent-id")
+	})
 	organizationsCmd.AddCommand(organizations_createOrganizationalUnitCmd)
 }

@@ -12,9 +12,11 @@ var opensearch_acceptInboundConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_acceptInboundConnectionCmd).Standalone()
+	carapace.Gen(opensearch_acceptInboundConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_acceptInboundConnectionCmd).Standalone()
 
-	opensearch_acceptInboundConnectionCmd.Flags().String("connection-id", "", "The ID of the inbound connection to accept.")
-	opensearch_acceptInboundConnectionCmd.MarkFlagRequired("connection-id")
+		opensearch_acceptInboundConnectionCmd.Flags().String("connection-id", "", "The ID of the inbound connection to accept.")
+		opensearch_acceptInboundConnectionCmd.MarkFlagRequired("connection-id")
+	})
 	opensearchCmd.AddCommand(opensearch_acceptInboundConnectionCmd)
 }

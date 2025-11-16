@@ -12,10 +12,12 @@ var ecr_getLifecyclePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_getLifecyclePolicyCmd).Standalone()
+	carapace.Gen(ecr_getLifecyclePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_getLifecyclePolicyCmd).Standalone()
 
-	ecr_getLifecyclePolicyCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the repository.")
-	ecr_getLifecyclePolicyCmd.Flags().String("repository-name", "", "The name of the repository.")
-	ecr_getLifecyclePolicyCmd.MarkFlagRequired("repository-name")
+		ecr_getLifecyclePolicyCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the repository.")
+		ecr_getLifecyclePolicyCmd.Flags().String("repository-name", "", "The name of the repository.")
+		ecr_getLifecyclePolicyCmd.MarkFlagRequired("repository-name")
+	})
 	ecrCmd.AddCommand(ecr_getLifecyclePolicyCmd)
 }

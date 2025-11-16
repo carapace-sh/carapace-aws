@@ -12,10 +12,12 @@ var redshiftData_getStatementResultCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftData_getStatementResultCmd).Standalone()
+	carapace.Gen(redshiftData_getStatementResultCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftData_getStatementResultCmd).Standalone()
 
-	redshiftData_getStatementResultCmd.Flags().String("id", "", "The identifier of the SQL statement whose results are to be fetched.")
-	redshiftData_getStatementResultCmd.Flags().String("next-token", "", "A value that indicates the starting point for the next set of response records in a subsequent request.")
-	redshiftData_getStatementResultCmd.MarkFlagRequired("id")
+		redshiftData_getStatementResultCmd.Flags().String("id", "", "The identifier of the SQL statement whose results are to be fetched.")
+		redshiftData_getStatementResultCmd.Flags().String("next-token", "", "A value that indicates the starting point for the next set of response records in a subsequent request.")
+		redshiftData_getStatementResultCmd.MarkFlagRequired("id")
+	})
 	redshiftDataCmd.AddCommand(redshiftData_getStatementResultCmd)
 }

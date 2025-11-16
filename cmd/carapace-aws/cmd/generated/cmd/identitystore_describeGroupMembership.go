@@ -12,11 +12,13 @@ var identitystore_describeGroupMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(identitystore_describeGroupMembershipCmd).Standalone()
+	carapace.Gen(identitystore_describeGroupMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(identitystore_describeGroupMembershipCmd).Standalone()
 
-	identitystore_describeGroupMembershipCmd.Flags().String("identity-store-id", "", "The globally unique identifier for the identity store.")
-	identitystore_describeGroupMembershipCmd.Flags().String("membership-id", "", "The identifier for a `GroupMembership` in an identity store.")
-	identitystore_describeGroupMembershipCmd.MarkFlagRequired("identity-store-id")
-	identitystore_describeGroupMembershipCmd.MarkFlagRequired("membership-id")
+		identitystore_describeGroupMembershipCmd.Flags().String("identity-store-id", "", "The globally unique identifier for the identity store.")
+		identitystore_describeGroupMembershipCmd.Flags().String("membership-id", "", "The identifier for a `GroupMembership` in an identity store.")
+		identitystore_describeGroupMembershipCmd.MarkFlagRequired("identity-store-id")
+		identitystore_describeGroupMembershipCmd.MarkFlagRequired("membership-id")
+	})
 	identitystoreCmd.AddCommand(identitystore_describeGroupMembershipCmd)
 }

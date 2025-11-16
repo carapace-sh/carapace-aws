@@ -12,11 +12,13 @@ var connectcampaignsv2_putProfileOutboundRequestBatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_putProfileOutboundRequestBatchCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_putProfileOutboundRequestBatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_putProfileOutboundRequestBatchCmd).Standalone()
 
-	connectcampaignsv2_putProfileOutboundRequestBatchCmd.Flags().String("id", "", "")
-	connectcampaignsv2_putProfileOutboundRequestBatchCmd.Flags().String("profile-outbound-requests", "", "")
-	connectcampaignsv2_putProfileOutboundRequestBatchCmd.MarkFlagRequired("id")
-	connectcampaignsv2_putProfileOutboundRequestBatchCmd.MarkFlagRequired("profile-outbound-requests")
+		connectcampaignsv2_putProfileOutboundRequestBatchCmd.Flags().String("id", "", "")
+		connectcampaignsv2_putProfileOutboundRequestBatchCmd.Flags().String("profile-outbound-requests", "", "")
+		connectcampaignsv2_putProfileOutboundRequestBatchCmd.MarkFlagRequired("id")
+		connectcampaignsv2_putProfileOutboundRequestBatchCmd.MarkFlagRequired("profile-outbound-requests")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_putProfileOutboundRequestBatchCmd)
 }

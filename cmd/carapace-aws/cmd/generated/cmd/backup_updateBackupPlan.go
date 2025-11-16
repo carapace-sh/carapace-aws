@@ -12,11 +12,13 @@ var backup_updateBackupPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_updateBackupPlanCmd).Standalone()
+	carapace.Gen(backup_updateBackupPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_updateBackupPlanCmd).Standalone()
 
-	backup_updateBackupPlanCmd.Flags().String("backup-plan", "", "The body of a backup plan.")
-	backup_updateBackupPlanCmd.Flags().String("backup-plan-id", "", "The ID of the backup plan.")
-	backup_updateBackupPlanCmd.MarkFlagRequired("backup-plan")
-	backup_updateBackupPlanCmd.MarkFlagRequired("backup-plan-id")
+		backup_updateBackupPlanCmd.Flags().String("backup-plan", "", "The body of a backup plan.")
+		backup_updateBackupPlanCmd.Flags().String("backup-plan-id", "", "The ID of the backup plan.")
+		backup_updateBackupPlanCmd.MarkFlagRequired("backup-plan")
+		backup_updateBackupPlanCmd.MarkFlagRequired("backup-plan-id")
+	})
 	backupCmd.AddCommand(backup_updateBackupPlanCmd)
 }

@@ -12,9 +12,11 @@ var lightsail_detachDiskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_detachDiskCmd).Standalone()
+	carapace.Gen(lightsail_detachDiskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_detachDiskCmd).Standalone()
 
-	lightsail_detachDiskCmd.Flags().String("disk-name", "", "The unique name of the disk you want to detach from your instance (`my-disk`).")
-	lightsail_detachDiskCmd.MarkFlagRequired("disk-name")
+		lightsail_detachDiskCmd.Flags().String("disk-name", "", "The unique name of the disk you want to detach from your instance (`my-disk`).")
+		lightsail_detachDiskCmd.MarkFlagRequired("disk-name")
+	})
 	lightsailCmd.AddCommand(lightsail_detachDiskCmd)
 }

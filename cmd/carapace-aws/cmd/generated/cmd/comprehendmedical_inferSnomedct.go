@@ -12,9 +12,11 @@ var comprehendmedical_inferSnomedctCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_inferSnomedctCmd).Standalone()
+	carapace.Gen(comprehendmedical_inferSnomedctCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_inferSnomedctCmd).Standalone()
 
-	comprehendmedical_inferSnomedctCmd.Flags().String("text", "", "The input text to be analyzed using InferSNOMEDCT.")
-	comprehendmedical_inferSnomedctCmd.MarkFlagRequired("text")
+		comprehendmedical_inferSnomedctCmd.Flags().String("text", "", "The input text to be analyzed using InferSNOMEDCT.")
+		comprehendmedical_inferSnomedctCmd.MarkFlagRequired("text")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_inferSnomedctCmd)
 }

@@ -12,11 +12,13 @@ var wellarchitected_disassociateProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_disassociateProfilesCmd).Standalone()
+	carapace.Gen(wellarchitected_disassociateProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_disassociateProfilesCmd).Standalone()
 
-	wellarchitected_disassociateProfilesCmd.Flags().String("profile-arns", "", "The list of profile ARNs to disassociate from the workload.")
-	wellarchitected_disassociateProfilesCmd.Flags().String("workload-id", "", "")
-	wellarchitected_disassociateProfilesCmd.MarkFlagRequired("profile-arns")
-	wellarchitected_disassociateProfilesCmd.MarkFlagRequired("workload-id")
+		wellarchitected_disassociateProfilesCmd.Flags().String("profile-arns", "", "The list of profile ARNs to disassociate from the workload.")
+		wellarchitected_disassociateProfilesCmd.Flags().String("workload-id", "", "")
+		wellarchitected_disassociateProfilesCmd.MarkFlagRequired("profile-arns")
+		wellarchitected_disassociateProfilesCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_disassociateProfilesCmd)
 }

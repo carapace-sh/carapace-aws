@@ -12,8 +12,10 @@ var emr_listStudiosCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_listStudiosCmd).Standalone()
+	carapace.Gen(emr_listStudiosCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_listStudiosCmd).Standalone()
 
-	emr_listStudiosCmd.Flags().String("marker", "", "The pagination token that indicates the set of results to retrieve.")
+		emr_listStudiosCmd.Flags().String("marker", "", "The pagination token that indicates the set of results to retrieve.")
+	})
 	emrCmd.AddCommand(emr_listStudiosCmd)
 }

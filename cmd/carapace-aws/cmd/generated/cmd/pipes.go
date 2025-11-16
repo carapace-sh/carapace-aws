@@ -12,7 +12,9 @@ var pipesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pipesCmd).Standalone()
+	carapace.Gen(pipesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pipesCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(pipesCmd)
 }

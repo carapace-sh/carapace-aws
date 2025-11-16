@@ -12,7 +12,9 @@ var macie2_describeOrganizationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_describeOrganizationConfigurationCmd).Standalone()
+	carapace.Gen(macie2_describeOrganizationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_describeOrganizationConfigurationCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_describeOrganizationConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var kafka_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_listTagsForResourceCmd).Standalone()
+	carapace.Gen(kafka_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_listTagsForResourceCmd).Standalone()
 
-	kafka_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.")
-	kafka_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		kafka_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.")
+		kafka_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	kafkaCmd.AddCommand(kafka_listTagsForResourceCmd)
 }

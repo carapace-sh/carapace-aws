@@ -12,9 +12,11 @@ var sqs_deleteQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_deleteQueueCmd).Standalone()
+	carapace.Gen(sqs_deleteQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_deleteQueueCmd).Standalone()
 
-	sqs_deleteQueueCmd.Flags().String("queue-url", "", "The URL of the Amazon SQS queue to delete.")
-	sqs_deleteQueueCmd.MarkFlagRequired("queue-url")
+		sqs_deleteQueueCmd.Flags().String("queue-url", "", "The URL of the Amazon SQS queue to delete.")
+		sqs_deleteQueueCmd.MarkFlagRequired("queue-url")
+	})
 	sqsCmd.AddCommand(sqs_deleteQueueCmd)
 }

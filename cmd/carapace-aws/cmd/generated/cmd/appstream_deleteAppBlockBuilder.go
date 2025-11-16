@@ -12,9 +12,11 @@ var appstream_deleteAppBlockBuilderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_deleteAppBlockBuilderCmd).Standalone()
+	carapace.Gen(appstream_deleteAppBlockBuilderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_deleteAppBlockBuilderCmd).Standalone()
 
-	appstream_deleteAppBlockBuilderCmd.Flags().String("name", "", "The name of the app block builder.")
-	appstream_deleteAppBlockBuilderCmd.MarkFlagRequired("name")
+		appstream_deleteAppBlockBuilderCmd.Flags().String("name", "", "The name of the app block builder.")
+		appstream_deleteAppBlockBuilderCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_deleteAppBlockBuilderCmd)
 }

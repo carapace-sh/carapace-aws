@@ -12,10 +12,12 @@ var devicefarm_getTestGridSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_getTestGridSessionCmd).Standalone()
+	carapace.Gen(devicefarm_getTestGridSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_getTestGridSessionCmd).Standalone()
 
-	devicefarm_getTestGridSessionCmd.Flags().String("project-arn", "", "The ARN for the project that this session belongs to.")
-	devicefarm_getTestGridSessionCmd.Flags().String("session-arn", "", "An ARN that uniquely identifies a [TestGridSession]().")
-	devicefarm_getTestGridSessionCmd.Flags().String("session-id", "", "An ID associated with this session.")
+		devicefarm_getTestGridSessionCmd.Flags().String("project-arn", "", "The ARN for the project that this session belongs to.")
+		devicefarm_getTestGridSessionCmd.Flags().String("session-arn", "", "An ARN that uniquely identifies a [TestGridSession]().")
+		devicefarm_getTestGridSessionCmd.Flags().String("session-id", "", "An ID associated with this session.")
+	})
 	devicefarmCmd.AddCommand(devicefarm_getTestGridSessionCmd)
 }

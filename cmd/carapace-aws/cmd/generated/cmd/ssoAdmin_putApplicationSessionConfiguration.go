@@ -12,10 +12,12 @@ var ssoAdmin_putApplicationSessionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_putApplicationSessionConfigurationCmd).Standalone()
+	carapace.Gen(ssoAdmin_putApplicationSessionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_putApplicationSessionConfigurationCmd).Standalone()
 
-	ssoAdmin_putApplicationSessionConfigurationCmd.Flags().String("application-arn", "", "The Amazon Resource Name (ARN) of the application for which to update the session configuration.")
-	ssoAdmin_putApplicationSessionConfigurationCmd.Flags().String("user-background-session-application-status", "", "The status of user background sessions for the application.")
-	ssoAdmin_putApplicationSessionConfigurationCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_putApplicationSessionConfigurationCmd.Flags().String("application-arn", "", "The Amazon Resource Name (ARN) of the application for which to update the session configuration.")
+		ssoAdmin_putApplicationSessionConfigurationCmd.Flags().String("user-background-session-application-status", "", "The status of user background sessions for the application.")
+		ssoAdmin_putApplicationSessionConfigurationCmd.MarkFlagRequired("application-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_putApplicationSessionConfigurationCmd)
 }

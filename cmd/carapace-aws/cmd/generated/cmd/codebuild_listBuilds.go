@@ -12,9 +12,11 @@ var codebuild_listBuildsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_listBuildsCmd).Standalone()
+	carapace.Gen(codebuild_listBuildsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_listBuildsCmd).Standalone()
 
-	codebuild_listBuildsCmd.Flags().String("next-token", "", "During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.")
-	codebuild_listBuildsCmd.Flags().String("sort-order", "", "The order to list build IDs.")
+		codebuild_listBuildsCmd.Flags().String("next-token", "", "During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.")
+		codebuild_listBuildsCmd.Flags().String("sort-order", "", "The order to list build IDs.")
+	})
 	codebuildCmd.AddCommand(codebuild_listBuildsCmd)
 }

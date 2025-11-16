@@ -12,11 +12,13 @@ var mturk_updateHittypeOfHitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_updateHittypeOfHitCmd).Standalone()
+	carapace.Gen(mturk_updateHittypeOfHitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_updateHittypeOfHitCmd).Standalone()
 
-	mturk_updateHittypeOfHitCmd.Flags().String("hitid", "", "The HIT to update.")
-	mturk_updateHittypeOfHitCmd.Flags().String("hittype-id", "", "The ID of the new HIT type.")
-	mturk_updateHittypeOfHitCmd.MarkFlagRequired("hitid")
-	mturk_updateHittypeOfHitCmd.MarkFlagRequired("hittype-id")
+		mturk_updateHittypeOfHitCmd.Flags().String("hitid", "", "The HIT to update.")
+		mturk_updateHittypeOfHitCmd.Flags().String("hittype-id", "", "The ID of the new HIT type.")
+		mturk_updateHittypeOfHitCmd.MarkFlagRequired("hitid")
+		mturk_updateHittypeOfHitCmd.MarkFlagRequired("hittype-id")
+	})
 	mturkCmd.AddCommand(mturk_updateHittypeOfHitCmd)
 }

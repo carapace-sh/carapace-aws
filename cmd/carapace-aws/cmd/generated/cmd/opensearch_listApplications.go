@@ -12,10 +12,12 @@ var opensearch_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_listApplicationsCmd).Standalone()
+	carapace.Gen(opensearch_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_listApplicationsCmd).Standalone()
 
-	opensearch_listApplicationsCmd.Flags().String("max-results", "", "")
-	opensearch_listApplicationsCmd.Flags().String("next-token", "", "")
-	opensearch_listApplicationsCmd.Flags().String("statuses", "", "Filters the list of OpenSearch applications by status.")
+		opensearch_listApplicationsCmd.Flags().String("max-results", "", "")
+		opensearch_listApplicationsCmd.Flags().String("next-token", "", "")
+		opensearch_listApplicationsCmd.Flags().String("statuses", "", "Filters the list of OpenSearch applications by status.")
+	})
 	opensearchCmd.AddCommand(opensearch_listApplicationsCmd)
 }

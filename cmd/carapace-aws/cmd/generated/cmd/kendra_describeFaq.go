@@ -12,11 +12,13 @@ var kendra_describeFaqCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_describeFaqCmd).Standalone()
+	carapace.Gen(kendra_describeFaqCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_describeFaqCmd).Standalone()
 
-	kendra_describeFaqCmd.Flags().String("id", "", "The identifier of the FAQ you want to get information on.")
-	kendra_describeFaqCmd.Flags().String("index-id", "", "The identifier of the index for the FAQ.")
-	kendra_describeFaqCmd.MarkFlagRequired("id")
-	kendra_describeFaqCmd.MarkFlagRequired("index-id")
+		kendra_describeFaqCmd.Flags().String("id", "", "The identifier of the FAQ you want to get information on.")
+		kendra_describeFaqCmd.Flags().String("index-id", "", "The identifier of the index for the FAQ.")
+		kendra_describeFaqCmd.MarkFlagRequired("id")
+		kendra_describeFaqCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_describeFaqCmd)
 }

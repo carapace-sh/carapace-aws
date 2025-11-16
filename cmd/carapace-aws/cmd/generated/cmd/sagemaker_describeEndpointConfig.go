@@ -12,9 +12,11 @@ var sagemaker_describeEndpointConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeEndpointConfigCmd).Standalone()
+	carapace.Gen(sagemaker_describeEndpointConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeEndpointConfigCmd).Standalone()
 
-	sagemaker_describeEndpointConfigCmd.Flags().String("endpoint-config-name", "", "The name of the endpoint configuration.")
-	sagemaker_describeEndpointConfigCmd.MarkFlagRequired("endpoint-config-name")
+		sagemaker_describeEndpointConfigCmd.Flags().String("endpoint-config-name", "", "The name of the endpoint configuration.")
+		sagemaker_describeEndpointConfigCmd.MarkFlagRequired("endpoint-config-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeEndpointConfigCmd)
 }

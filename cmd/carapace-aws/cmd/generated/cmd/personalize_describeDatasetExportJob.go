@@ -12,9 +12,11 @@ var personalize_describeDatasetExportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeDatasetExportJobCmd).Standalone()
+	carapace.Gen(personalize_describeDatasetExportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeDatasetExportJobCmd).Standalone()
 
-	personalize_describeDatasetExportJobCmd.Flags().String("dataset-export-job-arn", "", "The Amazon Resource Name (ARN) of the dataset export job to describe.")
-	personalize_describeDatasetExportJobCmd.MarkFlagRequired("dataset-export-job-arn")
+		personalize_describeDatasetExportJobCmd.Flags().String("dataset-export-job-arn", "", "The Amazon Resource Name (ARN) of the dataset export job to describe.")
+		personalize_describeDatasetExportJobCmd.MarkFlagRequired("dataset-export-job-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeDatasetExportJobCmd)
 }

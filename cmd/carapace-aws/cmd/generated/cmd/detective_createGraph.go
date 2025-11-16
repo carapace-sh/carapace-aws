@@ -12,8 +12,10 @@ var detective_createGraphCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_createGraphCmd).Standalone()
+	carapace.Gen(detective_createGraphCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_createGraphCmd).Standalone()
 
-	detective_createGraphCmd.Flags().String("tags", "", "The tags to assign to the new behavior graph.")
+		detective_createGraphCmd.Flags().String("tags", "", "The tags to assign to the new behavior graph.")
+	})
 	detectiveCmd.AddCommand(detective_createGraphCmd)
 }

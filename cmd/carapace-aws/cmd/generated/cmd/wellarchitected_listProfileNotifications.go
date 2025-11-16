@@ -12,10 +12,12 @@ var wellarchitected_listProfileNotificationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listProfileNotificationsCmd).Standalone()
+	carapace.Gen(wellarchitected_listProfileNotificationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listProfileNotificationsCmd).Standalone()
 
-	wellarchitected_listProfileNotificationsCmd.Flags().String("max-results", "", "")
-	wellarchitected_listProfileNotificationsCmd.Flags().String("next-token", "", "")
-	wellarchitected_listProfileNotificationsCmd.Flags().String("workload-id", "", "")
+		wellarchitected_listProfileNotificationsCmd.Flags().String("max-results", "", "")
+		wellarchitected_listProfileNotificationsCmd.Flags().String("next-token", "", "")
+		wellarchitected_listProfileNotificationsCmd.Flags().String("workload-id", "", "")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listProfileNotificationsCmd)
 }

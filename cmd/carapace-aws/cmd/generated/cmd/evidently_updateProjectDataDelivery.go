@@ -12,11 +12,13 @@ var evidently_updateProjectDataDeliveryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_updateProjectDataDeliveryCmd).Standalone()
+	carapace.Gen(evidently_updateProjectDataDeliveryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_updateProjectDataDeliveryCmd).Standalone()
 
-	evidently_updateProjectDataDeliveryCmd.Flags().String("cloud-watch-logs", "", "A structure containing the CloudWatch Logs log group where you want to store evaluation events.")
-	evidently_updateProjectDataDeliveryCmd.Flags().String("project", "", "The name or ARN of the project that you want to modify the data storage options for.")
-	evidently_updateProjectDataDeliveryCmd.Flags().String("s3-destination", "", "A structure containing the S3 bucket name and bucket prefix where you want to store evaluation events.")
-	evidently_updateProjectDataDeliveryCmd.MarkFlagRequired("project")
+		evidently_updateProjectDataDeliveryCmd.Flags().String("cloud-watch-logs", "", "A structure containing the CloudWatch Logs log group where you want to store evaluation events.")
+		evidently_updateProjectDataDeliveryCmd.Flags().String("project", "", "The name or ARN of the project that you want to modify the data storage options for.")
+		evidently_updateProjectDataDeliveryCmd.Flags().String("s3-destination", "", "A structure containing the S3 bucket name and bucket prefix where you want to store evaluation events.")
+		evidently_updateProjectDataDeliveryCmd.MarkFlagRequired("project")
+	})
 	evidentlyCmd.AddCommand(evidently_updateProjectDataDeliveryCmd)
 }

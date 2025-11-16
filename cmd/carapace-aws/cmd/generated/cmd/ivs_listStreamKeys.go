@@ -12,11 +12,13 @@ var ivs_listStreamKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_listStreamKeysCmd).Standalone()
+	carapace.Gen(ivs_listStreamKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_listStreamKeysCmd).Standalone()
 
-	ivs_listStreamKeysCmd.Flags().String("channel-arn", "", "Channel ARN used to filter the list.")
-	ivs_listStreamKeysCmd.Flags().String("max-results", "", "Maximum number of streamKeys to return.")
-	ivs_listStreamKeysCmd.Flags().String("next-token", "", "The first stream key to retrieve.")
-	ivs_listStreamKeysCmd.MarkFlagRequired("channel-arn")
+		ivs_listStreamKeysCmd.Flags().String("channel-arn", "", "Channel ARN used to filter the list.")
+		ivs_listStreamKeysCmd.Flags().String("max-results", "", "Maximum number of streamKeys to return.")
+		ivs_listStreamKeysCmd.Flags().String("next-token", "", "The first stream key to retrieve.")
+		ivs_listStreamKeysCmd.MarkFlagRequired("channel-arn")
+	})
 	ivsCmd.AddCommand(ivs_listStreamKeysCmd)
 }

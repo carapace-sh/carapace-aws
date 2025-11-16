@@ -12,7 +12,9 @@ var transferCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transferCmd).Standalone()
+	carapace.Gen(transferCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transferCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(transferCmd)
 }

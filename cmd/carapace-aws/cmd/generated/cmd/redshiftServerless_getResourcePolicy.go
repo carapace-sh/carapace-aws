@@ -12,9 +12,11 @@ var redshiftServerless_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getResourcePolicyCmd).Standalone()
+	carapace.Gen(redshiftServerless_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getResourcePolicyCmd).Standalone()
 
-	redshiftServerless_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to return.")
-	redshiftServerless_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		redshiftServerless_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to return.")
+		redshiftServerless_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getResourcePolicyCmd)
 }

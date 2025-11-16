@@ -12,12 +12,14 @@ var mediaconnect_deregisterGatewayInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_deregisterGatewayInstanceCmd).Standalone()
+	carapace.Gen(mediaconnect_deregisterGatewayInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_deregisterGatewayInstanceCmd).Standalone()
 
-	mediaconnect_deregisterGatewayInstanceCmd.Flags().Bool("force", false, "Force the deregistration of an instance.")
-	mediaconnect_deregisterGatewayInstanceCmd.Flags().String("gateway-instance-arn", "", "The Amazon Resource Name (ARN) of the gateway that contains the instance that you want to deregister.")
-	mediaconnect_deregisterGatewayInstanceCmd.Flags().Bool("no-force", false, "Force the deregistration of an instance.")
-	mediaconnect_deregisterGatewayInstanceCmd.MarkFlagRequired("gateway-instance-arn")
-	mediaconnect_deregisterGatewayInstanceCmd.Flag("no-force").Hidden = true
+		mediaconnect_deregisterGatewayInstanceCmd.Flags().Bool("force", false, "Force the deregistration of an instance.")
+		mediaconnect_deregisterGatewayInstanceCmd.Flags().String("gateway-instance-arn", "", "The Amazon Resource Name (ARN) of the gateway that contains the instance that you want to deregister.")
+		mediaconnect_deregisterGatewayInstanceCmd.Flags().Bool("no-force", false, "Force the deregistration of an instance.")
+		mediaconnect_deregisterGatewayInstanceCmd.MarkFlagRequired("gateway-instance-arn")
+		mediaconnect_deregisterGatewayInstanceCmd.Flag("no-force").Hidden = true
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_deregisterGatewayInstanceCmd)
 }

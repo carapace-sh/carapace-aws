@@ -12,11 +12,13 @@ var workspaces_modifyWorkspaceAccessPropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_modifyWorkspaceAccessPropertiesCmd).Standalone()
+	carapace.Gen(workspaces_modifyWorkspaceAccessPropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_modifyWorkspaceAccessPropertiesCmd).Standalone()
 
-	workspaces_modifyWorkspaceAccessPropertiesCmd.Flags().String("resource-id", "", "The identifier of the directory.")
-	workspaces_modifyWorkspaceAccessPropertiesCmd.Flags().String("workspace-access-properties", "", "The device types and operating systems to enable or disable for access.")
-	workspaces_modifyWorkspaceAccessPropertiesCmd.MarkFlagRequired("resource-id")
-	workspaces_modifyWorkspaceAccessPropertiesCmd.MarkFlagRequired("workspace-access-properties")
+		workspaces_modifyWorkspaceAccessPropertiesCmd.Flags().String("resource-id", "", "The identifier of the directory.")
+		workspaces_modifyWorkspaceAccessPropertiesCmd.Flags().String("workspace-access-properties", "", "The device types and operating systems to enable or disable for access.")
+		workspaces_modifyWorkspaceAccessPropertiesCmd.MarkFlagRequired("resource-id")
+		workspaces_modifyWorkspaceAccessPropertiesCmd.MarkFlagRequired("workspace-access-properties")
+	})
 	workspacesCmd.AddCommand(workspaces_modifyWorkspaceAccessPropertiesCmd)
 }

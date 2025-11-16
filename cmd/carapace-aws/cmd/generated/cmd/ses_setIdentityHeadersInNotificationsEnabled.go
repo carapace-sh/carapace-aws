@@ -12,13 +12,15 @@ var ses_setIdentityHeadersInNotificationsEnabledCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_setIdentityHeadersInNotificationsEnabledCmd).Standalone()
+	carapace.Gen(ses_setIdentityHeadersInNotificationsEnabledCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_setIdentityHeadersInNotificationsEnabledCmd).Standalone()
 
-	ses_setIdentityHeadersInNotificationsEnabledCmd.Flags().String("enabled", "", "Sets whether Amazon SES includes the original email headers in Amazon SNS notifications of the specified notification type.")
-	ses_setIdentityHeadersInNotificationsEnabledCmd.Flags().String("identity", "", "The identity for which to enable or disable headers in notifications.")
-	ses_setIdentityHeadersInNotificationsEnabledCmd.Flags().String("notification-type", "", "The notification type for which to enable or disable headers in notifications.")
-	ses_setIdentityHeadersInNotificationsEnabledCmd.MarkFlagRequired("enabled")
-	ses_setIdentityHeadersInNotificationsEnabledCmd.MarkFlagRequired("identity")
-	ses_setIdentityHeadersInNotificationsEnabledCmd.MarkFlagRequired("notification-type")
+		ses_setIdentityHeadersInNotificationsEnabledCmd.Flags().String("enabled", "", "Sets whether Amazon SES includes the original email headers in Amazon SNS notifications of the specified notification type.")
+		ses_setIdentityHeadersInNotificationsEnabledCmd.Flags().String("identity", "", "The identity for which to enable or disable headers in notifications.")
+		ses_setIdentityHeadersInNotificationsEnabledCmd.Flags().String("notification-type", "", "The notification type for which to enable or disable headers in notifications.")
+		ses_setIdentityHeadersInNotificationsEnabledCmd.MarkFlagRequired("enabled")
+		ses_setIdentityHeadersInNotificationsEnabledCmd.MarkFlagRequired("identity")
+		ses_setIdentityHeadersInNotificationsEnabledCmd.MarkFlagRequired("notification-type")
+	})
 	sesCmd.AddCommand(ses_setIdentityHeadersInNotificationsEnabledCmd)
 }

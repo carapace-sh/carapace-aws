@@ -12,9 +12,11 @@ var auditmanager_registerOrganizationAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_registerOrganizationAdminAccountCmd).Standalone()
+	carapace.Gen(auditmanager_registerOrganizationAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_registerOrganizationAdminAccountCmd).Standalone()
 
-	auditmanager_registerOrganizationAdminAccountCmd.Flags().String("admin-account-id", "", "The identifier for the delegated administrator account.")
-	auditmanager_registerOrganizationAdminAccountCmd.MarkFlagRequired("admin-account-id")
+		auditmanager_registerOrganizationAdminAccountCmd.Flags().String("admin-account-id", "", "The identifier for the delegated administrator account.")
+		auditmanager_registerOrganizationAdminAccountCmd.MarkFlagRequired("admin-account-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_registerOrganizationAdminAccountCmd)
 }

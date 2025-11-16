@@ -12,9 +12,11 @@ var elasticache_deleteCacheParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_deleteCacheParameterGroupCmd).Standalone()
+	carapace.Gen(elasticache_deleteCacheParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_deleteCacheParameterGroupCmd).Standalone()
 
-	elasticache_deleteCacheParameterGroupCmd.Flags().String("cache-parameter-group-name", "", "The name of the cache parameter group to delete.")
-	elasticache_deleteCacheParameterGroupCmd.MarkFlagRequired("cache-parameter-group-name")
+		elasticache_deleteCacheParameterGroupCmd.Flags().String("cache-parameter-group-name", "", "The name of the cache parameter group to delete.")
+		elasticache_deleteCacheParameterGroupCmd.MarkFlagRequired("cache-parameter-group-name")
+	})
 	elasticacheCmd.AddCommand(elasticache_deleteCacheParameterGroupCmd)
 }

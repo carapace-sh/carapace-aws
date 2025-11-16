@@ -12,11 +12,13 @@ var sagemaker_sendPipelineExecutionStepFailureCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_sendPipelineExecutionStepFailureCmd).Standalone()
+	carapace.Gen(sagemaker_sendPipelineExecutionStepFailureCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_sendPipelineExecutionStepFailureCmd).Standalone()
 
-	sagemaker_sendPipelineExecutionStepFailureCmd.Flags().String("callback-token", "", "The pipeline generated token from the Amazon SQS queue.")
-	sagemaker_sendPipelineExecutionStepFailureCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.")
-	sagemaker_sendPipelineExecutionStepFailureCmd.Flags().String("failure-reason", "", "A message describing why the step failed.")
-	sagemaker_sendPipelineExecutionStepFailureCmd.MarkFlagRequired("callback-token")
+		sagemaker_sendPipelineExecutionStepFailureCmd.Flags().String("callback-token", "", "The pipeline generated token from the Amazon SQS queue.")
+		sagemaker_sendPipelineExecutionStepFailureCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.")
+		sagemaker_sendPipelineExecutionStepFailureCmd.Flags().String("failure-reason", "", "A message describing why the step failed.")
+		sagemaker_sendPipelineExecutionStepFailureCmd.MarkFlagRequired("callback-token")
+	})
 	sagemakerCmd.AddCommand(sagemaker_sendPipelineExecutionStepFailureCmd)
 }

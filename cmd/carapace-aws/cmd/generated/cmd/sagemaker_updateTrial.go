@@ -12,10 +12,12 @@ var sagemaker_updateTrialCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_updateTrialCmd).Standalone()
+	carapace.Gen(sagemaker_updateTrialCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_updateTrialCmd).Standalone()
 
-	sagemaker_updateTrialCmd.Flags().String("display-name", "", "The name of the trial as displayed.")
-	sagemaker_updateTrialCmd.Flags().String("trial-name", "", "The name of the trial to update.")
-	sagemaker_updateTrialCmd.MarkFlagRequired("trial-name")
+		sagemaker_updateTrialCmd.Flags().String("display-name", "", "The name of the trial as displayed.")
+		sagemaker_updateTrialCmd.Flags().String("trial-name", "", "The name of the trial to update.")
+		sagemaker_updateTrialCmd.MarkFlagRequired("trial-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_updateTrialCmd)
 }

@@ -12,14 +12,16 @@ var cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd).Standalone()
+	carapace.Gen(cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd).Standalone()
 
-	cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("identity-id", "", "A unique identifier in the format REGION:GUID.")
-	cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("identity-pool-id", "", "An identity pool ID in the format REGION:GUID.")
-	cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("logins", "", "A set of optional name-value pairs that map provider names to provider tokens.")
-	cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("principal-tags", "", "Use this operation to configure attribute mappings for custom providers.")
-	cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("token-duration", "", "The expiration time of the token, in seconds.")
-	cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.MarkFlagRequired("identity-pool-id")
-	cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.MarkFlagRequired("logins")
+		cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("identity-id", "", "A unique identifier in the format REGION:GUID.")
+		cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("identity-pool-id", "", "An identity pool ID in the format REGION:GUID.")
+		cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("logins", "", "A set of optional name-value pairs that map provider names to provider tokens.")
+		cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("principal-tags", "", "Use this operation to configure attribute mappings for custom providers.")
+		cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.Flags().String("token-duration", "", "The expiration time of the token, in seconds.")
+		cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.MarkFlagRequired("identity-pool-id")
+		cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd.MarkFlagRequired("logins")
+	})
 	cognitoIdentityCmd.AddCommand(cognitoIdentity_getOpenIdTokenForDeveloperIdentityCmd)
 }

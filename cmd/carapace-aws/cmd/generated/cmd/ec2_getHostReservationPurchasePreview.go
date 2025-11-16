@@ -12,11 +12,13 @@ var ec2_getHostReservationPurchasePreviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getHostReservationPurchasePreviewCmd).Standalone()
+	carapace.Gen(ec2_getHostReservationPurchasePreviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getHostReservationPurchasePreviewCmd).Standalone()
 
-	ec2_getHostReservationPurchasePreviewCmd.Flags().String("host-id-set", "", "The IDs of the Dedicated Hosts with which the reservation is associated.")
-	ec2_getHostReservationPurchasePreviewCmd.Flags().String("offering-id", "", "The offering ID of the reservation.")
-	ec2_getHostReservationPurchasePreviewCmd.MarkFlagRequired("host-id-set")
-	ec2_getHostReservationPurchasePreviewCmd.MarkFlagRequired("offering-id")
+		ec2_getHostReservationPurchasePreviewCmd.Flags().String("host-id-set", "", "The IDs of the Dedicated Hosts with which the reservation is associated.")
+		ec2_getHostReservationPurchasePreviewCmd.Flags().String("offering-id", "", "The offering ID of the reservation.")
+		ec2_getHostReservationPurchasePreviewCmd.MarkFlagRequired("host-id-set")
+		ec2_getHostReservationPurchasePreviewCmd.MarkFlagRequired("offering-id")
+	})
 	ec2Cmd.AddCommand(ec2_getHostReservationPurchasePreviewCmd)
 }

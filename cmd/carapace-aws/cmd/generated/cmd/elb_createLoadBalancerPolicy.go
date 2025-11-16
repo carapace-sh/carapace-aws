@@ -12,14 +12,16 @@ var elb_createLoadBalancerPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_createLoadBalancerPolicyCmd).Standalone()
+	carapace.Gen(elb_createLoadBalancerPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_createLoadBalancerPolicyCmd).Standalone()
 
-	elb_createLoadBalancerPolicyCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_createLoadBalancerPolicyCmd.Flags().String("policy-attributes", "", "The policy attributes.")
-	elb_createLoadBalancerPolicyCmd.Flags().String("policy-name", "", "The name of the load balancer policy to be created.")
-	elb_createLoadBalancerPolicyCmd.Flags().String("policy-type-name", "", "The name of the base policy type.")
-	elb_createLoadBalancerPolicyCmd.MarkFlagRequired("load-balancer-name")
-	elb_createLoadBalancerPolicyCmd.MarkFlagRequired("policy-name")
-	elb_createLoadBalancerPolicyCmd.MarkFlagRequired("policy-type-name")
+		elb_createLoadBalancerPolicyCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_createLoadBalancerPolicyCmd.Flags().String("policy-attributes", "", "The policy attributes.")
+		elb_createLoadBalancerPolicyCmd.Flags().String("policy-name", "", "The name of the load balancer policy to be created.")
+		elb_createLoadBalancerPolicyCmd.Flags().String("policy-type-name", "", "The name of the base policy type.")
+		elb_createLoadBalancerPolicyCmd.MarkFlagRequired("load-balancer-name")
+		elb_createLoadBalancerPolicyCmd.MarkFlagRequired("policy-name")
+		elb_createLoadBalancerPolicyCmd.MarkFlagRequired("policy-type-name")
+	})
 	elbCmd.AddCommand(elb_createLoadBalancerPolicyCmd)
 }

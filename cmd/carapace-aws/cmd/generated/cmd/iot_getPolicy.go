@@ -12,9 +12,11 @@ var iot_getPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getPolicyCmd).Standalone()
+	carapace.Gen(iot_getPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getPolicyCmd).Standalone()
 
-	iot_getPolicyCmd.Flags().String("policy-name", "", "The name of the policy.")
-	iot_getPolicyCmd.MarkFlagRequired("policy-name")
+		iot_getPolicyCmd.Flags().String("policy-name", "", "The name of the policy.")
+		iot_getPolicyCmd.MarkFlagRequired("policy-name")
+	})
 	iotCmd.AddCommand(iot_getPolicyCmd)
 }

@@ -12,11 +12,13 @@ var ses_updateConfigurationSetSendingEnabledCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_updateConfigurationSetSendingEnabledCmd).Standalone()
+	carapace.Gen(ses_updateConfigurationSetSendingEnabledCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_updateConfigurationSetSendingEnabledCmd).Standalone()
 
-	ses_updateConfigurationSetSendingEnabledCmd.Flags().String("configuration-set-name", "", "The name of the configuration set to update.")
-	ses_updateConfigurationSetSendingEnabledCmd.Flags().String("enabled", "", "Describes whether email sending is enabled or disabled for the configuration set.")
-	ses_updateConfigurationSetSendingEnabledCmd.MarkFlagRequired("configuration-set-name")
-	ses_updateConfigurationSetSendingEnabledCmd.MarkFlagRequired("enabled")
+		ses_updateConfigurationSetSendingEnabledCmd.Flags().String("configuration-set-name", "", "The name of the configuration set to update.")
+		ses_updateConfigurationSetSendingEnabledCmd.Flags().String("enabled", "", "Describes whether email sending is enabled or disabled for the configuration set.")
+		ses_updateConfigurationSetSendingEnabledCmd.MarkFlagRequired("configuration-set-name")
+		ses_updateConfigurationSetSendingEnabledCmd.MarkFlagRequired("enabled")
+	})
 	sesCmd.AddCommand(ses_updateConfigurationSetSendingEnabledCmd)
 }

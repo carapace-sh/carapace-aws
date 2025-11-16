@@ -12,8 +12,10 @@ var elasticbeanstalk_describeApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_describeApplicationsCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_describeApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_describeApplicationsCmd).Standalone()
 
-	elasticbeanstalk_describeApplicationsCmd.Flags().String("application-names", "", "If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.")
+		elasticbeanstalk_describeApplicationsCmd.Flags().String("application-names", "", "If specified, AWS Elastic Beanstalk restricts the returned descriptions to only include those with the specified names.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_describeApplicationsCmd)
 }

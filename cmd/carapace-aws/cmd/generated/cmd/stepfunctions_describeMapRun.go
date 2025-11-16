@@ -12,9 +12,11 @@ var stepfunctions_describeMapRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_describeMapRunCmd).Standalone()
+	carapace.Gen(stepfunctions_describeMapRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_describeMapRunCmd).Standalone()
 
-	stepfunctions_describeMapRunCmd.Flags().String("map-run-arn", "", "The Amazon Resource Name (ARN) that identifies a Map Run.")
-	stepfunctions_describeMapRunCmd.MarkFlagRequired("map-run-arn")
+		stepfunctions_describeMapRunCmd.Flags().String("map-run-arn", "", "The Amazon Resource Name (ARN) that identifies a Map Run.")
+		stepfunctions_describeMapRunCmd.MarkFlagRequired("map-run-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_describeMapRunCmd)
 }

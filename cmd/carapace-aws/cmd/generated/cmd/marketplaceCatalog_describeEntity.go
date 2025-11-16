@@ -12,11 +12,13 @@ var marketplaceCatalog_describeEntityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceCatalog_describeEntityCmd).Standalone()
+	carapace.Gen(marketplaceCatalog_describeEntityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceCatalog_describeEntityCmd).Standalone()
 
-	marketplaceCatalog_describeEntityCmd.Flags().String("catalog", "", "Required.")
-	marketplaceCatalog_describeEntityCmd.Flags().String("entity-id", "", "Required.")
-	marketplaceCatalog_describeEntityCmd.MarkFlagRequired("catalog")
-	marketplaceCatalog_describeEntityCmd.MarkFlagRequired("entity-id")
+		marketplaceCatalog_describeEntityCmd.Flags().String("catalog", "", "Required.")
+		marketplaceCatalog_describeEntityCmd.Flags().String("entity-id", "", "Required.")
+		marketplaceCatalog_describeEntityCmd.MarkFlagRequired("catalog")
+		marketplaceCatalog_describeEntityCmd.MarkFlagRequired("entity-id")
+	})
 	marketplaceCatalogCmd.AddCommand(marketplaceCatalog_describeEntityCmd)
 }

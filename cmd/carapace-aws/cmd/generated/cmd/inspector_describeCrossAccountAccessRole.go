@@ -12,7 +12,9 @@ var inspector_describeCrossAccountAccessRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_describeCrossAccountAccessRoleCmd).Standalone()
+	carapace.Gen(inspector_describeCrossAccountAccessRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_describeCrossAccountAccessRoleCmd).Standalone()
 
+	})
 	inspectorCmd.AddCommand(inspector_describeCrossAccountAccessRoleCmd)
 }

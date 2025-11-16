@@ -12,10 +12,12 @@ var dynamodb_listExportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_listExportsCmd).Standalone()
+	carapace.Gen(dynamodb_listExportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_listExportsCmd).Standalone()
 
-	dynamodb_listExportsCmd.Flags().String("max-results", "", "Maximum number of results to return per page.")
-	dynamodb_listExportsCmd.Flags().String("next-token", "", "An optional string that, if supplied, must be copied from the output of a previous call to `ListExports`.")
-	dynamodb_listExportsCmd.Flags().String("table-arn", "", "The Amazon Resource Name (ARN) associated with the exported table.")
+		dynamodb_listExportsCmd.Flags().String("max-results", "", "Maximum number of results to return per page.")
+		dynamodb_listExportsCmd.Flags().String("next-token", "", "An optional string that, if supplied, must be copied from the output of a previous call to `ListExports`.")
+		dynamodb_listExportsCmd.Flags().String("table-arn", "", "The Amazon Resource Name (ARN) associated with the exported table.")
+	})
 	dynamodbCmd.AddCommand(dynamodb_listExportsCmd)
 }

@@ -12,12 +12,14 @@ var autoscaling_enableMetricsCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_enableMetricsCollectionCmd).Standalone()
+	carapace.Gen(autoscaling_enableMetricsCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_enableMetricsCollectionCmd).Standalone()
 
-	autoscaling_enableMetricsCollectionCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_enableMetricsCollectionCmd.Flags().String("granularity", "", "The frequency at which Amazon EC2 Auto Scaling sends aggregated data to CloudWatch.")
-	autoscaling_enableMetricsCollectionCmd.Flags().String("metrics", "", "Identifies the metrics to enable.")
-	autoscaling_enableMetricsCollectionCmd.MarkFlagRequired("auto-scaling-group-name")
-	autoscaling_enableMetricsCollectionCmd.MarkFlagRequired("granularity")
+		autoscaling_enableMetricsCollectionCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_enableMetricsCollectionCmd.Flags().String("granularity", "", "The frequency at which Amazon EC2 Auto Scaling sends aggregated data to CloudWatch.")
+		autoscaling_enableMetricsCollectionCmd.Flags().String("metrics", "", "Identifies the metrics to enable.")
+		autoscaling_enableMetricsCollectionCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_enableMetricsCollectionCmd.MarkFlagRequired("granularity")
+	})
 	autoscalingCmd.AddCommand(autoscaling_enableMetricsCollectionCmd)
 }

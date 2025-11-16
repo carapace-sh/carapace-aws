@@ -12,11 +12,13 @@ var iotanalytics_runPipelineActivityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_runPipelineActivityCmd).Standalone()
+	carapace.Gen(iotanalytics_runPipelineActivityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_runPipelineActivityCmd).Standalone()
 
-	iotanalytics_runPipelineActivityCmd.Flags().String("payloads", "", "The sample message payloads on which the pipeline activity is run.")
-	iotanalytics_runPipelineActivityCmd.Flags().String("pipeline-activity", "", "The pipeline activity that is run.")
-	iotanalytics_runPipelineActivityCmd.MarkFlagRequired("payloads")
-	iotanalytics_runPipelineActivityCmd.MarkFlagRequired("pipeline-activity")
+		iotanalytics_runPipelineActivityCmd.Flags().String("payloads", "", "The sample message payloads on which the pipeline activity is run.")
+		iotanalytics_runPipelineActivityCmd.Flags().String("pipeline-activity", "", "The pipeline activity that is run.")
+		iotanalytics_runPipelineActivityCmd.MarkFlagRequired("payloads")
+		iotanalytics_runPipelineActivityCmd.MarkFlagRequired("pipeline-activity")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_runPipelineActivityCmd)
 }

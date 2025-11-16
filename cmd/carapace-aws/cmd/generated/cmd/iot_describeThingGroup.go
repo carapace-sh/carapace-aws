@@ -12,9 +12,11 @@ var iot_describeThingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeThingGroupCmd).Standalone()
+	carapace.Gen(iot_describeThingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeThingGroupCmd).Standalone()
 
-	iot_describeThingGroupCmd.Flags().String("thing-group-name", "", "The name of the thing group.")
-	iot_describeThingGroupCmd.MarkFlagRequired("thing-group-name")
+		iot_describeThingGroupCmd.Flags().String("thing-group-name", "", "The name of the thing group.")
+		iot_describeThingGroupCmd.MarkFlagRequired("thing-group-name")
+	})
 	iotCmd.AddCommand(iot_describeThingGroupCmd)
 }

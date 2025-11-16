@@ -12,11 +12,13 @@ var codestarNotifications_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarNotifications_tagResourceCmd).Standalone()
+	carapace.Gen(codestarNotifications_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarNotifications_tagResourceCmd).Standalone()
 
-	codestarNotifications_tagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the notification rule to tag.")
-	codestarNotifications_tagResourceCmd.Flags().String("tags", "", "The list of tags to associate with the resource.")
-	codestarNotifications_tagResourceCmd.MarkFlagRequired("arn")
-	codestarNotifications_tagResourceCmd.MarkFlagRequired("tags")
+		codestarNotifications_tagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the notification rule to tag.")
+		codestarNotifications_tagResourceCmd.Flags().String("tags", "", "The list of tags to associate with the resource.")
+		codestarNotifications_tagResourceCmd.MarkFlagRequired("arn")
+		codestarNotifications_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	codestarNotificationsCmd.AddCommand(codestarNotifications_tagResourceCmd)
 }

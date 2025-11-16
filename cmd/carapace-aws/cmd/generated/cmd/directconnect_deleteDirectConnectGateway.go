@@ -12,9 +12,11 @@ var directconnect_deleteDirectConnectGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_deleteDirectConnectGatewayCmd).Standalone()
+	carapace.Gen(directconnect_deleteDirectConnectGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_deleteDirectConnectGatewayCmd).Standalone()
 
-	directconnect_deleteDirectConnectGatewayCmd.Flags().String("direct-connect-gateway-id", "", "The ID of the Direct Connect gateway.")
-	directconnect_deleteDirectConnectGatewayCmd.MarkFlagRequired("direct-connect-gateway-id")
+		directconnect_deleteDirectConnectGatewayCmd.Flags().String("direct-connect-gateway-id", "", "The ID of the Direct Connect gateway.")
+		directconnect_deleteDirectConnectGatewayCmd.MarkFlagRequired("direct-connect-gateway-id")
+	})
 	directconnectCmd.AddCommand(directconnect_deleteDirectConnectGatewayCmd)
 }

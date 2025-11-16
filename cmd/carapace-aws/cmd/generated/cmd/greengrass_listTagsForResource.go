@@ -12,9 +12,11 @@ var greengrass_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_listTagsForResourceCmd).Standalone()
+	carapace.Gen(greengrass_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_listTagsForResourceCmd).Standalone()
 
-	greengrass_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	greengrass_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		greengrass_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		greengrass_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	greengrassCmd.AddCommand(greengrass_listTagsForResourceCmd)
 }

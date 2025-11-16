@@ -12,9 +12,11 @@ var sesv2_getDeliverabilityTestReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getDeliverabilityTestReportCmd).Standalone()
+	carapace.Gen(sesv2_getDeliverabilityTestReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getDeliverabilityTestReportCmd).Standalone()
 
-	sesv2_getDeliverabilityTestReportCmd.Flags().String("report-id", "", "A unique string that identifies the predictive inbox placement test.")
-	sesv2_getDeliverabilityTestReportCmd.MarkFlagRequired("report-id")
+		sesv2_getDeliverabilityTestReportCmd.Flags().String("report-id", "", "A unique string that identifies the predictive inbox placement test.")
+		sesv2_getDeliverabilityTestReportCmd.MarkFlagRequired("report-id")
+	})
 	sesv2Cmd.AddCommand(sesv2_getDeliverabilityTestReportCmd)
 }

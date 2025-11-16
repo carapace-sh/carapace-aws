@@ -12,9 +12,11 @@ var chimeSdkVoice_deleteVoiceConnectorEmergencyCallingConfigurationCmd = &cobra.
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorEmergencyCallingConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorEmergencyCallingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteVoiceConnectorEmergencyCallingConfigurationCmd).Standalone()
 
-	chimeSdkVoice_deleteVoiceConnectorEmergencyCallingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_deleteVoiceConnectorEmergencyCallingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_deleteVoiceConnectorEmergencyCallingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_deleteVoiceConnectorEmergencyCallingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteVoiceConnectorEmergencyCallingConfigurationCmd)
 }

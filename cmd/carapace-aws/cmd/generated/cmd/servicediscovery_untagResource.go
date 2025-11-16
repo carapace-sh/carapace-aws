@@ -12,11 +12,13 @@ var servicediscovery_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_untagResourceCmd).Standalone()
+	carapace.Gen(servicediscovery_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_untagResourceCmd).Standalone()
 
-	servicediscovery_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.")
-	servicediscovery_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to remove from the specified resource.")
-	servicediscovery_untagResourceCmd.MarkFlagRequired("resource-arn")
-	servicediscovery_untagResourceCmd.MarkFlagRequired("tag-keys")
+		servicediscovery_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.")
+		servicediscovery_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to remove from the specified resource.")
+		servicediscovery_untagResourceCmd.MarkFlagRequired("resource-arn")
+		servicediscovery_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_untagResourceCmd)
 }

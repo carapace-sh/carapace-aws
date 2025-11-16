@@ -12,10 +12,12 @@ var es_listVpcEndpointsForDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_listVpcEndpointsForDomainCmd).Standalone()
+	carapace.Gen(es_listVpcEndpointsForDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_listVpcEndpointsForDomainCmd).Standalone()
 
-	es_listVpcEndpointsForDomainCmd.Flags().String("domain-name", "", "Name of the ElasticSearch domain whose VPC endpoints are to be listed.")
-	es_listVpcEndpointsForDomainCmd.Flags().String("next-token", "", "Provides an identifier to allow retrieval of paginated results.")
-	es_listVpcEndpointsForDomainCmd.MarkFlagRequired("domain-name")
+		es_listVpcEndpointsForDomainCmd.Flags().String("domain-name", "", "Name of the ElasticSearch domain whose VPC endpoints are to be listed.")
+		es_listVpcEndpointsForDomainCmd.Flags().String("next-token", "", "Provides an identifier to allow retrieval of paginated results.")
+		es_listVpcEndpointsForDomainCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_listVpcEndpointsForDomainCmd)
 }

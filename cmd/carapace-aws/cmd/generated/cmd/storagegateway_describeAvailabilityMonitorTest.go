@@ -12,9 +12,11 @@ var storagegateway_describeAvailabilityMonitorTestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeAvailabilityMonitorTestCmd).Standalone()
+	carapace.Gen(storagegateway_describeAvailabilityMonitorTestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeAvailabilityMonitorTestCmd).Standalone()
 
-	storagegateway_describeAvailabilityMonitorTestCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_describeAvailabilityMonitorTestCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_describeAvailabilityMonitorTestCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_describeAvailabilityMonitorTestCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeAvailabilityMonitorTestCmd)
 }

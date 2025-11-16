@@ -12,11 +12,13 @@ var networkmonitor_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmonitor_untagResourceCmd).Standalone()
+	carapace.Gen(networkmonitor_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmonitor_untagResourceCmd).Standalone()
 
-	networkmonitor_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the monitor or probe that the tag should be removed from.")
-	networkmonitor_untagResourceCmd.Flags().String("tag-keys", "", "The key-value pa")
-	networkmonitor_untagResourceCmd.MarkFlagRequired("resource-arn")
-	networkmonitor_untagResourceCmd.MarkFlagRequired("tag-keys")
+		networkmonitor_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the monitor or probe that the tag should be removed from.")
+		networkmonitor_untagResourceCmd.Flags().String("tag-keys", "", "The key-value pa")
+		networkmonitor_untagResourceCmd.MarkFlagRequired("resource-arn")
+		networkmonitor_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	networkmonitorCmd.AddCommand(networkmonitor_untagResourceCmd)
 }

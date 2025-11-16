@@ -12,13 +12,15 @@ var notifications_createNotificationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_createNotificationConfigurationCmd).Standalone()
+	carapace.Gen(notifications_createNotificationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_createNotificationConfigurationCmd).Standalone()
 
-	notifications_createNotificationConfigurationCmd.Flags().String("aggregation-duration", "", "The aggregation preference of the `NotificationConfiguration`.")
-	notifications_createNotificationConfigurationCmd.Flags().String("description", "", "The description of the `NotificationConfiguration`.")
-	notifications_createNotificationConfigurationCmd.Flags().String("name", "", "The name of the `NotificationConfiguration`.")
-	notifications_createNotificationConfigurationCmd.Flags().String("tags", "", "A map of tags assigned to a resource.")
-	notifications_createNotificationConfigurationCmd.MarkFlagRequired("description")
-	notifications_createNotificationConfigurationCmd.MarkFlagRequired("name")
+		notifications_createNotificationConfigurationCmd.Flags().String("aggregation-duration", "", "The aggregation preference of the `NotificationConfiguration`.")
+		notifications_createNotificationConfigurationCmd.Flags().String("description", "", "The description of the `NotificationConfiguration`.")
+		notifications_createNotificationConfigurationCmd.Flags().String("name", "", "The name of the `NotificationConfiguration`.")
+		notifications_createNotificationConfigurationCmd.Flags().String("tags", "", "A map of tags assigned to a resource.")
+		notifications_createNotificationConfigurationCmd.MarkFlagRequired("description")
+		notifications_createNotificationConfigurationCmd.MarkFlagRequired("name")
+	})
 	notificationsCmd.AddCommand(notifications_createNotificationConfigurationCmd)
 }

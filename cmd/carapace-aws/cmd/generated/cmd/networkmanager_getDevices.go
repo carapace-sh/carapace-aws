@@ -12,13 +12,15 @@ var networkmanager_getDevicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getDevicesCmd).Standalone()
+	carapace.Gen(networkmanager_getDevicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getDevicesCmd).Standalone()
 
-	networkmanager_getDevicesCmd.Flags().String("device-ids", "", "One or more device IDs.")
-	networkmanager_getDevicesCmd.Flags().String("global-network-id", "", "The ID of the global network.")
-	networkmanager_getDevicesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	networkmanager_getDevicesCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	networkmanager_getDevicesCmd.Flags().String("site-id", "", "The ID of the site.")
-	networkmanager_getDevicesCmd.MarkFlagRequired("global-network-id")
+		networkmanager_getDevicesCmd.Flags().String("device-ids", "", "One or more device IDs.")
+		networkmanager_getDevicesCmd.Flags().String("global-network-id", "", "The ID of the global network.")
+		networkmanager_getDevicesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		networkmanager_getDevicesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		networkmanager_getDevicesCmd.Flags().String("site-id", "", "The ID of the site.")
+		networkmanager_getDevicesCmd.MarkFlagRequired("global-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getDevicesCmd)
 }

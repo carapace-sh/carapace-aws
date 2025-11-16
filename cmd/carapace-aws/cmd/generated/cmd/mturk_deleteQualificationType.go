@@ -12,9 +12,11 @@ var mturk_deleteQualificationTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_deleteQualificationTypeCmd).Standalone()
+	carapace.Gen(mturk_deleteQualificationTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_deleteQualificationTypeCmd).Standalone()
 
-	mturk_deleteQualificationTypeCmd.Flags().String("qualification-type-id", "", "The ID of the QualificationType to dispose.")
-	mturk_deleteQualificationTypeCmd.MarkFlagRequired("qualification-type-id")
+		mturk_deleteQualificationTypeCmd.Flags().String("qualification-type-id", "", "The ID of the QualificationType to dispose.")
+		mturk_deleteQualificationTypeCmd.MarkFlagRequired("qualification-type-id")
+	})
 	mturkCmd.AddCommand(mturk_deleteQualificationTypeCmd)
 }

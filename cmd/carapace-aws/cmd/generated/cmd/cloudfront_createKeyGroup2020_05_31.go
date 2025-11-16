@@ -12,9 +12,11 @@ var cloudfront_createKeyGroup2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_createKeyGroup2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createKeyGroup2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createKeyGroup2020_05_31Cmd).Standalone()
 
-	cloudfront_createKeyGroup2020_05_31Cmd.Flags().String("key-group-config", "", "A key group configuration.")
-	cloudfront_createKeyGroup2020_05_31Cmd.MarkFlagRequired("key-group-config")
+		cloudfront_createKeyGroup2020_05_31Cmd.Flags().String("key-group-config", "", "A key group configuration.")
+		cloudfront_createKeyGroup2020_05_31Cmd.MarkFlagRequired("key-group-config")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createKeyGroup2020_05_31Cmd)
 }

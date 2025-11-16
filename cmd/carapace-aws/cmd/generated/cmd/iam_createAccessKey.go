@@ -12,8 +12,10 @@ var iam_createAccessKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_createAccessKeyCmd).Standalone()
+	carapace.Gen(iam_createAccessKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_createAccessKeyCmd).Standalone()
 
-	iam_createAccessKeyCmd.Flags().String("user-name", "", "The name of the IAM user that the new key will belong to.")
+		iam_createAccessKeyCmd.Flags().String("user-name", "", "The name of the IAM user that the new key will belong to.")
+	})
 	iamCmd.AddCommand(iam_createAccessKeyCmd)
 }

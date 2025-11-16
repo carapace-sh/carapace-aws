@@ -12,9 +12,11 @@ var kafka_describeReplicatorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_describeReplicatorCmd).Standalone()
+	carapace.Gen(kafka_describeReplicatorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_describeReplicatorCmd).Standalone()
 
-	kafka_describeReplicatorCmd.Flags().String("replicator-arn", "", "The Amazon Resource Name (ARN) of the replicator to be described.")
-	kafka_describeReplicatorCmd.MarkFlagRequired("replicator-arn")
+		kafka_describeReplicatorCmd.Flags().String("replicator-arn", "", "The Amazon Resource Name (ARN) of the replicator to be described.")
+		kafka_describeReplicatorCmd.MarkFlagRequired("replicator-arn")
+	})
 	kafkaCmd.AddCommand(kafka_describeReplicatorCmd)
 }

@@ -12,9 +12,11 @@ var batch_deleteServiceEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_deleteServiceEnvironmentCmd).Standalone()
+	carapace.Gen(batch_deleteServiceEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_deleteServiceEnvironmentCmd).Standalone()
 
-	batch_deleteServiceEnvironmentCmd.Flags().String("service-environment", "", "The name or ARN of the service environment to delete.")
-	batch_deleteServiceEnvironmentCmd.MarkFlagRequired("service-environment")
+		batch_deleteServiceEnvironmentCmd.Flags().String("service-environment", "", "The name or ARN of the service environment to delete.")
+		batch_deleteServiceEnvironmentCmd.MarkFlagRequired("service-environment")
+	})
 	batchCmd.AddCommand(batch_deleteServiceEnvironmentCmd)
 }

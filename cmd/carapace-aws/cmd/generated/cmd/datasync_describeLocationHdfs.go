@@ -12,9 +12,11 @@ var datasync_describeLocationHdfsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeLocationHdfsCmd).Standalone()
+	carapace.Gen(datasync_describeLocationHdfsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeLocationHdfsCmd).Standalone()
 
-	datasync_describeLocationHdfsCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the HDFS location.")
-	datasync_describeLocationHdfsCmd.MarkFlagRequired("location-arn")
+		datasync_describeLocationHdfsCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the HDFS location.")
+		datasync_describeLocationHdfsCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeLocationHdfsCmd)
 }

@@ -12,7 +12,9 @@ var directconnect_describeLocationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_describeLocationsCmd).Standalone()
+	carapace.Gen(directconnect_describeLocationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_describeLocationsCmd).Standalone()
 
+	})
 	directconnectCmd.AddCommand(directconnect_describeLocationsCmd)
 }

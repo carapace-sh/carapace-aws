@@ -12,12 +12,14 @@ var ec2_modifyVpcAttributeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_modifyVpcAttributeCmd).Standalone()
+	carapace.Gen(ec2_modifyVpcAttributeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_modifyVpcAttributeCmd).Standalone()
 
-	ec2_modifyVpcAttributeCmd.Flags().String("enable-dns-hostnames", "", "Indicates whether the instances launched in the VPC get DNS hostnames.")
-	ec2_modifyVpcAttributeCmd.Flags().String("enable-dns-support", "", "Indicates whether the DNS resolution is supported for the VPC.")
-	ec2_modifyVpcAttributeCmd.Flags().String("enable-network-address-usage-metrics", "", "Indicates whether Network Address Usage metrics are enabled for your VPC.")
-	ec2_modifyVpcAttributeCmd.Flags().String("vpc-id", "", "The ID of the VPC.")
-	ec2_modifyVpcAttributeCmd.MarkFlagRequired("vpc-id")
+		ec2_modifyVpcAttributeCmd.Flags().String("enable-dns-hostnames", "", "Indicates whether the instances launched in the VPC get DNS hostnames.")
+		ec2_modifyVpcAttributeCmd.Flags().String("enable-dns-support", "", "Indicates whether the DNS resolution is supported for the VPC.")
+		ec2_modifyVpcAttributeCmd.Flags().String("enable-network-address-usage-metrics", "", "Indicates whether Network Address Usage metrics are enabled for your VPC.")
+		ec2_modifyVpcAttributeCmd.Flags().String("vpc-id", "", "The ID of the VPC.")
+		ec2_modifyVpcAttributeCmd.MarkFlagRequired("vpc-id")
+	})
 	ec2Cmd.AddCommand(ec2_modifyVpcAttributeCmd)
 }

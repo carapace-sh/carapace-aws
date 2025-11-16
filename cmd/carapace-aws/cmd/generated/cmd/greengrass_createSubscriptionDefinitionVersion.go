@@ -12,11 +12,13 @@ var greengrass_createSubscriptionDefinitionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createSubscriptionDefinitionVersionCmd).Standalone()
+	carapace.Gen(greengrass_createSubscriptionDefinitionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createSubscriptionDefinitionVersionCmd).Standalone()
 
-	greengrass_createSubscriptionDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createSubscriptionDefinitionVersionCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
-	greengrass_createSubscriptionDefinitionVersionCmd.Flags().String("subscriptions", "", "A list of subscriptions.")
-	greengrass_createSubscriptionDefinitionVersionCmd.MarkFlagRequired("subscription-definition-id")
+		greengrass_createSubscriptionDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createSubscriptionDefinitionVersionCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
+		greengrass_createSubscriptionDefinitionVersionCmd.Flags().String("subscriptions", "", "A list of subscriptions.")
+		greengrass_createSubscriptionDefinitionVersionCmd.MarkFlagRequired("subscription-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_createSubscriptionDefinitionVersionCmd)
 }

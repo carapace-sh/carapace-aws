@@ -12,11 +12,13 @@ var route53RecoveryReadiness_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_untagResourceCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_untagResourceCmd).Standalone()
 
-	route53RecoveryReadiness_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a resource.")
-	route53RecoveryReadiness_untagResourceCmd.Flags().String("tag-keys", "", "The keys for tags you add to resources.")
-	route53RecoveryReadiness_untagResourceCmd.MarkFlagRequired("resource-arn")
-	route53RecoveryReadiness_untagResourceCmd.MarkFlagRequired("tag-keys")
+		route53RecoveryReadiness_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a resource.")
+		route53RecoveryReadiness_untagResourceCmd.Flags().String("tag-keys", "", "The keys for tags you add to resources.")
+		route53RecoveryReadiness_untagResourceCmd.MarkFlagRequired("resource-arn")
+		route53RecoveryReadiness_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_untagResourceCmd)
 }

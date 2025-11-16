@@ -12,10 +12,12 @@ var fms_putAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_putAdminAccountCmd).Standalone()
+	carapace.Gen(fms_putAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_putAdminAccountCmd).Standalone()
 
-	fms_putAdminAccountCmd.Flags().String("admin-account", "", "The Amazon Web Services account ID to add as an Firewall Manager administrator account.")
-	fms_putAdminAccountCmd.Flags().String("admin-scope", "", "Configures the resources that the specified Firewall Manager administrator can manage.")
-	fms_putAdminAccountCmd.MarkFlagRequired("admin-account")
+		fms_putAdminAccountCmd.Flags().String("admin-account", "", "The Amazon Web Services account ID to add as an Firewall Manager administrator account.")
+		fms_putAdminAccountCmd.Flags().String("admin-scope", "", "Configures the resources that the specified Firewall Manager administrator can manage.")
+		fms_putAdminAccountCmd.MarkFlagRequired("admin-account")
+	})
 	fmsCmd.AddCommand(fms_putAdminAccountCmd)
 }

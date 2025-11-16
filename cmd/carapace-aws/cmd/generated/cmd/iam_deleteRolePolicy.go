@@ -12,11 +12,13 @@ var iam_deleteRolePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteRolePolicyCmd).Standalone()
+	carapace.Gen(iam_deleteRolePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteRolePolicyCmd).Standalone()
 
-	iam_deleteRolePolicyCmd.Flags().String("policy-name", "", "The name of the inline policy to delete from the specified IAM role.")
-	iam_deleteRolePolicyCmd.Flags().String("role-name", "", "The name (friendly name, not ARN) identifying the role that the policy is embedded in.")
-	iam_deleteRolePolicyCmd.MarkFlagRequired("policy-name")
-	iam_deleteRolePolicyCmd.MarkFlagRequired("role-name")
+		iam_deleteRolePolicyCmd.Flags().String("policy-name", "", "The name of the inline policy to delete from the specified IAM role.")
+		iam_deleteRolePolicyCmd.Flags().String("role-name", "", "The name (friendly name, not ARN) identifying the role that the policy is embedded in.")
+		iam_deleteRolePolicyCmd.MarkFlagRequired("policy-name")
+		iam_deleteRolePolicyCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_deleteRolePolicyCmd)
 }

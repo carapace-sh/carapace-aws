@@ -12,9 +12,11 @@ var rum_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rum_getResourcePolicyCmd).Standalone()
+	carapace.Gen(rum_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rum_getResourcePolicyCmd).Standalone()
 
-	rum_getResourcePolicyCmd.Flags().String("name", "", "The name of the app monitor that is associated with the resource-based policy that you want to view.")
-	rum_getResourcePolicyCmd.MarkFlagRequired("name")
+		rum_getResourcePolicyCmd.Flags().String("name", "", "The name of the app monitor that is associated with the resource-based policy that you want to view.")
+		rum_getResourcePolicyCmd.MarkFlagRequired("name")
+	})
 	rumCmd.AddCommand(rum_getResourcePolicyCmd)
 }

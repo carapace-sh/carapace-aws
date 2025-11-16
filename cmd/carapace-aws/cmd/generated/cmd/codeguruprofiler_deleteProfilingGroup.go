@@ -12,9 +12,11 @@ var codeguruprofiler_deleteProfilingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruprofiler_deleteProfilingGroupCmd).Standalone()
+	carapace.Gen(codeguruprofiler_deleteProfilingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruprofiler_deleteProfilingGroupCmd).Standalone()
 
-	codeguruprofiler_deleteProfilingGroupCmd.Flags().String("profiling-group-name", "", "The name of the profiling group to delete.")
-	codeguruprofiler_deleteProfilingGroupCmd.MarkFlagRequired("profiling-group-name")
+		codeguruprofiler_deleteProfilingGroupCmd.Flags().String("profiling-group-name", "", "The name of the profiling group to delete.")
+		codeguruprofiler_deleteProfilingGroupCmd.MarkFlagRequired("profiling-group-name")
+	})
 	codeguruprofilerCmd.AddCommand(codeguruprofiler_deleteProfilingGroupCmd)
 }

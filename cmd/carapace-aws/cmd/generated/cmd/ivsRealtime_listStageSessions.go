@@ -12,11 +12,13 @@ var ivsRealtime_listStageSessionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_listStageSessionsCmd).Standalone()
+	carapace.Gen(ivsRealtime_listStageSessionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_listStageSessionsCmd).Standalone()
 
-	ivsRealtime_listStageSessionsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	ivsRealtime_listStageSessionsCmd.Flags().String("next-token", "", "The first stage session to retrieve.")
-	ivsRealtime_listStageSessionsCmd.Flags().String("stage-arn", "", "Stage ARN.")
-	ivsRealtime_listStageSessionsCmd.MarkFlagRequired("stage-arn")
+		ivsRealtime_listStageSessionsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		ivsRealtime_listStageSessionsCmd.Flags().String("next-token", "", "The first stage session to retrieve.")
+		ivsRealtime_listStageSessionsCmd.Flags().String("stage-arn", "", "Stage ARN.")
+		ivsRealtime_listStageSessionsCmd.MarkFlagRequired("stage-arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_listStageSessionsCmd)
 }

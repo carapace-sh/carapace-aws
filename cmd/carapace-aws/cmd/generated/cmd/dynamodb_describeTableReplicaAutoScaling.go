@@ -12,9 +12,11 @@ var dynamodb_describeTableReplicaAutoScalingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeTableReplicaAutoScalingCmd).Standalone()
+	carapace.Gen(dynamodb_describeTableReplicaAutoScalingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeTableReplicaAutoScalingCmd).Standalone()
 
-	dynamodb_describeTableReplicaAutoScalingCmd.Flags().String("table-name", "", "The name of the table.")
-	dynamodb_describeTableReplicaAutoScalingCmd.MarkFlagRequired("table-name")
+		dynamodb_describeTableReplicaAutoScalingCmd.Flags().String("table-name", "", "The name of the table.")
+		dynamodb_describeTableReplicaAutoScalingCmd.MarkFlagRequired("table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeTableReplicaAutoScalingCmd)
 }

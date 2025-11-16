@@ -12,9 +12,11 @@ var wafv2_describeAllManagedProductsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_describeAllManagedProductsCmd).Standalone()
+	carapace.Gen(wafv2_describeAllManagedProductsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_describeAllManagedProductsCmd).Standalone()
 
-	wafv2_describeAllManagedProductsCmd.Flags().String("scope", "", "Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.")
-	wafv2_describeAllManagedProductsCmd.MarkFlagRequired("scope")
+		wafv2_describeAllManagedProductsCmd.Flags().String("scope", "", "Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.")
+		wafv2_describeAllManagedProductsCmd.MarkFlagRequired("scope")
+	})
 	wafv2Cmd.AddCommand(wafv2_describeAllManagedProductsCmd)
 }

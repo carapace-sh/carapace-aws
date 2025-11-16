@@ -12,10 +12,12 @@ var timestreamWrite_listBatchLoadTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamWrite_listBatchLoadTasksCmd).Standalone()
+	carapace.Gen(timestreamWrite_listBatchLoadTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamWrite_listBatchLoadTasksCmd).Standalone()
 
-	timestreamWrite_listBatchLoadTasksCmd.Flags().String("max-results", "", "The total number of items to return in the output.")
-	timestreamWrite_listBatchLoadTasksCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
-	timestreamWrite_listBatchLoadTasksCmd.Flags().String("task-status", "", "Status of the batch load task.")
+		timestreamWrite_listBatchLoadTasksCmd.Flags().String("max-results", "", "The total number of items to return in the output.")
+		timestreamWrite_listBatchLoadTasksCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		timestreamWrite_listBatchLoadTasksCmd.Flags().String("task-status", "", "Status of the batch load task.")
+	})
 	timestreamWriteCmd.AddCommand(timestreamWrite_listBatchLoadTasksCmd)
 }

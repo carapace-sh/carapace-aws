@@ -12,7 +12,9 @@ var inspector2_describeOrganizationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_describeOrganizationConfigurationCmd).Standalone()
+	carapace.Gen(inspector2_describeOrganizationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_describeOrganizationConfigurationCmd).Standalone()
 
+	})
 	inspector2Cmd.AddCommand(inspector2_describeOrganizationConfigurationCmd)
 }

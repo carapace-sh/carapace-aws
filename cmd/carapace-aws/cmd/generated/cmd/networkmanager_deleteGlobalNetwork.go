@@ -12,9 +12,11 @@ var networkmanager_deleteGlobalNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_deleteGlobalNetworkCmd).Standalone()
+	carapace.Gen(networkmanager_deleteGlobalNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_deleteGlobalNetworkCmd).Standalone()
 
-	networkmanager_deleteGlobalNetworkCmd.Flags().String("global-network-id", "", "The ID of the global network.")
-	networkmanager_deleteGlobalNetworkCmd.MarkFlagRequired("global-network-id")
+		networkmanager_deleteGlobalNetworkCmd.Flags().String("global-network-id", "", "The ID of the global network.")
+		networkmanager_deleteGlobalNetworkCmd.MarkFlagRequired("global-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_deleteGlobalNetworkCmd)
 }

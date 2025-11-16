@@ -12,9 +12,11 @@ var iotManagedIntegrations_getCredentialLockerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getCredentialLockerCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getCredentialLockerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getCredentialLockerCmd).Standalone()
 
-	iotManagedIntegrations_getCredentialLockerCmd.Flags().String("identifier", "", "The identifier of the credential locker.")
-	iotManagedIntegrations_getCredentialLockerCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_getCredentialLockerCmd.Flags().String("identifier", "", "The identifier of the credential locker.")
+		iotManagedIntegrations_getCredentialLockerCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getCredentialLockerCmd)
 }

@@ -12,9 +12,11 @@ var appstream_expireSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_expireSessionCmd).Standalone()
+	carapace.Gen(appstream_expireSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_expireSessionCmd).Standalone()
 
-	appstream_expireSessionCmd.Flags().String("session-id", "", "The identifier of the streaming session.")
-	appstream_expireSessionCmd.MarkFlagRequired("session-id")
+		appstream_expireSessionCmd.Flags().String("session-id", "", "The identifier of the streaming session.")
+		appstream_expireSessionCmd.MarkFlagRequired("session-id")
+	})
 	appstreamCmd.AddCommand(appstream_expireSessionCmd)
 }

@@ -12,10 +12,12 @@ var discovery_describeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_describeTagsCmd).Standalone()
+	carapace.Gen(discovery_describeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_describeTagsCmd).Standalone()
 
-	discovery_describeTagsCmd.Flags().String("filters", "", "You can filter the list using a *key*-*value* format.")
-	discovery_describeTagsCmd.Flags().String("max-results", "", "The total number of items to return in a single page of output.")
-	discovery_describeTagsCmd.Flags().String("next-token", "", "A token to start the list.")
+		discovery_describeTagsCmd.Flags().String("filters", "", "You can filter the list using a *key*-*value* format.")
+		discovery_describeTagsCmd.Flags().String("max-results", "", "The total number of items to return in a single page of output.")
+		discovery_describeTagsCmd.Flags().String("next-token", "", "A token to start the list.")
+	})
 	discoveryCmd.AddCommand(discovery_describeTagsCmd)
 }

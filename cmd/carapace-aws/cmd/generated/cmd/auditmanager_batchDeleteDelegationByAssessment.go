@@ -12,11 +12,13 @@ var auditmanager_batchDeleteDelegationByAssessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_batchDeleteDelegationByAssessmentCmd).Standalone()
+	carapace.Gen(auditmanager_batchDeleteDelegationByAssessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_batchDeleteDelegationByAssessmentCmd).Standalone()
 
-	auditmanager_batchDeleteDelegationByAssessmentCmd.Flags().String("assessment-id", "", "The identifier for the assessment.")
-	auditmanager_batchDeleteDelegationByAssessmentCmd.Flags().String("delegation-ids", "", "The identifiers for the delegations.")
-	auditmanager_batchDeleteDelegationByAssessmentCmd.MarkFlagRequired("assessment-id")
-	auditmanager_batchDeleteDelegationByAssessmentCmd.MarkFlagRequired("delegation-ids")
+		auditmanager_batchDeleteDelegationByAssessmentCmd.Flags().String("assessment-id", "", "The identifier for the assessment.")
+		auditmanager_batchDeleteDelegationByAssessmentCmd.Flags().String("delegation-ids", "", "The identifiers for the delegations.")
+		auditmanager_batchDeleteDelegationByAssessmentCmd.MarkFlagRequired("assessment-id")
+		auditmanager_batchDeleteDelegationByAssessmentCmd.MarkFlagRequired("delegation-ids")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_batchDeleteDelegationByAssessmentCmd)
 }

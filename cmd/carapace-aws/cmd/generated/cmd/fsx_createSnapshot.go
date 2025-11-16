@@ -12,13 +12,15 @@ var fsx_createSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_createSnapshotCmd).Standalone()
+	carapace.Gen(fsx_createSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_createSnapshotCmd).Standalone()
 
-	fsx_createSnapshotCmd.Flags().String("client-request-token", "", "")
-	fsx_createSnapshotCmd.Flags().String("name", "", "The name of the snapshot.")
-	fsx_createSnapshotCmd.Flags().String("tags", "", "")
-	fsx_createSnapshotCmd.Flags().String("volume-id", "", "The ID of the volume that you are taking a snapshot of.")
-	fsx_createSnapshotCmd.MarkFlagRequired("name")
-	fsx_createSnapshotCmd.MarkFlagRequired("volume-id")
+		fsx_createSnapshotCmd.Flags().String("client-request-token", "", "")
+		fsx_createSnapshotCmd.Flags().String("name", "", "The name of the snapshot.")
+		fsx_createSnapshotCmd.Flags().String("tags", "", "")
+		fsx_createSnapshotCmd.Flags().String("volume-id", "", "The ID of the volume that you are taking a snapshot of.")
+		fsx_createSnapshotCmd.MarkFlagRequired("name")
+		fsx_createSnapshotCmd.MarkFlagRequired("volume-id")
+	})
 	fsxCmd.AddCommand(fsx_createSnapshotCmd)
 }

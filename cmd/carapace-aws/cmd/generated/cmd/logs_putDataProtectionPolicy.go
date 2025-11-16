@@ -12,11 +12,13 @@ var logs_putDataProtectionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_putDataProtectionPolicyCmd).Standalone()
+	carapace.Gen(logs_putDataProtectionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_putDataProtectionPolicyCmd).Standalone()
 
-	logs_putDataProtectionPolicyCmd.Flags().String("log-group-identifier", "", "Specify either the log group name or log group ARN.")
-	logs_putDataProtectionPolicyCmd.Flags().String("policy-document", "", "Specify the data protection policy, in JSON.")
-	logs_putDataProtectionPolicyCmd.MarkFlagRequired("log-group-identifier")
-	logs_putDataProtectionPolicyCmd.MarkFlagRequired("policy-document")
+		logs_putDataProtectionPolicyCmd.Flags().String("log-group-identifier", "", "Specify either the log group name or log group ARN.")
+		logs_putDataProtectionPolicyCmd.Flags().String("policy-document", "", "Specify the data protection policy, in JSON.")
+		logs_putDataProtectionPolicyCmd.MarkFlagRequired("log-group-identifier")
+		logs_putDataProtectionPolicyCmd.MarkFlagRequired("policy-document")
+	})
 	logsCmd.AddCommand(logs_putDataProtectionPolicyCmd)
 }

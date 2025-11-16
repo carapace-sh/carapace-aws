@@ -12,9 +12,11 @@ var ssmSap_getOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_getOperationCmd).Standalone()
+	carapace.Gen(ssmSap_getOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_getOperationCmd).Standalone()
 
-	ssmSap_getOperationCmd.Flags().String("operation-id", "", "The ID of the operation.")
-	ssmSap_getOperationCmd.MarkFlagRequired("operation-id")
+		ssmSap_getOperationCmd.Flags().String("operation-id", "", "The ID of the operation.")
+		ssmSap_getOperationCmd.MarkFlagRequired("operation-id")
+	})
 	ssmSapCmd.AddCommand(ssmSap_getOperationCmd)
 }

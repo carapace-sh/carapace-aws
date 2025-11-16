@@ -12,9 +12,11 @@ var deadline_getMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_getMonitorCmd).Standalone()
+	carapace.Gen(deadline_getMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_getMonitorCmd).Standalone()
 
-	deadline_getMonitorCmd.Flags().String("monitor-id", "", "The unique identifier for the monitor.")
-	deadline_getMonitorCmd.MarkFlagRequired("monitor-id")
+		deadline_getMonitorCmd.Flags().String("monitor-id", "", "The unique identifier for the monitor.")
+		deadline_getMonitorCmd.MarkFlagRequired("monitor-id")
+	})
 	deadlineCmd.AddCommand(deadline_getMonitorCmd)
 }

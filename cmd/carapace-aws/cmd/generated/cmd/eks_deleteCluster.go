@@ -12,9 +12,11 @@ var eks_deleteClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_deleteClusterCmd).Standalone()
+	carapace.Gen(eks_deleteClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_deleteClusterCmd).Standalone()
 
-	eks_deleteClusterCmd.Flags().String("name", "", "The name of the cluster to delete.")
-	eks_deleteClusterCmd.MarkFlagRequired("name")
+		eks_deleteClusterCmd.Flags().String("name", "", "The name of the cluster to delete.")
+		eks_deleteClusterCmd.MarkFlagRequired("name")
+	})
 	eksCmd.AddCommand(eks_deleteClusterCmd)
 }

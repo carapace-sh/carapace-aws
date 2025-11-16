@@ -12,9 +12,11 @@ var wafv2_disassociateWebAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_disassociateWebAclCmd).Standalone()
+	carapace.Gen(wafv2_disassociateWebAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_disassociateWebAclCmd).Standalone()
 
-	wafv2_disassociateWebAclCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to disassociate from the web ACL.")
-	wafv2_disassociateWebAclCmd.MarkFlagRequired("resource-arn")
+		wafv2_disassociateWebAclCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to disassociate from the web ACL.")
+		wafv2_disassociateWebAclCmd.MarkFlagRequired("resource-arn")
+	})
 	wafv2Cmd.AddCommand(wafv2_disassociateWebAclCmd)
 }

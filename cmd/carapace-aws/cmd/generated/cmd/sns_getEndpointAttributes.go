@@ -12,9 +12,11 @@ var sns_getEndpointAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_getEndpointAttributesCmd).Standalone()
+	carapace.Gen(sns_getEndpointAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_getEndpointAttributesCmd).Standalone()
 
-	sns_getEndpointAttributesCmd.Flags().String("endpoint-arn", "", "`EndpointArn` for `GetEndpointAttributes` input.")
-	sns_getEndpointAttributesCmd.MarkFlagRequired("endpoint-arn")
+		sns_getEndpointAttributesCmd.Flags().String("endpoint-arn", "", "`EndpointArn` for `GetEndpointAttributes` input.")
+		sns_getEndpointAttributesCmd.MarkFlagRequired("endpoint-arn")
+	})
 	snsCmd.AddCommand(sns_getEndpointAttributesCmd)
 }

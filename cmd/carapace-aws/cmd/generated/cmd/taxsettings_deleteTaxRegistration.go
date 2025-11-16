@@ -12,8 +12,10 @@ var taxsettings_deleteTaxRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_deleteTaxRegistrationCmd).Standalone()
+	carapace.Gen(taxsettings_deleteTaxRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_deleteTaxRegistrationCmd).Standalone()
 
-	taxsettings_deleteTaxRegistrationCmd.Flags().String("account-id", "", "Unique account identifier for the TRN information that needs to be deleted.")
+		taxsettings_deleteTaxRegistrationCmd.Flags().String("account-id", "", "Unique account identifier for the TRN information that needs to be deleted.")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_deleteTaxRegistrationCmd)
 }

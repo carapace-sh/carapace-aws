@@ -12,11 +12,13 @@ var connect_listUsersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listUsersCmd).Standalone()
+	carapace.Gen(connect_listUsersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listUsersCmd).Standalone()
 
-	connect_listUsersCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listUsersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listUsersCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listUsersCmd.MarkFlagRequired("instance-id")
+		connect_listUsersCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listUsersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listUsersCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listUsersCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listUsersCmd)
 }

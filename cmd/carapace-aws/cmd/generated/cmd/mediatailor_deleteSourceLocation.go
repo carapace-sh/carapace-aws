@@ -12,9 +12,11 @@ var mediatailor_deleteSourceLocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_deleteSourceLocationCmd).Standalone()
+	carapace.Gen(mediatailor_deleteSourceLocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_deleteSourceLocationCmd).Standalone()
 
-	mediatailor_deleteSourceLocationCmd.Flags().String("source-location-name", "", "The name of the source location.")
-	mediatailor_deleteSourceLocationCmd.MarkFlagRequired("source-location-name")
+		mediatailor_deleteSourceLocationCmd.Flags().String("source-location-name", "", "The name of the source location.")
+		mediatailor_deleteSourceLocationCmd.MarkFlagRequired("source-location-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_deleteSourceLocationCmd)
 }

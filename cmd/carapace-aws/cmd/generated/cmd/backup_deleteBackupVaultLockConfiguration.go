@@ -12,9 +12,11 @@ var backup_deleteBackupVaultLockConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_deleteBackupVaultLockConfigurationCmd).Standalone()
+	carapace.Gen(backup_deleteBackupVaultLockConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_deleteBackupVaultLockConfigurationCmd).Standalone()
 
-	backup_deleteBackupVaultLockConfigurationCmd.Flags().String("backup-vault-name", "", "The name of the backup vault from which to delete Backup Vault Lock.")
-	backup_deleteBackupVaultLockConfigurationCmd.MarkFlagRequired("backup-vault-name")
+		backup_deleteBackupVaultLockConfigurationCmd.Flags().String("backup-vault-name", "", "The name of the backup vault from which to delete Backup Vault Lock.")
+		backup_deleteBackupVaultLockConfigurationCmd.MarkFlagRequired("backup-vault-name")
+	})
 	backupCmd.AddCommand(backup_deleteBackupVaultLockConfigurationCmd)
 }

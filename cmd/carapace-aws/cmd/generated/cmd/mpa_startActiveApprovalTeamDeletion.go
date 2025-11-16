@@ -12,10 +12,12 @@ var mpa_startActiveApprovalTeamDeletionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_startActiveApprovalTeamDeletionCmd).Standalone()
+	carapace.Gen(mpa_startActiveApprovalTeamDeletionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_startActiveApprovalTeamDeletionCmd).Standalone()
 
-	mpa_startActiveApprovalTeamDeletionCmd.Flags().String("arn", "", "Amazon Resource Name (ARN) for the team.")
-	mpa_startActiveApprovalTeamDeletionCmd.Flags().String("pending-window-days", "", "Number of days between when the team approves the delete request and when the team is deleted.")
-	mpa_startActiveApprovalTeamDeletionCmd.MarkFlagRequired("arn")
+		mpa_startActiveApprovalTeamDeletionCmd.Flags().String("arn", "", "Amazon Resource Name (ARN) for the team.")
+		mpa_startActiveApprovalTeamDeletionCmd.Flags().String("pending-window-days", "", "Number of days between when the team approves the delete request and when the team is deleted.")
+		mpa_startActiveApprovalTeamDeletionCmd.MarkFlagRequired("arn")
+	})
 	mpaCmd.AddCommand(mpa_startActiveApprovalTeamDeletionCmd)
 }

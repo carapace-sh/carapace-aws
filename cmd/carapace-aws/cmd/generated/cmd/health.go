@@ -12,7 +12,9 @@ var healthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(healthCmd).Standalone()
+	carapace.Gen(healthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(healthCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(healthCmd)
 }

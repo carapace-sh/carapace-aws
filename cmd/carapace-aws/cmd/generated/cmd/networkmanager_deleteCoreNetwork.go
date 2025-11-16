@@ -12,9 +12,11 @@ var networkmanager_deleteCoreNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_deleteCoreNetworkCmd).Standalone()
+	carapace.Gen(networkmanager_deleteCoreNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_deleteCoreNetworkCmd).Standalone()
 
-	networkmanager_deleteCoreNetworkCmd.Flags().String("core-network-id", "", "The network ID of the deleted core network.")
-	networkmanager_deleteCoreNetworkCmd.MarkFlagRequired("core-network-id")
+		networkmanager_deleteCoreNetworkCmd.Flags().String("core-network-id", "", "The network ID of the deleted core network.")
+		networkmanager_deleteCoreNetworkCmd.MarkFlagRequired("core-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_deleteCoreNetworkCmd)
 }

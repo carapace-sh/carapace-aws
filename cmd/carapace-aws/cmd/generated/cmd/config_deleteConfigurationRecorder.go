@@ -12,9 +12,11 @@ var config_deleteConfigurationRecorderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deleteConfigurationRecorderCmd).Standalone()
+	carapace.Gen(config_deleteConfigurationRecorderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deleteConfigurationRecorderCmd).Standalone()
 
-	config_deleteConfigurationRecorderCmd.Flags().String("configuration-recorder-name", "", "The name of the customer managed configuration recorder that you want to delete.")
-	config_deleteConfigurationRecorderCmd.MarkFlagRequired("configuration-recorder-name")
+		config_deleteConfigurationRecorderCmd.Flags().String("configuration-recorder-name", "", "The name of the customer managed configuration recorder that you want to delete.")
+		config_deleteConfigurationRecorderCmd.MarkFlagRequired("configuration-recorder-name")
+	})
 	configCmd.AddCommand(config_deleteConfigurationRecorderCmd)
 }

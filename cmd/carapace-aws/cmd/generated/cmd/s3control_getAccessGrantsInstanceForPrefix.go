@@ -12,11 +12,13 @@ var s3control_getAccessGrantsInstanceForPrefixCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_getAccessGrantsInstanceForPrefixCmd).Standalone()
+	carapace.Gen(s3control_getAccessGrantsInstanceForPrefixCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_getAccessGrantsInstanceForPrefixCmd).Standalone()
 
-	s3control_getAccessGrantsInstanceForPrefixCmd.Flags().String("account-id", "", "The ID of the Amazon Web Services account that is making this request.")
-	s3control_getAccessGrantsInstanceForPrefixCmd.Flags().String("s3-prefix", "", "The S3 prefix of the access grants that you would like to retrieve.")
-	s3control_getAccessGrantsInstanceForPrefixCmd.MarkFlagRequired("account-id")
-	s3control_getAccessGrantsInstanceForPrefixCmd.MarkFlagRequired("s3-prefix")
+		s3control_getAccessGrantsInstanceForPrefixCmd.Flags().String("account-id", "", "The ID of the Amazon Web Services account that is making this request.")
+		s3control_getAccessGrantsInstanceForPrefixCmd.Flags().String("s3-prefix", "", "The S3 prefix of the access grants that you would like to retrieve.")
+		s3control_getAccessGrantsInstanceForPrefixCmd.MarkFlagRequired("account-id")
+		s3control_getAccessGrantsInstanceForPrefixCmd.MarkFlagRequired("s3-prefix")
+	})
 	s3controlCmd.AddCommand(s3control_getAccessGrantsInstanceForPrefixCmd)
 }

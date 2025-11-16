@@ -12,9 +12,11 @@ var networkmonitor_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmonitor_listTagsForResourceCmd).Standalone()
+	carapace.Gen(networkmonitor_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmonitor_listTagsForResourceCmd).Standalone()
 
-	networkmonitor_listTagsForResourceCmd.Flags().String("resource-arn", "", "The")
-	networkmonitor_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		networkmonitor_listTagsForResourceCmd.Flags().String("resource-arn", "", "The")
+		networkmonitor_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	networkmonitorCmd.AddCommand(networkmonitor_listTagsForResourceCmd)
 }

@@ -12,11 +12,13 @@ var glacier_listVaultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_listVaultsCmd).Standalone()
+	carapace.Gen(glacier_listVaultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_listVaultsCmd).Standalone()
 
-	glacier_listVaultsCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
-	glacier_listVaultsCmd.Flags().String("limit", "", "The maximum number of vaults to be returned.")
-	glacier_listVaultsCmd.Flags().String("marker", "", "A string used for pagination.")
-	glacier_listVaultsCmd.MarkFlagRequired("account-id")
+		glacier_listVaultsCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
+		glacier_listVaultsCmd.Flags().String("limit", "", "The maximum number of vaults to be returned.")
+		glacier_listVaultsCmd.Flags().String("marker", "", "A string used for pagination.")
+		glacier_listVaultsCmd.MarkFlagRequired("account-id")
+	})
 	glacierCmd.AddCommand(glacier_listVaultsCmd)
 }

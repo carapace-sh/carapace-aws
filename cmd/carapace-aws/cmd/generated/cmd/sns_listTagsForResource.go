@@ -12,9 +12,11 @@ var sns_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_listTagsForResourceCmd).Standalone()
+	carapace.Gen(sns_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_listTagsForResourceCmd).Standalone()
 
-	sns_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the topic for which to list tags.")
-	sns_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		sns_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the topic for which to list tags.")
+		sns_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	snsCmd.AddCommand(sns_listTagsForResourceCmd)
 }

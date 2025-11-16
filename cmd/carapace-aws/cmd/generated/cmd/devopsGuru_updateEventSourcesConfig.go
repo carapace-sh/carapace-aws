@@ -12,8 +12,10 @@ var devopsGuru_updateEventSourcesConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_updateEventSourcesConfigCmd).Standalone()
+	carapace.Gen(devopsGuru_updateEventSourcesConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_updateEventSourcesConfigCmd).Standalone()
 
-	devopsGuru_updateEventSourcesConfigCmd.Flags().String("event-sources", "", "Configuration information about the integration of DevOps Guru as the Consumer via EventBridge with another AWS Service.")
+		devopsGuru_updateEventSourcesConfigCmd.Flags().String("event-sources", "", "Configuration information about the integration of DevOps Guru as the Consumer via EventBridge with another AWS Service.")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_updateEventSourcesConfigCmd)
 }

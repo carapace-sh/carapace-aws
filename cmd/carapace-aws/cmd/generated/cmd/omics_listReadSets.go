@@ -12,12 +12,14 @@ var omics_listReadSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_listReadSetsCmd).Standalone()
+	carapace.Gen(omics_listReadSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_listReadSetsCmd).Standalone()
 
-	omics_listReadSetsCmd.Flags().String("filter", "", "A filter to apply to the list.")
-	omics_listReadSetsCmd.Flags().String("max-results", "", "The maximum number of read sets to return in one page of results.")
-	omics_listReadSetsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
-	omics_listReadSetsCmd.Flags().String("sequence-store-id", "", "The jobs' sequence store ID.")
-	omics_listReadSetsCmd.MarkFlagRequired("sequence-store-id")
+		omics_listReadSetsCmd.Flags().String("filter", "", "A filter to apply to the list.")
+		omics_listReadSetsCmd.Flags().String("max-results", "", "The maximum number of read sets to return in one page of results.")
+		omics_listReadSetsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		omics_listReadSetsCmd.Flags().String("sequence-store-id", "", "The jobs' sequence store ID.")
+		omics_listReadSetsCmd.MarkFlagRequired("sequence-store-id")
+	})
 	omicsCmd.AddCommand(omics_listReadSetsCmd)
 }

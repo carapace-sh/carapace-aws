@@ -12,9 +12,11 @@ var logs_deleteDataProtectionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteDataProtectionPolicyCmd).Standalone()
+	carapace.Gen(logs_deleteDataProtectionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteDataProtectionPolicyCmd).Standalone()
 
-	logs_deleteDataProtectionPolicyCmd.Flags().String("log-group-identifier", "", "The name or ARN of the log group that you want to delete the data protection policy for.")
-	logs_deleteDataProtectionPolicyCmd.MarkFlagRequired("log-group-identifier")
+		logs_deleteDataProtectionPolicyCmd.Flags().String("log-group-identifier", "", "The name or ARN of the log group that you want to delete the data protection policy for.")
+		logs_deleteDataProtectionPolicyCmd.MarkFlagRequired("log-group-identifier")
+	})
 	logsCmd.AddCommand(logs_deleteDataProtectionPolicyCmd)
 }

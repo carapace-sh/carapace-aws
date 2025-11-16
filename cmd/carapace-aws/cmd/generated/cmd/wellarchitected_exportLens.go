@@ -12,10 +12,12 @@ var wellarchitected_exportLensCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_exportLensCmd).Standalone()
+	carapace.Gen(wellarchitected_exportLensCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_exportLensCmd).Standalone()
 
-	wellarchitected_exportLensCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_exportLensCmd.Flags().String("lens-version", "", "The lens version to be exported.")
-	wellarchitected_exportLensCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_exportLensCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_exportLensCmd.Flags().String("lens-version", "", "The lens version to be exported.")
+		wellarchitected_exportLensCmd.MarkFlagRequired("lens-alias")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_exportLensCmd)
 }

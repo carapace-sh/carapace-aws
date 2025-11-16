@@ -12,11 +12,13 @@ var iotManagedIntegrations_listCloudConnectorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_listCloudConnectorsCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_listCloudConnectorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_listCloudConnectorsCmd).Standalone()
 
-	iotManagedIntegrations_listCloudConnectorsCmd.Flags().String("lambda-arn", "", "The Amazon Resource Name (ARN) of the Lambda function to filter cloud connectors by.")
-	iotManagedIntegrations_listCloudConnectorsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iotManagedIntegrations_listCloudConnectorsCmd.Flags().String("next-token", "", "A token that can be used to retrieve the next set of results.")
-	iotManagedIntegrations_listCloudConnectorsCmd.Flags().String("type", "", "The type of cloud connectors to filter by when listing available connectors.")
+		iotManagedIntegrations_listCloudConnectorsCmd.Flags().String("lambda-arn", "", "The Amazon Resource Name (ARN) of the Lambda function to filter cloud connectors by.")
+		iotManagedIntegrations_listCloudConnectorsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iotManagedIntegrations_listCloudConnectorsCmd.Flags().String("next-token", "", "A token that can be used to retrieve the next set of results.")
+		iotManagedIntegrations_listCloudConnectorsCmd.Flags().String("type", "", "The type of cloud connectors to filter by when listing available connectors.")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_listCloudConnectorsCmd)
 }

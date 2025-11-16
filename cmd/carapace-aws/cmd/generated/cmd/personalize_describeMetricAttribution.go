@@ -12,9 +12,11 @@ var personalize_describeMetricAttributionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeMetricAttributionCmd).Standalone()
+	carapace.Gen(personalize_describeMetricAttributionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeMetricAttributionCmd).Standalone()
 
-	personalize_describeMetricAttributionCmd.Flags().String("metric-attribution-arn", "", "The metric attribution's Amazon Resource Name (ARN).")
-	personalize_describeMetricAttributionCmd.MarkFlagRequired("metric-attribution-arn")
+		personalize_describeMetricAttributionCmd.Flags().String("metric-attribution-arn", "", "The metric attribution's Amazon Resource Name (ARN).")
+		personalize_describeMetricAttributionCmd.MarkFlagRequired("metric-attribution-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeMetricAttributionCmd)
 }

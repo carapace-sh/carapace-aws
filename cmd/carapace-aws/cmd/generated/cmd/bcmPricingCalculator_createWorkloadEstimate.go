@@ -12,12 +12,14 @@ var bcmPricingCalculator_createWorkloadEstimateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_createWorkloadEstimateCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_createWorkloadEstimateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_createWorkloadEstimateCmd).Standalone()
 
-	bcmPricingCalculator_createWorkloadEstimateCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure idempotency of the request.")
-	bcmPricingCalculator_createWorkloadEstimateCmd.Flags().String("name", "", "A descriptive name for the workload estimate.")
-	bcmPricingCalculator_createWorkloadEstimateCmd.Flags().String("rate-type", "", "The type of pricing rates to use for the estimate.")
-	bcmPricingCalculator_createWorkloadEstimateCmd.Flags().String("tags", "", "The tags to apply to the workload estimate.")
-	bcmPricingCalculator_createWorkloadEstimateCmd.MarkFlagRequired("name")
+		bcmPricingCalculator_createWorkloadEstimateCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure idempotency of the request.")
+		bcmPricingCalculator_createWorkloadEstimateCmd.Flags().String("name", "", "A descriptive name for the workload estimate.")
+		bcmPricingCalculator_createWorkloadEstimateCmd.Flags().String("rate-type", "", "The type of pricing rates to use for the estimate.")
+		bcmPricingCalculator_createWorkloadEstimateCmd.Flags().String("tags", "", "The tags to apply to the workload estimate.")
+		bcmPricingCalculator_createWorkloadEstimateCmd.MarkFlagRequired("name")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_createWorkloadEstimateCmd)
 }

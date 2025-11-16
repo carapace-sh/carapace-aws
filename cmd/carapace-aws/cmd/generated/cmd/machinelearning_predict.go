@@ -12,13 +12,15 @@ var machinelearning_predictCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_predictCmd).Standalone()
+	carapace.Gen(machinelearning_predictCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_predictCmd).Standalone()
 
-	machinelearning_predictCmd.Flags().String("mlmodel-id", "", "A unique identifier of the `MLModel`.")
-	machinelearning_predictCmd.Flags().String("predict-endpoint", "", "")
-	machinelearning_predictCmd.Flags().String("record", "", "")
-	machinelearning_predictCmd.MarkFlagRequired("mlmodel-id")
-	machinelearning_predictCmd.MarkFlagRequired("predict-endpoint")
-	machinelearning_predictCmd.MarkFlagRequired("record")
+		machinelearning_predictCmd.Flags().String("mlmodel-id", "", "A unique identifier of the `MLModel`.")
+		machinelearning_predictCmd.Flags().String("predict-endpoint", "", "")
+		machinelearning_predictCmd.Flags().String("record", "", "")
+		machinelearning_predictCmd.MarkFlagRequired("mlmodel-id")
+		machinelearning_predictCmd.MarkFlagRequired("predict-endpoint")
+		machinelearning_predictCmd.MarkFlagRequired("record")
+	})
 	machinelearningCmd.AddCommand(machinelearning_predictCmd)
 }

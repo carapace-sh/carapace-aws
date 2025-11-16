@@ -12,12 +12,14 @@ var devopsGuru_describeOrganizationOverviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeOrganizationOverviewCmd).Standalone()
+	carapace.Gen(devopsGuru_describeOrganizationOverviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeOrganizationOverviewCmd).Standalone()
 
-	devopsGuru_describeOrganizationOverviewCmd.Flags().String("account-ids", "", "The ID of the Amazon Web Services account.")
-	devopsGuru_describeOrganizationOverviewCmd.Flags().String("from-time", "", "The start of the time range passed in.")
-	devopsGuru_describeOrganizationOverviewCmd.Flags().String("organizational-unit-ids", "", "The ID of the organizational unit.")
-	devopsGuru_describeOrganizationOverviewCmd.Flags().String("to-time", "", "The end of the time range passed in.")
-	devopsGuru_describeOrganizationOverviewCmd.MarkFlagRequired("from-time")
+		devopsGuru_describeOrganizationOverviewCmd.Flags().String("account-ids", "", "The ID of the Amazon Web Services account.")
+		devopsGuru_describeOrganizationOverviewCmd.Flags().String("from-time", "", "The start of the time range passed in.")
+		devopsGuru_describeOrganizationOverviewCmd.Flags().String("organizational-unit-ids", "", "The ID of the organizational unit.")
+		devopsGuru_describeOrganizationOverviewCmd.Flags().String("to-time", "", "The end of the time range passed in.")
+		devopsGuru_describeOrganizationOverviewCmd.MarkFlagRequired("from-time")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeOrganizationOverviewCmd)
 }

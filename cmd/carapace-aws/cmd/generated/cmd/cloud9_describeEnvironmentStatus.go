@@ -12,9 +12,11 @@ var cloud9_describeEnvironmentStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloud9_describeEnvironmentStatusCmd).Standalone()
+	carapace.Gen(cloud9_describeEnvironmentStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloud9_describeEnvironmentStatusCmd).Standalone()
 
-	cloud9_describeEnvironmentStatusCmd.Flags().String("environment-id", "", "The ID of the environment to get status information about.")
-	cloud9_describeEnvironmentStatusCmd.MarkFlagRequired("environment-id")
+		cloud9_describeEnvironmentStatusCmd.Flags().String("environment-id", "", "The ID of the environment to get status information about.")
+		cloud9_describeEnvironmentStatusCmd.MarkFlagRequired("environment-id")
+	})
 	cloud9Cmd.AddCommand(cloud9_describeEnvironmentStatusCmd)
 }

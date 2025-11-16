@@ -12,7 +12,9 @@ var iottwinmakerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmakerCmd).Standalone()
+	carapace.Gen(iottwinmakerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmakerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(iottwinmakerCmd)
 }

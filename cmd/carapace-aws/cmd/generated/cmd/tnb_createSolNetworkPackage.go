@@ -12,8 +12,10 @@ var tnb_createSolNetworkPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_createSolNetworkPackageCmd).Standalone()
+	carapace.Gen(tnb_createSolNetworkPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_createSolNetworkPackageCmd).Standalone()
 
-	tnb_createSolNetworkPackageCmd.Flags().String("tags", "", "A tag is a label that you assign to an Amazon Web Services resource.")
+		tnb_createSolNetworkPackageCmd.Flags().String("tags", "", "A tag is a label that you assign to an Amazon Web Services resource.")
+	})
 	tnbCmd.AddCommand(tnb_createSolNetworkPackageCmd)
 }

@@ -12,11 +12,13 @@ var networkFirewall_updateFirewallAnalysisSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_updateFirewallAnalysisSettingsCmd).Standalone()
+	carapace.Gen(networkFirewall_updateFirewallAnalysisSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_updateFirewallAnalysisSettingsCmd).Standalone()
 
-	networkFirewall_updateFirewallAnalysisSettingsCmd.Flags().String("enabled-analysis-types", "", "An optional setting indicating the specific traffic analysis types to enable on the firewall.")
-	networkFirewall_updateFirewallAnalysisSettingsCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
-	networkFirewall_updateFirewallAnalysisSettingsCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
-	networkFirewall_updateFirewallAnalysisSettingsCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
+		networkFirewall_updateFirewallAnalysisSettingsCmd.Flags().String("enabled-analysis-types", "", "An optional setting indicating the specific traffic analysis types to enable on the firewall.")
+		networkFirewall_updateFirewallAnalysisSettingsCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
+		networkFirewall_updateFirewallAnalysisSettingsCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
+		networkFirewall_updateFirewallAnalysisSettingsCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_updateFirewallAnalysisSettingsCmd)
 }

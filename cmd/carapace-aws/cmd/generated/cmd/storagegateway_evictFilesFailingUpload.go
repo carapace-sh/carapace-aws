@@ -12,10 +12,12 @@ var storagegateway_evictFilesFailingUploadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_evictFilesFailingUploadCmd).Standalone()
+	carapace.Gen(storagegateway_evictFilesFailingUploadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_evictFilesFailingUploadCmd).Standalone()
 
-	storagegateway_evictFilesFailingUploadCmd.Flags().String("file-share-arn", "", "The Amazon Resource Name (ARN) of the file share for which you want to start the cache clean operation.")
-	storagegateway_evictFilesFailingUploadCmd.Flags().String("force-remove", "", "Specifies whether cache entries with full or partial file data currently stored on the gateway will be forcibly removed by the cache clean operation.")
-	storagegateway_evictFilesFailingUploadCmd.MarkFlagRequired("file-share-arn")
+		storagegateway_evictFilesFailingUploadCmd.Flags().String("file-share-arn", "", "The Amazon Resource Name (ARN) of the file share for which you want to start the cache clean operation.")
+		storagegateway_evictFilesFailingUploadCmd.Flags().String("force-remove", "", "Specifies whether cache entries with full or partial file data currently stored on the gateway will be forcibly removed by the cache clean operation.")
+		storagegateway_evictFilesFailingUploadCmd.MarkFlagRequired("file-share-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_evictFilesFailingUploadCmd)
 }

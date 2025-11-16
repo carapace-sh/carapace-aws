@@ -12,9 +12,11 @@ var tnb_deleteSolFunctionPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_deleteSolFunctionPackageCmd).Standalone()
+	carapace.Gen(tnb_deleteSolFunctionPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_deleteSolFunctionPackageCmd).Standalone()
 
-	tnb_deleteSolFunctionPackageCmd.Flags().String("vnf-pkg-id", "", "ID of the function package.")
-	tnb_deleteSolFunctionPackageCmd.MarkFlagRequired("vnf-pkg-id")
+		tnb_deleteSolFunctionPackageCmd.Flags().String("vnf-pkg-id", "", "ID of the function package.")
+		tnb_deleteSolFunctionPackageCmd.MarkFlagRequired("vnf-pkg-id")
+	})
 	tnbCmd.AddCommand(tnb_deleteSolFunctionPackageCmd)
 }

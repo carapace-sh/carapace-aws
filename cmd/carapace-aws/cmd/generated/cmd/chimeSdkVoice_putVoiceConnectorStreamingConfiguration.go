@@ -12,11 +12,13 @@ var chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd).Standalone()
 
-	chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd.Flags().String("streaming-configuration", "", "The streaming settings being updated.")
-	chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd.MarkFlagRequired("streaming-configuration")
-	chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd.Flags().String("streaming-configuration", "", "The streaming settings being updated.")
+		chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd.MarkFlagRequired("streaming-configuration")
+		chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_putVoiceConnectorStreamingConfigurationCmd)
 }

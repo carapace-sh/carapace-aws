@@ -12,10 +12,12 @@ var appconfig_listExtensionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_listExtensionsCmd).Standalone()
+	carapace.Gen(appconfig_listExtensionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_listExtensionsCmd).Standalone()
 
-	appconfig_listExtensionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	appconfig_listExtensionsCmd.Flags().String("name", "", "The extension name.")
-	appconfig_listExtensionsCmd.Flags().String("next-token", "", "A token to start the list.")
+		appconfig_listExtensionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		appconfig_listExtensionsCmd.Flags().String("name", "", "The extension name.")
+		appconfig_listExtensionsCmd.Flags().String("next-token", "", "A token to start the list.")
+	})
 	appconfigCmd.AddCommand(appconfig_listExtensionsCmd)
 }

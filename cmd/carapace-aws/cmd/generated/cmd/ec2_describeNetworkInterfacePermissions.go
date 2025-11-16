@@ -12,11 +12,13 @@ var ec2_describeNetworkInterfacePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeNetworkInterfacePermissionsCmd).Standalone()
+	carapace.Gen(ec2_describeNetworkInterfacePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeNetworkInterfacePermissionsCmd).Standalone()
 
-	ec2_describeNetworkInterfacePermissionsCmd.Flags().String("filters", "", "One or more filters.")
-	ec2_describeNetworkInterfacePermissionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	ec2_describeNetworkInterfacePermissionsCmd.Flags().String("network-interface-permission-ids", "", "The network interface permission IDs.")
-	ec2_describeNetworkInterfacePermissionsCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		ec2_describeNetworkInterfacePermissionsCmd.Flags().String("filters", "", "One or more filters.")
+		ec2_describeNetworkInterfacePermissionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		ec2_describeNetworkInterfacePermissionsCmd.Flags().String("network-interface-permission-ids", "", "The network interface permission IDs.")
+		ec2_describeNetworkInterfacePermissionsCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+	})
 	ec2Cmd.AddCommand(ec2_describeNetworkInterfacePermissionsCmd)
 }

@@ -12,9 +12,11 @@ var iot_setLoggingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_setLoggingOptionsCmd).Standalone()
+	carapace.Gen(iot_setLoggingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_setLoggingOptionsCmd).Standalone()
 
-	iot_setLoggingOptionsCmd.Flags().String("logging-options-payload", "", "The logging options payload.")
-	iot_setLoggingOptionsCmd.MarkFlagRequired("logging-options-payload")
+		iot_setLoggingOptionsCmd.Flags().String("logging-options-payload", "", "The logging options payload.")
+		iot_setLoggingOptionsCmd.MarkFlagRequired("logging-options-payload")
+	})
 	iotCmd.AddCommand(iot_setLoggingOptionsCmd)
 }

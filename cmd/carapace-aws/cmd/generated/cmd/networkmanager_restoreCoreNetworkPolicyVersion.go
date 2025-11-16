@@ -12,11 +12,13 @@ var networkmanager_restoreCoreNetworkPolicyVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_restoreCoreNetworkPolicyVersionCmd).Standalone()
+	carapace.Gen(networkmanager_restoreCoreNetworkPolicyVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_restoreCoreNetworkPolicyVersionCmd).Standalone()
 
-	networkmanager_restoreCoreNetworkPolicyVersionCmd.Flags().String("core-network-id", "", "The ID of a core network.")
-	networkmanager_restoreCoreNetworkPolicyVersionCmd.Flags().String("policy-version-id", "", "The ID of the policy version to restore.")
-	networkmanager_restoreCoreNetworkPolicyVersionCmd.MarkFlagRequired("core-network-id")
-	networkmanager_restoreCoreNetworkPolicyVersionCmd.MarkFlagRequired("policy-version-id")
+		networkmanager_restoreCoreNetworkPolicyVersionCmd.Flags().String("core-network-id", "", "The ID of a core network.")
+		networkmanager_restoreCoreNetworkPolicyVersionCmd.Flags().String("policy-version-id", "", "The ID of the policy version to restore.")
+		networkmanager_restoreCoreNetworkPolicyVersionCmd.MarkFlagRequired("core-network-id")
+		networkmanager_restoreCoreNetworkPolicyVersionCmd.MarkFlagRequired("policy-version-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_restoreCoreNetworkPolicyVersionCmd)
 }

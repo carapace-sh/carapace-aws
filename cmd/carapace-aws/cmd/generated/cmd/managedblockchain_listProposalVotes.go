@@ -12,13 +12,15 @@ var managedblockchain_listProposalVotesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchain_listProposalVotesCmd).Standalone()
+	carapace.Gen(managedblockchain_listProposalVotesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchain_listProposalVotesCmd).Standalone()
 
-	managedblockchain_listProposalVotesCmd.Flags().String("max-results", "", "The maximum number of votes to return.")
-	managedblockchain_listProposalVotesCmd.Flags().String("network-id", "", "The unique identifier of the network.")
-	managedblockchain_listProposalVotesCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results to retrieve.")
-	managedblockchain_listProposalVotesCmd.Flags().String("proposal-id", "", "The unique identifier of the proposal.")
-	managedblockchain_listProposalVotesCmd.MarkFlagRequired("network-id")
-	managedblockchain_listProposalVotesCmd.MarkFlagRequired("proposal-id")
+		managedblockchain_listProposalVotesCmd.Flags().String("max-results", "", "The maximum number of votes to return.")
+		managedblockchain_listProposalVotesCmd.Flags().String("network-id", "", "The unique identifier of the network.")
+		managedblockchain_listProposalVotesCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results to retrieve.")
+		managedblockchain_listProposalVotesCmd.Flags().String("proposal-id", "", "The unique identifier of the proposal.")
+		managedblockchain_listProposalVotesCmd.MarkFlagRequired("network-id")
+		managedblockchain_listProposalVotesCmd.MarkFlagRequired("proposal-id")
+	})
 	managedblockchainCmd.AddCommand(managedblockchain_listProposalVotesCmd)
 }

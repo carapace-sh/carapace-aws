@@ -12,13 +12,15 @@ var autoscaling_putNotificationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_putNotificationConfigurationCmd).Standalone()
+	carapace.Gen(autoscaling_putNotificationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_putNotificationConfigurationCmd).Standalone()
 
-	autoscaling_putNotificationConfigurationCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_putNotificationConfigurationCmd.Flags().String("notification-types", "", "The type of event that causes the notification to be sent.")
-	autoscaling_putNotificationConfigurationCmd.Flags().String("topic-arn", "", "The Amazon Resource Name (ARN) of the Amazon SNS topic.")
-	autoscaling_putNotificationConfigurationCmd.MarkFlagRequired("auto-scaling-group-name")
-	autoscaling_putNotificationConfigurationCmd.MarkFlagRequired("notification-types")
-	autoscaling_putNotificationConfigurationCmd.MarkFlagRequired("topic-arn")
+		autoscaling_putNotificationConfigurationCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_putNotificationConfigurationCmd.Flags().String("notification-types", "", "The type of event that causes the notification to be sent.")
+		autoscaling_putNotificationConfigurationCmd.Flags().String("topic-arn", "", "The Amazon Resource Name (ARN) of the Amazon SNS topic.")
+		autoscaling_putNotificationConfigurationCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_putNotificationConfigurationCmd.MarkFlagRequired("notification-types")
+		autoscaling_putNotificationConfigurationCmd.MarkFlagRequired("topic-arn")
+	})
 	autoscalingCmd.AddCommand(autoscaling_putNotificationConfigurationCmd)
 }

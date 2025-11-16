@@ -12,11 +12,13 @@ var elbv2_addListenerCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_addListenerCertificatesCmd).Standalone()
+	carapace.Gen(elbv2_addListenerCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_addListenerCertificatesCmd).Standalone()
 
-	elbv2_addListenerCertificatesCmd.Flags().String("certificates", "", "The certificate to add.")
-	elbv2_addListenerCertificatesCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
-	elbv2_addListenerCertificatesCmd.MarkFlagRequired("certificates")
-	elbv2_addListenerCertificatesCmd.MarkFlagRequired("listener-arn")
+		elbv2_addListenerCertificatesCmd.Flags().String("certificates", "", "The certificate to add.")
+		elbv2_addListenerCertificatesCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
+		elbv2_addListenerCertificatesCmd.MarkFlagRequired("certificates")
+		elbv2_addListenerCertificatesCmd.MarkFlagRequired("listener-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_addListenerCertificatesCmd)
 }

@@ -12,11 +12,13 @@ var workspaces_revokeIpRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_revokeIpRulesCmd).Standalone()
+	carapace.Gen(workspaces_revokeIpRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_revokeIpRulesCmd).Standalone()
 
-	workspaces_revokeIpRulesCmd.Flags().String("group-id", "", "The identifier of the group.")
-	workspaces_revokeIpRulesCmd.Flags().String("user-rules", "", "The rules to remove from the group.")
-	workspaces_revokeIpRulesCmd.MarkFlagRequired("group-id")
-	workspaces_revokeIpRulesCmd.MarkFlagRequired("user-rules")
+		workspaces_revokeIpRulesCmd.Flags().String("group-id", "", "The identifier of the group.")
+		workspaces_revokeIpRulesCmd.Flags().String("user-rules", "", "The rules to remove from the group.")
+		workspaces_revokeIpRulesCmd.MarkFlagRequired("group-id")
+		workspaces_revokeIpRulesCmd.MarkFlagRequired("user-rules")
+	})
 	workspacesCmd.AddCommand(workspaces_revokeIpRulesCmd)
 }

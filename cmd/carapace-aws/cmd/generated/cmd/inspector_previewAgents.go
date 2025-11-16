@@ -12,11 +12,13 @@ var inspector_previewAgentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_previewAgentsCmd).Standalone()
+	carapace.Gen(inspector_previewAgentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_previewAgentsCmd).Standalone()
 
-	inspector_previewAgentsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
-	inspector_previewAgentsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
-	inspector_previewAgentsCmd.Flags().String("preview-agents-arn", "", "The ARN of the assessment target whose agents you want to preview.")
-	inspector_previewAgentsCmd.MarkFlagRequired("preview-agents-arn")
+		inspector_previewAgentsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
+		inspector_previewAgentsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+		inspector_previewAgentsCmd.Flags().String("preview-agents-arn", "", "The ARN of the assessment target whose agents you want to preview.")
+		inspector_previewAgentsCmd.MarkFlagRequired("preview-agents-arn")
+	})
 	inspectorCmd.AddCommand(inspector_previewAgentsCmd)
 }

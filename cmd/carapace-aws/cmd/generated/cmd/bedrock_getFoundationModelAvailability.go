@@ -12,9 +12,11 @@ var bedrock_getFoundationModelAvailabilityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getFoundationModelAvailabilityCmd).Standalone()
+	carapace.Gen(bedrock_getFoundationModelAvailabilityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getFoundationModelAvailabilityCmd).Standalone()
 
-	bedrock_getFoundationModelAvailabilityCmd.Flags().String("model-id", "", "The model Id of the foundation model.")
-	bedrock_getFoundationModelAvailabilityCmd.MarkFlagRequired("model-id")
+		bedrock_getFoundationModelAvailabilityCmd.Flags().String("model-id", "", "The model Id of the foundation model.")
+		bedrock_getFoundationModelAvailabilityCmd.MarkFlagRequired("model-id")
+	})
 	bedrockCmd.AddCommand(bedrock_getFoundationModelAvailabilityCmd)
 }

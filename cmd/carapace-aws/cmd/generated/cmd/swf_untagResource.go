@@ -12,11 +12,13 @@ var swf_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_untagResourceCmd).Standalone()
+	carapace.Gen(swf_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_untagResourceCmd).Standalone()
 
-	swf_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the Amazon SWF domain.")
-	swf_untagResourceCmd.Flags().String("tag-keys", "", "The list of tags to remove from the Amazon SWF domain.")
-	swf_untagResourceCmd.MarkFlagRequired("resource-arn")
-	swf_untagResourceCmd.MarkFlagRequired("tag-keys")
+		swf_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the Amazon SWF domain.")
+		swf_untagResourceCmd.Flags().String("tag-keys", "", "The list of tags to remove from the Amazon SWF domain.")
+		swf_untagResourceCmd.MarkFlagRequired("resource-arn")
+		swf_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	swfCmd.AddCommand(swf_untagResourceCmd)
 }

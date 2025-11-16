@@ -12,11 +12,13 @@ var chime_disassociatePhoneNumberFromUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_disassociatePhoneNumberFromUserCmd).Standalone()
+	carapace.Gen(chime_disassociatePhoneNumberFromUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_disassociatePhoneNumberFromUserCmd).Standalone()
 
-	chime_disassociatePhoneNumberFromUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_disassociatePhoneNumberFromUserCmd.Flags().String("user-id", "", "The user ID.")
-	chime_disassociatePhoneNumberFromUserCmd.MarkFlagRequired("account-id")
-	chime_disassociatePhoneNumberFromUserCmd.MarkFlagRequired("user-id")
+		chime_disassociatePhoneNumberFromUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_disassociatePhoneNumberFromUserCmd.Flags().String("user-id", "", "The user ID.")
+		chime_disassociatePhoneNumberFromUserCmd.MarkFlagRequired("account-id")
+		chime_disassociatePhoneNumberFromUserCmd.MarkFlagRequired("user-id")
+	})
 	chimeCmd.AddCommand(chime_disassociatePhoneNumberFromUserCmd)
 }

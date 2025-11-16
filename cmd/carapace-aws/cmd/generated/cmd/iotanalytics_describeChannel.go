@@ -12,10 +12,12 @@ var iotanalytics_describeChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_describeChannelCmd).Standalone()
+	carapace.Gen(iotanalytics_describeChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_describeChannelCmd).Standalone()
 
-	iotanalytics_describeChannelCmd.Flags().String("channel-name", "", "The name of the channel whose information is retrieved.")
-	iotanalytics_describeChannelCmd.Flags().String("include-statistics", "", "If true, additional statistical information about the channel is included in the response.")
-	iotanalytics_describeChannelCmd.MarkFlagRequired("channel-name")
+		iotanalytics_describeChannelCmd.Flags().String("channel-name", "", "The name of the channel whose information is retrieved.")
+		iotanalytics_describeChannelCmd.Flags().String("include-statistics", "", "If true, additional statistical information about the channel is included in the response.")
+		iotanalytics_describeChannelCmd.MarkFlagRequired("channel-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_describeChannelCmd)
 }

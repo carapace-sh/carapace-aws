@@ -12,11 +12,13 @@ var licenseManager_listDistributedGrantsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_listDistributedGrantsCmd).Standalone()
+	carapace.Gen(licenseManager_listDistributedGrantsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_listDistributedGrantsCmd).Standalone()
 
-	licenseManager_listDistributedGrantsCmd.Flags().String("filters", "", "Filters to scope the results.")
-	licenseManager_listDistributedGrantsCmd.Flags().String("grant-arns", "", "Amazon Resource Names (ARNs) of the grants.")
-	licenseManager_listDistributedGrantsCmd.Flags().String("max-results", "", "Maximum number of results to return in a single call.")
-	licenseManager_listDistributedGrantsCmd.Flags().String("next-token", "", "Token for the next set of results.")
+		licenseManager_listDistributedGrantsCmd.Flags().String("filters", "", "Filters to scope the results.")
+		licenseManager_listDistributedGrantsCmd.Flags().String("grant-arns", "", "Amazon Resource Names (ARNs) of the grants.")
+		licenseManager_listDistributedGrantsCmd.Flags().String("max-results", "", "Maximum number of results to return in a single call.")
+		licenseManager_listDistributedGrantsCmd.Flags().String("next-token", "", "Token for the next set of results.")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_listDistributedGrantsCmd)
 }

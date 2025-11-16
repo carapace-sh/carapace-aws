@@ -12,11 +12,13 @@ var connect_getContactAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_getContactAttributesCmd).Standalone()
+	carapace.Gen(connect_getContactAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_getContactAttributesCmd).Standalone()
 
-	connect_getContactAttributesCmd.Flags().String("initial-contact-id", "", "The identifier of the initial contact.")
-	connect_getContactAttributesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_getContactAttributesCmd.MarkFlagRequired("initial-contact-id")
-	connect_getContactAttributesCmd.MarkFlagRequired("instance-id")
+		connect_getContactAttributesCmd.Flags().String("initial-contact-id", "", "The identifier of the initial contact.")
+		connect_getContactAttributesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_getContactAttributesCmd.MarkFlagRequired("initial-contact-id")
+		connect_getContactAttributesCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_getContactAttributesCmd)
 }

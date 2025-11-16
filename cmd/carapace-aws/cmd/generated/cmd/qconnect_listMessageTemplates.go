@@ -12,11 +12,13 @@ var qconnect_listMessageTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_listMessageTemplatesCmd).Standalone()
+	carapace.Gen(qconnect_listMessageTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_listMessageTemplatesCmd).Standalone()
 
-	qconnect_listMessageTemplatesCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_listMessageTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_listMessageTemplatesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	qconnect_listMessageTemplatesCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_listMessageTemplatesCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_listMessageTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_listMessageTemplatesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_listMessageTemplatesCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	qconnectCmd.AddCommand(qconnect_listMessageTemplatesCmd)
 }

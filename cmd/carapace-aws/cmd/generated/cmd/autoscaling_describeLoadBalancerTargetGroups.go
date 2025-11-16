@@ -12,11 +12,13 @@ var autoscaling_describeLoadBalancerTargetGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_describeLoadBalancerTargetGroupsCmd).Standalone()
+	carapace.Gen(autoscaling_describeLoadBalancerTargetGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_describeLoadBalancerTargetGroupsCmd).Standalone()
 
-	autoscaling_describeLoadBalancerTargetGroupsCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_describeLoadBalancerTargetGroupsCmd.Flags().String("max-records", "", "The maximum number of items to return with this call.")
-	autoscaling_describeLoadBalancerTargetGroupsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	autoscaling_describeLoadBalancerTargetGroupsCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_describeLoadBalancerTargetGroupsCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_describeLoadBalancerTargetGroupsCmd.Flags().String("max-records", "", "The maximum number of items to return with this call.")
+		autoscaling_describeLoadBalancerTargetGroupsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		autoscaling_describeLoadBalancerTargetGroupsCmd.MarkFlagRequired("auto-scaling-group-name")
+	})
 	autoscalingCmd.AddCommand(autoscaling_describeLoadBalancerTargetGroupsCmd)
 }

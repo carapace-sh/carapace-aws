@@ -12,13 +12,15 @@ var elb_setLoadBalancerListenerSslcertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_setLoadBalancerListenerSslcertificateCmd).Standalone()
+	carapace.Gen(elb_setLoadBalancerListenerSslcertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_setLoadBalancerListenerSslcertificateCmd).Standalone()
 
-	elb_setLoadBalancerListenerSslcertificateCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_setLoadBalancerListenerSslcertificateCmd.Flags().String("load-balancer-port", "", "The port that uses the specified SSL certificate.")
-	elb_setLoadBalancerListenerSslcertificateCmd.Flags().String("sslcertificate-id", "", "The Amazon Resource Name (ARN) of the SSL certificate.")
-	elb_setLoadBalancerListenerSslcertificateCmd.MarkFlagRequired("load-balancer-name")
-	elb_setLoadBalancerListenerSslcertificateCmd.MarkFlagRequired("load-balancer-port")
-	elb_setLoadBalancerListenerSslcertificateCmd.MarkFlagRequired("sslcertificate-id")
+		elb_setLoadBalancerListenerSslcertificateCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_setLoadBalancerListenerSslcertificateCmd.Flags().String("load-balancer-port", "", "The port that uses the specified SSL certificate.")
+		elb_setLoadBalancerListenerSslcertificateCmd.Flags().String("sslcertificate-id", "", "The Amazon Resource Name (ARN) of the SSL certificate.")
+		elb_setLoadBalancerListenerSslcertificateCmd.MarkFlagRequired("load-balancer-name")
+		elb_setLoadBalancerListenerSslcertificateCmd.MarkFlagRequired("load-balancer-port")
+		elb_setLoadBalancerListenerSslcertificateCmd.MarkFlagRequired("sslcertificate-id")
+	})
 	elbCmd.AddCommand(elb_setLoadBalancerListenerSslcertificateCmd)
 }

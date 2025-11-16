@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_deleteDefaultSenderIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteDefaultSenderIdCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteDefaultSenderIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteDefaultSenderIdCmd).Standalone()
 
-	pinpointSmsVoiceV2_deleteDefaultSenderIdCmd.Flags().String("configuration-set-name", "", "The name of the configuration set or the configuration set Amazon Resource Name (ARN) to delete the default sender ID from.")
-	pinpointSmsVoiceV2_deleteDefaultSenderIdCmd.MarkFlagRequired("configuration-set-name")
+		pinpointSmsVoiceV2_deleteDefaultSenderIdCmd.Flags().String("configuration-set-name", "", "The name of the configuration set or the configuration set Amazon Resource Name (ARN) to delete the default sender ID from.")
+		pinpointSmsVoiceV2_deleteDefaultSenderIdCmd.MarkFlagRequired("configuration-set-name")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteDefaultSenderIdCmd)
 }

@@ -12,9 +12,11 @@ var redshift_deleteRedshiftIdcApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteRedshiftIdcApplicationCmd).Standalone()
+	carapace.Gen(redshift_deleteRedshiftIdcApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteRedshiftIdcApplicationCmd).Standalone()
 
-	redshift_deleteRedshiftIdcApplicationCmd.Flags().String("redshift-idc-application-arn", "", "The ARN for a deleted Amazon Redshift IAM Identity Center application.")
-	redshift_deleteRedshiftIdcApplicationCmd.MarkFlagRequired("redshift-idc-application-arn")
+		redshift_deleteRedshiftIdcApplicationCmd.Flags().String("redshift-idc-application-arn", "", "The ARN for a deleted Amazon Redshift IAM Identity Center application.")
+		redshift_deleteRedshiftIdcApplicationCmd.MarkFlagRequired("redshift-idc-application-arn")
+	})
 	redshiftCmd.AddCommand(redshift_deleteRedshiftIdcApplicationCmd)
 }

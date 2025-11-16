@@ -12,11 +12,13 @@ var iottwinmaker_getEntityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_getEntityCmd).Standalone()
+	carapace.Gen(iottwinmaker_getEntityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_getEntityCmd).Standalone()
 
-	iottwinmaker_getEntityCmd.Flags().String("entity-id", "", "The ID of the entity.")
-	iottwinmaker_getEntityCmd.Flags().String("workspace-id", "", "The ID of the workspace.")
-	iottwinmaker_getEntityCmd.MarkFlagRequired("entity-id")
-	iottwinmaker_getEntityCmd.MarkFlagRequired("workspace-id")
+		iottwinmaker_getEntityCmd.Flags().String("entity-id", "", "The ID of the entity.")
+		iottwinmaker_getEntityCmd.Flags().String("workspace-id", "", "The ID of the workspace.")
+		iottwinmaker_getEntityCmd.MarkFlagRequired("entity-id")
+		iottwinmaker_getEntityCmd.MarkFlagRequired("workspace-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_getEntityCmd)
 }

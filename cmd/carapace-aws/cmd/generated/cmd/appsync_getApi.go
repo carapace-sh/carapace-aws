@@ -12,9 +12,11 @@ var appsync_getApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_getApiCmd).Standalone()
+	carapace.Gen(appsync_getApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_getApiCmd).Standalone()
 
-	appsync_getApiCmd.Flags().String("api-id", "", "The `Api` ID.")
-	appsync_getApiCmd.MarkFlagRequired("api-id")
+		appsync_getApiCmd.Flags().String("api-id", "", "The `Api` ID.")
+		appsync_getApiCmd.MarkFlagRequired("api-id")
+	})
 	appsyncCmd.AddCommand(appsync_getApiCmd)
 }

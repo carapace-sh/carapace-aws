@@ -12,9 +12,11 @@ var managedblockchain_getNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchain_getNetworkCmd).Standalone()
+	carapace.Gen(managedblockchain_getNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchain_getNetworkCmd).Standalone()
 
-	managedblockchain_getNetworkCmd.Flags().String("network-id", "", "The unique identifier of the network to get information about.")
-	managedblockchain_getNetworkCmd.MarkFlagRequired("network-id")
+		managedblockchain_getNetworkCmd.Flags().String("network-id", "", "The unique identifier of the network to get information about.")
+		managedblockchain_getNetworkCmd.MarkFlagRequired("network-id")
+	})
 	managedblockchainCmd.AddCommand(managedblockchain_getNetworkCmd)
 }

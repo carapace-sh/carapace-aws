@@ -12,11 +12,13 @@ var iot_describeProvisioningTemplateVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeProvisioningTemplateVersionCmd).Standalone()
+	carapace.Gen(iot_describeProvisioningTemplateVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeProvisioningTemplateVersionCmd).Standalone()
 
-	iot_describeProvisioningTemplateVersionCmd.Flags().String("template-name", "", "The template name.")
-	iot_describeProvisioningTemplateVersionCmd.Flags().String("version-id", "", "The provisioning template version ID.")
-	iot_describeProvisioningTemplateVersionCmd.MarkFlagRequired("template-name")
-	iot_describeProvisioningTemplateVersionCmd.MarkFlagRequired("version-id")
+		iot_describeProvisioningTemplateVersionCmd.Flags().String("template-name", "", "The template name.")
+		iot_describeProvisioningTemplateVersionCmd.Flags().String("version-id", "", "The provisioning template version ID.")
+		iot_describeProvisioningTemplateVersionCmd.MarkFlagRequired("template-name")
+		iot_describeProvisioningTemplateVersionCmd.MarkFlagRequired("version-id")
+	})
 	iotCmd.AddCommand(iot_describeProvisioningTemplateVersionCmd)
 }

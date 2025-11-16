@@ -12,11 +12,13 @@ var athena_batchGetPreparedStatementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_batchGetPreparedStatementCmd).Standalone()
+	carapace.Gen(athena_batchGetPreparedStatementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_batchGetPreparedStatementCmd).Standalone()
 
-	athena_batchGetPreparedStatementCmd.Flags().String("prepared-statement-names", "", "A list of prepared statement names to return.")
-	athena_batchGetPreparedStatementCmd.Flags().String("work-group", "", "The name of the workgroup to which the prepared statements belong.")
-	athena_batchGetPreparedStatementCmd.MarkFlagRequired("prepared-statement-names")
-	athena_batchGetPreparedStatementCmd.MarkFlagRequired("work-group")
+		athena_batchGetPreparedStatementCmd.Flags().String("prepared-statement-names", "", "A list of prepared statement names to return.")
+		athena_batchGetPreparedStatementCmd.Flags().String("work-group", "", "The name of the workgroup to which the prepared statements belong.")
+		athena_batchGetPreparedStatementCmd.MarkFlagRequired("prepared-statement-names")
+		athena_batchGetPreparedStatementCmd.MarkFlagRequired("work-group")
+	})
 	athenaCmd.AddCommand(athena_batchGetPreparedStatementCmd)
 }

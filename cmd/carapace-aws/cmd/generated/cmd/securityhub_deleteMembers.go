@@ -12,9 +12,11 @@ var securityhub_deleteMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_deleteMembersCmd).Standalone()
+	carapace.Gen(securityhub_deleteMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_deleteMembersCmd).Standalone()
 
-	securityhub_deleteMembersCmd.Flags().String("account-ids", "", "The list of account IDs for the member accounts to delete.")
-	securityhub_deleteMembersCmd.MarkFlagRequired("account-ids")
+		securityhub_deleteMembersCmd.Flags().String("account-ids", "", "The list of account IDs for the member accounts to delete.")
+		securityhub_deleteMembersCmd.MarkFlagRequired("account-ids")
+	})
 	securityhubCmd.AddCommand(securityhub_deleteMembersCmd)
 }

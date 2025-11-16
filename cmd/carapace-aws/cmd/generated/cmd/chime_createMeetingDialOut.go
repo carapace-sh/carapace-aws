@@ -12,15 +12,17 @@ var chime_createMeetingDialOutCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_createMeetingDialOutCmd).Standalone()
+	carapace.Gen(chime_createMeetingDialOutCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_createMeetingDialOutCmd).Standalone()
 
-	chime_createMeetingDialOutCmd.Flags().String("from-phone-number", "", "Phone number used as the caller ID when the remote party receives a call.")
-	chime_createMeetingDialOutCmd.Flags().String("join-token", "", "Token used by the Amazon Chime SDK attendee.")
-	chime_createMeetingDialOutCmd.Flags().String("meeting-id", "", "The Amazon Chime SDK meeting ID.")
-	chime_createMeetingDialOutCmd.Flags().String("to-phone-number", "", "Phone number called when inviting someone to a meeting.")
-	chime_createMeetingDialOutCmd.MarkFlagRequired("from-phone-number")
-	chime_createMeetingDialOutCmd.MarkFlagRequired("join-token")
-	chime_createMeetingDialOutCmd.MarkFlagRequired("meeting-id")
-	chime_createMeetingDialOutCmd.MarkFlagRequired("to-phone-number")
+		chime_createMeetingDialOutCmd.Flags().String("from-phone-number", "", "Phone number used as the caller ID when the remote party receives a call.")
+		chime_createMeetingDialOutCmd.Flags().String("join-token", "", "Token used by the Amazon Chime SDK attendee.")
+		chime_createMeetingDialOutCmd.Flags().String("meeting-id", "", "The Amazon Chime SDK meeting ID.")
+		chime_createMeetingDialOutCmd.Flags().String("to-phone-number", "", "Phone number called when inviting someone to a meeting.")
+		chime_createMeetingDialOutCmd.MarkFlagRequired("from-phone-number")
+		chime_createMeetingDialOutCmd.MarkFlagRequired("join-token")
+		chime_createMeetingDialOutCmd.MarkFlagRequired("meeting-id")
+		chime_createMeetingDialOutCmd.MarkFlagRequired("to-phone-number")
+	})
 	chimeCmd.AddCommand(chime_createMeetingDialOutCmd)
 }

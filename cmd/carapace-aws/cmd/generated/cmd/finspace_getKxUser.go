@@ -12,11 +12,13 @@ var finspace_getKxUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_getKxUserCmd).Standalone()
+	carapace.Gen(finspace_getKxUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_getKxUserCmd).Standalone()
 
-	finspace_getKxUserCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_getKxUserCmd.Flags().String("user-name", "", "A unique identifier for the user.")
-	finspace_getKxUserCmd.MarkFlagRequired("environment-id")
-	finspace_getKxUserCmd.MarkFlagRequired("user-name")
+		finspace_getKxUserCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_getKxUserCmd.Flags().String("user-name", "", "A unique identifier for the user.")
+		finspace_getKxUserCmd.MarkFlagRequired("environment-id")
+		finspace_getKxUserCmd.MarkFlagRequired("user-name")
+	})
 	finspaceCmd.AddCommand(finspace_getKxUserCmd)
 }

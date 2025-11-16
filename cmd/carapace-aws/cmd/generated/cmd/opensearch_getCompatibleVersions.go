@@ -12,8 +12,10 @@ var opensearch_getCompatibleVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_getCompatibleVersionsCmd).Standalone()
+	carapace.Gen(opensearch_getCompatibleVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_getCompatibleVersionsCmd).Standalone()
 
-	opensearch_getCompatibleVersionsCmd.Flags().String("domain-name", "", "The name of an existing domain.")
+		opensearch_getCompatibleVersionsCmd.Flags().String("domain-name", "", "The name of an existing domain.")
+	})
 	opensearchCmd.AddCommand(opensearch_getCompatibleVersionsCmd)
 }

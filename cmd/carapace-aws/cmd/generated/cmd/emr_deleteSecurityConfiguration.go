@@ -12,9 +12,11 @@ var emr_deleteSecurityConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_deleteSecurityConfigurationCmd).Standalone()
+	carapace.Gen(emr_deleteSecurityConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_deleteSecurityConfigurationCmd).Standalone()
 
-	emr_deleteSecurityConfigurationCmd.Flags().String("name", "", "The name of the security configuration.")
-	emr_deleteSecurityConfigurationCmd.MarkFlagRequired("name")
+		emr_deleteSecurityConfigurationCmd.Flags().String("name", "", "The name of the security configuration.")
+		emr_deleteSecurityConfigurationCmd.MarkFlagRequired("name")
+	})
 	emrCmd.AddCommand(emr_deleteSecurityConfigurationCmd)
 }

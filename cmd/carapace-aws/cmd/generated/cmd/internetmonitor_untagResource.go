@@ -12,11 +12,13 @@ var internetmonitor_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(internetmonitor_untagResourceCmd).Standalone()
+	carapace.Gen(internetmonitor_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(internetmonitor_untagResourceCmd).Standalone()
 
-	internetmonitor_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a tag you remove a resource from.")
-	internetmonitor_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys that you remove from a resource.")
-	internetmonitor_untagResourceCmd.MarkFlagRequired("resource-arn")
-	internetmonitor_untagResourceCmd.MarkFlagRequired("tag-keys")
+		internetmonitor_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a tag you remove a resource from.")
+		internetmonitor_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys that you remove from a resource.")
+		internetmonitor_untagResourceCmd.MarkFlagRequired("resource-arn")
+		internetmonitor_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	internetmonitorCmd.AddCommand(internetmonitor_untagResourceCmd)
 }

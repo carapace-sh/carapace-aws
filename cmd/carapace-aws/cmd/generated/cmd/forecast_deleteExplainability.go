@@ -12,9 +12,11 @@ var forecast_deleteExplainabilityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_deleteExplainabilityCmd).Standalone()
+	carapace.Gen(forecast_deleteExplainabilityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_deleteExplainabilityCmd).Standalone()
 
-	forecast_deleteExplainabilityCmd.Flags().String("explainability-arn", "", "The Amazon Resource Name (ARN) of the Explainability resource to delete.")
-	forecast_deleteExplainabilityCmd.MarkFlagRequired("explainability-arn")
+		forecast_deleteExplainabilityCmd.Flags().String("explainability-arn", "", "The Amazon Resource Name (ARN) of the Explainability resource to delete.")
+		forecast_deleteExplainabilityCmd.MarkFlagRequired("explainability-arn")
+	})
 	forecastCmd.AddCommand(forecast_deleteExplainabilityCmd)
 }

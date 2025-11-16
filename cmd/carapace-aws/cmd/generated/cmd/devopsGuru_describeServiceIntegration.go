@@ -12,7 +12,9 @@ var devopsGuru_describeServiceIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeServiceIntegrationCmd).Standalone()
+	carapace.Gen(devopsGuru_describeServiceIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeServiceIntegrationCmd).Standalone()
 
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeServiceIntegrationCmd)
 }

@@ -12,9 +12,11 @@ var sagemakerA2iRuntime_stopHumanLoopCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerA2iRuntime_stopHumanLoopCmd).Standalone()
+	carapace.Gen(sagemakerA2iRuntime_stopHumanLoopCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerA2iRuntime_stopHumanLoopCmd).Standalone()
 
-	sagemakerA2iRuntime_stopHumanLoopCmd.Flags().String("human-loop-name", "", "The name of the human loop that you want to stop.")
-	sagemakerA2iRuntime_stopHumanLoopCmd.MarkFlagRequired("human-loop-name")
+		sagemakerA2iRuntime_stopHumanLoopCmd.Flags().String("human-loop-name", "", "The name of the human loop that you want to stop.")
+		sagemakerA2iRuntime_stopHumanLoopCmd.MarkFlagRequired("human-loop-name")
+	})
 	sagemakerA2iRuntimeCmd.AddCommand(sagemakerA2iRuntime_stopHumanLoopCmd)
 }

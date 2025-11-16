@@ -12,12 +12,14 @@ var bedrockAgentcore_listBrowserSessionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_listBrowserSessionsCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_listBrowserSessionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_listBrowserSessionsCmd).Standalone()
 
-	bedrockAgentcore_listBrowserSessionsCmd.Flags().String("browser-identifier", "", "The unique identifier of the browser to list sessions for.")
-	bedrockAgentcore_listBrowserSessionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	bedrockAgentcore_listBrowserSessionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	bedrockAgentcore_listBrowserSessionsCmd.Flags().String("status", "", "The status of the browser sessions to list.")
-	bedrockAgentcore_listBrowserSessionsCmd.MarkFlagRequired("browser-identifier")
+		bedrockAgentcore_listBrowserSessionsCmd.Flags().String("browser-identifier", "", "The unique identifier of the browser to list sessions for.")
+		bedrockAgentcore_listBrowserSessionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		bedrockAgentcore_listBrowserSessionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		bedrockAgentcore_listBrowserSessionsCmd.Flags().String("status", "", "The status of the browser sessions to list.")
+		bedrockAgentcore_listBrowserSessionsCmd.MarkFlagRequired("browser-identifier")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_listBrowserSessionsCmd)
 }

@@ -12,11 +12,13 @@ var panorama_signalApplicationInstanceNodeInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_signalApplicationInstanceNodeInstancesCmd).Standalone()
+	carapace.Gen(panorama_signalApplicationInstanceNodeInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_signalApplicationInstanceNodeInstancesCmd).Standalone()
 
-	panorama_signalApplicationInstanceNodeInstancesCmd.Flags().String("application-instance-id", "", "An application instance ID.")
-	panorama_signalApplicationInstanceNodeInstancesCmd.Flags().String("node-signals", "", "A list of signals.")
-	panorama_signalApplicationInstanceNodeInstancesCmd.MarkFlagRequired("application-instance-id")
-	panorama_signalApplicationInstanceNodeInstancesCmd.MarkFlagRequired("node-signals")
+		panorama_signalApplicationInstanceNodeInstancesCmd.Flags().String("application-instance-id", "", "An application instance ID.")
+		panorama_signalApplicationInstanceNodeInstancesCmd.Flags().String("node-signals", "", "A list of signals.")
+		panorama_signalApplicationInstanceNodeInstancesCmd.MarkFlagRequired("application-instance-id")
+		panorama_signalApplicationInstanceNodeInstancesCmd.MarkFlagRequired("node-signals")
+	})
 	panoramaCmd.AddCommand(panorama_signalApplicationInstanceNodeInstancesCmd)
 }

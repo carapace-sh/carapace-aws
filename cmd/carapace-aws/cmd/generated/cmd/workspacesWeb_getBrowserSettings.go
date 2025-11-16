@@ -12,9 +12,11 @@ var workspacesWeb_getBrowserSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getBrowserSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_getBrowserSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getBrowserSettingsCmd).Standalone()
 
-	workspacesWeb_getBrowserSettingsCmd.Flags().String("browser-settings-arn", "", "The ARN of the browser settings.")
-	workspacesWeb_getBrowserSettingsCmd.MarkFlagRequired("browser-settings-arn")
+		workspacesWeb_getBrowserSettingsCmd.Flags().String("browser-settings-arn", "", "The ARN of the browser settings.")
+		workspacesWeb_getBrowserSettingsCmd.MarkFlagRequired("browser-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getBrowserSettingsCmd)
 }

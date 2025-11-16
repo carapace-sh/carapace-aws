@@ -12,9 +12,11 @@ var polly_getSpeechSynthesisTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(polly_getSpeechSynthesisTaskCmd).Standalone()
+	carapace.Gen(polly_getSpeechSynthesisTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(polly_getSpeechSynthesisTaskCmd).Standalone()
 
-	polly_getSpeechSynthesisTaskCmd.Flags().String("task-id", "", "The Amazon Polly generated identifier for a speech synthesis task.")
-	polly_getSpeechSynthesisTaskCmd.MarkFlagRequired("task-id")
+		polly_getSpeechSynthesisTaskCmd.Flags().String("task-id", "", "The Amazon Polly generated identifier for a speech synthesis task.")
+		polly_getSpeechSynthesisTaskCmd.MarkFlagRequired("task-id")
+	})
 	pollyCmd.AddCommand(polly_getSpeechSynthesisTaskCmd)
 }

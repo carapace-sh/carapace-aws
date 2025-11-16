@@ -12,10 +12,12 @@ var ssmContacts_stopEngagementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_stopEngagementCmd).Standalone()
+	carapace.Gen(ssmContacts_stopEngagementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_stopEngagementCmd).Standalone()
 
-	ssmContacts_stopEngagementCmd.Flags().String("engagement-id", "", "The Amazon Resource Name (ARN) of the engagement.")
-	ssmContacts_stopEngagementCmd.Flags().String("reason", "", "The reason that you're stopping the engagement.")
-	ssmContacts_stopEngagementCmd.MarkFlagRequired("engagement-id")
+		ssmContacts_stopEngagementCmd.Flags().String("engagement-id", "", "The Amazon Resource Name (ARN) of the engagement.")
+		ssmContacts_stopEngagementCmd.Flags().String("reason", "", "The reason that you're stopping the engagement.")
+		ssmContacts_stopEngagementCmd.MarkFlagRequired("engagement-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_stopEngagementCmd)
 }

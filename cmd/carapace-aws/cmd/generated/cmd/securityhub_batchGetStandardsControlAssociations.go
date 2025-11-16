@@ -12,9 +12,11 @@ var securityhub_batchGetStandardsControlAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_batchGetStandardsControlAssociationsCmd).Standalone()
+	carapace.Gen(securityhub_batchGetStandardsControlAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_batchGetStandardsControlAssociationsCmd).Standalone()
 
-	securityhub_batchGetStandardsControlAssociationsCmd.Flags().String("standards-control-association-ids", "", "An array with one or more objects that includes a security control (identified with `SecurityControlId`, `SecurityControlArn`, or a mix of both parameters) and the Amazon Resource Name (ARN) of a standard.")
-	securityhub_batchGetStandardsControlAssociationsCmd.MarkFlagRequired("standards-control-association-ids")
+		securityhub_batchGetStandardsControlAssociationsCmd.Flags().String("standards-control-association-ids", "", "An array with one or more objects that includes a security control (identified with `SecurityControlId`, `SecurityControlArn`, or a mix of both parameters) and the Amazon Resource Name (ARN) of a standard.")
+		securityhub_batchGetStandardsControlAssociationsCmd.MarkFlagRequired("standards-control-association-ids")
+	})
 	securityhubCmd.AddCommand(securityhub_batchGetStandardsControlAssociationsCmd)
 }

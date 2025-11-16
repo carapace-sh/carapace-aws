@@ -12,11 +12,13 @@ var glue_getWorkflowRunPropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getWorkflowRunPropertiesCmd).Standalone()
+	carapace.Gen(glue_getWorkflowRunPropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getWorkflowRunPropertiesCmd).Standalone()
 
-	glue_getWorkflowRunPropertiesCmd.Flags().String("name", "", "Name of the workflow which was run.")
-	glue_getWorkflowRunPropertiesCmd.Flags().String("run-id", "", "The ID of the workflow run whose run properties should be returned.")
-	glue_getWorkflowRunPropertiesCmd.MarkFlagRequired("name")
-	glue_getWorkflowRunPropertiesCmd.MarkFlagRequired("run-id")
+		glue_getWorkflowRunPropertiesCmd.Flags().String("name", "", "Name of the workflow which was run.")
+		glue_getWorkflowRunPropertiesCmd.Flags().String("run-id", "", "The ID of the workflow run whose run properties should be returned.")
+		glue_getWorkflowRunPropertiesCmd.MarkFlagRequired("name")
+		glue_getWorkflowRunPropertiesCmd.MarkFlagRequired("run-id")
+	})
 	glueCmd.AddCommand(glue_getWorkflowRunPropertiesCmd)
 }

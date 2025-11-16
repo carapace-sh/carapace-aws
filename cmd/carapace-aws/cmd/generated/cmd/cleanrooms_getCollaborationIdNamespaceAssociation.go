@@ -12,11 +12,13 @@ var cleanrooms_getCollaborationIdNamespaceAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_getCollaborationIdNamespaceAssociationCmd).Standalone()
+	carapace.Gen(cleanrooms_getCollaborationIdNamespaceAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_getCollaborationIdNamespaceAssociationCmd).Standalone()
 
-	cleanrooms_getCollaborationIdNamespaceAssociationCmd.Flags().String("collaboration-identifier", "", "The unique identifier of the collaboration that contains the ID namespace association that you want to retrieve.")
-	cleanrooms_getCollaborationIdNamespaceAssociationCmd.Flags().String("id-namespace-association-identifier", "", "The unique identifier of the ID namespace association that you want to retrieve.")
-	cleanrooms_getCollaborationIdNamespaceAssociationCmd.MarkFlagRequired("collaboration-identifier")
-	cleanrooms_getCollaborationIdNamespaceAssociationCmd.MarkFlagRequired("id-namespace-association-identifier")
+		cleanrooms_getCollaborationIdNamespaceAssociationCmd.Flags().String("collaboration-identifier", "", "The unique identifier of the collaboration that contains the ID namespace association that you want to retrieve.")
+		cleanrooms_getCollaborationIdNamespaceAssociationCmd.Flags().String("id-namespace-association-identifier", "", "The unique identifier of the ID namespace association that you want to retrieve.")
+		cleanrooms_getCollaborationIdNamespaceAssociationCmd.MarkFlagRequired("collaboration-identifier")
+		cleanrooms_getCollaborationIdNamespaceAssociationCmd.MarkFlagRequired("id-namespace-association-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_getCollaborationIdNamespaceAssociationCmd)
 }

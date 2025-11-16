@@ -12,11 +12,13 @@ var iotManagedIntegrations_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_untagResourceCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_untagResourceCmd).Standalone()
 
-	iotManagedIntegrations_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to which to add tags.")
-	iotManagedIntegrations_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the resource.")
-	iotManagedIntegrations_untagResourceCmd.MarkFlagRequired("resource-arn")
-	iotManagedIntegrations_untagResourceCmd.MarkFlagRequired("tag-keys")
+		iotManagedIntegrations_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to which to add tags.")
+		iotManagedIntegrations_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the resource.")
+		iotManagedIntegrations_untagResourceCmd.MarkFlagRequired("resource-arn")
+		iotManagedIntegrations_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_untagResourceCmd)
 }

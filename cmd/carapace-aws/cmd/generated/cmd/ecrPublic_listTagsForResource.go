@@ -12,9 +12,11 @@ var ecrPublic_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecrPublic_listTagsForResourceCmd).Standalone()
+	carapace.Gen(ecrPublic_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecrPublic_listTagsForResourceCmd).Standalone()
 
-	ecrPublic_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to list the tags for.")
-	ecrPublic_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		ecrPublic_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to list the tags for.")
+		ecrPublic_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	ecrPublicCmd.AddCommand(ecrPublic_listTagsForResourceCmd)
 }

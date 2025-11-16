@@ -12,12 +12,14 @@ var apigateway_updateResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_updateResourceCmd).Standalone()
+	carapace.Gen(apigateway_updateResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_updateResourceCmd).Standalone()
 
-	apigateway_updateResourceCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
-	apigateway_updateResourceCmd.Flags().String("resource-id", "", "The identifier of the Resource resource.")
-	apigateway_updateResourceCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_updateResourceCmd.MarkFlagRequired("resource-id")
-	apigateway_updateResourceCmd.MarkFlagRequired("rest-api-id")
+		apigateway_updateResourceCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
+		apigateway_updateResourceCmd.Flags().String("resource-id", "", "The identifier of the Resource resource.")
+		apigateway_updateResourceCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_updateResourceCmd.MarkFlagRequired("resource-id")
+		apigateway_updateResourceCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_updateResourceCmd)
 }

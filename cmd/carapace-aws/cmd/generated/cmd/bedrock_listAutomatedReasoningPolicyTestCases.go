@@ -12,11 +12,13 @@ var bedrock_listAutomatedReasoningPolicyTestCasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_listAutomatedReasoningPolicyTestCasesCmd).Standalone()
+	carapace.Gen(bedrock_listAutomatedReasoningPolicyTestCasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_listAutomatedReasoningPolicyTestCasesCmd).Standalone()
 
-	bedrock_listAutomatedReasoningPolicyTestCasesCmd.Flags().String("max-results", "", "The maximum number of tests to return in a single call.")
-	bedrock_listAutomatedReasoningPolicyTestCasesCmd.Flags().String("next-token", "", "The pagination token from a previous request to retrieve the next page of results.")
-	bedrock_listAutomatedReasoningPolicyTestCasesCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to list tests.")
-	bedrock_listAutomatedReasoningPolicyTestCasesCmd.MarkFlagRequired("policy-arn")
+		bedrock_listAutomatedReasoningPolicyTestCasesCmd.Flags().String("max-results", "", "The maximum number of tests to return in a single call.")
+		bedrock_listAutomatedReasoningPolicyTestCasesCmd.Flags().String("next-token", "", "The pagination token from a previous request to retrieve the next page of results.")
+		bedrock_listAutomatedReasoningPolicyTestCasesCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to list tests.")
+		bedrock_listAutomatedReasoningPolicyTestCasesCmd.MarkFlagRequired("policy-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_listAutomatedReasoningPolicyTestCasesCmd)
 }

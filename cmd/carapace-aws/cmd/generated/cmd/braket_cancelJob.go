@@ -12,9 +12,11 @@ var braket_cancelJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(braket_cancelJobCmd).Standalone()
+	carapace.Gen(braket_cancelJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(braket_cancelJobCmd).Standalone()
 
-	braket_cancelJobCmd.Flags().String("job-arn", "", "The ARN of the Amazon Braket hybrid job to cancel.")
-	braket_cancelJobCmd.MarkFlagRequired("job-arn")
+		braket_cancelJobCmd.Flags().String("job-arn", "", "The ARN of the Amazon Braket hybrid job to cancel.")
+		braket_cancelJobCmd.MarkFlagRequired("job-arn")
+	})
 	braketCmd.AddCommand(braket_cancelJobCmd)
 }

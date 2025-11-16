@@ -12,8 +12,10 @@ var ses_setActiveReceiptRuleSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_setActiveReceiptRuleSetCmd).Standalone()
+	carapace.Gen(ses_setActiveReceiptRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_setActiveReceiptRuleSetCmd).Standalone()
 
-	ses_setActiveReceiptRuleSetCmd.Flags().String("rule-set-name", "", "The name of the receipt rule set to make active.")
+		ses_setActiveReceiptRuleSetCmd.Flags().String("rule-set-name", "", "The name of the receipt rule set to make active.")
+	})
 	sesCmd.AddCommand(ses_setActiveReceiptRuleSetCmd)
 }

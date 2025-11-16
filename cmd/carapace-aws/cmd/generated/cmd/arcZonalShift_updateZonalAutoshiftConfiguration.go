@@ -12,11 +12,13 @@ var arcZonalShift_updateZonalAutoshiftConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_updateZonalAutoshiftConfigurationCmd).Standalone()
+	carapace.Gen(arcZonalShift_updateZonalAutoshiftConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_updateZonalAutoshiftConfigurationCmd).Standalone()
 
-	arcZonalShift_updateZonalAutoshiftConfigurationCmd.Flags().String("resource-identifier", "", "The identifier for the resource that you want to update the zonal autoshift configuration for.")
-	arcZonalShift_updateZonalAutoshiftConfigurationCmd.Flags().String("zonal-autoshift-status", "", "The zonal autoshift status for the resource that you want to update the zonal autoshift configuration for.")
-	arcZonalShift_updateZonalAutoshiftConfigurationCmd.MarkFlagRequired("resource-identifier")
-	arcZonalShift_updateZonalAutoshiftConfigurationCmd.MarkFlagRequired("zonal-autoshift-status")
+		arcZonalShift_updateZonalAutoshiftConfigurationCmd.Flags().String("resource-identifier", "", "The identifier for the resource that you want to update the zonal autoshift configuration for.")
+		arcZonalShift_updateZonalAutoshiftConfigurationCmd.Flags().String("zonal-autoshift-status", "", "The zonal autoshift status for the resource that you want to update the zonal autoshift configuration for.")
+		arcZonalShift_updateZonalAutoshiftConfigurationCmd.MarkFlagRequired("resource-identifier")
+		arcZonalShift_updateZonalAutoshiftConfigurationCmd.MarkFlagRequired("zonal-autoshift-status")
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_updateZonalAutoshiftConfigurationCmd)
 }

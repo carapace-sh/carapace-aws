@@ -12,14 +12,16 @@ var iotsitewise_listAccessPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_listAccessPoliciesCmd).Standalone()
+	carapace.Gen(iotsitewise_listAccessPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_listAccessPoliciesCmd).Standalone()
 
-	iotsitewise_listAccessPoliciesCmd.Flags().String("iam-arn", "", "The ARN of the IAM user.")
-	iotsitewise_listAccessPoliciesCmd.Flags().String("identity-id", "", "The ID of the identity.")
-	iotsitewise_listAccessPoliciesCmd.Flags().String("identity-type", "", "The type of identity (IAM Identity Center user, IAM Identity Center group, or IAM user).")
-	iotsitewise_listAccessPoliciesCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
-	iotsitewise_listAccessPoliciesCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	iotsitewise_listAccessPoliciesCmd.Flags().String("resource-id", "", "The ID of the resource.")
-	iotsitewise_listAccessPoliciesCmd.Flags().String("resource-type", "", "The type of resource (portal or project).")
+		iotsitewise_listAccessPoliciesCmd.Flags().String("iam-arn", "", "The ARN of the IAM user.")
+		iotsitewise_listAccessPoliciesCmd.Flags().String("identity-id", "", "The ID of the identity.")
+		iotsitewise_listAccessPoliciesCmd.Flags().String("identity-type", "", "The type of identity (IAM Identity Center user, IAM Identity Center group, or IAM user).")
+		iotsitewise_listAccessPoliciesCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
+		iotsitewise_listAccessPoliciesCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		iotsitewise_listAccessPoliciesCmd.Flags().String("resource-id", "", "The ID of the resource.")
+		iotsitewise_listAccessPoliciesCmd.Flags().String("resource-type", "", "The type of resource (portal or project).")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_listAccessPoliciesCmd)
 }

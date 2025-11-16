@@ -12,11 +12,13 @@ var glue_describeInboundIntegrationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_describeInboundIntegrationsCmd).Standalone()
+	carapace.Gen(glue_describeInboundIntegrationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_describeInboundIntegrationsCmd).Standalone()
 
-	glue_describeInboundIntegrationsCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the integration.")
-	glue_describeInboundIntegrationsCmd.Flags().String("marker", "", "A token to specify where to start paginating.")
-	glue_describeInboundIntegrationsCmd.Flags().String("max-records", "", "The total number of items to return in the output.")
-	glue_describeInboundIntegrationsCmd.Flags().String("target-arn", "", "The Amazon Resource Name (ARN) of the target resource in the integration.")
+		glue_describeInboundIntegrationsCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the integration.")
+		glue_describeInboundIntegrationsCmd.Flags().String("marker", "", "A token to specify where to start paginating.")
+		glue_describeInboundIntegrationsCmd.Flags().String("max-records", "", "The total number of items to return in the output.")
+		glue_describeInboundIntegrationsCmd.Flags().String("target-arn", "", "The Amazon Resource Name (ARN) of the target resource in the integration.")
+	})
 	glueCmd.AddCommand(glue_describeInboundIntegrationsCmd)
 }

@@ -12,9 +12,11 @@ var greengrassv2_deleteComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrassv2_deleteComponentCmd).Standalone()
+	carapace.Gen(greengrassv2_deleteComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrassv2_deleteComponentCmd).Standalone()
 
-	greengrassv2_deleteComponentCmd.Flags().String("arn", "", "The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.")
-	greengrassv2_deleteComponentCmd.MarkFlagRequired("arn")
+		greengrassv2_deleteComponentCmd.Flags().String("arn", "", "The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.")
+		greengrassv2_deleteComponentCmd.MarkFlagRequired("arn")
+	})
 	greengrassv2Cmd.AddCommand(greengrassv2_deleteComponentCmd)
 }

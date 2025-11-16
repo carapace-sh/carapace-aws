@@ -12,11 +12,13 @@ var bedrockAgent_createFlowVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_createFlowVersionCmd).Standalone()
+	carapace.Gen(bedrockAgent_createFlowVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_createFlowVersionCmd).Standalone()
 
-	bedrockAgent_createFlowVersionCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure that the API request completes no more than one time.")
-	bedrockAgent_createFlowVersionCmd.Flags().String("description", "", "A description of the version of the flow.")
-	bedrockAgent_createFlowVersionCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow that you want to create a version of.")
-	bedrockAgent_createFlowVersionCmd.MarkFlagRequired("flow-identifier")
+		bedrockAgent_createFlowVersionCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure that the API request completes no more than one time.")
+		bedrockAgent_createFlowVersionCmd.Flags().String("description", "", "A description of the version of the flow.")
+		bedrockAgent_createFlowVersionCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow that you want to create a version of.")
+		bedrockAgent_createFlowVersionCmd.MarkFlagRequired("flow-identifier")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_createFlowVersionCmd)
 }

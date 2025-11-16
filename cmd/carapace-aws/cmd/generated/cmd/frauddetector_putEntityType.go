@@ -12,11 +12,13 @@ var frauddetector_putEntityTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_putEntityTypeCmd).Standalone()
+	carapace.Gen(frauddetector_putEntityTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_putEntityTypeCmd).Standalone()
 
-	frauddetector_putEntityTypeCmd.Flags().String("description", "", "The description.")
-	frauddetector_putEntityTypeCmd.Flags().String("name", "", "The name of the entity type.")
-	frauddetector_putEntityTypeCmd.Flags().String("tags", "", "A collection of key and value pairs.")
-	frauddetector_putEntityTypeCmd.MarkFlagRequired("name")
+		frauddetector_putEntityTypeCmd.Flags().String("description", "", "The description.")
+		frauddetector_putEntityTypeCmd.Flags().String("name", "", "The name of the entity type.")
+		frauddetector_putEntityTypeCmd.Flags().String("tags", "", "A collection of key and value pairs.")
+		frauddetector_putEntityTypeCmd.MarkFlagRequired("name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_putEntityTypeCmd)
 }

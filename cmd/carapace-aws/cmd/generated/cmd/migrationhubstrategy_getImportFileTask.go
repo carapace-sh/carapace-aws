@@ -12,9 +12,11 @@ var migrationhubstrategy_getImportFileTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubstrategy_getImportFileTaskCmd).Standalone()
+	carapace.Gen(migrationhubstrategy_getImportFileTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubstrategy_getImportFileTaskCmd).Standalone()
 
-	migrationhubstrategy_getImportFileTaskCmd.Flags().String("id", "", "The ID of the import file task.")
-	migrationhubstrategy_getImportFileTaskCmd.MarkFlagRequired("id")
+		migrationhubstrategy_getImportFileTaskCmd.Flags().String("id", "", "The ID of the import file task.")
+		migrationhubstrategy_getImportFileTaskCmd.MarkFlagRequired("id")
+	})
 	migrationhubstrategyCmd.AddCommand(migrationhubstrategy_getImportFileTaskCmd)
 }

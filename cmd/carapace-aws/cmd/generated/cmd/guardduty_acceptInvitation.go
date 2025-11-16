@@ -12,13 +12,15 @@ var guardduty_acceptInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_acceptInvitationCmd).Standalone()
+	carapace.Gen(guardduty_acceptInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_acceptInvitationCmd).Standalone()
 
-	guardduty_acceptInvitationCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty member account.")
-	guardduty_acceptInvitationCmd.Flags().String("invitation-id", "", "The value that is used to validate the administrator account to the member account.")
-	guardduty_acceptInvitationCmd.Flags().String("master-id", "", "The account ID of the GuardDuty administrator account whose invitation you're accepting.")
-	guardduty_acceptInvitationCmd.MarkFlagRequired("detector-id")
-	guardduty_acceptInvitationCmd.MarkFlagRequired("invitation-id")
-	guardduty_acceptInvitationCmd.MarkFlagRequired("master-id")
+		guardduty_acceptInvitationCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty member account.")
+		guardduty_acceptInvitationCmd.Flags().String("invitation-id", "", "The value that is used to validate the administrator account to the member account.")
+		guardduty_acceptInvitationCmd.Flags().String("master-id", "", "The account ID of the GuardDuty administrator account whose invitation you're accepting.")
+		guardduty_acceptInvitationCmd.MarkFlagRequired("detector-id")
+		guardduty_acceptInvitationCmd.MarkFlagRequired("invitation-id")
+		guardduty_acceptInvitationCmd.MarkFlagRequired("master-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_acceptInvitationCmd)
 }

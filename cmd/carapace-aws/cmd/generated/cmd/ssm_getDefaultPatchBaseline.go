@@ -12,8 +12,10 @@ var ssm_getDefaultPatchBaselineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getDefaultPatchBaselineCmd).Standalone()
+	carapace.Gen(ssm_getDefaultPatchBaselineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getDefaultPatchBaselineCmd).Standalone()
 
-	ssm_getDefaultPatchBaselineCmd.Flags().String("operating-system", "", "Returns the default patch baseline for the specified operating system.")
+		ssm_getDefaultPatchBaselineCmd.Flags().String("operating-system", "", "Returns the default patch baseline for the specified operating system.")
+	})
 	ssmCmd.AddCommand(ssm_getDefaultPatchBaselineCmd)
 }

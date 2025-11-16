@@ -12,15 +12,17 @@ var s3tables_putTablePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_putTablePolicyCmd).Standalone()
+	carapace.Gen(s3tables_putTablePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_putTablePolicyCmd).Standalone()
 
-	s3tables_putTablePolicyCmd.Flags().String("name", "", "The name of the table.")
-	s3tables_putTablePolicyCmd.Flags().String("namespace", "", "The namespace associated with the table.")
-	s3tables_putTablePolicyCmd.Flags().String("resource-policy", "", "The `JSON` that defines the policy.")
-	s3tables_putTablePolicyCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket that contains the table.")
-	s3tables_putTablePolicyCmd.MarkFlagRequired("name")
-	s3tables_putTablePolicyCmd.MarkFlagRequired("namespace")
-	s3tables_putTablePolicyCmd.MarkFlagRequired("resource-policy")
-	s3tables_putTablePolicyCmd.MarkFlagRequired("table-bucket-arn")
+		s3tables_putTablePolicyCmd.Flags().String("name", "", "The name of the table.")
+		s3tables_putTablePolicyCmd.Flags().String("namespace", "", "The namespace associated with the table.")
+		s3tables_putTablePolicyCmd.Flags().String("resource-policy", "", "The `JSON` that defines the policy.")
+		s3tables_putTablePolicyCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket that contains the table.")
+		s3tables_putTablePolicyCmd.MarkFlagRequired("name")
+		s3tables_putTablePolicyCmd.MarkFlagRequired("namespace")
+		s3tables_putTablePolicyCmd.MarkFlagRequired("resource-policy")
+		s3tables_putTablePolicyCmd.MarkFlagRequired("table-bucket-arn")
+	})
 	s3tablesCmd.AddCommand(s3tables_putTablePolicyCmd)
 }

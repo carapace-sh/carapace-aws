@@ -12,11 +12,13 @@ var ivs_listStreamSessionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_listStreamSessionsCmd).Standalone()
+	carapace.Gen(ivs_listStreamSessionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_listStreamSessionsCmd).Standalone()
 
-	ivs_listStreamSessionsCmd.Flags().String("channel-arn", "", "Channel ARN used to filter the list.")
-	ivs_listStreamSessionsCmd.Flags().String("max-results", "", "Maximum number of streams to return.")
-	ivs_listStreamSessionsCmd.Flags().String("next-token", "", "The first stream to retrieve.")
-	ivs_listStreamSessionsCmd.MarkFlagRequired("channel-arn")
+		ivs_listStreamSessionsCmd.Flags().String("channel-arn", "", "Channel ARN used to filter the list.")
+		ivs_listStreamSessionsCmd.Flags().String("max-results", "", "Maximum number of streams to return.")
+		ivs_listStreamSessionsCmd.Flags().String("next-token", "", "The first stream to retrieve.")
+		ivs_listStreamSessionsCmd.MarkFlagRequired("channel-arn")
+	})
 	ivsCmd.AddCommand(ivs_listStreamSessionsCmd)
 }

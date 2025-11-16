@@ -12,9 +12,11 @@ var savingsplans_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(savingsplans_listTagsForResourceCmd).Standalone()
+	carapace.Gen(savingsplans_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(savingsplans_listTagsForResourceCmd).Standalone()
 
-	savingsplans_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	savingsplans_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		savingsplans_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		savingsplans_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	savingsplansCmd.AddCommand(savingsplans_listTagsForResourceCmd)
 }

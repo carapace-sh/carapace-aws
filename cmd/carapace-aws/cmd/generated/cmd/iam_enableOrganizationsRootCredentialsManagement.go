@@ -12,7 +12,9 @@ var iam_enableOrganizationsRootCredentialsManagementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_enableOrganizationsRootCredentialsManagementCmd).Standalone()
+	carapace.Gen(iam_enableOrganizationsRootCredentialsManagementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_enableOrganizationsRootCredentialsManagementCmd).Standalone()
 
+	})
 	iamCmd.AddCommand(iam_enableOrganizationsRootCredentialsManagementCmd)
 }

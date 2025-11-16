@@ -12,9 +12,11 @@ var workspaces_rebuildWorkspacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_rebuildWorkspacesCmd).Standalone()
+	carapace.Gen(workspaces_rebuildWorkspacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_rebuildWorkspacesCmd).Standalone()
 
-	workspaces_rebuildWorkspacesCmd.Flags().String("rebuild-workspace-requests", "", "The WorkSpace to rebuild.")
-	workspaces_rebuildWorkspacesCmd.MarkFlagRequired("rebuild-workspace-requests")
+		workspaces_rebuildWorkspacesCmd.Flags().String("rebuild-workspace-requests", "", "The WorkSpace to rebuild.")
+		workspaces_rebuildWorkspacesCmd.MarkFlagRequired("rebuild-workspace-requests")
+	})
 	workspacesCmd.AddCommand(workspaces_rebuildWorkspacesCmd)
 }

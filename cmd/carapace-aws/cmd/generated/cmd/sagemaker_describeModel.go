@@ -12,9 +12,11 @@ var sagemaker_describeModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeModelCmd).Standalone()
+	carapace.Gen(sagemaker_describeModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeModelCmd).Standalone()
 
-	sagemaker_describeModelCmd.Flags().String("model-name", "", "The name of the model.")
-	sagemaker_describeModelCmd.MarkFlagRequired("model-name")
+		sagemaker_describeModelCmd.Flags().String("model-name", "", "The name of the model.")
+		sagemaker_describeModelCmd.MarkFlagRequired("model-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeModelCmd)
 }

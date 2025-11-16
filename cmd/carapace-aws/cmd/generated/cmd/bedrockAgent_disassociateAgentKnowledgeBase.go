@@ -12,13 +12,15 @@ var bedrockAgent_disassociateAgentKnowledgeBaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_disassociateAgentKnowledgeBaseCmd).Standalone()
+	carapace.Gen(bedrockAgent_disassociateAgentKnowledgeBaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_disassociateAgentKnowledgeBaseCmd).Standalone()
 
-	bedrockAgent_disassociateAgentKnowledgeBaseCmd.Flags().String("agent-id", "", "The unique identifier of the agent from which to disassociate the knowledge base.")
-	bedrockAgent_disassociateAgentKnowledgeBaseCmd.Flags().String("agent-version", "", "The version of the agent from which to disassociate the knowledge base.")
-	bedrockAgent_disassociateAgentKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The unique identifier of the knowledge base to disassociate.")
-	bedrockAgent_disassociateAgentKnowledgeBaseCmd.MarkFlagRequired("agent-id")
-	bedrockAgent_disassociateAgentKnowledgeBaseCmd.MarkFlagRequired("agent-version")
-	bedrockAgent_disassociateAgentKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+		bedrockAgent_disassociateAgentKnowledgeBaseCmd.Flags().String("agent-id", "", "The unique identifier of the agent from which to disassociate the knowledge base.")
+		bedrockAgent_disassociateAgentKnowledgeBaseCmd.Flags().String("agent-version", "", "The version of the agent from which to disassociate the knowledge base.")
+		bedrockAgent_disassociateAgentKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The unique identifier of the knowledge base to disassociate.")
+		bedrockAgent_disassociateAgentKnowledgeBaseCmd.MarkFlagRequired("agent-id")
+		bedrockAgent_disassociateAgentKnowledgeBaseCmd.MarkFlagRequired("agent-version")
+		bedrockAgent_disassociateAgentKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_disassociateAgentKnowledgeBaseCmd)
 }

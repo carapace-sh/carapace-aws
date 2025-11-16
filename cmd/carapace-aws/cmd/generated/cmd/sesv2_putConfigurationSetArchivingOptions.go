@@ -12,10 +12,12 @@ var sesv2_putConfigurationSetArchivingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putConfigurationSetArchivingOptionsCmd).Standalone()
+	carapace.Gen(sesv2_putConfigurationSetArchivingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putConfigurationSetArchivingOptionsCmd).Standalone()
 
-	sesv2_putConfigurationSetArchivingOptionsCmd.Flags().String("archive-arn", "", "The Amazon Resource Name (ARN) of the MailManager archive that the Amazon SES API v2 sends email to.")
-	sesv2_putConfigurationSetArchivingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set to associate with a MailManager archive.")
-	sesv2_putConfigurationSetArchivingOptionsCmd.MarkFlagRequired("configuration-set-name")
+		sesv2_putConfigurationSetArchivingOptionsCmd.Flags().String("archive-arn", "", "The Amazon Resource Name (ARN) of the MailManager archive that the Amazon SES API v2 sends email to.")
+		sesv2_putConfigurationSetArchivingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set to associate with a MailManager archive.")
+		sesv2_putConfigurationSetArchivingOptionsCmd.MarkFlagRequired("configuration-set-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_putConfigurationSetArchivingOptionsCmd)
 }

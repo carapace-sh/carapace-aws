@@ -12,9 +12,11 @@ var s3control_deletePublicAccessBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_deletePublicAccessBlockCmd).Standalone()
+	carapace.Gen(s3control_deletePublicAccessBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_deletePublicAccessBlockCmd).Standalone()
 
-	s3control_deletePublicAccessBlockCmd.Flags().String("account-id", "", "The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to remove.")
-	s3control_deletePublicAccessBlockCmd.MarkFlagRequired("account-id")
+		s3control_deletePublicAccessBlockCmd.Flags().String("account-id", "", "The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to remove.")
+		s3control_deletePublicAccessBlockCmd.MarkFlagRequired("account-id")
+	})
 	s3controlCmd.AddCommand(s3control_deletePublicAccessBlockCmd)
 }

@@ -12,9 +12,11 @@ var billing_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billing_listTagsForResourceCmd).Standalone()
+	carapace.Gen(billing_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billing_listTagsForResourceCmd).Standalone()
 
-	billing_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	billing_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		billing_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		billing_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	billingCmd.AddCommand(billing_listTagsForResourceCmd)
 }

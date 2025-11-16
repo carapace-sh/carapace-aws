@@ -12,9 +12,11 @@ var iam_deleteVirtualMfadeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteVirtualMfadeviceCmd).Standalone()
+	carapace.Gen(iam_deleteVirtualMfadeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteVirtualMfadeviceCmd).Standalone()
 
-	iam_deleteVirtualMfadeviceCmd.Flags().String("serial-number", "", "The serial number that uniquely identifies the MFA device.")
-	iam_deleteVirtualMfadeviceCmd.MarkFlagRequired("serial-number")
+		iam_deleteVirtualMfadeviceCmd.Flags().String("serial-number", "", "The serial number that uniquely identifies the MFA device.")
+		iam_deleteVirtualMfadeviceCmd.MarkFlagRequired("serial-number")
+	})
 	iamCmd.AddCommand(iam_deleteVirtualMfadeviceCmd)
 }

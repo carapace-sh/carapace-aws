@@ -12,9 +12,11 @@ var iotwireless_getWirelessGatewayTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getWirelessGatewayTaskCmd).Standalone()
+	carapace.Gen(iotwireless_getWirelessGatewayTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getWirelessGatewayTaskCmd).Standalone()
 
-	iotwireless_getWirelessGatewayTaskCmd.Flags().String("id", "", "The ID of the resource to get.")
-	iotwireless_getWirelessGatewayTaskCmd.MarkFlagRequired("id")
+		iotwireless_getWirelessGatewayTaskCmd.Flags().String("id", "", "The ID of the resource to get.")
+		iotwireless_getWirelessGatewayTaskCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getWirelessGatewayTaskCmd)
 }

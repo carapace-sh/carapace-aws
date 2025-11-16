@@ -12,9 +12,11 @@ var verifiedpermissions_listPolicyStoresCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(verifiedpermissions_listPolicyStoresCmd).Standalone()
+	carapace.Gen(verifiedpermissions_listPolicyStoresCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(verifiedpermissions_listPolicyStoresCmd).Standalone()
 
-	verifiedpermissions_listPolicyStoresCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included in each response.")
-	verifiedpermissions_listPolicyStoresCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		verifiedpermissions_listPolicyStoresCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included in each response.")
+		verifiedpermissions_listPolicyStoresCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+	})
 	verifiedpermissionsCmd.AddCommand(verifiedpermissions_listPolicyStoresCmd)
 }

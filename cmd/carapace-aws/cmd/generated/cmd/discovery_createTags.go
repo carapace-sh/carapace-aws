@@ -12,11 +12,13 @@ var discovery_createTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_createTagsCmd).Standalone()
+	carapace.Gen(discovery_createTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_createTagsCmd).Standalone()
 
-	discovery_createTagsCmd.Flags().String("configuration-ids", "", "A list of configuration items that you want to tag.")
-	discovery_createTagsCmd.Flags().String("tags", "", "Tags that you want to associate with one or more configuration items.")
-	discovery_createTagsCmd.MarkFlagRequired("configuration-ids")
-	discovery_createTagsCmd.MarkFlagRequired("tags")
+		discovery_createTagsCmd.Flags().String("configuration-ids", "", "A list of configuration items that you want to tag.")
+		discovery_createTagsCmd.Flags().String("tags", "", "Tags that you want to associate with one or more configuration items.")
+		discovery_createTagsCmd.MarkFlagRequired("configuration-ids")
+		discovery_createTagsCmd.MarkFlagRequired("tags")
+	})
 	discoveryCmd.AddCommand(discovery_createTagsCmd)
 }

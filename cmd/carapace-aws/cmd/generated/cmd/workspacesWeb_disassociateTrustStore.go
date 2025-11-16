@@ -12,9 +12,11 @@ var workspacesWeb_disassociateTrustStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_disassociateTrustStoreCmd).Standalone()
+	carapace.Gen(workspacesWeb_disassociateTrustStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_disassociateTrustStoreCmd).Standalone()
 
-	workspacesWeb_disassociateTrustStoreCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
-	workspacesWeb_disassociateTrustStoreCmd.MarkFlagRequired("portal-arn")
+		workspacesWeb_disassociateTrustStoreCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
+		workspacesWeb_disassociateTrustStoreCmd.MarkFlagRequired("portal-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_disassociateTrustStoreCmd)
 }

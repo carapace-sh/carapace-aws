@@ -12,9 +12,11 @@ var frauddetector_deleteEntityTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteEntityTypeCmd).Standalone()
+	carapace.Gen(frauddetector_deleteEntityTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteEntityTypeCmd).Standalone()
 
-	frauddetector_deleteEntityTypeCmd.Flags().String("name", "", "The name of the entity type to delete.")
-	frauddetector_deleteEntityTypeCmd.MarkFlagRequired("name")
+		frauddetector_deleteEntityTypeCmd.Flags().String("name", "", "The name of the entity type to delete.")
+		frauddetector_deleteEntityTypeCmd.MarkFlagRequired("name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteEntityTypeCmd)
 }

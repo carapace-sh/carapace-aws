@@ -12,9 +12,11 @@ var chimeSdkVoice_batchUpdatePhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_batchUpdatePhoneNumberCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_batchUpdatePhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_batchUpdatePhoneNumberCmd).Standalone()
 
-	chimeSdkVoice_batchUpdatePhoneNumberCmd.Flags().String("update-phone-number-request-items", "", "Lists the phone numbers in the update request.")
-	chimeSdkVoice_batchUpdatePhoneNumberCmd.MarkFlagRequired("update-phone-number-request-items")
+		chimeSdkVoice_batchUpdatePhoneNumberCmd.Flags().String("update-phone-number-request-items", "", "Lists the phone numbers in the update request.")
+		chimeSdkVoice_batchUpdatePhoneNumberCmd.MarkFlagRequired("update-phone-number-request-items")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_batchUpdatePhoneNumberCmd)
 }

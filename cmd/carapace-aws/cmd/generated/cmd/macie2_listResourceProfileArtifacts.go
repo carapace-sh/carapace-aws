@@ -12,10 +12,12 @@ var macie2_listResourceProfileArtifactsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_listResourceProfileArtifactsCmd).Standalone()
+	carapace.Gen(macie2_listResourceProfileArtifactsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_listResourceProfileArtifactsCmd).Standalone()
 
-	macie2_listResourceProfileArtifactsCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
-	macie2_listResourceProfileArtifactsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.")
-	macie2_listResourceProfileArtifactsCmd.MarkFlagRequired("resource-arn")
+		macie2_listResourceProfileArtifactsCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+		macie2_listResourceProfileArtifactsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the S3 bucket that the request applies to.")
+		macie2_listResourceProfileArtifactsCmd.MarkFlagRequired("resource-arn")
+	})
 	macie2Cmd.AddCommand(macie2_listResourceProfileArtifactsCmd)
 }

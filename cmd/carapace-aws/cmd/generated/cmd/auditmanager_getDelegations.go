@@ -12,9 +12,11 @@ var auditmanager_getDelegationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getDelegationsCmd).Standalone()
+	carapace.Gen(auditmanager_getDelegationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getDelegationsCmd).Standalone()
 
-	auditmanager_getDelegationsCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
-	auditmanager_getDelegationsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		auditmanager_getDelegationsCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
+		auditmanager_getDelegationsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getDelegationsCmd)
 }

@@ -12,11 +12,13 @@ var freetier_listAccountActivitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(freetier_listAccountActivitiesCmd).Standalone()
+	carapace.Gen(freetier_listAccountActivitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(freetier_listAccountActivitiesCmd).Standalone()
 
-	freetier_listAccountActivitiesCmd.Flags().String("filter-activity-statuses", "", "The activity status filter.")
-	freetier_listAccountActivitiesCmd.Flags().String("language-code", "", "The language code used to return translated titles.")
-	freetier_listAccountActivitiesCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	freetier_listAccountActivitiesCmd.Flags().String("next-token", "", "A token from a previous paginated response.")
+		freetier_listAccountActivitiesCmd.Flags().String("filter-activity-statuses", "", "The activity status filter.")
+		freetier_listAccountActivitiesCmd.Flags().String("language-code", "", "The language code used to return translated titles.")
+		freetier_listAccountActivitiesCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		freetier_listAccountActivitiesCmd.Flags().String("next-token", "", "A token from a previous paginated response.")
+	})
 	freetierCmd.AddCommand(freetier_listAccountActivitiesCmd)
 }

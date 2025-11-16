@@ -12,10 +12,12 @@ var cleanroomsml_listAudienceExportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_listAudienceExportJobsCmd).Standalone()
+	carapace.Gen(cleanroomsml_listAudienceExportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_listAudienceExportJobsCmd).Standalone()
 
-	cleanroomsml_listAudienceExportJobsCmd.Flags().String("audience-generation-job-arn", "", "The Amazon Resource Name (ARN) of the audience generation job that you are interested in.")
-	cleanroomsml_listAudienceExportJobsCmd.Flags().String("max-results", "", "The maximum size of the results that is returned per call.")
-	cleanroomsml_listAudienceExportJobsCmd.Flags().String("next-token", "", "The token value retrieved from a previous call to access the next page of results.")
+		cleanroomsml_listAudienceExportJobsCmd.Flags().String("audience-generation-job-arn", "", "The Amazon Resource Name (ARN) of the audience generation job that you are interested in.")
+		cleanroomsml_listAudienceExportJobsCmd.Flags().String("max-results", "", "The maximum size of the results that is returned per call.")
+		cleanroomsml_listAudienceExportJobsCmd.Flags().String("next-token", "", "The token value retrieved from a previous call to access the next page of results.")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_listAudienceExportJobsCmd)
 }

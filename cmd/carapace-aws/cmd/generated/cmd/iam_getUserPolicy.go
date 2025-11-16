@@ -12,11 +12,13 @@ var iam_getUserPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getUserPolicyCmd).Standalone()
+	carapace.Gen(iam_getUserPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getUserPolicyCmd).Standalone()
 
-	iam_getUserPolicyCmd.Flags().String("policy-name", "", "The name of the policy document to get.")
-	iam_getUserPolicyCmd.Flags().String("user-name", "", "The name of the user who the policy is associated with.")
-	iam_getUserPolicyCmd.MarkFlagRequired("policy-name")
-	iam_getUserPolicyCmd.MarkFlagRequired("user-name")
+		iam_getUserPolicyCmd.Flags().String("policy-name", "", "The name of the policy document to get.")
+		iam_getUserPolicyCmd.Flags().String("user-name", "", "The name of the user who the policy is associated with.")
+		iam_getUserPolicyCmd.MarkFlagRequired("policy-name")
+		iam_getUserPolicyCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_getUserPolicyCmd)
 }

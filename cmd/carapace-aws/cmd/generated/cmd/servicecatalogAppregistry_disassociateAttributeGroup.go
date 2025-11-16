@@ -12,11 +12,13 @@ var servicecatalogAppregistry_disassociateAttributeGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalogAppregistry_disassociateAttributeGroupCmd).Standalone()
+	carapace.Gen(servicecatalogAppregistry_disassociateAttributeGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalogAppregistry_disassociateAttributeGroupCmd).Standalone()
 
-	servicecatalogAppregistry_disassociateAttributeGroupCmd.Flags().String("application", "", "The name, ID, or ARN of the application.")
-	servicecatalogAppregistry_disassociateAttributeGroupCmd.Flags().String("attribute-group", "", "The name, ID, or ARN of the attribute group that holds the attributes to describe the application.")
-	servicecatalogAppregistry_disassociateAttributeGroupCmd.MarkFlagRequired("application")
-	servicecatalogAppregistry_disassociateAttributeGroupCmd.MarkFlagRequired("attribute-group")
+		servicecatalogAppregistry_disassociateAttributeGroupCmd.Flags().String("application", "", "The name, ID, or ARN of the application.")
+		servicecatalogAppregistry_disassociateAttributeGroupCmd.Flags().String("attribute-group", "", "The name, ID, or ARN of the attribute group that holds the attributes to describe the application.")
+		servicecatalogAppregistry_disassociateAttributeGroupCmd.MarkFlagRequired("application")
+		servicecatalogAppregistry_disassociateAttributeGroupCmd.MarkFlagRequired("attribute-group")
+	})
 	servicecatalogAppregistryCmd.AddCommand(servicecatalogAppregistry_disassociateAttributeGroupCmd)
 }

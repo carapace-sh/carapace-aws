@@ -12,9 +12,11 @@ var ds_deleteSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_deleteSnapshotCmd).Standalone()
+	carapace.Gen(ds_deleteSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_deleteSnapshotCmd).Standalone()
 
-	ds_deleteSnapshotCmd.Flags().String("snapshot-id", "", "The identifier of the directory snapshot to be deleted.")
-	ds_deleteSnapshotCmd.MarkFlagRequired("snapshot-id")
+		ds_deleteSnapshotCmd.Flags().String("snapshot-id", "", "The identifier of the directory snapshot to be deleted.")
+		ds_deleteSnapshotCmd.MarkFlagRequired("snapshot-id")
+	})
 	dsCmd.AddCommand(ds_deleteSnapshotCmd)
 }

@@ -12,14 +12,16 @@ var ebs_completeSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ebs_completeSnapshotCmd).Standalone()
+	carapace.Gen(ebs_completeSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ebs_completeSnapshotCmd).Standalone()
 
-	ebs_completeSnapshotCmd.Flags().String("changed-blocks-count", "", "The number of blocks that were written to the snapshot.")
-	ebs_completeSnapshotCmd.Flags().String("checksum", "", "An aggregated Base-64 SHA256 checksum based on the checksums of each written block.")
-	ebs_completeSnapshotCmd.Flags().String("checksum-aggregation-method", "", "The aggregation method used to generate the checksum.")
-	ebs_completeSnapshotCmd.Flags().String("checksum-algorithm", "", "The algorithm used to generate the checksum.")
-	ebs_completeSnapshotCmd.Flags().String("snapshot-id", "", "The ID of the snapshot.")
-	ebs_completeSnapshotCmd.MarkFlagRequired("changed-blocks-count")
-	ebs_completeSnapshotCmd.MarkFlagRequired("snapshot-id")
+		ebs_completeSnapshotCmd.Flags().String("changed-blocks-count", "", "The number of blocks that were written to the snapshot.")
+		ebs_completeSnapshotCmd.Flags().String("checksum", "", "An aggregated Base-64 SHA256 checksum based on the checksums of each written block.")
+		ebs_completeSnapshotCmd.Flags().String("checksum-aggregation-method", "", "The aggregation method used to generate the checksum.")
+		ebs_completeSnapshotCmd.Flags().String("checksum-algorithm", "", "The algorithm used to generate the checksum.")
+		ebs_completeSnapshotCmd.Flags().String("snapshot-id", "", "The ID of the snapshot.")
+		ebs_completeSnapshotCmd.MarkFlagRequired("changed-blocks-count")
+		ebs_completeSnapshotCmd.MarkFlagRequired("snapshot-id")
+	})
 	ebsCmd.AddCommand(ebs_completeSnapshotCmd)
 }

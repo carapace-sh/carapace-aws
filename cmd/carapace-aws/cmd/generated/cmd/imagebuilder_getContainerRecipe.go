@@ -12,9 +12,11 @@ var imagebuilder_getContainerRecipeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getContainerRecipeCmd).Standalone()
+	carapace.Gen(imagebuilder_getContainerRecipeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getContainerRecipeCmd).Standalone()
 
-	imagebuilder_getContainerRecipeCmd.Flags().String("container-recipe-arn", "", "The Amazon Resource Name (ARN) of the container recipe to retrieve.")
-	imagebuilder_getContainerRecipeCmd.MarkFlagRequired("container-recipe-arn")
+		imagebuilder_getContainerRecipeCmd.Flags().String("container-recipe-arn", "", "The Amazon Resource Name (ARN) of the container recipe to retrieve.")
+		imagebuilder_getContainerRecipeCmd.MarkFlagRequired("container-recipe-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getContainerRecipeCmd)
 }

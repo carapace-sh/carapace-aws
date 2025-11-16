@@ -12,14 +12,16 @@ var codecommit_mergeBranchesByFastForwardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_mergeBranchesByFastForwardCmd).Standalone()
+	carapace.Gen(codecommit_mergeBranchesByFastForwardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_mergeBranchesByFastForwardCmd).Standalone()
 
-	codecommit_mergeBranchesByFastForwardCmd.Flags().String("destination-commit-specifier", "", "The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).")
-	codecommit_mergeBranchesByFastForwardCmd.Flags().String("repository-name", "", "The name of the repository where you want to merge two branches.")
-	codecommit_mergeBranchesByFastForwardCmd.Flags().String("source-commit-specifier", "", "The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).")
-	codecommit_mergeBranchesByFastForwardCmd.Flags().String("target-branch", "", "The branch where the merge is applied.")
-	codecommit_mergeBranchesByFastForwardCmd.MarkFlagRequired("destination-commit-specifier")
-	codecommit_mergeBranchesByFastForwardCmd.MarkFlagRequired("repository-name")
-	codecommit_mergeBranchesByFastForwardCmd.MarkFlagRequired("source-commit-specifier")
+		codecommit_mergeBranchesByFastForwardCmd.Flags().String("destination-commit-specifier", "", "The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).")
+		codecommit_mergeBranchesByFastForwardCmd.Flags().String("repository-name", "", "The name of the repository where you want to merge two branches.")
+		codecommit_mergeBranchesByFastForwardCmd.Flags().String("source-commit-specifier", "", "The branch, tag, HEAD, or other fully qualified reference used to identify a commit (for example, a branch name or a full commit ID).")
+		codecommit_mergeBranchesByFastForwardCmd.Flags().String("target-branch", "", "The branch where the merge is applied.")
+		codecommit_mergeBranchesByFastForwardCmd.MarkFlagRequired("destination-commit-specifier")
+		codecommit_mergeBranchesByFastForwardCmd.MarkFlagRequired("repository-name")
+		codecommit_mergeBranchesByFastForwardCmd.MarkFlagRequired("source-commit-specifier")
+	})
 	codecommitCmd.AddCommand(codecommit_mergeBranchesByFastForwardCmd)
 }

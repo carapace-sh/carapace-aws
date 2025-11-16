@@ -12,9 +12,11 @@ var rds_deleteDbclusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteDbclusterParameterGroupCmd).Standalone()
+	carapace.Gen(rds_deleteDbclusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteDbclusterParameterGroupCmd).Standalone()
 
-	rds_deleteDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the DB cluster parameter group.")
-	rds_deleteDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
+		rds_deleteDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the DB cluster parameter group.")
+		rds_deleteDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
+	})
 	rdsCmd.AddCommand(rds_deleteDbclusterParameterGroupCmd)
 }

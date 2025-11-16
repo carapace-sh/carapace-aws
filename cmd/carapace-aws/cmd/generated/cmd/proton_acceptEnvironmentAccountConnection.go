@@ -12,9 +12,11 @@ var proton_acceptEnvironmentAccountConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_acceptEnvironmentAccountConnectionCmd).Standalone()
+	carapace.Gen(proton_acceptEnvironmentAccountConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_acceptEnvironmentAccountConnectionCmd).Standalone()
 
-	proton_acceptEnvironmentAccountConnectionCmd.Flags().String("id", "", "The ID of the environment account connection.")
-	proton_acceptEnvironmentAccountConnectionCmd.MarkFlagRequired("id")
+		proton_acceptEnvironmentAccountConnectionCmd.Flags().String("id", "", "The ID of the environment account connection.")
+		proton_acceptEnvironmentAccountConnectionCmd.MarkFlagRequired("id")
+	})
 	protonCmd.AddCommand(proton_acceptEnvironmentAccountConnectionCmd)
 }

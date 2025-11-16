@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_getApiKeyCredentialProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_getApiKeyCredentialProviderCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_getApiKeyCredentialProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_getApiKeyCredentialProviderCmd).Standalone()
 
-	bedrockAgentcoreControl_getApiKeyCredentialProviderCmd.Flags().String("name", "", "The name of the API key credential provider to retrieve.")
-	bedrockAgentcoreControl_getApiKeyCredentialProviderCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_getApiKeyCredentialProviderCmd.Flags().String("name", "", "The name of the API key credential provider to retrieve.")
+		bedrockAgentcoreControl_getApiKeyCredentialProviderCmd.MarkFlagRequired("name")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_getApiKeyCredentialProviderCmd)
 }

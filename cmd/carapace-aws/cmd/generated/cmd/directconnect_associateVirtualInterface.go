@@ -12,11 +12,13 @@ var directconnect_associateVirtualInterfaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_associateVirtualInterfaceCmd).Standalone()
+	carapace.Gen(directconnect_associateVirtualInterfaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_associateVirtualInterfaceCmd).Standalone()
 
-	directconnect_associateVirtualInterfaceCmd.Flags().String("connection-id", "", "The ID of the LAG or connection.")
-	directconnect_associateVirtualInterfaceCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
-	directconnect_associateVirtualInterfaceCmd.MarkFlagRequired("connection-id")
-	directconnect_associateVirtualInterfaceCmd.MarkFlagRequired("virtual-interface-id")
+		directconnect_associateVirtualInterfaceCmd.Flags().String("connection-id", "", "The ID of the LAG or connection.")
+		directconnect_associateVirtualInterfaceCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
+		directconnect_associateVirtualInterfaceCmd.MarkFlagRequired("connection-id")
+		directconnect_associateVirtualInterfaceCmd.MarkFlagRequired("virtual-interface-id")
+	})
 	directconnectCmd.AddCommand(directconnect_associateVirtualInterfaceCmd)
 }

@@ -12,12 +12,14 @@ var opensearchserverless_deleteLifecyclePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_deleteLifecyclePolicyCmd).Standalone()
+	carapace.Gen(opensearchserverless_deleteLifecyclePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_deleteLifecyclePolicyCmd).Standalone()
 
-	opensearchserverless_deleteLifecyclePolicyCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
-	opensearchserverless_deleteLifecyclePolicyCmd.Flags().String("name", "", "The name of the policy to delete.")
-	opensearchserverless_deleteLifecyclePolicyCmd.Flags().String("type", "", "The type of lifecycle policy.")
-	opensearchserverless_deleteLifecyclePolicyCmd.MarkFlagRequired("name")
-	opensearchserverless_deleteLifecyclePolicyCmd.MarkFlagRequired("type")
+		opensearchserverless_deleteLifecyclePolicyCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
+		opensearchserverless_deleteLifecyclePolicyCmd.Flags().String("name", "", "The name of the policy to delete.")
+		opensearchserverless_deleteLifecyclePolicyCmd.Flags().String("type", "", "The type of lifecycle policy.")
+		opensearchserverless_deleteLifecyclePolicyCmd.MarkFlagRequired("name")
+		opensearchserverless_deleteLifecyclePolicyCmd.MarkFlagRequired("type")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_deleteLifecyclePolicyCmd)
 }

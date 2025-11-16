@@ -12,9 +12,11 @@ var lightsail_getLoadBalancerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getLoadBalancerCmd).Standalone()
+	carapace.Gen(lightsail_getLoadBalancerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getLoadBalancerCmd).Standalone()
 
-	lightsail_getLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	lightsail_getLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+		lightsail_getLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		lightsail_getLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getLoadBalancerCmd)
 }

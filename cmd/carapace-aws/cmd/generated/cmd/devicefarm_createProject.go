@@ -12,11 +12,13 @@ var devicefarm_createProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_createProjectCmd).Standalone()
+	carapace.Gen(devicefarm_createProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_createProjectCmd).Standalone()
 
-	devicefarm_createProjectCmd.Flags().String("default-job-timeout-minutes", "", "Sets the execution timeout value (in minutes) for a project.")
-	devicefarm_createProjectCmd.Flags().String("name", "", "The project's name.")
-	devicefarm_createProjectCmd.Flags().String("vpc-config", "", "The VPC security groups and subnets that are attached to a project.")
-	devicefarm_createProjectCmd.MarkFlagRequired("name")
+		devicefarm_createProjectCmd.Flags().String("default-job-timeout-minutes", "", "Sets the execution timeout value (in minutes) for a project.")
+		devicefarm_createProjectCmd.Flags().String("name", "", "The project's name.")
+		devicefarm_createProjectCmd.Flags().String("vpc-config", "", "The VPC security groups and subnets that are attached to a project.")
+		devicefarm_createProjectCmd.MarkFlagRequired("name")
+	})
 	devicefarmCmd.AddCommand(devicefarm_createProjectCmd)
 }

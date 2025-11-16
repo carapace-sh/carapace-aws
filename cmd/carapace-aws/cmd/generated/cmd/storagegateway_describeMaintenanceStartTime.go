@@ -12,9 +12,11 @@ var storagegateway_describeMaintenanceStartTimeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeMaintenanceStartTimeCmd).Standalone()
+	carapace.Gen(storagegateway_describeMaintenanceStartTimeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeMaintenanceStartTimeCmd).Standalone()
 
-	storagegateway_describeMaintenanceStartTimeCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_describeMaintenanceStartTimeCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_describeMaintenanceStartTimeCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_describeMaintenanceStartTimeCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeMaintenanceStartTimeCmd)
 }

@@ -12,11 +12,13 @@ var logs_testMetricFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_testMetricFilterCmd).Standalone()
+	carapace.Gen(logs_testMetricFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_testMetricFilterCmd).Standalone()
 
-	logs_testMetricFilterCmd.Flags().String("filter-pattern", "", "")
-	logs_testMetricFilterCmd.Flags().String("log-event-messages", "", "The log event messages to test.")
-	logs_testMetricFilterCmd.MarkFlagRequired("filter-pattern")
-	logs_testMetricFilterCmd.MarkFlagRequired("log-event-messages")
+		logs_testMetricFilterCmd.Flags().String("filter-pattern", "", "")
+		logs_testMetricFilterCmd.Flags().String("log-event-messages", "", "The log event messages to test.")
+		logs_testMetricFilterCmd.MarkFlagRequired("filter-pattern")
+		logs_testMetricFilterCmd.MarkFlagRequired("log-event-messages")
+	})
 	logsCmd.AddCommand(logs_testMetricFilterCmd)
 }

@@ -12,10 +12,12 @@ var forecast_listMonitorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_listMonitorsCmd).Standalone()
+	carapace.Gen(forecast_listMonitorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_listMonitorsCmd).Standalone()
 
-	forecast_listMonitorsCmd.Flags().String("filters", "", "An array of filters.")
-	forecast_listMonitorsCmd.Flags().String("max-results", "", "The maximum number of monitors to include in the response.")
-	forecast_listMonitorsCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a `NextToken`.")
+		forecast_listMonitorsCmd.Flags().String("filters", "", "An array of filters.")
+		forecast_listMonitorsCmd.Flags().String("max-results", "", "The maximum number of monitors to include in the response.")
+		forecast_listMonitorsCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a `NextToken`.")
+	})
 	forecastCmd.AddCommand(forecast_listMonitorsCmd)
 }

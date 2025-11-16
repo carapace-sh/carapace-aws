@@ -12,10 +12,12 @@ var codecatalyst_updateSpaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_updateSpaceCmd).Standalone()
+	carapace.Gen(codecatalyst_updateSpaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_updateSpaceCmd).Standalone()
 
-	codecatalyst_updateSpaceCmd.Flags().String("description", "", "The description of the space.")
-	codecatalyst_updateSpaceCmd.Flags().String("name", "", "The name of the space.")
-	codecatalyst_updateSpaceCmd.MarkFlagRequired("name")
+		codecatalyst_updateSpaceCmd.Flags().String("description", "", "The description of the space.")
+		codecatalyst_updateSpaceCmd.Flags().String("name", "", "The name of the space.")
+		codecatalyst_updateSpaceCmd.MarkFlagRequired("name")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_updateSpaceCmd)
 }

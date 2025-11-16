@@ -12,11 +12,13 @@ var cloudsearch_updateServiceAccessPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_updateServiceAccessPoliciesCmd).Standalone()
+	carapace.Gen(cloudsearch_updateServiceAccessPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_updateServiceAccessPoliciesCmd).Standalone()
 
-	cloudsearch_updateServiceAccessPoliciesCmd.Flags().String("access-policies", "", "The access rules you want to configure.")
-	cloudsearch_updateServiceAccessPoliciesCmd.Flags().String("domain-name", "", "")
-	cloudsearch_updateServiceAccessPoliciesCmd.MarkFlagRequired("access-policies")
-	cloudsearch_updateServiceAccessPoliciesCmd.MarkFlagRequired("domain-name")
+		cloudsearch_updateServiceAccessPoliciesCmd.Flags().String("access-policies", "", "The access rules you want to configure.")
+		cloudsearch_updateServiceAccessPoliciesCmd.Flags().String("domain-name", "", "")
+		cloudsearch_updateServiceAccessPoliciesCmd.MarkFlagRequired("access-policies")
+		cloudsearch_updateServiceAccessPoliciesCmd.MarkFlagRequired("domain-name")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_updateServiceAccessPoliciesCmd)
 }

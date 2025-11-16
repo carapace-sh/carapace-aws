@@ -12,11 +12,13 @@ var connectcases_deleteLayoutCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_deleteLayoutCmd).Standalone()
+	carapace.Gen(connectcases_deleteLayoutCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_deleteLayoutCmd).Standalone()
 
-	connectcases_deleteLayoutCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_deleteLayoutCmd.Flags().String("layout-id", "", "The unique identifier of the layout.")
-	connectcases_deleteLayoutCmd.MarkFlagRequired("domain-id")
-	connectcases_deleteLayoutCmd.MarkFlagRequired("layout-id")
+		connectcases_deleteLayoutCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_deleteLayoutCmd.Flags().String("layout-id", "", "The unique identifier of the layout.")
+		connectcases_deleteLayoutCmd.MarkFlagRequired("domain-id")
+		connectcases_deleteLayoutCmd.MarkFlagRequired("layout-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_deleteLayoutCmd)
 }

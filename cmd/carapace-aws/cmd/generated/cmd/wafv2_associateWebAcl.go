@@ -12,11 +12,13 @@ var wafv2_associateWebAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_associateWebAclCmd).Standalone()
+	carapace.Gen(wafv2_associateWebAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_associateWebAclCmd).Standalone()
 
-	wafv2_associateWebAclCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to associate with the web ACL.")
-	wafv2_associateWebAclCmd.Flags().String("web-aclarn", "", "The Amazon Resource Name (ARN) of the web ACL that you want to associate with the resource.")
-	wafv2_associateWebAclCmd.MarkFlagRequired("resource-arn")
-	wafv2_associateWebAclCmd.MarkFlagRequired("web-aclarn")
+		wafv2_associateWebAclCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to associate with the web ACL.")
+		wafv2_associateWebAclCmd.Flags().String("web-aclarn", "", "The Amazon Resource Name (ARN) of the web ACL that you want to associate with the resource.")
+		wafv2_associateWebAclCmd.MarkFlagRequired("resource-arn")
+		wafv2_associateWebAclCmd.MarkFlagRequired("web-aclarn")
+	})
 	wafv2Cmd.AddCommand(wafv2_associateWebAclCmd)
 }

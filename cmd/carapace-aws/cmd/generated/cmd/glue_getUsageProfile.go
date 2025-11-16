@@ -12,9 +12,11 @@ var glue_getUsageProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getUsageProfileCmd).Standalone()
+	carapace.Gen(glue_getUsageProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getUsageProfileCmd).Standalone()
 
-	glue_getUsageProfileCmd.Flags().String("name", "", "The name of the usage profile to retrieve.")
-	glue_getUsageProfileCmd.MarkFlagRequired("name")
+		glue_getUsageProfileCmd.Flags().String("name", "", "The name of the usage profile to retrieve.")
+		glue_getUsageProfileCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_getUsageProfileCmd)
 }

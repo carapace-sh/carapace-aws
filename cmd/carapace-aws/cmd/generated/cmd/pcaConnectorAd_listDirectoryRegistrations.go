@@ -12,9 +12,11 @@ var pcaConnectorAd_listDirectoryRegistrationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorAd_listDirectoryRegistrationsCmd).Standalone()
+	carapace.Gen(pcaConnectorAd_listDirectoryRegistrationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorAd_listDirectoryRegistrationsCmd).Standalone()
 
-	pcaConnectorAd_listDirectoryRegistrationsCmd.Flags().String("max-results", "", "Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.")
-	pcaConnectorAd_listDirectoryRegistrationsCmd.Flags().String("next-token", "", "Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.")
+		pcaConnectorAd_listDirectoryRegistrationsCmd.Flags().String("max-results", "", "Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.")
+		pcaConnectorAd_listDirectoryRegistrationsCmd.Flags().String("next-token", "", "Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.")
+	})
 	pcaConnectorAdCmd.AddCommand(pcaConnectorAd_listDirectoryRegistrationsCmd)
 }

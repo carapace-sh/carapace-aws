@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_createRegistrationVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_createRegistrationVersionCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_createRegistrationVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_createRegistrationVersionCmd).Standalone()
 
-	pinpointSmsVoiceV2_createRegistrationVersionCmd.Flags().String("registration-id", "", "The unique identifier for the registration.")
-	pinpointSmsVoiceV2_createRegistrationVersionCmd.MarkFlagRequired("registration-id")
+		pinpointSmsVoiceV2_createRegistrationVersionCmd.Flags().String("registration-id", "", "The unique identifier for the registration.")
+		pinpointSmsVoiceV2_createRegistrationVersionCmd.MarkFlagRequired("registration-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_createRegistrationVersionCmd)
 }

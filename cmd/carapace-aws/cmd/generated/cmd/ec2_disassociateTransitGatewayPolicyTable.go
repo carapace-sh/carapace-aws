@@ -12,14 +12,16 @@ var ec2_disassociateTransitGatewayPolicyTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_disassociateTransitGatewayPolicyTableCmd).Standalone()
+	carapace.Gen(ec2_disassociateTransitGatewayPolicyTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_disassociateTransitGatewayPolicyTableCmd).Standalone()
 
-	ec2_disassociateTransitGatewayPolicyTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disassociateTransitGatewayPolicyTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disassociateTransitGatewayPolicyTableCmd.Flags().String("transit-gateway-attachment-id", "", "The ID of the transit gateway attachment to disassociate from the policy table.")
-	ec2_disassociateTransitGatewayPolicyTableCmd.Flags().String("transit-gateway-policy-table-id", "", "The ID of the disassociated policy table.")
-	ec2_disassociateTransitGatewayPolicyTableCmd.Flag("no-dry-run").Hidden = true
-	ec2_disassociateTransitGatewayPolicyTableCmd.MarkFlagRequired("transit-gateway-attachment-id")
-	ec2_disassociateTransitGatewayPolicyTableCmd.MarkFlagRequired("transit-gateway-policy-table-id")
+		ec2_disassociateTransitGatewayPolicyTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disassociateTransitGatewayPolicyTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disassociateTransitGatewayPolicyTableCmd.Flags().String("transit-gateway-attachment-id", "", "The ID of the transit gateway attachment to disassociate from the policy table.")
+		ec2_disassociateTransitGatewayPolicyTableCmd.Flags().String("transit-gateway-policy-table-id", "", "The ID of the disassociated policy table.")
+		ec2_disassociateTransitGatewayPolicyTableCmd.Flag("no-dry-run").Hidden = true
+		ec2_disassociateTransitGatewayPolicyTableCmd.MarkFlagRequired("transit-gateway-attachment-id")
+		ec2_disassociateTransitGatewayPolicyTableCmd.MarkFlagRequired("transit-gateway-policy-table-id")
+	})
 	ec2Cmd.AddCommand(ec2_disassociateTransitGatewayPolicyTableCmd)
 }

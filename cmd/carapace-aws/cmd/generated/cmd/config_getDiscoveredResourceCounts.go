@@ -12,10 +12,12 @@ var config_getDiscoveredResourceCountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getDiscoveredResourceCountsCmd).Standalone()
+	carapace.Gen(config_getDiscoveredResourceCountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getDiscoveredResourceCountsCmd).Standalone()
 
-	config_getDiscoveredResourceCountsCmd.Flags().String("limit", "", "The maximum number of [ResourceCount]() objects returned on each page.")
-	config_getDiscoveredResourceCountsCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
-	config_getDiscoveredResourceCountsCmd.Flags().String("resource-types", "", "The comma-separated list that specifies the resource types that you want Config to return (for example, `\"AWS::EC2::Instance\"`, `\"AWS::IAM::User\"`).")
+		config_getDiscoveredResourceCountsCmd.Flags().String("limit", "", "The maximum number of [ResourceCount]() objects returned on each page.")
+		config_getDiscoveredResourceCountsCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+		config_getDiscoveredResourceCountsCmd.Flags().String("resource-types", "", "The comma-separated list that specifies the resource types that you want Config to return (for example, `\"AWS::EC2::Instance\"`, `\"AWS::IAM::User\"`).")
+	})
 	configCmd.AddCommand(config_getDiscoveredResourceCountsCmd)
 }

@@ -12,9 +12,11 @@ var mturk_listHitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_listHitsCmd).Standalone()
+	carapace.Gen(mturk_listHitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_listHitsCmd).Standalone()
 
-	mturk_listHitsCmd.Flags().String("max-results", "", "")
-	mturk_listHitsCmd.Flags().String("next-token", "", "Pagination token")
+		mturk_listHitsCmd.Flags().String("max-results", "", "")
+		mturk_listHitsCmd.Flags().String("next-token", "", "Pagination token")
+	})
 	mturkCmd.AddCommand(mturk_listHitsCmd)
 }

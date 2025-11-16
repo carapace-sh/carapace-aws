@@ -12,9 +12,11 @@ var comprehend_deleteFlywheelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_deleteFlywheelCmd).Standalone()
+	carapace.Gen(comprehend_deleteFlywheelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_deleteFlywheelCmd).Standalone()
 
-	comprehend_deleteFlywheelCmd.Flags().String("flywheel-arn", "", "The Amazon Resource Number (ARN) of the flywheel to delete.")
-	comprehend_deleteFlywheelCmd.MarkFlagRequired("flywheel-arn")
+		comprehend_deleteFlywheelCmd.Flags().String("flywheel-arn", "", "The Amazon Resource Number (ARN) of the flywheel to delete.")
+		comprehend_deleteFlywheelCmd.MarkFlagRequired("flywheel-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_deleteFlywheelCmd)
 }

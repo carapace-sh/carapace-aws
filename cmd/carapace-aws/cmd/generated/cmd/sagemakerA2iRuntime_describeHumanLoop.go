@@ -12,9 +12,11 @@ var sagemakerA2iRuntime_describeHumanLoopCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerA2iRuntime_describeHumanLoopCmd).Standalone()
+	carapace.Gen(sagemakerA2iRuntime_describeHumanLoopCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerA2iRuntime_describeHumanLoopCmd).Standalone()
 
-	sagemakerA2iRuntime_describeHumanLoopCmd.Flags().String("human-loop-name", "", "The name of the human loop that you want information about.")
-	sagemakerA2iRuntime_describeHumanLoopCmd.MarkFlagRequired("human-loop-name")
+		sagemakerA2iRuntime_describeHumanLoopCmd.Flags().String("human-loop-name", "", "The name of the human loop that you want information about.")
+		sagemakerA2iRuntime_describeHumanLoopCmd.MarkFlagRequired("human-loop-name")
+	})
 	sagemakerA2iRuntimeCmd.AddCommand(sagemakerA2iRuntime_describeHumanLoopCmd)
 }

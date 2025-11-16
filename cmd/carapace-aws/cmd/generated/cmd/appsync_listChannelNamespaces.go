@@ -12,11 +12,13 @@ var appsync_listChannelNamespacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_listChannelNamespacesCmd).Standalone()
+	carapace.Gen(appsync_listChannelNamespacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_listChannelNamespacesCmd).Standalone()
 
-	appsync_listChannelNamespacesCmd.Flags().String("api-id", "", "The `Api` ID.")
-	appsync_listChannelNamespacesCmd.Flags().String("max-results", "", "The maximum number of results that you want the request to return.")
-	appsync_listChannelNamespacesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.")
-	appsync_listChannelNamespacesCmd.MarkFlagRequired("api-id")
+		appsync_listChannelNamespacesCmd.Flags().String("api-id", "", "The `Api` ID.")
+		appsync_listChannelNamespacesCmd.Flags().String("max-results", "", "The maximum number of results that you want the request to return.")
+		appsync_listChannelNamespacesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.")
+		appsync_listChannelNamespacesCmd.MarkFlagRequired("api-id")
+	})
 	appsyncCmd.AddCommand(appsync_listChannelNamespacesCmd)
 }

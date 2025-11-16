@@ -12,13 +12,15 @@ var qbusiness_listPluginActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_listPluginActionsCmd).Standalone()
+	carapace.Gen(qbusiness_listPluginActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_listPluginActionsCmd).Standalone()
 
-	qbusiness_listPluginActionsCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application the plugin is attached to.")
-	qbusiness_listPluginActionsCmd.Flags().String("max-results", "", "The maximum number of plugin actions to return.")
-	qbusiness_listPluginActionsCmd.Flags().String("next-token", "", "If the number of plugin actions returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of plugin actions.")
-	qbusiness_listPluginActionsCmd.Flags().String("plugin-id", "", "The identifier of the Amazon Q Business plugin.")
-	qbusiness_listPluginActionsCmd.MarkFlagRequired("application-id")
-	qbusiness_listPluginActionsCmd.MarkFlagRequired("plugin-id")
+		qbusiness_listPluginActionsCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application the plugin is attached to.")
+		qbusiness_listPluginActionsCmd.Flags().String("max-results", "", "The maximum number of plugin actions to return.")
+		qbusiness_listPluginActionsCmd.Flags().String("next-token", "", "If the number of plugin actions returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of plugin actions.")
+		qbusiness_listPluginActionsCmd.Flags().String("plugin-id", "", "The identifier of the Amazon Q Business plugin.")
+		qbusiness_listPluginActionsCmd.MarkFlagRequired("application-id")
+		qbusiness_listPluginActionsCmd.MarkFlagRequired("plugin-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_listPluginActionsCmd)
 }

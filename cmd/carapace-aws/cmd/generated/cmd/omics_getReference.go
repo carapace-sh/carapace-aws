@@ -12,15 +12,17 @@ var omics_getReferenceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getReferenceCmd).Standalone()
+	carapace.Gen(omics_getReferenceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getReferenceCmd).Standalone()
 
-	omics_getReferenceCmd.Flags().String("file", "", "The file to retrieve.")
-	omics_getReferenceCmd.Flags().String("id", "", "The reference's ID.")
-	omics_getReferenceCmd.Flags().String("part-number", "", "The part number to retrieve.")
-	omics_getReferenceCmd.Flags().String("range", "", "The range to retrieve.")
-	omics_getReferenceCmd.Flags().String("reference-store-id", "", "The reference's store ID.")
-	omics_getReferenceCmd.MarkFlagRequired("id")
-	omics_getReferenceCmd.MarkFlagRequired("part-number")
-	omics_getReferenceCmd.MarkFlagRequired("reference-store-id")
+		omics_getReferenceCmd.Flags().String("file", "", "The file to retrieve.")
+		omics_getReferenceCmd.Flags().String("id", "", "The reference's ID.")
+		omics_getReferenceCmd.Flags().String("part-number", "", "The part number to retrieve.")
+		omics_getReferenceCmd.Flags().String("range", "", "The range to retrieve.")
+		omics_getReferenceCmd.Flags().String("reference-store-id", "", "The reference's store ID.")
+		omics_getReferenceCmd.MarkFlagRequired("id")
+		omics_getReferenceCmd.MarkFlagRequired("part-number")
+		omics_getReferenceCmd.MarkFlagRequired("reference-store-id")
+	})
 	omicsCmd.AddCommand(omics_getReferenceCmd)
 }

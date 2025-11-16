@@ -12,9 +12,11 @@ var cloudfront_createStreamingDistributionWithTags2020_05_31Cmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(cloudfront_createStreamingDistributionWithTags2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createStreamingDistributionWithTags2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createStreamingDistributionWithTags2020_05_31Cmd).Standalone()
 
-	cloudfront_createStreamingDistributionWithTags2020_05_31Cmd.Flags().String("streaming-distribution-config-with-tags", "", "The streaming distribution's configuration information.")
-	cloudfront_createStreamingDistributionWithTags2020_05_31Cmd.MarkFlagRequired("streaming-distribution-config-with-tags")
+		cloudfront_createStreamingDistributionWithTags2020_05_31Cmd.Flags().String("streaming-distribution-config-with-tags", "", "The streaming distribution's configuration information.")
+		cloudfront_createStreamingDistributionWithTags2020_05_31Cmd.MarkFlagRequired("streaming-distribution-config-with-tags")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createStreamingDistributionWithTags2020_05_31Cmd)
 }

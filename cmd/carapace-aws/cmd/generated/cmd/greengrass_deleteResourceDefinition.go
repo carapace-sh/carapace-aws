@@ -12,9 +12,11 @@ var greengrass_deleteResourceDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_deleteResourceDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_deleteResourceDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_deleteResourceDefinitionCmd).Standalone()
 
-	greengrass_deleteResourceDefinitionCmd.Flags().String("resource-definition-id", "", "The ID of the resource definition.")
-	greengrass_deleteResourceDefinitionCmd.MarkFlagRequired("resource-definition-id")
+		greengrass_deleteResourceDefinitionCmd.Flags().String("resource-definition-id", "", "The ID of the resource definition.")
+		greengrass_deleteResourceDefinitionCmd.MarkFlagRequired("resource-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_deleteResourceDefinitionCmd)
 }

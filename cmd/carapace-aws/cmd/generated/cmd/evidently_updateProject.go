@@ -12,11 +12,13 @@ var evidently_updateProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_updateProjectCmd).Standalone()
+	carapace.Gen(evidently_updateProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_updateProjectCmd).Standalone()
 
-	evidently_updateProjectCmd.Flags().String("app-config-resource", "", "Use this parameter if the project will use client-side evaluation powered by AppConfig.")
-	evidently_updateProjectCmd.Flags().String("description", "", "An optional description of the project.")
-	evidently_updateProjectCmd.Flags().String("project", "", "The name or ARN of the project to update.")
-	evidently_updateProjectCmd.MarkFlagRequired("project")
+		evidently_updateProjectCmd.Flags().String("app-config-resource", "", "Use this parameter if the project will use client-side evaluation powered by AppConfig.")
+		evidently_updateProjectCmd.Flags().String("description", "", "An optional description of the project.")
+		evidently_updateProjectCmd.Flags().String("project", "", "The name or ARN of the project to update.")
+		evidently_updateProjectCmd.MarkFlagRequired("project")
+	})
 	evidentlyCmd.AddCommand(evidently_updateProjectCmd)
 }

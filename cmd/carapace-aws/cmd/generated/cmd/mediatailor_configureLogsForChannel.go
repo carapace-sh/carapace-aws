@@ -12,11 +12,13 @@ var mediatailor_configureLogsForChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_configureLogsForChannelCmd).Standalone()
+	carapace.Gen(mediatailor_configureLogsForChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_configureLogsForChannelCmd).Standalone()
 
-	mediatailor_configureLogsForChannelCmd.Flags().String("channel-name", "", "The name of the channel.")
-	mediatailor_configureLogsForChannelCmd.Flags().String("log-types", "", "The types of logs to collect.")
-	mediatailor_configureLogsForChannelCmd.MarkFlagRequired("channel-name")
-	mediatailor_configureLogsForChannelCmd.MarkFlagRequired("log-types")
+		mediatailor_configureLogsForChannelCmd.Flags().String("channel-name", "", "The name of the channel.")
+		mediatailor_configureLogsForChannelCmd.Flags().String("log-types", "", "The types of logs to collect.")
+		mediatailor_configureLogsForChannelCmd.MarkFlagRequired("channel-name")
+		mediatailor_configureLogsForChannelCmd.MarkFlagRequired("log-types")
+	})
 	mediatailorCmd.AddCommand(mediatailor_configureLogsForChannelCmd)
 }

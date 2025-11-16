@@ -12,9 +12,11 @@ var organizations_listAwsserviceAccessForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listAwsserviceAccessForOrganizationCmd).Standalone()
+	carapace.Gen(organizations_listAwsserviceAccessForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listAwsserviceAccessForOrganizationCmd).Standalone()
 
-	organizations_listAwsserviceAccessForOrganizationCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	organizations_listAwsserviceAccessForOrganizationCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listAwsserviceAccessForOrganizationCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		organizations_listAwsserviceAccessForOrganizationCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+	})
 	organizationsCmd.AddCommand(organizations_listAwsserviceAccessForOrganizationCmd)
 }

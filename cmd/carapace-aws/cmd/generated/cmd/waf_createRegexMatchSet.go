@@ -12,11 +12,13 @@ var waf_createRegexMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_createRegexMatchSetCmd).Standalone()
+	carapace.Gen(waf_createRegexMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_createRegexMatchSetCmd).Standalone()
 
-	waf_createRegexMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	waf_createRegexMatchSetCmd.Flags().String("name", "", "A friendly name or description of the [RegexMatchSet]().")
-	waf_createRegexMatchSetCmd.MarkFlagRequired("change-token")
-	waf_createRegexMatchSetCmd.MarkFlagRequired("name")
+		waf_createRegexMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		waf_createRegexMatchSetCmd.Flags().String("name", "", "A friendly name or description of the [RegexMatchSet]().")
+		waf_createRegexMatchSetCmd.MarkFlagRequired("change-token")
+		waf_createRegexMatchSetCmd.MarkFlagRequired("name")
+	})
 	wafCmd.AddCommand(waf_createRegexMatchSetCmd)
 }

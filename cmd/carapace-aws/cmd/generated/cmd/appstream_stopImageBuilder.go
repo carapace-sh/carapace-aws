@@ -12,9 +12,11 @@ var appstream_stopImageBuilderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_stopImageBuilderCmd).Standalone()
+	carapace.Gen(appstream_stopImageBuilderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_stopImageBuilderCmd).Standalone()
 
-	appstream_stopImageBuilderCmd.Flags().String("name", "", "The name of the image builder.")
-	appstream_stopImageBuilderCmd.MarkFlagRequired("name")
+		appstream_stopImageBuilderCmd.Flags().String("name", "", "The name of the image builder.")
+		appstream_stopImageBuilderCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_stopImageBuilderCmd)
 }

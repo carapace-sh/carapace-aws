@@ -12,11 +12,13 @@ var dms_startMetadataModelConversionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_startMetadataModelConversionCmd).Standalone()
+	carapace.Gen(dms_startMetadataModelConversionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_startMetadataModelConversionCmd).Standalone()
 
-	dms_startMetadataModelConversionCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
-	dms_startMetadataModelConversionCmd.Flags().String("selection-rules", "", "A value that specifies the database objects to convert.")
-	dms_startMetadataModelConversionCmd.MarkFlagRequired("migration-project-identifier")
-	dms_startMetadataModelConversionCmd.MarkFlagRequired("selection-rules")
+		dms_startMetadataModelConversionCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
+		dms_startMetadataModelConversionCmd.Flags().String("selection-rules", "", "A value that specifies the database objects to convert.")
+		dms_startMetadataModelConversionCmd.MarkFlagRequired("migration-project-identifier")
+		dms_startMetadataModelConversionCmd.MarkFlagRequired("selection-rules")
+	})
 	dmsCmd.AddCommand(dms_startMetadataModelConversionCmd)
 }

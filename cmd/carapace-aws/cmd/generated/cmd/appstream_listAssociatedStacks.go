@@ -12,10 +12,12 @@ var appstream_listAssociatedStacksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_listAssociatedStacksCmd).Standalone()
+	carapace.Gen(appstream_listAssociatedStacksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_listAssociatedStacksCmd).Standalone()
 
-	appstream_listAssociatedStacksCmd.Flags().String("fleet-name", "", "The name of the fleet.")
-	appstream_listAssociatedStacksCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
-	appstream_listAssociatedStacksCmd.MarkFlagRequired("fleet-name")
+		appstream_listAssociatedStacksCmd.Flags().String("fleet-name", "", "The name of the fleet.")
+		appstream_listAssociatedStacksCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+		appstream_listAssociatedStacksCmd.MarkFlagRequired("fleet-name")
+	})
 	appstreamCmd.AddCommand(appstream_listAssociatedStacksCmd)
 }

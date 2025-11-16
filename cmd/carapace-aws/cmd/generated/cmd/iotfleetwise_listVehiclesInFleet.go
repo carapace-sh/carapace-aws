@@ -12,11 +12,13 @@ var iotfleetwise_listVehiclesInFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_listVehiclesInFleetCmd).Standalone()
+	carapace.Gen(iotfleetwise_listVehiclesInFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_listVehiclesInFleetCmd).Standalone()
 
-	iotfleetwise_listVehiclesInFleetCmd.Flags().String("fleet-id", "", "The ID of a fleet.")
-	iotfleetwise_listVehiclesInFleetCmd.Flags().String("max-results", "", "The maximum number of items to return, between 1 and 100, inclusive.")
-	iotfleetwise_listVehiclesInFleetCmd.Flags().String("next-token", "", "A pagination token for the next set of results.")
-	iotfleetwise_listVehiclesInFleetCmd.MarkFlagRequired("fleet-id")
+		iotfleetwise_listVehiclesInFleetCmd.Flags().String("fleet-id", "", "The ID of a fleet.")
+		iotfleetwise_listVehiclesInFleetCmd.Flags().String("max-results", "", "The maximum number of items to return, between 1 and 100, inclusive.")
+		iotfleetwise_listVehiclesInFleetCmd.Flags().String("next-token", "", "A pagination token for the next set of results.")
+		iotfleetwise_listVehiclesInFleetCmd.MarkFlagRequired("fleet-id")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_listVehiclesInFleetCmd)
 }

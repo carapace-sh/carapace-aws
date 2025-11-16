@@ -12,11 +12,13 @@ var location_getGeofenceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_getGeofenceCmd).Standalone()
+	carapace.Gen(location_getGeofenceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_getGeofenceCmd).Standalone()
 
-	location_getGeofenceCmd.Flags().String("collection-name", "", "The geofence collection storing the target geofence.")
-	location_getGeofenceCmd.Flags().String("geofence-id", "", "The geofence you're retrieving details for.")
-	location_getGeofenceCmd.MarkFlagRequired("collection-name")
-	location_getGeofenceCmd.MarkFlagRequired("geofence-id")
+		location_getGeofenceCmd.Flags().String("collection-name", "", "The geofence collection storing the target geofence.")
+		location_getGeofenceCmd.Flags().String("geofence-id", "", "The geofence you're retrieving details for.")
+		location_getGeofenceCmd.MarkFlagRequired("collection-name")
+		location_getGeofenceCmd.MarkFlagRequired("geofence-id")
+	})
 	locationCmd.AddCommand(location_getGeofenceCmd)
 }

@@ -12,9 +12,11 @@ var cleanroomsml_deleteTrainingDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_deleteTrainingDatasetCmd).Standalone()
+	carapace.Gen(cleanroomsml_deleteTrainingDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_deleteTrainingDatasetCmd).Standalone()
 
-	cleanroomsml_deleteTrainingDatasetCmd.Flags().String("training-dataset-arn", "", "The Amazon Resource Name (ARN) of the training dataset that you want to delete.")
-	cleanroomsml_deleteTrainingDatasetCmd.MarkFlagRequired("training-dataset-arn")
+		cleanroomsml_deleteTrainingDatasetCmd.Flags().String("training-dataset-arn", "", "The Amazon Resource Name (ARN) of the training dataset that you want to delete.")
+		cleanroomsml_deleteTrainingDatasetCmd.MarkFlagRequired("training-dataset-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_deleteTrainingDatasetCmd)
 }

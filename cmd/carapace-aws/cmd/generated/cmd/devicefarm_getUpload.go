@@ -12,9 +12,11 @@ var devicefarm_getUploadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_getUploadCmd).Standalone()
+	carapace.Gen(devicefarm_getUploadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_getUploadCmd).Standalone()
 
-	devicefarm_getUploadCmd.Flags().String("arn", "", "The upload's ARN.")
-	devicefarm_getUploadCmd.MarkFlagRequired("arn")
+		devicefarm_getUploadCmd.Flags().String("arn", "", "The upload's ARN.")
+		devicefarm_getUploadCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_getUploadCmd)
 }

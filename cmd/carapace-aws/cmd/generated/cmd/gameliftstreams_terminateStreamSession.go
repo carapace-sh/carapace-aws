@@ -12,11 +12,13 @@ var gameliftstreams_terminateStreamSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftstreams_terminateStreamSessionCmd).Standalone()
+	carapace.Gen(gameliftstreams_terminateStreamSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftstreams_terminateStreamSessionCmd).Standalone()
 
-	gameliftstreams_terminateStreamSessionCmd.Flags().String("identifier", "", "[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.")
-	gameliftstreams_terminateStreamSessionCmd.Flags().String("stream-session-identifier", "", "[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.")
-	gameliftstreams_terminateStreamSessionCmd.MarkFlagRequired("identifier")
-	gameliftstreams_terminateStreamSessionCmd.MarkFlagRequired("stream-session-identifier")
+		gameliftstreams_terminateStreamSessionCmd.Flags().String("identifier", "", "[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.")
+		gameliftstreams_terminateStreamSessionCmd.Flags().String("stream-session-identifier", "", "[Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.")
+		gameliftstreams_terminateStreamSessionCmd.MarkFlagRequired("identifier")
+		gameliftstreams_terminateStreamSessionCmd.MarkFlagRequired("stream-session-identifier")
+	})
 	gameliftstreamsCmd.AddCommand(gameliftstreams_terminateStreamSessionCmd)
 }

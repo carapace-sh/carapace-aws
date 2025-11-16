@@ -12,12 +12,14 @@ var lambda_listAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_listAliasesCmd).Standalone()
+	carapace.Gen(lambda_listAliasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_listAliasesCmd).Standalone()
 
-	lambda_listAliasesCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_listAliasesCmd.Flags().String("function-version", "", "Specify a function version to only list aliases that invoke that version.")
-	lambda_listAliasesCmd.Flags().String("marker", "", "Specify the pagination token that's returned by a previous request to retrieve the next page of results.")
-	lambda_listAliasesCmd.Flags().String("max-items", "", "Limit the number of aliases returned.")
-	lambda_listAliasesCmd.MarkFlagRequired("function-name")
+		lambda_listAliasesCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_listAliasesCmd.Flags().String("function-version", "", "Specify a function version to only list aliases that invoke that version.")
+		lambda_listAliasesCmd.Flags().String("marker", "", "Specify the pagination token that's returned by a previous request to retrieve the next page of results.")
+		lambda_listAliasesCmd.Flags().String("max-items", "", "Limit the number of aliases returned.")
+		lambda_listAliasesCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_listAliasesCmd)
 }

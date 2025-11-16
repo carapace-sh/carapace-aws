@@ -12,11 +12,13 @@ var kinesisanalyticsv2_describeApplicationOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_describeApplicationOperationCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_describeApplicationOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_describeApplicationOperationCmd).Standalone()
 
-	kinesisanalyticsv2_describeApplicationOperationCmd.Flags().String("application-name", "", "")
-	kinesisanalyticsv2_describeApplicationOperationCmd.Flags().String("operation-id", "", "")
-	kinesisanalyticsv2_describeApplicationOperationCmd.MarkFlagRequired("application-name")
-	kinesisanalyticsv2_describeApplicationOperationCmd.MarkFlagRequired("operation-id")
+		kinesisanalyticsv2_describeApplicationOperationCmd.Flags().String("application-name", "", "")
+		kinesisanalyticsv2_describeApplicationOperationCmd.Flags().String("operation-id", "", "")
+		kinesisanalyticsv2_describeApplicationOperationCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_describeApplicationOperationCmd.MarkFlagRequired("operation-id")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_describeApplicationOperationCmd)
 }

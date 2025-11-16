@@ -12,11 +12,13 @@ var ds_describeCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_describeCertificateCmd).Standalone()
+	carapace.Gen(ds_describeCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_describeCertificateCmd).Standalone()
 
-	ds_describeCertificateCmd.Flags().String("certificate-id", "", "The identifier of the certificate.")
-	ds_describeCertificateCmd.Flags().String("directory-id", "", "The identifier of the directory.")
-	ds_describeCertificateCmd.MarkFlagRequired("certificate-id")
-	ds_describeCertificateCmd.MarkFlagRequired("directory-id")
+		ds_describeCertificateCmd.Flags().String("certificate-id", "", "The identifier of the certificate.")
+		ds_describeCertificateCmd.Flags().String("directory-id", "", "The identifier of the directory.")
+		ds_describeCertificateCmd.MarkFlagRequired("certificate-id")
+		ds_describeCertificateCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_describeCertificateCmd)
 }

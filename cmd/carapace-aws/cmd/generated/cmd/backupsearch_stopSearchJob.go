@@ -12,9 +12,11 @@ var backupsearch_stopSearchJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupsearch_stopSearchJobCmd).Standalone()
+	carapace.Gen(backupsearch_stopSearchJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupsearch_stopSearchJobCmd).Standalone()
 
-	backupsearch_stopSearchJobCmd.Flags().String("search-job-identifier", "", "The unique string that specifies the search job.")
-	backupsearch_stopSearchJobCmd.MarkFlagRequired("search-job-identifier")
+		backupsearch_stopSearchJobCmd.Flags().String("search-job-identifier", "", "The unique string that specifies the search job.")
+		backupsearch_stopSearchJobCmd.MarkFlagRequired("search-job-identifier")
+	})
 	backupsearchCmd.AddCommand(backupsearch_stopSearchJobCmd)
 }

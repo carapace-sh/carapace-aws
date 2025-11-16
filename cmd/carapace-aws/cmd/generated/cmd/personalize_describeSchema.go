@@ -12,9 +12,11 @@ var personalize_describeSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeSchemaCmd).Standalone()
+	carapace.Gen(personalize_describeSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeSchemaCmd).Standalone()
 
-	personalize_describeSchemaCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) of the schema to retrieve.")
-	personalize_describeSchemaCmd.MarkFlagRequired("schema-arn")
+		personalize_describeSchemaCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) of the schema to retrieve.")
+		personalize_describeSchemaCmd.MarkFlagRequired("schema-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeSchemaCmd)
 }

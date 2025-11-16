@@ -12,11 +12,13 @@ var sagemaker_createModelPackageGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_createModelPackageGroupCmd).Standalone()
+	carapace.Gen(sagemaker_createModelPackageGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_createModelPackageGroupCmd).Standalone()
 
-	sagemaker_createModelPackageGroupCmd.Flags().String("model-package-group-description", "", "A description for the model group.")
-	sagemaker_createModelPackageGroupCmd.Flags().String("model-package-group-name", "", "The name of the model group.")
-	sagemaker_createModelPackageGroupCmd.Flags().String("tags", "", "A list of key value pairs associated with the model group.")
-	sagemaker_createModelPackageGroupCmd.MarkFlagRequired("model-package-group-name")
+		sagemaker_createModelPackageGroupCmd.Flags().String("model-package-group-description", "", "A description for the model group.")
+		sagemaker_createModelPackageGroupCmd.Flags().String("model-package-group-name", "", "The name of the model group.")
+		sagemaker_createModelPackageGroupCmd.Flags().String("tags", "", "A list of key value pairs associated with the model group.")
+		sagemaker_createModelPackageGroupCmd.MarkFlagRequired("model-package-group-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_createModelPackageGroupCmd)
 }

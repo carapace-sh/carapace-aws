@@ -12,7 +12,9 @@ var resiliencehubCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehubCmd).Standalone()
+	carapace.Gen(resiliencehubCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehubCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(resiliencehubCmd)
 }

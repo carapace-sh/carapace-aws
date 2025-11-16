@@ -12,12 +12,14 @@ var chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd).Standalone()
 
-	chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.Flags().String("e164-phone-numbers", "", "List of phone numbers, in E.164 format.")
-	chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.Flags().String("force-associate", "", "If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector and removes any previously existing associations.")
-	chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.MarkFlagRequired("e164-phone-numbers")
-	chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.Flags().String("e164-phone-numbers", "", "List of phone numbers, in E.164 format.")
+		chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.Flags().String("force-associate", "", "If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector and removes any previously existing associations.")
+		chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.MarkFlagRequired("e164-phone-numbers")
+		chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_associatePhoneNumbersWithVoiceConnectorCmd)
 }

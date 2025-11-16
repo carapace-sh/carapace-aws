@@ -12,7 +12,9 @@ var organizations_enableAllFeaturesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_enableAllFeaturesCmd).Standalone()
+	carapace.Gen(organizations_enableAllFeaturesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_enableAllFeaturesCmd).Standalone()
 
+	})
 	organizationsCmd.AddCommand(organizations_enableAllFeaturesCmd)
 }

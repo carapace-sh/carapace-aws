@@ -12,11 +12,13 @@ var omics_listVariantStoresCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_listVariantStoresCmd).Standalone()
+	carapace.Gen(omics_listVariantStoresCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_listVariantStoresCmd).Standalone()
 
-	omics_listVariantStoresCmd.Flags().String("filter", "", "A filter to apply to the list.")
-	omics_listVariantStoresCmd.Flags().String("ids", "", "A list of store IDs.")
-	omics_listVariantStoresCmd.Flags().String("max-results", "", "The maximum number of stores to return in one page of results.")
-	omics_listVariantStoresCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		omics_listVariantStoresCmd.Flags().String("filter", "", "A filter to apply to the list.")
+		omics_listVariantStoresCmd.Flags().String("ids", "", "A list of store IDs.")
+		omics_listVariantStoresCmd.Flags().String("max-results", "", "The maximum number of stores to return in one page of results.")
+		omics_listVariantStoresCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+	})
 	omicsCmd.AddCommand(omics_listVariantStoresCmd)
 }

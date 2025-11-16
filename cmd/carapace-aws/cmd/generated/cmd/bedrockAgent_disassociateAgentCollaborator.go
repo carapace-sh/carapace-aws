@@ -12,13 +12,15 @@ var bedrockAgent_disassociateAgentCollaboratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_disassociateAgentCollaboratorCmd).Standalone()
+	carapace.Gen(bedrockAgent_disassociateAgentCollaboratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_disassociateAgentCollaboratorCmd).Standalone()
 
-	bedrockAgent_disassociateAgentCollaboratorCmd.Flags().String("agent-id", "", "An agent ID.")
-	bedrockAgent_disassociateAgentCollaboratorCmd.Flags().String("agent-version", "", "The agent's version.")
-	bedrockAgent_disassociateAgentCollaboratorCmd.Flags().String("collaborator-id", "", "The collaborator's ID.")
-	bedrockAgent_disassociateAgentCollaboratorCmd.MarkFlagRequired("agent-id")
-	bedrockAgent_disassociateAgentCollaboratorCmd.MarkFlagRequired("agent-version")
-	bedrockAgent_disassociateAgentCollaboratorCmd.MarkFlagRequired("collaborator-id")
+		bedrockAgent_disassociateAgentCollaboratorCmd.Flags().String("agent-id", "", "An agent ID.")
+		bedrockAgent_disassociateAgentCollaboratorCmd.Flags().String("agent-version", "", "The agent's version.")
+		bedrockAgent_disassociateAgentCollaboratorCmd.Flags().String("collaborator-id", "", "The collaborator's ID.")
+		bedrockAgent_disassociateAgentCollaboratorCmd.MarkFlagRequired("agent-id")
+		bedrockAgent_disassociateAgentCollaboratorCmd.MarkFlagRequired("agent-version")
+		bedrockAgent_disassociateAgentCollaboratorCmd.MarkFlagRequired("collaborator-id")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_disassociateAgentCollaboratorCmd)
 }

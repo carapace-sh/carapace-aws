@@ -12,9 +12,11 @@ var directconnect_deleteVirtualInterfaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_deleteVirtualInterfaceCmd).Standalone()
+	carapace.Gen(directconnect_deleteVirtualInterfaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_deleteVirtualInterfaceCmd).Standalone()
 
-	directconnect_deleteVirtualInterfaceCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
-	directconnect_deleteVirtualInterfaceCmd.MarkFlagRequired("virtual-interface-id")
+		directconnect_deleteVirtualInterfaceCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
+		directconnect_deleteVirtualInterfaceCmd.MarkFlagRequired("virtual-interface-id")
+	})
 	directconnectCmd.AddCommand(directconnect_deleteVirtualInterfaceCmd)
 }

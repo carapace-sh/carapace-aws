@@ -12,9 +12,11 @@ var sagemaker_deleteNotebookInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteNotebookInstanceCmd).Standalone()
+	carapace.Gen(sagemaker_deleteNotebookInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteNotebookInstanceCmd).Standalone()
 
-	sagemaker_deleteNotebookInstanceCmd.Flags().String("notebook-instance-name", "", "The name of the SageMaker AI notebook instance to delete.")
-	sagemaker_deleteNotebookInstanceCmd.MarkFlagRequired("notebook-instance-name")
+		sagemaker_deleteNotebookInstanceCmd.Flags().String("notebook-instance-name", "", "The name of the SageMaker AI notebook instance to delete.")
+		sagemaker_deleteNotebookInstanceCmd.MarkFlagRequired("notebook-instance-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteNotebookInstanceCmd)
 }

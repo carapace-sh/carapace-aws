@@ -12,9 +12,11 @@ var kinesisvideo_describeStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_describeStreamCmd).Standalone()
+	carapace.Gen(kinesisvideo_describeStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_describeStreamCmd).Standalone()
 
-	kinesisvideo_describeStreamCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream.")
-	kinesisvideo_describeStreamCmd.Flags().String("stream-name", "", "The name of the stream.")
+		kinesisvideo_describeStreamCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream.")
+		kinesisvideo_describeStreamCmd.Flags().String("stream-name", "", "The name of the stream.")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_describeStreamCmd)
 }

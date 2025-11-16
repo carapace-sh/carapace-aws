@@ -12,9 +12,11 @@ var snowball_listClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_listClustersCmd).Standalone()
+	carapace.Gen(snowball_listClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_listClustersCmd).Standalone()
 
-	snowball_listClustersCmd.Flags().String("max-results", "", "The number of `ClusterListEntry` objects to return.")
-	snowball_listClustersCmd.Flags().String("next-token", "", "HTTP requests are stateless.")
+		snowball_listClustersCmd.Flags().String("max-results", "", "The number of `ClusterListEntry` objects to return.")
+		snowball_listClustersCmd.Flags().String("next-token", "", "HTTP requests are stateless.")
+	})
 	snowballCmd.AddCommand(snowball_listClustersCmd)
 }

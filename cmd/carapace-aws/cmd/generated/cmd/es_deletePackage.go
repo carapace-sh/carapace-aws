@@ -12,9 +12,11 @@ var es_deletePackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_deletePackageCmd).Standalone()
+	carapace.Gen(es_deletePackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_deletePackageCmd).Standalone()
 
-	es_deletePackageCmd.Flags().String("package-id", "", "Internal ID of the package that you want to delete.")
-	es_deletePackageCmd.MarkFlagRequired("package-id")
+		es_deletePackageCmd.Flags().String("package-id", "", "Internal ID of the package that you want to delete.")
+		es_deletePackageCmd.MarkFlagRequired("package-id")
+	})
 	esCmd.AddCommand(es_deletePackageCmd)
 }

@@ -12,9 +12,11 @@ var apprunner_startDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_startDeploymentCmd).Standalone()
+	carapace.Gen(apprunner_startDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_startDeploymentCmd).Standalone()
 
-	apprunner_startDeploymentCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to manually deploy to.")
-	apprunner_startDeploymentCmd.MarkFlagRequired("service-arn")
+		apprunner_startDeploymentCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to manually deploy to.")
+		apprunner_startDeploymentCmd.MarkFlagRequired("service-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_startDeploymentCmd)
 }

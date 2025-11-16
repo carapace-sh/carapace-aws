@@ -12,10 +12,12 @@ var resourcegroupstaggingapi_getTagValuesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourcegroupstaggingapi_getTagValuesCmd).Standalone()
+	carapace.Gen(resourcegroupstaggingapi_getTagValuesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourcegroupstaggingapi_getTagValuesCmd).Standalone()
 
-	resourcegroupstaggingapi_getTagValuesCmd.Flags().String("key", "", "Specifies the tag key for which you want to list all existing values that are currently used in the specified Amazon Web Services Region for the calling account.")
-	resourcegroupstaggingapi_getTagValuesCmd.Flags().String("pagination-token", "", "Specifies a `PaginationToken` response value from a previous request to indicate that you want the next page of results.")
-	resourcegroupstaggingapi_getTagValuesCmd.MarkFlagRequired("key")
+		resourcegroupstaggingapi_getTagValuesCmd.Flags().String("key", "", "Specifies the tag key for which you want to list all existing values that are currently used in the specified Amazon Web Services Region for the calling account.")
+		resourcegroupstaggingapi_getTagValuesCmd.Flags().String("pagination-token", "", "Specifies a `PaginationToken` response value from a previous request to indicate that you want the next page of results.")
+		resourcegroupstaggingapi_getTagValuesCmd.MarkFlagRequired("key")
+	})
 	resourcegroupstaggingapiCmd.AddCommand(resourcegroupstaggingapi_getTagValuesCmd)
 }

@@ -12,10 +12,12 @@ var xray_getSamplingTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getSamplingTargetsCmd).Standalone()
+	carapace.Gen(xray_getSamplingTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getSamplingTargetsCmd).Standalone()
 
-	xray_getSamplingTargetsCmd.Flags().String("sampling-boost-statistics-documents", "", "Information about rules that the service is using to boost sampling rate.")
-	xray_getSamplingTargetsCmd.Flags().String("sampling-statistics-documents", "", "Information about rules that the service is using to sample requests.")
-	xray_getSamplingTargetsCmd.MarkFlagRequired("sampling-statistics-documents")
+		xray_getSamplingTargetsCmd.Flags().String("sampling-boost-statistics-documents", "", "Information about rules that the service is using to boost sampling rate.")
+		xray_getSamplingTargetsCmd.Flags().String("sampling-statistics-documents", "", "Information about rules that the service is using to sample requests.")
+		xray_getSamplingTargetsCmd.MarkFlagRequired("sampling-statistics-documents")
+	})
 	xrayCmd.AddCommand(xray_getSamplingTargetsCmd)
 }

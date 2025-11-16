@@ -12,11 +12,13 @@ var gamelift_suspendGameServerGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_suspendGameServerGroupCmd).Standalone()
+	carapace.Gen(gamelift_suspendGameServerGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_suspendGameServerGroupCmd).Standalone()
 
-	gamelift_suspendGameServerGroupCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group.")
-	gamelift_suspendGameServerGroupCmd.Flags().String("suspend-actions", "", "The activity to suspend for this game server group.")
-	gamelift_suspendGameServerGroupCmd.MarkFlagRequired("game-server-group-name")
-	gamelift_suspendGameServerGroupCmd.MarkFlagRequired("suspend-actions")
+		gamelift_suspendGameServerGroupCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group.")
+		gamelift_suspendGameServerGroupCmd.Flags().String("suspend-actions", "", "The activity to suspend for this game server group.")
+		gamelift_suspendGameServerGroupCmd.MarkFlagRequired("game-server-group-name")
+		gamelift_suspendGameServerGroupCmd.MarkFlagRequired("suspend-actions")
+	})
 	gameliftCmd.AddCommand(gamelift_suspendGameServerGroupCmd)
 }

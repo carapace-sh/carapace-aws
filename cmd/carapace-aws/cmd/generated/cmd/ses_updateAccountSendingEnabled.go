@@ -12,8 +12,10 @@ var ses_updateAccountSendingEnabledCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_updateAccountSendingEnabledCmd).Standalone()
+	carapace.Gen(ses_updateAccountSendingEnabledCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_updateAccountSendingEnabledCmd).Standalone()
 
-	ses_updateAccountSendingEnabledCmd.Flags().String("enabled", "", "Describes whether email sending is enabled or disabled for your Amazon SES account in the current Amazon Web Services Region.")
+		ses_updateAccountSendingEnabledCmd.Flags().String("enabled", "", "Describes whether email sending is enabled or disabled for your Amazon SES account in the current Amazon Web Services Region.")
+	})
 	sesCmd.AddCommand(ses_updateAccountSendingEnabledCmd)
 }

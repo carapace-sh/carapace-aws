@@ -12,9 +12,11 @@ var tnb_listSolNetworkPackagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_listSolNetworkPackagesCmd).Standalone()
+	carapace.Gen(tnb_listSolNetworkPackagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_listSolNetworkPackagesCmd).Standalone()
 
-	tnb_listSolNetworkPackagesCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	tnb_listSolNetworkPackagesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		tnb_listSolNetworkPackagesCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		tnb_listSolNetworkPackagesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	tnbCmd.AddCommand(tnb_listSolNetworkPackagesCmd)
 }

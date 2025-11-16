@@ -12,7 +12,9 @@ var observabilityadminCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadminCmd).Standalone()
+	carapace.Gen(observabilityadminCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadminCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(observabilityadminCmd)
 }

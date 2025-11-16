@@ -12,9 +12,11 @@ var athena_stopQueryExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_stopQueryExecutionCmd).Standalone()
+	carapace.Gen(athena_stopQueryExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_stopQueryExecutionCmd).Standalone()
 
-	athena_stopQueryExecutionCmd.Flags().String("query-execution-id", "", "The unique ID of the query execution to stop.")
-	athena_stopQueryExecutionCmd.MarkFlagRequired("query-execution-id")
+		athena_stopQueryExecutionCmd.Flags().String("query-execution-id", "", "The unique ID of the query execution to stop.")
+		athena_stopQueryExecutionCmd.MarkFlagRequired("query-execution-id")
+	})
 	athenaCmd.AddCommand(athena_stopQueryExecutionCmd)
 }

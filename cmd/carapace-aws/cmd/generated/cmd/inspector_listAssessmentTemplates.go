@@ -12,11 +12,13 @@ var inspector_listAssessmentTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_listAssessmentTemplatesCmd).Standalone()
+	carapace.Gen(inspector_listAssessmentTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_listAssessmentTemplatesCmd).Standalone()
 
-	inspector_listAssessmentTemplatesCmd.Flags().String("assessment-target-arns", "", "A list of ARNs that specifies the assessment targets whose assessment templates you want to list.")
-	inspector_listAssessmentTemplatesCmd.Flags().String("filter", "", "You can use this parameter to specify a subset of data to be included in the action's response.")
-	inspector_listAssessmentTemplatesCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
-	inspector_listAssessmentTemplatesCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+		inspector_listAssessmentTemplatesCmd.Flags().String("assessment-target-arns", "", "A list of ARNs that specifies the assessment targets whose assessment templates you want to list.")
+		inspector_listAssessmentTemplatesCmd.Flags().String("filter", "", "You can use this parameter to specify a subset of data to be included in the action's response.")
+		inspector_listAssessmentTemplatesCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
+		inspector_listAssessmentTemplatesCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+	})
 	inspectorCmd.AddCommand(inspector_listAssessmentTemplatesCmd)
 }

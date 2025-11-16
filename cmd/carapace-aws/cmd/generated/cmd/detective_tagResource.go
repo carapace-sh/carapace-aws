@@ -12,11 +12,13 @@ var detective_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_tagResourceCmd).Standalone()
+	carapace.Gen(detective_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_tagResourceCmd).Standalone()
 
-	detective_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the behavior graph to assign the tags to.")
-	detective_tagResourceCmd.Flags().String("tags", "", "The tags to assign to the behavior graph.")
-	detective_tagResourceCmd.MarkFlagRequired("resource-arn")
-	detective_tagResourceCmd.MarkFlagRequired("tags")
+		detective_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the behavior graph to assign the tags to.")
+		detective_tagResourceCmd.Flags().String("tags", "", "The tags to assign to the behavior graph.")
+		detective_tagResourceCmd.MarkFlagRequired("resource-arn")
+		detective_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	detectiveCmd.AddCommand(detective_tagResourceCmd)
 }

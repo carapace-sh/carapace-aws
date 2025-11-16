@@ -12,9 +12,11 @@ var iotfleetwise_getCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_getCampaignCmd).Standalone()
+	carapace.Gen(iotfleetwise_getCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_getCampaignCmd).Standalone()
 
-	iotfleetwise_getCampaignCmd.Flags().String("name", "", "The name of the campaign to retrieve information about.")
-	iotfleetwise_getCampaignCmd.MarkFlagRequired("name")
+		iotfleetwise_getCampaignCmd.Flags().String("name", "", "The name of the campaign to retrieve information about.")
+		iotfleetwise_getCampaignCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_getCampaignCmd)
 }

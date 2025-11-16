@@ -12,7 +12,9 @@ var athenaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athenaCmd).Standalone()
+	carapace.Gen(athenaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athenaCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(athenaCmd)
 }

@@ -12,7 +12,9 @@ var cloudsearchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearchCmd).Standalone()
+	carapace.Gen(cloudsearchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearchCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cloudsearchCmd)
 }

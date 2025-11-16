@@ -12,9 +12,11 @@ var inspector_describeResourceGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_describeResourceGroupsCmd).Standalone()
+	carapace.Gen(inspector_describeResourceGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_describeResourceGroupsCmd).Standalone()
 
-	inspector_describeResourceGroupsCmd.Flags().String("resource-group-arns", "", "The ARN that specifies the resource group that you want to describe.")
-	inspector_describeResourceGroupsCmd.MarkFlagRequired("resource-group-arns")
+		inspector_describeResourceGroupsCmd.Flags().String("resource-group-arns", "", "The ARN that specifies the resource group that you want to describe.")
+		inspector_describeResourceGroupsCmd.MarkFlagRequired("resource-group-arns")
+	})
 	inspectorCmd.AddCommand(inspector_describeResourceGroupsCmd)
 }

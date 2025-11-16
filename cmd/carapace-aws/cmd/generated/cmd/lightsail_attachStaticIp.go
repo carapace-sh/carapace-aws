@@ -12,11 +12,13 @@ var lightsail_attachStaticIpCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_attachStaticIpCmd).Standalone()
+	carapace.Gen(lightsail_attachStaticIpCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_attachStaticIpCmd).Standalone()
 
-	lightsail_attachStaticIpCmd.Flags().String("instance-name", "", "The instance name to which you want to attach the static IP address.")
-	lightsail_attachStaticIpCmd.Flags().String("static-ip-name", "", "The name of the static IP.")
-	lightsail_attachStaticIpCmd.MarkFlagRequired("instance-name")
-	lightsail_attachStaticIpCmd.MarkFlagRequired("static-ip-name")
+		lightsail_attachStaticIpCmd.Flags().String("instance-name", "", "The instance name to which you want to attach the static IP address.")
+		lightsail_attachStaticIpCmd.Flags().String("static-ip-name", "", "The name of the static IP.")
+		lightsail_attachStaticIpCmd.MarkFlagRequired("instance-name")
+		lightsail_attachStaticIpCmd.MarkFlagRequired("static-ip-name")
+	})
 	lightsailCmd.AddCommand(lightsail_attachStaticIpCmd)
 }

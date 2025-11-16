@@ -12,9 +12,11 @@ var iotManagedIntegrations_listProvisioningProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_listProvisioningProfilesCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_listProvisioningProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_listProvisioningProfilesCmd).Standalone()
 
-	iotManagedIntegrations_listProvisioningProfilesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iotManagedIntegrations_listProvisioningProfilesCmd.Flags().String("next-token", "", "A token that can be used to retrieve the next set of results.")
+		iotManagedIntegrations_listProvisioningProfilesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iotManagedIntegrations_listProvisioningProfilesCmd.Flags().String("next-token", "", "A token that can be used to retrieve the next set of results.")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_listProvisioningProfilesCmd)
 }

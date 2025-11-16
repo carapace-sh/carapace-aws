@@ -12,9 +12,11 @@ var glue_deleteDevEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteDevEndpointCmd).Standalone()
+	carapace.Gen(glue_deleteDevEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteDevEndpointCmd).Standalone()
 
-	glue_deleteDevEndpointCmd.Flags().String("endpoint-name", "", "The name of the `DevEndpoint`.")
-	glue_deleteDevEndpointCmd.MarkFlagRequired("endpoint-name")
+		glue_deleteDevEndpointCmd.Flags().String("endpoint-name", "", "The name of the `DevEndpoint`.")
+		glue_deleteDevEndpointCmd.MarkFlagRequired("endpoint-name")
+	})
 	glueCmd.AddCommand(glue_deleteDevEndpointCmd)
 }

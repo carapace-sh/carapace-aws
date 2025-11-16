@@ -12,9 +12,11 @@ var ssmSap_startApplicationRefreshCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_startApplicationRefreshCmd).Standalone()
+	carapace.Gen(ssmSap_startApplicationRefreshCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_startApplicationRefreshCmd).Standalone()
 
-	ssmSap_startApplicationRefreshCmd.Flags().String("application-id", "", "The ID of the application.")
-	ssmSap_startApplicationRefreshCmd.MarkFlagRequired("application-id")
+		ssmSap_startApplicationRefreshCmd.Flags().String("application-id", "", "The ID of the application.")
+		ssmSap_startApplicationRefreshCmd.MarkFlagRequired("application-id")
+	})
 	ssmSapCmd.AddCommand(ssmSap_startApplicationRefreshCmd)
 }

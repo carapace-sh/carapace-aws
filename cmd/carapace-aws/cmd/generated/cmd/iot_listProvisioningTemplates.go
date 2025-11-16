@@ -12,9 +12,11 @@ var iot_listProvisioningTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listProvisioningTemplatesCmd).Standalone()
+	carapace.Gen(iot_listProvisioningTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listProvisioningTemplatesCmd).Standalone()
 
-	iot_listProvisioningTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_listProvisioningTemplatesCmd.Flags().String("next-token", "", "A token to retrieve the next set of results.")
+		iot_listProvisioningTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_listProvisioningTemplatesCmd.Flags().String("next-token", "", "A token to retrieve the next set of results.")
+	})
 	iotCmd.AddCommand(iot_listProvisioningTemplatesCmd)
 }

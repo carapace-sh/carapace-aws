@@ -12,10 +12,12 @@ var lightsail_createKeyPairCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_createKeyPairCmd).Standalone()
+	carapace.Gen(lightsail_createKeyPairCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_createKeyPairCmd).Standalone()
 
-	lightsail_createKeyPairCmd.Flags().String("key-pair-name", "", "The name for your new key pair.")
-	lightsail_createKeyPairCmd.Flags().String("tags", "", "The tag keys and optional values to add to the resource during create.")
-	lightsail_createKeyPairCmd.MarkFlagRequired("key-pair-name")
+		lightsail_createKeyPairCmd.Flags().String("key-pair-name", "", "The name for your new key pair.")
+		lightsail_createKeyPairCmd.Flags().String("tags", "", "The tag keys and optional values to add to the resource during create.")
+		lightsail_createKeyPairCmd.MarkFlagRequired("key-pair-name")
+	})
 	lightsailCmd.AddCommand(lightsail_createKeyPairCmd)
 }

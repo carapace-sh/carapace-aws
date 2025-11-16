@@ -12,9 +12,11 @@ var chime_createAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_createAccountCmd).Standalone()
+	carapace.Gen(chime_createAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_createAccountCmd).Standalone()
 
-	chime_createAccountCmd.Flags().String("name", "", "The name of the Amazon Chime account.")
-	chime_createAccountCmd.MarkFlagRequired("name")
+		chime_createAccountCmd.Flags().String("name", "", "The name of the Amazon Chime account.")
+		chime_createAccountCmd.MarkFlagRequired("name")
+	})
 	chimeCmd.AddCommand(chime_createAccountCmd)
 }

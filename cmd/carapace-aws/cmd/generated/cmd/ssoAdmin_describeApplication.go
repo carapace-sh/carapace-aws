@@ -12,9 +12,11 @@ var ssoAdmin_describeApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_describeApplicationCmd).Standalone()
+	carapace.Gen(ssoAdmin_describeApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_describeApplicationCmd).Standalone()
 
-	ssoAdmin_describeApplicationCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
-	ssoAdmin_describeApplicationCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_describeApplicationCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
+		ssoAdmin_describeApplicationCmd.MarkFlagRequired("application-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_describeApplicationCmd)
 }

@@ -12,11 +12,13 @@ var clouddirectory_listTypedLinkFacetNamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_listTypedLinkFacetNamesCmd).Standalone()
+	carapace.Gen(clouddirectory_listTypedLinkFacetNamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_listTypedLinkFacetNamesCmd).Standalone()
 
-	clouddirectory_listTypedLinkFacetNamesCmd.Flags().String("max-results", "", "The maximum number of results to retrieve.")
-	clouddirectory_listTypedLinkFacetNamesCmd.Flags().String("next-token", "", "The pagination token.")
-	clouddirectory_listTypedLinkFacetNamesCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) that is associated with the schema.")
-	clouddirectory_listTypedLinkFacetNamesCmd.MarkFlagRequired("schema-arn")
+		clouddirectory_listTypedLinkFacetNamesCmd.Flags().String("max-results", "", "The maximum number of results to retrieve.")
+		clouddirectory_listTypedLinkFacetNamesCmd.Flags().String("next-token", "", "The pagination token.")
+		clouddirectory_listTypedLinkFacetNamesCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) that is associated with the schema.")
+		clouddirectory_listTypedLinkFacetNamesCmd.MarkFlagRequired("schema-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_listTypedLinkFacetNamesCmd)
 }

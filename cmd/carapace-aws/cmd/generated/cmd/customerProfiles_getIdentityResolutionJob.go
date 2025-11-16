@@ -12,11 +12,13 @@ var customerProfiles_getIdentityResolutionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getIdentityResolutionJobCmd).Standalone()
+	carapace.Gen(customerProfiles_getIdentityResolutionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getIdentityResolutionJobCmd).Standalone()
 
-	customerProfiles_getIdentityResolutionJobCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getIdentityResolutionJobCmd.Flags().String("job-id", "", "The unique identifier of the Identity Resolution Job.")
-	customerProfiles_getIdentityResolutionJobCmd.MarkFlagRequired("domain-name")
-	customerProfiles_getIdentityResolutionJobCmd.MarkFlagRequired("job-id")
+		customerProfiles_getIdentityResolutionJobCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getIdentityResolutionJobCmd.Flags().String("job-id", "", "The unique identifier of the Identity Resolution Job.")
+		customerProfiles_getIdentityResolutionJobCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getIdentityResolutionJobCmd.MarkFlagRequired("job-id")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getIdentityResolutionJobCmd)
 }

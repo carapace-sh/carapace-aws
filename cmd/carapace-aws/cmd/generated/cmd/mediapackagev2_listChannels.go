@@ -12,11 +12,13 @@ var mediapackagev2_listChannelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackagev2_listChannelsCmd).Standalone()
+	carapace.Gen(mediapackagev2_listChannelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackagev2_listChannelsCmd).Standalone()
 
-	mediapackagev2_listChannelsCmd.Flags().String("channel-group-name", "", "The name that describes the channel group.")
-	mediapackagev2_listChannelsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	mediapackagev2_listChannelsCmd.Flags().String("next-token", "", "The pagination token from the GET list request.")
-	mediapackagev2_listChannelsCmd.MarkFlagRequired("channel-group-name")
+		mediapackagev2_listChannelsCmd.Flags().String("channel-group-name", "", "The name that describes the channel group.")
+		mediapackagev2_listChannelsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		mediapackagev2_listChannelsCmd.Flags().String("next-token", "", "The pagination token from the GET list request.")
+		mediapackagev2_listChannelsCmd.MarkFlagRequired("channel-group-name")
+	})
 	mediapackagev2Cmd.AddCommand(mediapackagev2_listChannelsCmd)
 }

@@ -12,13 +12,15 @@ var chimeSdkMeetings_updateAttendeeCapabilitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMeetings_updateAttendeeCapabilitiesCmd).Standalone()
+	carapace.Gen(chimeSdkMeetings_updateAttendeeCapabilitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMeetings_updateAttendeeCapabilitiesCmd).Standalone()
 
-	chimeSdkMeetings_updateAttendeeCapabilitiesCmd.Flags().String("attendee-id", "", "The ID of the attendee associated with the update request.")
-	chimeSdkMeetings_updateAttendeeCapabilitiesCmd.Flags().String("capabilities", "", "The capabilities that you want to update.")
-	chimeSdkMeetings_updateAttendeeCapabilitiesCmd.Flags().String("meeting-id", "", "The ID of the meeting associated with the update request.")
-	chimeSdkMeetings_updateAttendeeCapabilitiesCmd.MarkFlagRequired("attendee-id")
-	chimeSdkMeetings_updateAttendeeCapabilitiesCmd.MarkFlagRequired("capabilities")
-	chimeSdkMeetings_updateAttendeeCapabilitiesCmd.MarkFlagRequired("meeting-id")
+		chimeSdkMeetings_updateAttendeeCapabilitiesCmd.Flags().String("attendee-id", "", "The ID of the attendee associated with the update request.")
+		chimeSdkMeetings_updateAttendeeCapabilitiesCmd.Flags().String("capabilities", "", "The capabilities that you want to update.")
+		chimeSdkMeetings_updateAttendeeCapabilitiesCmd.Flags().String("meeting-id", "", "The ID of the meeting associated with the update request.")
+		chimeSdkMeetings_updateAttendeeCapabilitiesCmd.MarkFlagRequired("attendee-id")
+		chimeSdkMeetings_updateAttendeeCapabilitiesCmd.MarkFlagRequired("capabilities")
+		chimeSdkMeetings_updateAttendeeCapabilitiesCmd.MarkFlagRequired("meeting-id")
+	})
 	chimeSdkMeetingsCmd.AddCommand(chimeSdkMeetings_updateAttendeeCapabilitiesCmd)
 }

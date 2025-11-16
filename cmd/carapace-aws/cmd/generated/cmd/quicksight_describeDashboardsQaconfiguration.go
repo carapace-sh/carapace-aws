@@ -12,9 +12,11 @@ var quicksight_describeDashboardsQaconfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeDashboardsQaconfigurationCmd).Standalone()
+	carapace.Gen(quicksight_describeDashboardsQaconfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeDashboardsQaconfigurationCmd).Standalone()
 
-	quicksight_describeDashboardsQaconfigurationCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard QA configuration that you want described.")
-	quicksight_describeDashboardsQaconfigurationCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeDashboardsQaconfigurationCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard QA configuration that you want described.")
+		quicksight_describeDashboardsQaconfigurationCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeDashboardsQaconfigurationCmd)
 }

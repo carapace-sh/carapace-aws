@@ -12,10 +12,12 @@ var networkFirewall_describeRuleGroupMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_describeRuleGroupMetadataCmd).Standalone()
+	carapace.Gen(networkFirewall_describeRuleGroupMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_describeRuleGroupMetadataCmd).Standalone()
 
-	networkFirewall_describeRuleGroupMetadataCmd.Flags().String("rule-group-arn", "", "The descriptive name of the rule group.")
-	networkFirewall_describeRuleGroupMetadataCmd.Flags().String("rule-group-name", "", "The descriptive name of the rule group.")
-	networkFirewall_describeRuleGroupMetadataCmd.Flags().String("type", "", "Indicates whether the rule group is stateless or stateful.")
+		networkFirewall_describeRuleGroupMetadataCmd.Flags().String("rule-group-arn", "", "The descriptive name of the rule group.")
+		networkFirewall_describeRuleGroupMetadataCmd.Flags().String("rule-group-name", "", "The descriptive name of the rule group.")
+		networkFirewall_describeRuleGroupMetadataCmd.Flags().String("type", "", "Indicates whether the rule group is stateless or stateful.")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_describeRuleGroupMetadataCmd)
 }

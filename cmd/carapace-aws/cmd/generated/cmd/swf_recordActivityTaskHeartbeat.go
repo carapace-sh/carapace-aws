@@ -12,10 +12,12 @@ var swf_recordActivityTaskHeartbeatCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_recordActivityTaskHeartbeatCmd).Standalone()
+	carapace.Gen(swf_recordActivityTaskHeartbeatCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_recordActivityTaskHeartbeatCmd).Standalone()
 
-	swf_recordActivityTaskHeartbeatCmd.Flags().String("details", "", "If specified, contains details about the progress of the task.")
-	swf_recordActivityTaskHeartbeatCmd.Flags().String("task-token", "", "The `taskToken` of the [ActivityTask]().")
-	swf_recordActivityTaskHeartbeatCmd.MarkFlagRequired("task-token")
+		swf_recordActivityTaskHeartbeatCmd.Flags().String("details", "", "If specified, contains details about the progress of the task.")
+		swf_recordActivityTaskHeartbeatCmd.Flags().String("task-token", "", "The `taskToken` of the [ActivityTask]().")
+		swf_recordActivityTaskHeartbeatCmd.MarkFlagRequired("task-token")
+	})
 	swfCmd.AddCommand(swf_recordActivityTaskHeartbeatCmd)
 }

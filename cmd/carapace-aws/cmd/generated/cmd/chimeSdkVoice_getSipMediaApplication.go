@@ -12,9 +12,11 @@ var chimeSdkVoice_getSipMediaApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_getSipMediaApplicationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_getSipMediaApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_getSipMediaApplicationCmd).Standalone()
 
-	chimeSdkVoice_getSipMediaApplicationCmd.Flags().String("sip-media-application-id", "", "The SIP media application ID .")
-	chimeSdkVoice_getSipMediaApplicationCmd.MarkFlagRequired("sip-media-application-id")
+		chimeSdkVoice_getSipMediaApplicationCmd.Flags().String("sip-media-application-id", "", "The SIP media application ID .")
+		chimeSdkVoice_getSipMediaApplicationCmd.MarkFlagRequired("sip-media-application-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_getSipMediaApplicationCmd)
 }

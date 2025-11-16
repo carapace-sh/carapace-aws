@@ -12,9 +12,11 @@ var timestreamWrite_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamWrite_listTagsForResourceCmd).Standalone()
+	carapace.Gen(timestreamWrite_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamWrite_listTagsForResourceCmd).Standalone()
 
-	timestreamWrite_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Timestream resource with tags to be listed.")
-	timestreamWrite_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		timestreamWrite_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Timestream resource with tags to be listed.")
+		timestreamWrite_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	timestreamWriteCmd.AddCommand(timestreamWrite_listTagsForResourceCmd)
 }

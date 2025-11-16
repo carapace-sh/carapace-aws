@@ -12,10 +12,12 @@ var imagebuilder_listImageScanFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_listImageScanFindingsCmd).Standalone()
+	carapace.Gen(imagebuilder_listImageScanFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_listImageScanFindingsCmd).Standalone()
 
-	imagebuilder_listImageScanFindingsCmd.Flags().String("filters", "", "An array of name value pairs that you can use to filter your results.")
-	imagebuilder_listImageScanFindingsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
-	imagebuilder_listImageScanFindingsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		imagebuilder_listImageScanFindingsCmd.Flags().String("filters", "", "An array of name value pairs that you can use to filter your results.")
+		imagebuilder_listImageScanFindingsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
+		imagebuilder_listImageScanFindingsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_listImageScanFindingsCmd)
 }

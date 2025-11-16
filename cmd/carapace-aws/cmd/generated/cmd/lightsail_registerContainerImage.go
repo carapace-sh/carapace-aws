@@ -12,13 +12,15 @@ var lightsail_registerContainerImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_registerContainerImageCmd).Standalone()
+	carapace.Gen(lightsail_registerContainerImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_registerContainerImageCmd).Standalone()
 
-	lightsail_registerContainerImageCmd.Flags().String("digest", "", "The digest of the container image to be registered.")
-	lightsail_registerContainerImageCmd.Flags().String("label", "", "The label for the container image when it's registered to the container service.")
-	lightsail_registerContainerImageCmd.Flags().String("service-name", "", "The name of the container service for which to register a container image.")
-	lightsail_registerContainerImageCmd.MarkFlagRequired("digest")
-	lightsail_registerContainerImageCmd.MarkFlagRequired("label")
-	lightsail_registerContainerImageCmd.MarkFlagRequired("service-name")
+		lightsail_registerContainerImageCmd.Flags().String("digest", "", "The digest of the container image to be registered.")
+		lightsail_registerContainerImageCmd.Flags().String("label", "", "The label for the container image when it's registered to the container service.")
+		lightsail_registerContainerImageCmd.Flags().String("service-name", "", "The name of the container service for which to register a container image.")
+		lightsail_registerContainerImageCmd.MarkFlagRequired("digest")
+		lightsail_registerContainerImageCmd.MarkFlagRequired("label")
+		lightsail_registerContainerImageCmd.MarkFlagRequired("service-name")
+	})
 	lightsailCmd.AddCommand(lightsail_registerContainerImageCmd)
 }

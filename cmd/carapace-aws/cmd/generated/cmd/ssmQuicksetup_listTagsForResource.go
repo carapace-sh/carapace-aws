@@ -12,9 +12,11 @@ var ssmQuicksetup_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmQuicksetup_listTagsForResourceCmd).Standalone()
+	carapace.Gen(ssmQuicksetup_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmQuicksetup_listTagsForResourceCmd).Standalone()
 
-	ssmQuicksetup_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource the tag is assigned to.")
-	ssmQuicksetup_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		ssmQuicksetup_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource the tag is assigned to.")
+		ssmQuicksetup_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	ssmQuicksetupCmd.AddCommand(ssmQuicksetup_listTagsForResourceCmd)
 }

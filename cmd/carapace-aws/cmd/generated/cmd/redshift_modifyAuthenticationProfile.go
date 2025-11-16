@@ -12,11 +12,13 @@ var redshift_modifyAuthenticationProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_modifyAuthenticationProfileCmd).Standalone()
+	carapace.Gen(redshift_modifyAuthenticationProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_modifyAuthenticationProfileCmd).Standalone()
 
-	redshift_modifyAuthenticationProfileCmd.Flags().String("authentication-profile-content", "", "The new content of the authentication profile in JSON format.")
-	redshift_modifyAuthenticationProfileCmd.Flags().String("authentication-profile-name", "", "The name of the authentication profile to replace.")
-	redshift_modifyAuthenticationProfileCmd.MarkFlagRequired("authentication-profile-content")
-	redshift_modifyAuthenticationProfileCmd.MarkFlagRequired("authentication-profile-name")
+		redshift_modifyAuthenticationProfileCmd.Flags().String("authentication-profile-content", "", "The new content of the authentication profile in JSON format.")
+		redshift_modifyAuthenticationProfileCmd.Flags().String("authentication-profile-name", "", "The name of the authentication profile to replace.")
+		redshift_modifyAuthenticationProfileCmd.MarkFlagRequired("authentication-profile-content")
+		redshift_modifyAuthenticationProfileCmd.MarkFlagRequired("authentication-profile-name")
+	})
 	redshiftCmd.AddCommand(redshift_modifyAuthenticationProfileCmd)
 }

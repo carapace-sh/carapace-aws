@@ -12,9 +12,11 @@ var comprehend_describeEntityRecognizerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeEntityRecognizerCmd).Standalone()
+	carapace.Gen(comprehend_describeEntityRecognizerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeEntityRecognizerCmd).Standalone()
 
-	comprehend_describeEntityRecognizerCmd.Flags().String("entity-recognizer-arn", "", "The Amazon Resource Name (ARN) that identifies the entity recognizer.")
-	comprehend_describeEntityRecognizerCmd.MarkFlagRequired("entity-recognizer-arn")
+		comprehend_describeEntityRecognizerCmd.Flags().String("entity-recognizer-arn", "", "The Amazon Resource Name (ARN) that identifies the entity recognizer.")
+		comprehend_describeEntityRecognizerCmd.MarkFlagRequired("entity-recognizer-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_describeEntityRecognizerCmd)
 }

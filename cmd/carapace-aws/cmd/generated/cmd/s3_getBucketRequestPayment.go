@@ -12,10 +12,12 @@ var s3_getBucketRequestPaymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketRequestPaymentCmd).Standalone()
+	carapace.Gen(s3_getBucketRequestPaymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketRequestPaymentCmd).Standalone()
 
-	s3_getBucketRequestPaymentCmd.Flags().String("bucket", "", "The name of the bucket for which to get the payment request configuration")
-	s3_getBucketRequestPaymentCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketRequestPaymentCmd.MarkFlagRequired("bucket")
+		s3_getBucketRequestPaymentCmd.Flags().String("bucket", "", "The name of the bucket for which to get the payment request configuration")
+		s3_getBucketRequestPaymentCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketRequestPaymentCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getBucketRequestPaymentCmd)
 }

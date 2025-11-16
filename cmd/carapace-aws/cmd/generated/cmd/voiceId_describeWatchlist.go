@@ -12,11 +12,13 @@ var voiceId_describeWatchlistCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_describeWatchlistCmd).Standalone()
+	carapace.Gen(voiceId_describeWatchlistCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_describeWatchlistCmd).Standalone()
 
-	voiceId_describeWatchlistCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the watchlist.")
-	voiceId_describeWatchlistCmd.Flags().String("watchlist-id", "", "The identifier of the watchlist that you are describing.")
-	voiceId_describeWatchlistCmd.MarkFlagRequired("domain-id")
-	voiceId_describeWatchlistCmd.MarkFlagRequired("watchlist-id")
+		voiceId_describeWatchlistCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the watchlist.")
+		voiceId_describeWatchlistCmd.Flags().String("watchlist-id", "", "The identifier of the watchlist that you are describing.")
+		voiceId_describeWatchlistCmd.MarkFlagRequired("domain-id")
+		voiceId_describeWatchlistCmd.MarkFlagRequired("watchlist-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_describeWatchlistCmd)
 }

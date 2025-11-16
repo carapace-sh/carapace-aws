@@ -12,9 +12,11 @@ var shield_disassociateDrtlogBucketCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_disassociateDrtlogBucketCmd).Standalone()
+	carapace.Gen(shield_disassociateDrtlogBucketCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_disassociateDrtlogBucketCmd).Standalone()
 
-	shield_disassociateDrtlogBucketCmd.Flags().String("log-bucket", "", "The Amazon S3 bucket that contains the logs that you want to share.")
-	shield_disassociateDrtlogBucketCmd.MarkFlagRequired("log-bucket")
+		shield_disassociateDrtlogBucketCmd.Flags().String("log-bucket", "", "The Amazon S3 bucket that contains the logs that you want to share.")
+		shield_disassociateDrtlogBucketCmd.MarkFlagRequired("log-bucket")
+	})
 	shieldCmd.AddCommand(shield_disassociateDrtlogBucketCmd)
 }

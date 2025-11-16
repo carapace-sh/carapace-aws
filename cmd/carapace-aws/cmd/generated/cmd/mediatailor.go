@@ -12,7 +12,9 @@ var mediatailorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailorCmd).Standalone()
+	carapace.Gen(mediatailorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailorCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(mediatailorCmd)
 }

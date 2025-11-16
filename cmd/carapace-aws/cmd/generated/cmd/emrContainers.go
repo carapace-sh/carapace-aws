@@ -12,7 +12,9 @@ var emrContainersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainersCmd).Standalone()
+	carapace.Gen(emrContainersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainersCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(emrContainersCmd)
 }

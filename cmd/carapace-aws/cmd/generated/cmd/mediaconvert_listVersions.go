@@ -12,9 +12,11 @@ var mediaconvert_listVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_listVersionsCmd).Standalone()
+	carapace.Gen(mediaconvert_listVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_listVersionsCmd).Standalone()
 
-	mediaconvert_listVersionsCmd.Flags().String("max-results", "", "Optional.")
-	mediaconvert_listVersionsCmd.Flags().String("next-token", "", "Optional.")
+		mediaconvert_listVersionsCmd.Flags().String("max-results", "", "Optional.")
+		mediaconvert_listVersionsCmd.Flags().String("next-token", "", "Optional.")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_listVersionsCmd)
 }

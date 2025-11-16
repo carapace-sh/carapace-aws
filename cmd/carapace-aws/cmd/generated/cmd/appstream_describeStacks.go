@@ -12,9 +12,11 @@ var appstream_describeStacksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_describeStacksCmd).Standalone()
+	carapace.Gen(appstream_describeStacksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_describeStacksCmd).Standalone()
 
-	appstream_describeStacksCmd.Flags().String("names", "", "The names of the stacks to describe.")
-	appstream_describeStacksCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+		appstream_describeStacksCmd.Flags().String("names", "", "The names of the stacks to describe.")
+		appstream_describeStacksCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+	})
 	appstreamCmd.AddCommand(appstream_describeStacksCmd)
 }

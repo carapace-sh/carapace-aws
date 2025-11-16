@@ -12,11 +12,13 @@ var swf_respondActivityTaskFailedCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_respondActivityTaskFailedCmd).Standalone()
+	carapace.Gen(swf_respondActivityTaskFailedCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_respondActivityTaskFailedCmd).Standalone()
 
-	swf_respondActivityTaskFailedCmd.Flags().String("details", "", "Detailed information about the failure.")
-	swf_respondActivityTaskFailedCmd.Flags().String("reason", "", "Description of the error that may assist in diagnostics.")
-	swf_respondActivityTaskFailedCmd.Flags().String("task-token", "", "The `taskToken` of the [ActivityTask]().")
-	swf_respondActivityTaskFailedCmd.MarkFlagRequired("task-token")
+		swf_respondActivityTaskFailedCmd.Flags().String("details", "", "Detailed information about the failure.")
+		swf_respondActivityTaskFailedCmd.Flags().String("reason", "", "Description of the error that may assist in diagnostics.")
+		swf_respondActivityTaskFailedCmd.Flags().String("task-token", "", "The `taskToken` of the [ActivityTask]().")
+		swf_respondActivityTaskFailedCmd.MarkFlagRequired("task-token")
+	})
 	swfCmd.AddCommand(swf_respondActivityTaskFailedCmd)
 }

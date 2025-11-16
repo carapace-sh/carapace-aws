@@ -12,9 +12,11 @@ var supplychain_deleteInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_deleteInstanceCmd).Standalone()
+	carapace.Gen(supplychain_deleteInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_deleteInstanceCmd).Standalone()
 
-	supplychain_deleteInstanceCmd.Flags().String("instance-id", "", "The AWS Supply Chain instance identifier.")
-	supplychain_deleteInstanceCmd.MarkFlagRequired("instance-id")
+		supplychain_deleteInstanceCmd.Flags().String("instance-id", "", "The AWS Supply Chain instance identifier.")
+		supplychain_deleteInstanceCmd.MarkFlagRequired("instance-id")
+	})
 	supplychainCmd.AddCommand(supplychain_deleteInstanceCmd)
 }

@@ -12,11 +12,13 @@ var account_listRegionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(account_listRegionsCmd).Standalone()
+	carapace.Gen(account_listRegionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(account_listRegionsCmd).Standalone()
 
-	account_listRegionsCmd.Flags().String("account-id", "", "Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
-	account_listRegionsCmd.Flags().String("max-results", "", "The total number of items to return in the command’s output.")
-	account_listRegionsCmd.Flags().String("next-token", "", "A token used to specify where to start paginating.")
-	account_listRegionsCmd.Flags().String("region-opt-status-contains", "", "A list of Region statuses (Enabling, Enabled, Disabling, Disabled, Enabled\\_by\\_default) to use to filter the list of Regions for a given account.")
+		account_listRegionsCmd.Flags().String("account-id", "", "Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
+		account_listRegionsCmd.Flags().String("max-results", "", "The total number of items to return in the command’s output.")
+		account_listRegionsCmd.Flags().String("next-token", "", "A token used to specify where to start paginating.")
+		account_listRegionsCmd.Flags().String("region-opt-status-contains", "", "A list of Region statuses (Enabling, Enabled, Disabling, Disabled, Enabled\\_by\\_default) to use to filter the list of Regions for a given account.")
+	})
 	accountCmd.AddCommand(account_listRegionsCmd)
 }

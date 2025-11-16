@@ -12,10 +12,12 @@ var glue_getWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getWorkflowCmd).Standalone()
+	carapace.Gen(glue_getWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getWorkflowCmd).Standalone()
 
-	glue_getWorkflowCmd.Flags().String("include-graph", "", "Specifies whether to include a graph when returning the workflow resource metadata.")
-	glue_getWorkflowCmd.Flags().String("name", "", "The name of the workflow to retrieve.")
-	glue_getWorkflowCmd.MarkFlagRequired("name")
+		glue_getWorkflowCmd.Flags().String("include-graph", "", "Specifies whether to include a graph when returning the workflow resource metadata.")
+		glue_getWorkflowCmd.Flags().String("name", "", "The name of the workflow to retrieve.")
+		glue_getWorkflowCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_getWorkflowCmd)
 }

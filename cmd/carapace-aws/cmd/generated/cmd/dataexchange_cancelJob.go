@@ -12,9 +12,11 @@ var dataexchange_cancelJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_cancelJobCmd).Standalone()
+	carapace.Gen(dataexchange_cancelJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_cancelJobCmd).Standalone()
 
-	dataexchange_cancelJobCmd.Flags().String("job-id", "", "The unique identifier for a job.")
-	dataexchange_cancelJobCmd.MarkFlagRequired("job-id")
+		dataexchange_cancelJobCmd.Flags().String("job-id", "", "The unique identifier for a job.")
+		dataexchange_cancelJobCmd.MarkFlagRequired("job-id")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_cancelJobCmd)
 }

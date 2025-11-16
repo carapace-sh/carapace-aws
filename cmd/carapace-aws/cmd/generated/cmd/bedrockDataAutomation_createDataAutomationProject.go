@@ -12,18 +12,20 @@ var bedrockDataAutomation_createDataAutomationProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockDataAutomation_createDataAutomationProjectCmd).Standalone()
+	carapace.Gen(bedrockDataAutomation_createDataAutomationProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockDataAutomation_createDataAutomationProjectCmd).Standalone()
 
-	bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("client-token", "", "")
-	bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("custom-output-configuration", "", "")
-	bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("encryption-configuration", "", "")
-	bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("override-configuration", "", "")
-	bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("project-description", "", "")
-	bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("project-name", "", "")
-	bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("project-stage", "", "")
-	bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("standard-output-configuration", "", "")
-	bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("tags", "", "")
-	bedrockDataAutomation_createDataAutomationProjectCmd.MarkFlagRequired("project-name")
-	bedrockDataAutomation_createDataAutomationProjectCmd.MarkFlagRequired("standard-output-configuration")
+		bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("client-token", "", "")
+		bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("custom-output-configuration", "", "")
+		bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("encryption-configuration", "", "")
+		bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("override-configuration", "", "")
+		bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("project-description", "", "")
+		bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("project-name", "", "")
+		bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("project-stage", "", "")
+		bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("standard-output-configuration", "", "")
+		bedrockDataAutomation_createDataAutomationProjectCmd.Flags().String("tags", "", "")
+		bedrockDataAutomation_createDataAutomationProjectCmd.MarkFlagRequired("project-name")
+		bedrockDataAutomation_createDataAutomationProjectCmd.MarkFlagRequired("standard-output-configuration")
+	})
 	bedrockDataAutomationCmd.AddCommand(bedrockDataAutomation_createDataAutomationProjectCmd)
 }

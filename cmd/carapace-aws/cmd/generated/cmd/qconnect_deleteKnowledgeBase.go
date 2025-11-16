@@ -12,9 +12,11 @@ var qconnect_deleteKnowledgeBaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_deleteKnowledgeBaseCmd).Standalone()
+	carapace.Gen(qconnect_deleteKnowledgeBaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_deleteKnowledgeBaseCmd).Standalone()
 
-	qconnect_deleteKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The knowledge base to delete content from.")
-	qconnect_deleteKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_deleteKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The knowledge base to delete content from.")
+		qconnect_deleteKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	qconnectCmd.AddCommand(qconnect_deleteKnowledgeBaseCmd)
 }

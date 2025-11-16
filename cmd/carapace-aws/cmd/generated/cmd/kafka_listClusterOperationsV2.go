@@ -12,11 +12,13 @@ var kafka_listClusterOperationsV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_listClusterOperationsV2Cmd).Standalone()
+	carapace.Gen(kafka_listClusterOperationsV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_listClusterOperationsV2Cmd).Standalone()
 
-	kafka_listClusterOperationsV2Cmd.Flags().String("cluster-arn", "", "The arn of the cluster whose operations are being requested.")
-	kafka_listClusterOperationsV2Cmd.Flags().String("max-results", "", "The maxResults of the query.")
-	kafka_listClusterOperationsV2Cmd.Flags().String("next-token", "", "The nextToken of the query.")
-	kafka_listClusterOperationsV2Cmd.MarkFlagRequired("cluster-arn")
+		kafka_listClusterOperationsV2Cmd.Flags().String("cluster-arn", "", "The arn of the cluster whose operations are being requested.")
+		kafka_listClusterOperationsV2Cmd.Flags().String("max-results", "", "The maxResults of the query.")
+		kafka_listClusterOperationsV2Cmd.Flags().String("next-token", "", "The nextToken of the query.")
+		kafka_listClusterOperationsV2Cmd.MarkFlagRequired("cluster-arn")
+	})
 	kafkaCmd.AddCommand(kafka_listClusterOperationsV2Cmd)
 }

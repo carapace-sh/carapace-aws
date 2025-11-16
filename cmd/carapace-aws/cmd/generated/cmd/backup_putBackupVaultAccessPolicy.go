@@ -12,10 +12,12 @@ var backup_putBackupVaultAccessPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_putBackupVaultAccessPolicyCmd).Standalone()
+	carapace.Gen(backup_putBackupVaultAccessPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_putBackupVaultAccessPolicyCmd).Standalone()
 
-	backup_putBackupVaultAccessPolicyCmd.Flags().String("backup-vault-name", "", "The name of a logical container where backups are stored.")
-	backup_putBackupVaultAccessPolicyCmd.Flags().String("policy", "", "The backup vault access policy document in JSON format.")
-	backup_putBackupVaultAccessPolicyCmd.MarkFlagRequired("backup-vault-name")
+		backup_putBackupVaultAccessPolicyCmd.Flags().String("backup-vault-name", "", "The name of a logical container where backups are stored.")
+		backup_putBackupVaultAccessPolicyCmd.Flags().String("policy", "", "The backup vault access policy document in JSON format.")
+		backup_putBackupVaultAccessPolicyCmd.MarkFlagRequired("backup-vault-name")
+	})
 	backupCmd.AddCommand(backup_putBackupVaultAccessPolicyCmd)
 }

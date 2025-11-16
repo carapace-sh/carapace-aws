@@ -12,8 +12,10 @@ var devopsGuru_putFeedbackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_putFeedbackCmd).Standalone()
+	carapace.Gen(devopsGuru_putFeedbackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_putFeedbackCmd).Standalone()
 
-	devopsGuru_putFeedbackCmd.Flags().String("insight-feedback", "", "The feedback from customers is about the recommendations in this insight.")
+		devopsGuru_putFeedbackCmd.Flags().String("insight-feedback", "", "The feedback from customers is about the recommendations in this insight.")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_putFeedbackCmd)
 }

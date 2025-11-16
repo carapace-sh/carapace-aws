@@ -12,13 +12,15 @@ var ec2_updateCapacityManagerOrganizationsAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_updateCapacityManagerOrganizationsAccessCmd).Standalone()
+	carapace.Gen(ec2_updateCapacityManagerOrganizationsAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_updateCapacityManagerOrganizationsAccessCmd).Standalone()
 
-	ec2_updateCapacityManagerOrganizationsAccessCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	ec2_updateCapacityManagerOrganizationsAccessCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_updateCapacityManagerOrganizationsAccessCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_updateCapacityManagerOrganizationsAccessCmd.Flags().String("organizations-access", "", "Specifies whether to enable or disable cross-account access for Amazon Web Services Organizations.")
-	ec2_updateCapacityManagerOrganizationsAccessCmd.Flag("no-dry-run").Hidden = true
-	ec2_updateCapacityManagerOrganizationsAccessCmd.MarkFlagRequired("organizations-access")
+		ec2_updateCapacityManagerOrganizationsAccessCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		ec2_updateCapacityManagerOrganizationsAccessCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_updateCapacityManagerOrganizationsAccessCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_updateCapacityManagerOrganizationsAccessCmd.Flags().String("organizations-access", "", "Specifies whether to enable or disable cross-account access for Amazon Web Services Organizations.")
+		ec2_updateCapacityManagerOrganizationsAccessCmd.Flag("no-dry-run").Hidden = true
+		ec2_updateCapacityManagerOrganizationsAccessCmd.MarkFlagRequired("organizations-access")
+	})
 	ec2Cmd.AddCommand(ec2_updateCapacityManagerOrganizationsAccessCmd)
 }

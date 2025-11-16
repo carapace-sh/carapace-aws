@@ -12,11 +12,13 @@ var iotthingsgraph_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_listTagsForResourceCmd).Standalone()
+	carapace.Gen(iotthingsgraph_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_listTagsForResourceCmd).Standalone()
 
-	iotthingsgraph_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of tags to return.")
-	iotthingsgraph_listTagsForResourceCmd.Flags().String("next-token", "", "The token that specifies the next page of results to return.")
-	iotthingsgraph_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose tags are to be returned.")
-	iotthingsgraph_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		iotthingsgraph_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of tags to return.")
+		iotthingsgraph_listTagsForResourceCmd.Flags().String("next-token", "", "The token that specifies the next page of results to return.")
+		iotthingsgraph_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose tags are to be returned.")
+		iotthingsgraph_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_listTagsForResourceCmd)
 }

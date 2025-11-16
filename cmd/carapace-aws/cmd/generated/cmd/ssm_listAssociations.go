@@ -12,10 +12,12 @@ var ssm_listAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_listAssociationsCmd).Standalone()
+	carapace.Gen(ssm_listAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_listAssociationsCmd).Standalone()
 
-	ssm_listAssociationsCmd.Flags().String("association-filter-list", "", "One or more filters.")
-	ssm_listAssociationsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_listAssociationsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_listAssociationsCmd.Flags().String("association-filter-list", "", "One or more filters.")
+		ssm_listAssociationsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_listAssociationsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	ssmCmd.AddCommand(ssm_listAssociationsCmd)
 }

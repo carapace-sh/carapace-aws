@@ -12,11 +12,13 @@ var wafv2_listRuleGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_listRuleGroupsCmd).Standalone()
+	carapace.Gen(wafv2_listRuleGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_listRuleGroupsCmd).Standalone()
 
-	wafv2_listRuleGroupsCmd.Flags().String("limit", "", "The maximum number of objects that you want WAF to return for this request.")
-	wafv2_listRuleGroupsCmd.Flags().String("next-marker", "", "When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.")
-	wafv2_listRuleGroupsCmd.Flags().String("scope", "", "Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.")
-	wafv2_listRuleGroupsCmd.MarkFlagRequired("scope")
+		wafv2_listRuleGroupsCmd.Flags().String("limit", "", "The maximum number of objects that you want WAF to return for this request.")
+		wafv2_listRuleGroupsCmd.Flags().String("next-marker", "", "When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.")
+		wafv2_listRuleGroupsCmd.Flags().String("scope", "", "Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.")
+		wafv2_listRuleGroupsCmd.MarkFlagRequired("scope")
+	})
 	wafv2Cmd.AddCommand(wafv2_listRuleGroupsCmd)
 }

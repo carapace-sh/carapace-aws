@@ -12,7 +12,9 @@ var config_getComplianceSummaryByConfigRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getComplianceSummaryByConfigRuleCmd).Standalone()
+	carapace.Gen(config_getComplianceSummaryByConfigRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getComplianceSummaryByConfigRuleCmd).Standalone()
 
+	})
 	configCmd.AddCommand(config_getComplianceSummaryByConfigRuleCmd)
 }

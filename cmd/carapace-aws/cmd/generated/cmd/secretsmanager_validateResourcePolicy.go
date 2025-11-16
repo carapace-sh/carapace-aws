@@ -12,10 +12,12 @@ var secretsmanager_validateResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_validateResourcePolicyCmd).Standalone()
+	carapace.Gen(secretsmanager_validateResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_validateResourcePolicyCmd).Standalone()
 
-	secretsmanager_validateResourcePolicyCmd.Flags().String("resource-policy", "", "A JSON-formatted string that contains an Amazon Web Services resource-based policy.")
-	secretsmanager_validateResourcePolicyCmd.Flags().String("secret-id", "", "The ARN or name of the secret with the resource-based policy you want to validate.")
-	secretsmanager_validateResourcePolicyCmd.MarkFlagRequired("resource-policy")
+		secretsmanager_validateResourcePolicyCmd.Flags().String("resource-policy", "", "A JSON-formatted string that contains an Amazon Web Services resource-based policy.")
+		secretsmanager_validateResourcePolicyCmd.Flags().String("secret-id", "", "The ARN or name of the secret with the resource-based policy you want to validate.")
+		secretsmanager_validateResourcePolicyCmd.MarkFlagRequired("resource-policy")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_validateResourcePolicyCmd)
 }

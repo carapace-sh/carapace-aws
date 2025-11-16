@@ -12,7 +12,9 @@ var acm_getAccountConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acm_getAccountConfigurationCmd).Standalone()
+	carapace.Gen(acm_getAccountConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acm_getAccountConfigurationCmd).Standalone()
 
+	})
 	acmCmd.AddCommand(acm_getAccountConfigurationCmd)
 }

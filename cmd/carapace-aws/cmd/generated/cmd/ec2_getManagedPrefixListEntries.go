@@ -12,15 +12,17 @@ var ec2_getManagedPrefixListEntriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getManagedPrefixListEntriesCmd).Standalone()
+	carapace.Gen(ec2_getManagedPrefixListEntriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getManagedPrefixListEntriesCmd).Standalone()
 
-	ec2_getManagedPrefixListEntriesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getManagedPrefixListEntriesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	ec2_getManagedPrefixListEntriesCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	ec2_getManagedPrefixListEntriesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getManagedPrefixListEntriesCmd.Flags().String("prefix-list-id", "", "The ID of the prefix list.")
-	ec2_getManagedPrefixListEntriesCmd.Flags().String("target-version", "", "The version of the prefix list for which to return the entries.")
-	ec2_getManagedPrefixListEntriesCmd.Flag("no-dry-run").Hidden = true
-	ec2_getManagedPrefixListEntriesCmd.MarkFlagRequired("prefix-list-id")
+		ec2_getManagedPrefixListEntriesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getManagedPrefixListEntriesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		ec2_getManagedPrefixListEntriesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		ec2_getManagedPrefixListEntriesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getManagedPrefixListEntriesCmd.Flags().String("prefix-list-id", "", "The ID of the prefix list.")
+		ec2_getManagedPrefixListEntriesCmd.Flags().String("target-version", "", "The version of the prefix list for which to return the entries.")
+		ec2_getManagedPrefixListEntriesCmd.Flag("no-dry-run").Hidden = true
+		ec2_getManagedPrefixListEntriesCmd.MarkFlagRequired("prefix-list-id")
+	})
 	ec2Cmd.AddCommand(ec2_getManagedPrefixListEntriesCmd)
 }

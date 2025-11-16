@@ -12,9 +12,11 @@ var apigateway_getClientCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getClientCertificateCmd).Standalone()
+	carapace.Gen(apigateway_getClientCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getClientCertificateCmd).Standalone()
 
-	apigateway_getClientCertificateCmd.Flags().String("client-certificate-id", "", "The identifier of the ClientCertificate resource to be described.")
-	apigateway_getClientCertificateCmd.MarkFlagRequired("client-certificate-id")
+		apigateway_getClientCertificateCmd.Flags().String("client-certificate-id", "", "The identifier of the ClientCertificate resource to be described.")
+		apigateway_getClientCertificateCmd.MarkFlagRequired("client-certificate-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getClientCertificateCmd)
 }

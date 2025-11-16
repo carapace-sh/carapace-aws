@@ -12,10 +12,12 @@ var devicefarm_listJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_listJobsCmd).Standalone()
+	carapace.Gen(devicefarm_listJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_listJobsCmd).Standalone()
 
-	devicefarm_listJobsCmd.Flags().String("arn", "", "The run's Amazon Resource Name (ARN).")
-	devicefarm_listJobsCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
-	devicefarm_listJobsCmd.MarkFlagRequired("arn")
+		devicefarm_listJobsCmd.Flags().String("arn", "", "The run's Amazon Resource Name (ARN).")
+		devicefarm_listJobsCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+		devicefarm_listJobsCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_listJobsCmd)
 }

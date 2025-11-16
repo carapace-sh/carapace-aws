@@ -12,14 +12,16 @@ var kendra_listGroupsOlderThanOrderingIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_listGroupsOlderThanOrderingIdCmd).Standalone()
+	carapace.Gen(kendra_listGroupsOlderThanOrderingIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_listGroupsOlderThanOrderingIdCmd).Standalone()
 
-	kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("data-source-id", "", "The identifier of the data source for getting a list of groups mapped to users before a given ordering timestamp identifier.")
-	kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("index-id", "", "The identifier of the index for getting a list of groups mapped to users before a given ordering or timestamp identifier.")
-	kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("max-results", "", "The maximum number of returned groups that are mapped to users before a given ordering or timestamp identifier.")
-	kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.")
-	kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("ordering-id", "", "The timestamp identifier used for the latest `PUT` or `DELETE` action for mapping users to their groups.")
-	kendra_listGroupsOlderThanOrderingIdCmd.MarkFlagRequired("index-id")
-	kendra_listGroupsOlderThanOrderingIdCmd.MarkFlagRequired("ordering-id")
+		kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("data-source-id", "", "The identifier of the data source for getting a list of groups mapped to users before a given ordering timestamp identifier.")
+		kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("index-id", "", "The identifier of the index for getting a list of groups mapped to users before a given ordering or timestamp identifier.")
+		kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("max-results", "", "The maximum number of returned groups that are mapped to users before a given ordering or timestamp identifier.")
+		kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.")
+		kendra_listGroupsOlderThanOrderingIdCmd.Flags().String("ordering-id", "", "The timestamp identifier used for the latest `PUT` or `DELETE` action for mapping users to their groups.")
+		kendra_listGroupsOlderThanOrderingIdCmd.MarkFlagRequired("index-id")
+		kendra_listGroupsOlderThanOrderingIdCmd.MarkFlagRequired("ordering-id")
+	})
 	kendraCmd.AddCommand(kendra_listGroupsOlderThanOrderingIdCmd)
 }

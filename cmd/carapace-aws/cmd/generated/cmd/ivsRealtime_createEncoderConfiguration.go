@@ -12,10 +12,12 @@ var ivsRealtime_createEncoderConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_createEncoderConfigurationCmd).Standalone()
+	carapace.Gen(ivsRealtime_createEncoderConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_createEncoderConfigurationCmd).Standalone()
 
-	ivsRealtime_createEncoderConfigurationCmd.Flags().String("name", "", "Optional name to identify the resource.")
-	ivsRealtime_createEncoderConfigurationCmd.Flags().String("tags", "", "Tags attached to the resource.")
-	ivsRealtime_createEncoderConfigurationCmd.Flags().String("video", "", "Video configuration.")
+		ivsRealtime_createEncoderConfigurationCmd.Flags().String("name", "", "Optional name to identify the resource.")
+		ivsRealtime_createEncoderConfigurationCmd.Flags().String("tags", "", "Tags attached to the resource.")
+		ivsRealtime_createEncoderConfigurationCmd.Flags().String("video", "", "Video configuration.")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_createEncoderConfigurationCmd)
 }

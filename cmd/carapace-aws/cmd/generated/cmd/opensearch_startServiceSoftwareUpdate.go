@@ -12,11 +12,13 @@ var opensearch_startServiceSoftwareUpdateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_startServiceSoftwareUpdateCmd).Standalone()
+	carapace.Gen(opensearch_startServiceSoftwareUpdateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_startServiceSoftwareUpdateCmd).Standalone()
 
-	opensearch_startServiceSoftwareUpdateCmd.Flags().String("desired-start-time", "", "The Epoch timestamp when you want the service software update to start.")
-	opensearch_startServiceSoftwareUpdateCmd.Flags().String("domain-name", "", "The name of the domain that you want to update to the latest service software.")
-	opensearch_startServiceSoftwareUpdateCmd.Flags().String("schedule-at", "", "When to start the service software update.")
-	opensearch_startServiceSoftwareUpdateCmd.MarkFlagRequired("domain-name")
+		opensearch_startServiceSoftwareUpdateCmd.Flags().String("desired-start-time", "", "The Epoch timestamp when you want the service software update to start.")
+		opensearch_startServiceSoftwareUpdateCmd.Flags().String("domain-name", "", "The name of the domain that you want to update to the latest service software.")
+		opensearch_startServiceSoftwareUpdateCmd.Flags().String("schedule-at", "", "When to start the service software update.")
+		opensearch_startServiceSoftwareUpdateCmd.MarkFlagRequired("domain-name")
+	})
 	opensearchCmd.AddCommand(opensearch_startServiceSoftwareUpdateCmd)
 }

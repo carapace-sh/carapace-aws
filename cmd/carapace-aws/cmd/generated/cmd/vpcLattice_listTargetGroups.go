@@ -12,11 +12,13 @@ var vpcLattice_listTargetGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listTargetGroupsCmd).Standalone()
+	carapace.Gen(vpcLattice_listTargetGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listTargetGroupsCmd).Standalone()
 
-	vpcLattice_listTargetGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	vpcLattice_listTargetGroupsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
-	vpcLattice_listTargetGroupsCmd.Flags().String("target-group-type", "", "The target group type.")
-	vpcLattice_listTargetGroupsCmd.Flags().String("vpc-identifier", "", "The ID or ARN of the VPC.")
+		vpcLattice_listTargetGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		vpcLattice_listTargetGroupsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+		vpcLattice_listTargetGroupsCmd.Flags().String("target-group-type", "", "The target group type.")
+		vpcLattice_listTargetGroupsCmd.Flags().String("vpc-identifier", "", "The ID or ARN of the VPC.")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listTargetGroupsCmd)
 }

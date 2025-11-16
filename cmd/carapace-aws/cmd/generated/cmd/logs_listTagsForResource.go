@@ -12,9 +12,11 @@ var logs_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_listTagsForResourceCmd).Standalone()
+	carapace.Gen(logs_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_listTagsForResourceCmd).Standalone()
 
-	logs_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource that you want to view tags for.")
-	logs_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		logs_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource that you want to view tags for.")
+		logs_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	logsCmd.AddCommand(logs_listTagsForResourceCmd)
 }

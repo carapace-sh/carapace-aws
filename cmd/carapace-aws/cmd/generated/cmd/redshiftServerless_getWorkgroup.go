@@ -12,9 +12,11 @@ var redshiftServerless_getWorkgroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getWorkgroupCmd).Standalone()
+	carapace.Gen(redshiftServerless_getWorkgroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getWorkgroupCmd).Standalone()
 
-	redshiftServerless_getWorkgroupCmd.Flags().String("workgroup-name", "", "The name of the workgroup to return information for.")
-	redshiftServerless_getWorkgroupCmd.MarkFlagRequired("workgroup-name")
+		redshiftServerless_getWorkgroupCmd.Flags().String("workgroup-name", "", "The name of the workgroup to return information for.")
+		redshiftServerless_getWorkgroupCmd.MarkFlagRequired("workgroup-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getWorkgroupCmd)
 }

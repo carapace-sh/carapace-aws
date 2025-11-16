@@ -12,16 +12,18 @@ var bedrockAgent_deleteAgentActionGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_deleteAgentActionGroupCmd).Standalone()
+	carapace.Gen(bedrockAgent_deleteAgentActionGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_deleteAgentActionGroupCmd).Standalone()
 
-	bedrockAgent_deleteAgentActionGroupCmd.Flags().String("action-group-id", "", "The unique identifier of the action group to delete.")
-	bedrockAgent_deleteAgentActionGroupCmd.Flags().String("agent-id", "", "The unique identifier of the agent that the action group belongs to.")
-	bedrockAgent_deleteAgentActionGroupCmd.Flags().String("agent-version", "", "The version of the agent that the action group belongs to.")
-	bedrockAgent_deleteAgentActionGroupCmd.Flags().Bool("no-skip-resource-in-use-check", false, "By default, this value is `false` and deletion is stopped if the resource is in use.")
-	bedrockAgent_deleteAgentActionGroupCmd.Flags().Bool("skip-resource-in-use-check", false, "By default, this value is `false` and deletion is stopped if the resource is in use.")
-	bedrockAgent_deleteAgentActionGroupCmd.MarkFlagRequired("action-group-id")
-	bedrockAgent_deleteAgentActionGroupCmd.MarkFlagRequired("agent-id")
-	bedrockAgent_deleteAgentActionGroupCmd.MarkFlagRequired("agent-version")
-	bedrockAgent_deleteAgentActionGroupCmd.Flag("no-skip-resource-in-use-check").Hidden = true
+		bedrockAgent_deleteAgentActionGroupCmd.Flags().String("action-group-id", "", "The unique identifier of the action group to delete.")
+		bedrockAgent_deleteAgentActionGroupCmd.Flags().String("agent-id", "", "The unique identifier of the agent that the action group belongs to.")
+		bedrockAgent_deleteAgentActionGroupCmd.Flags().String("agent-version", "", "The version of the agent that the action group belongs to.")
+		bedrockAgent_deleteAgentActionGroupCmd.Flags().Bool("no-skip-resource-in-use-check", false, "By default, this value is `false` and deletion is stopped if the resource is in use.")
+		bedrockAgent_deleteAgentActionGroupCmd.Flags().Bool("skip-resource-in-use-check", false, "By default, this value is `false` and deletion is stopped if the resource is in use.")
+		bedrockAgent_deleteAgentActionGroupCmd.MarkFlagRequired("action-group-id")
+		bedrockAgent_deleteAgentActionGroupCmd.MarkFlagRequired("agent-id")
+		bedrockAgent_deleteAgentActionGroupCmd.MarkFlagRequired("agent-version")
+		bedrockAgent_deleteAgentActionGroupCmd.Flag("no-skip-resource-in-use-check").Hidden = true
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_deleteAgentActionGroupCmd)
 }

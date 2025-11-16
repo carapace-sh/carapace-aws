@@ -12,7 +12,9 @@ var ce_startSavingsPlansPurchaseRecommendationGenerationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_startSavingsPlansPurchaseRecommendationGenerationCmd).Standalone()
+	carapace.Gen(ce_startSavingsPlansPurchaseRecommendationGenerationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_startSavingsPlansPurchaseRecommendationGenerationCmd).Standalone()
 
+	})
 	ceCmd.AddCommand(ce_startSavingsPlansPurchaseRecommendationGenerationCmd)
 }

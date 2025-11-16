@@ -12,11 +12,13 @@ var ssm_listDocumentVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_listDocumentVersionsCmd).Standalone()
+	carapace.Gen(ssm_listDocumentVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_listDocumentVersionsCmd).Standalone()
 
-	ssm_listDocumentVersionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_listDocumentVersionsCmd.Flags().String("name", "", "The name of the document.")
-	ssm_listDocumentVersionsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	ssm_listDocumentVersionsCmd.MarkFlagRequired("name")
+		ssm_listDocumentVersionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_listDocumentVersionsCmd.Flags().String("name", "", "The name of the document.")
+		ssm_listDocumentVersionsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_listDocumentVersionsCmd.MarkFlagRequired("name")
+	})
 	ssmCmd.AddCommand(ssm_listDocumentVersionsCmd)
 }

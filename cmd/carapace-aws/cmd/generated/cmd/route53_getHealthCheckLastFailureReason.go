@@ -12,9 +12,11 @@ var route53_getHealthCheckLastFailureReasonCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getHealthCheckLastFailureReasonCmd).Standalone()
+	carapace.Gen(route53_getHealthCheckLastFailureReasonCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getHealthCheckLastFailureReasonCmd).Standalone()
 
-	route53_getHealthCheckLastFailureReasonCmd.Flags().String("health-check-id", "", "The ID for the health check for which you want the last failure reason.")
-	route53_getHealthCheckLastFailureReasonCmd.MarkFlagRequired("health-check-id")
+		route53_getHealthCheckLastFailureReasonCmd.Flags().String("health-check-id", "", "The ID for the health check for which you want the last failure reason.")
+		route53_getHealthCheckLastFailureReasonCmd.MarkFlagRequired("health-check-id")
+	})
 	route53Cmd.AddCommand(route53_getHealthCheckLastFailureReasonCmd)
 }

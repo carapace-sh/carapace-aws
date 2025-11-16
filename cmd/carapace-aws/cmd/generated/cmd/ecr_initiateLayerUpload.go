@@ -12,10 +12,12 @@ var ecr_initiateLayerUploadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_initiateLayerUploadCmd).Standalone()
+	carapace.Gen(ecr_initiateLayerUploadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_initiateLayerUploadCmd).Standalone()
 
-	ecr_initiateLayerUploadCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry to which you intend to upload layers.")
-	ecr_initiateLayerUploadCmd.Flags().String("repository-name", "", "The name of the repository to which you intend to upload layers.")
-	ecr_initiateLayerUploadCmd.MarkFlagRequired("repository-name")
+		ecr_initiateLayerUploadCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry to which you intend to upload layers.")
+		ecr_initiateLayerUploadCmd.Flags().String("repository-name", "", "The name of the repository to which you intend to upload layers.")
+		ecr_initiateLayerUploadCmd.MarkFlagRequired("repository-name")
+	})
 	ecrCmd.AddCommand(ecr_initiateLayerUploadCmd)
 }

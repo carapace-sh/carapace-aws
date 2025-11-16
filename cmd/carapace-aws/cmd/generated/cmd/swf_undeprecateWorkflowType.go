@@ -12,11 +12,13 @@ var swf_undeprecateWorkflowTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_undeprecateWorkflowTypeCmd).Standalone()
+	carapace.Gen(swf_undeprecateWorkflowTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_undeprecateWorkflowTypeCmd).Standalone()
 
-	swf_undeprecateWorkflowTypeCmd.Flags().String("domain", "", "The name of the domain of the deprecated workflow type.")
-	swf_undeprecateWorkflowTypeCmd.Flags().String("workflow-type", "", "The name of the domain of the deprecated workflow type.")
-	swf_undeprecateWorkflowTypeCmd.MarkFlagRequired("domain")
-	swf_undeprecateWorkflowTypeCmd.MarkFlagRequired("workflow-type")
+		swf_undeprecateWorkflowTypeCmd.Flags().String("domain", "", "The name of the domain of the deprecated workflow type.")
+		swf_undeprecateWorkflowTypeCmd.Flags().String("workflow-type", "", "The name of the domain of the deprecated workflow type.")
+		swf_undeprecateWorkflowTypeCmd.MarkFlagRequired("domain")
+		swf_undeprecateWorkflowTypeCmd.MarkFlagRequired("workflow-type")
+	})
 	swfCmd.AddCommand(swf_undeprecateWorkflowTypeCmd)
 }

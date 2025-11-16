@@ -12,11 +12,13 @@ var entityresolution_getProviderServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_getProviderServiceCmd).Standalone()
+	carapace.Gen(entityresolution_getProviderServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_getProviderServiceCmd).Standalone()
 
-	entityresolution_getProviderServiceCmd.Flags().String("provider-name", "", "The name of the provider.")
-	entityresolution_getProviderServiceCmd.Flags().String("provider-service-name", "", "The ARN (Amazon Resource Name) of the product that the provider service provides.")
-	entityresolution_getProviderServiceCmd.MarkFlagRequired("provider-name")
-	entityresolution_getProviderServiceCmd.MarkFlagRequired("provider-service-name")
+		entityresolution_getProviderServiceCmd.Flags().String("provider-name", "", "The name of the provider.")
+		entityresolution_getProviderServiceCmd.Flags().String("provider-service-name", "", "The ARN (Amazon Resource Name) of the product that the provider service provides.")
+		entityresolution_getProviderServiceCmd.MarkFlagRequired("provider-name")
+		entityresolution_getProviderServiceCmd.MarkFlagRequired("provider-service-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_getProviderServiceCmd)
 }

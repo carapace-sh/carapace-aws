@@ -12,10 +12,12 @@ var controlcatalog_listControlMappingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controlcatalog_listControlMappingsCmd).Standalone()
+	carapace.Gen(controlcatalog_listControlMappingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controlcatalog_listControlMappingsCmd).Standalone()
 
-	controlcatalog_listControlMappingsCmd.Flags().String("filter", "", "An optional filter that narrows the results to specific control mappings based on control ARNs, common control ARNs, or mapping types.")
-	controlcatalog_listControlMappingsCmd.Flags().String("max-results", "", "The maximum number of results on a page or for an API request call.")
-	controlcatalog_listControlMappingsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		controlcatalog_listControlMappingsCmd.Flags().String("filter", "", "An optional filter that narrows the results to specific control mappings based on control ARNs, common control ARNs, or mapping types.")
+		controlcatalog_listControlMappingsCmd.Flags().String("max-results", "", "The maximum number of results on a page or for an API request call.")
+		controlcatalog_listControlMappingsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+	})
 	controlcatalogCmd.AddCommand(controlcatalog_listControlMappingsCmd)
 }

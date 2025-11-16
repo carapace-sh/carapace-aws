@@ -12,7 +12,9 @@ var backup_describeRegionSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_describeRegionSettingsCmd).Standalone()
+	carapace.Gen(backup_describeRegionSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_describeRegionSettingsCmd).Standalone()
 
+	})
 	backupCmd.AddCommand(backup_describeRegionSettingsCmd)
 }

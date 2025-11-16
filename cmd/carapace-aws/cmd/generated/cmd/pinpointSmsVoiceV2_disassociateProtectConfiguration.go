@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_disassociateProtectConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_disassociateProtectConfigurationCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_disassociateProtectConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_disassociateProtectConfigurationCmd).Standalone()
 
-	pinpointSmsVoiceV2_disassociateProtectConfigurationCmd.Flags().String("configuration-set-name", "", "The name of the ConfigurationSet.")
-	pinpointSmsVoiceV2_disassociateProtectConfigurationCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
-	pinpointSmsVoiceV2_disassociateProtectConfigurationCmd.MarkFlagRequired("configuration-set-name")
-	pinpointSmsVoiceV2_disassociateProtectConfigurationCmd.MarkFlagRequired("protect-configuration-id")
+		pinpointSmsVoiceV2_disassociateProtectConfigurationCmd.Flags().String("configuration-set-name", "", "The name of the ConfigurationSet.")
+		pinpointSmsVoiceV2_disassociateProtectConfigurationCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
+		pinpointSmsVoiceV2_disassociateProtectConfigurationCmd.MarkFlagRequired("configuration-set-name")
+		pinpointSmsVoiceV2_disassociateProtectConfigurationCmd.MarkFlagRequired("protect-configuration-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_disassociateProtectConfigurationCmd)
 }

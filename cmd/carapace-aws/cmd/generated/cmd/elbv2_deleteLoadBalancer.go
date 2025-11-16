@@ -12,9 +12,11 @@ var elbv2_deleteLoadBalancerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_deleteLoadBalancerCmd).Standalone()
+	carapace.Gen(elbv2_deleteLoadBalancerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_deleteLoadBalancerCmd).Standalone()
 
-	elbv2_deleteLoadBalancerCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
-	elbv2_deleteLoadBalancerCmd.MarkFlagRequired("load-balancer-arn")
+		elbv2_deleteLoadBalancerCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
+		elbv2_deleteLoadBalancerCmd.MarkFlagRequired("load-balancer-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_deleteLoadBalancerCmd)
 }

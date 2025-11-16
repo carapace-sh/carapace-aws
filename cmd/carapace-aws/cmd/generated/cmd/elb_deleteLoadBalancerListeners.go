@@ -12,11 +12,13 @@ var elb_deleteLoadBalancerListenersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_deleteLoadBalancerListenersCmd).Standalone()
+	carapace.Gen(elb_deleteLoadBalancerListenersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_deleteLoadBalancerListenersCmd).Standalone()
 
-	elb_deleteLoadBalancerListenersCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_deleteLoadBalancerListenersCmd.Flags().String("load-balancer-ports", "", "The client port numbers of the listeners.")
-	elb_deleteLoadBalancerListenersCmd.MarkFlagRequired("load-balancer-name")
-	elb_deleteLoadBalancerListenersCmd.MarkFlagRequired("load-balancer-ports")
+		elb_deleteLoadBalancerListenersCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_deleteLoadBalancerListenersCmd.Flags().String("load-balancer-ports", "", "The client port numbers of the listeners.")
+		elb_deleteLoadBalancerListenersCmd.MarkFlagRequired("load-balancer-name")
+		elb_deleteLoadBalancerListenersCmd.MarkFlagRequired("load-balancer-ports")
+	})
 	elbCmd.AddCommand(elb_deleteLoadBalancerListenersCmd)
 }

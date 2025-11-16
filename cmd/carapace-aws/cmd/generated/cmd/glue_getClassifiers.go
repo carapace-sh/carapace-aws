@@ -12,9 +12,11 @@ var glue_getClassifiersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getClassifiersCmd).Standalone()
+	carapace.Gen(glue_getClassifiersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getClassifiersCmd).Standalone()
 
-	glue_getClassifiersCmd.Flags().String("max-results", "", "The size of the list to return (optional).")
-	glue_getClassifiersCmd.Flags().String("next-token", "", "An optional continuation token.")
+		glue_getClassifiersCmd.Flags().String("max-results", "", "The size of the list to return (optional).")
+		glue_getClassifiersCmd.Flags().String("next-token", "", "An optional continuation token.")
+	})
 	glueCmd.AddCommand(glue_getClassifiersCmd)
 }

@@ -12,9 +12,11 @@ var glue_listUsageProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listUsageProfilesCmd).Standalone()
+	carapace.Gen(glue_listUsageProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listUsageProfilesCmd).Standalone()
 
-	glue_listUsageProfilesCmd.Flags().String("max-results", "", "The maximum number of usage profiles to return in a single response.")
-	glue_listUsageProfilesCmd.Flags().String("next-token", "", "A continuation token, included if this is a continuation call.")
+		glue_listUsageProfilesCmd.Flags().String("max-results", "", "The maximum number of usage profiles to return in a single response.")
+		glue_listUsageProfilesCmd.Flags().String("next-token", "", "A continuation token, included if this is a continuation call.")
+	})
 	glueCmd.AddCommand(glue_listUsageProfilesCmd)
 }

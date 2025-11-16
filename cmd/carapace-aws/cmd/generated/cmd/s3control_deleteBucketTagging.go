@@ -12,11 +12,13 @@ var s3control_deleteBucketTaggingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_deleteBucketTaggingCmd).Standalone()
+	carapace.Gen(s3control_deleteBucketTaggingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_deleteBucketTaggingCmd).Standalone()
 
-	s3control_deleteBucketTaggingCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Outposts bucket tag set to be removed.")
-	s3control_deleteBucketTaggingCmd.Flags().String("bucket", "", "The bucket ARN that has the tag set to be removed.")
-	s3control_deleteBucketTaggingCmd.MarkFlagRequired("account-id")
-	s3control_deleteBucketTaggingCmd.MarkFlagRequired("bucket")
+		s3control_deleteBucketTaggingCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Outposts bucket tag set to be removed.")
+		s3control_deleteBucketTaggingCmd.Flags().String("bucket", "", "The bucket ARN that has the tag set to be removed.")
+		s3control_deleteBucketTaggingCmd.MarkFlagRequired("account-id")
+		s3control_deleteBucketTaggingCmd.MarkFlagRequired("bucket")
+	})
 	s3controlCmd.AddCommand(s3control_deleteBucketTaggingCmd)
 }

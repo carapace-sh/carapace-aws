@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_deleteWorkloadIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_deleteWorkloadIdentityCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_deleteWorkloadIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_deleteWorkloadIdentityCmd).Standalone()
 
-	bedrockAgentcoreControl_deleteWorkloadIdentityCmd.Flags().String("name", "", "The name of the workload identity to delete.")
-	bedrockAgentcoreControl_deleteWorkloadIdentityCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_deleteWorkloadIdentityCmd.Flags().String("name", "", "The name of the workload identity to delete.")
+		bedrockAgentcoreControl_deleteWorkloadIdentityCmd.MarkFlagRequired("name")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_deleteWorkloadIdentityCmd)
 }

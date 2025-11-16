@@ -12,9 +12,11 @@ var comprehendmedical_describePhidetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_describePhidetectionJobCmd).Standalone()
+	carapace.Gen(comprehendmedical_describePhidetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_describePhidetectionJobCmd).Standalone()
 
-	comprehendmedical_describePhidetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend Medical generated for the job.")
-	comprehendmedical_describePhidetectionJobCmd.MarkFlagRequired("job-id")
+		comprehendmedical_describePhidetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend Medical generated for the job.")
+		comprehendmedical_describePhidetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_describePhidetectionJobCmd)
 }

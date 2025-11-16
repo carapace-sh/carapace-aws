@@ -12,11 +12,13 @@ var quicksight_getFlowPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_getFlowPermissionsCmd).Standalone()
+	carapace.Gen(quicksight_getFlowPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_getFlowPermissionsCmd).Standalone()
 
-	quicksight_getFlowPermissionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the flow that you are getting permissions for.")
-	quicksight_getFlowPermissionsCmd.Flags().String("flow-id", "", "The unique identifier of the flow to get permissions from.")
-	quicksight_getFlowPermissionsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_getFlowPermissionsCmd.MarkFlagRequired("flow-id")
+		quicksight_getFlowPermissionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the flow that you are getting permissions for.")
+		quicksight_getFlowPermissionsCmd.Flags().String("flow-id", "", "The unique identifier of the flow to get permissions from.")
+		quicksight_getFlowPermissionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_getFlowPermissionsCmd.MarkFlagRequired("flow-id")
+	})
 	quicksightCmd.AddCommand(quicksight_getFlowPermissionsCmd)
 }

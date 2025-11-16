@@ -12,9 +12,11 @@ var ssm_deleteParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_deleteParametersCmd).Standalone()
+	carapace.Gen(ssm_deleteParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_deleteParametersCmd).Standalone()
 
-	ssm_deleteParametersCmd.Flags().String("names", "", "The names of the parameters to delete.")
-	ssm_deleteParametersCmd.MarkFlagRequired("names")
+		ssm_deleteParametersCmd.Flags().String("names", "", "The names of the parameters to delete.")
+		ssm_deleteParametersCmd.MarkFlagRequired("names")
+	})
 	ssmCmd.AddCommand(ssm_deleteParametersCmd)
 }

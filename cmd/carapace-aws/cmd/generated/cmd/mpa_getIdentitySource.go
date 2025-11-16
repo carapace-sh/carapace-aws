@@ -12,9 +12,11 @@ var mpa_getIdentitySourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_getIdentitySourceCmd).Standalone()
+	carapace.Gen(mpa_getIdentitySourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_getIdentitySourceCmd).Standalone()
 
-	mpa_getIdentitySourceCmd.Flags().String("identity-source-arn", "", "Amazon Resource Name (ARN) for the identity source.")
-	mpa_getIdentitySourceCmd.MarkFlagRequired("identity-source-arn")
+		mpa_getIdentitySourceCmd.Flags().String("identity-source-arn", "", "Amazon Resource Name (ARN) for the identity source.")
+		mpa_getIdentitySourceCmd.MarkFlagRequired("identity-source-arn")
+	})
 	mpaCmd.AddCommand(mpa_getIdentitySourceCmd)
 }

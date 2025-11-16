@@ -12,7 +12,9 @@ var freetierCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(freetierCmd).Standalone()
+	carapace.Gen(freetierCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(freetierCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(freetierCmd)
 }

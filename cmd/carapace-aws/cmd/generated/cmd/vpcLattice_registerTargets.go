@@ -12,11 +12,13 @@ var vpcLattice_registerTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_registerTargetsCmd).Standalone()
+	carapace.Gen(vpcLattice_registerTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_registerTargetsCmd).Standalone()
 
-	vpcLattice_registerTargetsCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
-	vpcLattice_registerTargetsCmd.Flags().String("targets", "", "The targets.")
-	vpcLattice_registerTargetsCmd.MarkFlagRequired("target-group-identifier")
-	vpcLattice_registerTargetsCmd.MarkFlagRequired("targets")
+		vpcLattice_registerTargetsCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
+		vpcLattice_registerTargetsCmd.Flags().String("targets", "", "The targets.")
+		vpcLattice_registerTargetsCmd.MarkFlagRequired("target-group-identifier")
+		vpcLattice_registerTargetsCmd.MarkFlagRequired("targets")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_registerTargetsCmd)
 }

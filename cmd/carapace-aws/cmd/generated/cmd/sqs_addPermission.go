@@ -12,15 +12,17 @@ var sqs_addPermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_addPermissionCmd).Standalone()
+	carapace.Gen(sqs_addPermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_addPermissionCmd).Standalone()
 
-	sqs_addPermissionCmd.Flags().String("actions", "", "The action the client wants to allow for the specified principal.")
-	sqs_addPermissionCmd.Flags().String("awsaccount-ids", "", "The Amazon Web Services account numbers of the [principals](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P) who are to receive permission.")
-	sqs_addPermissionCmd.Flags().String("label", "", "The unique identification of the permission you're setting (for example, `AliceSendMessage`).")
-	sqs_addPermissionCmd.Flags().String("queue-url", "", "The URL of the Amazon SQS queue to which permissions are added.")
-	sqs_addPermissionCmd.MarkFlagRequired("actions")
-	sqs_addPermissionCmd.MarkFlagRequired("awsaccount-ids")
-	sqs_addPermissionCmd.MarkFlagRequired("label")
-	sqs_addPermissionCmd.MarkFlagRequired("queue-url")
+		sqs_addPermissionCmd.Flags().String("actions", "", "The action the client wants to allow for the specified principal.")
+		sqs_addPermissionCmd.Flags().String("awsaccount-ids", "", "The Amazon Web Services account numbers of the [principals](https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P) who are to receive permission.")
+		sqs_addPermissionCmd.Flags().String("label", "", "The unique identification of the permission you're setting (for example, `AliceSendMessage`).")
+		sqs_addPermissionCmd.Flags().String("queue-url", "", "The URL of the Amazon SQS queue to which permissions are added.")
+		sqs_addPermissionCmd.MarkFlagRequired("actions")
+		sqs_addPermissionCmd.MarkFlagRequired("awsaccount-ids")
+		sqs_addPermissionCmd.MarkFlagRequired("label")
+		sqs_addPermissionCmd.MarkFlagRequired("queue-url")
+	})
 	sqsCmd.AddCommand(sqs_addPermissionCmd)
 }

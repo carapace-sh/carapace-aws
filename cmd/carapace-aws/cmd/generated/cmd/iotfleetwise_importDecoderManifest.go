@@ -12,11 +12,13 @@ var iotfleetwise_importDecoderManifestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_importDecoderManifestCmd).Standalone()
+	carapace.Gen(iotfleetwise_importDecoderManifestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_importDecoderManifestCmd).Standalone()
 
-	iotfleetwise_importDecoderManifestCmd.Flags().String("name", "", "The name of the decoder manifest to import.")
-	iotfleetwise_importDecoderManifestCmd.Flags().String("network-file-definitions", "", "The file to load into an Amazon Web Services account.")
-	iotfleetwise_importDecoderManifestCmd.MarkFlagRequired("name")
-	iotfleetwise_importDecoderManifestCmd.MarkFlagRequired("network-file-definitions")
+		iotfleetwise_importDecoderManifestCmd.Flags().String("name", "", "The name of the decoder manifest to import.")
+		iotfleetwise_importDecoderManifestCmd.Flags().String("network-file-definitions", "", "The file to load into an Amazon Web Services account.")
+		iotfleetwise_importDecoderManifestCmd.MarkFlagRequired("name")
+		iotfleetwise_importDecoderManifestCmd.MarkFlagRequired("network-file-definitions")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_importDecoderManifestCmd)
 }

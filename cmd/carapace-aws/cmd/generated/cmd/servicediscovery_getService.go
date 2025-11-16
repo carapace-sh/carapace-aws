@@ -12,9 +12,11 @@ var servicediscovery_getServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_getServiceCmd).Standalone()
+	carapace.Gen(servicediscovery_getServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_getServiceCmd).Standalone()
 
-	servicediscovery_getServiceCmd.Flags().String("id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to get settings for.")
-	servicediscovery_getServiceCmd.MarkFlagRequired("id")
+		servicediscovery_getServiceCmd.Flags().String("id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to get settings for.")
+		servicediscovery_getServiceCmd.MarkFlagRequired("id")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_getServiceCmd)
 }

@@ -12,11 +12,13 @@ var quicksight_describeThemePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeThemePermissionsCmd).Standalone()
+	carapace.Gen(quicksight_describeThemePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeThemePermissionsCmd).Standalone()
 
-	quicksight_describeThemePermissionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the theme that you're describing.")
-	quicksight_describeThemePermissionsCmd.Flags().String("theme-id", "", "The ID for the theme that you want to describe permissions for.")
-	quicksight_describeThemePermissionsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeThemePermissionsCmd.MarkFlagRequired("theme-id")
+		quicksight_describeThemePermissionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the theme that you're describing.")
+		quicksight_describeThemePermissionsCmd.Flags().String("theme-id", "", "The ID for the theme that you want to describe permissions for.")
+		quicksight_describeThemePermissionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeThemePermissionsCmd.MarkFlagRequired("theme-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeThemePermissionsCmd)
 }

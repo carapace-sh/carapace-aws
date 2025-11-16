@@ -12,9 +12,11 @@ var globalaccelerator_describeAcceleratorAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_describeAcceleratorAttributesCmd).Standalone()
+	carapace.Gen(globalaccelerator_describeAcceleratorAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_describeAcceleratorAttributesCmd).Standalone()
 
-	globalaccelerator_describeAcceleratorAttributesCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe.")
-	globalaccelerator_describeAcceleratorAttributesCmd.MarkFlagRequired("accelerator-arn")
+		globalaccelerator_describeAcceleratorAttributesCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe.")
+		globalaccelerator_describeAcceleratorAttributesCmd.MarkFlagRequired("accelerator-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_describeAcceleratorAttributesCmd)
 }

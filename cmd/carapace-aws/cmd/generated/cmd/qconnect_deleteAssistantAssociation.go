@@ -12,11 +12,13 @@ var qconnect_deleteAssistantAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_deleteAssistantAssociationCmd).Standalone()
+	carapace.Gen(qconnect_deleteAssistantAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_deleteAssistantAssociationCmd).Standalone()
 
-	qconnect_deleteAssistantAssociationCmd.Flags().String("assistant-association-id", "", "The identifier of the assistant association.")
-	qconnect_deleteAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_deleteAssistantAssociationCmd.MarkFlagRequired("assistant-association-id")
-	qconnect_deleteAssistantAssociationCmd.MarkFlagRequired("assistant-id")
+		qconnect_deleteAssistantAssociationCmd.Flags().String("assistant-association-id", "", "The identifier of the assistant association.")
+		qconnect_deleteAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_deleteAssistantAssociationCmd.MarkFlagRequired("assistant-association-id")
+		qconnect_deleteAssistantAssociationCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_deleteAssistantAssociationCmd)
 }

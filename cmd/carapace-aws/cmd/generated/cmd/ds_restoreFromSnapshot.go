@@ -12,9 +12,11 @@ var ds_restoreFromSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_restoreFromSnapshotCmd).Standalone()
+	carapace.Gen(ds_restoreFromSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_restoreFromSnapshotCmd).Standalone()
 
-	ds_restoreFromSnapshotCmd.Flags().String("snapshot-id", "", "The identifier of the snapshot to restore from.")
-	ds_restoreFromSnapshotCmd.MarkFlagRequired("snapshot-id")
+		ds_restoreFromSnapshotCmd.Flags().String("snapshot-id", "", "The identifier of the snapshot to restore from.")
+		ds_restoreFromSnapshotCmd.MarkFlagRequired("snapshot-id")
+	})
 	dsCmd.AddCommand(ds_restoreFromSnapshotCmd)
 }

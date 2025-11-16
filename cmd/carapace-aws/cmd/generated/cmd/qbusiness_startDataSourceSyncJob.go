@@ -12,13 +12,15 @@ var qbusiness_startDataSourceSyncJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_startDataSourceSyncJobCmd).Standalone()
+	carapace.Gen(qbusiness_startDataSourceSyncJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_startDataSourceSyncJobCmd).Standalone()
 
-	qbusiness_startDataSourceSyncJobCmd.Flags().String("application-id", "", "The identifier of Amazon Q Business application the data source is connected to.")
-	qbusiness_startDataSourceSyncJobCmd.Flags().String("data-source-id", "", "The identifier of the data source connector.")
-	qbusiness_startDataSourceSyncJobCmd.Flags().String("index-id", "", "The identifier of the index used with the data source connector.")
-	qbusiness_startDataSourceSyncJobCmd.MarkFlagRequired("application-id")
-	qbusiness_startDataSourceSyncJobCmd.MarkFlagRequired("data-source-id")
-	qbusiness_startDataSourceSyncJobCmd.MarkFlagRequired("index-id")
+		qbusiness_startDataSourceSyncJobCmd.Flags().String("application-id", "", "The identifier of Amazon Q Business application the data source is connected to.")
+		qbusiness_startDataSourceSyncJobCmd.Flags().String("data-source-id", "", "The identifier of the data source connector.")
+		qbusiness_startDataSourceSyncJobCmd.Flags().String("index-id", "", "The identifier of the index used with the data source connector.")
+		qbusiness_startDataSourceSyncJobCmd.MarkFlagRequired("application-id")
+		qbusiness_startDataSourceSyncJobCmd.MarkFlagRequired("data-source-id")
+		qbusiness_startDataSourceSyncJobCmd.MarkFlagRequired("index-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_startDataSourceSyncJobCmd)
 }

@@ -12,9 +12,11 @@ var dms_deleteEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteEndpointCmd).Standalone()
+	carapace.Gen(dms_deleteEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteEndpointCmd).Standalone()
 
-	dms_deleteEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.")
-	dms_deleteEndpointCmd.MarkFlagRequired("endpoint-arn")
+		dms_deleteEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.")
+		dms_deleteEndpointCmd.MarkFlagRequired("endpoint-arn")
+	})
 	dmsCmd.AddCommand(dms_deleteEndpointCmd)
 }

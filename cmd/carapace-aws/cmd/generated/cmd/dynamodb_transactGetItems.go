@@ -12,10 +12,12 @@ var dynamodb_transactGetItemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_transactGetItemsCmd).Standalone()
+	carapace.Gen(dynamodb_transactGetItemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_transactGetItemsCmd).Standalone()
 
-	dynamodb_transactGetItemsCmd.Flags().String("return-consumed-capacity", "", "A value of `TOTAL` causes consumed capacity information to be returned, and a value of `NONE` prevents that information from being returned.")
-	dynamodb_transactGetItemsCmd.Flags().String("transact-items", "", "An ordered array of up to 100 `TransactGetItem` objects, each of which contains a `Get` structure.")
-	dynamodb_transactGetItemsCmd.MarkFlagRequired("transact-items")
+		dynamodb_transactGetItemsCmd.Flags().String("return-consumed-capacity", "", "A value of `TOTAL` causes consumed capacity information to be returned, and a value of `NONE` prevents that information from being returned.")
+		dynamodb_transactGetItemsCmd.Flags().String("transact-items", "", "An ordered array of up to 100 `TransactGetItem` objects, each of which contains a `Get` structure.")
+		dynamodb_transactGetItemsCmd.MarkFlagRequired("transact-items")
+	})
 	dynamodbCmd.AddCommand(dynamodb_transactGetItemsCmd)
 }

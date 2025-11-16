@@ -12,11 +12,13 @@ var cloudtrail_generateQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_generateQueryCmd).Standalone()
+	carapace.Gen(cloudtrail_generateQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_generateQueryCmd).Standalone()
 
-	cloudtrail_generateQueryCmd.Flags().String("event-data-stores", "", "The ARN (or ID suffix of the ARN) of the event data store that you want to query.")
-	cloudtrail_generateQueryCmd.Flags().String("prompt", "", "The prompt that you want to use to generate the query.")
-	cloudtrail_generateQueryCmd.MarkFlagRequired("event-data-stores")
-	cloudtrail_generateQueryCmd.MarkFlagRequired("prompt")
+		cloudtrail_generateQueryCmd.Flags().String("event-data-stores", "", "The ARN (or ID suffix of the ARN) of the event data store that you want to query.")
+		cloudtrail_generateQueryCmd.Flags().String("prompt", "", "The prompt that you want to use to generate the query.")
+		cloudtrail_generateQueryCmd.MarkFlagRequired("event-data-stores")
+		cloudtrail_generateQueryCmd.MarkFlagRequired("prompt")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_generateQueryCmd)
 }

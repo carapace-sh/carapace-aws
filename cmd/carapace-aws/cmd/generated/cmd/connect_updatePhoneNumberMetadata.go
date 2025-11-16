@@ -12,11 +12,13 @@ var connect_updatePhoneNumberMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updatePhoneNumberMetadataCmd).Standalone()
+	carapace.Gen(connect_updatePhoneNumberMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updatePhoneNumberMetadataCmd).Standalone()
 
-	connect_updatePhoneNumberMetadataCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connect_updatePhoneNumberMetadataCmd.Flags().String("phone-number-description", "", "The description of the phone number.")
-	connect_updatePhoneNumberMetadataCmd.Flags().String("phone-number-id", "", "The Amazon Resource Name (ARN) or resource ID of the phone number.")
-	connect_updatePhoneNumberMetadataCmd.MarkFlagRequired("phone-number-id")
+		connect_updatePhoneNumberMetadataCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connect_updatePhoneNumberMetadataCmd.Flags().String("phone-number-description", "", "The description of the phone number.")
+		connect_updatePhoneNumberMetadataCmd.Flags().String("phone-number-id", "", "The Amazon Resource Name (ARN) or resource ID of the phone number.")
+		connect_updatePhoneNumberMetadataCmd.MarkFlagRequired("phone-number-id")
+	})
 	connectCmd.AddCommand(connect_updatePhoneNumberMetadataCmd)
 }

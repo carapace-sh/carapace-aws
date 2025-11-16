@@ -12,9 +12,11 @@ var comprehend_detectDominantLanguageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_detectDominantLanguageCmd).Standalone()
+	carapace.Gen(comprehend_detectDominantLanguageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_detectDominantLanguageCmd).Standalone()
 
-	comprehend_detectDominantLanguageCmd.Flags().String("text", "", "A UTF-8 text string.")
-	comprehend_detectDominantLanguageCmd.MarkFlagRequired("text")
+		comprehend_detectDominantLanguageCmd.Flags().String("text", "", "A UTF-8 text string.")
+		comprehend_detectDominantLanguageCmd.MarkFlagRequired("text")
+	})
 	comprehendCmd.AddCommand(comprehend_detectDominantLanguageCmd)
 }

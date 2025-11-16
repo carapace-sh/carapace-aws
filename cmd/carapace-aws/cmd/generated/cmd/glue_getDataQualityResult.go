@@ -12,9 +12,11 @@ var glue_getDataQualityResultCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getDataQualityResultCmd).Standalone()
+	carapace.Gen(glue_getDataQualityResultCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getDataQualityResultCmd).Standalone()
 
-	glue_getDataQualityResultCmd.Flags().String("result-id", "", "A unique result ID for the data quality result.")
-	glue_getDataQualityResultCmd.MarkFlagRequired("result-id")
+		glue_getDataQualityResultCmd.Flags().String("result-id", "", "A unique result ID for the data quality result.")
+		glue_getDataQualityResultCmd.MarkFlagRequired("result-id")
+	})
 	glueCmd.AddCommand(glue_getDataQualityResultCmd)
 }

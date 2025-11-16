@@ -12,11 +12,13 @@ var wafRegional_deleteRateBasedRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_deleteRateBasedRuleCmd).Standalone()
+	carapace.Gen(wafRegional_deleteRateBasedRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_deleteRateBasedRuleCmd).Standalone()
 
-	wafRegional_deleteRateBasedRuleCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	wafRegional_deleteRateBasedRuleCmd.Flags().String("rule-id", "", "The `RuleId` of the [RateBasedRule]() that you want to delete.")
-	wafRegional_deleteRateBasedRuleCmd.MarkFlagRequired("change-token")
-	wafRegional_deleteRateBasedRuleCmd.MarkFlagRequired("rule-id")
+		wafRegional_deleteRateBasedRuleCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		wafRegional_deleteRateBasedRuleCmd.Flags().String("rule-id", "", "The `RuleId` of the [RateBasedRule]() that you want to delete.")
+		wafRegional_deleteRateBasedRuleCmd.MarkFlagRequired("change-token")
+		wafRegional_deleteRateBasedRuleCmd.MarkFlagRequired("rule-id")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_deleteRateBasedRuleCmd)
 }

@@ -12,9 +12,11 @@ var healthlake_describeFhirdatastoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(healthlake_describeFhirdatastoreCmd).Standalone()
+	carapace.Gen(healthlake_describeFhirdatastoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(healthlake_describeFhirdatastoreCmd).Standalone()
 
-	healthlake_describeFhirdatastoreCmd.Flags().String("datastore-id", "", "The data store identifier.")
-	healthlake_describeFhirdatastoreCmd.MarkFlagRequired("datastore-id")
+		healthlake_describeFhirdatastoreCmd.Flags().String("datastore-id", "", "The data store identifier.")
+		healthlake_describeFhirdatastoreCmd.MarkFlagRequired("datastore-id")
+	})
 	healthlakeCmd.AddCommand(healthlake_describeFhirdatastoreCmd)
 }

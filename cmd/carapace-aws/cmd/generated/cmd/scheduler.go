@@ -12,7 +12,9 @@ var schedulerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schedulerCmd).Standalone()
+	carapace.Gen(schedulerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schedulerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(schedulerCmd)
 }

@@ -12,9 +12,11 @@ var apprunner_deleteConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_deleteConnectionCmd).Standalone()
+	carapace.Gen(apprunner_deleteConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_deleteConnectionCmd).Standalone()
 
-	apprunner_deleteConnectionCmd.Flags().String("connection-arn", "", "The Amazon Resource Name (ARN) of the App Runner connection that you want to delete.")
-	apprunner_deleteConnectionCmd.MarkFlagRequired("connection-arn")
+		apprunner_deleteConnectionCmd.Flags().String("connection-arn", "", "The Amazon Resource Name (ARN) of the App Runner connection that you want to delete.")
+		apprunner_deleteConnectionCmd.MarkFlagRequired("connection-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_deleteConnectionCmd)
 }

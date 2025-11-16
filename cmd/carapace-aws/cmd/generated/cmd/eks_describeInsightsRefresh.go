@@ -12,9 +12,11 @@ var eks_describeInsightsRefreshCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_describeInsightsRefreshCmd).Standalone()
+	carapace.Gen(eks_describeInsightsRefreshCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_describeInsightsRefreshCmd).Standalone()
 
-	eks_describeInsightsRefreshCmd.Flags().String("cluster-name", "", "The name of the cluster associated with the insights refresh operation.")
-	eks_describeInsightsRefreshCmd.MarkFlagRequired("cluster-name")
+		eks_describeInsightsRefreshCmd.Flags().String("cluster-name", "", "The name of the cluster associated with the insights refresh operation.")
+		eks_describeInsightsRefreshCmd.MarkFlagRequired("cluster-name")
+	})
 	eksCmd.AddCommand(eks_describeInsightsRefreshCmd)
 }

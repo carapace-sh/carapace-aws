@@ -12,15 +12,17 @@ var lexv2Models_batchCreateCustomVocabularyItemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_batchCreateCustomVocabularyItemCmd).Standalone()
+	carapace.Gen(lexv2Models_batchCreateCustomVocabularyItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_batchCreateCustomVocabularyItemCmd).Standalone()
 
-	lexv2Models_batchCreateCustomVocabularyItemCmd.Flags().String("bot-id", "", "The identifier of the bot associated with this custom vocabulary.")
-	lexv2Models_batchCreateCustomVocabularyItemCmd.Flags().String("bot-version", "", "The identifier of the version of the bot associated with this custom vocabulary.")
-	lexv2Models_batchCreateCustomVocabularyItemCmd.Flags().String("custom-vocabulary-item-list", "", "A list of new custom vocabulary items.")
-	lexv2Models_batchCreateCustomVocabularyItemCmd.Flags().String("locale-id", "", "The identifier of the language and locale where this custom vocabulary is used.")
-	lexv2Models_batchCreateCustomVocabularyItemCmd.MarkFlagRequired("bot-id")
-	lexv2Models_batchCreateCustomVocabularyItemCmd.MarkFlagRequired("bot-version")
-	lexv2Models_batchCreateCustomVocabularyItemCmd.MarkFlagRequired("custom-vocabulary-item-list")
-	lexv2Models_batchCreateCustomVocabularyItemCmd.MarkFlagRequired("locale-id")
+		lexv2Models_batchCreateCustomVocabularyItemCmd.Flags().String("bot-id", "", "The identifier of the bot associated with this custom vocabulary.")
+		lexv2Models_batchCreateCustomVocabularyItemCmd.Flags().String("bot-version", "", "The identifier of the version of the bot associated with this custom vocabulary.")
+		lexv2Models_batchCreateCustomVocabularyItemCmd.Flags().String("custom-vocabulary-item-list", "", "A list of new custom vocabulary items.")
+		lexv2Models_batchCreateCustomVocabularyItemCmd.Flags().String("locale-id", "", "The identifier of the language and locale where this custom vocabulary is used.")
+		lexv2Models_batchCreateCustomVocabularyItemCmd.MarkFlagRequired("bot-id")
+		lexv2Models_batchCreateCustomVocabularyItemCmd.MarkFlagRequired("bot-version")
+		lexv2Models_batchCreateCustomVocabularyItemCmd.MarkFlagRequired("custom-vocabulary-item-list")
+		lexv2Models_batchCreateCustomVocabularyItemCmd.MarkFlagRequired("locale-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_batchCreateCustomVocabularyItemCmd)
 }

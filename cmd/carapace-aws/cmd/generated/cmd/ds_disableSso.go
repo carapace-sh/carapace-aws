@@ -12,11 +12,13 @@ var ds_disableSsoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_disableSsoCmd).Standalone()
+	carapace.Gen(ds_disableSsoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_disableSsoCmd).Standalone()
 
-	ds_disableSsoCmd.Flags().String("directory-id", "", "The identifier of the directory for which to disable single-sign on.")
-	ds_disableSsoCmd.Flags().String("password", "", "The password of an alternate account to use to disable single-sign on.")
-	ds_disableSsoCmd.Flags().String("user-name", "", "The username of an alternate account to use to disable single-sign on.")
-	ds_disableSsoCmd.MarkFlagRequired("directory-id")
+		ds_disableSsoCmd.Flags().String("directory-id", "", "The identifier of the directory for which to disable single-sign on.")
+		ds_disableSsoCmd.Flags().String("password", "", "The password of an alternate account to use to disable single-sign on.")
+		ds_disableSsoCmd.Flags().String("user-name", "", "The username of an alternate account to use to disable single-sign on.")
+		ds_disableSsoCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_disableSsoCmd)
 }

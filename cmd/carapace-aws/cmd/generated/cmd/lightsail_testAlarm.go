@@ -12,11 +12,13 @@ var lightsail_testAlarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_testAlarmCmd).Standalone()
+	carapace.Gen(lightsail_testAlarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_testAlarmCmd).Standalone()
 
-	lightsail_testAlarmCmd.Flags().String("alarm-name", "", "The name of the alarm to test.")
-	lightsail_testAlarmCmd.Flags().String("state", "", "The alarm state to test.")
-	lightsail_testAlarmCmd.MarkFlagRequired("alarm-name")
-	lightsail_testAlarmCmd.MarkFlagRequired("state")
+		lightsail_testAlarmCmd.Flags().String("alarm-name", "", "The name of the alarm to test.")
+		lightsail_testAlarmCmd.Flags().String("state", "", "The alarm state to test.")
+		lightsail_testAlarmCmd.MarkFlagRequired("alarm-name")
+		lightsail_testAlarmCmd.MarkFlagRequired("state")
+	})
 	lightsailCmd.AddCommand(lightsail_testAlarmCmd)
 }

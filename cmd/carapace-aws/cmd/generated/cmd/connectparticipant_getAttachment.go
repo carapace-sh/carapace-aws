@@ -12,12 +12,14 @@ var connectparticipant_getAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectparticipant_getAttachmentCmd).Standalone()
+	carapace.Gen(connectparticipant_getAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectparticipant_getAttachmentCmd).Standalone()
 
-	connectparticipant_getAttachmentCmd.Flags().String("attachment-id", "", "A unique identifier for the attachment.")
-	connectparticipant_getAttachmentCmd.Flags().String("connection-token", "", "The authentication token associated with the participant's connection.")
-	connectparticipant_getAttachmentCmd.Flags().String("url-expiry-in-seconds", "", "The expiration time of the URL in ISO timestamp.")
-	connectparticipant_getAttachmentCmd.MarkFlagRequired("attachment-id")
-	connectparticipant_getAttachmentCmd.MarkFlagRequired("connection-token")
+		connectparticipant_getAttachmentCmd.Flags().String("attachment-id", "", "A unique identifier for the attachment.")
+		connectparticipant_getAttachmentCmd.Flags().String("connection-token", "", "The authentication token associated with the participant's connection.")
+		connectparticipant_getAttachmentCmd.Flags().String("url-expiry-in-seconds", "", "The expiration time of the URL in ISO timestamp.")
+		connectparticipant_getAttachmentCmd.MarkFlagRequired("attachment-id")
+		connectparticipant_getAttachmentCmd.MarkFlagRequired("connection-token")
+	})
 	connectparticipantCmd.AddCommand(connectparticipant_getAttachmentCmd)
 }

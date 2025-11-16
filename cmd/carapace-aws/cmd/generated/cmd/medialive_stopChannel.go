@@ -12,9 +12,11 @@ var medialive_stopChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_stopChannelCmd).Standalone()
+	carapace.Gen(medialive_stopChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_stopChannelCmd).Standalone()
 
-	medialive_stopChannelCmd.Flags().String("channel-id", "", "A request to stop a running channel")
-	medialive_stopChannelCmd.MarkFlagRequired("channel-id")
+		medialive_stopChannelCmd.Flags().String("channel-id", "", "A request to stop a running channel")
+		medialive_stopChannelCmd.MarkFlagRequired("channel-id")
+	})
 	medialiveCmd.AddCommand(medialive_stopChannelCmd)
 }

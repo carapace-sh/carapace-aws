@@ -12,10 +12,12 @@ var xray_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(xray_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_deleteResourcePolicyCmd).Standalone()
 
-	xray_deleteResourcePolicyCmd.Flags().String("policy-name", "", "The name of the resource policy to delete.")
-	xray_deleteResourcePolicyCmd.Flags().String("policy-revision-id", "", "Specifies a specific policy revision to delete.")
-	xray_deleteResourcePolicyCmd.MarkFlagRequired("policy-name")
+		xray_deleteResourcePolicyCmd.Flags().String("policy-name", "", "The name of the resource policy to delete.")
+		xray_deleteResourcePolicyCmd.Flags().String("policy-revision-id", "", "Specifies a specific policy revision to delete.")
+		xray_deleteResourcePolicyCmd.MarkFlagRequired("policy-name")
+	})
 	xrayCmd.AddCommand(xray_deleteResourcePolicyCmd)
 }

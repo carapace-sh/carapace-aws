@@ -12,8 +12,10 @@ var route53domains_getContactReachabilityStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_getContactReachabilityStatusCmd).Standalone()
+	carapace.Gen(route53domains_getContactReachabilityStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_getContactReachabilityStatusCmd).Standalone()
 
-	route53domains_getContactReachabilityStatusCmd.Flags().String("domain-name", "", "The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid.")
+		route53domains_getContactReachabilityStatusCmd.Flags().String("domain-name", "", "The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid.")
+	})
 	route53domainsCmd.AddCommand(route53domains_getContactReachabilityStatusCmd)
 }

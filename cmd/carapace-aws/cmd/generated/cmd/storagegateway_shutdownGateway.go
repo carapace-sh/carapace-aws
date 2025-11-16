@@ -12,9 +12,11 @@ var storagegateway_shutdownGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_shutdownGatewayCmd).Standalone()
+	carapace.Gen(storagegateway_shutdownGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_shutdownGatewayCmd).Standalone()
 
-	storagegateway_shutdownGatewayCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_shutdownGatewayCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_shutdownGatewayCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_shutdownGatewayCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_shutdownGatewayCmd)
 }

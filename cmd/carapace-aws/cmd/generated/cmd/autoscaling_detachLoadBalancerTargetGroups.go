@@ -12,11 +12,13 @@ var autoscaling_detachLoadBalancerTargetGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_detachLoadBalancerTargetGroupsCmd).Standalone()
+	carapace.Gen(autoscaling_detachLoadBalancerTargetGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_detachLoadBalancerTargetGroupsCmd).Standalone()
 
-	autoscaling_detachLoadBalancerTargetGroupsCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_detachLoadBalancerTargetGroupsCmd.Flags().String("target-group-arns", "", "The Amazon Resource Names (ARN) of the target groups.")
-	autoscaling_detachLoadBalancerTargetGroupsCmd.MarkFlagRequired("auto-scaling-group-name")
-	autoscaling_detachLoadBalancerTargetGroupsCmd.MarkFlagRequired("target-group-arns")
+		autoscaling_detachLoadBalancerTargetGroupsCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_detachLoadBalancerTargetGroupsCmd.Flags().String("target-group-arns", "", "The Amazon Resource Names (ARN) of the target groups.")
+		autoscaling_detachLoadBalancerTargetGroupsCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_detachLoadBalancerTargetGroupsCmd.MarkFlagRequired("target-group-arns")
+	})
 	autoscalingCmd.AddCommand(autoscaling_detachLoadBalancerTargetGroupsCmd)
 }

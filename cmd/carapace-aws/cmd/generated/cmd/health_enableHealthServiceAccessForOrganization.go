@@ -12,7 +12,9 @@ var health_enableHealthServiceAccessForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(health_enableHealthServiceAccessForOrganizationCmd).Standalone()
+	carapace.Gen(health_enableHealthServiceAccessForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(health_enableHealthServiceAccessForOrganizationCmd).Standalone()
 
+	})
 	healthCmd.AddCommand(health_enableHealthServiceAccessForOrganizationCmd)
 }

@@ -12,12 +12,14 @@ var sagemaker_updateFeatureGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_updateFeatureGroupCmd).Standalone()
+	carapace.Gen(sagemaker_updateFeatureGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_updateFeatureGroupCmd).Standalone()
 
-	sagemaker_updateFeatureGroupCmd.Flags().String("feature-additions", "", "Updates the feature group.")
-	sagemaker_updateFeatureGroupCmd.Flags().String("feature-group-name", "", "The name or Amazon Resource Name (ARN) of the feature group that you're updating.")
-	sagemaker_updateFeatureGroupCmd.Flags().String("online-store-config", "", "Updates the feature group online store configuration.")
-	sagemaker_updateFeatureGroupCmd.Flags().String("throughput-config", "", "")
-	sagemaker_updateFeatureGroupCmd.MarkFlagRequired("feature-group-name")
+		sagemaker_updateFeatureGroupCmd.Flags().String("feature-additions", "", "Updates the feature group.")
+		sagemaker_updateFeatureGroupCmd.Flags().String("feature-group-name", "", "The name or Amazon Resource Name (ARN) of the feature group that you're updating.")
+		sagemaker_updateFeatureGroupCmd.Flags().String("online-store-config", "", "Updates the feature group online store configuration.")
+		sagemaker_updateFeatureGroupCmd.Flags().String("throughput-config", "", "")
+		sagemaker_updateFeatureGroupCmd.MarkFlagRequired("feature-group-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_updateFeatureGroupCmd)
 }

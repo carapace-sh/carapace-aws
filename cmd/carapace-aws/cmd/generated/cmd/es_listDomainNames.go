@@ -12,8 +12,10 @@ var es_listDomainNamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_listDomainNamesCmd).Standalone()
+	carapace.Gen(es_listDomainNamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_listDomainNamesCmd).Standalone()
 
-	es_listDomainNamesCmd.Flags().String("engine-type", "", "Optional parameter to filter the output by domain engine type.")
+		es_listDomainNamesCmd.Flags().String("engine-type", "", "Optional parameter to filter the output by domain engine type.")
+	})
 	esCmd.AddCommand(es_listDomainNamesCmd)
 }

@@ -12,9 +12,11 @@ var machinelearning_deleteMlmodelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_deleteMlmodelCmd).Standalone()
+	carapace.Gen(machinelearning_deleteMlmodelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_deleteMlmodelCmd).Standalone()
 
-	machinelearning_deleteMlmodelCmd.Flags().String("mlmodel-id", "", "A user-supplied ID that uniquely identifies the `MLModel`.")
-	machinelearning_deleteMlmodelCmd.MarkFlagRequired("mlmodel-id")
+		machinelearning_deleteMlmodelCmd.Flags().String("mlmodel-id", "", "A user-supplied ID that uniquely identifies the `MLModel`.")
+		machinelearning_deleteMlmodelCmd.MarkFlagRequired("mlmodel-id")
+	})
 	machinelearningCmd.AddCommand(machinelearning_deleteMlmodelCmd)
 }

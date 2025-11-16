@@ -12,11 +12,13 @@ var connect_describeInstanceAttributeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeInstanceAttributeCmd).Standalone()
+	carapace.Gen(connect_describeInstanceAttributeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeInstanceAttributeCmd).Standalone()
 
-	connect_describeInstanceAttributeCmd.Flags().String("attribute-type", "", "The type of attribute.")
-	connect_describeInstanceAttributeCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeInstanceAttributeCmd.MarkFlagRequired("attribute-type")
-	connect_describeInstanceAttributeCmd.MarkFlagRequired("instance-id")
+		connect_describeInstanceAttributeCmd.Flags().String("attribute-type", "", "The type of attribute.")
+		connect_describeInstanceAttributeCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeInstanceAttributeCmd.MarkFlagRequired("attribute-type")
+		connect_describeInstanceAttributeCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_describeInstanceAttributeCmd)
 }

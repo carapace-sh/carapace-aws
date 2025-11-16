@@ -12,11 +12,13 @@ var events_listConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_listConnectionsCmd).Standalone()
+	carapace.Gen(events_listConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_listConnectionsCmd).Standalone()
 
-	events_listConnectionsCmd.Flags().String("connection-state", "", "The state of the connection.")
-	events_listConnectionsCmd.Flags().String("limit", "", "The maximum number of connections to return.")
-	events_listConnectionsCmd.Flags().String("name-prefix", "", "A name prefix to filter results returned.")
-	events_listConnectionsCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
+		events_listConnectionsCmd.Flags().String("connection-state", "", "The state of the connection.")
+		events_listConnectionsCmd.Flags().String("limit", "", "The maximum number of connections to return.")
+		events_listConnectionsCmd.Flags().String("name-prefix", "", "A name prefix to filter results returned.")
+		events_listConnectionsCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
+	})
 	eventsCmd.AddCommand(events_listConnectionsCmd)
 }

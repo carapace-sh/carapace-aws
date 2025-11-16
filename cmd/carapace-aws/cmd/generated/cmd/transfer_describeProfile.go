@@ -12,9 +12,11 @@ var transfer_describeProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_describeProfileCmd).Standalone()
+	carapace.Gen(transfer_describeProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_describeProfileCmd).Standalone()
 
-	transfer_describeProfileCmd.Flags().String("profile-id", "", "The identifier of the profile that you want described.")
-	transfer_describeProfileCmd.MarkFlagRequired("profile-id")
+		transfer_describeProfileCmd.Flags().String("profile-id", "", "The identifier of the profile that you want described.")
+		transfer_describeProfileCmd.MarkFlagRequired("profile-id")
+	})
 	transferCmd.AddCommand(transfer_describeProfileCmd)
 }

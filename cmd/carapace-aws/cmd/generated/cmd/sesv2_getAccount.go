@@ -12,7 +12,9 @@ var sesv2_getAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getAccountCmd).Standalone()
+	carapace.Gen(sesv2_getAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getAccountCmd).Standalone()
 
+	})
 	sesv2Cmd.AddCommand(sesv2_getAccountCmd)
 }

@@ -12,11 +12,13 @@ var codestarNotifications_unsubscribeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarNotifications_unsubscribeCmd).Standalone()
+	carapace.Gen(codestarNotifications_unsubscribeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarNotifications_unsubscribeCmd).Standalone()
 
-	codestarNotifications_unsubscribeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the notification rule.")
-	codestarNotifications_unsubscribeCmd.Flags().String("target-address", "", "The ARN of the Amazon Q Developer in chat applications topic to unsubscribe from the notification rule.")
-	codestarNotifications_unsubscribeCmd.MarkFlagRequired("arn")
-	codestarNotifications_unsubscribeCmd.MarkFlagRequired("target-address")
+		codestarNotifications_unsubscribeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the notification rule.")
+		codestarNotifications_unsubscribeCmd.Flags().String("target-address", "", "The ARN of the Amazon Q Developer in chat applications topic to unsubscribe from the notification rule.")
+		codestarNotifications_unsubscribeCmd.MarkFlagRequired("arn")
+		codestarNotifications_unsubscribeCmd.MarkFlagRequired("target-address")
+	})
 	codestarNotificationsCmd.AddCommand(codestarNotifications_unsubscribeCmd)
 }

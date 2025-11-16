@@ -12,11 +12,13 @@ var config_disassociateResourceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_disassociateResourceTypesCmd).Standalone()
+	carapace.Gen(config_disassociateResourceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_disassociateResourceTypesCmd).Standalone()
 
-	config_disassociateResourceTypesCmd.Flags().String("configuration-recorder-arn", "", "The Amazon Resource Name (ARN) of the specified configuration recorder.")
-	config_disassociateResourceTypesCmd.Flags().String("resource-types", "", "The list of resource types you want to remove from the recording group of the specified configuration recorder.")
-	config_disassociateResourceTypesCmd.MarkFlagRequired("configuration-recorder-arn")
-	config_disassociateResourceTypesCmd.MarkFlagRequired("resource-types")
+		config_disassociateResourceTypesCmd.Flags().String("configuration-recorder-arn", "", "The Amazon Resource Name (ARN) of the specified configuration recorder.")
+		config_disassociateResourceTypesCmd.Flags().String("resource-types", "", "The list of resource types you want to remove from the recording group of the specified configuration recorder.")
+		config_disassociateResourceTypesCmd.MarkFlagRequired("configuration-recorder-arn")
+		config_disassociateResourceTypesCmd.MarkFlagRequired("resource-types")
+	})
 	configCmd.AddCommand(config_disassociateResourceTypesCmd)
 }

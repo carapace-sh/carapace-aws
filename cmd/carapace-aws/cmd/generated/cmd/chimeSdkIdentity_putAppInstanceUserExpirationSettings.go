@@ -12,10 +12,12 @@ var chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd).Standalone()
 
-	chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd.Flags().String("app-instance-user-arn", "", "The ARN of the `AppInstanceUser`.")
-	chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd.Flags().String("expiration-settings", "", "Settings that control the interval after which an `AppInstanceUser` is automatically deleted.")
-	chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd.MarkFlagRequired("app-instance-user-arn")
+		chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd.Flags().String("app-instance-user-arn", "", "The ARN of the `AppInstanceUser`.")
+		chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd.Flags().String("expiration-settings", "", "Settings that control the interval after which an `AppInstanceUser` is automatically deleted.")
+		chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd.MarkFlagRequired("app-instance-user-arn")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_putAppInstanceUserExpirationSettingsCmd)
 }

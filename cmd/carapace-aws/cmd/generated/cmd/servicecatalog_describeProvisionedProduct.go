@@ -12,10 +12,12 @@ var servicecatalog_describeProvisionedProductCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_describeProvisionedProductCmd).Standalone()
+	carapace.Gen(servicecatalog_describeProvisionedProductCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_describeProvisionedProductCmd).Standalone()
 
-	servicecatalog_describeProvisionedProductCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_describeProvisionedProductCmd.Flags().String("id", "", "The provisioned product identifier.")
-	servicecatalog_describeProvisionedProductCmd.Flags().String("name", "", "The name of the provisioned product.")
+		servicecatalog_describeProvisionedProductCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_describeProvisionedProductCmd.Flags().String("id", "", "The provisioned product identifier.")
+		servicecatalog_describeProvisionedProductCmd.Flags().String("name", "", "The name of the provisioned product.")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_describeProvisionedProductCmd)
 }

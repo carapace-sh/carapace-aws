@@ -12,11 +12,13 @@ var m2_listDeploymentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_listDeploymentsCmd).Standalone()
+	carapace.Gen(m2_listDeploymentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_listDeploymentsCmd).Standalone()
 
-	m2_listDeploymentsCmd.Flags().String("application-id", "", "The application identifier.")
-	m2_listDeploymentsCmd.Flags().String("max-results", "", "The maximum number of objects to return.")
-	m2_listDeploymentsCmd.Flags().String("next-token", "", "A pagination token returned from a previous call to this operation.")
-	m2_listDeploymentsCmd.MarkFlagRequired("application-id")
+		m2_listDeploymentsCmd.Flags().String("application-id", "", "The application identifier.")
+		m2_listDeploymentsCmd.Flags().String("max-results", "", "The maximum number of objects to return.")
+		m2_listDeploymentsCmd.Flags().String("next-token", "", "A pagination token returned from a previous call to this operation.")
+		m2_listDeploymentsCmd.MarkFlagRequired("application-id")
+	})
 	m2Cmd.AddCommand(m2_listDeploymentsCmd)
 }

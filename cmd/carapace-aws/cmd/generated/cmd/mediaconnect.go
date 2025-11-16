@@ -12,7 +12,9 @@ var mediaconnectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnectCmd).Standalone()
+	carapace.Gen(mediaconnectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnectCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(mediaconnectCmd)
 }

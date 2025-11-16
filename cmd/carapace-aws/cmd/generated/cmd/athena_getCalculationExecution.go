@@ -12,9 +12,11 @@ var athena_getCalculationExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_getCalculationExecutionCmd).Standalone()
+	carapace.Gen(athena_getCalculationExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_getCalculationExecutionCmd).Standalone()
 
-	athena_getCalculationExecutionCmd.Flags().String("calculation-execution-id", "", "The calculation execution UUID.")
-	athena_getCalculationExecutionCmd.MarkFlagRequired("calculation-execution-id")
+		athena_getCalculationExecutionCmd.Flags().String("calculation-execution-id", "", "The calculation execution UUID.")
+		athena_getCalculationExecutionCmd.MarkFlagRequired("calculation-execution-id")
+	})
 	athenaCmd.AddCommand(athena_getCalculationExecutionCmd)
 }

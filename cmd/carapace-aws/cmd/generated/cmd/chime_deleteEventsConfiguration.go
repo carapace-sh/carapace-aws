@@ -12,11 +12,13 @@ var chime_deleteEventsConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_deleteEventsConfigurationCmd).Standalone()
+	carapace.Gen(chime_deleteEventsConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_deleteEventsConfigurationCmd).Standalone()
 
-	chime_deleteEventsConfigurationCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_deleteEventsConfigurationCmd.Flags().String("bot-id", "", "The bot ID.")
-	chime_deleteEventsConfigurationCmd.MarkFlagRequired("account-id")
-	chime_deleteEventsConfigurationCmd.MarkFlagRequired("bot-id")
+		chime_deleteEventsConfigurationCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_deleteEventsConfigurationCmd.Flags().String("bot-id", "", "The bot ID.")
+		chime_deleteEventsConfigurationCmd.MarkFlagRequired("account-id")
+		chime_deleteEventsConfigurationCmd.MarkFlagRequired("bot-id")
+	})
 	chimeCmd.AddCommand(chime_deleteEventsConfigurationCmd)
 }

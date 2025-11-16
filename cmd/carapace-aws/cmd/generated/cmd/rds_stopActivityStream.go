@@ -12,10 +12,12 @@ var rds_stopActivityStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_stopActivityStreamCmd).Standalone()
+	carapace.Gen(rds_stopActivityStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_stopActivityStreamCmd).Standalone()
 
-	rds_stopActivityStreamCmd.Flags().String("apply-immediately", "", "Specifies whether or not the database activity stream is to stop as soon as possible, regardless of the maintenance window for the database.")
-	rds_stopActivityStreamCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the DB cluster for the database activity stream.")
-	rds_stopActivityStreamCmd.MarkFlagRequired("resource-arn")
+		rds_stopActivityStreamCmd.Flags().String("apply-immediately", "", "Specifies whether or not the database activity stream is to stop as soon as possible, regardless of the maintenance window for the database.")
+		rds_stopActivityStreamCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the DB cluster for the database activity stream.")
+		rds_stopActivityStreamCmd.MarkFlagRequired("resource-arn")
+	})
 	rdsCmd.AddCommand(rds_stopActivityStreamCmd)
 }

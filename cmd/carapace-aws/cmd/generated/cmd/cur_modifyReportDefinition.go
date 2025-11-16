@@ -12,11 +12,13 @@ var cur_modifyReportDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cur_modifyReportDefinitionCmd).Standalone()
+	carapace.Gen(cur_modifyReportDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cur_modifyReportDefinitionCmd).Standalone()
 
-	cur_modifyReportDefinitionCmd.Flags().String("report-definition", "", "")
-	cur_modifyReportDefinitionCmd.Flags().String("report-name", "", "")
-	cur_modifyReportDefinitionCmd.MarkFlagRequired("report-definition")
-	cur_modifyReportDefinitionCmd.MarkFlagRequired("report-name")
+		cur_modifyReportDefinitionCmd.Flags().String("report-definition", "", "")
+		cur_modifyReportDefinitionCmd.Flags().String("report-name", "", "")
+		cur_modifyReportDefinitionCmd.MarkFlagRequired("report-definition")
+		cur_modifyReportDefinitionCmd.MarkFlagRequired("report-name")
+	})
 	curCmd.AddCommand(cur_modifyReportDefinitionCmd)
 }

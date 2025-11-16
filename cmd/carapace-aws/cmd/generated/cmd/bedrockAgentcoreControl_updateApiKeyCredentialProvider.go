@@ -12,11 +12,13 @@ var bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd).Standalone()
 
-	bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd.Flags().String("api-key", "", "The new API key to use for authentication.")
-	bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd.Flags().String("name", "", "The name of the API key credential provider to update.")
-	bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd.MarkFlagRequired("api-key")
-	bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd.Flags().String("api-key", "", "The new API key to use for authentication.")
+		bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd.Flags().String("name", "", "The name of the API key credential provider to update.")
+		bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd.MarkFlagRequired("api-key")
+		bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd.MarkFlagRequired("name")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_updateApiKeyCredentialProviderCmd)
 }

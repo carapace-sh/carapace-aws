@@ -12,11 +12,13 @@ var mturk_rejectAssignmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_rejectAssignmentCmd).Standalone()
+	carapace.Gen(mturk_rejectAssignmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_rejectAssignmentCmd).Standalone()
 
-	mturk_rejectAssignmentCmd.Flags().String("assignment-id", "", "The ID of the assignment.")
-	mturk_rejectAssignmentCmd.Flags().String("requester-feedback", "", "A message for the Worker, which the Worker can see in the Status section of the web site.")
-	mturk_rejectAssignmentCmd.MarkFlagRequired("assignment-id")
-	mturk_rejectAssignmentCmd.MarkFlagRequired("requester-feedback")
+		mturk_rejectAssignmentCmd.Flags().String("assignment-id", "", "The ID of the assignment.")
+		mturk_rejectAssignmentCmd.Flags().String("requester-feedback", "", "A message for the Worker, which the Worker can see in the Status section of the web site.")
+		mturk_rejectAssignmentCmd.MarkFlagRequired("assignment-id")
+		mturk_rejectAssignmentCmd.MarkFlagRequired("requester-feedback")
+	})
 	mturkCmd.AddCommand(mturk_rejectAssignmentCmd)
 }

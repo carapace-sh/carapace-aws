@@ -12,9 +12,11 @@ var dax_deleteSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_deleteSubnetGroupCmd).Standalone()
+	carapace.Gen(dax_deleteSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_deleteSubnetGroupCmd).Standalone()
 
-	dax_deleteSubnetGroupCmd.Flags().String("subnet-group-name", "", "The name of the subnet group to delete.")
-	dax_deleteSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
+		dax_deleteSubnetGroupCmd.Flags().String("subnet-group-name", "", "The name of the subnet group to delete.")
+		dax_deleteSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
+	})
 	daxCmd.AddCommand(dax_deleteSubnetGroupCmd)
 }

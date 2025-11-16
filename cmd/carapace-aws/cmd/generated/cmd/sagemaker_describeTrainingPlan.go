@@ -12,9 +12,11 @@ var sagemaker_describeTrainingPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeTrainingPlanCmd).Standalone()
+	carapace.Gen(sagemaker_describeTrainingPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeTrainingPlanCmd).Standalone()
 
-	sagemaker_describeTrainingPlanCmd.Flags().String("training-plan-name", "", "The name of the training plan to describe.")
-	sagemaker_describeTrainingPlanCmd.MarkFlagRequired("training-plan-name")
+		sagemaker_describeTrainingPlanCmd.Flags().String("training-plan-name", "", "The name of the training plan to describe.")
+		sagemaker_describeTrainingPlanCmd.MarkFlagRequired("training-plan-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeTrainingPlanCmd)
 }

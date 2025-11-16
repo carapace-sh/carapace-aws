@@ -12,13 +12,15 @@ var kafka_updateClusterConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_updateClusterConfigurationCmd).Standalone()
+	carapace.Gen(kafka_updateClusterConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_updateClusterConfigurationCmd).Standalone()
 
-	kafka_updateClusterConfigurationCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the cluster.")
-	kafka_updateClusterConfigurationCmd.Flags().String("configuration-info", "", "Represents the configuration that you want MSK to use for the brokers in a cluster.")
-	kafka_updateClusterConfigurationCmd.Flags().String("current-version", "", "The version of the cluster that needs to be updated.")
-	kafka_updateClusterConfigurationCmd.MarkFlagRequired("cluster-arn")
-	kafka_updateClusterConfigurationCmd.MarkFlagRequired("configuration-info")
-	kafka_updateClusterConfigurationCmd.MarkFlagRequired("current-version")
+		kafka_updateClusterConfigurationCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the cluster.")
+		kafka_updateClusterConfigurationCmd.Flags().String("configuration-info", "", "Represents the configuration that you want MSK to use for the brokers in a cluster.")
+		kafka_updateClusterConfigurationCmd.Flags().String("current-version", "", "The version of the cluster that needs to be updated.")
+		kafka_updateClusterConfigurationCmd.MarkFlagRequired("cluster-arn")
+		kafka_updateClusterConfigurationCmd.MarkFlagRequired("configuration-info")
+		kafka_updateClusterConfigurationCmd.MarkFlagRequired("current-version")
+	})
 	kafkaCmd.AddCommand(kafka_updateClusterConfigurationCmd)
 }

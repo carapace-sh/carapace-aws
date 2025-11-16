@@ -12,12 +12,14 @@ var backup_createBackupSelectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_createBackupSelectionCmd).Standalone()
+	carapace.Gen(backup_createBackupSelectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_createBackupSelectionCmd).Standalone()
 
-	backup_createBackupSelectionCmd.Flags().String("backup-plan-id", "", "The ID of the backup plan.")
-	backup_createBackupSelectionCmd.Flags().String("backup-selection", "", "The body of a request to assign a set of resources to a backup plan.")
-	backup_createBackupSelectionCmd.Flags().String("creator-request-id", "", "A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.")
-	backup_createBackupSelectionCmd.MarkFlagRequired("backup-plan-id")
-	backup_createBackupSelectionCmd.MarkFlagRequired("backup-selection")
+		backup_createBackupSelectionCmd.Flags().String("backup-plan-id", "", "The ID of the backup plan.")
+		backup_createBackupSelectionCmd.Flags().String("backup-selection", "", "The body of a request to assign a set of resources to a backup plan.")
+		backup_createBackupSelectionCmd.Flags().String("creator-request-id", "", "A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.")
+		backup_createBackupSelectionCmd.MarkFlagRequired("backup-plan-id")
+		backup_createBackupSelectionCmd.MarkFlagRequired("backup-selection")
+	})
 	backupCmd.AddCommand(backup_createBackupSelectionCmd)
 }

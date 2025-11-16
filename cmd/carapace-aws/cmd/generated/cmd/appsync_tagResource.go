@@ -12,11 +12,13 @@ var appsync_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_tagResourceCmd).Standalone()
+	carapace.Gen(appsync_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_tagResourceCmd).Standalone()
 
-	appsync_tagResourceCmd.Flags().String("resource-arn", "", "The `GraphqlApi` Amazon Resource Name (ARN).")
-	appsync_tagResourceCmd.Flags().String("tags", "", "A `TagMap` object.")
-	appsync_tagResourceCmd.MarkFlagRequired("resource-arn")
-	appsync_tagResourceCmd.MarkFlagRequired("tags")
+		appsync_tagResourceCmd.Flags().String("resource-arn", "", "The `GraphqlApi` Amazon Resource Name (ARN).")
+		appsync_tagResourceCmd.Flags().String("tags", "", "A `TagMap` object.")
+		appsync_tagResourceCmd.MarkFlagRequired("resource-arn")
+		appsync_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	appsyncCmd.AddCommand(appsync_tagResourceCmd)
 }

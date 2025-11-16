@@ -12,11 +12,13 @@ var schemas_getDiscoveredSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_getDiscoveredSchemaCmd).Standalone()
+	carapace.Gen(schemas_getDiscoveredSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_getDiscoveredSchemaCmd).Standalone()
 
-	schemas_getDiscoveredSchemaCmd.Flags().String("events", "", "An array of strings where each string is a JSON event.")
-	schemas_getDiscoveredSchemaCmd.Flags().String("type", "", "The type of event.")
-	schemas_getDiscoveredSchemaCmd.MarkFlagRequired("events")
-	schemas_getDiscoveredSchemaCmd.MarkFlagRequired("type")
+		schemas_getDiscoveredSchemaCmd.Flags().String("events", "", "An array of strings where each string is a JSON event.")
+		schemas_getDiscoveredSchemaCmd.Flags().String("type", "", "The type of event.")
+		schemas_getDiscoveredSchemaCmd.MarkFlagRequired("events")
+		schemas_getDiscoveredSchemaCmd.MarkFlagRequired("type")
+	})
 	schemasCmd.AddCommand(schemas_getDiscoveredSchemaCmd)
 }

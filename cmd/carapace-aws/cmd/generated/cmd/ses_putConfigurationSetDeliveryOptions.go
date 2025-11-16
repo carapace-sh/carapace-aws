@@ -12,10 +12,12 @@ var ses_putConfigurationSetDeliveryOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_putConfigurationSetDeliveryOptionsCmd).Standalone()
+	carapace.Gen(ses_putConfigurationSetDeliveryOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_putConfigurationSetDeliveryOptionsCmd).Standalone()
 
-	ses_putConfigurationSetDeliveryOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
-	ses_putConfigurationSetDeliveryOptionsCmd.Flags().String("delivery-options", "", "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS).")
-	ses_putConfigurationSetDeliveryOptionsCmd.MarkFlagRequired("configuration-set-name")
+		ses_putConfigurationSetDeliveryOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
+		ses_putConfigurationSetDeliveryOptionsCmd.Flags().String("delivery-options", "", "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS).")
+		ses_putConfigurationSetDeliveryOptionsCmd.MarkFlagRequired("configuration-set-name")
+	})
 	sesCmd.AddCommand(ses_putConfigurationSetDeliveryOptionsCmd)
 }

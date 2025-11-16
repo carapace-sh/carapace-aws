@@ -12,9 +12,11 @@ var cleanroomsml_getMlconfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_getMlconfigurationCmd).Standalone()
+	carapace.Gen(cleanroomsml_getMlconfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_getMlconfigurationCmd).Standalone()
 
-	cleanroomsml_getMlconfigurationCmd.Flags().String("membership-identifier", "", "The membership ID of the member that owns the ML configuration you want to return information about.")
-	cleanroomsml_getMlconfigurationCmd.MarkFlagRequired("membership-identifier")
+		cleanroomsml_getMlconfigurationCmd.Flags().String("membership-identifier", "", "The membership ID of the member that owns the ML configuration you want to return information about.")
+		cleanroomsml_getMlconfigurationCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_getMlconfigurationCmd)
 }

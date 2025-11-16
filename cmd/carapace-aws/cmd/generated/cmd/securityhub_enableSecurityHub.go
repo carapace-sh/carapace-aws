@@ -12,12 +12,14 @@ var securityhub_enableSecurityHubCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_enableSecurityHubCmd).Standalone()
+	carapace.Gen(securityhub_enableSecurityHubCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_enableSecurityHubCmd).Standalone()
 
-	securityhub_enableSecurityHubCmd.Flags().String("control-finding-generator", "", "This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on.")
-	securityhub_enableSecurityHubCmd.Flags().Bool("enable-default-standards", false, "Whether to enable the security standards that Security Hub has designated as automatically enabled.")
-	securityhub_enableSecurityHubCmd.Flags().Bool("no-enable-default-standards", false, "Whether to enable the security standards that Security Hub has designated as automatically enabled.")
-	securityhub_enableSecurityHubCmd.Flags().String("tags", "", "The tags to add to the hub resource when you enable Security Hub.")
-	securityhub_enableSecurityHubCmd.Flag("no-enable-default-standards").Hidden = true
+		securityhub_enableSecurityHubCmd.Flags().String("control-finding-generator", "", "This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on.")
+		securityhub_enableSecurityHubCmd.Flags().Bool("enable-default-standards", false, "Whether to enable the security standards that Security Hub has designated as automatically enabled.")
+		securityhub_enableSecurityHubCmd.Flags().Bool("no-enable-default-standards", false, "Whether to enable the security standards that Security Hub has designated as automatically enabled.")
+		securityhub_enableSecurityHubCmd.Flags().String("tags", "", "The tags to add to the hub resource when you enable Security Hub.")
+		securityhub_enableSecurityHubCmd.Flag("no-enable-default-standards").Hidden = true
+	})
 	securityhubCmd.AddCommand(securityhub_enableSecurityHubCmd)
 }

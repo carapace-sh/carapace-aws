@@ -12,9 +12,11 @@ var sagemaker_describeDataQualityJobDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeDataQualityJobDefinitionCmd).Standalone()
+	carapace.Gen(sagemaker_describeDataQualityJobDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeDataQualityJobDefinitionCmd).Standalone()
 
-	sagemaker_describeDataQualityJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the data quality monitoring job definition to describe.")
-	sagemaker_describeDataQualityJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+		sagemaker_describeDataQualityJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the data quality monitoring job definition to describe.")
+		sagemaker_describeDataQualityJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeDataQualityJobDefinitionCmd)
 }

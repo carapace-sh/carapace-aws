@@ -12,11 +12,13 @@ var ssoAdmin_getApplicationAuthenticationMethodCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_getApplicationAuthenticationMethodCmd).Standalone()
+	carapace.Gen(ssoAdmin_getApplicationAuthenticationMethodCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_getApplicationAuthenticationMethodCmd).Standalone()
 
-	ssoAdmin_getApplicationAuthenticationMethodCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
-	ssoAdmin_getApplicationAuthenticationMethodCmd.Flags().String("authentication-method-type", "", "Specifies the type of authentication method for which you want details.")
-	ssoAdmin_getApplicationAuthenticationMethodCmd.MarkFlagRequired("application-arn")
-	ssoAdmin_getApplicationAuthenticationMethodCmd.MarkFlagRequired("authentication-method-type")
+		ssoAdmin_getApplicationAuthenticationMethodCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
+		ssoAdmin_getApplicationAuthenticationMethodCmd.Flags().String("authentication-method-type", "", "Specifies the type of authentication method for which you want details.")
+		ssoAdmin_getApplicationAuthenticationMethodCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_getApplicationAuthenticationMethodCmd.MarkFlagRequired("authentication-method-type")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_getApplicationAuthenticationMethodCmd)
 }

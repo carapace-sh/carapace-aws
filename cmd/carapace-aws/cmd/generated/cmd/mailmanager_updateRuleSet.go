@@ -12,11 +12,13 @@ var mailmanager_updateRuleSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_updateRuleSetCmd).Standalone()
+	carapace.Gen(mailmanager_updateRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_updateRuleSetCmd).Standalone()
 
-	mailmanager_updateRuleSetCmd.Flags().String("rule-set-id", "", "The identifier of a rule set you want to update.")
-	mailmanager_updateRuleSetCmd.Flags().String("rule-set-name", "", "A user-friendly name for the rule set resource.")
-	mailmanager_updateRuleSetCmd.Flags().String("rules", "", "A new set of rules to replace the current rules of the rule set—these rules will override all the rules of the rule set.")
-	mailmanager_updateRuleSetCmd.MarkFlagRequired("rule-set-id")
+		mailmanager_updateRuleSetCmd.Flags().String("rule-set-id", "", "The identifier of a rule set you want to update.")
+		mailmanager_updateRuleSetCmd.Flags().String("rule-set-name", "", "A user-friendly name for the rule set resource.")
+		mailmanager_updateRuleSetCmd.Flags().String("rules", "", "A new set of rules to replace the current rules of the rule set—these rules will override all the rules of the rule set.")
+		mailmanager_updateRuleSetCmd.MarkFlagRequired("rule-set-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_updateRuleSetCmd)
 }

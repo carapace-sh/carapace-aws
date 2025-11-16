@@ -12,9 +12,11 @@ var elasticbeanstalk_disassociateEnvironmentOperationsRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_disassociateEnvironmentOperationsRoleCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_disassociateEnvironmentOperationsRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_disassociateEnvironmentOperationsRoleCmd).Standalone()
 
-	elasticbeanstalk_disassociateEnvironmentOperationsRoleCmd.Flags().String("environment-name", "", "The name of the environment from which to disassociate the operations role.")
-	elasticbeanstalk_disassociateEnvironmentOperationsRoleCmd.MarkFlagRequired("environment-name")
+		elasticbeanstalk_disassociateEnvironmentOperationsRoleCmd.Flags().String("environment-name", "", "The name of the environment from which to disassociate the operations role.")
+		elasticbeanstalk_disassociateEnvironmentOperationsRoleCmd.MarkFlagRequired("environment-name")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_disassociateEnvironmentOperationsRoleCmd)
 }

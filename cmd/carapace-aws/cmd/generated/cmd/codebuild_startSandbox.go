@@ -12,9 +12,11 @@ var codebuild_startSandboxCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_startSandboxCmd).Standalone()
+	carapace.Gen(codebuild_startSandboxCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_startSandboxCmd).Standalone()
 
-	codebuild_startSandboxCmd.Flags().String("idempotency-token", "", "A unique client token.")
-	codebuild_startSandboxCmd.Flags().String("project-name", "", "The CodeBuild project name.")
+		codebuild_startSandboxCmd.Flags().String("idempotency-token", "", "A unique client token.")
+		codebuild_startSandboxCmd.Flags().String("project-name", "", "The CodeBuild project name.")
+	})
 	codebuildCmd.AddCommand(codebuild_startSandboxCmd)
 }

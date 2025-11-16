@@ -12,9 +12,11 @@ var sesv2_deleteDedicatedIpPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteDedicatedIpPoolCmd).Standalone()
+	carapace.Gen(sesv2_deleteDedicatedIpPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteDedicatedIpPoolCmd).Standalone()
 
-	sesv2_deleteDedicatedIpPoolCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool that you want to delete.")
-	sesv2_deleteDedicatedIpPoolCmd.MarkFlagRequired("pool-name")
+		sesv2_deleteDedicatedIpPoolCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool that you want to delete.")
+		sesv2_deleteDedicatedIpPoolCmd.MarkFlagRequired("pool-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteDedicatedIpPoolCmd)
 }

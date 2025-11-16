@@ -12,14 +12,16 @@ var neptune_createDbsubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_createDbsubnetGroupCmd).Standalone()
+	carapace.Gen(neptune_createDbsubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_createDbsubnetGroupCmd).Standalone()
 
-	neptune_createDbsubnetGroupCmd.Flags().String("dbsubnet-group-description", "", "The description for the DB subnet group.")
-	neptune_createDbsubnetGroupCmd.Flags().String("dbsubnet-group-name", "", "The name for the DB subnet group.")
-	neptune_createDbsubnetGroupCmd.Flags().String("subnet-ids", "", "The EC2 Subnet IDs for the DB subnet group.")
-	neptune_createDbsubnetGroupCmd.Flags().String("tags", "", "The tags to be assigned to the new DB subnet group.")
-	neptune_createDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-description")
-	neptune_createDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-name")
-	neptune_createDbsubnetGroupCmd.MarkFlagRequired("subnet-ids")
+		neptune_createDbsubnetGroupCmd.Flags().String("dbsubnet-group-description", "", "The description for the DB subnet group.")
+		neptune_createDbsubnetGroupCmd.Flags().String("dbsubnet-group-name", "", "The name for the DB subnet group.")
+		neptune_createDbsubnetGroupCmd.Flags().String("subnet-ids", "", "The EC2 Subnet IDs for the DB subnet group.")
+		neptune_createDbsubnetGroupCmd.Flags().String("tags", "", "The tags to be assigned to the new DB subnet group.")
+		neptune_createDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-description")
+		neptune_createDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-name")
+		neptune_createDbsubnetGroupCmd.MarkFlagRequired("subnet-ids")
+	})
 	neptuneCmd.AddCommand(neptune_createDbsubnetGroupCmd)
 }

@@ -12,7 +12,9 @@ var lookoutequipmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipmentCmd).Standalone()
+	carapace.Gen(lookoutequipmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipmentCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(lookoutequipmentCmd)
 }

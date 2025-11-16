@@ -12,9 +12,11 @@ var appconfig_getDeploymentStrategyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_getDeploymentStrategyCmd).Standalone()
+	carapace.Gen(appconfig_getDeploymentStrategyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_getDeploymentStrategyCmd).Standalone()
 
-	appconfig_getDeploymentStrategyCmd.Flags().String("deployment-strategy-id", "", "The ID of the deployment strategy to get.")
-	appconfig_getDeploymentStrategyCmd.MarkFlagRequired("deployment-strategy-id")
+		appconfig_getDeploymentStrategyCmd.Flags().String("deployment-strategy-id", "", "The ID of the deployment strategy to get.")
+		appconfig_getDeploymentStrategyCmd.MarkFlagRequired("deployment-strategy-id")
+	})
 	appconfigCmd.AddCommand(appconfig_getDeploymentStrategyCmd)
 }

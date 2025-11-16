@@ -12,7 +12,9 @@ var taxsettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettingsCmd).Standalone()
+	carapace.Gen(taxsettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettingsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(taxsettingsCmd)
 }

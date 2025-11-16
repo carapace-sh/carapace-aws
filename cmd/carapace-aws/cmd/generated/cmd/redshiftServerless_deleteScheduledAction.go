@@ -12,9 +12,11 @@ var redshiftServerless_deleteScheduledActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_deleteScheduledActionCmd).Standalone()
+	carapace.Gen(redshiftServerless_deleteScheduledActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_deleteScheduledActionCmd).Standalone()
 
-	redshiftServerless_deleteScheduledActionCmd.Flags().String("scheduled-action-name", "", "The name of the scheduled action to delete.")
-	redshiftServerless_deleteScheduledActionCmd.MarkFlagRequired("scheduled-action-name")
+		redshiftServerless_deleteScheduledActionCmd.Flags().String("scheduled-action-name", "", "The name of the scheduled action to delete.")
+		redshiftServerless_deleteScheduledActionCmd.MarkFlagRequired("scheduled-action-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_deleteScheduledActionCmd)
 }

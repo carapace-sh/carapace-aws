@@ -12,9 +12,11 @@ var aiops_deleteInvestigationGroupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(aiops_deleteInvestigationGroupPolicyCmd).Standalone()
+	carapace.Gen(aiops_deleteInvestigationGroupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(aiops_deleteInvestigationGroupPolicyCmd).Standalone()
 
-	aiops_deleteInvestigationGroupPolicyCmd.Flags().String("identifier", "", "Specify either the name or the ARN of the investigation group that you want to remove the policy from.")
-	aiops_deleteInvestigationGroupPolicyCmd.MarkFlagRequired("identifier")
+		aiops_deleteInvestigationGroupPolicyCmd.Flags().String("identifier", "", "Specify either the name or the ARN of the investigation group that you want to remove the policy from.")
+		aiops_deleteInvestigationGroupPolicyCmd.MarkFlagRequired("identifier")
+	})
 	aiopsCmd.AddCommand(aiops_deleteInvestigationGroupPolicyCmd)
 }

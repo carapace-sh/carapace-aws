@@ -12,11 +12,13 @@ var qconnect_deleteMessageTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_deleteMessageTemplateCmd).Standalone()
+	carapace.Gen(qconnect_deleteMessageTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_deleteMessageTemplateCmd).Standalone()
 
-	qconnect_deleteMessageTemplateCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_deleteMessageTemplateCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
-	qconnect_deleteMessageTemplateCmd.MarkFlagRequired("knowledge-base-id")
-	qconnect_deleteMessageTemplateCmd.MarkFlagRequired("message-template-id")
+		qconnect_deleteMessageTemplateCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_deleteMessageTemplateCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
+		qconnect_deleteMessageTemplateCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_deleteMessageTemplateCmd.MarkFlagRequired("message-template-id")
+	})
 	qconnectCmd.AddCommand(qconnect_deleteMessageTemplateCmd)
 }

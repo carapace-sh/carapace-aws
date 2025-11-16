@@ -12,10 +12,12 @@ var apigateway_deleteDomainNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_deleteDomainNameCmd).Standalone()
+	carapace.Gen(apigateway_deleteDomainNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_deleteDomainNameCmd).Standalone()
 
-	apigateway_deleteDomainNameCmd.Flags().String("domain-name", "", "The name of the DomainName resource to be deleted.")
-	apigateway_deleteDomainNameCmd.Flags().String("domain-name-id", "", "The identifier for the domain name resource.")
-	apigateway_deleteDomainNameCmd.MarkFlagRequired("domain-name")
+		apigateway_deleteDomainNameCmd.Flags().String("domain-name", "", "The name of the DomainName resource to be deleted.")
+		apigateway_deleteDomainNameCmd.Flags().String("domain-name-id", "", "The identifier for the domain name resource.")
+		apigateway_deleteDomainNameCmd.MarkFlagRequired("domain-name")
+	})
 	apigatewayCmd.AddCommand(apigateway_deleteDomainNameCmd)
 }

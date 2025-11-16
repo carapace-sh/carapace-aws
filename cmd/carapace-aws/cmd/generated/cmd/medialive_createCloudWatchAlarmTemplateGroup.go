@@ -12,12 +12,14 @@ var medialive_createCloudWatchAlarmTemplateGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_createCloudWatchAlarmTemplateGroupCmd).Standalone()
+	carapace.Gen(medialive_createCloudWatchAlarmTemplateGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_createCloudWatchAlarmTemplateGroupCmd).Standalone()
 
-	medialive_createCloudWatchAlarmTemplateGroupCmd.Flags().String("description", "", "A resource's optional description.")
-	medialive_createCloudWatchAlarmTemplateGroupCmd.Flags().String("name", "", "A resource's name.")
-	medialive_createCloudWatchAlarmTemplateGroupCmd.Flags().String("request-id", "", "An ID that you assign to a create request.")
-	medialive_createCloudWatchAlarmTemplateGroupCmd.Flags().String("tags", "", "")
-	medialive_createCloudWatchAlarmTemplateGroupCmd.MarkFlagRequired("name")
+		medialive_createCloudWatchAlarmTemplateGroupCmd.Flags().String("description", "", "A resource's optional description.")
+		medialive_createCloudWatchAlarmTemplateGroupCmd.Flags().String("name", "", "A resource's name.")
+		medialive_createCloudWatchAlarmTemplateGroupCmd.Flags().String("request-id", "", "An ID that you assign to a create request.")
+		medialive_createCloudWatchAlarmTemplateGroupCmd.Flags().String("tags", "", "")
+		medialive_createCloudWatchAlarmTemplateGroupCmd.MarkFlagRequired("name")
+	})
 	medialiveCmd.AddCommand(medialive_createCloudWatchAlarmTemplateGroupCmd)
 }

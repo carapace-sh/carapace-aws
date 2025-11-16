@@ -12,9 +12,11 @@ var sesv2_getEmailIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getEmailIdentityCmd).Standalone()
+	carapace.Gen(sesv2_getEmailIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getEmailIdentityCmd).Standalone()
 
-	sesv2_getEmailIdentityCmd.Flags().String("email-identity", "", "The email identity.")
-	sesv2_getEmailIdentityCmd.MarkFlagRequired("email-identity")
+		sesv2_getEmailIdentityCmd.Flags().String("email-identity", "", "The email identity.")
+		sesv2_getEmailIdentityCmd.MarkFlagRequired("email-identity")
+	})
 	sesv2Cmd.AddCommand(sesv2_getEmailIdentityCmd)
 }

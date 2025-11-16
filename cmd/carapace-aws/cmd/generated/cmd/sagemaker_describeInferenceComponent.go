@@ -12,9 +12,11 @@ var sagemaker_describeInferenceComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeInferenceComponentCmd).Standalone()
+	carapace.Gen(sagemaker_describeInferenceComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeInferenceComponentCmd).Standalone()
 
-	sagemaker_describeInferenceComponentCmd.Flags().String("inference-component-name", "", "The name of the inference component.")
-	sagemaker_describeInferenceComponentCmd.MarkFlagRequired("inference-component-name")
+		sagemaker_describeInferenceComponentCmd.Flags().String("inference-component-name", "", "The name of the inference component.")
+		sagemaker_describeInferenceComponentCmd.MarkFlagRequired("inference-component-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeInferenceComponentCmd)
 }

@@ -12,13 +12,15 @@ var cloud9_createEnvironmentMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloud9_createEnvironmentMembershipCmd).Standalone()
+	carapace.Gen(cloud9_createEnvironmentMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloud9_createEnvironmentMembershipCmd).Standalone()
 
-	cloud9_createEnvironmentMembershipCmd.Flags().String("environment-id", "", "The ID of the environment that contains the environment member you want to add.")
-	cloud9_createEnvironmentMembershipCmd.Flags().String("permissions", "", "The type of environment member permissions you want to associate with this environment member.")
-	cloud9_createEnvironmentMembershipCmd.Flags().String("user-arn", "", "The Amazon Resource Name (ARN) of the environment member you want to add.")
-	cloud9_createEnvironmentMembershipCmd.MarkFlagRequired("environment-id")
-	cloud9_createEnvironmentMembershipCmd.MarkFlagRequired("permissions")
-	cloud9_createEnvironmentMembershipCmd.MarkFlagRequired("user-arn")
+		cloud9_createEnvironmentMembershipCmd.Flags().String("environment-id", "", "The ID of the environment that contains the environment member you want to add.")
+		cloud9_createEnvironmentMembershipCmd.Flags().String("permissions", "", "The type of environment member permissions you want to associate with this environment member.")
+		cloud9_createEnvironmentMembershipCmd.Flags().String("user-arn", "", "The Amazon Resource Name (ARN) of the environment member you want to add.")
+		cloud9_createEnvironmentMembershipCmd.MarkFlagRequired("environment-id")
+		cloud9_createEnvironmentMembershipCmd.MarkFlagRequired("permissions")
+		cloud9_createEnvironmentMembershipCmd.MarkFlagRequired("user-arn")
+	})
 	cloud9Cmd.AddCommand(cloud9_createEnvironmentMembershipCmd)
 }

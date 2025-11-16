@@ -12,10 +12,12 @@ var ssmSap_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_listApplicationsCmd).Standalone()
+	carapace.Gen(ssmSap_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_listApplicationsCmd).Standalone()
 
-	ssmSap_listApplicationsCmd.Flags().String("filters", "", "The filter of name, value, and operator.")
-	ssmSap_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	ssmSap_listApplicationsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		ssmSap_listApplicationsCmd.Flags().String("filters", "", "The filter of name, value, and operator.")
+		ssmSap_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		ssmSap_listApplicationsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	ssmSapCmd.AddCommand(ssmSap_listApplicationsCmd)
 }

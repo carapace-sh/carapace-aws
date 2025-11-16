@@ -12,9 +12,11 @@ var emrContainers_describeJobTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_describeJobTemplateCmd).Standalone()
+	carapace.Gen(emrContainers_describeJobTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_describeJobTemplateCmd).Standalone()
 
-	emrContainers_describeJobTemplateCmd.Flags().String("id", "", "The ID of the job template that will be described.")
-	emrContainers_describeJobTemplateCmd.MarkFlagRequired("id")
+		emrContainers_describeJobTemplateCmd.Flags().String("id", "", "The ID of the job template that will be described.")
+		emrContainers_describeJobTemplateCmd.MarkFlagRequired("id")
+	})
 	emrContainersCmd.AddCommand(emrContainers_describeJobTemplateCmd)
 }

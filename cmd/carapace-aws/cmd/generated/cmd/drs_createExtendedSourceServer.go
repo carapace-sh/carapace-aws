@@ -12,10 +12,12 @@ var drs_createExtendedSourceServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_createExtendedSourceServerCmd).Standalone()
+	carapace.Gen(drs_createExtendedSourceServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_createExtendedSourceServerCmd).Standalone()
 
-	drs_createExtendedSourceServerCmd.Flags().String("source-server-arn", "", "This defines the ARN of the source server in staging Account based on which you want to create an extended source server.")
-	drs_createExtendedSourceServerCmd.Flags().String("tags", "", "A list of tags associated with the extended source server.")
-	drs_createExtendedSourceServerCmd.MarkFlagRequired("source-server-arn")
+		drs_createExtendedSourceServerCmd.Flags().String("source-server-arn", "", "This defines the ARN of the source server in staging Account based on which you want to create an extended source server.")
+		drs_createExtendedSourceServerCmd.Flags().String("tags", "", "A list of tags associated with the extended source server.")
+		drs_createExtendedSourceServerCmd.MarkFlagRequired("source-server-arn")
+	})
 	drsCmd.AddCommand(drs_createExtendedSourceServerCmd)
 }

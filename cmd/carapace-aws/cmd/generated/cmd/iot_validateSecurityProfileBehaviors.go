@@ -12,9 +12,11 @@ var iot_validateSecurityProfileBehaviorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_validateSecurityProfileBehaviorsCmd).Standalone()
+	carapace.Gen(iot_validateSecurityProfileBehaviorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_validateSecurityProfileBehaviorsCmd).Standalone()
 
-	iot_validateSecurityProfileBehaviorsCmd.Flags().String("behaviors", "", "Specifies the behaviors that, when violated by a device (thing), cause an alert.")
-	iot_validateSecurityProfileBehaviorsCmd.MarkFlagRequired("behaviors")
+		iot_validateSecurityProfileBehaviorsCmd.Flags().String("behaviors", "", "Specifies the behaviors that, when violated by a device (thing), cause an alert.")
+		iot_validateSecurityProfileBehaviorsCmd.MarkFlagRequired("behaviors")
+	})
 	iotCmd.AddCommand(iot_validateSecurityProfileBehaviorsCmd)
 }

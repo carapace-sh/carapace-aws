@@ -12,7 +12,9 @@ var xray_getEncryptionConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getEncryptionConfigCmd).Standalone()
+	carapace.Gen(xray_getEncryptionConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getEncryptionConfigCmd).Standalone()
 
+	})
 	xrayCmd.AddCommand(xray_getEncryptionConfigCmd)
 }

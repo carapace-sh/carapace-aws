@@ -12,18 +12,20 @@ var supplychain_createDataIntegrationFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_createDataIntegrationFlowCmd).Standalone()
+	carapace.Gen(supplychain_createDataIntegrationFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_createDataIntegrationFlowCmd).Standalone()
 
-	supplychain_createDataIntegrationFlowCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
-	supplychain_createDataIntegrationFlowCmd.Flags().String("name", "", "Name of the DataIntegrationFlow.")
-	supplychain_createDataIntegrationFlowCmd.Flags().String("sources", "", "The source configurations for DataIntegrationFlow.")
-	supplychain_createDataIntegrationFlowCmd.Flags().String("tags", "", "The tags of the DataIntegrationFlow to be created")
-	supplychain_createDataIntegrationFlowCmd.Flags().String("target", "", "The target configurations for DataIntegrationFlow.")
-	supplychain_createDataIntegrationFlowCmd.Flags().String("transformation", "", "The transformation configurations for DataIntegrationFlow.")
-	supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("instance-id")
-	supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("name")
-	supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("sources")
-	supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("target")
-	supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("transformation")
+		supplychain_createDataIntegrationFlowCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
+		supplychain_createDataIntegrationFlowCmd.Flags().String("name", "", "Name of the DataIntegrationFlow.")
+		supplychain_createDataIntegrationFlowCmd.Flags().String("sources", "", "The source configurations for DataIntegrationFlow.")
+		supplychain_createDataIntegrationFlowCmd.Flags().String("tags", "", "The tags of the DataIntegrationFlow to be created")
+		supplychain_createDataIntegrationFlowCmd.Flags().String("target", "", "The target configurations for DataIntegrationFlow.")
+		supplychain_createDataIntegrationFlowCmd.Flags().String("transformation", "", "The transformation configurations for DataIntegrationFlow.")
+		supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("instance-id")
+		supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("name")
+		supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("sources")
+		supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("target")
+		supplychain_createDataIntegrationFlowCmd.MarkFlagRequired("transformation")
+	})
 	supplychainCmd.AddCommand(supplychain_createDataIntegrationFlowCmd)
 }

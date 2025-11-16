@@ -12,11 +12,13 @@ var panorama_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_untagResourceCmd).Standalone()
+	carapace.Gen(panorama_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_untagResourceCmd).Standalone()
 
-	panorama_untagResourceCmd.Flags().String("resource-arn", "", "The resource's ARN.")
-	panorama_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys to remove.")
-	panorama_untagResourceCmd.MarkFlagRequired("resource-arn")
-	panorama_untagResourceCmd.MarkFlagRequired("tag-keys")
+		panorama_untagResourceCmd.Flags().String("resource-arn", "", "The resource's ARN.")
+		panorama_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys to remove.")
+		panorama_untagResourceCmd.MarkFlagRequired("resource-arn")
+		panorama_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	panoramaCmd.AddCommand(panorama_untagResourceCmd)
 }

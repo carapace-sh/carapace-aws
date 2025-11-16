@@ -12,11 +12,13 @@ var sns_putDataProtectionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_putDataProtectionPolicyCmd).Standalone()
+	carapace.Gen(sns_putDataProtectionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_putDataProtectionPolicyCmd).Standalone()
 
-	sns_putDataProtectionPolicyCmd.Flags().String("data-protection-policy", "", "The JSON serialization of the topic's `DataProtectionPolicy`.")
-	sns_putDataProtectionPolicyCmd.Flags().String("resource-arn", "", "The ARN of the topic whose `DataProtectionPolicy` you want to add or update.")
-	sns_putDataProtectionPolicyCmd.MarkFlagRequired("data-protection-policy")
-	sns_putDataProtectionPolicyCmd.MarkFlagRequired("resource-arn")
+		sns_putDataProtectionPolicyCmd.Flags().String("data-protection-policy", "", "The JSON serialization of the topic's `DataProtectionPolicy`.")
+		sns_putDataProtectionPolicyCmd.Flags().String("resource-arn", "", "The ARN of the topic whose `DataProtectionPolicy` you want to add or update.")
+		sns_putDataProtectionPolicyCmd.MarkFlagRequired("data-protection-policy")
+		sns_putDataProtectionPolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	snsCmd.AddCommand(sns_putDataProtectionPolicyCmd)
 }

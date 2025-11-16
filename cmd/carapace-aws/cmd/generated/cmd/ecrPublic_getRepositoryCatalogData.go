@@ -12,10 +12,12 @@ var ecrPublic_getRepositoryCatalogDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecrPublic_getRepositoryCatalogDataCmd).Standalone()
+	carapace.Gen(ecrPublic_getRepositoryCatalogDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecrPublic_getRepositoryCatalogDataCmd).Standalone()
 
-	ecrPublic_getRepositoryCatalogDataCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID that's associated with the registry that contains the repositories to be described.")
-	ecrPublic_getRepositoryCatalogDataCmd.Flags().String("repository-name", "", "The name of the repository to retrieve the catalog metadata for.")
-	ecrPublic_getRepositoryCatalogDataCmd.MarkFlagRequired("repository-name")
+		ecrPublic_getRepositoryCatalogDataCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID that's associated with the registry that contains the repositories to be described.")
+		ecrPublic_getRepositoryCatalogDataCmd.Flags().String("repository-name", "", "The name of the repository to retrieve the catalog metadata for.")
+		ecrPublic_getRepositoryCatalogDataCmd.MarkFlagRequired("repository-name")
+	})
 	ecrPublicCmd.AddCommand(ecrPublic_getRepositoryCatalogDataCmd)
 }

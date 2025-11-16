@@ -12,13 +12,15 @@ var sns_createPlatformEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_createPlatformEndpointCmd).Standalone()
+	carapace.Gen(sns_createPlatformEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_createPlatformEndpointCmd).Standalone()
 
-	sns_createPlatformEndpointCmd.Flags().String("attributes", "", "For a list of attributes, see [`SetEndpointAttributes`](https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html) .")
-	sns_createPlatformEndpointCmd.Flags().String("custom-user-data", "", "Arbitrary user data to associate with the endpoint.")
-	sns_createPlatformEndpointCmd.Flags().String("platform-application-arn", "", "`PlatformApplicationArn` returned from CreatePlatformApplication is used to create a an endpoint.")
-	sns_createPlatformEndpointCmd.Flags().String("token", "", "Unique identifier created by the notification service for an app on a device.")
-	sns_createPlatformEndpointCmd.MarkFlagRequired("platform-application-arn")
-	sns_createPlatformEndpointCmd.MarkFlagRequired("token")
+		sns_createPlatformEndpointCmd.Flags().String("attributes", "", "For a list of attributes, see [`SetEndpointAttributes`](https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html) .")
+		sns_createPlatformEndpointCmd.Flags().String("custom-user-data", "", "Arbitrary user data to associate with the endpoint.")
+		sns_createPlatformEndpointCmd.Flags().String("platform-application-arn", "", "`PlatformApplicationArn` returned from CreatePlatformApplication is used to create a an endpoint.")
+		sns_createPlatformEndpointCmd.Flags().String("token", "", "Unique identifier created by the notification service for an app on a device.")
+		sns_createPlatformEndpointCmd.MarkFlagRequired("platform-application-arn")
+		sns_createPlatformEndpointCmd.MarkFlagRequired("token")
+	})
 	snsCmd.AddCommand(sns_createPlatformEndpointCmd)
 }

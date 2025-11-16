@@ -12,11 +12,13 @@ var redshift_registerNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_registerNamespaceCmd).Standalone()
+	carapace.Gen(redshift_registerNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_registerNamespaceCmd).Standalone()
 
-	redshift_registerNamespaceCmd.Flags().String("consumer-identifiers", "", "An array containing the ID of the consumer account that you want to register the namespace to.")
-	redshift_registerNamespaceCmd.Flags().String("namespace-identifier", "", "The unique identifier of the cluster or serverless namespace that you want to register.")
-	redshift_registerNamespaceCmd.MarkFlagRequired("consumer-identifiers")
-	redshift_registerNamespaceCmd.MarkFlagRequired("namespace-identifier")
+		redshift_registerNamespaceCmd.Flags().String("consumer-identifiers", "", "An array containing the ID of the consumer account that you want to register the namespace to.")
+		redshift_registerNamespaceCmd.Flags().String("namespace-identifier", "", "The unique identifier of the cluster or serverless namespace that you want to register.")
+		redshift_registerNamespaceCmd.MarkFlagRequired("consumer-identifiers")
+		redshift_registerNamespaceCmd.MarkFlagRequired("namespace-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_registerNamespaceCmd)
 }

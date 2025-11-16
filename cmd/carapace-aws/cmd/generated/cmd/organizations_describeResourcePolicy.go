@@ -12,7 +12,9 @@ var organizations_describeResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_describeResourcePolicyCmd).Standalone()
+	carapace.Gen(organizations_describeResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_describeResourcePolicyCmd).Standalone()
 
+	})
 	organizationsCmd.AddCommand(organizations_describeResourcePolicyCmd)
 }

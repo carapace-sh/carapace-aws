@@ -12,7 +12,9 @@ var securitylakeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylakeCmd).Standalone()
+	carapace.Gen(securitylakeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylakeCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(securitylakeCmd)
 }

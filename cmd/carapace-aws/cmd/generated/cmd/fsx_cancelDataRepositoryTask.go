@@ -12,9 +12,11 @@ var fsx_cancelDataRepositoryTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_cancelDataRepositoryTaskCmd).Standalone()
+	carapace.Gen(fsx_cancelDataRepositoryTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_cancelDataRepositoryTaskCmd).Standalone()
 
-	fsx_cancelDataRepositoryTaskCmd.Flags().String("task-id", "", "Specifies the data repository task to cancel.")
-	fsx_cancelDataRepositoryTaskCmd.MarkFlagRequired("task-id")
+		fsx_cancelDataRepositoryTaskCmd.Flags().String("task-id", "", "Specifies the data repository task to cancel.")
+		fsx_cancelDataRepositoryTaskCmd.MarkFlagRequired("task-id")
+	})
 	fsxCmd.AddCommand(fsx_cancelDataRepositoryTaskCmd)
 }

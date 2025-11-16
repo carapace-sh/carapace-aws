@@ -12,9 +12,11 @@ var iot_deleteCacertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteCacertificateCmd).Standalone()
+	carapace.Gen(iot_deleteCacertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteCacertificateCmd).Standalone()
 
-	iot_deleteCacertificateCmd.Flags().String("certificate-id", "", "The ID of the certificate to delete.")
-	iot_deleteCacertificateCmd.MarkFlagRequired("certificate-id")
+		iot_deleteCacertificateCmd.Flags().String("certificate-id", "", "The ID of the certificate to delete.")
+		iot_deleteCacertificateCmd.MarkFlagRequired("certificate-id")
+	})
 	iotCmd.AddCommand(iot_deleteCacertificateCmd)
 }

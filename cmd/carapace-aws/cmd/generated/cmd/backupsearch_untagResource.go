@@ -12,11 +12,13 @@ var backupsearch_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupsearch_untagResourceCmd).Standalone()
+	carapace.Gen(backupsearch_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupsearch_untagResourceCmd).Standalone()
 
-	backupsearch_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the resource where you want to remove tags.")
-	backupsearch_untagResourceCmd.Flags().String("tag-keys", "", "This required parameter contains the tag keys you want to remove from the source.")
-	backupsearch_untagResourceCmd.MarkFlagRequired("resource-arn")
-	backupsearch_untagResourceCmd.MarkFlagRequired("tag-keys")
+		backupsearch_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the resource where you want to remove tags.")
+		backupsearch_untagResourceCmd.Flags().String("tag-keys", "", "This required parameter contains the tag keys you want to remove from the source.")
+		backupsearch_untagResourceCmd.MarkFlagRequired("resource-arn")
+		backupsearch_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	backupsearchCmd.AddCommand(backupsearch_untagResourceCmd)
 }

@@ -12,8 +12,10 @@ var codedeploy_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_listApplicationsCmd).Standalone()
+	carapace.Gen(codedeploy_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_listApplicationsCmd).Standalone()
 
-	codedeploy_listApplicationsCmd.Flags().String("next-token", "", "An identifier returned from the previous list applications call.")
+		codedeploy_listApplicationsCmd.Flags().String("next-token", "", "An identifier returned from the previous list applications call.")
+	})
 	codedeployCmd.AddCommand(codedeploy_listApplicationsCmd)
 }

@@ -12,7 +12,9 @@ var dms_runFleetAdvisorLsaAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_runFleetAdvisorLsaAnalysisCmd).Standalone()
+	carapace.Gen(dms_runFleetAdvisorLsaAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_runFleetAdvisorLsaAnalysisCmd).Standalone()
 
+	})
 	dmsCmd.AddCommand(dms_runFleetAdvisorLsaAnalysisCmd)
 }

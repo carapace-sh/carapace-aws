@@ -12,9 +12,11 @@ var workspacesThinClient_getDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClient_getDeviceCmd).Standalone()
+	carapace.Gen(workspacesThinClient_getDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClient_getDeviceCmd).Standalone()
 
-	workspacesThinClient_getDeviceCmd.Flags().String("id", "", "The ID of the device for which to return information.")
-	workspacesThinClient_getDeviceCmd.MarkFlagRequired("id")
+		workspacesThinClient_getDeviceCmd.Flags().String("id", "", "The ID of the device for which to return information.")
+		workspacesThinClient_getDeviceCmd.MarkFlagRequired("id")
+	})
 	workspacesThinClientCmd.AddCommand(workspacesThinClient_getDeviceCmd)
 }

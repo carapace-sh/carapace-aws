@@ -12,11 +12,13 @@ var personalizeEvents_putActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalizeEvents_putActionsCmd).Standalone()
+	carapace.Gen(personalizeEvents_putActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalizeEvents_putActionsCmd).Standalone()
 
-	personalizeEvents_putActionsCmd.Flags().String("actions", "", "A list of action data.")
-	personalizeEvents_putActionsCmd.Flags().String("dataset-arn", "", "The Amazon Resource Name (ARN) of the Actions dataset you are adding the action or actions to.")
-	personalizeEvents_putActionsCmd.MarkFlagRequired("actions")
-	personalizeEvents_putActionsCmd.MarkFlagRequired("dataset-arn")
+		personalizeEvents_putActionsCmd.Flags().String("actions", "", "A list of action data.")
+		personalizeEvents_putActionsCmd.Flags().String("dataset-arn", "", "The Amazon Resource Name (ARN) of the Actions dataset you are adding the action or actions to.")
+		personalizeEvents_putActionsCmd.MarkFlagRequired("actions")
+		personalizeEvents_putActionsCmd.MarkFlagRequired("dataset-arn")
+	})
 	personalizeEventsCmd.AddCommand(personalizeEvents_putActionsCmd)
 }

@@ -12,13 +12,15 @@ var clouddirectory_removeFacetFromObjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_removeFacetFromObjectCmd).Standalone()
+	carapace.Gen(clouddirectory_removeFacetFromObjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_removeFacetFromObjectCmd).Standalone()
 
-	clouddirectory_removeFacetFromObjectCmd.Flags().String("directory-arn", "", "The ARN of the directory in which the object resides.")
-	clouddirectory_removeFacetFromObjectCmd.Flags().String("object-reference", "", "A reference to the object to remove the facet from.")
-	clouddirectory_removeFacetFromObjectCmd.Flags().String("schema-facet", "", "The facet to remove.")
-	clouddirectory_removeFacetFromObjectCmd.MarkFlagRequired("directory-arn")
-	clouddirectory_removeFacetFromObjectCmd.MarkFlagRequired("object-reference")
-	clouddirectory_removeFacetFromObjectCmd.MarkFlagRequired("schema-facet")
+		clouddirectory_removeFacetFromObjectCmd.Flags().String("directory-arn", "", "The ARN of the directory in which the object resides.")
+		clouddirectory_removeFacetFromObjectCmd.Flags().String("object-reference", "", "A reference to the object to remove the facet from.")
+		clouddirectory_removeFacetFromObjectCmd.Flags().String("schema-facet", "", "The facet to remove.")
+		clouddirectory_removeFacetFromObjectCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_removeFacetFromObjectCmd.MarkFlagRequired("object-reference")
+		clouddirectory_removeFacetFromObjectCmd.MarkFlagRequired("schema-facet")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_removeFacetFromObjectCmd)
 }

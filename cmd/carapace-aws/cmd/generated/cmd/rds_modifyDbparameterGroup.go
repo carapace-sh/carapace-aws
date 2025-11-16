@@ -12,11 +12,13 @@ var rds_modifyDbparameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_modifyDbparameterGroupCmd).Standalone()
+	carapace.Gen(rds_modifyDbparameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_modifyDbparameterGroupCmd).Standalone()
 
-	rds_modifyDbparameterGroupCmd.Flags().String("dbparameter-group-name", "", "The name of the DB parameter group.")
-	rds_modifyDbparameterGroupCmd.Flags().String("parameters", "", "An array of parameter names, values, and the application methods for the parameter update.")
-	rds_modifyDbparameterGroupCmd.MarkFlagRequired("dbparameter-group-name")
-	rds_modifyDbparameterGroupCmd.MarkFlagRequired("parameters")
+		rds_modifyDbparameterGroupCmd.Flags().String("dbparameter-group-name", "", "The name of the DB parameter group.")
+		rds_modifyDbparameterGroupCmd.Flags().String("parameters", "", "An array of parameter names, values, and the application methods for the parameter update.")
+		rds_modifyDbparameterGroupCmd.MarkFlagRequired("dbparameter-group-name")
+		rds_modifyDbparameterGroupCmd.MarkFlagRequired("parameters")
+	})
 	rdsCmd.AddCommand(rds_modifyDbparameterGroupCmd)
 }

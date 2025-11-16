@@ -12,9 +12,11 @@ var fms_deleteProtocolsListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_deleteProtocolsListCmd).Standalone()
+	carapace.Gen(fms_deleteProtocolsListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_deleteProtocolsListCmd).Standalone()
 
-	fms_deleteProtocolsListCmd.Flags().String("list-id", "", "The ID of the protocols list that you want to delete.")
-	fms_deleteProtocolsListCmd.MarkFlagRequired("list-id")
+		fms_deleteProtocolsListCmd.Flags().String("list-id", "", "The ID of the protocols list that you want to delete.")
+		fms_deleteProtocolsListCmd.MarkFlagRequired("list-id")
+	})
 	fmsCmd.AddCommand(fms_deleteProtocolsListCmd)
 }

@@ -12,9 +12,11 @@ var personalize_describeSolutionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeSolutionVersionCmd).Standalone()
+	carapace.Gen(personalize_describeSolutionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeSolutionVersionCmd).Standalone()
 
-	personalize_describeSolutionVersionCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version.")
-	personalize_describeSolutionVersionCmd.MarkFlagRequired("solution-version-arn")
+		personalize_describeSolutionVersionCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version.")
+		personalize_describeSolutionVersionCmd.MarkFlagRequired("solution-version-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeSolutionVersionCmd)
 }

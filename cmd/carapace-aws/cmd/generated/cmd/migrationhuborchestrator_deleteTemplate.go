@@ -12,9 +12,11 @@ var migrationhuborchestrator_deleteTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_deleteTemplateCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_deleteTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_deleteTemplateCmd).Standalone()
 
-	migrationhuborchestrator_deleteTemplateCmd.Flags().String("id", "", "The ID of the request to delete a migration workflow template.")
-	migrationhuborchestrator_deleteTemplateCmd.MarkFlagRequired("id")
+		migrationhuborchestrator_deleteTemplateCmd.Flags().String("id", "", "The ID of the request to delete a migration workflow template.")
+		migrationhuborchestrator_deleteTemplateCmd.MarkFlagRequired("id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_deleteTemplateCmd)
 }

@@ -12,9 +12,11 @@ var forecast_describeMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_describeMonitorCmd).Standalone()
+	carapace.Gen(forecast_describeMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_describeMonitorCmd).Standalone()
 
-	forecast_describeMonitorCmd.Flags().String("monitor-arn", "", "The Amazon Resource Name (ARN) of the monitor resource to describe.")
-	forecast_describeMonitorCmd.MarkFlagRequired("monitor-arn")
+		forecast_describeMonitorCmd.Flags().String("monitor-arn", "", "The Amazon Resource Name (ARN) of the monitor resource to describe.")
+		forecast_describeMonitorCmd.MarkFlagRequired("monitor-arn")
+	})
 	forecastCmd.AddCommand(forecast_describeMonitorCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_describeAutoMljobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeAutoMljobCmd).Standalone()
+	carapace.Gen(sagemaker_describeAutoMljobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeAutoMljobCmd).Standalone()
 
-	sagemaker_describeAutoMljobCmd.Flags().String("auto-mljob-name", "", "Requests information about an AutoML job using its unique name.")
-	sagemaker_describeAutoMljobCmd.MarkFlagRequired("auto-mljob-name")
+		sagemaker_describeAutoMljobCmd.Flags().String("auto-mljob-name", "", "Requests information about an AutoML job using its unique name.")
+		sagemaker_describeAutoMljobCmd.MarkFlagRequired("auto-mljob-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeAutoMljobCmd)
 }

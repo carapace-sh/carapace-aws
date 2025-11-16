@@ -12,13 +12,15 @@ var workmail_associateMemberToGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_associateMemberToGroupCmd).Standalone()
+	carapace.Gen(workmail_associateMemberToGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_associateMemberToGroupCmd).Standalone()
 
-	workmail_associateMemberToGroupCmd.Flags().String("group-id", "", "The group to which the member (user or group) is associated.")
-	workmail_associateMemberToGroupCmd.Flags().String("member-id", "", "The member (user or group) to associate to the group.")
-	workmail_associateMemberToGroupCmd.Flags().String("organization-id", "", "The organization under which the group exists.")
-	workmail_associateMemberToGroupCmd.MarkFlagRequired("group-id")
-	workmail_associateMemberToGroupCmd.MarkFlagRequired("member-id")
-	workmail_associateMemberToGroupCmd.MarkFlagRequired("organization-id")
+		workmail_associateMemberToGroupCmd.Flags().String("group-id", "", "The group to which the member (user or group) is associated.")
+		workmail_associateMemberToGroupCmd.Flags().String("member-id", "", "The member (user or group) to associate to the group.")
+		workmail_associateMemberToGroupCmd.Flags().String("organization-id", "", "The organization under which the group exists.")
+		workmail_associateMemberToGroupCmd.MarkFlagRequired("group-id")
+		workmail_associateMemberToGroupCmd.MarkFlagRequired("member-id")
+		workmail_associateMemberToGroupCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_associateMemberToGroupCmd)
 }

@@ -12,9 +12,11 @@ var pcaConnectorAd_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorAd_listTagsForResourceCmd).Standalone()
+	carapace.Gen(pcaConnectorAd_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorAd_listTagsForResourceCmd).Standalone()
 
-	pcaConnectorAd_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that was returned when you created the resource.")
-	pcaConnectorAd_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		pcaConnectorAd_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that was returned when you created the resource.")
+		pcaConnectorAd_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	pcaConnectorAdCmd.AddCommand(pcaConnectorAd_listTagsForResourceCmd)
 }

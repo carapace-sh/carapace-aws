@@ -12,10 +12,12 @@ var greengrass_updateThingRuntimeConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_updateThingRuntimeConfigurationCmd).Standalone()
+	carapace.Gen(greengrass_updateThingRuntimeConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_updateThingRuntimeConfigurationCmd).Standalone()
 
-	greengrass_updateThingRuntimeConfigurationCmd.Flags().String("telemetry-configuration", "", "Configuration for telemetry service.")
-	greengrass_updateThingRuntimeConfigurationCmd.Flags().String("thing-name", "", "The thing name.")
-	greengrass_updateThingRuntimeConfigurationCmd.MarkFlagRequired("thing-name")
+		greengrass_updateThingRuntimeConfigurationCmd.Flags().String("telemetry-configuration", "", "Configuration for telemetry service.")
+		greengrass_updateThingRuntimeConfigurationCmd.Flags().String("thing-name", "", "The thing name.")
+		greengrass_updateThingRuntimeConfigurationCmd.MarkFlagRequired("thing-name")
+	})
 	greengrassCmd.AddCommand(greengrass_updateThingRuntimeConfigurationCmd)
 }

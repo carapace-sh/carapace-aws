@@ -12,11 +12,13 @@ var workmail_putInboundDmarcSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_putInboundDmarcSettingsCmd).Standalone()
+	carapace.Gen(workmail_putInboundDmarcSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_putInboundDmarcSettingsCmd).Standalone()
 
-	workmail_putInboundDmarcSettingsCmd.Flags().String("enforced", "", "Enforces or suspends a policy after it's applied.")
-	workmail_putInboundDmarcSettingsCmd.Flags().String("organization-id", "", "The ID of the organization that you are applying the DMARC policy to.")
-	workmail_putInboundDmarcSettingsCmd.MarkFlagRequired("enforced")
-	workmail_putInboundDmarcSettingsCmd.MarkFlagRequired("organization-id")
+		workmail_putInboundDmarcSettingsCmd.Flags().String("enforced", "", "Enforces or suspends a policy after it's applied.")
+		workmail_putInboundDmarcSettingsCmd.Flags().String("organization-id", "", "The ID of the organization that you are applying the DMARC policy to.")
+		workmail_putInboundDmarcSettingsCmd.MarkFlagRequired("enforced")
+		workmail_putInboundDmarcSettingsCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_putInboundDmarcSettingsCmd)
 }

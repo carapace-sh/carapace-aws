@@ -12,9 +12,11 @@ var iotwireless_getFuotaTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getFuotaTaskCmd).Standalone()
+	carapace.Gen(iotwireless_getFuotaTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getFuotaTaskCmd).Standalone()
 
-	iotwireless_getFuotaTaskCmd.Flags().String("id", "", "")
-	iotwireless_getFuotaTaskCmd.MarkFlagRequired("id")
+		iotwireless_getFuotaTaskCmd.Flags().String("id", "", "")
+		iotwireless_getFuotaTaskCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getFuotaTaskCmd)
 }

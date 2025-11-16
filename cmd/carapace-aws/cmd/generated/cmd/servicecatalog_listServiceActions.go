@@ -12,10 +12,12 @@ var servicecatalog_listServiceActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_listServiceActionsCmd).Standalone()
+	carapace.Gen(servicecatalog_listServiceActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_listServiceActionsCmd).Standalone()
 
-	servicecatalog_listServiceActionsCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_listServiceActionsCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_listServiceActionsCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_listServiceActionsCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_listServiceActionsCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_listServiceActionsCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_listServiceActionsCmd)
 }

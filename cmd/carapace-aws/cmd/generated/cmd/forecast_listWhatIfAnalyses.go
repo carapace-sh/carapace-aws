@@ -12,10 +12,12 @@ var forecast_listWhatIfAnalysesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_listWhatIfAnalysesCmd).Standalone()
+	carapace.Gen(forecast_listWhatIfAnalysesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_listWhatIfAnalysesCmd).Standalone()
 
-	forecast_listWhatIfAnalysesCmd.Flags().String("filters", "", "An array of filters.")
-	forecast_listWhatIfAnalysesCmd.Flags().String("max-results", "", "The number of items to return in the response.")
-	forecast_listWhatIfAnalysesCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a `NextToken`.")
+		forecast_listWhatIfAnalysesCmd.Flags().String("filters", "", "An array of filters.")
+		forecast_listWhatIfAnalysesCmd.Flags().String("max-results", "", "The number of items to return in the response.")
+		forecast_listWhatIfAnalysesCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a `NextToken`.")
+	})
 	forecastCmd.AddCommand(forecast_listWhatIfAnalysesCmd)
 }

@@ -12,7 +12,9 @@ var panoramaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panoramaCmd).Standalone()
+	carapace.Gen(panoramaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panoramaCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(panoramaCmd)
 }

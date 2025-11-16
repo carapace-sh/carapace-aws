@@ -12,9 +12,11 @@ var workmail_listAccessControlRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_listAccessControlRulesCmd).Standalone()
+	carapace.Gen(workmail_listAccessControlRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_listAccessControlRulesCmd).Standalone()
 
-	workmail_listAccessControlRulesCmd.Flags().String("organization-id", "", "The identifier for the organization.")
-	workmail_listAccessControlRulesCmd.MarkFlagRequired("organization-id")
+		workmail_listAccessControlRulesCmd.Flags().String("organization-id", "", "The identifier for the organization.")
+		workmail_listAccessControlRulesCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_listAccessControlRulesCmd)
 }

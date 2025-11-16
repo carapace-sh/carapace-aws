@@ -12,9 +12,11 @@ var marketplaceCatalog_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceCatalog_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(marketplaceCatalog_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceCatalog_deleteResourcePolicyCmd).Standalone()
 
-	marketplaceCatalog_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the entity resource that is associated with the resource policy.")
-	marketplaceCatalog_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		marketplaceCatalog_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the entity resource that is associated with the resource policy.")
+		marketplaceCatalog_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	marketplaceCatalogCmd.AddCommand(marketplaceCatalog_deleteResourcePolicyCmd)
 }

@@ -12,9 +12,11 @@ var ssmContacts_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_listTagsForResourceCmd).Standalone()
+	carapace.Gen(ssmContacts_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_listTagsForResourceCmd).Standalone()
 
-	ssmContacts_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the contact, escalation plan, rotation, or on-call schedule.")
-	ssmContacts_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		ssmContacts_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the contact, escalation plan, rotation, or on-call schedule.")
+		ssmContacts_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_listTagsForResourceCmd)
 }

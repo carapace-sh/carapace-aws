@@ -12,11 +12,13 @@ var mpa_deleteInactiveApprovalTeamVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_deleteInactiveApprovalTeamVersionCmd).Standalone()
+	carapace.Gen(mpa_deleteInactiveApprovalTeamVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_deleteInactiveApprovalTeamVersionCmd).Standalone()
 
-	mpa_deleteInactiveApprovalTeamVersionCmd.Flags().String("arn", "", "Amaazon Resource Name (ARN) for the team.")
-	mpa_deleteInactiveApprovalTeamVersionCmd.Flags().String("version-id", "", "Version ID for the team.")
-	mpa_deleteInactiveApprovalTeamVersionCmd.MarkFlagRequired("arn")
-	mpa_deleteInactiveApprovalTeamVersionCmd.MarkFlagRequired("version-id")
+		mpa_deleteInactiveApprovalTeamVersionCmd.Flags().String("arn", "", "Amaazon Resource Name (ARN) for the team.")
+		mpa_deleteInactiveApprovalTeamVersionCmd.Flags().String("version-id", "", "Version ID for the team.")
+		mpa_deleteInactiveApprovalTeamVersionCmd.MarkFlagRequired("arn")
+		mpa_deleteInactiveApprovalTeamVersionCmd.MarkFlagRequired("version-id")
+	})
 	mpaCmd.AddCommand(mpa_deleteInactiveApprovalTeamVersionCmd)
 }

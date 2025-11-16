@@ -12,11 +12,13 @@ var cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd).Standalone()
+	carapace.Gen(cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd).Standalone()
 
-	cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd.Flags().String("collaboration-identifier", "", "A unique identifier for one of your collaborations.")
-	cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd.Flags().String("max-results", "", "The maximum number of results that are returned for an API request call.")
-	cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd.MarkFlagRequired("collaboration-identifier")
+		cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd.Flags().String("collaboration-identifier", "", "A unique identifier for one of your collaborations.")
+		cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd.Flags().String("max-results", "", "The maximum number of results that are returned for an API request call.")
+		cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd.MarkFlagRequired("collaboration-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_listCollaborationPrivacyBudgetTemplatesCmd)
 }

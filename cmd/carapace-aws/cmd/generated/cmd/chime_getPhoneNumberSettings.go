@@ -12,7 +12,9 @@ var chime_getPhoneNumberSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_getPhoneNumberSettingsCmd).Standalone()
+	carapace.Gen(chime_getPhoneNumberSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_getPhoneNumberSettingsCmd).Standalone()
 
+	})
 	chimeCmd.AddCommand(chime_getPhoneNumberSettingsCmd)
 }

@@ -12,13 +12,15 @@ var codeconnections_getRepositorySyncStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeconnections_getRepositorySyncStatusCmd).Standalone()
+	carapace.Gen(codeconnections_getRepositorySyncStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeconnections_getRepositorySyncStatusCmd).Standalone()
 
-	codeconnections_getRepositorySyncStatusCmd.Flags().String("branch", "", "The branch of the repository link for the requested repository sync status.")
-	codeconnections_getRepositorySyncStatusCmd.Flags().String("repository-link-id", "", "The repository link ID for the requested repository sync status.")
-	codeconnections_getRepositorySyncStatusCmd.Flags().String("sync-type", "", "The sync type of the requested sync status.")
-	codeconnections_getRepositorySyncStatusCmd.MarkFlagRequired("branch")
-	codeconnections_getRepositorySyncStatusCmd.MarkFlagRequired("repository-link-id")
-	codeconnections_getRepositorySyncStatusCmd.MarkFlagRequired("sync-type")
+		codeconnections_getRepositorySyncStatusCmd.Flags().String("branch", "", "The branch of the repository link for the requested repository sync status.")
+		codeconnections_getRepositorySyncStatusCmd.Flags().String("repository-link-id", "", "The repository link ID for the requested repository sync status.")
+		codeconnections_getRepositorySyncStatusCmd.Flags().String("sync-type", "", "The sync type of the requested sync status.")
+		codeconnections_getRepositorySyncStatusCmd.MarkFlagRequired("branch")
+		codeconnections_getRepositorySyncStatusCmd.MarkFlagRequired("repository-link-id")
+		codeconnections_getRepositorySyncStatusCmd.MarkFlagRequired("sync-type")
+	})
 	codeconnectionsCmd.AddCommand(codeconnections_getRepositorySyncStatusCmd)
 }

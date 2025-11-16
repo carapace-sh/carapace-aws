@@ -12,9 +12,11 @@ var sagemaker_describeStudioLifecycleConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeStudioLifecycleConfigCmd).Standalone()
+	carapace.Gen(sagemaker_describeStudioLifecycleConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeStudioLifecycleConfigCmd).Standalone()
 
-	sagemaker_describeStudioLifecycleConfigCmd.Flags().String("studio-lifecycle-config-name", "", "The name of the Amazon SageMaker AI Studio Lifecycle Configuration to describe.")
-	sagemaker_describeStudioLifecycleConfigCmd.MarkFlagRequired("studio-lifecycle-config-name")
+		sagemaker_describeStudioLifecycleConfigCmd.Flags().String("studio-lifecycle-config-name", "", "The name of the Amazon SageMaker AI Studio Lifecycle Configuration to describe.")
+		sagemaker_describeStudioLifecycleConfigCmd.MarkFlagRequired("studio-lifecycle-config-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeStudioLifecycleConfigCmd)
 }

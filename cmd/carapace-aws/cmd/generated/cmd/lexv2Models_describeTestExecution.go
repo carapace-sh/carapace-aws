@@ -12,9 +12,11 @@ var lexv2Models_describeTestExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_describeTestExecutionCmd).Standalone()
+	carapace.Gen(lexv2Models_describeTestExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_describeTestExecutionCmd).Standalone()
 
-	lexv2Models_describeTestExecutionCmd.Flags().String("test-execution-id", "", "The execution Id of the test set execution.")
-	lexv2Models_describeTestExecutionCmd.MarkFlagRequired("test-execution-id")
+		lexv2Models_describeTestExecutionCmd.Flags().String("test-execution-id", "", "The execution Id of the test set execution.")
+		lexv2Models_describeTestExecutionCmd.MarkFlagRequired("test-execution-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_describeTestExecutionCmd)
 }

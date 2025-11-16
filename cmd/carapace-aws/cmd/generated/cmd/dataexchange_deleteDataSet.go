@@ -12,9 +12,11 @@ var dataexchange_deleteDataSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_deleteDataSetCmd).Standalone()
+	carapace.Gen(dataexchange_deleteDataSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_deleteDataSetCmd).Standalone()
 
-	dataexchange_deleteDataSetCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
-	dataexchange_deleteDataSetCmd.MarkFlagRequired("data-set-id")
+		dataexchange_deleteDataSetCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
+		dataexchange_deleteDataSetCmd.MarkFlagRequired("data-set-id")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_deleteDataSetCmd)
 }

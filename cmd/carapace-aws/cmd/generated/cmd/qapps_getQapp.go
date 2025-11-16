@@ -12,12 +12,14 @@ var qapps_getQappCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_getQappCmd).Standalone()
+	carapace.Gen(qapps_getQappCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_getQappCmd).Standalone()
 
-	qapps_getQappCmd.Flags().String("app-id", "", "The unique identifier of the Q App to retrieve.")
-	qapps_getQappCmd.Flags().String("app-version", "", "The version of the Q App.")
-	qapps_getQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_getQappCmd.MarkFlagRequired("app-id")
-	qapps_getQappCmd.MarkFlagRequired("instance-id")
+		qapps_getQappCmd.Flags().String("app-id", "", "The unique identifier of the Q App to retrieve.")
+		qapps_getQappCmd.Flags().String("app-version", "", "The version of the Q App.")
+		qapps_getQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_getQappCmd.MarkFlagRequired("app-id")
+		qapps_getQappCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_getQappCmd)
 }

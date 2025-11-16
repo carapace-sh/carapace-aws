@@ -12,13 +12,15 @@ var chimeSdkVoice_listPhoneNumbersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_listPhoneNumbersCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_listPhoneNumbersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_listPhoneNumbersCmd).Standalone()
 
-	chimeSdkVoice_listPhoneNumbersCmd.Flags().String("filter-name", "", "The filter to limit the number of results.")
-	chimeSdkVoice_listPhoneNumbersCmd.Flags().String("filter-value", "", "The filter value.")
-	chimeSdkVoice_listPhoneNumbersCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	chimeSdkVoice_listPhoneNumbersCmd.Flags().String("next-token", "", "The token used to return the next page of results.")
-	chimeSdkVoice_listPhoneNumbersCmd.Flags().String("product-type", "", "The phone number product types.")
-	chimeSdkVoice_listPhoneNumbersCmd.Flags().String("status", "", "The status of your organization's phone numbers.")
+		chimeSdkVoice_listPhoneNumbersCmd.Flags().String("filter-name", "", "The filter to limit the number of results.")
+		chimeSdkVoice_listPhoneNumbersCmd.Flags().String("filter-value", "", "The filter value.")
+		chimeSdkVoice_listPhoneNumbersCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		chimeSdkVoice_listPhoneNumbersCmd.Flags().String("next-token", "", "The token used to return the next page of results.")
+		chimeSdkVoice_listPhoneNumbersCmd.Flags().String("product-type", "", "The phone number product types.")
+		chimeSdkVoice_listPhoneNumbersCmd.Flags().String("status", "", "The status of your organization's phone numbers.")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_listPhoneNumbersCmd)
 }

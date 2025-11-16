@@ -12,11 +12,13 @@ var ecs_listTaskDefinitionFamiliesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_listTaskDefinitionFamiliesCmd).Standalone()
+	carapace.Gen(ecs_listTaskDefinitionFamiliesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_listTaskDefinitionFamiliesCmd).Standalone()
 
-	ecs_listTaskDefinitionFamiliesCmd.Flags().String("family-prefix", "", "The `familyPrefix` is a string that's used to filter the results of `ListTaskDefinitionFamilies`.")
-	ecs_listTaskDefinitionFamiliesCmd.Flags().String("max-results", "", "The maximum number of task definition family results that `ListTaskDefinitionFamilies` returned in paginated output.")
-	ecs_listTaskDefinitionFamiliesCmd.Flags().String("next-token", "", "The `nextToken` value returned from a `ListTaskDefinitionFamilies` request indicating that more results are available to fulfill the request and further calls will be needed.")
-	ecs_listTaskDefinitionFamiliesCmd.Flags().String("status", "", "The task definition family status to filter the `ListTaskDefinitionFamilies` results with.")
+		ecs_listTaskDefinitionFamiliesCmd.Flags().String("family-prefix", "", "The `familyPrefix` is a string that's used to filter the results of `ListTaskDefinitionFamilies`.")
+		ecs_listTaskDefinitionFamiliesCmd.Flags().String("max-results", "", "The maximum number of task definition family results that `ListTaskDefinitionFamilies` returned in paginated output.")
+		ecs_listTaskDefinitionFamiliesCmd.Flags().String("next-token", "", "The `nextToken` value returned from a `ListTaskDefinitionFamilies` request indicating that more results are available to fulfill the request and further calls will be needed.")
+		ecs_listTaskDefinitionFamiliesCmd.Flags().String("status", "", "The task definition family status to filter the `ListTaskDefinitionFamilies` results with.")
+	})
 	ecsCmd.AddCommand(ecs_listTaskDefinitionFamiliesCmd)
 }

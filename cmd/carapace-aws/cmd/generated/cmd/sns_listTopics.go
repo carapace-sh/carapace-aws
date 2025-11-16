@@ -12,8 +12,10 @@ var sns_listTopicsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_listTopicsCmd).Standalone()
+	carapace.Gen(sns_listTopicsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_listTopicsCmd).Standalone()
 
-	sns_listTopicsCmd.Flags().String("next-token", "", "Token returned by the previous `ListTopics` request.")
+		sns_listTopicsCmd.Flags().String("next-token", "", "Token returned by the previous `ListTopics` request.")
+	})
 	snsCmd.AddCommand(sns_listTopicsCmd)
 }

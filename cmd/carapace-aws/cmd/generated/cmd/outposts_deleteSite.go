@@ -12,9 +12,11 @@ var outposts_deleteSiteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_deleteSiteCmd).Standalone()
+	carapace.Gen(outposts_deleteSiteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_deleteSiteCmd).Standalone()
 
-	outposts_deleteSiteCmd.Flags().String("site-id", "", "The ID or the Amazon Resource Name (ARN) of the site.")
-	outposts_deleteSiteCmd.MarkFlagRequired("site-id")
+		outposts_deleteSiteCmd.Flags().String("site-id", "", "The ID or the Amazon Resource Name (ARN) of the site.")
+		outposts_deleteSiteCmd.MarkFlagRequired("site-id")
+	})
 	outpostsCmd.AddCommand(outposts_deleteSiteCmd)
 }

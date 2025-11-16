@@ -12,13 +12,15 @@ var organizations_listChildrenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listChildrenCmd).Standalone()
+	carapace.Gen(organizations_listChildrenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listChildrenCmd).Standalone()
 
-	organizations_listChildrenCmd.Flags().String("child-type", "", "Filters the output to include only the specified child type.")
-	organizations_listChildrenCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	organizations_listChildrenCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
-	organizations_listChildrenCmd.Flags().String("parent-id", "", "The unique identifier (ID) for the parent root or OU whose children you want to list.")
-	organizations_listChildrenCmd.MarkFlagRequired("child-type")
-	organizations_listChildrenCmd.MarkFlagRequired("parent-id")
+		organizations_listChildrenCmd.Flags().String("child-type", "", "Filters the output to include only the specified child type.")
+		organizations_listChildrenCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		organizations_listChildrenCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listChildrenCmd.Flags().String("parent-id", "", "The unique identifier (ID) for the parent root or OU whose children you want to list.")
+		organizations_listChildrenCmd.MarkFlagRequired("child-type")
+		organizations_listChildrenCmd.MarkFlagRequired("parent-id")
+	})
 	organizationsCmd.AddCommand(organizations_listChildrenCmd)
 }

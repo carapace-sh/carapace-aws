@@ -12,11 +12,13 @@ var iot_updateRoleAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateRoleAliasCmd).Standalone()
+	carapace.Gen(iot_updateRoleAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateRoleAliasCmd).Standalone()
 
-	iot_updateRoleAliasCmd.Flags().String("credential-duration-seconds", "", "The number of seconds the credential will be valid.")
-	iot_updateRoleAliasCmd.Flags().String("role-alias", "", "The role alias to update.")
-	iot_updateRoleAliasCmd.Flags().String("role-arn", "", "The role ARN.")
-	iot_updateRoleAliasCmd.MarkFlagRequired("role-alias")
+		iot_updateRoleAliasCmd.Flags().String("credential-duration-seconds", "", "The number of seconds the credential will be valid.")
+		iot_updateRoleAliasCmd.Flags().String("role-alias", "", "The role alias to update.")
+		iot_updateRoleAliasCmd.Flags().String("role-arn", "", "The role ARN.")
+		iot_updateRoleAliasCmd.MarkFlagRequired("role-alias")
+	})
 	iotCmd.AddCommand(iot_updateRoleAliasCmd)
 }

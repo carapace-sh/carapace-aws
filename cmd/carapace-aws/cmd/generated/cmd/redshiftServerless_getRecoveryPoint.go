@@ -12,9 +12,11 @@ var redshiftServerless_getRecoveryPointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getRecoveryPointCmd).Standalone()
+	carapace.Gen(redshiftServerless_getRecoveryPointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getRecoveryPointCmd).Standalone()
 
-	redshiftServerless_getRecoveryPointCmd.Flags().String("recovery-point-id", "", "The unique identifier of the recovery point to return information for.")
-	redshiftServerless_getRecoveryPointCmd.MarkFlagRequired("recovery-point-id")
+		redshiftServerless_getRecoveryPointCmd.Flags().String("recovery-point-id", "", "The unique identifier of the recovery point to return information for.")
+		redshiftServerless_getRecoveryPointCmd.MarkFlagRequired("recovery-point-id")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getRecoveryPointCmd)
 }

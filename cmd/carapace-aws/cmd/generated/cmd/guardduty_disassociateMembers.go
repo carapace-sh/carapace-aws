@@ -12,11 +12,13 @@ var guardduty_disassociateMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_disassociateMembersCmd).Standalone()
+	carapace.Gen(guardduty_disassociateMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_disassociateMembersCmd).Standalone()
 
-	guardduty_disassociateMembersCmd.Flags().String("account-ids", "", "A list of account IDs of the GuardDuty member accounts that you want to disassociate from the administrator account.")
-	guardduty_disassociateMembersCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the administrator account.")
-	guardduty_disassociateMembersCmd.MarkFlagRequired("account-ids")
-	guardduty_disassociateMembersCmd.MarkFlagRequired("detector-id")
+		guardduty_disassociateMembersCmd.Flags().String("account-ids", "", "A list of account IDs of the GuardDuty member accounts that you want to disassociate from the administrator account.")
+		guardduty_disassociateMembersCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the administrator account.")
+		guardduty_disassociateMembersCmd.MarkFlagRequired("account-ids")
+		guardduty_disassociateMembersCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_disassociateMembersCmd)
 }

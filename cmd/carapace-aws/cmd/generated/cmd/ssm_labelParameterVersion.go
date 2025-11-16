@@ -12,12 +12,14 @@ var ssm_labelParameterVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_labelParameterVersionCmd).Standalone()
+	carapace.Gen(ssm_labelParameterVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_labelParameterVersionCmd).Standalone()
 
-	ssm_labelParameterVersionCmd.Flags().String("labels", "", "One or more labels to attach to the specified parameter version.")
-	ssm_labelParameterVersionCmd.Flags().String("name", "", "The parameter name on which you want to attach one or more labels.")
-	ssm_labelParameterVersionCmd.Flags().String("parameter-version", "", "The specific version of the parameter on which you want to attach one or more labels.")
-	ssm_labelParameterVersionCmd.MarkFlagRequired("labels")
-	ssm_labelParameterVersionCmd.MarkFlagRequired("name")
+		ssm_labelParameterVersionCmd.Flags().String("labels", "", "One or more labels to attach to the specified parameter version.")
+		ssm_labelParameterVersionCmd.Flags().String("name", "", "The parameter name on which you want to attach one or more labels.")
+		ssm_labelParameterVersionCmd.Flags().String("parameter-version", "", "The specific version of the parameter on which you want to attach one or more labels.")
+		ssm_labelParameterVersionCmd.MarkFlagRequired("labels")
+		ssm_labelParameterVersionCmd.MarkFlagRequired("name")
+	})
 	ssmCmd.AddCommand(ssm_labelParameterVersionCmd)
 }

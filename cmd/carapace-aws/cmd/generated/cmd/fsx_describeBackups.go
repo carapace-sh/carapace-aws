@@ -12,11 +12,13 @@ var fsx_describeBackupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_describeBackupsCmd).Standalone()
+	carapace.Gen(fsx_describeBackupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_describeBackupsCmd).Standalone()
 
-	fsx_describeBackupsCmd.Flags().String("backup-ids", "", "The IDs of the backups that you want to retrieve.")
-	fsx_describeBackupsCmd.Flags().String("filters", "", "The filters structure.")
-	fsx_describeBackupsCmd.Flags().String("max-results", "", "Maximum number of backups to return in the response.")
-	fsx_describeBackupsCmd.Flags().String("next-token", "", "An opaque pagination token returned from a previous `DescribeBackups` operation.")
+		fsx_describeBackupsCmd.Flags().String("backup-ids", "", "The IDs of the backups that you want to retrieve.")
+		fsx_describeBackupsCmd.Flags().String("filters", "", "The filters structure.")
+		fsx_describeBackupsCmd.Flags().String("max-results", "", "Maximum number of backups to return in the response.")
+		fsx_describeBackupsCmd.Flags().String("next-token", "", "An opaque pagination token returned from a previous `DescribeBackups` operation.")
+	})
 	fsxCmd.AddCommand(fsx_describeBackupsCmd)
 }

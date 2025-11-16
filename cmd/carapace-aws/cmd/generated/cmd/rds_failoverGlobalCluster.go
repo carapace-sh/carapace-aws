@@ -12,13 +12,15 @@ var rds_failoverGlobalClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_failoverGlobalClusterCmd).Standalone()
+	carapace.Gen(rds_failoverGlobalClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_failoverGlobalClusterCmd).Standalone()
 
-	rds_failoverGlobalClusterCmd.Flags().String("allow-data-loss", "", "Specifies whether to allow data loss for this global database cluster operation.")
-	rds_failoverGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The identifier of the global database cluster (Aurora global database) this operation should apply to.")
-	rds_failoverGlobalClusterCmd.Flags().String("switchover", "", "Specifies whether to switch over this global database cluster.")
-	rds_failoverGlobalClusterCmd.Flags().String("target-db-cluster-identifier", "", "The identifier of the secondary Aurora DB cluster that you want to promote to the primary for the global database cluster.")
-	rds_failoverGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
-	rds_failoverGlobalClusterCmd.MarkFlagRequired("target-db-cluster-identifier")
+		rds_failoverGlobalClusterCmd.Flags().String("allow-data-loss", "", "Specifies whether to allow data loss for this global database cluster operation.")
+		rds_failoverGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The identifier of the global database cluster (Aurora global database) this operation should apply to.")
+		rds_failoverGlobalClusterCmd.Flags().String("switchover", "", "Specifies whether to switch over this global database cluster.")
+		rds_failoverGlobalClusterCmd.Flags().String("target-db-cluster-identifier", "", "The identifier of the secondary Aurora DB cluster that you want to promote to the primary for the global database cluster.")
+		rds_failoverGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+		rds_failoverGlobalClusterCmd.MarkFlagRequired("target-db-cluster-identifier")
+	})
 	rdsCmd.AddCommand(rds_failoverGlobalClusterCmd)
 }

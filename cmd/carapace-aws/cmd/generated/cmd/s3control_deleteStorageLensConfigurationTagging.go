@@ -12,11 +12,13 @@ var s3control_deleteStorageLensConfigurationTaggingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_deleteStorageLensConfigurationTaggingCmd).Standalone()
+	carapace.Gen(s3control_deleteStorageLensConfigurationTaggingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_deleteStorageLensConfigurationTaggingCmd).Standalone()
 
-	s3control_deleteStorageLensConfigurationTaggingCmd.Flags().String("account-id", "", "The account ID of the requester.")
-	s3control_deleteStorageLensConfigurationTaggingCmd.Flags().String("config-id", "", "The ID of the S3 Storage Lens configuration.")
-	s3control_deleteStorageLensConfigurationTaggingCmd.MarkFlagRequired("account-id")
-	s3control_deleteStorageLensConfigurationTaggingCmd.MarkFlagRequired("config-id")
+		s3control_deleteStorageLensConfigurationTaggingCmd.Flags().String("account-id", "", "The account ID of the requester.")
+		s3control_deleteStorageLensConfigurationTaggingCmd.Flags().String("config-id", "", "The ID of the S3 Storage Lens configuration.")
+		s3control_deleteStorageLensConfigurationTaggingCmd.MarkFlagRequired("account-id")
+		s3control_deleteStorageLensConfigurationTaggingCmd.MarkFlagRequired("config-id")
+	})
 	s3controlCmd.AddCommand(s3control_deleteStorageLensConfigurationTaggingCmd)
 }

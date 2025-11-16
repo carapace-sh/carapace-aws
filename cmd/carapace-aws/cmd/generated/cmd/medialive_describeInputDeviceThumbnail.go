@@ -12,11 +12,13 @@ var medialive_describeInputDeviceThumbnailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeInputDeviceThumbnailCmd).Standalone()
+	carapace.Gen(medialive_describeInputDeviceThumbnailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeInputDeviceThumbnailCmd).Standalone()
 
-	medialive_describeInputDeviceThumbnailCmd.Flags().String("accept", "", "The HTTP Accept header.")
-	medialive_describeInputDeviceThumbnailCmd.Flags().String("input-device-id", "", "The unique ID of this input device.")
-	medialive_describeInputDeviceThumbnailCmd.MarkFlagRequired("accept")
-	medialive_describeInputDeviceThumbnailCmd.MarkFlagRequired("input-device-id")
+		medialive_describeInputDeviceThumbnailCmd.Flags().String("accept", "", "The HTTP Accept header.")
+		medialive_describeInputDeviceThumbnailCmd.Flags().String("input-device-id", "", "The unique ID of this input device.")
+		medialive_describeInputDeviceThumbnailCmd.MarkFlagRequired("accept")
+		medialive_describeInputDeviceThumbnailCmd.MarkFlagRequired("input-device-id")
+	})
 	medialiveCmd.AddCommand(medialive_describeInputDeviceThumbnailCmd)
 }

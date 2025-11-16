@@ -12,11 +12,13 @@ var amplify_deleteBranchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_deleteBranchCmd).Standalone()
+	carapace.Gen(amplify_deleteBranchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_deleteBranchCmd).Standalone()
 
-	amplify_deleteBranchCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_deleteBranchCmd.Flags().String("branch-name", "", "The name of the branch.")
-	amplify_deleteBranchCmd.MarkFlagRequired("app-id")
-	amplify_deleteBranchCmd.MarkFlagRequired("branch-name")
+		amplify_deleteBranchCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_deleteBranchCmd.Flags().String("branch-name", "", "The name of the branch.")
+		amplify_deleteBranchCmd.MarkFlagRequired("app-id")
+		amplify_deleteBranchCmd.MarkFlagRequired("branch-name")
+	})
 	amplifyCmd.AddCommand(amplify_deleteBranchCmd)
 }

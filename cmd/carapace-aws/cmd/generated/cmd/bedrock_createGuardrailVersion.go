@@ -12,11 +12,13 @@ var bedrock_createGuardrailVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_createGuardrailVersionCmd).Standalone()
+	carapace.Gen(bedrock_createGuardrailVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_createGuardrailVersionCmd).Standalone()
 
-	bedrock_createGuardrailVersionCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier to ensure that the API request completes no more than once.")
-	bedrock_createGuardrailVersionCmd.Flags().String("description", "", "A description of the guardrail version.")
-	bedrock_createGuardrailVersionCmd.Flags().String("guardrail-identifier", "", "The unique identifier of the guardrail.")
-	bedrock_createGuardrailVersionCmd.MarkFlagRequired("guardrail-identifier")
+		bedrock_createGuardrailVersionCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier to ensure that the API request completes no more than once.")
+		bedrock_createGuardrailVersionCmd.Flags().String("description", "", "A description of the guardrail version.")
+		bedrock_createGuardrailVersionCmd.Flags().String("guardrail-identifier", "", "The unique identifier of the guardrail.")
+		bedrock_createGuardrailVersionCmd.MarkFlagRequired("guardrail-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_createGuardrailVersionCmd)
 }

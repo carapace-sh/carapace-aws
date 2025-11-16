@@ -12,11 +12,13 @@ var datazone_deleteListingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteListingCmd).Standalone()
+	carapace.Gen(datazone_deleteListingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteListingCmd).Standalone()
 
-	datazone_deleteListingCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain.")
-	datazone_deleteListingCmd.Flags().String("identifier", "", "The ID of the listing to be deleted.")
-	datazone_deleteListingCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteListingCmd.MarkFlagRequired("identifier")
+		datazone_deleteListingCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain.")
+		datazone_deleteListingCmd.Flags().String("identifier", "", "The ID of the listing to be deleted.")
+		datazone_deleteListingCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteListingCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteListingCmd)
 }

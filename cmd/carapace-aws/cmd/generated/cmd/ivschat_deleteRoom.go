@@ -12,9 +12,11 @@ var ivschat_deleteRoomCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_deleteRoomCmd).Standalone()
+	carapace.Gen(ivschat_deleteRoomCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_deleteRoomCmd).Standalone()
 
-	ivschat_deleteRoomCmd.Flags().String("identifier", "", "Identifier of the room to be deleted.")
-	ivschat_deleteRoomCmd.MarkFlagRequired("identifier")
+		ivschat_deleteRoomCmd.Flags().String("identifier", "", "Identifier of the room to be deleted.")
+		ivschat_deleteRoomCmd.MarkFlagRequired("identifier")
+	})
 	ivschatCmd.AddCommand(ivschat_deleteRoomCmd)
 }

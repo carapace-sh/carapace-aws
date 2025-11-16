@@ -12,9 +12,11 @@ var timestreamWrite_resumeBatchLoadTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamWrite_resumeBatchLoadTaskCmd).Standalone()
+	carapace.Gen(timestreamWrite_resumeBatchLoadTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamWrite_resumeBatchLoadTaskCmd).Standalone()
 
-	timestreamWrite_resumeBatchLoadTaskCmd.Flags().String("task-id", "", "The ID of the batch load task to resume.")
-	timestreamWrite_resumeBatchLoadTaskCmd.MarkFlagRequired("task-id")
+		timestreamWrite_resumeBatchLoadTaskCmd.Flags().String("task-id", "", "The ID of the batch load task to resume.")
+		timestreamWrite_resumeBatchLoadTaskCmd.MarkFlagRequired("task-id")
+	})
 	timestreamWriteCmd.AddCommand(timestreamWrite_resumeBatchLoadTaskCmd)
 }

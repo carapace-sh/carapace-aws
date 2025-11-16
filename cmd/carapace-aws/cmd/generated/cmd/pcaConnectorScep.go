@@ -12,7 +12,9 @@ var pcaConnectorScepCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorScepCmd).Standalone()
+	carapace.Gen(pcaConnectorScepCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorScepCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(pcaConnectorScepCmd)
 }

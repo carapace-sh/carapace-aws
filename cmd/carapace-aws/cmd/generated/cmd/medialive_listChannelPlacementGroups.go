@@ -12,11 +12,13 @@ var medialive_listChannelPlacementGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listChannelPlacementGroupsCmd).Standalone()
+	carapace.Gen(medialive_listChannelPlacementGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listChannelPlacementGroupsCmd).Standalone()
 
-	medialive_listChannelPlacementGroupsCmd.Flags().String("cluster-id", "", "The ID of the cluster")
-	medialive_listChannelPlacementGroupsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	medialive_listChannelPlacementGroupsCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
-	medialive_listChannelPlacementGroupsCmd.MarkFlagRequired("cluster-id")
+		medialive_listChannelPlacementGroupsCmd.Flags().String("cluster-id", "", "The ID of the cluster")
+		medialive_listChannelPlacementGroupsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		medialive_listChannelPlacementGroupsCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+		medialive_listChannelPlacementGroupsCmd.MarkFlagRequired("cluster-id")
+	})
 	medialiveCmd.AddCommand(medialive_listChannelPlacementGroupsCmd)
 }

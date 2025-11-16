@@ -12,9 +12,11 @@ var neptuneGraph_getGraphSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_getGraphSnapshotCmd).Standalone()
+	carapace.Gen(neptuneGraph_getGraphSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_getGraphSnapshotCmd).Standalone()
 
-	neptuneGraph_getGraphSnapshotCmd.Flags().String("snapshot-identifier", "", "The ID of the snapshot to retrieve.")
-	neptuneGraph_getGraphSnapshotCmd.MarkFlagRequired("snapshot-identifier")
+		neptuneGraph_getGraphSnapshotCmd.Flags().String("snapshot-identifier", "", "The ID of the snapshot to retrieve.")
+		neptuneGraph_getGraphSnapshotCmd.MarkFlagRequired("snapshot-identifier")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_getGraphSnapshotCmd)
 }

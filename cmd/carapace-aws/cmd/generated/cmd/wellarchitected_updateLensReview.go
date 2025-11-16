@@ -12,14 +12,16 @@ var wellarchitected_updateLensReviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_updateLensReviewCmd).Standalone()
+	carapace.Gen(wellarchitected_updateLensReviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_updateLensReviewCmd).Standalone()
 
-	wellarchitected_updateLensReviewCmd.Flags().String("jira-configuration", "", "Configuration of the Jira integration.")
-	wellarchitected_updateLensReviewCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_updateLensReviewCmd.Flags().String("lens-notes", "", "")
-	wellarchitected_updateLensReviewCmd.Flags().String("pillar-notes", "", "")
-	wellarchitected_updateLensReviewCmd.Flags().String("workload-id", "", "")
-	wellarchitected_updateLensReviewCmd.MarkFlagRequired("lens-alias")
-	wellarchitected_updateLensReviewCmd.MarkFlagRequired("workload-id")
+		wellarchitected_updateLensReviewCmd.Flags().String("jira-configuration", "", "Configuration of the Jira integration.")
+		wellarchitected_updateLensReviewCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_updateLensReviewCmd.Flags().String("lens-notes", "", "")
+		wellarchitected_updateLensReviewCmd.Flags().String("pillar-notes", "", "")
+		wellarchitected_updateLensReviewCmd.Flags().String("workload-id", "", "")
+		wellarchitected_updateLensReviewCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_updateLensReviewCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_updateLensReviewCmd)
 }

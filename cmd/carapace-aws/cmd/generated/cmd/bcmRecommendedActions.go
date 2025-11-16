@@ -12,7 +12,9 @@ var bcmRecommendedActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmRecommendedActionsCmd).Standalone()
+	carapace.Gen(bcmRecommendedActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmRecommendedActionsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(bcmRecommendedActionsCmd)
 }

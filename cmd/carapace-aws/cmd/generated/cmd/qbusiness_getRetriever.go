@@ -12,11 +12,13 @@ var qbusiness_getRetrieverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_getRetrieverCmd).Standalone()
+	carapace.Gen(qbusiness_getRetrieverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_getRetrieverCmd).Standalone()
 
-	qbusiness_getRetrieverCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application using the retriever.")
-	qbusiness_getRetrieverCmd.Flags().String("retriever-id", "", "The identifier of the retriever.")
-	qbusiness_getRetrieverCmd.MarkFlagRequired("application-id")
-	qbusiness_getRetrieverCmd.MarkFlagRequired("retriever-id")
+		qbusiness_getRetrieverCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application using the retriever.")
+		qbusiness_getRetrieverCmd.Flags().String("retriever-id", "", "The identifier of the retriever.")
+		qbusiness_getRetrieverCmd.MarkFlagRequired("application-id")
+		qbusiness_getRetrieverCmd.MarkFlagRequired("retriever-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_getRetrieverCmd)
 }

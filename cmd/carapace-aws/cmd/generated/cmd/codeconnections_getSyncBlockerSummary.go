@@ -12,11 +12,13 @@ var codeconnections_getSyncBlockerSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeconnections_getSyncBlockerSummaryCmd).Standalone()
+	carapace.Gen(codeconnections_getSyncBlockerSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeconnections_getSyncBlockerSummaryCmd).Standalone()
 
-	codeconnections_getSyncBlockerSummaryCmd.Flags().String("resource-name", "", "The name of the Amazon Web Services resource currently blocked from automatically being synced from a Git repository.")
-	codeconnections_getSyncBlockerSummaryCmd.Flags().String("sync-type", "", "The sync type for the sync blocker summary.")
-	codeconnections_getSyncBlockerSummaryCmd.MarkFlagRequired("resource-name")
-	codeconnections_getSyncBlockerSummaryCmd.MarkFlagRequired("sync-type")
+		codeconnections_getSyncBlockerSummaryCmd.Flags().String("resource-name", "", "The name of the Amazon Web Services resource currently blocked from automatically being synced from a Git repository.")
+		codeconnections_getSyncBlockerSummaryCmd.Flags().String("sync-type", "", "The sync type for the sync blocker summary.")
+		codeconnections_getSyncBlockerSummaryCmd.MarkFlagRequired("resource-name")
+		codeconnections_getSyncBlockerSummaryCmd.MarkFlagRequired("sync-type")
+	})
 	codeconnectionsCmd.AddCommand(codeconnections_getSyncBlockerSummaryCmd)
 }

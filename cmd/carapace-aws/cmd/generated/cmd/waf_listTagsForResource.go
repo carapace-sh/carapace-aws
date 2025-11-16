@@ -12,11 +12,13 @@ var waf_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_listTagsForResourceCmd).Standalone()
+	carapace.Gen(waf_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_listTagsForResourceCmd).Standalone()
 
-	waf_listTagsForResourceCmd.Flags().String("limit", "", "")
-	waf_listTagsForResourceCmd.Flags().String("next-marker", "", "")
-	waf_listTagsForResourceCmd.Flags().String("resource-arn", "", "")
-	waf_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		waf_listTagsForResourceCmd.Flags().String("limit", "", "")
+		waf_listTagsForResourceCmd.Flags().String("next-marker", "", "")
+		waf_listTagsForResourceCmd.Flags().String("resource-arn", "", "")
+		waf_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	wafCmd.AddCommand(waf_listTagsForResourceCmd)
 }

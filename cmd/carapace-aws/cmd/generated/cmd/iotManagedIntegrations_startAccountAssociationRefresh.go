@@ -12,9 +12,11 @@ var iotManagedIntegrations_startAccountAssociationRefreshCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_startAccountAssociationRefreshCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_startAccountAssociationRefreshCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_startAccountAssociationRefreshCmd).Standalone()
 
-	iotManagedIntegrations_startAccountAssociationRefreshCmd.Flags().String("account-association-id", "", "The unique identifier of the account association to refresh.")
-	iotManagedIntegrations_startAccountAssociationRefreshCmd.MarkFlagRequired("account-association-id")
+		iotManagedIntegrations_startAccountAssociationRefreshCmd.Flags().String("account-association-id", "", "The unique identifier of the account association to refresh.")
+		iotManagedIntegrations_startAccountAssociationRefreshCmd.MarkFlagRequired("account-association-id")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_startAccountAssociationRefreshCmd)
 }

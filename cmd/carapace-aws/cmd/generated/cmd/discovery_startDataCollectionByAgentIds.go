@@ -12,9 +12,11 @@ var discovery_startDataCollectionByAgentIdsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_startDataCollectionByAgentIdsCmd).Standalone()
+	carapace.Gen(discovery_startDataCollectionByAgentIdsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_startDataCollectionByAgentIdsCmd).Standalone()
 
-	discovery_startDataCollectionByAgentIdsCmd.Flags().String("agent-ids", "", "The IDs of the agents from which to start collecting data.")
-	discovery_startDataCollectionByAgentIdsCmd.MarkFlagRequired("agent-ids")
+		discovery_startDataCollectionByAgentIdsCmd.Flags().String("agent-ids", "", "The IDs of the agents from which to start collecting data.")
+		discovery_startDataCollectionByAgentIdsCmd.MarkFlagRequired("agent-ids")
+	})
 	discoveryCmd.AddCommand(discovery_startDataCollectionByAgentIdsCmd)
 }

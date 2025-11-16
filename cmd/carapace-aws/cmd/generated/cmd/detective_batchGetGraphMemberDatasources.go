@@ -12,11 +12,13 @@ var detective_batchGetGraphMemberDatasourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_batchGetGraphMemberDatasourcesCmd).Standalone()
+	carapace.Gen(detective_batchGetGraphMemberDatasourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_batchGetGraphMemberDatasourcesCmd).Standalone()
 
-	detective_batchGetGraphMemberDatasourcesCmd.Flags().String("account-ids", "", "The list of Amazon Web Services accounts to get data source package information on.")
-	detective_batchGetGraphMemberDatasourcesCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph.")
-	detective_batchGetGraphMemberDatasourcesCmd.MarkFlagRequired("account-ids")
-	detective_batchGetGraphMemberDatasourcesCmd.MarkFlagRequired("graph-arn")
+		detective_batchGetGraphMemberDatasourcesCmd.Flags().String("account-ids", "", "The list of Amazon Web Services accounts to get data source package information on.")
+		detective_batchGetGraphMemberDatasourcesCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph.")
+		detective_batchGetGraphMemberDatasourcesCmd.MarkFlagRequired("account-ids")
+		detective_batchGetGraphMemberDatasourcesCmd.MarkFlagRequired("graph-arn")
+	})
 	detectiveCmd.AddCommand(detective_batchGetGraphMemberDatasourcesCmd)
 }

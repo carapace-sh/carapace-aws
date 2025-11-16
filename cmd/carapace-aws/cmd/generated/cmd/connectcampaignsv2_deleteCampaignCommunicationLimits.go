@@ -12,11 +12,13 @@ var connectcampaignsv2_deleteCampaignCommunicationLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_deleteCampaignCommunicationLimitsCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_deleteCampaignCommunicationLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_deleteCampaignCommunicationLimitsCmd).Standalone()
 
-	connectcampaignsv2_deleteCampaignCommunicationLimitsCmd.Flags().String("config", "", "")
-	connectcampaignsv2_deleteCampaignCommunicationLimitsCmd.Flags().String("id", "", "")
-	connectcampaignsv2_deleteCampaignCommunicationLimitsCmd.MarkFlagRequired("config")
-	connectcampaignsv2_deleteCampaignCommunicationLimitsCmd.MarkFlagRequired("id")
+		connectcampaignsv2_deleteCampaignCommunicationLimitsCmd.Flags().String("config", "", "")
+		connectcampaignsv2_deleteCampaignCommunicationLimitsCmd.Flags().String("id", "", "")
+		connectcampaignsv2_deleteCampaignCommunicationLimitsCmd.MarkFlagRequired("config")
+		connectcampaignsv2_deleteCampaignCommunicationLimitsCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_deleteCampaignCommunicationLimitsCmd)
 }

@@ -12,9 +12,11 @@ var codeconnections_deleteConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeconnections_deleteConnectionCmd).Standalone()
+	carapace.Gen(codeconnections_deleteConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeconnections_deleteConnectionCmd).Standalone()
 
-	codeconnections_deleteConnectionCmd.Flags().String("connection-arn", "", "The Amazon Resource Name (ARN) of the connection to be deleted.")
-	codeconnections_deleteConnectionCmd.MarkFlagRequired("connection-arn")
+		codeconnections_deleteConnectionCmd.Flags().String("connection-arn", "", "The Amazon Resource Name (ARN) of the connection to be deleted.")
+		codeconnections_deleteConnectionCmd.MarkFlagRequired("connection-arn")
+	})
 	codeconnectionsCmd.AddCommand(codeconnections_deleteConnectionCmd)
 }

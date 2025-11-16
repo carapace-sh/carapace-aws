@@ -12,9 +12,11 @@ var ivsRealtime_listStagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_listStagesCmd).Standalone()
+	carapace.Gen(ivsRealtime_listStagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_listStagesCmd).Standalone()
 
-	ivsRealtime_listStagesCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	ivsRealtime_listStagesCmd.Flags().String("next-token", "", "The first stage to retrieve.")
+		ivsRealtime_listStagesCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		ivsRealtime_listStagesCmd.Flags().String("next-token", "", "The first stage to retrieve.")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_listStagesCmd)
 }

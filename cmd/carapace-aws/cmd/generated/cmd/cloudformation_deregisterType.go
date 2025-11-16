@@ -12,11 +12,13 @@ var cloudformation_deregisterTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_deregisterTypeCmd).Standalone()
+	carapace.Gen(cloudformation_deregisterTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_deregisterTypeCmd).Standalone()
 
-	cloudformation_deregisterTypeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the extension.")
-	cloudformation_deregisterTypeCmd.Flags().String("type", "", "The kind of extension.")
-	cloudformation_deregisterTypeCmd.Flags().String("type-name", "", "The name of the extension.")
-	cloudformation_deregisterTypeCmd.Flags().String("version-id", "", "The ID of a specific version of the extension.")
+		cloudformation_deregisterTypeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the extension.")
+		cloudformation_deregisterTypeCmd.Flags().String("type", "", "The kind of extension.")
+		cloudformation_deregisterTypeCmd.Flags().String("type-name", "", "The name of the extension.")
+		cloudformation_deregisterTypeCmd.Flags().String("version-id", "", "The ID of a specific version of the extension.")
+	})
 	cloudformationCmd.AddCommand(cloudformation_deregisterTypeCmd)
 }

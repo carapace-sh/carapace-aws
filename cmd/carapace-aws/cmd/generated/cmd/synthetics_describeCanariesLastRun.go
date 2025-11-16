@@ -12,11 +12,13 @@ var synthetics_describeCanariesLastRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_describeCanariesLastRunCmd).Standalone()
+	carapace.Gen(synthetics_describeCanariesLastRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_describeCanariesLastRunCmd).Standalone()
 
-	synthetics_describeCanariesLastRunCmd.Flags().String("browser-type", "", "The type of browser to use for the canary run.")
-	synthetics_describeCanariesLastRunCmd.Flags().String("max-results", "", "Specify this parameter to limit how many runs are returned each time you use the `DescribeLastRun` operation.")
-	synthetics_describeCanariesLastRunCmd.Flags().String("names", "", "Use this parameter to return only canaries that match the names that you specify here.")
-	synthetics_describeCanariesLastRunCmd.Flags().String("next-token", "", "A token that indicates that there is more data available.")
+		synthetics_describeCanariesLastRunCmd.Flags().String("browser-type", "", "The type of browser to use for the canary run.")
+		synthetics_describeCanariesLastRunCmd.Flags().String("max-results", "", "Specify this parameter to limit how many runs are returned each time you use the `DescribeLastRun` operation.")
+		synthetics_describeCanariesLastRunCmd.Flags().String("names", "", "Use this parameter to return only canaries that match the names that you specify here.")
+		synthetics_describeCanariesLastRunCmd.Flags().String("next-token", "", "A token that indicates that there is more data available.")
+	})
 	syntheticsCmd.AddCommand(synthetics_describeCanariesLastRunCmd)
 }

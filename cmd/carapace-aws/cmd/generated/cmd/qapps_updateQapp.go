@@ -12,14 +12,16 @@ var qapps_updateQappCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_updateQappCmd).Standalone()
+	carapace.Gen(qapps_updateQappCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_updateQappCmd).Standalone()
 
-	qapps_updateQappCmd.Flags().String("app-definition", "", "The new definition specifying the cards and flow for the Q App.")
-	qapps_updateQappCmd.Flags().String("app-id", "", "The unique identifier of the Q App to update.")
-	qapps_updateQappCmd.Flags().String("description", "", "The new description for the Q App.")
-	qapps_updateQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_updateQappCmd.Flags().String("title", "", "The new title for the Q App.")
-	qapps_updateQappCmd.MarkFlagRequired("app-id")
-	qapps_updateQappCmd.MarkFlagRequired("instance-id")
+		qapps_updateQappCmd.Flags().String("app-definition", "", "The new definition specifying the cards and flow for the Q App.")
+		qapps_updateQappCmd.Flags().String("app-id", "", "The unique identifier of the Q App to update.")
+		qapps_updateQappCmd.Flags().String("description", "", "The new description for the Q App.")
+		qapps_updateQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_updateQappCmd.Flags().String("title", "", "The new title for the Q App.")
+		qapps_updateQappCmd.MarkFlagRequired("app-id")
+		qapps_updateQappCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_updateQappCmd)
 }

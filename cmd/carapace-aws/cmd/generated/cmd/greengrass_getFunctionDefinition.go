@@ -12,9 +12,11 @@ var greengrass_getFunctionDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getFunctionDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_getFunctionDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getFunctionDefinitionCmd).Standalone()
 
-	greengrass_getFunctionDefinitionCmd.Flags().String("function-definition-id", "", "The ID of the Lambda function definition.")
-	greengrass_getFunctionDefinitionCmd.MarkFlagRequired("function-definition-id")
+		greengrass_getFunctionDefinitionCmd.Flags().String("function-definition-id", "", "The ID of the Lambda function definition.")
+		greengrass_getFunctionDefinitionCmd.MarkFlagRequired("function-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getFunctionDefinitionCmd)
 }

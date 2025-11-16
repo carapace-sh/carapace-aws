@@ -12,9 +12,11 @@ var vpcLattice_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(vpcLattice_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deleteResourcePolicyCmd).Standalone()
 
-	vpcLattice_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	vpcLattice_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		vpcLattice_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		vpcLattice_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deleteResourcePolicyCmd)
 }

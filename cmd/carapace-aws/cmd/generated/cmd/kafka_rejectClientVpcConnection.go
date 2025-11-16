@@ -12,11 +12,13 @@ var kafka_rejectClientVpcConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_rejectClientVpcConnectionCmd).Standalone()
+	carapace.Gen(kafka_rejectClientVpcConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_rejectClientVpcConnectionCmd).Standalone()
 
-	kafka_rejectClientVpcConnectionCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
-	kafka_rejectClientVpcConnectionCmd.Flags().String("vpc-connection-arn", "", "The VPC connection ARN.")
-	kafka_rejectClientVpcConnectionCmd.MarkFlagRequired("cluster-arn")
-	kafka_rejectClientVpcConnectionCmd.MarkFlagRequired("vpc-connection-arn")
+		kafka_rejectClientVpcConnectionCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
+		kafka_rejectClientVpcConnectionCmd.Flags().String("vpc-connection-arn", "", "The VPC connection ARN.")
+		kafka_rejectClientVpcConnectionCmd.MarkFlagRequired("cluster-arn")
+		kafka_rejectClientVpcConnectionCmd.MarkFlagRequired("vpc-connection-arn")
+	})
 	kafkaCmd.AddCommand(kafka_rejectClientVpcConnectionCmd)
 }

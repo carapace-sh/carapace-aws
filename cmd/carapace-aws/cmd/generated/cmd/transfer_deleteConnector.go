@@ -12,9 +12,11 @@ var transfer_deleteConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_deleteConnectorCmd).Standalone()
+	carapace.Gen(transfer_deleteConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_deleteConnectorCmd).Standalone()
 
-	transfer_deleteConnectorCmd.Flags().String("connector-id", "", "The unique identifier for the connector.")
-	transfer_deleteConnectorCmd.MarkFlagRequired("connector-id")
+		transfer_deleteConnectorCmd.Flags().String("connector-id", "", "The unique identifier for the connector.")
+		transfer_deleteConnectorCmd.MarkFlagRequired("connector-id")
+	})
 	transferCmd.AddCommand(transfer_deleteConnectorCmd)
 }

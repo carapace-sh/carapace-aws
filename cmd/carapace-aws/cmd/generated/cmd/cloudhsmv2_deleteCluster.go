@@ -12,9 +12,11 @@ var cloudhsmv2_deleteClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsmv2_deleteClusterCmd).Standalone()
+	carapace.Gen(cloudhsmv2_deleteClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsmv2_deleteClusterCmd).Standalone()
 
-	cloudhsmv2_deleteClusterCmd.Flags().String("cluster-id", "", "The identifier (ID) of the cluster that you are deleting.")
-	cloudhsmv2_deleteClusterCmd.MarkFlagRequired("cluster-id")
+		cloudhsmv2_deleteClusterCmd.Flags().String("cluster-id", "", "The identifier (ID) of the cluster that you are deleting.")
+		cloudhsmv2_deleteClusterCmd.MarkFlagRequired("cluster-id")
+	})
 	cloudhsmv2Cmd.AddCommand(cloudhsmv2_deleteClusterCmd)
 }

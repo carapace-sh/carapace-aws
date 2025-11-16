@@ -12,9 +12,11 @@ var emrServerless_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrServerless_listTagsForResourceCmd).Standalone()
+	carapace.Gen(emrServerless_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrServerless_listTagsForResourceCmd).Standalone()
 
-	emrServerless_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to list the tags for.")
-	emrServerless_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		emrServerless_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to list the tags for.")
+		emrServerless_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	emrServerlessCmd.AddCommand(emrServerless_listTagsForResourceCmd)
 }

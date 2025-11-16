@@ -12,9 +12,11 @@ var transfer_deleteWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_deleteWorkflowCmd).Standalone()
+	carapace.Gen(transfer_deleteWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_deleteWorkflowCmd).Standalone()
 
-	transfer_deleteWorkflowCmd.Flags().String("workflow-id", "", "A unique identifier for the workflow.")
-	transfer_deleteWorkflowCmd.MarkFlagRequired("workflow-id")
+		transfer_deleteWorkflowCmd.Flags().String("workflow-id", "", "A unique identifier for the workflow.")
+		transfer_deleteWorkflowCmd.MarkFlagRequired("workflow-id")
+	})
 	transferCmd.AddCommand(transfer_deleteWorkflowCmd)
 }

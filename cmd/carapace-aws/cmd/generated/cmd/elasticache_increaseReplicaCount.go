@@ -12,16 +12,18 @@ var elasticache_increaseReplicaCountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_increaseReplicaCountCmd).Standalone()
+	carapace.Gen(elasticache_increaseReplicaCountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_increaseReplicaCountCmd).Standalone()
 
-	elasticache_increaseReplicaCountCmd.Flags().Bool("apply-immediately", false, "If `True`, the number of replica nodes is increased immediately.")
-	elasticache_increaseReplicaCountCmd.Flags().String("new-replica-count", "", "The number of read replica nodes you want at the completion of this operation.")
-	elasticache_increaseReplicaCountCmd.Flags().Bool("no-apply-immediately", false, "If `True`, the number of replica nodes is increased immediately.")
-	elasticache_increaseReplicaCountCmd.Flags().String("replica-configuration", "", "A list of `ConfigureShard` objects that can be used to configure each shard in a Valkey or Redis OSS (cluster mode enabled) replication group.")
-	elasticache_increaseReplicaCountCmd.Flags().String("replication-group-id", "", "The id of the replication group to which you want to add replica nodes.")
-	elasticache_increaseReplicaCountCmd.MarkFlagRequired("apply-immediately")
-	elasticache_increaseReplicaCountCmd.Flag("no-apply-immediately").Hidden = true
-	elasticache_increaseReplicaCountCmd.MarkFlagRequired("no-apply-immediately")
-	elasticache_increaseReplicaCountCmd.MarkFlagRequired("replication-group-id")
+		elasticache_increaseReplicaCountCmd.Flags().Bool("apply-immediately", false, "If `True`, the number of replica nodes is increased immediately.")
+		elasticache_increaseReplicaCountCmd.Flags().String("new-replica-count", "", "The number of read replica nodes you want at the completion of this operation.")
+		elasticache_increaseReplicaCountCmd.Flags().Bool("no-apply-immediately", false, "If `True`, the number of replica nodes is increased immediately.")
+		elasticache_increaseReplicaCountCmd.Flags().String("replica-configuration", "", "A list of `ConfigureShard` objects that can be used to configure each shard in a Valkey or Redis OSS (cluster mode enabled) replication group.")
+		elasticache_increaseReplicaCountCmd.Flags().String("replication-group-id", "", "The id of the replication group to which you want to add replica nodes.")
+		elasticache_increaseReplicaCountCmd.MarkFlagRequired("apply-immediately")
+		elasticache_increaseReplicaCountCmd.Flag("no-apply-immediately").Hidden = true
+		elasticache_increaseReplicaCountCmd.MarkFlagRequired("no-apply-immediately")
+		elasticache_increaseReplicaCountCmd.MarkFlagRequired("replication-group-id")
+	})
 	elasticacheCmd.AddCommand(elasticache_increaseReplicaCountCmd)
 }

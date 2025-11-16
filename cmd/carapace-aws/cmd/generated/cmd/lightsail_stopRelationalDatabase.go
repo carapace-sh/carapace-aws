@@ -12,10 +12,12 @@ var lightsail_stopRelationalDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_stopRelationalDatabaseCmd).Standalone()
+	carapace.Gen(lightsail_stopRelationalDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_stopRelationalDatabaseCmd).Standalone()
 
-	lightsail_stopRelationalDatabaseCmd.Flags().String("relational-database-name", "", "The name of your database to stop.")
-	lightsail_stopRelationalDatabaseCmd.Flags().String("relational-database-snapshot-name", "", "The name of your new database snapshot to be created before stopping your database.")
-	lightsail_stopRelationalDatabaseCmd.MarkFlagRequired("relational-database-name")
+		lightsail_stopRelationalDatabaseCmd.Flags().String("relational-database-name", "", "The name of your database to stop.")
+		lightsail_stopRelationalDatabaseCmd.Flags().String("relational-database-snapshot-name", "", "The name of your new database snapshot to be created before stopping your database.")
+		lightsail_stopRelationalDatabaseCmd.MarkFlagRequired("relational-database-name")
+	})
 	lightsailCmd.AddCommand(lightsail_stopRelationalDatabaseCmd)
 }

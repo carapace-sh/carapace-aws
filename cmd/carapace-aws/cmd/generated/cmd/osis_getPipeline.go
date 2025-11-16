@@ -12,9 +12,11 @@ var osis_getPipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_getPipelineCmd).Standalone()
+	carapace.Gen(osis_getPipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_getPipelineCmd).Standalone()
 
-	osis_getPipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline.")
-	osis_getPipelineCmd.MarkFlagRequired("pipeline-name")
+		osis_getPipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline.")
+		osis_getPipelineCmd.MarkFlagRequired("pipeline-name")
+	})
 	osisCmd.AddCommand(osis_getPipelineCmd)
 }

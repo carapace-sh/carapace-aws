@@ -12,11 +12,13 @@ var iot_deletePolicyVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deletePolicyVersionCmd).Standalone()
+	carapace.Gen(iot_deletePolicyVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deletePolicyVersionCmd).Standalone()
 
-	iot_deletePolicyVersionCmd.Flags().String("policy-name", "", "The name of the policy.")
-	iot_deletePolicyVersionCmd.Flags().String("policy-version-id", "", "The policy version ID.")
-	iot_deletePolicyVersionCmd.MarkFlagRequired("policy-name")
-	iot_deletePolicyVersionCmd.MarkFlagRequired("policy-version-id")
+		iot_deletePolicyVersionCmd.Flags().String("policy-name", "", "The name of the policy.")
+		iot_deletePolicyVersionCmd.Flags().String("policy-version-id", "", "The policy version ID.")
+		iot_deletePolicyVersionCmd.MarkFlagRequired("policy-name")
+		iot_deletePolicyVersionCmd.MarkFlagRequired("policy-version-id")
+	})
 	iotCmd.AddCommand(iot_deletePolicyVersionCmd)
 }

@@ -12,9 +12,11 @@ var stepfunctions_describeStateMachineAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_describeStateMachineAliasCmd).Standalone()
+	carapace.Gen(stepfunctions_describeStateMachineAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_describeStateMachineAliasCmd).Standalone()
 
-	stepfunctions_describeStateMachineAliasCmd.Flags().String("state-machine-alias-arn", "", "The Amazon Resource Name (ARN) of the state machine alias.")
-	stepfunctions_describeStateMachineAliasCmd.MarkFlagRequired("state-machine-alias-arn")
+		stepfunctions_describeStateMachineAliasCmd.Flags().String("state-machine-alias-arn", "", "The Amazon Resource Name (ARN) of the state machine alias.")
+		stepfunctions_describeStateMachineAliasCmd.MarkFlagRequired("state-machine-alias-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_describeStateMachineAliasCmd)
 }

@@ -12,11 +12,13 @@ var opensearch_deleteDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_deleteDataSourceCmd).Standalone()
+	carapace.Gen(opensearch_deleteDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_deleteDataSourceCmd).Standalone()
 
-	opensearch_deleteDataSourceCmd.Flags().String("domain-name", "", "The name of the domain.")
-	opensearch_deleteDataSourceCmd.Flags().String("name", "", "The name of the data source to delete.")
-	opensearch_deleteDataSourceCmd.MarkFlagRequired("domain-name")
-	opensearch_deleteDataSourceCmd.MarkFlagRequired("name")
+		opensearch_deleteDataSourceCmd.Flags().String("domain-name", "", "The name of the domain.")
+		opensearch_deleteDataSourceCmd.Flags().String("name", "", "The name of the data source to delete.")
+		opensearch_deleteDataSourceCmd.MarkFlagRequired("domain-name")
+		opensearch_deleteDataSourceCmd.MarkFlagRequired("name")
+	})
 	opensearchCmd.AddCommand(opensearch_deleteDataSourceCmd)
 }

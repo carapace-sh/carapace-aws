@@ -12,10 +12,12 @@ var iot_listDomainConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listDomainConfigurationsCmd).Standalone()
+	carapace.Gen(iot_listDomainConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listDomainConfigurationsCmd).Standalone()
 
-	iot_listDomainConfigurationsCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	iot_listDomainConfigurationsCmd.Flags().String("page-size", "", "The result page size.")
-	iot_listDomainConfigurationsCmd.Flags().String("service-type", "", "The type of service delivered by the endpoint.")
+		iot_listDomainConfigurationsCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		iot_listDomainConfigurationsCmd.Flags().String("page-size", "", "The result page size.")
+		iot_listDomainConfigurationsCmd.Flags().String("service-type", "", "The type of service delivered by the endpoint.")
+	})
 	iotCmd.AddCommand(iot_listDomainConfigurationsCmd)
 }

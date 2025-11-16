@@ -12,11 +12,13 @@ var rtbfabric_rejectLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_rejectLinkCmd).Standalone()
+	carapace.Gen(rtbfabric_rejectLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_rejectLinkCmd).Standalone()
 
-	rtbfabric_rejectLinkCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
-	rtbfabric_rejectLinkCmd.Flags().String("link-id", "", "The unique identifier of the link.")
-	rtbfabric_rejectLinkCmd.MarkFlagRequired("gateway-id")
-	rtbfabric_rejectLinkCmd.MarkFlagRequired("link-id")
+		rtbfabric_rejectLinkCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
+		rtbfabric_rejectLinkCmd.Flags().String("link-id", "", "The unique identifier of the link.")
+		rtbfabric_rejectLinkCmd.MarkFlagRequired("gateway-id")
+		rtbfabric_rejectLinkCmd.MarkFlagRequired("link-id")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_rejectLinkCmd)
 }

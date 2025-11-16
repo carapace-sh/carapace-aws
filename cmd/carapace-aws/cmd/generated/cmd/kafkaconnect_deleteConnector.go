@@ -12,10 +12,12 @@ var kafkaconnect_deleteConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnect_deleteConnectorCmd).Standalone()
+	carapace.Gen(kafkaconnect_deleteConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnect_deleteConnectorCmd).Standalone()
 
-	kafkaconnect_deleteConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector that you want to delete.")
-	kafkaconnect_deleteConnectorCmd.Flags().String("current-version", "", "The current version of the connector that you want to delete.")
-	kafkaconnect_deleteConnectorCmd.MarkFlagRequired("connector-arn")
+		kafkaconnect_deleteConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector that you want to delete.")
+		kafkaconnect_deleteConnectorCmd.Flags().String("current-version", "", "The current version of the connector that you want to delete.")
+		kafkaconnect_deleteConnectorCmd.MarkFlagRequired("connector-arn")
+	})
 	kafkaconnectCmd.AddCommand(kafkaconnect_deleteConnectorCmd)
 }

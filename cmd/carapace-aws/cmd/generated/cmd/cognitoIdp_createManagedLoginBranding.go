@@ -12,14 +12,16 @@ var cognitoIdp_createManagedLoginBrandingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_createManagedLoginBrandingCmd).Standalone()
+	carapace.Gen(cognitoIdp_createManagedLoginBrandingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_createManagedLoginBrandingCmd).Standalone()
 
-	cognitoIdp_createManagedLoginBrandingCmd.Flags().String("assets", "", "An array of image files that you want to apply to functions like backgrounds, logos, and icons.")
-	cognitoIdp_createManagedLoginBrandingCmd.Flags().String("client-id", "", "The app client that you want to create the branding style for.")
-	cognitoIdp_createManagedLoginBrandingCmd.Flags().String("settings", "", "A JSON file, encoded as a `Document` type, with the the settings that you want to apply to your style.")
-	cognitoIdp_createManagedLoginBrandingCmd.Flags().String("use-cognito-provided-values", "", "When true, applies the default branding style options.")
-	cognitoIdp_createManagedLoginBrandingCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to create a new branding style.")
-	cognitoIdp_createManagedLoginBrandingCmd.MarkFlagRequired("client-id")
-	cognitoIdp_createManagedLoginBrandingCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_createManagedLoginBrandingCmd.Flags().String("assets", "", "An array of image files that you want to apply to functions like backgrounds, logos, and icons.")
+		cognitoIdp_createManagedLoginBrandingCmd.Flags().String("client-id", "", "The app client that you want to create the branding style for.")
+		cognitoIdp_createManagedLoginBrandingCmd.Flags().String("settings", "", "A JSON file, encoded as a `Document` type, with the the settings that you want to apply to your style.")
+		cognitoIdp_createManagedLoginBrandingCmd.Flags().String("use-cognito-provided-values", "", "When true, applies the default branding style options.")
+		cognitoIdp_createManagedLoginBrandingCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to create a new branding style.")
+		cognitoIdp_createManagedLoginBrandingCmd.MarkFlagRequired("client-id")
+		cognitoIdp_createManagedLoginBrandingCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_createManagedLoginBrandingCmd)
 }

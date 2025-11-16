@@ -12,9 +12,11 @@ var observabilityadmin_deleteTelemetryRuleForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_deleteTelemetryRuleForOrganizationCmd).Standalone()
+	carapace.Gen(observabilityadmin_deleteTelemetryRuleForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_deleteTelemetryRuleForOrganizationCmd).Standalone()
 
-	observabilityadmin_deleteTelemetryRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization telemetry rule to delete.")
-	observabilityadmin_deleteTelemetryRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+		observabilityadmin_deleteTelemetryRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization telemetry rule to delete.")
+		observabilityadmin_deleteTelemetryRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_deleteTelemetryRuleForOrganizationCmd)
 }

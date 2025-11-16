@@ -12,11 +12,13 @@ var dms_startRecommendationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_startRecommendationsCmd).Standalone()
+	carapace.Gen(dms_startRecommendationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_startRecommendationsCmd).Standalone()
 
-	dms_startRecommendationsCmd.Flags().String("database-id", "", "The identifier of the source database to analyze and provide recommendations for.")
-	dms_startRecommendationsCmd.Flags().String("settings", "", "The settings in JSON format that Fleet Advisor uses to determine target engine recommendations.")
-	dms_startRecommendationsCmd.MarkFlagRequired("database-id")
-	dms_startRecommendationsCmd.MarkFlagRequired("settings")
+		dms_startRecommendationsCmd.Flags().String("database-id", "", "The identifier of the source database to analyze and provide recommendations for.")
+		dms_startRecommendationsCmd.Flags().String("settings", "", "The settings in JSON format that Fleet Advisor uses to determine target engine recommendations.")
+		dms_startRecommendationsCmd.MarkFlagRequired("database-id")
+		dms_startRecommendationsCmd.MarkFlagRequired("settings")
+	})
 	dmsCmd.AddCommand(dms_startRecommendationsCmd)
 }

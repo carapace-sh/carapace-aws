@@ -12,11 +12,13 @@ var lexModels_deleteSlotTypeVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_deleteSlotTypeVersionCmd).Standalone()
+	carapace.Gen(lexModels_deleteSlotTypeVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_deleteSlotTypeVersionCmd).Standalone()
 
-	lexModels_deleteSlotTypeVersionCmd.Flags().String("name", "", "The name of the slot type.")
-	lexModels_deleteSlotTypeVersionCmd.Flags().String("version", "", "The version of the slot type to delete.")
-	lexModels_deleteSlotTypeVersionCmd.MarkFlagRequired("name")
-	lexModels_deleteSlotTypeVersionCmd.MarkFlagRequired("version")
+		lexModels_deleteSlotTypeVersionCmd.Flags().String("name", "", "The name of the slot type.")
+		lexModels_deleteSlotTypeVersionCmd.Flags().String("version", "", "The version of the slot type to delete.")
+		lexModels_deleteSlotTypeVersionCmd.MarkFlagRequired("name")
+		lexModels_deleteSlotTypeVersionCmd.MarkFlagRequired("version")
+	})
 	lexModelsCmd.AddCommand(lexModels_deleteSlotTypeVersionCmd)
 }

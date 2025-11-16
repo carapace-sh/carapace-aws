@@ -12,14 +12,16 @@ var route53domains_updateDomainContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_updateDomainContactCmd).Standalone()
+	carapace.Gen(route53domains_updateDomainContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_updateDomainContactCmd).Standalone()
 
-	route53domains_updateDomainContactCmd.Flags().String("admin-contact", "", "Provides detailed contact information.")
-	route53domains_updateDomainContactCmd.Flags().String("billing-contact", "", "Provides detailed contact information.")
-	route53domains_updateDomainContactCmd.Flags().String("consent", "", "Customer's consent for the owner change request.")
-	route53domains_updateDomainContactCmd.Flags().String("domain-name", "", "The name of the domain that you want to update contact information for.")
-	route53domains_updateDomainContactCmd.Flags().String("registrant-contact", "", "Provides detailed contact information.")
-	route53domains_updateDomainContactCmd.Flags().String("tech-contact", "", "Provides detailed contact information.")
-	route53domains_updateDomainContactCmd.MarkFlagRequired("domain-name")
+		route53domains_updateDomainContactCmd.Flags().String("admin-contact", "", "Provides detailed contact information.")
+		route53domains_updateDomainContactCmd.Flags().String("billing-contact", "", "Provides detailed contact information.")
+		route53domains_updateDomainContactCmd.Flags().String("consent", "", "Customer's consent for the owner change request.")
+		route53domains_updateDomainContactCmd.Flags().String("domain-name", "", "The name of the domain that you want to update contact information for.")
+		route53domains_updateDomainContactCmd.Flags().String("registrant-contact", "", "Provides detailed contact information.")
+		route53domains_updateDomainContactCmd.Flags().String("tech-contact", "", "Provides detailed contact information.")
+		route53domains_updateDomainContactCmd.MarkFlagRequired("domain-name")
+	})
 	route53domainsCmd.AddCommand(route53domains_updateDomainContactCmd)
 }

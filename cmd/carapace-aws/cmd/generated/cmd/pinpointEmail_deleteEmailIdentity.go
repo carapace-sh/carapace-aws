@@ -12,9 +12,11 @@ var pinpointEmail_deleteEmailIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_deleteEmailIdentityCmd).Standalone()
+	carapace.Gen(pinpointEmail_deleteEmailIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_deleteEmailIdentityCmd).Standalone()
 
-	pinpointEmail_deleteEmailIdentityCmd.Flags().String("email-identity", "", "The identity (that is, the email address or domain) that you want to delete from your Amazon Pinpoint account.")
-	pinpointEmail_deleteEmailIdentityCmd.MarkFlagRequired("email-identity")
+		pinpointEmail_deleteEmailIdentityCmd.Flags().String("email-identity", "", "The identity (that is, the email address or domain) that you want to delete from your Amazon Pinpoint account.")
+		pinpointEmail_deleteEmailIdentityCmd.MarkFlagRequired("email-identity")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_deleteEmailIdentityCmd)
 }

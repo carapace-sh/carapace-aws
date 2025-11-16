@@ -12,9 +12,11 @@ var repostspace_listSpacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_listSpacesCmd).Standalone()
+	carapace.Gen(repostspace_listSpacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_listSpacesCmd).Standalone()
 
-	repostspace_listSpacesCmd.Flags().String("max-results", "", "The maximum number of private re:Posts to include in the results.")
-	repostspace_listSpacesCmd.Flags().String("next-token", "", "The token for the next set of private re:Posts to return.")
+		repostspace_listSpacesCmd.Flags().String("max-results", "", "The maximum number of private re:Posts to include in the results.")
+		repostspace_listSpacesCmd.Flags().String("next-token", "", "The token for the next set of private re:Posts to return.")
+	})
 	repostspaceCmd.AddCommand(repostspace_listSpacesCmd)
 }

@@ -12,10 +12,12 @@ var codeartifact_describeDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeartifact_describeDomainCmd).Standalone()
+	carapace.Gen(codeartifact_describeDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeartifact_describeDomainCmd).Standalone()
 
-	codeartifact_describeDomainCmd.Flags().String("domain", "", "A string that specifies the name of the requested domain.")
-	codeartifact_describeDomainCmd.Flags().String("domain-owner", "", "The 12-digit account number of the Amazon Web Services account that owns the domain.")
-	codeartifact_describeDomainCmd.MarkFlagRequired("domain")
+		codeartifact_describeDomainCmd.Flags().String("domain", "", "A string that specifies the name of the requested domain.")
+		codeartifact_describeDomainCmd.Flags().String("domain-owner", "", "The 12-digit account number of the Amazon Web Services account that owns the domain.")
+		codeartifact_describeDomainCmd.MarkFlagRequired("domain")
+	})
 	codeartifactCmd.AddCommand(codeartifact_describeDomainCmd)
 }

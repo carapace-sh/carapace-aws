@@ -12,10 +12,12 @@ var gamelift_describeFleetPortSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeFleetPortSettingsCmd).Standalone()
+	carapace.Gen(gamelift_describeFleetPortSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeFleetPortSettingsCmd).Standalone()
 
-	gamelift_describeFleetPortSettingsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to retrieve port settings for.")
-	gamelift_describeFleetPortSettingsCmd.Flags().String("location", "", "A remote location to check for status of port setting updates.")
-	gamelift_describeFleetPortSettingsCmd.MarkFlagRequired("fleet-id")
+		gamelift_describeFleetPortSettingsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to retrieve port settings for.")
+		gamelift_describeFleetPortSettingsCmd.Flags().String("location", "", "A remote location to check for status of port setting updates.")
+		gamelift_describeFleetPortSettingsCmd.MarkFlagRequired("fleet-id")
+	})
 	gameliftCmd.AddCommand(gamelift_describeFleetPortSettingsCmd)
 }

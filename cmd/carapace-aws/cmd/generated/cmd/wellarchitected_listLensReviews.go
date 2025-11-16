@@ -12,12 +12,14 @@ var wellarchitected_listLensReviewsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listLensReviewsCmd).Standalone()
+	carapace.Gen(wellarchitected_listLensReviewsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listLensReviewsCmd).Standalone()
 
-	wellarchitected_listLensReviewsCmd.Flags().String("max-results", "", "")
-	wellarchitected_listLensReviewsCmd.Flags().String("milestone-number", "", "")
-	wellarchitected_listLensReviewsCmd.Flags().String("next-token", "", "")
-	wellarchitected_listLensReviewsCmd.Flags().String("workload-id", "", "")
-	wellarchitected_listLensReviewsCmd.MarkFlagRequired("workload-id")
+		wellarchitected_listLensReviewsCmd.Flags().String("max-results", "", "")
+		wellarchitected_listLensReviewsCmd.Flags().String("milestone-number", "", "")
+		wellarchitected_listLensReviewsCmd.Flags().String("next-token", "", "")
+		wellarchitected_listLensReviewsCmd.Flags().String("workload-id", "", "")
+		wellarchitected_listLensReviewsCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listLensReviewsCmd)
 }

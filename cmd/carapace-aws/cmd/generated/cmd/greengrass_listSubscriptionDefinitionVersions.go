@@ -12,11 +12,13 @@ var greengrass_listSubscriptionDefinitionVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_listSubscriptionDefinitionVersionsCmd).Standalone()
+	carapace.Gen(greengrass_listSubscriptionDefinitionVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_listSubscriptionDefinitionVersionsCmd).Standalone()
 
-	greengrass_listSubscriptionDefinitionVersionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	greengrass_listSubscriptionDefinitionVersionsCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
-	greengrass_listSubscriptionDefinitionVersionsCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
-	greengrass_listSubscriptionDefinitionVersionsCmd.MarkFlagRequired("subscription-definition-id")
+		greengrass_listSubscriptionDefinitionVersionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		greengrass_listSubscriptionDefinitionVersionsCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
+		greengrass_listSubscriptionDefinitionVersionsCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
+		greengrass_listSubscriptionDefinitionVersionsCmd.MarkFlagRequired("subscription-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_listSubscriptionDefinitionVersionsCmd)
 }

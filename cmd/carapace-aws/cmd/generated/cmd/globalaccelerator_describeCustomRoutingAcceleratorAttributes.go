@@ -12,9 +12,11 @@ var globalaccelerator_describeCustomRoutingAcceleratorAttributesCmd = &cobra.Com
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_describeCustomRoutingAcceleratorAttributesCmd).Standalone()
+	carapace.Gen(globalaccelerator_describeCustomRoutingAcceleratorAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_describeCustomRoutingAcceleratorAttributesCmd).Standalone()
 
-	globalaccelerator_describeCustomRoutingAcceleratorAttributesCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the custom routing accelerator to describe the attributes for.")
-	globalaccelerator_describeCustomRoutingAcceleratorAttributesCmd.MarkFlagRequired("accelerator-arn")
+		globalaccelerator_describeCustomRoutingAcceleratorAttributesCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the custom routing accelerator to describe the attributes for.")
+		globalaccelerator_describeCustomRoutingAcceleratorAttributesCmd.MarkFlagRequired("accelerator-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_describeCustomRoutingAcceleratorAttributesCmd)
 }

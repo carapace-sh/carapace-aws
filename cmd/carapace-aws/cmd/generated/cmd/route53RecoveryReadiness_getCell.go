@@ -12,9 +12,11 @@ var route53RecoveryReadiness_getCellCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_getCellCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_getCellCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_getCellCmd).Standalone()
 
-	route53RecoveryReadiness_getCellCmd.Flags().String("cell-name", "", "The name of the cell.")
-	route53RecoveryReadiness_getCellCmd.MarkFlagRequired("cell-name")
+		route53RecoveryReadiness_getCellCmd.Flags().String("cell-name", "", "The name of the cell.")
+		route53RecoveryReadiness_getCellCmd.MarkFlagRequired("cell-name")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_getCellCmd)
 }

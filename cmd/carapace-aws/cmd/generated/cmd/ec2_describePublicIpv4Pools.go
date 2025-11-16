@@ -12,11 +12,13 @@ var ec2_describePublicIpv4PoolsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describePublicIpv4PoolsCmd).Standalone()
+	carapace.Gen(ec2_describePublicIpv4PoolsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describePublicIpv4PoolsCmd).Standalone()
 
-	ec2_describePublicIpv4PoolsCmd.Flags().String("filters", "", "One or more filters.")
-	ec2_describePublicIpv4PoolsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	ec2_describePublicIpv4PoolsCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	ec2_describePublicIpv4PoolsCmd.Flags().String("pool-ids", "", "The IDs of the address pools.")
+		ec2_describePublicIpv4PoolsCmd.Flags().String("filters", "", "One or more filters.")
+		ec2_describePublicIpv4PoolsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		ec2_describePublicIpv4PoolsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		ec2_describePublicIpv4PoolsCmd.Flags().String("pool-ids", "", "The IDs of the address pools.")
+	})
 	ec2Cmd.AddCommand(ec2_describePublicIpv4PoolsCmd)
 }

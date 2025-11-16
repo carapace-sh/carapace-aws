@@ -12,9 +12,11 @@ var panorama_describeApplicationInstanceDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_describeApplicationInstanceDetailsCmd).Standalone()
+	carapace.Gen(panorama_describeApplicationInstanceDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_describeApplicationInstanceDetailsCmd).Standalone()
 
-	panorama_describeApplicationInstanceDetailsCmd.Flags().String("application-instance-id", "", "The application instance's ID.")
-	panorama_describeApplicationInstanceDetailsCmd.MarkFlagRequired("application-instance-id")
+		panorama_describeApplicationInstanceDetailsCmd.Flags().String("application-instance-id", "", "The application instance's ID.")
+		panorama_describeApplicationInstanceDetailsCmd.MarkFlagRequired("application-instance-id")
+	})
 	panoramaCmd.AddCommand(panorama_describeApplicationInstanceDetailsCmd)
 }

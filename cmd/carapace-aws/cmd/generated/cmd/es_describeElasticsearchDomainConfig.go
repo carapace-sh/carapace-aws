@@ -12,9 +12,11 @@ var es_describeElasticsearchDomainConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_describeElasticsearchDomainConfigCmd).Standalone()
+	carapace.Gen(es_describeElasticsearchDomainConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_describeElasticsearchDomainConfigCmd).Standalone()
 
-	es_describeElasticsearchDomainConfigCmd.Flags().String("domain-name", "", "The Elasticsearch domain that you want to get information about.")
-	es_describeElasticsearchDomainConfigCmd.MarkFlagRequired("domain-name")
+		es_describeElasticsearchDomainConfigCmd.Flags().String("domain-name", "", "The Elasticsearch domain that you want to get information about.")
+		es_describeElasticsearchDomainConfigCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_describeElasticsearchDomainConfigCmd)
 }

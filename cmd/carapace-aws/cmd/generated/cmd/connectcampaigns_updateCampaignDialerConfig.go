@@ -12,11 +12,13 @@ var connectcampaigns_updateCampaignDialerConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaigns_updateCampaignDialerConfigCmd).Standalone()
+	carapace.Gen(connectcampaigns_updateCampaignDialerConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaigns_updateCampaignDialerConfigCmd).Standalone()
 
-	connectcampaigns_updateCampaignDialerConfigCmd.Flags().String("dialer-config", "", "")
-	connectcampaigns_updateCampaignDialerConfigCmd.Flags().String("id", "", "")
-	connectcampaigns_updateCampaignDialerConfigCmd.MarkFlagRequired("dialer-config")
-	connectcampaigns_updateCampaignDialerConfigCmd.MarkFlagRequired("id")
+		connectcampaigns_updateCampaignDialerConfigCmd.Flags().String("dialer-config", "", "")
+		connectcampaigns_updateCampaignDialerConfigCmd.Flags().String("id", "", "")
+		connectcampaigns_updateCampaignDialerConfigCmd.MarkFlagRequired("dialer-config")
+		connectcampaigns_updateCampaignDialerConfigCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsCmd.AddCommand(connectcampaigns_updateCampaignDialerConfigCmd)
 }

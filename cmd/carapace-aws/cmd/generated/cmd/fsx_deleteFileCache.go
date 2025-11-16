@@ -12,10 +12,12 @@ var fsx_deleteFileCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_deleteFileCacheCmd).Standalone()
+	carapace.Gen(fsx_deleteFileCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_deleteFileCacheCmd).Standalone()
 
-	fsx_deleteFileCacheCmd.Flags().String("client-request-token", "", "")
-	fsx_deleteFileCacheCmd.Flags().String("file-cache-id", "", "The ID of the cache that's being deleted.")
-	fsx_deleteFileCacheCmd.MarkFlagRequired("file-cache-id")
+		fsx_deleteFileCacheCmd.Flags().String("client-request-token", "", "")
+		fsx_deleteFileCacheCmd.Flags().String("file-cache-id", "", "The ID of the cache that's being deleted.")
+		fsx_deleteFileCacheCmd.MarkFlagRequired("file-cache-id")
+	})
 	fsxCmd.AddCommand(fsx_deleteFileCacheCmd)
 }

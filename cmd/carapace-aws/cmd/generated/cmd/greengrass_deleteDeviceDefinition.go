@@ -12,9 +12,11 @@ var greengrass_deleteDeviceDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_deleteDeviceDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_deleteDeviceDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_deleteDeviceDefinitionCmd).Standalone()
 
-	greengrass_deleteDeviceDefinitionCmd.Flags().String("device-definition-id", "", "The ID of the device definition.")
-	greengrass_deleteDeviceDefinitionCmd.MarkFlagRequired("device-definition-id")
+		greengrass_deleteDeviceDefinitionCmd.Flags().String("device-definition-id", "", "The ID of the device definition.")
+		greengrass_deleteDeviceDefinitionCmd.MarkFlagRequired("device-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_deleteDeviceDefinitionCmd)
 }

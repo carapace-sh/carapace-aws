@@ -12,9 +12,11 @@ var mediatailor_deletePlaybackConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_deletePlaybackConfigurationCmd).Standalone()
+	carapace.Gen(mediatailor_deletePlaybackConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_deletePlaybackConfigurationCmd).Standalone()
 
-	mediatailor_deletePlaybackConfigurationCmd.Flags().String("name", "", "The name of the playback configuration.")
-	mediatailor_deletePlaybackConfigurationCmd.MarkFlagRequired("name")
+		mediatailor_deletePlaybackConfigurationCmd.Flags().String("name", "", "The name of the playback configuration.")
+		mediatailor_deletePlaybackConfigurationCmd.MarkFlagRequired("name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_deletePlaybackConfigurationCmd)
 }

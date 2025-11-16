@@ -12,11 +12,13 @@ var ssmIncidents_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_putResourcePolicyCmd).Standalone()
+	carapace.Gen(ssmIncidents_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_putResourcePolicyCmd).Standalone()
 
-	ssmIncidents_putResourcePolicyCmd.Flags().String("policy", "", "Details of the resource policy.")
-	ssmIncidents_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the response plan to add the resource policy to.")
-	ssmIncidents_putResourcePolicyCmd.MarkFlagRequired("policy")
-	ssmIncidents_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		ssmIncidents_putResourcePolicyCmd.Flags().String("policy", "", "Details of the resource policy.")
+		ssmIncidents_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the response plan to add the resource policy to.")
+		ssmIncidents_putResourcePolicyCmd.MarkFlagRequired("policy")
+		ssmIncidents_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_putResourcePolicyCmd)
 }

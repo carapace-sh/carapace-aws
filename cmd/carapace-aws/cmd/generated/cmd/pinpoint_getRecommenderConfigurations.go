@@ -12,9 +12,11 @@ var pinpoint_getRecommenderConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getRecommenderConfigurationsCmd).Standalone()
+	carapace.Gen(pinpoint_getRecommenderConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getRecommenderConfigurationsCmd).Standalone()
 
-	pinpoint_getRecommenderConfigurationsCmd.Flags().String("page-size", "", "The maximum number of items to include in each page of a paginated response.")
-	pinpoint_getRecommenderConfigurationsCmd.Flags().String("token", "", "The NextToken string that specifies which page of results to return in a paginated response.")
+		pinpoint_getRecommenderConfigurationsCmd.Flags().String("page-size", "", "The maximum number of items to include in each page of a paginated response.")
+		pinpoint_getRecommenderConfigurationsCmd.Flags().String("token", "", "The NextToken string that specifies which page of results to return in a paginated response.")
+	})
 	pinpointCmd.AddCommand(pinpoint_getRecommenderConfigurationsCmd)
 }

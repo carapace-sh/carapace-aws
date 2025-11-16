@@ -12,9 +12,11 @@ var mediatailor_listChannelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_listChannelsCmd).Standalone()
+	carapace.Gen(mediatailor_listChannelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_listChannelsCmd).Standalone()
 
-	mediatailor_listChannelsCmd.Flags().String("max-results", "", "The maximum number of channels that you want MediaTailor to return in response to the current request.")
-	mediatailor_listChannelsCmd.Flags().String("next-token", "", "Pagination token returned by the list request when results exceed the maximum allowed.")
+		mediatailor_listChannelsCmd.Flags().String("max-results", "", "The maximum number of channels that you want MediaTailor to return in response to the current request.")
+		mediatailor_listChannelsCmd.Flags().String("next-token", "", "Pagination token returned by the list request when results exceed the maximum allowed.")
+	})
 	mediatailorCmd.AddCommand(mediatailor_listChannelsCmd)
 }

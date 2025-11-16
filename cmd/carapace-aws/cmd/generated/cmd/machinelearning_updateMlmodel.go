@@ -12,11 +12,13 @@ var machinelearning_updateMlmodelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_updateMlmodelCmd).Standalone()
+	carapace.Gen(machinelearning_updateMlmodelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_updateMlmodelCmd).Standalone()
 
-	machinelearning_updateMlmodelCmd.Flags().String("mlmodel-id", "", "The ID assigned to the `MLModel` during creation.")
-	machinelearning_updateMlmodelCmd.Flags().String("mlmodel-name", "", "A user-supplied name or description of the `MLModel`.")
-	machinelearning_updateMlmodelCmd.Flags().String("score-threshold", "", "The `ScoreThreshold` used in binary classification `MLModel` that marks the boundary between a positive prediction and a negative prediction.")
-	machinelearning_updateMlmodelCmd.MarkFlagRequired("mlmodel-id")
+		machinelearning_updateMlmodelCmd.Flags().String("mlmodel-id", "", "The ID assigned to the `MLModel` during creation.")
+		machinelearning_updateMlmodelCmd.Flags().String("mlmodel-name", "", "A user-supplied name or description of the `MLModel`.")
+		machinelearning_updateMlmodelCmd.Flags().String("score-threshold", "", "The `ScoreThreshold` used in binary classification `MLModel` that marks the boundary between a positive prediction and a negative prediction.")
+		machinelearning_updateMlmodelCmd.MarkFlagRequired("mlmodel-id")
+	})
 	machinelearningCmd.AddCommand(machinelearning_updateMlmodelCmd)
 }

@@ -12,7 +12,9 @@ var artifactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(artifactCmd).Standalone()
+	carapace.Gen(artifactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(artifactCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(artifactCmd)
 }

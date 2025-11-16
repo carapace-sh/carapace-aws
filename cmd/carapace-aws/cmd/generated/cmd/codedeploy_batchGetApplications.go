@@ -12,9 +12,11 @@ var codedeploy_batchGetApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_batchGetApplicationsCmd).Standalone()
+	carapace.Gen(codedeploy_batchGetApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_batchGetApplicationsCmd).Standalone()
 
-	codedeploy_batchGetApplicationsCmd.Flags().String("application-names", "", "A list of application names separated by spaces.")
-	codedeploy_batchGetApplicationsCmd.MarkFlagRequired("application-names")
+		codedeploy_batchGetApplicationsCmd.Flags().String("application-names", "", "A list of application names separated by spaces.")
+		codedeploy_batchGetApplicationsCmd.MarkFlagRequired("application-names")
+	})
 	codedeployCmd.AddCommand(codedeploy_batchGetApplicationsCmd)
 }

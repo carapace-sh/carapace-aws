@@ -12,10 +12,12 @@ var dax_listTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_listTagsCmd).Standalone()
+	carapace.Gen(dax_listTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_listTagsCmd).Standalone()
 
-	dax_listTagsCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
-	dax_listTagsCmd.Flags().String("resource-name", "", "The name of the DAX resource to which the tags belong.")
-	dax_listTagsCmd.MarkFlagRequired("resource-name")
+		dax_listTagsCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
+		dax_listTagsCmd.Flags().String("resource-name", "", "The name of the DAX resource to which the tags belong.")
+		dax_listTagsCmd.MarkFlagRequired("resource-name")
+	})
 	daxCmd.AddCommand(dax_listTagsCmd)
 }

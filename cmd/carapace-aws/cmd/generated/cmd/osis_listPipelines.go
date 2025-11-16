@@ -12,9 +12,11 @@ var osis_listPipelinesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_listPipelinesCmd).Standalone()
+	carapace.Gen(osis_listPipelinesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_listPipelinesCmd).Standalone()
 
-	osis_listPipelinesCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
-	osis_listPipelinesCmd.Flags().String("next-token", "", "If your initial `ListPipelines` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListPipelines` operations, which returns results in the next page.")
+		osis_listPipelinesCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
+		osis_listPipelinesCmd.Flags().String("next-token", "", "If your initial `ListPipelines` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListPipelines` operations, which returns results in the next page.")
+	})
 	osisCmd.AddCommand(osis_listPipelinesCmd)
 }

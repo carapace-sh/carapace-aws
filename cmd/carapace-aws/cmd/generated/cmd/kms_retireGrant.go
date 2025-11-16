@@ -12,11 +12,13 @@ var kms_retireGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_retireGrantCmd).Standalone()
+	carapace.Gen(kms_retireGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_retireGrantCmd).Standalone()
 
-	kms_retireGrantCmd.Flags().String("dry-run", "", "Checks if your request will succeed.")
-	kms_retireGrantCmd.Flags().String("grant-id", "", "Identifies the grant to retire.")
-	kms_retireGrantCmd.Flags().String("grant-token", "", "Identifies the grant to be retired.")
-	kms_retireGrantCmd.Flags().String("key-id", "", "The key ARN KMS key associated with the grant.")
+		kms_retireGrantCmd.Flags().String("dry-run", "", "Checks if your request will succeed.")
+		kms_retireGrantCmd.Flags().String("grant-id", "", "Identifies the grant to retire.")
+		kms_retireGrantCmd.Flags().String("grant-token", "", "Identifies the grant to be retired.")
+		kms_retireGrantCmd.Flags().String("key-id", "", "The key ARN KMS key associated with the grant.")
+	})
 	kmsCmd.AddCommand(kms_retireGrantCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_describeContextCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeContextCmd).Standalone()
+	carapace.Gen(sagemaker_describeContextCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeContextCmd).Standalone()
 
-	sagemaker_describeContextCmd.Flags().String("context-name", "", "The name of the context to describe.")
-	sagemaker_describeContextCmd.MarkFlagRequired("context-name")
+		sagemaker_describeContextCmd.Flags().String("context-name", "", "The name of the context to describe.")
+		sagemaker_describeContextCmd.MarkFlagRequired("context-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeContextCmd)
 }

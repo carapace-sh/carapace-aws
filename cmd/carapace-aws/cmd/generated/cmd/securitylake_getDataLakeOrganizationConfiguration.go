@@ -12,7 +12,9 @@ var securitylake_getDataLakeOrganizationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_getDataLakeOrganizationConfigurationCmd).Standalone()
+	carapace.Gen(securitylake_getDataLakeOrganizationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_getDataLakeOrganizationConfigurationCmd).Standalone()
 
+	})
 	securitylakeCmd.AddCommand(securitylake_getDataLakeOrganizationConfigurationCmd)
 }

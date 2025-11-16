@@ -12,11 +12,13 @@ var cognitoIdp_listTermsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_listTermsCmd).Standalone()
+	carapace.Gen(cognitoIdp_listTermsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_listTermsCmd).Standalone()
 
-	cognitoIdp_listTermsCmd.Flags().String("max-results", "", "The maximum number of terms documents that you want Amazon Cognito to return in the response.")
-	cognitoIdp_listTermsCmd.Flags().String("next-token", "", "This API operation returns a limited number of results.")
-	cognitoIdp_listTermsCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to list terms documents.")
-	cognitoIdp_listTermsCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_listTermsCmd.Flags().String("max-results", "", "The maximum number of terms documents that you want Amazon Cognito to return in the response.")
+		cognitoIdp_listTermsCmd.Flags().String("next-token", "", "This API operation returns a limited number of results.")
+		cognitoIdp_listTermsCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to list terms documents.")
+		cognitoIdp_listTermsCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_listTermsCmd)
 }

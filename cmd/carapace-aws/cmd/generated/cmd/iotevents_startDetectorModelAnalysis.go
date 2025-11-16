@@ -12,9 +12,11 @@ var iotevents_startDetectorModelAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_startDetectorModelAnalysisCmd).Standalone()
+	carapace.Gen(iotevents_startDetectorModelAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_startDetectorModelAnalysisCmd).Standalone()
 
-	iotevents_startDetectorModelAnalysisCmd.Flags().String("detector-model-definition", "", "")
-	iotevents_startDetectorModelAnalysisCmd.MarkFlagRequired("detector-model-definition")
+		iotevents_startDetectorModelAnalysisCmd.Flags().String("detector-model-definition", "", "")
+		iotevents_startDetectorModelAnalysisCmd.MarkFlagRequired("detector-model-definition")
+	})
 	ioteventsCmd.AddCommand(iotevents_startDetectorModelAnalysisCmd)
 }

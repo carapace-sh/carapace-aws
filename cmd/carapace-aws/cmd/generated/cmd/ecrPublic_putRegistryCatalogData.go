@@ -12,8 +12,10 @@ var ecrPublic_putRegistryCatalogDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecrPublic_putRegistryCatalogDataCmd).Standalone()
+	carapace.Gen(ecrPublic_putRegistryCatalogDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecrPublic_putRegistryCatalogDataCmd).Standalone()
 
-	ecrPublic_putRegistryCatalogDataCmd.Flags().String("display-name", "", "The display name for a public registry.")
+		ecrPublic_putRegistryCatalogDataCmd.Flags().String("display-name", "", "The display name for a public registry.")
+	})
 	ecrPublicCmd.AddCommand(ecrPublic_putRegistryCatalogDataCmd)
 }

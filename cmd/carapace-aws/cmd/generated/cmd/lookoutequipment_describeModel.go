@@ -12,9 +12,11 @@ var lookoutequipment_describeModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_describeModelCmd).Standalone()
+	carapace.Gen(lookoutequipment_describeModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_describeModelCmd).Standalone()
 
-	lookoutequipment_describeModelCmd.Flags().String("model-name", "", "The name of the machine learning model to be described.")
-	lookoutequipment_describeModelCmd.MarkFlagRequired("model-name")
+		lookoutequipment_describeModelCmd.Flags().String("model-name", "", "The name of the machine learning model to be described.")
+		lookoutequipment_describeModelCmd.MarkFlagRequired("model-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_describeModelCmd)
 }

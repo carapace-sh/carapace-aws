@@ -12,11 +12,13 @@ var stepfunctions_updateStateMachineAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_updateStateMachineAliasCmd).Standalone()
+	carapace.Gen(stepfunctions_updateStateMachineAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_updateStateMachineAliasCmd).Standalone()
 
-	stepfunctions_updateStateMachineAliasCmd.Flags().String("description", "", "A description of the state machine alias.")
-	stepfunctions_updateStateMachineAliasCmd.Flags().String("routing-configuration", "", "The routing configuration of the state machine alias.")
-	stepfunctions_updateStateMachineAliasCmd.Flags().String("state-machine-alias-arn", "", "The Amazon Resource Name (ARN) of the state machine alias.")
-	stepfunctions_updateStateMachineAliasCmd.MarkFlagRequired("state-machine-alias-arn")
+		stepfunctions_updateStateMachineAliasCmd.Flags().String("description", "", "A description of the state machine alias.")
+		stepfunctions_updateStateMachineAliasCmd.Flags().String("routing-configuration", "", "The routing configuration of the state machine alias.")
+		stepfunctions_updateStateMachineAliasCmd.Flags().String("state-machine-alias-arn", "", "The Amazon Resource Name (ARN) of the state machine alias.")
+		stepfunctions_updateStateMachineAliasCmd.MarkFlagRequired("state-machine-alias-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_updateStateMachineAliasCmd)
 }

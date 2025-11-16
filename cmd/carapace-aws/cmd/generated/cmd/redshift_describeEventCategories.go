@@ -12,8 +12,10 @@ var redshift_describeEventCategoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeEventCategoriesCmd).Standalone()
+	carapace.Gen(redshift_describeEventCategoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeEventCategoriesCmd).Standalone()
 
-	redshift_describeEventCategoriesCmd.Flags().String("source-type", "", "The source type, such as cluster or parameter group, to which the described event categories apply.")
+		redshift_describeEventCategoriesCmd.Flags().String("source-type", "", "The source type, such as cluster or parameter group, to which the described event categories apply.")
+	})
 	redshiftCmd.AddCommand(redshift_describeEventCategoriesCmd)
 }

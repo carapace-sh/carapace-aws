@@ -12,7 +12,9 @@ var rolesanywhereCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhereCmd).Standalone()
+	carapace.Gen(rolesanywhereCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhereCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(rolesanywhereCmd)
 }

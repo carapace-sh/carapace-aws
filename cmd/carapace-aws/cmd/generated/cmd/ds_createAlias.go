@@ -12,11 +12,13 @@ var ds_createAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_createAliasCmd).Standalone()
+	carapace.Gen(ds_createAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_createAliasCmd).Standalone()
 
-	ds_createAliasCmd.Flags().String("alias", "", "The requested alias.")
-	ds_createAliasCmd.Flags().String("directory-id", "", "The identifier of the directory for which to create the alias.")
-	ds_createAliasCmd.MarkFlagRequired("alias")
-	ds_createAliasCmd.MarkFlagRequired("directory-id")
+		ds_createAliasCmd.Flags().String("alias", "", "The requested alias.")
+		ds_createAliasCmd.Flags().String("directory-id", "", "The identifier of the directory for which to create the alias.")
+		ds_createAliasCmd.MarkFlagRequired("alias")
+		ds_createAliasCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_createAliasCmd)
 }

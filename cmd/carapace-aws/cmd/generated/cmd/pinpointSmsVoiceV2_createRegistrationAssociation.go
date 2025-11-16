@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_createRegistrationAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_createRegistrationAssociationCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_createRegistrationAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_createRegistrationAssociationCmd).Standalone()
 
-	pinpointSmsVoiceV2_createRegistrationAssociationCmd.Flags().String("registration-id", "", "The unique identifier for the registration.")
-	pinpointSmsVoiceV2_createRegistrationAssociationCmd.Flags().String("resource-id", "", "The unique identifier for the origination identity.")
-	pinpointSmsVoiceV2_createRegistrationAssociationCmd.MarkFlagRequired("registration-id")
-	pinpointSmsVoiceV2_createRegistrationAssociationCmd.MarkFlagRequired("resource-id")
+		pinpointSmsVoiceV2_createRegistrationAssociationCmd.Flags().String("registration-id", "", "The unique identifier for the registration.")
+		pinpointSmsVoiceV2_createRegistrationAssociationCmd.Flags().String("resource-id", "", "The unique identifier for the origination identity.")
+		pinpointSmsVoiceV2_createRegistrationAssociationCmd.MarkFlagRequired("registration-id")
+		pinpointSmsVoiceV2_createRegistrationAssociationCmd.MarkFlagRequired("resource-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_createRegistrationAssociationCmd)
 }

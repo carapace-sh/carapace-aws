@@ -12,11 +12,13 @@ var redshift_modifyClusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_modifyClusterParameterGroupCmd).Standalone()
+	carapace.Gen(redshift_modifyClusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_modifyClusterParameterGroupCmd).Standalone()
 
-	redshift_modifyClusterParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to be modified.")
-	redshift_modifyClusterParameterGroupCmd.Flags().String("parameters", "", "An array of parameters to be modified.")
-	redshift_modifyClusterParameterGroupCmd.MarkFlagRequired("parameter-group-name")
-	redshift_modifyClusterParameterGroupCmd.MarkFlagRequired("parameters")
+		redshift_modifyClusterParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to be modified.")
+		redshift_modifyClusterParameterGroupCmd.Flags().String("parameters", "", "An array of parameters to be modified.")
+		redshift_modifyClusterParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+		redshift_modifyClusterParameterGroupCmd.MarkFlagRequired("parameters")
+	})
 	redshiftCmd.AddCommand(redshift_modifyClusterParameterGroupCmd)
 }

@@ -12,12 +12,14 @@ var redshift_authorizeSnapshotAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_authorizeSnapshotAccessCmd).Standalone()
+	carapace.Gen(redshift_authorizeSnapshotAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_authorizeSnapshotAccessCmd).Standalone()
 
-	redshift_authorizeSnapshotAccessCmd.Flags().String("account-with-restore-access", "", "The identifier of the Amazon Web Services account authorized to restore the specified snapshot.")
-	redshift_authorizeSnapshotAccessCmd.Flags().String("snapshot-arn", "", "The Amazon Resource Name (ARN) of the snapshot to authorize access to.")
-	redshift_authorizeSnapshotAccessCmd.Flags().String("snapshot-cluster-identifier", "", "The identifier of the cluster the snapshot was created from.")
-	redshift_authorizeSnapshotAccessCmd.Flags().String("snapshot-identifier", "", "The identifier of the snapshot the account is authorized to restore.")
-	redshift_authorizeSnapshotAccessCmd.MarkFlagRequired("account-with-restore-access")
+		redshift_authorizeSnapshotAccessCmd.Flags().String("account-with-restore-access", "", "The identifier of the Amazon Web Services account authorized to restore the specified snapshot.")
+		redshift_authorizeSnapshotAccessCmd.Flags().String("snapshot-arn", "", "The Amazon Resource Name (ARN) of the snapshot to authorize access to.")
+		redshift_authorizeSnapshotAccessCmd.Flags().String("snapshot-cluster-identifier", "", "The identifier of the cluster the snapshot was created from.")
+		redshift_authorizeSnapshotAccessCmd.Flags().String("snapshot-identifier", "", "The identifier of the snapshot the account is authorized to restore.")
+		redshift_authorizeSnapshotAccessCmd.MarkFlagRequired("account-with-restore-access")
+	})
 	redshiftCmd.AddCommand(redshift_authorizeSnapshotAccessCmd)
 }

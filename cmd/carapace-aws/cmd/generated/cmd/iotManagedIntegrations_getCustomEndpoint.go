@@ -12,7 +12,9 @@ var iotManagedIntegrations_getCustomEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getCustomEndpointCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getCustomEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getCustomEndpointCmd).Standalone()
 
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getCustomEndpointCmd)
 }

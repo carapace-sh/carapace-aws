@@ -12,9 +12,11 @@ var route53_listCidrCollectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_listCidrCollectionsCmd).Standalone()
+	carapace.Gen(route53_listCidrCollectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_listCidrCollectionsCmd).Standalone()
 
-	route53_listCidrCollectionsCmd.Flags().String("max-results", "", "The maximum number of CIDR collections to return in the response.")
-	route53_listCidrCollectionsCmd.Flags().String("next-token", "", "An opaque pagination token to indicate where the service is to begin enumerating results.")
+		route53_listCidrCollectionsCmd.Flags().String("max-results", "", "The maximum number of CIDR collections to return in the response.")
+		route53_listCidrCollectionsCmd.Flags().String("next-token", "", "An opaque pagination token to indicate where the service is to begin enumerating results.")
+	})
 	route53Cmd.AddCommand(route53_listCidrCollectionsCmd)
 }

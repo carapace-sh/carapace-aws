@@ -12,9 +12,11 @@ var entityresolution_getIdNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_getIdNamespaceCmd).Standalone()
+	carapace.Gen(entityresolution_getIdNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_getIdNamespaceCmd).Standalone()
 
-	entityresolution_getIdNamespaceCmd.Flags().String("id-namespace-name", "", "The name of the ID namespace.")
-	entityresolution_getIdNamespaceCmd.MarkFlagRequired("id-namespace-name")
+		entityresolution_getIdNamespaceCmd.Flags().String("id-namespace-name", "", "The name of the ID namespace.")
+		entityresolution_getIdNamespaceCmd.MarkFlagRequired("id-namespace-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_getIdNamespaceCmd)
 }

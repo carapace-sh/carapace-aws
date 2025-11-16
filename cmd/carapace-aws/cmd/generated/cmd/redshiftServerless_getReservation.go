@@ -12,9 +12,11 @@ var redshiftServerless_getReservationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getReservationCmd).Standalone()
+	carapace.Gen(redshiftServerless_getReservationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getReservationCmd).Standalone()
 
-	redshiftServerless_getReservationCmd.Flags().String("reservation-id", "", "The ID of the reservation to retrieve.")
-	redshiftServerless_getReservationCmd.MarkFlagRequired("reservation-id")
+		redshiftServerless_getReservationCmd.Flags().String("reservation-id", "", "The ID of the reservation to retrieve.")
+		redshiftServerless_getReservationCmd.MarkFlagRequired("reservation-id")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getReservationCmd)
 }

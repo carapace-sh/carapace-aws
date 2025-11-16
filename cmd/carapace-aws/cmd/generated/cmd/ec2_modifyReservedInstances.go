@@ -12,12 +12,14 @@ var ec2_modifyReservedInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_modifyReservedInstancesCmd).Standalone()
+	carapace.Gen(ec2_modifyReservedInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_modifyReservedInstancesCmd).Standalone()
 
-	ec2_modifyReservedInstancesCmd.Flags().String("client-token", "", "A unique, case-sensitive token you provide to ensure idempotency of your modification request.")
-	ec2_modifyReservedInstancesCmd.Flags().String("reserved-instances-ids", "", "The IDs of the Reserved Instances to modify.")
-	ec2_modifyReservedInstancesCmd.Flags().String("target-configurations", "", "The configuration settings for the Reserved Instances to modify.")
-	ec2_modifyReservedInstancesCmd.MarkFlagRequired("reserved-instances-ids")
-	ec2_modifyReservedInstancesCmd.MarkFlagRequired("target-configurations")
+		ec2_modifyReservedInstancesCmd.Flags().String("client-token", "", "A unique, case-sensitive token you provide to ensure idempotency of your modification request.")
+		ec2_modifyReservedInstancesCmd.Flags().String("reserved-instances-ids", "", "The IDs of the Reserved Instances to modify.")
+		ec2_modifyReservedInstancesCmd.Flags().String("target-configurations", "", "The configuration settings for the Reserved Instances to modify.")
+		ec2_modifyReservedInstancesCmd.MarkFlagRequired("reserved-instances-ids")
+		ec2_modifyReservedInstancesCmd.MarkFlagRequired("target-configurations")
+	})
 	ec2Cmd.AddCommand(ec2_modifyReservedInstancesCmd)
 }

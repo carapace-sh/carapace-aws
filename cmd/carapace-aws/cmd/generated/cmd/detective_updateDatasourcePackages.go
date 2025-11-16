@@ -12,11 +12,13 @@ var detective_updateDatasourcePackagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_updateDatasourcePackagesCmd).Standalone()
+	carapace.Gen(detective_updateDatasourcePackagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_updateDatasourcePackagesCmd).Standalone()
 
-	detective_updateDatasourcePackagesCmd.Flags().String("datasource-packages", "", "The data source package to start for the behavior graph.")
-	detective_updateDatasourcePackagesCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph.")
-	detective_updateDatasourcePackagesCmd.MarkFlagRequired("datasource-packages")
-	detective_updateDatasourcePackagesCmd.MarkFlagRequired("graph-arn")
+		detective_updateDatasourcePackagesCmd.Flags().String("datasource-packages", "", "The data source package to start for the behavior graph.")
+		detective_updateDatasourcePackagesCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph.")
+		detective_updateDatasourcePackagesCmd.MarkFlagRequired("datasource-packages")
+		detective_updateDatasourcePackagesCmd.MarkFlagRequired("graph-arn")
+	})
 	detectiveCmd.AddCommand(detective_updateDatasourcePackagesCmd)
 }

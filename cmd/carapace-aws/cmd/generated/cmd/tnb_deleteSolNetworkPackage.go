@@ -12,9 +12,11 @@ var tnb_deleteSolNetworkPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_deleteSolNetworkPackageCmd).Standalone()
+	carapace.Gen(tnb_deleteSolNetworkPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_deleteSolNetworkPackageCmd).Standalone()
 
-	tnb_deleteSolNetworkPackageCmd.Flags().String("nsd-info-id", "", "ID of the network service descriptor in the network package.")
-	tnb_deleteSolNetworkPackageCmd.MarkFlagRequired("nsd-info-id")
+		tnb_deleteSolNetworkPackageCmd.Flags().String("nsd-info-id", "", "ID of the network service descriptor in the network package.")
+		tnb_deleteSolNetworkPackageCmd.MarkFlagRequired("nsd-info-id")
+	})
 	tnbCmd.AddCommand(tnb_deleteSolNetworkPackageCmd)
 }

@@ -12,12 +12,14 @@ var stepfunctions_createStateMachineAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_createStateMachineAliasCmd).Standalone()
+	carapace.Gen(stepfunctions_createStateMachineAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_createStateMachineAliasCmd).Standalone()
 
-	stepfunctions_createStateMachineAliasCmd.Flags().String("description", "", "A description for the state machine alias.")
-	stepfunctions_createStateMachineAliasCmd.Flags().String("name", "", "The name of the state machine alias.")
-	stepfunctions_createStateMachineAliasCmd.Flags().String("routing-configuration", "", "The routing configuration of a state machine alias.")
-	stepfunctions_createStateMachineAliasCmd.MarkFlagRequired("name")
-	stepfunctions_createStateMachineAliasCmd.MarkFlagRequired("routing-configuration")
+		stepfunctions_createStateMachineAliasCmd.Flags().String("description", "", "A description for the state machine alias.")
+		stepfunctions_createStateMachineAliasCmd.Flags().String("name", "", "The name of the state machine alias.")
+		stepfunctions_createStateMachineAliasCmd.Flags().String("routing-configuration", "", "The routing configuration of a state machine alias.")
+		stepfunctions_createStateMachineAliasCmd.MarkFlagRequired("name")
+		stepfunctions_createStateMachineAliasCmd.MarkFlagRequired("routing-configuration")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_createStateMachineAliasCmd)
 }

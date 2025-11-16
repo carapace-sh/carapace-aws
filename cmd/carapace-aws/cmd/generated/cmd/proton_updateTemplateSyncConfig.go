@@ -12,18 +12,20 @@ var proton_updateTemplateSyncConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_updateTemplateSyncConfigCmd).Standalone()
+	carapace.Gen(proton_updateTemplateSyncConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_updateTemplateSyncConfigCmd).Standalone()
 
-	proton_updateTemplateSyncConfigCmd.Flags().String("branch", "", "The repository branch for your template.")
-	proton_updateTemplateSyncConfigCmd.Flags().String("repository-name", "", "The repository name (for example, `myrepos/myrepo`).")
-	proton_updateTemplateSyncConfigCmd.Flags().String("repository-provider", "", "The repository provider.")
-	proton_updateTemplateSyncConfigCmd.Flags().String("subdirectory", "", "A subdirectory path to your template bundle version.")
-	proton_updateTemplateSyncConfigCmd.Flags().String("template-name", "", "The synced template name.")
-	proton_updateTemplateSyncConfigCmd.Flags().String("template-type", "", "The synced template type.")
-	proton_updateTemplateSyncConfigCmd.MarkFlagRequired("branch")
-	proton_updateTemplateSyncConfigCmd.MarkFlagRequired("repository-name")
-	proton_updateTemplateSyncConfigCmd.MarkFlagRequired("repository-provider")
-	proton_updateTemplateSyncConfigCmd.MarkFlagRequired("template-name")
-	proton_updateTemplateSyncConfigCmd.MarkFlagRequired("template-type")
+		proton_updateTemplateSyncConfigCmd.Flags().String("branch", "", "The repository branch for your template.")
+		proton_updateTemplateSyncConfigCmd.Flags().String("repository-name", "", "The repository name (for example, `myrepos/myrepo`).")
+		proton_updateTemplateSyncConfigCmd.Flags().String("repository-provider", "", "The repository provider.")
+		proton_updateTemplateSyncConfigCmd.Flags().String("subdirectory", "", "A subdirectory path to your template bundle version.")
+		proton_updateTemplateSyncConfigCmd.Flags().String("template-name", "", "The synced template name.")
+		proton_updateTemplateSyncConfigCmd.Flags().String("template-type", "", "The synced template type.")
+		proton_updateTemplateSyncConfigCmd.MarkFlagRequired("branch")
+		proton_updateTemplateSyncConfigCmd.MarkFlagRequired("repository-name")
+		proton_updateTemplateSyncConfigCmd.MarkFlagRequired("repository-provider")
+		proton_updateTemplateSyncConfigCmd.MarkFlagRequired("template-name")
+		proton_updateTemplateSyncConfigCmd.MarkFlagRequired("template-type")
+	})
 	protonCmd.AddCommand(proton_updateTemplateSyncConfigCmd)
 }

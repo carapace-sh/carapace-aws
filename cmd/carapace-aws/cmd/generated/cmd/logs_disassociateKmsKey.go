@@ -12,9 +12,11 @@ var logs_disassociateKmsKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_disassociateKmsKeyCmd).Standalone()
+	carapace.Gen(logs_disassociateKmsKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_disassociateKmsKeyCmd).Standalone()
 
-	logs_disassociateKmsKeyCmd.Flags().String("log-group-name", "", "The name of the log group.")
-	logs_disassociateKmsKeyCmd.Flags().String("resource-identifier", "", "Specifies the target for this operation.")
+		logs_disassociateKmsKeyCmd.Flags().String("log-group-name", "", "The name of the log group.")
+		logs_disassociateKmsKeyCmd.Flags().String("resource-identifier", "", "Specifies the target for this operation.")
+	})
 	logsCmd.AddCommand(logs_disassociateKmsKeyCmd)
 }

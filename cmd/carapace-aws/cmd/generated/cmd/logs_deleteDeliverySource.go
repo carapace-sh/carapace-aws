@@ -12,9 +12,11 @@ var logs_deleteDeliverySourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteDeliverySourceCmd).Standalone()
+	carapace.Gen(logs_deleteDeliverySourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteDeliverySourceCmd).Standalone()
 
-	logs_deleteDeliverySourceCmd.Flags().String("name", "", "The name of the delivery source that you want to delete.")
-	logs_deleteDeliverySourceCmd.MarkFlagRequired("name")
+		logs_deleteDeliverySourceCmd.Flags().String("name", "", "The name of the delivery source that you want to delete.")
+		logs_deleteDeliverySourceCmd.MarkFlagRequired("name")
+	})
 	logsCmd.AddCommand(logs_deleteDeliverySourceCmd)
 }

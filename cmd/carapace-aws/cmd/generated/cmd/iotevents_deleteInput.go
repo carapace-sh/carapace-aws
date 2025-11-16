@@ -12,9 +12,11 @@ var iotevents_deleteInputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_deleteInputCmd).Standalone()
+	carapace.Gen(iotevents_deleteInputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_deleteInputCmd).Standalone()
 
-	iotevents_deleteInputCmd.Flags().String("input-name", "", "The name of the input to delete.")
-	iotevents_deleteInputCmd.MarkFlagRequired("input-name")
+		iotevents_deleteInputCmd.Flags().String("input-name", "", "The name of the input to delete.")
+		iotevents_deleteInputCmd.MarkFlagRequired("input-name")
+	})
 	ioteventsCmd.AddCommand(iotevents_deleteInputCmd)
 }

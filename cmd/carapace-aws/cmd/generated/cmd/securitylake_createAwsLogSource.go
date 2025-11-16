@@ -12,9 +12,11 @@ var securitylake_createAwsLogSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_createAwsLogSourceCmd).Standalone()
+	carapace.Gen(securitylake_createAwsLogSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_createAwsLogSourceCmd).Standalone()
 
-	securitylake_createAwsLogSourceCmd.Flags().String("sources", "", "Specify the natively-supported Amazon Web Services service to add as a source in Security Lake.")
-	securitylake_createAwsLogSourceCmd.MarkFlagRequired("sources")
+		securitylake_createAwsLogSourceCmd.Flags().String("sources", "", "Specify the natively-supported Amazon Web Services service to add as a source in Security Lake.")
+		securitylake_createAwsLogSourceCmd.MarkFlagRequired("sources")
+	})
 	securitylakeCmd.AddCommand(securitylake_createAwsLogSourceCmd)
 }

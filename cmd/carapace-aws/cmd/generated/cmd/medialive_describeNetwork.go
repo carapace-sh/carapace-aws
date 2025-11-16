@@ -12,9 +12,11 @@ var medialive_describeNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeNetworkCmd).Standalone()
+	carapace.Gen(medialive_describeNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeNetworkCmd).Standalone()
 
-	medialive_describeNetworkCmd.Flags().String("network-id", "", "The ID of the network.")
-	medialive_describeNetworkCmd.MarkFlagRequired("network-id")
+		medialive_describeNetworkCmd.Flags().String("network-id", "", "The ID of the network.")
+		medialive_describeNetworkCmd.MarkFlagRequired("network-id")
+	})
 	medialiveCmd.AddCommand(medialive_describeNetworkCmd)
 }

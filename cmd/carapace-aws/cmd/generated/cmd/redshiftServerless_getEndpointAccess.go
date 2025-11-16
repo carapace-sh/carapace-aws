@@ -12,9 +12,11 @@ var redshiftServerless_getEndpointAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getEndpointAccessCmd).Standalone()
+	carapace.Gen(redshiftServerless_getEndpointAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getEndpointAccessCmd).Standalone()
 
-	redshiftServerless_getEndpointAccessCmd.Flags().String("endpoint-name", "", "The name of the VPC endpoint to return information for.")
-	redshiftServerless_getEndpointAccessCmd.MarkFlagRequired("endpoint-name")
+		redshiftServerless_getEndpointAccessCmd.Flags().String("endpoint-name", "", "The name of the VPC endpoint to return information for.")
+		redshiftServerless_getEndpointAccessCmd.MarkFlagRequired("endpoint-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getEndpointAccessCmd)
 }

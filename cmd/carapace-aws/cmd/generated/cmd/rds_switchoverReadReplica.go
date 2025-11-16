@@ -12,9 +12,11 @@ var rds_switchoverReadReplicaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_switchoverReadReplicaCmd).Standalone()
+	carapace.Gen(rds_switchoverReadReplicaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_switchoverReadReplicaCmd).Standalone()
 
-	rds_switchoverReadReplicaCmd.Flags().String("dbinstance-identifier", "", "The DB instance identifier of the current standby database.")
-	rds_switchoverReadReplicaCmd.MarkFlagRequired("dbinstance-identifier")
+		rds_switchoverReadReplicaCmd.Flags().String("dbinstance-identifier", "", "The DB instance identifier of the current standby database.")
+		rds_switchoverReadReplicaCmd.MarkFlagRequired("dbinstance-identifier")
+	})
 	rdsCmd.AddCommand(rds_switchoverReadReplicaCmd)
 }

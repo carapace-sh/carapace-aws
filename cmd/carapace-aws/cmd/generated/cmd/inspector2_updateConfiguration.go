@@ -12,9 +12,11 @@ var inspector2_updateConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_updateConfigurationCmd).Standalone()
+	carapace.Gen(inspector2_updateConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_updateConfigurationCmd).Standalone()
 
-	inspector2_updateConfigurationCmd.Flags().String("ec2-configuration", "", "Specifies how the Amazon EC2 automated scan will be updated for your environment.")
-	inspector2_updateConfigurationCmd.Flags().String("ecr-configuration", "", "Specifies how the ECR automated re-scan will be updated for your environment.")
+		inspector2_updateConfigurationCmd.Flags().String("ec2-configuration", "", "Specifies how the Amazon EC2 automated scan will be updated for your environment.")
+		inspector2_updateConfigurationCmd.Flags().String("ecr-configuration", "", "Specifies how the ECR automated re-scan will be updated for your environment.")
+	})
 	inspector2Cmd.AddCommand(inspector2_updateConfigurationCmd)
 }

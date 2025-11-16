@@ -12,9 +12,11 @@ var wellarchitected_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listTagsForResourceCmd).Standalone()
+	carapace.Gen(wellarchitected_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listTagsForResourceCmd).Standalone()
 
-	wellarchitected_listTagsForResourceCmd.Flags().String("workload-arn", "", "")
-	wellarchitected_listTagsForResourceCmd.MarkFlagRequired("workload-arn")
+		wellarchitected_listTagsForResourceCmd.Flags().String("workload-arn", "", "")
+		wellarchitected_listTagsForResourceCmd.MarkFlagRequired("workload-arn")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listTagsForResourceCmd)
 }

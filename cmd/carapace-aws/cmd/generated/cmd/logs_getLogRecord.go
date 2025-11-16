@@ -12,10 +12,12 @@ var logs_getLogRecordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_getLogRecordCmd).Standalone()
+	carapace.Gen(logs_getLogRecordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_getLogRecordCmd).Standalone()
 
-	logs_getLogRecordCmd.Flags().String("log-record-pointer", "", "The pointer corresponding to the log event record you want to retrieve.")
-	logs_getLogRecordCmd.Flags().String("unmask", "", "Specify `true` to display the log event fields with all sensitive data unmasked and visible.")
-	logs_getLogRecordCmd.MarkFlagRequired("log-record-pointer")
+		logs_getLogRecordCmd.Flags().String("log-record-pointer", "", "The pointer corresponding to the log event record you want to retrieve.")
+		logs_getLogRecordCmd.Flags().String("unmask", "", "Specify `true` to display the log event fields with all sensitive data unmasked and visible.")
+		logs_getLogRecordCmd.MarkFlagRequired("log-record-pointer")
+	})
 	logsCmd.AddCommand(logs_getLogRecordCmd)
 }

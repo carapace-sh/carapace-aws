@@ -12,8 +12,10 @@ var codedeploy_listDeploymentConfigsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_listDeploymentConfigsCmd).Standalone()
+	carapace.Gen(codedeploy_listDeploymentConfigsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_listDeploymentConfigsCmd).Standalone()
 
-	codedeploy_listDeploymentConfigsCmd.Flags().String("next-token", "", "An identifier returned from the previous `ListDeploymentConfigs` call.")
+		codedeploy_listDeploymentConfigsCmd.Flags().String("next-token", "", "An identifier returned from the previous `ListDeploymentConfigs` call.")
+	})
 	codedeployCmd.AddCommand(codedeploy_listDeploymentConfigsCmd)
 }

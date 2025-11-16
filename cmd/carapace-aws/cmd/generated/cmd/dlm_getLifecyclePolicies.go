@@ -12,13 +12,15 @@ var dlm_getLifecyclePoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dlm_getLifecyclePoliciesCmd).Standalone()
+	carapace.Gen(dlm_getLifecyclePoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dlm_getLifecyclePoliciesCmd).Standalone()
 
-	dlm_getLifecyclePoliciesCmd.Flags().String("default-policy-type", "", "**\\[Default policies only]** Specifies the type of default policy to get.")
-	dlm_getLifecyclePoliciesCmd.Flags().String("policy-ids", "", "The identifiers of the data lifecycle policies.")
-	dlm_getLifecyclePoliciesCmd.Flags().String("resource-types", "", "The resource type.")
-	dlm_getLifecyclePoliciesCmd.Flags().String("state", "", "The activation state.")
-	dlm_getLifecyclePoliciesCmd.Flags().String("tags-to-add", "", "The tags to add to objects created by the policy.")
-	dlm_getLifecyclePoliciesCmd.Flags().String("target-tags", "", "The target tag for a policy.")
+		dlm_getLifecyclePoliciesCmd.Flags().String("default-policy-type", "", "**\\[Default policies only]** Specifies the type of default policy to get.")
+		dlm_getLifecyclePoliciesCmd.Flags().String("policy-ids", "", "The identifiers of the data lifecycle policies.")
+		dlm_getLifecyclePoliciesCmd.Flags().String("resource-types", "", "The resource type.")
+		dlm_getLifecyclePoliciesCmd.Flags().String("state", "", "The activation state.")
+		dlm_getLifecyclePoliciesCmd.Flags().String("tags-to-add", "", "The tags to add to objects created by the policy.")
+		dlm_getLifecyclePoliciesCmd.Flags().String("target-tags", "", "The target tag for a policy.")
+	})
 	dlmCmd.AddCommand(dlm_getLifecyclePoliciesCmd)
 }

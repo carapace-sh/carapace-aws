@@ -12,11 +12,13 @@ var iotData_listNamedShadowsForThingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotData_listNamedShadowsForThingCmd).Standalone()
+	carapace.Gen(iotData_listNamedShadowsForThingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotData_listNamedShadowsForThingCmd).Standalone()
 
-	iotData_listNamedShadowsForThingCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
-	iotData_listNamedShadowsForThingCmd.Flags().String("page-size", "", "The result page size.")
-	iotData_listNamedShadowsForThingCmd.Flags().String("thing-name", "", "The name of the thing.")
-	iotData_listNamedShadowsForThingCmd.MarkFlagRequired("thing-name")
+		iotData_listNamedShadowsForThingCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+		iotData_listNamedShadowsForThingCmd.Flags().String("page-size", "", "The result page size.")
+		iotData_listNamedShadowsForThingCmd.Flags().String("thing-name", "", "The name of the thing.")
+		iotData_listNamedShadowsForThingCmd.MarkFlagRequired("thing-name")
+	})
 	iotDataCmd.AddCommand(iotData_listNamedShadowsForThingCmd)
 }

@@ -12,11 +12,13 @@ var es_describeDomainAutoTunesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_describeDomainAutoTunesCmd).Standalone()
+	carapace.Gen(es_describeDomainAutoTunesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_describeDomainAutoTunesCmd).Standalone()
 
-	es_describeDomainAutoTunesCmd.Flags().String("domain-name", "", "Specifies the domain name for which you want Auto-Tune action details.")
-	es_describeDomainAutoTunesCmd.Flags().String("max-results", "", "Set this value to limit the number of results returned.")
-	es_describeDomainAutoTunesCmd.Flags().String("next-token", "", "NextToken is sent in case the earlier API call results contain the NextToken.")
-	es_describeDomainAutoTunesCmd.MarkFlagRequired("domain-name")
+		es_describeDomainAutoTunesCmd.Flags().String("domain-name", "", "Specifies the domain name for which you want Auto-Tune action details.")
+		es_describeDomainAutoTunesCmd.Flags().String("max-results", "", "Set this value to limit the number of results returned.")
+		es_describeDomainAutoTunesCmd.Flags().String("next-token", "", "NextToken is sent in case the earlier API call results contain the NextToken.")
+		es_describeDomainAutoTunesCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_describeDomainAutoTunesCmd)
 }

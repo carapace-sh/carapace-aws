@@ -12,9 +12,11 @@ var ses_deleteTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_deleteTemplateCmd).Standalone()
+	carapace.Gen(ses_deleteTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_deleteTemplateCmd).Standalone()
 
-	ses_deleteTemplateCmd.Flags().String("template-name", "", "The name of the template to be deleted.")
-	ses_deleteTemplateCmd.MarkFlagRequired("template-name")
+		ses_deleteTemplateCmd.Flags().String("template-name", "", "The name of the template to be deleted.")
+		ses_deleteTemplateCmd.MarkFlagRequired("template-name")
+	})
 	sesCmd.AddCommand(ses_deleteTemplateCmd)
 }

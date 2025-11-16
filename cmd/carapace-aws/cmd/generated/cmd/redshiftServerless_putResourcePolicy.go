@@ -12,11 +12,13 @@ var redshiftServerless_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_putResourcePolicyCmd).Standalone()
+	carapace.Gen(redshiftServerless_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_putResourcePolicyCmd).Standalone()
 
-	redshiftServerless_putResourcePolicyCmd.Flags().String("policy", "", "The policy to create or update.")
-	redshiftServerless_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the account to create or update a resource policy for.")
-	redshiftServerless_putResourcePolicyCmd.MarkFlagRequired("policy")
-	redshiftServerless_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		redshiftServerless_putResourcePolicyCmd.Flags().String("policy", "", "The policy to create or update.")
+		redshiftServerless_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the account to create or update a resource policy for.")
+		redshiftServerless_putResourcePolicyCmd.MarkFlagRequired("policy")
+		redshiftServerless_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_putResourcePolicyCmd)
 }

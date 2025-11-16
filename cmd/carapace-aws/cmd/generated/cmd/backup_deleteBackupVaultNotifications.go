@@ -12,9 +12,11 @@ var backup_deleteBackupVaultNotificationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_deleteBackupVaultNotificationsCmd).Standalone()
+	carapace.Gen(backup_deleteBackupVaultNotificationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_deleteBackupVaultNotificationsCmd).Standalone()
 
-	backup_deleteBackupVaultNotificationsCmd.Flags().String("backup-vault-name", "", "The name of a logical container where backups are stored.")
-	backup_deleteBackupVaultNotificationsCmd.MarkFlagRequired("backup-vault-name")
+		backup_deleteBackupVaultNotificationsCmd.Flags().String("backup-vault-name", "", "The name of a logical container where backups are stored.")
+		backup_deleteBackupVaultNotificationsCmd.MarkFlagRequired("backup-vault-name")
+	})
 	backupCmd.AddCommand(backup_deleteBackupVaultNotificationsCmd)
 }

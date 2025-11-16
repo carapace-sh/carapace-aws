@@ -12,7 +12,9 @@ var devopsGuru_describeEventSourcesConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeEventSourcesConfigCmd).Standalone()
+	carapace.Gen(devopsGuru_describeEventSourcesConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeEventSourcesConfigCmd).Standalone()
 
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeEventSourcesConfigCmd)
 }

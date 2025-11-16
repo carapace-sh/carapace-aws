@@ -12,9 +12,11 @@ var tnb_listSolNetworkInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_listSolNetworkInstancesCmd).Standalone()
+	carapace.Gen(tnb_listSolNetworkInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_listSolNetworkInstancesCmd).Standalone()
 
-	tnb_listSolNetworkInstancesCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	tnb_listSolNetworkInstancesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		tnb_listSolNetworkInstancesCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		tnb_listSolNetworkInstancesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	tnbCmd.AddCommand(tnb_listSolNetworkInstancesCmd)
 }

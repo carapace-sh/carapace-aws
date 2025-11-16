@@ -12,9 +12,11 @@ var iotData_getRetainedMessageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotData_getRetainedMessageCmd).Standalone()
+	carapace.Gen(iotData_getRetainedMessageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotData_getRetainedMessageCmd).Standalone()
 
-	iotData_getRetainedMessageCmd.Flags().String("topic", "", "The topic name of the retained message to retrieve.")
-	iotData_getRetainedMessageCmd.MarkFlagRequired("topic")
+		iotData_getRetainedMessageCmd.Flags().String("topic", "", "The topic name of the retained message to retrieve.")
+		iotData_getRetainedMessageCmd.MarkFlagRequired("topic")
+	})
 	iotDataCmd.AddCommand(iotData_getRetainedMessageCmd)
 }

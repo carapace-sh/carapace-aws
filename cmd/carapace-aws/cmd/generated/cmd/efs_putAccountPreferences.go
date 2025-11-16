@@ -12,9 +12,11 @@ var efs_putAccountPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_putAccountPreferencesCmd).Standalone()
+	carapace.Gen(efs_putAccountPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_putAccountPreferencesCmd).Standalone()
 
-	efs_putAccountPreferencesCmd.Flags().String("resource-id-type", "", "Specifies the EFS resource ID preference to set for the user's Amazon Web Services account, in the current Amazon Web Services Region, either `LONG_ID` (17 characters), or `SHORT_ID` (8 characters).")
-	efs_putAccountPreferencesCmd.MarkFlagRequired("resource-id-type")
+		efs_putAccountPreferencesCmd.Flags().String("resource-id-type", "", "Specifies the EFS resource ID preference to set for the user's Amazon Web Services account, in the current Amazon Web Services Region, either `LONG_ID` (17 characters), or `SHORT_ID` (8 characters).")
+		efs_putAccountPreferencesCmd.MarkFlagRequired("resource-id-type")
+	})
 	efsCmd.AddCommand(efs_putAccountPreferencesCmd)
 }

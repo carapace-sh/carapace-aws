@@ -12,10 +12,12 @@ var events_putEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_putEventsCmd).Standalone()
+	carapace.Gen(events_putEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_putEventsCmd).Standalone()
 
-	events_putEventsCmd.Flags().String("endpoint-id", "", "The URL subdomain of the endpoint.")
-	events_putEventsCmd.Flags().String("entries", "", "The entry that defines an event in your system.")
-	events_putEventsCmd.MarkFlagRequired("entries")
+		events_putEventsCmd.Flags().String("endpoint-id", "", "The URL subdomain of the endpoint.")
+		events_putEventsCmd.Flags().String("entries", "", "The entry that defines an event in your system.")
+		events_putEventsCmd.MarkFlagRequired("entries")
+	})
 	eventsCmd.AddCommand(events_putEventsCmd)
 }

@@ -12,9 +12,11 @@ var chimeSdkMessaging_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_listTagsForResourceCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_listTagsForResourceCmd).Standalone()
 
-	chimeSdkMessaging_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	chimeSdkMessaging_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		chimeSdkMessaging_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		chimeSdkMessaging_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_listTagsForResourceCmd)
 }

@@ -12,9 +12,11 @@ var workspacesWeb_getDataProtectionSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getDataProtectionSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_getDataProtectionSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getDataProtectionSettingsCmd).Standalone()
 
-	workspacesWeb_getDataProtectionSettingsCmd.Flags().String("data-protection-settings-arn", "", "The ARN of the data protection settings.")
-	workspacesWeb_getDataProtectionSettingsCmd.MarkFlagRequired("data-protection-settings-arn")
+		workspacesWeb_getDataProtectionSettingsCmd.Flags().String("data-protection-settings-arn", "", "The ARN of the data protection settings.")
+		workspacesWeb_getDataProtectionSettingsCmd.MarkFlagRequired("data-protection-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getDataProtectionSettingsCmd)
 }

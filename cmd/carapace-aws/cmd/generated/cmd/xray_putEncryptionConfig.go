@@ -12,10 +12,12 @@ var xray_putEncryptionConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_putEncryptionConfigCmd).Standalone()
+	carapace.Gen(xray_putEncryptionConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_putEncryptionConfigCmd).Standalone()
 
-	xray_putEncryptionConfigCmd.Flags().String("key-id", "", "An Amazon Web Services KMS key in one of the following formats:")
-	xray_putEncryptionConfigCmd.Flags().String("type", "", "The type of encryption.")
-	xray_putEncryptionConfigCmd.MarkFlagRequired("type")
+		xray_putEncryptionConfigCmd.Flags().String("key-id", "", "An Amazon Web Services KMS key in one of the following formats:")
+		xray_putEncryptionConfigCmd.Flags().String("type", "", "The type of encryption.")
+		xray_putEncryptionConfigCmd.MarkFlagRequired("type")
+	})
 	xrayCmd.AddCommand(xray_putEncryptionConfigCmd)
 }

@@ -12,9 +12,11 @@ var resourceExplorer2_listSupportedResourceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_listSupportedResourceTypesCmd).Standalone()
+	carapace.Gen(resourceExplorer2_listSupportedResourceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_listSupportedResourceTypesCmd).Standalone()
 
-	resourceExplorer2_listSupportedResourceTypesCmd.Flags().String("max-results", "", "The maximum number of results that you want included on each page of the response.")
-	resourceExplorer2_listSupportedResourceTypesCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		resourceExplorer2_listSupportedResourceTypesCmd.Flags().String("max-results", "", "The maximum number of results that you want included on each page of the response.")
+		resourceExplorer2_listSupportedResourceTypesCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_listSupportedResourceTypesCmd)
 }

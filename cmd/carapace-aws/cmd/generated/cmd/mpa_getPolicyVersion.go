@@ -12,9 +12,11 @@ var mpa_getPolicyVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_getPolicyVersionCmd).Standalone()
+	carapace.Gen(mpa_getPolicyVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_getPolicyVersionCmd).Standalone()
 
-	mpa_getPolicyVersionCmd.Flags().String("policy-version-arn", "", "Amazon Resource Name (ARN) for the policy.")
-	mpa_getPolicyVersionCmd.MarkFlagRequired("policy-version-arn")
+		mpa_getPolicyVersionCmd.Flags().String("policy-version-arn", "", "Amazon Resource Name (ARN) for the policy.")
+		mpa_getPolicyVersionCmd.MarkFlagRequired("policy-version-arn")
+	})
 	mpaCmd.AddCommand(mpa_getPolicyVersionCmd)
 }

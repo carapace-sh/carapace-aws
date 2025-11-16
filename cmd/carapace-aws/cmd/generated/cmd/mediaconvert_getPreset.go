@@ -12,9 +12,11 @@ var mediaconvert_getPresetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_getPresetCmd).Standalone()
+	carapace.Gen(mediaconvert_getPresetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_getPresetCmd).Standalone()
 
-	mediaconvert_getPresetCmd.Flags().String("name", "", "The name of the preset.")
-	mediaconvert_getPresetCmd.MarkFlagRequired("name")
+		mediaconvert_getPresetCmd.Flags().String("name", "", "The name of the preset.")
+		mediaconvert_getPresetCmd.MarkFlagRequired("name")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_getPresetCmd)
 }

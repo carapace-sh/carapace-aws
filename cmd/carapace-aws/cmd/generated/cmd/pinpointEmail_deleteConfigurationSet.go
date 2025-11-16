@@ -12,9 +12,11 @@ var pinpointEmail_deleteConfigurationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_deleteConfigurationSetCmd).Standalone()
+	carapace.Gen(pinpointEmail_deleteConfigurationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_deleteConfigurationSetCmd).Standalone()
 
-	pinpointEmail_deleteConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that you want to delete.")
-	pinpointEmail_deleteConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+		pinpointEmail_deleteConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that you want to delete.")
+		pinpointEmail_deleteConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_deleteConfigurationSetCmd)
 }

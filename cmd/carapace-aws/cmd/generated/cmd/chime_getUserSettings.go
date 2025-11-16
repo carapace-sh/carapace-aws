@@ -12,11 +12,13 @@ var chime_getUserSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_getUserSettingsCmd).Standalone()
+	carapace.Gen(chime_getUserSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_getUserSettingsCmd).Standalone()
 
-	chime_getUserSettingsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_getUserSettingsCmd.Flags().String("user-id", "", "The user ID.")
-	chime_getUserSettingsCmd.MarkFlagRequired("account-id")
-	chime_getUserSettingsCmd.MarkFlagRequired("user-id")
+		chime_getUserSettingsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_getUserSettingsCmd.Flags().String("user-id", "", "The user ID.")
+		chime_getUserSettingsCmd.MarkFlagRequired("account-id")
+		chime_getUserSettingsCmd.MarkFlagRequired("user-id")
+	})
 	chimeCmd.AddCommand(chime_getUserSettingsCmd)
 }

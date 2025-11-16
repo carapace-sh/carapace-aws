@@ -12,7 +12,9 @@ var evidentlyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidentlyCmd).Standalone()
+	carapace.Gen(evidentlyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidentlyCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(evidentlyCmd)
 }

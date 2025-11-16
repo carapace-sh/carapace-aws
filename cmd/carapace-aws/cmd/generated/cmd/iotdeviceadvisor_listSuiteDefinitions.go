@@ -12,9 +12,11 @@ var iotdeviceadvisor_listSuiteDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotdeviceadvisor_listSuiteDefinitionsCmd).Standalone()
+	carapace.Gen(iotdeviceadvisor_listSuiteDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotdeviceadvisor_listSuiteDefinitionsCmd).Standalone()
 
-	iotdeviceadvisor_listSuiteDefinitionsCmd.Flags().String("max-results", "", "The maximum number of results to return at once.")
-	iotdeviceadvisor_listSuiteDefinitionsCmd.Flags().String("next-token", "", "A token used to get the next set of results.")
+		iotdeviceadvisor_listSuiteDefinitionsCmd.Flags().String("max-results", "", "The maximum number of results to return at once.")
+		iotdeviceadvisor_listSuiteDefinitionsCmd.Flags().String("next-token", "", "A token used to get the next set of results.")
+	})
 	iotdeviceadvisorCmd.AddCommand(iotdeviceadvisor_listSuiteDefinitionsCmd)
 }

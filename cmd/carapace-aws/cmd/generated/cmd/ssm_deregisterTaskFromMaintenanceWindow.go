@@ -12,11 +12,13 @@ var ssm_deregisterTaskFromMaintenanceWindowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_deregisterTaskFromMaintenanceWindowCmd).Standalone()
+	carapace.Gen(ssm_deregisterTaskFromMaintenanceWindowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_deregisterTaskFromMaintenanceWindowCmd).Standalone()
 
-	ssm_deregisterTaskFromMaintenanceWindowCmd.Flags().String("window-id", "", "The ID of the maintenance window the task should be removed from.")
-	ssm_deregisterTaskFromMaintenanceWindowCmd.Flags().String("window-task-id", "", "The ID of the task to remove from the maintenance window.")
-	ssm_deregisterTaskFromMaintenanceWindowCmd.MarkFlagRequired("window-id")
-	ssm_deregisterTaskFromMaintenanceWindowCmd.MarkFlagRequired("window-task-id")
+		ssm_deregisterTaskFromMaintenanceWindowCmd.Flags().String("window-id", "", "The ID of the maintenance window the task should be removed from.")
+		ssm_deregisterTaskFromMaintenanceWindowCmd.Flags().String("window-task-id", "", "The ID of the task to remove from the maintenance window.")
+		ssm_deregisterTaskFromMaintenanceWindowCmd.MarkFlagRequired("window-id")
+		ssm_deregisterTaskFromMaintenanceWindowCmd.MarkFlagRequired("window-task-id")
+	})
 	ssmCmd.AddCommand(ssm_deregisterTaskFromMaintenanceWindowCmd)
 }

@@ -12,13 +12,15 @@ var connect_updateQueueOutboundEmailConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateQueueOutboundEmailConfigCmd).Standalone()
+	carapace.Gen(connect_updateQueueOutboundEmailConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateQueueOutboundEmailConfigCmd).Standalone()
 
-	connect_updateQueueOutboundEmailConfigCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateQueueOutboundEmailConfigCmd.Flags().String("outbound-email-config", "", "The outbound email address ID for a specified queue.")
-	connect_updateQueueOutboundEmailConfigCmd.Flags().String("queue-id", "", "The identifier for the queue.")
-	connect_updateQueueOutboundEmailConfigCmd.MarkFlagRequired("instance-id")
-	connect_updateQueueOutboundEmailConfigCmd.MarkFlagRequired("outbound-email-config")
-	connect_updateQueueOutboundEmailConfigCmd.MarkFlagRequired("queue-id")
+		connect_updateQueueOutboundEmailConfigCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateQueueOutboundEmailConfigCmd.Flags().String("outbound-email-config", "", "The outbound email address ID for a specified queue.")
+		connect_updateQueueOutboundEmailConfigCmd.Flags().String("queue-id", "", "The identifier for the queue.")
+		connect_updateQueueOutboundEmailConfigCmd.MarkFlagRequired("instance-id")
+		connect_updateQueueOutboundEmailConfigCmd.MarkFlagRequired("outbound-email-config")
+		connect_updateQueueOutboundEmailConfigCmd.MarkFlagRequired("queue-id")
+	})
 	connectCmd.AddCommand(connect_updateQueueOutboundEmailConfigCmd)
 }

@@ -12,9 +12,11 @@ var proton_getServiceSyncConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getServiceSyncConfigCmd).Standalone()
+	carapace.Gen(proton_getServiceSyncConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getServiceSyncConfigCmd).Standalone()
 
-	proton_getServiceSyncConfigCmd.Flags().String("service-name", "", "The name of the service that you want to get the service sync configuration for.")
-	proton_getServiceSyncConfigCmd.MarkFlagRequired("service-name")
+		proton_getServiceSyncConfigCmd.Flags().String("service-name", "", "The name of the service that you want to get the service sync configuration for.")
+		proton_getServiceSyncConfigCmd.MarkFlagRequired("service-name")
+	})
 	protonCmd.AddCommand(proton_getServiceSyncConfigCmd)
 }

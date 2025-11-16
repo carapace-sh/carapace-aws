@@ -12,9 +12,11 @@ var glue_deleteBlueprintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteBlueprintCmd).Standalone()
+	carapace.Gen(glue_deleteBlueprintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteBlueprintCmd).Standalone()
 
-	glue_deleteBlueprintCmd.Flags().String("name", "", "The name of the blueprint to delete.")
-	glue_deleteBlueprintCmd.MarkFlagRequired("name")
+		glue_deleteBlueprintCmd.Flags().String("name", "", "The name of the blueprint to delete.")
+		glue_deleteBlueprintCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_deleteBlueprintCmd)
 }

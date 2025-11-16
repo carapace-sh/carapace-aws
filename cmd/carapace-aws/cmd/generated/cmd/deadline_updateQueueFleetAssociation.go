@@ -12,15 +12,17 @@ var deadline_updateQueueFleetAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_updateQueueFleetAssociationCmd).Standalone()
+	carapace.Gen(deadline_updateQueueFleetAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_updateQueueFleetAssociationCmd).Standalone()
 
-	deadline_updateQueueFleetAssociationCmd.Flags().String("farm-id", "", "The farm ID to update.")
-	deadline_updateQueueFleetAssociationCmd.Flags().String("fleet-id", "", "The fleet ID to update.")
-	deadline_updateQueueFleetAssociationCmd.Flags().String("queue-id", "", "The queue ID to update.")
-	deadline_updateQueueFleetAssociationCmd.Flags().String("status", "", "The status to update.")
-	deadline_updateQueueFleetAssociationCmd.MarkFlagRequired("farm-id")
-	deadline_updateQueueFleetAssociationCmd.MarkFlagRequired("fleet-id")
-	deadline_updateQueueFleetAssociationCmd.MarkFlagRequired("queue-id")
-	deadline_updateQueueFleetAssociationCmd.MarkFlagRequired("status")
+		deadline_updateQueueFleetAssociationCmd.Flags().String("farm-id", "", "The farm ID to update.")
+		deadline_updateQueueFleetAssociationCmd.Flags().String("fleet-id", "", "The fleet ID to update.")
+		deadline_updateQueueFleetAssociationCmd.Flags().String("queue-id", "", "The queue ID to update.")
+		deadline_updateQueueFleetAssociationCmd.Flags().String("status", "", "The status to update.")
+		deadline_updateQueueFleetAssociationCmd.MarkFlagRequired("farm-id")
+		deadline_updateQueueFleetAssociationCmd.MarkFlagRequired("fleet-id")
+		deadline_updateQueueFleetAssociationCmd.MarkFlagRequired("queue-id")
+		deadline_updateQueueFleetAssociationCmd.MarkFlagRequired("status")
+	})
 	deadlineCmd.AddCommand(deadline_updateQueueFleetAssociationCmd)
 }

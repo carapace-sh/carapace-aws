@@ -12,9 +12,11 @@ var s3vectors_deleteVectorBucketPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3vectors_deleteVectorBucketPolicyCmd).Standalone()
+	carapace.Gen(s3vectors_deleteVectorBucketPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3vectors_deleteVectorBucketPolicyCmd).Standalone()
 
-	s3vectors_deleteVectorBucketPolicyCmd.Flags().String("vector-bucket-arn", "", "The ARN of the vector bucket to delete the policy from.")
-	s3vectors_deleteVectorBucketPolicyCmd.Flags().String("vector-bucket-name", "", "The name of the vector bucket to delete the policy from.")
+		s3vectors_deleteVectorBucketPolicyCmd.Flags().String("vector-bucket-arn", "", "The ARN of the vector bucket to delete the policy from.")
+		s3vectors_deleteVectorBucketPolicyCmd.Flags().String("vector-bucket-name", "", "The name of the vector bucket to delete the policy from.")
+	})
 	s3vectorsCmd.AddCommand(s3vectors_deleteVectorBucketPolicyCmd)
 }

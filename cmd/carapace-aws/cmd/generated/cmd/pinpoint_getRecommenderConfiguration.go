@@ -12,9 +12,11 @@ var pinpoint_getRecommenderConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getRecommenderConfigurationCmd).Standalone()
+	carapace.Gen(pinpoint_getRecommenderConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getRecommenderConfigurationCmd).Standalone()
 
-	pinpoint_getRecommenderConfigurationCmd.Flags().String("recommender-id", "", "The unique identifier for the recommender model configuration.")
-	pinpoint_getRecommenderConfigurationCmd.MarkFlagRequired("recommender-id")
+		pinpoint_getRecommenderConfigurationCmd.Flags().String("recommender-id", "", "The unique identifier for the recommender model configuration.")
+		pinpoint_getRecommenderConfigurationCmd.MarkFlagRequired("recommender-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getRecommenderConfigurationCmd)
 }

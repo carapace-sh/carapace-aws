@@ -12,13 +12,15 @@ var iot_updateScheduledAuditCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateScheduledAuditCmd).Standalone()
+	carapace.Gen(iot_updateScheduledAuditCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateScheduledAuditCmd).Standalone()
 
-	iot_updateScheduledAuditCmd.Flags().String("day-of-month", "", "The day of the month on which the scheduled audit takes place.")
-	iot_updateScheduledAuditCmd.Flags().String("day-of-week", "", "The day of the week on which the scheduled audit takes place.")
-	iot_updateScheduledAuditCmd.Flags().String("frequency", "", "How often the scheduled audit takes place, either `DAILY`, `WEEKLY`, `BIWEEKLY`, or `MONTHLY`.")
-	iot_updateScheduledAuditCmd.Flags().String("scheduled-audit-name", "", "The name of the scheduled audit.")
-	iot_updateScheduledAuditCmd.Flags().String("target-check-names", "", "Which checks are performed during the scheduled audit.")
-	iot_updateScheduledAuditCmd.MarkFlagRequired("scheduled-audit-name")
+		iot_updateScheduledAuditCmd.Flags().String("day-of-month", "", "The day of the month on which the scheduled audit takes place.")
+		iot_updateScheduledAuditCmd.Flags().String("day-of-week", "", "The day of the week on which the scheduled audit takes place.")
+		iot_updateScheduledAuditCmd.Flags().String("frequency", "", "How often the scheduled audit takes place, either `DAILY`, `WEEKLY`, `BIWEEKLY`, or `MONTHLY`.")
+		iot_updateScheduledAuditCmd.Flags().String("scheduled-audit-name", "", "The name of the scheduled audit.")
+		iot_updateScheduledAuditCmd.Flags().String("target-check-names", "", "Which checks are performed during the scheduled audit.")
+		iot_updateScheduledAuditCmd.MarkFlagRequired("scheduled-audit-name")
+	})
 	iotCmd.AddCommand(iot_updateScheduledAuditCmd)
 }

@@ -12,11 +12,13 @@ var ec2_createVpnConnectionRouteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_createVpnConnectionRouteCmd).Standalone()
+	carapace.Gen(ec2_createVpnConnectionRouteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_createVpnConnectionRouteCmd).Standalone()
 
-	ec2_createVpnConnectionRouteCmd.Flags().String("destination-cidr-block", "", "The CIDR block associated with the local subnet of the customer network.")
-	ec2_createVpnConnectionRouteCmd.Flags().String("vpn-connection-id", "", "The ID of the VPN connection.")
-	ec2_createVpnConnectionRouteCmd.MarkFlagRequired("destination-cidr-block")
-	ec2_createVpnConnectionRouteCmd.MarkFlagRequired("vpn-connection-id")
+		ec2_createVpnConnectionRouteCmd.Flags().String("destination-cidr-block", "", "The CIDR block associated with the local subnet of the customer network.")
+		ec2_createVpnConnectionRouteCmd.Flags().String("vpn-connection-id", "", "The ID of the VPN connection.")
+		ec2_createVpnConnectionRouteCmd.MarkFlagRequired("destination-cidr-block")
+		ec2_createVpnConnectionRouteCmd.MarkFlagRequired("vpn-connection-id")
+	})
 	ec2Cmd.AddCommand(ec2_createVpnConnectionRouteCmd)
 }

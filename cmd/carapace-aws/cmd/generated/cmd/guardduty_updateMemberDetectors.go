@@ -12,13 +12,15 @@ var guardduty_updateMemberDetectorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_updateMemberDetectorsCmd).Standalone()
+	carapace.Gen(guardduty_updateMemberDetectorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_updateMemberDetectorsCmd).Standalone()
 
-	guardduty_updateMemberDetectorsCmd.Flags().String("account-ids", "", "A list of member account IDs to be updated.")
-	guardduty_updateMemberDetectorsCmd.Flags().String("data-sources", "", "Describes which data sources will be updated.")
-	guardduty_updateMemberDetectorsCmd.Flags().String("detector-id", "", "The detector ID of the administrator account.")
-	guardduty_updateMemberDetectorsCmd.Flags().String("features", "", "A list of features that will be updated for the specified member accounts.")
-	guardduty_updateMemberDetectorsCmd.MarkFlagRequired("account-ids")
-	guardduty_updateMemberDetectorsCmd.MarkFlagRequired("detector-id")
+		guardduty_updateMemberDetectorsCmd.Flags().String("account-ids", "", "A list of member account IDs to be updated.")
+		guardduty_updateMemberDetectorsCmd.Flags().String("data-sources", "", "Describes which data sources will be updated.")
+		guardduty_updateMemberDetectorsCmd.Flags().String("detector-id", "", "The detector ID of the administrator account.")
+		guardduty_updateMemberDetectorsCmd.Flags().String("features", "", "A list of features that will be updated for the specified member accounts.")
+		guardduty_updateMemberDetectorsCmd.MarkFlagRequired("account-ids")
+		guardduty_updateMemberDetectorsCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_updateMemberDetectorsCmd)
 }

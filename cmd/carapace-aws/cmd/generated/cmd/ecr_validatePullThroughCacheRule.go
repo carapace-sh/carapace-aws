@@ -12,10 +12,12 @@ var ecr_validatePullThroughCacheRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_validatePullThroughCacheRuleCmd).Standalone()
+	carapace.Gen(ecr_validatePullThroughCacheRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_validatePullThroughCacheRuleCmd).Standalone()
 
-	ecr_validatePullThroughCacheRuleCmd.Flags().String("ecr-repository-prefix", "", "The repository name prefix associated with the pull through cache rule.")
-	ecr_validatePullThroughCacheRuleCmd.Flags().String("registry-id", "", "The registry ID associated with the pull through cache rule.")
-	ecr_validatePullThroughCacheRuleCmd.MarkFlagRequired("ecr-repository-prefix")
+		ecr_validatePullThroughCacheRuleCmd.Flags().String("ecr-repository-prefix", "", "The repository name prefix associated with the pull through cache rule.")
+		ecr_validatePullThroughCacheRuleCmd.Flags().String("registry-id", "", "The registry ID associated with the pull through cache rule.")
+		ecr_validatePullThroughCacheRuleCmd.MarkFlagRequired("ecr-repository-prefix")
+	})
 	ecrCmd.AddCommand(ecr_validatePullThroughCacheRuleCmd)
 }

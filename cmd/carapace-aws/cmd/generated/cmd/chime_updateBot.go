@@ -12,12 +12,14 @@ var chime_updateBotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_updateBotCmd).Standalone()
+	carapace.Gen(chime_updateBotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_updateBotCmd).Standalone()
 
-	chime_updateBotCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_updateBotCmd.Flags().String("bot-id", "", "The bot ID.")
-	chime_updateBotCmd.Flags().String("disabled", "", "When true, stops the specified bot from running in your account.")
-	chime_updateBotCmd.MarkFlagRequired("account-id")
-	chime_updateBotCmd.MarkFlagRequired("bot-id")
+		chime_updateBotCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_updateBotCmd.Flags().String("bot-id", "", "The bot ID.")
+		chime_updateBotCmd.Flags().String("disabled", "", "When true, stops the specified bot from running in your account.")
+		chime_updateBotCmd.MarkFlagRequired("account-id")
+		chime_updateBotCmd.MarkFlagRequired("bot-id")
+	})
 	chimeCmd.AddCommand(chime_updateBotCmd)
 }

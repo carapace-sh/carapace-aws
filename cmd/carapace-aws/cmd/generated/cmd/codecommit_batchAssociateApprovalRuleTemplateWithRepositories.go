@@ -12,11 +12,13 @@ var codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd = &cobra.Co
 }
 
 func init() {
-	carapace.Gen(codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd).Standalone()
+	carapace.Gen(codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd).Standalone()
 
-	codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd.Flags().String("approval-rule-template-name", "", "The name of the template you want to associate with one or more repositories.")
-	codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd.Flags().String("repository-names", "", "The names of the repositories you want to associate with the template.")
-	codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd.MarkFlagRequired("approval-rule-template-name")
-	codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd.MarkFlagRequired("repository-names")
+		codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd.Flags().String("approval-rule-template-name", "", "The name of the template you want to associate with one or more repositories.")
+		codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd.Flags().String("repository-names", "", "The names of the repositories you want to associate with the template.")
+		codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd.MarkFlagRequired("approval-rule-template-name")
+		codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd.MarkFlagRequired("repository-names")
+	})
 	codecommitCmd.AddCommand(codecommit_batchAssociateApprovalRuleTemplateWithRepositoriesCmd)
 }

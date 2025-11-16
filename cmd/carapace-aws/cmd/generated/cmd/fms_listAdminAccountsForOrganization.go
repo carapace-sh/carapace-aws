@@ -12,9 +12,11 @@ var fms_listAdminAccountsForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_listAdminAccountsForOrganizationCmd).Standalone()
+	carapace.Gen(fms_listAdminAccountsForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_listAdminAccountsForOrganizationCmd).Standalone()
 
-	fms_listAdminAccountsForOrganizationCmd.Flags().String("max-results", "", "The maximum number of objects that you want Firewall Manager to return for this request.")
-	fms_listAdminAccountsForOrganizationCmd.Flags().String("next-token", "", "When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.")
+		fms_listAdminAccountsForOrganizationCmd.Flags().String("max-results", "", "The maximum number of objects that you want Firewall Manager to return for this request.")
+		fms_listAdminAccountsForOrganizationCmd.Flags().String("next-token", "", "When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a `NextToken` value in the response.")
+	})
 	fmsCmd.AddCommand(fms_listAdminAccountsForOrganizationCmd)
 }

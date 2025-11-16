@@ -12,9 +12,11 @@ var quicksight_describeAccountCustomPermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeAccountCustomPermissionCmd).Standalone()
+	carapace.Gen(quicksight_describeAccountCustomPermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeAccountCustomPermissionCmd).Standalone()
 
-	quicksight_describeAccountCustomPermissionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account for which you want to describe the applied custom permissions profile.")
-	quicksight_describeAccountCustomPermissionCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeAccountCustomPermissionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account for which you want to describe the applied custom permissions profile.")
+		quicksight_describeAccountCustomPermissionCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeAccountCustomPermissionCmd)
 }

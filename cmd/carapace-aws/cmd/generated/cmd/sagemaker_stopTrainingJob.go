@@ -12,9 +12,11 @@ var sagemaker_stopTrainingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopTrainingJobCmd).Standalone()
+	carapace.Gen(sagemaker_stopTrainingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopTrainingJobCmd).Standalone()
 
-	sagemaker_stopTrainingJobCmd.Flags().String("training-job-name", "", "The name of the training job to stop.")
-	sagemaker_stopTrainingJobCmd.MarkFlagRequired("training-job-name")
+		sagemaker_stopTrainingJobCmd.Flags().String("training-job-name", "", "The name of the training job to stop.")
+		sagemaker_stopTrainingJobCmd.MarkFlagRequired("training-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopTrainingJobCmd)
 }

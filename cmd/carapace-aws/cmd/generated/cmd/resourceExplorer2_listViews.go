@@ -12,9 +12,11 @@ var resourceExplorer2_listViewsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_listViewsCmd).Standalone()
+	carapace.Gen(resourceExplorer2_listViewsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_listViewsCmd).Standalone()
 
-	resourceExplorer2_listViewsCmd.Flags().String("max-results", "", "The maximum number of results that you want included on each page of the response.")
-	resourceExplorer2_listViewsCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		resourceExplorer2_listViewsCmd.Flags().String("max-results", "", "The maximum number of results that you want included on each page of the response.")
+		resourceExplorer2_listViewsCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_listViewsCmd)
 }

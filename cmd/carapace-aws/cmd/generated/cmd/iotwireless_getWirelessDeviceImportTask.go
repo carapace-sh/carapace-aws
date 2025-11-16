@@ -12,9 +12,11 @@ var iotwireless_getWirelessDeviceImportTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getWirelessDeviceImportTaskCmd).Standalone()
+	carapace.Gen(iotwireless_getWirelessDeviceImportTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getWirelessDeviceImportTaskCmd).Standalone()
 
-	iotwireless_getWirelessDeviceImportTaskCmd.Flags().String("id", "", "The identifier of the import task for which information is requested.")
-	iotwireless_getWirelessDeviceImportTaskCmd.MarkFlagRequired("id")
+		iotwireless_getWirelessDeviceImportTaskCmd.Flags().String("id", "", "The identifier of the import task for which information is requested.")
+		iotwireless_getWirelessDeviceImportTaskCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getWirelessDeviceImportTaskCmd)
 }

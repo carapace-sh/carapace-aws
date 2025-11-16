@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_setMediaMessageSpendLimitOverrideCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_setMediaMessageSpendLimitOverrideCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_setMediaMessageSpendLimitOverrideCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_setMediaMessageSpendLimitOverrideCmd).Standalone()
 
-	pinpointSmsVoiceV2_setMediaMessageSpendLimitOverrideCmd.Flags().String("monthly-limit", "", "The new monthly limit to enforce on text messages.")
-	pinpointSmsVoiceV2_setMediaMessageSpendLimitOverrideCmd.MarkFlagRequired("monthly-limit")
+		pinpointSmsVoiceV2_setMediaMessageSpendLimitOverrideCmd.Flags().String("monthly-limit", "", "The new monthly limit to enforce on text messages.")
+		pinpointSmsVoiceV2_setMediaMessageSpendLimitOverrideCmd.MarkFlagRequired("monthly-limit")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_setMediaMessageSpendLimitOverrideCmd)
 }

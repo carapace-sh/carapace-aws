@@ -12,9 +12,11 @@ var datasync_describeLocationSmbCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeLocationSmbCmd).Standalone()
+	carapace.Gen(datasync_describeLocationSmbCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeLocationSmbCmd).Standalone()
 
-	datasync_describeLocationSmbCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the SMB location that you want information about.")
-	datasync_describeLocationSmbCmd.MarkFlagRequired("location-arn")
+		datasync_describeLocationSmbCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the SMB location that you want information about.")
+		datasync_describeLocationSmbCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeLocationSmbCmd)
 }

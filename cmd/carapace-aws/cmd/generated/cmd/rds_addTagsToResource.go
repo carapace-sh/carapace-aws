@@ -12,11 +12,13 @@ var rds_addTagsToResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_addTagsToResourceCmd).Standalone()
+	carapace.Gen(rds_addTagsToResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_addTagsToResourceCmd).Standalone()
 
-	rds_addTagsToResourceCmd.Flags().String("resource-name", "", "The Amazon RDS resource that the tags are added to.")
-	rds_addTagsToResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Amazon RDS resource.")
-	rds_addTagsToResourceCmd.MarkFlagRequired("resource-name")
-	rds_addTagsToResourceCmd.MarkFlagRequired("tags")
+		rds_addTagsToResourceCmd.Flags().String("resource-name", "", "The Amazon RDS resource that the tags are added to.")
+		rds_addTagsToResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Amazon RDS resource.")
+		rds_addTagsToResourceCmd.MarkFlagRequired("resource-name")
+		rds_addTagsToResourceCmd.MarkFlagRequired("tags")
+	})
 	rdsCmd.AddCommand(rds_addTagsToResourceCmd)
 }

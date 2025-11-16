@@ -12,9 +12,11 @@ var connectcampaignsv2_getInstanceCommunicationLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_getInstanceCommunicationLimitsCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_getInstanceCommunicationLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_getInstanceCommunicationLimitsCmd).Standalone()
 
-	connectcampaignsv2_getInstanceCommunicationLimitsCmd.Flags().String("connect-instance-id", "", "")
-	connectcampaignsv2_getInstanceCommunicationLimitsCmd.MarkFlagRequired("connect-instance-id")
+		connectcampaignsv2_getInstanceCommunicationLimitsCmd.Flags().String("connect-instance-id", "", "")
+		connectcampaignsv2_getInstanceCommunicationLimitsCmd.MarkFlagRequired("connect-instance-id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_getInstanceCommunicationLimitsCmd)
 }

@@ -12,13 +12,15 @@ var workspacesInstances_disassociateVolumeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_disassociateVolumeCmd).Standalone()
+	carapace.Gen(workspacesInstances_disassociateVolumeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_disassociateVolumeCmd).Standalone()
 
-	workspacesInstances_disassociateVolumeCmd.Flags().String("device", "", "Device path of volume to detach.")
-	workspacesInstances_disassociateVolumeCmd.Flags().String("disassociate-mode", "", "Mode for volume detachment.")
-	workspacesInstances_disassociateVolumeCmd.Flags().String("volume-id", "", "Volume to be detached.")
-	workspacesInstances_disassociateVolumeCmd.Flags().String("workspace-instance-id", "", "WorkSpace Instance to detach volume from.")
-	workspacesInstances_disassociateVolumeCmd.MarkFlagRequired("volume-id")
-	workspacesInstances_disassociateVolumeCmd.MarkFlagRequired("workspace-instance-id")
+		workspacesInstances_disassociateVolumeCmd.Flags().String("device", "", "Device path of volume to detach.")
+		workspacesInstances_disassociateVolumeCmd.Flags().String("disassociate-mode", "", "Mode for volume detachment.")
+		workspacesInstances_disassociateVolumeCmd.Flags().String("volume-id", "", "Volume to be detached.")
+		workspacesInstances_disassociateVolumeCmd.Flags().String("workspace-instance-id", "", "WorkSpace Instance to detach volume from.")
+		workspacesInstances_disassociateVolumeCmd.MarkFlagRequired("volume-id")
+		workspacesInstances_disassociateVolumeCmd.MarkFlagRequired("workspace-instance-id")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_disassociateVolumeCmd)
 }

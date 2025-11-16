@@ -12,10 +12,12 @@ var ec2_describeInstanceEventNotificationAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeInstanceEventNotificationAttributesCmd).Standalone()
+	carapace.Gen(ec2_describeInstanceEventNotificationAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeInstanceEventNotificationAttributesCmd).Standalone()
 
-	ec2_describeInstanceEventNotificationAttributesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeInstanceEventNotificationAttributesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeInstanceEventNotificationAttributesCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeInstanceEventNotificationAttributesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeInstanceEventNotificationAttributesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeInstanceEventNotificationAttributesCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeInstanceEventNotificationAttributesCmd)
 }

@@ -12,10 +12,12 @@ var appmesh_describeMeshCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appmesh_describeMeshCmd).Standalone()
+	carapace.Gen(appmesh_describeMeshCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appmesh_describeMeshCmd).Standalone()
 
-	appmesh_describeMeshCmd.Flags().String("mesh-name", "", "The name of the service mesh to describe.")
-	appmesh_describeMeshCmd.Flags().String("mesh-owner", "", "The Amazon Web Services IAM account ID of the service mesh owner.")
-	appmesh_describeMeshCmd.MarkFlagRequired("mesh-name")
+		appmesh_describeMeshCmd.Flags().String("mesh-name", "", "The name of the service mesh to describe.")
+		appmesh_describeMeshCmd.Flags().String("mesh-owner", "", "The Amazon Web Services IAM account ID of the service mesh owner.")
+		appmesh_describeMeshCmd.MarkFlagRequired("mesh-name")
+	})
 	appmeshCmd.AddCommand(appmesh_describeMeshCmd)
 }

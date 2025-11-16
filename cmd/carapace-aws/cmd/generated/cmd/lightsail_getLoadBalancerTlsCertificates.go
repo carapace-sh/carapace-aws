@@ -12,9 +12,11 @@ var lightsail_getLoadBalancerTlsCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getLoadBalancerTlsCertificatesCmd).Standalone()
+	carapace.Gen(lightsail_getLoadBalancerTlsCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getLoadBalancerTlsCertificatesCmd).Standalone()
 
-	lightsail_getLoadBalancerTlsCertificatesCmd.Flags().String("load-balancer-name", "", "The name of the load balancer you associated with your SSL/TLS certificate.")
-	lightsail_getLoadBalancerTlsCertificatesCmd.MarkFlagRequired("load-balancer-name")
+		lightsail_getLoadBalancerTlsCertificatesCmd.Flags().String("load-balancer-name", "", "The name of the load balancer you associated with your SSL/TLS certificate.")
+		lightsail_getLoadBalancerTlsCertificatesCmd.MarkFlagRequired("load-balancer-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getLoadBalancerTlsCertificatesCmd)
 }

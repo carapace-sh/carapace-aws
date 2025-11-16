@@ -12,11 +12,13 @@ var guardduty_createMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_createMembersCmd).Standalone()
+	carapace.Gen(guardduty_createMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_createMembersCmd).Standalone()
 
-	guardduty_createMembersCmd.Flags().String("account-details", "", "A list of account ID and email address pairs of the accounts that you want to associate with the GuardDuty administrator account.")
-	guardduty_createMembersCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty account for which you want to associate member accounts.")
-	guardduty_createMembersCmd.MarkFlagRequired("account-details")
-	guardduty_createMembersCmd.MarkFlagRequired("detector-id")
+		guardduty_createMembersCmd.Flags().String("account-details", "", "A list of account ID and email address pairs of the accounts that you want to associate with the GuardDuty administrator account.")
+		guardduty_createMembersCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty account for which you want to associate member accounts.")
+		guardduty_createMembersCmd.MarkFlagRequired("account-details")
+		guardduty_createMembersCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_createMembersCmd)
 }

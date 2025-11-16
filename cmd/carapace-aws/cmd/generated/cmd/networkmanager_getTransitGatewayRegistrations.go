@@ -12,12 +12,14 @@ var networkmanager_getTransitGatewayRegistrationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getTransitGatewayRegistrationsCmd).Standalone()
+	carapace.Gen(networkmanager_getTransitGatewayRegistrationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getTransitGatewayRegistrationsCmd).Standalone()
 
-	networkmanager_getTransitGatewayRegistrationsCmd.Flags().String("global-network-id", "", "The ID of the global network.")
-	networkmanager_getTransitGatewayRegistrationsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	networkmanager_getTransitGatewayRegistrationsCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	networkmanager_getTransitGatewayRegistrationsCmd.Flags().String("transit-gateway-arns", "", "The Amazon Resource Names (ARNs) of one or more transit gateways.")
-	networkmanager_getTransitGatewayRegistrationsCmd.MarkFlagRequired("global-network-id")
+		networkmanager_getTransitGatewayRegistrationsCmd.Flags().String("global-network-id", "", "The ID of the global network.")
+		networkmanager_getTransitGatewayRegistrationsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		networkmanager_getTransitGatewayRegistrationsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		networkmanager_getTransitGatewayRegistrationsCmd.Flags().String("transit-gateway-arns", "", "The Amazon Resource Names (ARNs) of one or more transit gateways.")
+		networkmanager_getTransitGatewayRegistrationsCmd.MarkFlagRequired("global-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getTransitGatewayRegistrationsCmd)
 }

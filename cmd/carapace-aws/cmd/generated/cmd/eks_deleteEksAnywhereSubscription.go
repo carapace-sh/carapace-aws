@@ -12,9 +12,11 @@ var eks_deleteEksAnywhereSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_deleteEksAnywhereSubscriptionCmd).Standalone()
+	carapace.Gen(eks_deleteEksAnywhereSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_deleteEksAnywhereSubscriptionCmd).Standalone()
 
-	eks_deleteEksAnywhereSubscriptionCmd.Flags().String("id", "", "The ID of the subscription.")
-	eks_deleteEksAnywhereSubscriptionCmd.MarkFlagRequired("id")
+		eks_deleteEksAnywhereSubscriptionCmd.Flags().String("id", "", "The ID of the subscription.")
+		eks_deleteEksAnywhereSubscriptionCmd.MarkFlagRequired("id")
+	})
 	eksCmd.AddCommand(eks_deleteEksAnywhereSubscriptionCmd)
 }

@@ -12,9 +12,11 @@ var internetmonitor_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(internetmonitor_listTagsForResourceCmd).Standalone()
+	carapace.Gen(internetmonitor_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(internetmonitor_listTagsForResourceCmd).Standalone()
 
-	internetmonitor_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a resource.")
-	internetmonitor_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		internetmonitor_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a resource.")
+		internetmonitor_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	internetmonitorCmd.AddCommand(internetmonitor_listTagsForResourceCmd)
 }

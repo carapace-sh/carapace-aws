@@ -12,9 +12,11 @@ var storagegateway_describeSmbsettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeSmbsettingsCmd).Standalone()
+	carapace.Gen(storagegateway_describeSmbsettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeSmbsettingsCmd).Standalone()
 
-	storagegateway_describeSmbsettingsCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_describeSmbsettingsCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_describeSmbsettingsCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_describeSmbsettingsCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeSmbsettingsCmd)
 }

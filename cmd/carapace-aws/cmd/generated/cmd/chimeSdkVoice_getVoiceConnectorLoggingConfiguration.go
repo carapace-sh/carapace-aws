@@ -12,9 +12,11 @@ var chimeSdkVoice_getVoiceConnectorLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_getVoiceConnectorLoggingConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_getVoiceConnectorLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_getVoiceConnectorLoggingConfigurationCmd).Standalone()
 
-	chimeSdkVoice_getVoiceConnectorLoggingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_getVoiceConnectorLoggingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_getVoiceConnectorLoggingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_getVoiceConnectorLoggingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_getVoiceConnectorLoggingConfigurationCmd)
 }

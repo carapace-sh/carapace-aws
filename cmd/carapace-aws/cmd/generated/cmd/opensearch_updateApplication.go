@@ -12,11 +12,13 @@ var opensearch_updateApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_updateApplicationCmd).Standalone()
+	carapace.Gen(opensearch_updateApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_updateApplicationCmd).Standalone()
 
-	opensearch_updateApplicationCmd.Flags().String("app-configs", "", "The configuration settings to modify for the OpenSearch application.")
-	opensearch_updateApplicationCmd.Flags().String("data-sources", "", "The data sources to associate with the OpenSearch application.")
-	opensearch_updateApplicationCmd.Flags().String("id", "", "The unique identifier for the OpenSearch application to be updated.")
-	opensearch_updateApplicationCmd.MarkFlagRequired("id")
+		opensearch_updateApplicationCmd.Flags().String("app-configs", "", "The configuration settings to modify for the OpenSearch application.")
+		opensearch_updateApplicationCmd.Flags().String("data-sources", "", "The data sources to associate with the OpenSearch application.")
+		opensearch_updateApplicationCmd.Flags().String("id", "", "The unique identifier for the OpenSearch application to be updated.")
+		opensearch_updateApplicationCmd.MarkFlagRequired("id")
+	})
 	opensearchCmd.AddCommand(opensearch_updateApplicationCmd)
 }

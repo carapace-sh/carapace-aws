@@ -12,9 +12,11 @@ var inspector_registerCrossAccountAccessRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_registerCrossAccountAccessRoleCmd).Standalone()
+	carapace.Gen(inspector_registerCrossAccountAccessRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_registerCrossAccountAccessRoleCmd).Standalone()
 
-	inspector_registerCrossAccountAccessRoleCmd.Flags().String("role-arn", "", "The ARN of the IAM role that grants Amazon Inspector access to AWS Services needed to perform security assessments.")
-	inspector_registerCrossAccountAccessRoleCmd.MarkFlagRequired("role-arn")
+		inspector_registerCrossAccountAccessRoleCmd.Flags().String("role-arn", "", "The ARN of the IAM role that grants Amazon Inspector access to AWS Services needed to perform security assessments.")
+		inspector_registerCrossAccountAccessRoleCmd.MarkFlagRequired("role-arn")
+	})
 	inspectorCmd.AddCommand(inspector_registerCrossAccountAccessRoleCmd)
 }

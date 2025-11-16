@@ -12,11 +12,13 @@ var ssmContacts_listEngagementsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_listEngagementsCmd).Standalone()
+	carapace.Gen(ssmContacts_listEngagementsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_listEngagementsCmd).Standalone()
 
-	ssmContacts_listEngagementsCmd.Flags().String("incident-id", "", "The Amazon Resource Name (ARN) of the incident you're listing engagements for.")
-	ssmContacts_listEngagementsCmd.Flags().String("max-results", "", "The maximum number of engagements per page of results.")
-	ssmContacts_listEngagementsCmd.Flags().String("next-token", "", "The pagination token to continue to the next page of results.")
-	ssmContacts_listEngagementsCmd.Flags().String("time-range-value", "", "The time range to lists engagements for an incident.")
+		ssmContacts_listEngagementsCmd.Flags().String("incident-id", "", "The Amazon Resource Name (ARN) of the incident you're listing engagements for.")
+		ssmContacts_listEngagementsCmd.Flags().String("max-results", "", "The maximum number of engagements per page of results.")
+		ssmContacts_listEngagementsCmd.Flags().String("next-token", "", "The pagination token to continue to the next page of results.")
+		ssmContacts_listEngagementsCmd.Flags().String("time-range-value", "", "The time range to lists engagements for an incident.")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_listEngagementsCmd)
 }

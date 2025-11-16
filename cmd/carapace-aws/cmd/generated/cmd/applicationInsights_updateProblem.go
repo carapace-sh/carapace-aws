@@ -12,11 +12,13 @@ var applicationInsights_updateProblemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_updateProblemCmd).Standalone()
+	carapace.Gen(applicationInsights_updateProblemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_updateProblemCmd).Standalone()
 
-	applicationInsights_updateProblemCmd.Flags().String("problem-id", "", "The ID of the problem.")
-	applicationInsights_updateProblemCmd.Flags().String("update-status", "", "The status of the problem.")
-	applicationInsights_updateProblemCmd.Flags().String("visibility", "", "The visibility of a problem.")
-	applicationInsights_updateProblemCmd.MarkFlagRequired("problem-id")
+		applicationInsights_updateProblemCmd.Flags().String("problem-id", "", "The ID of the problem.")
+		applicationInsights_updateProblemCmd.Flags().String("update-status", "", "The status of the problem.")
+		applicationInsights_updateProblemCmd.Flags().String("visibility", "", "The visibility of a problem.")
+		applicationInsights_updateProblemCmd.MarkFlagRequired("problem-id")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_updateProblemCmd)
 }

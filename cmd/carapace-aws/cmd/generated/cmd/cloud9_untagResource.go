@@ -12,11 +12,13 @@ var cloud9_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloud9_untagResourceCmd).Standalone()
+	carapace.Gen(cloud9_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloud9_untagResourceCmd).Standalone()
 
-	cloud9_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Cloud9 development environment to remove tags from.")
-	cloud9_untagResourceCmd.Flags().String("tag-keys", "", "The tag names of the tags to remove from the given Cloud9 development environment.")
-	cloud9_untagResourceCmd.MarkFlagRequired("resource-arn")
-	cloud9_untagResourceCmd.MarkFlagRequired("tag-keys")
+		cloud9_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Cloud9 development environment to remove tags from.")
+		cloud9_untagResourceCmd.Flags().String("tag-keys", "", "The tag names of the tags to remove from the given Cloud9 development environment.")
+		cloud9_untagResourceCmd.MarkFlagRequired("resource-arn")
+		cloud9_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	cloud9Cmd.AddCommand(cloud9_untagResourceCmd)
 }

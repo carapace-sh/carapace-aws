@@ -12,9 +12,11 @@ var apprunner_deleteServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_deleteServiceCmd).Standalone()
+	carapace.Gen(apprunner_deleteServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_deleteServiceCmd).Standalone()
 
-	apprunner_deleteServiceCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to delete.")
-	apprunner_deleteServiceCmd.MarkFlagRequired("service-arn")
+		apprunner_deleteServiceCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to delete.")
+		apprunner_deleteServiceCmd.MarkFlagRequired("service-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_deleteServiceCmd)
 }

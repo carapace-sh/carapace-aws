@@ -12,9 +12,11 @@ var personalize_stopSolutionVersionCreationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_stopSolutionVersionCreationCmd).Standalone()
+	carapace.Gen(personalize_stopSolutionVersionCreationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_stopSolutionVersionCreationCmd).Standalone()
 
-	personalize_stopSolutionVersionCreationCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version you want to stop creating.")
-	personalize_stopSolutionVersionCreationCmd.MarkFlagRequired("solution-version-arn")
+		personalize_stopSolutionVersionCreationCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version you want to stop creating.")
+		personalize_stopSolutionVersionCreationCmd.MarkFlagRequired("solution-version-arn")
+	})
 	personalizeCmd.AddCommand(personalize_stopSolutionVersionCreationCmd)
 }

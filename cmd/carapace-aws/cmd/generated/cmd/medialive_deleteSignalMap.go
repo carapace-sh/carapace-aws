@@ -12,9 +12,11 @@ var medialive_deleteSignalMapCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteSignalMapCmd).Standalone()
+	carapace.Gen(medialive_deleteSignalMapCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteSignalMapCmd).Standalone()
 
-	medialive_deleteSignalMapCmd.Flags().String("identifier", "", "A signal map's identifier.")
-	medialive_deleteSignalMapCmd.MarkFlagRequired("identifier")
+		medialive_deleteSignalMapCmd.Flags().String("identifier", "", "A signal map's identifier.")
+		medialive_deleteSignalMapCmd.MarkFlagRequired("identifier")
+	})
 	medialiveCmd.AddCommand(medialive_deleteSignalMapCmd)
 }

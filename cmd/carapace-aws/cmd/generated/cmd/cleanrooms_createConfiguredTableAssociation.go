@@ -12,17 +12,19 @@ var cleanrooms_createConfiguredTableAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_createConfiguredTableAssociationCmd).Standalone()
+	carapace.Gen(cleanrooms_createConfiguredTableAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_createConfiguredTableAssociationCmd).Standalone()
 
-	cleanrooms_createConfiguredTableAssociationCmd.Flags().String("configured-table-identifier", "", "A unique identifier for the configured table to be associated to.")
-	cleanrooms_createConfiguredTableAssociationCmd.Flags().String("description", "", "A description for the configured table association.")
-	cleanrooms_createConfiguredTableAssociationCmd.Flags().String("membership-identifier", "", "A unique identifier for one of your memberships for a collaboration.")
-	cleanrooms_createConfiguredTableAssociationCmd.Flags().String("name", "", "The name of the configured table association.")
-	cleanrooms_createConfiguredTableAssociationCmd.Flags().String("role-arn", "", "The service will assume this role to access catalog metadata and query the table.")
-	cleanrooms_createConfiguredTableAssociationCmd.Flags().String("tags", "", "An optional label that you can assign to a resource when you create it.")
-	cleanrooms_createConfiguredTableAssociationCmd.MarkFlagRequired("configured-table-identifier")
-	cleanrooms_createConfiguredTableAssociationCmd.MarkFlagRequired("membership-identifier")
-	cleanrooms_createConfiguredTableAssociationCmd.MarkFlagRequired("name")
-	cleanrooms_createConfiguredTableAssociationCmd.MarkFlagRequired("role-arn")
+		cleanrooms_createConfiguredTableAssociationCmd.Flags().String("configured-table-identifier", "", "A unique identifier for the configured table to be associated to.")
+		cleanrooms_createConfiguredTableAssociationCmd.Flags().String("description", "", "A description for the configured table association.")
+		cleanrooms_createConfiguredTableAssociationCmd.Flags().String("membership-identifier", "", "A unique identifier for one of your memberships for a collaboration.")
+		cleanrooms_createConfiguredTableAssociationCmd.Flags().String("name", "", "The name of the configured table association.")
+		cleanrooms_createConfiguredTableAssociationCmd.Flags().String("role-arn", "", "The service will assume this role to access catalog metadata and query the table.")
+		cleanrooms_createConfiguredTableAssociationCmd.Flags().String("tags", "", "An optional label that you can assign to a resource when you create it.")
+		cleanrooms_createConfiguredTableAssociationCmd.MarkFlagRequired("configured-table-identifier")
+		cleanrooms_createConfiguredTableAssociationCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_createConfiguredTableAssociationCmd.MarkFlagRequired("name")
+		cleanrooms_createConfiguredTableAssociationCmd.MarkFlagRequired("role-arn")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_createConfiguredTableAssociationCmd)
 }

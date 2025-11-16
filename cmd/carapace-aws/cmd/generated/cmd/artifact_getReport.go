@@ -12,12 +12,14 @@ var artifact_getReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(artifact_getReportCmd).Standalone()
+	carapace.Gen(artifact_getReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(artifact_getReportCmd).Standalone()
 
-	artifact_getReportCmd.Flags().String("report-id", "", "Unique resource ID for the report resource.")
-	artifact_getReportCmd.Flags().String("report-version", "", "Version for the report resource.")
-	artifact_getReportCmd.Flags().String("term-token", "", "Unique download token provided by GetTermForReport API.")
-	artifact_getReportCmd.MarkFlagRequired("report-id")
-	artifact_getReportCmd.MarkFlagRequired("term-token")
+		artifact_getReportCmd.Flags().String("report-id", "", "Unique resource ID for the report resource.")
+		artifact_getReportCmd.Flags().String("report-version", "", "Version for the report resource.")
+		artifact_getReportCmd.Flags().String("term-token", "", "Unique download token provided by GetTermForReport API.")
+		artifact_getReportCmd.MarkFlagRequired("report-id")
+		artifact_getReportCmd.MarkFlagRequired("term-token")
+	})
 	artifactCmd.AddCommand(artifact_getReportCmd)
 }

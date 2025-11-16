@@ -12,9 +12,11 @@ var ecrPublic_describeRegistriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecrPublic_describeRegistriesCmd).Standalone()
+	carapace.Gen(ecrPublic_describeRegistriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecrPublic_describeRegistriesCmd).Standalone()
 
-	ecrPublic_describeRegistriesCmd.Flags().String("max-results", "", "The maximum number of repository results that's returned by `DescribeRegistries` in paginated output.")
-	ecrPublic_describeRegistriesCmd.Flags().String("next-token", "", "The `nextToken` value that's returned from a previous paginated `DescribeRegistries` request where `maxResults` was used and the results exceeded the value of that parameter.")
+		ecrPublic_describeRegistriesCmd.Flags().String("max-results", "", "The maximum number of repository results that's returned by `DescribeRegistries` in paginated output.")
+		ecrPublic_describeRegistriesCmd.Flags().String("next-token", "", "The `nextToken` value that's returned from a previous paginated `DescribeRegistries` request where `maxResults` was used and the results exceeded the value of that parameter.")
+	})
 	ecrPublicCmd.AddCommand(ecrPublic_describeRegistriesCmd)
 }

@@ -12,9 +12,11 @@ var guardduty_declineInvitationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_declineInvitationsCmd).Standalone()
+	carapace.Gen(guardduty_declineInvitationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_declineInvitationsCmd).Standalone()
 
-	guardduty_declineInvitationsCmd.Flags().String("account-ids", "", "A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to decline invitations from.")
-	guardduty_declineInvitationsCmd.MarkFlagRequired("account-ids")
+		guardduty_declineInvitationsCmd.Flags().String("account-ids", "", "A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to decline invitations from.")
+		guardduty_declineInvitationsCmd.MarkFlagRequired("account-ids")
+	})
 	guarddutyCmd.AddCommand(guardduty_declineInvitationsCmd)
 }

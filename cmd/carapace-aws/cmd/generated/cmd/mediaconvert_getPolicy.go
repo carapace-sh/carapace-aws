@@ -12,7 +12,9 @@ var mediaconvert_getPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_getPolicyCmd).Standalone()
+	carapace.Gen(mediaconvert_getPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_getPolicyCmd).Standalone()
 
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_getPolicyCmd)
 }

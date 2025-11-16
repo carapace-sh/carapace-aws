@@ -12,9 +12,11 @@ var medialive_startInputDeviceMaintenanceWindowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_startInputDeviceMaintenanceWindowCmd).Standalone()
+	carapace.Gen(medialive_startInputDeviceMaintenanceWindowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_startInputDeviceMaintenanceWindowCmd).Standalone()
 
-	medialive_startInputDeviceMaintenanceWindowCmd.Flags().String("input-device-id", "", "The unique ID of the input device to start a maintenance window for.")
-	medialive_startInputDeviceMaintenanceWindowCmd.MarkFlagRequired("input-device-id")
+		medialive_startInputDeviceMaintenanceWindowCmd.Flags().String("input-device-id", "", "The unique ID of the input device to start a maintenance window for.")
+		medialive_startInputDeviceMaintenanceWindowCmd.MarkFlagRequired("input-device-id")
+	})
 	medialiveCmd.AddCommand(medialive_startInputDeviceMaintenanceWindowCmd)
 }

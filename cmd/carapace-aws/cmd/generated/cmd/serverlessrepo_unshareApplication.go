@@ -12,11 +12,13 @@ var serverlessrepo_unshareApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serverlessrepo_unshareApplicationCmd).Standalone()
+	carapace.Gen(serverlessrepo_unshareApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serverlessrepo_unshareApplicationCmd).Standalone()
 
-	serverlessrepo_unshareApplicationCmd.Flags().String("application-id", "", "The Amazon Resource Name (ARN) of the application.")
-	serverlessrepo_unshareApplicationCmd.Flags().String("organization-id", "", "The AWS Organization ID to unshare the application from.")
-	serverlessrepo_unshareApplicationCmd.MarkFlagRequired("application-id")
-	serverlessrepo_unshareApplicationCmd.MarkFlagRequired("organization-id")
+		serverlessrepo_unshareApplicationCmd.Flags().String("application-id", "", "The Amazon Resource Name (ARN) of the application.")
+		serverlessrepo_unshareApplicationCmd.Flags().String("organization-id", "", "The AWS Organization ID to unshare the application from.")
+		serverlessrepo_unshareApplicationCmd.MarkFlagRequired("application-id")
+		serverlessrepo_unshareApplicationCmd.MarkFlagRequired("organization-id")
+	})
 	serverlessrepoCmd.AddCommand(serverlessrepo_unshareApplicationCmd)
 }

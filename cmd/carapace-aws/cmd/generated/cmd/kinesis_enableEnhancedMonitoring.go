@@ -12,11 +12,13 @@ var kinesis_enableEnhancedMonitoringCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_enableEnhancedMonitoringCmd).Standalone()
+	carapace.Gen(kinesis_enableEnhancedMonitoringCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_enableEnhancedMonitoringCmd).Standalone()
 
-	kinesis_enableEnhancedMonitoringCmd.Flags().String("shard-level-metrics", "", "List of shard-level metrics to enable.")
-	kinesis_enableEnhancedMonitoringCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
-	kinesis_enableEnhancedMonitoringCmd.Flags().String("stream-name", "", "The name of the stream for which to enable enhanced monitoring.")
-	kinesis_enableEnhancedMonitoringCmd.MarkFlagRequired("shard-level-metrics")
+		kinesis_enableEnhancedMonitoringCmd.Flags().String("shard-level-metrics", "", "List of shard-level metrics to enable.")
+		kinesis_enableEnhancedMonitoringCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
+		kinesis_enableEnhancedMonitoringCmd.Flags().String("stream-name", "", "The name of the stream for which to enable enhanced monitoring.")
+		kinesis_enableEnhancedMonitoringCmd.MarkFlagRequired("shard-level-metrics")
+	})
 	kinesisCmd.AddCommand(kinesis_enableEnhancedMonitoringCmd)
 }

@@ -12,7 +12,9 @@ var opensearchserverless_getPoliciesStatsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_getPoliciesStatsCmd).Standalone()
+	carapace.Gen(opensearchserverless_getPoliciesStatsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_getPoliciesStatsCmd).Standalone()
 
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_getPoliciesStatsCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_deleteStudioLifecycleConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteStudioLifecycleConfigCmd).Standalone()
+	carapace.Gen(sagemaker_deleteStudioLifecycleConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteStudioLifecycleConfigCmd).Standalone()
 
-	sagemaker_deleteStudioLifecycleConfigCmd.Flags().String("studio-lifecycle-config-name", "", "The name of the Amazon SageMaker AI Studio Lifecycle Configuration to delete.")
-	sagemaker_deleteStudioLifecycleConfigCmd.MarkFlagRequired("studio-lifecycle-config-name")
+		sagemaker_deleteStudioLifecycleConfigCmd.Flags().String("studio-lifecycle-config-name", "", "The name of the Amazon SageMaker AI Studio Lifecycle Configuration to delete.")
+		sagemaker_deleteStudioLifecycleConfigCmd.MarkFlagRequired("studio-lifecycle-config-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteStudioLifecycleConfigCmd)
 }

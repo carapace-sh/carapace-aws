@@ -12,10 +12,12 @@ var ec2_getCapacityManagerAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getCapacityManagerAttributesCmd).Standalone()
+	carapace.Gen(ec2_getCapacityManagerAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getCapacityManagerAttributesCmd).Standalone()
 
-	ec2_getCapacityManagerAttributesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getCapacityManagerAttributesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getCapacityManagerAttributesCmd.Flag("no-dry-run").Hidden = true
+		ec2_getCapacityManagerAttributesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getCapacityManagerAttributesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getCapacityManagerAttributesCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_getCapacityManagerAttributesCmd)
 }

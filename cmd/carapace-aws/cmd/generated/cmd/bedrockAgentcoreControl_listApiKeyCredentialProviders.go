@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_listApiKeyCredentialProvidersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_listApiKeyCredentialProvidersCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_listApiKeyCredentialProvidersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_listApiKeyCredentialProvidersCmd).Standalone()
 
-	bedrockAgentcoreControl_listApiKeyCredentialProvidersCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	bedrockAgentcoreControl_listApiKeyCredentialProvidersCmd.Flags().String("next-token", "", "Pagination token.")
+		bedrockAgentcoreControl_listApiKeyCredentialProvidersCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		bedrockAgentcoreControl_listApiKeyCredentialProvidersCmd.Flags().String("next-token", "", "Pagination token.")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_listApiKeyCredentialProvidersCmd)
 }

@@ -12,9 +12,11 @@ var auditmanager_getEvidenceFileUploadUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getEvidenceFileUploadUrlCmd).Standalone()
+	carapace.Gen(auditmanager_getEvidenceFileUploadUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getEvidenceFileUploadUrlCmd).Standalone()
 
-	auditmanager_getEvidenceFileUploadUrlCmd.Flags().String("file-name", "", "The file that you want to upload.")
-	auditmanager_getEvidenceFileUploadUrlCmd.MarkFlagRequired("file-name")
+		auditmanager_getEvidenceFileUploadUrlCmd.Flags().String("file-name", "", "The file that you want to upload.")
+		auditmanager_getEvidenceFileUploadUrlCmd.MarkFlagRequired("file-name")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getEvidenceFileUploadUrlCmd)
 }

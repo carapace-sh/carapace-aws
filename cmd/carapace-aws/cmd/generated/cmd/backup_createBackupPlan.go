@@ -12,11 +12,13 @@ var backup_createBackupPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_createBackupPlanCmd).Standalone()
+	carapace.Gen(backup_createBackupPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_createBackupPlanCmd).Standalone()
 
-	backup_createBackupPlanCmd.Flags().String("backup-plan", "", "The body of a backup plan.")
-	backup_createBackupPlanCmd.Flags().String("backup-plan-tags", "", "The tags to assign to the backup plan.")
-	backup_createBackupPlanCmd.Flags().String("creator-request-id", "", "Identifies the request and allows failed requests to be retried without the risk of running the operation twice.")
-	backup_createBackupPlanCmd.MarkFlagRequired("backup-plan")
+		backup_createBackupPlanCmd.Flags().String("backup-plan", "", "The body of a backup plan.")
+		backup_createBackupPlanCmd.Flags().String("backup-plan-tags", "", "The tags to assign to the backup plan.")
+		backup_createBackupPlanCmd.Flags().String("creator-request-id", "", "Identifies the request and allows failed requests to be retried without the risk of running the operation twice.")
+		backup_createBackupPlanCmd.MarkFlagRequired("backup-plan")
+	})
 	backupCmd.AddCommand(backup_createBackupPlanCmd)
 }

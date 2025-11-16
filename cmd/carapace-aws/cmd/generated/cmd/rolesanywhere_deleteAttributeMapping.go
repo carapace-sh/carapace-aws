@@ -12,12 +12,14 @@ var rolesanywhere_deleteAttributeMappingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_deleteAttributeMappingCmd).Standalone()
+	carapace.Gen(rolesanywhere_deleteAttributeMappingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_deleteAttributeMappingCmd).Standalone()
 
-	rolesanywhere_deleteAttributeMappingCmd.Flags().String("certificate-field", "", "Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.")
-	rolesanywhere_deleteAttributeMappingCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
-	rolesanywhere_deleteAttributeMappingCmd.Flags().String("specifiers", "", "A list of specifiers of a certificate field; for example, CN, OU, UID from a Subject.")
-	rolesanywhere_deleteAttributeMappingCmd.MarkFlagRequired("certificate-field")
-	rolesanywhere_deleteAttributeMappingCmd.MarkFlagRequired("profile-id")
+		rolesanywhere_deleteAttributeMappingCmd.Flags().String("certificate-field", "", "Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.")
+		rolesanywhere_deleteAttributeMappingCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
+		rolesanywhere_deleteAttributeMappingCmd.Flags().String("specifiers", "", "A list of specifiers of a certificate field; for example, CN, OU, UID from a Subject.")
+		rolesanywhere_deleteAttributeMappingCmd.MarkFlagRequired("certificate-field")
+		rolesanywhere_deleteAttributeMappingCmd.MarkFlagRequired("profile-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_deleteAttributeMappingCmd)
 }

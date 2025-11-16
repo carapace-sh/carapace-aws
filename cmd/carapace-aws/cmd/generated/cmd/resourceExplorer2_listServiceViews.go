@@ -12,9 +12,11 @@ var resourceExplorer2_listServiceViewsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_listServiceViewsCmd).Standalone()
+	carapace.Gen(resourceExplorer2_listServiceViewsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_listServiceViewsCmd).Standalone()
 
-	resourceExplorer2_listServiceViewsCmd.Flags().String("max-results", "", "The maximum number of service view results to return in a single response.")
-	resourceExplorer2_listServiceViewsCmd.Flags().String("next-token", "", "The pagination token from a previous `ListServiceViews` response.")
+		resourceExplorer2_listServiceViewsCmd.Flags().String("max-results", "", "The maximum number of service view results to return in a single response.")
+		resourceExplorer2_listServiceViewsCmd.Flags().String("next-token", "", "The pagination token from a previous `ListServiceViews` response.")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_listServiceViewsCmd)
 }

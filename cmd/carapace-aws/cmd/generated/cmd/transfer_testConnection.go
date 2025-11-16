@@ -12,9 +12,11 @@ var transfer_testConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_testConnectionCmd).Standalone()
+	carapace.Gen(transfer_testConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_testConnectionCmd).Standalone()
 
-	transfer_testConnectionCmd.Flags().String("connector-id", "", "The unique identifier for the connector.")
-	transfer_testConnectionCmd.MarkFlagRequired("connector-id")
+		transfer_testConnectionCmd.Flags().String("connector-id", "", "The unique identifier for the connector.")
+		transfer_testConnectionCmd.MarkFlagRequired("connector-id")
+	})
 	transferCmd.AddCommand(transfer_testConnectionCmd)
 }

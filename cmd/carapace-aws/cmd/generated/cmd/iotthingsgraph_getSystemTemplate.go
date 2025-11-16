@@ -12,10 +12,12 @@ var iotthingsgraph_getSystemTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_getSystemTemplateCmd).Standalone()
+	carapace.Gen(iotthingsgraph_getSystemTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_getSystemTemplateCmd).Standalone()
 
-	iotthingsgraph_getSystemTemplateCmd.Flags().String("id", "", "The ID of the system to get.")
-	iotthingsgraph_getSystemTemplateCmd.Flags().String("revision-number", "", "The number that specifies the revision of the system to get.")
-	iotthingsgraph_getSystemTemplateCmd.MarkFlagRequired("id")
+		iotthingsgraph_getSystemTemplateCmd.Flags().String("id", "", "The ID of the system to get.")
+		iotthingsgraph_getSystemTemplateCmd.Flags().String("revision-number", "", "The number that specifies the revision of the system to get.")
+		iotthingsgraph_getSystemTemplateCmd.MarkFlagRequired("id")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_getSystemTemplateCmd)
 }

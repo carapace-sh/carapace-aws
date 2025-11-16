@@ -12,9 +12,11 @@ var mediapackageVod_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackageVod_listTagsForResourceCmd).Standalone()
+	carapace.Gen(mediapackageVod_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackageVod_listTagsForResourceCmd).Standalone()
 
-	mediapackageVod_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource.")
-	mediapackageVod_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		mediapackageVod_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource.")
+		mediapackageVod_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	mediapackageVodCmd.AddCommand(mediapackageVod_listTagsForResourceCmd)
 }

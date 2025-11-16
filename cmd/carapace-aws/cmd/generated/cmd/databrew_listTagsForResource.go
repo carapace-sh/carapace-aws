@@ -12,9 +12,11 @@ var databrew_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_listTagsForResourceCmd).Standalone()
+	carapace.Gen(databrew_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_listTagsForResourceCmd).Standalone()
 
-	databrew_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the DataBrew resource.")
-	databrew_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		databrew_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the DataBrew resource.")
+		databrew_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	databrewCmd.AddCommand(databrew_listTagsForResourceCmd)
 }

@@ -12,14 +12,16 @@ var trustedadvisor_listRecommendationResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(trustedadvisor_listRecommendationResourcesCmd).Standalone()
+	carapace.Gen(trustedadvisor_listRecommendationResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(trustedadvisor_listRecommendationResourcesCmd).Standalone()
 
-	trustedadvisor_listRecommendationResourcesCmd.Flags().String("exclusion-status", "", "The exclusion status of the resource")
-	trustedadvisor_listRecommendationResourcesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	trustedadvisor_listRecommendationResourcesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	trustedadvisor_listRecommendationResourcesCmd.Flags().String("recommendation-identifier", "", "The Recommendation identifier")
-	trustedadvisor_listRecommendationResourcesCmd.Flags().String("region-code", "", "The AWS Region code of the resource")
-	trustedadvisor_listRecommendationResourcesCmd.Flags().String("status", "", "The status of the resource")
-	trustedadvisor_listRecommendationResourcesCmd.MarkFlagRequired("recommendation-identifier")
+		trustedadvisor_listRecommendationResourcesCmd.Flags().String("exclusion-status", "", "The exclusion status of the resource")
+		trustedadvisor_listRecommendationResourcesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		trustedadvisor_listRecommendationResourcesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		trustedadvisor_listRecommendationResourcesCmd.Flags().String("recommendation-identifier", "", "The Recommendation identifier")
+		trustedadvisor_listRecommendationResourcesCmd.Flags().String("region-code", "", "The AWS Region code of the resource")
+		trustedadvisor_listRecommendationResourcesCmd.Flags().String("status", "", "The status of the resource")
+		trustedadvisor_listRecommendationResourcesCmd.MarkFlagRequired("recommendation-identifier")
+	})
 	trustedadvisorCmd.AddCommand(trustedadvisor_listRecommendationResourcesCmd)
 }

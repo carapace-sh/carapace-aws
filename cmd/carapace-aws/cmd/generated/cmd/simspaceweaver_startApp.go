@@ -12,16 +12,18 @@ var simspaceweaver_startAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_startAppCmd).Standalone()
+	carapace.Gen(simspaceweaver_startAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_startAppCmd).Standalone()
 
-	simspaceweaver_startAppCmd.Flags().String("client-token", "", "A value that you provide to ensure that repeated calls to this API operation using the same parameters complete only once.")
-	simspaceweaver_startAppCmd.Flags().String("description", "", "The description of the app.")
-	simspaceweaver_startAppCmd.Flags().String("domain", "", "The name of the domain of the app.")
-	simspaceweaver_startAppCmd.Flags().String("launch-overrides", "", "")
-	simspaceweaver_startAppCmd.Flags().String("name", "", "The name of the app.")
-	simspaceweaver_startAppCmd.Flags().String("simulation", "", "The name of the simulation of the app.")
-	simspaceweaver_startAppCmd.MarkFlagRequired("domain")
-	simspaceweaver_startAppCmd.MarkFlagRequired("name")
-	simspaceweaver_startAppCmd.MarkFlagRequired("simulation")
+		simspaceweaver_startAppCmd.Flags().String("client-token", "", "A value that you provide to ensure that repeated calls to this API operation using the same parameters complete only once.")
+		simspaceweaver_startAppCmd.Flags().String("description", "", "The description of the app.")
+		simspaceweaver_startAppCmd.Flags().String("domain", "", "The name of the domain of the app.")
+		simspaceweaver_startAppCmd.Flags().String("launch-overrides", "", "")
+		simspaceweaver_startAppCmd.Flags().String("name", "", "The name of the app.")
+		simspaceweaver_startAppCmd.Flags().String("simulation", "", "The name of the simulation of the app.")
+		simspaceweaver_startAppCmd.MarkFlagRequired("domain")
+		simspaceweaver_startAppCmd.MarkFlagRequired("name")
+		simspaceweaver_startAppCmd.MarkFlagRequired("simulation")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_startAppCmd)
 }

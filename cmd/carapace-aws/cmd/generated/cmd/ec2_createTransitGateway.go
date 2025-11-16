@@ -12,13 +12,15 @@ var ec2_createTransitGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_createTransitGatewayCmd).Standalone()
+	carapace.Gen(ec2_createTransitGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_createTransitGatewayCmd).Standalone()
 
-	ec2_createTransitGatewayCmd.Flags().String("description", "", "A description of the transit gateway.")
-	ec2_createTransitGatewayCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_createTransitGatewayCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_createTransitGatewayCmd.Flags().String("options", "", "The transit gateway options.")
-	ec2_createTransitGatewayCmd.Flags().String("tag-specifications", "", "The tags to apply to the transit gateway.")
-	ec2_createTransitGatewayCmd.Flag("no-dry-run").Hidden = true
+		ec2_createTransitGatewayCmd.Flags().String("description", "", "A description of the transit gateway.")
+		ec2_createTransitGatewayCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_createTransitGatewayCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_createTransitGatewayCmd.Flags().String("options", "", "The transit gateway options.")
+		ec2_createTransitGatewayCmd.Flags().String("tag-specifications", "", "The tags to apply to the transit gateway.")
+		ec2_createTransitGatewayCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_createTransitGatewayCmd)
 }

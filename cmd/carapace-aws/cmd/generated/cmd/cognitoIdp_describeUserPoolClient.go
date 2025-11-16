@@ -12,11 +12,13 @@ var cognitoIdp_describeUserPoolClientCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_describeUserPoolClientCmd).Standalone()
+	carapace.Gen(cognitoIdp_describeUserPoolClientCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_describeUserPoolClientCmd).Standalone()
 
-	cognitoIdp_describeUserPoolClientCmd.Flags().String("client-id", "", "The ID of the app client that you want to describe.")
-	cognitoIdp_describeUserPoolClientCmd.Flags().String("user-pool-id", "", "The ID of the user pool that contains the app client you want to describe.")
-	cognitoIdp_describeUserPoolClientCmd.MarkFlagRequired("client-id")
-	cognitoIdp_describeUserPoolClientCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_describeUserPoolClientCmd.Flags().String("client-id", "", "The ID of the app client that you want to describe.")
+		cognitoIdp_describeUserPoolClientCmd.Flags().String("user-pool-id", "", "The ID of the user pool that contains the app client you want to describe.")
+		cognitoIdp_describeUserPoolClientCmd.MarkFlagRequired("client-id")
+		cognitoIdp_describeUserPoolClientCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_describeUserPoolClientCmd)
 }

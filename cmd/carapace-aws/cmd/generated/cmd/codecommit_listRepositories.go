@@ -12,10 +12,12 @@ var codecommit_listRepositoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_listRepositoriesCmd).Standalone()
+	carapace.Gen(codecommit_listRepositoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_listRepositoriesCmd).Standalone()
 
-	codecommit_listRepositoriesCmd.Flags().String("next-token", "", "An enumeration token that allows the operation to batch the results of the operation.")
-	codecommit_listRepositoriesCmd.Flags().String("order", "", "The order in which to sort the results of a list repositories operation.")
-	codecommit_listRepositoriesCmd.Flags().String("sort-by", "", "The criteria used to sort the results of a list repositories operation.")
+		codecommit_listRepositoriesCmd.Flags().String("next-token", "", "An enumeration token that allows the operation to batch the results of the operation.")
+		codecommit_listRepositoriesCmd.Flags().String("order", "", "The order in which to sort the results of a list repositories operation.")
+		codecommit_listRepositoriesCmd.Flags().String("sort-by", "", "The criteria used to sort the results of a list repositories operation.")
+	})
 	codecommitCmd.AddCommand(codecommit_listRepositoriesCmd)
 }

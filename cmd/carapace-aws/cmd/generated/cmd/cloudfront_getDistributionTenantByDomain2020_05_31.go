@@ -12,9 +12,11 @@ var cloudfront_getDistributionTenantByDomain2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_getDistributionTenantByDomain2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getDistributionTenantByDomain2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getDistributionTenantByDomain2020_05_31Cmd).Standalone()
 
-	cloudfront_getDistributionTenantByDomain2020_05_31Cmd.Flags().String("domain", "", "A domain name associated with the target distribution tenant.")
-	cloudfront_getDistributionTenantByDomain2020_05_31Cmd.MarkFlagRequired("domain")
+		cloudfront_getDistributionTenantByDomain2020_05_31Cmd.Flags().String("domain", "", "A domain name associated with the target distribution tenant.")
+		cloudfront_getDistributionTenantByDomain2020_05_31Cmd.MarkFlagRequired("domain")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getDistributionTenantByDomain2020_05_31Cmd)
 }

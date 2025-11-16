@@ -12,9 +12,11 @@ var ecs_describeClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_describeClustersCmd).Standalone()
+	carapace.Gen(ecs_describeClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_describeClustersCmd).Standalone()
 
-	ecs_describeClustersCmd.Flags().String("clusters", "", "A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN) entries.")
-	ecs_describeClustersCmd.Flags().String("include", "", "Determines whether to include additional information about the clusters in the response.")
+		ecs_describeClustersCmd.Flags().String("clusters", "", "A list of up to 100 cluster names or full cluster Amazon Resource Name (ARN) entries.")
+		ecs_describeClustersCmd.Flags().String("include", "", "Determines whether to include additional information about the clusters in the response.")
+	})
 	ecsCmd.AddCommand(ecs_describeClustersCmd)
 }

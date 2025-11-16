@@ -12,12 +12,14 @@ var apigateway_getBasePathMappingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getBasePathMappingsCmd).Standalone()
+	carapace.Gen(apigateway_getBasePathMappingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getBasePathMappingsCmd).Standalone()
 
-	apigateway_getBasePathMappingsCmd.Flags().String("domain-name", "", "The domain name of a BasePathMapping resource.")
-	apigateway_getBasePathMappingsCmd.Flags().String("domain-name-id", "", "The identifier for the domain name resource.")
-	apigateway_getBasePathMappingsCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getBasePathMappingsCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
-	apigateway_getBasePathMappingsCmd.MarkFlagRequired("domain-name")
+		apigateway_getBasePathMappingsCmd.Flags().String("domain-name", "", "The domain name of a BasePathMapping resource.")
+		apigateway_getBasePathMappingsCmd.Flags().String("domain-name-id", "", "The identifier for the domain name resource.")
+		apigateway_getBasePathMappingsCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getBasePathMappingsCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getBasePathMappingsCmd.MarkFlagRequired("domain-name")
+	})
 	apigatewayCmd.AddCommand(apigateway_getBasePathMappingsCmd)
 }

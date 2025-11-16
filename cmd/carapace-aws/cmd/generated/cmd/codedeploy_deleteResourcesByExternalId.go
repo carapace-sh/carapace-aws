@@ -12,8 +12,10 @@ var codedeploy_deleteResourcesByExternalIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_deleteResourcesByExternalIdCmd).Standalone()
+	carapace.Gen(codedeploy_deleteResourcesByExternalIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_deleteResourcesByExternalIdCmd).Standalone()
 
-	codedeploy_deleteResourcesByExternalIdCmd.Flags().String("external-id", "", "The unique ID of an external resource (for example, a CloudFormation stack ID) that is linked to one or more CodeDeploy resources.")
+		codedeploy_deleteResourcesByExternalIdCmd.Flags().String("external-id", "", "The unique ID of an external resource (for example, a CloudFormation stack ID) that is linked to one or more CodeDeploy resources.")
+	})
 	codedeployCmd.AddCommand(codedeploy_deleteResourcesByExternalIdCmd)
 }

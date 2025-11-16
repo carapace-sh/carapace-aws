@@ -12,11 +12,13 @@ var stepfunctions_createActivityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_createActivityCmd).Standalone()
+	carapace.Gen(stepfunctions_createActivityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_createActivityCmd).Standalone()
 
-	stepfunctions_createActivityCmd.Flags().String("encryption-configuration", "", "Settings to configure server-side encryption.")
-	stepfunctions_createActivityCmd.Flags().String("name", "", "The name of the activity to create.")
-	stepfunctions_createActivityCmd.Flags().String("tags", "", "The list of tags to add to a resource.")
-	stepfunctions_createActivityCmd.MarkFlagRequired("name")
+		stepfunctions_createActivityCmd.Flags().String("encryption-configuration", "", "Settings to configure server-side encryption.")
+		stepfunctions_createActivityCmd.Flags().String("name", "", "The name of the activity to create.")
+		stepfunctions_createActivityCmd.Flags().String("tags", "", "The list of tags to add to a resource.")
+		stepfunctions_createActivityCmd.MarkFlagRequired("name")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_createActivityCmd)
 }

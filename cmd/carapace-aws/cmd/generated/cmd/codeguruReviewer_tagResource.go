@@ -12,11 +12,13 @@ var codeguruReviewer_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruReviewer_tagResourceCmd).Standalone()
+	carapace.Gen(codeguruReviewer_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruReviewer_tagResourceCmd).Standalone()
 
-	codeguruReviewer_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.")
-	codeguruReviewer_tagResourceCmd.Flags().String("tags", "", "An array of key-value pairs used to tag an associated repository.")
-	codeguruReviewer_tagResourceCmd.MarkFlagRequired("resource-arn")
-	codeguruReviewer_tagResourceCmd.MarkFlagRequired("tags")
+		codeguruReviewer_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.")
+		codeguruReviewer_tagResourceCmd.Flags().String("tags", "", "An array of key-value pairs used to tag an associated repository.")
+		codeguruReviewer_tagResourceCmd.MarkFlagRequired("resource-arn")
+		codeguruReviewer_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	codeguruReviewerCmd.AddCommand(codeguruReviewer_tagResourceCmd)
 }

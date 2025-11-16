@@ -12,9 +12,11 @@ var connect_describeInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeInstanceCmd).Standalone()
+	carapace.Gen(connect_describeInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeInstanceCmd).Standalone()
 
-	connect_describeInstanceCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeInstanceCmd.MarkFlagRequired("instance-id")
+		connect_describeInstanceCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeInstanceCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_describeInstanceCmd)
 }

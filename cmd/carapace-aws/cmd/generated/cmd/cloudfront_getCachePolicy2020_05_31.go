@@ -12,9 +12,11 @@ var cloudfront_getCachePolicy2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_getCachePolicy2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getCachePolicy2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getCachePolicy2020_05_31Cmd).Standalone()
 
-	cloudfront_getCachePolicy2020_05_31Cmd.Flags().String("id", "", "The unique identifier for the cache policy.")
-	cloudfront_getCachePolicy2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getCachePolicy2020_05_31Cmd.Flags().String("id", "", "The unique identifier for the cache policy.")
+		cloudfront_getCachePolicy2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getCachePolicy2020_05_31Cmd)
 }

@@ -12,12 +12,14 @@ var ds_createHybridAdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_createHybridAdCmd).Standalone()
+	carapace.Gen(ds_createHybridAdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_createHybridAdCmd).Standalone()
 
-	ds_createHybridAdCmd.Flags().String("assessment-id", "", "The unique identifier of the successful directory assessment that validates your self-managed AD environment.")
-	ds_createHybridAdCmd.Flags().String("secret-arn", "", "The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials for the service account used to join hybrid domain controllers to your self-managed AD domain.")
-	ds_createHybridAdCmd.Flags().String("tags", "", "The tags to be assigned to the directory.")
-	ds_createHybridAdCmd.MarkFlagRequired("assessment-id")
-	ds_createHybridAdCmd.MarkFlagRequired("secret-arn")
+		ds_createHybridAdCmd.Flags().String("assessment-id", "", "The unique identifier of the successful directory assessment that validates your self-managed AD environment.")
+		ds_createHybridAdCmd.Flags().String("secret-arn", "", "The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials for the service account used to join hybrid domain controllers to your self-managed AD domain.")
+		ds_createHybridAdCmd.Flags().String("tags", "", "The tags to be assigned to the directory.")
+		ds_createHybridAdCmd.MarkFlagRequired("assessment-id")
+		ds_createHybridAdCmd.MarkFlagRequired("secret-arn")
+	})
 	dsCmd.AddCommand(ds_createHybridAdCmd)
 }

@@ -12,11 +12,13 @@ var sqs_tagQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_tagQueueCmd).Standalone()
+	carapace.Gen(sqs_tagQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_tagQueueCmd).Standalone()
 
-	sqs_tagQueueCmd.Flags().String("queue-url", "", "The URL of the queue.")
-	sqs_tagQueueCmd.Flags().String("tags", "", "The list of tags to be added to the specified queue.")
-	sqs_tagQueueCmd.MarkFlagRequired("queue-url")
-	sqs_tagQueueCmd.MarkFlagRequired("tags")
+		sqs_tagQueueCmd.Flags().String("queue-url", "", "The URL of the queue.")
+		sqs_tagQueueCmd.Flags().String("tags", "", "The list of tags to be added to the specified queue.")
+		sqs_tagQueueCmd.MarkFlagRequired("queue-url")
+		sqs_tagQueueCmd.MarkFlagRequired("tags")
+	})
 	sqsCmd.AddCommand(sqs_tagQueueCmd)
 }

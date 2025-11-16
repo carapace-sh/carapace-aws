@@ -12,9 +12,11 @@ var migrationHubRefactorSpaces_listEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpaces_listEnvironmentsCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpaces_listEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpaces_listEnvironmentsCmd).Standalone()
 
-	migrationHubRefactorSpaces_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	migrationHubRefactorSpaces_listEnvironmentsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		migrationHubRefactorSpaces_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		migrationHubRefactorSpaces_listEnvironmentsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_listEnvironmentsCmd)
 }

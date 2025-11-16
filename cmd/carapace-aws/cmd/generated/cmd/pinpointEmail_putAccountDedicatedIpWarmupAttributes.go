@@ -12,8 +12,10 @@ var pinpointEmail_putAccountDedicatedIpWarmupAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_putAccountDedicatedIpWarmupAttributesCmd).Standalone()
+	carapace.Gen(pinpointEmail_putAccountDedicatedIpWarmupAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_putAccountDedicatedIpWarmupAttributesCmd).Standalone()
 
-	pinpointEmail_putAccountDedicatedIpWarmupAttributesCmd.Flags().String("auto-warmup-enabled", "", "Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon Pinpoint account in the current AWS Region.")
+		pinpointEmail_putAccountDedicatedIpWarmupAttributesCmd.Flags().String("auto-warmup-enabled", "", "Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon Pinpoint account in the current AWS Region.")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_putAccountDedicatedIpWarmupAttributesCmd)
 }

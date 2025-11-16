@@ -12,7 +12,9 @@ var iotsitewise_describeStorageConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeStorageConfigurationCmd).Standalone()
+	carapace.Gen(iotsitewise_describeStorageConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeStorageConfigurationCmd).Standalone()
 
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeStorageConfigurationCmd)
 }

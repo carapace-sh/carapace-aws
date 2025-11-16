@@ -12,9 +12,11 @@ var route53resolver_getFirewallRuleGroupAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_getFirewallRuleGroupAssociationCmd).Standalone()
+	carapace.Gen(route53resolver_getFirewallRuleGroupAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_getFirewallRuleGroupAssociationCmd).Standalone()
 
-	route53resolver_getFirewallRuleGroupAssociationCmd.Flags().String("firewall-rule-group-association-id", "", "The identifier of the [FirewallRuleGroupAssociation]().")
-	route53resolver_getFirewallRuleGroupAssociationCmd.MarkFlagRequired("firewall-rule-group-association-id")
+		route53resolver_getFirewallRuleGroupAssociationCmd.Flags().String("firewall-rule-group-association-id", "", "The identifier of the [FirewallRuleGroupAssociation]().")
+		route53resolver_getFirewallRuleGroupAssociationCmd.MarkFlagRequired("firewall-rule-group-association-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_getFirewallRuleGroupAssociationCmd)
 }

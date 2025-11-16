@@ -12,9 +12,11 @@ var billing_getBillingViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billing_getBillingViewCmd).Standalone()
+	carapace.Gen(billing_getBillingViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billing_getBillingViewCmd).Standalone()
 
-	billing_getBillingViewCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.")
-	billing_getBillingViewCmd.MarkFlagRequired("arn")
+		billing_getBillingViewCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.")
+		billing_getBillingViewCmd.MarkFlagRequired("arn")
+	})
 	billingCmd.AddCommand(billing_getBillingViewCmd)
 }

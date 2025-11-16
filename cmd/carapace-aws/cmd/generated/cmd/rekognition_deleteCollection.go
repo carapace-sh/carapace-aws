@@ -12,9 +12,11 @@ var rekognition_deleteCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_deleteCollectionCmd).Standalone()
+	carapace.Gen(rekognition_deleteCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_deleteCollectionCmd).Standalone()
 
-	rekognition_deleteCollectionCmd.Flags().String("collection-id", "", "ID of the collection to delete.")
-	rekognition_deleteCollectionCmd.MarkFlagRequired("collection-id")
+		rekognition_deleteCollectionCmd.Flags().String("collection-id", "", "ID of the collection to delete.")
+		rekognition_deleteCollectionCmd.MarkFlagRequired("collection-id")
+	})
 	rekognitionCmd.AddCommand(rekognition_deleteCollectionCmd)
 }

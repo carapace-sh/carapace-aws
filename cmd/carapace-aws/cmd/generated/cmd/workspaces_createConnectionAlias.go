@@ -12,10 +12,12 @@ var workspaces_createConnectionAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_createConnectionAliasCmd).Standalone()
+	carapace.Gen(workspaces_createConnectionAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_createConnectionAliasCmd).Standalone()
 
-	workspaces_createConnectionAliasCmd.Flags().String("connection-string", "", "A connection string in the form of a fully qualified domain name (FQDN), such as `www.example.com`.")
-	workspaces_createConnectionAliasCmd.Flags().String("tags", "", "The tags to associate with the connection alias.")
-	workspaces_createConnectionAliasCmd.MarkFlagRequired("connection-string")
+		workspaces_createConnectionAliasCmd.Flags().String("connection-string", "", "A connection string in the form of a fully qualified domain name (FQDN), such as `www.example.com`.")
+		workspaces_createConnectionAliasCmd.Flags().String("tags", "", "The tags to associate with the connection alias.")
+		workspaces_createConnectionAliasCmd.MarkFlagRequired("connection-string")
+	})
 	workspacesCmd.AddCommand(workspaces_createConnectionAliasCmd)
 }

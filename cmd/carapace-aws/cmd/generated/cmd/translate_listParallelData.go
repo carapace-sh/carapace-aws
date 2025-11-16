@@ -12,9 +12,11 @@ var translate_listParallelDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_listParallelDataCmd).Standalone()
+	carapace.Gen(translate_listParallelDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_listParallelDataCmd).Standalone()
 
-	translate_listParallelDataCmd.Flags().String("max-results", "", "The maximum number of parallel data resources returned for each request.")
-	translate_listParallelDataCmd.Flags().String("next-token", "", "A string that specifies the next page of results to return in a paginated response.")
+		translate_listParallelDataCmd.Flags().String("max-results", "", "The maximum number of parallel data resources returned for each request.")
+		translate_listParallelDataCmd.Flags().String("next-token", "", "A string that specifies the next page of results to return in a paginated response.")
+	})
 	translateCmd.AddCommand(translate_listParallelDataCmd)
 }

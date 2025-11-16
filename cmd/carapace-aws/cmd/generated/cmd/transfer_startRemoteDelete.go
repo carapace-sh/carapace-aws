@@ -12,11 +12,13 @@ var transfer_startRemoteDeleteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_startRemoteDeleteCmd).Standalone()
+	carapace.Gen(transfer_startRemoteDeleteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_startRemoteDeleteCmd).Standalone()
 
-	transfer_startRemoteDeleteCmd.Flags().String("connector-id", "", "The unique identifier for the connector.")
-	transfer_startRemoteDeleteCmd.Flags().String("delete-path", "", "The absolute path of the file or directory to delete.")
-	transfer_startRemoteDeleteCmd.MarkFlagRequired("connector-id")
-	transfer_startRemoteDeleteCmd.MarkFlagRequired("delete-path")
+		transfer_startRemoteDeleteCmd.Flags().String("connector-id", "", "The unique identifier for the connector.")
+		transfer_startRemoteDeleteCmd.Flags().String("delete-path", "", "The absolute path of the file or directory to delete.")
+		transfer_startRemoteDeleteCmd.MarkFlagRequired("connector-id")
+		transfer_startRemoteDeleteCmd.MarkFlagRequired("delete-path")
+	})
 	transferCmd.AddCommand(transfer_startRemoteDeleteCmd)
 }

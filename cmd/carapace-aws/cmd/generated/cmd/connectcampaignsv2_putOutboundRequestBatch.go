@@ -12,11 +12,13 @@ var connectcampaignsv2_putOutboundRequestBatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_putOutboundRequestBatchCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_putOutboundRequestBatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_putOutboundRequestBatchCmd).Standalone()
 
-	connectcampaignsv2_putOutboundRequestBatchCmd.Flags().String("id", "", "")
-	connectcampaignsv2_putOutboundRequestBatchCmd.Flags().String("outbound-requests", "", "")
-	connectcampaignsv2_putOutboundRequestBatchCmd.MarkFlagRequired("id")
-	connectcampaignsv2_putOutboundRequestBatchCmd.MarkFlagRequired("outbound-requests")
+		connectcampaignsv2_putOutboundRequestBatchCmd.Flags().String("id", "", "")
+		connectcampaignsv2_putOutboundRequestBatchCmd.Flags().String("outbound-requests", "", "")
+		connectcampaignsv2_putOutboundRequestBatchCmd.MarkFlagRequired("id")
+		connectcampaignsv2_putOutboundRequestBatchCmd.MarkFlagRequired("outbound-requests")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_putOutboundRequestBatchCmd)
 }

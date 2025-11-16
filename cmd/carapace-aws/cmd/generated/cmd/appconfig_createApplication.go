@@ -12,11 +12,13 @@ var appconfig_createApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_createApplicationCmd).Standalone()
+	carapace.Gen(appconfig_createApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_createApplicationCmd).Standalone()
 
-	appconfig_createApplicationCmd.Flags().String("description", "", "A description of the application.")
-	appconfig_createApplicationCmd.Flags().String("name", "", "A name for the application.")
-	appconfig_createApplicationCmd.Flags().String("tags", "", "Metadata to assign to the application.")
-	appconfig_createApplicationCmd.MarkFlagRequired("name")
+		appconfig_createApplicationCmd.Flags().String("description", "", "A description of the application.")
+		appconfig_createApplicationCmd.Flags().String("name", "", "A name for the application.")
+		appconfig_createApplicationCmd.Flags().String("tags", "", "Metadata to assign to the application.")
+		appconfig_createApplicationCmd.MarkFlagRequired("name")
+	})
 	appconfigCmd.AddCommand(appconfig_createApplicationCmd)
 }

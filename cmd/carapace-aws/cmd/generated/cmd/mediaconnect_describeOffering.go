@@ -12,9 +12,11 @@ var mediaconnect_describeOfferingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_describeOfferingCmd).Standalone()
+	carapace.Gen(mediaconnect_describeOfferingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_describeOfferingCmd).Standalone()
 
-	mediaconnect_describeOfferingCmd.Flags().String("offering-arn", "", "The ARN of the offering.")
-	mediaconnect_describeOfferingCmd.MarkFlagRequired("offering-arn")
+		mediaconnect_describeOfferingCmd.Flags().String("offering-arn", "", "The ARN of the offering.")
+		mediaconnect_describeOfferingCmd.MarkFlagRequired("offering-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_describeOfferingCmd)
 }

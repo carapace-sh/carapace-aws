@@ -12,9 +12,11 @@ var opensearch_deleteDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_deleteDomainCmd).Standalone()
+	carapace.Gen(opensearch_deleteDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_deleteDomainCmd).Standalone()
 
-	opensearch_deleteDomainCmd.Flags().String("domain-name", "", "The name of the domain you want to permanently delete.")
-	opensearch_deleteDomainCmd.MarkFlagRequired("domain-name")
+		opensearch_deleteDomainCmd.Flags().String("domain-name", "", "The name of the domain you want to permanently delete.")
+		opensearch_deleteDomainCmd.MarkFlagRequired("domain-name")
+	})
 	opensearchCmd.AddCommand(opensearch_deleteDomainCmd)
 }

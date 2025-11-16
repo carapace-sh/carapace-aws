@@ -12,10 +12,12 @@ var health_describeEventDetailsForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(health_describeEventDetailsForOrganizationCmd).Standalone()
+	carapace.Gen(health_describeEventDetailsForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(health_describeEventDetailsForOrganizationCmd).Standalone()
 
-	health_describeEventDetailsForOrganizationCmd.Flags().String("locale", "", "The locale (language) to return information in.")
-	health_describeEventDetailsForOrganizationCmd.Flags().String("organization-event-detail-filters", "", "A set of JSON elements that includes the `awsAccountId` and the `eventArn`.")
-	health_describeEventDetailsForOrganizationCmd.MarkFlagRequired("organization-event-detail-filters")
+		health_describeEventDetailsForOrganizationCmd.Flags().String("locale", "", "The locale (language) to return information in.")
+		health_describeEventDetailsForOrganizationCmd.Flags().String("organization-event-detail-filters", "", "A set of JSON elements that includes the `awsAccountId` and the `eventArn`.")
+		health_describeEventDetailsForOrganizationCmd.MarkFlagRequired("organization-event-detail-filters")
+	})
 	healthCmd.AddCommand(health_describeEventDetailsForOrganizationCmd)
 }

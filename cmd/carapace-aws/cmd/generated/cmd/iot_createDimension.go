@@ -12,16 +12,18 @@ var iot_createDimensionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createDimensionCmd).Standalone()
+	carapace.Gen(iot_createDimensionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createDimensionCmd).Standalone()
 
-	iot_createDimensionCmd.Flags().String("client-request-token", "", "Each dimension must have a unique client request token.")
-	iot_createDimensionCmd.Flags().String("name", "", "A unique identifier for the dimension.")
-	iot_createDimensionCmd.Flags().String("string-values", "", "Specifies the value or list of values for the dimension.")
-	iot_createDimensionCmd.Flags().String("tags", "", "Metadata that can be used to manage the dimension.")
-	iot_createDimensionCmd.Flags().String("type", "", "Specifies the type of dimension.")
-	iot_createDimensionCmd.MarkFlagRequired("client-request-token")
-	iot_createDimensionCmd.MarkFlagRequired("name")
-	iot_createDimensionCmd.MarkFlagRequired("string-values")
-	iot_createDimensionCmd.MarkFlagRequired("type")
+		iot_createDimensionCmd.Flags().String("client-request-token", "", "Each dimension must have a unique client request token.")
+		iot_createDimensionCmd.Flags().String("name", "", "A unique identifier for the dimension.")
+		iot_createDimensionCmd.Flags().String("string-values", "", "Specifies the value or list of values for the dimension.")
+		iot_createDimensionCmd.Flags().String("tags", "", "Metadata that can be used to manage the dimension.")
+		iot_createDimensionCmd.Flags().String("type", "", "Specifies the type of dimension.")
+		iot_createDimensionCmd.MarkFlagRequired("client-request-token")
+		iot_createDimensionCmd.MarkFlagRequired("name")
+		iot_createDimensionCmd.MarkFlagRequired("string-values")
+		iot_createDimensionCmd.MarkFlagRequired("type")
+	})
 	iotCmd.AddCommand(iot_createDimensionCmd)
 }

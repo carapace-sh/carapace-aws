@@ -12,9 +12,11 @@ var route53RecoveryReadiness_createCrossAccountAuthorizationCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_createCrossAccountAuthorizationCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_createCrossAccountAuthorizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_createCrossAccountAuthorizationCmd).Standalone()
 
-	route53RecoveryReadiness_createCrossAccountAuthorizationCmd.Flags().String("cross-account-authorization", "", "The cross-account authorization.")
-	route53RecoveryReadiness_createCrossAccountAuthorizationCmd.MarkFlagRequired("cross-account-authorization")
+		route53RecoveryReadiness_createCrossAccountAuthorizationCmd.Flags().String("cross-account-authorization", "", "The cross-account authorization.")
+		route53RecoveryReadiness_createCrossAccountAuthorizationCmd.MarkFlagRequired("cross-account-authorization")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_createCrossAccountAuthorizationCmd)
 }

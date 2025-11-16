@@ -12,9 +12,11 @@ var tnb_deleteSolNetworkInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_deleteSolNetworkInstanceCmd).Standalone()
+	carapace.Gen(tnb_deleteSolNetworkInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_deleteSolNetworkInstanceCmd).Standalone()
 
-	tnb_deleteSolNetworkInstanceCmd.Flags().String("ns-instance-id", "", "Network instance ID.")
-	tnb_deleteSolNetworkInstanceCmd.MarkFlagRequired("ns-instance-id")
+		tnb_deleteSolNetworkInstanceCmd.Flags().String("ns-instance-id", "", "Network instance ID.")
+		tnb_deleteSolNetworkInstanceCmd.MarkFlagRequired("ns-instance-id")
+	})
 	tnbCmd.AddCommand(tnb_deleteSolNetworkInstanceCmd)
 }

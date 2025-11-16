@@ -12,10 +12,12 @@ var sesv2_putEmailIdentityConfigurationSetAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putEmailIdentityConfigurationSetAttributesCmd).Standalone()
+	carapace.Gen(sesv2_putEmailIdentityConfigurationSetAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putEmailIdentityConfigurationSetAttributesCmd).Standalone()
 
-	sesv2_putEmailIdentityConfigurationSetAttributesCmd.Flags().String("configuration-set-name", "", "The configuration set to associate with an email identity.")
-	sesv2_putEmailIdentityConfigurationSetAttributesCmd.Flags().String("email-identity", "", "The email address or domain to associate with a configuration set.")
-	sesv2_putEmailIdentityConfigurationSetAttributesCmd.MarkFlagRequired("email-identity")
+		sesv2_putEmailIdentityConfigurationSetAttributesCmd.Flags().String("configuration-set-name", "", "The configuration set to associate with an email identity.")
+		sesv2_putEmailIdentityConfigurationSetAttributesCmd.Flags().String("email-identity", "", "The email address or domain to associate with a configuration set.")
+		sesv2_putEmailIdentityConfigurationSetAttributesCmd.MarkFlagRequired("email-identity")
+	})
 	sesv2Cmd.AddCommand(sesv2_putEmailIdentityConfigurationSetAttributesCmd)
 }

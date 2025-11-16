@@ -12,9 +12,11 @@ var trustedadvisor_getOrganizationRecommendationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(trustedadvisor_getOrganizationRecommendationCmd).Standalone()
+	carapace.Gen(trustedadvisor_getOrganizationRecommendationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(trustedadvisor_getOrganizationRecommendationCmd).Standalone()
 
-	trustedadvisor_getOrganizationRecommendationCmd.Flags().String("organization-recommendation-identifier", "", "The Recommendation identifier")
-	trustedadvisor_getOrganizationRecommendationCmd.MarkFlagRequired("organization-recommendation-identifier")
+		trustedadvisor_getOrganizationRecommendationCmd.Flags().String("organization-recommendation-identifier", "", "The Recommendation identifier")
+		trustedadvisor_getOrganizationRecommendationCmd.MarkFlagRequired("organization-recommendation-identifier")
+	})
 	trustedadvisorCmd.AddCommand(trustedadvisor_getOrganizationRecommendationCmd)
 }

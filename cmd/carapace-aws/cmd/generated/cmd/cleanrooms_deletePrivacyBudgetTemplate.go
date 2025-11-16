@@ -12,11 +12,13 @@ var cleanrooms_deletePrivacyBudgetTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_deletePrivacyBudgetTemplateCmd).Standalone()
+	carapace.Gen(cleanrooms_deletePrivacyBudgetTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_deletePrivacyBudgetTemplateCmd).Standalone()
 
-	cleanrooms_deletePrivacyBudgetTemplateCmd.Flags().String("membership-identifier", "", "A unique identifier for one of your memberships for a collaboration.")
-	cleanrooms_deletePrivacyBudgetTemplateCmd.Flags().String("privacy-budget-template-identifier", "", "A unique identifier for your privacy budget template.")
-	cleanrooms_deletePrivacyBudgetTemplateCmd.MarkFlagRequired("membership-identifier")
-	cleanrooms_deletePrivacyBudgetTemplateCmd.MarkFlagRequired("privacy-budget-template-identifier")
+		cleanrooms_deletePrivacyBudgetTemplateCmd.Flags().String("membership-identifier", "", "A unique identifier for one of your memberships for a collaboration.")
+		cleanrooms_deletePrivacyBudgetTemplateCmd.Flags().String("privacy-budget-template-identifier", "", "A unique identifier for your privacy budget template.")
+		cleanrooms_deletePrivacyBudgetTemplateCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_deletePrivacyBudgetTemplateCmd.MarkFlagRequired("privacy-budget-template-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_deletePrivacyBudgetTemplateCmd)
 }

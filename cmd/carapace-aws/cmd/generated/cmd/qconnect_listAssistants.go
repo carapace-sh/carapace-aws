@@ -12,9 +12,11 @@ var qconnect_listAssistantsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_listAssistantsCmd).Standalone()
+	carapace.Gen(qconnect_listAssistantsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_listAssistantsCmd).Standalone()
 
-	qconnect_listAssistantsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_listAssistantsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_listAssistantsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_listAssistantsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	qconnectCmd.AddCommand(qconnect_listAssistantsCmd)
 }

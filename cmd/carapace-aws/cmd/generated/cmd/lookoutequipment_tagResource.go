@@ -12,11 +12,13 @@ var lookoutequipment_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_tagResourceCmd).Standalone()
+	carapace.Gen(lookoutequipment_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_tagResourceCmd).Standalone()
 
-	lookoutequipment_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the specific resource to which the tag should be associated.")
-	lookoutequipment_tagResourceCmd.Flags().String("tags", "", "The tag or tags to be associated with a specific resource.")
-	lookoutequipment_tagResourceCmd.MarkFlagRequired("resource-arn")
-	lookoutequipment_tagResourceCmd.MarkFlagRequired("tags")
+		lookoutequipment_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the specific resource to which the tag should be associated.")
+		lookoutequipment_tagResourceCmd.Flags().String("tags", "", "The tag or tags to be associated with a specific resource.")
+		lookoutequipment_tagResourceCmd.MarkFlagRequired("resource-arn")
+		lookoutequipment_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_tagResourceCmd)
 }

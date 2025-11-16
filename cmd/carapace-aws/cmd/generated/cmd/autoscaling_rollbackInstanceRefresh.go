@@ -12,9 +12,11 @@ var autoscaling_rollbackInstanceRefreshCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_rollbackInstanceRefreshCmd).Standalone()
+	carapace.Gen(autoscaling_rollbackInstanceRefreshCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_rollbackInstanceRefreshCmd).Standalone()
 
-	autoscaling_rollbackInstanceRefreshCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_rollbackInstanceRefreshCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_rollbackInstanceRefreshCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_rollbackInstanceRefreshCmd.MarkFlagRequired("auto-scaling-group-name")
+	})
 	autoscalingCmd.AddCommand(autoscaling_rollbackInstanceRefreshCmd)
 }

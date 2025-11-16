@@ -12,9 +12,11 @@ var glue_getCustomEntityTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getCustomEntityTypeCmd).Standalone()
+	carapace.Gen(glue_getCustomEntityTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getCustomEntityTypeCmd).Standalone()
 
-	glue_getCustomEntityTypeCmd.Flags().String("name", "", "The name of the custom pattern that you want to retrieve.")
-	glue_getCustomEntityTypeCmd.MarkFlagRequired("name")
+		glue_getCustomEntityTypeCmd.Flags().String("name", "", "The name of the custom pattern that you want to retrieve.")
+		glue_getCustomEntityTypeCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_getCustomEntityTypeCmd)
 }

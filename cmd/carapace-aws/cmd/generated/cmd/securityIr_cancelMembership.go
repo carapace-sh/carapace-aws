@@ -12,9 +12,11 @@ var securityIr_cancelMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityIr_cancelMembershipCmd).Standalone()
+	carapace.Gen(securityIr_cancelMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityIr_cancelMembershipCmd).Standalone()
 
-	securityIr_cancelMembershipCmd.Flags().String("membership-id", "", "Required element used in combination with CancelMembershipRequest to identify the membership ID to cancel.")
-	securityIr_cancelMembershipCmd.MarkFlagRequired("membership-id")
+		securityIr_cancelMembershipCmd.Flags().String("membership-id", "", "Required element used in combination with CancelMembershipRequest to identify the membership ID to cancel.")
+		securityIr_cancelMembershipCmd.MarkFlagRequired("membership-id")
+	})
 	securityIrCmd.AddCommand(securityIr_cancelMembershipCmd)
 }

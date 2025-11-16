@@ -12,9 +12,11 @@ var lightsail_getRelationalDatabaseLogStreamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getRelationalDatabaseLogStreamsCmd).Standalone()
+	carapace.Gen(lightsail_getRelationalDatabaseLogStreamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getRelationalDatabaseLogStreamsCmd).Standalone()
 
-	lightsail_getRelationalDatabaseLogStreamsCmd.Flags().String("relational-database-name", "", "The name of your database for which to get log streams.")
-	lightsail_getRelationalDatabaseLogStreamsCmd.MarkFlagRequired("relational-database-name")
+		lightsail_getRelationalDatabaseLogStreamsCmd.Flags().String("relational-database-name", "", "The name of your database for which to get log streams.")
+		lightsail_getRelationalDatabaseLogStreamsCmd.MarkFlagRequired("relational-database-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getRelationalDatabaseLogStreamsCmd)
 }

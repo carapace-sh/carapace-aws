@@ -12,11 +12,13 @@ var iotdeviceadvisor_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotdeviceadvisor_untagResourceCmd).Standalone()
+	carapace.Gen(iotdeviceadvisor_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotdeviceadvisor_untagResourceCmd).Standalone()
 
-	iotdeviceadvisor_untagResourceCmd.Flags().String("resource-arn", "", "The resource ARN of an IoT Device Advisor resource.")
-	iotdeviceadvisor_untagResourceCmd.Flags().String("tag-keys", "", "List of tag keys to remove from the IoT Device Advisor resource.")
-	iotdeviceadvisor_untagResourceCmd.MarkFlagRequired("resource-arn")
-	iotdeviceadvisor_untagResourceCmd.MarkFlagRequired("tag-keys")
+		iotdeviceadvisor_untagResourceCmd.Flags().String("resource-arn", "", "The resource ARN of an IoT Device Advisor resource.")
+		iotdeviceadvisor_untagResourceCmd.Flags().String("tag-keys", "", "List of tag keys to remove from the IoT Device Advisor resource.")
+		iotdeviceadvisor_untagResourceCmd.MarkFlagRequired("resource-arn")
+		iotdeviceadvisor_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	iotdeviceadvisorCmd.AddCommand(iotdeviceadvisor_untagResourceCmd)
 }

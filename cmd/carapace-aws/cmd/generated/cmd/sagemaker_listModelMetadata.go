@@ -12,10 +12,12 @@ var sagemaker_listModelMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_listModelMetadataCmd).Standalone()
+	carapace.Gen(sagemaker_listModelMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_listModelMetadataCmd).Standalone()
 
-	sagemaker_listModelMetadataCmd.Flags().String("max-results", "", "The maximum number of models to return in the response.")
-	sagemaker_listModelMetadataCmd.Flags().String("next-token", "", "If the response to a previous `ListModelMetadataResponse` request was truncated, the response includes a NextToken.")
-	sagemaker_listModelMetadataCmd.Flags().String("search-expression", "", "One or more filters that searches for the specified resource or resources in a search.")
+		sagemaker_listModelMetadataCmd.Flags().String("max-results", "", "The maximum number of models to return in the response.")
+		sagemaker_listModelMetadataCmd.Flags().String("next-token", "", "If the response to a previous `ListModelMetadataResponse` request was truncated, the response includes a NextToken.")
+		sagemaker_listModelMetadataCmd.Flags().String("search-expression", "", "One or more filters that searches for the specified resource or resources in a search.")
+	})
 	sagemakerCmd.AddCommand(sagemaker_listModelMetadataCmd)
 }

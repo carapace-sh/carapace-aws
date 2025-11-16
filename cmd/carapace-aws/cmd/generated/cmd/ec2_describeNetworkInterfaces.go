@@ -12,14 +12,16 @@ var ec2_describeNetworkInterfacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeNetworkInterfacesCmd).Standalone()
+	carapace.Gen(ec2_describeNetworkInterfacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeNetworkInterfacesCmd).Standalone()
 
-	ec2_describeNetworkInterfacesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeNetworkInterfacesCmd.Flags().String("filters", "", "One or more filters.")
-	ec2_describeNetworkInterfacesCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	ec2_describeNetworkInterfacesCmd.Flags().String("network-interface-ids", "", "The network interface IDs.")
-	ec2_describeNetworkInterfacesCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
-	ec2_describeNetworkInterfacesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeNetworkInterfacesCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeNetworkInterfacesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeNetworkInterfacesCmd.Flags().String("filters", "", "One or more filters.")
+		ec2_describeNetworkInterfacesCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		ec2_describeNetworkInterfacesCmd.Flags().String("network-interface-ids", "", "The network interface IDs.")
+		ec2_describeNetworkInterfacesCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		ec2_describeNetworkInterfacesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeNetworkInterfacesCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeNetworkInterfacesCmd)
 }

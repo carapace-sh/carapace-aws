@@ -12,9 +12,11 @@ var emrServerless_getApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrServerless_getApplicationCmd).Standalone()
+	carapace.Gen(emrServerless_getApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrServerless_getApplicationCmd).Standalone()
 
-	emrServerless_getApplicationCmd.Flags().String("application-id", "", "The ID of the application that will be described.")
-	emrServerless_getApplicationCmd.MarkFlagRequired("application-id")
+		emrServerless_getApplicationCmd.Flags().String("application-id", "", "The ID of the application that will be described.")
+		emrServerless_getApplicationCmd.MarkFlagRequired("application-id")
+	})
 	emrServerlessCmd.AddCommand(emrServerless_getApplicationCmd)
 }

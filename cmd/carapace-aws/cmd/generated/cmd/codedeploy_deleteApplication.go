@@ -12,9 +12,11 @@ var codedeploy_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_deleteApplicationCmd).Standalone()
+	carapace.Gen(codedeploy_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_deleteApplicationCmd).Standalone()
 
-	codedeploy_deleteApplicationCmd.Flags().String("application-name", "", "The name of an CodeDeploy application associated with the user or Amazon Web Services account.")
-	codedeploy_deleteApplicationCmd.MarkFlagRequired("application-name")
+		codedeploy_deleteApplicationCmd.Flags().String("application-name", "", "The name of an CodeDeploy application associated with the user or Amazon Web Services account.")
+		codedeploy_deleteApplicationCmd.MarkFlagRequired("application-name")
+	})
 	codedeployCmd.AddCommand(codedeploy_deleteApplicationCmd)
 }

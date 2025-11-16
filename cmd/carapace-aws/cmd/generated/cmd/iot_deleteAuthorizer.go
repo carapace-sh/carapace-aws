@@ -12,9 +12,11 @@ var iot_deleteAuthorizerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteAuthorizerCmd).Standalone()
+	carapace.Gen(iot_deleteAuthorizerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteAuthorizerCmd).Standalone()
 
-	iot_deleteAuthorizerCmd.Flags().String("authorizer-name", "", "The name of the authorizer to delete.")
-	iot_deleteAuthorizerCmd.MarkFlagRequired("authorizer-name")
+		iot_deleteAuthorizerCmd.Flags().String("authorizer-name", "", "The name of the authorizer to delete.")
+		iot_deleteAuthorizerCmd.MarkFlagRequired("authorizer-name")
+	})
 	iotCmd.AddCommand(iot_deleteAuthorizerCmd)
 }

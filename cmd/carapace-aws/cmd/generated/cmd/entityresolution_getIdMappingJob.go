@@ -12,11 +12,13 @@ var entityresolution_getIdMappingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_getIdMappingJobCmd).Standalone()
+	carapace.Gen(entityresolution_getIdMappingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_getIdMappingJobCmd).Standalone()
 
-	entityresolution_getIdMappingJobCmd.Flags().String("job-id", "", "The ID of the job.")
-	entityresolution_getIdMappingJobCmd.Flags().String("workflow-name", "", "The name of the workflow.")
-	entityresolution_getIdMappingJobCmd.MarkFlagRequired("job-id")
-	entityresolution_getIdMappingJobCmd.MarkFlagRequired("workflow-name")
+		entityresolution_getIdMappingJobCmd.Flags().String("job-id", "", "The ID of the job.")
+		entityresolution_getIdMappingJobCmd.Flags().String("workflow-name", "", "The name of the workflow.")
+		entityresolution_getIdMappingJobCmd.MarkFlagRequired("job-id")
+		entityresolution_getIdMappingJobCmd.MarkFlagRequired("workflow-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_getIdMappingJobCmd)
 }

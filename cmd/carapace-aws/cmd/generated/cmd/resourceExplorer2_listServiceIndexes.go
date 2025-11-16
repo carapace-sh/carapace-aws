@@ -12,10 +12,12 @@ var resourceExplorer2_listServiceIndexesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_listServiceIndexesCmd).Standalone()
+	carapace.Gen(resourceExplorer2_listServiceIndexesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_listServiceIndexesCmd).Standalone()
 
-	resourceExplorer2_listServiceIndexesCmd.Flags().String("max-results", "", "The maximum number of index results to return in a single response.")
-	resourceExplorer2_listServiceIndexesCmd.Flags().String("next-token", "", "The pagination token from a previous `ListServiceIndexes` response.")
-	resourceExplorer2_listServiceIndexesCmd.Flags().String("regions", "", "A list of Amazon Web Services Regions to include in the search for indexes.")
+		resourceExplorer2_listServiceIndexesCmd.Flags().String("max-results", "", "The maximum number of index results to return in a single response.")
+		resourceExplorer2_listServiceIndexesCmd.Flags().String("next-token", "", "The pagination token from a previous `ListServiceIndexes` response.")
+		resourceExplorer2_listServiceIndexesCmd.Flags().String("regions", "", "A list of Amazon Web Services Regions to include in the search for indexes.")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_listServiceIndexesCmd)
 }

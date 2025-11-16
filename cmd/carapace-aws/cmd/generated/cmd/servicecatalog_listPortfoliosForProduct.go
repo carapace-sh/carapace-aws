@@ -12,12 +12,14 @@ var servicecatalog_listPortfoliosForProductCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_listPortfoliosForProductCmd).Standalone()
+	carapace.Gen(servicecatalog_listPortfoliosForProductCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_listPortfoliosForProductCmd).Standalone()
 
-	servicecatalog_listPortfoliosForProductCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_listPortfoliosForProductCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_listPortfoliosForProductCmd.Flags().String("page-token", "", "The page token for the next set of results.")
-	servicecatalog_listPortfoliosForProductCmd.Flags().String("product-id", "", "The product identifier.")
-	servicecatalog_listPortfoliosForProductCmd.MarkFlagRequired("product-id")
+		servicecatalog_listPortfoliosForProductCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_listPortfoliosForProductCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_listPortfoliosForProductCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_listPortfoliosForProductCmd.Flags().String("product-id", "", "The product identifier.")
+		servicecatalog_listPortfoliosForProductCmd.MarkFlagRequired("product-id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_listPortfoliosForProductCmd)
 }

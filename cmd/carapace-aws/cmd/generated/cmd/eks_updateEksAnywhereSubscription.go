@@ -12,15 +12,17 @@ var eks_updateEksAnywhereSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_updateEksAnywhereSubscriptionCmd).Standalone()
+	carapace.Gen(eks_updateEksAnywhereSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_updateEksAnywhereSubscriptionCmd).Standalone()
 
-	eks_updateEksAnywhereSubscriptionCmd.Flags().Bool("auto-renew", false, "A boolean indicating whether or not to automatically renew the subscription.")
-	eks_updateEksAnywhereSubscriptionCmd.Flags().String("client-request-token", "", "Unique, case-sensitive identifier to ensure the idempotency of the request.")
-	eks_updateEksAnywhereSubscriptionCmd.Flags().String("id", "", "The ID of the subscription.")
-	eks_updateEksAnywhereSubscriptionCmd.Flags().Bool("no-auto-renew", false, "A boolean indicating whether or not to automatically renew the subscription.")
-	eks_updateEksAnywhereSubscriptionCmd.MarkFlagRequired("auto-renew")
-	eks_updateEksAnywhereSubscriptionCmd.MarkFlagRequired("id")
-	eks_updateEksAnywhereSubscriptionCmd.Flag("no-auto-renew").Hidden = true
-	eks_updateEksAnywhereSubscriptionCmd.MarkFlagRequired("no-auto-renew")
+		eks_updateEksAnywhereSubscriptionCmd.Flags().Bool("auto-renew", false, "A boolean indicating whether or not to automatically renew the subscription.")
+		eks_updateEksAnywhereSubscriptionCmd.Flags().String("client-request-token", "", "Unique, case-sensitive identifier to ensure the idempotency of the request.")
+		eks_updateEksAnywhereSubscriptionCmd.Flags().String("id", "", "The ID of the subscription.")
+		eks_updateEksAnywhereSubscriptionCmd.Flags().Bool("no-auto-renew", false, "A boolean indicating whether or not to automatically renew the subscription.")
+		eks_updateEksAnywhereSubscriptionCmd.MarkFlagRequired("auto-renew")
+		eks_updateEksAnywhereSubscriptionCmd.MarkFlagRequired("id")
+		eks_updateEksAnywhereSubscriptionCmd.Flag("no-auto-renew").Hidden = true
+		eks_updateEksAnywhereSubscriptionCmd.MarkFlagRequired("no-auto-renew")
+	})
 	eksCmd.AddCommand(eks_updateEksAnywhereSubscriptionCmd)
 }

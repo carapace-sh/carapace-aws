@@ -12,15 +12,17 @@ var bedrockAgentcore_getEventCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_getEventCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_getEventCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_getEventCmd).Standalone()
 
-	bedrockAgentcore_getEventCmd.Flags().String("actor-id", "", "The identifier of the actor associated with the event.")
-	bedrockAgentcore_getEventCmd.Flags().String("event-id", "", "The identifier of the event to retrieve.")
-	bedrockAgentcore_getEventCmd.Flags().String("memory-id", "", "The identifier of the AgentCore Memory resource containing the event.")
-	bedrockAgentcore_getEventCmd.Flags().String("session-id", "", "The identifier of the session containing the event.")
-	bedrockAgentcore_getEventCmd.MarkFlagRequired("actor-id")
-	bedrockAgentcore_getEventCmd.MarkFlagRequired("event-id")
-	bedrockAgentcore_getEventCmd.MarkFlagRequired("memory-id")
-	bedrockAgentcore_getEventCmd.MarkFlagRequired("session-id")
+		bedrockAgentcore_getEventCmd.Flags().String("actor-id", "", "The identifier of the actor associated with the event.")
+		bedrockAgentcore_getEventCmd.Flags().String("event-id", "", "The identifier of the event to retrieve.")
+		bedrockAgentcore_getEventCmd.Flags().String("memory-id", "", "The identifier of the AgentCore Memory resource containing the event.")
+		bedrockAgentcore_getEventCmd.Flags().String("session-id", "", "The identifier of the session containing the event.")
+		bedrockAgentcore_getEventCmd.MarkFlagRequired("actor-id")
+		bedrockAgentcore_getEventCmd.MarkFlagRequired("event-id")
+		bedrockAgentcore_getEventCmd.MarkFlagRequired("memory-id")
+		bedrockAgentcore_getEventCmd.MarkFlagRequired("session-id")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_getEventCmd)
 }

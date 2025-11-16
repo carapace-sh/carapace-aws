@@ -12,9 +12,11 @@ var odb_getCloudExadataInfrastructureCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_getCloudExadataInfrastructureCmd).Standalone()
+	carapace.Gen(odb_getCloudExadataInfrastructureCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_getCloudExadataInfrastructureCmd).Standalone()
 
-	odb_getCloudExadataInfrastructureCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Exadata infrastructure.")
-	odb_getCloudExadataInfrastructureCmd.MarkFlagRequired("cloud-exadata-infrastructure-id")
+		odb_getCloudExadataInfrastructureCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Exadata infrastructure.")
+		odb_getCloudExadataInfrastructureCmd.MarkFlagRequired("cloud-exadata-infrastructure-id")
+	})
 	odbCmd.AddCommand(odb_getCloudExadataInfrastructureCmd)
 }

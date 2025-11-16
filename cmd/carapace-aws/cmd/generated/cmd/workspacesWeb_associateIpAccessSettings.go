@@ -12,11 +12,13 @@ var workspacesWeb_associateIpAccessSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_associateIpAccessSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_associateIpAccessSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_associateIpAccessSettingsCmd).Standalone()
 
-	workspacesWeb_associateIpAccessSettingsCmd.Flags().String("ip-access-settings-arn", "", "The ARN of the IP access settings.")
-	workspacesWeb_associateIpAccessSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
-	workspacesWeb_associateIpAccessSettingsCmd.MarkFlagRequired("ip-access-settings-arn")
-	workspacesWeb_associateIpAccessSettingsCmd.MarkFlagRequired("portal-arn")
+		workspacesWeb_associateIpAccessSettingsCmd.Flags().String("ip-access-settings-arn", "", "The ARN of the IP access settings.")
+		workspacesWeb_associateIpAccessSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
+		workspacesWeb_associateIpAccessSettingsCmd.MarkFlagRequired("ip-access-settings-arn")
+		workspacesWeb_associateIpAccessSettingsCmd.MarkFlagRequired("portal-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_associateIpAccessSettingsCmd)
 }

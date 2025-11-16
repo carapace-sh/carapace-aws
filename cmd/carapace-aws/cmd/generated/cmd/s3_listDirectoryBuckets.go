@@ -12,9 +12,11 @@ var s3_listDirectoryBucketsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_listDirectoryBucketsCmd).Standalone()
+	carapace.Gen(s3_listDirectoryBucketsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_listDirectoryBucketsCmd).Standalone()
 
-	s3_listDirectoryBucketsCmd.Flags().String("continuation-token", "", "`ContinuationToken` indicates to Amazon S3 that the list is being continued on buckets in this account with a token.")
-	s3_listDirectoryBucketsCmd.Flags().String("max-directory-buckets", "", "Maximum number of buckets to be returned in response.")
+		s3_listDirectoryBucketsCmd.Flags().String("continuation-token", "", "`ContinuationToken` indicates to Amazon S3 that the list is being continued on buckets in this account with a token.")
+		s3_listDirectoryBucketsCmd.Flags().String("max-directory-buckets", "", "Maximum number of buckets to be returned in response.")
+	})
 	s3Cmd.AddCommand(s3_listDirectoryBucketsCmd)
 }

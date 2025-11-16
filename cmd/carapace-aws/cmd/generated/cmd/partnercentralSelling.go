@@ -12,7 +12,9 @@ var partnercentralSellingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(partnercentralSellingCmd).Standalone()
+	carapace.Gen(partnercentralSellingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSellingCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(partnercentralSellingCmd)
 }

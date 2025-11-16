@@ -12,10 +12,12 @@ var cognitoIdentity_getOpenIdTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdentity_getOpenIdTokenCmd).Standalone()
+	carapace.Gen(cognitoIdentity_getOpenIdTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdentity_getOpenIdTokenCmd).Standalone()
 
-	cognitoIdentity_getOpenIdTokenCmd.Flags().String("identity-id", "", "A unique identifier in the format REGION:GUID.")
-	cognitoIdentity_getOpenIdTokenCmd.Flags().String("logins", "", "A set of optional name-value pairs that map provider names to provider tokens.")
-	cognitoIdentity_getOpenIdTokenCmd.MarkFlagRequired("identity-id")
+		cognitoIdentity_getOpenIdTokenCmd.Flags().String("identity-id", "", "A unique identifier in the format REGION:GUID.")
+		cognitoIdentity_getOpenIdTokenCmd.Flags().String("logins", "", "A set of optional name-value pairs that map provider names to provider tokens.")
+		cognitoIdentity_getOpenIdTokenCmd.MarkFlagRequired("identity-id")
+	})
 	cognitoIdentityCmd.AddCommand(cognitoIdentity_getOpenIdTokenCmd)
 }

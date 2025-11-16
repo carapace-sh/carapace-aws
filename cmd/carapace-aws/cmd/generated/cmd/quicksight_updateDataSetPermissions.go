@@ -12,13 +12,15 @@ var quicksight_updateDataSetPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_updateDataSetPermissionsCmd).Standalone()
+	carapace.Gen(quicksight_updateDataSetPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_updateDataSetPermissionsCmd).Standalone()
 
-	quicksight_updateDataSetPermissionsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
-	quicksight_updateDataSetPermissionsCmd.Flags().String("data-set-id", "", "The ID for the dataset whose permissions you want to update.")
-	quicksight_updateDataSetPermissionsCmd.Flags().String("grant-permissions", "", "The resource permissions that you want to grant to the dataset.")
-	quicksight_updateDataSetPermissionsCmd.Flags().String("revoke-permissions", "", "The resource permissions that you want to revoke from the dataset.")
-	quicksight_updateDataSetPermissionsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_updateDataSetPermissionsCmd.MarkFlagRequired("data-set-id")
+		quicksight_updateDataSetPermissionsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
+		quicksight_updateDataSetPermissionsCmd.Flags().String("data-set-id", "", "The ID for the dataset whose permissions you want to update.")
+		quicksight_updateDataSetPermissionsCmd.Flags().String("grant-permissions", "", "The resource permissions that you want to grant to the dataset.")
+		quicksight_updateDataSetPermissionsCmd.Flags().String("revoke-permissions", "", "The resource permissions that you want to revoke from the dataset.")
+		quicksight_updateDataSetPermissionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_updateDataSetPermissionsCmd.MarkFlagRequired("data-set-id")
+	})
 	quicksightCmd.AddCommand(quicksight_updateDataSetPermissionsCmd)
 }

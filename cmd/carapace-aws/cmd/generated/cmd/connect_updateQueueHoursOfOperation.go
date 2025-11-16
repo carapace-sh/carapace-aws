@@ -12,13 +12,15 @@ var connect_updateQueueHoursOfOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateQueueHoursOfOperationCmd).Standalone()
+	carapace.Gen(connect_updateQueueHoursOfOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateQueueHoursOfOperationCmd).Standalone()
 
-	connect_updateQueueHoursOfOperationCmd.Flags().String("hours-of-operation-id", "", "The identifier for the hours of operation.")
-	connect_updateQueueHoursOfOperationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateQueueHoursOfOperationCmd.Flags().String("queue-id", "", "The identifier for the queue.")
-	connect_updateQueueHoursOfOperationCmd.MarkFlagRequired("hours-of-operation-id")
-	connect_updateQueueHoursOfOperationCmd.MarkFlagRequired("instance-id")
-	connect_updateQueueHoursOfOperationCmd.MarkFlagRequired("queue-id")
+		connect_updateQueueHoursOfOperationCmd.Flags().String("hours-of-operation-id", "", "The identifier for the hours of operation.")
+		connect_updateQueueHoursOfOperationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateQueueHoursOfOperationCmd.Flags().String("queue-id", "", "The identifier for the queue.")
+		connect_updateQueueHoursOfOperationCmd.MarkFlagRequired("hours-of-operation-id")
+		connect_updateQueueHoursOfOperationCmd.MarkFlagRequired("instance-id")
+		connect_updateQueueHoursOfOperationCmd.MarkFlagRequired("queue-id")
+	})
 	connectCmd.AddCommand(connect_updateQueueHoursOfOperationCmd)
 }

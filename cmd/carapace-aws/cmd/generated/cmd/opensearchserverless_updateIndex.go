@@ -12,12 +12,14 @@ var opensearchserverless_updateIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_updateIndexCmd).Standalone()
+	carapace.Gen(opensearchserverless_updateIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_updateIndexCmd).Standalone()
 
-	opensearchserverless_updateIndexCmd.Flags().String("id", "", "The unique identifier of the collection containing the index to update.")
-	opensearchserverless_updateIndexCmd.Flags().String("index-name", "", "The name of the index to update.")
-	opensearchserverless_updateIndexCmd.Flags().String("index-schema", "", "The updated JSON schema definition for the index, including field mappings and settings.")
-	opensearchserverless_updateIndexCmd.MarkFlagRequired("id")
-	opensearchserverless_updateIndexCmd.MarkFlagRequired("index-name")
+		opensearchserverless_updateIndexCmd.Flags().String("id", "", "The unique identifier of the collection containing the index to update.")
+		opensearchserverless_updateIndexCmd.Flags().String("index-name", "", "The name of the index to update.")
+		opensearchserverless_updateIndexCmd.Flags().String("index-schema", "", "The updated JSON schema definition for the index, including field mappings and settings.")
+		opensearchserverless_updateIndexCmd.MarkFlagRequired("id")
+		opensearchserverless_updateIndexCmd.MarkFlagRequired("index-name")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_updateIndexCmd)
 }

@@ -12,11 +12,13 @@ var sesv2_createImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_createImportJobCmd).Standalone()
+	carapace.Gen(sesv2_createImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_createImportJobCmd).Standalone()
 
-	sesv2_createImportJobCmd.Flags().String("import-data-source", "", "The data source for the import job.")
-	sesv2_createImportJobCmd.Flags().String("import-destination", "", "The destination for the import job.")
-	sesv2_createImportJobCmd.MarkFlagRequired("import-data-source")
-	sesv2_createImportJobCmd.MarkFlagRequired("import-destination")
+		sesv2_createImportJobCmd.Flags().String("import-data-source", "", "The data source for the import job.")
+		sesv2_createImportJobCmd.Flags().String("import-destination", "", "The destination for the import job.")
+		sesv2_createImportJobCmd.MarkFlagRequired("import-data-source")
+		sesv2_createImportJobCmd.MarkFlagRequired("import-destination")
+	})
 	sesv2Cmd.AddCommand(sesv2_createImportJobCmd)
 }

@@ -12,9 +12,11 @@ var proton_cancelComponentDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_cancelComponentDeploymentCmd).Standalone()
+	carapace.Gen(proton_cancelComponentDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_cancelComponentDeploymentCmd).Standalone()
 
-	proton_cancelComponentDeploymentCmd.Flags().String("component-name", "", "The name of the component with the deployment to cancel.")
-	proton_cancelComponentDeploymentCmd.MarkFlagRequired("component-name")
+		proton_cancelComponentDeploymentCmd.Flags().String("component-name", "", "The name of the component with the deployment to cancel.")
+		proton_cancelComponentDeploymentCmd.MarkFlagRequired("component-name")
+	})
 	protonCmd.AddCommand(proton_cancelComponentDeploymentCmd)
 }

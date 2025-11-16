@@ -12,8 +12,10 @@ var bedrockAgentcoreControl_getTokenVaultCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_getTokenVaultCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_getTokenVaultCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_getTokenVaultCmd).Standalone()
 
-	bedrockAgentcoreControl_getTokenVaultCmd.Flags().String("token-vault-id", "", "The unique identifier of the token vault to retrieve.")
+		bedrockAgentcoreControl_getTokenVaultCmd.Flags().String("token-vault-id", "", "The unique identifier of the token vault to retrieve.")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_getTokenVaultCmd)
 }

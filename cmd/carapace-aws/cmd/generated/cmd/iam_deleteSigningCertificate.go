@@ -12,10 +12,12 @@ var iam_deleteSigningCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteSigningCertificateCmd).Standalone()
+	carapace.Gen(iam_deleteSigningCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteSigningCertificateCmd).Standalone()
 
-	iam_deleteSigningCertificateCmd.Flags().String("certificate-id", "", "The ID of the signing certificate to delete.")
-	iam_deleteSigningCertificateCmd.Flags().String("user-name", "", "The name of the user the signing certificate belongs to.")
-	iam_deleteSigningCertificateCmd.MarkFlagRequired("certificate-id")
+		iam_deleteSigningCertificateCmd.Flags().String("certificate-id", "", "The ID of the signing certificate to delete.")
+		iam_deleteSigningCertificateCmd.Flags().String("user-name", "", "The name of the user the signing certificate belongs to.")
+		iam_deleteSigningCertificateCmd.MarkFlagRequired("certificate-id")
+	})
 	iamCmd.AddCommand(iam_deleteSigningCertificateCmd)
 }

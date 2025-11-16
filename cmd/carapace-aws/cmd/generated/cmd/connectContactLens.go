@@ -12,7 +12,9 @@ var connectContactLensCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectContactLensCmd).Standalone()
+	carapace.Gen(connectContactLensCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectContactLensCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(connectContactLensCmd)
 }

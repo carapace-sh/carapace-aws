@@ -12,14 +12,16 @@ var quicksight_describeFolderPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeFolderPermissionsCmd).Standalone()
+	carapace.Gen(quicksight_describeFolderPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeFolderPermissionsCmd).Standalone()
 
-	quicksight_describeFolderPermissionsCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that contains the folder.")
-	quicksight_describeFolderPermissionsCmd.Flags().String("folder-id", "", "The ID of the folder.")
-	quicksight_describeFolderPermissionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	quicksight_describeFolderPermissionsCmd.Flags().String("namespace", "", "The namespace of the folder whose permissions you want described.")
-	quicksight_describeFolderPermissionsCmd.Flags().String("next-token", "", "A pagination token for the next set of results.")
-	quicksight_describeFolderPermissionsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeFolderPermissionsCmd.MarkFlagRequired("folder-id")
+		quicksight_describeFolderPermissionsCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that contains the folder.")
+		quicksight_describeFolderPermissionsCmd.Flags().String("folder-id", "", "The ID of the folder.")
+		quicksight_describeFolderPermissionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		quicksight_describeFolderPermissionsCmd.Flags().String("namespace", "", "The namespace of the folder whose permissions you want described.")
+		quicksight_describeFolderPermissionsCmd.Flags().String("next-token", "", "A pagination token for the next set of results.")
+		quicksight_describeFolderPermissionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeFolderPermissionsCmd.MarkFlagRequired("folder-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeFolderPermissionsCmd)
 }

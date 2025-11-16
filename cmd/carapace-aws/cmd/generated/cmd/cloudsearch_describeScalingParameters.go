@@ -12,9 +12,11 @@ var cloudsearch_describeScalingParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_describeScalingParametersCmd).Standalone()
+	carapace.Gen(cloudsearch_describeScalingParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_describeScalingParametersCmd).Standalone()
 
-	cloudsearch_describeScalingParametersCmd.Flags().String("domain-name", "", "")
-	cloudsearch_describeScalingParametersCmd.MarkFlagRequired("domain-name")
+		cloudsearch_describeScalingParametersCmd.Flags().String("domain-name", "", "")
+		cloudsearch_describeScalingParametersCmd.MarkFlagRequired("domain-name")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_describeScalingParametersCmd)
 }

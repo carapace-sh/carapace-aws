@@ -12,9 +12,11 @@ var bedrock_deleteProvisionedModelThroughputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deleteProvisionedModelThroughputCmd).Standalone()
+	carapace.Gen(bedrock_deleteProvisionedModelThroughputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deleteProvisionedModelThroughputCmd).Standalone()
 
-	bedrock_deleteProvisionedModelThroughputCmd.Flags().String("provisioned-model-id", "", "The Amazon Resource Name (ARN) or name of the Provisioned Throughput.")
-	bedrock_deleteProvisionedModelThroughputCmd.MarkFlagRequired("provisioned-model-id")
+		bedrock_deleteProvisionedModelThroughputCmd.Flags().String("provisioned-model-id", "", "The Amazon Resource Name (ARN) or name of the Provisioned Throughput.")
+		bedrock_deleteProvisionedModelThroughputCmd.MarkFlagRequired("provisioned-model-id")
+	})
 	bedrockCmd.AddCommand(bedrock_deleteProvisionedModelThroughputCmd)
 }

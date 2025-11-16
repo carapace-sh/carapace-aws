@@ -12,11 +12,13 @@ var memorydb_describeMultiRegionClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_describeMultiRegionClustersCmd).Standalone()
+	carapace.Gen(memorydb_describeMultiRegionClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_describeMultiRegionClustersCmd).Standalone()
 
-	memorydb_describeMultiRegionClustersCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	memorydb_describeMultiRegionClustersCmd.Flags().String("multi-region-cluster-name", "", "The name of a specific multi-Region cluster to describe.")
-	memorydb_describeMultiRegionClustersCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
-	memorydb_describeMultiRegionClustersCmd.Flags().String("show-cluster-details", "", "Details about the multi-Region cluster.")
+		memorydb_describeMultiRegionClustersCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		memorydb_describeMultiRegionClustersCmd.Flags().String("multi-region-cluster-name", "", "The name of a specific multi-Region cluster to describe.")
+		memorydb_describeMultiRegionClustersCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		memorydb_describeMultiRegionClustersCmd.Flags().String("show-cluster-details", "", "Details about the multi-Region cluster.")
+	})
 	memorydbCmd.AddCommand(memorydb_describeMultiRegionClustersCmd)
 }

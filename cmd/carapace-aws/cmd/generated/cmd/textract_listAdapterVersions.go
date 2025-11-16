@@ -12,12 +12,14 @@ var textract_listAdapterVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(textract_listAdapterVersionsCmd).Standalone()
+	carapace.Gen(textract_listAdapterVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(textract_listAdapterVersionsCmd).Standalone()
 
-	textract_listAdapterVersionsCmd.Flags().String("adapter-id", "", "A string containing a unique ID for the adapter to match for when listing adapter versions.")
-	textract_listAdapterVersionsCmd.Flags().String("after-creation-time", "", "Specifies the lower bound for the ListAdapterVersions operation.")
-	textract_listAdapterVersionsCmd.Flags().String("before-creation-time", "", "Specifies the upper bound for the ListAdapterVersions operation.")
-	textract_listAdapterVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return when listing adapter versions.")
-	textract_listAdapterVersionsCmd.Flags().String("next-token", "", "Identifies the next page of results to return when listing adapter versions.")
+		textract_listAdapterVersionsCmd.Flags().String("adapter-id", "", "A string containing a unique ID for the adapter to match for when listing adapter versions.")
+		textract_listAdapterVersionsCmd.Flags().String("after-creation-time", "", "Specifies the lower bound for the ListAdapterVersions operation.")
+		textract_listAdapterVersionsCmd.Flags().String("before-creation-time", "", "Specifies the upper bound for the ListAdapterVersions operation.")
+		textract_listAdapterVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return when listing adapter versions.")
+		textract_listAdapterVersionsCmd.Flags().String("next-token", "", "Identifies the next page of results to return when listing adapter versions.")
+	})
 	textractCmd.AddCommand(textract_listAdapterVersionsCmd)
 }

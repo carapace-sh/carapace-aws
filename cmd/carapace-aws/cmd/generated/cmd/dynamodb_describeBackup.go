@@ -12,9 +12,11 @@ var dynamodb_describeBackupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeBackupCmd).Standalone()
+	carapace.Gen(dynamodb_describeBackupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeBackupCmd).Standalone()
 
-	dynamodb_describeBackupCmd.Flags().String("backup-arn", "", "The Amazon Resource Name (ARN) associated with the backup.")
-	dynamodb_describeBackupCmd.MarkFlagRequired("backup-arn")
+		dynamodb_describeBackupCmd.Flags().String("backup-arn", "", "The Amazon Resource Name (ARN) associated with the backup.")
+		dynamodb_describeBackupCmd.MarkFlagRequired("backup-arn")
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeBackupCmd)
 }

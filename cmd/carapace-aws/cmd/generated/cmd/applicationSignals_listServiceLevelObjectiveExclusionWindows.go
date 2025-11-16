@@ -12,11 +12,13 @@ var applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd = &cobra.Com
 }
 
 func init() {
-	carapace.Gen(applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd).Standalone()
+	carapace.Gen(applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd).Standalone()
 
-	applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd.Flags().String("id", "", "The ID of the SLO to list exclusion windows for.")
-	applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd.Flags().String("max-results", "", "The maximum number of results to return in one operation.")
-	applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd.Flags().String("next-token", "", "Include this value, if it was returned by the previous operation, to get the next set of service level objectives.")
-	applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd.MarkFlagRequired("id")
+		applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd.Flags().String("id", "", "The ID of the SLO to list exclusion windows for.")
+		applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd.Flags().String("max-results", "", "The maximum number of results to return in one operation.")
+		applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd.Flags().String("next-token", "", "Include this value, if it was returned by the previous operation, to get the next set of service level objectives.")
+		applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd.MarkFlagRequired("id")
+	})
 	applicationSignalsCmd.AddCommand(applicationSignals_listServiceLevelObjectiveExclusionWindowsCmd)
 }

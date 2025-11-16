@@ -12,9 +12,11 @@ var lightsail_getInstanceStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getInstanceStateCmd).Standalone()
+	carapace.Gen(lightsail_getInstanceStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getInstanceStateCmd).Standalone()
 
-	lightsail_getInstanceStateCmd.Flags().String("instance-name", "", "The name of the instance to get state information about.")
-	lightsail_getInstanceStateCmd.MarkFlagRequired("instance-name")
+		lightsail_getInstanceStateCmd.Flags().String("instance-name", "", "The name of the instance to get state information about.")
+		lightsail_getInstanceStateCmd.MarkFlagRequired("instance-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getInstanceStateCmd)
 }

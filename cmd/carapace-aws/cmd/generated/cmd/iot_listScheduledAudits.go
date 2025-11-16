@@ -12,9 +12,11 @@ var iot_listScheduledAuditsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listScheduledAuditsCmd).Standalone()
+	carapace.Gen(iot_listScheduledAuditsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listScheduledAuditsCmd).Standalone()
 
-	iot_listScheduledAuditsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_listScheduledAuditsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iot_listScheduledAuditsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_listScheduledAuditsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	iotCmd.AddCommand(iot_listScheduledAuditsCmd)
 }

@@ -12,11 +12,13 @@ var sagemaker_deregisterDevicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deregisterDevicesCmd).Standalone()
+	carapace.Gen(sagemaker_deregisterDevicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deregisterDevicesCmd).Standalone()
 
-	sagemaker_deregisterDevicesCmd.Flags().String("device-fleet-name", "", "The name of the fleet the devices belong to.")
-	sagemaker_deregisterDevicesCmd.Flags().String("device-names", "", "The unique IDs of the devices.")
-	sagemaker_deregisterDevicesCmd.MarkFlagRequired("device-fleet-name")
-	sagemaker_deregisterDevicesCmd.MarkFlagRequired("device-names")
+		sagemaker_deregisterDevicesCmd.Flags().String("device-fleet-name", "", "The name of the fleet the devices belong to.")
+		sagemaker_deregisterDevicesCmd.Flags().String("device-names", "", "The unique IDs of the devices.")
+		sagemaker_deregisterDevicesCmd.MarkFlagRequired("device-fleet-name")
+		sagemaker_deregisterDevicesCmd.MarkFlagRequired("device-names")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deregisterDevicesCmd)
 }

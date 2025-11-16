@@ -12,11 +12,13 @@ var chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd).Standalone()
 
-	chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd.Flags().String("logging-configuration", "", "The logging configuration being updated.")
-	chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd.MarkFlagRequired("logging-configuration")
-	chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd.Flags().String("logging-configuration", "", "The logging configuration being updated.")
+		chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd.MarkFlagRequired("logging-configuration")
+		chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_putVoiceConnectorLoggingConfigurationCmd)
 }

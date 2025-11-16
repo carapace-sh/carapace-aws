@@ -12,9 +12,11 @@ var cognitoIdp_getUserAuthFactorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_getUserAuthFactorsCmd).Standalone()
+	carapace.Gen(cognitoIdp_getUserAuthFactorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_getUserAuthFactorsCmd).Standalone()
 
-	cognitoIdp_getUserAuthFactorsCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_getUserAuthFactorsCmd.MarkFlagRequired("access-token")
+		cognitoIdp_getUserAuthFactorsCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_getUserAuthFactorsCmd.MarkFlagRequired("access-token")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_getUserAuthFactorsCmd)
 }

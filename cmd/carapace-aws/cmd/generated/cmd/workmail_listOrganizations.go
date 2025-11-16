@@ -12,9 +12,11 @@ var workmail_listOrganizationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_listOrganizationsCmd).Standalone()
+	carapace.Gen(workmail_listOrganizationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_listOrganizationsCmd).Standalone()
 
-	workmail_listOrganizationsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	workmail_listOrganizationsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+		workmail_listOrganizationsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		workmail_listOrganizationsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+	})
 	workmailCmd.AddCommand(workmail_listOrganizationsCmd)
 }

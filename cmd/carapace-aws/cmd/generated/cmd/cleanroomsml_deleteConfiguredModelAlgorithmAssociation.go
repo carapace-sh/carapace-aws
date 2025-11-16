@@ -12,11 +12,13 @@ var cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd).Standalone()
+	carapace.Gen(cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd).Standalone()
 
-	cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd.Flags().String("configured-model-algorithm-association-arn", "", "The Amazon Resource Name (ARN) of the configured model algorithm association that you want to delete.")
-	cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd.Flags().String("membership-identifier", "", "The membership ID of the member that is deleting the configured model algorithm association.")
-	cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd.MarkFlagRequired("configured-model-algorithm-association-arn")
-	cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd.MarkFlagRequired("membership-identifier")
+		cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd.Flags().String("configured-model-algorithm-association-arn", "", "The Amazon Resource Name (ARN) of the configured model algorithm association that you want to delete.")
+		cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd.Flags().String("membership-identifier", "", "The membership ID of the member that is deleting the configured model algorithm association.")
+		cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd.MarkFlagRequired("configured-model-algorithm-association-arn")
+		cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_deleteConfiguredModelAlgorithmAssociationCmd)
 }

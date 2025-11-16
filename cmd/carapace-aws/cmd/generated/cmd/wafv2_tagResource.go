@@ -12,11 +12,13 @@ var wafv2_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_tagResourceCmd).Standalone()
+	carapace.Gen(wafv2_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_tagResourceCmd).Standalone()
 
-	wafv2_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	wafv2_tagResourceCmd.Flags().String("tags", "", "An array of key:value pairs to associate with the resource.")
-	wafv2_tagResourceCmd.MarkFlagRequired("resource-arn")
-	wafv2_tagResourceCmd.MarkFlagRequired("tags")
+		wafv2_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		wafv2_tagResourceCmd.Flags().String("tags", "", "An array of key:value pairs to associate with the resource.")
+		wafv2_tagResourceCmd.MarkFlagRequired("resource-arn")
+		wafv2_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	wafv2Cmd.AddCommand(wafv2_tagResourceCmd)
 }

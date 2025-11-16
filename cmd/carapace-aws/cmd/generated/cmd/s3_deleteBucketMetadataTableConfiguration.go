@@ -12,10 +12,12 @@ var s3_deleteBucketMetadataTableConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_deleteBucketMetadataTableConfigurationCmd).Standalone()
+	carapace.Gen(s3_deleteBucketMetadataTableConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_deleteBucketMetadataTableConfigurationCmd).Standalone()
 
-	s3_deleteBucketMetadataTableConfigurationCmd.Flags().String("bucket", "", "The general purpose bucket that you want to remove the metadata table configuration from.")
-	s3_deleteBucketMetadataTableConfigurationCmd.Flags().String("expected-bucket-owner", "", "The expected bucket owner of the general purpose bucket that you want to remove the metadata table configuration from.")
-	s3_deleteBucketMetadataTableConfigurationCmd.MarkFlagRequired("bucket")
+		s3_deleteBucketMetadataTableConfigurationCmd.Flags().String("bucket", "", "The general purpose bucket that you want to remove the metadata table configuration from.")
+		s3_deleteBucketMetadataTableConfigurationCmd.Flags().String("expected-bucket-owner", "", "The expected bucket owner of the general purpose bucket that you want to remove the metadata table configuration from.")
+		s3_deleteBucketMetadataTableConfigurationCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_deleteBucketMetadataTableConfigurationCmd)
 }

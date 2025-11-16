@@ -12,9 +12,11 @@ var devicefarm_getDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_getDeviceCmd).Standalone()
+	carapace.Gen(devicefarm_getDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_getDeviceCmd).Standalone()
 
-	devicefarm_getDeviceCmd.Flags().String("arn", "", "The device type's ARN.")
-	devicefarm_getDeviceCmd.MarkFlagRequired("arn")
+		devicefarm_getDeviceCmd.Flags().String("arn", "", "The device type's ARN.")
+		devicefarm_getDeviceCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_getDeviceCmd)
 }

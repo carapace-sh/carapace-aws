@@ -12,10 +12,12 @@ var datasync_updateLocationFsxLustreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_updateLocationFsxLustreCmd).Standalone()
+	carapace.Gen(datasync_updateLocationFsxLustreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_updateLocationFsxLustreCmd).Standalone()
 
-	datasync_updateLocationFsxLustreCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the FSx for Lustre transfer location that you're updating.")
-	datasync_updateLocationFsxLustreCmd.Flags().String("subdirectory", "", "Specifies a mount path for your FSx for Lustre file system.")
-	datasync_updateLocationFsxLustreCmd.MarkFlagRequired("location-arn")
+		datasync_updateLocationFsxLustreCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the FSx for Lustre transfer location that you're updating.")
+		datasync_updateLocationFsxLustreCmd.Flags().String("subdirectory", "", "Specifies a mount path for your FSx for Lustre file system.")
+		datasync_updateLocationFsxLustreCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_updateLocationFsxLustreCmd)
 }

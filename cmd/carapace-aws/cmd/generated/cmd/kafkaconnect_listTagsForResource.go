@@ -12,9 +12,11 @@ var kafkaconnect_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnect_listTagsForResourceCmd).Standalone()
+	carapace.Gen(kafkaconnect_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnect_listTagsForResourceCmd).Standalone()
 
-	kafkaconnect_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want to list all attached tags.")
-	kafkaconnect_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		kafkaconnect_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want to list all attached tags.")
+		kafkaconnect_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	kafkaconnectCmd.AddCommand(kafkaconnect_listTagsForResourceCmd)
 }

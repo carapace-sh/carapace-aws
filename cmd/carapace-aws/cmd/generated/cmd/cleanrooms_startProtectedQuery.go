@@ -12,15 +12,17 @@ var cleanrooms_startProtectedQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_startProtectedQueryCmd).Standalone()
+	carapace.Gen(cleanrooms_startProtectedQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_startProtectedQueryCmd).Standalone()
 
-	cleanrooms_startProtectedQueryCmd.Flags().String("compute-configuration", "", "The compute configuration for the protected query.")
-	cleanrooms_startProtectedQueryCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership to run this query against.")
-	cleanrooms_startProtectedQueryCmd.Flags().String("result-configuration", "", "The details needed to write the query results.")
-	cleanrooms_startProtectedQueryCmd.Flags().String("sql-parameters", "", "The protected SQL query parameters.")
-	cleanrooms_startProtectedQueryCmd.Flags().String("type", "", "The type of the protected query to be started.")
-	cleanrooms_startProtectedQueryCmd.MarkFlagRequired("membership-identifier")
-	cleanrooms_startProtectedQueryCmd.MarkFlagRequired("sql-parameters")
-	cleanrooms_startProtectedQueryCmd.MarkFlagRequired("type")
+		cleanrooms_startProtectedQueryCmd.Flags().String("compute-configuration", "", "The compute configuration for the protected query.")
+		cleanrooms_startProtectedQueryCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership to run this query against.")
+		cleanrooms_startProtectedQueryCmd.Flags().String("result-configuration", "", "The details needed to write the query results.")
+		cleanrooms_startProtectedQueryCmd.Flags().String("sql-parameters", "", "The protected SQL query parameters.")
+		cleanrooms_startProtectedQueryCmd.Flags().String("type", "", "The type of the protected query to be started.")
+		cleanrooms_startProtectedQueryCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_startProtectedQueryCmd.MarkFlagRequired("sql-parameters")
+		cleanrooms_startProtectedQueryCmd.MarkFlagRequired("type")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_startProtectedQueryCmd)
 }

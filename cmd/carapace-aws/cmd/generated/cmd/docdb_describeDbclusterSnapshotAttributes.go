@@ -12,9 +12,11 @@ var docdb_describeDbclusterSnapshotAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_describeDbclusterSnapshotAttributesCmd).Standalone()
+	carapace.Gen(docdb_describeDbclusterSnapshotAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_describeDbclusterSnapshotAttributesCmd).Standalone()
 
-	docdb_describeDbclusterSnapshotAttributesCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier for the cluster snapshot to describe the attributes for.")
-	docdb_describeDbclusterSnapshotAttributesCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+		docdb_describeDbclusterSnapshotAttributesCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier for the cluster snapshot to describe the attributes for.")
+		docdb_describeDbclusterSnapshotAttributesCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+	})
 	docdbCmd.AddCommand(docdb_describeDbclusterSnapshotAttributesCmd)
 }

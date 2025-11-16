@@ -12,7 +12,9 @@ var backup_getSupportedResourceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_getSupportedResourceTypesCmd).Standalone()
+	carapace.Gen(backup_getSupportedResourceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_getSupportedResourceTypesCmd).Standalone()
 
+	})
 	backupCmd.AddCommand(backup_getSupportedResourceTypesCmd)
 }

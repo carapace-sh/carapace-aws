@@ -12,11 +12,13 @@ var budgets_describeBudgetNotificationsForAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(budgets_describeBudgetNotificationsForAccountCmd).Standalone()
+	carapace.Gen(budgets_describeBudgetNotificationsForAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(budgets_describeBudgetNotificationsForAccountCmd).Standalone()
 
-	budgets_describeBudgetNotificationsForAccountCmd.Flags().String("account-id", "", "")
-	budgets_describeBudgetNotificationsForAccountCmd.Flags().String("max-results", "", "An integer that represents how many budgets a paginated response contains.")
-	budgets_describeBudgetNotificationsForAccountCmd.Flags().String("next-token", "", "")
-	budgets_describeBudgetNotificationsForAccountCmd.MarkFlagRequired("account-id")
+		budgets_describeBudgetNotificationsForAccountCmd.Flags().String("account-id", "", "")
+		budgets_describeBudgetNotificationsForAccountCmd.Flags().String("max-results", "", "An integer that represents how many budgets a paginated response contains.")
+		budgets_describeBudgetNotificationsForAccountCmd.Flags().String("next-token", "", "")
+		budgets_describeBudgetNotificationsForAccountCmd.MarkFlagRequired("account-id")
+	})
 	budgetsCmd.AddCommand(budgets_describeBudgetNotificationsForAccountCmd)
 }

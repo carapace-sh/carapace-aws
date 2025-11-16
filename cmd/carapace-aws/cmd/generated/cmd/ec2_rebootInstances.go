@@ -12,12 +12,14 @@ var ec2_rebootInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_rebootInstancesCmd).Standalone()
+	carapace.Gen(ec2_rebootInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_rebootInstancesCmd).Standalone()
 
-	ec2_rebootInstancesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_rebootInstancesCmd.Flags().String("instance-ids", "", "The instance IDs.")
-	ec2_rebootInstancesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_rebootInstancesCmd.MarkFlagRequired("instance-ids")
-	ec2_rebootInstancesCmd.Flag("no-dry-run").Hidden = true
+		ec2_rebootInstancesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_rebootInstancesCmd.Flags().String("instance-ids", "", "The instance IDs.")
+		ec2_rebootInstancesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_rebootInstancesCmd.MarkFlagRequired("instance-ids")
+		ec2_rebootInstancesCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_rebootInstancesCmd)
 }

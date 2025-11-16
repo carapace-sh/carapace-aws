@@ -12,9 +12,11 @@ var translate_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_listTagsForResourceCmd).Standalone()
+	carapace.Gen(translate_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_listTagsForResourceCmd).Standalone()
 
-	translate_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the given Amazon Translate resource you are querying.")
-	translate_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		translate_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the given Amazon Translate resource you are querying.")
+		translate_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	translateCmd.AddCommand(translate_listTagsForResourceCmd)
 }

@@ -12,10 +12,12 @@ var savingsplans_returnSavingsPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(savingsplans_returnSavingsPlanCmd).Standalone()
+	carapace.Gen(savingsplans_returnSavingsPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(savingsplans_returnSavingsPlanCmd).Standalone()
 
-	savingsplans_returnSavingsPlanCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	savingsplans_returnSavingsPlanCmd.Flags().String("savings-plan-id", "", "The ID of the Savings Plan.")
-	savingsplans_returnSavingsPlanCmd.MarkFlagRequired("savings-plan-id")
+		savingsplans_returnSavingsPlanCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		savingsplans_returnSavingsPlanCmd.Flags().String("savings-plan-id", "", "The ID of the Savings Plan.")
+		savingsplans_returnSavingsPlanCmd.MarkFlagRequired("savings-plan-id")
+	})
 	savingsplansCmd.AddCommand(savingsplans_returnSavingsPlanCmd)
 }

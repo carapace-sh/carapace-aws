@@ -12,11 +12,13 @@ var connect_deleteUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteUserCmd).Standalone()
+	carapace.Gen(connect_deleteUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteUserCmd).Standalone()
 
-	connect_deleteUserCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteUserCmd.Flags().String("user-id", "", "The identifier of the user.")
-	connect_deleteUserCmd.MarkFlagRequired("instance-id")
-	connect_deleteUserCmd.MarkFlagRequired("user-id")
+		connect_deleteUserCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteUserCmd.Flags().String("user-id", "", "The identifier of the user.")
+		connect_deleteUserCmd.MarkFlagRequired("instance-id")
+		connect_deleteUserCmd.MarkFlagRequired("user-id")
+	})
 	connectCmd.AddCommand(connect_deleteUserCmd)
 }

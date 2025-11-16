@@ -12,9 +12,11 @@ var ec2_cancelReservedInstancesListingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_cancelReservedInstancesListingCmd).Standalone()
+	carapace.Gen(ec2_cancelReservedInstancesListingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_cancelReservedInstancesListingCmd).Standalone()
 
-	ec2_cancelReservedInstancesListingCmd.Flags().String("reserved-instances-listing-id", "", "The ID of the Reserved Instance listing.")
-	ec2_cancelReservedInstancesListingCmd.MarkFlagRequired("reserved-instances-listing-id")
+		ec2_cancelReservedInstancesListingCmd.Flags().String("reserved-instances-listing-id", "", "The ID of the Reserved Instance listing.")
+		ec2_cancelReservedInstancesListingCmd.MarkFlagRequired("reserved-instances-listing-id")
+	})
 	ec2Cmd.AddCommand(ec2_cancelReservedInstancesListingCmd)
 }

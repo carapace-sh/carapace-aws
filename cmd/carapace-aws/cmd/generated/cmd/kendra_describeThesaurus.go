@@ -12,11 +12,13 @@ var kendra_describeThesaurusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_describeThesaurusCmd).Standalone()
+	carapace.Gen(kendra_describeThesaurusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_describeThesaurusCmd).Standalone()
 
-	kendra_describeThesaurusCmd.Flags().String("id", "", "The identifier of the thesaurus you want to get information on.")
-	kendra_describeThesaurusCmd.Flags().String("index-id", "", "The identifier of the index for the thesaurus.")
-	kendra_describeThesaurusCmd.MarkFlagRequired("id")
-	kendra_describeThesaurusCmd.MarkFlagRequired("index-id")
+		kendra_describeThesaurusCmd.Flags().String("id", "", "The identifier of the thesaurus you want to get information on.")
+		kendra_describeThesaurusCmd.Flags().String("index-id", "", "The identifier of the index for the thesaurus.")
+		kendra_describeThesaurusCmd.MarkFlagRequired("id")
+		kendra_describeThesaurusCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_describeThesaurusCmd)
 }

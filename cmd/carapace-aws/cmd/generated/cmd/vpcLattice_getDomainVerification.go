@@ -12,9 +12,11 @@ var vpcLattice_getDomainVerificationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getDomainVerificationCmd).Standalone()
+	carapace.Gen(vpcLattice_getDomainVerificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getDomainVerificationCmd).Standalone()
 
-	vpcLattice_getDomainVerificationCmd.Flags().String("domain-verification-identifier", "", "The ID or ARN of the domain verification to retrieve.")
-	vpcLattice_getDomainVerificationCmd.MarkFlagRequired("domain-verification-identifier")
+		vpcLattice_getDomainVerificationCmd.Flags().String("domain-verification-identifier", "", "The ID or ARN of the domain verification to retrieve.")
+		vpcLattice_getDomainVerificationCmd.MarkFlagRequired("domain-verification-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getDomainVerificationCmd)
 }

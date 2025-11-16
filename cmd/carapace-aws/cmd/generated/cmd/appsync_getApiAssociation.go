@@ -12,9 +12,11 @@ var appsync_getApiAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_getApiAssociationCmd).Standalone()
+	carapace.Gen(appsync_getApiAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_getApiAssociationCmd).Standalone()
 
-	appsync_getApiAssociationCmd.Flags().String("domain-name", "", "The domain name.")
-	appsync_getApiAssociationCmd.MarkFlagRequired("domain-name")
+		appsync_getApiAssociationCmd.Flags().String("domain-name", "", "The domain name.")
+		appsync_getApiAssociationCmd.MarkFlagRequired("domain-name")
+	})
 	appsyncCmd.AddCommand(appsync_getApiAssociationCmd)
 }

@@ -12,10 +12,12 @@ var resiliencehub_updateAppVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_updateAppVersionCmd).Standalone()
+	carapace.Gen(resiliencehub_updateAppVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_updateAppVersionCmd).Standalone()
 
-	resiliencehub_updateAppVersionCmd.Flags().String("additional-info", "", "Additional configuration parameters for an Resilience Hub application.")
-	resiliencehub_updateAppVersionCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
-	resiliencehub_updateAppVersionCmd.MarkFlagRequired("app-arn")
+		resiliencehub_updateAppVersionCmd.Flags().String("additional-info", "", "Additional configuration parameters for an Resilience Hub application.")
+		resiliencehub_updateAppVersionCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
+		resiliencehub_updateAppVersionCmd.MarkFlagRequired("app-arn")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_updateAppVersionCmd)
 }

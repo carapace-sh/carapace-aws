@@ -12,13 +12,15 @@ var ebs_listChangedBlocksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ebs_listChangedBlocksCmd).Standalone()
+	carapace.Gen(ebs_listChangedBlocksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ebs_listChangedBlocksCmd).Standalone()
 
-	ebs_listChangedBlocksCmd.Flags().String("first-snapshot-id", "", "The ID of the first snapshot to use for the comparison.")
-	ebs_listChangedBlocksCmd.Flags().String("max-results", "", "The maximum number of blocks to be returned by the request.")
-	ebs_listChangedBlocksCmd.Flags().String("next-token", "", "The token to request the next page of results.")
-	ebs_listChangedBlocksCmd.Flags().String("second-snapshot-id", "", "The ID of the second snapshot to use for the comparison.")
-	ebs_listChangedBlocksCmd.Flags().String("starting-block-index", "", "The block index from which the comparison should start.")
-	ebs_listChangedBlocksCmd.MarkFlagRequired("second-snapshot-id")
+		ebs_listChangedBlocksCmd.Flags().String("first-snapshot-id", "", "The ID of the first snapshot to use for the comparison.")
+		ebs_listChangedBlocksCmd.Flags().String("max-results", "", "The maximum number of blocks to be returned by the request.")
+		ebs_listChangedBlocksCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		ebs_listChangedBlocksCmd.Flags().String("second-snapshot-id", "", "The ID of the second snapshot to use for the comparison.")
+		ebs_listChangedBlocksCmd.Flags().String("starting-block-index", "", "The block index from which the comparison should start.")
+		ebs_listChangedBlocksCmd.MarkFlagRequired("second-snapshot-id")
+	})
 	ebsCmd.AddCommand(ebs_listChangedBlocksCmd)
 }

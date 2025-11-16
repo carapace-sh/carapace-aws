@@ -12,11 +12,13 @@ var translate_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_tagResourceCmd).Standalone()
+	carapace.Gen(translate_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_tagResourceCmd).Standalone()
 
-	translate_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the given Amazon Translate resource to which you want to associate the tags.")
-	translate_tagResourceCmd.Flags().String("tags", "", "Tags being associated with a specific Amazon Translate resource.")
-	translate_tagResourceCmd.MarkFlagRequired("resource-arn")
-	translate_tagResourceCmd.MarkFlagRequired("tags")
+		translate_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the given Amazon Translate resource to which you want to associate the tags.")
+		translate_tagResourceCmd.Flags().String("tags", "", "Tags being associated with a specific Amazon Translate resource.")
+		translate_tagResourceCmd.MarkFlagRequired("resource-arn")
+		translate_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	translateCmd.AddCommand(translate_tagResourceCmd)
 }

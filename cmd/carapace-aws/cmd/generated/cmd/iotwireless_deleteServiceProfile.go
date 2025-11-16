@@ -12,9 +12,11 @@ var iotwireless_deleteServiceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_deleteServiceProfileCmd).Standalone()
+	carapace.Gen(iotwireless_deleteServiceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_deleteServiceProfileCmd).Standalone()
 
-	iotwireless_deleteServiceProfileCmd.Flags().String("id", "", "The ID of the resource to delete.")
-	iotwireless_deleteServiceProfileCmd.MarkFlagRequired("id")
+		iotwireless_deleteServiceProfileCmd.Flags().String("id", "", "The ID of the resource to delete.")
+		iotwireless_deleteServiceProfileCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_deleteServiceProfileCmd)
 }

@@ -12,7 +12,9 @@ var grafanaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafanaCmd).Standalone()
+	carapace.Gen(grafanaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafanaCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(grafanaCmd)
 }

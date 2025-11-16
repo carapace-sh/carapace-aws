@@ -12,9 +12,11 @@ var waf_listLoggingConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_listLoggingConfigurationsCmd).Standalone()
+	carapace.Gen(waf_listLoggingConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_listLoggingConfigurationsCmd).Standalone()
 
-	waf_listLoggingConfigurationsCmd.Flags().String("limit", "", "Specifies the number of `LoggingConfigurations` that you want AWS WAF to return for this request.")
-	waf_listLoggingConfigurationsCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `LoggingConfigurations` than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `LoggingConfigurations`.")
+		waf_listLoggingConfigurationsCmd.Flags().String("limit", "", "Specifies the number of `LoggingConfigurations` that you want AWS WAF to return for this request.")
+		waf_listLoggingConfigurationsCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `LoggingConfigurations` than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `LoggingConfigurations`.")
+	})
 	wafCmd.AddCommand(waf_listLoggingConfigurationsCmd)
 }

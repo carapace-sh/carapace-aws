@@ -12,11 +12,13 @@ var wafRegional_deleteSizeConstraintSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_deleteSizeConstraintSetCmd).Standalone()
+	carapace.Gen(wafRegional_deleteSizeConstraintSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_deleteSizeConstraintSetCmd).Standalone()
 
-	wafRegional_deleteSizeConstraintSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	wafRegional_deleteSizeConstraintSetCmd.Flags().String("size-constraint-set-id", "", "The `SizeConstraintSetId` of the [SizeConstraintSet]() that you want to delete.")
-	wafRegional_deleteSizeConstraintSetCmd.MarkFlagRequired("change-token")
-	wafRegional_deleteSizeConstraintSetCmd.MarkFlagRequired("size-constraint-set-id")
+		wafRegional_deleteSizeConstraintSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		wafRegional_deleteSizeConstraintSetCmd.Flags().String("size-constraint-set-id", "", "The `SizeConstraintSetId` of the [SizeConstraintSet]() that you want to delete.")
+		wafRegional_deleteSizeConstraintSetCmd.MarkFlagRequired("change-token")
+		wafRegional_deleteSizeConstraintSetCmd.MarkFlagRequired("size-constraint-set-id")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_deleteSizeConstraintSetCmd)
 }

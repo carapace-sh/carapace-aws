@@ -12,12 +12,14 @@ var ec2_deleteCustomerGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteCustomerGatewayCmd).Standalone()
+	carapace.Gen(ec2_deleteCustomerGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteCustomerGatewayCmd).Standalone()
 
-	ec2_deleteCustomerGatewayCmd.Flags().String("customer-gateway-id", "", "The ID of the customer gateway.")
-	ec2_deleteCustomerGatewayCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteCustomerGatewayCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteCustomerGatewayCmd.MarkFlagRequired("customer-gateway-id")
-	ec2_deleteCustomerGatewayCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteCustomerGatewayCmd.Flags().String("customer-gateway-id", "", "The ID of the customer gateway.")
+		ec2_deleteCustomerGatewayCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteCustomerGatewayCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteCustomerGatewayCmd.MarkFlagRequired("customer-gateway-id")
+		ec2_deleteCustomerGatewayCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_deleteCustomerGatewayCmd)
 }

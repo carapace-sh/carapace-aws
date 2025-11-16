@@ -12,9 +12,11 @@ var fis_listExperimentTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_listExperimentTemplatesCmd).Standalone()
+	carapace.Gen(fis_listExperimentTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_listExperimentTemplatesCmd).Standalone()
 
-	fis_listExperimentTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	fis_listExperimentTemplatesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		fis_listExperimentTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		fis_listExperimentTemplatesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	fisCmd.AddCommand(fis_listExperimentTemplatesCmd)
 }

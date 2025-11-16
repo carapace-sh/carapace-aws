@@ -12,9 +12,11 @@ var networkmonitor_getMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmonitor_getMonitorCmd).Standalone()
+	carapace.Gen(networkmonitor_getMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmonitor_getMonitorCmd).Standalone()
 
-	networkmonitor_getMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor that details are returned for.")
-	networkmonitor_getMonitorCmd.MarkFlagRequired("monitor-name")
+		networkmonitor_getMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor that details are returned for.")
+		networkmonitor_getMonitorCmd.MarkFlagRequired("monitor-name")
+	})
 	networkmonitorCmd.AddCommand(networkmonitor_getMonitorCmd)
 }

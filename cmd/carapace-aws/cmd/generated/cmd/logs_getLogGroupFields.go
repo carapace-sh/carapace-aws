@@ -12,10 +12,12 @@ var logs_getLogGroupFieldsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_getLogGroupFieldsCmd).Standalone()
+	carapace.Gen(logs_getLogGroupFieldsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_getLogGroupFieldsCmd).Standalone()
 
-	logs_getLogGroupFieldsCmd.Flags().String("log-group-identifier", "", "Specify either the name or ARN of the log group to view.")
-	logs_getLogGroupFieldsCmd.Flags().String("log-group-name", "", "The name of the log group to search.")
-	logs_getLogGroupFieldsCmd.Flags().String("time", "", "The time to set as the center of the query.")
+		logs_getLogGroupFieldsCmd.Flags().String("log-group-identifier", "", "Specify either the name or ARN of the log group to view.")
+		logs_getLogGroupFieldsCmd.Flags().String("log-group-name", "", "The name of the log group to search.")
+		logs_getLogGroupFieldsCmd.Flags().String("time", "", "The time to set as the center of the query.")
+	})
 	logsCmd.AddCommand(logs_getLogGroupFieldsCmd)
 }

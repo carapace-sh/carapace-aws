@@ -12,14 +12,16 @@ var ec2_modifyInstanceMetadataDefaultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_modifyInstanceMetadataDefaultsCmd).Standalone()
+	carapace.Gen(ec2_modifyInstanceMetadataDefaultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_modifyInstanceMetadataDefaultsCmd).Standalone()
 
-	ec2_modifyInstanceMetadataDefaultsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_modifyInstanceMetadataDefaultsCmd.Flags().String("http-endpoint", "", "Enables or disables the IMDS endpoint on an instance.")
-	ec2_modifyInstanceMetadataDefaultsCmd.Flags().String("http-put-response-hop-limit", "", "The maximum number of hops that the metadata token can travel.")
-	ec2_modifyInstanceMetadataDefaultsCmd.Flags().String("http-tokens", "", "Indicates whether IMDSv2 is required.")
-	ec2_modifyInstanceMetadataDefaultsCmd.Flags().String("instance-metadata-tags", "", "Enables or disables access to an instance's tags from the instance metadata.")
-	ec2_modifyInstanceMetadataDefaultsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_modifyInstanceMetadataDefaultsCmd.Flag("no-dry-run").Hidden = true
+		ec2_modifyInstanceMetadataDefaultsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_modifyInstanceMetadataDefaultsCmd.Flags().String("http-endpoint", "", "Enables or disables the IMDS endpoint on an instance.")
+		ec2_modifyInstanceMetadataDefaultsCmd.Flags().String("http-put-response-hop-limit", "", "The maximum number of hops that the metadata token can travel.")
+		ec2_modifyInstanceMetadataDefaultsCmd.Flags().String("http-tokens", "", "Indicates whether IMDSv2 is required.")
+		ec2_modifyInstanceMetadataDefaultsCmd.Flags().String("instance-metadata-tags", "", "Enables or disables access to an instance's tags from the instance metadata.")
+		ec2_modifyInstanceMetadataDefaultsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_modifyInstanceMetadataDefaultsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_modifyInstanceMetadataDefaultsCmd)
 }

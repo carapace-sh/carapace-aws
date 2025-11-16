@@ -12,9 +12,11 @@ var proton_listServicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_listServicesCmd).Standalone()
+	carapace.Gen(proton_listServicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_listServicesCmd).Standalone()
 
-	proton_listServicesCmd.Flags().String("max-results", "", "The maximum number of services to list.")
-	proton_listServicesCmd.Flags().String("next-token", "", "A token that indicates the location of the next service in the array of services, after the list of services that was previously requested.")
+		proton_listServicesCmd.Flags().String("max-results", "", "The maximum number of services to list.")
+		proton_listServicesCmd.Flags().String("next-token", "", "A token that indicates the location of the next service in the array of services, after the list of services that was previously requested.")
+	})
 	protonCmd.AddCommand(proton_listServicesCmd)
 }

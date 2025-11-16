@@ -12,7 +12,9 @@ var iam_listSamlprovidersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_listSamlprovidersCmd).Standalone()
+	carapace.Gen(iam_listSamlprovidersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_listSamlprovidersCmd).Standalone()
 
+	})
 	iamCmd.AddCommand(iam_listSamlprovidersCmd)
 }

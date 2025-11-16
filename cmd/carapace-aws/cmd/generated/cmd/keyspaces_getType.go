@@ -12,11 +12,13 @@ var keyspaces_getTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspaces_getTypeCmd).Standalone()
+	carapace.Gen(keyspaces_getTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspaces_getTypeCmd).Standalone()
 
-	keyspaces_getTypeCmd.Flags().String("keyspace-name", "", "The name of the keyspace that contains this type.")
-	keyspaces_getTypeCmd.Flags().String("type-name", "", "The formatted name of the type.")
-	keyspaces_getTypeCmd.MarkFlagRequired("keyspace-name")
-	keyspaces_getTypeCmd.MarkFlagRequired("type-name")
+		keyspaces_getTypeCmd.Flags().String("keyspace-name", "", "The name of the keyspace that contains this type.")
+		keyspaces_getTypeCmd.Flags().String("type-name", "", "The formatted name of the type.")
+		keyspaces_getTypeCmd.MarkFlagRequired("keyspace-name")
+		keyspaces_getTypeCmd.MarkFlagRequired("type-name")
+	})
 	keyspacesCmd.AddCommand(keyspaces_getTypeCmd)
 }

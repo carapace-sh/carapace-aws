@@ -12,9 +12,11 @@ var medialive_describeInputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeInputCmd).Standalone()
+	carapace.Gen(medialive_describeInputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeInputCmd).Standalone()
 
-	medialive_describeInputCmd.Flags().String("input-id", "", "Unique ID of the input")
-	medialive_describeInputCmd.MarkFlagRequired("input-id")
+		medialive_describeInputCmd.Flags().String("input-id", "", "Unique ID of the input")
+		medialive_describeInputCmd.MarkFlagRequired("input-id")
+	})
 	medialiveCmd.AddCommand(medialive_describeInputCmd)
 }

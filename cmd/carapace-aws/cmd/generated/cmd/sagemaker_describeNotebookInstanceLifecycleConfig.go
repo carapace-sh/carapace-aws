@@ -12,9 +12,11 @@ var sagemaker_describeNotebookInstanceLifecycleConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeNotebookInstanceLifecycleConfigCmd).Standalone()
+	carapace.Gen(sagemaker_describeNotebookInstanceLifecycleConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeNotebookInstanceLifecycleConfigCmd).Standalone()
 
-	sagemaker_describeNotebookInstanceLifecycleConfigCmd.Flags().String("notebook-instance-lifecycle-config-name", "", "The name of the lifecycle configuration to describe.")
-	sagemaker_describeNotebookInstanceLifecycleConfigCmd.MarkFlagRequired("notebook-instance-lifecycle-config-name")
+		sagemaker_describeNotebookInstanceLifecycleConfigCmd.Flags().String("notebook-instance-lifecycle-config-name", "", "The name of the lifecycle configuration to describe.")
+		sagemaker_describeNotebookInstanceLifecycleConfigCmd.MarkFlagRequired("notebook-instance-lifecycle-config-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeNotebookInstanceLifecycleConfigCmd)
 }

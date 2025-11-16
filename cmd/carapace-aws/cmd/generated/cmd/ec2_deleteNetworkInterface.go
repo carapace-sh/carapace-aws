@@ -12,12 +12,14 @@ var ec2_deleteNetworkInterfaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteNetworkInterfaceCmd).Standalone()
+	carapace.Gen(ec2_deleteNetworkInterfaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteNetworkInterfaceCmd).Standalone()
 
-	ec2_deleteNetworkInterfaceCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteNetworkInterfaceCmd.Flags().String("network-interface-id", "", "The ID of the network interface.")
-	ec2_deleteNetworkInterfaceCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteNetworkInterfaceCmd.MarkFlagRequired("network-interface-id")
-	ec2_deleteNetworkInterfaceCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteNetworkInterfaceCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteNetworkInterfaceCmd.Flags().String("network-interface-id", "", "The ID of the network interface.")
+		ec2_deleteNetworkInterfaceCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteNetworkInterfaceCmd.MarkFlagRequired("network-interface-id")
+		ec2_deleteNetworkInterfaceCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_deleteNetworkInterfaceCmd)
 }

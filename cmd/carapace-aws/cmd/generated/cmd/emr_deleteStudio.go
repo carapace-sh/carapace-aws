@@ -12,9 +12,11 @@ var emr_deleteStudioCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_deleteStudioCmd).Standalone()
+	carapace.Gen(emr_deleteStudioCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_deleteStudioCmd).Standalone()
 
-	emr_deleteStudioCmd.Flags().String("studio-id", "", "The ID of the Amazon EMR Studio.")
-	emr_deleteStudioCmd.MarkFlagRequired("studio-id")
+		emr_deleteStudioCmd.Flags().String("studio-id", "", "The ID of the Amazon EMR Studio.")
+		emr_deleteStudioCmd.MarkFlagRequired("studio-id")
+	})
 	emrCmd.AddCommand(emr_deleteStudioCmd)
 }

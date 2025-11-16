@@ -12,13 +12,15 @@ var sagemaker_createAppImageConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_createAppImageConfigCmd).Standalone()
+	carapace.Gen(sagemaker_createAppImageConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_createAppImageConfigCmd).Standalone()
 
-	sagemaker_createAppImageConfigCmd.Flags().String("app-image-config-name", "", "The name of the AppImageConfig.")
-	sagemaker_createAppImageConfigCmd.Flags().String("code-editor-app-image-config", "", "The `CodeEditorAppImageConfig`.")
-	sagemaker_createAppImageConfigCmd.Flags().String("jupyter-lab-app-image-config", "", "The `JupyterLabAppImageConfig`.")
-	sagemaker_createAppImageConfigCmd.Flags().String("kernel-gateway-image-config", "", "The KernelGatewayImageConfig.")
-	sagemaker_createAppImageConfigCmd.Flags().String("tags", "", "A list of tags to apply to the AppImageConfig.")
-	sagemaker_createAppImageConfigCmd.MarkFlagRequired("app-image-config-name")
+		sagemaker_createAppImageConfigCmd.Flags().String("app-image-config-name", "", "The name of the AppImageConfig.")
+		sagemaker_createAppImageConfigCmd.Flags().String("code-editor-app-image-config", "", "The `CodeEditorAppImageConfig`.")
+		sagemaker_createAppImageConfigCmd.Flags().String("jupyter-lab-app-image-config", "", "The `JupyterLabAppImageConfig`.")
+		sagemaker_createAppImageConfigCmd.Flags().String("kernel-gateway-image-config", "", "The KernelGatewayImageConfig.")
+		sagemaker_createAppImageConfigCmd.Flags().String("tags", "", "A list of tags to apply to the AppImageConfig.")
+		sagemaker_createAppImageConfigCmd.MarkFlagRequired("app-image-config-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_createAppImageConfigCmd)
 }

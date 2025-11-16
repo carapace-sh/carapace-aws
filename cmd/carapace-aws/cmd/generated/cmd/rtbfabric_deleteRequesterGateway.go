@@ -12,9 +12,11 @@ var rtbfabric_deleteRequesterGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_deleteRequesterGatewayCmd).Standalone()
+	carapace.Gen(rtbfabric_deleteRequesterGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_deleteRequesterGatewayCmd).Standalone()
 
-	rtbfabric_deleteRequesterGatewayCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
-	rtbfabric_deleteRequesterGatewayCmd.MarkFlagRequired("gateway-id")
+		rtbfabric_deleteRequesterGatewayCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
+		rtbfabric_deleteRequesterGatewayCmd.MarkFlagRequired("gateway-id")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_deleteRequesterGatewayCmd)
 }

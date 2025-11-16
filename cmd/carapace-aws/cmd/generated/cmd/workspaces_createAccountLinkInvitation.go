@@ -12,10 +12,12 @@ var workspaces_createAccountLinkInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_createAccountLinkInvitationCmd).Standalone()
+	carapace.Gen(workspaces_createAccountLinkInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_createAccountLinkInvitationCmd).Standalone()
 
-	workspaces_createAccountLinkInvitationCmd.Flags().String("client-token", "", "A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.")
-	workspaces_createAccountLinkInvitationCmd.Flags().String("target-account-id", "", "The identifier of the target account.")
-	workspaces_createAccountLinkInvitationCmd.MarkFlagRequired("target-account-id")
+		workspaces_createAccountLinkInvitationCmd.Flags().String("client-token", "", "A string of up to 64 ASCII characters that Amazon WorkSpaces uses to ensure idempotent creation.")
+		workspaces_createAccountLinkInvitationCmd.Flags().String("target-account-id", "", "The identifier of the target account.")
+		workspaces_createAccountLinkInvitationCmd.MarkFlagRequired("target-account-id")
+	})
 	workspacesCmd.AddCommand(workspaces_createAccountLinkInvitationCmd)
 }

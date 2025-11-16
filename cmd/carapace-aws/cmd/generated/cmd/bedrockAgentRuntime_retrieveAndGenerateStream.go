@@ -12,12 +12,14 @@ var bedrockAgentRuntime_retrieveAndGenerateStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentRuntime_retrieveAndGenerateStreamCmd).Standalone()
+	carapace.Gen(bedrockAgentRuntime_retrieveAndGenerateStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentRuntime_retrieveAndGenerateStreamCmd).Standalone()
 
-	bedrockAgentRuntime_retrieveAndGenerateStreamCmd.Flags().String("input", "", "Contains the query to be made to the knowledge base.")
-	bedrockAgentRuntime_retrieveAndGenerateStreamCmd.Flags().String("retrieve-and-generate-configuration", "", "Contains configurations for the knowledge base query and retrieval process.")
-	bedrockAgentRuntime_retrieveAndGenerateStreamCmd.Flags().String("session-configuration", "", "Contains details about the session with the knowledge base.")
-	bedrockAgentRuntime_retrieveAndGenerateStreamCmd.Flags().String("session-id", "", "The unique identifier of the session.")
-	bedrockAgentRuntime_retrieveAndGenerateStreamCmd.MarkFlagRequired("input")
+		bedrockAgentRuntime_retrieveAndGenerateStreamCmd.Flags().String("input", "", "Contains the query to be made to the knowledge base.")
+		bedrockAgentRuntime_retrieveAndGenerateStreamCmd.Flags().String("retrieve-and-generate-configuration", "", "Contains configurations for the knowledge base query and retrieval process.")
+		bedrockAgentRuntime_retrieveAndGenerateStreamCmd.Flags().String("session-configuration", "", "Contains details about the session with the knowledge base.")
+		bedrockAgentRuntime_retrieveAndGenerateStreamCmd.Flags().String("session-id", "", "The unique identifier of the session.")
+		bedrockAgentRuntime_retrieveAndGenerateStreamCmd.MarkFlagRequired("input")
+	})
 	bedrockAgentRuntimeCmd.AddCommand(bedrockAgentRuntime_retrieveAndGenerateStreamCmd)
 }

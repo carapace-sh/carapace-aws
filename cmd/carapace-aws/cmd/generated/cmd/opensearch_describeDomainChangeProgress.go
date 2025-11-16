@@ -12,10 +12,12 @@ var opensearch_describeDomainChangeProgressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_describeDomainChangeProgressCmd).Standalone()
+	carapace.Gen(opensearch_describeDomainChangeProgressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_describeDomainChangeProgressCmd).Standalone()
 
-	opensearch_describeDomainChangeProgressCmd.Flags().String("change-id", "", "The specific change ID for which you want to get progress information.")
-	opensearch_describeDomainChangeProgressCmd.Flags().String("domain-name", "", "The name of the domain to get progress information for.")
-	opensearch_describeDomainChangeProgressCmd.MarkFlagRequired("domain-name")
+		opensearch_describeDomainChangeProgressCmd.Flags().String("change-id", "", "The specific change ID for which you want to get progress information.")
+		opensearch_describeDomainChangeProgressCmd.Flags().String("domain-name", "", "The name of the domain to get progress information for.")
+		opensearch_describeDomainChangeProgressCmd.MarkFlagRequired("domain-name")
+	})
 	opensearchCmd.AddCommand(opensearch_describeDomainChangeProgressCmd)
 }

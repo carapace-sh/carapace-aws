@@ -12,7 +12,9 @@ var bedrock_getUseCaseForModelAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getUseCaseForModelAccessCmd).Standalone()
+	carapace.Gen(bedrock_getUseCaseForModelAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getUseCaseForModelAccessCmd).Standalone()
 
+	})
 	bedrockCmd.AddCommand(bedrock_getUseCaseForModelAccessCmd)
 }

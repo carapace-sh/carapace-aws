@@ -12,9 +12,11 @@ var dynamodb_describeGlobalTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeGlobalTableCmd).Standalone()
+	carapace.Gen(dynamodb_describeGlobalTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeGlobalTableCmd).Standalone()
 
-	dynamodb_describeGlobalTableCmd.Flags().String("global-table-name", "", "The name of the global table.")
-	dynamodb_describeGlobalTableCmd.MarkFlagRequired("global-table-name")
+		dynamodb_describeGlobalTableCmd.Flags().String("global-table-name", "", "The name of the global table.")
+		dynamodb_describeGlobalTableCmd.MarkFlagRequired("global-table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeGlobalTableCmd)
 }

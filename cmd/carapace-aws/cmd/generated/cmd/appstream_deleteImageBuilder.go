@@ -12,9 +12,11 @@ var appstream_deleteImageBuilderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_deleteImageBuilderCmd).Standalone()
+	carapace.Gen(appstream_deleteImageBuilderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_deleteImageBuilderCmd).Standalone()
 
-	appstream_deleteImageBuilderCmd.Flags().String("name", "", "The name of the image builder.")
-	appstream_deleteImageBuilderCmd.MarkFlagRequired("name")
+		appstream_deleteImageBuilderCmd.Flags().String("name", "", "The name of the image builder.")
+		appstream_deleteImageBuilderCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_deleteImageBuilderCmd)
 }

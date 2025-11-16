@@ -12,9 +12,11 @@ var workmail_describeIdentityProviderConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_describeIdentityProviderConfigurationCmd).Standalone()
+	carapace.Gen(workmail_describeIdentityProviderConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_describeIdentityProviderConfigurationCmd).Standalone()
 
-	workmail_describeIdentityProviderConfigurationCmd.Flags().String("organization-id", "", "The Organization ID.")
-	workmail_describeIdentityProviderConfigurationCmd.MarkFlagRequired("organization-id")
+		workmail_describeIdentityProviderConfigurationCmd.Flags().String("organization-id", "", "The Organization ID.")
+		workmail_describeIdentityProviderConfigurationCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_describeIdentityProviderConfigurationCmd)
 }

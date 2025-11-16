@@ -12,9 +12,11 @@ var logs_getDeliveryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_getDeliveryCmd).Standalone()
+	carapace.Gen(logs_getDeliveryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_getDeliveryCmd).Standalone()
 
-	logs_getDeliveryCmd.Flags().String("id", "", "The ID of the delivery that you want to retrieve.")
-	logs_getDeliveryCmd.MarkFlagRequired("id")
+		logs_getDeliveryCmd.Flags().String("id", "", "The ID of the delivery that you want to retrieve.")
+		logs_getDeliveryCmd.MarkFlagRequired("id")
+	})
 	logsCmd.AddCommand(logs_getDeliveryCmd)
 }

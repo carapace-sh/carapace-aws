@@ -12,9 +12,11 @@ var codepipeline_listPipelinesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_listPipelinesCmd).Standalone()
+	carapace.Gen(codepipeline_listPipelinesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_listPipelinesCmd).Standalone()
 
-	codepipeline_listPipelinesCmd.Flags().String("max-results", "", "The maximum number of pipelines to return in a single call.")
-	codepipeline_listPipelinesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous list pipelines call.")
+		codepipeline_listPipelinesCmd.Flags().String("max-results", "", "The maximum number of pipelines to return in a single call.")
+		codepipeline_listPipelinesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous list pipelines call.")
+	})
 	codepipelineCmd.AddCommand(codepipeline_listPipelinesCmd)
 }

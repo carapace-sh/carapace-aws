@@ -12,9 +12,11 @@ var dms_stopDataMigrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_stopDataMigrationCmd).Standalone()
+	carapace.Gen(dms_stopDataMigrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_stopDataMigrationCmd).Standalone()
 
-	dms_stopDataMigrationCmd.Flags().String("data-migration-identifier", "", "The identifier (name or ARN) of the data migration to stop.")
-	dms_stopDataMigrationCmd.MarkFlagRequired("data-migration-identifier")
+		dms_stopDataMigrationCmd.Flags().String("data-migration-identifier", "", "The identifier (name or ARN) of the data migration to stop.")
+		dms_stopDataMigrationCmd.MarkFlagRequired("data-migration-identifier")
+	})
 	dmsCmd.AddCommand(dms_stopDataMigrationCmd)
 }

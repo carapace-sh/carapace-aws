@@ -12,9 +12,11 @@ var iam_deleteAccountAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteAccountAliasCmd).Standalone()
+	carapace.Gen(iam_deleteAccountAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteAccountAliasCmd).Standalone()
 
-	iam_deleteAccountAliasCmd.Flags().String("account-alias", "", "The name of the account alias to delete.")
-	iam_deleteAccountAliasCmd.MarkFlagRequired("account-alias")
+		iam_deleteAccountAliasCmd.Flags().String("account-alias", "", "The name of the account alias to delete.")
+		iam_deleteAccountAliasCmd.MarkFlagRequired("account-alias")
+	})
 	iamCmd.AddCommand(iam_deleteAccountAliasCmd)
 }

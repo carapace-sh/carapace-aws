@@ -12,9 +12,11 @@ var rds_disableHttpEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_disableHttpEndpointCmd).Standalone()
+	carapace.Gen(rds_disableHttpEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_disableHttpEndpointCmd).Standalone()
 
-	rds_disableHttpEndpointCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the DB cluster.")
-	rds_disableHttpEndpointCmd.MarkFlagRequired("resource-arn")
+		rds_disableHttpEndpointCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the DB cluster.")
+		rds_disableHttpEndpointCmd.MarkFlagRequired("resource-arn")
+	})
 	rdsCmd.AddCommand(rds_disableHttpEndpointCmd)
 }

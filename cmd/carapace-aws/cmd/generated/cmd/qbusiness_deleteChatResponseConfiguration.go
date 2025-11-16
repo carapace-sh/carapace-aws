@@ -12,11 +12,13 @@ var qbusiness_deleteChatResponseConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_deleteChatResponseConfigurationCmd).Standalone()
+	carapace.Gen(qbusiness_deleteChatResponseConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_deleteChatResponseConfigurationCmd).Standalone()
 
-	qbusiness_deleteChatResponseConfigurationCmd.Flags().String("application-id", "", "The unique identifier of theAmazon Q Business application from which to delete the chat response configuration.")
-	qbusiness_deleteChatResponseConfigurationCmd.Flags().String("chat-response-configuration-id", "", "The unique identifier of the chat response configuration to delete from the specified application.")
-	qbusiness_deleteChatResponseConfigurationCmd.MarkFlagRequired("application-id")
-	qbusiness_deleteChatResponseConfigurationCmd.MarkFlagRequired("chat-response-configuration-id")
+		qbusiness_deleteChatResponseConfigurationCmd.Flags().String("application-id", "", "The unique identifier of theAmazon Q Business application from which to delete the chat response configuration.")
+		qbusiness_deleteChatResponseConfigurationCmd.Flags().String("chat-response-configuration-id", "", "The unique identifier of the chat response configuration to delete from the specified application.")
+		qbusiness_deleteChatResponseConfigurationCmd.MarkFlagRequired("application-id")
+		qbusiness_deleteChatResponseConfigurationCmd.MarkFlagRequired("chat-response-configuration-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_deleteChatResponseConfigurationCmd)
 }

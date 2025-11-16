@@ -12,15 +12,17 @@ var rtbfabric_createInboundExternalLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_createInboundExternalLinkCmd).Standalone()
+	carapace.Gen(rtbfabric_createInboundExternalLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_createInboundExternalLinkCmd).Standalone()
 
-	rtbfabric_createInboundExternalLinkCmd.Flags().String("attributes", "", "Attributes of the link.")
-	rtbfabric_createInboundExternalLinkCmd.Flags().String("client-token", "", "The unique client token.")
-	rtbfabric_createInboundExternalLinkCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
-	rtbfabric_createInboundExternalLinkCmd.Flags().String("log-settings", "", "")
-	rtbfabric_createInboundExternalLinkCmd.Flags().String("tags", "", "A map of the key-value pairs of the tag or tags to assign to the resource.")
-	rtbfabric_createInboundExternalLinkCmd.MarkFlagRequired("client-token")
-	rtbfabric_createInboundExternalLinkCmd.MarkFlagRequired("gateway-id")
-	rtbfabric_createInboundExternalLinkCmd.MarkFlagRequired("log-settings")
+		rtbfabric_createInboundExternalLinkCmd.Flags().String("attributes", "", "Attributes of the link.")
+		rtbfabric_createInboundExternalLinkCmd.Flags().String("client-token", "", "The unique client token.")
+		rtbfabric_createInboundExternalLinkCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
+		rtbfabric_createInboundExternalLinkCmd.Flags().String("log-settings", "", "")
+		rtbfabric_createInboundExternalLinkCmd.Flags().String("tags", "", "A map of the key-value pairs of the tag or tags to assign to the resource.")
+		rtbfabric_createInboundExternalLinkCmd.MarkFlagRequired("client-token")
+		rtbfabric_createInboundExternalLinkCmd.MarkFlagRequired("gateway-id")
+		rtbfabric_createInboundExternalLinkCmd.MarkFlagRequired("log-settings")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_createInboundExternalLinkCmd)
 }

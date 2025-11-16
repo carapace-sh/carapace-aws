@@ -12,13 +12,15 @@ var ds_updateConditionalForwarderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_updateConditionalForwarderCmd).Standalone()
+	carapace.Gen(ds_updateConditionalForwarderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_updateConditionalForwarderCmd).Standalone()
 
-	ds_updateConditionalForwarderCmd.Flags().String("directory-id", "", "The directory ID of the Amazon Web Services directory for which to update the conditional forwarder.")
-	ds_updateConditionalForwarderCmd.Flags().String("dns-ip-addrs", "", "The updated IP addresses of the remote DNS server associated with the conditional forwarder.")
-	ds_updateConditionalForwarderCmd.Flags().String("dns-ipv6-addrs", "", "The updated IPv6 addresses of the remote DNS server associated with the conditional forwarder.")
-	ds_updateConditionalForwarderCmd.Flags().String("remote-domain-name", "", "The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.")
-	ds_updateConditionalForwarderCmd.MarkFlagRequired("directory-id")
-	ds_updateConditionalForwarderCmd.MarkFlagRequired("remote-domain-name")
+		ds_updateConditionalForwarderCmd.Flags().String("directory-id", "", "The directory ID of the Amazon Web Services directory for which to update the conditional forwarder.")
+		ds_updateConditionalForwarderCmd.Flags().String("dns-ip-addrs", "", "The updated IP addresses of the remote DNS server associated with the conditional forwarder.")
+		ds_updateConditionalForwarderCmd.Flags().String("dns-ipv6-addrs", "", "The updated IPv6 addresses of the remote DNS server associated with the conditional forwarder.")
+		ds_updateConditionalForwarderCmd.Flags().String("remote-domain-name", "", "The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.")
+		ds_updateConditionalForwarderCmd.MarkFlagRequired("directory-id")
+		ds_updateConditionalForwarderCmd.MarkFlagRequired("remote-domain-name")
+	})
 	dsCmd.AddCommand(ds_updateConditionalForwarderCmd)
 }

@@ -12,9 +12,11 @@ var opensearchserverless_batchGetCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_batchGetCollectionCmd).Standalone()
+	carapace.Gen(opensearchserverless_batchGetCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_batchGetCollectionCmd).Standalone()
 
-	opensearchserverless_batchGetCollectionCmd.Flags().String("ids", "", "A list of collection IDs.")
-	opensearchserverless_batchGetCollectionCmd.Flags().String("names", "", "A list of collection names.")
+		opensearchserverless_batchGetCollectionCmd.Flags().String("ids", "", "A list of collection IDs.")
+		opensearchserverless_batchGetCollectionCmd.Flags().String("names", "", "A list of collection names.")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_batchGetCollectionCmd)
 }

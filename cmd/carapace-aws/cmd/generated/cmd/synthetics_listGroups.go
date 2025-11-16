@@ -12,9 +12,11 @@ var synthetics_listGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_listGroupsCmd).Standalone()
+	carapace.Gen(synthetics_listGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_listGroupsCmd).Standalone()
 
-	synthetics_listGroupsCmd.Flags().String("max-results", "", "Specify this parameter to limit how many groups are returned each time you use the `ListGroups` operation.")
-	synthetics_listGroupsCmd.Flags().String("next-token", "", "A token that indicates that there is more data available.")
+		synthetics_listGroupsCmd.Flags().String("max-results", "", "Specify this parameter to limit how many groups are returned each time you use the `ListGroups` operation.")
+		synthetics_listGroupsCmd.Flags().String("next-token", "", "A token that indicates that there is more data available.")
+	})
 	syntheticsCmd.AddCommand(synthetics_listGroupsCmd)
 }

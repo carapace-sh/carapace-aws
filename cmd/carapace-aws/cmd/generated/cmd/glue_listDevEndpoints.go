@@ -12,10 +12,12 @@ var glue_listDevEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listDevEndpointsCmd).Standalone()
+	carapace.Gen(glue_listDevEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listDevEndpointsCmd).Standalone()
 
-	glue_listDevEndpointsCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
-	glue_listDevEndpointsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
-	glue_listDevEndpointsCmd.Flags().String("tags", "", "Specifies to return only these tagged resources.")
+		glue_listDevEndpointsCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
+		glue_listDevEndpointsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+		glue_listDevEndpointsCmd.Flags().String("tags", "", "Specifies to return only these tagged resources.")
+	})
 	glueCmd.AddCommand(glue_listDevEndpointsCmd)
 }

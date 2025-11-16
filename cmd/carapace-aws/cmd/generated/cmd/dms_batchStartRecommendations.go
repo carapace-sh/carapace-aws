@@ -12,8 +12,10 @@ var dms_batchStartRecommendationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_batchStartRecommendationsCmd).Standalone()
+	carapace.Gen(dms_batchStartRecommendationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_batchStartRecommendationsCmd).Standalone()
 
-	dms_batchStartRecommendationsCmd.Flags().String("data", "", "Provides information about source databases to analyze.")
+		dms_batchStartRecommendationsCmd.Flags().String("data", "", "Provides information about source databases to analyze.")
+	})
 	dmsCmd.AddCommand(dms_batchStartRecommendationsCmd)
 }

@@ -12,9 +12,11 @@ var connect_listInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listInstancesCmd).Standalone()
+	carapace.Gen(connect_listInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listInstancesCmd).Standalone()
 
-	connect_listInstancesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listInstancesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listInstancesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listInstancesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	connectCmd.AddCommand(connect_listInstancesCmd)
 }

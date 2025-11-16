@@ -12,12 +12,14 @@ var omics_getWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getWorkflowCmd).Standalone()
+	carapace.Gen(omics_getWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getWorkflowCmd).Standalone()
 
-	omics_getWorkflowCmd.Flags().String("export", "", "The export format for the workflow.")
-	omics_getWorkflowCmd.Flags().String("id", "", "The workflow's ID.")
-	omics_getWorkflowCmd.Flags().String("type", "", "The workflow's type.")
-	omics_getWorkflowCmd.Flags().String("workflow-owner-id", "", "The ID of the workflow owner.")
-	omics_getWorkflowCmd.MarkFlagRequired("id")
+		omics_getWorkflowCmd.Flags().String("export", "", "The export format for the workflow.")
+		omics_getWorkflowCmd.Flags().String("id", "", "The workflow's ID.")
+		omics_getWorkflowCmd.Flags().String("type", "", "The workflow's type.")
+		omics_getWorkflowCmd.Flags().String("workflow-owner-id", "", "The ID of the workflow owner.")
+		omics_getWorkflowCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_getWorkflowCmd)
 }

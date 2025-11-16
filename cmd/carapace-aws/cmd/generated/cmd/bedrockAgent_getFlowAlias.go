@@ -12,11 +12,13 @@ var bedrockAgent_getFlowAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_getFlowAliasCmd).Standalone()
+	carapace.Gen(bedrockAgent_getFlowAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_getFlowAliasCmd).Standalone()
 
-	bedrockAgent_getFlowAliasCmd.Flags().String("alias-identifier", "", "The unique identifier of the alias for which to retrieve information.")
-	bedrockAgent_getFlowAliasCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow that the alias belongs to.")
-	bedrockAgent_getFlowAliasCmd.MarkFlagRequired("alias-identifier")
-	bedrockAgent_getFlowAliasCmd.MarkFlagRequired("flow-identifier")
+		bedrockAgent_getFlowAliasCmd.Flags().String("alias-identifier", "", "The unique identifier of the alias for which to retrieve information.")
+		bedrockAgent_getFlowAliasCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow that the alias belongs to.")
+		bedrockAgent_getFlowAliasCmd.MarkFlagRequired("alias-identifier")
+		bedrockAgent_getFlowAliasCmd.MarkFlagRequired("flow-identifier")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_getFlowAliasCmd)
 }

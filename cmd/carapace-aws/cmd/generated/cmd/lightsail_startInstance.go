@@ -12,9 +12,11 @@ var lightsail_startInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_startInstanceCmd).Standalone()
+	carapace.Gen(lightsail_startInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_startInstanceCmd).Standalone()
 
-	lightsail_startInstanceCmd.Flags().String("instance-name", "", "The name of the instance (a virtual private server) to start.")
-	lightsail_startInstanceCmd.MarkFlagRequired("instance-name")
+		lightsail_startInstanceCmd.Flags().String("instance-name", "", "The name of the instance (a virtual private server) to start.")
+		lightsail_startInstanceCmd.MarkFlagRequired("instance-name")
+	})
 	lightsailCmd.AddCommand(lightsail_startInstanceCmd)
 }

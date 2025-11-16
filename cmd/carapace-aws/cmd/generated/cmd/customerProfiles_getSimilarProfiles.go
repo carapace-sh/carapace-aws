@@ -12,17 +12,19 @@ var customerProfiles_getSimilarProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getSimilarProfilesCmd).Standalone()
+	carapace.Gen(customerProfiles_getSimilarProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getSimilarProfilesCmd).Standalone()
 
-	customerProfiles_getSimilarProfilesCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getSimilarProfilesCmd.Flags().String("match-type", "", "Specify the type of matching to get similar profiles for.")
-	customerProfiles_getSimilarProfilesCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	customerProfiles_getSimilarProfilesCmd.Flags().String("next-token", "", "The pagination token from the previous `GetSimilarProfiles` API call.")
-	customerProfiles_getSimilarProfilesCmd.Flags().String("search-key", "", "The string indicating the search key to be used.")
-	customerProfiles_getSimilarProfilesCmd.Flags().String("search-value", "", "The string based on `SearchKey` to be searched for similar profiles.")
-	customerProfiles_getSimilarProfilesCmd.MarkFlagRequired("domain-name")
-	customerProfiles_getSimilarProfilesCmd.MarkFlagRequired("match-type")
-	customerProfiles_getSimilarProfilesCmd.MarkFlagRequired("search-key")
-	customerProfiles_getSimilarProfilesCmd.MarkFlagRequired("search-value")
+		customerProfiles_getSimilarProfilesCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getSimilarProfilesCmd.Flags().String("match-type", "", "Specify the type of matching to get similar profiles for.")
+		customerProfiles_getSimilarProfilesCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		customerProfiles_getSimilarProfilesCmd.Flags().String("next-token", "", "The pagination token from the previous `GetSimilarProfiles` API call.")
+		customerProfiles_getSimilarProfilesCmd.Flags().String("search-key", "", "The string indicating the search key to be used.")
+		customerProfiles_getSimilarProfilesCmd.Flags().String("search-value", "", "The string based on `SearchKey` to be searched for similar profiles.")
+		customerProfiles_getSimilarProfilesCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getSimilarProfilesCmd.MarkFlagRequired("match-type")
+		customerProfiles_getSimilarProfilesCmd.MarkFlagRequired("search-key")
+		customerProfiles_getSimilarProfilesCmd.MarkFlagRequired("search-value")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getSimilarProfilesCmd)
 }

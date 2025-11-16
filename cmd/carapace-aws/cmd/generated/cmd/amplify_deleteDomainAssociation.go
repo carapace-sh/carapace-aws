@@ -12,11 +12,13 @@ var amplify_deleteDomainAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_deleteDomainAssociationCmd).Standalone()
+	carapace.Gen(amplify_deleteDomainAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_deleteDomainAssociationCmd).Standalone()
 
-	amplify_deleteDomainAssociationCmd.Flags().String("app-id", "", "The unique id for an Amplify app.")
-	amplify_deleteDomainAssociationCmd.Flags().String("domain-name", "", "The name of the domain.")
-	amplify_deleteDomainAssociationCmd.MarkFlagRequired("app-id")
-	amplify_deleteDomainAssociationCmd.MarkFlagRequired("domain-name")
+		amplify_deleteDomainAssociationCmd.Flags().String("app-id", "", "The unique id for an Amplify app.")
+		amplify_deleteDomainAssociationCmd.Flags().String("domain-name", "", "The name of the domain.")
+		amplify_deleteDomainAssociationCmd.MarkFlagRequired("app-id")
+		amplify_deleteDomainAssociationCmd.MarkFlagRequired("domain-name")
+	})
 	amplifyCmd.AddCommand(amplify_deleteDomainAssociationCmd)
 }

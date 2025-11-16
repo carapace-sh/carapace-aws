@@ -12,13 +12,15 @@ var lexv2Models_deleteBotLocaleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_deleteBotLocaleCmd).Standalone()
+	carapace.Gen(lexv2Models_deleteBotLocaleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_deleteBotLocaleCmd).Standalone()
 
-	lexv2Models_deleteBotLocaleCmd.Flags().String("bot-id", "", "The unique identifier of the bot that contains the locale.")
-	lexv2Models_deleteBotLocaleCmd.Flags().String("bot-version", "", "The version of the bot that contains the locale.")
-	lexv2Models_deleteBotLocaleCmd.Flags().String("locale-id", "", "The identifier of the language and locale that will be deleted.")
-	lexv2Models_deleteBotLocaleCmd.MarkFlagRequired("bot-id")
-	lexv2Models_deleteBotLocaleCmd.MarkFlagRequired("bot-version")
-	lexv2Models_deleteBotLocaleCmd.MarkFlagRequired("locale-id")
+		lexv2Models_deleteBotLocaleCmd.Flags().String("bot-id", "", "The unique identifier of the bot that contains the locale.")
+		lexv2Models_deleteBotLocaleCmd.Flags().String("bot-version", "", "The version of the bot that contains the locale.")
+		lexv2Models_deleteBotLocaleCmd.Flags().String("locale-id", "", "The identifier of the language and locale that will be deleted.")
+		lexv2Models_deleteBotLocaleCmd.MarkFlagRequired("bot-id")
+		lexv2Models_deleteBotLocaleCmd.MarkFlagRequired("bot-version")
+		lexv2Models_deleteBotLocaleCmd.MarkFlagRequired("locale-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_deleteBotLocaleCmd)
 }

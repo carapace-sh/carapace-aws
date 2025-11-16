@@ -12,11 +12,13 @@ var amp_describeAnomalyDetectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_describeAnomalyDetectorCmd).Standalone()
+	carapace.Gen(amp_describeAnomalyDetectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_describeAnomalyDetectorCmd).Standalone()
 
-	amp_describeAnomalyDetectorCmd.Flags().String("anomaly-detector-id", "", "The identifier of the anomaly detector to describe.")
-	amp_describeAnomalyDetectorCmd.Flags().String("workspace-id", "", "The identifier of the workspace containing the anomaly detector.")
-	amp_describeAnomalyDetectorCmd.MarkFlagRequired("anomaly-detector-id")
-	amp_describeAnomalyDetectorCmd.MarkFlagRequired("workspace-id")
+		amp_describeAnomalyDetectorCmd.Flags().String("anomaly-detector-id", "", "The identifier of the anomaly detector to describe.")
+		amp_describeAnomalyDetectorCmd.Flags().String("workspace-id", "", "The identifier of the workspace containing the anomaly detector.")
+		amp_describeAnomalyDetectorCmd.MarkFlagRequired("anomaly-detector-id")
+		amp_describeAnomalyDetectorCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_describeAnomalyDetectorCmd)
 }

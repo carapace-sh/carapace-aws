@@ -12,10 +12,12 @@ var iot_listCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listCertificatesCmd).Standalone()
+	carapace.Gen(iot_listCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listCertificatesCmd).Standalone()
 
-	iot_listCertificatesCmd.Flags().String("ascending-order", "", "Specifies the order for results.")
-	iot_listCertificatesCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	iot_listCertificatesCmd.Flags().String("page-size", "", "The result page size.")
+		iot_listCertificatesCmd.Flags().String("ascending-order", "", "Specifies the order for results.")
+		iot_listCertificatesCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		iot_listCertificatesCmd.Flags().String("page-size", "", "The result page size.")
+	})
 	iotCmd.AddCommand(iot_listCertificatesCmd)
 }

@@ -12,11 +12,13 @@ var chime_logoutUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_logoutUserCmd).Standalone()
+	carapace.Gen(chime_logoutUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_logoutUserCmd).Standalone()
 
-	chime_logoutUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_logoutUserCmd.Flags().String("user-id", "", "The user ID.")
-	chime_logoutUserCmd.MarkFlagRequired("account-id")
-	chime_logoutUserCmd.MarkFlagRequired("user-id")
+		chime_logoutUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_logoutUserCmd.Flags().String("user-id", "", "The user ID.")
+		chime_logoutUserCmd.MarkFlagRequired("account-id")
+		chime_logoutUserCmd.MarkFlagRequired("user-id")
+	})
 	chimeCmd.AddCommand(chime_logoutUserCmd)
 }

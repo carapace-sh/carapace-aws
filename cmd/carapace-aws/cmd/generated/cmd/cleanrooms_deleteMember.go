@@ -12,11 +12,13 @@ var cleanrooms_deleteMemberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_deleteMemberCmd).Standalone()
+	carapace.Gen(cleanrooms_deleteMemberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_deleteMemberCmd).Standalone()
 
-	cleanrooms_deleteMemberCmd.Flags().String("account-id", "", "The account ID of the member to remove.")
-	cleanrooms_deleteMemberCmd.Flags().String("collaboration-identifier", "", "The unique identifier for the associated collaboration.")
-	cleanrooms_deleteMemberCmd.MarkFlagRequired("account-id")
-	cleanrooms_deleteMemberCmd.MarkFlagRequired("collaboration-identifier")
+		cleanrooms_deleteMemberCmd.Flags().String("account-id", "", "The account ID of the member to remove.")
+		cleanrooms_deleteMemberCmd.Flags().String("collaboration-identifier", "", "The unique identifier for the associated collaboration.")
+		cleanrooms_deleteMemberCmd.MarkFlagRequired("account-id")
+		cleanrooms_deleteMemberCmd.MarkFlagRequired("collaboration-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_deleteMemberCmd)
 }

@@ -12,9 +12,11 @@ var workspacesInstances_deleteVolumeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_deleteVolumeCmd).Standalone()
+	carapace.Gen(workspacesInstances_deleteVolumeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_deleteVolumeCmd).Standalone()
 
-	workspacesInstances_deleteVolumeCmd.Flags().String("volume-id", "", "Identifier of the volume to delete.")
-	workspacesInstances_deleteVolumeCmd.MarkFlagRequired("volume-id")
+		workspacesInstances_deleteVolumeCmd.Flags().String("volume-id", "", "Identifier of the volume to delete.")
+		workspacesInstances_deleteVolumeCmd.MarkFlagRequired("volume-id")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_deleteVolumeCmd)
 }

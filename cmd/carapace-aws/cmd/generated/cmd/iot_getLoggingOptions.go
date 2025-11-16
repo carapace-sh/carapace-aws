@@ -12,7 +12,9 @@ var iot_getLoggingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getLoggingOptionsCmd).Standalone()
+	carapace.Gen(iot_getLoggingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getLoggingOptionsCmd).Standalone()
 
+	})
 	iotCmd.AddCommand(iot_getLoggingOptionsCmd)
 }

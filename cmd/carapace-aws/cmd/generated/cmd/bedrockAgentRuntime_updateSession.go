@@ -12,10 +12,12 @@ var bedrockAgentRuntime_updateSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentRuntime_updateSessionCmd).Standalone()
+	carapace.Gen(bedrockAgentRuntime_updateSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentRuntime_updateSessionCmd).Standalone()
 
-	bedrockAgentRuntime_updateSessionCmd.Flags().String("session-identifier", "", "The unique identifier of the session to modify.")
-	bedrockAgentRuntime_updateSessionCmd.Flags().String("session-metadata", "", "A map of key-value pairs containing attributes to be persisted across the session.")
-	bedrockAgentRuntime_updateSessionCmd.MarkFlagRequired("session-identifier")
+		bedrockAgentRuntime_updateSessionCmd.Flags().String("session-identifier", "", "The unique identifier of the session to modify.")
+		bedrockAgentRuntime_updateSessionCmd.Flags().String("session-metadata", "", "A map of key-value pairs containing attributes to be persisted across the session.")
+		bedrockAgentRuntime_updateSessionCmd.MarkFlagRequired("session-identifier")
+	})
 	bedrockAgentRuntimeCmd.AddCommand(bedrockAgentRuntime_updateSessionCmd)
 }

@@ -12,9 +12,11 @@ var backupGateway_listGatewaysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_listGatewaysCmd).Standalone()
+	carapace.Gen(backupGateway_listGatewaysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_listGatewaysCmd).Standalone()
 
-	backupGateway_listGatewaysCmd.Flags().String("max-results", "", "The maximum number of gateways to list.")
-	backupGateway_listGatewaysCmd.Flags().String("next-token", "", "The next item following a partial list of returned resources.")
+		backupGateway_listGatewaysCmd.Flags().String("max-results", "", "The maximum number of gateways to list.")
+		backupGateway_listGatewaysCmd.Flags().String("next-token", "", "The next item following a partial list of returned resources.")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_listGatewaysCmd)
 }

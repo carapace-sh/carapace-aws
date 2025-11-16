@@ -12,13 +12,15 @@ var gameliftstreams_exportStreamSessionFilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftstreams_exportStreamSessionFilesCmd).Standalone()
+	carapace.Gen(gameliftstreams_exportStreamSessionFilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftstreams_exportStreamSessionFilesCmd).Standalone()
 
-	gameliftstreams_exportStreamSessionFilesCmd.Flags().String("identifier", "", "An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.")
-	gameliftstreams_exportStreamSessionFilesCmd.Flags().String("output-uri", "", "The S3 bucket URI where Amazon GameLift Streams uploads the set of compressed exported files for this stream session.")
-	gameliftstreams_exportStreamSessionFilesCmd.Flags().String("stream-session-identifier", "", "An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.")
-	gameliftstreams_exportStreamSessionFilesCmd.MarkFlagRequired("identifier")
-	gameliftstreams_exportStreamSessionFilesCmd.MarkFlagRequired("output-uri")
-	gameliftstreams_exportStreamSessionFilesCmd.MarkFlagRequired("stream-session-identifier")
+		gameliftstreams_exportStreamSessionFilesCmd.Flags().String("identifier", "", "An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream group resource.")
+		gameliftstreams_exportStreamSessionFilesCmd.Flags().String("output-uri", "", "The S3 bucket URI where Amazon GameLift Streams uploads the set of compressed exported files for this stream session.")
+		gameliftstreams_exportStreamSessionFilesCmd.Flags().String("stream-session-identifier", "", "An [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) or ID that uniquely identifies the stream session resource.")
+		gameliftstreams_exportStreamSessionFilesCmd.MarkFlagRequired("identifier")
+		gameliftstreams_exportStreamSessionFilesCmd.MarkFlagRequired("output-uri")
+		gameliftstreams_exportStreamSessionFilesCmd.MarkFlagRequired("stream-session-identifier")
+	})
 	gameliftstreamsCmd.AddCommand(gameliftstreams_exportStreamSessionFilesCmd)
 }

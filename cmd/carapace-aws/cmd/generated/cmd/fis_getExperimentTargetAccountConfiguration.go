@@ -12,11 +12,13 @@ var fis_getExperimentTargetAccountConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_getExperimentTargetAccountConfigurationCmd).Standalone()
+	carapace.Gen(fis_getExperimentTargetAccountConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_getExperimentTargetAccountConfigurationCmd).Standalone()
 
-	fis_getExperimentTargetAccountConfigurationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the target account.")
-	fis_getExperimentTargetAccountConfigurationCmd.Flags().String("experiment-id", "", "The ID of the experiment.")
-	fis_getExperimentTargetAccountConfigurationCmd.MarkFlagRequired("account-id")
-	fis_getExperimentTargetAccountConfigurationCmd.MarkFlagRequired("experiment-id")
+		fis_getExperimentTargetAccountConfigurationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the target account.")
+		fis_getExperimentTargetAccountConfigurationCmd.Flags().String("experiment-id", "", "The ID of the experiment.")
+		fis_getExperimentTargetAccountConfigurationCmd.MarkFlagRequired("account-id")
+		fis_getExperimentTargetAccountConfigurationCmd.MarkFlagRequired("experiment-id")
+	})
 	fisCmd.AddCommand(fis_getExperimentTargetAccountConfigurationCmd)
 }

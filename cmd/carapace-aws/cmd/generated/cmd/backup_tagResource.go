@@ -12,11 +12,13 @@ var backup_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_tagResourceCmd).Standalone()
+	carapace.Gen(backup_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_tagResourceCmd).Standalone()
 
-	backup_tagResourceCmd.Flags().String("resource-arn", "", "The ARN that uniquely identifies the resource.")
-	backup_tagResourceCmd.Flags().String("tags", "", "Key-value pairs that are used to help organize your resources.")
-	backup_tagResourceCmd.MarkFlagRequired("resource-arn")
-	backup_tagResourceCmd.MarkFlagRequired("tags")
+		backup_tagResourceCmd.Flags().String("resource-arn", "", "The ARN that uniquely identifies the resource.")
+		backup_tagResourceCmd.Flags().String("tags", "", "Key-value pairs that are used to help organize your resources.")
+		backup_tagResourceCmd.MarkFlagRequired("resource-arn")
+		backup_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	backupCmd.AddCommand(backup_tagResourceCmd)
 }

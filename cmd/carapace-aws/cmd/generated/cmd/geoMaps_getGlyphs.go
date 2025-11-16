@@ -12,11 +12,13 @@ var geoMaps_getGlyphsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(geoMaps_getGlyphsCmd).Standalone()
+	carapace.Gen(geoMaps_getGlyphsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(geoMaps_getGlyphsCmd).Standalone()
 
-	geoMaps_getGlyphsCmd.Flags().String("font-stack", "", "Name of the `FontStack` to retrieve.")
-	geoMaps_getGlyphsCmd.Flags().String("font-unicode-range", "", "A Unicode range of characters to download glyphs for.")
-	geoMaps_getGlyphsCmd.MarkFlagRequired("font-stack")
-	geoMaps_getGlyphsCmd.MarkFlagRequired("font-unicode-range")
+		geoMaps_getGlyphsCmd.Flags().String("font-stack", "", "Name of the `FontStack` to retrieve.")
+		geoMaps_getGlyphsCmd.Flags().String("font-unicode-range", "", "A Unicode range of characters to download glyphs for.")
+		geoMaps_getGlyphsCmd.MarkFlagRequired("font-stack")
+		geoMaps_getGlyphsCmd.MarkFlagRequired("font-unicode-range")
+	})
 	geoMapsCmd.AddCommand(geoMaps_getGlyphsCmd)
 }

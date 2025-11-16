@@ -12,12 +12,14 @@ var iot_disassociateSbomFromPackageVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_disassociateSbomFromPackageVersionCmd).Standalone()
+	carapace.Gen(iot_disassociateSbomFromPackageVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_disassociateSbomFromPackageVersionCmd).Standalone()
 
-	iot_disassociateSbomFromPackageVersionCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iot_disassociateSbomFromPackageVersionCmd.Flags().String("package-name", "", "The name of the new software package.")
-	iot_disassociateSbomFromPackageVersionCmd.Flags().String("version-name", "", "The name of the new package version.")
-	iot_disassociateSbomFromPackageVersionCmd.MarkFlagRequired("package-name")
-	iot_disassociateSbomFromPackageVersionCmd.MarkFlagRequired("version-name")
+		iot_disassociateSbomFromPackageVersionCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iot_disassociateSbomFromPackageVersionCmd.Flags().String("package-name", "", "The name of the new software package.")
+		iot_disassociateSbomFromPackageVersionCmd.Flags().String("version-name", "", "The name of the new package version.")
+		iot_disassociateSbomFromPackageVersionCmd.MarkFlagRequired("package-name")
+		iot_disassociateSbomFromPackageVersionCmd.MarkFlagRequired("version-name")
+	})
 	iotCmd.AddCommand(iot_disassociateSbomFromPackageVersionCmd)
 }

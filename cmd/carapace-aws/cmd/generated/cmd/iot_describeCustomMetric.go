@@ -12,9 +12,11 @@ var iot_describeCustomMetricCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeCustomMetricCmd).Standalone()
+	carapace.Gen(iot_describeCustomMetricCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeCustomMetricCmd).Standalone()
 
-	iot_describeCustomMetricCmd.Flags().String("metric-name", "", "The name of the custom metric.")
-	iot_describeCustomMetricCmd.MarkFlagRequired("metric-name")
+		iot_describeCustomMetricCmd.Flags().String("metric-name", "", "The name of the custom metric.")
+		iot_describeCustomMetricCmd.MarkFlagRequired("metric-name")
+	})
 	iotCmd.AddCommand(iot_describeCustomMetricCmd)
 }

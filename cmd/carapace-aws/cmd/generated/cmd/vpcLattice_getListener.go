@@ -12,11 +12,13 @@ var vpcLattice_getListenerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getListenerCmd).Standalone()
+	carapace.Gen(vpcLattice_getListenerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getListenerCmd).Standalone()
 
-	vpcLattice_getListenerCmd.Flags().String("listener-identifier", "", "The ID or ARN of the listener.")
-	vpcLattice_getListenerCmd.Flags().String("service-identifier", "", "The ID or ARN of the service.")
-	vpcLattice_getListenerCmd.MarkFlagRequired("listener-identifier")
-	vpcLattice_getListenerCmd.MarkFlagRequired("service-identifier")
+		vpcLattice_getListenerCmd.Flags().String("listener-identifier", "", "The ID or ARN of the listener.")
+		vpcLattice_getListenerCmd.Flags().String("service-identifier", "", "The ID or ARN of the service.")
+		vpcLattice_getListenerCmd.MarkFlagRequired("listener-identifier")
+		vpcLattice_getListenerCmd.MarkFlagRequired("service-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getListenerCmd)
 }

@@ -12,10 +12,12 @@ var batch_describeServiceEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_describeServiceEnvironmentsCmd).Standalone()
+	carapace.Gen(batch_describeServiceEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_describeServiceEnvironmentsCmd).Standalone()
 
-	batch_describeServiceEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results returned by `DescribeServiceEnvironments` in paginated output.")
-	batch_describeServiceEnvironmentsCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `DescribeServiceEnvironments` request where `maxResults` was used and the results exceeded the value of that parameter.")
-	batch_describeServiceEnvironmentsCmd.Flags().String("service-environments", "", "An array of service environment names or ARN entries.")
+		batch_describeServiceEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results returned by `DescribeServiceEnvironments` in paginated output.")
+		batch_describeServiceEnvironmentsCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `DescribeServiceEnvironments` request where `maxResults` was used and the results exceeded the value of that parameter.")
+		batch_describeServiceEnvironmentsCmd.Flags().String("service-environments", "", "An array of service environment names or ARN entries.")
+	})
 	batchCmd.AddCommand(batch_describeServiceEnvironmentsCmd)
 }

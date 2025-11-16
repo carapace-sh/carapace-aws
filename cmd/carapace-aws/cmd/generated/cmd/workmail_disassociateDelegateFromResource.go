@@ -12,13 +12,15 @@ var workmail_disassociateDelegateFromResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_disassociateDelegateFromResourceCmd).Standalone()
+	carapace.Gen(workmail_disassociateDelegateFromResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_disassociateDelegateFromResourceCmd).Standalone()
 
-	workmail_disassociateDelegateFromResourceCmd.Flags().String("entity-id", "", "The identifier for the member (user, group) to be removed from the resource's delegates.")
-	workmail_disassociateDelegateFromResourceCmd.Flags().String("organization-id", "", "The identifier for the organization under which the resource exists.")
-	workmail_disassociateDelegateFromResourceCmd.Flags().String("resource-id", "", "The identifier of the resource from which delegates' set members are removed.")
-	workmail_disassociateDelegateFromResourceCmd.MarkFlagRequired("entity-id")
-	workmail_disassociateDelegateFromResourceCmd.MarkFlagRequired("organization-id")
-	workmail_disassociateDelegateFromResourceCmd.MarkFlagRequired("resource-id")
+		workmail_disassociateDelegateFromResourceCmd.Flags().String("entity-id", "", "The identifier for the member (user, group) to be removed from the resource's delegates.")
+		workmail_disassociateDelegateFromResourceCmd.Flags().String("organization-id", "", "The identifier for the organization under which the resource exists.")
+		workmail_disassociateDelegateFromResourceCmd.Flags().String("resource-id", "", "The identifier of the resource from which delegates' set members are removed.")
+		workmail_disassociateDelegateFromResourceCmd.MarkFlagRequired("entity-id")
+		workmail_disassociateDelegateFromResourceCmd.MarkFlagRequired("organization-id")
+		workmail_disassociateDelegateFromResourceCmd.MarkFlagRequired("resource-id")
+	})
 	workmailCmd.AddCommand(workmail_disassociateDelegateFromResourceCmd)
 }

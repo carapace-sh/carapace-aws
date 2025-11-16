@@ -12,9 +12,11 @@ var workmail_describeEmailMonitoringConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_describeEmailMonitoringConfigurationCmd).Standalone()
+	carapace.Gen(workmail_describeEmailMonitoringConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_describeEmailMonitoringConfigurationCmd).Standalone()
 
-	workmail_describeEmailMonitoringConfigurationCmd.Flags().String("organization-id", "", "The ID of the organization for which the email monitoring configuration is described.")
-	workmail_describeEmailMonitoringConfigurationCmd.MarkFlagRequired("organization-id")
+		workmail_describeEmailMonitoringConfigurationCmd.Flags().String("organization-id", "", "The ID of the organization for which the email monitoring configuration is described.")
+		workmail_describeEmailMonitoringConfigurationCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_describeEmailMonitoringConfigurationCmd)
 }

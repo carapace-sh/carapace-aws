@@ -12,9 +12,11 @@ var mediaconvert_putPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_putPolicyCmd).Standalone()
+	carapace.Gen(mediaconvert_putPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_putPolicyCmd).Standalone()
 
-	mediaconvert_putPolicyCmd.Flags().String("policy", "", "A policy configures behavior that you allow or disallow for your account.")
-	mediaconvert_putPolicyCmd.MarkFlagRequired("policy")
+		mediaconvert_putPolicyCmd.Flags().String("policy", "", "A policy configures behavior that you allow or disallow for your account.")
+		mediaconvert_putPolicyCmd.MarkFlagRequired("policy")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_putPolicyCmd)
 }

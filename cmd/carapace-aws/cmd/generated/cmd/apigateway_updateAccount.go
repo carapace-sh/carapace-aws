@@ -12,8 +12,10 @@ var apigateway_updateAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_updateAccountCmd).Standalone()
+	carapace.Gen(apigateway_updateAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_updateAccountCmd).Standalone()
 
-	apigateway_updateAccountCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
+		apigateway_updateAccountCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
+	})
 	apigatewayCmd.AddCommand(apigateway_updateAccountCmd)
 }

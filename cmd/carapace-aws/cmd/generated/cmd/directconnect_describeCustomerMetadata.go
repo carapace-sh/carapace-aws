@@ -12,7 +12,9 @@ var directconnect_describeCustomerMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_describeCustomerMetadataCmd).Standalone()
+	carapace.Gen(directconnect_describeCustomerMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_describeCustomerMetadataCmd).Standalone()
 
+	})
 	directconnectCmd.AddCommand(directconnect_describeCustomerMetadataCmd)
 }

@@ -12,9 +12,11 @@ var iam_deleteServerCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteServerCertificateCmd).Standalone()
+	carapace.Gen(iam_deleteServerCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteServerCertificateCmd).Standalone()
 
-	iam_deleteServerCertificateCmd.Flags().String("server-certificate-name", "", "The name of the server certificate you want to delete.")
-	iam_deleteServerCertificateCmd.MarkFlagRequired("server-certificate-name")
+		iam_deleteServerCertificateCmd.Flags().String("server-certificate-name", "", "The name of the server certificate you want to delete.")
+		iam_deleteServerCertificateCmd.MarkFlagRequired("server-certificate-name")
+	})
 	iamCmd.AddCommand(iam_deleteServerCertificateCmd)
 }

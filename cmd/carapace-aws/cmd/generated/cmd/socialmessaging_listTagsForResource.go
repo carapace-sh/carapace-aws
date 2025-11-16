@@ -12,9 +12,11 @@ var socialmessaging_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(socialmessaging_listTagsForResourceCmd).Standalone()
+	carapace.Gen(socialmessaging_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_listTagsForResourceCmd).Standalone()
 
-	socialmessaging_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to retrieve the tags from.")
-	socialmessaging_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		socialmessaging_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to retrieve the tags from.")
+		socialmessaging_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_listTagsForResourceCmd)
 }

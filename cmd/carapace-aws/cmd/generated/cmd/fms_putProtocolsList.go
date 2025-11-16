@@ -12,10 +12,12 @@ var fms_putProtocolsListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_putProtocolsListCmd).Standalone()
+	carapace.Gen(fms_putProtocolsListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_putProtocolsListCmd).Standalone()
 
-	fms_putProtocolsListCmd.Flags().String("protocols-list", "", "The details of the Firewall Manager protocols list to be created.")
-	fms_putProtocolsListCmd.Flags().String("tag-list", "", "The tags associated with the resource.")
-	fms_putProtocolsListCmd.MarkFlagRequired("protocols-list")
+		fms_putProtocolsListCmd.Flags().String("protocols-list", "", "The details of the Firewall Manager protocols list to be created.")
+		fms_putProtocolsListCmd.Flags().String("tag-list", "", "The tags associated with the resource.")
+		fms_putProtocolsListCmd.MarkFlagRequired("protocols-list")
+	})
 	fmsCmd.AddCommand(fms_putProtocolsListCmd)
 }

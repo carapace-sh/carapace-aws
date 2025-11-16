@@ -12,13 +12,15 @@ var connect_listIntegrationAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listIntegrationAssociationsCmd).Standalone()
+	carapace.Gen(connect_listIntegrationAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listIntegrationAssociationsCmd).Standalone()
 
-	connect_listIntegrationAssociationsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listIntegrationAssociationsCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the integration.")
-	connect_listIntegrationAssociationsCmd.Flags().String("integration-type", "", "The integration type.")
-	connect_listIntegrationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listIntegrationAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listIntegrationAssociationsCmd.MarkFlagRequired("instance-id")
+		connect_listIntegrationAssociationsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listIntegrationAssociationsCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the integration.")
+		connect_listIntegrationAssociationsCmd.Flags().String("integration-type", "", "The integration type.")
+		connect_listIntegrationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listIntegrationAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listIntegrationAssociationsCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listIntegrationAssociationsCmd)
 }

@@ -12,9 +12,11 @@ var mediastoreData_deleteObjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastoreData_deleteObjectCmd).Standalone()
+	carapace.Gen(mediastoreData_deleteObjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastoreData_deleteObjectCmd).Standalone()
 
-	mediastoreData_deleteObjectCmd.Flags().String("path", "", "The path (including the file name) where the object is stored in the container.")
-	mediastoreData_deleteObjectCmd.MarkFlagRequired("path")
+		mediastoreData_deleteObjectCmd.Flags().String("path", "", "The path (including the file name) where the object is stored in the container.")
+		mediastoreData_deleteObjectCmd.MarkFlagRequired("path")
+	})
 	mediastoreDataCmd.AddCommand(mediastoreData_deleteObjectCmd)
 }

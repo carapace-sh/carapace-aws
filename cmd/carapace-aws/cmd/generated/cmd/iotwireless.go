@@ -12,7 +12,9 @@ var iotwirelessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwirelessCmd).Standalone()
+	carapace.Gen(iotwirelessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwirelessCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(iotwirelessCmd)
 }

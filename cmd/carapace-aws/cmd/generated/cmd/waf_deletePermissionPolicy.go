@@ -12,9 +12,11 @@ var waf_deletePermissionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_deletePermissionPolicyCmd).Standalone()
+	carapace.Gen(waf_deletePermissionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_deletePermissionPolicyCmd).Standalone()
 
-	waf_deletePermissionPolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the RuleGroup from which you want to delete the policy.")
-	waf_deletePermissionPolicyCmd.MarkFlagRequired("resource-arn")
+		waf_deletePermissionPolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the RuleGroup from which you want to delete the policy.")
+		waf_deletePermissionPolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	wafCmd.AddCommand(waf_deletePermissionPolicyCmd)
 }

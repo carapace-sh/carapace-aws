@@ -12,11 +12,13 @@ var chimeSdkVoice_getProxySessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_getProxySessionCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_getProxySessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_getProxySessionCmd).Standalone()
 
-	chimeSdkVoice_getProxySessionCmd.Flags().String("proxy-session-id", "", "The proxy session ID.")
-	chimeSdkVoice_getProxySessionCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_getProxySessionCmd.MarkFlagRequired("proxy-session-id")
-	chimeSdkVoice_getProxySessionCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_getProxySessionCmd.Flags().String("proxy-session-id", "", "The proxy session ID.")
+		chimeSdkVoice_getProxySessionCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_getProxySessionCmd.MarkFlagRequired("proxy-session-id")
+		chimeSdkVoice_getProxySessionCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_getProxySessionCmd)
 }

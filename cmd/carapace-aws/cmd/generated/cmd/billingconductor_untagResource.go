@@ -12,11 +12,13 @@ var billingconductor_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billingconductor_untagResourceCmd).Standalone()
+	carapace.Gen(billingconductor_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_untagResourceCmd).Standalone()
 
-	billingconductor_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which to delete tags.")
-	billingconductor_untagResourceCmd.Flags().String("tag-keys", "", "The tags to delete from the resource as a list of key-value pairs.")
-	billingconductor_untagResourceCmd.MarkFlagRequired("resource-arn")
-	billingconductor_untagResourceCmd.MarkFlagRequired("tag-keys")
+		billingconductor_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which to delete tags.")
+		billingconductor_untagResourceCmd.Flags().String("tag-keys", "", "The tags to delete from the resource as a list of key-value pairs.")
+		billingconductor_untagResourceCmd.MarkFlagRequired("resource-arn")
+		billingconductor_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	billingconductorCmd.AddCommand(billingconductor_untagResourceCmd)
 }

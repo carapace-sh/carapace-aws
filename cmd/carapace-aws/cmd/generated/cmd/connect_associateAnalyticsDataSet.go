@@ -12,12 +12,14 @@ var connect_associateAnalyticsDataSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_associateAnalyticsDataSetCmd).Standalone()
+	carapace.Gen(connect_associateAnalyticsDataSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_associateAnalyticsDataSetCmd).Standalone()
 
-	connect_associateAnalyticsDataSetCmd.Flags().String("data-set-id", "", "The identifier of the dataset to associate with the target account.")
-	connect_associateAnalyticsDataSetCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_associateAnalyticsDataSetCmd.Flags().String("target-account-id", "", "The identifier of the target account.")
-	connect_associateAnalyticsDataSetCmd.MarkFlagRequired("data-set-id")
-	connect_associateAnalyticsDataSetCmd.MarkFlagRequired("instance-id")
+		connect_associateAnalyticsDataSetCmd.Flags().String("data-set-id", "", "The identifier of the dataset to associate with the target account.")
+		connect_associateAnalyticsDataSetCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_associateAnalyticsDataSetCmd.Flags().String("target-account-id", "", "The identifier of the target account.")
+		connect_associateAnalyticsDataSetCmd.MarkFlagRequired("data-set-id")
+		connect_associateAnalyticsDataSetCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_associateAnalyticsDataSetCmd)
 }

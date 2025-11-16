@@ -12,10 +12,12 @@ var lightsail_deleteKeyPairCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteKeyPairCmd).Standalone()
+	carapace.Gen(lightsail_deleteKeyPairCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteKeyPairCmd).Standalone()
 
-	lightsail_deleteKeyPairCmd.Flags().String("expected-fingerprint", "", "The RSA fingerprint of the Lightsail default key pair to delete.")
-	lightsail_deleteKeyPairCmd.Flags().String("key-pair-name", "", "The name of the key pair to delete.")
-	lightsail_deleteKeyPairCmd.MarkFlagRequired("key-pair-name")
+		lightsail_deleteKeyPairCmd.Flags().String("expected-fingerprint", "", "The RSA fingerprint of the Lightsail default key pair to delete.")
+		lightsail_deleteKeyPairCmd.Flags().String("key-pair-name", "", "The name of the key pair to delete.")
+		lightsail_deleteKeyPairCmd.MarkFlagRequired("key-pair-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteKeyPairCmd)
 }

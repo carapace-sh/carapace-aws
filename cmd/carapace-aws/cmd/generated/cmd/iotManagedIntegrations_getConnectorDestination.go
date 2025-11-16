@@ -12,9 +12,11 @@ var iotManagedIntegrations_getConnectorDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getConnectorDestinationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getConnectorDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getConnectorDestinationCmd).Standalone()
 
-	iotManagedIntegrations_getConnectorDestinationCmd.Flags().String("identifier", "", "The identifier of the C2C connector destination.")
-	iotManagedIntegrations_getConnectorDestinationCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_getConnectorDestinationCmd.Flags().String("identifier", "", "The identifier of the C2C connector destination.")
+		iotManagedIntegrations_getConnectorDestinationCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getConnectorDestinationCmd)
 }

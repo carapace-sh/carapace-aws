@@ -12,7 +12,9 @@ var migrationhubConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubConfigCmd).Standalone()
+	carapace.Gen(migrationhubConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubConfigCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(migrationhubConfigCmd)
 }

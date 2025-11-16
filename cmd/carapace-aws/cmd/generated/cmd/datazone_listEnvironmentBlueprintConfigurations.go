@@ -12,11 +12,13 @@ var datazone_listEnvironmentBlueprintConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_listEnvironmentBlueprintConfigurationsCmd).Standalone()
+	carapace.Gen(datazone_listEnvironmentBlueprintConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_listEnvironmentBlueprintConfigurationsCmd).Standalone()
 
-	datazone_listEnvironmentBlueprintConfigurationsCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain.")
-	datazone_listEnvironmentBlueprintConfigurationsCmd.Flags().String("max-results", "", "The maximum number of blueprint configurations to return in a single call to `ListEnvironmentBlueprintConfigurations`.")
-	datazone_listEnvironmentBlueprintConfigurationsCmd.Flags().String("next-token", "", "When the number of blueprint configurations is greater than the default value for the `MaxResults` parameter, or if you explicitly specify a value for `MaxResults` that is less than the number of configurations, the response includes a pagination token named `NextToken`.")
-	datazone_listEnvironmentBlueprintConfigurationsCmd.MarkFlagRequired("domain-identifier")
+		datazone_listEnvironmentBlueprintConfigurationsCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain.")
+		datazone_listEnvironmentBlueprintConfigurationsCmd.Flags().String("max-results", "", "The maximum number of blueprint configurations to return in a single call to `ListEnvironmentBlueprintConfigurations`.")
+		datazone_listEnvironmentBlueprintConfigurationsCmd.Flags().String("next-token", "", "When the number of blueprint configurations is greater than the default value for the `MaxResults` parameter, or if you explicitly specify a value for `MaxResults` that is less than the number of configurations, the response includes a pagination token named `NextToken`.")
+		datazone_listEnvironmentBlueprintConfigurationsCmd.MarkFlagRequired("domain-identifier")
+	})
 	datazoneCmd.AddCommand(datazone_listEnvironmentBlueprintConfigurationsCmd)
 }

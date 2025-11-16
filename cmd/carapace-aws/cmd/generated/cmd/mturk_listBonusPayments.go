@@ -12,11 +12,13 @@ var mturk_listBonusPaymentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_listBonusPaymentsCmd).Standalone()
+	carapace.Gen(mturk_listBonusPaymentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_listBonusPaymentsCmd).Standalone()
 
-	mturk_listBonusPaymentsCmd.Flags().String("assignment-id", "", "The ID of the assignment associated with the bonus payments to retrieve.")
-	mturk_listBonusPaymentsCmd.Flags().String("hitid", "", "The ID of the HIT associated with the bonus payments to retrieve.")
-	mturk_listBonusPaymentsCmd.Flags().String("max-results", "", "")
-	mturk_listBonusPaymentsCmd.Flags().String("next-token", "", "Pagination token")
+		mturk_listBonusPaymentsCmd.Flags().String("assignment-id", "", "The ID of the assignment associated with the bonus payments to retrieve.")
+		mturk_listBonusPaymentsCmd.Flags().String("hitid", "", "The ID of the HIT associated with the bonus payments to retrieve.")
+		mturk_listBonusPaymentsCmd.Flags().String("max-results", "", "")
+		mturk_listBonusPaymentsCmd.Flags().String("next-token", "", "Pagination token")
+	})
 	mturkCmd.AddCommand(mturk_listBonusPaymentsCmd)
 }

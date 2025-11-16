@@ -12,11 +12,13 @@ var glue_putDataQualityProfileAnnotationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_putDataQualityProfileAnnotationCmd).Standalone()
+	carapace.Gen(glue_putDataQualityProfileAnnotationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_putDataQualityProfileAnnotationCmd).Standalone()
 
-	glue_putDataQualityProfileAnnotationCmd.Flags().String("inclusion-annotation", "", "The inclusion annotation value to apply to the profile.")
-	glue_putDataQualityProfileAnnotationCmd.Flags().String("profile-id", "", "The ID of the data quality monitoring profile to annotate.")
-	glue_putDataQualityProfileAnnotationCmd.MarkFlagRequired("inclusion-annotation")
-	glue_putDataQualityProfileAnnotationCmd.MarkFlagRequired("profile-id")
+		glue_putDataQualityProfileAnnotationCmd.Flags().String("inclusion-annotation", "", "The inclusion annotation value to apply to the profile.")
+		glue_putDataQualityProfileAnnotationCmd.Flags().String("profile-id", "", "The ID of the data quality monitoring profile to annotate.")
+		glue_putDataQualityProfileAnnotationCmd.MarkFlagRequired("inclusion-annotation")
+		glue_putDataQualityProfileAnnotationCmd.MarkFlagRequired("profile-id")
+	})
 	glueCmd.AddCommand(glue_putDataQualityProfileAnnotationCmd)
 }

@@ -12,9 +12,11 @@ var mediaconvert_cancelJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_cancelJobCmd).Standalone()
+	carapace.Gen(mediaconvert_cancelJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_cancelJobCmd).Standalone()
 
-	mediaconvert_cancelJobCmd.Flags().String("id", "", "The Job ID of the job to be cancelled.")
-	mediaconvert_cancelJobCmd.MarkFlagRequired("id")
+		mediaconvert_cancelJobCmd.Flags().String("id", "", "The Job ID of the job to be cancelled.")
+		mediaconvert_cancelJobCmd.MarkFlagRequired("id")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_cancelJobCmd)
 }

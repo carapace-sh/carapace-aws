@@ -12,9 +12,11 @@ var devicefarm_getDeviceInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_getDeviceInstanceCmd).Standalone()
+	carapace.Gen(devicefarm_getDeviceInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_getDeviceInstanceCmd).Standalone()
 
-	devicefarm_getDeviceInstanceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the instance you're requesting information about.")
-	devicefarm_getDeviceInstanceCmd.MarkFlagRequired("arn")
+		devicefarm_getDeviceInstanceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the instance you're requesting information about.")
+		devicefarm_getDeviceInstanceCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_getDeviceInstanceCmd)
 }

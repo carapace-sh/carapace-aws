@@ -12,9 +12,11 @@ var odb_deleteCloudVmClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_deleteCloudVmClusterCmd).Standalone()
+	carapace.Gen(odb_deleteCloudVmClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_deleteCloudVmClusterCmd).Standalone()
 
-	odb_deleteCloudVmClusterCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster to delete.")
-	odb_deleteCloudVmClusterCmd.MarkFlagRequired("cloud-vm-cluster-id")
+		odb_deleteCloudVmClusterCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster to delete.")
+		odb_deleteCloudVmClusterCmd.MarkFlagRequired("cloud-vm-cluster-id")
+	})
 	odbCmd.AddCommand(odb_deleteCloudVmClusterCmd)
 }

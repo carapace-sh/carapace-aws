@@ -12,9 +12,11 @@ var secretsmanager_describeSecretCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_describeSecretCmd).Standalone()
+	carapace.Gen(secretsmanager_describeSecretCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_describeSecretCmd).Standalone()
 
-	secretsmanager_describeSecretCmd.Flags().String("secret-id", "", "The ARN or name of the secret.")
-	secretsmanager_describeSecretCmd.MarkFlagRequired("secret-id")
+		secretsmanager_describeSecretCmd.Flags().String("secret-id", "", "The ARN or name of the secret.")
+		secretsmanager_describeSecretCmd.MarkFlagRequired("secret-id")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_describeSecretCmd)
 }

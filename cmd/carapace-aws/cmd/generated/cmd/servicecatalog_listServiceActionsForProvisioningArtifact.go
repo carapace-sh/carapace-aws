@@ -12,14 +12,16 @@ var servicecatalog_listServiceActionsForProvisioningArtifactCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(servicecatalog_listServiceActionsForProvisioningArtifactCmd).Standalone()
+	carapace.Gen(servicecatalog_listServiceActionsForProvisioningArtifactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_listServiceActionsForProvisioningArtifactCmd).Standalone()
 
-	servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("page-token", "", "The page token for the next set of results.")
-	servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("product-id", "", "The product identifier.")
-	servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("provisioning-artifact-id", "", "The identifier of the provisioning artifact.")
-	servicecatalog_listServiceActionsForProvisioningArtifactCmd.MarkFlagRequired("product-id")
-	servicecatalog_listServiceActionsForProvisioningArtifactCmd.MarkFlagRequired("provisioning-artifact-id")
+		servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("product-id", "", "The product identifier.")
+		servicecatalog_listServiceActionsForProvisioningArtifactCmd.Flags().String("provisioning-artifact-id", "", "The identifier of the provisioning artifact.")
+		servicecatalog_listServiceActionsForProvisioningArtifactCmd.MarkFlagRequired("product-id")
+		servicecatalog_listServiceActionsForProvisioningArtifactCmd.MarkFlagRequired("provisioning-artifact-id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_listServiceActionsForProvisioningArtifactCmd)
 }

@@ -12,11 +12,13 @@ var sagemaker_listUltraServersByReservedCapacityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_listUltraServersByReservedCapacityCmd).Standalone()
+	carapace.Gen(sagemaker_listUltraServersByReservedCapacityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_listUltraServersByReservedCapacityCmd).Standalone()
 
-	sagemaker_listUltraServersByReservedCapacityCmd.Flags().String("max-results", "", "The maximum number of UltraServers to return in the response.")
-	sagemaker_listUltraServersByReservedCapacityCmd.Flags().String("next-token", "", "If the previous response was truncated, you receive this token.")
-	sagemaker_listUltraServersByReservedCapacityCmd.Flags().String("reserved-capacity-arn", "", "The ARN of the reserved capacity to list UltraServers for.")
-	sagemaker_listUltraServersByReservedCapacityCmd.MarkFlagRequired("reserved-capacity-arn")
+		sagemaker_listUltraServersByReservedCapacityCmd.Flags().String("max-results", "", "The maximum number of UltraServers to return in the response.")
+		sagemaker_listUltraServersByReservedCapacityCmd.Flags().String("next-token", "", "If the previous response was truncated, you receive this token.")
+		sagemaker_listUltraServersByReservedCapacityCmd.Flags().String("reserved-capacity-arn", "", "The ARN of the reserved capacity to list UltraServers for.")
+		sagemaker_listUltraServersByReservedCapacityCmd.MarkFlagRequired("reserved-capacity-arn")
+	})
 	sagemakerCmd.AddCommand(sagemaker_listUltraServersByReservedCapacityCmd)
 }

@@ -12,7 +12,9 @@ var lakeformation_getDataLakePrincipalCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_getDataLakePrincipalCmd).Standalone()
+	carapace.Gen(lakeformation_getDataLakePrincipalCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_getDataLakePrincipalCmd).Standalone()
 
+	})
 	lakeformationCmd.AddCommand(lakeformation_getDataLakePrincipalCmd)
 }

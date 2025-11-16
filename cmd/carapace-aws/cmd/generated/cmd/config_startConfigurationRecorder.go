@@ -12,9 +12,11 @@ var config_startConfigurationRecorderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_startConfigurationRecorderCmd).Standalone()
+	carapace.Gen(config_startConfigurationRecorderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_startConfigurationRecorderCmd).Standalone()
 
-	config_startConfigurationRecorderCmd.Flags().String("configuration-recorder-name", "", "The name of the customer managed configuration recorder that you want to start.")
-	config_startConfigurationRecorderCmd.MarkFlagRequired("configuration-recorder-name")
+		config_startConfigurationRecorderCmd.Flags().String("configuration-recorder-name", "", "The name of the customer managed configuration recorder that you want to start.")
+		config_startConfigurationRecorderCmd.MarkFlagRequired("configuration-recorder-name")
+	})
 	configCmd.AddCommand(config_startConfigurationRecorderCmd)
 }

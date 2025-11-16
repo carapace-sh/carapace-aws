@@ -12,9 +12,11 @@ var workspacesWeb_listBrowserSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_listBrowserSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_listBrowserSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_listBrowserSettingsCmd).Standalone()
 
-	workspacesWeb_listBrowserSettingsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
-	workspacesWeb_listBrowserSettingsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		workspacesWeb_listBrowserSettingsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
+		workspacesWeb_listBrowserSettingsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_listBrowserSettingsCmd)
 }

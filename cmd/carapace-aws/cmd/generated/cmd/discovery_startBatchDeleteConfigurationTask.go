@@ -12,11 +12,13 @@ var discovery_startBatchDeleteConfigurationTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_startBatchDeleteConfigurationTaskCmd).Standalone()
+	carapace.Gen(discovery_startBatchDeleteConfigurationTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_startBatchDeleteConfigurationTaskCmd).Standalone()
 
-	discovery_startBatchDeleteConfigurationTaskCmd.Flags().String("configuration-ids", "", "The list of configuration IDs that will be deleted by the task.")
-	discovery_startBatchDeleteConfigurationTaskCmd.Flags().String("configuration-type", "", "The type of configuration item to delete.")
-	discovery_startBatchDeleteConfigurationTaskCmd.MarkFlagRequired("configuration-ids")
-	discovery_startBatchDeleteConfigurationTaskCmd.MarkFlagRequired("configuration-type")
+		discovery_startBatchDeleteConfigurationTaskCmd.Flags().String("configuration-ids", "", "The list of configuration IDs that will be deleted by the task.")
+		discovery_startBatchDeleteConfigurationTaskCmd.Flags().String("configuration-type", "", "The type of configuration item to delete.")
+		discovery_startBatchDeleteConfigurationTaskCmd.MarkFlagRequired("configuration-ids")
+		discovery_startBatchDeleteConfigurationTaskCmd.MarkFlagRequired("configuration-type")
+	})
 	discoveryCmd.AddCommand(discovery_startBatchDeleteConfigurationTaskCmd)
 }

@@ -12,9 +12,11 @@ var kafka_getClusterPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_getClusterPolicyCmd).Standalone()
+	carapace.Gen(kafka_getClusterPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_getClusterPolicyCmd).Standalone()
 
-	kafka_getClusterPolicyCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
-	kafka_getClusterPolicyCmd.MarkFlagRequired("cluster-arn")
+		kafka_getClusterPolicyCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
+		kafka_getClusterPolicyCmd.MarkFlagRequired("cluster-arn")
+	})
 	kafkaCmd.AddCommand(kafka_getClusterPolicyCmd)
 }

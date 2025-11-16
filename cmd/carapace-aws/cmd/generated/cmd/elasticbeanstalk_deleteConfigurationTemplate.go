@@ -12,11 +12,13 @@ var elasticbeanstalk_deleteConfigurationTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_deleteConfigurationTemplateCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_deleteConfigurationTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_deleteConfigurationTemplateCmd).Standalone()
 
-	elasticbeanstalk_deleteConfigurationTemplateCmd.Flags().String("application-name", "", "The name of the application to delete the configuration template from.")
-	elasticbeanstalk_deleteConfigurationTemplateCmd.Flags().String("template-name", "", "The name of the configuration template to delete.")
-	elasticbeanstalk_deleteConfigurationTemplateCmd.MarkFlagRequired("application-name")
-	elasticbeanstalk_deleteConfigurationTemplateCmd.MarkFlagRequired("template-name")
+		elasticbeanstalk_deleteConfigurationTemplateCmd.Flags().String("application-name", "", "The name of the application to delete the configuration template from.")
+		elasticbeanstalk_deleteConfigurationTemplateCmd.Flags().String("template-name", "", "The name of the configuration template to delete.")
+		elasticbeanstalk_deleteConfigurationTemplateCmd.MarkFlagRequired("application-name")
+		elasticbeanstalk_deleteConfigurationTemplateCmd.MarkFlagRequired("template-name")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_deleteConfigurationTemplateCmd)
 }

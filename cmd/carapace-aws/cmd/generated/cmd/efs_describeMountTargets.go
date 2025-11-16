@@ -12,12 +12,14 @@ var efs_describeMountTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_describeMountTargetsCmd).Standalone()
+	carapace.Gen(efs_describeMountTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_describeMountTargetsCmd).Standalone()
 
-	efs_describeMountTargetsCmd.Flags().String("access-point-id", "", "(Optional) The ID of the access point whose mount targets that you want to list.")
-	efs_describeMountTargetsCmd.Flags().String("file-system-id", "", "(Optional) ID of the file system whose mount targets you want to list (String).")
-	efs_describeMountTargetsCmd.Flags().String("marker", "", "(Optional) Opaque pagination token returned from a previous `DescribeMountTargets` operation (String).")
-	efs_describeMountTargetsCmd.Flags().String("max-items", "", "(Optional) Maximum number of mount targets to return in the response.")
-	efs_describeMountTargetsCmd.Flags().String("mount-target-id", "", "(Optional) ID of the mount target that you want to have described (String).")
+		efs_describeMountTargetsCmd.Flags().String("access-point-id", "", "(Optional) The ID of the access point whose mount targets that you want to list.")
+		efs_describeMountTargetsCmd.Flags().String("file-system-id", "", "(Optional) ID of the file system whose mount targets you want to list (String).")
+		efs_describeMountTargetsCmd.Flags().String("marker", "", "(Optional) Opaque pagination token returned from a previous `DescribeMountTargets` operation (String).")
+		efs_describeMountTargetsCmd.Flags().String("max-items", "", "(Optional) Maximum number of mount targets to return in the response.")
+		efs_describeMountTargetsCmd.Flags().String("mount-target-id", "", "(Optional) ID of the mount target that you want to have described (String).")
+	})
 	efsCmd.AddCommand(efs_describeMountTargetsCmd)
 }

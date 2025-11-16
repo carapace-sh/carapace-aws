@@ -12,11 +12,13 @@ var pinpoint_createEmailTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_createEmailTemplateCmd).Standalone()
+	carapace.Gen(pinpoint_createEmailTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_createEmailTemplateCmd).Standalone()
 
-	pinpoint_createEmailTemplateCmd.Flags().String("email-template-request", "", "")
-	pinpoint_createEmailTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_createEmailTemplateCmd.MarkFlagRequired("email-template-request")
-	pinpoint_createEmailTemplateCmd.MarkFlagRequired("template-name")
+		pinpoint_createEmailTemplateCmd.Flags().String("email-template-request", "", "")
+		pinpoint_createEmailTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_createEmailTemplateCmd.MarkFlagRequired("email-template-request")
+		pinpoint_createEmailTemplateCmd.MarkFlagRequired("template-name")
+	})
 	pinpointCmd.AddCommand(pinpoint_createEmailTemplateCmd)
 }

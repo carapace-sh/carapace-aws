@@ -12,10 +12,12 @@ var organizations_listDelegatedAdministratorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listDelegatedAdministratorsCmd).Standalone()
+	carapace.Gen(organizations_listDelegatedAdministratorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listDelegatedAdministratorsCmd).Standalone()
 
-	organizations_listDelegatedAdministratorsCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	organizations_listDelegatedAdministratorsCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
-	organizations_listDelegatedAdministratorsCmd.Flags().String("service-principal", "", "Specifies a service principal name.")
+		organizations_listDelegatedAdministratorsCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		organizations_listDelegatedAdministratorsCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listDelegatedAdministratorsCmd.Flags().String("service-principal", "", "Specifies a service principal name.")
+	})
 	organizationsCmd.AddCommand(organizations_listDelegatedAdministratorsCmd)
 }

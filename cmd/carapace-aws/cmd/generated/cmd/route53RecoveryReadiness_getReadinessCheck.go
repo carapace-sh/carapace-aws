@@ -12,9 +12,11 @@ var route53RecoveryReadiness_getReadinessCheckCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_getReadinessCheckCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_getReadinessCheckCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_getReadinessCheckCmd).Standalone()
 
-	route53RecoveryReadiness_getReadinessCheckCmd.Flags().String("readiness-check-name", "", "Name of a readiness check.")
-	route53RecoveryReadiness_getReadinessCheckCmd.MarkFlagRequired("readiness-check-name")
+		route53RecoveryReadiness_getReadinessCheckCmd.Flags().String("readiness-check-name", "", "Name of a readiness check.")
+		route53RecoveryReadiness_getReadinessCheckCmd.MarkFlagRequired("readiness-check-name")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_getReadinessCheckCmd)
 }

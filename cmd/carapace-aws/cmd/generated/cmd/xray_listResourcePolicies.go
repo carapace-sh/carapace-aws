@@ -12,8 +12,10 @@ var xray_listResourcePoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_listResourcePoliciesCmd).Standalone()
+	carapace.Gen(xray_listResourcePoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_listResourcePoliciesCmd).Standalone()
 
-	xray_listResourcePoliciesCmd.Flags().String("next-token", "", "Not currently supported.")
+		xray_listResourcePoliciesCmd.Flags().String("next-token", "", "Not currently supported.")
+	})
 	xrayCmd.AddCommand(xray_listResourcePoliciesCmd)
 }

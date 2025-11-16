@@ -12,9 +12,11 @@ var secretsmanager_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_getResourcePolicyCmd).Standalone()
+	carapace.Gen(secretsmanager_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_getResourcePolicyCmd).Standalone()
 
-	secretsmanager_getResourcePolicyCmd.Flags().String("secret-id", "", "The ARN or name of the secret to retrieve the attached resource-based policy for.")
-	secretsmanager_getResourcePolicyCmd.MarkFlagRequired("secret-id")
+		secretsmanager_getResourcePolicyCmd.Flags().String("secret-id", "", "The ARN or name of the secret to retrieve the attached resource-based policy for.")
+		secretsmanager_getResourcePolicyCmd.MarkFlagRequired("secret-id")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_getResourcePolicyCmd)
 }

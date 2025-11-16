@@ -12,9 +12,11 @@ var sagemaker_deleteNotebookInstanceLifecycleConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteNotebookInstanceLifecycleConfigCmd).Standalone()
+	carapace.Gen(sagemaker_deleteNotebookInstanceLifecycleConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteNotebookInstanceLifecycleConfigCmd).Standalone()
 
-	sagemaker_deleteNotebookInstanceLifecycleConfigCmd.Flags().String("notebook-instance-lifecycle-config-name", "", "The name of the lifecycle configuration to delete.")
-	sagemaker_deleteNotebookInstanceLifecycleConfigCmd.MarkFlagRequired("notebook-instance-lifecycle-config-name")
+		sagemaker_deleteNotebookInstanceLifecycleConfigCmd.Flags().String("notebook-instance-lifecycle-config-name", "", "The name of the lifecycle configuration to delete.")
+		sagemaker_deleteNotebookInstanceLifecycleConfigCmd.MarkFlagRequired("notebook-instance-lifecycle-config-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteNotebookInstanceLifecycleConfigCmd)
 }

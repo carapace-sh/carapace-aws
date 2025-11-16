@@ -12,9 +12,11 @@ var lambda_listCodeSigningConfigsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_listCodeSigningConfigsCmd).Standalone()
+	carapace.Gen(lambda_listCodeSigningConfigsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_listCodeSigningConfigsCmd).Standalone()
 
-	lambda_listCodeSigningConfigsCmd.Flags().String("marker", "", "Specify the pagination token that's returned by a previous request to retrieve the next page of results.")
-	lambda_listCodeSigningConfigsCmd.Flags().String("max-items", "", "Maximum number of items to return.")
+		lambda_listCodeSigningConfigsCmd.Flags().String("marker", "", "Specify the pagination token that's returned by a previous request to retrieve the next page of results.")
+		lambda_listCodeSigningConfigsCmd.Flags().String("max-items", "", "Maximum number of items to return.")
+	})
 	lambdaCmd.AddCommand(lambda_listCodeSigningConfigsCmd)
 }

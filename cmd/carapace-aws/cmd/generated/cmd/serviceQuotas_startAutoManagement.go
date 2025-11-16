@@ -12,13 +12,15 @@ var serviceQuotas_startAutoManagementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_startAutoManagementCmd).Standalone()
+	carapace.Gen(serviceQuotas_startAutoManagementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_startAutoManagementCmd).Standalone()
 
-	serviceQuotas_startAutoManagementCmd.Flags().String("exclusion-list", "", "List of Amazon Web Services services excluded from Automatic Management.")
-	serviceQuotas_startAutoManagementCmd.Flags().String("notification-arn", "", "The [User Notifications](https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table) Amazon Resource Name (ARN) for Automatic Management notifications.")
-	serviceQuotas_startAutoManagementCmd.Flags().String("opt-in-level", "", "Sets the opt-in level for Automatic Management.")
-	serviceQuotas_startAutoManagementCmd.Flags().String("opt-in-type", "", "Sets the opt-in type for Automatic Management.")
-	serviceQuotas_startAutoManagementCmd.MarkFlagRequired("opt-in-level")
-	serviceQuotas_startAutoManagementCmd.MarkFlagRequired("opt-in-type")
+		serviceQuotas_startAutoManagementCmd.Flags().String("exclusion-list", "", "List of Amazon Web Services services excluded from Automatic Management.")
+		serviceQuotas_startAutoManagementCmd.Flags().String("notification-arn", "", "The [User Notifications](https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table) Amazon Resource Name (ARN) for Automatic Management notifications.")
+		serviceQuotas_startAutoManagementCmd.Flags().String("opt-in-level", "", "Sets the opt-in level for Automatic Management.")
+		serviceQuotas_startAutoManagementCmd.Flags().String("opt-in-type", "", "Sets the opt-in type for Automatic Management.")
+		serviceQuotas_startAutoManagementCmd.MarkFlagRequired("opt-in-level")
+		serviceQuotas_startAutoManagementCmd.MarkFlagRequired("opt-in-type")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_startAutoManagementCmd)
 }

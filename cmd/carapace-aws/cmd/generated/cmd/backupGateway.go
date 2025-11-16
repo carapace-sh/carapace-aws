@@ -12,7 +12,9 @@ var backupGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGatewayCmd).Standalone()
+	carapace.Gen(backupGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGatewayCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(backupGatewayCmd)
 }

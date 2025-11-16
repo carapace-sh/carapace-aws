@@ -12,13 +12,15 @@ var kinesisanalyticsv2_listApplicationOperationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_listApplicationOperationsCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_listApplicationOperationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_listApplicationOperationsCmd).Standalone()
 
-	kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("application-name", "", "")
-	kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("limit", "", "")
-	kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("next-token", "", "")
-	kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("operation", "", "")
-	kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("operation-status", "", "")
-	kinesisanalyticsv2_listApplicationOperationsCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("application-name", "", "")
+		kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("limit", "", "")
+		kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("next-token", "", "")
+		kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("operation", "", "")
+		kinesisanalyticsv2_listApplicationOperationsCmd.Flags().String("operation-status", "", "")
+		kinesisanalyticsv2_listApplicationOperationsCmd.MarkFlagRequired("application-name")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_listApplicationOperationsCmd)
 }

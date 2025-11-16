@@ -12,9 +12,11 @@ var batch_deleteJobQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_deleteJobQueueCmd).Standalone()
+	carapace.Gen(batch_deleteJobQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_deleteJobQueueCmd).Standalone()
 
-	batch_deleteJobQueueCmd.Flags().String("job-queue", "", "The short name or full Amazon Resource Name (ARN) of the queue to delete.")
-	batch_deleteJobQueueCmd.MarkFlagRequired("job-queue")
+		batch_deleteJobQueueCmd.Flags().String("job-queue", "", "The short name or full Amazon Resource Name (ARN) of the queue to delete.")
+		batch_deleteJobQueueCmd.MarkFlagRequired("job-queue")
+	})
 	batchCmd.AddCommand(batch_deleteJobQueueCmd)
 }

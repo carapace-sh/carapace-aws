@@ -12,10 +12,12 @@ var imagebuilder_listDistributionConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_listDistributionConfigurationsCmd).Standalone()
+	carapace.Gen(imagebuilder_listDistributionConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_listDistributionConfigurationsCmd).Standalone()
 
-	imagebuilder_listDistributionConfigurationsCmd.Flags().String("filters", "", "You can filter on `name` to streamline results.")
-	imagebuilder_listDistributionConfigurationsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
-	imagebuilder_listDistributionConfigurationsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		imagebuilder_listDistributionConfigurationsCmd.Flags().String("filters", "", "You can filter on `name` to streamline results.")
+		imagebuilder_listDistributionConfigurationsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
+		imagebuilder_listDistributionConfigurationsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_listDistributionConfigurationsCmd)
 }

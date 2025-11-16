@@ -12,11 +12,13 @@ var elb_deregisterInstancesFromLoadBalancerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_deregisterInstancesFromLoadBalancerCmd).Standalone()
+	carapace.Gen(elb_deregisterInstancesFromLoadBalancerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_deregisterInstancesFromLoadBalancerCmd).Standalone()
 
-	elb_deregisterInstancesFromLoadBalancerCmd.Flags().String("instances", "", "The IDs of the instances.")
-	elb_deregisterInstancesFromLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_deregisterInstancesFromLoadBalancerCmd.MarkFlagRequired("instances")
-	elb_deregisterInstancesFromLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+		elb_deregisterInstancesFromLoadBalancerCmd.Flags().String("instances", "", "The IDs of the instances.")
+		elb_deregisterInstancesFromLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_deregisterInstancesFromLoadBalancerCmd.MarkFlagRequired("instances")
+		elb_deregisterInstancesFromLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+	})
 	elbCmd.AddCommand(elb_deregisterInstancesFromLoadBalancerCmd)
 }

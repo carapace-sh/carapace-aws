@@ -12,10 +12,12 @@ var backupsearch_listSearchJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupsearch_listSearchJobsCmd).Standalone()
+	carapace.Gen(backupsearch_listSearchJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupsearch_listSearchJobsCmd).Standalone()
 
-	backupsearch_listSearchJobsCmd.Flags().String("by-status", "", "Include this parameter to filter list by search job status.")
-	backupsearch_listSearchJobsCmd.Flags().String("max-results", "", "The maximum number of resource list items to be returned.")
-	backupsearch_listSearchJobsCmd.Flags().String("next-token", "", "The next item following a partial list of returned search jobs.")
+		backupsearch_listSearchJobsCmd.Flags().String("by-status", "", "Include this parameter to filter list by search job status.")
+		backupsearch_listSearchJobsCmd.Flags().String("max-results", "", "The maximum number of resource list items to be returned.")
+		backupsearch_listSearchJobsCmd.Flags().String("next-token", "", "The next item following a partial list of returned search jobs.")
+	})
 	backupsearchCmd.AddCommand(backupsearch_listSearchJobsCmd)
 }

@@ -12,9 +12,11 @@ var dsql_getClusterPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsql_getClusterPolicyCmd).Standalone()
+	carapace.Gen(dsql_getClusterPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsql_getClusterPolicyCmd).Standalone()
 
-	dsql_getClusterPolicyCmd.Flags().String("identifier", "", "The ID of the cluster to retrieve the policy from.")
-	dsql_getClusterPolicyCmd.MarkFlagRequired("identifier")
+		dsql_getClusterPolicyCmd.Flags().String("identifier", "", "The ID of the cluster to retrieve the policy from.")
+		dsql_getClusterPolicyCmd.MarkFlagRequired("identifier")
+	})
 	dsqlCmd.AddCommand(dsql_getClusterPolicyCmd)
 }

@@ -12,12 +12,14 @@ var lexv2Models_deleteBotAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_deleteBotAliasCmd).Standalone()
+	carapace.Gen(lexv2Models_deleteBotAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_deleteBotAliasCmd).Standalone()
 
-	lexv2Models_deleteBotAliasCmd.Flags().String("bot-alias-id", "", "The unique identifier of the bot alias to delete.")
-	lexv2Models_deleteBotAliasCmd.Flags().String("bot-id", "", "The unique identifier of the bot associated with the alias to delete.")
-	lexv2Models_deleteBotAliasCmd.Flags().String("skip-resource-in-use-check", "", "By default, Amazon Lex checks if any other resource, such as a bot network, is using the bot alias before it is deleted and throws a `ResourceInUseException` exception if the alias is being used by another resource.")
-	lexv2Models_deleteBotAliasCmd.MarkFlagRequired("bot-alias-id")
-	lexv2Models_deleteBotAliasCmd.MarkFlagRequired("bot-id")
+		lexv2Models_deleteBotAliasCmd.Flags().String("bot-alias-id", "", "The unique identifier of the bot alias to delete.")
+		lexv2Models_deleteBotAliasCmd.Flags().String("bot-id", "", "The unique identifier of the bot associated with the alias to delete.")
+		lexv2Models_deleteBotAliasCmd.Flags().String("skip-resource-in-use-check", "", "By default, Amazon Lex checks if any other resource, such as a bot network, is using the bot alias before it is deleted and throws a `ResourceInUseException` exception if the alias is being used by another resource.")
+		lexv2Models_deleteBotAliasCmd.MarkFlagRequired("bot-alias-id")
+		lexv2Models_deleteBotAliasCmd.MarkFlagRequired("bot-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_deleteBotAliasCmd)
 }

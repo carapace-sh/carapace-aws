@@ -12,13 +12,15 @@ var appstream_updateImagePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_updateImagePermissionsCmd).Standalone()
+	carapace.Gen(appstream_updateImagePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_updateImagePermissionsCmd).Standalone()
 
-	appstream_updateImagePermissionsCmd.Flags().String("image-permissions", "", "The permissions for the image.")
-	appstream_updateImagePermissionsCmd.Flags().String("name", "", "The name of the private image.")
-	appstream_updateImagePermissionsCmd.Flags().String("shared-account-id", "", "The 12-digit identifier of the AWS account for which you want add or update image permissions.")
-	appstream_updateImagePermissionsCmd.MarkFlagRequired("image-permissions")
-	appstream_updateImagePermissionsCmd.MarkFlagRequired("name")
-	appstream_updateImagePermissionsCmd.MarkFlagRequired("shared-account-id")
+		appstream_updateImagePermissionsCmd.Flags().String("image-permissions", "", "The permissions for the image.")
+		appstream_updateImagePermissionsCmd.Flags().String("name", "", "The name of the private image.")
+		appstream_updateImagePermissionsCmd.Flags().String("shared-account-id", "", "The 12-digit identifier of the AWS account for which you want add or update image permissions.")
+		appstream_updateImagePermissionsCmd.MarkFlagRequired("image-permissions")
+		appstream_updateImagePermissionsCmd.MarkFlagRequired("name")
+		appstream_updateImagePermissionsCmd.MarkFlagRequired("shared-account-id")
+	})
 	appstreamCmd.AddCommand(appstream_updateImagePermissionsCmd)
 }

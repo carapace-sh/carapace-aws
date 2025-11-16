@@ -12,11 +12,13 @@ var bedrockAgent_getAgentAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_getAgentAliasCmd).Standalone()
+	carapace.Gen(bedrockAgent_getAgentAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_getAgentAliasCmd).Standalone()
 
-	bedrockAgent_getAgentAliasCmd.Flags().String("agent-alias-id", "", "The unique identifier of the alias for which to get information.")
-	bedrockAgent_getAgentAliasCmd.Flags().String("agent-id", "", "The unique identifier of the agent to which the alias to get information belongs.")
-	bedrockAgent_getAgentAliasCmd.MarkFlagRequired("agent-alias-id")
-	bedrockAgent_getAgentAliasCmd.MarkFlagRequired("agent-id")
+		bedrockAgent_getAgentAliasCmd.Flags().String("agent-alias-id", "", "The unique identifier of the alias for which to get information.")
+		bedrockAgent_getAgentAliasCmd.Flags().String("agent-id", "", "The unique identifier of the agent to which the alias to get information belongs.")
+		bedrockAgent_getAgentAliasCmd.MarkFlagRequired("agent-alias-id")
+		bedrockAgent_getAgentAliasCmd.MarkFlagRequired("agent-id")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_getAgentAliasCmd)
 }

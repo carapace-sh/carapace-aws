@@ -12,11 +12,13 @@ var workmail_getMailDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_getMailDomainCmd).Standalone()
+	carapace.Gen(workmail_getMailDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_getMailDomainCmd).Standalone()
 
-	workmail_getMailDomainCmd.Flags().String("domain-name", "", "The domain from which you want to retrieve details.")
-	workmail_getMailDomainCmd.Flags().String("organization-id", "", "The WorkMail organization for which the domain is retrieved.")
-	workmail_getMailDomainCmd.MarkFlagRequired("domain-name")
-	workmail_getMailDomainCmd.MarkFlagRequired("organization-id")
+		workmail_getMailDomainCmd.Flags().String("domain-name", "", "The domain from which you want to retrieve details.")
+		workmail_getMailDomainCmd.Flags().String("organization-id", "", "The WorkMail organization for which the domain is retrieved.")
+		workmail_getMailDomainCmd.MarkFlagRequired("domain-name")
+		workmail_getMailDomainCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_getMailDomainCmd)
 }

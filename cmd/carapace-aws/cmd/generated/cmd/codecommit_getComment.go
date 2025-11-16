@@ -12,9 +12,11 @@ var codecommit_getCommentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_getCommentCmd).Standalone()
+	carapace.Gen(codecommit_getCommentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_getCommentCmd).Standalone()
 
-	codecommit_getCommentCmd.Flags().String("comment-id", "", "The unique, system-generated ID of the comment.")
-	codecommit_getCommentCmd.MarkFlagRequired("comment-id")
+		codecommit_getCommentCmd.Flags().String("comment-id", "", "The unique, system-generated ID of the comment.")
+		codecommit_getCommentCmd.MarkFlagRequired("comment-id")
+	})
 	codecommitCmd.AddCommand(codecommit_getCommentCmd)
 }

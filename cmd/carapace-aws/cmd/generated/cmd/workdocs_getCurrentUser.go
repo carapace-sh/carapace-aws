@@ -12,9 +12,11 @@ var workdocs_getCurrentUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_getCurrentUserCmd).Standalone()
+	carapace.Gen(workdocs_getCurrentUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_getCurrentUserCmd).Standalone()
 
-	workdocs_getCurrentUserCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_getCurrentUserCmd.MarkFlagRequired("authentication-token")
+		workdocs_getCurrentUserCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_getCurrentUserCmd.MarkFlagRequired("authentication-token")
+	})
 	workdocsCmd.AddCommand(workdocs_getCurrentUserCmd)
 }

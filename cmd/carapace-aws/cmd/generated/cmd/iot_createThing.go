@@ -12,12 +12,14 @@ var iot_createThingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createThingCmd).Standalone()
+	carapace.Gen(iot_createThingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createThingCmd).Standalone()
 
-	iot_createThingCmd.Flags().String("attribute-payload", "", "The attribute payload, which consists of up to three name/value pairs in a JSON document.")
-	iot_createThingCmd.Flags().String("billing-group-name", "", "The name of the billing group the thing will be added to.")
-	iot_createThingCmd.Flags().String("thing-name", "", "The name of the thing to create.")
-	iot_createThingCmd.Flags().String("thing-type-name", "", "The name of the thing type associated with the new thing.")
-	iot_createThingCmd.MarkFlagRequired("thing-name")
+		iot_createThingCmd.Flags().String("attribute-payload", "", "The attribute payload, which consists of up to three name/value pairs in a JSON document.")
+		iot_createThingCmd.Flags().String("billing-group-name", "", "The name of the billing group the thing will be added to.")
+		iot_createThingCmd.Flags().String("thing-name", "", "The name of the thing to create.")
+		iot_createThingCmd.Flags().String("thing-type-name", "", "The name of the thing type associated with the new thing.")
+		iot_createThingCmd.MarkFlagRequired("thing-name")
+	})
 	iotCmd.AddCommand(iot_createThingCmd)
 }

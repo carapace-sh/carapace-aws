@@ -12,11 +12,13 @@ var workdocs_createFolderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_createFolderCmd).Standalone()
+	carapace.Gen(workdocs_createFolderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_createFolderCmd).Standalone()
 
-	workdocs_createFolderCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_createFolderCmd.Flags().String("name", "", "The name of the new folder.")
-	workdocs_createFolderCmd.Flags().String("parent-folder-id", "", "The ID of the parent folder.")
-	workdocs_createFolderCmd.MarkFlagRequired("parent-folder-id")
+		workdocs_createFolderCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_createFolderCmd.Flags().String("name", "", "The name of the new folder.")
+		workdocs_createFolderCmd.Flags().String("parent-folder-id", "", "The ID of the parent folder.")
+		workdocs_createFolderCmd.MarkFlagRequired("parent-folder-id")
+	})
 	workdocsCmd.AddCommand(workdocs_createFolderCmd)
 }

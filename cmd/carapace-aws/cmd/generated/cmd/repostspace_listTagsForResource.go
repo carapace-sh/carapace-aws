@@ -12,9 +12,11 @@ var repostspace_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_listTagsForResourceCmd).Standalone()
+	carapace.Gen(repostspace_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_listTagsForResourceCmd).Standalone()
 
-	repostspace_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource that the tags are associated with.")
-	repostspace_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		repostspace_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource that the tags are associated with.")
+		repostspace_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	repostspaceCmd.AddCommand(repostspace_listTagsForResourceCmd)
 }

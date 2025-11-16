@@ -12,11 +12,13 @@ var applicationAutoscaling_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationAutoscaling_untagResourceCmd).Standalone()
+	carapace.Gen(applicationAutoscaling_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationAutoscaling_untagResourceCmd).Standalone()
 
-	applicationAutoscaling_untagResourceCmd.Flags().String("resource-arn", "", "Identifies the Application Auto Scaling scalable target from which to remove tags.")
-	applicationAutoscaling_untagResourceCmd.Flags().String("tag-keys", "", "One or more tag keys.")
-	applicationAutoscaling_untagResourceCmd.MarkFlagRequired("resource-arn")
-	applicationAutoscaling_untagResourceCmd.MarkFlagRequired("tag-keys")
+		applicationAutoscaling_untagResourceCmd.Flags().String("resource-arn", "", "Identifies the Application Auto Scaling scalable target from which to remove tags.")
+		applicationAutoscaling_untagResourceCmd.Flags().String("tag-keys", "", "One or more tag keys.")
+		applicationAutoscaling_untagResourceCmd.MarkFlagRequired("resource-arn")
+		applicationAutoscaling_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	applicationAutoscalingCmd.AddCommand(applicationAutoscaling_untagResourceCmd)
 }

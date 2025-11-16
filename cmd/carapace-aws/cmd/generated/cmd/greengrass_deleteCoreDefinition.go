@@ -12,9 +12,11 @@ var greengrass_deleteCoreDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_deleteCoreDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_deleteCoreDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_deleteCoreDefinitionCmd).Standalone()
 
-	greengrass_deleteCoreDefinitionCmd.Flags().String("core-definition-id", "", "The ID of the core definition.")
-	greengrass_deleteCoreDefinitionCmd.MarkFlagRequired("core-definition-id")
+		greengrass_deleteCoreDefinitionCmd.Flags().String("core-definition-id", "", "The ID of the core definition.")
+		greengrass_deleteCoreDefinitionCmd.MarkFlagRequired("core-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_deleteCoreDefinitionCmd)
 }

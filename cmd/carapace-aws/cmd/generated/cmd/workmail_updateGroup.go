@@ -12,12 +12,14 @@ var workmail_updateGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_updateGroupCmd).Standalone()
+	carapace.Gen(workmail_updateGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_updateGroupCmd).Standalone()
 
-	workmail_updateGroupCmd.Flags().String("group-id", "", "The identifier for the group to be updated.")
-	workmail_updateGroupCmd.Flags().String("hidden-from-global-address-list", "", "If enabled, the group is hidden from the global address list.")
-	workmail_updateGroupCmd.Flags().String("organization-id", "", "The identifier for the organization under which the group exists.")
-	workmail_updateGroupCmd.MarkFlagRequired("group-id")
-	workmail_updateGroupCmd.MarkFlagRequired("organization-id")
+		workmail_updateGroupCmd.Flags().String("group-id", "", "The identifier for the group to be updated.")
+		workmail_updateGroupCmd.Flags().String("hidden-from-global-address-list", "", "If enabled, the group is hidden from the global address list.")
+		workmail_updateGroupCmd.Flags().String("organization-id", "", "The identifier for the organization under which the group exists.")
+		workmail_updateGroupCmd.MarkFlagRequired("group-id")
+		workmail_updateGroupCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_updateGroupCmd)
 }

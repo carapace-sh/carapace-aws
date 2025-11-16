@@ -12,11 +12,13 @@ var emr_removeAutoScalingPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_removeAutoScalingPolicyCmd).Standalone()
+	carapace.Gen(emr_removeAutoScalingPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_removeAutoScalingPolicyCmd).Standalone()
 
-	emr_removeAutoScalingPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of a cluster.")
-	emr_removeAutoScalingPolicyCmd.Flags().String("instance-group-id", "", "Specifies the ID of the instance group to which the scaling policy is applied.")
-	emr_removeAutoScalingPolicyCmd.MarkFlagRequired("cluster-id")
-	emr_removeAutoScalingPolicyCmd.MarkFlagRequired("instance-group-id")
+		emr_removeAutoScalingPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of a cluster.")
+		emr_removeAutoScalingPolicyCmd.Flags().String("instance-group-id", "", "Specifies the ID of the instance group to which the scaling policy is applied.")
+		emr_removeAutoScalingPolicyCmd.MarkFlagRequired("cluster-id")
+		emr_removeAutoScalingPolicyCmd.MarkFlagRequired("instance-group-id")
+	})
 	emrCmd.AddCommand(emr_removeAutoScalingPolicyCmd)
 }

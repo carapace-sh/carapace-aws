@@ -12,11 +12,13 @@ var pinpoint_updateEndpointsBatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateEndpointsBatchCmd).Standalone()
+	carapace.Gen(pinpoint_updateEndpointsBatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateEndpointsBatchCmd).Standalone()
 
-	pinpoint_updateEndpointsBatchCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_updateEndpointsBatchCmd.Flags().String("endpoint-batch-request", "", "")
-	pinpoint_updateEndpointsBatchCmd.MarkFlagRequired("application-id")
-	pinpoint_updateEndpointsBatchCmd.MarkFlagRequired("endpoint-batch-request")
+		pinpoint_updateEndpointsBatchCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_updateEndpointsBatchCmd.Flags().String("endpoint-batch-request", "", "")
+		pinpoint_updateEndpointsBatchCmd.MarkFlagRequired("application-id")
+		pinpoint_updateEndpointsBatchCmd.MarkFlagRequired("endpoint-batch-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateEndpointsBatchCmd)
 }

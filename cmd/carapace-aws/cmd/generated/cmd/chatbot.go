@@ -12,7 +12,9 @@ var chatbotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbotCmd).Standalone()
+	carapace.Gen(chatbotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbotCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(chatbotCmd)
 }

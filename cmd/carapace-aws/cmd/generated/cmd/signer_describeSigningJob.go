@@ -12,9 +12,11 @@ var signer_describeSigningJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(signer_describeSigningJobCmd).Standalone()
+	carapace.Gen(signer_describeSigningJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(signer_describeSigningJobCmd).Standalone()
 
-	signer_describeSigningJobCmd.Flags().String("job-id", "", "The ID of the signing job on input.")
-	signer_describeSigningJobCmd.MarkFlagRequired("job-id")
+		signer_describeSigningJobCmd.Flags().String("job-id", "", "The ID of the signing job on input.")
+		signer_describeSigningJobCmd.MarkFlagRequired("job-id")
+	})
 	signerCmd.AddCommand(signer_describeSigningJobCmd)
 }

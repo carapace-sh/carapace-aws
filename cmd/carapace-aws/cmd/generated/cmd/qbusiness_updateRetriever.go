@@ -12,14 +12,16 @@ var qbusiness_updateRetrieverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_updateRetrieverCmd).Standalone()
+	carapace.Gen(qbusiness_updateRetrieverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_updateRetrieverCmd).Standalone()
 
-	qbusiness_updateRetrieverCmd.Flags().String("application-id", "", "The identifier of your Amazon Q Business application.")
-	qbusiness_updateRetrieverCmd.Flags().String("configuration", "", "")
-	qbusiness_updateRetrieverCmd.Flags().String("display-name", "", "The name of your retriever.")
-	qbusiness_updateRetrieverCmd.Flags().String("retriever-id", "", "The identifier of your retriever.")
-	qbusiness_updateRetrieverCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of an IAM role with permission to access the retriever and required resources.")
-	qbusiness_updateRetrieverCmd.MarkFlagRequired("application-id")
-	qbusiness_updateRetrieverCmd.MarkFlagRequired("retriever-id")
+		qbusiness_updateRetrieverCmd.Flags().String("application-id", "", "The identifier of your Amazon Q Business application.")
+		qbusiness_updateRetrieverCmd.Flags().String("configuration", "", "")
+		qbusiness_updateRetrieverCmd.Flags().String("display-name", "", "The name of your retriever.")
+		qbusiness_updateRetrieverCmd.Flags().String("retriever-id", "", "The identifier of your retriever.")
+		qbusiness_updateRetrieverCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of an IAM role with permission to access the retriever and required resources.")
+		qbusiness_updateRetrieverCmd.MarkFlagRequired("application-id")
+		qbusiness_updateRetrieverCmd.MarkFlagRequired("retriever-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_updateRetrieverCmd)
 }

@@ -12,9 +12,11 @@ var iot_listIndicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listIndicesCmd).Standalone()
+	carapace.Gen(iot_listIndicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listIndicesCmd).Standalone()
 
-	iot_listIndicesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_listIndicesCmd.Flags().String("next-token", "", "The token used to get the next set of results, or `null` if there are no additional results.")
+		iot_listIndicesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_listIndicesCmd.Flags().String("next-token", "", "The token used to get the next set of results, or `null` if there are no additional results.")
+	})
 	iotCmd.AddCommand(iot_listIndicesCmd)
 }

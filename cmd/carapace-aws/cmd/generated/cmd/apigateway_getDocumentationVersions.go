@@ -12,11 +12,13 @@ var apigateway_getDocumentationVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getDocumentationVersionsCmd).Standalone()
+	carapace.Gen(apigateway_getDocumentationVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getDocumentationVersionsCmd).Standalone()
 
-	apigateway_getDocumentationVersionsCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getDocumentationVersionsCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
-	apigateway_getDocumentationVersionsCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getDocumentationVersionsCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getDocumentationVersionsCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getDocumentationVersionsCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getDocumentationVersionsCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getDocumentationVersionsCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getDocumentationVersionsCmd)
 }

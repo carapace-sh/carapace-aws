@@ -12,12 +12,14 @@ var omics_listReadSetImportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_listReadSetImportJobsCmd).Standalone()
+	carapace.Gen(omics_listReadSetImportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_listReadSetImportJobsCmd).Standalone()
 
-	omics_listReadSetImportJobsCmd.Flags().String("filter", "", "A filter to apply to the list.")
-	omics_listReadSetImportJobsCmd.Flags().String("max-results", "", "The maximum number of jobs to return in one page of results.")
-	omics_listReadSetImportJobsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
-	omics_listReadSetImportJobsCmd.Flags().String("sequence-store-id", "", "The jobs' sequence store ID.")
-	omics_listReadSetImportJobsCmd.MarkFlagRequired("sequence-store-id")
+		omics_listReadSetImportJobsCmd.Flags().String("filter", "", "A filter to apply to the list.")
+		omics_listReadSetImportJobsCmd.Flags().String("max-results", "", "The maximum number of jobs to return in one page of results.")
+		omics_listReadSetImportJobsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		omics_listReadSetImportJobsCmd.Flags().String("sequence-store-id", "", "The jobs' sequence store ID.")
+		omics_listReadSetImportJobsCmd.MarkFlagRequired("sequence-store-id")
+	})
 	omicsCmd.AddCommand(omics_listReadSetImportJobsCmd)
 }

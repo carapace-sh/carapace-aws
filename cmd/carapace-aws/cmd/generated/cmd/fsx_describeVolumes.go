@@ -12,11 +12,13 @@ var fsx_describeVolumesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_describeVolumesCmd).Standalone()
+	carapace.Gen(fsx_describeVolumesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_describeVolumesCmd).Standalone()
 
-	fsx_describeVolumesCmd.Flags().String("filters", "", "Enter a filter `Name` and `Values` pair to view a select set of volumes.")
-	fsx_describeVolumesCmd.Flags().String("max-results", "", "")
-	fsx_describeVolumesCmd.Flags().String("next-token", "", "")
-	fsx_describeVolumesCmd.Flags().String("volume-ids", "", "The IDs of the volumes whose descriptions you want to retrieve.")
+		fsx_describeVolumesCmd.Flags().String("filters", "", "Enter a filter `Name` and `Values` pair to view a select set of volumes.")
+		fsx_describeVolumesCmd.Flags().String("max-results", "", "")
+		fsx_describeVolumesCmd.Flags().String("next-token", "", "")
+		fsx_describeVolumesCmd.Flags().String("volume-ids", "", "The IDs of the volumes whose descriptions you want to retrieve.")
+	})
 	fsxCmd.AddCommand(fsx_describeVolumesCmd)
 }

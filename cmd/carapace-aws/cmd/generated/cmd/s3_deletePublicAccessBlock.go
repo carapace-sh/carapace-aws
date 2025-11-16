@@ -12,10 +12,12 @@ var s3_deletePublicAccessBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_deletePublicAccessBlockCmd).Standalone()
+	carapace.Gen(s3_deletePublicAccessBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_deletePublicAccessBlockCmd).Standalone()
 
-	s3_deletePublicAccessBlockCmd.Flags().String("bucket", "", "The Amazon S3 bucket whose `PublicAccessBlock` configuration you want to delete.")
-	s3_deletePublicAccessBlockCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_deletePublicAccessBlockCmd.MarkFlagRequired("bucket")
+		s3_deletePublicAccessBlockCmd.Flags().String("bucket", "", "The Amazon S3 bucket whose `PublicAccessBlock` configuration you want to delete.")
+		s3_deletePublicAccessBlockCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_deletePublicAccessBlockCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_deletePublicAccessBlockCmd)
 }

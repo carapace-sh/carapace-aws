@@ -12,11 +12,13 @@ var iottwinmaker_deleteComponentTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_deleteComponentTypeCmd).Standalone()
+	carapace.Gen(iottwinmaker_deleteComponentTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_deleteComponentTypeCmd).Standalone()
 
-	iottwinmaker_deleteComponentTypeCmd.Flags().String("component-type-id", "", "The ID of the component type to delete.")
-	iottwinmaker_deleteComponentTypeCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the component type.")
-	iottwinmaker_deleteComponentTypeCmd.MarkFlagRequired("component-type-id")
-	iottwinmaker_deleteComponentTypeCmd.MarkFlagRequired("workspace-id")
+		iottwinmaker_deleteComponentTypeCmd.Flags().String("component-type-id", "", "The ID of the component type to delete.")
+		iottwinmaker_deleteComponentTypeCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the component type.")
+		iottwinmaker_deleteComponentTypeCmd.MarkFlagRequired("component-type-id")
+		iottwinmaker_deleteComponentTypeCmd.MarkFlagRequired("workspace-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_deleteComponentTypeCmd)
 }

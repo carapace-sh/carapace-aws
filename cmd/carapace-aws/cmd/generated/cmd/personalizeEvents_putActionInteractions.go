@@ -12,11 +12,13 @@ var personalizeEvents_putActionInteractionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalizeEvents_putActionInteractionsCmd).Standalone()
+	carapace.Gen(personalizeEvents_putActionInteractionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalizeEvents_putActionInteractionsCmd).Standalone()
 
-	personalizeEvents_putActionInteractionsCmd.Flags().String("action-interactions", "", "A list of action interaction events from the session.")
-	personalizeEvents_putActionInteractionsCmd.Flags().String("tracking-id", "", "The ID of your action interaction event tracker.")
-	personalizeEvents_putActionInteractionsCmd.MarkFlagRequired("action-interactions")
-	personalizeEvents_putActionInteractionsCmd.MarkFlagRequired("tracking-id")
+		personalizeEvents_putActionInteractionsCmd.Flags().String("action-interactions", "", "A list of action interaction events from the session.")
+		personalizeEvents_putActionInteractionsCmd.Flags().String("tracking-id", "", "The ID of your action interaction event tracker.")
+		personalizeEvents_putActionInteractionsCmd.MarkFlagRequired("action-interactions")
+		personalizeEvents_putActionInteractionsCmd.MarkFlagRequired("tracking-id")
+	})
 	personalizeEventsCmd.AddCommand(personalizeEvents_putActionInteractionsCmd)
 }

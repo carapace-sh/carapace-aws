@@ -12,9 +12,11 @@ var iot_describeDomainConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeDomainConfigurationCmd).Standalone()
+	carapace.Gen(iot_describeDomainConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeDomainConfigurationCmd).Standalone()
 
-	iot_describeDomainConfigurationCmd.Flags().String("domain-configuration-name", "", "The name of the domain configuration.")
-	iot_describeDomainConfigurationCmd.MarkFlagRequired("domain-configuration-name")
+		iot_describeDomainConfigurationCmd.Flags().String("domain-configuration-name", "", "The name of the domain configuration.")
+		iot_describeDomainConfigurationCmd.MarkFlagRequired("domain-configuration-name")
+	})
 	iotCmd.AddCommand(iot_describeDomainConfigurationCmd)
 }

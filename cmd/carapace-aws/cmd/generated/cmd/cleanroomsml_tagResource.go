@@ -12,11 +12,13 @@ var cleanroomsml_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_tagResourceCmd).Standalone()
+	carapace.Gen(cleanroomsml_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_tagResourceCmd).Standalone()
 
-	cleanroomsml_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to assign tags.")
-	cleanroomsml_tagResourceCmd.Flags().String("tags", "", "The optional metadata that you apply to the resource to help you categorize and organize them.")
-	cleanroomsml_tagResourceCmd.MarkFlagRequired("resource-arn")
-	cleanroomsml_tagResourceCmd.MarkFlagRequired("tags")
+		cleanroomsml_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to assign tags.")
+		cleanroomsml_tagResourceCmd.Flags().String("tags", "", "The optional metadata that you apply to the resource to help you categorize and organize them.")
+		cleanroomsml_tagResourceCmd.MarkFlagRequired("resource-arn")
+		cleanroomsml_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_tagResourceCmd)
 }

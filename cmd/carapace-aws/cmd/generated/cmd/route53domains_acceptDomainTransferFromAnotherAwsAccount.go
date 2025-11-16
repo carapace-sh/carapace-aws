@@ -12,11 +12,13 @@ var route53domains_acceptDomainTransferFromAnotherAwsAccountCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(route53domains_acceptDomainTransferFromAnotherAwsAccountCmd).Standalone()
+	carapace.Gen(route53domains_acceptDomainTransferFromAnotherAwsAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_acceptDomainTransferFromAnotherAwsAccountCmd).Standalone()
 
-	route53domains_acceptDomainTransferFromAnotherAwsAccountCmd.Flags().String("domain-name", "", "The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.")
-	route53domains_acceptDomainTransferFromAnotherAwsAccountCmd.Flags().String("password", "", "The password that was returned by the [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.")
-	route53domains_acceptDomainTransferFromAnotherAwsAccountCmd.MarkFlagRequired("domain-name")
-	route53domains_acceptDomainTransferFromAnotherAwsAccountCmd.MarkFlagRequired("password")
+		route53domains_acceptDomainTransferFromAnotherAwsAccountCmd.Flags().String("domain-name", "", "The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.")
+		route53domains_acceptDomainTransferFromAnotherAwsAccountCmd.Flags().String("password", "", "The password that was returned by the [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.")
+		route53domains_acceptDomainTransferFromAnotherAwsAccountCmd.MarkFlagRequired("domain-name")
+		route53domains_acceptDomainTransferFromAnotherAwsAccountCmd.MarkFlagRequired("password")
+	})
 	route53domainsCmd.AddCommand(route53domains_acceptDomainTransferFromAnotherAwsAccountCmd)
 }

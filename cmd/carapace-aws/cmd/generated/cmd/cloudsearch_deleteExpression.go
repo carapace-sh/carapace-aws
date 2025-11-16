@@ -12,11 +12,13 @@ var cloudsearch_deleteExpressionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_deleteExpressionCmd).Standalone()
+	carapace.Gen(cloudsearch_deleteExpressionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_deleteExpressionCmd).Standalone()
 
-	cloudsearch_deleteExpressionCmd.Flags().String("domain-name", "", "")
-	cloudsearch_deleteExpressionCmd.Flags().String("expression-name", "", "The name of the `Expression` to delete.")
-	cloudsearch_deleteExpressionCmd.MarkFlagRequired("domain-name")
-	cloudsearch_deleteExpressionCmd.MarkFlagRequired("expression-name")
+		cloudsearch_deleteExpressionCmd.Flags().String("domain-name", "", "")
+		cloudsearch_deleteExpressionCmd.Flags().String("expression-name", "", "The name of the `Expression` to delete.")
+		cloudsearch_deleteExpressionCmd.MarkFlagRequired("domain-name")
+		cloudsearch_deleteExpressionCmd.MarkFlagRequired("expression-name")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_deleteExpressionCmd)
 }

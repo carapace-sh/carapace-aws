@@ -12,9 +12,11 @@ var grafana_deleteWorkspaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_deleteWorkspaceCmd).Standalone()
+	carapace.Gen(grafana_deleteWorkspaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_deleteWorkspaceCmd).Standalone()
 
-	grafana_deleteWorkspaceCmd.Flags().String("workspace-id", "", "The ID of the workspace to delete.")
-	grafana_deleteWorkspaceCmd.MarkFlagRequired("workspace-id")
+		grafana_deleteWorkspaceCmd.Flags().String("workspace-id", "", "The ID of the workspace to delete.")
+		grafana_deleteWorkspaceCmd.MarkFlagRequired("workspace-id")
+	})
 	grafanaCmd.AddCommand(grafana_deleteWorkspaceCmd)
 }

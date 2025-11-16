@@ -12,12 +12,14 @@ var ivschat_deleteMessageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_deleteMessageCmd).Standalone()
+	carapace.Gen(ivschat_deleteMessageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_deleteMessageCmd).Standalone()
 
-	ivschat_deleteMessageCmd.Flags().String("id", "", "ID of the message to be deleted.")
-	ivschat_deleteMessageCmd.Flags().String("reason", "", "Reason for deleting the message.")
-	ivschat_deleteMessageCmd.Flags().String("room-identifier", "", "Identifier of the room where the message should be deleted.")
-	ivschat_deleteMessageCmd.MarkFlagRequired("id")
-	ivschat_deleteMessageCmd.MarkFlagRequired("room-identifier")
+		ivschat_deleteMessageCmd.Flags().String("id", "", "ID of the message to be deleted.")
+		ivschat_deleteMessageCmd.Flags().String("reason", "", "Reason for deleting the message.")
+		ivschat_deleteMessageCmd.Flags().String("room-identifier", "", "Identifier of the room where the message should be deleted.")
+		ivschat_deleteMessageCmd.MarkFlagRequired("id")
+		ivschat_deleteMessageCmd.MarkFlagRequired("room-identifier")
+	})
 	ivschatCmd.AddCommand(ivschat_deleteMessageCmd)
 }

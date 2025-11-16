@@ -12,12 +12,14 @@ var billingconductor_batchAssociateResourcesToCustomLineItemCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(billingconductor_batchAssociateResourcesToCustomLineItemCmd).Standalone()
+	carapace.Gen(billingconductor_batchAssociateResourcesToCustomLineItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_batchAssociateResourcesToCustomLineItemCmd).Standalone()
 
-	billingconductor_batchAssociateResourcesToCustomLineItemCmd.Flags().String("billing-period-range", "", "")
-	billingconductor_batchAssociateResourcesToCustomLineItemCmd.Flags().String("resource-arns", "", "A list containing the ARNs of the resources to be associated.")
-	billingconductor_batchAssociateResourcesToCustomLineItemCmd.Flags().String("target-arn", "", "A percentage custom line item ARN to associate the resources to.")
-	billingconductor_batchAssociateResourcesToCustomLineItemCmd.MarkFlagRequired("resource-arns")
-	billingconductor_batchAssociateResourcesToCustomLineItemCmd.MarkFlagRequired("target-arn")
+		billingconductor_batchAssociateResourcesToCustomLineItemCmd.Flags().String("billing-period-range", "", "")
+		billingconductor_batchAssociateResourcesToCustomLineItemCmd.Flags().String("resource-arns", "", "A list containing the ARNs of the resources to be associated.")
+		billingconductor_batchAssociateResourcesToCustomLineItemCmd.Flags().String("target-arn", "", "A percentage custom line item ARN to associate the resources to.")
+		billingconductor_batchAssociateResourcesToCustomLineItemCmd.MarkFlagRequired("resource-arns")
+		billingconductor_batchAssociateResourcesToCustomLineItemCmd.MarkFlagRequired("target-arn")
+	})
 	billingconductorCmd.AddCommand(billingconductor_batchAssociateResourcesToCustomLineItemCmd)
 }

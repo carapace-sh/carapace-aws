@@ -12,11 +12,13 @@ var s3control_putPublicAccessBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_putPublicAccessBlockCmd).Standalone()
+	carapace.Gen(s3control_putPublicAccessBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_putPublicAccessBlockCmd).Standalone()
 
-	s3control_putPublicAccessBlockCmd.Flags().String("account-id", "", "The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to set.")
-	s3control_putPublicAccessBlockCmd.Flags().String("public-access-block-configuration", "", "The `PublicAccessBlock` configuration that you want to apply to the specified Amazon Web Services account.")
-	s3control_putPublicAccessBlockCmd.MarkFlagRequired("account-id")
-	s3control_putPublicAccessBlockCmd.MarkFlagRequired("public-access-block-configuration")
+		s3control_putPublicAccessBlockCmd.Flags().String("account-id", "", "The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to set.")
+		s3control_putPublicAccessBlockCmd.Flags().String("public-access-block-configuration", "", "The `PublicAccessBlock` configuration that you want to apply to the specified Amazon Web Services account.")
+		s3control_putPublicAccessBlockCmd.MarkFlagRequired("account-id")
+		s3control_putPublicAccessBlockCmd.MarkFlagRequired("public-access-block-configuration")
+	})
 	s3controlCmd.AddCommand(s3control_putPublicAccessBlockCmd)
 }

@@ -12,13 +12,15 @@ var lexv2Models_describeBotLocaleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_describeBotLocaleCmd).Standalone()
+	carapace.Gen(lexv2Models_describeBotLocaleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_describeBotLocaleCmd).Standalone()
 
-	lexv2Models_describeBotLocaleCmd.Flags().String("bot-id", "", "The identifier of the bot associated with the locale.")
-	lexv2Models_describeBotLocaleCmd.Flags().String("bot-version", "", "The version of the bot associated with the locale.")
-	lexv2Models_describeBotLocaleCmd.Flags().String("locale-id", "", "The unique identifier of the locale to describe.")
-	lexv2Models_describeBotLocaleCmd.MarkFlagRequired("bot-id")
-	lexv2Models_describeBotLocaleCmd.MarkFlagRequired("bot-version")
-	lexv2Models_describeBotLocaleCmd.MarkFlagRequired("locale-id")
+		lexv2Models_describeBotLocaleCmd.Flags().String("bot-id", "", "The identifier of the bot associated with the locale.")
+		lexv2Models_describeBotLocaleCmd.Flags().String("bot-version", "", "The version of the bot associated with the locale.")
+		lexv2Models_describeBotLocaleCmd.Flags().String("locale-id", "", "The unique identifier of the locale to describe.")
+		lexv2Models_describeBotLocaleCmd.MarkFlagRequired("bot-id")
+		lexv2Models_describeBotLocaleCmd.MarkFlagRequired("bot-version")
+		lexv2Models_describeBotLocaleCmd.MarkFlagRequired("locale-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_describeBotLocaleCmd)
 }

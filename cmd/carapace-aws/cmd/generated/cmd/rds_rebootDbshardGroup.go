@@ -12,9 +12,11 @@ var rds_rebootDbshardGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_rebootDbshardGroupCmd).Standalone()
+	carapace.Gen(rds_rebootDbshardGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_rebootDbshardGroupCmd).Standalone()
 
-	rds_rebootDbshardGroupCmd.Flags().String("dbshard-group-identifier", "", "The name of the DB shard group to reboot.")
-	rds_rebootDbshardGroupCmd.MarkFlagRequired("dbshard-group-identifier")
+		rds_rebootDbshardGroupCmd.Flags().String("dbshard-group-identifier", "", "The name of the DB shard group to reboot.")
+		rds_rebootDbshardGroupCmd.MarkFlagRequired("dbshard-group-identifier")
+	})
 	rdsCmd.AddCommand(rds_rebootDbshardGroupCmd)
 }

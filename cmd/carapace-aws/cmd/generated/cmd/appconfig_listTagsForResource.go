@@ -12,9 +12,11 @@ var appconfig_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_listTagsForResourceCmd).Standalone()
+	carapace.Gen(appconfig_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_listTagsForResourceCmd).Standalone()
 
-	appconfig_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
-	appconfig_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		appconfig_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
+		appconfig_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	appconfigCmd.AddCommand(appconfig_listTagsForResourceCmd)
 }

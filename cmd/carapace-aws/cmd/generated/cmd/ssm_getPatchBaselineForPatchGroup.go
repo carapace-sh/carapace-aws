@@ -12,10 +12,12 @@ var ssm_getPatchBaselineForPatchGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getPatchBaselineForPatchGroupCmd).Standalone()
+	carapace.Gen(ssm_getPatchBaselineForPatchGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getPatchBaselineForPatchGroupCmd).Standalone()
 
-	ssm_getPatchBaselineForPatchGroupCmd.Flags().String("operating-system", "", "Returns the operating system rule specified for patch groups using the patch baseline.")
-	ssm_getPatchBaselineForPatchGroupCmd.Flags().String("patch-group", "", "The name of the patch group whose patch baseline should be retrieved.")
-	ssm_getPatchBaselineForPatchGroupCmd.MarkFlagRequired("patch-group")
+		ssm_getPatchBaselineForPatchGroupCmd.Flags().String("operating-system", "", "Returns the operating system rule specified for patch groups using the patch baseline.")
+		ssm_getPatchBaselineForPatchGroupCmd.Flags().String("patch-group", "", "The name of the patch group whose patch baseline should be retrieved.")
+		ssm_getPatchBaselineForPatchGroupCmd.MarkFlagRequired("patch-group")
+	})
 	ssmCmd.AddCommand(ssm_getPatchBaselineForPatchGroupCmd)
 }

@@ -12,10 +12,12 @@ var inspector_listEventSubscriptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_listEventSubscriptionsCmd).Standalone()
+	carapace.Gen(inspector_listEventSubscriptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_listEventSubscriptionsCmd).Standalone()
 
-	inspector_listEventSubscriptionsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
-	inspector_listEventSubscriptionsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
-	inspector_listEventSubscriptionsCmd.Flags().String("resource-arn", "", "The ARN of the assessment template for which you want to list the existing event subscriptions.")
+		inspector_listEventSubscriptionsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
+		inspector_listEventSubscriptionsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+		inspector_listEventSubscriptionsCmd.Flags().String("resource-arn", "", "The ARN of the assessment template for which you want to list the existing event subscriptions.")
+	})
 	inspectorCmd.AddCommand(inspector_listEventSubscriptionsCmd)
 }

@@ -12,13 +12,15 @@ var neptune_modifyDbclusterSnapshotAttributeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_modifyDbclusterSnapshotAttributeCmd).Standalone()
+	carapace.Gen(neptune_modifyDbclusterSnapshotAttributeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_modifyDbclusterSnapshotAttributeCmd).Standalone()
 
-	neptune_modifyDbclusterSnapshotAttributeCmd.Flags().String("attribute-name", "", "The name of the DB cluster snapshot attribute to modify.")
-	neptune_modifyDbclusterSnapshotAttributeCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier for the DB cluster snapshot to modify the attributes for.")
-	neptune_modifyDbclusterSnapshotAttributeCmd.Flags().String("values-to-add", "", "A list of DB cluster snapshot attributes to add to the attribute specified by `AttributeName`.")
-	neptune_modifyDbclusterSnapshotAttributeCmd.Flags().String("values-to-remove", "", "A list of DB cluster snapshot attributes to remove from the attribute specified by `AttributeName`.")
-	neptune_modifyDbclusterSnapshotAttributeCmd.MarkFlagRequired("attribute-name")
-	neptune_modifyDbclusterSnapshotAttributeCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+		neptune_modifyDbclusterSnapshotAttributeCmd.Flags().String("attribute-name", "", "The name of the DB cluster snapshot attribute to modify.")
+		neptune_modifyDbclusterSnapshotAttributeCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier for the DB cluster snapshot to modify the attributes for.")
+		neptune_modifyDbclusterSnapshotAttributeCmd.Flags().String("values-to-add", "", "A list of DB cluster snapshot attributes to add to the attribute specified by `AttributeName`.")
+		neptune_modifyDbclusterSnapshotAttributeCmd.Flags().String("values-to-remove", "", "A list of DB cluster snapshot attributes to remove from the attribute specified by `AttributeName`.")
+		neptune_modifyDbclusterSnapshotAttributeCmd.MarkFlagRequired("attribute-name")
+		neptune_modifyDbclusterSnapshotAttributeCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+	})
 	neptuneCmd.AddCommand(neptune_modifyDbclusterSnapshotAttributeCmd)
 }

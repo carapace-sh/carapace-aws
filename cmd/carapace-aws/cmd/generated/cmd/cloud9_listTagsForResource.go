@@ -12,9 +12,11 @@ var cloud9_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloud9_listTagsForResourceCmd).Standalone()
+	carapace.Gen(cloud9_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloud9_listTagsForResourceCmd).Standalone()
 
-	cloud9_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Cloud9 development environment to get the tags for.")
-	cloud9_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		cloud9_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Cloud9 development environment to get the tags for.")
+		cloud9_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	cloud9Cmd.AddCommand(cloud9_listTagsForResourceCmd)
 }

@@ -12,10 +12,12 @@ var elasticache_describeCacheSecurityGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_describeCacheSecurityGroupsCmd).Standalone()
+	carapace.Gen(elasticache_describeCacheSecurityGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_describeCacheSecurityGroupsCmd).Standalone()
 
-	elasticache_describeCacheSecurityGroupsCmd.Flags().String("cache-security-group-name", "", "The name of the cache security group to return details for.")
-	elasticache_describeCacheSecurityGroupsCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
-	elasticache_describeCacheSecurityGroupsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		elasticache_describeCacheSecurityGroupsCmd.Flags().String("cache-security-group-name", "", "The name of the cache security group to return details for.")
+		elasticache_describeCacheSecurityGroupsCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
+		elasticache_describeCacheSecurityGroupsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	elasticacheCmd.AddCommand(elasticache_describeCacheSecurityGroupsCmd)
 }

@@ -12,11 +12,13 @@ var pcaConnectorAd_deleteServicePrincipalNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorAd_deleteServicePrincipalNameCmd).Standalone()
+	carapace.Gen(pcaConnectorAd_deleteServicePrincipalNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorAd_deleteServicePrincipalNameCmd).Standalone()
 
-	pcaConnectorAd_deleteServicePrincipalNameCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).")
-	pcaConnectorAd_deleteServicePrincipalNameCmd.Flags().String("directory-registration-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).")
-	pcaConnectorAd_deleteServicePrincipalNameCmd.MarkFlagRequired("connector-arn")
-	pcaConnectorAd_deleteServicePrincipalNameCmd.MarkFlagRequired("directory-registration-arn")
+		pcaConnectorAd_deleteServicePrincipalNameCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).")
+		pcaConnectorAd_deleteServicePrincipalNameCmd.Flags().String("directory-registration-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).")
+		pcaConnectorAd_deleteServicePrincipalNameCmd.MarkFlagRequired("connector-arn")
+		pcaConnectorAd_deleteServicePrincipalNameCmd.MarkFlagRequired("directory-registration-arn")
+	})
 	pcaConnectorAdCmd.AddCommand(pcaConnectorAd_deleteServicePrincipalNameCmd)
 }

@@ -12,9 +12,11 @@ var appsync_getDomainNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_getDomainNameCmd).Standalone()
+	carapace.Gen(appsync_getDomainNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_getDomainNameCmd).Standalone()
 
-	appsync_getDomainNameCmd.Flags().String("domain-name", "", "The domain name.")
-	appsync_getDomainNameCmd.MarkFlagRequired("domain-name")
+		appsync_getDomainNameCmd.Flags().String("domain-name", "", "The domain name.")
+		appsync_getDomainNameCmd.MarkFlagRequired("domain-name")
+	})
 	appsyncCmd.AddCommand(appsync_getDomainNameCmd)
 }

@@ -12,10 +12,12 @@ var dynamodbstreams_getRecordsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodbstreams_getRecordsCmd).Standalone()
+	carapace.Gen(dynamodbstreams_getRecordsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodbstreams_getRecordsCmd).Standalone()
 
-	dynamodbstreams_getRecordsCmd.Flags().String("limit", "", "The maximum number of records to return from the shard.")
-	dynamodbstreams_getRecordsCmd.Flags().String("shard-iterator", "", "A shard iterator that was retrieved from a previous GetShardIterator operation.")
-	dynamodbstreams_getRecordsCmd.MarkFlagRequired("shard-iterator")
+		dynamodbstreams_getRecordsCmd.Flags().String("limit", "", "The maximum number of records to return from the shard.")
+		dynamodbstreams_getRecordsCmd.Flags().String("shard-iterator", "", "A shard iterator that was retrieved from a previous GetShardIterator operation.")
+		dynamodbstreams_getRecordsCmd.MarkFlagRequired("shard-iterator")
+	})
 	dynamodbstreamsCmd.AddCommand(dynamodbstreams_getRecordsCmd)
 }

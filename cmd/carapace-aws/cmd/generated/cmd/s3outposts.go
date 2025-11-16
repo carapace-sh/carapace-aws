@@ -12,7 +12,9 @@ var s3outpostsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3outpostsCmd).Standalone()
+	carapace.Gen(s3outpostsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3outpostsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(s3outpostsCmd)
 }

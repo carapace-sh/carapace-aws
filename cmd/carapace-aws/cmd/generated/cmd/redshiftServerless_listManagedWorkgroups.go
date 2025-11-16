@@ -12,10 +12,12 @@ var redshiftServerless_listManagedWorkgroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_listManagedWorkgroupsCmd).Standalone()
+	carapace.Gen(redshiftServerless_listManagedWorkgroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_listManagedWorkgroupsCmd).Standalone()
 
-	redshiftServerless_listManagedWorkgroupsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
-	redshiftServerless_listManagedWorkgroupsCmd.Flags().String("next-token", "", "If your initial ListManagedWorkgroups operation returns a nextToken, you can include the returned nextToken in following ListManagedWorkgroups operations, which returns results in the next page.")
-	redshiftServerless_listManagedWorkgroupsCmd.Flags().String("source-arn", "", "The Amazon Resource Name (ARN) for the managed workgroup in the AWS Glue Data Catalog.")
+		redshiftServerless_listManagedWorkgroupsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
+		redshiftServerless_listManagedWorkgroupsCmd.Flags().String("next-token", "", "If your initial ListManagedWorkgroups operation returns a nextToken, you can include the returned nextToken in following ListManagedWorkgroups operations, which returns results in the next page.")
+		redshiftServerless_listManagedWorkgroupsCmd.Flags().String("source-arn", "", "The Amazon Resource Name (ARN) for the managed workgroup in the AWS Glue Data Catalog.")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_listManagedWorkgroupsCmd)
 }

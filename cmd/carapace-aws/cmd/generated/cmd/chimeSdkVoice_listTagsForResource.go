@@ -12,9 +12,11 @@ var chimeSdkVoice_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_listTagsForResourceCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_listTagsForResourceCmd).Standalone()
 
-	chimeSdkVoice_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
-	chimeSdkVoice_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		chimeSdkVoice_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
+		chimeSdkVoice_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_listTagsForResourceCmd)
 }

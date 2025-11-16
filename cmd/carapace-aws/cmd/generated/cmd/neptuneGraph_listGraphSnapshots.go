@@ -12,10 +12,12 @@ var neptuneGraph_listGraphSnapshotsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_listGraphSnapshotsCmd).Standalone()
+	carapace.Gen(neptuneGraph_listGraphSnapshotsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_listGraphSnapshotsCmd).Standalone()
 
-	neptuneGraph_listGraphSnapshotsCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
-	neptuneGraph_listGraphSnapshotsCmd.Flags().String("max-results", "", "The total number of records to return in the command's output.")
-	neptuneGraph_listGraphSnapshotsCmd.Flags().String("next-token", "", "Pagination token used to paginate output.")
+		neptuneGraph_listGraphSnapshotsCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
+		neptuneGraph_listGraphSnapshotsCmd.Flags().String("max-results", "", "The total number of records to return in the command's output.")
+		neptuneGraph_listGraphSnapshotsCmd.Flags().String("next-token", "", "Pagination token used to paginate output.")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_listGraphSnapshotsCmd)
 }

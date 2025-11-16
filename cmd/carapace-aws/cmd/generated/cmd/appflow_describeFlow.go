@@ -12,9 +12,11 @@ var appflow_describeFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appflow_describeFlowCmd).Standalone()
+	carapace.Gen(appflow_describeFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appflow_describeFlowCmd).Standalone()
 
-	appflow_describeFlowCmd.Flags().String("flow-name", "", "The specified name of the flow.")
-	appflow_describeFlowCmd.MarkFlagRequired("flow-name")
+		appflow_describeFlowCmd.Flags().String("flow-name", "", "The specified name of the flow.")
+		appflow_describeFlowCmd.MarkFlagRequired("flow-name")
+	})
 	appflowCmd.AddCommand(appflow_describeFlowCmd)
 }

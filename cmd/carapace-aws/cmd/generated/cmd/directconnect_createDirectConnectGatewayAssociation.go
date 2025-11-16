@@ -12,12 +12,14 @@ var directconnect_createDirectConnectGatewayAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_createDirectConnectGatewayAssociationCmd).Standalone()
+	carapace.Gen(directconnect_createDirectConnectGatewayAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_createDirectConnectGatewayAssociationCmd).Standalone()
 
-	directconnect_createDirectConnectGatewayAssociationCmd.Flags().String("add-allowed-prefixes-to-direct-connect-gateway", "", "The Amazon VPC prefixes to advertise to the Direct Connect gateway")
-	directconnect_createDirectConnectGatewayAssociationCmd.Flags().String("direct-connect-gateway-id", "", "The ID of the Direct Connect gateway.")
-	directconnect_createDirectConnectGatewayAssociationCmd.Flags().String("gateway-id", "", "The ID of the virtual private gateway or transit gateway.")
-	directconnect_createDirectConnectGatewayAssociationCmd.Flags().String("virtual-gateway-id", "", "The ID of the virtual private gateway.")
-	directconnect_createDirectConnectGatewayAssociationCmd.MarkFlagRequired("direct-connect-gateway-id")
+		directconnect_createDirectConnectGatewayAssociationCmd.Flags().String("add-allowed-prefixes-to-direct-connect-gateway", "", "The Amazon VPC prefixes to advertise to the Direct Connect gateway")
+		directconnect_createDirectConnectGatewayAssociationCmd.Flags().String("direct-connect-gateway-id", "", "The ID of the Direct Connect gateway.")
+		directconnect_createDirectConnectGatewayAssociationCmd.Flags().String("gateway-id", "", "The ID of the virtual private gateway or transit gateway.")
+		directconnect_createDirectConnectGatewayAssociationCmd.Flags().String("virtual-gateway-id", "", "The ID of the virtual private gateway.")
+		directconnect_createDirectConnectGatewayAssociationCmd.MarkFlagRequired("direct-connect-gateway-id")
+	})
 	directconnectCmd.AddCommand(directconnect_createDirectConnectGatewayAssociationCmd)
 }

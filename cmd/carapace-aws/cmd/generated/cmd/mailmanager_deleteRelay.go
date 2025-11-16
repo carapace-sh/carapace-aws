@@ -12,9 +12,11 @@ var mailmanager_deleteRelayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_deleteRelayCmd).Standalone()
+	carapace.Gen(mailmanager_deleteRelayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_deleteRelayCmd).Standalone()
 
-	mailmanager_deleteRelayCmd.Flags().String("relay-id", "", "The unique relay identifier.")
-	mailmanager_deleteRelayCmd.MarkFlagRequired("relay-id")
+		mailmanager_deleteRelayCmd.Flags().String("relay-id", "", "The unique relay identifier.")
+		mailmanager_deleteRelayCmd.MarkFlagRequired("relay-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_deleteRelayCmd)
 }

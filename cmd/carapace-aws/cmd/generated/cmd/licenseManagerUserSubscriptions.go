@@ -12,7 +12,9 @@ var licenseManagerUserSubscriptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManagerUserSubscriptionsCmd).Standalone()
+	carapace.Gen(licenseManagerUserSubscriptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerUserSubscriptionsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(licenseManagerUserSubscriptionsCmd)
 }

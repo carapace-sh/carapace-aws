@@ -12,9 +12,11 @@ var backup_listBackupPlanTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_listBackupPlanTemplatesCmd).Standalone()
+	carapace.Gen(backup_listBackupPlanTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_listBackupPlanTemplatesCmd).Standalone()
 
-	backup_listBackupPlanTemplatesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	backup_listBackupPlanTemplatesCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
+		backup_listBackupPlanTemplatesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		backup_listBackupPlanTemplatesCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
+	})
 	backupCmd.AddCommand(backup_listBackupPlanTemplatesCmd)
 }

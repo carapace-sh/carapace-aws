@@ -12,9 +12,11 @@ var cloudformation_batchDescribeTypeConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_batchDescribeTypeConfigurationsCmd).Standalone()
+	carapace.Gen(cloudformation_batchDescribeTypeConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_batchDescribeTypeConfigurationsCmd).Standalone()
 
-	cloudformation_batchDescribeTypeConfigurationsCmd.Flags().String("type-configuration-identifiers", "", "The list of identifiers for the desired extension configurations.")
-	cloudformation_batchDescribeTypeConfigurationsCmd.MarkFlagRequired("type-configuration-identifiers")
+		cloudformation_batchDescribeTypeConfigurationsCmd.Flags().String("type-configuration-identifiers", "", "The list of identifiers for the desired extension configurations.")
+		cloudformation_batchDescribeTypeConfigurationsCmd.MarkFlagRequired("type-configuration-identifiers")
+	})
 	cloudformationCmd.AddCommand(cloudformation_batchDescribeTypeConfigurationsCmd)
 }

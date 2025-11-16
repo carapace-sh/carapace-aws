@@ -12,7 +12,9 @@ var opensearchserverless_getAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_getAccountSettingsCmd).Standalone()
+	carapace.Gen(opensearchserverless_getAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_getAccountSettingsCmd).Standalone()
 
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_getAccountSettingsCmd)
 }

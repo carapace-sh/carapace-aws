@@ -12,10 +12,12 @@ var ioteventsData_describeAlarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ioteventsData_describeAlarmCmd).Standalone()
+	carapace.Gen(ioteventsData_describeAlarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ioteventsData_describeAlarmCmd).Standalone()
 
-	ioteventsData_describeAlarmCmd.Flags().String("alarm-model-name", "", "The name of the alarm model.")
-	ioteventsData_describeAlarmCmd.Flags().String("key-value", "", "The value of the key used as a filter to select only the alarms associated with the [key](https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).")
-	ioteventsData_describeAlarmCmd.MarkFlagRequired("alarm-model-name")
+		ioteventsData_describeAlarmCmd.Flags().String("alarm-model-name", "", "The name of the alarm model.")
+		ioteventsData_describeAlarmCmd.Flags().String("key-value", "", "The value of the key used as a filter to select only the alarms associated with the [key](https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).")
+		ioteventsData_describeAlarmCmd.MarkFlagRequired("alarm-model-name")
+	})
 	ioteventsDataCmd.AddCommand(ioteventsData_describeAlarmCmd)
 }

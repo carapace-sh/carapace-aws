@@ -12,11 +12,13 @@ var mgn_updateSourceServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_updateSourceServerCmd).Standalone()
+	carapace.Gen(mgn_updateSourceServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_updateSourceServerCmd).Standalone()
 
-	mgn_updateSourceServerCmd.Flags().String("account-id", "", "Update Source Server request account ID.")
-	mgn_updateSourceServerCmd.Flags().String("connector-action", "", "Update Source Server request connector action.")
-	mgn_updateSourceServerCmd.Flags().String("source-server-id", "", "Update Source Server request source server ID.")
-	mgn_updateSourceServerCmd.MarkFlagRequired("source-server-id")
+		mgn_updateSourceServerCmd.Flags().String("account-id", "", "Update Source Server request account ID.")
+		mgn_updateSourceServerCmd.Flags().String("connector-action", "", "Update Source Server request connector action.")
+		mgn_updateSourceServerCmd.Flags().String("source-server-id", "", "Update Source Server request source server ID.")
+		mgn_updateSourceServerCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_updateSourceServerCmd)
 }

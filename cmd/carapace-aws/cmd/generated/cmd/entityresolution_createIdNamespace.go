@@ -12,16 +12,18 @@ var entityresolution_createIdNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_createIdNamespaceCmd).Standalone()
+	carapace.Gen(entityresolution_createIdNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_createIdNamespaceCmd).Standalone()
 
-	entityresolution_createIdNamespaceCmd.Flags().String("description", "", "The description of the ID namespace.")
-	entityresolution_createIdNamespaceCmd.Flags().String("id-mapping-workflow-properties", "", "Determines the properties of `IdMappingWorflow` where this `IdNamespace` can be used as a `Source` or a `Target`.")
-	entityresolution_createIdNamespaceCmd.Flags().String("id-namespace-name", "", "The name of the ID namespace.")
-	entityresolution_createIdNamespaceCmd.Flags().String("input-source-config", "", "A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.")
-	entityresolution_createIdNamespaceCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the IAM role.")
-	entityresolution_createIdNamespaceCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
-	entityresolution_createIdNamespaceCmd.Flags().String("type", "", "The type of ID namespace.")
-	entityresolution_createIdNamespaceCmd.MarkFlagRequired("id-namespace-name")
-	entityresolution_createIdNamespaceCmd.MarkFlagRequired("type")
+		entityresolution_createIdNamespaceCmd.Flags().String("description", "", "The description of the ID namespace.")
+		entityresolution_createIdNamespaceCmd.Flags().String("id-mapping-workflow-properties", "", "Determines the properties of `IdMappingWorflow` where this `IdNamespace` can be used as a `Source` or a `Target`.")
+		entityresolution_createIdNamespaceCmd.Flags().String("id-namespace-name", "", "The name of the ID namespace.")
+		entityresolution_createIdNamespaceCmd.Flags().String("input-source-config", "", "A list of `InputSource` objects, which have the fields `InputSourceARN` and `SchemaName`.")
+		entityresolution_createIdNamespaceCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the IAM role.")
+		entityresolution_createIdNamespaceCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
+		entityresolution_createIdNamespaceCmd.Flags().String("type", "", "The type of ID namespace.")
+		entityresolution_createIdNamespaceCmd.MarkFlagRequired("id-namespace-name")
+		entityresolution_createIdNamespaceCmd.MarkFlagRequired("type")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_createIdNamespaceCmd)
 }

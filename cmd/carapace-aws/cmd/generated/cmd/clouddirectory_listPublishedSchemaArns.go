@@ -12,10 +12,12 @@ var clouddirectory_listPublishedSchemaArnsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_listPublishedSchemaArnsCmd).Standalone()
+	carapace.Gen(clouddirectory_listPublishedSchemaArnsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_listPublishedSchemaArnsCmd).Standalone()
 
-	clouddirectory_listPublishedSchemaArnsCmd.Flags().String("max-results", "", "The maximum number of results to retrieve.")
-	clouddirectory_listPublishedSchemaArnsCmd.Flags().String("next-token", "", "The pagination token.")
-	clouddirectory_listPublishedSchemaArnsCmd.Flags().String("schema-arn", "", "The response for `ListPublishedSchemaArns` when this parameter is used will list all minor version ARNs for a major version.")
+		clouddirectory_listPublishedSchemaArnsCmd.Flags().String("max-results", "", "The maximum number of results to retrieve.")
+		clouddirectory_listPublishedSchemaArnsCmd.Flags().String("next-token", "", "The pagination token.")
+		clouddirectory_listPublishedSchemaArnsCmd.Flags().String("schema-arn", "", "The response for `ListPublishedSchemaArns` when this parameter is used will list all minor version ARNs for a major version.")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_listPublishedSchemaArnsCmd)
 }

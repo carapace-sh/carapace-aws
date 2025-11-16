@@ -12,14 +12,16 @@ var qconnect_getRecommendationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_getRecommendationsCmd).Standalone()
+	carapace.Gen(qconnect_getRecommendationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_getRecommendationsCmd).Standalone()
 
-	qconnect_getRecommendationsCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_getRecommendationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_getRecommendationsCmd.Flags().String("next-chunk-token", "", "The token for the next set of chunks.")
-	qconnect_getRecommendationsCmd.Flags().String("session-id", "", "The identifier of the session.")
-	qconnect_getRecommendationsCmd.Flags().String("wait-time-seconds", "", "The duration (in seconds) for which the call waits for a recommendation to be made available before returning.")
-	qconnect_getRecommendationsCmd.MarkFlagRequired("assistant-id")
-	qconnect_getRecommendationsCmd.MarkFlagRequired("session-id")
+		qconnect_getRecommendationsCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_getRecommendationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_getRecommendationsCmd.Flags().String("next-chunk-token", "", "The token for the next set of chunks.")
+		qconnect_getRecommendationsCmd.Flags().String("session-id", "", "The identifier of the session.")
+		qconnect_getRecommendationsCmd.Flags().String("wait-time-seconds", "", "The duration (in seconds) for which the call waits for a recommendation to be made available before returning.")
+		qconnect_getRecommendationsCmd.MarkFlagRequired("assistant-id")
+		qconnect_getRecommendationsCmd.MarkFlagRequired("session-id")
+	})
 	qconnectCmd.AddCommand(qconnect_getRecommendationsCmd)
 }

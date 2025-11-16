@@ -12,10 +12,12 @@ var iot_getBehaviorModelTrainingSummariesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getBehaviorModelTrainingSummariesCmd).Standalone()
+	carapace.Gen(iot_getBehaviorModelTrainingSummariesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getBehaviorModelTrainingSummariesCmd).Standalone()
 
-	iot_getBehaviorModelTrainingSummariesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_getBehaviorModelTrainingSummariesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	iot_getBehaviorModelTrainingSummariesCmd.Flags().String("security-profile-name", "", "The name of the security profile.")
+		iot_getBehaviorModelTrainingSummariesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_getBehaviorModelTrainingSummariesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iot_getBehaviorModelTrainingSummariesCmd.Flags().String("security-profile-name", "", "The name of the security profile.")
+	})
 	iotCmd.AddCommand(iot_getBehaviorModelTrainingSummariesCmd)
 }

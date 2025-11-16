@@ -12,16 +12,18 @@ var partnercentralSelling_startEngagementFromOpportunityTaskCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(partnercentralSelling_startEngagementFromOpportunityTaskCmd).Standalone()
+	carapace.Gen(partnercentralSelling_startEngagementFromOpportunityTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSelling_startEngagementFromOpportunityTaskCmd).Standalone()
 
-	partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("aws-submission", "", "")
-	partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("catalog", "", "Specifies the catalog in which the engagement is tracked.")
-	partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("client-token", "", "A unique token provided by the client to help ensure the idempotency of the request.")
-	partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("identifier", "", "The unique identifier of the opportunity from which the engagement task is to be initiated.")
-	partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("tags", "", "A map of the key-value pairs of the tag or tags to assign.")
-	partnercentralSelling_startEngagementFromOpportunityTaskCmd.MarkFlagRequired("aws-submission")
-	partnercentralSelling_startEngagementFromOpportunityTaskCmd.MarkFlagRequired("catalog")
-	partnercentralSelling_startEngagementFromOpportunityTaskCmd.MarkFlagRequired("client-token")
-	partnercentralSelling_startEngagementFromOpportunityTaskCmd.MarkFlagRequired("identifier")
+		partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("aws-submission", "", "")
+		partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("catalog", "", "Specifies the catalog in which the engagement is tracked.")
+		partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("client-token", "", "A unique token provided by the client to help ensure the idempotency of the request.")
+		partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("identifier", "", "The unique identifier of the opportunity from which the engagement task is to be initiated.")
+		partnercentralSelling_startEngagementFromOpportunityTaskCmd.Flags().String("tags", "", "A map of the key-value pairs of the tag or tags to assign.")
+		partnercentralSelling_startEngagementFromOpportunityTaskCmd.MarkFlagRequired("aws-submission")
+		partnercentralSelling_startEngagementFromOpportunityTaskCmd.MarkFlagRequired("catalog")
+		partnercentralSelling_startEngagementFromOpportunityTaskCmd.MarkFlagRequired("client-token")
+		partnercentralSelling_startEngagementFromOpportunityTaskCmd.MarkFlagRequired("identifier")
+	})
 	partnercentralSellingCmd.AddCommand(partnercentralSelling_startEngagementFromOpportunityTaskCmd)
 }

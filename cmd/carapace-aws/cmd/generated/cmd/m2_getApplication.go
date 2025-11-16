@@ -12,9 +12,11 @@ var m2_getApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_getApplicationCmd).Standalone()
+	carapace.Gen(m2_getApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_getApplicationCmd).Standalone()
 
-	m2_getApplicationCmd.Flags().String("application-id", "", "The identifier of the application.")
-	m2_getApplicationCmd.MarkFlagRequired("application-id")
+		m2_getApplicationCmd.Flags().String("application-id", "", "The identifier of the application.")
+		m2_getApplicationCmd.MarkFlagRequired("application-id")
+	})
 	m2Cmd.AddCommand(m2_getApplicationCmd)
 }

@@ -12,9 +12,11 @@ var networkmanager_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(networkmanager_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_deleteResourcePolicyCmd).Standalone()
 
-	networkmanager_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the policy to delete.")
-	networkmanager_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		networkmanager_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the policy to delete.")
+		networkmanager_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_deleteResourcePolicyCmd)
 }

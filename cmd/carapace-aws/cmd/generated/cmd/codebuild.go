@@ -12,7 +12,9 @@ var codebuildCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuildCmd).Standalone()
+	carapace.Gen(codebuildCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuildCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(codebuildCmd)
 }

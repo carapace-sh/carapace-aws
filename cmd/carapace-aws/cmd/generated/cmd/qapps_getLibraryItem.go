@@ -12,12 +12,14 @@ var qapps_getLibraryItemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_getLibraryItemCmd).Standalone()
+	carapace.Gen(qapps_getLibraryItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_getLibraryItemCmd).Standalone()
 
-	qapps_getLibraryItemCmd.Flags().String("app-id", "", "The unique identifier of the Amazon Q App associated with the library item.")
-	qapps_getLibraryItemCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_getLibraryItemCmd.Flags().String("library-item-id", "", "The unique identifier of the library item to retrieve.")
-	qapps_getLibraryItemCmd.MarkFlagRequired("instance-id")
-	qapps_getLibraryItemCmd.MarkFlagRequired("library-item-id")
+		qapps_getLibraryItemCmd.Flags().String("app-id", "", "The unique identifier of the Amazon Q App associated with the library item.")
+		qapps_getLibraryItemCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_getLibraryItemCmd.Flags().String("library-item-id", "", "The unique identifier of the library item to retrieve.")
+		qapps_getLibraryItemCmd.MarkFlagRequired("instance-id")
+		qapps_getLibraryItemCmd.MarkFlagRequired("library-item-id")
+	})
 	qappsCmd.AddCommand(qapps_getLibraryItemCmd)
 }

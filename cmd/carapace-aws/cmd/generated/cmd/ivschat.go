@@ -12,7 +12,9 @@ var ivschatCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschatCmd).Standalone()
+	carapace.Gen(ivschatCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschatCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ivschatCmd)
 }

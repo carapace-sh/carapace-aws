@@ -12,9 +12,11 @@ var networkmanager_listOrganizationServiceAccessStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_listOrganizationServiceAccessStatusCmd).Standalone()
+	carapace.Gen(networkmanager_listOrganizationServiceAccessStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_listOrganizationServiceAccessStatusCmd).Standalone()
 
-	networkmanager_listOrganizationServiceAccessStatusCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	networkmanager_listOrganizationServiceAccessStatusCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		networkmanager_listOrganizationServiceAccessStatusCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		networkmanager_listOrganizationServiceAccessStatusCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_listOrganizationServiceAccessStatusCmd)
 }

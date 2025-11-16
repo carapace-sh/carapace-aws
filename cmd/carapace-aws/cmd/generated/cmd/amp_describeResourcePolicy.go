@@ -12,9 +12,11 @@ var amp_describeResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_describeResourcePolicyCmd).Standalone()
+	carapace.Gen(amp_describeResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_describeResourcePolicyCmd).Standalone()
 
-	amp_describeResourcePolicyCmd.Flags().String("workspace-id", "", "The ID of the workspace to describe the resource-based policy for.")
-	amp_describeResourcePolicyCmd.MarkFlagRequired("workspace-id")
+		amp_describeResourcePolicyCmd.Flags().String("workspace-id", "", "The ID of the workspace to describe the resource-based policy for.")
+		amp_describeResourcePolicyCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_describeResourcePolicyCmd)
 }

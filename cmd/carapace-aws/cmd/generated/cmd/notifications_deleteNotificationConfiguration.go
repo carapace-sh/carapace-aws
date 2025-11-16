@@ -12,9 +12,11 @@ var notifications_deleteNotificationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_deleteNotificationConfigurationCmd).Standalone()
+	carapace.Gen(notifications_deleteNotificationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_deleteNotificationConfigurationCmd).Standalone()
 
-	notifications_deleteNotificationConfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `NotificationConfiguration` to delete.")
-	notifications_deleteNotificationConfigurationCmd.MarkFlagRequired("arn")
+		notifications_deleteNotificationConfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `NotificationConfiguration` to delete.")
+		notifications_deleteNotificationConfigurationCmd.MarkFlagRequired("arn")
+	})
 	notificationsCmd.AddCommand(notifications_deleteNotificationConfigurationCmd)
 }

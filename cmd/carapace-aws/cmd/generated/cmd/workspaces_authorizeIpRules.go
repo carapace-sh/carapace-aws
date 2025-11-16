@@ -12,11 +12,13 @@ var workspaces_authorizeIpRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_authorizeIpRulesCmd).Standalone()
+	carapace.Gen(workspaces_authorizeIpRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_authorizeIpRulesCmd).Standalone()
 
-	workspaces_authorizeIpRulesCmd.Flags().String("group-id", "", "The identifier of the group.")
-	workspaces_authorizeIpRulesCmd.Flags().String("user-rules", "", "The rules to add to the group.")
-	workspaces_authorizeIpRulesCmd.MarkFlagRequired("group-id")
-	workspaces_authorizeIpRulesCmd.MarkFlagRequired("user-rules")
+		workspaces_authorizeIpRulesCmd.Flags().String("group-id", "", "The identifier of the group.")
+		workspaces_authorizeIpRulesCmd.Flags().String("user-rules", "", "The rules to add to the group.")
+		workspaces_authorizeIpRulesCmd.MarkFlagRequired("group-id")
+		workspaces_authorizeIpRulesCmd.MarkFlagRequired("user-rules")
+	})
 	workspacesCmd.AddCommand(workspaces_authorizeIpRulesCmd)
 }

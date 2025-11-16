@@ -12,7 +12,9 @@ var dynamodbCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodbCmd).Standalone()
+	carapace.Gen(dynamodbCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodbCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(dynamodbCmd)
 }

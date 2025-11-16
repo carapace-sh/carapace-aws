@@ -12,9 +12,11 @@ var workspaces_describeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeTagsCmd).Standalone()
+	carapace.Gen(workspaces_describeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeTagsCmd).Standalone()
 
-	workspaces_describeTagsCmd.Flags().String("resource-id", "", "The identifier of the WorkSpaces resource.")
-	workspaces_describeTagsCmd.MarkFlagRequired("resource-id")
+		workspaces_describeTagsCmd.Flags().String("resource-id", "", "The identifier of the WorkSpaces resource.")
+		workspaces_describeTagsCmd.MarkFlagRequired("resource-id")
+	})
 	workspacesCmd.AddCommand(workspaces_describeTagsCmd)
 }

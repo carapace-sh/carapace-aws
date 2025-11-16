@@ -12,9 +12,11 @@ var bcmPricingCalculator_deleteBillEstimateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_deleteBillEstimateCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_deleteBillEstimateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_deleteBillEstimateCmd).Standalone()
 
-	bcmPricingCalculator_deleteBillEstimateCmd.Flags().String("identifier", "", "The unique identifier of the bill estimate to delete.")
-	bcmPricingCalculator_deleteBillEstimateCmd.MarkFlagRequired("identifier")
+		bcmPricingCalculator_deleteBillEstimateCmd.Flags().String("identifier", "", "The unique identifier of the bill estimate to delete.")
+		bcmPricingCalculator_deleteBillEstimateCmd.MarkFlagRequired("identifier")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_deleteBillEstimateCmd)
 }

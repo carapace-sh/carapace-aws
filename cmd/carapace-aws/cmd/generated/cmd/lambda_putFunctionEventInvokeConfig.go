@@ -12,13 +12,15 @@ var lambda_putFunctionEventInvokeConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_putFunctionEventInvokeConfigCmd).Standalone()
+	carapace.Gen(lambda_putFunctionEventInvokeConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_putFunctionEventInvokeConfigCmd).Standalone()
 
-	lambda_putFunctionEventInvokeConfigCmd.Flags().String("destination-config", "", "A destination for events after they have been sent to a function for processing.")
-	lambda_putFunctionEventInvokeConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
-	lambda_putFunctionEventInvokeConfigCmd.Flags().String("maximum-event-age-in-seconds", "", "The maximum age of a request that Lambda sends to a function for processing.")
-	lambda_putFunctionEventInvokeConfigCmd.Flags().String("maximum-retry-attempts", "", "The maximum number of times to retry when the function returns an error.")
-	lambda_putFunctionEventInvokeConfigCmd.Flags().String("qualifier", "", "A version number or alias name.")
-	lambda_putFunctionEventInvokeConfigCmd.MarkFlagRequired("function-name")
+		lambda_putFunctionEventInvokeConfigCmd.Flags().String("destination-config", "", "A destination for events after they have been sent to a function for processing.")
+		lambda_putFunctionEventInvokeConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
+		lambda_putFunctionEventInvokeConfigCmd.Flags().String("maximum-event-age-in-seconds", "", "The maximum age of a request that Lambda sends to a function for processing.")
+		lambda_putFunctionEventInvokeConfigCmd.Flags().String("maximum-retry-attempts", "", "The maximum number of times to retry when the function returns an error.")
+		lambda_putFunctionEventInvokeConfigCmd.Flags().String("qualifier", "", "A version number or alias name.")
+		lambda_putFunctionEventInvokeConfigCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_putFunctionEventInvokeConfigCmd)
 }

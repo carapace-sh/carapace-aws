@@ -12,9 +12,11 @@ var customerProfiles_listDomainsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_listDomainsCmd).Standalone()
+	carapace.Gen(customerProfiles_listDomainsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_listDomainsCmd).Standalone()
 
-	customerProfiles_listDomainsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	customerProfiles_listDomainsCmd.Flags().String("next-token", "", "The pagination token from the previous ListDomain API call.")
+		customerProfiles_listDomainsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		customerProfiles_listDomainsCmd.Flags().String("next-token", "", "The pagination token from the previous ListDomain API call.")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_listDomainsCmd)
 }

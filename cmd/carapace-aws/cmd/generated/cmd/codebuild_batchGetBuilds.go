@@ -12,9 +12,11 @@ var codebuild_batchGetBuildsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_batchGetBuildsCmd).Standalone()
+	carapace.Gen(codebuild_batchGetBuildsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_batchGetBuildsCmd).Standalone()
 
-	codebuild_batchGetBuildsCmd.Flags().String("ids", "", "The IDs of the builds.")
-	codebuild_batchGetBuildsCmd.MarkFlagRequired("ids")
+		codebuild_batchGetBuildsCmd.Flags().String("ids", "", "The IDs of the builds.")
+		codebuild_batchGetBuildsCmd.MarkFlagRequired("ids")
+	})
 	codebuildCmd.AddCommand(codebuild_batchGetBuildsCmd)
 }

@@ -12,11 +12,13 @@ var deadline_listStorageProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_listStorageProfilesCmd).Standalone()
+	carapace.Gen(deadline_listStorageProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_listStorageProfilesCmd).Standalone()
 
-	deadline_listStorageProfilesCmd.Flags().String("farm-id", "", "The farm ID of the storage profile.")
-	deadline_listStorageProfilesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	deadline_listStorageProfilesCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
-	deadline_listStorageProfilesCmd.MarkFlagRequired("farm-id")
+		deadline_listStorageProfilesCmd.Flags().String("farm-id", "", "The farm ID of the storage profile.")
+		deadline_listStorageProfilesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		deadline_listStorageProfilesCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
+		deadline_listStorageProfilesCmd.MarkFlagRequired("farm-id")
+	})
 	deadlineCmd.AddCommand(deadline_listStorageProfilesCmd)
 }

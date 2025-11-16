@@ -12,8 +12,10 @@ var mediastore_describeContainerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_describeContainerCmd).Standalone()
+	carapace.Gen(mediastore_describeContainerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_describeContainerCmd).Standalone()
 
-	mediastore_describeContainerCmd.Flags().String("container-name", "", "The name of the container to query.")
+		mediastore_describeContainerCmd.Flags().String("container-name", "", "The name of the container to query.")
+	})
 	mediastoreCmd.AddCommand(mediastore_describeContainerCmd)
 }

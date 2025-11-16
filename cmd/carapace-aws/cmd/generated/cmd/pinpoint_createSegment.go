@@ -12,11 +12,13 @@ var pinpoint_createSegmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_createSegmentCmd).Standalone()
+	carapace.Gen(pinpoint_createSegmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_createSegmentCmd).Standalone()
 
-	pinpoint_createSegmentCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_createSegmentCmd.Flags().String("write-segment-request", "", "")
-	pinpoint_createSegmentCmd.MarkFlagRequired("application-id")
-	pinpoint_createSegmentCmd.MarkFlagRequired("write-segment-request")
+		pinpoint_createSegmentCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_createSegmentCmd.Flags().String("write-segment-request", "", "")
+		pinpoint_createSegmentCmd.MarkFlagRequired("application-id")
+		pinpoint_createSegmentCmd.MarkFlagRequired("write-segment-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_createSegmentCmd)
 }

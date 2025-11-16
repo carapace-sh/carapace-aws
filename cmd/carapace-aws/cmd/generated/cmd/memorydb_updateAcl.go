@@ -12,11 +12,13 @@ var memorydb_updateAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_updateAclCmd).Standalone()
+	carapace.Gen(memorydb_updateAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_updateAclCmd).Standalone()
 
-	memorydb_updateAclCmd.Flags().String("aclname", "", "The name of the Access Control List.")
-	memorydb_updateAclCmd.Flags().String("user-names-to-add", "", "The list of users to add to the Access Control List.")
-	memorydb_updateAclCmd.Flags().String("user-names-to-remove", "", "The list of users to remove from the Access Control List.")
-	memorydb_updateAclCmd.MarkFlagRequired("aclname")
+		memorydb_updateAclCmd.Flags().String("aclname", "", "The name of the Access Control List.")
+		memorydb_updateAclCmd.Flags().String("user-names-to-add", "", "The list of users to add to the Access Control List.")
+		memorydb_updateAclCmd.Flags().String("user-names-to-remove", "", "The list of users to remove from the Access Control List.")
+		memorydb_updateAclCmd.MarkFlagRequired("aclname")
+	})
 	memorydbCmd.AddCommand(memorydb_updateAclCmd)
 }

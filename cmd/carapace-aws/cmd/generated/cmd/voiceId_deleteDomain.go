@@ -12,9 +12,11 @@ var voiceId_deleteDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_deleteDomainCmd).Standalone()
+	carapace.Gen(voiceId_deleteDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_deleteDomainCmd).Standalone()
 
-	voiceId_deleteDomainCmd.Flags().String("domain-id", "", "The identifier of the domain you want to delete.")
-	voiceId_deleteDomainCmd.MarkFlagRequired("domain-id")
+		voiceId_deleteDomainCmd.Flags().String("domain-id", "", "The identifier of the domain you want to delete.")
+		voiceId_deleteDomainCmd.MarkFlagRequired("domain-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_deleteDomainCmd)
 }

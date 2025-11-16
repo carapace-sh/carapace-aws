@@ -12,13 +12,15 @@ var sns_createPlatformApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_createPlatformApplicationCmd).Standalone()
+	carapace.Gen(sns_createPlatformApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_createPlatformApplicationCmd).Standalone()
 
-	sns_createPlatformApplicationCmd.Flags().String("attributes", "", "For a list of attributes, see [`SetPlatformApplicationAttributes`](https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html) .")
-	sns_createPlatformApplicationCmd.Flags().String("name", "", "Application names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, hyphens, and periods, and must be between 1 and 256 characters long.")
-	sns_createPlatformApplicationCmd.Flags().String("platform", "", "The following platforms are supported: ADM (Amazon Device Messaging), APNS (Apple Push Notification Service), APNS\\_SANDBOX, and GCM (Firebase Cloud Messaging).")
-	sns_createPlatformApplicationCmd.MarkFlagRequired("attributes")
-	sns_createPlatformApplicationCmd.MarkFlagRequired("name")
-	sns_createPlatformApplicationCmd.MarkFlagRequired("platform")
+		sns_createPlatformApplicationCmd.Flags().String("attributes", "", "For a list of attributes, see [`SetPlatformApplicationAttributes`](https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html) .")
+		sns_createPlatformApplicationCmd.Flags().String("name", "", "Application names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, hyphens, and periods, and must be between 1 and 256 characters long.")
+		sns_createPlatformApplicationCmd.Flags().String("platform", "", "The following platforms are supported: ADM (Amazon Device Messaging), APNS (Apple Push Notification Service), APNS\\_SANDBOX, and GCM (Firebase Cloud Messaging).")
+		sns_createPlatformApplicationCmd.MarkFlagRequired("attributes")
+		sns_createPlatformApplicationCmd.MarkFlagRequired("name")
+		sns_createPlatformApplicationCmd.MarkFlagRequired("platform")
+	})
 	snsCmd.AddCommand(sns_createPlatformApplicationCmd)
 }

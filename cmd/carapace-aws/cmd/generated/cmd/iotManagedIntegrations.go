@@ -12,7 +12,9 @@ var iotManagedIntegrationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrationsCmd).Standalone()
+	carapace.Gen(iotManagedIntegrationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrationsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(iotManagedIntegrationsCmd)
 }

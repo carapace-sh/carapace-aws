@@ -12,14 +12,16 @@ var datapipeline_setTaskStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_setTaskStatusCmd).Standalone()
+	carapace.Gen(datapipeline_setTaskStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_setTaskStatusCmd).Standalone()
 
-	datapipeline_setTaskStatusCmd.Flags().String("error-id", "", "If an error occurred during the task, this value specifies the error code.")
-	datapipeline_setTaskStatusCmd.Flags().String("error-message", "", "If an error occurred during the task, this value specifies a text description of the error.")
-	datapipeline_setTaskStatusCmd.Flags().String("error-stack-trace", "", "If an error occurred during the task, this value specifies the stack trace associated with the error.")
-	datapipeline_setTaskStatusCmd.Flags().String("task-id", "", "The ID of the task assigned to the task runner.")
-	datapipeline_setTaskStatusCmd.Flags().String("task-status", "", "If `FINISHED`, the task successfully completed.")
-	datapipeline_setTaskStatusCmd.MarkFlagRequired("task-id")
-	datapipeline_setTaskStatusCmd.MarkFlagRequired("task-status")
+		datapipeline_setTaskStatusCmd.Flags().String("error-id", "", "If an error occurred during the task, this value specifies the error code.")
+		datapipeline_setTaskStatusCmd.Flags().String("error-message", "", "If an error occurred during the task, this value specifies a text description of the error.")
+		datapipeline_setTaskStatusCmd.Flags().String("error-stack-trace", "", "If an error occurred during the task, this value specifies the stack trace associated with the error.")
+		datapipeline_setTaskStatusCmd.Flags().String("task-id", "", "The ID of the task assigned to the task runner.")
+		datapipeline_setTaskStatusCmd.Flags().String("task-status", "", "If `FINISHED`, the task successfully completed.")
+		datapipeline_setTaskStatusCmd.MarkFlagRequired("task-id")
+		datapipeline_setTaskStatusCmd.MarkFlagRequired("task-status")
+	})
 	datapipelineCmd.AddCommand(datapipeline_setTaskStatusCmd)
 }

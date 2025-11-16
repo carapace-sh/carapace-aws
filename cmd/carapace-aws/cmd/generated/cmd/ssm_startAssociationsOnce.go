@@ -12,9 +12,11 @@ var ssm_startAssociationsOnceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_startAssociationsOnceCmd).Standalone()
+	carapace.Gen(ssm_startAssociationsOnceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_startAssociationsOnceCmd).Standalone()
 
-	ssm_startAssociationsOnceCmd.Flags().String("association-ids", "", "The association IDs that you want to run immediately and only one time.")
-	ssm_startAssociationsOnceCmd.MarkFlagRequired("association-ids")
+		ssm_startAssociationsOnceCmd.Flags().String("association-ids", "", "The association IDs that you want to run immediately and only one time.")
+		ssm_startAssociationsOnceCmd.MarkFlagRequired("association-ids")
+	})
 	ssmCmd.AddCommand(ssm_startAssociationsOnceCmd)
 }

@@ -12,10 +12,12 @@ var lambda_getFunctionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getFunctionCmd).Standalone()
+	carapace.Gen(lambda_getFunctionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getFunctionCmd).Standalone()
 
-	lambda_getFunctionCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
-	lambda_getFunctionCmd.Flags().String("qualifier", "", "Specify a version or alias to get details about a published version of the function.")
-	lambda_getFunctionCmd.MarkFlagRequired("function-name")
+		lambda_getFunctionCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
+		lambda_getFunctionCmd.Flags().String("qualifier", "", "Specify a version or alias to get details about a published version of the function.")
+		lambda_getFunctionCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_getFunctionCmd)
 }

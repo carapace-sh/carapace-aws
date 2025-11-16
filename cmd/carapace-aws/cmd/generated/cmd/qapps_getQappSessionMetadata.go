@@ -12,11 +12,13 @@ var qapps_getQappSessionMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_getQappSessionMetadataCmd).Standalone()
+	carapace.Gen(qapps_getQappSessionMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_getQappSessionMetadataCmd).Standalone()
 
-	qapps_getQappSessionMetadataCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_getQappSessionMetadataCmd.Flags().String("session-id", "", "The unique identifier of the Q App session.")
-	qapps_getQappSessionMetadataCmd.MarkFlagRequired("instance-id")
-	qapps_getQappSessionMetadataCmd.MarkFlagRequired("session-id")
+		qapps_getQappSessionMetadataCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_getQappSessionMetadataCmd.Flags().String("session-id", "", "The unique identifier of the Q App session.")
+		qapps_getQappSessionMetadataCmd.MarkFlagRequired("instance-id")
+		qapps_getQappSessionMetadataCmd.MarkFlagRequired("session-id")
+	})
 	qappsCmd.AddCommand(qapps_getQappSessionMetadataCmd)
 }

@@ -12,10 +12,12 @@ var iam_listAccessKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_listAccessKeysCmd).Standalone()
+	carapace.Gen(iam_listAccessKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_listAccessKeysCmd).Standalone()
 
-	iam_listAccessKeysCmd.Flags().String("marker", "", "Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated.")
-	iam_listAccessKeysCmd.Flags().String("max-items", "", "Use this only when paginating results to indicate the maximum number of items you want in the response.")
-	iam_listAccessKeysCmd.Flags().String("user-name", "", "The name of the user.")
+		iam_listAccessKeysCmd.Flags().String("marker", "", "Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated.")
+		iam_listAccessKeysCmd.Flags().String("max-items", "", "Use this only when paginating results to indicate the maximum number of items you want in the response.")
+		iam_listAccessKeysCmd.Flags().String("user-name", "", "The name of the user.")
+	})
 	iamCmd.AddCommand(iam_listAccessKeysCmd)
 }

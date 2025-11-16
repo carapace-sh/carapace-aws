@@ -12,9 +12,11 @@ var kms_deleteAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_deleteAliasCmd).Standalone()
+	carapace.Gen(kms_deleteAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_deleteAliasCmd).Standalone()
 
-	kms_deleteAliasCmd.Flags().String("alias-name", "", "The alias to be deleted.")
-	kms_deleteAliasCmd.MarkFlagRequired("alias-name")
+		kms_deleteAliasCmd.Flags().String("alias-name", "", "The alias to be deleted.")
+		kms_deleteAliasCmd.MarkFlagRequired("alias-name")
+	})
 	kmsCmd.AddCommand(kms_deleteAliasCmd)
 }

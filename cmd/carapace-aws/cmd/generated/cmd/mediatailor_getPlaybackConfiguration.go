@@ -12,9 +12,11 @@ var mediatailor_getPlaybackConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_getPlaybackConfigurationCmd).Standalone()
+	carapace.Gen(mediatailor_getPlaybackConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_getPlaybackConfigurationCmd).Standalone()
 
-	mediatailor_getPlaybackConfigurationCmd.Flags().String("name", "", "The identifier for the playback configuration.")
-	mediatailor_getPlaybackConfigurationCmd.MarkFlagRequired("name")
+		mediatailor_getPlaybackConfigurationCmd.Flags().String("name", "", "The identifier for the playback configuration.")
+		mediatailor_getPlaybackConfigurationCmd.MarkFlagRequired("name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_getPlaybackConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var deadline_getLicenseEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_getLicenseEndpointCmd).Standalone()
+	carapace.Gen(deadline_getLicenseEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_getLicenseEndpointCmd).Standalone()
 
-	deadline_getLicenseEndpointCmd.Flags().String("license-endpoint-id", "", "The license endpoint ID.")
-	deadline_getLicenseEndpointCmd.MarkFlagRequired("license-endpoint-id")
+		deadline_getLicenseEndpointCmd.Flags().String("license-endpoint-id", "", "The license endpoint ID.")
+		deadline_getLicenseEndpointCmd.MarkFlagRequired("license-endpoint-id")
+	})
 	deadlineCmd.AddCommand(deadline_getLicenseEndpointCmd)
 }

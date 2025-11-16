@@ -12,9 +12,11 @@ var dynamodb_describeImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeImportCmd).Standalone()
+	carapace.Gen(dynamodb_describeImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeImportCmd).Standalone()
 
-	dynamodb_describeImportCmd.Flags().String("import-arn", "", "The Amazon Resource Name (ARN) associated with the table you're importing to.")
-	dynamodb_describeImportCmd.MarkFlagRequired("import-arn")
+		dynamodb_describeImportCmd.Flags().String("import-arn", "", "The Amazon Resource Name (ARN) associated with the table you're importing to.")
+		dynamodb_describeImportCmd.MarkFlagRequired("import-arn")
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeImportCmd)
 }

@@ -12,9 +12,11 @@ var ssm_cancelMaintenanceWindowExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_cancelMaintenanceWindowExecutionCmd).Standalone()
+	carapace.Gen(ssm_cancelMaintenanceWindowExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_cancelMaintenanceWindowExecutionCmd).Standalone()
 
-	ssm_cancelMaintenanceWindowExecutionCmd.Flags().String("window-execution-id", "", "The ID of the maintenance window execution to stop.")
-	ssm_cancelMaintenanceWindowExecutionCmd.MarkFlagRequired("window-execution-id")
+		ssm_cancelMaintenanceWindowExecutionCmd.Flags().String("window-execution-id", "", "The ID of the maintenance window execution to stop.")
+		ssm_cancelMaintenanceWindowExecutionCmd.MarkFlagRequired("window-execution-id")
+	})
 	ssmCmd.AddCommand(ssm_cancelMaintenanceWindowExecutionCmd)
 }

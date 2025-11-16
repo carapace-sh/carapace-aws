@@ -12,10 +12,12 @@ var iot_deprecateThingTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deprecateThingTypeCmd).Standalone()
+	carapace.Gen(iot_deprecateThingTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deprecateThingTypeCmd).Standalone()
 
-	iot_deprecateThingTypeCmd.Flags().String("thing-type-name", "", "The name of the thing type to deprecate.")
-	iot_deprecateThingTypeCmd.Flags().String("undo-deprecate", "", "Whether to undeprecate a deprecated thing type.")
-	iot_deprecateThingTypeCmd.MarkFlagRequired("thing-type-name")
+		iot_deprecateThingTypeCmd.Flags().String("thing-type-name", "", "The name of the thing type to deprecate.")
+		iot_deprecateThingTypeCmd.Flags().String("undo-deprecate", "", "Whether to undeprecate a deprecated thing type.")
+		iot_deprecateThingTypeCmd.MarkFlagRequired("thing-type-name")
+	})
 	iotCmd.AddCommand(iot_deprecateThingTypeCmd)
 }

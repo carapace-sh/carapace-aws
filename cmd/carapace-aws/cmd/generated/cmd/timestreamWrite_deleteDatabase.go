@@ -12,9 +12,11 @@ var timestreamWrite_deleteDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamWrite_deleteDatabaseCmd).Standalone()
+	carapace.Gen(timestreamWrite_deleteDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamWrite_deleteDatabaseCmd).Standalone()
 
-	timestreamWrite_deleteDatabaseCmd.Flags().String("database-name", "", "The name of the Timestream database to be deleted.")
-	timestreamWrite_deleteDatabaseCmd.MarkFlagRequired("database-name")
+		timestreamWrite_deleteDatabaseCmd.Flags().String("database-name", "", "The name of the Timestream database to be deleted.")
+		timestreamWrite_deleteDatabaseCmd.MarkFlagRequired("database-name")
+	})
 	timestreamWriteCmd.AddCommand(timestreamWrite_deleteDatabaseCmd)
 }

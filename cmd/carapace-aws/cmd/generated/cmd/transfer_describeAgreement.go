@@ -12,11 +12,13 @@ var transfer_describeAgreementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_describeAgreementCmd).Standalone()
+	carapace.Gen(transfer_describeAgreementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_describeAgreementCmd).Standalone()
 
-	transfer_describeAgreementCmd.Flags().String("agreement-id", "", "A unique identifier for the agreement.")
-	transfer_describeAgreementCmd.Flags().String("server-id", "", "The server identifier that's associated with the agreement.")
-	transfer_describeAgreementCmd.MarkFlagRequired("agreement-id")
-	transfer_describeAgreementCmd.MarkFlagRequired("server-id")
+		transfer_describeAgreementCmd.Flags().String("agreement-id", "", "A unique identifier for the agreement.")
+		transfer_describeAgreementCmd.Flags().String("server-id", "", "The server identifier that's associated with the agreement.")
+		transfer_describeAgreementCmd.MarkFlagRequired("agreement-id")
+		transfer_describeAgreementCmd.MarkFlagRequired("server-id")
+	})
 	transferCmd.AddCommand(transfer_describeAgreementCmd)
 }

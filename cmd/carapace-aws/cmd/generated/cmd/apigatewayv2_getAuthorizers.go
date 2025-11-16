@@ -12,11 +12,13 @@ var apigatewayv2_getAuthorizersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_getAuthorizersCmd).Standalone()
+	carapace.Gen(apigatewayv2_getAuthorizersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_getAuthorizersCmd).Standalone()
 
-	apigatewayv2_getAuthorizersCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_getAuthorizersCmd.Flags().String("max-results", "", "The maximum number of elements to be returned for this resource.")
-	apigatewayv2_getAuthorizersCmd.Flags().String("next-token", "", "The next page of elements from this collection.")
-	apigatewayv2_getAuthorizersCmd.MarkFlagRequired("api-id")
+		apigatewayv2_getAuthorizersCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_getAuthorizersCmd.Flags().String("max-results", "", "The maximum number of elements to be returned for this resource.")
+		apigatewayv2_getAuthorizersCmd.Flags().String("next-token", "", "The next page of elements from this collection.")
+		apigatewayv2_getAuthorizersCmd.MarkFlagRequired("api-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_getAuthorizersCmd)
 }

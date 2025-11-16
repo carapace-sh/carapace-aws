@@ -12,9 +12,11 @@ var emrContainers_deleteVirtualClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_deleteVirtualClusterCmd).Standalone()
+	carapace.Gen(emrContainers_deleteVirtualClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_deleteVirtualClusterCmd).Standalone()
 
-	emrContainers_deleteVirtualClusterCmd.Flags().String("id", "", "The ID of the virtual cluster that will be deleted.")
-	emrContainers_deleteVirtualClusterCmd.MarkFlagRequired("id")
+		emrContainers_deleteVirtualClusterCmd.Flags().String("id", "", "The ID of the virtual cluster that will be deleted.")
+		emrContainers_deleteVirtualClusterCmd.MarkFlagRequired("id")
+	})
 	emrContainersCmd.AddCommand(emrContainers_deleteVirtualClusterCmd)
 }

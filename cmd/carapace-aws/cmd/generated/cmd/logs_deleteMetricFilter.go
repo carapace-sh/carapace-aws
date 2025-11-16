@@ -12,11 +12,13 @@ var logs_deleteMetricFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteMetricFilterCmd).Standalone()
+	carapace.Gen(logs_deleteMetricFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteMetricFilterCmd).Standalone()
 
-	logs_deleteMetricFilterCmd.Flags().String("filter-name", "", "The name of the metric filter.")
-	logs_deleteMetricFilterCmd.Flags().String("log-group-name", "", "The name of the log group.")
-	logs_deleteMetricFilterCmd.MarkFlagRequired("filter-name")
-	logs_deleteMetricFilterCmd.MarkFlagRequired("log-group-name")
+		logs_deleteMetricFilterCmd.Flags().String("filter-name", "", "The name of the metric filter.")
+		logs_deleteMetricFilterCmd.Flags().String("log-group-name", "", "The name of the log group.")
+		logs_deleteMetricFilterCmd.MarkFlagRequired("filter-name")
+		logs_deleteMetricFilterCmd.MarkFlagRequired("log-group-name")
+	})
 	logsCmd.AddCommand(logs_deleteMetricFilterCmd)
 }

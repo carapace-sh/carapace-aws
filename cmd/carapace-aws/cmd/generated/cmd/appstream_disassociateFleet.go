@@ -12,11 +12,13 @@ var appstream_disassociateFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_disassociateFleetCmd).Standalone()
+	carapace.Gen(appstream_disassociateFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_disassociateFleetCmd).Standalone()
 
-	appstream_disassociateFleetCmd.Flags().String("fleet-name", "", "The name of the fleet.")
-	appstream_disassociateFleetCmd.Flags().String("stack-name", "", "The name of the stack.")
-	appstream_disassociateFleetCmd.MarkFlagRequired("fleet-name")
-	appstream_disassociateFleetCmd.MarkFlagRequired("stack-name")
+		appstream_disassociateFleetCmd.Flags().String("fleet-name", "", "The name of the fleet.")
+		appstream_disassociateFleetCmd.Flags().String("stack-name", "", "The name of the stack.")
+		appstream_disassociateFleetCmd.MarkFlagRequired("fleet-name")
+		appstream_disassociateFleetCmd.MarkFlagRequired("stack-name")
+	})
 	appstreamCmd.AddCommand(appstream_disassociateFleetCmd)
 }

@@ -12,10 +12,12 @@ var appstream_createImageBuilderStreamingUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_createImageBuilderStreamingUrlCmd).Standalone()
+	carapace.Gen(appstream_createImageBuilderStreamingUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_createImageBuilderStreamingUrlCmd).Standalone()
 
-	appstream_createImageBuilderStreamingUrlCmd.Flags().String("name", "", "The name of the image builder.")
-	appstream_createImageBuilderStreamingUrlCmd.Flags().String("validity", "", "The time that the streaming URL will be valid, in seconds.")
-	appstream_createImageBuilderStreamingUrlCmd.MarkFlagRequired("name")
+		appstream_createImageBuilderStreamingUrlCmd.Flags().String("name", "", "The name of the image builder.")
+		appstream_createImageBuilderStreamingUrlCmd.Flags().String("validity", "", "The time that the streaming URL will be valid, in seconds.")
+		appstream_createImageBuilderStreamingUrlCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_createImageBuilderStreamingUrlCmd)
 }

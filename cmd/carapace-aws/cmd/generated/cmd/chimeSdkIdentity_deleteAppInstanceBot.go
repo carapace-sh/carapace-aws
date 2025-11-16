@@ -12,9 +12,11 @@ var chimeSdkIdentity_deleteAppInstanceBotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_deleteAppInstanceBotCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_deleteAppInstanceBotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_deleteAppInstanceBotCmd).Standalone()
 
-	chimeSdkIdentity_deleteAppInstanceBotCmd.Flags().String("app-instance-bot-arn", "", "The ARN of the `AppInstanceBot` being deleted.")
-	chimeSdkIdentity_deleteAppInstanceBotCmd.MarkFlagRequired("app-instance-bot-arn")
+		chimeSdkIdentity_deleteAppInstanceBotCmd.Flags().String("app-instance-bot-arn", "", "The ARN of the `AppInstanceBot` being deleted.")
+		chimeSdkIdentity_deleteAppInstanceBotCmd.MarkFlagRequired("app-instance-bot-arn")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_deleteAppInstanceBotCmd)
 }

@@ -12,11 +12,13 @@ var qconnect_getAssistantAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_getAssistantAssociationCmd).Standalone()
+	carapace.Gen(qconnect_getAssistantAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_getAssistantAssociationCmd).Standalone()
 
-	qconnect_getAssistantAssociationCmd.Flags().String("assistant-association-id", "", "The identifier of the assistant association.")
-	qconnect_getAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_getAssistantAssociationCmd.MarkFlagRequired("assistant-association-id")
-	qconnect_getAssistantAssociationCmd.MarkFlagRequired("assistant-id")
+		qconnect_getAssistantAssociationCmd.Flags().String("assistant-association-id", "", "The identifier of the assistant association.")
+		qconnect_getAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_getAssistantAssociationCmd.MarkFlagRequired("assistant-association-id")
+		qconnect_getAssistantAssociationCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_getAssistantAssociationCmd)
 }

@@ -12,11 +12,13 @@ var chimeSdkVoice_putVoiceConnectorTerminationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_putVoiceConnectorTerminationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_putVoiceConnectorTerminationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_putVoiceConnectorTerminationCmd).Standalone()
 
-	chimeSdkVoice_putVoiceConnectorTerminationCmd.Flags().String("termination", "", "The termination settings to be updated.")
-	chimeSdkVoice_putVoiceConnectorTerminationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_putVoiceConnectorTerminationCmd.MarkFlagRequired("termination")
-	chimeSdkVoice_putVoiceConnectorTerminationCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_putVoiceConnectorTerminationCmd.Flags().String("termination", "", "The termination settings to be updated.")
+		chimeSdkVoice_putVoiceConnectorTerminationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_putVoiceConnectorTerminationCmd.MarkFlagRequired("termination")
+		chimeSdkVoice_putVoiceConnectorTerminationCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_putVoiceConnectorTerminationCmd)
 }

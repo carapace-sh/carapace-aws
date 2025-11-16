@@ -12,11 +12,13 @@ var kendra_batchGetDocumentStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_batchGetDocumentStatusCmd).Standalone()
+	carapace.Gen(kendra_batchGetDocumentStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_batchGetDocumentStatusCmd).Standalone()
 
-	kendra_batchGetDocumentStatusCmd.Flags().String("document-info-list", "", "A list of `DocumentInfo` objects that identify the documents for which to get the status.")
-	kendra_batchGetDocumentStatusCmd.Flags().String("index-id", "", "The identifier of the index to add documents to.")
-	kendra_batchGetDocumentStatusCmd.MarkFlagRequired("document-info-list")
-	kendra_batchGetDocumentStatusCmd.MarkFlagRequired("index-id")
+		kendra_batchGetDocumentStatusCmd.Flags().String("document-info-list", "", "A list of `DocumentInfo` objects that identify the documents for which to get the status.")
+		kendra_batchGetDocumentStatusCmd.Flags().String("index-id", "", "The identifier of the index to add documents to.")
+		kendra_batchGetDocumentStatusCmd.MarkFlagRequired("document-info-list")
+		kendra_batchGetDocumentStatusCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_batchGetDocumentStatusCmd)
 }

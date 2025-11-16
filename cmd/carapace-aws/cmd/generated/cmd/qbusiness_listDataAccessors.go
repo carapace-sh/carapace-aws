@@ -12,11 +12,13 @@ var qbusiness_listDataAccessorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_listDataAccessorsCmd).Standalone()
+	carapace.Gen(qbusiness_listDataAccessorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_listDataAccessorsCmd).Standalone()
 
-	qbusiness_listDataAccessorsCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application.")
-	qbusiness_listDataAccessorsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	qbusiness_listDataAccessorsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	qbusiness_listDataAccessorsCmd.MarkFlagRequired("application-id")
+		qbusiness_listDataAccessorsCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application.")
+		qbusiness_listDataAccessorsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		qbusiness_listDataAccessorsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qbusiness_listDataAccessorsCmd.MarkFlagRequired("application-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_listDataAccessorsCmd)
 }

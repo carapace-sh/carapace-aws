@@ -12,9 +12,11 @@ var guardduty_enableOrganizationAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_enableOrganizationAdminAccountCmd).Standalone()
+	carapace.Gen(guardduty_enableOrganizationAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_enableOrganizationAdminAccountCmd).Standalone()
 
-	guardduty_enableOrganizationAdminAccountCmd.Flags().String("admin-account-id", "", "The Amazon Web Services account ID for the organization account to be enabled as a GuardDuty delegated administrator.")
-	guardduty_enableOrganizationAdminAccountCmd.MarkFlagRequired("admin-account-id")
+		guardduty_enableOrganizationAdminAccountCmd.Flags().String("admin-account-id", "", "The Amazon Web Services account ID for the organization account to be enabled as a GuardDuty delegated administrator.")
+		guardduty_enableOrganizationAdminAccountCmd.MarkFlagRequired("admin-account-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_enableOrganizationAdminAccountCmd)
 }

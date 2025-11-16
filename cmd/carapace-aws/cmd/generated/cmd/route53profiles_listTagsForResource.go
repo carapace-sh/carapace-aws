@@ -12,9 +12,11 @@ var route53profiles_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53profiles_listTagsForResourceCmd).Standalone()
+	carapace.Gen(route53profiles_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53profiles_listTagsForResourceCmd).Standalone()
 
-	route53profiles_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource that you want to list the tags for.")
-	route53profiles_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		route53profiles_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource that you want to list the tags for.")
+		route53profiles_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	route53profilesCmd.AddCommand(route53profiles_listTagsForResourceCmd)
 }

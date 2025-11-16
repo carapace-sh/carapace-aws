@@ -12,10 +12,12 @@ var codecommit_listBranchesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_listBranchesCmd).Standalone()
+	carapace.Gen(codecommit_listBranchesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_listBranchesCmd).Standalone()
 
-	codecommit_listBranchesCmd.Flags().String("next-token", "", "An enumeration token that allows the operation to batch the results.")
-	codecommit_listBranchesCmd.Flags().String("repository-name", "", "The name of the repository that contains the branches.")
-	codecommit_listBranchesCmd.MarkFlagRequired("repository-name")
+		codecommit_listBranchesCmd.Flags().String("next-token", "", "An enumeration token that allows the operation to batch the results.")
+		codecommit_listBranchesCmd.Flags().String("repository-name", "", "The name of the repository that contains the branches.")
+		codecommit_listBranchesCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_listBranchesCmd)
 }

@@ -12,9 +12,11 @@ var customerProfiles_getProfileObjectTypeTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getProfileObjectTypeTemplateCmd).Standalone()
+	carapace.Gen(customerProfiles_getProfileObjectTypeTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getProfileObjectTypeTemplateCmd).Standalone()
 
-	customerProfiles_getProfileObjectTypeTemplateCmd.Flags().String("template-id", "", "A unique identifier for the object template.")
-	customerProfiles_getProfileObjectTypeTemplateCmd.MarkFlagRequired("template-id")
+		customerProfiles_getProfileObjectTypeTemplateCmd.Flags().String("template-id", "", "A unique identifier for the object template.")
+		customerProfiles_getProfileObjectTypeTemplateCmd.MarkFlagRequired("template-id")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getProfileObjectTypeTemplateCmd)
 }

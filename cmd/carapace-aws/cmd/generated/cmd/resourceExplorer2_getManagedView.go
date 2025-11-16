@@ -12,9 +12,11 @@ var resourceExplorer2_getManagedViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_getManagedViewCmd).Standalone()
+	carapace.Gen(resourceExplorer2_getManagedViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_getManagedViewCmd).Standalone()
 
-	resourceExplorer2_getManagedViewCmd.Flags().String("managed-view-arn", "", "The Amazon resource name (ARN) of the managed view.")
-	resourceExplorer2_getManagedViewCmd.MarkFlagRequired("managed-view-arn")
+		resourceExplorer2_getManagedViewCmd.Flags().String("managed-view-arn", "", "The Amazon resource name (ARN) of the managed view.")
+		resourceExplorer2_getManagedViewCmd.MarkFlagRequired("managed-view-arn")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_getManagedViewCmd)
 }

@@ -12,9 +12,11 @@ var rds_describeEventCategoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeEventCategoriesCmd).Standalone()
+	carapace.Gen(rds_describeEventCategoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeEventCategoriesCmd).Standalone()
 
-	rds_describeEventCategoriesCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
-	rds_describeEventCategoriesCmd.Flags().String("source-type", "", "The type of source that is generating the events.")
+		rds_describeEventCategoriesCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
+		rds_describeEventCategoriesCmd.Flags().String("source-type", "", "The type of source that is generating the events.")
+	})
 	rdsCmd.AddCommand(rds_describeEventCategoriesCmd)
 }

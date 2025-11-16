@@ -12,12 +12,14 @@ var opensearch_createVpcEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_createVpcEndpointCmd).Standalone()
+	carapace.Gen(opensearch_createVpcEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_createVpcEndpointCmd).Standalone()
 
-	opensearch_createVpcEndpointCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
-	opensearch_createVpcEndpointCmd.Flags().String("domain-arn", "", "The Amazon Resource Name (ARN) of the domain to create the endpoint for.")
-	opensearch_createVpcEndpointCmd.Flags().String("vpc-options", "", "Options to specify the subnets and security groups for the endpoint.")
-	opensearch_createVpcEndpointCmd.MarkFlagRequired("domain-arn")
-	opensearch_createVpcEndpointCmd.MarkFlagRequired("vpc-options")
+		opensearch_createVpcEndpointCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
+		opensearch_createVpcEndpointCmd.Flags().String("domain-arn", "", "The Amazon Resource Name (ARN) of the domain to create the endpoint for.")
+		opensearch_createVpcEndpointCmd.Flags().String("vpc-options", "", "Options to specify the subnets and security groups for the endpoint.")
+		opensearch_createVpcEndpointCmd.MarkFlagRequired("domain-arn")
+		opensearch_createVpcEndpointCmd.MarkFlagRequired("vpc-options")
+	})
 	opensearchCmd.AddCommand(opensearch_createVpcEndpointCmd)
 }

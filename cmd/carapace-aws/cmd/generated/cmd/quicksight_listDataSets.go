@@ -12,11 +12,13 @@ var quicksight_listDataSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_listDataSetsCmd).Standalone()
+	carapace.Gen(quicksight_listDataSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_listDataSetsCmd).Standalone()
 
-	quicksight_listDataSetsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
-	quicksight_listDataSetsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	quicksight_listDataSetsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
-	quicksight_listDataSetsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_listDataSetsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
+		quicksight_listDataSetsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		quicksight_listDataSetsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
+		quicksight_listDataSetsCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_listDataSetsCmd)
 }

@@ -12,12 +12,14 @@ var ce_getApproximateUsageRecordsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_getApproximateUsageRecordsCmd).Standalone()
+	carapace.Gen(ce_getApproximateUsageRecordsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_getApproximateUsageRecordsCmd).Standalone()
 
-	ce_getApproximateUsageRecordsCmd.Flags().String("approximation-dimension", "", "The service to evaluate for the usage records.")
-	ce_getApproximateUsageRecordsCmd.Flags().String("granularity", "", "How granular you want the data to be.")
-	ce_getApproximateUsageRecordsCmd.Flags().String("services", "", "The service metadata for the service or services you want to query.")
-	ce_getApproximateUsageRecordsCmd.MarkFlagRequired("approximation-dimension")
-	ce_getApproximateUsageRecordsCmd.MarkFlagRequired("granularity")
+		ce_getApproximateUsageRecordsCmd.Flags().String("approximation-dimension", "", "The service to evaluate for the usage records.")
+		ce_getApproximateUsageRecordsCmd.Flags().String("granularity", "", "How granular you want the data to be.")
+		ce_getApproximateUsageRecordsCmd.Flags().String("services", "", "The service metadata for the service or services you want to query.")
+		ce_getApproximateUsageRecordsCmd.MarkFlagRequired("approximation-dimension")
+		ce_getApproximateUsageRecordsCmd.MarkFlagRequired("granularity")
+	})
 	ceCmd.AddCommand(ce_getApproximateUsageRecordsCmd)
 }

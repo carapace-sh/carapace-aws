@@ -12,11 +12,13 @@ var finspace_getKxDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_getKxDatabaseCmd).Standalone()
+	carapace.Gen(finspace_getKxDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_getKxDatabaseCmd).Standalone()
 
-	finspace_getKxDatabaseCmd.Flags().String("database-name", "", "The name of the kdb database.")
-	finspace_getKxDatabaseCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_getKxDatabaseCmd.MarkFlagRequired("database-name")
-	finspace_getKxDatabaseCmd.MarkFlagRequired("environment-id")
+		finspace_getKxDatabaseCmd.Flags().String("database-name", "", "The name of the kdb database.")
+		finspace_getKxDatabaseCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_getKxDatabaseCmd.MarkFlagRequired("database-name")
+		finspace_getKxDatabaseCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_getKxDatabaseCmd)
 }

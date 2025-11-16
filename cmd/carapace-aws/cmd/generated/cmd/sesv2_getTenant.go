@@ -12,9 +12,11 @@ var sesv2_getTenantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getTenantCmd).Standalone()
+	carapace.Gen(sesv2_getTenantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getTenantCmd).Standalone()
 
-	sesv2_getTenantCmd.Flags().String("tenant-name", "", "The name of the tenant to retrieve information about.")
-	sesv2_getTenantCmd.MarkFlagRequired("tenant-name")
+		sesv2_getTenantCmd.Flags().String("tenant-name", "", "The name of the tenant to retrieve information about.")
+		sesv2_getTenantCmd.MarkFlagRequired("tenant-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_getTenantCmd)
 }

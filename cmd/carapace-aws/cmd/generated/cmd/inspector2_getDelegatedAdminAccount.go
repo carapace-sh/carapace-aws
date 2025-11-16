@@ -12,7 +12,9 @@ var inspector2_getDelegatedAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_getDelegatedAdminAccountCmd).Standalone()
+	carapace.Gen(inspector2_getDelegatedAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_getDelegatedAdminAccountCmd).Standalone()
 
+	})
 	inspector2Cmd.AddCommand(inspector2_getDelegatedAdminAccountCmd)
 }

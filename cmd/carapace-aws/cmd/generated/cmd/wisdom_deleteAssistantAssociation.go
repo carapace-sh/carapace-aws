@@ -12,11 +12,13 @@ var wisdom_deleteAssistantAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_deleteAssistantAssociationCmd).Standalone()
+	carapace.Gen(wisdom_deleteAssistantAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_deleteAssistantAssociationCmd).Standalone()
 
-	wisdom_deleteAssistantAssociationCmd.Flags().String("assistant-association-id", "", "The identifier of the assistant association.")
-	wisdom_deleteAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
-	wisdom_deleteAssistantAssociationCmd.MarkFlagRequired("assistant-association-id")
-	wisdom_deleteAssistantAssociationCmd.MarkFlagRequired("assistant-id")
+		wisdom_deleteAssistantAssociationCmd.Flags().String("assistant-association-id", "", "The identifier of the assistant association.")
+		wisdom_deleteAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
+		wisdom_deleteAssistantAssociationCmd.MarkFlagRequired("assistant-association-id")
+		wisdom_deleteAssistantAssociationCmd.MarkFlagRequired("assistant-id")
+	})
 	wisdomCmd.AddCommand(wisdom_deleteAssistantAssociationCmd)
 }

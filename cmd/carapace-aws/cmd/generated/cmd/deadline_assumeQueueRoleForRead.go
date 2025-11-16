@@ -12,11 +12,13 @@ var deadline_assumeQueueRoleForReadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_assumeQueueRoleForReadCmd).Standalone()
+	carapace.Gen(deadline_assumeQueueRoleForReadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_assumeQueueRoleForReadCmd).Standalone()
 
-	deadline_assumeQueueRoleForReadCmd.Flags().String("farm-id", "", "The farm ID of the farm containing the queue.")
-	deadline_assumeQueueRoleForReadCmd.Flags().String("queue-id", "", "The queue ID.")
-	deadline_assumeQueueRoleForReadCmd.MarkFlagRequired("farm-id")
-	deadline_assumeQueueRoleForReadCmd.MarkFlagRequired("queue-id")
+		deadline_assumeQueueRoleForReadCmd.Flags().String("farm-id", "", "The farm ID of the farm containing the queue.")
+		deadline_assumeQueueRoleForReadCmd.Flags().String("queue-id", "", "The queue ID.")
+		deadline_assumeQueueRoleForReadCmd.MarkFlagRequired("farm-id")
+		deadline_assumeQueueRoleForReadCmd.MarkFlagRequired("queue-id")
+	})
 	deadlineCmd.AddCommand(deadline_assumeQueueRoleForReadCmd)
 }

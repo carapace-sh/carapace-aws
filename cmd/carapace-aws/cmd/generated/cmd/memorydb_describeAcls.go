@@ -12,10 +12,12 @@ var memorydb_describeAclsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_describeAclsCmd).Standalone()
+	carapace.Gen(memorydb_describeAclsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_describeAclsCmd).Standalone()
 
-	memorydb_describeAclsCmd.Flags().String("aclname", "", "The name of the ACL.")
-	memorydb_describeAclsCmd.Flags().String("max-results", "", "The maximum number of records to include in the response.")
-	memorydb_describeAclsCmd.Flags().String("next-token", "", "An optional argument to pass in case the total number of records exceeds the value of MaxResults.")
+		memorydb_describeAclsCmd.Flags().String("aclname", "", "The name of the ACL.")
+		memorydb_describeAclsCmd.Flags().String("max-results", "", "The maximum number of records to include in the response.")
+		memorydb_describeAclsCmd.Flags().String("next-token", "", "An optional argument to pass in case the total number of records exceeds the value of MaxResults.")
+	})
 	memorydbCmd.AddCommand(memorydb_describeAclsCmd)
 }

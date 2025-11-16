@@ -12,12 +12,14 @@ var billing_updateBillingViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billing_updateBillingViewCmd).Standalone()
+	carapace.Gen(billing_updateBillingViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billing_updateBillingViewCmd).Standalone()
 
-	billing_updateBillingViewCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.")
-	billing_updateBillingViewCmd.Flags().String("data-filter-expression", "", "See [Expression](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html).")
-	billing_updateBillingViewCmd.Flags().String("description", "", "The description of the billing view.")
-	billing_updateBillingViewCmd.Flags().String("name", "", "The name of the billing view.")
-	billing_updateBillingViewCmd.MarkFlagRequired("arn")
+		billing_updateBillingViewCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.")
+		billing_updateBillingViewCmd.Flags().String("data-filter-expression", "", "See [Expression](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_billing_Expression.html).")
+		billing_updateBillingViewCmd.Flags().String("description", "", "The description of the billing view.")
+		billing_updateBillingViewCmd.Flags().String("name", "", "The name of the billing view.")
+		billing_updateBillingViewCmd.MarkFlagRequired("arn")
+	})
 	billingCmd.AddCommand(billing_updateBillingViewCmd)
 }

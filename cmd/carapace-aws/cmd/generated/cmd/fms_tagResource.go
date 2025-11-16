@@ -12,11 +12,13 @@ var fms_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_tagResourceCmd).Standalone()
+	carapace.Gen(fms_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_tagResourceCmd).Standalone()
 
-	fms_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to return tags for.")
-	fms_tagResourceCmd.Flags().String("tag-list", "", "The tags to add to the resource.")
-	fms_tagResourceCmd.MarkFlagRequired("resource-arn")
-	fms_tagResourceCmd.MarkFlagRequired("tag-list")
+		fms_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to return tags for.")
+		fms_tagResourceCmd.Flags().String("tag-list", "", "The tags to add to the resource.")
+		fms_tagResourceCmd.MarkFlagRequired("resource-arn")
+		fms_tagResourceCmd.MarkFlagRequired("tag-list")
+	})
 	fmsCmd.AddCommand(fms_tagResourceCmd)
 }

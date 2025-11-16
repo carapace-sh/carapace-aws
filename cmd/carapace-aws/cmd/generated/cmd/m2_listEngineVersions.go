@@ -12,10 +12,12 @@ var m2_listEngineVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_listEngineVersionsCmd).Standalone()
+	carapace.Gen(m2_listEngineVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_listEngineVersionsCmd).Standalone()
 
-	m2_listEngineVersionsCmd.Flags().String("engine-type", "", "The type of target platform.")
-	m2_listEngineVersionsCmd.Flags().String("max-results", "", "The maximum number of objects to return.")
-	m2_listEngineVersionsCmd.Flags().String("next-token", "", "A pagination token returned from a previous call to this operation.")
+		m2_listEngineVersionsCmd.Flags().String("engine-type", "", "The type of target platform.")
+		m2_listEngineVersionsCmd.Flags().String("max-results", "", "The maximum number of objects to return.")
+		m2_listEngineVersionsCmd.Flags().String("next-token", "", "A pagination token returned from a previous call to this operation.")
+	})
 	m2Cmd.AddCommand(m2_listEngineVersionsCmd)
 }

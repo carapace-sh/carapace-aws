@@ -12,10 +12,12 @@ var glue_batchGetWorkflowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_batchGetWorkflowsCmd).Standalone()
+	carapace.Gen(glue_batchGetWorkflowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_batchGetWorkflowsCmd).Standalone()
 
-	glue_batchGetWorkflowsCmd.Flags().String("include-graph", "", "Specifies whether to include a graph when returning the workflow resource metadata.")
-	glue_batchGetWorkflowsCmd.Flags().String("names", "", "A list of workflow names, which may be the names returned from the `ListWorkflows` operation.")
-	glue_batchGetWorkflowsCmd.MarkFlagRequired("names")
+		glue_batchGetWorkflowsCmd.Flags().String("include-graph", "", "Specifies whether to include a graph when returning the workflow resource metadata.")
+		glue_batchGetWorkflowsCmd.Flags().String("names", "", "A list of workflow names, which may be the names returned from the `ListWorkflows` operation.")
+		glue_batchGetWorkflowsCmd.MarkFlagRequired("names")
+	})
 	glueCmd.AddCommand(glue_batchGetWorkflowsCmd)
 }

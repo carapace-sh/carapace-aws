@@ -12,15 +12,17 @@ var apigatewayv2_createModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_createModelCmd).Standalone()
+	carapace.Gen(apigatewayv2_createModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_createModelCmd).Standalone()
 
-	apigatewayv2_createModelCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_createModelCmd.Flags().String("content-type", "", "The content-type for the model, for example, \"application/json\".")
-	apigatewayv2_createModelCmd.Flags().String("description", "", "The description of the model.")
-	apigatewayv2_createModelCmd.Flags().String("name", "", "The name of the model.")
-	apigatewayv2_createModelCmd.Flags().String("schema", "", "The schema for the model.")
-	apigatewayv2_createModelCmd.MarkFlagRequired("api-id")
-	apigatewayv2_createModelCmd.MarkFlagRequired("name")
-	apigatewayv2_createModelCmd.MarkFlagRequired("schema")
+		apigatewayv2_createModelCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_createModelCmd.Flags().String("content-type", "", "The content-type for the model, for example, \"application/json\".")
+		apigatewayv2_createModelCmd.Flags().String("description", "", "The description of the model.")
+		apigatewayv2_createModelCmd.Flags().String("name", "", "The name of the model.")
+		apigatewayv2_createModelCmd.Flags().String("schema", "", "The schema for the model.")
+		apigatewayv2_createModelCmd.MarkFlagRequired("api-id")
+		apigatewayv2_createModelCmd.MarkFlagRequired("name")
+		apigatewayv2_createModelCmd.MarkFlagRequired("schema")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_createModelCmd)
 }

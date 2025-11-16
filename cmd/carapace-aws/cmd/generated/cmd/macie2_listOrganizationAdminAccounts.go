@@ -12,9 +12,11 @@ var macie2_listOrganizationAdminAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_listOrganizationAdminAccountsCmd).Standalone()
+	carapace.Gen(macie2_listOrganizationAdminAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_listOrganizationAdminAccountsCmd).Standalone()
 
-	macie2_listOrganizationAdminAccountsCmd.Flags().String("max-results", "", "The maximum number of items to include in each page of a paginated response.")
-	macie2_listOrganizationAdminAccountsCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+		macie2_listOrganizationAdminAccountsCmd.Flags().String("max-results", "", "The maximum number of items to include in each page of a paginated response.")
+		macie2_listOrganizationAdminAccountsCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+	})
 	macie2Cmd.AddCommand(macie2_listOrganizationAdminAccountsCmd)
 }

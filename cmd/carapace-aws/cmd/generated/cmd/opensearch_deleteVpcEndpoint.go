@@ -12,9 +12,11 @@ var opensearch_deleteVpcEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_deleteVpcEndpointCmd).Standalone()
+	carapace.Gen(opensearch_deleteVpcEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_deleteVpcEndpointCmd).Standalone()
 
-	opensearch_deleteVpcEndpointCmd.Flags().String("vpc-endpoint-id", "", "The unique identifier of the endpoint.")
-	opensearch_deleteVpcEndpointCmd.MarkFlagRequired("vpc-endpoint-id")
+		opensearch_deleteVpcEndpointCmd.Flags().String("vpc-endpoint-id", "", "The unique identifier of the endpoint.")
+		opensearch_deleteVpcEndpointCmd.MarkFlagRequired("vpc-endpoint-id")
+	})
 	opensearchCmd.AddCommand(opensearch_deleteVpcEndpointCmd)
 }

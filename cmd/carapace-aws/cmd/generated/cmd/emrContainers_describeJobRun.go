@@ -12,11 +12,13 @@ var emrContainers_describeJobRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_describeJobRunCmd).Standalone()
+	carapace.Gen(emrContainers_describeJobRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_describeJobRunCmd).Standalone()
 
-	emrContainers_describeJobRunCmd.Flags().String("id", "", "The ID of the job run request.")
-	emrContainers_describeJobRunCmd.Flags().String("virtual-cluster-id", "", "The ID of the virtual cluster for which the job run is submitted.")
-	emrContainers_describeJobRunCmd.MarkFlagRequired("id")
-	emrContainers_describeJobRunCmd.MarkFlagRequired("virtual-cluster-id")
+		emrContainers_describeJobRunCmd.Flags().String("id", "", "The ID of the job run request.")
+		emrContainers_describeJobRunCmd.Flags().String("virtual-cluster-id", "", "The ID of the virtual cluster for which the job run is submitted.")
+		emrContainers_describeJobRunCmd.MarkFlagRequired("id")
+		emrContainers_describeJobRunCmd.MarkFlagRequired("virtual-cluster-id")
+	})
 	emrContainersCmd.AddCommand(emrContainers_describeJobRunCmd)
 }

@@ -12,9 +12,11 @@ var detective_rejectInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_rejectInvitationCmd).Standalone()
+	carapace.Gen(detective_rejectInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_rejectInvitationCmd).Standalone()
 
-	detective_rejectInvitationCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph to reject the invitation to.")
-	detective_rejectInvitationCmd.MarkFlagRequired("graph-arn")
+		detective_rejectInvitationCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph to reject the invitation to.")
+		detective_rejectInvitationCmd.MarkFlagRequired("graph-arn")
+	})
 	detectiveCmd.AddCommand(detective_rejectInvitationCmd)
 }

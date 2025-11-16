@@ -12,9 +12,11 @@ var inspector_getTelemetryMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_getTelemetryMetadataCmd).Standalone()
+	carapace.Gen(inspector_getTelemetryMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_getTelemetryMetadataCmd).Standalone()
 
-	inspector_getTelemetryMetadataCmd.Flags().String("assessment-run-arn", "", "The ARN that specifies the assessment run that has the telemetry data that you want to obtain.")
-	inspector_getTelemetryMetadataCmd.MarkFlagRequired("assessment-run-arn")
+		inspector_getTelemetryMetadataCmd.Flags().String("assessment-run-arn", "", "The ARN that specifies the assessment run that has the telemetry data that you want to obtain.")
+		inspector_getTelemetryMetadataCmd.MarkFlagRequired("assessment-run-arn")
+	})
 	inspectorCmd.AddCommand(inspector_getTelemetryMetadataCmd)
 }

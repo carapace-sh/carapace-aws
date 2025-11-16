@@ -12,13 +12,15 @@ var lexv2Models_describeCustomVocabularyMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_describeCustomVocabularyMetadataCmd).Standalone()
+	carapace.Gen(lexv2Models_describeCustomVocabularyMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_describeCustomVocabularyMetadataCmd).Standalone()
 
-	lexv2Models_describeCustomVocabularyMetadataCmd.Flags().String("bot-id", "", "The unique identifier of the bot that contains the custom vocabulary.")
-	lexv2Models_describeCustomVocabularyMetadataCmd.Flags().String("bot-version", "", "The bot version of the bot to return metadata for.")
-	lexv2Models_describeCustomVocabularyMetadataCmd.Flags().String("locale-id", "", "The locale to return the custom vocabulary information for.")
-	lexv2Models_describeCustomVocabularyMetadataCmd.MarkFlagRequired("bot-id")
-	lexv2Models_describeCustomVocabularyMetadataCmd.MarkFlagRequired("bot-version")
-	lexv2Models_describeCustomVocabularyMetadataCmd.MarkFlagRequired("locale-id")
+		lexv2Models_describeCustomVocabularyMetadataCmd.Flags().String("bot-id", "", "The unique identifier of the bot that contains the custom vocabulary.")
+		lexv2Models_describeCustomVocabularyMetadataCmd.Flags().String("bot-version", "", "The bot version of the bot to return metadata for.")
+		lexv2Models_describeCustomVocabularyMetadataCmd.Flags().String("locale-id", "", "The locale to return the custom vocabulary information for.")
+		lexv2Models_describeCustomVocabularyMetadataCmd.MarkFlagRequired("bot-id")
+		lexv2Models_describeCustomVocabularyMetadataCmd.MarkFlagRequired("bot-version")
+		lexv2Models_describeCustomVocabularyMetadataCmd.MarkFlagRequired("locale-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_describeCustomVocabularyMetadataCmd)
 }

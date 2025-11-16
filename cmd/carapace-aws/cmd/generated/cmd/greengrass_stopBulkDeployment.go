@@ -12,9 +12,11 @@ var greengrass_stopBulkDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_stopBulkDeploymentCmd).Standalone()
+	carapace.Gen(greengrass_stopBulkDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_stopBulkDeploymentCmd).Standalone()
 
-	greengrass_stopBulkDeploymentCmd.Flags().String("bulk-deployment-id", "", "The ID of the bulk deployment.")
-	greengrass_stopBulkDeploymentCmd.MarkFlagRequired("bulk-deployment-id")
+		greengrass_stopBulkDeploymentCmd.Flags().String("bulk-deployment-id", "", "The ID of the bulk deployment.")
+		greengrass_stopBulkDeploymentCmd.MarkFlagRequired("bulk-deployment-id")
+	})
 	greengrassCmd.AddCommand(greengrass_stopBulkDeploymentCmd)
 }

@@ -12,17 +12,19 @@ var lexv2Models_listRecommendedIntentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_listRecommendedIntentsCmd).Standalone()
+	carapace.Gen(lexv2Models_listRecommendedIntentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_listRecommendedIntentsCmd).Standalone()
 
-	lexv2Models_listRecommendedIntentsCmd.Flags().String("bot-id", "", "The unique identifier of the bot associated with the recommended intents.")
-	lexv2Models_listRecommendedIntentsCmd.Flags().String("bot-recommendation-id", "", "The identifier of the bot recommendation that contains the recommended intents.")
-	lexv2Models_listRecommendedIntentsCmd.Flags().String("bot-version", "", "The version of the bot that contains the recommended intents.")
-	lexv2Models_listRecommendedIntentsCmd.Flags().String("locale-id", "", "The identifier of the language and locale of the recommended intents.")
-	lexv2Models_listRecommendedIntentsCmd.Flags().String("max-results", "", "The maximum number of bot recommendations to return in each page of results.")
-	lexv2Models_listRecommendedIntentsCmd.Flags().String("next-token", "", "If the response from the ListRecommendedIntents operation contains more results than specified in the maxResults parameter, a token is returned in the response.")
-	lexv2Models_listRecommendedIntentsCmd.MarkFlagRequired("bot-id")
-	lexv2Models_listRecommendedIntentsCmd.MarkFlagRequired("bot-recommendation-id")
-	lexv2Models_listRecommendedIntentsCmd.MarkFlagRequired("bot-version")
-	lexv2Models_listRecommendedIntentsCmd.MarkFlagRequired("locale-id")
+		lexv2Models_listRecommendedIntentsCmd.Flags().String("bot-id", "", "The unique identifier of the bot associated with the recommended intents.")
+		lexv2Models_listRecommendedIntentsCmd.Flags().String("bot-recommendation-id", "", "The identifier of the bot recommendation that contains the recommended intents.")
+		lexv2Models_listRecommendedIntentsCmd.Flags().String("bot-version", "", "The version of the bot that contains the recommended intents.")
+		lexv2Models_listRecommendedIntentsCmd.Flags().String("locale-id", "", "The identifier of the language and locale of the recommended intents.")
+		lexv2Models_listRecommendedIntentsCmd.Flags().String("max-results", "", "The maximum number of bot recommendations to return in each page of results.")
+		lexv2Models_listRecommendedIntentsCmd.Flags().String("next-token", "", "If the response from the ListRecommendedIntents operation contains more results than specified in the maxResults parameter, a token is returned in the response.")
+		lexv2Models_listRecommendedIntentsCmd.MarkFlagRequired("bot-id")
+		lexv2Models_listRecommendedIntentsCmd.MarkFlagRequired("bot-recommendation-id")
+		lexv2Models_listRecommendedIntentsCmd.MarkFlagRequired("bot-version")
+		lexv2Models_listRecommendedIntentsCmd.MarkFlagRequired("locale-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_listRecommendedIntentsCmd)
 }

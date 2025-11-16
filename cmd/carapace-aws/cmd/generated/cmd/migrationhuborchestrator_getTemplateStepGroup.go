@@ -12,11 +12,13 @@ var migrationhuborchestrator_getTemplateStepGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_getTemplateStepGroupCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_getTemplateStepGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_getTemplateStepGroupCmd).Standalone()
 
-	migrationhuborchestrator_getTemplateStepGroupCmd.Flags().String("id", "", "The ID of the step group.")
-	migrationhuborchestrator_getTemplateStepGroupCmd.Flags().String("template-id", "", "The ID of the template.")
-	migrationhuborchestrator_getTemplateStepGroupCmd.MarkFlagRequired("id")
-	migrationhuborchestrator_getTemplateStepGroupCmd.MarkFlagRequired("template-id")
+		migrationhuborchestrator_getTemplateStepGroupCmd.Flags().String("id", "", "The ID of the step group.")
+		migrationhuborchestrator_getTemplateStepGroupCmd.Flags().String("template-id", "", "The ID of the template.")
+		migrationhuborchestrator_getTemplateStepGroupCmd.MarkFlagRequired("id")
+		migrationhuborchestrator_getTemplateStepGroupCmd.MarkFlagRequired("template-id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_getTemplateStepGroupCmd)
 }

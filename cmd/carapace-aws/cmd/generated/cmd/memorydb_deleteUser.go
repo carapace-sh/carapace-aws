@@ -12,9 +12,11 @@ var memorydb_deleteUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_deleteUserCmd).Standalone()
+	carapace.Gen(memorydb_deleteUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_deleteUserCmd).Standalone()
 
-	memorydb_deleteUserCmd.Flags().String("user-name", "", "The name of the user to delete")
-	memorydb_deleteUserCmd.MarkFlagRequired("user-name")
+		memorydb_deleteUserCmd.Flags().String("user-name", "", "The name of the user to delete")
+		memorydb_deleteUserCmd.MarkFlagRequired("user-name")
+	})
 	memorydbCmd.AddCommand(memorydb_deleteUserCmd)
 }

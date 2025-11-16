@@ -12,9 +12,11 @@ var groundstation_listDataflowEndpointGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_listDataflowEndpointGroupsCmd).Standalone()
+	carapace.Gen(groundstation_listDataflowEndpointGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_listDataflowEndpointGroupsCmd).Standalone()
 
-	groundstation_listDataflowEndpointGroupsCmd.Flags().String("max-results", "", "Maximum number of dataflow endpoint groups returned.")
-	groundstation_listDataflowEndpointGroupsCmd.Flags().String("next-token", "", "Next token returned in the request of a previous `ListDataflowEndpointGroups` call.")
+		groundstation_listDataflowEndpointGroupsCmd.Flags().String("max-results", "", "Maximum number of dataflow endpoint groups returned.")
+		groundstation_listDataflowEndpointGroupsCmd.Flags().String("next-token", "", "Next token returned in the request of a previous `ListDataflowEndpointGroups` call.")
+	})
 	groundstationCmd.AddCommand(groundstation_listDataflowEndpointGroupsCmd)
 }

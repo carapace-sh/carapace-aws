@@ -12,7 +12,9 @@ var serviceQuotas_stopAutoManagementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_stopAutoManagementCmd).Standalone()
+	carapace.Gen(serviceQuotas_stopAutoManagementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_stopAutoManagementCmd).Standalone()
 
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_stopAutoManagementCmd)
 }

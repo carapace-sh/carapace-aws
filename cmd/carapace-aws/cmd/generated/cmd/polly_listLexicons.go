@@ -12,8 +12,10 @@ var polly_listLexiconsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(polly_listLexiconsCmd).Standalone()
+	carapace.Gen(polly_listLexiconsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(polly_listLexiconsCmd).Standalone()
 
-	polly_listLexiconsCmd.Flags().String("next-token", "", "An opaque pagination token returned from previous `ListLexicons` operation.")
+		polly_listLexiconsCmd.Flags().String("next-token", "", "An opaque pagination token returned from previous `ListLexicons` operation.")
+	})
 	pollyCmd.AddCommand(polly_listLexiconsCmd)
 }

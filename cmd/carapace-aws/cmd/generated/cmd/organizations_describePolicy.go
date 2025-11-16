@@ -12,9 +12,11 @@ var organizations_describePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_describePolicyCmd).Standalone()
+	carapace.Gen(organizations_describePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_describePolicyCmd).Standalone()
 
-	organizations_describePolicyCmd.Flags().String("policy-id", "", "The unique identifier (ID) of the policy that you want details about.")
-	organizations_describePolicyCmd.MarkFlagRequired("policy-id")
+		organizations_describePolicyCmd.Flags().String("policy-id", "", "The unique identifier (ID) of the policy that you want details about.")
+		organizations_describePolicyCmd.MarkFlagRequired("policy-id")
+	})
 	organizationsCmd.AddCommand(organizations_describePolicyCmd)
 }

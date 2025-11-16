@@ -12,11 +12,13 @@ var guardduty_unarchiveFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_unarchiveFindingsCmd).Standalone()
+	carapace.Gen(guardduty_unarchiveFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_unarchiveFindingsCmd).Standalone()
 
-	guardduty_unarchiveFindingsCmd.Flags().String("detector-id", "", "The ID of the detector associated with the findings to unarchive.")
-	guardduty_unarchiveFindingsCmd.Flags().String("finding-ids", "", "The IDs of the findings to unarchive.")
-	guardduty_unarchiveFindingsCmd.MarkFlagRequired("detector-id")
-	guardduty_unarchiveFindingsCmd.MarkFlagRequired("finding-ids")
+		guardduty_unarchiveFindingsCmd.Flags().String("detector-id", "", "The ID of the detector associated with the findings to unarchive.")
+		guardduty_unarchiveFindingsCmd.Flags().String("finding-ids", "", "The IDs of the findings to unarchive.")
+		guardduty_unarchiveFindingsCmd.MarkFlagRequired("detector-id")
+		guardduty_unarchiveFindingsCmd.MarkFlagRequired("finding-ids")
+	})
 	guarddutyCmd.AddCommand(guardduty_unarchiveFindingsCmd)
 }

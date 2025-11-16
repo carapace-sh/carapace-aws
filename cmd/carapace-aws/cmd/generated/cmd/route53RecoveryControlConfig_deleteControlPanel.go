@@ -12,9 +12,11 @@ var route53RecoveryControlConfig_deleteControlPanelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_deleteControlPanelCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_deleteControlPanelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_deleteControlPanelCmd).Standalone()
 
-	route53RecoveryControlConfig_deleteControlPanelCmd.Flags().String("control-panel-arn", "", "The Amazon Resource Name (ARN) of the control panel.")
-	route53RecoveryControlConfig_deleteControlPanelCmd.MarkFlagRequired("control-panel-arn")
+		route53RecoveryControlConfig_deleteControlPanelCmd.Flags().String("control-panel-arn", "", "The Amazon Resource Name (ARN) of the control panel.")
+		route53RecoveryControlConfig_deleteControlPanelCmd.MarkFlagRequired("control-panel-arn")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_deleteControlPanelCmd)
 }

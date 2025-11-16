@@ -12,9 +12,11 @@ var ssmIncidents_getReplicationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_getReplicationSetCmd).Standalone()
+	carapace.Gen(ssmIncidents_getReplicationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_getReplicationSetCmd).Standalone()
 
-	ssmIncidents_getReplicationSetCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the replication set you want to retrieve.")
-	ssmIncidents_getReplicationSetCmd.MarkFlagRequired("arn")
+		ssmIncidents_getReplicationSetCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the replication set you want to retrieve.")
+		ssmIncidents_getReplicationSetCmd.MarkFlagRequired("arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_getReplicationSetCmd)
 }

@@ -12,7 +12,9 @@ var pinpointSmsVoiceV2_deleteVoiceMessageSpendLimitOverrideCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteVoiceMessageSpendLimitOverrideCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteVoiceMessageSpendLimitOverrideCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteVoiceMessageSpendLimitOverrideCmd).Standalone()
 
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteVoiceMessageSpendLimitOverrideCmd)
 }

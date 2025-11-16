@@ -12,11 +12,13 @@ var repostspace_deregisterAdminCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_deregisterAdminCmd).Standalone()
+	carapace.Gen(repostspace_deregisterAdminCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_deregisterAdminCmd).Standalone()
 
-	repostspace_deregisterAdminCmd.Flags().String("admin-id", "", "The ID of the admin to remove.")
-	repostspace_deregisterAdminCmd.Flags().String("space-id", "", "The ID of the private re:Post to remove the admin from.")
-	repostspace_deregisterAdminCmd.MarkFlagRequired("admin-id")
-	repostspace_deregisterAdminCmd.MarkFlagRequired("space-id")
+		repostspace_deregisterAdminCmd.Flags().String("admin-id", "", "The ID of the admin to remove.")
+		repostspace_deregisterAdminCmd.Flags().String("space-id", "", "The ID of the private re:Post to remove the admin from.")
+		repostspace_deregisterAdminCmd.MarkFlagRequired("admin-id")
+		repostspace_deregisterAdminCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_deregisterAdminCmd)
 }

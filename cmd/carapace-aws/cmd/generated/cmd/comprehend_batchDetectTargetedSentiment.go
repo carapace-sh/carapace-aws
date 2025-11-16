@@ -12,11 +12,13 @@ var comprehend_batchDetectTargetedSentimentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_batchDetectTargetedSentimentCmd).Standalone()
+	carapace.Gen(comprehend_batchDetectTargetedSentimentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_batchDetectTargetedSentimentCmd).Standalone()
 
-	comprehend_batchDetectTargetedSentimentCmd.Flags().String("language-code", "", "The language of the input documents.")
-	comprehend_batchDetectTargetedSentimentCmd.Flags().String("text-list", "", "A list containing the UTF-8 encoded text of the input documents.")
-	comprehend_batchDetectTargetedSentimentCmd.MarkFlagRequired("language-code")
-	comprehend_batchDetectTargetedSentimentCmd.MarkFlagRequired("text-list")
+		comprehend_batchDetectTargetedSentimentCmd.Flags().String("language-code", "", "The language of the input documents.")
+		comprehend_batchDetectTargetedSentimentCmd.Flags().String("text-list", "", "A list containing the UTF-8 encoded text of the input documents.")
+		comprehend_batchDetectTargetedSentimentCmd.MarkFlagRequired("language-code")
+		comprehend_batchDetectTargetedSentimentCmd.MarkFlagRequired("text-list")
+	})
 	comprehendCmd.AddCommand(comprehend_batchDetectTargetedSentimentCmd)
 }

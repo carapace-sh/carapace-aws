@@ -12,10 +12,12 @@ var bedrock_listGuardrailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_listGuardrailsCmd).Standalone()
+	carapace.Gen(bedrock_listGuardrailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_listGuardrailsCmd).Standalone()
 
-	bedrock_listGuardrailsCmd.Flags().String("guardrail-identifier", "", "The unique identifier of the guardrail.")
-	bedrock_listGuardrailsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	bedrock_listGuardrailsCmd.Flags().String("next-token", "", "If there are more results than were returned in the response, the response returns a `nextToken` that you can send in another `ListGuardrails` request to see the next batch of results.")
+		bedrock_listGuardrailsCmd.Flags().String("guardrail-identifier", "", "The unique identifier of the guardrail.")
+		bedrock_listGuardrailsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		bedrock_listGuardrailsCmd.Flags().String("next-token", "", "If there are more results than were returned in the response, the response returns a `nextToken` that you can send in another `ListGuardrails` request to see the next batch of results.")
+	})
 	bedrockCmd.AddCommand(bedrock_listGuardrailsCmd)
 }

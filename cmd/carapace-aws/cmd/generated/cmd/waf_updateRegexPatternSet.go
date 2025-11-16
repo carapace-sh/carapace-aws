@@ -12,13 +12,15 @@ var waf_updateRegexPatternSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_updateRegexPatternSetCmd).Standalone()
+	carapace.Gen(waf_updateRegexPatternSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_updateRegexPatternSetCmd).Standalone()
 
-	waf_updateRegexPatternSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	waf_updateRegexPatternSetCmd.Flags().String("regex-pattern-set-id", "", "The `RegexPatternSetId` of the [RegexPatternSet]() that you want to update.")
-	waf_updateRegexPatternSetCmd.Flags().String("updates", "", "An array of `RegexPatternSetUpdate` objects that you want to insert into or delete from a [RegexPatternSet]().")
-	waf_updateRegexPatternSetCmd.MarkFlagRequired("change-token")
-	waf_updateRegexPatternSetCmd.MarkFlagRequired("regex-pattern-set-id")
-	waf_updateRegexPatternSetCmd.MarkFlagRequired("updates")
+		waf_updateRegexPatternSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		waf_updateRegexPatternSetCmd.Flags().String("regex-pattern-set-id", "", "The `RegexPatternSetId` of the [RegexPatternSet]() that you want to update.")
+		waf_updateRegexPatternSetCmd.Flags().String("updates", "", "An array of `RegexPatternSetUpdate` objects that you want to insert into or delete from a [RegexPatternSet]().")
+		waf_updateRegexPatternSetCmd.MarkFlagRequired("change-token")
+		waf_updateRegexPatternSetCmd.MarkFlagRequired("regex-pattern-set-id")
+		waf_updateRegexPatternSetCmd.MarkFlagRequired("updates")
+	})
 	wafCmd.AddCommand(waf_updateRegexPatternSetCmd)
 }

@@ -12,11 +12,13 @@ var cleanrooms_getConfiguredAudienceModelAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_getConfiguredAudienceModelAssociationCmd).Standalone()
+	carapace.Gen(cleanrooms_getConfiguredAudienceModelAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_getConfiguredAudienceModelAssociationCmd).Standalone()
 
-	cleanrooms_getConfiguredAudienceModelAssociationCmd.Flags().String("configured-audience-model-association-identifier", "", "A unique identifier for the configured audience model association that you want to retrieve.")
-	cleanrooms_getConfiguredAudienceModelAssociationCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership that contains the configured audience model association that you want to retrieve.")
-	cleanrooms_getConfiguredAudienceModelAssociationCmd.MarkFlagRequired("configured-audience-model-association-identifier")
-	cleanrooms_getConfiguredAudienceModelAssociationCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_getConfiguredAudienceModelAssociationCmd.Flags().String("configured-audience-model-association-identifier", "", "A unique identifier for the configured audience model association that you want to retrieve.")
+		cleanrooms_getConfiguredAudienceModelAssociationCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership that contains the configured audience model association that you want to retrieve.")
+		cleanrooms_getConfiguredAudienceModelAssociationCmd.MarkFlagRequired("configured-audience-model-association-identifier")
+		cleanrooms_getConfiguredAudienceModelAssociationCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_getConfiguredAudienceModelAssociationCmd)
 }

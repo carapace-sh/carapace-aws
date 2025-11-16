@@ -12,9 +12,11 @@ var amplify_listAppsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_listAppsCmd).Standalone()
+	carapace.Gen(amplify_listAppsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_listAppsCmd).Standalone()
 
-	amplify_listAppsCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
-	amplify_listAppsCmd.Flags().String("next-token", "", "A pagination token.")
+		amplify_listAppsCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
+		amplify_listAppsCmd.Flags().String("next-token", "", "A pagination token.")
+	})
 	amplifyCmd.AddCommand(amplify_listAppsCmd)
 }

@@ -12,10 +12,12 @@ var odb_listCloudAutonomousVmClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_listCloudAutonomousVmClustersCmd).Standalone()
+	carapace.Gen(odb_listCloudAutonomousVmClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_listCloudAutonomousVmClustersCmd).Standalone()
 
-	odb_listCloudAutonomousVmClustersCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Cloud Exadata Infrastructure that hosts the Autonomous VM clusters to be listed.")
-	odb_listCloudAutonomousVmClustersCmd.Flags().String("max-results", "", "The maximum number of items to return per page.")
-	odb_listCloudAutonomousVmClustersCmd.Flags().String("next-token", "", "The pagination token to continue listing from.")
+		odb_listCloudAutonomousVmClustersCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Cloud Exadata Infrastructure that hosts the Autonomous VM clusters to be listed.")
+		odb_listCloudAutonomousVmClustersCmd.Flags().String("max-results", "", "The maximum number of items to return per page.")
+		odb_listCloudAutonomousVmClustersCmd.Flags().String("next-token", "", "The pagination token to continue listing from.")
+	})
 	odbCmd.AddCommand(odb_listCloudAutonomousVmClustersCmd)
 }

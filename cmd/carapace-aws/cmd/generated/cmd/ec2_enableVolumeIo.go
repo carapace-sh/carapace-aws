@@ -12,12 +12,14 @@ var ec2_enableVolumeIoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_enableVolumeIoCmd).Standalone()
+	carapace.Gen(ec2_enableVolumeIoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_enableVolumeIoCmd).Standalone()
 
-	ec2_enableVolumeIoCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_enableVolumeIoCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_enableVolumeIoCmd.Flags().String("volume-id", "", "The ID of the volume.")
-	ec2_enableVolumeIoCmd.Flag("no-dry-run").Hidden = true
-	ec2_enableVolumeIoCmd.MarkFlagRequired("volume-id")
+		ec2_enableVolumeIoCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_enableVolumeIoCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_enableVolumeIoCmd.Flags().String("volume-id", "", "The ID of the volume.")
+		ec2_enableVolumeIoCmd.Flag("no-dry-run").Hidden = true
+		ec2_enableVolumeIoCmd.MarkFlagRequired("volume-id")
+	})
 	ec2Cmd.AddCommand(ec2_enableVolumeIoCmd)
 }

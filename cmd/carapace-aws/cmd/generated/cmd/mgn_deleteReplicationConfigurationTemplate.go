@@ -12,9 +12,11 @@ var mgn_deleteReplicationConfigurationTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_deleteReplicationConfigurationTemplateCmd).Standalone()
+	carapace.Gen(mgn_deleteReplicationConfigurationTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_deleteReplicationConfigurationTemplateCmd).Standalone()
 
-	mgn_deleteReplicationConfigurationTemplateCmd.Flags().String("replication-configuration-template-id", "", "Request to delete Replication Configuration Template from service by Replication Configuration Template ID.")
-	mgn_deleteReplicationConfigurationTemplateCmd.MarkFlagRequired("replication-configuration-template-id")
+		mgn_deleteReplicationConfigurationTemplateCmd.Flags().String("replication-configuration-template-id", "", "Request to delete Replication Configuration Template from service by Replication Configuration Template ID.")
+		mgn_deleteReplicationConfigurationTemplateCmd.MarkFlagRequired("replication-configuration-template-id")
+	})
 	mgnCmd.AddCommand(mgn_deleteReplicationConfigurationTemplateCmd)
 }

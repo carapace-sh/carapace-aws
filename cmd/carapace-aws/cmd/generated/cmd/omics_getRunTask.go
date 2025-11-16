@@ -12,11 +12,13 @@ var omics_getRunTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getRunTaskCmd).Standalone()
+	carapace.Gen(omics_getRunTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getRunTaskCmd).Standalone()
 
-	omics_getRunTaskCmd.Flags().String("id", "", "The workflow run ID.")
-	omics_getRunTaskCmd.Flags().String("task-id", "", "The task's ID.")
-	omics_getRunTaskCmd.MarkFlagRequired("id")
-	omics_getRunTaskCmd.MarkFlagRequired("task-id")
+		omics_getRunTaskCmd.Flags().String("id", "", "The workflow run ID.")
+		omics_getRunTaskCmd.Flags().String("task-id", "", "The task's ID.")
+		omics_getRunTaskCmd.MarkFlagRequired("id")
+		omics_getRunTaskCmd.MarkFlagRequired("task-id")
+	})
 	omicsCmd.AddCommand(omics_getRunTaskCmd)
 }

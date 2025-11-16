@@ -12,9 +12,11 @@ var cloudtrail_stopEventDataStoreIngestionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_stopEventDataStoreIngestionCmd).Standalone()
+	carapace.Gen(cloudtrail_stopEventDataStoreIngestionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_stopEventDataStoreIngestionCmd).Standalone()
 
-	cloudtrail_stopEventDataStoreIngestionCmd.Flags().String("event-data-store", "", "The ARN (or ID suffix of the ARN) of the event data store for which you want to stop ingestion.")
-	cloudtrail_stopEventDataStoreIngestionCmd.MarkFlagRequired("event-data-store")
+		cloudtrail_stopEventDataStoreIngestionCmd.Flags().String("event-data-store", "", "The ARN (or ID suffix of the ARN) of the event data store for which you want to stop ingestion.")
+		cloudtrail_stopEventDataStoreIngestionCmd.MarkFlagRequired("event-data-store")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_stopEventDataStoreIngestionCmd)
 }

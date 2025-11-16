@@ -12,13 +12,15 @@ var workmail_cancelMailboxExportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_cancelMailboxExportJobCmd).Standalone()
+	carapace.Gen(workmail_cancelMailboxExportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_cancelMailboxExportJobCmd).Standalone()
 
-	workmail_cancelMailboxExportJobCmd.Flags().String("client-token", "", "The idempotency token for the client request.")
-	workmail_cancelMailboxExportJobCmd.Flags().String("job-id", "", "The job ID.")
-	workmail_cancelMailboxExportJobCmd.Flags().String("organization-id", "", "The organization ID.")
-	workmail_cancelMailboxExportJobCmd.MarkFlagRequired("client-token")
-	workmail_cancelMailboxExportJobCmd.MarkFlagRequired("job-id")
-	workmail_cancelMailboxExportJobCmd.MarkFlagRequired("organization-id")
+		workmail_cancelMailboxExportJobCmd.Flags().String("client-token", "", "The idempotency token for the client request.")
+		workmail_cancelMailboxExportJobCmd.Flags().String("job-id", "", "The job ID.")
+		workmail_cancelMailboxExportJobCmd.Flags().String("organization-id", "", "The organization ID.")
+		workmail_cancelMailboxExportJobCmd.MarkFlagRequired("client-token")
+		workmail_cancelMailboxExportJobCmd.MarkFlagRequired("job-id")
+		workmail_cancelMailboxExportJobCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_cancelMailboxExportJobCmd)
 }

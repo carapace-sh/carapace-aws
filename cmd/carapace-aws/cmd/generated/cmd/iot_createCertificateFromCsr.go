@@ -12,10 +12,12 @@ var iot_createCertificateFromCsrCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createCertificateFromCsrCmd).Standalone()
+	carapace.Gen(iot_createCertificateFromCsrCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createCertificateFromCsrCmd).Standalone()
 
-	iot_createCertificateFromCsrCmd.Flags().String("certificate-signing-request", "", "The certificate signing request (CSR).")
-	iot_createCertificateFromCsrCmd.Flags().String("set-as-active", "", "Specifies whether the certificate is active.")
-	iot_createCertificateFromCsrCmd.MarkFlagRequired("certificate-signing-request")
+		iot_createCertificateFromCsrCmd.Flags().String("certificate-signing-request", "", "The certificate signing request (CSR).")
+		iot_createCertificateFromCsrCmd.Flags().String("set-as-active", "", "Specifies whether the certificate is active.")
+		iot_createCertificateFromCsrCmd.MarkFlagRequired("certificate-signing-request")
+	})
 	iotCmd.AddCommand(iot_createCertificateFromCsrCmd)
 }

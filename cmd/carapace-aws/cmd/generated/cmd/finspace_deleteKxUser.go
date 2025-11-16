@@ -12,12 +12,14 @@ var finspace_deleteKxUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_deleteKxUserCmd).Standalone()
+	carapace.Gen(finspace_deleteKxUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_deleteKxUserCmd).Standalone()
 
-	finspace_deleteKxUserCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
-	finspace_deleteKxUserCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_deleteKxUserCmd.Flags().String("user-name", "", "A unique identifier for the user that you want to delete.")
-	finspace_deleteKxUserCmd.MarkFlagRequired("environment-id")
-	finspace_deleteKxUserCmd.MarkFlagRequired("user-name")
+		finspace_deleteKxUserCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
+		finspace_deleteKxUserCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_deleteKxUserCmd.Flags().String("user-name", "", "A unique identifier for the user that you want to delete.")
+		finspace_deleteKxUserCmd.MarkFlagRequired("environment-id")
+		finspace_deleteKxUserCmd.MarkFlagRequired("user-name")
+	})
 	finspaceCmd.AddCommand(finspace_deleteKxUserCmd)
 }

@@ -12,11 +12,13 @@ var guardduty_listTrustedEntitySetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_listTrustedEntitySetsCmd).Standalone()
+	carapace.Gen(guardduty_listTrustedEntitySetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_listTrustedEntitySetsCmd).Standalone()
 
-	guardduty_listTrustedEntitySetsCmd.Flags().String("detector-id", "", "The unique ID of the GuardDuty detector that is associated with this threat entity set.")
-	guardduty_listTrustedEntitySetsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
-	guardduty_listTrustedEntitySetsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
-	guardduty_listTrustedEntitySetsCmd.MarkFlagRequired("detector-id")
+		guardduty_listTrustedEntitySetsCmd.Flags().String("detector-id", "", "The unique ID of the GuardDuty detector that is associated with this threat entity set.")
+		guardduty_listTrustedEntitySetsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
+		guardduty_listTrustedEntitySetsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+		guardduty_listTrustedEntitySetsCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_listTrustedEntitySetsCmd)
 }

@@ -12,9 +12,11 @@ var securityhub_disableImportFindingsForProductCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_disableImportFindingsForProductCmd).Standalone()
+	carapace.Gen(securityhub_disableImportFindingsForProductCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_disableImportFindingsForProductCmd).Standalone()
 
-	securityhub_disableImportFindingsForProductCmd.Flags().String("product-subscription-arn", "", "The ARN of the integrated product to disable the integration for.")
-	securityhub_disableImportFindingsForProductCmd.MarkFlagRequired("product-subscription-arn")
+		securityhub_disableImportFindingsForProductCmd.Flags().String("product-subscription-arn", "", "The ARN of the integrated product to disable the integration for.")
+		securityhub_disableImportFindingsForProductCmd.MarkFlagRequired("product-subscription-arn")
+	})
 	securityhubCmd.AddCommand(securityhub_disableImportFindingsForProductCmd)
 }

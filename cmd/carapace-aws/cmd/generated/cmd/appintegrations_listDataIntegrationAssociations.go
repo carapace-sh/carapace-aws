@@ -12,11 +12,13 @@ var appintegrations_listDataIntegrationAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_listDataIntegrationAssociationsCmd).Standalone()
+	carapace.Gen(appintegrations_listDataIntegrationAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_listDataIntegrationAssociationsCmd).Standalone()
 
-	appintegrations_listDataIntegrationAssociationsCmd.Flags().String("data-integration-identifier", "", "A unique identifier for the DataIntegration.")
-	appintegrations_listDataIntegrationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	appintegrations_listDataIntegrationAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	appintegrations_listDataIntegrationAssociationsCmd.MarkFlagRequired("data-integration-identifier")
+		appintegrations_listDataIntegrationAssociationsCmd.Flags().String("data-integration-identifier", "", "A unique identifier for the DataIntegration.")
+		appintegrations_listDataIntegrationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		appintegrations_listDataIntegrationAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		appintegrations_listDataIntegrationAssociationsCmd.MarkFlagRequired("data-integration-identifier")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_listDataIntegrationAssociationsCmd)
 }

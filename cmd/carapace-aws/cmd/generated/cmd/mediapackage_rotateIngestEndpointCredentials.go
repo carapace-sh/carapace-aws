@@ -12,11 +12,13 @@ var mediapackage_rotateIngestEndpointCredentialsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackage_rotateIngestEndpointCredentialsCmd).Standalone()
+	carapace.Gen(mediapackage_rotateIngestEndpointCredentialsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackage_rotateIngestEndpointCredentialsCmd).Standalone()
 
-	mediapackage_rotateIngestEndpointCredentialsCmd.Flags().String("id", "", "The ID of the channel the IngestEndpoint is on.")
-	mediapackage_rotateIngestEndpointCredentialsCmd.Flags().String("ingest-endpoint-id", "", "The id of the IngestEndpoint whose credentials should be rotated")
-	mediapackage_rotateIngestEndpointCredentialsCmd.MarkFlagRequired("id")
-	mediapackage_rotateIngestEndpointCredentialsCmd.MarkFlagRequired("ingest-endpoint-id")
+		mediapackage_rotateIngestEndpointCredentialsCmd.Flags().String("id", "", "The ID of the channel the IngestEndpoint is on.")
+		mediapackage_rotateIngestEndpointCredentialsCmd.Flags().String("ingest-endpoint-id", "", "The id of the IngestEndpoint whose credentials should be rotated")
+		mediapackage_rotateIngestEndpointCredentialsCmd.MarkFlagRequired("id")
+		mediapackage_rotateIngestEndpointCredentialsCmd.MarkFlagRequired("ingest-endpoint-id")
+	})
 	mediapackageCmd.AddCommand(mediapackage_rotateIngestEndpointCredentialsCmd)
 }

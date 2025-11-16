@@ -12,9 +12,11 @@ var shield_describeProtectionGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_describeProtectionGroupCmd).Standalone()
+	carapace.Gen(shield_describeProtectionGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_describeProtectionGroupCmd).Standalone()
 
-	shield_describeProtectionGroupCmd.Flags().String("protection-group-id", "", "The name of the protection group.")
-	shield_describeProtectionGroupCmd.MarkFlagRequired("protection-group-id")
+		shield_describeProtectionGroupCmd.Flags().String("protection-group-id", "", "The name of the protection group.")
+		shield_describeProtectionGroupCmd.MarkFlagRequired("protection-group-id")
+	})
 	shieldCmd.AddCommand(shield_describeProtectionGroupCmd)
 }

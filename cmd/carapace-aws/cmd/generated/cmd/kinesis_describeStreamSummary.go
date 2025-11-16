@@ -12,9 +12,11 @@ var kinesis_describeStreamSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_describeStreamSummaryCmd).Standalone()
+	carapace.Gen(kinesis_describeStreamSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_describeStreamSummaryCmd).Standalone()
 
-	kinesis_describeStreamSummaryCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
-	kinesis_describeStreamSummaryCmd.Flags().String("stream-name", "", "The name of the stream to describe.")
+		kinesis_describeStreamSummaryCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
+		kinesis_describeStreamSummaryCmd.Flags().String("stream-name", "", "The name of the stream to describe.")
+	})
 	kinesisCmd.AddCommand(kinesis_describeStreamSummaryCmd)
 }

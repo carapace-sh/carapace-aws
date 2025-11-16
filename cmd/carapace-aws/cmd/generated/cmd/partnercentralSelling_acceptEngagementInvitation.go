@@ -12,11 +12,13 @@ var partnercentralSelling_acceptEngagementInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(partnercentralSelling_acceptEngagementInvitationCmd).Standalone()
+	carapace.Gen(partnercentralSelling_acceptEngagementInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSelling_acceptEngagementInvitationCmd).Standalone()
 
-	partnercentralSelling_acceptEngagementInvitationCmd.Flags().String("catalog", "", "The `CatalogType` parameter specifies the catalog associated with the engagement invitation.")
-	partnercentralSelling_acceptEngagementInvitationCmd.Flags().String("identifier", "", "The `Identifier` parameter in the `AcceptEngagementInvitationRequest` specifies the unique identifier of the `EngagementInvitation` to be accepted.")
-	partnercentralSelling_acceptEngagementInvitationCmd.MarkFlagRequired("catalog")
-	partnercentralSelling_acceptEngagementInvitationCmd.MarkFlagRequired("identifier")
+		partnercentralSelling_acceptEngagementInvitationCmd.Flags().String("catalog", "", "The `CatalogType` parameter specifies the catalog associated with the engagement invitation.")
+		partnercentralSelling_acceptEngagementInvitationCmd.Flags().String("identifier", "", "The `Identifier` parameter in the `AcceptEngagementInvitationRequest` specifies the unique identifier of the `EngagementInvitation` to be accepted.")
+		partnercentralSelling_acceptEngagementInvitationCmd.MarkFlagRequired("catalog")
+		partnercentralSelling_acceptEngagementInvitationCmd.MarkFlagRequired("identifier")
+	})
 	partnercentralSellingCmd.AddCommand(partnercentralSelling_acceptEngagementInvitationCmd)
 }

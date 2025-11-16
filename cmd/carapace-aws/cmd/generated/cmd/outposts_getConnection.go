@@ -12,9 +12,11 @@ var outposts_getConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_getConnectionCmd).Standalone()
+	carapace.Gen(outposts_getConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_getConnectionCmd).Standalone()
 
-	outposts_getConnectionCmd.Flags().String("connection-id", "", "The ID of the connection.")
-	outposts_getConnectionCmd.MarkFlagRequired("connection-id")
+		outposts_getConnectionCmd.Flags().String("connection-id", "", "The ID of the connection.")
+		outposts_getConnectionCmd.MarkFlagRequired("connection-id")
+	})
 	outpostsCmd.AddCommand(outposts_getConnectionCmd)
 }

@@ -12,9 +12,11 @@ var outposts_getCatalogItemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_getCatalogItemCmd).Standalone()
+	carapace.Gen(outposts_getCatalogItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_getCatalogItemCmd).Standalone()
 
-	outposts_getCatalogItemCmd.Flags().String("catalog-item-id", "", "The ID of the catalog item.")
-	outposts_getCatalogItemCmd.MarkFlagRequired("catalog-item-id")
+		outposts_getCatalogItemCmd.Flags().String("catalog-item-id", "", "The ID of the catalog item.")
+		outposts_getCatalogItemCmd.MarkFlagRequired("catalog-item-id")
+	})
 	outpostsCmd.AddCommand(outposts_getCatalogItemCmd)
 }

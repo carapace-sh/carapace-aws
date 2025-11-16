@@ -12,14 +12,16 @@ var storagegateway_updateSmbfileShareVisibilityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_updateSmbfileShareVisibilityCmd).Standalone()
+	carapace.Gen(storagegateway_updateSmbfileShareVisibilityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_updateSmbfileShareVisibilityCmd).Standalone()
 
-	storagegateway_updateSmbfileShareVisibilityCmd.Flags().Bool("file-shares-visible", false, "The shares on this gateway appear when listing shares.")
-	storagegateway_updateSmbfileShareVisibilityCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_updateSmbfileShareVisibilityCmd.Flags().Bool("no-file-shares-visible", false, "The shares on this gateway appear when listing shares.")
-	storagegateway_updateSmbfileShareVisibilityCmd.MarkFlagRequired("file-shares-visible")
-	storagegateway_updateSmbfileShareVisibilityCmd.MarkFlagRequired("gateway-arn")
-	storagegateway_updateSmbfileShareVisibilityCmd.Flag("no-file-shares-visible").Hidden = true
-	storagegateway_updateSmbfileShareVisibilityCmd.MarkFlagRequired("no-file-shares-visible")
+		storagegateway_updateSmbfileShareVisibilityCmd.Flags().Bool("file-shares-visible", false, "The shares on this gateway appear when listing shares.")
+		storagegateway_updateSmbfileShareVisibilityCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_updateSmbfileShareVisibilityCmd.Flags().Bool("no-file-shares-visible", false, "The shares on this gateway appear when listing shares.")
+		storagegateway_updateSmbfileShareVisibilityCmd.MarkFlagRequired("file-shares-visible")
+		storagegateway_updateSmbfileShareVisibilityCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_updateSmbfileShareVisibilityCmd.Flag("no-file-shares-visible").Hidden = true
+		storagegateway_updateSmbfileShareVisibilityCmd.MarkFlagRequired("no-file-shares-visible")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_updateSmbfileShareVisibilityCmd)
 }

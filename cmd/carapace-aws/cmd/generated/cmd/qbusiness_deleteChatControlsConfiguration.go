@@ -12,9 +12,11 @@ var qbusiness_deleteChatControlsConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_deleteChatControlsConfigurationCmd).Standalone()
+	carapace.Gen(qbusiness_deleteChatControlsConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_deleteChatControlsConfigurationCmd).Standalone()
 
-	qbusiness_deleteChatControlsConfigurationCmd.Flags().String("application-id", "", "The identifier of the application the chat controls have been configured for.")
-	qbusiness_deleteChatControlsConfigurationCmd.MarkFlagRequired("application-id")
+		qbusiness_deleteChatControlsConfigurationCmd.Flags().String("application-id", "", "The identifier of the application the chat controls have been configured for.")
+		qbusiness_deleteChatControlsConfigurationCmd.MarkFlagRequired("application-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_deleteChatControlsConfigurationCmd)
 }

@@ -12,10 +12,12 @@ var support_addAttachmentsToSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(support_addAttachmentsToSetCmd).Standalone()
+	carapace.Gen(support_addAttachmentsToSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(support_addAttachmentsToSetCmd).Standalone()
 
-	support_addAttachmentsToSetCmd.Flags().String("attachment-set-id", "", "The ID of the attachment set.")
-	support_addAttachmentsToSetCmd.Flags().String("attachments", "", "One or more attachments to add to the set.")
-	support_addAttachmentsToSetCmd.MarkFlagRequired("attachments")
+		support_addAttachmentsToSetCmd.Flags().String("attachment-set-id", "", "The ID of the attachment set.")
+		support_addAttachmentsToSetCmd.Flags().String("attachments", "", "One or more attachments to add to the set.")
+		support_addAttachmentsToSetCmd.MarkFlagRequired("attachments")
+	})
 	supportCmd.AddCommand(support_addAttachmentsToSetCmd)
 }

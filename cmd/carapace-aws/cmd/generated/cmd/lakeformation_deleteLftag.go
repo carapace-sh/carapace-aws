@@ -12,10 +12,12 @@ var lakeformation_deleteLftagCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_deleteLftagCmd).Standalone()
+	carapace.Gen(lakeformation_deleteLftagCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_deleteLftagCmd).Standalone()
 
-	lakeformation_deleteLftagCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
-	lakeformation_deleteLftagCmd.Flags().String("tag-key", "", "The key-name for the LF-tag to delete.")
-	lakeformation_deleteLftagCmd.MarkFlagRequired("tag-key")
+		lakeformation_deleteLftagCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+		lakeformation_deleteLftagCmd.Flags().String("tag-key", "", "The key-name for the LF-tag to delete.")
+		lakeformation_deleteLftagCmd.MarkFlagRequired("tag-key")
+	})
 	lakeformationCmd.AddCommand(lakeformation_deleteLftagCmd)
 }

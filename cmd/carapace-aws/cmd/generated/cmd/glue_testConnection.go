@@ -12,10 +12,12 @@ var glue_testConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_testConnectionCmd).Standalone()
+	carapace.Gen(glue_testConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_testConnectionCmd).Standalone()
 
-	glue_testConnectionCmd.Flags().String("catalog-id", "", "The catalog ID where the connection resides.")
-	glue_testConnectionCmd.Flags().String("connection-name", "", "Optional.")
-	glue_testConnectionCmd.Flags().String("test-connection-input", "", "A structure that is used to specify testing a connection to a service.")
+		glue_testConnectionCmd.Flags().String("catalog-id", "", "The catalog ID where the connection resides.")
+		glue_testConnectionCmd.Flags().String("connection-name", "", "Optional.")
+		glue_testConnectionCmd.Flags().String("test-connection-input", "", "A structure that is used to specify testing a connection to a service.")
+	})
 	glueCmd.AddCommand(glue_testConnectionCmd)
 }

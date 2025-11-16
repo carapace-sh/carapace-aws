@@ -12,11 +12,13 @@ var tnb_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_untagResourceCmd).Standalone()
+	carapace.Gen(tnb_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_untagResourceCmd).Standalone()
 
-	tnb_untagResourceCmd.Flags().String("resource-arn", "", "Resource ARN.")
-	tnb_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys.")
-	tnb_untagResourceCmd.MarkFlagRequired("resource-arn")
-	tnb_untagResourceCmd.MarkFlagRequired("tag-keys")
+		tnb_untagResourceCmd.Flags().String("resource-arn", "", "Resource ARN.")
+		tnb_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys.")
+		tnb_untagResourceCmd.MarkFlagRequired("resource-arn")
+		tnb_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	tnbCmd.AddCommand(tnb_untagResourceCmd)
 }

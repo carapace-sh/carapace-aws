@@ -12,10 +12,12 @@ var mgh_listMigrationTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgh_listMigrationTasksCmd).Standalone()
+	carapace.Gen(mgh_listMigrationTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgh_listMigrationTasksCmd).Standalone()
 
-	mgh_listMigrationTasksCmd.Flags().String("max-results", "", "Value to specify how many results are returned per page.")
-	mgh_listMigrationTasksCmd.Flags().String("next-token", "", "If a `NextToken` was returned by a previous call, there are more results available.")
-	mgh_listMigrationTasksCmd.Flags().String("resource-name", "", "Filter migration tasks by discovered resource name.")
+		mgh_listMigrationTasksCmd.Flags().String("max-results", "", "Value to specify how many results are returned per page.")
+		mgh_listMigrationTasksCmd.Flags().String("next-token", "", "If a `NextToken` was returned by a previous call, there are more results available.")
+		mgh_listMigrationTasksCmd.Flags().String("resource-name", "", "Filter migration tasks by discovered resource name.")
+	})
 	mghCmd.AddCommand(mgh_listMigrationTasksCmd)
 }

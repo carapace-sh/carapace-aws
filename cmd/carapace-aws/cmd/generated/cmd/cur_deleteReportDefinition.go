@@ -12,9 +12,11 @@ var cur_deleteReportDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cur_deleteReportDefinitionCmd).Standalone()
+	carapace.Gen(cur_deleteReportDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cur_deleteReportDefinitionCmd).Standalone()
 
-	cur_deleteReportDefinitionCmd.Flags().String("report-name", "", "The name of the report that you want to delete.")
-	cur_deleteReportDefinitionCmd.MarkFlagRequired("report-name")
+		cur_deleteReportDefinitionCmd.Flags().String("report-name", "", "The name of the report that you want to delete.")
+		cur_deleteReportDefinitionCmd.MarkFlagRequired("report-name")
+	})
 	curCmd.AddCommand(cur_deleteReportDefinitionCmd)
 }

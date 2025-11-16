@@ -12,10 +12,12 @@ var ecs_putAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_putAttributesCmd).Standalone()
+	carapace.Gen(ecs_putAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_putAttributesCmd).Standalone()
 
-	ecs_putAttributesCmd.Flags().String("attributes", "", "The attributes to apply to your resource.")
-	ecs_putAttributesCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to apply attributes.")
-	ecs_putAttributesCmd.MarkFlagRequired("attributes")
+		ecs_putAttributesCmd.Flags().String("attributes", "", "The attributes to apply to your resource.")
+		ecs_putAttributesCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that contains the resource to apply attributes.")
+		ecs_putAttributesCmd.MarkFlagRequired("attributes")
+	})
 	ecsCmd.AddCommand(ecs_putAttributesCmd)
 }

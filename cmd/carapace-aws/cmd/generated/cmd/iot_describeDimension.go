@@ -12,9 +12,11 @@ var iot_describeDimensionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeDimensionCmd).Standalone()
+	carapace.Gen(iot_describeDimensionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeDimensionCmd).Standalone()
 
-	iot_describeDimensionCmd.Flags().String("name", "", "The unique identifier for the dimension.")
-	iot_describeDimensionCmd.MarkFlagRequired("name")
+		iot_describeDimensionCmd.Flags().String("name", "", "The unique identifier for the dimension.")
+		iot_describeDimensionCmd.MarkFlagRequired("name")
+	})
 	iotCmd.AddCommand(iot_describeDimensionCmd)
 }

@@ -12,11 +12,13 @@ var cloudfront_createInvalidation2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_createInvalidation2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createInvalidation2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createInvalidation2020_05_31Cmd).Standalone()
 
-	cloudfront_createInvalidation2020_05_31Cmd.Flags().String("distribution-id", "", "The distribution's id.")
-	cloudfront_createInvalidation2020_05_31Cmd.Flags().String("invalidation-batch", "", "The batch information for the invalidation.")
-	cloudfront_createInvalidation2020_05_31Cmd.MarkFlagRequired("distribution-id")
-	cloudfront_createInvalidation2020_05_31Cmd.MarkFlagRequired("invalidation-batch")
+		cloudfront_createInvalidation2020_05_31Cmd.Flags().String("distribution-id", "", "The distribution's id.")
+		cloudfront_createInvalidation2020_05_31Cmd.Flags().String("invalidation-batch", "", "The batch information for the invalidation.")
+		cloudfront_createInvalidation2020_05_31Cmd.MarkFlagRequired("distribution-id")
+		cloudfront_createInvalidation2020_05_31Cmd.MarkFlagRequired("invalidation-batch")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createInvalidation2020_05_31Cmd)
 }

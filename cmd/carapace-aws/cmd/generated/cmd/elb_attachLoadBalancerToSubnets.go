@@ -12,11 +12,13 @@ var elb_attachLoadBalancerToSubnetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_attachLoadBalancerToSubnetsCmd).Standalone()
+	carapace.Gen(elb_attachLoadBalancerToSubnetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_attachLoadBalancerToSubnetsCmd).Standalone()
 
-	elb_attachLoadBalancerToSubnetsCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_attachLoadBalancerToSubnetsCmd.Flags().String("subnets", "", "The IDs of the subnets to add.")
-	elb_attachLoadBalancerToSubnetsCmd.MarkFlagRequired("load-balancer-name")
-	elb_attachLoadBalancerToSubnetsCmd.MarkFlagRequired("subnets")
+		elb_attachLoadBalancerToSubnetsCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_attachLoadBalancerToSubnetsCmd.Flags().String("subnets", "", "The IDs of the subnets to add.")
+		elb_attachLoadBalancerToSubnetsCmd.MarkFlagRequired("load-balancer-name")
+		elb_attachLoadBalancerToSubnetsCmd.MarkFlagRequired("subnets")
+	})
 	elbCmd.AddCommand(elb_attachLoadBalancerToSubnetsCmd)
 }

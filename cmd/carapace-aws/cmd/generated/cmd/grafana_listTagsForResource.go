@@ -12,9 +12,11 @@ var grafana_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_listTagsForResourceCmd).Standalone()
+	carapace.Gen(grafana_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_listTagsForResourceCmd).Standalone()
 
-	grafana_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource the list of tags are associated with.")
-	grafana_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		grafana_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource the list of tags are associated with.")
+		grafana_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	grafanaCmd.AddCommand(grafana_listTagsForResourceCmd)
 }

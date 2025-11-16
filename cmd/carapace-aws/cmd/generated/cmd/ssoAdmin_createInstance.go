@@ -12,10 +12,12 @@ var ssoAdmin_createInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_createInstanceCmd).Standalone()
+	carapace.Gen(ssoAdmin_createInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_createInstanceCmd).Standalone()
 
-	ssoAdmin_createInstanceCmd.Flags().String("client-token", "", "Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.")
-	ssoAdmin_createInstanceCmd.Flags().String("name", "", "The name of the instance of IAM Identity Center.")
-	ssoAdmin_createInstanceCmd.Flags().String("tags", "", "Specifies tags to be attached to the instance of IAM Identity Center.")
+		ssoAdmin_createInstanceCmd.Flags().String("client-token", "", "Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.")
+		ssoAdmin_createInstanceCmd.Flags().String("name", "", "The name of the instance of IAM Identity Center.")
+		ssoAdmin_createInstanceCmd.Flags().String("tags", "", "Specifies tags to be attached to the instance of IAM Identity Center.")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_createInstanceCmd)
 }

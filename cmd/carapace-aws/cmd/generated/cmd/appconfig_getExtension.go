@@ -12,10 +12,12 @@ var appconfig_getExtensionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_getExtensionCmd).Standalone()
+	carapace.Gen(appconfig_getExtensionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_getExtensionCmd).Standalone()
 
-	appconfig_getExtensionCmd.Flags().String("extension-identifier", "", "The name, the ID, or the Amazon Resource Name (ARN) of the extension.")
-	appconfig_getExtensionCmd.Flags().String("version-number", "", "The extension version number.")
-	appconfig_getExtensionCmd.MarkFlagRequired("extension-identifier")
+		appconfig_getExtensionCmd.Flags().String("extension-identifier", "", "The name, the ID, or the Amazon Resource Name (ARN) of the extension.")
+		appconfig_getExtensionCmd.Flags().String("version-number", "", "The extension version number.")
+		appconfig_getExtensionCmd.MarkFlagRequired("extension-identifier")
+	})
 	appconfigCmd.AddCommand(appconfig_getExtensionCmd)
 }

@@ -12,10 +12,12 @@ var signer_getSigningProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(signer_getSigningProfileCmd).Standalone()
+	carapace.Gen(signer_getSigningProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(signer_getSigningProfileCmd).Standalone()
 
-	signer_getSigningProfileCmd.Flags().String("profile-name", "", "The name of the target signing profile.")
-	signer_getSigningProfileCmd.Flags().String("profile-owner", "", "The AWS account ID of the profile owner.")
-	signer_getSigningProfileCmd.MarkFlagRequired("profile-name")
+		signer_getSigningProfileCmd.Flags().String("profile-name", "", "The name of the target signing profile.")
+		signer_getSigningProfileCmd.Flags().String("profile-owner", "", "The AWS account ID of the profile owner.")
+		signer_getSigningProfileCmd.MarkFlagRequired("profile-name")
+	})
 	signerCmd.AddCommand(signer_getSigningProfileCmd)
 }

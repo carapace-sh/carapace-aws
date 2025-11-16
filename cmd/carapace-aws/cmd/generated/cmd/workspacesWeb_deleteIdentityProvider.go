@@ -12,9 +12,11 @@ var workspacesWeb_deleteIdentityProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_deleteIdentityProviderCmd).Standalone()
+	carapace.Gen(workspacesWeb_deleteIdentityProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_deleteIdentityProviderCmd).Standalone()
 
-	workspacesWeb_deleteIdentityProviderCmd.Flags().String("identity-provider-arn", "", "The ARN of the identity provider.")
-	workspacesWeb_deleteIdentityProviderCmd.MarkFlagRequired("identity-provider-arn")
+		workspacesWeb_deleteIdentityProviderCmd.Flags().String("identity-provider-arn", "", "The ARN of the identity provider.")
+		workspacesWeb_deleteIdentityProviderCmd.MarkFlagRequired("identity-provider-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_deleteIdentityProviderCmd)
 }

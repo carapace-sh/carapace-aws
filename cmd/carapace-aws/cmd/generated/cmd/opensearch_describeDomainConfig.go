@@ -12,9 +12,11 @@ var opensearch_describeDomainConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_describeDomainConfigCmd).Standalone()
+	carapace.Gen(opensearch_describeDomainConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_describeDomainConfigCmd).Standalone()
 
-	opensearch_describeDomainConfigCmd.Flags().String("domain-name", "", "Name of the OpenSearch Service domain configuration that you want to describe.")
-	opensearch_describeDomainConfigCmd.MarkFlagRequired("domain-name")
+		opensearch_describeDomainConfigCmd.Flags().String("domain-name", "", "Name of the OpenSearch Service domain configuration that you want to describe.")
+		opensearch_describeDomainConfigCmd.MarkFlagRequired("domain-name")
+	})
 	opensearchCmd.AddCommand(opensearch_describeDomainConfigCmd)
 }

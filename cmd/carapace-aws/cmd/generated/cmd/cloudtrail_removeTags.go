@@ -12,11 +12,13 @@ var cloudtrail_removeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_removeTagsCmd).Standalone()
+	carapace.Gen(cloudtrail_removeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_removeTagsCmd).Standalone()
 
-	cloudtrail_removeTagsCmd.Flags().String("resource-id", "", "Specifies the ARN of the trail, event data store, dashboard, or channel from which tags should be removed.")
-	cloudtrail_removeTagsCmd.Flags().String("tags-list", "", "Specifies a list of tags to be removed.")
-	cloudtrail_removeTagsCmd.MarkFlagRequired("resource-id")
-	cloudtrail_removeTagsCmd.MarkFlagRequired("tags-list")
+		cloudtrail_removeTagsCmd.Flags().String("resource-id", "", "Specifies the ARN of the trail, event data store, dashboard, or channel from which tags should be removed.")
+		cloudtrail_removeTagsCmd.Flags().String("tags-list", "", "Specifies a list of tags to be removed.")
+		cloudtrail_removeTagsCmd.MarkFlagRequired("resource-id")
+		cloudtrail_removeTagsCmd.MarkFlagRequired("tags-list")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_removeTagsCmd)
 }

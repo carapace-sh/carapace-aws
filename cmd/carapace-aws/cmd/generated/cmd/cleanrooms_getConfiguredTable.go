@@ -12,9 +12,11 @@ var cleanrooms_getConfiguredTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_getConfiguredTableCmd).Standalone()
+	carapace.Gen(cleanrooms_getConfiguredTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_getConfiguredTableCmd).Standalone()
 
-	cleanrooms_getConfiguredTableCmd.Flags().String("configured-table-identifier", "", "The unique ID for the configured table to retrieve.")
-	cleanrooms_getConfiguredTableCmd.MarkFlagRequired("configured-table-identifier")
+		cleanrooms_getConfiguredTableCmd.Flags().String("configured-table-identifier", "", "The unique ID for the configured table to retrieve.")
+		cleanrooms_getConfiguredTableCmd.MarkFlagRequired("configured-table-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_getConfiguredTableCmd)
 }

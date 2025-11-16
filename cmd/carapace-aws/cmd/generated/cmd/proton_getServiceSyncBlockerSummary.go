@@ -12,10 +12,12 @@ var proton_getServiceSyncBlockerSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getServiceSyncBlockerSummaryCmd).Standalone()
+	carapace.Gen(proton_getServiceSyncBlockerSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getServiceSyncBlockerSummaryCmd).Standalone()
 
-	proton_getServiceSyncBlockerSummaryCmd.Flags().String("service-instance-name", "", "The name of the service instance that you want to get the service sync blocker summary for.")
-	proton_getServiceSyncBlockerSummaryCmd.Flags().String("service-name", "", "The name of the service that you want to get the service sync blocker summary for.")
-	proton_getServiceSyncBlockerSummaryCmd.MarkFlagRequired("service-name")
+		proton_getServiceSyncBlockerSummaryCmd.Flags().String("service-instance-name", "", "The name of the service instance that you want to get the service sync blocker summary for.")
+		proton_getServiceSyncBlockerSummaryCmd.Flags().String("service-name", "", "The name of the service that you want to get the service sync blocker summary for.")
+		proton_getServiceSyncBlockerSummaryCmd.MarkFlagRequired("service-name")
+	})
 	protonCmd.AddCommand(proton_getServiceSyncBlockerSummaryCmd)
 }

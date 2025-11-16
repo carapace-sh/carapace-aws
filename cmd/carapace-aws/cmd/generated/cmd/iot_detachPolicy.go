@@ -12,11 +12,13 @@ var iot_detachPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_detachPolicyCmd).Standalone()
+	carapace.Gen(iot_detachPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_detachPolicyCmd).Standalone()
 
-	iot_detachPolicyCmd.Flags().String("policy-name", "", "The policy to detach.")
-	iot_detachPolicyCmd.Flags().String("target", "", "The target from which the policy will be detached.")
-	iot_detachPolicyCmd.MarkFlagRequired("policy-name")
-	iot_detachPolicyCmd.MarkFlagRequired("target")
+		iot_detachPolicyCmd.Flags().String("policy-name", "", "The policy to detach.")
+		iot_detachPolicyCmd.Flags().String("target", "", "The target from which the policy will be detached.")
+		iot_detachPolicyCmd.MarkFlagRequired("policy-name")
+		iot_detachPolicyCmd.MarkFlagRequired("target")
+	})
 	iotCmd.AddCommand(iot_detachPolicyCmd)
 }

@@ -12,9 +12,11 @@ var gamelift_deleteMatchmakingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteMatchmakingConfigurationCmd).Standalone()
+	carapace.Gen(gamelift_deleteMatchmakingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteMatchmakingConfigurationCmd).Standalone()
 
-	gamelift_deleteMatchmakingConfigurationCmd.Flags().String("name", "", "A unique identifier for the matchmaking configuration.")
-	gamelift_deleteMatchmakingConfigurationCmd.MarkFlagRequired("name")
+		gamelift_deleteMatchmakingConfigurationCmd.Flags().String("name", "", "A unique identifier for the matchmaking configuration.")
+		gamelift_deleteMatchmakingConfigurationCmd.MarkFlagRequired("name")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteMatchmakingConfigurationCmd)
 }

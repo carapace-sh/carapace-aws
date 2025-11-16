@@ -12,9 +12,11 @@ var rekognition_describeDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_describeDatasetCmd).Standalone()
+	carapace.Gen(rekognition_describeDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_describeDatasetCmd).Standalone()
 
-	rekognition_describeDatasetCmd.Flags().String("dataset-arn", "", "The Amazon Resource Name (ARN) of the dataset that you want to describe.")
-	rekognition_describeDatasetCmd.MarkFlagRequired("dataset-arn")
+		rekognition_describeDatasetCmd.Flags().String("dataset-arn", "", "The Amazon Resource Name (ARN) of the dataset that you want to describe.")
+		rekognition_describeDatasetCmd.MarkFlagRequired("dataset-arn")
+	})
 	rekognitionCmd.AddCommand(rekognition_describeDatasetCmd)
 }

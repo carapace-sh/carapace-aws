@@ -12,11 +12,13 @@ var qconnect_getQuickResponseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_getQuickResponseCmd).Standalone()
+	carapace.Gen(qconnect_getQuickResponseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_getQuickResponseCmd).Standalone()
 
-	qconnect_getQuickResponseCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_getQuickResponseCmd.Flags().String("quick-response-id", "", "The identifier of the quick response.")
-	qconnect_getQuickResponseCmd.MarkFlagRequired("knowledge-base-id")
-	qconnect_getQuickResponseCmd.MarkFlagRequired("quick-response-id")
+		qconnect_getQuickResponseCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_getQuickResponseCmd.Flags().String("quick-response-id", "", "The identifier of the quick response.")
+		qconnect_getQuickResponseCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_getQuickResponseCmd.MarkFlagRequired("quick-response-id")
+	})
 	qconnectCmd.AddCommand(qconnect_getQuickResponseCmd)
 }

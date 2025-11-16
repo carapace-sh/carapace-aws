@@ -12,9 +12,11 @@ var medialive_deleteChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteChannelCmd).Standalone()
+	carapace.Gen(medialive_deleteChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteChannelCmd).Standalone()
 
-	medialive_deleteChannelCmd.Flags().String("channel-id", "", "Unique ID of the channel.")
-	medialive_deleteChannelCmd.MarkFlagRequired("channel-id")
+		medialive_deleteChannelCmd.Flags().String("channel-id", "", "Unique ID of the channel.")
+		medialive_deleteChannelCmd.MarkFlagRequired("channel-id")
+	})
 	medialiveCmd.AddCommand(medialive_deleteChannelCmd)
 }

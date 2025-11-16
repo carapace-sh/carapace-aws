@@ -12,11 +12,13 @@ var xray_getInsightEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getInsightEventsCmd).Standalone()
+	carapace.Gen(xray_getInsightEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getInsightEventsCmd).Standalone()
 
-	xray_getInsightEventsCmd.Flags().String("insight-id", "", "The insight's unique identifier.")
-	xray_getInsightEventsCmd.Flags().String("max-results", "", "Used to retrieve at most the specified value of events.")
-	xray_getInsightEventsCmd.Flags().String("next-token", "", "Specify the pagination token returned by a previous request to retrieve the next page of events.")
-	xray_getInsightEventsCmd.MarkFlagRequired("insight-id")
+		xray_getInsightEventsCmd.Flags().String("insight-id", "", "The insight's unique identifier.")
+		xray_getInsightEventsCmd.Flags().String("max-results", "", "Used to retrieve at most the specified value of events.")
+		xray_getInsightEventsCmd.Flags().String("next-token", "", "Specify the pagination token returned by a previous request to retrieve the next page of events.")
+		xray_getInsightEventsCmd.MarkFlagRequired("insight-id")
+	})
 	xrayCmd.AddCommand(xray_getInsightEventsCmd)
 }

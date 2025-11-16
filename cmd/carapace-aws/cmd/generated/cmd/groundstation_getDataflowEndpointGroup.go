@@ -12,9 +12,11 @@ var groundstation_getDataflowEndpointGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_getDataflowEndpointGroupCmd).Standalone()
+	carapace.Gen(groundstation_getDataflowEndpointGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_getDataflowEndpointGroupCmd).Standalone()
 
-	groundstation_getDataflowEndpointGroupCmd.Flags().String("dataflow-endpoint-group-id", "", "UUID of a dataflow endpoint group.")
-	groundstation_getDataflowEndpointGroupCmd.MarkFlagRequired("dataflow-endpoint-group-id")
+		groundstation_getDataflowEndpointGroupCmd.Flags().String("dataflow-endpoint-group-id", "", "UUID of a dataflow endpoint group.")
+		groundstation_getDataflowEndpointGroupCmd.MarkFlagRequired("dataflow-endpoint-group-id")
+	})
 	groundstationCmd.AddCommand(groundstation_getDataflowEndpointGroupCmd)
 }

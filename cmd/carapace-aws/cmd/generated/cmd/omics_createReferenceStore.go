@@ -12,13 +12,15 @@ var omics_createReferenceStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_createReferenceStoreCmd).Standalone()
+	carapace.Gen(omics_createReferenceStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_createReferenceStoreCmd).Standalone()
 
-	omics_createReferenceStoreCmd.Flags().String("client-token", "", "To ensure that requests don't run multiple times, specify a unique token for each request.")
-	omics_createReferenceStoreCmd.Flags().String("description", "", "A description for the store.")
-	omics_createReferenceStoreCmd.Flags().String("name", "", "A name for the store.")
-	omics_createReferenceStoreCmd.Flags().String("sse-config", "", "Server-side encryption (SSE) settings for the store.")
-	omics_createReferenceStoreCmd.Flags().String("tags", "", "Tags for the store.")
-	omics_createReferenceStoreCmd.MarkFlagRequired("name")
+		omics_createReferenceStoreCmd.Flags().String("client-token", "", "To ensure that requests don't run multiple times, specify a unique token for each request.")
+		omics_createReferenceStoreCmd.Flags().String("description", "", "A description for the store.")
+		omics_createReferenceStoreCmd.Flags().String("name", "", "A name for the store.")
+		omics_createReferenceStoreCmd.Flags().String("sse-config", "", "Server-side encryption (SSE) settings for the store.")
+		omics_createReferenceStoreCmd.Flags().String("tags", "", "Tags for the store.")
+		omics_createReferenceStoreCmd.MarkFlagRequired("name")
+	})
 	omicsCmd.AddCommand(omics_createReferenceStoreCmd)
 }

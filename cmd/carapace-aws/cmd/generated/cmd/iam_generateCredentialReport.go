@@ -12,7 +12,9 @@ var iam_generateCredentialReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_generateCredentialReportCmd).Standalone()
+	carapace.Gen(iam_generateCredentialReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_generateCredentialReportCmd).Standalone()
 
+	})
 	iamCmd.AddCommand(iam_generateCredentialReportCmd)
 }

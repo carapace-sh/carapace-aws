@@ -12,10 +12,12 @@ var omics_updateAnnotationStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_updateAnnotationStoreCmd).Standalone()
+	carapace.Gen(omics_updateAnnotationStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_updateAnnotationStoreCmd).Standalone()
 
-	omics_updateAnnotationStoreCmd.Flags().String("description", "", "A description for the store.")
-	omics_updateAnnotationStoreCmd.Flags().String("name", "", "A name for the store.")
-	omics_updateAnnotationStoreCmd.MarkFlagRequired("name")
+		omics_updateAnnotationStoreCmd.Flags().String("description", "", "A description for the store.")
+		omics_updateAnnotationStoreCmd.Flags().String("name", "", "A name for the store.")
+		omics_updateAnnotationStoreCmd.MarkFlagRequired("name")
+	})
 	omicsCmd.AddCommand(omics_updateAnnotationStoreCmd)
 }

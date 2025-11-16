@@ -12,10 +12,12 @@ var taxsettings_putTaxRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_putTaxRegistrationCmd).Standalone()
+	carapace.Gen(taxsettings_putTaxRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_putTaxRegistrationCmd).Standalone()
 
-	taxsettings_putTaxRegistrationCmd.Flags().String("account-id", "", "Your unique account identifier.")
-	taxsettings_putTaxRegistrationCmd.Flags().String("tax-registration-entry", "", "Your TRN information that will be stored to the account mentioned in `accountId`.")
-	taxsettings_putTaxRegistrationCmd.MarkFlagRequired("tax-registration-entry")
+		taxsettings_putTaxRegistrationCmd.Flags().String("account-id", "", "Your unique account identifier.")
+		taxsettings_putTaxRegistrationCmd.Flags().String("tax-registration-entry", "", "Your TRN information that will be stored to the account mentioned in `accountId`.")
+		taxsettings_putTaxRegistrationCmd.MarkFlagRequired("tax-registration-entry")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_putTaxRegistrationCmd)
 }

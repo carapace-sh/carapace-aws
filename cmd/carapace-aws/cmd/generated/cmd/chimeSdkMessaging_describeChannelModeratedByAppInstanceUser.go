@@ -12,13 +12,15 @@ var chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd).Standalone()
 
-	chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.Flags().String("app-instance-user-arn", "", "The ARN of the user or bot in the moderated channel.")
-	chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.Flags().String("channel-arn", "", "The ARN of the moderated channel.")
-	chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.MarkFlagRequired("app-instance-user-arn")
-	chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.MarkFlagRequired("channel-arn")
-	chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.MarkFlagRequired("chime-bearer")
+		chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.Flags().String("app-instance-user-arn", "", "The ARN of the user or bot in the moderated channel.")
+		chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.Flags().String("channel-arn", "", "The ARN of the moderated channel.")
+		chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.MarkFlagRequired("app-instance-user-arn")
+		chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.MarkFlagRequired("channel-arn")
+		chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd.MarkFlagRequired("chime-bearer")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_describeChannelModeratedByAppInstanceUserCmd)
 }

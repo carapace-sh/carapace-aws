@@ -12,11 +12,13 @@ var quicksight_describeActionConnectorPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeActionConnectorPermissionsCmd).Standalone()
+	carapace.Gen(quicksight_describeActionConnectorPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeActionConnectorPermissionsCmd).Standalone()
 
-	quicksight_describeActionConnectorPermissionsCmd.Flags().String("action-connector-id", "", "The unique identifier of the action connector whose permissions you want to describe.")
-	quicksight_describeActionConnectorPermissionsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID that contains the action connector.")
-	quicksight_describeActionConnectorPermissionsCmd.MarkFlagRequired("action-connector-id")
-	quicksight_describeActionConnectorPermissionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeActionConnectorPermissionsCmd.Flags().String("action-connector-id", "", "The unique identifier of the action connector whose permissions you want to describe.")
+		quicksight_describeActionConnectorPermissionsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID that contains the action connector.")
+		quicksight_describeActionConnectorPermissionsCmd.MarkFlagRequired("action-connector-id")
+		quicksight_describeActionConnectorPermissionsCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeActionConnectorPermissionsCmd)
 }

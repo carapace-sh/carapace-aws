@@ -12,11 +12,13 @@ var ssoAdmin_describePermissionSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_describePermissionSetCmd).Standalone()
+	carapace.Gen(ssoAdmin_describePermissionSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_describePermissionSetCmd).Standalone()
 
-	ssoAdmin_describePermissionSetCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_describePermissionSetCmd.Flags().String("permission-set-arn", "", "The ARN of the permission set.")
-	ssoAdmin_describePermissionSetCmd.MarkFlagRequired("instance-arn")
-	ssoAdmin_describePermissionSetCmd.MarkFlagRequired("permission-set-arn")
+		ssoAdmin_describePermissionSetCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_describePermissionSetCmd.Flags().String("permission-set-arn", "", "The ARN of the permission set.")
+		ssoAdmin_describePermissionSetCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_describePermissionSetCmd.MarkFlagRequired("permission-set-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_describePermissionSetCmd)
 }

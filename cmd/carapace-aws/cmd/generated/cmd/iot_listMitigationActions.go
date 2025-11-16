@@ -12,10 +12,12 @@ var iot_listMitigationActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listMitigationActionsCmd).Standalone()
+	carapace.Gen(iot_listMitigationActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listMitigationActionsCmd).Standalone()
 
-	iot_listMitigationActionsCmd.Flags().String("action-type", "", "Specify a value to limit the result to mitigation actions with a specific action type.")
-	iot_listMitigationActionsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_listMitigationActionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iot_listMitigationActionsCmd.Flags().String("action-type", "", "Specify a value to limit the result to mitigation actions with a specific action type.")
+		iot_listMitigationActionsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_listMitigationActionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	iotCmd.AddCommand(iot_listMitigationActionsCmd)
 }

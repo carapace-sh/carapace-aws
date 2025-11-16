@@ -12,11 +12,13 @@ var codeconnections_deleteSyncConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeconnections_deleteSyncConfigurationCmd).Standalone()
+	carapace.Gen(codeconnections_deleteSyncConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeconnections_deleteSyncConfigurationCmd).Standalone()
 
-	codeconnections_deleteSyncConfigurationCmd.Flags().String("resource-name", "", "The name of the Amazon Web Services resource associated with the sync configuration to be deleted.")
-	codeconnections_deleteSyncConfigurationCmd.Flags().String("sync-type", "", "The type of sync configuration to be deleted.")
-	codeconnections_deleteSyncConfigurationCmd.MarkFlagRequired("resource-name")
-	codeconnections_deleteSyncConfigurationCmd.MarkFlagRequired("sync-type")
+		codeconnections_deleteSyncConfigurationCmd.Flags().String("resource-name", "", "The name of the Amazon Web Services resource associated with the sync configuration to be deleted.")
+		codeconnections_deleteSyncConfigurationCmd.Flags().String("sync-type", "", "The type of sync configuration to be deleted.")
+		codeconnections_deleteSyncConfigurationCmd.MarkFlagRequired("resource-name")
+		codeconnections_deleteSyncConfigurationCmd.MarkFlagRequired("sync-type")
+	})
 	codeconnectionsCmd.AddCommand(codeconnections_deleteSyncConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var proton_getEnvironmentTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getEnvironmentTemplateCmd).Standalone()
+	carapace.Gen(proton_getEnvironmentTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getEnvironmentTemplateCmd).Standalone()
 
-	proton_getEnvironmentTemplateCmd.Flags().String("name", "", "The name of the environment template that you want to get the detailed data for.")
-	proton_getEnvironmentTemplateCmd.MarkFlagRequired("name")
+		proton_getEnvironmentTemplateCmd.Flags().String("name", "", "The name of the environment template that you want to get the detailed data for.")
+		proton_getEnvironmentTemplateCmd.MarkFlagRequired("name")
+	})
 	protonCmd.AddCommand(proton_getEnvironmentTemplateCmd)
 }

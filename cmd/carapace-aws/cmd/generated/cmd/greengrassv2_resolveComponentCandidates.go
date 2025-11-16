@@ -12,9 +12,11 @@ var greengrassv2_resolveComponentCandidatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrassv2_resolveComponentCandidatesCmd).Standalone()
+	carapace.Gen(greengrassv2_resolveComponentCandidatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrassv2_resolveComponentCandidatesCmd).Standalone()
 
-	greengrassv2_resolveComponentCandidatesCmd.Flags().String("component-candidates", "", "The list of components to resolve.")
-	greengrassv2_resolveComponentCandidatesCmd.Flags().String("platform", "", "The platform to use to resolve compatible components.")
+		greengrassv2_resolveComponentCandidatesCmd.Flags().String("component-candidates", "", "The list of components to resolve.")
+		greengrassv2_resolveComponentCandidatesCmd.Flags().String("platform", "", "The platform to use to resolve compatible components.")
+	})
 	greengrassv2Cmd.AddCommand(greengrassv2_resolveComponentCandidatesCmd)
 }

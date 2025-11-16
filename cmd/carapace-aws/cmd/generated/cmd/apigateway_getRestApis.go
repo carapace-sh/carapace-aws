@@ -12,9 +12,11 @@ var apigateway_getRestApisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getRestApisCmd).Standalone()
+	carapace.Gen(apigateway_getRestApisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getRestApisCmd).Standalone()
 
-	apigateway_getRestApisCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getRestApisCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getRestApisCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getRestApisCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+	})
 	apigatewayCmd.AddCommand(apigateway_getRestApisCmd)
 }

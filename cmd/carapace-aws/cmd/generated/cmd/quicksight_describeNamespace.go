@@ -12,11 +12,13 @@ var quicksight_describeNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeNamespaceCmd).Standalone()
+	carapace.Gen(quicksight_describeNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeNamespaceCmd).Standalone()
 
-	quicksight_describeNamespaceCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that contains the Quick Sight namespace that you want to describe.")
-	quicksight_describeNamespaceCmd.Flags().String("namespace", "", "The namespace that you want to describe.")
-	quicksight_describeNamespaceCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeNamespaceCmd.MarkFlagRequired("namespace")
+		quicksight_describeNamespaceCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that contains the Quick Sight namespace that you want to describe.")
+		quicksight_describeNamespaceCmd.Flags().String("namespace", "", "The namespace that you want to describe.")
+		quicksight_describeNamespaceCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeNamespaceCmd.MarkFlagRequired("namespace")
+	})
 	quicksightCmd.AddCommand(quicksight_describeNamespaceCmd)
 }

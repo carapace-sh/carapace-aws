@@ -12,11 +12,13 @@ var iotwireless_associateWirelessGatewayWithThingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_associateWirelessGatewayWithThingCmd).Standalone()
+	carapace.Gen(iotwireless_associateWirelessGatewayWithThingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_associateWirelessGatewayWithThingCmd).Standalone()
 
-	iotwireless_associateWirelessGatewayWithThingCmd.Flags().String("id", "", "The ID of the resource to update.")
-	iotwireless_associateWirelessGatewayWithThingCmd.Flags().String("thing-arn", "", "The ARN of the thing to associate with the wireless gateway.")
-	iotwireless_associateWirelessGatewayWithThingCmd.MarkFlagRequired("id")
-	iotwireless_associateWirelessGatewayWithThingCmd.MarkFlagRequired("thing-arn")
+		iotwireless_associateWirelessGatewayWithThingCmd.Flags().String("id", "", "The ID of the resource to update.")
+		iotwireless_associateWirelessGatewayWithThingCmd.Flags().String("thing-arn", "", "The ARN of the thing to associate with the wireless gateway.")
+		iotwireless_associateWirelessGatewayWithThingCmd.MarkFlagRequired("id")
+		iotwireless_associateWirelessGatewayWithThingCmd.MarkFlagRequired("thing-arn")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_associateWirelessGatewayWithThingCmd)
 }

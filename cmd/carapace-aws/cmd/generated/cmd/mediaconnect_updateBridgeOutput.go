@@ -12,12 +12,14 @@ var mediaconnect_updateBridgeOutputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_updateBridgeOutputCmd).Standalone()
+	carapace.Gen(mediaconnect_updateBridgeOutputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_updateBridgeOutputCmd).Standalone()
 
-	mediaconnect_updateBridgeOutputCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to update.")
-	mediaconnect_updateBridgeOutputCmd.Flags().String("network-output", "", "The network of the bridge output.")
-	mediaconnect_updateBridgeOutputCmd.Flags().String("output-name", "", "Tname of the output that you want to update.")
-	mediaconnect_updateBridgeOutputCmd.MarkFlagRequired("bridge-arn")
-	mediaconnect_updateBridgeOutputCmd.MarkFlagRequired("output-name")
+		mediaconnect_updateBridgeOutputCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to update.")
+		mediaconnect_updateBridgeOutputCmd.Flags().String("network-output", "", "The network of the bridge output.")
+		mediaconnect_updateBridgeOutputCmd.Flags().String("output-name", "", "Tname of the output that you want to update.")
+		mediaconnect_updateBridgeOutputCmd.MarkFlagRequired("bridge-arn")
+		mediaconnect_updateBridgeOutputCmd.MarkFlagRequired("output-name")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_updateBridgeOutputCmd)
 }

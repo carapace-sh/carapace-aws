@@ -12,10 +12,12 @@ var lexv2Models_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(lexv2Models_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_deleteResourcePolicyCmd).Standalone()
 
-	lexv2Models_deleteResourcePolicyCmd.Flags().String("expected-revision-id", "", "The identifier of the revision to edit.")
-	lexv2Models_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the bot or bot alias that has the resource policy attached.")
-	lexv2Models_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		lexv2Models_deleteResourcePolicyCmd.Flags().String("expected-revision-id", "", "The identifier of the revision to edit.")
+		lexv2Models_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the bot or bot alias that has the resource policy attached.")
+		lexv2Models_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_deleteResourcePolicyCmd)
 }

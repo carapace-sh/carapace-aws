@@ -12,12 +12,14 @@ var iot_getStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getStatisticsCmd).Standalone()
+	carapace.Gen(iot_getStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getStatisticsCmd).Standalone()
 
-	iot_getStatisticsCmd.Flags().String("aggregation-field", "", "The aggregation field name.")
-	iot_getStatisticsCmd.Flags().String("index-name", "", "The name of the index to search.")
-	iot_getStatisticsCmd.Flags().String("query-string", "", "The query used to search.")
-	iot_getStatisticsCmd.Flags().String("query-version", "", "The version of the query used to search.")
-	iot_getStatisticsCmd.MarkFlagRequired("query-string")
+		iot_getStatisticsCmd.Flags().String("aggregation-field", "", "The aggregation field name.")
+		iot_getStatisticsCmd.Flags().String("index-name", "", "The name of the index to search.")
+		iot_getStatisticsCmd.Flags().String("query-string", "", "The query used to search.")
+		iot_getStatisticsCmd.Flags().String("query-version", "", "The version of the query used to search.")
+		iot_getStatisticsCmd.MarkFlagRequired("query-string")
+	})
 	iotCmd.AddCommand(iot_getStatisticsCmd)
 }

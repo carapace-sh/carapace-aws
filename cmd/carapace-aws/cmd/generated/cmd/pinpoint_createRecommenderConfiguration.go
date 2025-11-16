@@ -12,9 +12,11 @@ var pinpoint_createRecommenderConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_createRecommenderConfigurationCmd).Standalone()
+	carapace.Gen(pinpoint_createRecommenderConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_createRecommenderConfigurationCmd).Standalone()
 
-	pinpoint_createRecommenderConfigurationCmd.Flags().String("create-recommender-configuration", "", "")
-	pinpoint_createRecommenderConfigurationCmd.MarkFlagRequired("create-recommender-configuration")
+		pinpoint_createRecommenderConfigurationCmd.Flags().String("create-recommender-configuration", "", "")
+		pinpoint_createRecommenderConfigurationCmd.MarkFlagRequired("create-recommender-configuration")
+	})
 	pinpointCmd.AddCommand(pinpoint_createRecommenderConfigurationCmd)
 }

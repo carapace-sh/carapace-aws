@@ -12,13 +12,15 @@ var redshift_createSnapshotScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_createSnapshotScheduleCmd).Standalone()
+	carapace.Gen(redshift_createSnapshotScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_createSnapshotScheduleCmd).Standalone()
 
-	redshift_createSnapshotScheduleCmd.Flags().String("dry-run", "", "")
-	redshift_createSnapshotScheduleCmd.Flags().String("next-invocations", "", "")
-	redshift_createSnapshotScheduleCmd.Flags().String("schedule-definitions", "", "The definition of the snapshot schedule.")
-	redshift_createSnapshotScheduleCmd.Flags().String("schedule-description", "", "The description of the snapshot schedule.")
-	redshift_createSnapshotScheduleCmd.Flags().String("schedule-identifier", "", "A unique identifier for a snapshot schedule.")
-	redshift_createSnapshotScheduleCmd.Flags().String("tags", "", "An optional set of tags you can use to search for the schedule.")
+		redshift_createSnapshotScheduleCmd.Flags().String("dry-run", "", "")
+		redshift_createSnapshotScheduleCmd.Flags().String("next-invocations", "", "")
+		redshift_createSnapshotScheduleCmd.Flags().String("schedule-definitions", "", "The definition of the snapshot schedule.")
+		redshift_createSnapshotScheduleCmd.Flags().String("schedule-description", "", "The description of the snapshot schedule.")
+		redshift_createSnapshotScheduleCmd.Flags().String("schedule-identifier", "", "A unique identifier for a snapshot schedule.")
+		redshift_createSnapshotScheduleCmd.Flags().String("tags", "", "An optional set of tags you can use to search for the schedule.")
+	})
 	redshiftCmd.AddCommand(redshift_createSnapshotScheduleCmd)
 }

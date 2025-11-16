@@ -12,13 +12,15 @@ var vpcLattice_updateListenerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_updateListenerCmd).Standalone()
+	carapace.Gen(vpcLattice_updateListenerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_updateListenerCmd).Standalone()
 
-	vpcLattice_updateListenerCmd.Flags().String("default-action", "", "The action for the default rule.")
-	vpcLattice_updateListenerCmd.Flags().String("listener-identifier", "", "The ID or ARN of the listener.")
-	vpcLattice_updateListenerCmd.Flags().String("service-identifier", "", "The ID or ARN of the service.")
-	vpcLattice_updateListenerCmd.MarkFlagRequired("default-action")
-	vpcLattice_updateListenerCmd.MarkFlagRequired("listener-identifier")
-	vpcLattice_updateListenerCmd.MarkFlagRequired("service-identifier")
+		vpcLattice_updateListenerCmd.Flags().String("default-action", "", "The action for the default rule.")
+		vpcLattice_updateListenerCmd.Flags().String("listener-identifier", "", "The ID or ARN of the listener.")
+		vpcLattice_updateListenerCmd.Flags().String("service-identifier", "", "The ID or ARN of the service.")
+		vpcLattice_updateListenerCmd.MarkFlagRequired("default-action")
+		vpcLattice_updateListenerCmd.MarkFlagRequired("listener-identifier")
+		vpcLattice_updateListenerCmd.MarkFlagRequired("service-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_updateListenerCmd)
 }

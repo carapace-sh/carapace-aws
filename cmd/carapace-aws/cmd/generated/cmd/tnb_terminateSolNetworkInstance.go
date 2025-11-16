@@ -12,10 +12,12 @@ var tnb_terminateSolNetworkInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_terminateSolNetworkInstanceCmd).Standalone()
+	carapace.Gen(tnb_terminateSolNetworkInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_terminateSolNetworkInstanceCmd).Standalone()
 
-	tnb_terminateSolNetworkInstanceCmd.Flags().String("ns-instance-id", "", "ID of the network instance.")
-	tnb_terminateSolNetworkInstanceCmd.Flags().String("tags", "", "A tag is a label that you assign to an Amazon Web Services resource.")
-	tnb_terminateSolNetworkInstanceCmd.MarkFlagRequired("ns-instance-id")
+		tnb_terminateSolNetworkInstanceCmd.Flags().String("ns-instance-id", "", "ID of the network instance.")
+		tnb_terminateSolNetworkInstanceCmd.Flags().String("tags", "", "A tag is a label that you assign to an Amazon Web Services resource.")
+		tnb_terminateSolNetworkInstanceCmd.MarkFlagRequired("ns-instance-id")
+	})
 	tnbCmd.AddCommand(tnb_terminateSolNetworkInstanceCmd)
 }

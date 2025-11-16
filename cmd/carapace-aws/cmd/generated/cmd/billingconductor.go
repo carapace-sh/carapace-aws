@@ -12,7 +12,9 @@ var billingconductorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billingconductorCmd).Standalone()
+	carapace.Gen(billingconductorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductorCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(billingconductorCmd)
 }

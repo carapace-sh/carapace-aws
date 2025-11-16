@@ -12,10 +12,12 @@ var mgn_getReplicationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_getReplicationConfigurationCmd).Standalone()
+	carapace.Gen(mgn_getReplicationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_getReplicationConfigurationCmd).Standalone()
 
-	mgn_getReplicationConfigurationCmd.Flags().String("account-id", "", "Request to get Replication Configuration by Account ID.")
-	mgn_getReplicationConfigurationCmd.Flags().String("source-server-id", "", "Request to get Replication Configuration by Source Server ID.")
-	mgn_getReplicationConfigurationCmd.MarkFlagRequired("source-server-id")
+		mgn_getReplicationConfigurationCmd.Flags().String("account-id", "", "Request to get Replication Configuration by Account ID.")
+		mgn_getReplicationConfigurationCmd.Flags().String("source-server-id", "", "Request to get Replication Configuration by Source Server ID.")
+		mgn_getReplicationConfigurationCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_getReplicationConfigurationCmd)
 }

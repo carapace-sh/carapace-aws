@@ -12,9 +12,11 @@ var comprehend_stopKeyPhrasesDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_stopKeyPhrasesDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_stopKeyPhrasesDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_stopKeyPhrasesDetectionJobCmd).Standalone()
 
-	comprehend_stopKeyPhrasesDetectionJobCmd.Flags().String("job-id", "", "The identifier of the key phrases detection job to stop.")
-	comprehend_stopKeyPhrasesDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_stopKeyPhrasesDetectionJobCmd.Flags().String("job-id", "", "The identifier of the key phrases detection job to stop.")
+		comprehend_stopKeyPhrasesDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_stopKeyPhrasesDetectionJobCmd)
 }

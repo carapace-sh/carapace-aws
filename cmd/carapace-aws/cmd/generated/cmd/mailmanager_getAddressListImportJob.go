@@ -12,9 +12,11 @@ var mailmanager_getAddressListImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_getAddressListImportJobCmd).Standalone()
+	carapace.Gen(mailmanager_getAddressListImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_getAddressListImportJobCmd).Standalone()
 
-	mailmanager_getAddressListImportJobCmd.Flags().String("job-id", "", "The identifier of the import job that needs to be retrieved.")
-	mailmanager_getAddressListImportJobCmd.MarkFlagRequired("job-id")
+		mailmanager_getAddressListImportJobCmd.Flags().String("job-id", "", "The identifier of the import job that needs to be retrieved.")
+		mailmanager_getAddressListImportJobCmd.MarkFlagRequired("job-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_getAddressListImportJobCmd)
 }

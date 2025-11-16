@@ -12,10 +12,12 @@ var sagemaker_describeModelCardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeModelCardCmd).Standalone()
+	carapace.Gen(sagemaker_describeModelCardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeModelCardCmd).Standalone()
 
-	sagemaker_describeModelCardCmd.Flags().String("model-card-name", "", "The name or Amazon Resource Name (ARN) of the model card to describe.")
-	sagemaker_describeModelCardCmd.Flags().String("model-card-version", "", "The version of the model card to describe.")
-	sagemaker_describeModelCardCmd.MarkFlagRequired("model-card-name")
+		sagemaker_describeModelCardCmd.Flags().String("model-card-name", "", "The name or Amazon Resource Name (ARN) of the model card to describe.")
+		sagemaker_describeModelCardCmd.Flags().String("model-card-version", "", "The version of the model card to describe.")
+		sagemaker_describeModelCardCmd.MarkFlagRequired("model-card-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeModelCardCmd)
 }

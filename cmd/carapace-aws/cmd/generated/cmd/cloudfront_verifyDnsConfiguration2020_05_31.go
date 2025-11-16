@@ -12,10 +12,12 @@ var cloudfront_verifyDnsConfiguration2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_verifyDnsConfiguration2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_verifyDnsConfiguration2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_verifyDnsConfiguration2020_05_31Cmd).Standalone()
 
-	cloudfront_verifyDnsConfiguration2020_05_31Cmd.Flags().String("domain", "", "The domain name that you're verifying.")
-	cloudfront_verifyDnsConfiguration2020_05_31Cmd.Flags().String("identifier", "", "The identifier of the distribution tenant.")
-	cloudfront_verifyDnsConfiguration2020_05_31Cmd.MarkFlagRequired("identifier")
+		cloudfront_verifyDnsConfiguration2020_05_31Cmd.Flags().String("domain", "", "The domain name that you're verifying.")
+		cloudfront_verifyDnsConfiguration2020_05_31Cmd.Flags().String("identifier", "", "The identifier of the distribution tenant.")
+		cloudfront_verifyDnsConfiguration2020_05_31Cmd.MarkFlagRequired("identifier")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_verifyDnsConfiguration2020_05_31Cmd)
 }

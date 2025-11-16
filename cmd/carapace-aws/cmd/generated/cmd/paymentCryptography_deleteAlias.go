@@ -12,9 +12,11 @@ var paymentCryptography_deleteAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_deleteAliasCmd).Standalone()
+	carapace.Gen(paymentCryptography_deleteAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_deleteAliasCmd).Standalone()
 
-	paymentCryptography_deleteAliasCmd.Flags().String("alias-name", "", "A friendly name that you can use to refer Amazon Web Services Payment Cryptography key.")
-	paymentCryptography_deleteAliasCmd.MarkFlagRequired("alias-name")
+		paymentCryptography_deleteAliasCmd.Flags().String("alias-name", "", "A friendly name that you can use to refer Amazon Web Services Payment Cryptography key.")
+		paymentCryptography_deleteAliasCmd.MarkFlagRequired("alias-name")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_deleteAliasCmd)
 }

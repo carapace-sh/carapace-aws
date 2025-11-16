@@ -12,10 +12,12 @@ var redshiftServerless_updateSnapshotCopyConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_updateSnapshotCopyConfigurationCmd).Standalone()
+	carapace.Gen(redshiftServerless_updateSnapshotCopyConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_updateSnapshotCopyConfigurationCmd).Standalone()
 
-	redshiftServerless_updateSnapshotCopyConfigurationCmd.Flags().String("snapshot-copy-configuration-id", "", "The ID of the snapshot copy configuration to update.")
-	redshiftServerless_updateSnapshotCopyConfigurationCmd.Flags().String("snapshot-retention-period", "", "The new retention period of how long to keep a snapshot in the destination Amazon Web Services Region.")
-	redshiftServerless_updateSnapshotCopyConfigurationCmd.MarkFlagRequired("snapshot-copy-configuration-id")
+		redshiftServerless_updateSnapshotCopyConfigurationCmd.Flags().String("snapshot-copy-configuration-id", "", "The ID of the snapshot copy configuration to update.")
+		redshiftServerless_updateSnapshotCopyConfigurationCmd.Flags().String("snapshot-retention-period", "", "The new retention period of how long to keep a snapshot in the destination Amazon Web Services Region.")
+		redshiftServerless_updateSnapshotCopyConfigurationCmd.MarkFlagRequired("snapshot-copy-configuration-id")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_updateSnapshotCopyConfigurationCmd)
 }

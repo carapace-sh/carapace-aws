@@ -12,9 +12,11 @@ var route53_getAccountLimitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getAccountLimitCmd).Standalone()
+	carapace.Gen(route53_getAccountLimitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getAccountLimitCmd).Standalone()
 
-	route53_getAccountLimitCmd.Flags().String("type", "", "The limit that you want to get.")
-	route53_getAccountLimitCmd.MarkFlagRequired("type")
+		route53_getAccountLimitCmd.Flags().String("type", "", "The limit that you want to get.")
+		route53_getAccountLimitCmd.MarkFlagRequired("type")
+	})
 	route53Cmd.AddCommand(route53_getAccountLimitCmd)
 }

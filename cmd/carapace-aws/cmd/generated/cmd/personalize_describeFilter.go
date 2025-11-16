@@ -12,9 +12,11 @@ var personalize_describeFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeFilterCmd).Standalone()
+	carapace.Gen(personalize_describeFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeFilterCmd).Standalone()
 
-	personalize_describeFilterCmd.Flags().String("filter-arn", "", "The ARN of the filter to describe.")
-	personalize_describeFilterCmd.MarkFlagRequired("filter-arn")
+		personalize_describeFilterCmd.Flags().String("filter-arn", "", "The ARN of the filter to describe.")
+		personalize_describeFilterCmd.MarkFlagRequired("filter-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeFilterCmd)
 }

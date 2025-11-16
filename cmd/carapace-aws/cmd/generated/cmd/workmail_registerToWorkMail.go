@@ -12,13 +12,15 @@ var workmail_registerToWorkMailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_registerToWorkMailCmd).Standalone()
+	carapace.Gen(workmail_registerToWorkMailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_registerToWorkMailCmd).Standalone()
 
-	workmail_registerToWorkMailCmd.Flags().String("email", "", "The email for the user, group, or resource to be updated.")
-	workmail_registerToWorkMailCmd.Flags().String("entity-id", "", "The identifier for the user, group, or resource to be updated.")
-	workmail_registerToWorkMailCmd.Flags().String("organization-id", "", "The identifier for the organization under which the user, group, or resource exists.")
-	workmail_registerToWorkMailCmd.MarkFlagRequired("email")
-	workmail_registerToWorkMailCmd.MarkFlagRequired("entity-id")
-	workmail_registerToWorkMailCmd.MarkFlagRequired("organization-id")
+		workmail_registerToWorkMailCmd.Flags().String("email", "", "The email for the user, group, or resource to be updated.")
+		workmail_registerToWorkMailCmd.Flags().String("entity-id", "", "The identifier for the user, group, or resource to be updated.")
+		workmail_registerToWorkMailCmd.Flags().String("organization-id", "", "The identifier for the organization under which the user, group, or resource exists.")
+		workmail_registerToWorkMailCmd.MarkFlagRequired("email")
+		workmail_registerToWorkMailCmd.MarkFlagRequired("entity-id")
+		workmail_registerToWorkMailCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_registerToWorkMailCmd)
 }

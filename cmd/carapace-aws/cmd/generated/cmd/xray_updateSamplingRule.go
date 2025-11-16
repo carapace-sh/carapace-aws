@@ -12,9 +12,11 @@ var xray_updateSamplingRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_updateSamplingRuleCmd).Standalone()
+	carapace.Gen(xray_updateSamplingRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_updateSamplingRuleCmd).Standalone()
 
-	xray_updateSamplingRuleCmd.Flags().String("sampling-rule-update", "", "The rule and fields to change.")
-	xray_updateSamplingRuleCmd.MarkFlagRequired("sampling-rule-update")
+		xray_updateSamplingRuleCmd.Flags().String("sampling-rule-update", "", "The rule and fields to change.")
+		xray_updateSamplingRuleCmd.MarkFlagRequired("sampling-rule-update")
+	})
 	xrayCmd.AddCommand(xray_updateSamplingRuleCmd)
 }

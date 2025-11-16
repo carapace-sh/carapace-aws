@@ -12,13 +12,15 @@ var identitystore_updateGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(identitystore_updateGroupCmd).Standalone()
+	carapace.Gen(identitystore_updateGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(identitystore_updateGroupCmd).Standalone()
 
-	identitystore_updateGroupCmd.Flags().String("group-id", "", "The identifier for a group in the identity store.")
-	identitystore_updateGroupCmd.Flags().String("identity-store-id", "", "The globally unique identifier for the identity store.")
-	identitystore_updateGroupCmd.Flags().String("operations", "", "A list of `AttributeOperation` objects to apply to the requested group.")
-	identitystore_updateGroupCmd.MarkFlagRequired("group-id")
-	identitystore_updateGroupCmd.MarkFlagRequired("identity-store-id")
-	identitystore_updateGroupCmd.MarkFlagRequired("operations")
+		identitystore_updateGroupCmd.Flags().String("group-id", "", "The identifier for a group in the identity store.")
+		identitystore_updateGroupCmd.Flags().String("identity-store-id", "", "The globally unique identifier for the identity store.")
+		identitystore_updateGroupCmd.Flags().String("operations", "", "A list of `AttributeOperation` objects to apply to the requested group.")
+		identitystore_updateGroupCmd.MarkFlagRequired("group-id")
+		identitystore_updateGroupCmd.MarkFlagRequired("identity-store-id")
+		identitystore_updateGroupCmd.MarkFlagRequired("operations")
+	})
 	identitystoreCmd.AddCommand(identitystore_updateGroupCmd)
 }

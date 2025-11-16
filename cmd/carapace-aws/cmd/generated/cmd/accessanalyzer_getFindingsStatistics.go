@@ -12,9 +12,11 @@ var accessanalyzer_getFindingsStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_getFindingsStatisticsCmd).Standalone()
+	carapace.Gen(accessanalyzer_getFindingsStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_getFindingsStatisticsCmd).Standalone()
 
-	accessanalyzer_getFindingsStatisticsCmd.Flags().String("analyzer-arn", "", "The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the statistics.")
-	accessanalyzer_getFindingsStatisticsCmd.MarkFlagRequired("analyzer-arn")
+		accessanalyzer_getFindingsStatisticsCmd.Flags().String("analyzer-arn", "", "The [ARN of the analyzer](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources) used to generate the statistics.")
+		accessanalyzer_getFindingsStatisticsCmd.MarkFlagRequired("analyzer-arn")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_getFindingsStatisticsCmd)
 }

@@ -12,9 +12,11 @@ var greengrass_associateServiceRoleToAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_associateServiceRoleToAccountCmd).Standalone()
+	carapace.Gen(greengrass_associateServiceRoleToAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_associateServiceRoleToAccountCmd).Standalone()
 
-	greengrass_associateServiceRoleToAccountCmd.Flags().String("role-arn", "", "The ARN of the service role you wish to associate with your account.")
-	greengrass_associateServiceRoleToAccountCmd.MarkFlagRequired("role-arn")
+		greengrass_associateServiceRoleToAccountCmd.Flags().String("role-arn", "", "The ARN of the service role you wish to associate with your account.")
+		greengrass_associateServiceRoleToAccountCmd.MarkFlagRequired("role-arn")
+	})
 	greengrassCmd.AddCommand(greengrass_associateServiceRoleToAccountCmd)
 }

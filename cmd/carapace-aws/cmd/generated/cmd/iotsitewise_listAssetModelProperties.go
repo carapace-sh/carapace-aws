@@ -12,13 +12,15 @@ var iotsitewise_listAssetModelPropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_listAssetModelPropertiesCmd).Standalone()
+	carapace.Gen(iotsitewise_listAssetModelPropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_listAssetModelPropertiesCmd).Standalone()
 
-	iotsitewise_listAssetModelPropertiesCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
-	iotsitewise_listAssetModelPropertiesCmd.Flags().String("asset-model-version", "", "The version alias that specifies the latest or active version of the asset model.")
-	iotsitewise_listAssetModelPropertiesCmd.Flags().String("filter", "", "Filters the requested list of asset model properties.")
-	iotsitewise_listAssetModelPropertiesCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
-	iotsitewise_listAssetModelPropertiesCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	iotsitewise_listAssetModelPropertiesCmd.MarkFlagRequired("asset-model-id")
+		iotsitewise_listAssetModelPropertiesCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
+		iotsitewise_listAssetModelPropertiesCmd.Flags().String("asset-model-version", "", "The version alias that specifies the latest or active version of the asset model.")
+		iotsitewise_listAssetModelPropertiesCmd.Flags().String("filter", "", "Filters the requested list of asset model properties.")
+		iotsitewise_listAssetModelPropertiesCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
+		iotsitewise_listAssetModelPropertiesCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		iotsitewise_listAssetModelPropertiesCmd.MarkFlagRequired("asset-model-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_listAssetModelPropertiesCmd)
 }

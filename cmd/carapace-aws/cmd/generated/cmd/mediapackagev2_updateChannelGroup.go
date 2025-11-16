@@ -12,11 +12,13 @@ var mediapackagev2_updateChannelGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackagev2_updateChannelGroupCmd).Standalone()
+	carapace.Gen(mediapackagev2_updateChannelGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackagev2_updateChannelGroupCmd).Standalone()
 
-	mediapackagev2_updateChannelGroupCmd.Flags().String("channel-group-name", "", "The name that describes the channel group.")
-	mediapackagev2_updateChannelGroupCmd.Flags().String("description", "", "Any descriptive information that you want to add to the channel group for future identification purposes.")
-	mediapackagev2_updateChannelGroupCmd.Flags().String("etag", "", "The expected current Entity Tag (ETag) for the resource.")
-	mediapackagev2_updateChannelGroupCmd.MarkFlagRequired("channel-group-name")
+		mediapackagev2_updateChannelGroupCmd.Flags().String("channel-group-name", "", "The name that describes the channel group.")
+		mediapackagev2_updateChannelGroupCmd.Flags().String("description", "", "Any descriptive information that you want to add to the channel group for future identification purposes.")
+		mediapackagev2_updateChannelGroupCmd.Flags().String("etag", "", "The expected current Entity Tag (ETag) for the resource.")
+		mediapackagev2_updateChannelGroupCmd.MarkFlagRequired("channel-group-name")
+	})
 	mediapackagev2Cmd.AddCommand(mediapackagev2_updateChannelGroupCmd)
 }

@@ -12,13 +12,15 @@ var eks_registerClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_registerClusterCmd).Standalone()
+	carapace.Gen(eks_registerClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_registerClusterCmd).Standalone()
 
-	eks_registerClusterCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	eks_registerClusterCmd.Flags().String("connector-config", "", "The configuration settings required to connect the Kubernetes cluster to the Amazon EKS control plane.")
-	eks_registerClusterCmd.Flags().String("name", "", "A unique name for this cluster in your Amazon Web Services Region.")
-	eks_registerClusterCmd.Flags().String("tags", "", "Metadata that assists with categorization and organization.")
-	eks_registerClusterCmd.MarkFlagRequired("connector-config")
-	eks_registerClusterCmd.MarkFlagRequired("name")
+		eks_registerClusterCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		eks_registerClusterCmd.Flags().String("connector-config", "", "The configuration settings required to connect the Kubernetes cluster to the Amazon EKS control plane.")
+		eks_registerClusterCmd.Flags().String("name", "", "A unique name for this cluster in your Amazon Web Services Region.")
+		eks_registerClusterCmd.Flags().String("tags", "", "Metadata that assists with categorization and organization.")
+		eks_registerClusterCmd.MarkFlagRequired("connector-config")
+		eks_registerClusterCmd.MarkFlagRequired("name")
+	})
 	eksCmd.AddCommand(eks_registerClusterCmd)
 }

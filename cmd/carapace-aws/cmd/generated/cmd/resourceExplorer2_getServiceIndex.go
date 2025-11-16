@@ -12,7 +12,9 @@ var resourceExplorer2_getServiceIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_getServiceIndexCmd).Standalone()
+	carapace.Gen(resourceExplorer2_getServiceIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_getServiceIndexCmd).Standalone()
 
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_getServiceIndexCmd)
 }

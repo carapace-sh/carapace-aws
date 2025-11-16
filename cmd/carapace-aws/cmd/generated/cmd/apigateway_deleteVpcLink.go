@@ -12,9 +12,11 @@ var apigateway_deleteVpcLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_deleteVpcLinkCmd).Standalone()
+	carapace.Gen(apigateway_deleteVpcLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_deleteVpcLinkCmd).Standalone()
 
-	apigateway_deleteVpcLinkCmd.Flags().String("vpc-link-id", "", "The identifier of the VpcLink.")
-	apigateway_deleteVpcLinkCmd.MarkFlagRequired("vpc-link-id")
+		apigateway_deleteVpcLinkCmd.Flags().String("vpc-link-id", "", "The identifier of the VpcLink.")
+		apigateway_deleteVpcLinkCmd.MarkFlagRequired("vpc-link-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_deleteVpcLinkCmd)
 }

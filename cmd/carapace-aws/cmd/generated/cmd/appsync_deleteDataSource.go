@@ -12,11 +12,13 @@ var appsync_deleteDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_deleteDataSourceCmd).Standalone()
+	carapace.Gen(appsync_deleteDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_deleteDataSourceCmd).Standalone()
 
-	appsync_deleteDataSourceCmd.Flags().String("api-id", "", "The API ID.")
-	appsync_deleteDataSourceCmd.Flags().String("name", "", "The name of the data source.")
-	appsync_deleteDataSourceCmd.MarkFlagRequired("api-id")
-	appsync_deleteDataSourceCmd.MarkFlagRequired("name")
+		appsync_deleteDataSourceCmd.Flags().String("api-id", "", "The API ID.")
+		appsync_deleteDataSourceCmd.Flags().String("name", "", "The name of the data source.")
+		appsync_deleteDataSourceCmd.MarkFlagRequired("api-id")
+		appsync_deleteDataSourceCmd.MarkFlagRequired("name")
+	})
 	appsyncCmd.AddCommand(appsync_deleteDataSourceCmd)
 }

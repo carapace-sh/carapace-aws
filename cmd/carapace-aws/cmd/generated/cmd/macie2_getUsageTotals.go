@@ -12,8 +12,10 @@ var macie2_getUsageTotalsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getUsageTotalsCmd).Standalone()
+	carapace.Gen(macie2_getUsageTotalsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getUsageTotalsCmd).Standalone()
 
-	macie2_getUsageTotalsCmd.Flags().String("time-range", "", "The inclusive time period to retrieve the data for.")
+		macie2_getUsageTotalsCmd.Flags().String("time-range", "", "The inclusive time period to retrieve the data for.")
+	})
 	macie2Cmd.AddCommand(macie2_getUsageTotalsCmd)
 }

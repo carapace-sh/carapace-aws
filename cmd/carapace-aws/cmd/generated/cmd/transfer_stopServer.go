@@ -12,9 +12,11 @@ var transfer_stopServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_stopServerCmd).Standalone()
+	carapace.Gen(transfer_stopServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_stopServerCmd).Standalone()
 
-	transfer_stopServerCmd.Flags().String("server-id", "", "A system-assigned unique identifier for a server that you stopped.")
-	transfer_stopServerCmd.MarkFlagRequired("server-id")
+		transfer_stopServerCmd.Flags().String("server-id", "", "A system-assigned unique identifier for a server that you stopped.")
+		transfer_stopServerCmd.MarkFlagRequired("server-id")
+	})
 	transferCmd.AddCommand(transfer_stopServerCmd)
 }

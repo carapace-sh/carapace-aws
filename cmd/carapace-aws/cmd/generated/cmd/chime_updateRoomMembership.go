@@ -12,14 +12,16 @@ var chime_updateRoomMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_updateRoomMembershipCmd).Standalone()
+	carapace.Gen(chime_updateRoomMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_updateRoomMembershipCmd).Standalone()
 
-	chime_updateRoomMembershipCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_updateRoomMembershipCmd.Flags().String("member-id", "", "The member ID.")
-	chime_updateRoomMembershipCmd.Flags().String("role", "", "The role of the member.")
-	chime_updateRoomMembershipCmd.Flags().String("room-id", "", "The room ID.")
-	chime_updateRoomMembershipCmd.MarkFlagRequired("account-id")
-	chime_updateRoomMembershipCmd.MarkFlagRequired("member-id")
-	chime_updateRoomMembershipCmd.MarkFlagRequired("room-id")
+		chime_updateRoomMembershipCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_updateRoomMembershipCmd.Flags().String("member-id", "", "The member ID.")
+		chime_updateRoomMembershipCmd.Flags().String("role", "", "The role of the member.")
+		chime_updateRoomMembershipCmd.Flags().String("room-id", "", "The room ID.")
+		chime_updateRoomMembershipCmd.MarkFlagRequired("account-id")
+		chime_updateRoomMembershipCmd.MarkFlagRequired("member-id")
+		chime_updateRoomMembershipCmd.MarkFlagRequired("room-id")
+	})
 	chimeCmd.AddCommand(chime_updateRoomMembershipCmd)
 }

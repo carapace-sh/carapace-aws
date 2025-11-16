@@ -12,9 +12,11 @@ var vpcLattice_deleteAuthPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deleteAuthPolicyCmd).Standalone()
+	carapace.Gen(vpcLattice_deleteAuthPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deleteAuthPolicyCmd).Standalone()
 
-	vpcLattice_deleteAuthPolicyCmd.Flags().String("resource-identifier", "", "The ID or ARN of the resource.")
-	vpcLattice_deleteAuthPolicyCmd.MarkFlagRequired("resource-identifier")
+		vpcLattice_deleteAuthPolicyCmd.Flags().String("resource-identifier", "", "The ID or ARN of the resource.")
+		vpcLattice_deleteAuthPolicyCmd.MarkFlagRequired("resource-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deleteAuthPolicyCmd)
 }

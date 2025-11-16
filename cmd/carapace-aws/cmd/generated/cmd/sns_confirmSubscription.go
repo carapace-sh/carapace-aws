@@ -12,12 +12,14 @@ var sns_confirmSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_confirmSubscriptionCmd).Standalone()
+	carapace.Gen(sns_confirmSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_confirmSubscriptionCmd).Standalone()
 
-	sns_confirmSubscriptionCmd.Flags().String("authenticate-on-unsubscribe", "", "Disallows unauthenticated unsubscribes of the subscription.")
-	sns_confirmSubscriptionCmd.Flags().String("token", "", "Short-lived token sent to an endpoint during the `Subscribe` action.")
-	sns_confirmSubscriptionCmd.Flags().String("topic-arn", "", "The ARN of the topic for which you wish to confirm a subscription.")
-	sns_confirmSubscriptionCmd.MarkFlagRequired("token")
-	sns_confirmSubscriptionCmd.MarkFlagRequired("topic-arn")
+		sns_confirmSubscriptionCmd.Flags().String("authenticate-on-unsubscribe", "", "Disallows unauthenticated unsubscribes of the subscription.")
+		sns_confirmSubscriptionCmd.Flags().String("token", "", "Short-lived token sent to an endpoint during the `Subscribe` action.")
+		sns_confirmSubscriptionCmd.Flags().String("topic-arn", "", "The ARN of the topic for which you wish to confirm a subscription.")
+		sns_confirmSubscriptionCmd.MarkFlagRequired("token")
+		sns_confirmSubscriptionCmd.MarkFlagRequired("topic-arn")
+	})
 	snsCmd.AddCommand(sns_confirmSubscriptionCmd)
 }

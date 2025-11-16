@@ -12,9 +12,11 @@ var events_putPartnerEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_putPartnerEventsCmd).Standalone()
+	carapace.Gen(events_putPartnerEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_putPartnerEventsCmd).Standalone()
 
-	events_putPartnerEventsCmd.Flags().String("entries", "", "The list of events to write to the event bus.")
-	events_putPartnerEventsCmd.MarkFlagRequired("entries")
+		events_putPartnerEventsCmd.Flags().String("entries", "", "The list of events to write to the event bus.")
+		events_putPartnerEventsCmd.MarkFlagRequired("entries")
+	})
 	eventsCmd.AddCommand(events_putPartnerEventsCmd)
 }

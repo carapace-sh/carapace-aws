@@ -12,10 +12,12 @@ var iotsitewise_deleteDashboardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_deleteDashboardCmd).Standalone()
+	carapace.Gen(iotsitewise_deleteDashboardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_deleteDashboardCmd).Standalone()
 
-	iotsitewise_deleteDashboardCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_deleteDashboardCmd.Flags().String("dashboard-id", "", "The ID of the dashboard to delete.")
-	iotsitewise_deleteDashboardCmd.MarkFlagRequired("dashboard-id")
+		iotsitewise_deleteDashboardCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_deleteDashboardCmd.Flags().String("dashboard-id", "", "The ID of the dashboard to delete.")
+		iotsitewise_deleteDashboardCmd.MarkFlagRequired("dashboard-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_deleteDashboardCmd)
 }

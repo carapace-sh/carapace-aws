@@ -12,9 +12,11 @@ var lakeformation_updateDataCellsFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_updateDataCellsFilterCmd).Standalone()
+	carapace.Gen(lakeformation_updateDataCellsFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_updateDataCellsFilterCmd).Standalone()
 
-	lakeformation_updateDataCellsFilterCmd.Flags().String("table-data", "", "A `DataCellsFilter` structure containing information about the data cells filter.")
-	lakeformation_updateDataCellsFilterCmd.MarkFlagRequired("table-data")
+		lakeformation_updateDataCellsFilterCmd.Flags().String("table-data", "", "A `DataCellsFilter` structure containing information about the data cells filter.")
+		lakeformation_updateDataCellsFilterCmd.MarkFlagRequired("table-data")
+	})
 	lakeformationCmd.AddCommand(lakeformation_updateDataCellsFilterCmd)
 }

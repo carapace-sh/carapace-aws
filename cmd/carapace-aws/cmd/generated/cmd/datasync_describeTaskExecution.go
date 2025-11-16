@@ -12,9 +12,11 @@ var datasync_describeTaskExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeTaskExecutionCmd).Standalone()
+	carapace.Gen(datasync_describeTaskExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeTaskExecutionCmd).Standalone()
 
-	datasync_describeTaskExecutionCmd.Flags().String("task-execution-arn", "", "Specifies the Amazon Resource Name (ARN) of the task execution that you want information about.")
-	datasync_describeTaskExecutionCmd.MarkFlagRequired("task-execution-arn")
+		datasync_describeTaskExecutionCmd.Flags().String("task-execution-arn", "", "Specifies the Amazon Resource Name (ARN) of the task execution that you want information about.")
+		datasync_describeTaskExecutionCmd.MarkFlagRequired("task-execution-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeTaskExecutionCmd)
 }

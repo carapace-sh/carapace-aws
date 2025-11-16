@@ -12,10 +12,12 @@ var applicationInsights_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_listApplicationsCmd).Standalone()
+	carapace.Gen(applicationInsights_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_listApplicationsCmd).Standalone()
 
-	applicationInsights_listApplicationsCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the resource group owner.")
-	applicationInsights_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	applicationInsights_listApplicationsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		applicationInsights_listApplicationsCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the resource group owner.")
+		applicationInsights_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		applicationInsights_listApplicationsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_listApplicationsCmd)
 }

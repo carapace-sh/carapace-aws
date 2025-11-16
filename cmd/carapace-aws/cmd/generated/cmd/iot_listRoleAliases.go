@@ -12,10 +12,12 @@ var iot_listRoleAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listRoleAliasesCmd).Standalone()
+	carapace.Gen(iot_listRoleAliasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listRoleAliasesCmd).Standalone()
 
-	iot_listRoleAliasesCmd.Flags().String("ascending-order", "", "Return the list of role aliases in ascending alphabetical order.")
-	iot_listRoleAliasesCmd.Flags().String("marker", "", "A marker used to get the next set of results.")
-	iot_listRoleAliasesCmd.Flags().String("page-size", "", "The maximum number of results to return at one time.")
+		iot_listRoleAliasesCmd.Flags().String("ascending-order", "", "Return the list of role aliases in ascending alphabetical order.")
+		iot_listRoleAliasesCmd.Flags().String("marker", "", "A marker used to get the next set of results.")
+		iot_listRoleAliasesCmd.Flags().String("page-size", "", "The maximum number of results to return at one time.")
+	})
 	iotCmd.AddCommand(iot_listRoleAliasesCmd)
 }

@@ -12,9 +12,11 @@ var emrServerless_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrServerless_deleteApplicationCmd).Standalone()
+	carapace.Gen(emrServerless_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrServerless_deleteApplicationCmd).Standalone()
 
-	emrServerless_deleteApplicationCmd.Flags().String("application-id", "", "The ID of the application that will be deleted.")
-	emrServerless_deleteApplicationCmd.MarkFlagRequired("application-id")
+		emrServerless_deleteApplicationCmd.Flags().String("application-id", "", "The ID of the application that will be deleted.")
+		emrServerless_deleteApplicationCmd.MarkFlagRequired("application-id")
+	})
 	emrServerlessCmd.AddCommand(emrServerless_deleteApplicationCmd)
 }

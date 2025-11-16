@@ -12,15 +12,17 @@ var qapps_createLibraryItemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_createLibraryItemCmd).Standalone()
+	carapace.Gen(qapps_createLibraryItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_createLibraryItemCmd).Standalone()
 
-	qapps_createLibraryItemCmd.Flags().String("app-id", "", "The unique identifier of the Amazon Q App to publish to the library.")
-	qapps_createLibraryItemCmd.Flags().String("app-version", "", "The version of the Amazon Q App to publish to the library.")
-	qapps_createLibraryItemCmd.Flags().String("categories", "", "The categories to associate with the library item for easier discovery.")
-	qapps_createLibraryItemCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_createLibraryItemCmd.MarkFlagRequired("app-id")
-	qapps_createLibraryItemCmd.MarkFlagRequired("app-version")
-	qapps_createLibraryItemCmd.MarkFlagRequired("categories")
-	qapps_createLibraryItemCmd.MarkFlagRequired("instance-id")
+		qapps_createLibraryItemCmd.Flags().String("app-id", "", "The unique identifier of the Amazon Q App to publish to the library.")
+		qapps_createLibraryItemCmd.Flags().String("app-version", "", "The version of the Amazon Q App to publish to the library.")
+		qapps_createLibraryItemCmd.Flags().String("categories", "", "The categories to associate with the library item for easier discovery.")
+		qapps_createLibraryItemCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_createLibraryItemCmd.MarkFlagRequired("app-id")
+		qapps_createLibraryItemCmd.MarkFlagRequired("app-version")
+		qapps_createLibraryItemCmd.MarkFlagRequired("categories")
+		qapps_createLibraryItemCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_createLibraryItemCmd)
 }

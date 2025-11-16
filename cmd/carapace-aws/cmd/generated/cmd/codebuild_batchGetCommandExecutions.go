@@ -12,11 +12,13 @@ var codebuild_batchGetCommandExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_batchGetCommandExecutionsCmd).Standalone()
+	carapace.Gen(codebuild_batchGetCommandExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_batchGetCommandExecutionsCmd).Standalone()
 
-	codebuild_batchGetCommandExecutionsCmd.Flags().String("command-execution-ids", "", "A comma separated list of `commandExecutionIds`.")
-	codebuild_batchGetCommandExecutionsCmd.Flags().String("sandbox-id", "", "A `sandboxId` or `sandboxArn`.")
-	codebuild_batchGetCommandExecutionsCmd.MarkFlagRequired("command-execution-ids")
-	codebuild_batchGetCommandExecutionsCmd.MarkFlagRequired("sandbox-id")
+		codebuild_batchGetCommandExecutionsCmd.Flags().String("command-execution-ids", "", "A comma separated list of `commandExecutionIds`.")
+		codebuild_batchGetCommandExecutionsCmd.Flags().String("sandbox-id", "", "A `sandboxId` or `sandboxArn`.")
+		codebuild_batchGetCommandExecutionsCmd.MarkFlagRequired("command-execution-ids")
+		codebuild_batchGetCommandExecutionsCmd.MarkFlagRequired("sandbox-id")
+	})
 	codebuildCmd.AddCommand(codebuild_batchGetCommandExecutionsCmd)
 }

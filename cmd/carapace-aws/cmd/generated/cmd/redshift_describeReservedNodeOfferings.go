@@ -12,10 +12,12 @@ var redshift_describeReservedNodeOfferingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeReservedNodeOfferingsCmd).Standalone()
+	carapace.Gen(redshift_describeReservedNodeOfferingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeReservedNodeOfferingsCmd).Standalone()
 
-	redshift_describeReservedNodeOfferingsCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
-	redshift_describeReservedNodeOfferingsCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
-	redshift_describeReservedNodeOfferingsCmd.Flags().String("reserved-node-offering-id", "", "The unique identifier for the offering.")
+		redshift_describeReservedNodeOfferingsCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
+		redshift_describeReservedNodeOfferingsCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
+		redshift_describeReservedNodeOfferingsCmd.Flags().String("reserved-node-offering-id", "", "The unique identifier for the offering.")
+	})
 	redshiftCmd.AddCommand(redshift_describeReservedNodeOfferingsCmd)
 }

@@ -12,11 +12,13 @@ var codepipeline_getThirdPartyJobDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_getThirdPartyJobDetailsCmd).Standalone()
+	carapace.Gen(codepipeline_getThirdPartyJobDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_getThirdPartyJobDetailsCmd).Standalone()
 
-	codepipeline_getThirdPartyJobDetailsCmd.Flags().String("client-token", "", "The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.")
-	codepipeline_getThirdPartyJobDetailsCmd.Flags().String("job-id", "", "The unique system-generated ID used for identifying the job.")
-	codepipeline_getThirdPartyJobDetailsCmd.MarkFlagRequired("client-token")
-	codepipeline_getThirdPartyJobDetailsCmd.MarkFlagRequired("job-id")
+		codepipeline_getThirdPartyJobDetailsCmd.Flags().String("client-token", "", "The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.")
+		codepipeline_getThirdPartyJobDetailsCmd.Flags().String("job-id", "", "The unique system-generated ID used for identifying the job.")
+		codepipeline_getThirdPartyJobDetailsCmd.MarkFlagRequired("client-token")
+		codepipeline_getThirdPartyJobDetailsCmd.MarkFlagRequired("job-id")
+	})
 	codepipelineCmd.AddCommand(codepipeline_getThirdPartyJobDetailsCmd)
 }

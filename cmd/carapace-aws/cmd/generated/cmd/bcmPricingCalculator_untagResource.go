@@ -12,11 +12,13 @@ var bcmPricingCalculator_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_untagResourceCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_untagResourceCmd).Standalone()
 
-	bcmPricingCalculator_untagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource to remove tags from.")
-	bcmPricingCalculator_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to remove from the resource.")
-	bcmPricingCalculator_untagResourceCmd.MarkFlagRequired("arn")
-	bcmPricingCalculator_untagResourceCmd.MarkFlagRequired("tag-keys")
+		bcmPricingCalculator_untagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource to remove tags from.")
+		bcmPricingCalculator_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to remove from the resource.")
+		bcmPricingCalculator_untagResourceCmd.MarkFlagRequired("arn")
+		bcmPricingCalculator_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_untagResourceCmd)
 }

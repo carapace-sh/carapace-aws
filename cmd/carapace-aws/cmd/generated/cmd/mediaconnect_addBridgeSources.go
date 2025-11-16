@@ -12,11 +12,13 @@ var mediaconnect_addBridgeSourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_addBridgeSourcesCmd).Standalone()
+	carapace.Gen(mediaconnect_addBridgeSourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_addBridgeSourcesCmd).Standalone()
 
-	mediaconnect_addBridgeSourcesCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to update.")
-	mediaconnect_addBridgeSourcesCmd.Flags().String("sources", "", "The sources that you want to add to this bridge.")
-	mediaconnect_addBridgeSourcesCmd.MarkFlagRequired("bridge-arn")
-	mediaconnect_addBridgeSourcesCmd.MarkFlagRequired("sources")
+		mediaconnect_addBridgeSourcesCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to update.")
+		mediaconnect_addBridgeSourcesCmd.Flags().String("sources", "", "The sources that you want to add to this bridge.")
+		mediaconnect_addBridgeSourcesCmd.MarkFlagRequired("bridge-arn")
+		mediaconnect_addBridgeSourcesCmd.MarkFlagRequired("sources")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_addBridgeSourcesCmd)
 }

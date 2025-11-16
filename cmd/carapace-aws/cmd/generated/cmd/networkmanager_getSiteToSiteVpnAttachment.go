@@ -12,9 +12,11 @@ var networkmanager_getSiteToSiteVpnAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getSiteToSiteVpnAttachmentCmd).Standalone()
+	carapace.Gen(networkmanager_getSiteToSiteVpnAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getSiteToSiteVpnAttachmentCmd).Standalone()
 
-	networkmanager_getSiteToSiteVpnAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment.")
-	networkmanager_getSiteToSiteVpnAttachmentCmd.MarkFlagRequired("attachment-id")
+		networkmanager_getSiteToSiteVpnAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment.")
+		networkmanager_getSiteToSiteVpnAttachmentCmd.MarkFlagRequired("attachment-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getSiteToSiteVpnAttachmentCmd)
 }

@@ -12,9 +12,11 @@ var athena_getWorkGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_getWorkGroupCmd).Standalone()
+	carapace.Gen(athena_getWorkGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_getWorkGroupCmd).Standalone()
 
-	athena_getWorkGroupCmd.Flags().String("work-group", "", "The name of the workgroup.")
-	athena_getWorkGroupCmd.MarkFlagRequired("work-group")
+		athena_getWorkGroupCmd.Flags().String("work-group", "", "The name of the workgroup.")
+		athena_getWorkGroupCmd.MarkFlagRequired("work-group")
+	})
 	athenaCmd.AddCommand(athena_getWorkGroupCmd)
 }

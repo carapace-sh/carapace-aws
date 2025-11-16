@@ -12,11 +12,13 @@ var elasticache_testFailoverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_testFailoverCmd).Standalone()
+	carapace.Gen(elasticache_testFailoverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_testFailoverCmd).Standalone()
 
-	elasticache_testFailoverCmd.Flags().String("node-group-id", "", "The name of the node group (called shard in the console) in this replication group on which automatic failover is to be tested.")
-	elasticache_testFailoverCmd.Flags().String("replication-group-id", "", "The name of the replication group (console: cluster) whose automatic failover is being tested by this operation.")
-	elasticache_testFailoverCmd.MarkFlagRequired("node-group-id")
-	elasticache_testFailoverCmd.MarkFlagRequired("replication-group-id")
+		elasticache_testFailoverCmd.Flags().String("node-group-id", "", "The name of the node group (called shard in the console) in this replication group on which automatic failover is to be tested.")
+		elasticache_testFailoverCmd.Flags().String("replication-group-id", "", "The name of the replication group (console: cluster) whose automatic failover is being tested by this operation.")
+		elasticache_testFailoverCmd.MarkFlagRequired("node-group-id")
+		elasticache_testFailoverCmd.MarkFlagRequired("replication-group-id")
+	})
 	elasticacheCmd.AddCommand(elasticache_testFailoverCmd)
 }

@@ -12,9 +12,11 @@ var codecommit_getRepositoryTriggersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_getRepositoryTriggersCmd).Standalone()
+	carapace.Gen(codecommit_getRepositoryTriggersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_getRepositoryTriggersCmd).Standalone()
 
-	codecommit_getRepositoryTriggersCmd.Flags().String("repository-name", "", "The name of the repository for which the trigger is configured.")
-	codecommit_getRepositoryTriggersCmd.MarkFlagRequired("repository-name")
+		codecommit_getRepositoryTriggersCmd.Flags().String("repository-name", "", "The name of the repository for which the trigger is configured.")
+		codecommit_getRepositoryTriggersCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_getRepositoryTriggersCmd)
 }

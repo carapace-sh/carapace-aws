@@ -12,11 +12,13 @@ var ses_setIdentityFeedbackForwardingEnabledCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_setIdentityFeedbackForwardingEnabledCmd).Standalone()
+	carapace.Gen(ses_setIdentityFeedbackForwardingEnabledCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_setIdentityFeedbackForwardingEnabledCmd).Standalone()
 
-	ses_setIdentityFeedbackForwardingEnabledCmd.Flags().String("forwarding-enabled", "", "Sets whether Amazon SES forwards bounce and complaint notifications as email.")
-	ses_setIdentityFeedbackForwardingEnabledCmd.Flags().String("identity", "", "The identity for which to set bounce and complaint notification forwarding.")
-	ses_setIdentityFeedbackForwardingEnabledCmd.MarkFlagRequired("forwarding-enabled")
-	ses_setIdentityFeedbackForwardingEnabledCmd.MarkFlagRequired("identity")
+		ses_setIdentityFeedbackForwardingEnabledCmd.Flags().String("forwarding-enabled", "", "Sets whether Amazon SES forwards bounce and complaint notifications as email.")
+		ses_setIdentityFeedbackForwardingEnabledCmd.Flags().String("identity", "", "The identity for which to set bounce and complaint notification forwarding.")
+		ses_setIdentityFeedbackForwardingEnabledCmd.MarkFlagRequired("forwarding-enabled")
+		ses_setIdentityFeedbackForwardingEnabledCmd.MarkFlagRequired("identity")
+	})
 	sesCmd.AddCommand(ses_setIdentityFeedbackForwardingEnabledCmd)
 }

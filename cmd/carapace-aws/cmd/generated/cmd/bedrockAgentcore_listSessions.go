@@ -12,13 +12,15 @@ var bedrockAgentcore_listSessionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_listSessionsCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_listSessionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_listSessionsCmd).Standalone()
 
-	bedrockAgentcore_listSessionsCmd.Flags().String("actor-id", "", "The identifier of the actor for which to list sessions.")
-	bedrockAgentcore_listSessionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	bedrockAgentcore_listSessionsCmd.Flags().String("memory-id", "", "The identifier of the AgentCore Memory resource for which to list sessions.")
-	bedrockAgentcore_listSessionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	bedrockAgentcore_listSessionsCmd.MarkFlagRequired("actor-id")
-	bedrockAgentcore_listSessionsCmd.MarkFlagRequired("memory-id")
+		bedrockAgentcore_listSessionsCmd.Flags().String("actor-id", "", "The identifier of the actor for which to list sessions.")
+		bedrockAgentcore_listSessionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		bedrockAgentcore_listSessionsCmd.Flags().String("memory-id", "", "The identifier of the AgentCore Memory resource for which to list sessions.")
+		bedrockAgentcore_listSessionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		bedrockAgentcore_listSessionsCmd.MarkFlagRequired("actor-id")
+		bedrockAgentcore_listSessionsCmd.MarkFlagRequired("memory-id")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_listSessionsCmd)
 }

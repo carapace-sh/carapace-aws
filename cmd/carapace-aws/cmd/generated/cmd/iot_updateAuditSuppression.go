@@ -12,14 +12,16 @@ var iot_updateAuditSuppressionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateAuditSuppressionCmd).Standalone()
+	carapace.Gen(iot_updateAuditSuppressionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateAuditSuppressionCmd).Standalone()
 
-	iot_updateAuditSuppressionCmd.Flags().String("check-name", "", "")
-	iot_updateAuditSuppressionCmd.Flags().String("description", "", "The description of the audit suppression.")
-	iot_updateAuditSuppressionCmd.Flags().String("expiration-date", "", "The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to.")
-	iot_updateAuditSuppressionCmd.Flags().String("resource-identifier", "", "")
-	iot_updateAuditSuppressionCmd.Flags().String("suppress-indefinitely", "", "Indicates whether a suppression should exist indefinitely or not.")
-	iot_updateAuditSuppressionCmd.MarkFlagRequired("check-name")
-	iot_updateAuditSuppressionCmd.MarkFlagRequired("resource-identifier")
+		iot_updateAuditSuppressionCmd.Flags().String("check-name", "", "")
+		iot_updateAuditSuppressionCmd.Flags().String("description", "", "The description of the audit suppression.")
+		iot_updateAuditSuppressionCmd.Flags().String("expiration-date", "", "The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to.")
+		iot_updateAuditSuppressionCmd.Flags().String("resource-identifier", "", "")
+		iot_updateAuditSuppressionCmd.Flags().String("suppress-indefinitely", "", "Indicates whether a suppression should exist indefinitely or not.")
+		iot_updateAuditSuppressionCmd.MarkFlagRequired("check-name")
+		iot_updateAuditSuppressionCmd.MarkFlagRequired("resource-identifier")
+	})
 	iotCmd.AddCommand(iot_updateAuditSuppressionCmd)
 }

@@ -12,9 +12,11 @@ var ecr_putRegistryPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_putRegistryPolicyCmd).Standalone()
+	carapace.Gen(ecr_putRegistryPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_putRegistryPolicyCmd).Standalone()
 
-	ecr_putRegistryPolicyCmd.Flags().String("policy-text", "", "The JSON policy text to apply to your registry.")
-	ecr_putRegistryPolicyCmd.MarkFlagRequired("policy-text")
+		ecr_putRegistryPolicyCmd.Flags().String("policy-text", "", "The JSON policy text to apply to your registry.")
+		ecr_putRegistryPolicyCmd.MarkFlagRequired("policy-text")
+	})
 	ecrCmd.AddCommand(ecr_putRegistryPolicyCmd)
 }

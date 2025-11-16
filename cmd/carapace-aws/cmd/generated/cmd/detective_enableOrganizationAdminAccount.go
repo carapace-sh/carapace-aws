@@ -12,9 +12,11 @@ var detective_enableOrganizationAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_enableOrganizationAdminAccountCmd).Standalone()
+	carapace.Gen(detective_enableOrganizationAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_enableOrganizationAdminAccountCmd).Standalone()
 
-	detective_enableOrganizationAdminAccountCmd.Flags().String("account-id", "", "The Amazon Web Services account identifier of the account to designate as the Detective administrator account for the organization.")
-	detective_enableOrganizationAdminAccountCmd.MarkFlagRequired("account-id")
+		detective_enableOrganizationAdminAccountCmd.Flags().String("account-id", "", "The Amazon Web Services account identifier of the account to designate as the Detective administrator account for the organization.")
+		detective_enableOrganizationAdminAccountCmd.MarkFlagRequired("account-id")
+	})
 	detectiveCmd.AddCommand(detective_enableOrganizationAdminAccountCmd)
 }

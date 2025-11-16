@@ -12,9 +12,11 @@ var lookoutequipment_deleteInferenceSchedulerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_deleteInferenceSchedulerCmd).Standalone()
+	carapace.Gen(lookoutequipment_deleteInferenceSchedulerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_deleteInferenceSchedulerCmd).Standalone()
 
-	lookoutequipment_deleteInferenceSchedulerCmd.Flags().String("inference-scheduler-name", "", "The name of the inference scheduler to be deleted.")
-	lookoutequipment_deleteInferenceSchedulerCmd.MarkFlagRequired("inference-scheduler-name")
+		lookoutequipment_deleteInferenceSchedulerCmd.Flags().String("inference-scheduler-name", "", "The name of the inference scheduler to be deleted.")
+		lookoutequipment_deleteInferenceSchedulerCmd.MarkFlagRequired("inference-scheduler-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_deleteInferenceSchedulerCmd)
 }

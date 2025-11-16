@@ -12,7 +12,9 @@ var backupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupCmd).Standalone()
+	carapace.Gen(backupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(backupCmd)
 }

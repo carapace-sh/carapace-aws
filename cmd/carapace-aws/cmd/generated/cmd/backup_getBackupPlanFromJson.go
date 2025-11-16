@@ -12,9 +12,11 @@ var backup_getBackupPlanFromJsonCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_getBackupPlanFromJsonCmd).Standalone()
+	carapace.Gen(backup_getBackupPlanFromJsonCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_getBackupPlanFromJsonCmd).Standalone()
 
-	backup_getBackupPlanFromJsonCmd.Flags().String("backup-plan-template-json", "", "A customer-supplied backup plan document in JSON format.")
-	backup_getBackupPlanFromJsonCmd.MarkFlagRequired("backup-plan-template-json")
+		backup_getBackupPlanFromJsonCmd.Flags().String("backup-plan-template-json", "", "A customer-supplied backup plan document in JSON format.")
+		backup_getBackupPlanFromJsonCmd.MarkFlagRequired("backup-plan-template-json")
+	})
 	backupCmd.AddCommand(backup_getBackupPlanFromJsonCmd)
 }

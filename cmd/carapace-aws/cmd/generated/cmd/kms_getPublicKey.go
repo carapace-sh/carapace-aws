@@ -12,10 +12,12 @@ var kms_getPublicKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_getPublicKeyCmd).Standalone()
+	carapace.Gen(kms_getPublicKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_getPublicKeyCmd).Standalone()
 
-	kms_getPublicKeyCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
-	kms_getPublicKeyCmd.Flags().String("key-id", "", "Identifies the asymmetric KMS key that includes the public key.")
-	kms_getPublicKeyCmd.MarkFlagRequired("key-id")
+		kms_getPublicKeyCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
+		kms_getPublicKeyCmd.Flags().String("key-id", "", "Identifies the asymmetric KMS key that includes the public key.")
+		kms_getPublicKeyCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_getPublicKeyCmd)
 }

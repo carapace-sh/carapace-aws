@@ -12,11 +12,13 @@ var glue_deleteSchemaVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteSchemaVersionsCmd).Standalone()
+	carapace.Gen(glue_deleteSchemaVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteSchemaVersionsCmd).Standalone()
 
-	glue_deleteSchemaVersionsCmd.Flags().String("schema-id", "", "This is a wrapper structure that may contain the schema name and Amazon Resource Name (ARN).")
-	glue_deleteSchemaVersionsCmd.Flags().String("versions", "", "A version range may be supplied which may be of the format:")
-	glue_deleteSchemaVersionsCmd.MarkFlagRequired("schema-id")
-	glue_deleteSchemaVersionsCmd.MarkFlagRequired("versions")
+		glue_deleteSchemaVersionsCmd.Flags().String("schema-id", "", "This is a wrapper structure that may contain the schema name and Amazon Resource Name (ARN).")
+		glue_deleteSchemaVersionsCmd.Flags().String("versions", "", "A version range may be supplied which may be of the format:")
+		glue_deleteSchemaVersionsCmd.MarkFlagRequired("schema-id")
+		glue_deleteSchemaVersionsCmd.MarkFlagRequired("versions")
+	})
 	glueCmd.AddCommand(glue_deleteSchemaVersionsCmd)
 }

@@ -12,9 +12,11 @@ var lightsail_stopGuisessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_stopGuisessionCmd).Standalone()
+	carapace.Gen(lightsail_stopGuisessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_stopGuisessionCmd).Standalone()
 
-	lightsail_stopGuisessionCmd.Flags().String("resource-name", "", "The resource name.")
-	lightsail_stopGuisessionCmd.MarkFlagRequired("resource-name")
+		lightsail_stopGuisessionCmd.Flags().String("resource-name", "", "The resource name.")
+		lightsail_stopGuisessionCmd.MarkFlagRequired("resource-name")
+	})
 	lightsailCmd.AddCommand(lightsail_stopGuisessionCmd)
 }

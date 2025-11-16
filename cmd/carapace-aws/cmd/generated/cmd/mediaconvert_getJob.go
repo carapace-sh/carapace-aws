@@ -12,9 +12,11 @@ var mediaconvert_getJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_getJobCmd).Standalone()
+	carapace.Gen(mediaconvert_getJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_getJobCmd).Standalone()
 
-	mediaconvert_getJobCmd.Flags().String("id", "", "the job ID of the job.")
-	mediaconvert_getJobCmd.MarkFlagRequired("id")
+		mediaconvert_getJobCmd.Flags().String("id", "", "the job ID of the job.")
+		mediaconvert_getJobCmd.MarkFlagRequired("id")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_getJobCmd)
 }

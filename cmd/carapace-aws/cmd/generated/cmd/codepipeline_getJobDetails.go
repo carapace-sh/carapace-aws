@@ -12,9 +12,11 @@ var codepipeline_getJobDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_getJobDetailsCmd).Standalone()
+	carapace.Gen(codepipeline_getJobDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_getJobDetailsCmd).Standalone()
 
-	codepipeline_getJobDetailsCmd.Flags().String("job-id", "", "The unique system-generated ID for the job.")
-	codepipeline_getJobDetailsCmd.MarkFlagRequired("job-id")
+		codepipeline_getJobDetailsCmd.Flags().String("job-id", "", "The unique system-generated ID for the job.")
+		codepipeline_getJobDetailsCmd.MarkFlagRequired("job-id")
+	})
 	codepipelineCmd.AddCommand(codepipeline_getJobDetailsCmd)
 }

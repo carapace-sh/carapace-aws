@@ -12,8 +12,10 @@ var lightsail_getRelationalDatabaseSnapshotsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getRelationalDatabaseSnapshotsCmd).Standalone()
+	carapace.Gen(lightsail_getRelationalDatabaseSnapshotsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getRelationalDatabaseSnapshotsCmd).Standalone()
 
-	lightsail_getRelationalDatabaseSnapshotsCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+		lightsail_getRelationalDatabaseSnapshotsCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+	})
 	lightsailCmd.AddCommand(lightsail_getRelationalDatabaseSnapshotsCmd)
 }

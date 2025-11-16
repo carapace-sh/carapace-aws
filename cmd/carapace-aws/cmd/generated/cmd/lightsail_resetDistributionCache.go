@@ -12,8 +12,10 @@ var lightsail_resetDistributionCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_resetDistributionCacheCmd).Standalone()
+	carapace.Gen(lightsail_resetDistributionCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_resetDistributionCacheCmd).Standalone()
 
-	lightsail_resetDistributionCacheCmd.Flags().String("distribution-name", "", "The name of the distribution for which to reset cache.")
+		lightsail_resetDistributionCacheCmd.Flags().String("distribution-name", "", "The name of the distribution for which to reset cache.")
+	})
 	lightsailCmd.AddCommand(lightsail_resetDistributionCacheCmd)
 }

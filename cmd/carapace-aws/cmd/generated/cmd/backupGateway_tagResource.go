@@ -12,11 +12,13 @@ var backupGateway_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_tagResourceCmd).Standalone()
+	carapace.Gen(backupGateway_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_tagResourceCmd).Standalone()
 
-	backupGateway_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to tag.")
-	backupGateway_tagResourceCmd.Flags().String("tags", "", "A list of tags to assign to the resource.")
-	backupGateway_tagResourceCmd.MarkFlagRequired("resource-arn")
-	backupGateway_tagResourceCmd.MarkFlagRequired("tags")
+		backupGateway_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to tag.")
+		backupGateway_tagResourceCmd.Flags().String("tags", "", "A list of tags to assign to the resource.")
+		backupGateway_tagResourceCmd.MarkFlagRequired("resource-arn")
+		backupGateway_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_tagResourceCmd)
 }

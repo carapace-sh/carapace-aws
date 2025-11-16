@@ -12,13 +12,15 @@ var swf_registerDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_registerDomainCmd).Standalone()
+	carapace.Gen(swf_registerDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_registerDomainCmd).Standalone()
 
-	swf_registerDomainCmd.Flags().String("description", "", "A text description of the domain.")
-	swf_registerDomainCmd.Flags().String("name", "", "Name of the domain to register.")
-	swf_registerDomainCmd.Flags().String("tags", "", "Tags to be added when registering a domain.")
-	swf_registerDomainCmd.Flags().String("workflow-execution-retention-period-in-days", "", "The duration (in days) that records and histories of workflow executions on the domain should be kept by the service.")
-	swf_registerDomainCmd.MarkFlagRequired("name")
-	swf_registerDomainCmd.MarkFlagRequired("workflow-execution-retention-period-in-days")
+		swf_registerDomainCmd.Flags().String("description", "", "A text description of the domain.")
+		swf_registerDomainCmd.Flags().String("name", "", "Name of the domain to register.")
+		swf_registerDomainCmd.Flags().String("tags", "", "Tags to be added when registering a domain.")
+		swf_registerDomainCmd.Flags().String("workflow-execution-retention-period-in-days", "", "The duration (in days) that records and histories of workflow executions on the domain should be kept by the service.")
+		swf_registerDomainCmd.MarkFlagRequired("name")
+		swf_registerDomainCmd.MarkFlagRequired("workflow-execution-retention-period-in-days")
+	})
 	swfCmd.AddCommand(swf_registerDomainCmd)
 }

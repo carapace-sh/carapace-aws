@@ -12,13 +12,15 @@ var chimeSdkMessaging_deleteChannelBanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_deleteChannelBanCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_deleteChannelBanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_deleteChannelBanCmd).Standalone()
 
-	chimeSdkMessaging_deleteChannelBanCmd.Flags().String("channel-arn", "", "The ARN of the channel from which the `AppInstanceUser` was banned.")
-	chimeSdkMessaging_deleteChannelBanCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_deleteChannelBanCmd.Flags().String("member-arn", "", "The ARN of the `AppInstanceUser` that you want to reinstate.")
-	chimeSdkMessaging_deleteChannelBanCmd.MarkFlagRequired("channel-arn")
-	chimeSdkMessaging_deleteChannelBanCmd.MarkFlagRequired("chime-bearer")
-	chimeSdkMessaging_deleteChannelBanCmd.MarkFlagRequired("member-arn")
+		chimeSdkMessaging_deleteChannelBanCmd.Flags().String("channel-arn", "", "The ARN of the channel from which the `AppInstanceUser` was banned.")
+		chimeSdkMessaging_deleteChannelBanCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_deleteChannelBanCmd.Flags().String("member-arn", "", "The ARN of the `AppInstanceUser` that you want to reinstate.")
+		chimeSdkMessaging_deleteChannelBanCmd.MarkFlagRequired("channel-arn")
+		chimeSdkMessaging_deleteChannelBanCmd.MarkFlagRequired("chime-bearer")
+		chimeSdkMessaging_deleteChannelBanCmd.MarkFlagRequired("member-arn")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_deleteChannelBanCmd)
 }

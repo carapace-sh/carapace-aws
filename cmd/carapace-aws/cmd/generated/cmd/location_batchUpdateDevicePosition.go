@@ -12,11 +12,13 @@ var location_batchUpdateDevicePositionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_batchUpdateDevicePositionCmd).Standalone()
+	carapace.Gen(location_batchUpdateDevicePositionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_batchUpdateDevicePositionCmd).Standalone()
 
-	location_batchUpdateDevicePositionCmd.Flags().String("tracker-name", "", "The name of the tracker resource to update.")
-	location_batchUpdateDevicePositionCmd.Flags().String("updates", "", "Contains the position update details for each device, up to 10 devices.")
-	location_batchUpdateDevicePositionCmd.MarkFlagRequired("tracker-name")
-	location_batchUpdateDevicePositionCmd.MarkFlagRequired("updates")
+		location_batchUpdateDevicePositionCmd.Flags().String("tracker-name", "", "The name of the tracker resource to update.")
+		location_batchUpdateDevicePositionCmd.Flags().String("updates", "", "Contains the position update details for each device, up to 10 devices.")
+		location_batchUpdateDevicePositionCmd.MarkFlagRequired("tracker-name")
+		location_batchUpdateDevicePositionCmd.MarkFlagRequired("updates")
+	})
 	locationCmd.AddCommand(location_batchUpdateDevicePositionCmd)
 }

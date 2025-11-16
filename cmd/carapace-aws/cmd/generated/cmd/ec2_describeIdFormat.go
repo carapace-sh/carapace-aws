@@ -12,8 +12,10 @@ var ec2_describeIdFormatCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeIdFormatCmd).Standalone()
+	carapace.Gen(ec2_describeIdFormatCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeIdFormatCmd).Standalone()
 
-	ec2_describeIdFormatCmd.Flags().String("resource", "", "The type of resource: `bundle` | `conversion-task` | `customer-gateway` | `dhcp-options` | `elastic-ip-allocation` | `elastic-ip-association` | `export-task` | `flow-log` | `image` | `import-task` | `instance` | `internet-gateway` | `network-acl` | `network-acl-association` | `network-interface` | `network-interface-attachment` | `prefix-list` | `reservation` | `route-table` | `route-table-association` | `security-group` | `snapshot` | `subnet` | `subnet-cidr-block-association` | `volume` | `vpc` | `vpc-cidr-block-association` | `vpc-endpoint` | `vpc-peering-connection` | `vpn-connection` | `vpn-gateway`")
+		ec2_describeIdFormatCmd.Flags().String("resource", "", "The type of resource: `bundle` | `conversion-task` | `customer-gateway` | `dhcp-options` | `elastic-ip-allocation` | `elastic-ip-association` | `export-task` | `flow-log` | `image` | `import-task` | `instance` | `internet-gateway` | `network-acl` | `network-acl-association` | `network-interface` | `network-interface-attachment` | `prefix-list` | `reservation` | `route-table` | `route-table-association` | `security-group` | `snapshot` | `subnet` | `subnet-cidr-block-association` | `volume` | `vpc` | `vpc-cidr-block-association` | `vpc-endpoint` | `vpc-peering-connection` | `vpn-connection` | `vpn-gateway`")
+	})
 	ec2Cmd.AddCommand(ec2_describeIdFormatCmd)
 }

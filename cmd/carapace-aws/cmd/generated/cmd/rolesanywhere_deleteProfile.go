@@ -12,9 +12,11 @@ var rolesanywhere_deleteProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_deleteProfileCmd).Standalone()
+	carapace.Gen(rolesanywhere_deleteProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_deleteProfileCmd).Standalone()
 
-	rolesanywhere_deleteProfileCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
-	rolesanywhere_deleteProfileCmd.MarkFlagRequired("profile-id")
+		rolesanywhere_deleteProfileCmd.Flags().String("profile-id", "", "The unique identifier of the profile.")
+		rolesanywhere_deleteProfileCmd.MarkFlagRequired("profile-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_deleteProfileCmd)
 }

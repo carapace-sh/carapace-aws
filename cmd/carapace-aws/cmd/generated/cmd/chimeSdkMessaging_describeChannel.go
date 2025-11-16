@@ -12,11 +12,13 @@ var chimeSdkMessaging_describeChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_describeChannelCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_describeChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_describeChannelCmd).Standalone()
 
-	chimeSdkMessaging_describeChannelCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
-	chimeSdkMessaging_describeChannelCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_describeChannelCmd.MarkFlagRequired("channel-arn")
-	chimeSdkMessaging_describeChannelCmd.MarkFlagRequired("chime-bearer")
+		chimeSdkMessaging_describeChannelCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
+		chimeSdkMessaging_describeChannelCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_describeChannelCmd.MarkFlagRequired("channel-arn")
+		chimeSdkMessaging_describeChannelCmd.MarkFlagRequired("chime-bearer")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_describeChannelCmd)
 }

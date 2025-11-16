@@ -12,10 +12,12 @@ var autoscaling_describeAutoScalingInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_describeAutoScalingInstancesCmd).Standalone()
+	carapace.Gen(autoscaling_describeAutoScalingInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_describeAutoScalingInstancesCmd).Standalone()
 
-	autoscaling_describeAutoScalingInstancesCmd.Flags().String("instance-ids", "", "The IDs of the instances.")
-	autoscaling_describeAutoScalingInstancesCmd.Flags().String("max-records", "", "The maximum number of items to return with this call.")
-	autoscaling_describeAutoScalingInstancesCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		autoscaling_describeAutoScalingInstancesCmd.Flags().String("instance-ids", "", "The IDs of the instances.")
+		autoscaling_describeAutoScalingInstancesCmd.Flags().String("max-records", "", "The maximum number of items to return with this call.")
+		autoscaling_describeAutoScalingInstancesCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	autoscalingCmd.AddCommand(autoscaling_describeAutoScalingInstancesCmd)
 }

@@ -12,10 +12,12 @@ var autoscaling_attachInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_attachInstancesCmd).Standalone()
+	carapace.Gen(autoscaling_attachInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_attachInstancesCmd).Standalone()
 
-	autoscaling_attachInstancesCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_attachInstancesCmd.Flags().String("instance-ids", "", "The IDs of the instances.")
-	autoscaling_attachInstancesCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_attachInstancesCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_attachInstancesCmd.Flags().String("instance-ids", "", "The IDs of the instances.")
+		autoscaling_attachInstancesCmd.MarkFlagRequired("auto-scaling-group-name")
+	})
 	autoscalingCmd.AddCommand(autoscaling_attachInstancesCmd)
 }

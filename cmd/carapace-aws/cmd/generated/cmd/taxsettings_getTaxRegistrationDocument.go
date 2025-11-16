@@ -12,10 +12,12 @@ var taxsettings_getTaxRegistrationDocumentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_getTaxRegistrationDocumentCmd).Standalone()
+	carapace.Gen(taxsettings_getTaxRegistrationDocumentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_getTaxRegistrationDocumentCmd).Standalone()
 
-	taxsettings_getTaxRegistrationDocumentCmd.Flags().String("destination-s3-location", "", "The Amazon S3 bucket that you specify to download your tax documents to.")
-	taxsettings_getTaxRegistrationDocumentCmd.Flags().String("tax-document-metadata", "", "The metadata for your tax document.")
-	taxsettings_getTaxRegistrationDocumentCmd.MarkFlagRequired("tax-document-metadata")
+		taxsettings_getTaxRegistrationDocumentCmd.Flags().String("destination-s3-location", "", "The Amazon S3 bucket that you specify to download your tax documents to.")
+		taxsettings_getTaxRegistrationDocumentCmd.Flags().String("tax-document-metadata", "", "The metadata for your tax document.")
+		taxsettings_getTaxRegistrationDocumentCmd.MarkFlagRequired("tax-document-metadata")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_getTaxRegistrationDocumentCmd)
 }

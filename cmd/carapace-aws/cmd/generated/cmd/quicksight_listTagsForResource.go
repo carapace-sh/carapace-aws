@@ -12,9 +12,11 @@ var quicksight_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_listTagsForResourceCmd).Standalone()
+	carapace.Gen(quicksight_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_listTagsForResourceCmd).Standalone()
 
-	quicksight_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want a list of tags for.")
-	quicksight_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		quicksight_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want a list of tags for.")
+		quicksight_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	quicksightCmd.AddCommand(quicksight_listTagsForResourceCmd)
 }

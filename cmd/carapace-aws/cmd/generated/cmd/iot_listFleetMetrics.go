@@ -12,9 +12,11 @@ var iot_listFleetMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listFleetMetricsCmd).Standalone()
+	carapace.Gen(iot_listFleetMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listFleetMetricsCmd).Standalone()
 
-	iot_listFleetMetricsCmd.Flags().String("max-results", "", "The maximum number of results to return in this operation.")
-	iot_listFleetMetricsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise `null` to receive the first set of results.")
+		iot_listFleetMetricsCmd.Flags().String("max-results", "", "The maximum number of results to return in this operation.")
+		iot_listFleetMetricsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise `null` to receive the first set of results.")
+	})
 	iotCmd.AddCommand(iot_listFleetMetricsCmd)
 }

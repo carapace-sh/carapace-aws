@@ -12,12 +12,14 @@ var lambda_publishVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_publishVersionCmd).Standalone()
+	carapace.Gen(lambda_publishVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_publishVersionCmd).Standalone()
 
-	lambda_publishVersionCmd.Flags().String("code-sha256", "", "Only publish a version if the hash value matches the value that's specified.")
-	lambda_publishVersionCmd.Flags().String("description", "", "A description for the version to override the description in the function configuration.")
-	lambda_publishVersionCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_publishVersionCmd.Flags().String("revision-id", "", "Only update the function if the revision ID matches the ID that's specified.")
-	lambda_publishVersionCmd.MarkFlagRequired("function-name")
+		lambda_publishVersionCmd.Flags().String("code-sha256", "", "Only publish a version if the hash value matches the value that's specified.")
+		lambda_publishVersionCmd.Flags().String("description", "", "A description for the version to override the description in the function configuration.")
+		lambda_publishVersionCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_publishVersionCmd.Flags().String("revision-id", "", "Only update the function if the revision ID matches the ID that's specified.")
+		lambda_publishVersionCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_publishVersionCmd)
 }

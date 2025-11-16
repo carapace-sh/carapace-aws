@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_setDefaultSenderIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_setDefaultSenderIdCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_setDefaultSenderIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_setDefaultSenderIdCmd).Standalone()
 
-	pinpointSmsVoiceV2_setDefaultSenderIdCmd.Flags().String("configuration-set-name", "", "The configuration set to updated with a new default SenderId.")
-	pinpointSmsVoiceV2_setDefaultSenderIdCmd.Flags().String("sender-id", "", "The current sender ID for the configuration set.")
-	pinpointSmsVoiceV2_setDefaultSenderIdCmd.MarkFlagRequired("configuration-set-name")
-	pinpointSmsVoiceV2_setDefaultSenderIdCmd.MarkFlagRequired("sender-id")
+		pinpointSmsVoiceV2_setDefaultSenderIdCmd.Flags().String("configuration-set-name", "", "The configuration set to updated with a new default SenderId.")
+		pinpointSmsVoiceV2_setDefaultSenderIdCmd.Flags().String("sender-id", "", "The current sender ID for the configuration set.")
+		pinpointSmsVoiceV2_setDefaultSenderIdCmd.MarkFlagRequired("configuration-set-name")
+		pinpointSmsVoiceV2_setDefaultSenderIdCmd.MarkFlagRequired("sender-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_setDefaultSenderIdCmd)
 }

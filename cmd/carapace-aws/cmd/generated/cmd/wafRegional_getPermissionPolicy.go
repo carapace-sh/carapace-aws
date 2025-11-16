@@ -12,9 +12,11 @@ var wafRegional_getPermissionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_getPermissionPolicyCmd).Standalone()
+	carapace.Gen(wafRegional_getPermissionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_getPermissionPolicyCmd).Standalone()
 
-	wafRegional_getPermissionPolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the RuleGroup for which you want to get the policy.")
-	wafRegional_getPermissionPolicyCmd.MarkFlagRequired("resource-arn")
+		wafRegional_getPermissionPolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the RuleGroup for which you want to get the policy.")
+		wafRegional_getPermissionPolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_getPermissionPolicyCmd)
 }

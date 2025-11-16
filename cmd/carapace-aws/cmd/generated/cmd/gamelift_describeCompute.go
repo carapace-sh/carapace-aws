@@ -12,11 +12,13 @@ var gamelift_describeComputeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeComputeCmd).Standalone()
+	carapace.Gen(gamelift_describeComputeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeComputeCmd).Standalone()
 
-	gamelift_describeComputeCmd.Flags().String("compute-name", "", "The unique identifier of the compute resource to retrieve properties for.")
-	gamelift_describeComputeCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet that the compute belongs to.")
-	gamelift_describeComputeCmd.MarkFlagRequired("compute-name")
-	gamelift_describeComputeCmd.MarkFlagRequired("fleet-id")
+		gamelift_describeComputeCmd.Flags().String("compute-name", "", "The unique identifier of the compute resource to retrieve properties for.")
+		gamelift_describeComputeCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet that the compute belongs to.")
+		gamelift_describeComputeCmd.MarkFlagRequired("compute-name")
+		gamelift_describeComputeCmd.MarkFlagRequired("fleet-id")
+	})
 	gameliftCmd.AddCommand(gamelift_describeComputeCmd)
 }

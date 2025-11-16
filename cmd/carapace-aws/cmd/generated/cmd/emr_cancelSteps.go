@@ -12,12 +12,14 @@ var emr_cancelStepsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_cancelStepsCmd).Standalone()
+	carapace.Gen(emr_cancelStepsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_cancelStepsCmd).Standalone()
 
-	emr_cancelStepsCmd.Flags().String("cluster-id", "", "The `ClusterID` for the specified steps that will be canceled.")
-	emr_cancelStepsCmd.Flags().String("step-cancellation-option", "", "The option to choose to cancel `RUNNING` steps.")
-	emr_cancelStepsCmd.Flags().String("step-ids", "", "The list of `StepIDs` to cancel.")
-	emr_cancelStepsCmd.MarkFlagRequired("cluster-id")
-	emr_cancelStepsCmd.MarkFlagRequired("step-ids")
+		emr_cancelStepsCmd.Flags().String("cluster-id", "", "The `ClusterID` for the specified steps that will be canceled.")
+		emr_cancelStepsCmd.Flags().String("step-cancellation-option", "", "The option to choose to cancel `RUNNING` steps.")
+		emr_cancelStepsCmd.Flags().String("step-ids", "", "The list of `StepIDs` to cancel.")
+		emr_cancelStepsCmd.MarkFlagRequired("cluster-id")
+		emr_cancelStepsCmd.MarkFlagRequired("step-ids")
+	})
 	emrCmd.AddCommand(emr_cancelStepsCmd)
 }

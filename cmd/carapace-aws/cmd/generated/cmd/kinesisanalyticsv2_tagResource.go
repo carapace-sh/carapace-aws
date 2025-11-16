@@ -12,11 +12,13 @@ var kinesisanalyticsv2_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_tagResourceCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_tagResourceCmd).Standalone()
 
-	kinesisanalyticsv2_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the application to assign the tags.")
-	kinesisanalyticsv2_tagResourceCmd.Flags().String("tags", "", "The key-value tags to assign to the application.")
-	kinesisanalyticsv2_tagResourceCmd.MarkFlagRequired("resource-arn")
-	kinesisanalyticsv2_tagResourceCmd.MarkFlagRequired("tags")
+		kinesisanalyticsv2_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the application to assign the tags.")
+		kinesisanalyticsv2_tagResourceCmd.Flags().String("tags", "", "The key-value tags to assign to the application.")
+		kinesisanalyticsv2_tagResourceCmd.MarkFlagRequired("resource-arn")
+		kinesisanalyticsv2_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_tagResourceCmd)
 }

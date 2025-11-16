@@ -12,13 +12,15 @@ var connect_listTaskTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listTaskTemplatesCmd).Standalone()
+	carapace.Gen(connect_listTaskTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listTaskTemplatesCmd).Standalone()
 
-	connect_listTaskTemplatesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listTaskTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listTaskTemplatesCmd.Flags().String("name", "", "The name of the task template.")
-	connect_listTaskTemplatesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listTaskTemplatesCmd.Flags().String("status", "", "Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to it.")
-	connect_listTaskTemplatesCmd.MarkFlagRequired("instance-id")
+		connect_listTaskTemplatesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listTaskTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listTaskTemplatesCmd.Flags().String("name", "", "The name of the task template.")
+		connect_listTaskTemplatesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listTaskTemplatesCmd.Flags().String("status", "", "Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to it.")
+		connect_listTaskTemplatesCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listTaskTemplatesCmd)
 }

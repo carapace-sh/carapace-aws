@@ -12,9 +12,11 @@ var pinpointEmail_getEmailIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getEmailIdentityCmd).Standalone()
+	carapace.Gen(pinpointEmail_getEmailIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getEmailIdentityCmd).Standalone()
 
-	pinpointEmail_getEmailIdentityCmd.Flags().String("email-identity", "", "The email identity that you want to retrieve details for.")
-	pinpointEmail_getEmailIdentityCmd.MarkFlagRequired("email-identity")
+		pinpointEmail_getEmailIdentityCmd.Flags().String("email-identity", "", "The email identity that you want to retrieve details for.")
+		pinpointEmail_getEmailIdentityCmd.MarkFlagRequired("email-identity")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getEmailIdentityCmd)
 }

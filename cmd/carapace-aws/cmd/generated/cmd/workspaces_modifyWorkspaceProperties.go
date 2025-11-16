@@ -12,11 +12,13 @@ var workspaces_modifyWorkspacePropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_modifyWorkspacePropertiesCmd).Standalone()
+	carapace.Gen(workspaces_modifyWorkspacePropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_modifyWorkspacePropertiesCmd).Standalone()
 
-	workspaces_modifyWorkspacePropertiesCmd.Flags().String("data-replication", "", "Indicates the data replication status.")
-	workspaces_modifyWorkspacePropertiesCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
-	workspaces_modifyWorkspacePropertiesCmd.Flags().String("workspace-properties", "", "The properties of the WorkSpace.")
-	workspaces_modifyWorkspacePropertiesCmd.MarkFlagRequired("workspace-id")
+		workspaces_modifyWorkspacePropertiesCmd.Flags().String("data-replication", "", "Indicates the data replication status.")
+		workspaces_modifyWorkspacePropertiesCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
+		workspaces_modifyWorkspacePropertiesCmd.Flags().String("workspace-properties", "", "The properties of the WorkSpace.")
+		workspaces_modifyWorkspacePropertiesCmd.MarkFlagRequired("workspace-id")
+	})
 	workspacesCmd.AddCommand(workspaces_modifyWorkspacePropertiesCmd)
 }

@@ -12,11 +12,13 @@ var neptunedata_listLoaderJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_listLoaderJobsCmd).Standalone()
+	carapace.Gen(neptunedata_listLoaderJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_listLoaderJobsCmd).Standalone()
 
-	neptunedata_listLoaderJobsCmd.Flags().Bool("include-queued-loads", false, "An optional parameter that can be used to exclude the load IDs of queued load requests when requesting a list of load IDs by setting the parameter to `FALSE`.")
-	neptunedata_listLoaderJobsCmd.Flags().String("limit", "", "The number of load IDs to list.")
-	neptunedata_listLoaderJobsCmd.Flags().Bool("no-include-queued-loads", false, "An optional parameter that can be used to exclude the load IDs of queued load requests when requesting a list of load IDs by setting the parameter to `FALSE`.")
-	neptunedata_listLoaderJobsCmd.Flag("no-include-queued-loads").Hidden = true
+		neptunedata_listLoaderJobsCmd.Flags().Bool("include-queued-loads", false, "An optional parameter that can be used to exclude the load IDs of queued load requests when requesting a list of load IDs by setting the parameter to `FALSE`.")
+		neptunedata_listLoaderJobsCmd.Flags().String("limit", "", "The number of load IDs to list.")
+		neptunedata_listLoaderJobsCmd.Flags().Bool("no-include-queued-loads", false, "An optional parameter that can be used to exclude the load IDs of queued load requests when requesting a list of load IDs by setting the parameter to `FALSE`.")
+		neptunedata_listLoaderJobsCmd.Flag("no-include-queued-loads").Hidden = true
+	})
 	neptunedataCmd.AddCommand(neptunedata_listLoaderJobsCmd)
 }

@@ -12,11 +12,13 @@ var chimeSdkIdentity_deleteAppInstanceAdminCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_deleteAppInstanceAdminCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_deleteAppInstanceAdminCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_deleteAppInstanceAdminCmd).Standalone()
 
-	chimeSdkIdentity_deleteAppInstanceAdminCmd.Flags().String("app-instance-admin-arn", "", "The ARN of the `AppInstance`'s administrator.")
-	chimeSdkIdentity_deleteAppInstanceAdminCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
-	chimeSdkIdentity_deleteAppInstanceAdminCmd.MarkFlagRequired("app-instance-admin-arn")
-	chimeSdkIdentity_deleteAppInstanceAdminCmd.MarkFlagRequired("app-instance-arn")
+		chimeSdkIdentity_deleteAppInstanceAdminCmd.Flags().String("app-instance-admin-arn", "", "The ARN of the `AppInstance`'s administrator.")
+		chimeSdkIdentity_deleteAppInstanceAdminCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
+		chimeSdkIdentity_deleteAppInstanceAdminCmd.MarkFlagRequired("app-instance-admin-arn")
+		chimeSdkIdentity_deleteAppInstanceAdminCmd.MarkFlagRequired("app-instance-arn")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_deleteAppInstanceAdminCmd)
 }

@@ -12,11 +12,13 @@ var cloudfront_deleteVpcOrigin2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_deleteVpcOrigin2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_deleteVpcOrigin2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_deleteVpcOrigin2020_05_31Cmd).Standalone()
 
-	cloudfront_deleteVpcOrigin2020_05_31Cmd.Flags().String("id", "", "The VPC origin ID.")
-	cloudfront_deleteVpcOrigin2020_05_31Cmd.Flags().String("if-match", "", "The version identifier of the VPC origin to delete.")
-	cloudfront_deleteVpcOrigin2020_05_31Cmd.MarkFlagRequired("id")
-	cloudfront_deleteVpcOrigin2020_05_31Cmd.MarkFlagRequired("if-match")
+		cloudfront_deleteVpcOrigin2020_05_31Cmd.Flags().String("id", "", "The VPC origin ID.")
+		cloudfront_deleteVpcOrigin2020_05_31Cmd.Flags().String("if-match", "", "The version identifier of the VPC origin to delete.")
+		cloudfront_deleteVpcOrigin2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_deleteVpcOrigin2020_05_31Cmd.MarkFlagRequired("if-match")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_deleteVpcOrigin2020_05_31Cmd)
 }

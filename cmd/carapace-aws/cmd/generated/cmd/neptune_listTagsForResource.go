@@ -12,10 +12,12 @@ var neptune_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_listTagsForResourceCmd).Standalone()
+	carapace.Gen(neptune_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_listTagsForResourceCmd).Standalone()
 
-	neptune_listTagsForResourceCmd.Flags().String("filters", "", "This parameter is not currently supported.")
-	neptune_listTagsForResourceCmd.Flags().String("resource-name", "", "The Amazon Neptune resource with tags to be listed.")
-	neptune_listTagsForResourceCmd.MarkFlagRequired("resource-name")
+		neptune_listTagsForResourceCmd.Flags().String("filters", "", "This parameter is not currently supported.")
+		neptune_listTagsForResourceCmd.Flags().String("resource-name", "", "The Amazon Neptune resource with tags to be listed.")
+		neptune_listTagsForResourceCmd.MarkFlagRequired("resource-name")
+	})
 	neptuneCmd.AddCommand(neptune_listTagsForResourceCmd)
 }

@@ -12,10 +12,12 @@ var amp_deleteAlertManagerDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_deleteAlertManagerDefinitionCmd).Standalone()
+	carapace.Gen(amp_deleteAlertManagerDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_deleteAlertManagerDefinitionCmd).Standalone()
 
-	amp_deleteAlertManagerDefinitionCmd.Flags().String("client-token", "", "A unique identifier that you can provide to ensure the idempotency of the request.")
-	amp_deleteAlertManagerDefinitionCmd.Flags().String("workspace-id", "", "The ID of the workspace to delete the alert manager definition from.")
-	amp_deleteAlertManagerDefinitionCmd.MarkFlagRequired("workspace-id")
+		amp_deleteAlertManagerDefinitionCmd.Flags().String("client-token", "", "A unique identifier that you can provide to ensure the idempotency of the request.")
+		amp_deleteAlertManagerDefinitionCmd.Flags().String("workspace-id", "", "The ID of the workspace to delete the alert manager definition from.")
+		amp_deleteAlertManagerDefinitionCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_deleteAlertManagerDefinitionCmd)
 }

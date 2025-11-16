@@ -12,11 +12,13 @@ var finspaceData_listChangesetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_listChangesetsCmd).Standalone()
+	carapace.Gen(finspaceData_listChangesetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_listChangesetsCmd).Standalone()
 
-	finspaceData_listChangesetsCmd.Flags().String("dataset-id", "", "The unique identifier for the FinSpace Dataset to which the Changeset belongs.")
-	finspaceData_listChangesetsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
-	finspaceData_listChangesetsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
-	finspaceData_listChangesetsCmd.MarkFlagRequired("dataset-id")
+		finspaceData_listChangesetsCmd.Flags().String("dataset-id", "", "The unique identifier for the FinSpace Dataset to which the Changeset belongs.")
+		finspaceData_listChangesetsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
+		finspaceData_listChangesetsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+		finspaceData_listChangesetsCmd.MarkFlagRequired("dataset-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_listChangesetsCmd)
 }

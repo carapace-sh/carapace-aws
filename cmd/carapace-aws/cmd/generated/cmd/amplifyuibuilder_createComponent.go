@@ -12,14 +12,16 @@ var amplifyuibuilder_createComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_createComponentCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_createComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_createComponentCmd).Standalone()
 
-	amplifyuibuilder_createComponentCmd.Flags().String("app-id", "", "The unique ID of the Amplify app to associate with the component.")
-	amplifyuibuilder_createComponentCmd.Flags().String("client-token", "", "The unique client token.")
-	amplifyuibuilder_createComponentCmd.Flags().String("component-to-create", "", "Represents the configuration of the component to create.")
-	amplifyuibuilder_createComponentCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app.")
-	amplifyuibuilder_createComponentCmd.MarkFlagRequired("app-id")
-	amplifyuibuilder_createComponentCmd.MarkFlagRequired("component-to-create")
-	amplifyuibuilder_createComponentCmd.MarkFlagRequired("environment-name")
+		amplifyuibuilder_createComponentCmd.Flags().String("app-id", "", "The unique ID of the Amplify app to associate with the component.")
+		amplifyuibuilder_createComponentCmd.Flags().String("client-token", "", "The unique client token.")
+		amplifyuibuilder_createComponentCmd.Flags().String("component-to-create", "", "Represents the configuration of the component to create.")
+		amplifyuibuilder_createComponentCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app.")
+		amplifyuibuilder_createComponentCmd.MarkFlagRequired("app-id")
+		amplifyuibuilder_createComponentCmd.MarkFlagRequired("component-to-create")
+		amplifyuibuilder_createComponentCmd.MarkFlagRequired("environment-name")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_createComponentCmd)
 }

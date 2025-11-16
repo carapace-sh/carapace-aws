@@ -12,9 +12,11 @@ var securityhub_getMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getMembersCmd).Standalone()
+	carapace.Gen(securityhub_getMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getMembersCmd).Standalone()
 
-	securityhub_getMembersCmd.Flags().String("account-ids", "", "The list of account IDs for the Security Hub member accounts to return the details for.")
-	securityhub_getMembersCmd.MarkFlagRequired("account-ids")
+		securityhub_getMembersCmd.Flags().String("account-ids", "", "The list of account IDs for the Security Hub member accounts to return the details for.")
+		securityhub_getMembersCmd.MarkFlagRequired("account-ids")
+	})
 	securityhubCmd.AddCommand(securityhub_getMembersCmd)
 }

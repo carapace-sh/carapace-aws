@@ -12,9 +12,11 @@ var storagegateway_deleteAutomaticTapeCreationPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_deleteAutomaticTapeCreationPolicyCmd).Standalone()
+	carapace.Gen(storagegateway_deleteAutomaticTapeCreationPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_deleteAutomaticTapeCreationPolicyCmd).Standalone()
 
-	storagegateway_deleteAutomaticTapeCreationPolicyCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_deleteAutomaticTapeCreationPolicyCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_deleteAutomaticTapeCreationPolicyCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_deleteAutomaticTapeCreationPolicyCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_deleteAutomaticTapeCreationPolicyCmd)
 }

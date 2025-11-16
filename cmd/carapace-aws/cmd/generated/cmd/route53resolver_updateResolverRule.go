@@ -12,11 +12,13 @@ var route53resolver_updateResolverRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_updateResolverRuleCmd).Standalone()
+	carapace.Gen(route53resolver_updateResolverRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_updateResolverRuleCmd).Standalone()
 
-	route53resolver_updateResolverRuleCmd.Flags().String("config", "", "The new settings for the Resolver rule.")
-	route53resolver_updateResolverRuleCmd.Flags().String("resolver-rule-id", "", "The ID of the Resolver rule that you want to update.")
-	route53resolver_updateResolverRuleCmd.MarkFlagRequired("config")
-	route53resolver_updateResolverRuleCmd.MarkFlagRequired("resolver-rule-id")
+		route53resolver_updateResolverRuleCmd.Flags().String("config", "", "The new settings for the Resolver rule.")
+		route53resolver_updateResolverRuleCmd.Flags().String("resolver-rule-id", "", "The ID of the Resolver rule that you want to update.")
+		route53resolver_updateResolverRuleCmd.MarkFlagRequired("config")
+		route53resolver_updateResolverRuleCmd.MarkFlagRequired("resolver-rule-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_updateResolverRuleCmd)
 }

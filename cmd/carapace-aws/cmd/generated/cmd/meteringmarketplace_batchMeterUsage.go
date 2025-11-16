@@ -12,11 +12,13 @@ var meteringmarketplace_batchMeterUsageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(meteringmarketplace_batchMeterUsageCmd).Standalone()
+	carapace.Gen(meteringmarketplace_batchMeterUsageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(meteringmarketplace_batchMeterUsageCmd).Standalone()
 
-	meteringmarketplace_batchMeterUsageCmd.Flags().String("product-code", "", "Product code is used to uniquely identify a product in Amazon Web Services Marketplace.")
-	meteringmarketplace_batchMeterUsageCmd.Flags().String("usage-records", "", "The set of `UsageRecords` to submit.")
-	meteringmarketplace_batchMeterUsageCmd.MarkFlagRequired("product-code")
-	meteringmarketplace_batchMeterUsageCmd.MarkFlagRequired("usage-records")
+		meteringmarketplace_batchMeterUsageCmd.Flags().String("product-code", "", "Product code is used to uniquely identify a product in Amazon Web Services Marketplace.")
+		meteringmarketplace_batchMeterUsageCmd.Flags().String("usage-records", "", "The set of `UsageRecords` to submit.")
+		meteringmarketplace_batchMeterUsageCmd.MarkFlagRequired("product-code")
+		meteringmarketplace_batchMeterUsageCmd.MarkFlagRequired("usage-records")
+	})
 	meteringmarketplaceCmd.AddCommand(meteringmarketplace_batchMeterUsageCmd)
 }

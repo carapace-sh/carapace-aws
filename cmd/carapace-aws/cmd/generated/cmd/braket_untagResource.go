@@ -12,11 +12,13 @@ var braket_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(braket_untagResourceCmd).Standalone()
+	carapace.Gen(braket_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(braket_untagResourceCmd).Standalone()
 
-	braket_untagResourceCmd.Flags().String("resource-arn", "", "Specify the `resourceArn` for the resource from which to remove the tags.")
-	braket_untagResourceCmd.Flags().String("tag-keys", "", "Specify the keys for the tags to remove from the resource.")
-	braket_untagResourceCmd.MarkFlagRequired("resource-arn")
-	braket_untagResourceCmd.MarkFlagRequired("tag-keys")
+		braket_untagResourceCmd.Flags().String("resource-arn", "", "Specify the `resourceArn` for the resource from which to remove the tags.")
+		braket_untagResourceCmd.Flags().String("tag-keys", "", "Specify the keys for the tags to remove from the resource.")
+		braket_untagResourceCmd.MarkFlagRequired("resource-arn")
+		braket_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	braketCmd.AddCommand(braket_untagResourceCmd)
 }

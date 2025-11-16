@@ -12,11 +12,13 @@ var opensearch_getDomainMaintenanceStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_getDomainMaintenanceStatusCmd).Standalone()
+	carapace.Gen(opensearch_getDomainMaintenanceStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_getDomainMaintenanceStatusCmd).Standalone()
 
-	opensearch_getDomainMaintenanceStatusCmd.Flags().String("domain-name", "", "The name of the domain.")
-	opensearch_getDomainMaintenanceStatusCmd.Flags().String("maintenance-id", "", "The request ID of the maintenance action.")
-	opensearch_getDomainMaintenanceStatusCmd.MarkFlagRequired("domain-name")
-	opensearch_getDomainMaintenanceStatusCmd.MarkFlagRequired("maintenance-id")
+		opensearch_getDomainMaintenanceStatusCmd.Flags().String("domain-name", "", "The name of the domain.")
+		opensearch_getDomainMaintenanceStatusCmd.Flags().String("maintenance-id", "", "The request ID of the maintenance action.")
+		opensearch_getDomainMaintenanceStatusCmd.MarkFlagRequired("domain-name")
+		opensearch_getDomainMaintenanceStatusCmd.MarkFlagRequired("maintenance-id")
+	})
 	opensearchCmd.AddCommand(opensearch_getDomainMaintenanceStatusCmd)
 }

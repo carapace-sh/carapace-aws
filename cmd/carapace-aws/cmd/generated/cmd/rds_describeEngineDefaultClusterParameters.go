@@ -12,12 +12,14 @@ var rds_describeEngineDefaultClusterParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeEngineDefaultClusterParametersCmd).Standalone()
+	carapace.Gen(rds_describeEngineDefaultClusterParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeEngineDefaultClusterParametersCmd).Standalone()
 
-	rds_describeEngineDefaultClusterParametersCmd.Flags().String("dbparameter-group-family", "", "The name of the DB cluster parameter group family to return engine parameter information for.")
-	rds_describeEngineDefaultClusterParametersCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
-	rds_describeEngineDefaultClusterParametersCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeEngineDefaultClusterParameters` request.")
-	rds_describeEngineDefaultClusterParametersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	rds_describeEngineDefaultClusterParametersCmd.MarkFlagRequired("dbparameter-group-family")
+		rds_describeEngineDefaultClusterParametersCmd.Flags().String("dbparameter-group-family", "", "The name of the DB cluster parameter group family to return engine parameter information for.")
+		rds_describeEngineDefaultClusterParametersCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
+		rds_describeEngineDefaultClusterParametersCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeEngineDefaultClusterParameters` request.")
+		rds_describeEngineDefaultClusterParametersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		rds_describeEngineDefaultClusterParametersCmd.MarkFlagRequired("dbparameter-group-family")
+	})
 	rdsCmd.AddCommand(rds_describeEngineDefaultClusterParametersCmd)
 }

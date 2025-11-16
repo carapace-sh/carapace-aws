@@ -12,9 +12,11 @@ var acmPca_deletePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acmPca_deletePolicyCmd).Standalone()
+	carapace.Gen(acmPca_deletePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acmPca_deletePolicyCmd).Standalone()
 
-	acmPca_deletePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Number (ARN) of the private CA that will have its policy deleted.")
-	acmPca_deletePolicyCmd.MarkFlagRequired("resource-arn")
+		acmPca_deletePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Number (ARN) of the private CA that will have its policy deleted.")
+		acmPca_deletePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	acmPcaCmd.AddCommand(acmPca_deletePolicyCmd)
 }

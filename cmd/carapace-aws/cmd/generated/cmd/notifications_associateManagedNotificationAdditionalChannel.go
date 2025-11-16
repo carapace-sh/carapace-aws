@@ -12,11 +12,13 @@ var notifications_associateManagedNotificationAdditionalChannelCmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(notifications_associateManagedNotificationAdditionalChannelCmd).Standalone()
+	carapace.Gen(notifications_associateManagedNotificationAdditionalChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_associateManagedNotificationAdditionalChannelCmd).Standalone()
 
-	notifications_associateManagedNotificationAdditionalChannelCmd.Flags().String("channel-arn", "", "The Amazon Resource Name (ARN) of the Channel to associate with the `ManagedNotificationConfiguration`.")
-	notifications_associateManagedNotificationAdditionalChannelCmd.Flags().String("managed-notification-configuration-arn", "", "The Amazon Resource Name (ARN) of the `ManagedNotificationConfiguration` to associate with the additional Channel.")
-	notifications_associateManagedNotificationAdditionalChannelCmd.MarkFlagRequired("channel-arn")
-	notifications_associateManagedNotificationAdditionalChannelCmd.MarkFlagRequired("managed-notification-configuration-arn")
+		notifications_associateManagedNotificationAdditionalChannelCmd.Flags().String("channel-arn", "", "The Amazon Resource Name (ARN) of the Channel to associate with the `ManagedNotificationConfiguration`.")
+		notifications_associateManagedNotificationAdditionalChannelCmd.Flags().String("managed-notification-configuration-arn", "", "The Amazon Resource Name (ARN) of the `ManagedNotificationConfiguration` to associate with the additional Channel.")
+		notifications_associateManagedNotificationAdditionalChannelCmd.MarkFlagRequired("channel-arn")
+		notifications_associateManagedNotificationAdditionalChannelCmd.MarkFlagRequired("managed-notification-configuration-arn")
+	})
 	notificationsCmd.AddCommand(notifications_associateManagedNotificationAdditionalChannelCmd)
 }

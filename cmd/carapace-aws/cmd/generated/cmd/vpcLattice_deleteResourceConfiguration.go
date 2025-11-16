@@ -12,9 +12,11 @@ var vpcLattice_deleteResourceConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deleteResourceConfigurationCmd).Standalone()
+	carapace.Gen(vpcLattice_deleteResourceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deleteResourceConfigurationCmd).Standalone()
 
-	vpcLattice_deleteResourceConfigurationCmd.Flags().String("resource-configuration-identifier", "", "The ID or ARN of the resource configuration.")
-	vpcLattice_deleteResourceConfigurationCmd.MarkFlagRequired("resource-configuration-identifier")
+		vpcLattice_deleteResourceConfigurationCmd.Flags().String("resource-configuration-identifier", "", "The ID or ARN of the resource configuration.")
+		vpcLattice_deleteResourceConfigurationCmd.MarkFlagRequired("resource-configuration-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deleteResourceConfigurationCmd)
 }

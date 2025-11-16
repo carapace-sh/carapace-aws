@@ -12,11 +12,13 @@ var bcmDataExports_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDataExports_untagResourceCmd).Standalone()
+	carapace.Gen(bcmDataExports_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDataExports_untagResourceCmd).Standalone()
 
-	bcmDataExports_untagResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
-	bcmDataExports_untagResourceCmd.Flags().String("resource-tag-keys", "", "The tag keys that are associated with the resource ARN.")
-	bcmDataExports_untagResourceCmd.MarkFlagRequired("resource-arn")
-	bcmDataExports_untagResourceCmd.MarkFlagRequired("resource-tag-keys")
+		bcmDataExports_untagResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
+		bcmDataExports_untagResourceCmd.Flags().String("resource-tag-keys", "", "The tag keys that are associated with the resource ARN.")
+		bcmDataExports_untagResourceCmd.MarkFlagRequired("resource-arn")
+		bcmDataExports_untagResourceCmd.MarkFlagRequired("resource-tag-keys")
+	})
 	bcmDataExportsCmd.AddCommand(bcmDataExports_untagResourceCmd)
 }

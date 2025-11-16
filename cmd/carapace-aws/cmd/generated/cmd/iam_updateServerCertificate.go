@@ -12,11 +12,13 @@ var iam_updateServerCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_updateServerCertificateCmd).Standalone()
+	carapace.Gen(iam_updateServerCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_updateServerCertificateCmd).Standalone()
 
-	iam_updateServerCertificateCmd.Flags().String("new-path", "", "The new path for the server certificate.")
-	iam_updateServerCertificateCmd.Flags().String("new-server-certificate-name", "", "The new name for the server certificate.")
-	iam_updateServerCertificateCmd.Flags().String("server-certificate-name", "", "The name of the server certificate that you want to update.")
-	iam_updateServerCertificateCmd.MarkFlagRequired("server-certificate-name")
+		iam_updateServerCertificateCmd.Flags().String("new-path", "", "The new path for the server certificate.")
+		iam_updateServerCertificateCmd.Flags().String("new-server-certificate-name", "", "The new name for the server certificate.")
+		iam_updateServerCertificateCmd.Flags().String("server-certificate-name", "", "The name of the server certificate that you want to update.")
+		iam_updateServerCertificateCmd.MarkFlagRequired("server-certificate-name")
+	})
 	iamCmd.AddCommand(iam_updateServerCertificateCmd)
 }

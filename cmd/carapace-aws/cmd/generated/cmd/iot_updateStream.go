@@ -12,12 +12,14 @@ var iot_updateStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateStreamCmd).Standalone()
+	carapace.Gen(iot_updateStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateStreamCmd).Standalone()
 
-	iot_updateStreamCmd.Flags().String("description", "", "The description of the stream.")
-	iot_updateStreamCmd.Flags().String("files", "", "The files associated with the stream.")
-	iot_updateStreamCmd.Flags().String("role-arn", "", "An IAM role that allows the IoT service principal assumes to access your S3 files.")
-	iot_updateStreamCmd.Flags().String("stream-id", "", "The stream ID.")
-	iot_updateStreamCmd.MarkFlagRequired("stream-id")
+		iot_updateStreamCmd.Flags().String("description", "", "The description of the stream.")
+		iot_updateStreamCmd.Flags().String("files", "", "The files associated with the stream.")
+		iot_updateStreamCmd.Flags().String("role-arn", "", "An IAM role that allows the IoT service principal assumes to access your S3 files.")
+		iot_updateStreamCmd.Flags().String("stream-id", "", "The stream ID.")
+		iot_updateStreamCmd.MarkFlagRequired("stream-id")
+	})
 	iotCmd.AddCommand(iot_updateStreamCmd)
 }

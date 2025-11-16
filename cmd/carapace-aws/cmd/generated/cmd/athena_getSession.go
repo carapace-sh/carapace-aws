@@ -12,9 +12,11 @@ var athena_getSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_getSessionCmd).Standalone()
+	carapace.Gen(athena_getSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_getSessionCmd).Standalone()
 
-	athena_getSessionCmd.Flags().String("session-id", "", "The session ID.")
-	athena_getSessionCmd.MarkFlagRequired("session-id")
+		athena_getSessionCmd.Flags().String("session-id", "", "The session ID.")
+		athena_getSessionCmd.MarkFlagRequired("session-id")
+	})
 	athenaCmd.AddCommand(athena_getSessionCmd)
 }

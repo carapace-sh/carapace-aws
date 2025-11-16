@@ -12,9 +12,11 @@ var rds_deleteGlobalClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteGlobalClusterCmd).Standalone()
+	carapace.Gen(rds_deleteGlobalClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteGlobalClusterCmd).Standalone()
 
-	rds_deleteGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier of the global database cluster being deleted.")
-	rds_deleteGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+		rds_deleteGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier of the global database cluster being deleted.")
+		rds_deleteGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+	})
 	rdsCmd.AddCommand(rds_deleteGlobalClusterCmd)
 }

@@ -12,13 +12,15 @@ var mgn_listSourceServerActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_listSourceServerActionsCmd).Standalone()
+	carapace.Gen(mgn_listSourceServerActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_listSourceServerActionsCmd).Standalone()
 
-	mgn_listSourceServerActionsCmd.Flags().String("account-id", "", "Account ID to return when listing source server post migration custom actions.")
-	mgn_listSourceServerActionsCmd.Flags().String("filters", "", "Filters to apply when listing source server post migration custom actions.")
-	mgn_listSourceServerActionsCmd.Flags().String("max-results", "", "Maximum amount of items to return when listing source server post migration custom actions.")
-	mgn_listSourceServerActionsCmd.Flags().String("next-token", "", "Next token to use when listing source server post migration custom actions.")
-	mgn_listSourceServerActionsCmd.Flags().String("source-server-id", "", "Source server ID.")
-	mgn_listSourceServerActionsCmd.MarkFlagRequired("source-server-id")
+		mgn_listSourceServerActionsCmd.Flags().String("account-id", "", "Account ID to return when listing source server post migration custom actions.")
+		mgn_listSourceServerActionsCmd.Flags().String("filters", "", "Filters to apply when listing source server post migration custom actions.")
+		mgn_listSourceServerActionsCmd.Flags().String("max-results", "", "Maximum amount of items to return when listing source server post migration custom actions.")
+		mgn_listSourceServerActionsCmd.Flags().String("next-token", "", "Next token to use when listing source server post migration custom actions.")
+		mgn_listSourceServerActionsCmd.Flags().String("source-server-id", "", "Source server ID.")
+		mgn_listSourceServerActionsCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_listSourceServerActionsCmd)
 }

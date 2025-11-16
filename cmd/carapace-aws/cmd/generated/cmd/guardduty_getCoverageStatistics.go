@@ -12,12 +12,14 @@ var guardduty_getCoverageStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_getCoverageStatisticsCmd).Standalone()
+	carapace.Gen(guardduty_getCoverageStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_getCoverageStatisticsCmd).Standalone()
 
-	guardduty_getCoverageStatisticsCmd.Flags().String("detector-id", "", "The unique ID of the GuardDuty detector.")
-	guardduty_getCoverageStatisticsCmd.Flags().String("filter-criteria", "", "Represents the criteria used to filter the coverage statistics.")
-	guardduty_getCoverageStatisticsCmd.Flags().String("statistics-type", "", "Represents the statistics type used to aggregate the coverage details.")
-	guardduty_getCoverageStatisticsCmd.MarkFlagRequired("detector-id")
-	guardduty_getCoverageStatisticsCmd.MarkFlagRequired("statistics-type")
+		guardduty_getCoverageStatisticsCmd.Flags().String("detector-id", "", "The unique ID of the GuardDuty detector.")
+		guardduty_getCoverageStatisticsCmd.Flags().String("filter-criteria", "", "Represents the criteria used to filter the coverage statistics.")
+		guardduty_getCoverageStatisticsCmd.Flags().String("statistics-type", "", "Represents the statistics type used to aggregate the coverage details.")
+		guardduty_getCoverageStatisticsCmd.MarkFlagRequired("detector-id")
+		guardduty_getCoverageStatisticsCmd.MarkFlagRequired("statistics-type")
+	})
 	guarddutyCmd.AddCommand(guardduty_getCoverageStatisticsCmd)
 }

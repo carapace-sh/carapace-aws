@@ -12,9 +12,11 @@ var transcribe_deleteMedicalScribeJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_deleteMedicalScribeJobCmd).Standalone()
+	carapace.Gen(transcribe_deleteMedicalScribeJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_deleteMedicalScribeJobCmd).Standalone()
 
-	transcribe_deleteMedicalScribeJobCmd.Flags().String("medical-scribe-job-name", "", "The name of the Medical Scribe job you want to delete.")
-	transcribe_deleteMedicalScribeJobCmd.MarkFlagRequired("medical-scribe-job-name")
+		transcribe_deleteMedicalScribeJobCmd.Flags().String("medical-scribe-job-name", "", "The name of the Medical Scribe job you want to delete.")
+		transcribe_deleteMedicalScribeJobCmd.MarkFlagRequired("medical-scribe-job-name")
+	})
 	transcribeCmd.AddCommand(transcribe_deleteMedicalScribeJobCmd)
 }

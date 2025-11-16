@@ -12,9 +12,11 @@ var redshift_disableSnapshotCopyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_disableSnapshotCopyCmd).Standalone()
+	carapace.Gen(redshift_disableSnapshotCopyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_disableSnapshotCopyCmd).Standalone()
 
-	redshift_disableSnapshotCopyCmd.Flags().String("cluster-identifier", "", "The unique identifier of the source cluster that you want to disable copying of snapshots to a destination region.")
-	redshift_disableSnapshotCopyCmd.MarkFlagRequired("cluster-identifier")
+		redshift_disableSnapshotCopyCmd.Flags().String("cluster-identifier", "", "The unique identifier of the source cluster that you want to disable copying of snapshots to a destination region.")
+		redshift_disableSnapshotCopyCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_disableSnapshotCopyCmd)
 }

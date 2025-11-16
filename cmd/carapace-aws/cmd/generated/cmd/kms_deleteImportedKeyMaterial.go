@@ -12,10 +12,12 @@ var kms_deleteImportedKeyMaterialCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_deleteImportedKeyMaterialCmd).Standalone()
+	carapace.Gen(kms_deleteImportedKeyMaterialCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_deleteImportedKeyMaterialCmd).Standalone()
 
-	kms_deleteImportedKeyMaterialCmd.Flags().String("key-id", "", "Identifies the KMS key from which you are deleting imported key material.")
-	kms_deleteImportedKeyMaterialCmd.Flags().String("key-material-id", "", "Identifies the imported key material you are deleting.")
-	kms_deleteImportedKeyMaterialCmd.MarkFlagRequired("key-id")
+		kms_deleteImportedKeyMaterialCmd.Flags().String("key-id", "", "Identifies the KMS key from which you are deleting imported key material.")
+		kms_deleteImportedKeyMaterialCmd.Flags().String("key-material-id", "", "Identifies the imported key material you are deleting.")
+		kms_deleteImportedKeyMaterialCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_deleteImportedKeyMaterialCmd)
 }

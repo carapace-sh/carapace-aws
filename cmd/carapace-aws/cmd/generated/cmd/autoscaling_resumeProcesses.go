@@ -12,10 +12,12 @@ var autoscaling_resumeProcessesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_resumeProcessesCmd).Standalone()
+	carapace.Gen(autoscaling_resumeProcessesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_resumeProcessesCmd).Standalone()
 
-	autoscaling_resumeProcessesCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_resumeProcessesCmd.Flags().String("scaling-processes", "", "One or more of the following processes:")
-	autoscaling_resumeProcessesCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_resumeProcessesCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_resumeProcessesCmd.Flags().String("scaling-processes", "", "One or more of the following processes:")
+		autoscaling_resumeProcessesCmd.MarkFlagRequired("auto-scaling-group-name")
+	})
 	autoscalingCmd.AddCommand(autoscaling_resumeProcessesCmd)
 }

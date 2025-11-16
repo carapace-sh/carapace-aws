@@ -12,9 +12,11 @@ var timestreamInfluxdb_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamInfluxdb_listTagsForResourceCmd).Standalone()
+	carapace.Gen(timestreamInfluxdb_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamInfluxdb_listTagsForResourceCmd).Standalone()
 
-	timestreamInfluxdb_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the tagged resource.")
-	timestreamInfluxdb_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		timestreamInfluxdb_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the tagged resource.")
+		timestreamInfluxdb_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	timestreamInfluxdbCmd.AddCommand(timestreamInfluxdb_listTagsForResourceCmd)
 }

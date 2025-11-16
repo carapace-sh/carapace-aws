@@ -12,7 +12,9 @@ var osisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osisCmd).Standalone()
+	carapace.Gen(osisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osisCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(osisCmd)
 }

@@ -12,11 +12,13 @@ var sqs_setQueueAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_setQueueAttributesCmd).Standalone()
+	carapace.Gen(sqs_setQueueAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_setQueueAttributesCmd).Standalone()
 
-	sqs_setQueueAttributesCmd.Flags().String("attributes", "", "A map of attributes to set.")
-	sqs_setQueueAttributesCmd.Flags().String("queue-url", "", "The URL of the Amazon SQS queue whose attributes are set.")
-	sqs_setQueueAttributesCmd.MarkFlagRequired("attributes")
-	sqs_setQueueAttributesCmd.MarkFlagRequired("queue-url")
+		sqs_setQueueAttributesCmd.Flags().String("attributes", "", "A map of attributes to set.")
+		sqs_setQueueAttributesCmd.Flags().String("queue-url", "", "The URL of the Amazon SQS queue whose attributes are set.")
+		sqs_setQueueAttributesCmd.MarkFlagRequired("attributes")
+		sqs_setQueueAttributesCmd.MarkFlagRequired("queue-url")
+	})
 	sqsCmd.AddCommand(sqs_setQueueAttributesCmd)
 }

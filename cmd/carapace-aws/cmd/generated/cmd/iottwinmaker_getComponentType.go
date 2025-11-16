@@ -12,11 +12,13 @@ var iottwinmaker_getComponentTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_getComponentTypeCmd).Standalone()
+	carapace.Gen(iottwinmaker_getComponentTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_getComponentTypeCmd).Standalone()
 
-	iottwinmaker_getComponentTypeCmd.Flags().String("component-type-id", "", "The ID of the component type.")
-	iottwinmaker_getComponentTypeCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the component type.")
-	iottwinmaker_getComponentTypeCmd.MarkFlagRequired("component-type-id")
-	iottwinmaker_getComponentTypeCmd.MarkFlagRequired("workspace-id")
+		iottwinmaker_getComponentTypeCmd.Flags().String("component-type-id", "", "The ID of the component type.")
+		iottwinmaker_getComponentTypeCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the component type.")
+		iottwinmaker_getComponentTypeCmd.MarkFlagRequired("component-type-id")
+		iottwinmaker_getComponentTypeCmd.MarkFlagRequired("workspace-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_getComponentTypeCmd)
 }

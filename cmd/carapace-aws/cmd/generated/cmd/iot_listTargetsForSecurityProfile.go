@@ -12,11 +12,13 @@ var iot_listTargetsForSecurityProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listTargetsForSecurityProfileCmd).Standalone()
+	carapace.Gen(iot_listTargetsForSecurityProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listTargetsForSecurityProfileCmd).Standalone()
 
-	iot_listTargetsForSecurityProfileCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_listTargetsForSecurityProfileCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	iot_listTargetsForSecurityProfileCmd.Flags().String("security-profile-name", "", "The security profile.")
-	iot_listTargetsForSecurityProfileCmd.MarkFlagRequired("security-profile-name")
+		iot_listTargetsForSecurityProfileCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_listTargetsForSecurityProfileCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iot_listTargetsForSecurityProfileCmd.Flags().String("security-profile-name", "", "The security profile.")
+		iot_listTargetsForSecurityProfileCmd.MarkFlagRequired("security-profile-name")
+	})
 	iotCmd.AddCommand(iot_listTargetsForSecurityProfileCmd)
 }

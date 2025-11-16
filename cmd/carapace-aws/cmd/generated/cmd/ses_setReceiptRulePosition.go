@@ -12,12 +12,14 @@ var ses_setReceiptRulePositionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_setReceiptRulePositionCmd).Standalone()
+	carapace.Gen(ses_setReceiptRulePositionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_setReceiptRulePositionCmd).Standalone()
 
-	ses_setReceiptRulePositionCmd.Flags().String("after", "", "The name of the receipt rule after which to place the specified receipt rule.")
-	ses_setReceiptRulePositionCmd.Flags().String("rule-name", "", "The name of the receipt rule to reposition.")
-	ses_setReceiptRulePositionCmd.Flags().String("rule-set-name", "", "The name of the receipt rule set that contains the receipt rule to reposition.")
-	ses_setReceiptRulePositionCmd.MarkFlagRequired("rule-name")
-	ses_setReceiptRulePositionCmd.MarkFlagRequired("rule-set-name")
+		ses_setReceiptRulePositionCmd.Flags().String("after", "", "The name of the receipt rule after which to place the specified receipt rule.")
+		ses_setReceiptRulePositionCmd.Flags().String("rule-name", "", "The name of the receipt rule to reposition.")
+		ses_setReceiptRulePositionCmd.Flags().String("rule-set-name", "", "The name of the receipt rule set that contains the receipt rule to reposition.")
+		ses_setReceiptRulePositionCmd.MarkFlagRequired("rule-name")
+		ses_setReceiptRulePositionCmd.MarkFlagRequired("rule-set-name")
+	})
 	sesCmd.AddCommand(ses_setReceiptRulePositionCmd)
 }

@@ -12,9 +12,11 @@ var pinpoint_getSmsChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getSmsChannelCmd).Standalone()
+	carapace.Gen(pinpoint_getSmsChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getSmsChannelCmd).Standalone()
 
-	pinpoint_getSmsChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getSmsChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_getSmsChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getSmsChannelCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getSmsChannelCmd)
 }

@@ -12,10 +12,12 @@ var lakeformation_listResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_listResourcesCmd).Standalone()
+	carapace.Gen(lakeformation_listResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_listResourcesCmd).Standalone()
 
-	lakeformation_listResourcesCmd.Flags().String("filter-condition-list", "", "Any applicable row-level and/or column-level filtering conditions for the resources.")
-	lakeformation_listResourcesCmd.Flags().String("max-results", "", "The maximum number of resource results.")
-	lakeformation_listResourcesCmd.Flags().String("next-token", "", "A continuation token, if this is not the first call to retrieve these resources.")
+		lakeformation_listResourcesCmd.Flags().String("filter-condition-list", "", "Any applicable row-level and/or column-level filtering conditions for the resources.")
+		lakeformation_listResourcesCmd.Flags().String("max-results", "", "The maximum number of resource results.")
+		lakeformation_listResourcesCmd.Flags().String("next-token", "", "A continuation token, if this is not the first call to retrieve these resources.")
+	})
 	lakeformationCmd.AddCommand(lakeformation_listResourcesCmd)
 }

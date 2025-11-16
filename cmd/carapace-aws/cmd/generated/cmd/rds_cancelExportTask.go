@@ -12,9 +12,11 @@ var rds_cancelExportTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_cancelExportTaskCmd).Standalone()
+	carapace.Gen(rds_cancelExportTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_cancelExportTaskCmd).Standalone()
 
-	rds_cancelExportTaskCmd.Flags().String("export-task-identifier", "", "The identifier of the snapshot or cluster export task to cancel.")
-	rds_cancelExportTaskCmd.MarkFlagRequired("export-task-identifier")
+		rds_cancelExportTaskCmd.Flags().String("export-task-identifier", "", "The identifier of the snapshot or cluster export task to cancel.")
+		rds_cancelExportTaskCmd.MarkFlagRequired("export-task-identifier")
+	})
 	rdsCmd.AddCommand(rds_cancelExportTaskCmd)
 }

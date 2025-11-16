@@ -12,9 +12,11 @@ var translate_getParallelDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_getParallelDataCmd).Standalone()
+	carapace.Gen(translate_getParallelDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_getParallelDataCmd).Standalone()
 
-	translate_getParallelDataCmd.Flags().String("name", "", "The name of the parallel data resource that is being retrieved.")
-	translate_getParallelDataCmd.MarkFlagRequired("name")
+		translate_getParallelDataCmd.Flags().String("name", "", "The name of the parallel data resource that is being retrieved.")
+		translate_getParallelDataCmd.MarkFlagRequired("name")
+	})
 	translateCmd.AddCommand(translate_getParallelDataCmd)
 }

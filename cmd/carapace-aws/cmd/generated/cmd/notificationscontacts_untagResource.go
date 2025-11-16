@@ -12,11 +12,13 @@ var notificationscontacts_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notificationscontacts_untagResourceCmd).Standalone()
+	carapace.Gen(notificationscontacts_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notificationscontacts_untagResourceCmd).Standalone()
 
-	notificationscontacts_untagResourceCmd.Flags().String("arn", "", "The value of the resource that will have the tag removed.")
-	notificationscontacts_untagResourceCmd.Flags().String("tag-keys", "", "Specifies a list of tag keys that you want to remove from the specified resources.")
-	notificationscontacts_untagResourceCmd.MarkFlagRequired("arn")
-	notificationscontacts_untagResourceCmd.MarkFlagRequired("tag-keys")
+		notificationscontacts_untagResourceCmd.Flags().String("arn", "", "The value of the resource that will have the tag removed.")
+		notificationscontacts_untagResourceCmd.Flags().String("tag-keys", "", "Specifies a list of tag keys that you want to remove from the specified resources.")
+		notificationscontacts_untagResourceCmd.MarkFlagRequired("arn")
+		notificationscontacts_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	notificationscontactsCmd.AddCommand(notificationscontacts_untagResourceCmd)
 }

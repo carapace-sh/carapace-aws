@@ -12,9 +12,11 @@ var dynamodb_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_getResourcePolicyCmd).Standalone()
+	carapace.Gen(dynamodb_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_getResourcePolicyCmd).Standalone()
 
-	dynamodb_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the DynamoDB resource to which the policy is attached.")
-	dynamodb_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		dynamodb_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the DynamoDB resource to which the policy is attached.")
+		dynamodb_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	dynamodbCmd.AddCommand(dynamodb_getResourcePolicyCmd)
 }

@@ -12,11 +12,13 @@ var clouddirectory_getFacetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_getFacetCmd).Standalone()
+	carapace.Gen(clouddirectory_getFacetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_getFacetCmd).Standalone()
 
-	clouddirectory_getFacetCmd.Flags().String("name", "", "The name of the facet to retrieve.")
-	clouddirectory_getFacetCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Facet]().")
-	clouddirectory_getFacetCmd.MarkFlagRequired("name")
-	clouddirectory_getFacetCmd.MarkFlagRequired("schema-arn")
+		clouddirectory_getFacetCmd.Flags().String("name", "", "The name of the facet to retrieve.")
+		clouddirectory_getFacetCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Facet]().")
+		clouddirectory_getFacetCmd.MarkFlagRequired("name")
+		clouddirectory_getFacetCmd.MarkFlagRequired("schema-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_getFacetCmd)
 }

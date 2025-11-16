@@ -12,7 +12,9 @@ var ecr_getRegistryScanningConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_getRegistryScanningConfigurationCmd).Standalone()
+	carapace.Gen(ecr_getRegistryScanningConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_getRegistryScanningConfigurationCmd).Standalone()
 
+	})
 	ecrCmd.AddCommand(ecr_getRegistryScanningConfigurationCmd)
 }

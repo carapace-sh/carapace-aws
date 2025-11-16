@@ -12,8 +12,10 @@ var support_resolveCaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(support_resolveCaseCmd).Standalone()
+	carapace.Gen(support_resolveCaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(support_resolveCaseCmd).Standalone()
 
-	support_resolveCaseCmd.Flags().String("case-id", "", "The support case ID requested or returned in the call.")
+		support_resolveCaseCmd.Flags().String("case-id", "", "The support case ID requested or returned in the call.")
+	})
 	supportCmd.AddCommand(support_resolveCaseCmd)
 }

@@ -12,10 +12,12 @@ var redshift_purchaseReservedNodeOfferingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_purchaseReservedNodeOfferingCmd).Standalone()
+	carapace.Gen(redshift_purchaseReservedNodeOfferingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_purchaseReservedNodeOfferingCmd).Standalone()
 
-	redshift_purchaseReservedNodeOfferingCmd.Flags().String("node-count", "", "The number of reserved nodes that you want to purchase.")
-	redshift_purchaseReservedNodeOfferingCmd.Flags().String("reserved-node-offering-id", "", "The unique identifier of the reserved node offering you want to purchase.")
-	redshift_purchaseReservedNodeOfferingCmd.MarkFlagRequired("reserved-node-offering-id")
+		redshift_purchaseReservedNodeOfferingCmd.Flags().String("node-count", "", "The number of reserved nodes that you want to purchase.")
+		redshift_purchaseReservedNodeOfferingCmd.Flags().String("reserved-node-offering-id", "", "The unique identifier of the reserved node offering you want to purchase.")
+		redshift_purchaseReservedNodeOfferingCmd.MarkFlagRequired("reserved-node-offering-id")
+	})
 	redshiftCmd.AddCommand(redshift_purchaseReservedNodeOfferingCmd)
 }

@@ -12,11 +12,13 @@ var organizations_listAccountsForParentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listAccountsForParentCmd).Standalone()
+	carapace.Gen(organizations_listAccountsForParentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listAccountsForParentCmd).Standalone()
 
-	organizations_listAccountsForParentCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	organizations_listAccountsForParentCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
-	organizations_listAccountsForParentCmd.Flags().String("parent-id", "", "The unique identifier (ID) for the parent root or organization unit (OU) whose accounts you want to list.")
-	organizations_listAccountsForParentCmd.MarkFlagRequired("parent-id")
+		organizations_listAccountsForParentCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		organizations_listAccountsForParentCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listAccountsForParentCmd.Flags().String("parent-id", "", "The unique identifier (ID) for the parent root or organization unit (OU) whose accounts you want to list.")
+		organizations_listAccountsForParentCmd.MarkFlagRequired("parent-id")
+	})
 	organizationsCmd.AddCommand(organizations_listAccountsForParentCmd)
 }

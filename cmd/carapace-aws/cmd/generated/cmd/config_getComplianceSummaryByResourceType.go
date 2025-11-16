@@ -12,8 +12,10 @@ var config_getComplianceSummaryByResourceTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getComplianceSummaryByResourceTypeCmd).Standalone()
+	carapace.Gen(config_getComplianceSummaryByResourceTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getComplianceSummaryByResourceTypeCmd).Standalone()
 
-	config_getComplianceSummaryByResourceTypeCmd.Flags().String("resource-types", "", "Specify one or more resource types to get the number of resources that are compliant and the number that are noncompliant for each resource type.")
+		config_getComplianceSummaryByResourceTypeCmd.Flags().String("resource-types", "", "Specify one or more resource types to get the number of resources that are compliant and the number that are noncompliant for each resource type.")
+	})
 	configCmd.AddCommand(config_getComplianceSummaryByResourceTypeCmd)
 }

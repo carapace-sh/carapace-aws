@@ -12,11 +12,13 @@ var docdb_removeSourceIdentifierFromSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_removeSourceIdentifierFromSubscriptionCmd).Standalone()
+	carapace.Gen(docdb_removeSourceIdentifierFromSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_removeSourceIdentifierFromSubscriptionCmd).Standalone()
 
-	docdb_removeSourceIdentifierFromSubscriptionCmd.Flags().String("source-identifier", "", "The source identifier to be removed from the subscription, such as the instance identifier for an instance, or the name of a security group.")
-	docdb_removeSourceIdentifierFromSubscriptionCmd.Flags().String("subscription-name", "", "The name of the Amazon DocumentDB event notification subscription that you want to remove a source identifier from.")
-	docdb_removeSourceIdentifierFromSubscriptionCmd.MarkFlagRequired("source-identifier")
-	docdb_removeSourceIdentifierFromSubscriptionCmd.MarkFlagRequired("subscription-name")
+		docdb_removeSourceIdentifierFromSubscriptionCmd.Flags().String("source-identifier", "", "The source identifier to be removed from the subscription, such as the instance identifier for an instance, or the name of a security group.")
+		docdb_removeSourceIdentifierFromSubscriptionCmd.Flags().String("subscription-name", "", "The name of the Amazon DocumentDB event notification subscription that you want to remove a source identifier from.")
+		docdb_removeSourceIdentifierFromSubscriptionCmd.MarkFlagRequired("source-identifier")
+		docdb_removeSourceIdentifierFromSubscriptionCmd.MarkFlagRequired("subscription-name")
+	})
 	docdbCmd.AddCommand(docdb_removeSourceIdentifierFromSubscriptionCmd)
 }

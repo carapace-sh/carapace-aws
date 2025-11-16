@@ -12,9 +12,11 @@ var route53resolver_getFirewallRuleGroupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_getFirewallRuleGroupPolicyCmd).Standalone()
+	carapace.Gen(route53resolver_getFirewallRuleGroupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_getFirewallRuleGroupPolicyCmd).Standalone()
 
-	route53resolver_getFirewallRuleGroupPolicyCmd.Flags().String("arn", "", "The ARN (Amazon Resource Name) for the rule group.")
-	route53resolver_getFirewallRuleGroupPolicyCmd.MarkFlagRequired("arn")
+		route53resolver_getFirewallRuleGroupPolicyCmd.Flags().String("arn", "", "The ARN (Amazon Resource Name) for the rule group.")
+		route53resolver_getFirewallRuleGroupPolicyCmd.MarkFlagRequired("arn")
+	})
 	route53resolverCmd.AddCommand(route53resolver_getFirewallRuleGroupPolicyCmd)
 }

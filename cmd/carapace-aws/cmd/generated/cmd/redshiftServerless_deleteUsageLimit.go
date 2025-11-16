@@ -12,9 +12,11 @@ var redshiftServerless_deleteUsageLimitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_deleteUsageLimitCmd).Standalone()
+	carapace.Gen(redshiftServerless_deleteUsageLimitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_deleteUsageLimitCmd).Standalone()
 
-	redshiftServerless_deleteUsageLimitCmd.Flags().String("usage-limit-id", "", "The unique identifier of the usage limit to delete.")
-	redshiftServerless_deleteUsageLimitCmd.MarkFlagRequired("usage-limit-id")
+		redshiftServerless_deleteUsageLimitCmd.Flags().String("usage-limit-id", "", "The unique identifier of the usage limit to delete.")
+		redshiftServerless_deleteUsageLimitCmd.MarkFlagRequired("usage-limit-id")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_deleteUsageLimitCmd)
 }

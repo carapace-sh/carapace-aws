@@ -12,11 +12,13 @@ var chimeSdkMessaging_putChannelExpirationSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_putChannelExpirationSettingsCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_putChannelExpirationSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_putChannelExpirationSettingsCmd).Standalone()
 
-	chimeSdkMessaging_putChannelExpirationSettingsCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
-	chimeSdkMessaging_putChannelExpirationSettingsCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_putChannelExpirationSettingsCmd.Flags().String("expiration-settings", "", "Settings that control the interval after which a channel is deleted.")
-	chimeSdkMessaging_putChannelExpirationSettingsCmd.MarkFlagRequired("channel-arn")
+		chimeSdkMessaging_putChannelExpirationSettingsCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
+		chimeSdkMessaging_putChannelExpirationSettingsCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_putChannelExpirationSettingsCmd.Flags().String("expiration-settings", "", "Settings that control the interval after which a channel is deleted.")
+		chimeSdkMessaging_putChannelExpirationSettingsCmd.MarkFlagRequired("channel-arn")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_putChannelExpirationSettingsCmd)
 }

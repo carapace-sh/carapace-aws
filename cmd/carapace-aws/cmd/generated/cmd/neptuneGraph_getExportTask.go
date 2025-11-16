@@ -12,9 +12,11 @@ var neptuneGraph_getExportTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_getExportTaskCmd).Standalone()
+	carapace.Gen(neptuneGraph_getExportTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_getExportTaskCmd).Standalone()
 
-	neptuneGraph_getExportTaskCmd.Flags().String("task-identifier", "", "The unique identifier of the export task.")
-	neptuneGraph_getExportTaskCmd.MarkFlagRequired("task-identifier")
+		neptuneGraph_getExportTaskCmd.Flags().String("task-identifier", "", "The unique identifier of the export task.")
+		neptuneGraph_getExportTaskCmd.MarkFlagRequired("task-identifier")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_getExportTaskCmd)
 }

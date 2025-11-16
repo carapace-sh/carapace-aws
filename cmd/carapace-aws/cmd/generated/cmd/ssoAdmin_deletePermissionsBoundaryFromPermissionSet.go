@@ -12,11 +12,13 @@ var ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd).Standalone()
+	carapace.Gen(ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd).Standalone()
 
-	ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd.Flags().String("permission-set-arn", "", "The ARN of the `PermissionSet`.")
-	ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd.MarkFlagRequired("instance-arn")
-	ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd.MarkFlagRequired("permission-set-arn")
+		ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd.Flags().String("permission-set-arn", "", "The ARN of the `PermissionSet`.")
+		ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd.MarkFlagRequired("permission-set-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_deletePermissionsBoundaryFromPermissionSetCmd)
 }

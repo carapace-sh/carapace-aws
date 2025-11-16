@@ -12,9 +12,11 @@ var apprunner_describeVpcConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_describeVpcConnectorCmd).Standalone()
+	carapace.Gen(apprunner_describeVpcConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_describeVpcConnectorCmd).Standalone()
 
-	apprunner_describeVpcConnectorCmd.Flags().String("vpc-connector-arn", "", "The Amazon Resource Name (ARN) of the App Runner VPC connector that you want a description for.")
-	apprunner_describeVpcConnectorCmd.MarkFlagRequired("vpc-connector-arn")
+		apprunner_describeVpcConnectorCmd.Flags().String("vpc-connector-arn", "", "The Amazon Resource Name (ARN) of the App Runner VPC connector that you want a description for.")
+		apprunner_describeVpcConnectorCmd.MarkFlagRequired("vpc-connector-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_describeVpcConnectorCmd)
 }

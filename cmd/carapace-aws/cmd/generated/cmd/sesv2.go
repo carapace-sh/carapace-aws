@@ -12,7 +12,9 @@ var sesv2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2Cmd).Standalone()
+	carapace.Gen(sesv2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2Cmd).Standalone()
 
+	})
 	rootCmd.AddCommand(sesv2Cmd)
 }

@@ -12,10 +12,12 @@ var apigateway_getUsagePlansCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getUsagePlansCmd).Standalone()
+	carapace.Gen(apigateway_getUsagePlansCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getUsagePlansCmd).Standalone()
 
-	apigateway_getUsagePlansCmd.Flags().String("key-id", "", "The identifier of the API key associated with the usage plans.")
-	apigateway_getUsagePlansCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getUsagePlansCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getUsagePlansCmd.Flags().String("key-id", "", "The identifier of the API key associated with the usage plans.")
+		apigateway_getUsagePlansCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getUsagePlansCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+	})
 	apigatewayCmd.AddCommand(apigateway_getUsagePlansCmd)
 }

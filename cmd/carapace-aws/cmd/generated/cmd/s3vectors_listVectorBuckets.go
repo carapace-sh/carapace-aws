@@ -12,10 +12,12 @@ var s3vectors_listVectorBucketsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3vectors_listVectorBucketsCmd).Standalone()
+	carapace.Gen(s3vectors_listVectorBucketsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3vectors_listVectorBucketsCmd).Standalone()
 
-	s3vectors_listVectorBucketsCmd.Flags().String("max-results", "", "The maximum number of vector buckets to be returned in the response.")
-	s3vectors_listVectorBucketsCmd.Flags().String("next-token", "", "The previous pagination token.")
-	s3vectors_listVectorBucketsCmd.Flags().String("prefix", "", "Limits the response to vector buckets that begin with the specified prefix.")
+		s3vectors_listVectorBucketsCmd.Flags().String("max-results", "", "The maximum number of vector buckets to be returned in the response.")
+		s3vectors_listVectorBucketsCmd.Flags().String("next-token", "", "The previous pagination token.")
+		s3vectors_listVectorBucketsCmd.Flags().String("prefix", "", "Limits the response to vector buckets that begin with the specified prefix.")
+	})
 	s3vectorsCmd.AddCommand(s3vectors_listVectorBucketsCmd)
 }

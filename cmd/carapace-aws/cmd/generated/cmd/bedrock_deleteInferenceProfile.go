@@ -12,9 +12,11 @@ var bedrock_deleteInferenceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deleteInferenceProfileCmd).Standalone()
+	carapace.Gen(bedrock_deleteInferenceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deleteInferenceProfileCmd).Standalone()
 
-	bedrock_deleteInferenceProfileCmd.Flags().String("inference-profile-identifier", "", "The Amazon Resource Name (ARN) or ID of the application inference profile to delete.")
-	bedrock_deleteInferenceProfileCmd.MarkFlagRequired("inference-profile-identifier")
+		bedrock_deleteInferenceProfileCmd.Flags().String("inference-profile-identifier", "", "The Amazon Resource Name (ARN) or ID of the application inference profile to delete.")
+		bedrock_deleteInferenceProfileCmd.MarkFlagRequired("inference-profile-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_deleteInferenceProfileCmd)
 }

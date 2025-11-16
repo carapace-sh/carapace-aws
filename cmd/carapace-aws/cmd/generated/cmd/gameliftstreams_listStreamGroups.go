@@ -12,9 +12,11 @@ var gameliftstreams_listStreamGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftstreams_listStreamGroupsCmd).Standalone()
+	carapace.Gen(gameliftstreams_listStreamGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftstreams_listStreamGroupsCmd).Standalone()
 
-	gameliftstreams_listStreamGroupsCmd.Flags().String("max-results", "", "The number of results to return.")
-	gameliftstreams_listStreamGroupsCmd.Flags().String("next-token", "", "A token that marks the start of the next set of results.")
+		gameliftstreams_listStreamGroupsCmd.Flags().String("max-results", "", "The number of results to return.")
+		gameliftstreams_listStreamGroupsCmd.Flags().String("next-token", "", "A token that marks the start of the next set of results.")
+	})
 	gameliftstreamsCmd.AddCommand(gameliftstreams_listStreamGroupsCmd)
 }

@@ -12,9 +12,11 @@ var omics_deleteShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_deleteShareCmd).Standalone()
+	carapace.Gen(omics_deleteShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_deleteShareCmd).Standalone()
 
-	omics_deleteShareCmd.Flags().String("share-id", "", "The ID for the resource share to be deleted.")
-	omics_deleteShareCmd.MarkFlagRequired("share-id")
+		omics_deleteShareCmd.Flags().String("share-id", "", "The ID for the resource share to be deleted.")
+		omics_deleteShareCmd.MarkFlagRequired("share-id")
+	})
 	omicsCmd.AddCommand(omics_deleteShareCmd)
 }

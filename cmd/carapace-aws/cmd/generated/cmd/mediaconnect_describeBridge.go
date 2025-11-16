@@ -12,9 +12,11 @@ var mediaconnect_describeBridgeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_describeBridgeCmd).Standalone()
+	carapace.Gen(mediaconnect_describeBridgeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_describeBridgeCmd).Standalone()
 
-	mediaconnect_describeBridgeCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to describe.")
-	mediaconnect_describeBridgeCmd.MarkFlagRequired("bridge-arn")
+		mediaconnect_describeBridgeCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to describe.")
+		mediaconnect_describeBridgeCmd.MarkFlagRequired("bridge-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_describeBridgeCmd)
 }

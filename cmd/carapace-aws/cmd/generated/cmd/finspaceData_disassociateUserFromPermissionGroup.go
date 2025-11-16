@@ -12,12 +12,14 @@ var finspaceData_disassociateUserFromPermissionGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_disassociateUserFromPermissionGroupCmd).Standalone()
+	carapace.Gen(finspaceData_disassociateUserFromPermissionGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_disassociateUserFromPermissionGroupCmd).Standalone()
 
-	finspaceData_disassociateUserFromPermissionGroupCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
-	finspaceData_disassociateUserFromPermissionGroupCmd.Flags().String("permission-group-id", "", "The unique identifier for the permission group.")
-	finspaceData_disassociateUserFromPermissionGroupCmd.Flags().String("user-id", "", "The unique identifier for the user.")
-	finspaceData_disassociateUserFromPermissionGroupCmd.MarkFlagRequired("permission-group-id")
-	finspaceData_disassociateUserFromPermissionGroupCmd.MarkFlagRequired("user-id")
+		finspaceData_disassociateUserFromPermissionGroupCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
+		finspaceData_disassociateUserFromPermissionGroupCmd.Flags().String("permission-group-id", "", "The unique identifier for the permission group.")
+		finspaceData_disassociateUserFromPermissionGroupCmd.Flags().String("user-id", "", "The unique identifier for the user.")
+		finspaceData_disassociateUserFromPermissionGroupCmd.MarkFlagRequired("permission-group-id")
+		finspaceData_disassociateUserFromPermissionGroupCmd.MarkFlagRequired("user-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_disassociateUserFromPermissionGroupCmd)
 }

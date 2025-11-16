@@ -12,11 +12,13 @@ var codecommit_getPullRequestApprovalStatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_getPullRequestApprovalStatesCmd).Standalone()
+	carapace.Gen(codecommit_getPullRequestApprovalStatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_getPullRequestApprovalStatesCmd).Standalone()
 
-	codecommit_getPullRequestApprovalStatesCmd.Flags().String("pull-request-id", "", "The system-generated ID for the pull request.")
-	codecommit_getPullRequestApprovalStatesCmd.Flags().String("revision-id", "", "The system-generated ID for the pull request revision.")
-	codecommit_getPullRequestApprovalStatesCmd.MarkFlagRequired("pull-request-id")
-	codecommit_getPullRequestApprovalStatesCmd.MarkFlagRequired("revision-id")
+		codecommit_getPullRequestApprovalStatesCmd.Flags().String("pull-request-id", "", "The system-generated ID for the pull request.")
+		codecommit_getPullRequestApprovalStatesCmd.Flags().String("revision-id", "", "The system-generated ID for the pull request revision.")
+		codecommit_getPullRequestApprovalStatesCmd.MarkFlagRequired("pull-request-id")
+		codecommit_getPullRequestApprovalStatesCmd.MarkFlagRequired("revision-id")
+	})
 	codecommitCmd.AddCommand(codecommit_getPullRequestApprovalStatesCmd)
 }

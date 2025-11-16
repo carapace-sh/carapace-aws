@@ -12,7 +12,9 @@ var applicationInsightsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsightsCmd).Standalone()
+	carapace.Gen(applicationInsightsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsightsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(applicationInsightsCmd)
 }

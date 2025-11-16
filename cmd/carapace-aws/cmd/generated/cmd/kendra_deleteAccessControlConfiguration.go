@@ -12,11 +12,13 @@ var kendra_deleteAccessControlConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_deleteAccessControlConfigurationCmd).Standalone()
+	carapace.Gen(kendra_deleteAccessControlConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_deleteAccessControlConfigurationCmd).Standalone()
 
-	kendra_deleteAccessControlConfigurationCmd.Flags().String("id", "", "The identifier of the access control configuration you want to delete.")
-	kendra_deleteAccessControlConfigurationCmd.Flags().String("index-id", "", "The identifier of the index for an access control configuration.")
-	kendra_deleteAccessControlConfigurationCmd.MarkFlagRequired("id")
-	kendra_deleteAccessControlConfigurationCmd.MarkFlagRequired("index-id")
+		kendra_deleteAccessControlConfigurationCmd.Flags().String("id", "", "The identifier of the access control configuration you want to delete.")
+		kendra_deleteAccessControlConfigurationCmd.Flags().String("index-id", "", "The identifier of the index for an access control configuration.")
+		kendra_deleteAccessControlConfigurationCmd.MarkFlagRequired("id")
+		kendra_deleteAccessControlConfigurationCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_deleteAccessControlConfigurationCmd)
 }

@@ -12,14 +12,16 @@ var pinpointSmsVoiceV2_putKeywordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_putKeywordCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_putKeywordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_putKeywordCmd).Standalone()
 
-	pinpointSmsVoiceV2_putKeywordCmd.Flags().String("keyword", "", "The new keyword to add.")
-	pinpointSmsVoiceV2_putKeywordCmd.Flags().String("keyword-action", "", "The action to perform for the new keyword when it is received.")
-	pinpointSmsVoiceV2_putKeywordCmd.Flags().String("keyword-message", "", "The message associated with the keyword.")
-	pinpointSmsVoiceV2_putKeywordCmd.Flags().String("origination-identity", "", "The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn.")
-	pinpointSmsVoiceV2_putKeywordCmd.MarkFlagRequired("keyword")
-	pinpointSmsVoiceV2_putKeywordCmd.MarkFlagRequired("keyword-message")
-	pinpointSmsVoiceV2_putKeywordCmd.MarkFlagRequired("origination-identity")
+		pinpointSmsVoiceV2_putKeywordCmd.Flags().String("keyword", "", "The new keyword to add.")
+		pinpointSmsVoiceV2_putKeywordCmd.Flags().String("keyword-action", "", "The action to perform for the new keyword when it is received.")
+		pinpointSmsVoiceV2_putKeywordCmd.Flags().String("keyword-message", "", "The message associated with the keyword.")
+		pinpointSmsVoiceV2_putKeywordCmd.Flags().String("origination-identity", "", "The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn.")
+		pinpointSmsVoiceV2_putKeywordCmd.MarkFlagRequired("keyword")
+		pinpointSmsVoiceV2_putKeywordCmd.MarkFlagRequired("keyword-message")
+		pinpointSmsVoiceV2_putKeywordCmd.MarkFlagRequired("origination-identity")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_putKeywordCmd)
 }

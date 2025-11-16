@@ -12,13 +12,15 @@ var connect_listAssociatedContactsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listAssociatedContactsCmd).Standalone()
+	carapace.Gen(connect_listAssociatedContactsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listAssociatedContactsCmd).Standalone()
 
-	connect_listAssociatedContactsCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
-	connect_listAssociatedContactsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listAssociatedContactsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listAssociatedContactsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listAssociatedContactsCmd.MarkFlagRequired("contact-id")
-	connect_listAssociatedContactsCmd.MarkFlagRequired("instance-id")
+		connect_listAssociatedContactsCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
+		connect_listAssociatedContactsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listAssociatedContactsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listAssociatedContactsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listAssociatedContactsCmd.MarkFlagRequired("contact-id")
+		connect_listAssociatedContactsCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listAssociatedContactsCmd)
 }

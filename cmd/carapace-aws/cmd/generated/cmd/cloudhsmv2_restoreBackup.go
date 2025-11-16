@@ -12,9 +12,11 @@ var cloudhsmv2_restoreBackupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsmv2_restoreBackupCmd).Standalone()
+	carapace.Gen(cloudhsmv2_restoreBackupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsmv2_restoreBackupCmd).Standalone()
 
-	cloudhsmv2_restoreBackupCmd.Flags().String("backup-id", "", "The ID of the backup to be restored.")
-	cloudhsmv2_restoreBackupCmd.MarkFlagRequired("backup-id")
+		cloudhsmv2_restoreBackupCmd.Flags().String("backup-id", "", "The ID of the backup to be restored.")
+		cloudhsmv2_restoreBackupCmd.MarkFlagRequired("backup-id")
+	})
 	cloudhsmv2Cmd.AddCommand(cloudhsmv2_restoreBackupCmd)
 }

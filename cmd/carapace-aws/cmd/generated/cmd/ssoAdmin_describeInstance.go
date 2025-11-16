@@ -12,9 +12,11 @@ var ssoAdmin_describeInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_describeInstanceCmd).Standalone()
+	carapace.Gen(ssoAdmin_describeInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_describeInstanceCmd).Standalone()
 
-	ssoAdmin_describeInstanceCmd.Flags().String("instance-arn", "", "The ARN of the instance of IAM Identity Center under which the operation will run.")
-	ssoAdmin_describeInstanceCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_describeInstanceCmd.Flags().String("instance-arn", "", "The ARN of the instance of IAM Identity Center under which the operation will run.")
+		ssoAdmin_describeInstanceCmd.MarkFlagRequired("instance-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_describeInstanceCmd)
 }

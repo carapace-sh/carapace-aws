@@ -12,11 +12,13 @@ var codecommit_updateApprovalRuleTemplateNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_updateApprovalRuleTemplateNameCmd).Standalone()
+	carapace.Gen(codecommit_updateApprovalRuleTemplateNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_updateApprovalRuleTemplateNameCmd).Standalone()
 
-	codecommit_updateApprovalRuleTemplateNameCmd.Flags().String("new-approval-rule-template-name", "", "The new name you want to apply to the approval rule template.")
-	codecommit_updateApprovalRuleTemplateNameCmd.Flags().String("old-approval-rule-template-name", "", "The current name of the approval rule template.")
-	codecommit_updateApprovalRuleTemplateNameCmd.MarkFlagRequired("new-approval-rule-template-name")
-	codecommit_updateApprovalRuleTemplateNameCmd.MarkFlagRequired("old-approval-rule-template-name")
+		codecommit_updateApprovalRuleTemplateNameCmd.Flags().String("new-approval-rule-template-name", "", "The new name you want to apply to the approval rule template.")
+		codecommit_updateApprovalRuleTemplateNameCmd.Flags().String("old-approval-rule-template-name", "", "The current name of the approval rule template.")
+		codecommit_updateApprovalRuleTemplateNameCmd.MarkFlagRequired("new-approval-rule-template-name")
+		codecommit_updateApprovalRuleTemplateNameCmd.MarkFlagRequired("old-approval-rule-template-name")
+	})
 	codecommitCmd.AddCommand(codecommit_updateApprovalRuleTemplateNameCmd)
 }

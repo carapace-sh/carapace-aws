@@ -12,9 +12,11 @@ var ssmQuicksetup_getConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmQuicksetup_getConfigurationCmd).Standalone()
+	carapace.Gen(ssmQuicksetup_getConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmQuicksetup_getConfigurationCmd).Standalone()
 
-	ssmQuicksetup_getConfigurationCmd.Flags().String("configuration-id", "", "A service generated identifier for the configuration.")
-	ssmQuicksetup_getConfigurationCmd.MarkFlagRequired("configuration-id")
+		ssmQuicksetup_getConfigurationCmd.Flags().String("configuration-id", "", "A service generated identifier for the configuration.")
+		ssmQuicksetup_getConfigurationCmd.MarkFlagRequired("configuration-id")
+	})
 	ssmQuicksetupCmd.AddCommand(ssmQuicksetup_getConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var notificationscontacts_deleteEmailContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notificationscontacts_deleteEmailContactCmd).Standalone()
+	carapace.Gen(notificationscontacts_deleteEmailContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notificationscontacts_deleteEmailContactCmd).Standalone()
 
-	notificationscontacts_deleteEmailContactCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	notificationscontacts_deleteEmailContactCmd.MarkFlagRequired("arn")
+		notificationscontacts_deleteEmailContactCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		notificationscontacts_deleteEmailContactCmd.MarkFlagRequired("arn")
+	})
 	notificationscontactsCmd.AddCommand(notificationscontacts_deleteEmailContactCmd)
 }

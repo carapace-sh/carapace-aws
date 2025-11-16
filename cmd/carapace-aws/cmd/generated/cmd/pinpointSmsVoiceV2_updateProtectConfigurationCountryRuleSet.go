@@ -12,13 +12,15 @@ var pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd).Standalone()
 
-	pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.Flags().String("country-rule-set-updates", "", "A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability.")
-	pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.Flags().String("number-capability", "", "The number capability to apply the CountryRuleSetUpdates updates to.")
-	pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
-	pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("country-rule-set-updates")
-	pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("number-capability")
-	pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("protect-configuration-id")
+		pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.Flags().String("country-rule-set-updates", "", "A map of ProtectConfigurationCountryRuleSetInformation objects that contain the details for the requested NumberCapability.")
+		pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.Flags().String("number-capability", "", "The number capability to apply the CountryRuleSetUpdates updates to.")
+		pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
+		pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("country-rule-set-updates")
+		pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("number-capability")
+		pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("protect-configuration-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_updateProtectConfigurationCountryRuleSetCmd)
 }

@@ -12,9 +12,11 @@ var rum_listAppMonitorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rum_listAppMonitorsCmd).Standalone()
+	carapace.Gen(rum_listAppMonitorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rum_listAppMonitorsCmd).Standalone()
 
-	rum_listAppMonitorsCmd.Flags().String("max-results", "", "The maximum number of results to return in one operation.")
-	rum_listAppMonitorsCmd.Flags().String("next-token", "", "Use the token returned by the previous operation to request the next page of results.")
+		rum_listAppMonitorsCmd.Flags().String("max-results", "", "The maximum number of results to return in one operation.")
+		rum_listAppMonitorsCmd.Flags().String("next-token", "", "Use the token returned by the previous operation to request the next page of results.")
+	})
 	rumCmd.AddCommand(rum_listAppMonitorsCmd)
 }

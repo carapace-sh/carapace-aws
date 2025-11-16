@@ -12,9 +12,11 @@ var sagemaker_stopTransformJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopTransformJobCmd).Standalone()
+	carapace.Gen(sagemaker_stopTransformJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopTransformJobCmd).Standalone()
 
-	sagemaker_stopTransformJobCmd.Flags().String("transform-job-name", "", "The name of the batch transform job to stop.")
-	sagemaker_stopTransformJobCmd.MarkFlagRequired("transform-job-name")
+		sagemaker_stopTransformJobCmd.Flags().String("transform-job-name", "", "The name of the batch transform job to stop.")
+		sagemaker_stopTransformJobCmd.MarkFlagRequired("transform-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopTransformJobCmd)
 }

@@ -12,9 +12,11 @@ var quicksight_deleteAccountSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteAccountSubscriptionCmd).Standalone()
+	carapace.Gen(quicksight_deleteAccountSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteAccountSubscriptionCmd).Standalone()
 
-	quicksight_deleteAccountSubscriptionCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID of the account that you want to delete.")
-	quicksight_deleteAccountSubscriptionCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteAccountSubscriptionCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID of the account that you want to delete.")
+		quicksight_deleteAccountSubscriptionCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteAccountSubscriptionCmd)
 }

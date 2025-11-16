@@ -12,7 +12,9 @@ var resourceExplorer2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2Cmd).Standalone()
+	carapace.Gen(resourceExplorer2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2Cmd).Standalone()
 
+	})
 	rootCmd.AddCommand(resourceExplorer2Cmd)
 }

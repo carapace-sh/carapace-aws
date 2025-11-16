@@ -12,11 +12,13 @@ var iotevents_listInputRoutingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_listInputRoutingsCmd).Standalone()
+	carapace.Gen(iotevents_listInputRoutingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_listInputRoutingsCmd).Standalone()
 
-	iotevents_listInputRoutingsCmd.Flags().String("input-identifier", "", "The identifer of the routed input.")
-	iotevents_listInputRoutingsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	iotevents_listInputRoutingsCmd.Flags().String("next-token", "", "The token that you can use to return the next set of results.")
-	iotevents_listInputRoutingsCmd.MarkFlagRequired("input-identifier")
+		iotevents_listInputRoutingsCmd.Flags().String("input-identifier", "", "The identifer of the routed input.")
+		iotevents_listInputRoutingsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		iotevents_listInputRoutingsCmd.Flags().String("next-token", "", "The token that you can use to return the next set of results.")
+		iotevents_listInputRoutingsCmd.MarkFlagRequired("input-identifier")
+	})
 	ioteventsCmd.AddCommand(iotevents_listInputRoutingsCmd)
 }

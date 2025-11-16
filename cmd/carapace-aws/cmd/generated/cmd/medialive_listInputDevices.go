@@ -12,9 +12,11 @@ var medialive_listInputDevicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listInputDevicesCmd).Standalone()
+	carapace.Gen(medialive_listInputDevicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listInputDevicesCmd).Standalone()
 
-	medialive_listInputDevicesCmd.Flags().String("max-results", "", "")
-	medialive_listInputDevicesCmd.Flags().String("next-token", "", "")
+		medialive_listInputDevicesCmd.Flags().String("max-results", "", "")
+		medialive_listInputDevicesCmd.Flags().String("next-token", "", "")
+	})
 	medialiveCmd.AddCommand(medialive_listInputDevicesCmd)
 }

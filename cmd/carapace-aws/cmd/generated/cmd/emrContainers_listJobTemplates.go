@@ -12,11 +12,13 @@ var emrContainers_listJobTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_listJobTemplatesCmd).Standalone()
+	carapace.Gen(emrContainers_listJobTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_listJobTemplatesCmd).Standalone()
 
-	emrContainers_listJobTemplatesCmd.Flags().String("created-after", "", "The date and time after which the job templates were created.")
-	emrContainers_listJobTemplatesCmd.Flags().String("created-before", "", "The date and time before which the job templates were created.")
-	emrContainers_listJobTemplatesCmd.Flags().String("max-results", "", "The maximum number of job templates that can be listed.")
-	emrContainers_listJobTemplatesCmd.Flags().String("next-token", "", "The token for the next set of job templates to return.")
+		emrContainers_listJobTemplatesCmd.Flags().String("created-after", "", "The date and time after which the job templates were created.")
+		emrContainers_listJobTemplatesCmd.Flags().String("created-before", "", "The date and time before which the job templates were created.")
+		emrContainers_listJobTemplatesCmd.Flags().String("max-results", "", "The maximum number of job templates that can be listed.")
+		emrContainers_listJobTemplatesCmd.Flags().String("next-token", "", "The token for the next set of job templates to return.")
+	})
 	emrContainersCmd.AddCommand(emrContainers_listJobTemplatesCmd)
 }

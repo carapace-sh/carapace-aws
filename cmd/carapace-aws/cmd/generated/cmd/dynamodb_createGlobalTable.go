@@ -12,11 +12,13 @@ var dynamodb_createGlobalTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_createGlobalTableCmd).Standalone()
+	carapace.Gen(dynamodb_createGlobalTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_createGlobalTableCmd).Standalone()
 
-	dynamodb_createGlobalTableCmd.Flags().String("global-table-name", "", "The global table name.")
-	dynamodb_createGlobalTableCmd.Flags().String("replication-group", "", "The Regions where the global table needs to be created.")
-	dynamodb_createGlobalTableCmd.MarkFlagRequired("global-table-name")
-	dynamodb_createGlobalTableCmd.MarkFlagRequired("replication-group")
+		dynamodb_createGlobalTableCmd.Flags().String("global-table-name", "", "The global table name.")
+		dynamodb_createGlobalTableCmd.Flags().String("replication-group", "", "The Regions where the global table needs to be created.")
+		dynamodb_createGlobalTableCmd.MarkFlagRequired("global-table-name")
+		dynamodb_createGlobalTableCmd.MarkFlagRequired("replication-group")
+	})
 	dynamodbCmd.AddCommand(dynamodb_createGlobalTableCmd)
 }

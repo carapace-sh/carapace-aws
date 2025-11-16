@@ -12,9 +12,11 @@ var accessanalyzer_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_listTagsForResourceCmd).Standalone()
+	carapace.Gen(accessanalyzer_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_listTagsForResourceCmd).Standalone()
 
-	accessanalyzer_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to retrieve tags from.")
-	accessanalyzer_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		accessanalyzer_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to retrieve tags from.")
+		accessanalyzer_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_listTagsForResourceCmd)
 }

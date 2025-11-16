@@ -12,11 +12,13 @@ var kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd = &cobra.Com
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd).Standalone()
 
-	kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd.Flags().String("application-maintenance-configuration-update", "", "Describes the application maintenance configuration update.")
-	kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd.Flags().String("application-name", "", "The name of the application for which you want to update the maintenance configuration.")
-	kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd.MarkFlagRequired("application-maintenance-configuration-update")
-	kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd.Flags().String("application-maintenance-configuration-update", "", "Describes the application maintenance configuration update.")
+		kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd.Flags().String("application-name", "", "The name of the application for which you want to update the maintenance configuration.")
+		kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd.MarkFlagRequired("application-maintenance-configuration-update")
+		kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd.MarkFlagRequired("application-name")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_updateApplicationMaintenanceConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var ioteventsData_batchPutMessageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ioteventsData_batchPutMessageCmd).Standalone()
+	carapace.Gen(ioteventsData_batchPutMessageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ioteventsData_batchPutMessageCmd).Standalone()
 
-	ioteventsData_batchPutMessageCmd.Flags().String("messages", "", "The list of messages to send.")
-	ioteventsData_batchPutMessageCmd.MarkFlagRequired("messages")
+		ioteventsData_batchPutMessageCmd.Flags().String("messages", "", "The list of messages to send.")
+		ioteventsData_batchPutMessageCmd.MarkFlagRequired("messages")
+	})
 	ioteventsDataCmd.AddCommand(ioteventsData_batchPutMessageCmd)
 }

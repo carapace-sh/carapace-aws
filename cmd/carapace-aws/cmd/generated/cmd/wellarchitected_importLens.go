@@ -12,13 +12,15 @@ var wellarchitected_importLensCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_importLensCmd).Standalone()
+	carapace.Gen(wellarchitected_importLensCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_importLensCmd).Standalone()
 
-	wellarchitected_importLensCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_importLensCmd.Flags().String("jsonstring", "", "The JSON representation of a lens.")
-	wellarchitected_importLensCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_importLensCmd.Flags().String("tags", "", "Tags to associate to a lens.")
-	wellarchitected_importLensCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_importLensCmd.MarkFlagRequired("jsonstring")
+		wellarchitected_importLensCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_importLensCmd.Flags().String("jsonstring", "", "The JSON representation of a lens.")
+		wellarchitected_importLensCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_importLensCmd.Flags().String("tags", "", "Tags to associate to a lens.")
+		wellarchitected_importLensCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_importLensCmd.MarkFlagRequired("jsonstring")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_importLensCmd)
 }

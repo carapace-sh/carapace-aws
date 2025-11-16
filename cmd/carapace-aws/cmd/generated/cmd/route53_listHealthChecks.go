@@ -12,9 +12,11 @@ var route53_listHealthChecksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_listHealthChecksCmd).Standalone()
+	carapace.Gen(route53_listHealthChecksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_listHealthChecksCmd).Standalone()
 
-	route53_listHealthChecksCmd.Flags().String("marker", "", "If the value of `IsTruncated` in the previous response was `true`, you have more health checks.")
-	route53_listHealthChecksCmd.Flags().String("max-items", "", "The maximum number of health checks that you want `ListHealthChecks` to return in response to the current request.")
+		route53_listHealthChecksCmd.Flags().String("marker", "", "If the value of `IsTruncated` in the previous response was `true`, you have more health checks.")
+		route53_listHealthChecksCmd.Flags().String("max-items", "", "The maximum number of health checks that you want `ListHealthChecks` to return in response to the current request.")
+	})
 	route53Cmd.AddCommand(route53_listHealthChecksCmd)
 }

@@ -12,15 +12,17 @@ var serviceQuotas_requestServiceQuotaIncreaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_requestServiceQuotaIncreaseCmd).Standalone()
+	carapace.Gen(serviceQuotas_requestServiceQuotaIncreaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_requestServiceQuotaIncreaseCmd).Standalone()
 
-	serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("context-id", "", "Specifies the resource with an Amazon Resource Name (ARN).")
-	serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("desired-value", "", "Specifies the new, increased value for the quota.")
-	serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("quota-code", "", "Specifies the quota identifier.")
-	serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("service-code", "", "Specifies the service identifier.")
-	serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("support-case-allowed", "", "Specifies if an Amazon Web Services Support case can be opened for the quota increase request.")
-	serviceQuotas_requestServiceQuotaIncreaseCmd.MarkFlagRequired("desired-value")
-	serviceQuotas_requestServiceQuotaIncreaseCmd.MarkFlagRequired("quota-code")
-	serviceQuotas_requestServiceQuotaIncreaseCmd.MarkFlagRequired("service-code")
+		serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("context-id", "", "Specifies the resource with an Amazon Resource Name (ARN).")
+		serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("desired-value", "", "Specifies the new, increased value for the quota.")
+		serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("quota-code", "", "Specifies the quota identifier.")
+		serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("service-code", "", "Specifies the service identifier.")
+		serviceQuotas_requestServiceQuotaIncreaseCmd.Flags().String("support-case-allowed", "", "Specifies if an Amazon Web Services Support case can be opened for the quota increase request.")
+		serviceQuotas_requestServiceQuotaIncreaseCmd.MarkFlagRequired("desired-value")
+		serviceQuotas_requestServiceQuotaIncreaseCmd.MarkFlagRequired("quota-code")
+		serviceQuotas_requestServiceQuotaIncreaseCmd.MarkFlagRequired("service-code")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_requestServiceQuotaIncreaseCmd)
 }

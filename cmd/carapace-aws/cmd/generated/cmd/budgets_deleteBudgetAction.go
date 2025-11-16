@@ -12,13 +12,15 @@ var budgets_deleteBudgetActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(budgets_deleteBudgetActionCmd).Standalone()
+	carapace.Gen(budgets_deleteBudgetActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(budgets_deleteBudgetActionCmd).Standalone()
 
-	budgets_deleteBudgetActionCmd.Flags().String("account-id", "", "")
-	budgets_deleteBudgetActionCmd.Flags().String("action-id", "", "A system-generated universally unique identifier (UUID) for the action.")
-	budgets_deleteBudgetActionCmd.Flags().String("budget-name", "", "")
-	budgets_deleteBudgetActionCmd.MarkFlagRequired("account-id")
-	budgets_deleteBudgetActionCmd.MarkFlagRequired("action-id")
-	budgets_deleteBudgetActionCmd.MarkFlagRequired("budget-name")
+		budgets_deleteBudgetActionCmd.Flags().String("account-id", "", "")
+		budgets_deleteBudgetActionCmd.Flags().String("action-id", "", "A system-generated universally unique identifier (UUID) for the action.")
+		budgets_deleteBudgetActionCmd.Flags().String("budget-name", "", "")
+		budgets_deleteBudgetActionCmd.MarkFlagRequired("account-id")
+		budgets_deleteBudgetActionCmd.MarkFlagRequired("action-id")
+		budgets_deleteBudgetActionCmd.MarkFlagRequired("budget-name")
+	})
 	budgetsCmd.AddCommand(budgets_deleteBudgetActionCmd)
 }

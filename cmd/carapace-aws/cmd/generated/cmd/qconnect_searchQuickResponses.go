@@ -12,14 +12,16 @@ var qconnect_searchQuickResponsesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_searchQuickResponsesCmd).Standalone()
+	carapace.Gen(qconnect_searchQuickResponsesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_searchQuickResponsesCmd).Standalone()
 
-	qconnect_searchQuickResponsesCmd.Flags().String("attributes", "", "The [user-defined Amazon Connect contact attributes](https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes) to be resolved when search results are returned.")
-	qconnect_searchQuickResponsesCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_searchQuickResponsesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_searchQuickResponsesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	qconnect_searchQuickResponsesCmd.Flags().String("search-expression", "", "The search expression for querying the quick response.")
-	qconnect_searchQuickResponsesCmd.MarkFlagRequired("knowledge-base-id")
-	qconnect_searchQuickResponsesCmd.MarkFlagRequired("search-expression")
+		qconnect_searchQuickResponsesCmd.Flags().String("attributes", "", "The [user-defined Amazon Connect contact attributes](https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes) to be resolved when search results are returned.")
+		qconnect_searchQuickResponsesCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_searchQuickResponsesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_searchQuickResponsesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_searchQuickResponsesCmd.Flags().String("search-expression", "", "The search expression for querying the quick response.")
+		qconnect_searchQuickResponsesCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_searchQuickResponsesCmd.MarkFlagRequired("search-expression")
+	})
 	qconnectCmd.AddCommand(qconnect_searchQuickResponsesCmd)
 }

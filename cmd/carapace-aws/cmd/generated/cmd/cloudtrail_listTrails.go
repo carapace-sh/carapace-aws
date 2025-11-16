@@ -12,8 +12,10 @@ var cloudtrail_listTrailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_listTrailsCmd).Standalone()
+	carapace.Gen(cloudtrail_listTrailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_listTrailsCmd).Standalone()
 
-	cloudtrail_listTrailsCmd.Flags().String("next-token", "", "The token to use to get the next page of results after a previous API call.")
+		cloudtrail_listTrailsCmd.Flags().String("next-token", "", "The token to use to get the next page of results after a previous API call.")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_listTrailsCmd)
 }

@@ -12,11 +12,13 @@ var iotwireless_getPartnerAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getPartnerAccountCmd).Standalone()
+	carapace.Gen(iotwireless_getPartnerAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getPartnerAccountCmd).Standalone()
 
-	iotwireless_getPartnerAccountCmd.Flags().String("partner-account-id", "", "The partner account ID to disassociate from the AWS account.")
-	iotwireless_getPartnerAccountCmd.Flags().String("partner-type", "", "The partner type.")
-	iotwireless_getPartnerAccountCmd.MarkFlagRequired("partner-account-id")
-	iotwireless_getPartnerAccountCmd.MarkFlagRequired("partner-type")
+		iotwireless_getPartnerAccountCmd.Flags().String("partner-account-id", "", "The partner account ID to disassociate from the AWS account.")
+		iotwireless_getPartnerAccountCmd.Flags().String("partner-type", "", "The partner type.")
+		iotwireless_getPartnerAccountCmd.MarkFlagRequired("partner-account-id")
+		iotwireless_getPartnerAccountCmd.MarkFlagRequired("partner-type")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getPartnerAccountCmd)
 }

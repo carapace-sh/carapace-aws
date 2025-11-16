@@ -12,9 +12,11 @@ var apigateway_deleteUsagePlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_deleteUsagePlanCmd).Standalone()
+	carapace.Gen(apigateway_deleteUsagePlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_deleteUsagePlanCmd).Standalone()
 
-	apigateway_deleteUsagePlanCmd.Flags().String("usage-plan-id", "", "The Id of the to-be-deleted usage plan.")
-	apigateway_deleteUsagePlanCmd.MarkFlagRequired("usage-plan-id")
+		apigateway_deleteUsagePlanCmd.Flags().String("usage-plan-id", "", "The Id of the to-be-deleted usage plan.")
+		apigateway_deleteUsagePlanCmd.MarkFlagRequired("usage-plan-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_deleteUsagePlanCmd)
 }

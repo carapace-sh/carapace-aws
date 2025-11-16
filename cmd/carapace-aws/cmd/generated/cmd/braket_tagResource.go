@@ -12,11 +12,13 @@ var braket_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(braket_tagResourceCmd).Standalone()
+	carapace.Gen(braket_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(braket_tagResourceCmd).Standalone()
 
-	braket_tagResourceCmd.Flags().String("resource-arn", "", "Specify the `resourceArn` of the resource to which a tag will be added.")
-	braket_tagResourceCmd.Flags().String("tags", "", "Specify the tags to add to the resource.")
-	braket_tagResourceCmd.MarkFlagRequired("resource-arn")
-	braket_tagResourceCmd.MarkFlagRequired("tags")
+		braket_tagResourceCmd.Flags().String("resource-arn", "", "Specify the `resourceArn` of the resource to which a tag will be added.")
+		braket_tagResourceCmd.Flags().String("tags", "", "Specify the tags to add to the resource.")
+		braket_tagResourceCmd.MarkFlagRequired("resource-arn")
+		braket_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	braketCmd.AddCommand(braket_tagResourceCmd)
 }

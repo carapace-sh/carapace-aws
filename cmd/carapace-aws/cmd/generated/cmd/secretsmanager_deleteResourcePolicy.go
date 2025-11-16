@@ -12,9 +12,11 @@ var secretsmanager_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(secretsmanager_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_deleteResourcePolicyCmd).Standalone()
 
-	secretsmanager_deleteResourcePolicyCmd.Flags().String("secret-id", "", "The ARN or name of the secret to delete the attached resource-based policy for.")
-	secretsmanager_deleteResourcePolicyCmd.MarkFlagRequired("secret-id")
+		secretsmanager_deleteResourcePolicyCmd.Flags().String("secret-id", "", "The ARN or name of the secret to delete the attached resource-based policy for.")
+		secretsmanager_deleteResourcePolicyCmd.MarkFlagRequired("secret-id")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_deleteResourcePolicyCmd)
 }

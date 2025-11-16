@@ -12,9 +12,11 @@ var ivs_getPlaybackRestrictionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_getPlaybackRestrictionPolicyCmd).Standalone()
+	carapace.Gen(ivs_getPlaybackRestrictionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_getPlaybackRestrictionPolicyCmd).Standalone()
 
-	ivs_getPlaybackRestrictionPolicyCmd.Flags().String("arn", "", "ARN of the playback restriction policy to be returned.")
-	ivs_getPlaybackRestrictionPolicyCmd.MarkFlagRequired("arn")
+		ivs_getPlaybackRestrictionPolicyCmd.Flags().String("arn", "", "ARN of the playback restriction policy to be returned.")
+		ivs_getPlaybackRestrictionPolicyCmd.MarkFlagRequired("arn")
+	})
 	ivsCmd.AddCommand(ivs_getPlaybackRestrictionPolicyCmd)
 }

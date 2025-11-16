@@ -12,7 +12,9 @@ var macie2_getMasterAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getMasterAccountCmd).Standalone()
+	carapace.Gen(macie2_getMasterAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getMasterAccountCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_getMasterAccountCmd)
 }

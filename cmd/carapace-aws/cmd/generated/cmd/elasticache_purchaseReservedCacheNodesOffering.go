@@ -12,12 +12,14 @@ var elasticache_purchaseReservedCacheNodesOfferingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_purchaseReservedCacheNodesOfferingCmd).Standalone()
+	carapace.Gen(elasticache_purchaseReservedCacheNodesOfferingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_purchaseReservedCacheNodesOfferingCmd).Standalone()
 
-	elasticache_purchaseReservedCacheNodesOfferingCmd.Flags().String("cache-node-count", "", "The number of cache node instances to reserve.")
-	elasticache_purchaseReservedCacheNodesOfferingCmd.Flags().String("reserved-cache-node-id", "", "A customer-specified identifier to track this reservation.")
-	elasticache_purchaseReservedCacheNodesOfferingCmd.Flags().String("reserved-cache-nodes-offering-id", "", "The ID of the reserved cache node offering to purchase.")
-	elasticache_purchaseReservedCacheNodesOfferingCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
-	elasticache_purchaseReservedCacheNodesOfferingCmd.MarkFlagRequired("reserved-cache-nodes-offering-id")
+		elasticache_purchaseReservedCacheNodesOfferingCmd.Flags().String("cache-node-count", "", "The number of cache node instances to reserve.")
+		elasticache_purchaseReservedCacheNodesOfferingCmd.Flags().String("reserved-cache-node-id", "", "A customer-specified identifier to track this reservation.")
+		elasticache_purchaseReservedCacheNodesOfferingCmd.Flags().String("reserved-cache-nodes-offering-id", "", "The ID of the reserved cache node offering to purchase.")
+		elasticache_purchaseReservedCacheNodesOfferingCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
+		elasticache_purchaseReservedCacheNodesOfferingCmd.MarkFlagRequired("reserved-cache-nodes-offering-id")
+	})
 	elasticacheCmd.AddCommand(elasticache_purchaseReservedCacheNodesOfferingCmd)
 }

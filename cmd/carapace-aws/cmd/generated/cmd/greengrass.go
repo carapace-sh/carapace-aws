@@ -12,7 +12,9 @@ var greengrassCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrassCmd).Standalone()
+	carapace.Gen(greengrassCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrassCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(greengrassCmd)
 }

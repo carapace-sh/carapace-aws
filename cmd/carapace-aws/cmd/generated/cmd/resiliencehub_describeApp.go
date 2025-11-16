@@ -12,9 +12,11 @@ var resiliencehub_describeAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_describeAppCmd).Standalone()
+	carapace.Gen(resiliencehub_describeAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_describeAppCmd).Standalone()
 
-	resiliencehub_describeAppCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
-	resiliencehub_describeAppCmd.MarkFlagRequired("app-arn")
+		resiliencehub_describeAppCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
+		resiliencehub_describeAppCmd.MarkFlagRequired("app-arn")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_describeAppCmd)
 }

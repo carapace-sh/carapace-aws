@@ -12,10 +12,12 @@ var pinpointEmail_createDedicatedIpPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_createDedicatedIpPoolCmd).Standalone()
+	carapace.Gen(pinpointEmail_createDedicatedIpPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_createDedicatedIpPoolCmd).Standalone()
 
-	pinpointEmail_createDedicatedIpPoolCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool.")
-	pinpointEmail_createDedicatedIpPoolCmd.Flags().String("tags", "", "An object that defines the tags (keys and values) that you want to associate with the pool.")
-	pinpointEmail_createDedicatedIpPoolCmd.MarkFlagRequired("pool-name")
+		pinpointEmail_createDedicatedIpPoolCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool.")
+		pinpointEmail_createDedicatedIpPoolCmd.Flags().String("tags", "", "An object that defines the tags (keys and values) that you want to associate with the pool.")
+		pinpointEmail_createDedicatedIpPoolCmd.MarkFlagRequired("pool-name")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_createDedicatedIpPoolCmd)
 }

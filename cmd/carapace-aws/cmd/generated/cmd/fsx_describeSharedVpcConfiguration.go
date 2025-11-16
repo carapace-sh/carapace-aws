@@ -12,7 +12,9 @@ var fsx_describeSharedVpcConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_describeSharedVpcConfigurationCmd).Standalone()
+	carapace.Gen(fsx_describeSharedVpcConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_describeSharedVpcConfigurationCmd).Standalone()
 
+	})
 	fsxCmd.AddCommand(fsx_describeSharedVpcConfigurationCmd)
 }

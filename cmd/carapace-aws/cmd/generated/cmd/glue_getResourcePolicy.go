@@ -12,8 +12,10 @@ var glue_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getResourcePolicyCmd).Standalone()
+	carapace.Gen(glue_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getResourcePolicyCmd).Standalone()
 
-	glue_getResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the Glue resource for which to retrieve the resource policy.")
+		glue_getResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the Glue resource for which to retrieve the resource policy.")
+	})
 	glueCmd.AddCommand(glue_getResourcePolicyCmd)
 }

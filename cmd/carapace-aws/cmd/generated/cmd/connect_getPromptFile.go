@@ -12,11 +12,13 @@ var connect_getPromptFileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_getPromptFileCmd).Standalone()
+	carapace.Gen(connect_getPromptFileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_getPromptFileCmd).Standalone()
 
-	connect_getPromptFileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_getPromptFileCmd.Flags().String("prompt-id", "", "A unique identifier for the prompt.")
-	connect_getPromptFileCmd.MarkFlagRequired("instance-id")
-	connect_getPromptFileCmd.MarkFlagRequired("prompt-id")
+		connect_getPromptFileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_getPromptFileCmd.Flags().String("prompt-id", "", "A unique identifier for the prompt.")
+		connect_getPromptFileCmd.MarkFlagRequired("instance-id")
+		connect_getPromptFileCmd.MarkFlagRequired("prompt-id")
+	})
 	connectCmd.AddCommand(connect_getPromptFileCmd)
 }

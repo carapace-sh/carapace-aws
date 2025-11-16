@@ -12,7 +12,9 @@ var redshiftServerlessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerlessCmd).Standalone()
+	carapace.Gen(redshiftServerlessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerlessCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(redshiftServerlessCmd)
 }

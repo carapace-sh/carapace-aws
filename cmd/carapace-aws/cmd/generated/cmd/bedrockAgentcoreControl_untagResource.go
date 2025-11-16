@@ -12,11 +12,13 @@ var bedrockAgentcoreControl_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_untagResourceCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_untagResourceCmd).Standalone()
 
-	bedrockAgentcoreControl_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to untag.")
-	bedrockAgentcoreControl_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys of the tags to remove from the resource.")
-	bedrockAgentcoreControl_untagResourceCmd.MarkFlagRequired("resource-arn")
-	bedrockAgentcoreControl_untagResourceCmd.MarkFlagRequired("tag-keys")
+		bedrockAgentcoreControl_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to untag.")
+		bedrockAgentcoreControl_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys of the tags to remove from the resource.")
+		bedrockAgentcoreControl_untagResourceCmd.MarkFlagRequired("resource-arn")
+		bedrockAgentcoreControl_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_untagResourceCmd)
 }

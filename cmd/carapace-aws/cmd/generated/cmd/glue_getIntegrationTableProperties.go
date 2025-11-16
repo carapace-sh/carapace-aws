@@ -12,11 +12,13 @@ var glue_getIntegrationTablePropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getIntegrationTablePropertiesCmd).Standalone()
+	carapace.Gen(glue_getIntegrationTablePropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getIntegrationTablePropertiesCmd).Standalone()
 
-	glue_getIntegrationTablePropertiesCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties.")
-	glue_getIntegrationTablePropertiesCmd.Flags().String("table-name", "", "The name of the table to be replicated.")
-	glue_getIntegrationTablePropertiesCmd.MarkFlagRequired("resource-arn")
-	glue_getIntegrationTablePropertiesCmd.MarkFlagRequired("table-name")
+		glue_getIntegrationTablePropertiesCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties.")
+		glue_getIntegrationTablePropertiesCmd.Flags().String("table-name", "", "The name of the table to be replicated.")
+		glue_getIntegrationTablePropertiesCmd.MarkFlagRequired("resource-arn")
+		glue_getIntegrationTablePropertiesCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_getIntegrationTablePropertiesCmd)
 }

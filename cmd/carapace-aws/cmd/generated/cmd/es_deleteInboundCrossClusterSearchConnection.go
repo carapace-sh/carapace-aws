@@ -12,9 +12,11 @@ var es_deleteInboundCrossClusterSearchConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_deleteInboundCrossClusterSearchConnectionCmd).Standalone()
+	carapace.Gen(es_deleteInboundCrossClusterSearchConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_deleteInboundCrossClusterSearchConnectionCmd).Standalone()
 
-	es_deleteInboundCrossClusterSearchConnectionCmd.Flags().String("cross-cluster-search-connection-id", "", "The id of the inbound connection that you want to permanently delete.")
-	es_deleteInboundCrossClusterSearchConnectionCmd.MarkFlagRequired("cross-cluster-search-connection-id")
+		es_deleteInboundCrossClusterSearchConnectionCmd.Flags().String("cross-cluster-search-connection-id", "", "The id of the inbound connection that you want to permanently delete.")
+		es_deleteInboundCrossClusterSearchConnectionCmd.MarkFlagRequired("cross-cluster-search-connection-id")
+	})
 	esCmd.AddCommand(es_deleteInboundCrossClusterSearchConnectionCmd)
 }

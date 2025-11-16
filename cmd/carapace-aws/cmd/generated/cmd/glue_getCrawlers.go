@@ -12,9 +12,11 @@ var glue_getCrawlersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getCrawlersCmd).Standalone()
+	carapace.Gen(glue_getCrawlersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getCrawlersCmd).Standalone()
 
-	glue_getCrawlersCmd.Flags().String("max-results", "", "The number of crawlers to return on each call.")
-	glue_getCrawlersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+		glue_getCrawlersCmd.Flags().String("max-results", "", "The number of crawlers to return on each call.")
+		glue_getCrawlersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+	})
 	glueCmd.AddCommand(glue_getCrawlersCmd)
 }

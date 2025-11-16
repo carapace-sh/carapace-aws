@@ -12,11 +12,13 @@ var proton_updateServiceSyncBlockerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_updateServiceSyncBlockerCmd).Standalone()
+	carapace.Gen(proton_updateServiceSyncBlockerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_updateServiceSyncBlockerCmd).Standalone()
 
-	proton_updateServiceSyncBlockerCmd.Flags().String("id", "", "The ID of the service sync blocker.")
-	proton_updateServiceSyncBlockerCmd.Flags().String("resolved-reason", "", "The reason the service sync blocker was resolved.")
-	proton_updateServiceSyncBlockerCmd.MarkFlagRequired("id")
-	proton_updateServiceSyncBlockerCmd.MarkFlagRequired("resolved-reason")
+		proton_updateServiceSyncBlockerCmd.Flags().String("id", "", "The ID of the service sync blocker.")
+		proton_updateServiceSyncBlockerCmd.Flags().String("resolved-reason", "", "The reason the service sync blocker was resolved.")
+		proton_updateServiceSyncBlockerCmd.MarkFlagRequired("id")
+		proton_updateServiceSyncBlockerCmd.MarkFlagRequired("resolved-reason")
+	})
 	protonCmd.AddCommand(proton_updateServiceSyncBlockerCmd)
 }

@@ -12,9 +12,11 @@ var securityhub_batchGetSecurityControlsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_batchGetSecurityControlsCmd).Standalone()
+	carapace.Gen(securityhub_batchGetSecurityControlsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_batchGetSecurityControlsCmd).Standalone()
 
-	securityhub_batchGetSecurityControlsCmd.Flags().String("security-control-ids", "", "A list of security controls (identified with `SecurityControlId`, `SecurityControlArn`, or a mix of both parameters).")
-	securityhub_batchGetSecurityControlsCmd.MarkFlagRequired("security-control-ids")
+		securityhub_batchGetSecurityControlsCmd.Flags().String("security-control-ids", "", "A list of security controls (identified with `SecurityControlId`, `SecurityControlArn`, or a mix of both parameters).")
+		securityhub_batchGetSecurityControlsCmd.MarkFlagRequired("security-control-ids")
+	})
 	securityhubCmd.AddCommand(securityhub_batchGetSecurityControlsCmd)
 }

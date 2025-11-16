@@ -12,11 +12,13 @@ var redshift_modifySnapshotScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_modifySnapshotScheduleCmd).Standalone()
+	carapace.Gen(redshift_modifySnapshotScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_modifySnapshotScheduleCmd).Standalone()
 
-	redshift_modifySnapshotScheduleCmd.Flags().String("schedule-definitions", "", "An updated list of schedule definitions.")
-	redshift_modifySnapshotScheduleCmd.Flags().String("schedule-identifier", "", "A unique alphanumeric identifier of the schedule to modify.")
-	redshift_modifySnapshotScheduleCmd.MarkFlagRequired("schedule-definitions")
-	redshift_modifySnapshotScheduleCmd.MarkFlagRequired("schedule-identifier")
+		redshift_modifySnapshotScheduleCmd.Flags().String("schedule-definitions", "", "An updated list of schedule definitions.")
+		redshift_modifySnapshotScheduleCmd.Flags().String("schedule-identifier", "", "A unique alphanumeric identifier of the schedule to modify.")
+		redshift_modifySnapshotScheduleCmd.MarkFlagRequired("schedule-definitions")
+		redshift_modifySnapshotScheduleCmd.MarkFlagRequired("schedule-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_modifySnapshotScheduleCmd)
 }

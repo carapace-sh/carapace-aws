@@ -12,9 +12,11 @@ var medialive_listSdiSourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listSdiSourcesCmd).Standalone()
+	carapace.Gen(medialive_listSdiSourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listSdiSourcesCmd).Standalone()
 
-	medialive_listSdiSourcesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	medialive_listSdiSourcesCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+		medialive_listSdiSourcesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		medialive_listSdiSourcesCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+	})
 	medialiveCmd.AddCommand(medialive_listSdiSourcesCmd)
 }

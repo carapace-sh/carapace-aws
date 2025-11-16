@@ -12,9 +12,11 @@ var shield_disableApplicationLayerAutomaticResponseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_disableApplicationLayerAutomaticResponseCmd).Standalone()
+	carapace.Gen(shield_disableApplicationLayerAutomaticResponseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_disableApplicationLayerAutomaticResponseCmd).Standalone()
 
-	shield_disableApplicationLayerAutomaticResponseCmd.Flags().String("resource-arn", "", "The ARN (Amazon Resource Name) of the protected resource.")
-	shield_disableApplicationLayerAutomaticResponseCmd.MarkFlagRequired("resource-arn")
+		shield_disableApplicationLayerAutomaticResponseCmd.Flags().String("resource-arn", "", "The ARN (Amazon Resource Name) of the protected resource.")
+		shield_disableApplicationLayerAutomaticResponseCmd.MarkFlagRequired("resource-arn")
+	})
 	shieldCmd.AddCommand(shield_disableApplicationLayerAutomaticResponseCmd)
 }

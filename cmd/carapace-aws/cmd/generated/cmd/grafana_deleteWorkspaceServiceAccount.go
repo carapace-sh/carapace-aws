@@ -12,11 +12,13 @@ var grafana_deleteWorkspaceServiceAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_deleteWorkspaceServiceAccountCmd).Standalone()
+	carapace.Gen(grafana_deleteWorkspaceServiceAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_deleteWorkspaceServiceAccountCmd).Standalone()
 
-	grafana_deleteWorkspaceServiceAccountCmd.Flags().String("service-account-id", "", "The ID of the service account to delete.")
-	grafana_deleteWorkspaceServiceAccountCmd.Flags().String("workspace-id", "", "The ID of the workspace where the service account resides.")
-	grafana_deleteWorkspaceServiceAccountCmd.MarkFlagRequired("service-account-id")
-	grafana_deleteWorkspaceServiceAccountCmd.MarkFlagRequired("workspace-id")
+		grafana_deleteWorkspaceServiceAccountCmd.Flags().String("service-account-id", "", "The ID of the service account to delete.")
+		grafana_deleteWorkspaceServiceAccountCmd.Flags().String("workspace-id", "", "The ID of the workspace where the service account resides.")
+		grafana_deleteWorkspaceServiceAccountCmd.MarkFlagRequired("service-account-id")
+		grafana_deleteWorkspaceServiceAccountCmd.MarkFlagRequired("workspace-id")
+	})
 	grafanaCmd.AddCommand(grafana_deleteWorkspaceServiceAccountCmd)
 }

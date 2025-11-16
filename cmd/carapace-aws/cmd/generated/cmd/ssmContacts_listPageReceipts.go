@@ -12,11 +12,13 @@ var ssmContacts_listPageReceiptsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_listPageReceiptsCmd).Standalone()
+	carapace.Gen(ssmContacts_listPageReceiptsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_listPageReceiptsCmd).Standalone()
 
-	ssmContacts_listPageReceiptsCmd.Flags().String("max-results", "", "The maximum number of acknowledgements per page of results.")
-	ssmContacts_listPageReceiptsCmd.Flags().String("next-token", "", "The pagination token to continue to the next page of results.")
-	ssmContacts_listPageReceiptsCmd.Flags().String("page-id", "", "The Amazon Resource Name (ARN) of the engagement to a specific contact channel.")
-	ssmContacts_listPageReceiptsCmd.MarkFlagRequired("page-id")
+		ssmContacts_listPageReceiptsCmd.Flags().String("max-results", "", "The maximum number of acknowledgements per page of results.")
+		ssmContacts_listPageReceiptsCmd.Flags().String("next-token", "", "The pagination token to continue to the next page of results.")
+		ssmContacts_listPageReceiptsCmd.Flags().String("page-id", "", "The Amazon Resource Name (ARN) of the engagement to a specific contact channel.")
+		ssmContacts_listPageReceiptsCmd.MarkFlagRequired("page-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_listPageReceiptsCmd)
 }

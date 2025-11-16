@@ -12,9 +12,11 @@ var bedrock_getEvaluationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getEvaluationJobCmd).Standalone()
+	carapace.Gen(bedrock_getEvaluationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getEvaluationJobCmd).Standalone()
 
-	bedrock_getEvaluationJobCmd.Flags().String("job-identifier", "", "The Amazon Resource Name (ARN) of the evaluation job you want get information on.")
-	bedrock_getEvaluationJobCmd.MarkFlagRequired("job-identifier")
+		bedrock_getEvaluationJobCmd.Flags().String("job-identifier", "", "The Amazon Resource Name (ARN) of the evaluation job you want get information on.")
+		bedrock_getEvaluationJobCmd.MarkFlagRequired("job-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_getEvaluationJobCmd)
 }

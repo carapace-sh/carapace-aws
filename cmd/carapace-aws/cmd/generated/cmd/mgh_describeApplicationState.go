@@ -12,9 +12,11 @@ var mgh_describeApplicationStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgh_describeApplicationStateCmd).Standalone()
+	carapace.Gen(mgh_describeApplicationStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgh_describeApplicationStateCmd).Standalone()
 
-	mgh_describeApplicationStateCmd.Flags().String("application-id", "", "The configurationId in Application Discovery Service that uniquely identifies the grouped application.")
-	mgh_describeApplicationStateCmd.MarkFlagRequired("application-id")
+		mgh_describeApplicationStateCmd.Flags().String("application-id", "", "The configurationId in Application Discovery Service that uniquely identifies the grouped application.")
+		mgh_describeApplicationStateCmd.MarkFlagRequired("application-id")
+	})
 	mghCmd.AddCommand(mgh_describeApplicationStateCmd)
 }

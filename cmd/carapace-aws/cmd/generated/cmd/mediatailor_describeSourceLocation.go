@@ -12,9 +12,11 @@ var mediatailor_describeSourceLocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_describeSourceLocationCmd).Standalone()
+	carapace.Gen(mediatailor_describeSourceLocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_describeSourceLocationCmd).Standalone()
 
-	mediatailor_describeSourceLocationCmd.Flags().String("source-location-name", "", "The name of the source location.")
-	mediatailor_describeSourceLocationCmd.MarkFlagRequired("source-location-name")
+		mediatailor_describeSourceLocationCmd.Flags().String("source-location-name", "", "The name of the source location.")
+		mediatailor_describeSourceLocationCmd.MarkFlagRequired("source-location-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_describeSourceLocationCmd)
 }

@@ -12,9 +12,11 @@ var controltower_disableBaselineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_disableBaselineCmd).Standalone()
+	carapace.Gen(controltower_disableBaselineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_disableBaselineCmd).Standalone()
 
-	controltower_disableBaselineCmd.Flags().String("enabled-baseline-identifier", "", "Identifier of the `EnabledBaseline` resource to be deactivated, in ARN format.")
-	controltower_disableBaselineCmd.MarkFlagRequired("enabled-baseline-identifier")
+		controltower_disableBaselineCmd.Flags().String("enabled-baseline-identifier", "", "Identifier of the `EnabledBaseline` resource to be deactivated, in ARN format.")
+		controltower_disableBaselineCmd.MarkFlagRequired("enabled-baseline-identifier")
+	})
 	controltowerCmd.AddCommand(controltower_disableBaselineCmd)
 }

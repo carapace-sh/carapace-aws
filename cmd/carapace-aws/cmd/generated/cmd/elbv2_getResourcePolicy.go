@@ -12,9 +12,11 @@ var elbv2_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_getResourcePolicyCmd).Standalone()
+	carapace.Gen(elbv2_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_getResourcePolicyCmd).Standalone()
 
-	elbv2_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	elbv2_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		elbv2_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		elbv2_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_getResourcePolicyCmd)
 }

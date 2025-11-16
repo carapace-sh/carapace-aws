@@ -12,10 +12,12 @@ var networkmanager_updateCoreNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_updateCoreNetworkCmd).Standalone()
+	carapace.Gen(networkmanager_updateCoreNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_updateCoreNetworkCmd).Standalone()
 
-	networkmanager_updateCoreNetworkCmd.Flags().String("core-network-id", "", "The ID of a core network.")
-	networkmanager_updateCoreNetworkCmd.Flags().String("description", "", "The description of the update.")
-	networkmanager_updateCoreNetworkCmd.MarkFlagRequired("core-network-id")
+		networkmanager_updateCoreNetworkCmd.Flags().String("core-network-id", "", "The ID of a core network.")
+		networkmanager_updateCoreNetworkCmd.Flags().String("description", "", "The description of the update.")
+		networkmanager_updateCoreNetworkCmd.MarkFlagRequired("core-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_updateCoreNetworkCmd)
 }

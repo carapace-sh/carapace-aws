@@ -12,11 +12,13 @@ var appsync_listDataSourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_listDataSourcesCmd).Standalone()
+	carapace.Gen(appsync_listDataSourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_listDataSourcesCmd).Standalone()
 
-	appsync_listDataSourcesCmd.Flags().String("api-id", "", "The API ID.")
-	appsync_listDataSourcesCmd.Flags().String("max-results", "", "The maximum number of results that you want the request to return.")
-	appsync_listDataSourcesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.")
-	appsync_listDataSourcesCmd.MarkFlagRequired("api-id")
+		appsync_listDataSourcesCmd.Flags().String("api-id", "", "The API ID.")
+		appsync_listDataSourcesCmd.Flags().String("max-results", "", "The maximum number of results that you want the request to return.")
+		appsync_listDataSourcesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.")
+		appsync_listDataSourcesCmd.MarkFlagRequired("api-id")
+	})
 	appsyncCmd.AddCommand(appsync_listDataSourcesCmd)
 }

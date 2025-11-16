@@ -12,11 +12,13 @@ var resiliencehub_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_tagResourceCmd).Standalone()
+	carapace.Gen(resiliencehub_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_tagResourceCmd).Standalone()
 
-	resiliencehub_tagResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the resource.")
-	resiliencehub_tagResourceCmd.Flags().String("tags", "", "The tags to assign to the resource.")
-	resiliencehub_tagResourceCmd.MarkFlagRequired("resource-arn")
-	resiliencehub_tagResourceCmd.MarkFlagRequired("tags")
+		resiliencehub_tagResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the resource.")
+		resiliencehub_tagResourceCmd.Flags().String("tags", "", "The tags to assign to the resource.")
+		resiliencehub_tagResourceCmd.MarkFlagRequired("resource-arn")
+		resiliencehub_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_tagResourceCmd)
 }

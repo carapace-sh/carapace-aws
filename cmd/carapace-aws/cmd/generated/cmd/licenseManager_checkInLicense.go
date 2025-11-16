@@ -12,10 +12,12 @@ var licenseManager_checkInLicenseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_checkInLicenseCmd).Standalone()
+	carapace.Gen(licenseManager_checkInLicenseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_checkInLicenseCmd).Standalone()
 
-	licenseManager_checkInLicenseCmd.Flags().String("beneficiary", "", "License beneficiary.")
-	licenseManager_checkInLicenseCmd.Flags().String("license-consumption-token", "", "License consumption token.")
-	licenseManager_checkInLicenseCmd.MarkFlagRequired("license-consumption-token")
+		licenseManager_checkInLicenseCmd.Flags().String("beneficiary", "", "License beneficiary.")
+		licenseManager_checkInLicenseCmd.Flags().String("license-consumption-token", "", "License consumption token.")
+		licenseManager_checkInLicenseCmd.MarkFlagRequired("license-consumption-token")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_checkInLicenseCmd)
 }

@@ -12,12 +12,14 @@ var groundstation_createConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_createConfigCmd).Standalone()
+	carapace.Gen(groundstation_createConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_createConfigCmd).Standalone()
 
-	groundstation_createConfigCmd.Flags().String("config-data", "", "Parameters of a `Config`.")
-	groundstation_createConfigCmd.Flags().String("name", "", "Name of a `Config`.")
-	groundstation_createConfigCmd.Flags().String("tags", "", "Tags assigned to a `Config`.")
-	groundstation_createConfigCmd.MarkFlagRequired("config-data")
-	groundstation_createConfigCmd.MarkFlagRequired("name")
+		groundstation_createConfigCmd.Flags().String("config-data", "", "Parameters of a `Config`.")
+		groundstation_createConfigCmd.Flags().String("name", "", "Name of a `Config`.")
+		groundstation_createConfigCmd.Flags().String("tags", "", "Tags assigned to a `Config`.")
+		groundstation_createConfigCmd.MarkFlagRequired("config-data")
+		groundstation_createConfigCmd.MarkFlagRequired("name")
+	})
 	groundstationCmd.AddCommand(groundstation_createConfigCmd)
 }

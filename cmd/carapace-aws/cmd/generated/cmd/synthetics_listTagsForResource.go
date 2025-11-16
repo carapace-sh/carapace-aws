@@ -12,9 +12,11 @@ var synthetics_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_listTagsForResourceCmd).Standalone()
+	carapace.Gen(synthetics_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_listTagsForResourceCmd).Standalone()
 
-	synthetics_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the canary or group that you want to view tags for.")
-	synthetics_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		synthetics_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the canary or group that you want to view tags for.")
+		synthetics_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	syntheticsCmd.AddCommand(synthetics_listTagsForResourceCmd)
 }

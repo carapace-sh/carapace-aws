@@ -12,9 +12,11 @@ var elastictranscoder_cancelJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elastictranscoder_cancelJobCmd).Standalone()
+	carapace.Gen(elastictranscoder_cancelJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elastictranscoder_cancelJobCmd).Standalone()
 
-	elastictranscoder_cancelJobCmd.Flags().String("id", "", "The identifier of the job that you want to cancel.")
-	elastictranscoder_cancelJobCmd.MarkFlagRequired("id")
+		elastictranscoder_cancelJobCmd.Flags().String("id", "", "The identifier of the job that you want to cancel.")
+		elastictranscoder_cancelJobCmd.MarkFlagRequired("id")
+	})
 	elastictranscoderCmd.AddCommand(elastictranscoder_cancelJobCmd)
 }

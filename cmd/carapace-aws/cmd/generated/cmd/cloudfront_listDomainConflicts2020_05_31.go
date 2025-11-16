@@ -12,13 +12,15 @@ var cloudfront_listDomainConflicts2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_listDomainConflicts2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listDomainConflicts2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listDomainConflicts2020_05_31Cmd).Standalone()
 
-	cloudfront_listDomainConflicts2020_05_31Cmd.Flags().String("domain", "", "The domain to check for conflicts.")
-	cloudfront_listDomainConflicts2020_05_31Cmd.Flags().String("domain-control-validation-resource", "", "The distribution resource identifier.")
-	cloudfront_listDomainConflicts2020_05_31Cmd.Flags().String("marker", "", "The marker for the next set of domain conflicts.")
-	cloudfront_listDomainConflicts2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of domain conflicts to return.")
-	cloudfront_listDomainConflicts2020_05_31Cmd.MarkFlagRequired("domain")
-	cloudfront_listDomainConflicts2020_05_31Cmd.MarkFlagRequired("domain-control-validation-resource")
+		cloudfront_listDomainConflicts2020_05_31Cmd.Flags().String("domain", "", "The domain to check for conflicts.")
+		cloudfront_listDomainConflicts2020_05_31Cmd.Flags().String("domain-control-validation-resource", "", "The distribution resource identifier.")
+		cloudfront_listDomainConflicts2020_05_31Cmd.Flags().String("marker", "", "The marker for the next set of domain conflicts.")
+		cloudfront_listDomainConflicts2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of domain conflicts to return.")
+		cloudfront_listDomainConflicts2020_05_31Cmd.MarkFlagRequired("domain")
+		cloudfront_listDomainConflicts2020_05_31Cmd.MarkFlagRequired("domain-control-validation-resource")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listDomainConflicts2020_05_31Cmd)
 }

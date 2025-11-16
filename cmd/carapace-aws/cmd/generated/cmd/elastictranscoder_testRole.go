@@ -12,15 +12,17 @@ var elastictranscoder_testRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elastictranscoder_testRoleCmd).Standalone()
+	carapace.Gen(elastictranscoder_testRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elastictranscoder_testRoleCmd).Standalone()
 
-	elastictranscoder_testRoleCmd.Flags().String("input-bucket", "", "The Amazon S3 bucket that contains media files to be transcoded.")
-	elastictranscoder_testRoleCmd.Flags().String("output-bucket", "", "The Amazon S3 bucket that Elastic Transcoder writes transcoded media files to.")
-	elastictranscoder_testRoleCmd.Flags().String("role", "", "The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to test.")
-	elastictranscoder_testRoleCmd.Flags().String("topics", "", "The ARNs of one or more Amazon Simple Notification Service (Amazon SNS) topics that you want the action to send a test notification to.")
-	elastictranscoder_testRoleCmd.MarkFlagRequired("input-bucket")
-	elastictranscoder_testRoleCmd.MarkFlagRequired("output-bucket")
-	elastictranscoder_testRoleCmd.MarkFlagRequired("role")
-	elastictranscoder_testRoleCmd.MarkFlagRequired("topics")
+		elastictranscoder_testRoleCmd.Flags().String("input-bucket", "", "The Amazon S3 bucket that contains media files to be transcoded.")
+		elastictranscoder_testRoleCmd.Flags().String("output-bucket", "", "The Amazon S3 bucket that Elastic Transcoder writes transcoded media files to.")
+		elastictranscoder_testRoleCmd.Flags().String("role", "", "The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder to test.")
+		elastictranscoder_testRoleCmd.Flags().String("topics", "", "The ARNs of one or more Amazon Simple Notification Service (Amazon SNS) topics that you want the action to send a test notification to.")
+		elastictranscoder_testRoleCmd.MarkFlagRequired("input-bucket")
+		elastictranscoder_testRoleCmd.MarkFlagRequired("output-bucket")
+		elastictranscoder_testRoleCmd.MarkFlagRequired("role")
+		elastictranscoder_testRoleCmd.MarkFlagRequired("topics")
+	})
 	elastictranscoderCmd.AddCommand(elastictranscoder_testRoleCmd)
 }

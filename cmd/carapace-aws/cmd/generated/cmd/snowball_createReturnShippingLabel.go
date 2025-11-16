@@ -12,10 +12,12 @@ var snowball_createReturnShippingLabelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_createReturnShippingLabelCmd).Standalone()
+	carapace.Gen(snowball_createReturnShippingLabelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_createReturnShippingLabelCmd).Standalone()
 
-	snowball_createReturnShippingLabelCmd.Flags().String("job-id", "", "The ID for a job that you want to create the return shipping label for; for example, `JID123e4567-e89b-12d3-a456-426655440000`.")
-	snowball_createReturnShippingLabelCmd.Flags().String("shipping-option", "", "The shipping speed for a particular job.")
-	snowball_createReturnShippingLabelCmd.MarkFlagRequired("job-id")
+		snowball_createReturnShippingLabelCmd.Flags().String("job-id", "", "The ID for a job that you want to create the return shipping label for; for example, `JID123e4567-e89b-12d3-a456-426655440000`.")
+		snowball_createReturnShippingLabelCmd.Flags().String("shipping-option", "", "The shipping speed for a particular job.")
+		snowball_createReturnShippingLabelCmd.MarkFlagRequired("job-id")
+	})
 	snowballCmd.AddCommand(snowball_createReturnShippingLabelCmd)
 }

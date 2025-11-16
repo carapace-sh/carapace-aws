@@ -12,9 +12,11 @@ var cloudformation_describeStackDriftDetectionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeStackDriftDetectionStatusCmd).Standalone()
+	carapace.Gen(cloudformation_describeStackDriftDetectionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeStackDriftDetectionStatusCmd).Standalone()
 
-	cloudformation_describeStackDriftDetectionStatusCmd.Flags().String("stack-drift-detection-id", "", "The ID of the drift detection results of this operation.")
-	cloudformation_describeStackDriftDetectionStatusCmd.MarkFlagRequired("stack-drift-detection-id")
+		cloudformation_describeStackDriftDetectionStatusCmd.Flags().String("stack-drift-detection-id", "", "The ID of the drift detection results of this operation.")
+		cloudformation_describeStackDriftDetectionStatusCmd.MarkFlagRequired("stack-drift-detection-id")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeStackDriftDetectionStatusCmd)
 }

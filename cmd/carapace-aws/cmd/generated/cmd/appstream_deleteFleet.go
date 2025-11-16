@@ -12,9 +12,11 @@ var appstream_deleteFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_deleteFleetCmd).Standalone()
+	carapace.Gen(appstream_deleteFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_deleteFleetCmd).Standalone()
 
-	appstream_deleteFleetCmd.Flags().String("name", "", "The name of the fleet.")
-	appstream_deleteFleetCmd.MarkFlagRequired("name")
+		appstream_deleteFleetCmd.Flags().String("name", "", "The name of the fleet.")
+		appstream_deleteFleetCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_deleteFleetCmd)
 }

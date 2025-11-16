@@ -12,7 +12,9 @@ var iotfleetwise_getEncryptionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_getEncryptionConfigurationCmd).Standalone()
+	carapace.Gen(iotfleetwise_getEncryptionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_getEncryptionConfigurationCmd).Standalone()
 
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_getEncryptionConfigurationCmd)
 }

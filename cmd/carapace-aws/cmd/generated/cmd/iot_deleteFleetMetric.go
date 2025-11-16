@@ -12,10 +12,12 @@ var iot_deleteFleetMetricCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteFleetMetricCmd).Standalone()
+	carapace.Gen(iot_deleteFleetMetricCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteFleetMetricCmd).Standalone()
 
-	iot_deleteFleetMetricCmd.Flags().String("expected-version", "", "The expected version of the fleet metric to delete.")
-	iot_deleteFleetMetricCmd.Flags().String("metric-name", "", "The name of the fleet metric to delete.")
-	iot_deleteFleetMetricCmd.MarkFlagRequired("metric-name")
+		iot_deleteFleetMetricCmd.Flags().String("expected-version", "", "The expected version of the fleet metric to delete.")
+		iot_deleteFleetMetricCmd.Flags().String("metric-name", "", "The name of the fleet metric to delete.")
+		iot_deleteFleetMetricCmd.MarkFlagRequired("metric-name")
+	})
 	iotCmd.AddCommand(iot_deleteFleetMetricCmd)
 }

@@ -12,10 +12,12 @@ var waf_getRateBasedRuleManagedKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_getRateBasedRuleManagedKeysCmd).Standalone()
+	carapace.Gen(waf_getRateBasedRuleManagedKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_getRateBasedRuleManagedKeysCmd).Standalone()
 
-	waf_getRateBasedRuleManagedKeysCmd.Flags().String("next-marker", "", "A null value and not currently used.")
-	waf_getRateBasedRuleManagedKeysCmd.Flags().String("rule-id", "", "The `RuleId` of the [RateBasedRule]() for which you want to get a list of `ManagedKeys`.")
-	waf_getRateBasedRuleManagedKeysCmd.MarkFlagRequired("rule-id")
+		waf_getRateBasedRuleManagedKeysCmd.Flags().String("next-marker", "", "A null value and not currently used.")
+		waf_getRateBasedRuleManagedKeysCmd.Flags().String("rule-id", "", "The `RuleId` of the [RateBasedRule]() for which you want to get a list of `ManagedKeys`.")
+		waf_getRateBasedRuleManagedKeysCmd.MarkFlagRequired("rule-id")
+	})
 	wafCmd.AddCommand(waf_getRateBasedRuleManagedKeysCmd)
 }

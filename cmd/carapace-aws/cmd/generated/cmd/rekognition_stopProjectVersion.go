@@ -12,9 +12,11 @@ var rekognition_stopProjectVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_stopProjectVersionCmd).Standalone()
+	carapace.Gen(rekognition_stopProjectVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_stopProjectVersionCmd).Standalone()
 
-	rekognition_stopProjectVersionCmd.Flags().String("project-version-arn", "", "The Amazon Resource Name (ARN) of the model version that you want to stop.")
-	rekognition_stopProjectVersionCmd.MarkFlagRequired("project-version-arn")
+		rekognition_stopProjectVersionCmd.Flags().String("project-version-arn", "", "The Amazon Resource Name (ARN) of the model version that you want to stop.")
+		rekognition_stopProjectVersionCmd.MarkFlagRequired("project-version-arn")
+	})
 	rekognitionCmd.AddCommand(rekognition_stopProjectVersionCmd)
 }

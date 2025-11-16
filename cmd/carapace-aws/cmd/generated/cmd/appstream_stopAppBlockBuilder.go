@@ -12,9 +12,11 @@ var appstream_stopAppBlockBuilderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_stopAppBlockBuilderCmd).Standalone()
+	carapace.Gen(appstream_stopAppBlockBuilderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_stopAppBlockBuilderCmd).Standalone()
 
-	appstream_stopAppBlockBuilderCmd.Flags().String("name", "", "The name of the app block builder.")
-	appstream_stopAppBlockBuilderCmd.MarkFlagRequired("name")
+		appstream_stopAppBlockBuilderCmd.Flags().String("name", "", "The name of the app block builder.")
+		appstream_stopAppBlockBuilderCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_stopAppBlockBuilderCmd)
 }

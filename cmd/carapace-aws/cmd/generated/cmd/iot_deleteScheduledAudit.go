@@ -12,9 +12,11 @@ var iot_deleteScheduledAuditCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteScheduledAuditCmd).Standalone()
+	carapace.Gen(iot_deleteScheduledAuditCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteScheduledAuditCmd).Standalone()
 
-	iot_deleteScheduledAuditCmd.Flags().String("scheduled-audit-name", "", "The name of the scheduled audit you want to delete.")
-	iot_deleteScheduledAuditCmd.MarkFlagRequired("scheduled-audit-name")
+		iot_deleteScheduledAuditCmd.Flags().String("scheduled-audit-name", "", "The name of the scheduled audit you want to delete.")
+		iot_deleteScheduledAuditCmd.MarkFlagRequired("scheduled-audit-name")
+	})
 	iotCmd.AddCommand(iot_deleteScheduledAuditCmd)
 }

@@ -12,7 +12,9 @@ var computeOptimizerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(computeOptimizerCmd).Standalone()
+	carapace.Gen(computeOptimizerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(computeOptimizerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(computeOptimizerCmd)
 }

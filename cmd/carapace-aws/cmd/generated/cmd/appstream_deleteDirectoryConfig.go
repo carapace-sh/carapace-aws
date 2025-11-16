@@ -12,9 +12,11 @@ var appstream_deleteDirectoryConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_deleteDirectoryConfigCmd).Standalone()
+	carapace.Gen(appstream_deleteDirectoryConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_deleteDirectoryConfigCmd).Standalone()
 
-	appstream_deleteDirectoryConfigCmd.Flags().String("directory-name", "", "The name of the directory configuration.")
-	appstream_deleteDirectoryConfigCmd.MarkFlagRequired("directory-name")
+		appstream_deleteDirectoryConfigCmd.Flags().String("directory-name", "", "The name of the directory configuration.")
+		appstream_deleteDirectoryConfigCmd.MarkFlagRequired("directory-name")
+	})
 	appstreamCmd.AddCommand(appstream_deleteDirectoryConfigCmd)
 }

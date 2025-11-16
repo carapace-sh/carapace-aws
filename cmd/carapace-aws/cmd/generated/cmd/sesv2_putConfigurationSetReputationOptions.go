@@ -12,10 +12,12 @@ var sesv2_putConfigurationSetReputationOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putConfigurationSetReputationOptionsCmd).Standalone()
+	carapace.Gen(sesv2_putConfigurationSetReputationOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putConfigurationSetReputationOptionsCmd).Standalone()
 
-	sesv2_putConfigurationSetReputationOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
-	sesv2_putConfigurationSetReputationOptionsCmd.Flags().String("reputation-metrics-enabled", "", "If `true`, tracking of reputation metrics is enabled for the configuration set.")
-	sesv2_putConfigurationSetReputationOptionsCmd.MarkFlagRequired("configuration-set-name")
+		sesv2_putConfigurationSetReputationOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
+		sesv2_putConfigurationSetReputationOptionsCmd.Flags().String("reputation-metrics-enabled", "", "If `true`, tracking of reputation metrics is enabled for the configuration set.")
+		sesv2_putConfigurationSetReputationOptionsCmd.MarkFlagRequired("configuration-set-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_putConfigurationSetReputationOptionsCmd)
 }

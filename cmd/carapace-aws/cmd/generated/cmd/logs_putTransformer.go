@@ -12,11 +12,13 @@ var logs_putTransformerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_putTransformerCmd).Standalone()
+	carapace.Gen(logs_putTransformerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_putTransformerCmd).Standalone()
 
-	logs_putTransformerCmd.Flags().String("log-group-identifier", "", "Specify either the name or ARN of the log group to create the transformer for.")
-	logs_putTransformerCmd.Flags().String("transformer-config", "", "This structure contains the configuration of this log transformer.")
-	logs_putTransformerCmd.MarkFlagRequired("log-group-identifier")
-	logs_putTransformerCmd.MarkFlagRequired("transformer-config")
+		logs_putTransformerCmd.Flags().String("log-group-identifier", "", "Specify either the name or ARN of the log group to create the transformer for.")
+		logs_putTransformerCmd.Flags().String("transformer-config", "", "This structure contains the configuration of this log transformer.")
+		logs_putTransformerCmd.MarkFlagRequired("log-group-identifier")
+		logs_putTransformerCmd.MarkFlagRequired("transformer-config")
+	})
 	logsCmd.AddCommand(logs_putTransformerCmd)
 }

@@ -12,9 +12,11 @@ var redshift_pauseClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_pauseClusterCmd).Standalone()
+	carapace.Gen(redshift_pauseClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_pauseClusterCmd).Standalone()
 
-	redshift_pauseClusterCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster to be paused.")
-	redshift_pauseClusterCmd.MarkFlagRequired("cluster-identifier")
+		redshift_pauseClusterCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster to be paused.")
+		redshift_pauseClusterCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_pauseClusterCmd)
 }

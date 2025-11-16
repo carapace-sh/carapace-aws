@@ -12,11 +12,13 @@ var chimeSdkIdentity_describeAppInstanceUserEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_describeAppInstanceUserEndpointCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_describeAppInstanceUserEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_describeAppInstanceUserEndpointCmd).Standalone()
 
-	chimeSdkIdentity_describeAppInstanceUserEndpointCmd.Flags().String("app-instance-user-arn", "", "The ARN of the `AppInstanceUser`.")
-	chimeSdkIdentity_describeAppInstanceUserEndpointCmd.Flags().String("endpoint-id", "", "The unique identifier of the `AppInstanceUserEndpoint`.")
-	chimeSdkIdentity_describeAppInstanceUserEndpointCmd.MarkFlagRequired("app-instance-user-arn")
-	chimeSdkIdentity_describeAppInstanceUserEndpointCmd.MarkFlagRequired("endpoint-id")
+		chimeSdkIdentity_describeAppInstanceUserEndpointCmd.Flags().String("app-instance-user-arn", "", "The ARN of the `AppInstanceUser`.")
+		chimeSdkIdentity_describeAppInstanceUserEndpointCmd.Flags().String("endpoint-id", "", "The unique identifier of the `AppInstanceUserEndpoint`.")
+		chimeSdkIdentity_describeAppInstanceUserEndpointCmd.MarkFlagRequired("app-instance-user-arn")
+		chimeSdkIdentity_describeAppInstanceUserEndpointCmd.MarkFlagRequired("endpoint-id")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_describeAppInstanceUserEndpointCmd)
 }

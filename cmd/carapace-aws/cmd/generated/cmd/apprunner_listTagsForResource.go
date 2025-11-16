@@ -12,9 +12,11 @@ var apprunner_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_listTagsForResourceCmd).Standalone()
+	carapace.Gen(apprunner_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_listTagsForResourceCmd).Standalone()
 
-	apprunner_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that a tag list is requested for.")
-	apprunner_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		apprunner_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that a tag list is requested for.")
+		apprunner_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_listTagsForResourceCmd)
 }

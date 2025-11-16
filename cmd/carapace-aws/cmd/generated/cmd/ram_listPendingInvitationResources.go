@@ -12,12 +12,14 @@ var ram_listPendingInvitationResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ram_listPendingInvitationResourcesCmd).Standalone()
+	carapace.Gen(ram_listPendingInvitationResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ram_listPendingInvitationResourcesCmd).Standalone()
 
-	ram_listPendingInvitationResourcesCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included on each page of the response.")
-	ram_listPendingInvitationResourcesCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
-	ram_listPendingInvitationResourcesCmd.Flags().String("resource-region-scope", "", "Specifies that you want the results to include only resources that have the specified scope.")
-	ram_listPendingInvitationResourcesCmd.Flags().String("resource-share-invitation-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the invitation.")
-	ram_listPendingInvitationResourcesCmd.MarkFlagRequired("resource-share-invitation-arn")
+		ram_listPendingInvitationResourcesCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included on each page of the response.")
+		ram_listPendingInvitationResourcesCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		ram_listPendingInvitationResourcesCmd.Flags().String("resource-region-scope", "", "Specifies that you want the results to include only resources that have the specified scope.")
+		ram_listPendingInvitationResourcesCmd.Flags().String("resource-share-invitation-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the invitation.")
+		ram_listPendingInvitationResourcesCmd.MarkFlagRequired("resource-share-invitation-arn")
+	})
 	ramCmd.AddCommand(ram_listPendingInvitationResourcesCmd)
 }

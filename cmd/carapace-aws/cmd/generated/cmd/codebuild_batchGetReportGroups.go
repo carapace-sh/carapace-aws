@@ -12,9 +12,11 @@ var codebuild_batchGetReportGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_batchGetReportGroupsCmd).Standalone()
+	carapace.Gen(codebuild_batchGetReportGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_batchGetReportGroupsCmd).Standalone()
 
-	codebuild_batchGetReportGroupsCmd.Flags().String("report-group-arns", "", "An array of report group ARNs that identify the report groups to return.")
-	codebuild_batchGetReportGroupsCmd.MarkFlagRequired("report-group-arns")
+		codebuild_batchGetReportGroupsCmd.Flags().String("report-group-arns", "", "An array of report group ARNs that identify the report groups to return.")
+		codebuild_batchGetReportGroupsCmd.MarkFlagRequired("report-group-arns")
+	})
 	codebuildCmd.AddCommand(codebuild_batchGetReportGroupsCmd)
 }

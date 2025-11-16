@@ -12,9 +12,11 @@ var backup_stopBackupJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_stopBackupJobCmd).Standalone()
+	carapace.Gen(backup_stopBackupJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_stopBackupJobCmd).Standalone()
 
-	backup_stopBackupJobCmd.Flags().String("backup-job-id", "", "Uniquely identifies a request to Backup to back up a resource.")
-	backup_stopBackupJobCmd.MarkFlagRequired("backup-job-id")
+		backup_stopBackupJobCmd.Flags().String("backup-job-id", "", "Uniquely identifies a request to Backup to back up a resource.")
+		backup_stopBackupJobCmd.MarkFlagRequired("backup-job-id")
+	})
 	backupCmd.AddCommand(backup_stopBackupJobCmd)
 }

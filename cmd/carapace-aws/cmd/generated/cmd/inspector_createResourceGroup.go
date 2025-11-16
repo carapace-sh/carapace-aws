@@ -12,9 +12,11 @@ var inspector_createResourceGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_createResourceGroupCmd).Standalone()
+	carapace.Gen(inspector_createResourceGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_createResourceGroupCmd).Standalone()
 
-	inspector_createResourceGroupCmd.Flags().String("resource-group-tags", "", "A collection of keys and an array of possible values, '\\[{\"key\":\"key1\",\"values\":\\[\"Value1\",\"Value2\"]},{\"key\":\"Key2\",\"values\":\\[\"Value3\"]}]'.")
-	inspector_createResourceGroupCmd.MarkFlagRequired("resource-group-tags")
+		inspector_createResourceGroupCmd.Flags().String("resource-group-tags", "", "A collection of keys and an array of possible values, '\\[{\"key\":\"key1\",\"values\":\\[\"Value1\",\"Value2\"]},{\"key\":\"Key2\",\"values\":\\[\"Value3\"]}]'.")
+		inspector_createResourceGroupCmd.MarkFlagRequired("resource-group-tags")
+	})
 	inspectorCmd.AddCommand(inspector_createResourceGroupCmd)
 }

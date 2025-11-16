@@ -12,12 +12,14 @@ var managedblockchain_updateMemberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchain_updateMemberCmd).Standalone()
+	carapace.Gen(managedblockchain_updateMemberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchain_updateMemberCmd).Standalone()
 
-	managedblockchain_updateMemberCmd.Flags().String("log-publishing-configuration", "", "Configuration properties for publishing to Amazon CloudWatch Logs.")
-	managedblockchain_updateMemberCmd.Flags().String("member-id", "", "The unique identifier of the member.")
-	managedblockchain_updateMemberCmd.Flags().String("network-id", "", "The unique identifier of the Managed Blockchain network to which the member belongs.")
-	managedblockchain_updateMemberCmd.MarkFlagRequired("member-id")
-	managedblockchain_updateMemberCmd.MarkFlagRequired("network-id")
+		managedblockchain_updateMemberCmd.Flags().String("log-publishing-configuration", "", "Configuration properties for publishing to Amazon CloudWatch Logs.")
+		managedblockchain_updateMemberCmd.Flags().String("member-id", "", "The unique identifier of the member.")
+		managedblockchain_updateMemberCmd.Flags().String("network-id", "", "The unique identifier of the Managed Blockchain network to which the member belongs.")
+		managedblockchain_updateMemberCmd.MarkFlagRequired("member-id")
+		managedblockchain_updateMemberCmd.MarkFlagRequired("network-id")
+	})
 	managedblockchainCmd.AddCommand(managedblockchain_updateMemberCmd)
 }

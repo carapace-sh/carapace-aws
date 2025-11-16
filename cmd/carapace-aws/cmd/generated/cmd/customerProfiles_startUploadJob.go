@@ -12,11 +12,13 @@ var customerProfiles_startUploadJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_startUploadJobCmd).Standalone()
+	carapace.Gen(customerProfiles_startUploadJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_startUploadJobCmd).Standalone()
 
-	customerProfiles_startUploadJobCmd.Flags().String("domain-name", "", "The unique name of the domain containing the upload job to start.")
-	customerProfiles_startUploadJobCmd.Flags().String("job-id", "", "The unique identifier of the upload job to start.")
-	customerProfiles_startUploadJobCmd.MarkFlagRequired("domain-name")
-	customerProfiles_startUploadJobCmd.MarkFlagRequired("job-id")
+		customerProfiles_startUploadJobCmd.Flags().String("domain-name", "", "The unique name of the domain containing the upload job to start.")
+		customerProfiles_startUploadJobCmd.Flags().String("job-id", "", "The unique identifier of the upload job to start.")
+		customerProfiles_startUploadJobCmd.MarkFlagRequired("domain-name")
+		customerProfiles_startUploadJobCmd.MarkFlagRequired("job-id")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_startUploadJobCmd)
 }

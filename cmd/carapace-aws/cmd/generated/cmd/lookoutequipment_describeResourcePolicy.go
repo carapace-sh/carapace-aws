@@ -12,9 +12,11 @@ var lookoutequipment_describeResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_describeResourcePolicyCmd).Standalone()
+	carapace.Gen(lookoutequipment_describeResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_describeResourcePolicyCmd).Standalone()
 
-	lookoutequipment_describeResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that is associated with the resource policy.")
-	lookoutequipment_describeResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		lookoutequipment_describeResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that is associated with the resource policy.")
+		lookoutequipment_describeResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_describeResourcePolicyCmd)
 }

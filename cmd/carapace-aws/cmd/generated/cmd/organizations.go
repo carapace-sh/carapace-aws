@@ -12,7 +12,9 @@ var organizationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizationsCmd).Standalone()
+	carapace.Gen(organizationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizationsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(organizationsCmd)
 }

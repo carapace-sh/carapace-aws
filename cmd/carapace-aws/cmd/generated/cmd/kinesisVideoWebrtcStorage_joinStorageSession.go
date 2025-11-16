@@ -12,9 +12,11 @@ var kinesisVideoWebrtcStorage_joinStorageSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisVideoWebrtcStorage_joinStorageSessionCmd).Standalone()
+	carapace.Gen(kinesisVideoWebrtcStorage_joinStorageSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisVideoWebrtcStorage_joinStorageSessionCmd).Standalone()
 
-	kinesisVideoWebrtcStorage_joinStorageSessionCmd.Flags().String("channel-arn", "", "The Amazon Resource Name (ARN) of the signaling channel.")
-	kinesisVideoWebrtcStorage_joinStorageSessionCmd.MarkFlagRequired("channel-arn")
+		kinesisVideoWebrtcStorage_joinStorageSessionCmd.Flags().String("channel-arn", "", "The Amazon Resource Name (ARN) of the signaling channel.")
+		kinesisVideoWebrtcStorage_joinStorageSessionCmd.MarkFlagRequired("channel-arn")
+	})
 	kinesisVideoWebrtcStorageCmd.AddCommand(kinesisVideoWebrtcStorage_joinStorageSessionCmd)
 }

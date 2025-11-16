@@ -12,12 +12,14 @@ var ssm_getCommandInvocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getCommandInvocationCmd).Standalone()
+	carapace.Gen(ssm_getCommandInvocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getCommandInvocationCmd).Standalone()
 
-	ssm_getCommandInvocationCmd.Flags().String("command-id", "", "(Required) The parent command ID of the invocation plugin.")
-	ssm_getCommandInvocationCmd.Flags().String("instance-id", "", "(Required) The ID of the managed node targeted by the command.")
-	ssm_getCommandInvocationCmd.Flags().String("plugin-name", "", "The name of the step for which you want detailed results.")
-	ssm_getCommandInvocationCmd.MarkFlagRequired("command-id")
-	ssm_getCommandInvocationCmd.MarkFlagRequired("instance-id")
+		ssm_getCommandInvocationCmd.Flags().String("command-id", "", "(Required) The parent command ID of the invocation plugin.")
+		ssm_getCommandInvocationCmd.Flags().String("instance-id", "", "(Required) The ID of the managed node targeted by the command.")
+		ssm_getCommandInvocationCmd.Flags().String("plugin-name", "", "The name of the step for which you want detailed results.")
+		ssm_getCommandInvocationCmd.MarkFlagRequired("command-id")
+		ssm_getCommandInvocationCmd.MarkFlagRequired("instance-id")
+	})
 	ssmCmd.AddCommand(ssm_getCommandInvocationCmd)
 }

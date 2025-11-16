@@ -12,9 +12,11 @@ var socialmessaging_disassociateWhatsAppBusinessAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(socialmessaging_disassociateWhatsAppBusinessAccountCmd).Standalone()
+	carapace.Gen(socialmessaging_disassociateWhatsAppBusinessAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_disassociateWhatsAppBusinessAccountCmd).Standalone()
 
-	socialmessaging_disassociateWhatsAppBusinessAccountCmd.Flags().String("id", "", "The unique identifier of your WhatsApp Business Account.")
-	socialmessaging_disassociateWhatsAppBusinessAccountCmd.MarkFlagRequired("id")
+		socialmessaging_disassociateWhatsAppBusinessAccountCmd.Flags().String("id", "", "The unique identifier of your WhatsApp Business Account.")
+		socialmessaging_disassociateWhatsAppBusinessAccountCmd.MarkFlagRequired("id")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_disassociateWhatsAppBusinessAccountCmd)
 }

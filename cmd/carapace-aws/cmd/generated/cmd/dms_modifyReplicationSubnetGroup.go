@@ -12,12 +12,14 @@ var dms_modifyReplicationSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_modifyReplicationSubnetGroupCmd).Standalone()
+	carapace.Gen(dms_modifyReplicationSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_modifyReplicationSubnetGroupCmd).Standalone()
 
-	dms_modifyReplicationSubnetGroupCmd.Flags().String("replication-subnet-group-description", "", "A description for the replication instance subnet group.")
-	dms_modifyReplicationSubnetGroupCmd.Flags().String("replication-subnet-group-identifier", "", "The name of the replication instance subnet group.")
-	dms_modifyReplicationSubnetGroupCmd.Flags().String("subnet-ids", "", "A list of subnet IDs.")
-	dms_modifyReplicationSubnetGroupCmd.MarkFlagRequired("replication-subnet-group-identifier")
-	dms_modifyReplicationSubnetGroupCmd.MarkFlagRequired("subnet-ids")
+		dms_modifyReplicationSubnetGroupCmd.Flags().String("replication-subnet-group-description", "", "A description for the replication instance subnet group.")
+		dms_modifyReplicationSubnetGroupCmd.Flags().String("replication-subnet-group-identifier", "", "The name of the replication instance subnet group.")
+		dms_modifyReplicationSubnetGroupCmd.Flags().String("subnet-ids", "", "A list of subnet IDs.")
+		dms_modifyReplicationSubnetGroupCmd.MarkFlagRequired("replication-subnet-group-identifier")
+		dms_modifyReplicationSubnetGroupCmd.MarkFlagRequired("subnet-ids")
+	})
 	dmsCmd.AddCommand(dms_modifyReplicationSubnetGroupCmd)
 }

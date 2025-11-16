@@ -12,7 +12,9 @@ var applicationSignals_deleteGroupingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationSignals_deleteGroupingConfigurationCmd).Standalone()
+	carapace.Gen(applicationSignals_deleteGroupingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationSignals_deleteGroupingConfigurationCmd).Standalone()
 
+	})
 	applicationSignalsCmd.AddCommand(applicationSignals_deleteGroupingConfigurationCmd)
 }

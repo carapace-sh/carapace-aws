@@ -12,11 +12,13 @@ var organizations_listAccountsWithInvalidEffectivePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listAccountsWithInvalidEffectivePolicyCmd).Standalone()
+	carapace.Gen(organizations_listAccountsWithInvalidEffectivePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listAccountsWithInvalidEffectivePolicyCmd).Standalone()
 
-	organizations_listAccountsWithInvalidEffectivePolicyCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	organizations_listAccountsWithInvalidEffectivePolicyCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
-	organizations_listAccountsWithInvalidEffectivePolicyCmd.Flags().String("policy-type", "", "The type of policy that you want information about.")
-	organizations_listAccountsWithInvalidEffectivePolicyCmd.MarkFlagRequired("policy-type")
+		organizations_listAccountsWithInvalidEffectivePolicyCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		organizations_listAccountsWithInvalidEffectivePolicyCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listAccountsWithInvalidEffectivePolicyCmd.Flags().String("policy-type", "", "The type of policy that you want information about.")
+		organizations_listAccountsWithInvalidEffectivePolicyCmd.MarkFlagRequired("policy-type")
+	})
 	organizationsCmd.AddCommand(organizations_listAccountsWithInvalidEffectivePolicyCmd)
 }

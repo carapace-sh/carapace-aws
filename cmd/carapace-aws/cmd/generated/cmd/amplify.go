@@ -12,7 +12,9 @@ var amplifyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyCmd).Standalone()
+	carapace.Gen(amplifyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(amplifyCmd)
 }

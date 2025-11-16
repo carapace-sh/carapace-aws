@@ -12,9 +12,11 @@ var codeconnections_listRepositoryLinksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeconnections_listRepositoryLinksCmd).Standalone()
+	carapace.Gen(codeconnections_listRepositoryLinksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeconnections_listRepositoryLinksCmd).Standalone()
 
-	codeconnections_listRepositoryLinksCmd.Flags().String("max-results", "", "A non-zero, non-negative integer used to limit the number of returned results.")
-	codeconnections_listRepositoryLinksCmd.Flags().String("next-token", "", "An enumeration token that, when provided in a request, returns the next batch of the results.")
+		codeconnections_listRepositoryLinksCmd.Flags().String("max-results", "", "A non-zero, non-negative integer used to limit the number of returned results.")
+		codeconnections_listRepositoryLinksCmd.Flags().String("next-token", "", "An enumeration token that, when provided in a request, returns the next batch of the results.")
+	})
 	codeconnectionsCmd.AddCommand(codeconnections_listRepositoryLinksCmd)
 }

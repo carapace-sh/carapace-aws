@@ -12,9 +12,11 @@ var omics_getShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getShareCmd).Standalone()
+	carapace.Gen(omics_getShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getShareCmd).Standalone()
 
-	omics_getShareCmd.Flags().String("share-id", "", "The ID of the share.")
-	omics_getShareCmd.MarkFlagRequired("share-id")
+		omics_getShareCmd.Flags().String("share-id", "", "The ID of the share.")
+		omics_getShareCmd.MarkFlagRequired("share-id")
+	})
 	omicsCmd.AddCommand(omics_getShareCmd)
 }

@@ -12,13 +12,15 @@ var ec2_createDhcpOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_createDhcpOptionsCmd).Standalone()
+	carapace.Gen(ec2_createDhcpOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_createDhcpOptionsCmd).Standalone()
 
-	ec2_createDhcpOptionsCmd.Flags().String("dhcp-configurations", "", "A DHCP configuration option.")
-	ec2_createDhcpOptionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_createDhcpOptionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_createDhcpOptionsCmd.Flags().String("tag-specifications", "", "The tags to assign to the DHCP option.")
-	ec2_createDhcpOptionsCmd.MarkFlagRequired("dhcp-configurations")
-	ec2_createDhcpOptionsCmd.Flag("no-dry-run").Hidden = true
+		ec2_createDhcpOptionsCmd.Flags().String("dhcp-configurations", "", "A DHCP configuration option.")
+		ec2_createDhcpOptionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_createDhcpOptionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_createDhcpOptionsCmd.Flags().String("tag-specifications", "", "The tags to assign to the DHCP option.")
+		ec2_createDhcpOptionsCmd.MarkFlagRequired("dhcp-configurations")
+		ec2_createDhcpOptionsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_createDhcpOptionsCmd)
 }

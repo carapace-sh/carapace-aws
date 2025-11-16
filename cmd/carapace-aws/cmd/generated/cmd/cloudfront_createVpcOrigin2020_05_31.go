@@ -12,10 +12,12 @@ var cloudfront_createVpcOrigin2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_createVpcOrigin2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createVpcOrigin2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createVpcOrigin2020_05_31Cmd).Standalone()
 
-	cloudfront_createVpcOrigin2020_05_31Cmd.Flags().String("tags", "", "")
-	cloudfront_createVpcOrigin2020_05_31Cmd.Flags().String("vpc-origin-endpoint-config", "", "The VPC origin endpoint configuration.")
-	cloudfront_createVpcOrigin2020_05_31Cmd.MarkFlagRequired("vpc-origin-endpoint-config")
+		cloudfront_createVpcOrigin2020_05_31Cmd.Flags().String("tags", "", "")
+		cloudfront_createVpcOrigin2020_05_31Cmd.Flags().String("vpc-origin-endpoint-config", "", "The VPC origin endpoint configuration.")
+		cloudfront_createVpcOrigin2020_05_31Cmd.MarkFlagRequired("vpc-origin-endpoint-config")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createVpcOrigin2020_05_31Cmd)
 }

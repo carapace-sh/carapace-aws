@@ -12,9 +12,11 @@ var iot_describeFleetMetricCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeFleetMetricCmd).Standalone()
+	carapace.Gen(iot_describeFleetMetricCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeFleetMetricCmd).Standalone()
 
-	iot_describeFleetMetricCmd.Flags().String("metric-name", "", "The name of the fleet metric to describe.")
-	iot_describeFleetMetricCmd.MarkFlagRequired("metric-name")
+		iot_describeFleetMetricCmd.Flags().String("metric-name", "", "The name of the fleet metric to describe.")
+		iot_describeFleetMetricCmd.MarkFlagRequired("metric-name")
+	})
 	iotCmd.AddCommand(iot_describeFleetMetricCmd)
 }

@@ -12,10 +12,12 @@ var lambda_getFunctionUrlConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getFunctionUrlConfigCmd).Standalone()
+	carapace.Gen(lambda_getFunctionUrlConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getFunctionUrlConfigCmd).Standalone()
 
-	lambda_getFunctionUrlConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_getFunctionUrlConfigCmd.Flags().String("qualifier", "", "The alias name.")
-	lambda_getFunctionUrlConfigCmd.MarkFlagRequired("function-name")
+		lambda_getFunctionUrlConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_getFunctionUrlConfigCmd.Flags().String("qualifier", "", "The alias name.")
+		lambda_getFunctionUrlConfigCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_getFunctionUrlConfigCmd)
 }

@@ -12,13 +12,15 @@ var lakeformation_createLftagExpressionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_createLftagExpressionCmd).Standalone()
+	carapace.Gen(lakeformation_createLftagExpressionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_createLftagExpressionCmd).Standalone()
 
-	lakeformation_createLftagExpressionCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
-	lakeformation_createLftagExpressionCmd.Flags().String("description", "", "A description with information about the LF-Tag expression.")
-	lakeformation_createLftagExpressionCmd.Flags().String("expression", "", "A list of LF-Tag conditions (key-value pairs).")
-	lakeformation_createLftagExpressionCmd.Flags().String("name", "", "A name for the expression.")
-	lakeformation_createLftagExpressionCmd.MarkFlagRequired("expression")
-	lakeformation_createLftagExpressionCmd.MarkFlagRequired("name")
+		lakeformation_createLftagExpressionCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+		lakeformation_createLftagExpressionCmd.Flags().String("description", "", "A description with information about the LF-Tag expression.")
+		lakeformation_createLftagExpressionCmd.Flags().String("expression", "", "A list of LF-Tag conditions (key-value pairs).")
+		lakeformation_createLftagExpressionCmd.Flags().String("name", "", "A name for the expression.")
+		lakeformation_createLftagExpressionCmd.MarkFlagRequired("expression")
+		lakeformation_createLftagExpressionCmd.MarkFlagRequired("name")
+	})
 	lakeformationCmd.AddCommand(lakeformation_createLftagExpressionCmd)
 }

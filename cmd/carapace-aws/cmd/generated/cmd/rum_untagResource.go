@@ -12,11 +12,13 @@ var rum_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rum_untagResourceCmd).Standalone()
+	carapace.Gen(rum_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rum_untagResourceCmd).Standalone()
 
-	rum_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch RUM resource that you're removing tags from.")
-	rum_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
-	rum_untagResourceCmd.MarkFlagRequired("resource-arn")
-	rum_untagResourceCmd.MarkFlagRequired("tag-keys")
+		rum_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch RUM resource that you're removing tags from.")
+		rum_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
+		rum_untagResourceCmd.MarkFlagRequired("resource-arn")
+		rum_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	rumCmd.AddCommand(rum_untagResourceCmd)
 }

@@ -12,11 +12,13 @@ var firehose_listTagsForDeliveryStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(firehose_listTagsForDeliveryStreamCmd).Standalone()
+	carapace.Gen(firehose_listTagsForDeliveryStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(firehose_listTagsForDeliveryStreamCmd).Standalone()
 
-	firehose_listTagsForDeliveryStreamCmd.Flags().String("delivery-stream-name", "", "The name of the Firehose stream whose tags you want to list.")
-	firehose_listTagsForDeliveryStreamCmd.Flags().String("exclusive-start-tag-key", "", "The key to use as the starting point for the list of tags.")
-	firehose_listTagsForDeliveryStreamCmd.Flags().String("limit", "", "The number of tags to return.")
-	firehose_listTagsForDeliveryStreamCmd.MarkFlagRequired("delivery-stream-name")
+		firehose_listTagsForDeliveryStreamCmd.Flags().String("delivery-stream-name", "", "The name of the Firehose stream whose tags you want to list.")
+		firehose_listTagsForDeliveryStreamCmd.Flags().String("exclusive-start-tag-key", "", "The key to use as the starting point for the list of tags.")
+		firehose_listTagsForDeliveryStreamCmd.Flags().String("limit", "", "The number of tags to return.")
+		firehose_listTagsForDeliveryStreamCmd.MarkFlagRequired("delivery-stream-name")
+	})
 	firehoseCmd.AddCommand(firehose_listTagsForDeliveryStreamCmd)
 }

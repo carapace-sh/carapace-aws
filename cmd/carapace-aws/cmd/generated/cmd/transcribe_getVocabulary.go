@@ -12,9 +12,11 @@ var transcribe_getVocabularyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_getVocabularyCmd).Standalone()
+	carapace.Gen(transcribe_getVocabularyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_getVocabularyCmd).Standalone()
 
-	transcribe_getVocabularyCmd.Flags().String("vocabulary-name", "", "The name of the custom vocabulary you want information about.")
-	transcribe_getVocabularyCmd.MarkFlagRequired("vocabulary-name")
+		transcribe_getVocabularyCmd.Flags().String("vocabulary-name", "", "The name of the custom vocabulary you want information about.")
+		transcribe_getVocabularyCmd.MarkFlagRequired("vocabulary-name")
+	})
 	transcribeCmd.AddCommand(transcribe_getVocabularyCmd)
 }

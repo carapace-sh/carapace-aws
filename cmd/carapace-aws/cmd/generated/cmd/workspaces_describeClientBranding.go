@@ -12,9 +12,11 @@ var workspaces_describeClientBrandingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeClientBrandingCmd).Standalone()
+	carapace.Gen(workspaces_describeClientBrandingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeClientBrandingCmd).Standalone()
 
-	workspaces_describeClientBrandingCmd.Flags().String("resource-id", "", "The directory identifier of the WorkSpace for which you want to view client branding information.")
-	workspaces_describeClientBrandingCmd.MarkFlagRequired("resource-id")
+		workspaces_describeClientBrandingCmd.Flags().String("resource-id", "", "The directory identifier of the WorkSpace for which you want to view client branding information.")
+		workspaces_describeClientBrandingCmd.MarkFlagRequired("resource-id")
+	})
 	workspacesCmd.AddCommand(workspaces_describeClientBrandingCmd)
 }

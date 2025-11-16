@@ -12,11 +12,13 @@ var s3vectors_putVectorBucketPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3vectors_putVectorBucketPolicyCmd).Standalone()
+	carapace.Gen(s3vectors_putVectorBucketPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3vectors_putVectorBucketPolicyCmd).Standalone()
 
-	s3vectors_putVectorBucketPolicyCmd.Flags().String("policy", "", "The `JSON` that defines the policy.")
-	s3vectors_putVectorBucketPolicyCmd.Flags().String("vector-bucket-arn", "", "The Amazon Resource Name (ARN) of the vector bucket.")
-	s3vectors_putVectorBucketPolicyCmd.Flags().String("vector-bucket-name", "", "The name of the vector bucket.")
-	s3vectors_putVectorBucketPolicyCmd.MarkFlagRequired("policy")
+		s3vectors_putVectorBucketPolicyCmd.Flags().String("policy", "", "The `JSON` that defines the policy.")
+		s3vectors_putVectorBucketPolicyCmd.Flags().String("vector-bucket-arn", "", "The Amazon Resource Name (ARN) of the vector bucket.")
+		s3vectors_putVectorBucketPolicyCmd.Flags().String("vector-bucket-name", "", "The name of the vector bucket.")
+		s3vectors_putVectorBucketPolicyCmd.MarkFlagRequired("policy")
+	})
 	s3vectorsCmd.AddCommand(s3vectors_putVectorBucketPolicyCmd)
 }

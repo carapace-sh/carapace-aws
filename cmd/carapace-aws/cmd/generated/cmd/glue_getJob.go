@@ -12,9 +12,11 @@ var glue_getJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getJobCmd).Standalone()
+	carapace.Gen(glue_getJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getJobCmd).Standalone()
 
-	glue_getJobCmd.Flags().String("job-name", "", "The name of the job definition to retrieve.")
-	glue_getJobCmd.MarkFlagRequired("job-name")
+		glue_getJobCmd.Flags().String("job-name", "", "The name of the job definition to retrieve.")
+		glue_getJobCmd.MarkFlagRequired("job-name")
+	})
 	glueCmd.AddCommand(glue_getJobCmd)
 }

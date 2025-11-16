@@ -12,11 +12,13 @@ var transfer_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_untagResourceCmd).Standalone()
+	carapace.Gen(transfer_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_untagResourceCmd).Standalone()
 
-	transfer_untagResourceCmd.Flags().String("arn", "", "The value of the resource that will have the tag removed.")
-	transfer_untagResourceCmd.Flags().String("tag-keys", "", "TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type.")
-	transfer_untagResourceCmd.MarkFlagRequired("arn")
-	transfer_untagResourceCmd.MarkFlagRequired("tag-keys")
+		transfer_untagResourceCmd.Flags().String("arn", "", "The value of the resource that will have the tag removed.")
+		transfer_untagResourceCmd.Flags().String("tag-keys", "", "TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type.")
+		transfer_untagResourceCmd.MarkFlagRequired("arn")
+		transfer_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	transferCmd.AddCommand(transfer_untagResourceCmd)
 }

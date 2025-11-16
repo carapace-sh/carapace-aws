@@ -12,10 +12,12 @@ var chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd = &cobra
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd).Standalone()
 
-	chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd.Flags().String("identifier", "", "The unique identifier of the requested resource.")
-	chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd.Flags().String("stream-configuration", "", "The configuration settings for the video stream.")
-	chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd.MarkFlagRequired("identifier")
+		chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd.Flags().String("identifier", "", "The unique identifier of the requested resource.")
+		chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd.Flags().String("stream-configuration", "", "The configuration settings for the video stream.")
+		chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd.MarkFlagRequired("identifier")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_updateMediaPipelineKinesisVideoStreamPoolCmd)
 }

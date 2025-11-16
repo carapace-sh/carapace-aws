@@ -12,10 +12,12 @@ var kinesisvideo_deleteStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_deleteStreamCmd).Standalone()
+	carapace.Gen(kinesisvideo_deleteStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_deleteStreamCmd).Standalone()
 
-	kinesisvideo_deleteStreamCmd.Flags().String("current-version", "", "Optional: The version of the stream that you want to delete.")
-	kinesisvideo_deleteStreamCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream that you want to delete.")
-	kinesisvideo_deleteStreamCmd.MarkFlagRequired("stream-arn")
+		kinesisvideo_deleteStreamCmd.Flags().String("current-version", "", "Optional: The version of the stream that you want to delete.")
+		kinesisvideo_deleteStreamCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream that you want to delete.")
+		kinesisvideo_deleteStreamCmd.MarkFlagRequired("stream-arn")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_deleteStreamCmd)
 }

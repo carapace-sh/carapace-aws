@@ -12,9 +12,11 @@ var bedrockAgentRuntime_deleteSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentRuntime_deleteSessionCmd).Standalone()
+	carapace.Gen(bedrockAgentRuntime_deleteSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentRuntime_deleteSessionCmd).Standalone()
 
-	bedrockAgentRuntime_deleteSessionCmd.Flags().String("session-identifier", "", "The unique identifier for the session to be deleted.")
-	bedrockAgentRuntime_deleteSessionCmd.MarkFlagRequired("session-identifier")
+		bedrockAgentRuntime_deleteSessionCmd.Flags().String("session-identifier", "", "The unique identifier for the session to be deleted.")
+		bedrockAgentRuntime_deleteSessionCmd.MarkFlagRequired("session-identifier")
+	})
 	bedrockAgentRuntimeCmd.AddCommand(bedrockAgentRuntime_deleteSessionCmd)
 }

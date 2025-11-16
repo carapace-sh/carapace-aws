@@ -12,9 +12,11 @@ var datasync_deleteTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_deleteTaskCmd).Standalone()
+	carapace.Gen(datasync_deleteTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_deleteTaskCmd).Standalone()
 
-	datasync_deleteTaskCmd.Flags().String("task-arn", "", "Specifies the Amazon Resource Name (ARN) of the task that you want to delete.")
-	datasync_deleteTaskCmd.MarkFlagRequired("task-arn")
+		datasync_deleteTaskCmd.Flags().String("task-arn", "", "Specifies the Amazon Resource Name (ARN) of the task that you want to delete.")
+		datasync_deleteTaskCmd.MarkFlagRequired("task-arn")
+	})
 	datasyncCmd.AddCommand(datasync_deleteTaskCmd)
 }

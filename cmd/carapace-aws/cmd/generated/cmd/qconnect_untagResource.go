@@ -12,11 +12,13 @@ var qconnect_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_untagResourceCmd).Standalone()
+	carapace.Gen(qconnect_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_untagResourceCmd).Standalone()
 
-	qconnect_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	qconnect_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
-	qconnect_untagResourceCmd.MarkFlagRequired("resource-arn")
-	qconnect_untagResourceCmd.MarkFlagRequired("tag-keys")
+		qconnect_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		qconnect_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
+		qconnect_untagResourceCmd.MarkFlagRequired("resource-arn")
+		qconnect_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	qconnectCmd.AddCommand(qconnect_untagResourceCmd)
 }

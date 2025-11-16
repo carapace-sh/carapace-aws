@@ -12,11 +12,13 @@ var socialmessaging_getWhatsAppMessageTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(socialmessaging_getWhatsAppMessageTemplateCmd).Standalone()
+	carapace.Gen(socialmessaging_getWhatsAppMessageTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_getWhatsAppMessageTemplateCmd).Standalone()
 
-	socialmessaging_getWhatsAppMessageTemplateCmd.Flags().String("id", "", "The ID of the WhatsApp Business Account associated with this template.")
-	socialmessaging_getWhatsAppMessageTemplateCmd.Flags().String("meta-template-id", "", "The numeric ID of the template assigned by Meta.")
-	socialmessaging_getWhatsAppMessageTemplateCmd.MarkFlagRequired("id")
-	socialmessaging_getWhatsAppMessageTemplateCmd.MarkFlagRequired("meta-template-id")
+		socialmessaging_getWhatsAppMessageTemplateCmd.Flags().String("id", "", "The ID of the WhatsApp Business Account associated with this template.")
+		socialmessaging_getWhatsAppMessageTemplateCmd.Flags().String("meta-template-id", "", "The numeric ID of the template assigned by Meta.")
+		socialmessaging_getWhatsAppMessageTemplateCmd.MarkFlagRequired("id")
+		socialmessaging_getWhatsAppMessageTemplateCmd.MarkFlagRequired("meta-template-id")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_getWhatsAppMessageTemplateCmd)
 }

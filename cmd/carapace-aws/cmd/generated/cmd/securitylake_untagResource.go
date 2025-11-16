@@ -12,11 +12,13 @@ var securitylake_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_untagResourceCmd).Standalone()
+	carapace.Gen(securitylake_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_untagResourceCmd).Standalone()
 
-	securitylake_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Security Lake resource to remove one or more tags from.")
-	securitylake_untagResourceCmd.Flags().String("tag-keys", "", "A list of one or more tag keys.")
-	securitylake_untagResourceCmd.MarkFlagRequired("resource-arn")
-	securitylake_untagResourceCmd.MarkFlagRequired("tag-keys")
+		securitylake_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Security Lake resource to remove one or more tags from.")
+		securitylake_untagResourceCmd.Flags().String("tag-keys", "", "A list of one or more tag keys.")
+		securitylake_untagResourceCmd.MarkFlagRequired("resource-arn")
+		securitylake_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	securitylakeCmd.AddCommand(securitylake_untagResourceCmd)
 }

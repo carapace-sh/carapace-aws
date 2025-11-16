@@ -12,9 +12,11 @@ var comprehend_stopPiiEntitiesDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_stopPiiEntitiesDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_stopPiiEntitiesDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_stopPiiEntitiesDetectionJobCmd).Standalone()
 
-	comprehend_stopPiiEntitiesDetectionJobCmd.Flags().String("job-id", "", "The identifier of the PII entities detection job to stop.")
-	comprehend_stopPiiEntitiesDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_stopPiiEntitiesDetectionJobCmd.Flags().String("job-id", "", "The identifier of the PII entities detection job to stop.")
+		comprehend_stopPiiEntitiesDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_stopPiiEntitiesDetectionJobCmd)
 }

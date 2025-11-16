@@ -12,10 +12,12 @@ var cloudformation_describeStackEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeStackEventsCmd).Standalone()
+	carapace.Gen(cloudformation_describeStackEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeStackEventsCmd).Standalone()
 
-	cloudformation_describeStackEventsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	cloudformation_describeStackEventsCmd.Flags().String("stack-name", "", "The name or the unique stack ID that's associated with the stack, which aren't always interchangeable:")
-	cloudformation_describeStackEventsCmd.MarkFlagRequired("stack-name")
+		cloudformation_describeStackEventsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		cloudformation_describeStackEventsCmd.Flags().String("stack-name", "", "The name or the unique stack ID that's associated with the stack, which aren't always interchangeable:")
+		cloudformation_describeStackEventsCmd.MarkFlagRequired("stack-name")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeStackEventsCmd)
 }

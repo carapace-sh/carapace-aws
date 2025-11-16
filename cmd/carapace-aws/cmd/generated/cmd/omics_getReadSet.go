@@ -12,14 +12,16 @@ var omics_getReadSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getReadSetCmd).Standalone()
+	carapace.Gen(omics_getReadSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getReadSetCmd).Standalone()
 
-	omics_getReadSetCmd.Flags().String("file", "", "The file to retrieve.")
-	omics_getReadSetCmd.Flags().String("id", "", "The read set's ID.")
-	omics_getReadSetCmd.Flags().String("part-number", "", "The part number to retrieve.")
-	omics_getReadSetCmd.Flags().String("sequence-store-id", "", "The read set's sequence store ID.")
-	omics_getReadSetCmd.MarkFlagRequired("id")
-	omics_getReadSetCmd.MarkFlagRequired("part-number")
-	omics_getReadSetCmd.MarkFlagRequired("sequence-store-id")
+		omics_getReadSetCmd.Flags().String("file", "", "The file to retrieve.")
+		omics_getReadSetCmd.Flags().String("id", "", "The read set's ID.")
+		omics_getReadSetCmd.Flags().String("part-number", "", "The part number to retrieve.")
+		omics_getReadSetCmd.Flags().String("sequence-store-id", "", "The read set's sequence store ID.")
+		omics_getReadSetCmd.MarkFlagRequired("id")
+		omics_getReadSetCmd.MarkFlagRequired("part-number")
+		omics_getReadSetCmd.MarkFlagRequired("sequence-store-id")
+	})
 	omicsCmd.AddCommand(omics_getReadSetCmd)
 }

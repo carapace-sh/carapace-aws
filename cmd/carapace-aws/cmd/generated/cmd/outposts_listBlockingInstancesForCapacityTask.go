@@ -12,13 +12,15 @@ var outposts_listBlockingInstancesForCapacityTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_listBlockingInstancesForCapacityTaskCmd).Standalone()
+	carapace.Gen(outposts_listBlockingInstancesForCapacityTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_listBlockingInstancesForCapacityTaskCmd).Standalone()
 
-	outposts_listBlockingInstancesForCapacityTaskCmd.Flags().String("capacity-task-id", "", "The ID of the capacity task.")
-	outposts_listBlockingInstancesForCapacityTaskCmd.Flags().String("max-results", "", "")
-	outposts_listBlockingInstancesForCapacityTaskCmd.Flags().String("next-token", "", "")
-	outposts_listBlockingInstancesForCapacityTaskCmd.Flags().String("outpost-identifier", "", "The ID or ARN of the Outpost associated with the specified capacity task.")
-	outposts_listBlockingInstancesForCapacityTaskCmd.MarkFlagRequired("capacity-task-id")
-	outposts_listBlockingInstancesForCapacityTaskCmd.MarkFlagRequired("outpost-identifier")
+		outposts_listBlockingInstancesForCapacityTaskCmd.Flags().String("capacity-task-id", "", "The ID of the capacity task.")
+		outposts_listBlockingInstancesForCapacityTaskCmd.Flags().String("max-results", "", "")
+		outposts_listBlockingInstancesForCapacityTaskCmd.Flags().String("next-token", "", "")
+		outposts_listBlockingInstancesForCapacityTaskCmd.Flags().String("outpost-identifier", "", "The ID or ARN of the Outpost associated with the specified capacity task.")
+		outposts_listBlockingInstancesForCapacityTaskCmd.MarkFlagRequired("capacity-task-id")
+		outposts_listBlockingInstancesForCapacityTaskCmd.MarkFlagRequired("outpost-identifier")
+	})
 	outpostsCmd.AddCommand(outposts_listBlockingInstancesForCapacityTaskCmd)
 }

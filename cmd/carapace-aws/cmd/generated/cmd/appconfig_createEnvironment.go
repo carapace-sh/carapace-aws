@@ -12,14 +12,16 @@ var appconfig_createEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_createEnvironmentCmd).Standalone()
+	carapace.Gen(appconfig_createEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_createEnvironmentCmd).Standalone()
 
-	appconfig_createEnvironmentCmd.Flags().String("application-id", "", "The application ID.")
-	appconfig_createEnvironmentCmd.Flags().String("description", "", "A description of the environment.")
-	appconfig_createEnvironmentCmd.Flags().String("monitors", "", "Amazon CloudWatch alarms to monitor during the deployment process.")
-	appconfig_createEnvironmentCmd.Flags().String("name", "", "A name for the environment.")
-	appconfig_createEnvironmentCmd.Flags().String("tags", "", "Metadata to assign to the environment.")
-	appconfig_createEnvironmentCmd.MarkFlagRequired("application-id")
-	appconfig_createEnvironmentCmd.MarkFlagRequired("name")
+		appconfig_createEnvironmentCmd.Flags().String("application-id", "", "The application ID.")
+		appconfig_createEnvironmentCmd.Flags().String("description", "", "A description of the environment.")
+		appconfig_createEnvironmentCmd.Flags().String("monitors", "", "Amazon CloudWatch alarms to monitor during the deployment process.")
+		appconfig_createEnvironmentCmd.Flags().String("name", "", "A name for the environment.")
+		appconfig_createEnvironmentCmd.Flags().String("tags", "", "Metadata to assign to the environment.")
+		appconfig_createEnvironmentCmd.MarkFlagRequired("application-id")
+		appconfig_createEnvironmentCmd.MarkFlagRequired("name")
+	})
 	appconfigCmd.AddCommand(appconfig_createEnvironmentCmd)
 }

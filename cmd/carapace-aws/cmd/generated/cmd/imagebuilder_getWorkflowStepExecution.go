@@ -12,9 +12,11 @@ var imagebuilder_getWorkflowStepExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getWorkflowStepExecutionCmd).Standalone()
+	carapace.Gen(imagebuilder_getWorkflowStepExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getWorkflowStepExecutionCmd).Standalone()
 
-	imagebuilder_getWorkflowStepExecutionCmd.Flags().String("step-execution-id", "", "Use the unique identifier for a specific runtime instance of the workflow step to get runtime details for that step.")
-	imagebuilder_getWorkflowStepExecutionCmd.MarkFlagRequired("step-execution-id")
+		imagebuilder_getWorkflowStepExecutionCmd.Flags().String("step-execution-id", "", "Use the unique identifier for a specific runtime instance of the workflow step to get runtime details for that step.")
+		imagebuilder_getWorkflowStepExecutionCmd.MarkFlagRequired("step-execution-id")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getWorkflowStepExecutionCmd)
 }

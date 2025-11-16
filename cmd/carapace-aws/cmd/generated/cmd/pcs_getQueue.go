@@ -12,11 +12,13 @@ var pcs_getQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcs_getQueueCmd).Standalone()
+	carapace.Gen(pcs_getQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcs_getQueueCmd).Standalone()
 
-	pcs_getQueueCmd.Flags().String("cluster-identifier", "", "The name or ID of the cluster of the queue.")
-	pcs_getQueueCmd.Flags().String("queue-identifier", "", "The name or ID of the queue.")
-	pcs_getQueueCmd.MarkFlagRequired("cluster-identifier")
-	pcs_getQueueCmd.MarkFlagRequired("queue-identifier")
+		pcs_getQueueCmd.Flags().String("cluster-identifier", "", "The name or ID of the cluster of the queue.")
+		pcs_getQueueCmd.Flags().String("queue-identifier", "", "The name or ID of the queue.")
+		pcs_getQueueCmd.MarkFlagRequired("cluster-identifier")
+		pcs_getQueueCmd.MarkFlagRequired("queue-identifier")
+	})
 	pcsCmd.AddCommand(pcs_getQueueCmd)
 }

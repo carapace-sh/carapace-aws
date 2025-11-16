@@ -12,11 +12,13 @@ var paymentCryptography_getParametersForImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_getParametersForImportCmd).Standalone()
+	carapace.Gen(paymentCryptography_getParametersForImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_getParametersForImportCmd).Standalone()
 
-	paymentCryptography_getParametersForImportCmd.Flags().String("key-material-type", "", "The method to use for key material import.")
-	paymentCryptography_getParametersForImportCmd.Flags().String("wrapping-key-algorithm", "", "The wrapping key algorithm to generate a wrapping key certificate.")
-	paymentCryptography_getParametersForImportCmd.MarkFlagRequired("key-material-type")
-	paymentCryptography_getParametersForImportCmd.MarkFlagRequired("wrapping-key-algorithm")
+		paymentCryptography_getParametersForImportCmd.Flags().String("key-material-type", "", "The method to use for key material import.")
+		paymentCryptography_getParametersForImportCmd.Flags().String("wrapping-key-algorithm", "", "The wrapping key algorithm to generate a wrapping key certificate.")
+		paymentCryptography_getParametersForImportCmd.MarkFlagRequired("key-material-type")
+		paymentCryptography_getParametersForImportCmd.MarkFlagRequired("wrapping-key-algorithm")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_getParametersForImportCmd)
 }

@@ -12,11 +12,13 @@ var odb_getDbNodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_getDbNodeCmd).Standalone()
+	carapace.Gen(odb_getDbNodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_getDbNodeCmd).Standalone()
 
-	odb_getDbNodeCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster that contains the DB node.")
-	odb_getDbNodeCmd.Flags().String("db-node-id", "", "The unique identifier of the DB node to retrieve information about.")
-	odb_getDbNodeCmd.MarkFlagRequired("cloud-vm-cluster-id")
-	odb_getDbNodeCmd.MarkFlagRequired("db-node-id")
+		odb_getDbNodeCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster that contains the DB node.")
+		odb_getDbNodeCmd.Flags().String("db-node-id", "", "The unique identifier of the DB node to retrieve information about.")
+		odb_getDbNodeCmd.MarkFlagRequired("cloud-vm-cluster-id")
+		odb_getDbNodeCmd.MarkFlagRequired("db-node-id")
+	})
 	odbCmd.AddCommand(odb_getDbNodeCmd)
 }

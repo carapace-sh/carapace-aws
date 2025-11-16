@@ -12,7 +12,9 @@ var autoscaling_describeTerminationPolicyTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_describeTerminationPolicyTypesCmd).Standalone()
+	carapace.Gen(autoscaling_describeTerminationPolicyTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_describeTerminationPolicyTypesCmd).Standalone()
 
+	})
 	autoscalingCmd.AddCommand(autoscaling_describeTerminationPolicyTypesCmd)
 }

@@ -12,9 +12,11 @@ var ses_getCustomVerificationEmailTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_getCustomVerificationEmailTemplateCmd).Standalone()
+	carapace.Gen(ses_getCustomVerificationEmailTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_getCustomVerificationEmailTemplateCmd).Standalone()
 
-	ses_getCustomVerificationEmailTemplateCmd.Flags().String("template-name", "", "The name of the custom verification email template to retrieve.")
-	ses_getCustomVerificationEmailTemplateCmd.MarkFlagRequired("template-name")
+		ses_getCustomVerificationEmailTemplateCmd.Flags().String("template-name", "", "The name of the custom verification email template to retrieve.")
+		ses_getCustomVerificationEmailTemplateCmd.MarkFlagRequired("template-name")
+	})
 	sesCmd.AddCommand(ses_getCustomVerificationEmailTemplateCmd)
 }

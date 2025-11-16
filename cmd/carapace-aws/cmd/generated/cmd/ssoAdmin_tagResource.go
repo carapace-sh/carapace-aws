@@ -12,12 +12,14 @@ var ssoAdmin_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_tagResourceCmd).Standalone()
+	carapace.Gen(ssoAdmin_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_tagResourceCmd).Standalone()
 
-	ssoAdmin_tagResourceCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource with the tags to be listed.")
-	ssoAdmin_tagResourceCmd.Flags().String("tags", "", "A set of key-value pairs that are used to manage the resource.")
-	ssoAdmin_tagResourceCmd.MarkFlagRequired("resource-arn")
-	ssoAdmin_tagResourceCmd.MarkFlagRequired("tags")
+		ssoAdmin_tagResourceCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource with the tags to be listed.")
+		ssoAdmin_tagResourceCmd.Flags().String("tags", "", "A set of key-value pairs that are used to manage the resource.")
+		ssoAdmin_tagResourceCmd.MarkFlagRequired("resource-arn")
+		ssoAdmin_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_tagResourceCmd)
 }

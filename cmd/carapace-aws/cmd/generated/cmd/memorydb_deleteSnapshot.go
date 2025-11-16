@@ -12,9 +12,11 @@ var memorydb_deleteSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_deleteSnapshotCmd).Standalone()
+	carapace.Gen(memorydb_deleteSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_deleteSnapshotCmd).Standalone()
 
-	memorydb_deleteSnapshotCmd.Flags().String("snapshot-name", "", "The name of the snapshot to delete.")
-	memorydb_deleteSnapshotCmd.MarkFlagRequired("snapshot-name")
+		memorydb_deleteSnapshotCmd.Flags().String("snapshot-name", "", "The name of the snapshot to delete.")
+		memorydb_deleteSnapshotCmd.MarkFlagRequired("snapshot-name")
+	})
 	memorydbCmd.AddCommand(memorydb_deleteSnapshotCmd)
 }

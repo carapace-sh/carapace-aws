@@ -12,9 +12,11 @@ var lightsail_deleteInstanceSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteInstanceSnapshotCmd).Standalone()
+	carapace.Gen(lightsail_deleteInstanceSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteInstanceSnapshotCmd).Standalone()
 
-	lightsail_deleteInstanceSnapshotCmd.Flags().String("instance-snapshot-name", "", "The name of the snapshot to delete.")
-	lightsail_deleteInstanceSnapshotCmd.MarkFlagRequired("instance-snapshot-name")
+		lightsail_deleteInstanceSnapshotCmd.Flags().String("instance-snapshot-name", "", "The name of the snapshot to delete.")
+		lightsail_deleteInstanceSnapshotCmd.MarkFlagRequired("instance-snapshot-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteInstanceSnapshotCmd)
 }

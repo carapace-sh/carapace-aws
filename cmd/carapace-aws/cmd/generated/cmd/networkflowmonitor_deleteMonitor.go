@@ -12,9 +12,11 @@ var networkflowmonitor_deleteMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_deleteMonitorCmd).Standalone()
+	carapace.Gen(networkflowmonitor_deleteMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_deleteMonitorCmd).Standalone()
 
-	networkflowmonitor_deleteMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor to delete.")
-	networkflowmonitor_deleteMonitorCmd.MarkFlagRequired("monitor-name")
+		networkflowmonitor_deleteMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor to delete.")
+		networkflowmonitor_deleteMonitorCmd.MarkFlagRequired("monitor-name")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_deleteMonitorCmd)
 }

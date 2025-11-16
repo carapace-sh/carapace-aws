@@ -12,11 +12,13 @@ var cloudtrail_cancelQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_cancelQueryCmd).Standalone()
+	carapace.Gen(cloudtrail_cancelQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_cancelQueryCmd).Standalone()
 
-	cloudtrail_cancelQueryCmd.Flags().String("event-data-store", "", "The ARN (or the ID suffix of the ARN) of an event data store on which the specified query is running.")
-	cloudtrail_cancelQueryCmd.Flags().String("event-data-store-owner-account-id", "", "The account ID of the event data store owner.")
-	cloudtrail_cancelQueryCmd.Flags().String("query-id", "", "The ID of the query that you want to cancel.")
-	cloudtrail_cancelQueryCmd.MarkFlagRequired("query-id")
+		cloudtrail_cancelQueryCmd.Flags().String("event-data-store", "", "The ARN (or the ID suffix of the ARN) of an event data store on which the specified query is running.")
+		cloudtrail_cancelQueryCmd.Flags().String("event-data-store-owner-account-id", "", "The account ID of the event data store owner.")
+		cloudtrail_cancelQueryCmd.Flags().String("query-id", "", "The ID of the query that you want to cancel.")
+		cloudtrail_cancelQueryCmd.MarkFlagRequired("query-id")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_cancelQueryCmd)
 }

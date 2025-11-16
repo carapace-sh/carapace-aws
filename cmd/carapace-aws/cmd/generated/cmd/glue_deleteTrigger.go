@@ -12,9 +12,11 @@ var glue_deleteTriggerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteTriggerCmd).Standalone()
+	carapace.Gen(glue_deleteTriggerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteTriggerCmd).Standalone()
 
-	glue_deleteTriggerCmd.Flags().String("name", "", "The name of the trigger to delete.")
-	glue_deleteTriggerCmd.MarkFlagRequired("name")
+		glue_deleteTriggerCmd.Flags().String("name", "", "The name of the trigger to delete.")
+		glue_deleteTriggerCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_deleteTriggerCmd)
 }

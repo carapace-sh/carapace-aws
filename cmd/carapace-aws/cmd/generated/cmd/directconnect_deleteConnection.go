@@ -12,9 +12,11 @@ var directconnect_deleteConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_deleteConnectionCmd).Standalone()
+	carapace.Gen(directconnect_deleteConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_deleteConnectionCmd).Standalone()
 
-	directconnect_deleteConnectionCmd.Flags().String("connection-id", "", "The ID of the connection.")
-	directconnect_deleteConnectionCmd.MarkFlagRequired("connection-id")
+		directconnect_deleteConnectionCmd.Flags().String("connection-id", "", "The ID of the connection.")
+		directconnect_deleteConnectionCmd.MarkFlagRequired("connection-id")
+	})
 	directconnectCmd.AddCommand(directconnect_deleteConnectionCmd)
 }

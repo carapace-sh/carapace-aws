@@ -12,9 +12,11 @@ var inspector2_cancelSbomExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_cancelSbomExportCmd).Standalone()
+	carapace.Gen(inspector2_cancelSbomExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_cancelSbomExportCmd).Standalone()
 
-	inspector2_cancelSbomExportCmd.Flags().String("report-id", "", "The report ID of the SBOM export to cancel.")
-	inspector2_cancelSbomExportCmd.MarkFlagRequired("report-id")
+		inspector2_cancelSbomExportCmd.Flags().String("report-id", "", "The report ID of the SBOM export to cancel.")
+		inspector2_cancelSbomExportCmd.MarkFlagRequired("report-id")
+	})
 	inspector2Cmd.AddCommand(inspector2_cancelSbomExportCmd)
 }

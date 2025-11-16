@@ -12,9 +12,11 @@ var workspaces_restoreWorkspaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_restoreWorkspaceCmd).Standalone()
+	carapace.Gen(workspaces_restoreWorkspaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_restoreWorkspaceCmd).Standalone()
 
-	workspaces_restoreWorkspaceCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
-	workspaces_restoreWorkspaceCmd.MarkFlagRequired("workspace-id")
+		workspaces_restoreWorkspaceCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
+		workspaces_restoreWorkspaceCmd.MarkFlagRequired("workspace-id")
+	})
 	workspacesCmd.AddCommand(workspaces_restoreWorkspaceCmd)
 }

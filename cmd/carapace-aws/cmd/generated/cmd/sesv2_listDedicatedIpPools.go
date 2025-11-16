@@ -12,9 +12,11 @@ var sesv2_listDedicatedIpPoolsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listDedicatedIpPoolsCmd).Standalone()
+	carapace.Gen(sesv2_listDedicatedIpPoolsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listDedicatedIpPoolsCmd).Standalone()
 
-	sesv2_listDedicatedIpPoolsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListDedicatedIpPools` to indicate the position in the list of dedicated IP pools.")
-	sesv2_listDedicatedIpPoolsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListDedicatedIpPools`.")
+		sesv2_listDedicatedIpPoolsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListDedicatedIpPools` to indicate the position in the list of dedicated IP pools.")
+		sesv2_listDedicatedIpPoolsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListDedicatedIpPools`.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listDedicatedIpPoolsCmd)
 }

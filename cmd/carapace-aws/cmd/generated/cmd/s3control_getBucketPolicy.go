@@ -12,11 +12,13 @@ var s3control_getBucketPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_getBucketPolicyCmd).Standalone()
+	carapace.Gen(s3control_getBucketPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_getBucketPolicyCmd).Standalone()
 
-	s3control_getBucketPolicyCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Outposts bucket.")
-	s3control_getBucketPolicyCmd.Flags().String("bucket", "", "Specifies the bucket.")
-	s3control_getBucketPolicyCmd.MarkFlagRequired("account-id")
-	s3control_getBucketPolicyCmd.MarkFlagRequired("bucket")
+		s3control_getBucketPolicyCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Outposts bucket.")
+		s3control_getBucketPolicyCmd.Flags().String("bucket", "", "Specifies the bucket.")
+		s3control_getBucketPolicyCmd.MarkFlagRequired("account-id")
+		s3control_getBucketPolicyCmd.MarkFlagRequired("bucket")
+	})
 	s3controlCmd.AddCommand(s3control_getBucketPolicyCmd)
 }

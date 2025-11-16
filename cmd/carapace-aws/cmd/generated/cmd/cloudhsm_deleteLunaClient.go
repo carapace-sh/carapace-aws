@@ -12,9 +12,11 @@ var cloudhsm_deleteLunaClientCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_deleteLunaClientCmd).Standalone()
+	carapace.Gen(cloudhsm_deleteLunaClientCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_deleteLunaClientCmd).Standalone()
 
-	cloudhsm_deleteLunaClientCmd.Flags().String("client-arn", "", "The ARN of the client to delete.")
-	cloudhsm_deleteLunaClientCmd.MarkFlagRequired("client-arn")
+		cloudhsm_deleteLunaClientCmd.Flags().String("client-arn", "", "The ARN of the client to delete.")
+		cloudhsm_deleteLunaClientCmd.MarkFlagRequired("client-arn")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_deleteLunaClientCmd)
 }

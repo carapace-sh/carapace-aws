@@ -12,9 +12,11 @@ var wellarchitected_getReviewTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_getReviewTemplateCmd).Standalone()
+	carapace.Gen(wellarchitected_getReviewTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_getReviewTemplateCmd).Standalone()
 
-	wellarchitected_getReviewTemplateCmd.Flags().String("template-arn", "", "The review template ARN.")
-	wellarchitected_getReviewTemplateCmd.MarkFlagRequired("template-arn")
+		wellarchitected_getReviewTemplateCmd.Flags().String("template-arn", "", "The review template ARN.")
+		wellarchitected_getReviewTemplateCmd.MarkFlagRequired("template-arn")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_getReviewTemplateCmd)
 }

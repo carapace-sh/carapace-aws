@@ -12,12 +12,14 @@ var snowball_listServiceVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_listServiceVersionsCmd).Standalone()
+	carapace.Gen(snowball_listServiceVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_listServiceVersionsCmd).Standalone()
 
-	snowball_listServiceVersionsCmd.Flags().String("dependent-services", "", "A list of names and versions of dependant services of the requested service.")
-	snowball_listServiceVersionsCmd.Flags().String("max-results", "", "The maximum number of `ListServiceVersions` objects to return.")
-	snowball_listServiceVersionsCmd.Flags().String("next-token", "", "Because HTTP requests are stateless, this is the starting point for the next list of returned `ListServiceVersionsRequest` versions.")
-	snowball_listServiceVersionsCmd.Flags().String("service-name", "", "The name of the service for which you're requesting supported versions.")
-	snowball_listServiceVersionsCmd.MarkFlagRequired("service-name")
+		snowball_listServiceVersionsCmd.Flags().String("dependent-services", "", "A list of names and versions of dependant services of the requested service.")
+		snowball_listServiceVersionsCmd.Flags().String("max-results", "", "The maximum number of `ListServiceVersions` objects to return.")
+		snowball_listServiceVersionsCmd.Flags().String("next-token", "", "Because HTTP requests are stateless, this is the starting point for the next list of returned `ListServiceVersionsRequest` versions.")
+		snowball_listServiceVersionsCmd.Flags().String("service-name", "", "The name of the service for which you're requesting supported versions.")
+		snowball_listServiceVersionsCmd.MarkFlagRequired("service-name")
+	})
 	snowballCmd.AddCommand(snowball_listServiceVersionsCmd)
 }

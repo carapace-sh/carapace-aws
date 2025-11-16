@@ -12,9 +12,11 @@ var redshift_describeLoggingStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeLoggingStatusCmd).Standalone()
+	carapace.Gen(redshift_describeLoggingStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeLoggingStatusCmd).Standalone()
 
-	redshift_describeLoggingStatusCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster from which to get the logging status.")
-	redshift_describeLoggingStatusCmd.MarkFlagRequired("cluster-identifier")
+		redshift_describeLoggingStatusCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster from which to get the logging status.")
+		redshift_describeLoggingStatusCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_describeLoggingStatusCmd)
 }

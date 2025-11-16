@@ -12,9 +12,11 @@ var iotwireless_listDestinationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_listDestinationsCmd).Standalone()
+	carapace.Gen(iotwireless_listDestinationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_listDestinationsCmd).Standalone()
 
-	iotwireless_listDestinationsCmd.Flags().String("max-results", "", "The maximum number of results to return in this operation.")
-	iotwireless_listDestinationsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+		iotwireless_listDestinationsCmd.Flags().String("max-results", "", "The maximum number of results to return in this operation.")
+		iotwireless_listDestinationsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_listDestinationsCmd)
 }

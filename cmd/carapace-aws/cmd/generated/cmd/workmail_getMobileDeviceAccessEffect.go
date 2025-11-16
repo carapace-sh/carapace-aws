@@ -12,13 +12,15 @@ var workmail_getMobileDeviceAccessEffectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_getMobileDeviceAccessEffectCmd).Standalone()
+	carapace.Gen(workmail_getMobileDeviceAccessEffectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_getMobileDeviceAccessEffectCmd).Standalone()
 
-	workmail_getMobileDeviceAccessEffectCmd.Flags().String("device-model", "", "Device model the simulated user will report.")
-	workmail_getMobileDeviceAccessEffectCmd.Flags().String("device-operating-system", "", "Device operating system the simulated user will report.")
-	workmail_getMobileDeviceAccessEffectCmd.Flags().String("device-type", "", "Device type the simulated user will report.")
-	workmail_getMobileDeviceAccessEffectCmd.Flags().String("device-user-agent", "", "Device user agent the simulated user will report.")
-	workmail_getMobileDeviceAccessEffectCmd.Flags().String("organization-id", "", "The WorkMail organization to simulate the access effect for.")
-	workmail_getMobileDeviceAccessEffectCmd.MarkFlagRequired("organization-id")
+		workmail_getMobileDeviceAccessEffectCmd.Flags().String("device-model", "", "Device model the simulated user will report.")
+		workmail_getMobileDeviceAccessEffectCmd.Flags().String("device-operating-system", "", "Device operating system the simulated user will report.")
+		workmail_getMobileDeviceAccessEffectCmd.Flags().String("device-type", "", "Device type the simulated user will report.")
+		workmail_getMobileDeviceAccessEffectCmd.Flags().String("device-user-agent", "", "Device user agent the simulated user will report.")
+		workmail_getMobileDeviceAccessEffectCmd.Flags().String("organization-id", "", "The WorkMail organization to simulate the access effect for.")
+		workmail_getMobileDeviceAccessEffectCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_getMobileDeviceAccessEffectCmd)
 }

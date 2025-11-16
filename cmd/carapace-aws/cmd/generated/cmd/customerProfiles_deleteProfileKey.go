@@ -12,15 +12,17 @@ var customerProfiles_deleteProfileKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_deleteProfileKeyCmd).Standalone()
+	carapace.Gen(customerProfiles_deleteProfileKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_deleteProfileKeyCmd).Standalone()
 
-	customerProfiles_deleteProfileKeyCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_deleteProfileKeyCmd.Flags().String("key-name", "", "A searchable identifier of a customer profile.")
-	customerProfiles_deleteProfileKeyCmd.Flags().String("profile-id", "", "The unique identifier of a customer profile.")
-	customerProfiles_deleteProfileKeyCmd.Flags().String("values", "", "A list of key values.")
-	customerProfiles_deleteProfileKeyCmd.MarkFlagRequired("domain-name")
-	customerProfiles_deleteProfileKeyCmd.MarkFlagRequired("key-name")
-	customerProfiles_deleteProfileKeyCmd.MarkFlagRequired("profile-id")
-	customerProfiles_deleteProfileKeyCmd.MarkFlagRequired("values")
+		customerProfiles_deleteProfileKeyCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_deleteProfileKeyCmd.Flags().String("key-name", "", "A searchable identifier of a customer profile.")
+		customerProfiles_deleteProfileKeyCmd.Flags().String("profile-id", "", "The unique identifier of a customer profile.")
+		customerProfiles_deleteProfileKeyCmd.Flags().String("values", "", "A list of key values.")
+		customerProfiles_deleteProfileKeyCmd.MarkFlagRequired("domain-name")
+		customerProfiles_deleteProfileKeyCmd.MarkFlagRequired("key-name")
+		customerProfiles_deleteProfileKeyCmd.MarkFlagRequired("profile-id")
+		customerProfiles_deleteProfileKeyCmd.MarkFlagRequired("values")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_deleteProfileKeyCmd)
 }

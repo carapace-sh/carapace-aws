@@ -12,11 +12,13 @@ var chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd).Standalone()
 
-	chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd.Flags().String("identifier", "", "The unique identifier of the resource to be updated.")
-	chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd.Flags().String("update-status", "", "The requested status of the media insights pipeline.")
-	chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd.MarkFlagRequired("identifier")
-	chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd.MarkFlagRequired("update-status")
+		chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd.Flags().String("identifier", "", "The unique identifier of the resource to be updated.")
+		chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd.Flags().String("update-status", "", "The requested status of the media insights pipeline.")
+		chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd.MarkFlagRequired("identifier")
+		chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd.MarkFlagRequired("update-status")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_updateMediaInsightsPipelineStatusCmd)
 }

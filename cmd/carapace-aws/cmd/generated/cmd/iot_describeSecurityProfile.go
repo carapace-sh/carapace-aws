@@ -12,9 +12,11 @@ var iot_describeSecurityProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeSecurityProfileCmd).Standalone()
+	carapace.Gen(iot_describeSecurityProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeSecurityProfileCmd).Standalone()
 
-	iot_describeSecurityProfileCmd.Flags().String("security-profile-name", "", "The name of the security profile whose information you want to get.")
-	iot_describeSecurityProfileCmd.MarkFlagRequired("security-profile-name")
+		iot_describeSecurityProfileCmd.Flags().String("security-profile-name", "", "The name of the security profile whose information you want to get.")
+		iot_describeSecurityProfileCmd.MarkFlagRequired("security-profile-name")
+	})
 	iotCmd.AddCommand(iot_describeSecurityProfileCmd)
 }

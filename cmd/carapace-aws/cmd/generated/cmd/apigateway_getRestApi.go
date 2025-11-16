@@ -12,9 +12,11 @@ var apigateway_getRestApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getRestApiCmd).Standalone()
+	carapace.Gen(apigateway_getRestApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getRestApiCmd).Standalone()
 
-	apigateway_getRestApiCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getRestApiCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getRestApiCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getRestApiCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getRestApiCmd)
 }

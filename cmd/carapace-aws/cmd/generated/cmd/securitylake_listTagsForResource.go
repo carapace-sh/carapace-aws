@@ -12,9 +12,11 @@ var securitylake_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_listTagsForResourceCmd).Standalone()
+	carapace.Gen(securitylake_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_listTagsForResourceCmd).Standalone()
 
-	securitylake_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Security Lake resource for which you want to retrieve the tags.")
-	securitylake_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		securitylake_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Security Lake resource for which you want to retrieve the tags.")
+		securitylake_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	securitylakeCmd.AddCommand(securitylake_listTagsForResourceCmd)
 }

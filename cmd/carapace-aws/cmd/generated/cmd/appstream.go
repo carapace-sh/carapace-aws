@@ -12,7 +12,9 @@ var appstreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstreamCmd).Standalone()
+	carapace.Gen(appstreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstreamCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(appstreamCmd)
 }

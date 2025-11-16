@@ -12,11 +12,13 @@ var iam_changePasswordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_changePasswordCmd).Standalone()
+	carapace.Gen(iam_changePasswordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_changePasswordCmd).Standalone()
 
-	iam_changePasswordCmd.Flags().String("new-password", "", "The new password.")
-	iam_changePasswordCmd.Flags().String("old-password", "", "The IAM user's current password.")
-	iam_changePasswordCmd.MarkFlagRequired("new-password")
-	iam_changePasswordCmd.MarkFlagRequired("old-password")
+		iam_changePasswordCmd.Flags().String("new-password", "", "The new password.")
+		iam_changePasswordCmd.Flags().String("old-password", "", "The IAM user's current password.")
+		iam_changePasswordCmd.MarkFlagRequired("new-password")
+		iam_changePasswordCmd.MarkFlagRequired("old-password")
+	})
 	iamCmd.AddCommand(iam_changePasswordCmd)
 }

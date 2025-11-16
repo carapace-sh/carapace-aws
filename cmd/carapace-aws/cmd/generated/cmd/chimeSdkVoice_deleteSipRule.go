@@ -12,9 +12,11 @@ var chimeSdkVoice_deleteSipRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteSipRuleCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteSipRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteSipRuleCmd).Standalone()
 
-	chimeSdkVoice_deleteSipRuleCmd.Flags().String("sip-rule-id", "", "The SIP rule ID.")
-	chimeSdkVoice_deleteSipRuleCmd.MarkFlagRequired("sip-rule-id")
+		chimeSdkVoice_deleteSipRuleCmd.Flags().String("sip-rule-id", "", "The SIP rule ID.")
+		chimeSdkVoice_deleteSipRuleCmd.MarkFlagRequired("sip-rule-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteSipRuleCmd)
 }

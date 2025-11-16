@@ -12,9 +12,11 @@ var licenseManagerLinuxSubscriptions_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManagerLinuxSubscriptions_listTagsForResourceCmd).Standalone()
+	carapace.Gen(licenseManagerLinuxSubscriptions_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerLinuxSubscriptions_listTagsForResourceCmd).Standalone()
 
-	licenseManagerLinuxSubscriptions_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which to list metadata tags.")
-	licenseManagerLinuxSubscriptions_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		licenseManagerLinuxSubscriptions_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which to list metadata tags.")
+		licenseManagerLinuxSubscriptions_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	licenseManagerLinuxSubscriptionsCmd.AddCommand(licenseManagerLinuxSubscriptions_listTagsForResourceCmd)
 }

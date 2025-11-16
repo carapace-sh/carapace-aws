@@ -12,14 +12,16 @@ var ec2_modifyPublicIpDnsNameOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_modifyPublicIpDnsNameOptionsCmd).Standalone()
+	carapace.Gen(ec2_modifyPublicIpDnsNameOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_modifyPublicIpDnsNameOptionsCmd).Standalone()
 
-	ec2_modifyPublicIpDnsNameOptionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_modifyPublicIpDnsNameOptionsCmd.Flags().String("hostname-type", "", "The public hostname type.")
-	ec2_modifyPublicIpDnsNameOptionsCmd.Flags().String("network-interface-id", "", "A network interface ID.")
-	ec2_modifyPublicIpDnsNameOptionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_modifyPublicIpDnsNameOptionsCmd.MarkFlagRequired("hostname-type")
-	ec2_modifyPublicIpDnsNameOptionsCmd.MarkFlagRequired("network-interface-id")
-	ec2_modifyPublicIpDnsNameOptionsCmd.Flag("no-dry-run").Hidden = true
+		ec2_modifyPublicIpDnsNameOptionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_modifyPublicIpDnsNameOptionsCmd.Flags().String("hostname-type", "", "The public hostname type.")
+		ec2_modifyPublicIpDnsNameOptionsCmd.Flags().String("network-interface-id", "", "A network interface ID.")
+		ec2_modifyPublicIpDnsNameOptionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_modifyPublicIpDnsNameOptionsCmd.MarkFlagRequired("hostname-type")
+		ec2_modifyPublicIpDnsNameOptionsCmd.MarkFlagRequired("network-interface-id")
+		ec2_modifyPublicIpDnsNameOptionsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_modifyPublicIpDnsNameOptionsCmd)
 }

@@ -12,11 +12,13 @@ var chimeSdkIdentity_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_tagResourceCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_tagResourceCmd).Standalone()
 
-	chimeSdkIdentity_tagResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
-	chimeSdkIdentity_tagResourceCmd.Flags().String("tags", "", "The tag key-value pairs.")
-	chimeSdkIdentity_tagResourceCmd.MarkFlagRequired("resource-arn")
-	chimeSdkIdentity_tagResourceCmd.MarkFlagRequired("tags")
+		chimeSdkIdentity_tagResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
+		chimeSdkIdentity_tagResourceCmd.Flags().String("tags", "", "The tag key-value pairs.")
+		chimeSdkIdentity_tagResourceCmd.MarkFlagRequired("resource-arn")
+		chimeSdkIdentity_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_tagResourceCmd)
 }

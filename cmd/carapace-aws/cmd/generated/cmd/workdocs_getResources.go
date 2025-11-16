@@ -12,12 +12,14 @@ var workdocs_getResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_getResourcesCmd).Standalone()
+	carapace.Gen(workdocs_getResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_getResourcesCmd).Standalone()
 
-	workdocs_getResourcesCmd.Flags().String("authentication-token", "", "The Amazon WorkDocs authentication token.")
-	workdocs_getResourcesCmd.Flags().String("collection-type", "", "The collection type.")
-	workdocs_getResourcesCmd.Flags().String("limit", "", "The maximum number of resources to return.")
-	workdocs_getResourcesCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	workdocs_getResourcesCmd.Flags().String("user-id", "", "The user ID for the resource collection.")
+		workdocs_getResourcesCmd.Flags().String("authentication-token", "", "The Amazon WorkDocs authentication token.")
+		workdocs_getResourcesCmd.Flags().String("collection-type", "", "The collection type.")
+		workdocs_getResourcesCmd.Flags().String("limit", "", "The maximum number of resources to return.")
+		workdocs_getResourcesCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		workdocs_getResourcesCmd.Flags().String("user-id", "", "The user ID for the resource collection.")
+	})
 	workdocsCmd.AddCommand(workdocs_getResourcesCmd)
 }

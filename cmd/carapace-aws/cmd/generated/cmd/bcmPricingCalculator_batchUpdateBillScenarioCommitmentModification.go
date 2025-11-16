@@ -12,11 +12,13 @@ var bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd = &cob
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd).Standalone()
 
-	bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd.Flags().String("bill-scenario-id", "", "The ID of the Bill Scenario for which you want to modify the commitment group of a modeled commitment.")
-	bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd.Flags().String("commitment-modifications", "", "List of commitments that you want to update in a Bill Scenario.")
-	bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd.MarkFlagRequired("bill-scenario-id")
-	bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd.MarkFlagRequired("commitment-modifications")
+		bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd.Flags().String("bill-scenario-id", "", "The ID of the Bill Scenario for which you want to modify the commitment group of a modeled commitment.")
+		bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd.Flags().String("commitment-modifications", "", "List of commitments that you want to update in a Bill Scenario.")
+		bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd.MarkFlagRequired("bill-scenario-id")
+		bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd.MarkFlagRequired("commitment-modifications")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_batchUpdateBillScenarioCommitmentModificationCmd)
 }

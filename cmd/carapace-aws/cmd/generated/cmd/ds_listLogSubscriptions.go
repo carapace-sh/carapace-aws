@@ -12,10 +12,12 @@ var ds_listLogSubscriptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_listLogSubscriptionsCmd).Standalone()
+	carapace.Gen(ds_listLogSubscriptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_listLogSubscriptionsCmd).Standalone()
 
-	ds_listLogSubscriptionsCmd.Flags().String("directory-id", "", "If a *DirectoryID* is provided, lists only the log subscription associated with that directory.")
-	ds_listLogSubscriptionsCmd.Flags().String("limit", "", "The maximum number of items returned.")
-	ds_listLogSubscriptionsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ds_listLogSubscriptionsCmd.Flags().String("directory-id", "", "If a *DirectoryID* is provided, lists only the log subscription associated with that directory.")
+		ds_listLogSubscriptionsCmd.Flags().String("limit", "", "The maximum number of items returned.")
+		ds_listLogSubscriptionsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	dsCmd.AddCommand(ds_listLogSubscriptionsCmd)
 }

@@ -12,9 +12,11 @@ var storagegateway_describeGatewayInformationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeGatewayInformationCmd).Standalone()
+	carapace.Gen(storagegateway_describeGatewayInformationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeGatewayInformationCmd).Standalone()
 
-	storagegateway_describeGatewayInformationCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_describeGatewayInformationCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_describeGatewayInformationCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_describeGatewayInformationCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeGatewayInformationCmd)
 }

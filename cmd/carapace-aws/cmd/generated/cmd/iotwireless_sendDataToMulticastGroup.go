@@ -12,13 +12,15 @@ var iotwireless_sendDataToMulticastGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_sendDataToMulticastGroupCmd).Standalone()
+	carapace.Gen(iotwireless_sendDataToMulticastGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_sendDataToMulticastGroupCmd).Standalone()
 
-	iotwireless_sendDataToMulticastGroupCmd.Flags().String("id", "", "")
-	iotwireless_sendDataToMulticastGroupCmd.Flags().String("payload-data", "", "")
-	iotwireless_sendDataToMulticastGroupCmd.Flags().String("wireless-metadata", "", "")
-	iotwireless_sendDataToMulticastGroupCmd.MarkFlagRequired("id")
-	iotwireless_sendDataToMulticastGroupCmd.MarkFlagRequired("payload-data")
-	iotwireless_sendDataToMulticastGroupCmd.MarkFlagRequired("wireless-metadata")
+		iotwireless_sendDataToMulticastGroupCmd.Flags().String("id", "", "")
+		iotwireless_sendDataToMulticastGroupCmd.Flags().String("payload-data", "", "")
+		iotwireless_sendDataToMulticastGroupCmd.Flags().String("wireless-metadata", "", "")
+		iotwireless_sendDataToMulticastGroupCmd.MarkFlagRequired("id")
+		iotwireless_sendDataToMulticastGroupCmd.MarkFlagRequired("payload-data")
+		iotwireless_sendDataToMulticastGroupCmd.MarkFlagRequired("wireless-metadata")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_sendDataToMulticastGroupCmd)
 }

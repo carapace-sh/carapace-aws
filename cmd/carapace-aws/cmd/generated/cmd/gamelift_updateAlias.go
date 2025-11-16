@@ -12,12 +12,14 @@ var gamelift_updateAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_updateAliasCmd).Standalone()
+	carapace.Gen(gamelift_updateAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_updateAliasCmd).Standalone()
 
-	gamelift_updateAliasCmd.Flags().String("alias-id", "", "A unique identifier for the alias that you want to update.")
-	gamelift_updateAliasCmd.Flags().String("description", "", "A human-readable description of the alias.")
-	gamelift_updateAliasCmd.Flags().String("name", "", "A descriptive label that is associated with an alias.")
-	gamelift_updateAliasCmd.Flags().String("routing-strategy", "", "The routing configuration, including routing type and fleet target, for the alias.")
-	gamelift_updateAliasCmd.MarkFlagRequired("alias-id")
+		gamelift_updateAliasCmd.Flags().String("alias-id", "", "A unique identifier for the alias that you want to update.")
+		gamelift_updateAliasCmd.Flags().String("description", "", "A human-readable description of the alias.")
+		gamelift_updateAliasCmd.Flags().String("name", "", "A descriptive label that is associated with an alias.")
+		gamelift_updateAliasCmd.Flags().String("routing-strategy", "", "The routing configuration, including routing type and fleet target, for the alias.")
+		gamelift_updateAliasCmd.MarkFlagRequired("alias-id")
+	})
 	gameliftCmd.AddCommand(gamelift_updateAliasCmd)
 }

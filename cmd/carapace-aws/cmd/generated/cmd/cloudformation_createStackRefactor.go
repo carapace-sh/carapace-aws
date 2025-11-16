@@ -12,12 +12,14 @@ var cloudformation_createStackRefactorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_createStackRefactorCmd).Standalone()
+	carapace.Gen(cloudformation_createStackRefactorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_createStackRefactorCmd).Standalone()
 
-	cloudformation_createStackRefactorCmd.Flags().String("description", "", "A description to help you identify the stack refactor.")
-	cloudformation_createStackRefactorCmd.Flags().String("enable-stack-creation", "", "Determines if a new stack is created with the refactor.")
-	cloudformation_createStackRefactorCmd.Flags().String("resource-mappings", "", "The mappings for the stack resource `Source` and stack resource `Destination`.")
-	cloudformation_createStackRefactorCmd.Flags().String("stack-definitions", "", "The stacks being refactored.")
-	cloudformation_createStackRefactorCmd.MarkFlagRequired("stack-definitions")
+		cloudformation_createStackRefactorCmd.Flags().String("description", "", "A description to help you identify the stack refactor.")
+		cloudformation_createStackRefactorCmd.Flags().String("enable-stack-creation", "", "Determines if a new stack is created with the refactor.")
+		cloudformation_createStackRefactorCmd.Flags().String("resource-mappings", "", "The mappings for the stack resource `Source` and stack resource `Destination`.")
+		cloudformation_createStackRefactorCmd.Flags().String("stack-definitions", "", "The stacks being refactored.")
+		cloudformation_createStackRefactorCmd.MarkFlagRequired("stack-definitions")
+	})
 	cloudformationCmd.AddCommand(cloudformation_createStackRefactorCmd)
 }

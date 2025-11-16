@@ -12,11 +12,13 @@ var iot_getPolicyVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getPolicyVersionCmd).Standalone()
+	carapace.Gen(iot_getPolicyVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getPolicyVersionCmd).Standalone()
 
-	iot_getPolicyVersionCmd.Flags().String("policy-name", "", "The name of the policy.")
-	iot_getPolicyVersionCmd.Flags().String("policy-version-id", "", "The policy version ID.")
-	iot_getPolicyVersionCmd.MarkFlagRequired("policy-name")
-	iot_getPolicyVersionCmd.MarkFlagRequired("policy-version-id")
+		iot_getPolicyVersionCmd.Flags().String("policy-name", "", "The name of the policy.")
+		iot_getPolicyVersionCmd.Flags().String("policy-version-id", "", "The policy version ID.")
+		iot_getPolicyVersionCmd.MarkFlagRequired("policy-name")
+		iot_getPolicyVersionCmd.MarkFlagRequired("policy-version-id")
+	})
 	iotCmd.AddCommand(iot_getPolicyVersionCmd)
 }

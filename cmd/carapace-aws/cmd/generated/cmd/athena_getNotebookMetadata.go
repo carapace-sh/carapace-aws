@@ -12,9 +12,11 @@ var athena_getNotebookMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_getNotebookMetadataCmd).Standalone()
+	carapace.Gen(athena_getNotebookMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_getNotebookMetadataCmd).Standalone()
 
-	athena_getNotebookMetadataCmd.Flags().String("notebook-id", "", "The ID of the notebook whose metadata is to be retrieved.")
-	athena_getNotebookMetadataCmd.MarkFlagRequired("notebook-id")
+		athena_getNotebookMetadataCmd.Flags().String("notebook-id", "", "The ID of the notebook whose metadata is to be retrieved.")
+		athena_getNotebookMetadataCmd.MarkFlagRequired("notebook-id")
+	})
 	athenaCmd.AddCommand(athena_getNotebookMetadataCmd)
 }

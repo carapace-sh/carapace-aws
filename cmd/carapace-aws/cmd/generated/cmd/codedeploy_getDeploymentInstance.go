@@ -12,11 +12,13 @@ var codedeploy_getDeploymentInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_getDeploymentInstanceCmd).Standalone()
+	carapace.Gen(codedeploy_getDeploymentInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_getDeploymentInstanceCmd).Standalone()
 
-	codedeploy_getDeploymentInstanceCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
-	codedeploy_getDeploymentInstanceCmd.Flags().String("instance-id", "", "The unique ID of an instance in the deployment group.")
-	codedeploy_getDeploymentInstanceCmd.MarkFlagRequired("deployment-id")
-	codedeploy_getDeploymentInstanceCmd.MarkFlagRequired("instance-id")
+		codedeploy_getDeploymentInstanceCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
+		codedeploy_getDeploymentInstanceCmd.Flags().String("instance-id", "", "The unique ID of an instance in the deployment group.")
+		codedeploy_getDeploymentInstanceCmd.MarkFlagRequired("deployment-id")
+		codedeploy_getDeploymentInstanceCmd.MarkFlagRequired("instance-id")
+	})
 	codedeployCmd.AddCommand(codedeploy_getDeploymentInstanceCmd)
 }

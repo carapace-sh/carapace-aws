@@ -12,9 +12,11 @@ var mailmanager_getArchiveSearchResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_getArchiveSearchResultsCmd).Standalone()
+	carapace.Gen(mailmanager_getArchiveSearchResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_getArchiveSearchResultsCmd).Standalone()
 
-	mailmanager_getArchiveSearchResultsCmd.Flags().String("search-id", "", "The identifier of the completed search job.")
-	mailmanager_getArchiveSearchResultsCmd.MarkFlagRequired("search-id")
+		mailmanager_getArchiveSearchResultsCmd.Flags().String("search-id", "", "The identifier of the completed search job.")
+		mailmanager_getArchiveSearchResultsCmd.MarkFlagRequired("search-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_getArchiveSearchResultsCmd)
 }

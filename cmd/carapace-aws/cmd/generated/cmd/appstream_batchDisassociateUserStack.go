@@ -12,9 +12,11 @@ var appstream_batchDisassociateUserStackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_batchDisassociateUserStackCmd).Standalone()
+	carapace.Gen(appstream_batchDisassociateUserStackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_batchDisassociateUserStackCmd).Standalone()
 
-	appstream_batchDisassociateUserStackCmd.Flags().String("user-stack-associations", "", "The list of UserStackAssociation objects.")
-	appstream_batchDisassociateUserStackCmd.MarkFlagRequired("user-stack-associations")
+		appstream_batchDisassociateUserStackCmd.Flags().String("user-stack-associations", "", "The list of UserStackAssociation objects.")
+		appstream_batchDisassociateUserStackCmd.MarkFlagRequired("user-stack-associations")
+	})
 	appstreamCmd.AddCommand(appstream_batchDisassociateUserStackCmd)
 }

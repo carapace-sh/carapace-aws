@@ -12,9 +12,11 @@ var kafka_listConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_listConfigurationsCmd).Standalone()
+	carapace.Gen(kafka_listConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_listConfigurationsCmd).Standalone()
 
-	kafka_listConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	kafka_listConfigurationsCmd.Flags().String("next-token", "", "The paginated results marker.")
+		kafka_listConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		kafka_listConfigurationsCmd.Flags().String("next-token", "", "The paginated results marker.")
+	})
 	kafkaCmd.AddCommand(kafka_listConfigurationsCmd)
 }

@@ -12,9 +12,11 @@ var accessanalyzer_getAnalyzerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_getAnalyzerCmd).Standalone()
+	carapace.Gen(accessanalyzer_getAnalyzerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_getAnalyzerCmd).Standalone()
 
-	accessanalyzer_getAnalyzerCmd.Flags().String("analyzer-name", "", "The name of the analyzer retrieved.")
-	accessanalyzer_getAnalyzerCmd.MarkFlagRequired("analyzer-name")
+		accessanalyzer_getAnalyzerCmd.Flags().String("analyzer-name", "", "The name of the analyzer retrieved.")
+		accessanalyzer_getAnalyzerCmd.MarkFlagRequired("analyzer-name")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_getAnalyzerCmd)
 }

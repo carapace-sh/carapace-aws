@@ -12,8 +12,10 @@ var chimeSdkMessaging_getMessagingSessionEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_getMessagingSessionEndpointCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_getMessagingSessionEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_getMessagingSessionEndpointCmd).Standalone()
 
-	chimeSdkMessaging_getMessagingSessionEndpointCmd.Flags().String("network-type", "", "The type of network for the messaging session endpoint.")
+		chimeSdkMessaging_getMessagingSessionEndpointCmd.Flags().String("network-type", "", "The type of network for the messaging session endpoint.")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_getMessagingSessionEndpointCmd)
 }

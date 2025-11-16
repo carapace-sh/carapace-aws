@@ -12,9 +12,11 @@ var databrew_deleteDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_deleteDatasetCmd).Standalone()
+	carapace.Gen(databrew_deleteDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_deleteDatasetCmd).Standalone()
 
-	databrew_deleteDatasetCmd.Flags().String("name", "", "The name of the dataset to be deleted.")
-	databrew_deleteDatasetCmd.MarkFlagRequired("name")
+		databrew_deleteDatasetCmd.Flags().String("name", "", "The name of the dataset to be deleted.")
+		databrew_deleteDatasetCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_deleteDatasetCmd)
 }

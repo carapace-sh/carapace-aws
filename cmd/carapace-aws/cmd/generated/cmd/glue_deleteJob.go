@@ -12,9 +12,11 @@ var glue_deleteJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteJobCmd).Standalone()
+	carapace.Gen(glue_deleteJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteJobCmd).Standalone()
 
-	glue_deleteJobCmd.Flags().String("job-name", "", "The name of the job definition to delete.")
-	glue_deleteJobCmd.MarkFlagRequired("job-name")
+		glue_deleteJobCmd.Flags().String("job-name", "", "The name of the job definition to delete.")
+		glue_deleteJobCmd.MarkFlagRequired("job-name")
+	})
 	glueCmd.AddCommand(glue_deleteJobCmd)
 }

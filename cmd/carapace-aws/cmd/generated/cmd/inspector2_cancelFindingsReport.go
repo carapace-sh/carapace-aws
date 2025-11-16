@@ -12,9 +12,11 @@ var inspector2_cancelFindingsReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_cancelFindingsReportCmd).Standalone()
+	carapace.Gen(inspector2_cancelFindingsReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_cancelFindingsReportCmd).Standalone()
 
-	inspector2_cancelFindingsReportCmd.Flags().String("report-id", "", "The ID of the report to be canceled.")
-	inspector2_cancelFindingsReportCmd.MarkFlagRequired("report-id")
+		inspector2_cancelFindingsReportCmd.Flags().String("report-id", "", "The ID of the report to be canceled.")
+		inspector2_cancelFindingsReportCmd.MarkFlagRequired("report-id")
+	})
 	inspector2Cmd.AddCommand(inspector2_cancelFindingsReportCmd)
 }

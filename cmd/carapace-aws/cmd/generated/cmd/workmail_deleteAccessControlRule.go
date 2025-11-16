@@ -12,11 +12,13 @@ var workmail_deleteAccessControlRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_deleteAccessControlRuleCmd).Standalone()
+	carapace.Gen(workmail_deleteAccessControlRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_deleteAccessControlRuleCmd).Standalone()
 
-	workmail_deleteAccessControlRuleCmd.Flags().String("name", "", "The name of the access control rule.")
-	workmail_deleteAccessControlRuleCmd.Flags().String("organization-id", "", "The identifier for the organization.")
-	workmail_deleteAccessControlRuleCmd.MarkFlagRequired("name")
-	workmail_deleteAccessControlRuleCmd.MarkFlagRequired("organization-id")
+		workmail_deleteAccessControlRuleCmd.Flags().String("name", "", "The name of the access control rule.")
+		workmail_deleteAccessControlRuleCmd.Flags().String("organization-id", "", "The identifier for the organization.")
+		workmail_deleteAccessControlRuleCmd.MarkFlagRequired("name")
+		workmail_deleteAccessControlRuleCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_deleteAccessControlRuleCmd)
 }

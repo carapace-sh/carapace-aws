@@ -12,12 +12,14 @@ var iottwinmaker_listComponentTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_listComponentTypesCmd).Standalone()
+	carapace.Gen(iottwinmaker_listComponentTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_listComponentTypesCmd).Standalone()
 
-	iottwinmaker_listComponentTypesCmd.Flags().String("filters", "", "A list of objects that filter the request.")
-	iottwinmaker_listComponentTypesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iottwinmaker_listComponentTypesCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
-	iottwinmaker_listComponentTypesCmd.Flags().String("workspace-id", "", "The ID of the workspace.")
-	iottwinmaker_listComponentTypesCmd.MarkFlagRequired("workspace-id")
+		iottwinmaker_listComponentTypesCmd.Flags().String("filters", "", "A list of objects that filter the request.")
+		iottwinmaker_listComponentTypesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iottwinmaker_listComponentTypesCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
+		iottwinmaker_listComponentTypesCmd.Flags().String("workspace-id", "", "The ID of the workspace.")
+		iottwinmaker_listComponentTypesCmd.MarkFlagRequired("workspace-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_listComponentTypesCmd)
 }

@@ -12,10 +12,12 @@ var s3_headBucketCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_headBucketCmd).Standalone()
+	carapace.Gen(s3_headBucketCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_headBucketCmd).Standalone()
 
-	s3_headBucketCmd.Flags().String("bucket", "", "The bucket name.")
-	s3_headBucketCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_headBucketCmd.MarkFlagRequired("bucket")
+		s3_headBucketCmd.Flags().String("bucket", "", "The bucket name.")
+		s3_headBucketCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_headBucketCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_headBucketCmd)
 }

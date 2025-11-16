@@ -12,9 +12,11 @@ var connectcampaigns_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaigns_listTagsForResourceCmd).Standalone()
+	carapace.Gen(connectcampaigns_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaigns_listTagsForResourceCmd).Standalone()
 
-	connectcampaigns_listTagsForResourceCmd.Flags().String("arn", "", "")
-	connectcampaigns_listTagsForResourceCmd.MarkFlagRequired("arn")
+		connectcampaigns_listTagsForResourceCmd.Flags().String("arn", "", "")
+		connectcampaigns_listTagsForResourceCmd.MarkFlagRequired("arn")
+	})
 	connectcampaignsCmd.AddCommand(connectcampaigns_listTagsForResourceCmd)
 }

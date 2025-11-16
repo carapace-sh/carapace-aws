@@ -12,9 +12,11 @@ var notifications_registerNotificationHubCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_registerNotificationHubCmd).Standalone()
+	carapace.Gen(notifications_registerNotificationHubCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_registerNotificationHubCmd).Standalone()
 
-	notifications_registerNotificationHubCmd.Flags().String("notification-hub-region", "", "The Region of the `NotificationHub`.")
-	notifications_registerNotificationHubCmd.MarkFlagRequired("notification-hub-region")
+		notifications_registerNotificationHubCmd.Flags().String("notification-hub-region", "", "The Region of the `NotificationHub`.")
+		notifications_registerNotificationHubCmd.MarkFlagRequired("notification-hub-region")
+	})
 	notificationsCmd.AddCommand(notifications_registerNotificationHubCmd)
 }

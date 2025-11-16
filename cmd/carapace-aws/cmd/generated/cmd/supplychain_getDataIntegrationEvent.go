@@ -12,11 +12,13 @@ var supplychain_getDataIntegrationEventCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_getDataIntegrationEventCmd).Standalone()
+	carapace.Gen(supplychain_getDataIntegrationEventCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_getDataIntegrationEventCmd).Standalone()
 
-	supplychain_getDataIntegrationEventCmd.Flags().String("event-id", "", "The unique event identifier.")
-	supplychain_getDataIntegrationEventCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
-	supplychain_getDataIntegrationEventCmd.MarkFlagRequired("event-id")
-	supplychain_getDataIntegrationEventCmd.MarkFlagRequired("instance-id")
+		supplychain_getDataIntegrationEventCmd.Flags().String("event-id", "", "The unique event identifier.")
+		supplychain_getDataIntegrationEventCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
+		supplychain_getDataIntegrationEventCmd.MarkFlagRequired("event-id")
+		supplychain_getDataIntegrationEventCmd.MarkFlagRequired("instance-id")
+	})
 	supplychainCmd.AddCommand(supplychain_getDataIntegrationEventCmd)
 }

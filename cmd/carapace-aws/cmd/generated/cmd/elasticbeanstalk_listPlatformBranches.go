@@ -12,10 +12,12 @@ var elasticbeanstalk_listPlatformBranchesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_listPlatformBranchesCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_listPlatformBranchesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_listPlatformBranchesCmd).Standalone()
 
-	elasticbeanstalk_listPlatformBranchesCmd.Flags().String("filters", "", "Criteria for restricting the resulting list of platform branches.")
-	elasticbeanstalk_listPlatformBranchesCmd.Flags().String("max-records", "", "The maximum number of platform branch values returned in one call.")
-	elasticbeanstalk_listPlatformBranchesCmd.Flags().String("next-token", "", "For a paginated request.")
+		elasticbeanstalk_listPlatformBranchesCmd.Flags().String("filters", "", "Criteria for restricting the resulting list of platform branches.")
+		elasticbeanstalk_listPlatformBranchesCmd.Flags().String("max-records", "", "The maximum number of platform branch values returned in one call.")
+		elasticbeanstalk_listPlatformBranchesCmd.Flags().String("next-token", "", "For a paginated request.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_listPlatformBranchesCmd)
 }

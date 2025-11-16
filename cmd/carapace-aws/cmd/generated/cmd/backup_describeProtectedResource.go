@@ -12,9 +12,11 @@ var backup_describeProtectedResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_describeProtectedResourceCmd).Standalone()
+	carapace.Gen(backup_describeProtectedResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_describeProtectedResourceCmd).Standalone()
 
-	backup_describeProtectedResourceCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies a resource.")
-	backup_describeProtectedResourceCmd.MarkFlagRequired("resource-arn")
+		backup_describeProtectedResourceCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies a resource.")
+		backup_describeProtectedResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	backupCmd.AddCommand(backup_describeProtectedResourceCmd)
 }

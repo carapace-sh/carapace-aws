@@ -12,11 +12,13 @@ var bedrockDataAutomation_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockDataAutomation_tagResourceCmd).Standalone()
+	carapace.Gen(bedrockDataAutomation_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockDataAutomation_tagResourceCmd).Standalone()
 
-	bedrockDataAutomation_tagResourceCmd.Flags().String("resource-arn", "", "")
-	bedrockDataAutomation_tagResourceCmd.Flags().String("tags", "", "")
-	bedrockDataAutomation_tagResourceCmd.MarkFlagRequired("resource-arn")
-	bedrockDataAutomation_tagResourceCmd.MarkFlagRequired("tags")
+		bedrockDataAutomation_tagResourceCmd.Flags().String("resource-arn", "", "")
+		bedrockDataAutomation_tagResourceCmd.Flags().String("tags", "", "")
+		bedrockDataAutomation_tagResourceCmd.MarkFlagRequired("resource-arn")
+		bedrockDataAutomation_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	bedrockDataAutomationCmd.AddCommand(bedrockDataAutomation_tagResourceCmd)
 }

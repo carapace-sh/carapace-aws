@@ -12,16 +12,18 @@ var dms_startMetadataModelImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_startMetadataModelImportCmd).Standalone()
+	carapace.Gen(dms_startMetadataModelImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_startMetadataModelImportCmd).Standalone()
 
-	dms_startMetadataModelImportCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
-	dms_startMetadataModelImportCmd.Flags().Bool("no-refresh", false, "If `true`, DMS loads metadata for the specified objects from the source database.")
-	dms_startMetadataModelImportCmd.Flags().String("origin", "", "Whether to load metadata to the source or target database.")
-	dms_startMetadataModelImportCmd.Flags().Bool("refresh", false, "If `true`, DMS loads metadata for the specified objects from the source database.")
-	dms_startMetadataModelImportCmd.Flags().String("selection-rules", "", "A value that specifies the database objects to import.")
-	dms_startMetadataModelImportCmd.MarkFlagRequired("migration-project-identifier")
-	dms_startMetadataModelImportCmd.Flag("no-refresh").Hidden = true
-	dms_startMetadataModelImportCmd.MarkFlagRequired("origin")
-	dms_startMetadataModelImportCmd.MarkFlagRequired("selection-rules")
+		dms_startMetadataModelImportCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
+		dms_startMetadataModelImportCmd.Flags().Bool("no-refresh", false, "If `true`, DMS loads metadata for the specified objects from the source database.")
+		dms_startMetadataModelImportCmd.Flags().String("origin", "", "Whether to load metadata to the source or target database.")
+		dms_startMetadataModelImportCmd.Flags().Bool("refresh", false, "If `true`, DMS loads metadata for the specified objects from the source database.")
+		dms_startMetadataModelImportCmd.Flags().String("selection-rules", "", "A value that specifies the database objects to import.")
+		dms_startMetadataModelImportCmd.MarkFlagRequired("migration-project-identifier")
+		dms_startMetadataModelImportCmd.Flag("no-refresh").Hidden = true
+		dms_startMetadataModelImportCmd.MarkFlagRequired("origin")
+		dms_startMetadataModelImportCmd.MarkFlagRequired("selection-rules")
+	})
 	dmsCmd.AddCommand(dms_startMetadataModelImportCmd)
 }

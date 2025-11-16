@@ -12,9 +12,11 @@ var lexv2Models_deleteImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_deleteImportCmd).Standalone()
+	carapace.Gen(lexv2Models_deleteImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_deleteImportCmd).Standalone()
 
-	lexv2Models_deleteImportCmd.Flags().String("import-id", "", "The unique identifier of the import to delete.")
-	lexv2Models_deleteImportCmd.MarkFlagRequired("import-id")
+		lexv2Models_deleteImportCmd.Flags().String("import-id", "", "The unique identifier of the import to delete.")
+		lexv2Models_deleteImportCmd.MarkFlagRequired("import-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_deleteImportCmd)
 }

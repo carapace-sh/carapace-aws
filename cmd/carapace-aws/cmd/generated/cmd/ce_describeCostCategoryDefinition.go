@@ -12,10 +12,12 @@ var ce_describeCostCategoryDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_describeCostCategoryDefinitionCmd).Standalone()
+	carapace.Gen(ce_describeCostCategoryDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_describeCostCategoryDefinitionCmd).Standalone()
 
-	ce_describeCostCategoryDefinitionCmd.Flags().String("cost-category-arn", "", "The unique identifier for your Cost Category.")
-	ce_describeCostCategoryDefinitionCmd.Flags().String("effective-on", "", "The date when the Cost Category was effective.")
-	ce_describeCostCategoryDefinitionCmd.MarkFlagRequired("cost-category-arn")
+		ce_describeCostCategoryDefinitionCmd.Flags().String("cost-category-arn", "", "The unique identifier for your Cost Category.")
+		ce_describeCostCategoryDefinitionCmd.Flags().String("effective-on", "", "The date when the Cost Category was effective.")
+		ce_describeCostCategoryDefinitionCmd.MarkFlagRequired("cost-category-arn")
+	})
 	ceCmd.AddCommand(ce_describeCostCategoryDefinitionCmd)
 }

@@ -12,12 +12,14 @@ var opensearch_describeInstanceTypeLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_describeInstanceTypeLimitsCmd).Standalone()
+	carapace.Gen(opensearch_describeInstanceTypeLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_describeInstanceTypeLimitsCmd).Standalone()
 
-	opensearch_describeInstanceTypeLimitsCmd.Flags().String("domain-name", "", "The name of the domain.")
-	opensearch_describeInstanceTypeLimitsCmd.Flags().String("engine-version", "", "Version of OpenSearch or Elasticsearch, in the format Elasticsearch\\_X.Y or OpenSearch\\_X.Y. Defaults to the latest version of OpenSearch.")
-	opensearch_describeInstanceTypeLimitsCmd.Flags().String("instance-type", "", "The OpenSearch Service instance type for which you need limit information.")
-	opensearch_describeInstanceTypeLimitsCmd.MarkFlagRequired("engine-version")
-	opensearch_describeInstanceTypeLimitsCmd.MarkFlagRequired("instance-type")
+		opensearch_describeInstanceTypeLimitsCmd.Flags().String("domain-name", "", "The name of the domain.")
+		opensearch_describeInstanceTypeLimitsCmd.Flags().String("engine-version", "", "Version of OpenSearch or Elasticsearch, in the format Elasticsearch\\_X.Y or OpenSearch\\_X.Y. Defaults to the latest version of OpenSearch.")
+		opensearch_describeInstanceTypeLimitsCmd.Flags().String("instance-type", "", "The OpenSearch Service instance type for which you need limit information.")
+		opensearch_describeInstanceTypeLimitsCmd.MarkFlagRequired("engine-version")
+		opensearch_describeInstanceTypeLimitsCmd.MarkFlagRequired("instance-type")
+	})
 	opensearchCmd.AddCommand(opensearch_describeInstanceTypeLimitsCmd)
 }

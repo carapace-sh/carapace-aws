@@ -12,14 +12,16 @@ var s3tables_deleteTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_deleteTableCmd).Standalone()
+	carapace.Gen(s3tables_deleteTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_deleteTableCmd).Standalone()
 
-	s3tables_deleteTableCmd.Flags().String("name", "", "The name of the table.")
-	s3tables_deleteTableCmd.Flags().String("namespace", "", "The namespace associated with the table.")
-	s3tables_deleteTableCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket that contains the table.")
-	s3tables_deleteTableCmd.Flags().String("version-token", "", "The version token of the table.")
-	s3tables_deleteTableCmd.MarkFlagRequired("name")
-	s3tables_deleteTableCmd.MarkFlagRequired("namespace")
-	s3tables_deleteTableCmd.MarkFlagRequired("table-bucket-arn")
+		s3tables_deleteTableCmd.Flags().String("name", "", "The name of the table.")
+		s3tables_deleteTableCmd.Flags().String("namespace", "", "The namespace associated with the table.")
+		s3tables_deleteTableCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket that contains the table.")
+		s3tables_deleteTableCmd.Flags().String("version-token", "", "The version token of the table.")
+		s3tables_deleteTableCmd.MarkFlagRequired("name")
+		s3tables_deleteTableCmd.MarkFlagRequired("namespace")
+		s3tables_deleteTableCmd.MarkFlagRequired("table-bucket-arn")
+	})
 	s3tablesCmd.AddCommand(s3tables_deleteTableCmd)
 }

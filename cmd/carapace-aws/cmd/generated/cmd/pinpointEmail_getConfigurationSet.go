@@ -12,9 +12,11 @@ var pinpointEmail_getConfigurationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getConfigurationSetCmd).Standalone()
+	carapace.Gen(pinpointEmail_getConfigurationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getConfigurationSetCmd).Standalone()
 
-	pinpointEmail_getConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that you want to obtain more information about.")
-	pinpointEmail_getConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+		pinpointEmail_getConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that you want to obtain more information about.")
+		pinpointEmail_getConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getConfigurationSetCmd)
 }

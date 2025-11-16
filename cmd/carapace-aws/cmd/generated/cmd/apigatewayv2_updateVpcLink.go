@@ -12,10 +12,12 @@ var apigatewayv2_updateVpcLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_updateVpcLinkCmd).Standalone()
+	carapace.Gen(apigatewayv2_updateVpcLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_updateVpcLinkCmd).Standalone()
 
-	apigatewayv2_updateVpcLinkCmd.Flags().String("name", "", "The name of the VPC link.")
-	apigatewayv2_updateVpcLinkCmd.Flags().String("vpc-link-id", "", "The ID of the VPC link.")
-	apigatewayv2_updateVpcLinkCmd.MarkFlagRequired("vpc-link-id")
+		apigatewayv2_updateVpcLinkCmd.Flags().String("name", "", "The name of the VPC link.")
+		apigatewayv2_updateVpcLinkCmd.Flags().String("vpc-link-id", "", "The ID of the VPC link.")
+		apigatewayv2_updateVpcLinkCmd.MarkFlagRequired("vpc-link-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_updateVpcLinkCmd)
 }

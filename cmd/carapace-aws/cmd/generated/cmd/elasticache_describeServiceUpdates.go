@@ -12,11 +12,13 @@ var elasticache_describeServiceUpdatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_describeServiceUpdatesCmd).Standalone()
+	carapace.Gen(elasticache_describeServiceUpdatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_describeServiceUpdatesCmd).Standalone()
 
-	elasticache_describeServiceUpdatesCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
-	elasticache_describeServiceUpdatesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response")
-	elasticache_describeServiceUpdatesCmd.Flags().String("service-update-name", "", "The unique ID of the service update")
-	elasticache_describeServiceUpdatesCmd.Flags().String("service-update-status", "", "The status of the service update")
+		elasticache_describeServiceUpdatesCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
+		elasticache_describeServiceUpdatesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response")
+		elasticache_describeServiceUpdatesCmd.Flags().String("service-update-name", "", "The unique ID of the service update")
+		elasticache_describeServiceUpdatesCmd.Flags().String("service-update-status", "", "The status of the service update")
+	})
 	elasticacheCmd.AddCommand(elasticache_describeServiceUpdatesCmd)
 }

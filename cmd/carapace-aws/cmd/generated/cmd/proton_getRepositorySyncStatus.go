@@ -12,15 +12,17 @@ var proton_getRepositorySyncStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getRepositorySyncStatusCmd).Standalone()
+	carapace.Gen(proton_getRepositorySyncStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getRepositorySyncStatusCmd).Standalone()
 
-	proton_getRepositorySyncStatusCmd.Flags().String("branch", "", "The repository branch.")
-	proton_getRepositorySyncStatusCmd.Flags().String("repository-name", "", "The repository name.")
-	proton_getRepositorySyncStatusCmd.Flags().String("repository-provider", "", "The repository provider.")
-	proton_getRepositorySyncStatusCmd.Flags().String("sync-type", "", "The repository sync type.")
-	proton_getRepositorySyncStatusCmd.MarkFlagRequired("branch")
-	proton_getRepositorySyncStatusCmd.MarkFlagRequired("repository-name")
-	proton_getRepositorySyncStatusCmd.MarkFlagRequired("repository-provider")
-	proton_getRepositorySyncStatusCmd.MarkFlagRequired("sync-type")
+		proton_getRepositorySyncStatusCmd.Flags().String("branch", "", "The repository branch.")
+		proton_getRepositorySyncStatusCmd.Flags().String("repository-name", "", "The repository name.")
+		proton_getRepositorySyncStatusCmd.Flags().String("repository-provider", "", "The repository provider.")
+		proton_getRepositorySyncStatusCmd.Flags().String("sync-type", "", "The repository sync type.")
+		proton_getRepositorySyncStatusCmd.MarkFlagRequired("branch")
+		proton_getRepositorySyncStatusCmd.MarkFlagRequired("repository-name")
+		proton_getRepositorySyncStatusCmd.MarkFlagRequired("repository-provider")
+		proton_getRepositorySyncStatusCmd.MarkFlagRequired("sync-type")
+	})
 	protonCmd.AddCommand(proton_getRepositorySyncStatusCmd)
 }

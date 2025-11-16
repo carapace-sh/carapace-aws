@@ -12,10 +12,12 @@ var medialive_startMonitorDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_startMonitorDeploymentCmd).Standalone()
+	carapace.Gen(medialive_startMonitorDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_startMonitorDeploymentCmd).Standalone()
 
-	medialive_startMonitorDeploymentCmd.Flags().String("dry-run", "", "")
-	medialive_startMonitorDeploymentCmd.Flags().String("identifier", "", "A signal map's identifier.")
-	medialive_startMonitorDeploymentCmd.MarkFlagRequired("identifier")
+		medialive_startMonitorDeploymentCmd.Flags().String("dry-run", "", "")
+		medialive_startMonitorDeploymentCmd.Flags().String("identifier", "", "A signal map's identifier.")
+		medialive_startMonitorDeploymentCmd.MarkFlagRequired("identifier")
+	})
 	medialiveCmd.AddCommand(medialive_startMonitorDeploymentCmd)
 }

@@ -12,9 +12,11 @@ var opensearch_deleteInboundConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_deleteInboundConnectionCmd).Standalone()
+	carapace.Gen(opensearch_deleteInboundConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_deleteInboundConnectionCmd).Standalone()
 
-	opensearch_deleteInboundConnectionCmd.Flags().String("connection-id", "", "The ID of the inbound connection to permanently delete.")
-	opensearch_deleteInboundConnectionCmd.MarkFlagRequired("connection-id")
+		opensearch_deleteInboundConnectionCmd.Flags().String("connection-id", "", "The ID of the inbound connection to permanently delete.")
+		opensearch_deleteInboundConnectionCmd.MarkFlagRequired("connection-id")
+	})
 	opensearchCmd.AddCommand(opensearch_deleteInboundConnectionCmd)
 }

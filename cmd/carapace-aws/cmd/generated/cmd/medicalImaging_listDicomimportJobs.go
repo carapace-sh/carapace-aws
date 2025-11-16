@@ -12,12 +12,14 @@ var medicalImaging_listDicomimportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medicalImaging_listDicomimportJobsCmd).Standalone()
+	carapace.Gen(medicalImaging_listDicomimportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medicalImaging_listDicomimportJobsCmd).Standalone()
 
-	medicalImaging_listDicomimportJobsCmd.Flags().String("datastore-id", "", "The data store identifier.")
-	medicalImaging_listDicomimportJobsCmd.Flags().String("job-status", "", "The filters for listing import jobs based on status.")
-	medicalImaging_listDicomimportJobsCmd.Flags().String("max-results", "", "The max results count.")
-	medicalImaging_listDicomimportJobsCmd.Flags().String("next-token", "", "The pagination token used to request the list of import jobs on the next page.")
-	medicalImaging_listDicomimportJobsCmd.MarkFlagRequired("datastore-id")
+		medicalImaging_listDicomimportJobsCmd.Flags().String("datastore-id", "", "The data store identifier.")
+		medicalImaging_listDicomimportJobsCmd.Flags().String("job-status", "", "The filters for listing import jobs based on status.")
+		medicalImaging_listDicomimportJobsCmd.Flags().String("max-results", "", "The max results count.")
+		medicalImaging_listDicomimportJobsCmd.Flags().String("next-token", "", "The pagination token used to request the list of import jobs on the next page.")
+		medicalImaging_listDicomimportJobsCmd.MarkFlagRequired("datastore-id")
+	})
 	medicalImagingCmd.AddCommand(medicalImaging_listDicomimportJobsCmd)
 }

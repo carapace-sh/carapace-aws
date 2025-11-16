@@ -12,9 +12,11 @@ var outposts_getOrderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_getOrderCmd).Standalone()
+	carapace.Gen(outposts_getOrderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_getOrderCmd).Standalone()
 
-	outposts_getOrderCmd.Flags().String("order-id", "", "The ID of the order.")
-	outposts_getOrderCmd.MarkFlagRequired("order-id")
+		outposts_getOrderCmd.Flags().String("order-id", "", "The ID of the order.")
+		outposts_getOrderCmd.MarkFlagRequired("order-id")
+	})
 	outpostsCmd.AddCommand(outposts_getOrderCmd)
 }

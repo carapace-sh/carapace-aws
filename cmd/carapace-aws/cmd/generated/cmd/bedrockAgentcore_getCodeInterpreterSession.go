@@ -12,11 +12,13 @@ var bedrockAgentcore_getCodeInterpreterSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_getCodeInterpreterSessionCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_getCodeInterpreterSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_getCodeInterpreterSessionCmd).Standalone()
 
-	bedrockAgentcore_getCodeInterpreterSessionCmd.Flags().String("code-interpreter-identifier", "", "The unique identifier of the code interpreter associated with the session.")
-	bedrockAgentcore_getCodeInterpreterSessionCmd.Flags().String("session-id", "", "The unique identifier of the code interpreter session to retrieve.")
-	bedrockAgentcore_getCodeInterpreterSessionCmd.MarkFlagRequired("code-interpreter-identifier")
-	bedrockAgentcore_getCodeInterpreterSessionCmd.MarkFlagRequired("session-id")
+		bedrockAgentcore_getCodeInterpreterSessionCmd.Flags().String("code-interpreter-identifier", "", "The unique identifier of the code interpreter associated with the session.")
+		bedrockAgentcore_getCodeInterpreterSessionCmd.Flags().String("session-id", "", "The unique identifier of the code interpreter session to retrieve.")
+		bedrockAgentcore_getCodeInterpreterSessionCmd.MarkFlagRequired("code-interpreter-identifier")
+		bedrockAgentcore_getCodeInterpreterSessionCmd.MarkFlagRequired("session-id")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_getCodeInterpreterSessionCmd)
 }

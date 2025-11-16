@@ -12,9 +12,11 @@ var efs_deleteFileSystemPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_deleteFileSystemPolicyCmd).Standalone()
+	carapace.Gen(efs_deleteFileSystemPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_deleteFileSystemPolicyCmd).Standalone()
 
-	efs_deleteFileSystemPolicyCmd.Flags().String("file-system-id", "", "Specifies the EFS file system for which to delete the `FileSystemPolicy`.")
-	efs_deleteFileSystemPolicyCmd.MarkFlagRequired("file-system-id")
+		efs_deleteFileSystemPolicyCmd.Flags().String("file-system-id", "", "Specifies the EFS file system for which to delete the `FileSystemPolicy`.")
+		efs_deleteFileSystemPolicyCmd.MarkFlagRequired("file-system-id")
+	})
 	efsCmd.AddCommand(efs_deleteFileSystemPolicyCmd)
 }

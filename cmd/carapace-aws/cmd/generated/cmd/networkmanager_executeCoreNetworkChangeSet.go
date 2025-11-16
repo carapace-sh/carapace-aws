@@ -12,11 +12,13 @@ var networkmanager_executeCoreNetworkChangeSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_executeCoreNetworkChangeSetCmd).Standalone()
+	carapace.Gen(networkmanager_executeCoreNetworkChangeSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_executeCoreNetworkChangeSetCmd).Standalone()
 
-	networkmanager_executeCoreNetworkChangeSetCmd.Flags().String("core-network-id", "", "The ID of a core network.")
-	networkmanager_executeCoreNetworkChangeSetCmd.Flags().String("policy-version-id", "", "The ID of the policy version.")
-	networkmanager_executeCoreNetworkChangeSetCmd.MarkFlagRequired("core-network-id")
-	networkmanager_executeCoreNetworkChangeSetCmd.MarkFlagRequired("policy-version-id")
+		networkmanager_executeCoreNetworkChangeSetCmd.Flags().String("core-network-id", "", "The ID of a core network.")
+		networkmanager_executeCoreNetworkChangeSetCmd.Flags().String("policy-version-id", "", "The ID of the policy version.")
+		networkmanager_executeCoreNetworkChangeSetCmd.MarkFlagRequired("core-network-id")
+		networkmanager_executeCoreNetworkChangeSetCmd.MarkFlagRequired("policy-version-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_executeCoreNetworkChangeSetCmd)
 }

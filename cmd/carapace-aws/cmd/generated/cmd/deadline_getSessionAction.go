@@ -12,15 +12,17 @@ var deadline_getSessionActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_getSessionActionCmd).Standalone()
+	carapace.Gen(deadline_getSessionActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_getSessionActionCmd).Standalone()
 
-	deadline_getSessionActionCmd.Flags().String("farm-id", "", "The farm ID for the session action.")
-	deadline_getSessionActionCmd.Flags().String("job-id", "", "The job ID for the session.")
-	deadline_getSessionActionCmd.Flags().String("queue-id", "", "The queue ID for the session action.")
-	deadline_getSessionActionCmd.Flags().String("session-action-id", "", "The session action ID for the session.")
-	deadline_getSessionActionCmd.MarkFlagRequired("farm-id")
-	deadline_getSessionActionCmd.MarkFlagRequired("job-id")
-	deadline_getSessionActionCmd.MarkFlagRequired("queue-id")
-	deadline_getSessionActionCmd.MarkFlagRequired("session-action-id")
+		deadline_getSessionActionCmd.Flags().String("farm-id", "", "The farm ID for the session action.")
+		deadline_getSessionActionCmd.Flags().String("job-id", "", "The job ID for the session.")
+		deadline_getSessionActionCmd.Flags().String("queue-id", "", "The queue ID for the session action.")
+		deadline_getSessionActionCmd.Flags().String("session-action-id", "", "The session action ID for the session.")
+		deadline_getSessionActionCmd.MarkFlagRequired("farm-id")
+		deadline_getSessionActionCmd.MarkFlagRequired("job-id")
+		deadline_getSessionActionCmd.MarkFlagRequired("queue-id")
+		deadline_getSessionActionCmd.MarkFlagRequired("session-action-id")
+	})
 	deadlineCmd.AddCommand(deadline_getSessionActionCmd)
 }

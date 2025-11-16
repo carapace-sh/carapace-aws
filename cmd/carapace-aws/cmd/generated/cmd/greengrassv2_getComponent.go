@@ -12,10 +12,12 @@ var greengrassv2_getComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrassv2_getComponentCmd).Standalone()
+	carapace.Gen(greengrassv2_getComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrassv2_getComponentCmd).Standalone()
 
-	greengrassv2_getComponentCmd.Flags().String("arn", "", "The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.")
-	greengrassv2_getComponentCmd.Flags().String("recipe-output-format", "", "The format of the recipe.")
-	greengrassv2_getComponentCmd.MarkFlagRequired("arn")
+		greengrassv2_getComponentCmd.Flags().String("arn", "", "The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the component version.")
+		greengrassv2_getComponentCmd.Flags().String("recipe-output-format", "", "The format of the recipe.")
+		greengrassv2_getComponentCmd.MarkFlagRequired("arn")
+	})
 	greengrassv2Cmd.AddCommand(greengrassv2_getComponentCmd)
 }

@@ -12,9 +12,11 @@ var ses_deleteCustomVerificationEmailTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_deleteCustomVerificationEmailTemplateCmd).Standalone()
+	carapace.Gen(ses_deleteCustomVerificationEmailTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_deleteCustomVerificationEmailTemplateCmd).Standalone()
 
-	ses_deleteCustomVerificationEmailTemplateCmd.Flags().String("template-name", "", "The name of the custom verification email template to delete.")
-	ses_deleteCustomVerificationEmailTemplateCmd.MarkFlagRequired("template-name")
+		ses_deleteCustomVerificationEmailTemplateCmd.Flags().String("template-name", "", "The name of the custom verification email template to delete.")
+		ses_deleteCustomVerificationEmailTemplateCmd.MarkFlagRequired("template-name")
+	})
 	sesCmd.AddCommand(ses_deleteCustomVerificationEmailTemplateCmd)
 }

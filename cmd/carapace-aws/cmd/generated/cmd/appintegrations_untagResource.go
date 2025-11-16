@@ -12,11 +12,13 @@ var appintegrations_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_untagResourceCmd).Standalone()
+	carapace.Gen(appintegrations_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_untagResourceCmd).Standalone()
 
-	appintegrations_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	appintegrations_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
-	appintegrations_untagResourceCmd.MarkFlagRequired("resource-arn")
-	appintegrations_untagResourceCmd.MarkFlagRequired("tag-keys")
+		appintegrations_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		appintegrations_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
+		appintegrations_untagResourceCmd.MarkFlagRequired("resource-arn")
+		appintegrations_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_untagResourceCmd)
 }

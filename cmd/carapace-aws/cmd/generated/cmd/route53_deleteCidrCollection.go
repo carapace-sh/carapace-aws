@@ -12,9 +12,11 @@ var route53_deleteCidrCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_deleteCidrCollectionCmd).Standalone()
+	carapace.Gen(route53_deleteCidrCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_deleteCidrCollectionCmd).Standalone()
 
-	route53_deleteCidrCollectionCmd.Flags().String("id", "", "The UUID of the collection to delete.")
-	route53_deleteCidrCollectionCmd.MarkFlagRequired("id")
+		route53_deleteCidrCollectionCmd.Flags().String("id", "", "The UUID of the collection to delete.")
+		route53_deleteCidrCollectionCmd.MarkFlagRequired("id")
+	})
 	route53Cmd.AddCommand(route53_deleteCidrCollectionCmd)
 }

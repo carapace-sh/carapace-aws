@@ -12,9 +12,11 @@ var ses_listCustomVerificationEmailTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_listCustomVerificationEmailTemplatesCmd).Standalone()
+	carapace.Gen(ses_listCustomVerificationEmailTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_listCustomVerificationEmailTemplatesCmd).Standalone()
 
-	ses_listCustomVerificationEmailTemplatesCmd.Flags().String("max-results", "", "The maximum number of custom verification email templates to return.")
-	ses_listCustomVerificationEmailTemplatesCmd.Flags().String("next-token", "", "An array the contains the name and creation time stamp for each template in your Amazon SES account.")
+		ses_listCustomVerificationEmailTemplatesCmd.Flags().String("max-results", "", "The maximum number of custom verification email templates to return.")
+		ses_listCustomVerificationEmailTemplatesCmd.Flags().String("next-token", "", "An array the contains the name and creation time stamp for each template in your Amazon SES account.")
+	})
 	sesCmd.AddCommand(ses_listCustomVerificationEmailTemplatesCmd)
 }

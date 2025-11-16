@@ -12,10 +12,12 @@ var schemas_updateRegistryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_updateRegistryCmd).Standalone()
+	carapace.Gen(schemas_updateRegistryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_updateRegistryCmd).Standalone()
 
-	schemas_updateRegistryCmd.Flags().String("description", "", "The description of the registry to update.")
-	schemas_updateRegistryCmd.Flags().String("registry-name", "", "The name of the registry.")
-	schemas_updateRegistryCmd.MarkFlagRequired("registry-name")
+		schemas_updateRegistryCmd.Flags().String("description", "", "The description of the registry to update.")
+		schemas_updateRegistryCmd.Flags().String("registry-name", "", "The name of the registry.")
+		schemas_updateRegistryCmd.MarkFlagRequired("registry-name")
+	})
 	schemasCmd.AddCommand(schemas_updateRegistryCmd)
 }

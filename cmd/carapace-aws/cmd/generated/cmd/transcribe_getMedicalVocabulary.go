@@ -12,9 +12,11 @@ var transcribe_getMedicalVocabularyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_getMedicalVocabularyCmd).Standalone()
+	carapace.Gen(transcribe_getMedicalVocabularyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_getMedicalVocabularyCmd).Standalone()
 
-	transcribe_getMedicalVocabularyCmd.Flags().String("vocabulary-name", "", "The name of the custom medical vocabulary you want information about.")
-	transcribe_getMedicalVocabularyCmd.MarkFlagRequired("vocabulary-name")
+		transcribe_getMedicalVocabularyCmd.Flags().String("vocabulary-name", "", "The name of the custom medical vocabulary you want information about.")
+		transcribe_getMedicalVocabularyCmd.MarkFlagRequired("vocabulary-name")
+	})
 	transcribeCmd.AddCommand(transcribe_getMedicalVocabularyCmd)
 }

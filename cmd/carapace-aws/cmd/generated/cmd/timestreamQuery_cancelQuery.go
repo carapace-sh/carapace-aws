@@ -12,9 +12,11 @@ var timestreamQuery_cancelQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_cancelQueryCmd).Standalone()
+	carapace.Gen(timestreamQuery_cancelQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_cancelQueryCmd).Standalone()
 
-	timestreamQuery_cancelQueryCmd.Flags().String("query-id", "", "The ID of the query that needs to be cancelled.")
-	timestreamQuery_cancelQueryCmd.MarkFlagRequired("query-id")
+		timestreamQuery_cancelQueryCmd.Flags().String("query-id", "", "The ID of the query that needs to be cancelled.")
+		timestreamQuery_cancelQueryCmd.MarkFlagRequired("query-id")
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_cancelQueryCmd)
 }

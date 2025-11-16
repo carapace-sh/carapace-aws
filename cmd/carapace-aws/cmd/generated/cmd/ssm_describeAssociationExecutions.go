@@ -12,12 +12,14 @@ var ssm_describeAssociationExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeAssociationExecutionsCmd).Standalone()
+	carapace.Gen(ssm_describeAssociationExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeAssociationExecutionsCmd).Standalone()
 
-	ssm_describeAssociationExecutionsCmd.Flags().String("association-id", "", "The association ID for which you want to view execution history details.")
-	ssm_describeAssociationExecutionsCmd.Flags().String("filters", "", "Filters for the request.")
-	ssm_describeAssociationExecutionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_describeAssociationExecutionsCmd.Flags().String("next-token", "", "A token to start the list.")
-	ssm_describeAssociationExecutionsCmd.MarkFlagRequired("association-id")
+		ssm_describeAssociationExecutionsCmd.Flags().String("association-id", "", "The association ID for which you want to view execution history details.")
+		ssm_describeAssociationExecutionsCmd.Flags().String("filters", "", "Filters for the request.")
+		ssm_describeAssociationExecutionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_describeAssociationExecutionsCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_describeAssociationExecutionsCmd.MarkFlagRequired("association-id")
+	})
 	ssmCmd.AddCommand(ssm_describeAssociationExecutionsCmd)
 }

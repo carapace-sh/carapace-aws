@@ -12,9 +12,11 @@ var auditmanager_getControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getControlCmd).Standalone()
+	carapace.Gen(auditmanager_getControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getControlCmd).Standalone()
 
-	auditmanager_getControlCmd.Flags().String("control-id", "", "The identifier for the control.")
-	auditmanager_getControlCmd.MarkFlagRequired("control-id")
+		auditmanager_getControlCmd.Flags().String("control-id", "", "The identifier for the control.")
+		auditmanager_getControlCmd.MarkFlagRequired("control-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getControlCmd)
 }

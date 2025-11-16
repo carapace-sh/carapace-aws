@@ -12,9 +12,11 @@ var route53resolver_getResolverQueryLogConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_getResolverQueryLogConfigCmd).Standalone()
+	carapace.Gen(route53resolver_getResolverQueryLogConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_getResolverQueryLogConfigCmd).Standalone()
 
-	route53resolver_getResolverQueryLogConfigCmd.Flags().String("resolver-query-log-config-id", "", "The ID of the Resolver query logging configuration that you want to get information about.")
-	route53resolver_getResolverQueryLogConfigCmd.MarkFlagRequired("resolver-query-log-config-id")
+		route53resolver_getResolverQueryLogConfigCmd.Flags().String("resolver-query-log-config-id", "", "The ID of the Resolver query logging configuration that you want to get information about.")
+		route53resolver_getResolverQueryLogConfigCmd.MarkFlagRequired("resolver-query-log-config-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_getResolverQueryLogConfigCmd)
 }

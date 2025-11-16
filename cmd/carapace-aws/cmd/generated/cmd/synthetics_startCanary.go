@@ -12,9 +12,11 @@ var synthetics_startCanaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_startCanaryCmd).Standalone()
+	carapace.Gen(synthetics_startCanaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_startCanaryCmd).Standalone()
 
-	synthetics_startCanaryCmd.Flags().String("name", "", "The name of the canary that you want to run.")
-	synthetics_startCanaryCmd.MarkFlagRequired("name")
+		synthetics_startCanaryCmd.Flags().String("name", "", "The name of the canary that you want to run.")
+		synthetics_startCanaryCmd.MarkFlagRequired("name")
+	})
 	syntheticsCmd.AddCommand(synthetics_startCanaryCmd)
 }

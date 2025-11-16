@@ -12,9 +12,11 @@ var mwaa_listEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mwaa_listEnvironmentsCmd).Standalone()
+	carapace.Gen(mwaa_listEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mwaa_listEnvironmentsCmd).Standalone()
 
-	mwaa_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results to retrieve per page.")
-	mwaa_listEnvironmentsCmd.Flags().String("next-token", "", "Retrieves the next page of the results.")
+		mwaa_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results to retrieve per page.")
+		mwaa_listEnvironmentsCmd.Flags().String("next-token", "", "Retrieves the next page of the results.")
+	})
 	mwaaCmd.AddCommand(mwaa_listEnvironmentsCmd)
 }

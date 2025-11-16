@@ -12,10 +12,12 @@ var comprehend_listPiiEntitiesDetectionJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_listPiiEntitiesDetectionJobsCmd).Standalone()
+	carapace.Gen(comprehend_listPiiEntitiesDetectionJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_listPiiEntitiesDetectionJobsCmd).Standalone()
 
-	comprehend_listPiiEntitiesDetectionJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
-	comprehend_listPiiEntitiesDetectionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
-	comprehend_listPiiEntitiesDetectionJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehend_listPiiEntitiesDetectionJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
+		comprehend_listPiiEntitiesDetectionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
+		comprehend_listPiiEntitiesDetectionJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendCmd.AddCommand(comprehend_listPiiEntitiesDetectionJobsCmd)
 }

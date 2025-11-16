@@ -12,9 +12,11 @@ var iotevents_describeInputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_describeInputCmd).Standalone()
+	carapace.Gen(iotevents_describeInputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_describeInputCmd).Standalone()
 
-	iotevents_describeInputCmd.Flags().String("input-name", "", "The name of the input.")
-	iotevents_describeInputCmd.MarkFlagRequired("input-name")
+		iotevents_describeInputCmd.Flags().String("input-name", "", "The name of the input.")
+		iotevents_describeInputCmd.MarkFlagRequired("input-name")
+	})
 	ioteventsCmd.AddCommand(iotevents_describeInputCmd)
 }

@@ -12,7 +12,9 @@ var braketCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(braketCmd).Standalone()
+	carapace.Gen(braketCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(braketCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(braketCmd)
 }

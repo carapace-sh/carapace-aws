@@ -12,9 +12,11 @@ var servicecatalog_describePortfolioShareStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_describePortfolioShareStatusCmd).Standalone()
+	carapace.Gen(servicecatalog_describePortfolioShareStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_describePortfolioShareStatusCmd).Standalone()
 
-	servicecatalog_describePortfolioShareStatusCmd.Flags().String("portfolio-share-token", "", "The token for the portfolio share operation.")
-	servicecatalog_describePortfolioShareStatusCmd.MarkFlagRequired("portfolio-share-token")
+		servicecatalog_describePortfolioShareStatusCmd.Flags().String("portfolio-share-token", "", "The token for the portfolio share operation.")
+		servicecatalog_describePortfolioShareStatusCmd.MarkFlagRequired("portfolio-share-token")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_describePortfolioShareStatusCmd)
 }

@@ -12,9 +12,11 @@ var notificationscontacts_sendActivationCodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notificationscontacts_sendActivationCodeCmd).Standalone()
+	carapace.Gen(notificationscontacts_sendActivationCodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notificationscontacts_sendActivationCodeCmd).Standalone()
 
-	notificationscontacts_sendActivationCodeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	notificationscontacts_sendActivationCodeCmd.MarkFlagRequired("arn")
+		notificationscontacts_sendActivationCodeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		notificationscontacts_sendActivationCodeCmd.MarkFlagRequired("arn")
+	})
 	notificationscontactsCmd.AddCommand(notificationscontacts_sendActivationCodeCmd)
 }

@@ -12,9 +12,11 @@ var devicefarm_deleteUploadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_deleteUploadCmd).Standalone()
+	carapace.Gen(devicefarm_deleteUploadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_deleteUploadCmd).Standalone()
 
-	devicefarm_deleteUploadCmd.Flags().String("arn", "", "Represents the Amazon Resource Name (ARN) of the Device Farm upload to delete.")
-	devicefarm_deleteUploadCmd.MarkFlagRequired("arn")
+		devicefarm_deleteUploadCmd.Flags().String("arn", "", "Represents the Amazon Resource Name (ARN) of the Device Farm upload to delete.")
+		devicefarm_deleteUploadCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_deleteUploadCmd)
 }

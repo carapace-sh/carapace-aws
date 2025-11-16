@@ -12,12 +12,14 @@ var vpcLattice_listResourceConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listResourceConfigurationsCmd).Standalone()
+	carapace.Gen(vpcLattice_listResourceConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listResourceConfigurationsCmd).Standalone()
 
-	vpcLattice_listResourceConfigurationsCmd.Flags().String("domain-verification-identifier", "", "The domain verification ID.")
-	vpcLattice_listResourceConfigurationsCmd.Flags().String("max-results", "", "The maximum page size.")
-	vpcLattice_listResourceConfigurationsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
-	vpcLattice_listResourceConfigurationsCmd.Flags().String("resource-configuration-group-identifier", "", "The ID of the resource configuration of type `Group`.")
-	vpcLattice_listResourceConfigurationsCmd.Flags().String("resource-gateway-identifier", "", "The ID of the resource gateway for the resource configuration.")
+		vpcLattice_listResourceConfigurationsCmd.Flags().String("domain-verification-identifier", "", "The domain verification ID.")
+		vpcLattice_listResourceConfigurationsCmd.Flags().String("max-results", "", "The maximum page size.")
+		vpcLattice_listResourceConfigurationsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+		vpcLattice_listResourceConfigurationsCmd.Flags().String("resource-configuration-group-identifier", "", "The ID of the resource configuration of type `Group`.")
+		vpcLattice_listResourceConfigurationsCmd.Flags().String("resource-gateway-identifier", "", "The ID of the resource gateway for the resource configuration.")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listResourceConfigurationsCmd)
 }

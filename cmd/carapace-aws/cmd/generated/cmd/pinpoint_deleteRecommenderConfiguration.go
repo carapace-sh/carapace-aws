@@ -12,9 +12,11 @@ var pinpoint_deleteRecommenderConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteRecommenderConfigurationCmd).Standalone()
+	carapace.Gen(pinpoint_deleteRecommenderConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteRecommenderConfigurationCmd).Standalone()
 
-	pinpoint_deleteRecommenderConfigurationCmd.Flags().String("recommender-id", "", "The unique identifier for the recommender model configuration.")
-	pinpoint_deleteRecommenderConfigurationCmd.MarkFlagRequired("recommender-id")
+		pinpoint_deleteRecommenderConfigurationCmd.Flags().String("recommender-id", "", "The unique identifier for the recommender model configuration.")
+		pinpoint_deleteRecommenderConfigurationCmd.MarkFlagRequired("recommender-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteRecommenderConfigurationCmd)
 }

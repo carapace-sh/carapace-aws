@@ -12,11 +12,13 @@ var medialive_updateReservationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_updateReservationCmd).Standalone()
+	carapace.Gen(medialive_updateReservationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_updateReservationCmd).Standalone()
 
-	medialive_updateReservationCmd.Flags().String("name", "", "Name of the reservation")
-	medialive_updateReservationCmd.Flags().String("renewal-settings", "", "Renewal settings for the reservation")
-	medialive_updateReservationCmd.Flags().String("reservation-id", "", "Unique reservation ID, e.g. '1234567'")
-	medialive_updateReservationCmd.MarkFlagRequired("reservation-id")
+		medialive_updateReservationCmd.Flags().String("name", "", "Name of the reservation")
+		medialive_updateReservationCmd.Flags().String("renewal-settings", "", "Renewal settings for the reservation")
+		medialive_updateReservationCmd.Flags().String("reservation-id", "", "Unique reservation ID, e.g. '1234567'")
+		medialive_updateReservationCmd.MarkFlagRequired("reservation-id")
+	})
 	medialiveCmd.AddCommand(medialive_updateReservationCmd)
 }

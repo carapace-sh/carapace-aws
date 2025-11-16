@@ -12,9 +12,11 @@ var personalize_deleteFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_deleteFilterCmd).Standalone()
+	carapace.Gen(personalize_deleteFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_deleteFilterCmd).Standalone()
 
-	personalize_deleteFilterCmd.Flags().String("filter-arn", "", "The ARN of the filter to delete.")
-	personalize_deleteFilterCmd.MarkFlagRequired("filter-arn")
+		personalize_deleteFilterCmd.Flags().String("filter-arn", "", "The ARN of the filter to delete.")
+		personalize_deleteFilterCmd.MarkFlagRequired("filter-arn")
+	})
 	personalizeCmd.AddCommand(personalize_deleteFilterCmd)
 }

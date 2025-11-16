@@ -12,11 +12,13 @@ var managedblockchain_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchain_untagResourceCmd).Standalone()
+	carapace.Gen(managedblockchain_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchain_untagResourceCmd).Standalone()
 
-	managedblockchain_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	managedblockchain_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
-	managedblockchain_untagResourceCmd.MarkFlagRequired("resource-arn")
-	managedblockchain_untagResourceCmd.MarkFlagRequired("tag-keys")
+		managedblockchain_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		managedblockchain_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
+		managedblockchain_untagResourceCmd.MarkFlagRequired("resource-arn")
+		managedblockchain_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	managedblockchainCmd.AddCommand(managedblockchain_untagResourceCmd)
 }

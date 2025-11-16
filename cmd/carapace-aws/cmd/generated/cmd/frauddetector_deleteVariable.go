@@ -12,9 +12,11 @@ var frauddetector_deleteVariableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteVariableCmd).Standalone()
+	carapace.Gen(frauddetector_deleteVariableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteVariableCmd).Standalone()
 
-	frauddetector_deleteVariableCmd.Flags().String("name", "", "The name of the variable to delete.")
-	frauddetector_deleteVariableCmd.MarkFlagRequired("name")
+		frauddetector_deleteVariableCmd.Flags().String("name", "", "The name of the variable to delete.")
+		frauddetector_deleteVariableCmd.MarkFlagRequired("name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteVariableCmd)
 }

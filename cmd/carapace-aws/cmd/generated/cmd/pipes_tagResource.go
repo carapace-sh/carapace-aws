@@ -12,11 +12,13 @@ var pipes_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pipes_tagResourceCmd).Standalone()
+	carapace.Gen(pipes_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pipes_tagResourceCmd).Standalone()
 
-	pipes_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the pipe.")
-	pipes_tagResourceCmd.Flags().String("tags", "", "The list of key-value pairs associated with the pipe.")
-	pipes_tagResourceCmd.MarkFlagRequired("resource-arn")
-	pipes_tagResourceCmd.MarkFlagRequired("tags")
+		pipes_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the pipe.")
+		pipes_tagResourceCmd.Flags().String("tags", "", "The list of key-value pairs associated with the pipe.")
+		pipes_tagResourceCmd.MarkFlagRequired("resource-arn")
+		pipes_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	pipesCmd.AddCommand(pipes_tagResourceCmd)
 }

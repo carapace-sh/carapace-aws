@@ -12,9 +12,11 @@ var cloudhsm_deleteHapgCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_deleteHapgCmd).Standalone()
+	carapace.Gen(cloudhsm_deleteHapgCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_deleteHapgCmd).Standalone()
 
-	cloudhsm_deleteHapgCmd.Flags().String("hapg-arn", "", "The ARN of the high-availability partition group to delete.")
-	cloudhsm_deleteHapgCmd.MarkFlagRequired("hapg-arn")
+		cloudhsm_deleteHapgCmd.Flags().String("hapg-arn", "", "The ARN of the high-availability partition group to delete.")
+		cloudhsm_deleteHapgCmd.MarkFlagRequired("hapg-arn")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_deleteHapgCmd)
 }

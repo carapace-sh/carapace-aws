@@ -12,9 +12,11 @@ var pinpoint_getApplicationSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getApplicationSettingsCmd).Standalone()
+	carapace.Gen(pinpoint_getApplicationSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getApplicationSettingsCmd).Standalone()
 
-	pinpoint_getApplicationSettingsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getApplicationSettingsCmd.MarkFlagRequired("application-id")
+		pinpoint_getApplicationSettingsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getApplicationSettingsCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getApplicationSettingsCmd)
 }

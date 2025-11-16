@@ -12,7 +12,9 @@ var qconnectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnectCmd).Standalone()
+	carapace.Gen(qconnectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnectCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(qconnectCmd)
 }

@@ -12,11 +12,13 @@ var mailmanager_registerMemberToAddressListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_registerMemberToAddressListCmd).Standalone()
+	carapace.Gen(mailmanager_registerMemberToAddressListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_registerMemberToAddressListCmd).Standalone()
 
-	mailmanager_registerMemberToAddressListCmd.Flags().String("address", "", "The address to be added to the address list.")
-	mailmanager_registerMemberToAddressListCmd.Flags().String("address-list-id", "", "The unique identifier of the address list where the address should be added.")
-	mailmanager_registerMemberToAddressListCmd.MarkFlagRequired("address")
-	mailmanager_registerMemberToAddressListCmd.MarkFlagRequired("address-list-id")
+		mailmanager_registerMemberToAddressListCmd.Flags().String("address", "", "The address to be added to the address list.")
+		mailmanager_registerMemberToAddressListCmd.Flags().String("address-list-id", "", "The unique identifier of the address list where the address should be added.")
+		mailmanager_registerMemberToAddressListCmd.MarkFlagRequired("address")
+		mailmanager_registerMemberToAddressListCmd.MarkFlagRequired("address-list-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_registerMemberToAddressListCmd)
 }

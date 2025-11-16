@@ -12,11 +12,13 @@ var securityhub_listStandardsControlAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_listStandardsControlAssociationsCmd).Standalone()
+	carapace.Gen(securityhub_listStandardsControlAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_listStandardsControlAssociationsCmd).Standalone()
 
-	securityhub_listStandardsControlAssociationsCmd.Flags().String("max-results", "", "An optional parameter that limits the total results of the API response to the specified number.")
-	securityhub_listStandardsControlAssociationsCmd.Flags().String("next-token", "", "Optional pagination parameter.")
-	securityhub_listStandardsControlAssociationsCmd.Flags().String("security-control-id", "", "The identifier of the control (identified with `SecurityControlId`, `SecurityControlArn`, or a mix of both parameters) that you want to determine the enablement status of in each enabled standard.")
-	securityhub_listStandardsControlAssociationsCmd.MarkFlagRequired("security-control-id")
+		securityhub_listStandardsControlAssociationsCmd.Flags().String("max-results", "", "An optional parameter that limits the total results of the API response to the specified number.")
+		securityhub_listStandardsControlAssociationsCmd.Flags().String("next-token", "", "Optional pagination parameter.")
+		securityhub_listStandardsControlAssociationsCmd.Flags().String("security-control-id", "", "The identifier of the control (identified with `SecurityControlId`, `SecurityControlArn`, or a mix of both parameters) that you want to determine the enablement status of in each enabled standard.")
+		securityhub_listStandardsControlAssociationsCmd.MarkFlagRequired("security-control-id")
+	})
 	securityhubCmd.AddCommand(securityhub_listStandardsControlAssociationsCmd)
 }

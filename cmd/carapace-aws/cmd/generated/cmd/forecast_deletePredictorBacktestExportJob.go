@@ -12,9 +12,11 @@ var forecast_deletePredictorBacktestExportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_deletePredictorBacktestExportJobCmd).Standalone()
+	carapace.Gen(forecast_deletePredictorBacktestExportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_deletePredictorBacktestExportJobCmd).Standalone()
 
-	forecast_deletePredictorBacktestExportJobCmd.Flags().String("predictor-backtest-export-job-arn", "", "The Amazon Resource Name (ARN) of the predictor backtest export job to delete.")
-	forecast_deletePredictorBacktestExportJobCmd.MarkFlagRequired("predictor-backtest-export-job-arn")
+		forecast_deletePredictorBacktestExportJobCmd.Flags().String("predictor-backtest-export-job-arn", "", "The Amazon Resource Name (ARN) of the predictor backtest export job to delete.")
+		forecast_deletePredictorBacktestExportJobCmd.MarkFlagRequired("predictor-backtest-export-job-arn")
+	})
 	forecastCmd.AddCommand(forecast_deletePredictorBacktestExportJobCmd)
 }

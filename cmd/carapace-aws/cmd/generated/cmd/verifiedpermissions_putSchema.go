@@ -12,11 +12,13 @@ var verifiedpermissions_putSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(verifiedpermissions_putSchemaCmd).Standalone()
+	carapace.Gen(verifiedpermissions_putSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(verifiedpermissions_putSchemaCmd).Standalone()
 
-	verifiedpermissions_putSchemaCmd.Flags().String("definition", "", "Specifies the definition of the schema to be stored.")
-	verifiedpermissions_putSchemaCmd.Flags().String("policy-store-id", "", "Specifies the ID of the policy store in which to place the schema.")
-	verifiedpermissions_putSchemaCmd.MarkFlagRequired("definition")
-	verifiedpermissions_putSchemaCmd.MarkFlagRequired("policy-store-id")
+		verifiedpermissions_putSchemaCmd.Flags().String("definition", "", "Specifies the definition of the schema to be stored.")
+		verifiedpermissions_putSchemaCmd.Flags().String("policy-store-id", "", "Specifies the ID of the policy store in which to place the schema.")
+		verifiedpermissions_putSchemaCmd.MarkFlagRequired("definition")
+		verifiedpermissions_putSchemaCmd.MarkFlagRequired("policy-store-id")
+	})
 	verifiedpermissionsCmd.AddCommand(verifiedpermissions_putSchemaCmd)
 }

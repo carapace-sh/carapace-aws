@@ -12,9 +12,11 @@ var glue_deleteWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteWorkflowCmd).Standalone()
+	carapace.Gen(glue_deleteWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteWorkflowCmd).Standalone()
 
-	glue_deleteWorkflowCmd.Flags().String("name", "", "Name of the workflow to be deleted.")
-	glue_deleteWorkflowCmd.MarkFlagRequired("name")
+		glue_deleteWorkflowCmd.Flags().String("name", "", "Name of the workflow to be deleted.")
+		glue_deleteWorkflowCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_deleteWorkflowCmd)
 }

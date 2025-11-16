@@ -12,9 +12,11 @@ var cognitoIdp_describeUserPoolDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_describeUserPoolDomainCmd).Standalone()
+	carapace.Gen(cognitoIdp_describeUserPoolDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_describeUserPoolDomainCmd).Standalone()
 
-	cognitoIdp_describeUserPoolDomainCmd.Flags().String("domain", "", "The domain that you want to describe.")
-	cognitoIdp_describeUserPoolDomainCmd.MarkFlagRequired("domain")
+		cognitoIdp_describeUserPoolDomainCmd.Flags().String("domain", "", "The domain that you want to describe.")
+		cognitoIdp_describeUserPoolDomainCmd.MarkFlagRequired("domain")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_describeUserPoolDomainCmd)
 }

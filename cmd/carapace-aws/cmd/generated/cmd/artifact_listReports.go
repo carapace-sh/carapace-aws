@@ -12,9 +12,11 @@ var artifact_listReportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(artifact_listReportsCmd).Standalone()
+	carapace.Gen(artifact_listReportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(artifact_listReportsCmd).Standalone()
 
-	artifact_listReportsCmd.Flags().String("max-results", "", "Maximum number of resources to return in the paginated response.")
-	artifact_listReportsCmd.Flags().String("next-token", "", "Pagination token to request the next page of resources.")
+		artifact_listReportsCmd.Flags().String("max-results", "", "Maximum number of resources to return in the paginated response.")
+		artifact_listReportsCmd.Flags().String("next-token", "", "Pagination token to request the next page of resources.")
+	})
 	artifactCmd.AddCommand(artifact_listReportsCmd)
 }

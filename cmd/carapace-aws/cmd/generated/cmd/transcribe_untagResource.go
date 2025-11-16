@@ -12,11 +12,13 @@ var transcribe_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_untagResourceCmd).Standalone()
+	carapace.Gen(transcribe_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_untagResourceCmd).Standalone()
 
-	transcribe_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove tags from.")
-	transcribe_untagResourceCmd.Flags().String("tag-keys", "", "Removes the specified tag keys from the specified Amazon Transcribe resource.")
-	transcribe_untagResourceCmd.MarkFlagRequired("resource-arn")
-	transcribe_untagResourceCmd.MarkFlagRequired("tag-keys")
+		transcribe_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove tags from.")
+		transcribe_untagResourceCmd.Flags().String("tag-keys", "", "Removes the specified tag keys from the specified Amazon Transcribe resource.")
+		transcribe_untagResourceCmd.MarkFlagRequired("resource-arn")
+		transcribe_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	transcribeCmd.AddCommand(transcribe_untagResourceCmd)
 }

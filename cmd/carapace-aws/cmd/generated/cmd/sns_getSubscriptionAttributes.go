@@ -12,9 +12,11 @@ var sns_getSubscriptionAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_getSubscriptionAttributesCmd).Standalone()
+	carapace.Gen(sns_getSubscriptionAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_getSubscriptionAttributesCmd).Standalone()
 
-	sns_getSubscriptionAttributesCmd.Flags().String("subscription-arn", "", "The ARN of the subscription whose properties you want to get.")
-	sns_getSubscriptionAttributesCmd.MarkFlagRequired("subscription-arn")
+		sns_getSubscriptionAttributesCmd.Flags().String("subscription-arn", "", "The ARN of the subscription whose properties you want to get.")
+		sns_getSubscriptionAttributesCmd.MarkFlagRequired("subscription-arn")
+	})
 	snsCmd.AddCommand(sns_getSubscriptionAttributesCmd)
 }

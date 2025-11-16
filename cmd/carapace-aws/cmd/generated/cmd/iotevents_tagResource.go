@@ -12,11 +12,13 @@ var iotevents_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_tagResourceCmd).Standalone()
+	carapace.Gen(iotevents_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_tagResourceCmd).Standalone()
 
-	iotevents_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	iotevents_tagResourceCmd.Flags().String("tags", "", "The new or modified tags for the resource.")
-	iotevents_tagResourceCmd.MarkFlagRequired("resource-arn")
-	iotevents_tagResourceCmd.MarkFlagRequired("tags")
+		iotevents_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		iotevents_tagResourceCmd.Flags().String("tags", "", "The new or modified tags for the resource.")
+		iotevents_tagResourceCmd.MarkFlagRequired("resource-arn")
+		iotevents_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	ioteventsCmd.AddCommand(iotevents_tagResourceCmd)
 }

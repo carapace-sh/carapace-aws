@@ -12,12 +12,14 @@ var s3_getBucketIntelligentTieringConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketIntelligentTieringConfigurationCmd).Standalone()
+	carapace.Gen(s3_getBucketIntelligentTieringConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketIntelligentTieringConfigurationCmd).Standalone()
 
-	s3_getBucketIntelligentTieringConfigurationCmd.Flags().String("bucket", "", "The name of the Amazon S3 bucket whose configuration you want to modify or retrieve.")
-	s3_getBucketIntelligentTieringConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketIntelligentTieringConfigurationCmd.Flags().String("id", "", "The ID used to identify the S3 Intelligent-Tiering configuration.")
-	s3_getBucketIntelligentTieringConfigurationCmd.MarkFlagRequired("bucket")
-	s3_getBucketIntelligentTieringConfigurationCmd.MarkFlagRequired("id")
+		s3_getBucketIntelligentTieringConfigurationCmd.Flags().String("bucket", "", "The name of the Amazon S3 bucket whose configuration you want to modify or retrieve.")
+		s3_getBucketIntelligentTieringConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketIntelligentTieringConfigurationCmd.Flags().String("id", "", "The ID used to identify the S3 Intelligent-Tiering configuration.")
+		s3_getBucketIntelligentTieringConfigurationCmd.MarkFlagRequired("bucket")
+		s3_getBucketIntelligentTieringConfigurationCmd.MarkFlagRequired("id")
+	})
 	s3Cmd.AddCommand(s3_getBucketIntelligentTieringConfigurationCmd)
 }

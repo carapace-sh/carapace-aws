@@ -12,9 +12,11 @@ var config_deleteDeliveryChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deleteDeliveryChannelCmd).Standalone()
+	carapace.Gen(config_deleteDeliveryChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deleteDeliveryChannelCmd).Standalone()
 
-	config_deleteDeliveryChannelCmd.Flags().String("delivery-channel-name", "", "The name of the delivery channel that you want to delete.")
-	config_deleteDeliveryChannelCmd.MarkFlagRequired("delivery-channel-name")
+		config_deleteDeliveryChannelCmd.Flags().String("delivery-channel-name", "", "The name of the delivery channel that you want to delete.")
+		config_deleteDeliveryChannelCmd.MarkFlagRequired("delivery-channel-name")
+	})
 	configCmd.AddCommand(config_deleteDeliveryChannelCmd)
 }

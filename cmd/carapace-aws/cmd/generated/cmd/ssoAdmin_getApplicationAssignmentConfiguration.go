@@ -12,9 +12,11 @@ var ssoAdmin_getApplicationAssignmentConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_getApplicationAssignmentConfigurationCmd).Standalone()
+	carapace.Gen(ssoAdmin_getApplicationAssignmentConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_getApplicationAssignmentConfigurationCmd).Standalone()
 
-	ssoAdmin_getApplicationAssignmentConfigurationCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
-	ssoAdmin_getApplicationAssignmentConfigurationCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_getApplicationAssignmentConfigurationCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
+		ssoAdmin_getApplicationAssignmentConfigurationCmd.MarkFlagRequired("application-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_getApplicationAssignmentConfigurationCmd)
 }

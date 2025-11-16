@@ -12,9 +12,11 @@ var emrContainers_deleteJobTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_deleteJobTemplateCmd).Standalone()
+	carapace.Gen(emrContainers_deleteJobTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_deleteJobTemplateCmd).Standalone()
 
-	emrContainers_deleteJobTemplateCmd.Flags().String("id", "", "The ID of the job template that will be deleted.")
-	emrContainers_deleteJobTemplateCmd.MarkFlagRequired("id")
+		emrContainers_deleteJobTemplateCmd.Flags().String("id", "", "The ID of the job template that will be deleted.")
+		emrContainers_deleteJobTemplateCmd.MarkFlagRequired("id")
+	})
 	emrContainersCmd.AddCommand(emrContainers_deleteJobTemplateCmd)
 }

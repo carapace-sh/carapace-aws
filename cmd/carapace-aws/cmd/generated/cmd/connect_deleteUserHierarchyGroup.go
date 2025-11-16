@@ -12,11 +12,13 @@ var connect_deleteUserHierarchyGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteUserHierarchyGroupCmd).Standalone()
+	carapace.Gen(connect_deleteUserHierarchyGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteUserHierarchyGroupCmd).Standalone()
 
-	connect_deleteUserHierarchyGroupCmd.Flags().String("hierarchy-group-id", "", "The identifier of the hierarchy group.")
-	connect_deleteUserHierarchyGroupCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteUserHierarchyGroupCmd.MarkFlagRequired("hierarchy-group-id")
-	connect_deleteUserHierarchyGroupCmd.MarkFlagRequired("instance-id")
+		connect_deleteUserHierarchyGroupCmd.Flags().String("hierarchy-group-id", "", "The identifier of the hierarchy group.")
+		connect_deleteUserHierarchyGroupCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteUserHierarchyGroupCmd.MarkFlagRequired("hierarchy-group-id")
+		connect_deleteUserHierarchyGroupCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_deleteUserHierarchyGroupCmd)
 }

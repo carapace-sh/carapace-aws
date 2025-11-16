@@ -12,9 +12,11 @@ var applicationInsights_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_deleteApplicationCmd).Standalone()
+	carapace.Gen(applicationInsights_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_deleteApplicationCmd).Standalone()
 
-	applicationInsights_deleteApplicationCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
-	applicationInsights_deleteApplicationCmd.MarkFlagRequired("resource-group-name")
+		applicationInsights_deleteApplicationCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
+		applicationInsights_deleteApplicationCmd.MarkFlagRequired("resource-group-name")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_deleteApplicationCmd)
 }

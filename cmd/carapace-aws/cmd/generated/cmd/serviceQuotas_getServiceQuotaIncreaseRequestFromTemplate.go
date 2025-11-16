@@ -12,13 +12,15 @@ var serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd).Standalone()
+	carapace.Gen(serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd).Standalone()
 
-	serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.Flags().String("aws-region", "", "Specifies the Amazon Web Services Region for which you made the request.")
-	serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.Flags().String("quota-code", "", "Specifies the quota identifier.")
-	serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.Flags().String("service-code", "", "Specifies the service identifier.")
-	serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.MarkFlagRequired("aws-region")
-	serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.MarkFlagRequired("quota-code")
-	serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.MarkFlagRequired("service-code")
+		serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.Flags().String("aws-region", "", "Specifies the Amazon Web Services Region for which you made the request.")
+		serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.Flags().String("quota-code", "", "Specifies the quota identifier.")
+		serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.Flags().String("service-code", "", "Specifies the service identifier.")
+		serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.MarkFlagRequired("aws-region")
+		serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.MarkFlagRequired("quota-code")
+		serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd.MarkFlagRequired("service-code")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_getServiceQuotaIncreaseRequestFromTemplateCmd)
 }

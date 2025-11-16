@@ -12,10 +12,12 @@ var config_describeConfigurationRecordersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_describeConfigurationRecordersCmd).Standalone()
+	carapace.Gen(config_describeConfigurationRecordersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_describeConfigurationRecordersCmd).Standalone()
 
-	config_describeConfigurationRecordersCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.")
-	config_describeConfigurationRecordersCmd.Flags().String("configuration-recorder-names", "", "A list of names of the configuration recorders that you want to specify.")
-	config_describeConfigurationRecordersCmd.Flags().String("service-principal", "", "For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.")
+		config_describeConfigurationRecordersCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the configuration recorder that you want to specify.")
+		config_describeConfigurationRecordersCmd.Flags().String("configuration-recorder-names", "", "A list of names of the configuration recorders that you want to specify.")
+		config_describeConfigurationRecordersCmd.Flags().String("service-principal", "", "For service-linked configuration recorders, you can use the service principal of the linked Amazon Web Services service to specify the configuration recorder.")
+	})
 	configCmd.AddCommand(config_describeConfigurationRecordersCmd)
 }

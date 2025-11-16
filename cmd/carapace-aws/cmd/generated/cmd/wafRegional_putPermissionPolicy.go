@@ -12,11 +12,13 @@ var wafRegional_putPermissionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_putPermissionPolicyCmd).Standalone()
+	carapace.Gen(wafRegional_putPermissionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_putPermissionPolicyCmd).Standalone()
 
-	wafRegional_putPermissionPolicyCmd.Flags().String("policy", "", "The policy to attach to the specified RuleGroup.")
-	wafRegional_putPermissionPolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the RuleGroup to which you want to attach the policy.")
-	wafRegional_putPermissionPolicyCmd.MarkFlagRequired("policy")
-	wafRegional_putPermissionPolicyCmd.MarkFlagRequired("resource-arn")
+		wafRegional_putPermissionPolicyCmd.Flags().String("policy", "", "The policy to attach to the specified RuleGroup.")
+		wafRegional_putPermissionPolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the RuleGroup to which you want to attach the policy.")
+		wafRegional_putPermissionPolicyCmd.MarkFlagRequired("policy")
+		wafRegional_putPermissionPolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_putPermissionPolicyCmd)
 }

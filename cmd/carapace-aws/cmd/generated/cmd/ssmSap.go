@@ -12,7 +12,9 @@ var ssmSapCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSapCmd).Standalone()
+	carapace.Gen(ssmSapCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSapCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ssmSapCmd)
 }

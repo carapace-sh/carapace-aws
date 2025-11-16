@@ -12,11 +12,13 @@ var networkFirewall_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_tagResourceCmd).Standalone()
+	carapace.Gen(networkFirewall_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_tagResourceCmd).Standalone()
 
-	networkFirewall_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	networkFirewall_tagResourceCmd.Flags().String("tags", "", "")
-	networkFirewall_tagResourceCmd.MarkFlagRequired("resource-arn")
-	networkFirewall_tagResourceCmd.MarkFlagRequired("tags")
+		networkFirewall_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		networkFirewall_tagResourceCmd.Flags().String("tags", "", "")
+		networkFirewall_tagResourceCmd.MarkFlagRequired("resource-arn")
+		networkFirewall_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_tagResourceCmd)
 }

@@ -12,11 +12,13 @@ var workspaces_modifyEndpointEncryptionModeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_modifyEndpointEncryptionModeCmd).Standalone()
+	carapace.Gen(workspaces_modifyEndpointEncryptionModeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_modifyEndpointEncryptionModeCmd).Standalone()
 
-	workspaces_modifyEndpointEncryptionModeCmd.Flags().String("directory-id", "", "The identifier of the directory.")
-	workspaces_modifyEndpointEncryptionModeCmd.Flags().String("endpoint-encryption-mode", "", "The encryption mode used for endpoint connections when streaming to WorkSpaces Personal or WorkSpace Pools.")
-	workspaces_modifyEndpointEncryptionModeCmd.MarkFlagRequired("directory-id")
-	workspaces_modifyEndpointEncryptionModeCmd.MarkFlagRequired("endpoint-encryption-mode")
+		workspaces_modifyEndpointEncryptionModeCmd.Flags().String("directory-id", "", "The identifier of the directory.")
+		workspaces_modifyEndpointEncryptionModeCmd.Flags().String("endpoint-encryption-mode", "", "The encryption mode used for endpoint connections when streaming to WorkSpaces Personal or WorkSpace Pools.")
+		workspaces_modifyEndpointEncryptionModeCmd.MarkFlagRequired("directory-id")
+		workspaces_modifyEndpointEncryptionModeCmd.MarkFlagRequired("endpoint-encryption-mode")
+	})
 	workspacesCmd.AddCommand(workspaces_modifyEndpointEncryptionModeCmd)
 }

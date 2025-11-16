@@ -12,11 +12,13 @@ var pinpoint_createInAppTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_createInAppTemplateCmd).Standalone()
+	carapace.Gen(pinpoint_createInAppTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_createInAppTemplateCmd).Standalone()
 
-	pinpoint_createInAppTemplateCmd.Flags().String("in-app-template-request", "", "")
-	pinpoint_createInAppTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_createInAppTemplateCmd.MarkFlagRequired("in-app-template-request")
-	pinpoint_createInAppTemplateCmd.MarkFlagRequired("template-name")
+		pinpoint_createInAppTemplateCmd.Flags().String("in-app-template-request", "", "")
+		pinpoint_createInAppTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_createInAppTemplateCmd.MarkFlagRequired("in-app-template-request")
+		pinpoint_createInAppTemplateCmd.MarkFlagRequired("template-name")
+	})
 	pinpointCmd.AddCommand(pinpoint_createInAppTemplateCmd)
 }

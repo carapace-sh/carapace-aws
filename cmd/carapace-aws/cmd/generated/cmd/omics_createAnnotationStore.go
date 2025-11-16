@@ -12,16 +12,18 @@ var omics_createAnnotationStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_createAnnotationStoreCmd).Standalone()
+	carapace.Gen(omics_createAnnotationStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_createAnnotationStoreCmd).Standalone()
 
-	omics_createAnnotationStoreCmd.Flags().String("description", "", "A description for the store.")
-	omics_createAnnotationStoreCmd.Flags().String("name", "", "A name for the store.")
-	omics_createAnnotationStoreCmd.Flags().String("reference", "", "The genome reference for the store's annotations.")
-	omics_createAnnotationStoreCmd.Flags().String("sse-config", "", "Server-side encryption (SSE) settings for the store.")
-	omics_createAnnotationStoreCmd.Flags().String("store-format", "", "The annotation file format of the store.")
-	omics_createAnnotationStoreCmd.Flags().String("store-options", "", "File parsing options for the annotation store.")
-	omics_createAnnotationStoreCmd.Flags().String("tags", "", "Tags for the store.")
-	omics_createAnnotationStoreCmd.Flags().String("version-name", "", "The name given to an annotation store version to distinguish it from other versions.")
-	omics_createAnnotationStoreCmd.MarkFlagRequired("store-format")
+		omics_createAnnotationStoreCmd.Flags().String("description", "", "A description for the store.")
+		omics_createAnnotationStoreCmd.Flags().String("name", "", "A name for the store.")
+		omics_createAnnotationStoreCmd.Flags().String("reference", "", "The genome reference for the store's annotations.")
+		omics_createAnnotationStoreCmd.Flags().String("sse-config", "", "Server-side encryption (SSE) settings for the store.")
+		omics_createAnnotationStoreCmd.Flags().String("store-format", "", "The annotation file format of the store.")
+		omics_createAnnotationStoreCmd.Flags().String("store-options", "", "File parsing options for the annotation store.")
+		omics_createAnnotationStoreCmd.Flags().String("tags", "", "Tags for the store.")
+		omics_createAnnotationStoreCmd.Flags().String("version-name", "", "The name given to an annotation store version to distinguish it from other versions.")
+		omics_createAnnotationStoreCmd.MarkFlagRequired("store-format")
+	})
 	omicsCmd.AddCommand(omics_createAnnotationStoreCmd)
 }

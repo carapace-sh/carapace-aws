@@ -12,11 +12,13 @@ var codepipeline_acknowledgeJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_acknowledgeJobCmd).Standalone()
+	carapace.Gen(codepipeline_acknowledgeJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_acknowledgeJobCmd).Standalone()
 
-	codepipeline_acknowledgeJobCmd.Flags().String("job-id", "", "The unique system-generated ID of the job for which you want to confirm receipt.")
-	codepipeline_acknowledgeJobCmd.Flags().String("nonce", "", "A system-generated random number that CodePipeline uses to ensure that the job is being worked on by only one job worker.")
-	codepipeline_acknowledgeJobCmd.MarkFlagRequired("job-id")
-	codepipeline_acknowledgeJobCmd.MarkFlagRequired("nonce")
+		codepipeline_acknowledgeJobCmd.Flags().String("job-id", "", "The unique system-generated ID of the job for which you want to confirm receipt.")
+		codepipeline_acknowledgeJobCmd.Flags().String("nonce", "", "A system-generated random number that CodePipeline uses to ensure that the job is being worked on by only one job worker.")
+		codepipeline_acknowledgeJobCmd.MarkFlagRequired("job-id")
+		codepipeline_acknowledgeJobCmd.MarkFlagRequired("nonce")
+	})
 	codepipelineCmd.AddCommand(codepipeline_acknowledgeJobCmd)
 }

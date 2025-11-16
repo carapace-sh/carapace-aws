@@ -12,7 +12,9 @@ var snowDeviceManagementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowDeviceManagementCmd).Standalone()
+	carapace.Gen(snowDeviceManagementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowDeviceManagementCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(snowDeviceManagementCmd)
 }

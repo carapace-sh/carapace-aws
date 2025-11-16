@@ -12,14 +12,16 @@ var appsync_evaluateCodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_evaluateCodeCmd).Standalone()
+	carapace.Gen(appsync_evaluateCodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_evaluateCodeCmd).Standalone()
 
-	appsync_evaluateCodeCmd.Flags().String("code", "", "The code definition to be evaluated.")
-	appsync_evaluateCodeCmd.Flags().String("context", "", "The map that holds all of the contextual information for your resolver invocation.")
-	appsync_evaluateCodeCmd.Flags().String("function", "", "The function within the code to be evaluated.")
-	appsync_evaluateCodeCmd.Flags().String("runtime", "", "The runtime to be used when evaluating the code.")
-	appsync_evaluateCodeCmd.MarkFlagRequired("code")
-	appsync_evaluateCodeCmd.MarkFlagRequired("context")
-	appsync_evaluateCodeCmd.MarkFlagRequired("runtime")
+		appsync_evaluateCodeCmd.Flags().String("code", "", "The code definition to be evaluated.")
+		appsync_evaluateCodeCmd.Flags().String("context", "", "The map that holds all of the contextual information for your resolver invocation.")
+		appsync_evaluateCodeCmd.Flags().String("function", "", "The function within the code to be evaluated.")
+		appsync_evaluateCodeCmd.Flags().String("runtime", "", "The runtime to be used when evaluating the code.")
+		appsync_evaluateCodeCmd.MarkFlagRequired("code")
+		appsync_evaluateCodeCmd.MarkFlagRequired("context")
+		appsync_evaluateCodeCmd.MarkFlagRequired("runtime")
+	})
 	appsyncCmd.AddCommand(appsync_evaluateCodeCmd)
 }

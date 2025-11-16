@@ -12,9 +12,11 @@ var emr_terminateJobFlowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_terminateJobFlowsCmd).Standalone()
+	carapace.Gen(emr_terminateJobFlowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_terminateJobFlowsCmd).Standalone()
 
-	emr_terminateJobFlowsCmd.Flags().String("job-flow-ids", "", "A list of job flows to be shut down.")
-	emr_terminateJobFlowsCmd.MarkFlagRequired("job-flow-ids")
+		emr_terminateJobFlowsCmd.Flags().String("job-flow-ids", "", "A list of job flows to be shut down.")
+		emr_terminateJobFlowsCmd.MarkFlagRequired("job-flow-ids")
+	})
 	emrCmd.AddCommand(emr_terminateJobFlowsCmd)
 }

@@ -12,12 +12,14 @@ var iot_putVerificationStateOnViolationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_putVerificationStateOnViolationCmd).Standalone()
+	carapace.Gen(iot_putVerificationStateOnViolationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_putVerificationStateOnViolationCmd).Standalone()
 
-	iot_putVerificationStateOnViolationCmd.Flags().String("verification-state", "", "The verification state of the violation.")
-	iot_putVerificationStateOnViolationCmd.Flags().String("verification-state-description", "", "The description of the verification state of the violation (detect alarm).")
-	iot_putVerificationStateOnViolationCmd.Flags().String("violation-id", "", "The violation ID.")
-	iot_putVerificationStateOnViolationCmd.MarkFlagRequired("verification-state")
-	iot_putVerificationStateOnViolationCmd.MarkFlagRequired("violation-id")
+		iot_putVerificationStateOnViolationCmd.Flags().String("verification-state", "", "The verification state of the violation.")
+		iot_putVerificationStateOnViolationCmd.Flags().String("verification-state-description", "", "The description of the verification state of the violation (detect alarm).")
+		iot_putVerificationStateOnViolationCmd.Flags().String("violation-id", "", "The violation ID.")
+		iot_putVerificationStateOnViolationCmd.MarkFlagRequired("verification-state")
+		iot_putVerificationStateOnViolationCmd.MarkFlagRequired("violation-id")
+	})
 	iotCmd.AddCommand(iot_putVerificationStateOnViolationCmd)
 }

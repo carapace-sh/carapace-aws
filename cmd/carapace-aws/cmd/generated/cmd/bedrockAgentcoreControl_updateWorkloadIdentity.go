@@ -12,10 +12,12 @@ var bedrockAgentcoreControl_updateWorkloadIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_updateWorkloadIdentityCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_updateWorkloadIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_updateWorkloadIdentityCmd).Standalone()
 
-	bedrockAgentcoreControl_updateWorkloadIdentityCmd.Flags().String("allowed-resource-oauth2-return-urls", "", "The new list of allowed OAuth2 return URLs for resources associated with this workload identity.")
-	bedrockAgentcoreControl_updateWorkloadIdentityCmd.Flags().String("name", "", "The name of the workload identity to update.")
-	bedrockAgentcoreControl_updateWorkloadIdentityCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_updateWorkloadIdentityCmd.Flags().String("allowed-resource-oauth2-return-urls", "", "The new list of allowed OAuth2 return URLs for resources associated with this workload identity.")
+		bedrockAgentcoreControl_updateWorkloadIdentityCmd.Flags().String("name", "", "The name of the workload identity to update.")
+		bedrockAgentcoreControl_updateWorkloadIdentityCmd.MarkFlagRequired("name")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_updateWorkloadIdentityCmd)
 }

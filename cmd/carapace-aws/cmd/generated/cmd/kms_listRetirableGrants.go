@@ -12,11 +12,13 @@ var kms_listRetirableGrantsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_listRetirableGrantsCmd).Standalone()
+	carapace.Gen(kms_listRetirableGrantsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_listRetirableGrantsCmd).Standalone()
 
-	kms_listRetirableGrantsCmd.Flags().String("limit", "", "Use this parameter to specify the maximum number of items to return.")
-	kms_listRetirableGrantsCmd.Flags().String("marker", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
-	kms_listRetirableGrantsCmd.Flags().String("retiring-principal", "", "The retiring principal for which to list grants.")
-	kms_listRetirableGrantsCmd.MarkFlagRequired("retiring-principal")
+		kms_listRetirableGrantsCmd.Flags().String("limit", "", "Use this parameter to specify the maximum number of items to return.")
+		kms_listRetirableGrantsCmd.Flags().String("marker", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
+		kms_listRetirableGrantsCmd.Flags().String("retiring-principal", "", "The retiring principal for which to list grants.")
+		kms_listRetirableGrantsCmd.MarkFlagRequired("retiring-principal")
+	})
 	kmsCmd.AddCommand(kms_listRetirableGrantsCmd)
 }

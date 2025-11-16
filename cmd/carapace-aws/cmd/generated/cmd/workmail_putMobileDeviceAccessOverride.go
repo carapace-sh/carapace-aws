@@ -12,16 +12,18 @@ var workmail_putMobileDeviceAccessOverrideCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_putMobileDeviceAccessOverrideCmd).Standalone()
+	carapace.Gen(workmail_putMobileDeviceAccessOverrideCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_putMobileDeviceAccessOverrideCmd).Standalone()
 
-	workmail_putMobileDeviceAccessOverrideCmd.Flags().String("description", "", "A description of the override.")
-	workmail_putMobileDeviceAccessOverrideCmd.Flags().String("device-id", "", "The mobile device for which you create the override.")
-	workmail_putMobileDeviceAccessOverrideCmd.Flags().String("effect", "", "The effect of the override, `ALLOW` or `DENY`.")
-	workmail_putMobileDeviceAccessOverrideCmd.Flags().String("organization-id", "", "Identifies the WorkMail organization for which you create the override.")
-	workmail_putMobileDeviceAccessOverrideCmd.Flags().String("user-id", "", "The WorkMail user for which you create the override.")
-	workmail_putMobileDeviceAccessOverrideCmd.MarkFlagRequired("device-id")
-	workmail_putMobileDeviceAccessOverrideCmd.MarkFlagRequired("effect")
-	workmail_putMobileDeviceAccessOverrideCmd.MarkFlagRequired("organization-id")
-	workmail_putMobileDeviceAccessOverrideCmd.MarkFlagRequired("user-id")
+		workmail_putMobileDeviceAccessOverrideCmd.Flags().String("description", "", "A description of the override.")
+		workmail_putMobileDeviceAccessOverrideCmd.Flags().String("device-id", "", "The mobile device for which you create the override.")
+		workmail_putMobileDeviceAccessOverrideCmd.Flags().String("effect", "", "The effect of the override, `ALLOW` or `DENY`.")
+		workmail_putMobileDeviceAccessOverrideCmd.Flags().String("organization-id", "", "Identifies the WorkMail organization for which you create the override.")
+		workmail_putMobileDeviceAccessOverrideCmd.Flags().String("user-id", "", "The WorkMail user for which you create the override.")
+		workmail_putMobileDeviceAccessOverrideCmd.MarkFlagRequired("device-id")
+		workmail_putMobileDeviceAccessOverrideCmd.MarkFlagRequired("effect")
+		workmail_putMobileDeviceAccessOverrideCmd.MarkFlagRequired("organization-id")
+		workmail_putMobileDeviceAccessOverrideCmd.MarkFlagRequired("user-id")
+	})
 	workmailCmd.AddCommand(workmail_putMobileDeviceAccessOverrideCmd)
 }

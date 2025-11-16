@@ -12,7 +12,9 @@ var route53resolverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolverCmd).Standalone()
+	carapace.Gen(route53resolverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolverCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(route53resolverCmd)
 }

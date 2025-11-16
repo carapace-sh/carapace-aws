@@ -12,7 +12,9 @@ var pollyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pollyCmd).Standalone()
+	carapace.Gen(pollyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pollyCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(pollyCmd)
 }

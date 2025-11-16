@@ -12,9 +12,11 @@ var codeconnections_deleteHostCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeconnections_deleteHostCmd).Standalone()
+	carapace.Gen(codeconnections_deleteHostCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeconnections_deleteHostCmd).Standalone()
 
-	codeconnections_deleteHostCmd.Flags().String("host-arn", "", "The Amazon Resource Name (ARN) of the host to be deleted.")
-	codeconnections_deleteHostCmd.MarkFlagRequired("host-arn")
+		codeconnections_deleteHostCmd.Flags().String("host-arn", "", "The Amazon Resource Name (ARN) of the host to be deleted.")
+		codeconnections_deleteHostCmd.MarkFlagRequired("host-arn")
+	})
 	codeconnectionsCmd.AddCommand(codeconnections_deleteHostCmd)
 }

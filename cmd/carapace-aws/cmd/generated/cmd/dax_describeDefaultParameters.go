@@ -12,9 +12,11 @@ var dax_describeDefaultParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_describeDefaultParametersCmd).Standalone()
+	carapace.Gen(dax_describeDefaultParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_describeDefaultParametersCmd).Standalone()
 
-	dax_describeDefaultParametersCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	dax_describeDefaultParametersCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
+		dax_describeDefaultParametersCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		dax_describeDefaultParametersCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
+	})
 	daxCmd.AddCommand(dax_describeDefaultParametersCmd)
 }

@@ -12,13 +12,15 @@ var kafkaconnect_updateConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnect_updateConnectorCmd).Standalone()
+	carapace.Gen(kafkaconnect_updateConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnect_updateConnectorCmd).Standalone()
 
-	kafkaconnect_updateConnectorCmd.Flags().String("capacity", "", "The target capacity.")
-	kafkaconnect_updateConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector that you want to update.")
-	kafkaconnect_updateConnectorCmd.Flags().String("connector-configuration", "", "A map of keys to values that represent the configuration for the connector.")
-	kafkaconnect_updateConnectorCmd.Flags().String("current-version", "", "The current version of the connector that you want to update.")
-	kafkaconnect_updateConnectorCmd.MarkFlagRequired("connector-arn")
-	kafkaconnect_updateConnectorCmd.MarkFlagRequired("current-version")
+		kafkaconnect_updateConnectorCmd.Flags().String("capacity", "", "The target capacity.")
+		kafkaconnect_updateConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector that you want to update.")
+		kafkaconnect_updateConnectorCmd.Flags().String("connector-configuration", "", "A map of keys to values that represent the configuration for the connector.")
+		kafkaconnect_updateConnectorCmd.Flags().String("current-version", "", "The current version of the connector that you want to update.")
+		kafkaconnect_updateConnectorCmd.MarkFlagRequired("connector-arn")
+		kafkaconnect_updateConnectorCmd.MarkFlagRequired("current-version")
+	})
 	kafkaconnectCmd.AddCommand(kafkaconnect_updateConnectorCmd)
 }

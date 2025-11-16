@@ -12,9 +12,11 @@ var iot_getCommandCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getCommandCmd).Standalone()
+	carapace.Gen(iot_getCommandCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getCommandCmd).Standalone()
 
-	iot_getCommandCmd.Flags().String("command-id", "", "The unique identifier of the command for which you want to retrieve information.")
-	iot_getCommandCmd.MarkFlagRequired("command-id")
+		iot_getCommandCmd.Flags().String("command-id", "", "The unique identifier of the command for which you want to retrieve information.")
+		iot_getCommandCmd.MarkFlagRequired("command-id")
+	})
 	iotCmd.AddCommand(iot_getCommandCmd)
 }

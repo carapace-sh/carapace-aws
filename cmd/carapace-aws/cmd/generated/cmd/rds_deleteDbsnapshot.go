@@ -12,9 +12,11 @@ var rds_deleteDbsnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteDbsnapshotCmd).Standalone()
+	carapace.Gen(rds_deleteDbsnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteDbsnapshotCmd).Standalone()
 
-	rds_deleteDbsnapshotCmd.Flags().String("dbsnapshot-identifier", "", "The DB snapshot identifier.")
-	rds_deleteDbsnapshotCmd.MarkFlagRequired("dbsnapshot-identifier")
+		rds_deleteDbsnapshotCmd.Flags().String("dbsnapshot-identifier", "", "The DB snapshot identifier.")
+		rds_deleteDbsnapshotCmd.MarkFlagRequired("dbsnapshot-identifier")
+	})
 	rdsCmd.AddCommand(rds_deleteDbsnapshotCmd)
 }

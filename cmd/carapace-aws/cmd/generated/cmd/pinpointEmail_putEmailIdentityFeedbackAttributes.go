@@ -12,10 +12,12 @@ var pinpointEmail_putEmailIdentityFeedbackAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_putEmailIdentityFeedbackAttributesCmd).Standalone()
+	carapace.Gen(pinpointEmail_putEmailIdentityFeedbackAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_putEmailIdentityFeedbackAttributesCmd).Standalone()
 
-	pinpointEmail_putEmailIdentityFeedbackAttributesCmd.Flags().String("email-forwarding-enabled", "", "Sets the feedback forwarding configuration for the identity.")
-	pinpointEmail_putEmailIdentityFeedbackAttributesCmd.Flags().String("email-identity", "", "The email identity that you want to configure bounce and complaint feedback forwarding for.")
-	pinpointEmail_putEmailIdentityFeedbackAttributesCmd.MarkFlagRequired("email-identity")
+		pinpointEmail_putEmailIdentityFeedbackAttributesCmd.Flags().String("email-forwarding-enabled", "", "Sets the feedback forwarding configuration for the identity.")
+		pinpointEmail_putEmailIdentityFeedbackAttributesCmd.Flags().String("email-identity", "", "The email identity that you want to configure bounce and complaint feedback forwarding for.")
+		pinpointEmail_putEmailIdentityFeedbackAttributesCmd.MarkFlagRequired("email-identity")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_putEmailIdentityFeedbackAttributesCmd)
 }

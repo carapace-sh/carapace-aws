@@ -12,11 +12,13 @@ var securitylake_updateSubscriberNotificationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_updateSubscriberNotificationCmd).Standalone()
+	carapace.Gen(securitylake_updateSubscriberNotificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_updateSubscriberNotificationCmd).Standalone()
 
-	securitylake_updateSubscriberNotificationCmd.Flags().String("configuration", "", "The configuration for subscriber notification.")
-	securitylake_updateSubscriberNotificationCmd.Flags().String("subscriber-id", "", "The subscription ID for which the subscription notification is specified.")
-	securitylake_updateSubscriberNotificationCmd.MarkFlagRequired("configuration")
-	securitylake_updateSubscriberNotificationCmd.MarkFlagRequired("subscriber-id")
+		securitylake_updateSubscriberNotificationCmd.Flags().String("configuration", "", "The configuration for subscriber notification.")
+		securitylake_updateSubscriberNotificationCmd.Flags().String("subscriber-id", "", "The subscription ID for which the subscription notification is specified.")
+		securitylake_updateSubscriberNotificationCmd.MarkFlagRequired("configuration")
+		securitylake_updateSubscriberNotificationCmd.MarkFlagRequired("subscriber-id")
+	})
 	securitylakeCmd.AddCommand(securitylake_updateSubscriberNotificationCmd)
 }

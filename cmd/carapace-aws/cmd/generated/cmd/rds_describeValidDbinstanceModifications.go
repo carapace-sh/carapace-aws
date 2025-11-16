@@ -12,9 +12,11 @@ var rds_describeValidDbinstanceModificationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeValidDbinstanceModificationsCmd).Standalone()
+	carapace.Gen(rds_describeValidDbinstanceModificationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeValidDbinstanceModificationsCmd).Standalone()
 
-	rds_describeValidDbinstanceModificationsCmd.Flags().String("dbinstance-identifier", "", "The customer identifier or the ARN of your DB instance.")
-	rds_describeValidDbinstanceModificationsCmd.MarkFlagRequired("dbinstance-identifier")
+		rds_describeValidDbinstanceModificationsCmd.Flags().String("dbinstance-identifier", "", "The customer identifier or the ARN of your DB instance.")
+		rds_describeValidDbinstanceModificationsCmd.MarkFlagRequired("dbinstance-identifier")
+	})
 	rdsCmd.AddCommand(rds_describeValidDbinstanceModificationsCmd)
 }

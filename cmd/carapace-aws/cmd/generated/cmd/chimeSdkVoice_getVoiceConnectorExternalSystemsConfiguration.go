@@ -12,9 +12,11 @@ var chimeSdkVoice_getVoiceConnectorExternalSystemsConfigurationCmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_getVoiceConnectorExternalSystemsConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_getVoiceConnectorExternalSystemsConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_getVoiceConnectorExternalSystemsConfigurationCmd).Standalone()
 
-	chimeSdkVoice_getVoiceConnectorExternalSystemsConfigurationCmd.Flags().String("voice-connector-id", "", "The ID of the Voice Connector for which to return information about the external system configuration.")
-	chimeSdkVoice_getVoiceConnectorExternalSystemsConfigurationCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_getVoiceConnectorExternalSystemsConfigurationCmd.Flags().String("voice-connector-id", "", "The ID of the Voice Connector for which to return information about the external system configuration.")
+		chimeSdkVoice_getVoiceConnectorExternalSystemsConfigurationCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_getVoiceConnectorExternalSystemsConfigurationCmd)
 }

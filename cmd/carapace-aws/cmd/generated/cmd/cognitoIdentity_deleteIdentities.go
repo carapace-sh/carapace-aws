@@ -12,9 +12,11 @@ var cognitoIdentity_deleteIdentitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdentity_deleteIdentitiesCmd).Standalone()
+	carapace.Gen(cognitoIdentity_deleteIdentitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdentity_deleteIdentitiesCmd).Standalone()
 
-	cognitoIdentity_deleteIdentitiesCmd.Flags().String("identity-ids-to-delete", "", "A list of 1-60 identities that you want to delete.")
-	cognitoIdentity_deleteIdentitiesCmd.MarkFlagRequired("identity-ids-to-delete")
+		cognitoIdentity_deleteIdentitiesCmd.Flags().String("identity-ids-to-delete", "", "A list of 1-60 identities that you want to delete.")
+		cognitoIdentity_deleteIdentitiesCmd.MarkFlagRequired("identity-ids-to-delete")
+	})
 	cognitoIdentityCmd.AddCommand(cognitoIdentity_deleteIdentitiesCmd)
 }

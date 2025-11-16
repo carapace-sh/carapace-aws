@@ -12,9 +12,11 @@ var sagemaker_stopLabelingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopLabelingJobCmd).Standalone()
+	carapace.Gen(sagemaker_stopLabelingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopLabelingJobCmd).Standalone()
 
-	sagemaker_stopLabelingJobCmd.Flags().String("labeling-job-name", "", "The name of the labeling job to stop.")
-	sagemaker_stopLabelingJobCmd.MarkFlagRequired("labeling-job-name")
+		sagemaker_stopLabelingJobCmd.Flags().String("labeling-job-name", "", "The name of the labeling job to stop.")
+		sagemaker_stopLabelingJobCmd.MarkFlagRequired("labeling-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopLabelingJobCmd)
 }

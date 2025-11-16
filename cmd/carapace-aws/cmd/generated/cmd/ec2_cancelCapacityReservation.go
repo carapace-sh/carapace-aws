@@ -12,12 +12,14 @@ var ec2_cancelCapacityReservationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_cancelCapacityReservationCmd).Standalone()
+	carapace.Gen(ec2_cancelCapacityReservationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_cancelCapacityReservationCmd).Standalone()
 
-	ec2_cancelCapacityReservationCmd.Flags().String("capacity-reservation-id", "", "The ID of the Capacity Reservation to be cancelled.")
-	ec2_cancelCapacityReservationCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_cancelCapacityReservationCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_cancelCapacityReservationCmd.MarkFlagRequired("capacity-reservation-id")
-	ec2_cancelCapacityReservationCmd.Flag("no-dry-run").Hidden = true
+		ec2_cancelCapacityReservationCmd.Flags().String("capacity-reservation-id", "", "The ID of the Capacity Reservation to be cancelled.")
+		ec2_cancelCapacityReservationCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_cancelCapacityReservationCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_cancelCapacityReservationCmd.MarkFlagRequired("capacity-reservation-id")
+		ec2_cancelCapacityReservationCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_cancelCapacityReservationCmd)
 }

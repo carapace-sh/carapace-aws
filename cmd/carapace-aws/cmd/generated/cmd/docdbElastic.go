@@ -12,7 +12,9 @@ var docdbElasticCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdbElasticCmd).Standalone()
+	carapace.Gen(docdbElasticCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdbElasticCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(docdbElasticCmd)
 }

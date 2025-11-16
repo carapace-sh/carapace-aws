@@ -12,7 +12,9 @@ var docdbCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdbCmd).Standalone()
+	carapace.Gen(docdbCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdbCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(docdbCmd)
 }

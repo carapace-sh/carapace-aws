@@ -12,11 +12,13 @@ var cleanrooms_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_untagResourceCmd).Standalone()
+	carapace.Gen(cleanrooms_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_untagResourceCmd).Standalone()
 
-	cleanrooms_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.")
-	cleanrooms_untagResourceCmd.Flags().String("tag-keys", "", "A list of key names of tags to be removed.")
-	cleanrooms_untagResourceCmd.MarkFlagRequired("resource-arn")
-	cleanrooms_untagResourceCmd.MarkFlagRequired("tag-keys")
+		cleanrooms_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.")
+		cleanrooms_untagResourceCmd.Flags().String("tag-keys", "", "A list of key names of tags to be removed.")
+		cleanrooms_untagResourceCmd.MarkFlagRequired("resource-arn")
+		cleanrooms_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_untagResourceCmd)
 }

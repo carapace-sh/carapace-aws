@@ -12,9 +12,11 @@ var deadline_deleteMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_deleteMonitorCmd).Standalone()
+	carapace.Gen(deadline_deleteMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_deleteMonitorCmd).Standalone()
 
-	deadline_deleteMonitorCmd.Flags().String("monitor-id", "", "The unique identifier of the monitor to delete.")
-	deadline_deleteMonitorCmd.MarkFlagRequired("monitor-id")
+		deadline_deleteMonitorCmd.Flags().String("monitor-id", "", "The unique identifier of the monitor to delete.")
+		deadline_deleteMonitorCmd.MarkFlagRequired("monitor-id")
+	})
 	deadlineCmd.AddCommand(deadline_deleteMonitorCmd)
 }

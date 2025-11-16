@@ -12,9 +12,11 @@ var osis_deletePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_deletePipelineCmd).Standalone()
+	carapace.Gen(osis_deletePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_deletePipelineCmd).Standalone()
 
-	osis_deletePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to delete.")
-	osis_deletePipelineCmd.MarkFlagRequired("pipeline-name")
+		osis_deletePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to delete.")
+		osis_deletePipelineCmd.MarkFlagRequired("pipeline-name")
+	})
 	osisCmd.AddCommand(osis_deletePipelineCmd)
 }

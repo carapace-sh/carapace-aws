@@ -12,11 +12,13 @@ var quicksight_describeAssetBundleExportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeAssetBundleExportJobCmd).Standalone()
+	carapace.Gen(quicksight_describeAssetBundleExportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeAssetBundleExportJobCmd).Standalone()
 
-	quicksight_describeAssetBundleExportJobCmd.Flags().String("asset-bundle-export-job-id", "", "The ID of the job that you want described.")
-	quicksight_describeAssetBundleExportJobCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account the export job is executed in.")
-	quicksight_describeAssetBundleExportJobCmd.MarkFlagRequired("asset-bundle-export-job-id")
-	quicksight_describeAssetBundleExportJobCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeAssetBundleExportJobCmd.Flags().String("asset-bundle-export-job-id", "", "The ID of the job that you want described.")
+		quicksight_describeAssetBundleExportJobCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account the export job is executed in.")
+		quicksight_describeAssetBundleExportJobCmd.MarkFlagRequired("asset-bundle-export-job-id")
+		quicksight_describeAssetBundleExportJobCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeAssetBundleExportJobCmd)
 }

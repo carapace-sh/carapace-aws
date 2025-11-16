@@ -12,7 +12,9 @@ var b2biCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2biCmd).Standalone()
+	carapace.Gen(b2biCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2biCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(b2biCmd)
 }

@@ -12,9 +12,11 @@ var customerProfiles_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_listTagsForResourceCmd).Standalone()
+	carapace.Gen(customerProfiles_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_listTagsForResourceCmd).Standalone()
 
-	customerProfiles_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which you want to view tags.")
-	customerProfiles_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		customerProfiles_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which you want to view tags.")
+		customerProfiles_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_listTagsForResourceCmd)
 }

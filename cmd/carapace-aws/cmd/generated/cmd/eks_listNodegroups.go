@@ -12,11 +12,13 @@ var eks_listNodegroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_listNodegroupsCmd).Standalone()
+	carapace.Gen(eks_listNodegroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_listNodegroupsCmd).Standalone()
 
-	eks_listNodegroupsCmd.Flags().String("cluster-name", "", "The name of your cluster.")
-	eks_listNodegroupsCmd.Flags().String("max-results", "", "The maximum number of results, returned in paginated output.")
-	eks_listNodegroupsCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.")
-	eks_listNodegroupsCmd.MarkFlagRequired("cluster-name")
+		eks_listNodegroupsCmd.Flags().String("cluster-name", "", "The name of your cluster.")
+		eks_listNodegroupsCmd.Flags().String("max-results", "", "The maximum number of results, returned in paginated output.")
+		eks_listNodegroupsCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated request, where `maxResults` was used and the results exceeded the value of that parameter.")
+		eks_listNodegroupsCmd.MarkFlagRequired("cluster-name")
+	})
 	eksCmd.AddCommand(eks_listNodegroupsCmd)
 }

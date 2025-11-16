@@ -12,13 +12,15 @@ var deadline_deleteWorkerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_deleteWorkerCmd).Standalone()
+	carapace.Gen(deadline_deleteWorkerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_deleteWorkerCmd).Standalone()
 
-	deadline_deleteWorkerCmd.Flags().String("farm-id", "", "The farm ID of the worker to delete.")
-	deadline_deleteWorkerCmd.Flags().String("fleet-id", "", "The fleet ID of the worker to delete.")
-	deadline_deleteWorkerCmd.Flags().String("worker-id", "", "The worker ID of the worker to delete.")
-	deadline_deleteWorkerCmd.MarkFlagRequired("farm-id")
-	deadline_deleteWorkerCmd.MarkFlagRequired("fleet-id")
-	deadline_deleteWorkerCmd.MarkFlagRequired("worker-id")
+		deadline_deleteWorkerCmd.Flags().String("farm-id", "", "The farm ID of the worker to delete.")
+		deadline_deleteWorkerCmd.Flags().String("fleet-id", "", "The fleet ID of the worker to delete.")
+		deadline_deleteWorkerCmd.Flags().String("worker-id", "", "The worker ID of the worker to delete.")
+		deadline_deleteWorkerCmd.MarkFlagRequired("farm-id")
+		deadline_deleteWorkerCmd.MarkFlagRequired("fleet-id")
+		deadline_deleteWorkerCmd.MarkFlagRequired("worker-id")
+	})
 	deadlineCmd.AddCommand(deadline_deleteWorkerCmd)
 }

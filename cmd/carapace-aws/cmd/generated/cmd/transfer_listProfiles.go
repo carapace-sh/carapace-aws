@@ -12,10 +12,12 @@ var transfer_listProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_listProfilesCmd).Standalone()
+	carapace.Gen(transfer_listProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_listProfilesCmd).Standalone()
 
-	transfer_listProfilesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	transfer_listProfilesCmd.Flags().String("next-token", "", "When there are additional results that were not returned, a `NextToken` parameter is returned.")
-	transfer_listProfilesCmd.Flags().String("profile-type", "", "Indicates whether to list only `LOCAL` type profiles or only `PARTNER` type profiles.")
+		transfer_listProfilesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		transfer_listProfilesCmd.Flags().String("next-token", "", "When there are additional results that were not returned, a `NextToken` parameter is returned.")
+		transfer_listProfilesCmd.Flags().String("profile-type", "", "Indicates whether to list only `LOCAL` type profiles or only `PARTNER` type profiles.")
+	})
 	transferCmd.AddCommand(transfer_listProfilesCmd)
 }

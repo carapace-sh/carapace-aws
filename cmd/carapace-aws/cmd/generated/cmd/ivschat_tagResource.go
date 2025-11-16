@@ -12,11 +12,13 @@ var ivschat_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_tagResourceCmd).Standalone()
+	carapace.Gen(ivschat_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_tagResourceCmd).Standalone()
 
-	ivschat_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be tagged.")
-	ivschat_tagResourceCmd.Flags().String("tags", "", "Array of tags to be added or updated.")
-	ivschat_tagResourceCmd.MarkFlagRequired("resource-arn")
-	ivschat_tagResourceCmd.MarkFlagRequired("tags")
+		ivschat_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be tagged.")
+		ivschat_tagResourceCmd.Flags().String("tags", "", "Array of tags to be added or updated.")
+		ivschat_tagResourceCmd.MarkFlagRequired("resource-arn")
+		ivschat_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	ivschatCmd.AddCommand(ivschat_tagResourceCmd)
 }

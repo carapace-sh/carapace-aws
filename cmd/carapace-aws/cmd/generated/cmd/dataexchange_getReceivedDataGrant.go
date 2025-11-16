@@ -12,9 +12,11 @@ var dataexchange_getReceivedDataGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_getReceivedDataGrantCmd).Standalone()
+	carapace.Gen(dataexchange_getReceivedDataGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_getReceivedDataGrantCmd).Standalone()
 
-	dataexchange_getReceivedDataGrantCmd.Flags().String("data-grant-arn", "", "The Amazon Resource Name (ARN) of the data grant.")
-	dataexchange_getReceivedDataGrantCmd.MarkFlagRequired("data-grant-arn")
+		dataexchange_getReceivedDataGrantCmd.Flags().String("data-grant-arn", "", "The Amazon Resource Name (ARN) of the data grant.")
+		dataexchange_getReceivedDataGrantCmd.MarkFlagRequired("data-grant-arn")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_getReceivedDataGrantCmd)
 }

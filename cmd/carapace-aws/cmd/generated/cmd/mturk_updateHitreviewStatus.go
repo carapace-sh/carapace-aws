@@ -12,12 +12,14 @@ var mturk_updateHitreviewStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_updateHitreviewStatusCmd).Standalone()
+	carapace.Gen(mturk_updateHitreviewStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_updateHitreviewStatusCmd).Standalone()
 
-	mturk_updateHitreviewStatusCmd.Flags().String("hitid", "", "The ID of the HIT to update.")
-	mturk_updateHitreviewStatusCmd.Flags().Bool("no-revert", false, "Specifies how to update the HIT status.")
-	mturk_updateHitreviewStatusCmd.Flags().Bool("revert", false, "Specifies how to update the HIT status.")
-	mturk_updateHitreviewStatusCmd.MarkFlagRequired("hitid")
-	mturk_updateHitreviewStatusCmd.Flag("no-revert").Hidden = true
+		mturk_updateHitreviewStatusCmd.Flags().String("hitid", "", "The ID of the HIT to update.")
+		mturk_updateHitreviewStatusCmd.Flags().Bool("no-revert", false, "Specifies how to update the HIT status.")
+		mturk_updateHitreviewStatusCmd.Flags().Bool("revert", false, "Specifies how to update the HIT status.")
+		mturk_updateHitreviewStatusCmd.MarkFlagRequired("hitid")
+		mturk_updateHitreviewStatusCmd.Flag("no-revert").Hidden = true
+	})
 	mturkCmd.AddCommand(mturk_updateHitreviewStatusCmd)
 }

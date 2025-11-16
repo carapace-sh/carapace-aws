@@ -12,9 +12,11 @@ var snowball_listCompatibleImagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_listCompatibleImagesCmd).Standalone()
+	carapace.Gen(snowball_listCompatibleImagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_listCompatibleImagesCmd).Standalone()
 
-	snowball_listCompatibleImagesCmd.Flags().String("max-results", "", "The maximum number of results for the list of compatible images.")
-	snowball_listCompatibleImagesCmd.Flags().String("next-token", "", "HTTP requests are stateless.")
+		snowball_listCompatibleImagesCmd.Flags().String("max-results", "", "The maximum number of results for the list of compatible images.")
+		snowball_listCompatibleImagesCmd.Flags().String("next-token", "", "HTTP requests are stateless.")
+	})
 	snowballCmd.AddCommand(snowball_listCompatibleImagesCmd)
 }

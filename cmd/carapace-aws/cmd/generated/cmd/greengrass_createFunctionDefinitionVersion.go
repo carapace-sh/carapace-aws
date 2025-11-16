@@ -12,12 +12,14 @@ var greengrass_createFunctionDefinitionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createFunctionDefinitionVersionCmd).Standalone()
+	carapace.Gen(greengrass_createFunctionDefinitionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createFunctionDefinitionVersionCmd).Standalone()
 
-	greengrass_createFunctionDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createFunctionDefinitionVersionCmd.Flags().String("default-config", "", "The default configuration that applies to all Lambda functions in this function definition version.")
-	greengrass_createFunctionDefinitionVersionCmd.Flags().String("function-definition-id", "", "The ID of the Lambda function definition.")
-	greengrass_createFunctionDefinitionVersionCmd.Flags().String("functions", "", "A list of Lambda functions in this function definition version.")
-	greengrass_createFunctionDefinitionVersionCmd.MarkFlagRequired("function-definition-id")
+		greengrass_createFunctionDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createFunctionDefinitionVersionCmd.Flags().String("default-config", "", "The default configuration that applies to all Lambda functions in this function definition version.")
+		greengrass_createFunctionDefinitionVersionCmd.Flags().String("function-definition-id", "", "The ID of the Lambda function definition.")
+		greengrass_createFunctionDefinitionVersionCmd.Flags().String("functions", "", "A list of Lambda functions in this function definition version.")
+		greengrass_createFunctionDefinitionVersionCmd.MarkFlagRequired("function-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_createFunctionDefinitionVersionCmd)
 }

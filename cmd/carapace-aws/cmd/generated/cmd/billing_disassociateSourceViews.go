@@ -12,11 +12,13 @@ var billing_disassociateSourceViewsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billing_disassociateSourceViewsCmd).Standalone()
+	carapace.Gen(billing_disassociateSourceViewsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billing_disassociateSourceViewsCmd).Standalone()
 
-	billing_disassociateSourceViewsCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the billing view to disassociate source views from.")
-	billing_disassociateSourceViewsCmd.Flags().String("source-views", "", "A list of ARNs of the source billing views to disassociate.")
-	billing_disassociateSourceViewsCmd.MarkFlagRequired("arn")
-	billing_disassociateSourceViewsCmd.MarkFlagRequired("source-views")
+		billing_disassociateSourceViewsCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the billing view to disassociate source views from.")
+		billing_disassociateSourceViewsCmd.Flags().String("source-views", "", "A list of ARNs of the source billing views to disassociate.")
+		billing_disassociateSourceViewsCmd.MarkFlagRequired("arn")
+		billing_disassociateSourceViewsCmd.MarkFlagRequired("source-views")
+	})
 	billingCmd.AddCommand(billing_disassociateSourceViewsCmd)
 }

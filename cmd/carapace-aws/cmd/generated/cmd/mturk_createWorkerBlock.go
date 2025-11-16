@@ -12,11 +12,13 @@ var mturk_createWorkerBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_createWorkerBlockCmd).Standalone()
+	carapace.Gen(mturk_createWorkerBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_createWorkerBlockCmd).Standalone()
 
-	mturk_createWorkerBlockCmd.Flags().String("reason", "", "A message explaining the reason for blocking the Worker.")
-	mturk_createWorkerBlockCmd.Flags().String("worker-id", "", "The ID of the Worker to block.")
-	mturk_createWorkerBlockCmd.MarkFlagRequired("reason")
-	mturk_createWorkerBlockCmd.MarkFlagRequired("worker-id")
+		mturk_createWorkerBlockCmd.Flags().String("reason", "", "A message explaining the reason for blocking the Worker.")
+		mturk_createWorkerBlockCmd.Flags().String("worker-id", "", "The ID of the Worker to block.")
+		mturk_createWorkerBlockCmd.MarkFlagRequired("reason")
+		mturk_createWorkerBlockCmd.MarkFlagRequired("worker-id")
+	})
 	mturkCmd.AddCommand(mturk_createWorkerBlockCmd)
 }

@@ -12,8 +12,10 @@ var config_startConfigRulesEvaluationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_startConfigRulesEvaluationCmd).Standalone()
+	carapace.Gen(config_startConfigRulesEvaluationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_startConfigRulesEvaluationCmd).Standalone()
 
-	config_startConfigRulesEvaluationCmd.Flags().String("config-rule-names", "", "The list of names of Config rules that you want to run evaluations for.")
+		config_startConfigRulesEvaluationCmd.Flags().String("config-rule-names", "", "The list of names of Config rules that you want to run evaluations for.")
+	})
 	configCmd.AddCommand(config_startConfigRulesEvaluationCmd)
 }

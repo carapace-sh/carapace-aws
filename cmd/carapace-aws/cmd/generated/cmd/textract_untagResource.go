@@ -12,11 +12,13 @@ var textract_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(textract_untagResourceCmd).Standalone()
+	carapace.Gen(textract_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(textract_untagResourceCmd).Standalone()
 
-	textract_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that specifies the resource to be untagged.")
-	textract_untagResourceCmd.Flags().String("tag-keys", "", "Specifies the tags to be removed from the resource specified by the ResourceARN.")
-	textract_untagResourceCmd.MarkFlagRequired("resource-arn")
-	textract_untagResourceCmd.MarkFlagRequired("tag-keys")
+		textract_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that specifies the resource to be untagged.")
+		textract_untagResourceCmd.Flags().String("tag-keys", "", "Specifies the tags to be removed from the resource specified by the ResourceARN.")
+		textract_untagResourceCmd.MarkFlagRequired("resource-arn")
+		textract_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	textractCmd.AddCommand(textract_untagResourceCmd)
 }

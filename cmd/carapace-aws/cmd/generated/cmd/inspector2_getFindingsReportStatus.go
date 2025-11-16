@@ -12,8 +12,10 @@ var inspector2_getFindingsReportStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_getFindingsReportStatusCmd).Standalone()
+	carapace.Gen(inspector2_getFindingsReportStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_getFindingsReportStatusCmd).Standalone()
 
-	inspector2_getFindingsReportStatusCmd.Flags().String("report-id", "", "The ID of the report to retrieve the status of.")
+		inspector2_getFindingsReportStatusCmd.Flags().String("report-id", "", "The ID of the report to retrieve the status of.")
+	})
 	inspector2Cmd.AddCommand(inspector2_getFindingsReportStatusCmd)
 }

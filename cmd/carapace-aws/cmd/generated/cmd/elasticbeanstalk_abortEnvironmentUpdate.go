@@ -12,9 +12,11 @@ var elasticbeanstalk_abortEnvironmentUpdateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_abortEnvironmentUpdateCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_abortEnvironmentUpdateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_abortEnvironmentUpdateCmd).Standalone()
 
-	elasticbeanstalk_abortEnvironmentUpdateCmd.Flags().String("environment-id", "", "This specifies the ID of the environment with the in-progress update that you want to cancel.")
-	elasticbeanstalk_abortEnvironmentUpdateCmd.Flags().String("environment-name", "", "This specifies the name of the environment with the in-progress update that you want to cancel.")
+		elasticbeanstalk_abortEnvironmentUpdateCmd.Flags().String("environment-id", "", "This specifies the ID of the environment with the in-progress update that you want to cancel.")
+		elasticbeanstalk_abortEnvironmentUpdateCmd.Flags().String("environment-name", "", "This specifies the name of the environment with the in-progress update that you want to cancel.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_abortEnvironmentUpdateCmd)
 }

@@ -12,11 +12,13 @@ var gamelift_deleteVpcPeeringAuthorizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteVpcPeeringAuthorizationCmd).Standalone()
+	carapace.Gen(gamelift_deleteVpcPeeringAuthorizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteVpcPeeringAuthorizationCmd).Standalone()
 
-	gamelift_deleteVpcPeeringAuthorizationCmd.Flags().String("game-lift-aws-account-id", "", "A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet.")
-	gamelift_deleteVpcPeeringAuthorizationCmd.Flags().String("peer-vpc-id", "", "A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet.")
-	gamelift_deleteVpcPeeringAuthorizationCmd.MarkFlagRequired("game-lift-aws-account-id")
-	gamelift_deleteVpcPeeringAuthorizationCmd.MarkFlagRequired("peer-vpc-id")
+		gamelift_deleteVpcPeeringAuthorizationCmd.Flags().String("game-lift-aws-account-id", "", "A unique identifier for the Amazon Web Services account that you use to manage your Amazon GameLift Servers fleet.")
+		gamelift_deleteVpcPeeringAuthorizationCmd.Flags().String("peer-vpc-id", "", "A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet.")
+		gamelift_deleteVpcPeeringAuthorizationCmd.MarkFlagRequired("game-lift-aws-account-id")
+		gamelift_deleteVpcPeeringAuthorizationCmd.MarkFlagRequired("peer-vpc-id")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteVpcPeeringAuthorizationCmd)
 }

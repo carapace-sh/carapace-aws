@@ -12,9 +12,11 @@ var resiliencehub_startResourceGroupingRecommendationTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_startResourceGroupingRecommendationTaskCmd).Standalone()
+	carapace.Gen(resiliencehub_startResourceGroupingRecommendationTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_startResourceGroupingRecommendationTaskCmd).Standalone()
 
-	resiliencehub_startResourceGroupingRecommendationTaskCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
-	resiliencehub_startResourceGroupingRecommendationTaskCmd.MarkFlagRequired("app-arn")
+		resiliencehub_startResourceGroupingRecommendationTaskCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
+		resiliencehub_startResourceGroupingRecommendationTaskCmd.MarkFlagRequired("app-arn")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_startResourceGroupingRecommendationTaskCmd)
 }

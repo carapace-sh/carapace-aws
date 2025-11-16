@@ -12,11 +12,13 @@ var redshiftServerless_getCustomDomainAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getCustomDomainAssociationCmd).Standalone()
+	carapace.Gen(redshiftServerless_getCustomDomainAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getCustomDomainAssociationCmd).Standalone()
 
-	redshiftServerless_getCustomDomainAssociationCmd.Flags().String("custom-domain-name", "", "The custom domain name associated with the workgroup.")
-	redshiftServerless_getCustomDomainAssociationCmd.Flags().String("workgroup-name", "", "The name of the workgroup associated with the database.")
-	redshiftServerless_getCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-name")
-	redshiftServerless_getCustomDomainAssociationCmd.MarkFlagRequired("workgroup-name")
+		redshiftServerless_getCustomDomainAssociationCmd.Flags().String("custom-domain-name", "", "The custom domain name associated with the workgroup.")
+		redshiftServerless_getCustomDomainAssociationCmd.Flags().String("workgroup-name", "", "The name of the workgroup associated with the database.")
+		redshiftServerless_getCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-name")
+		redshiftServerless_getCustomDomainAssociationCmd.MarkFlagRequired("workgroup-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getCustomDomainAssociationCmd)
 }

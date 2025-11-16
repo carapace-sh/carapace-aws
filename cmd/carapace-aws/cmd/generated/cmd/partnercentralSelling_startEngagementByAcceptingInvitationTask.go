@@ -12,14 +12,16 @@ var partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd = &cobra.C
 }
 
 func init() {
-	carapace.Gen(partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd).Standalone()
+	carapace.Gen(partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd).Standalone()
 
-	partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.Flags().String("catalog", "", "Specifies the catalog related to the task.")
-	partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier provided by the client that helps to ensure the idempotency of the request.")
-	partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.Flags().String("identifier", "", "Specifies the unique identifier of the `EngagementInvitation` to be accepted.")
-	partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.Flags().String("tags", "", "A map of the key-value pairs of the tag or tags to assign.")
-	partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.MarkFlagRequired("catalog")
-	partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.MarkFlagRequired("client-token")
-	partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.MarkFlagRequired("identifier")
+		partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.Flags().String("catalog", "", "Specifies the catalog related to the task.")
+		partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier provided by the client that helps to ensure the idempotency of the request.")
+		partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.Flags().String("identifier", "", "Specifies the unique identifier of the `EngagementInvitation` to be accepted.")
+		partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.Flags().String("tags", "", "A map of the key-value pairs of the tag or tags to assign.")
+		partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.MarkFlagRequired("catalog")
+		partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.MarkFlagRequired("client-token")
+		partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd.MarkFlagRequired("identifier")
+	})
 	partnercentralSellingCmd.AddCommand(partnercentralSelling_startEngagementByAcceptingInvitationTaskCmd)
 }

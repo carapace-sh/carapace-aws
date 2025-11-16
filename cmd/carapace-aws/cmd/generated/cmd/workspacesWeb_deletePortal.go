@@ -12,9 +12,11 @@ var workspacesWeb_deletePortalCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_deletePortalCmd).Standalone()
+	carapace.Gen(workspacesWeb_deletePortalCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_deletePortalCmd).Standalone()
 
-	workspacesWeb_deletePortalCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
-	workspacesWeb_deletePortalCmd.MarkFlagRequired("portal-arn")
+		workspacesWeb_deletePortalCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
+		workspacesWeb_deletePortalCmd.MarkFlagRequired("portal-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_deletePortalCmd)
 }

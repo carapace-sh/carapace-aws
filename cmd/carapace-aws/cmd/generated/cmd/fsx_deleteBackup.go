@@ -12,10 +12,12 @@ var fsx_deleteBackupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_deleteBackupCmd).Standalone()
+	carapace.Gen(fsx_deleteBackupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_deleteBackupCmd).Standalone()
 
-	fsx_deleteBackupCmd.Flags().String("backup-id", "", "The ID of the backup that you want to delete.")
-	fsx_deleteBackupCmd.Flags().String("client-request-token", "", "A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent deletion.")
-	fsx_deleteBackupCmd.MarkFlagRequired("backup-id")
+		fsx_deleteBackupCmd.Flags().String("backup-id", "", "The ID of the backup that you want to delete.")
+		fsx_deleteBackupCmd.Flags().String("client-request-token", "", "A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent deletion.")
+		fsx_deleteBackupCmd.MarkFlagRequired("backup-id")
+	})
 	fsxCmd.AddCommand(fsx_deleteBackupCmd)
 }

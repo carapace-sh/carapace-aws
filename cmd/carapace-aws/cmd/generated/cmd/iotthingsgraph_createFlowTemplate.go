@@ -12,10 +12,12 @@ var iotthingsgraph_createFlowTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_createFlowTemplateCmd).Standalone()
+	carapace.Gen(iotthingsgraph_createFlowTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_createFlowTemplateCmd).Standalone()
 
-	iotthingsgraph_createFlowTemplateCmd.Flags().String("compatible-namespace-version", "", "The namespace version in which the workflow is to be created.")
-	iotthingsgraph_createFlowTemplateCmd.Flags().String("definition", "", "The workflow `DefinitionDocument`.")
-	iotthingsgraph_createFlowTemplateCmd.MarkFlagRequired("definition")
+		iotthingsgraph_createFlowTemplateCmd.Flags().String("compatible-namespace-version", "", "The namespace version in which the workflow is to be created.")
+		iotthingsgraph_createFlowTemplateCmd.Flags().String("definition", "", "The workflow `DefinitionDocument`.")
+		iotthingsgraph_createFlowTemplateCmd.MarkFlagRequired("definition")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_createFlowTemplateCmd)
 }

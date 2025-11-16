@@ -12,13 +12,15 @@ var iotwireless_updatePartnerAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_updatePartnerAccountCmd).Standalone()
+	carapace.Gen(iotwireless_updatePartnerAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_updatePartnerAccountCmd).Standalone()
 
-	iotwireless_updatePartnerAccountCmd.Flags().String("partner-account-id", "", "The ID of the partner account to update.")
-	iotwireless_updatePartnerAccountCmd.Flags().String("partner-type", "", "The partner type.")
-	iotwireless_updatePartnerAccountCmd.Flags().String("sidewalk", "", "The Sidewalk account credentials.")
-	iotwireless_updatePartnerAccountCmd.MarkFlagRequired("partner-account-id")
-	iotwireless_updatePartnerAccountCmd.MarkFlagRequired("partner-type")
-	iotwireless_updatePartnerAccountCmd.MarkFlagRequired("sidewalk")
+		iotwireless_updatePartnerAccountCmd.Flags().String("partner-account-id", "", "The ID of the partner account to update.")
+		iotwireless_updatePartnerAccountCmd.Flags().String("partner-type", "", "The partner type.")
+		iotwireless_updatePartnerAccountCmd.Flags().String("sidewalk", "", "The Sidewalk account credentials.")
+		iotwireless_updatePartnerAccountCmd.MarkFlagRequired("partner-account-id")
+		iotwireless_updatePartnerAccountCmd.MarkFlagRequired("partner-type")
+		iotwireless_updatePartnerAccountCmd.MarkFlagRequired("sidewalk")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_updatePartnerAccountCmd)
 }

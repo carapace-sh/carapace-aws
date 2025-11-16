@@ -12,7 +12,9 @@ var shield_describeEmergencyContactSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_describeEmergencyContactSettingsCmd).Standalone()
+	carapace.Gen(shield_describeEmergencyContactSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_describeEmergencyContactSettingsCmd).Standalone()
 
+	})
 	shieldCmd.AddCommand(shield_describeEmergencyContactSettingsCmd)
 }

@@ -12,12 +12,14 @@ var ce_getSavingsPlansUtilizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_getSavingsPlansUtilizationCmd).Standalone()
+	carapace.Gen(ce_getSavingsPlansUtilizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_getSavingsPlansUtilizationCmd).Standalone()
 
-	ce_getSavingsPlansUtilizationCmd.Flags().String("filter", "", "Filters Savings Plans utilization coverage data for active Savings Plans dimensions.")
-	ce_getSavingsPlansUtilizationCmd.Flags().String("granularity", "", "The granularity of the Amazon Web Services utillization data for your Savings Plans.")
-	ce_getSavingsPlansUtilizationCmd.Flags().String("sort-by", "", "The value that you want to sort the data by.")
-	ce_getSavingsPlansUtilizationCmd.Flags().String("time-period", "", "The time period that you want the usage and costs for.")
-	ce_getSavingsPlansUtilizationCmd.MarkFlagRequired("time-period")
+		ce_getSavingsPlansUtilizationCmd.Flags().String("filter", "", "Filters Savings Plans utilization coverage data for active Savings Plans dimensions.")
+		ce_getSavingsPlansUtilizationCmd.Flags().String("granularity", "", "The granularity of the Amazon Web Services utillization data for your Savings Plans.")
+		ce_getSavingsPlansUtilizationCmd.Flags().String("sort-by", "", "The value that you want to sort the data by.")
+		ce_getSavingsPlansUtilizationCmd.Flags().String("time-period", "", "The time period that you want the usage and costs for.")
+		ce_getSavingsPlansUtilizationCmd.MarkFlagRequired("time-period")
+	})
 	ceCmd.AddCommand(ce_getSavingsPlansUtilizationCmd)
 }

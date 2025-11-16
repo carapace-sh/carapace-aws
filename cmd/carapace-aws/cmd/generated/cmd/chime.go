@@ -12,7 +12,9 @@ var chimeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeCmd).Standalone()
+	carapace.Gen(chimeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(chimeCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_deleteInferenceExperimentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteInferenceExperimentCmd).Standalone()
+	carapace.Gen(sagemaker_deleteInferenceExperimentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteInferenceExperimentCmd).Standalone()
 
-	sagemaker_deleteInferenceExperimentCmd.Flags().String("name", "", "The name of the inference experiment you want to delete.")
-	sagemaker_deleteInferenceExperimentCmd.MarkFlagRequired("name")
+		sagemaker_deleteInferenceExperimentCmd.Flags().String("name", "", "The name of the inference experiment you want to delete.")
+		sagemaker_deleteInferenceExperimentCmd.MarkFlagRequired("name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteInferenceExperimentCmd)
 }

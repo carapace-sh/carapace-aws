@@ -12,7 +12,9 @@ var s3vectorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3vectorsCmd).Standalone()
+	carapace.Gen(s3vectorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3vectorsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(s3vectorsCmd)
 }

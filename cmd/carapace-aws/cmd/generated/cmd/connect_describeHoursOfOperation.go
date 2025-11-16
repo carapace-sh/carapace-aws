@@ -12,11 +12,13 @@ var connect_describeHoursOfOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeHoursOfOperationCmd).Standalone()
+	carapace.Gen(connect_describeHoursOfOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeHoursOfOperationCmd).Standalone()
 
-	connect_describeHoursOfOperationCmd.Flags().String("hours-of-operation-id", "", "The identifier for the hours of operation.")
-	connect_describeHoursOfOperationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeHoursOfOperationCmd.MarkFlagRequired("hours-of-operation-id")
-	connect_describeHoursOfOperationCmd.MarkFlagRequired("instance-id")
+		connect_describeHoursOfOperationCmd.Flags().String("hours-of-operation-id", "", "The identifier for the hours of operation.")
+		connect_describeHoursOfOperationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeHoursOfOperationCmd.MarkFlagRequired("hours-of-operation-id")
+		connect_describeHoursOfOperationCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_describeHoursOfOperationCmd)
 }

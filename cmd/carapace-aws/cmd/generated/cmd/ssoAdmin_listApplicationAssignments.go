@@ -12,11 +12,13 @@ var ssoAdmin_listApplicationAssignmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_listApplicationAssignmentsCmd).Standalone()
+	carapace.Gen(ssoAdmin_listApplicationAssignmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_listApplicationAssignmentsCmd).Standalone()
 
-	ssoAdmin_listApplicationAssignmentsCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
-	ssoAdmin_listApplicationAssignmentsCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included in each response.")
-	ssoAdmin_listApplicationAssignmentsCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
-	ssoAdmin_listApplicationAssignmentsCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_listApplicationAssignmentsCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
+		ssoAdmin_listApplicationAssignmentsCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included in each response.")
+		ssoAdmin_listApplicationAssignmentsCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		ssoAdmin_listApplicationAssignmentsCmd.MarkFlagRequired("application-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_listApplicationAssignmentsCmd)
 }

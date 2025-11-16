@@ -12,13 +12,15 @@ var inspector_subscribeToEventCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_subscribeToEventCmd).Standalone()
+	carapace.Gen(inspector_subscribeToEventCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_subscribeToEventCmd).Standalone()
 
-	inspector_subscribeToEventCmd.Flags().String("event", "", "The event for which you want to receive SNS notifications.")
-	inspector_subscribeToEventCmd.Flags().String("resource-arn", "", "The ARN of the assessment template that is used during the event for which you want to receive SNS notifications.")
-	inspector_subscribeToEventCmd.Flags().String("topic-arn", "", "The ARN of the SNS topic to which the SNS notifications are sent.")
-	inspector_subscribeToEventCmd.MarkFlagRequired("event")
-	inspector_subscribeToEventCmd.MarkFlagRequired("resource-arn")
-	inspector_subscribeToEventCmd.MarkFlagRequired("topic-arn")
+		inspector_subscribeToEventCmd.Flags().String("event", "", "The event for which you want to receive SNS notifications.")
+		inspector_subscribeToEventCmd.Flags().String("resource-arn", "", "The ARN of the assessment template that is used during the event for which you want to receive SNS notifications.")
+		inspector_subscribeToEventCmd.Flags().String("topic-arn", "", "The ARN of the SNS topic to which the SNS notifications are sent.")
+		inspector_subscribeToEventCmd.MarkFlagRequired("event")
+		inspector_subscribeToEventCmd.MarkFlagRequired("resource-arn")
+		inspector_subscribeToEventCmd.MarkFlagRequired("topic-arn")
+	})
 	inspectorCmd.AddCommand(inspector_subscribeToEventCmd)
 }

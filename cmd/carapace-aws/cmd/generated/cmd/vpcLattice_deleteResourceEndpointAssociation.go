@@ -12,9 +12,11 @@ var vpcLattice_deleteResourceEndpointAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deleteResourceEndpointAssociationCmd).Standalone()
+	carapace.Gen(vpcLattice_deleteResourceEndpointAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deleteResourceEndpointAssociationCmd).Standalone()
 
-	vpcLattice_deleteResourceEndpointAssociationCmd.Flags().String("resource-endpoint-association-identifier", "", "The ID or ARN of the association.")
-	vpcLattice_deleteResourceEndpointAssociationCmd.MarkFlagRequired("resource-endpoint-association-identifier")
+		vpcLattice_deleteResourceEndpointAssociationCmd.Flags().String("resource-endpoint-association-identifier", "", "The ID or ARN of the association.")
+		vpcLattice_deleteResourceEndpointAssociationCmd.MarkFlagRequired("resource-endpoint-association-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deleteResourceEndpointAssociationCmd)
 }

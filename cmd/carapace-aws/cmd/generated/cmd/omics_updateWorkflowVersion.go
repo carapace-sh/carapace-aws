@@ -12,15 +12,17 @@ var omics_updateWorkflowVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_updateWorkflowVersionCmd).Standalone()
+	carapace.Gen(omics_updateWorkflowVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_updateWorkflowVersionCmd).Standalone()
 
-	omics_updateWorkflowVersionCmd.Flags().String("description", "", "Description of the workflow version.")
-	omics_updateWorkflowVersionCmd.Flags().String("readme-markdown", "", "The markdown content for the workflow version's README file.")
-	omics_updateWorkflowVersionCmd.Flags().String("storage-capacity", "", "The default static storage capacity (in gibibytes) for runs that use this workflow version.")
-	omics_updateWorkflowVersionCmd.Flags().String("storage-type", "", "The default storage type for runs that use this workflow version.")
-	omics_updateWorkflowVersionCmd.Flags().String("version-name", "", "The name of the workflow version.")
-	omics_updateWorkflowVersionCmd.Flags().String("workflow-id", "", "The workflow's ID.")
-	omics_updateWorkflowVersionCmd.MarkFlagRequired("version-name")
-	omics_updateWorkflowVersionCmd.MarkFlagRequired("workflow-id")
+		omics_updateWorkflowVersionCmd.Flags().String("description", "", "Description of the workflow version.")
+		omics_updateWorkflowVersionCmd.Flags().String("readme-markdown", "", "The markdown content for the workflow version's README file.")
+		omics_updateWorkflowVersionCmd.Flags().String("storage-capacity", "", "The default static storage capacity (in gibibytes) for runs that use this workflow version.")
+		omics_updateWorkflowVersionCmd.Flags().String("storage-type", "", "The default storage type for runs that use this workflow version.")
+		omics_updateWorkflowVersionCmd.Flags().String("version-name", "", "The name of the workflow version.")
+		omics_updateWorkflowVersionCmd.Flags().String("workflow-id", "", "The workflow's ID.")
+		omics_updateWorkflowVersionCmd.MarkFlagRequired("version-name")
+		omics_updateWorkflowVersionCmd.MarkFlagRequired("workflow-id")
+	})
 	omicsCmd.AddCommand(omics_updateWorkflowVersionCmd)
 }

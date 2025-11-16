@@ -12,11 +12,13 @@ var neptuneGraph_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_tagResourceCmd).Standalone()
+	carapace.Gen(neptuneGraph_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_tagResourceCmd).Standalone()
 
-	neptuneGraph_tagResourceCmd.Flags().String("resource-arn", "", "ARN of the resource for which tags need to be added.")
-	neptuneGraph_tagResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Neptune Analytics resource.")
-	neptuneGraph_tagResourceCmd.MarkFlagRequired("resource-arn")
-	neptuneGraph_tagResourceCmd.MarkFlagRequired("tags")
+		neptuneGraph_tagResourceCmd.Flags().String("resource-arn", "", "ARN of the resource for which tags need to be added.")
+		neptuneGraph_tagResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Neptune Analytics resource.")
+		neptuneGraph_tagResourceCmd.MarkFlagRequired("resource-arn")
+		neptuneGraph_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_tagResourceCmd)
 }

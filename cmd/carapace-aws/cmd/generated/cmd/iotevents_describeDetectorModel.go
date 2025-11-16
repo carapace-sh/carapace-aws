@@ -12,10 +12,12 @@ var iotevents_describeDetectorModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_describeDetectorModelCmd).Standalone()
+	carapace.Gen(iotevents_describeDetectorModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_describeDetectorModelCmd).Standalone()
 
-	iotevents_describeDetectorModelCmd.Flags().String("detector-model-name", "", "The name of the detector model.")
-	iotevents_describeDetectorModelCmd.Flags().String("detector-model-version", "", "The version of the detector model.")
-	iotevents_describeDetectorModelCmd.MarkFlagRequired("detector-model-name")
+		iotevents_describeDetectorModelCmd.Flags().String("detector-model-name", "", "The name of the detector model.")
+		iotevents_describeDetectorModelCmd.Flags().String("detector-model-version", "", "The version of the detector model.")
+		iotevents_describeDetectorModelCmd.MarkFlagRequired("detector-model-name")
+	})
 	ioteventsCmd.AddCommand(iotevents_describeDetectorModelCmd)
 }

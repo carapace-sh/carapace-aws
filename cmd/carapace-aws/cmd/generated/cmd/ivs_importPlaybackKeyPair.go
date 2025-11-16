@@ -12,11 +12,13 @@ var ivs_importPlaybackKeyPairCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_importPlaybackKeyPairCmd).Standalone()
+	carapace.Gen(ivs_importPlaybackKeyPairCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_importPlaybackKeyPairCmd).Standalone()
 
-	ivs_importPlaybackKeyPairCmd.Flags().String("name", "", "Playback-key-pair name.")
-	ivs_importPlaybackKeyPairCmd.Flags().String("public-key-material", "", "The public portion of a customer-generated key pair.")
-	ivs_importPlaybackKeyPairCmd.Flags().String("tags", "", "Any tags provided with the request are added to the playback key pair tags.")
-	ivs_importPlaybackKeyPairCmd.MarkFlagRequired("public-key-material")
+		ivs_importPlaybackKeyPairCmd.Flags().String("name", "", "Playback-key-pair name.")
+		ivs_importPlaybackKeyPairCmd.Flags().String("public-key-material", "", "The public portion of a customer-generated key pair.")
+		ivs_importPlaybackKeyPairCmd.Flags().String("tags", "", "Any tags provided with the request are added to the playback key pair tags.")
+		ivs_importPlaybackKeyPairCmd.MarkFlagRequired("public-key-material")
+	})
 	ivsCmd.AddCommand(ivs_importPlaybackKeyPairCmd)
 }

@@ -12,9 +12,11 @@ var gamelift_deleteGameSessionQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteGameSessionQueueCmd).Standalone()
+	carapace.Gen(gamelift_deleteGameSessionQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteGameSessionQueueCmd).Standalone()
 
-	gamelift_deleteGameSessionQueueCmd.Flags().String("name", "", "A descriptive label that is associated with game session queue.")
-	gamelift_deleteGameSessionQueueCmd.MarkFlagRequired("name")
+		gamelift_deleteGameSessionQueueCmd.Flags().String("name", "", "A descriptive label that is associated with game session queue.")
+		gamelift_deleteGameSessionQueueCmd.MarkFlagRequired("name")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteGameSessionQueueCmd)
 }

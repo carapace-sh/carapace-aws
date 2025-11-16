@@ -12,9 +12,11 @@ var workmail_describeOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_describeOrganizationCmd).Standalone()
+	carapace.Gen(workmail_describeOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_describeOrganizationCmd).Standalone()
 
-	workmail_describeOrganizationCmd.Flags().String("organization-id", "", "The identifier for the organization to be described.")
-	workmail_describeOrganizationCmd.MarkFlagRequired("organization-id")
+		workmail_describeOrganizationCmd.Flags().String("organization-id", "", "The identifier for the organization to be described.")
+		workmail_describeOrganizationCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_describeOrganizationCmd)
 }

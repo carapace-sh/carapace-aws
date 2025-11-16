@@ -12,12 +12,14 @@ var neptunedata_executeOpenCypherExplainQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_executeOpenCypherExplainQueryCmd).Standalone()
+	carapace.Gen(neptunedata_executeOpenCypherExplainQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_executeOpenCypherExplainQueryCmd).Standalone()
 
-	neptunedata_executeOpenCypherExplainQueryCmd.Flags().String("explain-mode", "", "The openCypher `explain` mode.")
-	neptunedata_executeOpenCypherExplainQueryCmd.Flags().String("open-cypher-query", "", "The openCypher query string.")
-	neptunedata_executeOpenCypherExplainQueryCmd.Flags().String("parameters", "", "The openCypher query parameters.")
-	neptunedata_executeOpenCypherExplainQueryCmd.MarkFlagRequired("explain-mode")
-	neptunedata_executeOpenCypherExplainQueryCmd.MarkFlagRequired("open-cypher-query")
+		neptunedata_executeOpenCypherExplainQueryCmd.Flags().String("explain-mode", "", "The openCypher `explain` mode.")
+		neptunedata_executeOpenCypherExplainQueryCmd.Flags().String("open-cypher-query", "", "The openCypher query string.")
+		neptunedata_executeOpenCypherExplainQueryCmd.Flags().String("parameters", "", "The openCypher query parameters.")
+		neptunedata_executeOpenCypherExplainQueryCmd.MarkFlagRequired("explain-mode")
+		neptunedata_executeOpenCypherExplainQueryCmd.MarkFlagRequired("open-cypher-query")
+	})
 	neptunedataCmd.AddCommand(neptunedata_executeOpenCypherExplainQueryCmd)
 }

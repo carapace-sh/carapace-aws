@@ -12,11 +12,13 @@ var qapps_associateLibraryItemReviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_associateLibraryItemReviewCmd).Standalone()
+	carapace.Gen(qapps_associateLibraryItemReviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_associateLibraryItemReviewCmd).Standalone()
 
-	qapps_associateLibraryItemReviewCmd.Flags().String("instance-id", "", "The unique identifier for the Amazon Q Business application environment instance.")
-	qapps_associateLibraryItemReviewCmd.Flags().String("library-item-id", "", "The unique identifier of the library item to associate the review with.")
-	qapps_associateLibraryItemReviewCmd.MarkFlagRequired("instance-id")
-	qapps_associateLibraryItemReviewCmd.MarkFlagRequired("library-item-id")
+		qapps_associateLibraryItemReviewCmd.Flags().String("instance-id", "", "The unique identifier for the Amazon Q Business application environment instance.")
+		qapps_associateLibraryItemReviewCmd.Flags().String("library-item-id", "", "The unique identifier of the library item to associate the review with.")
+		qapps_associateLibraryItemReviewCmd.MarkFlagRequired("instance-id")
+		qapps_associateLibraryItemReviewCmd.MarkFlagRequired("library-item-id")
+	})
 	qappsCmd.AddCommand(qapps_associateLibraryItemReviewCmd)
 }

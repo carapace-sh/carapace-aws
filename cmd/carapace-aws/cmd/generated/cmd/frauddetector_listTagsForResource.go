@@ -12,11 +12,13 @@ var frauddetector_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_listTagsForResourceCmd).Standalone()
+	carapace.Gen(frauddetector_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_listTagsForResourceCmd).Standalone()
 
-	frauddetector_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of objects to return for the request.")
-	frauddetector_listTagsForResourceCmd.Flags().String("next-token", "", "The next token from the previous results.")
-	frauddetector_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN that specifies the resource whose tags you want to list.")
-	frauddetector_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		frauddetector_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of objects to return for the request.")
+		frauddetector_listTagsForResourceCmd.Flags().String("next-token", "", "The next token from the previous results.")
+		frauddetector_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN that specifies the resource whose tags you want to list.")
+		frauddetector_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_listTagsForResourceCmd)
 }

@@ -12,9 +12,11 @@ var pinpoint_createAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_createAppCmd).Standalone()
+	carapace.Gen(pinpoint_createAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_createAppCmd).Standalone()
 
-	pinpoint_createAppCmd.Flags().String("create-application-request", "", "")
-	pinpoint_createAppCmd.MarkFlagRequired("create-application-request")
+		pinpoint_createAppCmd.Flags().String("create-application-request", "", "")
+		pinpoint_createAppCmd.MarkFlagRequired("create-application-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_createAppCmd)
 }

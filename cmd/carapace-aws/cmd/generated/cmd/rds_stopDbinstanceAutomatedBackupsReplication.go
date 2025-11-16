@@ -12,9 +12,11 @@ var rds_stopDbinstanceAutomatedBackupsReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_stopDbinstanceAutomatedBackupsReplicationCmd).Standalone()
+	carapace.Gen(rds_stopDbinstanceAutomatedBackupsReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_stopDbinstanceAutomatedBackupsReplicationCmd).Standalone()
 
-	rds_stopDbinstanceAutomatedBackupsReplicationCmd.Flags().String("source-dbinstance-arn", "", "The Amazon Resource Name (ARN) of the source DB instance for which to stop replicating automate backups, for example, `arn:aws:rds:us-west-2:123456789012:db:mydatabase`.")
-	rds_stopDbinstanceAutomatedBackupsReplicationCmd.MarkFlagRequired("source-dbinstance-arn")
+		rds_stopDbinstanceAutomatedBackupsReplicationCmd.Flags().String("source-dbinstance-arn", "", "The Amazon Resource Name (ARN) of the source DB instance for which to stop replicating automate backups, for example, `arn:aws:rds:us-west-2:123456789012:db:mydatabase`.")
+		rds_stopDbinstanceAutomatedBackupsReplicationCmd.MarkFlagRequired("source-dbinstance-arn")
+	})
 	rdsCmd.AddCommand(rds_stopDbinstanceAutomatedBackupsReplicationCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_deleteModelPackageGroupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteModelPackageGroupPolicyCmd).Standalone()
+	carapace.Gen(sagemaker_deleteModelPackageGroupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteModelPackageGroupPolicyCmd).Standalone()
 
-	sagemaker_deleteModelPackageGroupPolicyCmd.Flags().String("model-package-group-name", "", "The name of the model group for which to delete the policy.")
-	sagemaker_deleteModelPackageGroupPolicyCmd.MarkFlagRequired("model-package-group-name")
+		sagemaker_deleteModelPackageGroupPolicyCmd.Flags().String("model-package-group-name", "", "The name of the model group for which to delete the policy.")
+		sagemaker_deleteModelPackageGroupPolicyCmd.MarkFlagRequired("model-package-group-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteModelPackageGroupPolicyCmd)
 }

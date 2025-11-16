@@ -12,10 +12,12 @@ var bedrockDataAutomation_deleteBlueprintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockDataAutomation_deleteBlueprintCmd).Standalone()
+	carapace.Gen(bedrockDataAutomation_deleteBlueprintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockDataAutomation_deleteBlueprintCmd).Standalone()
 
-	bedrockDataAutomation_deleteBlueprintCmd.Flags().String("blueprint-arn", "", "ARN generated at the server side when a Blueprint is created")
-	bedrockDataAutomation_deleteBlueprintCmd.Flags().String("blueprint-version", "", "Optional field to delete a specific Blueprint version")
-	bedrockDataAutomation_deleteBlueprintCmd.MarkFlagRequired("blueprint-arn")
+		bedrockDataAutomation_deleteBlueprintCmd.Flags().String("blueprint-arn", "", "ARN generated at the server side when a Blueprint is created")
+		bedrockDataAutomation_deleteBlueprintCmd.Flags().String("blueprint-version", "", "Optional field to delete a specific Blueprint version")
+		bedrockDataAutomation_deleteBlueprintCmd.MarkFlagRequired("blueprint-arn")
+	})
 	bedrockDataAutomationCmd.AddCommand(bedrockDataAutomation_deleteBlueprintCmd)
 }

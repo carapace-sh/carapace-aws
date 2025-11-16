@@ -12,9 +12,11 @@ var mediaconvert_deleteJobTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_deleteJobTemplateCmd).Standalone()
+	carapace.Gen(mediaconvert_deleteJobTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_deleteJobTemplateCmd).Standalone()
 
-	mediaconvert_deleteJobTemplateCmd.Flags().String("name", "", "The name of the job template to be deleted.")
-	mediaconvert_deleteJobTemplateCmd.MarkFlagRequired("name")
+		mediaconvert_deleteJobTemplateCmd.Flags().String("name", "", "The name of the job template to be deleted.")
+		mediaconvert_deleteJobTemplateCmd.MarkFlagRequired("name")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_deleteJobTemplateCmd)
 }

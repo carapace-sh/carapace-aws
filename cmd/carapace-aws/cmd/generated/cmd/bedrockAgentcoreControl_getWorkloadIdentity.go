@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_getWorkloadIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_getWorkloadIdentityCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_getWorkloadIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_getWorkloadIdentityCmd).Standalone()
 
-	bedrockAgentcoreControl_getWorkloadIdentityCmd.Flags().String("name", "", "The name of the workload identity to retrieve.")
-	bedrockAgentcoreControl_getWorkloadIdentityCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_getWorkloadIdentityCmd.Flags().String("name", "", "The name of the workload identity to retrieve.")
+		bedrockAgentcoreControl_getWorkloadIdentityCmd.MarkFlagRequired("name")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_getWorkloadIdentityCmd)
 }

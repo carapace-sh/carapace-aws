@@ -12,9 +12,11 @@ var mailmanager_stopArchiveSearchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_stopArchiveSearchCmd).Standalone()
+	carapace.Gen(mailmanager_stopArchiveSearchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_stopArchiveSearchCmd).Standalone()
 
-	mailmanager_stopArchiveSearchCmd.Flags().String("search-id", "", "The identifier of the search job to stop.")
-	mailmanager_stopArchiveSearchCmd.MarkFlagRequired("search-id")
+		mailmanager_stopArchiveSearchCmd.Flags().String("search-id", "", "The identifier of the search job to stop.")
+		mailmanager_stopArchiveSearchCmd.MarkFlagRequired("search-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_stopArchiveSearchCmd)
 }

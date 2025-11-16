@@ -12,13 +12,15 @@ var workspacesWeb_updateIpAccessSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_updateIpAccessSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_updateIpAccessSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_updateIpAccessSettingsCmd).Standalone()
 
-	workspacesWeb_updateIpAccessSettingsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	workspacesWeb_updateIpAccessSettingsCmd.Flags().String("description", "", "The description of the IP access settings.")
-	workspacesWeb_updateIpAccessSettingsCmd.Flags().String("display-name", "", "The display name of the IP access settings.")
-	workspacesWeb_updateIpAccessSettingsCmd.Flags().String("ip-access-settings-arn", "", "The ARN of the IP access settings.")
-	workspacesWeb_updateIpAccessSettingsCmd.Flags().String("ip-rules", "", "The updated IP rules of the IP access settings.")
-	workspacesWeb_updateIpAccessSettingsCmd.MarkFlagRequired("ip-access-settings-arn")
+		workspacesWeb_updateIpAccessSettingsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		workspacesWeb_updateIpAccessSettingsCmd.Flags().String("description", "", "The description of the IP access settings.")
+		workspacesWeb_updateIpAccessSettingsCmd.Flags().String("display-name", "", "The display name of the IP access settings.")
+		workspacesWeb_updateIpAccessSettingsCmd.Flags().String("ip-access-settings-arn", "", "The ARN of the IP access settings.")
+		workspacesWeb_updateIpAccessSettingsCmd.Flags().String("ip-rules", "", "The updated IP rules of the IP access settings.")
+		workspacesWeb_updateIpAccessSettingsCmd.MarkFlagRequired("ip-access-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_updateIpAccessSettingsCmd)
 }

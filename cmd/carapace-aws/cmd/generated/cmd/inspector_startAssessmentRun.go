@@ -12,10 +12,12 @@ var inspector_startAssessmentRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_startAssessmentRunCmd).Standalone()
+	carapace.Gen(inspector_startAssessmentRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_startAssessmentRunCmd).Standalone()
 
-	inspector_startAssessmentRunCmd.Flags().String("assessment-run-name", "", "You can specify the name for the assessment run.")
-	inspector_startAssessmentRunCmd.Flags().String("assessment-template-arn", "", "The ARN of the assessment template of the assessment run that you want to start.")
-	inspector_startAssessmentRunCmd.MarkFlagRequired("assessment-template-arn")
+		inspector_startAssessmentRunCmd.Flags().String("assessment-run-name", "", "You can specify the name for the assessment run.")
+		inspector_startAssessmentRunCmd.Flags().String("assessment-template-arn", "", "The ARN of the assessment template of the assessment run that you want to start.")
+		inspector_startAssessmentRunCmd.MarkFlagRequired("assessment-template-arn")
+	})
 	inspectorCmd.AddCommand(inspector_startAssessmentRunCmd)
 }

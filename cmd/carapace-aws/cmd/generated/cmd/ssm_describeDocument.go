@@ -12,11 +12,13 @@ var ssm_describeDocumentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeDocumentCmd).Standalone()
+	carapace.Gen(ssm_describeDocumentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeDocumentCmd).Standalone()
 
-	ssm_describeDocumentCmd.Flags().String("document-version", "", "The document version for which you want information.")
-	ssm_describeDocumentCmd.Flags().String("name", "", "The name of the SSM document.")
-	ssm_describeDocumentCmd.Flags().String("version-name", "", "An optional field specifying the version of the artifact associated with the document.")
-	ssm_describeDocumentCmd.MarkFlagRequired("name")
+		ssm_describeDocumentCmd.Flags().String("document-version", "", "The document version for which you want information.")
+		ssm_describeDocumentCmd.Flags().String("name", "", "The name of the SSM document.")
+		ssm_describeDocumentCmd.Flags().String("version-name", "", "An optional field specifying the version of the artifact associated with the document.")
+		ssm_describeDocumentCmd.MarkFlagRequired("name")
+	})
 	ssmCmd.AddCommand(ssm_describeDocumentCmd)
 }

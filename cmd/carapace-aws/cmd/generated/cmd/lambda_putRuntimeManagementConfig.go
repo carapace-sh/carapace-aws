@@ -12,13 +12,15 @@ var lambda_putRuntimeManagementConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_putRuntimeManagementConfigCmd).Standalone()
+	carapace.Gen(lambda_putRuntimeManagementConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_putRuntimeManagementConfigCmd).Standalone()
 
-	lambda_putRuntimeManagementConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_putRuntimeManagementConfigCmd.Flags().String("qualifier", "", "Specify a version of the function.")
-	lambda_putRuntimeManagementConfigCmd.Flags().String("runtime-version-arn", "", "The ARN of the runtime version you want the function to use.")
-	lambda_putRuntimeManagementConfigCmd.Flags().String("update-runtime-on", "", "Specify the runtime update mode.")
-	lambda_putRuntimeManagementConfigCmd.MarkFlagRequired("function-name")
-	lambda_putRuntimeManagementConfigCmd.MarkFlagRequired("update-runtime-on")
+		lambda_putRuntimeManagementConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_putRuntimeManagementConfigCmd.Flags().String("qualifier", "", "Specify a version of the function.")
+		lambda_putRuntimeManagementConfigCmd.Flags().String("runtime-version-arn", "", "The ARN of the runtime version you want the function to use.")
+		lambda_putRuntimeManagementConfigCmd.Flags().String("update-runtime-on", "", "Specify the runtime update mode.")
+		lambda_putRuntimeManagementConfigCmd.MarkFlagRequired("function-name")
+		lambda_putRuntimeManagementConfigCmd.MarkFlagRequired("update-runtime-on")
+	})
 	lambdaCmd.AddCommand(lambda_putRuntimeManagementConfigCmd)
 }

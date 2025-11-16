@@ -12,12 +12,14 @@ var cloudformation_testTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_testTypeCmd).Standalone()
+	carapace.Gen(cloudformation_testTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_testTypeCmd).Standalone()
 
-	cloudformation_testTypeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the extension.")
-	cloudformation_testTypeCmd.Flags().String("log-delivery-bucket", "", "The S3 bucket to which CloudFormation delivers the contract test execution logs.")
-	cloudformation_testTypeCmd.Flags().String("type", "", "The type of the extension to test.")
-	cloudformation_testTypeCmd.Flags().String("type-name", "", "The name of the extension to test.")
-	cloudformation_testTypeCmd.Flags().String("version-id", "", "The version of the extension to test.")
+		cloudformation_testTypeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the extension.")
+		cloudformation_testTypeCmd.Flags().String("log-delivery-bucket", "", "The S3 bucket to which CloudFormation delivers the contract test execution logs.")
+		cloudformation_testTypeCmd.Flags().String("type", "", "The type of the extension to test.")
+		cloudformation_testTypeCmd.Flags().String("type-name", "", "The name of the extension to test.")
+		cloudformation_testTypeCmd.Flags().String("version-id", "", "The version of the extension to test.")
+	})
 	cloudformationCmd.AddCommand(cloudformation_testTypeCmd)
 }

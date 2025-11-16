@@ -12,10 +12,12 @@ var drs_describeSourceNetworksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_describeSourceNetworksCmd).Standalone()
+	carapace.Gen(drs_describeSourceNetworksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_describeSourceNetworksCmd).Standalone()
 
-	drs_describeSourceNetworksCmd.Flags().String("filters", "", "A set of filters by which to return Source Networks.")
-	drs_describeSourceNetworksCmd.Flags().String("max-results", "", "Maximum number of Source Networks to retrieve.")
-	drs_describeSourceNetworksCmd.Flags().String("next-token", "", "The token of the next Source Networks to retrieve.")
+		drs_describeSourceNetworksCmd.Flags().String("filters", "", "A set of filters by which to return Source Networks.")
+		drs_describeSourceNetworksCmd.Flags().String("max-results", "", "Maximum number of Source Networks to retrieve.")
+		drs_describeSourceNetworksCmd.Flags().String("next-token", "", "The token of the next Source Networks to retrieve.")
+	})
 	drsCmd.AddCommand(drs_describeSourceNetworksCmd)
 }

@@ -12,10 +12,12 @@ var apprunner_listConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_listConnectionsCmd).Standalone()
+	carapace.Gen(apprunner_listConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_listConnectionsCmd).Standalone()
 
-	apprunner_listConnectionsCmd.Flags().String("connection-name", "", "If specified, only this connection is returned.")
-	apprunner_listConnectionsCmd.Flags().String("max-results", "", "The maximum number of results to include in each response (result page).")
-	apprunner_listConnectionsCmd.Flags().String("next-token", "", "A token from a previous result page.")
+		apprunner_listConnectionsCmd.Flags().String("connection-name", "", "If specified, only this connection is returned.")
+		apprunner_listConnectionsCmd.Flags().String("max-results", "", "The maximum number of results to include in each response (result page).")
+		apprunner_listConnectionsCmd.Flags().String("next-token", "", "A token from a previous result page.")
+	})
 	apprunnerCmd.AddCommand(apprunner_listConnectionsCmd)
 }

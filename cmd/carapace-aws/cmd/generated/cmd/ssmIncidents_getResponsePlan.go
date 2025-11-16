@@ -12,9 +12,11 @@ var ssmIncidents_getResponsePlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_getResponsePlanCmd).Standalone()
+	carapace.Gen(ssmIncidents_getResponsePlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_getResponsePlanCmd).Standalone()
 
-	ssmIncidents_getResponsePlanCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the response plan.")
-	ssmIncidents_getResponsePlanCmd.MarkFlagRequired("arn")
+		ssmIncidents_getResponsePlanCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the response plan.")
+		ssmIncidents_getResponsePlanCmd.MarkFlagRequired("arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_getResponsePlanCmd)
 }

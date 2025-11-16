@@ -12,7 +12,9 @@ var licenseManager_getServiceSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_getServiceSettingsCmd).Standalone()
+	carapace.Gen(licenseManager_getServiceSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_getServiceSettingsCmd).Standalone()
 
+	})
 	licenseManagerCmd.AddCommand(licenseManager_getServiceSettingsCmd)
 }

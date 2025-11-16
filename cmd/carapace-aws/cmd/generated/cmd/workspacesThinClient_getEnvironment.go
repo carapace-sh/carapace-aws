@@ -12,9 +12,11 @@ var workspacesThinClient_getEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClient_getEnvironmentCmd).Standalone()
+	carapace.Gen(workspacesThinClient_getEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClient_getEnvironmentCmd).Standalone()
 
-	workspacesThinClient_getEnvironmentCmd.Flags().String("id", "", "The ID of the environment for which to return information.")
-	workspacesThinClient_getEnvironmentCmd.MarkFlagRequired("id")
+		workspacesThinClient_getEnvironmentCmd.Flags().String("id", "", "The ID of the environment for which to return information.")
+		workspacesThinClient_getEnvironmentCmd.MarkFlagRequired("id")
+	})
 	workspacesThinClientCmd.AddCommand(workspacesThinClient_getEnvironmentCmd)
 }

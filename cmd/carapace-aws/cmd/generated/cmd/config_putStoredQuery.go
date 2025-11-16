@@ -12,10 +12,12 @@ var config_putStoredQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_putStoredQueryCmd).Standalone()
+	carapace.Gen(config_putStoredQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_putStoredQueryCmd).Standalone()
 
-	config_putStoredQueryCmd.Flags().String("stored-query", "", "A list of `StoredQuery` objects.")
-	config_putStoredQueryCmd.Flags().String("tags", "", "A list of `Tags` object.")
-	config_putStoredQueryCmd.MarkFlagRequired("stored-query")
+		config_putStoredQueryCmd.Flags().String("stored-query", "", "A list of `StoredQuery` objects.")
+		config_putStoredQueryCmd.Flags().String("tags", "", "A list of `Tags` object.")
+		config_putStoredQueryCmd.MarkFlagRequired("stored-query")
+	})
 	configCmd.AddCommand(config_putStoredQueryCmd)
 }

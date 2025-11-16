@@ -12,7 +12,9 @@ var route53_getTrafficPolicyInstanceCountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getTrafficPolicyInstanceCountCmd).Standalone()
+	carapace.Gen(route53_getTrafficPolicyInstanceCountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getTrafficPolicyInstanceCountCmd).Standalone()
 
+	})
 	route53Cmd.AddCommand(route53_getTrafficPolicyInstanceCountCmd)
 }

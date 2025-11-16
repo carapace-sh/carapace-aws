@@ -12,9 +12,11 @@ var sts_getAccessKeyInfoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sts_getAccessKeyInfoCmd).Standalone()
+	carapace.Gen(sts_getAccessKeyInfoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sts_getAccessKeyInfoCmd).Standalone()
 
-	sts_getAccessKeyInfoCmd.Flags().String("access-key-id", "", "The identifier of an access key.")
-	sts_getAccessKeyInfoCmd.MarkFlagRequired("access-key-id")
+		sts_getAccessKeyInfoCmd.Flags().String("access-key-id", "", "The identifier of an access key.")
+		sts_getAccessKeyInfoCmd.MarkFlagRequired("access-key-id")
+	})
 	stsCmd.AddCommand(sts_getAccessKeyInfoCmd)
 }

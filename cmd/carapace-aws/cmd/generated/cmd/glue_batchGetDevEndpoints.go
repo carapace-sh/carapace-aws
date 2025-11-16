@@ -12,9 +12,11 @@ var glue_batchGetDevEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_batchGetDevEndpointsCmd).Standalone()
+	carapace.Gen(glue_batchGetDevEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_batchGetDevEndpointsCmd).Standalone()
 
-	glue_batchGetDevEndpointsCmd.Flags().String("dev-endpoint-names", "", "The list of `DevEndpoint` names, which might be the names returned from the `ListDevEndpoint` operation.")
-	glue_batchGetDevEndpointsCmd.MarkFlagRequired("dev-endpoint-names")
+		glue_batchGetDevEndpointsCmd.Flags().String("dev-endpoint-names", "", "The list of `DevEndpoint` names, which might be the names returned from the `ListDevEndpoint` operation.")
+		glue_batchGetDevEndpointsCmd.MarkFlagRequired("dev-endpoint-names")
+	})
 	glueCmd.AddCommand(glue_batchGetDevEndpointsCmd)
 }

@@ -12,9 +12,11 @@ var datasync_describeLocationS3Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeLocationS3Cmd).Standalone()
+	carapace.Gen(datasync_describeLocationS3Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeLocationS3Cmd).Standalone()
 
-	datasync_describeLocationS3Cmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the Amazon S3 location.")
-	datasync_describeLocationS3Cmd.MarkFlagRequired("location-arn")
+		datasync_describeLocationS3Cmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the Amazon S3 location.")
+		datasync_describeLocationS3Cmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeLocationS3Cmd)
 }

@@ -12,9 +12,11 @@ var greengrassv2_getConnectivityInfoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrassv2_getConnectivityInfoCmd).Standalone()
+	carapace.Gen(greengrassv2_getConnectivityInfoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrassv2_getConnectivityInfoCmd).Standalone()
 
-	greengrassv2_getConnectivityInfoCmd.Flags().String("thing-name", "", "The name of the core device.")
-	greengrassv2_getConnectivityInfoCmd.MarkFlagRequired("thing-name")
+		greengrassv2_getConnectivityInfoCmd.Flags().String("thing-name", "", "The name of the core device.")
+		greengrassv2_getConnectivityInfoCmd.MarkFlagRequired("thing-name")
+	})
 	greengrassv2Cmd.AddCommand(greengrassv2_getConnectivityInfoCmd)
 }

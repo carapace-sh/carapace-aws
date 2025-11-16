@@ -12,7 +12,9 @@ var iotfleetwise_getRegisterAccountStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_getRegisterAccountStatusCmd).Standalone()
+	carapace.Gen(iotfleetwise_getRegisterAccountStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_getRegisterAccountStatusCmd).Standalone()
 
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_getRegisterAccountStatusCmd)
 }

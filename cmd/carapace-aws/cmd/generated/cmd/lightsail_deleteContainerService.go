@@ -12,9 +12,11 @@ var lightsail_deleteContainerServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteContainerServiceCmd).Standalone()
+	carapace.Gen(lightsail_deleteContainerServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteContainerServiceCmd).Standalone()
 
-	lightsail_deleteContainerServiceCmd.Flags().String("service-name", "", "The name of the container service to delete.")
-	lightsail_deleteContainerServiceCmd.MarkFlagRequired("service-name")
+		lightsail_deleteContainerServiceCmd.Flags().String("service-name", "", "The name of the container service to delete.")
+		lightsail_deleteContainerServiceCmd.MarkFlagRequired("service-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteContainerServiceCmd)
 }

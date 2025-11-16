@@ -12,13 +12,15 @@ var redshiftServerless_createCustomDomainAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_createCustomDomainAssociationCmd).Standalone()
+	carapace.Gen(redshiftServerless_createCustomDomainAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_createCustomDomainAssociationCmd).Standalone()
 
-	redshiftServerless_createCustomDomainAssociationCmd.Flags().String("custom-domain-certificate-arn", "", "The custom domain name’s certificate Amazon resource name (ARN).")
-	redshiftServerless_createCustomDomainAssociationCmd.Flags().String("custom-domain-name", "", "The custom domain name to associate with the workgroup.")
-	redshiftServerless_createCustomDomainAssociationCmd.Flags().String("workgroup-name", "", "The name of the workgroup associated with the database.")
-	redshiftServerless_createCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-certificate-arn")
-	redshiftServerless_createCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-name")
-	redshiftServerless_createCustomDomainAssociationCmd.MarkFlagRequired("workgroup-name")
+		redshiftServerless_createCustomDomainAssociationCmd.Flags().String("custom-domain-certificate-arn", "", "The custom domain name’s certificate Amazon resource name (ARN).")
+		redshiftServerless_createCustomDomainAssociationCmd.Flags().String("custom-domain-name", "", "The custom domain name to associate with the workgroup.")
+		redshiftServerless_createCustomDomainAssociationCmd.Flags().String("workgroup-name", "", "The name of the workgroup associated with the database.")
+		redshiftServerless_createCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-certificate-arn")
+		redshiftServerless_createCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-name")
+		redshiftServerless_createCustomDomainAssociationCmd.MarkFlagRequired("workgroup-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_createCustomDomainAssociationCmd)
 }

@@ -12,11 +12,13 @@ var dms_modifyConversionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_modifyConversionConfigurationCmd).Standalone()
+	carapace.Gen(dms_modifyConversionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_modifyConversionConfigurationCmd).Standalone()
 
-	dms_modifyConversionConfigurationCmd.Flags().String("conversion-configuration", "", "The new conversion configuration.")
-	dms_modifyConversionConfigurationCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
-	dms_modifyConversionConfigurationCmd.MarkFlagRequired("conversion-configuration")
-	dms_modifyConversionConfigurationCmd.MarkFlagRequired("migration-project-identifier")
+		dms_modifyConversionConfigurationCmd.Flags().String("conversion-configuration", "", "The new conversion configuration.")
+		dms_modifyConversionConfigurationCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
+		dms_modifyConversionConfigurationCmd.MarkFlagRequired("conversion-configuration")
+		dms_modifyConversionConfigurationCmd.MarkFlagRequired("migration-project-identifier")
+	})
 	dmsCmd.AddCommand(dms_modifyConversionConfigurationCmd)
 }

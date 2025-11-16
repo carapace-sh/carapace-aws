@@ -12,11 +12,13 @@ var mgn_startCutoverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_startCutoverCmd).Standalone()
+	carapace.Gen(mgn_startCutoverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_startCutoverCmd).Standalone()
 
-	mgn_startCutoverCmd.Flags().String("account-id", "", "Start Cutover by Account IDs")
-	mgn_startCutoverCmd.Flags().String("source-server-ids", "", "Start Cutover by Source Server IDs.")
-	mgn_startCutoverCmd.Flags().String("tags", "", "Start Cutover by Tags.")
-	mgn_startCutoverCmd.MarkFlagRequired("source-server-ids")
+		mgn_startCutoverCmd.Flags().String("account-id", "", "Start Cutover by Account IDs")
+		mgn_startCutoverCmd.Flags().String("source-server-ids", "", "Start Cutover by Source Server IDs.")
+		mgn_startCutoverCmd.Flags().String("tags", "", "Start Cutover by Tags.")
+		mgn_startCutoverCmd.MarkFlagRequired("source-server-ids")
+	})
 	mgnCmd.AddCommand(mgn_startCutoverCmd)
 }

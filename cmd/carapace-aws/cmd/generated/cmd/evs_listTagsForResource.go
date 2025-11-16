@@ -12,9 +12,11 @@ var evs_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evs_listTagsForResourceCmd).Standalone()
+	carapace.Gen(evs_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evs_listTagsForResourceCmd).Standalone()
 
-	evs_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to list tags for.")
-	evs_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		evs_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to list tags for.")
+		evs_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	evsCmd.AddCommand(evs_listTagsForResourceCmd)
 }

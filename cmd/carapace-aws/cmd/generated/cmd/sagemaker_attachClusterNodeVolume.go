@@ -12,13 +12,15 @@ var sagemaker_attachClusterNodeVolumeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_attachClusterNodeVolumeCmd).Standalone()
+	carapace.Gen(sagemaker_attachClusterNodeVolumeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_attachClusterNodeVolumeCmd).Standalone()
 
-	sagemaker_attachClusterNodeVolumeCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster containing the target node.")
-	sagemaker_attachClusterNodeVolumeCmd.Flags().String("node-id", "", "The unique identifier of the cluster node to which you want to attach the volume.")
-	sagemaker_attachClusterNodeVolumeCmd.Flags().String("volume-id", "", "The unique identifier of your EBS volume to attach.")
-	sagemaker_attachClusterNodeVolumeCmd.MarkFlagRequired("cluster-arn")
-	sagemaker_attachClusterNodeVolumeCmd.MarkFlagRequired("node-id")
-	sagemaker_attachClusterNodeVolumeCmd.MarkFlagRequired("volume-id")
+		sagemaker_attachClusterNodeVolumeCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster containing the target node.")
+		sagemaker_attachClusterNodeVolumeCmd.Flags().String("node-id", "", "The unique identifier of the cluster node to which you want to attach the volume.")
+		sagemaker_attachClusterNodeVolumeCmd.Flags().String("volume-id", "", "The unique identifier of your EBS volume to attach.")
+		sagemaker_attachClusterNodeVolumeCmd.MarkFlagRequired("cluster-arn")
+		sagemaker_attachClusterNodeVolumeCmd.MarkFlagRequired("node-id")
+		sagemaker_attachClusterNodeVolumeCmd.MarkFlagRequired("volume-id")
+	})
 	sagemakerCmd.AddCommand(sagemaker_attachClusterNodeVolumeCmd)
 }

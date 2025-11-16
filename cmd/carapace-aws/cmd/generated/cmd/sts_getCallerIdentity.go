@@ -12,7 +12,9 @@ var sts_getCallerIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sts_getCallerIdentityCmd).Standalone()
+	carapace.Gen(sts_getCallerIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sts_getCallerIdentityCmd).Standalone()
 
+	})
 	stsCmd.AddCommand(sts_getCallerIdentityCmd)
 }

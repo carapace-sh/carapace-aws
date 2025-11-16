@@ -12,11 +12,13 @@ var qapps_describeQappPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_describeQappPermissionsCmd).Standalone()
+	carapace.Gen(qapps_describeQappPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_describeQappPermissionsCmd).Standalone()
 
-	qapps_describeQappPermissionsCmd.Flags().String("app-id", "", "The unique identifier of the Amazon Q App for which to retrieve permissions.")
-	qapps_describeQappPermissionsCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_describeQappPermissionsCmd.MarkFlagRequired("app-id")
-	qapps_describeQappPermissionsCmd.MarkFlagRequired("instance-id")
+		qapps_describeQappPermissionsCmd.Flags().String("app-id", "", "The unique identifier of the Amazon Q App for which to retrieve permissions.")
+		qapps_describeQappPermissionsCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_describeQappPermissionsCmd.MarkFlagRequired("app-id")
+		qapps_describeQappPermissionsCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_describeQappPermissionsCmd)
 }

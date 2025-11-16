@@ -12,9 +12,11 @@ var b2bi_deletePartnershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_deletePartnershipCmd).Standalone()
+	carapace.Gen(b2bi_deletePartnershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_deletePartnershipCmd).Standalone()
 
-	b2bi_deletePartnershipCmd.Flags().String("partnership-id", "", "Specifies the unique, system-generated identifier for a partnership.")
-	b2bi_deletePartnershipCmd.MarkFlagRequired("partnership-id")
+		b2bi_deletePartnershipCmd.Flags().String("partnership-id", "", "Specifies the unique, system-generated identifier for a partnership.")
+		b2bi_deletePartnershipCmd.MarkFlagRequired("partnership-id")
+	})
 	b2biCmd.AddCommand(b2bi_deletePartnershipCmd)
 }

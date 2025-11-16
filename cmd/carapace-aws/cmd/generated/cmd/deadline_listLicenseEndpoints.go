@@ -12,9 +12,11 @@ var deadline_listLicenseEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_listLicenseEndpointsCmd).Standalone()
+	carapace.Gen(deadline_listLicenseEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_listLicenseEndpointsCmd).Standalone()
 
-	deadline_listLicenseEndpointsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	deadline_listLicenseEndpointsCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
+		deadline_listLicenseEndpointsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		deadline_listLicenseEndpointsCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
+	})
 	deadlineCmd.AddCommand(deadline_listLicenseEndpointsCmd)
 }

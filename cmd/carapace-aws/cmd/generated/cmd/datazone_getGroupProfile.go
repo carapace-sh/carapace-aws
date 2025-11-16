@@ -12,11 +12,13 @@ var datazone_getGroupProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getGroupProfileCmd).Standalone()
+	carapace.Gen(datazone_getGroupProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getGroupProfileCmd).Standalone()
 
-	datazone_getGroupProfileCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain in which the group profile exists.")
-	datazone_getGroupProfileCmd.Flags().String("group-identifier", "", "The identifier of the group profile.")
-	datazone_getGroupProfileCmd.MarkFlagRequired("domain-identifier")
-	datazone_getGroupProfileCmd.MarkFlagRequired("group-identifier")
+		datazone_getGroupProfileCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain in which the group profile exists.")
+		datazone_getGroupProfileCmd.Flags().String("group-identifier", "", "The identifier of the group profile.")
+		datazone_getGroupProfileCmd.MarkFlagRequired("domain-identifier")
+		datazone_getGroupProfileCmd.MarkFlagRequired("group-identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getGroupProfileCmd)
 }

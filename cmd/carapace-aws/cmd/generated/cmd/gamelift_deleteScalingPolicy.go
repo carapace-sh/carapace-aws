@@ -12,11 +12,13 @@ var gamelift_deleteScalingPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteScalingPolicyCmd).Standalone()
+	carapace.Gen(gamelift_deleteScalingPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteScalingPolicyCmd).Standalone()
 
-	gamelift_deleteScalingPolicyCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to be deleted.")
-	gamelift_deleteScalingPolicyCmd.Flags().String("name", "", "A descriptive label that is associated with a fleet's scaling policy.")
-	gamelift_deleteScalingPolicyCmd.MarkFlagRequired("fleet-id")
-	gamelift_deleteScalingPolicyCmd.MarkFlagRequired("name")
+		gamelift_deleteScalingPolicyCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to be deleted.")
+		gamelift_deleteScalingPolicyCmd.Flags().String("name", "", "A descriptive label that is associated with a fleet's scaling policy.")
+		gamelift_deleteScalingPolicyCmd.MarkFlagRequired("fleet-id")
+		gamelift_deleteScalingPolicyCmd.MarkFlagRequired("name")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteScalingPolicyCmd)
 }

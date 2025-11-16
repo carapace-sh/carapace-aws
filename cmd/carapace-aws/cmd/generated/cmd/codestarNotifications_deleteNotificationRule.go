@@ -12,9 +12,11 @@ var codestarNotifications_deleteNotificationRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarNotifications_deleteNotificationRuleCmd).Standalone()
+	carapace.Gen(codestarNotifications_deleteNotificationRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarNotifications_deleteNotificationRuleCmd).Standalone()
 
-	codestarNotifications_deleteNotificationRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the notification rule you want to delete.")
-	codestarNotifications_deleteNotificationRuleCmd.MarkFlagRequired("arn")
+		codestarNotifications_deleteNotificationRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the notification rule you want to delete.")
+		codestarNotifications_deleteNotificationRuleCmd.MarkFlagRequired("arn")
+	})
 	codestarNotificationsCmd.AddCommand(codestarNotifications_deleteNotificationRuleCmd)
 }

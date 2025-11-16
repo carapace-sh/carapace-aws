@@ -12,15 +12,17 @@ var opensearch_createOutboundConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_createOutboundConnectionCmd).Standalone()
+	carapace.Gen(opensearch_createOutboundConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_createOutboundConnectionCmd).Standalone()
 
-	opensearch_createOutboundConnectionCmd.Flags().String("connection-alias", "", "Name of the connection.")
-	opensearch_createOutboundConnectionCmd.Flags().String("connection-mode", "", "The connection mode.")
-	opensearch_createOutboundConnectionCmd.Flags().String("connection-properties", "", "The `ConnectionProperties` for the outbound connection.")
-	opensearch_createOutboundConnectionCmd.Flags().String("local-domain-info", "", "Name and Region of the source (local) domain.")
-	opensearch_createOutboundConnectionCmd.Flags().String("remote-domain-info", "", "Name and Region of the destination (remote) domain.")
-	opensearch_createOutboundConnectionCmd.MarkFlagRequired("connection-alias")
-	opensearch_createOutboundConnectionCmd.MarkFlagRequired("local-domain-info")
-	opensearch_createOutboundConnectionCmd.MarkFlagRequired("remote-domain-info")
+		opensearch_createOutboundConnectionCmd.Flags().String("connection-alias", "", "Name of the connection.")
+		opensearch_createOutboundConnectionCmd.Flags().String("connection-mode", "", "The connection mode.")
+		opensearch_createOutboundConnectionCmd.Flags().String("connection-properties", "", "The `ConnectionProperties` for the outbound connection.")
+		opensearch_createOutboundConnectionCmd.Flags().String("local-domain-info", "", "Name and Region of the source (local) domain.")
+		opensearch_createOutboundConnectionCmd.Flags().String("remote-domain-info", "", "Name and Region of the destination (remote) domain.")
+		opensearch_createOutboundConnectionCmd.MarkFlagRequired("connection-alias")
+		opensearch_createOutboundConnectionCmd.MarkFlagRequired("local-domain-info")
+		opensearch_createOutboundConnectionCmd.MarkFlagRequired("remote-domain-info")
+	})
 	opensearchCmd.AddCommand(opensearch_createOutboundConnectionCmd)
 }

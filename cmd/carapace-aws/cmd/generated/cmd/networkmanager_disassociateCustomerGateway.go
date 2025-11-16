@@ -12,11 +12,13 @@ var networkmanager_disassociateCustomerGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_disassociateCustomerGatewayCmd).Standalone()
+	carapace.Gen(networkmanager_disassociateCustomerGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_disassociateCustomerGatewayCmd).Standalone()
 
-	networkmanager_disassociateCustomerGatewayCmd.Flags().String("customer-gateway-arn", "", "The Amazon Resource Name (ARN) of the customer gateway.")
-	networkmanager_disassociateCustomerGatewayCmd.Flags().String("global-network-id", "", "The ID of the global network.")
-	networkmanager_disassociateCustomerGatewayCmd.MarkFlagRequired("customer-gateway-arn")
-	networkmanager_disassociateCustomerGatewayCmd.MarkFlagRequired("global-network-id")
+		networkmanager_disassociateCustomerGatewayCmd.Flags().String("customer-gateway-arn", "", "The Amazon Resource Name (ARN) of the customer gateway.")
+		networkmanager_disassociateCustomerGatewayCmd.Flags().String("global-network-id", "", "The ID of the global network.")
+		networkmanager_disassociateCustomerGatewayCmd.MarkFlagRequired("customer-gateway-arn")
+		networkmanager_disassociateCustomerGatewayCmd.MarkFlagRequired("global-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_disassociateCustomerGatewayCmd)
 }

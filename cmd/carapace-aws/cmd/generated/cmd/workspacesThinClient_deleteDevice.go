@@ -12,10 +12,12 @@ var workspacesThinClient_deleteDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClient_deleteDeviceCmd).Standalone()
+	carapace.Gen(workspacesThinClient_deleteDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClient_deleteDeviceCmd).Standalone()
 
-	workspacesThinClient_deleteDeviceCmd.Flags().String("client-token", "", "Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	workspacesThinClient_deleteDeviceCmd.Flags().String("id", "", "The ID of the device to delete.")
-	workspacesThinClient_deleteDeviceCmd.MarkFlagRequired("id")
+		workspacesThinClient_deleteDeviceCmd.Flags().String("client-token", "", "Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		workspacesThinClient_deleteDeviceCmd.Flags().String("id", "", "The ID of the device to delete.")
+		workspacesThinClient_deleteDeviceCmd.MarkFlagRequired("id")
+	})
 	workspacesThinClientCmd.AddCommand(workspacesThinClient_deleteDeviceCmd)
 }

@@ -12,11 +12,13 @@ var cognitoIdp_listDevicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_listDevicesCmd).Standalone()
+	carapace.Gen(cognitoIdp_listDevicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_listDevicesCmd).Standalone()
 
-	cognitoIdp_listDevicesCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_listDevicesCmd.Flags().String("limit", "", "The maximum number of devices that you want Amazon Cognito to return in the response.")
-	cognitoIdp_listDevicesCmd.Flags().String("pagination-token", "", "This API operation returns a limited number of results.")
-	cognitoIdp_listDevicesCmd.MarkFlagRequired("access-token")
+		cognitoIdp_listDevicesCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_listDevicesCmd.Flags().String("limit", "", "The maximum number of devices that you want Amazon Cognito to return in the response.")
+		cognitoIdp_listDevicesCmd.Flags().String("pagination-token", "", "This API operation returns a limited number of results.")
+		cognitoIdp_listDevicesCmd.MarkFlagRequired("access-token")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_listDevicesCmd)
 }

@@ -12,15 +12,17 @@ var amplifybackend_createBackendAuthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_createBackendAuthCmd).Standalone()
+	carapace.Gen(amplifybackend_createBackendAuthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_createBackendAuthCmd).Standalone()
 
-	amplifybackend_createBackendAuthCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_createBackendAuthCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
-	amplifybackend_createBackendAuthCmd.Flags().String("resource-config", "", "The resource configuration for this request object.")
-	amplifybackend_createBackendAuthCmd.Flags().String("resource-name", "", "The name of this resource.")
-	amplifybackend_createBackendAuthCmd.MarkFlagRequired("app-id")
-	amplifybackend_createBackendAuthCmd.MarkFlagRequired("backend-environment-name")
-	amplifybackend_createBackendAuthCmd.MarkFlagRequired("resource-config")
-	amplifybackend_createBackendAuthCmd.MarkFlagRequired("resource-name")
+		amplifybackend_createBackendAuthCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_createBackendAuthCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
+		amplifybackend_createBackendAuthCmd.Flags().String("resource-config", "", "The resource configuration for this request object.")
+		amplifybackend_createBackendAuthCmd.Flags().String("resource-name", "", "The name of this resource.")
+		amplifybackend_createBackendAuthCmd.MarkFlagRequired("app-id")
+		amplifybackend_createBackendAuthCmd.MarkFlagRequired("backend-environment-name")
+		amplifybackend_createBackendAuthCmd.MarkFlagRequired("resource-config")
+		amplifybackend_createBackendAuthCmd.MarkFlagRequired("resource-name")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_createBackendAuthCmd)
 }

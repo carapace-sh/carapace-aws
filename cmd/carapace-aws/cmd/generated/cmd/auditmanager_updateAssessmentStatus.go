@@ -12,11 +12,13 @@ var auditmanager_updateAssessmentStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_updateAssessmentStatusCmd).Standalone()
+	carapace.Gen(auditmanager_updateAssessmentStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_updateAssessmentStatusCmd).Standalone()
 
-	auditmanager_updateAssessmentStatusCmd.Flags().String("assessment-id", "", "The unique identifier for the assessment.")
-	auditmanager_updateAssessmentStatusCmd.Flags().String("status", "", "The current status of the assessment.")
-	auditmanager_updateAssessmentStatusCmd.MarkFlagRequired("assessment-id")
-	auditmanager_updateAssessmentStatusCmd.MarkFlagRequired("status")
+		auditmanager_updateAssessmentStatusCmd.Flags().String("assessment-id", "", "The unique identifier for the assessment.")
+		auditmanager_updateAssessmentStatusCmd.Flags().String("status", "", "The current status of the assessment.")
+		auditmanager_updateAssessmentStatusCmd.MarkFlagRequired("assessment-id")
+		auditmanager_updateAssessmentStatusCmd.MarkFlagRequired("status")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_updateAssessmentStatusCmd)
 }

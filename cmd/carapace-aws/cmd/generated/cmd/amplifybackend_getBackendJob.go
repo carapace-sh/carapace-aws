@@ -12,13 +12,15 @@ var amplifybackend_getBackendJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_getBackendJobCmd).Standalone()
+	carapace.Gen(amplifybackend_getBackendJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_getBackendJobCmd).Standalone()
 
-	amplifybackend_getBackendJobCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_getBackendJobCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
-	amplifybackend_getBackendJobCmd.Flags().String("job-id", "", "The ID for the job.")
-	amplifybackend_getBackendJobCmd.MarkFlagRequired("app-id")
-	amplifybackend_getBackendJobCmd.MarkFlagRequired("backend-environment-name")
-	amplifybackend_getBackendJobCmd.MarkFlagRequired("job-id")
+		amplifybackend_getBackendJobCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_getBackendJobCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
+		amplifybackend_getBackendJobCmd.Flags().String("job-id", "", "The ID for the job.")
+		amplifybackend_getBackendJobCmd.MarkFlagRequired("app-id")
+		amplifybackend_getBackendJobCmd.MarkFlagRequired("backend-environment-name")
+		amplifybackend_getBackendJobCmd.MarkFlagRequired("job-id")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_getBackendJobCmd)
 }

@@ -12,12 +12,14 @@ var glue_createCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_createCatalogCmd).Standalone()
+	carapace.Gen(glue_createCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_createCatalogCmd).Standalone()
 
-	glue_createCatalogCmd.Flags().String("catalog-input", "", "A `CatalogInput` object that defines the metadata for the catalog.")
-	glue_createCatalogCmd.Flags().String("name", "", "The name of the catalog to create.")
-	glue_createCatalogCmd.Flags().String("tags", "", "A map array of key-value pairs, not more than 50 pairs.")
-	glue_createCatalogCmd.MarkFlagRequired("catalog-input")
-	glue_createCatalogCmd.MarkFlagRequired("name")
+		glue_createCatalogCmd.Flags().String("catalog-input", "", "A `CatalogInput` object that defines the metadata for the catalog.")
+		glue_createCatalogCmd.Flags().String("name", "", "The name of the catalog to create.")
+		glue_createCatalogCmd.Flags().String("tags", "", "A map array of key-value pairs, not more than 50 pairs.")
+		glue_createCatalogCmd.MarkFlagRequired("catalog-input")
+		glue_createCatalogCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_createCatalogCmd)
 }

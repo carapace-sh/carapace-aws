@@ -12,7 +12,9 @@ var clouddirectoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectoryCmd).Standalone()
+	carapace.Gen(clouddirectoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectoryCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(clouddirectoryCmd)
 }

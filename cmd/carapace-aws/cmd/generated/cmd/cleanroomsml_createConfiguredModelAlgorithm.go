@@ -12,16 +12,18 @@ var cleanroomsml_createConfiguredModelAlgorithmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_createConfiguredModelAlgorithmCmd).Standalone()
+	carapace.Gen(cleanroomsml_createConfiguredModelAlgorithmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_createConfiguredModelAlgorithmCmd).Standalone()
 
-	cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("description", "", "The description of the configured model algorithm.")
-	cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("inference-container-config", "", "Configuration information for the inference container that is used when you run an inference job on a configured model algorithm.")
-	cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("kms-key-arn", "", "The Amazon Resource Name (ARN) of the KMS key.")
-	cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("name", "", "The name of the configured model algorithm.")
-	cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the role that is used to access the repository.")
-	cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("tags", "", "The optional metadata that you apply to the resource to help you categorize and organize them.")
-	cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("training-container-config", "", "Configuration information for the training container, including entrypoints and arguments.")
-	cleanroomsml_createConfiguredModelAlgorithmCmd.MarkFlagRequired("name")
-	cleanroomsml_createConfiguredModelAlgorithmCmd.MarkFlagRequired("role-arn")
+		cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("description", "", "The description of the configured model algorithm.")
+		cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("inference-container-config", "", "Configuration information for the inference container that is used when you run an inference job on a configured model algorithm.")
+		cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("kms-key-arn", "", "The Amazon Resource Name (ARN) of the KMS key.")
+		cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("name", "", "The name of the configured model algorithm.")
+		cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the role that is used to access the repository.")
+		cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("tags", "", "The optional metadata that you apply to the resource to help you categorize and organize them.")
+		cleanroomsml_createConfiguredModelAlgorithmCmd.Flags().String("training-container-config", "", "Configuration information for the training container, including entrypoints and arguments.")
+		cleanroomsml_createConfiguredModelAlgorithmCmd.MarkFlagRequired("name")
+		cleanroomsml_createConfiguredModelAlgorithmCmd.MarkFlagRequired("role-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_createConfiguredModelAlgorithmCmd)
 }

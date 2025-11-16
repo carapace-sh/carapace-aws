@@ -12,11 +12,13 @@ var supplychain_deleteDataIntegrationFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_deleteDataIntegrationFlowCmd).Standalone()
+	carapace.Gen(supplychain_deleteDataIntegrationFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_deleteDataIntegrationFlowCmd).Standalone()
 
-	supplychain_deleteDataIntegrationFlowCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
-	supplychain_deleteDataIntegrationFlowCmd.Flags().String("name", "", "The name of the DataIntegrationFlow to be deleted.")
-	supplychain_deleteDataIntegrationFlowCmd.MarkFlagRequired("instance-id")
-	supplychain_deleteDataIntegrationFlowCmd.MarkFlagRequired("name")
+		supplychain_deleteDataIntegrationFlowCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
+		supplychain_deleteDataIntegrationFlowCmd.Flags().String("name", "", "The name of the DataIntegrationFlow to be deleted.")
+		supplychain_deleteDataIntegrationFlowCmd.MarkFlagRequired("instance-id")
+		supplychain_deleteDataIntegrationFlowCmd.MarkFlagRequired("name")
+	})
 	supplychainCmd.AddCommand(supplychain_deleteDataIntegrationFlowCmd)
 }

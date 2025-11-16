@@ -12,12 +12,14 @@ var iot_listJobExecutionsForJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listJobExecutionsForJobCmd).Standalone()
+	carapace.Gen(iot_listJobExecutionsForJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listJobExecutionsForJobCmd).Standalone()
 
-	iot_listJobExecutionsForJobCmd.Flags().String("job-id", "", "The unique identifier you assigned to this job when it was created.")
-	iot_listJobExecutionsForJobCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	iot_listJobExecutionsForJobCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
-	iot_listJobExecutionsForJobCmd.Flags().String("status", "", "The status of the job.")
-	iot_listJobExecutionsForJobCmd.MarkFlagRequired("job-id")
+		iot_listJobExecutionsForJobCmd.Flags().String("job-id", "", "The unique identifier you assigned to this job when it was created.")
+		iot_listJobExecutionsForJobCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		iot_listJobExecutionsForJobCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+		iot_listJobExecutionsForJobCmd.Flags().String("status", "", "The status of the job.")
+		iot_listJobExecutionsForJobCmd.MarkFlagRequired("job-id")
+	})
 	iotCmd.AddCommand(iot_listJobExecutionsForJobCmd)
 }

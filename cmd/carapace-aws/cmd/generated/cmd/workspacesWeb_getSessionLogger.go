@@ -12,9 +12,11 @@ var workspacesWeb_getSessionLoggerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getSessionLoggerCmd).Standalone()
+	carapace.Gen(workspacesWeb_getSessionLoggerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getSessionLoggerCmd).Standalone()
 
-	workspacesWeb_getSessionLoggerCmd.Flags().String("session-logger-arn", "", "The ARN of the session logger.")
-	workspacesWeb_getSessionLoggerCmd.MarkFlagRequired("session-logger-arn")
+		workspacesWeb_getSessionLoggerCmd.Flags().String("session-logger-arn", "", "The ARN of the session logger.")
+		workspacesWeb_getSessionLoggerCmd.MarkFlagRequired("session-logger-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getSessionLoggerCmd)
 }

@@ -12,9 +12,11 @@ var route53resolver_deleteOutpostResolverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_deleteOutpostResolverCmd).Standalone()
+	carapace.Gen(route53resolver_deleteOutpostResolverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_deleteOutpostResolverCmd).Standalone()
 
-	route53resolver_deleteOutpostResolverCmd.Flags().String("id", "", "A unique string that identifies the Resolver on the Outpost.")
-	route53resolver_deleteOutpostResolverCmd.MarkFlagRequired("id")
+		route53resolver_deleteOutpostResolverCmd.Flags().String("id", "", "A unique string that identifies the Resolver on the Outpost.")
+		route53resolver_deleteOutpostResolverCmd.MarkFlagRequired("id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_deleteOutpostResolverCmd)
 }

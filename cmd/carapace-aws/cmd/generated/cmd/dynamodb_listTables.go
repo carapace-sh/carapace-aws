@@ -12,9 +12,11 @@ var dynamodb_listTablesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_listTablesCmd).Standalone()
+	carapace.Gen(dynamodb_listTablesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_listTablesCmd).Standalone()
 
-	dynamodb_listTablesCmd.Flags().String("exclusive-start-table-name", "", "The first table name that this operation will evaluate.")
-	dynamodb_listTablesCmd.Flags().String("limit", "", "A maximum number of table names to return.")
+		dynamodb_listTablesCmd.Flags().String("exclusive-start-table-name", "", "The first table name that this operation will evaluate.")
+		dynamodb_listTablesCmd.Flags().String("limit", "", "A maximum number of table names to return.")
+	})
 	dynamodbCmd.AddCommand(dynamodb_listTablesCmd)
 }

@@ -12,17 +12,19 @@ var applicationcostprofiler_putReportDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationcostprofiler_putReportDefinitionCmd).Standalone()
+	carapace.Gen(applicationcostprofiler_putReportDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationcostprofiler_putReportDefinitionCmd).Standalone()
 
-	applicationcostprofiler_putReportDefinitionCmd.Flags().String("destination-s3-location", "", "Required.")
-	applicationcostprofiler_putReportDefinitionCmd.Flags().String("format", "", "Required.")
-	applicationcostprofiler_putReportDefinitionCmd.Flags().String("report-description", "", "Required.")
-	applicationcostprofiler_putReportDefinitionCmd.Flags().String("report-frequency", "", "Required.")
-	applicationcostprofiler_putReportDefinitionCmd.Flags().String("report-id", "", "Required.")
-	applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("destination-s3-location")
-	applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("format")
-	applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("report-description")
-	applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("report-frequency")
-	applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("report-id")
+		applicationcostprofiler_putReportDefinitionCmd.Flags().String("destination-s3-location", "", "Required.")
+		applicationcostprofiler_putReportDefinitionCmd.Flags().String("format", "", "Required.")
+		applicationcostprofiler_putReportDefinitionCmd.Flags().String("report-description", "", "Required.")
+		applicationcostprofiler_putReportDefinitionCmd.Flags().String("report-frequency", "", "Required.")
+		applicationcostprofiler_putReportDefinitionCmd.Flags().String("report-id", "", "Required.")
+		applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("destination-s3-location")
+		applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("format")
+		applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("report-description")
+		applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("report-frequency")
+		applicationcostprofiler_putReportDefinitionCmd.MarkFlagRequired("report-id")
+	})
 	applicationcostprofilerCmd.AddCommand(applicationcostprofiler_putReportDefinitionCmd)
 }

@@ -12,9 +12,11 @@ var memorydb_listAllowedNodeTypeUpdatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_listAllowedNodeTypeUpdatesCmd).Standalone()
+	carapace.Gen(memorydb_listAllowedNodeTypeUpdatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_listAllowedNodeTypeUpdatesCmd).Standalone()
 
-	memorydb_listAllowedNodeTypeUpdatesCmd.Flags().String("cluster-name", "", "The name of the cluster you want to scale.")
-	memorydb_listAllowedNodeTypeUpdatesCmd.MarkFlagRequired("cluster-name")
+		memorydb_listAllowedNodeTypeUpdatesCmd.Flags().String("cluster-name", "", "The name of the cluster you want to scale.")
+		memorydb_listAllowedNodeTypeUpdatesCmd.MarkFlagRequired("cluster-name")
+	})
 	memorydbCmd.AddCommand(memorydb_listAllowedNodeTypeUpdatesCmd)
 }

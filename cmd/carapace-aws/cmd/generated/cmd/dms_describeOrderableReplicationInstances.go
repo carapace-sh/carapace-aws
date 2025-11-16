@@ -12,9 +12,11 @@ var dms_describeOrderableReplicationInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeOrderableReplicationInstancesCmd).Standalone()
+	carapace.Gen(dms_describeOrderableReplicationInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeOrderableReplicationInstancesCmd).Standalone()
 
-	dms_describeOrderableReplicationInstancesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	dms_describeOrderableReplicationInstancesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		dms_describeOrderableReplicationInstancesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		dms_describeOrderableReplicationInstancesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	dmsCmd.AddCommand(dms_describeOrderableReplicationInstancesCmd)
 }

@@ -12,9 +12,11 @@ var qconnect_listKnowledgeBasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_listKnowledgeBasesCmd).Standalone()
+	carapace.Gen(qconnect_listKnowledgeBasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_listKnowledgeBasesCmd).Standalone()
 
-	qconnect_listKnowledgeBasesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_listKnowledgeBasesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_listKnowledgeBasesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_listKnowledgeBasesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	qconnectCmd.AddCommand(qconnect_listKnowledgeBasesCmd)
 }

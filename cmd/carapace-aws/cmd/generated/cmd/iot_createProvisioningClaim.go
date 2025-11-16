@@ -12,9 +12,11 @@ var iot_createProvisioningClaimCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createProvisioningClaimCmd).Standalone()
+	carapace.Gen(iot_createProvisioningClaimCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createProvisioningClaimCmd).Standalone()
 
-	iot_createProvisioningClaimCmd.Flags().String("template-name", "", "The name of the provisioning template to use.")
-	iot_createProvisioningClaimCmd.MarkFlagRequired("template-name")
+		iot_createProvisioningClaimCmd.Flags().String("template-name", "", "The name of the provisioning template to use.")
+		iot_createProvisioningClaimCmd.MarkFlagRequired("template-name")
+	})
 	iotCmd.AddCommand(iot_createProvisioningClaimCmd)
 }

@@ -12,11 +12,13 @@ var bedrockAgentcoreControl_synchronizeGatewayTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_synchronizeGatewayTargetsCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_synchronizeGatewayTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_synchronizeGatewayTargetsCmd).Standalone()
 
-	bedrockAgentcoreControl_synchronizeGatewayTargetsCmd.Flags().String("gateway-identifier", "", "The gateway Identifier.")
-	bedrockAgentcoreControl_synchronizeGatewayTargetsCmd.Flags().String("target-id-list", "", "The target ID list.")
-	bedrockAgentcoreControl_synchronizeGatewayTargetsCmd.MarkFlagRequired("gateway-identifier")
-	bedrockAgentcoreControl_synchronizeGatewayTargetsCmd.MarkFlagRequired("target-id-list")
+		bedrockAgentcoreControl_synchronizeGatewayTargetsCmd.Flags().String("gateway-identifier", "", "The gateway Identifier.")
+		bedrockAgentcoreControl_synchronizeGatewayTargetsCmd.Flags().String("target-id-list", "", "The target ID list.")
+		bedrockAgentcoreControl_synchronizeGatewayTargetsCmd.MarkFlagRequired("gateway-identifier")
+		bedrockAgentcoreControl_synchronizeGatewayTargetsCmd.MarkFlagRequired("target-id-list")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_synchronizeGatewayTargetsCmd)
 }

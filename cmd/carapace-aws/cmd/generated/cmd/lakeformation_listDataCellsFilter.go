@@ -12,10 +12,12 @@ var lakeformation_listDataCellsFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_listDataCellsFilterCmd).Standalone()
+	carapace.Gen(lakeformation_listDataCellsFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_listDataCellsFilterCmd).Standalone()
 
-	lakeformation_listDataCellsFilterCmd.Flags().String("max-results", "", "The maximum size of the response.")
-	lakeformation_listDataCellsFilterCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
-	lakeformation_listDataCellsFilterCmd.Flags().String("table", "", "A table in the Glue Data Catalog.")
+		lakeformation_listDataCellsFilterCmd.Flags().String("max-results", "", "The maximum size of the response.")
+		lakeformation_listDataCellsFilterCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		lakeformation_listDataCellsFilterCmd.Flags().String("table", "", "A table in the Glue Data Catalog.")
+	})
 	lakeformationCmd.AddCommand(lakeformation_listDataCellsFilterCmd)
 }

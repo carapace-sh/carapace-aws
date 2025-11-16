@@ -12,11 +12,13 @@ var sesv2_getReputationEntityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getReputationEntityCmd).Standalone()
+	carapace.Gen(sesv2_getReputationEntityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getReputationEntityCmd).Standalone()
 
-	sesv2_getReputationEntityCmd.Flags().String("reputation-entity-reference", "", "The unique identifier for the reputation entity.")
-	sesv2_getReputationEntityCmd.Flags().String("reputation-entity-type", "", "The type of reputation entity.")
-	sesv2_getReputationEntityCmd.MarkFlagRequired("reputation-entity-reference")
-	sesv2_getReputationEntityCmd.MarkFlagRequired("reputation-entity-type")
+		sesv2_getReputationEntityCmd.Flags().String("reputation-entity-reference", "", "The unique identifier for the reputation entity.")
+		sesv2_getReputationEntityCmd.Flags().String("reputation-entity-type", "", "The type of reputation entity.")
+		sesv2_getReputationEntityCmd.MarkFlagRequired("reputation-entity-reference")
+		sesv2_getReputationEntityCmd.MarkFlagRequired("reputation-entity-type")
+	})
 	sesv2Cmd.AddCommand(sesv2_getReputationEntityCmd)
 }

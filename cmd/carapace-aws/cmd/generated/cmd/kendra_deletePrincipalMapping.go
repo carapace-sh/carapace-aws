@@ -12,13 +12,15 @@ var kendra_deletePrincipalMappingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_deletePrincipalMappingCmd).Standalone()
+	carapace.Gen(kendra_deletePrincipalMappingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_deletePrincipalMappingCmd).Standalone()
 
-	kendra_deletePrincipalMappingCmd.Flags().String("data-source-id", "", "The identifier of the data source you want to delete a group from.")
-	kendra_deletePrincipalMappingCmd.Flags().String("group-id", "", "The identifier of the group you want to delete.")
-	kendra_deletePrincipalMappingCmd.Flags().String("index-id", "", "The identifier of the index you want to delete a group from.")
-	kendra_deletePrincipalMappingCmd.Flags().String("ordering-id", "", "The timestamp identifier you specify to ensure Amazon Kendra does not override the latest `DELETE` action with previous actions.")
-	kendra_deletePrincipalMappingCmd.MarkFlagRequired("group-id")
-	kendra_deletePrincipalMappingCmd.MarkFlagRequired("index-id")
+		kendra_deletePrincipalMappingCmd.Flags().String("data-source-id", "", "The identifier of the data source you want to delete a group from.")
+		kendra_deletePrincipalMappingCmd.Flags().String("group-id", "", "The identifier of the group you want to delete.")
+		kendra_deletePrincipalMappingCmd.Flags().String("index-id", "", "The identifier of the index you want to delete a group from.")
+		kendra_deletePrincipalMappingCmd.Flags().String("ordering-id", "", "The timestamp identifier you specify to ensure Amazon Kendra does not override the latest `DELETE` action with previous actions.")
+		kendra_deletePrincipalMappingCmd.MarkFlagRequired("group-id")
+		kendra_deletePrincipalMappingCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_deletePrincipalMappingCmd)
 }

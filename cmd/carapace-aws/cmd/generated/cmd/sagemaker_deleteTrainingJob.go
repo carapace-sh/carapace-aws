@@ -12,9 +12,11 @@ var sagemaker_deleteTrainingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteTrainingJobCmd).Standalone()
+	carapace.Gen(sagemaker_deleteTrainingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteTrainingJobCmd).Standalone()
 
-	sagemaker_deleteTrainingJobCmd.Flags().String("training-job-name", "", "The name of the training job to delete.")
-	sagemaker_deleteTrainingJobCmd.MarkFlagRequired("training-job-name")
+		sagemaker_deleteTrainingJobCmd.Flags().String("training-job-name", "", "The name of the training job to delete.")
+		sagemaker_deleteTrainingJobCmd.MarkFlagRequired("training-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteTrainingJobCmd)
 }

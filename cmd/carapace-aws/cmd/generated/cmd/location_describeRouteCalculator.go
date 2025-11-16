@@ -12,9 +12,11 @@ var location_describeRouteCalculatorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_describeRouteCalculatorCmd).Standalone()
+	carapace.Gen(location_describeRouteCalculatorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_describeRouteCalculatorCmd).Standalone()
 
-	location_describeRouteCalculatorCmd.Flags().String("calculator-name", "", "The name of the route calculator resource.")
-	location_describeRouteCalculatorCmd.MarkFlagRequired("calculator-name")
+		location_describeRouteCalculatorCmd.Flags().String("calculator-name", "", "The name of the route calculator resource.")
+		location_describeRouteCalculatorCmd.MarkFlagRequired("calculator-name")
+	})
 	locationCmd.AddCommand(location_describeRouteCalculatorCmd)
 }

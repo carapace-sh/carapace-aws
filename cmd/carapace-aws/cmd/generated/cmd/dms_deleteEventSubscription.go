@@ -12,9 +12,11 @@ var dms_deleteEventSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteEventSubscriptionCmd).Standalone()
+	carapace.Gen(dms_deleteEventSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteEventSubscriptionCmd).Standalone()
 
-	dms_deleteEventSubscriptionCmd.Flags().String("subscription-name", "", "The name of the DMS event notification subscription to be deleted.")
-	dms_deleteEventSubscriptionCmd.MarkFlagRequired("subscription-name")
+		dms_deleteEventSubscriptionCmd.Flags().String("subscription-name", "", "The name of the DMS event notification subscription to be deleted.")
+		dms_deleteEventSubscriptionCmd.MarkFlagRequired("subscription-name")
+	})
 	dmsCmd.AddCommand(dms_deleteEventSubscriptionCmd)
 }

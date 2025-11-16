@@ -12,9 +12,11 @@ var discovery_stopDataCollectionByAgentIdsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_stopDataCollectionByAgentIdsCmd).Standalone()
+	carapace.Gen(discovery_stopDataCollectionByAgentIdsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_stopDataCollectionByAgentIdsCmd).Standalone()
 
-	discovery_stopDataCollectionByAgentIdsCmd.Flags().String("agent-ids", "", "The IDs of the agents from which to stop collecting data.")
-	discovery_stopDataCollectionByAgentIdsCmd.MarkFlagRequired("agent-ids")
+		discovery_stopDataCollectionByAgentIdsCmd.Flags().String("agent-ids", "", "The IDs of the agents from which to stop collecting data.")
+		discovery_stopDataCollectionByAgentIdsCmd.MarkFlagRequired("agent-ids")
+	})
 	discoveryCmd.AddCommand(discovery_stopDataCollectionByAgentIdsCmd)
 }

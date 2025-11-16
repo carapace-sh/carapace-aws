@@ -12,10 +12,12 @@ var iotevents_describeAlarmModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_describeAlarmModelCmd).Standalone()
+	carapace.Gen(iotevents_describeAlarmModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_describeAlarmModelCmd).Standalone()
 
-	iotevents_describeAlarmModelCmd.Flags().String("alarm-model-name", "", "The name of the alarm model.")
-	iotevents_describeAlarmModelCmd.Flags().String("alarm-model-version", "", "The version of the alarm model.")
-	iotevents_describeAlarmModelCmd.MarkFlagRequired("alarm-model-name")
+		iotevents_describeAlarmModelCmd.Flags().String("alarm-model-name", "", "The name of the alarm model.")
+		iotevents_describeAlarmModelCmd.Flags().String("alarm-model-version", "", "The version of the alarm model.")
+		iotevents_describeAlarmModelCmd.MarkFlagRequired("alarm-model-name")
+	})
 	ioteventsCmd.AddCommand(iotevents_describeAlarmModelCmd)
 }

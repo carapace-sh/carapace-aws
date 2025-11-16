@@ -12,11 +12,13 @@ var qconnect_getSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_getSessionCmd).Standalone()
+	carapace.Gen(qconnect_getSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_getSessionCmd).Standalone()
 
-	qconnect_getSessionCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_getSessionCmd.Flags().String("session-id", "", "The identifier of the session.")
-	qconnect_getSessionCmd.MarkFlagRequired("assistant-id")
-	qconnect_getSessionCmd.MarkFlagRequired("session-id")
+		qconnect_getSessionCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_getSessionCmd.Flags().String("session-id", "", "The identifier of the session.")
+		qconnect_getSessionCmd.MarkFlagRequired("assistant-id")
+		qconnect_getSessionCmd.MarkFlagRequired("session-id")
+	})
 	qconnectCmd.AddCommand(qconnect_getSessionCmd)
 }

@@ -12,7 +12,9 @@ var elasticbeanstalk_createStorageLocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_createStorageLocationCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_createStorageLocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_createStorageLocationCmd).Standalone()
 
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_createStorageLocationCmd)
 }

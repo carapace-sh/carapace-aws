@@ -12,10 +12,12 @@ var odb_listCloudVmClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_listCloudVmClustersCmd).Standalone()
+	carapace.Gen(odb_listCloudVmClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_listCloudVmClustersCmd).Standalone()
 
-	odb_listCloudVmClustersCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Oracle Exadata infrastructure.")
-	odb_listCloudVmClustersCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	odb_listCloudVmClustersCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		odb_listCloudVmClustersCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Oracle Exadata infrastructure.")
+		odb_listCloudVmClustersCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		odb_listCloudVmClustersCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+	})
 	odbCmd.AddCommand(odb_listCloudVmClustersCmd)
 }

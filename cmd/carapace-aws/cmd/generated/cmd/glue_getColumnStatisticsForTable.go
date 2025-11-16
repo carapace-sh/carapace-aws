@@ -12,14 +12,16 @@ var glue_getColumnStatisticsForTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getColumnStatisticsForTableCmd).Standalone()
+	carapace.Gen(glue_getColumnStatisticsForTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getColumnStatisticsForTableCmd).Standalone()
 
-	glue_getColumnStatisticsForTableCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the partitions in question reside.")
-	glue_getColumnStatisticsForTableCmd.Flags().String("column-names", "", "A list of the column names.")
-	glue_getColumnStatisticsForTableCmd.Flags().String("database-name", "", "The name of the catalog database where the partitions reside.")
-	glue_getColumnStatisticsForTableCmd.Flags().String("table-name", "", "The name of the partitions' table.")
-	glue_getColumnStatisticsForTableCmd.MarkFlagRequired("column-names")
-	glue_getColumnStatisticsForTableCmd.MarkFlagRequired("database-name")
-	glue_getColumnStatisticsForTableCmd.MarkFlagRequired("table-name")
+		glue_getColumnStatisticsForTableCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the partitions in question reside.")
+		glue_getColumnStatisticsForTableCmd.Flags().String("column-names", "", "A list of the column names.")
+		glue_getColumnStatisticsForTableCmd.Flags().String("database-name", "", "The name of the catalog database where the partitions reside.")
+		glue_getColumnStatisticsForTableCmd.Flags().String("table-name", "", "The name of the partitions' table.")
+		glue_getColumnStatisticsForTableCmd.MarkFlagRequired("column-names")
+		glue_getColumnStatisticsForTableCmd.MarkFlagRequired("database-name")
+		glue_getColumnStatisticsForTableCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_getColumnStatisticsForTableCmd)
 }

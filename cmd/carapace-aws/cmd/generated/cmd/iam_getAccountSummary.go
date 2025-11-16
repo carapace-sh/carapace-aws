@@ -12,7 +12,9 @@ var iam_getAccountSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getAccountSummaryCmd).Standalone()
+	carapace.Gen(iam_getAccountSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getAccountSummaryCmd).Standalone()
 
+	})
 	iamCmd.AddCommand(iam_getAccountSummaryCmd)
 }

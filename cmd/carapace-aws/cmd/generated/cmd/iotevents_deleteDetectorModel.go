@@ -12,9 +12,11 @@ var iotevents_deleteDetectorModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_deleteDetectorModelCmd).Standalone()
+	carapace.Gen(iotevents_deleteDetectorModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_deleteDetectorModelCmd).Standalone()
 
-	iotevents_deleteDetectorModelCmd.Flags().String("detector-model-name", "", "The name of the detector model to be deleted.")
-	iotevents_deleteDetectorModelCmd.MarkFlagRequired("detector-model-name")
+		iotevents_deleteDetectorModelCmd.Flags().String("detector-model-name", "", "The name of the detector model to be deleted.")
+		iotevents_deleteDetectorModelCmd.MarkFlagRequired("detector-model-name")
+	})
 	ioteventsCmd.AddCommand(iotevents_deleteDetectorModelCmd)
 }

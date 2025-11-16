@@ -12,9 +12,11 @@ var vpcLattice_getTargetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getTargetGroupCmd).Standalone()
+	carapace.Gen(vpcLattice_getTargetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getTargetGroupCmd).Standalone()
 
-	vpcLattice_getTargetGroupCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
-	vpcLattice_getTargetGroupCmd.MarkFlagRequired("target-group-identifier")
+		vpcLattice_getTargetGroupCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
+		vpcLattice_getTargetGroupCmd.MarkFlagRequired("target-group-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getTargetGroupCmd)
 }

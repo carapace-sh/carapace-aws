@@ -12,8 +12,10 @@ var glue_getDataCatalogEncryptionSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getDataCatalogEncryptionSettingsCmd).Standalone()
+	carapace.Gen(glue_getDataCatalogEncryptionSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getDataCatalogEncryptionSettingsCmd).Standalone()
 
-	glue_getDataCatalogEncryptionSettingsCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog to retrieve the security configuration for.")
+		glue_getDataCatalogEncryptionSettingsCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog to retrieve the security configuration for.")
+	})
 	glueCmd.AddCommand(glue_getDataCatalogEncryptionSettingsCmd)
 }

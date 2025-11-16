@@ -12,13 +12,15 @@ var connect_deleteUseCaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteUseCaseCmd).Standalone()
+	carapace.Gen(connect_deleteUseCaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteUseCaseCmd).Standalone()
 
-	connect_deleteUseCaseCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteUseCaseCmd.Flags().String("integration-association-id", "", "The identifier for the integration association.")
-	connect_deleteUseCaseCmd.Flags().String("use-case-id", "", "The identifier for the use case.")
-	connect_deleteUseCaseCmd.MarkFlagRequired("instance-id")
-	connect_deleteUseCaseCmd.MarkFlagRequired("integration-association-id")
-	connect_deleteUseCaseCmd.MarkFlagRequired("use-case-id")
+		connect_deleteUseCaseCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteUseCaseCmd.Flags().String("integration-association-id", "", "The identifier for the integration association.")
+		connect_deleteUseCaseCmd.Flags().String("use-case-id", "", "The identifier for the use case.")
+		connect_deleteUseCaseCmd.MarkFlagRequired("instance-id")
+		connect_deleteUseCaseCmd.MarkFlagRequired("integration-association-id")
+		connect_deleteUseCaseCmd.MarkFlagRequired("use-case-id")
+	})
 	connectCmd.AddCommand(connect_deleteUseCaseCmd)
 }

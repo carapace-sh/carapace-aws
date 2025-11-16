@@ -12,9 +12,11 @@ var workspacesWeb_getNetworkSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getNetworkSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_getNetworkSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getNetworkSettingsCmd).Standalone()
 
-	workspacesWeb_getNetworkSettingsCmd.Flags().String("network-settings-arn", "", "The ARN of the network settings.")
-	workspacesWeb_getNetworkSettingsCmd.MarkFlagRequired("network-settings-arn")
+		workspacesWeb_getNetworkSettingsCmd.Flags().String("network-settings-arn", "", "The ARN of the network settings.")
+		workspacesWeb_getNetworkSettingsCmd.MarkFlagRequired("network-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getNetworkSettingsCmd)
 }

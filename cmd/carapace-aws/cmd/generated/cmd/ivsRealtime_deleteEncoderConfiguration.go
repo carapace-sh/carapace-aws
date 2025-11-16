@@ -12,9 +12,11 @@ var ivsRealtime_deleteEncoderConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_deleteEncoderConfigurationCmd).Standalone()
+	carapace.Gen(ivsRealtime_deleteEncoderConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_deleteEncoderConfigurationCmd).Standalone()
 
-	ivsRealtime_deleteEncoderConfigurationCmd.Flags().String("arn", "", "ARN of the EncoderConfiguration.")
-	ivsRealtime_deleteEncoderConfigurationCmd.MarkFlagRequired("arn")
+		ivsRealtime_deleteEncoderConfigurationCmd.Flags().String("arn", "", "ARN of the EncoderConfiguration.")
+		ivsRealtime_deleteEncoderConfigurationCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_deleteEncoderConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var ssmContacts_describePageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_describePageCmd).Standalone()
+	carapace.Gen(ssmContacts_describePageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_describePageCmd).Standalone()
 
-	ssmContacts_describePageCmd.Flags().String("page-id", "", "The ID of the engagement to a contact channel.")
-	ssmContacts_describePageCmd.MarkFlagRequired("page-id")
+		ssmContacts_describePageCmd.Flags().String("page-id", "", "The ID of the engagement to a contact channel.")
+		ssmContacts_describePageCmd.MarkFlagRequired("page-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_describePageCmd)
 }

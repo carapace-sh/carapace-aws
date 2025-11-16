@@ -12,11 +12,13 @@ var kms_updateAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_updateAliasCmd).Standalone()
+	carapace.Gen(kms_updateAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_updateAliasCmd).Standalone()
 
-	kms_updateAliasCmd.Flags().String("alias-name", "", "Identifies the alias that is changing its KMS key.")
-	kms_updateAliasCmd.Flags().String("target-key-id", "", "Identifies the [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key) to associate with the alias.")
-	kms_updateAliasCmd.MarkFlagRequired("alias-name")
-	kms_updateAliasCmd.MarkFlagRequired("target-key-id")
+		kms_updateAliasCmd.Flags().String("alias-name", "", "Identifies the alias that is changing its KMS key.")
+		kms_updateAliasCmd.Flags().String("target-key-id", "", "Identifies the [customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-mgn-key) to associate with the alias.")
+		kms_updateAliasCmd.MarkFlagRequired("alias-name")
+		kms_updateAliasCmd.MarkFlagRequired("target-key-id")
+	})
 	kmsCmd.AddCommand(kms_updateAliasCmd)
 }

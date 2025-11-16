@@ -12,10 +12,12 @@ var workspaces_describeIpGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeIpGroupsCmd).Standalone()
+	carapace.Gen(workspaces_describeIpGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeIpGroupsCmd).Standalone()
 
-	workspaces_describeIpGroupsCmd.Flags().String("group-ids", "", "The identifiers of one or more IP access control groups.")
-	workspaces_describeIpGroupsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	workspaces_describeIpGroupsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+		workspaces_describeIpGroupsCmd.Flags().String("group-ids", "", "The identifiers of one or more IP access control groups.")
+		workspaces_describeIpGroupsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		workspaces_describeIpGroupsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+	})
 	workspacesCmd.AddCommand(workspaces_describeIpGroupsCmd)
 }

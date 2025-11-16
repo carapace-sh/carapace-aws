@@ -12,9 +12,11 @@ var migrationhuborchestrator_getTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_getTemplateCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_getTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_getTemplateCmd).Standalone()
 
-	migrationhuborchestrator_getTemplateCmd.Flags().String("id", "", "The ID of the template.")
-	migrationhuborchestrator_getTemplateCmd.MarkFlagRequired("id")
+		migrationhuborchestrator_getTemplateCmd.Flags().String("id", "", "The ID of the template.")
+		migrationhuborchestrator_getTemplateCmd.MarkFlagRequired("id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_getTemplateCmd)
 }

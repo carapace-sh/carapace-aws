@@ -12,7 +12,9 @@ var ram_enableSharingWithAwsOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ram_enableSharingWithAwsOrganizationCmd).Standalone()
+	carapace.Gen(ram_enableSharingWithAwsOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ram_enableSharingWithAwsOrganizationCmd).Standalone()
 
+	})
 	ramCmd.AddCommand(ram_enableSharingWithAwsOrganizationCmd)
 }

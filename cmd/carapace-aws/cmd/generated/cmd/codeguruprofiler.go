@@ -12,7 +12,9 @@ var codeguruprofilerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruprofilerCmd).Standalone()
+	carapace.Gen(codeguruprofilerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruprofilerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(codeguruprofilerCmd)
 }

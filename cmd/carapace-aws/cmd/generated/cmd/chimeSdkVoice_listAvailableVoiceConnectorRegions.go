@@ -12,7 +12,9 @@ var chimeSdkVoice_listAvailableVoiceConnectorRegionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_listAvailableVoiceConnectorRegionsCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_listAvailableVoiceConnectorRegionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_listAvailableVoiceConnectorRegionsCmd).Standalone()
 
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_listAvailableVoiceConnectorRegionsCmd)
 }

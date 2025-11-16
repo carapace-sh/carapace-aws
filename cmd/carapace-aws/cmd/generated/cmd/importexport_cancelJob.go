@@ -12,10 +12,12 @@ var importexport_cancelJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(importexport_cancelJobCmd).Standalone()
+	carapace.Gen(importexport_cancelJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(importexport_cancelJobCmd).Standalone()
 
-	importexport_cancelJobCmd.Flags().String("apiversion", "", "")
-	importexport_cancelJobCmd.Flags().String("job-id", "", "")
-	importexport_cancelJobCmd.MarkFlagRequired("job-id")
+		importexport_cancelJobCmd.Flags().String("apiversion", "", "")
+		importexport_cancelJobCmd.Flags().String("job-id", "", "")
+		importexport_cancelJobCmd.MarkFlagRequired("job-id")
+	})
 	importexportCmd.AddCommand(importexport_cancelJobCmd)
 }

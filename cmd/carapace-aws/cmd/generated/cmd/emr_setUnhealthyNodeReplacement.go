@@ -12,11 +12,13 @@ var emr_setUnhealthyNodeReplacementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_setUnhealthyNodeReplacementCmd).Standalone()
+	carapace.Gen(emr_setUnhealthyNodeReplacementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_setUnhealthyNodeReplacementCmd).Standalone()
 
-	emr_setUnhealthyNodeReplacementCmd.Flags().String("job-flow-ids", "", "The list of strings that uniquely identify the clusters for which to turn on unhealthy node replacement.")
-	emr_setUnhealthyNodeReplacementCmd.Flags().String("unhealthy-node-replacement", "", "Indicates whether to turn on or turn off graceful unhealthy node replacement.")
-	emr_setUnhealthyNodeReplacementCmd.MarkFlagRequired("job-flow-ids")
-	emr_setUnhealthyNodeReplacementCmd.MarkFlagRequired("unhealthy-node-replacement")
+		emr_setUnhealthyNodeReplacementCmd.Flags().String("job-flow-ids", "", "The list of strings that uniquely identify the clusters for which to turn on unhealthy node replacement.")
+		emr_setUnhealthyNodeReplacementCmd.Flags().String("unhealthy-node-replacement", "", "Indicates whether to turn on or turn off graceful unhealthy node replacement.")
+		emr_setUnhealthyNodeReplacementCmd.MarkFlagRequired("job-flow-ids")
+		emr_setUnhealthyNodeReplacementCmd.MarkFlagRequired("unhealthy-node-replacement")
+	})
 	emrCmd.AddCommand(emr_setUnhealthyNodeReplacementCmd)
 }

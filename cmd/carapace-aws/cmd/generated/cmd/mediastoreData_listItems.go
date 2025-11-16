@@ -12,10 +12,12 @@ var mediastoreData_listItemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastoreData_listItemsCmd).Standalone()
+	carapace.Gen(mediastoreData_listItemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastoreData_listItemsCmd).Standalone()
 
-	mediastoreData_listItemsCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
-	mediastoreData_listItemsCmd.Flags().String("next-token", "", "The token that identifies which batch of results that you want to see.")
-	mediastoreData_listItemsCmd.Flags().String("path", "", "The path in the container from which to retrieve items.")
+		mediastoreData_listItemsCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
+		mediastoreData_listItemsCmd.Flags().String("next-token", "", "The token that identifies which batch of results that you want to see.")
+		mediastoreData_listItemsCmd.Flags().String("path", "", "The path in the container from which to retrieve items.")
+	})
 	mediastoreDataCmd.AddCommand(mediastoreData_listItemsCmd)
 }

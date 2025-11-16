@@ -12,12 +12,14 @@ var servicecatalog_disassociateProductFromPortfolioCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_disassociateProductFromPortfolioCmd).Standalone()
+	carapace.Gen(servicecatalog_disassociateProductFromPortfolioCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_disassociateProductFromPortfolioCmd).Standalone()
 
-	servicecatalog_disassociateProductFromPortfolioCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_disassociateProductFromPortfolioCmd.Flags().String("portfolio-id", "", "The portfolio identifier.")
-	servicecatalog_disassociateProductFromPortfolioCmd.Flags().String("product-id", "", "The product identifier.")
-	servicecatalog_disassociateProductFromPortfolioCmd.MarkFlagRequired("portfolio-id")
-	servicecatalog_disassociateProductFromPortfolioCmd.MarkFlagRequired("product-id")
+		servicecatalog_disassociateProductFromPortfolioCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_disassociateProductFromPortfolioCmd.Flags().String("portfolio-id", "", "The portfolio identifier.")
+		servicecatalog_disassociateProductFromPortfolioCmd.Flags().String("product-id", "", "The product identifier.")
+		servicecatalog_disassociateProductFromPortfolioCmd.MarkFlagRequired("portfolio-id")
+		servicecatalog_disassociateProductFromPortfolioCmd.MarkFlagRequired("product-id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_disassociateProductFromPortfolioCmd)
 }

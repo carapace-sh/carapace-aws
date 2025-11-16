@@ -12,10 +12,12 @@ var s3_getObjectLockConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getObjectLockConfigurationCmd).Standalone()
+	carapace.Gen(s3_getObjectLockConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getObjectLockConfigurationCmd).Standalone()
 
-	s3_getObjectLockConfigurationCmd.Flags().String("bucket", "", "The bucket whose Object Lock configuration you want to retrieve.")
-	s3_getObjectLockConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getObjectLockConfigurationCmd.MarkFlagRequired("bucket")
+		s3_getObjectLockConfigurationCmd.Flags().String("bucket", "", "The bucket whose Object Lock configuration you want to retrieve.")
+		s3_getObjectLockConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getObjectLockConfigurationCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getObjectLockConfigurationCmd)
 }

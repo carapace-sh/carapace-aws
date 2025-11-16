@@ -12,11 +12,13 @@ var pricing_describeServicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pricing_describeServicesCmd).Standalone()
+	carapace.Gen(pricing_describeServicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pricing_describeServicesCmd).Standalone()
 
-	pricing_describeServicesCmd.Flags().String("format-version", "", "The format version that you want the response to be in.")
-	pricing_describeServicesCmd.Flags().String("max-results", "", "The maximum number of results that you want returned in the response.")
-	pricing_describeServicesCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results that you want to retrieve.")
-	pricing_describeServicesCmd.Flags().String("service-code", "", "The code for the service whose information you want to retrieve, such as `AmazonEC2`.")
+		pricing_describeServicesCmd.Flags().String("format-version", "", "The format version that you want the response to be in.")
+		pricing_describeServicesCmd.Flags().String("max-results", "", "The maximum number of results that you want returned in the response.")
+		pricing_describeServicesCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results that you want to retrieve.")
+		pricing_describeServicesCmd.Flags().String("service-code", "", "The code for the service whose information you want to retrieve, such as `AmazonEC2`.")
+	})
 	pricingCmd.AddCommand(pricing_describeServicesCmd)
 }

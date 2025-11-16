@@ -12,9 +12,11 @@ var codepipeline_getPipelineStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_getPipelineStateCmd).Standalone()
+	carapace.Gen(codepipeline_getPipelineStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_getPipelineStateCmd).Standalone()
 
-	codepipeline_getPipelineStateCmd.Flags().String("name", "", "The name of the pipeline about which you want to get information.")
-	codepipeline_getPipelineStateCmd.MarkFlagRequired("name")
+		codepipeline_getPipelineStateCmd.Flags().String("name", "", "The name of the pipeline about which you want to get information.")
+		codepipeline_getPipelineStateCmd.MarkFlagRequired("name")
+	})
 	codepipelineCmd.AddCommand(codepipeline_getPipelineStateCmd)
 }

@@ -12,7 +12,9 @@ var wellarchitected_getProfileTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_getProfileTemplateCmd).Standalone()
+	carapace.Gen(wellarchitected_getProfileTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_getProfileTemplateCmd).Standalone()
 
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_getProfileTemplateCmd)
 }

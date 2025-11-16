@@ -12,7 +12,9 @@ var macie2_disableMacieCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_disableMacieCmd).Standalone()
+	carapace.Gen(macie2_disableMacieCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_disableMacieCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_disableMacieCmd)
 }

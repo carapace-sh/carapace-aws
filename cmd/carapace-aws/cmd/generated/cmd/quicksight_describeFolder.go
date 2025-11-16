@@ -12,11 +12,13 @@ var quicksight_describeFolderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeFolderCmd).Standalone()
+	carapace.Gen(quicksight_describeFolderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeFolderCmd).Standalone()
 
-	quicksight_describeFolderCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that contains the folder.")
-	quicksight_describeFolderCmd.Flags().String("folder-id", "", "The ID of the folder.")
-	quicksight_describeFolderCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeFolderCmd.MarkFlagRequired("folder-id")
+		quicksight_describeFolderCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that contains the folder.")
+		quicksight_describeFolderCmd.Flags().String("folder-id", "", "The ID of the folder.")
+		quicksight_describeFolderCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeFolderCmd.MarkFlagRequired("folder-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeFolderCmd)
 }

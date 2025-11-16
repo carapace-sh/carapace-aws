@@ -12,11 +12,13 @@ var cleanrooms_listIdMappingTablesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_listIdMappingTablesCmd).Standalone()
+	carapace.Gen(cleanrooms_listIdMappingTablesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_listIdMappingTablesCmd).Standalone()
 
-	cleanrooms_listIdMappingTablesCmd.Flags().String("max-results", "", "The maximum size of the results that is returned per call.")
-	cleanrooms_listIdMappingTablesCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID mapping tables that you want to view.")
-	cleanrooms_listIdMappingTablesCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	cleanrooms_listIdMappingTablesCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_listIdMappingTablesCmd.Flags().String("max-results", "", "The maximum size of the results that is returned per call.")
+		cleanrooms_listIdMappingTablesCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID mapping tables that you want to view.")
+		cleanrooms_listIdMappingTablesCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		cleanrooms_listIdMappingTablesCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_listIdMappingTablesCmd)
 }

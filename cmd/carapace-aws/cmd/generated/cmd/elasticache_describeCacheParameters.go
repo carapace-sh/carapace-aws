@@ -12,12 +12,14 @@ var elasticache_describeCacheParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_describeCacheParametersCmd).Standalone()
+	carapace.Gen(elasticache_describeCacheParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_describeCacheParametersCmd).Standalone()
 
-	elasticache_describeCacheParametersCmd.Flags().String("cache-parameter-group-name", "", "The name of a specific cache parameter group to return details for.")
-	elasticache_describeCacheParametersCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
-	elasticache_describeCacheParametersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	elasticache_describeCacheParametersCmd.Flags().String("source", "", "The parameter types to return.")
-	elasticache_describeCacheParametersCmd.MarkFlagRequired("cache-parameter-group-name")
+		elasticache_describeCacheParametersCmd.Flags().String("cache-parameter-group-name", "", "The name of a specific cache parameter group to return details for.")
+		elasticache_describeCacheParametersCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
+		elasticache_describeCacheParametersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		elasticache_describeCacheParametersCmd.Flags().String("source", "", "The parameter types to return.")
+		elasticache_describeCacheParametersCmd.MarkFlagRequired("cache-parameter-group-name")
+	})
 	elasticacheCmd.AddCommand(elasticache_describeCacheParametersCmd)
 }

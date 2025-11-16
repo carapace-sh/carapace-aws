@@ -12,8 +12,10 @@ var sns_listSubscriptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_listSubscriptionsCmd).Standalone()
+	carapace.Gen(sns_listSubscriptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_listSubscriptionsCmd).Standalone()
 
-	sns_listSubscriptionsCmd.Flags().String("next-token", "", "Token returned by the previous `ListSubscriptions` request.")
+		sns_listSubscriptionsCmd.Flags().String("next-token", "", "Token returned by the previous `ListSubscriptions` request.")
+	})
 	snsCmd.AddCommand(sns_listSubscriptionsCmd)
 }

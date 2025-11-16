@@ -12,11 +12,13 @@ var appsync_getChannelNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_getChannelNamespaceCmd).Standalone()
+	carapace.Gen(appsync_getChannelNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_getChannelNamespaceCmd).Standalone()
 
-	appsync_getChannelNamespaceCmd.Flags().String("api-id", "", "The `Api` ID.")
-	appsync_getChannelNamespaceCmd.Flags().String("name", "", "The name of the `ChannelNamespace`.")
-	appsync_getChannelNamespaceCmd.MarkFlagRequired("api-id")
-	appsync_getChannelNamespaceCmd.MarkFlagRequired("name")
+		appsync_getChannelNamespaceCmd.Flags().String("api-id", "", "The `Api` ID.")
+		appsync_getChannelNamespaceCmd.Flags().String("name", "", "The name of the `ChannelNamespace`.")
+		appsync_getChannelNamespaceCmd.MarkFlagRequired("api-id")
+		appsync_getChannelNamespaceCmd.MarkFlagRequired("name")
+	})
 	appsyncCmd.AddCommand(appsync_getChannelNamespaceCmd)
 }

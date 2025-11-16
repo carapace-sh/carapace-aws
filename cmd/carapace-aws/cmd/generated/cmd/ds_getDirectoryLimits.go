@@ -12,7 +12,9 @@ var ds_getDirectoryLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_getDirectoryLimitsCmd).Standalone()
+	carapace.Gen(ds_getDirectoryLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_getDirectoryLimitsCmd).Standalone()
 
+	})
 	dsCmd.AddCommand(ds_getDirectoryLimitsCmd)
 }

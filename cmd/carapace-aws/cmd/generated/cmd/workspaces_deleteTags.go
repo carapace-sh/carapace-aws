@@ -12,11 +12,13 @@ var workspaces_deleteTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_deleteTagsCmd).Standalone()
+	carapace.Gen(workspaces_deleteTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_deleteTagsCmd).Standalone()
 
-	workspaces_deleteTagsCmd.Flags().String("resource-id", "", "The identifier of the WorkSpaces resource.")
-	workspaces_deleteTagsCmd.Flags().String("tag-keys", "", "The tag keys.")
-	workspaces_deleteTagsCmd.MarkFlagRequired("resource-id")
-	workspaces_deleteTagsCmd.MarkFlagRequired("tag-keys")
+		workspaces_deleteTagsCmd.Flags().String("resource-id", "", "The identifier of the WorkSpaces resource.")
+		workspaces_deleteTagsCmd.Flags().String("tag-keys", "", "The tag keys.")
+		workspaces_deleteTagsCmd.MarkFlagRequired("resource-id")
+		workspaces_deleteTagsCmd.MarkFlagRequired("tag-keys")
+	})
 	workspacesCmd.AddCommand(workspaces_deleteTagsCmd)
 }

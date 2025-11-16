@@ -12,12 +12,14 @@ var datazone_startDataSourceRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_startDataSourceRunCmd).Standalone()
+	carapace.Gen(datazone_startDataSourceRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_startDataSourceRunCmd).Standalone()
 
-	datazone_startDataSourceRunCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.")
-	datazone_startDataSourceRunCmd.Flags().String("data-source-identifier", "", "The identifier of the data source.")
-	datazone_startDataSourceRunCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain in which to start a data source run.")
-	datazone_startDataSourceRunCmd.MarkFlagRequired("data-source-identifier")
-	datazone_startDataSourceRunCmd.MarkFlagRequired("domain-identifier")
+		datazone_startDataSourceRunCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.")
+		datazone_startDataSourceRunCmd.Flags().String("data-source-identifier", "", "The identifier of the data source.")
+		datazone_startDataSourceRunCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain in which to start a data source run.")
+		datazone_startDataSourceRunCmd.MarkFlagRequired("data-source-identifier")
+		datazone_startDataSourceRunCmd.MarkFlagRequired("domain-identifier")
+	})
 	datazoneCmd.AddCommand(datazone_startDataSourceRunCmd)
 }

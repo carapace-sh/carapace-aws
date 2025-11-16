@@ -12,9 +12,11 @@ var elbv2_setRulePrioritiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_setRulePrioritiesCmd).Standalone()
+	carapace.Gen(elbv2_setRulePrioritiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_setRulePrioritiesCmd).Standalone()
 
-	elbv2_setRulePrioritiesCmd.Flags().String("rule-priorities", "", "The rule priorities.")
-	elbv2_setRulePrioritiesCmd.MarkFlagRequired("rule-priorities")
+		elbv2_setRulePrioritiesCmd.Flags().String("rule-priorities", "", "The rule priorities.")
+		elbv2_setRulePrioritiesCmd.MarkFlagRequired("rule-priorities")
+	})
 	elbv2Cmd.AddCommand(elbv2_setRulePrioritiesCmd)
 }

@@ -12,8 +12,10 @@ var schemas_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(schemas_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_deleteResourcePolicyCmd).Standalone()
 
-	schemas_deleteResourcePolicyCmd.Flags().String("registry-name", "", "The name of the registry.")
+		schemas_deleteResourcePolicyCmd.Flags().String("registry-name", "", "The name of the registry.")
+	})
 	schemasCmd.AddCommand(schemas_deleteResourcePolicyCmd)
 }

@@ -12,11 +12,13 @@ var guardduty_archiveFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_archiveFindingsCmd).Standalone()
+	carapace.Gen(guardduty_archiveFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_archiveFindingsCmd).Standalone()
 
-	guardduty_archiveFindingsCmd.Flags().String("detector-id", "", "The ID of the detector that specifies the GuardDuty service whose findings you want to archive.")
-	guardduty_archiveFindingsCmd.Flags().String("finding-ids", "", "The IDs of the findings that you want to archive.")
-	guardduty_archiveFindingsCmd.MarkFlagRequired("detector-id")
-	guardduty_archiveFindingsCmd.MarkFlagRequired("finding-ids")
+		guardduty_archiveFindingsCmd.Flags().String("detector-id", "", "The ID of the detector that specifies the GuardDuty service whose findings you want to archive.")
+		guardduty_archiveFindingsCmd.Flags().String("finding-ids", "", "The IDs of the findings that you want to archive.")
+		guardduty_archiveFindingsCmd.MarkFlagRequired("detector-id")
+		guardduty_archiveFindingsCmd.MarkFlagRequired("finding-ids")
+	})
 	guarddutyCmd.AddCommand(guardduty_archiveFindingsCmd)
 }

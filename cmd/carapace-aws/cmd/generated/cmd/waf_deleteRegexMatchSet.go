@@ -12,11 +12,13 @@ var waf_deleteRegexMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_deleteRegexMatchSetCmd).Standalone()
+	carapace.Gen(waf_deleteRegexMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_deleteRegexMatchSetCmd).Standalone()
 
-	waf_deleteRegexMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	waf_deleteRegexMatchSetCmd.Flags().String("regex-match-set-id", "", "The `RegexMatchSetId` of the [RegexMatchSet]() that you want to delete.")
-	waf_deleteRegexMatchSetCmd.MarkFlagRequired("change-token")
-	waf_deleteRegexMatchSetCmd.MarkFlagRequired("regex-match-set-id")
+		waf_deleteRegexMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		waf_deleteRegexMatchSetCmd.Flags().String("regex-match-set-id", "", "The `RegexMatchSetId` of the [RegexMatchSet]() that you want to delete.")
+		waf_deleteRegexMatchSetCmd.MarkFlagRequired("change-token")
+		waf_deleteRegexMatchSetCmd.MarkFlagRequired("regex-match-set-id")
+	})
 	wafCmd.AddCommand(waf_deleteRegexMatchSetCmd)
 }

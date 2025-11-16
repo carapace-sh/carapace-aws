@@ -12,9 +12,11 @@ var imagebuilder_getWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getWorkflowCmd).Standalone()
+	carapace.Gen(imagebuilder_getWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getWorkflowCmd).Standalone()
 
-	imagebuilder_getWorkflowCmd.Flags().String("workflow-build-version-arn", "", "The Amazon Resource Name (ARN) of the workflow resource that you want to get.")
-	imagebuilder_getWorkflowCmd.MarkFlagRequired("workflow-build-version-arn")
+		imagebuilder_getWorkflowCmd.Flags().String("workflow-build-version-arn", "", "The Amazon Resource Name (ARN) of the workflow resource that you want to get.")
+		imagebuilder_getWorkflowCmd.MarkFlagRequired("workflow-build-version-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getWorkflowCmd)
 }

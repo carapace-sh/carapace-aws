@@ -12,12 +12,14 @@ var personalize_createSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_createSchemaCmd).Standalone()
+	carapace.Gen(personalize_createSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_createSchemaCmd).Standalone()
 
-	personalize_createSchemaCmd.Flags().String("domain", "", "The domain for the schema.")
-	personalize_createSchemaCmd.Flags().String("name", "", "The name for the schema.")
-	personalize_createSchemaCmd.Flags().String("schema", "", "A schema in Avro JSON format.")
-	personalize_createSchemaCmd.MarkFlagRequired("name")
-	personalize_createSchemaCmd.MarkFlagRequired("schema")
+		personalize_createSchemaCmd.Flags().String("domain", "", "The domain for the schema.")
+		personalize_createSchemaCmd.Flags().String("name", "", "The name for the schema.")
+		personalize_createSchemaCmd.Flags().String("schema", "", "A schema in Avro JSON format.")
+		personalize_createSchemaCmd.MarkFlagRequired("name")
+		personalize_createSchemaCmd.MarkFlagRequired("schema")
+	})
 	personalizeCmd.AddCommand(personalize_createSchemaCmd)
 }

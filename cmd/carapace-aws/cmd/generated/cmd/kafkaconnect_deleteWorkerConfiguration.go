@@ -12,9 +12,11 @@ var kafkaconnect_deleteWorkerConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnect_deleteWorkerConfigurationCmd).Standalone()
+	carapace.Gen(kafkaconnect_deleteWorkerConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnect_deleteWorkerConfigurationCmd).Standalone()
 
-	kafkaconnect_deleteWorkerConfigurationCmd.Flags().String("worker-configuration-arn", "", "The Amazon Resource Name (ARN) of the worker configuration that you want to delete.")
-	kafkaconnect_deleteWorkerConfigurationCmd.MarkFlagRequired("worker-configuration-arn")
+		kafkaconnect_deleteWorkerConfigurationCmd.Flags().String("worker-configuration-arn", "", "The Amazon Resource Name (ARN) of the worker configuration that you want to delete.")
+		kafkaconnect_deleteWorkerConfigurationCmd.MarkFlagRequired("worker-configuration-arn")
+	})
 	kafkaconnectCmd.AddCommand(kafkaconnect_deleteWorkerConfigurationCmd)
 }

@@ -12,11 +12,13 @@ var iam_getRolePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getRolePolicyCmd).Standalone()
+	carapace.Gen(iam_getRolePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getRolePolicyCmd).Standalone()
 
-	iam_getRolePolicyCmd.Flags().String("policy-name", "", "The name of the policy document to get.")
-	iam_getRolePolicyCmd.Flags().String("role-name", "", "The name of the role associated with the policy.")
-	iam_getRolePolicyCmd.MarkFlagRequired("policy-name")
-	iam_getRolePolicyCmd.MarkFlagRequired("role-name")
+		iam_getRolePolicyCmd.Flags().String("policy-name", "", "The name of the policy document to get.")
+		iam_getRolePolicyCmd.Flags().String("role-name", "", "The name of the role associated with the policy.")
+		iam_getRolePolicyCmd.MarkFlagRequired("policy-name")
+		iam_getRolePolicyCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_getRolePolicyCmd)
 }

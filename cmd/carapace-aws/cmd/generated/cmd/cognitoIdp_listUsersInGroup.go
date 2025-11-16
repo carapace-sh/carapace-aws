@@ -12,13 +12,15 @@ var cognitoIdp_listUsersInGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_listUsersInGroupCmd).Standalone()
+	carapace.Gen(cognitoIdp_listUsersInGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_listUsersInGroupCmd).Standalone()
 
-	cognitoIdp_listUsersInGroupCmd.Flags().String("group-name", "", "The name of the group that you want to query for user membership.")
-	cognitoIdp_listUsersInGroupCmd.Flags().String("limit", "", "The maximum number of groups that you want Amazon Cognito to return in the response.")
-	cognitoIdp_listUsersInGroupCmd.Flags().String("next-token", "", "This API operation returns a limited number of results.")
-	cognitoIdp_listUsersInGroupCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to view the membership of the requested group.")
-	cognitoIdp_listUsersInGroupCmd.MarkFlagRequired("group-name")
-	cognitoIdp_listUsersInGroupCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_listUsersInGroupCmd.Flags().String("group-name", "", "The name of the group that you want to query for user membership.")
+		cognitoIdp_listUsersInGroupCmd.Flags().String("limit", "", "The maximum number of groups that you want Amazon Cognito to return in the response.")
+		cognitoIdp_listUsersInGroupCmd.Flags().String("next-token", "", "This API operation returns a limited number of results.")
+		cognitoIdp_listUsersInGroupCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to view the membership of the requested group.")
+		cognitoIdp_listUsersInGroupCmd.MarkFlagRequired("group-name")
+		cognitoIdp_listUsersInGroupCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_listUsersInGroupCmd)
 }

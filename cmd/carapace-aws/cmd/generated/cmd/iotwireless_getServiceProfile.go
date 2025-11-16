@@ -12,9 +12,11 @@ var iotwireless_getServiceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getServiceProfileCmd).Standalone()
+	carapace.Gen(iotwireless_getServiceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getServiceProfileCmd).Standalone()
 
-	iotwireless_getServiceProfileCmd.Flags().String("id", "", "The ID of the resource to get.")
-	iotwireless_getServiceProfileCmd.MarkFlagRequired("id")
+		iotwireless_getServiceProfileCmd.Flags().String("id", "", "The ID of the resource to get.")
+		iotwireless_getServiceProfileCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getServiceProfileCmd)
 }

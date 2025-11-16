@@ -12,9 +12,11 @@ var cognitoIdp_associateSoftwareTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_associateSoftwareTokenCmd).Standalone()
+	carapace.Gen(cognitoIdp_associateSoftwareTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_associateSoftwareTokenCmd).Standalone()
 
-	cognitoIdp_associateSoftwareTokenCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_associateSoftwareTokenCmd.Flags().String("session", "", "The session identifier that maintains the state of authentication requests and challenge responses.")
+		cognitoIdp_associateSoftwareTokenCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_associateSoftwareTokenCmd.Flags().String("session", "", "The session identifier that maintains the state of authentication requests and challenge responses.")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_associateSoftwareTokenCmd)
 }

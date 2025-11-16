@@ -12,9 +12,11 @@ var iotevents_describeDetectorModelAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_describeDetectorModelAnalysisCmd).Standalone()
+	carapace.Gen(iotevents_describeDetectorModelAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_describeDetectorModelAnalysisCmd).Standalone()
 
-	iotevents_describeDetectorModelAnalysisCmd.Flags().String("analysis-id", "", "The ID of the analysis result that you want to retrieve.")
-	iotevents_describeDetectorModelAnalysisCmd.MarkFlagRequired("analysis-id")
+		iotevents_describeDetectorModelAnalysisCmd.Flags().String("analysis-id", "", "The ID of the analysis result that you want to retrieve.")
+		iotevents_describeDetectorModelAnalysisCmd.MarkFlagRequired("analysis-id")
+	})
 	ioteventsCmd.AddCommand(iotevents_describeDetectorModelAnalysisCmd)
 }

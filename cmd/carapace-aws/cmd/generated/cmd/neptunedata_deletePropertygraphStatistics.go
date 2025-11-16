@@ -12,7 +12,9 @@ var neptunedata_deletePropertygraphStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_deletePropertygraphStatisticsCmd).Standalone()
+	carapace.Gen(neptunedata_deletePropertygraphStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_deletePropertygraphStatisticsCmd).Standalone()
 
+	})
 	neptunedataCmd.AddCommand(neptunedata_deletePropertygraphStatisticsCmd)
 }

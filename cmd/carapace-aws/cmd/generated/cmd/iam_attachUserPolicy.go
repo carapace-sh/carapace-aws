@@ -12,11 +12,13 @@ var iam_attachUserPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_attachUserPolicyCmd).Standalone()
+	carapace.Gen(iam_attachUserPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_attachUserPolicyCmd).Standalone()
 
-	iam_attachUserPolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the IAM policy you want to attach.")
-	iam_attachUserPolicyCmd.Flags().String("user-name", "", "The name (friendly name, not ARN) of the IAM user to attach the policy to.")
-	iam_attachUserPolicyCmd.MarkFlagRequired("policy-arn")
-	iam_attachUserPolicyCmd.MarkFlagRequired("user-name")
+		iam_attachUserPolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the IAM policy you want to attach.")
+		iam_attachUserPolicyCmd.Flags().String("user-name", "", "The name (friendly name, not ARN) of the IAM user to attach the policy to.")
+		iam_attachUserPolicyCmd.MarkFlagRequired("policy-arn")
+		iam_attachUserPolicyCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_attachUserPolicyCmd)
 }

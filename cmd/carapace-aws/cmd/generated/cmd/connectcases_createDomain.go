@@ -12,9 +12,11 @@ var connectcases_createDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_createDomainCmd).Standalone()
+	carapace.Gen(connectcases_createDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_createDomainCmd).Standalone()
 
-	connectcases_createDomainCmd.Flags().String("name", "", "The name for your Cases domain.")
-	connectcases_createDomainCmd.MarkFlagRequired("name")
+		connectcases_createDomainCmd.Flags().String("name", "", "The name for your Cases domain.")
+		connectcases_createDomainCmd.MarkFlagRequired("name")
+	})
 	connectcasesCmd.AddCommand(connectcases_createDomainCmd)
 }

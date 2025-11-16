@@ -12,9 +12,11 @@ var entityresolution_listSchemaMappingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_listSchemaMappingsCmd).Standalone()
+	carapace.Gen(entityresolution_listSchemaMappingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_listSchemaMappingsCmd).Standalone()
 
-	entityresolution_listSchemaMappingsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	entityresolution_listSchemaMappingsCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
+		entityresolution_listSchemaMappingsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		entityresolution_listSchemaMappingsCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_listSchemaMappingsCmd)
 }

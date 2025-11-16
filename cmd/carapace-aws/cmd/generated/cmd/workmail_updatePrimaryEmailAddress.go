@@ -12,13 +12,15 @@ var workmail_updatePrimaryEmailAddressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_updatePrimaryEmailAddressCmd).Standalone()
+	carapace.Gen(workmail_updatePrimaryEmailAddressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_updatePrimaryEmailAddressCmd).Standalone()
 
-	workmail_updatePrimaryEmailAddressCmd.Flags().String("email", "", "The value of the email to be updated as primary.")
-	workmail_updatePrimaryEmailAddressCmd.Flags().String("entity-id", "", "The user, group, or resource to update.")
-	workmail_updatePrimaryEmailAddressCmd.Flags().String("organization-id", "", "The organization that contains the user, group, or resource to update.")
-	workmail_updatePrimaryEmailAddressCmd.MarkFlagRequired("email")
-	workmail_updatePrimaryEmailAddressCmd.MarkFlagRequired("entity-id")
-	workmail_updatePrimaryEmailAddressCmd.MarkFlagRequired("organization-id")
+		workmail_updatePrimaryEmailAddressCmd.Flags().String("email", "", "The value of the email to be updated as primary.")
+		workmail_updatePrimaryEmailAddressCmd.Flags().String("entity-id", "", "The user, group, or resource to update.")
+		workmail_updatePrimaryEmailAddressCmd.Flags().String("organization-id", "", "The organization that contains the user, group, or resource to update.")
+		workmail_updatePrimaryEmailAddressCmd.MarkFlagRequired("email")
+		workmail_updatePrimaryEmailAddressCmd.MarkFlagRequired("entity-id")
+		workmail_updatePrimaryEmailAddressCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_updatePrimaryEmailAddressCmd)
 }

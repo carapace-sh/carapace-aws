@@ -12,9 +12,11 @@ var sagemaker_deleteClusterSchedulerConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteClusterSchedulerConfigCmd).Standalone()
+	carapace.Gen(sagemaker_deleteClusterSchedulerConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteClusterSchedulerConfigCmd).Standalone()
 
-	sagemaker_deleteClusterSchedulerConfigCmd.Flags().String("cluster-scheduler-config-id", "", "ID of the cluster policy.")
-	sagemaker_deleteClusterSchedulerConfigCmd.MarkFlagRequired("cluster-scheduler-config-id")
+		sagemaker_deleteClusterSchedulerConfigCmd.Flags().String("cluster-scheduler-config-id", "", "ID of the cluster policy.")
+		sagemaker_deleteClusterSchedulerConfigCmd.MarkFlagRequired("cluster-scheduler-config-id")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteClusterSchedulerConfigCmd)
 }

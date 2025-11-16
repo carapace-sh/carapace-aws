@@ -12,11 +12,13 @@ var customerProfiles_deleteProfileObjectTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_deleteProfileObjectTypeCmd).Standalone()
+	carapace.Gen(customerProfiles_deleteProfileObjectTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_deleteProfileObjectTypeCmd).Standalone()
 
-	customerProfiles_deleteProfileObjectTypeCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_deleteProfileObjectTypeCmd.Flags().String("object-type-name", "", "The name of the profile object type.")
-	customerProfiles_deleteProfileObjectTypeCmd.MarkFlagRequired("domain-name")
-	customerProfiles_deleteProfileObjectTypeCmd.MarkFlagRequired("object-type-name")
+		customerProfiles_deleteProfileObjectTypeCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_deleteProfileObjectTypeCmd.Flags().String("object-type-name", "", "The name of the profile object type.")
+		customerProfiles_deleteProfileObjectTypeCmd.MarkFlagRequired("domain-name")
+		customerProfiles_deleteProfileObjectTypeCmd.MarkFlagRequired("object-type-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_deleteProfileObjectTypeCmd)
 }

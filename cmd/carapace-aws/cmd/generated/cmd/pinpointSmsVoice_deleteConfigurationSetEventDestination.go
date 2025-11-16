@@ -12,11 +12,13 @@ var pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd).Standalone()
+	carapace.Gen(pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd).Standalone()
 
-	pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd.Flags().String("configuration-set-name", "", "ConfigurationSetName")
-	pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd.Flags().String("event-destination-name", "", "EventDestinationName")
-	pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd.MarkFlagRequired("configuration-set-name")
-	pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination-name")
+		pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd.Flags().String("configuration-set-name", "", "ConfigurationSetName")
+		pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd.Flags().String("event-destination-name", "", "EventDestinationName")
+		pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd.MarkFlagRequired("configuration-set-name")
+		pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination-name")
+	})
 	pinpointSmsVoiceCmd.AddCommand(pinpointSmsVoice_deleteConfigurationSetEventDestinationCmd)
 }

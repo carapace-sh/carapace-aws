@@ -12,12 +12,14 @@ var wellarchitected_upgradeReviewTemplateLensReviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_upgradeReviewTemplateLensReviewCmd).Standalone()
+	carapace.Gen(wellarchitected_upgradeReviewTemplateLensReviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_upgradeReviewTemplateLensReviewCmd).Standalone()
 
-	wellarchitected_upgradeReviewTemplateLensReviewCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_upgradeReviewTemplateLensReviewCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_upgradeReviewTemplateLensReviewCmd.Flags().String("template-arn", "", "The ARN of the review template.")
-	wellarchitected_upgradeReviewTemplateLensReviewCmd.MarkFlagRequired("lens-alias")
-	wellarchitected_upgradeReviewTemplateLensReviewCmd.MarkFlagRequired("template-arn")
+		wellarchitected_upgradeReviewTemplateLensReviewCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_upgradeReviewTemplateLensReviewCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_upgradeReviewTemplateLensReviewCmd.Flags().String("template-arn", "", "The ARN of the review template.")
+		wellarchitected_upgradeReviewTemplateLensReviewCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_upgradeReviewTemplateLensReviewCmd.MarkFlagRequired("template-arn")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_upgradeReviewTemplateLensReviewCmd)
 }

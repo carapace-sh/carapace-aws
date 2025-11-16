@@ -12,7 +12,9 @@ var applicationSignalsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationSignalsCmd).Standalone()
+	carapace.Gen(applicationSignalsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationSignalsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(applicationSignalsCmd)
 }

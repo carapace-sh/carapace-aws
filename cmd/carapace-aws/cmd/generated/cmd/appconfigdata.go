@@ -12,7 +12,9 @@ var appconfigdataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfigdataCmd).Standalone()
+	carapace.Gen(appconfigdataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfigdataCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(appconfigdataCmd)
 }

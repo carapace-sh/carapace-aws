@@ -12,16 +12,18 @@ var kms_signCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_signCmd).Standalone()
+	carapace.Gen(kms_signCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_signCmd).Standalone()
 
-	kms_signCmd.Flags().String("dry-run", "", "Checks if your request will succeed.")
-	kms_signCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
-	kms_signCmd.Flags().String("key-id", "", "Identifies an asymmetric KMS key.")
-	kms_signCmd.Flags().String("message", "", "Specifies the message or message digest to sign.")
-	kms_signCmd.Flags().String("message-type", "", "Tells KMS whether the value of the `Message` parameter should be hashed as part of the signing algorithm.")
-	kms_signCmd.Flags().String("signing-algorithm", "", "Specifies the signing algorithm to use when signing the message.")
-	kms_signCmd.MarkFlagRequired("key-id")
-	kms_signCmd.MarkFlagRequired("message")
-	kms_signCmd.MarkFlagRequired("signing-algorithm")
+		kms_signCmd.Flags().String("dry-run", "", "Checks if your request will succeed.")
+		kms_signCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
+		kms_signCmd.Flags().String("key-id", "", "Identifies an asymmetric KMS key.")
+		kms_signCmd.Flags().String("message", "", "Specifies the message or message digest to sign.")
+		kms_signCmd.Flags().String("message-type", "", "Tells KMS whether the value of the `Message` parameter should be hashed as part of the signing algorithm.")
+		kms_signCmd.Flags().String("signing-algorithm", "", "Specifies the signing algorithm to use when signing the message.")
+		kms_signCmd.MarkFlagRequired("key-id")
+		kms_signCmd.MarkFlagRequired("message")
+		kms_signCmd.MarkFlagRequired("signing-algorithm")
+	})
 	kmsCmd.AddCommand(kms_signCmd)
 }

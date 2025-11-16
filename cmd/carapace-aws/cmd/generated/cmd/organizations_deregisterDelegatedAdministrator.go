@@ -12,11 +12,13 @@ var organizations_deregisterDelegatedAdministratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_deregisterDelegatedAdministratorCmd).Standalone()
+	carapace.Gen(organizations_deregisterDelegatedAdministratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_deregisterDelegatedAdministratorCmd).Standalone()
 
-	organizations_deregisterDelegatedAdministratorCmd.Flags().String("account-id", "", "The account ID number of the member account in the organization that you want to deregister as a delegated administrator.")
-	organizations_deregisterDelegatedAdministratorCmd.Flags().String("service-principal", "", "The service principal name of an Amazon Web Services service for which the account is a delegated administrator.")
-	organizations_deregisterDelegatedAdministratorCmd.MarkFlagRequired("account-id")
-	organizations_deregisterDelegatedAdministratorCmd.MarkFlagRequired("service-principal")
+		organizations_deregisterDelegatedAdministratorCmd.Flags().String("account-id", "", "The account ID number of the member account in the organization that you want to deregister as a delegated administrator.")
+		organizations_deregisterDelegatedAdministratorCmd.Flags().String("service-principal", "", "The service principal name of an Amazon Web Services service for which the account is a delegated administrator.")
+		organizations_deregisterDelegatedAdministratorCmd.MarkFlagRequired("account-id")
+		organizations_deregisterDelegatedAdministratorCmd.MarkFlagRequired("service-principal")
+	})
 	organizationsCmd.AddCommand(organizations_deregisterDelegatedAdministratorCmd)
 }

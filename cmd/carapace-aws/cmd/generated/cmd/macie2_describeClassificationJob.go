@@ -12,9 +12,11 @@ var macie2_describeClassificationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_describeClassificationJobCmd).Standalone()
+	carapace.Gen(macie2_describeClassificationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_describeClassificationJobCmd).Standalone()
 
-	macie2_describeClassificationJobCmd.Flags().String("job-id", "", "The unique identifier for the classification job.")
-	macie2_describeClassificationJobCmd.MarkFlagRequired("job-id")
+		macie2_describeClassificationJobCmd.Flags().String("job-id", "", "The unique identifier for the classification job.")
+		macie2_describeClassificationJobCmd.MarkFlagRequired("job-id")
+	})
 	macie2Cmd.AddCommand(macie2_describeClassificationJobCmd)
 }

@@ -12,7 +12,9 @@ var ramCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ramCmd).Standalone()
+	carapace.Gen(ramCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ramCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ramCmd)
 }

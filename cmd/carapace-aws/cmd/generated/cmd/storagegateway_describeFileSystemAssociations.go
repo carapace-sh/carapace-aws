@@ -12,9 +12,11 @@ var storagegateway_describeFileSystemAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeFileSystemAssociationsCmd).Standalone()
+	carapace.Gen(storagegateway_describeFileSystemAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeFileSystemAssociationsCmd).Standalone()
 
-	storagegateway_describeFileSystemAssociationsCmd.Flags().String("file-system-association-arnlist", "", "An array containing the Amazon Resource Name (ARN) of each file system association to be described.")
-	storagegateway_describeFileSystemAssociationsCmd.MarkFlagRequired("file-system-association-arnlist")
+		storagegateway_describeFileSystemAssociationsCmd.Flags().String("file-system-association-arnlist", "", "An array containing the Amazon Resource Name (ARN) of each file system association to be described.")
+		storagegateway_describeFileSystemAssociationsCmd.MarkFlagRequired("file-system-association-arnlist")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeFileSystemAssociationsCmd)
 }

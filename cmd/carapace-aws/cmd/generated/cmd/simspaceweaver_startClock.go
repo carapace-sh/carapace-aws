@@ -12,9 +12,11 @@ var simspaceweaver_startClockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_startClockCmd).Standalone()
+	carapace.Gen(simspaceweaver_startClockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_startClockCmd).Standalone()
 
-	simspaceweaver_startClockCmd.Flags().String("simulation", "", "The name of the simulation.")
-	simspaceweaver_startClockCmd.MarkFlagRequired("simulation")
+		simspaceweaver_startClockCmd.Flags().String("simulation", "", "The name of the simulation.")
+		simspaceweaver_startClockCmd.MarkFlagRequired("simulation")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_startClockCmd)
 }

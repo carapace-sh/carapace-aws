@@ -12,11 +12,13 @@ var transcribe_listLanguageModelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_listLanguageModelsCmd).Standalone()
+	carapace.Gen(transcribe_listLanguageModelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_listLanguageModelsCmd).Standalone()
 
-	transcribe_listLanguageModelsCmd.Flags().String("max-results", "", "The maximum number of custom language models to return in each page of results.")
-	transcribe_listLanguageModelsCmd.Flags().String("name-contains", "", "Returns only the custom language models that contain the specified string.")
-	transcribe_listLanguageModelsCmd.Flags().String("next-token", "", "If your `ListLanguageModels` request returns more results than can be displayed, `NextToken` is displayed in the response with an associated string.")
-	transcribe_listLanguageModelsCmd.Flags().String("status-equals", "", "Returns only custom language models with the specified status.")
+		transcribe_listLanguageModelsCmd.Flags().String("max-results", "", "The maximum number of custom language models to return in each page of results.")
+		transcribe_listLanguageModelsCmd.Flags().String("name-contains", "", "Returns only the custom language models that contain the specified string.")
+		transcribe_listLanguageModelsCmd.Flags().String("next-token", "", "If your `ListLanguageModels` request returns more results than can be displayed, `NextToken` is displayed in the response with an associated string.")
+		transcribe_listLanguageModelsCmd.Flags().String("status-equals", "", "Returns only custom language models with the specified status.")
+	})
 	transcribeCmd.AddCommand(transcribe_listLanguageModelsCmd)
 }

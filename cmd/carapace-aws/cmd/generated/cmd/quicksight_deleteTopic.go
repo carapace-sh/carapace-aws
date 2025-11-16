@@ -12,11 +12,13 @@ var quicksight_deleteTopicCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteTopicCmd).Standalone()
+	carapace.Gen(quicksight_deleteTopicCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteTopicCmd).Standalone()
 
-	quicksight_deleteTopicCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the topic that you want to delete.")
-	quicksight_deleteTopicCmd.Flags().String("topic-id", "", "The ID of the topic that you want to delete.")
-	quicksight_deleteTopicCmd.MarkFlagRequired("aws-account-id")
-	quicksight_deleteTopicCmd.MarkFlagRequired("topic-id")
+		quicksight_deleteTopicCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the topic that you want to delete.")
+		quicksight_deleteTopicCmd.Flags().String("topic-id", "", "The ID of the topic that you want to delete.")
+		quicksight_deleteTopicCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteTopicCmd.MarkFlagRequired("topic-id")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteTopicCmd)
 }

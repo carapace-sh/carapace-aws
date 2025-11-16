@@ -12,9 +12,11 @@ var b2bi_deleteProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_deleteProfileCmd).Standalone()
+	carapace.Gen(b2bi_deleteProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_deleteProfileCmd).Standalone()
 
-	b2bi_deleteProfileCmd.Flags().String("profile-id", "", "Specifies the unique, system-generated identifier for the profile.")
-	b2bi_deleteProfileCmd.MarkFlagRequired("profile-id")
+		b2bi_deleteProfileCmd.Flags().String("profile-id", "", "Specifies the unique, system-generated identifier for the profile.")
+		b2bi_deleteProfileCmd.MarkFlagRequired("profile-id")
+	})
 	b2biCmd.AddCommand(b2bi_deleteProfileCmd)
 }

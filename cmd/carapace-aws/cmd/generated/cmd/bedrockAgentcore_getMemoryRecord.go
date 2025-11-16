@@ -12,11 +12,13 @@ var bedrockAgentcore_getMemoryRecordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_getMemoryRecordCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_getMemoryRecordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_getMemoryRecordCmd).Standalone()
 
-	bedrockAgentcore_getMemoryRecordCmd.Flags().String("memory-id", "", "The identifier of the AgentCore Memory resource containing the memory record.")
-	bedrockAgentcore_getMemoryRecordCmd.Flags().String("memory-record-id", "", "The identifier of the memory record to retrieve.")
-	bedrockAgentcore_getMemoryRecordCmd.MarkFlagRequired("memory-id")
-	bedrockAgentcore_getMemoryRecordCmd.MarkFlagRequired("memory-record-id")
+		bedrockAgentcore_getMemoryRecordCmd.Flags().String("memory-id", "", "The identifier of the AgentCore Memory resource containing the memory record.")
+		bedrockAgentcore_getMemoryRecordCmd.Flags().String("memory-record-id", "", "The identifier of the memory record to retrieve.")
+		bedrockAgentcore_getMemoryRecordCmd.MarkFlagRequired("memory-id")
+		bedrockAgentcore_getMemoryRecordCmd.MarkFlagRequired("memory-record-id")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_getMemoryRecordCmd)
 }

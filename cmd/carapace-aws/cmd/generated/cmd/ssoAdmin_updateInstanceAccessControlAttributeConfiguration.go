@@ -12,11 +12,13 @@ var ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd = &cobra.Comma
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd).Standalone()
+	carapace.Gen(ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd).Standalone()
 
-	ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd.Flags().String("instance-access-control-attribute-configuration", "", "Updates the attributes for your ABAC configuration.")
-	ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd.MarkFlagRequired("instance-access-control-attribute-configuration")
-	ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd.Flags().String("instance-access-control-attribute-configuration", "", "Updates the attributes for your ABAC configuration.")
+		ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd.MarkFlagRequired("instance-access-control-attribute-configuration")
+		ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd.MarkFlagRequired("instance-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_updateInstanceAccessControlAttributeConfigurationCmd)
 }

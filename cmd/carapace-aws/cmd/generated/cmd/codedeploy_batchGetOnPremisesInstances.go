@@ -12,9 +12,11 @@ var codedeploy_batchGetOnPremisesInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_batchGetOnPremisesInstancesCmd).Standalone()
+	carapace.Gen(codedeploy_batchGetOnPremisesInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_batchGetOnPremisesInstancesCmd).Standalone()
 
-	codedeploy_batchGetOnPremisesInstancesCmd.Flags().String("instance-names", "", "The names of the on-premises instances about which to get information.")
-	codedeploy_batchGetOnPremisesInstancesCmd.MarkFlagRequired("instance-names")
+		codedeploy_batchGetOnPremisesInstancesCmd.Flags().String("instance-names", "", "The names of the on-premises instances about which to get information.")
+		codedeploy_batchGetOnPremisesInstancesCmd.MarkFlagRequired("instance-names")
+	})
 	codedeployCmd.AddCommand(codedeploy_batchGetOnPremisesInstancesCmd)
 }

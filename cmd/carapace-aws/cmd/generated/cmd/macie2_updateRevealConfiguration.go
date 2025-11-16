@@ -12,10 +12,12 @@ var macie2_updateRevealConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_updateRevealConfigurationCmd).Standalone()
+	carapace.Gen(macie2_updateRevealConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_updateRevealConfigurationCmd).Standalone()
 
-	macie2_updateRevealConfigurationCmd.Flags().String("configuration", "", "The KMS key to use to encrypt the sensitive data, and the status of the configuration for the Amazon Macie account.")
-	macie2_updateRevealConfigurationCmd.Flags().String("retrieval-configuration", "", "The access method and settings to use when retrieving the sensitive data.")
-	macie2_updateRevealConfigurationCmd.MarkFlagRequired("configuration")
+		macie2_updateRevealConfigurationCmd.Flags().String("configuration", "", "The KMS key to use to encrypt the sensitive data, and the status of the configuration for the Amazon Macie account.")
+		macie2_updateRevealConfigurationCmd.Flags().String("retrieval-configuration", "", "The access method and settings to use when retrieving the sensitive data.")
+		macie2_updateRevealConfigurationCmd.MarkFlagRequired("configuration")
+	})
 	macie2Cmd.AddCommand(macie2_updateRevealConfigurationCmd)
 }

@@ -12,11 +12,13 @@ var mediapackage_createChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackage_createChannelCmd).Standalone()
+	carapace.Gen(mediapackage_createChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackage_createChannelCmd).Standalone()
 
-	mediapackage_createChannelCmd.Flags().String("description", "", "A short text description of the Channel.")
-	mediapackage_createChannelCmd.Flags().String("id", "", "The ID of the Channel.")
-	mediapackage_createChannelCmd.Flags().String("tags", "", "")
-	mediapackage_createChannelCmd.MarkFlagRequired("id")
+		mediapackage_createChannelCmd.Flags().String("description", "", "A short text description of the Channel.")
+		mediapackage_createChannelCmd.Flags().String("id", "", "The ID of the Channel.")
+		mediapackage_createChannelCmd.Flags().String("tags", "", "")
+		mediapackage_createChannelCmd.MarkFlagRequired("id")
+	})
 	mediapackageCmd.AddCommand(mediapackage_createChannelCmd)
 }

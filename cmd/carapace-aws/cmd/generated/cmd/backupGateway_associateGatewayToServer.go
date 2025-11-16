@@ -12,11 +12,13 @@ var backupGateway_associateGatewayToServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_associateGatewayToServerCmd).Standalone()
+	carapace.Gen(backupGateway_associateGatewayToServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_associateGatewayToServerCmd).Standalone()
 
-	backupGateway_associateGatewayToServerCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway.")
-	backupGateway_associateGatewayToServerCmd.Flags().String("server-arn", "", "The Amazon Resource Name (ARN) of the server that hosts your virtual machines.")
-	backupGateway_associateGatewayToServerCmd.MarkFlagRequired("gateway-arn")
-	backupGateway_associateGatewayToServerCmd.MarkFlagRequired("server-arn")
+		backupGateway_associateGatewayToServerCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway.")
+		backupGateway_associateGatewayToServerCmd.Flags().String("server-arn", "", "The Amazon Resource Name (ARN) of the server that hosts your virtual machines.")
+		backupGateway_associateGatewayToServerCmd.MarkFlagRequired("gateway-arn")
+		backupGateway_associateGatewayToServerCmd.MarkFlagRequired("server-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_associateGatewayToServerCmd)
 }

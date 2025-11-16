@@ -12,11 +12,13 @@ var apigatewayv2_getModelTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_getModelTemplateCmd).Standalone()
+	carapace.Gen(apigatewayv2_getModelTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_getModelTemplateCmd).Standalone()
 
-	apigatewayv2_getModelTemplateCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_getModelTemplateCmd.Flags().String("model-id", "", "The model ID.")
-	apigatewayv2_getModelTemplateCmd.MarkFlagRequired("api-id")
-	apigatewayv2_getModelTemplateCmd.MarkFlagRequired("model-id")
+		apigatewayv2_getModelTemplateCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_getModelTemplateCmd.Flags().String("model-id", "", "The model ID.")
+		apigatewayv2_getModelTemplateCmd.MarkFlagRequired("api-id")
+		apigatewayv2_getModelTemplateCmd.MarkFlagRequired("model-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_getModelTemplateCmd)
 }

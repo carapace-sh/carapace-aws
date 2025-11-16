@@ -12,12 +12,14 @@ var config_getOrganizationConfigRuleDetailedStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getOrganizationConfigRuleDetailedStatusCmd).Standalone()
+	carapace.Gen(config_getOrganizationConfigRuleDetailedStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getOrganizationConfigRuleDetailedStatusCmd).Standalone()
 
-	config_getOrganizationConfigRuleDetailedStatusCmd.Flags().String("filters", "", "A `StatusDetailFilters` object.")
-	config_getOrganizationConfigRuleDetailedStatusCmd.Flags().String("limit", "", "The maximum number of `OrganizationConfigRuleDetailedStatus` returned on each page.")
-	config_getOrganizationConfigRuleDetailedStatusCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
-	config_getOrganizationConfigRuleDetailedStatusCmd.Flags().String("organization-config-rule-name", "", "The name of your organization Config rule for which you want status details for member accounts.")
-	config_getOrganizationConfigRuleDetailedStatusCmd.MarkFlagRequired("organization-config-rule-name")
+		config_getOrganizationConfigRuleDetailedStatusCmd.Flags().String("filters", "", "A `StatusDetailFilters` object.")
+		config_getOrganizationConfigRuleDetailedStatusCmd.Flags().String("limit", "", "The maximum number of `OrganizationConfigRuleDetailedStatus` returned on each page.")
+		config_getOrganizationConfigRuleDetailedStatusCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+		config_getOrganizationConfigRuleDetailedStatusCmd.Flags().String("organization-config-rule-name", "", "The name of your organization Config rule for which you want status details for member accounts.")
+		config_getOrganizationConfigRuleDetailedStatusCmd.MarkFlagRequired("organization-config-rule-name")
+	})
 	configCmd.AddCommand(config_getOrganizationConfigRuleDetailedStatusCmd)
 }

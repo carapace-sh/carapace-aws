@@ -12,10 +12,12 @@ var sesv2_listImportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listImportJobsCmd).Standalone()
+	carapace.Gen(sesv2_listImportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listImportJobsCmd).Standalone()
 
-	sesv2_listImportJobsCmd.Flags().String("import-destination-type", "", "The destination of the import job, which can be used to list import jobs that have a certain `ImportDestinationType`.")
-	sesv2_listImportJobsCmd.Flags().String("next-token", "", "A string token indicating that there might be additional import jobs available to be listed.")
-	sesv2_listImportJobsCmd.Flags().String("page-size", "", "Maximum number of import jobs to return at once.")
+		sesv2_listImportJobsCmd.Flags().String("import-destination-type", "", "The destination of the import job, which can be used to list import jobs that have a certain `ImportDestinationType`.")
+		sesv2_listImportJobsCmd.Flags().String("next-token", "", "A string token indicating that there might be additional import jobs available to be listed.")
+		sesv2_listImportJobsCmd.Flags().String("page-size", "", "Maximum number of import jobs to return at once.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listImportJobsCmd)
 }

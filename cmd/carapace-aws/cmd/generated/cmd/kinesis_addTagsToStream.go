@@ -12,11 +12,13 @@ var kinesis_addTagsToStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_addTagsToStreamCmd).Standalone()
+	carapace.Gen(kinesis_addTagsToStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_addTagsToStreamCmd).Standalone()
 
-	kinesis_addTagsToStreamCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
-	kinesis_addTagsToStreamCmd.Flags().String("stream-name", "", "The name of the stream.")
-	kinesis_addTagsToStreamCmd.Flags().String("tags", "", "A set of up to 50 key-value pairs to use to create the tags.")
-	kinesis_addTagsToStreamCmd.MarkFlagRequired("tags")
+		kinesis_addTagsToStreamCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
+		kinesis_addTagsToStreamCmd.Flags().String("stream-name", "", "The name of the stream.")
+		kinesis_addTagsToStreamCmd.Flags().String("tags", "", "A set of up to 50 key-value pairs to use to create the tags.")
+		kinesis_addTagsToStreamCmd.MarkFlagRequired("tags")
+	})
 	kinesisCmd.AddCommand(kinesis_addTagsToStreamCmd)
 }

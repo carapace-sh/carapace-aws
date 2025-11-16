@@ -12,11 +12,13 @@ var observabilityadmin_updateCentralizationRuleForOrganizationCmd = &cobra.Comma
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_updateCentralizationRuleForOrganizationCmd).Standalone()
+	carapace.Gen(observabilityadmin_updateCentralizationRuleForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_updateCentralizationRuleForOrganizationCmd).Standalone()
 
-	observabilityadmin_updateCentralizationRuleForOrganizationCmd.Flags().String("rule", "", "The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.")
-	observabilityadmin_updateCentralizationRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization centralization rule to update.")
-	observabilityadmin_updateCentralizationRuleForOrganizationCmd.MarkFlagRequired("rule")
-	observabilityadmin_updateCentralizationRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+		observabilityadmin_updateCentralizationRuleForOrganizationCmd.Flags().String("rule", "", "The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.")
+		observabilityadmin_updateCentralizationRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization centralization rule to update.")
+		observabilityadmin_updateCentralizationRuleForOrganizationCmd.MarkFlagRequired("rule")
+		observabilityadmin_updateCentralizationRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_updateCentralizationRuleForOrganizationCmd)
 }

@@ -12,13 +12,15 @@ var iotfleetwise_updateSignalCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_updateSignalCatalogCmd).Standalone()
+	carapace.Gen(iotfleetwise_updateSignalCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_updateSignalCatalogCmd).Standalone()
 
-	iotfleetwise_updateSignalCatalogCmd.Flags().String("description", "", "A brief description of the signal catalog to update.")
-	iotfleetwise_updateSignalCatalogCmd.Flags().String("name", "", "The name of the signal catalog to update.")
-	iotfleetwise_updateSignalCatalogCmd.Flags().String("nodes-to-add", "", "A list of information about nodes to add to the signal catalog.")
-	iotfleetwise_updateSignalCatalogCmd.Flags().String("nodes-to-remove", "", "A list of `fullyQualifiedName` of nodes to remove from the signal catalog.")
-	iotfleetwise_updateSignalCatalogCmd.Flags().String("nodes-to-update", "", "A list of information about nodes to update in the signal catalog.")
-	iotfleetwise_updateSignalCatalogCmd.MarkFlagRequired("name")
+		iotfleetwise_updateSignalCatalogCmd.Flags().String("description", "", "A brief description of the signal catalog to update.")
+		iotfleetwise_updateSignalCatalogCmd.Flags().String("name", "", "The name of the signal catalog to update.")
+		iotfleetwise_updateSignalCatalogCmd.Flags().String("nodes-to-add", "", "A list of information about nodes to add to the signal catalog.")
+		iotfleetwise_updateSignalCatalogCmd.Flags().String("nodes-to-remove", "", "A list of `fullyQualifiedName` of nodes to remove from the signal catalog.")
+		iotfleetwise_updateSignalCatalogCmd.Flags().String("nodes-to-update", "", "A list of information about nodes to update in the signal catalog.")
+		iotfleetwise_updateSignalCatalogCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_updateSignalCatalogCmd)
 }

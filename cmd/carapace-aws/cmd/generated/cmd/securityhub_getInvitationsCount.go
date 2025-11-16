@@ -12,7 +12,9 @@ var securityhub_getInvitationsCountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getInvitationsCountCmd).Standalone()
+	carapace.Gen(securityhub_getInvitationsCountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getInvitationsCountCmd).Standalone()
 
+	})
 	securityhubCmd.AddCommand(securityhub_getInvitationsCountCmd)
 }

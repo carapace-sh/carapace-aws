@@ -12,10 +12,12 @@ var workspacesThinClient_deleteEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClient_deleteEnvironmentCmd).Standalone()
+	carapace.Gen(workspacesThinClient_deleteEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClient_deleteEnvironmentCmd).Standalone()
 
-	workspacesThinClient_deleteEnvironmentCmd.Flags().String("client-token", "", "Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	workspacesThinClient_deleteEnvironmentCmd.Flags().String("id", "", "The ID of the environment to delete.")
-	workspacesThinClient_deleteEnvironmentCmd.MarkFlagRequired("id")
+		workspacesThinClient_deleteEnvironmentCmd.Flags().String("client-token", "", "Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		workspacesThinClient_deleteEnvironmentCmd.Flags().String("id", "", "The ID of the environment to delete.")
+		workspacesThinClient_deleteEnvironmentCmd.MarkFlagRequired("id")
+	})
 	workspacesThinClientCmd.AddCommand(workspacesThinClient_deleteEnvironmentCmd)
 }

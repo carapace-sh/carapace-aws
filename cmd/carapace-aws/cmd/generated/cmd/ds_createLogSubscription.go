@@ -12,11 +12,13 @@ var ds_createLogSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_createLogSubscriptionCmd).Standalone()
+	carapace.Gen(ds_createLogSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_createLogSubscriptionCmd).Standalone()
 
-	ds_createLogSubscriptionCmd.Flags().String("directory-id", "", "Identifier of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.")
-	ds_createLogSubscriptionCmd.Flags().String("log-group-name", "", "The name of the CloudWatch log group where the real-time domain controller logs are forwarded.")
-	ds_createLogSubscriptionCmd.MarkFlagRequired("directory-id")
-	ds_createLogSubscriptionCmd.MarkFlagRequired("log-group-name")
+		ds_createLogSubscriptionCmd.Flags().String("directory-id", "", "Identifier of the directory to which you want to subscribe and receive real-time logs to your specified CloudWatch log group.")
+		ds_createLogSubscriptionCmd.Flags().String("log-group-name", "", "The name of the CloudWatch log group where the real-time domain controller logs are forwarded.")
+		ds_createLogSubscriptionCmd.MarkFlagRequired("directory-id")
+		ds_createLogSubscriptionCmd.MarkFlagRequired("log-group-name")
+	})
 	dsCmd.AddCommand(ds_createLogSubscriptionCmd)
 }

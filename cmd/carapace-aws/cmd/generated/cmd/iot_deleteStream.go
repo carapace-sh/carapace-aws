@@ -12,9 +12,11 @@ var iot_deleteStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteStreamCmd).Standalone()
+	carapace.Gen(iot_deleteStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteStreamCmd).Standalone()
 
-	iot_deleteStreamCmd.Flags().String("stream-id", "", "The stream ID.")
-	iot_deleteStreamCmd.MarkFlagRequired("stream-id")
+		iot_deleteStreamCmd.Flags().String("stream-id", "", "The stream ID.")
+		iot_deleteStreamCmd.MarkFlagRequired("stream-id")
+	})
 	iotCmd.AddCommand(iot_deleteStreamCmd)
 }

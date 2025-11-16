@@ -12,9 +12,11 @@ var route53resolver_getResolverRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_getResolverRuleCmd).Standalone()
+	carapace.Gen(route53resolver_getResolverRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_getResolverRuleCmd).Standalone()
 
-	route53resolver_getResolverRuleCmd.Flags().String("resolver-rule-id", "", "The ID of the Resolver rule that you want to get information about.")
-	route53resolver_getResolverRuleCmd.MarkFlagRequired("resolver-rule-id")
+		route53resolver_getResolverRuleCmd.Flags().String("resolver-rule-id", "", "The ID of the Resolver rule that you want to get information about.")
+		route53resolver_getResolverRuleCmd.MarkFlagRequired("resolver-rule-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_getResolverRuleCmd)
 }

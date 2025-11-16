@@ -12,9 +12,11 @@ var ecs_discoverPollEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_discoverPollEndpointCmd).Standalone()
+	carapace.Gen(ecs_discoverPollEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_discoverPollEndpointCmd).Standalone()
 
-	ecs_discoverPollEndpointCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that the container instance belongs to.")
-	ecs_discoverPollEndpointCmd.Flags().String("container-instance", "", "The container instance ID or full ARN of the container instance.")
+		ecs_discoverPollEndpointCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that the container instance belongs to.")
+		ecs_discoverPollEndpointCmd.Flags().String("container-instance", "", "The container instance ID or full ARN of the container instance.")
+	})
 	ecsCmd.AddCommand(ecs_discoverPollEndpointCmd)
 }

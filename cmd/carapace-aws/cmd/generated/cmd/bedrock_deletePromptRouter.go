@@ -12,9 +12,11 @@ var bedrock_deletePromptRouterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deletePromptRouterCmd).Standalone()
+	carapace.Gen(bedrock_deletePromptRouterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deletePromptRouterCmd).Standalone()
 
-	bedrock_deletePromptRouterCmd.Flags().String("prompt-router-arn", "", "The Amazon Resource Name (ARN) of the prompt router to delete.")
-	bedrock_deletePromptRouterCmd.MarkFlagRequired("prompt-router-arn")
+		bedrock_deletePromptRouterCmd.Flags().String("prompt-router-arn", "", "The Amazon Resource Name (ARN) of the prompt router to delete.")
+		bedrock_deletePromptRouterCmd.MarkFlagRequired("prompt-router-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_deletePromptRouterCmd)
 }

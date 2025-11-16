@@ -12,12 +12,14 @@ var ec2_getVpnConnectionDeviceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getVpnConnectionDeviceTypesCmd).Standalone()
+	carapace.Gen(ec2_getVpnConnectionDeviceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getVpnConnectionDeviceTypesCmd).Standalone()
 
-	ec2_getVpnConnectionDeviceTypesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getVpnConnectionDeviceTypesCmd.Flags().String("max-results", "", "The maximum number of results returned by `GetVpnConnectionDeviceTypes` in paginated output.")
-	ec2_getVpnConnectionDeviceTypesCmd.Flags().String("next-token", "", "The `NextToken` value returned from a previous paginated `GetVpnConnectionDeviceTypes` request where `MaxResults` was used and the results exceeded the value of that parameter.")
-	ec2_getVpnConnectionDeviceTypesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getVpnConnectionDeviceTypesCmd.Flag("no-dry-run").Hidden = true
+		ec2_getVpnConnectionDeviceTypesCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getVpnConnectionDeviceTypesCmd.Flags().String("max-results", "", "The maximum number of results returned by `GetVpnConnectionDeviceTypes` in paginated output.")
+		ec2_getVpnConnectionDeviceTypesCmd.Flags().String("next-token", "", "The `NextToken` value returned from a previous paginated `GetVpnConnectionDeviceTypes` request where `MaxResults` was used and the results exceeded the value of that parameter.")
+		ec2_getVpnConnectionDeviceTypesCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getVpnConnectionDeviceTypesCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_getVpnConnectionDeviceTypesCmd)
 }

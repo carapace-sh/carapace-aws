@@ -12,9 +12,11 @@ var iotfleetwise_batchUpdateVehicleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_batchUpdateVehicleCmd).Standalone()
+	carapace.Gen(iotfleetwise_batchUpdateVehicleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_batchUpdateVehicleCmd).Standalone()
 
-	iotfleetwise_batchUpdateVehicleCmd.Flags().String("vehicles", "", "A list of information about the vehicles to update.")
-	iotfleetwise_batchUpdateVehicleCmd.MarkFlagRequired("vehicles")
+		iotfleetwise_batchUpdateVehicleCmd.Flags().String("vehicles", "", "A list of information about the vehicles to update.")
+		iotfleetwise_batchUpdateVehicleCmd.MarkFlagRequired("vehicles")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_batchUpdateVehicleCmd)
 }

@@ -12,9 +12,11 @@ var fms_deleteAppsListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_deleteAppsListCmd).Standalone()
+	carapace.Gen(fms_deleteAppsListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_deleteAppsListCmd).Standalone()
 
-	fms_deleteAppsListCmd.Flags().String("list-id", "", "The ID of the applications list that you want to delete.")
-	fms_deleteAppsListCmd.MarkFlagRequired("list-id")
+		fms_deleteAppsListCmd.Flags().String("list-id", "", "The ID of the applications list that you want to delete.")
+		fms_deleteAppsListCmd.MarkFlagRequired("list-id")
+	})
 	fmsCmd.AddCommand(fms_deleteAppsListCmd)
 }

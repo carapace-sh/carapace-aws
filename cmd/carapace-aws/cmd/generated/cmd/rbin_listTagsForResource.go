@@ -12,9 +12,11 @@ var rbin_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rbin_listTagsForResourceCmd).Standalone()
+	carapace.Gen(rbin_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rbin_listTagsForResourceCmd).Standalone()
 
-	rbin_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the retention rule.")
-	rbin_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		rbin_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the retention rule.")
+		rbin_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	rbinCmd.AddCommand(rbin_listTagsForResourceCmd)
 }

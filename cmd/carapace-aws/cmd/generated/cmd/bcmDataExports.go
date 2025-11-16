@@ -12,7 +12,9 @@ var bcmDataExportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDataExportsCmd).Standalone()
+	carapace.Gen(bcmDataExportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDataExportsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(bcmDataExportsCmd)
 }

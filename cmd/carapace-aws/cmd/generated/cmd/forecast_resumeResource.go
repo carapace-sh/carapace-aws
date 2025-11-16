@@ -12,9 +12,11 @@ var forecast_resumeResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_resumeResourceCmd).Standalone()
+	carapace.Gen(forecast_resumeResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_resumeResourceCmd).Standalone()
 
-	forecast_resumeResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the monitor resource to resume.")
-	forecast_resumeResourceCmd.MarkFlagRequired("resource-arn")
+		forecast_resumeResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the monitor resource to resume.")
+		forecast_resumeResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	forecastCmd.AddCommand(forecast_resumeResourceCmd)
 }

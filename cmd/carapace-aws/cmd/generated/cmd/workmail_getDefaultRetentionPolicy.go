@@ -12,9 +12,11 @@ var workmail_getDefaultRetentionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_getDefaultRetentionPolicyCmd).Standalone()
+	carapace.Gen(workmail_getDefaultRetentionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_getDefaultRetentionPolicyCmd).Standalone()
 
-	workmail_getDefaultRetentionPolicyCmd.Flags().String("organization-id", "", "The organization ID.")
-	workmail_getDefaultRetentionPolicyCmd.MarkFlagRequired("organization-id")
+		workmail_getDefaultRetentionPolicyCmd.Flags().String("organization-id", "", "The organization ID.")
+		workmail_getDefaultRetentionPolicyCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_getDefaultRetentionPolicyCmd)
 }

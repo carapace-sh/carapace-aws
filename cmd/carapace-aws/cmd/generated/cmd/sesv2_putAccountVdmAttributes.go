@@ -12,9 +12,11 @@ var sesv2_putAccountVdmAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putAccountVdmAttributesCmd).Standalone()
+	carapace.Gen(sesv2_putAccountVdmAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putAccountVdmAttributesCmd).Standalone()
 
-	sesv2_putAccountVdmAttributesCmd.Flags().String("vdm-attributes", "", "The VDM attributes that you wish to apply to your Amazon SES account.")
-	sesv2_putAccountVdmAttributesCmd.MarkFlagRequired("vdm-attributes")
+		sesv2_putAccountVdmAttributesCmd.Flags().String("vdm-attributes", "", "The VDM attributes that you wish to apply to your Amazon SES account.")
+		sesv2_putAccountVdmAttributesCmd.MarkFlagRequired("vdm-attributes")
+	})
 	sesv2Cmd.AddCommand(sesv2_putAccountVdmAttributesCmd)
 }

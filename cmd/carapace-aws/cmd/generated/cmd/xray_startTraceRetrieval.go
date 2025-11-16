@@ -12,13 +12,15 @@ var xray_startTraceRetrievalCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_startTraceRetrievalCmd).Standalone()
+	carapace.Gen(xray_startTraceRetrievalCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_startTraceRetrievalCmd).Standalone()
 
-	xray_startTraceRetrievalCmd.Flags().String("end-time", "", "The end of the time range to retrieve traces.")
-	xray_startTraceRetrievalCmd.Flags().String("start-time", "", "The start of the time range to retrieve traces.")
-	xray_startTraceRetrievalCmd.Flags().String("trace-ids", "", "Specify the trace IDs of the traces to be retrieved.")
-	xray_startTraceRetrievalCmd.MarkFlagRequired("end-time")
-	xray_startTraceRetrievalCmd.MarkFlagRequired("start-time")
-	xray_startTraceRetrievalCmd.MarkFlagRequired("trace-ids")
+		xray_startTraceRetrievalCmd.Flags().String("end-time", "", "The end of the time range to retrieve traces.")
+		xray_startTraceRetrievalCmd.Flags().String("start-time", "", "The start of the time range to retrieve traces.")
+		xray_startTraceRetrievalCmd.Flags().String("trace-ids", "", "Specify the trace IDs of the traces to be retrieved.")
+		xray_startTraceRetrievalCmd.MarkFlagRequired("end-time")
+		xray_startTraceRetrievalCmd.MarkFlagRequired("start-time")
+		xray_startTraceRetrievalCmd.MarkFlagRequired("trace-ids")
+	})
 	xrayCmd.AddCommand(xray_startTraceRetrievalCmd)
 }

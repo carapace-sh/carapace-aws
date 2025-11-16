@@ -12,11 +12,13 @@ var mediapackageVod_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackageVod_untagResourceCmd).Standalone()
+	carapace.Gen(mediapackageVod_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackageVod_untagResourceCmd).Standalone()
 
-	mediapackageVod_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource.")
-	mediapackageVod_untagResourceCmd.Flags().String("tag-keys", "", "A comma-separated list of the tag keys to remove from the resource.")
-	mediapackageVod_untagResourceCmd.MarkFlagRequired("resource-arn")
-	mediapackageVod_untagResourceCmd.MarkFlagRequired("tag-keys")
+		mediapackageVod_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource.")
+		mediapackageVod_untagResourceCmd.Flags().String("tag-keys", "", "A comma-separated list of the tag keys to remove from the resource.")
+		mediapackageVod_untagResourceCmd.MarkFlagRequired("resource-arn")
+		mediapackageVod_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	mediapackageVodCmd.AddCommand(mediapackageVod_untagResourceCmd)
 }

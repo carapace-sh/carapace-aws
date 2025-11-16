@@ -12,9 +12,11 @@ var codedeploy_getDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_getDeploymentCmd).Standalone()
+	carapace.Gen(codedeploy_getDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_getDeploymentCmd).Standalone()
 
-	codedeploy_getDeploymentCmd.Flags().String("deployment-id", "", "The unique ID of a deployment associated with the user or Amazon Web Services account.")
-	codedeploy_getDeploymentCmd.MarkFlagRequired("deployment-id")
+		codedeploy_getDeploymentCmd.Flags().String("deployment-id", "", "The unique ID of a deployment associated with the user or Amazon Web Services account.")
+		codedeploy_getDeploymentCmd.MarkFlagRequired("deployment-id")
+	})
 	codedeployCmd.AddCommand(codedeploy_getDeploymentCmd)
 }

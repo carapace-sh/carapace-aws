@@ -12,9 +12,11 @@ var vpcLattice_deleteResourceGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deleteResourceGatewayCmd).Standalone()
+	carapace.Gen(vpcLattice_deleteResourceGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deleteResourceGatewayCmd).Standalone()
 
-	vpcLattice_deleteResourceGatewayCmd.Flags().String("resource-gateway-identifier", "", "The ID or ARN of the resource gateway.")
-	vpcLattice_deleteResourceGatewayCmd.MarkFlagRequired("resource-gateway-identifier")
+		vpcLattice_deleteResourceGatewayCmd.Flags().String("resource-gateway-identifier", "", "The ID or ARN of the resource gateway.")
+		vpcLattice_deleteResourceGatewayCmd.MarkFlagRequired("resource-gateway-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deleteResourceGatewayCmd)
 }

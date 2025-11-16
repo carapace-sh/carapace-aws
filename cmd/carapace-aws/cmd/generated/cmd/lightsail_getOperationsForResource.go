@@ -12,10 +12,12 @@ var lightsail_getOperationsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getOperationsForResourceCmd).Standalone()
+	carapace.Gen(lightsail_getOperationsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getOperationsForResourceCmd).Standalone()
 
-	lightsail_getOperationsForResourceCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
-	lightsail_getOperationsForResourceCmd.Flags().String("resource-name", "", "The name of the resource for which you are requesting information.")
-	lightsail_getOperationsForResourceCmd.MarkFlagRequired("resource-name")
+		lightsail_getOperationsForResourceCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+		lightsail_getOperationsForResourceCmd.Flags().String("resource-name", "", "The name of the resource for which you are requesting information.")
+		lightsail_getOperationsForResourceCmd.MarkFlagRequired("resource-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getOperationsForResourceCmd)
 }

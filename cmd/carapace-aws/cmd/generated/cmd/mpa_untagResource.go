@@ -12,11 +12,13 @@ var mpa_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_untagResourceCmd).Standalone()
+	carapace.Gen(mpa_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_untagResourceCmd).Standalone()
 
-	mpa_untagResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) for the resource you want to untag.")
-	mpa_untagResourceCmd.Flags().String("tag-keys", "", "Array of tag key-value pairs that you want to untag.")
-	mpa_untagResourceCmd.MarkFlagRequired("resource-arn")
-	mpa_untagResourceCmd.MarkFlagRequired("tag-keys")
+		mpa_untagResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) for the resource you want to untag.")
+		mpa_untagResourceCmd.Flags().String("tag-keys", "", "Array of tag key-value pairs that you want to untag.")
+		mpa_untagResourceCmd.MarkFlagRequired("resource-arn")
+		mpa_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	mpaCmd.AddCommand(mpa_untagResourceCmd)
 }

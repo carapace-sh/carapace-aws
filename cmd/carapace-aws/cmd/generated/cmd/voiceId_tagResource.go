@@ -12,11 +12,13 @@ var voiceId_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_tagResourceCmd).Standalone()
+	carapace.Gen(voiceId_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_tagResourceCmd).Standalone()
 
-	voiceId_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Voice ID resource you want to tag.")
-	voiceId_tagResourceCmd.Flags().String("tags", "", "The list of tags to assign to the specified resource.")
-	voiceId_tagResourceCmd.MarkFlagRequired("resource-arn")
-	voiceId_tagResourceCmd.MarkFlagRequired("tags")
+		voiceId_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Voice ID resource you want to tag.")
+		voiceId_tagResourceCmd.Flags().String("tags", "", "The list of tags to assign to the specified resource.")
+		voiceId_tagResourceCmd.MarkFlagRequired("resource-arn")
+		voiceId_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	voiceIdCmd.AddCommand(voiceId_tagResourceCmd)
 }

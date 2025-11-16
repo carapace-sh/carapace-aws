@@ -12,13 +12,15 @@ var repostspace_batchRemoveRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_batchRemoveRoleCmd).Standalone()
+	carapace.Gen(repostspace_batchRemoveRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_batchRemoveRoleCmd).Standalone()
 
-	repostspace_batchRemoveRoleCmd.Flags().String("accessor-ids", "", "The user or group accessor identifiers to remove the role from.")
-	repostspace_batchRemoveRoleCmd.Flags().String("role", "", "The role to remove from the users or groups.")
-	repostspace_batchRemoveRoleCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
-	repostspace_batchRemoveRoleCmd.MarkFlagRequired("accessor-ids")
-	repostspace_batchRemoveRoleCmd.MarkFlagRequired("role")
-	repostspace_batchRemoveRoleCmd.MarkFlagRequired("space-id")
+		repostspace_batchRemoveRoleCmd.Flags().String("accessor-ids", "", "The user or group accessor identifiers to remove the role from.")
+		repostspace_batchRemoveRoleCmd.Flags().String("role", "", "The role to remove from the users or groups.")
+		repostspace_batchRemoveRoleCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
+		repostspace_batchRemoveRoleCmd.MarkFlagRequired("accessor-ids")
+		repostspace_batchRemoveRoleCmd.MarkFlagRequired("role")
+		repostspace_batchRemoveRoleCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_batchRemoveRoleCmd)
 }

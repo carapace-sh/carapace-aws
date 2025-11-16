@@ -12,11 +12,13 @@ var logs_putDeliveryDestinationPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_putDeliveryDestinationPolicyCmd).Standalone()
+	carapace.Gen(logs_putDeliveryDestinationPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_putDeliveryDestinationPolicyCmd).Standalone()
 
-	logs_putDeliveryDestinationPolicyCmd.Flags().String("delivery-destination-name", "", "The name of the delivery destination to assign this policy to.")
-	logs_putDeliveryDestinationPolicyCmd.Flags().String("delivery-destination-policy", "", "The contents of the policy.")
-	logs_putDeliveryDestinationPolicyCmd.MarkFlagRequired("delivery-destination-name")
-	logs_putDeliveryDestinationPolicyCmd.MarkFlagRequired("delivery-destination-policy")
+		logs_putDeliveryDestinationPolicyCmd.Flags().String("delivery-destination-name", "", "The name of the delivery destination to assign this policy to.")
+		logs_putDeliveryDestinationPolicyCmd.Flags().String("delivery-destination-policy", "", "The contents of the policy.")
+		logs_putDeliveryDestinationPolicyCmd.MarkFlagRequired("delivery-destination-name")
+		logs_putDeliveryDestinationPolicyCmd.MarkFlagRequired("delivery-destination-policy")
+	})
 	logsCmd.AddCommand(logs_putDeliveryDestinationPolicyCmd)
 }

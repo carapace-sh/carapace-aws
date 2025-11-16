@@ -12,7 +12,9 @@ var ssmContactsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContactsCmd).Standalone()
+	carapace.Gen(ssmContactsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContactsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ssmContactsCmd)
 }

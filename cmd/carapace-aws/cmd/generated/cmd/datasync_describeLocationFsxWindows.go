@@ -12,9 +12,11 @@ var datasync_describeLocationFsxWindowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeLocationFsxWindowsCmd).Standalone()
+	carapace.Gen(datasync_describeLocationFsxWindowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeLocationFsxWindowsCmd).Standalone()
 
-	datasync_describeLocationFsxWindowsCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the FSx for Windows File Server location.")
-	datasync_describeLocationFsxWindowsCmd.MarkFlagRequired("location-arn")
+		datasync_describeLocationFsxWindowsCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the FSx for Windows File Server location.")
+		datasync_describeLocationFsxWindowsCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeLocationFsxWindowsCmd)
 }

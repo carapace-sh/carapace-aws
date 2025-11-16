@@ -12,9 +12,11 @@ var comprehend_deleteEntityRecognizerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_deleteEntityRecognizerCmd).Standalone()
+	carapace.Gen(comprehend_deleteEntityRecognizerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_deleteEntityRecognizerCmd).Standalone()
 
-	comprehend_deleteEntityRecognizerCmd.Flags().String("entity-recognizer-arn", "", "The Amazon Resource Name (ARN) that identifies the entity recognizer.")
-	comprehend_deleteEntityRecognizerCmd.MarkFlagRequired("entity-recognizer-arn")
+		comprehend_deleteEntityRecognizerCmd.Flags().String("entity-recognizer-arn", "", "The Amazon Resource Name (ARN) that identifies the entity recognizer.")
+		comprehend_deleteEntityRecognizerCmd.MarkFlagRequired("entity-recognizer-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_deleteEntityRecognizerCmd)
 }

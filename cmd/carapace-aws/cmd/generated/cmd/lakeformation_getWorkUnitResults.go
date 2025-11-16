@@ -12,13 +12,15 @@ var lakeformation_getWorkUnitResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_getWorkUnitResultsCmd).Standalone()
+	carapace.Gen(lakeformation_getWorkUnitResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_getWorkUnitResultsCmd).Standalone()
 
-	lakeformation_getWorkUnitResultsCmd.Flags().String("query-id", "", "The ID of the plan query operation for which to get results.")
-	lakeformation_getWorkUnitResultsCmd.Flags().String("work-unit-id", "", "The work unit ID for which to get results.")
-	lakeformation_getWorkUnitResultsCmd.Flags().String("work-unit-token", "", "A work token used to query the execution service.")
-	lakeformation_getWorkUnitResultsCmd.MarkFlagRequired("query-id")
-	lakeformation_getWorkUnitResultsCmd.MarkFlagRequired("work-unit-id")
-	lakeformation_getWorkUnitResultsCmd.MarkFlagRequired("work-unit-token")
+		lakeformation_getWorkUnitResultsCmd.Flags().String("query-id", "", "The ID of the plan query operation for which to get results.")
+		lakeformation_getWorkUnitResultsCmd.Flags().String("work-unit-id", "", "The work unit ID for which to get results.")
+		lakeformation_getWorkUnitResultsCmd.Flags().String("work-unit-token", "", "A work token used to query the execution service.")
+		lakeformation_getWorkUnitResultsCmd.MarkFlagRequired("query-id")
+		lakeformation_getWorkUnitResultsCmd.MarkFlagRequired("work-unit-id")
+		lakeformation_getWorkUnitResultsCmd.MarkFlagRequired("work-unit-token")
+	})
 	lakeformationCmd.AddCommand(lakeformation_getWorkUnitResultsCmd)
 }

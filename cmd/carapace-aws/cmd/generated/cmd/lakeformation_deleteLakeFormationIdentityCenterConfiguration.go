@@ -12,8 +12,10 @@ var lakeformation_deleteLakeFormationIdentityCenterConfigurationCmd = &cobra.Com
 }
 
 func init() {
-	carapace.Gen(lakeformation_deleteLakeFormationIdentityCenterConfigurationCmd).Standalone()
+	carapace.Gen(lakeformation_deleteLakeFormationIdentityCenterConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_deleteLakeFormationIdentityCenterConfigurationCmd).Standalone()
 
-	lakeformation_deleteLakeFormationIdentityCenterConfigurationCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+		lakeformation_deleteLakeFormationIdentityCenterConfigurationCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+	})
 	lakeformationCmd.AddCommand(lakeformation_deleteLakeFormationIdentityCenterConfigurationCmd)
 }

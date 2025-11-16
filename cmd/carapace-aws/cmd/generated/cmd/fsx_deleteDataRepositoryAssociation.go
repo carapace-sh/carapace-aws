@@ -12,11 +12,13 @@ var fsx_deleteDataRepositoryAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_deleteDataRepositoryAssociationCmd).Standalone()
+	carapace.Gen(fsx_deleteDataRepositoryAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_deleteDataRepositoryAssociationCmd).Standalone()
 
-	fsx_deleteDataRepositoryAssociationCmd.Flags().String("association-id", "", "The ID of the data repository association that you want to delete.")
-	fsx_deleteDataRepositoryAssociationCmd.Flags().String("client-request-token", "", "")
-	fsx_deleteDataRepositoryAssociationCmd.Flags().String("delete-data-in-file-system", "", "Set to `true` to delete the data in the file system that corresponds to the data repository association.")
-	fsx_deleteDataRepositoryAssociationCmd.MarkFlagRequired("association-id")
+		fsx_deleteDataRepositoryAssociationCmd.Flags().String("association-id", "", "The ID of the data repository association that you want to delete.")
+		fsx_deleteDataRepositoryAssociationCmd.Flags().String("client-request-token", "", "")
+		fsx_deleteDataRepositoryAssociationCmd.Flags().String("delete-data-in-file-system", "", "Set to `true` to delete the data in the file system that corresponds to the data repository association.")
+		fsx_deleteDataRepositoryAssociationCmd.MarkFlagRequired("association-id")
+	})
 	fsxCmd.AddCommand(fsx_deleteDataRepositoryAssociationCmd)
 }

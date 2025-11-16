@@ -12,11 +12,13 @@ var es_revokeVpcEndpointAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_revokeVpcEndpointAccessCmd).Standalone()
+	carapace.Gen(es_revokeVpcEndpointAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_revokeVpcEndpointAccessCmd).Standalone()
 
-	es_revokeVpcEndpointAccessCmd.Flags().String("account", "", "The account ID to revoke access from.")
-	es_revokeVpcEndpointAccessCmd.Flags().String("domain-name", "", "The name of the OpenSearch Service domain.")
-	es_revokeVpcEndpointAccessCmd.MarkFlagRequired("account")
-	es_revokeVpcEndpointAccessCmd.MarkFlagRequired("domain-name")
+		es_revokeVpcEndpointAccessCmd.Flags().String("account", "", "The account ID to revoke access from.")
+		es_revokeVpcEndpointAccessCmd.Flags().String("domain-name", "", "The name of the OpenSearch Service domain.")
+		es_revokeVpcEndpointAccessCmd.MarkFlagRequired("account")
+		es_revokeVpcEndpointAccessCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_revokeVpcEndpointAccessCmd)
 }

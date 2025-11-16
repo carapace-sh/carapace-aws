@@ -12,9 +12,11 @@ var imagebuilder_getImagePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getImagePipelineCmd).Standalone()
+	carapace.Gen(imagebuilder_getImagePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getImagePipelineCmd).Standalone()
 
-	imagebuilder_getImagePipelineCmd.Flags().String("image-pipeline-arn", "", "The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve.")
-	imagebuilder_getImagePipelineCmd.MarkFlagRequired("image-pipeline-arn")
+		imagebuilder_getImagePipelineCmd.Flags().String("image-pipeline-arn", "", "The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve.")
+		imagebuilder_getImagePipelineCmd.MarkFlagRequired("image-pipeline-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getImagePipelineCmd)
 }

@@ -12,11 +12,13 @@ var codecommit_getPullRequestOverrideStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_getPullRequestOverrideStateCmd).Standalone()
+	carapace.Gen(codecommit_getPullRequestOverrideStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_getPullRequestOverrideStateCmd).Standalone()
 
-	codecommit_getPullRequestOverrideStateCmd.Flags().String("pull-request-id", "", "The ID of the pull request for which you want to get information about whether approval rules have been set aside (overridden).")
-	codecommit_getPullRequestOverrideStateCmd.Flags().String("revision-id", "", "The system-generated ID of the revision for the pull request.")
-	codecommit_getPullRequestOverrideStateCmd.MarkFlagRequired("pull-request-id")
-	codecommit_getPullRequestOverrideStateCmd.MarkFlagRequired("revision-id")
+		codecommit_getPullRequestOverrideStateCmd.Flags().String("pull-request-id", "", "The ID of the pull request for which you want to get information about whether approval rules have been set aside (overridden).")
+		codecommit_getPullRequestOverrideStateCmd.Flags().String("revision-id", "", "The system-generated ID of the revision for the pull request.")
+		codecommit_getPullRequestOverrideStateCmd.MarkFlagRequired("pull-request-id")
+		codecommit_getPullRequestOverrideStateCmd.MarkFlagRequired("revision-id")
+	})
 	codecommitCmd.AddCommand(codecommit_getPullRequestOverrideStateCmd)
 }

@@ -12,7 +12,9 @@ var autoscaling_describeLifecycleHookTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_describeLifecycleHookTypesCmd).Standalone()
+	carapace.Gen(autoscaling_describeLifecycleHookTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_describeLifecycleHookTypesCmd).Standalone()
 
+	})
 	autoscalingCmd.AddCommand(autoscaling_describeLifecycleHookTypesCmd)
 }

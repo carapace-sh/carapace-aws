@@ -12,7 +12,9 @@ var cloud9Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloud9Cmd).Standalone()
+	carapace.Gen(cloud9Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloud9Cmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cloud9Cmd)
 }

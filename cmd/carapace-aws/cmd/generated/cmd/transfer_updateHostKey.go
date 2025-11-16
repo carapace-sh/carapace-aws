@@ -12,13 +12,15 @@ var transfer_updateHostKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_updateHostKeyCmd).Standalone()
+	carapace.Gen(transfer_updateHostKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_updateHostKeyCmd).Standalone()
 
-	transfer_updateHostKeyCmd.Flags().String("description", "", "An updated description for the host key.")
-	transfer_updateHostKeyCmd.Flags().String("host-key-id", "", "The identifier of the host key that you are updating.")
-	transfer_updateHostKeyCmd.Flags().String("server-id", "", "The identifier of the server that contains the host key that you are updating.")
-	transfer_updateHostKeyCmd.MarkFlagRequired("description")
-	transfer_updateHostKeyCmd.MarkFlagRequired("host-key-id")
-	transfer_updateHostKeyCmd.MarkFlagRequired("server-id")
+		transfer_updateHostKeyCmd.Flags().String("description", "", "An updated description for the host key.")
+		transfer_updateHostKeyCmd.Flags().String("host-key-id", "", "The identifier of the host key that you are updating.")
+		transfer_updateHostKeyCmd.Flags().String("server-id", "", "The identifier of the server that contains the host key that you are updating.")
+		transfer_updateHostKeyCmd.MarkFlagRequired("description")
+		transfer_updateHostKeyCmd.MarkFlagRequired("host-key-id")
+		transfer_updateHostKeyCmd.MarkFlagRequired("server-id")
+	})
 	transferCmd.AddCommand(transfer_updateHostKeyCmd)
 }

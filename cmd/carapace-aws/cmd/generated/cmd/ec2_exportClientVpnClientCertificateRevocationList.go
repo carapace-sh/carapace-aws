@@ -12,12 +12,14 @@ var ec2_exportClientVpnClientCertificateRevocationListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_exportClientVpnClientCertificateRevocationListCmd).Standalone()
+	carapace.Gen(ec2_exportClientVpnClientCertificateRevocationListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_exportClientVpnClientCertificateRevocationListCmd).Standalone()
 
-	ec2_exportClientVpnClientCertificateRevocationListCmd.Flags().String("client-vpn-endpoint-id", "", "The ID of the Client VPN endpoint.")
-	ec2_exportClientVpnClientCertificateRevocationListCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_exportClientVpnClientCertificateRevocationListCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_exportClientVpnClientCertificateRevocationListCmd.MarkFlagRequired("client-vpn-endpoint-id")
-	ec2_exportClientVpnClientCertificateRevocationListCmd.Flag("no-dry-run").Hidden = true
+		ec2_exportClientVpnClientCertificateRevocationListCmd.Flags().String("client-vpn-endpoint-id", "", "The ID of the Client VPN endpoint.")
+		ec2_exportClientVpnClientCertificateRevocationListCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_exportClientVpnClientCertificateRevocationListCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_exportClientVpnClientCertificateRevocationListCmd.MarkFlagRequired("client-vpn-endpoint-id")
+		ec2_exportClientVpnClientCertificateRevocationListCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_exportClientVpnClientCertificateRevocationListCmd)
 }

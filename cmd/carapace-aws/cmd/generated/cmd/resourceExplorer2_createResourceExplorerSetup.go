@@ -12,12 +12,14 @@ var resourceExplorer2_createResourceExplorerSetupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_createResourceExplorerSetupCmd).Standalone()
+	carapace.Gen(resourceExplorer2_createResourceExplorerSetupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_createResourceExplorerSetupCmd).Standalone()
 
-	resourceExplorer2_createResourceExplorerSetupCmd.Flags().String("aggregator-regions", "", "A list of Amazon Web Services Regions that should be configured as aggregator Regions.")
-	resourceExplorer2_createResourceExplorerSetupCmd.Flags().String("region-list", "", "A list of Amazon Web Services Regions where Resource Explorer should be configured.")
-	resourceExplorer2_createResourceExplorerSetupCmd.Flags().String("view-name", "", "The name for the view to be created as part of the Resource Explorer setup.")
-	resourceExplorer2_createResourceExplorerSetupCmd.MarkFlagRequired("region-list")
-	resourceExplorer2_createResourceExplorerSetupCmd.MarkFlagRequired("view-name")
+		resourceExplorer2_createResourceExplorerSetupCmd.Flags().String("aggregator-regions", "", "A list of Amazon Web Services Regions that should be configured as aggregator Regions.")
+		resourceExplorer2_createResourceExplorerSetupCmd.Flags().String("region-list", "", "A list of Amazon Web Services Regions where Resource Explorer should be configured.")
+		resourceExplorer2_createResourceExplorerSetupCmd.Flags().String("view-name", "", "The name for the view to be created as part of the Resource Explorer setup.")
+		resourceExplorer2_createResourceExplorerSetupCmd.MarkFlagRequired("region-list")
+		resourceExplorer2_createResourceExplorerSetupCmd.MarkFlagRequired("view-name")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_createResourceExplorerSetupCmd)
 }

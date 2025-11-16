@@ -12,12 +12,14 @@ var pinpointSmsVoiceV2_updateProtectConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_updateProtectConfigurationCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_updateProtectConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_updateProtectConfigurationCmd).Standalone()
 
-	pinpointSmsVoiceV2_updateProtectConfigurationCmd.Flags().Bool("deletion-protection-enabled", false, "When set to true deletion protection is enabled.")
-	pinpointSmsVoiceV2_updateProtectConfigurationCmd.Flags().Bool("no-deletion-protection-enabled", false, "When set to true deletion protection is enabled.")
-	pinpointSmsVoiceV2_updateProtectConfigurationCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
-	pinpointSmsVoiceV2_updateProtectConfigurationCmd.Flag("no-deletion-protection-enabled").Hidden = true
-	pinpointSmsVoiceV2_updateProtectConfigurationCmd.MarkFlagRequired("protect-configuration-id")
+		pinpointSmsVoiceV2_updateProtectConfigurationCmd.Flags().Bool("deletion-protection-enabled", false, "When set to true deletion protection is enabled.")
+		pinpointSmsVoiceV2_updateProtectConfigurationCmd.Flags().Bool("no-deletion-protection-enabled", false, "When set to true deletion protection is enabled.")
+		pinpointSmsVoiceV2_updateProtectConfigurationCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
+		pinpointSmsVoiceV2_updateProtectConfigurationCmd.Flag("no-deletion-protection-enabled").Hidden = true
+		pinpointSmsVoiceV2_updateProtectConfigurationCmd.MarkFlagRequired("protect-configuration-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_updateProtectConfigurationCmd)
 }

@@ -12,11 +12,13 @@ var swf_describeActivityTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_describeActivityTypeCmd).Standalone()
+	carapace.Gen(swf_describeActivityTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_describeActivityTypeCmd).Standalone()
 
-	swf_describeActivityTypeCmd.Flags().String("activity-type", "", "The activity type to get information about.")
-	swf_describeActivityTypeCmd.Flags().String("domain", "", "The name of the domain in which the activity type is registered.")
-	swf_describeActivityTypeCmd.MarkFlagRequired("activity-type")
-	swf_describeActivityTypeCmd.MarkFlagRequired("domain")
+		swf_describeActivityTypeCmd.Flags().String("activity-type", "", "The activity type to get information about.")
+		swf_describeActivityTypeCmd.Flags().String("domain", "", "The name of the domain in which the activity type is registered.")
+		swf_describeActivityTypeCmd.MarkFlagRequired("activity-type")
+		swf_describeActivityTypeCmd.MarkFlagRequired("domain")
+	})
 	swfCmd.AddCommand(swf_describeActivityTypeCmd)
 }

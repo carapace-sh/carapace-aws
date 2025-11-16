@@ -12,13 +12,15 @@ var pinpointEmail_getDomainStatisticsReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getDomainStatisticsReportCmd).Standalone()
+	carapace.Gen(pinpointEmail_getDomainStatisticsReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getDomainStatisticsReportCmd).Standalone()
 
-	pinpointEmail_getDomainStatisticsReportCmd.Flags().String("domain", "", "The domain that you want to obtain deliverability metrics for.")
-	pinpointEmail_getDomainStatisticsReportCmd.Flags().String("end-date", "", "The last day (in Unix time) that you want to obtain domain deliverability metrics for.")
-	pinpointEmail_getDomainStatisticsReportCmd.Flags().String("start-date", "", "The first day (in Unix time) that you want to obtain domain deliverability metrics for.")
-	pinpointEmail_getDomainStatisticsReportCmd.MarkFlagRequired("domain")
-	pinpointEmail_getDomainStatisticsReportCmd.MarkFlagRequired("end-date")
-	pinpointEmail_getDomainStatisticsReportCmd.MarkFlagRequired("start-date")
+		pinpointEmail_getDomainStatisticsReportCmd.Flags().String("domain", "", "The domain that you want to obtain deliverability metrics for.")
+		pinpointEmail_getDomainStatisticsReportCmd.Flags().String("end-date", "", "The last day (in Unix time) that you want to obtain domain deliverability metrics for.")
+		pinpointEmail_getDomainStatisticsReportCmd.Flags().String("start-date", "", "The first day (in Unix time) that you want to obtain domain deliverability metrics for.")
+		pinpointEmail_getDomainStatisticsReportCmd.MarkFlagRequired("domain")
+		pinpointEmail_getDomainStatisticsReportCmd.MarkFlagRequired("end-date")
+		pinpointEmail_getDomainStatisticsReportCmd.MarkFlagRequired("start-date")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getDomainStatisticsReportCmd)
 }

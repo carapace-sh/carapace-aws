@@ -12,12 +12,14 @@ var securitylake_updateDataLakeExceptionSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_updateDataLakeExceptionSubscriptionCmd).Standalone()
+	carapace.Gen(securitylake_updateDataLakeExceptionSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_updateDataLakeExceptionSubscriptionCmd).Standalone()
 
-	securitylake_updateDataLakeExceptionSubscriptionCmd.Flags().String("exception-time-to-live", "", "The time-to-live (TTL) for the exception message to remain.")
-	securitylake_updateDataLakeExceptionSubscriptionCmd.Flags().String("notification-endpoint", "", "The account that is subscribed to receive exception notifications.")
-	securitylake_updateDataLakeExceptionSubscriptionCmd.Flags().String("subscription-protocol", "", "The subscription protocol to which exception messages are posted.")
-	securitylake_updateDataLakeExceptionSubscriptionCmd.MarkFlagRequired("notification-endpoint")
-	securitylake_updateDataLakeExceptionSubscriptionCmd.MarkFlagRequired("subscription-protocol")
+		securitylake_updateDataLakeExceptionSubscriptionCmd.Flags().String("exception-time-to-live", "", "The time-to-live (TTL) for the exception message to remain.")
+		securitylake_updateDataLakeExceptionSubscriptionCmd.Flags().String("notification-endpoint", "", "The account that is subscribed to receive exception notifications.")
+		securitylake_updateDataLakeExceptionSubscriptionCmd.Flags().String("subscription-protocol", "", "The subscription protocol to which exception messages are posted.")
+		securitylake_updateDataLakeExceptionSubscriptionCmd.MarkFlagRequired("notification-endpoint")
+		securitylake_updateDataLakeExceptionSubscriptionCmd.MarkFlagRequired("subscription-protocol")
+	})
 	securitylakeCmd.AddCommand(securitylake_updateDataLakeExceptionSubscriptionCmd)
 }

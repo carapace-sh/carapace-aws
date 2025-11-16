@@ -12,10 +12,12 @@ var bedrockAgent_getPromptCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_getPromptCmd).Standalone()
+	carapace.Gen(bedrockAgent_getPromptCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_getPromptCmd).Standalone()
 
-	bedrockAgent_getPromptCmd.Flags().String("prompt-identifier", "", "The unique identifier of the prompt.")
-	bedrockAgent_getPromptCmd.Flags().String("prompt-version", "", "The version of the prompt about which you want to retrieve information.")
-	bedrockAgent_getPromptCmd.MarkFlagRequired("prompt-identifier")
+		bedrockAgent_getPromptCmd.Flags().String("prompt-identifier", "", "The unique identifier of the prompt.")
+		bedrockAgent_getPromptCmd.Flags().String("prompt-version", "", "The version of the prompt about which you want to retrieve information.")
+		bedrockAgent_getPromptCmd.MarkFlagRequired("prompt-identifier")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_getPromptCmd)
 }

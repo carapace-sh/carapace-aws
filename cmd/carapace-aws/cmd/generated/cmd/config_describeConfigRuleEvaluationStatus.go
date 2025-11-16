@@ -12,10 +12,12 @@ var config_describeConfigRuleEvaluationStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_describeConfigRuleEvaluationStatusCmd).Standalone()
+	carapace.Gen(config_describeConfigRuleEvaluationStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_describeConfigRuleEvaluationStatusCmd).Standalone()
 
-	config_describeConfigRuleEvaluationStatusCmd.Flags().String("config-rule-names", "", "The name of the Config managed rules for which you want status information.")
-	config_describeConfigRuleEvaluationStatusCmd.Flags().String("limit", "", "The number of rule evaluation results that you want returned.")
-	config_describeConfigRuleEvaluationStatusCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+		config_describeConfigRuleEvaluationStatusCmd.Flags().String("config-rule-names", "", "The name of the Config managed rules for which you want status information.")
+		config_describeConfigRuleEvaluationStatusCmd.Flags().String("limit", "", "The number of rule evaluation results that you want returned.")
+		config_describeConfigRuleEvaluationStatusCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+	})
 	configCmd.AddCommand(config_describeConfigRuleEvaluationStatusCmd)
 }

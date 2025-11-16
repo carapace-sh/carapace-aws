@@ -12,10 +12,12 @@ var glue_listBlueprintsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listBlueprintsCmd).Standalone()
+	carapace.Gen(glue_listBlueprintsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listBlueprintsCmd).Standalone()
 
-	glue_listBlueprintsCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
-	glue_listBlueprintsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
-	glue_listBlueprintsCmd.Flags().String("tags", "", "Filters the list by an Amazon Web Services resource tag.")
+		glue_listBlueprintsCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
+		glue_listBlueprintsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+		glue_listBlueprintsCmd.Flags().String("tags", "", "Filters the list by an Amazon Web Services resource tag.")
+	})
 	glueCmd.AddCommand(glue_listBlueprintsCmd)
 }

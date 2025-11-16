@@ -12,10 +12,12 @@ var kms_listAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_listAliasesCmd).Standalone()
+	carapace.Gen(kms_listAliasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_listAliasesCmd).Standalone()
 
-	kms_listAliasesCmd.Flags().String("key-id", "", "Lists only aliases that are associated with the specified KMS key.")
-	kms_listAliasesCmd.Flags().String("limit", "", "Use this parameter to specify the maximum number of items to return.")
-	kms_listAliasesCmd.Flags().String("marker", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
+		kms_listAliasesCmd.Flags().String("key-id", "", "Lists only aliases that are associated with the specified KMS key.")
+		kms_listAliasesCmd.Flags().String("limit", "", "Use this parameter to specify the maximum number of items to return.")
+		kms_listAliasesCmd.Flags().String("marker", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
+	})
 	kmsCmd.AddCommand(kms_listAliasesCmd)
 }

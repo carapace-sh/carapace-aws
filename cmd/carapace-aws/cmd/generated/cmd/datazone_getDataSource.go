@@ -12,11 +12,13 @@ var datazone_getDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getDataSourceCmd).Standalone()
+	carapace.Gen(datazone_getDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getDataSourceCmd).Standalone()
 
-	datazone_getDataSourceCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the data source exists.")
-	datazone_getDataSourceCmd.Flags().String("identifier", "", "The ID of the Amazon DataZone data source.")
-	datazone_getDataSourceCmd.MarkFlagRequired("domain-identifier")
-	datazone_getDataSourceCmd.MarkFlagRequired("identifier")
+		datazone_getDataSourceCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the data source exists.")
+		datazone_getDataSourceCmd.Flags().String("identifier", "", "The ID of the Amazon DataZone data source.")
+		datazone_getDataSourceCmd.MarkFlagRequired("domain-identifier")
+		datazone_getDataSourceCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getDataSourceCmd)
 }

@@ -12,10 +12,12 @@ var fms_putPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_putPolicyCmd).Standalone()
+	carapace.Gen(fms_putPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_putPolicyCmd).Standalone()
 
-	fms_putPolicyCmd.Flags().String("policy", "", "The details of the Firewall Manager policy to be created.")
-	fms_putPolicyCmd.Flags().String("tag-list", "", "The tags to add to the Amazon Web Services resource.")
-	fms_putPolicyCmd.MarkFlagRequired("policy")
+		fms_putPolicyCmd.Flags().String("policy", "", "The details of the Firewall Manager policy to be created.")
+		fms_putPolicyCmd.Flags().String("tag-list", "", "The tags to add to the Amazon Web Services resource.")
+		fms_putPolicyCmd.MarkFlagRequired("policy")
+	})
 	fmsCmd.AddCommand(fms_putPolicyCmd)
 }

@@ -12,11 +12,13 @@ var datazone_deleteSubscriptionRequestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteSubscriptionRequestCmd).Standalone()
+	carapace.Gen(datazone_deleteSubscriptionRequestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteSubscriptionRequestCmd).Standalone()
 
-	datazone_deleteSubscriptionRequestCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the subscription request is deleted.")
-	datazone_deleteSubscriptionRequestCmd.Flags().String("identifier", "", "The ID of the subscription request that is deleted.")
-	datazone_deleteSubscriptionRequestCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteSubscriptionRequestCmd.MarkFlagRequired("identifier")
+		datazone_deleteSubscriptionRequestCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the subscription request is deleted.")
+		datazone_deleteSubscriptionRequestCmd.Flags().String("identifier", "", "The ID of the subscription request that is deleted.")
+		datazone_deleteSubscriptionRequestCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteSubscriptionRequestCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteSubscriptionRequestCmd)
 }

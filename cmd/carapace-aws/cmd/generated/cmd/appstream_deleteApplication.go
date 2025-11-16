@@ -12,9 +12,11 @@ var appstream_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_deleteApplicationCmd).Standalone()
+	carapace.Gen(appstream_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_deleteApplicationCmd).Standalone()
 
-	appstream_deleteApplicationCmd.Flags().String("name", "", "The name of the application.")
-	appstream_deleteApplicationCmd.MarkFlagRequired("name")
+		appstream_deleteApplicationCmd.Flags().String("name", "", "The name of the application.")
+		appstream_deleteApplicationCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_deleteApplicationCmd)
 }

@@ -12,9 +12,11 @@ var storagegateway_deleteTapePoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_deleteTapePoolCmd).Standalone()
+	carapace.Gen(storagegateway_deleteTapePoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_deleteTapePoolCmd).Standalone()
 
-	storagegateway_deleteTapePoolCmd.Flags().String("pool-arn", "", "The Amazon Resource Name (ARN) of the custom tape pool to delete.")
-	storagegateway_deleteTapePoolCmd.MarkFlagRequired("pool-arn")
+		storagegateway_deleteTapePoolCmd.Flags().String("pool-arn", "", "The Amazon Resource Name (ARN) of the custom tape pool to delete.")
+		storagegateway_deleteTapePoolCmd.MarkFlagRequired("pool-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_deleteTapePoolCmd)
 }

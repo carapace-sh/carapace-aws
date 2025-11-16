@@ -12,9 +12,11 @@ var cloud9_describeEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloud9_describeEnvironmentsCmd).Standalone()
+	carapace.Gen(cloud9_describeEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloud9_describeEnvironmentsCmd).Standalone()
 
-	cloud9_describeEnvironmentsCmd.Flags().String("environment-ids", "", "The IDs of individual environments to get information about.")
-	cloud9_describeEnvironmentsCmd.MarkFlagRequired("environment-ids")
+		cloud9_describeEnvironmentsCmd.Flags().String("environment-ids", "", "The IDs of individual environments to get information about.")
+		cloud9_describeEnvironmentsCmd.MarkFlagRequired("environment-ids")
+	})
 	cloud9Cmd.AddCommand(cloud9_describeEnvironmentsCmd)
 }

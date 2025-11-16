@@ -12,14 +12,16 @@ var amplifyuibuilder_createThemeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_createThemeCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_createThemeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_createThemeCmd).Standalone()
 
-	amplifyuibuilder_createThemeCmd.Flags().String("app-id", "", "The unique ID of the Amplify app associated with the theme.")
-	amplifyuibuilder_createThemeCmd.Flags().String("client-token", "", "The unique client token.")
-	amplifyuibuilder_createThemeCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app.")
-	amplifyuibuilder_createThemeCmd.Flags().String("theme-to-create", "", "Represents the configuration of the theme to create.")
-	amplifyuibuilder_createThemeCmd.MarkFlagRequired("app-id")
-	amplifyuibuilder_createThemeCmd.MarkFlagRequired("environment-name")
-	amplifyuibuilder_createThemeCmd.MarkFlagRequired("theme-to-create")
+		amplifyuibuilder_createThemeCmd.Flags().String("app-id", "", "The unique ID of the Amplify app associated with the theme.")
+		amplifyuibuilder_createThemeCmd.Flags().String("client-token", "", "The unique client token.")
+		amplifyuibuilder_createThemeCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app.")
+		amplifyuibuilder_createThemeCmd.Flags().String("theme-to-create", "", "Represents the configuration of the theme to create.")
+		amplifyuibuilder_createThemeCmd.MarkFlagRequired("app-id")
+		amplifyuibuilder_createThemeCmd.MarkFlagRequired("environment-name")
+		amplifyuibuilder_createThemeCmd.MarkFlagRequired("theme-to-create")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_createThemeCmd)
 }

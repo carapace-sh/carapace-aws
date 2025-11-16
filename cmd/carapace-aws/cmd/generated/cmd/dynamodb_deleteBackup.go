@@ -12,9 +12,11 @@ var dynamodb_deleteBackupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_deleteBackupCmd).Standalone()
+	carapace.Gen(dynamodb_deleteBackupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_deleteBackupCmd).Standalone()
 
-	dynamodb_deleteBackupCmd.Flags().String("backup-arn", "", "The ARN associated with the backup.")
-	dynamodb_deleteBackupCmd.MarkFlagRequired("backup-arn")
+		dynamodb_deleteBackupCmd.Flags().String("backup-arn", "", "The ARN associated with the backup.")
+		dynamodb_deleteBackupCmd.MarkFlagRequired("backup-arn")
+	})
 	dynamodbCmd.AddCommand(dynamodb_deleteBackupCmd)
 }

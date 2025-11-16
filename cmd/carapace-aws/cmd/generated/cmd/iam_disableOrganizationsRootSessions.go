@@ -12,7 +12,9 @@ var iam_disableOrganizationsRootSessionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_disableOrganizationsRootSessionsCmd).Standalone()
+	carapace.Gen(iam_disableOrganizationsRootSessionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_disableOrganizationsRootSessionsCmd).Standalone()
 
+	})
 	iamCmd.AddCommand(iam_disableOrganizationsRootSessionsCmd)
 }

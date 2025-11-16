@@ -12,9 +12,11 @@ var inspector2_getMemberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_getMemberCmd).Standalone()
+	carapace.Gen(inspector2_getMemberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_getMemberCmd).Standalone()
 
-	inspector2_getMemberCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the member account to retrieve information on.")
-	inspector2_getMemberCmd.MarkFlagRequired("account-id")
+		inspector2_getMemberCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the member account to retrieve information on.")
+		inspector2_getMemberCmd.MarkFlagRequired("account-id")
+	})
 	inspector2Cmd.AddCommand(inspector2_getMemberCmd)
 }

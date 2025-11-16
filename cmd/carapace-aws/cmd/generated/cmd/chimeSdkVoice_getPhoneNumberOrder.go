@@ -12,9 +12,11 @@ var chimeSdkVoice_getPhoneNumberOrderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_getPhoneNumberOrderCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_getPhoneNumberOrderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_getPhoneNumberOrderCmd).Standalone()
 
-	chimeSdkVoice_getPhoneNumberOrderCmd.Flags().String("phone-number-order-id", "", "The ID of the phone number order .")
-	chimeSdkVoice_getPhoneNumberOrderCmd.MarkFlagRequired("phone-number-order-id")
+		chimeSdkVoice_getPhoneNumberOrderCmd.Flags().String("phone-number-order-id", "", "The ID of the phone number order .")
+		chimeSdkVoice_getPhoneNumberOrderCmd.MarkFlagRequired("phone-number-order-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_getPhoneNumberOrderCmd)
 }

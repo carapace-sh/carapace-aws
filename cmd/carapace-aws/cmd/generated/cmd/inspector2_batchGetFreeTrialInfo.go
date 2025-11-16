@@ -12,9 +12,11 @@ var inspector2_batchGetFreeTrialInfoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_batchGetFreeTrialInfoCmd).Standalone()
+	carapace.Gen(inspector2_batchGetFreeTrialInfoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_batchGetFreeTrialInfoCmd).Standalone()
 
-	inspector2_batchGetFreeTrialInfoCmd.Flags().String("account-ids", "", "The account IDs to get free trial status for.")
-	inspector2_batchGetFreeTrialInfoCmd.MarkFlagRequired("account-ids")
+		inspector2_batchGetFreeTrialInfoCmd.Flags().String("account-ids", "", "The account IDs to get free trial status for.")
+		inspector2_batchGetFreeTrialInfoCmd.MarkFlagRequired("account-ids")
+	})
 	inspector2Cmd.AddCommand(inspector2_batchGetFreeTrialInfoCmd)
 }

@@ -12,9 +12,11 @@ var ds_describeEventTopicsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_describeEventTopicsCmd).Standalone()
+	carapace.Gen(ds_describeEventTopicsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_describeEventTopicsCmd).Standalone()
 
-	ds_describeEventTopicsCmd.Flags().String("directory-id", "", "The Directory ID for which to get the list of associated Amazon SNS topics.")
-	ds_describeEventTopicsCmd.Flags().String("topic-names", "", "A list of Amazon SNS topic names for which to obtain the information.")
+		ds_describeEventTopicsCmd.Flags().String("directory-id", "", "The Directory ID for which to get the list of associated Amazon SNS topics.")
+		ds_describeEventTopicsCmd.Flags().String("topic-names", "", "A list of Amazon SNS topic names for which to obtain the information.")
+	})
 	dsCmd.AddCommand(ds_describeEventTopicsCmd)
 }

@@ -12,10 +12,12 @@ var comprehendmedical_listIcd10CminferenceJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_listIcd10CminferenceJobsCmd).Standalone()
+	carapace.Gen(comprehendmedical_listIcd10CminferenceJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_listIcd10CminferenceJobsCmd).Standalone()
 
-	comprehendmedical_listIcd10CminferenceJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
-	comprehendmedical_listIcd10CminferenceJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
-	comprehendmedical_listIcd10CminferenceJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehendmedical_listIcd10CminferenceJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
+		comprehendmedical_listIcd10CminferenceJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
+		comprehendmedical_listIcd10CminferenceJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_listIcd10CminferenceJobsCmd)
 }

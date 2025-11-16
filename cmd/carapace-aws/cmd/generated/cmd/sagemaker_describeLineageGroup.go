@@ -12,9 +12,11 @@ var sagemaker_describeLineageGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeLineageGroupCmd).Standalone()
+	carapace.Gen(sagemaker_describeLineageGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeLineageGroupCmd).Standalone()
 
-	sagemaker_describeLineageGroupCmd.Flags().String("lineage-group-name", "", "The name of the lineage group.")
-	sagemaker_describeLineageGroupCmd.MarkFlagRequired("lineage-group-name")
+		sagemaker_describeLineageGroupCmd.Flags().String("lineage-group-name", "", "The name of the lineage group.")
+		sagemaker_describeLineageGroupCmd.MarkFlagRequired("lineage-group-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeLineageGroupCmd)
 }

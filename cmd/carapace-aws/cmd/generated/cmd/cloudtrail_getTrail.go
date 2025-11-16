@@ -12,9 +12,11 @@ var cloudtrail_getTrailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_getTrailCmd).Standalone()
+	carapace.Gen(cloudtrail_getTrailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_getTrailCmd).Standalone()
 
-	cloudtrail_getTrailCmd.Flags().String("name", "", "The name or the Amazon Resource Name (ARN) of the trail for which you want to retrieve settings information.")
-	cloudtrail_getTrailCmd.MarkFlagRequired("name")
+		cloudtrail_getTrailCmd.Flags().String("name", "", "The name or the Amazon Resource Name (ARN) of the trail for which you want to retrieve settings information.")
+		cloudtrail_getTrailCmd.MarkFlagRequired("name")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_getTrailCmd)
 }

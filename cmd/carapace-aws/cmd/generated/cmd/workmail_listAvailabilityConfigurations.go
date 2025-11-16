@@ -12,11 +12,13 @@ var workmail_listAvailabilityConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_listAvailabilityConfigurationsCmd).Standalone()
+	carapace.Gen(workmail_listAvailabilityConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_listAvailabilityConfigurationsCmd).Standalone()
 
-	workmail_listAvailabilityConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	workmail_listAvailabilityConfigurationsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
-	workmail_listAvailabilityConfigurationsCmd.Flags().String("organization-id", "", "The WorkMail organization for which the `AvailabilityConfiguration`'s will be listed.")
-	workmail_listAvailabilityConfigurationsCmd.MarkFlagRequired("organization-id")
+		workmail_listAvailabilityConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		workmail_listAvailabilityConfigurationsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+		workmail_listAvailabilityConfigurationsCmd.Flags().String("organization-id", "", "The WorkMail organization for which the `AvailabilityConfiguration`'s will be listed.")
+		workmail_listAvailabilityConfigurationsCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_listAvailabilityConfigurationsCmd)
 }

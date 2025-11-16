@@ -12,13 +12,15 @@ var connect_updateViewMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateViewMetadataCmd).Standalone()
+	carapace.Gen(connect_updateViewMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateViewMetadataCmd).Standalone()
 
-	connect_updateViewMetadataCmd.Flags().String("description", "", "The description of the view.")
-	connect_updateViewMetadataCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateViewMetadataCmd.Flags().String("name", "", "The name of the view.")
-	connect_updateViewMetadataCmd.Flags().String("view-id", "", "The identifier of the view.")
-	connect_updateViewMetadataCmd.MarkFlagRequired("instance-id")
-	connect_updateViewMetadataCmd.MarkFlagRequired("view-id")
+		connect_updateViewMetadataCmd.Flags().String("description", "", "The description of the view.")
+		connect_updateViewMetadataCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateViewMetadataCmd.Flags().String("name", "", "The name of the view.")
+		connect_updateViewMetadataCmd.Flags().String("view-id", "", "The identifier of the view.")
+		connect_updateViewMetadataCmd.MarkFlagRequired("instance-id")
+		connect_updateViewMetadataCmd.MarkFlagRequired("view-id")
+	})
 	connectCmd.AddCommand(connect_updateViewMetadataCmd)
 }

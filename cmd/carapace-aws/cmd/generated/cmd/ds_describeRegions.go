@@ -12,11 +12,13 @@ var ds_describeRegionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_describeRegionsCmd).Standalone()
+	carapace.Gen(ds_describeRegionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_describeRegionsCmd).Standalone()
 
-	ds_describeRegionsCmd.Flags().String("directory-id", "", "The identifier of the directory.")
-	ds_describeRegionsCmd.Flags().String("next-token", "", "The `DescribeRegionsResult.NextToken` value from a previous call to [DescribeRegions]().")
-	ds_describeRegionsCmd.Flags().String("region-name", "", "The name of the Region.")
-	ds_describeRegionsCmd.MarkFlagRequired("directory-id")
+		ds_describeRegionsCmd.Flags().String("directory-id", "", "The identifier of the directory.")
+		ds_describeRegionsCmd.Flags().String("next-token", "", "The `DescribeRegionsResult.NextToken` value from a previous call to [DescribeRegions]().")
+		ds_describeRegionsCmd.Flags().String("region-name", "", "The name of the Region.")
+		ds_describeRegionsCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_describeRegionsCmd)
 }

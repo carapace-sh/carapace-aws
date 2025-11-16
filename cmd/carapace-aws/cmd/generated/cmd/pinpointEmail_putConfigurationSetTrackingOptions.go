@@ -12,10 +12,12 @@ var pinpointEmail_putConfigurationSetTrackingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_putConfigurationSetTrackingOptionsCmd).Standalone()
+	carapace.Gen(pinpointEmail_putConfigurationSetTrackingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_putConfigurationSetTrackingOptionsCmd).Standalone()
 
-	pinpointEmail_putConfigurationSetTrackingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that you want to add a custom tracking domain to.")
-	pinpointEmail_putConfigurationSetTrackingOptionsCmd.Flags().String("custom-redirect-domain", "", "The domain that you want to use to track open and click events.")
-	pinpointEmail_putConfigurationSetTrackingOptionsCmd.MarkFlagRequired("configuration-set-name")
+		pinpointEmail_putConfigurationSetTrackingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that you want to add a custom tracking domain to.")
+		pinpointEmail_putConfigurationSetTrackingOptionsCmd.Flags().String("custom-redirect-domain", "", "The domain that you want to use to track open and click events.")
+		pinpointEmail_putConfigurationSetTrackingOptionsCmd.MarkFlagRequired("configuration-set-name")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_putConfigurationSetTrackingOptionsCmd)
 }

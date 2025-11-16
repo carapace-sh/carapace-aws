@@ -12,10 +12,12 @@ var comprehend_listEventsDetectionJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_listEventsDetectionJobsCmd).Standalone()
+	carapace.Gen(comprehend_listEventsDetectionJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_listEventsDetectionJobsCmd).Standalone()
 
-	comprehend_listEventsDetectionJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
-	comprehend_listEventsDetectionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
-	comprehend_listEventsDetectionJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehend_listEventsDetectionJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
+		comprehend_listEventsDetectionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
+		comprehend_listEventsDetectionJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendCmd.AddCommand(comprehend_listEventsDetectionJobsCmd)
 }

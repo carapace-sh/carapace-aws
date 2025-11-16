@@ -12,9 +12,11 @@ var workspacesWeb_deleteUserSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_deleteUserSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_deleteUserSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_deleteUserSettingsCmd).Standalone()
 
-	workspacesWeb_deleteUserSettingsCmd.Flags().String("user-settings-arn", "", "The ARN of the user settings.")
-	workspacesWeb_deleteUserSettingsCmd.MarkFlagRequired("user-settings-arn")
+		workspacesWeb_deleteUserSettingsCmd.Flags().String("user-settings-arn", "", "The ARN of the user settings.")
+		workspacesWeb_deleteUserSettingsCmd.MarkFlagRequired("user-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_deleteUserSettingsCmd)
 }

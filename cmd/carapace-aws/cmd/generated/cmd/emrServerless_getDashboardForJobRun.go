@@ -12,15 +12,17 @@ var emrServerless_getDashboardForJobRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrServerless_getDashboardForJobRunCmd).Standalone()
+	carapace.Gen(emrServerless_getDashboardForJobRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrServerless_getDashboardForJobRunCmd).Standalone()
 
-	emrServerless_getDashboardForJobRunCmd.Flags().Bool("access-system-profile-logs", false, "Allows access to system profile logs for Lake Formation-enabled jobs.")
-	emrServerless_getDashboardForJobRunCmd.Flags().String("application-id", "", "The ID of the application.")
-	emrServerless_getDashboardForJobRunCmd.Flags().String("attempt", "", "An optimal parameter that indicates the amount of attempts for the job.")
-	emrServerless_getDashboardForJobRunCmd.Flags().String("job-run-id", "", "The ID of the job run.")
-	emrServerless_getDashboardForJobRunCmd.Flags().Bool("no-access-system-profile-logs", false, "Allows access to system profile logs for Lake Formation-enabled jobs.")
-	emrServerless_getDashboardForJobRunCmd.MarkFlagRequired("application-id")
-	emrServerless_getDashboardForJobRunCmd.MarkFlagRequired("job-run-id")
-	emrServerless_getDashboardForJobRunCmd.Flag("no-access-system-profile-logs").Hidden = true
+		emrServerless_getDashboardForJobRunCmd.Flags().Bool("access-system-profile-logs", false, "Allows access to system profile logs for Lake Formation-enabled jobs.")
+		emrServerless_getDashboardForJobRunCmd.Flags().String("application-id", "", "The ID of the application.")
+		emrServerless_getDashboardForJobRunCmd.Flags().String("attempt", "", "An optimal parameter that indicates the amount of attempts for the job.")
+		emrServerless_getDashboardForJobRunCmd.Flags().String("job-run-id", "", "The ID of the job run.")
+		emrServerless_getDashboardForJobRunCmd.Flags().Bool("no-access-system-profile-logs", false, "Allows access to system profile logs for Lake Formation-enabled jobs.")
+		emrServerless_getDashboardForJobRunCmd.MarkFlagRequired("application-id")
+		emrServerless_getDashboardForJobRunCmd.MarkFlagRequired("job-run-id")
+		emrServerless_getDashboardForJobRunCmd.Flag("no-access-system-profile-logs").Hidden = true
+	})
 	emrServerlessCmd.AddCommand(emrServerless_getDashboardForJobRunCmd)
 }

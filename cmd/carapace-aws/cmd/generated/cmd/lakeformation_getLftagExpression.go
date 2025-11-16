@@ -12,10 +12,12 @@ var lakeformation_getLftagExpressionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_getLftagExpressionCmd).Standalone()
+	carapace.Gen(lakeformation_getLftagExpressionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_getLftagExpressionCmd).Standalone()
 
-	lakeformation_getLftagExpressionCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
-	lakeformation_getLftagExpressionCmd.Flags().String("name", "", "The name for the LF-Tag expression")
-	lakeformation_getLftagExpressionCmd.MarkFlagRequired("name")
+		lakeformation_getLftagExpressionCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+		lakeformation_getLftagExpressionCmd.Flags().String("name", "", "The name for the LF-Tag expression")
+		lakeformation_getLftagExpressionCmd.MarkFlagRequired("name")
+	})
 	lakeformationCmd.AddCommand(lakeformation_getLftagExpressionCmd)
 }

@@ -12,9 +12,11 @@ var comprehend_describeResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeResourcePolicyCmd).Standalone()
+	carapace.Gen(comprehend_describeResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeResourcePolicyCmd).Standalone()
 
-	comprehend_describeResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the custom model version that has the resource policy.")
-	comprehend_describeResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		comprehend_describeResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the custom model version that has the resource policy.")
+		comprehend_describeResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_describeResourcePolicyCmd)
 }

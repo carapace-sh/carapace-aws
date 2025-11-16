@@ -12,13 +12,15 @@ var connect_searchUsersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_searchUsersCmd).Standalone()
+	carapace.Gen(connect_searchUsersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_searchUsersCmd).Standalone()
 
-	connect_searchUsersCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_searchUsersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_searchUsersCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_searchUsersCmd.Flags().String("search-criteria", "", "")
-	connect_searchUsersCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
-	connect_searchUsersCmd.MarkFlagRequired("instance-id")
+		connect_searchUsersCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_searchUsersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_searchUsersCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_searchUsersCmd.Flags().String("search-criteria", "", "")
+		connect_searchUsersCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
+		connect_searchUsersCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_searchUsersCmd)
 }

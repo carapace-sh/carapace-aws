@@ -12,9 +12,11 @@ var personalize_startRecommenderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_startRecommenderCmd).Standalone()
+	carapace.Gen(personalize_startRecommenderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_startRecommenderCmd).Standalone()
 
-	personalize_startRecommenderCmd.Flags().String("recommender-arn", "", "The Amazon Resource Name (ARN) of the recommender to start.")
-	personalize_startRecommenderCmd.MarkFlagRequired("recommender-arn")
+		personalize_startRecommenderCmd.Flags().String("recommender-arn", "", "The Amazon Resource Name (ARN) of the recommender to start.")
+		personalize_startRecommenderCmd.MarkFlagRequired("recommender-arn")
+	})
 	personalizeCmd.AddCommand(personalize_startRecommenderCmd)
 }

@@ -12,7 +12,9 @@ var bedrock_getModelInvocationLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getModelInvocationLoggingConfigurationCmd).Standalone()
+	carapace.Gen(bedrock_getModelInvocationLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getModelInvocationLoggingConfigurationCmd).Standalone()
 
+	})
 	bedrockCmd.AddCommand(bedrock_getModelInvocationLoggingConfigurationCmd)
 }

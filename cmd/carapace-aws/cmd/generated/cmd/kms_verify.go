@@ -12,18 +12,20 @@ var kms_verifyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_verifyCmd).Standalone()
+	carapace.Gen(kms_verifyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_verifyCmd).Standalone()
 
-	kms_verifyCmd.Flags().String("dry-run", "", "Checks if your request will succeed.")
-	kms_verifyCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
-	kms_verifyCmd.Flags().String("key-id", "", "Identifies the asymmetric KMS key that will be used to verify the signature.")
-	kms_verifyCmd.Flags().String("message", "", "Specifies the message that was signed.")
-	kms_verifyCmd.Flags().String("message-type", "", "Tells KMS whether the value of the `Message` parameter should be hashed as part of the signing algorithm.")
-	kms_verifyCmd.Flags().String("signature", "", "The signature that the `Sign` operation generated.")
-	kms_verifyCmd.Flags().String("signing-algorithm", "", "The signing algorithm that was used to sign the message.")
-	kms_verifyCmd.MarkFlagRequired("key-id")
-	kms_verifyCmd.MarkFlagRequired("message")
-	kms_verifyCmd.MarkFlagRequired("signature")
-	kms_verifyCmd.MarkFlagRequired("signing-algorithm")
+		kms_verifyCmd.Flags().String("dry-run", "", "Checks if your request will succeed.")
+		kms_verifyCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
+		kms_verifyCmd.Flags().String("key-id", "", "Identifies the asymmetric KMS key that will be used to verify the signature.")
+		kms_verifyCmd.Flags().String("message", "", "Specifies the message that was signed.")
+		kms_verifyCmd.Flags().String("message-type", "", "Tells KMS whether the value of the `Message` parameter should be hashed as part of the signing algorithm.")
+		kms_verifyCmd.Flags().String("signature", "", "The signature that the `Sign` operation generated.")
+		kms_verifyCmd.Flags().String("signing-algorithm", "", "The signing algorithm that was used to sign the message.")
+		kms_verifyCmd.MarkFlagRequired("key-id")
+		kms_verifyCmd.MarkFlagRequired("message")
+		kms_verifyCmd.MarkFlagRequired("signature")
+		kms_verifyCmd.MarkFlagRequired("signing-algorithm")
+	})
 	kmsCmd.AddCommand(kms_verifyCmd)
 }

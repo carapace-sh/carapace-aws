@@ -12,9 +12,11 @@ var rekognition_describeStreamProcessorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_describeStreamProcessorCmd).Standalone()
+	carapace.Gen(rekognition_describeStreamProcessorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_describeStreamProcessorCmd).Standalone()
 
-	rekognition_describeStreamProcessorCmd.Flags().String("name", "", "Name of the stream processor for which you want information.")
-	rekognition_describeStreamProcessorCmd.MarkFlagRequired("name")
+		rekognition_describeStreamProcessorCmd.Flags().String("name", "", "Name of the stream processor for which you want information.")
+		rekognition_describeStreamProcessorCmd.MarkFlagRequired("name")
+	})
 	rekognitionCmd.AddCommand(rekognition_describeStreamProcessorCmd)
 }

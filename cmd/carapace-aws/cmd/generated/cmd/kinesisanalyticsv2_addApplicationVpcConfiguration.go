@@ -12,13 +12,15 @@ var kinesisanalyticsv2_addApplicationVpcConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_addApplicationVpcConfigurationCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_addApplicationVpcConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_addApplicationVpcConfigurationCmd).Standalone()
 
-	kinesisanalyticsv2_addApplicationVpcConfigurationCmd.Flags().String("application-name", "", "The name of an existing application.")
-	kinesisanalyticsv2_addApplicationVpcConfigurationCmd.Flags().String("conditional-token", "", "A value you use to implement strong concurrency for application updates.")
-	kinesisanalyticsv2_addApplicationVpcConfigurationCmd.Flags().String("current-application-version-id", "", "The version of the application to which you want to add the VPC configuration.")
-	kinesisanalyticsv2_addApplicationVpcConfigurationCmd.Flags().String("vpc-configuration", "", "Description of the VPC to add to the application.")
-	kinesisanalyticsv2_addApplicationVpcConfigurationCmd.MarkFlagRequired("application-name")
-	kinesisanalyticsv2_addApplicationVpcConfigurationCmd.MarkFlagRequired("vpc-configuration")
+		kinesisanalyticsv2_addApplicationVpcConfigurationCmd.Flags().String("application-name", "", "The name of an existing application.")
+		kinesisanalyticsv2_addApplicationVpcConfigurationCmd.Flags().String("conditional-token", "", "A value you use to implement strong concurrency for application updates.")
+		kinesisanalyticsv2_addApplicationVpcConfigurationCmd.Flags().String("current-application-version-id", "", "The version of the application to which you want to add the VPC configuration.")
+		kinesisanalyticsv2_addApplicationVpcConfigurationCmd.Flags().String("vpc-configuration", "", "Description of the VPC to add to the application.")
+		kinesisanalyticsv2_addApplicationVpcConfigurationCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_addApplicationVpcConfigurationCmd.MarkFlagRequired("vpc-configuration")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_addApplicationVpcConfigurationCmd)
 }

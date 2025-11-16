@@ -12,11 +12,13 @@ var workspaces_describeBundleAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeBundleAssociationsCmd).Standalone()
+	carapace.Gen(workspaces_describeBundleAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeBundleAssociationsCmd).Standalone()
 
-	workspaces_describeBundleAssociationsCmd.Flags().String("associated-resource-types", "", "The resource types of the associated resource.")
-	workspaces_describeBundleAssociationsCmd.Flags().String("bundle-id", "", "The identifier of the bundle.")
-	workspaces_describeBundleAssociationsCmd.MarkFlagRequired("associated-resource-types")
-	workspaces_describeBundleAssociationsCmd.MarkFlagRequired("bundle-id")
+		workspaces_describeBundleAssociationsCmd.Flags().String("associated-resource-types", "", "The resource types of the associated resource.")
+		workspaces_describeBundleAssociationsCmd.Flags().String("bundle-id", "", "The identifier of the bundle.")
+		workspaces_describeBundleAssociationsCmd.MarkFlagRequired("associated-resource-types")
+		workspaces_describeBundleAssociationsCmd.MarkFlagRequired("bundle-id")
+	})
 	workspacesCmd.AddCommand(workspaces_describeBundleAssociationsCmd)
 }

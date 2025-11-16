@@ -12,7 +12,9 @@ var glue_deleteGlueIdentityCenterConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteGlueIdentityCenterConfigurationCmd).Standalone()
+	carapace.Gen(glue_deleteGlueIdentityCenterConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteGlueIdentityCenterConfigurationCmd).Standalone()
 
+	})
 	glueCmd.AddCommand(glue_deleteGlueIdentityCenterConfigurationCmd)
 }

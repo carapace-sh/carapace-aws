@@ -12,9 +12,11 @@ var location_describeKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_describeKeyCmd).Standalone()
+	carapace.Gen(location_describeKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_describeKeyCmd).Standalone()
 
-	location_describeKeyCmd.Flags().String("key-name", "", "The name of the API key resource.")
-	location_describeKeyCmd.MarkFlagRequired("key-name")
+		location_describeKeyCmd.Flags().String("key-name", "", "The name of the API key resource.")
+		location_describeKeyCmd.MarkFlagRequired("key-name")
+	})
 	locationCmd.AddCommand(location_describeKeyCmd)
 }

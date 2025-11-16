@@ -12,9 +12,11 @@ var securityIr_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityIr_listTagsForResourceCmd).Standalone()
+	carapace.Gen(securityIr_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityIr_listTagsForResourceCmd).Standalone()
 
-	securityIr_listTagsForResourceCmd.Flags().String("resource-arn", "", "Required element for ListTagsForResource to provide the ARN to identify a specific resource.")
-	securityIr_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		securityIr_listTagsForResourceCmd.Flags().String("resource-arn", "", "Required element for ListTagsForResource to provide the ARN to identify a specific resource.")
+		securityIr_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	securityIrCmd.AddCommand(securityIr_listTagsForResourceCmd)
 }

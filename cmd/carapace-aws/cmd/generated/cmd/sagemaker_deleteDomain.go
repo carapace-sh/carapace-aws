@@ -12,10 +12,12 @@ var sagemaker_deleteDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteDomainCmd).Standalone()
+	carapace.Gen(sagemaker_deleteDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteDomainCmd).Standalone()
 
-	sagemaker_deleteDomainCmd.Flags().String("domain-id", "", "The domain ID.")
-	sagemaker_deleteDomainCmd.Flags().String("retention-policy", "", "The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted.")
-	sagemaker_deleteDomainCmd.MarkFlagRequired("domain-id")
+		sagemaker_deleteDomainCmd.Flags().String("domain-id", "", "The domain ID.")
+		sagemaker_deleteDomainCmd.Flags().String("retention-policy", "", "The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted.")
+		sagemaker_deleteDomainCmd.MarkFlagRequired("domain-id")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteDomainCmd)
 }

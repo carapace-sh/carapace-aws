@@ -12,9 +12,11 @@ var iotsitewise_deleteGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_deleteGatewayCmd).Standalone()
+	carapace.Gen(iotsitewise_deleteGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_deleteGatewayCmd).Standalone()
 
-	iotsitewise_deleteGatewayCmd.Flags().String("gateway-id", "", "The ID of the gateway to delete.")
-	iotsitewise_deleteGatewayCmd.MarkFlagRequired("gateway-id")
+		iotsitewise_deleteGatewayCmd.Flags().String("gateway-id", "", "The ID of the gateway to delete.")
+		iotsitewise_deleteGatewayCmd.MarkFlagRequired("gateway-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_deleteGatewayCmd)
 }

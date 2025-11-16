@@ -12,9 +12,11 @@ var workspacesWeb_getIpAccessSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getIpAccessSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_getIpAccessSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getIpAccessSettingsCmd).Standalone()
 
-	workspacesWeb_getIpAccessSettingsCmd.Flags().String("ip-access-settings-arn", "", "The ARN of the IP access settings.")
-	workspacesWeb_getIpAccessSettingsCmd.MarkFlagRequired("ip-access-settings-arn")
+		workspacesWeb_getIpAccessSettingsCmd.Flags().String("ip-access-settings-arn", "", "The ARN of the IP access settings.")
+		workspacesWeb_getIpAccessSettingsCmd.MarkFlagRequired("ip-access-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getIpAccessSettingsCmd)
 }

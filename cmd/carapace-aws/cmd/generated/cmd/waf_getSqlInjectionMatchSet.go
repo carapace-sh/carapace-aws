@@ -12,9 +12,11 @@ var waf_getSqlInjectionMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_getSqlInjectionMatchSetCmd).Standalone()
+	carapace.Gen(waf_getSqlInjectionMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_getSqlInjectionMatchSetCmd).Standalone()
 
-	waf_getSqlInjectionMatchSetCmd.Flags().String("sql-injection-match-set-id", "", "The `SqlInjectionMatchSetId` of the [SqlInjectionMatchSet]() that you want to get.")
-	waf_getSqlInjectionMatchSetCmd.MarkFlagRequired("sql-injection-match-set-id")
+		waf_getSqlInjectionMatchSetCmd.Flags().String("sql-injection-match-set-id", "", "The `SqlInjectionMatchSetId` of the [SqlInjectionMatchSet]() that you want to get.")
+		waf_getSqlInjectionMatchSetCmd.MarkFlagRequired("sql-injection-match-set-id")
+	})
 	wafCmd.AddCommand(waf_getSqlInjectionMatchSetCmd)
 }

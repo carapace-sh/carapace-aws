@@ -12,9 +12,11 @@ var comprehend_deleteEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_deleteEndpointCmd).Standalone()
+	carapace.Gen(comprehend_deleteEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_deleteEndpointCmd).Standalone()
 
-	comprehend_deleteEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Number (ARN) of the endpoint being deleted.")
-	comprehend_deleteEndpointCmd.MarkFlagRequired("endpoint-arn")
+		comprehend_deleteEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Number (ARN) of the endpoint being deleted.")
+		comprehend_deleteEndpointCmd.MarkFlagRequired("endpoint-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_deleteEndpointCmd)
 }

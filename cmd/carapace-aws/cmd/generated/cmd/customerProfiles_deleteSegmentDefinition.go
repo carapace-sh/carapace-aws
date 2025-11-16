@@ -12,11 +12,13 @@ var customerProfiles_deleteSegmentDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_deleteSegmentDefinitionCmd).Standalone()
+	carapace.Gen(customerProfiles_deleteSegmentDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_deleteSegmentDefinitionCmd).Standalone()
 
-	customerProfiles_deleteSegmentDefinitionCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_deleteSegmentDefinitionCmd.Flags().String("segment-definition-name", "", "The unique name of the segment definition.")
-	customerProfiles_deleteSegmentDefinitionCmd.MarkFlagRequired("domain-name")
-	customerProfiles_deleteSegmentDefinitionCmd.MarkFlagRequired("segment-definition-name")
+		customerProfiles_deleteSegmentDefinitionCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_deleteSegmentDefinitionCmd.Flags().String("segment-definition-name", "", "The unique name of the segment definition.")
+		customerProfiles_deleteSegmentDefinitionCmd.MarkFlagRequired("domain-name")
+		customerProfiles_deleteSegmentDefinitionCmd.MarkFlagRequired("segment-definition-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_deleteSegmentDefinitionCmd)
 }

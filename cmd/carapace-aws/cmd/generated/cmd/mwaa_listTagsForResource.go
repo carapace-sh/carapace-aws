@@ -12,9 +12,11 @@ var mwaa_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mwaa_listTagsForResourceCmd).Standalone()
+	carapace.Gen(mwaa_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mwaa_listTagsForResourceCmd).Standalone()
 
-	mwaa_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon MWAA environment.")
-	mwaa_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		mwaa_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon MWAA environment.")
+		mwaa_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	mwaaCmd.AddCommand(mwaa_listTagsForResourceCmd)
 }

@@ -12,9 +12,11 @@ var networkmanager_deleteAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_deleteAttachmentCmd).Standalone()
+	carapace.Gen(networkmanager_deleteAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_deleteAttachmentCmd).Standalone()
 
-	networkmanager_deleteAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment to delete.")
-	networkmanager_deleteAttachmentCmd.MarkFlagRequired("attachment-id")
+		networkmanager_deleteAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment to delete.")
+		networkmanager_deleteAttachmentCmd.MarkFlagRequired("attachment-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_deleteAttachmentCmd)
 }

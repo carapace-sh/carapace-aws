@@ -12,10 +12,12 @@ var lexModels_getBotsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getBotsCmd).Standalone()
+	carapace.Gen(lexModels_getBotsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getBotsCmd).Standalone()
 
-	lexModels_getBotsCmd.Flags().String("max-results", "", "The maximum number of bots to return in the response that the request will return.")
-	lexModels_getBotsCmd.Flags().String("name-contains", "", "Substring to match in bot names.")
-	lexModels_getBotsCmd.Flags().String("next-token", "", "A pagination token that fetches the next page of bots.")
+		lexModels_getBotsCmd.Flags().String("max-results", "", "The maximum number of bots to return in the response that the request will return.")
+		lexModels_getBotsCmd.Flags().String("name-contains", "", "Substring to match in bot names.")
+		lexModels_getBotsCmd.Flags().String("next-token", "", "A pagination token that fetches the next page of bots.")
+	})
 	lexModelsCmd.AddCommand(lexModels_getBotsCmd)
 }

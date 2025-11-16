@@ -12,9 +12,11 @@ var lightsail_createCloudFormationStackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_createCloudFormationStackCmd).Standalone()
+	carapace.Gen(lightsail_createCloudFormationStackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_createCloudFormationStackCmd).Standalone()
 
-	lightsail_createCloudFormationStackCmd.Flags().String("instances", "", "An array of parameters that will be used to create the new Amazon EC2 instance.")
-	lightsail_createCloudFormationStackCmd.MarkFlagRequired("instances")
+		lightsail_createCloudFormationStackCmd.Flags().String("instances", "", "An array of parameters that will be used to create the new Amazon EC2 instance.")
+		lightsail_createCloudFormationStackCmd.MarkFlagRequired("instances")
+	})
 	lightsailCmd.AddCommand(lightsail_createCloudFormationStackCmd)
 }

@@ -12,9 +12,11 @@ var codestarConnections_getHostCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarConnections_getHostCmd).Standalone()
+	carapace.Gen(codestarConnections_getHostCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarConnections_getHostCmd).Standalone()
 
-	codestarConnections_getHostCmd.Flags().String("host-arn", "", "The Amazon Resource Name (ARN) of the requested host.")
-	codestarConnections_getHostCmd.MarkFlagRequired("host-arn")
+		codestarConnections_getHostCmd.Flags().String("host-arn", "", "The Amazon Resource Name (ARN) of the requested host.")
+		codestarConnections_getHostCmd.MarkFlagRequired("host-arn")
+	})
 	codestarConnectionsCmd.AddCommand(codestarConnections_getHostCmd)
 }

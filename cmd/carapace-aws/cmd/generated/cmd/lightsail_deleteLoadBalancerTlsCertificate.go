@@ -12,12 +12,14 @@ var lightsail_deleteLoadBalancerTlsCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteLoadBalancerTlsCertificateCmd).Standalone()
+	carapace.Gen(lightsail_deleteLoadBalancerTlsCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteLoadBalancerTlsCertificateCmd).Standalone()
 
-	lightsail_deleteLoadBalancerTlsCertificateCmd.Flags().String("certificate-name", "", "The SSL/TLS certificate name.")
-	lightsail_deleteLoadBalancerTlsCertificateCmd.Flags().String("force", "", "When `true`, forces the deletion of an SSL/TLS certificate.")
-	lightsail_deleteLoadBalancerTlsCertificateCmd.Flags().String("load-balancer-name", "", "The load balancer name.")
-	lightsail_deleteLoadBalancerTlsCertificateCmd.MarkFlagRequired("certificate-name")
-	lightsail_deleteLoadBalancerTlsCertificateCmd.MarkFlagRequired("load-balancer-name")
+		lightsail_deleteLoadBalancerTlsCertificateCmd.Flags().String("certificate-name", "", "The SSL/TLS certificate name.")
+		lightsail_deleteLoadBalancerTlsCertificateCmd.Flags().String("force", "", "When `true`, forces the deletion of an SSL/TLS certificate.")
+		lightsail_deleteLoadBalancerTlsCertificateCmd.Flags().String("load-balancer-name", "", "The load balancer name.")
+		lightsail_deleteLoadBalancerTlsCertificateCmd.MarkFlagRequired("certificate-name")
+		lightsail_deleteLoadBalancerTlsCertificateCmd.MarkFlagRequired("load-balancer-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteLoadBalancerTlsCertificateCmd)
 }

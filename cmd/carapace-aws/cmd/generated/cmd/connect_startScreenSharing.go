@@ -12,12 +12,14 @@ var connect_startScreenSharingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_startScreenSharingCmd).Standalone()
+	carapace.Gen(connect_startScreenSharingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_startScreenSharingCmd).Standalone()
 
-	connect_startScreenSharingCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connect_startScreenSharingCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
-	connect_startScreenSharingCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_startScreenSharingCmd.MarkFlagRequired("contact-id")
-	connect_startScreenSharingCmd.MarkFlagRequired("instance-id")
+		connect_startScreenSharingCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connect_startScreenSharingCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
+		connect_startScreenSharingCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_startScreenSharingCmd.MarkFlagRequired("contact-id")
+		connect_startScreenSharingCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_startScreenSharingCmd)
 }

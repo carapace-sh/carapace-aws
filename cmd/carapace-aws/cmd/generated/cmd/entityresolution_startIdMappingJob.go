@@ -12,11 +12,13 @@ var entityresolution_startIdMappingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_startIdMappingJobCmd).Standalone()
+	carapace.Gen(entityresolution_startIdMappingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_startIdMappingJobCmd).Standalone()
 
-	entityresolution_startIdMappingJobCmd.Flags().String("job-type", "", "The job type for the ID mapping job.")
-	entityresolution_startIdMappingJobCmd.Flags().String("output-source-config", "", "A list of `OutputSource` objects.")
-	entityresolution_startIdMappingJobCmd.Flags().String("workflow-name", "", "The name of the ID mapping job to be retrieved.")
-	entityresolution_startIdMappingJobCmd.MarkFlagRequired("workflow-name")
+		entityresolution_startIdMappingJobCmd.Flags().String("job-type", "", "The job type for the ID mapping job.")
+		entityresolution_startIdMappingJobCmd.Flags().String("output-source-config", "", "A list of `OutputSource` objects.")
+		entityresolution_startIdMappingJobCmd.Flags().String("workflow-name", "", "The name of the ID mapping job to be retrieved.")
+		entityresolution_startIdMappingJobCmd.MarkFlagRequired("workflow-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_startIdMappingJobCmd)
 }

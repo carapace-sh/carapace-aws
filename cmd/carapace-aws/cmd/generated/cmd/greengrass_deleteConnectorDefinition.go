@@ -12,9 +12,11 @@ var greengrass_deleteConnectorDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_deleteConnectorDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_deleteConnectorDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_deleteConnectorDefinitionCmd).Standalone()
 
-	greengrass_deleteConnectorDefinitionCmd.Flags().String("connector-definition-id", "", "The ID of the connector definition.")
-	greengrass_deleteConnectorDefinitionCmd.MarkFlagRequired("connector-definition-id")
+		greengrass_deleteConnectorDefinitionCmd.Flags().String("connector-definition-id", "", "The ID of the connector definition.")
+		greengrass_deleteConnectorDefinitionCmd.MarkFlagRequired("connector-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_deleteConnectorDefinitionCmd)
 }

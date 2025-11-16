@@ -12,7 +12,9 @@ var serviceQuotas_associateServiceQuotaTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_associateServiceQuotaTemplateCmd).Standalone()
+	carapace.Gen(serviceQuotas_associateServiceQuotaTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_associateServiceQuotaTemplateCmd).Standalone()
 
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_associateServiceQuotaTemplateCmd)
 }

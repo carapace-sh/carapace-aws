@@ -12,11 +12,13 @@ var lightsail_updateRelationalDatabaseParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_updateRelationalDatabaseParametersCmd).Standalone()
+	carapace.Gen(lightsail_updateRelationalDatabaseParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_updateRelationalDatabaseParametersCmd).Standalone()
 
-	lightsail_updateRelationalDatabaseParametersCmd.Flags().String("parameters", "", "The database parameters to update.")
-	lightsail_updateRelationalDatabaseParametersCmd.Flags().String("relational-database-name", "", "The name of your database for which to update parameters.")
-	lightsail_updateRelationalDatabaseParametersCmd.MarkFlagRequired("parameters")
-	lightsail_updateRelationalDatabaseParametersCmd.MarkFlagRequired("relational-database-name")
+		lightsail_updateRelationalDatabaseParametersCmd.Flags().String("parameters", "", "The database parameters to update.")
+		lightsail_updateRelationalDatabaseParametersCmd.Flags().String("relational-database-name", "", "The name of your database for which to update parameters.")
+		lightsail_updateRelationalDatabaseParametersCmd.MarkFlagRequired("parameters")
+		lightsail_updateRelationalDatabaseParametersCmd.MarkFlagRequired("relational-database-name")
+	})
 	lightsailCmd.AddCommand(lightsail_updateRelationalDatabaseParametersCmd)
 }

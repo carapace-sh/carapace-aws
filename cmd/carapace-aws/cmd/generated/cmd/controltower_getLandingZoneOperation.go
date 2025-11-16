@@ -12,9 +12,11 @@ var controltower_getLandingZoneOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_getLandingZoneOperationCmd).Standalone()
+	carapace.Gen(controltower_getLandingZoneOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_getLandingZoneOperationCmd).Standalone()
 
-	controltower_getLandingZoneOperationCmd.Flags().String("operation-identifier", "", "A unique identifier assigned to a landing zone operation.")
-	controltower_getLandingZoneOperationCmd.MarkFlagRequired("operation-identifier")
+		controltower_getLandingZoneOperationCmd.Flags().String("operation-identifier", "", "A unique identifier assigned to a landing zone operation.")
+		controltower_getLandingZoneOperationCmd.MarkFlagRequired("operation-identifier")
+	})
 	controltowerCmd.AddCommand(controltower_getLandingZoneOperationCmd)
 }

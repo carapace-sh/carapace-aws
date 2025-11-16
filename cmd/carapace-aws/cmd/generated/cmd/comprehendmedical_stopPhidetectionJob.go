@@ -12,9 +12,11 @@ var comprehendmedical_stopPhidetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_stopPhidetectionJobCmd).Standalone()
+	carapace.Gen(comprehendmedical_stopPhidetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_stopPhidetectionJobCmd).Standalone()
 
-	comprehendmedical_stopPhidetectionJobCmd.Flags().String("job-id", "", "The identifier of the PHI detection job to stop.")
-	comprehendmedical_stopPhidetectionJobCmd.MarkFlagRequired("job-id")
+		comprehendmedical_stopPhidetectionJobCmd.Flags().String("job-id", "", "The identifier of the PHI detection job to stop.")
+		comprehendmedical_stopPhidetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_stopPhidetectionJobCmd)
 }

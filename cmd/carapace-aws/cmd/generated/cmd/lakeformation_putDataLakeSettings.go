@@ -12,10 +12,12 @@ var lakeformation_putDataLakeSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_putDataLakeSettingsCmd).Standalone()
+	carapace.Gen(lakeformation_putDataLakeSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_putDataLakeSettingsCmd).Standalone()
 
-	lakeformation_putDataLakeSettingsCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
-	lakeformation_putDataLakeSettingsCmd.Flags().String("data-lake-settings", "", "A structure representing a list of Lake Formation principals designated as data lake administrators.")
-	lakeformation_putDataLakeSettingsCmd.MarkFlagRequired("data-lake-settings")
+		lakeformation_putDataLakeSettingsCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+		lakeformation_putDataLakeSettingsCmd.Flags().String("data-lake-settings", "", "A structure representing a list of Lake Formation principals designated as data lake administrators.")
+		lakeformation_putDataLakeSettingsCmd.MarkFlagRequired("data-lake-settings")
+	})
 	lakeformationCmd.AddCommand(lakeformation_putDataLakeSettingsCmd)
 }

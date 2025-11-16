@@ -12,10 +12,12 @@ var mgn_unarchiveApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_unarchiveApplicationCmd).Standalone()
+	carapace.Gen(mgn_unarchiveApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_unarchiveApplicationCmd).Standalone()
 
-	mgn_unarchiveApplicationCmd.Flags().String("account-id", "", "Account ID.")
-	mgn_unarchiveApplicationCmd.Flags().String("application-id", "", "Application ID.")
-	mgn_unarchiveApplicationCmd.MarkFlagRequired("application-id")
+		mgn_unarchiveApplicationCmd.Flags().String("account-id", "", "Account ID.")
+		mgn_unarchiveApplicationCmd.Flags().String("application-id", "", "Application ID.")
+		mgn_unarchiveApplicationCmd.MarkFlagRequired("application-id")
+	})
 	mgnCmd.AddCommand(mgn_unarchiveApplicationCmd)
 }

@@ -12,12 +12,14 @@ var workmail_listUsersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_listUsersCmd).Standalone()
+	carapace.Gen(workmail_listUsersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_listUsersCmd).Standalone()
 
-	workmail_listUsersCmd.Flags().String("filters", "", "Limit the user search results based on the filter criteria.")
-	workmail_listUsersCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	workmail_listUsersCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
-	workmail_listUsersCmd.Flags().String("organization-id", "", "The identifier for the organization under which the users exist.")
-	workmail_listUsersCmd.MarkFlagRequired("organization-id")
+		workmail_listUsersCmd.Flags().String("filters", "", "Limit the user search results based on the filter criteria.")
+		workmail_listUsersCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		workmail_listUsersCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+		workmail_listUsersCmd.Flags().String("organization-id", "", "The identifier for the organization under which the users exist.")
+		workmail_listUsersCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_listUsersCmd)
 }

@@ -12,9 +12,11 @@ var cloudwatch_deleteMetricStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_deleteMetricStreamCmd).Standalone()
+	carapace.Gen(cloudwatch_deleteMetricStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_deleteMetricStreamCmd).Standalone()
 
-	cloudwatch_deleteMetricStreamCmd.Flags().String("name", "", "The name of the metric stream to delete.")
-	cloudwatch_deleteMetricStreamCmd.MarkFlagRequired("name")
+		cloudwatch_deleteMetricStreamCmd.Flags().String("name", "", "The name of the metric stream to delete.")
+		cloudwatch_deleteMetricStreamCmd.MarkFlagRequired("name")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_deleteMetricStreamCmd)
 }

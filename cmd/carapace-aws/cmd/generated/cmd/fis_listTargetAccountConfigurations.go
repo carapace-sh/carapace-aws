@@ -12,11 +12,13 @@ var fis_listTargetAccountConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_listTargetAccountConfigurationsCmd).Standalone()
+	carapace.Gen(fis_listTargetAccountConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_listTargetAccountConfigurationsCmd).Standalone()
 
-	fis_listTargetAccountConfigurationsCmd.Flags().String("experiment-template-id", "", "The ID of the experiment template.")
-	fis_listTargetAccountConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	fis_listTargetAccountConfigurationsCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	fis_listTargetAccountConfigurationsCmd.MarkFlagRequired("experiment-template-id")
+		fis_listTargetAccountConfigurationsCmd.Flags().String("experiment-template-id", "", "The ID of the experiment template.")
+		fis_listTargetAccountConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		fis_listTargetAccountConfigurationsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		fis_listTargetAccountConfigurationsCmd.MarkFlagRequired("experiment-template-id")
+	})
 	fisCmd.AddCommand(fis_listTargetAccountConfigurationsCmd)
 }

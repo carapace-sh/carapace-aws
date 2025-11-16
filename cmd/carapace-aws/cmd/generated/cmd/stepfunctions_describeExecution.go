@@ -12,10 +12,12 @@ var stepfunctions_describeExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_describeExecutionCmd).Standalone()
+	carapace.Gen(stepfunctions_describeExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_describeExecutionCmd).Standalone()
 
-	stepfunctions_describeExecutionCmd.Flags().String("execution-arn", "", "The Amazon Resource Name (ARN) of the execution to describe.")
-	stepfunctions_describeExecutionCmd.Flags().String("included-data", "", "If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.")
-	stepfunctions_describeExecutionCmd.MarkFlagRequired("execution-arn")
+		stepfunctions_describeExecutionCmd.Flags().String("execution-arn", "", "The Amazon Resource Name (ARN) of the execution to describe.")
+		stepfunctions_describeExecutionCmd.Flags().String("included-data", "", "If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.")
+		stepfunctions_describeExecutionCmd.MarkFlagRequired("execution-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_describeExecutionCmd)
 }

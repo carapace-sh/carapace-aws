@@ -12,9 +12,11 @@ var mediastore_getContainerPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_getContainerPolicyCmd).Standalone()
+	carapace.Gen(mediastore_getContainerPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_getContainerPolicyCmd).Standalone()
 
-	mediastore_getContainerPolicyCmd.Flags().String("container-name", "", "The name of the container.")
-	mediastore_getContainerPolicyCmd.MarkFlagRequired("container-name")
+		mediastore_getContainerPolicyCmd.Flags().String("container-name", "", "The name of the container.")
+		mediastore_getContainerPolicyCmd.MarkFlagRequired("container-name")
+	})
 	mediastoreCmd.AddCommand(mediastore_getContainerPolicyCmd)
 }

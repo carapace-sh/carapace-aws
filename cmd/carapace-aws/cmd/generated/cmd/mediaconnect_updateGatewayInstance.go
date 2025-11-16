@@ -12,10 +12,12 @@ var mediaconnect_updateGatewayInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_updateGatewayInstanceCmd).Standalone()
+	carapace.Gen(mediaconnect_updateGatewayInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_updateGatewayInstanceCmd).Standalone()
 
-	mediaconnect_updateGatewayInstanceCmd.Flags().String("bridge-placement", "", "The state of the instance.")
-	mediaconnect_updateGatewayInstanceCmd.Flags().String("gateway-instance-arn", "", "The Amazon Resource Name (ARN) of the gateway instance that you want to update.")
-	mediaconnect_updateGatewayInstanceCmd.MarkFlagRequired("gateway-instance-arn")
+		mediaconnect_updateGatewayInstanceCmd.Flags().String("bridge-placement", "", "The state of the instance.")
+		mediaconnect_updateGatewayInstanceCmd.Flags().String("gateway-instance-arn", "", "The Amazon Resource Name (ARN) of the gateway instance that you want to update.")
+		mediaconnect_updateGatewayInstanceCmd.MarkFlagRequired("gateway-instance-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_updateGatewayInstanceCmd)
 }

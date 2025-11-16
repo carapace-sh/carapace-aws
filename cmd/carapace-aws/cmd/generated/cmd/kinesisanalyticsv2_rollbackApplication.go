@@ -12,11 +12,13 @@ var kinesisanalyticsv2_rollbackApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_rollbackApplicationCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_rollbackApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_rollbackApplicationCmd).Standalone()
 
-	kinesisanalyticsv2_rollbackApplicationCmd.Flags().String("application-name", "", "The name of the application.")
-	kinesisanalyticsv2_rollbackApplicationCmd.Flags().String("current-application-version-id", "", "The current application version ID.")
-	kinesisanalyticsv2_rollbackApplicationCmd.MarkFlagRequired("application-name")
-	kinesisanalyticsv2_rollbackApplicationCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalyticsv2_rollbackApplicationCmd.Flags().String("application-name", "", "The name of the application.")
+		kinesisanalyticsv2_rollbackApplicationCmd.Flags().String("current-application-version-id", "", "The current application version ID.")
+		kinesisanalyticsv2_rollbackApplicationCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_rollbackApplicationCmd.MarkFlagRequired("current-application-version-id")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_rollbackApplicationCmd)
 }

@@ -12,8 +12,10 @@ var codecatalyst_listSpacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_listSpacesCmd).Standalone()
+	carapace.Gen(codecatalyst_listSpacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_listSpacesCmd).Standalone()
 
-	codecatalyst_listSpacesCmd.Flags().String("next-token", "", "A token returned from a call to this API to indicate the next batch of results to return, if any.")
+		codecatalyst_listSpacesCmd.Flags().String("next-token", "", "A token returned from a call to this API to indicate the next batch of results to return, if any.")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_listSpacesCmd)
 }

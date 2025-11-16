@@ -12,9 +12,11 @@ var iot_describeAuthorizerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeAuthorizerCmd).Standalone()
+	carapace.Gen(iot_describeAuthorizerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeAuthorizerCmd).Standalone()
 
-	iot_describeAuthorizerCmd.Flags().String("authorizer-name", "", "The name of the authorizer to describe.")
-	iot_describeAuthorizerCmd.MarkFlagRequired("authorizer-name")
+		iot_describeAuthorizerCmd.Flags().String("authorizer-name", "", "The name of the authorizer to describe.")
+		iot_describeAuthorizerCmd.MarkFlagRequired("authorizer-name")
+	})
 	iotCmd.AddCommand(iot_describeAuthorizerCmd)
 }

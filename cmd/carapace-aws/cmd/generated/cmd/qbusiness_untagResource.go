@@ -12,11 +12,13 @@ var qbusiness_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_untagResourceCmd).Standalone()
+	carapace.Gen(qbusiness_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_untagResourceCmd).Standalone()
 
-	qbusiness_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Q Business application, or data source to remove the tag from.")
-	qbusiness_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the Amazon Q Business application or data source.")
-	qbusiness_untagResourceCmd.MarkFlagRequired("resource-arn")
-	qbusiness_untagResourceCmd.MarkFlagRequired("tag-keys")
+		qbusiness_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Q Business application, or data source to remove the tag from.")
+		qbusiness_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the Amazon Q Business application or data source.")
+		qbusiness_untagResourceCmd.MarkFlagRequired("resource-arn")
+		qbusiness_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	qbusinessCmd.AddCommand(qbusiness_untagResourceCmd)
 }

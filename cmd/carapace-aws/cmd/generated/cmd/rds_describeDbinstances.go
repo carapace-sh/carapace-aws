@@ -12,11 +12,13 @@ var rds_describeDbinstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeDbinstancesCmd).Standalone()
+	carapace.Gen(rds_describeDbinstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeDbinstancesCmd).Standalone()
 
-	rds_describeDbinstancesCmd.Flags().String("dbinstance-identifier", "", "The user-supplied instance identifier or the Amazon Resource Name (ARN) of the DB instance.")
-	rds_describeDbinstancesCmd.Flags().String("filters", "", "A filter that specifies one or more DB instances to describe.")
-	rds_describeDbinstancesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeDBInstances` request.")
-	rds_describeDbinstancesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		rds_describeDbinstancesCmd.Flags().String("dbinstance-identifier", "", "The user-supplied instance identifier or the Amazon Resource Name (ARN) of the DB instance.")
+		rds_describeDbinstancesCmd.Flags().String("filters", "", "A filter that specifies one or more DB instances to describe.")
+		rds_describeDbinstancesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeDBInstances` request.")
+		rds_describeDbinstancesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	rdsCmd.AddCommand(rds_describeDbinstancesCmd)
 }

@@ -12,9 +12,11 @@ var ecs_deleteTaskDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_deleteTaskDefinitionsCmd).Standalone()
+	carapace.Gen(ecs_deleteTaskDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_deleteTaskDefinitionsCmd).Standalone()
 
-	ecs_deleteTaskDefinitionsCmd.Flags().String("task-definitions", "", "The `family` and `revision` (`family:revision`) or full Amazon Resource Name (ARN) of the task definition to delete.")
-	ecs_deleteTaskDefinitionsCmd.MarkFlagRequired("task-definitions")
+		ecs_deleteTaskDefinitionsCmd.Flags().String("task-definitions", "", "The `family` and `revision` (`family:revision`) or full Amazon Resource Name (ARN) of the task definition to delete.")
+		ecs_deleteTaskDefinitionsCmd.MarkFlagRequired("task-definitions")
+	})
 	ecsCmd.AddCommand(ecs_deleteTaskDefinitionsCmd)
 }

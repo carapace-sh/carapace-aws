@@ -12,9 +12,11 @@ var glue_getColumnStatisticsTaskRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getColumnStatisticsTaskRunCmd).Standalone()
+	carapace.Gen(glue_getColumnStatisticsTaskRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getColumnStatisticsTaskRunCmd).Standalone()
 
-	glue_getColumnStatisticsTaskRunCmd.Flags().String("column-statistics-task-run-id", "", "The identifier for the particular column statistics task run.")
-	glue_getColumnStatisticsTaskRunCmd.MarkFlagRequired("column-statistics-task-run-id")
+		glue_getColumnStatisticsTaskRunCmd.Flags().String("column-statistics-task-run-id", "", "The identifier for the particular column statistics task run.")
+		glue_getColumnStatisticsTaskRunCmd.MarkFlagRequired("column-statistics-task-run-id")
+	})
 	glueCmd.AddCommand(glue_getColumnStatisticsTaskRunCmd)
 }

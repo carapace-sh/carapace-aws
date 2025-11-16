@@ -12,10 +12,12 @@ var controlcatalog_listCommonControlsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controlcatalog_listCommonControlsCmd).Standalone()
+	carapace.Gen(controlcatalog_listCommonControlsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controlcatalog_listCommonControlsCmd).Standalone()
 
-	controlcatalog_listCommonControlsCmd.Flags().String("common-control-filter", "", "An optional filter that narrows the results to a specific objective.")
-	controlcatalog_listCommonControlsCmd.Flags().String("max-results", "", "The maximum number of results on a page or for an API request call.")
-	controlcatalog_listCommonControlsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		controlcatalog_listCommonControlsCmd.Flags().String("common-control-filter", "", "An optional filter that narrows the results to a specific objective.")
+		controlcatalog_listCommonControlsCmd.Flags().String("max-results", "", "The maximum number of results on a page or for an API request call.")
+		controlcatalog_listCommonControlsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+	})
 	controlcatalogCmd.AddCommand(controlcatalog_listCommonControlsCmd)
 }

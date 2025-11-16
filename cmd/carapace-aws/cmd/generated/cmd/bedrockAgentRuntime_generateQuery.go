@@ -12,11 +12,13 @@ var bedrockAgentRuntime_generateQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentRuntime_generateQueryCmd).Standalone()
+	carapace.Gen(bedrockAgentRuntime_generateQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentRuntime_generateQueryCmd).Standalone()
 
-	bedrockAgentRuntime_generateQueryCmd.Flags().String("query-generation-input", "", "Specifies information about a natural language query to transform into SQL.")
-	bedrockAgentRuntime_generateQueryCmd.Flags().String("transformation-configuration", "", "Specifies configurations for transforming the natural language query into SQL.")
-	bedrockAgentRuntime_generateQueryCmd.MarkFlagRequired("query-generation-input")
-	bedrockAgentRuntime_generateQueryCmd.MarkFlagRequired("transformation-configuration")
+		bedrockAgentRuntime_generateQueryCmd.Flags().String("query-generation-input", "", "Specifies information about a natural language query to transform into SQL.")
+		bedrockAgentRuntime_generateQueryCmd.Flags().String("transformation-configuration", "", "Specifies configurations for transforming the natural language query into SQL.")
+		bedrockAgentRuntime_generateQueryCmd.MarkFlagRequired("query-generation-input")
+		bedrockAgentRuntime_generateQueryCmd.MarkFlagRequired("transformation-configuration")
+	})
 	bedrockAgentRuntimeCmd.AddCommand(bedrockAgentRuntime_generateQueryCmd)
 }

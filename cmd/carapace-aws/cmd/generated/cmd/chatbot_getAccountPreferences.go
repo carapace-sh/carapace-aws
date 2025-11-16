@@ -12,7 +12,9 @@ var chatbot_getAccountPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_getAccountPreferencesCmd).Standalone()
+	carapace.Gen(chatbot_getAccountPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_getAccountPreferencesCmd).Standalone()
 
+	})
 	chatbotCmd.AddCommand(chatbot_getAccountPreferencesCmd)
 }

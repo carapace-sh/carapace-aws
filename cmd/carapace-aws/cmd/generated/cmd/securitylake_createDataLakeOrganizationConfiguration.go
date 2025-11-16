@@ -12,8 +12,10 @@ var securitylake_createDataLakeOrganizationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_createDataLakeOrganizationConfigurationCmd).Standalone()
+	carapace.Gen(securitylake_createDataLakeOrganizationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_createDataLakeOrganizationConfigurationCmd).Standalone()
 
-	securitylake_createDataLakeOrganizationConfigurationCmd.Flags().String("auto-enable-new-account", "", "Enable Security Lake with the specified configuration settings, to begin collecting security data for new accounts in your organization.")
+		securitylake_createDataLakeOrganizationConfigurationCmd.Flags().String("auto-enable-new-account", "", "Enable Security Lake with the specified configuration settings, to begin collecting security data for new accounts in your organization.")
+	})
 	securitylakeCmd.AddCommand(securitylake_createDataLakeOrganizationConfigurationCmd)
 }

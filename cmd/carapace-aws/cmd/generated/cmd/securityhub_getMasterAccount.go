@@ -12,7 +12,9 @@ var securityhub_getMasterAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getMasterAccountCmd).Standalone()
+	carapace.Gen(securityhub_getMasterAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getMasterAccountCmd).Standalone()
 
+	})
 	securityhubCmd.AddCommand(securityhub_getMasterAccountCmd)
 }

@@ -12,11 +12,13 @@ var medicalImaging_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medicalImaging_untagResourceCmd).Standalone()
+	carapace.Gen(medicalImaging_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medicalImaging_untagResourceCmd).Standalone()
 
-	medicalImaging_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the medical imaging resource that tags are being removed from.")
-	medicalImaging_untagResourceCmd.Flags().String("tag-keys", "", "The keys for the tags to be removed from the medical imaging resource.")
-	medicalImaging_untagResourceCmd.MarkFlagRequired("resource-arn")
-	medicalImaging_untagResourceCmd.MarkFlagRequired("tag-keys")
+		medicalImaging_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the medical imaging resource that tags are being removed from.")
+		medicalImaging_untagResourceCmd.Flags().String("tag-keys", "", "The keys for the tags to be removed from the medical imaging resource.")
+		medicalImaging_untagResourceCmd.MarkFlagRequired("resource-arn")
+		medicalImaging_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	medicalImagingCmd.AddCommand(medicalImaging_untagResourceCmd)
 }

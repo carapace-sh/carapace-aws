@@ -12,12 +12,14 @@ var computeOptimizer_deleteRecommendationPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(computeOptimizer_deleteRecommendationPreferencesCmd).Standalone()
+	carapace.Gen(computeOptimizer_deleteRecommendationPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(computeOptimizer_deleteRecommendationPreferencesCmd).Standalone()
 
-	computeOptimizer_deleteRecommendationPreferencesCmd.Flags().String("recommendation-preference-names", "", "The name of the recommendation preference to delete.")
-	computeOptimizer_deleteRecommendationPreferencesCmd.Flags().String("resource-type", "", "The target resource type of the recommendation preference to delete.")
-	computeOptimizer_deleteRecommendationPreferencesCmd.Flags().String("scope", "", "An object that describes the scope of the recommendation preference to delete.")
-	computeOptimizer_deleteRecommendationPreferencesCmd.MarkFlagRequired("recommendation-preference-names")
-	computeOptimizer_deleteRecommendationPreferencesCmd.MarkFlagRequired("resource-type")
+		computeOptimizer_deleteRecommendationPreferencesCmd.Flags().String("recommendation-preference-names", "", "The name of the recommendation preference to delete.")
+		computeOptimizer_deleteRecommendationPreferencesCmd.Flags().String("resource-type", "", "The target resource type of the recommendation preference to delete.")
+		computeOptimizer_deleteRecommendationPreferencesCmd.Flags().String("scope", "", "An object that describes the scope of the recommendation preference to delete.")
+		computeOptimizer_deleteRecommendationPreferencesCmd.MarkFlagRequired("recommendation-preference-names")
+		computeOptimizer_deleteRecommendationPreferencesCmd.MarkFlagRequired("resource-type")
+	})
 	computeOptimizerCmd.AddCommand(computeOptimizer_deleteRecommendationPreferencesCmd)
 }

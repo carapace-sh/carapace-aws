@@ -12,12 +12,14 @@ var directconnect_deleteBgppeerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_deleteBgppeerCmd).Standalone()
+	carapace.Gen(directconnect_deleteBgppeerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_deleteBgppeerCmd).Standalone()
 
-	directconnect_deleteBgppeerCmd.Flags().String("asn", "", "The autonomous system number (ASN).")
-	directconnect_deleteBgppeerCmd.Flags().String("asn-long", "", "The long ASN for the BGP peer to be deleted from a Direct Connect virtual interface.")
-	directconnect_deleteBgppeerCmd.Flags().String("bgp-peer-id", "", "The ID of the BGP peer.")
-	directconnect_deleteBgppeerCmd.Flags().String("customer-address", "", "The IP address assigned to the customer interface.")
-	directconnect_deleteBgppeerCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
+		directconnect_deleteBgppeerCmd.Flags().String("asn", "", "The autonomous system number (ASN).")
+		directconnect_deleteBgppeerCmd.Flags().String("asn-long", "", "The long ASN for the BGP peer to be deleted from a Direct Connect virtual interface.")
+		directconnect_deleteBgppeerCmd.Flags().String("bgp-peer-id", "", "The ID of the BGP peer.")
+		directconnect_deleteBgppeerCmd.Flags().String("customer-address", "", "The IP address assigned to the customer interface.")
+		directconnect_deleteBgppeerCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
+	})
 	directconnectCmd.AddCommand(directconnect_deleteBgppeerCmd)
 }

@@ -12,11 +12,13 @@ var iam_tagPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_tagPolicyCmd).Standalone()
+	carapace.Gen(iam_tagPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_tagPolicyCmd).Standalone()
 
-	iam_tagPolicyCmd.Flags().String("policy-arn", "", "The ARN of the IAM customer managed policy to which you want to add tags.")
-	iam_tagPolicyCmd.Flags().String("tags", "", "The list of tags that you want to attach to the IAM customer managed policy.")
-	iam_tagPolicyCmd.MarkFlagRequired("policy-arn")
-	iam_tagPolicyCmd.MarkFlagRequired("tags")
+		iam_tagPolicyCmd.Flags().String("policy-arn", "", "The ARN of the IAM customer managed policy to which you want to add tags.")
+		iam_tagPolicyCmd.Flags().String("tags", "", "The list of tags that you want to attach to the IAM customer managed policy.")
+		iam_tagPolicyCmd.MarkFlagRequired("policy-arn")
+		iam_tagPolicyCmd.MarkFlagRequired("tags")
+	})
 	iamCmd.AddCommand(iam_tagPolicyCmd)
 }

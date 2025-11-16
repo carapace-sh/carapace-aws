@@ -12,9 +12,11 @@ var support_describeAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(support_describeAttachmentCmd).Standalone()
+	carapace.Gen(support_describeAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(support_describeAttachmentCmd).Standalone()
 
-	support_describeAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment to return.")
-	support_describeAttachmentCmd.MarkFlagRequired("attachment-id")
+		support_describeAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment to return.")
+		support_describeAttachmentCmd.MarkFlagRequired("attachment-id")
+	})
 	supportCmd.AddCommand(support_describeAttachmentCmd)
 }

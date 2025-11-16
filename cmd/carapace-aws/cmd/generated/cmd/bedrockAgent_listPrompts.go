@@ -12,10 +12,12 @@ var bedrockAgent_listPromptsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_listPromptsCmd).Standalone()
+	carapace.Gen(bedrockAgent_listPromptsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_listPromptsCmd).Standalone()
 
-	bedrockAgent_listPromptsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	bedrockAgent_listPromptsCmd.Flags().String("next-token", "", "If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.")
-	bedrockAgent_listPromptsCmd.Flags().String("prompt-identifier", "", "The unique identifier of the prompt for whose versions you want to return information.")
+		bedrockAgent_listPromptsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		bedrockAgent_listPromptsCmd.Flags().String("next-token", "", "If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.")
+		bedrockAgent_listPromptsCmd.Flags().String("prompt-identifier", "", "The unique identifier of the prompt for whose versions you want to return information.")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_listPromptsCmd)
 }

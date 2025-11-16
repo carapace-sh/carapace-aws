@@ -12,10 +12,12 @@ var cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd).Standalone()
 
-	cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd.Flags().String("id", "", "The identifier for the response headers policy that you are deleting.")
-	cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd.Flags().String("if-match", "", "The version of the response headers policy that you are deleting.")
-	cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd.Flags().String("id", "", "The identifier for the response headers policy that you are deleting.")
+		cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd.Flags().String("if-match", "", "The version of the response headers policy that you are deleting.")
+		cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_deleteResponseHeadersPolicy2020_05_31Cmd)
 }

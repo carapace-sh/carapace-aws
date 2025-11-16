@@ -12,11 +12,13 @@ var lexModels_getIntentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getIntentCmd).Standalone()
+	carapace.Gen(lexModels_getIntentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getIntentCmd).Standalone()
 
-	lexModels_getIntentCmd.Flags().String("name", "", "The name of the intent.")
-	lexModels_getIntentCmd.Flags().String("version", "", "The version of the intent.")
-	lexModels_getIntentCmd.MarkFlagRequired("name")
-	lexModels_getIntentCmd.MarkFlagRequired("version")
+		lexModels_getIntentCmd.Flags().String("name", "", "The name of the intent.")
+		lexModels_getIntentCmd.Flags().String("version", "", "The version of the intent.")
+		lexModels_getIntentCmd.MarkFlagRequired("name")
+		lexModels_getIntentCmd.MarkFlagRequired("version")
+	})
 	lexModelsCmd.AddCommand(lexModels_getIntentCmd)
 }

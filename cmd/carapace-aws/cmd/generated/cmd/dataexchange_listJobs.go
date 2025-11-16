@@ -12,11 +12,13 @@ var dataexchange_listJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_listJobsCmd).Standalone()
+	carapace.Gen(dataexchange_listJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_listJobsCmd).Standalone()
 
-	dataexchange_listJobsCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
-	dataexchange_listJobsCmd.Flags().String("max-results", "", "The maximum number of results returned by a single call.")
-	dataexchange_listJobsCmd.Flags().String("next-token", "", "The token value retrieved from a previous call to access the next page of results.")
-	dataexchange_listJobsCmd.Flags().String("revision-id", "", "The unique identifier for a revision.")
+		dataexchange_listJobsCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
+		dataexchange_listJobsCmd.Flags().String("max-results", "", "The maximum number of results returned by a single call.")
+		dataexchange_listJobsCmd.Flags().String("next-token", "", "The token value retrieved from a previous call to access the next page of results.")
+		dataexchange_listJobsCmd.Flags().String("revision-id", "", "The unique identifier for a revision.")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_listJobsCmd)
 }

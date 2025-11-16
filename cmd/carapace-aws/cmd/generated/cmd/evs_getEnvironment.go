@@ -12,9 +12,11 @@ var evs_getEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evs_getEnvironmentCmd).Standalone()
+	carapace.Gen(evs_getEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evs_getEnvironmentCmd).Standalone()
 
-	evs_getEnvironmentCmd.Flags().String("environment-id", "", "A unique ID for the environment.")
-	evs_getEnvironmentCmd.MarkFlagRequired("environment-id")
+		evs_getEnvironmentCmd.Flags().String("environment-id", "", "A unique ID for the environment.")
+		evs_getEnvironmentCmd.MarkFlagRequired("environment-id")
+	})
 	evsCmd.AddCommand(evs_getEnvironmentCmd)
 }

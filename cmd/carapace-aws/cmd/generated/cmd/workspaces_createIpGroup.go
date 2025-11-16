@@ -12,12 +12,14 @@ var workspaces_createIpGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_createIpGroupCmd).Standalone()
+	carapace.Gen(workspaces_createIpGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_createIpGroupCmd).Standalone()
 
-	workspaces_createIpGroupCmd.Flags().String("group-desc", "", "The description of the group.")
-	workspaces_createIpGroupCmd.Flags().String("group-name", "", "The name of the group.")
-	workspaces_createIpGroupCmd.Flags().String("tags", "", "The tags.")
-	workspaces_createIpGroupCmd.Flags().String("user-rules", "", "The rules to add to the group.")
-	workspaces_createIpGroupCmd.MarkFlagRequired("group-name")
+		workspaces_createIpGroupCmd.Flags().String("group-desc", "", "The description of the group.")
+		workspaces_createIpGroupCmd.Flags().String("group-name", "", "The name of the group.")
+		workspaces_createIpGroupCmd.Flags().String("tags", "", "The tags.")
+		workspaces_createIpGroupCmd.Flags().String("user-rules", "", "The rules to add to the group.")
+		workspaces_createIpGroupCmd.MarkFlagRequired("group-name")
+	})
 	workspacesCmd.AddCommand(workspaces_createIpGroupCmd)
 }

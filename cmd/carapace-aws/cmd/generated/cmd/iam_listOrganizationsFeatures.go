@@ -12,7 +12,9 @@ var iam_listOrganizationsFeaturesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_listOrganizationsFeaturesCmd).Standalone()
+	carapace.Gen(iam_listOrganizationsFeaturesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_listOrganizationsFeaturesCmd).Standalone()
 
+	})
 	iamCmd.AddCommand(iam_listOrganizationsFeaturesCmd)
 }

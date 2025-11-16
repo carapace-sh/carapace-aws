@@ -12,9 +12,11 @@ var ivsRealtime_getStageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_getStageCmd).Standalone()
+	carapace.Gen(ivsRealtime_getStageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_getStageCmd).Standalone()
 
-	ivsRealtime_getStageCmd.Flags().String("arn", "", "ARN of the stage for which the information is to be retrieved.")
-	ivsRealtime_getStageCmd.MarkFlagRequired("arn")
+		ivsRealtime_getStageCmd.Flags().String("arn", "", "ARN of the stage for which the information is to be retrieved.")
+		ivsRealtime_getStageCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_getStageCmd)
 }

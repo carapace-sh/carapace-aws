@@ -12,11 +12,13 @@ var wellarchitected_deleteReviewTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_deleteReviewTemplateCmd).Standalone()
+	carapace.Gen(wellarchitected_deleteReviewTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_deleteReviewTemplateCmd).Standalone()
 
-	wellarchitected_deleteReviewTemplateCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_deleteReviewTemplateCmd.Flags().String("template-arn", "", "The review template ARN.")
-	wellarchitected_deleteReviewTemplateCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_deleteReviewTemplateCmd.MarkFlagRequired("template-arn")
+		wellarchitected_deleteReviewTemplateCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_deleteReviewTemplateCmd.Flags().String("template-arn", "", "The review template ARN.")
+		wellarchitected_deleteReviewTemplateCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_deleteReviewTemplateCmd.MarkFlagRequired("template-arn")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_deleteReviewTemplateCmd)
 }

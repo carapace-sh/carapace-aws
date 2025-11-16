@@ -12,9 +12,11 @@ var globalaccelerator_deleteListenerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_deleteListenerCmd).Standalone()
+	carapace.Gen(globalaccelerator_deleteListenerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_deleteListenerCmd).Standalone()
 
-	globalaccelerator_deleteListenerCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
-	globalaccelerator_deleteListenerCmd.MarkFlagRequired("listener-arn")
+		globalaccelerator_deleteListenerCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
+		globalaccelerator_deleteListenerCmd.MarkFlagRequired("listener-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_deleteListenerCmd)
 }

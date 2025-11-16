@@ -12,11 +12,13 @@ var iot_updateTopicRuleDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateTopicRuleDestinationCmd).Standalone()
+	carapace.Gen(iot_updateTopicRuleDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateTopicRuleDestinationCmd).Standalone()
 
-	iot_updateTopicRuleDestinationCmd.Flags().String("arn", "", "The ARN of the topic rule destination.")
-	iot_updateTopicRuleDestinationCmd.Flags().String("status", "", "The status of the topic rule destination.")
-	iot_updateTopicRuleDestinationCmd.MarkFlagRequired("arn")
-	iot_updateTopicRuleDestinationCmd.MarkFlagRequired("status")
+		iot_updateTopicRuleDestinationCmd.Flags().String("arn", "", "The ARN of the topic rule destination.")
+		iot_updateTopicRuleDestinationCmd.Flags().String("status", "", "The status of the topic rule destination.")
+		iot_updateTopicRuleDestinationCmd.MarkFlagRequired("arn")
+		iot_updateTopicRuleDestinationCmd.MarkFlagRequired("status")
+	})
 	iotCmd.AddCommand(iot_updateTopicRuleDestinationCmd)
 }

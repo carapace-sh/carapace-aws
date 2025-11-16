@@ -12,13 +12,15 @@ var bedrockAgentcoreControl_updateOauth2CredentialProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_updateOauth2CredentialProviderCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_updateOauth2CredentialProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_updateOauth2CredentialProviderCmd).Standalone()
 
-	bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.Flags().String("credential-provider-vendor", "", "The vendor of the OAuth2 credential provider.")
-	bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.Flags().String("name", "", "The name of the OAuth2 credential provider to update.")
-	bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.Flags().String("oauth2-provider-config-input", "", "The configuration input for the OAuth2 provider.")
-	bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.MarkFlagRequired("credential-provider-vendor")
-	bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.MarkFlagRequired("name")
-	bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.MarkFlagRequired("oauth2-provider-config-input")
+		bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.Flags().String("credential-provider-vendor", "", "The vendor of the OAuth2 credential provider.")
+		bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.Flags().String("name", "", "The name of the OAuth2 credential provider to update.")
+		bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.Flags().String("oauth2-provider-config-input", "", "The configuration input for the OAuth2 provider.")
+		bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.MarkFlagRequired("credential-provider-vendor")
+		bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_updateOauth2CredentialProviderCmd.MarkFlagRequired("oauth2-provider-config-input")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_updateOauth2CredentialProviderCmd)
 }

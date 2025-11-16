@@ -12,11 +12,13 @@ var billing_listSourceViewsForBillingViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billing_listSourceViewsForBillingViewCmd).Standalone()
+	carapace.Gen(billing_listSourceViewsForBillingViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billing_listSourceViewsForBillingViewCmd).Standalone()
 
-	billing_listSourceViewsForBillingViewCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.")
-	billing_listSourceViewsForBillingViewCmd.Flags().String("max-results", "", "The number of entries a paginated response contains.")
-	billing_listSourceViewsForBillingViewCmd.Flags().String("next-token", "", "The pagination token that is used on subsequent calls to list billing views.")
-	billing_listSourceViewsForBillingViewCmd.MarkFlagRequired("arn")
+		billing_listSourceViewsForBillingViewCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that can be used to uniquely identify the billing view.")
+		billing_listSourceViewsForBillingViewCmd.Flags().String("max-results", "", "The number of entries a paginated response contains.")
+		billing_listSourceViewsForBillingViewCmd.Flags().String("next-token", "", "The pagination token that is used on subsequent calls to list billing views.")
+		billing_listSourceViewsForBillingViewCmd.MarkFlagRequired("arn")
+	})
 	billingCmd.AddCommand(billing_listSourceViewsForBillingViewCmd)
 }

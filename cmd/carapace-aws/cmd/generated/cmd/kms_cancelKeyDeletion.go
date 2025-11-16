@@ -12,9 +12,11 @@ var kms_cancelKeyDeletionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_cancelKeyDeletionCmd).Standalone()
+	carapace.Gen(kms_cancelKeyDeletionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_cancelKeyDeletionCmd).Standalone()
 
-	kms_cancelKeyDeletionCmd.Flags().String("key-id", "", "Identifies the KMS key whose deletion is being canceled.")
-	kms_cancelKeyDeletionCmd.MarkFlagRequired("key-id")
+		kms_cancelKeyDeletionCmd.Flags().String("key-id", "", "Identifies the KMS key whose deletion is being canceled.")
+		kms_cancelKeyDeletionCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_cancelKeyDeletionCmd)
 }

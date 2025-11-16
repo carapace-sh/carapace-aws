@@ -12,9 +12,11 @@ var ivs_deleteChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_deleteChannelCmd).Standalone()
+	carapace.Gen(ivs_deleteChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_deleteChannelCmd).Standalone()
 
-	ivs_deleteChannelCmd.Flags().String("arn", "", "ARN of the channel to be deleted.")
-	ivs_deleteChannelCmd.MarkFlagRequired("arn")
+		ivs_deleteChannelCmd.Flags().String("arn", "", "ARN of the channel to be deleted.")
+		ivs_deleteChannelCmd.MarkFlagRequired("arn")
+	})
 	ivsCmd.AddCommand(ivs_deleteChannelCmd)
 }

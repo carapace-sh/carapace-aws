@@ -12,11 +12,13 @@ var location_disassociateTrackerConsumerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_disassociateTrackerConsumerCmd).Standalone()
+	carapace.Gen(location_disassociateTrackerConsumerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_disassociateTrackerConsumerCmd).Standalone()
 
-	location_disassociateTrackerConsumerCmd.Flags().String("consumer-arn", "", "The Amazon Resource Name (ARN) for the geofence collection to be disassociated from the tracker resource.")
-	location_disassociateTrackerConsumerCmd.Flags().String("tracker-name", "", "The name of the tracker resource to be dissociated from the consumer.")
-	location_disassociateTrackerConsumerCmd.MarkFlagRequired("consumer-arn")
-	location_disassociateTrackerConsumerCmd.MarkFlagRequired("tracker-name")
+		location_disassociateTrackerConsumerCmd.Flags().String("consumer-arn", "", "The Amazon Resource Name (ARN) for the geofence collection to be disassociated from the tracker resource.")
+		location_disassociateTrackerConsumerCmd.Flags().String("tracker-name", "", "The name of the tracker resource to be dissociated from the consumer.")
+		location_disassociateTrackerConsumerCmd.MarkFlagRequired("consumer-arn")
+		location_disassociateTrackerConsumerCmd.MarkFlagRequired("tracker-name")
+	})
 	locationCmd.AddCommand(location_disassociateTrackerConsumerCmd)
 }

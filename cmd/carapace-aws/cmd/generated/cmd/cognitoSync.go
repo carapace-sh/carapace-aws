@@ -12,7 +12,9 @@ var cognitoSyncCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoSyncCmd).Standalone()
+	carapace.Gen(cognitoSyncCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoSyncCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cognitoSyncCmd)
 }

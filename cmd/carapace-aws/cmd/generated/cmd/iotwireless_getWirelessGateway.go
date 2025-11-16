@@ -12,11 +12,13 @@ var iotwireless_getWirelessGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getWirelessGatewayCmd).Standalone()
+	carapace.Gen(iotwireless_getWirelessGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getWirelessGatewayCmd).Standalone()
 
-	iotwireless_getWirelessGatewayCmd.Flags().String("identifier", "", "The identifier of the wireless gateway to get.")
-	iotwireless_getWirelessGatewayCmd.Flags().String("identifier-type", "", "The type of identifier used in `identifier`.")
-	iotwireless_getWirelessGatewayCmd.MarkFlagRequired("identifier")
-	iotwireless_getWirelessGatewayCmd.MarkFlagRequired("identifier-type")
+		iotwireless_getWirelessGatewayCmd.Flags().String("identifier", "", "The identifier of the wireless gateway to get.")
+		iotwireless_getWirelessGatewayCmd.Flags().String("identifier-type", "", "The type of identifier used in `identifier`.")
+		iotwireless_getWirelessGatewayCmd.MarkFlagRequired("identifier")
+		iotwireless_getWirelessGatewayCmd.MarkFlagRequired("identifier-type")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getWirelessGatewayCmd)
 }

@@ -12,11 +12,13 @@ var organizations_listOrganizationalUnitsForParentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listOrganizationalUnitsForParentCmd).Standalone()
+	carapace.Gen(organizations_listOrganizationalUnitsForParentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listOrganizationalUnitsForParentCmd).Standalone()
 
-	organizations_listOrganizationalUnitsForParentCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	organizations_listOrganizationalUnitsForParentCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
-	organizations_listOrganizationalUnitsForParentCmd.Flags().String("parent-id", "", "The unique identifier (ID) of the root or OU whose child OUs you want to list.")
-	organizations_listOrganizationalUnitsForParentCmd.MarkFlagRequired("parent-id")
+		organizations_listOrganizationalUnitsForParentCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		organizations_listOrganizationalUnitsForParentCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listOrganizationalUnitsForParentCmd.Flags().String("parent-id", "", "The unique identifier (ID) of the root or OU whose child OUs you want to list.")
+		organizations_listOrganizationalUnitsForParentCmd.MarkFlagRequired("parent-id")
+	})
 	organizationsCmd.AddCommand(organizations_listOrganizationalUnitsForParentCmd)
 }

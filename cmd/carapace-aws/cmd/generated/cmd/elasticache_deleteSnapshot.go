@@ -12,9 +12,11 @@ var elasticache_deleteSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_deleteSnapshotCmd).Standalone()
+	carapace.Gen(elasticache_deleteSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_deleteSnapshotCmd).Standalone()
 
-	elasticache_deleteSnapshotCmd.Flags().String("snapshot-name", "", "The name of the snapshot to be deleted.")
-	elasticache_deleteSnapshotCmd.MarkFlagRequired("snapshot-name")
+		elasticache_deleteSnapshotCmd.Flags().String("snapshot-name", "", "The name of the snapshot to be deleted.")
+		elasticache_deleteSnapshotCmd.MarkFlagRequired("snapshot-name")
+	})
 	elasticacheCmd.AddCommand(elasticache_deleteSnapshotCmd)
 }

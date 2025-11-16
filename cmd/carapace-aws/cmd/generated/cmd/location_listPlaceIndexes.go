@@ -12,9 +12,11 @@ var location_listPlaceIndexesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_listPlaceIndexesCmd).Standalone()
+	carapace.Gen(location_listPlaceIndexesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_listPlaceIndexesCmd).Standalone()
 
-	location_listPlaceIndexesCmd.Flags().String("max-results", "", "An optional limit for the maximum number of results returned in a single call.")
-	location_listPlaceIndexesCmd.Flags().String("next-token", "", "The pagination token specifying which page of results to return in the response.")
+		location_listPlaceIndexesCmd.Flags().String("max-results", "", "An optional limit for the maximum number of results returned in a single call.")
+		location_listPlaceIndexesCmd.Flags().String("next-token", "", "The pagination token specifying which page of results to return in the response.")
+	})
 	locationCmd.AddCommand(location_listPlaceIndexesCmd)
 }

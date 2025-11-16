@@ -12,7 +12,9 @@ var iotwireless_getMetricConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getMetricConfigurationCmd).Standalone()
+	carapace.Gen(iotwireless_getMetricConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getMetricConfigurationCmd).Standalone()
 
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getMetricConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var chimeSdkIdentity_getAppInstanceRetentionSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_getAppInstanceRetentionSettingsCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_getAppInstanceRetentionSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_getAppInstanceRetentionSettingsCmd).Standalone()
 
-	chimeSdkIdentity_getAppInstanceRetentionSettingsCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
-	chimeSdkIdentity_getAppInstanceRetentionSettingsCmd.MarkFlagRequired("app-instance-arn")
+		chimeSdkIdentity_getAppInstanceRetentionSettingsCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
+		chimeSdkIdentity_getAppInstanceRetentionSettingsCmd.MarkFlagRequired("app-instance-arn")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_getAppInstanceRetentionSettingsCmd)
 }

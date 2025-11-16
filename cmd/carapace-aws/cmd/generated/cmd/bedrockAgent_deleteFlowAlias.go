@@ -12,11 +12,13 @@ var bedrockAgent_deleteFlowAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_deleteFlowAliasCmd).Standalone()
+	carapace.Gen(bedrockAgent_deleteFlowAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_deleteFlowAliasCmd).Standalone()
 
-	bedrockAgent_deleteFlowAliasCmd.Flags().String("alias-identifier", "", "The unique identifier of the alias to be deleted.")
-	bedrockAgent_deleteFlowAliasCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow that the alias belongs to.")
-	bedrockAgent_deleteFlowAliasCmd.MarkFlagRequired("alias-identifier")
-	bedrockAgent_deleteFlowAliasCmd.MarkFlagRequired("flow-identifier")
+		bedrockAgent_deleteFlowAliasCmd.Flags().String("alias-identifier", "", "The unique identifier of the alias to be deleted.")
+		bedrockAgent_deleteFlowAliasCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow that the alias belongs to.")
+		bedrockAgent_deleteFlowAliasCmd.MarkFlagRequired("alias-identifier")
+		bedrockAgent_deleteFlowAliasCmd.MarkFlagRequired("flow-identifier")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_deleteFlowAliasCmd)
 }

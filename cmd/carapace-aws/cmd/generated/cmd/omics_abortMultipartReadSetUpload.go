@@ -12,11 +12,13 @@ var omics_abortMultipartReadSetUploadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_abortMultipartReadSetUploadCmd).Standalone()
+	carapace.Gen(omics_abortMultipartReadSetUploadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_abortMultipartReadSetUploadCmd).Standalone()
 
-	omics_abortMultipartReadSetUploadCmd.Flags().String("sequence-store-id", "", "The sequence store ID for the store involved in the multipart upload.")
-	omics_abortMultipartReadSetUploadCmd.Flags().String("upload-id", "", "The ID for the multipart upload.")
-	omics_abortMultipartReadSetUploadCmd.MarkFlagRequired("sequence-store-id")
-	omics_abortMultipartReadSetUploadCmd.MarkFlagRequired("upload-id")
+		omics_abortMultipartReadSetUploadCmd.Flags().String("sequence-store-id", "", "The sequence store ID for the store involved in the multipart upload.")
+		omics_abortMultipartReadSetUploadCmd.Flags().String("upload-id", "", "The ID for the multipart upload.")
+		omics_abortMultipartReadSetUploadCmd.MarkFlagRequired("sequence-store-id")
+		omics_abortMultipartReadSetUploadCmd.MarkFlagRequired("upload-id")
+	})
 	omicsCmd.AddCommand(omics_abortMultipartReadSetUploadCmd)
 }

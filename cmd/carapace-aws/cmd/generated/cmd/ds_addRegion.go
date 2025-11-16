@@ -12,13 +12,15 @@ var ds_addRegionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_addRegionCmd).Standalone()
+	carapace.Gen(ds_addRegionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_addRegionCmd).Standalone()
 
-	ds_addRegionCmd.Flags().String("directory-id", "", "The identifier of the directory to which you want to add Region replication.")
-	ds_addRegionCmd.Flags().String("region-name", "", "The name of the Region where you want to add domain controllers for replication.")
-	ds_addRegionCmd.Flags().String("vpcsettings", "", "")
-	ds_addRegionCmd.MarkFlagRequired("directory-id")
-	ds_addRegionCmd.MarkFlagRequired("region-name")
-	ds_addRegionCmd.MarkFlagRequired("vpcsettings")
+		ds_addRegionCmd.Flags().String("directory-id", "", "The identifier of the directory to which you want to add Region replication.")
+		ds_addRegionCmd.Flags().String("region-name", "", "The name of the Region where you want to add domain controllers for replication.")
+		ds_addRegionCmd.Flags().String("vpcsettings", "", "")
+		ds_addRegionCmd.MarkFlagRequired("directory-id")
+		ds_addRegionCmd.MarkFlagRequired("region-name")
+		ds_addRegionCmd.MarkFlagRequired("vpcsettings")
+	})
 	dsCmd.AddCommand(ds_addRegionCmd)
 }

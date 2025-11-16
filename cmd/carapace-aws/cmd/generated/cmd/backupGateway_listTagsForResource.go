@@ -12,9 +12,11 @@ var backupGateway_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_listTagsForResourceCmd).Standalone()
+	carapace.Gen(backupGateway_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_listTagsForResourceCmd).Standalone()
 
-	backupGateway_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource's tags to list.")
-	backupGateway_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		backupGateway_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource's tags to list.")
+		backupGateway_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_listTagsForResourceCmd)
 }

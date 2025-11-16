@@ -12,14 +12,16 @@ var s3_getObjectAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getObjectAclCmd).Standalone()
+	carapace.Gen(s3_getObjectAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getObjectAclCmd).Standalone()
 
-	s3_getObjectAclCmd.Flags().String("bucket", "", "The bucket name that contains the object for which to get the ACL information.")
-	s3_getObjectAclCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getObjectAclCmd.Flags().String("key", "", "The key of the object for which to get the ACL information.")
-	s3_getObjectAclCmd.Flags().String("request-payer", "", "")
-	s3_getObjectAclCmd.Flags().String("version-id", "", "Version ID used to reference a specific version of the object.")
-	s3_getObjectAclCmd.MarkFlagRequired("bucket")
-	s3_getObjectAclCmd.MarkFlagRequired("key")
+		s3_getObjectAclCmd.Flags().String("bucket", "", "The bucket name that contains the object for which to get the ACL information.")
+		s3_getObjectAclCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getObjectAclCmd.Flags().String("key", "", "The key of the object for which to get the ACL information.")
+		s3_getObjectAclCmd.Flags().String("request-payer", "", "")
+		s3_getObjectAclCmd.Flags().String("version-id", "", "Version ID used to reference a specific version of the object.")
+		s3_getObjectAclCmd.MarkFlagRequired("bucket")
+		s3_getObjectAclCmd.MarkFlagRequired("key")
+	})
 	s3Cmd.AddCommand(s3_getObjectAclCmd)
 }

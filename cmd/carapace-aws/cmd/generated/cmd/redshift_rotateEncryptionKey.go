@@ -12,9 +12,11 @@ var redshift_rotateEncryptionKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_rotateEncryptionKeyCmd).Standalone()
+	carapace.Gen(redshift_rotateEncryptionKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_rotateEncryptionKeyCmd).Standalone()
 
-	redshift_rotateEncryptionKeyCmd.Flags().String("cluster-identifier", "", "The unique identifier of the cluster that you want to rotate the encryption keys for.")
-	redshift_rotateEncryptionKeyCmd.MarkFlagRequired("cluster-identifier")
+		redshift_rotateEncryptionKeyCmd.Flags().String("cluster-identifier", "", "The unique identifier of the cluster that you want to rotate the encryption keys for.")
+		redshift_rotateEncryptionKeyCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_rotateEncryptionKeyCmd)
 }

@@ -12,11 +12,13 @@ var workspacesWeb_updateUserAccessLoggingSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_updateUserAccessLoggingSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_updateUserAccessLoggingSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_updateUserAccessLoggingSettingsCmd).Standalone()
 
-	workspacesWeb_updateUserAccessLoggingSettingsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	workspacesWeb_updateUserAccessLoggingSettingsCmd.Flags().String("kinesis-stream-arn", "", "The ARN of the Kinesis stream.")
-	workspacesWeb_updateUserAccessLoggingSettingsCmd.Flags().String("user-access-logging-settings-arn", "", "The ARN of the user access logging settings.")
-	workspacesWeb_updateUserAccessLoggingSettingsCmd.MarkFlagRequired("user-access-logging-settings-arn")
+		workspacesWeb_updateUserAccessLoggingSettingsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		workspacesWeb_updateUserAccessLoggingSettingsCmd.Flags().String("kinesis-stream-arn", "", "The ARN of the Kinesis stream.")
+		workspacesWeb_updateUserAccessLoggingSettingsCmd.Flags().String("user-access-logging-settings-arn", "", "The ARN of the user access logging settings.")
+		workspacesWeb_updateUserAccessLoggingSettingsCmd.MarkFlagRequired("user-access-logging-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_updateUserAccessLoggingSettingsCmd)
 }

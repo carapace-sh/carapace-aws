@@ -12,9 +12,11 @@ var snowball_cancelJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_cancelJobCmd).Standalone()
+	carapace.Gen(snowball_cancelJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_cancelJobCmd).Standalone()
 
-	snowball_cancelJobCmd.Flags().String("job-id", "", "The 39-character job ID for the job that you want to cancel, for example `JID123e4567-e89b-12d3-a456-426655440000`.")
-	snowball_cancelJobCmd.MarkFlagRequired("job-id")
+		snowball_cancelJobCmd.Flags().String("job-id", "", "The 39-character job ID for the job that you want to cancel, for example `JID123e4567-e89b-12d3-a456-426655440000`.")
+		snowball_cancelJobCmd.MarkFlagRequired("job-id")
+	})
 	snowballCmd.AddCommand(snowball_cancelJobCmd)
 }

@@ -12,9 +12,11 @@ var location_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_listTagsForResourceCmd).Standalone()
+	carapace.Gen(location_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_listTagsForResourceCmd).Standalone()
 
-	location_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.")
-	location_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		location_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.")
+		location_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	locationCmd.AddCommand(location_listTagsForResourceCmd)
 }

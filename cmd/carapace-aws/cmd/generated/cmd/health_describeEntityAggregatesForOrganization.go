@@ -12,10 +12,12 @@ var health_describeEntityAggregatesForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(health_describeEntityAggregatesForOrganizationCmd).Standalone()
+	carapace.Gen(health_describeEntityAggregatesForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(health_describeEntityAggregatesForOrganizationCmd).Standalone()
 
-	health_describeEntityAggregatesForOrganizationCmd.Flags().String("aws-account-ids", "", "A list of 12-digit Amazon Web Services account numbers that contains the affected entities.")
-	health_describeEntityAggregatesForOrganizationCmd.Flags().String("event-arns", "", "A list of event ARNs (unique identifiers).")
-	health_describeEntityAggregatesForOrganizationCmd.MarkFlagRequired("event-arns")
+		health_describeEntityAggregatesForOrganizationCmd.Flags().String("aws-account-ids", "", "A list of 12-digit Amazon Web Services account numbers that contains the affected entities.")
+		health_describeEntityAggregatesForOrganizationCmd.Flags().String("event-arns", "", "A list of event ARNs (unique identifiers).")
+		health_describeEntityAggregatesForOrganizationCmd.MarkFlagRequired("event-arns")
+	})
 	healthCmd.AddCommand(health_describeEntityAggregatesForOrganizationCmd)
 }

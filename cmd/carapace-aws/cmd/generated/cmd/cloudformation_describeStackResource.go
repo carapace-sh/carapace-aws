@@ -12,11 +12,13 @@ var cloudformation_describeStackResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeStackResourceCmd).Standalone()
+	carapace.Gen(cloudformation_describeStackResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeStackResourceCmd).Standalone()
 
-	cloudformation_describeStackResourceCmd.Flags().String("logical-resource-id", "", "The logical name of the resource as specified in the template.")
-	cloudformation_describeStackResourceCmd.Flags().String("stack-name", "", "The name or the unique stack ID that's associated with the stack, which aren't always interchangeable:")
-	cloudformation_describeStackResourceCmd.MarkFlagRequired("logical-resource-id")
-	cloudformation_describeStackResourceCmd.MarkFlagRequired("stack-name")
+		cloudformation_describeStackResourceCmd.Flags().String("logical-resource-id", "", "The logical name of the resource as specified in the template.")
+		cloudformation_describeStackResourceCmd.Flags().String("stack-name", "", "The name or the unique stack ID that's associated with the stack, which aren't always interchangeable:")
+		cloudformation_describeStackResourceCmd.MarkFlagRequired("logical-resource-id")
+		cloudformation_describeStackResourceCmd.MarkFlagRequired("stack-name")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeStackResourceCmd)
 }

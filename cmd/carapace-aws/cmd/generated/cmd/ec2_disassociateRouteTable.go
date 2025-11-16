@@ -12,12 +12,14 @@ var ec2_disassociateRouteTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_disassociateRouteTableCmd).Standalone()
+	carapace.Gen(ec2_disassociateRouteTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_disassociateRouteTableCmd).Standalone()
 
-	ec2_disassociateRouteTableCmd.Flags().String("association-id", "", "The association ID representing the current association between the route table and subnet or gateway.")
-	ec2_disassociateRouteTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disassociateRouteTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disassociateRouteTableCmd.MarkFlagRequired("association-id")
-	ec2_disassociateRouteTableCmd.Flag("no-dry-run").Hidden = true
+		ec2_disassociateRouteTableCmd.Flags().String("association-id", "", "The association ID representing the current association between the route table and subnet or gateway.")
+		ec2_disassociateRouteTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disassociateRouteTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disassociateRouteTableCmd.MarkFlagRequired("association-id")
+		ec2_disassociateRouteTableCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_disassociateRouteTableCmd)
 }

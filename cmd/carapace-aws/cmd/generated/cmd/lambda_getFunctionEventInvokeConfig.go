@@ -12,10 +12,12 @@ var lambda_getFunctionEventInvokeConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getFunctionEventInvokeConfigCmd).Standalone()
+	carapace.Gen(lambda_getFunctionEventInvokeConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getFunctionEventInvokeConfigCmd).Standalone()
 
-	lambda_getFunctionEventInvokeConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
-	lambda_getFunctionEventInvokeConfigCmd.Flags().String("qualifier", "", "A version number or alias name.")
-	lambda_getFunctionEventInvokeConfigCmd.MarkFlagRequired("function-name")
+		lambda_getFunctionEventInvokeConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
+		lambda_getFunctionEventInvokeConfigCmd.Flags().String("qualifier", "", "A version number or alias name.")
+		lambda_getFunctionEventInvokeConfigCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_getFunctionEventInvokeConfigCmd)
 }

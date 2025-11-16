@@ -12,10 +12,12 @@ var networkmanager_describeGlobalNetworksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_describeGlobalNetworksCmd).Standalone()
+	carapace.Gen(networkmanager_describeGlobalNetworksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_describeGlobalNetworksCmd).Standalone()
 
-	networkmanager_describeGlobalNetworksCmd.Flags().String("global-network-ids", "", "The IDs of one or more global networks.")
-	networkmanager_describeGlobalNetworksCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	networkmanager_describeGlobalNetworksCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		networkmanager_describeGlobalNetworksCmd.Flags().String("global-network-ids", "", "The IDs of one or more global networks.")
+		networkmanager_describeGlobalNetworksCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		networkmanager_describeGlobalNetworksCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_describeGlobalNetworksCmd)
 }

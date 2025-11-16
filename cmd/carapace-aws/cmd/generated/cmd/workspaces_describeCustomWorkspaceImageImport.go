@@ -12,9 +12,11 @@ var workspaces_describeCustomWorkspaceImageImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeCustomWorkspaceImageImportCmd).Standalone()
+	carapace.Gen(workspaces_describeCustomWorkspaceImageImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeCustomWorkspaceImageImportCmd).Standalone()
 
-	workspaces_describeCustomWorkspaceImageImportCmd.Flags().String("image-id", "", "The identifier of the WorkSpace image.")
-	workspaces_describeCustomWorkspaceImageImportCmd.MarkFlagRequired("image-id")
+		workspaces_describeCustomWorkspaceImageImportCmd.Flags().String("image-id", "", "The identifier of the WorkSpace image.")
+		workspaces_describeCustomWorkspaceImageImportCmd.MarkFlagRequired("image-id")
+	})
 	workspacesCmd.AddCommand(workspaces_describeCustomWorkspaceImageImportCmd)
 }

@@ -12,11 +12,13 @@ var ram_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ram_tagResourceCmd).Standalone()
+	carapace.Gen(ram_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ram_tagResourceCmd).Standalone()
 
-	ram_tagResourceCmd.Flags().String("resource-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the managed permission that you want to add tags to.")
-	ram_tagResourceCmd.Flags().String("resource-share-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share that you want to add tags to.")
-	ram_tagResourceCmd.Flags().String("tags", "", "A list of one or more tag key and value pairs.")
-	ram_tagResourceCmd.MarkFlagRequired("tags")
+		ram_tagResourceCmd.Flags().String("resource-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the managed permission that you want to add tags to.")
+		ram_tagResourceCmd.Flags().String("resource-share-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share that you want to add tags to.")
+		ram_tagResourceCmd.Flags().String("tags", "", "A list of one or more tag key and value pairs.")
+		ram_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	ramCmd.AddCommand(ram_tagResourceCmd)
 }

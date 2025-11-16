@@ -12,11 +12,13 @@ var globalaccelerator_addCustomRoutingEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_addCustomRoutingEndpointsCmd).Standalone()
+	carapace.Gen(globalaccelerator_addCustomRoutingEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_addCustomRoutingEndpointsCmd).Standalone()
 
-	globalaccelerator_addCustomRoutingEndpointsCmd.Flags().String("endpoint-configurations", "", "The list of endpoint objects to add to a custom routing accelerator.")
-	globalaccelerator_addCustomRoutingEndpointsCmd.Flags().String("endpoint-group-arn", "", "The Amazon Resource Name (ARN) of the endpoint group for the custom routing endpoint.")
-	globalaccelerator_addCustomRoutingEndpointsCmd.MarkFlagRequired("endpoint-configurations")
-	globalaccelerator_addCustomRoutingEndpointsCmd.MarkFlagRequired("endpoint-group-arn")
+		globalaccelerator_addCustomRoutingEndpointsCmd.Flags().String("endpoint-configurations", "", "The list of endpoint objects to add to a custom routing accelerator.")
+		globalaccelerator_addCustomRoutingEndpointsCmd.Flags().String("endpoint-group-arn", "", "The Amazon Resource Name (ARN) of the endpoint group for the custom routing endpoint.")
+		globalaccelerator_addCustomRoutingEndpointsCmd.MarkFlagRequired("endpoint-configurations")
+		globalaccelerator_addCustomRoutingEndpointsCmd.MarkFlagRequired("endpoint-group-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_addCustomRoutingEndpointsCmd)
 }

@@ -12,13 +12,15 @@ var chime_deleteRoomMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_deleteRoomMembershipCmd).Standalone()
+	carapace.Gen(chime_deleteRoomMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_deleteRoomMembershipCmd).Standalone()
 
-	chime_deleteRoomMembershipCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_deleteRoomMembershipCmd.Flags().String("member-id", "", "The member ID (user ID or bot ID).")
-	chime_deleteRoomMembershipCmd.Flags().String("room-id", "", "The room ID.")
-	chime_deleteRoomMembershipCmd.MarkFlagRequired("account-id")
-	chime_deleteRoomMembershipCmd.MarkFlagRequired("member-id")
-	chime_deleteRoomMembershipCmd.MarkFlagRequired("room-id")
+		chime_deleteRoomMembershipCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_deleteRoomMembershipCmd.Flags().String("member-id", "", "The member ID (user ID or bot ID).")
+		chime_deleteRoomMembershipCmd.Flags().String("room-id", "", "The room ID.")
+		chime_deleteRoomMembershipCmd.MarkFlagRequired("account-id")
+		chime_deleteRoomMembershipCmd.MarkFlagRequired("member-id")
+		chime_deleteRoomMembershipCmd.MarkFlagRequired("room-id")
+	})
 	chimeCmd.AddCommand(chime_deleteRoomMembershipCmd)
 }

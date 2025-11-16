@@ -12,15 +12,17 @@ var gamelift_registerGameServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_registerGameServerCmd).Standalone()
+	carapace.Gen(gamelift_registerGameServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_registerGameServerCmd).Standalone()
 
-	gamelift_registerGameServerCmd.Flags().String("connection-info", "", "Information that is needed to make inbound client connections to the game server.")
-	gamelift_registerGameServerCmd.Flags().String("game-server-data", "", "A set of custom game server properties, formatted as a single string value.")
-	gamelift_registerGameServerCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group where the game server is running.")
-	gamelift_registerGameServerCmd.Flags().String("game-server-id", "", "A custom string that uniquely identifies the game server to register.")
-	gamelift_registerGameServerCmd.Flags().String("instance-id", "", "The unique identifier for the instance where the game server is running.")
-	gamelift_registerGameServerCmd.MarkFlagRequired("game-server-group-name")
-	gamelift_registerGameServerCmd.MarkFlagRequired("game-server-id")
-	gamelift_registerGameServerCmd.MarkFlagRequired("instance-id")
+		gamelift_registerGameServerCmd.Flags().String("connection-info", "", "Information that is needed to make inbound client connections to the game server.")
+		gamelift_registerGameServerCmd.Flags().String("game-server-data", "", "A set of custom game server properties, formatted as a single string value.")
+		gamelift_registerGameServerCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group where the game server is running.")
+		gamelift_registerGameServerCmd.Flags().String("game-server-id", "", "A custom string that uniquely identifies the game server to register.")
+		gamelift_registerGameServerCmd.Flags().String("instance-id", "", "The unique identifier for the instance where the game server is running.")
+		gamelift_registerGameServerCmd.MarkFlagRequired("game-server-group-name")
+		gamelift_registerGameServerCmd.MarkFlagRequired("game-server-id")
+		gamelift_registerGameServerCmd.MarkFlagRequired("instance-id")
+	})
 	gameliftCmd.AddCommand(gamelift_registerGameServerCmd)
 }

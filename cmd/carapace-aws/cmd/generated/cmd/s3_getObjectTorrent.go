@@ -12,13 +12,15 @@ var s3_getObjectTorrentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getObjectTorrentCmd).Standalone()
+	carapace.Gen(s3_getObjectTorrentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getObjectTorrentCmd).Standalone()
 
-	s3_getObjectTorrentCmd.Flags().String("bucket", "", "The name of the bucket containing the object for which to get the torrent files.")
-	s3_getObjectTorrentCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getObjectTorrentCmd.Flags().String("key", "", "The object key for which to get the information.")
-	s3_getObjectTorrentCmd.Flags().String("request-payer", "", "")
-	s3_getObjectTorrentCmd.MarkFlagRequired("bucket")
-	s3_getObjectTorrentCmd.MarkFlagRequired("key")
+		s3_getObjectTorrentCmd.Flags().String("bucket", "", "The name of the bucket containing the object for which to get the torrent files.")
+		s3_getObjectTorrentCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getObjectTorrentCmd.Flags().String("key", "", "The object key for which to get the information.")
+		s3_getObjectTorrentCmd.Flags().String("request-payer", "", "")
+		s3_getObjectTorrentCmd.MarkFlagRequired("bucket")
+		s3_getObjectTorrentCmd.MarkFlagRequired("key")
+	})
 	s3Cmd.AddCommand(s3_getObjectTorrentCmd)
 }

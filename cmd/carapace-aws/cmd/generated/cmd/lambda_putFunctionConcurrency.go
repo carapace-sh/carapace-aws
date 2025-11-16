@@ -12,11 +12,13 @@ var lambda_putFunctionConcurrencyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_putFunctionConcurrencyCmd).Standalone()
+	carapace.Gen(lambda_putFunctionConcurrencyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_putFunctionConcurrencyCmd).Standalone()
 
-	lambda_putFunctionConcurrencyCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_putFunctionConcurrencyCmd.Flags().String("reserved-concurrent-executions", "", "The number of simultaneous executions to reserve for the function.")
-	lambda_putFunctionConcurrencyCmd.MarkFlagRequired("function-name")
-	lambda_putFunctionConcurrencyCmd.MarkFlagRequired("reserved-concurrent-executions")
+		lambda_putFunctionConcurrencyCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_putFunctionConcurrencyCmd.Flags().String("reserved-concurrent-executions", "", "The number of simultaneous executions to reserve for the function.")
+		lambda_putFunctionConcurrencyCmd.MarkFlagRequired("function-name")
+		lambda_putFunctionConcurrencyCmd.MarkFlagRequired("reserved-concurrent-executions")
+	})
 	lambdaCmd.AddCommand(lambda_putFunctionConcurrencyCmd)
 }

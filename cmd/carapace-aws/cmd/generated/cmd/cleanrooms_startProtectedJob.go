@@ -12,15 +12,17 @@ var cleanrooms_startProtectedJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_startProtectedJobCmd).Standalone()
+	carapace.Gen(cleanrooms_startProtectedJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_startProtectedJobCmd).Standalone()
 
-	cleanrooms_startProtectedJobCmd.Flags().String("compute-configuration", "", "The compute configuration for the protected job.")
-	cleanrooms_startProtectedJobCmd.Flags().String("job-parameters", "", "The job parameters.")
-	cleanrooms_startProtectedJobCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership to run this job against.")
-	cleanrooms_startProtectedJobCmd.Flags().String("result-configuration", "", "The details needed to write the job results.")
-	cleanrooms_startProtectedJobCmd.Flags().String("type", "", "The type of protected job to start.")
-	cleanrooms_startProtectedJobCmd.MarkFlagRequired("job-parameters")
-	cleanrooms_startProtectedJobCmd.MarkFlagRequired("membership-identifier")
-	cleanrooms_startProtectedJobCmd.MarkFlagRequired("type")
+		cleanrooms_startProtectedJobCmd.Flags().String("compute-configuration", "", "The compute configuration for the protected job.")
+		cleanrooms_startProtectedJobCmd.Flags().String("job-parameters", "", "The job parameters.")
+		cleanrooms_startProtectedJobCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership to run this job against.")
+		cleanrooms_startProtectedJobCmd.Flags().String("result-configuration", "", "The details needed to write the job results.")
+		cleanrooms_startProtectedJobCmd.Flags().String("type", "", "The type of protected job to start.")
+		cleanrooms_startProtectedJobCmd.MarkFlagRequired("job-parameters")
+		cleanrooms_startProtectedJobCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_startProtectedJobCmd.MarkFlagRequired("type")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_startProtectedJobCmd)
 }

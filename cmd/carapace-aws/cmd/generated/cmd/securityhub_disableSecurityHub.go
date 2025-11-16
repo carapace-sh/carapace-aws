@@ -12,7 +12,9 @@ var securityhub_disableSecurityHubCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_disableSecurityHubCmd).Standalone()
+	carapace.Gen(securityhub_disableSecurityHubCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_disableSecurityHubCmd).Standalone()
 
+	})
 	securityhubCmd.AddCommand(securityhub_disableSecurityHubCmd)
 }

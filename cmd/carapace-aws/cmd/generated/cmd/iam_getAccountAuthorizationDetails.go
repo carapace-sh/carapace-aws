@@ -12,10 +12,12 @@ var iam_getAccountAuthorizationDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getAccountAuthorizationDetailsCmd).Standalone()
+	carapace.Gen(iam_getAccountAuthorizationDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getAccountAuthorizationDetailsCmd).Standalone()
 
-	iam_getAccountAuthorizationDetailsCmd.Flags().String("filter", "", "A list of entity types used to filter the results.")
-	iam_getAccountAuthorizationDetailsCmd.Flags().String("marker", "", "Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated.")
-	iam_getAccountAuthorizationDetailsCmd.Flags().String("max-items", "", "Use this only when paginating results to indicate the maximum number of items you want in the response.")
+		iam_getAccountAuthorizationDetailsCmd.Flags().String("filter", "", "A list of entity types used to filter the results.")
+		iam_getAccountAuthorizationDetailsCmd.Flags().String("marker", "", "Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated.")
+		iam_getAccountAuthorizationDetailsCmd.Flags().String("max-items", "", "Use this only when paginating results to indicate the maximum number of items you want in the response.")
+	})
 	iamCmd.AddCommand(iam_getAccountAuthorizationDetailsCmd)
 }

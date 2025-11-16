@@ -12,7 +12,9 @@ var rds_describeAccountAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeAccountAttributesCmd).Standalone()
+	carapace.Gen(rds_describeAccountAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeAccountAttributesCmd).Standalone()
 
+	})
 	rdsCmd.AddCommand(rds_describeAccountAttributesCmd)
 }

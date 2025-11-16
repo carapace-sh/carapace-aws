@@ -12,7 +12,9 @@ var wisdomCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdomCmd).Standalone()
+	carapace.Gen(wisdomCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdomCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(wisdomCmd)
 }

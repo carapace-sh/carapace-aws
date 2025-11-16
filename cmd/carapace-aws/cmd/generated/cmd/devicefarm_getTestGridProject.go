@@ -12,9 +12,11 @@ var devicefarm_getTestGridProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_getTestGridProjectCmd).Standalone()
+	carapace.Gen(devicefarm_getTestGridProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_getTestGridProjectCmd).Standalone()
 
-	devicefarm_getTestGridProjectCmd.Flags().String("project-arn", "", "The ARN of the Selenium testing project, from either [CreateTestGridProject]() or [ListTestGridProjects]().")
-	devicefarm_getTestGridProjectCmd.MarkFlagRequired("project-arn")
+		devicefarm_getTestGridProjectCmd.Flags().String("project-arn", "", "The ARN of the Selenium testing project, from either [CreateTestGridProject]() or [ListTestGridProjects]().")
+		devicefarm_getTestGridProjectCmd.MarkFlagRequired("project-arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_getTestGridProjectCmd)
 }

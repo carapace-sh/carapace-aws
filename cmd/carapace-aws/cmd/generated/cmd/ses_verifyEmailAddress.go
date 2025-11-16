@@ -12,9 +12,11 @@ var ses_verifyEmailAddressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_verifyEmailAddressCmd).Standalone()
+	carapace.Gen(ses_verifyEmailAddressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_verifyEmailAddressCmd).Standalone()
 
-	ses_verifyEmailAddressCmd.Flags().String("email-address", "", "The email address to be verified.")
-	ses_verifyEmailAddressCmd.MarkFlagRequired("email-address")
+		ses_verifyEmailAddressCmd.Flags().String("email-address", "", "The email address to be verified.")
+		ses_verifyEmailAddressCmd.MarkFlagRequired("email-address")
+	})
 	sesCmd.AddCommand(ses_verifyEmailAddressCmd)
 }

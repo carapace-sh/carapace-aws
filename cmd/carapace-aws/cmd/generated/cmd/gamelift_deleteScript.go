@@ -12,9 +12,11 @@ var gamelift_deleteScriptCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteScriptCmd).Standalone()
+	carapace.Gen(gamelift_deleteScriptCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteScriptCmd).Standalone()
 
-	gamelift_deleteScriptCmd.Flags().String("script-id", "", "A unique identifier for the Realtime script to delete.")
-	gamelift_deleteScriptCmd.MarkFlagRequired("script-id")
+		gamelift_deleteScriptCmd.Flags().String("script-id", "", "A unique identifier for the Realtime script to delete.")
+		gamelift_deleteScriptCmd.MarkFlagRequired("script-id")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteScriptCmd)
 }

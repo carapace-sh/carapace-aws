@@ -12,10 +12,12 @@ var cloudhsmv2_describeClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsmv2_describeClustersCmd).Standalone()
+	carapace.Gen(cloudhsmv2_describeClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsmv2_describeClustersCmd).Standalone()
 
-	cloudhsmv2_describeClustersCmd.Flags().String("filters", "", "One or more filters to limit the items returned in the response.")
-	cloudhsmv2_describeClustersCmd.Flags().String("max-results", "", "The maximum number of clusters to return in the response.")
-	cloudhsmv2_describeClustersCmd.Flags().String("next-token", "", "The `NextToken` value that you received in the previous response.")
+		cloudhsmv2_describeClustersCmd.Flags().String("filters", "", "One or more filters to limit the items returned in the response.")
+		cloudhsmv2_describeClustersCmd.Flags().String("max-results", "", "The maximum number of clusters to return in the response.")
+		cloudhsmv2_describeClustersCmd.Flags().String("next-token", "", "The `NextToken` value that you received in the previous response.")
+	})
 	cloudhsmv2Cmd.AddCommand(cloudhsmv2_describeClustersCmd)
 }

@@ -12,11 +12,13 @@ var chime_getRoomCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_getRoomCmd).Standalone()
+	carapace.Gen(chime_getRoomCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_getRoomCmd).Standalone()
 
-	chime_getRoomCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_getRoomCmd.Flags().String("room-id", "", "The room ID.")
-	chime_getRoomCmd.MarkFlagRequired("account-id")
-	chime_getRoomCmd.MarkFlagRequired("room-id")
+		chime_getRoomCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_getRoomCmd.Flags().String("room-id", "", "The room ID.")
+		chime_getRoomCmd.MarkFlagRequired("account-id")
+		chime_getRoomCmd.MarkFlagRequired("room-id")
+	})
 	chimeCmd.AddCommand(chime_getRoomCmd)
 }

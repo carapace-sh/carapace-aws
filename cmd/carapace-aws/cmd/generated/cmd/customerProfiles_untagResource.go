@@ -12,11 +12,13 @@ var customerProfiles_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_untagResourceCmd).Standalone()
+	carapace.Gen(customerProfiles_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_untagResourceCmd).Standalone()
 
-	customerProfiles_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource from which you are removing tags.")
-	customerProfiles_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
-	customerProfiles_untagResourceCmd.MarkFlagRequired("resource-arn")
-	customerProfiles_untagResourceCmd.MarkFlagRequired("tag-keys")
+		customerProfiles_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource from which you are removing tags.")
+		customerProfiles_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
+		customerProfiles_untagResourceCmd.MarkFlagRequired("resource-arn")
+		customerProfiles_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_untagResourceCmd)
 }

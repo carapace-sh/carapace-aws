@@ -12,10 +12,12 @@ var xray_getTraceGraphCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getTraceGraphCmd).Standalone()
+	carapace.Gen(xray_getTraceGraphCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getTraceGraphCmd).Standalone()
 
-	xray_getTraceGraphCmd.Flags().String("next-token", "", "Pagination token.")
-	xray_getTraceGraphCmd.Flags().String("trace-ids", "", "Trace IDs of requests for which to generate a service graph.")
-	xray_getTraceGraphCmd.MarkFlagRequired("trace-ids")
+		xray_getTraceGraphCmd.Flags().String("next-token", "", "Pagination token.")
+		xray_getTraceGraphCmd.Flags().String("trace-ids", "", "Trace IDs of requests for which to generate a service graph.")
+		xray_getTraceGraphCmd.MarkFlagRequired("trace-ids")
+	})
 	xrayCmd.AddCommand(xray_getTraceGraphCmd)
 }

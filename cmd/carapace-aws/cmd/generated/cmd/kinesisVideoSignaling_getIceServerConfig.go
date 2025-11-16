@@ -12,12 +12,14 @@ var kinesisVideoSignaling_getIceServerConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisVideoSignaling_getIceServerConfigCmd).Standalone()
+	carapace.Gen(kinesisVideoSignaling_getIceServerConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisVideoSignaling_getIceServerConfigCmd).Standalone()
 
-	kinesisVideoSignaling_getIceServerConfigCmd.Flags().String("channel-arn", "", "The ARN of the signaling channel to be used for the peer-to-peer connection between configured peers.")
-	kinesisVideoSignaling_getIceServerConfigCmd.Flags().String("client-id", "", "Unique identifier for the viewer.")
-	kinesisVideoSignaling_getIceServerConfigCmd.Flags().String("service", "", "Specifies the desired service.")
-	kinesisVideoSignaling_getIceServerConfigCmd.Flags().String("username", "", "An optional user ID to be associated with the credentials.")
-	kinesisVideoSignaling_getIceServerConfigCmd.MarkFlagRequired("channel-arn")
+		kinesisVideoSignaling_getIceServerConfigCmd.Flags().String("channel-arn", "", "The ARN of the signaling channel to be used for the peer-to-peer connection between configured peers.")
+		kinesisVideoSignaling_getIceServerConfigCmd.Flags().String("client-id", "", "Unique identifier for the viewer.")
+		kinesisVideoSignaling_getIceServerConfigCmd.Flags().String("service", "", "Specifies the desired service.")
+		kinesisVideoSignaling_getIceServerConfigCmd.Flags().String("username", "", "An optional user ID to be associated with the credentials.")
+		kinesisVideoSignaling_getIceServerConfigCmd.MarkFlagRequired("channel-arn")
+	})
 	kinesisVideoSignalingCmd.AddCommand(kinesisVideoSignaling_getIceServerConfigCmd)
 }

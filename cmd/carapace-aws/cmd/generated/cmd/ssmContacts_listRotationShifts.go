@@ -12,14 +12,16 @@ var ssmContacts_listRotationShiftsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_listRotationShiftsCmd).Standalone()
+	carapace.Gen(ssmContacts_listRotationShiftsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_listRotationShiftsCmd).Standalone()
 
-	ssmContacts_listRotationShiftsCmd.Flags().String("end-time", "", "The date and time for the end of the time range to list shifts for.")
-	ssmContacts_listRotationShiftsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssmContacts_listRotationShiftsCmd.Flags().String("next-token", "", "A token to start the list.")
-	ssmContacts_listRotationShiftsCmd.Flags().String("rotation-id", "", "The Amazon Resource Name (ARN) of the rotation to retrieve shift information about.")
-	ssmContacts_listRotationShiftsCmd.Flags().String("start-time", "", "The date and time for the beginning of the time range to list shifts for.")
-	ssmContacts_listRotationShiftsCmd.MarkFlagRequired("end-time")
-	ssmContacts_listRotationShiftsCmd.MarkFlagRequired("rotation-id")
+		ssmContacts_listRotationShiftsCmd.Flags().String("end-time", "", "The date and time for the end of the time range to list shifts for.")
+		ssmContacts_listRotationShiftsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssmContacts_listRotationShiftsCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssmContacts_listRotationShiftsCmd.Flags().String("rotation-id", "", "The Amazon Resource Name (ARN) of the rotation to retrieve shift information about.")
+		ssmContacts_listRotationShiftsCmd.Flags().String("start-time", "", "The date and time for the beginning of the time range to list shifts for.")
+		ssmContacts_listRotationShiftsCmd.MarkFlagRequired("end-time")
+		ssmContacts_listRotationShiftsCmd.MarkFlagRequired("rotation-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_listRotationShiftsCmd)
 }

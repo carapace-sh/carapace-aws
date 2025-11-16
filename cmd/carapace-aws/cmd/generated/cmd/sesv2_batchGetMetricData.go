@@ -12,9 +12,11 @@ var sesv2_batchGetMetricDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_batchGetMetricDataCmd).Standalone()
+	carapace.Gen(sesv2_batchGetMetricDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_batchGetMetricDataCmd).Standalone()
 
-	sesv2_batchGetMetricDataCmd.Flags().String("queries", "", "A list of queries for metrics to be retrieved.")
-	sesv2_batchGetMetricDataCmd.MarkFlagRequired("queries")
+		sesv2_batchGetMetricDataCmd.Flags().String("queries", "", "A list of queries for metrics to be retrieved.")
+		sesv2_batchGetMetricDataCmd.MarkFlagRequired("queries")
+	})
 	sesv2Cmd.AddCommand(sesv2_batchGetMetricDataCmd)
 }

@@ -12,9 +12,11 @@ var workspaces_startWorkspacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_startWorkspacesCmd).Standalone()
+	carapace.Gen(workspaces_startWorkspacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_startWorkspacesCmd).Standalone()
 
-	workspaces_startWorkspacesCmd.Flags().String("start-workspace-requests", "", "The WorkSpaces to start.")
-	workspaces_startWorkspacesCmd.MarkFlagRequired("start-workspace-requests")
+		workspaces_startWorkspacesCmd.Flags().String("start-workspace-requests", "", "The WorkSpaces to start.")
+		workspaces_startWorkspacesCmd.MarkFlagRequired("start-workspace-requests")
+	})
 	workspacesCmd.AddCommand(workspaces_startWorkspacesCmd)
 }

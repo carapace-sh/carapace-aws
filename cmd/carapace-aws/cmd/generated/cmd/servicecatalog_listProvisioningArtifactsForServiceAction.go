@@ -12,12 +12,14 @@ var servicecatalog_listProvisioningArtifactsForServiceActionCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(servicecatalog_listProvisioningArtifactsForServiceActionCmd).Standalone()
+	carapace.Gen(servicecatalog_listProvisioningArtifactsForServiceActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_listProvisioningArtifactsForServiceActionCmd).Standalone()
 
-	servicecatalog_listProvisioningArtifactsForServiceActionCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_listProvisioningArtifactsForServiceActionCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_listProvisioningArtifactsForServiceActionCmd.Flags().String("page-token", "", "The page token for the next set of results.")
-	servicecatalog_listProvisioningArtifactsForServiceActionCmd.Flags().String("service-action-id", "", "The self-service action identifier.")
-	servicecatalog_listProvisioningArtifactsForServiceActionCmd.MarkFlagRequired("service-action-id")
+		servicecatalog_listProvisioningArtifactsForServiceActionCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_listProvisioningArtifactsForServiceActionCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_listProvisioningArtifactsForServiceActionCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_listProvisioningArtifactsForServiceActionCmd.Flags().String("service-action-id", "", "The self-service action identifier.")
+		servicecatalog_listProvisioningArtifactsForServiceActionCmd.MarkFlagRequired("service-action-id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_listProvisioningArtifactsForServiceActionCmd)
 }

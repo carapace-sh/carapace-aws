@@ -12,9 +12,11 @@ var waf_getSizeConstraintSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_getSizeConstraintSetCmd).Standalone()
+	carapace.Gen(waf_getSizeConstraintSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_getSizeConstraintSetCmd).Standalone()
 
-	waf_getSizeConstraintSetCmd.Flags().String("size-constraint-set-id", "", "The `SizeConstraintSetId` of the [SizeConstraintSet]() that you want to get.")
-	waf_getSizeConstraintSetCmd.MarkFlagRequired("size-constraint-set-id")
+		waf_getSizeConstraintSetCmd.Flags().String("size-constraint-set-id", "", "The `SizeConstraintSetId` of the [SizeConstraintSet]() that you want to get.")
+		waf_getSizeConstraintSetCmd.MarkFlagRequired("size-constraint-set-id")
+	})
 	wafCmd.AddCommand(waf_getSizeConstraintSetCmd)
 }

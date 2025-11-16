@@ -12,9 +12,11 @@ var bcmDashboards_listDashboardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDashboards_listDashboardsCmd).Standalone()
+	carapace.Gen(bcmDashboards_listDashboardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDashboards_listDashboardsCmd).Standalone()
 
-	bcmDashboards_listDashboardsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	bcmDashboards_listDashboardsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		bcmDashboards_listDashboardsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		bcmDashboards_listDashboardsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	bcmDashboardsCmd.AddCommand(bcmDashboards_listDashboardsCmd)
 }

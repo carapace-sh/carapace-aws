@@ -12,10 +12,12 @@ var fsx_releaseFileSystemNfsV3LocksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_releaseFileSystemNfsV3LocksCmd).Standalone()
+	carapace.Gen(fsx_releaseFileSystemNfsV3LocksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_releaseFileSystemNfsV3LocksCmd).Standalone()
 
-	fsx_releaseFileSystemNfsV3LocksCmd.Flags().String("client-request-token", "", "")
-	fsx_releaseFileSystemNfsV3LocksCmd.Flags().String("file-system-id", "", "")
-	fsx_releaseFileSystemNfsV3LocksCmd.MarkFlagRequired("file-system-id")
+		fsx_releaseFileSystemNfsV3LocksCmd.Flags().String("client-request-token", "", "")
+		fsx_releaseFileSystemNfsV3LocksCmd.Flags().String("file-system-id", "", "")
+		fsx_releaseFileSystemNfsV3LocksCmd.MarkFlagRequired("file-system-id")
+	})
 	fsxCmd.AddCommand(fsx_releaseFileSystemNfsV3LocksCmd)
 }

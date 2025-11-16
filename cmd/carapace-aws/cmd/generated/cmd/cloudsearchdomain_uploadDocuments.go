@@ -12,11 +12,13 @@ var cloudsearchdomain_uploadDocumentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearchdomain_uploadDocumentsCmd).Standalone()
+	carapace.Gen(cloudsearchdomain_uploadDocumentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearchdomain_uploadDocumentsCmd).Standalone()
 
-	cloudsearchdomain_uploadDocumentsCmd.Flags().String("content-type", "", "The format of the batch you are uploading.")
-	cloudsearchdomain_uploadDocumentsCmd.Flags().String("documents", "", "A batch of documents formatted in JSON or HTML.")
-	cloudsearchdomain_uploadDocumentsCmd.MarkFlagRequired("content-type")
-	cloudsearchdomain_uploadDocumentsCmd.MarkFlagRequired("documents")
+		cloudsearchdomain_uploadDocumentsCmd.Flags().String("content-type", "", "The format of the batch you are uploading.")
+		cloudsearchdomain_uploadDocumentsCmd.Flags().String("documents", "", "A batch of documents formatted in JSON or HTML.")
+		cloudsearchdomain_uploadDocumentsCmd.MarkFlagRequired("content-type")
+		cloudsearchdomain_uploadDocumentsCmd.MarkFlagRequired("documents")
+	})
 	cloudsearchdomainCmd.AddCommand(cloudsearchdomain_uploadDocumentsCmd)
 }

@@ -12,10 +12,12 @@ var lightsail_getInstanceAccessDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getInstanceAccessDetailsCmd).Standalone()
+	carapace.Gen(lightsail_getInstanceAccessDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getInstanceAccessDetailsCmd).Standalone()
 
-	lightsail_getInstanceAccessDetailsCmd.Flags().String("instance-name", "", "The name of the instance to access.")
-	lightsail_getInstanceAccessDetailsCmd.Flags().String("protocol", "", "The protocol to use to connect to your instance.")
-	lightsail_getInstanceAccessDetailsCmd.MarkFlagRequired("instance-name")
+		lightsail_getInstanceAccessDetailsCmd.Flags().String("instance-name", "", "The name of the instance to access.")
+		lightsail_getInstanceAccessDetailsCmd.Flags().String("protocol", "", "The protocol to use to connect to your instance.")
+		lightsail_getInstanceAccessDetailsCmd.MarkFlagRequired("instance-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getInstanceAccessDetailsCmd)
 }

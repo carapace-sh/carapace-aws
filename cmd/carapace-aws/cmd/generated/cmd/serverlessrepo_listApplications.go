@@ -12,9 +12,11 @@ var serverlessrepo_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serverlessrepo_listApplicationsCmd).Standalone()
+	carapace.Gen(serverlessrepo_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serverlessrepo_listApplicationsCmd).Standalone()
 
-	serverlessrepo_listApplicationsCmd.Flags().String("max-items", "", "The total number of items to return.")
-	serverlessrepo_listApplicationsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		serverlessrepo_listApplicationsCmd.Flags().String("max-items", "", "The total number of items to return.")
+		serverlessrepo_listApplicationsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+	})
 	serverlessrepoCmd.AddCommand(serverlessrepo_listApplicationsCmd)
 }

@@ -12,11 +12,13 @@ var sqs_changeMessageVisibilityBatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_changeMessageVisibilityBatchCmd).Standalone()
+	carapace.Gen(sqs_changeMessageVisibilityBatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_changeMessageVisibilityBatchCmd).Standalone()
 
-	sqs_changeMessageVisibilityBatchCmd.Flags().String("entries", "", "Lists the receipt handles of the messages for which the visibility timeout must be changed.")
-	sqs_changeMessageVisibilityBatchCmd.Flags().String("queue-url", "", "The URL of the Amazon SQS queue whose messages' visibility is changed.")
-	sqs_changeMessageVisibilityBatchCmd.MarkFlagRequired("entries")
-	sqs_changeMessageVisibilityBatchCmd.MarkFlagRequired("queue-url")
+		sqs_changeMessageVisibilityBatchCmd.Flags().String("entries", "", "Lists the receipt handles of the messages for which the visibility timeout must be changed.")
+		sqs_changeMessageVisibilityBatchCmd.Flags().String("queue-url", "", "The URL of the Amazon SQS queue whose messages' visibility is changed.")
+		sqs_changeMessageVisibilityBatchCmd.MarkFlagRequired("entries")
+		sqs_changeMessageVisibilityBatchCmd.MarkFlagRequired("queue-url")
+	})
 	sqsCmd.AddCommand(sqs_changeMessageVisibilityBatchCmd)
 }

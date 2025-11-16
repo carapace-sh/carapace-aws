@@ -12,10 +12,12 @@ var imagebuilder_listWorkflowBuildVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_listWorkflowBuildVersionsCmd).Standalone()
+	carapace.Gen(imagebuilder_listWorkflowBuildVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_listWorkflowBuildVersionsCmd).Standalone()
 
-	imagebuilder_listWorkflowBuildVersionsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
-	imagebuilder_listWorkflowBuildVersionsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
-	imagebuilder_listWorkflowBuildVersionsCmd.Flags().String("workflow-version-arn", "", "The Amazon Resource Name (ARN) of the workflow resource for which to get a list of build versions.")
+		imagebuilder_listWorkflowBuildVersionsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
+		imagebuilder_listWorkflowBuildVersionsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		imagebuilder_listWorkflowBuildVersionsCmd.Flags().String("workflow-version-arn", "", "The Amazon Resource Name (ARN) of the workflow resource for which to get a list of build versions.")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_listWorkflowBuildVersionsCmd)
 }

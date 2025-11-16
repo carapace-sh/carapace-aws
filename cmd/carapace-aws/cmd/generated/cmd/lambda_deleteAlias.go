@@ -12,11 +12,13 @@ var lambda_deleteAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_deleteAliasCmd).Standalone()
+	carapace.Gen(lambda_deleteAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_deleteAliasCmd).Standalone()
 
-	lambda_deleteAliasCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_deleteAliasCmd.Flags().String("name", "", "The name of the alias.")
-	lambda_deleteAliasCmd.MarkFlagRequired("function-name")
-	lambda_deleteAliasCmd.MarkFlagRequired("name")
+		lambda_deleteAliasCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_deleteAliasCmd.Flags().String("name", "", "The name of the alias.")
+		lambda_deleteAliasCmd.MarkFlagRequired("function-name")
+		lambda_deleteAliasCmd.MarkFlagRequired("name")
+	})
 	lambdaCmd.AddCommand(lambda_deleteAliasCmd)
 }

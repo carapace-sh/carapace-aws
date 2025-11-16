@@ -12,13 +12,15 @@ var paymentCryptography_getCertificateSigningRequestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_getCertificateSigningRequestCmd).Standalone()
+	carapace.Gen(paymentCryptography_getCertificateSigningRequestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_getCertificateSigningRequestCmd).Standalone()
 
-	paymentCryptography_getCertificateSigningRequestCmd.Flags().String("certificate-subject", "", "The metadata used to create the CSR.")
-	paymentCryptography_getCertificateSigningRequestCmd.Flags().String("key-identifier", "", "Asymmetric key used for generating the certificate signing request")
-	paymentCryptography_getCertificateSigningRequestCmd.Flags().String("signing-algorithm", "", "The cryptographic algorithm used to sign your CSR.")
-	paymentCryptography_getCertificateSigningRequestCmd.MarkFlagRequired("certificate-subject")
-	paymentCryptography_getCertificateSigningRequestCmd.MarkFlagRequired("key-identifier")
-	paymentCryptography_getCertificateSigningRequestCmd.MarkFlagRequired("signing-algorithm")
+		paymentCryptography_getCertificateSigningRequestCmd.Flags().String("certificate-subject", "", "The metadata used to create the CSR.")
+		paymentCryptography_getCertificateSigningRequestCmd.Flags().String("key-identifier", "", "Asymmetric key used for generating the certificate signing request")
+		paymentCryptography_getCertificateSigningRequestCmd.Flags().String("signing-algorithm", "", "The cryptographic algorithm used to sign your CSR.")
+		paymentCryptography_getCertificateSigningRequestCmd.MarkFlagRequired("certificate-subject")
+		paymentCryptography_getCertificateSigningRequestCmd.MarkFlagRequired("key-identifier")
+		paymentCryptography_getCertificateSigningRequestCmd.MarkFlagRequired("signing-algorithm")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_getCertificateSigningRequestCmd)
 }

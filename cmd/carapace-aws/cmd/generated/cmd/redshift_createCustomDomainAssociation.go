@@ -12,13 +12,15 @@ var redshift_createCustomDomainAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_createCustomDomainAssociationCmd).Standalone()
+	carapace.Gen(redshift_createCustomDomainAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_createCustomDomainAssociationCmd).Standalone()
 
-	redshift_createCustomDomainAssociationCmd.Flags().String("cluster-identifier", "", "The cluster identifier that the custom domain is associated with.")
-	redshift_createCustomDomainAssociationCmd.Flags().String("custom-domain-certificate-arn", "", "The certificate Amazon Resource Name (ARN) for the custom domain name association.")
-	redshift_createCustomDomainAssociationCmd.Flags().String("custom-domain-name", "", "The custom domain name for a custom domain association.")
-	redshift_createCustomDomainAssociationCmd.MarkFlagRequired("cluster-identifier")
-	redshift_createCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-certificate-arn")
-	redshift_createCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-name")
+		redshift_createCustomDomainAssociationCmd.Flags().String("cluster-identifier", "", "The cluster identifier that the custom domain is associated with.")
+		redshift_createCustomDomainAssociationCmd.Flags().String("custom-domain-certificate-arn", "", "The certificate Amazon Resource Name (ARN) for the custom domain name association.")
+		redshift_createCustomDomainAssociationCmd.Flags().String("custom-domain-name", "", "The custom domain name for a custom domain association.")
+		redshift_createCustomDomainAssociationCmd.MarkFlagRequired("cluster-identifier")
+		redshift_createCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-certificate-arn")
+		redshift_createCustomDomainAssociationCmd.MarkFlagRequired("custom-domain-name")
+	})
 	redshiftCmd.AddCommand(redshift_createCustomDomainAssociationCmd)
 }

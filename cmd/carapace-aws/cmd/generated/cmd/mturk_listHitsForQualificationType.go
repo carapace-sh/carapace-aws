@@ -12,11 +12,13 @@ var mturk_listHitsForQualificationTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_listHitsForQualificationTypeCmd).Standalone()
+	carapace.Gen(mturk_listHitsForQualificationTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_listHitsForQualificationTypeCmd).Standalone()
 
-	mturk_listHitsForQualificationTypeCmd.Flags().String("max-results", "", "Limit the number of results returned.")
-	mturk_listHitsForQualificationTypeCmd.Flags().String("next-token", "", "Pagination Token")
-	mturk_listHitsForQualificationTypeCmd.Flags().String("qualification-type-id", "", "The ID of the Qualification type to use when querying HITs.")
-	mturk_listHitsForQualificationTypeCmd.MarkFlagRequired("qualification-type-id")
+		mturk_listHitsForQualificationTypeCmd.Flags().String("max-results", "", "Limit the number of results returned.")
+		mturk_listHitsForQualificationTypeCmd.Flags().String("next-token", "", "Pagination Token")
+		mturk_listHitsForQualificationTypeCmd.Flags().String("qualification-type-id", "", "The ID of the Qualification type to use when querying HITs.")
+		mturk_listHitsForQualificationTypeCmd.MarkFlagRequired("qualification-type-id")
+	})
 	mturkCmd.AddCommand(mturk_listHitsForQualificationTypeCmd)
 }

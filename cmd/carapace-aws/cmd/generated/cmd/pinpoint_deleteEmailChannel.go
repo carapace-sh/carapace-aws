@@ -12,9 +12,11 @@ var pinpoint_deleteEmailChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteEmailChannelCmd).Standalone()
+	carapace.Gen(pinpoint_deleteEmailChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteEmailChannelCmd).Standalone()
 
-	pinpoint_deleteEmailChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_deleteEmailChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_deleteEmailChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_deleteEmailChannelCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteEmailChannelCmd)
 }

@@ -12,9 +12,11 @@ var iam_getPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getPolicyCmd).Standalone()
+	carapace.Gen(iam_getPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getPolicyCmd).Standalone()
 
-	iam_getPolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the managed policy that you want information about.")
-	iam_getPolicyCmd.MarkFlagRequired("policy-arn")
+		iam_getPolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the managed policy that you want information about.")
+		iam_getPolicyCmd.MarkFlagRequired("policy-arn")
+	})
 	iamCmd.AddCommand(iam_getPolicyCmd)
 }

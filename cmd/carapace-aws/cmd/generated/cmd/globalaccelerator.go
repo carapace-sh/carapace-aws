@@ -12,7 +12,9 @@ var globalacceleratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalacceleratorCmd).Standalone()
+	carapace.Gen(globalacceleratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalacceleratorCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(globalacceleratorCmd)
 }

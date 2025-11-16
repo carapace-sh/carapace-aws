@@ -12,11 +12,13 @@ var cleanrooms_getIdNamespaceAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_getIdNamespaceAssociationCmd).Standalone()
+	carapace.Gen(cleanrooms_getIdNamespaceAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_getIdNamespaceAssociationCmd).Standalone()
 
-	cleanrooms_getIdNamespaceAssociationCmd.Flags().String("id-namespace-association-identifier", "", "The unique identifier of the ID namespace association that you want to retrieve.")
-	cleanrooms_getIdNamespaceAssociationCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID namespace association that you want to retrieve.")
-	cleanrooms_getIdNamespaceAssociationCmd.MarkFlagRequired("id-namespace-association-identifier")
-	cleanrooms_getIdNamespaceAssociationCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_getIdNamespaceAssociationCmd.Flags().String("id-namespace-association-identifier", "", "The unique identifier of the ID namespace association that you want to retrieve.")
+		cleanrooms_getIdNamespaceAssociationCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID namespace association that you want to retrieve.")
+		cleanrooms_getIdNamespaceAssociationCmd.MarkFlagRequired("id-namespace-association-identifier")
+		cleanrooms_getIdNamespaceAssociationCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_getIdNamespaceAssociationCmd)
 }

@@ -12,9 +12,11 @@ var globalaccelerator_describeCrossAccountAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_describeCrossAccountAttachmentCmd).Standalone()
+	carapace.Gen(globalaccelerator_describeCrossAccountAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_describeCrossAccountAttachmentCmd).Standalone()
 
-	globalaccelerator_describeCrossAccountAttachmentCmd.Flags().String("attachment-arn", "", "The Amazon Resource Name (ARN) for the cross-account attachment to describe.")
-	globalaccelerator_describeCrossAccountAttachmentCmd.MarkFlagRequired("attachment-arn")
+		globalaccelerator_describeCrossAccountAttachmentCmd.Flags().String("attachment-arn", "", "The Amazon Resource Name (ARN) for the cross-account attachment to describe.")
+		globalaccelerator_describeCrossAccountAttachmentCmd.MarkFlagRequired("attachment-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_describeCrossAccountAttachmentCmd)
 }

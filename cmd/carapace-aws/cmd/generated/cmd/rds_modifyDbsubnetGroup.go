@@ -12,12 +12,14 @@ var rds_modifyDbsubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_modifyDbsubnetGroupCmd).Standalone()
+	carapace.Gen(rds_modifyDbsubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_modifyDbsubnetGroupCmd).Standalone()
 
-	rds_modifyDbsubnetGroupCmd.Flags().String("dbsubnet-group-description", "", "The description for the DB subnet group.")
-	rds_modifyDbsubnetGroupCmd.Flags().String("dbsubnet-group-name", "", "The name for the DB subnet group.")
-	rds_modifyDbsubnetGroupCmd.Flags().String("subnet-ids", "", "The EC2 subnet IDs for the DB subnet group.")
-	rds_modifyDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-name")
-	rds_modifyDbsubnetGroupCmd.MarkFlagRequired("subnet-ids")
+		rds_modifyDbsubnetGroupCmd.Flags().String("dbsubnet-group-description", "", "The description for the DB subnet group.")
+		rds_modifyDbsubnetGroupCmd.Flags().String("dbsubnet-group-name", "", "The name for the DB subnet group.")
+		rds_modifyDbsubnetGroupCmd.Flags().String("subnet-ids", "", "The EC2 subnet IDs for the DB subnet group.")
+		rds_modifyDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-name")
+		rds_modifyDbsubnetGroupCmd.MarkFlagRequired("subnet-ids")
+	})
 	rdsCmd.AddCommand(rds_modifyDbsubnetGroupCmd)
 }

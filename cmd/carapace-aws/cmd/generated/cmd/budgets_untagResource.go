@@ -12,11 +12,13 @@ var budgets_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(budgets_untagResourceCmd).Standalone()
+	carapace.Gen(budgets_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(budgets_untagResourceCmd).Standalone()
 
-	budgets_untagResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
-	budgets_untagResourceCmd.Flags().String("resource-tag-keys", "", "The key that's associated with the tag.")
-	budgets_untagResourceCmd.MarkFlagRequired("resource-arn")
-	budgets_untagResourceCmd.MarkFlagRequired("resource-tag-keys")
+		budgets_untagResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
+		budgets_untagResourceCmd.Flags().String("resource-tag-keys", "", "The key that's associated with the tag.")
+		budgets_untagResourceCmd.MarkFlagRequired("resource-arn")
+		budgets_untagResourceCmd.MarkFlagRequired("resource-tag-keys")
+	})
 	budgetsCmd.AddCommand(budgets_untagResourceCmd)
 }

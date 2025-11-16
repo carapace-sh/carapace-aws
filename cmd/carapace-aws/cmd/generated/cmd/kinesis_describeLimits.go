@@ -12,7 +12,9 @@ var kinesis_describeLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_describeLimitsCmd).Standalone()
+	carapace.Gen(kinesis_describeLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_describeLimitsCmd).Standalone()
 
+	})
 	kinesisCmd.AddCommand(kinesis_describeLimitsCmd)
 }

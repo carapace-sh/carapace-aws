@@ -12,11 +12,13 @@ var workmail_updateDefaultMailDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_updateDefaultMailDomainCmd).Standalone()
+	carapace.Gen(workmail_updateDefaultMailDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_updateDefaultMailDomainCmd).Standalone()
 
-	workmail_updateDefaultMailDomainCmd.Flags().String("domain-name", "", "The domain name that will become the default domain.")
-	workmail_updateDefaultMailDomainCmd.Flags().String("organization-id", "", "The WorkMail organization for which to list domains.")
-	workmail_updateDefaultMailDomainCmd.MarkFlagRequired("domain-name")
-	workmail_updateDefaultMailDomainCmd.MarkFlagRequired("organization-id")
+		workmail_updateDefaultMailDomainCmd.Flags().String("domain-name", "", "The domain name that will become the default domain.")
+		workmail_updateDefaultMailDomainCmd.Flags().String("organization-id", "", "The WorkMail organization for which to list domains.")
+		workmail_updateDefaultMailDomainCmd.MarkFlagRequired("domain-name")
+		workmail_updateDefaultMailDomainCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_updateDefaultMailDomainCmd)
 }

@@ -12,9 +12,11 @@ var odb_getCloudAutonomousVmClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_getCloudAutonomousVmClusterCmd).Standalone()
+	carapace.Gen(odb_getCloudAutonomousVmClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_getCloudAutonomousVmClusterCmd).Standalone()
 
-	odb_getCloudAutonomousVmClusterCmd.Flags().String("cloud-autonomous-vm-cluster-id", "", "The unique identifier of the Autonomous VM cluster to retrieve information about.")
-	odb_getCloudAutonomousVmClusterCmd.MarkFlagRequired("cloud-autonomous-vm-cluster-id")
+		odb_getCloudAutonomousVmClusterCmd.Flags().String("cloud-autonomous-vm-cluster-id", "", "The unique identifier of the Autonomous VM cluster to retrieve information about.")
+		odb_getCloudAutonomousVmClusterCmd.MarkFlagRequired("cloud-autonomous-vm-cluster-id")
+	})
 	odbCmd.AddCommand(odb_getCloudAutonomousVmClusterCmd)
 }

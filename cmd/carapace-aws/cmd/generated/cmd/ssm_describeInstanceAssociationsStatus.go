@@ -12,11 +12,13 @@ var ssm_describeInstanceAssociationsStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeInstanceAssociationsStatusCmd).Standalone()
+	carapace.Gen(ssm_describeInstanceAssociationsStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeInstanceAssociationsStatusCmd).Standalone()
 
-	ssm_describeInstanceAssociationsStatusCmd.Flags().String("instance-id", "", "The managed node IDs for which you want association status information.")
-	ssm_describeInstanceAssociationsStatusCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_describeInstanceAssociationsStatusCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	ssm_describeInstanceAssociationsStatusCmd.MarkFlagRequired("instance-id")
+		ssm_describeInstanceAssociationsStatusCmd.Flags().String("instance-id", "", "The managed node IDs for which you want association status information.")
+		ssm_describeInstanceAssociationsStatusCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_describeInstanceAssociationsStatusCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_describeInstanceAssociationsStatusCmd.MarkFlagRequired("instance-id")
+	})
 	ssmCmd.AddCommand(ssm_describeInstanceAssociationsStatusCmd)
 }

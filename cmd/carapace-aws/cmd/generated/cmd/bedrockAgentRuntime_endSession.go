@@ -12,9 +12,11 @@ var bedrockAgentRuntime_endSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentRuntime_endSessionCmd).Standalone()
+	carapace.Gen(bedrockAgentRuntime_endSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentRuntime_endSessionCmd).Standalone()
 
-	bedrockAgentRuntime_endSessionCmd.Flags().String("session-identifier", "", "The unique identifier for the session to end.")
-	bedrockAgentRuntime_endSessionCmd.MarkFlagRequired("session-identifier")
+		bedrockAgentRuntime_endSessionCmd.Flags().String("session-identifier", "", "The unique identifier for the session to end.")
+		bedrockAgentRuntime_endSessionCmd.MarkFlagRequired("session-identifier")
+	})
 	bedrockAgentRuntimeCmd.AddCommand(bedrockAgentRuntime_endSessionCmd)
 }

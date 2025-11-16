@@ -12,9 +12,11 @@ var codeartifact_listDomainsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeartifact_listDomainsCmd).Standalone()
+	carapace.Gen(codeartifact_listDomainsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeartifact_listDomainsCmd).Standalone()
 
-	codeartifact_listDomainsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	codeartifact_listDomainsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		codeartifact_listDomainsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		codeartifact_listDomainsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	codeartifactCmd.AddCommand(codeartifact_listDomainsCmd)
 }

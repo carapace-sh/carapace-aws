@@ -12,7 +12,9 @@ var ecr_getRegistryPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_getRegistryPolicyCmd).Standalone()
+	carapace.Gen(ecr_getRegistryPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_getRegistryPolicyCmd).Standalone()
 
+	})
 	ecrCmd.AddCommand(ecr_getRegistryPolicyCmd)
 }

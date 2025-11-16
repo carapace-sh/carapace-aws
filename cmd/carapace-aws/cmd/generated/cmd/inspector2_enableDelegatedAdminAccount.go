@@ -12,10 +12,12 @@ var inspector2_enableDelegatedAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_enableDelegatedAdminAccountCmd).Standalone()
+	carapace.Gen(inspector2_enableDelegatedAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_enableDelegatedAdminAccountCmd).Standalone()
 
-	inspector2_enableDelegatedAdminAccountCmd.Flags().String("client-token", "", "The idempotency token for the request.")
-	inspector2_enableDelegatedAdminAccountCmd.Flags().String("delegated-admin-account-id", "", "The Amazon Web Services account ID of the Amazon Inspector delegated administrator.")
-	inspector2_enableDelegatedAdminAccountCmd.MarkFlagRequired("delegated-admin-account-id")
+		inspector2_enableDelegatedAdminAccountCmd.Flags().String("client-token", "", "The idempotency token for the request.")
+		inspector2_enableDelegatedAdminAccountCmd.Flags().String("delegated-admin-account-id", "", "The Amazon Web Services account ID of the Amazon Inspector delegated administrator.")
+		inspector2_enableDelegatedAdminAccountCmd.MarkFlagRequired("delegated-admin-account-id")
+	})
 	inspector2Cmd.AddCommand(inspector2_enableDelegatedAdminAccountCmd)
 }

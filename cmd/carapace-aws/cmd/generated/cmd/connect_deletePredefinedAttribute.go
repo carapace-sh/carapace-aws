@@ -12,11 +12,13 @@ var connect_deletePredefinedAttributeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deletePredefinedAttributeCmd).Standalone()
+	carapace.Gen(connect_deletePredefinedAttributeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deletePredefinedAttributeCmd).Standalone()
 
-	connect_deletePredefinedAttributeCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deletePredefinedAttributeCmd.Flags().String("name", "", "The name of the predefined attribute.")
-	connect_deletePredefinedAttributeCmd.MarkFlagRequired("instance-id")
-	connect_deletePredefinedAttributeCmd.MarkFlagRequired("name")
+		connect_deletePredefinedAttributeCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deletePredefinedAttributeCmd.Flags().String("name", "", "The name of the predefined attribute.")
+		connect_deletePredefinedAttributeCmd.MarkFlagRequired("instance-id")
+		connect_deletePredefinedAttributeCmd.MarkFlagRequired("name")
+	})
 	connectCmd.AddCommand(connect_deletePredefinedAttributeCmd)
 }

@@ -12,11 +12,13 @@ var networkFirewall_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_putResourcePolicyCmd).Standalone()
+	carapace.Gen(networkFirewall_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_putResourcePolicyCmd).Standalone()
 
-	networkFirewall_putResourcePolicyCmd.Flags().String("policy", "", "The IAM policy statement that lists the accounts that you want to share your Network Firewall resources with and the operations that you want the accounts to be able to perform.")
-	networkFirewall_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the account that you want to share your Network Firewall resources with.")
-	networkFirewall_putResourcePolicyCmd.MarkFlagRequired("policy")
-	networkFirewall_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		networkFirewall_putResourcePolicyCmd.Flags().String("policy", "", "The IAM policy statement that lists the accounts that you want to share your Network Firewall resources with and the operations that you want the accounts to be able to perform.")
+		networkFirewall_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the account that you want to share your Network Firewall resources with.")
+		networkFirewall_putResourcePolicyCmd.MarkFlagRequired("policy")
+		networkFirewall_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_putResourcePolicyCmd)
 }

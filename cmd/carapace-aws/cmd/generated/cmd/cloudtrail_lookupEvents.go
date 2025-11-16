@@ -12,13 +12,15 @@ var cloudtrail_lookupEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_lookupEventsCmd).Standalone()
+	carapace.Gen(cloudtrail_lookupEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_lookupEventsCmd).Standalone()
 
-	cloudtrail_lookupEventsCmd.Flags().String("end-time", "", "Specifies that only events that occur before or at the specified time are returned.")
-	cloudtrail_lookupEventsCmd.Flags().String("event-category", "", "Specifies the event category.")
-	cloudtrail_lookupEventsCmd.Flags().String("lookup-attributes", "", "Contains a list of lookup attributes.")
-	cloudtrail_lookupEventsCmd.Flags().String("max-results", "", "The number of events to return.")
-	cloudtrail_lookupEventsCmd.Flags().String("next-token", "", "The token to use to get the next page of results after a previous API call.")
-	cloudtrail_lookupEventsCmd.Flags().String("start-time", "", "Specifies that only events that occur after or at the specified time are returned.")
+		cloudtrail_lookupEventsCmd.Flags().String("end-time", "", "Specifies that only events that occur before or at the specified time are returned.")
+		cloudtrail_lookupEventsCmd.Flags().String("event-category", "", "Specifies the event category.")
+		cloudtrail_lookupEventsCmd.Flags().String("lookup-attributes", "", "Contains a list of lookup attributes.")
+		cloudtrail_lookupEventsCmd.Flags().String("max-results", "", "The number of events to return.")
+		cloudtrail_lookupEventsCmd.Flags().String("next-token", "", "The token to use to get the next page of results after a previous API call.")
+		cloudtrail_lookupEventsCmd.Flags().String("start-time", "", "Specifies that only events that occur after or at the specified time are returned.")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_lookupEventsCmd)
 }

@@ -12,9 +12,11 @@ var apigatewaymanagementapi_deleteConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewaymanagementapi_deleteConnectionCmd).Standalone()
+	carapace.Gen(apigatewaymanagementapi_deleteConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewaymanagementapi_deleteConnectionCmd).Standalone()
 
-	apigatewaymanagementapi_deleteConnectionCmd.Flags().String("connection-id", "", "")
-	apigatewaymanagementapi_deleteConnectionCmd.MarkFlagRequired("connection-id")
+		apigatewaymanagementapi_deleteConnectionCmd.Flags().String("connection-id", "", "")
+		apigatewaymanagementapi_deleteConnectionCmd.MarkFlagRequired("connection-id")
+	})
 	apigatewaymanagementapiCmd.AddCommand(apigatewaymanagementapi_deleteConnectionCmd)
 }

@@ -12,9 +12,11 @@ var iam_getAccessKeyLastUsedCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getAccessKeyLastUsedCmd).Standalone()
+	carapace.Gen(iam_getAccessKeyLastUsedCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getAccessKeyLastUsedCmd).Standalone()
 
-	iam_getAccessKeyLastUsedCmd.Flags().String("access-key-id", "", "The identifier of an access key.")
-	iam_getAccessKeyLastUsedCmd.MarkFlagRequired("access-key-id")
+		iam_getAccessKeyLastUsedCmd.Flags().String("access-key-id", "", "The identifier of an access key.")
+		iam_getAccessKeyLastUsedCmd.MarkFlagRequired("access-key-id")
+	})
 	iamCmd.AddCommand(iam_getAccessKeyLastUsedCmd)
 }

@@ -12,10 +12,12 @@ var cognitoIdentity_listIdentityPoolsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdentity_listIdentityPoolsCmd).Standalone()
+	carapace.Gen(cognitoIdentity_listIdentityPoolsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdentity_listIdentityPoolsCmd).Standalone()
 
-	cognitoIdentity_listIdentityPoolsCmd.Flags().String("max-results", "", "The maximum number of identities to return.")
-	cognitoIdentity_listIdentityPoolsCmd.Flags().String("next-token", "", "A pagination token.")
-	cognitoIdentity_listIdentityPoolsCmd.MarkFlagRequired("max-results")
+		cognitoIdentity_listIdentityPoolsCmd.Flags().String("max-results", "", "The maximum number of identities to return.")
+		cognitoIdentity_listIdentityPoolsCmd.Flags().String("next-token", "", "A pagination token.")
+		cognitoIdentity_listIdentityPoolsCmd.MarkFlagRequired("max-results")
+	})
 	cognitoIdentityCmd.AddCommand(cognitoIdentity_listIdentityPoolsCmd)
 }

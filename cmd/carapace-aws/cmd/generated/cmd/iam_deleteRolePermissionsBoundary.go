@@ -12,9 +12,11 @@ var iam_deleteRolePermissionsBoundaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteRolePermissionsBoundaryCmd).Standalone()
+	carapace.Gen(iam_deleteRolePermissionsBoundaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteRolePermissionsBoundaryCmd).Standalone()
 
-	iam_deleteRolePermissionsBoundaryCmd.Flags().String("role-name", "", "The name (friendly name, not ARN) of the IAM role from which you want to remove the permissions boundary.")
-	iam_deleteRolePermissionsBoundaryCmd.MarkFlagRequired("role-name")
+		iam_deleteRolePermissionsBoundaryCmd.Flags().String("role-name", "", "The name (friendly name, not ARN) of the IAM role from which you want to remove the permissions boundary.")
+		iam_deleteRolePermissionsBoundaryCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_deleteRolePermissionsBoundaryCmd)
 }

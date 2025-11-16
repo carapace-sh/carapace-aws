@@ -12,13 +12,15 @@ var fsx_deleteFileSystemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_deleteFileSystemCmd).Standalone()
+	carapace.Gen(fsx_deleteFileSystemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_deleteFileSystemCmd).Standalone()
 
-	fsx_deleteFileSystemCmd.Flags().String("client-request-token", "", "A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent deletion.")
-	fsx_deleteFileSystemCmd.Flags().String("file-system-id", "", "The ID of the file system that you want to delete.")
-	fsx_deleteFileSystemCmd.Flags().String("lustre-configuration", "", "")
-	fsx_deleteFileSystemCmd.Flags().String("open-zfsconfiguration", "", "The configuration object for the OpenZFS file system used in the `DeleteFileSystem` operation.")
-	fsx_deleteFileSystemCmd.Flags().String("windows-configuration", "", "")
-	fsx_deleteFileSystemCmd.MarkFlagRequired("file-system-id")
+		fsx_deleteFileSystemCmd.Flags().String("client-request-token", "", "A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent deletion.")
+		fsx_deleteFileSystemCmd.Flags().String("file-system-id", "", "The ID of the file system that you want to delete.")
+		fsx_deleteFileSystemCmd.Flags().String("lustre-configuration", "", "")
+		fsx_deleteFileSystemCmd.Flags().String("open-zfsconfiguration", "", "The configuration object for the OpenZFS file system used in the `DeleteFileSystem` operation.")
+		fsx_deleteFileSystemCmd.Flags().String("windows-configuration", "", "")
+		fsx_deleteFileSystemCmd.MarkFlagRequired("file-system-id")
+	})
 	fsxCmd.AddCommand(fsx_deleteFileSystemCmd)
 }

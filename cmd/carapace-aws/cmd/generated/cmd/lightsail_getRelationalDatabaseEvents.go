@@ -12,11 +12,13 @@ var lightsail_getRelationalDatabaseEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getRelationalDatabaseEventsCmd).Standalone()
+	carapace.Gen(lightsail_getRelationalDatabaseEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getRelationalDatabaseEventsCmd).Standalone()
 
-	lightsail_getRelationalDatabaseEventsCmd.Flags().String("duration-in-minutes", "", "The number of minutes in the past from which to retrieve events.")
-	lightsail_getRelationalDatabaseEventsCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
-	lightsail_getRelationalDatabaseEventsCmd.Flags().String("relational-database-name", "", "The name of the database from which to get events.")
-	lightsail_getRelationalDatabaseEventsCmd.MarkFlagRequired("relational-database-name")
+		lightsail_getRelationalDatabaseEventsCmd.Flags().String("duration-in-minutes", "", "The number of minutes in the past from which to retrieve events.")
+		lightsail_getRelationalDatabaseEventsCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+		lightsail_getRelationalDatabaseEventsCmd.Flags().String("relational-database-name", "", "The name of the database from which to get events.")
+		lightsail_getRelationalDatabaseEventsCmd.MarkFlagRequired("relational-database-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getRelationalDatabaseEventsCmd)
 }

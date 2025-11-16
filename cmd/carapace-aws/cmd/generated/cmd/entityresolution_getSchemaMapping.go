@@ -12,9 +12,11 @@ var entityresolution_getSchemaMappingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_getSchemaMappingCmd).Standalone()
+	carapace.Gen(entityresolution_getSchemaMappingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_getSchemaMappingCmd).Standalone()
 
-	entityresolution_getSchemaMappingCmd.Flags().String("schema-name", "", "The name of the schema to be retrieved.")
-	entityresolution_getSchemaMappingCmd.MarkFlagRequired("schema-name")
+		entityresolution_getSchemaMappingCmd.Flags().String("schema-name", "", "The name of the schema to be retrieved.")
+		entityresolution_getSchemaMappingCmd.MarkFlagRequired("schema-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_getSchemaMappingCmd)
 }

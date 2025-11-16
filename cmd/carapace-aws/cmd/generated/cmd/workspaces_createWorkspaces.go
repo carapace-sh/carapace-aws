@@ -12,9 +12,11 @@ var workspaces_createWorkspacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_createWorkspacesCmd).Standalone()
+	carapace.Gen(workspaces_createWorkspacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_createWorkspacesCmd).Standalone()
 
-	workspaces_createWorkspacesCmd.Flags().String("workspaces", "", "The WorkSpaces to create.")
-	workspaces_createWorkspacesCmd.MarkFlagRequired("workspaces")
+		workspaces_createWorkspacesCmd.Flags().String("workspaces", "", "The WorkSpaces to create.")
+		workspaces_createWorkspacesCmd.MarkFlagRequired("workspaces")
+	})
 	workspacesCmd.AddCommand(workspaces_createWorkspacesCmd)
 }

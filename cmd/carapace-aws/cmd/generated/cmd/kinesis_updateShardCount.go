@@ -12,13 +12,15 @@ var kinesis_updateShardCountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_updateShardCountCmd).Standalone()
+	carapace.Gen(kinesis_updateShardCountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_updateShardCountCmd).Standalone()
 
-	kinesis_updateShardCountCmd.Flags().String("scaling-type", "", "The scaling type.")
-	kinesis_updateShardCountCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
-	kinesis_updateShardCountCmd.Flags().String("stream-name", "", "The name of the stream.")
-	kinesis_updateShardCountCmd.Flags().String("target-shard-count", "", "The new number of shards.")
-	kinesis_updateShardCountCmd.MarkFlagRequired("scaling-type")
-	kinesis_updateShardCountCmd.MarkFlagRequired("target-shard-count")
+		kinesis_updateShardCountCmd.Flags().String("scaling-type", "", "The scaling type.")
+		kinesis_updateShardCountCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
+		kinesis_updateShardCountCmd.Flags().String("stream-name", "", "The name of the stream.")
+		kinesis_updateShardCountCmd.Flags().String("target-shard-count", "", "The new number of shards.")
+		kinesis_updateShardCountCmd.MarkFlagRequired("scaling-type")
+		kinesis_updateShardCountCmd.MarkFlagRequired("target-shard-count")
+	})
 	kinesisCmd.AddCommand(kinesis_updateShardCountCmd)
 }

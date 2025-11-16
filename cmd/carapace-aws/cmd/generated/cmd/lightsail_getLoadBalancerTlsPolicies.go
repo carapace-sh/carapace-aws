@@ -12,8 +12,10 @@ var lightsail_getLoadBalancerTlsPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getLoadBalancerTlsPoliciesCmd).Standalone()
+	carapace.Gen(lightsail_getLoadBalancerTlsPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getLoadBalancerTlsPoliciesCmd).Standalone()
 
-	lightsail_getLoadBalancerTlsPoliciesCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+		lightsail_getLoadBalancerTlsPoliciesCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+	})
 	lightsailCmd.AddCommand(lightsail_getLoadBalancerTlsPoliciesCmd)
 }

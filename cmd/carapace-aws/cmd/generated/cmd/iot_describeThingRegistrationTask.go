@@ -12,9 +12,11 @@ var iot_describeThingRegistrationTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeThingRegistrationTaskCmd).Standalone()
+	carapace.Gen(iot_describeThingRegistrationTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeThingRegistrationTaskCmd).Standalone()
 
-	iot_describeThingRegistrationTaskCmd.Flags().String("task-id", "", "The task ID.")
-	iot_describeThingRegistrationTaskCmd.MarkFlagRequired("task-id")
+		iot_describeThingRegistrationTaskCmd.Flags().String("task-id", "", "The task ID.")
+		iot_describeThingRegistrationTaskCmd.MarkFlagRequired("task-id")
+	})
 	iotCmd.AddCommand(iot_describeThingRegistrationTaskCmd)
 }

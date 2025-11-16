@@ -12,14 +12,16 @@ var appsync_updateTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_updateTypeCmd).Standalone()
+	carapace.Gen(appsync_updateTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_updateTypeCmd).Standalone()
 
-	appsync_updateTypeCmd.Flags().String("api-id", "", "The API ID.")
-	appsync_updateTypeCmd.Flags().String("definition", "", "The new definition.")
-	appsync_updateTypeCmd.Flags().String("format", "", "The new type format: SDL or JSON.")
-	appsync_updateTypeCmd.Flags().String("type-name", "", "The new type name.")
-	appsync_updateTypeCmd.MarkFlagRequired("api-id")
-	appsync_updateTypeCmd.MarkFlagRequired("format")
-	appsync_updateTypeCmd.MarkFlagRequired("type-name")
+		appsync_updateTypeCmd.Flags().String("api-id", "", "The API ID.")
+		appsync_updateTypeCmd.Flags().String("definition", "", "The new definition.")
+		appsync_updateTypeCmd.Flags().String("format", "", "The new type format: SDL or JSON.")
+		appsync_updateTypeCmd.Flags().String("type-name", "", "The new type name.")
+		appsync_updateTypeCmd.MarkFlagRequired("api-id")
+		appsync_updateTypeCmd.MarkFlagRequired("format")
+		appsync_updateTypeCmd.MarkFlagRequired("type-name")
+	})
 	appsyncCmd.AddCommand(appsync_updateTypeCmd)
 }

@@ -12,14 +12,16 @@ var omics_createAnnotationStoreVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_createAnnotationStoreVersionCmd).Standalone()
+	carapace.Gen(omics_createAnnotationStoreVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_createAnnotationStoreVersionCmd).Standalone()
 
-	omics_createAnnotationStoreVersionCmd.Flags().String("description", "", "The description of an annotation store version.")
-	omics_createAnnotationStoreVersionCmd.Flags().String("name", "", "The name of an annotation store version from which versions are being created.")
-	omics_createAnnotationStoreVersionCmd.Flags().String("tags", "", "Any tags added to annotation store version.")
-	omics_createAnnotationStoreVersionCmd.Flags().String("version-name", "", "The name given to an annotation store version to distinguish it from other versions.")
-	omics_createAnnotationStoreVersionCmd.Flags().String("version-options", "", "The options for an annotation store version.")
-	omics_createAnnotationStoreVersionCmd.MarkFlagRequired("name")
-	omics_createAnnotationStoreVersionCmd.MarkFlagRequired("version-name")
+		omics_createAnnotationStoreVersionCmd.Flags().String("description", "", "The description of an annotation store version.")
+		omics_createAnnotationStoreVersionCmd.Flags().String("name", "", "The name of an annotation store version from which versions are being created.")
+		omics_createAnnotationStoreVersionCmd.Flags().String("tags", "", "Any tags added to annotation store version.")
+		omics_createAnnotationStoreVersionCmd.Flags().String("version-name", "", "The name given to an annotation store version to distinguish it from other versions.")
+		omics_createAnnotationStoreVersionCmd.Flags().String("version-options", "", "The options for an annotation store version.")
+		omics_createAnnotationStoreVersionCmd.MarkFlagRequired("name")
+		omics_createAnnotationStoreVersionCmd.MarkFlagRequired("version-name")
+	})
 	omicsCmd.AddCommand(omics_createAnnotationStoreVersionCmd)
 }

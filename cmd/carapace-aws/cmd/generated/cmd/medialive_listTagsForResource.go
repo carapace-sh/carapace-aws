@@ -12,9 +12,11 @@ var medialive_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listTagsForResourceCmd).Standalone()
+	carapace.Gen(medialive_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listTagsForResourceCmd).Standalone()
 
-	medialive_listTagsForResourceCmd.Flags().String("resource-arn", "", "")
-	medialive_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		medialive_listTagsForResourceCmd.Flags().String("resource-arn", "", "")
+		medialive_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	medialiveCmd.AddCommand(medialive_listTagsForResourceCmd)
 }

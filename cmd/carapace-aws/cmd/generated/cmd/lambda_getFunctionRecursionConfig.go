@@ -12,9 +12,11 @@ var lambda_getFunctionRecursionConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getFunctionRecursionConfigCmd).Standalone()
+	carapace.Gen(lambda_getFunctionRecursionConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getFunctionRecursionConfigCmd).Standalone()
 
-	lambda_getFunctionRecursionConfigCmd.Flags().String("function-name", "", "")
-	lambda_getFunctionRecursionConfigCmd.MarkFlagRequired("function-name")
+		lambda_getFunctionRecursionConfigCmd.Flags().String("function-name", "", "")
+		lambda_getFunctionRecursionConfigCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_getFunctionRecursionConfigCmd)
 }

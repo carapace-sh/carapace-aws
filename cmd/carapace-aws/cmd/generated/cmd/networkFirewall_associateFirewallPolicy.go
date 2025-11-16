@@ -12,12 +12,14 @@ var networkFirewall_associateFirewallPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_associateFirewallPolicyCmd).Standalone()
+	carapace.Gen(networkFirewall_associateFirewallPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_associateFirewallPolicyCmd).Standalone()
 
-	networkFirewall_associateFirewallPolicyCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
-	networkFirewall_associateFirewallPolicyCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
-	networkFirewall_associateFirewallPolicyCmd.Flags().String("firewall-policy-arn", "", "The Amazon Resource Name (ARN) of the firewall policy.")
-	networkFirewall_associateFirewallPolicyCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
-	networkFirewall_associateFirewallPolicyCmd.MarkFlagRequired("firewall-policy-arn")
+		networkFirewall_associateFirewallPolicyCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
+		networkFirewall_associateFirewallPolicyCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
+		networkFirewall_associateFirewallPolicyCmd.Flags().String("firewall-policy-arn", "", "The Amazon Resource Name (ARN) of the firewall policy.")
+		networkFirewall_associateFirewallPolicyCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
+		networkFirewall_associateFirewallPolicyCmd.MarkFlagRequired("firewall-policy-arn")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_associateFirewallPolicyCmd)
 }

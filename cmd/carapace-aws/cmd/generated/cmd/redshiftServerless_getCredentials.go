@@ -12,11 +12,13 @@ var redshiftServerless_getCredentialsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getCredentialsCmd).Standalone()
+	carapace.Gen(redshiftServerless_getCredentialsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getCredentialsCmd).Standalone()
 
-	redshiftServerless_getCredentialsCmd.Flags().String("custom-domain-name", "", "The custom domain name associated with the workgroup.")
-	redshiftServerless_getCredentialsCmd.Flags().String("db-name", "", "The name of the database to get temporary authorization to log on to.")
-	redshiftServerless_getCredentialsCmd.Flags().String("duration-seconds", "", "The number of seconds until the returned temporary password expires.")
-	redshiftServerless_getCredentialsCmd.Flags().String("workgroup-name", "", "The name of the workgroup associated with the database.")
+		redshiftServerless_getCredentialsCmd.Flags().String("custom-domain-name", "", "The custom domain name associated with the workgroup.")
+		redshiftServerless_getCredentialsCmd.Flags().String("db-name", "", "The name of the database to get temporary authorization to log on to.")
+		redshiftServerless_getCredentialsCmd.Flags().String("duration-seconds", "", "The number of seconds until the returned temporary password expires.")
+		redshiftServerless_getCredentialsCmd.Flags().String("workgroup-name", "", "The name of the workgroup associated with the database.")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getCredentialsCmd)
 }

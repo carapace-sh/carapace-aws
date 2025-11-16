@@ -12,9 +12,11 @@ var redshiftData_describeStatementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftData_describeStatementCmd).Standalone()
+	carapace.Gen(redshiftData_describeStatementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftData_describeStatementCmd).Standalone()
 
-	redshiftData_describeStatementCmd.Flags().String("id", "", "The identifier of the SQL statement to describe.")
-	redshiftData_describeStatementCmd.MarkFlagRequired("id")
+		redshiftData_describeStatementCmd.Flags().String("id", "", "The identifier of the SQL statement to describe.")
+		redshiftData_describeStatementCmd.MarkFlagRequired("id")
+	})
 	redshiftDataCmd.AddCommand(redshiftData_describeStatementCmd)
 }

@@ -12,9 +12,11 @@ var logs_deleteIndexPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteIndexPolicyCmd).Standalone()
+	carapace.Gen(logs_deleteIndexPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteIndexPolicyCmd).Standalone()
 
-	logs_deleteIndexPolicyCmd.Flags().String("log-group-identifier", "", "The log group to delete the index policy for.")
-	logs_deleteIndexPolicyCmd.MarkFlagRequired("log-group-identifier")
+		logs_deleteIndexPolicyCmd.Flags().String("log-group-identifier", "", "The log group to delete the index policy for.")
+		logs_deleteIndexPolicyCmd.MarkFlagRequired("log-group-identifier")
+	})
 	logsCmd.AddCommand(logs_deleteIndexPolicyCmd)
 }

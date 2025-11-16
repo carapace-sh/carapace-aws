@@ -12,9 +12,11 @@ var dataexchange_deleteDataGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_deleteDataGrantCmd).Standalone()
+	carapace.Gen(dataexchange_deleteDataGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_deleteDataGrantCmd).Standalone()
 
-	dataexchange_deleteDataGrantCmd.Flags().String("data-grant-id", "", "The ID of the data grant to delete.")
-	dataexchange_deleteDataGrantCmd.MarkFlagRequired("data-grant-id")
+		dataexchange_deleteDataGrantCmd.Flags().String("data-grant-id", "", "The ID of the data grant to delete.")
+		dataexchange_deleteDataGrantCmd.MarkFlagRequired("data-grant-id")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_deleteDataGrantCmd)
 }

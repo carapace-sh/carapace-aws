@@ -12,9 +12,11 @@ var neptune_failoverDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_failoverDbclusterCmd).Standalone()
+	carapace.Gen(neptune_failoverDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_failoverDbclusterCmd).Standalone()
 
-	neptune_failoverDbclusterCmd.Flags().String("dbcluster-identifier", "", "A DB cluster identifier to force a failover for.")
-	neptune_failoverDbclusterCmd.Flags().String("target-dbinstance-identifier", "", "The name of the instance to promote to the primary instance.")
+		neptune_failoverDbclusterCmd.Flags().String("dbcluster-identifier", "", "A DB cluster identifier to force a failover for.")
+		neptune_failoverDbclusterCmd.Flags().String("target-dbinstance-identifier", "", "The name of the instance to promote to the primary instance.")
+	})
 	neptuneCmd.AddCommand(neptune_failoverDbclusterCmd)
 }

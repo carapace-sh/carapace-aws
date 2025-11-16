@@ -12,9 +12,11 @@ var iam_getServiceLinkedRoleDeletionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getServiceLinkedRoleDeletionStatusCmd).Standalone()
+	carapace.Gen(iam_getServiceLinkedRoleDeletionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getServiceLinkedRoleDeletionStatusCmd).Standalone()
 
-	iam_getServiceLinkedRoleDeletionStatusCmd.Flags().String("deletion-task-id", "", "The deletion task identifier.")
-	iam_getServiceLinkedRoleDeletionStatusCmd.MarkFlagRequired("deletion-task-id")
+		iam_getServiceLinkedRoleDeletionStatusCmd.Flags().String("deletion-task-id", "", "The deletion task identifier.")
+		iam_getServiceLinkedRoleDeletionStatusCmd.MarkFlagRequired("deletion-task-id")
+	})
 	iamCmd.AddCommand(iam_getServiceLinkedRoleDeletionStatusCmd)
 }

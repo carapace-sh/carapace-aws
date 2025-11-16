@@ -12,9 +12,11 @@ var pinpointEmail_listDedicatedIpPoolsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_listDedicatedIpPoolsCmd).Standalone()
+	carapace.Gen(pinpointEmail_listDedicatedIpPoolsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_listDedicatedIpPoolsCmd).Standalone()
 
-	pinpointEmail_listDedicatedIpPoolsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListDedicatedIpPools` to indicate the position in the list of dedicated IP pools.")
-	pinpointEmail_listDedicatedIpPoolsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListDedicatedIpPools`.")
+		pinpointEmail_listDedicatedIpPoolsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListDedicatedIpPools` to indicate the position in the list of dedicated IP pools.")
+		pinpointEmail_listDedicatedIpPoolsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListDedicatedIpPools`.")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_listDedicatedIpPoolsCmd)
 }

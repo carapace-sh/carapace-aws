@@ -12,7 +12,9 @@ var launchWizardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(launchWizardCmd).Standalone()
+	carapace.Gen(launchWizardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(launchWizardCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(launchWizardCmd)
 }

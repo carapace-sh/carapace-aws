@@ -12,12 +12,14 @@ var events_putTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_putTargetsCmd).Standalone()
+	carapace.Gen(events_putTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_putTargetsCmd).Standalone()
 
-	events_putTargetsCmd.Flags().String("event-bus-name", "", "The name or ARN of the event bus associated with the rule.")
-	events_putTargetsCmd.Flags().String("rule", "", "The name of the rule.")
-	events_putTargetsCmd.Flags().String("targets", "", "The targets to update or add to the rule.")
-	events_putTargetsCmd.MarkFlagRequired("rule")
-	events_putTargetsCmd.MarkFlagRequired("targets")
+		events_putTargetsCmd.Flags().String("event-bus-name", "", "The name or ARN of the event bus associated with the rule.")
+		events_putTargetsCmd.Flags().String("rule", "", "The name of the rule.")
+		events_putTargetsCmd.Flags().String("targets", "", "The targets to update or add to the rule.")
+		events_putTargetsCmd.MarkFlagRequired("rule")
+		events_putTargetsCmd.MarkFlagRequired("targets")
+	})
 	eventsCmd.AddCommand(events_putTargetsCmd)
 }

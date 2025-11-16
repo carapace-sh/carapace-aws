@@ -12,9 +12,11 @@ var transfer_listWorkflowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_listWorkflowsCmd).Standalone()
+	carapace.Gen(transfer_listWorkflowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_listWorkflowsCmd).Standalone()
 
-	transfer_listWorkflowsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	transfer_listWorkflowsCmd.Flags().String("next-token", "", "`ListWorkflows` returns the `NextToken` parameter in the output.")
+		transfer_listWorkflowsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		transfer_listWorkflowsCmd.Flags().String("next-token", "", "`ListWorkflows` returns the `NextToken` parameter in the output.")
+	})
 	transferCmd.AddCommand(transfer_listWorkflowsCmd)
 }

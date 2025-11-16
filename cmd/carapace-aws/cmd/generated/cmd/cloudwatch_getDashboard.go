@@ -12,9 +12,11 @@ var cloudwatch_getDashboardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_getDashboardCmd).Standalone()
+	carapace.Gen(cloudwatch_getDashboardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_getDashboardCmd).Standalone()
 
-	cloudwatch_getDashboardCmd.Flags().String("dashboard-name", "", "The name of the dashboard to be described.")
-	cloudwatch_getDashboardCmd.MarkFlagRequired("dashboard-name")
+		cloudwatch_getDashboardCmd.Flags().String("dashboard-name", "", "The name of the dashboard to be described.")
+		cloudwatch_getDashboardCmd.MarkFlagRequired("dashboard-name")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_getDashboardCmd)
 }

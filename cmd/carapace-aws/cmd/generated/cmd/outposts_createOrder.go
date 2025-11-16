@@ -12,13 +12,15 @@ var outposts_createOrderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_createOrderCmd).Standalone()
+	carapace.Gen(outposts_createOrderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_createOrderCmd).Standalone()
 
-	outposts_createOrderCmd.Flags().String("line-items", "", "The line items that make up the order.")
-	outposts_createOrderCmd.Flags().String("outpost-identifier", "", "The ID or the Amazon Resource Name (ARN) of the Outpost.")
-	outposts_createOrderCmd.Flags().String("payment-option", "", "The payment option.")
-	outposts_createOrderCmd.Flags().String("payment-term", "", "The payment terms.")
-	outposts_createOrderCmd.MarkFlagRequired("outpost-identifier")
-	outposts_createOrderCmd.MarkFlagRequired("payment-option")
+		outposts_createOrderCmd.Flags().String("line-items", "", "The line items that make up the order.")
+		outposts_createOrderCmd.Flags().String("outpost-identifier", "", "The ID or the Amazon Resource Name (ARN) of the Outpost.")
+		outposts_createOrderCmd.Flags().String("payment-option", "", "The payment option.")
+		outposts_createOrderCmd.Flags().String("payment-term", "", "The payment terms.")
+		outposts_createOrderCmd.MarkFlagRequired("outpost-identifier")
+		outposts_createOrderCmd.MarkFlagRequired("payment-option")
+	})
 	outpostsCmd.AddCommand(outposts_createOrderCmd)
 }

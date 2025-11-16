@@ -12,9 +12,11 @@ var glue_listRegistriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listRegistriesCmd).Standalone()
+	carapace.Gen(glue_listRegistriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listRegistriesCmd).Standalone()
 
-	glue_listRegistriesCmd.Flags().String("max-results", "", "Maximum number of results required per page.")
-	glue_listRegistriesCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		glue_listRegistriesCmd.Flags().String("max-results", "", "Maximum number of results required per page.")
+		glue_listRegistriesCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+	})
 	glueCmd.AddCommand(glue_listRegistriesCmd)
 }

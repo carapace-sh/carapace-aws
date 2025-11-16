@@ -12,11 +12,13 @@ var devicefarm_updateDeviceInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_updateDeviceInstanceCmd).Standalone()
+	carapace.Gen(devicefarm_updateDeviceInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_updateDeviceInstanceCmd).Standalone()
 
-	devicefarm_updateDeviceInstanceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the device instance.")
-	devicefarm_updateDeviceInstanceCmd.Flags().String("labels", "", "An array of strings that you want to associate with the device instance.")
-	devicefarm_updateDeviceInstanceCmd.Flags().String("profile-arn", "", "The ARN of the profile that you want to associate with the device instance.")
-	devicefarm_updateDeviceInstanceCmd.MarkFlagRequired("arn")
+		devicefarm_updateDeviceInstanceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the device instance.")
+		devicefarm_updateDeviceInstanceCmd.Flags().String("labels", "", "An array of strings that you want to associate with the device instance.")
+		devicefarm_updateDeviceInstanceCmd.Flags().String("profile-arn", "", "The ARN of the profile that you want to associate with the device instance.")
+		devicefarm_updateDeviceInstanceCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_updateDeviceInstanceCmd)
 }

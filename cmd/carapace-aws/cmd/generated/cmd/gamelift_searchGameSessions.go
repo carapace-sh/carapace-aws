@@ -12,14 +12,16 @@ var gamelift_searchGameSessionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_searchGameSessionsCmd).Standalone()
+	carapace.Gen(gamelift_searchGameSessionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_searchGameSessionsCmd).Standalone()
 
-	gamelift_searchGameSessionsCmd.Flags().String("alias-id", "", "A unique identifier for the alias associated with the fleet to search for active game sessions.")
-	gamelift_searchGameSessionsCmd.Flags().String("filter-expression", "", "String containing the search criteria for the session search.")
-	gamelift_searchGameSessionsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to search for active game sessions.")
-	gamelift_searchGameSessionsCmd.Flags().String("limit", "", "The maximum number of results to return.")
-	gamelift_searchGameSessionsCmd.Flags().String("location", "", "A fleet location to search for game sessions.")
-	gamelift_searchGameSessionsCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
-	gamelift_searchGameSessionsCmd.Flags().String("sort-expression", "", "Instructions on how to sort the search results.")
+		gamelift_searchGameSessionsCmd.Flags().String("alias-id", "", "A unique identifier for the alias associated with the fleet to search for active game sessions.")
+		gamelift_searchGameSessionsCmd.Flags().String("filter-expression", "", "String containing the search criteria for the session search.")
+		gamelift_searchGameSessionsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to search for active game sessions.")
+		gamelift_searchGameSessionsCmd.Flags().String("limit", "", "The maximum number of results to return.")
+		gamelift_searchGameSessionsCmd.Flags().String("location", "", "A fleet location to search for game sessions.")
+		gamelift_searchGameSessionsCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+		gamelift_searchGameSessionsCmd.Flags().String("sort-expression", "", "Instructions on how to sort the search results.")
+	})
 	gameliftCmd.AddCommand(gamelift_searchGameSessionsCmd)
 }

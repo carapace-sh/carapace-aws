@@ -12,9 +12,11 @@ var workspacesWeb_disassociateSessionLoggerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_disassociateSessionLoggerCmd).Standalone()
+	carapace.Gen(workspacesWeb_disassociateSessionLoggerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_disassociateSessionLoggerCmd).Standalone()
 
-	workspacesWeb_disassociateSessionLoggerCmd.Flags().String("portal-arn", "", "The ARN of the portal to disassociate from the a session logger.")
-	workspacesWeb_disassociateSessionLoggerCmd.MarkFlagRequired("portal-arn")
+		workspacesWeb_disassociateSessionLoggerCmd.Flags().String("portal-arn", "", "The ARN of the portal to disassociate from the a session logger.")
+		workspacesWeb_disassociateSessionLoggerCmd.MarkFlagRequired("portal-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_disassociateSessionLoggerCmd)
 }

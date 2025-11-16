@@ -12,13 +12,15 @@ var applicationInsights_addWorkloadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_addWorkloadCmd).Standalone()
+	carapace.Gen(applicationInsights_addWorkloadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_addWorkloadCmd).Standalone()
 
-	applicationInsights_addWorkloadCmd.Flags().String("component-name", "", "The name of the component.")
-	applicationInsights_addWorkloadCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
-	applicationInsights_addWorkloadCmd.Flags().String("workload-configuration", "", "The configuration settings of the workload.")
-	applicationInsights_addWorkloadCmd.MarkFlagRequired("component-name")
-	applicationInsights_addWorkloadCmd.MarkFlagRequired("resource-group-name")
-	applicationInsights_addWorkloadCmd.MarkFlagRequired("workload-configuration")
+		applicationInsights_addWorkloadCmd.Flags().String("component-name", "", "The name of the component.")
+		applicationInsights_addWorkloadCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
+		applicationInsights_addWorkloadCmd.Flags().String("workload-configuration", "", "The configuration settings of the workload.")
+		applicationInsights_addWorkloadCmd.MarkFlagRequired("component-name")
+		applicationInsights_addWorkloadCmd.MarkFlagRequired("resource-group-name")
+		applicationInsights_addWorkloadCmd.MarkFlagRequired("workload-configuration")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_addWorkloadCmd)
 }

@@ -12,13 +12,15 @@ var lexv2Models_deleteCustomVocabularyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_deleteCustomVocabularyCmd).Standalone()
+	carapace.Gen(lexv2Models_deleteCustomVocabularyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_deleteCustomVocabularyCmd).Standalone()
 
-	lexv2Models_deleteCustomVocabularyCmd.Flags().String("bot-id", "", "The unique identifier of the bot to remove the custom vocabulary from.")
-	lexv2Models_deleteCustomVocabularyCmd.Flags().String("bot-version", "", "The version of the bot to remove the custom vocabulary from.")
-	lexv2Models_deleteCustomVocabularyCmd.Flags().String("locale-id", "", "The locale identifier for the locale that contains the custom vocabulary to remove.")
-	lexv2Models_deleteCustomVocabularyCmd.MarkFlagRequired("bot-id")
-	lexv2Models_deleteCustomVocabularyCmd.MarkFlagRequired("bot-version")
-	lexv2Models_deleteCustomVocabularyCmd.MarkFlagRequired("locale-id")
+		lexv2Models_deleteCustomVocabularyCmd.Flags().String("bot-id", "", "The unique identifier of the bot to remove the custom vocabulary from.")
+		lexv2Models_deleteCustomVocabularyCmd.Flags().String("bot-version", "", "The version of the bot to remove the custom vocabulary from.")
+		lexv2Models_deleteCustomVocabularyCmd.Flags().String("locale-id", "", "The locale identifier for the locale that contains the custom vocabulary to remove.")
+		lexv2Models_deleteCustomVocabularyCmd.MarkFlagRequired("bot-id")
+		lexv2Models_deleteCustomVocabularyCmd.MarkFlagRequired("bot-version")
+		lexv2Models_deleteCustomVocabularyCmd.MarkFlagRequired("locale-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_deleteCustomVocabularyCmd)
 }

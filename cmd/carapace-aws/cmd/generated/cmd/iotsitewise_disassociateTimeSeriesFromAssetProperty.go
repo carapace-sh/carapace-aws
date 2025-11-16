@@ -12,14 +12,16 @@ var iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd).Standalone()
+	carapace.Gen(iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd).Standalone()
 
-	iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.Flags().String("alias", "", "The alias that identifies the time series.")
-	iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.Flags().String("asset-id", "", "The ID of the asset in which the asset property was created.")
-	iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.Flags().String("property-id", "", "The ID of the asset property.")
-	iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.MarkFlagRequired("alias")
-	iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.MarkFlagRequired("asset-id")
-	iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.MarkFlagRequired("property-id")
+		iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.Flags().String("alias", "", "The alias that identifies the time series.")
+		iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.Flags().String("asset-id", "", "The ID of the asset in which the asset property was created.")
+		iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.Flags().String("property-id", "", "The ID of the asset property.")
+		iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.MarkFlagRequired("alias")
+		iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.MarkFlagRequired("asset-id")
+		iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd.MarkFlagRequired("property-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_disassociateTimeSeriesFromAssetPropertyCmd)
 }

@@ -12,9 +12,11 @@ var comprehend_describeDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeDatasetCmd).Standalone()
+	carapace.Gen(comprehend_describeDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeDatasetCmd).Standalone()
 
-	comprehend_describeDatasetCmd.Flags().String("dataset-arn", "", "The ARN of the dataset.")
-	comprehend_describeDatasetCmd.MarkFlagRequired("dataset-arn")
+		comprehend_describeDatasetCmd.Flags().String("dataset-arn", "", "The ARN of the dataset.")
+		comprehend_describeDatasetCmd.MarkFlagRequired("dataset-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_describeDatasetCmd)
 }

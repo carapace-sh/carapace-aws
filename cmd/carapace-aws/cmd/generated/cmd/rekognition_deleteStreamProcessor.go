@@ -12,9 +12,11 @@ var rekognition_deleteStreamProcessorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_deleteStreamProcessorCmd).Standalone()
+	carapace.Gen(rekognition_deleteStreamProcessorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_deleteStreamProcessorCmd).Standalone()
 
-	rekognition_deleteStreamProcessorCmd.Flags().String("name", "", "The name of the stream processor you want to delete.")
-	rekognition_deleteStreamProcessorCmd.MarkFlagRequired("name")
+		rekognition_deleteStreamProcessorCmd.Flags().String("name", "", "The name of the stream processor you want to delete.")
+		rekognition_deleteStreamProcessorCmd.MarkFlagRequired("name")
+	})
 	rekognitionCmd.AddCommand(rekognition_deleteStreamProcessorCmd)
 }

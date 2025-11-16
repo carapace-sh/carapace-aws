@@ -12,9 +12,11 @@ var securityhub_listEnabledProductsForImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_listEnabledProductsForImportCmd).Standalone()
+	carapace.Gen(securityhub_listEnabledProductsForImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_listEnabledProductsForImportCmd).Standalone()
 
-	securityhub_listEnabledProductsForImportCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
-	securityhub_listEnabledProductsForImportCmd.Flags().String("next-token", "", "The token that is required for pagination.")
+		securityhub_listEnabledProductsForImportCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
+		securityhub_listEnabledProductsForImportCmd.Flags().String("next-token", "", "The token that is required for pagination.")
+	})
 	securityhubCmd.AddCommand(securityhub_listEnabledProductsForImportCmd)
 }

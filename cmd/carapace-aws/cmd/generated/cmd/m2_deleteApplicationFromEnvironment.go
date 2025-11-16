@@ -12,11 +12,13 @@ var m2_deleteApplicationFromEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_deleteApplicationFromEnvironmentCmd).Standalone()
+	carapace.Gen(m2_deleteApplicationFromEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_deleteApplicationFromEnvironmentCmd).Standalone()
 
-	m2_deleteApplicationFromEnvironmentCmd.Flags().String("application-id", "", "The unique identifier of the application you want to delete.")
-	m2_deleteApplicationFromEnvironmentCmd.Flags().String("environment-id", "", "The unique identifier of the runtime environment where the application was previously deployed.")
-	m2_deleteApplicationFromEnvironmentCmd.MarkFlagRequired("application-id")
-	m2_deleteApplicationFromEnvironmentCmd.MarkFlagRequired("environment-id")
+		m2_deleteApplicationFromEnvironmentCmd.Flags().String("application-id", "", "The unique identifier of the application you want to delete.")
+		m2_deleteApplicationFromEnvironmentCmd.Flags().String("environment-id", "", "The unique identifier of the runtime environment where the application was previously deployed.")
+		m2_deleteApplicationFromEnvironmentCmd.MarkFlagRequired("application-id")
+		m2_deleteApplicationFromEnvironmentCmd.MarkFlagRequired("environment-id")
+	})
 	m2Cmd.AddCommand(m2_deleteApplicationFromEnvironmentCmd)
 }

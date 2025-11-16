@@ -12,9 +12,11 @@ var codeguruReviewer_describeRepositoryAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruReviewer_describeRepositoryAssociationCmd).Standalone()
+	carapace.Gen(codeguruReviewer_describeRepositoryAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruReviewer_describeRepositoryAssociationCmd).Standalone()
 
-	codeguruReviewer_describeRepositoryAssociationCmd.Flags().String("association-arn", "", "The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.")
-	codeguruReviewer_describeRepositoryAssociationCmd.MarkFlagRequired("association-arn")
+		codeguruReviewer_describeRepositoryAssociationCmd.Flags().String("association-arn", "", "The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.")
+		codeguruReviewer_describeRepositoryAssociationCmd.MarkFlagRequired("association-arn")
+	})
 	codeguruReviewerCmd.AddCommand(codeguruReviewer_describeRepositoryAssociationCmd)
 }

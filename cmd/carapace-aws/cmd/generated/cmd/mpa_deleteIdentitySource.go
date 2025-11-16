@@ -12,9 +12,11 @@ var mpa_deleteIdentitySourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_deleteIdentitySourceCmd).Standalone()
+	carapace.Gen(mpa_deleteIdentitySourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_deleteIdentitySourceCmd).Standalone()
 
-	mpa_deleteIdentitySourceCmd.Flags().String("identity-source-arn", "", "Amazon Resource Name (ARN) for identity source.")
-	mpa_deleteIdentitySourceCmd.MarkFlagRequired("identity-source-arn")
+		mpa_deleteIdentitySourceCmd.Flags().String("identity-source-arn", "", "Amazon Resource Name (ARN) for identity source.")
+		mpa_deleteIdentitySourceCmd.MarkFlagRequired("identity-source-arn")
+	})
 	mpaCmd.AddCommand(mpa_deleteIdentitySourceCmd)
 }

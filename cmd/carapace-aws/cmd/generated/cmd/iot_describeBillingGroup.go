@@ -12,9 +12,11 @@ var iot_describeBillingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeBillingGroupCmd).Standalone()
+	carapace.Gen(iot_describeBillingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeBillingGroupCmd).Standalone()
 
-	iot_describeBillingGroupCmd.Flags().String("billing-group-name", "", "The name of the billing group.")
-	iot_describeBillingGroupCmd.MarkFlagRequired("billing-group-name")
+		iot_describeBillingGroupCmd.Flags().String("billing-group-name", "", "The name of the billing group.")
+		iot_describeBillingGroupCmd.MarkFlagRequired("billing-group-name")
+	})
 	iotCmd.AddCommand(iot_describeBillingGroupCmd)
 }

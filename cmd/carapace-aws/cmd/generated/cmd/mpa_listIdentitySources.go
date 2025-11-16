@@ -12,9 +12,11 @@ var mpa_listIdentitySourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_listIdentitySourcesCmd).Standalone()
+	carapace.Gen(mpa_listIdentitySourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_listIdentitySourcesCmd).Standalone()
 
-	mpa_listIdentitySourcesCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
-	mpa_listIdentitySourcesCmd.Flags().String("next-token", "", "If present, indicates that more output is available than is included in the current response.")
+		mpa_listIdentitySourcesCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
+		mpa_listIdentitySourcesCmd.Flags().String("next-token", "", "If present, indicates that more output is available than is included in the current response.")
+	})
 	mpaCmd.AddCommand(mpa_listIdentitySourcesCmd)
 }

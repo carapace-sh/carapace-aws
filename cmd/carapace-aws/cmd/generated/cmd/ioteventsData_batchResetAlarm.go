@@ -12,9 +12,11 @@ var ioteventsData_batchResetAlarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ioteventsData_batchResetAlarmCmd).Standalone()
+	carapace.Gen(ioteventsData_batchResetAlarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ioteventsData_batchResetAlarmCmd).Standalone()
 
-	ioteventsData_batchResetAlarmCmd.Flags().String("reset-action-requests", "", "The list of reset action requests.")
-	ioteventsData_batchResetAlarmCmd.MarkFlagRequired("reset-action-requests")
+		ioteventsData_batchResetAlarmCmd.Flags().String("reset-action-requests", "", "The list of reset action requests.")
+		ioteventsData_batchResetAlarmCmd.MarkFlagRequired("reset-action-requests")
+	})
 	ioteventsDataCmd.AddCommand(ioteventsData_batchResetAlarmCmd)
 }

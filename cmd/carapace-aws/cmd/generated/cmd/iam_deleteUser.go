@@ -12,9 +12,11 @@ var iam_deleteUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteUserCmd).Standalone()
+	carapace.Gen(iam_deleteUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteUserCmd).Standalone()
 
-	iam_deleteUserCmd.Flags().String("user-name", "", "The name of the user to delete.")
-	iam_deleteUserCmd.MarkFlagRequired("user-name")
+		iam_deleteUserCmd.Flags().String("user-name", "", "The name of the user to delete.")
+		iam_deleteUserCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_deleteUserCmd)
 }

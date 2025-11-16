@@ -12,9 +12,11 @@ var networkmanager_startOrganizationServiceAccessUpdateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_startOrganizationServiceAccessUpdateCmd).Standalone()
+	carapace.Gen(networkmanager_startOrganizationServiceAccessUpdateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_startOrganizationServiceAccessUpdateCmd).Standalone()
 
-	networkmanager_startOrganizationServiceAccessUpdateCmd.Flags().String("action", "", "The action to take for the update request.")
-	networkmanager_startOrganizationServiceAccessUpdateCmd.MarkFlagRequired("action")
+		networkmanager_startOrganizationServiceAccessUpdateCmd.Flags().String("action", "", "The action to take for the update request.")
+		networkmanager_startOrganizationServiceAccessUpdateCmd.MarkFlagRequired("action")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_startOrganizationServiceAccessUpdateCmd)
 }

@@ -12,9 +12,11 @@ var medialive_deleteCloudWatchAlarmTemplateGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteCloudWatchAlarmTemplateGroupCmd).Standalone()
+	carapace.Gen(medialive_deleteCloudWatchAlarmTemplateGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteCloudWatchAlarmTemplateGroupCmd).Standalone()
 
-	medialive_deleteCloudWatchAlarmTemplateGroupCmd.Flags().String("identifier", "", "A cloudwatch alarm template group's identifier.")
-	medialive_deleteCloudWatchAlarmTemplateGroupCmd.MarkFlagRequired("identifier")
+		medialive_deleteCloudWatchAlarmTemplateGroupCmd.Flags().String("identifier", "", "A cloudwatch alarm template group's identifier.")
+		medialive_deleteCloudWatchAlarmTemplateGroupCmd.MarkFlagRequired("identifier")
+	})
 	medialiveCmd.AddCommand(medialive_deleteCloudWatchAlarmTemplateGroupCmd)
 }

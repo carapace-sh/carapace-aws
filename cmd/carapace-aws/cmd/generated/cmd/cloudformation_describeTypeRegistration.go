@@ -12,9 +12,11 @@ var cloudformation_describeTypeRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeTypeRegistrationCmd).Standalone()
+	carapace.Gen(cloudformation_describeTypeRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeTypeRegistrationCmd).Standalone()
 
-	cloudformation_describeTypeRegistrationCmd.Flags().String("registration-token", "", "The identifier for this registration request.")
-	cloudformation_describeTypeRegistrationCmd.MarkFlagRequired("registration-token")
+		cloudformation_describeTypeRegistrationCmd.Flags().String("registration-token", "", "The identifier for this registration request.")
+		cloudformation_describeTypeRegistrationCmd.MarkFlagRequired("registration-token")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeTypeRegistrationCmd)
 }

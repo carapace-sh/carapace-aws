@@ -12,9 +12,11 @@ var detective_disassociateMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_disassociateMembershipCmd).Standalone()
+	carapace.Gen(detective_disassociateMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_disassociateMembershipCmd).Standalone()
 
-	detective_disassociateMembershipCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph to remove the member account from.")
-	detective_disassociateMembershipCmd.MarkFlagRequired("graph-arn")
+		detective_disassociateMembershipCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph to remove the member account from.")
+		detective_disassociateMembershipCmd.MarkFlagRequired("graph-arn")
+	})
 	detectiveCmd.AddCommand(detective_disassociateMembershipCmd)
 }

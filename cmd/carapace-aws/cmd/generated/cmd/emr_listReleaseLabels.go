@@ -12,10 +12,12 @@ var emr_listReleaseLabelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_listReleaseLabelsCmd).Standalone()
+	carapace.Gen(emr_listReleaseLabelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_listReleaseLabelsCmd).Standalone()
 
-	emr_listReleaseLabelsCmd.Flags().String("filters", "", "Filters the results of the request.")
-	emr_listReleaseLabelsCmd.Flags().String("max-results", "", "Defines the maximum number of release labels to return in a single response.")
-	emr_listReleaseLabelsCmd.Flags().String("next-token", "", "Specifies the next page of results.")
+		emr_listReleaseLabelsCmd.Flags().String("filters", "", "Filters the results of the request.")
+		emr_listReleaseLabelsCmd.Flags().String("max-results", "", "Defines the maximum number of release labels to return in a single response.")
+		emr_listReleaseLabelsCmd.Flags().String("next-token", "", "Specifies the next page of results.")
+	})
 	emrCmd.AddCommand(emr_listReleaseLabelsCmd)
 }

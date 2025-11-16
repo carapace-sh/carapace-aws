@@ -12,12 +12,14 @@ var networkFirewall_associateSubnetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_associateSubnetsCmd).Standalone()
+	carapace.Gen(networkFirewall_associateSubnetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_associateSubnetsCmd).Standalone()
 
-	networkFirewall_associateSubnetsCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
-	networkFirewall_associateSubnetsCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
-	networkFirewall_associateSubnetsCmd.Flags().String("subnet-mappings", "", "The IDs of the subnets that you want to associate with the firewall.")
-	networkFirewall_associateSubnetsCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
-	networkFirewall_associateSubnetsCmd.MarkFlagRequired("subnet-mappings")
+		networkFirewall_associateSubnetsCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
+		networkFirewall_associateSubnetsCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
+		networkFirewall_associateSubnetsCmd.Flags().String("subnet-mappings", "", "The IDs of the subnets that you want to associate with the firewall.")
+		networkFirewall_associateSubnetsCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
+		networkFirewall_associateSubnetsCmd.MarkFlagRequired("subnet-mappings")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_associateSubnetsCmd)
 }

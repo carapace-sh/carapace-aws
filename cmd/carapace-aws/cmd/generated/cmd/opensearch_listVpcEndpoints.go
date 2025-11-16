@@ -12,8 +12,10 @@ var opensearch_listVpcEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_listVpcEndpointsCmd).Standalone()
+	carapace.Gen(opensearch_listVpcEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_listVpcEndpointsCmd).Standalone()
 
-	opensearch_listVpcEndpointsCmd.Flags().String("next-token", "", "If your initial `ListVpcEndpoints` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpoints` operations, which returns results in the next page.")
+		opensearch_listVpcEndpointsCmd.Flags().String("next-token", "", "If your initial `ListVpcEndpoints` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpoints` operations, which returns results in the next page.")
+	})
 	opensearchCmd.AddCommand(opensearch_listVpcEndpointsCmd)
 }

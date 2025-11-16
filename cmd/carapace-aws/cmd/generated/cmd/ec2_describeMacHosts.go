@@ -12,11 +12,13 @@ var ec2_describeMacHostsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeMacHostsCmd).Standalone()
+	carapace.Gen(ec2_describeMacHostsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeMacHostsCmd).Standalone()
 
-	ec2_describeMacHostsCmd.Flags().String("filters", "", "The filters.")
-	ec2_describeMacHostsCmd.Flags().String("host-ids", "", "The IDs of the EC2 Mac Dedicated Hosts.")
-	ec2_describeMacHostsCmd.Flags().String("max-results", "", "The maximum number of results to return for the request in a single page.")
-	ec2_describeMacHostsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+		ec2_describeMacHostsCmd.Flags().String("filters", "", "The filters.")
+		ec2_describeMacHostsCmd.Flags().String("host-ids", "", "The IDs of the EC2 Mac Dedicated Hosts.")
+		ec2_describeMacHostsCmd.Flags().String("max-results", "", "The maximum number of results to return for the request in a single page.")
+		ec2_describeMacHostsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+	})
 	ec2Cmd.AddCommand(ec2_describeMacHostsCmd)
 }

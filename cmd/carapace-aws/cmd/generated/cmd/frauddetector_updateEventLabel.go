@@ -12,15 +12,17 @@ var frauddetector_updateEventLabelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_updateEventLabelCmd).Standalone()
+	carapace.Gen(frauddetector_updateEventLabelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_updateEventLabelCmd).Standalone()
 
-	frauddetector_updateEventLabelCmd.Flags().String("assigned-label", "", "The new label to assign to the event.")
-	frauddetector_updateEventLabelCmd.Flags().String("event-id", "", "The ID of the event associated with the label to update.")
-	frauddetector_updateEventLabelCmd.Flags().String("event-type-name", "", "The event type of the event associated with the label to update.")
-	frauddetector_updateEventLabelCmd.Flags().String("label-timestamp", "", "The timestamp associated with the label.")
-	frauddetector_updateEventLabelCmd.MarkFlagRequired("assigned-label")
-	frauddetector_updateEventLabelCmd.MarkFlagRequired("event-id")
-	frauddetector_updateEventLabelCmd.MarkFlagRequired("event-type-name")
-	frauddetector_updateEventLabelCmd.MarkFlagRequired("label-timestamp")
+		frauddetector_updateEventLabelCmd.Flags().String("assigned-label", "", "The new label to assign to the event.")
+		frauddetector_updateEventLabelCmd.Flags().String("event-id", "", "The ID of the event associated with the label to update.")
+		frauddetector_updateEventLabelCmd.Flags().String("event-type-name", "", "The event type of the event associated with the label to update.")
+		frauddetector_updateEventLabelCmd.Flags().String("label-timestamp", "", "The timestamp associated with the label.")
+		frauddetector_updateEventLabelCmd.MarkFlagRequired("assigned-label")
+		frauddetector_updateEventLabelCmd.MarkFlagRequired("event-id")
+		frauddetector_updateEventLabelCmd.MarkFlagRequired("event-type-name")
+		frauddetector_updateEventLabelCmd.MarkFlagRequired("label-timestamp")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_updateEventLabelCmd)
 }

@@ -12,7 +12,9 @@ var databrewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrewCmd).Standalone()
+	carapace.Gen(databrewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrewCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(databrewCmd)
 }

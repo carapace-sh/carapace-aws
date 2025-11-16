@@ -12,10 +12,12 @@ var iot_acceptCertificateTransferCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_acceptCertificateTransferCmd).Standalone()
+	carapace.Gen(iot_acceptCertificateTransferCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_acceptCertificateTransferCmd).Standalone()
 
-	iot_acceptCertificateTransferCmd.Flags().String("certificate-id", "", "The ID of the certificate.")
-	iot_acceptCertificateTransferCmd.Flags().String("set-as-active", "", "Specifies whether the certificate is active.")
-	iot_acceptCertificateTransferCmd.MarkFlagRequired("certificate-id")
+		iot_acceptCertificateTransferCmd.Flags().String("certificate-id", "", "The ID of the certificate.")
+		iot_acceptCertificateTransferCmd.Flags().String("set-as-active", "", "Specifies whether the certificate is active.")
+		iot_acceptCertificateTransferCmd.MarkFlagRequired("certificate-id")
+	})
 	iotCmd.AddCommand(iot_acceptCertificateTransferCmd)
 }

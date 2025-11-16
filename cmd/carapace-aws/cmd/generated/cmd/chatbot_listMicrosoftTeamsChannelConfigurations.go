@@ -12,10 +12,12 @@ var chatbot_listMicrosoftTeamsChannelConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_listMicrosoftTeamsChannelConfigurationsCmd).Standalone()
+	carapace.Gen(chatbot_listMicrosoftTeamsChannelConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_listMicrosoftTeamsChannelConfigurationsCmd).Standalone()
 
-	chatbot_listMicrosoftTeamsChannelConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	chatbot_listMicrosoftTeamsChannelConfigurationsCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
-	chatbot_listMicrosoftTeamsChannelConfigurationsCmd.Flags().String("team-id", "", "The ID of the Microsoft Teams authorized with AWS Chatbot.")
+		chatbot_listMicrosoftTeamsChannelConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		chatbot_listMicrosoftTeamsChannelConfigurationsCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
+		chatbot_listMicrosoftTeamsChannelConfigurationsCmd.Flags().String("team-id", "", "The ID of the Microsoft Teams authorized with AWS Chatbot.")
+	})
 	chatbotCmd.AddCommand(chatbot_listMicrosoftTeamsChannelConfigurationsCmd)
 }

@@ -12,12 +12,14 @@ var chimeSdkVoice_listProxySessionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_listProxySessionsCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_listProxySessionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_listProxySessionsCmd).Standalone()
 
-	chimeSdkVoice_listProxySessionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	chimeSdkVoice_listProxySessionsCmd.Flags().String("next-token", "", "The token used to retrieve the next page of results.")
-	chimeSdkVoice_listProxySessionsCmd.Flags().String("status", "", "The proxy session status.")
-	chimeSdkVoice_listProxySessionsCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_listProxySessionsCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_listProxySessionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		chimeSdkVoice_listProxySessionsCmd.Flags().String("next-token", "", "The token used to retrieve the next page of results.")
+		chimeSdkVoice_listProxySessionsCmd.Flags().String("status", "", "The proxy session status.")
+		chimeSdkVoice_listProxySessionsCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_listProxySessionsCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_listProxySessionsCmd)
 }

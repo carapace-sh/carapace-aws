@@ -12,11 +12,13 @@ var apigatewayv2_getIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_getIntegrationCmd).Standalone()
+	carapace.Gen(apigatewayv2_getIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_getIntegrationCmd).Standalone()
 
-	apigatewayv2_getIntegrationCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_getIntegrationCmd.Flags().String("integration-id", "", "The integration ID.")
-	apigatewayv2_getIntegrationCmd.MarkFlagRequired("api-id")
-	apigatewayv2_getIntegrationCmd.MarkFlagRequired("integration-id")
+		apigatewayv2_getIntegrationCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_getIntegrationCmd.Flags().String("integration-id", "", "The integration ID.")
+		apigatewayv2_getIntegrationCmd.MarkFlagRequired("api-id")
+		apigatewayv2_getIntegrationCmd.MarkFlagRequired("integration-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_getIntegrationCmd)
 }

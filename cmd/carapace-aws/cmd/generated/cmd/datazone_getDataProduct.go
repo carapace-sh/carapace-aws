@@ -12,12 +12,14 @@ var datazone_getDataProductCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getDataProductCmd).Standalone()
+	carapace.Gen(datazone_getDataProductCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getDataProductCmd).Standalone()
 
-	datazone_getDataProductCmd.Flags().String("domain-identifier", "", "The ID of the domain where the data product lives.")
-	datazone_getDataProductCmd.Flags().String("identifier", "", "The ID of the data product.")
-	datazone_getDataProductCmd.Flags().String("revision", "", "The revision of the data product.")
-	datazone_getDataProductCmd.MarkFlagRequired("domain-identifier")
-	datazone_getDataProductCmd.MarkFlagRequired("identifier")
+		datazone_getDataProductCmd.Flags().String("domain-identifier", "", "The ID of the domain where the data product lives.")
+		datazone_getDataProductCmd.Flags().String("identifier", "", "The ID of the data product.")
+		datazone_getDataProductCmd.Flags().String("revision", "", "The revision of the data product.")
+		datazone_getDataProductCmd.MarkFlagRequired("domain-identifier")
+		datazone_getDataProductCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getDataProductCmd)
 }

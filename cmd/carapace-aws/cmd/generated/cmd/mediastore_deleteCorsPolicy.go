@@ -12,9 +12,11 @@ var mediastore_deleteCorsPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_deleteCorsPolicyCmd).Standalone()
+	carapace.Gen(mediastore_deleteCorsPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_deleteCorsPolicyCmd).Standalone()
 
-	mediastore_deleteCorsPolicyCmd.Flags().String("container-name", "", "The name of the container to remove the policy from.")
-	mediastore_deleteCorsPolicyCmd.MarkFlagRequired("container-name")
+		mediastore_deleteCorsPolicyCmd.Flags().String("container-name", "", "The name of the container to remove the policy from.")
+		mediastore_deleteCorsPolicyCmd.MarkFlagRequired("container-name")
+	})
 	mediastoreCmd.AddCommand(mediastore_deleteCorsPolicyCmd)
 }

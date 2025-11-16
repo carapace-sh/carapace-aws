@@ -12,11 +12,13 @@ var emr_putManagedScalingPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_putManagedScalingPolicyCmd).Standalone()
+	carapace.Gen(emr_putManagedScalingPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_putManagedScalingPolicyCmd).Standalone()
 
-	emr_putManagedScalingPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of an Amazon EMR cluster where the managed scaling policy is attached.")
-	emr_putManagedScalingPolicyCmd.Flags().String("managed-scaling-policy", "", "Specifies the constraints for the managed scaling policy.")
-	emr_putManagedScalingPolicyCmd.MarkFlagRequired("cluster-id")
-	emr_putManagedScalingPolicyCmd.MarkFlagRequired("managed-scaling-policy")
+		emr_putManagedScalingPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of an Amazon EMR cluster where the managed scaling policy is attached.")
+		emr_putManagedScalingPolicyCmd.Flags().String("managed-scaling-policy", "", "Specifies the constraints for the managed scaling policy.")
+		emr_putManagedScalingPolicyCmd.MarkFlagRequired("cluster-id")
+		emr_putManagedScalingPolicyCmd.MarkFlagRequired("managed-scaling-policy")
+	})
 	emrCmd.AddCommand(emr_putManagedScalingPolicyCmd)
 }

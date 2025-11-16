@@ -12,7 +12,9 @@ var sns_getSmssandboxAccountStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_getSmssandboxAccountStatusCmd).Standalone()
+	carapace.Gen(sns_getSmssandboxAccountStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_getSmssandboxAccountStatusCmd).Standalone()
 
+	})
 	snsCmd.AddCommand(sns_getSmssandboxAccountStatusCmd)
 }

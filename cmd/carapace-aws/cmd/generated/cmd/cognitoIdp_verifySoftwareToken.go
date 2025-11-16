@@ -12,12 +12,14 @@ var cognitoIdp_verifySoftwareTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_verifySoftwareTokenCmd).Standalone()
+	carapace.Gen(cognitoIdp_verifySoftwareTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_verifySoftwareTokenCmd).Standalone()
 
-	cognitoIdp_verifySoftwareTokenCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_verifySoftwareTokenCmd.Flags().String("friendly-device-name", "", "A friendly name for the device that's running the TOTP authenticator.")
-	cognitoIdp_verifySoftwareTokenCmd.Flags().String("session", "", "The session ID from an `AssociateSoftwareToken` request.")
-	cognitoIdp_verifySoftwareTokenCmd.Flags().String("user-code", "", "A TOTP that the user generated in their configured authenticator app.")
-	cognitoIdp_verifySoftwareTokenCmd.MarkFlagRequired("user-code")
+		cognitoIdp_verifySoftwareTokenCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_verifySoftwareTokenCmd.Flags().String("friendly-device-name", "", "A friendly name for the device that's running the TOTP authenticator.")
+		cognitoIdp_verifySoftwareTokenCmd.Flags().String("session", "", "The session ID from an `AssociateSoftwareToken` request.")
+		cognitoIdp_verifySoftwareTokenCmd.Flags().String("user-code", "", "A TOTP that the user generated in their configured authenticator app.")
+		cognitoIdp_verifySoftwareTokenCmd.MarkFlagRequired("user-code")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_verifySoftwareTokenCmd)
 }

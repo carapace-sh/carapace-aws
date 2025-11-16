@@ -12,10 +12,12 @@ var pinpointEmail_putConfigurationSetReputationOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_putConfigurationSetReputationOptionsCmd).Standalone()
+	carapace.Gen(pinpointEmail_putConfigurationSetReputationOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_putConfigurationSetReputationOptionsCmd).Standalone()
 
-	pinpointEmail_putConfigurationSetReputationOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that you want to enable or disable reputation metric tracking for.")
-	pinpointEmail_putConfigurationSetReputationOptionsCmd.Flags().String("reputation-metrics-enabled", "", "If `true`, tracking of reputation metrics is enabled for the configuration set.")
-	pinpointEmail_putConfigurationSetReputationOptionsCmd.MarkFlagRequired("configuration-set-name")
+		pinpointEmail_putConfigurationSetReputationOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that you want to enable or disable reputation metric tracking for.")
+		pinpointEmail_putConfigurationSetReputationOptionsCmd.Flags().String("reputation-metrics-enabled", "", "If `true`, tracking of reputation metrics is enabled for the configuration set.")
+		pinpointEmail_putConfigurationSetReputationOptionsCmd.MarkFlagRequired("configuration-set-name")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_putConfigurationSetReputationOptionsCmd)
 }

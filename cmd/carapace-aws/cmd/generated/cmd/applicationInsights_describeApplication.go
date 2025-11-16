@@ -12,10 +12,12 @@ var applicationInsights_describeApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_describeApplicationCmd).Standalone()
+	carapace.Gen(applicationInsights_describeApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_describeApplicationCmd).Standalone()
 
-	applicationInsights_describeApplicationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the resource group owner.")
-	applicationInsights_describeApplicationCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
-	applicationInsights_describeApplicationCmd.MarkFlagRequired("resource-group-name")
+		applicationInsights_describeApplicationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the resource group owner.")
+		applicationInsights_describeApplicationCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
+		applicationInsights_describeApplicationCmd.MarkFlagRequired("resource-group-name")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_describeApplicationCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_stopAutoMljobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopAutoMljobCmd).Standalone()
+	carapace.Gen(sagemaker_stopAutoMljobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopAutoMljobCmd).Standalone()
 
-	sagemaker_stopAutoMljobCmd.Flags().String("auto-mljob-name", "", "The name of the object you are requesting.")
-	sagemaker_stopAutoMljobCmd.MarkFlagRequired("auto-mljob-name")
+		sagemaker_stopAutoMljobCmd.Flags().String("auto-mljob-name", "", "The name of the object you are requesting.")
+		sagemaker_stopAutoMljobCmd.MarkFlagRequired("auto-mljob-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopAutoMljobCmd)
 }

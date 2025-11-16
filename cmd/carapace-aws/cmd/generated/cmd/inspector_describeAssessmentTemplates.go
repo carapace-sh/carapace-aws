@@ -12,9 +12,11 @@ var inspector_describeAssessmentTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_describeAssessmentTemplatesCmd).Standalone()
+	carapace.Gen(inspector_describeAssessmentTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_describeAssessmentTemplatesCmd).Standalone()
 
-	inspector_describeAssessmentTemplatesCmd.Flags().String("assessment-template-arns", "", "")
-	inspector_describeAssessmentTemplatesCmd.MarkFlagRequired("assessment-template-arns")
+		inspector_describeAssessmentTemplatesCmd.Flags().String("assessment-template-arns", "", "")
+		inspector_describeAssessmentTemplatesCmd.MarkFlagRequired("assessment-template-arns")
+	})
 	inspectorCmd.AddCommand(inspector_describeAssessmentTemplatesCmd)
 }

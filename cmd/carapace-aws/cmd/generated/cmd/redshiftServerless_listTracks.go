@@ -12,9 +12,11 @@ var redshiftServerless_listTracksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_listTracksCmd).Standalone()
+	carapace.Gen(redshiftServerless_listTracksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_listTracksCmd).Standalone()
 
-	redshiftServerless_listTracksCmd.Flags().String("max-results", "", "The maximum number of response records to return in each call.")
-	redshiftServerless_listTracksCmd.Flags().String("next-token", "", "If your initial `ListTracksRequest` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListTracksRequest` operations, which returns results in the next page.")
+		redshiftServerless_listTracksCmd.Flags().String("max-results", "", "The maximum number of response records to return in each call.")
+		redshiftServerless_listTracksCmd.Flags().String("next-token", "", "If your initial `ListTracksRequest` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListTracksRequest` operations, which returns results in the next page.")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_listTracksCmd)
 }

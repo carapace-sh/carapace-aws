@@ -12,11 +12,13 @@ var appstream_describeSoftwareAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_describeSoftwareAssociationsCmd).Standalone()
+	carapace.Gen(appstream_describeSoftwareAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_describeSoftwareAssociationsCmd).Standalone()
 
-	appstream_describeSoftwareAssociationsCmd.Flags().String("associated-resource", "", "The ARN of the resource to describe software associations.")
-	appstream_describeSoftwareAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	appstream_describeSoftwareAssociationsCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
-	appstream_describeSoftwareAssociationsCmd.MarkFlagRequired("associated-resource")
+		appstream_describeSoftwareAssociationsCmd.Flags().String("associated-resource", "", "The ARN of the resource to describe software associations.")
+		appstream_describeSoftwareAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		appstream_describeSoftwareAssociationsCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+		appstream_describeSoftwareAssociationsCmd.MarkFlagRequired("associated-resource")
+	})
 	appstreamCmd.AddCommand(appstream_describeSoftwareAssociationsCmd)
 }

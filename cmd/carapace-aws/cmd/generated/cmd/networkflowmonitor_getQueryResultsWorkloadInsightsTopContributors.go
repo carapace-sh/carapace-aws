@@ -12,13 +12,15 @@ var networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd = &cobr
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd).Standalone()
+	carapace.Gen(networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd).Standalone()
 
-	networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.Flags().String("max-results", "", "The number of query results that you want to return with this call.")
-	networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.Flags().String("query-id", "", "The identifier for the query.")
-	networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
-	networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.MarkFlagRequired("query-id")
-	networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.MarkFlagRequired("scope-id")
+		networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.Flags().String("max-results", "", "The number of query results that you want to return with this call.")
+		networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.Flags().String("query-id", "", "The identifier for the query.")
+		networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
+		networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.MarkFlagRequired("query-id")
+		networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd.MarkFlagRequired("scope-id")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_getQueryResultsWorkloadInsightsTopContributorsCmd)
 }

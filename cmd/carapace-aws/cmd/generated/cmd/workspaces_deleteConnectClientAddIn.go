@@ -12,11 +12,13 @@ var workspaces_deleteConnectClientAddInCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_deleteConnectClientAddInCmd).Standalone()
+	carapace.Gen(workspaces_deleteConnectClientAddInCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_deleteConnectClientAddInCmd).Standalone()
 
-	workspaces_deleteConnectClientAddInCmd.Flags().String("add-in-id", "", "The identifier of the client add-in to delete.")
-	workspaces_deleteConnectClientAddInCmd.Flags().String("resource-id", "", "The directory identifier for which the client add-in is configured.")
-	workspaces_deleteConnectClientAddInCmd.MarkFlagRequired("add-in-id")
-	workspaces_deleteConnectClientAddInCmd.MarkFlagRequired("resource-id")
+		workspaces_deleteConnectClientAddInCmd.Flags().String("add-in-id", "", "The identifier of the client add-in to delete.")
+		workspaces_deleteConnectClientAddInCmd.Flags().String("resource-id", "", "The directory identifier for which the client add-in is configured.")
+		workspaces_deleteConnectClientAddInCmd.MarkFlagRequired("add-in-id")
+		workspaces_deleteConnectClientAddInCmd.MarkFlagRequired("resource-id")
+	})
 	workspacesCmd.AddCommand(workspaces_deleteConnectClientAddInCmd)
 }

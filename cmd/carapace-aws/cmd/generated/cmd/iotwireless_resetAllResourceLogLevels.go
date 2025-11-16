@@ -12,7 +12,9 @@ var iotwireless_resetAllResourceLogLevelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_resetAllResourceLogLevelsCmd).Standalone()
+	carapace.Gen(iotwireless_resetAllResourceLogLevelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_resetAllResourceLogLevelsCmd).Standalone()
 
+	})
 	iotwirelessCmd.AddCommand(iotwireless_resetAllResourceLogLevelsCmd)
 }

@@ -12,8 +12,10 @@ var taxsettings_putTaxInheritanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_putTaxInheritanceCmd).Standalone()
+	carapace.Gen(taxsettings_putTaxInheritanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_putTaxInheritanceCmd).Standalone()
 
-	taxsettings_putTaxInheritanceCmd.Flags().String("heritage-status", "", "The tax inheritance status.")
+		taxsettings_putTaxInheritanceCmd.Flags().String("heritage-status", "", "The tax inheritance status.")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_putTaxInheritanceCmd)
 }

@@ -12,9 +12,11 @@ var iotwireless_getNetworkAnalyzerConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getNetworkAnalyzerConfigurationCmd).Standalone()
+	carapace.Gen(iotwireless_getNetworkAnalyzerConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getNetworkAnalyzerConfigurationCmd).Standalone()
 
-	iotwireless_getNetworkAnalyzerConfigurationCmd.Flags().String("configuration-name", "", "")
-	iotwireless_getNetworkAnalyzerConfigurationCmd.MarkFlagRequired("configuration-name")
+		iotwireless_getNetworkAnalyzerConfigurationCmd.Flags().String("configuration-name", "", "")
+		iotwireless_getNetworkAnalyzerConfigurationCmd.MarkFlagRequired("configuration-name")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getNetworkAnalyzerConfigurationCmd)
 }

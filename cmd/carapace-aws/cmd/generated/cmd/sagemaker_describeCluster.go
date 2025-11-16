@@ -12,9 +12,11 @@ var sagemaker_describeClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeClusterCmd).Standalone()
+	carapace.Gen(sagemaker_describeClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeClusterCmd).Standalone()
 
-	sagemaker_describeClusterCmd.Flags().String("cluster-name", "", "The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster.")
-	sagemaker_describeClusterCmd.MarkFlagRequired("cluster-name")
+		sagemaker_describeClusterCmd.Flags().String("cluster-name", "", "The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster.")
+		sagemaker_describeClusterCmd.MarkFlagRequired("cluster-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeClusterCmd)
 }

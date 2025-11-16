@@ -12,8 +12,10 @@ var codedeploy_listGitHubAccountTokenNamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_listGitHubAccountTokenNamesCmd).Standalone()
+	carapace.Gen(codedeploy_listGitHubAccountTokenNamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_listGitHubAccountTokenNamesCmd).Standalone()
 
-	codedeploy_listGitHubAccountTokenNamesCmd.Flags().String("next-token", "", "An identifier returned from the previous `ListGitHubAccountTokenNames` call.")
+		codedeploy_listGitHubAccountTokenNamesCmd.Flags().String("next-token", "", "An identifier returned from the previous `ListGitHubAccountTokenNames` call.")
+	})
 	codedeployCmd.AddCommand(codedeploy_listGitHubAccountTokenNamesCmd)
 }

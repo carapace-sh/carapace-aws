@@ -12,11 +12,13 @@ var iottwinmaker_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_tagResourceCmd).Standalone()
+	carapace.Gen(iottwinmaker_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_tagResourceCmd).Standalone()
 
-	iottwinmaker_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	iottwinmaker_tagResourceCmd.Flags().String("tags", "", "Metadata to add to this resource.")
-	iottwinmaker_tagResourceCmd.MarkFlagRequired("resource-arn")
-	iottwinmaker_tagResourceCmd.MarkFlagRequired("tags")
+		iottwinmaker_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		iottwinmaker_tagResourceCmd.Flags().String("tags", "", "Metadata to add to this resource.")
+		iottwinmaker_tagResourceCmd.MarkFlagRequired("resource-arn")
+		iottwinmaker_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_tagResourceCmd)
 }

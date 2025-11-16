@@ -12,9 +12,11 @@ var sagemaker_describeAppImageConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeAppImageConfigCmd).Standalone()
+	carapace.Gen(sagemaker_describeAppImageConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeAppImageConfigCmd).Standalone()
 
-	sagemaker_describeAppImageConfigCmd.Flags().String("app-image-config-name", "", "The name of the AppImageConfig to describe.")
-	sagemaker_describeAppImageConfigCmd.MarkFlagRequired("app-image-config-name")
+		sagemaker_describeAppImageConfigCmd.Flags().String("app-image-config-name", "", "The name of the AppImageConfig to describe.")
+		sagemaker_describeAppImageConfigCmd.MarkFlagRequired("app-image-config-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeAppImageConfigCmd)
 }

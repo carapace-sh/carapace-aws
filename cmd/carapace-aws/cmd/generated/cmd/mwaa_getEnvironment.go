@@ -12,9 +12,11 @@ var mwaa_getEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mwaa_getEnvironmentCmd).Standalone()
+	carapace.Gen(mwaa_getEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mwaa_getEnvironmentCmd).Standalone()
 
-	mwaa_getEnvironmentCmd.Flags().String("name", "", "The name of the Amazon MWAA environment.")
-	mwaa_getEnvironmentCmd.MarkFlagRequired("name")
+		mwaa_getEnvironmentCmd.Flags().String("name", "", "The name of the Amazon MWAA environment.")
+		mwaa_getEnvironmentCmd.MarkFlagRequired("name")
+	})
 	mwaaCmd.AddCommand(mwaa_getEnvironmentCmd)
 }

@@ -12,9 +12,11 @@ var cloudfront_getResponseHeadersPolicy2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_getResponseHeadersPolicy2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getResponseHeadersPolicy2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getResponseHeadersPolicy2020_05_31Cmd).Standalone()
 
-	cloudfront_getResponseHeadersPolicy2020_05_31Cmd.Flags().String("id", "", "The identifier for the response headers policy.")
-	cloudfront_getResponseHeadersPolicy2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getResponseHeadersPolicy2020_05_31Cmd.Flags().String("id", "", "The identifier for the response headers policy.")
+		cloudfront_getResponseHeadersPolicy2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getResponseHeadersPolicy2020_05_31Cmd)
 }

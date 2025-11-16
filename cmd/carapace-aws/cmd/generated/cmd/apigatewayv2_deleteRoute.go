@@ -12,11 +12,13 @@ var apigatewayv2_deleteRouteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_deleteRouteCmd).Standalone()
+	carapace.Gen(apigatewayv2_deleteRouteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_deleteRouteCmd).Standalone()
 
-	apigatewayv2_deleteRouteCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_deleteRouteCmd.Flags().String("route-id", "", "The route ID.")
-	apigatewayv2_deleteRouteCmd.MarkFlagRequired("api-id")
-	apigatewayv2_deleteRouteCmd.MarkFlagRequired("route-id")
+		apigatewayv2_deleteRouteCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_deleteRouteCmd.Flags().String("route-id", "", "The route ID.")
+		apigatewayv2_deleteRouteCmd.MarkFlagRequired("api-id")
+		apigatewayv2_deleteRouteCmd.MarkFlagRequired("route-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_deleteRouteCmd)
 }

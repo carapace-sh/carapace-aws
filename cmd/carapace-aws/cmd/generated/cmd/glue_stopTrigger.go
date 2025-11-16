@@ -12,9 +12,11 @@ var glue_stopTriggerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_stopTriggerCmd).Standalone()
+	carapace.Gen(glue_stopTriggerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_stopTriggerCmd).Standalone()
 
-	glue_stopTriggerCmd.Flags().String("name", "", "The name of the trigger to stop.")
-	glue_stopTriggerCmd.MarkFlagRequired("name")
+		glue_stopTriggerCmd.Flags().String("name", "", "The name of the trigger to stop.")
+		glue_stopTriggerCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_stopTriggerCmd)
 }

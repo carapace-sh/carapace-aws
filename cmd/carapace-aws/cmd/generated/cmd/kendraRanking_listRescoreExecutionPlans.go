@@ -12,9 +12,11 @@ var kendraRanking_listRescoreExecutionPlansCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendraRanking_listRescoreExecutionPlansCmd).Standalone()
+	carapace.Gen(kendraRanking_listRescoreExecutionPlansCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendraRanking_listRescoreExecutionPlansCmd).Standalone()
 
-	kendraRanking_listRescoreExecutionPlansCmd.Flags().String("max-results", "", "The maximum number of rescore execution plans to return.")
-	kendraRanking_listRescoreExecutionPlansCmd.Flags().String("next-token", "", "If the response is truncated, Amazon Kendra Intelligent Ranking returns a pagination token in the response.")
+		kendraRanking_listRescoreExecutionPlansCmd.Flags().String("max-results", "", "The maximum number of rescore execution plans to return.")
+		kendraRanking_listRescoreExecutionPlansCmd.Flags().String("next-token", "", "If the response is truncated, Amazon Kendra Intelligent Ranking returns a pagination token in the response.")
+	})
 	kendraRankingCmd.AddCommand(kendraRanking_listRescoreExecutionPlansCmd)
 }

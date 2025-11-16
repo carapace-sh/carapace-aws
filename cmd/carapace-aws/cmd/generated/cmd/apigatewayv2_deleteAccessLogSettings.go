@@ -12,11 +12,13 @@ var apigatewayv2_deleteAccessLogSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_deleteAccessLogSettingsCmd).Standalone()
+	carapace.Gen(apigatewayv2_deleteAccessLogSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_deleteAccessLogSettingsCmd).Standalone()
 
-	apigatewayv2_deleteAccessLogSettingsCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_deleteAccessLogSettingsCmd.Flags().String("stage-name", "", "The stage name.")
-	apigatewayv2_deleteAccessLogSettingsCmd.MarkFlagRequired("api-id")
-	apigatewayv2_deleteAccessLogSettingsCmd.MarkFlagRequired("stage-name")
+		apigatewayv2_deleteAccessLogSettingsCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_deleteAccessLogSettingsCmd.Flags().String("stage-name", "", "The stage name.")
+		apigatewayv2_deleteAccessLogSettingsCmd.MarkFlagRequired("api-id")
+		apigatewayv2_deleteAccessLogSettingsCmd.MarkFlagRequired("stage-name")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_deleteAccessLogSettingsCmd)
 }

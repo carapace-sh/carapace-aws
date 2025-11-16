@@ -12,9 +12,11 @@ var sagemakerGeospatial_getRasterDataCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerGeospatial_getRasterDataCollectionCmd).Standalone()
+	carapace.Gen(sagemakerGeospatial_getRasterDataCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerGeospatial_getRasterDataCollectionCmd).Standalone()
 
-	sagemakerGeospatial_getRasterDataCollectionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the raster data collection.")
-	sagemakerGeospatial_getRasterDataCollectionCmd.MarkFlagRequired("arn")
+		sagemakerGeospatial_getRasterDataCollectionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the raster data collection.")
+		sagemakerGeospatial_getRasterDataCollectionCmd.MarkFlagRequired("arn")
+	})
 	sagemakerGeospatialCmd.AddCommand(sagemakerGeospatial_getRasterDataCollectionCmd)
 }

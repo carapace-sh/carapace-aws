@@ -12,7 +12,9 @@ var rbinCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rbinCmd).Standalone()
+	carapace.Gen(rbinCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rbinCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(rbinCmd)
 }

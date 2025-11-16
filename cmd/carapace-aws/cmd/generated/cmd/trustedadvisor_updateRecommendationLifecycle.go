@@ -12,13 +12,15 @@ var trustedadvisor_updateRecommendationLifecycleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(trustedadvisor_updateRecommendationLifecycleCmd).Standalone()
+	carapace.Gen(trustedadvisor_updateRecommendationLifecycleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(trustedadvisor_updateRecommendationLifecycleCmd).Standalone()
 
-	trustedadvisor_updateRecommendationLifecycleCmd.Flags().String("lifecycle-stage", "", "The new lifecycle stage")
-	trustedadvisor_updateRecommendationLifecycleCmd.Flags().String("recommendation-identifier", "", "The Recommendation identifier for AWS Trusted Advisor Priority recommendations")
-	trustedadvisor_updateRecommendationLifecycleCmd.Flags().String("update-reason", "", "Reason for the lifecycle stage change")
-	trustedadvisor_updateRecommendationLifecycleCmd.Flags().String("update-reason-code", "", "Reason code for the lifecycle state change")
-	trustedadvisor_updateRecommendationLifecycleCmd.MarkFlagRequired("lifecycle-stage")
-	trustedadvisor_updateRecommendationLifecycleCmd.MarkFlagRequired("recommendation-identifier")
+		trustedadvisor_updateRecommendationLifecycleCmd.Flags().String("lifecycle-stage", "", "The new lifecycle stage")
+		trustedadvisor_updateRecommendationLifecycleCmd.Flags().String("recommendation-identifier", "", "The Recommendation identifier for AWS Trusted Advisor Priority recommendations")
+		trustedadvisor_updateRecommendationLifecycleCmd.Flags().String("update-reason", "", "Reason for the lifecycle stage change")
+		trustedadvisor_updateRecommendationLifecycleCmd.Flags().String("update-reason-code", "", "Reason code for the lifecycle state change")
+		trustedadvisor_updateRecommendationLifecycleCmd.MarkFlagRequired("lifecycle-stage")
+		trustedadvisor_updateRecommendationLifecycleCmd.MarkFlagRequired("recommendation-identifier")
+	})
 	trustedadvisorCmd.AddCommand(trustedadvisor_updateRecommendationLifecycleCmd)
 }

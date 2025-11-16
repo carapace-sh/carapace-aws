@@ -12,11 +12,13 @@ var kinesisanalyticsv2_describeApplicationSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_describeApplicationSnapshotCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_describeApplicationSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_describeApplicationSnapshotCmd).Standalone()
 
-	kinesisanalyticsv2_describeApplicationSnapshotCmd.Flags().String("application-name", "", "The name of an existing application.")
-	kinesisanalyticsv2_describeApplicationSnapshotCmd.Flags().String("snapshot-name", "", "The identifier of an application snapshot.")
-	kinesisanalyticsv2_describeApplicationSnapshotCmd.MarkFlagRequired("application-name")
-	kinesisanalyticsv2_describeApplicationSnapshotCmd.MarkFlagRequired("snapshot-name")
+		kinesisanalyticsv2_describeApplicationSnapshotCmd.Flags().String("application-name", "", "The name of an existing application.")
+		kinesisanalyticsv2_describeApplicationSnapshotCmd.Flags().String("snapshot-name", "", "The identifier of an application snapshot.")
+		kinesisanalyticsv2_describeApplicationSnapshotCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_describeApplicationSnapshotCmd.MarkFlagRequired("snapshot-name")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_describeApplicationSnapshotCmd)
 }

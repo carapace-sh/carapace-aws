@@ -12,9 +12,11 @@ var redshift_deleteSnapshotScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteSnapshotScheduleCmd).Standalone()
+	carapace.Gen(redshift_deleteSnapshotScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteSnapshotScheduleCmd).Standalone()
 
-	redshift_deleteSnapshotScheduleCmd.Flags().String("schedule-identifier", "", "A unique identifier of the snapshot schedule to delete.")
-	redshift_deleteSnapshotScheduleCmd.MarkFlagRequired("schedule-identifier")
+		redshift_deleteSnapshotScheduleCmd.Flags().String("schedule-identifier", "", "A unique identifier of the snapshot schedule to delete.")
+		redshift_deleteSnapshotScheduleCmd.MarkFlagRequired("schedule-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_deleteSnapshotScheduleCmd)
 }

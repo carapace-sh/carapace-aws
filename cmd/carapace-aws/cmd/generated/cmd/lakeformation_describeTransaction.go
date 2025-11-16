@@ -12,9 +12,11 @@ var lakeformation_describeTransactionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_describeTransactionCmd).Standalone()
+	carapace.Gen(lakeformation_describeTransactionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_describeTransactionCmd).Standalone()
 
-	lakeformation_describeTransactionCmd.Flags().String("transaction-id", "", "The transaction for which to return status.")
-	lakeformation_describeTransactionCmd.MarkFlagRequired("transaction-id")
+		lakeformation_describeTransactionCmd.Flags().String("transaction-id", "", "The transaction for which to return status.")
+		lakeformation_describeTransactionCmd.MarkFlagRequired("transaction-id")
+	})
 	lakeformationCmd.AddCommand(lakeformation_describeTransactionCmd)
 }

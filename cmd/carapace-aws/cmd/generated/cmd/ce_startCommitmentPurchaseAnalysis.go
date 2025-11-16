@@ -12,9 +12,11 @@ var ce_startCommitmentPurchaseAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_startCommitmentPurchaseAnalysisCmd).Standalone()
+	carapace.Gen(ce_startCommitmentPurchaseAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_startCommitmentPurchaseAnalysisCmd).Standalone()
 
-	ce_startCommitmentPurchaseAnalysisCmd.Flags().String("commitment-purchase-analysis-configuration", "", "The configuration for the commitment purchase analysis.")
-	ce_startCommitmentPurchaseAnalysisCmd.MarkFlagRequired("commitment-purchase-analysis-configuration")
+		ce_startCommitmentPurchaseAnalysisCmd.Flags().String("commitment-purchase-analysis-configuration", "", "The configuration for the commitment purchase analysis.")
+		ce_startCommitmentPurchaseAnalysisCmd.MarkFlagRequired("commitment-purchase-analysis-configuration")
+	})
 	ceCmd.AddCommand(ce_startCommitmentPurchaseAnalysisCmd)
 }

@@ -12,10 +12,12 @@ var securitylake_updateDataLakeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_updateDataLakeCmd).Standalone()
+	carapace.Gen(securitylake_updateDataLakeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_updateDataLakeCmd).Standalone()
 
-	securitylake_updateDataLakeCmd.Flags().String("configurations", "", "Specifies the Region or Regions that will contribute data to the rollup region.")
-	securitylake_updateDataLakeCmd.Flags().String("meta-store-manager-role-arn", "", "The Amazon Resource Name (ARN) used to create and update the Glue table.")
-	securitylake_updateDataLakeCmd.MarkFlagRequired("configurations")
+		securitylake_updateDataLakeCmd.Flags().String("configurations", "", "Specifies the Region or Regions that will contribute data to the rollup region.")
+		securitylake_updateDataLakeCmd.Flags().String("meta-store-manager-role-arn", "", "The Amazon Resource Name (ARN) used to create and update the Glue table.")
+		securitylake_updateDataLakeCmd.MarkFlagRequired("configurations")
+	})
 	securitylakeCmd.AddCommand(securitylake_updateDataLakeCmd)
 }

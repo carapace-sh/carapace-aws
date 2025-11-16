@@ -12,9 +12,11 @@ var cloudtrail_startEventDataStoreIngestionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_startEventDataStoreIngestionCmd).Standalone()
+	carapace.Gen(cloudtrail_startEventDataStoreIngestionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_startEventDataStoreIngestionCmd).Standalone()
 
-	cloudtrail_startEventDataStoreIngestionCmd.Flags().String("event-data-store", "", "The ARN (or ID suffix of the ARN) of the event data store for which you want to start ingestion.")
-	cloudtrail_startEventDataStoreIngestionCmd.MarkFlagRequired("event-data-store")
+		cloudtrail_startEventDataStoreIngestionCmd.Flags().String("event-data-store", "", "The ARN (or ID suffix of the ARN) of the event data store for which you want to start ingestion.")
+		cloudtrail_startEventDataStoreIngestionCmd.MarkFlagRequired("event-data-store")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_startEventDataStoreIngestionCmd)
 }

@@ -12,9 +12,11 @@ var medicalImaging_deleteDatastoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medicalImaging_deleteDatastoreCmd).Standalone()
+	carapace.Gen(medicalImaging_deleteDatastoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medicalImaging_deleteDatastoreCmd).Standalone()
 
-	medicalImaging_deleteDatastoreCmd.Flags().String("datastore-id", "", "The data store identifier.")
-	medicalImaging_deleteDatastoreCmd.MarkFlagRequired("datastore-id")
+		medicalImaging_deleteDatastoreCmd.Flags().String("datastore-id", "", "The data store identifier.")
+		medicalImaging_deleteDatastoreCmd.MarkFlagRequired("datastore-id")
+	})
 	medicalImagingCmd.AddCommand(medicalImaging_deleteDatastoreCmd)
 }

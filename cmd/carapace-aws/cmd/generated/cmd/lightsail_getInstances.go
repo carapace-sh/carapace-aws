@@ -12,8 +12,10 @@ var lightsail_getInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getInstancesCmd).Standalone()
+	carapace.Gen(lightsail_getInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getInstancesCmd).Standalone()
 
-	lightsail_getInstancesCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+		lightsail_getInstancesCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+	})
 	lightsailCmd.AddCommand(lightsail_getInstancesCmd)
 }

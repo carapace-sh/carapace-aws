@@ -12,9 +12,11 @@ var amp_describeLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_describeLoggingConfigurationCmd).Standalone()
+	carapace.Gen(amp_describeLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_describeLoggingConfigurationCmd).Standalone()
 
-	amp_describeLoggingConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace to describe the logging configuration for.")
-	amp_describeLoggingConfigurationCmd.MarkFlagRequired("workspace-id")
+		amp_describeLoggingConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace to describe the logging configuration for.")
+		amp_describeLoggingConfigurationCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_describeLoggingConfigurationCmd)
 }

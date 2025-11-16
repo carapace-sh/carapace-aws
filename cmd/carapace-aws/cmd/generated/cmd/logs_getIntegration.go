@@ -12,9 +12,11 @@ var logs_getIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_getIntegrationCmd).Standalone()
+	carapace.Gen(logs_getIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_getIntegrationCmd).Standalone()
 
-	logs_getIntegrationCmd.Flags().String("integration-name", "", "The name of the integration that you want to find information about.")
-	logs_getIntegrationCmd.MarkFlagRequired("integration-name")
+		logs_getIntegrationCmd.Flags().String("integration-name", "", "The name of the integration that you want to find information about.")
+		logs_getIntegrationCmd.MarkFlagRequired("integration-name")
+	})
 	logsCmd.AddCommand(logs_getIntegrationCmd)
 }

@@ -12,9 +12,11 @@ var logs_deleteDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteDestinationCmd).Standalone()
+	carapace.Gen(logs_deleteDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteDestinationCmd).Standalone()
 
-	logs_deleteDestinationCmd.Flags().String("destination-name", "", "The name of the destination.")
-	logs_deleteDestinationCmd.MarkFlagRequired("destination-name")
+		logs_deleteDestinationCmd.Flags().String("destination-name", "", "The name of the destination.")
+		logs_deleteDestinationCmd.MarkFlagRequired("destination-name")
+	})
 	logsCmd.AddCommand(logs_deleteDestinationCmd)
 }

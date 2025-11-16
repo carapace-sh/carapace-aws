@@ -12,7 +12,9 @@ var apigatewaymanagementapiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewaymanagementapiCmd).Standalone()
+	carapace.Gen(apigatewaymanagementapiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewaymanagementapiCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(apigatewaymanagementapiCmd)
 }

@@ -12,10 +12,12 @@ var ses_listIdentitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_listIdentitiesCmd).Standalone()
+	carapace.Gen(ses_listIdentitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_listIdentitiesCmd).Standalone()
 
-	ses_listIdentitiesCmd.Flags().String("identity-type", "", "The type of the identities to list.")
-	ses_listIdentitiesCmd.Flags().String("max-items", "", "The maximum number of identities per page.")
-	ses_listIdentitiesCmd.Flags().String("next-token", "", "The token to use for pagination.")
+		ses_listIdentitiesCmd.Flags().String("identity-type", "", "The type of the identities to list.")
+		ses_listIdentitiesCmd.Flags().String("max-items", "", "The maximum number of identities per page.")
+		ses_listIdentitiesCmd.Flags().String("next-token", "", "The token to use for pagination.")
+	})
 	sesCmd.AddCommand(ses_listIdentitiesCmd)
 }

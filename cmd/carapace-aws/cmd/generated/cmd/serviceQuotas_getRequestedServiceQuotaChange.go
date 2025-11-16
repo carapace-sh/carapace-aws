@@ -12,9 +12,11 @@ var serviceQuotas_getRequestedServiceQuotaChangeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_getRequestedServiceQuotaChangeCmd).Standalone()
+	carapace.Gen(serviceQuotas_getRequestedServiceQuotaChangeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_getRequestedServiceQuotaChangeCmd).Standalone()
 
-	serviceQuotas_getRequestedServiceQuotaChangeCmd.Flags().String("request-id", "", "Specifies the ID of the quota increase request.")
-	serviceQuotas_getRequestedServiceQuotaChangeCmd.MarkFlagRequired("request-id")
+		serviceQuotas_getRequestedServiceQuotaChangeCmd.Flags().String("request-id", "", "Specifies the ID of the quota increase request.")
+		serviceQuotas_getRequestedServiceQuotaChangeCmd.MarkFlagRequired("request-id")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_getRequestedServiceQuotaChangeCmd)
 }

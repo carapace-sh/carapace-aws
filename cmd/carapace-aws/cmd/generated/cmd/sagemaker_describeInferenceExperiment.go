@@ -12,9 +12,11 @@ var sagemaker_describeInferenceExperimentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeInferenceExperimentCmd).Standalone()
+	carapace.Gen(sagemaker_describeInferenceExperimentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeInferenceExperimentCmd).Standalone()
 
-	sagemaker_describeInferenceExperimentCmd.Flags().String("name", "", "The name of the inference experiment to describe.")
-	sagemaker_describeInferenceExperimentCmd.MarkFlagRequired("name")
+		sagemaker_describeInferenceExperimentCmd.Flags().String("name", "", "The name of the inference experiment to describe.")
+		sagemaker_describeInferenceExperimentCmd.MarkFlagRequired("name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeInferenceExperimentCmd)
 }

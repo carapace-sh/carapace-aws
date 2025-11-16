@@ -12,11 +12,13 @@ var elasticache_describeEngineDefaultParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_describeEngineDefaultParametersCmd).Standalone()
+	carapace.Gen(elasticache_describeEngineDefaultParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_describeEngineDefaultParametersCmd).Standalone()
 
-	elasticache_describeEngineDefaultParametersCmd.Flags().String("cache-parameter-group-family", "", "The name of the cache parameter group family.")
-	elasticache_describeEngineDefaultParametersCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
-	elasticache_describeEngineDefaultParametersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	elasticache_describeEngineDefaultParametersCmd.MarkFlagRequired("cache-parameter-group-family")
+		elasticache_describeEngineDefaultParametersCmd.Flags().String("cache-parameter-group-family", "", "The name of the cache parameter group family.")
+		elasticache_describeEngineDefaultParametersCmd.Flags().String("marker", "", "An optional marker returned from a prior request.")
+		elasticache_describeEngineDefaultParametersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		elasticache_describeEngineDefaultParametersCmd.MarkFlagRequired("cache-parameter-group-family")
+	})
 	elasticacheCmd.AddCommand(elasticache_describeEngineDefaultParametersCmd)
 }

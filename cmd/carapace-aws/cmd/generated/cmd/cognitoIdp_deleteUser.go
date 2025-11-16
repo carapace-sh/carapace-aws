@@ -12,9 +12,11 @@ var cognitoIdp_deleteUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_deleteUserCmd).Standalone()
+	carapace.Gen(cognitoIdp_deleteUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_deleteUserCmd).Standalone()
 
-	cognitoIdp_deleteUserCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_deleteUserCmd.MarkFlagRequired("access-token")
+		cognitoIdp_deleteUserCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_deleteUserCmd.MarkFlagRequired("access-token")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_deleteUserCmd)
 }

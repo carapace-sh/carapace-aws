@@ -12,11 +12,13 @@ var stepfunctions_listStateMachineAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_listStateMachineAliasesCmd).Standalone()
+	carapace.Gen(stepfunctions_listStateMachineAliasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_listStateMachineAliasesCmd).Standalone()
 
-	stepfunctions_listStateMachineAliasesCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	stepfunctions_listStateMachineAliasesCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
-	stepfunctions_listStateMachineAliasesCmd.Flags().String("state-machine-arn", "", "The Amazon Resource Name (ARN) of the state machine for which you want to list aliases.")
-	stepfunctions_listStateMachineAliasesCmd.MarkFlagRequired("state-machine-arn")
+		stepfunctions_listStateMachineAliasesCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		stepfunctions_listStateMachineAliasesCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		stepfunctions_listStateMachineAliasesCmd.Flags().String("state-machine-arn", "", "The Amazon Resource Name (ARN) of the state machine for which you want to list aliases.")
+		stepfunctions_listStateMachineAliasesCmd.MarkFlagRequired("state-machine-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_listStateMachineAliasesCmd)
 }

@@ -12,10 +12,12 @@ var quicksight_deleteDefaultQbusinessApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteDefaultQbusinessApplicationCmd).Standalone()
+	carapace.Gen(quicksight_deleteDefaultQbusinessApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteDefaultQbusinessApplicationCmd).Standalone()
 
-	quicksight_deleteDefaultQbusinessApplicationCmd.Flags().String("aws-account-id", "", "The ID of the Quick Sight account that you want to disconnect from a Amazon Q Business application.")
-	quicksight_deleteDefaultQbusinessApplicationCmd.Flags().String("namespace", "", "The Quick Sight namespace that you want to delete a linked Amazon Q Business application from.")
-	quicksight_deleteDefaultQbusinessApplicationCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteDefaultQbusinessApplicationCmd.Flags().String("aws-account-id", "", "The ID of the Quick Sight account that you want to disconnect from a Amazon Q Business application.")
+		quicksight_deleteDefaultQbusinessApplicationCmd.Flags().String("namespace", "", "The Quick Sight namespace that you want to delete a linked Amazon Q Business application from.")
+		quicksight_deleteDefaultQbusinessApplicationCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteDefaultQbusinessApplicationCmd)
 }

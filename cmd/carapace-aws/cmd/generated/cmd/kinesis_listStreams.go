@@ -12,10 +12,12 @@ var kinesis_listStreamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_listStreamsCmd).Standalone()
+	carapace.Gen(kinesis_listStreamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_listStreamsCmd).Standalone()
 
-	kinesis_listStreamsCmd.Flags().String("exclusive-start-stream-name", "", "The name of the stream to start the list with.")
-	kinesis_listStreamsCmd.Flags().String("limit", "", "The maximum number of streams to list.")
-	kinesis_listStreamsCmd.Flags().String("next-token", "", "")
+		kinesis_listStreamsCmd.Flags().String("exclusive-start-stream-name", "", "The name of the stream to start the list with.")
+		kinesis_listStreamsCmd.Flags().String("limit", "", "The maximum number of streams to list.")
+		kinesis_listStreamsCmd.Flags().String("next-token", "", "")
+	})
 	kinesisCmd.AddCommand(kinesis_listStreamsCmd)
 }

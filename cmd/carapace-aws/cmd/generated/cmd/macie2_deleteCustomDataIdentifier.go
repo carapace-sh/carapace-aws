@@ -12,9 +12,11 @@ var macie2_deleteCustomDataIdentifierCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_deleteCustomDataIdentifierCmd).Standalone()
+	carapace.Gen(macie2_deleteCustomDataIdentifierCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_deleteCustomDataIdentifierCmd).Standalone()
 
-	macie2_deleteCustomDataIdentifierCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
-	macie2_deleteCustomDataIdentifierCmd.MarkFlagRequired("id")
+		macie2_deleteCustomDataIdentifierCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
+		macie2_deleteCustomDataIdentifierCmd.MarkFlagRequired("id")
+	})
 	macie2Cmd.AddCommand(macie2_deleteCustomDataIdentifierCmd)
 }

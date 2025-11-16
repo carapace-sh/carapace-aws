@@ -12,9 +12,11 @@ var fms_associateAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_associateAdminAccountCmd).Standalone()
+	carapace.Gen(fms_associateAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_associateAdminAccountCmd).Standalone()
 
-	fms_associateAdminAccountCmd.Flags().String("admin-account", "", "The Amazon Web Services account ID to associate with Firewall Manager as the Firewall Manager default administrator account.")
-	fms_associateAdminAccountCmd.MarkFlagRequired("admin-account")
+		fms_associateAdminAccountCmd.Flags().String("admin-account", "", "The Amazon Web Services account ID to associate with Firewall Manager as the Firewall Manager default administrator account.")
+		fms_associateAdminAccountCmd.MarkFlagRequired("admin-account")
+	})
 	fmsCmd.AddCommand(fms_associateAdminAccountCmd)
 }

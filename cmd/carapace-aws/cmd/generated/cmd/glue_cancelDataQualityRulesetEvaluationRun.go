@@ -12,9 +12,11 @@ var glue_cancelDataQualityRulesetEvaluationRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_cancelDataQualityRulesetEvaluationRunCmd).Standalone()
+	carapace.Gen(glue_cancelDataQualityRulesetEvaluationRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_cancelDataQualityRulesetEvaluationRunCmd).Standalone()
 
-	glue_cancelDataQualityRulesetEvaluationRunCmd.Flags().String("run-id", "", "The unique run identifier associated with this run.")
-	glue_cancelDataQualityRulesetEvaluationRunCmd.MarkFlagRequired("run-id")
+		glue_cancelDataQualityRulesetEvaluationRunCmd.Flags().String("run-id", "", "The unique run identifier associated with this run.")
+		glue_cancelDataQualityRulesetEvaluationRunCmd.MarkFlagRequired("run-id")
+	})
 	glueCmd.AddCommand(glue_cancelDataQualityRulesetEvaluationRunCmd)
 }

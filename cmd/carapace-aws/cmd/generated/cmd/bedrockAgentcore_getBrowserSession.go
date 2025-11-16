@@ -12,11 +12,13 @@ var bedrockAgentcore_getBrowserSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_getBrowserSessionCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_getBrowserSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_getBrowserSessionCmd).Standalone()
 
-	bedrockAgentcore_getBrowserSessionCmd.Flags().String("browser-identifier", "", "The unique identifier of the browser associated with the session.")
-	bedrockAgentcore_getBrowserSessionCmd.Flags().String("session-id", "", "The unique identifier of the browser session to retrieve.")
-	bedrockAgentcore_getBrowserSessionCmd.MarkFlagRequired("browser-identifier")
-	bedrockAgentcore_getBrowserSessionCmd.MarkFlagRequired("session-id")
+		bedrockAgentcore_getBrowserSessionCmd.Flags().String("browser-identifier", "", "The unique identifier of the browser associated with the session.")
+		bedrockAgentcore_getBrowserSessionCmd.Flags().String("session-id", "", "The unique identifier of the browser session to retrieve.")
+		bedrockAgentcore_getBrowserSessionCmd.MarkFlagRequired("browser-identifier")
+		bedrockAgentcore_getBrowserSessionCmd.MarkFlagRequired("session-id")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_getBrowserSessionCmd)
 }

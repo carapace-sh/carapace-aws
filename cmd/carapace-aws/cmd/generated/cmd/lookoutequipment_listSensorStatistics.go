@@ -12,12 +12,14 @@ var lookoutequipment_listSensorStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_listSensorStatisticsCmd).Standalone()
+	carapace.Gen(lookoutequipment_listSensorStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_listSensorStatisticsCmd).Standalone()
 
-	lookoutequipment_listSensorStatisticsCmd.Flags().String("dataset-name", "", "The name of the dataset associated with the list of Sensor Statistics.")
-	lookoutequipment_listSensorStatisticsCmd.Flags().String("ingestion-job-id", "", "The ingestion job id associated with the list of Sensor Statistics.")
-	lookoutequipment_listSensorStatisticsCmd.Flags().String("max-results", "", "Specifies the maximum number of sensors for which to retrieve statistics.")
-	lookoutequipment_listSensorStatisticsCmd.Flags().String("next-token", "", "An opaque pagination token indicating where to continue the listing of sensor statistics.")
-	lookoutequipment_listSensorStatisticsCmd.MarkFlagRequired("dataset-name")
+		lookoutequipment_listSensorStatisticsCmd.Flags().String("dataset-name", "", "The name of the dataset associated with the list of Sensor Statistics.")
+		lookoutequipment_listSensorStatisticsCmd.Flags().String("ingestion-job-id", "", "The ingestion job id associated with the list of Sensor Statistics.")
+		lookoutequipment_listSensorStatisticsCmd.Flags().String("max-results", "", "Specifies the maximum number of sensors for which to retrieve statistics.")
+		lookoutequipment_listSensorStatisticsCmd.Flags().String("next-token", "", "An opaque pagination token indicating where to continue the listing of sensor statistics.")
+		lookoutequipment_listSensorStatisticsCmd.MarkFlagRequired("dataset-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_listSensorStatisticsCmd)
 }

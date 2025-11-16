@@ -12,13 +12,15 @@ var datazone_createUserProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_createUserProfileCmd).Standalone()
+	carapace.Gen(datazone_createUserProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_createUserProfileCmd).Standalone()
 
-	datazone_createUserProfileCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.")
-	datazone_createUserProfileCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain in which a user profile is created.")
-	datazone_createUserProfileCmd.Flags().String("user-identifier", "", "The identifier of the user for which the user profile is created.")
-	datazone_createUserProfileCmd.Flags().String("user-type", "", "The user type of the user for which the user profile is created.")
-	datazone_createUserProfileCmd.MarkFlagRequired("domain-identifier")
-	datazone_createUserProfileCmd.MarkFlagRequired("user-identifier")
+		datazone_createUserProfileCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.")
+		datazone_createUserProfileCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain in which a user profile is created.")
+		datazone_createUserProfileCmd.Flags().String("user-identifier", "", "The identifier of the user for which the user profile is created.")
+		datazone_createUserProfileCmd.Flags().String("user-type", "", "The user type of the user for which the user profile is created.")
+		datazone_createUserProfileCmd.MarkFlagRequired("domain-identifier")
+		datazone_createUserProfileCmd.MarkFlagRequired("user-identifier")
+	})
 	datazoneCmd.AddCommand(datazone_createUserProfileCmd)
 }

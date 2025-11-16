@@ -12,9 +12,11 @@ var codebuild_deleteFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_deleteFleetCmd).Standalone()
+	carapace.Gen(codebuild_deleteFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_deleteFleetCmd).Standalone()
 
-	codebuild_deleteFleetCmd.Flags().String("arn", "", "The ARN of the compute fleet.")
-	codebuild_deleteFleetCmd.MarkFlagRequired("arn")
+		codebuild_deleteFleetCmd.Flags().String("arn", "", "The ARN of the compute fleet.")
+		codebuild_deleteFleetCmd.MarkFlagRequired("arn")
+	})
 	codebuildCmd.AddCommand(codebuild_deleteFleetCmd)
 }

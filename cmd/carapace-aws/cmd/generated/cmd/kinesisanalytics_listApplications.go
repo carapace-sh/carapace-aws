@@ -12,9 +12,11 @@ var kinesisanalytics_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_listApplicationsCmd).Standalone()
+	carapace.Gen(kinesisanalytics_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_listApplicationsCmd).Standalone()
 
-	kinesisanalytics_listApplicationsCmd.Flags().String("exclusive-start-application-name", "", "Name of the application to start the list with.")
-	kinesisanalytics_listApplicationsCmd.Flags().String("limit", "", "Maximum number of applications to list.")
+		kinesisanalytics_listApplicationsCmd.Flags().String("exclusive-start-application-name", "", "Name of the application to start the list with.")
+		kinesisanalytics_listApplicationsCmd.Flags().String("limit", "", "Maximum number of applications to list.")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_listApplicationsCmd)
 }

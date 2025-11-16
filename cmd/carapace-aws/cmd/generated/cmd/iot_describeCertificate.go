@@ -12,9 +12,11 @@ var iot_describeCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeCertificateCmd).Standalone()
+	carapace.Gen(iot_describeCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeCertificateCmd).Standalone()
 
-	iot_describeCertificateCmd.Flags().String("certificate-id", "", "The ID of the certificate.")
-	iot_describeCertificateCmd.MarkFlagRequired("certificate-id")
+		iot_describeCertificateCmd.Flags().String("certificate-id", "", "The ID of the certificate.")
+		iot_describeCertificateCmd.MarkFlagRequired("certificate-id")
+	})
 	iotCmd.AddCommand(iot_describeCertificateCmd)
 }

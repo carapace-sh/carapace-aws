@@ -12,11 +12,13 @@ var cloudformation_publishTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_publishTypeCmd).Standalone()
+	carapace.Gen(cloudformation_publishTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_publishTypeCmd).Standalone()
 
-	cloudformation_publishTypeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the extension.")
-	cloudformation_publishTypeCmd.Flags().String("public-version-number", "", "The version number to assign to this version of the extension.")
-	cloudformation_publishTypeCmd.Flags().String("type", "", "The type of the extension.")
-	cloudformation_publishTypeCmd.Flags().String("type-name", "", "The name of the extension.")
+		cloudformation_publishTypeCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the extension.")
+		cloudformation_publishTypeCmd.Flags().String("public-version-number", "", "The version number to assign to this version of the extension.")
+		cloudformation_publishTypeCmd.Flags().String("type", "", "The type of the extension.")
+		cloudformation_publishTypeCmd.Flags().String("type-name", "", "The name of the extension.")
+	})
 	cloudformationCmd.AddCommand(cloudformation_publishTypeCmd)
 }

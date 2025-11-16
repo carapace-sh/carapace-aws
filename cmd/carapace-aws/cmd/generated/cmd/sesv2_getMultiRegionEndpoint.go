@@ -12,9 +12,11 @@ var sesv2_getMultiRegionEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getMultiRegionEndpointCmd).Standalone()
+	carapace.Gen(sesv2_getMultiRegionEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getMultiRegionEndpointCmd).Standalone()
 
-	sesv2_getMultiRegionEndpointCmd.Flags().String("endpoint-name", "", "The name of the multi-region endpoint (global-endpoint).")
-	sesv2_getMultiRegionEndpointCmd.MarkFlagRequired("endpoint-name")
+		sesv2_getMultiRegionEndpointCmd.Flags().String("endpoint-name", "", "The name of the multi-region endpoint (global-endpoint).")
+		sesv2_getMultiRegionEndpointCmd.MarkFlagRequired("endpoint-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_getMultiRegionEndpointCmd)
 }

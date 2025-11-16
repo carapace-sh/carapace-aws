@@ -12,9 +12,11 @@ var lightsail_getRelationalDatabaseSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getRelationalDatabaseSnapshotCmd).Standalone()
+	carapace.Gen(lightsail_getRelationalDatabaseSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getRelationalDatabaseSnapshotCmd).Standalone()
 
-	lightsail_getRelationalDatabaseSnapshotCmd.Flags().String("relational-database-snapshot-name", "", "The name of the database snapshot for which to get information.")
-	lightsail_getRelationalDatabaseSnapshotCmd.MarkFlagRequired("relational-database-snapshot-name")
+		lightsail_getRelationalDatabaseSnapshotCmd.Flags().String("relational-database-snapshot-name", "", "The name of the database snapshot for which to get information.")
+		lightsail_getRelationalDatabaseSnapshotCmd.MarkFlagRequired("relational-database-snapshot-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getRelationalDatabaseSnapshotCmd)
 }

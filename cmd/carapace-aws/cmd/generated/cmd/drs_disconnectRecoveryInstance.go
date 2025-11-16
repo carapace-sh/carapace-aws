@@ -12,9 +12,11 @@ var drs_disconnectRecoveryInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_disconnectRecoveryInstanceCmd).Standalone()
+	carapace.Gen(drs_disconnectRecoveryInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_disconnectRecoveryInstanceCmd).Standalone()
 
-	drs_disconnectRecoveryInstanceCmd.Flags().String("recovery-instance-id", "", "The ID of the Recovery Instance to disconnect.")
-	drs_disconnectRecoveryInstanceCmd.MarkFlagRequired("recovery-instance-id")
+		drs_disconnectRecoveryInstanceCmd.Flags().String("recovery-instance-id", "", "The ID of the Recovery Instance to disconnect.")
+		drs_disconnectRecoveryInstanceCmd.MarkFlagRequired("recovery-instance-id")
+	})
 	drsCmd.AddCommand(drs_disconnectRecoveryInstanceCmd)
 }

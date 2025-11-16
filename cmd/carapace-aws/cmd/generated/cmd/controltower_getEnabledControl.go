@@ -12,9 +12,11 @@ var controltower_getEnabledControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_getEnabledControlCmd).Standalone()
+	carapace.Gen(controltower_getEnabledControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_getEnabledControlCmd).Standalone()
 
-	controltower_getEnabledControlCmd.Flags().String("enabled-control-identifier", "", "The `controlIdentifier` of the enabled control.")
-	controltower_getEnabledControlCmd.MarkFlagRequired("enabled-control-identifier")
+		controltower_getEnabledControlCmd.Flags().String("enabled-control-identifier", "", "The `controlIdentifier` of the enabled control.")
+		controltower_getEnabledControlCmd.MarkFlagRequired("enabled-control-identifier")
+	})
 	controltowerCmd.AddCommand(controltower_getEnabledControlCmd)
 }

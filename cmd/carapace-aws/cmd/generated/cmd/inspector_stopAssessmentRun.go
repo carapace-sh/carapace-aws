@@ -12,10 +12,12 @@ var inspector_stopAssessmentRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_stopAssessmentRunCmd).Standalone()
+	carapace.Gen(inspector_stopAssessmentRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_stopAssessmentRunCmd).Standalone()
 
-	inspector_stopAssessmentRunCmd.Flags().String("assessment-run-arn", "", "The ARN of the assessment run that you want to stop.")
-	inspector_stopAssessmentRunCmd.Flags().String("stop-action", "", "An input option that can be set to either START\\_EVALUATION or SKIP\\_EVALUATION.")
-	inspector_stopAssessmentRunCmd.MarkFlagRequired("assessment-run-arn")
+		inspector_stopAssessmentRunCmd.Flags().String("assessment-run-arn", "", "The ARN of the assessment run that you want to stop.")
+		inspector_stopAssessmentRunCmd.Flags().String("stop-action", "", "An input option that can be set to either START\\_EVALUATION or SKIP\\_EVALUATION.")
+		inspector_stopAssessmentRunCmd.MarkFlagRequired("assessment-run-arn")
+	})
 	inspectorCmd.AddCommand(inspector_stopAssessmentRunCmd)
 }

@@ -12,10 +12,12 @@ var dms_describeConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeConnectionsCmd).Standalone()
+	carapace.Gen(dms_describeConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeConnectionsCmd).Standalone()
 
-	dms_describeConnectionsCmd.Flags().String("filters", "", "The filters applied to the connection.")
-	dms_describeConnectionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	dms_describeConnectionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		dms_describeConnectionsCmd.Flags().String("filters", "", "The filters applied to the connection.")
+		dms_describeConnectionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		dms_describeConnectionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	dmsCmd.AddCommand(dms_describeConnectionsCmd)
 }

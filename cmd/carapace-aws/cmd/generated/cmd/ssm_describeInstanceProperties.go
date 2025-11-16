@@ -12,11 +12,13 @@ var ssm_describeInstancePropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeInstancePropertiesCmd).Standalone()
+	carapace.Gen(ssm_describeInstancePropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeInstancePropertiesCmd).Standalone()
 
-	ssm_describeInstancePropertiesCmd.Flags().String("filters-with-operator", "", "The request filters to use with the operator.")
-	ssm_describeInstancePropertiesCmd.Flags().String("instance-property-filter-list", "", "An array of instance property filters.")
-	ssm_describeInstancePropertiesCmd.Flags().String("max-results", "", "The maximum number of items to return for the call.")
-	ssm_describeInstancePropertiesCmd.Flags().String("next-token", "", "The token provided by a previous request to use to return the next set of properties.")
+		ssm_describeInstancePropertiesCmd.Flags().String("filters-with-operator", "", "The request filters to use with the operator.")
+		ssm_describeInstancePropertiesCmd.Flags().String("instance-property-filter-list", "", "An array of instance property filters.")
+		ssm_describeInstancePropertiesCmd.Flags().String("max-results", "", "The maximum number of items to return for the call.")
+		ssm_describeInstancePropertiesCmd.Flags().String("next-token", "", "The token provided by a previous request to use to return the next set of properties.")
+	})
 	ssmCmd.AddCommand(ssm_describeInstancePropertiesCmd)
 }

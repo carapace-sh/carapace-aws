@@ -12,11 +12,13 @@ var qbusiness_listChatResponseConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_listChatResponseConfigurationsCmd).Standalone()
+	carapace.Gen(qbusiness_listChatResponseConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_listChatResponseConfigurationsCmd).Standalone()
 
-	qbusiness_listChatResponseConfigurationsCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application for which to list available chat response configurations.")
-	qbusiness_listChatResponseConfigurationsCmd.Flags().String("max-results", "", "The maximum number of chat response configurations to return in a single response.")
-	qbusiness_listChatResponseConfigurationsCmd.Flags().String("next-token", "", "A pagination token used to retrieve the next set of results when the number of configurations exceeds the specified `maxResults` value.")
-	qbusiness_listChatResponseConfigurationsCmd.MarkFlagRequired("application-id")
+		qbusiness_listChatResponseConfigurationsCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application for which to list available chat response configurations.")
+		qbusiness_listChatResponseConfigurationsCmd.Flags().String("max-results", "", "The maximum number of chat response configurations to return in a single response.")
+		qbusiness_listChatResponseConfigurationsCmd.Flags().String("next-token", "", "A pagination token used to retrieve the next set of results when the number of configurations exceeds the specified `maxResults` value.")
+		qbusiness_listChatResponseConfigurationsCmd.MarkFlagRequired("application-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_listChatResponseConfigurationsCmd)
 }

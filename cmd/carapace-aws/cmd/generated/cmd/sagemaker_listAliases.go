@@ -12,13 +12,15 @@ var sagemaker_listAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_listAliasesCmd).Standalone()
+	carapace.Gen(sagemaker_listAliasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_listAliasesCmd).Standalone()
 
-	sagemaker_listAliasesCmd.Flags().String("alias", "", "The alias of the image version.")
-	sagemaker_listAliasesCmd.Flags().String("image-name", "", "The name of the image.")
-	sagemaker_listAliasesCmd.Flags().String("max-results", "", "The maximum number of aliases to return.")
-	sagemaker_listAliasesCmd.Flags().String("next-token", "", "If the previous call to `ListAliases` didn't return the full set of aliases, the call returns a token for retrieving the next set of aliases.")
-	sagemaker_listAliasesCmd.Flags().String("version", "", "The version of the image.")
-	sagemaker_listAliasesCmd.MarkFlagRequired("image-name")
+		sagemaker_listAliasesCmd.Flags().String("alias", "", "The alias of the image version.")
+		sagemaker_listAliasesCmd.Flags().String("image-name", "", "The name of the image.")
+		sagemaker_listAliasesCmd.Flags().String("max-results", "", "The maximum number of aliases to return.")
+		sagemaker_listAliasesCmd.Flags().String("next-token", "", "If the previous call to `ListAliases` didn't return the full set of aliases, the call returns a token for retrieving the next set of aliases.")
+		sagemaker_listAliasesCmd.Flags().String("version", "", "The version of the image.")
+		sagemaker_listAliasesCmd.MarkFlagRequired("image-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_listAliasesCmd)
 }

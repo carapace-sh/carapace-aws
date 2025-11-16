@@ -12,9 +12,11 @@ var imagebuilder_getContainerRecipePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getContainerRecipePolicyCmd).Standalone()
+	carapace.Gen(imagebuilder_getContainerRecipePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getContainerRecipePolicyCmd).Standalone()
 
-	imagebuilder_getContainerRecipePolicyCmd.Flags().String("container-recipe-arn", "", "The Amazon Resource Name (ARN) of the container recipe for the policy being requested.")
-	imagebuilder_getContainerRecipePolicyCmd.MarkFlagRequired("container-recipe-arn")
+		imagebuilder_getContainerRecipePolicyCmd.Flags().String("container-recipe-arn", "", "The Amazon Resource Name (ARN) of the container recipe for the policy being requested.")
+		imagebuilder_getContainerRecipePolicyCmd.MarkFlagRequired("container-recipe-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getContainerRecipePolicyCmd)
 }

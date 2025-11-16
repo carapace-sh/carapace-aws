@@ -12,9 +12,11 @@ var oam_deleteLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_deleteLinkCmd).Standalone()
+	carapace.Gen(oam_deleteLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_deleteLinkCmd).Standalone()
 
-	oam_deleteLinkCmd.Flags().String("identifier", "", "The ARN of the link to delete.")
-	oam_deleteLinkCmd.MarkFlagRequired("identifier")
+		oam_deleteLinkCmd.Flags().String("identifier", "", "The ARN of the link to delete.")
+		oam_deleteLinkCmd.MarkFlagRequired("identifier")
+	})
 	oamCmd.AddCommand(oam_deleteLinkCmd)
 }

@@ -12,11 +12,13 @@ var kms_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_tagResourceCmd).Standalone()
+	carapace.Gen(kms_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_tagResourceCmd).Standalone()
 
-	kms_tagResourceCmd.Flags().String("key-id", "", "Identifies a customer managed key in the account and Region.")
-	kms_tagResourceCmd.Flags().String("tags", "", "One or more tags.")
-	kms_tagResourceCmd.MarkFlagRequired("key-id")
-	kms_tagResourceCmd.MarkFlagRequired("tags")
+		kms_tagResourceCmd.Flags().String("key-id", "", "Identifies a customer managed key in the account and Region.")
+		kms_tagResourceCmd.Flags().String("tags", "", "One or more tags.")
+		kms_tagResourceCmd.MarkFlagRequired("key-id")
+		kms_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	kmsCmd.AddCommand(kms_tagResourceCmd)
 }

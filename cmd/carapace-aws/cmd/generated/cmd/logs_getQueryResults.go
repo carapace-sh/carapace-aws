@@ -12,9 +12,11 @@ var logs_getQueryResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_getQueryResultsCmd).Standalone()
+	carapace.Gen(logs_getQueryResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_getQueryResultsCmd).Standalone()
 
-	logs_getQueryResultsCmd.Flags().String("query-id", "", "The ID number of the query.")
-	logs_getQueryResultsCmd.MarkFlagRequired("query-id")
+		logs_getQueryResultsCmd.Flags().String("query-id", "", "The ID number of the query.")
+		logs_getQueryResultsCmd.MarkFlagRequired("query-id")
+	})
 	logsCmd.AddCommand(logs_getQueryResultsCmd)
 }

@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_listWorkloadIdentitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_listWorkloadIdentitiesCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_listWorkloadIdentitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_listWorkloadIdentitiesCmd).Standalone()
 
-	bedrockAgentcoreControl_listWorkloadIdentitiesCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	bedrockAgentcoreControl_listWorkloadIdentitiesCmd.Flags().String("next-token", "", "Pagination token.")
+		bedrockAgentcoreControl_listWorkloadIdentitiesCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		bedrockAgentcoreControl_listWorkloadIdentitiesCmd.Flags().String("next-token", "", "Pagination token.")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_listWorkloadIdentitiesCmd)
 }

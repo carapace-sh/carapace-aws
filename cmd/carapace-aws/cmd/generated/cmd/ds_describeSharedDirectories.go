@@ -12,12 +12,14 @@ var ds_describeSharedDirectoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_describeSharedDirectoriesCmd).Standalone()
+	carapace.Gen(ds_describeSharedDirectoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_describeSharedDirectoriesCmd).Standalone()
 
-	ds_describeSharedDirectoriesCmd.Flags().String("limit", "", "The number of shared directories to return in the response object.")
-	ds_describeSharedDirectoriesCmd.Flags().String("next-token", "", "The `DescribeSharedDirectoriesResult.NextToken` value from a previous call to [DescribeSharedDirectories]().")
-	ds_describeSharedDirectoriesCmd.Flags().String("owner-directory-id", "", "Returns the identifier of the directory in the directory owner account.")
-	ds_describeSharedDirectoriesCmd.Flags().String("shared-directory-ids", "", "A list of identifiers of all shared directories in your account.")
-	ds_describeSharedDirectoriesCmd.MarkFlagRequired("owner-directory-id")
+		ds_describeSharedDirectoriesCmd.Flags().String("limit", "", "The number of shared directories to return in the response object.")
+		ds_describeSharedDirectoriesCmd.Flags().String("next-token", "", "The `DescribeSharedDirectoriesResult.NextToken` value from a previous call to [DescribeSharedDirectories]().")
+		ds_describeSharedDirectoriesCmd.Flags().String("owner-directory-id", "", "Returns the identifier of the directory in the directory owner account.")
+		ds_describeSharedDirectoriesCmd.Flags().String("shared-directory-ids", "", "A list of identifiers of all shared directories in your account.")
+		ds_describeSharedDirectoriesCmd.MarkFlagRequired("owner-directory-id")
+	})
 	dsCmd.AddCommand(ds_describeSharedDirectoriesCmd)
 }

@@ -12,10 +12,12 @@ var machinelearning_getDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_getDataSourceCmd).Standalone()
+	carapace.Gen(machinelearning_getDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_getDataSourceCmd).Standalone()
 
-	machinelearning_getDataSourceCmd.Flags().String("data-source-id", "", "The ID assigned to the `DataSource` at creation.")
-	machinelearning_getDataSourceCmd.Flags().String("verbose", "", "Specifies whether the `GetDataSource` operation should return `DataSourceSchema`.")
-	machinelearning_getDataSourceCmd.MarkFlagRequired("data-source-id")
+		machinelearning_getDataSourceCmd.Flags().String("data-source-id", "", "The ID assigned to the `DataSource` at creation.")
+		machinelearning_getDataSourceCmd.Flags().String("verbose", "", "Specifies whether the `GetDataSource` operation should return `DataSourceSchema`.")
+		machinelearning_getDataSourceCmd.MarkFlagRequired("data-source-id")
+	})
 	machinelearningCmd.AddCommand(machinelearning_getDataSourceCmd)
 }

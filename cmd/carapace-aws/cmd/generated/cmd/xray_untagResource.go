@@ -12,11 +12,13 @@ var xray_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_untagResourceCmd).Standalone()
+	carapace.Gen(xray_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_untagResourceCmd).Standalone()
 
-	xray_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.")
-	xray_untagResourceCmd.Flags().String("tag-keys", "", "Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.")
-	xray_untagResourceCmd.MarkFlagRequired("resource-arn")
-	xray_untagResourceCmd.MarkFlagRequired("tag-keys")
+		xray_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.")
+		xray_untagResourceCmd.Flags().String("tag-keys", "", "Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.")
+		xray_untagResourceCmd.MarkFlagRequired("resource-arn")
+		xray_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	xrayCmd.AddCommand(xray_untagResourceCmd)
 }

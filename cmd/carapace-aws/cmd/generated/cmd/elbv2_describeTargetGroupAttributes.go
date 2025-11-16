@@ -12,9 +12,11 @@ var elbv2_describeTargetGroupAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_describeTargetGroupAttributesCmd).Standalone()
+	carapace.Gen(elbv2_describeTargetGroupAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_describeTargetGroupAttributesCmd).Standalone()
 
-	elbv2_describeTargetGroupAttributesCmd.Flags().String("target-group-arn", "", "The Amazon Resource Name (ARN) of the target group.")
-	elbv2_describeTargetGroupAttributesCmd.MarkFlagRequired("target-group-arn")
+		elbv2_describeTargetGroupAttributesCmd.Flags().String("target-group-arn", "", "The Amazon Resource Name (ARN) of the target group.")
+		elbv2_describeTargetGroupAttributesCmd.MarkFlagRequired("target-group-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_describeTargetGroupAttributesCmd)
 }

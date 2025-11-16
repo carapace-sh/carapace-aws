@@ -12,13 +12,15 @@ var resiliencehub_listAppVersionResourceMappingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_listAppVersionResourceMappingsCmd).Standalone()
+	carapace.Gen(resiliencehub_listAppVersionResourceMappingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_listAppVersionResourceMappingsCmd).Standalone()
 
-	resiliencehub_listAppVersionResourceMappingsCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
-	resiliencehub_listAppVersionResourceMappingsCmd.Flags().String("app-version", "", "The version of the application.")
-	resiliencehub_listAppVersionResourceMappingsCmd.Flags().String("max-results", "", "Maximum number of results to include in the response.")
-	resiliencehub_listAppVersionResourceMappingsCmd.Flags().String("next-token", "", "Null, or the token from a previous call to get the next set of results.")
-	resiliencehub_listAppVersionResourceMappingsCmd.MarkFlagRequired("app-arn")
-	resiliencehub_listAppVersionResourceMappingsCmd.MarkFlagRequired("app-version")
+		resiliencehub_listAppVersionResourceMappingsCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
+		resiliencehub_listAppVersionResourceMappingsCmd.Flags().String("app-version", "", "The version of the application.")
+		resiliencehub_listAppVersionResourceMappingsCmd.Flags().String("max-results", "", "Maximum number of results to include in the response.")
+		resiliencehub_listAppVersionResourceMappingsCmd.Flags().String("next-token", "", "Null, or the token from a previous call to get the next set of results.")
+		resiliencehub_listAppVersionResourceMappingsCmd.MarkFlagRequired("app-arn")
+		resiliencehub_listAppVersionResourceMappingsCmd.MarkFlagRequired("app-version")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_listAppVersionResourceMappingsCmd)
 }

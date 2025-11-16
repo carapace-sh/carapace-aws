@@ -12,12 +12,14 @@ var resiliencehub_describeAppVersionResourcesResolutionStatusCmd = &cobra.Comman
 }
 
 func init() {
-	carapace.Gen(resiliencehub_describeAppVersionResourcesResolutionStatusCmd).Standalone()
+	carapace.Gen(resiliencehub_describeAppVersionResourcesResolutionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_describeAppVersionResourcesResolutionStatusCmd).Standalone()
 
-	resiliencehub_describeAppVersionResourcesResolutionStatusCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
-	resiliencehub_describeAppVersionResourcesResolutionStatusCmd.Flags().String("app-version", "", "The version of the application.")
-	resiliencehub_describeAppVersionResourcesResolutionStatusCmd.Flags().String("resolution-id", "", "The identifier for a specific resolution.")
-	resiliencehub_describeAppVersionResourcesResolutionStatusCmd.MarkFlagRequired("app-arn")
-	resiliencehub_describeAppVersionResourcesResolutionStatusCmd.MarkFlagRequired("app-version")
+		resiliencehub_describeAppVersionResourcesResolutionStatusCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
+		resiliencehub_describeAppVersionResourcesResolutionStatusCmd.Flags().String("app-version", "", "The version of the application.")
+		resiliencehub_describeAppVersionResourcesResolutionStatusCmd.Flags().String("resolution-id", "", "The identifier for a specific resolution.")
+		resiliencehub_describeAppVersionResourcesResolutionStatusCmd.MarkFlagRequired("app-arn")
+		resiliencehub_describeAppVersionResourcesResolutionStatusCmd.MarkFlagRequired("app-version")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_describeAppVersionResourcesResolutionStatusCmd)
 }

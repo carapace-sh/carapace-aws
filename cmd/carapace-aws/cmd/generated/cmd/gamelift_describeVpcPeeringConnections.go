@@ -12,8 +12,10 @@ var gamelift_describeVpcPeeringConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeVpcPeeringConnectionsCmd).Standalone()
+	carapace.Gen(gamelift_describeVpcPeeringConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeVpcPeeringConnectionsCmd).Standalone()
 
-	gamelift_describeVpcPeeringConnectionsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet.")
+		gamelift_describeVpcPeeringConnectionsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet.")
+	})
 	gameliftCmd.AddCommand(gamelift_describeVpcPeeringConnectionsCmd)
 }

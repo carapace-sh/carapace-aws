@@ -12,11 +12,13 @@ var customerProfiles_getEventTriggerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getEventTriggerCmd).Standalone()
+	carapace.Gen(customerProfiles_getEventTriggerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getEventTriggerCmd).Standalone()
 
-	customerProfiles_getEventTriggerCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getEventTriggerCmd.Flags().String("event-trigger-name", "", "The unique name of the event trigger.")
-	customerProfiles_getEventTriggerCmd.MarkFlagRequired("domain-name")
-	customerProfiles_getEventTriggerCmd.MarkFlagRequired("event-trigger-name")
+		customerProfiles_getEventTriggerCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getEventTriggerCmd.Flags().String("event-trigger-name", "", "The unique name of the event trigger.")
+		customerProfiles_getEventTriggerCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getEventTriggerCmd.MarkFlagRequired("event-trigger-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getEventTriggerCmd)
 }

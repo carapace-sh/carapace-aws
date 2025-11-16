@@ -12,9 +12,11 @@ var discovery_deleteApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_deleteApplicationsCmd).Standalone()
+	carapace.Gen(discovery_deleteApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_deleteApplicationsCmd).Standalone()
 
-	discovery_deleteApplicationsCmd.Flags().String("configuration-ids", "", "Configuration ID of an application to be deleted.")
-	discovery_deleteApplicationsCmd.MarkFlagRequired("configuration-ids")
+		discovery_deleteApplicationsCmd.Flags().String("configuration-ids", "", "Configuration ID of an application to be deleted.")
+		discovery_deleteApplicationsCmd.MarkFlagRequired("configuration-ids")
+	})
 	discoveryCmd.AddCommand(discovery_deleteApplicationsCmd)
 }

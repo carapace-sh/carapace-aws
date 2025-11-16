@@ -12,7 +12,9 @@ var quicksightCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksightCmd).Standalone()
+	carapace.Gen(quicksightCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksightCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(quicksightCmd)
 }

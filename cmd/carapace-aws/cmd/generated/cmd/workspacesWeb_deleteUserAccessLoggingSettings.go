@@ -12,9 +12,11 @@ var workspacesWeb_deleteUserAccessLoggingSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_deleteUserAccessLoggingSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_deleteUserAccessLoggingSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_deleteUserAccessLoggingSettingsCmd).Standalone()
 
-	workspacesWeb_deleteUserAccessLoggingSettingsCmd.Flags().String("user-access-logging-settings-arn", "", "The ARN of the user access logging settings.")
-	workspacesWeb_deleteUserAccessLoggingSettingsCmd.MarkFlagRequired("user-access-logging-settings-arn")
+		workspacesWeb_deleteUserAccessLoggingSettingsCmd.Flags().String("user-access-logging-settings-arn", "", "The ARN of the user access logging settings.")
+		workspacesWeb_deleteUserAccessLoggingSettingsCmd.MarkFlagRequired("user-access-logging-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_deleteUserAccessLoggingSettingsCmd)
 }

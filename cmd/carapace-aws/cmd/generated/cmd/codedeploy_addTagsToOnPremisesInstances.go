@@ -12,11 +12,13 @@ var codedeploy_addTagsToOnPremisesInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_addTagsToOnPremisesInstancesCmd).Standalone()
+	carapace.Gen(codedeploy_addTagsToOnPremisesInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_addTagsToOnPremisesInstancesCmd).Standalone()
 
-	codedeploy_addTagsToOnPremisesInstancesCmd.Flags().String("instance-names", "", "The names of the on-premises instances to which to add tags.")
-	codedeploy_addTagsToOnPremisesInstancesCmd.Flags().String("tags", "", "The tag key-value pairs to add to the on-premises instances.")
-	codedeploy_addTagsToOnPremisesInstancesCmd.MarkFlagRequired("instance-names")
-	codedeploy_addTagsToOnPremisesInstancesCmd.MarkFlagRequired("tags")
+		codedeploy_addTagsToOnPremisesInstancesCmd.Flags().String("instance-names", "", "The names of the on-premises instances to which to add tags.")
+		codedeploy_addTagsToOnPremisesInstancesCmd.Flags().String("tags", "", "The tag key-value pairs to add to the on-premises instances.")
+		codedeploy_addTagsToOnPremisesInstancesCmd.MarkFlagRequired("instance-names")
+		codedeploy_addTagsToOnPremisesInstancesCmd.MarkFlagRequired("tags")
+	})
 	codedeployCmd.AddCommand(codedeploy_addTagsToOnPremisesInstancesCmd)
 }

@@ -12,9 +12,11 @@ var ivs_stopStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_stopStreamCmd).Standalone()
+	carapace.Gen(ivs_stopStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_stopStreamCmd).Standalone()
 
-	ivs_stopStreamCmd.Flags().String("channel-arn", "", "ARN of the channel for which the stream is to be stopped.")
-	ivs_stopStreamCmd.MarkFlagRequired("channel-arn")
+		ivs_stopStreamCmd.Flags().String("channel-arn", "", "ARN of the channel for which the stream is to be stopped.")
+		ivs_stopStreamCmd.MarkFlagRequired("channel-arn")
+	})
 	ivsCmd.AddCommand(ivs_stopStreamCmd)
 }

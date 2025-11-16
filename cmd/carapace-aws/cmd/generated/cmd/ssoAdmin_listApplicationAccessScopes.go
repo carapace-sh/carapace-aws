@@ -12,11 +12,13 @@ var ssoAdmin_listApplicationAccessScopesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_listApplicationAccessScopesCmd).Standalone()
+	carapace.Gen(ssoAdmin_listApplicationAccessScopesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_listApplicationAccessScopesCmd).Standalone()
 
-	ssoAdmin_listApplicationAccessScopesCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
-	ssoAdmin_listApplicationAccessScopesCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included in each response.")
-	ssoAdmin_listApplicationAccessScopesCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
-	ssoAdmin_listApplicationAccessScopesCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_listApplicationAccessScopesCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
+		ssoAdmin_listApplicationAccessScopesCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included in each response.")
+		ssoAdmin_listApplicationAccessScopesCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		ssoAdmin_listApplicationAccessScopesCmd.MarkFlagRequired("application-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_listApplicationAccessScopesCmd)
 }

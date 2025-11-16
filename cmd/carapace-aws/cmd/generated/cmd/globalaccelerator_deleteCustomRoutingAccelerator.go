@@ -12,9 +12,11 @@ var globalaccelerator_deleteCustomRoutingAcceleratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_deleteCustomRoutingAcceleratorCmd).Standalone()
+	carapace.Gen(globalaccelerator_deleteCustomRoutingAcceleratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_deleteCustomRoutingAcceleratorCmd).Standalone()
 
-	globalaccelerator_deleteCustomRoutingAcceleratorCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the custom routing accelerator to delete.")
-	globalaccelerator_deleteCustomRoutingAcceleratorCmd.MarkFlagRequired("accelerator-arn")
+		globalaccelerator_deleteCustomRoutingAcceleratorCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the custom routing accelerator to delete.")
+		globalaccelerator_deleteCustomRoutingAcceleratorCmd.MarkFlagRequired("accelerator-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_deleteCustomRoutingAcceleratorCmd)
 }

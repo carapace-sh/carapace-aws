@@ -12,11 +12,13 @@ var route53RecoveryControlConfig_createSafetyRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_createSafetyRuleCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_createSafetyRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_createSafetyRuleCmd).Standalone()
 
-	route53RecoveryControlConfig_createSafetyRuleCmd.Flags().String("assertion-rule", "", "The assertion rule requested.")
-	route53RecoveryControlConfig_createSafetyRuleCmd.Flags().String("client-token", "", "A unique, case-sensitive string of up to 64 ASCII characters.")
-	route53RecoveryControlConfig_createSafetyRuleCmd.Flags().String("gating-rule", "", "The gating rule requested.")
-	route53RecoveryControlConfig_createSafetyRuleCmd.Flags().String("tags", "", "The tags associated with the safety rule.")
+		route53RecoveryControlConfig_createSafetyRuleCmd.Flags().String("assertion-rule", "", "The assertion rule requested.")
+		route53RecoveryControlConfig_createSafetyRuleCmd.Flags().String("client-token", "", "A unique, case-sensitive string of up to 64 ASCII characters.")
+		route53RecoveryControlConfig_createSafetyRuleCmd.Flags().String("gating-rule", "", "The gating rule requested.")
+		route53RecoveryControlConfig_createSafetyRuleCmd.Flags().String("tags", "", "The tags associated with the safety rule.")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_createSafetyRuleCmd)
 }

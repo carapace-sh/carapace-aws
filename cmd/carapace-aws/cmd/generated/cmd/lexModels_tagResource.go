@@ -12,11 +12,13 @@ var lexModels_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_tagResourceCmd).Standalone()
+	carapace.Gen(lexModels_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_tagResourceCmd).Standalone()
 
-	lexModels_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.")
-	lexModels_tagResourceCmd.Flags().String("tags", "", "A list of tag keys to add to the resource.")
-	lexModels_tagResourceCmd.MarkFlagRequired("resource-arn")
-	lexModels_tagResourceCmd.MarkFlagRequired("tags")
+		lexModels_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.")
+		lexModels_tagResourceCmd.Flags().String("tags", "", "A list of tag keys to add to the resource.")
+		lexModels_tagResourceCmd.MarkFlagRequired("resource-arn")
+		lexModels_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	lexModelsCmd.AddCommand(lexModels_tagResourceCmd)
 }

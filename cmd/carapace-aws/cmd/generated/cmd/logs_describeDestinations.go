@@ -12,10 +12,12 @@ var logs_describeDestinationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_describeDestinationsCmd).Standalone()
+	carapace.Gen(logs_describeDestinationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_describeDestinationsCmd).Standalone()
 
-	logs_describeDestinationsCmd.Flags().String("destination-name-prefix", "", "The prefix to match.")
-	logs_describeDestinationsCmd.Flags().String("limit", "", "The maximum number of items returned.")
-	logs_describeDestinationsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		logs_describeDestinationsCmd.Flags().String("destination-name-prefix", "", "The prefix to match.")
+		logs_describeDestinationsCmd.Flags().String("limit", "", "The maximum number of items returned.")
+		logs_describeDestinationsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	logsCmd.AddCommand(logs_describeDestinationsCmd)
 }

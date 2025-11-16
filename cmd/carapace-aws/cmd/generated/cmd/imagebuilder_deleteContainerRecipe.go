@@ -12,9 +12,11 @@ var imagebuilder_deleteContainerRecipeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_deleteContainerRecipeCmd).Standalone()
+	carapace.Gen(imagebuilder_deleteContainerRecipeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_deleteContainerRecipeCmd).Standalone()
 
-	imagebuilder_deleteContainerRecipeCmd.Flags().String("container-recipe-arn", "", "The Amazon Resource Name (ARN) of the container recipe to delete.")
-	imagebuilder_deleteContainerRecipeCmd.MarkFlagRequired("container-recipe-arn")
+		imagebuilder_deleteContainerRecipeCmd.Flags().String("container-recipe-arn", "", "The Amazon Resource Name (ARN) of the container recipe to delete.")
+		imagebuilder_deleteContainerRecipeCmd.MarkFlagRequired("container-recipe-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_deleteContainerRecipeCmd)
 }

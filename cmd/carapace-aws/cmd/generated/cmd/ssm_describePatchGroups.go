@@ -12,10 +12,12 @@ var ssm_describePatchGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describePatchGroupsCmd).Standalone()
+	carapace.Gen(ssm_describePatchGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describePatchGroupsCmd).Standalone()
 
-	ssm_describePatchGroupsCmd.Flags().String("filters", "", "Each element in the array is a structure containing a key-value pair.")
-	ssm_describePatchGroupsCmd.Flags().String("max-results", "", "The maximum number of patch groups to return (per page).")
-	ssm_describePatchGroupsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_describePatchGroupsCmd.Flags().String("filters", "", "Each element in the array is a structure containing a key-value pair.")
+		ssm_describePatchGroupsCmd.Flags().String("max-results", "", "The maximum number of patch groups to return (per page).")
+		ssm_describePatchGroupsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	ssmCmd.AddCommand(ssm_describePatchGroupsCmd)
 }

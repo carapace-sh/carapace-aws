@@ -12,9 +12,11 @@ var lightsail_getDiskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getDiskCmd).Standalone()
+	carapace.Gen(lightsail_getDiskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getDiskCmd).Standalone()
 
-	lightsail_getDiskCmd.Flags().String("disk-name", "", "The name of the disk (`my-disk`).")
-	lightsail_getDiskCmd.MarkFlagRequired("disk-name")
+		lightsail_getDiskCmd.Flags().String("disk-name", "", "The name of the disk (`my-disk`).")
+		lightsail_getDiskCmd.MarkFlagRequired("disk-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getDiskCmd)
 }

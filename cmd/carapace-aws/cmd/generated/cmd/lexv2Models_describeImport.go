@@ -12,9 +12,11 @@ var lexv2Models_describeImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_describeImportCmd).Standalone()
+	carapace.Gen(lexv2Models_describeImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_describeImportCmd).Standalone()
 
-	lexv2Models_describeImportCmd.Flags().String("import-id", "", "The unique identifier of the import to describe.")
-	lexv2Models_describeImportCmd.MarkFlagRequired("import-id")
+		lexv2Models_describeImportCmd.Flags().String("import-id", "", "The unique identifier of the import to describe.")
+		lexv2Models_describeImportCmd.MarkFlagRequired("import-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_describeImportCmd)
 }

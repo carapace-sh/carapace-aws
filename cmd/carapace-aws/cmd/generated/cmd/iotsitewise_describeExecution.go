@@ -12,9 +12,11 @@ var iotsitewise_describeExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeExecutionCmd).Standalone()
+	carapace.Gen(iotsitewise_describeExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeExecutionCmd).Standalone()
 
-	iotsitewise_describeExecutionCmd.Flags().String("execution-id", "", "The ID of the execution.")
-	iotsitewise_describeExecutionCmd.MarkFlagRequired("execution-id")
+		iotsitewise_describeExecutionCmd.Flags().String("execution-id", "", "The ID of the execution.")
+		iotsitewise_describeExecutionCmd.MarkFlagRequired("execution-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeExecutionCmd)
 }

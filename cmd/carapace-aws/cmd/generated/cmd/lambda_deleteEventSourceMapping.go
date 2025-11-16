@@ -12,9 +12,11 @@ var lambda_deleteEventSourceMappingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_deleteEventSourceMappingCmd).Standalone()
+	carapace.Gen(lambda_deleteEventSourceMappingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_deleteEventSourceMappingCmd).Standalone()
 
-	lambda_deleteEventSourceMappingCmd.Flags().String("uuid", "", "The identifier of the event source mapping.")
-	lambda_deleteEventSourceMappingCmd.MarkFlagRequired("uuid")
+		lambda_deleteEventSourceMappingCmd.Flags().String("uuid", "", "The identifier of the event source mapping.")
+		lambda_deleteEventSourceMappingCmd.MarkFlagRequired("uuid")
+	})
 	lambdaCmd.AddCommand(lambda_deleteEventSourceMappingCmd)
 }

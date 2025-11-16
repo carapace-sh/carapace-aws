@@ -12,11 +12,13 @@ var gameliftstreams_addStreamGroupLocationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftstreams_addStreamGroupLocationsCmd).Standalone()
+	carapace.Gen(gameliftstreams_addStreamGroupLocationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftstreams_addStreamGroupLocationsCmd).Standalone()
 
-	gameliftstreams_addStreamGroupLocationsCmd.Flags().String("identifier", "", "A stream group to add the specified locations to.")
-	gameliftstreams_addStreamGroupLocationsCmd.Flags().String("location-configurations", "", "A set of one or more locations and the streaming capacity for each location.")
-	gameliftstreams_addStreamGroupLocationsCmd.MarkFlagRequired("identifier")
-	gameliftstreams_addStreamGroupLocationsCmd.MarkFlagRequired("location-configurations")
+		gameliftstreams_addStreamGroupLocationsCmd.Flags().String("identifier", "", "A stream group to add the specified locations to.")
+		gameliftstreams_addStreamGroupLocationsCmd.Flags().String("location-configurations", "", "A set of one or more locations and the streaming capacity for each location.")
+		gameliftstreams_addStreamGroupLocationsCmd.MarkFlagRequired("identifier")
+		gameliftstreams_addStreamGroupLocationsCmd.MarkFlagRequired("location-configurations")
+	})
 	gameliftstreamsCmd.AddCommand(gameliftstreams_addStreamGroupLocationsCmd)
 }

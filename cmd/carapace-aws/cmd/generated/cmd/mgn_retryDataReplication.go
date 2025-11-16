@@ -12,10 +12,12 @@ var mgn_retryDataReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_retryDataReplicationCmd).Standalone()
+	carapace.Gen(mgn_retryDataReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_retryDataReplicationCmd).Standalone()
 
-	mgn_retryDataReplicationCmd.Flags().String("account-id", "", "Retry data replication for Account ID.")
-	mgn_retryDataReplicationCmd.Flags().String("source-server-id", "", "Retry data replication for Source Server ID.")
-	mgn_retryDataReplicationCmd.MarkFlagRequired("source-server-id")
+		mgn_retryDataReplicationCmd.Flags().String("account-id", "", "Retry data replication for Account ID.")
+		mgn_retryDataReplicationCmd.Flags().String("source-server-id", "", "Retry data replication for Source Server ID.")
+		mgn_retryDataReplicationCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_retryDataReplicationCmd)
 }

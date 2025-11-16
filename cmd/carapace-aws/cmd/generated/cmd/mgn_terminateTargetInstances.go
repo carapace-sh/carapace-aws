@@ -12,11 +12,13 @@ var mgn_terminateTargetInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_terminateTargetInstancesCmd).Standalone()
+	carapace.Gen(mgn_terminateTargetInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_terminateTargetInstancesCmd).Standalone()
 
-	mgn_terminateTargetInstancesCmd.Flags().String("account-id", "", "Terminate Target instance by Account ID")
-	mgn_terminateTargetInstancesCmd.Flags().String("source-server-ids", "", "Terminate Target instance by Source Server IDs.")
-	mgn_terminateTargetInstancesCmd.Flags().String("tags", "", "Terminate Target instance by Tags.")
-	mgn_terminateTargetInstancesCmd.MarkFlagRequired("source-server-ids")
+		mgn_terminateTargetInstancesCmd.Flags().String("account-id", "", "Terminate Target instance by Account ID")
+		mgn_terminateTargetInstancesCmd.Flags().String("source-server-ids", "", "Terminate Target instance by Source Server IDs.")
+		mgn_terminateTargetInstancesCmd.Flags().String("tags", "", "Terminate Target instance by Tags.")
+		mgn_terminateTargetInstancesCmd.MarkFlagRequired("source-server-ids")
+	})
 	mgnCmd.AddCommand(mgn_terminateTargetInstancesCmd)
 }

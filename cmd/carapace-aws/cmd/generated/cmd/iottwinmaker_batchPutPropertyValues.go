@@ -12,11 +12,13 @@ var iottwinmaker_batchPutPropertyValuesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_batchPutPropertyValuesCmd).Standalone()
+	carapace.Gen(iottwinmaker_batchPutPropertyValuesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_batchPutPropertyValuesCmd).Standalone()
 
-	iottwinmaker_batchPutPropertyValuesCmd.Flags().String("entries", "", "An object that maps strings to the property value entries to set.")
-	iottwinmaker_batchPutPropertyValuesCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the properties to set.")
-	iottwinmaker_batchPutPropertyValuesCmd.MarkFlagRequired("entries")
-	iottwinmaker_batchPutPropertyValuesCmd.MarkFlagRequired("workspace-id")
+		iottwinmaker_batchPutPropertyValuesCmd.Flags().String("entries", "", "An object that maps strings to the property value entries to set.")
+		iottwinmaker_batchPutPropertyValuesCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the properties to set.")
+		iottwinmaker_batchPutPropertyValuesCmd.MarkFlagRequired("entries")
+		iottwinmaker_batchPutPropertyValuesCmd.MarkFlagRequired("workspace-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_batchPutPropertyValuesCmd)
 }

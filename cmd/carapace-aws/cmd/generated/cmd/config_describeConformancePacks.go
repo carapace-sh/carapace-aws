@@ -12,10 +12,12 @@ var config_describeConformancePacksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_describeConformancePacksCmd).Standalone()
+	carapace.Gen(config_describeConformancePacksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_describeConformancePacksCmd).Standalone()
 
-	config_describeConformancePacksCmd.Flags().String("conformance-pack-names", "", "Comma-separated list of conformance pack names for which you want details.")
-	config_describeConformancePacksCmd.Flags().String("limit", "", "The maximum number of conformance packs returned on each page.")
-	config_describeConformancePacksCmd.Flags().String("next-token", "", "The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.")
+		config_describeConformancePacksCmd.Flags().String("conformance-pack-names", "", "Comma-separated list of conformance pack names for which you want details.")
+		config_describeConformancePacksCmd.Flags().String("limit", "", "The maximum number of conformance packs returned on each page.")
+		config_describeConformancePacksCmd.Flags().String("next-token", "", "The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.")
+	})
 	configCmd.AddCommand(config_describeConformancePacksCmd)
 }

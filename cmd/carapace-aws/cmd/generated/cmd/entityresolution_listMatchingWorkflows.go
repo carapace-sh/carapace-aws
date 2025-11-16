@@ -12,9 +12,11 @@ var entityresolution_listMatchingWorkflowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_listMatchingWorkflowsCmd).Standalone()
+	carapace.Gen(entityresolution_listMatchingWorkflowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_listMatchingWorkflowsCmd).Standalone()
 
-	entityresolution_listMatchingWorkflowsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	entityresolution_listMatchingWorkflowsCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
+		entityresolution_listMatchingWorkflowsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		entityresolution_listMatchingWorkflowsCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_listMatchingWorkflowsCmd)
 }

@@ -12,9 +12,11 @@ var comprehend_deleteDocumentClassifierCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_deleteDocumentClassifierCmd).Standalone()
+	carapace.Gen(comprehend_deleteDocumentClassifierCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_deleteDocumentClassifierCmd).Standalone()
 
-	comprehend_deleteDocumentClassifierCmd.Flags().String("document-classifier-arn", "", "The Amazon Resource Name (ARN) that identifies the document classifier.")
-	comprehend_deleteDocumentClassifierCmd.MarkFlagRequired("document-classifier-arn")
+		comprehend_deleteDocumentClassifierCmd.Flags().String("document-classifier-arn", "", "The Amazon Resource Name (ARN) that identifies the document classifier.")
+		comprehend_deleteDocumentClassifierCmd.MarkFlagRequired("document-classifier-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_deleteDocumentClassifierCmd)
 }

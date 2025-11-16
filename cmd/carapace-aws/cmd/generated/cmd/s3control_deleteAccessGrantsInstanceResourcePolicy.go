@@ -12,9 +12,11 @@ var s3control_deleteAccessGrantsInstanceResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_deleteAccessGrantsInstanceResourcePolicyCmd).Standalone()
+	carapace.Gen(s3control_deleteAccessGrantsInstanceResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_deleteAccessGrantsInstanceResourcePolicyCmd).Standalone()
 
-	s3control_deleteAccessGrantsInstanceResourcePolicyCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
-	s3control_deleteAccessGrantsInstanceResourcePolicyCmd.MarkFlagRequired("account-id")
+		s3control_deleteAccessGrantsInstanceResourcePolicyCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
+		s3control_deleteAccessGrantsInstanceResourcePolicyCmd.MarkFlagRequired("account-id")
+	})
 	s3controlCmd.AddCommand(s3control_deleteAccessGrantsInstanceResourcePolicyCmd)
 }

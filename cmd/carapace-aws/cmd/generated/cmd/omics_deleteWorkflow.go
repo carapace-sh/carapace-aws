@@ -12,9 +12,11 @@ var omics_deleteWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_deleteWorkflowCmd).Standalone()
+	carapace.Gen(omics_deleteWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_deleteWorkflowCmd).Standalone()
 
-	omics_deleteWorkflowCmd.Flags().String("id", "", "The workflow's ID.")
-	omics_deleteWorkflowCmd.MarkFlagRequired("id")
+		omics_deleteWorkflowCmd.Flags().String("id", "", "The workflow's ID.")
+		omics_deleteWorkflowCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_deleteWorkflowCmd)
 }

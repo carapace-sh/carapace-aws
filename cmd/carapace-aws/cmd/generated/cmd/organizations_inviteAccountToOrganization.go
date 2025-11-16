@@ -12,11 +12,13 @@ var organizations_inviteAccountToOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_inviteAccountToOrganizationCmd).Standalone()
+	carapace.Gen(organizations_inviteAccountToOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_inviteAccountToOrganizationCmd).Standalone()
 
-	organizations_inviteAccountToOrganizationCmd.Flags().String("notes", "", "Additional information that you want to include in the generated email to the recipient account owner.")
-	organizations_inviteAccountToOrganizationCmd.Flags().String("tags", "", "A list of tags that you want to attach to the account when it becomes a member of the organization.")
-	organizations_inviteAccountToOrganizationCmd.Flags().String("target", "", "The identifier (ID) of the Amazon Web Services account that you want to invite to join your organization.")
-	organizations_inviteAccountToOrganizationCmd.MarkFlagRequired("target")
+		organizations_inviteAccountToOrganizationCmd.Flags().String("notes", "", "Additional information that you want to include in the generated email to the recipient account owner.")
+		organizations_inviteAccountToOrganizationCmd.Flags().String("tags", "", "A list of tags that you want to attach to the account when it becomes a member of the organization.")
+		organizations_inviteAccountToOrganizationCmd.Flags().String("target", "", "The identifier (ID) of the Amazon Web Services account that you want to invite to join your organization.")
+		organizations_inviteAccountToOrganizationCmd.MarkFlagRequired("target")
+	})
 	organizationsCmd.AddCommand(organizations_inviteAccountToOrganizationCmd)
 }

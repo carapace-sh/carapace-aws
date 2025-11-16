@@ -12,9 +12,11 @@ var lexModels_getMigrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getMigrationCmd).Standalone()
+	carapace.Gen(lexModels_getMigrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getMigrationCmd).Standalone()
 
-	lexModels_getMigrationCmd.Flags().String("migration-id", "", "The unique identifier of the migration to view.")
-	lexModels_getMigrationCmd.MarkFlagRequired("migration-id")
+		lexModels_getMigrationCmd.Flags().String("migration-id", "", "The unique identifier of the migration to view.")
+		lexModels_getMigrationCmd.MarkFlagRequired("migration-id")
+	})
 	lexModelsCmd.AddCommand(lexModels_getMigrationCmd)
 }

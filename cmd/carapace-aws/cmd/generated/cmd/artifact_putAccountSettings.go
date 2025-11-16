@@ -12,8 +12,10 @@ var artifact_putAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(artifact_putAccountSettingsCmd).Standalone()
+	carapace.Gen(artifact_putAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(artifact_putAccountSettingsCmd).Standalone()
 
-	artifact_putAccountSettingsCmd.Flags().String("notification-subscription-status", "", "Desired notification subscription status.")
+		artifact_putAccountSettingsCmd.Flags().String("notification-subscription-status", "", "Desired notification subscription status.")
+	})
 	artifactCmd.AddCommand(artifact_putAccountSettingsCmd)
 }

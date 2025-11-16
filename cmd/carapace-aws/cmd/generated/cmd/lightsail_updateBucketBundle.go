@@ -12,11 +12,13 @@ var lightsail_updateBucketBundleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_updateBucketBundleCmd).Standalone()
+	carapace.Gen(lightsail_updateBucketBundleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_updateBucketBundleCmd).Standalone()
 
-	lightsail_updateBucketBundleCmd.Flags().String("bucket-name", "", "The name of the bucket for which to update the bundle.")
-	lightsail_updateBucketBundleCmd.Flags().String("bundle-id", "", "The ID of the new bundle to apply to the bucket.")
-	lightsail_updateBucketBundleCmd.MarkFlagRequired("bucket-name")
-	lightsail_updateBucketBundleCmd.MarkFlagRequired("bundle-id")
+		lightsail_updateBucketBundleCmd.Flags().String("bucket-name", "", "The name of the bucket for which to update the bundle.")
+		lightsail_updateBucketBundleCmd.Flags().String("bundle-id", "", "The ID of the new bundle to apply to the bucket.")
+		lightsail_updateBucketBundleCmd.MarkFlagRequired("bucket-name")
+		lightsail_updateBucketBundleCmd.MarkFlagRequired("bundle-id")
+	})
 	lightsailCmd.AddCommand(lightsail_updateBucketBundleCmd)
 }

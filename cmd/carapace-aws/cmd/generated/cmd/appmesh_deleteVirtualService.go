@@ -12,12 +12,14 @@ var appmesh_deleteVirtualServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appmesh_deleteVirtualServiceCmd).Standalone()
+	carapace.Gen(appmesh_deleteVirtualServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appmesh_deleteVirtualServiceCmd).Standalone()
 
-	appmesh_deleteVirtualServiceCmd.Flags().String("mesh-name", "", "The name of the service mesh to delete the virtual service in.")
-	appmesh_deleteVirtualServiceCmd.Flags().String("mesh-owner", "", "The Amazon Web Services IAM account ID of the service mesh owner.")
-	appmesh_deleteVirtualServiceCmd.Flags().String("virtual-service-name", "", "The name of the virtual service to delete.")
-	appmesh_deleteVirtualServiceCmd.MarkFlagRequired("mesh-name")
-	appmesh_deleteVirtualServiceCmd.MarkFlagRequired("virtual-service-name")
+		appmesh_deleteVirtualServiceCmd.Flags().String("mesh-name", "", "The name of the service mesh to delete the virtual service in.")
+		appmesh_deleteVirtualServiceCmd.Flags().String("mesh-owner", "", "The Amazon Web Services IAM account ID of the service mesh owner.")
+		appmesh_deleteVirtualServiceCmd.Flags().String("virtual-service-name", "", "The name of the virtual service to delete.")
+		appmesh_deleteVirtualServiceCmd.MarkFlagRequired("mesh-name")
+		appmesh_deleteVirtualServiceCmd.MarkFlagRequired("virtual-service-name")
+	})
 	appmeshCmd.AddCommand(appmesh_deleteVirtualServiceCmd)
 }

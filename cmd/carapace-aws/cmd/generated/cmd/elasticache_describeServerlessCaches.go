@@ -12,10 +12,12 @@ var elasticache_describeServerlessCachesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_describeServerlessCachesCmd).Standalone()
+	carapace.Gen(elasticache_describeServerlessCachesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_describeServerlessCachesCmd).Standalone()
 
-	elasticache_describeServerlessCachesCmd.Flags().String("max-results", "", "The maximum number of records in the response.")
-	elasticache_describeServerlessCachesCmd.Flags().String("next-token", "", "An optional marker returned from a prior request to support pagination of results from this operation.")
-	elasticache_describeServerlessCachesCmd.Flags().String("serverless-cache-name", "", "The identifier for the serverless cache.")
+		elasticache_describeServerlessCachesCmd.Flags().String("max-results", "", "The maximum number of records in the response.")
+		elasticache_describeServerlessCachesCmd.Flags().String("next-token", "", "An optional marker returned from a prior request to support pagination of results from this operation.")
+		elasticache_describeServerlessCachesCmd.Flags().String("serverless-cache-name", "", "The identifier for the serverless cache.")
+	})
 	elasticacheCmd.AddCommand(elasticache_describeServerlessCachesCmd)
 }

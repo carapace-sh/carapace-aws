@@ -12,11 +12,13 @@ var cognitoIdp_adminGetUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_adminGetUserCmd).Standalone()
+	carapace.Gen(cognitoIdp_adminGetUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_adminGetUserCmd).Standalone()
 
-	cognitoIdp_adminGetUserCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to get information about the user.")
-	cognitoIdp_adminGetUserCmd.Flags().String("username", "", "The name of the user that you want to query or modify.")
-	cognitoIdp_adminGetUserCmd.MarkFlagRequired("user-pool-id")
-	cognitoIdp_adminGetUserCmd.MarkFlagRequired("username")
+		cognitoIdp_adminGetUserCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to get information about the user.")
+		cognitoIdp_adminGetUserCmd.Flags().String("username", "", "The name of the user that you want to query or modify.")
+		cognitoIdp_adminGetUserCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_adminGetUserCmd.MarkFlagRequired("username")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_adminGetUserCmd)
 }

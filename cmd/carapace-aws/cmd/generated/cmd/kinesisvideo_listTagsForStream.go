@@ -12,10 +12,12 @@ var kinesisvideo_listTagsForStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_listTagsForStreamCmd).Standalone()
+	carapace.Gen(kinesisvideo_listTagsForStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_listTagsForStreamCmd).Standalone()
 
-	kinesisvideo_listTagsForStreamCmd.Flags().String("next-token", "", "If you specify this parameter and the result of a `ListTagsForStream` call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags.")
-	kinesisvideo_listTagsForStreamCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream that you want to list tags for.")
-	kinesisvideo_listTagsForStreamCmd.Flags().String("stream-name", "", "The name of the stream that you want to list tags for.")
+		kinesisvideo_listTagsForStreamCmd.Flags().String("next-token", "", "If you specify this parameter and the result of a `ListTagsForStream` call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags.")
+		kinesisvideo_listTagsForStreamCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream that you want to list tags for.")
+		kinesisvideo_listTagsForStreamCmd.Flags().String("stream-name", "", "The name of the stream that you want to list tags for.")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_listTagsForStreamCmd)
 }

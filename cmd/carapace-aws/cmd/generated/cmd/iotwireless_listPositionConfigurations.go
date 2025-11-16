@@ -12,10 +12,12 @@ var iotwireless_listPositionConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_listPositionConfigurationsCmd).Standalone()
+	carapace.Gen(iotwireless_listPositionConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_listPositionConfigurationsCmd).Standalone()
 
-	iotwireless_listPositionConfigurationsCmd.Flags().String("max-results", "", "")
-	iotwireless_listPositionConfigurationsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
-	iotwireless_listPositionConfigurationsCmd.Flags().String("resource-type", "", "Resource type for which position configurations are listed.")
+		iotwireless_listPositionConfigurationsCmd.Flags().String("max-results", "", "")
+		iotwireless_listPositionConfigurationsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+		iotwireless_listPositionConfigurationsCmd.Flags().String("resource-type", "", "Resource type for which position configurations are listed.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_listPositionConfigurationsCmd)
 }

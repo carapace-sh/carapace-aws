@@ -12,14 +12,16 @@ var iotsitewise_updateAssetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_updateAssetCmd).Standalone()
+	carapace.Gen(iotsitewise_updateAssetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_updateAssetCmd).Standalone()
 
-	iotsitewise_updateAssetCmd.Flags().String("asset-description", "", "A description for the asset.")
-	iotsitewise_updateAssetCmd.Flags().String("asset-external-id", "", "An external ID to assign to the asset.")
-	iotsitewise_updateAssetCmd.Flags().String("asset-id", "", "The ID of the asset to update.")
-	iotsitewise_updateAssetCmd.Flags().String("asset-name", "", "A friendly name for the asset.")
-	iotsitewise_updateAssetCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_updateAssetCmd.MarkFlagRequired("asset-id")
-	iotsitewise_updateAssetCmd.MarkFlagRequired("asset-name")
+		iotsitewise_updateAssetCmd.Flags().String("asset-description", "", "A description for the asset.")
+		iotsitewise_updateAssetCmd.Flags().String("asset-external-id", "", "An external ID to assign to the asset.")
+		iotsitewise_updateAssetCmd.Flags().String("asset-id", "", "The ID of the asset to update.")
+		iotsitewise_updateAssetCmd.Flags().String("asset-name", "", "A friendly name for the asset.")
+		iotsitewise_updateAssetCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_updateAssetCmd.MarkFlagRequired("asset-id")
+		iotsitewise_updateAssetCmd.MarkFlagRequired("asset-name")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_updateAssetCmd)
 }

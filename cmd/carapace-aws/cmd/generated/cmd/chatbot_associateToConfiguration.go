@@ -12,11 +12,13 @@ var chatbot_associateToConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_associateToConfigurationCmd).Standalone()
+	carapace.Gen(chatbot_associateToConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_associateToConfigurationCmd).Standalone()
 
-	chatbot_associateToConfigurationCmd.Flags().String("chat-configuration", "", "The channel configuration to associate with the resource.")
-	chatbot_associateToConfigurationCmd.Flags().String("resource", "", "The resource Amazon Resource Name (ARN) to link.")
-	chatbot_associateToConfigurationCmd.MarkFlagRequired("chat-configuration")
-	chatbot_associateToConfigurationCmd.MarkFlagRequired("resource")
+		chatbot_associateToConfigurationCmd.Flags().String("chat-configuration", "", "The channel configuration to associate with the resource.")
+		chatbot_associateToConfigurationCmd.Flags().String("resource", "", "The resource Amazon Resource Name (ARN) to link.")
+		chatbot_associateToConfigurationCmd.MarkFlagRequired("chat-configuration")
+		chatbot_associateToConfigurationCmd.MarkFlagRequired("resource")
+	})
 	chatbotCmd.AddCommand(chatbot_associateToConfigurationCmd)
 }

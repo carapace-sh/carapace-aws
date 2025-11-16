@@ -12,9 +12,11 @@ var iotManagedIntegrations_getManagedThingCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getManagedThingCertificateCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getManagedThingCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getManagedThingCertificateCmd).Standalone()
 
-	iotManagedIntegrations_getManagedThingCertificateCmd.Flags().String("identifier", "", "The identifier of the managed thing.")
-	iotManagedIntegrations_getManagedThingCertificateCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_getManagedThingCertificateCmd.Flags().String("identifier", "", "The identifier of the managed thing.")
+		iotManagedIntegrations_getManagedThingCertificateCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getManagedThingCertificateCmd)
 }

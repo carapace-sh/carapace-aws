@@ -12,11 +12,13 @@ var workmail_getImpersonationRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_getImpersonationRoleCmd).Standalone()
+	carapace.Gen(workmail_getImpersonationRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_getImpersonationRoleCmd).Standalone()
 
-	workmail_getImpersonationRoleCmd.Flags().String("impersonation-role-id", "", "The impersonation role ID to retrieve.")
-	workmail_getImpersonationRoleCmd.Flags().String("organization-id", "", "The WorkMail organization from which to retrieve the impersonation role.")
-	workmail_getImpersonationRoleCmd.MarkFlagRequired("impersonation-role-id")
-	workmail_getImpersonationRoleCmd.MarkFlagRequired("organization-id")
+		workmail_getImpersonationRoleCmd.Flags().String("impersonation-role-id", "", "The impersonation role ID to retrieve.")
+		workmail_getImpersonationRoleCmd.Flags().String("organization-id", "", "The WorkMail organization from which to retrieve the impersonation role.")
+		workmail_getImpersonationRoleCmd.MarkFlagRequired("impersonation-role-id")
+		workmail_getImpersonationRoleCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_getImpersonationRoleCmd)
 }

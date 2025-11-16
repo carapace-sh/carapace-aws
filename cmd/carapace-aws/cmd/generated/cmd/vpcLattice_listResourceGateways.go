@@ -12,9 +12,11 @@ var vpcLattice_listResourceGatewaysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listResourceGatewaysCmd).Standalone()
+	carapace.Gen(vpcLattice_listResourceGatewaysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listResourceGatewaysCmd).Standalone()
 
-	vpcLattice_listResourceGatewaysCmd.Flags().String("max-results", "", "The maximum page size.")
-	vpcLattice_listResourceGatewaysCmd.Flags().String("next-token", "", "If there are additional results, a pagination token for the next page of results.")
+		vpcLattice_listResourceGatewaysCmd.Flags().String("max-results", "", "The maximum page size.")
+		vpcLattice_listResourceGatewaysCmd.Flags().String("next-token", "", "If there are additional results, a pagination token for the next page of results.")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listResourceGatewaysCmd)
 }

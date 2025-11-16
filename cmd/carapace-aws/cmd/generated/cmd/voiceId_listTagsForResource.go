@@ -12,9 +12,11 @@ var voiceId_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_listTagsForResourceCmd).Standalone()
+	carapace.Gen(voiceId_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_listTagsForResourceCmd).Standalone()
 
-	voiceId_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Voice ID resource for which you want to list the tags.")
-	voiceId_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		voiceId_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Voice ID resource for which you want to list the tags.")
+		voiceId_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	voiceIdCmd.AddCommand(voiceId_listTagsForResourceCmd)
 }

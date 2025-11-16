@@ -12,11 +12,13 @@ var pinpoint_updateGcmChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateGcmChannelCmd).Standalone()
+	carapace.Gen(pinpoint_updateGcmChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateGcmChannelCmd).Standalone()
 
-	pinpoint_updateGcmChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_updateGcmChannelCmd.Flags().String("gcmchannel-request", "", "")
-	pinpoint_updateGcmChannelCmd.MarkFlagRequired("application-id")
-	pinpoint_updateGcmChannelCmd.MarkFlagRequired("gcmchannel-request")
+		pinpoint_updateGcmChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_updateGcmChannelCmd.Flags().String("gcmchannel-request", "", "")
+		pinpoint_updateGcmChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_updateGcmChannelCmd.MarkFlagRequired("gcmchannel-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateGcmChannelCmd)
 }

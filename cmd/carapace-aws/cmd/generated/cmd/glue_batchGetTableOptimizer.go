@@ -12,9 +12,11 @@ var glue_batchGetTableOptimizerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_batchGetTableOptimizerCmd).Standalone()
+	carapace.Gen(glue_batchGetTableOptimizerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_batchGetTableOptimizerCmd).Standalone()
 
-	glue_batchGetTableOptimizerCmd.Flags().String("entries", "", "A list of `BatchGetTableOptimizerEntry` objects specifying the table optimizers to retrieve.")
-	glue_batchGetTableOptimizerCmd.MarkFlagRequired("entries")
+		glue_batchGetTableOptimizerCmd.Flags().String("entries", "", "A list of `BatchGetTableOptimizerEntry` objects specifying the table optimizers to retrieve.")
+		glue_batchGetTableOptimizerCmd.MarkFlagRequired("entries")
+	})
 	glueCmd.AddCommand(glue_batchGetTableOptimizerCmd)
 }

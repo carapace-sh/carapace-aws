@@ -12,9 +12,11 @@ var textract_getAdapterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(textract_getAdapterCmd).Standalone()
+	carapace.Gen(textract_getAdapterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(textract_getAdapterCmd).Standalone()
 
-	textract_getAdapterCmd.Flags().String("adapter-id", "", "A string containing a unique ID for the adapter.")
-	textract_getAdapterCmd.MarkFlagRequired("adapter-id")
+		textract_getAdapterCmd.Flags().String("adapter-id", "", "A string containing a unique ID for the adapter.")
+		textract_getAdapterCmd.MarkFlagRequired("adapter-id")
+	})
 	textractCmd.AddCommand(textract_getAdapterCmd)
 }

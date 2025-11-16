@@ -12,11 +12,13 @@ var macie2_acceptInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_acceptInvitationCmd).Standalone()
+	carapace.Gen(macie2_acceptInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_acceptInvitationCmd).Standalone()
 
-	macie2_acceptInvitationCmd.Flags().String("administrator-account-id", "", "The Amazon Web Services account ID for the account that sent the invitation.")
-	macie2_acceptInvitationCmd.Flags().String("invitation-id", "", "The unique identifier for the invitation to accept.")
-	macie2_acceptInvitationCmd.Flags().String("master-account", "", "(Deprecated) The Amazon Web Services account ID for the account that sent the invitation.")
-	macie2_acceptInvitationCmd.MarkFlagRequired("invitation-id")
+		macie2_acceptInvitationCmd.Flags().String("administrator-account-id", "", "The Amazon Web Services account ID for the account that sent the invitation.")
+		macie2_acceptInvitationCmd.Flags().String("invitation-id", "", "The unique identifier for the invitation to accept.")
+		macie2_acceptInvitationCmd.Flags().String("master-account", "", "(Deprecated) The Amazon Web Services account ID for the account that sent the invitation.")
+		macie2_acceptInvitationCmd.MarkFlagRequired("invitation-id")
+	})
 	macie2Cmd.AddCommand(macie2_acceptInvitationCmd)
 }

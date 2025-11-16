@@ -12,9 +12,11 @@ var appintegrations_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_deleteApplicationCmd).Standalone()
+	carapace.Gen(appintegrations_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_deleteApplicationCmd).Standalone()
 
-	appintegrations_deleteApplicationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Application.")
-	appintegrations_deleteApplicationCmd.MarkFlagRequired("arn")
+		appintegrations_deleteApplicationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Application.")
+		appintegrations_deleteApplicationCmd.MarkFlagRequired("arn")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_deleteApplicationCmd)
 }

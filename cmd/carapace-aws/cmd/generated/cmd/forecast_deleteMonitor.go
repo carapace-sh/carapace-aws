@@ -12,9 +12,11 @@ var forecast_deleteMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_deleteMonitorCmd).Standalone()
+	carapace.Gen(forecast_deleteMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_deleteMonitorCmd).Standalone()
 
-	forecast_deleteMonitorCmd.Flags().String("monitor-arn", "", "The Amazon Resource Name (ARN) of the monitor resource to delete.")
-	forecast_deleteMonitorCmd.MarkFlagRequired("monitor-arn")
+		forecast_deleteMonitorCmd.Flags().String("monitor-arn", "", "The Amazon Resource Name (ARN) of the monitor resource to delete.")
+		forecast_deleteMonitorCmd.MarkFlagRequired("monitor-arn")
+	})
 	forecastCmd.AddCommand(forecast_deleteMonitorCmd)
 }

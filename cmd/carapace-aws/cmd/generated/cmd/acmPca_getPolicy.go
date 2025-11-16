@@ -12,9 +12,11 @@ var acmPca_getPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acmPca_getPolicyCmd).Standalone()
+	carapace.Gen(acmPca_getPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acmPca_getPolicyCmd).Standalone()
 
-	acmPca_getPolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Number (ARN) of the private CA that will have its policy retrieved.")
-	acmPca_getPolicyCmd.MarkFlagRequired("resource-arn")
+		acmPca_getPolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Number (ARN) of the private CA that will have its policy retrieved.")
+		acmPca_getPolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	acmPcaCmd.AddCommand(acmPca_getPolicyCmd)
 }

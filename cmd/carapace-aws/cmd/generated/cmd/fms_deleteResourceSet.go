@@ -12,9 +12,11 @@ var fms_deleteResourceSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_deleteResourceSetCmd).Standalone()
+	carapace.Gen(fms_deleteResourceSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_deleteResourceSetCmd).Standalone()
 
-	fms_deleteResourceSetCmd.Flags().String("identifier", "", "A unique identifier for the resource set, used in a request to refer to the resource set.")
-	fms_deleteResourceSetCmd.MarkFlagRequired("identifier")
+		fms_deleteResourceSetCmd.Flags().String("identifier", "", "A unique identifier for the resource set, used in a request to refer to the resource set.")
+		fms_deleteResourceSetCmd.MarkFlagRequired("identifier")
+	})
 	fmsCmd.AddCommand(fms_deleteResourceSetCmd)
 }

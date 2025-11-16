@@ -12,7 +12,9 @@ var elastictranscoderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elastictranscoderCmd).Standalone()
+	carapace.Gen(elastictranscoderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elastictranscoderCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(elastictranscoderCmd)
 }

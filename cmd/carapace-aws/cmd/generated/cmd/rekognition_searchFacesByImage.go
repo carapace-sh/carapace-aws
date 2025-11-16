@@ -12,14 +12,16 @@ var rekognition_searchFacesByImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_searchFacesByImageCmd).Standalone()
+	carapace.Gen(rekognition_searchFacesByImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_searchFacesByImageCmd).Standalone()
 
-	rekognition_searchFacesByImageCmd.Flags().String("collection-id", "", "ID of the collection to search.")
-	rekognition_searchFacesByImageCmd.Flags().String("face-match-threshold", "", "(Optional) Specifies the minimum confidence in the face match to return.")
-	rekognition_searchFacesByImageCmd.Flags().String("image", "", "The input image as base64-encoded bytes or an S3 object.")
-	rekognition_searchFacesByImageCmd.Flags().String("max-faces", "", "Maximum number of faces to return.")
-	rekognition_searchFacesByImageCmd.Flags().String("quality-filter", "", "A filter that specifies a quality bar for how much filtering is done to identify faces.")
-	rekognition_searchFacesByImageCmd.MarkFlagRequired("collection-id")
-	rekognition_searchFacesByImageCmd.MarkFlagRequired("image")
+		rekognition_searchFacesByImageCmd.Flags().String("collection-id", "", "ID of the collection to search.")
+		rekognition_searchFacesByImageCmd.Flags().String("face-match-threshold", "", "(Optional) Specifies the minimum confidence in the face match to return.")
+		rekognition_searchFacesByImageCmd.Flags().String("image", "", "The input image as base64-encoded bytes or an S3 object.")
+		rekognition_searchFacesByImageCmd.Flags().String("max-faces", "", "Maximum number of faces to return.")
+		rekognition_searchFacesByImageCmd.Flags().String("quality-filter", "", "A filter that specifies a quality bar for how much filtering is done to identify faces.")
+		rekognition_searchFacesByImageCmd.MarkFlagRequired("collection-id")
+		rekognition_searchFacesByImageCmd.MarkFlagRequired("image")
+	})
 	rekognitionCmd.AddCommand(rekognition_searchFacesByImageCmd)
 }

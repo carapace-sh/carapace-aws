@@ -12,11 +12,13 @@ var s3control_deleteAccessPointScopeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_deleteAccessPointScopeCmd).Standalone()
+	carapace.Gen(s3control_deleteAccessPointScopeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_deleteAccessPointScopeCmd).Standalone()
 
-	s3control_deleteAccessPointScopeCmd.Flags().String("account-id", "", "The Amazon Web Services account ID that owns the access point with the scope that you want to delete.")
-	s3control_deleteAccessPointScopeCmd.Flags().String("name", "", "The name of the access point with the scope that you want to delete.")
-	s3control_deleteAccessPointScopeCmd.MarkFlagRequired("account-id")
-	s3control_deleteAccessPointScopeCmd.MarkFlagRequired("name")
+		s3control_deleteAccessPointScopeCmd.Flags().String("account-id", "", "The Amazon Web Services account ID that owns the access point with the scope that you want to delete.")
+		s3control_deleteAccessPointScopeCmd.Flags().String("name", "", "The name of the access point with the scope that you want to delete.")
+		s3control_deleteAccessPointScopeCmd.MarkFlagRequired("account-id")
+		s3control_deleteAccessPointScopeCmd.MarkFlagRequired("name")
+	})
 	s3controlCmd.AddCommand(s3control_deleteAccessPointScopeCmd)
 }

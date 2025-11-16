@@ -12,10 +12,12 @@ var es_cancelDomainConfigChangeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_cancelDomainConfigChangeCmd).Standalone()
+	carapace.Gen(es_cancelDomainConfigChangeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_cancelDomainConfigChangeCmd).Standalone()
 
-	es_cancelDomainConfigChangeCmd.Flags().String("domain-name", "", "Name of the OpenSearch Service domain configuration request to cancel.")
-	es_cancelDomainConfigChangeCmd.Flags().String("dry-run", "", "When set to **True**, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.")
-	es_cancelDomainConfigChangeCmd.MarkFlagRequired("domain-name")
+		es_cancelDomainConfigChangeCmd.Flags().String("domain-name", "", "Name of the OpenSearch Service domain configuration request to cancel.")
+		es_cancelDomainConfigChangeCmd.Flags().String("dry-run", "", "When set to **True**, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.")
+		es_cancelDomainConfigChangeCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_cancelDomainConfigChangeCmd)
 }

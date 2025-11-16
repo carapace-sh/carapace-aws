@@ -12,11 +12,13 @@ var appfabric_startUserAccessTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appfabric_startUserAccessTasksCmd).Standalone()
+	carapace.Gen(appfabric_startUserAccessTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appfabric_startUserAccessTasksCmd).Standalone()
 
-	appfabric_startUserAccessTasksCmd.Flags().String("app-bundle-identifier", "", "The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.")
-	appfabric_startUserAccessTasksCmd.Flags().String("email", "", "The email address of the target user.")
-	appfabric_startUserAccessTasksCmd.MarkFlagRequired("app-bundle-identifier")
-	appfabric_startUserAccessTasksCmd.MarkFlagRequired("email")
+		appfabric_startUserAccessTasksCmd.Flags().String("app-bundle-identifier", "", "The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.")
+		appfabric_startUserAccessTasksCmd.Flags().String("email", "", "The email address of the target user.")
+		appfabric_startUserAccessTasksCmd.MarkFlagRequired("app-bundle-identifier")
+		appfabric_startUserAccessTasksCmd.MarkFlagRequired("email")
+	})
 	appfabricCmd.AddCommand(appfabric_startUserAccessTasksCmd)
 }

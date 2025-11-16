@@ -12,9 +12,11 @@ var xray_deleteSamplingRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_deleteSamplingRuleCmd).Standalone()
+	carapace.Gen(xray_deleteSamplingRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_deleteSamplingRuleCmd).Standalone()
 
-	xray_deleteSamplingRuleCmd.Flags().String("rule-arn", "", "The ARN of the sampling rule.")
-	xray_deleteSamplingRuleCmd.Flags().String("rule-name", "", "The name of the sampling rule.")
+		xray_deleteSamplingRuleCmd.Flags().String("rule-arn", "", "The ARN of the sampling rule.")
+		xray_deleteSamplingRuleCmd.Flags().String("rule-name", "", "The name of the sampling rule.")
+	})
 	xrayCmd.AddCommand(xray_deleteSamplingRuleCmd)
 }

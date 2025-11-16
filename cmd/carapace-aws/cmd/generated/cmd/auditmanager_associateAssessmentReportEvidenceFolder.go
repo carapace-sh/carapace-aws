@@ -12,11 +12,13 @@ var auditmanager_associateAssessmentReportEvidenceFolderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_associateAssessmentReportEvidenceFolderCmd).Standalone()
+	carapace.Gen(auditmanager_associateAssessmentReportEvidenceFolderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_associateAssessmentReportEvidenceFolderCmd).Standalone()
 
-	auditmanager_associateAssessmentReportEvidenceFolderCmd.Flags().String("assessment-id", "", "The identifier for the assessment.")
-	auditmanager_associateAssessmentReportEvidenceFolderCmd.Flags().String("evidence-folder-id", "", "The identifier for the folder that the evidence is stored in.")
-	auditmanager_associateAssessmentReportEvidenceFolderCmd.MarkFlagRequired("assessment-id")
-	auditmanager_associateAssessmentReportEvidenceFolderCmd.MarkFlagRequired("evidence-folder-id")
+		auditmanager_associateAssessmentReportEvidenceFolderCmd.Flags().String("assessment-id", "", "The identifier for the assessment.")
+		auditmanager_associateAssessmentReportEvidenceFolderCmd.Flags().String("evidence-folder-id", "", "The identifier for the folder that the evidence is stored in.")
+		auditmanager_associateAssessmentReportEvidenceFolderCmd.MarkFlagRequired("assessment-id")
+		auditmanager_associateAssessmentReportEvidenceFolderCmd.MarkFlagRequired("evidence-folder-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_associateAssessmentReportEvidenceFolderCmd)
 }

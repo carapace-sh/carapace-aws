@@ -12,14 +12,16 @@ var ec2_describeInstanceImageMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeInstanceImageMetadataCmd).Standalone()
+	carapace.Gen(ec2_describeInstanceImageMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeInstanceImageMetadataCmd).Standalone()
 
-	ec2_describeInstanceImageMetadataCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeInstanceImageMetadataCmd.Flags().String("filters", "", "The filters.")
-	ec2_describeInstanceImageMetadataCmd.Flags().String("instance-ids", "", "The instance IDs.")
-	ec2_describeInstanceImageMetadataCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	ec2_describeInstanceImageMetadataCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
-	ec2_describeInstanceImageMetadataCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeInstanceImageMetadataCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeInstanceImageMetadataCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeInstanceImageMetadataCmd.Flags().String("filters", "", "The filters.")
+		ec2_describeInstanceImageMetadataCmd.Flags().String("instance-ids", "", "The instance IDs.")
+		ec2_describeInstanceImageMetadataCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		ec2_describeInstanceImageMetadataCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		ec2_describeInstanceImageMetadataCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeInstanceImageMetadataCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeInstanceImageMetadataCmd)
 }

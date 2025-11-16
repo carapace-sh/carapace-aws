@@ -12,9 +12,11 @@ var ssmIncidents_deleteIncidentRecordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_deleteIncidentRecordCmd).Standalone()
+	carapace.Gen(ssmIncidents_deleteIncidentRecordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_deleteIncidentRecordCmd).Standalone()
 
-	ssmIncidents_deleteIncidentRecordCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the incident record you are deleting.")
-	ssmIncidents_deleteIncidentRecordCmd.MarkFlagRequired("arn")
+		ssmIncidents_deleteIncidentRecordCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the incident record you are deleting.")
+		ssmIncidents_deleteIncidentRecordCmd.MarkFlagRequired("arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_deleteIncidentRecordCmd)
 }

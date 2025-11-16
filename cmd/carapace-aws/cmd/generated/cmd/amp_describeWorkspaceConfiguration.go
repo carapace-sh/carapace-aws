@@ -12,9 +12,11 @@ var amp_describeWorkspaceConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_describeWorkspaceConfigurationCmd).Standalone()
+	carapace.Gen(amp_describeWorkspaceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_describeWorkspaceConfigurationCmd).Standalone()
 
-	amp_describeWorkspaceConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace that you want to retrieve information for.")
-	amp_describeWorkspaceConfigurationCmd.MarkFlagRequired("workspace-id")
+		amp_describeWorkspaceConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace that you want to retrieve information for.")
+		amp_describeWorkspaceConfigurationCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_describeWorkspaceConfigurationCmd)
 }

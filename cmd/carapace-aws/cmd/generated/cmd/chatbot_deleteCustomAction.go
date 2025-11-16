@@ -12,9 +12,11 @@ var chatbot_deleteCustomActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_deleteCustomActionCmd).Standalone()
+	carapace.Gen(chatbot_deleteCustomActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_deleteCustomActionCmd).Standalone()
 
-	chatbot_deleteCustomActionCmd.Flags().String("custom-action-arn", "", "The fully defined ARN of the custom action.")
-	chatbot_deleteCustomActionCmd.MarkFlagRequired("custom-action-arn")
+		chatbot_deleteCustomActionCmd.Flags().String("custom-action-arn", "", "The fully defined ARN of the custom action.")
+		chatbot_deleteCustomActionCmd.MarkFlagRequired("custom-action-arn")
+	})
 	chatbotCmd.AddCommand(chatbot_deleteCustomActionCmd)
 }

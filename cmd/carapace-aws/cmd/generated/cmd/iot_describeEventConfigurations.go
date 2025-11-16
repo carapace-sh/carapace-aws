@@ -12,7 +12,9 @@ var iot_describeEventConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeEventConfigurationsCmd).Standalone()
+	carapace.Gen(iot_describeEventConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeEventConfigurationsCmd).Standalone()
 
+	})
 	iotCmd.AddCommand(iot_describeEventConfigurationsCmd)
 }

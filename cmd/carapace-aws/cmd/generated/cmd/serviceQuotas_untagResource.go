@@ -12,11 +12,13 @@ var serviceQuotas_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_untagResourceCmd).Standalone()
+	carapace.Gen(serviceQuotas_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_untagResourceCmd).Standalone()
 
-	serviceQuotas_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the applied quota that you want to untag.")
-	serviceQuotas_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags that you want to remove from the resource.")
-	serviceQuotas_untagResourceCmd.MarkFlagRequired("resource-arn")
-	serviceQuotas_untagResourceCmd.MarkFlagRequired("tag-keys")
+		serviceQuotas_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the applied quota that you want to untag.")
+		serviceQuotas_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags that you want to remove from the resource.")
+		serviceQuotas_untagResourceCmd.MarkFlagRequired("resource-arn")
+		serviceQuotas_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_untagResourceCmd)
 }

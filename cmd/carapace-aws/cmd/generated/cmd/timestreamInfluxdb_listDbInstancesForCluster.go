@@ -12,11 +12,13 @@ var timestreamInfluxdb_listDbInstancesForClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamInfluxdb_listDbInstancesForClusterCmd).Standalone()
+	carapace.Gen(timestreamInfluxdb_listDbInstancesForClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamInfluxdb_listDbInstancesForClusterCmd).Standalone()
 
-	timestreamInfluxdb_listDbInstancesForClusterCmd.Flags().String("db-cluster-id", "", "Service-generated unique identifier of the DB cluster.")
-	timestreamInfluxdb_listDbInstancesForClusterCmd.Flags().String("max-results", "", "The maximum number of items to return in the output.")
-	timestreamInfluxdb_listDbInstancesForClusterCmd.Flags().String("next-token", "", "The pagination token.")
-	timestreamInfluxdb_listDbInstancesForClusterCmd.MarkFlagRequired("db-cluster-id")
+		timestreamInfluxdb_listDbInstancesForClusterCmd.Flags().String("db-cluster-id", "", "Service-generated unique identifier of the DB cluster.")
+		timestreamInfluxdb_listDbInstancesForClusterCmd.Flags().String("max-results", "", "The maximum number of items to return in the output.")
+		timestreamInfluxdb_listDbInstancesForClusterCmd.Flags().String("next-token", "", "The pagination token.")
+		timestreamInfluxdb_listDbInstancesForClusterCmd.MarkFlagRequired("db-cluster-id")
+	})
 	timestreamInfluxdbCmd.AddCommand(timestreamInfluxdb_listDbInstancesForClusterCmd)
 }

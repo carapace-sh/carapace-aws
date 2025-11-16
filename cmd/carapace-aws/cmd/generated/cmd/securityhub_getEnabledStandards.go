@@ -12,10 +12,12 @@ var securityhub_getEnabledStandardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getEnabledStandardsCmd).Standalone()
+	carapace.Gen(securityhub_getEnabledStandardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getEnabledStandardsCmd).Standalone()
 
-	securityhub_getEnabledStandardsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	securityhub_getEnabledStandardsCmd.Flags().String("next-token", "", "The token that is required for pagination.")
-	securityhub_getEnabledStandardsCmd.Flags().String("standards-subscription-arns", "", "The list of the standards subscription ARNs for the standards to retrieve.")
+		securityhub_getEnabledStandardsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		securityhub_getEnabledStandardsCmd.Flags().String("next-token", "", "The token that is required for pagination.")
+		securityhub_getEnabledStandardsCmd.Flags().String("standards-subscription-arns", "", "The list of the standards subscription ARNs for the standards to retrieve.")
+	})
 	securityhubCmd.AddCommand(securityhub_getEnabledStandardsCmd)
 }

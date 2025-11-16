@@ -12,10 +12,12 @@ var drs_startFailbackLaunchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_startFailbackLaunchCmd).Standalone()
+	carapace.Gen(drs_startFailbackLaunchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_startFailbackLaunchCmd).Standalone()
 
-	drs_startFailbackLaunchCmd.Flags().String("recovery-instance-ids", "", "The IDs of the Recovery Instance whose failback launch we want to request.")
-	drs_startFailbackLaunchCmd.Flags().String("tags", "", "The tags to be associated with the failback launch Job.")
-	drs_startFailbackLaunchCmd.MarkFlagRequired("recovery-instance-ids")
+		drs_startFailbackLaunchCmd.Flags().String("recovery-instance-ids", "", "The IDs of the Recovery Instance whose failback launch we want to request.")
+		drs_startFailbackLaunchCmd.Flags().String("tags", "", "The tags to be associated with the failback launch Job.")
+		drs_startFailbackLaunchCmd.MarkFlagRequired("recovery-instance-ids")
+	})
 	drsCmd.AddCommand(drs_startFailbackLaunchCmd)
 }

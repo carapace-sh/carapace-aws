@@ -12,9 +12,11 @@ var sagemaker_deleteModelExplainabilityJobDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteModelExplainabilityJobDefinitionCmd).Standalone()
+	carapace.Gen(sagemaker_deleteModelExplainabilityJobDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteModelExplainabilityJobDefinitionCmd).Standalone()
 
-	sagemaker_deleteModelExplainabilityJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the model explainability job definition to delete.")
-	sagemaker_deleteModelExplainabilityJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+		sagemaker_deleteModelExplainabilityJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the model explainability job definition to delete.")
+		sagemaker_deleteModelExplainabilityJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteModelExplainabilityJobDefinitionCmd)
 }

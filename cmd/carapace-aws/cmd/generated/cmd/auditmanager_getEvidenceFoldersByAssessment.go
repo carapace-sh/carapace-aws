@@ -12,11 +12,13 @@ var auditmanager_getEvidenceFoldersByAssessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getEvidenceFoldersByAssessmentCmd).Standalone()
+	carapace.Gen(auditmanager_getEvidenceFoldersByAssessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getEvidenceFoldersByAssessmentCmd).Standalone()
 
-	auditmanager_getEvidenceFoldersByAssessmentCmd.Flags().String("assessment-id", "", "The unique identifier for the assessment.")
-	auditmanager_getEvidenceFoldersByAssessmentCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
-	auditmanager_getEvidenceFoldersByAssessmentCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	auditmanager_getEvidenceFoldersByAssessmentCmd.MarkFlagRequired("assessment-id")
+		auditmanager_getEvidenceFoldersByAssessmentCmd.Flags().String("assessment-id", "", "The unique identifier for the assessment.")
+		auditmanager_getEvidenceFoldersByAssessmentCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
+		auditmanager_getEvidenceFoldersByAssessmentCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		auditmanager_getEvidenceFoldersByAssessmentCmd.MarkFlagRequired("assessment-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getEvidenceFoldersByAssessmentCmd)
 }

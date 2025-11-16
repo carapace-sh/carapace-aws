@@ -12,12 +12,14 @@ var connect_updateQueueMaxContactsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateQueueMaxContactsCmd).Standalone()
+	carapace.Gen(connect_updateQueueMaxContactsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateQueueMaxContactsCmd).Standalone()
 
-	connect_updateQueueMaxContactsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateQueueMaxContactsCmd.Flags().String("max-contacts", "", "The maximum number of contacts that can be in the queue before it is considered full.")
-	connect_updateQueueMaxContactsCmd.Flags().String("queue-id", "", "The identifier for the queue.")
-	connect_updateQueueMaxContactsCmd.MarkFlagRequired("instance-id")
-	connect_updateQueueMaxContactsCmd.MarkFlagRequired("queue-id")
+		connect_updateQueueMaxContactsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateQueueMaxContactsCmd.Flags().String("max-contacts", "", "The maximum number of contacts that can be in the queue before it is considered full.")
+		connect_updateQueueMaxContactsCmd.Flags().String("queue-id", "", "The identifier for the queue.")
+		connect_updateQueueMaxContactsCmd.MarkFlagRequired("instance-id")
+		connect_updateQueueMaxContactsCmd.MarkFlagRequired("queue-id")
+	})
 	connectCmd.AddCommand(connect_updateQueueMaxContactsCmd)
 }

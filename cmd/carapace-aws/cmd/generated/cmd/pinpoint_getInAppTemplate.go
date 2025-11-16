@@ -12,10 +12,12 @@ var pinpoint_getInAppTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getInAppTemplateCmd).Standalone()
+	carapace.Gen(pinpoint_getInAppTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getInAppTemplateCmd).Standalone()
 
-	pinpoint_getInAppTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_getInAppTemplateCmd.Flags().String("version", "", "The unique identifier for the version of the message template to update, retrieve information about, or delete.")
-	pinpoint_getInAppTemplateCmd.MarkFlagRequired("template-name")
+		pinpoint_getInAppTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_getInAppTemplateCmd.Flags().String("version", "", "The unique identifier for the version of the message template to update, retrieve information about, or delete.")
+		pinpoint_getInAppTemplateCmd.MarkFlagRequired("template-name")
+	})
 	pinpointCmd.AddCommand(pinpoint_getInAppTemplateCmd)
 }

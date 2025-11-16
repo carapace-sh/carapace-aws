@@ -12,9 +12,11 @@ var iot_deleteCommandCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteCommandCmd).Standalone()
+	carapace.Gen(iot_deleteCommandCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteCommandCmd).Standalone()
 
-	iot_deleteCommandCmd.Flags().String("command-id", "", "The unique identifier of the command to be deleted.")
-	iot_deleteCommandCmd.MarkFlagRequired("command-id")
+		iot_deleteCommandCmd.Flags().String("command-id", "", "The unique identifier of the command to be deleted.")
+		iot_deleteCommandCmd.MarkFlagRequired("command-id")
+	})
 	iotCmd.AddCommand(iot_deleteCommandCmd)
 }

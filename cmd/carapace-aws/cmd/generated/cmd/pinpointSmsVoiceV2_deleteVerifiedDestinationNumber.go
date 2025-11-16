@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_deleteVerifiedDestinationNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteVerifiedDestinationNumberCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteVerifiedDestinationNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteVerifiedDestinationNumberCmd).Standalone()
 
-	pinpointSmsVoiceV2_deleteVerifiedDestinationNumberCmd.Flags().String("verified-destination-number-id", "", "The unique identifier for the verified destination phone number.")
-	pinpointSmsVoiceV2_deleteVerifiedDestinationNumberCmd.MarkFlagRequired("verified-destination-number-id")
+		pinpointSmsVoiceV2_deleteVerifiedDestinationNumberCmd.Flags().String("verified-destination-number-id", "", "The unique identifier for the verified destination phone number.")
+		pinpointSmsVoiceV2_deleteVerifiedDestinationNumberCmd.MarkFlagRequired("verified-destination-number-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteVerifiedDestinationNumberCmd)
 }

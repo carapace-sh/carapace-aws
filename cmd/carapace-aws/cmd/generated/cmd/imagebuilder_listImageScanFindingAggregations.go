@@ -12,9 +12,11 @@ var imagebuilder_listImageScanFindingAggregationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_listImageScanFindingAggregationsCmd).Standalone()
+	carapace.Gen(imagebuilder_listImageScanFindingAggregationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_listImageScanFindingAggregationsCmd).Standalone()
 
-	imagebuilder_listImageScanFindingAggregationsCmd.Flags().String("filter", "", "")
-	imagebuilder_listImageScanFindingAggregationsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		imagebuilder_listImageScanFindingAggregationsCmd.Flags().String("filter", "", "")
+		imagebuilder_listImageScanFindingAggregationsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_listImageScanFindingAggregationsCmd)
 }

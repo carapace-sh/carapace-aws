@@ -12,11 +12,13 @@ var bedrockRuntime_countTokensCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockRuntime_countTokensCmd).Standalone()
+	carapace.Gen(bedrockRuntime_countTokensCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockRuntime_countTokensCmd).Standalone()
 
-	bedrockRuntime_countTokensCmd.Flags().String("input", "", "The input for which to count tokens.")
-	bedrockRuntime_countTokensCmd.Flags().String("model-id", "", "The unique identifier or ARN of the foundation model to use for token counting.")
-	bedrockRuntime_countTokensCmd.MarkFlagRequired("input")
-	bedrockRuntime_countTokensCmd.MarkFlagRequired("model-id")
+		bedrockRuntime_countTokensCmd.Flags().String("input", "", "The input for which to count tokens.")
+		bedrockRuntime_countTokensCmd.Flags().String("model-id", "", "The unique identifier or ARN of the foundation model to use for token counting.")
+		bedrockRuntime_countTokensCmd.MarkFlagRequired("input")
+		bedrockRuntime_countTokensCmd.MarkFlagRequired("model-id")
+	})
 	bedrockRuntimeCmd.AddCommand(bedrockRuntime_countTokensCmd)
 }

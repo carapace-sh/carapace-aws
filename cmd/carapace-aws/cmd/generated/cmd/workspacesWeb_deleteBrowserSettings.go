@@ -12,9 +12,11 @@ var workspacesWeb_deleteBrowserSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_deleteBrowserSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_deleteBrowserSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_deleteBrowserSettingsCmd).Standalone()
 
-	workspacesWeb_deleteBrowserSettingsCmd.Flags().String("browser-settings-arn", "", "The ARN of the browser settings.")
-	workspacesWeb_deleteBrowserSettingsCmd.MarkFlagRequired("browser-settings-arn")
+		workspacesWeb_deleteBrowserSettingsCmd.Flags().String("browser-settings-arn", "", "The ARN of the browser settings.")
+		workspacesWeb_deleteBrowserSettingsCmd.MarkFlagRequired("browser-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_deleteBrowserSettingsCmd)
 }

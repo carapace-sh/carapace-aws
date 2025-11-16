@@ -12,11 +12,13 @@ var rekognition_getTextDetectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_getTextDetectionCmd).Standalone()
+	carapace.Gen(rekognition_getTextDetectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_getTextDetectionCmd).Standalone()
 
-	rekognition_getTextDetectionCmd.Flags().String("job-id", "", "Job identifier for the text detection operation for which you want results returned.")
-	rekognition_getTextDetectionCmd.Flags().String("max-results", "", "Maximum number of results to return per paginated call.")
-	rekognition_getTextDetectionCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns a pagination token in the response.")
-	rekognition_getTextDetectionCmd.MarkFlagRequired("job-id")
+		rekognition_getTextDetectionCmd.Flags().String("job-id", "", "Job identifier for the text detection operation for which you want results returned.")
+		rekognition_getTextDetectionCmd.Flags().String("max-results", "", "Maximum number of results to return per paginated call.")
+		rekognition_getTextDetectionCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns a pagination token in the response.")
+		rekognition_getTextDetectionCmd.MarkFlagRequired("job-id")
+	})
 	rekognitionCmd.AddCommand(rekognition_getTextDetectionCmd)
 }

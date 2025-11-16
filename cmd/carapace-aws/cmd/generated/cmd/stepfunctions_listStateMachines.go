@@ -12,9 +12,11 @@ var stepfunctions_listStateMachinesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_listStateMachinesCmd).Standalone()
+	carapace.Gen(stepfunctions_listStateMachinesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_listStateMachinesCmd).Standalone()
 
-	stepfunctions_listStateMachinesCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	stepfunctions_listStateMachinesCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		stepfunctions_listStateMachinesCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		stepfunctions_listStateMachinesCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_listStateMachinesCmd)
 }

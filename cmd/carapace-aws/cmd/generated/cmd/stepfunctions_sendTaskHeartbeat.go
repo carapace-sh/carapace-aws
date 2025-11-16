@@ -12,9 +12,11 @@ var stepfunctions_sendTaskHeartbeatCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_sendTaskHeartbeatCmd).Standalone()
+	carapace.Gen(stepfunctions_sendTaskHeartbeatCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_sendTaskHeartbeatCmd).Standalone()
 
-	stepfunctions_sendTaskHeartbeatCmd.Flags().String("task-token", "", "The token that represents this task.")
-	stepfunctions_sendTaskHeartbeatCmd.MarkFlagRequired("task-token")
+		stepfunctions_sendTaskHeartbeatCmd.Flags().String("task-token", "", "The token that represents this task.")
+		stepfunctions_sendTaskHeartbeatCmd.MarkFlagRequired("task-token")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_sendTaskHeartbeatCmd)
 }

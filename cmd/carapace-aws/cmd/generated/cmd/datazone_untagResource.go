@@ -12,11 +12,13 @@ var datazone_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_untagResourceCmd).Standalone()
+	carapace.Gen(datazone_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_untagResourceCmd).Standalone()
 
-	datazone_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be untagged in Amazon DataZone.")
-	datazone_untagResourceCmd.Flags().String("tag-keys", "", "Specifies the tag keys for the `UntagResource` action.")
-	datazone_untagResourceCmd.MarkFlagRequired("resource-arn")
-	datazone_untagResourceCmd.MarkFlagRequired("tag-keys")
+		datazone_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be untagged in Amazon DataZone.")
+		datazone_untagResourceCmd.Flags().String("tag-keys", "", "Specifies the tag keys for the `UntagResource` action.")
+		datazone_untagResourceCmd.MarkFlagRequired("resource-arn")
+		datazone_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	datazoneCmd.AddCommand(datazone_untagResourceCmd)
 }

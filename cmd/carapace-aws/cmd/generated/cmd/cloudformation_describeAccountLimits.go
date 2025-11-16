@@ -12,8 +12,10 @@ var cloudformation_describeAccountLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeAccountLimitsCmd).Standalone()
+	carapace.Gen(cloudformation_describeAccountLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeAccountLimitsCmd).Standalone()
 
-	cloudformation_describeAccountLimitsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		cloudformation_describeAccountLimitsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeAccountLimitsCmd)
 }

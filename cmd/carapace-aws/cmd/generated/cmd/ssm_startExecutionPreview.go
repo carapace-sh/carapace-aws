@@ -12,11 +12,13 @@ var ssm_startExecutionPreviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_startExecutionPreviewCmd).Standalone()
+	carapace.Gen(ssm_startExecutionPreviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_startExecutionPreviewCmd).Standalone()
 
-	ssm_startExecutionPreviewCmd.Flags().String("document-name", "", "The name of the Automation runbook to run.")
-	ssm_startExecutionPreviewCmd.Flags().String("document-version", "", "The version of the Automation runbook to run.")
-	ssm_startExecutionPreviewCmd.Flags().String("execution-inputs", "", "Information about the inputs that can be specified for the preview operation.")
-	ssm_startExecutionPreviewCmd.MarkFlagRequired("document-name")
+		ssm_startExecutionPreviewCmd.Flags().String("document-name", "", "The name of the Automation runbook to run.")
+		ssm_startExecutionPreviewCmd.Flags().String("document-version", "", "The version of the Automation runbook to run.")
+		ssm_startExecutionPreviewCmd.Flags().String("execution-inputs", "", "Information about the inputs that can be specified for the preview operation.")
+		ssm_startExecutionPreviewCmd.MarkFlagRequired("document-name")
+	})
 	ssmCmd.AddCommand(ssm_startExecutionPreviewCmd)
 }

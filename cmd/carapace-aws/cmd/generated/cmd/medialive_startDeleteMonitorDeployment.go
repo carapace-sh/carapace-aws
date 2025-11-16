@@ -12,9 +12,11 @@ var medialive_startDeleteMonitorDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_startDeleteMonitorDeploymentCmd).Standalone()
+	carapace.Gen(medialive_startDeleteMonitorDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_startDeleteMonitorDeploymentCmd).Standalone()
 
-	medialive_startDeleteMonitorDeploymentCmd.Flags().String("identifier", "", "A signal map's identifier.")
-	medialive_startDeleteMonitorDeploymentCmd.MarkFlagRequired("identifier")
+		medialive_startDeleteMonitorDeploymentCmd.Flags().String("identifier", "", "A signal map's identifier.")
+		medialive_startDeleteMonitorDeploymentCmd.MarkFlagRequired("identifier")
+	})
 	medialiveCmd.AddCommand(medialive_startDeleteMonitorDeploymentCmd)
 }

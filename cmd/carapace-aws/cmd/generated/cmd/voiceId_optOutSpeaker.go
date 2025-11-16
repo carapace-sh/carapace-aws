@@ -12,11 +12,13 @@ var voiceId_optOutSpeakerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_optOutSpeakerCmd).Standalone()
+	carapace.Gen(voiceId_optOutSpeakerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_optOutSpeakerCmd).Standalone()
 
-	voiceId_optOutSpeakerCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the speaker.")
-	voiceId_optOutSpeakerCmd.Flags().String("speaker-id", "", "The identifier of the speaker you want opted-out.")
-	voiceId_optOutSpeakerCmd.MarkFlagRequired("domain-id")
-	voiceId_optOutSpeakerCmd.MarkFlagRequired("speaker-id")
+		voiceId_optOutSpeakerCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the speaker.")
+		voiceId_optOutSpeakerCmd.Flags().String("speaker-id", "", "The identifier of the speaker you want opted-out.")
+		voiceId_optOutSpeakerCmd.MarkFlagRequired("domain-id")
+		voiceId_optOutSpeakerCmd.MarkFlagRequired("speaker-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_optOutSpeakerCmd)
 }

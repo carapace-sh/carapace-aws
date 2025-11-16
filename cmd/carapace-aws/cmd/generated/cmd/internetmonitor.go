@@ -12,7 +12,9 @@ var internetmonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(internetmonitorCmd).Standalone()
+	carapace.Gen(internetmonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(internetmonitorCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(internetmonitorCmd)
 }

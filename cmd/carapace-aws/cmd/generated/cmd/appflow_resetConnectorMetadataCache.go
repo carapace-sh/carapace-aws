@@ -12,12 +12,14 @@ var appflow_resetConnectorMetadataCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appflow_resetConnectorMetadataCacheCmd).Standalone()
+	carapace.Gen(appflow_resetConnectorMetadataCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appflow_resetConnectorMetadataCacheCmd).Standalone()
 
-	appflow_resetConnectorMetadataCacheCmd.Flags().String("api-version", "", "The API version that you specified in the connector profile that you’re resetting cached metadata for.")
-	appflow_resetConnectorMetadataCacheCmd.Flags().String("connector-entity-name", "", "Use this parameter if you want to reset cached metadata about the details for an individual entity.")
-	appflow_resetConnectorMetadataCacheCmd.Flags().String("connector-profile-name", "", "The name of the connector profile that you want to reset cached metadata for.")
-	appflow_resetConnectorMetadataCacheCmd.Flags().String("connector-type", "", "The type of connector to reset cached metadata for.")
-	appflow_resetConnectorMetadataCacheCmd.Flags().String("entities-path", "", "Use this parameter only if you’re resetting the cached metadata about a nested entity.")
+		appflow_resetConnectorMetadataCacheCmd.Flags().String("api-version", "", "The API version that you specified in the connector profile that you’re resetting cached metadata for.")
+		appflow_resetConnectorMetadataCacheCmd.Flags().String("connector-entity-name", "", "Use this parameter if you want to reset cached metadata about the details for an individual entity.")
+		appflow_resetConnectorMetadataCacheCmd.Flags().String("connector-profile-name", "", "The name of the connector profile that you want to reset cached metadata for.")
+		appflow_resetConnectorMetadataCacheCmd.Flags().String("connector-type", "", "The type of connector to reset cached metadata for.")
+		appflow_resetConnectorMetadataCacheCmd.Flags().String("entities-path", "", "Use this parameter only if you’re resetting the cached metadata about a nested entity.")
+	})
 	appflowCmd.AddCommand(appflow_resetConnectorMetadataCacheCmd)
 }

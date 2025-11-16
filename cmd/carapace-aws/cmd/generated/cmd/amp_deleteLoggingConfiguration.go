@@ -12,10 +12,12 @@ var amp_deleteLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_deleteLoggingConfigurationCmd).Standalone()
+	carapace.Gen(amp_deleteLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_deleteLoggingConfigurationCmd).Standalone()
 
-	amp_deleteLoggingConfigurationCmd.Flags().String("client-token", "", "A unique identifier that you can provide to ensure the idempotency of the request.")
-	amp_deleteLoggingConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace containing the logging configuration to delete.")
-	amp_deleteLoggingConfigurationCmd.MarkFlagRequired("workspace-id")
+		amp_deleteLoggingConfigurationCmd.Flags().String("client-token", "", "A unique identifier that you can provide to ensure the idempotency of the request.")
+		amp_deleteLoggingConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace containing the logging configuration to delete.")
+		amp_deleteLoggingConfigurationCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_deleteLoggingConfigurationCmd)
 }

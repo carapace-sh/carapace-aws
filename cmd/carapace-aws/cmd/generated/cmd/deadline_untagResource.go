@@ -12,11 +12,13 @@ var deadline_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_untagResourceCmd).Standalone()
+	carapace.Gen(deadline_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_untagResourceCmd).Standalone()
 
-	deadline_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to remove the tag from.")
-	deadline_untagResourceCmd.Flags().String("tag-keys", "", "They keys of the tag.")
-	deadline_untagResourceCmd.MarkFlagRequired("resource-arn")
-	deadline_untagResourceCmd.MarkFlagRequired("tag-keys")
+		deadline_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to remove the tag from.")
+		deadline_untagResourceCmd.Flags().String("tag-keys", "", "They keys of the tag.")
+		deadline_untagResourceCmd.MarkFlagRequired("resource-arn")
+		deadline_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	deadlineCmd.AddCommand(deadline_untagResourceCmd)
 }

@@ -12,11 +12,13 @@ var omics_getReferenceMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getReferenceMetadataCmd).Standalone()
+	carapace.Gen(omics_getReferenceMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getReferenceMetadataCmd).Standalone()
 
-	omics_getReferenceMetadataCmd.Flags().String("id", "", "The reference's ID.")
-	omics_getReferenceMetadataCmd.Flags().String("reference-store-id", "", "The reference's reference store ID.")
-	omics_getReferenceMetadataCmd.MarkFlagRequired("id")
-	omics_getReferenceMetadataCmd.MarkFlagRequired("reference-store-id")
+		omics_getReferenceMetadataCmd.Flags().String("id", "", "The reference's ID.")
+		omics_getReferenceMetadataCmd.Flags().String("reference-store-id", "", "The reference's reference store ID.")
+		omics_getReferenceMetadataCmd.MarkFlagRequired("id")
+		omics_getReferenceMetadataCmd.MarkFlagRequired("reference-store-id")
+	})
 	omicsCmd.AddCommand(omics_getReferenceMetadataCmd)
 }

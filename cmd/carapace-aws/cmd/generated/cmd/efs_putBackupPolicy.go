@@ -12,11 +12,13 @@ var efs_putBackupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_putBackupPolicyCmd).Standalone()
+	carapace.Gen(efs_putBackupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_putBackupPolicyCmd).Standalone()
 
-	efs_putBackupPolicyCmd.Flags().String("backup-policy", "", "The backup policy included in the `PutBackupPolicy` request.")
-	efs_putBackupPolicyCmd.Flags().String("file-system-id", "", "Specifies which EFS file system to update the backup policy for.")
-	efs_putBackupPolicyCmd.MarkFlagRequired("backup-policy")
-	efs_putBackupPolicyCmd.MarkFlagRequired("file-system-id")
+		efs_putBackupPolicyCmd.Flags().String("backup-policy", "", "The backup policy included in the `PutBackupPolicy` request.")
+		efs_putBackupPolicyCmd.Flags().String("file-system-id", "", "Specifies which EFS file system to update the backup policy for.")
+		efs_putBackupPolicyCmd.MarkFlagRequired("backup-policy")
+		efs_putBackupPolicyCmd.MarkFlagRequired("file-system-id")
+	})
 	efsCmd.AddCommand(efs_putBackupPolicyCmd)
 }

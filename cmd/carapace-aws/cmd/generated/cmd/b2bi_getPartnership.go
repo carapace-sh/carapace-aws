@@ -12,9 +12,11 @@ var b2bi_getPartnershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_getPartnershipCmd).Standalone()
+	carapace.Gen(b2bi_getPartnershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_getPartnershipCmd).Standalone()
 
-	b2bi_getPartnershipCmd.Flags().String("partnership-id", "", "Specifies the unique, system-generated identifier for a partnership.")
-	b2bi_getPartnershipCmd.MarkFlagRequired("partnership-id")
+		b2bi_getPartnershipCmd.Flags().String("partnership-id", "", "Specifies the unique, system-generated identifier for a partnership.")
+		b2bi_getPartnershipCmd.MarkFlagRequired("partnership-id")
+	})
 	b2biCmd.AddCommand(b2bi_getPartnershipCmd)
 }

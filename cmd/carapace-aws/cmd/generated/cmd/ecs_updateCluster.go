@@ -12,12 +12,14 @@ var ecs_updateClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_updateClusterCmd).Standalone()
+	carapace.Gen(ecs_updateClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_updateClusterCmd).Standalone()
 
-	ecs_updateClusterCmd.Flags().String("cluster", "", "The name of the cluster to modify the settings for.")
-	ecs_updateClusterCmd.Flags().String("configuration", "", "The execute command configuration for the cluster.")
-	ecs_updateClusterCmd.Flags().String("service-connect-defaults", "", "Use this parameter to set a default Service Connect namespace.")
-	ecs_updateClusterCmd.Flags().String("settings", "", "The cluster settings for your cluster.")
-	ecs_updateClusterCmd.MarkFlagRequired("cluster")
+		ecs_updateClusterCmd.Flags().String("cluster", "", "The name of the cluster to modify the settings for.")
+		ecs_updateClusterCmd.Flags().String("configuration", "", "The execute command configuration for the cluster.")
+		ecs_updateClusterCmd.Flags().String("service-connect-defaults", "", "Use this parameter to set a default Service Connect namespace.")
+		ecs_updateClusterCmd.Flags().String("settings", "", "The cluster settings for your cluster.")
+		ecs_updateClusterCmd.MarkFlagRequired("cluster")
+	})
 	ecsCmd.AddCommand(ecs_updateClusterCmd)
 }

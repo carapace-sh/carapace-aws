@@ -12,9 +12,11 @@ var dms_deleteDataProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteDataProviderCmd).Standalone()
+	carapace.Gen(dms_deleteDataProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteDataProviderCmd).Standalone()
 
-	dms_deleteDataProviderCmd.Flags().String("data-provider-identifier", "", "The identifier of the data provider to delete.")
-	dms_deleteDataProviderCmd.MarkFlagRequired("data-provider-identifier")
+		dms_deleteDataProviderCmd.Flags().String("data-provider-identifier", "", "The identifier of the data provider to delete.")
+		dms_deleteDataProviderCmd.MarkFlagRequired("data-provider-identifier")
+	})
 	dmsCmd.AddCommand(dms_deleteDataProviderCmd)
 }

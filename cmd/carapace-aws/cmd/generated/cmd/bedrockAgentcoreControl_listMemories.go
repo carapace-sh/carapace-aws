@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_listMemoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_listMemoriesCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_listMemoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_listMemoriesCmd).Standalone()
 
-	bedrockAgentcoreControl_listMemoriesCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	bedrockAgentcoreControl_listMemoriesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		bedrockAgentcoreControl_listMemoriesCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		bedrockAgentcoreControl_listMemoriesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_listMemoriesCmd)
 }

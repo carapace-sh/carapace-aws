@@ -12,9 +12,11 @@ var acm_describeCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acm_describeCertificateCmd).Standalone()
+	carapace.Gen(acm_describeCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acm_describeCertificateCmd).Standalone()
 
-	acm_describeCertificateCmd.Flags().String("certificate-arn", "", "The Amazon Resource Name (ARN) of the ACM certificate.")
-	acm_describeCertificateCmd.MarkFlagRequired("certificate-arn")
+		acm_describeCertificateCmd.Flags().String("certificate-arn", "", "The Amazon Resource Name (ARN) of the ACM certificate.")
+		acm_describeCertificateCmd.MarkFlagRequired("certificate-arn")
+	})
 	acmCmd.AddCommand(acm_describeCertificateCmd)
 }

@@ -12,9 +12,11 @@ var securityhub_deleteFindingAggregatorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_deleteFindingAggregatorCmd).Standalone()
+	carapace.Gen(securityhub_deleteFindingAggregatorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_deleteFindingAggregatorCmd).Standalone()
 
-	securityhub_deleteFindingAggregatorCmd.Flags().String("finding-aggregator-arn", "", "The ARN of the finding aggregator to delete.")
-	securityhub_deleteFindingAggregatorCmd.MarkFlagRequired("finding-aggregator-arn")
+		securityhub_deleteFindingAggregatorCmd.Flags().String("finding-aggregator-arn", "", "The ARN of the finding aggregator to delete.")
+		securityhub_deleteFindingAggregatorCmd.MarkFlagRequired("finding-aggregator-arn")
+	})
 	securityhubCmd.AddCommand(securityhub_deleteFindingAggregatorCmd)
 }

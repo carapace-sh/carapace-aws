@@ -12,10 +12,12 @@ var devopsGuru_describeInsightCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeInsightCmd).Standalone()
+	carapace.Gen(devopsGuru_describeInsightCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeInsightCmd).Standalone()
 
-	devopsGuru_describeInsightCmd.Flags().String("account-id", "", "The ID of the member account in the organization.")
-	devopsGuru_describeInsightCmd.Flags().String("id", "", "The ID of the insight.")
-	devopsGuru_describeInsightCmd.MarkFlagRequired("id")
+		devopsGuru_describeInsightCmd.Flags().String("account-id", "", "The ID of the member account in the organization.")
+		devopsGuru_describeInsightCmd.Flags().String("id", "", "The ID of the insight.")
+		devopsGuru_describeInsightCmd.MarkFlagRequired("id")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeInsightCmd)
 }

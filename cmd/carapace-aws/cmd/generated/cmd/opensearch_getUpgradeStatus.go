@@ -12,9 +12,11 @@ var opensearch_getUpgradeStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_getUpgradeStatusCmd).Standalone()
+	carapace.Gen(opensearch_getUpgradeStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_getUpgradeStatusCmd).Standalone()
 
-	opensearch_getUpgradeStatusCmd.Flags().String("domain-name", "", "The domain of the domain to get upgrade status information for.")
-	opensearch_getUpgradeStatusCmd.MarkFlagRequired("domain-name")
+		opensearch_getUpgradeStatusCmd.Flags().String("domain-name", "", "The domain of the domain to get upgrade status information for.")
+		opensearch_getUpgradeStatusCmd.MarkFlagRequired("domain-name")
+	})
 	opensearchCmd.AddCommand(opensearch_getUpgradeStatusCmd)
 }

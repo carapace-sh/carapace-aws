@@ -12,9 +12,11 @@ var forecast_listDatasetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_listDatasetsCmd).Standalone()
+	carapace.Gen(forecast_listDatasetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_listDatasetsCmd).Standalone()
 
-	forecast_listDatasetsCmd.Flags().String("max-results", "", "The number of items to return in the response.")
-	forecast_listDatasetsCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a `NextToken`.")
+		forecast_listDatasetsCmd.Flags().String("max-results", "", "The number of items to return in the response.")
+		forecast_listDatasetsCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a `NextToken`.")
+	})
 	forecastCmd.AddCommand(forecast_listDatasetsCmd)
 }

@@ -12,9 +12,11 @@ var iotfleetwise_deleteStateTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_deleteStateTemplateCmd).Standalone()
+	carapace.Gen(iotfleetwise_deleteStateTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_deleteStateTemplateCmd).Standalone()
 
-	iotfleetwise_deleteStateTemplateCmd.Flags().String("identifier", "", "The unique ID of the state template.")
-	iotfleetwise_deleteStateTemplateCmd.MarkFlagRequired("identifier")
+		iotfleetwise_deleteStateTemplateCmd.Flags().String("identifier", "", "The unique ID of the state template.")
+		iotfleetwise_deleteStateTemplateCmd.MarkFlagRequired("identifier")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_deleteStateTemplateCmd)
 }

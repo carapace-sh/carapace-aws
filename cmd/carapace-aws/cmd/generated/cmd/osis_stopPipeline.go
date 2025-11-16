@@ -12,9 +12,11 @@ var osis_stopPipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_stopPipelineCmd).Standalone()
+	carapace.Gen(osis_stopPipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_stopPipelineCmd).Standalone()
 
-	osis_stopPipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to stop.")
-	osis_stopPipelineCmd.MarkFlagRequired("pipeline-name")
+		osis_stopPipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to stop.")
+		osis_stopPipelineCmd.MarkFlagRequired("pipeline-name")
+	})
 	osisCmd.AddCommand(osis_stopPipelineCmd)
 }

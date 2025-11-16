@@ -12,9 +12,11 @@ var logs_listTagsLogGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_listTagsLogGroupCmd).Standalone()
+	carapace.Gen(logs_listTagsLogGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_listTagsLogGroupCmd).Standalone()
 
-	logs_listTagsLogGroupCmd.Flags().String("log-group-name", "", "The name of the log group.")
-	logs_listTagsLogGroupCmd.MarkFlagRequired("log-group-name")
+		logs_listTagsLogGroupCmd.Flags().String("log-group-name", "", "The name of the log group.")
+		logs_listTagsLogGroupCmd.MarkFlagRequired("log-group-name")
+	})
 	logsCmd.AddCommand(logs_listTagsLogGroupCmd)
 }

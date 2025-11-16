@@ -12,9 +12,11 @@ var polly_getLexiconCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(polly_getLexiconCmd).Standalone()
+	carapace.Gen(polly_getLexiconCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(polly_getLexiconCmd).Standalone()
 
-	polly_getLexiconCmd.Flags().String("name", "", "Name of the lexicon.")
-	polly_getLexiconCmd.MarkFlagRequired("name")
+		polly_getLexiconCmd.Flags().String("name", "", "Name of the lexicon.")
+		polly_getLexiconCmd.MarkFlagRequired("name")
+	})
 	pollyCmd.AddCommand(polly_getLexiconCmd)
 }

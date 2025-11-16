@@ -12,7 +12,9 @@ var route53_getCheckerIpRangesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getCheckerIpRangesCmd).Standalone()
+	carapace.Gen(route53_getCheckerIpRangesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getCheckerIpRangesCmd).Standalone()
 
+	})
 	route53Cmd.AddCommand(route53_getCheckerIpRangesCmd)
 }

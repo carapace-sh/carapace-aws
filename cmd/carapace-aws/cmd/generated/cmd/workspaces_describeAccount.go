@@ -12,7 +12,9 @@ var workspaces_describeAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeAccountCmd).Standalone()
+	carapace.Gen(workspaces_describeAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeAccountCmd).Standalone()
 
+	})
 	workspacesCmd.AddCommand(workspaces_describeAccountCmd)
 }

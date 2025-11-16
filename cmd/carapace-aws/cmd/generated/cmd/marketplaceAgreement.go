@@ -12,7 +12,9 @@ var marketplaceAgreementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceAgreementCmd).Standalone()
+	carapace.Gen(marketplaceAgreementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceAgreementCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(marketplaceAgreementCmd)
 }

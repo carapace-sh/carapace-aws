@@ -12,11 +12,13 @@ var cognitoIdentity_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdentity_tagResourceCmd).Standalone()
+	carapace.Gen(cognitoIdentity_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdentity_tagResourceCmd).Standalone()
 
-	cognitoIdentity_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the identity pool.")
-	cognitoIdentity_tagResourceCmd.Flags().String("tags", "", "The tags to assign to the identity pool.")
-	cognitoIdentity_tagResourceCmd.MarkFlagRequired("resource-arn")
-	cognitoIdentity_tagResourceCmd.MarkFlagRequired("tags")
+		cognitoIdentity_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the identity pool.")
+		cognitoIdentity_tagResourceCmd.Flags().String("tags", "", "The tags to assign to the identity pool.")
+		cognitoIdentity_tagResourceCmd.MarkFlagRequired("resource-arn")
+		cognitoIdentity_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	cognitoIdentityCmd.AddCommand(cognitoIdentity_tagResourceCmd)
 }

@@ -12,13 +12,15 @@ var connect_listUserProficienciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listUserProficienciesCmd).Standalone()
+	carapace.Gen(connect_listUserProficienciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listUserProficienciesCmd).Standalone()
 
-	connect_listUserProficienciesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listUserProficienciesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listUserProficienciesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listUserProficienciesCmd.Flags().String("user-id", "", "The identifier of the user account.")
-	connect_listUserProficienciesCmd.MarkFlagRequired("instance-id")
-	connect_listUserProficienciesCmd.MarkFlagRequired("user-id")
+		connect_listUserProficienciesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listUserProficienciesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listUserProficienciesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listUserProficienciesCmd.Flags().String("user-id", "", "The identifier of the user account.")
+		connect_listUserProficienciesCmd.MarkFlagRequired("instance-id")
+		connect_listUserProficienciesCmd.MarkFlagRequired("user-id")
+	})
 	connectCmd.AddCommand(connect_listUserProficienciesCmd)
 }

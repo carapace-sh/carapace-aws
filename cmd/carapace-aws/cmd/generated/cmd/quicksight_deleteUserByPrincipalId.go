@@ -12,13 +12,15 @@ var quicksight_deleteUserByPrincipalIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteUserByPrincipalIdCmd).Standalone()
+	carapace.Gen(quicksight_deleteUserByPrincipalIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteUserByPrincipalIdCmd).Standalone()
 
-	quicksight_deleteUserByPrincipalIdCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that the user is in.")
-	quicksight_deleteUserByPrincipalIdCmd.Flags().String("namespace", "", "The namespace.")
-	quicksight_deleteUserByPrincipalIdCmd.Flags().String("principal-id", "", "The principal ID of the user.")
-	quicksight_deleteUserByPrincipalIdCmd.MarkFlagRequired("aws-account-id")
-	quicksight_deleteUserByPrincipalIdCmd.MarkFlagRequired("namespace")
-	quicksight_deleteUserByPrincipalIdCmd.MarkFlagRequired("principal-id")
+		quicksight_deleteUserByPrincipalIdCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that the user is in.")
+		quicksight_deleteUserByPrincipalIdCmd.Flags().String("namespace", "", "The namespace.")
+		quicksight_deleteUserByPrincipalIdCmd.Flags().String("principal-id", "", "The principal ID of the user.")
+		quicksight_deleteUserByPrincipalIdCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteUserByPrincipalIdCmd.MarkFlagRequired("namespace")
+		quicksight_deleteUserByPrincipalIdCmd.MarkFlagRequired("principal-id")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteUserByPrincipalIdCmd)
 }

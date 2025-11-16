@@ -12,11 +12,13 @@ var globalaccelerator_provisionByoipCidrCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_provisionByoipCidrCmd).Standalone()
+	carapace.Gen(globalaccelerator_provisionByoipCidrCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_provisionByoipCidrCmd).Standalone()
 
-	globalaccelerator_provisionByoipCidrCmd.Flags().String("cidr", "", "The public IPv4 address range, in CIDR notation.")
-	globalaccelerator_provisionByoipCidrCmd.Flags().String("cidr-authorization-context", "", "A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP.")
-	globalaccelerator_provisionByoipCidrCmd.MarkFlagRequired("cidr")
-	globalaccelerator_provisionByoipCidrCmd.MarkFlagRequired("cidr-authorization-context")
+		globalaccelerator_provisionByoipCidrCmd.Flags().String("cidr", "", "The public IPv4 address range, in CIDR notation.")
+		globalaccelerator_provisionByoipCidrCmd.Flags().String("cidr-authorization-context", "", "A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP.")
+		globalaccelerator_provisionByoipCidrCmd.MarkFlagRequired("cidr")
+		globalaccelerator_provisionByoipCidrCmd.MarkFlagRequired("cidr-authorization-context")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_provisionByoipCidrCmd)
 }

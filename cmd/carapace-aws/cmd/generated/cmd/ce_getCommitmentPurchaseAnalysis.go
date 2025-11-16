@@ -12,9 +12,11 @@ var ce_getCommitmentPurchaseAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_getCommitmentPurchaseAnalysisCmd).Standalone()
+	carapace.Gen(ce_getCommitmentPurchaseAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_getCommitmentPurchaseAnalysisCmd).Standalone()
 
-	ce_getCommitmentPurchaseAnalysisCmd.Flags().String("analysis-id", "", "The analysis ID that's associated with the commitment purchase analysis.")
-	ce_getCommitmentPurchaseAnalysisCmd.MarkFlagRequired("analysis-id")
+		ce_getCommitmentPurchaseAnalysisCmd.Flags().String("analysis-id", "", "The analysis ID that's associated with the commitment purchase analysis.")
+		ce_getCommitmentPurchaseAnalysisCmd.MarkFlagRequired("analysis-id")
+	})
 	ceCmd.AddCommand(ce_getCommitmentPurchaseAnalysisCmd)
 }

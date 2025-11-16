@@ -12,9 +12,11 @@ var chimeSdkMediaPipelines_getMediaPipelineKinesisVideoStreamPoolCmd = &cobra.Co
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_getMediaPipelineKinesisVideoStreamPoolCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_getMediaPipelineKinesisVideoStreamPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_getMediaPipelineKinesisVideoStreamPoolCmd).Standalone()
 
-	chimeSdkMediaPipelines_getMediaPipelineKinesisVideoStreamPoolCmd.Flags().String("identifier", "", "The unique identifier of the requested resource.")
-	chimeSdkMediaPipelines_getMediaPipelineKinesisVideoStreamPoolCmd.MarkFlagRequired("identifier")
+		chimeSdkMediaPipelines_getMediaPipelineKinesisVideoStreamPoolCmd.Flags().String("identifier", "", "The unique identifier of the requested resource.")
+		chimeSdkMediaPipelines_getMediaPipelineKinesisVideoStreamPoolCmd.MarkFlagRequired("identifier")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_getMediaPipelineKinesisVideoStreamPoolCmd)
 }

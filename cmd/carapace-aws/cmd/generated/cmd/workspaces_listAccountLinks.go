@@ -12,10 +12,12 @@ var workspaces_listAccountLinksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_listAccountLinksCmd).Standalone()
+	carapace.Gen(workspaces_listAccountLinksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_listAccountLinksCmd).Standalone()
 
-	workspaces_listAccountLinksCmd.Flags().String("link-status-filter", "", "Filters the account based on their link status.")
-	workspaces_listAccountLinksCmd.Flags().String("max-results", "", "The maximum number of accounts to return.")
-	workspaces_listAccountLinksCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+		workspaces_listAccountLinksCmd.Flags().String("link-status-filter", "", "Filters the account based on their link status.")
+		workspaces_listAccountLinksCmd.Flags().String("max-results", "", "The maximum number of accounts to return.")
+		workspaces_listAccountLinksCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+	})
 	workspacesCmd.AddCommand(workspaces_listAccountLinksCmd)
 }

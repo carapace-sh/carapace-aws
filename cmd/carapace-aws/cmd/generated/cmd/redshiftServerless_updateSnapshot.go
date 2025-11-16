@@ -12,10 +12,12 @@ var redshiftServerless_updateSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_updateSnapshotCmd).Standalone()
+	carapace.Gen(redshiftServerless_updateSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_updateSnapshotCmd).Standalone()
 
-	redshiftServerless_updateSnapshotCmd.Flags().String("retention-period", "", "The new retention period of the snapshot.")
-	redshiftServerless_updateSnapshotCmd.Flags().String("snapshot-name", "", "The name of the snapshot.")
-	redshiftServerless_updateSnapshotCmd.MarkFlagRequired("snapshot-name")
+		redshiftServerless_updateSnapshotCmd.Flags().String("retention-period", "", "The new retention period of the snapshot.")
+		redshiftServerless_updateSnapshotCmd.Flags().String("snapshot-name", "", "The name of the snapshot.")
+		redshiftServerless_updateSnapshotCmd.MarkFlagRequired("snapshot-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_updateSnapshotCmd)
 }

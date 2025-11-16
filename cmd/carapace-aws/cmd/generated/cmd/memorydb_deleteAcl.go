@@ -12,9 +12,11 @@ var memorydb_deleteAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_deleteAclCmd).Standalone()
+	carapace.Gen(memorydb_deleteAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_deleteAclCmd).Standalone()
 
-	memorydb_deleteAclCmd.Flags().String("aclname", "", "The name of the Access Control List to delete.")
-	memorydb_deleteAclCmd.MarkFlagRequired("aclname")
+		memorydb_deleteAclCmd.Flags().String("aclname", "", "The name of the Access Control List to delete.")
+		memorydb_deleteAclCmd.MarkFlagRequired("aclname")
+	})
 	memorydbCmd.AddCommand(memorydb_deleteAclCmd)
 }

@@ -12,9 +12,11 @@ var mediastore_deleteLifecyclePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_deleteLifecyclePolicyCmd).Standalone()
+	carapace.Gen(mediastore_deleteLifecyclePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_deleteLifecyclePolicyCmd).Standalone()
 
-	mediastore_deleteLifecyclePolicyCmd.Flags().String("container-name", "", "The name of the container that holds the object lifecycle policy.")
-	mediastore_deleteLifecyclePolicyCmd.MarkFlagRequired("container-name")
+		mediastore_deleteLifecyclePolicyCmd.Flags().String("container-name", "", "The name of the container that holds the object lifecycle policy.")
+		mediastore_deleteLifecyclePolicyCmd.MarkFlagRequired("container-name")
+	})
 	mediastoreCmd.AddCommand(mediastore_deleteLifecyclePolicyCmd)
 }

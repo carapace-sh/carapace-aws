@@ -12,11 +12,13 @@ var eks_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_tagResourceCmd).Standalone()
+	carapace.Gen(eks_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_tagResourceCmd).Standalone()
 
-	eks_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to add tags to.")
-	eks_tagResourceCmd.Flags().String("tags", "", "Metadata that assists with categorization and organization.")
-	eks_tagResourceCmd.MarkFlagRequired("resource-arn")
-	eks_tagResourceCmd.MarkFlagRequired("tags")
+		eks_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to add tags to.")
+		eks_tagResourceCmd.Flags().String("tags", "", "Metadata that assists with categorization and organization.")
+		eks_tagResourceCmd.MarkFlagRequired("resource-arn")
+		eks_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	eksCmd.AddCommand(eks_tagResourceCmd)
 }

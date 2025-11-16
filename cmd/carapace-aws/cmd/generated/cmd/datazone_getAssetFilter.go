@@ -12,13 +12,15 @@ var datazone_getAssetFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getAssetFilterCmd).Standalone()
+	carapace.Gen(datazone_getAssetFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getAssetFilterCmd).Standalone()
 
-	datazone_getAssetFilterCmd.Flags().String("asset-identifier", "", "The ID of the data asset.")
-	datazone_getAssetFilterCmd.Flags().String("domain-identifier", "", "The ID of the domain where you want to get an asset filter.")
-	datazone_getAssetFilterCmd.Flags().String("identifier", "", "The ID of the asset filter.")
-	datazone_getAssetFilterCmd.MarkFlagRequired("asset-identifier")
-	datazone_getAssetFilterCmd.MarkFlagRequired("domain-identifier")
-	datazone_getAssetFilterCmd.MarkFlagRequired("identifier")
+		datazone_getAssetFilterCmd.Flags().String("asset-identifier", "", "The ID of the data asset.")
+		datazone_getAssetFilterCmd.Flags().String("domain-identifier", "", "The ID of the domain where you want to get an asset filter.")
+		datazone_getAssetFilterCmd.Flags().String("identifier", "", "The ID of the asset filter.")
+		datazone_getAssetFilterCmd.MarkFlagRequired("asset-identifier")
+		datazone_getAssetFilterCmd.MarkFlagRequired("domain-identifier")
+		datazone_getAssetFilterCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getAssetFilterCmd)
 }

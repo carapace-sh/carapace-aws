@@ -12,9 +12,11 @@ var clouddirectory_deleteSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_deleteSchemaCmd).Standalone()
+	carapace.Gen(clouddirectory_deleteSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_deleteSchemaCmd).Standalone()
 
-	clouddirectory_deleteSchemaCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) of the development schema.")
-	clouddirectory_deleteSchemaCmd.MarkFlagRequired("schema-arn")
+		clouddirectory_deleteSchemaCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) of the development schema.")
+		clouddirectory_deleteSchemaCmd.MarkFlagRequired("schema-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_deleteSchemaCmd)
 }

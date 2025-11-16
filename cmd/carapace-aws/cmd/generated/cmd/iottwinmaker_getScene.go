@@ -12,11 +12,13 @@ var iottwinmaker_getSceneCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_getSceneCmd).Standalone()
+	carapace.Gen(iottwinmaker_getSceneCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_getSceneCmd).Standalone()
 
-	iottwinmaker_getSceneCmd.Flags().String("scene-id", "", "The ID of the scene.")
-	iottwinmaker_getSceneCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the scene.")
-	iottwinmaker_getSceneCmd.MarkFlagRequired("scene-id")
-	iottwinmaker_getSceneCmd.MarkFlagRequired("workspace-id")
+		iottwinmaker_getSceneCmd.Flags().String("scene-id", "", "The ID of the scene.")
+		iottwinmaker_getSceneCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the scene.")
+		iottwinmaker_getSceneCmd.MarkFlagRequired("scene-id")
+		iottwinmaker_getSceneCmd.MarkFlagRequired("workspace-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_getSceneCmd)
 }

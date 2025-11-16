@@ -12,13 +12,15 @@ var quicksight_updateBrandPublishedVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_updateBrandPublishedVersionCmd).Standalone()
+	carapace.Gen(quicksight_updateBrandPublishedVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_updateBrandPublishedVersionCmd).Standalone()
 
-	quicksight_updateBrandPublishedVersionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that owns the brand.")
-	quicksight_updateBrandPublishedVersionCmd.Flags().String("brand-id", "", "The ID of the Quick Suite brand.")
-	quicksight_updateBrandPublishedVersionCmd.Flags().String("version-id", "", "The ID of the published version.")
-	quicksight_updateBrandPublishedVersionCmd.MarkFlagRequired("aws-account-id")
-	quicksight_updateBrandPublishedVersionCmd.MarkFlagRequired("brand-id")
-	quicksight_updateBrandPublishedVersionCmd.MarkFlagRequired("version-id")
+		quicksight_updateBrandPublishedVersionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that owns the brand.")
+		quicksight_updateBrandPublishedVersionCmd.Flags().String("brand-id", "", "The ID of the Quick Suite brand.")
+		quicksight_updateBrandPublishedVersionCmd.Flags().String("version-id", "", "The ID of the published version.")
+		quicksight_updateBrandPublishedVersionCmd.MarkFlagRequired("aws-account-id")
+		quicksight_updateBrandPublishedVersionCmd.MarkFlagRequired("brand-id")
+		quicksight_updateBrandPublishedVersionCmd.MarkFlagRequired("version-id")
+	})
 	quicksightCmd.AddCommand(quicksight_updateBrandPublishedVersionCmd)
 }

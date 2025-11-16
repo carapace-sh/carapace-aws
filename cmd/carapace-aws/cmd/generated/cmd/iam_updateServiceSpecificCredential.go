@@ -12,12 +12,14 @@ var iam_updateServiceSpecificCredentialCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_updateServiceSpecificCredentialCmd).Standalone()
+	carapace.Gen(iam_updateServiceSpecificCredentialCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_updateServiceSpecificCredentialCmd).Standalone()
 
-	iam_updateServiceSpecificCredentialCmd.Flags().String("service-specific-credential-id", "", "The unique identifier of the service-specific credential.")
-	iam_updateServiceSpecificCredentialCmd.Flags().String("status", "", "The status to be assigned to the service-specific credential.")
-	iam_updateServiceSpecificCredentialCmd.Flags().String("user-name", "", "The name of the IAM user associated with the service-specific credential.")
-	iam_updateServiceSpecificCredentialCmd.MarkFlagRequired("service-specific-credential-id")
-	iam_updateServiceSpecificCredentialCmd.MarkFlagRequired("status")
+		iam_updateServiceSpecificCredentialCmd.Flags().String("service-specific-credential-id", "", "The unique identifier of the service-specific credential.")
+		iam_updateServiceSpecificCredentialCmd.Flags().String("status", "", "The status to be assigned to the service-specific credential.")
+		iam_updateServiceSpecificCredentialCmd.Flags().String("user-name", "", "The name of the IAM user associated with the service-specific credential.")
+		iam_updateServiceSpecificCredentialCmd.MarkFlagRequired("service-specific-credential-id")
+		iam_updateServiceSpecificCredentialCmd.MarkFlagRequired("status")
+	})
 	iamCmd.AddCommand(iam_updateServiceSpecificCredentialCmd)
 }

@@ -12,13 +12,15 @@ var pinpoint_getJourneyExecutionMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getJourneyExecutionMetricsCmd).Standalone()
+	carapace.Gen(pinpoint_getJourneyExecutionMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getJourneyExecutionMetricsCmd).Standalone()
 
-	pinpoint_getJourneyExecutionMetricsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getJourneyExecutionMetricsCmd.Flags().String("journey-id", "", "The unique identifier for the journey.")
-	pinpoint_getJourneyExecutionMetricsCmd.Flags().String("next-token", "", "The `string that specifies which page of results to return in a paginated response.")
-	pinpoint_getJourneyExecutionMetricsCmd.Flags().String("page-size", "", "The maximum number of items to include in each page of a paginated response.")
-	pinpoint_getJourneyExecutionMetricsCmd.MarkFlagRequired("application-id")
-	pinpoint_getJourneyExecutionMetricsCmd.MarkFlagRequired("journey-id")
+		pinpoint_getJourneyExecutionMetricsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getJourneyExecutionMetricsCmd.Flags().String("journey-id", "", "The unique identifier for the journey.")
+		pinpoint_getJourneyExecutionMetricsCmd.Flags().String("next-token", "", "The `string that specifies which page of results to return in a paginated response.")
+		pinpoint_getJourneyExecutionMetricsCmd.Flags().String("page-size", "", "The maximum number of items to include in each page of a paginated response.")
+		pinpoint_getJourneyExecutionMetricsCmd.MarkFlagRequired("application-id")
+		pinpoint_getJourneyExecutionMetricsCmd.MarkFlagRequired("journey-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getJourneyExecutionMetricsCmd)
 }

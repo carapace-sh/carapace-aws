@@ -12,15 +12,17 @@ var connect_startContactRecordingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_startContactRecordingCmd).Standalone()
+	carapace.Gen(connect_startContactRecordingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_startContactRecordingCmd).Standalone()
 
-	connect_startContactRecordingCmd.Flags().String("contact-id", "", "The identifier of the contact.")
-	connect_startContactRecordingCmd.Flags().String("initial-contact-id", "", "The identifier of the contact.")
-	connect_startContactRecordingCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_startContactRecordingCmd.Flags().String("voice-recording-configuration", "", "The person being recorded.")
-	connect_startContactRecordingCmd.MarkFlagRequired("contact-id")
-	connect_startContactRecordingCmd.MarkFlagRequired("initial-contact-id")
-	connect_startContactRecordingCmd.MarkFlagRequired("instance-id")
-	connect_startContactRecordingCmd.MarkFlagRequired("voice-recording-configuration")
+		connect_startContactRecordingCmd.Flags().String("contact-id", "", "The identifier of the contact.")
+		connect_startContactRecordingCmd.Flags().String("initial-contact-id", "", "The identifier of the contact.")
+		connect_startContactRecordingCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_startContactRecordingCmd.Flags().String("voice-recording-configuration", "", "The person being recorded.")
+		connect_startContactRecordingCmd.MarkFlagRequired("contact-id")
+		connect_startContactRecordingCmd.MarkFlagRequired("initial-contact-id")
+		connect_startContactRecordingCmd.MarkFlagRequired("instance-id")
+		connect_startContactRecordingCmd.MarkFlagRequired("voice-recording-configuration")
+	})
 	connectCmd.AddCommand(connect_startContactRecordingCmd)
 }

@@ -12,9 +12,11 @@ var transfer_deleteCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_deleteCertificateCmd).Standalone()
+	carapace.Gen(transfer_deleteCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_deleteCertificateCmd).Standalone()
 
-	transfer_deleteCertificateCmd.Flags().String("certificate-id", "", "The identifier of the certificate object that you are deleting.")
-	transfer_deleteCertificateCmd.MarkFlagRequired("certificate-id")
+		transfer_deleteCertificateCmd.Flags().String("certificate-id", "", "The identifier of the certificate object that you are deleting.")
+		transfer_deleteCertificateCmd.MarkFlagRequired("certificate-id")
+	})
 	transferCmd.AddCommand(transfer_deleteCertificateCmd)
 }

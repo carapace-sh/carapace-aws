@@ -12,9 +12,11 @@ var securityhub_listAutomationRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_listAutomationRulesCmd).Standalone()
+	carapace.Gen(securityhub_listAutomationRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_listAutomationRulesCmd).Standalone()
 
-	securityhub_listAutomationRulesCmd.Flags().String("max-results", "", "The maximum number of rules to return in the response.")
-	securityhub_listAutomationRulesCmd.Flags().String("next-token", "", "A token to specify where to start paginating the response.")
+		securityhub_listAutomationRulesCmd.Flags().String("max-results", "", "The maximum number of rules to return in the response.")
+		securityhub_listAutomationRulesCmd.Flags().String("next-token", "", "A token to specify where to start paginating the response.")
+	})
 	securityhubCmd.AddCommand(securityhub_listAutomationRulesCmd)
 }

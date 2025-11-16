@@ -12,11 +12,13 @@ var lexv2Models_describeBotVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_describeBotVersionCmd).Standalone()
+	carapace.Gen(lexv2Models_describeBotVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_describeBotVersionCmd).Standalone()
 
-	lexv2Models_describeBotVersionCmd.Flags().String("bot-id", "", "The identifier of the bot containing the version to return metadata for.")
-	lexv2Models_describeBotVersionCmd.Flags().String("bot-version", "", "The version of the bot to return metadata for.")
-	lexv2Models_describeBotVersionCmd.MarkFlagRequired("bot-id")
-	lexv2Models_describeBotVersionCmd.MarkFlagRequired("bot-version")
+		lexv2Models_describeBotVersionCmd.Flags().String("bot-id", "", "The identifier of the bot containing the version to return metadata for.")
+		lexv2Models_describeBotVersionCmd.Flags().String("bot-version", "", "The version of the bot to return metadata for.")
+		lexv2Models_describeBotVersionCmd.MarkFlagRequired("bot-id")
+		lexv2Models_describeBotVersionCmd.MarkFlagRequired("bot-version")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_describeBotVersionCmd)
 }

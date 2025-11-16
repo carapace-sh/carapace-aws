@@ -12,11 +12,13 @@ var swf_deleteWorkflowTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_deleteWorkflowTypeCmd).Standalone()
+	carapace.Gen(swf_deleteWorkflowTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_deleteWorkflowTypeCmd).Standalone()
 
-	swf_deleteWorkflowTypeCmd.Flags().String("domain", "", "The name of the domain in which the workflow type is registered.")
-	swf_deleteWorkflowTypeCmd.Flags().String("workflow-type", "", "The workflow type to delete.")
-	swf_deleteWorkflowTypeCmd.MarkFlagRequired("domain")
-	swf_deleteWorkflowTypeCmd.MarkFlagRequired("workflow-type")
+		swf_deleteWorkflowTypeCmd.Flags().String("domain", "", "The name of the domain in which the workflow type is registered.")
+		swf_deleteWorkflowTypeCmd.Flags().String("workflow-type", "", "The workflow type to delete.")
+		swf_deleteWorkflowTypeCmd.MarkFlagRequired("domain")
+		swf_deleteWorkflowTypeCmd.MarkFlagRequired("workflow-type")
+	})
 	swfCmd.AddCommand(swf_deleteWorkflowTypeCmd)
 }

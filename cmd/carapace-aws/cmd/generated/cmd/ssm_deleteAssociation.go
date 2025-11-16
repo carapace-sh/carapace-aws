@@ -12,10 +12,12 @@ var ssm_deleteAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_deleteAssociationCmd).Standalone()
+	carapace.Gen(ssm_deleteAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_deleteAssociationCmd).Standalone()
 
-	ssm_deleteAssociationCmd.Flags().String("association-id", "", "The association ID that you want to delete.")
-	ssm_deleteAssociationCmd.Flags().String("instance-id", "", "The managed node ID.")
-	ssm_deleteAssociationCmd.Flags().String("name", "", "The name of the SSM document.")
+		ssm_deleteAssociationCmd.Flags().String("association-id", "", "The association ID that you want to delete.")
+		ssm_deleteAssociationCmd.Flags().String("instance-id", "", "The managed node ID.")
+		ssm_deleteAssociationCmd.Flags().String("name", "", "The name of the SSM document.")
+	})
 	ssmCmd.AddCommand(ssm_deleteAssociationCmd)
 }

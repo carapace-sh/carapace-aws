@@ -12,9 +12,11 @@ var iotManagedIntegrations_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_listTagsForResourceCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_listTagsForResourceCmd).Standalone()
 
-	iotManagedIntegrations_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which to list tags.")
-	iotManagedIntegrations_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		iotManagedIntegrations_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which to list tags.")
+		iotManagedIntegrations_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_listTagsForResourceCmd)
 }

@@ -12,12 +12,14 @@ var s3_deleteBucketIntelligentTieringConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_deleteBucketIntelligentTieringConfigurationCmd).Standalone()
+	carapace.Gen(s3_deleteBucketIntelligentTieringConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_deleteBucketIntelligentTieringConfigurationCmd).Standalone()
 
-	s3_deleteBucketIntelligentTieringConfigurationCmd.Flags().String("bucket", "", "The name of the Amazon S3 bucket whose configuration you want to modify or retrieve.")
-	s3_deleteBucketIntelligentTieringConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_deleteBucketIntelligentTieringConfigurationCmd.Flags().String("id", "", "The ID used to identify the S3 Intelligent-Tiering configuration.")
-	s3_deleteBucketIntelligentTieringConfigurationCmd.MarkFlagRequired("bucket")
-	s3_deleteBucketIntelligentTieringConfigurationCmd.MarkFlagRequired("id")
+		s3_deleteBucketIntelligentTieringConfigurationCmd.Flags().String("bucket", "", "The name of the Amazon S3 bucket whose configuration you want to modify or retrieve.")
+		s3_deleteBucketIntelligentTieringConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_deleteBucketIntelligentTieringConfigurationCmd.Flags().String("id", "", "The ID used to identify the S3 Intelligent-Tiering configuration.")
+		s3_deleteBucketIntelligentTieringConfigurationCmd.MarkFlagRequired("bucket")
+		s3_deleteBucketIntelligentTieringConfigurationCmd.MarkFlagRequired("id")
+	})
 	s3Cmd.AddCommand(s3_deleteBucketIntelligentTieringConfigurationCmd)
 }

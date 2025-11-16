@@ -12,9 +12,11 @@ var route53domains_deleteDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_deleteDomainCmd).Standalone()
+	carapace.Gen(route53domains_deleteDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_deleteDomainCmd).Standalone()
 
-	route53domains_deleteDomainCmd.Flags().String("domain-name", "", "Name of the domain to be deleted.")
-	route53domains_deleteDomainCmd.MarkFlagRequired("domain-name")
+		route53domains_deleteDomainCmd.Flags().String("domain-name", "", "Name of the domain to be deleted.")
+		route53domains_deleteDomainCmd.MarkFlagRequired("domain-name")
+	})
 	route53domainsCmd.AddCommand(route53domains_deleteDomainCmd)
 }

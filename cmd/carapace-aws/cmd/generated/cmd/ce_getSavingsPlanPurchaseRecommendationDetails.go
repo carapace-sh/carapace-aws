@@ -12,9 +12,11 @@ var ce_getSavingsPlanPurchaseRecommendationDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_getSavingsPlanPurchaseRecommendationDetailsCmd).Standalone()
+	carapace.Gen(ce_getSavingsPlanPurchaseRecommendationDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_getSavingsPlanPurchaseRecommendationDetailsCmd).Standalone()
 
-	ce_getSavingsPlanPurchaseRecommendationDetailsCmd.Flags().String("recommendation-detail-id", "", "The ID that is associated with the Savings Plan recommendation.")
-	ce_getSavingsPlanPurchaseRecommendationDetailsCmd.MarkFlagRequired("recommendation-detail-id")
+		ce_getSavingsPlanPurchaseRecommendationDetailsCmd.Flags().String("recommendation-detail-id", "", "The ID that is associated with the Savings Plan recommendation.")
+		ce_getSavingsPlanPurchaseRecommendationDetailsCmd.MarkFlagRequired("recommendation-detail-id")
+	})
 	ceCmd.AddCommand(ce_getSavingsPlanPurchaseRecommendationDetailsCmd)
 }

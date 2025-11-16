@@ -12,11 +12,13 @@ var securityIr_updateCaseStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityIr_updateCaseStatusCmd).Standalone()
+	carapace.Gen(securityIr_updateCaseStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityIr_updateCaseStatusCmd).Standalone()
 
-	securityIr_updateCaseStatusCmd.Flags().String("case-id", "", "Required element for UpdateCaseStatus to identify the case to update.")
-	securityIr_updateCaseStatusCmd.Flags().String("case-status", "", "Required element for UpdateCaseStatus to identify the status for a case.")
-	securityIr_updateCaseStatusCmd.MarkFlagRequired("case-id")
-	securityIr_updateCaseStatusCmd.MarkFlagRequired("case-status")
+		securityIr_updateCaseStatusCmd.Flags().String("case-id", "", "Required element for UpdateCaseStatus to identify the case to update.")
+		securityIr_updateCaseStatusCmd.Flags().String("case-status", "", "Required element for UpdateCaseStatus to identify the status for a case.")
+		securityIr_updateCaseStatusCmd.MarkFlagRequired("case-id")
+		securityIr_updateCaseStatusCmd.MarkFlagRequired("case-status")
+	})
 	securityIrCmd.AddCommand(securityIr_updateCaseStatusCmd)
 }

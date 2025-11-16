@@ -12,11 +12,13 @@ var timestreamInfluxdb_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamInfluxdb_untagResourceCmd).Standalone()
+	carapace.Gen(timestreamInfluxdb_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamInfluxdb_untagResourceCmd).Standalone()
 
-	timestreamInfluxdb_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the tagged resource.")
-	timestreamInfluxdb_untagResourceCmd.Flags().String("tag-keys", "", "The keys used to identify the tags.")
-	timestreamInfluxdb_untagResourceCmd.MarkFlagRequired("resource-arn")
-	timestreamInfluxdb_untagResourceCmd.MarkFlagRequired("tag-keys")
+		timestreamInfluxdb_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the tagged resource.")
+		timestreamInfluxdb_untagResourceCmd.Flags().String("tag-keys", "", "The keys used to identify the tags.")
+		timestreamInfluxdb_untagResourceCmd.MarkFlagRequired("resource-arn")
+		timestreamInfluxdb_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	timestreamInfluxdbCmd.AddCommand(timestreamInfluxdb_untagResourceCmd)
 }

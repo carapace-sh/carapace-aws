@@ -12,11 +12,13 @@ var qbusiness_disassociatePermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_disassociatePermissionCmd).Standalone()
+	carapace.Gen(qbusiness_disassociatePermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_disassociatePermissionCmd).Standalone()
 
-	qbusiness_disassociatePermissionCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application.")
-	qbusiness_disassociatePermissionCmd.Flags().String("statement-id", "", "The statement ID of the permission to remove.")
-	qbusiness_disassociatePermissionCmd.MarkFlagRequired("application-id")
-	qbusiness_disassociatePermissionCmd.MarkFlagRequired("statement-id")
+		qbusiness_disassociatePermissionCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application.")
+		qbusiness_disassociatePermissionCmd.Flags().String("statement-id", "", "The statement ID of the permission to remove.")
+		qbusiness_disassociatePermissionCmd.MarkFlagRequired("application-id")
+		qbusiness_disassociatePermissionCmd.MarkFlagRequired("statement-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_disassociatePermissionCmd)
 }

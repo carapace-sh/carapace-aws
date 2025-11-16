@@ -12,8 +12,10 @@ var macie2_batchGetCustomDataIdentifiersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_batchGetCustomDataIdentifiersCmd).Standalone()
+	carapace.Gen(macie2_batchGetCustomDataIdentifiersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_batchGetCustomDataIdentifiersCmd).Standalone()
 
-	macie2_batchGetCustomDataIdentifiersCmd.Flags().String("ids", "", "An array of custom data identifier IDs, one for each custom data identifier to retrieve information about.")
+		macie2_batchGetCustomDataIdentifiersCmd.Flags().String("ids", "", "An array of custom data identifier IDs, one for each custom data identifier to retrieve information about.")
+	})
 	macie2Cmd.AddCommand(macie2_batchGetCustomDataIdentifiersCmd)
 }

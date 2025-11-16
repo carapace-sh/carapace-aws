@@ -12,9 +12,11 @@ var kms_getKeyRotationStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_getKeyRotationStatusCmd).Standalone()
+	carapace.Gen(kms_getKeyRotationStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_getKeyRotationStatusCmd).Standalone()
 
-	kms_getKeyRotationStatusCmd.Flags().String("key-id", "", "Gets the rotation status for the specified KMS key.")
-	kms_getKeyRotationStatusCmd.MarkFlagRequired("key-id")
+		kms_getKeyRotationStatusCmd.Flags().String("key-id", "", "Gets the rotation status for the specified KMS key.")
+		kms_getKeyRotationStatusCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_getKeyRotationStatusCmd)
 }

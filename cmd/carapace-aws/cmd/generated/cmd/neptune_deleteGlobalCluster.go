@@ -12,9 +12,11 @@ var neptune_deleteGlobalClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_deleteGlobalClusterCmd).Standalone()
+	carapace.Gen(neptune_deleteGlobalClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_deleteGlobalClusterCmd).Standalone()
 
-	neptune_deleteGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier of the global database cluster being deleted.")
-	neptune_deleteGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+		neptune_deleteGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier of the global database cluster being deleted.")
+		neptune_deleteGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+	})
 	neptuneCmd.AddCommand(neptune_deleteGlobalClusterCmd)
 }

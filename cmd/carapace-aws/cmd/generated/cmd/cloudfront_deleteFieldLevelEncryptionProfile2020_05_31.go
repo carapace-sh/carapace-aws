@@ -12,10 +12,12 @@ var cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd).Standalone()
 
-	cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd.Flags().String("id", "", "Request the ID of the profile you want to delete from CloudFront.")
-	cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd.Flags().String("if-match", "", "The value of the `ETag` header that you received when retrieving the profile to delete.")
-	cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd.Flags().String("id", "", "Request the ID of the profile you want to delete from CloudFront.")
+		cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd.Flags().String("if-match", "", "The value of the `ETag` header that you received when retrieving the profile to delete.")
+		cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_deleteFieldLevelEncryptionProfile2020_05_31Cmd)
 }

@@ -12,15 +12,17 @@ var deadline_assumeQueueRoleForWorkerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_assumeQueueRoleForWorkerCmd).Standalone()
+	carapace.Gen(deadline_assumeQueueRoleForWorkerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_assumeQueueRoleForWorkerCmd).Standalone()
 
-	deadline_assumeQueueRoleForWorkerCmd.Flags().String("farm-id", "", "The farm ID of the worker assuming the queue role.")
-	deadline_assumeQueueRoleForWorkerCmd.Flags().String("fleet-id", "", "The fleet ID of the worker assuming the queue role.")
-	deadline_assumeQueueRoleForWorkerCmd.Flags().String("queue-id", "", "The queue ID of the worker assuming the queue role.")
-	deadline_assumeQueueRoleForWorkerCmd.Flags().String("worker-id", "", "The worker ID of the worker assuming the queue role.")
-	deadline_assumeQueueRoleForWorkerCmd.MarkFlagRequired("farm-id")
-	deadline_assumeQueueRoleForWorkerCmd.MarkFlagRequired("fleet-id")
-	deadline_assumeQueueRoleForWorkerCmd.MarkFlagRequired("queue-id")
-	deadline_assumeQueueRoleForWorkerCmd.MarkFlagRequired("worker-id")
+		deadline_assumeQueueRoleForWorkerCmd.Flags().String("farm-id", "", "The farm ID of the worker assuming the queue role.")
+		deadline_assumeQueueRoleForWorkerCmd.Flags().String("fleet-id", "", "The fleet ID of the worker assuming the queue role.")
+		deadline_assumeQueueRoleForWorkerCmd.Flags().String("queue-id", "", "The queue ID of the worker assuming the queue role.")
+		deadline_assumeQueueRoleForWorkerCmd.Flags().String("worker-id", "", "The worker ID of the worker assuming the queue role.")
+		deadline_assumeQueueRoleForWorkerCmd.MarkFlagRequired("farm-id")
+		deadline_assumeQueueRoleForWorkerCmd.MarkFlagRequired("fleet-id")
+		deadline_assumeQueueRoleForWorkerCmd.MarkFlagRequired("queue-id")
+		deadline_assumeQueueRoleForWorkerCmd.MarkFlagRequired("worker-id")
+	})
 	deadlineCmd.AddCommand(deadline_assumeQueueRoleForWorkerCmd)
 }

@@ -12,9 +12,11 @@ var appstream_startFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_startFleetCmd).Standalone()
+	carapace.Gen(appstream_startFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_startFleetCmd).Standalone()
 
-	appstream_startFleetCmd.Flags().String("name", "", "The name of the fleet.")
-	appstream_startFleetCmd.MarkFlagRequired("name")
+		appstream_startFleetCmd.Flags().String("name", "", "The name of the fleet.")
+		appstream_startFleetCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_startFleetCmd)
 }

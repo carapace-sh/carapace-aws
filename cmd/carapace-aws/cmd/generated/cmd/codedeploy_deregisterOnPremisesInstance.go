@@ -12,9 +12,11 @@ var codedeploy_deregisterOnPremisesInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_deregisterOnPremisesInstanceCmd).Standalone()
+	carapace.Gen(codedeploy_deregisterOnPremisesInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_deregisterOnPremisesInstanceCmd).Standalone()
 
-	codedeploy_deregisterOnPremisesInstanceCmd.Flags().String("instance-name", "", "The name of the on-premises instance to deregister.")
-	codedeploy_deregisterOnPremisesInstanceCmd.MarkFlagRequired("instance-name")
+		codedeploy_deregisterOnPremisesInstanceCmd.Flags().String("instance-name", "", "The name of the on-premises instance to deregister.")
+		codedeploy_deregisterOnPremisesInstanceCmd.MarkFlagRequired("instance-name")
+	})
 	codedeployCmd.AddCommand(codedeploy_deregisterOnPremisesInstanceCmd)
 }

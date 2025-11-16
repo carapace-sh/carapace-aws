@@ -12,10 +12,12 @@ var costOptimizationHub_updatePreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(costOptimizationHub_updatePreferencesCmd).Standalone()
+	carapace.Gen(costOptimizationHub_updatePreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(costOptimizationHub_updatePreferencesCmd).Standalone()
 
-	costOptimizationHub_updatePreferencesCmd.Flags().String("member-account-discount-visibility", "", "Sets the \"member account discount visibility\" preference.")
-	costOptimizationHub_updatePreferencesCmd.Flags().String("preferred-commitment", "", "Sets the preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.")
-	costOptimizationHub_updatePreferencesCmd.Flags().String("savings-estimation-mode", "", "Sets the \"savings estimation mode\" preference.")
+		costOptimizationHub_updatePreferencesCmd.Flags().String("member-account-discount-visibility", "", "Sets the \"member account discount visibility\" preference.")
+		costOptimizationHub_updatePreferencesCmd.Flags().String("preferred-commitment", "", "Sets the preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.")
+		costOptimizationHub_updatePreferencesCmd.Flags().String("savings-estimation-mode", "", "Sets the \"savings estimation mode\" preference.")
+	})
 	costOptimizationHubCmd.AddCommand(costOptimizationHub_updatePreferencesCmd)
 }

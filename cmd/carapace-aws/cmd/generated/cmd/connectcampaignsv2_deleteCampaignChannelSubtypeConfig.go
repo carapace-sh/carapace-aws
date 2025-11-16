@@ -12,11 +12,13 @@ var connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd).Standalone()
 
-	connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd.Flags().String("channel-subtype", "", "")
-	connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd.Flags().String("id", "", "")
-	connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd.MarkFlagRequired("channel-subtype")
-	connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd.MarkFlagRequired("id")
+		connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd.Flags().String("channel-subtype", "", "")
+		connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd.Flags().String("id", "", "")
+		connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd.MarkFlagRequired("channel-subtype")
+		connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_deleteCampaignChannelSubtypeConfigCmd)
 }

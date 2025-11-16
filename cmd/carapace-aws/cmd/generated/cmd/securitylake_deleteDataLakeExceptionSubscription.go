@@ -12,7 +12,9 @@ var securitylake_deleteDataLakeExceptionSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_deleteDataLakeExceptionSubscriptionCmd).Standalone()
+	carapace.Gen(securitylake_deleteDataLakeExceptionSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_deleteDataLakeExceptionSubscriptionCmd).Standalone()
 
+	})
 	securitylakeCmd.AddCommand(securitylake_deleteDataLakeExceptionSubscriptionCmd)
 }

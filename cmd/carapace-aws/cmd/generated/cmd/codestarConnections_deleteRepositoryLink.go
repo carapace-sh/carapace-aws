@@ -12,9 +12,11 @@ var codestarConnections_deleteRepositoryLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarConnections_deleteRepositoryLinkCmd).Standalone()
+	carapace.Gen(codestarConnections_deleteRepositoryLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarConnections_deleteRepositoryLinkCmd).Standalone()
 
-	codestarConnections_deleteRepositoryLinkCmd.Flags().String("repository-link-id", "", "The ID of the repository link to be deleted.")
-	codestarConnections_deleteRepositoryLinkCmd.MarkFlagRequired("repository-link-id")
+		codestarConnections_deleteRepositoryLinkCmd.Flags().String("repository-link-id", "", "The ID of the repository link to be deleted.")
+		codestarConnections_deleteRepositoryLinkCmd.MarkFlagRequired("repository-link-id")
+	})
 	codestarConnectionsCmd.AddCommand(codestarConnections_deleteRepositoryLinkCmd)
 }

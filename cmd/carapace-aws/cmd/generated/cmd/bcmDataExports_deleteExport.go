@@ -12,9 +12,11 @@ var bcmDataExports_deleteExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDataExports_deleteExportCmd).Standalone()
+	carapace.Gen(bcmDataExports_deleteExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDataExports_deleteExportCmd).Standalone()
 
-	bcmDataExports_deleteExportCmd.Flags().String("export-arn", "", "The Amazon Resource Name (ARN) for this export.")
-	bcmDataExports_deleteExportCmd.MarkFlagRequired("export-arn")
+		bcmDataExports_deleteExportCmd.Flags().String("export-arn", "", "The Amazon Resource Name (ARN) for this export.")
+		bcmDataExports_deleteExportCmd.MarkFlagRequired("export-arn")
+	})
 	bcmDataExportsCmd.AddCommand(bcmDataExports_deleteExportCmd)
 }

@@ -12,11 +12,13 @@ var connect_deleteViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteViewCmd).Standalone()
+	carapace.Gen(connect_deleteViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteViewCmd).Standalone()
 
-	connect_deleteViewCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteViewCmd.Flags().String("view-id", "", "The identifier of the view.")
-	connect_deleteViewCmd.MarkFlagRequired("instance-id")
-	connect_deleteViewCmd.MarkFlagRequired("view-id")
+		connect_deleteViewCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteViewCmd.Flags().String("view-id", "", "The identifier of the view.")
+		connect_deleteViewCmd.MarkFlagRequired("instance-id")
+		connect_deleteViewCmd.MarkFlagRequired("view-id")
+	})
 	connectCmd.AddCommand(connect_deleteViewCmd)
 }

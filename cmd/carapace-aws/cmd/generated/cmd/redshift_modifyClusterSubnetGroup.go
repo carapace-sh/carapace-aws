@@ -12,12 +12,14 @@ var redshift_modifyClusterSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_modifyClusterSubnetGroupCmd).Standalone()
+	carapace.Gen(redshift_modifyClusterSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_modifyClusterSubnetGroupCmd).Standalone()
 
-	redshift_modifyClusterSubnetGroupCmd.Flags().String("cluster-subnet-group-name", "", "The name of the subnet group to be modified.")
-	redshift_modifyClusterSubnetGroupCmd.Flags().String("description", "", "A text description of the subnet group to be modified.")
-	redshift_modifyClusterSubnetGroupCmd.Flags().String("subnet-ids", "", "An array of VPC subnet IDs.")
-	redshift_modifyClusterSubnetGroupCmd.MarkFlagRequired("cluster-subnet-group-name")
-	redshift_modifyClusterSubnetGroupCmd.MarkFlagRequired("subnet-ids")
+		redshift_modifyClusterSubnetGroupCmd.Flags().String("cluster-subnet-group-name", "", "The name of the subnet group to be modified.")
+		redshift_modifyClusterSubnetGroupCmd.Flags().String("description", "", "A text description of the subnet group to be modified.")
+		redshift_modifyClusterSubnetGroupCmd.Flags().String("subnet-ids", "", "An array of VPC subnet IDs.")
+		redshift_modifyClusterSubnetGroupCmd.MarkFlagRequired("cluster-subnet-group-name")
+		redshift_modifyClusterSubnetGroupCmd.MarkFlagRequired("subnet-ids")
+	})
 	redshiftCmd.AddCommand(redshift_modifyClusterSubnetGroupCmd)
 }

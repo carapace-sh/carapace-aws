@@ -12,12 +12,14 @@ var dms_importCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_importCertificateCmd).Standalone()
+	carapace.Gen(dms_importCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_importCertificateCmd).Standalone()
 
-	dms_importCertificateCmd.Flags().String("certificate-identifier", "", "A customer-assigned name for the certificate.")
-	dms_importCertificateCmd.Flags().String("certificate-pem", "", "The contents of a `.pem` file, which contains an X.509 certificate.")
-	dms_importCertificateCmd.Flags().String("certificate-wallet", "", "The location of an imported Oracle Wallet certificate for use with SSL.")
-	dms_importCertificateCmd.Flags().String("tags", "", "The tags associated with the certificate.")
-	dms_importCertificateCmd.MarkFlagRequired("certificate-identifier")
+		dms_importCertificateCmd.Flags().String("certificate-identifier", "", "A customer-assigned name for the certificate.")
+		dms_importCertificateCmd.Flags().String("certificate-pem", "", "The contents of a `.pem` file, which contains an X.509 certificate.")
+		dms_importCertificateCmd.Flags().String("certificate-wallet", "", "The location of an imported Oracle Wallet certificate for use with SSL.")
+		dms_importCertificateCmd.Flags().String("tags", "", "The tags associated with the certificate.")
+		dms_importCertificateCmd.MarkFlagRequired("certificate-identifier")
+	})
 	dmsCmd.AddCommand(dms_importCertificateCmd)
 }

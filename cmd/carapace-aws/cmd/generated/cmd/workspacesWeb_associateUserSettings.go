@@ -12,11 +12,13 @@ var workspacesWeb_associateUserSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_associateUserSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_associateUserSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_associateUserSettingsCmd).Standalone()
 
-	workspacesWeb_associateUserSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
-	workspacesWeb_associateUserSettingsCmd.Flags().String("user-settings-arn", "", "The ARN of the user settings.")
-	workspacesWeb_associateUserSettingsCmd.MarkFlagRequired("portal-arn")
-	workspacesWeb_associateUserSettingsCmd.MarkFlagRequired("user-settings-arn")
+		workspacesWeb_associateUserSettingsCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
+		workspacesWeb_associateUserSettingsCmd.Flags().String("user-settings-arn", "", "The ARN of the user settings.")
+		workspacesWeb_associateUserSettingsCmd.MarkFlagRequired("portal-arn")
+		workspacesWeb_associateUserSettingsCmd.MarkFlagRequired("user-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_associateUserSettingsCmd)
 }

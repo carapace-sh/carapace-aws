@@ -12,10 +12,12 @@ var mgn_deleteJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_deleteJobCmd).Standalone()
+	carapace.Gen(mgn_deleteJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_deleteJobCmd).Standalone()
 
-	mgn_deleteJobCmd.Flags().String("account-id", "", "Request to delete Job from service by Account ID.")
-	mgn_deleteJobCmd.Flags().String("job-id", "", "Request to delete Job from service by Job ID.")
-	mgn_deleteJobCmd.MarkFlagRequired("job-id")
+		mgn_deleteJobCmd.Flags().String("account-id", "", "Request to delete Job from service by Account ID.")
+		mgn_deleteJobCmd.Flags().String("job-id", "", "Request to delete Job from service by Job ID.")
+		mgn_deleteJobCmd.MarkFlagRequired("job-id")
+	})
 	mgnCmd.AddCommand(mgn_deleteJobCmd)
 }

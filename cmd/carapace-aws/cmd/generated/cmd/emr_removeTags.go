@@ -12,11 +12,13 @@ var emr_removeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_removeTagsCmd).Standalone()
+	carapace.Gen(emr_removeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_removeTagsCmd).Standalone()
 
-	emr_removeTagsCmd.Flags().String("resource-id", "", "The Amazon EMR resource identifier from which tags will be removed.")
-	emr_removeTagsCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the resource.")
-	emr_removeTagsCmd.MarkFlagRequired("resource-id")
-	emr_removeTagsCmd.MarkFlagRequired("tag-keys")
+		emr_removeTagsCmd.Flags().String("resource-id", "", "The Amazon EMR resource identifier from which tags will be removed.")
+		emr_removeTagsCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the resource.")
+		emr_removeTagsCmd.MarkFlagRequired("resource-id")
+		emr_removeTagsCmd.MarkFlagRequired("tag-keys")
+	})
 	emrCmd.AddCommand(emr_removeTagsCmd)
 }

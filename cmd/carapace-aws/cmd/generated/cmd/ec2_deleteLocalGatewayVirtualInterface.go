@@ -12,12 +12,14 @@ var ec2_deleteLocalGatewayVirtualInterfaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteLocalGatewayVirtualInterfaceCmd).Standalone()
+	carapace.Gen(ec2_deleteLocalGatewayVirtualInterfaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteLocalGatewayVirtualInterfaceCmd).Standalone()
 
-	ec2_deleteLocalGatewayVirtualInterfaceCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteLocalGatewayVirtualInterfaceCmd.Flags().String("local-gateway-virtual-interface-id", "", "The ID of the local virtual interface to delete.")
-	ec2_deleteLocalGatewayVirtualInterfaceCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteLocalGatewayVirtualInterfaceCmd.MarkFlagRequired("local-gateway-virtual-interface-id")
-	ec2_deleteLocalGatewayVirtualInterfaceCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteLocalGatewayVirtualInterfaceCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteLocalGatewayVirtualInterfaceCmd.Flags().String("local-gateway-virtual-interface-id", "", "The ID of the local virtual interface to delete.")
+		ec2_deleteLocalGatewayVirtualInterfaceCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteLocalGatewayVirtualInterfaceCmd.MarkFlagRequired("local-gateway-virtual-interface-id")
+		ec2_deleteLocalGatewayVirtualInterfaceCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_deleteLocalGatewayVirtualInterfaceCmd)
 }

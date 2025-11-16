@@ -12,11 +12,13 @@ var bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd).Standalone()
 
-	bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd.Flags().String("agent-runtime-id", "", "The unique identifier of the AgentCore Runtime to list endpoints for.")
-	bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd.Flags().String("next-token", "", "A token to retrieve the next page of results.")
-	bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd.MarkFlagRequired("agent-runtime-id")
+		bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd.Flags().String("agent-runtime-id", "", "The unique identifier of the AgentCore Runtime to list endpoints for.")
+		bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd.Flags().String("next-token", "", "A token to retrieve the next page of results.")
+		bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd.MarkFlagRequired("agent-runtime-id")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_listAgentRuntimeEndpointsCmd)
 }

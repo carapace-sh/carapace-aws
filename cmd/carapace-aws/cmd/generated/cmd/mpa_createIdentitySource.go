@@ -12,11 +12,13 @@ var mpa_createIdentitySourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_createIdentitySourceCmd).Standalone()
+	carapace.Gen(mpa_createIdentitySourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_createIdentitySourceCmd).Standalone()
 
-	mpa_createIdentitySourceCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	mpa_createIdentitySourceCmd.Flags().String("identity-source-parameters", "", "A `IdentitySourceParameters` object.")
-	mpa_createIdentitySourceCmd.Flags().String("tags", "", "Tag you want to attach to the identity source.")
-	mpa_createIdentitySourceCmd.MarkFlagRequired("identity-source-parameters")
+		mpa_createIdentitySourceCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		mpa_createIdentitySourceCmd.Flags().String("identity-source-parameters", "", "A `IdentitySourceParameters` object.")
+		mpa_createIdentitySourceCmd.Flags().String("tags", "", "Tag you want to attach to the identity source.")
+		mpa_createIdentitySourceCmd.MarkFlagRequired("identity-source-parameters")
+	})
 	mpaCmd.AddCommand(mpa_createIdentitySourceCmd)
 }

@@ -12,17 +12,19 @@ var iotanalytics_createDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_createDatasetCmd).Standalone()
+	carapace.Gen(iotanalytics_createDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_createDatasetCmd).Standalone()
 
-	iotanalytics_createDatasetCmd.Flags().String("actions", "", "A list of actions that create the dataset contents.")
-	iotanalytics_createDatasetCmd.Flags().String("content-delivery-rules", "", "When dataset contents are created, they are delivered to destinations specified here.")
-	iotanalytics_createDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset.")
-	iotanalytics_createDatasetCmd.Flags().String("late-data-rules", "", "A list of data rules that send notifications to CloudWatch, when data arrives late.")
-	iotanalytics_createDatasetCmd.Flags().String("retention-period", "", "Optional.")
-	iotanalytics_createDatasetCmd.Flags().String("tags", "", "Metadata which can be used to manage the dataset.")
-	iotanalytics_createDatasetCmd.Flags().String("triggers", "", "A list of triggers.")
-	iotanalytics_createDatasetCmd.Flags().String("versioning-configuration", "", "Optional.")
-	iotanalytics_createDatasetCmd.MarkFlagRequired("actions")
-	iotanalytics_createDatasetCmd.MarkFlagRequired("dataset-name")
+		iotanalytics_createDatasetCmd.Flags().String("actions", "", "A list of actions that create the dataset contents.")
+		iotanalytics_createDatasetCmd.Flags().String("content-delivery-rules", "", "When dataset contents are created, they are delivered to destinations specified here.")
+		iotanalytics_createDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset.")
+		iotanalytics_createDatasetCmd.Flags().String("late-data-rules", "", "A list of data rules that send notifications to CloudWatch, when data arrives late.")
+		iotanalytics_createDatasetCmd.Flags().String("retention-period", "", "Optional.")
+		iotanalytics_createDatasetCmd.Flags().String("tags", "", "Metadata which can be used to manage the dataset.")
+		iotanalytics_createDatasetCmd.Flags().String("triggers", "", "A list of triggers.")
+		iotanalytics_createDatasetCmd.Flags().String("versioning-configuration", "", "Optional.")
+		iotanalytics_createDatasetCmd.MarkFlagRequired("actions")
+		iotanalytics_createDatasetCmd.MarkFlagRequired("dataset-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_createDatasetCmd)
 }

@@ -12,9 +12,11 @@ var chatbot_listMicrosoftTeamsConfiguredTeamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_listMicrosoftTeamsConfiguredTeamsCmd).Standalone()
+	carapace.Gen(chatbot_listMicrosoftTeamsConfiguredTeamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_listMicrosoftTeamsConfiguredTeamsCmd).Standalone()
 
-	chatbot_listMicrosoftTeamsConfiguredTeamsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	chatbot_listMicrosoftTeamsConfiguredTeamsCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
+		chatbot_listMicrosoftTeamsConfiguredTeamsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		chatbot_listMicrosoftTeamsConfiguredTeamsCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
+	})
 	chatbotCmd.AddCommand(chatbot_listMicrosoftTeamsConfiguredTeamsCmd)
 }

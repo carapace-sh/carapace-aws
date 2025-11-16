@@ -12,11 +12,13 @@ var sqs_untagQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_untagQueueCmd).Standalone()
+	carapace.Gen(sqs_untagQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_untagQueueCmd).Standalone()
 
-	sqs_untagQueueCmd.Flags().String("queue-url", "", "The URL of the queue.")
-	sqs_untagQueueCmd.Flags().String("tag-keys", "", "The list of tags to be removed from the specified queue.")
-	sqs_untagQueueCmd.MarkFlagRequired("queue-url")
-	sqs_untagQueueCmd.MarkFlagRequired("tag-keys")
+		sqs_untagQueueCmd.Flags().String("queue-url", "", "The URL of the queue.")
+		sqs_untagQueueCmd.Flags().String("tag-keys", "", "The list of tags to be removed from the specified queue.")
+		sqs_untagQueueCmd.MarkFlagRequired("queue-url")
+		sqs_untagQueueCmd.MarkFlagRequired("tag-keys")
+	})
 	sqsCmd.AddCommand(sqs_untagQueueCmd)
 }

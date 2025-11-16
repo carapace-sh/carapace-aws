@@ -12,14 +12,16 @@ var schemas_exportSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_exportSchemaCmd).Standalone()
+	carapace.Gen(schemas_exportSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_exportSchemaCmd).Standalone()
 
-	schemas_exportSchemaCmd.Flags().String("registry-name", "", "The name of the registry.")
-	schemas_exportSchemaCmd.Flags().String("schema-name", "", "The name of the schema.")
-	schemas_exportSchemaCmd.Flags().String("schema-version", "", "Specifying this limits the results to only this schema version.")
-	schemas_exportSchemaCmd.Flags().String("type", "", "")
-	schemas_exportSchemaCmd.MarkFlagRequired("registry-name")
-	schemas_exportSchemaCmd.MarkFlagRequired("schema-name")
-	schemas_exportSchemaCmd.MarkFlagRequired("type")
+		schemas_exportSchemaCmd.Flags().String("registry-name", "", "The name of the registry.")
+		schemas_exportSchemaCmd.Flags().String("schema-name", "", "The name of the schema.")
+		schemas_exportSchemaCmd.Flags().String("schema-version", "", "Specifying this limits the results to only this schema version.")
+		schemas_exportSchemaCmd.Flags().String("type", "", "")
+		schemas_exportSchemaCmd.MarkFlagRequired("registry-name")
+		schemas_exportSchemaCmd.MarkFlagRequired("schema-name")
+		schemas_exportSchemaCmd.MarkFlagRequired("type")
+	})
 	schemasCmd.AddCommand(schemas_exportSchemaCmd)
 }

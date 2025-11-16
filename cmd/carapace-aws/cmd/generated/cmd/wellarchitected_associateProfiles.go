@@ -12,11 +12,13 @@ var wellarchitected_associateProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_associateProfilesCmd).Standalone()
+	carapace.Gen(wellarchitected_associateProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_associateProfilesCmd).Standalone()
 
-	wellarchitected_associateProfilesCmd.Flags().String("profile-arns", "", "The list of profile ARNs to associate with the workload.")
-	wellarchitected_associateProfilesCmd.Flags().String("workload-id", "", "")
-	wellarchitected_associateProfilesCmd.MarkFlagRequired("profile-arns")
-	wellarchitected_associateProfilesCmd.MarkFlagRequired("workload-id")
+		wellarchitected_associateProfilesCmd.Flags().String("profile-arns", "", "The list of profile ARNs to associate with the workload.")
+		wellarchitected_associateProfilesCmd.Flags().String("workload-id", "", "")
+		wellarchitected_associateProfilesCmd.MarkFlagRequired("profile-arns")
+		wellarchitected_associateProfilesCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_associateProfilesCmd)
 }

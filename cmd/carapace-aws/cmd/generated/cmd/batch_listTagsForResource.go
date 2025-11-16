@@ -12,9 +12,11 @@ var batch_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_listTagsForResourceCmd).Standalone()
+	carapace.Gen(batch_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_listTagsForResourceCmd).Standalone()
 
-	batch_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource that tags are listed for.")
-	batch_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		batch_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource that tags are listed for.")
+		batch_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	batchCmd.AddCommand(batch_listTagsForResourceCmd)
 }

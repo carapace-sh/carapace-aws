@@ -12,9 +12,11 @@ var transcribe_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_listTagsForResourceCmd).Standalone()
+	carapace.Gen(transcribe_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_listTagsForResourceCmd).Standalone()
 
-	transcribe_listTagsForResourceCmd.Flags().String("resource-arn", "", "Returns a list of all tags associated with the specified Amazon Resource Name (ARN).")
-	transcribe_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		transcribe_listTagsForResourceCmd.Flags().String("resource-arn", "", "Returns a list of all tags associated with the specified Amazon Resource Name (ARN).")
+		transcribe_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	transcribeCmd.AddCommand(transcribe_listTagsForResourceCmd)
 }

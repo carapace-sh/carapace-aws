@@ -12,11 +12,13 @@ var es_getUpgradeHistoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_getUpgradeHistoryCmd).Standalone()
+	carapace.Gen(es_getUpgradeHistoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_getUpgradeHistoryCmd).Standalone()
 
-	es_getUpgradeHistoryCmd.Flags().String("domain-name", "", "")
-	es_getUpgradeHistoryCmd.Flags().String("max-results", "", "")
-	es_getUpgradeHistoryCmd.Flags().String("next-token", "", "")
-	es_getUpgradeHistoryCmd.MarkFlagRequired("domain-name")
+		es_getUpgradeHistoryCmd.Flags().String("domain-name", "", "")
+		es_getUpgradeHistoryCmd.Flags().String("max-results", "", "")
+		es_getUpgradeHistoryCmd.Flags().String("next-token", "", "")
+		es_getUpgradeHistoryCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_getUpgradeHistoryCmd)
 }

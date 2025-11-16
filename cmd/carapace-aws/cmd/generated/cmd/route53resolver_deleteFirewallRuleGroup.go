@@ -12,9 +12,11 @@ var route53resolver_deleteFirewallRuleGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_deleteFirewallRuleGroupCmd).Standalone()
+	carapace.Gen(route53resolver_deleteFirewallRuleGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_deleteFirewallRuleGroupCmd).Standalone()
 
-	route53resolver_deleteFirewallRuleGroupCmd.Flags().String("firewall-rule-group-id", "", "The unique identifier of the firewall rule group that you want to delete.")
-	route53resolver_deleteFirewallRuleGroupCmd.MarkFlagRequired("firewall-rule-group-id")
+		route53resolver_deleteFirewallRuleGroupCmd.Flags().String("firewall-rule-group-id", "", "The unique identifier of the firewall rule group that you want to delete.")
+		route53resolver_deleteFirewallRuleGroupCmd.MarkFlagRequired("firewall-rule-group-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_deleteFirewallRuleGroupCmd)
 }

@@ -12,15 +12,17 @@ var amplifybackend_updateBackendStorageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_updateBackendStorageCmd).Standalone()
+	carapace.Gen(amplifybackend_updateBackendStorageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_updateBackendStorageCmd).Standalone()
 
-	amplifybackend_updateBackendStorageCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_updateBackendStorageCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
-	amplifybackend_updateBackendStorageCmd.Flags().String("resource-config", "", "The resource configuration for updating backend storage.")
-	amplifybackend_updateBackendStorageCmd.Flags().String("resource-name", "", "The name of the storage resource.")
-	amplifybackend_updateBackendStorageCmd.MarkFlagRequired("app-id")
-	amplifybackend_updateBackendStorageCmd.MarkFlagRequired("backend-environment-name")
-	amplifybackend_updateBackendStorageCmd.MarkFlagRequired("resource-config")
-	amplifybackend_updateBackendStorageCmd.MarkFlagRequired("resource-name")
+		amplifybackend_updateBackendStorageCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_updateBackendStorageCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
+		amplifybackend_updateBackendStorageCmd.Flags().String("resource-config", "", "The resource configuration for updating backend storage.")
+		amplifybackend_updateBackendStorageCmd.Flags().String("resource-name", "", "The name of the storage resource.")
+		amplifybackend_updateBackendStorageCmd.MarkFlagRequired("app-id")
+		amplifybackend_updateBackendStorageCmd.MarkFlagRequired("backend-environment-name")
+		amplifybackend_updateBackendStorageCmd.MarkFlagRequired("resource-config")
+		amplifybackend_updateBackendStorageCmd.MarkFlagRequired("resource-name")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_updateBackendStorageCmd)
 }

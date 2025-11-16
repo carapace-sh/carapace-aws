@@ -12,13 +12,15 @@ var managedblockchainQuery_listTransactionEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchainQuery_listTransactionEventsCmd).Standalone()
+	carapace.Gen(managedblockchainQuery_listTransactionEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchainQuery_listTransactionEventsCmd).Standalone()
 
-	managedblockchainQuery_listTransactionEventsCmd.Flags().String("max-results", "", "The maximum number of transaction events to list.")
-	managedblockchainQuery_listTransactionEventsCmd.Flags().String("network", "", "The blockchain network where the transaction events occurred.")
-	managedblockchainQuery_listTransactionEventsCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results to retrieve.")
-	managedblockchainQuery_listTransactionEventsCmd.Flags().String("transaction-hash", "", "The hash of a transaction.")
-	managedblockchainQuery_listTransactionEventsCmd.Flags().String("transaction-id", "", "The identifier of a Bitcoin transaction.")
-	managedblockchainQuery_listTransactionEventsCmd.MarkFlagRequired("network")
+		managedblockchainQuery_listTransactionEventsCmd.Flags().String("max-results", "", "The maximum number of transaction events to list.")
+		managedblockchainQuery_listTransactionEventsCmd.Flags().String("network", "", "The blockchain network where the transaction events occurred.")
+		managedblockchainQuery_listTransactionEventsCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results to retrieve.")
+		managedblockchainQuery_listTransactionEventsCmd.Flags().String("transaction-hash", "", "The hash of a transaction.")
+		managedblockchainQuery_listTransactionEventsCmd.Flags().String("transaction-id", "", "The identifier of a Bitcoin transaction.")
+		managedblockchainQuery_listTransactionEventsCmd.MarkFlagRequired("network")
+	})
 	managedblockchainQueryCmd.AddCommand(managedblockchainQuery_listTransactionEventsCmd)
 }

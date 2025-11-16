@@ -12,10 +12,12 @@ var ssmSap_startConfigurationChecksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_startConfigurationChecksCmd).Standalone()
+	carapace.Gen(ssmSap_startConfigurationChecksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_startConfigurationChecksCmd).Standalone()
 
-	ssmSap_startConfigurationChecksCmd.Flags().String("application-id", "", "The ID of the application.")
-	ssmSap_startConfigurationChecksCmd.Flags().String("configuration-check-ids", "", "The list of configuration checks to perform.")
-	ssmSap_startConfigurationChecksCmd.MarkFlagRequired("application-id")
+		ssmSap_startConfigurationChecksCmd.Flags().String("application-id", "", "The ID of the application.")
+		ssmSap_startConfigurationChecksCmd.Flags().String("configuration-check-ids", "", "The list of configuration checks to perform.")
+		ssmSap_startConfigurationChecksCmd.MarkFlagRequired("application-id")
+	})
 	ssmSapCmd.AddCommand(ssmSap_startConfigurationChecksCmd)
 }

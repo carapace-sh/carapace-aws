@@ -12,9 +12,11 @@ var chatbot_deleteSlackWorkspaceAuthorizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_deleteSlackWorkspaceAuthorizationCmd).Standalone()
+	carapace.Gen(chatbot_deleteSlackWorkspaceAuthorizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_deleteSlackWorkspaceAuthorizationCmd).Standalone()
 
-	chatbot_deleteSlackWorkspaceAuthorizationCmd.Flags().String("slack-team-id", "", "The ID of the Slack workspace authorized with AWS Chatbot.")
-	chatbot_deleteSlackWorkspaceAuthorizationCmd.MarkFlagRequired("slack-team-id")
+		chatbot_deleteSlackWorkspaceAuthorizationCmd.Flags().String("slack-team-id", "", "The ID of the Slack workspace authorized with AWS Chatbot.")
+		chatbot_deleteSlackWorkspaceAuthorizationCmd.MarkFlagRequired("slack-team-id")
+	})
 	chatbotCmd.AddCommand(chatbot_deleteSlackWorkspaceAuthorizationCmd)
 }

@@ -12,13 +12,15 @@ var iotManagedIntegrations_updateDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_updateDestinationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_updateDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_updateDestinationCmd).Standalone()
 
-	iotManagedIntegrations_updateDestinationCmd.Flags().String("delivery-destination-arn", "", "The Amazon Resource Name (ARN) of the customer-managed destination.")
-	iotManagedIntegrations_updateDestinationCmd.Flags().String("delivery-destination-type", "", "The destination type for the customer-managed destination.")
-	iotManagedIntegrations_updateDestinationCmd.Flags().String("description", "", "The description of the customer-managed destination.")
-	iotManagedIntegrations_updateDestinationCmd.Flags().String("name", "", "The name of the customer-managed destination.")
-	iotManagedIntegrations_updateDestinationCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the delivery destination role.")
-	iotManagedIntegrations_updateDestinationCmd.MarkFlagRequired("name")
+		iotManagedIntegrations_updateDestinationCmd.Flags().String("delivery-destination-arn", "", "The Amazon Resource Name (ARN) of the customer-managed destination.")
+		iotManagedIntegrations_updateDestinationCmd.Flags().String("delivery-destination-type", "", "The destination type for the customer-managed destination.")
+		iotManagedIntegrations_updateDestinationCmd.Flags().String("description", "", "The description of the customer-managed destination.")
+		iotManagedIntegrations_updateDestinationCmd.Flags().String("name", "", "The name of the customer-managed destination.")
+		iotManagedIntegrations_updateDestinationCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the delivery destination role.")
+		iotManagedIntegrations_updateDestinationCmd.MarkFlagRequired("name")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_updateDestinationCmd)
 }

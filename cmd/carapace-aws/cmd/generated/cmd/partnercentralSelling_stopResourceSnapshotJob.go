@@ -12,11 +12,13 @@ var partnercentralSelling_stopResourceSnapshotJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(partnercentralSelling_stopResourceSnapshotJobCmd).Standalone()
+	carapace.Gen(partnercentralSelling_stopResourceSnapshotJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSelling_stopResourceSnapshotJobCmd).Standalone()
 
-	partnercentralSelling_stopResourceSnapshotJobCmd.Flags().String("catalog", "", "Specifies the catalog related to the request.")
-	partnercentralSelling_stopResourceSnapshotJobCmd.Flags().String("resource-snapshot-job-identifier", "", "The identifier of the job to stop.")
-	partnercentralSelling_stopResourceSnapshotJobCmd.MarkFlagRequired("catalog")
-	partnercentralSelling_stopResourceSnapshotJobCmd.MarkFlagRequired("resource-snapshot-job-identifier")
+		partnercentralSelling_stopResourceSnapshotJobCmd.Flags().String("catalog", "", "Specifies the catalog related to the request.")
+		partnercentralSelling_stopResourceSnapshotJobCmd.Flags().String("resource-snapshot-job-identifier", "", "The identifier of the job to stop.")
+		partnercentralSelling_stopResourceSnapshotJobCmd.MarkFlagRequired("catalog")
+		partnercentralSelling_stopResourceSnapshotJobCmd.MarkFlagRequired("resource-snapshot-job-identifier")
+	})
 	partnercentralSellingCmd.AddCommand(partnercentralSelling_stopResourceSnapshotJobCmd)
 }

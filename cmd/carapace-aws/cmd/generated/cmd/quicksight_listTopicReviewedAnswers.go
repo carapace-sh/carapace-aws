@@ -12,11 +12,13 @@ var quicksight_listTopicReviewedAnswersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_listTopicReviewedAnswersCmd).Standalone()
+	carapace.Gen(quicksight_listTopicReviewedAnswersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_listTopicReviewedAnswersCmd).Standalone()
 
-	quicksight_listTopicReviewedAnswersCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that containd the reviewed answers that you want listed.")
-	quicksight_listTopicReviewedAnswersCmd.Flags().String("topic-id", "", "The ID for the topic that contains the reviewed answer that you want to list.")
-	quicksight_listTopicReviewedAnswersCmd.MarkFlagRequired("aws-account-id")
-	quicksight_listTopicReviewedAnswersCmd.MarkFlagRequired("topic-id")
+		quicksight_listTopicReviewedAnswersCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that containd the reviewed answers that you want listed.")
+		quicksight_listTopicReviewedAnswersCmd.Flags().String("topic-id", "", "The ID for the topic that contains the reviewed answer that you want to list.")
+		quicksight_listTopicReviewedAnswersCmd.MarkFlagRequired("aws-account-id")
+		quicksight_listTopicReviewedAnswersCmd.MarkFlagRequired("topic-id")
+	})
 	quicksightCmd.AddCommand(quicksight_listTopicReviewedAnswersCmd)
 }

@@ -12,9 +12,11 @@ var voiceId_listDomainsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_listDomainsCmd).Standalone()
+	carapace.Gen(voiceId_listDomainsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_listDomainsCmd).Standalone()
 
-	voiceId_listDomainsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	voiceId_listDomainsCmd.Flags().String("next-token", "", "If `NextToken` is returned, there are more results available.")
+		voiceId_listDomainsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		voiceId_listDomainsCmd.Flags().String("next-token", "", "If `NextToken` is returned, there are more results available.")
+	})
 	voiceIdCmd.AddCommand(voiceId_listDomainsCmd)
 }

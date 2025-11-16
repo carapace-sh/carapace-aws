@@ -12,7 +12,9 @@ var supplychainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychainCmd).Standalone()
+	carapace.Gen(supplychainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychainCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(supplychainCmd)
 }

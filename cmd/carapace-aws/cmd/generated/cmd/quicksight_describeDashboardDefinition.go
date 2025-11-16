@@ -12,13 +12,15 @@ var quicksight_describeDashboardDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeDashboardDefinitionCmd).Standalone()
+	carapace.Gen(quicksight_describeDashboardDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeDashboardDefinitionCmd).Standalone()
 
-	quicksight_describeDashboardDefinitionCmd.Flags().String("alias-name", "", "The alias name.")
-	quicksight_describeDashboardDefinitionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard that you're describing.")
-	quicksight_describeDashboardDefinitionCmd.Flags().String("dashboard-id", "", "The ID for the dashboard.")
-	quicksight_describeDashboardDefinitionCmd.Flags().String("version-number", "", "The version number for the dashboard.")
-	quicksight_describeDashboardDefinitionCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeDashboardDefinitionCmd.MarkFlagRequired("dashboard-id")
+		quicksight_describeDashboardDefinitionCmd.Flags().String("alias-name", "", "The alias name.")
+		quicksight_describeDashboardDefinitionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard that you're describing.")
+		quicksight_describeDashboardDefinitionCmd.Flags().String("dashboard-id", "", "The ID for the dashboard.")
+		quicksight_describeDashboardDefinitionCmd.Flags().String("version-number", "", "The version number for the dashboard.")
+		quicksight_describeDashboardDefinitionCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeDashboardDefinitionCmd.MarkFlagRequired("dashboard-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeDashboardDefinitionCmd)
 }

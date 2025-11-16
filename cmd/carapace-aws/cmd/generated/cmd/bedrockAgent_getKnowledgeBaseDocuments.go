@@ -12,13 +12,15 @@ var bedrockAgent_getKnowledgeBaseDocumentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_getKnowledgeBaseDocumentsCmd).Standalone()
+	carapace.Gen(bedrockAgent_getKnowledgeBaseDocumentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_getKnowledgeBaseDocumentsCmd).Standalone()
 
-	bedrockAgent_getKnowledgeBaseDocumentsCmd.Flags().String("data-source-id", "", "The unique identifier of the data source that contains the documents.")
-	bedrockAgent_getKnowledgeBaseDocumentsCmd.Flags().String("document-identifiers", "", "A list of objects, each of which contains information to identify a document for which to retrieve information.")
-	bedrockAgent_getKnowledgeBaseDocumentsCmd.Flags().String("knowledge-base-id", "", "The unique identifier of the knowledge base that is connected to the data source.")
-	bedrockAgent_getKnowledgeBaseDocumentsCmd.MarkFlagRequired("data-source-id")
-	bedrockAgent_getKnowledgeBaseDocumentsCmd.MarkFlagRequired("document-identifiers")
-	bedrockAgent_getKnowledgeBaseDocumentsCmd.MarkFlagRequired("knowledge-base-id")
+		bedrockAgent_getKnowledgeBaseDocumentsCmd.Flags().String("data-source-id", "", "The unique identifier of the data source that contains the documents.")
+		bedrockAgent_getKnowledgeBaseDocumentsCmd.Flags().String("document-identifiers", "", "A list of objects, each of which contains information to identify a document for which to retrieve information.")
+		bedrockAgent_getKnowledgeBaseDocumentsCmd.Flags().String("knowledge-base-id", "", "The unique identifier of the knowledge base that is connected to the data source.")
+		bedrockAgent_getKnowledgeBaseDocumentsCmd.MarkFlagRequired("data-source-id")
+		bedrockAgent_getKnowledgeBaseDocumentsCmd.MarkFlagRequired("document-identifiers")
+		bedrockAgent_getKnowledgeBaseDocumentsCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_getKnowledgeBaseDocumentsCmd)
 }

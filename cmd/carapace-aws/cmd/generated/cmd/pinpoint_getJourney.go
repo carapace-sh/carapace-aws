@@ -12,11 +12,13 @@ var pinpoint_getJourneyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getJourneyCmd).Standalone()
+	carapace.Gen(pinpoint_getJourneyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getJourneyCmd).Standalone()
 
-	pinpoint_getJourneyCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getJourneyCmd.Flags().String("journey-id", "", "The unique identifier for the journey.")
-	pinpoint_getJourneyCmd.MarkFlagRequired("application-id")
-	pinpoint_getJourneyCmd.MarkFlagRequired("journey-id")
+		pinpoint_getJourneyCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getJourneyCmd.Flags().String("journey-id", "", "The unique identifier for the journey.")
+		pinpoint_getJourneyCmd.MarkFlagRequired("application-id")
+		pinpoint_getJourneyCmd.MarkFlagRequired("journey-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getJourneyCmd)
 }

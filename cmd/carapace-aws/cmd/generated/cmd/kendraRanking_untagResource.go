@@ -12,11 +12,13 @@ var kendraRanking_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendraRanking_untagResourceCmd).Standalone()
+	carapace.Gen(kendraRanking_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendraRanking_untagResourceCmd).Standalone()
 
-	kendraRanking_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the rescore execution plan to remove the tag.")
-	kendraRanking_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the rescore execution plan.")
-	kendraRanking_untagResourceCmd.MarkFlagRequired("resource-arn")
-	kendraRanking_untagResourceCmd.MarkFlagRequired("tag-keys")
+		kendraRanking_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the rescore execution plan to remove the tag.")
+		kendraRanking_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the rescore execution plan.")
+		kendraRanking_untagResourceCmd.MarkFlagRequired("resource-arn")
+		kendraRanking_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	kendraRankingCmd.AddCommand(kendraRanking_untagResourceCmd)
 }

@@ -12,10 +12,12 @@ var mgh_createProgressUpdateStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgh_createProgressUpdateStreamCmd).Standalone()
+	carapace.Gen(mgh_createProgressUpdateStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgh_createProgressUpdateStreamCmd).Standalone()
 
-	mgh_createProgressUpdateStreamCmd.Flags().String("dry-run", "", "Optional boolean flag to indicate whether any effect should take place.")
-	mgh_createProgressUpdateStreamCmd.Flags().String("progress-update-stream-name", "", "The name of the ProgressUpdateStream.")
-	mgh_createProgressUpdateStreamCmd.MarkFlagRequired("progress-update-stream-name")
+		mgh_createProgressUpdateStreamCmd.Flags().String("dry-run", "", "Optional boolean flag to indicate whether any effect should take place.")
+		mgh_createProgressUpdateStreamCmd.Flags().String("progress-update-stream-name", "", "The name of the ProgressUpdateStream.")
+		mgh_createProgressUpdateStreamCmd.MarkFlagRequired("progress-update-stream-name")
+	})
 	mghCmd.AddCommand(mgh_createProgressUpdateStreamCmd)
 }

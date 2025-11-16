@@ -12,15 +12,17 @@ var dsData_removeGroupMemberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsData_removeGroupMemberCmd).Standalone()
+	carapace.Gen(dsData_removeGroupMemberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsData_removeGroupMemberCmd).Standalone()
 
-	dsData_removeGroupMemberCmd.Flags().String("client-token", "", "A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.")
-	dsData_removeGroupMemberCmd.Flags().String("directory-id", "", "The identifier (ID) of the directory that's associated with the member.")
-	dsData_removeGroupMemberCmd.Flags().String("group-name", "", "The name of the group.")
-	dsData_removeGroupMemberCmd.Flags().String("member-name", "", "The `SAMAccountName` of the user, group, or computer to remove from the group.")
-	dsData_removeGroupMemberCmd.Flags().String("member-realm", "", "The domain name that's associated with the group member.")
-	dsData_removeGroupMemberCmd.MarkFlagRequired("directory-id")
-	dsData_removeGroupMemberCmd.MarkFlagRequired("group-name")
-	dsData_removeGroupMemberCmd.MarkFlagRequired("member-name")
+		dsData_removeGroupMemberCmd.Flags().String("client-token", "", "A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.")
+		dsData_removeGroupMemberCmd.Flags().String("directory-id", "", "The identifier (ID) of the directory that's associated with the member.")
+		dsData_removeGroupMemberCmd.Flags().String("group-name", "", "The name of the group.")
+		dsData_removeGroupMemberCmd.Flags().String("member-name", "", "The `SAMAccountName` of the user, group, or computer to remove from the group.")
+		dsData_removeGroupMemberCmd.Flags().String("member-realm", "", "The domain name that's associated with the group member.")
+		dsData_removeGroupMemberCmd.MarkFlagRequired("directory-id")
+		dsData_removeGroupMemberCmd.MarkFlagRequired("group-name")
+		dsData_removeGroupMemberCmd.MarkFlagRequired("member-name")
+	})
 	dsDataCmd.AddCommand(dsData_removeGroupMemberCmd)
 }

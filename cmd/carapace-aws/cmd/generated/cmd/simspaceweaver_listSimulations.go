@@ -12,9 +12,11 @@ var simspaceweaver_listSimulationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_listSimulationsCmd).Standalone()
+	carapace.Gen(simspaceweaver_listSimulationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_listSimulationsCmd).Standalone()
 
-	simspaceweaver_listSimulationsCmd.Flags().String("max-results", "", "The maximum number of simulations to list.")
-	simspaceweaver_listSimulationsCmd.Flags().String("next-token", "", "If SimSpace Weaver returns `nextToken`, then there are more results available.")
+		simspaceweaver_listSimulationsCmd.Flags().String("max-results", "", "The maximum number of simulations to list.")
+		simspaceweaver_listSimulationsCmd.Flags().String("next-token", "", "If SimSpace Weaver returns `nextToken`, then there are more results available.")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_listSimulationsCmd)
 }

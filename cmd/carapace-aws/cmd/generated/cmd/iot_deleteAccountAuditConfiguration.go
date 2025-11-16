@@ -12,8 +12,10 @@ var iot_deleteAccountAuditConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteAccountAuditConfigurationCmd).Standalone()
+	carapace.Gen(iot_deleteAccountAuditConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteAccountAuditConfigurationCmd).Standalone()
 
-	iot_deleteAccountAuditConfigurationCmd.Flags().String("delete-scheduled-audits", "", "If true, all scheduled audits are deleted.")
+		iot_deleteAccountAuditConfigurationCmd.Flags().String("delete-scheduled-audits", "", "If true, all scheduled audits are deleted.")
+	})
 	iotCmd.AddCommand(iot_deleteAccountAuditConfigurationCmd)
 }

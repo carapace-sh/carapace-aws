@@ -12,7 +12,9 @@ var iotsitewiseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewiseCmd).Standalone()
+	carapace.Gen(iotsitewiseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewiseCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(iotsitewiseCmd)
 }

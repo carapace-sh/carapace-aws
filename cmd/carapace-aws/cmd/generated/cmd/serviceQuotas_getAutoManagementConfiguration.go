@@ -12,7 +12,9 @@ var serviceQuotas_getAutoManagementConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_getAutoManagementConfigurationCmd).Standalone()
+	carapace.Gen(serviceQuotas_getAutoManagementConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_getAutoManagementConfigurationCmd).Standalone()
 
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_getAutoManagementConfigurationCmd)
 }

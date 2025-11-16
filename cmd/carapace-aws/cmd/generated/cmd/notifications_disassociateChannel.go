@@ -12,11 +12,13 @@ var notifications_disassociateChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_disassociateChannelCmd).Standalone()
+	carapace.Gen(notifications_disassociateChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_disassociateChannelCmd).Standalone()
 
-	notifications_disassociateChannelCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Channel to disassociate.")
-	notifications_disassociateChannelCmd.Flags().String("notification-configuration-arn", "", "The ARN of the `NotificationConfiguration` to disassociate.")
-	notifications_disassociateChannelCmd.MarkFlagRequired("arn")
-	notifications_disassociateChannelCmd.MarkFlagRequired("notification-configuration-arn")
+		notifications_disassociateChannelCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Channel to disassociate.")
+		notifications_disassociateChannelCmd.Flags().String("notification-configuration-arn", "", "The ARN of the `NotificationConfiguration` to disassociate.")
+		notifications_disassociateChannelCmd.MarkFlagRequired("arn")
+		notifications_disassociateChannelCmd.MarkFlagRequired("notification-configuration-arn")
+	})
 	notificationsCmd.AddCommand(notifications_disassociateChannelCmd)
 }

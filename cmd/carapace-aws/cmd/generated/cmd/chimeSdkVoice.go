@@ -12,7 +12,9 @@ var chimeSdkVoiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoiceCmd).Standalone()
+	carapace.Gen(chimeSdkVoiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoiceCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(chimeSdkVoiceCmd)
 }

@@ -12,12 +12,14 @@ var apprunner_createConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_createConnectionCmd).Standalone()
+	carapace.Gen(apprunner_createConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_createConnectionCmd).Standalone()
 
-	apprunner_createConnectionCmd.Flags().String("connection-name", "", "A name for the new connection.")
-	apprunner_createConnectionCmd.Flags().String("provider-type", "", "The source repository provider.")
-	apprunner_createConnectionCmd.Flags().String("tags", "", "A list of metadata items that you can associate with your connection resource.")
-	apprunner_createConnectionCmd.MarkFlagRequired("connection-name")
-	apprunner_createConnectionCmd.MarkFlagRequired("provider-type")
+		apprunner_createConnectionCmd.Flags().String("connection-name", "", "A name for the new connection.")
+		apprunner_createConnectionCmd.Flags().String("provider-type", "", "The source repository provider.")
+		apprunner_createConnectionCmd.Flags().String("tags", "", "A list of metadata items that you can associate with your connection resource.")
+		apprunner_createConnectionCmd.MarkFlagRequired("connection-name")
+		apprunner_createConnectionCmd.MarkFlagRequired("provider-type")
+	})
 	apprunnerCmd.AddCommand(apprunner_createConnectionCmd)
 }

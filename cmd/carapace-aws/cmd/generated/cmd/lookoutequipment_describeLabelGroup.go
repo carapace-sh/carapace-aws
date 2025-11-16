@@ -12,9 +12,11 @@ var lookoutequipment_describeLabelGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_describeLabelGroupCmd).Standalone()
+	carapace.Gen(lookoutequipment_describeLabelGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_describeLabelGroupCmd).Standalone()
 
-	lookoutequipment_describeLabelGroupCmd.Flags().String("label-group-name", "", "Returns the name of the label group.")
-	lookoutequipment_describeLabelGroupCmd.MarkFlagRequired("label-group-name")
+		lookoutequipment_describeLabelGroupCmd.Flags().String("label-group-name", "", "Returns the name of the label group.")
+		lookoutequipment_describeLabelGroupCmd.MarkFlagRequired("label-group-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_describeLabelGroupCmd)
 }

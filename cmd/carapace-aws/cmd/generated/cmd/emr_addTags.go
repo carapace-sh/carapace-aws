@@ -12,11 +12,13 @@ var emr_addTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_addTagsCmd).Standalone()
+	carapace.Gen(emr_addTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_addTagsCmd).Standalone()
 
-	emr_addTagsCmd.Flags().String("resource-id", "", "The Amazon EMR resource identifier to which tags will be added.")
-	emr_addTagsCmd.Flags().String("tags", "", "A list of tags to associate with a resource.")
-	emr_addTagsCmd.MarkFlagRequired("resource-id")
-	emr_addTagsCmd.MarkFlagRequired("tags")
+		emr_addTagsCmd.Flags().String("resource-id", "", "The Amazon EMR resource identifier to which tags will be added.")
+		emr_addTagsCmd.Flags().String("tags", "", "A list of tags to associate with a resource.")
+		emr_addTagsCmd.MarkFlagRequired("resource-id")
+		emr_addTagsCmd.MarkFlagRequired("tags")
+	})
 	emrCmd.AddCommand(emr_addTagsCmd)
 }

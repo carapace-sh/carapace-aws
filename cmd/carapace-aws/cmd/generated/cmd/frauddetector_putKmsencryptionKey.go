@@ -12,9 +12,11 @@ var frauddetector_putKmsencryptionKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_putKmsencryptionKeyCmd).Standalone()
+	carapace.Gen(frauddetector_putKmsencryptionKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_putKmsencryptionKeyCmd).Standalone()
 
-	frauddetector_putKmsencryptionKeyCmd.Flags().String("kms-encryption-key-arn", "", "The KMS encryption key ARN.")
-	frauddetector_putKmsencryptionKeyCmd.MarkFlagRequired("kms-encryption-key-arn")
+		frauddetector_putKmsencryptionKeyCmd.Flags().String("kms-encryption-key-arn", "", "The KMS encryption key ARN.")
+		frauddetector_putKmsencryptionKeyCmd.MarkFlagRequired("kms-encryption-key-arn")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_putKmsencryptionKeyCmd)
 }

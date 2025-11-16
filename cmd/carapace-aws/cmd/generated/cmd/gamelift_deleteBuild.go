@@ -12,9 +12,11 @@ var gamelift_deleteBuildCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteBuildCmd).Standalone()
+	carapace.Gen(gamelift_deleteBuildCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteBuildCmd).Standalone()
 
-	gamelift_deleteBuildCmd.Flags().String("build-id", "", "A unique identifier for the build to delete.")
-	gamelift_deleteBuildCmd.MarkFlagRequired("build-id")
+		gamelift_deleteBuildCmd.Flags().String("build-id", "", "A unique identifier for the build to delete.")
+		gamelift_deleteBuildCmd.MarkFlagRequired("build-id")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteBuildCmd)
 }

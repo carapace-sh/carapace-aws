@@ -12,11 +12,13 @@ var qapps_listQappsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_listQappsCmd).Standalone()
+	carapace.Gen(qapps_listQappsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_listQappsCmd).Standalone()
 
-	qapps_listQappsCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_listQappsCmd.Flags().String("limit", "", "The maximum number of Q Apps to return in the response.")
-	qapps_listQappsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
-	qapps_listQappsCmd.MarkFlagRequired("instance-id")
+		qapps_listQappsCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_listQappsCmd.Flags().String("limit", "", "The maximum number of Q Apps to return in the response.")
+		qapps_listQappsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		qapps_listQappsCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_listQappsCmd)
 }

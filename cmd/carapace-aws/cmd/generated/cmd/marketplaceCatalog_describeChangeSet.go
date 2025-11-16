@@ -12,11 +12,13 @@ var marketplaceCatalog_describeChangeSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceCatalog_describeChangeSetCmd).Standalone()
+	carapace.Gen(marketplaceCatalog_describeChangeSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceCatalog_describeChangeSetCmd).Standalone()
 
-	marketplaceCatalog_describeChangeSetCmd.Flags().String("catalog", "", "Required.")
-	marketplaceCatalog_describeChangeSetCmd.Flags().String("change-set-id", "", "Required.")
-	marketplaceCatalog_describeChangeSetCmd.MarkFlagRequired("catalog")
-	marketplaceCatalog_describeChangeSetCmd.MarkFlagRequired("change-set-id")
+		marketplaceCatalog_describeChangeSetCmd.Flags().String("catalog", "", "Required.")
+		marketplaceCatalog_describeChangeSetCmd.Flags().String("change-set-id", "", "Required.")
+		marketplaceCatalog_describeChangeSetCmd.MarkFlagRequired("catalog")
+		marketplaceCatalog_describeChangeSetCmd.MarkFlagRequired("change-set-id")
+	})
 	marketplaceCatalogCmd.AddCommand(marketplaceCatalog_describeChangeSetCmd)
 }

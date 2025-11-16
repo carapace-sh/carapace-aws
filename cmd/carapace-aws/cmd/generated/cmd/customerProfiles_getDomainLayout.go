@@ -12,11 +12,13 @@ var customerProfiles_getDomainLayoutCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getDomainLayoutCmd).Standalone()
+	carapace.Gen(customerProfiles_getDomainLayoutCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getDomainLayoutCmd).Standalone()
 
-	customerProfiles_getDomainLayoutCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getDomainLayoutCmd.Flags().String("layout-definition-name", "", "The unique name of the layout.")
-	customerProfiles_getDomainLayoutCmd.MarkFlagRequired("domain-name")
-	customerProfiles_getDomainLayoutCmd.MarkFlagRequired("layout-definition-name")
+		customerProfiles_getDomainLayoutCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getDomainLayoutCmd.Flags().String("layout-definition-name", "", "The unique name of the layout.")
+		customerProfiles_getDomainLayoutCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getDomainLayoutCmd.MarkFlagRequired("layout-definition-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getDomainLayoutCmd)
 }

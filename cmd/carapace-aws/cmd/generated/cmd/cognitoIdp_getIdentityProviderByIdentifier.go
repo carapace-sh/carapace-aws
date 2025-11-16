@@ -12,11 +12,13 @@ var cognitoIdp_getIdentityProviderByIdentifierCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_getIdentityProviderByIdentifierCmd).Standalone()
+	carapace.Gen(cognitoIdp_getIdentityProviderByIdentifierCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_getIdentityProviderByIdentifierCmd).Standalone()
 
-	cognitoIdp_getIdentityProviderByIdentifierCmd.Flags().String("idp-identifier", "", "The identifier that you assigned to your user pool.")
-	cognitoIdp_getIdentityProviderByIdentifierCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to get information about the IdP.")
-	cognitoIdp_getIdentityProviderByIdentifierCmd.MarkFlagRequired("idp-identifier")
-	cognitoIdp_getIdentityProviderByIdentifierCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_getIdentityProviderByIdentifierCmd.Flags().String("idp-identifier", "", "The identifier that you assigned to your user pool.")
+		cognitoIdp_getIdentityProviderByIdentifierCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to get information about the IdP.")
+		cognitoIdp_getIdentityProviderByIdentifierCmd.MarkFlagRequired("idp-identifier")
+		cognitoIdp_getIdentityProviderByIdentifierCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_getIdentityProviderByIdentifierCmd)
 }

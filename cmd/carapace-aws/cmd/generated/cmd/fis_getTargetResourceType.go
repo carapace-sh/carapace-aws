@@ -12,9 +12,11 @@ var fis_getTargetResourceTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_getTargetResourceTypeCmd).Standalone()
+	carapace.Gen(fis_getTargetResourceTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_getTargetResourceTypeCmd).Standalone()
 
-	fis_getTargetResourceTypeCmd.Flags().String("resource-type", "", "The resource type.")
-	fis_getTargetResourceTypeCmd.MarkFlagRequired("resource-type")
+		fis_getTargetResourceTypeCmd.Flags().String("resource-type", "", "The resource type.")
+		fis_getTargetResourceTypeCmd.MarkFlagRequired("resource-type")
+	})
 	fisCmd.AddCommand(fis_getTargetResourceTypeCmd)
 }

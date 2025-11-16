@@ -12,10 +12,12 @@ var licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd).Standalone()
+	carapace.Gen(licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd).Standalone()
 
-	licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd.Flags().String("filters", "", "An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.")
-	licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd.Flags().String("max-results", "", "The maximum items to return in a request.")
-	licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd.Flags().String("filters", "", "An array of structures that you can use to filter the results to those that match one or more sets of key-value pairs that you specify.")
+		licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd.Flags().String("max-results", "", "The maximum items to return in a request.")
+		licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+	})
 	licenseManagerLinuxSubscriptionsCmd.AddCommand(licenseManagerLinuxSubscriptions_listLinuxSubscriptionsCmd)
 }

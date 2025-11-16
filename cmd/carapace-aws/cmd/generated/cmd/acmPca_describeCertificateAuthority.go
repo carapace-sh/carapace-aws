@@ -12,9 +12,11 @@ var acmPca_describeCertificateAuthorityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acmPca_describeCertificateAuthorityCmd).Standalone()
+	carapace.Gen(acmPca_describeCertificateAuthorityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acmPca_describeCertificateAuthorityCmd).Standalone()
 
-	acmPca_describeCertificateAuthorityCmd.Flags().String("certificate-authority-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).")
-	acmPca_describeCertificateAuthorityCmd.MarkFlagRequired("certificate-authority-arn")
+		acmPca_describeCertificateAuthorityCmd.Flags().String("certificate-authority-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).")
+		acmPca_describeCertificateAuthorityCmd.MarkFlagRequired("certificate-authority-arn")
+	})
 	acmPcaCmd.AddCommand(acmPca_describeCertificateAuthorityCmd)
 }

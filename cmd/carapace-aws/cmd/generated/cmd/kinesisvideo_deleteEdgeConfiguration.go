@@ -12,9 +12,11 @@ var kinesisvideo_deleteEdgeConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_deleteEdgeConfigurationCmd).Standalone()
+	carapace.Gen(kinesisvideo_deleteEdgeConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_deleteEdgeConfigurationCmd).Standalone()
 
-	kinesisvideo_deleteEdgeConfigurationCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream.")
-	kinesisvideo_deleteEdgeConfigurationCmd.Flags().String("stream-name", "", "The name of the stream from which to delete the edge configuration.")
+		kinesisvideo_deleteEdgeConfigurationCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream.")
+		kinesisvideo_deleteEdgeConfigurationCmd.Flags().String("stream-name", "", "The name of the stream from which to delete the edge configuration.")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_deleteEdgeConfigurationCmd)
 }

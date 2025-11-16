@@ -12,12 +12,14 @@ var lookoutequipment_updateModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_updateModelCmd).Standalone()
+	carapace.Gen(lookoutequipment_updateModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_updateModelCmd).Standalone()
 
-	lookoutequipment_updateModelCmd.Flags().String("labels-input-configuration", "", "")
-	lookoutequipment_updateModelCmd.Flags().String("model-diagnostics-output-configuration", "", "The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics for the model.")
-	lookoutequipment_updateModelCmd.Flags().String("model-name", "", "The name of the model to update.")
-	lookoutequipment_updateModelCmd.Flags().String("role-arn", "", "The ARN of the model to update.")
-	lookoutequipment_updateModelCmd.MarkFlagRequired("model-name")
+		lookoutequipment_updateModelCmd.Flags().String("labels-input-configuration", "", "")
+		lookoutequipment_updateModelCmd.Flags().String("model-diagnostics-output-configuration", "", "The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics for the model.")
+		lookoutequipment_updateModelCmd.Flags().String("model-name", "", "The name of the model to update.")
+		lookoutequipment_updateModelCmd.Flags().String("role-arn", "", "The ARN of the model to update.")
+		lookoutequipment_updateModelCmd.MarkFlagRequired("model-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_updateModelCmd)
 }

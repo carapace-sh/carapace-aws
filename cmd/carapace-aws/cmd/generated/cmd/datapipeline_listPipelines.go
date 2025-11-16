@@ -12,8 +12,10 @@ var datapipeline_listPipelinesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_listPipelinesCmd).Standalone()
+	carapace.Gen(datapipeline_listPipelinesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_listPipelinesCmd).Standalone()
 
-	datapipeline_listPipelinesCmd.Flags().String("marker", "", "The starting point for the results to be returned.")
+		datapipeline_listPipelinesCmd.Flags().String("marker", "", "The starting point for the results to be returned.")
+	})
 	datapipelineCmd.AddCommand(datapipeline_listPipelinesCmd)
 }

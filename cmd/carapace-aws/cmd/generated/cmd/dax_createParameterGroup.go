@@ -12,10 +12,12 @@ var dax_createParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_createParameterGroupCmd).Standalone()
+	carapace.Gen(dax_createParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_createParameterGroupCmd).Standalone()
 
-	dax_createParameterGroupCmd.Flags().String("description", "", "A description of the parameter group.")
-	dax_createParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to apply to all of the clusters in this replication group.")
-	dax_createParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+		dax_createParameterGroupCmd.Flags().String("description", "", "A description of the parameter group.")
+		dax_createParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to apply to all of the clusters in this replication group.")
+		dax_createParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+	})
 	daxCmd.AddCommand(dax_createParameterGroupCmd)
 }

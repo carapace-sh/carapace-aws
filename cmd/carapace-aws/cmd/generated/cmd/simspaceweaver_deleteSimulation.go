@@ -12,9 +12,11 @@ var simspaceweaver_deleteSimulationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_deleteSimulationCmd).Standalone()
+	carapace.Gen(simspaceweaver_deleteSimulationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_deleteSimulationCmd).Standalone()
 
-	simspaceweaver_deleteSimulationCmd.Flags().String("simulation", "", "The name of the simulation.")
-	simspaceweaver_deleteSimulationCmd.MarkFlagRequired("simulation")
+		simspaceweaver_deleteSimulationCmd.Flags().String("simulation", "", "The name of the simulation.")
+		simspaceweaver_deleteSimulationCmd.MarkFlagRequired("simulation")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_deleteSimulationCmd)
 }

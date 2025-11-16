@@ -12,12 +12,14 @@ var internetmonitor_getHealthEventCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(internetmonitor_getHealthEventCmd).Standalone()
+	carapace.Gen(internetmonitor_getHealthEventCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(internetmonitor_getHealthEventCmd).Standalone()
 
-	internetmonitor_getHealthEventCmd.Flags().String("event-id", "", "The internally-generated identifier of a health event.")
-	internetmonitor_getHealthEventCmd.Flags().String("linked-account-id", "", "The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.")
-	internetmonitor_getHealthEventCmd.Flags().String("monitor-name", "", "The name of the monitor.")
-	internetmonitor_getHealthEventCmd.MarkFlagRequired("event-id")
-	internetmonitor_getHealthEventCmd.MarkFlagRequired("monitor-name")
+		internetmonitor_getHealthEventCmd.Flags().String("event-id", "", "The internally-generated identifier of a health event.")
+		internetmonitor_getHealthEventCmd.Flags().String("linked-account-id", "", "The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor.")
+		internetmonitor_getHealthEventCmd.Flags().String("monitor-name", "", "The name of the monitor.")
+		internetmonitor_getHealthEventCmd.MarkFlagRequired("event-id")
+		internetmonitor_getHealthEventCmd.MarkFlagRequired("monitor-name")
+	})
 	internetmonitorCmd.AddCommand(internetmonitor_getHealthEventCmd)
 }

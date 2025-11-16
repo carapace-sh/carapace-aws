@@ -12,13 +12,15 @@ var connect_updateContactAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateContactAttributesCmd).Standalone()
+	carapace.Gen(connect_updateContactAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateContactAttributesCmd).Standalone()
 
-	connect_updateContactAttributesCmd.Flags().String("attributes", "", "The Amazon Connect attributes.")
-	connect_updateContactAttributesCmd.Flags().String("initial-contact-id", "", "The identifier of the contact.")
-	connect_updateContactAttributesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateContactAttributesCmd.MarkFlagRequired("attributes")
-	connect_updateContactAttributesCmd.MarkFlagRequired("initial-contact-id")
-	connect_updateContactAttributesCmd.MarkFlagRequired("instance-id")
+		connect_updateContactAttributesCmd.Flags().String("attributes", "", "The Amazon Connect attributes.")
+		connect_updateContactAttributesCmd.Flags().String("initial-contact-id", "", "The identifier of the contact.")
+		connect_updateContactAttributesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateContactAttributesCmd.MarkFlagRequired("attributes")
+		connect_updateContactAttributesCmd.MarkFlagRequired("initial-contact-id")
+		connect_updateContactAttributesCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_updateContactAttributesCmd)
 }

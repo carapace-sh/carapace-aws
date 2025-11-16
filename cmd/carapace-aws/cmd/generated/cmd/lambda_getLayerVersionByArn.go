@@ -12,9 +12,11 @@ var lambda_getLayerVersionByArnCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getLayerVersionByArnCmd).Standalone()
+	carapace.Gen(lambda_getLayerVersionByArnCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getLayerVersionByArnCmd).Standalone()
 
-	lambda_getLayerVersionByArnCmd.Flags().String("arn", "", "The ARN of the layer version.")
-	lambda_getLayerVersionByArnCmd.MarkFlagRequired("arn")
+		lambda_getLayerVersionByArnCmd.Flags().String("arn", "", "The ARN of the layer version.")
+		lambda_getLayerVersionByArnCmd.MarkFlagRequired("arn")
+	})
 	lambdaCmd.AddCommand(lambda_getLayerVersionByArnCmd)
 }

@@ -12,12 +12,14 @@ var cognitoIdp_setUserMfapreferenceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_setUserMfapreferenceCmd).Standalone()
+	carapace.Gen(cognitoIdp_setUserMfapreferenceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_setUserMfapreferenceCmd).Standalone()
 
-	cognitoIdp_setUserMfapreferenceCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_setUserMfapreferenceCmd.Flags().String("email-mfa-settings", "", "User preferences for email message MFA.")
-	cognitoIdp_setUserMfapreferenceCmd.Flags().String("smsmfa-settings", "", "User preferences for SMS message MFA.")
-	cognitoIdp_setUserMfapreferenceCmd.Flags().String("software-token-mfa-settings", "", "User preferences for time-based one-time password (TOTP) MFA.")
-	cognitoIdp_setUserMfapreferenceCmd.MarkFlagRequired("access-token")
+		cognitoIdp_setUserMfapreferenceCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_setUserMfapreferenceCmd.Flags().String("email-mfa-settings", "", "User preferences for email message MFA.")
+		cognitoIdp_setUserMfapreferenceCmd.Flags().String("smsmfa-settings", "", "User preferences for SMS message MFA.")
+		cognitoIdp_setUserMfapreferenceCmd.Flags().String("software-token-mfa-settings", "", "User preferences for time-based one-time password (TOTP) MFA.")
+		cognitoIdp_setUserMfapreferenceCmd.MarkFlagRequired("access-token")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_setUserMfapreferenceCmd)
 }

@@ -12,11 +12,13 @@ var ssm_describeInstancePatchStatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeInstancePatchStatesCmd).Standalone()
+	carapace.Gen(ssm_describeInstancePatchStatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeInstancePatchStatesCmd).Standalone()
 
-	ssm_describeInstancePatchStatesCmd.Flags().String("instance-ids", "", "The ID of the managed node for which patch state information should be retrieved.")
-	ssm_describeInstancePatchStatesCmd.Flags().String("max-results", "", "The maximum number of managed nodes to return (per page).")
-	ssm_describeInstancePatchStatesCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	ssm_describeInstancePatchStatesCmd.MarkFlagRequired("instance-ids")
+		ssm_describeInstancePatchStatesCmd.Flags().String("instance-ids", "", "The ID of the managed node for which patch state information should be retrieved.")
+		ssm_describeInstancePatchStatesCmd.Flags().String("max-results", "", "The maximum number of managed nodes to return (per page).")
+		ssm_describeInstancePatchStatesCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_describeInstancePatchStatesCmd.MarkFlagRequired("instance-ids")
+	})
 	ssmCmd.AddCommand(ssm_describeInstancePatchStatesCmd)
 }

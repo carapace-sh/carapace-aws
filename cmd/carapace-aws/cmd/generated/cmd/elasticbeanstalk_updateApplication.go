@@ -12,10 +12,12 @@ var elasticbeanstalk_updateApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_updateApplicationCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_updateApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_updateApplicationCmd).Standalone()
 
-	elasticbeanstalk_updateApplicationCmd.Flags().String("application-name", "", "The name of the application to update.")
-	elasticbeanstalk_updateApplicationCmd.Flags().String("description", "", "A new description for the application.")
-	elasticbeanstalk_updateApplicationCmd.MarkFlagRequired("application-name")
+		elasticbeanstalk_updateApplicationCmd.Flags().String("application-name", "", "The name of the application to update.")
+		elasticbeanstalk_updateApplicationCmd.Flags().String("description", "", "A new description for the application.")
+		elasticbeanstalk_updateApplicationCmd.MarkFlagRequired("application-name")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_updateApplicationCmd)
 }

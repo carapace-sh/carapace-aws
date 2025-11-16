@@ -12,9 +12,11 @@ var backupsearch_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupsearch_listTagsForResourceCmd).Standalone()
+	carapace.Gen(backupsearch_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupsearch_listTagsForResourceCmd).Standalone()
 
-	backupsearch_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the resource.&gt;")
-	backupsearch_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		backupsearch_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the resource.&gt;")
+		backupsearch_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	backupsearchCmd.AddCommand(backupsearch_listTagsForResourceCmd)
 }

@@ -12,10 +12,12 @@ var sns_createSmssandboxPhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_createSmssandboxPhoneNumberCmd).Standalone()
+	carapace.Gen(sns_createSmssandboxPhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_createSmssandboxPhoneNumberCmd).Standalone()
 
-	sns_createSmssandboxPhoneNumberCmd.Flags().String("language-code", "", "The language to use for sending the OTP.")
-	sns_createSmssandboxPhoneNumberCmd.Flags().String("phone-number", "", "The destination phone number to verify.")
-	sns_createSmssandboxPhoneNumberCmd.MarkFlagRequired("phone-number")
+		sns_createSmssandboxPhoneNumberCmd.Flags().String("language-code", "", "The language to use for sending the OTP.")
+		sns_createSmssandboxPhoneNumberCmd.Flags().String("phone-number", "", "The destination phone number to verify.")
+		sns_createSmssandboxPhoneNumberCmd.MarkFlagRequired("phone-number")
+	})
 	snsCmd.AddCommand(sns_createSmssandboxPhoneNumberCmd)
 }

@@ -12,9 +12,11 @@ var macie2_deleteMemberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_deleteMemberCmd).Standalone()
+	carapace.Gen(macie2_deleteMemberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_deleteMemberCmd).Standalone()
 
-	macie2_deleteMemberCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
-	macie2_deleteMemberCmd.MarkFlagRequired("id")
+		macie2_deleteMemberCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
+		macie2_deleteMemberCmd.MarkFlagRequired("id")
+	})
 	macie2Cmd.AddCommand(macie2_deleteMemberCmd)
 }

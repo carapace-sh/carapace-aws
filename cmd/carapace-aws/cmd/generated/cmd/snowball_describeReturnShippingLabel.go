@@ -12,9 +12,11 @@ var snowball_describeReturnShippingLabelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_describeReturnShippingLabelCmd).Standalone()
+	carapace.Gen(snowball_describeReturnShippingLabelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_describeReturnShippingLabelCmd).Standalone()
 
-	snowball_describeReturnShippingLabelCmd.Flags().String("job-id", "", "The automatically generated ID for a job, for example `JID123e4567-e89b-12d3-a456-426655440000`.")
-	snowball_describeReturnShippingLabelCmd.MarkFlagRequired("job-id")
+		snowball_describeReturnShippingLabelCmd.Flags().String("job-id", "", "The automatically generated ID for a job, for example `JID123e4567-e89b-12d3-a456-426655440000`.")
+		snowball_describeReturnShippingLabelCmd.MarkFlagRequired("job-id")
+	})
 	snowballCmd.AddCommand(snowball_describeReturnShippingLabelCmd)
 }

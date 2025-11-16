@@ -12,9 +12,11 @@ var mediapackage_deleteOriginEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackage_deleteOriginEndpointCmd).Standalone()
+	carapace.Gen(mediapackage_deleteOriginEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackage_deleteOriginEndpointCmd).Standalone()
 
-	mediapackage_deleteOriginEndpointCmd.Flags().String("id", "", "The ID of the OriginEndpoint to delete.")
-	mediapackage_deleteOriginEndpointCmd.MarkFlagRequired("id")
+		mediapackage_deleteOriginEndpointCmd.Flags().String("id", "", "The ID of the OriginEndpoint to delete.")
+		mediapackage_deleteOriginEndpointCmd.MarkFlagRequired("id")
+	})
 	mediapackageCmd.AddCommand(mediapackage_deleteOriginEndpointCmd)
 }

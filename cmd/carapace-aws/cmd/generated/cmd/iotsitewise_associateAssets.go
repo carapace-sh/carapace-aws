@@ -12,14 +12,16 @@ var iotsitewise_associateAssetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_associateAssetsCmd).Standalone()
+	carapace.Gen(iotsitewise_associateAssetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_associateAssetsCmd).Standalone()
 
-	iotsitewise_associateAssetsCmd.Flags().String("asset-id", "", "The ID of the parent asset.")
-	iotsitewise_associateAssetsCmd.Flags().String("child-asset-id", "", "The ID of the child asset to be associated.")
-	iotsitewise_associateAssetsCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_associateAssetsCmd.Flags().String("hierarchy-id", "", "The ID of a hierarchy in the parent asset's model.")
-	iotsitewise_associateAssetsCmd.MarkFlagRequired("asset-id")
-	iotsitewise_associateAssetsCmd.MarkFlagRequired("child-asset-id")
-	iotsitewise_associateAssetsCmd.MarkFlagRequired("hierarchy-id")
+		iotsitewise_associateAssetsCmd.Flags().String("asset-id", "", "The ID of the parent asset.")
+		iotsitewise_associateAssetsCmd.Flags().String("child-asset-id", "", "The ID of the child asset to be associated.")
+		iotsitewise_associateAssetsCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_associateAssetsCmd.Flags().String("hierarchy-id", "", "The ID of a hierarchy in the parent asset's model.")
+		iotsitewise_associateAssetsCmd.MarkFlagRequired("asset-id")
+		iotsitewise_associateAssetsCmd.MarkFlagRequired("child-asset-id")
+		iotsitewise_associateAssetsCmd.MarkFlagRequired("hierarchy-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_associateAssetsCmd)
 }

@@ -12,11 +12,13 @@ var lakeformation_listLakeFormationOptInsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_listLakeFormationOptInsCmd).Standalone()
+	carapace.Gen(lakeformation_listLakeFormationOptInsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_listLakeFormationOptInsCmd).Standalone()
 
-	lakeformation_listLakeFormationOptInsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	lakeformation_listLakeFormationOptInsCmd.Flags().String("next-token", "", "A continuation token, if this is not the first call to retrieve this list.")
-	lakeformation_listLakeFormationOptInsCmd.Flags().String("principal", "", "")
-	lakeformation_listLakeFormationOptInsCmd.Flags().String("resource", "", "A structure for the resource.")
+		lakeformation_listLakeFormationOptInsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		lakeformation_listLakeFormationOptInsCmd.Flags().String("next-token", "", "A continuation token, if this is not the first call to retrieve this list.")
+		lakeformation_listLakeFormationOptInsCmd.Flags().String("principal", "", "")
+		lakeformation_listLakeFormationOptInsCmd.Flags().String("resource", "", "A structure for the resource.")
+	})
 	lakeformationCmd.AddCommand(lakeformation_listLakeFormationOptInsCmd)
 }

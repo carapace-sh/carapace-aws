@@ -12,9 +12,11 @@ var vpcLattice_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listTagsForResourceCmd).Standalone()
+	carapace.Gen(vpcLattice_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listTagsForResourceCmd).Standalone()
 
-	vpcLattice_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	vpcLattice_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		vpcLattice_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		vpcLattice_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listTagsForResourceCmd)
 }

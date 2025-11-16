@@ -12,13 +12,15 @@ var docdb_modifyDbclusterSnapshotAttributeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_modifyDbclusterSnapshotAttributeCmd).Standalone()
+	carapace.Gen(docdb_modifyDbclusterSnapshotAttributeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_modifyDbclusterSnapshotAttributeCmd).Standalone()
 
-	docdb_modifyDbclusterSnapshotAttributeCmd.Flags().String("attribute-name", "", "The name of the cluster snapshot attribute to modify.")
-	docdb_modifyDbclusterSnapshotAttributeCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier for the cluster snapshot to modify the attributes for.")
-	docdb_modifyDbclusterSnapshotAttributeCmd.Flags().String("values-to-add", "", "A list of cluster snapshot attributes to add to the attribute specified by `AttributeName`.")
-	docdb_modifyDbclusterSnapshotAttributeCmd.Flags().String("values-to-remove", "", "A list of cluster snapshot attributes to remove from the attribute specified by `AttributeName`.")
-	docdb_modifyDbclusterSnapshotAttributeCmd.MarkFlagRequired("attribute-name")
-	docdb_modifyDbclusterSnapshotAttributeCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+		docdb_modifyDbclusterSnapshotAttributeCmd.Flags().String("attribute-name", "", "The name of the cluster snapshot attribute to modify.")
+		docdb_modifyDbclusterSnapshotAttributeCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier for the cluster snapshot to modify the attributes for.")
+		docdb_modifyDbclusterSnapshotAttributeCmd.Flags().String("values-to-add", "", "A list of cluster snapshot attributes to add to the attribute specified by `AttributeName`.")
+		docdb_modifyDbclusterSnapshotAttributeCmd.Flags().String("values-to-remove", "", "A list of cluster snapshot attributes to remove from the attribute specified by `AttributeName`.")
+		docdb_modifyDbclusterSnapshotAttributeCmd.MarkFlagRequired("attribute-name")
+		docdb_modifyDbclusterSnapshotAttributeCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+	})
 	docdbCmd.AddCommand(docdb_modifyDbclusterSnapshotAttributeCmd)
 }

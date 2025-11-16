@@ -12,9 +12,11 @@ var appsync_deleteDomainNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_deleteDomainNameCmd).Standalone()
+	carapace.Gen(appsync_deleteDomainNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_deleteDomainNameCmd).Standalone()
 
-	appsync_deleteDomainNameCmd.Flags().String("domain-name", "", "The domain name.")
-	appsync_deleteDomainNameCmd.MarkFlagRequired("domain-name")
+		appsync_deleteDomainNameCmd.Flags().String("domain-name", "", "The domain name.")
+		appsync_deleteDomainNameCmd.MarkFlagRequired("domain-name")
+	})
 	appsyncCmd.AddCommand(appsync_deleteDomainNameCmd)
 }

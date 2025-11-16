@@ -12,9 +12,11 @@ var memorydb_listTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_listTagsCmd).Standalone()
+	carapace.Gen(memorydb_listTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_listTagsCmd).Standalone()
 
-	memorydb_listTagsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want the list of tags.")
-	memorydb_listTagsCmd.MarkFlagRequired("resource-arn")
+		memorydb_listTagsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want the list of tags.")
+		memorydb_listTagsCmd.MarkFlagRequired("resource-arn")
+	})
 	memorydbCmd.AddCommand(memorydb_listTagsCmd)
 }

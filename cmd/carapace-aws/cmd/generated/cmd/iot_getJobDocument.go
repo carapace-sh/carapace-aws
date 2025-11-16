@@ -12,10 +12,12 @@ var iot_getJobDocumentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getJobDocumentCmd).Standalone()
+	carapace.Gen(iot_getJobDocumentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getJobDocumentCmd).Standalone()
 
-	iot_getJobDocumentCmd.Flags().String("before-substitution", "", "Provides a view of the job document before and after the substitution parameters have been resolved with their exact values.")
-	iot_getJobDocumentCmd.Flags().String("job-id", "", "The unique identifier you assigned to this job when it was created.")
-	iot_getJobDocumentCmd.MarkFlagRequired("job-id")
+		iot_getJobDocumentCmd.Flags().String("before-substitution", "", "Provides a view of the job document before and after the substitution parameters have been resolved with their exact values.")
+		iot_getJobDocumentCmd.Flags().String("job-id", "", "The unique identifier you assigned to this job when it was created.")
+		iot_getJobDocumentCmd.MarkFlagRequired("job-id")
+	})
 	iotCmd.AddCommand(iot_getJobDocumentCmd)
 }

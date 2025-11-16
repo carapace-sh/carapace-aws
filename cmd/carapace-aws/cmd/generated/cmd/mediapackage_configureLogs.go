@@ -12,11 +12,13 @@ var mediapackage_configureLogsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackage_configureLogsCmd).Standalone()
+	carapace.Gen(mediapackage_configureLogsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackage_configureLogsCmd).Standalone()
 
-	mediapackage_configureLogsCmd.Flags().String("egress-access-logs", "", "")
-	mediapackage_configureLogsCmd.Flags().String("id", "", "The ID of the channel to log subscription.")
-	mediapackage_configureLogsCmd.Flags().String("ingress-access-logs", "", "")
-	mediapackage_configureLogsCmd.MarkFlagRequired("id")
+		mediapackage_configureLogsCmd.Flags().String("egress-access-logs", "", "")
+		mediapackage_configureLogsCmd.Flags().String("id", "", "The ID of the channel to log subscription.")
+		mediapackage_configureLogsCmd.Flags().String("ingress-access-logs", "", "")
+		mediapackage_configureLogsCmd.MarkFlagRequired("id")
+	})
 	mediapackageCmd.AddCommand(mediapackage_configureLogsCmd)
 }

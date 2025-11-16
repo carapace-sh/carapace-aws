@@ -12,12 +12,14 @@ var route53resolver_updateOutpostResolverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_updateOutpostResolverCmd).Standalone()
+	carapace.Gen(route53resolver_updateOutpostResolverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_updateOutpostResolverCmd).Standalone()
 
-	route53resolver_updateOutpostResolverCmd.Flags().String("id", "", "A unique string that identifies Resolver on an Outpost.")
-	route53resolver_updateOutpostResolverCmd.Flags().String("instance-count", "", "The Amazon EC2 instance count for a Resolver on the Outpost.")
-	route53resolver_updateOutpostResolverCmd.Flags().String("name", "", "Name of the Resolver on the Outpost.")
-	route53resolver_updateOutpostResolverCmd.Flags().String("preferred-instance-type", "", "Amazon EC2 instance type.")
-	route53resolver_updateOutpostResolverCmd.MarkFlagRequired("id")
+		route53resolver_updateOutpostResolverCmd.Flags().String("id", "", "A unique string that identifies Resolver on an Outpost.")
+		route53resolver_updateOutpostResolverCmd.Flags().String("instance-count", "", "The Amazon EC2 instance count for a Resolver on the Outpost.")
+		route53resolver_updateOutpostResolverCmd.Flags().String("name", "", "Name of the Resolver on the Outpost.")
+		route53resolver_updateOutpostResolverCmd.Flags().String("preferred-instance-type", "", "Amazon EC2 instance type.")
+		route53resolver_updateOutpostResolverCmd.MarkFlagRequired("id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_updateOutpostResolverCmd)
 }

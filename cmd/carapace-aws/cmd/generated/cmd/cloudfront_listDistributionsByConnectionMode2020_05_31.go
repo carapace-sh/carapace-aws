@@ -12,11 +12,13 @@ var cloudfront_listDistributionsByConnectionMode2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_listDistributionsByConnectionMode2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listDistributionsByConnectionMode2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listDistributionsByConnectionMode2020_05_31Cmd).Standalone()
 
-	cloudfront_listDistributionsByConnectionMode2020_05_31Cmd.Flags().String("connection-mode", "", "This field specifies whether the connection mode is through a standard distribution (direct) or a multi-tenant distribution with distribution tenants (tenant-only).")
-	cloudfront_listDistributionsByConnectionMode2020_05_31Cmd.Flags().String("marker", "", "The marker for the next set of distributions to retrieve.")
-	cloudfront_listDistributionsByConnectionMode2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of distributions to return.")
-	cloudfront_listDistributionsByConnectionMode2020_05_31Cmd.MarkFlagRequired("connection-mode")
+		cloudfront_listDistributionsByConnectionMode2020_05_31Cmd.Flags().String("connection-mode", "", "This field specifies whether the connection mode is through a standard distribution (direct) or a multi-tenant distribution with distribution tenants (tenant-only).")
+		cloudfront_listDistributionsByConnectionMode2020_05_31Cmd.Flags().String("marker", "", "The marker for the next set of distributions to retrieve.")
+		cloudfront_listDistributionsByConnectionMode2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of distributions to return.")
+		cloudfront_listDistributionsByConnectionMode2020_05_31Cmd.MarkFlagRequired("connection-mode")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listDistributionsByConnectionMode2020_05_31Cmd)
 }

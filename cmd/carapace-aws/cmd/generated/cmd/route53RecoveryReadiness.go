@@ -12,7 +12,9 @@ var route53RecoveryReadinessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadinessCmd).Standalone()
+	carapace.Gen(route53RecoveryReadinessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadinessCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(route53RecoveryReadinessCmd)
 }

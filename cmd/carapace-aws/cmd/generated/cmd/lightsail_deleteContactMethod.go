@@ -12,9 +12,11 @@ var lightsail_deleteContactMethodCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteContactMethodCmd).Standalone()
+	carapace.Gen(lightsail_deleteContactMethodCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteContactMethodCmd).Standalone()
 
-	lightsail_deleteContactMethodCmd.Flags().String("protocol", "", "The protocol that will be deleted, such as `Email` or `SMS` (text messaging).")
-	lightsail_deleteContactMethodCmd.MarkFlagRequired("protocol")
+		lightsail_deleteContactMethodCmd.Flags().String("protocol", "", "The protocol that will be deleted, such as `Email` or `SMS` (text messaging).")
+		lightsail_deleteContactMethodCmd.MarkFlagRequired("protocol")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteContactMethodCmd)
 }

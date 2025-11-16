@@ -12,11 +12,13 @@ var ssm_createOpsMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_createOpsMetadataCmd).Standalone()
+	carapace.Gen(ssm_createOpsMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_createOpsMetadataCmd).Standalone()
 
-	ssm_createOpsMetadataCmd.Flags().String("metadata", "", "Metadata for a new Application Manager application.")
-	ssm_createOpsMetadataCmd.Flags().String("resource-id", "", "A resource ID for a new Application Manager application.")
-	ssm_createOpsMetadataCmd.Flags().String("tags", "", "Optional metadata that you assign to a resource.")
-	ssm_createOpsMetadataCmd.MarkFlagRequired("resource-id")
+		ssm_createOpsMetadataCmd.Flags().String("metadata", "", "Metadata for a new Application Manager application.")
+		ssm_createOpsMetadataCmd.Flags().String("resource-id", "", "A resource ID for a new Application Manager application.")
+		ssm_createOpsMetadataCmd.Flags().String("tags", "", "Optional metadata that you assign to a resource.")
+		ssm_createOpsMetadataCmd.MarkFlagRequired("resource-id")
+	})
 	ssmCmd.AddCommand(ssm_createOpsMetadataCmd)
 }

@@ -12,11 +12,13 @@ var mgn_listImportErrorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_listImportErrorsCmd).Standalone()
+	carapace.Gen(mgn_listImportErrorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_listImportErrorsCmd).Standalone()
 
-	mgn_listImportErrorsCmd.Flags().String("import-id", "", "List import errors request import id.")
-	mgn_listImportErrorsCmd.Flags().String("max-results", "", "List import errors request max results.")
-	mgn_listImportErrorsCmd.Flags().String("next-token", "", "List import errors request next token.")
-	mgn_listImportErrorsCmd.MarkFlagRequired("import-id")
+		mgn_listImportErrorsCmd.Flags().String("import-id", "", "List import errors request import id.")
+		mgn_listImportErrorsCmd.Flags().String("max-results", "", "List import errors request max results.")
+		mgn_listImportErrorsCmd.Flags().String("next-token", "", "List import errors request next token.")
+		mgn_listImportErrorsCmd.MarkFlagRequired("import-id")
+	})
 	mgnCmd.AddCommand(mgn_listImportErrorsCmd)
 }

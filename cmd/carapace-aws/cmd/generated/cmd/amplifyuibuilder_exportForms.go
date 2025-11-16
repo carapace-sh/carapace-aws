@@ -12,12 +12,14 @@ var amplifyuibuilder_exportFormsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_exportFormsCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_exportFormsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_exportFormsCmd).Standalone()
 
-	amplifyuibuilder_exportFormsCmd.Flags().String("app-id", "", "The unique ID of the Amplify app to export forms to.")
-	amplifyuibuilder_exportFormsCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app.")
-	amplifyuibuilder_exportFormsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
-	amplifyuibuilder_exportFormsCmd.MarkFlagRequired("app-id")
-	amplifyuibuilder_exportFormsCmd.MarkFlagRequired("environment-name")
+		amplifyuibuilder_exportFormsCmd.Flags().String("app-id", "", "The unique ID of the Amplify app to export forms to.")
+		amplifyuibuilder_exportFormsCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app.")
+		amplifyuibuilder_exportFormsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		amplifyuibuilder_exportFormsCmd.MarkFlagRequired("app-id")
+		amplifyuibuilder_exportFormsCmd.MarkFlagRequired("environment-name")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_exportFormsCmd)
 }

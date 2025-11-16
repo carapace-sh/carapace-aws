@@ -12,9 +12,11 @@ var route53resolver_getResolverEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_getResolverEndpointCmd).Standalone()
+	carapace.Gen(route53resolver_getResolverEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_getResolverEndpointCmd).Standalone()
 
-	route53resolver_getResolverEndpointCmd.Flags().String("resolver-endpoint-id", "", "The ID of the Resolver endpoint that you want to get information about.")
-	route53resolver_getResolverEndpointCmd.MarkFlagRequired("resolver-endpoint-id")
+		route53resolver_getResolverEndpointCmd.Flags().String("resolver-endpoint-id", "", "The ID of the Resolver endpoint that you want to get information about.")
+		route53resolver_getResolverEndpointCmd.MarkFlagRequired("resolver-endpoint-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_getResolverEndpointCmd)
 }

@@ -12,7 +12,9 @@ var wellarchitectedCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitectedCmd).Standalone()
+	carapace.Gen(wellarchitectedCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitectedCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(wellarchitectedCmd)
 }

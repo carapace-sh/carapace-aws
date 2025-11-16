@@ -12,13 +12,15 @@ var inspector2_sendCisSessionTelemetryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_sendCisSessionTelemetryCmd).Standalone()
+	carapace.Gen(inspector2_sendCisSessionTelemetryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_sendCisSessionTelemetryCmd).Standalone()
 
-	inspector2_sendCisSessionTelemetryCmd.Flags().String("messages", "", "The CIS session telemetry messages.")
-	inspector2_sendCisSessionTelemetryCmd.Flags().String("scan-job-id", "", "A unique identifier for the scan job.")
-	inspector2_sendCisSessionTelemetryCmd.Flags().String("session-token", "", "The unique token that identifies the CIS session.")
-	inspector2_sendCisSessionTelemetryCmd.MarkFlagRequired("messages")
-	inspector2_sendCisSessionTelemetryCmd.MarkFlagRequired("scan-job-id")
-	inspector2_sendCisSessionTelemetryCmd.MarkFlagRequired("session-token")
+		inspector2_sendCisSessionTelemetryCmd.Flags().String("messages", "", "The CIS session telemetry messages.")
+		inspector2_sendCisSessionTelemetryCmd.Flags().String("scan-job-id", "", "A unique identifier for the scan job.")
+		inspector2_sendCisSessionTelemetryCmd.Flags().String("session-token", "", "The unique token that identifies the CIS session.")
+		inspector2_sendCisSessionTelemetryCmd.MarkFlagRequired("messages")
+		inspector2_sendCisSessionTelemetryCmd.MarkFlagRequired("scan-job-id")
+		inspector2_sendCisSessionTelemetryCmd.MarkFlagRequired("session-token")
+	})
 	inspector2Cmd.AddCommand(inspector2_sendCisSessionTelemetryCmd)
 }

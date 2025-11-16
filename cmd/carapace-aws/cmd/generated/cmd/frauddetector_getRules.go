@@ -12,13 +12,15 @@ var frauddetector_getRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getRulesCmd).Standalone()
+	carapace.Gen(frauddetector_getRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getRulesCmd).Standalone()
 
-	frauddetector_getRulesCmd.Flags().String("detector-id", "", "The detector ID.")
-	frauddetector_getRulesCmd.Flags().String("max-results", "", "The maximum number of rules to return for the request.")
-	frauddetector_getRulesCmd.Flags().String("next-token", "", "The next page token.")
-	frauddetector_getRulesCmd.Flags().String("rule-id", "", "The rule ID.")
-	frauddetector_getRulesCmd.Flags().String("rule-version", "", "The rule version.")
-	frauddetector_getRulesCmd.MarkFlagRequired("detector-id")
+		frauddetector_getRulesCmd.Flags().String("detector-id", "", "The detector ID.")
+		frauddetector_getRulesCmd.Flags().String("max-results", "", "The maximum number of rules to return for the request.")
+		frauddetector_getRulesCmd.Flags().String("next-token", "", "The next page token.")
+		frauddetector_getRulesCmd.Flags().String("rule-id", "", "The rule ID.")
+		frauddetector_getRulesCmd.Flags().String("rule-version", "", "The rule version.")
+		frauddetector_getRulesCmd.MarkFlagRequired("detector-id")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getRulesCmd)
 }

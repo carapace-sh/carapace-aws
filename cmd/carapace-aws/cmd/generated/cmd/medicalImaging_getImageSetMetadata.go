@@ -12,12 +12,14 @@ var medicalImaging_getImageSetMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medicalImaging_getImageSetMetadataCmd).Standalone()
+	carapace.Gen(medicalImaging_getImageSetMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medicalImaging_getImageSetMetadataCmd).Standalone()
 
-	medicalImaging_getImageSetMetadataCmd.Flags().String("datastore-id", "", "The data store identifier.")
-	medicalImaging_getImageSetMetadataCmd.Flags().String("image-set-id", "", "The image set identifier.")
-	medicalImaging_getImageSetMetadataCmd.Flags().String("version-id", "", "The image set version identifier.")
-	medicalImaging_getImageSetMetadataCmd.MarkFlagRequired("datastore-id")
-	medicalImaging_getImageSetMetadataCmd.MarkFlagRequired("image-set-id")
+		medicalImaging_getImageSetMetadataCmd.Flags().String("datastore-id", "", "The data store identifier.")
+		medicalImaging_getImageSetMetadataCmd.Flags().String("image-set-id", "", "The image set identifier.")
+		medicalImaging_getImageSetMetadataCmd.Flags().String("version-id", "", "The image set version identifier.")
+		medicalImaging_getImageSetMetadataCmd.MarkFlagRequired("datastore-id")
+		medicalImaging_getImageSetMetadataCmd.MarkFlagRequired("image-set-id")
+	})
 	medicalImagingCmd.AddCommand(medicalImaging_getImageSetMetadataCmd)
 }

@@ -12,10 +12,12 @@ var timestreamWrite_listTablesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamWrite_listTablesCmd).Standalone()
+	carapace.Gen(timestreamWrite_listTablesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamWrite_listTablesCmd).Standalone()
 
-	timestreamWrite_listTablesCmd.Flags().String("database-name", "", "The name of the Timestream database.")
-	timestreamWrite_listTablesCmd.Flags().String("max-results", "", "The total number of items to return in the output.")
-	timestreamWrite_listTablesCmd.Flags().String("next-token", "", "The pagination token.")
+		timestreamWrite_listTablesCmd.Flags().String("database-name", "", "The name of the Timestream database.")
+		timestreamWrite_listTablesCmd.Flags().String("max-results", "", "The total number of items to return in the output.")
+		timestreamWrite_listTablesCmd.Flags().String("next-token", "", "The pagination token.")
+	})
 	timestreamWriteCmd.AddCommand(timestreamWrite_listTablesCmd)
 }

@@ -12,11 +12,13 @@ var databrew_batchDeleteRecipeVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_batchDeleteRecipeVersionCmd).Standalone()
+	carapace.Gen(databrew_batchDeleteRecipeVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_batchDeleteRecipeVersionCmd).Standalone()
 
-	databrew_batchDeleteRecipeVersionCmd.Flags().String("name", "", "The name of the recipe whose versions are to be deleted.")
-	databrew_batchDeleteRecipeVersionCmd.Flags().String("recipe-versions", "", "An array of version identifiers, for the recipe versions to be deleted.")
-	databrew_batchDeleteRecipeVersionCmd.MarkFlagRequired("name")
-	databrew_batchDeleteRecipeVersionCmd.MarkFlagRequired("recipe-versions")
+		databrew_batchDeleteRecipeVersionCmd.Flags().String("name", "", "The name of the recipe whose versions are to be deleted.")
+		databrew_batchDeleteRecipeVersionCmd.Flags().String("recipe-versions", "", "An array of version identifiers, for the recipe versions to be deleted.")
+		databrew_batchDeleteRecipeVersionCmd.MarkFlagRequired("name")
+		databrew_batchDeleteRecipeVersionCmd.MarkFlagRequired("recipe-versions")
+	})
 	databrewCmd.AddCommand(databrew_batchDeleteRecipeVersionCmd)
 }

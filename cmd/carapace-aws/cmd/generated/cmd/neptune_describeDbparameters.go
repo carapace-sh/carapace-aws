@@ -12,13 +12,15 @@ var neptune_describeDbparametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_describeDbparametersCmd).Standalone()
+	carapace.Gen(neptune_describeDbparametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_describeDbparametersCmd).Standalone()
 
-	neptune_describeDbparametersCmd.Flags().String("dbparameter-group-name", "", "The name of a specific DB parameter group to return details for.")
-	neptune_describeDbparametersCmd.Flags().String("filters", "", "This parameter is not currently supported.")
-	neptune_describeDbparametersCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeDBParameters` request.")
-	neptune_describeDbparametersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	neptune_describeDbparametersCmd.Flags().String("source", "", "The parameter types to return.")
-	neptune_describeDbparametersCmd.MarkFlagRequired("dbparameter-group-name")
+		neptune_describeDbparametersCmd.Flags().String("dbparameter-group-name", "", "The name of a specific DB parameter group to return details for.")
+		neptune_describeDbparametersCmd.Flags().String("filters", "", "This parameter is not currently supported.")
+		neptune_describeDbparametersCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeDBParameters` request.")
+		neptune_describeDbparametersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		neptune_describeDbparametersCmd.Flags().String("source", "", "The parameter types to return.")
+		neptune_describeDbparametersCmd.MarkFlagRequired("dbparameter-group-name")
+	})
 	neptuneCmd.AddCommand(neptune_describeDbparametersCmd)
 }

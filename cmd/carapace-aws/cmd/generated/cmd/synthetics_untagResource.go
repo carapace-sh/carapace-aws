@@ -12,11 +12,13 @@ var synthetics_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_untagResourceCmd).Standalone()
+	carapace.Gen(synthetics_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_untagResourceCmd).Standalone()
 
-	synthetics_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the canary or group that you're removing tags from.")
-	synthetics_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
-	synthetics_untagResourceCmd.MarkFlagRequired("resource-arn")
-	synthetics_untagResourceCmd.MarkFlagRequired("tag-keys")
+		synthetics_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the canary or group that you're removing tags from.")
+		synthetics_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
+		synthetics_untagResourceCmd.MarkFlagRequired("resource-arn")
+		synthetics_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	syntheticsCmd.AddCommand(synthetics_untagResourceCmd)
 }

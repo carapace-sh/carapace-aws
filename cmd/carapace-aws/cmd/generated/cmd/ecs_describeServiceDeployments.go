@@ -12,9 +12,11 @@ var ecs_describeServiceDeploymentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_describeServiceDeploymentsCmd).Standalone()
+	carapace.Gen(ecs_describeServiceDeploymentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_describeServiceDeploymentsCmd).Standalone()
 
-	ecs_describeServiceDeploymentsCmd.Flags().String("service-deployment-arns", "", "The ARN of the service deployment.")
-	ecs_describeServiceDeploymentsCmd.MarkFlagRequired("service-deployment-arns")
+		ecs_describeServiceDeploymentsCmd.Flags().String("service-deployment-arns", "", "The ARN of the service deployment.")
+		ecs_describeServiceDeploymentsCmd.MarkFlagRequired("service-deployment-arns")
+	})
 	ecsCmd.AddCommand(ecs_describeServiceDeploymentsCmd)
 }

@@ -12,12 +12,14 @@ var amp_listRuleGroupsNamespacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_listRuleGroupsNamespacesCmd).Standalone()
+	carapace.Gen(amp_listRuleGroupsNamespacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_listRuleGroupsNamespacesCmd).Standalone()
 
-	amp_listRuleGroupsNamespacesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	amp_listRuleGroupsNamespacesCmd.Flags().String("name", "", "Use this parameter to filter the rule groups namespaces that are returned.")
-	amp_listRuleGroupsNamespacesCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	amp_listRuleGroupsNamespacesCmd.Flags().String("workspace-id", "", "The ID of the workspace containing the rule groups namespaces.")
-	amp_listRuleGroupsNamespacesCmd.MarkFlagRequired("workspace-id")
+		amp_listRuleGroupsNamespacesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		amp_listRuleGroupsNamespacesCmd.Flags().String("name", "", "Use this parameter to filter the rule groups namespaces that are returned.")
+		amp_listRuleGroupsNamespacesCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		amp_listRuleGroupsNamespacesCmd.Flags().String("workspace-id", "", "The ID of the workspace containing the rule groups namespaces.")
+		amp_listRuleGroupsNamespacesCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_listRuleGroupsNamespacesCmd)
 }

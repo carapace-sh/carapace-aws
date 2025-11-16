@@ -12,12 +12,14 @@ var appstream_startSoftwareDeploymentToImageBuilderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_startSoftwareDeploymentToImageBuilderCmd).Standalone()
+	carapace.Gen(appstream_startSoftwareDeploymentToImageBuilderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_startSoftwareDeploymentToImageBuilderCmd).Standalone()
 
-	appstream_startSoftwareDeploymentToImageBuilderCmd.Flags().String("image-builder-name", "", "The name of the target image builder instance.")
-	appstream_startSoftwareDeploymentToImageBuilderCmd.Flags().Bool("no-retry-failed-deployments", false, "Whether to retry previously failed license included application deployments.")
-	appstream_startSoftwareDeploymentToImageBuilderCmd.Flags().Bool("retry-failed-deployments", false, "Whether to retry previously failed license included application deployments.")
-	appstream_startSoftwareDeploymentToImageBuilderCmd.MarkFlagRequired("image-builder-name")
-	appstream_startSoftwareDeploymentToImageBuilderCmd.Flag("no-retry-failed-deployments").Hidden = true
+		appstream_startSoftwareDeploymentToImageBuilderCmd.Flags().String("image-builder-name", "", "The name of the target image builder instance.")
+		appstream_startSoftwareDeploymentToImageBuilderCmd.Flags().Bool("no-retry-failed-deployments", false, "Whether to retry previously failed license included application deployments.")
+		appstream_startSoftwareDeploymentToImageBuilderCmd.Flags().Bool("retry-failed-deployments", false, "Whether to retry previously failed license included application deployments.")
+		appstream_startSoftwareDeploymentToImageBuilderCmd.MarkFlagRequired("image-builder-name")
+		appstream_startSoftwareDeploymentToImageBuilderCmd.Flag("no-retry-failed-deployments").Hidden = true
+	})
 	appstreamCmd.AddCommand(appstream_startSoftwareDeploymentToImageBuilderCmd)
 }

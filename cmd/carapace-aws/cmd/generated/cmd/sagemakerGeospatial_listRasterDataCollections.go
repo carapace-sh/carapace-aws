@@ -12,9 +12,11 @@ var sagemakerGeospatial_listRasterDataCollectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerGeospatial_listRasterDataCollectionsCmd).Standalone()
+	carapace.Gen(sagemakerGeospatial_listRasterDataCollectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerGeospatial_listRasterDataCollectionsCmd).Standalone()
 
-	sagemakerGeospatial_listRasterDataCollectionsCmd.Flags().String("max-results", "", "The total number of items to return.")
-	sagemakerGeospatial_listRasterDataCollectionsCmd.Flags().String("next-token", "", "If the previous response was truncated, you receive this token.")
+		sagemakerGeospatial_listRasterDataCollectionsCmd.Flags().String("max-results", "", "The total number of items to return.")
+		sagemakerGeospatial_listRasterDataCollectionsCmd.Flags().String("next-token", "", "If the previous response was truncated, you receive this token.")
+	})
 	sagemakerGeospatialCmd.AddCommand(sagemakerGeospatial_listRasterDataCollectionsCmd)
 }

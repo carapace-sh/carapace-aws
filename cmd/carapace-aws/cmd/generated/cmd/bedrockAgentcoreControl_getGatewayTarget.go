@@ -12,11 +12,13 @@ var bedrockAgentcoreControl_getGatewayTargetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_getGatewayTargetCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_getGatewayTargetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_getGatewayTargetCmd).Standalone()
 
-	bedrockAgentcoreControl_getGatewayTargetCmd.Flags().String("gateway-identifier", "", "The identifier of the gateway that contains the target.")
-	bedrockAgentcoreControl_getGatewayTargetCmd.Flags().String("target-id", "", "The unique identifier of the target to retrieve.")
-	bedrockAgentcoreControl_getGatewayTargetCmd.MarkFlagRequired("gateway-identifier")
-	bedrockAgentcoreControl_getGatewayTargetCmd.MarkFlagRequired("target-id")
+		bedrockAgentcoreControl_getGatewayTargetCmd.Flags().String("gateway-identifier", "", "The identifier of the gateway that contains the target.")
+		bedrockAgentcoreControl_getGatewayTargetCmd.Flags().String("target-id", "", "The unique identifier of the target to retrieve.")
+		bedrockAgentcoreControl_getGatewayTargetCmd.MarkFlagRequired("gateway-identifier")
+		bedrockAgentcoreControl_getGatewayTargetCmd.MarkFlagRequired("target-id")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_getGatewayTargetCmd)
 }

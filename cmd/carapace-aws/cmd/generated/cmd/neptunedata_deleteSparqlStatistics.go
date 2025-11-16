@@ -12,7 +12,9 @@ var neptunedata_deleteSparqlStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_deleteSparqlStatisticsCmd).Standalone()
+	carapace.Gen(neptunedata_deleteSparqlStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_deleteSparqlStatisticsCmd).Standalone()
 
+	})
 	neptunedataCmd.AddCommand(neptunedata_deleteSparqlStatisticsCmd)
 }

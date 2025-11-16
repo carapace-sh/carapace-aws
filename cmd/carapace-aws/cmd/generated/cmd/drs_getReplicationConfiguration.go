@@ -12,9 +12,11 @@ var drs_getReplicationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_getReplicationConfigurationCmd).Standalone()
+	carapace.Gen(drs_getReplicationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_getReplicationConfigurationCmd).Standalone()
 
-	drs_getReplicationConfigurationCmd.Flags().String("source-server-id", "", "The ID of the Source Serve for this Replication Configuration.r")
-	drs_getReplicationConfigurationCmd.MarkFlagRequired("source-server-id")
+		drs_getReplicationConfigurationCmd.Flags().String("source-server-id", "", "The ID of the Source Serve for this Replication Configuration.r")
+		drs_getReplicationConfigurationCmd.MarkFlagRequired("source-server-id")
+	})
 	drsCmd.AddCommand(drs_getReplicationConfigurationCmd)
 }

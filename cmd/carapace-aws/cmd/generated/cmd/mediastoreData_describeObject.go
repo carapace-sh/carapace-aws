@@ -12,9 +12,11 @@ var mediastoreData_describeObjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastoreData_describeObjectCmd).Standalone()
+	carapace.Gen(mediastoreData_describeObjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastoreData_describeObjectCmd).Standalone()
 
-	mediastoreData_describeObjectCmd.Flags().String("path", "", "The path (including the file name) where the object is stored in the container.")
-	mediastoreData_describeObjectCmd.MarkFlagRequired("path")
+		mediastoreData_describeObjectCmd.Flags().String("path", "", "The path (including the file name) where the object is stored in the container.")
+		mediastoreData_describeObjectCmd.MarkFlagRequired("path")
+	})
 	mediastoreDataCmd.AddCommand(mediastoreData_describeObjectCmd)
 }

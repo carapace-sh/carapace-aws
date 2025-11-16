@@ -12,12 +12,14 @@ var proton_updateEnvironmentAccountConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_updateEnvironmentAccountConnectionCmd).Standalone()
+	carapace.Gen(proton_updateEnvironmentAccountConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_updateEnvironmentAccountConnectionCmd).Standalone()
 
-	proton_updateEnvironmentAccountConnectionCmd.Flags().String("codebuild-role-arn", "", "The Amazon Resource Name (ARN) of an IAM service role in the environment account.")
-	proton_updateEnvironmentAccountConnectionCmd.Flags().String("component-role-arn", "", "The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in the associated environment account.")
-	proton_updateEnvironmentAccountConnectionCmd.Flags().String("id", "", "The ID of the environment account connection to update.")
-	proton_updateEnvironmentAccountConnectionCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the IAM service role that's associated with the environment account connection to update.")
-	proton_updateEnvironmentAccountConnectionCmd.MarkFlagRequired("id")
+		proton_updateEnvironmentAccountConnectionCmd.Flags().String("codebuild-role-arn", "", "The Amazon Resource Name (ARN) of an IAM service role in the environment account.")
+		proton_updateEnvironmentAccountConnectionCmd.Flags().String("component-role-arn", "", "The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in the associated environment account.")
+		proton_updateEnvironmentAccountConnectionCmd.Flags().String("id", "", "The ID of the environment account connection to update.")
+		proton_updateEnvironmentAccountConnectionCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the IAM service role that's associated with the environment account connection to update.")
+		proton_updateEnvironmentAccountConnectionCmd.MarkFlagRequired("id")
+	})
 	protonCmd.AddCommand(proton_updateEnvironmentAccountConnectionCmd)
 }

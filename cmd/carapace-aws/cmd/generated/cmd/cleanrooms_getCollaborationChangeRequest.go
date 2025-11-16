@@ -12,11 +12,13 @@ var cleanrooms_getCollaborationChangeRequestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_getCollaborationChangeRequestCmd).Standalone()
+	carapace.Gen(cleanrooms_getCollaborationChangeRequestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_getCollaborationChangeRequestCmd).Standalone()
 
-	cleanrooms_getCollaborationChangeRequestCmd.Flags().String("change-request-identifier", "", "A unique identifier for the change request to retrieve.")
-	cleanrooms_getCollaborationChangeRequestCmd.Flags().String("collaboration-identifier", "", "The identifier of the collaboration that the change request is made against.")
-	cleanrooms_getCollaborationChangeRequestCmd.MarkFlagRequired("change-request-identifier")
-	cleanrooms_getCollaborationChangeRequestCmd.MarkFlagRequired("collaboration-identifier")
+		cleanrooms_getCollaborationChangeRequestCmd.Flags().String("change-request-identifier", "", "A unique identifier for the change request to retrieve.")
+		cleanrooms_getCollaborationChangeRequestCmd.Flags().String("collaboration-identifier", "", "The identifier of the collaboration that the change request is made against.")
+		cleanrooms_getCollaborationChangeRequestCmd.MarkFlagRequired("change-request-identifier")
+		cleanrooms_getCollaborationChangeRequestCmd.MarkFlagRequired("collaboration-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_getCollaborationChangeRequestCmd)
 }

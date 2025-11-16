@@ -12,15 +12,17 @@ var qconnect_createAssistantAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_createAssistantAssociationCmd).Standalone()
+	carapace.Gen(qconnect_createAssistantAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_createAssistantAssociationCmd).Standalone()
 
-	qconnect_createAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_createAssistantAssociationCmd.Flags().String("association", "", "The identifier of the associated resource.")
-	qconnect_createAssistantAssociationCmd.Flags().String("association-type", "", "The type of association.")
-	qconnect_createAssistantAssociationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	qconnect_createAssistantAssociationCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
-	qconnect_createAssistantAssociationCmd.MarkFlagRequired("assistant-id")
-	qconnect_createAssistantAssociationCmd.MarkFlagRequired("association")
-	qconnect_createAssistantAssociationCmd.MarkFlagRequired("association-type")
+		qconnect_createAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_createAssistantAssociationCmd.Flags().String("association", "", "The identifier of the associated resource.")
+		qconnect_createAssistantAssociationCmd.Flags().String("association-type", "", "The type of association.")
+		qconnect_createAssistantAssociationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		qconnect_createAssistantAssociationCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
+		qconnect_createAssistantAssociationCmd.MarkFlagRequired("assistant-id")
+		qconnect_createAssistantAssociationCmd.MarkFlagRequired("association")
+		qconnect_createAssistantAssociationCmd.MarkFlagRequired("association-type")
+	})
 	qconnectCmd.AddCommand(qconnect_createAssistantAssociationCmd)
 }

@@ -12,9 +12,11 @@ var codedeploy_continueDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_continueDeploymentCmd).Standalone()
+	carapace.Gen(codedeploy_continueDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_continueDeploymentCmd).Standalone()
 
-	codedeploy_continueDeploymentCmd.Flags().String("deployment-id", "", "The unique ID of a blue/green deployment for which you want to start rerouting traffic to the replacement environment.")
-	codedeploy_continueDeploymentCmd.Flags().String("deployment-wait-type", "", "The status of the deployment's waiting period.")
+		codedeploy_continueDeploymentCmd.Flags().String("deployment-id", "", "The unique ID of a blue/green deployment for which you want to start rerouting traffic to the replacement environment.")
+		codedeploy_continueDeploymentCmd.Flags().String("deployment-wait-type", "", "The status of the deployment's waiting period.")
+	})
 	codedeployCmd.AddCommand(codedeploy_continueDeploymentCmd)
 }

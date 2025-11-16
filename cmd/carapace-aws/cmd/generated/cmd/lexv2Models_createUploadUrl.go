@@ -12,7 +12,9 @@ var lexv2Models_createUploadUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_createUploadUrlCmd).Standalone()
+	carapace.Gen(lexv2Models_createUploadUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_createUploadUrlCmd).Standalone()
 
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_createUploadUrlCmd)
 }

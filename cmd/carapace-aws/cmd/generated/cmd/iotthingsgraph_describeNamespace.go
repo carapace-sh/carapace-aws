@@ -12,8 +12,10 @@ var iotthingsgraph_describeNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_describeNamespaceCmd).Standalone()
+	carapace.Gen(iotthingsgraph_describeNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_describeNamespaceCmd).Standalone()
 
-	iotthingsgraph_describeNamespaceCmd.Flags().String("namespace-name", "", "The name of the user's namespace.")
+		iotthingsgraph_describeNamespaceCmd.Flags().String("namespace-name", "", "The name of the user's namespace.")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_describeNamespaceCmd)
 }

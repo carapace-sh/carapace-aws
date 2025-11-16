@@ -12,7 +12,9 @@ var iotsitewise_describeDefaultEncryptionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeDefaultEncryptionConfigurationCmd).Standalone()
+	carapace.Gen(iotsitewise_describeDefaultEncryptionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeDefaultEncryptionConfigurationCmd).Standalone()
 
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeDefaultEncryptionConfigurationCmd)
 }

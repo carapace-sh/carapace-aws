@@ -12,9 +12,11 @@ var chimeSdkMediaPipelines_deleteMediaInsightsPipelineConfigurationCmd = &cobra.
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_deleteMediaInsightsPipelineConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_deleteMediaInsightsPipelineConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_deleteMediaInsightsPipelineConfigurationCmd).Standalone()
 
-	chimeSdkMediaPipelines_deleteMediaInsightsPipelineConfigurationCmd.Flags().String("identifier", "", "The unique identifier of the resource to be deleted.")
-	chimeSdkMediaPipelines_deleteMediaInsightsPipelineConfigurationCmd.MarkFlagRequired("identifier")
+		chimeSdkMediaPipelines_deleteMediaInsightsPipelineConfigurationCmd.Flags().String("identifier", "", "The unique identifier of the resource to be deleted.")
+		chimeSdkMediaPipelines_deleteMediaInsightsPipelineConfigurationCmd.MarkFlagRequired("identifier")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_deleteMediaInsightsPipelineConfigurationCmd)
 }

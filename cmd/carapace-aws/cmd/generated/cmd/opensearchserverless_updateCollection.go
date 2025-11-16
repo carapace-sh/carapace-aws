@@ -12,11 +12,13 @@ var opensearchserverless_updateCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_updateCollectionCmd).Standalone()
+	carapace.Gen(opensearchserverless_updateCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_updateCollectionCmd).Standalone()
 
-	opensearchserverless_updateCollectionCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
-	opensearchserverless_updateCollectionCmd.Flags().String("description", "", "A description of the collection.")
-	opensearchserverless_updateCollectionCmd.Flags().String("id", "", "The unique identifier of the collection.")
-	opensearchserverless_updateCollectionCmd.MarkFlagRequired("id")
+		opensearchserverless_updateCollectionCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
+		opensearchserverless_updateCollectionCmd.Flags().String("description", "", "A description of the collection.")
+		opensearchserverless_updateCollectionCmd.Flags().String("id", "", "The unique identifier of the collection.")
+		opensearchserverless_updateCollectionCmd.MarkFlagRequired("id")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_updateCollectionCmd)
 }

@@ -12,10 +12,12 @@ var resourceExplorer2_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_tagResourceCmd).Standalone()
+	carapace.Gen(resourceExplorer2_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_tagResourceCmd).Standalone()
 
-	resourceExplorer2_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the view or index that you want to attach tags to.")
-	resourceExplorer2_tagResourceCmd.Flags().String("tags", "", "A list of tag key and value pairs that you want to attach to the specified view or index.")
-	resourceExplorer2_tagResourceCmd.MarkFlagRequired("resource-arn")
+		resourceExplorer2_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the view or index that you want to attach tags to.")
+		resourceExplorer2_tagResourceCmd.Flags().String("tags", "", "A list of tag key and value pairs that you want to attach to the specified view or index.")
+		resourceExplorer2_tagResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_tagResourceCmd)
 }

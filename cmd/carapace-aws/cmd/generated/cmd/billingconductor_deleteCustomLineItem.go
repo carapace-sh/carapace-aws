@@ -12,10 +12,12 @@ var billingconductor_deleteCustomLineItemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billingconductor_deleteCustomLineItemCmd).Standalone()
+	carapace.Gen(billingconductor_deleteCustomLineItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_deleteCustomLineItemCmd).Standalone()
 
-	billingconductor_deleteCustomLineItemCmd.Flags().String("arn", "", "The ARN of the custom line item to be deleted.")
-	billingconductor_deleteCustomLineItemCmd.Flags().String("billing-period-range", "", "")
-	billingconductor_deleteCustomLineItemCmd.MarkFlagRequired("arn")
+		billingconductor_deleteCustomLineItemCmd.Flags().String("arn", "", "The ARN of the custom line item to be deleted.")
+		billingconductor_deleteCustomLineItemCmd.Flags().String("billing-period-range", "", "")
+		billingconductor_deleteCustomLineItemCmd.MarkFlagRequired("arn")
+	})
 	billingconductorCmd.AddCommand(billingconductor_deleteCustomLineItemCmd)
 }

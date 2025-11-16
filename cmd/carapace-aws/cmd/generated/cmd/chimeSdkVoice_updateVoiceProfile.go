@@ -12,11 +12,13 @@ var chimeSdkVoice_updateVoiceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_updateVoiceProfileCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_updateVoiceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_updateVoiceProfileCmd).Standalone()
 
-	chimeSdkVoice_updateVoiceProfileCmd.Flags().String("speaker-search-task-id", "", "The ID of the speaker search task.")
-	chimeSdkVoice_updateVoiceProfileCmd.Flags().String("voice-profile-id", "", "The profile ID.")
-	chimeSdkVoice_updateVoiceProfileCmd.MarkFlagRequired("speaker-search-task-id")
-	chimeSdkVoice_updateVoiceProfileCmd.MarkFlagRequired("voice-profile-id")
+		chimeSdkVoice_updateVoiceProfileCmd.Flags().String("speaker-search-task-id", "", "The ID of the speaker search task.")
+		chimeSdkVoice_updateVoiceProfileCmd.Flags().String("voice-profile-id", "", "The profile ID.")
+		chimeSdkVoice_updateVoiceProfileCmd.MarkFlagRequired("speaker-search-task-id")
+		chimeSdkVoice_updateVoiceProfileCmd.MarkFlagRequired("voice-profile-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_updateVoiceProfileCmd)
 }

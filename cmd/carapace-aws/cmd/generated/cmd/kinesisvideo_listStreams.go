@@ -12,10 +12,12 @@ var kinesisvideo_listStreamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_listStreamsCmd).Standalone()
+	carapace.Gen(kinesisvideo_listStreamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_listStreamsCmd).Standalone()
 
-	kinesisvideo_listStreamsCmd.Flags().String("max-results", "", "The maximum number of streams to return in the response.")
-	kinesisvideo_listStreamsCmd.Flags().String("next-token", "", "If you specify this parameter, when the result of a `ListStreams` operation is truncated, the call returns the `NextToken` in the response.")
-	kinesisvideo_listStreamsCmd.Flags().String("stream-name-condition", "", "Optional: Returns only streams that satisfy a specific condition.")
+		kinesisvideo_listStreamsCmd.Flags().String("max-results", "", "The maximum number of streams to return in the response.")
+		kinesisvideo_listStreamsCmd.Flags().String("next-token", "", "If you specify this parameter, when the result of a `ListStreams` operation is truncated, the call returns the `NextToken` in the response.")
+		kinesisvideo_listStreamsCmd.Flags().String("stream-name-condition", "", "Optional: Returns only streams that satisfy a specific condition.")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_listStreamsCmd)
 }

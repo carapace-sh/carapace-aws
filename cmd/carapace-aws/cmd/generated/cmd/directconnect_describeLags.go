@@ -12,10 +12,12 @@ var directconnect_describeLagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_describeLagsCmd).Standalone()
+	carapace.Gen(directconnect_describeLagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_describeLagsCmd).Standalone()
 
-	directconnect_describeLagsCmd.Flags().String("lag-id", "", "The ID of the LAG.")
-	directconnect_describeLagsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	directconnect_describeLagsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		directconnect_describeLagsCmd.Flags().String("lag-id", "", "The ID of the LAG.")
+		directconnect_describeLagsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		directconnect_describeLagsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	directconnectCmd.AddCommand(directconnect_describeLagsCmd)
 }

@@ -12,9 +12,11 @@ var organizations_closeAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_closeAccountCmd).Standalone()
+	carapace.Gen(organizations_closeAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_closeAccountCmd).Standalone()
 
-	organizations_closeAccountCmd.Flags().String("account-id", "", "Retrieves the Amazon Web Services account Id for the current `CloseAccount` API request.")
-	organizations_closeAccountCmd.MarkFlagRequired("account-id")
+		organizations_closeAccountCmd.Flags().String("account-id", "", "Retrieves the Amazon Web Services account Id for the current `CloseAccount` API request.")
+		organizations_closeAccountCmd.MarkFlagRequired("account-id")
+	})
 	organizationsCmd.AddCommand(organizations_closeAccountCmd)
 }

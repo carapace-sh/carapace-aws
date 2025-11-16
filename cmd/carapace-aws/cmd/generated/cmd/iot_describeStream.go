@@ -12,9 +12,11 @@ var iot_describeStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeStreamCmd).Standalone()
+	carapace.Gen(iot_describeStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeStreamCmd).Standalone()
 
-	iot_describeStreamCmd.Flags().String("stream-id", "", "The stream ID.")
-	iot_describeStreamCmd.MarkFlagRequired("stream-id")
+		iot_describeStreamCmd.Flags().String("stream-id", "", "The stream ID.")
+		iot_describeStreamCmd.MarkFlagRequired("stream-id")
+	})
 	iotCmd.AddCommand(iot_describeStreamCmd)
 }

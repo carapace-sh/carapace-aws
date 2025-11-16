@@ -12,11 +12,13 @@ var cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd = &cobra.Comman
 }
 
 func init() {
-	carapace.Gen(cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd).Standalone()
 
-	cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd.Flags().String("distribution-tenant-id", "", "The ID of the distribution tenant.")
-	cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd.Flags().String("id", "", "The ID of the invalidation to retrieve.")
-	cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd.MarkFlagRequired("distribution-tenant-id")
-	cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd.Flags().String("distribution-tenant-id", "", "The ID of the distribution tenant.")
+		cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd.Flags().String("id", "", "The ID of the invalidation to retrieve.")
+		cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd.MarkFlagRequired("distribution-tenant-id")
+		cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getInvalidationForDistributionTenant2020_05_31Cmd)
 }

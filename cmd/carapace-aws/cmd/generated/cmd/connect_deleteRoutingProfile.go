@@ -12,11 +12,13 @@ var connect_deleteRoutingProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteRoutingProfileCmd).Standalone()
+	carapace.Gen(connect_deleteRoutingProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteRoutingProfileCmd).Standalone()
 
-	connect_deleteRoutingProfileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteRoutingProfileCmd.Flags().String("routing-profile-id", "", "The identifier of the routing profile.")
-	connect_deleteRoutingProfileCmd.MarkFlagRequired("instance-id")
-	connect_deleteRoutingProfileCmd.MarkFlagRequired("routing-profile-id")
+		connect_deleteRoutingProfileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteRoutingProfileCmd.Flags().String("routing-profile-id", "", "The identifier of the routing profile.")
+		connect_deleteRoutingProfileCmd.MarkFlagRequired("instance-id")
+		connect_deleteRoutingProfileCmd.MarkFlagRequired("routing-profile-id")
+	})
 	connectCmd.AddCommand(connect_deleteRoutingProfileCmd)
 }

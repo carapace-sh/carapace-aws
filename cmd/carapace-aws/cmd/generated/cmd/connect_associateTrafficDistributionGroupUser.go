@@ -12,13 +12,15 @@ var connect_associateTrafficDistributionGroupUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_associateTrafficDistributionGroupUserCmd).Standalone()
+	carapace.Gen(connect_associateTrafficDistributionGroupUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_associateTrafficDistributionGroupUserCmd).Standalone()
 
-	connect_associateTrafficDistributionGroupUserCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_associateTrafficDistributionGroupUserCmd.Flags().String("traffic-distribution-group-id", "", "The identifier of the traffic distribution group.")
-	connect_associateTrafficDistributionGroupUserCmd.Flags().String("user-id", "", "The identifier of the user account.")
-	connect_associateTrafficDistributionGroupUserCmd.MarkFlagRequired("instance-id")
-	connect_associateTrafficDistributionGroupUserCmd.MarkFlagRequired("traffic-distribution-group-id")
-	connect_associateTrafficDistributionGroupUserCmd.MarkFlagRequired("user-id")
+		connect_associateTrafficDistributionGroupUserCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_associateTrafficDistributionGroupUserCmd.Flags().String("traffic-distribution-group-id", "", "The identifier of the traffic distribution group.")
+		connect_associateTrafficDistributionGroupUserCmd.Flags().String("user-id", "", "The identifier of the user account.")
+		connect_associateTrafficDistributionGroupUserCmd.MarkFlagRequired("instance-id")
+		connect_associateTrafficDistributionGroupUserCmd.MarkFlagRequired("traffic-distribution-group-id")
+		connect_associateTrafficDistributionGroupUserCmd.MarkFlagRequired("user-id")
+	})
 	connectCmd.AddCommand(connect_associateTrafficDistributionGroupUserCmd)
 }

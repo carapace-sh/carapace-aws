@@ -12,12 +12,14 @@ var appmesh_describeVirtualGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appmesh_describeVirtualGatewayCmd).Standalone()
+	carapace.Gen(appmesh_describeVirtualGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appmesh_describeVirtualGatewayCmd).Standalone()
 
-	appmesh_describeVirtualGatewayCmd.Flags().String("mesh-name", "", "The name of the service mesh that the gateway route resides in.")
-	appmesh_describeVirtualGatewayCmd.Flags().String("mesh-owner", "", "The Amazon Web Services IAM account ID of the service mesh owner.")
-	appmesh_describeVirtualGatewayCmd.Flags().String("virtual-gateway-name", "", "The name of the virtual gateway to describe.")
-	appmesh_describeVirtualGatewayCmd.MarkFlagRequired("mesh-name")
-	appmesh_describeVirtualGatewayCmd.MarkFlagRequired("virtual-gateway-name")
+		appmesh_describeVirtualGatewayCmd.Flags().String("mesh-name", "", "The name of the service mesh that the gateway route resides in.")
+		appmesh_describeVirtualGatewayCmd.Flags().String("mesh-owner", "", "The Amazon Web Services IAM account ID of the service mesh owner.")
+		appmesh_describeVirtualGatewayCmd.Flags().String("virtual-gateway-name", "", "The name of the virtual gateway to describe.")
+		appmesh_describeVirtualGatewayCmd.MarkFlagRequired("mesh-name")
+		appmesh_describeVirtualGatewayCmd.MarkFlagRequired("virtual-gateway-name")
+	})
 	appmeshCmd.AddCommand(appmesh_describeVirtualGatewayCmd)
 }

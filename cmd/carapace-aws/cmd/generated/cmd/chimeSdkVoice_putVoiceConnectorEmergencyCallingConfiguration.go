@@ -12,11 +12,13 @@ var chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd = &cobra.Com
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd).Standalone()
 
-	chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd.Flags().String("emergency-calling-configuration", "", "The configuration being updated.")
-	chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd.MarkFlagRequired("emergency-calling-configuration")
-	chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd.Flags().String("emergency-calling-configuration", "", "The configuration being updated.")
+		chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd.MarkFlagRequired("emergency-calling-configuration")
+		chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_putVoiceConnectorEmergencyCallingConfigurationCmd)
 }

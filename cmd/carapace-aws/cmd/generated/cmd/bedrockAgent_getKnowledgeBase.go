@@ -12,9 +12,11 @@ var bedrockAgent_getKnowledgeBaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_getKnowledgeBaseCmd).Standalone()
+	carapace.Gen(bedrockAgent_getKnowledgeBaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_getKnowledgeBaseCmd).Standalone()
 
-	bedrockAgent_getKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The unique identifier of the knowledge base you want to get information on.")
-	bedrockAgent_getKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+		bedrockAgent_getKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The unique identifier of the knowledge base you want to get information on.")
+		bedrockAgent_getKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_getKnowledgeBaseCmd)
 }

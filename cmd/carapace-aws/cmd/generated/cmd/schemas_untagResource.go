@@ -12,11 +12,13 @@ var schemas_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_untagResourceCmd).Standalone()
+	carapace.Gen(schemas_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_untagResourceCmd).Standalone()
 
-	schemas_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	schemas_untagResourceCmd.Flags().String("tag-keys", "", "Keys of key-value pairs.")
-	schemas_untagResourceCmd.MarkFlagRequired("resource-arn")
-	schemas_untagResourceCmd.MarkFlagRequired("tag-keys")
+		schemas_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		schemas_untagResourceCmd.Flags().String("tag-keys", "", "Keys of key-value pairs.")
+		schemas_untagResourceCmd.MarkFlagRequired("resource-arn")
+		schemas_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	schemasCmd.AddCommand(schemas_untagResourceCmd)
 }

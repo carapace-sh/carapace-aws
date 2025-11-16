@@ -12,10 +12,12 @@ var securitylake_deleteCustomLogSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_deleteCustomLogSourceCmd).Standalone()
+	carapace.Gen(securitylake_deleteCustomLogSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_deleteCustomLogSourceCmd).Standalone()
 
-	securitylake_deleteCustomLogSourceCmd.Flags().String("source-name", "", "The source name of custom log source that you want to delete.")
-	securitylake_deleteCustomLogSourceCmd.Flags().String("source-version", "", "The source version for the third-party custom source.")
-	securitylake_deleteCustomLogSourceCmd.MarkFlagRequired("source-name")
+		securitylake_deleteCustomLogSourceCmd.Flags().String("source-name", "", "The source name of custom log source that you want to delete.")
+		securitylake_deleteCustomLogSourceCmd.Flags().String("source-version", "", "The source version for the third-party custom source.")
+		securitylake_deleteCustomLogSourceCmd.MarkFlagRequired("source-name")
+	})
 	securitylakeCmd.AddCommand(securitylake_deleteCustomLogSourceCmd)
 }

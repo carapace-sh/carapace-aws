@@ -12,9 +12,11 @@ var cloudfront_listStreamingDistributions2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_listStreamingDistributions2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listStreamingDistributions2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listStreamingDistributions2020_05_31Cmd).Standalone()
 
-	cloudfront_listStreamingDistributions2020_05_31Cmd.Flags().String("marker", "", "The value that you provided for the `Marker` request parameter.")
-	cloudfront_listStreamingDistributions2020_05_31Cmd.Flags().String("max-items", "", "The value that you provided for the `MaxItems` request parameter.")
+		cloudfront_listStreamingDistributions2020_05_31Cmd.Flags().String("marker", "", "The value that you provided for the `Marker` request parameter.")
+		cloudfront_listStreamingDistributions2020_05_31Cmd.Flags().String("max-items", "", "The value that you provided for the `MaxItems` request parameter.")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listStreamingDistributions2020_05_31Cmd)
 }

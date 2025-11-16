@@ -12,9 +12,11 @@ var iam_getRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getRoleCmd).Standalone()
+	carapace.Gen(iam_getRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getRoleCmd).Standalone()
 
-	iam_getRoleCmd.Flags().String("role-name", "", "The name of the IAM role to get information about.")
-	iam_getRoleCmd.MarkFlagRequired("role-name")
+		iam_getRoleCmd.Flags().String("role-name", "", "The name of the IAM role to get information about.")
+		iam_getRoleCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_getRoleCmd)
 }

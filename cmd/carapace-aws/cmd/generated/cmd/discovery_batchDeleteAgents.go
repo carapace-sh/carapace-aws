@@ -12,9 +12,11 @@ var discovery_batchDeleteAgentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_batchDeleteAgentsCmd).Standalone()
+	carapace.Gen(discovery_batchDeleteAgentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_batchDeleteAgentsCmd).Standalone()
 
-	discovery_batchDeleteAgentsCmd.Flags().String("delete-agents", "", "The list of agents to delete.")
-	discovery_batchDeleteAgentsCmd.MarkFlagRequired("delete-agents")
+		discovery_batchDeleteAgentsCmd.Flags().String("delete-agents", "", "The list of agents to delete.")
+		discovery_batchDeleteAgentsCmd.MarkFlagRequired("delete-agents")
+	})
 	discoveryCmd.AddCommand(discovery_batchDeleteAgentsCmd)
 }

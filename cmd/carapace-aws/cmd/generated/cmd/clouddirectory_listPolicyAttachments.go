@@ -12,14 +12,16 @@ var clouddirectory_listPolicyAttachmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_listPolicyAttachmentsCmd).Standalone()
+	carapace.Gen(clouddirectory_listPolicyAttachmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_listPolicyAttachmentsCmd).Standalone()
 
-	clouddirectory_listPolicyAttachmentsCmd.Flags().String("consistency-level", "", "Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.")
-	clouddirectory_listPolicyAttachmentsCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]() where objects reside.")
-	clouddirectory_listPolicyAttachmentsCmd.Flags().String("max-results", "", "The maximum number of items to be retrieved in a single call.")
-	clouddirectory_listPolicyAttachmentsCmd.Flags().String("next-token", "", "The pagination token.")
-	clouddirectory_listPolicyAttachmentsCmd.Flags().String("policy-reference", "", "The reference that identifies the policy object.")
-	clouddirectory_listPolicyAttachmentsCmd.MarkFlagRequired("directory-arn")
-	clouddirectory_listPolicyAttachmentsCmd.MarkFlagRequired("policy-reference")
+		clouddirectory_listPolicyAttachmentsCmd.Flags().String("consistency-level", "", "Represents the manner and timing in which the successful write or update of an object is reflected in a subsequent read operation of that same object.")
+		clouddirectory_listPolicyAttachmentsCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]() where objects reside.")
+		clouddirectory_listPolicyAttachmentsCmd.Flags().String("max-results", "", "The maximum number of items to be retrieved in a single call.")
+		clouddirectory_listPolicyAttachmentsCmd.Flags().String("next-token", "", "The pagination token.")
+		clouddirectory_listPolicyAttachmentsCmd.Flags().String("policy-reference", "", "The reference that identifies the policy object.")
+		clouddirectory_listPolicyAttachmentsCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_listPolicyAttachmentsCmd.MarkFlagRequired("policy-reference")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_listPolicyAttachmentsCmd)
 }

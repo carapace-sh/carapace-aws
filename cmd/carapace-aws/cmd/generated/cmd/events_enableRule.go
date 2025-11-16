@@ -12,10 +12,12 @@ var events_enableRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_enableRuleCmd).Standalone()
+	carapace.Gen(events_enableRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_enableRuleCmd).Standalone()
 
-	events_enableRuleCmd.Flags().String("event-bus-name", "", "The name or ARN of the event bus associated with the rule.")
-	events_enableRuleCmd.Flags().String("name", "", "The name of the rule.")
-	events_enableRuleCmd.MarkFlagRequired("name")
+		events_enableRuleCmd.Flags().String("event-bus-name", "", "The name or ARN of the event bus associated with the rule.")
+		events_enableRuleCmd.Flags().String("name", "", "The name of the rule.")
+		events_enableRuleCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_enableRuleCmd)
 }

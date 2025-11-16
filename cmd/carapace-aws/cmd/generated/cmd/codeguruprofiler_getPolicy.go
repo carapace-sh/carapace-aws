@@ -12,9 +12,11 @@ var codeguruprofiler_getPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruprofiler_getPolicyCmd).Standalone()
+	carapace.Gen(codeguruprofiler_getPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruprofiler_getPolicyCmd).Standalone()
 
-	codeguruprofiler_getPolicyCmd.Flags().String("profiling-group-name", "", "The name of the profiling group.")
-	codeguruprofiler_getPolicyCmd.MarkFlagRequired("profiling-group-name")
+		codeguruprofiler_getPolicyCmd.Flags().String("profiling-group-name", "", "The name of the profiling group.")
+		codeguruprofiler_getPolicyCmd.MarkFlagRequired("profiling-group-name")
+	})
 	codeguruprofilerCmd.AddCommand(codeguruprofiler_getPolicyCmd)
 }

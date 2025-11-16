@@ -12,16 +12,18 @@ var rds_createDbclusterEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_createDbclusterEndpointCmd).Standalone()
+	carapace.Gen(rds_createDbclusterEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_createDbclusterEndpointCmd).Standalone()
 
-	rds_createDbclusterEndpointCmd.Flags().String("dbcluster-endpoint-identifier", "", "The identifier to use for the new endpoint.")
-	rds_createDbclusterEndpointCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the DB cluster associated with the endpoint.")
-	rds_createDbclusterEndpointCmd.Flags().String("endpoint-type", "", "The type of the endpoint, one of: `READER`, `WRITER`, `ANY`.")
-	rds_createDbclusterEndpointCmd.Flags().String("excluded-members", "", "List of DB instance identifiers that aren't part of the custom endpoint group.")
-	rds_createDbclusterEndpointCmd.Flags().String("static-members", "", "List of DB instance identifiers that are part of the custom endpoint group.")
-	rds_createDbclusterEndpointCmd.Flags().String("tags", "", "The tags to be assigned to the Amazon RDS resource.")
-	rds_createDbclusterEndpointCmd.MarkFlagRequired("dbcluster-endpoint-identifier")
-	rds_createDbclusterEndpointCmd.MarkFlagRequired("dbcluster-identifier")
-	rds_createDbclusterEndpointCmd.MarkFlagRequired("endpoint-type")
+		rds_createDbclusterEndpointCmd.Flags().String("dbcluster-endpoint-identifier", "", "The identifier to use for the new endpoint.")
+		rds_createDbclusterEndpointCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the DB cluster associated with the endpoint.")
+		rds_createDbclusterEndpointCmd.Flags().String("endpoint-type", "", "The type of the endpoint, one of: `READER`, `WRITER`, `ANY`.")
+		rds_createDbclusterEndpointCmd.Flags().String("excluded-members", "", "List of DB instance identifiers that aren't part of the custom endpoint group.")
+		rds_createDbclusterEndpointCmd.Flags().String("static-members", "", "List of DB instance identifiers that are part of the custom endpoint group.")
+		rds_createDbclusterEndpointCmd.Flags().String("tags", "", "The tags to be assigned to the Amazon RDS resource.")
+		rds_createDbclusterEndpointCmd.MarkFlagRequired("dbcluster-endpoint-identifier")
+		rds_createDbclusterEndpointCmd.MarkFlagRequired("dbcluster-identifier")
+		rds_createDbclusterEndpointCmd.MarkFlagRequired("endpoint-type")
+	})
 	rdsCmd.AddCommand(rds_createDbclusterEndpointCmd)
 }

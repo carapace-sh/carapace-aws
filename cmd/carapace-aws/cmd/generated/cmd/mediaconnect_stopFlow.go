@@ -12,9 +12,11 @@ var mediaconnect_stopFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_stopFlowCmd).Standalone()
+	carapace.Gen(mediaconnect_stopFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_stopFlowCmd).Standalone()
 
-	mediaconnect_stopFlowCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to stop.")
-	mediaconnect_stopFlowCmd.MarkFlagRequired("flow-arn")
+		mediaconnect_stopFlowCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to stop.")
+		mediaconnect_stopFlowCmd.MarkFlagRequired("flow-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_stopFlowCmd)
 }

@@ -12,9 +12,11 @@ var cloudwatch_deleteDashboardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_deleteDashboardsCmd).Standalone()
+	carapace.Gen(cloudwatch_deleteDashboardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_deleteDashboardsCmd).Standalone()
 
-	cloudwatch_deleteDashboardsCmd.Flags().String("dashboard-names", "", "The dashboards to be deleted.")
-	cloudwatch_deleteDashboardsCmd.MarkFlagRequired("dashboard-names")
+		cloudwatch_deleteDashboardsCmd.Flags().String("dashboard-names", "", "The dashboards to be deleted.")
+		cloudwatch_deleteDashboardsCmd.MarkFlagRequired("dashboard-names")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_deleteDashboardsCmd)
 }

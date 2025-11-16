@@ -12,9 +12,11 @@ var cleanrooms_getMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_getMembershipCmd).Standalone()
+	carapace.Gen(cleanrooms_getMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_getMembershipCmd).Standalone()
 
-	cleanrooms_getMembershipCmd.Flags().String("membership-identifier", "", "The identifier for a membership resource.")
-	cleanrooms_getMembershipCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_getMembershipCmd.Flags().String("membership-identifier", "", "The identifier for a membership resource.")
+		cleanrooms_getMembershipCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_getMembershipCmd)
 }

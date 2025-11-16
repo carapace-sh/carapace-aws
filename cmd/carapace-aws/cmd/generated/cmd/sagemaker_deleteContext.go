@@ -12,9 +12,11 @@ var sagemaker_deleteContextCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteContextCmd).Standalone()
+	carapace.Gen(sagemaker_deleteContextCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteContextCmd).Standalone()
 
-	sagemaker_deleteContextCmd.Flags().String("context-name", "", "The name of the context to delete.")
-	sagemaker_deleteContextCmd.MarkFlagRequired("context-name")
+		sagemaker_deleteContextCmd.Flags().String("context-name", "", "The name of the context to delete.")
+		sagemaker_deleteContextCmd.MarkFlagRequired("context-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteContextCmd)
 }

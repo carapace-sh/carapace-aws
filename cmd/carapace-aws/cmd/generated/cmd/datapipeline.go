@@ -12,7 +12,9 @@ var datapipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipelineCmd).Standalone()
+	carapace.Gen(datapipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipelineCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(datapipelineCmd)
 }

@@ -12,10 +12,12 @@ var route53_updateHostedZoneCommentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_updateHostedZoneCommentCmd).Standalone()
+	carapace.Gen(route53_updateHostedZoneCommentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_updateHostedZoneCommentCmd).Standalone()
 
-	route53_updateHostedZoneCommentCmd.Flags().String("comment", "", "The new comment for the hosted zone.")
-	route53_updateHostedZoneCommentCmd.Flags().String("id", "", "The ID for the hosted zone that you want to update the comment for.")
-	route53_updateHostedZoneCommentCmd.MarkFlagRequired("id")
+		route53_updateHostedZoneCommentCmd.Flags().String("comment", "", "The new comment for the hosted zone.")
+		route53_updateHostedZoneCommentCmd.Flags().String("id", "", "The ID for the hosted zone that you want to update the comment for.")
+		route53_updateHostedZoneCommentCmd.MarkFlagRequired("id")
+	})
 	route53Cmd.AddCommand(route53_updateHostedZoneCommentCmd)
 }

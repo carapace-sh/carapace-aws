@@ -12,11 +12,13 @@ var connectcases_listLayoutsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_listLayoutsCmd).Standalone()
+	carapace.Gen(connectcases_listLayoutsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_listLayoutsCmd).Standalone()
 
-	connectcases_listLayoutsCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_listLayoutsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connectcases_listLayoutsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connectcases_listLayoutsCmd.MarkFlagRequired("domain-id")
+		connectcases_listLayoutsCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_listLayoutsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connectcases_listLayoutsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connectcases_listLayoutsCmd.MarkFlagRequired("domain-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_listLayoutsCmd)
 }

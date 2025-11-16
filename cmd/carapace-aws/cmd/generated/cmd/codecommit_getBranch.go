@@ -12,9 +12,11 @@ var codecommit_getBranchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_getBranchCmd).Standalone()
+	carapace.Gen(codecommit_getBranchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_getBranchCmd).Standalone()
 
-	codecommit_getBranchCmd.Flags().String("branch-name", "", "The name of the branch for which you want to retrieve information.")
-	codecommit_getBranchCmd.Flags().String("repository-name", "", "The name of the repository that contains the branch for which you want to retrieve information.")
+		codecommit_getBranchCmd.Flags().String("branch-name", "", "The name of the branch for which you want to retrieve information.")
+		codecommit_getBranchCmd.Flags().String("repository-name", "", "The name of the repository that contains the branch for which you want to retrieve information.")
+	})
 	codecommitCmd.AddCommand(codecommit_getBranchCmd)
 }

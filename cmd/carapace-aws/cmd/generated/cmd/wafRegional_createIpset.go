@@ -12,11 +12,13 @@ var wafRegional_createIpsetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_createIpsetCmd).Standalone()
+	carapace.Gen(wafRegional_createIpsetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_createIpsetCmd).Standalone()
 
-	wafRegional_createIpsetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	wafRegional_createIpsetCmd.Flags().String("name", "", "A friendly name or description of the [IPSet]().")
-	wafRegional_createIpsetCmd.MarkFlagRequired("change-token")
-	wafRegional_createIpsetCmd.MarkFlagRequired("name")
+		wafRegional_createIpsetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		wafRegional_createIpsetCmd.Flags().String("name", "", "A friendly name or description of the [IPSet]().")
+		wafRegional_createIpsetCmd.MarkFlagRequired("change-token")
+		wafRegional_createIpsetCmd.MarkFlagRequired("name")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_createIpsetCmd)
 }

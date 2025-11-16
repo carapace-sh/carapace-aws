@@ -12,9 +12,11 @@ var lightsail_createGuisessionAccessDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_createGuisessionAccessDetailsCmd).Standalone()
+	carapace.Gen(lightsail_createGuisessionAccessDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_createGuisessionAccessDetailsCmd).Standalone()
 
-	lightsail_createGuisessionAccessDetailsCmd.Flags().String("resource-name", "", "The resource name.")
-	lightsail_createGuisessionAccessDetailsCmd.MarkFlagRequired("resource-name")
+		lightsail_createGuisessionAccessDetailsCmd.Flags().String("resource-name", "", "The resource name.")
+		lightsail_createGuisessionAccessDetailsCmd.MarkFlagRequired("resource-name")
+	})
 	lightsailCmd.AddCommand(lightsail_createGuisessionAccessDetailsCmd)
 }

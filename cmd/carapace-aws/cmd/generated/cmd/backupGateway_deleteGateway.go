@@ -12,9 +12,11 @@ var backupGateway_deleteGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_deleteGatewayCmd).Standalone()
+	carapace.Gen(backupGateway_deleteGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_deleteGatewayCmd).Standalone()
 
-	backupGateway_deleteGatewayCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway to delete.")
-	backupGateway_deleteGatewayCmd.MarkFlagRequired("gateway-arn")
+		backupGateway_deleteGatewayCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway to delete.")
+		backupGateway_deleteGatewayCmd.MarkFlagRequired("gateway-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_deleteGatewayCmd)
 }

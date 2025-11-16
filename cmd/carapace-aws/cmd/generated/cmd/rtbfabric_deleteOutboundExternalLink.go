@@ -12,11 +12,13 @@ var rtbfabric_deleteOutboundExternalLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_deleteOutboundExternalLinkCmd).Standalone()
+	carapace.Gen(rtbfabric_deleteOutboundExternalLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_deleteOutboundExternalLinkCmd).Standalone()
 
-	rtbfabric_deleteOutboundExternalLinkCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
-	rtbfabric_deleteOutboundExternalLinkCmd.Flags().String("link-id", "", "The unique identifier of the link.")
-	rtbfabric_deleteOutboundExternalLinkCmd.MarkFlagRequired("gateway-id")
-	rtbfabric_deleteOutboundExternalLinkCmd.MarkFlagRequired("link-id")
+		rtbfabric_deleteOutboundExternalLinkCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
+		rtbfabric_deleteOutboundExternalLinkCmd.Flags().String("link-id", "", "The unique identifier of the link.")
+		rtbfabric_deleteOutboundExternalLinkCmd.MarkFlagRequired("gateway-id")
+		rtbfabric_deleteOutboundExternalLinkCmd.MarkFlagRequired("link-id")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_deleteOutboundExternalLinkCmd)
 }

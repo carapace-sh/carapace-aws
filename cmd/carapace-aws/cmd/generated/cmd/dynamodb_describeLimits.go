@@ -12,7 +12,9 @@ var dynamodb_describeLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeLimitsCmd).Standalone()
+	carapace.Gen(dynamodb_describeLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeLimitsCmd).Standalone()
 
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeLimitsCmd)
 }

@@ -12,9 +12,11 @@ var rds_deleteIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteIntegrationCmd).Standalone()
+	carapace.Gen(rds_deleteIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteIntegrationCmd).Standalone()
 
-	rds_deleteIntegrationCmd.Flags().String("integration-identifier", "", "The unique identifier of the integration.")
-	rds_deleteIntegrationCmd.MarkFlagRequired("integration-identifier")
+		rds_deleteIntegrationCmd.Flags().String("integration-identifier", "", "The unique identifier of the integration.")
+		rds_deleteIntegrationCmd.MarkFlagRequired("integration-identifier")
+	})
 	rdsCmd.AddCommand(rds_deleteIntegrationCmd)
 }

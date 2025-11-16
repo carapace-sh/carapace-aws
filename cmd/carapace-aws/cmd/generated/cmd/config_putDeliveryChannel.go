@@ -12,9 +12,11 @@ var config_putDeliveryChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_putDeliveryChannelCmd).Standalone()
+	carapace.Gen(config_putDeliveryChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_putDeliveryChannelCmd).Standalone()
 
-	config_putDeliveryChannelCmd.Flags().String("delivery-channel", "", "An object for the delivery channel.")
-	config_putDeliveryChannelCmd.MarkFlagRequired("delivery-channel")
+		config_putDeliveryChannelCmd.Flags().String("delivery-channel", "", "An object for the delivery channel.")
+		config_putDeliveryChannelCmd.MarkFlagRequired("delivery-channel")
+	})
 	configCmd.AddCommand(config_putDeliveryChannelCmd)
 }

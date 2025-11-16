@@ -12,9 +12,11 @@ var securityhub_listInvitationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_listInvitationsCmd).Standalone()
+	carapace.Gen(securityhub_listInvitationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_listInvitationsCmd).Standalone()
 
-	securityhub_listInvitationsCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
-	securityhub_listInvitationsCmd.Flags().String("next-token", "", "The token that is required for pagination.")
+		securityhub_listInvitationsCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
+		securityhub_listInvitationsCmd.Flags().String("next-token", "", "The token that is required for pagination.")
+	})
 	securityhubCmd.AddCommand(securityhub_listInvitationsCmd)
 }

@@ -12,11 +12,13 @@ var chimeSdkMessaging_putMessagingStreamingConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_putMessagingStreamingConfigurationsCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_putMessagingStreamingConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_putMessagingStreamingConfigurationsCmd).Standalone()
 
-	chimeSdkMessaging_putMessagingStreamingConfigurationsCmd.Flags().String("app-instance-arn", "", "The ARN of the streaming configuration.")
-	chimeSdkMessaging_putMessagingStreamingConfigurationsCmd.Flags().String("streaming-configurations", "", "The streaming configurations.")
-	chimeSdkMessaging_putMessagingStreamingConfigurationsCmd.MarkFlagRequired("app-instance-arn")
-	chimeSdkMessaging_putMessagingStreamingConfigurationsCmd.MarkFlagRequired("streaming-configurations")
+		chimeSdkMessaging_putMessagingStreamingConfigurationsCmd.Flags().String("app-instance-arn", "", "The ARN of the streaming configuration.")
+		chimeSdkMessaging_putMessagingStreamingConfigurationsCmd.Flags().String("streaming-configurations", "", "The streaming configurations.")
+		chimeSdkMessaging_putMessagingStreamingConfigurationsCmd.MarkFlagRequired("app-instance-arn")
+		chimeSdkMessaging_putMessagingStreamingConfigurationsCmd.MarkFlagRequired("streaming-configurations")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_putMessagingStreamingConfigurationsCmd)
 }

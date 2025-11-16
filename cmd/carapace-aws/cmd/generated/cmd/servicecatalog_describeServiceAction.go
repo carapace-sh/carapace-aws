@@ -12,10 +12,12 @@ var servicecatalog_describeServiceActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_describeServiceActionCmd).Standalone()
+	carapace.Gen(servicecatalog_describeServiceActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_describeServiceActionCmd).Standalone()
 
-	servicecatalog_describeServiceActionCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_describeServiceActionCmd.Flags().String("id", "", "The self-service action identifier.")
-	servicecatalog_describeServiceActionCmd.MarkFlagRequired("id")
+		servicecatalog_describeServiceActionCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_describeServiceActionCmd.Flags().String("id", "", "The self-service action identifier.")
+		servicecatalog_describeServiceActionCmd.MarkFlagRequired("id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_describeServiceActionCmd)
 }

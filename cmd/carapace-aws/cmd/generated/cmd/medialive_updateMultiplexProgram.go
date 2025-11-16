@@ -12,12 +12,14 @@ var medialive_updateMultiplexProgramCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_updateMultiplexProgramCmd).Standalone()
+	carapace.Gen(medialive_updateMultiplexProgramCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_updateMultiplexProgramCmd).Standalone()
 
-	medialive_updateMultiplexProgramCmd.Flags().String("multiplex-id", "", "The ID of the multiplex of the program to update.")
-	medialive_updateMultiplexProgramCmd.Flags().String("multiplex-program-settings", "", "The new settings for a multiplex program.")
-	medialive_updateMultiplexProgramCmd.Flags().String("program-name", "", "The name of the program to update.")
-	medialive_updateMultiplexProgramCmd.MarkFlagRequired("multiplex-id")
-	medialive_updateMultiplexProgramCmd.MarkFlagRequired("program-name")
+		medialive_updateMultiplexProgramCmd.Flags().String("multiplex-id", "", "The ID of the multiplex of the program to update.")
+		medialive_updateMultiplexProgramCmd.Flags().String("multiplex-program-settings", "", "The new settings for a multiplex program.")
+		medialive_updateMultiplexProgramCmd.Flags().String("program-name", "", "The name of the program to update.")
+		medialive_updateMultiplexProgramCmd.MarkFlagRequired("multiplex-id")
+		medialive_updateMultiplexProgramCmd.MarkFlagRequired("program-name")
+	})
 	medialiveCmd.AddCommand(medialive_updateMultiplexProgramCmd)
 }

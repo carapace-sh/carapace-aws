@@ -12,9 +12,11 @@ var iotManagedIntegrations_getEventLogConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getEventLogConfigurationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getEventLogConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getEventLogConfigurationCmd).Standalone()
 
-	iotManagedIntegrations_getEventLogConfigurationCmd.Flags().String("id", "", "The identifier of the event log configuration.")
-	iotManagedIntegrations_getEventLogConfigurationCmd.MarkFlagRequired("id")
+		iotManagedIntegrations_getEventLogConfigurationCmd.Flags().String("id", "", "The identifier of the event log configuration.")
+		iotManagedIntegrations_getEventLogConfigurationCmd.MarkFlagRequired("id")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getEventLogConfigurationCmd)
 }

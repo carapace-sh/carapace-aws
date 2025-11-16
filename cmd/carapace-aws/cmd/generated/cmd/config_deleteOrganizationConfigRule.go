@@ -12,9 +12,11 @@ var config_deleteOrganizationConfigRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deleteOrganizationConfigRuleCmd).Standalone()
+	carapace.Gen(config_deleteOrganizationConfigRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deleteOrganizationConfigRuleCmd).Standalone()
 
-	config_deleteOrganizationConfigRuleCmd.Flags().String("organization-config-rule-name", "", "The name of organization Config rule that you want to delete.")
-	config_deleteOrganizationConfigRuleCmd.MarkFlagRequired("organization-config-rule-name")
+		config_deleteOrganizationConfigRuleCmd.Flags().String("organization-config-rule-name", "", "The name of organization Config rule that you want to delete.")
+		config_deleteOrganizationConfigRuleCmd.MarkFlagRequired("organization-config-rule-name")
+	})
 	configCmd.AddCommand(config_deleteOrganizationConfigRuleCmd)
 }

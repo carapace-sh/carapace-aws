@@ -12,11 +12,13 @@ var ssmSap_getComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_getComponentCmd).Standalone()
+	carapace.Gen(ssmSap_getComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_getComponentCmd).Standalone()
 
-	ssmSap_getComponentCmd.Flags().String("application-id", "", "The ID of the application.")
-	ssmSap_getComponentCmd.Flags().String("component-id", "", "The ID of the component.")
-	ssmSap_getComponentCmd.MarkFlagRequired("application-id")
-	ssmSap_getComponentCmd.MarkFlagRequired("component-id")
+		ssmSap_getComponentCmd.Flags().String("application-id", "", "The ID of the application.")
+		ssmSap_getComponentCmd.Flags().String("component-id", "", "The ID of the component.")
+		ssmSap_getComponentCmd.MarkFlagRequired("application-id")
+		ssmSap_getComponentCmd.MarkFlagRequired("component-id")
+	})
 	ssmSapCmd.AddCommand(ssmSap_getComponentCmd)
 }

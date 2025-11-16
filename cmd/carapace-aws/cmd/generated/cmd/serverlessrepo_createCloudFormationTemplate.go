@@ -12,10 +12,12 @@ var serverlessrepo_createCloudFormationTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serverlessrepo_createCloudFormationTemplateCmd).Standalone()
+	carapace.Gen(serverlessrepo_createCloudFormationTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serverlessrepo_createCloudFormationTemplateCmd).Standalone()
 
-	serverlessrepo_createCloudFormationTemplateCmd.Flags().String("application-id", "", "The Amazon Resource Name (ARN) of the application.")
-	serverlessrepo_createCloudFormationTemplateCmd.Flags().String("semantic-version", "", "The semantic version of the application:")
-	serverlessrepo_createCloudFormationTemplateCmd.MarkFlagRequired("application-id")
+		serverlessrepo_createCloudFormationTemplateCmd.Flags().String("application-id", "", "The Amazon Resource Name (ARN) of the application.")
+		serverlessrepo_createCloudFormationTemplateCmd.Flags().String("semantic-version", "", "The semantic version of the application:")
+		serverlessrepo_createCloudFormationTemplateCmd.MarkFlagRequired("application-id")
+	})
 	serverlessrepoCmd.AddCommand(serverlessrepo_createCloudFormationTemplateCmd)
 }

@@ -12,9 +12,11 @@ var ivsRealtime_listEncoderConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_listEncoderConfigurationsCmd).Standalone()
+	carapace.Gen(ivsRealtime_listEncoderConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_listEncoderConfigurationsCmd).Standalone()
 
-	ivsRealtime_listEncoderConfigurationsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	ivsRealtime_listEncoderConfigurationsCmd.Flags().String("next-token", "", "The first encoder configuration to retrieve.")
+		ivsRealtime_listEncoderConfigurationsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		ivsRealtime_listEncoderConfigurationsCmd.Flags().String("next-token", "", "The first encoder configuration to retrieve.")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_listEncoderConfigurationsCmd)
 }

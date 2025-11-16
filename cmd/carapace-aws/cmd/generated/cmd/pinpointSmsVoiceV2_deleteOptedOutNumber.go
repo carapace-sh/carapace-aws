@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_deleteOptedOutNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteOptedOutNumberCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteOptedOutNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteOptedOutNumberCmd).Standalone()
 
-	pinpointSmsVoiceV2_deleteOptedOutNumberCmd.Flags().String("opt-out-list-name", "", "The OptOutListName or OptOutListArn to remove the phone number from.")
-	pinpointSmsVoiceV2_deleteOptedOutNumberCmd.Flags().String("opted-out-number", "", "The phone number, in E.164 format, to remove from the OptOutList.")
-	pinpointSmsVoiceV2_deleteOptedOutNumberCmd.MarkFlagRequired("opt-out-list-name")
-	pinpointSmsVoiceV2_deleteOptedOutNumberCmd.MarkFlagRequired("opted-out-number")
+		pinpointSmsVoiceV2_deleteOptedOutNumberCmd.Flags().String("opt-out-list-name", "", "The OptOutListName or OptOutListArn to remove the phone number from.")
+		pinpointSmsVoiceV2_deleteOptedOutNumberCmd.Flags().String("opted-out-number", "", "The phone number, in E.164 format, to remove from the OptOutList.")
+		pinpointSmsVoiceV2_deleteOptedOutNumberCmd.MarkFlagRequired("opt-out-list-name")
+		pinpointSmsVoiceV2_deleteOptedOutNumberCmd.MarkFlagRequired("opted-out-number")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteOptedOutNumberCmd)
 }

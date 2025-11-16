@@ -12,11 +12,13 @@ var apigateway_getAuthorizerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getAuthorizerCmd).Standalone()
+	carapace.Gen(apigateway_getAuthorizerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getAuthorizerCmd).Standalone()
 
-	apigateway_getAuthorizerCmd.Flags().String("authorizer-id", "", "The identifier of the Authorizer resource.")
-	apigateway_getAuthorizerCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getAuthorizerCmd.MarkFlagRequired("authorizer-id")
-	apigateway_getAuthorizerCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getAuthorizerCmd.Flags().String("authorizer-id", "", "The identifier of the Authorizer resource.")
+		apigateway_getAuthorizerCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getAuthorizerCmd.MarkFlagRequired("authorizer-id")
+		apigateway_getAuthorizerCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getAuthorizerCmd)
 }

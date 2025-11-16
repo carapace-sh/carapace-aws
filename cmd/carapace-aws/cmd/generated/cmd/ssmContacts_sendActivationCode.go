@@ -12,9 +12,11 @@ var ssmContacts_sendActivationCodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_sendActivationCodeCmd).Standalone()
+	carapace.Gen(ssmContacts_sendActivationCodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_sendActivationCodeCmd).Standalone()
 
-	ssmContacts_sendActivationCodeCmd.Flags().String("contact-channel-id", "", "The Amazon Resource Name (ARN) of the contact channel.")
-	ssmContacts_sendActivationCodeCmd.MarkFlagRequired("contact-channel-id")
+		ssmContacts_sendActivationCodeCmd.Flags().String("contact-channel-id", "", "The Amazon Resource Name (ARN) of the contact channel.")
+		ssmContacts_sendActivationCodeCmd.MarkFlagRequired("contact-channel-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_sendActivationCodeCmd)
 }

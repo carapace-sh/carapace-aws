@@ -12,10 +12,12 @@ var workspaces_modifyStreamingPropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_modifyStreamingPropertiesCmd).Standalone()
+	carapace.Gen(workspaces_modifyStreamingPropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_modifyStreamingPropertiesCmd).Standalone()
 
-	workspaces_modifyStreamingPropertiesCmd.Flags().String("resource-id", "", "The identifier of the resource.")
-	workspaces_modifyStreamingPropertiesCmd.Flags().String("streaming-properties", "", "The streaming properties to configure.")
-	workspaces_modifyStreamingPropertiesCmd.MarkFlagRequired("resource-id")
+		workspaces_modifyStreamingPropertiesCmd.Flags().String("resource-id", "", "The identifier of the resource.")
+		workspaces_modifyStreamingPropertiesCmd.Flags().String("streaming-properties", "", "The streaming properties to configure.")
+		workspaces_modifyStreamingPropertiesCmd.MarkFlagRequired("resource-id")
+	})
 	workspacesCmd.AddCommand(workspaces_modifyStreamingPropertiesCmd)
 }

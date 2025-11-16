@@ -12,11 +12,13 @@ var m2_listEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_listEnvironmentsCmd).Standalone()
+	carapace.Gen(m2_listEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_listEnvironmentsCmd).Standalone()
 
-	m2_listEnvironmentsCmd.Flags().String("engine-type", "", "The engine type for the runtime environment.")
-	m2_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of runtime environments to return.")
-	m2_listEnvironmentsCmd.Flags().String("names", "", "The names of the runtime environments.")
-	m2_listEnvironmentsCmd.Flags().String("next-token", "", "A pagination token to control the number of runtime environments displayed in the list.")
+		m2_listEnvironmentsCmd.Flags().String("engine-type", "", "The engine type for the runtime environment.")
+		m2_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of runtime environments to return.")
+		m2_listEnvironmentsCmd.Flags().String("names", "", "The names of the runtime environments.")
+		m2_listEnvironmentsCmd.Flags().String("next-token", "", "A pagination token to control the number of runtime environments displayed in the list.")
+	})
 	m2Cmd.AddCommand(m2_listEnvironmentsCmd)
 }

@@ -12,9 +12,11 @@ var redshiftServerless_listNamespacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_listNamespacesCmd).Standalone()
+	carapace.Gen(redshiftServerless_listNamespacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_listNamespacesCmd).Standalone()
 
-	redshiftServerless_listNamespacesCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
-	redshiftServerless_listNamespacesCmd.Flags().String("next-token", "", "If your initial `ListNamespaces` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListNamespaces` operations, which returns results in the next page.")
+		redshiftServerless_listNamespacesCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
+		redshiftServerless_listNamespacesCmd.Flags().String("next-token", "", "If your initial `ListNamespaces` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListNamespaces` operations, which returns results in the next page.")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_listNamespacesCmd)
 }

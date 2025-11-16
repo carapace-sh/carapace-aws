@@ -12,11 +12,13 @@ var qbusiness_listRetrieversCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_listRetrieversCmd).Standalone()
+	carapace.Gen(qbusiness_listRetrieversCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_listRetrieversCmd).Standalone()
 
-	qbusiness_listRetrieversCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application using the retriever.")
-	qbusiness_listRetrieversCmd.Flags().String("max-results", "", "The maximum number of retrievers returned.")
-	qbusiness_listRetrieversCmd.Flags().String("next-token", "", "If the number of retrievers returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of retrievers.")
-	qbusiness_listRetrieversCmd.MarkFlagRequired("application-id")
+		qbusiness_listRetrieversCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application using the retriever.")
+		qbusiness_listRetrieversCmd.Flags().String("max-results", "", "The maximum number of retrievers returned.")
+		qbusiness_listRetrieversCmd.Flags().String("next-token", "", "If the number of retrievers returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of retrievers.")
+		qbusiness_listRetrieversCmd.MarkFlagRequired("application-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_listRetrieversCmd)
 }

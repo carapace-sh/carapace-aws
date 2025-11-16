@@ -12,9 +12,11 @@ var sagemakerGeospatial_stopVectorEnrichmentJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerGeospatial_stopVectorEnrichmentJobCmd).Standalone()
+	carapace.Gen(sagemakerGeospatial_stopVectorEnrichmentJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerGeospatial_stopVectorEnrichmentJobCmd).Standalone()
 
-	sagemakerGeospatial_stopVectorEnrichmentJobCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Vector Enrichment job.")
-	sagemakerGeospatial_stopVectorEnrichmentJobCmd.MarkFlagRequired("arn")
+		sagemakerGeospatial_stopVectorEnrichmentJobCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Vector Enrichment job.")
+		sagemakerGeospatial_stopVectorEnrichmentJobCmd.MarkFlagRequired("arn")
+	})
 	sagemakerGeospatialCmd.AddCommand(sagemakerGeospatial_stopVectorEnrichmentJobCmd)
 }

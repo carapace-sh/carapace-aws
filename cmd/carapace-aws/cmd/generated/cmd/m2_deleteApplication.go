@@ -12,9 +12,11 @@ var m2_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_deleteApplicationCmd).Standalone()
+	carapace.Gen(m2_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_deleteApplicationCmd).Standalone()
 
-	m2_deleteApplicationCmd.Flags().String("application-id", "", "The unique identifier of the application you want to delete.")
-	m2_deleteApplicationCmd.MarkFlagRequired("application-id")
+		m2_deleteApplicationCmd.Flags().String("application-id", "", "The unique identifier of the application you want to delete.")
+		m2_deleteApplicationCmd.MarkFlagRequired("application-id")
+	})
 	m2Cmd.AddCommand(m2_deleteApplicationCmd)
 }

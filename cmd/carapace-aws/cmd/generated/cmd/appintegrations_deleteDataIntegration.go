@@ -12,9 +12,11 @@ var appintegrations_deleteDataIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_deleteDataIntegrationCmd).Standalone()
+	carapace.Gen(appintegrations_deleteDataIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_deleteDataIntegrationCmd).Standalone()
 
-	appintegrations_deleteDataIntegrationCmd.Flags().String("data-integration-identifier", "", "A unique identifier for the DataIntegration.")
-	appintegrations_deleteDataIntegrationCmd.MarkFlagRequired("data-integration-identifier")
+		appintegrations_deleteDataIntegrationCmd.Flags().String("data-integration-identifier", "", "A unique identifier for the DataIntegration.")
+		appintegrations_deleteDataIntegrationCmd.MarkFlagRequired("data-integration-identifier")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_deleteDataIntegrationCmd)
 }

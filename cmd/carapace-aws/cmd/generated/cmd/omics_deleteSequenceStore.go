@@ -12,9 +12,11 @@ var omics_deleteSequenceStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_deleteSequenceStoreCmd).Standalone()
+	carapace.Gen(omics_deleteSequenceStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_deleteSequenceStoreCmd).Standalone()
 
-	omics_deleteSequenceStoreCmd.Flags().String("id", "", "The sequence store's ID.")
-	omics_deleteSequenceStoreCmd.MarkFlagRequired("id")
+		omics_deleteSequenceStoreCmd.Flags().String("id", "", "The sequence store's ID.")
+		omics_deleteSequenceStoreCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_deleteSequenceStoreCmd)
 }

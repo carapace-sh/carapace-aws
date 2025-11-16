@@ -12,9 +12,11 @@ var chimeSdkMessaging_deleteChannelFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_deleteChannelFlowCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_deleteChannelFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_deleteChannelFlowCmd).Standalone()
 
-	chimeSdkMessaging_deleteChannelFlowCmd.Flags().String("channel-flow-arn", "", "The ARN of the channel flow.")
-	chimeSdkMessaging_deleteChannelFlowCmd.MarkFlagRequired("channel-flow-arn")
+		chimeSdkMessaging_deleteChannelFlowCmd.Flags().String("channel-flow-arn", "", "The ARN of the channel flow.")
+		chimeSdkMessaging_deleteChannelFlowCmd.MarkFlagRequired("channel-flow-arn")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_deleteChannelFlowCmd)
 }

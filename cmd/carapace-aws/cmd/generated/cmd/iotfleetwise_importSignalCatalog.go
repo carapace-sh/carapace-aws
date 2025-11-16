@@ -12,12 +12,14 @@ var iotfleetwise_importSignalCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_importSignalCatalogCmd).Standalone()
+	carapace.Gen(iotfleetwise_importSignalCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_importSignalCatalogCmd).Standalone()
 
-	iotfleetwise_importSignalCatalogCmd.Flags().String("description", "", "A brief description of the signal catalog.")
-	iotfleetwise_importSignalCatalogCmd.Flags().String("name", "", "The name of the signal catalog to import.")
-	iotfleetwise_importSignalCatalogCmd.Flags().String("tags", "", "Metadata that can be used to manage the signal catalog.")
-	iotfleetwise_importSignalCatalogCmd.Flags().String("vss", "", "The contents of the Vehicle Signal Specification (VSS) configuration.")
-	iotfleetwise_importSignalCatalogCmd.MarkFlagRequired("name")
+		iotfleetwise_importSignalCatalogCmd.Flags().String("description", "", "A brief description of the signal catalog.")
+		iotfleetwise_importSignalCatalogCmd.Flags().String("name", "", "The name of the signal catalog to import.")
+		iotfleetwise_importSignalCatalogCmd.Flags().String("tags", "", "Metadata that can be used to manage the signal catalog.")
+		iotfleetwise_importSignalCatalogCmd.Flags().String("vss", "", "The contents of the Vehicle Signal Specification (VSS) configuration.")
+		iotfleetwise_importSignalCatalogCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_importSignalCatalogCmd)
 }

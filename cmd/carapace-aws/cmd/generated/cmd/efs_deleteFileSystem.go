@@ -12,9 +12,11 @@ var efs_deleteFileSystemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_deleteFileSystemCmd).Standalone()
+	carapace.Gen(efs_deleteFileSystemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_deleteFileSystemCmd).Standalone()
 
-	efs_deleteFileSystemCmd.Flags().String("file-system-id", "", "The ID of the file system you want to delete.")
-	efs_deleteFileSystemCmd.MarkFlagRequired("file-system-id")
+		efs_deleteFileSystemCmd.Flags().String("file-system-id", "", "The ID of the file system you want to delete.")
+		efs_deleteFileSystemCmd.MarkFlagRequired("file-system-id")
+	})
 	efsCmd.AddCommand(efs_deleteFileSystemCmd)
 }

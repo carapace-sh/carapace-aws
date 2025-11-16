@@ -12,11 +12,13 @@ var backup_getRestoreTestingSelectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_getRestoreTestingSelectionCmd).Standalone()
+	carapace.Gen(backup_getRestoreTestingSelectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_getRestoreTestingSelectionCmd).Standalone()
 
-	backup_getRestoreTestingSelectionCmd.Flags().String("restore-testing-plan-name", "", "Required unique name of the restore testing plan.")
-	backup_getRestoreTestingSelectionCmd.Flags().String("restore-testing-selection-name", "", "Required unique name of the restore testing selection.")
-	backup_getRestoreTestingSelectionCmd.MarkFlagRequired("restore-testing-plan-name")
-	backup_getRestoreTestingSelectionCmd.MarkFlagRequired("restore-testing-selection-name")
+		backup_getRestoreTestingSelectionCmd.Flags().String("restore-testing-plan-name", "", "Required unique name of the restore testing plan.")
+		backup_getRestoreTestingSelectionCmd.Flags().String("restore-testing-selection-name", "", "Required unique name of the restore testing selection.")
+		backup_getRestoreTestingSelectionCmd.MarkFlagRequired("restore-testing-plan-name")
+		backup_getRestoreTestingSelectionCmd.MarkFlagRequired("restore-testing-selection-name")
+	})
 	backupCmd.AddCommand(backup_getRestoreTestingSelectionCmd)
 }

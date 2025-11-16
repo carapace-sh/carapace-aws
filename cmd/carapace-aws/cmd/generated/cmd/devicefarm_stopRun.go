@@ -12,9 +12,11 @@ var devicefarm_stopRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_stopRunCmd).Standalone()
+	carapace.Gen(devicefarm_stopRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_stopRunCmd).Standalone()
 
-	devicefarm_stopRunCmd.Flags().String("arn", "", "Represents the Amazon Resource Name (ARN) of the Device Farm run to stop.")
-	devicefarm_stopRunCmd.MarkFlagRequired("arn")
+		devicefarm_stopRunCmd.Flags().String("arn", "", "Represents the Amazon Resource Name (ARN) of the Device Farm run to stop.")
+		devicefarm_stopRunCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_stopRunCmd)
 }

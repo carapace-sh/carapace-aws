@@ -12,13 +12,15 @@ var amplifyuibuilder_getThemeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_getThemeCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_getThemeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_getThemeCmd).Standalone()
 
-	amplifyuibuilder_getThemeCmd.Flags().String("app-id", "", "The unique ID of the Amplify app.")
-	amplifyuibuilder_getThemeCmd.Flags().String("environment-name", "", "The name of the backend environment that is part of the Amplify app.")
-	amplifyuibuilder_getThemeCmd.Flags().String("id", "", "The unique ID for the theme.")
-	amplifyuibuilder_getThemeCmd.MarkFlagRequired("app-id")
-	amplifyuibuilder_getThemeCmd.MarkFlagRequired("environment-name")
-	amplifyuibuilder_getThemeCmd.MarkFlagRequired("id")
+		amplifyuibuilder_getThemeCmd.Flags().String("app-id", "", "The unique ID of the Amplify app.")
+		amplifyuibuilder_getThemeCmd.Flags().String("environment-name", "", "The name of the backend environment that is part of the Amplify app.")
+		amplifyuibuilder_getThemeCmd.Flags().String("id", "", "The unique ID for the theme.")
+		amplifyuibuilder_getThemeCmd.MarkFlagRequired("app-id")
+		amplifyuibuilder_getThemeCmd.MarkFlagRequired("environment-name")
+		amplifyuibuilder_getThemeCmd.MarkFlagRequired("id")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_getThemeCmd)
 }

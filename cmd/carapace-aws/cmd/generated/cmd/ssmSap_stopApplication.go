@@ -12,13 +12,15 @@ var ssmSap_stopApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_stopApplicationCmd).Standalone()
+	carapace.Gen(ssmSap_stopApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_stopApplicationCmd).Standalone()
 
-	ssmSap_stopApplicationCmd.Flags().String("application-id", "", "The ID of the application.")
-	ssmSap_stopApplicationCmd.Flags().Bool("include-ec2-instance-shutdown", false, "Boolean.")
-	ssmSap_stopApplicationCmd.Flags().Bool("no-include-ec2-instance-shutdown", false, "Boolean.")
-	ssmSap_stopApplicationCmd.Flags().String("stop-connected-entity", "", "Specify the `ConnectedEntityType`.")
-	ssmSap_stopApplicationCmd.MarkFlagRequired("application-id")
-	ssmSap_stopApplicationCmd.Flag("no-include-ec2-instance-shutdown").Hidden = true
+		ssmSap_stopApplicationCmd.Flags().String("application-id", "", "The ID of the application.")
+		ssmSap_stopApplicationCmd.Flags().Bool("include-ec2-instance-shutdown", false, "Boolean.")
+		ssmSap_stopApplicationCmd.Flags().Bool("no-include-ec2-instance-shutdown", false, "Boolean.")
+		ssmSap_stopApplicationCmd.Flags().String("stop-connected-entity", "", "Specify the `ConnectedEntityType`.")
+		ssmSap_stopApplicationCmd.MarkFlagRequired("application-id")
+		ssmSap_stopApplicationCmd.Flag("no-include-ec2-instance-shutdown").Hidden = true
+	})
 	ssmSapCmd.AddCommand(ssmSap_stopApplicationCmd)
 }

@@ -12,9 +12,11 @@ var controltower_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_listTagsForResourceCmd).Standalone()
+	carapace.Gen(controltower_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_listTagsForResourceCmd).Standalone()
 
-	controltower_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	controltower_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		controltower_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		controltower_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	controltowerCmd.AddCommand(controltower_listTagsForResourceCmd)
 }

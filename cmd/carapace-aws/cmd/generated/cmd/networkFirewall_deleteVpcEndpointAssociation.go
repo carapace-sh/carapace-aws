@@ -12,9 +12,11 @@ var networkFirewall_deleteVpcEndpointAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_deleteVpcEndpointAssociationCmd).Standalone()
+	carapace.Gen(networkFirewall_deleteVpcEndpointAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_deleteVpcEndpointAssociationCmd).Standalone()
 
-	networkFirewall_deleteVpcEndpointAssociationCmd.Flags().String("vpc-endpoint-association-arn", "", "The Amazon Resource Name (ARN) of a VPC endpoint association.")
-	networkFirewall_deleteVpcEndpointAssociationCmd.MarkFlagRequired("vpc-endpoint-association-arn")
+		networkFirewall_deleteVpcEndpointAssociationCmd.Flags().String("vpc-endpoint-association-arn", "", "The Amazon Resource Name (ARN) of a VPC endpoint association.")
+		networkFirewall_deleteVpcEndpointAssociationCmd.MarkFlagRequired("vpc-endpoint-association-arn")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_deleteVpcEndpointAssociationCmd)
 }

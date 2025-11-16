@@ -12,11 +12,13 @@ var workmail_describeUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_describeUserCmd).Standalone()
+	carapace.Gen(workmail_describeUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_describeUserCmd).Standalone()
 
-	workmail_describeUserCmd.Flags().String("organization-id", "", "The identifier for the organization under which the user exists.")
-	workmail_describeUserCmd.Flags().String("user-id", "", "The identifier for the user to be described.")
-	workmail_describeUserCmd.MarkFlagRequired("organization-id")
-	workmail_describeUserCmd.MarkFlagRequired("user-id")
+		workmail_describeUserCmd.Flags().String("organization-id", "", "The identifier for the organization under which the user exists.")
+		workmail_describeUserCmd.Flags().String("user-id", "", "The identifier for the user to be described.")
+		workmail_describeUserCmd.MarkFlagRequired("organization-id")
+		workmail_describeUserCmd.MarkFlagRequired("user-id")
+	})
 	workmailCmd.AddCommand(workmail_describeUserCmd)
 }

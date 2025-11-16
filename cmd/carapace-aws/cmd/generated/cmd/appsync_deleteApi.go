@@ -12,9 +12,11 @@ var appsync_deleteApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_deleteApiCmd).Standalone()
+	carapace.Gen(appsync_deleteApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_deleteApiCmd).Standalone()
 
-	appsync_deleteApiCmd.Flags().String("api-id", "", "The `Api` ID.")
-	appsync_deleteApiCmd.MarkFlagRequired("api-id")
+		appsync_deleteApiCmd.Flags().String("api-id", "", "The `Api` ID.")
+		appsync_deleteApiCmd.MarkFlagRequired("api-id")
+	})
 	appsyncCmd.AddCommand(appsync_deleteApiCmd)
 }

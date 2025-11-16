@@ -12,9 +12,11 @@ var directconnect_deleteInterconnectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_deleteInterconnectCmd).Standalone()
+	carapace.Gen(directconnect_deleteInterconnectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_deleteInterconnectCmd).Standalone()
 
-	directconnect_deleteInterconnectCmd.Flags().String("interconnect-id", "", "The ID of the interconnect.")
-	directconnect_deleteInterconnectCmd.MarkFlagRequired("interconnect-id")
+		directconnect_deleteInterconnectCmd.Flags().String("interconnect-id", "", "The ID of the interconnect.")
+		directconnect_deleteInterconnectCmd.MarkFlagRequired("interconnect-id")
+	})
 	directconnectCmd.AddCommand(directconnect_deleteInterconnectCmd)
 }

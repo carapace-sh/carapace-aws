@@ -12,11 +12,13 @@ var quicksight_updateDashboardsQaconfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_updateDashboardsQaconfigurationCmd).Standalone()
+	carapace.Gen(quicksight_updateDashboardsQaconfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_updateDashboardsQaconfigurationCmd).Standalone()
 
-	quicksight_updateDashboardsQaconfigurationCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard QA configuration that you want to update.")
-	quicksight_updateDashboardsQaconfigurationCmd.Flags().String("dashboards-qastatus", "", "The status of dashboards QA configuration that you want to update.")
-	quicksight_updateDashboardsQaconfigurationCmd.MarkFlagRequired("aws-account-id")
-	quicksight_updateDashboardsQaconfigurationCmd.MarkFlagRequired("dashboards-qastatus")
+		quicksight_updateDashboardsQaconfigurationCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard QA configuration that you want to update.")
+		quicksight_updateDashboardsQaconfigurationCmd.Flags().String("dashboards-qastatus", "", "The status of dashboards QA configuration that you want to update.")
+		quicksight_updateDashboardsQaconfigurationCmd.MarkFlagRequired("aws-account-id")
+		quicksight_updateDashboardsQaconfigurationCmd.MarkFlagRequired("dashboards-qastatus")
+	})
 	quicksightCmd.AddCommand(quicksight_updateDashboardsQaconfigurationCmd)
 }

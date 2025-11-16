@@ -12,11 +12,13 @@ var codecommit_getCommitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_getCommitCmd).Standalone()
+	carapace.Gen(codecommit_getCommitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_getCommitCmd).Standalone()
 
-	codecommit_getCommitCmd.Flags().String("commit-id", "", "The commit ID.")
-	codecommit_getCommitCmd.Flags().String("repository-name", "", "The name of the repository to which the commit was made.")
-	codecommit_getCommitCmd.MarkFlagRequired("commit-id")
-	codecommit_getCommitCmd.MarkFlagRequired("repository-name")
+		codecommit_getCommitCmd.Flags().String("commit-id", "", "The commit ID.")
+		codecommit_getCommitCmd.Flags().String("repository-name", "", "The name of the repository to which the commit was made.")
+		codecommit_getCommitCmd.MarkFlagRequired("commit-id")
+		codecommit_getCommitCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_getCommitCmd)
 }

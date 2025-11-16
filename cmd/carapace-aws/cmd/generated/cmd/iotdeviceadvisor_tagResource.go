@@ -12,11 +12,13 @@ var iotdeviceadvisor_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotdeviceadvisor_tagResourceCmd).Standalone()
+	carapace.Gen(iotdeviceadvisor_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotdeviceadvisor_tagResourceCmd).Standalone()
 
-	iotdeviceadvisor_tagResourceCmd.Flags().String("resource-arn", "", "The resource ARN of an IoT Device Advisor resource.")
-	iotdeviceadvisor_tagResourceCmd.Flags().String("tags", "", "The tags to be attached to the IoT Device Advisor resource.")
-	iotdeviceadvisor_tagResourceCmd.MarkFlagRequired("resource-arn")
-	iotdeviceadvisor_tagResourceCmd.MarkFlagRequired("tags")
+		iotdeviceadvisor_tagResourceCmd.Flags().String("resource-arn", "", "The resource ARN of an IoT Device Advisor resource.")
+		iotdeviceadvisor_tagResourceCmd.Flags().String("tags", "", "The tags to be attached to the IoT Device Advisor resource.")
+		iotdeviceadvisor_tagResourceCmd.MarkFlagRequired("resource-arn")
+		iotdeviceadvisor_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	iotdeviceadvisorCmd.AddCommand(iotdeviceadvisor_tagResourceCmd)
 }

@@ -12,17 +12,19 @@ var iotsitewise_updateComputationModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_updateComputationModelCmd).Standalone()
+	carapace.Gen(iotsitewise_updateComputationModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_updateComputationModelCmd).Standalone()
 
-	iotsitewise_updateComputationModelCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_updateComputationModelCmd.Flags().String("computation-model-configuration", "", "The configuration for the computation model.")
-	iotsitewise_updateComputationModelCmd.Flags().String("computation-model-data-binding", "", "The data binding for the computation model.")
-	iotsitewise_updateComputationModelCmd.Flags().String("computation-model-description", "", "The description of the computation model.")
-	iotsitewise_updateComputationModelCmd.Flags().String("computation-model-id", "", "The ID of the computation model.")
-	iotsitewise_updateComputationModelCmd.Flags().String("computation-model-name", "", "The name of the computation model.")
-	iotsitewise_updateComputationModelCmd.MarkFlagRequired("computation-model-configuration")
-	iotsitewise_updateComputationModelCmd.MarkFlagRequired("computation-model-data-binding")
-	iotsitewise_updateComputationModelCmd.MarkFlagRequired("computation-model-id")
-	iotsitewise_updateComputationModelCmd.MarkFlagRequired("computation-model-name")
+		iotsitewise_updateComputationModelCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_updateComputationModelCmd.Flags().String("computation-model-configuration", "", "The configuration for the computation model.")
+		iotsitewise_updateComputationModelCmd.Flags().String("computation-model-data-binding", "", "The data binding for the computation model.")
+		iotsitewise_updateComputationModelCmd.Flags().String("computation-model-description", "", "The description of the computation model.")
+		iotsitewise_updateComputationModelCmd.Flags().String("computation-model-id", "", "The ID of the computation model.")
+		iotsitewise_updateComputationModelCmd.Flags().String("computation-model-name", "", "The name of the computation model.")
+		iotsitewise_updateComputationModelCmd.MarkFlagRequired("computation-model-configuration")
+		iotsitewise_updateComputationModelCmd.MarkFlagRequired("computation-model-data-binding")
+		iotsitewise_updateComputationModelCmd.MarkFlagRequired("computation-model-id")
+		iotsitewise_updateComputationModelCmd.MarkFlagRequired("computation-model-name")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_updateComputationModelCmd)
 }

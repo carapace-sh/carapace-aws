@@ -12,9 +12,11 @@ var schemas_describeDiscovererCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_describeDiscovererCmd).Standalone()
+	carapace.Gen(schemas_describeDiscovererCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_describeDiscovererCmd).Standalone()
 
-	schemas_describeDiscovererCmd.Flags().String("discoverer-id", "", "The ID of the discoverer.")
-	schemas_describeDiscovererCmd.MarkFlagRequired("discoverer-id")
+		schemas_describeDiscovererCmd.Flags().String("discoverer-id", "", "The ID of the discoverer.")
+		schemas_describeDiscovererCmd.MarkFlagRequired("discoverer-id")
+	})
 	schemasCmd.AddCommand(schemas_describeDiscovererCmd)
 }

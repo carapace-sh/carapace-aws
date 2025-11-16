@@ -12,12 +12,14 @@ var fms_getAppsListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_getAppsListCmd).Standalone()
+	carapace.Gen(fms_getAppsListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_getAppsListCmd).Standalone()
 
-	fms_getAppsListCmd.Flags().Bool("default-list", false, "Specifies whether the list to retrieve is a default list owned by Firewall Manager.")
-	fms_getAppsListCmd.Flags().String("list-id", "", "The ID of the Firewall Manager applications list that you want the details for.")
-	fms_getAppsListCmd.Flags().Bool("no-default-list", false, "Specifies whether the list to retrieve is a default list owned by Firewall Manager.")
-	fms_getAppsListCmd.MarkFlagRequired("list-id")
-	fms_getAppsListCmd.Flag("no-default-list").Hidden = true
+		fms_getAppsListCmd.Flags().Bool("default-list", false, "Specifies whether the list to retrieve is a default list owned by Firewall Manager.")
+		fms_getAppsListCmd.Flags().String("list-id", "", "The ID of the Firewall Manager applications list that you want the details for.")
+		fms_getAppsListCmd.Flags().Bool("no-default-list", false, "Specifies whether the list to retrieve is a default list owned by Firewall Manager.")
+		fms_getAppsListCmd.MarkFlagRequired("list-id")
+		fms_getAppsListCmd.Flag("no-default-list").Hidden = true
+	})
 	fmsCmd.AddCommand(fms_getAppsListCmd)
 }

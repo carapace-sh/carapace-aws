@@ -12,9 +12,11 @@ var rolesanywhere_getSubjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_getSubjectCmd).Standalone()
+	carapace.Gen(rolesanywhere_getSubjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_getSubjectCmd).Standalone()
 
-	rolesanywhere_getSubjectCmd.Flags().String("subject-id", "", "The unique identifier of the subject.")
-	rolesanywhere_getSubjectCmd.MarkFlagRequired("subject-id")
+		rolesanywhere_getSubjectCmd.Flags().String("subject-id", "", "The unique identifier of the subject.")
+		rolesanywhere_getSubjectCmd.MarkFlagRequired("subject-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_getSubjectCmd)
 }

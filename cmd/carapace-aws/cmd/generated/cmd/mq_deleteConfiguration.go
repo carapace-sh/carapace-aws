@@ -12,9 +12,11 @@ var mq_deleteConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mq_deleteConfigurationCmd).Standalone()
+	carapace.Gen(mq_deleteConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mq_deleteConfigurationCmd).Standalone()
 
-	mq_deleteConfigurationCmd.Flags().String("configuration-id", "", "The unique ID that Amazon MQ generates for the configuration.")
-	mq_deleteConfigurationCmd.MarkFlagRequired("configuration-id")
+		mq_deleteConfigurationCmd.Flags().String("configuration-id", "", "The unique ID that Amazon MQ generates for the configuration.")
+		mq_deleteConfigurationCmd.MarkFlagRequired("configuration-id")
+	})
 	mqCmd.AddCommand(mq_deleteConfigurationCmd)
 }

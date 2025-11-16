@@ -12,9 +12,11 @@ var sesv2_listEmailTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listEmailTemplatesCmd).Standalone()
+	carapace.Gen(sesv2_listEmailTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listEmailTemplatesCmd).Standalone()
 
-	sesv2_listEmailTemplatesCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListEmailTemplates` to indicate the position in the list of email templates.")
-	sesv2_listEmailTemplatesCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListEmailTemplates`.")
+		sesv2_listEmailTemplatesCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListEmailTemplates` to indicate the position in the list of email templates.")
+		sesv2_listEmailTemplatesCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListEmailTemplates`.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listEmailTemplatesCmd)
 }

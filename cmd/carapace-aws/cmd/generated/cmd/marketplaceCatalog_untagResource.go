@@ -12,11 +12,13 @@ var marketplaceCatalog_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceCatalog_untagResourceCmd).Standalone()
+	carapace.Gen(marketplaceCatalog_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceCatalog_untagResourceCmd).Standalone()
 
-	marketplaceCatalog_untagResourceCmd.Flags().String("resource-arn", "", "Required.")
-	marketplaceCatalog_untagResourceCmd.Flags().String("tag-keys", "", "Required.")
-	marketplaceCatalog_untagResourceCmd.MarkFlagRequired("resource-arn")
-	marketplaceCatalog_untagResourceCmd.MarkFlagRequired("tag-keys")
+		marketplaceCatalog_untagResourceCmd.Flags().String("resource-arn", "", "Required.")
+		marketplaceCatalog_untagResourceCmd.Flags().String("tag-keys", "", "Required.")
+		marketplaceCatalog_untagResourceCmd.MarkFlagRequired("resource-arn")
+		marketplaceCatalog_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	marketplaceCatalogCmd.AddCommand(marketplaceCatalog_untagResourceCmd)
 }

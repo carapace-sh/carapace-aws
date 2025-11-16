@@ -12,14 +12,16 @@ var connect_updateParticipantAuthenticationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateParticipantAuthenticationCmd).Standalone()
+	carapace.Gen(connect_updateParticipantAuthenticationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateParticipantAuthenticationCmd).Standalone()
 
-	connect_updateParticipantAuthenticationCmd.Flags().String("code", "", "The `code` query parameter provided by Cognito in the `redirectUri`.")
-	connect_updateParticipantAuthenticationCmd.Flags().String("error", "", "The `error` query parameter provided by Cognito in the `redirectUri`.")
-	connect_updateParticipantAuthenticationCmd.Flags().String("error-description", "", "The `error_description` parameter provided by Cognito in the `redirectUri`.")
-	connect_updateParticipantAuthenticationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateParticipantAuthenticationCmd.Flags().String("state", "", "The `state` query parameter that was provided by Cognito in the `redirectUri`.")
-	connect_updateParticipantAuthenticationCmd.MarkFlagRequired("instance-id")
-	connect_updateParticipantAuthenticationCmd.MarkFlagRequired("state")
+		connect_updateParticipantAuthenticationCmd.Flags().String("code", "", "The `code` query parameter provided by Cognito in the `redirectUri`.")
+		connect_updateParticipantAuthenticationCmd.Flags().String("error", "", "The `error` query parameter provided by Cognito in the `redirectUri`.")
+		connect_updateParticipantAuthenticationCmd.Flags().String("error-description", "", "The `error_description` parameter provided by Cognito in the `redirectUri`.")
+		connect_updateParticipantAuthenticationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateParticipantAuthenticationCmd.Flags().String("state", "", "The `state` query parameter that was provided by Cognito in the `redirectUri`.")
+		connect_updateParticipantAuthenticationCmd.MarkFlagRequired("instance-id")
+		connect_updateParticipantAuthenticationCmd.MarkFlagRequired("state")
+	})
 	connectCmd.AddCommand(connect_updateParticipantAuthenticationCmd)
 }

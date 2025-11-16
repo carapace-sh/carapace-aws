@@ -12,11 +12,13 @@ var timestreamWrite_createDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamWrite_createDatabaseCmd).Standalone()
+	carapace.Gen(timestreamWrite_createDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamWrite_createDatabaseCmd).Standalone()
 
-	timestreamWrite_createDatabaseCmd.Flags().String("database-name", "", "The name of the Timestream database.")
-	timestreamWrite_createDatabaseCmd.Flags().String("kms-key-id", "", "The KMS key for the database.")
-	timestreamWrite_createDatabaseCmd.Flags().String("tags", "", "A list of key-value pairs to label the table.")
-	timestreamWrite_createDatabaseCmd.MarkFlagRequired("database-name")
+		timestreamWrite_createDatabaseCmd.Flags().String("database-name", "", "The name of the Timestream database.")
+		timestreamWrite_createDatabaseCmd.Flags().String("kms-key-id", "", "The KMS key for the database.")
+		timestreamWrite_createDatabaseCmd.Flags().String("tags", "", "A list of key-value pairs to label the table.")
+		timestreamWrite_createDatabaseCmd.MarkFlagRequired("database-name")
+	})
 	timestreamWriteCmd.AddCommand(timestreamWrite_createDatabaseCmd)
 }

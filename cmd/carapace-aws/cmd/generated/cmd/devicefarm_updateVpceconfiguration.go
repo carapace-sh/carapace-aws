@@ -12,13 +12,15 @@ var devicefarm_updateVpceconfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_updateVpceconfigurationCmd).Standalone()
+	carapace.Gen(devicefarm_updateVpceconfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_updateVpceconfigurationCmd).Standalone()
 
-	devicefarm_updateVpceconfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to update.")
-	devicefarm_updateVpceconfigurationCmd.Flags().String("service-dns-name", "", "The DNS (domain) name used to connect to your private service in your VPC.")
-	devicefarm_updateVpceconfigurationCmd.Flags().String("vpce-configuration-description", "", "An optional description that provides details about your VPC endpoint configuration.")
-	devicefarm_updateVpceconfigurationCmd.Flags().String("vpce-configuration-name", "", "The friendly name you give to your VPC endpoint configuration to manage your configurations more easily.")
-	devicefarm_updateVpceconfigurationCmd.Flags().String("vpce-service-name", "", "The name of the VPC endpoint service running in your AWS account that you want Device Farm to test.")
-	devicefarm_updateVpceconfigurationCmd.MarkFlagRequired("arn")
+		devicefarm_updateVpceconfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to update.")
+		devicefarm_updateVpceconfigurationCmd.Flags().String("service-dns-name", "", "The DNS (domain) name used to connect to your private service in your VPC.")
+		devicefarm_updateVpceconfigurationCmd.Flags().String("vpce-configuration-description", "", "An optional description that provides details about your VPC endpoint configuration.")
+		devicefarm_updateVpceconfigurationCmd.Flags().String("vpce-configuration-name", "", "The friendly name you give to your VPC endpoint configuration to manage your configurations more easily.")
+		devicefarm_updateVpceconfigurationCmd.Flags().String("vpce-service-name", "", "The name of the VPC endpoint service running in your AWS account that you want Device Farm to test.")
+		devicefarm_updateVpceconfigurationCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_updateVpceconfigurationCmd)
 }

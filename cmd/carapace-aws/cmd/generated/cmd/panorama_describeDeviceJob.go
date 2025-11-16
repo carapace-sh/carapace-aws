@@ -12,9 +12,11 @@ var panorama_describeDeviceJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_describeDeviceJobCmd).Standalone()
+	carapace.Gen(panorama_describeDeviceJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_describeDeviceJobCmd).Standalone()
 
-	panorama_describeDeviceJobCmd.Flags().String("job-id", "", "The job's ID.")
-	panorama_describeDeviceJobCmd.MarkFlagRequired("job-id")
+		panorama_describeDeviceJobCmd.Flags().String("job-id", "", "The job's ID.")
+		panorama_describeDeviceJobCmd.MarkFlagRequired("job-id")
+	})
 	panoramaCmd.AddCommand(panorama_describeDeviceJobCmd)
 }

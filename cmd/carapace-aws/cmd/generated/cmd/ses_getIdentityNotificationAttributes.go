@@ -12,9 +12,11 @@ var ses_getIdentityNotificationAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_getIdentityNotificationAttributesCmd).Standalone()
+	carapace.Gen(ses_getIdentityNotificationAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_getIdentityNotificationAttributesCmd).Standalone()
 
-	ses_getIdentityNotificationAttributesCmd.Flags().String("identities", "", "A list of one or more identities.")
-	ses_getIdentityNotificationAttributesCmd.MarkFlagRequired("identities")
+		ses_getIdentityNotificationAttributesCmd.Flags().String("identities", "", "A list of one or more identities.")
+		ses_getIdentityNotificationAttributesCmd.MarkFlagRequired("identities")
+	})
 	sesCmd.AddCommand(ses_getIdentityNotificationAttributesCmd)
 }

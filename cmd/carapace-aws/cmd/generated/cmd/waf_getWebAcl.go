@@ -12,9 +12,11 @@ var waf_getWebAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_getWebAclCmd).Standalone()
+	carapace.Gen(waf_getWebAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_getWebAclCmd).Standalone()
 
-	waf_getWebAclCmd.Flags().String("web-aclid", "", "The `WebACLId` of the [WebACL]() that you want to get.")
-	waf_getWebAclCmd.MarkFlagRequired("web-aclid")
+		waf_getWebAclCmd.Flags().String("web-aclid", "", "The `WebACLId` of the [WebACL]() that you want to get.")
+		waf_getWebAclCmd.MarkFlagRequired("web-aclid")
+	})
 	wafCmd.AddCommand(waf_getWebAclCmd)
 }

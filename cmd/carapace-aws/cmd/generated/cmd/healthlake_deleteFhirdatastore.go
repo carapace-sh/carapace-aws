@@ -12,9 +12,11 @@ var healthlake_deleteFhirdatastoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(healthlake_deleteFhirdatastoreCmd).Standalone()
+	carapace.Gen(healthlake_deleteFhirdatastoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(healthlake_deleteFhirdatastoreCmd).Standalone()
 
-	healthlake_deleteFhirdatastoreCmd.Flags().String("datastore-id", "", "The AWS-generated identifier for the data store to be deleted.")
-	healthlake_deleteFhirdatastoreCmd.MarkFlagRequired("datastore-id")
+		healthlake_deleteFhirdatastoreCmd.Flags().String("datastore-id", "", "The AWS-generated identifier for the data store to be deleted.")
+		healthlake_deleteFhirdatastoreCmd.MarkFlagRequired("datastore-id")
+	})
 	healthlakeCmd.AddCommand(healthlake_deleteFhirdatastoreCmd)
 }

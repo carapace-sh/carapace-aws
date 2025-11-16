@@ -12,12 +12,14 @@ var ivschat_disconnectUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_disconnectUserCmd).Standalone()
+	carapace.Gen(ivschat_disconnectUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_disconnectUserCmd).Standalone()
 
-	ivschat_disconnectUserCmd.Flags().String("reason", "", "Reason for disconnecting the user.")
-	ivschat_disconnectUserCmd.Flags().String("room-identifier", "", "Identifier of the room from which the user's clients should be disconnected.")
-	ivschat_disconnectUserCmd.Flags().String("user-id", "", "ID of the user (connection) to disconnect from the room.")
-	ivschat_disconnectUserCmd.MarkFlagRequired("room-identifier")
-	ivschat_disconnectUserCmd.MarkFlagRequired("user-id")
+		ivschat_disconnectUserCmd.Flags().String("reason", "", "Reason for disconnecting the user.")
+		ivschat_disconnectUserCmd.Flags().String("room-identifier", "", "Identifier of the room from which the user's clients should be disconnected.")
+		ivschat_disconnectUserCmd.Flags().String("user-id", "", "ID of the user (connection) to disconnect from the room.")
+		ivschat_disconnectUserCmd.MarkFlagRequired("room-identifier")
+		ivschat_disconnectUserCmd.MarkFlagRequired("user-id")
+	})
 	ivschatCmd.AddCommand(ivschat_disconnectUserCmd)
 }

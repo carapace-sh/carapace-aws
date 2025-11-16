@@ -12,9 +12,11 @@ var dynamodb_describeTimeToLiveCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeTimeToLiveCmd).Standalone()
+	carapace.Gen(dynamodb_describeTimeToLiveCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeTimeToLiveCmd).Standalone()
 
-	dynamodb_describeTimeToLiveCmd.Flags().String("table-name", "", "The name of the table to be described.")
-	dynamodb_describeTimeToLiveCmd.MarkFlagRequired("table-name")
+		dynamodb_describeTimeToLiveCmd.Flags().String("table-name", "", "The name of the table to be described.")
+		dynamodb_describeTimeToLiveCmd.MarkFlagRequired("table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeTimeToLiveCmd)
 }

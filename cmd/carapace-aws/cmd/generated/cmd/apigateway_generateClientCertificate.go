@@ -12,9 +12,11 @@ var apigateway_generateClientCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_generateClientCertificateCmd).Standalone()
+	carapace.Gen(apigateway_generateClientCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_generateClientCertificateCmd).Standalone()
 
-	apigateway_generateClientCertificateCmd.Flags().String("description", "", "The description of the ClientCertificate.")
-	apigateway_generateClientCertificateCmd.Flags().String("tags", "", "The key-value map of strings.")
+		apigateway_generateClientCertificateCmd.Flags().String("description", "", "The description of the ClientCertificate.")
+		apigateway_generateClientCertificateCmd.Flags().String("tags", "", "The key-value map of strings.")
+	})
 	apigatewayCmd.AddCommand(apigateway_generateClientCertificateCmd)
 }

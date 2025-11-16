@@ -12,9 +12,11 @@ var efs_describeMountTargetSecurityGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_describeMountTargetSecurityGroupsCmd).Standalone()
+	carapace.Gen(efs_describeMountTargetSecurityGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_describeMountTargetSecurityGroupsCmd).Standalone()
 
-	efs_describeMountTargetSecurityGroupsCmd.Flags().String("mount-target-id", "", "The ID of the mount target whose security groups you want to retrieve.")
-	efs_describeMountTargetSecurityGroupsCmd.MarkFlagRequired("mount-target-id")
+		efs_describeMountTargetSecurityGroupsCmd.Flags().String("mount-target-id", "", "The ID of the mount target whose security groups you want to retrieve.")
+		efs_describeMountTargetSecurityGroupsCmd.MarkFlagRequired("mount-target-id")
+	})
 	efsCmd.AddCommand(efs_describeMountTargetSecurityGroupsCmd)
 }

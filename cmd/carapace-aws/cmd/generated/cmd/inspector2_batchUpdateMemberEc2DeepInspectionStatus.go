@@ -12,9 +12,11 @@ var inspector2_batchUpdateMemberEc2DeepInspectionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_batchUpdateMemberEc2DeepInspectionStatusCmd).Standalone()
+	carapace.Gen(inspector2_batchUpdateMemberEc2DeepInspectionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_batchUpdateMemberEc2DeepInspectionStatusCmd).Standalone()
 
-	inspector2_batchUpdateMemberEc2DeepInspectionStatusCmd.Flags().String("account-ids", "", "The unique identifiers for the Amazon Web Services accounts to change Amazon Inspector deep inspection status for.")
-	inspector2_batchUpdateMemberEc2DeepInspectionStatusCmd.MarkFlagRequired("account-ids")
+		inspector2_batchUpdateMemberEc2DeepInspectionStatusCmd.Flags().String("account-ids", "", "The unique identifiers for the Amazon Web Services accounts to change Amazon Inspector deep inspection status for.")
+		inspector2_batchUpdateMemberEc2DeepInspectionStatusCmd.MarkFlagRequired("account-ids")
+	})
 	inspector2Cmd.AddCommand(inspector2_batchUpdateMemberEc2DeepInspectionStatusCmd)
 }

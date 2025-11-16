@@ -12,8 +12,10 @@ var lightsail_deleteDistributionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteDistributionCmd).Standalone()
+	carapace.Gen(lightsail_deleteDistributionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteDistributionCmd).Standalone()
 
-	lightsail_deleteDistributionCmd.Flags().String("distribution-name", "", "The name of the distribution to delete.")
+		lightsail_deleteDistributionCmd.Flags().String("distribution-name", "", "The name of the distribution to delete.")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteDistributionCmd)
 }

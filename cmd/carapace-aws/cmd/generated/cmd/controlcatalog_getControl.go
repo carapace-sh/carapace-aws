@@ -12,9 +12,11 @@ var controlcatalog_getControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controlcatalog_getControlCmd).Standalone()
+	carapace.Gen(controlcatalog_getControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controlcatalog_getControlCmd).Standalone()
 
-	controlcatalog_getControlCmd.Flags().String("control-arn", "", "The Amazon Resource Name (ARN) of the control.")
-	controlcatalog_getControlCmd.MarkFlagRequired("control-arn")
+		controlcatalog_getControlCmd.Flags().String("control-arn", "", "The Amazon Resource Name (ARN) of the control.")
+		controlcatalog_getControlCmd.MarkFlagRequired("control-arn")
+	})
 	controlcatalogCmd.AddCommand(controlcatalog_getControlCmd)
 }

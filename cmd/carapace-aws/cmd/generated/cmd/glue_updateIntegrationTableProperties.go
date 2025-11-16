@@ -12,13 +12,15 @@ var glue_updateIntegrationTablePropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_updateIntegrationTablePropertiesCmd).Standalone()
+	carapace.Gen(glue_updateIntegrationTablePropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_updateIntegrationTablePropertiesCmd).Standalone()
 
-	glue_updateIntegrationTablePropertiesCmd.Flags().String("resource-arn", "", "The connection ARN of the source, or the database ARN of the target.")
-	glue_updateIntegrationTablePropertiesCmd.Flags().String("source-table-config", "", "A structure for the source table configuration.")
-	glue_updateIntegrationTablePropertiesCmd.Flags().String("table-name", "", "The name of the table to be replicated.")
-	glue_updateIntegrationTablePropertiesCmd.Flags().String("target-table-config", "", "A structure for the target table configuration.")
-	glue_updateIntegrationTablePropertiesCmd.MarkFlagRequired("resource-arn")
-	glue_updateIntegrationTablePropertiesCmd.MarkFlagRequired("table-name")
+		glue_updateIntegrationTablePropertiesCmd.Flags().String("resource-arn", "", "The connection ARN of the source, or the database ARN of the target.")
+		glue_updateIntegrationTablePropertiesCmd.Flags().String("source-table-config", "", "A structure for the source table configuration.")
+		glue_updateIntegrationTablePropertiesCmd.Flags().String("table-name", "", "The name of the table to be replicated.")
+		glue_updateIntegrationTablePropertiesCmd.Flags().String("target-table-config", "", "A structure for the target table configuration.")
+		glue_updateIntegrationTablePropertiesCmd.MarkFlagRequired("resource-arn")
+		glue_updateIntegrationTablePropertiesCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_updateIntegrationTablePropertiesCmd)
 }

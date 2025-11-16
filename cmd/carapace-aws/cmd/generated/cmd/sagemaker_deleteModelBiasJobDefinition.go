@@ -12,9 +12,11 @@ var sagemaker_deleteModelBiasJobDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteModelBiasJobDefinitionCmd).Standalone()
+	carapace.Gen(sagemaker_deleteModelBiasJobDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteModelBiasJobDefinitionCmd).Standalone()
 
-	sagemaker_deleteModelBiasJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the model bias job definition to delete.")
-	sagemaker_deleteModelBiasJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+		sagemaker_deleteModelBiasJobDefinitionCmd.Flags().String("job-definition-name", "", "The name of the model bias job definition to delete.")
+		sagemaker_deleteModelBiasJobDefinitionCmd.MarkFlagRequired("job-definition-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteModelBiasJobDefinitionCmd)
 }

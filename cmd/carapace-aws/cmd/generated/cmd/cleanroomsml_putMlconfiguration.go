@@ -12,11 +12,13 @@ var cleanroomsml_putMlconfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_putMlconfigurationCmd).Standalone()
+	carapace.Gen(cleanroomsml_putMlconfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_putMlconfigurationCmd).Standalone()
 
-	cleanroomsml_putMlconfigurationCmd.Flags().String("default-output-location", "", "The default Amazon S3 location where ML output is stored for the specified member.")
-	cleanroomsml_putMlconfigurationCmd.Flags().String("membership-identifier", "", "The membership ID of the member that is being configured.")
-	cleanroomsml_putMlconfigurationCmd.MarkFlagRequired("default-output-location")
-	cleanroomsml_putMlconfigurationCmd.MarkFlagRequired("membership-identifier")
+		cleanroomsml_putMlconfigurationCmd.Flags().String("default-output-location", "", "The default Amazon S3 location where ML output is stored for the specified member.")
+		cleanroomsml_putMlconfigurationCmd.Flags().String("membership-identifier", "", "The membership ID of the member that is being configured.")
+		cleanroomsml_putMlconfigurationCmd.MarkFlagRequired("default-output-location")
+		cleanroomsml_putMlconfigurationCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_putMlconfigurationCmd)
 }

@@ -12,7 +12,9 @@ var arcRegionSwitchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcRegionSwitchCmd).Standalone()
+	carapace.Gen(arcRegionSwitchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcRegionSwitchCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(arcRegionSwitchCmd)
 }

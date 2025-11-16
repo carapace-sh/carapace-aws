@@ -12,11 +12,13 @@ var bcmPricingCalculator_updateBillEstimateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_updateBillEstimateCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_updateBillEstimateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_updateBillEstimateCmd).Standalone()
 
-	bcmPricingCalculator_updateBillEstimateCmd.Flags().String("expires-at", "", "The new expiration date for the bill estimate.")
-	bcmPricingCalculator_updateBillEstimateCmd.Flags().String("identifier", "", "The unique identifier of the bill estimate to update.")
-	bcmPricingCalculator_updateBillEstimateCmd.Flags().String("name", "", "The new name for the bill estimate.")
-	bcmPricingCalculator_updateBillEstimateCmd.MarkFlagRequired("identifier")
+		bcmPricingCalculator_updateBillEstimateCmd.Flags().String("expires-at", "", "The new expiration date for the bill estimate.")
+		bcmPricingCalculator_updateBillEstimateCmd.Flags().String("identifier", "", "The unique identifier of the bill estimate to update.")
+		bcmPricingCalculator_updateBillEstimateCmd.Flags().String("name", "", "The new name for the bill estimate.")
+		bcmPricingCalculator_updateBillEstimateCmd.MarkFlagRequired("identifier")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_updateBillEstimateCmd)
 }

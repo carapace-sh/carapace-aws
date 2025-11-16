@@ -12,7 +12,9 @@ var cloudformationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformationCmd).Standalone()
+	carapace.Gen(cloudformationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformationCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cloudformationCmd)
 }

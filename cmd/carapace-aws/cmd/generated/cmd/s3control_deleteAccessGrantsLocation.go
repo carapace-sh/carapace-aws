@@ -12,11 +12,13 @@ var s3control_deleteAccessGrantsLocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_deleteAccessGrantsLocationCmd).Standalone()
+	carapace.Gen(s3control_deleteAccessGrantsLocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_deleteAccessGrantsLocationCmd).Standalone()
 
-	s3control_deleteAccessGrantsLocationCmd.Flags().String("access-grants-location-id", "", "The ID of the registered location that you are deregistering from your S3 Access Grants instance.")
-	s3control_deleteAccessGrantsLocationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
-	s3control_deleteAccessGrantsLocationCmd.MarkFlagRequired("access-grants-location-id")
-	s3control_deleteAccessGrantsLocationCmd.MarkFlagRequired("account-id")
+		s3control_deleteAccessGrantsLocationCmd.Flags().String("access-grants-location-id", "", "The ID of the registered location that you are deregistering from your S3 Access Grants instance.")
+		s3control_deleteAccessGrantsLocationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
+		s3control_deleteAccessGrantsLocationCmd.MarkFlagRequired("access-grants-location-id")
+		s3control_deleteAccessGrantsLocationCmd.MarkFlagRequired("account-id")
+	})
 	s3controlCmd.AddCommand(s3control_deleteAccessGrantsLocationCmd)
 }

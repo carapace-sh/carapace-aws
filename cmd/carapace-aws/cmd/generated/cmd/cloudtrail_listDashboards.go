@@ -12,11 +12,13 @@ var cloudtrail_listDashboardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_listDashboardsCmd).Standalone()
+	carapace.Gen(cloudtrail_listDashboardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_listDashboardsCmd).Standalone()
 
-	cloudtrail_listDashboardsCmd.Flags().String("max-results", "", "The maximum number of dashboards to display on a single page.")
-	cloudtrail_listDashboardsCmd.Flags().String("name-prefix", "", "Specify a name prefix to filter on.")
-	cloudtrail_listDashboardsCmd.Flags().String("next-token", "", "A token you can use to get the next page of dashboard results.")
-	cloudtrail_listDashboardsCmd.Flags().String("type", "", "Specify a dashboard type to filter on: `CUSTOM` or `MANAGED`.")
+		cloudtrail_listDashboardsCmd.Flags().String("max-results", "", "The maximum number of dashboards to display on a single page.")
+		cloudtrail_listDashboardsCmd.Flags().String("name-prefix", "", "Specify a name prefix to filter on.")
+		cloudtrail_listDashboardsCmd.Flags().String("next-token", "", "A token you can use to get the next page of dashboard results.")
+		cloudtrail_listDashboardsCmd.Flags().String("type", "", "Specify a dashboard type to filter on: `CUSTOM` or `MANAGED`.")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_listDashboardsCmd)
 }

@@ -12,12 +12,14 @@ var organizations_updatePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_updatePolicyCmd).Standalone()
+	carapace.Gen(organizations_updatePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_updatePolicyCmd).Standalone()
 
-	organizations_updatePolicyCmd.Flags().String("content", "", "If provided, the new content for the policy.")
-	organizations_updatePolicyCmd.Flags().String("description", "", "If provided, the new description for the policy.")
-	organizations_updatePolicyCmd.Flags().String("name", "", "If provided, the new name for the policy.")
-	organizations_updatePolicyCmd.Flags().String("policy-id", "", "The unique identifier (ID) of the policy that you want to update.")
-	organizations_updatePolicyCmd.MarkFlagRequired("policy-id")
+		organizations_updatePolicyCmd.Flags().String("content", "", "If provided, the new content for the policy.")
+		organizations_updatePolicyCmd.Flags().String("description", "", "If provided, the new description for the policy.")
+		organizations_updatePolicyCmd.Flags().String("name", "", "If provided, the new name for the policy.")
+		organizations_updatePolicyCmd.Flags().String("policy-id", "", "The unique identifier (ID) of the policy that you want to update.")
+		organizations_updatePolicyCmd.MarkFlagRequired("policy-id")
+	})
 	organizationsCmd.AddCommand(organizations_updatePolicyCmd)
 }

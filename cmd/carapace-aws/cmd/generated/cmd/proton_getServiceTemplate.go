@@ -12,9 +12,11 @@ var proton_getServiceTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getServiceTemplateCmd).Standalone()
+	carapace.Gen(proton_getServiceTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getServiceTemplateCmd).Standalone()
 
-	proton_getServiceTemplateCmd.Flags().String("name", "", "The name of the service template that you want to get detailed data for.")
-	proton_getServiceTemplateCmd.MarkFlagRequired("name")
+		proton_getServiceTemplateCmd.Flags().String("name", "", "The name of the service template that you want to get detailed data for.")
+		proton_getServiceTemplateCmd.MarkFlagRequired("name")
+	})
 	protonCmd.AddCommand(proton_getServiceTemplateCmd)
 }

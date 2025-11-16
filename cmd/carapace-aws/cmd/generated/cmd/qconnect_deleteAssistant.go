@@ -12,9 +12,11 @@ var qconnect_deleteAssistantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_deleteAssistantCmd).Standalone()
+	carapace.Gen(qconnect_deleteAssistantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_deleteAssistantCmd).Standalone()
 
-	qconnect_deleteAssistantCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_deleteAssistantCmd.MarkFlagRequired("assistant-id")
+		qconnect_deleteAssistantCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_deleteAssistantCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_deleteAssistantCmd)
 }

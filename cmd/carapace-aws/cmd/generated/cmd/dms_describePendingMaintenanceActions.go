@@ -12,11 +12,13 @@ var dms_describePendingMaintenanceActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describePendingMaintenanceActionsCmd).Standalone()
+	carapace.Gen(dms_describePendingMaintenanceActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describePendingMaintenanceActionsCmd).Standalone()
 
-	dms_describePendingMaintenanceActionsCmd.Flags().String("filters", "", "")
-	dms_describePendingMaintenanceActionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	dms_describePendingMaintenanceActionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	dms_describePendingMaintenanceActionsCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
+		dms_describePendingMaintenanceActionsCmd.Flags().String("filters", "", "")
+		dms_describePendingMaintenanceActionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		dms_describePendingMaintenanceActionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		dms_describePendingMaintenanceActionsCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
+	})
 	dmsCmd.AddCommand(dms_describePendingMaintenanceActionsCmd)
 }

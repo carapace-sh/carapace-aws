@@ -12,9 +12,11 @@ var paymentCryptography_restoreKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_restoreKeyCmd).Standalone()
+	carapace.Gen(paymentCryptography_restoreKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_restoreKeyCmd).Standalone()
 
-	paymentCryptography_restoreKeyCmd.Flags().String("key-identifier", "", "The `KeyARN` of the key to be restored within Amazon Web Services Payment Cryptography.")
-	paymentCryptography_restoreKeyCmd.MarkFlagRequired("key-identifier")
+		paymentCryptography_restoreKeyCmd.Flags().String("key-identifier", "", "The `KeyARN` of the key to be restored within Amazon Web Services Payment Cryptography.")
+		paymentCryptography_restoreKeyCmd.MarkFlagRequired("key-identifier")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_restoreKeyCmd)
 }

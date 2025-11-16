@@ -12,11 +12,13 @@ var amplify_listDomainAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_listDomainAssociationsCmd).Standalone()
+	carapace.Gen(amplify_listDomainAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_listDomainAssociationsCmd).Standalone()
 
-	amplify_listDomainAssociationsCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_listDomainAssociationsCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
-	amplify_listDomainAssociationsCmd.Flags().String("next-token", "", "A pagination token.")
-	amplify_listDomainAssociationsCmd.MarkFlagRequired("app-id")
+		amplify_listDomainAssociationsCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_listDomainAssociationsCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
+		amplify_listDomainAssociationsCmd.Flags().String("next-token", "", "A pagination token.")
+		amplify_listDomainAssociationsCmd.MarkFlagRequired("app-id")
+	})
 	amplifyCmd.AddCommand(amplify_listDomainAssociationsCmd)
 }

@@ -12,12 +12,14 @@ var datazone_getRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getRuleCmd).Standalone()
+	carapace.Gen(datazone_getRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getRuleCmd).Standalone()
 
-	datazone_getRuleCmd.Flags().String("domain-identifier", "", "The ID of the domain where the `GetRule` action is to be invoked.")
-	datazone_getRuleCmd.Flags().String("identifier", "", "The ID of the rule.")
-	datazone_getRuleCmd.Flags().String("revision", "", "The revision of the rule.")
-	datazone_getRuleCmd.MarkFlagRequired("domain-identifier")
-	datazone_getRuleCmd.MarkFlagRequired("identifier")
+		datazone_getRuleCmd.Flags().String("domain-identifier", "", "The ID of the domain where the `GetRule` action is to be invoked.")
+		datazone_getRuleCmd.Flags().String("identifier", "", "The ID of the rule.")
+		datazone_getRuleCmd.Flags().String("revision", "", "The revision of the rule.")
+		datazone_getRuleCmd.MarkFlagRequired("domain-identifier")
+		datazone_getRuleCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getRuleCmd)
 }

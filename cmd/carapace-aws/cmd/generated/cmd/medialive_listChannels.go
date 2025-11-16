@@ -12,9 +12,11 @@ var medialive_listChannelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listChannelsCmd).Standalone()
+	carapace.Gen(medialive_listChannelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listChannelsCmd).Standalone()
 
-	medialive_listChannelsCmd.Flags().String("max-results", "", "")
-	medialive_listChannelsCmd.Flags().String("next-token", "", "")
+		medialive_listChannelsCmd.Flags().String("max-results", "", "")
+		medialive_listChannelsCmd.Flags().String("next-token", "", "")
+	})
 	medialiveCmd.AddCommand(medialive_listChannelsCmd)
 }

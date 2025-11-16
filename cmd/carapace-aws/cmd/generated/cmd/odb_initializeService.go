@@ -12,7 +12,9 @@ var odb_initializeServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_initializeServiceCmd).Standalone()
+	carapace.Gen(odb_initializeServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_initializeServiceCmd).Standalone()
 
+	})
 	odbCmd.AddCommand(odb_initializeServiceCmd)
 }

@@ -12,9 +12,11 @@ var lookoutequipment_deleteDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_deleteDatasetCmd).Standalone()
+	carapace.Gen(lookoutequipment_deleteDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_deleteDatasetCmd).Standalone()
 
-	lookoutequipment_deleteDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset to be deleted.")
-	lookoutequipment_deleteDatasetCmd.MarkFlagRequired("dataset-name")
+		lookoutequipment_deleteDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset to be deleted.")
+		lookoutequipment_deleteDatasetCmd.MarkFlagRequired("dataset-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_deleteDatasetCmd)
 }

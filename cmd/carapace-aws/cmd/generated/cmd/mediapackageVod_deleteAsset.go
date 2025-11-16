@@ -12,9 +12,11 @@ var mediapackageVod_deleteAssetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackageVod_deleteAssetCmd).Standalone()
+	carapace.Gen(mediapackageVod_deleteAssetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackageVod_deleteAssetCmd).Standalone()
 
-	mediapackageVod_deleteAssetCmd.Flags().String("id", "", "The ID of the MediaPackage VOD Asset resource to delete.")
-	mediapackageVod_deleteAssetCmd.MarkFlagRequired("id")
+		mediapackageVod_deleteAssetCmd.Flags().String("id", "", "The ID of the MediaPackage VOD Asset resource to delete.")
+		mediapackageVod_deleteAssetCmd.MarkFlagRequired("id")
+	})
 	mediapackageVodCmd.AddCommand(mediapackageVod_deleteAssetCmd)
 }

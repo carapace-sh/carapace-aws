@@ -12,7 +12,9 @@ var datazoneCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazoneCmd).Standalone()
+	carapace.Gen(datazoneCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazoneCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(datazoneCmd)
 }

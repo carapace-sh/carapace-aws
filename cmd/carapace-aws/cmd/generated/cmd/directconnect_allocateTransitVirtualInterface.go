@@ -12,13 +12,15 @@ var directconnect_allocateTransitVirtualInterfaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_allocateTransitVirtualInterfaceCmd).Standalone()
+	carapace.Gen(directconnect_allocateTransitVirtualInterfaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_allocateTransitVirtualInterfaceCmd).Standalone()
 
-	directconnect_allocateTransitVirtualInterfaceCmd.Flags().String("connection-id", "", "The ID of the connection on which the transit virtual interface is provisioned.")
-	directconnect_allocateTransitVirtualInterfaceCmd.Flags().String("new-transit-virtual-interface-allocation", "", "Information about the transit virtual interface.")
-	directconnect_allocateTransitVirtualInterfaceCmd.Flags().String("owner-account", "", "The ID of the Amazon Web Services account that owns the transit virtual interface.")
-	directconnect_allocateTransitVirtualInterfaceCmd.MarkFlagRequired("connection-id")
-	directconnect_allocateTransitVirtualInterfaceCmd.MarkFlagRequired("new-transit-virtual-interface-allocation")
-	directconnect_allocateTransitVirtualInterfaceCmd.MarkFlagRequired("owner-account")
+		directconnect_allocateTransitVirtualInterfaceCmd.Flags().String("connection-id", "", "The ID of the connection on which the transit virtual interface is provisioned.")
+		directconnect_allocateTransitVirtualInterfaceCmd.Flags().String("new-transit-virtual-interface-allocation", "", "Information about the transit virtual interface.")
+		directconnect_allocateTransitVirtualInterfaceCmd.Flags().String("owner-account", "", "The ID of the Amazon Web Services account that owns the transit virtual interface.")
+		directconnect_allocateTransitVirtualInterfaceCmd.MarkFlagRequired("connection-id")
+		directconnect_allocateTransitVirtualInterfaceCmd.MarkFlagRequired("new-transit-virtual-interface-allocation")
+		directconnect_allocateTransitVirtualInterfaceCmd.MarkFlagRequired("owner-account")
+	})
 	directconnectCmd.AddCommand(directconnect_allocateTransitVirtualInterfaceCmd)
 }

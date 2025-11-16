@@ -12,9 +12,11 @@ var swf_deprecateDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_deprecateDomainCmd).Standalone()
+	carapace.Gen(swf_deprecateDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_deprecateDomainCmd).Standalone()
 
-	swf_deprecateDomainCmd.Flags().String("name", "", "The name of the domain to deprecate.")
-	swf_deprecateDomainCmd.MarkFlagRequired("name")
+		swf_deprecateDomainCmd.Flags().String("name", "", "The name of the domain to deprecate.")
+		swf_deprecateDomainCmd.MarkFlagRequired("name")
+	})
 	swfCmd.AddCommand(swf_deprecateDomainCmd)
 }

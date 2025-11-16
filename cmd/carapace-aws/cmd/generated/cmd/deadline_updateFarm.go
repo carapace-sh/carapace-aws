@@ -12,11 +12,13 @@ var deadline_updateFarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_updateFarmCmd).Standalone()
+	carapace.Gen(deadline_updateFarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_updateFarmCmd).Standalone()
 
-	deadline_updateFarmCmd.Flags().String("description", "", "The description of the farm to update.")
-	deadline_updateFarmCmd.Flags().String("display-name", "", "The display name of the farm to update.")
-	deadline_updateFarmCmd.Flags().String("farm-id", "", "The farm ID to update.")
-	deadline_updateFarmCmd.MarkFlagRequired("farm-id")
+		deadline_updateFarmCmd.Flags().String("description", "", "The description of the farm to update.")
+		deadline_updateFarmCmd.Flags().String("display-name", "", "The display name of the farm to update.")
+		deadline_updateFarmCmd.Flags().String("farm-id", "", "The farm ID to update.")
+		deadline_updateFarmCmd.MarkFlagRequired("farm-id")
+	})
 	deadlineCmd.AddCommand(deadline_updateFarmCmd)
 }

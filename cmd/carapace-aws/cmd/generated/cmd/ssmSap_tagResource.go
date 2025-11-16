@@ -12,11 +12,13 @@ var ssmSap_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_tagResourceCmd).Standalone()
+	carapace.Gen(ssmSap_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_tagResourceCmd).Standalone()
 
-	ssmSap_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	ssmSap_tagResourceCmd.Flags().String("tags", "", "The tags on a resource.")
-	ssmSap_tagResourceCmd.MarkFlagRequired("resource-arn")
-	ssmSap_tagResourceCmd.MarkFlagRequired("tags")
+		ssmSap_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		ssmSap_tagResourceCmd.Flags().String("tags", "", "The tags on a resource.")
+		ssmSap_tagResourceCmd.MarkFlagRequired("resource-arn")
+		ssmSap_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	ssmSapCmd.AddCommand(ssmSap_tagResourceCmd)
 }

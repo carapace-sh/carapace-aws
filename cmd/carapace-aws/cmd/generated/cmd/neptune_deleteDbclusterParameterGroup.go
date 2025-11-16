@@ -12,9 +12,11 @@ var neptune_deleteDbclusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_deleteDbclusterParameterGroupCmd).Standalone()
+	carapace.Gen(neptune_deleteDbclusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_deleteDbclusterParameterGroupCmd).Standalone()
 
-	neptune_deleteDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the DB cluster parameter group.")
-	neptune_deleteDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
+		neptune_deleteDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the DB cluster parameter group.")
+		neptune_deleteDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
+	})
 	neptuneCmd.AddCommand(neptune_deleteDbclusterParameterGroupCmd)
 }

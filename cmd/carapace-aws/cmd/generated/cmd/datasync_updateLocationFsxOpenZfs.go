@@ -12,11 +12,13 @@ var datasync_updateLocationFsxOpenZfsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_updateLocationFsxOpenZfsCmd).Standalone()
+	carapace.Gen(datasync_updateLocationFsxOpenZfsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_updateLocationFsxOpenZfsCmd).Standalone()
 
-	datasync_updateLocationFsxOpenZfsCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the FSx for OpenZFS transfer location that you're updating.")
-	datasync_updateLocationFsxOpenZfsCmd.Flags().String("protocol", "", "")
-	datasync_updateLocationFsxOpenZfsCmd.Flags().String("subdirectory", "", "Specifies a subdirectory in the location's path that must begin with `/fsx`.")
-	datasync_updateLocationFsxOpenZfsCmd.MarkFlagRequired("location-arn")
+		datasync_updateLocationFsxOpenZfsCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the FSx for OpenZFS transfer location that you're updating.")
+		datasync_updateLocationFsxOpenZfsCmd.Flags().String("protocol", "", "")
+		datasync_updateLocationFsxOpenZfsCmd.Flags().String("subdirectory", "", "Specifies a subdirectory in the location's path that must begin with `/fsx`.")
+		datasync_updateLocationFsxOpenZfsCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_updateLocationFsxOpenZfsCmd)
 }

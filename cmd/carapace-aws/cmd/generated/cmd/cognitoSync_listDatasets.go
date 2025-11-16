@@ -12,13 +12,15 @@ var cognitoSync_listDatasetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoSync_listDatasetsCmd).Standalone()
+	carapace.Gen(cognitoSync_listDatasetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoSync_listDatasetsCmd).Standalone()
 
-	cognitoSync_listDatasetsCmd.Flags().String("identity-id", "", "A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.")
-	cognitoSync_listDatasetsCmd.Flags().String("identity-pool-id", "", "A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.")
-	cognitoSync_listDatasetsCmd.Flags().String("max-results", "", "The maximum number of results to be returned.")
-	cognitoSync_listDatasetsCmd.Flags().String("next-token", "", "A pagination token for obtaining the next page of results.")
-	cognitoSync_listDatasetsCmd.MarkFlagRequired("identity-id")
-	cognitoSync_listDatasetsCmd.MarkFlagRequired("identity-pool-id")
+		cognitoSync_listDatasetsCmd.Flags().String("identity-id", "", "A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.")
+		cognitoSync_listDatasetsCmd.Flags().String("identity-pool-id", "", "A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.")
+		cognitoSync_listDatasetsCmd.Flags().String("max-results", "", "The maximum number of results to be returned.")
+		cognitoSync_listDatasetsCmd.Flags().String("next-token", "", "A pagination token for obtaining the next page of results.")
+		cognitoSync_listDatasetsCmd.MarkFlagRequired("identity-id")
+		cognitoSync_listDatasetsCmd.MarkFlagRequired("identity-pool-id")
+	})
 	cognitoSyncCmd.AddCommand(cognitoSync_listDatasetsCmd)
 }

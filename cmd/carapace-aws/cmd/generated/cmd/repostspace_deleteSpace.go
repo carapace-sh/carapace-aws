@@ -12,9 +12,11 @@ var repostspace_deleteSpaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_deleteSpaceCmd).Standalone()
+	carapace.Gen(repostspace_deleteSpaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_deleteSpaceCmd).Standalone()
 
-	repostspace_deleteSpaceCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
-	repostspace_deleteSpaceCmd.MarkFlagRequired("space-id")
+		repostspace_deleteSpaceCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
+		repostspace_deleteSpaceCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_deleteSpaceCmd)
 }

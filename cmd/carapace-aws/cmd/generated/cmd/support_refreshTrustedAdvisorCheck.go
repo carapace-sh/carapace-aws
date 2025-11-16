@@ -12,9 +12,11 @@ var support_refreshTrustedAdvisorCheckCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(support_refreshTrustedAdvisorCheckCmd).Standalone()
+	carapace.Gen(support_refreshTrustedAdvisorCheckCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(support_refreshTrustedAdvisorCheckCmd).Standalone()
 
-	support_refreshTrustedAdvisorCheckCmd.Flags().String("check-id", "", "The unique identifier for the Trusted Advisor check to refresh.")
-	support_refreshTrustedAdvisorCheckCmd.MarkFlagRequired("check-id")
+		support_refreshTrustedAdvisorCheckCmd.Flags().String("check-id", "", "The unique identifier for the Trusted Advisor check to refresh.")
+		support_refreshTrustedAdvisorCheckCmd.MarkFlagRequired("check-id")
+	})
 	supportCmd.AddCommand(support_refreshTrustedAdvisorCheckCmd)
 }

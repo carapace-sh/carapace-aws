@@ -12,9 +12,11 @@ var route53resolver_getResolverRuleAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_getResolverRuleAssociationCmd).Standalone()
+	carapace.Gen(route53resolver_getResolverRuleAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_getResolverRuleAssociationCmd).Standalone()
 
-	route53resolver_getResolverRuleAssociationCmd.Flags().String("resolver-rule-association-id", "", "The ID of the Resolver rule association that you want to get information about.")
-	route53resolver_getResolverRuleAssociationCmd.MarkFlagRequired("resolver-rule-association-id")
+		route53resolver_getResolverRuleAssociationCmd.Flags().String("resolver-rule-association-id", "", "The ID of the Resolver rule association that you want to get information about.")
+		route53resolver_getResolverRuleAssociationCmd.MarkFlagRequired("resolver-rule-association-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_getResolverRuleAssociationCmd)
 }

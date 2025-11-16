@@ -12,10 +12,12 @@ var elasticbeanstalk_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_deleteApplicationCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_deleteApplicationCmd).Standalone()
 
-	elasticbeanstalk_deleteApplicationCmd.Flags().String("application-name", "", "The name of the application to delete.")
-	elasticbeanstalk_deleteApplicationCmd.Flags().String("terminate-env-by-force", "", "When set to true, running environments will be terminated before deleting the application.")
-	elasticbeanstalk_deleteApplicationCmd.MarkFlagRequired("application-name")
+		elasticbeanstalk_deleteApplicationCmd.Flags().String("application-name", "", "The name of the application to delete.")
+		elasticbeanstalk_deleteApplicationCmd.Flags().String("terminate-env-by-force", "", "When set to true, running environments will be terminated before deleting the application.")
+		elasticbeanstalk_deleteApplicationCmd.MarkFlagRequired("application-name")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_deleteApplicationCmd)
 }

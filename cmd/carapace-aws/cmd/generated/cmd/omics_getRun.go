@@ -12,10 +12,12 @@ var omics_getRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getRunCmd).Standalone()
+	carapace.Gen(omics_getRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getRunCmd).Standalone()
 
-	omics_getRunCmd.Flags().String("export", "", "The run's export format.")
-	omics_getRunCmd.Flags().String("id", "", "The run's ID.")
-	omics_getRunCmd.MarkFlagRequired("id")
+		omics_getRunCmd.Flags().String("export", "", "The run's export format.")
+		omics_getRunCmd.Flags().String("id", "", "The run's ID.")
+		omics_getRunCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_getRunCmd)
 }

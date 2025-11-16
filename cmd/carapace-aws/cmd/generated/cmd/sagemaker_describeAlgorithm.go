@@ -12,9 +12,11 @@ var sagemaker_describeAlgorithmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeAlgorithmCmd).Standalone()
+	carapace.Gen(sagemaker_describeAlgorithmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeAlgorithmCmd).Standalone()
 
-	sagemaker_describeAlgorithmCmd.Flags().String("algorithm-name", "", "The name of the algorithm to describe.")
-	sagemaker_describeAlgorithmCmd.MarkFlagRequired("algorithm-name")
+		sagemaker_describeAlgorithmCmd.Flags().String("algorithm-name", "", "The name of the algorithm to describe.")
+		sagemaker_describeAlgorithmCmd.MarkFlagRequired("algorithm-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeAlgorithmCmd)
 }

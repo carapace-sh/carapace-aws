@@ -12,9 +12,11 @@ var arcZonalShift_cancelZonalShiftCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_cancelZonalShiftCmd).Standalone()
+	carapace.Gen(arcZonalShift_cancelZonalShiftCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_cancelZonalShiftCmd).Standalone()
 
-	arcZonalShift_cancelZonalShiftCmd.Flags().String("zonal-shift-id", "", "The internally-generated identifier of a zonal shift.")
-	arcZonalShift_cancelZonalShiftCmd.MarkFlagRequired("zonal-shift-id")
+		arcZonalShift_cancelZonalShiftCmd.Flags().String("zonal-shift-id", "", "The internally-generated identifier of a zonal shift.")
+		arcZonalShift_cancelZonalShiftCmd.MarkFlagRequired("zonal-shift-id")
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_cancelZonalShiftCmd)
 }

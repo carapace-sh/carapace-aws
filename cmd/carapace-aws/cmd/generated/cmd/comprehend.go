@@ -12,7 +12,9 @@ var comprehendCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendCmd).Standalone()
+	carapace.Gen(comprehendCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(comprehendCmd)
 }

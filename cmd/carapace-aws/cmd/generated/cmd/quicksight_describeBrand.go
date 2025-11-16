@@ -12,12 +12,14 @@ var quicksight_describeBrandCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeBrandCmd).Standalone()
+	carapace.Gen(quicksight_describeBrandCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeBrandCmd).Standalone()
 
-	quicksight_describeBrandCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that owns the brand.")
-	quicksight_describeBrandCmd.Flags().String("brand-id", "", "The ID of the Quick Suite brand.")
-	quicksight_describeBrandCmd.Flags().String("version-id", "", "The ID of the specific version.")
-	quicksight_describeBrandCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeBrandCmd.MarkFlagRequired("brand-id")
+		quicksight_describeBrandCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that owns the brand.")
+		quicksight_describeBrandCmd.Flags().String("brand-id", "", "The ID of the Quick Suite brand.")
+		quicksight_describeBrandCmd.Flags().String("version-id", "", "The ID of the specific version.")
+		quicksight_describeBrandCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeBrandCmd.MarkFlagRequired("brand-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeBrandCmd)
 }

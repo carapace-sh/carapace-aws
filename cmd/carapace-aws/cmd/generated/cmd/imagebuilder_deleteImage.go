@@ -12,9 +12,11 @@ var imagebuilder_deleteImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_deleteImageCmd).Standalone()
+	carapace.Gen(imagebuilder_deleteImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_deleteImageCmd).Standalone()
 
-	imagebuilder_deleteImageCmd.Flags().String("image-build-version-arn", "", "The Amazon Resource Name (ARN) of the Image Builder image resource to delete.")
-	imagebuilder_deleteImageCmd.MarkFlagRequired("image-build-version-arn")
+		imagebuilder_deleteImageCmd.Flags().String("image-build-version-arn", "", "The Amazon Resource Name (ARN) of the Image Builder image resource to delete.")
+		imagebuilder_deleteImageCmd.MarkFlagRequired("image-build-version-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_deleteImageCmd)
 }

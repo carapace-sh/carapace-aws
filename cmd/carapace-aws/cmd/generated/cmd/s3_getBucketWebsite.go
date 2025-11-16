@@ -12,10 +12,12 @@ var s3_getBucketWebsiteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketWebsiteCmd).Standalone()
+	carapace.Gen(s3_getBucketWebsiteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketWebsiteCmd).Standalone()
 
-	s3_getBucketWebsiteCmd.Flags().String("bucket", "", "The bucket name for which to get the website configuration.")
-	s3_getBucketWebsiteCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketWebsiteCmd.MarkFlagRequired("bucket")
+		s3_getBucketWebsiteCmd.Flags().String("bucket", "", "The bucket name for which to get the website configuration.")
+		s3_getBucketWebsiteCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketWebsiteCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getBucketWebsiteCmd)
 }

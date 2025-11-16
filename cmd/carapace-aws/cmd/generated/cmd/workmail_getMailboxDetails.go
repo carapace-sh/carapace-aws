@@ -12,11 +12,13 @@ var workmail_getMailboxDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_getMailboxDetailsCmd).Standalone()
+	carapace.Gen(workmail_getMailboxDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_getMailboxDetailsCmd).Standalone()
 
-	workmail_getMailboxDetailsCmd.Flags().String("organization-id", "", "The identifier for the organization that contains the user whose mailbox details are being requested.")
-	workmail_getMailboxDetailsCmd.Flags().String("user-id", "", "The identifier for the user whose mailbox details are being requested.")
-	workmail_getMailboxDetailsCmd.MarkFlagRequired("organization-id")
-	workmail_getMailboxDetailsCmd.MarkFlagRequired("user-id")
+		workmail_getMailboxDetailsCmd.Flags().String("organization-id", "", "The identifier for the organization that contains the user whose mailbox details are being requested.")
+		workmail_getMailboxDetailsCmd.Flags().String("user-id", "", "The identifier for the user whose mailbox details are being requested.")
+		workmail_getMailboxDetailsCmd.MarkFlagRequired("organization-id")
+		workmail_getMailboxDetailsCmd.MarkFlagRequired("user-id")
+	})
 	workmailCmd.AddCommand(workmail_getMailboxDetailsCmd)
 }

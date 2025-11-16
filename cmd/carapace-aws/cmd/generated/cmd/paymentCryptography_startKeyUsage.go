@@ -12,9 +12,11 @@ var paymentCryptography_startKeyUsageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_startKeyUsageCmd).Standalone()
+	carapace.Gen(paymentCryptography_startKeyUsageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_startKeyUsageCmd).Standalone()
 
-	paymentCryptography_startKeyUsageCmd.Flags().String("key-identifier", "", "The `KeyArn` of the key.")
-	paymentCryptography_startKeyUsageCmd.MarkFlagRequired("key-identifier")
+		paymentCryptography_startKeyUsageCmd.Flags().String("key-identifier", "", "The `KeyArn` of the key.")
+		paymentCryptography_startKeyUsageCmd.MarkFlagRequired("key-identifier")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_startKeyUsageCmd)
 }

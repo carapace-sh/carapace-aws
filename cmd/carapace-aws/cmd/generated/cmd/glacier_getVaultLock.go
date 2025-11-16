@@ -12,11 +12,13 @@ var glacier_getVaultLockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_getVaultLockCmd).Standalone()
+	carapace.Gen(glacier_getVaultLockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_getVaultLockCmd).Standalone()
 
-	glacier_getVaultLockCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
-	glacier_getVaultLockCmd.Flags().String("vault-name", "", "The name of the vault.")
-	glacier_getVaultLockCmd.MarkFlagRequired("account-id")
-	glacier_getVaultLockCmd.MarkFlagRequired("vault-name")
+		glacier_getVaultLockCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
+		glacier_getVaultLockCmd.Flags().String("vault-name", "", "The name of the vault.")
+		glacier_getVaultLockCmd.MarkFlagRequired("account-id")
+		glacier_getVaultLockCmd.MarkFlagRequired("vault-name")
+	})
 	glacierCmd.AddCommand(glacier_getVaultLockCmd)
 }

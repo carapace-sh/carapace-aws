@@ -12,14 +12,16 @@ var ec2_modifyVpcTenancyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_modifyVpcTenancyCmd).Standalone()
+	carapace.Gen(ec2_modifyVpcTenancyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_modifyVpcTenancyCmd).Standalone()
 
-	ec2_modifyVpcTenancyCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_modifyVpcTenancyCmd.Flags().String("instance-tenancy", "", "The instance tenancy attribute for the VPC.")
-	ec2_modifyVpcTenancyCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_modifyVpcTenancyCmd.Flags().String("vpc-id", "", "The ID of the VPC.")
-	ec2_modifyVpcTenancyCmd.MarkFlagRequired("instance-tenancy")
-	ec2_modifyVpcTenancyCmd.Flag("no-dry-run").Hidden = true
-	ec2_modifyVpcTenancyCmd.MarkFlagRequired("vpc-id")
+		ec2_modifyVpcTenancyCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_modifyVpcTenancyCmd.Flags().String("instance-tenancy", "", "The instance tenancy attribute for the VPC.")
+		ec2_modifyVpcTenancyCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_modifyVpcTenancyCmd.Flags().String("vpc-id", "", "The ID of the VPC.")
+		ec2_modifyVpcTenancyCmd.MarkFlagRequired("instance-tenancy")
+		ec2_modifyVpcTenancyCmd.Flag("no-dry-run").Hidden = true
+		ec2_modifyVpcTenancyCmd.MarkFlagRequired("vpc-id")
+	})
 	ec2Cmd.AddCommand(ec2_modifyVpcTenancyCmd)
 }

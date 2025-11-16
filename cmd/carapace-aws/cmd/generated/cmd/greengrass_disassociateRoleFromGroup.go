@@ -12,9 +12,11 @@ var greengrass_disassociateRoleFromGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_disassociateRoleFromGroupCmd).Standalone()
+	carapace.Gen(greengrass_disassociateRoleFromGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_disassociateRoleFromGroupCmd).Standalone()
 
-	greengrass_disassociateRoleFromGroupCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
-	greengrass_disassociateRoleFromGroupCmd.MarkFlagRequired("group-id")
+		greengrass_disassociateRoleFromGroupCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
+		greengrass_disassociateRoleFromGroupCmd.MarkFlagRequired("group-id")
+	})
 	greengrassCmd.AddCommand(greengrass_disassociateRoleFromGroupCmd)
 }

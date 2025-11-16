@@ -12,11 +12,13 @@ var paymentCryptography_getParametersForExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_getParametersForExportCmd).Standalone()
+	carapace.Gen(paymentCryptography_getParametersForExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_getParametersForExportCmd).Standalone()
 
-	paymentCryptography_getParametersForExportCmd.Flags().String("key-material-type", "", "The key block format type (for example, TR-34 or TR-31) to use during key material export.")
-	paymentCryptography_getParametersForExportCmd.Flags().String("signing-key-algorithm", "", "The signing key algorithm to generate a signing key certificate.")
-	paymentCryptography_getParametersForExportCmd.MarkFlagRequired("key-material-type")
-	paymentCryptography_getParametersForExportCmd.MarkFlagRequired("signing-key-algorithm")
+		paymentCryptography_getParametersForExportCmd.Flags().String("key-material-type", "", "The key block format type (for example, TR-34 or TR-31) to use during key material export.")
+		paymentCryptography_getParametersForExportCmd.Flags().String("signing-key-algorithm", "", "The signing key algorithm to generate a signing key certificate.")
+		paymentCryptography_getParametersForExportCmd.MarkFlagRequired("key-material-type")
+		paymentCryptography_getParametersForExportCmd.MarkFlagRequired("signing-key-algorithm")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_getParametersForExportCmd)
 }

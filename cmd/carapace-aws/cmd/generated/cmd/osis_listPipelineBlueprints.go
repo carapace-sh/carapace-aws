@@ -12,7 +12,9 @@ var osis_listPipelineBlueprintsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_listPipelineBlueprintsCmd).Standalone()
+	carapace.Gen(osis_listPipelineBlueprintsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_listPipelineBlueprintsCmd).Standalone()
 
+	})
 	osisCmd.AddCommand(osis_listPipelineBlueprintsCmd)
 }

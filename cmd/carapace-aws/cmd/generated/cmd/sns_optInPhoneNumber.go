@@ -12,9 +12,11 @@ var sns_optInPhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_optInPhoneNumberCmd).Standalone()
+	carapace.Gen(sns_optInPhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_optInPhoneNumberCmd).Standalone()
 
-	sns_optInPhoneNumberCmd.Flags().String("phone-number", "", "The phone number to opt in.")
-	sns_optInPhoneNumberCmd.MarkFlagRequired("phone-number")
+		sns_optInPhoneNumberCmd.Flags().String("phone-number", "", "The phone number to opt in.")
+		sns_optInPhoneNumberCmd.MarkFlagRequired("phone-number")
+	})
 	snsCmd.AddCommand(sns_optInPhoneNumberCmd)
 }

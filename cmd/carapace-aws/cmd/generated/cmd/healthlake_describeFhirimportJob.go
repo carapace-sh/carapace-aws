@@ -12,11 +12,13 @@ var healthlake_describeFhirimportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(healthlake_describeFhirimportJobCmd).Standalone()
+	carapace.Gen(healthlake_describeFhirimportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(healthlake_describeFhirimportJobCmd).Standalone()
 
-	healthlake_describeFhirimportJobCmd.Flags().String("datastore-id", "", "The data store identifier.")
-	healthlake_describeFhirimportJobCmd.Flags().String("job-id", "", "The import job identifier.")
-	healthlake_describeFhirimportJobCmd.MarkFlagRequired("datastore-id")
-	healthlake_describeFhirimportJobCmd.MarkFlagRequired("job-id")
+		healthlake_describeFhirimportJobCmd.Flags().String("datastore-id", "", "The data store identifier.")
+		healthlake_describeFhirimportJobCmd.Flags().String("job-id", "", "The import job identifier.")
+		healthlake_describeFhirimportJobCmd.MarkFlagRequired("datastore-id")
+		healthlake_describeFhirimportJobCmd.MarkFlagRequired("job-id")
+	})
 	healthlakeCmd.AddCommand(healthlake_describeFhirimportJobCmd)
 }

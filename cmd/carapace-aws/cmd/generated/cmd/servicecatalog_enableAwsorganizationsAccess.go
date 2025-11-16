@@ -12,7 +12,9 @@ var servicecatalog_enableAwsorganizationsAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_enableAwsorganizationsAccessCmd).Standalone()
+	carapace.Gen(servicecatalog_enableAwsorganizationsAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_enableAwsorganizationsAccessCmd).Standalone()
 
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_enableAwsorganizationsAccessCmd)
 }

@@ -12,9 +12,11 @@ var mediapackage_describeOriginEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackage_describeOriginEndpointCmd).Standalone()
+	carapace.Gen(mediapackage_describeOriginEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackage_describeOriginEndpointCmd).Standalone()
 
-	mediapackage_describeOriginEndpointCmd.Flags().String("id", "", "The ID of the OriginEndpoint.")
-	mediapackage_describeOriginEndpointCmd.MarkFlagRequired("id")
+		mediapackage_describeOriginEndpointCmd.Flags().String("id", "", "The ID of the OriginEndpoint.")
+		mediapackage_describeOriginEndpointCmd.MarkFlagRequired("id")
+	})
 	mediapackageCmd.AddCommand(mediapackage_describeOriginEndpointCmd)
 }

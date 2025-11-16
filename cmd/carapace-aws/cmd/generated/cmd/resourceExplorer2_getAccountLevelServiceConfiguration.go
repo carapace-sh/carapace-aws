@@ -12,7 +12,9 @@ var resourceExplorer2_getAccountLevelServiceConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_getAccountLevelServiceConfigurationCmd).Standalone()
+	carapace.Gen(resourceExplorer2_getAccountLevelServiceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_getAccountLevelServiceConfigurationCmd).Standalone()
 
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_getAccountLevelServiceConfigurationCmd)
 }

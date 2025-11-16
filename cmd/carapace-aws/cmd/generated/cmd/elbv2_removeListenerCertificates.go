@@ -12,11 +12,13 @@ var elbv2_removeListenerCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_removeListenerCertificatesCmd).Standalone()
+	carapace.Gen(elbv2_removeListenerCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_removeListenerCertificatesCmd).Standalone()
 
-	elbv2_removeListenerCertificatesCmd.Flags().String("certificates", "", "The certificate to remove.")
-	elbv2_removeListenerCertificatesCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
-	elbv2_removeListenerCertificatesCmd.MarkFlagRequired("certificates")
-	elbv2_removeListenerCertificatesCmd.MarkFlagRequired("listener-arn")
+		elbv2_removeListenerCertificatesCmd.Flags().String("certificates", "", "The certificate to remove.")
+		elbv2_removeListenerCertificatesCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
+		elbv2_removeListenerCertificatesCmd.MarkFlagRequired("certificates")
+		elbv2_removeListenerCertificatesCmd.MarkFlagRequired("listener-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_removeListenerCertificatesCmd)
 }

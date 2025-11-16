@@ -12,11 +12,13 @@ var eksAuth_assumeRoleForPodIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eksAuth_assumeRoleForPodIdentityCmd).Standalone()
+	carapace.Gen(eksAuth_assumeRoleForPodIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eksAuth_assumeRoleForPodIdentityCmd).Standalone()
 
-	eksAuth_assumeRoleForPodIdentityCmd.Flags().String("cluster-name", "", "The name of the cluster for the request.")
-	eksAuth_assumeRoleForPodIdentityCmd.Flags().String("token", "", "The token of the Kubernetes service account for the pod.")
-	eksAuth_assumeRoleForPodIdentityCmd.MarkFlagRequired("cluster-name")
-	eksAuth_assumeRoleForPodIdentityCmd.MarkFlagRequired("token")
+		eksAuth_assumeRoleForPodIdentityCmd.Flags().String("cluster-name", "", "The name of the cluster for the request.")
+		eksAuth_assumeRoleForPodIdentityCmd.Flags().String("token", "", "The token of the Kubernetes service account for the pod.")
+		eksAuth_assumeRoleForPodIdentityCmd.MarkFlagRequired("cluster-name")
+		eksAuth_assumeRoleForPodIdentityCmd.MarkFlagRequired("token")
+	})
 	eksAuthCmd.AddCommand(eksAuth_assumeRoleForPodIdentityCmd)
 }

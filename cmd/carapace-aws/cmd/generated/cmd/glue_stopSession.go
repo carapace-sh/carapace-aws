@@ -12,10 +12,12 @@ var glue_stopSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_stopSessionCmd).Standalone()
+	carapace.Gen(glue_stopSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_stopSessionCmd).Standalone()
 
-	glue_stopSessionCmd.Flags().String("id", "", "The ID of the session to be stopped.")
-	glue_stopSessionCmd.Flags().String("request-origin", "", "The origin of the request.")
-	glue_stopSessionCmd.MarkFlagRequired("id")
+		glue_stopSessionCmd.Flags().String("id", "", "The ID of the session to be stopped.")
+		glue_stopSessionCmd.Flags().String("request-origin", "", "The origin of the request.")
+		glue_stopSessionCmd.MarkFlagRequired("id")
+	})
 	glueCmd.AddCommand(glue_stopSessionCmd)
 }

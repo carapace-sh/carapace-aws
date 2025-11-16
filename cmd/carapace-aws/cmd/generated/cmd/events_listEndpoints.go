@@ -12,11 +12,13 @@ var events_listEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_listEndpointsCmd).Standalone()
+	carapace.Gen(events_listEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_listEndpointsCmd).Standalone()
 
-	events_listEndpointsCmd.Flags().String("home-region", "", "The primary Region of the endpoints associated with this account.")
-	events_listEndpointsCmd.Flags().String("max-results", "", "The maximum number of results returned by the call.")
-	events_listEndpointsCmd.Flags().String("name-prefix", "", "A value that will return a subset of the endpoints associated with this account.")
-	events_listEndpointsCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
+		events_listEndpointsCmd.Flags().String("home-region", "", "The primary Region of the endpoints associated with this account.")
+		events_listEndpointsCmd.Flags().String("max-results", "", "The maximum number of results returned by the call.")
+		events_listEndpointsCmd.Flags().String("name-prefix", "", "A value that will return a subset of the endpoints associated with this account.")
+		events_listEndpointsCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
+	})
 	eventsCmd.AddCommand(events_listEndpointsCmd)
 }

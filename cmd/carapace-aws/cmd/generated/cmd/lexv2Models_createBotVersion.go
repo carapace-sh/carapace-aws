@@ -12,12 +12,14 @@ var lexv2Models_createBotVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_createBotVersionCmd).Standalone()
+	carapace.Gen(lexv2Models_createBotVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_createBotVersionCmd).Standalone()
 
-	lexv2Models_createBotVersionCmd.Flags().String("bot-id", "", "The identifier of the bot to create the version for.")
-	lexv2Models_createBotVersionCmd.Flags().String("bot-version-locale-specification", "", "Specifies the locales that Amazon Lex adds to this version.")
-	lexv2Models_createBotVersionCmd.Flags().String("description", "", "A description of the version.")
-	lexv2Models_createBotVersionCmd.MarkFlagRequired("bot-id")
-	lexv2Models_createBotVersionCmd.MarkFlagRequired("bot-version-locale-specification")
+		lexv2Models_createBotVersionCmd.Flags().String("bot-id", "", "The identifier of the bot to create the version for.")
+		lexv2Models_createBotVersionCmd.Flags().String("bot-version-locale-specification", "", "Specifies the locales that Amazon Lex adds to this version.")
+		lexv2Models_createBotVersionCmd.Flags().String("description", "", "A description of the version.")
+		lexv2Models_createBotVersionCmd.MarkFlagRequired("bot-id")
+		lexv2Models_createBotVersionCmd.MarkFlagRequired("bot-version-locale-specification")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_createBotVersionCmd)
 }

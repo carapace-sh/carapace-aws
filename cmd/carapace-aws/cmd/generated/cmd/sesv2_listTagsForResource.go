@@ -12,9 +12,11 @@ var sesv2_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listTagsForResourceCmd).Standalone()
+	carapace.Gen(sesv2_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listTagsForResourceCmd).Standalone()
 
-	sesv2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.")
-	sesv2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		sesv2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.")
+		sesv2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	sesv2Cmd.AddCommand(sesv2_listTagsForResourceCmd)
 }

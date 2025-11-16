@@ -12,11 +12,13 @@ var medialive_deleteChannelPlacementGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteChannelPlacementGroupCmd).Standalone()
+	carapace.Gen(medialive_deleteChannelPlacementGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteChannelPlacementGroupCmd).Standalone()
 
-	medialive_deleteChannelPlacementGroupCmd.Flags().String("channel-placement-group-id", "", "The ID of the channel placement group.")
-	medialive_deleteChannelPlacementGroupCmd.Flags().String("cluster-id", "", "The ID of the cluster.")
-	medialive_deleteChannelPlacementGroupCmd.MarkFlagRequired("channel-placement-group-id")
-	medialive_deleteChannelPlacementGroupCmd.MarkFlagRequired("cluster-id")
+		medialive_deleteChannelPlacementGroupCmd.Flags().String("channel-placement-group-id", "", "The ID of the channel placement group.")
+		medialive_deleteChannelPlacementGroupCmd.Flags().String("cluster-id", "", "The ID of the cluster.")
+		medialive_deleteChannelPlacementGroupCmd.MarkFlagRequired("channel-placement-group-id")
+		medialive_deleteChannelPlacementGroupCmd.MarkFlagRequired("cluster-id")
+	})
 	medialiveCmd.AddCommand(medialive_deleteChannelPlacementGroupCmd)
 }

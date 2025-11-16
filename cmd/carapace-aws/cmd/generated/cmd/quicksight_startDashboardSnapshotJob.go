@@ -12,17 +12,19 @@ var quicksight_startDashboardSnapshotJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_startDashboardSnapshotJobCmd).Standalone()
+	carapace.Gen(quicksight_startDashboardSnapshotJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_startDashboardSnapshotJobCmd).Standalone()
 
-	quicksight_startDashboardSnapshotJobCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.")
-	quicksight_startDashboardSnapshotJobCmd.Flags().String("dashboard-id", "", "The ID of the dashboard that you want to start a snapshot job for.")
-	quicksight_startDashboardSnapshotJobCmd.Flags().String("snapshot-configuration", "", "A structure that describes the configuration of the dashboard snapshot.")
-	quicksight_startDashboardSnapshotJobCmd.Flags().String("snapshot-job-id", "", "An ID for the dashboard snapshot job.")
-	quicksight_startDashboardSnapshotJobCmd.Flags().String("user-configuration", "", "A structure that contains information about the anonymous users that the generated snapshot is for.")
-	quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("aws-account-id")
-	quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("dashboard-id")
-	quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("snapshot-configuration")
-	quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("snapshot-job-id")
-	quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("user-configuration")
+		quicksight_startDashboardSnapshotJobCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.")
+		quicksight_startDashboardSnapshotJobCmd.Flags().String("dashboard-id", "", "The ID of the dashboard that you want to start a snapshot job for.")
+		quicksight_startDashboardSnapshotJobCmd.Flags().String("snapshot-configuration", "", "A structure that describes the configuration of the dashboard snapshot.")
+		quicksight_startDashboardSnapshotJobCmd.Flags().String("snapshot-job-id", "", "An ID for the dashboard snapshot job.")
+		quicksight_startDashboardSnapshotJobCmd.Flags().String("user-configuration", "", "A structure that contains information about the anonymous users that the generated snapshot is for.")
+		quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("aws-account-id")
+		quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("dashboard-id")
+		quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("snapshot-configuration")
+		quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("snapshot-job-id")
+		quicksight_startDashboardSnapshotJobCmd.MarkFlagRequired("user-configuration")
+	})
 	quicksightCmd.AddCommand(quicksight_startDashboardSnapshotJobCmd)
 }

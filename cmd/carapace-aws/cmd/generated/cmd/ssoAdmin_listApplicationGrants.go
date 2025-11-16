@@ -12,10 +12,12 @@ var ssoAdmin_listApplicationGrantsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_listApplicationGrantsCmd).Standalone()
+	carapace.Gen(ssoAdmin_listApplicationGrantsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_listApplicationGrantsCmd).Standalone()
 
-	ssoAdmin_listApplicationGrantsCmd.Flags().String("application-arn", "", "Specifies the ARN of the application whose grants you want to list.")
-	ssoAdmin_listApplicationGrantsCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
-	ssoAdmin_listApplicationGrantsCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_listApplicationGrantsCmd.Flags().String("application-arn", "", "Specifies the ARN of the application whose grants you want to list.")
+		ssoAdmin_listApplicationGrantsCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		ssoAdmin_listApplicationGrantsCmd.MarkFlagRequired("application-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_listApplicationGrantsCmd)
 }

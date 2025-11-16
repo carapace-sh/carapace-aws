@@ -12,11 +12,13 @@ var quicksight_describeTopicPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeTopicPermissionsCmd).Standalone()
+	carapace.Gen(quicksight_describeTopicPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeTopicPermissionsCmd).Standalone()
 
-	quicksight_describeTopicPermissionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the topic that you want described.")
-	quicksight_describeTopicPermissionsCmd.Flags().String("topic-id", "", "The ID of the topic that you want to describe.")
-	quicksight_describeTopicPermissionsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeTopicPermissionsCmd.MarkFlagRequired("topic-id")
+		quicksight_describeTopicPermissionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the topic that you want described.")
+		quicksight_describeTopicPermissionsCmd.Flags().String("topic-id", "", "The ID of the topic that you want to describe.")
+		quicksight_describeTopicPermissionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeTopicPermissionsCmd.MarkFlagRequired("topic-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeTopicPermissionsCmd)
 }

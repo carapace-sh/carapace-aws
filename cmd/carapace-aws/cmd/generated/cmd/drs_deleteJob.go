@@ -12,9 +12,11 @@ var drs_deleteJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_deleteJobCmd).Standalone()
+	carapace.Gen(drs_deleteJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_deleteJobCmd).Standalone()
 
-	drs_deleteJobCmd.Flags().String("job-id", "", "The ID of the Job to be deleted.")
-	drs_deleteJobCmd.MarkFlagRequired("job-id")
+		drs_deleteJobCmd.Flags().String("job-id", "", "The ID of the Job to be deleted.")
+		drs_deleteJobCmd.MarkFlagRequired("job-id")
+	})
 	drsCmd.AddCommand(drs_deleteJobCmd)
 }

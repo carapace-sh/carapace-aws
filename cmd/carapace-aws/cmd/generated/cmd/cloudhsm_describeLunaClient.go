@@ -12,9 +12,11 @@ var cloudhsm_describeLunaClientCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_describeLunaClientCmd).Standalone()
+	carapace.Gen(cloudhsm_describeLunaClientCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_describeLunaClientCmd).Standalone()
 
-	cloudhsm_describeLunaClientCmd.Flags().String("certificate-fingerprint", "", "The certificate fingerprint.")
-	cloudhsm_describeLunaClientCmd.Flags().String("client-arn", "", "The ARN of the client.")
+		cloudhsm_describeLunaClientCmd.Flags().String("certificate-fingerprint", "", "The certificate fingerprint.")
+		cloudhsm_describeLunaClientCmd.Flags().String("client-arn", "", "The ARN of the client.")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_describeLunaClientCmd)
 }

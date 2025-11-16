@@ -12,9 +12,11 @@ var dataexchange_startJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_startJobCmd).Standalone()
+	carapace.Gen(dataexchange_startJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_startJobCmd).Standalone()
 
-	dataexchange_startJobCmd.Flags().String("job-id", "", "The unique identifier for a job.")
-	dataexchange_startJobCmd.MarkFlagRequired("job-id")
+		dataexchange_startJobCmd.Flags().String("job-id", "", "The unique identifier for a job.")
+		dataexchange_startJobCmd.MarkFlagRequired("job-id")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_startJobCmd)
 }

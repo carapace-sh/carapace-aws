@@ -12,7 +12,9 @@ var migrationhuborchestratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestratorCmd).Standalone()
+	carapace.Gen(migrationhuborchestratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestratorCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(migrationhuborchestratorCmd)
 }

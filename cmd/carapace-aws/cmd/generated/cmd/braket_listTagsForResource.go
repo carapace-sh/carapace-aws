@@ -12,9 +12,11 @@ var braket_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(braket_listTagsForResourceCmd).Standalone()
+	carapace.Gen(braket_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(braket_listTagsForResourceCmd).Standalone()
 
-	braket_listTagsForResourceCmd.Flags().String("resource-arn", "", "Specify the `resourceArn` for the resource whose tags to display.")
-	braket_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		braket_listTagsForResourceCmd.Flags().String("resource-arn", "", "Specify the `resourceArn` for the resource whose tags to display.")
+		braket_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	braketCmd.AddCommand(braket_listTagsForResourceCmd)
 }

@@ -12,11 +12,13 @@ var qconnect_getMessageTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_getMessageTemplateCmd).Standalone()
+	carapace.Gen(qconnect_getMessageTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_getMessageTemplateCmd).Standalone()
 
-	qconnect_getMessageTemplateCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_getMessageTemplateCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
-	qconnect_getMessageTemplateCmd.MarkFlagRequired("knowledge-base-id")
-	qconnect_getMessageTemplateCmd.MarkFlagRequired("message-template-id")
+		qconnect_getMessageTemplateCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_getMessageTemplateCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
+		qconnect_getMessageTemplateCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_getMessageTemplateCmd.MarkFlagRequired("message-template-id")
+	})
 	qconnectCmd.AddCommand(qconnect_getMessageTemplateCmd)
 }

@@ -12,10 +12,12 @@ var ssmContacts_listRotationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_listRotationsCmd).Standalone()
+	carapace.Gen(ssmContacts_listRotationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_listRotationsCmd).Standalone()
 
-	ssmContacts_listRotationsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssmContacts_listRotationsCmd.Flags().String("next-token", "", "A token to start the list.")
-	ssmContacts_listRotationsCmd.Flags().String("rotation-name-prefix", "", "A filter to include rotations in list results based on their common prefix.")
+		ssmContacts_listRotationsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssmContacts_listRotationsCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssmContacts_listRotationsCmd.Flags().String("rotation-name-prefix", "", "A filter to include rotations in list results based on their common prefix.")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_listRotationsCmd)
 }

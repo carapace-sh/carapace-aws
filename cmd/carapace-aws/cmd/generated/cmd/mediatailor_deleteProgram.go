@@ -12,11 +12,13 @@ var mediatailor_deleteProgramCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_deleteProgramCmd).Standalone()
+	carapace.Gen(mediatailor_deleteProgramCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_deleteProgramCmd).Standalone()
 
-	mediatailor_deleteProgramCmd.Flags().String("channel-name", "", "The name of the channel.")
-	mediatailor_deleteProgramCmd.Flags().String("program-name", "", "The name of the program.")
-	mediatailor_deleteProgramCmd.MarkFlagRequired("channel-name")
-	mediatailor_deleteProgramCmd.MarkFlagRequired("program-name")
+		mediatailor_deleteProgramCmd.Flags().String("channel-name", "", "The name of the channel.")
+		mediatailor_deleteProgramCmd.Flags().String("program-name", "", "The name of the program.")
+		mediatailor_deleteProgramCmd.MarkFlagRequired("channel-name")
+		mediatailor_deleteProgramCmd.MarkFlagRequired("program-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_deleteProgramCmd)
 }

@@ -12,9 +12,11 @@ var chimeSdkMessaging_describeChannelFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_describeChannelFlowCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_describeChannelFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_describeChannelFlowCmd).Standalone()
 
-	chimeSdkMessaging_describeChannelFlowCmd.Flags().String("channel-flow-arn", "", "The ARN of the channel flow.")
-	chimeSdkMessaging_describeChannelFlowCmd.MarkFlagRequired("channel-flow-arn")
+		chimeSdkMessaging_describeChannelFlowCmd.Flags().String("channel-flow-arn", "", "The ARN of the channel flow.")
+		chimeSdkMessaging_describeChannelFlowCmd.MarkFlagRequired("channel-flow-arn")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_describeChannelFlowCmd)
 }

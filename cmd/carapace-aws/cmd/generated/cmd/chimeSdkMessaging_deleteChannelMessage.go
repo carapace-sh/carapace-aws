@@ -12,14 +12,16 @@ var chimeSdkMessaging_deleteChannelMessageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_deleteChannelMessageCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_deleteChannelMessageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_deleteChannelMessageCmd).Standalone()
 
-	chimeSdkMessaging_deleteChannelMessageCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
-	chimeSdkMessaging_deleteChannelMessageCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_deleteChannelMessageCmd.Flags().String("message-id", "", "The ID of the message being deleted.")
-	chimeSdkMessaging_deleteChannelMessageCmd.Flags().String("sub-channel-id", "", "The ID of the SubChannel in the request.")
-	chimeSdkMessaging_deleteChannelMessageCmd.MarkFlagRequired("channel-arn")
-	chimeSdkMessaging_deleteChannelMessageCmd.MarkFlagRequired("chime-bearer")
-	chimeSdkMessaging_deleteChannelMessageCmd.MarkFlagRequired("message-id")
+		chimeSdkMessaging_deleteChannelMessageCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
+		chimeSdkMessaging_deleteChannelMessageCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_deleteChannelMessageCmd.Flags().String("message-id", "", "The ID of the message being deleted.")
+		chimeSdkMessaging_deleteChannelMessageCmd.Flags().String("sub-channel-id", "", "The ID of the SubChannel in the request.")
+		chimeSdkMessaging_deleteChannelMessageCmd.MarkFlagRequired("channel-arn")
+		chimeSdkMessaging_deleteChannelMessageCmd.MarkFlagRequired("chime-bearer")
+		chimeSdkMessaging_deleteChannelMessageCmd.MarkFlagRequired("message-id")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_deleteChannelMessageCmd)
 }

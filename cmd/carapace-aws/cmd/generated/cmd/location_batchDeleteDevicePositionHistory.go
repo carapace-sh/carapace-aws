@@ -12,11 +12,13 @@ var location_batchDeleteDevicePositionHistoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_batchDeleteDevicePositionHistoryCmd).Standalone()
+	carapace.Gen(location_batchDeleteDevicePositionHistoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_batchDeleteDevicePositionHistoryCmd).Standalone()
 
-	location_batchDeleteDevicePositionHistoryCmd.Flags().String("device-ids", "", "Devices whose position history you want to delete.")
-	location_batchDeleteDevicePositionHistoryCmd.Flags().String("tracker-name", "", "The name of the tracker resource to delete the device position history from.")
-	location_batchDeleteDevicePositionHistoryCmd.MarkFlagRequired("device-ids")
-	location_batchDeleteDevicePositionHistoryCmd.MarkFlagRequired("tracker-name")
+		location_batchDeleteDevicePositionHistoryCmd.Flags().String("device-ids", "", "Devices whose position history you want to delete.")
+		location_batchDeleteDevicePositionHistoryCmd.Flags().String("tracker-name", "", "The name of the tracker resource to delete the device position history from.")
+		location_batchDeleteDevicePositionHistoryCmd.MarkFlagRequired("device-ids")
+		location_batchDeleteDevicePositionHistoryCmd.MarkFlagRequired("tracker-name")
+	})
 	locationCmd.AddCommand(location_batchDeleteDevicePositionHistoryCmd)
 }

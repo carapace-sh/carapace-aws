@@ -12,11 +12,13 @@ var pinpoint_createPushTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_createPushTemplateCmd).Standalone()
+	carapace.Gen(pinpoint_createPushTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_createPushTemplateCmd).Standalone()
 
-	pinpoint_createPushTemplateCmd.Flags().String("push-notification-template-request", "", "")
-	pinpoint_createPushTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_createPushTemplateCmd.MarkFlagRequired("push-notification-template-request")
-	pinpoint_createPushTemplateCmd.MarkFlagRequired("template-name")
+		pinpoint_createPushTemplateCmd.Flags().String("push-notification-template-request", "", "")
+		pinpoint_createPushTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_createPushTemplateCmd.MarkFlagRequired("push-notification-template-request")
+		pinpoint_createPushTemplateCmd.MarkFlagRequired("template-name")
+	})
 	pinpointCmd.AddCommand(pinpoint_createPushTemplateCmd)
 }

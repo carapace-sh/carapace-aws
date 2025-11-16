@@ -12,9 +12,11 @@ var storagegateway_updateGatewaySoftwareNowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_updateGatewaySoftwareNowCmd).Standalone()
+	carapace.Gen(storagegateway_updateGatewaySoftwareNowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_updateGatewaySoftwareNowCmd).Standalone()
 
-	storagegateway_updateGatewaySoftwareNowCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_updateGatewaySoftwareNowCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_updateGatewaySoftwareNowCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_updateGatewaySoftwareNowCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_updateGatewaySoftwareNowCmd)
 }

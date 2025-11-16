@@ -12,11 +12,13 @@ var dms_cancelMetadataModelConversionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_cancelMetadataModelConversionCmd).Standalone()
+	carapace.Gen(dms_cancelMetadataModelConversionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_cancelMetadataModelConversionCmd).Standalone()
 
-	dms_cancelMetadataModelConversionCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
-	dms_cancelMetadataModelConversionCmd.Flags().String("request-identifier", "", "The identifier for the metadata model conversion operation to cancel.")
-	dms_cancelMetadataModelConversionCmd.MarkFlagRequired("migration-project-identifier")
-	dms_cancelMetadataModelConversionCmd.MarkFlagRequired("request-identifier")
+		dms_cancelMetadataModelConversionCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
+		dms_cancelMetadataModelConversionCmd.Flags().String("request-identifier", "", "The identifier for the metadata model conversion operation to cancel.")
+		dms_cancelMetadataModelConversionCmd.MarkFlagRequired("migration-project-identifier")
+		dms_cancelMetadataModelConversionCmd.MarkFlagRequired("request-identifier")
+	})
 	dmsCmd.AddCommand(dms_cancelMetadataModelConversionCmd)
 }

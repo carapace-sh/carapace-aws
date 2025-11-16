@@ -12,7 +12,9 @@ var iot_getIndexingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getIndexingConfigurationCmd).Standalone()
+	carapace.Gen(iot_getIndexingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getIndexingConfigurationCmd).Standalone()
 
+	})
 	iotCmd.AddCommand(iot_getIndexingConfigurationCmd)
 }

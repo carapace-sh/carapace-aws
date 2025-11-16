@@ -12,9 +12,11 @@ var mediapackagev2_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackagev2_listTagsForResourceCmd).Standalone()
+	carapace.Gen(mediapackagev2_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackagev2_listTagsForResourceCmd).Standalone()
 
-	mediapackagev2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch resource that you want to view tags for.")
-	mediapackagev2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		mediapackagev2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch resource that you want to view tags for.")
+		mediapackagev2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	mediapackagev2Cmd.AddCommand(mediapackagev2_listTagsForResourceCmd)
 }

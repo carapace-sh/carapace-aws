@@ -12,7 +12,9 @@ var freetier_getAccountPlanStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(freetier_getAccountPlanStateCmd).Standalone()
+	carapace.Gen(freetier_getAccountPlanStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(freetier_getAccountPlanStateCmd).Standalone()
 
+	})
 	freetierCmd.AddCommand(freetier_getAccountPlanStateCmd)
 }

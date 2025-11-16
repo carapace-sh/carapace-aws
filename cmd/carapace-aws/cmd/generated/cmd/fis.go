@@ -12,7 +12,9 @@ var fisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fisCmd).Standalone()
+	carapace.Gen(fisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fisCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(fisCmd)
 }

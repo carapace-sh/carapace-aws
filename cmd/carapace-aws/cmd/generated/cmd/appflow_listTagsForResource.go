@@ -12,9 +12,11 @@ var appflow_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appflow_listTagsForResourceCmd).Standalone()
+	carapace.Gen(appflow_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appflow_listTagsForResourceCmd).Standalone()
 
-	appflow_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the specified flow.")
-	appflow_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		appflow_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the specified flow.")
+		appflow_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	appflowCmd.AddCommand(appflow_listTagsForResourceCmd)
 }

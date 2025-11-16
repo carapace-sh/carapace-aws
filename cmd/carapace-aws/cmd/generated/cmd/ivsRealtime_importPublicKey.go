@@ -12,11 +12,13 @@ var ivsRealtime_importPublicKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_importPublicKeyCmd).Standalone()
+	carapace.Gen(ivsRealtime_importPublicKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_importPublicKeyCmd).Standalone()
 
-	ivsRealtime_importPublicKeyCmd.Flags().String("name", "", "Name of the public key to be imported.")
-	ivsRealtime_importPublicKeyCmd.Flags().String("public-key-material", "", "The content of the public key to be imported.")
-	ivsRealtime_importPublicKeyCmd.Flags().String("tags", "", "Tags attached to the resource.")
-	ivsRealtime_importPublicKeyCmd.MarkFlagRequired("public-key-material")
+		ivsRealtime_importPublicKeyCmd.Flags().String("name", "", "Name of the public key to be imported.")
+		ivsRealtime_importPublicKeyCmd.Flags().String("public-key-material", "", "The content of the public key to be imported.")
+		ivsRealtime_importPublicKeyCmd.Flags().String("tags", "", "Tags attached to the resource.")
+		ivsRealtime_importPublicKeyCmd.MarkFlagRequired("public-key-material")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_importPublicKeyCmd)
 }

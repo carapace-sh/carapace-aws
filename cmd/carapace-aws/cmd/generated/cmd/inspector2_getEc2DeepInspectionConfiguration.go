@@ -12,7 +12,9 @@ var inspector2_getEc2DeepInspectionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_getEc2DeepInspectionConfigurationCmd).Standalone()
+	carapace.Gen(inspector2_getEc2DeepInspectionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_getEc2DeepInspectionConfigurationCmd).Standalone()
 
+	})
 	inspector2Cmd.AddCommand(inspector2_getEc2DeepInspectionConfigurationCmd)
 }

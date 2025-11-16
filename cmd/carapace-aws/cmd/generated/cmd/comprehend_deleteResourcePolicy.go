@@ -12,10 +12,12 @@ var comprehend_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(comprehend_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_deleteResourcePolicyCmd).Standalone()
 
-	comprehend_deleteResourcePolicyCmd.Flags().String("policy-revision-id", "", "The revision ID of the policy to delete.")
-	comprehend_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the custom model version that has the policy to delete.")
-	comprehend_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		comprehend_deleteResourcePolicyCmd.Flags().String("policy-revision-id", "", "The revision ID of the policy to delete.")
+		comprehend_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the custom model version that has the policy to delete.")
+		comprehend_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_deleteResourcePolicyCmd)
 }

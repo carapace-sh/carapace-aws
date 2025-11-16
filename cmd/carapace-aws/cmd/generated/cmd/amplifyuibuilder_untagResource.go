@@ -12,11 +12,13 @@ var amplifyuibuilder_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_untagResourceCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_untagResourceCmd).Standalone()
 
-	amplifyuibuilder_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) to use to untag a resource.")
-	amplifyuibuilder_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to use to untag a resource.")
-	amplifyuibuilder_untagResourceCmd.MarkFlagRequired("resource-arn")
-	amplifyuibuilder_untagResourceCmd.MarkFlagRequired("tag-keys")
+		amplifyuibuilder_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) to use to untag a resource.")
+		amplifyuibuilder_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to use to untag a resource.")
+		amplifyuibuilder_untagResourceCmd.MarkFlagRequired("resource-arn")
+		amplifyuibuilder_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_untagResourceCmd)
 }

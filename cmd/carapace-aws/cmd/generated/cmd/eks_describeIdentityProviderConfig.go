@@ -12,11 +12,13 @@ var eks_describeIdentityProviderConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_describeIdentityProviderConfigCmd).Standalone()
+	carapace.Gen(eks_describeIdentityProviderConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_describeIdentityProviderConfigCmd).Standalone()
 
-	eks_describeIdentityProviderConfigCmd.Flags().String("cluster-name", "", "The name of your cluster.")
-	eks_describeIdentityProviderConfigCmd.Flags().String("identity-provider-config", "", "An object representing an identity provider configuration.")
-	eks_describeIdentityProviderConfigCmd.MarkFlagRequired("cluster-name")
-	eks_describeIdentityProviderConfigCmd.MarkFlagRequired("identity-provider-config")
+		eks_describeIdentityProviderConfigCmd.Flags().String("cluster-name", "", "The name of your cluster.")
+		eks_describeIdentityProviderConfigCmd.Flags().String("identity-provider-config", "", "An object representing an identity provider configuration.")
+		eks_describeIdentityProviderConfigCmd.MarkFlagRequired("cluster-name")
+		eks_describeIdentityProviderConfigCmd.MarkFlagRequired("identity-provider-config")
+	})
 	eksCmd.AddCommand(eks_describeIdentityProviderConfigCmd)
 }

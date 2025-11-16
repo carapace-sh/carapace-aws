@@ -12,9 +12,11 @@ var chimeSdkMediaPipelines_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_listTagsForResourceCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_listTagsForResourceCmd).Standalone()
 
-	chimeSdkMediaPipelines_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the media pipeline associated with any tags.")
-	chimeSdkMediaPipelines_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		chimeSdkMediaPipelines_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the media pipeline associated with any tags.")
+		chimeSdkMediaPipelines_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_listTagsForResourceCmd)
 }

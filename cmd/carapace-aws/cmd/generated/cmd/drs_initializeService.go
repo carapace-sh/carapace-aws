@@ -12,7 +12,9 @@ var drs_initializeServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_initializeServiceCmd).Standalone()
+	carapace.Gen(drs_initializeServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_initializeServiceCmd).Standalone()
 
+	})
 	drsCmd.AddCommand(drs_initializeServiceCmd)
 }

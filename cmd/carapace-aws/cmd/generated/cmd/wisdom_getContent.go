@@ -12,11 +12,13 @@ var wisdom_getContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_getContentCmd).Standalone()
+	carapace.Gen(wisdom_getContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_getContentCmd).Standalone()
 
-	wisdom_getContentCmd.Flags().String("content-id", "", "The identifier of the content.")
-	wisdom_getContentCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	wisdom_getContentCmd.MarkFlagRequired("content-id")
-	wisdom_getContentCmd.MarkFlagRequired("knowledge-base-id")
+		wisdom_getContentCmd.Flags().String("content-id", "", "The identifier of the content.")
+		wisdom_getContentCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		wisdom_getContentCmd.MarkFlagRequired("content-id")
+		wisdom_getContentCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	wisdomCmd.AddCommand(wisdom_getContentCmd)
 }

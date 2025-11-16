@@ -12,9 +12,11 @@ var servicecatalog_deleteTagOptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_deleteTagOptionCmd).Standalone()
+	carapace.Gen(servicecatalog_deleteTagOptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_deleteTagOptionCmd).Standalone()
 
-	servicecatalog_deleteTagOptionCmd.Flags().String("id", "", "The TagOption identifier.")
-	servicecatalog_deleteTagOptionCmd.MarkFlagRequired("id")
+		servicecatalog_deleteTagOptionCmd.Flags().String("id", "", "The TagOption identifier.")
+		servicecatalog_deleteTagOptionCmd.MarkFlagRequired("id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_deleteTagOptionCmd)
 }

@@ -12,11 +12,13 @@ var apigateway_getStageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getStageCmd).Standalone()
+	carapace.Gen(apigateway_getStageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getStageCmd).Standalone()
 
-	apigateway_getStageCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getStageCmd.Flags().String("stage-name", "", "The name of the Stage resource to get information about.")
-	apigateway_getStageCmd.MarkFlagRequired("rest-api-id")
-	apigateway_getStageCmd.MarkFlagRequired("stage-name")
+		apigateway_getStageCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getStageCmd.Flags().String("stage-name", "", "The name of the Stage resource to get information about.")
+		apigateway_getStageCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getStageCmd.MarkFlagRequired("stage-name")
+	})
 	apigatewayCmd.AddCommand(apigateway_getStageCmd)
 }

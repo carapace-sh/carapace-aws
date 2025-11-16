@@ -12,9 +12,11 @@ var sso_logoutCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sso_logoutCmd).Standalone()
+	carapace.Gen(sso_logoutCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sso_logoutCmd).Standalone()
 
-	sso_logoutCmd.Flags().String("access-token", "", "The token issued by the `CreateToken` API call.")
-	sso_logoutCmd.MarkFlagRequired("access-token")
+		sso_logoutCmd.Flags().String("access-token", "", "The token issued by the `CreateToken` API call.")
+		sso_logoutCmd.MarkFlagRequired("access-token")
+	})
 	ssoCmd.AddCommand(sso_logoutCmd)
 }

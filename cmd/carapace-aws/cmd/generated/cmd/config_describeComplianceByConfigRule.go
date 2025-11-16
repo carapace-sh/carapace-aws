@@ -12,10 +12,12 @@ var config_describeComplianceByConfigRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_describeComplianceByConfigRuleCmd).Standalone()
+	carapace.Gen(config_describeComplianceByConfigRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_describeComplianceByConfigRuleCmd).Standalone()
 
-	config_describeComplianceByConfigRuleCmd.Flags().String("compliance-types", "", "Filters the results by compliance.")
-	config_describeComplianceByConfigRuleCmd.Flags().String("config-rule-names", "", "Specify one or more Config rule names to filter the results by rule.")
-	config_describeComplianceByConfigRuleCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+		config_describeComplianceByConfigRuleCmd.Flags().String("compliance-types", "", "Filters the results by compliance.")
+		config_describeComplianceByConfigRuleCmd.Flags().String("config-rule-names", "", "Specify one or more Config rule names to filter the results by rule.")
+		config_describeComplianceByConfigRuleCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+	})
 	configCmd.AddCommand(config_describeComplianceByConfigRuleCmd)
 }

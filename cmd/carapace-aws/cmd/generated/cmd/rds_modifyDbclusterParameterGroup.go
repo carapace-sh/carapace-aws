@@ -12,11 +12,13 @@ var rds_modifyDbclusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_modifyDbclusterParameterGroupCmd).Standalone()
+	carapace.Gen(rds_modifyDbclusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_modifyDbclusterParameterGroupCmd).Standalone()
 
-	rds_modifyDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the DB cluster parameter group to modify.")
-	rds_modifyDbclusterParameterGroupCmd.Flags().String("parameters", "", "A list of parameters in the DB cluster parameter group to modify.")
-	rds_modifyDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
-	rds_modifyDbclusterParameterGroupCmd.MarkFlagRequired("parameters")
+		rds_modifyDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the DB cluster parameter group to modify.")
+		rds_modifyDbclusterParameterGroupCmd.Flags().String("parameters", "", "A list of parameters in the DB cluster parameter group to modify.")
+		rds_modifyDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
+		rds_modifyDbclusterParameterGroupCmd.MarkFlagRequired("parameters")
+	})
 	rdsCmd.AddCommand(rds_modifyDbclusterParameterGroupCmd)
 }

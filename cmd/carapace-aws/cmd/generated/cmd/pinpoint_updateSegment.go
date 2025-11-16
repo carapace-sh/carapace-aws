@@ -12,13 +12,15 @@ var pinpoint_updateSegmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateSegmentCmd).Standalone()
+	carapace.Gen(pinpoint_updateSegmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateSegmentCmd).Standalone()
 
-	pinpoint_updateSegmentCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_updateSegmentCmd.Flags().String("segment-id", "", "The unique identifier for the segment.")
-	pinpoint_updateSegmentCmd.Flags().String("write-segment-request", "", "")
-	pinpoint_updateSegmentCmd.MarkFlagRequired("application-id")
-	pinpoint_updateSegmentCmd.MarkFlagRequired("segment-id")
-	pinpoint_updateSegmentCmd.MarkFlagRequired("write-segment-request")
+		pinpoint_updateSegmentCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_updateSegmentCmd.Flags().String("segment-id", "", "The unique identifier for the segment.")
+		pinpoint_updateSegmentCmd.Flags().String("write-segment-request", "", "")
+		pinpoint_updateSegmentCmd.MarkFlagRequired("application-id")
+		pinpoint_updateSegmentCmd.MarkFlagRequired("segment-id")
+		pinpoint_updateSegmentCmd.MarkFlagRequired("write-segment-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateSegmentCmd)
 }

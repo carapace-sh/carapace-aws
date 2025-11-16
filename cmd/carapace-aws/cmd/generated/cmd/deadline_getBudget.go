@@ -12,11 +12,13 @@ var deadline_getBudgetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_getBudgetCmd).Standalone()
+	carapace.Gen(deadline_getBudgetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_getBudgetCmd).Standalone()
 
-	deadline_getBudgetCmd.Flags().String("budget-id", "", "The budget ID.")
-	deadline_getBudgetCmd.Flags().String("farm-id", "", "The farm ID of the farm connected to the budget.")
-	deadline_getBudgetCmd.MarkFlagRequired("budget-id")
-	deadline_getBudgetCmd.MarkFlagRequired("farm-id")
+		deadline_getBudgetCmd.Flags().String("budget-id", "", "The budget ID.")
+		deadline_getBudgetCmd.Flags().String("farm-id", "", "The farm ID of the farm connected to the budget.")
+		deadline_getBudgetCmd.MarkFlagRequired("budget-id")
+		deadline_getBudgetCmd.MarkFlagRequired("farm-id")
+	})
 	deadlineCmd.AddCommand(deadline_getBudgetCmd)
 }

@@ -12,9 +12,11 @@ var route53_getHostedZoneCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getHostedZoneCmd).Standalone()
+	carapace.Gen(route53_getHostedZoneCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getHostedZoneCmd).Standalone()
 
-	route53_getHostedZoneCmd.Flags().String("id", "", "The ID of the hosted zone that you want to get information about.")
-	route53_getHostedZoneCmd.MarkFlagRequired("id")
+		route53_getHostedZoneCmd.Flags().String("id", "", "The ID of the hosted zone that you want to get information about.")
+		route53_getHostedZoneCmd.MarkFlagRequired("id")
+	})
 	route53Cmd.AddCommand(route53_getHostedZoneCmd)
 }

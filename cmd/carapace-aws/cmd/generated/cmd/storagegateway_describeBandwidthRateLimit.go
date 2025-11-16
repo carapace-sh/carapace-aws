@@ -12,9 +12,11 @@ var storagegateway_describeBandwidthRateLimitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeBandwidthRateLimitCmd).Standalone()
+	carapace.Gen(storagegateway_describeBandwidthRateLimitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeBandwidthRateLimitCmd).Standalone()
 
-	storagegateway_describeBandwidthRateLimitCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_describeBandwidthRateLimitCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_describeBandwidthRateLimitCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_describeBandwidthRateLimitCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeBandwidthRateLimitCmd)
 }

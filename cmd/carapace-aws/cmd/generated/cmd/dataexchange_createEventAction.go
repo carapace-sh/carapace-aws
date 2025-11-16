@@ -12,12 +12,14 @@ var dataexchange_createEventActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_createEventActionCmd).Standalone()
+	carapace.Gen(dataexchange_createEventActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_createEventActionCmd).Standalone()
 
-	dataexchange_createEventActionCmd.Flags().String("action", "", "What occurs after a certain event.")
-	dataexchange_createEventActionCmd.Flags().String("event", "", "What occurs to start an action.")
-	dataexchange_createEventActionCmd.Flags().String("tags", "", "Key-value pairs that you can associate with the event action.")
-	dataexchange_createEventActionCmd.MarkFlagRequired("action")
-	dataexchange_createEventActionCmd.MarkFlagRequired("event")
+		dataexchange_createEventActionCmd.Flags().String("action", "", "What occurs after a certain event.")
+		dataexchange_createEventActionCmd.Flags().String("event", "", "What occurs to start an action.")
+		dataexchange_createEventActionCmd.Flags().String("tags", "", "Key-value pairs that you can associate with the event action.")
+		dataexchange_createEventActionCmd.MarkFlagRequired("action")
+		dataexchange_createEventActionCmd.MarkFlagRequired("event")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_createEventActionCmd)
 }

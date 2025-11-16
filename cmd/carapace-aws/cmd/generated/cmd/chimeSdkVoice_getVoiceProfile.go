@@ -12,9 +12,11 @@ var chimeSdkVoice_getVoiceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_getVoiceProfileCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_getVoiceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_getVoiceProfileCmd).Standalone()
 
-	chimeSdkVoice_getVoiceProfileCmd.Flags().String("voice-profile-id", "", "The voice profile ID.")
-	chimeSdkVoice_getVoiceProfileCmd.MarkFlagRequired("voice-profile-id")
+		chimeSdkVoice_getVoiceProfileCmd.Flags().String("voice-profile-id", "", "The voice profile ID.")
+		chimeSdkVoice_getVoiceProfileCmd.MarkFlagRequired("voice-profile-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_getVoiceProfileCmd)
 }

@@ -12,9 +12,11 @@ var migrationhubstrategy_stopAssessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubstrategy_stopAssessmentCmd).Standalone()
+	carapace.Gen(migrationhubstrategy_stopAssessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubstrategy_stopAssessmentCmd).Standalone()
 
-	migrationhubstrategy_stopAssessmentCmd.Flags().String("assessment-id", "", "The `assessmentId` returned by [StartAssessment]().")
-	migrationhubstrategy_stopAssessmentCmd.MarkFlagRequired("assessment-id")
+		migrationhubstrategy_stopAssessmentCmd.Flags().String("assessment-id", "", "The `assessmentId` returned by [StartAssessment]().")
+		migrationhubstrategy_stopAssessmentCmd.MarkFlagRequired("assessment-id")
+	})
 	migrationhubstrategyCmd.AddCommand(migrationhubstrategy_stopAssessmentCmd)
 }

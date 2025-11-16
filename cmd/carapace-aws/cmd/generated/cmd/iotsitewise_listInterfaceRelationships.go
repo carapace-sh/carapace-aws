@@ -12,11 +12,13 @@ var iotsitewise_listInterfaceRelationshipsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_listInterfaceRelationshipsCmd).Standalone()
+	carapace.Gen(iotsitewise_listInterfaceRelationshipsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_listInterfaceRelationshipsCmd).Standalone()
 
-	iotsitewise_listInterfaceRelationshipsCmd.Flags().String("interface-asset-model-id", "", "The ID of the interface asset model.")
-	iotsitewise_listInterfaceRelationshipsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
-	iotsitewise_listInterfaceRelationshipsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	iotsitewise_listInterfaceRelationshipsCmd.MarkFlagRequired("interface-asset-model-id")
+		iotsitewise_listInterfaceRelationshipsCmd.Flags().String("interface-asset-model-id", "", "The ID of the interface asset model.")
+		iotsitewise_listInterfaceRelationshipsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
+		iotsitewise_listInterfaceRelationshipsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		iotsitewise_listInterfaceRelationshipsCmd.MarkFlagRequired("interface-asset-model-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_listInterfaceRelationshipsCmd)
 }

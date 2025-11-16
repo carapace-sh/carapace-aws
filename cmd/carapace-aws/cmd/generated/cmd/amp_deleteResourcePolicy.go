@@ -12,11 +12,13 @@ var amp_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(amp_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_deleteResourcePolicyCmd).Standalone()
 
-	amp_deleteResourcePolicyCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the request is safe to retry (idempotent).")
-	amp_deleteResourcePolicyCmd.Flags().String("revision-id", "", "The revision ID of the policy to delete.")
-	amp_deleteResourcePolicyCmd.Flags().String("workspace-id", "", "The ID of the workspace from which to delete the resource-based policy.")
-	amp_deleteResourcePolicyCmd.MarkFlagRequired("workspace-id")
+		amp_deleteResourcePolicyCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the request is safe to retry (idempotent).")
+		amp_deleteResourcePolicyCmd.Flags().String("revision-id", "", "The revision ID of the policy to delete.")
+		amp_deleteResourcePolicyCmd.Flags().String("workspace-id", "", "The ID of the workspace from which to delete the resource-based policy.")
+		amp_deleteResourcePolicyCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_deleteResourcePolicyCmd)
 }

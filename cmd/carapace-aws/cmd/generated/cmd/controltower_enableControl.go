@@ -12,13 +12,15 @@ var controltower_enableControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_enableControlCmd).Standalone()
+	carapace.Gen(controltower_enableControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_enableControlCmd).Standalone()
 
-	controltower_enableControlCmd.Flags().String("control-identifier", "", "The ARN of the control.")
-	controltower_enableControlCmd.Flags().String("parameters", "", "A list of input parameter values, which are specified to configure the control when you enable it.")
-	controltower_enableControlCmd.Flags().String("tags", "", "Tags to be applied to the `EnabledControl` resource.")
-	controltower_enableControlCmd.Flags().String("target-identifier", "", "The ARN of the organizational unit.")
-	controltower_enableControlCmd.MarkFlagRequired("control-identifier")
-	controltower_enableControlCmd.MarkFlagRequired("target-identifier")
+		controltower_enableControlCmd.Flags().String("control-identifier", "", "The ARN of the control.")
+		controltower_enableControlCmd.Flags().String("parameters", "", "A list of input parameter values, which are specified to configure the control when you enable it.")
+		controltower_enableControlCmd.Flags().String("tags", "", "Tags to be applied to the `EnabledControl` resource.")
+		controltower_enableControlCmd.Flags().String("target-identifier", "", "The ARN of the organizational unit.")
+		controltower_enableControlCmd.MarkFlagRequired("control-identifier")
+		controltower_enableControlCmd.MarkFlagRequired("target-identifier")
+	})
 	controltowerCmd.AddCommand(controltower_enableControlCmd)
 }

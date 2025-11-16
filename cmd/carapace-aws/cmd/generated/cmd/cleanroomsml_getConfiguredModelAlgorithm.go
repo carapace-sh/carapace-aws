@@ -12,9 +12,11 @@ var cleanroomsml_getConfiguredModelAlgorithmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_getConfiguredModelAlgorithmCmd).Standalone()
+	carapace.Gen(cleanroomsml_getConfiguredModelAlgorithmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_getConfiguredModelAlgorithmCmd).Standalone()
 
-	cleanroomsml_getConfiguredModelAlgorithmCmd.Flags().String("configured-model-algorithm-arn", "", "The Amazon Resource Name (ARN) of the configured model algorithm that you want to return information about.")
-	cleanroomsml_getConfiguredModelAlgorithmCmd.MarkFlagRequired("configured-model-algorithm-arn")
+		cleanroomsml_getConfiguredModelAlgorithmCmd.Flags().String("configured-model-algorithm-arn", "", "The Amazon Resource Name (ARN) of the configured model algorithm that you want to return information about.")
+		cleanroomsml_getConfiguredModelAlgorithmCmd.MarkFlagRequired("configured-model-algorithm-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_getConfiguredModelAlgorithmCmd)
 }

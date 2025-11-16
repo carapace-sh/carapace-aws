@@ -12,9 +12,11 @@ var dms_deleteInstanceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteInstanceProfileCmd).Standalone()
+	carapace.Gen(dms_deleteInstanceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteInstanceProfileCmd).Standalone()
 
-	dms_deleteInstanceProfileCmd.Flags().String("instance-profile-identifier", "", "The identifier of the instance profile to delete.")
-	dms_deleteInstanceProfileCmd.MarkFlagRequired("instance-profile-identifier")
+		dms_deleteInstanceProfileCmd.Flags().String("instance-profile-identifier", "", "The identifier of the instance profile to delete.")
+		dms_deleteInstanceProfileCmd.MarkFlagRequired("instance-profile-identifier")
+	})
 	dmsCmd.AddCommand(dms_deleteInstanceProfileCmd)
 }

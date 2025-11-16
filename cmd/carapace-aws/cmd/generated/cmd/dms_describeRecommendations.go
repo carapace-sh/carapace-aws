@@ -12,10 +12,12 @@ var dms_describeRecommendationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeRecommendationsCmd).Standalone()
+	carapace.Gen(dms_describeRecommendationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeRecommendationsCmd).Standalone()
 
-	dms_describeRecommendationsCmd.Flags().String("filters", "", "Filters applied to the target engine recommendations described in the form of key-value pairs.")
-	dms_describeRecommendationsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	dms_describeRecommendationsCmd.Flags().String("next-token", "", "Specifies the unique pagination token that makes it possible to display the next page of results.")
+		dms_describeRecommendationsCmd.Flags().String("filters", "", "Filters applied to the target engine recommendations described in the form of key-value pairs.")
+		dms_describeRecommendationsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		dms_describeRecommendationsCmd.Flags().String("next-token", "", "Specifies the unique pagination token that makes it possible to display the next page of results.")
+	})
 	dmsCmd.AddCommand(dms_describeRecommendationsCmd)
 }

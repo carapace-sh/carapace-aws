@@ -12,9 +12,11 @@ var securityhub_enableImportFindingsForProductCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_enableImportFindingsForProductCmd).Standalone()
+	carapace.Gen(securityhub_enableImportFindingsForProductCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_enableImportFindingsForProductCmd).Standalone()
 
-	securityhub_enableImportFindingsForProductCmd.Flags().String("product-arn", "", "The ARN of the product to enable the integration for.")
-	securityhub_enableImportFindingsForProductCmd.MarkFlagRequired("product-arn")
+		securityhub_enableImportFindingsForProductCmd.Flags().String("product-arn", "", "The ARN of the product to enable the integration for.")
+		securityhub_enableImportFindingsForProductCmd.MarkFlagRequired("product-arn")
+	})
 	securityhubCmd.AddCommand(securityhub_enableImportFindingsForProductCmd)
 }

@@ -12,9 +12,11 @@ var servicecatalogAppregistry_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalogAppregistry_listTagsForResourceCmd).Standalone()
+	carapace.Gen(servicecatalogAppregistry_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalogAppregistry_listTagsForResourceCmd).Standalone()
 
-	servicecatalogAppregistry_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon resource name (ARN) that specifies the resource.")
-	servicecatalogAppregistry_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		servicecatalogAppregistry_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon resource name (ARN) that specifies the resource.")
+		servicecatalogAppregistry_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	servicecatalogAppregistryCmd.AddCommand(servicecatalogAppregistry_listTagsForResourceCmd)
 }

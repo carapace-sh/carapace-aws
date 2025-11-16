@@ -12,11 +12,13 @@ var apprunner_disassociateCustomDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_disassociateCustomDomainCmd).Standalone()
+	carapace.Gen(apprunner_disassociateCustomDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_disassociateCustomDomainCmd).Standalone()
 
-	apprunner_disassociateCustomDomainCmd.Flags().String("domain-name", "", "The domain name that you want to disassociate from the App Runner service.")
-	apprunner_disassociateCustomDomainCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to disassociate a custom domain name from.")
-	apprunner_disassociateCustomDomainCmd.MarkFlagRequired("domain-name")
-	apprunner_disassociateCustomDomainCmd.MarkFlagRequired("service-arn")
+		apprunner_disassociateCustomDomainCmd.Flags().String("domain-name", "", "The domain name that you want to disassociate from the App Runner service.")
+		apprunner_disassociateCustomDomainCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to disassociate a custom domain name from.")
+		apprunner_disassociateCustomDomainCmd.MarkFlagRequired("domain-name")
+		apprunner_disassociateCustomDomainCmd.MarkFlagRequired("service-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_disassociateCustomDomainCmd)
 }

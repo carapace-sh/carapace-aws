@@ -12,9 +12,11 @@ var dlm_getLifecyclePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dlm_getLifecyclePolicyCmd).Standalone()
+	carapace.Gen(dlm_getLifecyclePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dlm_getLifecyclePolicyCmd).Standalone()
 
-	dlm_getLifecyclePolicyCmd.Flags().String("policy-id", "", "The identifier of the lifecycle policy.")
-	dlm_getLifecyclePolicyCmd.MarkFlagRequired("policy-id")
+		dlm_getLifecyclePolicyCmd.Flags().String("policy-id", "", "The identifier of the lifecycle policy.")
+		dlm_getLifecyclePolicyCmd.MarkFlagRequired("policy-id")
+	})
 	dlmCmd.AddCommand(dlm_getLifecyclePolicyCmd)
 }

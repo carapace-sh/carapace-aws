@@ -12,9 +12,11 @@ var route53RecoveryReadiness_deleteCellCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_deleteCellCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_deleteCellCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_deleteCellCmd).Standalone()
 
-	route53RecoveryReadiness_deleteCellCmd.Flags().String("cell-name", "", "The name of the cell.")
-	route53RecoveryReadiness_deleteCellCmd.MarkFlagRequired("cell-name")
+		route53RecoveryReadiness_deleteCellCmd.Flags().String("cell-name", "", "The name of the cell.")
+		route53RecoveryReadiness_deleteCellCmd.MarkFlagRequired("cell-name")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_deleteCellCmd)
 }

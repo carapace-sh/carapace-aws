@@ -12,11 +12,13 @@ var kinesisvideo_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_untagResourceCmd).Standalone()
+	carapace.Gen(kinesisvideo_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_untagResourceCmd).Standalone()
 
-	kinesisvideo_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the signaling channel from which you want to remove tags.")
-	kinesisvideo_untagResourceCmd.Flags().String("tag-key-list", "", "A list of the keys of the tags that you want to remove.")
-	kinesisvideo_untagResourceCmd.MarkFlagRequired("resource-arn")
-	kinesisvideo_untagResourceCmd.MarkFlagRequired("tag-key-list")
+		kinesisvideo_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the signaling channel from which you want to remove tags.")
+		kinesisvideo_untagResourceCmd.Flags().String("tag-key-list", "", "A list of the keys of the tags that you want to remove.")
+		kinesisvideo_untagResourceCmd.MarkFlagRequired("resource-arn")
+		kinesisvideo_untagResourceCmd.MarkFlagRequired("tag-key-list")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_untagResourceCmd)
 }

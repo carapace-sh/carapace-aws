@@ -12,9 +12,11 @@ var docdb_deleteGlobalClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_deleteGlobalClusterCmd).Standalone()
+	carapace.Gen(docdb_deleteGlobalClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_deleteGlobalClusterCmd).Standalone()
 
-	docdb_deleteGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier of the global cluster being deleted.")
-	docdb_deleteGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+		docdb_deleteGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier of the global cluster being deleted.")
+		docdb_deleteGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+	})
 	docdbCmd.AddCommand(docdb_deleteGlobalClusterCmd)
 }

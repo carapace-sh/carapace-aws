@@ -12,9 +12,11 @@ var es_cancelElasticsearchServiceSoftwareUpdateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_cancelElasticsearchServiceSoftwareUpdateCmd).Standalone()
+	carapace.Gen(es_cancelElasticsearchServiceSoftwareUpdateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_cancelElasticsearchServiceSoftwareUpdateCmd).Standalone()
 
-	es_cancelElasticsearchServiceSoftwareUpdateCmd.Flags().String("domain-name", "", "The name of the domain that you want to stop the latest service software update on.")
-	es_cancelElasticsearchServiceSoftwareUpdateCmd.MarkFlagRequired("domain-name")
+		es_cancelElasticsearchServiceSoftwareUpdateCmd.Flags().String("domain-name", "", "The name of the domain that you want to stop the latest service software update on.")
+		es_cancelElasticsearchServiceSoftwareUpdateCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_cancelElasticsearchServiceSoftwareUpdateCmd)
 }

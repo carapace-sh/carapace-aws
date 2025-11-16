@@ -12,10 +12,12 @@ var drs_describeSourceServersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_describeSourceServersCmd).Standalone()
+	carapace.Gen(drs_describeSourceServersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_describeSourceServersCmd).Standalone()
 
-	drs_describeSourceServersCmd.Flags().String("filters", "", "A set of filters by which to return Source Servers.")
-	drs_describeSourceServersCmd.Flags().String("max-results", "", "Maximum number of Source Servers to retrieve.")
-	drs_describeSourceServersCmd.Flags().String("next-token", "", "The token of the next Source Server to retrieve.")
+		drs_describeSourceServersCmd.Flags().String("filters", "", "A set of filters by which to return Source Servers.")
+		drs_describeSourceServersCmd.Flags().String("max-results", "", "Maximum number of Source Servers to retrieve.")
+		drs_describeSourceServersCmd.Flags().String("next-token", "", "The token of the next Source Server to retrieve.")
+	})
 	drsCmd.AddCommand(drs_describeSourceServersCmd)
 }

@@ -12,9 +12,11 @@ var comprehend_describeTopicsDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeTopicsDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_describeTopicsDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeTopicsDetectionJobCmd).Standalone()
 
-	comprehend_describeTopicsDetectionJobCmd.Flags().String("job-id", "", "The identifier assigned by the user to the detection job.")
-	comprehend_describeTopicsDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_describeTopicsDetectionJobCmd.Flags().String("job-id", "", "The identifier assigned by the user to the detection job.")
+		comprehend_describeTopicsDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_describeTopicsDetectionJobCmd)
 }

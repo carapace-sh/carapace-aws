@@ -12,12 +12,14 @@ var mgn_updateSourceServerReplicationTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_updateSourceServerReplicationTypeCmd).Standalone()
+	carapace.Gen(mgn_updateSourceServerReplicationTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_updateSourceServerReplicationTypeCmd).Standalone()
 
-	mgn_updateSourceServerReplicationTypeCmd.Flags().String("account-id", "", "Account ID on which to update replication type.")
-	mgn_updateSourceServerReplicationTypeCmd.Flags().String("replication-type", "", "Replication type to which to update source server.")
-	mgn_updateSourceServerReplicationTypeCmd.Flags().String("source-server-id", "", "ID of source server on which to update replication type.")
-	mgn_updateSourceServerReplicationTypeCmd.MarkFlagRequired("replication-type")
-	mgn_updateSourceServerReplicationTypeCmd.MarkFlagRequired("source-server-id")
+		mgn_updateSourceServerReplicationTypeCmd.Flags().String("account-id", "", "Account ID on which to update replication type.")
+		mgn_updateSourceServerReplicationTypeCmd.Flags().String("replication-type", "", "Replication type to which to update source server.")
+		mgn_updateSourceServerReplicationTypeCmd.Flags().String("source-server-id", "", "ID of source server on which to update replication type.")
+		mgn_updateSourceServerReplicationTypeCmd.MarkFlagRequired("replication-type")
+		mgn_updateSourceServerReplicationTypeCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_updateSourceServerReplicationTypeCmd)
 }

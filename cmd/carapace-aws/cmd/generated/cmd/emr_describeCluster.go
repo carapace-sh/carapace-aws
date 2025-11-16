@@ -12,9 +12,11 @@ var emr_describeClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_describeClusterCmd).Standalone()
+	carapace.Gen(emr_describeClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_describeClusterCmd).Standalone()
 
-	emr_describeClusterCmd.Flags().String("cluster-id", "", "The identifier of the cluster to describe.")
-	emr_describeClusterCmd.MarkFlagRequired("cluster-id")
+		emr_describeClusterCmd.Flags().String("cluster-id", "", "The identifier of the cluster to describe.")
+		emr_describeClusterCmd.MarkFlagRequired("cluster-id")
+	})
 	emrCmd.AddCommand(emr_describeClusterCmd)
 }

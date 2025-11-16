@@ -12,9 +12,11 @@ var codeguruprofiler_describeProfilingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruprofiler_describeProfilingGroupCmd).Standalone()
+	carapace.Gen(codeguruprofiler_describeProfilingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruprofiler_describeProfilingGroupCmd).Standalone()
 
-	codeguruprofiler_describeProfilingGroupCmd.Flags().String("profiling-group-name", "", "The name of the profiling group to get information about.")
-	codeguruprofiler_describeProfilingGroupCmd.MarkFlagRequired("profiling-group-name")
+		codeguruprofiler_describeProfilingGroupCmd.Flags().String("profiling-group-name", "", "The name of the profiling group to get information about.")
+		codeguruprofiler_describeProfilingGroupCmd.MarkFlagRequired("profiling-group-name")
+	})
 	codeguruprofilerCmd.AddCommand(codeguruprofiler_describeProfilingGroupCmd)
 }

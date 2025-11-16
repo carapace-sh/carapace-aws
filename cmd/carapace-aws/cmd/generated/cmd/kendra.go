@@ -12,7 +12,9 @@ var kendraCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendraCmd).Standalone()
+	carapace.Gen(kendraCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendraCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(kendraCmd)
 }

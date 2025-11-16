@@ -12,13 +12,15 @@ var cognitoIdp_updateUserPoolDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_updateUserPoolDomainCmd).Standalone()
+	carapace.Gen(cognitoIdp_updateUserPoolDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_updateUserPoolDomainCmd).Standalone()
 
-	cognitoIdp_updateUserPoolDomainCmd.Flags().String("custom-domain-config", "", "The configuration for a custom domain that hosts managed login for your application.")
-	cognitoIdp_updateUserPoolDomainCmd.Flags().String("domain", "", "The name of the domain that you want to update.")
-	cognitoIdp_updateUserPoolDomainCmd.Flags().String("managed-login-version", "", "A version number that indicates the state of managed login for your domain.")
-	cognitoIdp_updateUserPoolDomainCmd.Flags().String("user-pool-id", "", "The ID of the user pool that is associated with the domain you're updating.")
-	cognitoIdp_updateUserPoolDomainCmd.MarkFlagRequired("domain")
-	cognitoIdp_updateUserPoolDomainCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_updateUserPoolDomainCmd.Flags().String("custom-domain-config", "", "The configuration for a custom domain that hosts managed login for your application.")
+		cognitoIdp_updateUserPoolDomainCmd.Flags().String("domain", "", "The name of the domain that you want to update.")
+		cognitoIdp_updateUserPoolDomainCmd.Flags().String("managed-login-version", "", "A version number that indicates the state of managed login for your domain.")
+		cognitoIdp_updateUserPoolDomainCmd.Flags().String("user-pool-id", "", "The ID of the user pool that is associated with the domain you're updating.")
+		cognitoIdp_updateUserPoolDomainCmd.MarkFlagRequired("domain")
+		cognitoIdp_updateUserPoolDomainCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_updateUserPoolDomainCmd)
 }

@@ -12,13 +12,15 @@ var chimeSdkMessaging_describeChannelBanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_describeChannelBanCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_describeChannelBanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_describeChannelBanCmd).Standalone()
 
-	chimeSdkMessaging_describeChannelBanCmd.Flags().String("channel-arn", "", "The ARN of the channel from which the user is banned.")
-	chimeSdkMessaging_describeChannelBanCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_describeChannelBanCmd.Flags().String("member-arn", "", "The `AppInstanceUserArn` of the member being banned.")
-	chimeSdkMessaging_describeChannelBanCmd.MarkFlagRequired("channel-arn")
-	chimeSdkMessaging_describeChannelBanCmd.MarkFlagRequired("chime-bearer")
-	chimeSdkMessaging_describeChannelBanCmd.MarkFlagRequired("member-arn")
+		chimeSdkMessaging_describeChannelBanCmd.Flags().String("channel-arn", "", "The ARN of the channel from which the user is banned.")
+		chimeSdkMessaging_describeChannelBanCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_describeChannelBanCmd.Flags().String("member-arn", "", "The `AppInstanceUserArn` of the member being banned.")
+		chimeSdkMessaging_describeChannelBanCmd.MarkFlagRequired("channel-arn")
+		chimeSdkMessaging_describeChannelBanCmd.MarkFlagRequired("chime-bearer")
+		chimeSdkMessaging_describeChannelBanCmd.MarkFlagRequired("member-arn")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_describeChannelBanCmd)
 }

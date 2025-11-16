@@ -12,11 +12,13 @@ var cloudformation_listStackRefactorActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_listStackRefactorActionsCmd).Standalone()
+	carapace.Gen(cloudformation_listStackRefactorActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_listStackRefactorActionsCmd).Standalone()
 
-	cloudformation_listStackRefactorActionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned with a single call.")
-	cloudformation_listStackRefactorActionsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	cloudformation_listStackRefactorActionsCmd.Flags().String("stack-refactor-id", "", "The ID associated with the stack refactor created from the [CreateStackRefactor]() action.")
-	cloudformation_listStackRefactorActionsCmd.MarkFlagRequired("stack-refactor-id")
+		cloudformation_listStackRefactorActionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned with a single call.")
+		cloudformation_listStackRefactorActionsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		cloudformation_listStackRefactorActionsCmd.Flags().String("stack-refactor-id", "", "The ID associated with the stack refactor created from the [CreateStackRefactor]() action.")
+		cloudformation_listStackRefactorActionsCmd.MarkFlagRequired("stack-refactor-id")
+	})
 	cloudformationCmd.AddCommand(cloudformation_listStackRefactorActionsCmd)
 }

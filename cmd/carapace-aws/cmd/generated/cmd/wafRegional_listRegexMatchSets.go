@@ -12,9 +12,11 @@ var wafRegional_listRegexMatchSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_listRegexMatchSetsCmd).Standalone()
+	carapace.Gen(wafRegional_listRegexMatchSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_listRegexMatchSetsCmd).Standalone()
 
-	wafRegional_listRegexMatchSetsCmd.Flags().String("limit", "", "Specifies the number of `RegexMatchSet` objects that you want AWS WAF to return for this request.")
-	wafRegional_listRegexMatchSetsCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `RegexMatchSet` objects than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `ByteMatchSets`.")
+		wafRegional_listRegexMatchSetsCmd.Flags().String("limit", "", "Specifies the number of `RegexMatchSet` objects that you want AWS WAF to return for this request.")
+		wafRegional_listRegexMatchSetsCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `RegexMatchSet` objects than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `ByteMatchSets`.")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_listRegexMatchSetsCmd)
 }

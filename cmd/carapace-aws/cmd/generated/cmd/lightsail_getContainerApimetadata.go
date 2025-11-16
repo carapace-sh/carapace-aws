@@ -12,7 +12,9 @@ var lightsail_getContainerApimetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getContainerApimetadataCmd).Standalone()
+	carapace.Gen(lightsail_getContainerApimetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getContainerApimetadataCmd).Standalone()
 
+	})
 	lightsailCmd.AddCommand(lightsail_getContainerApimetadataCmd)
 }

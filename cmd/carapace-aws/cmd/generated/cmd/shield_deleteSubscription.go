@@ -12,7 +12,9 @@ var shield_deleteSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_deleteSubscriptionCmd).Standalone()
+	carapace.Gen(shield_deleteSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_deleteSubscriptionCmd).Standalone()
 
+	})
 	shieldCmd.AddCommand(shield_deleteSubscriptionCmd)
 }

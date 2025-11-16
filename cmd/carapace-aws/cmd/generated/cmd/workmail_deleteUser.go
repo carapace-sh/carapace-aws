@@ -12,11 +12,13 @@ var workmail_deleteUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_deleteUserCmd).Standalone()
+	carapace.Gen(workmail_deleteUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_deleteUserCmd).Standalone()
 
-	workmail_deleteUserCmd.Flags().String("organization-id", "", "The organization that contains the user to be deleted.")
-	workmail_deleteUserCmd.Flags().String("user-id", "", "The identifier of the user to be deleted.")
-	workmail_deleteUserCmd.MarkFlagRequired("organization-id")
-	workmail_deleteUserCmd.MarkFlagRequired("user-id")
+		workmail_deleteUserCmd.Flags().String("organization-id", "", "The organization that contains the user to be deleted.")
+		workmail_deleteUserCmd.Flags().String("user-id", "", "The identifier of the user to be deleted.")
+		workmail_deleteUserCmd.MarkFlagRequired("organization-id")
+		workmail_deleteUserCmd.MarkFlagRequired("user-id")
+	})
 	workmailCmd.AddCommand(workmail_deleteUserCmd)
 }

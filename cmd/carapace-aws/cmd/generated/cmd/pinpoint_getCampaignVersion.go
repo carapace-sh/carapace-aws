@@ -12,13 +12,15 @@ var pinpoint_getCampaignVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getCampaignVersionCmd).Standalone()
+	carapace.Gen(pinpoint_getCampaignVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getCampaignVersionCmd).Standalone()
 
-	pinpoint_getCampaignVersionCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getCampaignVersionCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
-	pinpoint_getCampaignVersionCmd.Flags().String("version", "", "The unique version number (Version property) for the campaign version.")
-	pinpoint_getCampaignVersionCmd.MarkFlagRequired("application-id")
-	pinpoint_getCampaignVersionCmd.MarkFlagRequired("campaign-id")
-	pinpoint_getCampaignVersionCmd.MarkFlagRequired("version")
+		pinpoint_getCampaignVersionCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getCampaignVersionCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
+		pinpoint_getCampaignVersionCmd.Flags().String("version", "", "The unique version number (Version property) for the campaign version.")
+		pinpoint_getCampaignVersionCmd.MarkFlagRequired("application-id")
+		pinpoint_getCampaignVersionCmd.MarkFlagRequired("campaign-id")
+		pinpoint_getCampaignVersionCmd.MarkFlagRequired("version")
+	})
 	pinpointCmd.AddCommand(pinpoint_getCampaignVersionCmd)
 }

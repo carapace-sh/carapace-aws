@@ -12,11 +12,13 @@ var iam_tagOpenIdconnectProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_tagOpenIdconnectProviderCmd).Standalone()
+	carapace.Gen(iam_tagOpenIdconnectProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_tagOpenIdconnectProviderCmd).Standalone()
 
-	iam_tagOpenIdconnectProviderCmd.Flags().String("open-idconnect-provider-arn", "", "The ARN of the OIDC identity provider in IAM to which you want to add tags.")
-	iam_tagOpenIdconnectProviderCmd.Flags().String("tags", "", "The list of tags that you want to attach to the OIDC identity provider in IAM.")
-	iam_tagOpenIdconnectProviderCmd.MarkFlagRequired("open-idconnect-provider-arn")
-	iam_tagOpenIdconnectProviderCmd.MarkFlagRequired("tags")
+		iam_tagOpenIdconnectProviderCmd.Flags().String("open-idconnect-provider-arn", "", "The ARN of the OIDC identity provider in IAM to which you want to add tags.")
+		iam_tagOpenIdconnectProviderCmd.Flags().String("tags", "", "The list of tags that you want to attach to the OIDC identity provider in IAM.")
+		iam_tagOpenIdconnectProviderCmd.MarkFlagRequired("open-idconnect-provider-arn")
+		iam_tagOpenIdconnectProviderCmd.MarkFlagRequired("tags")
+	})
 	iamCmd.AddCommand(iam_tagOpenIdconnectProviderCmd)
 }

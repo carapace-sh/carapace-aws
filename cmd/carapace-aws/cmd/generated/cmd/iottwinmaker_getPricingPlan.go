@@ -12,7 +12,9 @@ var iottwinmaker_getPricingPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_getPricingPlanCmd).Standalone()
+	carapace.Gen(iottwinmaker_getPricingPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_getPricingPlanCmd).Standalone()
 
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_getPricingPlanCmd)
 }

@@ -12,11 +12,13 @@ var medialive_listMultiplexProgramsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listMultiplexProgramsCmd).Standalone()
+	carapace.Gen(medialive_listMultiplexProgramsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listMultiplexProgramsCmd).Standalone()
 
-	medialive_listMultiplexProgramsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	medialive_listMultiplexProgramsCmd.Flags().String("multiplex-id", "", "The ID of the multiplex that the programs belong to.")
-	medialive_listMultiplexProgramsCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
-	medialive_listMultiplexProgramsCmd.MarkFlagRequired("multiplex-id")
+		medialive_listMultiplexProgramsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		medialive_listMultiplexProgramsCmd.Flags().String("multiplex-id", "", "The ID of the multiplex that the programs belong to.")
+		medialive_listMultiplexProgramsCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+		medialive_listMultiplexProgramsCmd.MarkFlagRequired("multiplex-id")
+	})
 	medialiveCmd.AddCommand(medialive_listMultiplexProgramsCmd)
 }

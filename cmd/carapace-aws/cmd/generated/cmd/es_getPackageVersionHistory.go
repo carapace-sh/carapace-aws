@@ -12,11 +12,13 @@ var es_getPackageVersionHistoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_getPackageVersionHistoryCmd).Standalone()
+	carapace.Gen(es_getPackageVersionHistoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_getPackageVersionHistoryCmd).Standalone()
 
-	es_getPackageVersionHistoryCmd.Flags().String("max-results", "", "Limits results to a maximum number of versions.")
-	es_getPackageVersionHistoryCmd.Flags().String("next-token", "", "Used for pagination.")
-	es_getPackageVersionHistoryCmd.Flags().String("package-id", "", "Returns an audit history of versions of the package.")
-	es_getPackageVersionHistoryCmd.MarkFlagRequired("package-id")
+		es_getPackageVersionHistoryCmd.Flags().String("max-results", "", "Limits results to a maximum number of versions.")
+		es_getPackageVersionHistoryCmd.Flags().String("next-token", "", "Used for pagination.")
+		es_getPackageVersionHistoryCmd.Flags().String("package-id", "", "Returns an audit history of versions of the package.")
+		es_getPackageVersionHistoryCmd.MarkFlagRequired("package-id")
+	})
 	esCmd.AddCommand(es_getPackageVersionHistoryCmd)
 }

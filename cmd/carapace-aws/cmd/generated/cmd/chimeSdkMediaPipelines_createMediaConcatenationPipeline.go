@@ -12,13 +12,15 @@ var chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd).Standalone()
 
-	chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.Flags().String("client-request-token", "", "The unique identifier for the client request.")
-	chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.Flags().String("sinks", "", "An object that specifies the data sinks for the media concatenation pipeline.")
-	chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.Flags().String("sources", "", "An object that specifies the sources for the media concatenation pipeline.")
-	chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.Flags().String("tags", "", "The tags associated with the media concatenation pipeline.")
-	chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.MarkFlagRequired("sinks")
-	chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.MarkFlagRequired("sources")
+		chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.Flags().String("client-request-token", "", "The unique identifier for the client request.")
+		chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.Flags().String("sinks", "", "An object that specifies the data sinks for the media concatenation pipeline.")
+		chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.Flags().String("sources", "", "An object that specifies the sources for the media concatenation pipeline.")
+		chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.Flags().String("tags", "", "The tags associated with the media concatenation pipeline.")
+		chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.MarkFlagRequired("sinks")
+		chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd.MarkFlagRequired("sources")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_createMediaConcatenationPipelineCmd)
 }

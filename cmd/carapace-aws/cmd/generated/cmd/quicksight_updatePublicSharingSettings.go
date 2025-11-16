@@ -12,12 +12,14 @@ var quicksight_updatePublicSharingSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_updatePublicSharingSettingsCmd).Standalone()
+	carapace.Gen(quicksight_updatePublicSharingSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_updatePublicSharingSettingsCmd).Standalone()
 
-	quicksight_updatePublicSharingSettingsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID associated with your Amazon Quick Sight subscription.")
-	quicksight_updatePublicSharingSettingsCmd.Flags().Bool("no-public-sharing-enabled", false, "A Boolean value that indicates whether public sharing is turned on for an Quick Suite account.")
-	quicksight_updatePublicSharingSettingsCmd.Flags().Bool("public-sharing-enabled", false, "A Boolean value that indicates whether public sharing is turned on for an Quick Suite account.")
-	quicksight_updatePublicSharingSettingsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_updatePublicSharingSettingsCmd.Flag("no-public-sharing-enabled").Hidden = true
+		quicksight_updatePublicSharingSettingsCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID associated with your Amazon Quick Sight subscription.")
+		quicksight_updatePublicSharingSettingsCmd.Flags().Bool("no-public-sharing-enabled", false, "A Boolean value that indicates whether public sharing is turned on for an Quick Suite account.")
+		quicksight_updatePublicSharingSettingsCmd.Flags().Bool("public-sharing-enabled", false, "A Boolean value that indicates whether public sharing is turned on for an Quick Suite account.")
+		quicksight_updatePublicSharingSettingsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_updatePublicSharingSettingsCmd.Flag("no-public-sharing-enabled").Hidden = true
+	})
 	quicksightCmd.AddCommand(quicksight_updatePublicSharingSettingsCmd)
 }

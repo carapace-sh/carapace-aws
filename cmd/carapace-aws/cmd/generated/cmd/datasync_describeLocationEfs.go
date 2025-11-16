@@ -12,9 +12,11 @@ var datasync_describeLocationEfsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeLocationEfsCmd).Standalone()
+	carapace.Gen(datasync_describeLocationEfsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeLocationEfsCmd).Standalone()
 
-	datasync_describeLocationEfsCmd.Flags().String("location-arn", "", "The Amazon Resource Name (ARN) of the Amazon EFS file system location that you want information about.")
-	datasync_describeLocationEfsCmd.MarkFlagRequired("location-arn")
+		datasync_describeLocationEfsCmd.Flags().String("location-arn", "", "The Amazon Resource Name (ARN) of the Amazon EFS file system location that you want information about.")
+		datasync_describeLocationEfsCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeLocationEfsCmd)
 }

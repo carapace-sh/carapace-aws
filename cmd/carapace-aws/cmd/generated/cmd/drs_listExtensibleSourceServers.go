@@ -12,11 +12,13 @@ var drs_listExtensibleSourceServersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_listExtensibleSourceServersCmd).Standalone()
+	carapace.Gen(drs_listExtensibleSourceServersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_listExtensibleSourceServersCmd).Standalone()
 
-	drs_listExtensibleSourceServersCmd.Flags().String("max-results", "", "The maximum number of extensible source servers to retrieve.")
-	drs_listExtensibleSourceServersCmd.Flags().String("next-token", "", "The token of the next extensible source server to retrieve.")
-	drs_listExtensibleSourceServersCmd.Flags().String("staging-account-id", "", "The Id of the staging Account to retrieve extensible source servers from.")
-	drs_listExtensibleSourceServersCmd.MarkFlagRequired("staging-account-id")
+		drs_listExtensibleSourceServersCmd.Flags().String("max-results", "", "The maximum number of extensible source servers to retrieve.")
+		drs_listExtensibleSourceServersCmd.Flags().String("next-token", "", "The token of the next extensible source server to retrieve.")
+		drs_listExtensibleSourceServersCmd.Flags().String("staging-account-id", "", "The Id of the staging Account to retrieve extensible source servers from.")
+		drs_listExtensibleSourceServersCmd.MarkFlagRequired("staging-account-id")
+	})
 	drsCmd.AddCommand(drs_listExtensibleSourceServersCmd)
 }

@@ -12,9 +12,11 @@ var kendra_describeQuerySuggestionsConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_describeQuerySuggestionsConfigCmd).Standalone()
+	carapace.Gen(kendra_describeQuerySuggestionsConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_describeQuerySuggestionsConfigCmd).Standalone()
 
-	kendra_describeQuerySuggestionsConfigCmd.Flags().String("index-id", "", "The identifier of the index with query suggestions that you want to get information on.")
-	kendra_describeQuerySuggestionsConfigCmd.MarkFlagRequired("index-id")
+		kendra_describeQuerySuggestionsConfigCmd.Flags().String("index-id", "", "The identifier of the index with query suggestions that you want to get information on.")
+		kendra_describeQuerySuggestionsConfigCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_describeQuerySuggestionsConfigCmd)
 }

@@ -12,12 +12,14 @@ var docdb_modifyDbsubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_modifyDbsubnetGroupCmd).Standalone()
+	carapace.Gen(docdb_modifyDbsubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_modifyDbsubnetGroupCmd).Standalone()
 
-	docdb_modifyDbsubnetGroupCmd.Flags().String("dbsubnet-group-description", "", "The description for the subnet group.")
-	docdb_modifyDbsubnetGroupCmd.Flags().String("dbsubnet-group-name", "", "The name for the subnet group.")
-	docdb_modifyDbsubnetGroupCmd.Flags().String("subnet-ids", "", "The Amazon EC2 subnet IDs for the subnet group.")
-	docdb_modifyDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-name")
-	docdb_modifyDbsubnetGroupCmd.MarkFlagRequired("subnet-ids")
+		docdb_modifyDbsubnetGroupCmd.Flags().String("dbsubnet-group-description", "", "The description for the subnet group.")
+		docdb_modifyDbsubnetGroupCmd.Flags().String("dbsubnet-group-name", "", "The name for the subnet group.")
+		docdb_modifyDbsubnetGroupCmd.Flags().String("subnet-ids", "", "The Amazon EC2 subnet IDs for the subnet group.")
+		docdb_modifyDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-name")
+		docdb_modifyDbsubnetGroupCmd.MarkFlagRequired("subnet-ids")
+	})
 	docdbCmd.AddCommand(docdb_modifyDbsubnetGroupCmd)
 }

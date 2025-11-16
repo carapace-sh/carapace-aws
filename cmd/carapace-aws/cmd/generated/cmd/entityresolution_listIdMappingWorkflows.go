@@ -12,9 +12,11 @@ var entityresolution_listIdMappingWorkflowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_listIdMappingWorkflowsCmd).Standalone()
+	carapace.Gen(entityresolution_listIdMappingWorkflowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_listIdMappingWorkflowsCmd).Standalone()
 
-	entityresolution_listIdMappingWorkflowsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	entityresolution_listIdMappingWorkflowsCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
+		entityresolution_listIdMappingWorkflowsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		entityresolution_listIdMappingWorkflowsCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_listIdMappingWorkflowsCmd)
 }

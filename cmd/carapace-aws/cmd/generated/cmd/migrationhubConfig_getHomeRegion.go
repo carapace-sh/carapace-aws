@@ -12,7 +12,9 @@ var migrationhubConfig_getHomeRegionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubConfig_getHomeRegionCmd).Standalone()
+	carapace.Gen(migrationhubConfig_getHomeRegionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubConfig_getHomeRegionCmd).Standalone()
 
+	})
 	migrationhubConfigCmd.AddCommand(migrationhubConfig_getHomeRegionCmd)
 }

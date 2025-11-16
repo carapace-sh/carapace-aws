@@ -12,10 +12,12 @@ var opensearch_describeReservedInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_describeReservedInstancesCmd).Standalone()
+	carapace.Gen(opensearch_describeReservedInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_describeReservedInstancesCmd).Standalone()
 
-	opensearch_describeReservedInstancesCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
-	opensearch_describeReservedInstancesCmd.Flags().String("next-token", "", "If your initial `DescribeReservedInstances` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeReservedInstances` operations, which returns results in the next page.")
-	opensearch_describeReservedInstancesCmd.Flags().String("reserved-instance-id", "", "The reserved instance identifier filter value.")
+		opensearch_describeReservedInstancesCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
+		opensearch_describeReservedInstancesCmd.Flags().String("next-token", "", "If your initial `DescribeReservedInstances` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeReservedInstances` operations, which returns results in the next page.")
+		opensearch_describeReservedInstancesCmd.Flags().String("reserved-instance-id", "", "The reserved instance identifier filter value.")
+	})
 	opensearchCmd.AddCommand(opensearch_describeReservedInstancesCmd)
 }

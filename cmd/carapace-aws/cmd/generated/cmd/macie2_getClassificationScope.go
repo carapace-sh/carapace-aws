@@ -12,9 +12,11 @@ var macie2_getClassificationScopeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getClassificationScopeCmd).Standalone()
+	carapace.Gen(macie2_getClassificationScopeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getClassificationScopeCmd).Standalone()
 
-	macie2_getClassificationScopeCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
-	macie2_getClassificationScopeCmd.MarkFlagRequired("id")
+		macie2_getClassificationScopeCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
+		macie2_getClassificationScopeCmd.MarkFlagRequired("id")
+	})
 	macie2Cmd.AddCommand(macie2_getClassificationScopeCmd)
 }

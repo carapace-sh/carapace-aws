@@ -12,13 +12,15 @@ var wellarchitected_listWorkloadSharesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listWorkloadSharesCmd).Standalone()
+	carapace.Gen(wellarchitected_listWorkloadSharesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listWorkloadSharesCmd).Standalone()
 
-	wellarchitected_listWorkloadSharesCmd.Flags().String("max-results", "", "The maximum number of results to return for this request.")
-	wellarchitected_listWorkloadSharesCmd.Flags().String("next-token", "", "")
-	wellarchitected_listWorkloadSharesCmd.Flags().String("shared-with-prefix", "", "The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the workload is shared.")
-	wellarchitected_listWorkloadSharesCmd.Flags().String("status", "", "")
-	wellarchitected_listWorkloadSharesCmd.Flags().String("workload-id", "", "")
-	wellarchitected_listWorkloadSharesCmd.MarkFlagRequired("workload-id")
+		wellarchitected_listWorkloadSharesCmd.Flags().String("max-results", "", "The maximum number of results to return for this request.")
+		wellarchitected_listWorkloadSharesCmd.Flags().String("next-token", "", "")
+		wellarchitected_listWorkloadSharesCmd.Flags().String("shared-with-prefix", "", "The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the workload is shared.")
+		wellarchitected_listWorkloadSharesCmd.Flags().String("status", "", "")
+		wellarchitected_listWorkloadSharesCmd.Flags().String("workload-id", "", "")
+		wellarchitected_listWorkloadSharesCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listWorkloadSharesCmd)
 }

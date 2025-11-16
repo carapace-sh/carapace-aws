@@ -12,11 +12,13 @@ var eks_describeFargateProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_describeFargateProfileCmd).Standalone()
+	carapace.Gen(eks_describeFargateProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_describeFargateProfileCmd).Standalone()
 
-	eks_describeFargateProfileCmd.Flags().String("cluster-name", "", "The name of your cluster.")
-	eks_describeFargateProfileCmd.Flags().String("fargate-profile-name", "", "The name of the Fargate profile to describe.")
-	eks_describeFargateProfileCmd.MarkFlagRequired("cluster-name")
-	eks_describeFargateProfileCmd.MarkFlagRequired("fargate-profile-name")
+		eks_describeFargateProfileCmd.Flags().String("cluster-name", "", "The name of your cluster.")
+		eks_describeFargateProfileCmd.Flags().String("fargate-profile-name", "", "The name of the Fargate profile to describe.")
+		eks_describeFargateProfileCmd.MarkFlagRequired("cluster-name")
+		eks_describeFargateProfileCmd.MarkFlagRequired("fargate-profile-name")
+	})
 	eksCmd.AddCommand(eks_describeFargateProfileCmd)
 }

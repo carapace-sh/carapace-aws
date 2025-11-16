@@ -12,9 +12,11 @@ var ivsRealtime_getPublicKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_getPublicKeyCmd).Standalone()
+	carapace.Gen(ivsRealtime_getPublicKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_getPublicKeyCmd).Standalone()
 
-	ivsRealtime_getPublicKeyCmd.Flags().String("arn", "", "ARN of the public key for which the information is to be retrieved.")
-	ivsRealtime_getPublicKeyCmd.MarkFlagRequired("arn")
+		ivsRealtime_getPublicKeyCmd.Flags().String("arn", "", "ARN of the public key for which the information is to be retrieved.")
+		ivsRealtime_getPublicKeyCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_getPublicKeyCmd)
 }

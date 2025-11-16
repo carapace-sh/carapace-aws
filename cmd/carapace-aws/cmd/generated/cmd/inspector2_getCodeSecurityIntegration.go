@@ -12,10 +12,12 @@ var inspector2_getCodeSecurityIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_getCodeSecurityIntegrationCmd).Standalone()
+	carapace.Gen(inspector2_getCodeSecurityIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_getCodeSecurityIntegrationCmd).Standalone()
 
-	inspector2_getCodeSecurityIntegrationCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the code security integration to retrieve.")
-	inspector2_getCodeSecurityIntegrationCmd.Flags().String("tags", "", "The tags associated with the code security integration.")
-	inspector2_getCodeSecurityIntegrationCmd.MarkFlagRequired("integration-arn")
+		inspector2_getCodeSecurityIntegrationCmd.Flags().String("integration-arn", "", "The Amazon Resource Name (ARN) of the code security integration to retrieve.")
+		inspector2_getCodeSecurityIntegrationCmd.Flags().String("tags", "", "The tags associated with the code security integration.")
+		inspector2_getCodeSecurityIntegrationCmd.MarkFlagRequired("integration-arn")
+	})
 	inspector2Cmd.AddCommand(inspector2_getCodeSecurityIntegrationCmd)
 }

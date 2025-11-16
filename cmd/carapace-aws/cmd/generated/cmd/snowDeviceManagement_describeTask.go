@@ -12,9 +12,11 @@ var snowDeviceManagement_describeTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowDeviceManagement_describeTaskCmd).Standalone()
+	carapace.Gen(snowDeviceManagement_describeTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowDeviceManagement_describeTaskCmd).Standalone()
 
-	snowDeviceManagement_describeTaskCmd.Flags().String("task-id", "", "The ID of the task to be described.")
-	snowDeviceManagement_describeTaskCmd.MarkFlagRequired("task-id")
+		snowDeviceManagement_describeTaskCmd.Flags().String("task-id", "", "The ID of the task to be described.")
+		snowDeviceManagement_describeTaskCmd.MarkFlagRequired("task-id")
+	})
 	snowDeviceManagementCmd.AddCommand(snowDeviceManagement_describeTaskCmd)
 }

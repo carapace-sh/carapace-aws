@@ -12,9 +12,11 @@ var ssmQuicksetup_deleteConfigurationManagerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmQuicksetup_deleteConfigurationManagerCmd).Standalone()
+	carapace.Gen(ssmQuicksetup_deleteConfigurationManagerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmQuicksetup_deleteConfigurationManagerCmd).Standalone()
 
-	ssmQuicksetup_deleteConfigurationManagerCmd.Flags().String("manager-arn", "", "The ID of the configuration manager.")
-	ssmQuicksetup_deleteConfigurationManagerCmd.MarkFlagRequired("manager-arn")
+		ssmQuicksetup_deleteConfigurationManagerCmd.Flags().String("manager-arn", "", "The ID of the configuration manager.")
+		ssmQuicksetup_deleteConfigurationManagerCmd.MarkFlagRequired("manager-arn")
+	})
 	ssmQuicksetupCmd.AddCommand(ssmQuicksetup_deleteConfigurationManagerCmd)
 }

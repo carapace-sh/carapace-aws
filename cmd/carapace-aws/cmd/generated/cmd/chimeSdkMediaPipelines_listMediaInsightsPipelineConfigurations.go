@@ -12,9 +12,11 @@ var chimeSdkMediaPipelines_listMediaInsightsPipelineConfigurationsCmd = &cobra.C
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_listMediaInsightsPipelineConfigurationsCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_listMediaInsightsPipelineConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_listMediaInsightsPipelineConfigurationsCmd).Standalone()
 
-	chimeSdkMediaPipelines_listMediaInsightsPipelineConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	chimeSdkMediaPipelines_listMediaInsightsPipelineConfigurationsCmd.Flags().String("next-token", "", "The token used to return the next page of results.")
+		chimeSdkMediaPipelines_listMediaInsightsPipelineConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		chimeSdkMediaPipelines_listMediaInsightsPipelineConfigurationsCmd.Flags().String("next-token", "", "The token used to return the next page of results.")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_listMediaInsightsPipelineConfigurationsCmd)
 }

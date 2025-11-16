@@ -12,12 +12,14 @@ var accessanalyzer_deleteArchiveRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_deleteArchiveRuleCmd).Standalone()
+	carapace.Gen(accessanalyzer_deleteArchiveRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_deleteArchiveRuleCmd).Standalone()
 
-	accessanalyzer_deleteArchiveRuleCmd.Flags().String("analyzer-name", "", "The name of the analyzer that associated with the archive rule to delete.")
-	accessanalyzer_deleteArchiveRuleCmd.Flags().String("client-token", "", "A client token.")
-	accessanalyzer_deleteArchiveRuleCmd.Flags().String("rule-name", "", "The name of the rule to delete.")
-	accessanalyzer_deleteArchiveRuleCmd.MarkFlagRequired("analyzer-name")
-	accessanalyzer_deleteArchiveRuleCmd.MarkFlagRequired("rule-name")
+		accessanalyzer_deleteArchiveRuleCmd.Flags().String("analyzer-name", "", "The name of the analyzer that associated with the archive rule to delete.")
+		accessanalyzer_deleteArchiveRuleCmd.Flags().String("client-token", "", "A client token.")
+		accessanalyzer_deleteArchiveRuleCmd.Flags().String("rule-name", "", "The name of the rule to delete.")
+		accessanalyzer_deleteArchiveRuleCmd.MarkFlagRequired("analyzer-name")
+		accessanalyzer_deleteArchiveRuleCmd.MarkFlagRequired("rule-name")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_deleteArchiveRuleCmd)
 }

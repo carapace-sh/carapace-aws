@@ -12,9 +12,11 @@ var odb_deleteOdbPeeringConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_deleteOdbPeeringConnectionCmd).Standalone()
+	carapace.Gen(odb_deleteOdbPeeringConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_deleteOdbPeeringConnectionCmd).Standalone()
 
-	odb_deleteOdbPeeringConnectionCmd.Flags().String("odb-peering-connection-id", "", "The unique identifier of the ODB peering connection to delete.")
-	odb_deleteOdbPeeringConnectionCmd.MarkFlagRequired("odb-peering-connection-id")
+		odb_deleteOdbPeeringConnectionCmd.Flags().String("odb-peering-connection-id", "", "The unique identifier of the ODB peering connection to delete.")
+		odb_deleteOdbPeeringConnectionCmd.MarkFlagRequired("odb-peering-connection-id")
+	})
 	odbCmd.AddCommand(odb_deleteOdbPeeringConnectionCmd)
 }

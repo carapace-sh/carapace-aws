@@ -12,8 +12,10 @@ var config_describeDeliveryChannelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_describeDeliveryChannelsCmd).Standalone()
+	carapace.Gen(config_describeDeliveryChannelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_describeDeliveryChannelsCmd).Standalone()
 
-	config_describeDeliveryChannelsCmd.Flags().String("delivery-channel-names", "", "A list of delivery channel names.")
+		config_describeDeliveryChannelsCmd.Flags().String("delivery-channel-names", "", "A list of delivery channel names.")
+	})
 	configCmd.AddCommand(config_describeDeliveryChannelsCmd)
 }

@@ -12,11 +12,13 @@ var rolesanywhere_putNotificationSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_putNotificationSettingsCmd).Standalone()
+	carapace.Gen(rolesanywhere_putNotificationSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_putNotificationSettingsCmd).Standalone()
 
-	rolesanywhere_putNotificationSettingsCmd.Flags().String("notification-settings", "", "A list of notification settings to be associated to the trust anchor.")
-	rolesanywhere_putNotificationSettingsCmd.Flags().String("trust-anchor-id", "", "The unique identifier of the trust anchor.")
-	rolesanywhere_putNotificationSettingsCmd.MarkFlagRequired("notification-settings")
-	rolesanywhere_putNotificationSettingsCmd.MarkFlagRequired("trust-anchor-id")
+		rolesanywhere_putNotificationSettingsCmd.Flags().String("notification-settings", "", "A list of notification settings to be associated to the trust anchor.")
+		rolesanywhere_putNotificationSettingsCmd.Flags().String("trust-anchor-id", "", "The unique identifier of the trust anchor.")
+		rolesanywhere_putNotificationSettingsCmd.MarkFlagRequired("notification-settings")
+		rolesanywhere_putNotificationSettingsCmd.MarkFlagRequired("trust-anchor-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_putNotificationSettingsCmd)
 }

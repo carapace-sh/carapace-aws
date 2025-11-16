@@ -12,10 +12,12 @@ var ssm_describeOpsItemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeOpsItemsCmd).Standalone()
+	carapace.Gen(ssm_describeOpsItemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeOpsItemsCmd).Standalone()
 
-	ssm_describeOpsItemsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_describeOpsItemsCmd.Flags().String("next-token", "", "A token to start the list.")
-	ssm_describeOpsItemsCmd.Flags().String("ops-item-filters", "", "One or more filters to limit the response.")
+		ssm_describeOpsItemsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_describeOpsItemsCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_describeOpsItemsCmd.Flags().String("ops-item-filters", "", "One or more filters to limit the response.")
+	})
 	ssmCmd.AddCommand(ssm_describeOpsItemsCmd)
 }

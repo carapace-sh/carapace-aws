@@ -12,11 +12,13 @@ var dms_describeEndpointSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeEndpointSettingsCmd).Standalone()
+	carapace.Gen(dms_describeEndpointSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeEndpointSettingsCmd).Standalone()
 
-	dms_describeEndpointSettingsCmd.Flags().String("engine-name", "", "The database engine used for your source or target endpoint.")
-	dms_describeEndpointSettingsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	dms_describeEndpointSettingsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	dms_describeEndpointSettingsCmd.MarkFlagRequired("engine-name")
+		dms_describeEndpointSettingsCmd.Flags().String("engine-name", "", "The database engine used for your source or target endpoint.")
+		dms_describeEndpointSettingsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		dms_describeEndpointSettingsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		dms_describeEndpointSettingsCmd.MarkFlagRequired("engine-name")
+	})
 	dmsCmd.AddCommand(dms_describeEndpointSettingsCmd)
 }

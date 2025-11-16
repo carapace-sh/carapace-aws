@@ -12,7 +12,9 @@ var lambda_getAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getAccountSettingsCmd).Standalone()
+	carapace.Gen(lambda_getAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getAccountSettingsCmd).Standalone()
 
+	})
 	lambdaCmd.AddCommand(lambda_getAccountSettingsCmd)
 }

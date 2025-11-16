@@ -12,11 +12,13 @@ var connectcampaignsv2_updateCampaignCommunicationLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_updateCampaignCommunicationLimitsCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_updateCampaignCommunicationLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_updateCampaignCommunicationLimitsCmd).Standalone()
 
-	connectcampaignsv2_updateCampaignCommunicationLimitsCmd.Flags().String("communication-limits-override", "", "")
-	connectcampaignsv2_updateCampaignCommunicationLimitsCmd.Flags().String("id", "", "")
-	connectcampaignsv2_updateCampaignCommunicationLimitsCmd.MarkFlagRequired("communication-limits-override")
-	connectcampaignsv2_updateCampaignCommunicationLimitsCmd.MarkFlagRequired("id")
+		connectcampaignsv2_updateCampaignCommunicationLimitsCmd.Flags().String("communication-limits-override", "", "")
+		connectcampaignsv2_updateCampaignCommunicationLimitsCmd.Flags().String("id", "", "")
+		connectcampaignsv2_updateCampaignCommunicationLimitsCmd.MarkFlagRequired("communication-limits-override")
+		connectcampaignsv2_updateCampaignCommunicationLimitsCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_updateCampaignCommunicationLimitsCmd)
 }

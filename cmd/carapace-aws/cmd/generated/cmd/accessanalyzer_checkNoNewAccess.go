@@ -12,13 +12,15 @@ var accessanalyzer_checkNoNewAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_checkNoNewAccessCmd).Standalone()
+	carapace.Gen(accessanalyzer_checkNoNewAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_checkNoNewAccessCmd).Standalone()
 
-	accessanalyzer_checkNoNewAccessCmd.Flags().String("existing-policy-document", "", "The JSON policy document to use as the content for the existing policy.")
-	accessanalyzer_checkNoNewAccessCmd.Flags().String("new-policy-document", "", "The JSON policy document to use as the content for the updated policy.")
-	accessanalyzer_checkNoNewAccessCmd.Flags().String("policy-type", "", "The type of policy to compare.")
-	accessanalyzer_checkNoNewAccessCmd.MarkFlagRequired("existing-policy-document")
-	accessanalyzer_checkNoNewAccessCmd.MarkFlagRequired("new-policy-document")
-	accessanalyzer_checkNoNewAccessCmd.MarkFlagRequired("policy-type")
+		accessanalyzer_checkNoNewAccessCmd.Flags().String("existing-policy-document", "", "The JSON policy document to use as the content for the existing policy.")
+		accessanalyzer_checkNoNewAccessCmd.Flags().String("new-policy-document", "", "The JSON policy document to use as the content for the updated policy.")
+		accessanalyzer_checkNoNewAccessCmd.Flags().String("policy-type", "", "The type of policy to compare.")
+		accessanalyzer_checkNoNewAccessCmd.MarkFlagRequired("existing-policy-document")
+		accessanalyzer_checkNoNewAccessCmd.MarkFlagRequired("new-policy-document")
+		accessanalyzer_checkNoNewAccessCmd.MarkFlagRequired("policy-type")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_checkNoNewAccessCmd)
 }

@@ -12,11 +12,13 @@ var wisdom_getQuickResponseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_getQuickResponseCmd).Standalone()
+	carapace.Gen(wisdom_getQuickResponseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_getQuickResponseCmd).Standalone()
 
-	wisdom_getQuickResponseCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	wisdom_getQuickResponseCmd.Flags().String("quick-response-id", "", "The identifier of the quick response.")
-	wisdom_getQuickResponseCmd.MarkFlagRequired("knowledge-base-id")
-	wisdom_getQuickResponseCmd.MarkFlagRequired("quick-response-id")
+		wisdom_getQuickResponseCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		wisdom_getQuickResponseCmd.Flags().String("quick-response-id", "", "The identifier of the quick response.")
+		wisdom_getQuickResponseCmd.MarkFlagRequired("knowledge-base-id")
+		wisdom_getQuickResponseCmd.MarkFlagRequired("quick-response-id")
+	})
 	wisdomCmd.AddCommand(wisdom_getQuickResponseCmd)
 }

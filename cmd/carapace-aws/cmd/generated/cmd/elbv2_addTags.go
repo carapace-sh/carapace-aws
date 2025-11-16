@@ -12,11 +12,13 @@ var elbv2_addTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_addTagsCmd).Standalone()
+	carapace.Gen(elbv2_addTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_addTagsCmd).Standalone()
 
-	elbv2_addTagsCmd.Flags().String("resource-arns", "", "The Amazon Resource Name (ARN) of the resource.")
-	elbv2_addTagsCmd.Flags().String("tags", "", "The tags.")
-	elbv2_addTagsCmd.MarkFlagRequired("resource-arns")
-	elbv2_addTagsCmd.MarkFlagRequired("tags")
+		elbv2_addTagsCmd.Flags().String("resource-arns", "", "The Amazon Resource Name (ARN) of the resource.")
+		elbv2_addTagsCmd.Flags().String("tags", "", "The tags.")
+		elbv2_addTagsCmd.MarkFlagRequired("resource-arns")
+		elbv2_addTagsCmd.MarkFlagRequired("tags")
+	})
 	elbv2Cmd.AddCommand(elbv2_addTagsCmd)
 }

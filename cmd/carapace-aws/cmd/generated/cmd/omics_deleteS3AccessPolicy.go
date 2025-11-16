@@ -12,9 +12,11 @@ var omics_deleteS3AccessPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_deleteS3AccessPolicyCmd).Standalone()
+	carapace.Gen(omics_deleteS3AccessPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_deleteS3AccessPolicyCmd).Standalone()
 
-	omics_deleteS3AccessPolicyCmd.Flags().String("s3-access-point-arn", "", "The S3 access point ARN that has the access policy.")
-	omics_deleteS3AccessPolicyCmd.MarkFlagRequired("s3-access-point-arn")
+		omics_deleteS3AccessPolicyCmd.Flags().String("s3-access-point-arn", "", "The S3 access point ARN that has the access policy.")
+		omics_deleteS3AccessPolicyCmd.MarkFlagRequired("s3-access-point-arn")
+	})
 	omicsCmd.AddCommand(omics_deleteS3AccessPolicyCmd)
 }

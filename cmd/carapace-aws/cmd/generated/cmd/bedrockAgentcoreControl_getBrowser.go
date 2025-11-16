@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_getBrowserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_getBrowserCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_getBrowserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_getBrowserCmd).Standalone()
 
-	bedrockAgentcoreControl_getBrowserCmd.Flags().String("browser-id", "", "The unique identifier of the browser to retrieve.")
-	bedrockAgentcoreControl_getBrowserCmd.MarkFlagRequired("browser-id")
+		bedrockAgentcoreControl_getBrowserCmd.Flags().String("browser-id", "", "The unique identifier of the browser to retrieve.")
+		bedrockAgentcoreControl_getBrowserCmd.MarkFlagRequired("browser-id")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_getBrowserCmd)
 }

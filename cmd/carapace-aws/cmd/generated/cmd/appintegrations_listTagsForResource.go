@@ -12,9 +12,11 @@ var appintegrations_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_listTagsForResourceCmd).Standalone()
+	carapace.Gen(appintegrations_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_listTagsForResourceCmd).Standalone()
 
-	appintegrations_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	appintegrations_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		appintegrations_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		appintegrations_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_listTagsForResourceCmd)
 }

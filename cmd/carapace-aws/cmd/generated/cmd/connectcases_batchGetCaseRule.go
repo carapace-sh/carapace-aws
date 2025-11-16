@@ -12,11 +12,13 @@ var connectcases_batchGetCaseRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_batchGetCaseRuleCmd).Standalone()
+	carapace.Gen(connectcases_batchGetCaseRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_batchGetCaseRuleCmd).Standalone()
 
-	connectcases_batchGetCaseRuleCmd.Flags().String("case-rules", "", "A list of case rule identifiers.")
-	connectcases_batchGetCaseRuleCmd.Flags().String("domain-id", "", "Unique identifier of a Cases domain.")
-	connectcases_batchGetCaseRuleCmd.MarkFlagRequired("case-rules")
-	connectcases_batchGetCaseRuleCmd.MarkFlagRequired("domain-id")
+		connectcases_batchGetCaseRuleCmd.Flags().String("case-rules", "", "A list of case rule identifiers.")
+		connectcases_batchGetCaseRuleCmd.Flags().String("domain-id", "", "Unique identifier of a Cases domain.")
+		connectcases_batchGetCaseRuleCmd.MarkFlagRequired("case-rules")
+		connectcases_batchGetCaseRuleCmd.MarkFlagRequired("domain-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_batchGetCaseRuleCmd)
 }

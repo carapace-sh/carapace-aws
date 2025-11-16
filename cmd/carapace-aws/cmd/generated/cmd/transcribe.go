@@ -12,7 +12,9 @@ var transcribeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribeCmd).Standalone()
+	carapace.Gen(transcribeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribeCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(transcribeCmd)
 }

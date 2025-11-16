@@ -12,11 +12,13 @@ var servicecatalog_createTagOptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_createTagOptionCmd).Standalone()
+	carapace.Gen(servicecatalog_createTagOptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_createTagOptionCmd).Standalone()
 
-	servicecatalog_createTagOptionCmd.Flags().String("key", "", "The TagOption key.")
-	servicecatalog_createTagOptionCmd.Flags().String("value", "", "The TagOption value.")
-	servicecatalog_createTagOptionCmd.MarkFlagRequired("key")
-	servicecatalog_createTagOptionCmd.MarkFlagRequired("value")
+		servicecatalog_createTagOptionCmd.Flags().String("key", "", "The TagOption key.")
+		servicecatalog_createTagOptionCmd.Flags().String("value", "", "The TagOption value.")
+		servicecatalog_createTagOptionCmd.MarkFlagRequired("key")
+		servicecatalog_createTagOptionCmd.MarkFlagRequired("value")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_createTagOptionCmd)
 }

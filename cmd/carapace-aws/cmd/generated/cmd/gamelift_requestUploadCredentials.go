@@ -12,9 +12,11 @@ var gamelift_requestUploadCredentialsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_requestUploadCredentialsCmd).Standalone()
+	carapace.Gen(gamelift_requestUploadCredentialsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_requestUploadCredentialsCmd).Standalone()
 
-	gamelift_requestUploadCredentialsCmd.Flags().String("build-id", "", "A unique identifier for the build to get credentials for.")
-	gamelift_requestUploadCredentialsCmd.MarkFlagRequired("build-id")
+		gamelift_requestUploadCredentialsCmd.Flags().String("build-id", "", "A unique identifier for the build to get credentials for.")
+		gamelift_requestUploadCredentialsCmd.MarkFlagRequired("build-id")
+	})
 	gameliftCmd.AddCommand(gamelift_requestUploadCredentialsCmd)
 }

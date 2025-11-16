@@ -12,11 +12,13 @@ var qapps_associateQappWithUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_associateQappWithUserCmd).Standalone()
+	carapace.Gen(qapps_associateQappWithUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_associateQappWithUserCmd).Standalone()
 
-	qapps_associateQappWithUserCmd.Flags().String("app-id", "", "The ID of the Amazon Q App to associate with the user.")
-	qapps_associateQappWithUserCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_associateQappWithUserCmd.MarkFlagRequired("app-id")
-	qapps_associateQappWithUserCmd.MarkFlagRequired("instance-id")
+		qapps_associateQappWithUserCmd.Flags().String("app-id", "", "The ID of the Amazon Q App to associate with the user.")
+		qapps_associateQappWithUserCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_associateQappWithUserCmd.MarkFlagRequired("app-id")
+		qapps_associateQappWithUserCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_associateQappWithUserCmd)
 }

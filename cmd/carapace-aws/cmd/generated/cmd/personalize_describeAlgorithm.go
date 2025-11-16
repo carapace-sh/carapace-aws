@@ -12,9 +12,11 @@ var personalize_describeAlgorithmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeAlgorithmCmd).Standalone()
+	carapace.Gen(personalize_describeAlgorithmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeAlgorithmCmd).Standalone()
 
-	personalize_describeAlgorithmCmd.Flags().String("algorithm-arn", "", "The Amazon Resource Name (ARN) of the algorithm to describe.")
-	personalize_describeAlgorithmCmd.MarkFlagRequired("algorithm-arn")
+		personalize_describeAlgorithmCmd.Flags().String("algorithm-arn", "", "The Amazon Resource Name (ARN) of the algorithm to describe.")
+		personalize_describeAlgorithmCmd.MarkFlagRequired("algorithm-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeAlgorithmCmd)
 }

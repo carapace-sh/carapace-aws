@@ -12,13 +12,15 @@ var connect_deleteHoursOfOperationOverrideCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteHoursOfOperationOverrideCmd).Standalone()
+	carapace.Gen(connect_deleteHoursOfOperationOverrideCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteHoursOfOperationOverrideCmd).Standalone()
 
-	connect_deleteHoursOfOperationOverrideCmd.Flags().String("hours-of-operation-id", "", "The identifier for the hours of operation.")
-	connect_deleteHoursOfOperationOverrideCmd.Flags().String("hours-of-operation-override-id", "", "The identifier for the hours of operation override.")
-	connect_deleteHoursOfOperationOverrideCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteHoursOfOperationOverrideCmd.MarkFlagRequired("hours-of-operation-id")
-	connect_deleteHoursOfOperationOverrideCmd.MarkFlagRequired("hours-of-operation-override-id")
-	connect_deleteHoursOfOperationOverrideCmd.MarkFlagRequired("instance-id")
+		connect_deleteHoursOfOperationOverrideCmd.Flags().String("hours-of-operation-id", "", "The identifier for the hours of operation.")
+		connect_deleteHoursOfOperationOverrideCmd.Flags().String("hours-of-operation-override-id", "", "The identifier for the hours of operation override.")
+		connect_deleteHoursOfOperationOverrideCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteHoursOfOperationOverrideCmd.MarkFlagRequired("hours-of-operation-id")
+		connect_deleteHoursOfOperationOverrideCmd.MarkFlagRequired("hours-of-operation-override-id")
+		connect_deleteHoursOfOperationOverrideCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_deleteHoursOfOperationOverrideCmd)
 }

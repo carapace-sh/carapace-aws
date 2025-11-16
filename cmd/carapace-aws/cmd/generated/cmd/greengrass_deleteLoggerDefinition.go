@@ -12,9 +12,11 @@ var greengrass_deleteLoggerDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_deleteLoggerDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_deleteLoggerDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_deleteLoggerDefinitionCmd).Standalone()
 
-	greengrass_deleteLoggerDefinitionCmd.Flags().String("logger-definition-id", "", "The ID of the logger definition.")
-	greengrass_deleteLoggerDefinitionCmd.MarkFlagRequired("logger-definition-id")
+		greengrass_deleteLoggerDefinitionCmd.Flags().String("logger-definition-id", "", "The ID of the logger definition.")
+		greengrass_deleteLoggerDefinitionCmd.MarkFlagRequired("logger-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_deleteLoggerDefinitionCmd)
 }

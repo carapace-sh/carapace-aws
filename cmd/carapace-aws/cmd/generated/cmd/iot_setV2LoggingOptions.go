@@ -12,10 +12,12 @@ var iot_setV2LoggingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_setV2LoggingOptionsCmd).Standalone()
+	carapace.Gen(iot_setV2LoggingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_setV2LoggingOptionsCmd).Standalone()
 
-	iot_setV2LoggingOptionsCmd.Flags().String("default-log-level", "", "The default logging level.")
-	iot_setV2LoggingOptionsCmd.Flags().String("disable-all-logs", "", "If true all logs are disabled.")
-	iot_setV2LoggingOptionsCmd.Flags().String("role-arn", "", "The ARN of the role that allows IoT to write to Cloudwatch logs.")
+		iot_setV2LoggingOptionsCmd.Flags().String("default-log-level", "", "The default logging level.")
+		iot_setV2LoggingOptionsCmd.Flags().String("disable-all-logs", "", "If true all logs are disabled.")
+		iot_setV2LoggingOptionsCmd.Flags().String("role-arn", "", "The ARN of the role that allows IoT to write to Cloudwatch logs.")
+	})
 	iotCmd.AddCommand(iot_setV2LoggingOptionsCmd)
 }

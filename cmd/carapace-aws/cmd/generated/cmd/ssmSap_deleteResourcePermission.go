@@ -12,11 +12,13 @@ var ssmSap_deleteResourcePermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_deleteResourcePermissionCmd).Standalone()
+	carapace.Gen(ssmSap_deleteResourcePermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_deleteResourcePermissionCmd).Standalone()
 
-	ssmSap_deleteResourcePermissionCmd.Flags().String("action-type", "", "Delete or restore the permissions on the target database.")
-	ssmSap_deleteResourcePermissionCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	ssmSap_deleteResourcePermissionCmd.Flags().String("source-resource-arn", "", "The Amazon Resource Name (ARN) of the source resource.")
-	ssmSap_deleteResourcePermissionCmd.MarkFlagRequired("resource-arn")
+		ssmSap_deleteResourcePermissionCmd.Flags().String("action-type", "", "Delete or restore the permissions on the target database.")
+		ssmSap_deleteResourcePermissionCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		ssmSap_deleteResourcePermissionCmd.Flags().String("source-resource-arn", "", "The Amazon Resource Name (ARN) of the source resource.")
+		ssmSap_deleteResourcePermissionCmd.MarkFlagRequired("resource-arn")
+	})
 	ssmSapCmd.AddCommand(ssmSap_deleteResourcePermissionCmd)
 }

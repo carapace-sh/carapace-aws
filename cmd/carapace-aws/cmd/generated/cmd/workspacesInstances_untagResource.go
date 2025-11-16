@@ -12,11 +12,13 @@ var workspacesInstances_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_untagResourceCmd).Standalone()
+	carapace.Gen(workspacesInstances_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_untagResourceCmd).Standalone()
 
-	workspacesInstances_untagResourceCmd.Flags().String("tag-keys", "", "Keys of tags to be removed.")
-	workspacesInstances_untagResourceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpace Instance to untag.")
-	workspacesInstances_untagResourceCmd.MarkFlagRequired("tag-keys")
-	workspacesInstances_untagResourceCmd.MarkFlagRequired("workspace-instance-id")
+		workspacesInstances_untagResourceCmd.Flags().String("tag-keys", "", "Keys of tags to be removed.")
+		workspacesInstances_untagResourceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpace Instance to untag.")
+		workspacesInstances_untagResourceCmd.MarkFlagRequired("tag-keys")
+		workspacesInstances_untagResourceCmd.MarkFlagRequired("workspace-instance-id")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_untagResourceCmd)
 }

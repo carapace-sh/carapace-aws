@@ -12,7 +12,9 @@ var pinpointSmsVoiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(pinpointSmsVoiceCmd)
 }

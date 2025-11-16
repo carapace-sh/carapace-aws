@@ -12,11 +12,13 @@ var mediaconnect_revokeFlowEntitlementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_revokeFlowEntitlementCmd).Standalone()
+	carapace.Gen(mediaconnect_revokeFlowEntitlementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_revokeFlowEntitlementCmd).Standalone()
 
-	mediaconnect_revokeFlowEntitlementCmd.Flags().String("entitlement-arn", "", "The Amazon Resource Name (ARN) of the entitlement that you want to revoke.")
-	mediaconnect_revokeFlowEntitlementCmd.Flags().String("flow-arn", "", "The flow that you want to revoke an entitlement from.")
-	mediaconnect_revokeFlowEntitlementCmd.MarkFlagRequired("entitlement-arn")
-	mediaconnect_revokeFlowEntitlementCmd.MarkFlagRequired("flow-arn")
+		mediaconnect_revokeFlowEntitlementCmd.Flags().String("entitlement-arn", "", "The Amazon Resource Name (ARN) of the entitlement that you want to revoke.")
+		mediaconnect_revokeFlowEntitlementCmd.Flags().String("flow-arn", "", "The flow that you want to revoke an entitlement from.")
+		mediaconnect_revokeFlowEntitlementCmd.MarkFlagRequired("entitlement-arn")
+		mediaconnect_revokeFlowEntitlementCmd.MarkFlagRequired("flow-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_revokeFlowEntitlementCmd)
 }

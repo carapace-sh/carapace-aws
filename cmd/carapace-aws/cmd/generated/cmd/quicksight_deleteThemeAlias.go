@@ -12,13 +12,15 @@ var quicksight_deleteThemeAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteThemeAliasCmd).Standalone()
+	carapace.Gen(quicksight_deleteThemeAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteThemeAliasCmd).Standalone()
 
-	quicksight_deleteThemeAliasCmd.Flags().String("alias-name", "", "The unique name for the theme alias to delete.")
-	quicksight_deleteThemeAliasCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the theme alias to delete.")
-	quicksight_deleteThemeAliasCmd.Flags().String("theme-id", "", "The ID for the theme that the specified alias is for.")
-	quicksight_deleteThemeAliasCmd.MarkFlagRequired("alias-name")
-	quicksight_deleteThemeAliasCmd.MarkFlagRequired("aws-account-id")
-	quicksight_deleteThemeAliasCmd.MarkFlagRequired("theme-id")
+		quicksight_deleteThemeAliasCmd.Flags().String("alias-name", "", "The unique name for the theme alias to delete.")
+		quicksight_deleteThemeAliasCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the theme alias to delete.")
+		quicksight_deleteThemeAliasCmd.Flags().String("theme-id", "", "The ID for the theme that the specified alias is for.")
+		quicksight_deleteThemeAliasCmd.MarkFlagRequired("alias-name")
+		quicksight_deleteThemeAliasCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteThemeAliasCmd.MarkFlagRequired("theme-id")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteThemeAliasCmd)
 }

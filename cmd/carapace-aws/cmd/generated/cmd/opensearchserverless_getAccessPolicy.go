@@ -12,11 +12,13 @@ var opensearchserverless_getAccessPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_getAccessPolicyCmd).Standalone()
+	carapace.Gen(opensearchserverless_getAccessPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_getAccessPolicyCmd).Standalone()
 
-	opensearchserverless_getAccessPolicyCmd.Flags().String("name", "", "The name of the access policy.")
-	opensearchserverless_getAccessPolicyCmd.Flags().String("type", "", "Tye type of policy.")
-	opensearchserverless_getAccessPolicyCmd.MarkFlagRequired("name")
-	opensearchserverless_getAccessPolicyCmd.MarkFlagRequired("type")
+		opensearchserverless_getAccessPolicyCmd.Flags().String("name", "", "The name of the access policy.")
+		opensearchserverless_getAccessPolicyCmd.Flags().String("type", "", "Tye type of policy.")
+		opensearchserverless_getAccessPolicyCmd.MarkFlagRequired("name")
+		opensearchserverless_getAccessPolicyCmd.MarkFlagRequired("type")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_getAccessPolicyCmd)
 }

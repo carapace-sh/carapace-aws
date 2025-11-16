@@ -12,9 +12,11 @@ var apprunner_deleteObservabilityConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_deleteObservabilityConfigurationCmd).Standalone()
+	carapace.Gen(apprunner_deleteObservabilityConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_deleteObservabilityConfigurationCmd).Standalone()
 
-	apprunner_deleteObservabilityConfigurationCmd.Flags().String("observability-configuration-arn", "", "The Amazon Resource Name (ARN) of the App Runner observability configuration that you want to delete.")
-	apprunner_deleteObservabilityConfigurationCmd.MarkFlagRequired("observability-configuration-arn")
+		apprunner_deleteObservabilityConfigurationCmd.Flags().String("observability-configuration-arn", "", "The Amazon Resource Name (ARN) of the App Runner observability configuration that you want to delete.")
+		apprunner_deleteObservabilityConfigurationCmd.MarkFlagRequired("observability-configuration-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_deleteObservabilityConfigurationCmd)
 }

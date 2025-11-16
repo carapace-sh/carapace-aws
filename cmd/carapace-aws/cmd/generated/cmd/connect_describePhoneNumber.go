@@ -12,9 +12,11 @@ var connect_describePhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describePhoneNumberCmd).Standalone()
+	carapace.Gen(connect_describePhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describePhoneNumberCmd).Standalone()
 
-	connect_describePhoneNumberCmd.Flags().String("phone-number-id", "", "A unique identifier for the phone number.")
-	connect_describePhoneNumberCmd.MarkFlagRequired("phone-number-id")
+		connect_describePhoneNumberCmd.Flags().String("phone-number-id", "", "A unique identifier for the phone number.")
+		connect_describePhoneNumberCmd.MarkFlagRequired("phone-number-id")
+	})
 	connectCmd.AddCommand(connect_describePhoneNumberCmd)
 }

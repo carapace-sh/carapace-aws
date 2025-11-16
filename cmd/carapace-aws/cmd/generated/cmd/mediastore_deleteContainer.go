@@ -12,9 +12,11 @@ var mediastore_deleteContainerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_deleteContainerCmd).Standalone()
+	carapace.Gen(mediastore_deleteContainerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_deleteContainerCmd).Standalone()
 
-	mediastore_deleteContainerCmd.Flags().String("container-name", "", "The name of the container to delete.")
-	mediastore_deleteContainerCmd.MarkFlagRequired("container-name")
+		mediastore_deleteContainerCmd.Flags().String("container-name", "", "The name of the container to delete.")
+		mediastore_deleteContainerCmd.MarkFlagRequired("container-name")
+	})
 	mediastoreCmd.AddCommand(mediastore_deleteContainerCmd)
 }

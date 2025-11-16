@@ -12,11 +12,13 @@ var keyspaces_getTableAutoScalingSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspaces_getTableAutoScalingSettingsCmd).Standalone()
+	carapace.Gen(keyspaces_getTableAutoScalingSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspaces_getTableAutoScalingSettingsCmd).Standalone()
 
-	keyspaces_getTableAutoScalingSettingsCmd.Flags().String("keyspace-name", "", "The name of the keyspace.")
-	keyspaces_getTableAutoScalingSettingsCmd.Flags().String("table-name", "", "The name of the table.")
-	keyspaces_getTableAutoScalingSettingsCmd.MarkFlagRequired("keyspace-name")
-	keyspaces_getTableAutoScalingSettingsCmd.MarkFlagRequired("table-name")
+		keyspaces_getTableAutoScalingSettingsCmd.Flags().String("keyspace-name", "", "The name of the keyspace.")
+		keyspaces_getTableAutoScalingSettingsCmd.Flags().String("table-name", "", "The name of the table.")
+		keyspaces_getTableAutoScalingSettingsCmd.MarkFlagRequired("keyspace-name")
+		keyspaces_getTableAutoScalingSettingsCmd.MarkFlagRequired("table-name")
+	})
 	keyspacesCmd.AddCommand(keyspaces_getTableAutoScalingSettingsCmd)
 }

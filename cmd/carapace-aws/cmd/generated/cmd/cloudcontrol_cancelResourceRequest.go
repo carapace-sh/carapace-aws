@@ -12,9 +12,11 @@ var cloudcontrol_cancelResourceRequestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudcontrol_cancelResourceRequestCmd).Standalone()
+	carapace.Gen(cloudcontrol_cancelResourceRequestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudcontrol_cancelResourceRequestCmd).Standalone()
 
-	cloudcontrol_cancelResourceRequestCmd.Flags().String("request-token", "", "The `RequestToken` of the `ProgressEvent` object returned by the resource operation request.")
-	cloudcontrol_cancelResourceRequestCmd.MarkFlagRequired("request-token")
+		cloudcontrol_cancelResourceRequestCmd.Flags().String("request-token", "", "The `RequestToken` of the `ProgressEvent` object returned by the resource operation request.")
+		cloudcontrol_cancelResourceRequestCmd.MarkFlagRequired("request-token")
+	})
 	cloudcontrolCmd.AddCommand(cloudcontrol_cancelResourceRequestCmd)
 }

@@ -12,9 +12,11 @@ var redshiftServerless_getUsageLimitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getUsageLimitCmd).Standalone()
+	carapace.Gen(redshiftServerless_getUsageLimitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getUsageLimitCmd).Standalone()
 
-	redshiftServerless_getUsageLimitCmd.Flags().String("usage-limit-id", "", "The unique identifier of the usage limit to return information for.")
-	redshiftServerless_getUsageLimitCmd.MarkFlagRequired("usage-limit-id")
+		redshiftServerless_getUsageLimitCmd.Flags().String("usage-limit-id", "", "The unique identifier of the usage limit to return information for.")
+		redshiftServerless_getUsageLimitCmd.MarkFlagRequired("usage-limit-id")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getUsageLimitCmd)
 }

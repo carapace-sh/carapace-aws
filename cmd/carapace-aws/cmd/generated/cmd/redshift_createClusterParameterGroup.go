@@ -12,14 +12,16 @@ var redshift_createClusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_createClusterParameterGroupCmd).Standalone()
+	carapace.Gen(redshift_createClusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_createClusterParameterGroupCmd).Standalone()
 
-	redshift_createClusterParameterGroupCmd.Flags().String("description", "", "A description of the parameter group.")
-	redshift_createClusterParameterGroupCmd.Flags().String("parameter-group-family", "", "The Amazon Redshift engine version to which the cluster parameter group applies.")
-	redshift_createClusterParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the cluster parameter group.")
-	redshift_createClusterParameterGroupCmd.Flags().String("tags", "", "A list of tag instances.")
-	redshift_createClusterParameterGroupCmd.MarkFlagRequired("description")
-	redshift_createClusterParameterGroupCmd.MarkFlagRequired("parameter-group-family")
-	redshift_createClusterParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+		redshift_createClusterParameterGroupCmd.Flags().String("description", "", "A description of the parameter group.")
+		redshift_createClusterParameterGroupCmd.Flags().String("parameter-group-family", "", "The Amazon Redshift engine version to which the cluster parameter group applies.")
+		redshift_createClusterParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the cluster parameter group.")
+		redshift_createClusterParameterGroupCmd.Flags().String("tags", "", "A list of tag instances.")
+		redshift_createClusterParameterGroupCmd.MarkFlagRequired("description")
+		redshift_createClusterParameterGroupCmd.MarkFlagRequired("parameter-group-family")
+		redshift_createClusterParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+	})
 	redshiftCmd.AddCommand(redshift_createClusterParameterGroupCmd)
 }

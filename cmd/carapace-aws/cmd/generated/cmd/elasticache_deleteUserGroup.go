@@ -12,9 +12,11 @@ var elasticache_deleteUserGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_deleteUserGroupCmd).Standalone()
+	carapace.Gen(elasticache_deleteUserGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_deleteUserGroupCmd).Standalone()
 
-	elasticache_deleteUserGroupCmd.Flags().String("user-group-id", "", "The ID of the user group.")
-	elasticache_deleteUserGroupCmd.MarkFlagRequired("user-group-id")
+		elasticache_deleteUserGroupCmd.Flags().String("user-group-id", "", "The ID of the user group.")
+		elasticache_deleteUserGroupCmd.MarkFlagRequired("user-group-id")
+	})
 	elasticacheCmd.AddCommand(elasticache_deleteUserGroupCmd)
 }

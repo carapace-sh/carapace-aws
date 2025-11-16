@@ -12,9 +12,11 @@ var pcaConnectorScep_deleteConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorScep_deleteConnectorCmd).Standalone()
+	carapace.Gen(pcaConnectorScep_deleteConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorScep_deleteConnectorCmd).Standalone()
 
-	pcaConnectorScep_deleteConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector to delete.")
-	pcaConnectorScep_deleteConnectorCmd.MarkFlagRequired("connector-arn")
+		pcaConnectorScep_deleteConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector to delete.")
+		pcaConnectorScep_deleteConnectorCmd.MarkFlagRequired("connector-arn")
+	})
 	pcaConnectorScepCmd.AddCommand(pcaConnectorScep_deleteConnectorCmd)
 }

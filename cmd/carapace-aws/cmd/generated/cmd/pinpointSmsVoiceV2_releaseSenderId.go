@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_releaseSenderIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_releaseSenderIdCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_releaseSenderIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_releaseSenderIdCmd).Standalone()
 
-	pinpointSmsVoiceV2_releaseSenderIdCmd.Flags().String("iso-country-code", "", "The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.")
-	pinpointSmsVoiceV2_releaseSenderIdCmd.Flags().String("sender-id", "", "The sender ID to release.")
-	pinpointSmsVoiceV2_releaseSenderIdCmd.MarkFlagRequired("iso-country-code")
-	pinpointSmsVoiceV2_releaseSenderIdCmd.MarkFlagRequired("sender-id")
+		pinpointSmsVoiceV2_releaseSenderIdCmd.Flags().String("iso-country-code", "", "The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.")
+		pinpointSmsVoiceV2_releaseSenderIdCmd.Flags().String("sender-id", "", "The sender ID to release.")
+		pinpointSmsVoiceV2_releaseSenderIdCmd.MarkFlagRequired("iso-country-code")
+		pinpointSmsVoiceV2_releaseSenderIdCmd.MarkFlagRequired("sender-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_releaseSenderIdCmd)
 }

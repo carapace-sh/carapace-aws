@@ -12,9 +12,11 @@ var amp_describeWorkspaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_describeWorkspaceCmd).Standalone()
+	carapace.Gen(amp_describeWorkspaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_describeWorkspaceCmd).Standalone()
 
-	amp_describeWorkspaceCmd.Flags().String("workspace-id", "", "The ID of the workspace to describe.")
-	amp_describeWorkspaceCmd.MarkFlagRequired("workspace-id")
+		amp_describeWorkspaceCmd.Flags().String("workspace-id", "", "The ID of the workspace to describe.")
+		amp_describeWorkspaceCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_describeWorkspaceCmd)
 }

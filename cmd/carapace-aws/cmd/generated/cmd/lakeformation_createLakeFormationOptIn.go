@@ -12,12 +12,14 @@ var lakeformation_createLakeFormationOptInCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_createLakeFormationOptInCmd).Standalone()
+	carapace.Gen(lakeformation_createLakeFormationOptInCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_createLakeFormationOptInCmd).Standalone()
 
-	lakeformation_createLakeFormationOptInCmd.Flags().String("condition", "", "")
-	lakeformation_createLakeFormationOptInCmd.Flags().String("principal", "", "")
-	lakeformation_createLakeFormationOptInCmd.Flags().String("resource", "", "")
-	lakeformation_createLakeFormationOptInCmd.MarkFlagRequired("principal")
-	lakeformation_createLakeFormationOptInCmd.MarkFlagRequired("resource")
+		lakeformation_createLakeFormationOptInCmd.Flags().String("condition", "", "")
+		lakeformation_createLakeFormationOptInCmd.Flags().String("principal", "", "")
+		lakeformation_createLakeFormationOptInCmd.Flags().String("resource", "", "")
+		lakeformation_createLakeFormationOptInCmd.MarkFlagRequired("principal")
+		lakeformation_createLakeFormationOptInCmd.MarkFlagRequired("resource")
+	})
 	lakeformationCmd.AddCommand(lakeformation_createLakeFormationOptInCmd)
 }

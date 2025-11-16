@@ -12,11 +12,13 @@ var networkmonitor_deleteProbeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmonitor_deleteProbeCmd).Standalone()
+	carapace.Gen(networkmonitor_deleteProbeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmonitor_deleteProbeCmd).Standalone()
 
-	networkmonitor_deleteProbeCmd.Flags().String("monitor-name", "", "The name of the monitor to delete.")
-	networkmonitor_deleteProbeCmd.Flags().String("probe-id", "", "The ID of the probe to delete.")
-	networkmonitor_deleteProbeCmd.MarkFlagRequired("monitor-name")
-	networkmonitor_deleteProbeCmd.MarkFlagRequired("probe-id")
+		networkmonitor_deleteProbeCmd.Flags().String("monitor-name", "", "The name of the monitor to delete.")
+		networkmonitor_deleteProbeCmd.Flags().String("probe-id", "", "The ID of the probe to delete.")
+		networkmonitor_deleteProbeCmd.MarkFlagRequired("monitor-name")
+		networkmonitor_deleteProbeCmd.MarkFlagRequired("probe-id")
+	})
 	networkmonitorCmd.AddCommand(networkmonitor_deleteProbeCmd)
 }

@@ -12,11 +12,13 @@ var pinpoint_putEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_putEventsCmd).Standalone()
+	carapace.Gen(pinpoint_putEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_putEventsCmd).Standalone()
 
-	pinpoint_putEventsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_putEventsCmd.Flags().String("events-request", "", "")
-	pinpoint_putEventsCmd.MarkFlagRequired("application-id")
-	pinpoint_putEventsCmd.MarkFlagRequired("events-request")
+		pinpoint_putEventsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_putEventsCmd.Flags().String("events-request", "", "")
+		pinpoint_putEventsCmd.MarkFlagRequired("application-id")
+		pinpoint_putEventsCmd.MarkFlagRequired("events-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_putEventsCmd)
 }

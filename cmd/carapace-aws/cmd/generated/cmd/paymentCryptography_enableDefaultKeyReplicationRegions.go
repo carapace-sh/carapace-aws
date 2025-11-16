@@ -12,9 +12,11 @@ var paymentCryptography_enableDefaultKeyReplicationRegionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_enableDefaultKeyReplicationRegionsCmd).Standalone()
+	carapace.Gen(paymentCryptography_enableDefaultKeyReplicationRegionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_enableDefaultKeyReplicationRegionsCmd).Standalone()
 
-	paymentCryptography_enableDefaultKeyReplicationRegionsCmd.Flags().String("replication-regions", "", "The list of Amazon Web Services Regions to enable as default replication regions for the Amazon Web Services account for [Multi-Region key replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html).")
-	paymentCryptography_enableDefaultKeyReplicationRegionsCmd.MarkFlagRequired("replication-regions")
+		paymentCryptography_enableDefaultKeyReplicationRegionsCmd.Flags().String("replication-regions", "", "The list of Amazon Web Services Regions to enable as default replication regions for the Amazon Web Services account for [Multi-Region key replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html).")
+		paymentCryptography_enableDefaultKeyReplicationRegionsCmd.MarkFlagRequired("replication-regions")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_enableDefaultKeyReplicationRegionsCmd)
 }

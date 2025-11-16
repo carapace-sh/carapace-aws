@@ -12,12 +12,14 @@ var networkmanager_updateVpcAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_updateVpcAttachmentCmd).Standalone()
+	carapace.Gen(networkmanager_updateVpcAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_updateVpcAttachmentCmd).Standalone()
 
-	networkmanager_updateVpcAttachmentCmd.Flags().String("add-subnet-arns", "", "Adds a subnet ARN to the VPC attachment.")
-	networkmanager_updateVpcAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment.")
-	networkmanager_updateVpcAttachmentCmd.Flags().String("options", "", "Additional options for updating the VPC attachment.")
-	networkmanager_updateVpcAttachmentCmd.Flags().String("remove-subnet-arns", "", "Removes a subnet ARN from the attachment.")
-	networkmanager_updateVpcAttachmentCmd.MarkFlagRequired("attachment-id")
+		networkmanager_updateVpcAttachmentCmd.Flags().String("add-subnet-arns", "", "Adds a subnet ARN to the VPC attachment.")
+		networkmanager_updateVpcAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment.")
+		networkmanager_updateVpcAttachmentCmd.Flags().String("options", "", "Additional options for updating the VPC attachment.")
+		networkmanager_updateVpcAttachmentCmd.Flags().String("remove-subnet-arns", "", "Removes a subnet ARN from the attachment.")
+		networkmanager_updateVpcAttachmentCmd.MarkFlagRequired("attachment-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_updateVpcAttachmentCmd)
 }

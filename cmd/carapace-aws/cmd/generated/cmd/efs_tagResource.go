@@ -12,11 +12,13 @@ var efs_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_tagResourceCmd).Standalone()
+	carapace.Gen(efs_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_tagResourceCmd).Standalone()
 
-	efs_tagResourceCmd.Flags().String("resource-id", "", "The ID specifying the EFS resource that you want to create a tag for.")
-	efs_tagResourceCmd.Flags().String("tags", "", "An array of `Tag` objects to add.")
-	efs_tagResourceCmd.MarkFlagRequired("resource-id")
-	efs_tagResourceCmd.MarkFlagRequired("tags")
+		efs_tagResourceCmd.Flags().String("resource-id", "", "The ID specifying the EFS resource that you want to create a tag for.")
+		efs_tagResourceCmd.Flags().String("tags", "", "An array of `Tag` objects to add.")
+		efs_tagResourceCmd.MarkFlagRequired("resource-id")
+		efs_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	efsCmd.AddCommand(efs_tagResourceCmd)
 }

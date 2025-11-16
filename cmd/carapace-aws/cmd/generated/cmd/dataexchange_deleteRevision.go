@@ -12,11 +12,13 @@ var dataexchange_deleteRevisionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_deleteRevisionCmd).Standalone()
+	carapace.Gen(dataexchange_deleteRevisionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_deleteRevisionCmd).Standalone()
 
-	dataexchange_deleteRevisionCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
-	dataexchange_deleteRevisionCmd.Flags().String("revision-id", "", "The unique identifier for a revision.")
-	dataexchange_deleteRevisionCmd.MarkFlagRequired("data-set-id")
-	dataexchange_deleteRevisionCmd.MarkFlagRequired("revision-id")
+		dataexchange_deleteRevisionCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
+		dataexchange_deleteRevisionCmd.Flags().String("revision-id", "", "The unique identifier for a revision.")
+		dataexchange_deleteRevisionCmd.MarkFlagRequired("data-set-id")
+		dataexchange_deleteRevisionCmd.MarkFlagRequired("revision-id")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_deleteRevisionCmd)
 }

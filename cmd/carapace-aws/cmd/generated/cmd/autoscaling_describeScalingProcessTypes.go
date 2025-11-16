@@ -12,7 +12,9 @@ var autoscaling_describeScalingProcessTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_describeScalingProcessTypesCmd).Standalone()
+	carapace.Gen(autoscaling_describeScalingProcessTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_describeScalingProcessTypesCmd).Standalone()
 
+	})
 	autoscalingCmd.AddCommand(autoscaling_describeScalingProcessTypesCmd)
 }

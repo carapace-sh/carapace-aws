@@ -12,7 +12,9 @@ var ssoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoCmd).Standalone()
+	carapace.Gen(ssoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ssoCmd)
 }

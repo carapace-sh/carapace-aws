@@ -12,11 +12,13 @@ var globalaccelerator_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_tagResourceCmd).Standalone()
+	carapace.Gen(globalaccelerator_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_tagResourceCmd).Standalone()
 
-	globalaccelerator_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Global Accelerator resource to add tags to.")
-	globalaccelerator_tagResourceCmd.Flags().String("tags", "", "The tags to add to a resource.")
-	globalaccelerator_tagResourceCmd.MarkFlagRequired("resource-arn")
-	globalaccelerator_tagResourceCmd.MarkFlagRequired("tags")
+		globalaccelerator_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Global Accelerator resource to add tags to.")
+		globalaccelerator_tagResourceCmd.Flags().String("tags", "", "The tags to add to a resource.")
+		globalaccelerator_tagResourceCmd.MarkFlagRequired("resource-arn")
+		globalaccelerator_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_tagResourceCmd)
 }

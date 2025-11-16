@@ -12,11 +12,13 @@ var dms_startDataMigrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_startDataMigrationCmd).Standalone()
+	carapace.Gen(dms_startDataMigrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_startDataMigrationCmd).Standalone()
 
-	dms_startDataMigrationCmd.Flags().String("data-migration-identifier", "", "The identifier (name or ARN) of the data migration to start.")
-	dms_startDataMigrationCmd.Flags().String("start-type", "", "Specifies the start type for the data migration.")
-	dms_startDataMigrationCmd.MarkFlagRequired("data-migration-identifier")
-	dms_startDataMigrationCmd.MarkFlagRequired("start-type")
+		dms_startDataMigrationCmd.Flags().String("data-migration-identifier", "", "The identifier (name or ARN) of the data migration to start.")
+		dms_startDataMigrationCmd.Flags().String("start-type", "", "Specifies the start type for the data migration.")
+		dms_startDataMigrationCmd.MarkFlagRequired("data-migration-identifier")
+		dms_startDataMigrationCmd.MarkFlagRequired("start-type")
+	})
 	dmsCmd.AddCommand(dms_startDataMigrationCmd)
 }

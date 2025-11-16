@@ -12,11 +12,13 @@ var entityresolution_listIdMappingJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_listIdMappingJobsCmd).Standalone()
+	carapace.Gen(entityresolution_listIdMappingJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_listIdMappingJobsCmd).Standalone()
 
-	entityresolution_listIdMappingJobsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	entityresolution_listIdMappingJobsCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
-	entityresolution_listIdMappingJobsCmd.Flags().String("workflow-name", "", "The name of the workflow to be retrieved.")
-	entityresolution_listIdMappingJobsCmd.MarkFlagRequired("workflow-name")
+		entityresolution_listIdMappingJobsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		entityresolution_listIdMappingJobsCmd.Flags().String("next-token", "", "The pagination token from the previous API call.")
+		entityresolution_listIdMappingJobsCmd.Flags().String("workflow-name", "", "The name of the workflow to be retrieved.")
+		entityresolution_listIdMappingJobsCmd.MarkFlagRequired("workflow-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_listIdMappingJobsCmd)
 }

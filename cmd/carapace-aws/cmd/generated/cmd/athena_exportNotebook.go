@@ -12,9 +12,11 @@ var athena_exportNotebookCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_exportNotebookCmd).Standalone()
+	carapace.Gen(athena_exportNotebookCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_exportNotebookCmd).Standalone()
 
-	athena_exportNotebookCmd.Flags().String("notebook-id", "", "The ID of the notebook to export.")
-	athena_exportNotebookCmd.MarkFlagRequired("notebook-id")
+		athena_exportNotebookCmd.Flags().String("notebook-id", "", "The ID of the notebook to export.")
+		athena_exportNotebookCmd.MarkFlagRequired("notebook-id")
+	})
 	athenaCmd.AddCommand(athena_exportNotebookCmd)
 }

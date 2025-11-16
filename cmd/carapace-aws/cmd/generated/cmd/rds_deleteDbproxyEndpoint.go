@@ -12,9 +12,11 @@ var rds_deleteDbproxyEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteDbproxyEndpointCmd).Standalone()
+	carapace.Gen(rds_deleteDbproxyEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteDbproxyEndpointCmd).Standalone()
 
-	rds_deleteDbproxyEndpointCmd.Flags().String("dbproxy-endpoint-name", "", "The name of the DB proxy endpoint to delete.")
-	rds_deleteDbproxyEndpointCmd.MarkFlagRequired("dbproxy-endpoint-name")
+		rds_deleteDbproxyEndpointCmd.Flags().String("dbproxy-endpoint-name", "", "The name of the DB proxy endpoint to delete.")
+		rds_deleteDbproxyEndpointCmd.MarkFlagRequired("dbproxy-endpoint-name")
+	})
 	rdsCmd.AddCommand(rds_deleteDbproxyEndpointCmd)
 }

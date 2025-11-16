@@ -12,11 +12,13 @@ var kendra_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_tagResourceCmd).Standalone()
+	carapace.Gen(kendra_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_tagResourceCmd).Standalone()
 
-	kendra_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to add a tag.")
-	kendra_tagResourceCmd.Flags().String("tags", "", "A list of tag keys to add to the index, FAQ, data source, or other resource.")
-	kendra_tagResourceCmd.MarkFlagRequired("resource-arn")
-	kendra_tagResourceCmd.MarkFlagRequired("tags")
+		kendra_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to add a tag.")
+		kendra_tagResourceCmd.Flags().String("tags", "", "A list of tag keys to add to the index, FAQ, data source, or other resource.")
+		kendra_tagResourceCmd.MarkFlagRequired("resource-arn")
+		kendra_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	kendraCmd.AddCommand(kendra_tagResourceCmd)
 }

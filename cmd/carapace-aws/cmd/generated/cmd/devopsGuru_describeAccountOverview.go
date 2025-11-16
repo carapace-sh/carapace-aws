@@ -12,10 +12,12 @@ var devopsGuru_describeAccountOverviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeAccountOverviewCmd).Standalone()
+	carapace.Gen(devopsGuru_describeAccountOverviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeAccountOverviewCmd).Standalone()
 
-	devopsGuru_describeAccountOverviewCmd.Flags().String("from-time", "", "The start of the time range passed in.")
-	devopsGuru_describeAccountOverviewCmd.Flags().String("to-time", "", "The end of the time range passed in.")
-	devopsGuru_describeAccountOverviewCmd.MarkFlagRequired("from-time")
+		devopsGuru_describeAccountOverviewCmd.Flags().String("from-time", "", "The start of the time range passed in.")
+		devopsGuru_describeAccountOverviewCmd.Flags().String("to-time", "", "The end of the time range passed in.")
+		devopsGuru_describeAccountOverviewCmd.MarkFlagRequired("from-time")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeAccountOverviewCmd)
 }

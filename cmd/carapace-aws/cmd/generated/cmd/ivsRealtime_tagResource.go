@@ -12,11 +12,13 @@ var ivsRealtime_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_tagResourceCmd).Standalone()
+	carapace.Gen(ivsRealtime_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_tagResourceCmd).Standalone()
 
-	ivsRealtime_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be tagged.")
-	ivsRealtime_tagResourceCmd.Flags().String("tags", "", "Array of tags to be added or updated.")
-	ivsRealtime_tagResourceCmd.MarkFlagRequired("resource-arn")
-	ivsRealtime_tagResourceCmd.MarkFlagRequired("tags")
+		ivsRealtime_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be tagged.")
+		ivsRealtime_tagResourceCmd.Flags().String("tags", "", "Array of tags to be added or updated.")
+		ivsRealtime_tagResourceCmd.MarkFlagRequired("resource-arn")
+		ivsRealtime_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_tagResourceCmd)
 }

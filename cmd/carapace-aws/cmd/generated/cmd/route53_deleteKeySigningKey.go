@@ -12,11 +12,13 @@ var route53_deleteKeySigningKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_deleteKeySigningKeyCmd).Standalone()
+	carapace.Gen(route53_deleteKeySigningKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_deleteKeySigningKeyCmd).Standalone()
 
-	route53_deleteKeySigningKeyCmd.Flags().String("hosted-zone-id", "", "A unique string used to identify a hosted zone.")
-	route53_deleteKeySigningKeyCmd.Flags().String("name", "", "A string used to identify a key-signing key (KSK).")
-	route53_deleteKeySigningKeyCmd.MarkFlagRequired("hosted-zone-id")
-	route53_deleteKeySigningKeyCmd.MarkFlagRequired("name")
+		route53_deleteKeySigningKeyCmd.Flags().String("hosted-zone-id", "", "A unique string used to identify a hosted zone.")
+		route53_deleteKeySigningKeyCmd.Flags().String("name", "", "A string used to identify a key-signing key (KSK).")
+		route53_deleteKeySigningKeyCmd.MarkFlagRequired("hosted-zone-id")
+		route53_deleteKeySigningKeyCmd.MarkFlagRequired("name")
+	})
 	route53Cmd.AddCommand(route53_deleteKeySigningKeyCmd)
 }

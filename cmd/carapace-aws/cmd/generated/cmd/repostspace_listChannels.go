@@ -12,11 +12,13 @@ var repostspace_listChannelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_listChannelsCmd).Standalone()
+	carapace.Gen(repostspace_listChannelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_listChannelsCmd).Standalone()
 
-	repostspace_listChannelsCmd.Flags().String("max-results", "", "The maximum number of channels to include in the results.")
-	repostspace_listChannelsCmd.Flags().String("next-token", "", "The token for the next set of channel to return.")
-	repostspace_listChannelsCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
-	repostspace_listChannelsCmd.MarkFlagRequired("space-id")
+		repostspace_listChannelsCmd.Flags().String("max-results", "", "The maximum number of channels to include in the results.")
+		repostspace_listChannelsCmd.Flags().String("next-token", "", "The token for the next set of channel to return.")
+		repostspace_listChannelsCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
+		repostspace_listChannelsCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_listChannelsCmd)
 }

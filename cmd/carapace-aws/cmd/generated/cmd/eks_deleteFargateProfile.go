@@ -12,11 +12,13 @@ var eks_deleteFargateProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_deleteFargateProfileCmd).Standalone()
+	carapace.Gen(eks_deleteFargateProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_deleteFargateProfileCmd).Standalone()
 
-	eks_deleteFargateProfileCmd.Flags().String("cluster-name", "", "The name of your cluster.")
-	eks_deleteFargateProfileCmd.Flags().String("fargate-profile-name", "", "The name of the Fargate profile to delete.")
-	eks_deleteFargateProfileCmd.MarkFlagRequired("cluster-name")
-	eks_deleteFargateProfileCmd.MarkFlagRequired("fargate-profile-name")
+		eks_deleteFargateProfileCmd.Flags().String("cluster-name", "", "The name of your cluster.")
+		eks_deleteFargateProfileCmd.Flags().String("fargate-profile-name", "", "The name of the Fargate profile to delete.")
+		eks_deleteFargateProfileCmd.MarkFlagRequired("cluster-name")
+		eks_deleteFargateProfileCmd.MarkFlagRequired("fargate-profile-name")
+	})
 	eksCmd.AddCommand(eks_deleteFargateProfileCmd)
 }

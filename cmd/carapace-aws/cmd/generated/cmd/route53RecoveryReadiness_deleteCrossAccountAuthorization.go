@@ -12,9 +12,11 @@ var route53RecoveryReadiness_deleteCrossAccountAuthorizationCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_deleteCrossAccountAuthorizationCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_deleteCrossAccountAuthorizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_deleteCrossAccountAuthorizationCmd).Standalone()
 
-	route53RecoveryReadiness_deleteCrossAccountAuthorizationCmd.Flags().String("cross-account-authorization", "", "The cross-account authorization.")
-	route53RecoveryReadiness_deleteCrossAccountAuthorizationCmd.MarkFlagRequired("cross-account-authorization")
+		route53RecoveryReadiness_deleteCrossAccountAuthorizationCmd.Flags().String("cross-account-authorization", "", "The cross-account authorization.")
+		route53RecoveryReadiness_deleteCrossAccountAuthorizationCmd.MarkFlagRequired("cross-account-authorization")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_deleteCrossAccountAuthorizationCmd)
 }

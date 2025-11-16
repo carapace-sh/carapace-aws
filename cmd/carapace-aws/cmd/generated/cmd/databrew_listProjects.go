@@ -12,9 +12,11 @@ var databrew_listProjectsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_listProjectsCmd).Standalone()
+	carapace.Gen(databrew_listProjectsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_listProjectsCmd).Standalone()
 
-	databrew_listProjectsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	databrew_listProjectsCmd.Flags().String("next-token", "", "The token returned by a previous call to retrieve the next set of results.")
+		databrew_listProjectsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		databrew_listProjectsCmd.Flags().String("next-token", "", "The token returned by a previous call to retrieve the next set of results.")
+	})
 	databrewCmd.AddCommand(databrew_listProjectsCmd)
 }

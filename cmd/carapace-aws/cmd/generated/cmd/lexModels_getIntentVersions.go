@@ -12,11 +12,13 @@ var lexModels_getIntentVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getIntentVersionsCmd).Standalone()
+	carapace.Gen(lexModels_getIntentVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getIntentVersionsCmd).Standalone()
 
-	lexModels_getIntentVersionsCmd.Flags().String("max-results", "", "The maximum number of intent versions to return in the response.")
-	lexModels_getIntentVersionsCmd.Flags().String("name", "", "The name of the intent for which versions should be returned.")
-	lexModels_getIntentVersionsCmd.Flags().String("next-token", "", "A pagination token for fetching the next page of intent versions.")
-	lexModels_getIntentVersionsCmd.MarkFlagRequired("name")
+		lexModels_getIntentVersionsCmd.Flags().String("max-results", "", "The maximum number of intent versions to return in the response.")
+		lexModels_getIntentVersionsCmd.Flags().String("name", "", "The name of the intent for which versions should be returned.")
+		lexModels_getIntentVersionsCmd.Flags().String("next-token", "", "A pagination token for fetching the next page of intent versions.")
+		lexModels_getIntentVersionsCmd.MarkFlagRequired("name")
+	})
 	lexModelsCmd.AddCommand(lexModels_getIntentVersionsCmd)
 }

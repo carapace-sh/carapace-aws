@@ -12,10 +12,12 @@ var apigateway_getDomainNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getDomainNameCmd).Standalone()
+	carapace.Gen(apigateway_getDomainNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getDomainNameCmd).Standalone()
 
-	apigateway_getDomainNameCmd.Flags().String("domain-name", "", "The name of the DomainName resource.")
-	apigateway_getDomainNameCmd.Flags().String("domain-name-id", "", "The identifier for the domain name resource.")
-	apigateway_getDomainNameCmd.MarkFlagRequired("domain-name")
+		apigateway_getDomainNameCmd.Flags().String("domain-name", "", "The name of the DomainName resource.")
+		apigateway_getDomainNameCmd.Flags().String("domain-name-id", "", "The identifier for the domain name resource.")
+		apigateway_getDomainNameCmd.MarkFlagRequired("domain-name")
+	})
 	apigatewayCmd.AddCommand(apigateway_getDomainNameCmd)
 }

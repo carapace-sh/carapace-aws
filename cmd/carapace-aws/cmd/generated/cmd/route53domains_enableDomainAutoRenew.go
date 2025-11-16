@@ -12,9 +12,11 @@ var route53domains_enableDomainAutoRenewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_enableDomainAutoRenewCmd).Standalone()
+	carapace.Gen(route53domains_enableDomainAutoRenewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_enableDomainAutoRenewCmd).Standalone()
 
-	route53domains_enableDomainAutoRenewCmd.Flags().String("domain-name", "", "The name of the domain that you want to enable automatic renewal for.")
-	route53domains_enableDomainAutoRenewCmd.MarkFlagRequired("domain-name")
+		route53domains_enableDomainAutoRenewCmd.Flags().String("domain-name", "", "The name of the domain that you want to enable automatic renewal for.")
+		route53domains_enableDomainAutoRenewCmd.MarkFlagRequired("domain-name")
+	})
 	route53domainsCmd.AddCommand(route53domains_enableDomainAutoRenewCmd)
 }

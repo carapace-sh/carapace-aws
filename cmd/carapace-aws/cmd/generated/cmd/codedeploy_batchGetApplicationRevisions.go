@@ -12,11 +12,13 @@ var codedeploy_batchGetApplicationRevisionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_batchGetApplicationRevisionsCmd).Standalone()
+	carapace.Gen(codedeploy_batchGetApplicationRevisionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_batchGetApplicationRevisionsCmd).Standalone()
 
-	codedeploy_batchGetApplicationRevisionsCmd.Flags().String("application-name", "", "The name of an CodeDeploy application about which to get revision information.")
-	codedeploy_batchGetApplicationRevisionsCmd.Flags().String("revisions", "", "An array of `RevisionLocation` objects that specify information to get about the application revisions, including type and location.")
-	codedeploy_batchGetApplicationRevisionsCmd.MarkFlagRequired("application-name")
-	codedeploy_batchGetApplicationRevisionsCmd.MarkFlagRequired("revisions")
+		codedeploy_batchGetApplicationRevisionsCmd.Flags().String("application-name", "", "The name of an CodeDeploy application about which to get revision information.")
+		codedeploy_batchGetApplicationRevisionsCmd.Flags().String("revisions", "", "An array of `RevisionLocation` objects that specify information to get about the application revisions, including type and location.")
+		codedeploy_batchGetApplicationRevisionsCmd.MarkFlagRequired("application-name")
+		codedeploy_batchGetApplicationRevisionsCmd.MarkFlagRequired("revisions")
+	})
 	codedeployCmd.AddCommand(codedeploy_batchGetApplicationRevisionsCmd)
 }

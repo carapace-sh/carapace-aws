@@ -12,11 +12,13 @@ var codeartifact_createDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeartifact_createDomainCmd).Standalone()
+	carapace.Gen(codeartifact_createDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeartifact_createDomainCmd).Standalone()
 
-	codeartifact_createDomainCmd.Flags().String("domain", "", "The name of the domain to create.")
-	codeartifact_createDomainCmd.Flags().String("encryption-key", "", "The encryption key for the domain.")
-	codeartifact_createDomainCmd.Flags().String("tags", "", "One or more tag key-value pairs for the domain.")
-	codeartifact_createDomainCmd.MarkFlagRequired("domain")
+		codeartifact_createDomainCmd.Flags().String("domain", "", "The name of the domain to create.")
+		codeartifact_createDomainCmd.Flags().String("encryption-key", "", "The encryption key for the domain.")
+		codeartifact_createDomainCmd.Flags().String("tags", "", "One or more tag key-value pairs for the domain.")
+		codeartifact_createDomainCmd.MarkFlagRequired("domain")
+	})
 	codeartifactCmd.AddCommand(codeartifact_createDomainCmd)
 }

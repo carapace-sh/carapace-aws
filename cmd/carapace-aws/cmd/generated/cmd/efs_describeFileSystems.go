@@ -12,11 +12,13 @@ var efs_describeFileSystemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_describeFileSystemsCmd).Standalone()
+	carapace.Gen(efs_describeFileSystemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_describeFileSystemsCmd).Standalone()
 
-	efs_describeFileSystemsCmd.Flags().String("creation-token", "", "(Optional) Restricts the list to the file system with this creation token (String).")
-	efs_describeFileSystemsCmd.Flags().String("file-system-id", "", "(Optional) ID of the file system whose description you want to retrieve (String).")
-	efs_describeFileSystemsCmd.Flags().String("marker", "", "(Optional) Opaque pagination token returned from a previous `DescribeFileSystems` operation (String).")
-	efs_describeFileSystemsCmd.Flags().String("max-items", "", "(Optional) Specifies the maximum number of file systems to return in the response (integer).")
+		efs_describeFileSystemsCmd.Flags().String("creation-token", "", "(Optional) Restricts the list to the file system with this creation token (String).")
+		efs_describeFileSystemsCmd.Flags().String("file-system-id", "", "(Optional) ID of the file system whose description you want to retrieve (String).")
+		efs_describeFileSystemsCmd.Flags().String("marker", "", "(Optional) Opaque pagination token returned from a previous `DescribeFileSystems` operation (String).")
+		efs_describeFileSystemsCmd.Flags().String("max-items", "", "(Optional) Specifies the maximum number of file systems to return in the response (integer).")
+	})
 	efsCmd.AddCommand(efs_describeFileSystemsCmd)
 }

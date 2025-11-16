@@ -12,7 +12,9 @@ var observabilityadmin_startTelemetryEvaluationForOrganizationCmd = &cobra.Comma
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_startTelemetryEvaluationForOrganizationCmd).Standalone()
+	carapace.Gen(observabilityadmin_startTelemetryEvaluationForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_startTelemetryEvaluationForOrganizationCmd).Standalone()
 
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_startTelemetryEvaluationForOrganizationCmd)
 }

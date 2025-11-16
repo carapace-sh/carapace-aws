@@ -12,9 +12,11 @@ var iotwireless_getWirelessGatewayFirmwareInformationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getWirelessGatewayFirmwareInformationCmd).Standalone()
+	carapace.Gen(iotwireless_getWirelessGatewayFirmwareInformationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getWirelessGatewayFirmwareInformationCmd).Standalone()
 
-	iotwireless_getWirelessGatewayFirmwareInformationCmd.Flags().String("id", "", "The ID of the resource to get.")
-	iotwireless_getWirelessGatewayFirmwareInformationCmd.MarkFlagRequired("id")
+		iotwireless_getWirelessGatewayFirmwareInformationCmd.Flags().String("id", "", "The ID of the resource to get.")
+		iotwireless_getWirelessGatewayFirmwareInformationCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getWirelessGatewayFirmwareInformationCmd)
 }

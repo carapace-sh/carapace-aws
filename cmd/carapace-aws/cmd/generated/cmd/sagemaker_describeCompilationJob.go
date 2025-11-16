@@ -12,9 +12,11 @@ var sagemaker_describeCompilationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeCompilationJobCmd).Standalone()
+	carapace.Gen(sagemaker_describeCompilationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeCompilationJobCmd).Standalone()
 
-	sagemaker_describeCompilationJobCmd.Flags().String("compilation-job-name", "", "The name of the model compilation job that you want information about.")
-	sagemaker_describeCompilationJobCmd.MarkFlagRequired("compilation-job-name")
+		sagemaker_describeCompilationJobCmd.Flags().String("compilation-job-name", "", "The name of the model compilation job that you want information about.")
+		sagemaker_describeCompilationJobCmd.MarkFlagRequired("compilation-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeCompilationJobCmd)
 }

@@ -12,12 +12,14 @@ var bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd = &cobra.Co
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd).Standalone()
 
-	bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.Flags().String("bill-scenario-id", "", "The ID of the Bill Scenario for which you want to create the modeled usage.")
-	bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.Flags().String("usage-modifications", "", "List of usage that you want to model in the Bill Scenario.")
-	bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.MarkFlagRequired("bill-scenario-id")
-	bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.MarkFlagRequired("usage-modifications")
+		bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.Flags().String("bill-scenario-id", "", "The ID of the Bill Scenario for which you want to create the modeled usage.")
+		bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.Flags().String("usage-modifications", "", "List of usage that you want to model in the Bill Scenario.")
+		bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.MarkFlagRequired("bill-scenario-id")
+		bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd.MarkFlagRequired("usage-modifications")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_batchCreateBillScenarioUsageModificationCmd)
 }

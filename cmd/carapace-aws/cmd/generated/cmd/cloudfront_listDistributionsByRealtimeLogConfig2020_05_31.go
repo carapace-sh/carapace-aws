@@ -12,11 +12,13 @@ var cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd = &cobra.Comman
 }
 
 func init() {
-	carapace.Gen(cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd).Standalone()
 
-	cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd.Flags().String("marker", "", "Use this field when paginating results to indicate where to begin in your list of distributions.")
-	cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of distributions that you want in the response.")
-	cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd.Flags().String("realtime-log-config-arn", "", "The Amazon Resource Name (ARN) of the real-time log configuration whose associated distributions you want to list.")
-	cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd.Flags().String("realtime-log-config-name", "", "The name of the real-time log configuration whose associated distributions you want to list.")
+		cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd.Flags().String("marker", "", "Use this field when paginating results to indicate where to begin in your list of distributions.")
+		cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of distributions that you want in the response.")
+		cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd.Flags().String("realtime-log-config-arn", "", "The Amazon Resource Name (ARN) of the real-time log configuration whose associated distributions you want to list.")
+		cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd.Flags().String("realtime-log-config-name", "", "The name of the real-time log configuration whose associated distributions you want to list.")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listDistributionsByRealtimeLogConfig2020_05_31Cmd)
 }

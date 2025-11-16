@@ -12,10 +12,12 @@ var discovery_describeImportTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_describeImportTasksCmd).Standalone()
+	carapace.Gen(discovery_describeImportTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_describeImportTasksCmd).Standalone()
 
-	discovery_describeImportTasksCmd.Flags().String("filters", "", "An array of name-value pairs that you provide to filter the results for the `DescribeImportTask` request to a specific subset of results.")
-	discovery_describeImportTasksCmd.Flags().String("max-results", "", "The maximum number of results that you want this request to return, up to 100.")
-	discovery_describeImportTasksCmd.Flags().String("next-token", "", "The token to request a specific page of results.")
+		discovery_describeImportTasksCmd.Flags().String("filters", "", "An array of name-value pairs that you provide to filter the results for the `DescribeImportTask` request to a specific subset of results.")
+		discovery_describeImportTasksCmd.Flags().String("max-results", "", "The maximum number of results that you want this request to return, up to 100.")
+		discovery_describeImportTasksCmd.Flags().String("next-token", "", "The token to request a specific page of results.")
+	})
 	discoveryCmd.AddCommand(discovery_describeImportTasksCmd)
 }

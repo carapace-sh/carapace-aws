@@ -12,9 +12,11 @@ var amplifybackend_removeBackendConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_removeBackendConfigCmd).Standalone()
+	carapace.Gen(amplifybackend_removeBackendConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_removeBackendConfigCmd).Standalone()
 
-	amplifybackend_removeBackendConfigCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_removeBackendConfigCmd.MarkFlagRequired("app-id")
+		amplifybackend_removeBackendConfigCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_removeBackendConfigCmd.MarkFlagRequired("app-id")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_removeBackendConfigCmd)
 }

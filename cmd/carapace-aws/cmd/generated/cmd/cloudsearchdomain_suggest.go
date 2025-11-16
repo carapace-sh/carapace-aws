@@ -12,12 +12,14 @@ var cloudsearchdomain_suggestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearchdomain_suggestCmd).Standalone()
+	carapace.Gen(cloudsearchdomain_suggestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearchdomain_suggestCmd).Standalone()
 
-	cloudsearchdomain_suggestCmd.Flags().String("query", "", "Specifies the string for which you want to get suggestions.")
-	cloudsearchdomain_suggestCmd.Flags().String("size", "", "Specifies the maximum number of suggestions to return.")
-	cloudsearchdomain_suggestCmd.Flags().String("suggester", "", "Specifies the name of the suggester to use to find suggested matches.")
-	cloudsearchdomain_suggestCmd.MarkFlagRequired("query")
-	cloudsearchdomain_suggestCmd.MarkFlagRequired("suggester")
+		cloudsearchdomain_suggestCmd.Flags().String("query", "", "Specifies the string for which you want to get suggestions.")
+		cloudsearchdomain_suggestCmd.Flags().String("size", "", "Specifies the maximum number of suggestions to return.")
+		cloudsearchdomain_suggestCmd.Flags().String("suggester", "", "Specifies the name of the suggester to use to find suggested matches.")
+		cloudsearchdomain_suggestCmd.MarkFlagRequired("query")
+		cloudsearchdomain_suggestCmd.MarkFlagRequired("suggester")
+	})
 	cloudsearchdomainCmd.AddCommand(cloudsearchdomain_suggestCmd)
 }

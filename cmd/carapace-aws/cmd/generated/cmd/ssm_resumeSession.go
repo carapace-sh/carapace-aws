@@ -12,9 +12,11 @@ var ssm_resumeSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_resumeSessionCmd).Standalone()
+	carapace.Gen(ssm_resumeSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_resumeSessionCmd).Standalone()
 
-	ssm_resumeSessionCmd.Flags().String("session-id", "", "The ID of the disconnected session to resume.")
-	ssm_resumeSessionCmd.MarkFlagRequired("session-id")
+		ssm_resumeSessionCmd.Flags().String("session-id", "", "The ID of the disconnected session to resume.")
+		ssm_resumeSessionCmd.MarkFlagRequired("session-id")
+	})
 	ssmCmd.AddCommand(ssm_resumeSessionCmd)
 }

@@ -12,9 +12,11 @@ var redshiftServerless_deleteSnapshotCopyConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_deleteSnapshotCopyConfigurationCmd).Standalone()
+	carapace.Gen(redshiftServerless_deleteSnapshotCopyConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_deleteSnapshotCopyConfigurationCmd).Standalone()
 
-	redshiftServerless_deleteSnapshotCopyConfigurationCmd.Flags().String("snapshot-copy-configuration-id", "", "The ID of the snapshot copy configuration to delete.")
-	redshiftServerless_deleteSnapshotCopyConfigurationCmd.MarkFlagRequired("snapshot-copy-configuration-id")
+		redshiftServerless_deleteSnapshotCopyConfigurationCmd.Flags().String("snapshot-copy-configuration-id", "", "The ID of the snapshot copy configuration to delete.")
+		redshiftServerless_deleteSnapshotCopyConfigurationCmd.MarkFlagRequired("snapshot-copy-configuration-id")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_deleteSnapshotCopyConfigurationCmd)
 }

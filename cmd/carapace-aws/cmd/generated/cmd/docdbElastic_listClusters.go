@@ -12,9 +12,11 @@ var docdbElastic_listClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdbElastic_listClustersCmd).Standalone()
+	carapace.Gen(docdbElastic_listClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdbElastic_listClustersCmd).Standalone()
 
-	docdbElastic_listClustersCmd.Flags().String("max-results", "", "The maximum number of elastic cluster snapshot results to receive in the response.")
-	docdbElastic_listClustersCmd.Flags().String("next-token", "", "A pagination token provided by a previous request.")
+		docdbElastic_listClustersCmd.Flags().String("max-results", "", "The maximum number of elastic cluster snapshot results to receive in the response.")
+		docdbElastic_listClustersCmd.Flags().String("next-token", "", "A pagination token provided by a previous request.")
+	})
 	docdbElasticCmd.AddCommand(docdbElastic_listClustersCmd)
 }

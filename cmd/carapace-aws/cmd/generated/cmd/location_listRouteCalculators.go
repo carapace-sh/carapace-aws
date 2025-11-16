@@ -12,9 +12,11 @@ var location_listRouteCalculatorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_listRouteCalculatorsCmd).Standalone()
+	carapace.Gen(location_listRouteCalculatorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_listRouteCalculatorsCmd).Standalone()
 
-	location_listRouteCalculatorsCmd.Flags().String("max-results", "", "An optional maximum number of results returned in a single call.")
-	location_listRouteCalculatorsCmd.Flags().String("next-token", "", "The pagination token specifying which page of results to return in the response.")
+		location_listRouteCalculatorsCmd.Flags().String("max-results", "", "An optional maximum number of results returned in a single call.")
+		location_listRouteCalculatorsCmd.Flags().String("next-token", "", "The pagination token specifying which page of results to return in the response.")
+	})
 	locationCmd.AddCommand(location_listRouteCalculatorsCmd)
 }

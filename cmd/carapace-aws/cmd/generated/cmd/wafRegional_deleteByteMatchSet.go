@@ -12,11 +12,13 @@ var wafRegional_deleteByteMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_deleteByteMatchSetCmd).Standalone()
+	carapace.Gen(wafRegional_deleteByteMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_deleteByteMatchSetCmd).Standalone()
 
-	wafRegional_deleteByteMatchSetCmd.Flags().String("byte-match-set-id", "", "The `ByteMatchSetId` of the [ByteMatchSet]() that you want to delete.")
-	wafRegional_deleteByteMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	wafRegional_deleteByteMatchSetCmd.MarkFlagRequired("byte-match-set-id")
-	wafRegional_deleteByteMatchSetCmd.MarkFlagRequired("change-token")
+		wafRegional_deleteByteMatchSetCmd.Flags().String("byte-match-set-id", "", "The `ByteMatchSetId` of the [ByteMatchSet]() that you want to delete.")
+		wafRegional_deleteByteMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		wafRegional_deleteByteMatchSetCmd.MarkFlagRequired("byte-match-set-id")
+		wafRegional_deleteByteMatchSetCmd.MarkFlagRequired("change-token")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_deleteByteMatchSetCmd)
 }

@@ -12,11 +12,13 @@ var kinesis_decreaseStreamRetentionPeriodCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_decreaseStreamRetentionPeriodCmd).Standalone()
+	carapace.Gen(kinesis_decreaseStreamRetentionPeriodCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_decreaseStreamRetentionPeriodCmd).Standalone()
 
-	kinesis_decreaseStreamRetentionPeriodCmd.Flags().String("retention-period-hours", "", "The new retention period of the stream, in hours.")
-	kinesis_decreaseStreamRetentionPeriodCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
-	kinesis_decreaseStreamRetentionPeriodCmd.Flags().String("stream-name", "", "The name of the stream to modify.")
-	kinesis_decreaseStreamRetentionPeriodCmd.MarkFlagRequired("retention-period-hours")
+		kinesis_decreaseStreamRetentionPeriodCmd.Flags().String("retention-period-hours", "", "The new retention period of the stream, in hours.")
+		kinesis_decreaseStreamRetentionPeriodCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
+		kinesis_decreaseStreamRetentionPeriodCmd.Flags().String("stream-name", "", "The name of the stream to modify.")
+		kinesis_decreaseStreamRetentionPeriodCmd.MarkFlagRequired("retention-period-hours")
+	})
 	kinesisCmd.AddCommand(kinesis_decreaseStreamRetentionPeriodCmd)
 }

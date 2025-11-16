@@ -12,9 +12,11 @@ var mediatailor_deleteChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_deleteChannelCmd).Standalone()
+	carapace.Gen(mediatailor_deleteChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_deleteChannelCmd).Standalone()
 
-	mediatailor_deleteChannelCmd.Flags().String("channel-name", "", "The name of the channel.")
-	mediatailor_deleteChannelCmd.MarkFlagRequired("channel-name")
+		mediatailor_deleteChannelCmd.Flags().String("channel-name", "", "The name of the channel.")
+		mediatailor_deleteChannelCmd.MarkFlagRequired("channel-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_deleteChannelCmd)
 }

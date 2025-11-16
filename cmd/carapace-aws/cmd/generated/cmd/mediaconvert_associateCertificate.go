@@ -12,9 +12,11 @@ var mediaconvert_associateCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_associateCertificateCmd).Standalone()
+	carapace.Gen(mediaconvert_associateCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_associateCertificateCmd).Standalone()
 
-	mediaconvert_associateCertificateCmd.Flags().String("arn", "", "The ARN of the ACM certificate that you want to associate with your MediaConvert resource.")
-	mediaconvert_associateCertificateCmd.MarkFlagRequired("arn")
+		mediaconvert_associateCertificateCmd.Flags().String("arn", "", "The ARN of the ACM certificate that you want to associate with your MediaConvert resource.")
+		mediaconvert_associateCertificateCmd.MarkFlagRequired("arn")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_associateCertificateCmd)
 }

@@ -12,9 +12,11 @@ var proton_cancelEnvironmentDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_cancelEnvironmentDeploymentCmd).Standalone()
+	carapace.Gen(proton_cancelEnvironmentDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_cancelEnvironmentDeploymentCmd).Standalone()
 
-	proton_cancelEnvironmentDeploymentCmd.Flags().String("environment-name", "", "The name of the environment with the deployment to cancel.")
-	proton_cancelEnvironmentDeploymentCmd.MarkFlagRequired("environment-name")
+		proton_cancelEnvironmentDeploymentCmd.Flags().String("environment-name", "", "The name of the environment with the deployment to cancel.")
+		proton_cancelEnvironmentDeploymentCmd.MarkFlagRequired("environment-name")
+	})
 	protonCmd.AddCommand(proton_cancelEnvironmentDeploymentCmd)
 }

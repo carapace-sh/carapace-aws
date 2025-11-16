@@ -12,9 +12,11 @@ var datapipeline_deletePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_deletePipelineCmd).Standalone()
+	carapace.Gen(datapipeline_deletePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_deletePipelineCmd).Standalone()
 
-	datapipeline_deletePipelineCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
-	datapipeline_deletePipelineCmd.MarkFlagRequired("pipeline-id")
+		datapipeline_deletePipelineCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
+		datapipeline_deletePipelineCmd.MarkFlagRequired("pipeline-id")
+	})
 	datapipelineCmd.AddCommand(datapipeline_deletePipelineCmd)
 }

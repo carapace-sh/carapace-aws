@@ -12,7 +12,9 @@ var lightsail_unpeerVpcCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_unpeerVpcCmd).Standalone()
+	carapace.Gen(lightsail_unpeerVpcCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_unpeerVpcCmd).Standalone()
 
+	})
 	lightsailCmd.AddCommand(lightsail_unpeerVpcCmd)
 }

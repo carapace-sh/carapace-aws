@@ -12,7 +12,9 @@ var dsqlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsqlCmd).Standalone()
+	carapace.Gen(dsqlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsqlCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(dsqlCmd)
 }

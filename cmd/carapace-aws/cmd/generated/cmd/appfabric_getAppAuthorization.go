@@ -12,11 +12,13 @@ var appfabric_getAppAuthorizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appfabric_getAppAuthorizationCmd).Standalone()
+	carapace.Gen(appfabric_getAppAuthorizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appfabric_getAppAuthorizationCmd).Standalone()
 
-	appfabric_getAppAuthorizationCmd.Flags().String("app-authorization-identifier", "", "The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app authorization to use for the request.")
-	appfabric_getAppAuthorizationCmd.Flags().String("app-bundle-identifier", "", "The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.")
-	appfabric_getAppAuthorizationCmd.MarkFlagRequired("app-authorization-identifier")
-	appfabric_getAppAuthorizationCmd.MarkFlagRequired("app-bundle-identifier")
+		appfabric_getAppAuthorizationCmd.Flags().String("app-authorization-identifier", "", "The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app authorization to use for the request.")
+		appfabric_getAppAuthorizationCmd.Flags().String("app-bundle-identifier", "", "The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.")
+		appfabric_getAppAuthorizationCmd.MarkFlagRequired("app-authorization-identifier")
+		appfabric_getAppAuthorizationCmd.MarkFlagRequired("app-bundle-identifier")
+	})
 	appfabricCmd.AddCommand(appfabric_getAppAuthorizationCmd)
 }

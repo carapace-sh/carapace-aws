@@ -12,13 +12,15 @@ var sagemaker_updateProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_updateProjectCmd).Standalone()
+	carapace.Gen(sagemaker_updateProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_updateProjectCmd).Standalone()
 
-	sagemaker_updateProjectCmd.Flags().String("project-description", "", "The description for the project.")
-	sagemaker_updateProjectCmd.Flags().String("project-name", "", "The name of the project.")
-	sagemaker_updateProjectCmd.Flags().String("service-catalog-provisioning-update-details", "", "The product ID and provisioning artifact ID to provision a service catalog.")
-	sagemaker_updateProjectCmd.Flags().String("tags", "", "An array of key-value pairs.")
-	sagemaker_updateProjectCmd.Flags().String("template-providers-to-update", "", "The template providers to update in the project.")
-	sagemaker_updateProjectCmd.MarkFlagRequired("project-name")
+		sagemaker_updateProjectCmd.Flags().String("project-description", "", "The description for the project.")
+		sagemaker_updateProjectCmd.Flags().String("project-name", "", "The name of the project.")
+		sagemaker_updateProjectCmd.Flags().String("service-catalog-provisioning-update-details", "", "The product ID and provisioning artifact ID to provision a service catalog.")
+		sagemaker_updateProjectCmd.Flags().String("tags", "", "An array of key-value pairs.")
+		sagemaker_updateProjectCmd.Flags().String("template-providers-to-update", "", "The template providers to update in the project.")
+		sagemaker_updateProjectCmd.MarkFlagRequired("project-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_updateProjectCmd)
 }

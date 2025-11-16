@@ -12,11 +12,13 @@ var proton_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_untagResourceCmd).Standalone()
+	carapace.Gen(proton_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_untagResourceCmd).Standalone()
 
-	proton_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to remove customer tags from.")
-	proton_untagResourceCmd.Flags().String("tag-keys", "", "A list of customer tag keys that indicate the customer tags to be removed from the resource.")
-	proton_untagResourceCmd.MarkFlagRequired("resource-arn")
-	proton_untagResourceCmd.MarkFlagRequired("tag-keys")
+		proton_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to remove customer tags from.")
+		proton_untagResourceCmd.Flags().String("tag-keys", "", "A list of customer tag keys that indicate the customer tags to be removed from the resource.")
+		proton_untagResourceCmd.MarkFlagRequired("resource-arn")
+		proton_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	protonCmd.AddCommand(proton_untagResourceCmd)
 }

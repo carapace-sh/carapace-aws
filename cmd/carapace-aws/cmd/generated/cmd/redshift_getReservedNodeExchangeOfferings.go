@@ -12,11 +12,13 @@ var redshift_getReservedNodeExchangeOfferingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_getReservedNodeExchangeOfferingsCmd).Standalone()
+	carapace.Gen(redshift_getReservedNodeExchangeOfferingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_getReservedNodeExchangeOfferingsCmd).Standalone()
 
-	redshift_getReservedNodeExchangeOfferingsCmd.Flags().String("marker", "", "A value that indicates the starting point for the next set of ReservedNodeOfferings.")
-	redshift_getReservedNodeExchangeOfferingsCmd.Flags().String("max-records", "", "An integer setting the maximum number of ReservedNodeOfferings to retrieve.")
-	redshift_getReservedNodeExchangeOfferingsCmd.Flags().String("reserved-node-id", "", "A string representing the node identifier for the DC1 Reserved Node to be exchanged.")
-	redshift_getReservedNodeExchangeOfferingsCmd.MarkFlagRequired("reserved-node-id")
+		redshift_getReservedNodeExchangeOfferingsCmd.Flags().String("marker", "", "A value that indicates the starting point for the next set of ReservedNodeOfferings.")
+		redshift_getReservedNodeExchangeOfferingsCmd.Flags().String("max-records", "", "An integer setting the maximum number of ReservedNodeOfferings to retrieve.")
+		redshift_getReservedNodeExchangeOfferingsCmd.Flags().String("reserved-node-id", "", "A string representing the node identifier for the DC1 Reserved Node to be exchanged.")
+		redshift_getReservedNodeExchangeOfferingsCmd.MarkFlagRequired("reserved-node-id")
+	})
 	redshiftCmd.AddCommand(redshift_getReservedNodeExchangeOfferingsCmd)
 }

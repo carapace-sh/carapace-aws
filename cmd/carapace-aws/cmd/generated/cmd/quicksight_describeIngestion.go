@@ -12,13 +12,15 @@ var quicksight_describeIngestionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeIngestionCmd).Standalone()
+	carapace.Gen(quicksight_describeIngestionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeIngestionCmd).Standalone()
 
-	quicksight_describeIngestionCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
-	quicksight_describeIngestionCmd.Flags().String("data-set-id", "", "The ID of the dataset used in the ingestion.")
-	quicksight_describeIngestionCmd.Flags().String("ingestion-id", "", "An ID for the ingestion.")
-	quicksight_describeIngestionCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeIngestionCmd.MarkFlagRequired("data-set-id")
-	quicksight_describeIngestionCmd.MarkFlagRequired("ingestion-id")
+		quicksight_describeIngestionCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
+		quicksight_describeIngestionCmd.Flags().String("data-set-id", "", "The ID of the dataset used in the ingestion.")
+		quicksight_describeIngestionCmd.Flags().String("ingestion-id", "", "An ID for the ingestion.")
+		quicksight_describeIngestionCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeIngestionCmd.MarkFlagRequired("data-set-id")
+		quicksight_describeIngestionCmd.MarkFlagRequired("ingestion-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeIngestionCmd)
 }

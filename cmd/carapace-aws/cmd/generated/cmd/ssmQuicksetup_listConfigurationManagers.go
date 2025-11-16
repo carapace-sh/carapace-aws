@@ -12,10 +12,12 @@ var ssmQuicksetup_listConfigurationManagersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmQuicksetup_listConfigurationManagersCmd).Standalone()
+	carapace.Gen(ssmQuicksetup_listConfigurationManagersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmQuicksetup_listConfigurationManagersCmd).Standalone()
 
-	ssmQuicksetup_listConfigurationManagersCmd.Flags().String("filters", "", "Filters the results returned by the request.")
-	ssmQuicksetup_listConfigurationManagersCmd.Flags().String("max-items", "", "Specifies the maximum number of configuration managers that are returned by the request.")
-	ssmQuicksetup_listConfigurationManagersCmd.Flags().String("starting-token", "", "The token to use when requesting a specific set of items from a list.")
+		ssmQuicksetup_listConfigurationManagersCmd.Flags().String("filters", "", "Filters the results returned by the request.")
+		ssmQuicksetup_listConfigurationManagersCmd.Flags().String("max-items", "", "Specifies the maximum number of configuration managers that are returned by the request.")
+		ssmQuicksetup_listConfigurationManagersCmd.Flags().String("starting-token", "", "The token to use when requesting a specific set of items from a list.")
+	})
 	ssmQuicksetupCmd.AddCommand(ssmQuicksetup_listConfigurationManagersCmd)
 }

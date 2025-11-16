@@ -12,9 +12,11 @@ var redshift_deleteClusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteClusterParameterGroupCmd).Standalone()
+	carapace.Gen(redshift_deleteClusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteClusterParameterGroupCmd).Standalone()
 
-	redshift_deleteClusterParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to be deleted.")
-	redshift_deleteClusterParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+		redshift_deleteClusterParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group to be deleted.")
+		redshift_deleteClusterParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+	})
 	redshiftCmd.AddCommand(redshift_deleteClusterParameterGroupCmd)
 }

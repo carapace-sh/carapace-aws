@@ -12,9 +12,11 @@ var tnb_getSolNetworkInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_getSolNetworkInstanceCmd).Standalone()
+	carapace.Gen(tnb_getSolNetworkInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_getSolNetworkInstanceCmd).Standalone()
 
-	tnb_getSolNetworkInstanceCmd.Flags().String("ns-instance-id", "", "ID of the network instance.")
-	tnb_getSolNetworkInstanceCmd.MarkFlagRequired("ns-instance-id")
+		tnb_getSolNetworkInstanceCmd.Flags().String("ns-instance-id", "", "ID of the network instance.")
+		tnb_getSolNetworkInstanceCmd.MarkFlagRequired("ns-instance-id")
+	})
 	tnbCmd.AddCommand(tnb_getSolNetworkInstanceCmd)
 }

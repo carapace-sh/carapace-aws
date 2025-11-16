@@ -12,9 +12,11 @@ var route53_deleteHostedZoneCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_deleteHostedZoneCmd).Standalone()
+	carapace.Gen(route53_deleteHostedZoneCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_deleteHostedZoneCmd).Standalone()
 
-	route53_deleteHostedZoneCmd.Flags().String("id", "", "The ID of the hosted zone you want to delete.")
-	route53_deleteHostedZoneCmd.MarkFlagRequired("id")
+		route53_deleteHostedZoneCmd.Flags().String("id", "", "The ID of the hosted zone you want to delete.")
+		route53_deleteHostedZoneCmd.MarkFlagRequired("id")
+	})
 	route53Cmd.AddCommand(route53_deleteHostedZoneCmd)
 }

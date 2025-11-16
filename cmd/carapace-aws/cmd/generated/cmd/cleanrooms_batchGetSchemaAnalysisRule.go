@@ -12,11 +12,13 @@ var cleanrooms_batchGetSchemaAnalysisRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_batchGetSchemaAnalysisRuleCmd).Standalone()
+	carapace.Gen(cleanrooms_batchGetSchemaAnalysisRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_batchGetSchemaAnalysisRuleCmd).Standalone()
 
-	cleanrooms_batchGetSchemaAnalysisRuleCmd.Flags().String("collaboration-identifier", "", "The unique identifier of the collaboration that contains the schema analysis rule.")
-	cleanrooms_batchGetSchemaAnalysisRuleCmd.Flags().String("schema-analysis-rule-requests", "", "The information that's necessary to retrieve a schema analysis rule.")
-	cleanrooms_batchGetSchemaAnalysisRuleCmd.MarkFlagRequired("collaboration-identifier")
-	cleanrooms_batchGetSchemaAnalysisRuleCmd.MarkFlagRequired("schema-analysis-rule-requests")
+		cleanrooms_batchGetSchemaAnalysisRuleCmd.Flags().String("collaboration-identifier", "", "The unique identifier of the collaboration that contains the schema analysis rule.")
+		cleanrooms_batchGetSchemaAnalysisRuleCmd.Flags().String("schema-analysis-rule-requests", "", "The information that's necessary to retrieve a schema analysis rule.")
+		cleanrooms_batchGetSchemaAnalysisRuleCmd.MarkFlagRequired("collaboration-identifier")
+		cleanrooms_batchGetSchemaAnalysisRuleCmd.MarkFlagRequired("schema-analysis-rule-requests")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_batchGetSchemaAnalysisRuleCmd)
 }

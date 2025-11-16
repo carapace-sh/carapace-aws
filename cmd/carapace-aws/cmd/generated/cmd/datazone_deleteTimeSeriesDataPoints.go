@@ -12,16 +12,18 @@ var datazone_deleteTimeSeriesDataPointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteTimeSeriesDataPointsCmd).Standalone()
+	carapace.Gen(datazone_deleteTimeSeriesDataPointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteTimeSeriesDataPointsCmd).Standalone()
 
-	datazone_deleteTimeSeriesDataPointsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure idempotency of the request.")
-	datazone_deleteTimeSeriesDataPointsCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain that houses the asset for which you want to delete a time series form.")
-	datazone_deleteTimeSeriesDataPointsCmd.Flags().String("entity-identifier", "", "The ID of the asset for which you want to delete a time series form.")
-	datazone_deleteTimeSeriesDataPointsCmd.Flags().String("entity-type", "", "The type of the asset for which you want to delete a time series form.")
-	datazone_deleteTimeSeriesDataPointsCmd.Flags().String("form-name", "", "The name of the time series form that you want to delete.")
-	datazone_deleteTimeSeriesDataPointsCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteTimeSeriesDataPointsCmd.MarkFlagRequired("entity-identifier")
-	datazone_deleteTimeSeriesDataPointsCmd.MarkFlagRequired("entity-type")
-	datazone_deleteTimeSeriesDataPointsCmd.MarkFlagRequired("form-name")
+		datazone_deleteTimeSeriesDataPointsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure idempotency of the request.")
+		datazone_deleteTimeSeriesDataPointsCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain that houses the asset for which you want to delete a time series form.")
+		datazone_deleteTimeSeriesDataPointsCmd.Flags().String("entity-identifier", "", "The ID of the asset for which you want to delete a time series form.")
+		datazone_deleteTimeSeriesDataPointsCmd.Flags().String("entity-type", "", "The type of the asset for which you want to delete a time series form.")
+		datazone_deleteTimeSeriesDataPointsCmd.Flags().String("form-name", "", "The name of the time series form that you want to delete.")
+		datazone_deleteTimeSeriesDataPointsCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteTimeSeriesDataPointsCmd.MarkFlagRequired("entity-identifier")
+		datazone_deleteTimeSeriesDataPointsCmd.MarkFlagRequired("entity-type")
+		datazone_deleteTimeSeriesDataPointsCmd.MarkFlagRequired("form-name")
+	})
 	datazoneCmd.AddCommand(datazone_deleteTimeSeriesDataPointsCmd)
 }

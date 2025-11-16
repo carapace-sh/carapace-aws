@@ -12,11 +12,13 @@ var datazone_getLineageEventCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getLineageEventCmd).Standalone()
+	carapace.Gen(datazone_getLineageEventCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getLineageEventCmd).Standalone()
 
-	datazone_getLineageEventCmd.Flags().String("domain-identifier", "", "The ID of the domain.")
-	datazone_getLineageEventCmd.Flags().String("identifier", "", "The ID of the lineage event.")
-	datazone_getLineageEventCmd.MarkFlagRequired("domain-identifier")
-	datazone_getLineageEventCmd.MarkFlagRequired("identifier")
+		datazone_getLineageEventCmd.Flags().String("domain-identifier", "", "The ID of the domain.")
+		datazone_getLineageEventCmd.Flags().String("identifier", "", "The ID of the lineage event.")
+		datazone_getLineageEventCmd.MarkFlagRequired("domain-identifier")
+		datazone_getLineageEventCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getLineageEventCmd)
 }

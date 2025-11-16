@@ -12,9 +12,11 @@ var ec2_releaseHostsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_releaseHostsCmd).Standalone()
+	carapace.Gen(ec2_releaseHostsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_releaseHostsCmd).Standalone()
 
-	ec2_releaseHostsCmd.Flags().String("host-ids", "", "The IDs of the Dedicated Hosts to release.")
-	ec2_releaseHostsCmd.MarkFlagRequired("host-ids")
+		ec2_releaseHostsCmd.Flags().String("host-ids", "", "The IDs of the Dedicated Hosts to release.")
+		ec2_releaseHostsCmd.MarkFlagRequired("host-ids")
+	})
 	ec2Cmd.AddCommand(ec2_releaseHostsCmd)
 }

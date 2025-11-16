@@ -12,9 +12,11 @@ var chatbot_deleteChimeWebhookConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_deleteChimeWebhookConfigurationCmd).Standalone()
+	carapace.Gen(chatbot_deleteChimeWebhookConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_deleteChimeWebhookConfigurationCmd).Standalone()
 
-	chatbot_deleteChimeWebhookConfigurationCmd.Flags().String("chat-configuration-arn", "", "The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to delete.")
-	chatbot_deleteChimeWebhookConfigurationCmd.MarkFlagRequired("chat-configuration-arn")
+		chatbot_deleteChimeWebhookConfigurationCmd.Flags().String("chat-configuration-arn", "", "The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to delete.")
+		chatbot_deleteChimeWebhookConfigurationCmd.MarkFlagRequired("chat-configuration-arn")
+	})
 	chatbotCmd.AddCommand(chatbot_deleteChimeWebhookConfigurationCmd)
 }

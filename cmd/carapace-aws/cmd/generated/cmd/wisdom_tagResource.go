@@ -12,11 +12,13 @@ var wisdom_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_tagResourceCmd).Standalone()
+	carapace.Gen(wisdom_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_tagResourceCmd).Standalone()
 
-	wisdom_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	wisdom_tagResourceCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
-	wisdom_tagResourceCmd.MarkFlagRequired("resource-arn")
-	wisdom_tagResourceCmd.MarkFlagRequired("tags")
+		wisdom_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		wisdom_tagResourceCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
+		wisdom_tagResourceCmd.MarkFlagRequired("resource-arn")
+		wisdom_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	wisdomCmd.AddCommand(wisdom_tagResourceCmd)
 }

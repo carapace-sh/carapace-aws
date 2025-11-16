@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_listOauth2CredentialProvidersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_listOauth2CredentialProvidersCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_listOauth2CredentialProvidersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_listOauth2CredentialProvidersCmd).Standalone()
 
-	bedrockAgentcoreControl_listOauth2CredentialProvidersCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	bedrockAgentcoreControl_listOauth2CredentialProvidersCmd.Flags().String("next-token", "", "Pagination token.")
+		bedrockAgentcoreControl_listOauth2CredentialProvidersCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		bedrockAgentcoreControl_listOauth2CredentialProvidersCmd.Flags().String("next-token", "", "Pagination token.")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_listOauth2CredentialProvidersCmd)
 }

@@ -12,11 +12,13 @@ var mailmanager_listArchiveSearchesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_listArchiveSearchesCmd).Standalone()
+	carapace.Gen(mailmanager_listArchiveSearchesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_listArchiveSearchesCmd).Standalone()
 
-	mailmanager_listArchiveSearchesCmd.Flags().String("archive-id", "", "The identifier of the archive.")
-	mailmanager_listArchiveSearchesCmd.Flags().String("next-token", "", "If NextToken is returned, there are more results available.")
-	mailmanager_listArchiveSearchesCmd.Flags().String("page-size", "", "The maximum number of archive search jobs that are returned per call.")
-	mailmanager_listArchiveSearchesCmd.MarkFlagRequired("archive-id")
+		mailmanager_listArchiveSearchesCmd.Flags().String("archive-id", "", "The identifier of the archive.")
+		mailmanager_listArchiveSearchesCmd.Flags().String("next-token", "", "If NextToken is returned, there are more results available.")
+		mailmanager_listArchiveSearchesCmd.Flags().String("page-size", "", "The maximum number of archive search jobs that are returned per call.")
+		mailmanager_listArchiveSearchesCmd.MarkFlagRequired("archive-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_listArchiveSearchesCmd)
 }

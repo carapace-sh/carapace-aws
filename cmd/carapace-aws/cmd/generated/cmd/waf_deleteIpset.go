@@ -12,11 +12,13 @@ var waf_deleteIpsetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_deleteIpsetCmd).Standalone()
+	carapace.Gen(waf_deleteIpsetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_deleteIpsetCmd).Standalone()
 
-	waf_deleteIpsetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	waf_deleteIpsetCmd.Flags().String("ipset-id", "", "The `IPSetId` of the [IPSet]() that you want to delete.")
-	waf_deleteIpsetCmd.MarkFlagRequired("change-token")
-	waf_deleteIpsetCmd.MarkFlagRequired("ipset-id")
+		waf_deleteIpsetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		waf_deleteIpsetCmd.Flags().String("ipset-id", "", "The `IPSetId` of the [IPSet]() that you want to delete.")
+		waf_deleteIpsetCmd.MarkFlagRequired("change-token")
+		waf_deleteIpsetCmd.MarkFlagRequired("ipset-id")
+	})
 	wafCmd.AddCommand(waf_deleteIpsetCmd)
 }

@@ -12,9 +12,11 @@ var ses_deleteConfigurationSetTrackingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_deleteConfigurationSetTrackingOptionsCmd).Standalone()
+	carapace.Gen(ses_deleteConfigurationSetTrackingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_deleteConfigurationSetTrackingOptionsCmd).Standalone()
 
-	ses_deleteConfigurationSetTrackingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
-	ses_deleteConfigurationSetTrackingOptionsCmd.MarkFlagRequired("configuration-set-name")
+		ses_deleteConfigurationSetTrackingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
+		ses_deleteConfigurationSetTrackingOptionsCmd.MarkFlagRequired("configuration-set-name")
+	})
 	sesCmd.AddCommand(ses_deleteConfigurationSetTrackingOptionsCmd)
 }

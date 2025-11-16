@@ -12,11 +12,13 @@ var glacier_getVaultNotificationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_getVaultNotificationsCmd).Standalone()
+	carapace.Gen(glacier_getVaultNotificationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_getVaultNotificationsCmd).Standalone()
 
-	glacier_getVaultNotificationsCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
-	glacier_getVaultNotificationsCmd.Flags().String("vault-name", "", "The name of the vault.")
-	glacier_getVaultNotificationsCmd.MarkFlagRequired("account-id")
-	glacier_getVaultNotificationsCmd.MarkFlagRequired("vault-name")
+		glacier_getVaultNotificationsCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
+		glacier_getVaultNotificationsCmd.Flags().String("vault-name", "", "The name of the vault.")
+		glacier_getVaultNotificationsCmd.MarkFlagRequired("account-id")
+		glacier_getVaultNotificationsCmd.MarkFlagRequired("vault-name")
+	})
 	glacierCmd.AddCommand(glacier_getVaultNotificationsCmd)
 }

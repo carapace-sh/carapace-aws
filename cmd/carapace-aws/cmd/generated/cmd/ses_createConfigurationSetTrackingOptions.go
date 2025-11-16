@@ -12,11 +12,13 @@ var ses_createConfigurationSetTrackingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_createConfigurationSetTrackingOptionsCmd).Standalone()
+	carapace.Gen(ses_createConfigurationSetTrackingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_createConfigurationSetTrackingOptionsCmd).Standalone()
 
-	ses_createConfigurationSetTrackingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that the tracking options should be associated with.")
-	ses_createConfigurationSetTrackingOptionsCmd.Flags().String("tracking-options", "", "")
-	ses_createConfigurationSetTrackingOptionsCmd.MarkFlagRequired("configuration-set-name")
-	ses_createConfigurationSetTrackingOptionsCmd.MarkFlagRequired("tracking-options")
+		ses_createConfigurationSetTrackingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that the tracking options should be associated with.")
+		ses_createConfigurationSetTrackingOptionsCmd.Flags().String("tracking-options", "", "")
+		ses_createConfigurationSetTrackingOptionsCmd.MarkFlagRequired("configuration-set-name")
+		ses_createConfigurationSetTrackingOptionsCmd.MarkFlagRequired("tracking-options")
+	})
 	sesCmd.AddCommand(ses_createConfigurationSetTrackingOptionsCmd)
 }

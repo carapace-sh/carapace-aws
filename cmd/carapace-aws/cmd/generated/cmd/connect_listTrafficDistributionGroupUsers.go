@@ -12,11 +12,13 @@ var connect_listTrafficDistributionGroupUsersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listTrafficDistributionGroupUsersCmd).Standalone()
+	carapace.Gen(connect_listTrafficDistributionGroupUsersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listTrafficDistributionGroupUsersCmd).Standalone()
 
-	connect_listTrafficDistributionGroupUsersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listTrafficDistributionGroupUsersCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listTrafficDistributionGroupUsersCmd.Flags().String("traffic-distribution-group-id", "", "The identifier of the traffic distribution group.")
-	connect_listTrafficDistributionGroupUsersCmd.MarkFlagRequired("traffic-distribution-group-id")
+		connect_listTrafficDistributionGroupUsersCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listTrafficDistributionGroupUsersCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listTrafficDistributionGroupUsersCmd.Flags().String("traffic-distribution-group-id", "", "The identifier of the traffic distribution group.")
+		connect_listTrafficDistributionGroupUsersCmd.MarkFlagRequired("traffic-distribution-group-id")
+	})
 	connectCmd.AddCommand(connect_listTrafficDistributionGroupUsersCmd)
 }

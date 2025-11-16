@@ -12,9 +12,11 @@ var appintegrations_getDataIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_getDataIntegrationCmd).Standalone()
+	carapace.Gen(appintegrations_getDataIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_getDataIntegrationCmd).Standalone()
 
-	appintegrations_getDataIntegrationCmd.Flags().String("identifier", "", "A unique identifier.")
-	appintegrations_getDataIntegrationCmd.MarkFlagRequired("identifier")
+		appintegrations_getDataIntegrationCmd.Flags().String("identifier", "", "A unique identifier.")
+		appintegrations_getDataIntegrationCmd.MarkFlagRequired("identifier")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_getDataIntegrationCmd)
 }

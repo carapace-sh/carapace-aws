@@ -12,10 +12,12 @@ var s3_getBucketNotificationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketNotificationCmd).Standalone()
+	carapace.Gen(s3_getBucketNotificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketNotificationCmd).Standalone()
 
-	s3_getBucketNotificationCmd.Flags().String("bucket", "", "The name of the bucket for which to get the notification configuration.")
-	s3_getBucketNotificationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketNotificationCmd.MarkFlagRequired("bucket")
+		s3_getBucketNotificationCmd.Flags().String("bucket", "", "The name of the bucket for which to get the notification configuration.")
+		s3_getBucketNotificationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketNotificationCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getBucketNotificationCmd)
 }

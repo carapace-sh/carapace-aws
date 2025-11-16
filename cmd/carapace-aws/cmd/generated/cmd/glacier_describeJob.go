@@ -12,13 +12,15 @@ var glacier_describeJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_describeJobCmd).Standalone()
+	carapace.Gen(glacier_describeJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_describeJobCmd).Standalone()
 
-	glacier_describeJobCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
-	glacier_describeJobCmd.Flags().String("job-id", "", "The ID of the job to describe.")
-	glacier_describeJobCmd.Flags().String("vault-name", "", "The name of the vault.")
-	glacier_describeJobCmd.MarkFlagRequired("account-id")
-	glacier_describeJobCmd.MarkFlagRequired("job-id")
-	glacier_describeJobCmd.MarkFlagRequired("vault-name")
+		glacier_describeJobCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
+		glacier_describeJobCmd.Flags().String("job-id", "", "The ID of the job to describe.")
+		glacier_describeJobCmd.Flags().String("vault-name", "", "The name of the vault.")
+		glacier_describeJobCmd.MarkFlagRequired("account-id")
+		glacier_describeJobCmd.MarkFlagRequired("job-id")
+		glacier_describeJobCmd.MarkFlagRequired("vault-name")
+	})
 	glacierCmd.AddCommand(glacier_describeJobCmd)
 }

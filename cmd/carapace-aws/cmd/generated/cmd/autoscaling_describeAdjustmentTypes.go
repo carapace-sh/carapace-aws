@@ -12,7 +12,9 @@ var autoscaling_describeAdjustmentTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_describeAdjustmentTypesCmd).Standalone()
+	carapace.Gen(autoscaling_describeAdjustmentTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_describeAdjustmentTypesCmd).Standalone()
 
+	})
 	autoscalingCmd.AddCommand(autoscaling_describeAdjustmentTypesCmd)
 }

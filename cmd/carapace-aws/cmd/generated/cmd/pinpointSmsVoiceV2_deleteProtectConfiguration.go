@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_deleteProtectConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteProtectConfigurationCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteProtectConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteProtectConfigurationCmd).Standalone()
 
-	pinpointSmsVoiceV2_deleteProtectConfigurationCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
-	pinpointSmsVoiceV2_deleteProtectConfigurationCmd.MarkFlagRequired("protect-configuration-id")
+		pinpointSmsVoiceV2_deleteProtectConfigurationCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
+		pinpointSmsVoiceV2_deleteProtectConfigurationCmd.MarkFlagRequired("protect-configuration-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteProtectConfigurationCmd)
 }

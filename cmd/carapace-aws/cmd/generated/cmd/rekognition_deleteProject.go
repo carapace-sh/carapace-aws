@@ -12,9 +12,11 @@ var rekognition_deleteProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_deleteProjectCmd).Standalone()
+	carapace.Gen(rekognition_deleteProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_deleteProjectCmd).Standalone()
 
-	rekognition_deleteProjectCmd.Flags().String("project-arn", "", "The Amazon Resource Name (ARN) of the project that you want to delete.")
-	rekognition_deleteProjectCmd.MarkFlagRequired("project-arn")
+		rekognition_deleteProjectCmd.Flags().String("project-arn", "", "The Amazon Resource Name (ARN) of the project that you want to delete.")
+		rekognition_deleteProjectCmd.MarkFlagRequired("project-arn")
+	})
 	rekognitionCmd.AddCommand(rekognition_deleteProjectCmd)
 }

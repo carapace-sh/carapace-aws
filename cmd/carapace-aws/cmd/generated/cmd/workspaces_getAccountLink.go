@@ -12,9 +12,11 @@ var workspaces_getAccountLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_getAccountLinkCmd).Standalone()
+	carapace.Gen(workspaces_getAccountLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_getAccountLinkCmd).Standalone()
 
-	workspaces_getAccountLinkCmd.Flags().String("link-id", "", "The identifier of the account to link.")
-	workspaces_getAccountLinkCmd.Flags().String("linked-account-id", "", "The identifier of the account link")
+		workspaces_getAccountLinkCmd.Flags().String("link-id", "", "The identifier of the account to link.")
+		workspaces_getAccountLinkCmd.Flags().String("linked-account-id", "", "The identifier of the account link")
+	})
 	workspacesCmd.AddCommand(workspaces_getAccountLinkCmd)
 }

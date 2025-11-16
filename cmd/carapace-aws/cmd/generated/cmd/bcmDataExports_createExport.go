@@ -12,10 +12,12 @@ var bcmDataExports_createExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDataExports_createExportCmd).Standalone()
+	carapace.Gen(bcmDataExports_createExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDataExports_createExportCmd).Standalone()
 
-	bcmDataExports_createExportCmd.Flags().String("export", "", "The details of the export, including data query, name, description, and destination configuration.")
-	bcmDataExports_createExportCmd.Flags().String("resource-tags", "", "An optional list of tags to associate with the specified export.")
-	bcmDataExports_createExportCmd.MarkFlagRequired("export")
+		bcmDataExports_createExportCmd.Flags().String("export", "", "The details of the export, including data query, name, description, and destination configuration.")
+		bcmDataExports_createExportCmd.Flags().String("resource-tags", "", "An optional list of tags to associate with the specified export.")
+		bcmDataExports_createExportCmd.MarkFlagRequired("export")
+	})
 	bcmDataExportsCmd.AddCommand(bcmDataExports_createExportCmd)
 }

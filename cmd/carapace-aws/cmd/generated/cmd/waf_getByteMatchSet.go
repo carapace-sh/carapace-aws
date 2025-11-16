@@ -12,9 +12,11 @@ var waf_getByteMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_getByteMatchSetCmd).Standalone()
+	carapace.Gen(waf_getByteMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_getByteMatchSetCmd).Standalone()
 
-	waf_getByteMatchSetCmd.Flags().String("byte-match-set-id", "", "The `ByteMatchSetId` of the [ByteMatchSet]() that you want to get.")
-	waf_getByteMatchSetCmd.MarkFlagRequired("byte-match-set-id")
+		waf_getByteMatchSetCmd.Flags().String("byte-match-set-id", "", "The `ByteMatchSetId` of the [ByteMatchSet]() that you want to get.")
+		waf_getByteMatchSetCmd.MarkFlagRequired("byte-match-set-id")
+	})
 	wafCmd.AddCommand(waf_getByteMatchSetCmd)
 }

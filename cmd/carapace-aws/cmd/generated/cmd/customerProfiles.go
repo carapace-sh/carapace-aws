@@ -12,7 +12,9 @@ var customerProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfilesCmd).Standalone()
+	carapace.Gen(customerProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfilesCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(customerProfilesCmd)
 }

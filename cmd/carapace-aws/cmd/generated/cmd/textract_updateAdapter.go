@@ -12,12 +12,14 @@ var textract_updateAdapterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(textract_updateAdapterCmd).Standalone()
+	carapace.Gen(textract_updateAdapterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(textract_updateAdapterCmd).Standalone()
 
-	textract_updateAdapterCmd.Flags().String("adapter-id", "", "A string containing a unique ID for the adapter that will be updated.")
-	textract_updateAdapterCmd.Flags().String("adapter-name", "", "The new name to be applied to the adapter.")
-	textract_updateAdapterCmd.Flags().String("auto-update", "", "The new auto-update status to be applied to the adapter.")
-	textract_updateAdapterCmd.Flags().String("description", "", "The new description to be applied to the adapter.")
-	textract_updateAdapterCmd.MarkFlagRequired("adapter-id")
+		textract_updateAdapterCmd.Flags().String("adapter-id", "", "A string containing a unique ID for the adapter that will be updated.")
+		textract_updateAdapterCmd.Flags().String("adapter-name", "", "The new name to be applied to the adapter.")
+		textract_updateAdapterCmd.Flags().String("auto-update", "", "The new auto-update status to be applied to the adapter.")
+		textract_updateAdapterCmd.Flags().String("description", "", "The new description to be applied to the adapter.")
+		textract_updateAdapterCmd.MarkFlagRequired("adapter-id")
+	})
 	textractCmd.AddCommand(textract_updateAdapterCmd)
 }

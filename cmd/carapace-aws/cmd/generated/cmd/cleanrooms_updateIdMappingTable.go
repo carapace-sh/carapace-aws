@@ -12,13 +12,15 @@ var cleanrooms_updateIdMappingTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_updateIdMappingTableCmd).Standalone()
+	carapace.Gen(cleanrooms_updateIdMappingTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_updateIdMappingTableCmd).Standalone()
 
-	cleanrooms_updateIdMappingTableCmd.Flags().String("description", "", "A new description for the ID mapping table.")
-	cleanrooms_updateIdMappingTableCmd.Flags().String("id-mapping-table-identifier", "", "The unique identifier of the ID mapping table that you want to update.")
-	cleanrooms_updateIdMappingTableCmd.Flags().String("kms-key-arn", "", "The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.")
-	cleanrooms_updateIdMappingTableCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID mapping table that you want to update.")
-	cleanrooms_updateIdMappingTableCmd.MarkFlagRequired("id-mapping-table-identifier")
-	cleanrooms_updateIdMappingTableCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_updateIdMappingTableCmd.Flags().String("description", "", "A new description for the ID mapping table.")
+		cleanrooms_updateIdMappingTableCmd.Flags().String("id-mapping-table-identifier", "", "The unique identifier of the ID mapping table that you want to update.")
+		cleanrooms_updateIdMappingTableCmd.Flags().String("kms-key-arn", "", "The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.")
+		cleanrooms_updateIdMappingTableCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID mapping table that you want to update.")
+		cleanrooms_updateIdMappingTableCmd.MarkFlagRequired("id-mapping-table-identifier")
+		cleanrooms_updateIdMappingTableCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_updateIdMappingTableCmd)
 }

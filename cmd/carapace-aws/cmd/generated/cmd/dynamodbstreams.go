@@ -12,7 +12,9 @@ var dynamodbstreamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodbstreamsCmd).Standalone()
+	carapace.Gen(dynamodbstreamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodbstreamsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(dynamodbstreamsCmd)
 }

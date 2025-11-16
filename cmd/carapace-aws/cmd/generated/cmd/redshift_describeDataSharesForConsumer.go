@@ -12,11 +12,13 @@ var redshift_describeDataSharesForConsumerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeDataSharesForConsumerCmd).Standalone()
+	carapace.Gen(redshift_describeDataSharesForConsumerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeDataSharesForConsumerCmd).Standalone()
 
-	redshift_describeDataSharesForConsumerCmd.Flags().String("consumer-arn", "", "The Amazon Resource Name (ARN) of the consumer namespace that returns in the list of datashares.")
-	redshift_describeDataSharesForConsumerCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
-	redshift_describeDataSharesForConsumerCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
-	redshift_describeDataSharesForConsumerCmd.Flags().String("status", "", "An identifier giving the status of a datashare in the consumer cluster.")
+		redshift_describeDataSharesForConsumerCmd.Flags().String("consumer-arn", "", "The Amazon Resource Name (ARN) of the consumer namespace that returns in the list of datashares.")
+		redshift_describeDataSharesForConsumerCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
+		redshift_describeDataSharesForConsumerCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
+		redshift_describeDataSharesForConsumerCmd.Flags().String("status", "", "An identifier giving the status of a datashare in the consumer cluster.")
+	})
 	redshiftCmd.AddCommand(redshift_describeDataSharesForConsumerCmd)
 }

@@ -12,9 +12,11 @@ var finspaceData_getDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_getDatasetCmd).Standalone()
+	carapace.Gen(finspaceData_getDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_getDatasetCmd).Standalone()
 
-	finspaceData_getDatasetCmd.Flags().String("dataset-id", "", "The unique identifier for a Dataset.")
-	finspaceData_getDatasetCmd.MarkFlagRequired("dataset-id")
+		finspaceData_getDatasetCmd.Flags().String("dataset-id", "", "The unique identifier for a Dataset.")
+		finspaceData_getDatasetCmd.MarkFlagRequired("dataset-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_getDatasetCmd)
 }

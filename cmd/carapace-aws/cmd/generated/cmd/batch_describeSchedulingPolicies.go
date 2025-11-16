@@ -12,9 +12,11 @@ var batch_describeSchedulingPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_describeSchedulingPoliciesCmd).Standalone()
+	carapace.Gen(batch_describeSchedulingPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_describeSchedulingPoliciesCmd).Standalone()
 
-	batch_describeSchedulingPoliciesCmd.Flags().String("arns", "", "A list of up to 100 scheduling policy Amazon Resource Name (ARN) entries.")
-	batch_describeSchedulingPoliciesCmd.MarkFlagRequired("arns")
+		batch_describeSchedulingPoliciesCmd.Flags().String("arns", "", "A list of up to 100 scheduling policy Amazon Resource Name (ARN) entries.")
+		batch_describeSchedulingPoliciesCmd.MarkFlagRequired("arns")
+	})
 	batchCmd.AddCommand(batch_describeSchedulingPoliciesCmd)
 }

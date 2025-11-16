@@ -12,15 +12,17 @@ var chimeSdkMessaging_listChannelMembershipsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_listChannelMembershipsCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_listChannelMembershipsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_listChannelMembershipsCmd).Standalone()
 
-	chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("channel-arn", "", "The maximum number of channel memberships that you want returned.")
-	chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("max-results", "", "The maximum number of channel memberships that you want returned.")
-	chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("next-token", "", "The token passed by previous API calls until all requested channel memberships are returned.")
-	chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("sub-channel-id", "", "The ID of the SubChannel in the request.")
-	chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("type", "", "The membership type of a user, `DEFAULT` or `HIDDEN`.")
-	chimeSdkMessaging_listChannelMembershipsCmd.MarkFlagRequired("channel-arn")
-	chimeSdkMessaging_listChannelMembershipsCmd.MarkFlagRequired("chime-bearer")
+		chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("channel-arn", "", "The maximum number of channel memberships that you want returned.")
+		chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("max-results", "", "The maximum number of channel memberships that you want returned.")
+		chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("next-token", "", "The token passed by previous API calls until all requested channel memberships are returned.")
+		chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("sub-channel-id", "", "The ID of the SubChannel in the request.")
+		chimeSdkMessaging_listChannelMembershipsCmd.Flags().String("type", "", "The membership type of a user, `DEFAULT` or `HIDDEN`.")
+		chimeSdkMessaging_listChannelMembershipsCmd.MarkFlagRequired("channel-arn")
+		chimeSdkMessaging_listChannelMembershipsCmd.MarkFlagRequired("chime-bearer")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_listChannelMembershipsCmd)
 }

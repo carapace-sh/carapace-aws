@@ -12,7 +12,9 @@ var accountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accountCmd).Standalone()
+	carapace.Gen(accountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accountCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(accountCmd)
 }

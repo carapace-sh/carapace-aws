@@ -12,9 +12,11 @@ var ses_getIdentityDkimAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_getIdentityDkimAttributesCmd).Standalone()
+	carapace.Gen(ses_getIdentityDkimAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_getIdentityDkimAttributesCmd).Standalone()
 
-	ses_getIdentityDkimAttributesCmd.Flags().String("identities", "", "A list of one or more verified identities - email addresses, domains, or both.")
-	ses_getIdentityDkimAttributesCmd.MarkFlagRequired("identities")
+		ses_getIdentityDkimAttributesCmd.Flags().String("identities", "", "A list of one or more verified identities - email addresses, domains, or both.")
+		ses_getIdentityDkimAttributesCmd.MarkFlagRequired("identities")
+	})
 	sesCmd.AddCommand(ses_getIdentityDkimAttributesCmd)
 }

@@ -12,12 +12,14 @@ var chime_inviteUsersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_inviteUsersCmd).Standalone()
+	carapace.Gen(chime_inviteUsersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_inviteUsersCmd).Standalone()
 
-	chime_inviteUsersCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_inviteUsersCmd.Flags().String("user-email-list", "", "The user email addresses to which to send the email invitation.")
-	chime_inviteUsersCmd.Flags().String("user-type", "", "The user type.")
-	chime_inviteUsersCmd.MarkFlagRequired("account-id")
-	chime_inviteUsersCmd.MarkFlagRequired("user-email-list")
+		chime_inviteUsersCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_inviteUsersCmd.Flags().String("user-email-list", "", "The user email addresses to which to send the email invitation.")
+		chime_inviteUsersCmd.Flags().String("user-type", "", "The user type.")
+		chime_inviteUsersCmd.MarkFlagRequired("account-id")
+		chime_inviteUsersCmd.MarkFlagRequired("user-email-list")
+	})
 	chimeCmd.AddCommand(chime_inviteUsersCmd)
 }

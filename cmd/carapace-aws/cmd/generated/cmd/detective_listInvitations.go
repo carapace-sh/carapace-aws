@@ -12,9 +12,11 @@ var detective_listInvitationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_listInvitationsCmd).Standalone()
+	carapace.Gen(detective_listInvitationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_listInvitationsCmd).Standalone()
 
-	detective_listInvitationsCmd.Flags().String("max-results", "", "The maximum number of behavior graph invitations to return in the response.")
-	detective_listInvitationsCmd.Flags().String("next-token", "", "For requests to retrieve the next page of results, the pagination token that was returned with the previous page of results.")
+		detective_listInvitationsCmd.Flags().String("max-results", "", "The maximum number of behavior graph invitations to return in the response.")
+		detective_listInvitationsCmd.Flags().String("next-token", "", "For requests to retrieve the next page of results, the pagination token that was returned with the previous page of results.")
+	})
 	detectiveCmd.AddCommand(detective_listInvitationsCmd)
 }

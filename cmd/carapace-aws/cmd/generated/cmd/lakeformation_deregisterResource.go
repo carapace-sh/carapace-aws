@@ -12,9 +12,11 @@ var lakeformation_deregisterResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_deregisterResourceCmd).Standalone()
+	carapace.Gen(lakeformation_deregisterResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_deregisterResourceCmd).Standalone()
 
-	lakeformation_deregisterResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to deregister.")
-	lakeformation_deregisterResourceCmd.MarkFlagRequired("resource-arn")
+		lakeformation_deregisterResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to deregister.")
+		lakeformation_deregisterResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	lakeformationCmd.AddCommand(lakeformation_deregisterResourceCmd)
 }

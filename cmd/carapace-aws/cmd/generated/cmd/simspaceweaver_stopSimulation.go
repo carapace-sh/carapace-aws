@@ -12,9 +12,11 @@ var simspaceweaver_stopSimulationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_stopSimulationCmd).Standalone()
+	carapace.Gen(simspaceweaver_stopSimulationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_stopSimulationCmd).Standalone()
 
-	simspaceweaver_stopSimulationCmd.Flags().String("simulation", "", "The name of the simulation.")
-	simspaceweaver_stopSimulationCmd.MarkFlagRequired("simulation")
+		simspaceweaver_stopSimulationCmd.Flags().String("simulation", "", "The name of the simulation.")
+		simspaceweaver_stopSimulationCmd.MarkFlagRequired("simulation")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_stopSimulationCmd)
 }

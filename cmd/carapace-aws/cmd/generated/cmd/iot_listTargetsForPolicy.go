@@ -12,11 +12,13 @@ var iot_listTargetsForPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listTargetsForPolicyCmd).Standalone()
+	carapace.Gen(iot_listTargetsForPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listTargetsForPolicyCmd).Standalone()
 
-	iot_listTargetsForPolicyCmd.Flags().String("marker", "", "A marker used to get the next set of results.")
-	iot_listTargetsForPolicyCmd.Flags().String("page-size", "", "The maximum number of results to return at one time.")
-	iot_listTargetsForPolicyCmd.Flags().String("policy-name", "", "The policy name.")
-	iot_listTargetsForPolicyCmd.MarkFlagRequired("policy-name")
+		iot_listTargetsForPolicyCmd.Flags().String("marker", "", "A marker used to get the next set of results.")
+		iot_listTargetsForPolicyCmd.Flags().String("page-size", "", "The maximum number of results to return at one time.")
+		iot_listTargetsForPolicyCmd.Flags().String("policy-name", "", "The policy name.")
+		iot_listTargetsForPolicyCmd.MarkFlagRequired("policy-name")
+	})
 	iotCmd.AddCommand(iot_listTargetsForPolicyCmd)
 }

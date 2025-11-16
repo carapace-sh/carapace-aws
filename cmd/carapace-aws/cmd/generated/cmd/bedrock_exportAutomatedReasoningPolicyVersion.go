@@ -12,9 +12,11 @@ var bedrock_exportAutomatedReasoningPolicyVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_exportAutomatedReasoningPolicyVersionCmd).Standalone()
+	carapace.Gen(bedrock_exportAutomatedReasoningPolicyVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_exportAutomatedReasoningPolicyVersionCmd).Standalone()
 
-	bedrock_exportAutomatedReasoningPolicyVersionCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy to export.")
-	bedrock_exportAutomatedReasoningPolicyVersionCmd.MarkFlagRequired("policy-arn")
+		bedrock_exportAutomatedReasoningPolicyVersionCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy to export.")
+		bedrock_exportAutomatedReasoningPolicyVersionCmd.MarkFlagRequired("policy-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_exportAutomatedReasoningPolicyVersionCmd)
 }

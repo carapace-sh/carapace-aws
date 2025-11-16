@@ -12,11 +12,13 @@ var workspaces_describeWorkspaceImagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeWorkspaceImagesCmd).Standalone()
+	carapace.Gen(workspaces_describeWorkspaceImagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeWorkspaceImagesCmd).Standalone()
 
-	workspaces_describeWorkspaceImagesCmd.Flags().String("image-ids", "", "The identifier of the image.")
-	workspaces_describeWorkspaceImagesCmd.Flags().String("image-type", "", "The type (owned or shared) of the image.")
-	workspaces_describeWorkspaceImagesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	workspaces_describeWorkspaceImagesCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+		workspaces_describeWorkspaceImagesCmd.Flags().String("image-ids", "", "The identifier of the image.")
+		workspaces_describeWorkspaceImagesCmd.Flags().String("image-type", "", "The type (owned or shared) of the image.")
+		workspaces_describeWorkspaceImagesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		workspaces_describeWorkspaceImagesCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+	})
 	workspacesCmd.AddCommand(workspaces_describeWorkspaceImagesCmd)
 }

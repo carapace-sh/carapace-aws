@@ -12,9 +12,11 @@ var tnb_getSolFunctionInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_getSolFunctionInstanceCmd).Standalone()
+	carapace.Gen(tnb_getSolFunctionInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_getSolFunctionInstanceCmd).Standalone()
 
-	tnb_getSolFunctionInstanceCmd.Flags().String("vnf-instance-id", "", "ID of the network function.")
-	tnb_getSolFunctionInstanceCmd.MarkFlagRequired("vnf-instance-id")
+		tnb_getSolFunctionInstanceCmd.Flags().String("vnf-instance-id", "", "ID of the network function.")
+		tnb_getSolFunctionInstanceCmd.MarkFlagRequired("vnf-instance-id")
+	})
 	tnbCmd.AddCommand(tnb_getSolFunctionInstanceCmd)
 }

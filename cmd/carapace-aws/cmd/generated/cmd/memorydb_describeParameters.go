@@ -12,11 +12,13 @@ var memorydb_describeParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_describeParametersCmd).Standalone()
+	carapace.Gen(memorydb_describeParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_describeParametersCmd).Standalone()
 
-	memorydb_describeParametersCmd.Flags().String("max-results", "", "The maximum number of records to include in the response.")
-	memorydb_describeParametersCmd.Flags().String("next-token", "", "An optional argument to pass in case the total number of records exceeds the value of MaxResults.")
-	memorydb_describeParametersCmd.Flags().String("parameter-group-name", "", "he name of a specific parameter group to return details for.")
-	memorydb_describeParametersCmd.MarkFlagRequired("parameter-group-name")
+		memorydb_describeParametersCmd.Flags().String("max-results", "", "The maximum number of records to include in the response.")
+		memorydb_describeParametersCmd.Flags().String("next-token", "", "An optional argument to pass in case the total number of records exceeds the value of MaxResults.")
+		memorydb_describeParametersCmd.Flags().String("parameter-group-name", "", "he name of a specific parameter group to return details for.")
+		memorydb_describeParametersCmd.MarkFlagRequired("parameter-group-name")
+	})
 	memorydbCmd.AddCommand(memorydb_describeParametersCmd)
 }

@@ -12,9 +12,11 @@ var route53domains_resendOperationAuthorizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_resendOperationAuthorizationCmd).Standalone()
+	carapace.Gen(route53domains_resendOperationAuthorizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_resendOperationAuthorizationCmd).Standalone()
 
-	route53domains_resendOperationAuthorizationCmd.Flags().String("operation-id", "", "Operation ID.")
-	route53domains_resendOperationAuthorizationCmd.MarkFlagRequired("operation-id")
+		route53domains_resendOperationAuthorizationCmd.Flags().String("operation-id", "", "Operation ID.")
+		route53domains_resendOperationAuthorizationCmd.MarkFlagRequired("operation-id")
+	})
 	route53domainsCmd.AddCommand(route53domains_resendOperationAuthorizationCmd)
 }

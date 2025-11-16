@@ -12,9 +12,11 @@ var costOptimizationHub_getRecommendationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(costOptimizationHub_getRecommendationCmd).Standalone()
+	carapace.Gen(costOptimizationHub_getRecommendationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(costOptimizationHub_getRecommendationCmd).Standalone()
 
-	costOptimizationHub_getRecommendationCmd.Flags().String("recommendation-id", "", "The ID for the recommendation.")
-	costOptimizationHub_getRecommendationCmd.MarkFlagRequired("recommendation-id")
+		costOptimizationHub_getRecommendationCmd.Flags().String("recommendation-id", "", "The ID for the recommendation.")
+		costOptimizationHub_getRecommendationCmd.MarkFlagRequired("recommendation-id")
+	})
 	costOptimizationHubCmd.AddCommand(costOptimizationHub_getRecommendationCmd)
 }

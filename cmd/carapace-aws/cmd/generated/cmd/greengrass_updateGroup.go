@@ -12,10 +12,12 @@ var greengrass_updateGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_updateGroupCmd).Standalone()
+	carapace.Gen(greengrass_updateGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_updateGroupCmd).Standalone()
 
-	greengrass_updateGroupCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
-	greengrass_updateGroupCmd.Flags().String("name", "", "The name of the definition.")
-	greengrass_updateGroupCmd.MarkFlagRequired("group-id")
+		greengrass_updateGroupCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
+		greengrass_updateGroupCmd.Flags().String("name", "", "The name of the definition.")
+		greengrass_updateGroupCmd.MarkFlagRequired("group-id")
+	})
 	greengrassCmd.AddCommand(greengrass_updateGroupCmd)
 }

@@ -12,13 +12,15 @@ var connect_deletePushNotificationRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deletePushNotificationRegistrationCmd).Standalone()
+	carapace.Gen(connect_deletePushNotificationRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deletePushNotificationRegistrationCmd).Standalone()
 
-	connect_deletePushNotificationRegistrationCmd.Flags().String("contact-id", "", "The identifier of the contact within the Amazon Connect instance.")
-	connect_deletePushNotificationRegistrationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deletePushNotificationRegistrationCmd.Flags().String("registration-id", "", "The identifier for the registration.")
-	connect_deletePushNotificationRegistrationCmd.MarkFlagRequired("contact-id")
-	connect_deletePushNotificationRegistrationCmd.MarkFlagRequired("instance-id")
-	connect_deletePushNotificationRegistrationCmd.MarkFlagRequired("registration-id")
+		connect_deletePushNotificationRegistrationCmd.Flags().String("contact-id", "", "The identifier of the contact within the Amazon Connect instance.")
+		connect_deletePushNotificationRegistrationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deletePushNotificationRegistrationCmd.Flags().String("registration-id", "", "The identifier for the registration.")
+		connect_deletePushNotificationRegistrationCmd.MarkFlagRequired("contact-id")
+		connect_deletePushNotificationRegistrationCmd.MarkFlagRequired("instance-id")
+		connect_deletePushNotificationRegistrationCmd.MarkFlagRequired("registration-id")
+	})
 	connectCmd.AddCommand(connect_deletePushNotificationRegistrationCmd)
 }

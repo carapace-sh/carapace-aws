@@ -12,16 +12,18 @@ var docdb_describeEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_describeEventsCmd).Standalone()
+	carapace.Gen(docdb_describeEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_describeEventsCmd).Standalone()
 
-	docdb_describeEventsCmd.Flags().String("duration", "", "The number of minutes to retrieve events for.")
-	docdb_describeEventsCmd.Flags().String("end-time", "", "The end of the time interval for which to retrieve events, specified in ISO 8601 format.")
-	docdb_describeEventsCmd.Flags().String("event-categories", "", "A list of event categories that trigger notifications for an event notification subscription.")
-	docdb_describeEventsCmd.Flags().String("filters", "", "This parameter is not currently supported.")
-	docdb_describeEventsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	docdb_describeEventsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	docdb_describeEventsCmd.Flags().String("source-identifier", "", "The identifier of the event source for which events are returned.")
-	docdb_describeEventsCmd.Flags().String("source-type", "", "The event source to retrieve events for.")
-	docdb_describeEventsCmd.Flags().String("start-time", "", "The beginning of the time interval to retrieve events for, specified in ISO 8601 format.")
+		docdb_describeEventsCmd.Flags().String("duration", "", "The number of minutes to retrieve events for.")
+		docdb_describeEventsCmd.Flags().String("end-time", "", "The end of the time interval for which to retrieve events, specified in ISO 8601 format.")
+		docdb_describeEventsCmd.Flags().String("event-categories", "", "A list of event categories that trigger notifications for an event notification subscription.")
+		docdb_describeEventsCmd.Flags().String("filters", "", "This parameter is not currently supported.")
+		docdb_describeEventsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		docdb_describeEventsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		docdb_describeEventsCmd.Flags().String("source-identifier", "", "The identifier of the event source for which events are returned.")
+		docdb_describeEventsCmd.Flags().String("source-type", "", "The event source to retrieve events for.")
+		docdb_describeEventsCmd.Flags().String("start-time", "", "The beginning of the time interval to retrieve events for, specified in ISO 8601 format.")
+	})
 	docdbCmd.AddCommand(docdb_describeEventsCmd)
 }

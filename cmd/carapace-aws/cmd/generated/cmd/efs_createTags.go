@@ -12,11 +12,13 @@ var efs_createTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_createTagsCmd).Standalone()
+	carapace.Gen(efs_createTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_createTagsCmd).Standalone()
 
-	efs_createTagsCmd.Flags().String("file-system-id", "", "The ID of the file system whose tags you want to modify (String).")
-	efs_createTagsCmd.Flags().String("tags", "", "An array of `Tag` objects to add.")
-	efs_createTagsCmd.MarkFlagRequired("file-system-id")
-	efs_createTagsCmd.MarkFlagRequired("tags")
+		efs_createTagsCmd.Flags().String("file-system-id", "", "The ID of the file system whose tags you want to modify (String).")
+		efs_createTagsCmd.Flags().String("tags", "", "An array of `Tag` objects to add.")
+		efs_createTagsCmd.MarkFlagRequired("file-system-id")
+		efs_createTagsCmd.MarkFlagRequired("tags")
+	})
 	efsCmd.AddCommand(efs_createTagsCmd)
 }

@@ -12,15 +12,17 @@ var pi_listAvailableResourceMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pi_listAvailableResourceMetricsCmd).Standalone()
+	carapace.Gen(pi_listAvailableResourceMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pi_listAvailableResourceMetricsCmd).Standalone()
 
-	pi_listAvailableResourceMetricsCmd.Flags().String("identifier", "", "An immutable identifier for a data source that is unique within an Amazon Web Services Region.")
-	pi_listAvailableResourceMetricsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	pi_listAvailableResourceMetricsCmd.Flags().String("metric-types", "", "The types of metrics to return in the response.")
-	pi_listAvailableResourceMetricsCmd.Flags().String("next-token", "", "An optional pagination token provided by a previous request.")
-	pi_listAvailableResourceMetricsCmd.Flags().String("service-type", "", "The Amazon Web Services service for which Performance Insights returns metrics.")
-	pi_listAvailableResourceMetricsCmd.MarkFlagRequired("identifier")
-	pi_listAvailableResourceMetricsCmd.MarkFlagRequired("metric-types")
-	pi_listAvailableResourceMetricsCmd.MarkFlagRequired("service-type")
+		pi_listAvailableResourceMetricsCmd.Flags().String("identifier", "", "An immutable identifier for a data source that is unique within an Amazon Web Services Region.")
+		pi_listAvailableResourceMetricsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		pi_listAvailableResourceMetricsCmd.Flags().String("metric-types", "", "The types of metrics to return in the response.")
+		pi_listAvailableResourceMetricsCmd.Flags().String("next-token", "", "An optional pagination token provided by a previous request.")
+		pi_listAvailableResourceMetricsCmd.Flags().String("service-type", "", "The Amazon Web Services service for which Performance Insights returns metrics.")
+		pi_listAvailableResourceMetricsCmd.MarkFlagRequired("identifier")
+		pi_listAvailableResourceMetricsCmd.MarkFlagRequired("metric-types")
+		pi_listAvailableResourceMetricsCmd.MarkFlagRequired("service-type")
+	})
 	piCmd.AddCommand(pi_listAvailableResourceMetricsCmd)
 }

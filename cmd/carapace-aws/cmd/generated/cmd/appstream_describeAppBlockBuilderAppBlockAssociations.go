@@ -12,11 +12,13 @@ var appstream_describeAppBlockBuilderAppBlockAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_describeAppBlockBuilderAppBlockAssociationsCmd).Standalone()
+	carapace.Gen(appstream_describeAppBlockBuilderAppBlockAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_describeAppBlockBuilderAppBlockAssociationsCmd).Standalone()
 
-	appstream_describeAppBlockBuilderAppBlockAssociationsCmd.Flags().String("app-block-arn", "", "The ARN of the app block.")
-	appstream_describeAppBlockBuilderAppBlockAssociationsCmd.Flags().String("app-block-builder-name", "", "The name of the app block builder.")
-	appstream_describeAppBlockBuilderAppBlockAssociationsCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
-	appstream_describeAppBlockBuilderAppBlockAssociationsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		appstream_describeAppBlockBuilderAppBlockAssociationsCmd.Flags().String("app-block-arn", "", "The ARN of the app block.")
+		appstream_describeAppBlockBuilderAppBlockAssociationsCmd.Flags().String("app-block-builder-name", "", "The name of the app block builder.")
+		appstream_describeAppBlockBuilderAppBlockAssociationsCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
+		appstream_describeAppBlockBuilderAppBlockAssociationsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+	})
 	appstreamCmd.AddCommand(appstream_describeAppBlockBuilderAppBlockAssociationsCmd)
 }

@@ -12,11 +12,13 @@ var quicksight_describeDashboardPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeDashboardPermissionsCmd).Standalone()
+	carapace.Gen(quicksight_describeDashboardPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeDashboardPermissionsCmd).Standalone()
 
-	quicksight_describeDashboardPermissionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard that you're describing permissions for.")
-	quicksight_describeDashboardPermissionsCmd.Flags().String("dashboard-id", "", "The ID for the dashboard, also added to the IAM policy.")
-	quicksight_describeDashboardPermissionsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeDashboardPermissionsCmd.MarkFlagRequired("dashboard-id")
+		quicksight_describeDashboardPermissionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the dashboard that you're describing permissions for.")
+		quicksight_describeDashboardPermissionsCmd.Flags().String("dashboard-id", "", "The ID for the dashboard, also added to the IAM policy.")
+		quicksight_describeDashboardPermissionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeDashboardPermissionsCmd.MarkFlagRequired("dashboard-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeDashboardPermissionsCmd)
 }

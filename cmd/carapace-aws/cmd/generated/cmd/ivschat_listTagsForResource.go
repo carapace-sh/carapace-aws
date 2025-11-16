@@ -12,9 +12,11 @@ var ivschat_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_listTagsForResourceCmd).Standalone()
+	carapace.Gen(ivschat_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_listTagsForResourceCmd).Standalone()
 
-	ivschat_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be retrieved.")
-	ivschat_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		ivschat_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be retrieved.")
+		ivschat_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	ivschatCmd.AddCommand(ivschat_listTagsForResourceCmd)
 }

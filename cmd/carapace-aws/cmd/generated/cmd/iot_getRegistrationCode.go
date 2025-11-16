@@ -12,7 +12,9 @@ var iot_getRegistrationCodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getRegistrationCodeCmd).Standalone()
+	carapace.Gen(iot_getRegistrationCodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getRegistrationCodeCmd).Standalone()
 
+	})
 	iotCmd.AddCommand(iot_getRegistrationCodeCmd)
 }

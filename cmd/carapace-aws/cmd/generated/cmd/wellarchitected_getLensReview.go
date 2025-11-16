@@ -12,12 +12,14 @@ var wellarchitected_getLensReviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_getLensReviewCmd).Standalone()
+	carapace.Gen(wellarchitected_getLensReviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_getLensReviewCmd).Standalone()
 
-	wellarchitected_getLensReviewCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_getLensReviewCmd.Flags().String("milestone-number", "", "")
-	wellarchitected_getLensReviewCmd.Flags().String("workload-id", "", "")
-	wellarchitected_getLensReviewCmd.MarkFlagRequired("lens-alias")
-	wellarchitected_getLensReviewCmd.MarkFlagRequired("workload-id")
+		wellarchitected_getLensReviewCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_getLensReviewCmd.Flags().String("milestone-number", "", "")
+		wellarchitected_getLensReviewCmd.Flags().String("workload-id", "", "")
+		wellarchitected_getLensReviewCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_getLensReviewCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_getLensReviewCmd)
 }

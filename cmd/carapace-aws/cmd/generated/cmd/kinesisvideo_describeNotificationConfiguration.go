@@ -12,9 +12,11 @@ var kinesisvideo_describeNotificationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_describeNotificationConfigurationCmd).Standalone()
+	carapace.Gen(kinesisvideo_describeNotificationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_describeNotificationConfigurationCmd).Standalone()
 
-	kinesisvideo_describeNotificationConfigurationCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to retrieve the notification configuration.")
-	kinesisvideo_describeNotificationConfigurationCmd.Flags().String("stream-name", "", "The name of the stream from which to retrieve the notification configuration.")
+		kinesisvideo_describeNotificationConfigurationCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to retrieve the notification configuration.")
+		kinesisvideo_describeNotificationConfigurationCmd.Flags().String("stream-name", "", "The name of the stream from which to retrieve the notification configuration.")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_describeNotificationConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var appsync_listApisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_listApisCmd).Standalone()
+	carapace.Gen(appsync_listApisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_listApisCmd).Standalone()
 
-	appsync_listApisCmd.Flags().String("max-results", "", "The maximum number of results that you want the request to return.")
-	appsync_listApisCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.")
+		appsync_listApisCmd.Flags().String("max-results", "", "The maximum number of results that you want the request to return.")
+		appsync_listApisCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.")
+	})
 	appsyncCmd.AddCommand(appsync_listApisCmd)
 }

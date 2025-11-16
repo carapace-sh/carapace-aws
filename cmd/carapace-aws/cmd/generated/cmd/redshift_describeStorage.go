@@ -12,7 +12,9 @@ var redshift_describeStorageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeStorageCmd).Standalone()
+	carapace.Gen(redshift_describeStorageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeStorageCmd).Standalone()
 
+	})
 	redshiftCmd.AddCommand(redshift_describeStorageCmd)
 }

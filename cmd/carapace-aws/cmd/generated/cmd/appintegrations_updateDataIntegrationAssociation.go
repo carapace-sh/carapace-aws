@@ -12,13 +12,15 @@ var appintegrations_updateDataIntegrationAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_updateDataIntegrationAssociationCmd).Standalone()
+	carapace.Gen(appintegrations_updateDataIntegrationAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_updateDataIntegrationAssociationCmd).Standalone()
 
-	appintegrations_updateDataIntegrationAssociationCmd.Flags().String("data-integration-association-identifier", "", "A unique identifier.")
-	appintegrations_updateDataIntegrationAssociationCmd.Flags().String("data-integration-identifier", "", "A unique identifier for the DataIntegration.")
-	appintegrations_updateDataIntegrationAssociationCmd.Flags().String("execution-configuration", "", "The configuration for how the files should be pulled from the source.")
-	appintegrations_updateDataIntegrationAssociationCmd.MarkFlagRequired("data-integration-association-identifier")
-	appintegrations_updateDataIntegrationAssociationCmd.MarkFlagRequired("data-integration-identifier")
-	appintegrations_updateDataIntegrationAssociationCmd.MarkFlagRequired("execution-configuration")
+		appintegrations_updateDataIntegrationAssociationCmd.Flags().String("data-integration-association-identifier", "", "A unique identifier.")
+		appintegrations_updateDataIntegrationAssociationCmd.Flags().String("data-integration-identifier", "", "A unique identifier for the DataIntegration.")
+		appintegrations_updateDataIntegrationAssociationCmd.Flags().String("execution-configuration", "", "The configuration for how the files should be pulled from the source.")
+		appintegrations_updateDataIntegrationAssociationCmd.MarkFlagRequired("data-integration-association-identifier")
+		appintegrations_updateDataIntegrationAssociationCmd.MarkFlagRequired("data-integration-identifier")
+		appintegrations_updateDataIntegrationAssociationCmd.MarkFlagRequired("execution-configuration")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_updateDataIntegrationAssociationCmd)
 }

@@ -12,9 +12,11 @@ var cloudfront_getOriginRequestPolicyConfig2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_getOriginRequestPolicyConfig2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getOriginRequestPolicyConfig2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getOriginRequestPolicyConfig2020_05_31Cmd).Standalone()
 
-	cloudfront_getOriginRequestPolicyConfig2020_05_31Cmd.Flags().String("id", "", "The unique identifier for the origin request policy.")
-	cloudfront_getOriginRequestPolicyConfig2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getOriginRequestPolicyConfig2020_05_31Cmd.Flags().String("id", "", "The unique identifier for the origin request policy.")
+		cloudfront_getOriginRequestPolicyConfig2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getOriginRequestPolicyConfig2020_05_31Cmd)
 }

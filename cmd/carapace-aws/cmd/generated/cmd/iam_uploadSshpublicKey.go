@@ -12,11 +12,13 @@ var iam_uploadSshpublicKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_uploadSshpublicKeyCmd).Standalone()
+	carapace.Gen(iam_uploadSshpublicKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_uploadSshpublicKeyCmd).Standalone()
 
-	iam_uploadSshpublicKeyCmd.Flags().String("sshpublic-key-body", "", "The SSH public key.")
-	iam_uploadSshpublicKeyCmd.Flags().String("user-name", "", "The name of the IAM user to associate the SSH public key with.")
-	iam_uploadSshpublicKeyCmd.MarkFlagRequired("sshpublic-key-body")
-	iam_uploadSshpublicKeyCmd.MarkFlagRequired("user-name")
+		iam_uploadSshpublicKeyCmd.Flags().String("sshpublic-key-body", "", "The SSH public key.")
+		iam_uploadSshpublicKeyCmd.Flags().String("user-name", "", "The name of the IAM user to associate the SSH public key with.")
+		iam_uploadSshpublicKeyCmd.MarkFlagRequired("sshpublic-key-body")
+		iam_uploadSshpublicKeyCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_uploadSshpublicKeyCmd)
 }

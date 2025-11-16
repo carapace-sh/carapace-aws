@@ -12,12 +12,14 @@ var amp_deleteAnomalyDetectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_deleteAnomalyDetectorCmd).Standalone()
+	carapace.Gen(amp_deleteAnomalyDetectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_deleteAnomalyDetectorCmd).Standalone()
 
-	amp_deleteAnomalyDetectorCmd.Flags().String("anomaly-detector-id", "", "The identifier of the anomaly detector to delete.")
-	amp_deleteAnomalyDetectorCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	amp_deleteAnomalyDetectorCmd.Flags().String("workspace-id", "", "The identifier of the workspace containing the anomaly detector to delete.")
-	amp_deleteAnomalyDetectorCmd.MarkFlagRequired("anomaly-detector-id")
-	amp_deleteAnomalyDetectorCmd.MarkFlagRequired("workspace-id")
+		amp_deleteAnomalyDetectorCmd.Flags().String("anomaly-detector-id", "", "The identifier of the anomaly detector to delete.")
+		amp_deleteAnomalyDetectorCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		amp_deleteAnomalyDetectorCmd.Flags().String("workspace-id", "", "The identifier of the workspace containing the anomaly detector to delete.")
+		amp_deleteAnomalyDetectorCmd.MarkFlagRequired("anomaly-detector-id")
+		amp_deleteAnomalyDetectorCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_deleteAnomalyDetectorCmd)
 }

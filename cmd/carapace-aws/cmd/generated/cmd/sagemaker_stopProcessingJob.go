@@ -12,9 +12,11 @@ var sagemaker_stopProcessingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopProcessingJobCmd).Standalone()
+	carapace.Gen(sagemaker_stopProcessingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopProcessingJobCmd).Standalone()
 
-	sagemaker_stopProcessingJobCmd.Flags().String("processing-job-name", "", "The name of the processing job to stop.")
-	sagemaker_stopProcessingJobCmd.MarkFlagRequired("processing-job-name")
+		sagemaker_stopProcessingJobCmd.Flags().String("processing-job-name", "", "The name of the processing job to stop.")
+		sagemaker_stopProcessingJobCmd.MarkFlagRequired("processing-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopProcessingJobCmd)
 }

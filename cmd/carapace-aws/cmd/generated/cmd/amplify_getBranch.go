@@ -12,11 +12,13 @@ var amplify_getBranchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_getBranchCmd).Standalone()
+	carapace.Gen(amplify_getBranchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_getBranchCmd).Standalone()
 
-	amplify_getBranchCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_getBranchCmd.Flags().String("branch-name", "", "The name of the branch.")
-	amplify_getBranchCmd.MarkFlagRequired("app-id")
-	amplify_getBranchCmd.MarkFlagRequired("branch-name")
+		amplify_getBranchCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_getBranchCmd.Flags().String("branch-name", "", "The name of the branch.")
+		amplify_getBranchCmd.MarkFlagRequired("app-id")
+		amplify_getBranchCmd.MarkFlagRequired("branch-name")
+	})
 	amplifyCmd.AddCommand(amplify_getBranchCmd)
 }

@@ -12,9 +12,11 @@ var lightsail_getRelationalDatabaseBundlesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getRelationalDatabaseBundlesCmd).Standalone()
+	carapace.Gen(lightsail_getRelationalDatabaseBundlesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getRelationalDatabaseBundlesCmd).Standalone()
 
-	lightsail_getRelationalDatabaseBundlesCmd.Flags().String("include-inactive", "", "A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.")
-	lightsail_getRelationalDatabaseBundlesCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+		lightsail_getRelationalDatabaseBundlesCmd.Flags().String("include-inactive", "", "A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.")
+		lightsail_getRelationalDatabaseBundlesCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+	})
 	lightsailCmd.AddCommand(lightsail_getRelationalDatabaseBundlesCmd)
 }

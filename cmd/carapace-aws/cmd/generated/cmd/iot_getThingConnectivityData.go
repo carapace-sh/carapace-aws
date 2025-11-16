@@ -12,9 +12,11 @@ var iot_getThingConnectivityDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getThingConnectivityDataCmd).Standalone()
+	carapace.Gen(iot_getThingConnectivityDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getThingConnectivityDataCmd).Standalone()
 
-	iot_getThingConnectivityDataCmd.Flags().String("thing-name", "", "The name of your IoT thing.")
-	iot_getThingConnectivityDataCmd.MarkFlagRequired("thing-name")
+		iot_getThingConnectivityDataCmd.Flags().String("thing-name", "", "The name of your IoT thing.")
+		iot_getThingConnectivityDataCmd.MarkFlagRequired("thing-name")
+	})
 	iotCmd.AddCommand(iot_getThingConnectivityDataCmd)
 }

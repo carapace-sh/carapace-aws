@@ -12,13 +12,15 @@ var workspaces_describeApplicationAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeApplicationAssociationsCmd).Standalone()
+	carapace.Gen(workspaces_describeApplicationAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeApplicationAssociationsCmd).Standalone()
 
-	workspaces_describeApplicationAssociationsCmd.Flags().String("application-id", "", "The identifier of the specified application.")
-	workspaces_describeApplicationAssociationsCmd.Flags().String("associated-resource-types", "", "The resource type of the associated resources.")
-	workspaces_describeApplicationAssociationsCmd.Flags().String("max-results", "", "The maximum number of associations to return.")
-	workspaces_describeApplicationAssociationsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
-	workspaces_describeApplicationAssociationsCmd.MarkFlagRequired("application-id")
-	workspaces_describeApplicationAssociationsCmd.MarkFlagRequired("associated-resource-types")
+		workspaces_describeApplicationAssociationsCmd.Flags().String("application-id", "", "The identifier of the specified application.")
+		workspaces_describeApplicationAssociationsCmd.Flags().String("associated-resource-types", "", "The resource type of the associated resources.")
+		workspaces_describeApplicationAssociationsCmd.Flags().String("max-results", "", "The maximum number of associations to return.")
+		workspaces_describeApplicationAssociationsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+		workspaces_describeApplicationAssociationsCmd.MarkFlagRequired("application-id")
+		workspaces_describeApplicationAssociationsCmd.MarkFlagRequired("associated-resource-types")
+	})
 	workspacesCmd.AddCommand(workspaces_describeApplicationAssociationsCmd)
 }

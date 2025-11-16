@@ -12,14 +12,16 @@ var cognitoIdp_getTokensFromRefreshTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_getTokensFromRefreshTokenCmd).Standalone()
+	carapace.Gen(cognitoIdp_getTokensFromRefreshTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_getTokensFromRefreshTokenCmd).Standalone()
 
-	cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("client-id", "", "The app client that issued the refresh token to the user who wants to request new tokens.")
-	cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("client-metadata", "", "A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers.")
-	cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("client-secret", "", "The client secret of the requested app client, if the client has a secret.")
-	cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("device-key", "", "When you enable device remembering, Amazon Cognito issues a device key that you can use for device authentication that bypasses multi-factor authentication (MFA).")
-	cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("refresh-token", "", "A valid refresh token that can authorize the request for new tokens.")
-	cognitoIdp_getTokensFromRefreshTokenCmd.MarkFlagRequired("client-id")
-	cognitoIdp_getTokensFromRefreshTokenCmd.MarkFlagRequired("refresh-token")
+		cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("client-id", "", "The app client that issued the refresh token to the user who wants to request new tokens.")
+		cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("client-metadata", "", "A map of custom key-value pairs that you can provide as input for certain custom workflows that this action triggers.")
+		cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("client-secret", "", "The client secret of the requested app client, if the client has a secret.")
+		cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("device-key", "", "When you enable device remembering, Amazon Cognito issues a device key that you can use for device authentication that bypasses multi-factor authentication (MFA).")
+		cognitoIdp_getTokensFromRefreshTokenCmd.Flags().String("refresh-token", "", "A valid refresh token that can authorize the request for new tokens.")
+		cognitoIdp_getTokensFromRefreshTokenCmd.MarkFlagRequired("client-id")
+		cognitoIdp_getTokensFromRefreshTokenCmd.MarkFlagRequired("refresh-token")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_getTokensFromRefreshTokenCmd)
 }

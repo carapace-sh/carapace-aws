@@ -12,9 +12,11 @@ var appsync_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_listTagsForResourceCmd).Standalone()
+	carapace.Gen(appsync_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_listTagsForResourceCmd).Standalone()
 
-	appsync_listTagsForResourceCmd.Flags().String("resource-arn", "", "The `GraphqlApi` Amazon Resource Name (ARN).")
-	appsync_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		appsync_listTagsForResourceCmd.Flags().String("resource-arn", "", "The `GraphqlApi` Amazon Resource Name (ARN).")
+		appsync_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	appsyncCmd.AddCommand(appsync_listTagsForResourceCmd)
 }

@@ -12,7 +12,9 @@ var elasticbeanstalk_listAvailableSolutionStacksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_listAvailableSolutionStacksCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_listAvailableSolutionStacksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_listAvailableSolutionStacksCmd).Standalone()
 
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_listAvailableSolutionStacksCmd)
 }

@@ -12,11 +12,13 @@ var cognitoIdp_describeTermsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_describeTermsCmd).Standalone()
+	carapace.Gen(cognitoIdp_describeTermsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_describeTermsCmd).Standalone()
 
-	cognitoIdp_describeTermsCmd.Flags().String("terms-id", "", "The ID of the terms documents that you want to describe.")
-	cognitoIdp_describeTermsCmd.Flags().String("user-pool-id", "", "The ID of the user pool that contains the terms documents that you want to describe.")
-	cognitoIdp_describeTermsCmd.MarkFlagRequired("terms-id")
-	cognitoIdp_describeTermsCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_describeTermsCmd.Flags().String("terms-id", "", "The ID of the terms documents that you want to describe.")
+		cognitoIdp_describeTermsCmd.Flags().String("user-pool-id", "", "The ID of the user pool that contains the terms documents that you want to describe.")
+		cognitoIdp_describeTermsCmd.MarkFlagRequired("terms-id")
+		cognitoIdp_describeTermsCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_describeTermsCmd)
 }

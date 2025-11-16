@@ -12,12 +12,14 @@ var codeguruSecurity_getFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruSecurity_getFindingsCmd).Standalone()
+	carapace.Gen(codeguruSecurity_getFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruSecurity_getFindingsCmd).Standalone()
 
-	codeguruSecurity_getFindingsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	codeguruSecurity_getFindingsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
-	codeguruSecurity_getFindingsCmd.Flags().String("scan-name", "", "The name of the scan you want to retrieve findings from.")
-	codeguruSecurity_getFindingsCmd.Flags().String("status", "", "The status of the findings you want to get.")
-	codeguruSecurity_getFindingsCmd.MarkFlagRequired("scan-name")
+		codeguruSecurity_getFindingsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		codeguruSecurity_getFindingsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
+		codeguruSecurity_getFindingsCmd.Flags().String("scan-name", "", "The name of the scan you want to retrieve findings from.")
+		codeguruSecurity_getFindingsCmd.Flags().String("status", "", "The status of the findings you want to get.")
+		codeguruSecurity_getFindingsCmd.MarkFlagRequired("scan-name")
+	})
 	codeguruSecurityCmd.AddCommand(codeguruSecurity_getFindingsCmd)
 }

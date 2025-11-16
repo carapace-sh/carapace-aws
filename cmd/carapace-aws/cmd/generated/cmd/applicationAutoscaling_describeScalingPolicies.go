@@ -12,14 +12,16 @@ var applicationAutoscaling_describeScalingPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationAutoscaling_describeScalingPoliciesCmd).Standalone()
+	carapace.Gen(applicationAutoscaling_describeScalingPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationAutoscaling_describeScalingPoliciesCmd).Standalone()
 
-	applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("max-results", "", "The maximum number of scalable targets.")
-	applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("policy-names", "", "The names of the scaling policies to describe.")
-	applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("resource-id", "", "The identifier of the resource associated with the scaling policy.")
-	applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("scalable-dimension", "", "The scalable dimension.")
-	applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("service-namespace", "", "The namespace of the Amazon Web Services service that provides the resource.")
-	applicationAutoscaling_describeScalingPoliciesCmd.MarkFlagRequired("service-namespace")
+		applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("max-results", "", "The maximum number of scalable targets.")
+		applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("policy-names", "", "The names of the scaling policies to describe.")
+		applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("resource-id", "", "The identifier of the resource associated with the scaling policy.")
+		applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("scalable-dimension", "", "The scalable dimension.")
+		applicationAutoscaling_describeScalingPoliciesCmd.Flags().String("service-namespace", "", "The namespace of the Amazon Web Services service that provides the resource.")
+		applicationAutoscaling_describeScalingPoliciesCmd.MarkFlagRequired("service-namespace")
+	})
 	applicationAutoscalingCmd.AddCommand(applicationAutoscaling_describeScalingPoliciesCmd)
 }

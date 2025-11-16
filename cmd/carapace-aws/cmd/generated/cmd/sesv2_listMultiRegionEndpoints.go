@@ -12,9 +12,11 @@ var sesv2_listMultiRegionEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listMultiRegionEndpointsCmd).Standalone()
+	carapace.Gen(sesv2_listMultiRegionEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listMultiRegionEndpointsCmd).Standalone()
 
-	sesv2_listMultiRegionEndpointsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListMultiRegionEndpoints` to indicate the position in the list of multi-region endpoints (global-endpoints).")
-	sesv2_listMultiRegionEndpointsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListMultiRegionEndpoints`.")
+		sesv2_listMultiRegionEndpointsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListMultiRegionEndpoints` to indicate the position in the list of multi-region endpoints (global-endpoints).")
+		sesv2_listMultiRegionEndpointsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListMultiRegionEndpoints`.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listMultiRegionEndpointsCmd)
 }

@@ -12,11 +12,13 @@ var mediastore_putCorsPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_putCorsPolicyCmd).Standalone()
+	carapace.Gen(mediastore_putCorsPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_putCorsPolicyCmd).Standalone()
 
-	mediastore_putCorsPolicyCmd.Flags().String("container-name", "", "The name of the container that you want to assign the CORS policy to.")
-	mediastore_putCorsPolicyCmd.Flags().String("cors-policy", "", "The CORS policy to apply to the container.")
-	mediastore_putCorsPolicyCmd.MarkFlagRequired("container-name")
-	mediastore_putCorsPolicyCmd.MarkFlagRequired("cors-policy")
+		mediastore_putCorsPolicyCmd.Flags().String("container-name", "", "The name of the container that you want to assign the CORS policy to.")
+		mediastore_putCorsPolicyCmd.Flags().String("cors-policy", "", "The CORS policy to apply to the container.")
+		mediastore_putCorsPolicyCmd.MarkFlagRequired("container-name")
+		mediastore_putCorsPolicyCmd.MarkFlagRequired("cors-policy")
+	})
 	mediastoreCmd.AddCommand(mediastore_putCorsPolicyCmd)
 }

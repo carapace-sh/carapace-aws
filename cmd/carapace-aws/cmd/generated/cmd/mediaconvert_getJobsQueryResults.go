@@ -12,9 +12,11 @@ var mediaconvert_getJobsQueryResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_getJobsQueryResultsCmd).Standalone()
+	carapace.Gen(mediaconvert_getJobsQueryResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_getJobsQueryResultsCmd).Standalone()
 
-	mediaconvert_getJobsQueryResultsCmd.Flags().String("id", "", "The ID of the jobs query.")
-	mediaconvert_getJobsQueryResultsCmd.MarkFlagRequired("id")
+		mediaconvert_getJobsQueryResultsCmd.Flags().String("id", "", "The ID of the jobs query.")
+		mediaconvert_getJobsQueryResultsCmd.MarkFlagRequired("id")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_getJobsQueryResultsCmd)
 }

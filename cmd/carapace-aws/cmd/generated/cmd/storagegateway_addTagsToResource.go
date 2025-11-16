@@ -12,11 +12,13 @@ var storagegateway_addTagsToResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_addTagsToResourceCmd).Standalone()
+	carapace.Gen(storagegateway_addTagsToResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_addTagsToResourceCmd).Standalone()
 
-	storagegateway_addTagsToResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you want to add tags to.")
-	storagegateway_addTagsToResourceCmd.Flags().String("tags", "", "The key-value pair that represents the tag you want to add to the resource.")
-	storagegateway_addTagsToResourceCmd.MarkFlagRequired("resource-arn")
-	storagegateway_addTagsToResourceCmd.MarkFlagRequired("tags")
+		storagegateway_addTagsToResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you want to add tags to.")
+		storagegateway_addTagsToResourceCmd.Flags().String("tags", "", "The key-value pair that represents the tag you want to add to the resource.")
+		storagegateway_addTagsToResourceCmd.MarkFlagRequired("resource-arn")
+		storagegateway_addTagsToResourceCmd.MarkFlagRequired("tags")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_addTagsToResourceCmd)
 }

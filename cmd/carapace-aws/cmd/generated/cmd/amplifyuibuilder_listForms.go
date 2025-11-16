@@ -12,13 +12,15 @@ var amplifyuibuilder_listFormsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_listFormsCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_listFormsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_listFormsCmd).Standalone()
 
-	amplifyuibuilder_listFormsCmd.Flags().String("app-id", "", "The unique ID for the Amplify app.")
-	amplifyuibuilder_listFormsCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app.")
-	amplifyuibuilder_listFormsCmd.Flags().String("max-results", "", "The maximum number of forms to retrieve.")
-	amplifyuibuilder_listFormsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
-	amplifyuibuilder_listFormsCmd.MarkFlagRequired("app-id")
-	amplifyuibuilder_listFormsCmd.MarkFlagRequired("environment-name")
+		amplifyuibuilder_listFormsCmd.Flags().String("app-id", "", "The unique ID for the Amplify app.")
+		amplifyuibuilder_listFormsCmd.Flags().String("environment-name", "", "The name of the backend environment that is a part of the Amplify app.")
+		amplifyuibuilder_listFormsCmd.Flags().String("max-results", "", "The maximum number of forms to retrieve.")
+		amplifyuibuilder_listFormsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		amplifyuibuilder_listFormsCmd.MarkFlagRequired("app-id")
+		amplifyuibuilder_listFormsCmd.MarkFlagRequired("environment-name")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_listFormsCmd)
 }

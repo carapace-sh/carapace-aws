@@ -12,12 +12,14 @@ var rekognition_startPersonTrackingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_startPersonTrackingCmd).Standalone()
+	carapace.Gen(rekognition_startPersonTrackingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_startPersonTrackingCmd).Standalone()
 
-	rekognition_startPersonTrackingCmd.Flags().String("client-request-token", "", "Idempotent token used to identify the start request.")
-	rekognition_startPersonTrackingCmd.Flags().String("job-tag", "", "An identifier you specify that's returned in the completion notification that's published to your Amazon Simple Notification Service topic.")
-	rekognition_startPersonTrackingCmd.Flags().String("notification-channel", "", "The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to.")
-	rekognition_startPersonTrackingCmd.Flags().String("video", "", "The video in which you want to detect people.")
-	rekognition_startPersonTrackingCmd.MarkFlagRequired("video")
+		rekognition_startPersonTrackingCmd.Flags().String("client-request-token", "", "Idempotent token used to identify the start request.")
+		rekognition_startPersonTrackingCmd.Flags().String("job-tag", "", "An identifier you specify that's returned in the completion notification that's published to your Amazon Simple Notification Service topic.")
+		rekognition_startPersonTrackingCmd.Flags().String("notification-channel", "", "The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to.")
+		rekognition_startPersonTrackingCmd.Flags().String("video", "", "The video in which you want to detect people.")
+		rekognition_startPersonTrackingCmd.MarkFlagRequired("video")
+	})
 	rekognitionCmd.AddCommand(rekognition_startPersonTrackingCmd)
 }

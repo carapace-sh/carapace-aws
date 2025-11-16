@@ -12,9 +12,11 @@ var elbv2_describeLoadBalancerAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_describeLoadBalancerAttributesCmd).Standalone()
+	carapace.Gen(elbv2_describeLoadBalancerAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_describeLoadBalancerAttributesCmd).Standalone()
 
-	elbv2_describeLoadBalancerAttributesCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
-	elbv2_describeLoadBalancerAttributesCmd.MarkFlagRequired("load-balancer-arn")
+		elbv2_describeLoadBalancerAttributesCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
+		elbv2_describeLoadBalancerAttributesCmd.MarkFlagRequired("load-balancer-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_describeLoadBalancerAttributesCmd)
 }

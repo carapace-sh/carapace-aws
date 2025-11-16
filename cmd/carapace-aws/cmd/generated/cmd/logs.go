@@ -12,7 +12,9 @@ var logsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logsCmd).Standalone()
+	carapace.Gen(logsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(logsCmd)
 }

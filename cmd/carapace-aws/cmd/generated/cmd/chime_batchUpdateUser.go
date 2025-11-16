@@ -12,11 +12,13 @@ var chime_batchUpdateUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_batchUpdateUserCmd).Standalone()
+	carapace.Gen(chime_batchUpdateUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_batchUpdateUserCmd).Standalone()
 
-	chime_batchUpdateUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_batchUpdateUserCmd.Flags().String("update-user-request-items", "", "The request containing the user IDs and details to update.")
-	chime_batchUpdateUserCmd.MarkFlagRequired("account-id")
-	chime_batchUpdateUserCmd.MarkFlagRequired("update-user-request-items")
+		chime_batchUpdateUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_batchUpdateUserCmd.Flags().String("update-user-request-items", "", "The request containing the user IDs and details to update.")
+		chime_batchUpdateUserCmd.MarkFlagRequired("account-id")
+		chime_batchUpdateUserCmd.MarkFlagRequired("update-user-request-items")
+	})
 	chimeCmd.AddCommand(chime_batchUpdateUserCmd)
 }

@@ -12,11 +12,13 @@ var finspaceData_getExternalDataViewAccessDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_getExternalDataViewAccessDetailsCmd).Standalone()
+	carapace.Gen(finspaceData_getExternalDataViewAccessDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_getExternalDataViewAccessDetailsCmd).Standalone()
 
-	finspaceData_getExternalDataViewAccessDetailsCmd.Flags().String("data-view-id", "", "The unique identifier for the Dataview that you want to access.")
-	finspaceData_getExternalDataViewAccessDetailsCmd.Flags().String("dataset-id", "", "The unique identifier for the Dataset.")
-	finspaceData_getExternalDataViewAccessDetailsCmd.MarkFlagRequired("data-view-id")
-	finspaceData_getExternalDataViewAccessDetailsCmd.MarkFlagRequired("dataset-id")
+		finspaceData_getExternalDataViewAccessDetailsCmd.Flags().String("data-view-id", "", "The unique identifier for the Dataview that you want to access.")
+		finspaceData_getExternalDataViewAccessDetailsCmd.Flags().String("dataset-id", "", "The unique identifier for the Dataset.")
+		finspaceData_getExternalDataViewAccessDetailsCmd.MarkFlagRequired("data-view-id")
+		finspaceData_getExternalDataViewAccessDetailsCmd.MarkFlagRequired("dataset-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_getExternalDataViewAccessDetailsCmd)
 }

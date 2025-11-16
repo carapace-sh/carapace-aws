@@ -12,9 +12,11 @@ var frauddetector_deleteEventTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteEventTypeCmd).Standalone()
+	carapace.Gen(frauddetector_deleteEventTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteEventTypeCmd).Standalone()
 
-	frauddetector_deleteEventTypeCmd.Flags().String("name", "", "The name of the event type to delete.")
-	frauddetector_deleteEventTypeCmd.MarkFlagRequired("name")
+		frauddetector_deleteEventTypeCmd.Flags().String("name", "", "The name of the event type to delete.")
+		frauddetector_deleteEventTypeCmd.MarkFlagRequired("name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteEventTypeCmd)
 }

@@ -12,9 +12,11 @@ var imagebuilder_getInfrastructureConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getInfrastructureConfigurationCmd).Standalone()
+	carapace.Gen(imagebuilder_getInfrastructureConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getInfrastructureConfigurationCmd).Standalone()
 
-	imagebuilder_getInfrastructureConfigurationCmd.Flags().String("infrastructure-configuration-arn", "", "The Amazon Resource Name (ARN) of the infrastructure configuration that you want to retrieve.")
-	imagebuilder_getInfrastructureConfigurationCmd.MarkFlagRequired("infrastructure-configuration-arn")
+		imagebuilder_getInfrastructureConfigurationCmd.Flags().String("infrastructure-configuration-arn", "", "The Amazon Resource Name (ARN) of the infrastructure configuration that you want to retrieve.")
+		imagebuilder_getInfrastructureConfigurationCmd.MarkFlagRequired("infrastructure-configuration-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getInfrastructureConfigurationCmd)
 }

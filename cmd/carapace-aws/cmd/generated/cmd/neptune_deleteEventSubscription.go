@@ -12,9 +12,11 @@ var neptune_deleteEventSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_deleteEventSubscriptionCmd).Standalone()
+	carapace.Gen(neptune_deleteEventSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_deleteEventSubscriptionCmd).Standalone()
 
-	neptune_deleteEventSubscriptionCmd.Flags().String("subscription-name", "", "The name of the event notification subscription you want to delete.")
-	neptune_deleteEventSubscriptionCmd.MarkFlagRequired("subscription-name")
+		neptune_deleteEventSubscriptionCmd.Flags().String("subscription-name", "", "The name of the event notification subscription you want to delete.")
+		neptune_deleteEventSubscriptionCmd.MarkFlagRequired("subscription-name")
+	})
 	neptuneCmd.AddCommand(neptune_deleteEventSubscriptionCmd)
 }

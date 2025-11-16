@@ -12,9 +12,11 @@ var kafka_deleteClusterPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_deleteClusterPolicyCmd).Standalone()
+	carapace.Gen(kafka_deleteClusterPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_deleteClusterPolicyCmd).Standalone()
 
-	kafka_deleteClusterPolicyCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
-	kafka_deleteClusterPolicyCmd.MarkFlagRequired("cluster-arn")
+		kafka_deleteClusterPolicyCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
+		kafka_deleteClusterPolicyCmd.MarkFlagRequired("cluster-arn")
+	})
 	kafkaCmd.AddCommand(kafka_deleteClusterPolicyCmd)
 }

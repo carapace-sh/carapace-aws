@@ -12,9 +12,11 @@ var aiops_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(aiops_listTagsForResourceCmd).Standalone()
+	carapace.Gen(aiops_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(aiops_listTagsForResourceCmd).Standalone()
 
-	aiops_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch investigations resource that you want to view tags for.")
-	aiops_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		aiops_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch investigations resource that you want to view tags for.")
+		aiops_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	aiopsCmd.AddCommand(aiops_listTagsForResourceCmd)
 }

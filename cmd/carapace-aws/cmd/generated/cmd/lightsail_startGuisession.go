@@ -12,9 +12,11 @@ var lightsail_startGuisessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_startGuisessionCmd).Standalone()
+	carapace.Gen(lightsail_startGuisessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_startGuisessionCmd).Standalone()
 
-	lightsail_startGuisessionCmd.Flags().String("resource-name", "", "The resource name.")
-	lightsail_startGuisessionCmd.MarkFlagRequired("resource-name")
+		lightsail_startGuisessionCmd.Flags().String("resource-name", "", "The resource name.")
+		lightsail_startGuisessionCmd.MarkFlagRequired("resource-name")
+	})
 	lightsailCmd.AddCommand(lightsail_startGuisessionCmd)
 }

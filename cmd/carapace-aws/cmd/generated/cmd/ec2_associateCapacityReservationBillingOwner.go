@@ -12,14 +12,16 @@ var ec2_associateCapacityReservationBillingOwnerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_associateCapacityReservationBillingOwnerCmd).Standalone()
+	carapace.Gen(ec2_associateCapacityReservationBillingOwnerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_associateCapacityReservationBillingOwnerCmd).Standalone()
 
-	ec2_associateCapacityReservationBillingOwnerCmd.Flags().String("capacity-reservation-id", "", "The ID of the Capacity Reservation.")
-	ec2_associateCapacityReservationBillingOwnerCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_associateCapacityReservationBillingOwnerCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_associateCapacityReservationBillingOwnerCmd.Flags().String("unused-reservation-billing-owner-id", "", "The ID of the consumer account to which to assign billing.")
-	ec2_associateCapacityReservationBillingOwnerCmd.MarkFlagRequired("capacity-reservation-id")
-	ec2_associateCapacityReservationBillingOwnerCmd.Flag("no-dry-run").Hidden = true
-	ec2_associateCapacityReservationBillingOwnerCmd.MarkFlagRequired("unused-reservation-billing-owner-id")
+		ec2_associateCapacityReservationBillingOwnerCmd.Flags().String("capacity-reservation-id", "", "The ID of the Capacity Reservation.")
+		ec2_associateCapacityReservationBillingOwnerCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_associateCapacityReservationBillingOwnerCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_associateCapacityReservationBillingOwnerCmd.Flags().String("unused-reservation-billing-owner-id", "", "The ID of the consumer account to which to assign billing.")
+		ec2_associateCapacityReservationBillingOwnerCmd.MarkFlagRequired("capacity-reservation-id")
+		ec2_associateCapacityReservationBillingOwnerCmd.Flag("no-dry-run").Hidden = true
+		ec2_associateCapacityReservationBillingOwnerCmd.MarkFlagRequired("unused-reservation-billing-owner-id")
+	})
 	ec2Cmd.AddCommand(ec2_associateCapacityReservationBillingOwnerCmd)
 }

@@ -12,9 +12,11 @@ var ses_deleteIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_deleteIdentityCmd).Standalone()
+	carapace.Gen(ses_deleteIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_deleteIdentityCmd).Standalone()
 
-	ses_deleteIdentityCmd.Flags().String("identity", "", "The identity to be removed from the list of identities for the Amazon Web Services account.")
-	ses_deleteIdentityCmd.MarkFlagRequired("identity")
+		ses_deleteIdentityCmd.Flags().String("identity", "", "The identity to be removed from the list of identities for the Amazon Web Services account.")
+		ses_deleteIdentityCmd.MarkFlagRequired("identity")
+	})
 	sesCmd.AddCommand(ses_deleteIdentityCmd)
 }

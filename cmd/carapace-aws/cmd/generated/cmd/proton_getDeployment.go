@@ -12,13 +12,15 @@ var proton_getDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getDeploymentCmd).Standalone()
+	carapace.Gen(proton_getDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getDeploymentCmd).Standalone()
 
-	proton_getDeploymentCmd.Flags().String("component-name", "", "The name of a component that you want to get the detailed data for.")
-	proton_getDeploymentCmd.Flags().String("environment-name", "", "The name of a environment that you want to get the detailed data for.")
-	proton_getDeploymentCmd.Flags().String("id", "", "The ID of the deployment that you want to get the detailed data for.")
-	proton_getDeploymentCmd.Flags().String("service-instance-name", "", "The name of the service instance associated with the given deployment ID.")
-	proton_getDeploymentCmd.Flags().String("service-name", "", "The name of the service associated with the given deployment ID.")
-	proton_getDeploymentCmd.MarkFlagRequired("id")
+		proton_getDeploymentCmd.Flags().String("component-name", "", "The name of a component that you want to get the detailed data for.")
+		proton_getDeploymentCmd.Flags().String("environment-name", "", "The name of a environment that you want to get the detailed data for.")
+		proton_getDeploymentCmd.Flags().String("id", "", "The ID of the deployment that you want to get the detailed data for.")
+		proton_getDeploymentCmd.Flags().String("service-instance-name", "", "The name of the service instance associated with the given deployment ID.")
+		proton_getDeploymentCmd.Flags().String("service-name", "", "The name of the service associated with the given deployment ID.")
+		proton_getDeploymentCmd.MarkFlagRequired("id")
+	})
 	protonCmd.AddCommand(proton_getDeploymentCmd)
 }

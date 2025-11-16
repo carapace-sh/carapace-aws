@@ -12,10 +12,12 @@ var bcmPricingCalculator_updatePreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_updatePreferencesCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_updatePreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_updatePreferencesCmd).Standalone()
 
-	bcmPricingCalculator_updatePreferencesCmd.Flags().String("management-account-rate-type-selections", "", "The updated preferred rate types for the management account.")
-	bcmPricingCalculator_updatePreferencesCmd.Flags().String("member-account-rate-type-selections", "", "The updated preferred rate types for member accounts.")
-	bcmPricingCalculator_updatePreferencesCmd.Flags().String("standalone-account-rate-type-selections", "", "The updated preferred rate types for a standalone account.")
+		bcmPricingCalculator_updatePreferencesCmd.Flags().String("management-account-rate-type-selections", "", "The updated preferred rate types for the management account.")
+		bcmPricingCalculator_updatePreferencesCmd.Flags().String("member-account-rate-type-selections", "", "The updated preferred rate types for member accounts.")
+		bcmPricingCalculator_updatePreferencesCmd.Flags().String("standalone-account-rate-type-selections", "", "The updated preferred rate types for a standalone account.")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_updatePreferencesCmd)
 }

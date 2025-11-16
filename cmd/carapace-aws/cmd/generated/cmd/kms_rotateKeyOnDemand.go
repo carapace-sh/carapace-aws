@@ -12,9 +12,11 @@ var kms_rotateKeyOnDemandCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_rotateKeyOnDemandCmd).Standalone()
+	carapace.Gen(kms_rotateKeyOnDemandCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_rotateKeyOnDemandCmd).Standalone()
 
-	kms_rotateKeyOnDemandCmd.Flags().String("key-id", "", "Identifies a symmetric encryption KMS key.")
-	kms_rotateKeyOnDemandCmd.MarkFlagRequired("key-id")
+		kms_rotateKeyOnDemandCmd.Flags().String("key-id", "", "Identifies a symmetric encryption KMS key.")
+		kms_rotateKeyOnDemandCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_rotateKeyOnDemandCmd)
 }

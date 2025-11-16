@@ -12,13 +12,15 @@ var pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd).Standalone()
 
-	pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("field-paths", "", "An array of paths to the registration form field.")
-	pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
-	pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("registration-type", "", "The type of registration form.")
-	pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("section-path", "", "The path to the section of the registration.")
-	pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.MarkFlagRequired("registration-type")
+		pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("field-paths", "", "An array of paths to the registration form field.")
+		pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
+		pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("registration-type", "", "The type of registration form.")
+		pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.Flags().String("section-path", "", "The path to the section of the registration.")
+		pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd.MarkFlagRequired("registration-type")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_describeRegistrationFieldDefinitionsCmd)
 }

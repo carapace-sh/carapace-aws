@@ -12,11 +12,13 @@ var gamelift_listAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_listAliasesCmd).Standalone()
+	carapace.Gen(gamelift_listAliasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_listAliasesCmd).Standalone()
 
-	gamelift_listAliasesCmd.Flags().String("limit", "", "The maximum number of results to return.")
-	gamelift_listAliasesCmd.Flags().String("name", "", "A descriptive label that is associated with an alias.")
-	gamelift_listAliasesCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
-	gamelift_listAliasesCmd.Flags().String("routing-strategy-type", "", "The routing type to filter results on.")
+		gamelift_listAliasesCmd.Flags().String("limit", "", "The maximum number of results to return.")
+		gamelift_listAliasesCmd.Flags().String("name", "", "A descriptive label that is associated with an alias.")
+		gamelift_listAliasesCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+		gamelift_listAliasesCmd.Flags().String("routing-strategy-type", "", "The routing type to filter results on.")
+	})
 	gameliftCmd.AddCommand(gamelift_listAliasesCmd)
 }

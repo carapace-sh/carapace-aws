@@ -12,9 +12,11 @@ var savingsplans_deleteQueuedSavingsPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(savingsplans_deleteQueuedSavingsPlanCmd).Standalone()
+	carapace.Gen(savingsplans_deleteQueuedSavingsPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(savingsplans_deleteQueuedSavingsPlanCmd).Standalone()
 
-	savingsplans_deleteQueuedSavingsPlanCmd.Flags().String("savings-plan-id", "", "The ID of the Savings Plan.")
-	savingsplans_deleteQueuedSavingsPlanCmd.MarkFlagRequired("savings-plan-id")
+		savingsplans_deleteQueuedSavingsPlanCmd.Flags().String("savings-plan-id", "", "The ID of the Savings Plan.")
+		savingsplans_deleteQueuedSavingsPlanCmd.MarkFlagRequired("savings-plan-id")
+	})
 	savingsplansCmd.AddCommand(savingsplans_deleteQueuedSavingsPlanCmd)
 }

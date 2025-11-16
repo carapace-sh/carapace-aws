@@ -12,9 +12,11 @@ var iotManagedIntegrations_getProvisioningProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getProvisioningProfileCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getProvisioningProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getProvisioningProfileCmd).Standalone()
 
-	iotManagedIntegrations_getProvisioningProfileCmd.Flags().String("identifier", "", "The provisioning template the device uses for the provisioning process.")
-	iotManagedIntegrations_getProvisioningProfileCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_getProvisioningProfileCmd.Flags().String("identifier", "", "The provisioning template the device uses for the provisioning process.")
+		iotManagedIntegrations_getProvisioningProfileCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getProvisioningProfileCmd)
 }

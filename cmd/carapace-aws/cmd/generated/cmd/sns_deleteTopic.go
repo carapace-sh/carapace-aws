@@ -12,9 +12,11 @@ var sns_deleteTopicCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_deleteTopicCmd).Standalone()
+	carapace.Gen(sns_deleteTopicCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_deleteTopicCmd).Standalone()
 
-	sns_deleteTopicCmd.Flags().String("topic-arn", "", "The ARN of the topic you want to delete.")
-	sns_deleteTopicCmd.MarkFlagRequired("topic-arn")
+		sns_deleteTopicCmd.Flags().String("topic-arn", "", "The ARN of the topic you want to delete.")
+		sns_deleteTopicCmd.MarkFlagRequired("topic-arn")
+	})
 	snsCmd.AddCommand(sns_deleteTopicCmd)
 }

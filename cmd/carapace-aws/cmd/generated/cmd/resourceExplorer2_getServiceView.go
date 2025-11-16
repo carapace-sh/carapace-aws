@@ -12,9 +12,11 @@ var resourceExplorer2_getServiceViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_getServiceViewCmd).Standalone()
+	carapace.Gen(resourceExplorer2_getServiceViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_getServiceViewCmd).Standalone()
 
-	resourceExplorer2_getServiceViewCmd.Flags().String("service-view-arn", "", "The Amazon Resource Name (ARN) of the service view to retrieve details for.")
-	resourceExplorer2_getServiceViewCmd.MarkFlagRequired("service-view-arn")
+		resourceExplorer2_getServiceViewCmd.Flags().String("service-view-arn", "", "The Amazon Resource Name (ARN) of the service view to retrieve details for.")
+		resourceExplorer2_getServiceViewCmd.MarkFlagRequired("service-view-arn")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_getServiceViewCmd)
 }

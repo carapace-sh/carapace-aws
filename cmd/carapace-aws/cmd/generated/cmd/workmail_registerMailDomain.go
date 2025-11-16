@@ -12,12 +12,14 @@ var workmail_registerMailDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_registerMailDomainCmd).Standalone()
+	carapace.Gen(workmail_registerMailDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_registerMailDomainCmd).Standalone()
 
-	workmail_registerMailDomainCmd.Flags().String("client-token", "", "Idempotency token used when retrying requests.")
-	workmail_registerMailDomainCmd.Flags().String("domain-name", "", "The name of the mail domain to create in WorkMail and SES.")
-	workmail_registerMailDomainCmd.Flags().String("organization-id", "", "The WorkMail organization under which you're creating the domain.")
-	workmail_registerMailDomainCmd.MarkFlagRequired("domain-name")
-	workmail_registerMailDomainCmd.MarkFlagRequired("organization-id")
+		workmail_registerMailDomainCmd.Flags().String("client-token", "", "Idempotency token used when retrying requests.")
+		workmail_registerMailDomainCmd.Flags().String("domain-name", "", "The name of the mail domain to create in WorkMail and SES.")
+		workmail_registerMailDomainCmd.Flags().String("organization-id", "", "The WorkMail organization under which you're creating the domain.")
+		workmail_registerMailDomainCmd.MarkFlagRequired("domain-name")
+		workmail_registerMailDomainCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_registerMailDomainCmd)
 }

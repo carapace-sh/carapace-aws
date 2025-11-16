@@ -12,9 +12,11 @@ var logs_deleteLogAnomalyDetectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteLogAnomalyDetectorCmd).Standalone()
+	carapace.Gen(logs_deleteLogAnomalyDetectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteLogAnomalyDetectorCmd).Standalone()
 
-	logs_deleteLogAnomalyDetectorCmd.Flags().String("anomaly-detector-arn", "", "The ARN of the anomaly detector to delete.")
-	logs_deleteLogAnomalyDetectorCmd.MarkFlagRequired("anomaly-detector-arn")
+		logs_deleteLogAnomalyDetectorCmd.Flags().String("anomaly-detector-arn", "", "The ARN of the anomaly detector to delete.")
+		logs_deleteLogAnomalyDetectorCmd.MarkFlagRequired("anomaly-detector-arn")
+	})
 	logsCmd.AddCommand(logs_deleteLogAnomalyDetectorCmd)
 }

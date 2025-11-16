@@ -12,8 +12,10 @@ var ec2_disableVpcClassicLinkDnsSupportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_disableVpcClassicLinkDnsSupportCmd).Standalone()
+	carapace.Gen(ec2_disableVpcClassicLinkDnsSupportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_disableVpcClassicLinkDnsSupportCmd).Standalone()
 
-	ec2_disableVpcClassicLinkDnsSupportCmd.Flags().String("vpc-id", "", "The ID of the VPC.")
+		ec2_disableVpcClassicLinkDnsSupportCmd.Flags().String("vpc-id", "", "The ID of the VPC.")
+	})
 	ec2Cmd.AddCommand(ec2_disableVpcClassicLinkDnsSupportCmd)
 }

@@ -12,11 +12,13 @@ var imagebuilder_cancelLifecycleExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_cancelLifecycleExecutionCmd).Standalone()
+	carapace.Gen(imagebuilder_cancelLifecycleExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_cancelLifecycleExecutionCmd).Standalone()
 
-	imagebuilder_cancelLifecycleExecutionCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier you provide to ensure idempotency of the request.")
-	imagebuilder_cancelLifecycleExecutionCmd.Flags().String("lifecycle-execution-id", "", "Identifies the specific runtime instance of the image lifecycle to cancel.")
-	imagebuilder_cancelLifecycleExecutionCmd.MarkFlagRequired("client-token")
-	imagebuilder_cancelLifecycleExecutionCmd.MarkFlagRequired("lifecycle-execution-id")
+		imagebuilder_cancelLifecycleExecutionCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier you provide to ensure idempotency of the request.")
+		imagebuilder_cancelLifecycleExecutionCmd.Flags().String("lifecycle-execution-id", "", "Identifies the specific runtime instance of the image lifecycle to cancel.")
+		imagebuilder_cancelLifecycleExecutionCmd.MarkFlagRequired("client-token")
+		imagebuilder_cancelLifecycleExecutionCmd.MarkFlagRequired("lifecycle-execution-id")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_cancelLifecycleExecutionCmd)
 }

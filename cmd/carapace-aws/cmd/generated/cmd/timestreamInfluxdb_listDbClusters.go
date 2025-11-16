@@ -12,9 +12,11 @@ var timestreamInfluxdb_listDbClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamInfluxdb_listDbClustersCmd).Standalone()
+	carapace.Gen(timestreamInfluxdb_listDbClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamInfluxdb_listDbClustersCmd).Standalone()
 
-	timestreamInfluxdb_listDbClustersCmd.Flags().String("max-results", "", "The maximum number of items to return in the output.")
-	timestreamInfluxdb_listDbClustersCmd.Flags().String("next-token", "", "The pagination token.")
+		timestreamInfluxdb_listDbClustersCmd.Flags().String("max-results", "", "The maximum number of items to return in the output.")
+		timestreamInfluxdb_listDbClustersCmd.Flags().String("next-token", "", "The pagination token.")
+	})
 	timestreamInfluxdbCmd.AddCommand(timestreamInfluxdb_listDbClustersCmd)
 }

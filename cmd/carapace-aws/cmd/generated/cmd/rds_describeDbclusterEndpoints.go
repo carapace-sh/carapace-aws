@@ -12,12 +12,14 @@ var rds_describeDbclusterEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeDbclusterEndpointsCmd).Standalone()
+	carapace.Gen(rds_describeDbclusterEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeDbclusterEndpointsCmd).Standalone()
 
-	rds_describeDbclusterEndpointsCmd.Flags().String("dbcluster-endpoint-identifier", "", "The identifier of the endpoint to describe.")
-	rds_describeDbclusterEndpointsCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the DB cluster associated with the endpoint.")
-	rds_describeDbclusterEndpointsCmd.Flags().String("filters", "", "A set of name-value pairs that define which endpoints to include in the output.")
-	rds_describeDbclusterEndpointsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeDBClusterEndpoints` request.")
-	rds_describeDbclusterEndpointsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		rds_describeDbclusterEndpointsCmd.Flags().String("dbcluster-endpoint-identifier", "", "The identifier of the endpoint to describe.")
+		rds_describeDbclusterEndpointsCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the DB cluster associated with the endpoint.")
+		rds_describeDbclusterEndpointsCmd.Flags().String("filters", "", "A set of name-value pairs that define which endpoints to include in the output.")
+		rds_describeDbclusterEndpointsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeDBClusterEndpoints` request.")
+		rds_describeDbclusterEndpointsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	rdsCmd.AddCommand(rds_describeDbclusterEndpointsCmd)
 }

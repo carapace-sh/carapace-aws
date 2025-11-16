@@ -12,7 +12,9 @@ var pinpointEmail_getAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getAccountCmd).Standalone()
+	carapace.Gen(pinpointEmail_getAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getAccountCmd).Standalone()
 
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getAccountCmd)
 }

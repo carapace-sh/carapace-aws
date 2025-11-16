@@ -12,11 +12,13 @@ var organizations_listPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listPoliciesCmd).Standalone()
+	carapace.Gen(organizations_listPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listPoliciesCmd).Standalone()
 
-	organizations_listPoliciesCmd.Flags().String("filter", "", "Specifies the type of policy that you want to include in the response.")
-	organizations_listPoliciesCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	organizations_listPoliciesCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
-	organizations_listPoliciesCmd.MarkFlagRequired("filter")
+		organizations_listPoliciesCmd.Flags().String("filter", "", "Specifies the type of policy that you want to include in the response.")
+		organizations_listPoliciesCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		organizations_listPoliciesCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listPoliciesCmd.MarkFlagRequired("filter")
+	})
 	organizationsCmd.AddCommand(organizations_listPoliciesCmd)
 }

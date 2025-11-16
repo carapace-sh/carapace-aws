@@ -12,9 +12,11 @@ var applicationcostprofiler_deleteReportDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationcostprofiler_deleteReportDefinitionCmd).Standalone()
+	carapace.Gen(applicationcostprofiler_deleteReportDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationcostprofiler_deleteReportDefinitionCmd).Standalone()
 
-	applicationcostprofiler_deleteReportDefinitionCmd.Flags().String("report-id", "", "Required.")
-	applicationcostprofiler_deleteReportDefinitionCmd.MarkFlagRequired("report-id")
+		applicationcostprofiler_deleteReportDefinitionCmd.Flags().String("report-id", "", "Required.")
+		applicationcostprofiler_deleteReportDefinitionCmd.MarkFlagRequired("report-id")
+	})
 	applicationcostprofilerCmd.AddCommand(applicationcostprofiler_deleteReportDefinitionCmd)
 }

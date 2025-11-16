@@ -12,7 +12,9 @@ var es_deleteElasticsearchServiceRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_deleteElasticsearchServiceRoleCmd).Standalone()
+	carapace.Gen(es_deleteElasticsearchServiceRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_deleteElasticsearchServiceRoleCmd).Standalone()
 
+	})
 	esCmd.AddCommand(es_deleteElasticsearchServiceRoleCmd)
 }

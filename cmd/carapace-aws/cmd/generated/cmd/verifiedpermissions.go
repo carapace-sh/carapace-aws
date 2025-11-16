@@ -12,7 +12,9 @@ var verifiedpermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(verifiedpermissionsCmd).Standalone()
+	carapace.Gen(verifiedpermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(verifiedpermissionsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(verifiedpermissionsCmd)
 }

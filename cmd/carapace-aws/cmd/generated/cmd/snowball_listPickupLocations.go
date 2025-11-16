@@ -12,9 +12,11 @@ var snowball_listPickupLocationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_listPickupLocationsCmd).Standalone()
+	carapace.Gen(snowball_listPickupLocationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_listPickupLocationsCmd).Standalone()
 
-	snowball_listPickupLocationsCmd.Flags().String("max-results", "", "The maximum number of locations to list per page.")
-	snowball_listPickupLocationsCmd.Flags().String("next-token", "", "HTTP requests are stateless.")
+		snowball_listPickupLocationsCmd.Flags().String("max-results", "", "The maximum number of locations to list per page.")
+		snowball_listPickupLocationsCmd.Flags().String("next-token", "", "HTTP requests are stateless.")
+	})
 	snowballCmd.AddCommand(snowball_listPickupLocationsCmd)
 }

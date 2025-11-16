@@ -12,9 +12,11 @@ var chatbot_deleteSlackChannelConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_deleteSlackChannelConfigurationCmd).Standalone()
+	carapace.Gen(chatbot_deleteSlackChannelConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_deleteSlackChannelConfigurationCmd).Standalone()
 
-	chatbot_deleteSlackChannelConfigurationCmd.Flags().String("chat-configuration-arn", "", "The Amazon Resource Name (ARN) of the SlackChannelConfiguration to delete.")
-	chatbot_deleteSlackChannelConfigurationCmd.MarkFlagRequired("chat-configuration-arn")
+		chatbot_deleteSlackChannelConfigurationCmd.Flags().String("chat-configuration-arn", "", "The Amazon Resource Name (ARN) of the SlackChannelConfiguration to delete.")
+		chatbot_deleteSlackChannelConfigurationCmd.MarkFlagRequired("chat-configuration-arn")
+	})
 	chatbotCmd.AddCommand(chatbot_deleteSlackChannelConfigurationCmd)
 }

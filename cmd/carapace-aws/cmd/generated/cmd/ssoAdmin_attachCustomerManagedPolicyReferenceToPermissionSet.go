@@ -12,13 +12,15 @@ var ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd = &cobra.Com
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd).Standalone()
+	carapace.Gen(ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd).Standalone()
 
-	ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.Flags().String("customer-managed-policy-reference", "", "Specifies the name and path of a customer managed policy.")
-	ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.Flags().String("permission-set-arn", "", "The ARN of the `PermissionSet`.")
-	ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.MarkFlagRequired("customer-managed-policy-reference")
-	ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.MarkFlagRequired("instance-arn")
-	ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.MarkFlagRequired("permission-set-arn")
+		ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.Flags().String("customer-managed-policy-reference", "", "Specifies the name and path of a customer managed policy.")
+		ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.Flags().String("permission-set-arn", "", "The ARN of the `PermissionSet`.")
+		ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.MarkFlagRequired("customer-managed-policy-reference")
+		ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd.MarkFlagRequired("permission-set-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_attachCustomerManagedPolicyReferenceToPermissionSetCmd)
 }

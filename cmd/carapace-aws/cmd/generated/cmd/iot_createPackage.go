@@ -12,12 +12,14 @@ var iot_createPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createPackageCmd).Standalone()
+	carapace.Gen(iot_createPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createPackageCmd).Standalone()
 
-	iot_createPackageCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iot_createPackageCmd.Flags().String("description", "", "A summary of the package being created.")
-	iot_createPackageCmd.Flags().String("package-name", "", "The name of the new software package.")
-	iot_createPackageCmd.Flags().String("tags", "", "Metadata that can be used to manage the package.")
-	iot_createPackageCmd.MarkFlagRequired("package-name")
+		iot_createPackageCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iot_createPackageCmd.Flags().String("description", "", "A summary of the package being created.")
+		iot_createPackageCmd.Flags().String("package-name", "", "The name of the new software package.")
+		iot_createPackageCmd.Flags().String("tags", "", "Metadata that can be used to manage the package.")
+		iot_createPackageCmd.MarkFlagRequired("package-name")
+	})
 	iotCmd.AddCommand(iot_createPackageCmd)
 }

@@ -12,12 +12,14 @@ var personalize_createSolutionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_createSolutionVersionCmd).Standalone()
+	carapace.Gen(personalize_createSolutionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_createSolutionVersionCmd).Standalone()
 
-	personalize_createSolutionVersionCmd.Flags().String("name", "", "The name of the solution version.")
-	personalize_createSolutionVersionCmd.Flags().String("solution-arn", "", "The Amazon Resource Name (ARN) of the solution containing the training configuration information.")
-	personalize_createSolutionVersionCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the solution version.")
-	personalize_createSolutionVersionCmd.Flags().String("training-mode", "", "The scope of training to be performed when creating the solution version.")
-	personalize_createSolutionVersionCmd.MarkFlagRequired("solution-arn")
+		personalize_createSolutionVersionCmd.Flags().String("name", "", "The name of the solution version.")
+		personalize_createSolutionVersionCmd.Flags().String("solution-arn", "", "The Amazon Resource Name (ARN) of the solution containing the training configuration information.")
+		personalize_createSolutionVersionCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the solution version.")
+		personalize_createSolutionVersionCmd.Flags().String("training-mode", "", "The scope of training to be performed when creating the solution version.")
+		personalize_createSolutionVersionCmd.MarkFlagRequired("solution-arn")
+	})
 	personalizeCmd.AddCommand(personalize_createSolutionVersionCmd)
 }

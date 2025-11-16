@@ -12,13 +12,15 @@ var neptune_applyPendingMaintenanceActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_applyPendingMaintenanceActionCmd).Standalone()
+	carapace.Gen(neptune_applyPendingMaintenanceActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_applyPendingMaintenanceActionCmd).Standalone()
 
-	neptune_applyPendingMaintenanceActionCmd.Flags().String("apply-action", "", "The pending maintenance action to apply to this resource.")
-	neptune_applyPendingMaintenanceActionCmd.Flags().String("opt-in-type", "", "A value that specifies the type of opt-in request, or undoes an opt-in request.")
-	neptune_applyPendingMaintenanceActionCmd.Flags().String("resource-identifier", "", "The Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to.")
-	neptune_applyPendingMaintenanceActionCmd.MarkFlagRequired("apply-action")
-	neptune_applyPendingMaintenanceActionCmd.MarkFlagRequired("opt-in-type")
-	neptune_applyPendingMaintenanceActionCmd.MarkFlagRequired("resource-identifier")
+		neptune_applyPendingMaintenanceActionCmd.Flags().String("apply-action", "", "The pending maintenance action to apply to this resource.")
+		neptune_applyPendingMaintenanceActionCmd.Flags().String("opt-in-type", "", "A value that specifies the type of opt-in request, or undoes an opt-in request.")
+		neptune_applyPendingMaintenanceActionCmd.Flags().String("resource-identifier", "", "The Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to.")
+		neptune_applyPendingMaintenanceActionCmd.MarkFlagRequired("apply-action")
+		neptune_applyPendingMaintenanceActionCmd.MarkFlagRequired("opt-in-type")
+		neptune_applyPendingMaintenanceActionCmd.MarkFlagRequired("resource-identifier")
+	})
 	neptuneCmd.AddCommand(neptune_applyPendingMaintenanceActionCmd)
 }

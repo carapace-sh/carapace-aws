@@ -12,9 +12,11 @@ var s3tables_getTableBucketMetricsConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_getTableBucketMetricsConfigurationCmd).Standalone()
+	carapace.Gen(s3tables_getTableBucketMetricsConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_getTableBucketMetricsConfigurationCmd).Standalone()
 
-	s3tables_getTableBucketMetricsConfigurationCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
-	s3tables_getTableBucketMetricsConfigurationCmd.MarkFlagRequired("table-bucket-arn")
+		s3tables_getTableBucketMetricsConfigurationCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
+		s3tables_getTableBucketMetricsConfigurationCmd.MarkFlagRequired("table-bucket-arn")
+	})
 	s3tablesCmd.AddCommand(s3tables_getTableBucketMetricsConfigurationCmd)
 }

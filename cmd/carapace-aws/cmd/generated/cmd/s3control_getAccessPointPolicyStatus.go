@@ -12,11 +12,13 @@ var s3control_getAccessPointPolicyStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_getAccessPointPolicyStatusCmd).Standalone()
+	carapace.Gen(s3control_getAccessPointPolicyStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_getAccessPointPolicyStatusCmd).Standalone()
 
-	s3control_getAccessPointPolicyStatusCmd.Flags().String("account-id", "", "The account ID for the account that owns the specified access point.")
-	s3control_getAccessPointPolicyStatusCmd.Flags().String("name", "", "The name of the access point whose policy status you want to retrieve.")
-	s3control_getAccessPointPolicyStatusCmd.MarkFlagRequired("account-id")
-	s3control_getAccessPointPolicyStatusCmd.MarkFlagRequired("name")
+		s3control_getAccessPointPolicyStatusCmd.Flags().String("account-id", "", "The account ID for the account that owns the specified access point.")
+		s3control_getAccessPointPolicyStatusCmd.Flags().String("name", "", "The name of the access point whose policy status you want to retrieve.")
+		s3control_getAccessPointPolicyStatusCmd.MarkFlagRequired("account-id")
+		s3control_getAccessPointPolicyStatusCmd.MarkFlagRequired("name")
+	})
 	s3controlCmd.AddCommand(s3control_getAccessPointPolicyStatusCmd)
 }

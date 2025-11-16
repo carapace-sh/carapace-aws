@@ -12,11 +12,13 @@ var rekognition_listUsersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_listUsersCmd).Standalone()
+	carapace.Gen(rekognition_listUsersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_listUsersCmd).Standalone()
 
-	rekognition_listUsersCmd.Flags().String("collection-id", "", "The ID of an existing collection.")
-	rekognition_listUsersCmd.Flags().String("max-results", "", "Maximum number of UsersID to return.")
-	rekognition_listUsersCmd.Flags().String("next-token", "", "Pagingation token to receive the next set of UsersID.")
-	rekognition_listUsersCmd.MarkFlagRequired("collection-id")
+		rekognition_listUsersCmd.Flags().String("collection-id", "", "The ID of an existing collection.")
+		rekognition_listUsersCmd.Flags().String("max-results", "", "Maximum number of UsersID to return.")
+		rekognition_listUsersCmd.Flags().String("next-token", "", "Pagingation token to receive the next set of UsersID.")
+		rekognition_listUsersCmd.MarkFlagRequired("collection-id")
+	})
 	rekognitionCmd.AddCommand(rekognition_listUsersCmd)
 }

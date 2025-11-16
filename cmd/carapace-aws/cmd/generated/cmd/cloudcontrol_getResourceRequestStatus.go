@@ -12,9 +12,11 @@ var cloudcontrol_getResourceRequestStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudcontrol_getResourceRequestStatusCmd).Standalone()
+	carapace.Gen(cloudcontrol_getResourceRequestStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudcontrol_getResourceRequestStatusCmd).Standalone()
 
-	cloudcontrol_getResourceRequestStatusCmd.Flags().String("request-token", "", "A unique token used to track the progress of the resource operation request.")
-	cloudcontrol_getResourceRequestStatusCmd.MarkFlagRequired("request-token")
+		cloudcontrol_getResourceRequestStatusCmd.Flags().String("request-token", "", "A unique token used to track the progress of the resource operation request.")
+		cloudcontrol_getResourceRequestStatusCmd.MarkFlagRequired("request-token")
+	})
 	cloudcontrolCmd.AddCommand(cloudcontrol_getResourceRequestStatusCmd)
 }

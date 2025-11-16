@@ -12,11 +12,13 @@ var detective_startMonitoringMemberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_startMonitoringMemberCmd).Standalone()
+	carapace.Gen(detective_startMonitoringMemberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_startMonitoringMemberCmd).Standalone()
 
-	detective_startMonitoringMemberCmd.Flags().String("account-id", "", "The account ID of the member account to try to enable.")
-	detective_startMonitoringMemberCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph.")
-	detective_startMonitoringMemberCmd.MarkFlagRequired("account-id")
-	detective_startMonitoringMemberCmd.MarkFlagRequired("graph-arn")
+		detective_startMonitoringMemberCmd.Flags().String("account-id", "", "The account ID of the member account to try to enable.")
+		detective_startMonitoringMemberCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph.")
+		detective_startMonitoringMemberCmd.MarkFlagRequired("account-id")
+		detective_startMonitoringMemberCmd.MarkFlagRequired("graph-arn")
+	})
 	detectiveCmd.AddCommand(detective_startMonitoringMemberCmd)
 }

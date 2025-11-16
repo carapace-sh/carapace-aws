@@ -12,11 +12,13 @@ var kafka_listClientVpcConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_listClientVpcConnectionsCmd).Standalone()
+	carapace.Gen(kafka_listClientVpcConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_listClientVpcConnectionsCmd).Standalone()
 
-	kafka_listClientVpcConnectionsCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
-	kafka_listClientVpcConnectionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	kafka_listClientVpcConnectionsCmd.Flags().String("next-token", "", "The paginated results marker.")
-	kafka_listClientVpcConnectionsCmd.MarkFlagRequired("cluster-arn")
+		kafka_listClientVpcConnectionsCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
+		kafka_listClientVpcConnectionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		kafka_listClientVpcConnectionsCmd.Flags().String("next-token", "", "The paginated results marker.")
+		kafka_listClientVpcConnectionsCmd.MarkFlagRequired("cluster-arn")
+	})
 	kafkaCmd.AddCommand(kafka_listClientVpcConnectionsCmd)
 }

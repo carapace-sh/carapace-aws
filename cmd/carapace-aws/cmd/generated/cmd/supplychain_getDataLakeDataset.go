@@ -12,13 +12,15 @@ var supplychain_getDataLakeDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_getDataLakeDatasetCmd).Standalone()
+	carapace.Gen(supplychain_getDataLakeDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_getDataLakeDatasetCmd).Standalone()
 
-	supplychain_getDataLakeDatasetCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
-	supplychain_getDataLakeDatasetCmd.Flags().String("name", "", "The name of the dataset.")
-	supplychain_getDataLakeDatasetCmd.Flags().String("namespace", "", "The namespace of the dataset, besides the custom defined namespace, every instance comes with below pre-defined namespaces:")
-	supplychain_getDataLakeDatasetCmd.MarkFlagRequired("instance-id")
-	supplychain_getDataLakeDatasetCmd.MarkFlagRequired("name")
-	supplychain_getDataLakeDatasetCmd.MarkFlagRequired("namespace")
+		supplychain_getDataLakeDatasetCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
+		supplychain_getDataLakeDatasetCmd.Flags().String("name", "", "The name of the dataset.")
+		supplychain_getDataLakeDatasetCmd.Flags().String("namespace", "", "The namespace of the dataset, besides the custom defined namespace, every instance comes with below pre-defined namespaces:")
+		supplychain_getDataLakeDatasetCmd.MarkFlagRequired("instance-id")
+		supplychain_getDataLakeDatasetCmd.MarkFlagRequired("name")
+		supplychain_getDataLakeDatasetCmd.MarkFlagRequired("namespace")
+	})
 	supplychainCmd.AddCommand(supplychain_getDataLakeDatasetCmd)
 }

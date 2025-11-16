@@ -12,11 +12,13 @@ var billingconductor_disassociateAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billingconductor_disassociateAccountsCmd).Standalone()
+	carapace.Gen(billingconductor_disassociateAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_disassociateAccountsCmd).Standalone()
 
-	billingconductor_disassociateAccountsCmd.Flags().String("account-ids", "", "The array of account IDs to disassociate.")
-	billingconductor_disassociateAccountsCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the billing group that the array of account IDs will disassociate from.")
-	billingconductor_disassociateAccountsCmd.MarkFlagRequired("account-ids")
-	billingconductor_disassociateAccountsCmd.MarkFlagRequired("arn")
+		billingconductor_disassociateAccountsCmd.Flags().String("account-ids", "", "The array of account IDs to disassociate.")
+		billingconductor_disassociateAccountsCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the billing group that the array of account IDs will disassociate from.")
+		billingconductor_disassociateAccountsCmd.MarkFlagRequired("account-ids")
+		billingconductor_disassociateAccountsCmd.MarkFlagRequired("arn")
+	})
 	billingconductorCmd.AddCommand(billingconductor_disassociateAccountsCmd)
 }

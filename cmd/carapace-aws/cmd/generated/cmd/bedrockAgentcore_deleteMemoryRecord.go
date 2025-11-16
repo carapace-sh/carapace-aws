@@ -12,11 +12,13 @@ var bedrockAgentcore_deleteMemoryRecordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_deleteMemoryRecordCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_deleteMemoryRecordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_deleteMemoryRecordCmd).Standalone()
 
-	bedrockAgentcore_deleteMemoryRecordCmd.Flags().String("memory-id", "", "The identifier of the AgentCore Memory resource from which to delete the memory record.")
-	bedrockAgentcore_deleteMemoryRecordCmd.Flags().String("memory-record-id", "", "The identifier of the memory record to delete.")
-	bedrockAgentcore_deleteMemoryRecordCmd.MarkFlagRequired("memory-id")
-	bedrockAgentcore_deleteMemoryRecordCmd.MarkFlagRequired("memory-record-id")
+		bedrockAgentcore_deleteMemoryRecordCmd.Flags().String("memory-id", "", "The identifier of the AgentCore Memory resource from which to delete the memory record.")
+		bedrockAgentcore_deleteMemoryRecordCmd.Flags().String("memory-record-id", "", "The identifier of the memory record to delete.")
+		bedrockAgentcore_deleteMemoryRecordCmd.MarkFlagRequired("memory-id")
+		bedrockAgentcore_deleteMemoryRecordCmd.MarkFlagRequired("memory-record-id")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_deleteMemoryRecordCmd)
 }

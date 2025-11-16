@@ -12,9 +12,11 @@ var iotevents_listDetectorModelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_listDetectorModelsCmd).Standalone()
+	carapace.Gen(iotevents_listDetectorModelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_listDetectorModelsCmd).Standalone()
 
-	iotevents_listDetectorModelsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	iotevents_listDetectorModelsCmd.Flags().String("next-token", "", "The token that you can use to return the next set of results.")
+		iotevents_listDetectorModelsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		iotevents_listDetectorModelsCmd.Flags().String("next-token", "", "The token that you can use to return the next set of results.")
+	})
 	ioteventsCmd.AddCommand(iotevents_listDetectorModelsCmd)
 }

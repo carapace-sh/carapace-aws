@@ -12,9 +12,11 @@ var comprehend_describeTargetedSentimentDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeTargetedSentimentDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_describeTargetedSentimentDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeTargetedSentimentDetectionJobCmd).Standalone()
 
-	comprehend_describeTargetedSentimentDetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend generated for the job.")
-	comprehend_describeTargetedSentimentDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_describeTargetedSentimentDetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend generated for the job.")
+		comprehend_describeTargetedSentimentDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_describeTargetedSentimentDetectionJobCmd)
 }

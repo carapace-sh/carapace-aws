@@ -12,13 +12,15 @@ var chatbot_updateCustomActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_updateCustomActionCmd).Standalone()
+	carapace.Gen(chatbot_updateCustomActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_updateCustomActionCmd).Standalone()
 
-	chatbot_updateCustomActionCmd.Flags().String("alias-name", "", "The name used to invoke this action in the chat channel.")
-	chatbot_updateCustomActionCmd.Flags().String("attachments", "", "Defines when this custom action button should be attached to a notification.")
-	chatbot_updateCustomActionCmd.Flags().String("custom-action-arn", "", "The fully defined Amazon Resource Name (ARN) of the custom action.")
-	chatbot_updateCustomActionCmd.Flags().String("definition", "", "The definition of the command to run when invoked as an alias or as an action button.")
-	chatbot_updateCustomActionCmd.MarkFlagRequired("custom-action-arn")
-	chatbot_updateCustomActionCmd.MarkFlagRequired("definition")
+		chatbot_updateCustomActionCmd.Flags().String("alias-name", "", "The name used to invoke this action in the chat channel.")
+		chatbot_updateCustomActionCmd.Flags().String("attachments", "", "Defines when this custom action button should be attached to a notification.")
+		chatbot_updateCustomActionCmd.Flags().String("custom-action-arn", "", "The fully defined Amazon Resource Name (ARN) of the custom action.")
+		chatbot_updateCustomActionCmd.Flags().String("definition", "", "The definition of the command to run when invoked as an alias or as an action button.")
+		chatbot_updateCustomActionCmd.MarkFlagRequired("custom-action-arn")
+		chatbot_updateCustomActionCmd.MarkFlagRequired("definition")
+	})
 	chatbotCmd.AddCommand(chatbot_updateCustomActionCmd)
 }

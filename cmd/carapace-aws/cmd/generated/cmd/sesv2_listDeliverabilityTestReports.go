@@ -12,9 +12,11 @@ var sesv2_listDeliverabilityTestReportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listDeliverabilityTestReportsCmd).Standalone()
+	carapace.Gen(sesv2_listDeliverabilityTestReportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listDeliverabilityTestReportsCmd).Standalone()
 
-	sesv2_listDeliverabilityTestReportsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListDeliverabilityTestReports` to indicate the position in the list of predictive inbox placement tests.")
-	sesv2_listDeliverabilityTestReportsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListDeliverabilityTestReports`.")
+		sesv2_listDeliverabilityTestReportsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListDeliverabilityTestReports` to indicate the position in the list of predictive inbox placement tests.")
+		sesv2_listDeliverabilityTestReportsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListDeliverabilityTestReports`.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listDeliverabilityTestReportsCmd)
 }

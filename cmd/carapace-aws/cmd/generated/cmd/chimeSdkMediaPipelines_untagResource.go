@@ -12,11 +12,13 @@ var chimeSdkMediaPipelines_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_untagResourceCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_untagResourceCmd).Standalone()
 
-	chimeSdkMediaPipelines_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the pipeline that you want to untag.")
-	chimeSdkMediaPipelines_untagResourceCmd.Flags().String("tag-keys", "", "The key/value pairs in the tag that you want to remove.")
-	chimeSdkMediaPipelines_untagResourceCmd.MarkFlagRequired("resource-arn")
-	chimeSdkMediaPipelines_untagResourceCmd.MarkFlagRequired("tag-keys")
+		chimeSdkMediaPipelines_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the pipeline that you want to untag.")
+		chimeSdkMediaPipelines_untagResourceCmd.Flags().String("tag-keys", "", "The key/value pairs in the tag that you want to remove.")
+		chimeSdkMediaPipelines_untagResourceCmd.MarkFlagRequired("resource-arn")
+		chimeSdkMediaPipelines_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_untagResourceCmd)
 }

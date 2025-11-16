@@ -12,11 +12,13 @@ var iot_detachSecurityProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_detachSecurityProfileCmd).Standalone()
+	carapace.Gen(iot_detachSecurityProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_detachSecurityProfileCmd).Standalone()
 
-	iot_detachSecurityProfileCmd.Flags().String("security-profile-name", "", "The security profile that is detached.")
-	iot_detachSecurityProfileCmd.Flags().String("security-profile-target-arn", "", "The ARN of the thing group from which the security profile is detached.")
-	iot_detachSecurityProfileCmd.MarkFlagRequired("security-profile-name")
-	iot_detachSecurityProfileCmd.MarkFlagRequired("security-profile-target-arn")
+		iot_detachSecurityProfileCmd.Flags().String("security-profile-name", "", "The security profile that is detached.")
+		iot_detachSecurityProfileCmd.Flags().String("security-profile-target-arn", "", "The ARN of the thing group from which the security profile is detached.")
+		iot_detachSecurityProfileCmd.MarkFlagRequired("security-profile-name")
+		iot_detachSecurityProfileCmd.MarkFlagRequired("security-profile-target-arn")
+	})
 	iotCmd.AddCommand(iot_detachSecurityProfileCmd)
 }

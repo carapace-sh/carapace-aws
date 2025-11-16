@@ -12,9 +12,11 @@ var imagebuilder_getDistributionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getDistributionConfigurationCmd).Standalone()
+	carapace.Gen(imagebuilder_getDistributionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getDistributionConfigurationCmd).Standalone()
 
-	imagebuilder_getDistributionConfigurationCmd.Flags().String("distribution-configuration-arn", "", "The Amazon Resource Name (ARN) of the distribution configuration that you want to retrieve.")
-	imagebuilder_getDistributionConfigurationCmd.MarkFlagRequired("distribution-configuration-arn")
+		imagebuilder_getDistributionConfigurationCmd.Flags().String("distribution-configuration-arn", "", "The Amazon Resource Name (ARN) of the distribution configuration that you want to retrieve.")
+		imagebuilder_getDistributionConfigurationCmd.MarkFlagRequired("distribution-configuration-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getDistributionConfigurationCmd)
 }

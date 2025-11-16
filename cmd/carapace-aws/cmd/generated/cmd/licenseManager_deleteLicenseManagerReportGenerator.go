@@ -12,9 +12,11 @@ var licenseManager_deleteLicenseManagerReportGeneratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_deleteLicenseManagerReportGeneratorCmd).Standalone()
+	carapace.Gen(licenseManager_deleteLicenseManagerReportGeneratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_deleteLicenseManagerReportGeneratorCmd).Standalone()
 
-	licenseManager_deleteLicenseManagerReportGeneratorCmd.Flags().String("license-manager-report-generator-arn", "", "Amazon Resource Name (ARN) of the report generator to be deleted.")
-	licenseManager_deleteLicenseManagerReportGeneratorCmd.MarkFlagRequired("license-manager-report-generator-arn")
+		licenseManager_deleteLicenseManagerReportGeneratorCmd.Flags().String("license-manager-report-generator-arn", "", "Amazon Resource Name (ARN) of the report generator to be deleted.")
+		licenseManager_deleteLicenseManagerReportGeneratorCmd.MarkFlagRequired("license-manager-report-generator-arn")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_deleteLicenseManagerReportGeneratorCmd)
 }

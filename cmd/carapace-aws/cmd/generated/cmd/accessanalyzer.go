@@ -12,7 +12,9 @@ var accessanalyzerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzerCmd).Standalone()
+	carapace.Gen(accessanalyzerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(accessanalyzerCmd)
 }

@@ -12,14 +12,16 @@ var chimeSdkVoice_createSipMediaApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_createSipMediaApplicationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_createSipMediaApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_createSipMediaApplicationCmd).Standalone()
 
-	chimeSdkVoice_createSipMediaApplicationCmd.Flags().String("aws-region", "", "The AWS Region assigned to the SIP media application.")
-	chimeSdkVoice_createSipMediaApplicationCmd.Flags().String("endpoints", "", "List of endpoints (Lambda ARNs) specified for the SIP media application.")
-	chimeSdkVoice_createSipMediaApplicationCmd.Flags().String("name", "", "The SIP media application's name.")
-	chimeSdkVoice_createSipMediaApplicationCmd.Flags().String("tags", "", "The tags assigned to the SIP media application.")
-	chimeSdkVoice_createSipMediaApplicationCmd.MarkFlagRequired("aws-region")
-	chimeSdkVoice_createSipMediaApplicationCmd.MarkFlagRequired("endpoints")
-	chimeSdkVoice_createSipMediaApplicationCmd.MarkFlagRequired("name")
+		chimeSdkVoice_createSipMediaApplicationCmd.Flags().String("aws-region", "", "The AWS Region assigned to the SIP media application.")
+		chimeSdkVoice_createSipMediaApplicationCmd.Flags().String("endpoints", "", "List of endpoints (Lambda ARNs) specified for the SIP media application.")
+		chimeSdkVoice_createSipMediaApplicationCmd.Flags().String("name", "", "The SIP media application's name.")
+		chimeSdkVoice_createSipMediaApplicationCmd.Flags().String("tags", "", "The tags assigned to the SIP media application.")
+		chimeSdkVoice_createSipMediaApplicationCmd.MarkFlagRequired("aws-region")
+		chimeSdkVoice_createSipMediaApplicationCmd.MarkFlagRequired("endpoints")
+		chimeSdkVoice_createSipMediaApplicationCmd.MarkFlagRequired("name")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_createSipMediaApplicationCmd)
 }

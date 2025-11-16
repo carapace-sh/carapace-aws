@@ -12,14 +12,16 @@ var appstream_copyImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_copyImageCmd).Standalone()
+	carapace.Gen(appstream_copyImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_copyImageCmd).Standalone()
 
-	appstream_copyImageCmd.Flags().String("destination-image-description", "", "The description that the image will have when it is copied to the destination.")
-	appstream_copyImageCmd.Flags().String("destination-image-name", "", "The name that the image will have when it is copied to the destination.")
-	appstream_copyImageCmd.Flags().String("destination-region", "", "The destination region to which the image will be copied.")
-	appstream_copyImageCmd.Flags().String("source-image-name", "", "The name of the image to copy.")
-	appstream_copyImageCmd.MarkFlagRequired("destination-image-name")
-	appstream_copyImageCmd.MarkFlagRequired("destination-region")
-	appstream_copyImageCmd.MarkFlagRequired("source-image-name")
+		appstream_copyImageCmd.Flags().String("destination-image-description", "", "The description that the image will have when it is copied to the destination.")
+		appstream_copyImageCmd.Flags().String("destination-image-name", "", "The name that the image will have when it is copied to the destination.")
+		appstream_copyImageCmd.Flags().String("destination-region", "", "The destination region to which the image will be copied.")
+		appstream_copyImageCmd.Flags().String("source-image-name", "", "The name of the image to copy.")
+		appstream_copyImageCmd.MarkFlagRequired("destination-image-name")
+		appstream_copyImageCmd.MarkFlagRequired("destination-region")
+		appstream_copyImageCmd.MarkFlagRequired("source-image-name")
+	})
 	appstreamCmd.AddCommand(appstream_copyImageCmd)
 }

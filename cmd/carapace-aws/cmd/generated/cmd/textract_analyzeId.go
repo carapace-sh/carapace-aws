@@ -12,9 +12,11 @@ var textract_analyzeIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(textract_analyzeIdCmd).Standalone()
+	carapace.Gen(textract_analyzeIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(textract_analyzeIdCmd).Standalone()
 
-	textract_analyzeIdCmd.Flags().String("document-pages", "", "The document being passed to AnalyzeID.")
-	textract_analyzeIdCmd.MarkFlagRequired("document-pages")
+		textract_analyzeIdCmd.Flags().String("document-pages", "", "The document being passed to AnalyzeID.")
+		textract_analyzeIdCmd.MarkFlagRequired("document-pages")
+	})
 	textractCmd.AddCommand(textract_analyzeIdCmd)
 }

@@ -12,8 +12,10 @@ var pinpointSmsVoice_createConfigurationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoice_createConfigurationSetCmd).Standalone()
+	carapace.Gen(pinpointSmsVoice_createConfigurationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoice_createConfigurationSetCmd).Standalone()
 
-	pinpointSmsVoice_createConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name that you want to give the configuration set.")
+		pinpointSmsVoice_createConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name that you want to give the configuration set.")
+	})
 	pinpointSmsVoiceCmd.AddCommand(pinpointSmsVoice_createConfigurationSetCmd)
 }

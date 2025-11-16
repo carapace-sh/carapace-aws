@@ -12,9 +12,11 @@ var codepipeline_deletePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_deletePipelineCmd).Standalone()
+	carapace.Gen(codepipeline_deletePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_deletePipelineCmd).Standalone()
 
-	codepipeline_deletePipelineCmd.Flags().String("name", "", "The name of the pipeline to be deleted.")
-	codepipeline_deletePipelineCmd.MarkFlagRequired("name")
+		codepipeline_deletePipelineCmd.Flags().String("name", "", "The name of the pipeline to be deleted.")
+		codepipeline_deletePipelineCmd.MarkFlagRequired("name")
+	})
 	codepipelineCmd.AddCommand(codepipeline_deletePipelineCmd)
 }

@@ -12,11 +12,13 @@ var appstream_associateSoftwareToImageBuilderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_associateSoftwareToImageBuilderCmd).Standalone()
+	carapace.Gen(appstream_associateSoftwareToImageBuilderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_associateSoftwareToImageBuilderCmd).Standalone()
 
-	appstream_associateSoftwareToImageBuilderCmd.Flags().String("image-builder-name", "", "The name of the target image builder instance.")
-	appstream_associateSoftwareToImageBuilderCmd.Flags().String("software-names", "", "The list of license included applications to associate with the image builder.")
-	appstream_associateSoftwareToImageBuilderCmd.MarkFlagRequired("image-builder-name")
-	appstream_associateSoftwareToImageBuilderCmd.MarkFlagRequired("software-names")
+		appstream_associateSoftwareToImageBuilderCmd.Flags().String("image-builder-name", "", "The name of the target image builder instance.")
+		appstream_associateSoftwareToImageBuilderCmd.Flags().String("software-names", "", "The list of license included applications to associate with the image builder.")
+		appstream_associateSoftwareToImageBuilderCmd.MarkFlagRequired("image-builder-name")
+		appstream_associateSoftwareToImageBuilderCmd.MarkFlagRequired("software-names")
+	})
 	appstreamCmd.AddCommand(appstream_associateSoftwareToImageBuilderCmd)
 }

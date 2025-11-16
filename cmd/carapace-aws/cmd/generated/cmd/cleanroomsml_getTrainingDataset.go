@@ -12,9 +12,11 @@ var cleanroomsml_getTrainingDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_getTrainingDatasetCmd).Standalone()
+	carapace.Gen(cleanroomsml_getTrainingDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_getTrainingDatasetCmd).Standalone()
 
-	cleanroomsml_getTrainingDatasetCmd.Flags().String("training-dataset-arn", "", "The Amazon Resource Name (ARN) of the training dataset that you are interested in.")
-	cleanroomsml_getTrainingDatasetCmd.MarkFlagRequired("training-dataset-arn")
+		cleanroomsml_getTrainingDatasetCmd.Flags().String("training-dataset-arn", "", "The Amazon Resource Name (ARN) of the training dataset that you are interested in.")
+		cleanroomsml_getTrainingDatasetCmd.MarkFlagRequired("training-dataset-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_getTrainingDatasetCmd)
 }

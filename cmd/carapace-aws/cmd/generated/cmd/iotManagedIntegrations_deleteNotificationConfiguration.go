@@ -12,9 +12,11 @@ var iotManagedIntegrations_deleteNotificationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_deleteNotificationConfigurationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_deleteNotificationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_deleteNotificationConfigurationCmd).Standalone()
 
-	iotManagedIntegrations_deleteNotificationConfigurationCmd.Flags().String("event-type", "", "The type of event triggering a device notification to the customer-managed destination.")
-	iotManagedIntegrations_deleteNotificationConfigurationCmd.MarkFlagRequired("event-type")
+		iotManagedIntegrations_deleteNotificationConfigurationCmd.Flags().String("event-type", "", "The type of event triggering a device notification to the customer-managed destination.")
+		iotManagedIntegrations_deleteNotificationConfigurationCmd.MarkFlagRequired("event-type")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_deleteNotificationConfigurationCmd)
 }

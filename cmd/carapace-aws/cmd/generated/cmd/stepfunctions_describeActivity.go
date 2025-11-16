@@ -12,9 +12,11 @@ var stepfunctions_describeActivityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_describeActivityCmd).Standalone()
+	carapace.Gen(stepfunctions_describeActivityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_describeActivityCmd).Standalone()
 
-	stepfunctions_describeActivityCmd.Flags().String("activity-arn", "", "The Amazon Resource Name (ARN) of the activity to describe.")
-	stepfunctions_describeActivityCmd.MarkFlagRequired("activity-arn")
+		stepfunctions_describeActivityCmd.Flags().String("activity-arn", "", "The Amazon Resource Name (ARN) of the activity to describe.")
+		stepfunctions_describeActivityCmd.MarkFlagRequired("activity-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_describeActivityCmd)
 }

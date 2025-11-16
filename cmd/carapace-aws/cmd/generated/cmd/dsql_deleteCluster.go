@@ -12,10 +12,12 @@ var dsql_deleteClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsql_deleteClusterCmd).Standalone()
+	carapace.Gen(dsql_deleteClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsql_deleteClusterCmd).Standalone()
 
-	dsql_deleteClusterCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	dsql_deleteClusterCmd.Flags().String("identifier", "", "The ID of the cluster to delete.")
-	dsql_deleteClusterCmd.MarkFlagRequired("identifier")
+		dsql_deleteClusterCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		dsql_deleteClusterCmd.Flags().String("identifier", "", "The ID of the cluster to delete.")
+		dsql_deleteClusterCmd.MarkFlagRequired("identifier")
+	})
 	dsqlCmd.AddCommand(dsql_deleteClusterCmd)
 }

@@ -12,11 +12,13 @@ var ivsRealtime_listCompositionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_listCompositionsCmd).Standalone()
+	carapace.Gen(ivsRealtime_listCompositionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_listCompositionsCmd).Standalone()
 
-	ivsRealtime_listCompositionsCmd.Flags().String("filter-by-encoder-configuration-arn", "", "Filters the Composition list to match the specified EncoderConfiguration attached to at least one of its output.")
-	ivsRealtime_listCompositionsCmd.Flags().String("filter-by-stage-arn", "", "Filters the Composition list to match the specified Stage ARN.")
-	ivsRealtime_listCompositionsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	ivsRealtime_listCompositionsCmd.Flags().String("next-token", "", "The first Composition to retrieve.")
+		ivsRealtime_listCompositionsCmd.Flags().String("filter-by-encoder-configuration-arn", "", "Filters the Composition list to match the specified EncoderConfiguration attached to at least one of its output.")
+		ivsRealtime_listCompositionsCmd.Flags().String("filter-by-stage-arn", "", "Filters the Composition list to match the specified Stage ARN.")
+		ivsRealtime_listCompositionsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		ivsRealtime_listCompositionsCmd.Flags().String("next-token", "", "The first Composition to retrieve.")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_listCompositionsCmd)
 }

@@ -12,9 +12,11 @@ var ses_createReceiptRuleSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_createReceiptRuleSetCmd).Standalone()
+	carapace.Gen(ses_createReceiptRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_createReceiptRuleSetCmd).Standalone()
 
-	ses_createReceiptRuleSetCmd.Flags().String("rule-set-name", "", "The name of the rule set to create.")
-	ses_createReceiptRuleSetCmd.MarkFlagRequired("rule-set-name")
+		ses_createReceiptRuleSetCmd.Flags().String("rule-set-name", "", "The name of the rule set to create.")
+		ses_createReceiptRuleSetCmd.MarkFlagRequired("rule-set-name")
+	})
 	sesCmd.AddCommand(ses_createReceiptRuleSetCmd)
 }

@@ -12,12 +12,14 @@ var bcmDashboards_updateDashboardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDashboards_updateDashboardCmd).Standalone()
+	carapace.Gen(bcmDashboards_updateDashboardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDashboards_updateDashboardCmd).Standalone()
 
-	bcmDashboards_updateDashboardCmd.Flags().String("arn", "", "The ARN of the dashboard to update.")
-	bcmDashboards_updateDashboardCmd.Flags().String("description", "", "The new description for the dashboard.")
-	bcmDashboards_updateDashboardCmd.Flags().String("name", "", "The new name for the dashboard.")
-	bcmDashboards_updateDashboardCmd.Flags().String("widgets", "", "The updated array of widget configurations for the dashboard.")
-	bcmDashboards_updateDashboardCmd.MarkFlagRequired("arn")
+		bcmDashboards_updateDashboardCmd.Flags().String("arn", "", "The ARN of the dashboard to update.")
+		bcmDashboards_updateDashboardCmd.Flags().String("description", "", "The new description for the dashboard.")
+		bcmDashboards_updateDashboardCmd.Flags().String("name", "", "The new name for the dashboard.")
+		bcmDashboards_updateDashboardCmd.Flags().String("widgets", "", "The updated array of widget configurations for the dashboard.")
+		bcmDashboards_updateDashboardCmd.MarkFlagRequired("arn")
+	})
 	bcmDashboardsCmd.AddCommand(bcmDashboards_updateDashboardCmd)
 }

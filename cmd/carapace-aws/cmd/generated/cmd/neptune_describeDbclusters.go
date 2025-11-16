@@ -12,11 +12,13 @@ var neptune_describeDbclustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_describeDbclustersCmd).Standalone()
+	carapace.Gen(neptune_describeDbclustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_describeDbclustersCmd).Standalone()
 
-	neptune_describeDbclustersCmd.Flags().String("dbcluster-identifier", "", "The user-supplied DB cluster identifier.")
-	neptune_describeDbclustersCmd.Flags().String("filters", "", "A filter that specifies one or more DB clusters to describe.")
-	neptune_describeDbclustersCmd.Flags().String("marker", "", "An optional pagination token provided by a previous [DescribeDBClusters]() request.")
-	neptune_describeDbclustersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		neptune_describeDbclustersCmd.Flags().String("dbcluster-identifier", "", "The user-supplied DB cluster identifier.")
+		neptune_describeDbclustersCmd.Flags().String("filters", "", "A filter that specifies one or more DB clusters to describe.")
+		neptune_describeDbclustersCmd.Flags().String("marker", "", "An optional pagination token provided by a previous [DescribeDBClusters]() request.")
+		neptune_describeDbclustersCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	neptuneCmd.AddCommand(neptune_describeDbclustersCmd)
 }

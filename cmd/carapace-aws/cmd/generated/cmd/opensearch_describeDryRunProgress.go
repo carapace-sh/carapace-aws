@@ -12,13 +12,15 @@ var opensearch_describeDryRunProgressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_describeDryRunProgressCmd).Standalone()
+	carapace.Gen(opensearch_describeDryRunProgressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_describeDryRunProgressCmd).Standalone()
 
-	opensearch_describeDryRunProgressCmd.Flags().String("domain-name", "", "The name of the domain.")
-	opensearch_describeDryRunProgressCmd.Flags().String("dry-run-id", "", "The unique identifier of the dry run.")
-	opensearch_describeDryRunProgressCmd.Flags().Bool("load-dry-run-config", false, "Whether to include the configuration of the dry run in the response.")
-	opensearch_describeDryRunProgressCmd.Flags().Bool("no-load-dry-run-config", false, "Whether to include the configuration of the dry run in the response.")
-	opensearch_describeDryRunProgressCmd.MarkFlagRequired("domain-name")
-	opensearch_describeDryRunProgressCmd.Flag("no-load-dry-run-config").Hidden = true
+		opensearch_describeDryRunProgressCmd.Flags().String("domain-name", "", "The name of the domain.")
+		opensearch_describeDryRunProgressCmd.Flags().String("dry-run-id", "", "The unique identifier of the dry run.")
+		opensearch_describeDryRunProgressCmd.Flags().Bool("load-dry-run-config", false, "Whether to include the configuration of the dry run in the response.")
+		opensearch_describeDryRunProgressCmd.Flags().Bool("no-load-dry-run-config", false, "Whether to include the configuration of the dry run in the response.")
+		opensearch_describeDryRunProgressCmd.MarkFlagRequired("domain-name")
+		opensearch_describeDryRunProgressCmd.Flag("no-load-dry-run-config").Hidden = true
+	})
 	opensearchCmd.AddCommand(opensearch_describeDryRunProgressCmd)
 }

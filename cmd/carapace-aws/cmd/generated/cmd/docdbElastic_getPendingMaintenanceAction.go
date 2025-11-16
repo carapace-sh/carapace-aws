@@ -12,9 +12,11 @@ var docdbElastic_getPendingMaintenanceActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdbElastic_getPendingMaintenanceActionCmd).Standalone()
+	carapace.Gen(docdbElastic_getPendingMaintenanceActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdbElastic_getPendingMaintenanceActionCmd).Standalone()
 
-	docdbElastic_getPendingMaintenanceActionCmd.Flags().String("resource-arn", "", "Retrieves pending maintenance actions for a specific Amazon Resource Name (ARN).")
-	docdbElastic_getPendingMaintenanceActionCmd.MarkFlagRequired("resource-arn")
+		docdbElastic_getPendingMaintenanceActionCmd.Flags().String("resource-arn", "", "Retrieves pending maintenance actions for a specific Amazon Resource Name (ARN).")
+		docdbElastic_getPendingMaintenanceActionCmd.MarkFlagRequired("resource-arn")
+	})
 	docdbElasticCmd.AddCommand(docdbElastic_getPendingMaintenanceActionCmd)
 }

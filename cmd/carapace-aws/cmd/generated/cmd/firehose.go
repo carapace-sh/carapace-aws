@@ -12,7 +12,9 @@ var firehoseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(firehoseCmd).Standalone()
+	carapace.Gen(firehoseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(firehoseCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(firehoseCmd)
 }

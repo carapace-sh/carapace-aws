@@ -12,11 +12,13 @@ var config_deletePendingAggregationRequestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deletePendingAggregationRequestCmd).Standalone()
+	carapace.Gen(config_deletePendingAggregationRequestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deletePendingAggregationRequestCmd).Standalone()
 
-	config_deletePendingAggregationRequestCmd.Flags().String("requester-account-id", "", "The 12-digit account ID of the account requesting to aggregate data.")
-	config_deletePendingAggregationRequestCmd.Flags().String("requester-aws-region", "", "The region requesting to aggregate data.")
-	config_deletePendingAggregationRequestCmd.MarkFlagRequired("requester-account-id")
-	config_deletePendingAggregationRequestCmd.MarkFlagRequired("requester-aws-region")
+		config_deletePendingAggregationRequestCmd.Flags().String("requester-account-id", "", "The 12-digit account ID of the account requesting to aggregate data.")
+		config_deletePendingAggregationRequestCmd.Flags().String("requester-aws-region", "", "The region requesting to aggregate data.")
+		config_deletePendingAggregationRequestCmd.MarkFlagRequired("requester-account-id")
+		config_deletePendingAggregationRequestCmd.MarkFlagRequired("requester-aws-region")
+	})
 	configCmd.AddCommand(config_deletePendingAggregationRequestCmd)
 }

@@ -12,9 +12,11 @@ var ioteventsData_batchAcknowledgeAlarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ioteventsData_batchAcknowledgeAlarmCmd).Standalone()
+	carapace.Gen(ioteventsData_batchAcknowledgeAlarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ioteventsData_batchAcknowledgeAlarmCmd).Standalone()
 
-	ioteventsData_batchAcknowledgeAlarmCmd.Flags().String("acknowledge-action-requests", "", "The list of acknowledge action requests.")
-	ioteventsData_batchAcknowledgeAlarmCmd.MarkFlagRequired("acknowledge-action-requests")
+		ioteventsData_batchAcknowledgeAlarmCmd.Flags().String("acknowledge-action-requests", "", "The list of acknowledge action requests.")
+		ioteventsData_batchAcknowledgeAlarmCmd.MarkFlagRequired("acknowledge-action-requests")
+	})
 	ioteventsDataCmd.AddCommand(ioteventsData_batchAcknowledgeAlarmCmd)
 }

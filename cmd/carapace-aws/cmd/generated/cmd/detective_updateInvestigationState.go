@@ -12,13 +12,15 @@ var detective_updateInvestigationStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_updateInvestigationStateCmd).Standalone()
+	carapace.Gen(detective_updateInvestigationStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_updateInvestigationStateCmd).Standalone()
 
-	detective_updateInvestigationStateCmd.Flags().String("graph-arn", "", "The Amazon Resource Name (ARN) of the behavior graph.")
-	detective_updateInvestigationStateCmd.Flags().String("investigation-id", "", "The investigation ID of the investigation report.")
-	detective_updateInvestigationStateCmd.Flags().String("state", "", "The current state of the investigation.")
-	detective_updateInvestigationStateCmd.MarkFlagRequired("graph-arn")
-	detective_updateInvestigationStateCmd.MarkFlagRequired("investigation-id")
-	detective_updateInvestigationStateCmd.MarkFlagRequired("state")
+		detective_updateInvestigationStateCmd.Flags().String("graph-arn", "", "The Amazon Resource Name (ARN) of the behavior graph.")
+		detective_updateInvestigationStateCmd.Flags().String("investigation-id", "", "The investigation ID of the investigation report.")
+		detective_updateInvestigationStateCmd.Flags().String("state", "", "The current state of the investigation.")
+		detective_updateInvestigationStateCmd.MarkFlagRequired("graph-arn")
+		detective_updateInvestigationStateCmd.MarkFlagRequired("investigation-id")
+		detective_updateInvestigationStateCmd.MarkFlagRequired("state")
+	})
 	detectiveCmd.AddCommand(detective_updateInvestigationStateCmd)
 }

@@ -12,9 +12,11 @@ var iam_getContextKeysForCustomPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getContextKeysForCustomPolicyCmd).Standalone()
+	carapace.Gen(iam_getContextKeysForCustomPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getContextKeysForCustomPolicyCmd).Standalone()
 
-	iam_getContextKeysForCustomPolicyCmd.Flags().String("policy-input-list", "", "A list of policies for which you want the list of context keys referenced in those policies.")
-	iam_getContextKeysForCustomPolicyCmd.MarkFlagRequired("policy-input-list")
+		iam_getContextKeysForCustomPolicyCmd.Flags().String("policy-input-list", "", "A list of policies for which you want the list of context keys referenced in those policies.")
+		iam_getContextKeysForCustomPolicyCmd.MarkFlagRequired("policy-input-list")
+	})
 	iamCmd.AddCommand(iam_getContextKeysForCustomPolicyCmd)
 }

@@ -12,7 +12,9 @@ var gamelift_describeVpcPeeringAuthorizationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeVpcPeeringAuthorizationsCmd).Standalone()
+	carapace.Gen(gamelift_describeVpcPeeringAuthorizationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeVpcPeeringAuthorizationsCmd).Standalone()
 
+	})
 	gameliftCmd.AddCommand(gamelift_describeVpcPeeringAuthorizationsCmd)
 }

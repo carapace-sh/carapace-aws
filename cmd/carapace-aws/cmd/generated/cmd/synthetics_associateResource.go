@@ -12,11 +12,13 @@ var synthetics_associateResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_associateResourceCmd).Standalone()
+	carapace.Gen(synthetics_associateResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_associateResourceCmd).Standalone()
 
-	synthetics_associateResourceCmd.Flags().String("group-identifier", "", "Specifies the group.")
-	synthetics_associateResourceCmd.Flags().String("resource-arn", "", "The ARN of the canary that you want to associate with the specified group.")
-	synthetics_associateResourceCmd.MarkFlagRequired("group-identifier")
-	synthetics_associateResourceCmd.MarkFlagRequired("resource-arn")
+		synthetics_associateResourceCmd.Flags().String("group-identifier", "", "Specifies the group.")
+		synthetics_associateResourceCmd.Flags().String("resource-arn", "", "The ARN of the canary that you want to associate with the specified group.")
+		synthetics_associateResourceCmd.MarkFlagRequired("group-identifier")
+		synthetics_associateResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	syntheticsCmd.AddCommand(synthetics_associateResourceCmd)
 }

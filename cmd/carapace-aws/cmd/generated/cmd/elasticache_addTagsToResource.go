@@ -12,11 +12,13 @@ var elasticache_addTagsToResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_addTagsToResourceCmd).Standalone()
+	carapace.Gen(elasticache_addTagsToResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_addTagsToResourceCmd).Standalone()
 
-	elasticache_addTagsToResourceCmd.Flags().String("resource-name", "", "The Amazon Resource Name (ARN) of the resource to which the tags are to be added, for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.")
-	elasticache_addTagsToResourceCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
-	elasticache_addTagsToResourceCmd.MarkFlagRequired("resource-name")
-	elasticache_addTagsToResourceCmd.MarkFlagRequired("tags")
+		elasticache_addTagsToResourceCmd.Flags().String("resource-name", "", "The Amazon Resource Name (ARN) of the resource to which the tags are to be added, for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.")
+		elasticache_addTagsToResourceCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
+		elasticache_addTagsToResourceCmd.MarkFlagRequired("resource-name")
+		elasticache_addTagsToResourceCmd.MarkFlagRequired("tags")
+	})
 	elasticacheCmd.AddCommand(elasticache_addTagsToResourceCmd)
 }

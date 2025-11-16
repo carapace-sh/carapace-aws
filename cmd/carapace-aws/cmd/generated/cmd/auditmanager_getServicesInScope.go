@@ -12,7 +12,9 @@ var auditmanager_getServicesInScopeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getServicesInScopeCmd).Standalone()
+	carapace.Gen(auditmanager_getServicesInScopeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getServicesInScopeCmd).Standalone()
 
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getServicesInScopeCmd)
 }

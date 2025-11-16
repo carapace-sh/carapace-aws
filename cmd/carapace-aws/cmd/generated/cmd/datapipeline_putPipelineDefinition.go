@@ -12,13 +12,15 @@ var datapipeline_putPipelineDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_putPipelineDefinitionCmd).Standalone()
+	carapace.Gen(datapipeline_putPipelineDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_putPipelineDefinitionCmd).Standalone()
 
-	datapipeline_putPipelineDefinitionCmd.Flags().String("parameter-objects", "", "The parameter objects used with the pipeline.")
-	datapipeline_putPipelineDefinitionCmd.Flags().String("parameter-values", "", "The parameter values used with the pipeline.")
-	datapipeline_putPipelineDefinitionCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
-	datapipeline_putPipelineDefinitionCmd.Flags().String("pipeline-objects", "", "The objects that define the pipeline.")
-	datapipeline_putPipelineDefinitionCmd.MarkFlagRequired("pipeline-id")
-	datapipeline_putPipelineDefinitionCmd.MarkFlagRequired("pipeline-objects")
+		datapipeline_putPipelineDefinitionCmd.Flags().String("parameter-objects", "", "The parameter objects used with the pipeline.")
+		datapipeline_putPipelineDefinitionCmd.Flags().String("parameter-values", "", "The parameter values used with the pipeline.")
+		datapipeline_putPipelineDefinitionCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
+		datapipeline_putPipelineDefinitionCmd.Flags().String("pipeline-objects", "", "The objects that define the pipeline.")
+		datapipeline_putPipelineDefinitionCmd.MarkFlagRequired("pipeline-id")
+		datapipeline_putPipelineDefinitionCmd.MarkFlagRequired("pipeline-objects")
+	})
 	datapipelineCmd.AddCommand(datapipeline_putPipelineDefinitionCmd)
 }

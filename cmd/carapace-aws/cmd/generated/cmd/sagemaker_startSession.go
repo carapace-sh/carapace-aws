@@ -12,9 +12,11 @@ var sagemaker_startSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_startSessionCmd).Standalone()
+	carapace.Gen(sagemaker_startSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_startSessionCmd).Standalone()
 
-	sagemaker_startSessionCmd.Flags().String("resource-identifier", "", "The Amazon Resource Name (ARN) of the resource to which the remote connection will be established.")
-	sagemaker_startSessionCmd.MarkFlagRequired("resource-identifier")
+		sagemaker_startSessionCmd.Flags().String("resource-identifier", "", "The Amazon Resource Name (ARN) of the resource to which the remote connection will be established.")
+		sagemaker_startSessionCmd.MarkFlagRequired("resource-identifier")
+	})
 	sagemakerCmd.AddCommand(sagemaker_startSessionCmd)
 }

@@ -12,9 +12,11 @@ var connect_getFederationTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_getFederationTokenCmd).Standalone()
+	carapace.Gen(connect_getFederationTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_getFederationTokenCmd).Standalone()
 
-	connect_getFederationTokenCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_getFederationTokenCmd.MarkFlagRequired("instance-id")
+		connect_getFederationTokenCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_getFederationTokenCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_getFederationTokenCmd)
 }

@@ -12,7 +12,9 @@ var aiopsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(aiopsCmd).Standalone()
+	carapace.Gen(aiopsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(aiopsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(aiopsCmd)
 }

@@ -12,9 +12,11 @@ var forecast_describeAutoPredictorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_describeAutoPredictorCmd).Standalone()
+	carapace.Gen(forecast_describeAutoPredictorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_describeAutoPredictorCmd).Standalone()
 
-	forecast_describeAutoPredictorCmd.Flags().String("predictor-arn", "", "The Amazon Resource Name (ARN) of the predictor.")
-	forecast_describeAutoPredictorCmd.MarkFlagRequired("predictor-arn")
+		forecast_describeAutoPredictorCmd.Flags().String("predictor-arn", "", "The Amazon Resource Name (ARN) of the predictor.")
+		forecast_describeAutoPredictorCmd.MarkFlagRequired("predictor-arn")
+	})
 	forecastCmd.AddCommand(forecast_describeAutoPredictorCmd)
 }

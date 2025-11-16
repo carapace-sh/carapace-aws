@@ -12,9 +12,11 @@ var lookoutequipment_deleteRetrainingSchedulerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_deleteRetrainingSchedulerCmd).Standalone()
+	carapace.Gen(lookoutequipment_deleteRetrainingSchedulerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_deleteRetrainingSchedulerCmd).Standalone()
 
-	lookoutequipment_deleteRetrainingSchedulerCmd.Flags().String("model-name", "", "The name of the model whose retraining scheduler you want to delete.")
-	lookoutequipment_deleteRetrainingSchedulerCmd.MarkFlagRequired("model-name")
+		lookoutequipment_deleteRetrainingSchedulerCmd.Flags().String("model-name", "", "The name of the model whose retraining scheduler you want to delete.")
+		lookoutequipment_deleteRetrainingSchedulerCmd.MarkFlagRequired("model-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_deleteRetrainingSchedulerCmd)
 }

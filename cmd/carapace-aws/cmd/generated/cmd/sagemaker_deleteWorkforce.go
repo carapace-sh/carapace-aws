@@ -12,9 +12,11 @@ var sagemaker_deleteWorkforceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteWorkforceCmd).Standalone()
+	carapace.Gen(sagemaker_deleteWorkforceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteWorkforceCmd).Standalone()
 
-	sagemaker_deleteWorkforceCmd.Flags().String("workforce-name", "", "The name of the workforce.")
-	sagemaker_deleteWorkforceCmd.MarkFlagRequired("workforce-name")
+		sagemaker_deleteWorkforceCmd.Flags().String("workforce-name", "", "The name of the workforce.")
+		sagemaker_deleteWorkforceCmd.MarkFlagRequired("workforce-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteWorkforceCmd)
 }

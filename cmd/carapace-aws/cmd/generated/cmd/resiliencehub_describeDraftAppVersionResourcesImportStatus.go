@@ -12,9 +12,11 @@ var resiliencehub_describeDraftAppVersionResourcesImportStatusCmd = &cobra.Comma
 }
 
 func init() {
-	carapace.Gen(resiliencehub_describeDraftAppVersionResourcesImportStatusCmd).Standalone()
+	carapace.Gen(resiliencehub_describeDraftAppVersionResourcesImportStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_describeDraftAppVersionResourcesImportStatusCmd).Standalone()
 
-	resiliencehub_describeDraftAppVersionResourcesImportStatusCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
-	resiliencehub_describeDraftAppVersionResourcesImportStatusCmd.MarkFlagRequired("app-arn")
+		resiliencehub_describeDraftAppVersionResourcesImportStatusCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
+		resiliencehub_describeDraftAppVersionResourcesImportStatusCmd.MarkFlagRequired("app-arn")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_describeDraftAppVersionResourcesImportStatusCmd)
 }

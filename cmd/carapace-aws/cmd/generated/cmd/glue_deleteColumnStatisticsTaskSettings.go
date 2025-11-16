@@ -12,11 +12,13 @@ var glue_deleteColumnStatisticsTaskSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteColumnStatisticsTaskSettingsCmd).Standalone()
+	carapace.Gen(glue_deleteColumnStatisticsTaskSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteColumnStatisticsTaskSettingsCmd).Standalone()
 
-	glue_deleteColumnStatisticsTaskSettingsCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
-	glue_deleteColumnStatisticsTaskSettingsCmd.Flags().String("table-name", "", "The name of the table for which to delete column statistics.")
-	glue_deleteColumnStatisticsTaskSettingsCmd.MarkFlagRequired("database-name")
-	glue_deleteColumnStatisticsTaskSettingsCmd.MarkFlagRequired("table-name")
+		glue_deleteColumnStatisticsTaskSettingsCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
+		glue_deleteColumnStatisticsTaskSettingsCmd.Flags().String("table-name", "", "The name of the table for which to delete column statistics.")
+		glue_deleteColumnStatisticsTaskSettingsCmd.MarkFlagRequired("database-name")
+		glue_deleteColumnStatisticsTaskSettingsCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_deleteColumnStatisticsTaskSettingsCmd)
 }

@@ -12,13 +12,15 @@ var kinesisanalytics_updateApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_updateApplicationCmd).Standalone()
+	carapace.Gen(kinesisanalytics_updateApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_updateApplicationCmd).Standalone()
 
-	kinesisanalytics_updateApplicationCmd.Flags().String("application-name", "", "Name of the Amazon Kinesis Analytics application to update.")
-	kinesisanalytics_updateApplicationCmd.Flags().String("application-update", "", "Describes application updates.")
-	kinesisanalytics_updateApplicationCmd.Flags().String("current-application-version-id", "", "The current application version ID.")
-	kinesisanalytics_updateApplicationCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_updateApplicationCmd.MarkFlagRequired("application-update")
-	kinesisanalytics_updateApplicationCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalytics_updateApplicationCmd.Flags().String("application-name", "", "Name of the Amazon Kinesis Analytics application to update.")
+		kinesisanalytics_updateApplicationCmd.Flags().String("application-update", "", "Describes application updates.")
+		kinesisanalytics_updateApplicationCmd.Flags().String("current-application-version-id", "", "The current application version ID.")
+		kinesisanalytics_updateApplicationCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_updateApplicationCmd.MarkFlagRequired("application-update")
+		kinesisanalytics_updateApplicationCmd.MarkFlagRequired("current-application-version-id")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_updateApplicationCmd)
 }

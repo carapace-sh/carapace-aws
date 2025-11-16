@@ -12,7 +12,9 @@ var kinesisVideoWebrtcStorageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisVideoWebrtcStorageCmd).Standalone()
+	carapace.Gen(kinesisVideoWebrtcStorageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisVideoWebrtcStorageCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(kinesisVideoWebrtcStorageCmd)
 }

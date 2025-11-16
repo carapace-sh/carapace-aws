@@ -12,9 +12,11 @@ var frauddetector_cancelBatchPredictionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_cancelBatchPredictionJobCmd).Standalone()
+	carapace.Gen(frauddetector_cancelBatchPredictionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_cancelBatchPredictionJobCmd).Standalone()
 
-	frauddetector_cancelBatchPredictionJobCmd.Flags().String("job-id", "", "The ID of the batch prediction job to cancel.")
-	frauddetector_cancelBatchPredictionJobCmd.MarkFlagRequired("job-id")
+		frauddetector_cancelBatchPredictionJobCmd.Flags().String("job-id", "", "The ID of the batch prediction job to cancel.")
+		frauddetector_cancelBatchPredictionJobCmd.MarkFlagRequired("job-id")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_cancelBatchPredictionJobCmd)
 }

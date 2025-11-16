@@ -12,13 +12,15 @@ var mediatailor_updateVodSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_updateVodSourceCmd).Standalone()
+	carapace.Gen(mediatailor_updateVodSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_updateVodSourceCmd).Standalone()
 
-	mediatailor_updateVodSourceCmd.Flags().String("http-package-configurations", "", "A list of HTTP package configurations for the VOD source on this account.")
-	mediatailor_updateVodSourceCmd.Flags().String("source-location-name", "", "The name of the source location associated with this VOD Source.")
-	mediatailor_updateVodSourceCmd.Flags().String("vod-source-name", "", "The name of the VOD source.")
-	mediatailor_updateVodSourceCmd.MarkFlagRequired("http-package-configurations")
-	mediatailor_updateVodSourceCmd.MarkFlagRequired("source-location-name")
-	mediatailor_updateVodSourceCmd.MarkFlagRequired("vod-source-name")
+		mediatailor_updateVodSourceCmd.Flags().String("http-package-configurations", "", "A list of HTTP package configurations for the VOD source on this account.")
+		mediatailor_updateVodSourceCmd.Flags().String("source-location-name", "", "The name of the source location associated with this VOD Source.")
+		mediatailor_updateVodSourceCmd.Flags().String("vod-source-name", "", "The name of the VOD source.")
+		mediatailor_updateVodSourceCmd.MarkFlagRequired("http-package-configurations")
+		mediatailor_updateVodSourceCmd.MarkFlagRequired("source-location-name")
+		mediatailor_updateVodSourceCmd.MarkFlagRequired("vod-source-name")
+	})
 	mediatailorCmd.AddCommand(mediatailor_updateVodSourceCmd)
 }

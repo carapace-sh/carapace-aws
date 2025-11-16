@@ -12,9 +12,11 @@ var networkFirewall_describeTlsinspectionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_describeTlsinspectionConfigurationCmd).Standalone()
+	carapace.Gen(networkFirewall_describeTlsinspectionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_describeTlsinspectionConfigurationCmd).Standalone()
 
-	networkFirewall_describeTlsinspectionConfigurationCmd.Flags().String("tlsinspection-configuration-arn", "", "The Amazon Resource Name (ARN) of the TLS inspection configuration.")
-	networkFirewall_describeTlsinspectionConfigurationCmd.Flags().String("tlsinspection-configuration-name", "", "The descriptive name of the TLS inspection configuration.")
+		networkFirewall_describeTlsinspectionConfigurationCmd.Flags().String("tlsinspection-configuration-arn", "", "The Amazon Resource Name (ARN) of the TLS inspection configuration.")
+		networkFirewall_describeTlsinspectionConfigurationCmd.Flags().String("tlsinspection-configuration-name", "", "The descriptive name of the TLS inspection configuration.")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_describeTlsinspectionConfigurationCmd)
 }

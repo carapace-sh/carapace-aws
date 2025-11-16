@@ -12,10 +12,12 @@ var cloudhsm_createLunaClientCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_createLunaClientCmd).Standalone()
+	carapace.Gen(cloudhsm_createLunaClientCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_createLunaClientCmd).Standalone()
 
-	cloudhsm_createLunaClientCmd.Flags().String("certificate", "", "The contents of a Base64-Encoded X.509 v3 certificate to be installed on the HSMs used by this client.")
-	cloudhsm_createLunaClientCmd.Flags().String("label", "", "The label for the client.")
-	cloudhsm_createLunaClientCmd.MarkFlagRequired("certificate")
+		cloudhsm_createLunaClientCmd.Flags().String("certificate", "", "The contents of a Base64-Encoded X.509 v3 certificate to be installed on the HSMs used by this client.")
+		cloudhsm_createLunaClientCmd.Flags().String("label", "", "The label for the client.")
+		cloudhsm_createLunaClientCmd.MarkFlagRequired("certificate")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_createLunaClientCmd)
 }

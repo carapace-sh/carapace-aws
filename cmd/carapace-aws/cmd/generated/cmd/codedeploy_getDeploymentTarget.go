@@ -12,11 +12,13 @@ var codedeploy_getDeploymentTargetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_getDeploymentTargetCmd).Standalone()
+	carapace.Gen(codedeploy_getDeploymentTargetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_getDeploymentTargetCmd).Standalone()
 
-	codedeploy_getDeploymentTargetCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
-	codedeploy_getDeploymentTargetCmd.Flags().String("target-id", "", "The unique ID of a deployment target.")
-	codedeploy_getDeploymentTargetCmd.MarkFlagRequired("deployment-id")
-	codedeploy_getDeploymentTargetCmd.MarkFlagRequired("target-id")
+		codedeploy_getDeploymentTargetCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
+		codedeploy_getDeploymentTargetCmd.Flags().String("target-id", "", "The unique ID of a deployment target.")
+		codedeploy_getDeploymentTargetCmd.MarkFlagRequired("deployment-id")
+		codedeploy_getDeploymentTargetCmd.MarkFlagRequired("target-id")
+	})
 	codedeployCmd.AddCommand(codedeploy_getDeploymentTargetCmd)
 }

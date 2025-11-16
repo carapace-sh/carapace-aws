@@ -12,11 +12,13 @@ var applicationSignals_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationSignals_untagResourceCmd).Standalone()
+	carapace.Gen(applicationSignals_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationSignals_untagResourceCmd).Standalone()
 
-	applicationSignals_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the CloudWatch resource that you want to delete tags from.")
-	applicationSignals_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
-	applicationSignals_untagResourceCmd.MarkFlagRequired("resource-arn")
-	applicationSignals_untagResourceCmd.MarkFlagRequired("tag-keys")
+		applicationSignals_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the CloudWatch resource that you want to delete tags from.")
+		applicationSignals_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
+		applicationSignals_untagResourceCmd.MarkFlagRequired("resource-arn")
+		applicationSignals_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	applicationSignalsCmd.AddCommand(applicationSignals_untagResourceCmd)
 }

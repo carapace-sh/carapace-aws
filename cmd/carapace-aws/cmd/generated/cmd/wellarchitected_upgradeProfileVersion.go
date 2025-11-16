@@ -12,13 +12,15 @@ var wellarchitected_upgradeProfileVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_upgradeProfileVersionCmd).Standalone()
+	carapace.Gen(wellarchitected_upgradeProfileVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_upgradeProfileVersionCmd).Standalone()
 
-	wellarchitected_upgradeProfileVersionCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_upgradeProfileVersionCmd.Flags().String("milestone-name", "", "")
-	wellarchitected_upgradeProfileVersionCmd.Flags().String("profile-arn", "", "The profile ARN.")
-	wellarchitected_upgradeProfileVersionCmd.Flags().String("workload-id", "", "")
-	wellarchitected_upgradeProfileVersionCmd.MarkFlagRequired("profile-arn")
-	wellarchitected_upgradeProfileVersionCmd.MarkFlagRequired("workload-id")
+		wellarchitected_upgradeProfileVersionCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_upgradeProfileVersionCmd.Flags().String("milestone-name", "", "")
+		wellarchitected_upgradeProfileVersionCmd.Flags().String("profile-arn", "", "The profile ARN.")
+		wellarchitected_upgradeProfileVersionCmd.Flags().String("workload-id", "", "")
+		wellarchitected_upgradeProfileVersionCmd.MarkFlagRequired("profile-arn")
+		wellarchitected_upgradeProfileVersionCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_upgradeProfileVersionCmd)
 }

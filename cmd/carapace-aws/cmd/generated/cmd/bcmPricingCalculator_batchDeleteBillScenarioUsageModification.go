@@ -12,11 +12,13 @@ var bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd = &cobra.Co
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd).Standalone()
 
-	bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd.Flags().String("bill-scenario-id", "", "The ID of the Bill Scenario for which you want to delete the modeled usage.")
-	bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd.Flags().String("ids", "", "List of usage that you want to delete from the Bill Scenario.")
-	bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd.MarkFlagRequired("bill-scenario-id")
-	bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd.MarkFlagRequired("ids")
+		bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd.Flags().String("bill-scenario-id", "", "The ID of the Bill Scenario for which you want to delete the modeled usage.")
+		bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd.Flags().String("ids", "", "List of usage that you want to delete from the Bill Scenario.")
+		bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd.MarkFlagRequired("bill-scenario-id")
+		bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd.MarkFlagRequired("ids")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_batchDeleteBillScenarioUsageModificationCmd)
 }

@@ -12,9 +12,11 @@ var connectcampaignsv2_deleteCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_deleteCampaignCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_deleteCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_deleteCampaignCmd).Standalone()
 
-	connectcampaignsv2_deleteCampaignCmd.Flags().String("id", "", "")
-	connectcampaignsv2_deleteCampaignCmd.MarkFlagRequired("id")
+		connectcampaignsv2_deleteCampaignCmd.Flags().String("id", "", "")
+		connectcampaignsv2_deleteCampaignCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_deleteCampaignCmd)
 }

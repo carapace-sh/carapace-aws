@@ -12,13 +12,15 @@ var clouddirectory_publishSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_publishSchemaCmd).Standalone()
+	carapace.Gen(clouddirectory_publishSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_publishSchemaCmd).Standalone()
 
-	clouddirectory_publishSchemaCmd.Flags().String("development-schema-arn", "", "The Amazon Resource Name (ARN) that is associated with the development schema.")
-	clouddirectory_publishSchemaCmd.Flags().String("minor-version", "", "The minor version under which the schema will be published.")
-	clouddirectory_publishSchemaCmd.Flags().String("name", "", "The new name under which the schema will be published.")
-	clouddirectory_publishSchemaCmd.Flags().String("version", "", "The major version under which the schema will be published.")
-	clouddirectory_publishSchemaCmd.MarkFlagRequired("development-schema-arn")
-	clouddirectory_publishSchemaCmd.MarkFlagRequired("version")
+		clouddirectory_publishSchemaCmd.Flags().String("development-schema-arn", "", "The Amazon Resource Name (ARN) that is associated with the development schema.")
+		clouddirectory_publishSchemaCmd.Flags().String("minor-version", "", "The minor version under which the schema will be published.")
+		clouddirectory_publishSchemaCmd.Flags().String("name", "", "The new name under which the schema will be published.")
+		clouddirectory_publishSchemaCmd.Flags().String("version", "", "The major version under which the schema will be published.")
+		clouddirectory_publishSchemaCmd.MarkFlagRequired("development-schema-arn")
+		clouddirectory_publishSchemaCmd.MarkFlagRequired("version")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_publishSchemaCmd)
 }

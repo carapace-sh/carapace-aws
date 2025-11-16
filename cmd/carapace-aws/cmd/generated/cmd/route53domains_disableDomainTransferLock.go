@@ -12,9 +12,11 @@ var route53domains_disableDomainTransferLockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_disableDomainTransferLockCmd).Standalone()
+	carapace.Gen(route53domains_disableDomainTransferLockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_disableDomainTransferLockCmd).Standalone()
 
-	route53domains_disableDomainTransferLockCmd.Flags().String("domain-name", "", "The name of the domain that you want to remove the transfer lock for.")
-	route53domains_disableDomainTransferLockCmd.MarkFlagRequired("domain-name")
+		route53domains_disableDomainTransferLockCmd.Flags().String("domain-name", "", "The name of the domain that you want to remove the transfer lock for.")
+		route53domains_disableDomainTransferLockCmd.MarkFlagRequired("domain-name")
+	})
 	route53domainsCmd.AddCommand(route53domains_disableDomainTransferLockCmd)
 }

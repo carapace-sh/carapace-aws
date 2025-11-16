@@ -12,9 +12,11 @@ var mediaconnect_describeFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_describeFlowCmd).Standalone()
+	carapace.Gen(mediaconnect_describeFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_describeFlowCmd).Standalone()
 
-	mediaconnect_describeFlowCmd.Flags().String("flow-arn", "", "The ARN of the flow that you want to describe.")
-	mediaconnect_describeFlowCmd.MarkFlagRequired("flow-arn")
+		mediaconnect_describeFlowCmd.Flags().String("flow-arn", "", "The ARN of the flow that you want to describe.")
+		mediaconnect_describeFlowCmd.MarkFlagRequired("flow-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_describeFlowCmd)
 }

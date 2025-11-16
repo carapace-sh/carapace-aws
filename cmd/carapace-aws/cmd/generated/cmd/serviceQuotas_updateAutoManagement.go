@@ -12,10 +12,12 @@ var serviceQuotas_updateAutoManagementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_updateAutoManagementCmd).Standalone()
+	carapace.Gen(serviceQuotas_updateAutoManagementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_updateAutoManagementCmd).Standalone()
 
-	serviceQuotas_updateAutoManagementCmd.Flags().String("exclusion-list", "", "List of Amazon Web Services services you want to exclude from Automatic Management.")
-	serviceQuotas_updateAutoManagementCmd.Flags().String("notification-arn", "", "The [User Notifications](https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table) Amazon Resource Name (ARN) for Automatic Management notifications you want to update.")
-	serviceQuotas_updateAutoManagementCmd.Flags().String("opt-in-type", "", "Information on the opt-in type for your Automatic Management configuration.")
+		serviceQuotas_updateAutoManagementCmd.Flags().String("exclusion-list", "", "List of Amazon Web Services services you want to exclude from Automatic Management.")
+		serviceQuotas_updateAutoManagementCmd.Flags().String("notification-arn", "", "The [User Notifications](https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table) Amazon Resource Name (ARN) for Automatic Management notifications you want to update.")
+		serviceQuotas_updateAutoManagementCmd.Flags().String("opt-in-type", "", "Information on the opt-in type for your Automatic Management configuration.")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_updateAutoManagementCmd)
 }

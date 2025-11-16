@@ -12,11 +12,13 @@ var elbv2_getTrustStoreRevocationContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_getTrustStoreRevocationContentCmd).Standalone()
+	carapace.Gen(elbv2_getTrustStoreRevocationContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_getTrustStoreRevocationContentCmd).Standalone()
 
-	elbv2_getTrustStoreRevocationContentCmd.Flags().String("revocation-id", "", "The revocation ID of the revocation file.")
-	elbv2_getTrustStoreRevocationContentCmd.Flags().String("trust-store-arn", "", "The Amazon Resource Name (ARN) of the trust store.")
-	elbv2_getTrustStoreRevocationContentCmd.MarkFlagRequired("revocation-id")
-	elbv2_getTrustStoreRevocationContentCmd.MarkFlagRequired("trust-store-arn")
+		elbv2_getTrustStoreRevocationContentCmd.Flags().String("revocation-id", "", "The revocation ID of the revocation file.")
+		elbv2_getTrustStoreRevocationContentCmd.Flags().String("trust-store-arn", "", "The Amazon Resource Name (ARN) of the trust store.")
+		elbv2_getTrustStoreRevocationContentCmd.MarkFlagRequired("revocation-id")
+		elbv2_getTrustStoreRevocationContentCmd.MarkFlagRequired("trust-store-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_getTrustStoreRevocationContentCmd)
 }

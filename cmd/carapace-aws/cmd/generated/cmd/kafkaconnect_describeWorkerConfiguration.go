@@ -12,9 +12,11 @@ var kafkaconnect_describeWorkerConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnect_describeWorkerConfigurationCmd).Standalone()
+	carapace.Gen(kafkaconnect_describeWorkerConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnect_describeWorkerConfigurationCmd).Standalone()
 
-	kafkaconnect_describeWorkerConfigurationCmd.Flags().String("worker-configuration-arn", "", "The Amazon Resource Name (ARN) of the worker configuration that you want to get information about.")
-	kafkaconnect_describeWorkerConfigurationCmd.MarkFlagRequired("worker-configuration-arn")
+		kafkaconnect_describeWorkerConfigurationCmd.Flags().String("worker-configuration-arn", "", "The Amazon Resource Name (ARN) of the worker configuration that you want to get information about.")
+		kafkaconnect_describeWorkerConfigurationCmd.MarkFlagRequired("worker-configuration-arn")
+	})
 	kafkaconnectCmd.AddCommand(kafkaconnect_describeWorkerConfigurationCmd)
 }

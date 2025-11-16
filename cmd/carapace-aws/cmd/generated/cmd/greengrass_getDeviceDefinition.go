@@ -12,9 +12,11 @@ var greengrass_getDeviceDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getDeviceDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_getDeviceDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getDeviceDefinitionCmd).Standalone()
 
-	greengrass_getDeviceDefinitionCmd.Flags().String("device-definition-id", "", "The ID of the device definition.")
-	greengrass_getDeviceDefinitionCmd.MarkFlagRequired("device-definition-id")
+		greengrass_getDeviceDefinitionCmd.Flags().String("device-definition-id", "", "The ID of the device definition.")
+		greengrass_getDeviceDefinitionCmd.MarkFlagRequired("device-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getDeviceDefinitionCmd)
 }

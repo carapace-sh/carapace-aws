@@ -12,9 +12,11 @@ var dms_deleteDataMigrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteDataMigrationCmd).Standalone()
+	carapace.Gen(dms_deleteDataMigrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteDataMigrationCmd).Standalone()
 
-	dms_deleteDataMigrationCmd.Flags().String("data-migration-identifier", "", "The identifier (name or ARN) of the data migration to delete.")
-	dms_deleteDataMigrationCmd.MarkFlagRequired("data-migration-identifier")
+		dms_deleteDataMigrationCmd.Flags().String("data-migration-identifier", "", "The identifier (name or ARN) of the data migration to delete.")
+		dms_deleteDataMigrationCmd.MarkFlagRequired("data-migration-identifier")
+	})
 	dmsCmd.AddCommand(dms_deleteDataMigrationCmd)
 }

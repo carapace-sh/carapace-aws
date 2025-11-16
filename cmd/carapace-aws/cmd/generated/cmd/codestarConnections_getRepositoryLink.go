@@ -12,9 +12,11 @@ var codestarConnections_getRepositoryLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarConnections_getRepositoryLinkCmd).Standalone()
+	carapace.Gen(codestarConnections_getRepositoryLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarConnections_getRepositoryLinkCmd).Standalone()
 
-	codestarConnections_getRepositoryLinkCmd.Flags().String("repository-link-id", "", "The ID of the repository link to get.")
-	codestarConnections_getRepositoryLinkCmd.MarkFlagRequired("repository-link-id")
+		codestarConnections_getRepositoryLinkCmd.Flags().String("repository-link-id", "", "The ID of the repository link to get.")
+		codestarConnections_getRepositoryLinkCmd.MarkFlagRequired("repository-link-id")
+	})
 	codestarConnectionsCmd.AddCommand(codestarConnections_getRepositoryLinkCmd)
 }

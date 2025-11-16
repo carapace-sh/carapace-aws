@@ -12,10 +12,12 @@ var dynamodb_batchExecuteStatementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_batchExecuteStatementCmd).Standalone()
+	carapace.Gen(dynamodb_batchExecuteStatementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_batchExecuteStatementCmd).Standalone()
 
-	dynamodb_batchExecuteStatementCmd.Flags().String("return-consumed-capacity", "", "")
-	dynamodb_batchExecuteStatementCmd.Flags().String("statements", "", "The list of PartiQL statements representing the batch to run.")
-	dynamodb_batchExecuteStatementCmd.MarkFlagRequired("statements")
+		dynamodb_batchExecuteStatementCmd.Flags().String("return-consumed-capacity", "", "")
+		dynamodb_batchExecuteStatementCmd.Flags().String("statements", "", "The list of PartiQL statements representing the batch to run.")
+		dynamodb_batchExecuteStatementCmd.MarkFlagRequired("statements")
+	})
 	dynamodbCmd.AddCommand(dynamodb_batchExecuteStatementCmd)
 }

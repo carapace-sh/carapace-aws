@@ -12,10 +12,12 @@ var logs_deleteIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteIntegrationCmd).Standalone()
+	carapace.Gen(logs_deleteIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteIntegrationCmd).Standalone()
 
-	logs_deleteIntegrationCmd.Flags().String("force", "", "Specify `true` to force the deletion of the integration even if vended logs dashboards currently exist.")
-	logs_deleteIntegrationCmd.Flags().String("integration-name", "", "The name of the integration to delete.")
-	logs_deleteIntegrationCmd.MarkFlagRequired("integration-name")
+		logs_deleteIntegrationCmd.Flags().String("force", "", "Specify `true` to force the deletion of the integration even if vended logs dashboards currently exist.")
+		logs_deleteIntegrationCmd.Flags().String("integration-name", "", "The name of the integration to delete.")
+		logs_deleteIntegrationCmd.MarkFlagRequired("integration-name")
+	})
 	logsCmd.AddCommand(logs_deleteIntegrationCmd)
 }

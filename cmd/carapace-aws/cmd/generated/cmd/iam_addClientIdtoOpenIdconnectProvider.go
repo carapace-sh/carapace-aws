@@ -12,11 +12,13 @@ var iam_addClientIdtoOpenIdconnectProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_addClientIdtoOpenIdconnectProviderCmd).Standalone()
+	carapace.Gen(iam_addClientIdtoOpenIdconnectProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_addClientIdtoOpenIdconnectProviderCmd).Standalone()
 
-	iam_addClientIdtoOpenIdconnectProviderCmd.Flags().String("client-id", "", "The client ID (also known as audience) to add to the IAM OpenID Connect provider resource.")
-	iam_addClientIdtoOpenIdconnectProviderCmd.Flags().String("open-idconnect-provider-arn", "", "The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider resource to add the client ID to.")
-	iam_addClientIdtoOpenIdconnectProviderCmd.MarkFlagRequired("client-id")
-	iam_addClientIdtoOpenIdconnectProviderCmd.MarkFlagRequired("open-idconnect-provider-arn")
+		iam_addClientIdtoOpenIdconnectProviderCmd.Flags().String("client-id", "", "The client ID (also known as audience) to add to the IAM OpenID Connect provider resource.")
+		iam_addClientIdtoOpenIdconnectProviderCmd.Flags().String("open-idconnect-provider-arn", "", "The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider resource to add the client ID to.")
+		iam_addClientIdtoOpenIdconnectProviderCmd.MarkFlagRequired("client-id")
+		iam_addClientIdtoOpenIdconnectProviderCmd.MarkFlagRequired("open-idconnect-provider-arn")
+	})
 	iamCmd.AddCommand(iam_addClientIdtoOpenIdconnectProviderCmd)
 }

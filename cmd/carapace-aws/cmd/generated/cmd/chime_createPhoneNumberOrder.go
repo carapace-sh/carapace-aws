@@ -12,11 +12,13 @@ var chime_createPhoneNumberOrderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_createPhoneNumberOrderCmd).Standalone()
+	carapace.Gen(chime_createPhoneNumberOrderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_createPhoneNumberOrderCmd).Standalone()
 
-	chime_createPhoneNumberOrderCmd.Flags().String("e164-phone-numbers", "", "List of phone numbers, in E.164 format.")
-	chime_createPhoneNumberOrderCmd.Flags().String("product-type", "", "The phone number product type.")
-	chime_createPhoneNumberOrderCmd.MarkFlagRequired("e164-phone-numbers")
-	chime_createPhoneNumberOrderCmd.MarkFlagRequired("product-type")
+		chime_createPhoneNumberOrderCmd.Flags().String("e164-phone-numbers", "", "List of phone numbers, in E.164 format.")
+		chime_createPhoneNumberOrderCmd.Flags().String("product-type", "", "The phone number product type.")
+		chime_createPhoneNumberOrderCmd.MarkFlagRequired("e164-phone-numbers")
+		chime_createPhoneNumberOrderCmd.MarkFlagRequired("product-type")
+	})
 	chimeCmd.AddCommand(chime_createPhoneNumberOrderCmd)
 }

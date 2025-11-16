@@ -12,9 +12,11 @@ var comprehendmedical_describeEntitiesDetectionV2JobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_describeEntitiesDetectionV2JobCmd).Standalone()
+	carapace.Gen(comprehendmedical_describeEntitiesDetectionV2JobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_describeEntitiesDetectionV2JobCmd).Standalone()
 
-	comprehendmedical_describeEntitiesDetectionV2JobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend Medical generated for the job.")
-	comprehendmedical_describeEntitiesDetectionV2JobCmd.MarkFlagRequired("job-id")
+		comprehendmedical_describeEntitiesDetectionV2JobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend Medical generated for the job.")
+		comprehendmedical_describeEntitiesDetectionV2JobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_describeEntitiesDetectionV2JobCmd)
 }

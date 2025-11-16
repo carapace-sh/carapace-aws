@@ -12,9 +12,11 @@ var glue_getDevEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getDevEndpointsCmd).Standalone()
+	carapace.Gen(glue_getDevEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getDevEndpointsCmd).Standalone()
 
-	glue_getDevEndpointsCmd.Flags().String("max-results", "", "The maximum size of information to return.")
-	glue_getDevEndpointsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		glue_getDevEndpointsCmd.Flags().String("max-results", "", "The maximum size of information to return.")
+		glue_getDevEndpointsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+	})
 	glueCmd.AddCommand(glue_getDevEndpointsCmd)
 }

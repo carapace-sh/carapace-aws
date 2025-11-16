@@ -12,9 +12,11 @@ var memorydb_listAllowedMultiRegionClusterUpdatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_listAllowedMultiRegionClusterUpdatesCmd).Standalone()
+	carapace.Gen(memorydb_listAllowedMultiRegionClusterUpdatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_listAllowedMultiRegionClusterUpdatesCmd).Standalone()
 
-	memorydb_listAllowedMultiRegionClusterUpdatesCmd.Flags().String("multi-region-cluster-name", "", "The name of the multi-Region cluster.")
-	memorydb_listAllowedMultiRegionClusterUpdatesCmd.MarkFlagRequired("multi-region-cluster-name")
+		memorydb_listAllowedMultiRegionClusterUpdatesCmd.Flags().String("multi-region-cluster-name", "", "The name of the multi-Region cluster.")
+		memorydb_listAllowedMultiRegionClusterUpdatesCmd.MarkFlagRequired("multi-region-cluster-name")
+	})
 	memorydbCmd.AddCommand(memorydb_listAllowedMultiRegionClusterUpdatesCmd)
 }

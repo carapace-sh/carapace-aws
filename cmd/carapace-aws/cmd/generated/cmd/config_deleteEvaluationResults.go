@@ -12,9 +12,11 @@ var config_deleteEvaluationResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deleteEvaluationResultsCmd).Standalone()
+	carapace.Gen(config_deleteEvaluationResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deleteEvaluationResultsCmd).Standalone()
 
-	config_deleteEvaluationResultsCmd.Flags().String("config-rule-name", "", "The name of the Config rule for which you want to delete the evaluation results.")
-	config_deleteEvaluationResultsCmd.MarkFlagRequired("config-rule-name")
+		config_deleteEvaluationResultsCmd.Flags().String("config-rule-name", "", "The name of the Config rule for which you want to delete the evaluation results.")
+		config_deleteEvaluationResultsCmd.MarkFlagRequired("config-rule-name")
+	})
 	configCmd.AddCommand(config_deleteEvaluationResultsCmd)
 }

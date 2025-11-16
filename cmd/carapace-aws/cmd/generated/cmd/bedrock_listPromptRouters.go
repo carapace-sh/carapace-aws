@@ -12,10 +12,12 @@ var bedrock_listPromptRoutersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_listPromptRoutersCmd).Standalone()
+	carapace.Gen(bedrock_listPromptRoutersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_listPromptRoutersCmd).Standalone()
 
-	bedrock_listPromptRoutersCmd.Flags().String("max-results", "", "The maximum number of prompt routers to return in one page of results.")
-	bedrock_listPromptRoutersCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
-	bedrock_listPromptRoutersCmd.Flags().String("type", "", "The type of the prompt routers, such as whether it's default or custom.")
+		bedrock_listPromptRoutersCmd.Flags().String("max-results", "", "The maximum number of prompt routers to return in one page of results.")
+		bedrock_listPromptRoutersCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		bedrock_listPromptRoutersCmd.Flags().String("type", "", "The type of the prompt routers, such as whether it's default or custom.")
+	})
 	bedrockCmd.AddCommand(bedrock_listPromptRoutersCmd)
 }

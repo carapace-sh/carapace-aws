@@ -12,9 +12,11 @@ var keyspaces_deleteKeyspaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspaces_deleteKeyspaceCmd).Standalone()
+	carapace.Gen(keyspaces_deleteKeyspaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspaces_deleteKeyspaceCmd).Standalone()
 
-	keyspaces_deleteKeyspaceCmd.Flags().String("keyspace-name", "", "The name of the keyspace to be deleted.")
-	keyspaces_deleteKeyspaceCmd.MarkFlagRequired("keyspace-name")
+		keyspaces_deleteKeyspaceCmd.Flags().String("keyspace-name", "", "The name of the keyspace to be deleted.")
+		keyspaces_deleteKeyspaceCmd.MarkFlagRequired("keyspace-name")
+	})
 	keyspacesCmd.AddCommand(keyspaces_deleteKeyspaceCmd)
 }

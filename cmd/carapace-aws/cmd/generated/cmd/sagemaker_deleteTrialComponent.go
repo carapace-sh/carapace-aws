@@ -12,9 +12,11 @@ var sagemaker_deleteTrialComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteTrialComponentCmd).Standalone()
+	carapace.Gen(sagemaker_deleteTrialComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteTrialComponentCmd).Standalone()
 
-	sagemaker_deleteTrialComponentCmd.Flags().String("trial-component-name", "", "The name of the component to delete.")
-	sagemaker_deleteTrialComponentCmd.MarkFlagRequired("trial-component-name")
+		sagemaker_deleteTrialComponentCmd.Flags().String("trial-component-name", "", "The name of the component to delete.")
+		sagemaker_deleteTrialComponentCmd.MarkFlagRequired("trial-component-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteTrialComponentCmd)
 }

@@ -12,9 +12,11 @@ var mturk_getQualificationTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_getQualificationTypeCmd).Standalone()
+	carapace.Gen(mturk_getQualificationTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_getQualificationTypeCmd).Standalone()
 
-	mturk_getQualificationTypeCmd.Flags().String("qualification-type-id", "", "The ID of the QualificationType.")
-	mturk_getQualificationTypeCmd.MarkFlagRequired("qualification-type-id")
+		mturk_getQualificationTypeCmd.Flags().String("qualification-type-id", "", "The ID of the QualificationType.")
+		mturk_getQualificationTypeCmd.MarkFlagRequired("qualification-type-id")
+	})
 	mturkCmd.AddCommand(mturk_getQualificationTypeCmd)
 }

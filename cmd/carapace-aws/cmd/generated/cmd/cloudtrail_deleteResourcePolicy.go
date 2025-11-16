@@ -12,9 +12,11 @@ var cloudtrail_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(cloudtrail_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_deleteResourcePolicyCmd).Standalone()
 
-	cloudtrail_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel you're deleting the resource-based policy from.")
-	cloudtrail_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		cloudtrail_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel you're deleting the resource-based policy from.")
+		cloudtrail_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_deleteResourcePolicyCmd)
 }

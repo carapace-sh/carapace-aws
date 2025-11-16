@@ -12,9 +12,11 @@ var rekognition_getFaceLivenessSessionResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_getFaceLivenessSessionResultsCmd).Standalone()
+	carapace.Gen(rekognition_getFaceLivenessSessionResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_getFaceLivenessSessionResultsCmd).Standalone()
 
-	rekognition_getFaceLivenessSessionResultsCmd.Flags().String("session-id", "", "A unique 128-bit UUID.")
-	rekognition_getFaceLivenessSessionResultsCmd.MarkFlagRequired("session-id")
+		rekognition_getFaceLivenessSessionResultsCmd.Flags().String("session-id", "", "A unique 128-bit UUID.")
+		rekognition_getFaceLivenessSessionResultsCmd.MarkFlagRequired("session-id")
+	})
 	rekognitionCmd.AddCommand(rekognition_getFaceLivenessSessionResultsCmd)
 }

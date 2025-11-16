@@ -12,11 +12,13 @@ var route53domains_listDomainsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_listDomainsCmd).Standalone()
+	carapace.Gen(route53domains_listDomainsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_listDomainsCmd).Standalone()
 
-	route53domains_listDomainsCmd.Flags().String("filter-conditions", "", "A complex type that contains information about the filters applied during the `ListDomains` request.")
-	route53domains_listDomainsCmd.Flags().String("marker", "", "For an initial request for a list of domains, omit this element.")
-	route53domains_listDomainsCmd.Flags().String("max-items", "", "Number of domains to be returned.")
-	route53domains_listDomainsCmd.Flags().String("sort-condition", "", "A complex type that contains information about the requested ordering of domains in the returned list.")
+		route53domains_listDomainsCmd.Flags().String("filter-conditions", "", "A complex type that contains information about the filters applied during the `ListDomains` request.")
+		route53domains_listDomainsCmd.Flags().String("marker", "", "For an initial request for a list of domains, omit this element.")
+		route53domains_listDomainsCmd.Flags().String("max-items", "", "Number of domains to be returned.")
+		route53domains_listDomainsCmd.Flags().String("sort-condition", "", "A complex type that contains information about the requested ordering of domains in the returned list.")
+	})
 	route53domainsCmd.AddCommand(route53domains_listDomainsCmd)
 }

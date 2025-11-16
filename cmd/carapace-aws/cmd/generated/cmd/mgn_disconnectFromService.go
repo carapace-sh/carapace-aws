@@ -12,10 +12,12 @@ var mgn_disconnectFromServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_disconnectFromServiceCmd).Standalone()
+	carapace.Gen(mgn_disconnectFromServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_disconnectFromServiceCmd).Standalone()
 
-	mgn_disconnectFromServiceCmd.Flags().String("account-id", "", "Request to disconnect Source Server from service by Account ID.")
-	mgn_disconnectFromServiceCmd.Flags().String("source-server-id", "", "Request to disconnect Source Server from service by Server ID.")
-	mgn_disconnectFromServiceCmd.MarkFlagRequired("source-server-id")
+		mgn_disconnectFromServiceCmd.Flags().String("account-id", "", "Request to disconnect Source Server from service by Account ID.")
+		mgn_disconnectFromServiceCmd.Flags().String("source-server-id", "", "Request to disconnect Source Server from service by Server ID.")
+		mgn_disconnectFromServiceCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_disconnectFromServiceCmd)
 }

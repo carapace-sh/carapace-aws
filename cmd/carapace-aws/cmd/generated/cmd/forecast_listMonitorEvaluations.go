@@ -12,12 +12,14 @@ var forecast_listMonitorEvaluationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_listMonitorEvaluationsCmd).Standalone()
+	carapace.Gen(forecast_listMonitorEvaluationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_listMonitorEvaluationsCmd).Standalone()
 
-	forecast_listMonitorEvaluationsCmd.Flags().String("filters", "", "An array of filters.")
-	forecast_listMonitorEvaluationsCmd.Flags().String("max-results", "", "The maximum number of monitoring results to return.")
-	forecast_listMonitorEvaluationsCmd.Flags().String("monitor-arn", "", "The Amazon Resource Name (ARN) of the monitor resource to get results from.")
-	forecast_listMonitorEvaluationsCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a `NextToken`.")
-	forecast_listMonitorEvaluationsCmd.MarkFlagRequired("monitor-arn")
+		forecast_listMonitorEvaluationsCmd.Flags().String("filters", "", "An array of filters.")
+		forecast_listMonitorEvaluationsCmd.Flags().String("max-results", "", "The maximum number of monitoring results to return.")
+		forecast_listMonitorEvaluationsCmd.Flags().String("monitor-arn", "", "The Amazon Resource Name (ARN) of the monitor resource to get results from.")
+		forecast_listMonitorEvaluationsCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a `NextToken`.")
+		forecast_listMonitorEvaluationsCmd.MarkFlagRequired("monitor-arn")
+	})
 	forecastCmd.AddCommand(forecast_listMonitorEvaluationsCmd)
 }

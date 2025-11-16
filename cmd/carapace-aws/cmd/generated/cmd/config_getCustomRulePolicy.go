@@ -12,8 +12,10 @@ var config_getCustomRulePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getCustomRulePolicyCmd).Standalone()
+	carapace.Gen(config_getCustomRulePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getCustomRulePolicyCmd).Standalone()
 
-	config_getCustomRulePolicyCmd.Flags().String("config-rule-name", "", "The name of your Config Custom Policy rule.")
+		config_getCustomRulePolicyCmd.Flags().String("config-rule-name", "", "The name of your Config Custom Policy rule.")
+	})
 	configCmd.AddCommand(config_getCustomRulePolicyCmd)
 }

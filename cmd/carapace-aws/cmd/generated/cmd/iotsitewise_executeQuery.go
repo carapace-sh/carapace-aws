@@ -12,12 +12,14 @@ var iotsitewise_executeQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_executeQueryCmd).Standalone()
+	carapace.Gen(iotsitewise_executeQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_executeQueryCmd).Standalone()
 
-	iotsitewise_executeQueryCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_executeQueryCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iotsitewise_executeQueryCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
-	iotsitewise_executeQueryCmd.Flags().String("query-statement", "", "The IoT SiteWise query statement.")
-	iotsitewise_executeQueryCmd.MarkFlagRequired("query-statement")
+		iotsitewise_executeQueryCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_executeQueryCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iotsitewise_executeQueryCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
+		iotsitewise_executeQueryCmd.Flags().String("query-statement", "", "The IoT SiteWise query statement.")
+		iotsitewise_executeQueryCmd.MarkFlagRequired("query-statement")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_executeQueryCmd)
 }

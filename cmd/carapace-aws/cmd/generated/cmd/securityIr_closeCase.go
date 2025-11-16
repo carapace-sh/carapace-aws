@@ -12,9 +12,11 @@ var securityIr_closeCaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityIr_closeCaseCmd).Standalone()
+	carapace.Gen(securityIr_closeCaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityIr_closeCaseCmd).Standalone()
 
-	securityIr_closeCaseCmd.Flags().String("case-id", "", "Required element used in combination with CloseCase to identify the case ID to close.")
-	securityIr_closeCaseCmd.MarkFlagRequired("case-id")
+		securityIr_closeCaseCmd.Flags().String("case-id", "", "Required element used in combination with CloseCase to identify the case ID to close.")
+		securityIr_closeCaseCmd.MarkFlagRequired("case-id")
+	})
 	securityIrCmd.AddCommand(securityIr_closeCaseCmd)
 }

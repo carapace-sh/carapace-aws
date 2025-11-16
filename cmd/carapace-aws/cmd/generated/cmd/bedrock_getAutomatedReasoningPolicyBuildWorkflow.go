@@ -12,11 +12,13 @@ var bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd).Standalone()
+	carapace.Gen(bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd).Standalone()
 
-	bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd.Flags().String("build-workflow-id", "", "The unique identifier of the build workflow to retrieve.")
-	bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflow you want to retrieve.")
-	bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd.MarkFlagRequired("build-workflow-id")
-	bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd.MarkFlagRequired("policy-arn")
+		bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd.Flags().String("build-workflow-id", "", "The unique identifier of the build workflow to retrieve.")
+		bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflow you want to retrieve.")
+		bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd.MarkFlagRequired("build-workflow-id")
+		bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd.MarkFlagRequired("policy-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_getAutomatedReasoningPolicyBuildWorkflowCmd)
 }

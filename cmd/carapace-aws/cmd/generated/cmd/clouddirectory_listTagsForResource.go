@@ -12,11 +12,13 @@ var clouddirectory_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_listTagsForResourceCmd).Standalone()
+	carapace.Gen(clouddirectory_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_listTagsForResourceCmd).Standalone()
 
-	clouddirectory_listTagsForResourceCmd.Flags().String("max-results", "", "The `MaxResults` parameter sets the maximum number of results returned in a single page.")
-	clouddirectory_listTagsForResourceCmd.Flags().String("next-token", "", "The pagination token.")
-	clouddirectory_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	clouddirectory_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		clouddirectory_listTagsForResourceCmd.Flags().String("max-results", "", "The `MaxResults` parameter sets the maximum number of results returned in a single page.")
+		clouddirectory_listTagsForResourceCmd.Flags().String("next-token", "", "The pagination token.")
+		clouddirectory_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		clouddirectory_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_listTagsForResourceCmd)
 }

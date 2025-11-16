@@ -12,14 +12,16 @@ var workspaces_createUpdatedWorkspaceImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_createUpdatedWorkspaceImageCmd).Standalone()
+	carapace.Gen(workspaces_createUpdatedWorkspaceImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_createUpdatedWorkspaceImageCmd).Standalone()
 
-	workspaces_createUpdatedWorkspaceImageCmd.Flags().String("description", "", "A description of whether updates for the WorkSpace image are available.")
-	workspaces_createUpdatedWorkspaceImageCmd.Flags().String("name", "", "The name of the new updated WorkSpace image.")
-	workspaces_createUpdatedWorkspaceImageCmd.Flags().String("source-image-id", "", "The identifier of the source WorkSpace image.")
-	workspaces_createUpdatedWorkspaceImageCmd.Flags().String("tags", "", "The tags that you want to add to the new updated WorkSpace image.")
-	workspaces_createUpdatedWorkspaceImageCmd.MarkFlagRequired("description")
-	workspaces_createUpdatedWorkspaceImageCmd.MarkFlagRequired("name")
-	workspaces_createUpdatedWorkspaceImageCmd.MarkFlagRequired("source-image-id")
+		workspaces_createUpdatedWorkspaceImageCmd.Flags().String("description", "", "A description of whether updates for the WorkSpace image are available.")
+		workspaces_createUpdatedWorkspaceImageCmd.Flags().String("name", "", "The name of the new updated WorkSpace image.")
+		workspaces_createUpdatedWorkspaceImageCmd.Flags().String("source-image-id", "", "The identifier of the source WorkSpace image.")
+		workspaces_createUpdatedWorkspaceImageCmd.Flags().String("tags", "", "The tags that you want to add to the new updated WorkSpace image.")
+		workspaces_createUpdatedWorkspaceImageCmd.MarkFlagRequired("description")
+		workspaces_createUpdatedWorkspaceImageCmd.MarkFlagRequired("name")
+		workspaces_createUpdatedWorkspaceImageCmd.MarkFlagRequired("source-image-id")
+	})
 	workspacesCmd.AddCommand(workspaces_createUpdatedWorkspaceImageCmd)
 }

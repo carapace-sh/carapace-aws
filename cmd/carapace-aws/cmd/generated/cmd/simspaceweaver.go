@@ -12,7 +12,9 @@ var simspaceweaverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaverCmd).Standalone()
+	carapace.Gen(simspaceweaverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaverCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(simspaceweaverCmd)
 }

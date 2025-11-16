@@ -12,11 +12,13 @@ var appstream_disassociateAppBlockBuilderAppBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_disassociateAppBlockBuilderAppBlockCmd).Standalone()
+	carapace.Gen(appstream_disassociateAppBlockBuilderAppBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_disassociateAppBlockBuilderAppBlockCmd).Standalone()
 
-	appstream_disassociateAppBlockBuilderAppBlockCmd.Flags().String("app-block-arn", "", "The ARN of the app block.")
-	appstream_disassociateAppBlockBuilderAppBlockCmd.Flags().String("app-block-builder-name", "", "The name of the app block builder.")
-	appstream_disassociateAppBlockBuilderAppBlockCmd.MarkFlagRequired("app-block-arn")
-	appstream_disassociateAppBlockBuilderAppBlockCmd.MarkFlagRequired("app-block-builder-name")
+		appstream_disassociateAppBlockBuilderAppBlockCmd.Flags().String("app-block-arn", "", "The ARN of the app block.")
+		appstream_disassociateAppBlockBuilderAppBlockCmd.Flags().String("app-block-builder-name", "", "The name of the app block builder.")
+		appstream_disassociateAppBlockBuilderAppBlockCmd.MarkFlagRequired("app-block-arn")
+		appstream_disassociateAppBlockBuilderAppBlockCmd.MarkFlagRequired("app-block-builder-name")
+	})
 	appstreamCmd.AddCommand(appstream_disassociateAppBlockBuilderAppBlockCmd)
 }

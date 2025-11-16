@@ -12,7 +12,9 @@ var iot_describeAccountAuditConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeAccountAuditConfigurationCmd).Standalone()
+	carapace.Gen(iot_describeAccountAuditConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeAccountAuditConfigurationCmd).Standalone()
 
+	})
 	iotCmd.AddCommand(iot_describeAccountAuditConfigurationCmd)
 }

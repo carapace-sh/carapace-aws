@@ -12,9 +12,11 @@ var lightsail_deleteAlarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteAlarmCmd).Standalone()
+	carapace.Gen(lightsail_deleteAlarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteAlarmCmd).Standalone()
 
-	lightsail_deleteAlarmCmd.Flags().String("alarm-name", "", "The name of the alarm to delete.")
-	lightsail_deleteAlarmCmd.MarkFlagRequired("alarm-name")
+		lightsail_deleteAlarmCmd.Flags().String("alarm-name", "", "The name of the alarm to delete.")
+		lightsail_deleteAlarmCmd.MarkFlagRequired("alarm-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteAlarmCmd)
 }

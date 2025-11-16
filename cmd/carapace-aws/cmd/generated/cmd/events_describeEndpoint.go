@@ -12,10 +12,12 @@ var events_describeEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_describeEndpointCmd).Standalone()
+	carapace.Gen(events_describeEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_describeEndpointCmd).Standalone()
 
-	events_describeEndpointCmd.Flags().String("home-region", "", "The primary Region of the endpoint you want to get information about.")
-	events_describeEndpointCmd.Flags().String("name", "", "The name of the endpoint you want to get information about.")
-	events_describeEndpointCmd.MarkFlagRequired("name")
+		events_describeEndpointCmd.Flags().String("home-region", "", "The primary Region of the endpoint you want to get information about.")
+		events_describeEndpointCmd.Flags().String("name", "", "The name of the endpoint you want to get information about.")
+		events_describeEndpointCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_describeEndpointCmd)
 }

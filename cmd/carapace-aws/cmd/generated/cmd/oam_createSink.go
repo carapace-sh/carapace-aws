@@ -12,10 +12,12 @@ var oam_createSinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_createSinkCmd).Standalone()
+	carapace.Gen(oam_createSinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_createSinkCmd).Standalone()
 
-	oam_createSinkCmd.Flags().String("name", "", "A name for the sink.")
-	oam_createSinkCmd.Flags().String("tags", "", "Assigns one or more tags (key-value pairs) to the link.")
-	oam_createSinkCmd.MarkFlagRequired("name")
+		oam_createSinkCmd.Flags().String("name", "", "A name for the sink.")
+		oam_createSinkCmd.Flags().String("tags", "", "Assigns one or more tags (key-value pairs) to the link.")
+		oam_createSinkCmd.MarkFlagRequired("name")
+	})
 	oamCmd.AddCommand(oam_createSinkCmd)
 }

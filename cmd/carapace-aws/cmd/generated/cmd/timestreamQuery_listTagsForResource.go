@@ -12,11 +12,13 @@ var timestreamQuery_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_listTagsForResourceCmd).Standalone()
+	carapace.Gen(timestreamQuery_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_listTagsForResourceCmd).Standalone()
 
-	timestreamQuery_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of tags to return.")
-	timestreamQuery_listTagsForResourceCmd.Flags().String("next-token", "", "A pagination token to resume pagination.")
-	timestreamQuery_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Timestream resource with tags to be listed.")
-	timestreamQuery_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		timestreamQuery_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of tags to return.")
+		timestreamQuery_listTagsForResourceCmd.Flags().String("next-token", "", "A pagination token to resume pagination.")
+		timestreamQuery_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Timestream resource with tags to be listed.")
+		timestreamQuery_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_listTagsForResourceCmd)
 }

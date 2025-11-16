@@ -12,7 +12,9 @@ var iam_listOpenIdconnectProvidersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_listOpenIdconnectProvidersCmd).Standalone()
+	carapace.Gen(iam_listOpenIdconnectProvidersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_listOpenIdconnectProvidersCmd).Standalone()
 
+	})
 	iamCmd.AddCommand(iam_listOpenIdconnectProvidersCmd)
 }

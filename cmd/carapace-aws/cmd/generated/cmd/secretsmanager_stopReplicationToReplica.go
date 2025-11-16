@@ -12,9 +12,11 @@ var secretsmanager_stopReplicationToReplicaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_stopReplicationToReplicaCmd).Standalone()
+	carapace.Gen(secretsmanager_stopReplicationToReplicaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_stopReplicationToReplicaCmd).Standalone()
 
-	secretsmanager_stopReplicationToReplicaCmd.Flags().String("secret-id", "", "The ARN of the primary secret.")
-	secretsmanager_stopReplicationToReplicaCmd.MarkFlagRequired("secret-id")
+		secretsmanager_stopReplicationToReplicaCmd.Flags().String("secret-id", "", "The ARN of the primary secret.")
+		secretsmanager_stopReplicationToReplicaCmd.MarkFlagRequired("secret-id")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_stopReplicationToReplicaCmd)
 }

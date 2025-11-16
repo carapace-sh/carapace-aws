@@ -12,13 +12,15 @@ var chimeSdkMessaging_listChannelModeratorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_listChannelModeratorsCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_listChannelModeratorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_listChannelModeratorsCmd).Standalone()
 
-	chimeSdkMessaging_listChannelModeratorsCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
-	chimeSdkMessaging_listChannelModeratorsCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_listChannelModeratorsCmd.Flags().String("max-results", "", "The maximum number of moderators that you want returned.")
-	chimeSdkMessaging_listChannelModeratorsCmd.Flags().String("next-token", "", "The token passed by previous API calls until all requested moderators are returned.")
-	chimeSdkMessaging_listChannelModeratorsCmd.MarkFlagRequired("channel-arn")
-	chimeSdkMessaging_listChannelModeratorsCmd.MarkFlagRequired("chime-bearer")
+		chimeSdkMessaging_listChannelModeratorsCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
+		chimeSdkMessaging_listChannelModeratorsCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_listChannelModeratorsCmd.Flags().String("max-results", "", "The maximum number of moderators that you want returned.")
+		chimeSdkMessaging_listChannelModeratorsCmd.Flags().String("next-token", "", "The token passed by previous API calls until all requested moderators are returned.")
+		chimeSdkMessaging_listChannelModeratorsCmd.MarkFlagRequired("channel-arn")
+		chimeSdkMessaging_listChannelModeratorsCmd.MarkFlagRequired("chime-bearer")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_listChannelModeratorsCmd)
 }

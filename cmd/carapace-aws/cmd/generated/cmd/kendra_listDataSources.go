@@ -12,11 +12,13 @@ var kendra_listDataSourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_listDataSourcesCmd).Standalone()
+	carapace.Gen(kendra_listDataSourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_listDataSourcesCmd).Standalone()
 
-	kendra_listDataSourcesCmd.Flags().String("index-id", "", "The identifier of the index used with one or more data source connectors.")
-	kendra_listDataSourcesCmd.Flags().String("max-results", "", "The maximum number of data source connectors to return.")
-	kendra_listDataSourcesCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.")
-	kendra_listDataSourcesCmd.MarkFlagRequired("index-id")
+		kendra_listDataSourcesCmd.Flags().String("index-id", "", "The identifier of the index used with one or more data source connectors.")
+		kendra_listDataSourcesCmd.Flags().String("max-results", "", "The maximum number of data source connectors to return.")
+		kendra_listDataSourcesCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.")
+		kendra_listDataSourcesCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_listDataSourcesCmd)
 }

@@ -12,13 +12,15 @@ var workspaces_updateWorkspaceImagePermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_updateWorkspaceImagePermissionCmd).Standalone()
+	carapace.Gen(workspaces_updateWorkspaceImagePermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_updateWorkspaceImagePermissionCmd).Standalone()
 
-	workspaces_updateWorkspaceImagePermissionCmd.Flags().String("allow-copy-image", "", "The permission to copy the image.")
-	workspaces_updateWorkspaceImagePermissionCmd.Flags().String("image-id", "", "The identifier of the image.")
-	workspaces_updateWorkspaceImagePermissionCmd.Flags().String("shared-account-id", "", "The identifier of the Amazon Web Services account to share or unshare the image with.")
-	workspaces_updateWorkspaceImagePermissionCmd.MarkFlagRequired("allow-copy-image")
-	workspaces_updateWorkspaceImagePermissionCmd.MarkFlagRequired("image-id")
-	workspaces_updateWorkspaceImagePermissionCmd.MarkFlagRequired("shared-account-id")
+		workspaces_updateWorkspaceImagePermissionCmd.Flags().String("allow-copy-image", "", "The permission to copy the image.")
+		workspaces_updateWorkspaceImagePermissionCmd.Flags().String("image-id", "", "The identifier of the image.")
+		workspaces_updateWorkspaceImagePermissionCmd.Flags().String("shared-account-id", "", "The identifier of the Amazon Web Services account to share or unshare the image with.")
+		workspaces_updateWorkspaceImagePermissionCmd.MarkFlagRequired("allow-copy-image")
+		workspaces_updateWorkspaceImagePermissionCmd.MarkFlagRequired("image-id")
+		workspaces_updateWorkspaceImagePermissionCmd.MarkFlagRequired("shared-account-id")
+	})
 	workspacesCmd.AddCommand(workspaces_updateWorkspaceImagePermissionCmd)
 }

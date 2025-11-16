@@ -12,7 +12,9 @@ var macie2_getRevealConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getRevealConfigurationCmd).Standalone()
+	carapace.Gen(macie2_getRevealConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getRevealConfigurationCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_getRevealConfigurationCmd)
 }

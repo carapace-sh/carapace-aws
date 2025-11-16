@@ -12,12 +12,14 @@ var gamelift_describeFleetLocationAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeFleetLocationAttributesCmd).Standalone()
+	carapace.Gen(gamelift_describeFleetLocationAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeFleetLocationAttributesCmd).Standalone()
 
-	gamelift_describeFleetLocationAttributesCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to retrieve remote locations for.")
-	gamelift_describeFleetLocationAttributesCmd.Flags().String("limit", "", "The maximum number of results to return.")
-	gamelift_describeFleetLocationAttributesCmd.Flags().String("locations", "", "A list of fleet locations to retrieve information for.")
-	gamelift_describeFleetLocationAttributesCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
-	gamelift_describeFleetLocationAttributesCmd.MarkFlagRequired("fleet-id")
+		gamelift_describeFleetLocationAttributesCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to retrieve remote locations for.")
+		gamelift_describeFleetLocationAttributesCmd.Flags().String("limit", "", "The maximum number of results to return.")
+		gamelift_describeFleetLocationAttributesCmd.Flags().String("locations", "", "A list of fleet locations to retrieve information for.")
+		gamelift_describeFleetLocationAttributesCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+		gamelift_describeFleetLocationAttributesCmd.MarkFlagRequired("fleet-id")
+	})
 	gameliftCmd.AddCommand(gamelift_describeFleetLocationAttributesCmd)
 }

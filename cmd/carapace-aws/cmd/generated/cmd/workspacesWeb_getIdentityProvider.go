@@ -12,9 +12,11 @@ var workspacesWeb_getIdentityProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getIdentityProviderCmd).Standalone()
+	carapace.Gen(workspacesWeb_getIdentityProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getIdentityProviderCmd).Standalone()
 
-	workspacesWeb_getIdentityProviderCmd.Flags().String("identity-provider-arn", "", "The ARN of the identity provider.")
-	workspacesWeb_getIdentityProviderCmd.MarkFlagRequired("identity-provider-arn")
+		workspacesWeb_getIdentityProviderCmd.Flags().String("identity-provider-arn", "", "The ARN of the identity provider.")
+		workspacesWeb_getIdentityProviderCmd.MarkFlagRequired("identity-provider-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getIdentityProviderCmd)
 }

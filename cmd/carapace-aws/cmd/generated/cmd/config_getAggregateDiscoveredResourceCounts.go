@@ -12,13 +12,15 @@ var config_getAggregateDiscoveredResourceCountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getAggregateDiscoveredResourceCountsCmd).Standalone()
+	carapace.Gen(config_getAggregateDiscoveredResourceCountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getAggregateDiscoveredResourceCountsCmd).Standalone()
 
-	config_getAggregateDiscoveredResourceCountsCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
-	config_getAggregateDiscoveredResourceCountsCmd.Flags().String("filters", "", "Filters the results based on the `ResourceCountFilters` object.")
-	config_getAggregateDiscoveredResourceCountsCmd.Flags().String("group-by-key", "", "The key to group the resource counts.")
-	config_getAggregateDiscoveredResourceCountsCmd.Flags().String("limit", "", "The maximum number of [GroupedResourceCount]() objects returned on each page.")
-	config_getAggregateDiscoveredResourceCountsCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
-	config_getAggregateDiscoveredResourceCountsCmd.MarkFlagRequired("configuration-aggregator-name")
+		config_getAggregateDiscoveredResourceCountsCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
+		config_getAggregateDiscoveredResourceCountsCmd.Flags().String("filters", "", "Filters the results based on the `ResourceCountFilters` object.")
+		config_getAggregateDiscoveredResourceCountsCmd.Flags().String("group-by-key", "", "The key to group the resource counts.")
+		config_getAggregateDiscoveredResourceCountsCmd.Flags().String("limit", "", "The maximum number of [GroupedResourceCount]() objects returned on each page.")
+		config_getAggregateDiscoveredResourceCountsCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+		config_getAggregateDiscoveredResourceCountsCmd.MarkFlagRequired("configuration-aggregator-name")
+	})
 	configCmd.AddCommand(config_getAggregateDiscoveredResourceCountsCmd)
 }

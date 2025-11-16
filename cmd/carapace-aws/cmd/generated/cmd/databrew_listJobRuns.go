@@ -12,11 +12,13 @@ var databrew_listJobRunsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_listJobRunsCmd).Standalone()
+	carapace.Gen(databrew_listJobRunsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_listJobRunsCmd).Standalone()
 
-	databrew_listJobRunsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	databrew_listJobRunsCmd.Flags().String("name", "", "The name of the job.")
-	databrew_listJobRunsCmd.Flags().String("next-token", "", "The token returned by a previous call to retrieve the next set of results.")
-	databrew_listJobRunsCmd.MarkFlagRequired("name")
+		databrew_listJobRunsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		databrew_listJobRunsCmd.Flags().String("name", "", "The name of the job.")
+		databrew_listJobRunsCmd.Flags().String("next-token", "", "The token returned by a previous call to retrieve the next set of results.")
+		databrew_listJobRunsCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_listJobRunsCmd)
 }

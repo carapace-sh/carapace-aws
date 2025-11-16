@@ -12,13 +12,15 @@ var lightsail_getCostEstimateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getCostEstimateCmd).Standalone()
+	carapace.Gen(lightsail_getCostEstimateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getCostEstimateCmd).Standalone()
 
-	lightsail_getCostEstimateCmd.Flags().String("end-time", "", "The cost estimate end time.")
-	lightsail_getCostEstimateCmd.Flags().String("resource-name", "", "The resource name.")
-	lightsail_getCostEstimateCmd.Flags().String("start-time", "", "The cost estimate start time.")
-	lightsail_getCostEstimateCmd.MarkFlagRequired("end-time")
-	lightsail_getCostEstimateCmd.MarkFlagRequired("resource-name")
-	lightsail_getCostEstimateCmd.MarkFlagRequired("start-time")
+		lightsail_getCostEstimateCmd.Flags().String("end-time", "", "The cost estimate end time.")
+		lightsail_getCostEstimateCmd.Flags().String("resource-name", "", "The resource name.")
+		lightsail_getCostEstimateCmd.Flags().String("start-time", "", "The cost estimate start time.")
+		lightsail_getCostEstimateCmd.MarkFlagRequired("end-time")
+		lightsail_getCostEstimateCmd.MarkFlagRequired("resource-name")
+		lightsail_getCostEstimateCmd.MarkFlagRequired("start-time")
+	})
 	lightsailCmd.AddCommand(lightsail_getCostEstimateCmd)
 }

@@ -12,7 +12,9 @@ var importexportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(importexportCmd).Standalone()
+	carapace.Gen(importexportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(importexportCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(importexportCmd)
 }

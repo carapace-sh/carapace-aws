@@ -12,11 +12,13 @@ var appstream_deleteImagePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_deleteImagePermissionsCmd).Standalone()
+	carapace.Gen(appstream_deleteImagePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_deleteImagePermissionsCmd).Standalone()
 
-	appstream_deleteImagePermissionsCmd.Flags().String("name", "", "The name of the private image.")
-	appstream_deleteImagePermissionsCmd.Flags().String("shared-account-id", "", "The 12-digit identifier of the AWS account for which to delete image permissions.")
-	appstream_deleteImagePermissionsCmd.MarkFlagRequired("name")
-	appstream_deleteImagePermissionsCmd.MarkFlagRequired("shared-account-id")
+		appstream_deleteImagePermissionsCmd.Flags().String("name", "", "The name of the private image.")
+		appstream_deleteImagePermissionsCmd.Flags().String("shared-account-id", "", "The 12-digit identifier of the AWS account for which to delete image permissions.")
+		appstream_deleteImagePermissionsCmd.MarkFlagRequired("name")
+		appstream_deleteImagePermissionsCmd.MarkFlagRequired("shared-account-id")
+	})
 	appstreamCmd.AddCommand(appstream_deleteImagePermissionsCmd)
 }

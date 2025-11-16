@@ -12,13 +12,15 @@ var clouddirectory_listObjectParentPathsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_listObjectParentPathsCmd).Standalone()
+	carapace.Gen(clouddirectory_listObjectParentPathsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_listObjectParentPathsCmd).Standalone()
 
-	clouddirectory_listObjectParentPathsCmd.Flags().String("directory-arn", "", "The ARN of the directory to which the parent path applies.")
-	clouddirectory_listObjectParentPathsCmd.Flags().String("max-results", "", "The maximum number of items to be retrieved in a single call.")
-	clouddirectory_listObjectParentPathsCmd.Flags().String("next-token", "", "The pagination token.")
-	clouddirectory_listObjectParentPathsCmd.Flags().String("object-reference", "", "The reference that identifies the object whose parent paths are listed.")
-	clouddirectory_listObjectParentPathsCmd.MarkFlagRequired("directory-arn")
-	clouddirectory_listObjectParentPathsCmd.MarkFlagRequired("object-reference")
+		clouddirectory_listObjectParentPathsCmd.Flags().String("directory-arn", "", "The ARN of the directory to which the parent path applies.")
+		clouddirectory_listObjectParentPathsCmd.Flags().String("max-results", "", "The maximum number of items to be retrieved in a single call.")
+		clouddirectory_listObjectParentPathsCmd.Flags().String("next-token", "", "The pagination token.")
+		clouddirectory_listObjectParentPathsCmd.Flags().String("object-reference", "", "The reference that identifies the object whose parent paths are listed.")
+		clouddirectory_listObjectParentPathsCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_listObjectParentPathsCmd.MarkFlagRequired("object-reference")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_listObjectParentPathsCmd)
 }

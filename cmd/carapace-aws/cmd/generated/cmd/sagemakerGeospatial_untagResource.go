@@ -12,11 +12,13 @@ var sagemakerGeospatial_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerGeospatial_untagResourceCmd).Standalone()
+	carapace.Gen(sagemakerGeospatial_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerGeospatial_untagResourceCmd).Standalone()
 
-	sagemakerGeospatial_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you want to untag.")
-	sagemakerGeospatial_untagResourceCmd.Flags().String("tag-keys", "", "Keys of the tags you want to remove.")
-	sagemakerGeospatial_untagResourceCmd.MarkFlagRequired("resource-arn")
-	sagemakerGeospatial_untagResourceCmd.MarkFlagRequired("tag-keys")
+		sagemakerGeospatial_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you want to untag.")
+		sagemakerGeospatial_untagResourceCmd.Flags().String("tag-keys", "", "Keys of the tags you want to remove.")
+		sagemakerGeospatial_untagResourceCmd.MarkFlagRequired("resource-arn")
+		sagemakerGeospatial_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	sagemakerGeospatialCmd.AddCommand(sagemakerGeospatial_untagResourceCmd)
 }

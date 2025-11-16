@@ -12,11 +12,13 @@ var pinpointEmail_deleteConfigurationSetEventDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_deleteConfigurationSetEventDestinationCmd).Standalone()
+	carapace.Gen(pinpointEmail_deleteConfigurationSetEventDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_deleteConfigurationSetEventDestinationCmd).Standalone()
 
-	pinpointEmail_deleteConfigurationSetEventDestinationCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that contains the event destination that you want to delete.")
-	pinpointEmail_deleteConfigurationSetEventDestinationCmd.Flags().String("event-destination-name", "", "The name of the event destination that you want to delete.")
-	pinpointEmail_deleteConfigurationSetEventDestinationCmd.MarkFlagRequired("configuration-set-name")
-	pinpointEmail_deleteConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination-name")
+		pinpointEmail_deleteConfigurationSetEventDestinationCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that contains the event destination that you want to delete.")
+		pinpointEmail_deleteConfigurationSetEventDestinationCmd.Flags().String("event-destination-name", "", "The name of the event destination that you want to delete.")
+		pinpointEmail_deleteConfigurationSetEventDestinationCmd.MarkFlagRequired("configuration-set-name")
+		pinpointEmail_deleteConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination-name")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_deleteConfigurationSetEventDestinationCmd)
 }

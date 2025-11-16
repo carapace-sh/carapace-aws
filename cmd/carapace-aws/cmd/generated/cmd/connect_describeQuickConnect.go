@@ -12,11 +12,13 @@ var connect_describeQuickConnectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeQuickConnectCmd).Standalone()
+	carapace.Gen(connect_describeQuickConnectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeQuickConnectCmd).Standalone()
 
-	connect_describeQuickConnectCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeQuickConnectCmd.Flags().String("quick-connect-id", "", "The identifier for the quick connect.")
-	connect_describeQuickConnectCmd.MarkFlagRequired("instance-id")
-	connect_describeQuickConnectCmd.MarkFlagRequired("quick-connect-id")
+		connect_describeQuickConnectCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeQuickConnectCmd.Flags().String("quick-connect-id", "", "The identifier for the quick connect.")
+		connect_describeQuickConnectCmd.MarkFlagRequired("instance-id")
+		connect_describeQuickConnectCmd.MarkFlagRequired("quick-connect-id")
+	})
 	connectCmd.AddCommand(connect_describeQuickConnectCmd)
 }

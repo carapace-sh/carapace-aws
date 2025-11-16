@@ -12,11 +12,13 @@ var m2_getApplicationVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_getApplicationVersionCmd).Standalone()
+	carapace.Gen(m2_getApplicationVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_getApplicationVersionCmd).Standalone()
 
-	m2_getApplicationVersionCmd.Flags().String("application-id", "", "The unique identifier of the application.")
-	m2_getApplicationVersionCmd.Flags().String("application-version", "", "The specific version of the application.")
-	m2_getApplicationVersionCmd.MarkFlagRequired("application-id")
-	m2_getApplicationVersionCmd.MarkFlagRequired("application-version")
+		m2_getApplicationVersionCmd.Flags().String("application-id", "", "The unique identifier of the application.")
+		m2_getApplicationVersionCmd.Flags().String("application-version", "", "The specific version of the application.")
+		m2_getApplicationVersionCmd.MarkFlagRequired("application-id")
+		m2_getApplicationVersionCmd.MarkFlagRequired("application-version")
+	})
 	m2Cmd.AddCommand(m2_getApplicationVersionCmd)
 }

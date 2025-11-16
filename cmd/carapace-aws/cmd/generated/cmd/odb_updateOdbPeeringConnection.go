@@ -12,12 +12,14 @@ var odb_updateOdbPeeringConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_updateOdbPeeringConnectionCmd).Standalone()
+	carapace.Gen(odb_updateOdbPeeringConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_updateOdbPeeringConnectionCmd).Standalone()
 
-	odb_updateOdbPeeringConnectionCmd.Flags().String("display-name", "", "A new display name for the peering connection.")
-	odb_updateOdbPeeringConnectionCmd.Flags().String("odb-peering-connection-id", "", "The identifier of the Oracle Database@Amazon Web Services peering connection to update.")
-	odb_updateOdbPeeringConnectionCmd.Flags().String("peer-network-cidrs-to-be-added", "", "A list of CIDR blocks to add to the peering connection.")
-	odb_updateOdbPeeringConnectionCmd.Flags().String("peer-network-cidrs-to-be-removed", "", "A list of CIDR blocks to remove from the peering connection.")
-	odb_updateOdbPeeringConnectionCmd.MarkFlagRequired("odb-peering-connection-id")
+		odb_updateOdbPeeringConnectionCmd.Flags().String("display-name", "", "A new display name for the peering connection.")
+		odb_updateOdbPeeringConnectionCmd.Flags().String("odb-peering-connection-id", "", "The identifier of the Oracle Database@Amazon Web Services peering connection to update.")
+		odb_updateOdbPeeringConnectionCmd.Flags().String("peer-network-cidrs-to-be-added", "", "A list of CIDR blocks to add to the peering connection.")
+		odb_updateOdbPeeringConnectionCmd.Flags().String("peer-network-cidrs-to-be-removed", "", "A list of CIDR blocks to remove from the peering connection.")
+		odb_updateOdbPeeringConnectionCmd.MarkFlagRequired("odb-peering-connection-id")
+	})
 	odbCmd.AddCommand(odb_updateOdbPeeringConnectionCmd)
 }

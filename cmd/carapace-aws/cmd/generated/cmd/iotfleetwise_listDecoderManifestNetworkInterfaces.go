@@ -12,11 +12,13 @@ var iotfleetwise_listDecoderManifestNetworkInterfacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_listDecoderManifestNetworkInterfacesCmd).Standalone()
+	carapace.Gen(iotfleetwise_listDecoderManifestNetworkInterfacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_listDecoderManifestNetworkInterfacesCmd).Standalone()
 
-	iotfleetwise_listDecoderManifestNetworkInterfacesCmd.Flags().String("max-results", "", "The maximum number of items to return, between 1 and 100, inclusive.")
-	iotfleetwise_listDecoderManifestNetworkInterfacesCmd.Flags().String("name", "", "The name of the decoder manifest to list information about.")
-	iotfleetwise_listDecoderManifestNetworkInterfacesCmd.Flags().String("next-token", "", "A pagination token for the next set of results.")
-	iotfleetwise_listDecoderManifestNetworkInterfacesCmd.MarkFlagRequired("name")
+		iotfleetwise_listDecoderManifestNetworkInterfacesCmd.Flags().String("max-results", "", "The maximum number of items to return, between 1 and 100, inclusive.")
+		iotfleetwise_listDecoderManifestNetworkInterfacesCmd.Flags().String("name", "", "The name of the decoder manifest to list information about.")
+		iotfleetwise_listDecoderManifestNetworkInterfacesCmd.Flags().String("next-token", "", "A pagination token for the next set of results.")
+		iotfleetwise_listDecoderManifestNetworkInterfacesCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_listDecoderManifestNetworkInterfacesCmd)
 }

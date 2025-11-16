@@ -12,11 +12,13 @@ var cognitoIdp_setUserSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_setUserSettingsCmd).Standalone()
+	carapace.Gen(cognitoIdp_setUserSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_setUserSettingsCmd).Standalone()
 
-	cognitoIdp_setUserSettingsCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_setUserSettingsCmd.Flags().String("mfaoptions", "", "You can use this parameter only to set an SMS configuration that uses SMS for delivery.")
-	cognitoIdp_setUserSettingsCmd.MarkFlagRequired("access-token")
-	cognitoIdp_setUserSettingsCmd.MarkFlagRequired("mfaoptions")
+		cognitoIdp_setUserSettingsCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_setUserSettingsCmd.Flags().String("mfaoptions", "", "You can use this parameter only to set an SMS configuration that uses SMS for delivery.")
+		cognitoIdp_setUserSettingsCmd.MarkFlagRequired("access-token")
+		cognitoIdp_setUserSettingsCmd.MarkFlagRequired("mfaoptions")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_setUserSettingsCmd)
 }

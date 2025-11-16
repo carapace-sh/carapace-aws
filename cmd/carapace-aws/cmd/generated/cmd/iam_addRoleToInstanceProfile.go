@@ -12,11 +12,13 @@ var iam_addRoleToInstanceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_addRoleToInstanceProfileCmd).Standalone()
+	carapace.Gen(iam_addRoleToInstanceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_addRoleToInstanceProfileCmd).Standalone()
 
-	iam_addRoleToInstanceProfileCmd.Flags().String("instance-profile-name", "", "The name of the instance profile to update.")
-	iam_addRoleToInstanceProfileCmd.Flags().String("role-name", "", "The name of the role to add.")
-	iam_addRoleToInstanceProfileCmd.MarkFlagRequired("instance-profile-name")
-	iam_addRoleToInstanceProfileCmd.MarkFlagRequired("role-name")
+		iam_addRoleToInstanceProfileCmd.Flags().String("instance-profile-name", "", "The name of the instance profile to update.")
+		iam_addRoleToInstanceProfileCmd.Flags().String("role-name", "", "The name of the role to add.")
+		iam_addRoleToInstanceProfileCmd.MarkFlagRequired("instance-profile-name")
+		iam_addRoleToInstanceProfileCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_addRoleToInstanceProfileCmd)
 }

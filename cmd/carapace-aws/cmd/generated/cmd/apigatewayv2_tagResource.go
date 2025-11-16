@@ -12,10 +12,12 @@ var apigatewayv2_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_tagResourceCmd).Standalone()
+	carapace.Gen(apigatewayv2_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_tagResourceCmd).Standalone()
 
-	apigatewayv2_tagResourceCmd.Flags().String("resource-arn", "", "The resource ARN for the tag.")
-	apigatewayv2_tagResourceCmd.Flags().String("tags", "", "The collection of tags.")
-	apigatewayv2_tagResourceCmd.MarkFlagRequired("resource-arn")
+		apigatewayv2_tagResourceCmd.Flags().String("resource-arn", "", "The resource ARN for the tag.")
+		apigatewayv2_tagResourceCmd.Flags().String("tags", "", "The collection of tags.")
+		apigatewayv2_tagResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_tagResourceCmd)
 }

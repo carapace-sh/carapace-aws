@@ -12,11 +12,13 @@ var elastictranscoder_updatePipelineStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elastictranscoder_updatePipelineStatusCmd).Standalone()
+	carapace.Gen(elastictranscoder_updatePipelineStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elastictranscoder_updatePipelineStatusCmd).Standalone()
 
-	elastictranscoder_updatePipelineStatusCmd.Flags().String("id", "", "The identifier of the pipeline to update.")
-	elastictranscoder_updatePipelineStatusCmd.Flags().String("status", "", "The desired status of the pipeline:")
-	elastictranscoder_updatePipelineStatusCmd.MarkFlagRequired("id")
-	elastictranscoder_updatePipelineStatusCmd.MarkFlagRequired("status")
+		elastictranscoder_updatePipelineStatusCmd.Flags().String("id", "", "The identifier of the pipeline to update.")
+		elastictranscoder_updatePipelineStatusCmd.Flags().String("status", "", "The desired status of the pipeline:")
+		elastictranscoder_updatePipelineStatusCmd.MarkFlagRequired("id")
+		elastictranscoder_updatePipelineStatusCmd.MarkFlagRequired("status")
+	})
 	elastictranscoderCmd.AddCommand(elastictranscoder_updatePipelineStatusCmd)
 }

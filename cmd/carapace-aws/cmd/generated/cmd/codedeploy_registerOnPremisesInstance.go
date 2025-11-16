@@ -12,11 +12,13 @@ var codedeploy_registerOnPremisesInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_registerOnPremisesInstanceCmd).Standalone()
+	carapace.Gen(codedeploy_registerOnPremisesInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_registerOnPremisesInstanceCmd).Standalone()
 
-	codedeploy_registerOnPremisesInstanceCmd.Flags().String("iam-session-arn", "", "The ARN of the IAM session to associate with the on-premises instance.")
-	codedeploy_registerOnPremisesInstanceCmd.Flags().String("iam-user-arn", "", "The ARN of the user to associate with the on-premises instance.")
-	codedeploy_registerOnPremisesInstanceCmd.Flags().String("instance-name", "", "The name of the on-premises instance to register.")
-	codedeploy_registerOnPremisesInstanceCmd.MarkFlagRequired("instance-name")
+		codedeploy_registerOnPremisesInstanceCmd.Flags().String("iam-session-arn", "", "The ARN of the IAM session to associate with the on-premises instance.")
+		codedeploy_registerOnPremisesInstanceCmd.Flags().String("iam-user-arn", "", "The ARN of the user to associate with the on-premises instance.")
+		codedeploy_registerOnPremisesInstanceCmd.Flags().String("instance-name", "", "The name of the on-premises instance to register.")
+		codedeploy_registerOnPremisesInstanceCmd.MarkFlagRequired("instance-name")
+	})
 	codedeployCmd.AddCommand(codedeploy_registerOnPremisesInstanceCmd)
 }

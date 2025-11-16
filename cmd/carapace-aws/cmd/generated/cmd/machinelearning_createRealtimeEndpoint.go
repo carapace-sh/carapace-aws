@@ -12,9 +12,11 @@ var machinelearning_createRealtimeEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_createRealtimeEndpointCmd).Standalone()
+	carapace.Gen(machinelearning_createRealtimeEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_createRealtimeEndpointCmd).Standalone()
 
-	machinelearning_createRealtimeEndpointCmd.Flags().String("mlmodel-id", "", "The ID assigned to the `MLModel` during creation.")
-	machinelearning_createRealtimeEndpointCmd.MarkFlagRequired("mlmodel-id")
+		machinelearning_createRealtimeEndpointCmd.Flags().String("mlmodel-id", "", "The ID assigned to the `MLModel` during creation.")
+		machinelearning_createRealtimeEndpointCmd.MarkFlagRequired("mlmodel-id")
+	})
 	machinelearningCmd.AddCommand(machinelearning_createRealtimeEndpointCmd)
 }

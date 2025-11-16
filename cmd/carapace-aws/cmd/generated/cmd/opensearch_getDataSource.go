@@ -12,11 +12,13 @@ var opensearch_getDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_getDataSourceCmd).Standalone()
+	carapace.Gen(opensearch_getDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_getDataSourceCmd).Standalone()
 
-	opensearch_getDataSourceCmd.Flags().String("domain-name", "", "The name of the domain.")
-	opensearch_getDataSourceCmd.Flags().String("name", "", "The name of the data source to get information about.")
-	opensearch_getDataSourceCmd.MarkFlagRequired("domain-name")
-	opensearch_getDataSourceCmd.MarkFlagRequired("name")
+		opensearch_getDataSourceCmd.Flags().String("domain-name", "", "The name of the domain.")
+		opensearch_getDataSourceCmd.Flags().String("name", "", "The name of the data source to get information about.")
+		opensearch_getDataSourceCmd.MarkFlagRequired("domain-name")
+		opensearch_getDataSourceCmd.MarkFlagRequired("name")
+	})
 	opensearchCmd.AddCommand(opensearch_getDataSourceCmd)
 }

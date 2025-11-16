@@ -12,9 +12,11 @@ var es_describeVpcEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_describeVpcEndpointsCmd).Standalone()
+	carapace.Gen(es_describeVpcEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_describeVpcEndpointsCmd).Standalone()
 
-	es_describeVpcEndpointsCmd.Flags().String("vpc-endpoint-ids", "", "The unique identifiers of the endpoints to get information about.")
-	es_describeVpcEndpointsCmd.MarkFlagRequired("vpc-endpoint-ids")
+		es_describeVpcEndpointsCmd.Flags().String("vpc-endpoint-ids", "", "The unique identifiers of the endpoints to get information about.")
+		es_describeVpcEndpointsCmd.MarkFlagRequired("vpc-endpoint-ids")
+	})
 	esCmd.AddCommand(es_describeVpcEndpointsCmd)
 }

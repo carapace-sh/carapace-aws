@@ -12,7 +12,9 @@ var opensearch_getDefaultApplicationSettingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_getDefaultApplicationSettingCmd).Standalone()
+	carapace.Gen(opensearch_getDefaultApplicationSettingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_getDefaultApplicationSettingCmd).Standalone()
 
+	})
 	opensearchCmd.AddCommand(opensearch_getDefaultApplicationSettingCmd)
 }

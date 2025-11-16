@@ -12,9 +12,11 @@ var personalize_describeBatchSegmentJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeBatchSegmentJobCmd).Standalone()
+	carapace.Gen(personalize_describeBatchSegmentJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeBatchSegmentJobCmd).Standalone()
 
-	personalize_describeBatchSegmentJobCmd.Flags().String("batch-segment-job-arn", "", "The ARN of the batch segment job to describe.")
-	personalize_describeBatchSegmentJobCmd.MarkFlagRequired("batch-segment-job-arn")
+		personalize_describeBatchSegmentJobCmd.Flags().String("batch-segment-job-arn", "", "The ARN of the batch segment job to describe.")
+		personalize_describeBatchSegmentJobCmd.MarkFlagRequired("batch-segment-job-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeBatchSegmentJobCmd)
 }

@@ -12,9 +12,11 @@ var forecast_deleteResourceTreeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_deleteResourceTreeCmd).Standalone()
+	carapace.Gen(forecast_deleteResourceTreeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_deleteResourceTreeCmd).Standalone()
 
-	forecast_deleteResourceTreeCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the parent resource to delete.")
-	forecast_deleteResourceTreeCmd.MarkFlagRequired("resource-arn")
+		forecast_deleteResourceTreeCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the parent resource to delete.")
+		forecast_deleteResourceTreeCmd.MarkFlagRequired("resource-arn")
+	})
 	forecastCmd.AddCommand(forecast_deleteResourceTreeCmd)
 }

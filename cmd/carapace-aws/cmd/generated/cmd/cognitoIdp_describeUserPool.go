@@ -12,9 +12,11 @@ var cognitoIdp_describeUserPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_describeUserPoolCmd).Standalone()
+	carapace.Gen(cognitoIdp_describeUserPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_describeUserPoolCmd).Standalone()
 
-	cognitoIdp_describeUserPoolCmd.Flags().String("user-pool-id", "", "The ID of the user pool you want to describe.")
-	cognitoIdp_describeUserPoolCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_describeUserPoolCmd.Flags().String("user-pool-id", "", "The ID of the user pool you want to describe.")
+		cognitoIdp_describeUserPoolCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_describeUserPoolCmd)
 }

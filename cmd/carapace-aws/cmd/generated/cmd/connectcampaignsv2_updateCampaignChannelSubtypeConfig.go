@@ -12,11 +12,13 @@ var connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd).Standalone()
 
-	connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd.Flags().String("channel-subtype-config", "", "")
-	connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd.Flags().String("id", "", "")
-	connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd.MarkFlagRequired("channel-subtype-config")
-	connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd.MarkFlagRequired("id")
+		connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd.Flags().String("channel-subtype-config", "", "")
+		connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd.Flags().String("id", "", "")
+		connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd.MarkFlagRequired("channel-subtype-config")
+		connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_updateCampaignChannelSubtypeConfigCmd)
 }

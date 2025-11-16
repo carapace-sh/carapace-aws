@@ -12,11 +12,13 @@ var cognitoIdp_describeIdentityProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_describeIdentityProviderCmd).Standalone()
+	carapace.Gen(cognitoIdp_describeIdentityProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_describeIdentityProviderCmd).Standalone()
 
-	cognitoIdp_describeIdentityProviderCmd.Flags().String("provider-name", "", "The name of the IdP that you want to describe.")
-	cognitoIdp_describeIdentityProviderCmd.Flags().String("user-pool-id", "", "The ID of the user pool that has the IdP that you want to describe..")
-	cognitoIdp_describeIdentityProviderCmd.MarkFlagRequired("provider-name")
-	cognitoIdp_describeIdentityProviderCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_describeIdentityProviderCmd.Flags().String("provider-name", "", "The name of the IdP that you want to describe.")
+		cognitoIdp_describeIdentityProviderCmd.Flags().String("user-pool-id", "", "The ID of the user pool that has the IdP that you want to describe..")
+		cognitoIdp_describeIdentityProviderCmd.MarkFlagRequired("provider-name")
+		cognitoIdp_describeIdentityProviderCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_describeIdentityProviderCmd)
 }

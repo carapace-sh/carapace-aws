@@ -12,9 +12,11 @@ var mq_rebootBrokerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mq_rebootBrokerCmd).Standalone()
+	carapace.Gen(mq_rebootBrokerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mq_rebootBrokerCmd).Standalone()
 
-	mq_rebootBrokerCmd.Flags().String("broker-id", "", "The unique ID that Amazon MQ generates for the broker.")
-	mq_rebootBrokerCmd.MarkFlagRequired("broker-id")
+		mq_rebootBrokerCmd.Flags().String("broker-id", "", "The unique ID that Amazon MQ generates for the broker.")
+		mq_rebootBrokerCmd.MarkFlagRequired("broker-id")
+	})
 	mqCmd.AddCommand(mq_rebootBrokerCmd)
 }

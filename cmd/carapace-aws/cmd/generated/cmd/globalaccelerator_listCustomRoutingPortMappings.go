@@ -12,12 +12,14 @@ var globalaccelerator_listCustomRoutingPortMappingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_listCustomRoutingPortMappingsCmd).Standalone()
+	carapace.Gen(globalaccelerator_listCustomRoutingPortMappingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_listCustomRoutingPortMappingsCmd).Standalone()
 
-	globalaccelerator_listCustomRoutingPortMappingsCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the accelerator to list the custom routing port mappings for.")
-	globalaccelerator_listCustomRoutingPortMappingsCmd.Flags().String("endpoint-group-arn", "", "The Amazon Resource Name (ARN) of the endpoint group to list the custom routing port mappings for.")
-	globalaccelerator_listCustomRoutingPortMappingsCmd.Flags().String("max-results", "", "The number of destination port mappings that you want to return with this call.")
-	globalaccelerator_listCustomRoutingPortMappingsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	globalaccelerator_listCustomRoutingPortMappingsCmd.MarkFlagRequired("accelerator-arn")
+		globalaccelerator_listCustomRoutingPortMappingsCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the accelerator to list the custom routing port mappings for.")
+		globalaccelerator_listCustomRoutingPortMappingsCmd.Flags().String("endpoint-group-arn", "", "The Amazon Resource Name (ARN) of the endpoint group to list the custom routing port mappings for.")
+		globalaccelerator_listCustomRoutingPortMappingsCmd.Flags().String("max-results", "", "The number of destination port mappings that you want to return with this call.")
+		globalaccelerator_listCustomRoutingPortMappingsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		globalaccelerator_listCustomRoutingPortMappingsCmd.MarkFlagRequired("accelerator-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_listCustomRoutingPortMappingsCmd)
 }

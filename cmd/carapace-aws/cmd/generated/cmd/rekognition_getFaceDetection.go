@@ -12,11 +12,13 @@ var rekognition_getFaceDetectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_getFaceDetectionCmd).Standalone()
+	carapace.Gen(rekognition_getFaceDetectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_getFaceDetectionCmd).Standalone()
 
-	rekognition_getFaceDetectionCmd.Flags().String("job-id", "", "Unique identifier for the face detection job.")
-	rekognition_getFaceDetectionCmd.Flags().String("max-results", "", "Maximum number of results to return per paginated call.")
-	rekognition_getFaceDetectionCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there are more faces to retrieve), Amazon Rekognition Video returns a pagination token in the response.")
-	rekognition_getFaceDetectionCmd.MarkFlagRequired("job-id")
+		rekognition_getFaceDetectionCmd.Flags().String("job-id", "", "Unique identifier for the face detection job.")
+		rekognition_getFaceDetectionCmd.Flags().String("max-results", "", "Maximum number of results to return per paginated call.")
+		rekognition_getFaceDetectionCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there are more faces to retrieve), Amazon Rekognition Video returns a pagination token in the response.")
+		rekognition_getFaceDetectionCmd.MarkFlagRequired("job-id")
+	})
 	rekognitionCmd.AddCommand(rekognition_getFaceDetectionCmd)
 }

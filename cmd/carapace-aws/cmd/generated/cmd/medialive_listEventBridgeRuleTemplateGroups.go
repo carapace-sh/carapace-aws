@@ -12,10 +12,12 @@ var medialive_listEventBridgeRuleTemplateGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listEventBridgeRuleTemplateGroupsCmd).Standalone()
+	carapace.Gen(medialive_listEventBridgeRuleTemplateGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listEventBridgeRuleTemplateGroupsCmd).Standalone()
 
-	medialive_listEventBridgeRuleTemplateGroupsCmd.Flags().String("max-results", "", "")
-	medialive_listEventBridgeRuleTemplateGroupsCmd.Flags().String("next-token", "", "A token used to retrieve the next set of results in paginated list responses.")
-	medialive_listEventBridgeRuleTemplateGroupsCmd.Flags().String("signal-map-identifier", "", "A signal map's identifier.")
+		medialive_listEventBridgeRuleTemplateGroupsCmd.Flags().String("max-results", "", "")
+		medialive_listEventBridgeRuleTemplateGroupsCmd.Flags().String("next-token", "", "A token used to retrieve the next set of results in paginated list responses.")
+		medialive_listEventBridgeRuleTemplateGroupsCmd.Flags().String("signal-map-identifier", "", "A signal map's identifier.")
+	})
 	medialiveCmd.AddCommand(medialive_listEventBridgeRuleTemplateGroupsCmd)
 }

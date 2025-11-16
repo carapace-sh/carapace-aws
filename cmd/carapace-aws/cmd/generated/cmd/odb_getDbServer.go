@@ -12,11 +12,13 @@ var odb_getDbServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_getDbServerCmd).Standalone()
+	carapace.Gen(odb_getDbServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_getDbServerCmd).Standalone()
 
-	odb_getDbServerCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Oracle Exadata infrastructure that contains the database server.")
-	odb_getDbServerCmd.Flags().String("db-server-id", "", "The unique identifier of the database server to retrieve information about.")
-	odb_getDbServerCmd.MarkFlagRequired("cloud-exadata-infrastructure-id")
-	odb_getDbServerCmd.MarkFlagRequired("db-server-id")
+		odb_getDbServerCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Oracle Exadata infrastructure that contains the database server.")
+		odb_getDbServerCmd.Flags().String("db-server-id", "", "The unique identifier of the database server to retrieve information about.")
+		odb_getDbServerCmd.MarkFlagRequired("cloud-exadata-infrastructure-id")
+		odb_getDbServerCmd.MarkFlagRequired("db-server-id")
+	})
 	odbCmd.AddCommand(odb_getDbServerCmd)
 }

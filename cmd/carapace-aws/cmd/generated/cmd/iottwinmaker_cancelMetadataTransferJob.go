@@ -12,9 +12,11 @@ var iottwinmaker_cancelMetadataTransferJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_cancelMetadataTransferJobCmd).Standalone()
+	carapace.Gen(iottwinmaker_cancelMetadataTransferJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_cancelMetadataTransferJobCmd).Standalone()
 
-	iottwinmaker_cancelMetadataTransferJobCmd.Flags().String("metadata-transfer-job-id", "", "The metadata transfer job Id.")
-	iottwinmaker_cancelMetadataTransferJobCmd.MarkFlagRequired("metadata-transfer-job-id")
+		iottwinmaker_cancelMetadataTransferJobCmd.Flags().String("metadata-transfer-job-id", "", "The metadata transfer job Id.")
+		iottwinmaker_cancelMetadataTransferJobCmd.MarkFlagRequired("metadata-transfer-job-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_cancelMetadataTransferJobCmd)
 }

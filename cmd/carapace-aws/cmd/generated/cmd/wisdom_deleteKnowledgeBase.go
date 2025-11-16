@@ -12,9 +12,11 @@ var wisdom_deleteKnowledgeBaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_deleteKnowledgeBaseCmd).Standalone()
+	carapace.Gen(wisdom_deleteKnowledgeBaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_deleteKnowledgeBaseCmd).Standalone()
 
-	wisdom_deleteKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The knowledge base to delete content from.")
-	wisdom_deleteKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+		wisdom_deleteKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The knowledge base to delete content from.")
+		wisdom_deleteKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	wisdomCmd.AddCommand(wisdom_deleteKnowledgeBaseCmd)
 }

@@ -12,11 +12,13 @@ var opensearchserverless_getSecurityPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_getSecurityPolicyCmd).Standalone()
+	carapace.Gen(opensearchserverless_getSecurityPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_getSecurityPolicyCmd).Standalone()
 
-	opensearchserverless_getSecurityPolicyCmd.Flags().String("name", "", "The name of the security policy.")
-	opensearchserverless_getSecurityPolicyCmd.Flags().String("type", "", "The type of security policy.")
-	opensearchserverless_getSecurityPolicyCmd.MarkFlagRequired("name")
-	opensearchserverless_getSecurityPolicyCmd.MarkFlagRequired("type")
+		opensearchserverless_getSecurityPolicyCmd.Flags().String("name", "", "The name of the security policy.")
+		opensearchserverless_getSecurityPolicyCmd.Flags().String("type", "", "The type of security policy.")
+		opensearchserverless_getSecurityPolicyCmd.MarkFlagRequired("name")
+		opensearchserverless_getSecurityPolicyCmd.MarkFlagRequired("type")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_getSecurityPolicyCmd)
 }

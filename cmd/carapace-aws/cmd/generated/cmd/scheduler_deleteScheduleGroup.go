@@ -12,10 +12,12 @@ var scheduler_deleteScheduleGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(scheduler_deleteScheduleGroupCmd).Standalone()
+	carapace.Gen(scheduler_deleteScheduleGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(scheduler_deleteScheduleGroupCmd).Standalone()
 
-	scheduler_deleteScheduleGroupCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier you provide to ensure the idempotency of the request.")
-	scheduler_deleteScheduleGroupCmd.Flags().String("name", "", "The name of the schedule group to delete.")
-	scheduler_deleteScheduleGroupCmd.MarkFlagRequired("name")
+		scheduler_deleteScheduleGroupCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier you provide to ensure the idempotency of the request.")
+		scheduler_deleteScheduleGroupCmd.Flags().String("name", "", "The name of the schedule group to delete.")
+		scheduler_deleteScheduleGroupCmd.MarkFlagRequired("name")
+	})
 	schedulerCmd.AddCommand(scheduler_deleteScheduleGroupCmd)
 }

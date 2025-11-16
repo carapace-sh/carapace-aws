@@ -12,9 +12,11 @@ var iam_getSamlproviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getSamlproviderCmd).Standalone()
+	carapace.Gen(iam_getSamlproviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getSamlproviderCmd).Standalone()
 
-	iam_getSamlproviderCmd.Flags().String("samlprovider-arn", "", "The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to get information about.")
-	iam_getSamlproviderCmd.MarkFlagRequired("samlprovider-arn")
+		iam_getSamlproviderCmd.Flags().String("samlprovider-arn", "", "The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to get information about.")
+		iam_getSamlproviderCmd.MarkFlagRequired("samlprovider-arn")
+	})
 	iamCmd.AddCommand(iam_getSamlproviderCmd)
 }

@@ -12,9 +12,11 @@ var entityresolution_getPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_getPolicyCmd).Standalone()
+	carapace.Gen(entityresolution_getPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_getPolicyCmd).Standalone()
 
-	entityresolution_getPolicyCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource for which the policy need to be returned.")
-	entityresolution_getPolicyCmd.MarkFlagRequired("arn")
+		entityresolution_getPolicyCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource for which the policy need to be returned.")
+		entityresolution_getPolicyCmd.MarkFlagRequired("arn")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_getPolicyCmd)
 }

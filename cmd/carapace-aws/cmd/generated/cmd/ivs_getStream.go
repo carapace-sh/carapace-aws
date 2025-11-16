@@ -12,9 +12,11 @@ var ivs_getStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_getStreamCmd).Standalone()
+	carapace.Gen(ivs_getStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_getStreamCmd).Standalone()
 
-	ivs_getStreamCmd.Flags().String("channel-arn", "", "Channel ARN for stream to be accessed.")
-	ivs_getStreamCmd.MarkFlagRequired("channel-arn")
+		ivs_getStreamCmd.Flags().String("channel-arn", "", "Channel ARN for stream to be accessed.")
+		ivs_getStreamCmd.MarkFlagRequired("channel-arn")
+	})
 	ivsCmd.AddCommand(ivs_getStreamCmd)
 }

@@ -12,11 +12,13 @@ var mediaconnect_grantFlowEntitlementsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_grantFlowEntitlementsCmd).Standalone()
+	carapace.Gen(mediaconnect_grantFlowEntitlementsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_grantFlowEntitlementsCmd).Standalone()
 
-	mediaconnect_grantFlowEntitlementsCmd.Flags().String("entitlements", "", "The list of entitlements that you want to grant.")
-	mediaconnect_grantFlowEntitlementsCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to grant entitlements on.")
-	mediaconnect_grantFlowEntitlementsCmd.MarkFlagRequired("entitlements")
-	mediaconnect_grantFlowEntitlementsCmd.MarkFlagRequired("flow-arn")
+		mediaconnect_grantFlowEntitlementsCmd.Flags().String("entitlements", "", "The list of entitlements that you want to grant.")
+		mediaconnect_grantFlowEntitlementsCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to grant entitlements on.")
+		mediaconnect_grantFlowEntitlementsCmd.MarkFlagRequired("entitlements")
+		mediaconnect_grantFlowEntitlementsCmd.MarkFlagRequired("flow-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_grantFlowEntitlementsCmd)
 }

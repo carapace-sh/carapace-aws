@@ -12,9 +12,11 @@ var mediaconvert_deletePresetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_deletePresetCmd).Standalone()
+	carapace.Gen(mediaconvert_deletePresetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_deletePresetCmd).Standalone()
 
-	mediaconvert_deletePresetCmd.Flags().String("name", "", "The name of the preset to be deleted.")
-	mediaconvert_deletePresetCmd.MarkFlagRequired("name")
+		mediaconvert_deletePresetCmd.Flags().String("name", "", "The name of the preset to be deleted.")
+		mediaconvert_deletePresetCmd.MarkFlagRequired("name")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_deletePresetCmd)
 }

@@ -12,9 +12,11 @@ var medialive_deleteNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteNetworkCmd).Standalone()
+	carapace.Gen(medialive_deleteNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteNetworkCmd).Standalone()
 
-	medialive_deleteNetworkCmd.Flags().String("network-id", "", "The ID of the network.")
-	medialive_deleteNetworkCmd.MarkFlagRequired("network-id")
+		medialive_deleteNetworkCmd.Flags().String("network-id", "", "The ID of the network.")
+		medialive_deleteNetworkCmd.MarkFlagRequired("network-id")
+	})
 	medialiveCmd.AddCommand(medialive_deleteNetworkCmd)
 }

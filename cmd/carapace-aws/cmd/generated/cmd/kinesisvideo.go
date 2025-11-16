@@ -12,7 +12,9 @@ var kinesisvideoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideoCmd).Standalone()
+	carapace.Gen(kinesisvideoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideoCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(kinesisvideoCmd)
 }

@@ -12,11 +12,13 @@ var managedblockchain_getMemberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchain_getMemberCmd).Standalone()
+	carapace.Gen(managedblockchain_getMemberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchain_getMemberCmd).Standalone()
 
-	managedblockchain_getMemberCmd.Flags().String("member-id", "", "The unique identifier of the member.")
-	managedblockchain_getMemberCmd.Flags().String("network-id", "", "The unique identifier of the network to which the member belongs.")
-	managedblockchain_getMemberCmd.MarkFlagRequired("member-id")
-	managedblockchain_getMemberCmd.MarkFlagRequired("network-id")
+		managedblockchain_getMemberCmd.Flags().String("member-id", "", "The unique identifier of the member.")
+		managedblockchain_getMemberCmd.Flags().String("network-id", "", "The unique identifier of the network to which the member belongs.")
+		managedblockchain_getMemberCmd.MarkFlagRequired("member-id")
+		managedblockchain_getMemberCmd.MarkFlagRequired("network-id")
+	})
 	managedblockchainCmd.AddCommand(managedblockchain_getMemberCmd)
 }

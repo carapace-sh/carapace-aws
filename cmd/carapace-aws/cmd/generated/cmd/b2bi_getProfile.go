@@ -12,9 +12,11 @@ var b2bi_getProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_getProfileCmd).Standalone()
+	carapace.Gen(b2bi_getProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_getProfileCmd).Standalone()
 
-	b2bi_getProfileCmd.Flags().String("profile-id", "", "Specifies the unique, system-generated identifier for the profile.")
-	b2bi_getProfileCmd.MarkFlagRequired("profile-id")
+		b2bi_getProfileCmd.Flags().String("profile-id", "", "Specifies the unique, system-generated identifier for the profile.")
+		b2bi_getProfileCmd.MarkFlagRequired("profile-id")
+	})
 	b2biCmd.AddCommand(b2bi_getProfileCmd)
 }

@@ -12,11 +12,13 @@ var iotwireless_getPositionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getPositionConfigurationCmd).Standalone()
+	carapace.Gen(iotwireless_getPositionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getPositionConfigurationCmd).Standalone()
 
-	iotwireless_getPositionConfigurationCmd.Flags().String("resource-identifier", "", "Resource identifier used in a position configuration.")
-	iotwireless_getPositionConfigurationCmd.Flags().String("resource-type", "", "Resource type of the resource for which position configuration is retrieved.")
-	iotwireless_getPositionConfigurationCmd.MarkFlagRequired("resource-identifier")
-	iotwireless_getPositionConfigurationCmd.MarkFlagRequired("resource-type")
+		iotwireless_getPositionConfigurationCmd.Flags().String("resource-identifier", "", "Resource identifier used in a position configuration.")
+		iotwireless_getPositionConfigurationCmd.Flags().String("resource-type", "", "Resource type of the resource for which position configuration is retrieved.")
+		iotwireless_getPositionConfigurationCmd.MarkFlagRequired("resource-identifier")
+		iotwireless_getPositionConfigurationCmd.MarkFlagRequired("resource-type")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getPositionConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var elbv2_deleteRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_deleteRuleCmd).Standalone()
+	carapace.Gen(elbv2_deleteRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_deleteRuleCmd).Standalone()
 
-	elbv2_deleteRuleCmd.Flags().String("rule-arn", "", "The Amazon Resource Name (ARN) of the rule.")
-	elbv2_deleteRuleCmd.MarkFlagRequired("rule-arn")
+		elbv2_deleteRuleCmd.Flags().String("rule-arn", "", "The Amazon Resource Name (ARN) of the rule.")
+		elbv2_deleteRuleCmd.MarkFlagRequired("rule-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_deleteRuleCmd)
 }

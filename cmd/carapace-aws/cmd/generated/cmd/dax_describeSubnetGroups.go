@@ -12,10 +12,12 @@ var dax_describeSubnetGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_describeSubnetGroupsCmd).Standalone()
+	carapace.Gen(dax_describeSubnetGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_describeSubnetGroupsCmd).Standalone()
 
-	dax_describeSubnetGroupsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	dax_describeSubnetGroupsCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
-	dax_describeSubnetGroupsCmd.Flags().String("subnet-group-names", "", "The name of the subnet group.")
+		dax_describeSubnetGroupsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		dax_describeSubnetGroupsCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
+		dax_describeSubnetGroupsCmd.Flags().String("subnet-group-names", "", "The name of the subnet group.")
+	})
 	daxCmd.AddCommand(dax_describeSubnetGroupsCmd)
 }

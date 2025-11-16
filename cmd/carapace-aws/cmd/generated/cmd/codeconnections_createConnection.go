@@ -12,12 +12,14 @@ var codeconnections_createConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeconnections_createConnectionCmd).Standalone()
+	carapace.Gen(codeconnections_createConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeconnections_createConnectionCmd).Standalone()
 
-	codeconnections_createConnectionCmd.Flags().String("connection-name", "", "The name of the connection to be created.")
-	codeconnections_createConnectionCmd.Flags().String("host-arn", "", "The Amazon Resource Name (ARN) of the host associated with the connection to be created.")
-	codeconnections_createConnectionCmd.Flags().String("provider-type", "", "The name of the external provider where your third-party code repository is configured.")
-	codeconnections_createConnectionCmd.Flags().String("tags", "", "The key-value pair to use when tagging the resource.")
-	codeconnections_createConnectionCmd.MarkFlagRequired("connection-name")
+		codeconnections_createConnectionCmd.Flags().String("connection-name", "", "The name of the connection to be created.")
+		codeconnections_createConnectionCmd.Flags().String("host-arn", "", "The Amazon Resource Name (ARN) of the host associated with the connection to be created.")
+		codeconnections_createConnectionCmd.Flags().String("provider-type", "", "The name of the external provider where your third-party code repository is configured.")
+		codeconnections_createConnectionCmd.Flags().String("tags", "", "The key-value pair to use when tagging the resource.")
+		codeconnections_createConnectionCmd.MarkFlagRequired("connection-name")
+	})
 	codeconnectionsCmd.AddCommand(codeconnections_createConnectionCmd)
 }

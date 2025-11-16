@@ -12,13 +12,15 @@ var dsData_describeUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsData_describeUserCmd).Standalone()
+	carapace.Gen(dsData_describeUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsData_describeUserCmd).Standalone()
 
-	dsData_describeUserCmd.Flags().String("directory-id", "", "The identifier (ID) of the directory that's associated with the user.")
-	dsData_describeUserCmd.Flags().String("other-attributes", "", "One or more attribute names to be returned for the user.")
-	dsData_describeUserCmd.Flags().String("realm", "", "The domain name that's associated with the user.")
-	dsData_describeUserCmd.Flags().String("samaccount-name", "", "The name of the user.")
-	dsData_describeUserCmd.MarkFlagRequired("directory-id")
-	dsData_describeUserCmd.MarkFlagRequired("samaccount-name")
+		dsData_describeUserCmd.Flags().String("directory-id", "", "The identifier (ID) of the directory that's associated with the user.")
+		dsData_describeUserCmd.Flags().String("other-attributes", "", "One or more attribute names to be returned for the user.")
+		dsData_describeUserCmd.Flags().String("realm", "", "The domain name that's associated with the user.")
+		dsData_describeUserCmd.Flags().String("samaccount-name", "", "The name of the user.")
+		dsData_describeUserCmd.MarkFlagRequired("directory-id")
+		dsData_describeUserCmd.MarkFlagRequired("samaccount-name")
+	})
 	dsDataCmd.AddCommand(dsData_describeUserCmd)
 }

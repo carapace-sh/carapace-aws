@@ -12,9 +12,11 @@ var tnb_getSolNetworkOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_getSolNetworkOperationCmd).Standalone()
+	carapace.Gen(tnb_getSolNetworkOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_getSolNetworkOperationCmd).Standalone()
 
-	tnb_getSolNetworkOperationCmd.Flags().String("ns-lcm-op-occ-id", "", "The identifier of the network operation.")
-	tnb_getSolNetworkOperationCmd.MarkFlagRequired("ns-lcm-op-occ-id")
+		tnb_getSolNetworkOperationCmd.Flags().String("ns-lcm-op-occ-id", "", "The identifier of the network operation.")
+		tnb_getSolNetworkOperationCmd.MarkFlagRequired("ns-lcm-op-occ-id")
+	})
 	tnbCmd.AddCommand(tnb_getSolNetworkOperationCmd)
 }

@@ -12,13 +12,15 @@ var iam_getSshpublicKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getSshpublicKeyCmd).Standalone()
+	carapace.Gen(iam_getSshpublicKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getSshpublicKeyCmd).Standalone()
 
-	iam_getSshpublicKeyCmd.Flags().String("encoding", "", "Specifies the public key encoding format to use in the response.")
-	iam_getSshpublicKeyCmd.Flags().String("sshpublic-key-id", "", "The unique identifier for the SSH public key.")
-	iam_getSshpublicKeyCmd.Flags().String("user-name", "", "The name of the IAM user associated with the SSH public key.")
-	iam_getSshpublicKeyCmd.MarkFlagRequired("encoding")
-	iam_getSshpublicKeyCmd.MarkFlagRequired("sshpublic-key-id")
-	iam_getSshpublicKeyCmd.MarkFlagRequired("user-name")
+		iam_getSshpublicKeyCmd.Flags().String("encoding", "", "Specifies the public key encoding format to use in the response.")
+		iam_getSshpublicKeyCmd.Flags().String("sshpublic-key-id", "", "The unique identifier for the SSH public key.")
+		iam_getSshpublicKeyCmd.Flags().String("user-name", "", "The name of the IAM user associated with the SSH public key.")
+		iam_getSshpublicKeyCmd.MarkFlagRequired("encoding")
+		iam_getSshpublicKeyCmd.MarkFlagRequired("sshpublic-key-id")
+		iam_getSshpublicKeyCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_getSshpublicKeyCmd)
 }

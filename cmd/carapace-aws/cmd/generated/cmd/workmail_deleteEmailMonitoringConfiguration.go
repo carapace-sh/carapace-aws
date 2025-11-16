@@ -12,9 +12,11 @@ var workmail_deleteEmailMonitoringConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_deleteEmailMonitoringConfigurationCmd).Standalone()
+	carapace.Gen(workmail_deleteEmailMonitoringConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_deleteEmailMonitoringConfigurationCmd).Standalone()
 
-	workmail_deleteEmailMonitoringConfigurationCmd.Flags().String("organization-id", "", "The ID of the organization from which the email monitoring configuration is deleted.")
-	workmail_deleteEmailMonitoringConfigurationCmd.MarkFlagRequired("organization-id")
+		workmail_deleteEmailMonitoringConfigurationCmd.Flags().String("organization-id", "", "The ID of the organization from which the email monitoring configuration is deleted.")
+		workmail_deleteEmailMonitoringConfigurationCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_deleteEmailMonitoringConfigurationCmd)
 }

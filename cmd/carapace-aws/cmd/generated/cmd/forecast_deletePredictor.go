@@ -12,9 +12,11 @@ var forecast_deletePredictorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_deletePredictorCmd).Standalone()
+	carapace.Gen(forecast_deletePredictorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_deletePredictorCmd).Standalone()
 
-	forecast_deletePredictorCmd.Flags().String("predictor-arn", "", "The Amazon Resource Name (ARN) of the predictor to delete.")
-	forecast_deletePredictorCmd.MarkFlagRequired("predictor-arn")
+		forecast_deletePredictorCmd.Flags().String("predictor-arn", "", "The Amazon Resource Name (ARN) of the predictor to delete.")
+		forecast_deletePredictorCmd.MarkFlagRequired("predictor-arn")
+	})
 	forecastCmd.AddCommand(forecast_deletePredictorCmd)
 }

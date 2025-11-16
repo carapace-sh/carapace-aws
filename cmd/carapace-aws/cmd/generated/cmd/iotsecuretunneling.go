@@ -12,7 +12,9 @@ var iotsecuretunnelingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsecuretunnelingCmd).Standalone()
+	carapace.Gen(iotsecuretunnelingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsecuretunnelingCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(iotsecuretunnelingCmd)
 }

@@ -12,11 +12,13 @@ var greengrass_listFunctionDefinitionVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_listFunctionDefinitionVersionsCmd).Standalone()
+	carapace.Gen(greengrass_listFunctionDefinitionVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_listFunctionDefinitionVersionsCmd).Standalone()
 
-	greengrass_listFunctionDefinitionVersionsCmd.Flags().String("function-definition-id", "", "The ID of the Lambda function definition.")
-	greengrass_listFunctionDefinitionVersionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	greengrass_listFunctionDefinitionVersionsCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
-	greengrass_listFunctionDefinitionVersionsCmd.MarkFlagRequired("function-definition-id")
+		greengrass_listFunctionDefinitionVersionsCmd.Flags().String("function-definition-id", "", "The ID of the Lambda function definition.")
+		greengrass_listFunctionDefinitionVersionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		greengrass_listFunctionDefinitionVersionsCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
+		greengrass_listFunctionDefinitionVersionsCmd.MarkFlagRequired("function-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_listFunctionDefinitionVersionsCmd)
 }

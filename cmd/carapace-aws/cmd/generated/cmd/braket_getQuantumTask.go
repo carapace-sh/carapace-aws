@@ -12,10 +12,12 @@ var braket_getQuantumTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(braket_getQuantumTaskCmd).Standalone()
+	carapace.Gen(braket_getQuantumTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(braket_getQuantumTaskCmd).Standalone()
 
-	braket_getQuantumTaskCmd.Flags().String("additional-attribute-names", "", "A list of attributes to return additional information for.")
-	braket_getQuantumTaskCmd.Flags().String("quantum-task-arn", "", "The ARN of the quantum task to retrieve.")
-	braket_getQuantumTaskCmd.MarkFlagRequired("quantum-task-arn")
+		braket_getQuantumTaskCmd.Flags().String("additional-attribute-names", "", "A list of attributes to return additional information for.")
+		braket_getQuantumTaskCmd.Flags().String("quantum-task-arn", "", "The ARN of the quantum task to retrieve.")
+		braket_getQuantumTaskCmd.MarkFlagRequired("quantum-task-arn")
+	})
 	braketCmd.AddCommand(braket_getQuantumTaskCmd)
 }

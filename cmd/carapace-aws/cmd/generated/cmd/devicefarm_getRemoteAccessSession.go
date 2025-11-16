@@ -12,9 +12,11 @@ var devicefarm_getRemoteAccessSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_getRemoteAccessSessionCmd).Standalone()
+	carapace.Gen(devicefarm_getRemoteAccessSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_getRemoteAccessSessionCmd).Standalone()
 
-	devicefarm_getRemoteAccessSessionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the remote access session about which you want to get session information.")
-	devicefarm_getRemoteAccessSessionCmd.MarkFlagRequired("arn")
+		devicefarm_getRemoteAccessSessionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the remote access session about which you want to get session information.")
+		devicefarm_getRemoteAccessSessionCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_getRemoteAccessSessionCmd)
 }

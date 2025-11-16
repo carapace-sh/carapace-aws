@@ -12,11 +12,13 @@ var lexv2Models_createTestSetDiscrepancyReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_createTestSetDiscrepancyReportCmd).Standalone()
+	carapace.Gen(lexv2Models_createTestSetDiscrepancyReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_createTestSetDiscrepancyReportCmd).Standalone()
 
-	lexv2Models_createTestSetDiscrepancyReportCmd.Flags().String("target", "", "The target bot for the test set discrepancy report.")
-	lexv2Models_createTestSetDiscrepancyReportCmd.Flags().String("test-set-id", "", "The test set Id for the test set discrepancy report.")
-	lexv2Models_createTestSetDiscrepancyReportCmd.MarkFlagRequired("target")
-	lexv2Models_createTestSetDiscrepancyReportCmd.MarkFlagRequired("test-set-id")
+		lexv2Models_createTestSetDiscrepancyReportCmd.Flags().String("target", "", "The target bot for the test set discrepancy report.")
+		lexv2Models_createTestSetDiscrepancyReportCmd.Flags().String("test-set-id", "", "The test set Id for the test set discrepancy report.")
+		lexv2Models_createTestSetDiscrepancyReportCmd.MarkFlagRequired("target")
+		lexv2Models_createTestSetDiscrepancyReportCmd.MarkFlagRequired("test-set-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_createTestSetDiscrepancyReportCmd)
 }

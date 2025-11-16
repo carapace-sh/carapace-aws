@@ -12,13 +12,15 @@ var qbusiness_updateSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_updateSubscriptionCmd).Standalone()
+	carapace.Gen(qbusiness_updateSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_updateSubscriptionCmd).Standalone()
 
-	qbusiness_updateSubscriptionCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application where the subscription update should take effect.")
-	qbusiness_updateSubscriptionCmd.Flags().String("subscription-id", "", "The identifier of the Amazon Q Business subscription to be updated.")
-	qbusiness_updateSubscriptionCmd.Flags().String("type", "", "The type of the Amazon Q Business subscription to be updated.")
-	qbusiness_updateSubscriptionCmd.MarkFlagRequired("application-id")
-	qbusiness_updateSubscriptionCmd.MarkFlagRequired("subscription-id")
-	qbusiness_updateSubscriptionCmd.MarkFlagRequired("type")
+		qbusiness_updateSubscriptionCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application where the subscription update should take effect.")
+		qbusiness_updateSubscriptionCmd.Flags().String("subscription-id", "", "The identifier of the Amazon Q Business subscription to be updated.")
+		qbusiness_updateSubscriptionCmd.Flags().String("type", "", "The type of the Amazon Q Business subscription to be updated.")
+		qbusiness_updateSubscriptionCmd.MarkFlagRequired("application-id")
+		qbusiness_updateSubscriptionCmd.MarkFlagRequired("subscription-id")
+		qbusiness_updateSubscriptionCmd.MarkFlagRequired("type")
+	})
 	qbusinessCmd.AddCommand(qbusiness_updateSubscriptionCmd)
 }

@@ -12,11 +12,13 @@ var cleanroomsml_getConfiguredModelAlgorithmAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_getConfiguredModelAlgorithmAssociationCmd).Standalone()
+	carapace.Gen(cleanroomsml_getConfiguredModelAlgorithmAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_getConfiguredModelAlgorithmAssociationCmd).Standalone()
 
-	cleanroomsml_getConfiguredModelAlgorithmAssociationCmd.Flags().String("configured-model-algorithm-association-arn", "", "The Amazon Resource Name (ARN) of the configured model algorithm association that you want to return information about.")
-	cleanroomsml_getConfiguredModelAlgorithmAssociationCmd.Flags().String("membership-identifier", "", "The membership ID of the member that created the configured model algorithm association.")
-	cleanroomsml_getConfiguredModelAlgorithmAssociationCmd.MarkFlagRequired("configured-model-algorithm-association-arn")
-	cleanroomsml_getConfiguredModelAlgorithmAssociationCmd.MarkFlagRequired("membership-identifier")
+		cleanroomsml_getConfiguredModelAlgorithmAssociationCmd.Flags().String("configured-model-algorithm-association-arn", "", "The Amazon Resource Name (ARN) of the configured model algorithm association that you want to return information about.")
+		cleanroomsml_getConfiguredModelAlgorithmAssociationCmd.Flags().String("membership-identifier", "", "The membership ID of the member that created the configured model algorithm association.")
+		cleanroomsml_getConfiguredModelAlgorithmAssociationCmd.MarkFlagRequired("configured-model-algorithm-association-arn")
+		cleanroomsml_getConfiguredModelAlgorithmAssociationCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_getConfiguredModelAlgorithmAssociationCmd)
 }

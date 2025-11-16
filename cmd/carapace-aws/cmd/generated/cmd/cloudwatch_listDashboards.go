@@ -12,9 +12,11 @@ var cloudwatch_listDashboardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_listDashboardsCmd).Standalone()
+	carapace.Gen(cloudwatch_listDashboardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_listDashboardsCmd).Standalone()
 
-	cloudwatch_listDashboardsCmd.Flags().String("dashboard-name-prefix", "", "If you specify this parameter, only the dashboards with names starting with the specified string are listed.")
-	cloudwatch_listDashboardsCmd.Flags().String("next-token", "", "The token returned by a previous call to indicate that there is more data available.")
+		cloudwatch_listDashboardsCmd.Flags().String("dashboard-name-prefix", "", "If you specify this parameter, only the dashboards with names starting with the specified string are listed.")
+		cloudwatch_listDashboardsCmd.Flags().String("next-token", "", "The token returned by a previous call to indicate that there is more data available.")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_listDashboardsCmd)
 }

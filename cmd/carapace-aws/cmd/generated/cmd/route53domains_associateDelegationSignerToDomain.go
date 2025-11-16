@@ -12,11 +12,13 @@ var route53domains_associateDelegationSignerToDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_associateDelegationSignerToDomainCmd).Standalone()
+	carapace.Gen(route53domains_associateDelegationSignerToDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_associateDelegationSignerToDomainCmd).Standalone()
 
-	route53domains_associateDelegationSignerToDomainCmd.Flags().String("domain-name", "", "The name of the domain.")
-	route53domains_associateDelegationSignerToDomainCmd.Flags().String("signing-attributes", "", "The information about a key, including the algorithm, public key-value, and flags.")
-	route53domains_associateDelegationSignerToDomainCmd.MarkFlagRequired("domain-name")
-	route53domains_associateDelegationSignerToDomainCmd.MarkFlagRequired("signing-attributes")
+		route53domains_associateDelegationSignerToDomainCmd.Flags().String("domain-name", "", "The name of the domain.")
+		route53domains_associateDelegationSignerToDomainCmd.Flags().String("signing-attributes", "", "The information about a key, including the algorithm, public key-value, and flags.")
+		route53domains_associateDelegationSignerToDomainCmd.MarkFlagRequired("domain-name")
+		route53domains_associateDelegationSignerToDomainCmd.MarkFlagRequired("signing-attributes")
+	})
 	route53domainsCmd.AddCommand(route53domains_associateDelegationSignerToDomainCmd)
 }

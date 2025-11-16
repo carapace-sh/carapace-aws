@@ -12,10 +12,12 @@ var lookoutequipment_listLabelGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_listLabelGroupsCmd).Standalone()
+	carapace.Gen(lookoutequipment_listLabelGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_listLabelGroupsCmd).Standalone()
 
-	lookoutequipment_listLabelGroupsCmd.Flags().String("label-group-name-begins-with", "", "The beginning of the name of the label groups to be listed.")
-	lookoutequipment_listLabelGroupsCmd.Flags().String("max-results", "", "Specifies the maximum number of label groups to list.")
-	lookoutequipment_listLabelGroupsCmd.Flags().String("next-token", "", "An opaque pagination token indicating where to continue the listing of label groups.")
+		lookoutequipment_listLabelGroupsCmd.Flags().String("label-group-name-begins-with", "", "The beginning of the name of the label groups to be listed.")
+		lookoutequipment_listLabelGroupsCmd.Flags().String("max-results", "", "Specifies the maximum number of label groups to list.")
+		lookoutequipment_listLabelGroupsCmd.Flags().String("next-token", "", "An opaque pagination token indicating where to continue the listing of label groups.")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_listLabelGroupsCmd)
 }

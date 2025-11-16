@@ -12,11 +12,13 @@ var ds_listIpRoutesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_listIpRoutesCmd).Standalone()
+	carapace.Gen(ds_listIpRoutesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_listIpRoutesCmd).Standalone()
 
-	ds_listIpRoutesCmd.Flags().String("directory-id", "", "Identifier (ID) of the directory for which you want to retrieve the IP addresses.")
-	ds_listIpRoutesCmd.Flags().String("limit", "", "Maximum number of items to return.")
-	ds_listIpRoutesCmd.Flags().String("next-token", "", "The *ListIpRoutes.NextToken* value from a previous call to [ListIpRoutes]().")
-	ds_listIpRoutesCmd.MarkFlagRequired("directory-id")
+		ds_listIpRoutesCmd.Flags().String("directory-id", "", "Identifier (ID) of the directory for which you want to retrieve the IP addresses.")
+		ds_listIpRoutesCmd.Flags().String("limit", "", "Maximum number of items to return.")
+		ds_listIpRoutesCmd.Flags().String("next-token", "", "The *ListIpRoutes.NextToken* value from a previous call to [ListIpRoutes]().")
+		ds_listIpRoutesCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_listIpRoutesCmd)
 }

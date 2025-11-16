@@ -12,9 +12,11 @@ var greengrass_deleteSubscriptionDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_deleteSubscriptionDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_deleteSubscriptionDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_deleteSubscriptionDefinitionCmd).Standalone()
 
-	greengrass_deleteSubscriptionDefinitionCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
-	greengrass_deleteSubscriptionDefinitionCmd.MarkFlagRequired("subscription-definition-id")
+		greengrass_deleteSubscriptionDefinitionCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
+		greengrass_deleteSubscriptionDefinitionCmd.MarkFlagRequired("subscription-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_deleteSubscriptionDefinitionCmd)
 }

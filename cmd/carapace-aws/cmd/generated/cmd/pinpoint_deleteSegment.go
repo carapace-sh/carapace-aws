@@ -12,11 +12,13 @@ var pinpoint_deleteSegmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteSegmentCmd).Standalone()
+	carapace.Gen(pinpoint_deleteSegmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteSegmentCmd).Standalone()
 
-	pinpoint_deleteSegmentCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_deleteSegmentCmd.Flags().String("segment-id", "", "The unique identifier for the segment.")
-	pinpoint_deleteSegmentCmd.MarkFlagRequired("application-id")
-	pinpoint_deleteSegmentCmd.MarkFlagRequired("segment-id")
+		pinpoint_deleteSegmentCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_deleteSegmentCmd.Flags().String("segment-id", "", "The unique identifier for the segment.")
+		pinpoint_deleteSegmentCmd.MarkFlagRequired("application-id")
+		pinpoint_deleteSegmentCmd.MarkFlagRequired("segment-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteSegmentCmd)
 }

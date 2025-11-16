@@ -12,11 +12,13 @@ var redshift_acceptReservedNodeExchangeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_acceptReservedNodeExchangeCmd).Standalone()
+	carapace.Gen(redshift_acceptReservedNodeExchangeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_acceptReservedNodeExchangeCmd).Standalone()
 
-	redshift_acceptReservedNodeExchangeCmd.Flags().String("reserved-node-id", "", "A string representing the node identifier of the DC1 Reserved Node to be exchanged.")
-	redshift_acceptReservedNodeExchangeCmd.Flags().String("target-reserved-node-offering-id", "", "The unique identifier of the DC2 Reserved Node offering to be used for the exchange.")
-	redshift_acceptReservedNodeExchangeCmd.MarkFlagRequired("reserved-node-id")
-	redshift_acceptReservedNodeExchangeCmd.MarkFlagRequired("target-reserved-node-offering-id")
+		redshift_acceptReservedNodeExchangeCmd.Flags().String("reserved-node-id", "", "A string representing the node identifier of the DC1 Reserved Node to be exchanged.")
+		redshift_acceptReservedNodeExchangeCmd.Flags().String("target-reserved-node-offering-id", "", "The unique identifier of the DC2 Reserved Node offering to be used for the exchange.")
+		redshift_acceptReservedNodeExchangeCmd.MarkFlagRequired("reserved-node-id")
+		redshift_acceptReservedNodeExchangeCmd.MarkFlagRequired("target-reserved-node-offering-id")
+	})
 	redshiftCmd.AddCommand(redshift_acceptReservedNodeExchangeCmd)
 }

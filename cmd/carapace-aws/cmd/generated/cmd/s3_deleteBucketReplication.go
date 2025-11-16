@@ -12,10 +12,12 @@ var s3_deleteBucketReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_deleteBucketReplicationCmd).Standalone()
+	carapace.Gen(s3_deleteBucketReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_deleteBucketReplicationCmd).Standalone()
 
-	s3_deleteBucketReplicationCmd.Flags().String("bucket", "", "The bucket name.")
-	s3_deleteBucketReplicationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_deleteBucketReplicationCmd.MarkFlagRequired("bucket")
+		s3_deleteBucketReplicationCmd.Flags().String("bucket", "", "The bucket name.")
+		s3_deleteBucketReplicationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_deleteBucketReplicationCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_deleteBucketReplicationCmd)
 }

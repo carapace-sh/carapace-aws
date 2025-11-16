@@ -12,8 +12,10 @@ var devopsGuru_getCostEstimationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_getCostEstimationCmd).Standalone()
+	carapace.Gen(devopsGuru_getCostEstimationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_getCostEstimationCmd).Standalone()
 
-	devopsGuru_getCostEstimationCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+		devopsGuru_getCostEstimationCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_getCostEstimationCmd)
 }

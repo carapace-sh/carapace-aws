@@ -12,11 +12,13 @@ var lambda_listLayersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_listLayersCmd).Standalone()
+	carapace.Gen(lambda_listLayersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_listLayersCmd).Standalone()
 
-	lambda_listLayersCmd.Flags().String("compatible-architecture", "", "The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).")
-	lambda_listLayersCmd.Flags().String("compatible-runtime", "", "A runtime identifier.")
-	lambda_listLayersCmd.Flags().String("marker", "", "A pagination token returned by a previous call.")
-	lambda_listLayersCmd.Flags().String("max-items", "", "The maximum number of layers to return.")
+		lambda_listLayersCmd.Flags().String("compatible-architecture", "", "The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).")
+		lambda_listLayersCmd.Flags().String("compatible-runtime", "", "A runtime identifier.")
+		lambda_listLayersCmd.Flags().String("marker", "", "A pagination token returned by a previous call.")
+		lambda_listLayersCmd.Flags().String("max-items", "", "The maximum number of layers to return.")
+	})
 	lambdaCmd.AddCommand(lambda_listLayersCmd)
 }

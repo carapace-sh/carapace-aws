@@ -12,11 +12,13 @@ var datazone_getProjectProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getProjectProfileCmd).Standalone()
+	carapace.Gen(datazone_getProjectProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getProjectProfileCmd).Standalone()
 
-	datazone_getProjectProfileCmd.Flags().String("domain-identifier", "", "The ID of the domain.")
-	datazone_getProjectProfileCmd.Flags().String("identifier", "", "The ID of the project profile.")
-	datazone_getProjectProfileCmd.MarkFlagRequired("domain-identifier")
-	datazone_getProjectProfileCmd.MarkFlagRequired("identifier")
+		datazone_getProjectProfileCmd.Flags().String("domain-identifier", "", "The ID of the domain.")
+		datazone_getProjectProfileCmd.Flags().String("identifier", "", "The ID of the project profile.")
+		datazone_getProjectProfileCmd.MarkFlagRequired("domain-identifier")
+		datazone_getProjectProfileCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getProjectProfileCmd)
 }

@@ -12,11 +12,13 @@ var opensearchserverless_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_tagResourceCmd).Standalone()
+	carapace.Gen(opensearchserverless_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_tagResourceCmd).Standalone()
 
-	opensearchserverless_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	opensearchserverless_tagResourceCmd.Flags().String("tags", "", "A list of tags (key-value pairs) to add to the resource.")
-	opensearchserverless_tagResourceCmd.MarkFlagRequired("resource-arn")
-	opensearchserverless_tagResourceCmd.MarkFlagRequired("tags")
+		opensearchserverless_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		opensearchserverless_tagResourceCmd.Flags().String("tags", "", "A list of tags (key-value pairs) to add to the resource.")
+		opensearchserverless_tagResourceCmd.MarkFlagRequired("resource-arn")
+		opensearchserverless_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_tagResourceCmd)
 }

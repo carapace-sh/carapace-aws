@@ -12,11 +12,13 @@ var networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd).Standalone()
+	carapace.Gen(networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd).Standalone()
 
-	networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd.Flags().String("query-id", "", "The identifier for the query.")
-	networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
-	networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd.MarkFlagRequired("query-id")
-	networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd.MarkFlagRequired("scope-id")
+		networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd.Flags().String("query-id", "", "The identifier for the query.")
+		networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
+		networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd.MarkFlagRequired("query-id")
+		networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd.MarkFlagRequired("scope-id")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_stopQueryWorkloadInsightsTopContributorsCmd)
 }

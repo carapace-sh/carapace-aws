@@ -12,9 +12,11 @@ var elbv2_describeAccountLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_describeAccountLimitsCmd).Standalone()
+	carapace.Gen(elbv2_describeAccountLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_describeAccountLimitsCmd).Standalone()
 
-	elbv2_describeAccountLimitsCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	elbv2_describeAccountLimitsCmd.Flags().String("page-size", "", "The maximum number of results to return with this call.")
+		elbv2_describeAccountLimitsCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		elbv2_describeAccountLimitsCmd.Flags().String("page-size", "", "The maximum number of results to return with this call.")
+	})
 	elbv2Cmd.AddCommand(elbv2_describeAccountLimitsCmd)
 }

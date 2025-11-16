@@ -12,7 +12,9 @@ var detectiveCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detectiveCmd).Standalone()
+	carapace.Gen(detectiveCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detectiveCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(detectiveCmd)
 }

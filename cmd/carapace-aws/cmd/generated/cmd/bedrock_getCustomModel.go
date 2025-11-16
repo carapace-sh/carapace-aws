@@ -12,9 +12,11 @@ var bedrock_getCustomModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getCustomModelCmd).Standalone()
+	carapace.Gen(bedrock_getCustomModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getCustomModelCmd).Standalone()
 
-	bedrock_getCustomModelCmd.Flags().String("model-identifier", "", "Name or Amazon Resource Name (ARN) of the custom model.")
-	bedrock_getCustomModelCmd.MarkFlagRequired("model-identifier")
+		bedrock_getCustomModelCmd.Flags().String("model-identifier", "", "Name or Amazon Resource Name (ARN) of the custom model.")
+		bedrock_getCustomModelCmd.MarkFlagRequired("model-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_getCustomModelCmd)
 }

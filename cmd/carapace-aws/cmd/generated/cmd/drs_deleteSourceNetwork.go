@@ -12,9 +12,11 @@ var drs_deleteSourceNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_deleteSourceNetworkCmd).Standalone()
+	carapace.Gen(drs_deleteSourceNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_deleteSourceNetworkCmd).Standalone()
 
-	drs_deleteSourceNetworkCmd.Flags().String("source-network-id", "", "ID of the Source Network to delete.")
-	drs_deleteSourceNetworkCmd.MarkFlagRequired("source-network-id")
+		drs_deleteSourceNetworkCmd.Flags().String("source-network-id", "", "ID of the Source Network to delete.")
+		drs_deleteSourceNetworkCmd.MarkFlagRequired("source-network-id")
+	})
 	drsCmd.AddCommand(drs_deleteSourceNetworkCmd)
 }

@@ -12,11 +12,13 @@ var grafana_deleteWorkspaceApiKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_deleteWorkspaceApiKeyCmd).Standalone()
+	carapace.Gen(grafana_deleteWorkspaceApiKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_deleteWorkspaceApiKeyCmd).Standalone()
 
-	grafana_deleteWorkspaceApiKeyCmd.Flags().String("key-name", "", "The name of the API key to delete.")
-	grafana_deleteWorkspaceApiKeyCmd.Flags().String("workspace-id", "", "The ID of the workspace to delete.")
-	grafana_deleteWorkspaceApiKeyCmd.MarkFlagRequired("key-name")
-	grafana_deleteWorkspaceApiKeyCmd.MarkFlagRequired("workspace-id")
+		grafana_deleteWorkspaceApiKeyCmd.Flags().String("key-name", "", "The name of the API key to delete.")
+		grafana_deleteWorkspaceApiKeyCmd.Flags().String("workspace-id", "", "The ID of the workspace to delete.")
+		grafana_deleteWorkspaceApiKeyCmd.MarkFlagRequired("key-name")
+		grafana_deleteWorkspaceApiKeyCmd.MarkFlagRequired("workspace-id")
+	})
 	grafanaCmd.AddCommand(grafana_deleteWorkspaceApiKeyCmd)
 }

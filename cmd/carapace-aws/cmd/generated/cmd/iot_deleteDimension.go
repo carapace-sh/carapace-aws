@@ -12,9 +12,11 @@ var iot_deleteDimensionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteDimensionCmd).Standalone()
+	carapace.Gen(iot_deleteDimensionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteDimensionCmd).Standalone()
 
-	iot_deleteDimensionCmd.Flags().String("name", "", "The unique identifier for the dimension that you want to delete.")
-	iot_deleteDimensionCmd.MarkFlagRequired("name")
+		iot_deleteDimensionCmd.Flags().String("name", "", "The unique identifier for the dimension that you want to delete.")
+		iot_deleteDimensionCmd.MarkFlagRequired("name")
+	})
 	iotCmd.AddCommand(iot_deleteDimensionCmd)
 }

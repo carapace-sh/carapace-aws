@@ -12,11 +12,13 @@ var storagegateway_setLocalConsolePasswordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_setLocalConsolePasswordCmd).Standalone()
+	carapace.Gen(storagegateway_setLocalConsolePasswordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_setLocalConsolePasswordCmd).Standalone()
 
-	storagegateway_setLocalConsolePasswordCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_setLocalConsolePasswordCmd.Flags().String("local-console-password", "", "The password you want to set for your VM local console.")
-	storagegateway_setLocalConsolePasswordCmd.MarkFlagRequired("gateway-arn")
-	storagegateway_setLocalConsolePasswordCmd.MarkFlagRequired("local-console-password")
+		storagegateway_setLocalConsolePasswordCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_setLocalConsolePasswordCmd.Flags().String("local-console-password", "", "The password you want to set for your VM local console.")
+		storagegateway_setLocalConsolePasswordCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_setLocalConsolePasswordCmd.MarkFlagRequired("local-console-password")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_setLocalConsolePasswordCmd)
 }

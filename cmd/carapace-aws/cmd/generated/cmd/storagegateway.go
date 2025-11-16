@@ -12,7 +12,9 @@ var storagegatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegatewayCmd).Standalone()
+	carapace.Gen(storagegatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegatewayCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(storagegatewayCmd)
 }

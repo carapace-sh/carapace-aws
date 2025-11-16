@@ -12,9 +12,11 @@ var es_rejectInboundCrossClusterSearchConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_rejectInboundCrossClusterSearchConnectionCmd).Standalone()
+	carapace.Gen(es_rejectInboundCrossClusterSearchConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_rejectInboundCrossClusterSearchConnectionCmd).Standalone()
 
-	es_rejectInboundCrossClusterSearchConnectionCmd.Flags().String("cross-cluster-search-connection-id", "", "The id of the inbound connection that you want to reject.")
-	es_rejectInboundCrossClusterSearchConnectionCmd.MarkFlagRequired("cross-cluster-search-connection-id")
+		es_rejectInboundCrossClusterSearchConnectionCmd.Flags().String("cross-cluster-search-connection-id", "", "The id of the inbound connection that you want to reject.")
+		es_rejectInboundCrossClusterSearchConnectionCmd.MarkFlagRequired("cross-cluster-search-connection-id")
+	})
 	esCmd.AddCommand(es_rejectInboundCrossClusterSearchConnectionCmd)
 }

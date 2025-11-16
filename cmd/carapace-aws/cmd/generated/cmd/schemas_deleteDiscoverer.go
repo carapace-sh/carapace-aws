@@ -12,9 +12,11 @@ var schemas_deleteDiscovererCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_deleteDiscovererCmd).Standalone()
+	carapace.Gen(schemas_deleteDiscovererCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_deleteDiscovererCmd).Standalone()
 
-	schemas_deleteDiscovererCmd.Flags().String("discoverer-id", "", "The ID of the discoverer.")
-	schemas_deleteDiscovererCmd.MarkFlagRequired("discoverer-id")
+		schemas_deleteDiscovererCmd.Flags().String("discoverer-id", "", "The ID of the discoverer.")
+		schemas_deleteDiscovererCmd.MarkFlagRequired("discoverer-id")
+	})
 	schemasCmd.AddCommand(schemas_deleteDiscovererCmd)
 }

@@ -12,12 +12,14 @@ var applicationInsights_listLogPatternSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_listLogPatternSetsCmd).Standalone()
+	carapace.Gen(applicationInsights_listLogPatternSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_listLogPatternSetsCmd).Standalone()
 
-	applicationInsights_listLogPatternSetsCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the resource group owner.")
-	applicationInsights_listLogPatternSetsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	applicationInsights_listLogPatternSetsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
-	applicationInsights_listLogPatternSetsCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
-	applicationInsights_listLogPatternSetsCmd.MarkFlagRequired("resource-group-name")
+		applicationInsights_listLogPatternSetsCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the resource group owner.")
+		applicationInsights_listLogPatternSetsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		applicationInsights_listLogPatternSetsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		applicationInsights_listLogPatternSetsCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
+		applicationInsights_listLogPatternSetsCmd.MarkFlagRequired("resource-group-name")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_listLogPatternSetsCmd)
 }

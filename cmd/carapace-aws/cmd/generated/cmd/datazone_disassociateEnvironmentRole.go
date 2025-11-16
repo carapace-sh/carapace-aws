@@ -12,13 +12,15 @@ var datazone_disassociateEnvironmentRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_disassociateEnvironmentRoleCmd).Standalone()
+	carapace.Gen(datazone_disassociateEnvironmentRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_disassociateEnvironmentRoleCmd).Standalone()
 
-	datazone_disassociateEnvironmentRoleCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which an environment role is disassociated.")
-	datazone_disassociateEnvironmentRoleCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
-	datazone_disassociateEnvironmentRoleCmd.Flags().String("environment-role-arn", "", "The ARN of the environment role.")
-	datazone_disassociateEnvironmentRoleCmd.MarkFlagRequired("domain-identifier")
-	datazone_disassociateEnvironmentRoleCmd.MarkFlagRequired("environment-identifier")
-	datazone_disassociateEnvironmentRoleCmd.MarkFlagRequired("environment-role-arn")
+		datazone_disassociateEnvironmentRoleCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which an environment role is disassociated.")
+		datazone_disassociateEnvironmentRoleCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
+		datazone_disassociateEnvironmentRoleCmd.Flags().String("environment-role-arn", "", "The ARN of the environment role.")
+		datazone_disassociateEnvironmentRoleCmd.MarkFlagRequired("domain-identifier")
+		datazone_disassociateEnvironmentRoleCmd.MarkFlagRequired("environment-identifier")
+		datazone_disassociateEnvironmentRoleCmd.MarkFlagRequired("environment-role-arn")
+	})
 	datazoneCmd.AddCommand(datazone_disassociateEnvironmentRoleCmd)
 }

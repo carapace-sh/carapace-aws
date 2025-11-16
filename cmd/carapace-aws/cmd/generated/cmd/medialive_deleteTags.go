@@ -12,11 +12,13 @@ var medialive_deleteTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteTagsCmd).Standalone()
+	carapace.Gen(medialive_deleteTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteTagsCmd).Standalone()
 
-	medialive_deleteTagsCmd.Flags().String("resource-arn", "", "")
-	medialive_deleteTagsCmd.Flags().String("tag-keys", "", "An array of tag keys to delete")
-	medialive_deleteTagsCmd.MarkFlagRequired("resource-arn")
-	medialive_deleteTagsCmd.MarkFlagRequired("tag-keys")
+		medialive_deleteTagsCmd.Flags().String("resource-arn", "", "")
+		medialive_deleteTagsCmd.Flags().String("tag-keys", "", "An array of tag keys to delete")
+		medialive_deleteTagsCmd.MarkFlagRequired("resource-arn")
+		medialive_deleteTagsCmd.MarkFlagRequired("tag-keys")
+	})
 	medialiveCmd.AddCommand(medialive_deleteTagsCmd)
 }

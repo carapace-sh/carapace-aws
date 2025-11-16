@@ -12,9 +12,11 @@ var synthetics_getGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_getGroupCmd).Standalone()
+	carapace.Gen(synthetics_getGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_getGroupCmd).Standalone()
 
-	synthetics_getGroupCmd.Flags().String("group-identifier", "", "Specifies the group to return information for.")
-	synthetics_getGroupCmd.MarkFlagRequired("group-identifier")
+		synthetics_getGroupCmd.Flags().String("group-identifier", "", "Specifies the group to return information for.")
+		synthetics_getGroupCmd.MarkFlagRequired("group-identifier")
+	})
 	syntheticsCmd.AddCommand(synthetics_getGroupCmd)
 }

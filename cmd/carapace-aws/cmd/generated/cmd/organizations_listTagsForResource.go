@@ -12,10 +12,12 @@ var organizations_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listTagsForResourceCmd).Standalone()
+	carapace.Gen(organizations_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listTagsForResourceCmd).Standalone()
 
-	organizations_listTagsForResourceCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
-	organizations_listTagsForResourceCmd.Flags().String("resource-id", "", "The ID of the resource with the tags to list.")
-	organizations_listTagsForResourceCmd.MarkFlagRequired("resource-id")
+		organizations_listTagsForResourceCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listTagsForResourceCmd.Flags().String("resource-id", "", "The ID of the resource with the tags to list.")
+		organizations_listTagsForResourceCmd.MarkFlagRequired("resource-id")
+	})
 	organizationsCmd.AddCommand(organizations_listTagsForResourceCmd)
 }

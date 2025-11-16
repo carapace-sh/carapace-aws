@@ -12,9 +12,11 @@ var mpa_getApprovalTeamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_getApprovalTeamCmd).Standalone()
+	carapace.Gen(mpa_getApprovalTeamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_getApprovalTeamCmd).Standalone()
 
-	mpa_getApprovalTeamCmd.Flags().String("arn", "", "Amazon Resource Name (ARN) for the team.")
-	mpa_getApprovalTeamCmd.MarkFlagRequired("arn")
+		mpa_getApprovalTeamCmd.Flags().String("arn", "", "Amazon Resource Name (ARN) for the team.")
+		mpa_getApprovalTeamCmd.MarkFlagRequired("arn")
+	})
 	mpaCmd.AddCommand(mpa_getApprovalTeamCmd)
 }

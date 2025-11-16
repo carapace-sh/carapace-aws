@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_createRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_createRegistrationCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_createRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_createRegistrationCmd).Standalone()
 
-	pinpointSmsVoiceV2_createRegistrationCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	pinpointSmsVoiceV2_createRegistrationCmd.Flags().String("registration-type", "", "The type of registration form to create.")
-	pinpointSmsVoiceV2_createRegistrationCmd.Flags().String("tags", "", "An array of tags (key and value pairs) to associate with the registration.")
-	pinpointSmsVoiceV2_createRegistrationCmd.MarkFlagRequired("registration-type")
+		pinpointSmsVoiceV2_createRegistrationCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		pinpointSmsVoiceV2_createRegistrationCmd.Flags().String("registration-type", "", "The type of registration form to create.")
+		pinpointSmsVoiceV2_createRegistrationCmd.Flags().String("tags", "", "An array of tags (key and value pairs) to associate with the registration.")
+		pinpointSmsVoiceV2_createRegistrationCmd.MarkFlagRequired("registration-type")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_createRegistrationCmd)
 }

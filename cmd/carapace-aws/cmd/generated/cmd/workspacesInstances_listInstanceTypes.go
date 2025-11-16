@@ -12,9 +12,11 @@ var workspacesInstances_listInstanceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_listInstanceTypesCmd).Standalone()
+	carapace.Gen(workspacesInstances_listInstanceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_listInstanceTypesCmd).Standalone()
 
-	workspacesInstances_listInstanceTypesCmd.Flags().String("max-results", "", "Maximum number of instance types to return in a single API call.")
-	workspacesInstances_listInstanceTypesCmd.Flags().String("next-token", "", "Pagination token for retrieving subsequent pages of instance type results.")
+		workspacesInstances_listInstanceTypesCmd.Flags().String("max-results", "", "Maximum number of instance types to return in a single API call.")
+		workspacesInstances_listInstanceTypesCmd.Flags().String("next-token", "", "Pagination token for retrieving subsequent pages of instance type results.")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_listInstanceTypesCmd)
 }

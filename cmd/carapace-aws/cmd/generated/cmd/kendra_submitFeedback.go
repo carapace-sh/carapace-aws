@@ -12,13 +12,15 @@ var kendra_submitFeedbackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_submitFeedbackCmd).Standalone()
+	carapace.Gen(kendra_submitFeedbackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_submitFeedbackCmd).Standalone()
 
-	kendra_submitFeedbackCmd.Flags().String("click-feedback-items", "", "Tells Amazon Kendra that a particular search result link was chosen by the user.")
-	kendra_submitFeedbackCmd.Flags().String("index-id", "", "The identifier of the index that was queried.")
-	kendra_submitFeedbackCmd.Flags().String("query-id", "", "The identifier of the specific query for which you are submitting feedback.")
-	kendra_submitFeedbackCmd.Flags().String("relevance-feedback-items", "", "Provides Amazon Kendra with relevant or not relevant feedback for whether a particular item was relevant to the search.")
-	kendra_submitFeedbackCmd.MarkFlagRequired("index-id")
-	kendra_submitFeedbackCmd.MarkFlagRequired("query-id")
+		kendra_submitFeedbackCmd.Flags().String("click-feedback-items", "", "Tells Amazon Kendra that a particular search result link was chosen by the user.")
+		kendra_submitFeedbackCmd.Flags().String("index-id", "", "The identifier of the index that was queried.")
+		kendra_submitFeedbackCmd.Flags().String("query-id", "", "The identifier of the specific query for which you are submitting feedback.")
+		kendra_submitFeedbackCmd.Flags().String("relevance-feedback-items", "", "Provides Amazon Kendra with relevant or not relevant feedback for whether a particular item was relevant to the search.")
+		kendra_submitFeedbackCmd.MarkFlagRequired("index-id")
+		kendra_submitFeedbackCmd.MarkFlagRequired("query-id")
+	})
 	kendraCmd.AddCommand(kendra_submitFeedbackCmd)
 }

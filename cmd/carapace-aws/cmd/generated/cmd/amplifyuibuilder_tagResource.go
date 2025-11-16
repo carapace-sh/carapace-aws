@@ -12,11 +12,13 @@ var amplifyuibuilder_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_tagResourceCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_tagResourceCmd).Standalone()
 
-	amplifyuibuilder_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) to use to tag a resource.")
-	amplifyuibuilder_tagResourceCmd.Flags().String("tags", "", "A list of tag key value pairs for a specified Amazon Resource Name (ARN).")
-	amplifyuibuilder_tagResourceCmd.MarkFlagRequired("resource-arn")
-	amplifyuibuilder_tagResourceCmd.MarkFlagRequired("tags")
+		amplifyuibuilder_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) to use to tag a resource.")
+		amplifyuibuilder_tagResourceCmd.Flags().String("tags", "", "A list of tag key value pairs for a specified Amazon Resource Name (ARN).")
+		amplifyuibuilder_tagResourceCmd.MarkFlagRequired("resource-arn")
+		amplifyuibuilder_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_tagResourceCmd)
 }

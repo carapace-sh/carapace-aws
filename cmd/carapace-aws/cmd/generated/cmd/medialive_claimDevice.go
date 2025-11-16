@@ -12,8 +12,10 @@ var medialive_claimDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_claimDeviceCmd).Standalone()
+	carapace.Gen(medialive_claimDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_claimDeviceCmd).Standalone()
 
-	medialive_claimDeviceCmd.Flags().String("id", "", "The id of the device you want to claim.")
+		medialive_claimDeviceCmd.Flags().String("id", "", "The id of the device you want to claim.")
+	})
 	medialiveCmd.AddCommand(medialive_claimDeviceCmd)
 }

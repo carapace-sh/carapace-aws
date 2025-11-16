@@ -12,9 +12,11 @@ var cloudtrail_deregisterOrganizationDelegatedAdminCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_deregisterOrganizationDelegatedAdminCmd).Standalone()
+	carapace.Gen(cloudtrail_deregisterOrganizationDelegatedAdminCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_deregisterOrganizationDelegatedAdminCmd).Standalone()
 
-	cloudtrail_deregisterOrganizationDelegatedAdminCmd.Flags().String("delegated-admin-account-id", "", "A delegated administrator account ID.")
-	cloudtrail_deregisterOrganizationDelegatedAdminCmd.MarkFlagRequired("delegated-admin-account-id")
+		cloudtrail_deregisterOrganizationDelegatedAdminCmd.Flags().String("delegated-admin-account-id", "", "A delegated administrator account ID.")
+		cloudtrail_deregisterOrganizationDelegatedAdminCmd.MarkFlagRequired("delegated-admin-account-id")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_deregisterOrganizationDelegatedAdminCmd)
 }

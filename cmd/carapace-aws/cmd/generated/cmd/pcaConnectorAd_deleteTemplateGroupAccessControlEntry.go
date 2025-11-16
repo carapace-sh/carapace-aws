@@ -12,11 +12,13 @@ var pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd).Standalone()
+	carapace.Gen(pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd).Standalone()
 
-	pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd.Flags().String("group-security-identifier", "", "Security identifier (SID) of the group object from Active Directory.")
-	pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd.Flags().String("template-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).")
-	pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd.MarkFlagRequired("group-security-identifier")
-	pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd.MarkFlagRequired("template-arn")
+		pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd.Flags().String("group-security-identifier", "", "Security identifier (SID) of the group object from Active Directory.")
+		pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd.Flags().String("template-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html).")
+		pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd.MarkFlagRequired("group-security-identifier")
+		pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd.MarkFlagRequired("template-arn")
+	})
 	pcaConnectorAdCmd.AddCommand(pcaConnectorAd_deleteTemplateGroupAccessControlEntryCmd)
 }

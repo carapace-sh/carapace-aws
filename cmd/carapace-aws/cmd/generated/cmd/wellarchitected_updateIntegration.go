@@ -12,13 +12,15 @@ var wellarchitected_updateIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_updateIntegrationCmd).Standalone()
+	carapace.Gen(wellarchitected_updateIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_updateIntegrationCmd).Standalone()
 
-	wellarchitected_updateIntegrationCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_updateIntegrationCmd.Flags().String("integrating-service", "", "Which integrated service to update.")
-	wellarchitected_updateIntegrationCmd.Flags().String("workload-id", "", "")
-	wellarchitected_updateIntegrationCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_updateIntegrationCmd.MarkFlagRequired("integrating-service")
-	wellarchitected_updateIntegrationCmd.MarkFlagRequired("workload-id")
+		wellarchitected_updateIntegrationCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_updateIntegrationCmd.Flags().String("integrating-service", "", "Which integrated service to update.")
+		wellarchitected_updateIntegrationCmd.Flags().String("workload-id", "", "")
+		wellarchitected_updateIntegrationCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_updateIntegrationCmd.MarkFlagRequired("integrating-service")
+		wellarchitected_updateIntegrationCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_updateIntegrationCmd)
 }

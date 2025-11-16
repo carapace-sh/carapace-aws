@@ -12,10 +12,12 @@ var rds_switchoverBlueGreenDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_switchoverBlueGreenDeploymentCmd).Standalone()
+	carapace.Gen(rds_switchoverBlueGreenDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_switchoverBlueGreenDeploymentCmd).Standalone()
 
-	rds_switchoverBlueGreenDeploymentCmd.Flags().String("blue-green-deployment-identifier", "", "The resource ID of the blue/green deployment.")
-	rds_switchoverBlueGreenDeploymentCmd.Flags().String("switchover-timeout", "", "The amount of time, in seconds, for the switchover to complete.")
-	rds_switchoverBlueGreenDeploymentCmd.MarkFlagRequired("blue-green-deployment-identifier")
+		rds_switchoverBlueGreenDeploymentCmd.Flags().String("blue-green-deployment-identifier", "", "The resource ID of the blue/green deployment.")
+		rds_switchoverBlueGreenDeploymentCmd.Flags().String("switchover-timeout", "", "The amount of time, in seconds, for the switchover to complete.")
+		rds_switchoverBlueGreenDeploymentCmd.MarkFlagRequired("blue-green-deployment-identifier")
+	})
 	rdsCmd.AddCommand(rds_switchoverBlueGreenDeploymentCmd)
 }

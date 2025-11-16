@@ -12,13 +12,15 @@ var networkflowmonitor_getQueryResultsMonitorTopContributorsCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_getQueryResultsMonitorTopContributorsCmd).Standalone()
+	carapace.Gen(networkflowmonitor_getQueryResultsMonitorTopContributorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_getQueryResultsMonitorTopContributorsCmd).Standalone()
 
-	networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.Flags().String("max-results", "", "The number of query results that you want to return with this call.")
-	networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.Flags().String("monitor-name", "", "The name of the monitor.")
-	networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.Flags().String("query-id", "", "The identifier for the query.")
-	networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.MarkFlagRequired("monitor-name")
-	networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.MarkFlagRequired("query-id")
+		networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.Flags().String("max-results", "", "The number of query results that you want to return with this call.")
+		networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.Flags().String("monitor-name", "", "The name of the monitor.")
+		networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.Flags().String("query-id", "", "The identifier for the query.")
+		networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.MarkFlagRequired("monitor-name")
+		networkflowmonitor_getQueryResultsMonitorTopContributorsCmd.MarkFlagRequired("query-id")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_getQueryResultsMonitorTopContributorsCmd)
 }

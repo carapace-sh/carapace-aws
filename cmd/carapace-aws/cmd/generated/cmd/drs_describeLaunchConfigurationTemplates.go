@@ -12,10 +12,12 @@ var drs_describeLaunchConfigurationTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_describeLaunchConfigurationTemplatesCmd).Standalone()
+	carapace.Gen(drs_describeLaunchConfigurationTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_describeLaunchConfigurationTemplatesCmd).Standalone()
 
-	drs_describeLaunchConfigurationTemplatesCmd.Flags().String("launch-configuration-template-ids", "", "Request to filter Launch Configuration Templates list by Launch Configuration Template ID.")
-	drs_describeLaunchConfigurationTemplatesCmd.Flags().String("max-results", "", "Maximum results to be returned in DescribeLaunchConfigurationTemplates.")
-	drs_describeLaunchConfigurationTemplatesCmd.Flags().String("next-token", "", "The token of the next Launch Configuration Template to retrieve.")
+		drs_describeLaunchConfigurationTemplatesCmd.Flags().String("launch-configuration-template-ids", "", "Request to filter Launch Configuration Templates list by Launch Configuration Template ID.")
+		drs_describeLaunchConfigurationTemplatesCmd.Flags().String("max-results", "", "Maximum results to be returned in DescribeLaunchConfigurationTemplates.")
+		drs_describeLaunchConfigurationTemplatesCmd.Flags().String("next-token", "", "The token of the next Launch Configuration Template to retrieve.")
+	})
 	drsCmd.AddCommand(drs_describeLaunchConfigurationTemplatesCmd)
 }

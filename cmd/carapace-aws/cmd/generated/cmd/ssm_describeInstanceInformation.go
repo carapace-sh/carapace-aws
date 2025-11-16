@@ -12,11 +12,13 @@ var ssm_describeInstanceInformationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeInstanceInformationCmd).Standalone()
+	carapace.Gen(ssm_describeInstanceInformationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeInstanceInformationCmd).Standalone()
 
-	ssm_describeInstanceInformationCmd.Flags().String("filters", "", "One or more filters.")
-	ssm_describeInstanceInformationCmd.Flags().String("instance-information-filter-list", "", "This is a legacy method.")
-	ssm_describeInstanceInformationCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_describeInstanceInformationCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_describeInstanceInformationCmd.Flags().String("filters", "", "One or more filters.")
+		ssm_describeInstanceInformationCmd.Flags().String("instance-information-filter-list", "", "This is a legacy method.")
+		ssm_describeInstanceInformationCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_describeInstanceInformationCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	ssmCmd.AddCommand(ssm_describeInstanceInformationCmd)
 }

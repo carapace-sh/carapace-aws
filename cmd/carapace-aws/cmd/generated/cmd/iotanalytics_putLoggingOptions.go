@@ -12,9 +12,11 @@ var iotanalytics_putLoggingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_putLoggingOptionsCmd).Standalone()
+	carapace.Gen(iotanalytics_putLoggingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_putLoggingOptionsCmd).Standalone()
 
-	iotanalytics_putLoggingOptionsCmd.Flags().String("logging-options", "", "The new values of the IoT Analytics logging options.")
-	iotanalytics_putLoggingOptionsCmd.MarkFlagRequired("logging-options")
+		iotanalytics_putLoggingOptionsCmd.Flags().String("logging-options", "", "The new values of the IoT Analytics logging options.")
+		iotanalytics_putLoggingOptionsCmd.MarkFlagRequired("logging-options")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_putLoggingOptionsCmd)
 }

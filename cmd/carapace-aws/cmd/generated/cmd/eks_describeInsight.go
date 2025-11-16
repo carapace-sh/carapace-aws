@@ -12,11 +12,13 @@ var eks_describeInsightCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_describeInsightCmd).Standalone()
+	carapace.Gen(eks_describeInsightCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_describeInsightCmd).Standalone()
 
-	eks_describeInsightCmd.Flags().String("cluster-name", "", "The name of the cluster to describe the insight for.")
-	eks_describeInsightCmd.Flags().String("id", "", "The identity of the insight to describe.")
-	eks_describeInsightCmd.MarkFlagRequired("cluster-name")
-	eks_describeInsightCmd.MarkFlagRequired("id")
+		eks_describeInsightCmd.Flags().String("cluster-name", "", "The name of the cluster to describe the insight for.")
+		eks_describeInsightCmd.Flags().String("id", "", "The identity of the insight to describe.")
+		eks_describeInsightCmd.MarkFlagRequired("cluster-name")
+		eks_describeInsightCmd.MarkFlagRequired("id")
+	})
 	eksCmd.AddCommand(eks_describeInsightCmd)
 }

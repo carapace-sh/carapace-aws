@@ -12,9 +12,11 @@ var ssm_getMaintenanceWindowExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getMaintenanceWindowExecutionCmd).Standalone()
+	carapace.Gen(ssm_getMaintenanceWindowExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getMaintenanceWindowExecutionCmd).Standalone()
 
-	ssm_getMaintenanceWindowExecutionCmd.Flags().String("window-execution-id", "", "The ID of the maintenance window execution that includes the task.")
-	ssm_getMaintenanceWindowExecutionCmd.MarkFlagRequired("window-execution-id")
+		ssm_getMaintenanceWindowExecutionCmd.Flags().String("window-execution-id", "", "The ID of the maintenance window execution that includes the task.")
+		ssm_getMaintenanceWindowExecutionCmd.MarkFlagRequired("window-execution-id")
+	})
 	ssmCmd.AddCommand(ssm_getMaintenanceWindowExecutionCmd)
 }

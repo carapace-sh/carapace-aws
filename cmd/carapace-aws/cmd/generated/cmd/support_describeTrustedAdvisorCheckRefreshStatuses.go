@@ -12,9 +12,11 @@ var support_describeTrustedAdvisorCheckRefreshStatusesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(support_describeTrustedAdvisorCheckRefreshStatusesCmd).Standalone()
+	carapace.Gen(support_describeTrustedAdvisorCheckRefreshStatusesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(support_describeTrustedAdvisorCheckRefreshStatusesCmd).Standalone()
 
-	support_describeTrustedAdvisorCheckRefreshStatusesCmd.Flags().String("check-ids", "", "The IDs of the Trusted Advisor checks to get the status.")
-	support_describeTrustedAdvisorCheckRefreshStatusesCmd.MarkFlagRequired("check-ids")
+		support_describeTrustedAdvisorCheckRefreshStatusesCmd.Flags().String("check-ids", "", "The IDs of the Trusted Advisor checks to get the status.")
+		support_describeTrustedAdvisorCheckRefreshStatusesCmd.MarkFlagRequired("check-ids")
+	})
 	supportCmd.AddCommand(support_describeTrustedAdvisorCheckRefreshStatusesCmd)
 }

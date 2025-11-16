@@ -12,9 +12,11 @@ var route53RecoveryControlConfig_listClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_listClustersCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_listClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_listClustersCmd).Standalone()
 
-	route53RecoveryControlConfig_listClustersCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
-	route53RecoveryControlConfig_listClustersCmd.Flags().String("next-token", "", "The token that identifies which batch of results you want to see.")
+		route53RecoveryControlConfig_listClustersCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
+		route53RecoveryControlConfig_listClustersCmd.Flags().String("next-token", "", "The token that identifies which batch of results you want to see.")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_listClustersCmd)
 }

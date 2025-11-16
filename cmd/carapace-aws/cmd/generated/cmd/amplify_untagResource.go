@@ -12,11 +12,13 @@ var amplify_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_untagResourceCmd).Standalone()
+	carapace.Gen(amplify_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_untagResourceCmd).Standalone()
 
-	amplify_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) to use to untag a resource.")
-	amplify_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to use to untag a resource.")
-	amplify_untagResourceCmd.MarkFlagRequired("resource-arn")
-	amplify_untagResourceCmd.MarkFlagRequired("tag-keys")
+		amplify_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) to use to untag a resource.")
+		amplify_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys to use to untag a resource.")
+		amplify_untagResourceCmd.MarkFlagRequired("resource-arn")
+		amplify_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	amplifyCmd.AddCommand(amplify_untagResourceCmd)
 }

@@ -12,11 +12,13 @@ var iotwireless_associateWirelessGatewayWithCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_associateWirelessGatewayWithCertificateCmd).Standalone()
+	carapace.Gen(iotwireless_associateWirelessGatewayWithCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_associateWirelessGatewayWithCertificateCmd).Standalone()
 
-	iotwireless_associateWirelessGatewayWithCertificateCmd.Flags().String("id", "", "The ID of the resource to update.")
-	iotwireless_associateWirelessGatewayWithCertificateCmd.Flags().String("iot-certificate-id", "", "The ID of the certificate to associate with the wireless gateway.")
-	iotwireless_associateWirelessGatewayWithCertificateCmd.MarkFlagRequired("id")
-	iotwireless_associateWirelessGatewayWithCertificateCmd.MarkFlagRequired("iot-certificate-id")
+		iotwireless_associateWirelessGatewayWithCertificateCmd.Flags().String("id", "", "The ID of the resource to update.")
+		iotwireless_associateWirelessGatewayWithCertificateCmd.Flags().String("iot-certificate-id", "", "The ID of the certificate to associate with the wireless gateway.")
+		iotwireless_associateWirelessGatewayWithCertificateCmd.MarkFlagRequired("id")
+		iotwireless_associateWirelessGatewayWithCertificateCmd.MarkFlagRequired("iot-certificate-id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_associateWirelessGatewayWithCertificateCmd)
 }

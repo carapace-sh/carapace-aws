@@ -12,9 +12,11 @@ var iam_createAccountAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_createAccountAliasCmd).Standalone()
+	carapace.Gen(iam_createAccountAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_createAccountAliasCmd).Standalone()
 
-	iam_createAccountAliasCmd.Flags().String("account-alias", "", "The account alias to create.")
-	iam_createAccountAliasCmd.MarkFlagRequired("account-alias")
+		iam_createAccountAliasCmd.Flags().String("account-alias", "", "The account alias to create.")
+		iam_createAccountAliasCmd.MarkFlagRequired("account-alias")
+	})
 	iamCmd.AddCommand(iam_createAccountAliasCmd)
 }

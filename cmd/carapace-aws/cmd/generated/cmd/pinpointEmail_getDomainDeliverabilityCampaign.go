@@ -12,9 +12,11 @@ var pinpointEmail_getDomainDeliverabilityCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getDomainDeliverabilityCampaignCmd).Standalone()
+	carapace.Gen(pinpointEmail_getDomainDeliverabilityCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getDomainDeliverabilityCampaignCmd).Standalone()
 
-	pinpointEmail_getDomainDeliverabilityCampaignCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
-	pinpointEmail_getDomainDeliverabilityCampaignCmd.MarkFlagRequired("campaign-id")
+		pinpointEmail_getDomainDeliverabilityCampaignCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
+		pinpointEmail_getDomainDeliverabilityCampaignCmd.MarkFlagRequired("campaign-id")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getDomainDeliverabilityCampaignCmd)
 }

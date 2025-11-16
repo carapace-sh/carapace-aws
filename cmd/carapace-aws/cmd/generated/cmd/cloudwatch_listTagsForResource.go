@@ -12,9 +12,11 @@ var cloudwatch_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_listTagsForResourceCmd).Standalone()
+	carapace.Gen(cloudwatch_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_listTagsForResourceCmd).Standalone()
 
-	cloudwatch_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch resource that you want to view tags for.")
-	cloudwatch_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		cloudwatch_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch resource that you want to view tags for.")
+		cloudwatch_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_listTagsForResourceCmd)
 }

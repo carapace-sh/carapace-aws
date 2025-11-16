@@ -12,9 +12,11 @@ var ivs_batchGetChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_batchGetChannelCmd).Standalone()
+	carapace.Gen(ivs_batchGetChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_batchGetChannelCmd).Standalone()
 
-	ivs_batchGetChannelCmd.Flags().String("arns", "", "Array of ARNs, one per channel.")
-	ivs_batchGetChannelCmd.MarkFlagRequired("arns")
+		ivs_batchGetChannelCmd.Flags().String("arns", "", "Array of ARNs, one per channel.")
+		ivs_batchGetChannelCmd.MarkFlagRequired("arns")
+	})
 	ivsCmd.AddCommand(ivs_batchGetChannelCmd)
 }

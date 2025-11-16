@@ -12,10 +12,12 @@ var account_putAccountNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(account_putAccountNameCmd).Standalone()
+	carapace.Gen(account_putAccountNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(account_putAccountNameCmd).Standalone()
 
-	account_putAccountNameCmd.Flags().String("account-id", "", "Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
-	account_putAccountNameCmd.Flags().String("account-name", "", "The name of the account.")
-	account_putAccountNameCmd.MarkFlagRequired("account-name")
+		account_putAccountNameCmd.Flags().String("account-id", "", "Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
+		account_putAccountNameCmd.Flags().String("account-name", "", "The name of the account.")
+		account_putAccountNameCmd.MarkFlagRequired("account-name")
+	})
 	accountCmd.AddCommand(account_putAccountNameCmd)
 }

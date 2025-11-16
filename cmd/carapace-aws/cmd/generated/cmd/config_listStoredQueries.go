@@ -12,9 +12,11 @@ var config_listStoredQueriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_listStoredQueriesCmd).Standalone()
+	carapace.Gen(config_listStoredQueriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_listStoredQueriesCmd).Standalone()
 
-	config_listStoredQueriesCmd.Flags().String("max-results", "", "The maximum number of results to be returned with a single call.")
-	config_listStoredQueriesCmd.Flags().String("next-token", "", "The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.")
+		config_listStoredQueriesCmd.Flags().String("max-results", "", "The maximum number of results to be returned with a single call.")
+		config_listStoredQueriesCmd.Flags().String("next-token", "", "The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.")
+	})
 	configCmd.AddCommand(config_listStoredQueriesCmd)
 }

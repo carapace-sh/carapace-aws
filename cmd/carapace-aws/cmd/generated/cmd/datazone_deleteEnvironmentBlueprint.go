@@ -12,11 +12,13 @@ var datazone_deleteEnvironmentBlueprintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteEnvironmentBlueprintCmd).Standalone()
+	carapace.Gen(datazone_deleteEnvironmentBlueprintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteEnvironmentBlueprintCmd).Standalone()
 
-	datazone_deleteEnvironmentBlueprintCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the blueprint is deleted.")
-	datazone_deleteEnvironmentBlueprintCmd.Flags().String("identifier", "", "The ID of the blueprint that is deleted.")
-	datazone_deleteEnvironmentBlueprintCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteEnvironmentBlueprintCmd.MarkFlagRequired("identifier")
+		datazone_deleteEnvironmentBlueprintCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the blueprint is deleted.")
+		datazone_deleteEnvironmentBlueprintCmd.Flags().String("identifier", "", "The ID of the blueprint that is deleted.")
+		datazone_deleteEnvironmentBlueprintCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteEnvironmentBlueprintCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteEnvironmentBlueprintCmd)
 }

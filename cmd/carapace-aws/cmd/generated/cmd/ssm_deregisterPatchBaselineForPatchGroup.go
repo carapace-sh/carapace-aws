@@ -12,11 +12,13 @@ var ssm_deregisterPatchBaselineForPatchGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_deregisterPatchBaselineForPatchGroupCmd).Standalone()
+	carapace.Gen(ssm_deregisterPatchBaselineForPatchGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_deregisterPatchBaselineForPatchGroupCmd).Standalone()
 
-	ssm_deregisterPatchBaselineForPatchGroupCmd.Flags().String("baseline-id", "", "The ID of the patch baseline to deregister the patch group from.")
-	ssm_deregisterPatchBaselineForPatchGroupCmd.Flags().String("patch-group", "", "The name of the patch group that should be deregistered from the patch baseline.")
-	ssm_deregisterPatchBaselineForPatchGroupCmd.MarkFlagRequired("baseline-id")
-	ssm_deregisterPatchBaselineForPatchGroupCmd.MarkFlagRequired("patch-group")
+		ssm_deregisterPatchBaselineForPatchGroupCmd.Flags().String("baseline-id", "", "The ID of the patch baseline to deregister the patch group from.")
+		ssm_deregisterPatchBaselineForPatchGroupCmd.Flags().String("patch-group", "", "The name of the patch group that should be deregistered from the patch baseline.")
+		ssm_deregisterPatchBaselineForPatchGroupCmd.MarkFlagRequired("baseline-id")
+		ssm_deregisterPatchBaselineForPatchGroupCmd.MarkFlagRequired("patch-group")
+	})
 	ssmCmd.AddCommand(ssm_deregisterPatchBaselineForPatchGroupCmd)
 }

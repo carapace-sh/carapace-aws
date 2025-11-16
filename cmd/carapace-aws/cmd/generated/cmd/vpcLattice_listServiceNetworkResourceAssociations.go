@@ -12,14 +12,16 @@ var vpcLattice_listServiceNetworkResourceAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listServiceNetworkResourceAssociationsCmd).Standalone()
+	carapace.Gen(vpcLattice_listServiceNetworkResourceAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listServiceNetworkResourceAssociationsCmd).Standalone()
 
-	vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().Bool("include-children", false, "Include service network resource associations of the child resource configuration with the grouped resource configuration.")
-	vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().String("max-results", "", "The maximum page size.")
-	vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().String("next-token", "", "If there are additional results, a pagination token for the next page of results.")
-	vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().Bool("no-include-children", false, "Include service network resource associations of the child resource configuration with the grouped resource configuration.")
-	vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().String("resource-configuration-identifier", "", "The ID of the resource configuration.")
-	vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().String("service-network-identifier", "", "The ID of the service network.")
-	vpcLattice_listServiceNetworkResourceAssociationsCmd.Flag("no-include-children").Hidden = true
+		vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().Bool("include-children", false, "Include service network resource associations of the child resource configuration with the grouped resource configuration.")
+		vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().String("max-results", "", "The maximum page size.")
+		vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().String("next-token", "", "If there are additional results, a pagination token for the next page of results.")
+		vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().Bool("no-include-children", false, "Include service network resource associations of the child resource configuration with the grouped resource configuration.")
+		vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().String("resource-configuration-identifier", "", "The ID of the resource configuration.")
+		vpcLattice_listServiceNetworkResourceAssociationsCmd.Flags().String("service-network-identifier", "", "The ID of the service network.")
+		vpcLattice_listServiceNetworkResourceAssociationsCmd.Flag("no-include-children").Hidden = true
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listServiceNetworkResourceAssociationsCmd)
 }

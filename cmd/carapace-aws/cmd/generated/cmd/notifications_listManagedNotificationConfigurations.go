@@ -12,10 +12,12 @@ var notifications_listManagedNotificationConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_listManagedNotificationConfigurationsCmd).Standalone()
+	carapace.Gen(notifications_listManagedNotificationConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_listManagedNotificationConfigurationsCmd).Standalone()
 
-	notifications_listManagedNotificationConfigurationsCmd.Flags().String("channel-identifier", "", "The identifier or ARN of the notification channel to filter configurations by.")
-	notifications_listManagedNotificationConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to be returned in this call.")
-	notifications_listManagedNotificationConfigurationsCmd.Flags().String("next-token", "", "The start token for paginated calls.")
+		notifications_listManagedNotificationConfigurationsCmd.Flags().String("channel-identifier", "", "The identifier or ARN of the notification channel to filter configurations by.")
+		notifications_listManagedNotificationConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to be returned in this call.")
+		notifications_listManagedNotificationConfigurationsCmd.Flags().String("next-token", "", "The start token for paginated calls.")
+	})
 	notificationsCmd.AddCommand(notifications_listManagedNotificationConfigurationsCmd)
 }

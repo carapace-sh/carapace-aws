@@ -12,9 +12,11 @@ var forecast_deleteWhatIfAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_deleteWhatIfAnalysisCmd).Standalone()
+	carapace.Gen(forecast_deleteWhatIfAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_deleteWhatIfAnalysisCmd).Standalone()
 
-	forecast_deleteWhatIfAnalysisCmd.Flags().String("what-if-analysis-arn", "", "The Amazon Resource Name (ARN) of the what-if analysis that you want to delete.")
-	forecast_deleteWhatIfAnalysisCmd.MarkFlagRequired("what-if-analysis-arn")
+		forecast_deleteWhatIfAnalysisCmd.Flags().String("what-if-analysis-arn", "", "The Amazon Resource Name (ARN) of the what-if analysis that you want to delete.")
+		forecast_deleteWhatIfAnalysisCmd.MarkFlagRequired("what-if-analysis-arn")
+	})
 	forecastCmd.AddCommand(forecast_deleteWhatIfAnalysisCmd)
 }

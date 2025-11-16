@@ -12,16 +12,18 @@ var amplify_updateDomainAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_updateDomainAssociationCmd).Standalone()
+	carapace.Gen(amplify_updateDomainAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_updateDomainAssociationCmd).Standalone()
 
-	amplify_updateDomainAssociationCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_updateDomainAssociationCmd.Flags().String("auto-sub-domain-creation-patterns", "", "Sets the branch patterns for automatic subdomain creation.")
-	amplify_updateDomainAssociationCmd.Flags().String("auto-sub-domain-iamrole", "", "The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains.")
-	amplify_updateDomainAssociationCmd.Flags().String("certificate-settings", "", "The type of SSL/TLS certificate to use for your custom domain.")
-	amplify_updateDomainAssociationCmd.Flags().String("domain-name", "", "The name of the domain.")
-	amplify_updateDomainAssociationCmd.Flags().String("enable-auto-sub-domain", "", "Enables the automated creation of subdomains for branches.")
-	amplify_updateDomainAssociationCmd.Flags().String("sub-domain-settings", "", "Describes the settings for the subdomain.")
-	amplify_updateDomainAssociationCmd.MarkFlagRequired("app-id")
-	amplify_updateDomainAssociationCmd.MarkFlagRequired("domain-name")
+		amplify_updateDomainAssociationCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_updateDomainAssociationCmd.Flags().String("auto-sub-domain-creation-patterns", "", "Sets the branch patterns for automatic subdomain creation.")
+		amplify_updateDomainAssociationCmd.Flags().String("auto-sub-domain-iamrole", "", "The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains.")
+		amplify_updateDomainAssociationCmd.Flags().String("certificate-settings", "", "The type of SSL/TLS certificate to use for your custom domain.")
+		amplify_updateDomainAssociationCmd.Flags().String("domain-name", "", "The name of the domain.")
+		amplify_updateDomainAssociationCmd.Flags().String("enable-auto-sub-domain", "", "Enables the automated creation of subdomains for branches.")
+		amplify_updateDomainAssociationCmd.Flags().String("sub-domain-settings", "", "Describes the settings for the subdomain.")
+		amplify_updateDomainAssociationCmd.MarkFlagRequired("app-id")
+		amplify_updateDomainAssociationCmd.MarkFlagRequired("domain-name")
+	})
 	amplifyCmd.AddCommand(amplify_updateDomainAssociationCmd)
 }

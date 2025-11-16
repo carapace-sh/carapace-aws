@@ -12,10 +12,12 @@ var codestarNotifications_deleteTargetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarNotifications_deleteTargetCmd).Standalone()
+	carapace.Gen(codestarNotifications_deleteTargetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarNotifications_deleteTargetCmd).Standalone()
 
-	codestarNotifications_deleteTargetCmd.Flags().String("force-unsubscribe-all", "", "A Boolean value that can be used to delete all associations with this Amazon Q Developer in chat applications topic.")
-	codestarNotifications_deleteTargetCmd.Flags().String("target-address", "", "The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client to delete.")
-	codestarNotifications_deleteTargetCmd.MarkFlagRequired("target-address")
+		codestarNotifications_deleteTargetCmd.Flags().String("force-unsubscribe-all", "", "A Boolean value that can be used to delete all associations with this Amazon Q Developer in chat applications topic.")
+		codestarNotifications_deleteTargetCmd.Flags().String("target-address", "", "The Amazon Resource Name (ARN) of the Amazon Q Developer in chat applications topic or Amazon Q Developer in chat applications client to delete.")
+		codestarNotifications_deleteTargetCmd.MarkFlagRequired("target-address")
+	})
 	codestarNotificationsCmd.AddCommand(codestarNotifications_deleteTargetCmd)
 }

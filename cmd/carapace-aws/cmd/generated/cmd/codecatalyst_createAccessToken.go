@@ -12,10 +12,12 @@ var codecatalyst_createAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_createAccessTokenCmd).Standalone()
+	carapace.Gen(codecatalyst_createAccessTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_createAccessTokenCmd).Standalone()
 
-	codecatalyst_createAccessTokenCmd.Flags().String("expires-time", "", "The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).")
-	codecatalyst_createAccessTokenCmd.Flags().String("name", "", "The friendly name of the personal access token.")
-	codecatalyst_createAccessTokenCmd.MarkFlagRequired("name")
+		codecatalyst_createAccessTokenCmd.Flags().String("expires-time", "", "The date and time the personal access token expires, in coordinated universal time (UTC) timestamp format as specified in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).")
+		codecatalyst_createAccessTokenCmd.Flags().String("name", "", "The friendly name of the personal access token.")
+		codecatalyst_createAccessTokenCmd.MarkFlagRequired("name")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_createAccessTokenCmd)
 }

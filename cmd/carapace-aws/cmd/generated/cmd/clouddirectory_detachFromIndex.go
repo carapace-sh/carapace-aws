@@ -12,13 +12,15 @@ var clouddirectory_detachFromIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_detachFromIndexCmd).Standalone()
+	carapace.Gen(clouddirectory_detachFromIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_detachFromIndexCmd).Standalone()
 
-	clouddirectory_detachFromIndexCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) of the directory the index and object exist in.")
-	clouddirectory_detachFromIndexCmd.Flags().String("index-reference", "", "A reference to the index object.")
-	clouddirectory_detachFromIndexCmd.Flags().String("target-reference", "", "A reference to the object being detached from the index.")
-	clouddirectory_detachFromIndexCmd.MarkFlagRequired("directory-arn")
-	clouddirectory_detachFromIndexCmd.MarkFlagRequired("index-reference")
-	clouddirectory_detachFromIndexCmd.MarkFlagRequired("target-reference")
+		clouddirectory_detachFromIndexCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) of the directory the index and object exist in.")
+		clouddirectory_detachFromIndexCmd.Flags().String("index-reference", "", "A reference to the index object.")
+		clouddirectory_detachFromIndexCmd.Flags().String("target-reference", "", "A reference to the object being detached from the index.")
+		clouddirectory_detachFromIndexCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_detachFromIndexCmd.MarkFlagRequired("index-reference")
+		clouddirectory_detachFromIndexCmd.MarkFlagRequired("target-reference")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_detachFromIndexCmd)
 }

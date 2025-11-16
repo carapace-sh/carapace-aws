@@ -12,11 +12,13 @@ var logs_putRetentionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_putRetentionPolicyCmd).Standalone()
+	carapace.Gen(logs_putRetentionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_putRetentionPolicyCmd).Standalone()
 
-	logs_putRetentionPolicyCmd.Flags().String("log-group-name", "", "The name of the log group.")
-	logs_putRetentionPolicyCmd.Flags().String("retention-in-days", "", "")
-	logs_putRetentionPolicyCmd.MarkFlagRequired("log-group-name")
-	logs_putRetentionPolicyCmd.MarkFlagRequired("retention-in-days")
+		logs_putRetentionPolicyCmd.Flags().String("log-group-name", "", "The name of the log group.")
+		logs_putRetentionPolicyCmd.Flags().String("retention-in-days", "", "")
+		logs_putRetentionPolicyCmd.MarkFlagRequired("log-group-name")
+		logs_putRetentionPolicyCmd.MarkFlagRequired("retention-in-days")
+	})
 	logsCmd.AddCommand(logs_putRetentionPolicyCmd)
 }

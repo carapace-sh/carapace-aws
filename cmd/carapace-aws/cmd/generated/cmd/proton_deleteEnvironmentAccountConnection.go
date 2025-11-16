@@ -12,9 +12,11 @@ var proton_deleteEnvironmentAccountConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_deleteEnvironmentAccountConnectionCmd).Standalone()
+	carapace.Gen(proton_deleteEnvironmentAccountConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_deleteEnvironmentAccountConnectionCmd).Standalone()
 
-	proton_deleteEnvironmentAccountConnectionCmd.Flags().String("id", "", "The ID of the environment account connection to delete.")
-	proton_deleteEnvironmentAccountConnectionCmd.MarkFlagRequired("id")
+		proton_deleteEnvironmentAccountConnectionCmd.Flags().String("id", "", "The ID of the environment account connection to delete.")
+		proton_deleteEnvironmentAccountConnectionCmd.MarkFlagRequired("id")
+	})
 	protonCmd.AddCommand(proton_deleteEnvironmentAccountConnectionCmd)
 }

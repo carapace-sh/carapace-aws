@@ -12,11 +12,13 @@ var chime_resetPersonalPinCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_resetPersonalPinCmd).Standalone()
+	carapace.Gen(chime_resetPersonalPinCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_resetPersonalPinCmd).Standalone()
 
-	chime_resetPersonalPinCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_resetPersonalPinCmd.Flags().String("user-id", "", "The user ID.")
-	chime_resetPersonalPinCmd.MarkFlagRequired("account-id")
-	chime_resetPersonalPinCmd.MarkFlagRequired("user-id")
+		chime_resetPersonalPinCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_resetPersonalPinCmd.Flags().String("user-id", "", "The user ID.")
+		chime_resetPersonalPinCmd.MarkFlagRequired("account-id")
+		chime_resetPersonalPinCmd.MarkFlagRequired("user-id")
+	})
 	chimeCmd.AddCommand(chime_resetPersonalPinCmd)
 }

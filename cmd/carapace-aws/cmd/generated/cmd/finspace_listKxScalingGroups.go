@@ -12,11 +12,13 @@ var finspace_listKxScalingGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_listKxScalingGroupsCmd).Standalone()
+	carapace.Gen(finspace_listKxScalingGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_listKxScalingGroupsCmd).Standalone()
 
-	finspace_listKxScalingGroupsCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment, for which you want to retrieve a list of scaling groups.")
-	finspace_listKxScalingGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	finspace_listKxScalingGroupsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
-	finspace_listKxScalingGroupsCmd.MarkFlagRequired("environment-id")
+		finspace_listKxScalingGroupsCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment, for which you want to retrieve a list of scaling groups.")
+		finspace_listKxScalingGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		finspace_listKxScalingGroupsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+		finspace_listKxScalingGroupsCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_listKxScalingGroupsCmd)
 }

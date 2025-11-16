@@ -12,9 +12,11 @@ var connectcampaigns_pauseCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaigns_pauseCampaignCmd).Standalone()
+	carapace.Gen(connectcampaigns_pauseCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaigns_pauseCampaignCmd).Standalone()
 
-	connectcampaigns_pauseCampaignCmd.Flags().String("id", "", "")
-	connectcampaigns_pauseCampaignCmd.MarkFlagRequired("id")
+		connectcampaigns_pauseCampaignCmd.Flags().String("id", "", "")
+		connectcampaigns_pauseCampaignCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsCmd.AddCommand(connectcampaigns_pauseCampaignCmd)
 }

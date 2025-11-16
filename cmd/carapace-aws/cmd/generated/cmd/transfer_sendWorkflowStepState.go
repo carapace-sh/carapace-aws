@@ -12,15 +12,17 @@ var transfer_sendWorkflowStepStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_sendWorkflowStepStateCmd).Standalone()
+	carapace.Gen(transfer_sendWorkflowStepStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_sendWorkflowStepStateCmd).Standalone()
 
-	transfer_sendWorkflowStepStateCmd.Flags().String("execution-id", "", "A unique identifier for the execution of a workflow.")
-	transfer_sendWorkflowStepStateCmd.Flags().String("status", "", "Indicates whether the specified step succeeded or failed.")
-	transfer_sendWorkflowStepStateCmd.Flags().String("token", "", "Used to distinguish between multiple callbacks for multiple Lambda steps within the same execution.")
-	transfer_sendWorkflowStepStateCmd.Flags().String("workflow-id", "", "A unique identifier for the workflow.")
-	transfer_sendWorkflowStepStateCmd.MarkFlagRequired("execution-id")
-	transfer_sendWorkflowStepStateCmd.MarkFlagRequired("status")
-	transfer_sendWorkflowStepStateCmd.MarkFlagRequired("token")
-	transfer_sendWorkflowStepStateCmd.MarkFlagRequired("workflow-id")
+		transfer_sendWorkflowStepStateCmd.Flags().String("execution-id", "", "A unique identifier for the execution of a workflow.")
+		transfer_sendWorkflowStepStateCmd.Flags().String("status", "", "Indicates whether the specified step succeeded or failed.")
+		transfer_sendWorkflowStepStateCmd.Flags().String("token", "", "Used to distinguish between multiple callbacks for multiple Lambda steps within the same execution.")
+		transfer_sendWorkflowStepStateCmd.Flags().String("workflow-id", "", "A unique identifier for the workflow.")
+		transfer_sendWorkflowStepStateCmd.MarkFlagRequired("execution-id")
+		transfer_sendWorkflowStepStateCmd.MarkFlagRequired("status")
+		transfer_sendWorkflowStepStateCmd.MarkFlagRequired("token")
+		transfer_sendWorkflowStepStateCmd.MarkFlagRequired("workflow-id")
+	})
 	transferCmd.AddCommand(transfer_sendWorkflowStepStateCmd)
 }

@@ -12,11 +12,13 @@ var costOptimizationHub_listEnrollmentStatusesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(costOptimizationHub_listEnrollmentStatusesCmd).Standalone()
+	carapace.Gen(costOptimizationHub_listEnrollmentStatusesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(costOptimizationHub_listEnrollmentStatusesCmd).Standalone()
 
-	costOptimizationHub_listEnrollmentStatusesCmd.Flags().String("account-id", "", "The account ID of a member account in the organization.")
-	costOptimizationHub_listEnrollmentStatusesCmd.Flags().String("include-organization-info", "", "Indicates whether to return the enrollment status for the organization.")
-	costOptimizationHub_listEnrollmentStatusesCmd.Flags().String("max-results", "", "The maximum number of objects that are returned for the request.")
-	costOptimizationHub_listEnrollmentStatusesCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+		costOptimizationHub_listEnrollmentStatusesCmd.Flags().String("account-id", "", "The account ID of a member account in the organization.")
+		costOptimizationHub_listEnrollmentStatusesCmd.Flags().String("include-organization-info", "", "Indicates whether to return the enrollment status for the organization.")
+		costOptimizationHub_listEnrollmentStatusesCmd.Flags().String("max-results", "", "The maximum number of objects that are returned for the request.")
+		costOptimizationHub_listEnrollmentStatusesCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+	})
 	costOptimizationHubCmd.AddCommand(costOptimizationHub_listEnrollmentStatusesCmd)
 }

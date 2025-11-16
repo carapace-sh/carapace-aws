@@ -12,11 +12,13 @@ var iotwireless_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_tagResourceCmd).Standalone()
+	carapace.Gen(iotwireless_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_tagResourceCmd).Standalone()
 
-	iotwireless_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to add tags to.")
-	iotwireless_tagResourceCmd.Flags().String("tags", "", "Adds to or modifies the tags of the given resource.")
-	iotwireless_tagResourceCmd.MarkFlagRequired("resource-arn")
-	iotwireless_tagResourceCmd.MarkFlagRequired("tags")
+		iotwireless_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to add tags to.")
+		iotwireless_tagResourceCmd.Flags().String("tags", "", "Adds to or modifies the tags of the given resource.")
+		iotwireless_tagResourceCmd.MarkFlagRequired("resource-arn")
+		iotwireless_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_tagResourceCmd)
 }

@@ -12,9 +12,11 @@ var iotanalytics_listPipelinesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_listPipelinesCmd).Standalone()
+	carapace.Gen(iotanalytics_listPipelinesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_listPipelinesCmd).Standalone()
 
-	iotanalytics_listPipelinesCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	iotanalytics_listPipelinesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iotanalytics_listPipelinesCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		iotanalytics_listPipelinesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_listPipelinesCmd)
 }

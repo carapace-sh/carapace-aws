@@ -12,10 +12,12 @@ var finspaceData_listUsersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_listUsersCmd).Standalone()
+	carapace.Gen(finspaceData_listUsersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_listUsersCmd).Standalone()
 
-	finspaceData_listUsersCmd.Flags().String("max-results", "", "The maximum number of results per page.")
-	finspaceData_listUsersCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
-	finspaceData_listUsersCmd.MarkFlagRequired("max-results")
+		finspaceData_listUsersCmd.Flags().String("max-results", "", "The maximum number of results per page.")
+		finspaceData_listUsersCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+		finspaceData_listUsersCmd.MarkFlagRequired("max-results")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_listUsersCmd)
 }

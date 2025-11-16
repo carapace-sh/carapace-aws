@@ -12,10 +12,12 @@ var paymentCryptography_deleteKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_deleteKeyCmd).Standalone()
+	carapace.Gen(paymentCryptography_deleteKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_deleteKeyCmd).Standalone()
 
-	paymentCryptography_deleteKeyCmd.Flags().String("delete-key-in-days", "", "The waiting period for key deletion.")
-	paymentCryptography_deleteKeyCmd.Flags().String("key-identifier", "", "The `KeyARN` of the key that is scheduled for deletion.")
-	paymentCryptography_deleteKeyCmd.MarkFlagRequired("key-identifier")
+		paymentCryptography_deleteKeyCmd.Flags().String("delete-key-in-days", "", "The waiting period for key deletion.")
+		paymentCryptography_deleteKeyCmd.Flags().String("key-identifier", "", "The `KeyARN` of the key that is scheduled for deletion.")
+		paymentCryptography_deleteKeyCmd.MarkFlagRequired("key-identifier")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_deleteKeyCmd)
 }

@@ -12,8 +12,10 @@ var securityhub_describeHubCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_describeHubCmd).Standalone()
+	carapace.Gen(securityhub_describeHubCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_describeHubCmd).Standalone()
 
-	securityhub_describeHubCmd.Flags().String("hub-arn", "", "The ARN of the Hub resource to retrieve.")
+		securityhub_describeHubCmd.Flags().String("hub-arn", "", "The ARN of the Hub resource to retrieve.")
+	})
 	securityhubCmd.AddCommand(securityhub_describeHubCmd)
 }

@@ -12,9 +12,11 @@ var medialive_describeInputSecurityGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeInputSecurityGroupCmd).Standalone()
+	carapace.Gen(medialive_describeInputSecurityGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeInputSecurityGroupCmd).Standalone()
 
-	medialive_describeInputSecurityGroupCmd.Flags().String("input-security-group-id", "", "The id of the Input Security Group to describe")
-	medialive_describeInputSecurityGroupCmd.MarkFlagRequired("input-security-group-id")
+		medialive_describeInputSecurityGroupCmd.Flags().String("input-security-group-id", "", "The id of the Input Security Group to describe")
+		medialive_describeInputSecurityGroupCmd.MarkFlagRequired("input-security-group-id")
+	})
 	medialiveCmd.AddCommand(medialive_describeInputSecurityGroupCmd)
 }

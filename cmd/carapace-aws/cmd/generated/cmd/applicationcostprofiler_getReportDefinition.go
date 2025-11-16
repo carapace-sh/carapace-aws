@@ -12,9 +12,11 @@ var applicationcostprofiler_getReportDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationcostprofiler_getReportDefinitionCmd).Standalone()
+	carapace.Gen(applicationcostprofiler_getReportDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationcostprofiler_getReportDefinitionCmd).Standalone()
 
-	applicationcostprofiler_getReportDefinitionCmd.Flags().String("report-id", "", "ID of the report to retrieve.")
-	applicationcostprofiler_getReportDefinitionCmd.MarkFlagRequired("report-id")
+		applicationcostprofiler_getReportDefinitionCmd.Flags().String("report-id", "", "ID of the report to retrieve.")
+		applicationcostprofiler_getReportDefinitionCmd.MarkFlagRequired("report-id")
+	})
 	applicationcostprofilerCmd.AddCommand(applicationcostprofiler_getReportDefinitionCmd)
 }

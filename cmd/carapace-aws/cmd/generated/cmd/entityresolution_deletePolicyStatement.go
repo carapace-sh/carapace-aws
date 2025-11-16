@@ -12,11 +12,13 @@ var entityresolution_deletePolicyStatementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_deletePolicyStatementCmd).Standalone()
+	carapace.Gen(entityresolution_deletePolicyStatementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_deletePolicyStatementCmd).Standalone()
 
-	entityresolution_deletePolicyStatementCmd.Flags().String("arn", "", "The ARN of the resource for which the policy need to be deleted.")
-	entityresolution_deletePolicyStatementCmd.Flags().String("statement-id", "", "A statement identifier that differentiates the statement from others in the same policy.")
-	entityresolution_deletePolicyStatementCmd.MarkFlagRequired("arn")
-	entityresolution_deletePolicyStatementCmd.MarkFlagRequired("statement-id")
+		entityresolution_deletePolicyStatementCmd.Flags().String("arn", "", "The ARN of the resource for which the policy need to be deleted.")
+		entityresolution_deletePolicyStatementCmd.Flags().String("statement-id", "", "A statement identifier that differentiates the statement from others in the same policy.")
+		entityresolution_deletePolicyStatementCmd.MarkFlagRequired("arn")
+		entityresolution_deletePolicyStatementCmd.MarkFlagRequired("statement-id")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_deletePolicyStatementCmd)
 }

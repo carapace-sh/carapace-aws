@@ -12,9 +12,11 @@ var sagemaker_deleteActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteActionCmd).Standalone()
+	carapace.Gen(sagemaker_deleteActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteActionCmd).Standalone()
 
-	sagemaker_deleteActionCmd.Flags().String("action-name", "", "The name of the action to delete.")
-	sagemaker_deleteActionCmd.MarkFlagRequired("action-name")
+		sagemaker_deleteActionCmd.Flags().String("action-name", "", "The name of the action to delete.")
+		sagemaker_deleteActionCmd.MarkFlagRequired("action-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteActionCmd)
 }

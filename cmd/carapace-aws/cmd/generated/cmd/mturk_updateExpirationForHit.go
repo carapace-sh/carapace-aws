@@ -12,11 +12,13 @@ var mturk_updateExpirationForHitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_updateExpirationForHitCmd).Standalone()
+	carapace.Gen(mturk_updateExpirationForHitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_updateExpirationForHitCmd).Standalone()
 
-	mturk_updateExpirationForHitCmd.Flags().String("expire-at", "", "The date and time at which you want the HIT to expire")
-	mturk_updateExpirationForHitCmd.Flags().String("hitid", "", "The HIT to update.")
-	mturk_updateExpirationForHitCmd.MarkFlagRequired("expire-at")
-	mturk_updateExpirationForHitCmd.MarkFlagRequired("hitid")
+		mturk_updateExpirationForHitCmd.Flags().String("expire-at", "", "The date and time at which you want the HIT to expire")
+		mturk_updateExpirationForHitCmd.Flags().String("hitid", "", "The HIT to update.")
+		mturk_updateExpirationForHitCmd.MarkFlagRequired("expire-at")
+		mturk_updateExpirationForHitCmd.MarkFlagRequired("hitid")
+	})
 	mturkCmd.AddCommand(mturk_updateExpirationForHitCmd)
 }

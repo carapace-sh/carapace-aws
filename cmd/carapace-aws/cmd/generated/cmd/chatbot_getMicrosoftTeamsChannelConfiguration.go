@@ -12,9 +12,11 @@ var chatbot_getMicrosoftTeamsChannelConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_getMicrosoftTeamsChannelConfigurationCmd).Standalone()
+	carapace.Gen(chatbot_getMicrosoftTeamsChannelConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_getMicrosoftTeamsChannelConfigurationCmd).Standalone()
 
-	chatbot_getMicrosoftTeamsChannelConfigurationCmd.Flags().String("chat-configuration-arn", "", "The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.")
-	chatbot_getMicrosoftTeamsChannelConfigurationCmd.MarkFlagRequired("chat-configuration-arn")
+		chatbot_getMicrosoftTeamsChannelConfigurationCmd.Flags().String("chat-configuration-arn", "", "The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.")
+		chatbot_getMicrosoftTeamsChannelConfigurationCmd.MarkFlagRequired("chat-configuration-arn")
+	})
 	chatbotCmd.AddCommand(chatbot_getMicrosoftTeamsChannelConfigurationCmd)
 }

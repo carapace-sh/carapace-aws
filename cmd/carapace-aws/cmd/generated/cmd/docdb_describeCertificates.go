@@ -12,11 +12,13 @@ var docdb_describeCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_describeCertificatesCmd).Standalone()
+	carapace.Gen(docdb_describeCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_describeCertificatesCmd).Standalone()
 
-	docdb_describeCertificatesCmd.Flags().String("certificate-identifier", "", "The user-supplied certificate identifier.")
-	docdb_describeCertificatesCmd.Flags().String("filters", "", "This parameter is not currently supported.")
-	docdb_describeCertificatesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeCertificates` request.")
-	docdb_describeCertificatesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		docdb_describeCertificatesCmd.Flags().String("certificate-identifier", "", "The user-supplied certificate identifier.")
+		docdb_describeCertificatesCmd.Flags().String("filters", "", "This parameter is not currently supported.")
+		docdb_describeCertificatesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeCertificates` request.")
+		docdb_describeCertificatesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	docdbCmd.AddCommand(docdb_describeCertificatesCmd)
 }

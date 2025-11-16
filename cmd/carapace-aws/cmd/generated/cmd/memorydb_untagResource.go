@@ -12,11 +12,13 @@ var memorydb_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_untagResourceCmd).Standalone()
+	carapace.Gen(memorydb_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_untagResourceCmd).Standalone()
 
-	memorydb_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which the tags are to be removed.")
-	memorydb_untagResourceCmd.Flags().String("tag-keys", "", "The list of keys of the tags that are to be removed.")
-	memorydb_untagResourceCmd.MarkFlagRequired("resource-arn")
-	memorydb_untagResourceCmd.MarkFlagRequired("tag-keys")
+		memorydb_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which the tags are to be removed.")
+		memorydb_untagResourceCmd.Flags().String("tag-keys", "", "The list of keys of the tags that are to be removed.")
+		memorydb_untagResourceCmd.MarkFlagRequired("resource-arn")
+		memorydb_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	memorydbCmd.AddCommand(memorydb_untagResourceCmd)
 }

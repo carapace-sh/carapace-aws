@@ -12,9 +12,11 @@ var workspaces_deleteWorkspaceImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_deleteWorkspaceImageCmd).Standalone()
+	carapace.Gen(workspaces_deleteWorkspaceImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_deleteWorkspaceImageCmd).Standalone()
 
-	workspaces_deleteWorkspaceImageCmd.Flags().String("image-id", "", "The identifier of the image.")
-	workspaces_deleteWorkspaceImageCmd.MarkFlagRequired("image-id")
+		workspaces_deleteWorkspaceImageCmd.Flags().String("image-id", "", "The identifier of the image.")
+		workspaces_deleteWorkspaceImageCmd.MarkFlagRequired("image-id")
+	})
 	workspacesCmd.AddCommand(workspaces_deleteWorkspaceImageCmd)
 }

@@ -12,9 +12,11 @@ var servicecatalog_describeTagOptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_describeTagOptionCmd).Standalone()
+	carapace.Gen(servicecatalog_describeTagOptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_describeTagOptionCmd).Standalone()
 
-	servicecatalog_describeTagOptionCmd.Flags().String("id", "", "The TagOption identifier.")
-	servicecatalog_describeTagOptionCmd.MarkFlagRequired("id")
+		servicecatalog_describeTagOptionCmd.Flags().String("id", "", "The TagOption identifier.")
+		servicecatalog_describeTagOptionCmd.MarkFlagRequired("id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_describeTagOptionCmd)
 }

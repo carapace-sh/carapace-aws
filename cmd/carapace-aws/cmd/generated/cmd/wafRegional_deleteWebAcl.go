@@ -12,11 +12,13 @@ var wafRegional_deleteWebAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_deleteWebAclCmd).Standalone()
+	carapace.Gen(wafRegional_deleteWebAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_deleteWebAclCmd).Standalone()
 
-	wafRegional_deleteWebAclCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	wafRegional_deleteWebAclCmd.Flags().String("web-aclid", "", "The `WebACLId` of the [WebACL]() that you want to delete.")
-	wafRegional_deleteWebAclCmd.MarkFlagRequired("change-token")
-	wafRegional_deleteWebAclCmd.MarkFlagRequired("web-aclid")
+		wafRegional_deleteWebAclCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		wafRegional_deleteWebAclCmd.Flags().String("web-aclid", "", "The `WebACLId` of the [WebACL]() that you want to delete.")
+		wafRegional_deleteWebAclCmd.MarkFlagRequired("change-token")
+		wafRegional_deleteWebAclCmd.MarkFlagRequired("web-aclid")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_deleteWebAclCmd)
 }

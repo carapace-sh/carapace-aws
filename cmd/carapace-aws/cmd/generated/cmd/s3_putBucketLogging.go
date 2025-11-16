@@ -12,14 +12,16 @@ var s3_putBucketLoggingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_putBucketLoggingCmd).Standalone()
+	carapace.Gen(s3_putBucketLoggingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_putBucketLoggingCmd).Standalone()
 
-	s3_putBucketLoggingCmd.Flags().String("bucket", "", "The name of the bucket for which to set the logging parameters.")
-	s3_putBucketLoggingCmd.Flags().String("bucket-logging-status", "", "Container for logging status information.")
-	s3_putBucketLoggingCmd.Flags().String("checksum-algorithm", "", "Indicates the algorithm used to create the checksum for the request when you use the SDK.")
-	s3_putBucketLoggingCmd.Flags().String("content-md5", "", "The MD5 hash of the `PutBucketLogging` request body.")
-	s3_putBucketLoggingCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_putBucketLoggingCmd.MarkFlagRequired("bucket")
-	s3_putBucketLoggingCmd.MarkFlagRequired("bucket-logging-status")
+		s3_putBucketLoggingCmd.Flags().String("bucket", "", "The name of the bucket for which to set the logging parameters.")
+		s3_putBucketLoggingCmd.Flags().String("bucket-logging-status", "", "Container for logging status information.")
+		s3_putBucketLoggingCmd.Flags().String("checksum-algorithm", "", "Indicates the algorithm used to create the checksum for the request when you use the SDK.")
+		s3_putBucketLoggingCmd.Flags().String("content-md5", "", "The MD5 hash of the `PutBucketLogging` request body.")
+		s3_putBucketLoggingCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_putBucketLoggingCmd.MarkFlagRequired("bucket")
+		s3_putBucketLoggingCmd.MarkFlagRequired("bucket-logging-status")
+	})
 	s3Cmd.AddCommand(s3_putBucketLoggingCmd)
 }

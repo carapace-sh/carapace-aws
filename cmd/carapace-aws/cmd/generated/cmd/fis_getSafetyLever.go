@@ -12,9 +12,11 @@ var fis_getSafetyLeverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_getSafetyLeverCmd).Standalone()
+	carapace.Gen(fis_getSafetyLeverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_getSafetyLeverCmd).Standalone()
 
-	fis_getSafetyLeverCmd.Flags().String("id", "", "The ID of the safety lever.")
-	fis_getSafetyLeverCmd.MarkFlagRequired("id")
+		fis_getSafetyLeverCmd.Flags().String("id", "", "The ID of the safety lever.")
+		fis_getSafetyLeverCmd.MarkFlagRequired("id")
+	})
 	fisCmd.AddCommand(fis_getSafetyLeverCmd)
 }

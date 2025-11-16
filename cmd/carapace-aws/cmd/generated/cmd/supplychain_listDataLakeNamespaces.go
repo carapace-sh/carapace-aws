@@ -12,11 +12,13 @@ var supplychain_listDataLakeNamespacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_listDataLakeNamespacesCmd).Standalone()
+	carapace.Gen(supplychain_listDataLakeNamespacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_listDataLakeNamespacesCmd).Standalone()
 
-	supplychain_listDataLakeNamespacesCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
-	supplychain_listDataLakeNamespacesCmd.Flags().String("max-results", "", "The max number of namespaces to fetch in this paginated request.")
-	supplychain_listDataLakeNamespacesCmd.Flags().String("next-token", "", "The pagination token to fetch next page of namespaces.")
-	supplychain_listDataLakeNamespacesCmd.MarkFlagRequired("instance-id")
+		supplychain_listDataLakeNamespacesCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
+		supplychain_listDataLakeNamespacesCmd.Flags().String("max-results", "", "The max number of namespaces to fetch in this paginated request.")
+		supplychain_listDataLakeNamespacesCmd.Flags().String("next-token", "", "The pagination token to fetch next page of namespaces.")
+		supplychain_listDataLakeNamespacesCmd.MarkFlagRequired("instance-id")
+	})
 	supplychainCmd.AddCommand(supplychain_listDataLakeNamespacesCmd)
 }

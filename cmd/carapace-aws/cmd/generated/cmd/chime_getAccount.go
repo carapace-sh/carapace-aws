@@ -12,9 +12,11 @@ var chime_getAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_getAccountCmd).Standalone()
+	carapace.Gen(chime_getAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_getAccountCmd).Standalone()
 
-	chime_getAccountCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_getAccountCmd.MarkFlagRequired("account-id")
+		chime_getAccountCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_getAccountCmd.MarkFlagRequired("account-id")
+	})
 	chimeCmd.AddCommand(chime_getAccountCmd)
 }

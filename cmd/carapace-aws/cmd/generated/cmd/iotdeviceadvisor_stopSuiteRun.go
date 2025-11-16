@@ -12,11 +12,13 @@ var iotdeviceadvisor_stopSuiteRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotdeviceadvisor_stopSuiteRunCmd).Standalone()
+	carapace.Gen(iotdeviceadvisor_stopSuiteRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotdeviceadvisor_stopSuiteRunCmd).Standalone()
 
-	iotdeviceadvisor_stopSuiteRunCmd.Flags().String("suite-definition-id", "", "Suite definition ID of the test suite run to be stopped.")
-	iotdeviceadvisor_stopSuiteRunCmd.Flags().String("suite-run-id", "", "Suite run ID of the test suite run to be stopped.")
-	iotdeviceadvisor_stopSuiteRunCmd.MarkFlagRequired("suite-definition-id")
-	iotdeviceadvisor_stopSuiteRunCmd.MarkFlagRequired("suite-run-id")
+		iotdeviceadvisor_stopSuiteRunCmd.Flags().String("suite-definition-id", "", "Suite definition ID of the test suite run to be stopped.")
+		iotdeviceadvisor_stopSuiteRunCmd.Flags().String("suite-run-id", "", "Suite run ID of the test suite run to be stopped.")
+		iotdeviceadvisor_stopSuiteRunCmd.MarkFlagRequired("suite-definition-id")
+		iotdeviceadvisor_stopSuiteRunCmd.MarkFlagRequired("suite-run-id")
+	})
 	iotdeviceadvisorCmd.AddCommand(iotdeviceadvisor_stopSuiteRunCmd)
 }

@@ -12,10 +12,12 @@ var sagemaker_describeClusterSchedulerConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeClusterSchedulerConfigCmd).Standalone()
+	carapace.Gen(sagemaker_describeClusterSchedulerConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeClusterSchedulerConfigCmd).Standalone()
 
-	sagemaker_describeClusterSchedulerConfigCmd.Flags().String("cluster-scheduler-config-id", "", "ID of the cluster policy.")
-	sagemaker_describeClusterSchedulerConfigCmd.Flags().String("cluster-scheduler-config-version", "", "Version of the cluster policy.")
-	sagemaker_describeClusterSchedulerConfigCmd.MarkFlagRequired("cluster-scheduler-config-id")
+		sagemaker_describeClusterSchedulerConfigCmd.Flags().String("cluster-scheduler-config-id", "", "ID of the cluster policy.")
+		sagemaker_describeClusterSchedulerConfigCmd.Flags().String("cluster-scheduler-config-version", "", "Version of the cluster policy.")
+		sagemaker_describeClusterSchedulerConfigCmd.MarkFlagRequired("cluster-scheduler-config-id")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeClusterSchedulerConfigCmd)
 }

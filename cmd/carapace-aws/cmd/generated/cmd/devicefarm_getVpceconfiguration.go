@@ -12,9 +12,11 @@ var devicefarm_getVpceconfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_getVpceconfigurationCmd).Standalone()
+	carapace.Gen(devicefarm_getVpceconfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_getVpceconfigurationCmd).Standalone()
 
-	devicefarm_getVpceconfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to describe.")
-	devicefarm_getVpceconfigurationCmd.MarkFlagRequired("arn")
+		devicefarm_getVpceconfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to describe.")
+		devicefarm_getVpceconfigurationCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_getVpceconfigurationCmd)
 }

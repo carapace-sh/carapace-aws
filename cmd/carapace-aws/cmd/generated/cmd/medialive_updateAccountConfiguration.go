@@ -12,8 +12,10 @@ var medialive_updateAccountConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_updateAccountConfigurationCmd).Standalone()
+	carapace.Gen(medialive_updateAccountConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_updateAccountConfigurationCmd).Standalone()
 
-	medialive_updateAccountConfigurationCmd.Flags().String("account-configuration", "", "")
+		medialive_updateAccountConfigurationCmd.Flags().String("account-configuration", "", "")
+	})
 	medialiveCmd.AddCommand(medialive_updateAccountConfigurationCmd)
 }

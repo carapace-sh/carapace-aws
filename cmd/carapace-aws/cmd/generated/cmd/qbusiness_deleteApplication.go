@@ -12,9 +12,11 @@ var qbusiness_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_deleteApplicationCmd).Standalone()
+	carapace.Gen(qbusiness_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_deleteApplicationCmd).Standalone()
 
-	qbusiness_deleteApplicationCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application.")
-	qbusiness_deleteApplicationCmd.MarkFlagRequired("application-id")
+		qbusiness_deleteApplicationCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application.")
+		qbusiness_deleteApplicationCmd.MarkFlagRequired("application-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_deleteApplicationCmd)
 }

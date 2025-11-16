@@ -12,9 +12,11 @@ var lightsail_getContainerServiceDeploymentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getContainerServiceDeploymentsCmd).Standalone()
+	carapace.Gen(lightsail_getContainerServiceDeploymentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getContainerServiceDeploymentsCmd).Standalone()
 
-	lightsail_getContainerServiceDeploymentsCmd.Flags().String("service-name", "", "The name of the container service for which to return deployments.")
-	lightsail_getContainerServiceDeploymentsCmd.MarkFlagRequired("service-name")
+		lightsail_getContainerServiceDeploymentsCmd.Flags().String("service-name", "", "The name of the container service for which to return deployments.")
+		lightsail_getContainerServiceDeploymentsCmd.MarkFlagRequired("service-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getContainerServiceDeploymentsCmd)
 }

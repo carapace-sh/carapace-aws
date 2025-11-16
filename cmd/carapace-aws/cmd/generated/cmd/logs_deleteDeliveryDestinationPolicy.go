@@ -12,9 +12,11 @@ var logs_deleteDeliveryDestinationPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteDeliveryDestinationPolicyCmd).Standalone()
+	carapace.Gen(logs_deleteDeliveryDestinationPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteDeliveryDestinationPolicyCmd).Standalone()
 
-	logs_deleteDeliveryDestinationPolicyCmd.Flags().String("delivery-destination-name", "", "The name of the delivery destination that you want to delete the policy for.")
-	logs_deleteDeliveryDestinationPolicyCmd.MarkFlagRequired("delivery-destination-name")
+		logs_deleteDeliveryDestinationPolicyCmd.Flags().String("delivery-destination-name", "", "The name of the delivery destination that you want to delete the policy for.")
+		logs_deleteDeliveryDestinationPolicyCmd.MarkFlagRequired("delivery-destination-name")
+	})
 	logsCmd.AddCommand(logs_deleteDeliveryDestinationPolicyCmd)
 }

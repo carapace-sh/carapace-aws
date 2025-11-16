@@ -12,7 +12,9 @@ var ses_getAccountSendingEnabledCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_getAccountSendingEnabledCmd).Standalone()
+	carapace.Gen(ses_getAccountSendingEnabledCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_getAccountSendingEnabledCmd).Standalone()
 
+	})
 	sesCmd.AddCommand(ses_getAccountSendingEnabledCmd)
 }

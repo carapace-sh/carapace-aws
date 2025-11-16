@@ -12,9 +12,11 @@ var events_cancelReplayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_cancelReplayCmd).Standalone()
+	carapace.Gen(events_cancelReplayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_cancelReplayCmd).Standalone()
 
-	events_cancelReplayCmd.Flags().String("replay-name", "", "The name of the replay to cancel.")
-	events_cancelReplayCmd.MarkFlagRequired("replay-name")
+		events_cancelReplayCmd.Flags().String("replay-name", "", "The name of the replay to cancel.")
+		events_cancelReplayCmd.MarkFlagRequired("replay-name")
+	})
 	eventsCmd.AddCommand(events_cancelReplayCmd)
 }

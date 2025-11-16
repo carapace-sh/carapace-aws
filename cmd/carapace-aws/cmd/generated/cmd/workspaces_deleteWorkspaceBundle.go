@@ -12,8 +12,10 @@ var workspaces_deleteWorkspaceBundleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_deleteWorkspaceBundleCmd).Standalone()
+	carapace.Gen(workspaces_deleteWorkspaceBundleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_deleteWorkspaceBundleCmd).Standalone()
 
-	workspaces_deleteWorkspaceBundleCmd.Flags().String("bundle-id", "", "The identifier of the bundle.")
+		workspaces_deleteWorkspaceBundleCmd.Flags().String("bundle-id", "", "The identifier of the bundle.")
+	})
 	workspacesCmd.AddCommand(workspaces_deleteWorkspaceBundleCmd)
 }

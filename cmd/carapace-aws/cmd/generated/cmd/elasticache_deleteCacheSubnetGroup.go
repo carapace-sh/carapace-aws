@@ -12,9 +12,11 @@ var elasticache_deleteCacheSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_deleteCacheSubnetGroupCmd).Standalone()
+	carapace.Gen(elasticache_deleteCacheSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_deleteCacheSubnetGroupCmd).Standalone()
 
-	elasticache_deleteCacheSubnetGroupCmd.Flags().String("cache-subnet-group-name", "", "The name of the cache subnet group to delete.")
-	elasticache_deleteCacheSubnetGroupCmd.MarkFlagRequired("cache-subnet-group-name")
+		elasticache_deleteCacheSubnetGroupCmd.Flags().String("cache-subnet-group-name", "", "The name of the cache subnet group to delete.")
+		elasticache_deleteCacheSubnetGroupCmd.MarkFlagRequired("cache-subnet-group-name")
+	})
 	elasticacheCmd.AddCommand(elasticache_deleteCacheSubnetGroupCmd)
 }

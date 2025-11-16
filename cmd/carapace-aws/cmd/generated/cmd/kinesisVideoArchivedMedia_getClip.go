@@ -12,11 +12,13 @@ var kinesisVideoArchivedMedia_getClipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisVideoArchivedMedia_getClipCmd).Standalone()
+	carapace.Gen(kinesisVideoArchivedMedia_getClipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisVideoArchivedMedia_getClipCmd).Standalone()
 
-	kinesisVideoArchivedMedia_getClipCmd.Flags().String("clip-fragment-selector", "", "The time range of the requested clip and the source of the timestamps.")
-	kinesisVideoArchivedMedia_getClipCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream for which to retrieve the media clip.")
-	kinesisVideoArchivedMedia_getClipCmd.Flags().String("stream-name", "", "The name of the stream for which to retrieve the media clip.")
-	kinesisVideoArchivedMedia_getClipCmd.MarkFlagRequired("clip-fragment-selector")
+		kinesisVideoArchivedMedia_getClipCmd.Flags().String("clip-fragment-selector", "", "The time range of the requested clip and the source of the timestamps.")
+		kinesisVideoArchivedMedia_getClipCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream for which to retrieve the media clip.")
+		kinesisVideoArchivedMedia_getClipCmd.Flags().String("stream-name", "", "The name of the stream for which to retrieve the media clip.")
+		kinesisVideoArchivedMedia_getClipCmd.MarkFlagRequired("clip-fragment-selector")
+	})
 	kinesisVideoArchivedMediaCmd.AddCommand(kinesisVideoArchivedMedia_getClipCmd)
 }

@@ -12,11 +12,13 @@ var pinpoint_createSmsTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_createSmsTemplateCmd).Standalone()
+	carapace.Gen(pinpoint_createSmsTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_createSmsTemplateCmd).Standalone()
 
-	pinpoint_createSmsTemplateCmd.Flags().String("smstemplate-request", "", "")
-	pinpoint_createSmsTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_createSmsTemplateCmd.MarkFlagRequired("smstemplate-request")
-	pinpoint_createSmsTemplateCmd.MarkFlagRequired("template-name")
+		pinpoint_createSmsTemplateCmd.Flags().String("smstemplate-request", "", "")
+		pinpoint_createSmsTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_createSmsTemplateCmd.MarkFlagRequired("smstemplate-request")
+		pinpoint_createSmsTemplateCmd.MarkFlagRequired("template-name")
+	})
 	pinpointCmd.AddCommand(pinpoint_createSmsTemplateCmd)
 }

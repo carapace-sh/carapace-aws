@@ -12,11 +12,13 @@ var connect_listAnalyticsDataLakeDataSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listAnalyticsDataLakeDataSetsCmd).Standalone()
+	carapace.Gen(connect_listAnalyticsDataLakeDataSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listAnalyticsDataLakeDataSetsCmd).Standalone()
 
-	connect_listAnalyticsDataLakeDataSetsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listAnalyticsDataLakeDataSetsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listAnalyticsDataLakeDataSetsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listAnalyticsDataLakeDataSetsCmd.MarkFlagRequired("instance-id")
+		connect_listAnalyticsDataLakeDataSetsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listAnalyticsDataLakeDataSetsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listAnalyticsDataLakeDataSetsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listAnalyticsDataLakeDataSetsCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listAnalyticsDataLakeDataSetsCmd)
 }

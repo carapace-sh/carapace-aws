@@ -12,13 +12,15 @@ var iotthingsgraph_searchEntitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_searchEntitiesCmd).Standalone()
+	carapace.Gen(iotthingsgraph_searchEntitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_searchEntitiesCmd).Standalone()
 
-	iotthingsgraph_searchEntitiesCmd.Flags().String("entity-types", "", "The entity types for which to search.")
-	iotthingsgraph_searchEntitiesCmd.Flags().String("filters", "", "Optional filter to apply to the search.")
-	iotthingsgraph_searchEntitiesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	iotthingsgraph_searchEntitiesCmd.Flags().String("namespace-version", "", "The version of the user's namespace.")
-	iotthingsgraph_searchEntitiesCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
-	iotthingsgraph_searchEntitiesCmd.MarkFlagRequired("entity-types")
+		iotthingsgraph_searchEntitiesCmd.Flags().String("entity-types", "", "The entity types for which to search.")
+		iotthingsgraph_searchEntitiesCmd.Flags().String("filters", "", "Optional filter to apply to the search.")
+		iotthingsgraph_searchEntitiesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		iotthingsgraph_searchEntitiesCmd.Flags().String("namespace-version", "", "The version of the user's namespace.")
+		iotthingsgraph_searchEntitiesCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
+		iotthingsgraph_searchEntitiesCmd.MarkFlagRequired("entity-types")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_searchEntitiesCmd)
 }

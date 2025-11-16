@@ -12,13 +12,15 @@ var connect_deactivateEvaluationFormCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deactivateEvaluationFormCmd).Standalone()
+	carapace.Gen(connect_deactivateEvaluationFormCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deactivateEvaluationFormCmd).Standalone()
 
-	connect_deactivateEvaluationFormCmd.Flags().String("evaluation-form-id", "", "The unique identifier for the evaluation form.")
-	connect_deactivateEvaluationFormCmd.Flags().String("evaluation-form-version", "", "A version of the evaluation form.")
-	connect_deactivateEvaluationFormCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deactivateEvaluationFormCmd.MarkFlagRequired("evaluation-form-id")
-	connect_deactivateEvaluationFormCmd.MarkFlagRequired("evaluation-form-version")
-	connect_deactivateEvaluationFormCmd.MarkFlagRequired("instance-id")
+		connect_deactivateEvaluationFormCmd.Flags().String("evaluation-form-id", "", "The unique identifier for the evaluation form.")
+		connect_deactivateEvaluationFormCmd.Flags().String("evaluation-form-version", "", "A version of the evaluation form.")
+		connect_deactivateEvaluationFormCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deactivateEvaluationFormCmd.MarkFlagRequired("evaluation-form-id")
+		connect_deactivateEvaluationFormCmd.MarkFlagRequired("evaluation-form-version")
+		connect_deactivateEvaluationFormCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_deactivateEvaluationFormCmd)
 }

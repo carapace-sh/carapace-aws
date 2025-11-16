@@ -12,11 +12,13 @@ var redshift_authorizeEndpointAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_authorizeEndpointAccessCmd).Standalone()
+	carapace.Gen(redshift_authorizeEndpointAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_authorizeEndpointAccessCmd).Standalone()
 
-	redshift_authorizeEndpointAccessCmd.Flags().String("account", "", "The Amazon Web Services account ID to grant access to.")
-	redshift_authorizeEndpointAccessCmd.Flags().String("cluster-identifier", "", "The cluster identifier of the cluster to grant access to.")
-	redshift_authorizeEndpointAccessCmd.Flags().String("vpc-ids", "", "The virtual private cloud (VPC) identifiers to grant access to.")
-	redshift_authorizeEndpointAccessCmd.MarkFlagRequired("account")
+		redshift_authorizeEndpointAccessCmd.Flags().String("account", "", "The Amazon Web Services account ID to grant access to.")
+		redshift_authorizeEndpointAccessCmd.Flags().String("cluster-identifier", "", "The cluster identifier of the cluster to grant access to.")
+		redshift_authorizeEndpointAccessCmd.Flags().String("vpc-ids", "", "The virtual private cloud (VPC) identifiers to grant access to.")
+		redshift_authorizeEndpointAccessCmd.MarkFlagRequired("account")
+	})
 	redshiftCmd.AddCommand(redshift_authorizeEndpointAccessCmd)
 }

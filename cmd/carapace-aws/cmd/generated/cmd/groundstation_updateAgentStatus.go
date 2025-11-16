@@ -12,15 +12,17 @@ var groundstation_updateAgentStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_updateAgentStatusCmd).Standalone()
+	carapace.Gen(groundstation_updateAgentStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_updateAgentStatusCmd).Standalone()
 
-	groundstation_updateAgentStatusCmd.Flags().String("agent-id", "", "UUID of agent to update.")
-	groundstation_updateAgentStatusCmd.Flags().String("aggregate-status", "", "Aggregate status for agent.")
-	groundstation_updateAgentStatusCmd.Flags().String("component-statuses", "", "List of component statuses for agent.")
-	groundstation_updateAgentStatusCmd.Flags().String("task-id", "", "GUID of agent task.")
-	groundstation_updateAgentStatusCmd.MarkFlagRequired("agent-id")
-	groundstation_updateAgentStatusCmd.MarkFlagRequired("aggregate-status")
-	groundstation_updateAgentStatusCmd.MarkFlagRequired("component-statuses")
-	groundstation_updateAgentStatusCmd.MarkFlagRequired("task-id")
+		groundstation_updateAgentStatusCmd.Flags().String("agent-id", "", "UUID of agent to update.")
+		groundstation_updateAgentStatusCmd.Flags().String("aggregate-status", "", "Aggregate status for agent.")
+		groundstation_updateAgentStatusCmd.Flags().String("component-statuses", "", "List of component statuses for agent.")
+		groundstation_updateAgentStatusCmd.Flags().String("task-id", "", "GUID of agent task.")
+		groundstation_updateAgentStatusCmd.MarkFlagRequired("agent-id")
+		groundstation_updateAgentStatusCmd.MarkFlagRequired("aggregate-status")
+		groundstation_updateAgentStatusCmd.MarkFlagRequired("component-statuses")
+		groundstation_updateAgentStatusCmd.MarkFlagRequired("task-id")
+	})
 	groundstationCmd.AddCommand(groundstation_updateAgentStatusCmd)
 }

@@ -12,10 +12,12 @@ var iotManagedIntegrations_listConnectorDestinationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_listConnectorDestinationsCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_listConnectorDestinationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_listConnectorDestinationsCmd).Standalone()
 
-	iotManagedIntegrations_listConnectorDestinationsCmd.Flags().String("cloud-connector-id", "", "The identifier of the cloud connector to filter connector destinations by.")
-	iotManagedIntegrations_listConnectorDestinationsCmd.Flags().String("max-results", "", "The maximum number of connector destinations to return in a single response.")
-	iotManagedIntegrations_listConnectorDestinationsCmd.Flags().String("next-token", "", "A token used for pagination of results.")
+		iotManagedIntegrations_listConnectorDestinationsCmd.Flags().String("cloud-connector-id", "", "The identifier of the cloud connector to filter connector destinations by.")
+		iotManagedIntegrations_listConnectorDestinationsCmd.Flags().String("max-results", "", "The maximum number of connector destinations to return in a single response.")
+		iotManagedIntegrations_listConnectorDestinationsCmd.Flags().String("next-token", "", "A token used for pagination of results.")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_listConnectorDestinationsCmd)
 }

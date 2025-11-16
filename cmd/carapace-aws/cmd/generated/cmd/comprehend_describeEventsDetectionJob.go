@@ -12,9 +12,11 @@ var comprehend_describeEventsDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeEventsDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_describeEventsDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeEventsDetectionJobCmd).Standalone()
 
-	comprehend_describeEventsDetectionJobCmd.Flags().String("job-id", "", "The identifier of the events detection job.")
-	comprehend_describeEventsDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_describeEventsDetectionJobCmd.Flags().String("job-id", "", "The identifier of the events detection job.")
+		comprehend_describeEventsDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_describeEventsDetectionJobCmd)
 }

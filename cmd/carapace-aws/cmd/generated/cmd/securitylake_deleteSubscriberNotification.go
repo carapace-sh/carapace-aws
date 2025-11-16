@@ -12,9 +12,11 @@ var securitylake_deleteSubscriberNotificationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_deleteSubscriberNotificationCmd).Standalone()
+	carapace.Gen(securitylake_deleteSubscriberNotificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_deleteSubscriberNotificationCmd).Standalone()
 
-	securitylake_deleteSubscriberNotificationCmd.Flags().String("subscriber-id", "", "The ID of the Security Lake subscriber account.")
-	securitylake_deleteSubscriberNotificationCmd.MarkFlagRequired("subscriber-id")
+		securitylake_deleteSubscriberNotificationCmd.Flags().String("subscriber-id", "", "The ID of the Security Lake subscriber account.")
+		securitylake_deleteSubscriberNotificationCmd.MarkFlagRequired("subscriber-id")
+	})
 	securitylakeCmd.AddCommand(securitylake_deleteSubscriberNotificationCmd)
 }

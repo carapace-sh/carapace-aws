@@ -12,12 +12,14 @@ var codeguruprofiler_getFindingsReportAccountSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruprofiler_getFindingsReportAccountSummaryCmd).Standalone()
+	carapace.Gen(codeguruprofiler_getFindingsReportAccountSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruprofiler_getFindingsReportAccountSummaryCmd).Standalone()
 
-	codeguruprofiler_getFindingsReportAccountSummaryCmd.Flags().Bool("daily-reports-only", false, "A `Boolean` value indicating whether to only return reports from daily profiles.")
-	codeguruprofiler_getFindingsReportAccountSummaryCmd.Flags().String("max-results", "", "The maximum number of results returned by `GetFindingsReportAccountSummary` in paginated output.")
-	codeguruprofiler_getFindingsReportAccountSummaryCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `GetFindingsReportAccountSummary` request where `maxResults` was used and the results exceeded the value of that parameter.")
-	codeguruprofiler_getFindingsReportAccountSummaryCmd.Flags().Bool("no-daily-reports-only", false, "A `Boolean` value indicating whether to only return reports from daily profiles.")
-	codeguruprofiler_getFindingsReportAccountSummaryCmd.Flag("no-daily-reports-only").Hidden = true
+		codeguruprofiler_getFindingsReportAccountSummaryCmd.Flags().Bool("daily-reports-only", false, "A `Boolean` value indicating whether to only return reports from daily profiles.")
+		codeguruprofiler_getFindingsReportAccountSummaryCmd.Flags().String("max-results", "", "The maximum number of results returned by `GetFindingsReportAccountSummary` in paginated output.")
+		codeguruprofiler_getFindingsReportAccountSummaryCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `GetFindingsReportAccountSummary` request where `maxResults` was used and the results exceeded the value of that parameter.")
+		codeguruprofiler_getFindingsReportAccountSummaryCmd.Flags().Bool("no-daily-reports-only", false, "A `Boolean` value indicating whether to only return reports from daily profiles.")
+		codeguruprofiler_getFindingsReportAccountSummaryCmd.Flag("no-daily-reports-only").Hidden = true
+	})
 	codeguruprofilerCmd.AddCommand(codeguruprofiler_getFindingsReportAccountSummaryCmd)
 }

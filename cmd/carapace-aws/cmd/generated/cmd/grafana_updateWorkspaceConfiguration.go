@@ -12,12 +12,14 @@ var grafana_updateWorkspaceConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_updateWorkspaceConfigurationCmd).Standalone()
+	carapace.Gen(grafana_updateWorkspaceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_updateWorkspaceConfigurationCmd).Standalone()
 
-	grafana_updateWorkspaceConfigurationCmd.Flags().String("configuration", "", "The new configuration string for the workspace.")
-	grafana_updateWorkspaceConfigurationCmd.Flags().String("grafana-version", "", "Specifies the version of Grafana to support in the workspace.")
-	grafana_updateWorkspaceConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace to update.")
-	grafana_updateWorkspaceConfigurationCmd.MarkFlagRequired("configuration")
-	grafana_updateWorkspaceConfigurationCmd.MarkFlagRequired("workspace-id")
+		grafana_updateWorkspaceConfigurationCmd.Flags().String("configuration", "", "The new configuration string for the workspace.")
+		grafana_updateWorkspaceConfigurationCmd.Flags().String("grafana-version", "", "Specifies the version of Grafana to support in the workspace.")
+		grafana_updateWorkspaceConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace to update.")
+		grafana_updateWorkspaceConfigurationCmd.MarkFlagRequired("configuration")
+		grafana_updateWorkspaceConfigurationCmd.MarkFlagRequired("workspace-id")
+	})
 	grafanaCmd.AddCommand(grafana_updateWorkspaceConfigurationCmd)
 }

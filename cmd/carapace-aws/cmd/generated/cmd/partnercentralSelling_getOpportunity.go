@@ -12,11 +12,13 @@ var partnercentralSelling_getOpportunityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(partnercentralSelling_getOpportunityCmd).Standalone()
+	carapace.Gen(partnercentralSelling_getOpportunityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSelling_getOpportunityCmd).Standalone()
 
-	partnercentralSelling_getOpportunityCmd.Flags().String("catalog", "", "Specifies the catalog associated with the request.")
-	partnercentralSelling_getOpportunityCmd.Flags().String("identifier", "", "Read-only, system generated `Opportunity` unique identifier.")
-	partnercentralSelling_getOpportunityCmd.MarkFlagRequired("catalog")
-	partnercentralSelling_getOpportunityCmd.MarkFlagRequired("identifier")
+		partnercentralSelling_getOpportunityCmd.Flags().String("catalog", "", "Specifies the catalog associated with the request.")
+		partnercentralSelling_getOpportunityCmd.Flags().String("identifier", "", "Read-only, system generated `Opportunity` unique identifier.")
+		partnercentralSelling_getOpportunityCmd.MarkFlagRequired("catalog")
+		partnercentralSelling_getOpportunityCmd.MarkFlagRequired("identifier")
+	})
 	partnercentralSellingCmd.AddCommand(partnercentralSelling_getOpportunityCmd)
 }

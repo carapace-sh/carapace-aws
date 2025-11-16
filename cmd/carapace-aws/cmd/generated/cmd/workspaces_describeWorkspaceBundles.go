@@ -12,10 +12,12 @@ var workspaces_describeWorkspaceBundlesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeWorkspaceBundlesCmd).Standalone()
+	carapace.Gen(workspaces_describeWorkspaceBundlesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeWorkspaceBundlesCmd).Standalone()
 
-	workspaces_describeWorkspaceBundlesCmd.Flags().String("bundle-ids", "", "The identifiers of the bundles.")
-	workspaces_describeWorkspaceBundlesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	workspaces_describeWorkspaceBundlesCmd.Flags().String("owner", "", "The owner of the bundles.")
+		workspaces_describeWorkspaceBundlesCmd.Flags().String("bundle-ids", "", "The identifiers of the bundles.")
+		workspaces_describeWorkspaceBundlesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		workspaces_describeWorkspaceBundlesCmd.Flags().String("owner", "", "The owner of the bundles.")
+	})
 	workspacesCmd.AddCommand(workspaces_describeWorkspaceBundlesCmd)
 }

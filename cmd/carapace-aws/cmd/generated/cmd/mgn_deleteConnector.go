@@ -12,9 +12,11 @@ var mgn_deleteConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_deleteConnectorCmd).Standalone()
+	carapace.Gen(mgn_deleteConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_deleteConnectorCmd).Standalone()
 
-	mgn_deleteConnectorCmd.Flags().String("connector-id", "", "Delete Connector request connector ID.")
-	mgn_deleteConnectorCmd.MarkFlagRequired("connector-id")
+		mgn_deleteConnectorCmd.Flags().String("connector-id", "", "Delete Connector request connector ID.")
+		mgn_deleteConnectorCmd.MarkFlagRequired("connector-id")
+	})
 	mgnCmd.AddCommand(mgn_deleteConnectorCmd)
 }

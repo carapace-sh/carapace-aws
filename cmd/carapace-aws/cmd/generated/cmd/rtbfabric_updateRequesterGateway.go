@@ -12,12 +12,14 @@ var rtbfabric_updateRequesterGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_updateRequesterGatewayCmd).Standalone()
+	carapace.Gen(rtbfabric_updateRequesterGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_updateRequesterGatewayCmd).Standalone()
 
-	rtbfabric_updateRequesterGatewayCmd.Flags().String("client-token", "", "The unique client token.")
-	rtbfabric_updateRequesterGatewayCmd.Flags().String("description", "", "An optional description for the requester gateway.")
-	rtbfabric_updateRequesterGatewayCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
-	rtbfabric_updateRequesterGatewayCmd.MarkFlagRequired("client-token")
-	rtbfabric_updateRequesterGatewayCmd.MarkFlagRequired("gateway-id")
+		rtbfabric_updateRequesterGatewayCmd.Flags().String("client-token", "", "The unique client token.")
+		rtbfabric_updateRequesterGatewayCmd.Flags().String("description", "", "An optional description for the requester gateway.")
+		rtbfabric_updateRequesterGatewayCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
+		rtbfabric_updateRequesterGatewayCmd.MarkFlagRequired("client-token")
+		rtbfabric_updateRequesterGatewayCmd.MarkFlagRequired("gateway-id")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_updateRequesterGatewayCmd)
 }

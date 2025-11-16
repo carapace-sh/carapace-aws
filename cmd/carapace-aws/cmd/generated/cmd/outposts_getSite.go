@@ -12,9 +12,11 @@ var outposts_getSiteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_getSiteCmd).Standalone()
+	carapace.Gen(outposts_getSiteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_getSiteCmd).Standalone()
 
-	outposts_getSiteCmd.Flags().String("site-id", "", "The ID or the Amazon Resource Name (ARN) of the site.")
-	outposts_getSiteCmd.MarkFlagRequired("site-id")
+		outposts_getSiteCmd.Flags().String("site-id", "", "The ID or the Amazon Resource Name (ARN) of the site.")
+		outposts_getSiteCmd.MarkFlagRequired("site-id")
+	})
 	outpostsCmd.AddCommand(outposts_getSiteCmd)
 }

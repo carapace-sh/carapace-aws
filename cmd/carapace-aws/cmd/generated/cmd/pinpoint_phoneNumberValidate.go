@@ -12,9 +12,11 @@ var pinpoint_phoneNumberValidateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_phoneNumberValidateCmd).Standalone()
+	carapace.Gen(pinpoint_phoneNumberValidateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_phoneNumberValidateCmd).Standalone()
 
-	pinpoint_phoneNumberValidateCmd.Flags().String("number-validate-request", "", "")
-	pinpoint_phoneNumberValidateCmd.MarkFlagRequired("number-validate-request")
+		pinpoint_phoneNumberValidateCmd.Flags().String("number-validate-request", "", "")
+		pinpoint_phoneNumberValidateCmd.MarkFlagRequired("number-validate-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_phoneNumberValidateCmd)
 }

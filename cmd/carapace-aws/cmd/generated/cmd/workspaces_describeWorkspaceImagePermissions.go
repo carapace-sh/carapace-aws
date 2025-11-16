@@ -12,11 +12,13 @@ var workspaces_describeWorkspaceImagePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeWorkspaceImagePermissionsCmd).Standalone()
+	carapace.Gen(workspaces_describeWorkspaceImagePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeWorkspaceImagePermissionsCmd).Standalone()
 
-	workspaces_describeWorkspaceImagePermissionsCmd.Flags().String("image-id", "", "The identifier of the image.")
-	workspaces_describeWorkspaceImagePermissionsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	workspaces_describeWorkspaceImagePermissionsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
-	workspaces_describeWorkspaceImagePermissionsCmd.MarkFlagRequired("image-id")
+		workspaces_describeWorkspaceImagePermissionsCmd.Flags().String("image-id", "", "The identifier of the image.")
+		workspaces_describeWorkspaceImagePermissionsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		workspaces_describeWorkspaceImagePermissionsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+		workspaces_describeWorkspaceImagePermissionsCmd.MarkFlagRequired("image-id")
+	})
 	workspacesCmd.AddCommand(workspaces_describeWorkspaceImagePermissionsCmd)
 }

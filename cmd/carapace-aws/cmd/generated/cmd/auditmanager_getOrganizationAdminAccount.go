@@ -12,7 +12,9 @@ var auditmanager_getOrganizationAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getOrganizationAdminAccountCmd).Standalone()
+	carapace.Gen(auditmanager_getOrganizationAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getOrganizationAdminAccountCmd).Standalone()
 
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getOrganizationAdminAccountCmd)
 }

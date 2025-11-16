@@ -12,10 +12,12 @@ var organizations_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_putResourcePolicyCmd).Standalone()
+	carapace.Gen(organizations_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_putResourcePolicyCmd).Standalone()
 
-	organizations_putResourcePolicyCmd.Flags().String("content", "", "If provided, the new content for the resource policy.")
-	organizations_putResourcePolicyCmd.Flags().String("tags", "", "A list of tags that you want to attach to the newly created resource policy.")
-	organizations_putResourcePolicyCmd.MarkFlagRequired("content")
+		organizations_putResourcePolicyCmd.Flags().String("content", "", "If provided, the new content for the resource policy.")
+		organizations_putResourcePolicyCmd.Flags().String("tags", "", "A list of tags that you want to attach to the newly created resource policy.")
+		organizations_putResourcePolicyCmd.MarkFlagRequired("content")
+	})
 	organizationsCmd.AddCommand(organizations_putResourcePolicyCmd)
 }

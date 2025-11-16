@@ -12,13 +12,15 @@ var gamelift_startMatchBackfillCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_startMatchBackfillCmd).Standalone()
+	carapace.Gen(gamelift_startMatchBackfillCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_startMatchBackfillCmd).Standalone()
 
-	gamelift_startMatchBackfillCmd.Flags().String("configuration-name", "", "Name of the matchmaker to use for this request.")
-	gamelift_startMatchBackfillCmd.Flags().String("game-session-arn", "", "A unique identifier for the game session.")
-	gamelift_startMatchBackfillCmd.Flags().String("players", "", "Match information on all players that are currently assigned to the game session.")
-	gamelift_startMatchBackfillCmd.Flags().String("ticket-id", "", "A unique identifier for a matchmaking ticket.")
-	gamelift_startMatchBackfillCmd.MarkFlagRequired("configuration-name")
-	gamelift_startMatchBackfillCmd.MarkFlagRequired("players")
+		gamelift_startMatchBackfillCmd.Flags().String("configuration-name", "", "Name of the matchmaker to use for this request.")
+		gamelift_startMatchBackfillCmd.Flags().String("game-session-arn", "", "A unique identifier for the game session.")
+		gamelift_startMatchBackfillCmd.Flags().String("players", "", "Match information on all players that are currently assigned to the game session.")
+		gamelift_startMatchBackfillCmd.Flags().String("ticket-id", "", "A unique identifier for a matchmaking ticket.")
+		gamelift_startMatchBackfillCmd.MarkFlagRequired("configuration-name")
+		gamelift_startMatchBackfillCmd.MarkFlagRequired("players")
+	})
 	gameliftCmd.AddCommand(gamelift_startMatchBackfillCmd)
 }

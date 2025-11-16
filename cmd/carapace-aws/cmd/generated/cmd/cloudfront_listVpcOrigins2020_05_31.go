@@ -12,9 +12,11 @@ var cloudfront_listVpcOrigins2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_listVpcOrigins2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listVpcOrigins2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listVpcOrigins2020_05_31Cmd).Standalone()
 
-	cloudfront_listVpcOrigins2020_05_31Cmd.Flags().String("marker", "", "The marker associated with the VPC origins list.")
-	cloudfront_listVpcOrigins2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of items included in the list.")
+		cloudfront_listVpcOrigins2020_05_31Cmd.Flags().String("marker", "", "The marker associated with the VPC origins list.")
+		cloudfront_listVpcOrigins2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of items included in the list.")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listVpcOrigins2020_05_31Cmd)
 }

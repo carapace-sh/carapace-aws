@@ -12,11 +12,13 @@ var cognitoIdp_deleteGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_deleteGroupCmd).Standalone()
+	carapace.Gen(cognitoIdp_deleteGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_deleteGroupCmd).Standalone()
 
-	cognitoIdp_deleteGroupCmd.Flags().String("group-name", "", "The name of the group that you want to delete.")
-	cognitoIdp_deleteGroupCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to delete the group.")
-	cognitoIdp_deleteGroupCmd.MarkFlagRequired("group-name")
-	cognitoIdp_deleteGroupCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_deleteGroupCmd.Flags().String("group-name", "", "The name of the group that you want to delete.")
+		cognitoIdp_deleteGroupCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to delete the group.")
+		cognitoIdp_deleteGroupCmd.MarkFlagRequired("group-name")
+		cognitoIdp_deleteGroupCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_deleteGroupCmd)
 }

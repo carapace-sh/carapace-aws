@@ -12,13 +12,15 @@ var observabilityadmin_listResourceTelemetryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_listResourceTelemetryCmd).Standalone()
+	carapace.Gen(observabilityadmin_listResourceTelemetryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_listResourceTelemetryCmd).Standalone()
 
-	observabilityadmin_listResourceTelemetryCmd.Flags().String("max-results", "", "A number field used to limit the number of results within the returned list.")
-	observabilityadmin_listResourceTelemetryCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	observabilityadmin_listResourceTelemetryCmd.Flags().String("resource-identifier-prefix", "", "A string used to filter resources which have a `ResourceIdentifier` starting with the `ResourceIdentifierPrefix`.")
-	observabilityadmin_listResourceTelemetryCmd.Flags().String("resource-tags", "", "A key-value pair to filter resources based on tags associated with the resource.")
-	observabilityadmin_listResourceTelemetryCmd.Flags().String("resource-types", "", "A list of resource types used to filter resources supported by telemetry config.")
-	observabilityadmin_listResourceTelemetryCmd.Flags().String("telemetry-configuration-state", "", "A key-value pair to filter resources based on the telemetry type and the state of the telemetry configuration.")
+		observabilityadmin_listResourceTelemetryCmd.Flags().String("max-results", "", "A number field used to limit the number of results within the returned list.")
+		observabilityadmin_listResourceTelemetryCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		observabilityadmin_listResourceTelemetryCmd.Flags().String("resource-identifier-prefix", "", "A string used to filter resources which have a `ResourceIdentifier` starting with the `ResourceIdentifierPrefix`.")
+		observabilityadmin_listResourceTelemetryCmd.Flags().String("resource-tags", "", "A key-value pair to filter resources based on tags associated with the resource.")
+		observabilityadmin_listResourceTelemetryCmd.Flags().String("resource-types", "", "A list of resource types used to filter resources supported by telemetry config.")
+		observabilityadmin_listResourceTelemetryCmd.Flags().String("telemetry-configuration-state", "", "A key-value pair to filter resources based on the telemetry type and the state of the telemetry configuration.")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_listResourceTelemetryCmd)
 }

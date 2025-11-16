@@ -12,13 +12,15 @@ var connectcases_updateFieldCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_updateFieldCmd).Standalone()
+	carapace.Gen(connectcases_updateFieldCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_updateFieldCmd).Standalone()
 
-	connectcases_updateFieldCmd.Flags().String("description", "", "The description of a field.")
-	connectcases_updateFieldCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_updateFieldCmd.Flags().String("field-id", "", "The unique identifier of a field.")
-	connectcases_updateFieldCmd.Flags().String("name", "", "The name of the field.")
-	connectcases_updateFieldCmd.MarkFlagRequired("domain-id")
-	connectcases_updateFieldCmd.MarkFlagRequired("field-id")
+		connectcases_updateFieldCmd.Flags().String("description", "", "The description of a field.")
+		connectcases_updateFieldCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_updateFieldCmd.Flags().String("field-id", "", "The unique identifier of a field.")
+		connectcases_updateFieldCmd.Flags().String("name", "", "The name of the field.")
+		connectcases_updateFieldCmd.MarkFlagRequired("domain-id")
+		connectcases_updateFieldCmd.MarkFlagRequired("field-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_updateFieldCmd)
 }

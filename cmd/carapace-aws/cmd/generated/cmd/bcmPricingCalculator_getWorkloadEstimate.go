@@ -12,9 +12,11 @@ var bcmPricingCalculator_getWorkloadEstimateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_getWorkloadEstimateCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_getWorkloadEstimateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_getWorkloadEstimateCmd).Standalone()
 
-	bcmPricingCalculator_getWorkloadEstimateCmd.Flags().String("identifier", "", "The unique identifier of the workload estimate to retrieve.")
-	bcmPricingCalculator_getWorkloadEstimateCmd.MarkFlagRequired("identifier")
+		bcmPricingCalculator_getWorkloadEstimateCmd.Flags().String("identifier", "", "The unique identifier of the workload estimate to retrieve.")
+		bcmPricingCalculator_getWorkloadEstimateCmd.MarkFlagRequired("identifier")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_getWorkloadEstimateCmd)
 }

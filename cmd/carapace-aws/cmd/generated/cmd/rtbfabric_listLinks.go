@@ -12,11 +12,13 @@ var rtbfabric_listLinksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_listLinksCmd).Standalone()
+	carapace.Gen(rtbfabric_listLinksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_listLinksCmd).Standalone()
 
-	rtbfabric_listLinksCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
-	rtbfabric_listLinksCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	rtbfabric_listLinksCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
-	rtbfabric_listLinksCmd.MarkFlagRequired("gateway-id")
+		rtbfabric_listLinksCmd.Flags().String("gateway-id", "", "The unique identifier of the gateway.")
+		rtbfabric_listLinksCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		rtbfabric_listLinksCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		rtbfabric_listLinksCmd.MarkFlagRequired("gateway-id")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_listLinksCmd)
 }

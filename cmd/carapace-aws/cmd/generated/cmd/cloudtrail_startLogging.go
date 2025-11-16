@@ -12,9 +12,11 @@ var cloudtrail_startLoggingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_startLoggingCmd).Standalone()
+	carapace.Gen(cloudtrail_startLoggingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_startLoggingCmd).Standalone()
 
-	cloudtrail_startLoggingCmd.Flags().String("name", "", "Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs Amazon Web Services API calls.")
-	cloudtrail_startLoggingCmd.MarkFlagRequired("name")
+		cloudtrail_startLoggingCmd.Flags().String("name", "", "Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs Amazon Web Services API calls.")
+		cloudtrail_startLoggingCmd.MarkFlagRequired("name")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_startLoggingCmd)
 }

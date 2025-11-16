@@ -12,11 +12,13 @@ var route53RecoveryReadiness_getArchitectureRecommendationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_getArchitectureRecommendationsCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_getArchitectureRecommendationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_getArchitectureRecommendationsCmd).Standalone()
 
-	route53RecoveryReadiness_getArchitectureRecommendationsCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
-	route53RecoveryReadiness_getArchitectureRecommendationsCmd.Flags().String("next-token", "", "The token that identifies which batch of results you want to see.")
-	route53RecoveryReadiness_getArchitectureRecommendationsCmd.Flags().String("recovery-group-name", "", "The name of a recovery group.")
-	route53RecoveryReadiness_getArchitectureRecommendationsCmd.MarkFlagRequired("recovery-group-name")
+		route53RecoveryReadiness_getArchitectureRecommendationsCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
+		route53RecoveryReadiness_getArchitectureRecommendationsCmd.Flags().String("next-token", "", "The token that identifies which batch of results you want to see.")
+		route53RecoveryReadiness_getArchitectureRecommendationsCmd.Flags().String("recovery-group-name", "", "The name of a recovery group.")
+		route53RecoveryReadiness_getArchitectureRecommendationsCmd.MarkFlagRequired("recovery-group-name")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_getArchitectureRecommendationsCmd)
 }

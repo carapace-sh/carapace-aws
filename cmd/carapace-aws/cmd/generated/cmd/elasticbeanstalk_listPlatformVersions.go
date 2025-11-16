@@ -12,10 +12,12 @@ var elasticbeanstalk_listPlatformVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_listPlatformVersionsCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_listPlatformVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_listPlatformVersionsCmd).Standalone()
 
-	elasticbeanstalk_listPlatformVersionsCmd.Flags().String("filters", "", "Criteria for restricting the resulting list of platform versions.")
-	elasticbeanstalk_listPlatformVersionsCmd.Flags().String("max-records", "", "The maximum number of platform version values returned in one call.")
-	elasticbeanstalk_listPlatformVersionsCmd.Flags().String("next-token", "", "For a paginated request.")
+		elasticbeanstalk_listPlatformVersionsCmd.Flags().String("filters", "", "Criteria for restricting the resulting list of platform versions.")
+		elasticbeanstalk_listPlatformVersionsCmd.Flags().String("max-records", "", "The maximum number of platform version values returned in one call.")
+		elasticbeanstalk_listPlatformVersionsCmd.Flags().String("next-token", "", "For a paginated request.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_listPlatformVersionsCmd)
 }

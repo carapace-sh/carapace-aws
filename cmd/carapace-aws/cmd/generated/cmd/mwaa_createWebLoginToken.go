@@ -12,9 +12,11 @@ var mwaa_createWebLoginTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mwaa_createWebLoginTokenCmd).Standalone()
+	carapace.Gen(mwaa_createWebLoginTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mwaa_createWebLoginTokenCmd).Standalone()
 
-	mwaa_createWebLoginTokenCmd.Flags().String("name", "", "The name of the Amazon MWAA environment.")
-	mwaa_createWebLoginTokenCmd.MarkFlagRequired("name")
+		mwaa_createWebLoginTokenCmd.Flags().String("name", "", "The name of the Amazon MWAA environment.")
+		mwaa_createWebLoginTokenCmd.MarkFlagRequired("name")
+	})
 	mwaaCmd.AddCommand(mwaa_createWebLoginTokenCmd)
 }

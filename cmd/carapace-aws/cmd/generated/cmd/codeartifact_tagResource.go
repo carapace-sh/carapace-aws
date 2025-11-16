@@ -12,11 +12,13 @@ var codeartifact_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeartifact_tagResourceCmd).Standalone()
+	carapace.Gen(codeartifact_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeartifact_tagResourceCmd).Standalone()
 
-	codeartifact_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to add or update tags for.")
-	codeartifact_tagResourceCmd.Flags().String("tags", "", "The tags you want to modify or add to the resource.")
-	codeartifact_tagResourceCmd.MarkFlagRequired("resource-arn")
-	codeartifact_tagResourceCmd.MarkFlagRequired("tags")
+		codeartifact_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to add or update tags for.")
+		codeartifact_tagResourceCmd.Flags().String("tags", "", "The tags you want to modify or add to the resource.")
+		codeartifact_tagResourceCmd.MarkFlagRequired("resource-arn")
+		codeartifact_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	codeartifactCmd.AddCommand(codeartifact_tagResourceCmd)
 }

@@ -12,9 +12,11 @@ var chime_updateGlobalSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_updateGlobalSettingsCmd).Standalone()
+	carapace.Gen(chime_updateGlobalSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_updateGlobalSettingsCmd).Standalone()
 
-	chime_updateGlobalSettingsCmd.Flags().String("business-calling", "", "The Amazon Chime Business Calling settings.")
-	chime_updateGlobalSettingsCmd.Flags().String("voice-connector", "", "The Amazon Chime Voice Connector settings.")
+		chime_updateGlobalSettingsCmd.Flags().String("business-calling", "", "The Amazon Chime Business Calling settings.")
+		chime_updateGlobalSettingsCmd.Flags().String("voice-connector", "", "The Amazon Chime Voice Connector settings.")
+	})
 	chimeCmd.AddCommand(chime_updateGlobalSettingsCmd)
 }

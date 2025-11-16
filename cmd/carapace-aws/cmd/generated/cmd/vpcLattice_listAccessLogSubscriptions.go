@@ -12,11 +12,13 @@ var vpcLattice_listAccessLogSubscriptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listAccessLogSubscriptionsCmd).Standalone()
+	carapace.Gen(vpcLattice_listAccessLogSubscriptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listAccessLogSubscriptionsCmd).Standalone()
 
-	vpcLattice_listAccessLogSubscriptionsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	vpcLattice_listAccessLogSubscriptionsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
-	vpcLattice_listAccessLogSubscriptionsCmd.Flags().String("resource-identifier", "", "The ID or ARN of the service network or service.")
-	vpcLattice_listAccessLogSubscriptionsCmd.MarkFlagRequired("resource-identifier")
+		vpcLattice_listAccessLogSubscriptionsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		vpcLattice_listAccessLogSubscriptionsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+		vpcLattice_listAccessLogSubscriptionsCmd.Flags().String("resource-identifier", "", "The ID or ARN of the service network or service.")
+		vpcLattice_listAccessLogSubscriptionsCmd.MarkFlagRequired("resource-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listAccessLogSubscriptionsCmd)
 }

@@ -12,9 +12,11 @@ var iotfleetwise_deleteModelManifestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_deleteModelManifestCmd).Standalone()
+	carapace.Gen(iotfleetwise_deleteModelManifestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_deleteModelManifestCmd).Standalone()
 
-	iotfleetwise_deleteModelManifestCmd.Flags().String("name", "", "The name of the model manifest to delete.")
-	iotfleetwise_deleteModelManifestCmd.MarkFlagRequired("name")
+		iotfleetwise_deleteModelManifestCmd.Flags().String("name", "", "The name of the model manifest to delete.")
+		iotfleetwise_deleteModelManifestCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_deleteModelManifestCmd)
 }

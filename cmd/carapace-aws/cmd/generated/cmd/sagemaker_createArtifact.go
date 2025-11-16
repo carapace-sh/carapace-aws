@@ -12,15 +12,17 @@ var sagemaker_createArtifactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_createArtifactCmd).Standalone()
+	carapace.Gen(sagemaker_createArtifactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_createArtifactCmd).Standalone()
 
-	sagemaker_createArtifactCmd.Flags().String("artifact-name", "", "The name of the artifact.")
-	sagemaker_createArtifactCmd.Flags().String("artifact-type", "", "The artifact type.")
-	sagemaker_createArtifactCmd.Flags().String("metadata-properties", "", "")
-	sagemaker_createArtifactCmd.Flags().String("properties", "", "A list of properties to add to the artifact.")
-	sagemaker_createArtifactCmd.Flags().String("source", "", "The ID, ID type, and URI of the source.")
-	sagemaker_createArtifactCmd.Flags().String("tags", "", "A list of tags to apply to the artifact.")
-	sagemaker_createArtifactCmd.MarkFlagRequired("artifact-type")
-	sagemaker_createArtifactCmd.MarkFlagRequired("source")
+		sagemaker_createArtifactCmd.Flags().String("artifact-name", "", "The name of the artifact.")
+		sagemaker_createArtifactCmd.Flags().String("artifact-type", "", "The artifact type.")
+		sagemaker_createArtifactCmd.Flags().String("metadata-properties", "", "")
+		sagemaker_createArtifactCmd.Flags().String("properties", "", "A list of properties to add to the artifact.")
+		sagemaker_createArtifactCmd.Flags().String("source", "", "The ID, ID type, and URI of the source.")
+		sagemaker_createArtifactCmd.Flags().String("tags", "", "A list of tags to apply to the artifact.")
+		sagemaker_createArtifactCmd.MarkFlagRequired("artifact-type")
+		sagemaker_createArtifactCmd.MarkFlagRequired("source")
+	})
 	sagemakerCmd.AddCommand(sagemaker_createArtifactCmd)
 }

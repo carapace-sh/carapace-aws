@@ -12,11 +12,13 @@ var connectcampaignsv2_putConnectInstanceIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_putConnectInstanceIntegrationCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_putConnectInstanceIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_putConnectInstanceIntegrationCmd).Standalone()
 
-	connectcampaignsv2_putConnectInstanceIntegrationCmd.Flags().String("connect-instance-id", "", "")
-	connectcampaignsv2_putConnectInstanceIntegrationCmd.Flags().String("integration-config", "", "")
-	connectcampaignsv2_putConnectInstanceIntegrationCmd.MarkFlagRequired("connect-instance-id")
-	connectcampaignsv2_putConnectInstanceIntegrationCmd.MarkFlagRequired("integration-config")
+		connectcampaignsv2_putConnectInstanceIntegrationCmd.Flags().String("connect-instance-id", "", "")
+		connectcampaignsv2_putConnectInstanceIntegrationCmd.Flags().String("integration-config", "", "")
+		connectcampaignsv2_putConnectInstanceIntegrationCmd.MarkFlagRequired("connect-instance-id")
+		connectcampaignsv2_putConnectInstanceIntegrationCmd.MarkFlagRequired("integration-config")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_putConnectInstanceIntegrationCmd)
 }

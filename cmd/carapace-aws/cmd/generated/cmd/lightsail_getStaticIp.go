@@ -12,9 +12,11 @@ var lightsail_getStaticIpCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getStaticIpCmd).Standalone()
+	carapace.Gen(lightsail_getStaticIpCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getStaticIpCmd).Standalone()
 
-	lightsail_getStaticIpCmd.Flags().String("static-ip-name", "", "The name of the static IP in Lightsail.")
-	lightsail_getStaticIpCmd.MarkFlagRequired("static-ip-name")
+		lightsail_getStaticIpCmd.Flags().String("static-ip-name", "", "The name of the static IP in Lightsail.")
+		lightsail_getStaticIpCmd.MarkFlagRequired("static-ip-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getStaticIpCmd)
 }

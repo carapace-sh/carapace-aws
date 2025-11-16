@@ -12,7 +12,9 @@ var cloudfrontKeyvaluestoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfrontKeyvaluestoreCmd).Standalone()
+	carapace.Gen(cloudfrontKeyvaluestoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfrontKeyvaluestoreCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cloudfrontKeyvaluestoreCmd)
 }

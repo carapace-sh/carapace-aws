@@ -12,11 +12,13 @@ var dms_moveReplicationTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_moveReplicationTaskCmd).Standalone()
+	carapace.Gen(dms_moveReplicationTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_moveReplicationTaskCmd).Standalone()
 
-	dms_moveReplicationTaskCmd.Flags().String("replication-task-arn", "", "The Amazon Resource Name (ARN) of the task that you want to move.")
-	dms_moveReplicationTaskCmd.Flags().String("target-replication-instance-arn", "", "The ARN of the replication instance where you want to move the task to.")
-	dms_moveReplicationTaskCmd.MarkFlagRequired("replication-task-arn")
-	dms_moveReplicationTaskCmd.MarkFlagRequired("target-replication-instance-arn")
+		dms_moveReplicationTaskCmd.Flags().String("replication-task-arn", "", "The Amazon Resource Name (ARN) of the task that you want to move.")
+		dms_moveReplicationTaskCmd.Flags().String("target-replication-instance-arn", "", "The ARN of the replication instance where you want to move the task to.")
+		dms_moveReplicationTaskCmd.MarkFlagRequired("replication-task-arn")
+		dms_moveReplicationTaskCmd.MarkFlagRequired("target-replication-instance-arn")
+	})
 	dmsCmd.AddCommand(dms_moveReplicationTaskCmd)
 }

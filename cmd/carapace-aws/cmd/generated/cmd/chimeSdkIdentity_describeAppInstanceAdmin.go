@@ -12,11 +12,13 @@ var chimeSdkIdentity_describeAppInstanceAdminCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_describeAppInstanceAdminCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_describeAppInstanceAdminCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_describeAppInstanceAdminCmd).Standalone()
 
-	chimeSdkIdentity_describeAppInstanceAdminCmd.Flags().String("app-instance-admin-arn", "", "The ARN of the `AppInstanceAdmin`.")
-	chimeSdkIdentity_describeAppInstanceAdminCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
-	chimeSdkIdentity_describeAppInstanceAdminCmd.MarkFlagRequired("app-instance-admin-arn")
-	chimeSdkIdentity_describeAppInstanceAdminCmd.MarkFlagRequired("app-instance-arn")
+		chimeSdkIdentity_describeAppInstanceAdminCmd.Flags().String("app-instance-admin-arn", "", "The ARN of the `AppInstanceAdmin`.")
+		chimeSdkIdentity_describeAppInstanceAdminCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
+		chimeSdkIdentity_describeAppInstanceAdminCmd.MarkFlagRequired("app-instance-admin-arn")
+		chimeSdkIdentity_describeAppInstanceAdminCmd.MarkFlagRequired("app-instance-arn")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_describeAppInstanceAdminCmd)
 }

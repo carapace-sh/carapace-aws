@@ -12,8 +12,10 @@ var elasticbeanstalk_deletePlatformVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_deletePlatformVersionCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_deletePlatformVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_deletePlatformVersionCmd).Standalone()
 
-	elasticbeanstalk_deletePlatformVersionCmd.Flags().String("platform-arn", "", "The ARN of the version of the custom platform.")
+		elasticbeanstalk_deletePlatformVersionCmd.Flags().String("platform-arn", "", "The ARN of the version of the custom platform.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_deletePlatformVersionCmd)
 }

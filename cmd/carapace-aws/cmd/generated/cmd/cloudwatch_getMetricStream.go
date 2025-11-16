@@ -12,9 +12,11 @@ var cloudwatch_getMetricStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_getMetricStreamCmd).Standalone()
+	carapace.Gen(cloudwatch_getMetricStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_getMetricStreamCmd).Standalone()
 
-	cloudwatch_getMetricStreamCmd.Flags().String("name", "", "The name of the metric stream to retrieve information about.")
-	cloudwatch_getMetricStreamCmd.MarkFlagRequired("name")
+		cloudwatch_getMetricStreamCmd.Flags().String("name", "", "The name of the metric stream to retrieve information about.")
+		cloudwatch_getMetricStreamCmd.MarkFlagRequired("name")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_getMetricStreamCmd)
 }

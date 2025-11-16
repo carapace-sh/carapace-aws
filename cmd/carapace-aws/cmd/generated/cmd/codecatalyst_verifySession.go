@@ -12,7 +12,9 @@ var codecatalyst_verifySessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_verifySessionCmd).Standalone()
+	carapace.Gen(codecatalyst_verifySessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_verifySessionCmd).Standalone()
 
+	})
 	codecatalystCmd.AddCommand(codecatalyst_verifySessionCmd)
 }

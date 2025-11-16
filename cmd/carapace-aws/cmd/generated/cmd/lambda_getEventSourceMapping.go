@@ -12,9 +12,11 @@ var lambda_getEventSourceMappingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getEventSourceMappingCmd).Standalone()
+	carapace.Gen(lambda_getEventSourceMappingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getEventSourceMappingCmd).Standalone()
 
-	lambda_getEventSourceMappingCmd.Flags().String("uuid", "", "The identifier of the event source mapping.")
-	lambda_getEventSourceMappingCmd.MarkFlagRequired("uuid")
+		lambda_getEventSourceMappingCmd.Flags().String("uuid", "", "The identifier of the event source mapping.")
+		lambda_getEventSourceMappingCmd.MarkFlagRequired("uuid")
+	})
 	lambdaCmd.AddCommand(lambda_getEventSourceMappingCmd)
 }

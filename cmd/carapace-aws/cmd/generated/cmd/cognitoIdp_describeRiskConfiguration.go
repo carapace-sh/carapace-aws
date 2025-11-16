@@ -12,10 +12,12 @@ var cognitoIdp_describeRiskConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_describeRiskConfigurationCmd).Standalone()
+	carapace.Gen(cognitoIdp_describeRiskConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_describeRiskConfigurationCmd).Standalone()
 
-	cognitoIdp_describeRiskConfigurationCmd.Flags().String("client-id", "", "The ID of the app client with the risk configuration that you want to inspect.")
-	cognitoIdp_describeRiskConfigurationCmd.Flags().String("user-pool-id", "", "The ID of the user pool with the risk configuration that you want to inspect.")
-	cognitoIdp_describeRiskConfigurationCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_describeRiskConfigurationCmd.Flags().String("client-id", "", "The ID of the app client with the risk configuration that you want to inspect.")
+		cognitoIdp_describeRiskConfigurationCmd.Flags().String("user-pool-id", "", "The ID of the user pool with the risk configuration that you want to inspect.")
+		cognitoIdp_describeRiskConfigurationCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_describeRiskConfigurationCmd)
 }

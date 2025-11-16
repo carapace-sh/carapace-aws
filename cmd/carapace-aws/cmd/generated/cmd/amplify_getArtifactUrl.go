@@ -12,9 +12,11 @@ var amplify_getArtifactUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_getArtifactUrlCmd).Standalone()
+	carapace.Gen(amplify_getArtifactUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_getArtifactUrlCmd).Standalone()
 
-	amplify_getArtifactUrlCmd.Flags().String("artifact-id", "", "The unique ID for an artifact.")
-	amplify_getArtifactUrlCmd.MarkFlagRequired("artifact-id")
+		amplify_getArtifactUrlCmd.Flags().String("artifact-id", "", "The unique ID for an artifact.")
+		amplify_getArtifactUrlCmd.MarkFlagRequired("artifact-id")
+	})
 	amplifyCmd.AddCommand(amplify_getArtifactUrlCmd)
 }

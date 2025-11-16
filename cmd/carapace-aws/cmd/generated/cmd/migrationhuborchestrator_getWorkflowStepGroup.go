@@ -12,11 +12,13 @@ var migrationhuborchestrator_getWorkflowStepGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_getWorkflowStepGroupCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_getWorkflowStepGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_getWorkflowStepGroupCmd).Standalone()
 
-	migrationhuborchestrator_getWorkflowStepGroupCmd.Flags().String("id", "", "The ID of the step group.")
-	migrationhuborchestrator_getWorkflowStepGroupCmd.Flags().String("workflow-id", "", "The ID of the migration workflow.")
-	migrationhuborchestrator_getWorkflowStepGroupCmd.MarkFlagRequired("id")
-	migrationhuborchestrator_getWorkflowStepGroupCmd.MarkFlagRequired("workflow-id")
+		migrationhuborchestrator_getWorkflowStepGroupCmd.Flags().String("id", "", "The ID of the step group.")
+		migrationhuborchestrator_getWorkflowStepGroupCmd.Flags().String("workflow-id", "", "The ID of the migration workflow.")
+		migrationhuborchestrator_getWorkflowStepGroupCmd.MarkFlagRequired("id")
+		migrationhuborchestrator_getWorkflowStepGroupCmd.MarkFlagRequired("workflow-id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_getWorkflowStepGroupCmd)
 }

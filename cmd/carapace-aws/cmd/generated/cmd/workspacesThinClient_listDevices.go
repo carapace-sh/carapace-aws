@@ -12,9 +12,11 @@ var workspacesThinClient_listDevicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClient_listDevicesCmd).Standalone()
+	carapace.Gen(workspacesThinClient_listDevicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClient_listDevicesCmd).Standalone()
 
-	workspacesThinClient_listDevicesCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	workspacesThinClient_listDevicesCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		workspacesThinClient_listDevicesCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		workspacesThinClient_listDevicesCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+	})
 	workspacesThinClientCmd.AddCommand(workspacesThinClient_listDevicesCmd)
 }

@@ -12,9 +12,11 @@ var lookoutequipment_stopRetrainingSchedulerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_stopRetrainingSchedulerCmd).Standalone()
+	carapace.Gen(lookoutequipment_stopRetrainingSchedulerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_stopRetrainingSchedulerCmd).Standalone()
 
-	lookoutequipment_stopRetrainingSchedulerCmd.Flags().String("model-name", "", "The name of the model whose retraining scheduler you want to stop.")
-	lookoutequipment_stopRetrainingSchedulerCmd.MarkFlagRequired("model-name")
+		lookoutequipment_stopRetrainingSchedulerCmd.Flags().String("model-name", "", "The name of the model whose retraining scheduler you want to stop.")
+		lookoutequipment_stopRetrainingSchedulerCmd.MarkFlagRequired("model-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_stopRetrainingSchedulerCmd)
 }

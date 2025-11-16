@@ -12,8 +12,10 @@ var opensearch_listDomainNamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_listDomainNamesCmd).Standalone()
+	carapace.Gen(opensearch_listDomainNamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_listDomainNamesCmd).Standalone()
 
-	opensearch_listDomainNamesCmd.Flags().String("engine-type", "", "Filters the output by domain engine type.")
+		opensearch_listDomainNamesCmd.Flags().String("engine-type", "", "Filters the output by domain engine type.")
+	})
 	opensearchCmd.AddCommand(opensearch_listDomainNamesCmd)
 }

@@ -12,11 +12,13 @@ var connect_deleteContactEvaluationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteContactEvaluationCmd).Standalone()
+	carapace.Gen(connect_deleteContactEvaluationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteContactEvaluationCmd).Standalone()
 
-	connect_deleteContactEvaluationCmd.Flags().String("evaluation-id", "", "A unique identifier for the contact evaluation.")
-	connect_deleteContactEvaluationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteContactEvaluationCmd.MarkFlagRequired("evaluation-id")
-	connect_deleteContactEvaluationCmd.MarkFlagRequired("instance-id")
+		connect_deleteContactEvaluationCmd.Flags().String("evaluation-id", "", "A unique identifier for the contact evaluation.")
+		connect_deleteContactEvaluationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteContactEvaluationCmd.MarkFlagRequired("evaluation-id")
+		connect_deleteContactEvaluationCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_deleteContactEvaluationCmd)
 }

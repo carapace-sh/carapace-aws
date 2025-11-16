@@ -12,12 +12,14 @@ var medialive_updateSdiSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_updateSdiSourceCmd).Standalone()
+	carapace.Gen(medialive_updateSdiSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_updateSdiSourceCmd).Standalone()
 
-	medialive_updateSdiSourceCmd.Flags().String("mode", "", "Include this parameter only if you want to change the name of the SdiSource.")
-	medialive_updateSdiSourceCmd.Flags().String("name", "", "Include this parameter only if you want to change the name of the SdiSource.")
-	medialive_updateSdiSourceCmd.Flags().String("sdi-source-id", "", "The ID of the SdiSource")
-	medialive_updateSdiSourceCmd.Flags().String("type", "", "Include this parameter only if you want to change the mode.")
-	medialive_updateSdiSourceCmd.MarkFlagRequired("sdi-source-id")
+		medialive_updateSdiSourceCmd.Flags().String("mode", "", "Include this parameter only if you want to change the name of the SdiSource.")
+		medialive_updateSdiSourceCmd.Flags().String("name", "", "Include this parameter only if you want to change the name of the SdiSource.")
+		medialive_updateSdiSourceCmd.Flags().String("sdi-source-id", "", "The ID of the SdiSource")
+		medialive_updateSdiSourceCmd.Flags().String("type", "", "Include this parameter only if you want to change the mode.")
+		medialive_updateSdiSourceCmd.MarkFlagRequired("sdi-source-id")
+	})
 	medialiveCmd.AddCommand(medialive_updateSdiSourceCmd)
 }

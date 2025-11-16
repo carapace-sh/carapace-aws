@@ -12,9 +12,11 @@ var fis_stopExperimentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_stopExperimentCmd).Standalone()
+	carapace.Gen(fis_stopExperimentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_stopExperimentCmd).Standalone()
 
-	fis_stopExperimentCmd.Flags().String("id", "", "The ID of the experiment.")
-	fis_stopExperimentCmd.MarkFlagRequired("id")
+		fis_stopExperimentCmd.Flags().String("id", "", "The ID of the experiment.")
+		fis_stopExperimentCmd.MarkFlagRequired("id")
+	})
 	fisCmd.AddCommand(fis_stopExperimentCmd)
 }

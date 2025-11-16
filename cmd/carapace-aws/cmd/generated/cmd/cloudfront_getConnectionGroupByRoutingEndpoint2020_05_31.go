@@ -12,9 +12,11 @@ var cloudfront_getConnectionGroupByRoutingEndpoint2020_05_31Cmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(cloudfront_getConnectionGroupByRoutingEndpoint2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getConnectionGroupByRoutingEndpoint2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getConnectionGroupByRoutingEndpoint2020_05_31Cmd).Standalone()
 
-	cloudfront_getConnectionGroupByRoutingEndpoint2020_05_31Cmd.Flags().String("routing-endpoint", "", "The routing endpoint for the target connection group, such as d111111abcdef8.cloudfront.net.")
-	cloudfront_getConnectionGroupByRoutingEndpoint2020_05_31Cmd.MarkFlagRequired("routing-endpoint")
+		cloudfront_getConnectionGroupByRoutingEndpoint2020_05_31Cmd.Flags().String("routing-endpoint", "", "The routing endpoint for the target connection group, such as d111111abcdef8.cloudfront.net.")
+		cloudfront_getConnectionGroupByRoutingEndpoint2020_05_31Cmd.MarkFlagRequired("routing-endpoint")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getConnectionGroupByRoutingEndpoint2020_05_31Cmd)
 }

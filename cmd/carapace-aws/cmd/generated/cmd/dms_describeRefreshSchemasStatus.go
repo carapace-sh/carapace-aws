@@ -12,9 +12,11 @@ var dms_describeRefreshSchemasStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeRefreshSchemasStatusCmd).Standalone()
+	carapace.Gen(dms_describeRefreshSchemasStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeRefreshSchemasStatusCmd).Standalone()
 
-	dms_describeRefreshSchemasStatusCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.")
-	dms_describeRefreshSchemasStatusCmd.MarkFlagRequired("endpoint-arn")
+		dms_describeRefreshSchemasStatusCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.")
+		dms_describeRefreshSchemasStatusCmd.MarkFlagRequired("endpoint-arn")
+	})
 	dmsCmd.AddCommand(dms_describeRefreshSchemasStatusCmd)
 }

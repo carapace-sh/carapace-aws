@@ -12,9 +12,11 @@ var appstream_startAppBlockBuilderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_startAppBlockBuilderCmd).Standalone()
+	carapace.Gen(appstream_startAppBlockBuilderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_startAppBlockBuilderCmd).Standalone()
 
-	appstream_startAppBlockBuilderCmd.Flags().String("name", "", "The name of the app block builder.")
-	appstream_startAppBlockBuilderCmd.MarkFlagRequired("name")
+		appstream_startAppBlockBuilderCmd.Flags().String("name", "", "The name of the app block builder.")
+		appstream_startAppBlockBuilderCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_startAppBlockBuilderCmd)
 }

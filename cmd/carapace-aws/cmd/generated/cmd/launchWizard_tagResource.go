@@ -12,11 +12,13 @@ var launchWizard_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(launchWizard_tagResourceCmd).Standalone()
+	carapace.Gen(launchWizard_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(launchWizard_tagResourceCmd).Standalone()
 
-	launchWizard_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	launchWizard_tagResourceCmd.Flags().String("tags", "", "One or more tags to attach to the resource.")
-	launchWizard_tagResourceCmd.MarkFlagRequired("resource-arn")
-	launchWizard_tagResourceCmd.MarkFlagRequired("tags")
+		launchWizard_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		launchWizard_tagResourceCmd.Flags().String("tags", "", "One or more tags to attach to the resource.")
+		launchWizard_tagResourceCmd.MarkFlagRequired("resource-arn")
+		launchWizard_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	launchWizardCmd.AddCommand(launchWizard_tagResourceCmd)
 }

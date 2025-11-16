@@ -12,9 +12,11 @@ var mwaa_deleteEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mwaa_deleteEnvironmentCmd).Standalone()
+	carapace.Gen(mwaa_deleteEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mwaa_deleteEnvironmentCmd).Standalone()
 
-	mwaa_deleteEnvironmentCmd.Flags().String("name", "", "The name of the Amazon MWAA environment.")
-	mwaa_deleteEnvironmentCmd.MarkFlagRequired("name")
+		mwaa_deleteEnvironmentCmd.Flags().String("name", "", "The name of the Amazon MWAA environment.")
+		mwaa_deleteEnvironmentCmd.MarkFlagRequired("name")
+	})
 	mwaaCmd.AddCommand(mwaa_deleteEnvironmentCmd)
 }

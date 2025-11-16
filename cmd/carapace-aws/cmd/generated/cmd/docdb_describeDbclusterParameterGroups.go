@@ -12,11 +12,13 @@ var docdb_describeDbclusterParameterGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_describeDbclusterParameterGroupsCmd).Standalone()
+	carapace.Gen(docdb_describeDbclusterParameterGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_describeDbclusterParameterGroupsCmd).Standalone()
 
-	docdb_describeDbclusterParameterGroupsCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of a specific cluster parameter group to return details for.")
-	docdb_describeDbclusterParameterGroupsCmd.Flags().String("filters", "", "This parameter is not currently supported.")
-	docdb_describeDbclusterParameterGroupsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	docdb_describeDbclusterParameterGroupsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		docdb_describeDbclusterParameterGroupsCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of a specific cluster parameter group to return details for.")
+		docdb_describeDbclusterParameterGroupsCmd.Flags().String("filters", "", "This parameter is not currently supported.")
+		docdb_describeDbclusterParameterGroupsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		docdb_describeDbclusterParameterGroupsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	docdbCmd.AddCommand(docdb_describeDbclusterParameterGroupsCmd)
 }

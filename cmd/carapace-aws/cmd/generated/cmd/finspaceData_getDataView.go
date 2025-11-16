@@ -12,11 +12,13 @@ var finspaceData_getDataViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_getDataViewCmd).Standalone()
+	carapace.Gen(finspaceData_getDataViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_getDataViewCmd).Standalone()
 
-	finspaceData_getDataViewCmd.Flags().String("data-view-id", "", "The unique identifier for the Dataview.")
-	finspaceData_getDataViewCmd.Flags().String("dataset-id", "", "The unique identifier for the Dataset used in the Dataview.")
-	finspaceData_getDataViewCmd.MarkFlagRequired("data-view-id")
-	finspaceData_getDataViewCmd.MarkFlagRequired("dataset-id")
+		finspaceData_getDataViewCmd.Flags().String("data-view-id", "", "The unique identifier for the Dataview.")
+		finspaceData_getDataViewCmd.Flags().String("dataset-id", "", "The unique identifier for the Dataset used in the Dataview.")
+		finspaceData_getDataViewCmd.MarkFlagRequired("data-view-id")
+		finspaceData_getDataViewCmd.MarkFlagRequired("dataset-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_getDataViewCmd)
 }

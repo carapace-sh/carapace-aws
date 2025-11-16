@@ -12,14 +12,16 @@ var qconnect_listAiagentVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_listAiagentVersionsCmd).Standalone()
+	carapace.Gen(qconnect_listAiagentVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_listAiagentVersionsCmd).Standalone()
 
-	qconnect_listAiagentVersionsCmd.Flags().String("ai-agent-id", "", "The identifier of the Amazon Q in Connect AI Agent for which versions are to be listed.")
-	qconnect_listAiagentVersionsCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_listAiagentVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_listAiagentVersionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	qconnect_listAiagentVersionsCmd.Flags().String("origin", "", "The origin of the AI Agent versions to be listed.")
-	qconnect_listAiagentVersionsCmd.MarkFlagRequired("ai-agent-id")
-	qconnect_listAiagentVersionsCmd.MarkFlagRequired("assistant-id")
+		qconnect_listAiagentVersionsCmd.Flags().String("ai-agent-id", "", "The identifier of the Amazon Q in Connect AI Agent for which versions are to be listed.")
+		qconnect_listAiagentVersionsCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_listAiagentVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_listAiagentVersionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_listAiagentVersionsCmd.Flags().String("origin", "", "The origin of the AI Agent versions to be listed.")
+		qconnect_listAiagentVersionsCmd.MarkFlagRequired("ai-agent-id")
+		qconnect_listAiagentVersionsCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_listAiagentVersionsCmd)
 }

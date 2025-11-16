@@ -12,9 +12,11 @@ var firehose_stopDeliveryStreamEncryptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(firehose_stopDeliveryStreamEncryptionCmd).Standalone()
+	carapace.Gen(firehose_stopDeliveryStreamEncryptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(firehose_stopDeliveryStreamEncryptionCmd).Standalone()
 
-	firehose_stopDeliveryStreamEncryptionCmd.Flags().String("delivery-stream-name", "", "The name of the Firehose stream for which you want to disable server-side encryption (SSE).")
-	firehose_stopDeliveryStreamEncryptionCmd.MarkFlagRequired("delivery-stream-name")
+		firehose_stopDeliveryStreamEncryptionCmd.Flags().String("delivery-stream-name", "", "The name of the Firehose stream for which you want to disable server-side encryption (SSE).")
+		firehose_stopDeliveryStreamEncryptionCmd.MarkFlagRequired("delivery-stream-name")
+	})
 	firehoseCmd.AddCommand(firehose_stopDeliveryStreamEncryptionCmd)
 }

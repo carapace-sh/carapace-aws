@@ -12,10 +12,12 @@ var ec2_getInstanceMetadataDefaultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getInstanceMetadataDefaultsCmd).Standalone()
+	carapace.Gen(ec2_getInstanceMetadataDefaultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getInstanceMetadataDefaultsCmd).Standalone()
 
-	ec2_getInstanceMetadataDefaultsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_getInstanceMetadataDefaultsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_getInstanceMetadataDefaultsCmd.Flag("no-dry-run").Hidden = true
+		ec2_getInstanceMetadataDefaultsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_getInstanceMetadataDefaultsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_getInstanceMetadataDefaultsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_getInstanceMetadataDefaultsCmd)
 }

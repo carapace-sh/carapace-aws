@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_carrierLookupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_carrierLookupCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_carrierLookupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_carrierLookupCmd).Standalone()
 
-	pinpointSmsVoiceV2_carrierLookupCmd.Flags().String("phone-number", "", "The phone number that you want to retrieve information about.")
-	pinpointSmsVoiceV2_carrierLookupCmd.MarkFlagRequired("phone-number")
+		pinpointSmsVoiceV2_carrierLookupCmd.Flags().String("phone-number", "", "The phone number that you want to retrieve information about.")
+		pinpointSmsVoiceV2_carrierLookupCmd.MarkFlagRequired("phone-number")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_carrierLookupCmd)
 }

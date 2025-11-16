@@ -12,9 +12,11 @@ var medialive_stopMultiplexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_stopMultiplexCmd).Standalone()
+	carapace.Gen(medialive_stopMultiplexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_stopMultiplexCmd).Standalone()
 
-	medialive_stopMultiplexCmd.Flags().String("multiplex-id", "", "The ID of the multiplex.")
-	medialive_stopMultiplexCmd.MarkFlagRequired("multiplex-id")
+		medialive_stopMultiplexCmd.Flags().String("multiplex-id", "", "The ID of the multiplex.")
+		medialive_stopMultiplexCmd.MarkFlagRequired("multiplex-id")
+	})
 	medialiveCmd.AddCommand(medialive_stopMultiplexCmd)
 }

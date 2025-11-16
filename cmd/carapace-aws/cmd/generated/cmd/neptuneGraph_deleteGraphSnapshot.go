@@ -12,9 +12,11 @@ var neptuneGraph_deleteGraphSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_deleteGraphSnapshotCmd).Standalone()
+	carapace.Gen(neptuneGraph_deleteGraphSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_deleteGraphSnapshotCmd).Standalone()
 
-	neptuneGraph_deleteGraphSnapshotCmd.Flags().String("snapshot-identifier", "", "ID of the graph snapshot to be deleted.")
-	neptuneGraph_deleteGraphSnapshotCmd.MarkFlagRequired("snapshot-identifier")
+		neptuneGraph_deleteGraphSnapshotCmd.Flags().String("snapshot-identifier", "", "ID of the graph snapshot to be deleted.")
+		neptuneGraph_deleteGraphSnapshotCmd.MarkFlagRequired("snapshot-identifier")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_deleteGraphSnapshotCmd)
 }

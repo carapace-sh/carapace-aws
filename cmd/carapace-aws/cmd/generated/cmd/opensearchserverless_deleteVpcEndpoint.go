@@ -12,10 +12,12 @@ var opensearchserverless_deleteVpcEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_deleteVpcEndpointCmd).Standalone()
+	carapace.Gen(opensearchserverless_deleteVpcEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_deleteVpcEndpointCmd).Standalone()
 
-	opensearchserverless_deleteVpcEndpointCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
-	opensearchserverless_deleteVpcEndpointCmd.Flags().String("id", "", "The VPC endpoint identifier.")
-	opensearchserverless_deleteVpcEndpointCmd.MarkFlagRequired("id")
+		opensearchserverless_deleteVpcEndpointCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
+		opensearchserverless_deleteVpcEndpointCmd.Flags().String("id", "", "The VPC endpoint identifier.")
+		opensearchserverless_deleteVpcEndpointCmd.MarkFlagRequired("id")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_deleteVpcEndpointCmd)
 }

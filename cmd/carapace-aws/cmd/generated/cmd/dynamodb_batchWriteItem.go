@@ -12,11 +12,13 @@ var dynamodb_batchWriteItemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_batchWriteItemCmd).Standalone()
+	carapace.Gen(dynamodb_batchWriteItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_batchWriteItemCmd).Standalone()
 
-	dynamodb_batchWriteItemCmd.Flags().String("request-items", "", "A map of one or more table names or table ARNs and, for each table, a list of operations to be performed (`DeleteRequest` or `PutRequest`).")
-	dynamodb_batchWriteItemCmd.Flags().String("return-consumed-capacity", "", "")
-	dynamodb_batchWriteItemCmd.Flags().String("return-item-collection-metrics", "", "Determines whether item collection metrics are returned.")
-	dynamodb_batchWriteItemCmd.MarkFlagRequired("request-items")
+		dynamodb_batchWriteItemCmd.Flags().String("request-items", "", "A map of one or more table names or table ARNs and, for each table, a list of operations to be performed (`DeleteRequest` or `PutRequest`).")
+		dynamodb_batchWriteItemCmd.Flags().String("return-consumed-capacity", "", "")
+		dynamodb_batchWriteItemCmd.Flags().String("return-item-collection-metrics", "", "Determines whether item collection metrics are returned.")
+		dynamodb_batchWriteItemCmd.MarkFlagRequired("request-items")
+	})
 	dynamodbCmd.AddCommand(dynamodb_batchWriteItemCmd)
 }

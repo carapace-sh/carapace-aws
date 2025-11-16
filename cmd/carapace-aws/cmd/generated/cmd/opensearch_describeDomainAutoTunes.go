@@ -12,11 +12,13 @@ var opensearch_describeDomainAutoTunesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_describeDomainAutoTunesCmd).Standalone()
+	carapace.Gen(opensearch_describeDomainAutoTunesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_describeDomainAutoTunesCmd).Standalone()
 
-	opensearch_describeDomainAutoTunesCmd.Flags().String("domain-name", "", "Name of the domain that you want Auto-Tune details about.")
-	opensearch_describeDomainAutoTunesCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
-	opensearch_describeDomainAutoTunesCmd.Flags().String("next-token", "", "If your initial `DescribeDomainAutoTunes` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeDomainAutoTunes` operations, which returns results in the next page.")
-	opensearch_describeDomainAutoTunesCmd.MarkFlagRequired("domain-name")
+		opensearch_describeDomainAutoTunesCmd.Flags().String("domain-name", "", "Name of the domain that you want Auto-Tune details about.")
+		opensearch_describeDomainAutoTunesCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
+		opensearch_describeDomainAutoTunesCmd.Flags().String("next-token", "", "If your initial `DescribeDomainAutoTunes` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeDomainAutoTunes` operations, which returns results in the next page.")
+		opensearch_describeDomainAutoTunesCmd.MarkFlagRequired("domain-name")
+	})
 	opensearchCmd.AddCommand(opensearch_describeDomainAutoTunesCmd)
 }

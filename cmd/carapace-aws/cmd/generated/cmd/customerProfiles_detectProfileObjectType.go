@@ -12,11 +12,13 @@ var customerProfiles_detectProfileObjectTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_detectProfileObjectTypeCmd).Standalone()
+	carapace.Gen(customerProfiles_detectProfileObjectTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_detectProfileObjectTypeCmd).Standalone()
 
-	customerProfiles_detectProfileObjectTypeCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_detectProfileObjectTypeCmd.Flags().String("objects", "", "A string that is serialized from a JSON object.")
-	customerProfiles_detectProfileObjectTypeCmd.MarkFlagRequired("domain-name")
-	customerProfiles_detectProfileObjectTypeCmd.MarkFlagRequired("objects")
+		customerProfiles_detectProfileObjectTypeCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_detectProfileObjectTypeCmd.Flags().String("objects", "", "A string that is serialized from a JSON object.")
+		customerProfiles_detectProfileObjectTypeCmd.MarkFlagRequired("domain-name")
+		customerProfiles_detectProfileObjectTypeCmd.MarkFlagRequired("objects")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_detectProfileObjectTypeCmd)
 }

@@ -12,12 +12,14 @@ var dax_createSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_createSubnetGroupCmd).Standalone()
+	carapace.Gen(dax_createSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_createSubnetGroupCmd).Standalone()
 
-	dax_createSubnetGroupCmd.Flags().String("description", "", "A description for the subnet group")
-	dax_createSubnetGroupCmd.Flags().String("subnet-group-name", "", "A name for the subnet group.")
-	dax_createSubnetGroupCmd.Flags().String("subnet-ids", "", "A list of VPC subnet IDs for the subnet group.")
-	dax_createSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
-	dax_createSubnetGroupCmd.MarkFlagRequired("subnet-ids")
+		dax_createSubnetGroupCmd.Flags().String("description", "", "A description for the subnet group")
+		dax_createSubnetGroupCmd.Flags().String("subnet-group-name", "", "A name for the subnet group.")
+		dax_createSubnetGroupCmd.Flags().String("subnet-ids", "", "A list of VPC subnet IDs for the subnet group.")
+		dax_createSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
+		dax_createSubnetGroupCmd.MarkFlagRequired("subnet-ids")
+	})
 	daxCmd.AddCommand(dax_createSubnetGroupCmd)
 }

@@ -12,11 +12,13 @@ var kafkaconnect_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnect_tagResourceCmd).Standalone()
+	carapace.Gen(kafkaconnect_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnect_tagResourceCmd).Standalone()
 
-	kafkaconnect_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which you want to attach tags.")
-	kafkaconnect_tagResourceCmd.Flags().String("tags", "", "The tags that you want to attach to the resource.")
-	kafkaconnect_tagResourceCmd.MarkFlagRequired("resource-arn")
-	kafkaconnect_tagResourceCmd.MarkFlagRequired("tags")
+		kafkaconnect_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which you want to attach tags.")
+		kafkaconnect_tagResourceCmd.Flags().String("tags", "", "The tags that you want to attach to the resource.")
+		kafkaconnect_tagResourceCmd.MarkFlagRequired("resource-arn")
+		kafkaconnect_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	kafkaconnectCmd.AddCommand(kafkaconnect_tagResourceCmd)
 }

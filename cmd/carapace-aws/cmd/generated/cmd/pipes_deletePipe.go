@@ -12,9 +12,11 @@ var pipes_deletePipeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pipes_deletePipeCmd).Standalone()
+	carapace.Gen(pipes_deletePipeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pipes_deletePipeCmd).Standalone()
 
-	pipes_deletePipeCmd.Flags().String("name", "", "The name of the pipe.")
-	pipes_deletePipeCmd.MarkFlagRequired("name")
+		pipes_deletePipeCmd.Flags().String("name", "", "The name of the pipe.")
+		pipes_deletePipeCmd.MarkFlagRequired("name")
+	})
 	pipesCmd.AddCommand(pipes_deletePipeCmd)
 }

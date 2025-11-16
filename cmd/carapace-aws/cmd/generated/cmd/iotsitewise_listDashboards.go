@@ -12,11 +12,13 @@ var iotsitewise_listDashboardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_listDashboardsCmd).Standalone()
+	carapace.Gen(iotsitewise_listDashboardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_listDashboardsCmd).Standalone()
 
-	iotsitewise_listDashboardsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
-	iotsitewise_listDashboardsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	iotsitewise_listDashboardsCmd.Flags().String("project-id", "", "The ID of the project.")
-	iotsitewise_listDashboardsCmd.MarkFlagRequired("project-id")
+		iotsitewise_listDashboardsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
+		iotsitewise_listDashboardsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		iotsitewise_listDashboardsCmd.Flags().String("project-id", "", "The ID of the project.")
+		iotsitewise_listDashboardsCmd.MarkFlagRequired("project-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_listDashboardsCmd)
 }

@@ -12,11 +12,13 @@ var logs_describeResourcePoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_describeResourcePoliciesCmd).Standalone()
+	carapace.Gen(logs_describeResourcePoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_describeResourcePoliciesCmd).Standalone()
 
-	logs_describeResourcePoliciesCmd.Flags().String("limit", "", "The maximum number of resource policies to be displayed with one call of this API.")
-	logs_describeResourcePoliciesCmd.Flags().String("next-token", "", "")
-	logs_describeResourcePoliciesCmd.Flags().String("policy-scope", "", "Specifies the scope of the resource policy.")
-	logs_describeResourcePoliciesCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch Logs resource for which to query the resource policy.")
+		logs_describeResourcePoliciesCmd.Flags().String("limit", "", "The maximum number of resource policies to be displayed with one call of this API.")
+		logs_describeResourcePoliciesCmd.Flags().String("next-token", "", "")
+		logs_describeResourcePoliciesCmd.Flags().String("policy-scope", "", "Specifies the scope of the resource policy.")
+		logs_describeResourcePoliciesCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch Logs resource for which to query the resource policy.")
+	})
 	logsCmd.AddCommand(logs_describeResourcePoliciesCmd)
 }

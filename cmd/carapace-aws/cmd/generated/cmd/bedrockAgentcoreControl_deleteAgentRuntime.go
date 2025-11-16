@@ -12,10 +12,12 @@ var bedrockAgentcoreControl_deleteAgentRuntimeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_deleteAgentRuntimeCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_deleteAgentRuntimeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_deleteAgentRuntimeCmd).Standalone()
 
-	bedrockAgentcoreControl_deleteAgentRuntimeCmd.Flags().String("agent-runtime-id", "", "The unique identifier of the AgentCore Runtime to delete.")
-	bedrockAgentcoreControl_deleteAgentRuntimeCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure that the operation completes no more than one time.")
-	bedrockAgentcoreControl_deleteAgentRuntimeCmd.MarkFlagRequired("agent-runtime-id")
+		bedrockAgentcoreControl_deleteAgentRuntimeCmd.Flags().String("agent-runtime-id", "", "The unique identifier of the AgentCore Runtime to delete.")
+		bedrockAgentcoreControl_deleteAgentRuntimeCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure that the operation completes no more than one time.")
+		bedrockAgentcoreControl_deleteAgentRuntimeCmd.MarkFlagRequired("agent-runtime-id")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_deleteAgentRuntimeCmd)
 }

@@ -12,10 +12,12 @@ var batch_updateSchedulingPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_updateSchedulingPolicyCmd).Standalone()
+	carapace.Gen(batch_updateSchedulingPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_updateSchedulingPolicyCmd).Standalone()
 
-	batch_updateSchedulingPolicyCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the scheduling policy to update.")
-	batch_updateSchedulingPolicyCmd.Flags().String("fairshare-policy", "", "The fair-share policy scheduling details.")
-	batch_updateSchedulingPolicyCmd.MarkFlagRequired("arn")
+		batch_updateSchedulingPolicyCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the scheduling policy to update.")
+		batch_updateSchedulingPolicyCmd.Flags().String("fairshare-policy", "", "The fair-share policy scheduling details.")
+		batch_updateSchedulingPolicyCmd.MarkFlagRequired("arn")
+	})
 	batchCmd.AddCommand(batch_updateSchedulingPolicyCmd)
 }

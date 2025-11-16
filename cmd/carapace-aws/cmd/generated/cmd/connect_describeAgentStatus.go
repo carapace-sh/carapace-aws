@@ -12,11 +12,13 @@ var connect_describeAgentStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeAgentStatusCmd).Standalone()
+	carapace.Gen(connect_describeAgentStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeAgentStatusCmd).Standalone()
 
-	connect_describeAgentStatusCmd.Flags().String("agent-status-id", "", "The identifier for the agent status.")
-	connect_describeAgentStatusCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeAgentStatusCmd.MarkFlagRequired("agent-status-id")
-	connect_describeAgentStatusCmd.MarkFlagRequired("instance-id")
+		connect_describeAgentStatusCmd.Flags().String("agent-status-id", "", "The identifier for the agent status.")
+		connect_describeAgentStatusCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeAgentStatusCmd.MarkFlagRequired("agent-status-id")
+		connect_describeAgentStatusCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_describeAgentStatusCmd)
 }

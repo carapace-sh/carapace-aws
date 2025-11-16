@@ -12,9 +12,11 @@ var ssmIncidents_deleteResponsePlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_deleteResponsePlanCmd).Standalone()
+	carapace.Gen(ssmIncidents_deleteResponsePlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_deleteResponsePlanCmd).Standalone()
 
-	ssmIncidents_deleteResponsePlanCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the response plan.")
-	ssmIncidents_deleteResponsePlanCmd.MarkFlagRequired("arn")
+		ssmIncidents_deleteResponsePlanCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the response plan.")
+		ssmIncidents_deleteResponsePlanCmd.MarkFlagRequired("arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_deleteResponsePlanCmd)
 }

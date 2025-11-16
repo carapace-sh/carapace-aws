@@ -12,12 +12,14 @@ var bedrock_deleteAutomatedReasoningPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deleteAutomatedReasoningPolicyCmd).Standalone()
+	carapace.Gen(bedrock_deleteAutomatedReasoningPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deleteAutomatedReasoningPolicyCmd).Standalone()
 
-	bedrock_deleteAutomatedReasoningPolicyCmd.Flags().Bool("force", false, "Specifies whether to force delete the automated reasoning policy even if it has active resources.")
-	bedrock_deleteAutomatedReasoningPolicyCmd.Flags().Bool("no-force", false, "Specifies whether to force delete the automated reasoning policy even if it has active resources.")
-	bedrock_deleteAutomatedReasoningPolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy to delete.")
-	bedrock_deleteAutomatedReasoningPolicyCmd.Flag("no-force").Hidden = true
-	bedrock_deleteAutomatedReasoningPolicyCmd.MarkFlagRequired("policy-arn")
+		bedrock_deleteAutomatedReasoningPolicyCmd.Flags().Bool("force", false, "Specifies whether to force delete the automated reasoning policy even if it has active resources.")
+		bedrock_deleteAutomatedReasoningPolicyCmd.Flags().Bool("no-force", false, "Specifies whether to force delete the automated reasoning policy even if it has active resources.")
+		bedrock_deleteAutomatedReasoningPolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy to delete.")
+		bedrock_deleteAutomatedReasoningPolicyCmd.Flag("no-force").Hidden = true
+		bedrock_deleteAutomatedReasoningPolicyCmd.MarkFlagRequired("policy-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_deleteAutomatedReasoningPolicyCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_describeTrialCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeTrialCmd).Standalone()
+	carapace.Gen(sagemaker_describeTrialCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeTrialCmd).Standalone()
 
-	sagemaker_describeTrialCmd.Flags().String("trial-name", "", "The name of the trial to describe.")
-	sagemaker_describeTrialCmd.MarkFlagRequired("trial-name")
+		sagemaker_describeTrialCmd.Flags().String("trial-name", "", "The name of the trial to describe.")
+		sagemaker_describeTrialCmd.MarkFlagRequired("trial-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeTrialCmd)
 }

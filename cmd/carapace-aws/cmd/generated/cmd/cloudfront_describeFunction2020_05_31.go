@@ -12,10 +12,12 @@ var cloudfront_describeFunction2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_describeFunction2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_describeFunction2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_describeFunction2020_05_31Cmd).Standalone()
 
-	cloudfront_describeFunction2020_05_31Cmd.Flags().String("name", "", "The name of the function that you are getting information about.")
-	cloudfront_describeFunction2020_05_31Cmd.Flags().String("stage", "", "The function's stage, either `DEVELOPMENT` or `LIVE`.")
-	cloudfront_describeFunction2020_05_31Cmd.MarkFlagRequired("name")
+		cloudfront_describeFunction2020_05_31Cmd.Flags().String("name", "", "The name of the function that you are getting information about.")
+		cloudfront_describeFunction2020_05_31Cmd.Flags().String("stage", "", "The function's stage, either `DEVELOPMENT` or `LIVE`.")
+		cloudfront_describeFunction2020_05_31Cmd.MarkFlagRequired("name")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_describeFunction2020_05_31Cmd)
 }

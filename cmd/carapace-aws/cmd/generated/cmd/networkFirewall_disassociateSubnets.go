@@ -12,12 +12,14 @@ var networkFirewall_disassociateSubnetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_disassociateSubnetsCmd).Standalone()
+	carapace.Gen(networkFirewall_disassociateSubnetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_disassociateSubnetsCmd).Standalone()
 
-	networkFirewall_disassociateSubnetsCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
-	networkFirewall_disassociateSubnetsCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
-	networkFirewall_disassociateSubnetsCmd.Flags().String("subnet-ids", "", "The unique identifiers for the subnets that you want to disassociate.")
-	networkFirewall_disassociateSubnetsCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
-	networkFirewall_disassociateSubnetsCmd.MarkFlagRequired("subnet-ids")
+		networkFirewall_disassociateSubnetsCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
+		networkFirewall_disassociateSubnetsCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
+		networkFirewall_disassociateSubnetsCmd.Flags().String("subnet-ids", "", "The unique identifiers for the subnets that you want to disassociate.")
+		networkFirewall_disassociateSubnetsCmd.Flags().String("update-token", "", "An optional token that you can use for optimistic locking.")
+		networkFirewall_disassociateSubnetsCmd.MarkFlagRequired("subnet-ids")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_disassociateSubnetsCmd)
 }

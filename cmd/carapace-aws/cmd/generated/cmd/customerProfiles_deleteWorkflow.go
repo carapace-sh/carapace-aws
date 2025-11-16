@@ -12,11 +12,13 @@ var customerProfiles_deleteWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_deleteWorkflowCmd).Standalone()
+	carapace.Gen(customerProfiles_deleteWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_deleteWorkflowCmd).Standalone()
 
-	customerProfiles_deleteWorkflowCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_deleteWorkflowCmd.Flags().String("workflow-id", "", "Unique identifier for the workflow.")
-	customerProfiles_deleteWorkflowCmd.MarkFlagRequired("domain-name")
-	customerProfiles_deleteWorkflowCmd.MarkFlagRequired("workflow-id")
+		customerProfiles_deleteWorkflowCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_deleteWorkflowCmd.Flags().String("workflow-id", "", "Unique identifier for the workflow.")
+		customerProfiles_deleteWorkflowCmd.MarkFlagRequired("domain-name")
+		customerProfiles_deleteWorkflowCmd.MarkFlagRequired("workflow-id")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_deleteWorkflowCmd)
 }

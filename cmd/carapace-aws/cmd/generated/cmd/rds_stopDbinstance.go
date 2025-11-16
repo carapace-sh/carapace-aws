@@ -12,10 +12,12 @@ var rds_stopDbinstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_stopDbinstanceCmd).Standalone()
+	carapace.Gen(rds_stopDbinstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_stopDbinstanceCmd).Standalone()
 
-	rds_stopDbinstanceCmd.Flags().String("dbinstance-identifier", "", "The user-supplied instance identifier.")
-	rds_stopDbinstanceCmd.Flags().String("dbsnapshot-identifier", "", "The user-supplied instance identifier of the DB Snapshot created immediately before the DB instance is stopped.")
-	rds_stopDbinstanceCmd.MarkFlagRequired("dbinstance-identifier")
+		rds_stopDbinstanceCmd.Flags().String("dbinstance-identifier", "", "The user-supplied instance identifier.")
+		rds_stopDbinstanceCmd.Flags().String("dbsnapshot-identifier", "", "The user-supplied instance identifier of the DB Snapshot created immediately before the DB instance is stopped.")
+		rds_stopDbinstanceCmd.MarkFlagRequired("dbinstance-identifier")
+	})
 	rdsCmd.AddCommand(rds_stopDbinstanceCmd)
 }

@@ -12,9 +12,11 @@ var personalize_describeRecipeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeRecipeCmd).Standalone()
+	carapace.Gen(personalize_describeRecipeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeRecipeCmd).Standalone()
 
-	personalize_describeRecipeCmd.Flags().String("recipe-arn", "", "The Amazon Resource Name (ARN) of the recipe to describe.")
-	personalize_describeRecipeCmd.MarkFlagRequired("recipe-arn")
+		personalize_describeRecipeCmd.Flags().String("recipe-arn", "", "The Amazon Resource Name (ARN) of the recipe to describe.")
+		personalize_describeRecipeCmd.MarkFlagRequired("recipe-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeRecipeCmd)
 }

@@ -12,9 +12,11 @@ var timestreamQuery_listScheduledQueriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_listScheduledQueriesCmd).Standalone()
+	carapace.Gen(timestreamQuery_listScheduledQueriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_listScheduledQueriesCmd).Standalone()
 
-	timestreamQuery_listScheduledQueriesCmd.Flags().String("max-results", "", "The maximum number of items to return in the output.")
-	timestreamQuery_listScheduledQueriesCmd.Flags().String("next-token", "", "A pagination token to resume pagination.")
+		timestreamQuery_listScheduledQueriesCmd.Flags().String("max-results", "", "The maximum number of items to return in the output.")
+		timestreamQuery_listScheduledQueriesCmd.Flags().String("next-token", "", "A pagination token to resume pagination.")
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_listScheduledQueriesCmd)
 }

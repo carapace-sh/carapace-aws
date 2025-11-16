@@ -12,13 +12,15 @@ var connect_getContactMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_getContactMetricsCmd).Standalone()
+	carapace.Gen(connect_getContactMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_getContactMetricsCmd).Standalone()
 
-	connect_getContactMetricsCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
-	connect_getContactMetricsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_getContactMetricsCmd.Flags().String("metrics", "", "A list of contact-level metrics to retrieve.")
-	connect_getContactMetricsCmd.MarkFlagRequired("contact-id")
-	connect_getContactMetricsCmd.MarkFlagRequired("instance-id")
-	connect_getContactMetricsCmd.MarkFlagRequired("metrics")
+		connect_getContactMetricsCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
+		connect_getContactMetricsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_getContactMetricsCmd.Flags().String("metrics", "", "A list of contact-level metrics to retrieve.")
+		connect_getContactMetricsCmd.MarkFlagRequired("contact-id")
+		connect_getContactMetricsCmd.MarkFlagRequired("instance-id")
+		connect_getContactMetricsCmd.MarkFlagRequired("metrics")
+	})
 	connectCmd.AddCommand(connect_getContactMetricsCmd)
 }

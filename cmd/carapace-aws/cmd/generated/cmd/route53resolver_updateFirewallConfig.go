@@ -12,11 +12,13 @@ var route53resolver_updateFirewallConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_updateFirewallConfigCmd).Standalone()
+	carapace.Gen(route53resolver_updateFirewallConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_updateFirewallConfigCmd).Standalone()
 
-	route53resolver_updateFirewallConfigCmd.Flags().String("firewall-fail-open", "", "Determines how Route 53 Resolver handles queries during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply.")
-	route53resolver_updateFirewallConfigCmd.Flags().String("resource-id", "", "The ID of the VPC that the configuration is for.")
-	route53resolver_updateFirewallConfigCmd.MarkFlagRequired("firewall-fail-open")
-	route53resolver_updateFirewallConfigCmd.MarkFlagRequired("resource-id")
+		route53resolver_updateFirewallConfigCmd.Flags().String("firewall-fail-open", "", "Determines how Route 53 Resolver handles queries during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply.")
+		route53resolver_updateFirewallConfigCmd.Flags().String("resource-id", "", "The ID of the VPC that the configuration is for.")
+		route53resolver_updateFirewallConfigCmd.MarkFlagRequired("firewall-fail-open")
+		route53resolver_updateFirewallConfigCmd.MarkFlagRequired("resource-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_updateFirewallConfigCmd)
 }

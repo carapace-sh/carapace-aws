@@ -12,9 +12,11 @@ var licenseManager_deleteLicenseConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_deleteLicenseConfigurationCmd).Standalone()
+	carapace.Gen(licenseManager_deleteLicenseConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_deleteLicenseConfigurationCmd).Standalone()
 
-	licenseManager_deleteLicenseConfigurationCmd.Flags().String("license-configuration-arn", "", "ID of the license configuration.")
-	licenseManager_deleteLicenseConfigurationCmd.MarkFlagRequired("license-configuration-arn")
+		licenseManager_deleteLicenseConfigurationCmd.Flags().String("license-configuration-arn", "", "ID of the license configuration.")
+		licenseManager_deleteLicenseConfigurationCmd.MarkFlagRequired("license-configuration-arn")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_deleteLicenseConfigurationCmd)
 }

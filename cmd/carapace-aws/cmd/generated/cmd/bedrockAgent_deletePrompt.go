@@ -12,10 +12,12 @@ var bedrockAgent_deletePromptCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_deletePromptCmd).Standalone()
+	carapace.Gen(bedrockAgent_deletePromptCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_deletePromptCmd).Standalone()
 
-	bedrockAgent_deletePromptCmd.Flags().String("prompt-identifier", "", "The unique identifier of the prompt.")
-	bedrockAgent_deletePromptCmd.Flags().String("prompt-version", "", "The version of the prompt to delete.")
-	bedrockAgent_deletePromptCmd.MarkFlagRequired("prompt-identifier")
+		bedrockAgent_deletePromptCmd.Flags().String("prompt-identifier", "", "The unique identifier of the prompt.")
+		bedrockAgent_deletePromptCmd.Flags().String("prompt-version", "", "The version of the prompt to delete.")
+		bedrockAgent_deletePromptCmd.MarkFlagRequired("prompt-identifier")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_deletePromptCmd)
 }

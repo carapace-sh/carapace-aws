@@ -12,12 +12,14 @@ var acmPca_deletePermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acmPca_deletePermissionCmd).Standalone()
+	carapace.Gen(acmPca_deletePermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acmPca_deletePermissionCmd).Standalone()
 
-	acmPca_deletePermissionCmd.Flags().String("certificate-authority-arn", "", "The Amazon Resource Number (ARN) of the private CA that issued the permissions.")
-	acmPca_deletePermissionCmd.Flags().String("principal", "", "The Amazon Web Services service or identity that will have its CA permissions revoked.")
-	acmPca_deletePermissionCmd.Flags().String("source-account", "", "The Amazon Web Services account that calls this action.")
-	acmPca_deletePermissionCmd.MarkFlagRequired("certificate-authority-arn")
-	acmPca_deletePermissionCmd.MarkFlagRequired("principal")
+		acmPca_deletePermissionCmd.Flags().String("certificate-authority-arn", "", "The Amazon Resource Number (ARN) of the private CA that issued the permissions.")
+		acmPca_deletePermissionCmd.Flags().String("principal", "", "The Amazon Web Services service or identity that will have its CA permissions revoked.")
+		acmPca_deletePermissionCmd.Flags().String("source-account", "", "The Amazon Web Services account that calls this action.")
+		acmPca_deletePermissionCmd.MarkFlagRequired("certificate-authority-arn")
+		acmPca_deletePermissionCmd.MarkFlagRequired("principal")
+	})
 	acmPcaCmd.AddCommand(acmPca_deletePermissionCmd)
 }

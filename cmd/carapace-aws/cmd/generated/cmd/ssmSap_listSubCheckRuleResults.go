@@ -12,11 +12,13 @@ var ssmSap_listSubCheckRuleResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_listSubCheckRuleResultsCmd).Standalone()
+	carapace.Gen(ssmSap_listSubCheckRuleResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_listSubCheckRuleResultsCmd).Standalone()
 
-	ssmSap_listSubCheckRuleResultsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	ssmSap_listSubCheckRuleResultsCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	ssmSap_listSubCheckRuleResultsCmd.Flags().String("sub-check-result-id", "", "The ID of the sub check result.")
-	ssmSap_listSubCheckRuleResultsCmd.MarkFlagRequired("sub-check-result-id")
+		ssmSap_listSubCheckRuleResultsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		ssmSap_listSubCheckRuleResultsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		ssmSap_listSubCheckRuleResultsCmd.Flags().String("sub-check-result-id", "", "The ID of the sub check result.")
+		ssmSap_listSubCheckRuleResultsCmd.MarkFlagRequired("sub-check-result-id")
+	})
 	ssmSapCmd.AddCommand(ssmSap_listSubCheckRuleResultsCmd)
 }

@@ -12,9 +12,11 @@ var greengrass_listBulkDeploymentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_listBulkDeploymentsCmd).Standalone()
+	carapace.Gen(greengrass_listBulkDeploymentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_listBulkDeploymentsCmd).Standalone()
 
-	greengrass_listBulkDeploymentsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	greengrass_listBulkDeploymentsCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
+		greengrass_listBulkDeploymentsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		greengrass_listBulkDeploymentsCmd.Flags().String("next-token", "", "The token for the next set of results, or ''null'' if there are no additional results.")
+	})
 	greengrassCmd.AddCommand(greengrass_listBulkDeploymentsCmd)
 }

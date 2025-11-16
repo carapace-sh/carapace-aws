@@ -12,11 +12,13 @@ var neptuneGraph_getQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_getQueryCmd).Standalone()
+	carapace.Gen(neptuneGraph_getQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_getQueryCmd).Standalone()
 
-	neptuneGraph_getQueryCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
-	neptuneGraph_getQueryCmd.Flags().String("query-id", "", "The ID of the query in question.")
-	neptuneGraph_getQueryCmd.MarkFlagRequired("graph-identifier")
-	neptuneGraph_getQueryCmd.MarkFlagRequired("query-id")
+		neptuneGraph_getQueryCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
+		neptuneGraph_getQueryCmd.Flags().String("query-id", "", "The ID of the query in question.")
+		neptuneGraph_getQueryCmd.MarkFlagRequired("graph-identifier")
+		neptuneGraph_getQueryCmd.MarkFlagRequired("query-id")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_getQueryCmd)
 }

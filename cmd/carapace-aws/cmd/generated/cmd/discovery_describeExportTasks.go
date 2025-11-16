@@ -12,11 +12,13 @@ var discovery_describeExportTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_describeExportTasksCmd).Standalone()
+	carapace.Gen(discovery_describeExportTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_describeExportTasksCmd).Standalone()
 
-	discovery_describeExportTasksCmd.Flags().String("export-ids", "", "One or more unique identifiers used to query the status of an export request.")
-	discovery_describeExportTasksCmd.Flags().String("filters", "", "One or more filters.")
-	discovery_describeExportTasksCmd.Flags().String("max-results", "", "The maximum number of volume results returned by `DescribeExportTasks` in paginated output.")
-	discovery_describeExportTasksCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `DescribeExportTasks` request where `maxResults` was used and the results exceeded the value of that parameter.")
+		discovery_describeExportTasksCmd.Flags().String("export-ids", "", "One or more unique identifiers used to query the status of an export request.")
+		discovery_describeExportTasksCmd.Flags().String("filters", "", "One or more filters.")
+		discovery_describeExportTasksCmd.Flags().String("max-results", "", "The maximum number of volume results returned by `DescribeExportTasks` in paginated output.")
+		discovery_describeExportTasksCmd.Flags().String("next-token", "", "The `nextToken` value returned from a previous paginated `DescribeExportTasks` request where `maxResults` was used and the results exceeded the value of that parameter.")
+	})
 	discoveryCmd.AddCommand(discovery_describeExportTasksCmd)
 }

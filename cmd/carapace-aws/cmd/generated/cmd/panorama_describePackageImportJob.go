@@ -12,9 +12,11 @@ var panorama_describePackageImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_describePackageImportJobCmd).Standalone()
+	carapace.Gen(panorama_describePackageImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_describePackageImportJobCmd).Standalone()
 
-	panorama_describePackageImportJobCmd.Flags().String("job-id", "", "The job's ID.")
-	panorama_describePackageImportJobCmd.MarkFlagRequired("job-id")
+		panorama_describePackageImportJobCmd.Flags().String("job-id", "", "The job's ID.")
+		panorama_describePackageImportJobCmd.MarkFlagRequired("job-id")
+	})
 	panoramaCmd.AddCommand(panorama_describePackageImportJobCmd)
 }

@@ -12,12 +12,14 @@ var mturk_createAdditionalAssignmentsForHitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_createAdditionalAssignmentsForHitCmd).Standalone()
+	carapace.Gen(mturk_createAdditionalAssignmentsForHitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_createAdditionalAssignmentsForHitCmd).Standalone()
 
-	mturk_createAdditionalAssignmentsForHitCmd.Flags().String("hitid", "", "The ID of the HIT to extend.")
-	mturk_createAdditionalAssignmentsForHitCmd.Flags().String("number-of-additional-assignments", "", "The number of additional assignments to request for this HIT.")
-	mturk_createAdditionalAssignmentsForHitCmd.Flags().String("unique-request-token", "", "A unique identifier for this request, which allows you to retry the call on error without extending the HIT multiple times.")
-	mturk_createAdditionalAssignmentsForHitCmd.MarkFlagRequired("hitid")
-	mturk_createAdditionalAssignmentsForHitCmd.MarkFlagRequired("number-of-additional-assignments")
+		mturk_createAdditionalAssignmentsForHitCmd.Flags().String("hitid", "", "The ID of the HIT to extend.")
+		mturk_createAdditionalAssignmentsForHitCmd.Flags().String("number-of-additional-assignments", "", "The number of additional assignments to request for this HIT.")
+		mturk_createAdditionalAssignmentsForHitCmd.Flags().String("unique-request-token", "", "A unique identifier for this request, which allows you to retry the call on error without extending the HIT multiple times.")
+		mturk_createAdditionalAssignmentsForHitCmd.MarkFlagRequired("hitid")
+		mturk_createAdditionalAssignmentsForHitCmd.MarkFlagRequired("number-of-additional-assignments")
+	})
 	mturkCmd.AddCommand(mturk_createAdditionalAssignmentsForHitCmd)
 }

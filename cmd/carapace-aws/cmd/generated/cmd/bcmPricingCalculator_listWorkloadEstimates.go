@@ -12,12 +12,14 @@ var bcmPricingCalculator_listWorkloadEstimatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_listWorkloadEstimatesCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_listWorkloadEstimatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_listWorkloadEstimatesCmd).Standalone()
 
-	bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("created-at-filter", "", "Filter workload estimates based on the creation date.")
-	bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("expires-at-filter", "", "Filter workload estimates based on the expiration date.")
-	bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("filters", "", "Filters to apply to the list of workload estimates.")
-	bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("next-token", "", "A token to retrieve the next page of results.")
+		bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("created-at-filter", "", "Filter workload estimates based on the creation date.")
+		bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("expires-at-filter", "", "Filter workload estimates based on the expiration date.")
+		bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("filters", "", "Filters to apply to the list of workload estimates.")
+		bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		bcmPricingCalculator_listWorkloadEstimatesCmd.Flags().String("next-token", "", "A token to retrieve the next page of results.")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_listWorkloadEstimatesCmd)
 }

@@ -12,10 +12,12 @@ var redshift_modifyEndpointAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_modifyEndpointAccessCmd).Standalone()
+	carapace.Gen(redshift_modifyEndpointAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_modifyEndpointAccessCmd).Standalone()
 
-	redshift_modifyEndpointAccessCmd.Flags().String("endpoint-name", "", "The endpoint to be modified.")
-	redshift_modifyEndpointAccessCmd.Flags().String("vpc-security-group-ids", "", "The complete list of VPC security groups associated with the endpoint after the endpoint is modified.")
-	redshift_modifyEndpointAccessCmd.MarkFlagRequired("endpoint-name")
+		redshift_modifyEndpointAccessCmd.Flags().String("endpoint-name", "", "The endpoint to be modified.")
+		redshift_modifyEndpointAccessCmd.Flags().String("vpc-security-group-ids", "", "The complete list of VPC security groups associated with the endpoint after the endpoint is modified.")
+		redshift_modifyEndpointAccessCmd.MarkFlagRequired("endpoint-name")
+	})
 	redshiftCmd.AddCommand(redshift_modifyEndpointAccessCmd)
 }

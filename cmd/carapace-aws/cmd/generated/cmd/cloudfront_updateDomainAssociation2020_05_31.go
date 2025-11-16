@@ -12,12 +12,14 @@ var cloudfront_updateDomainAssociation2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_updateDomainAssociation2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_updateDomainAssociation2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_updateDomainAssociation2020_05_31Cmd).Standalone()
 
-	cloudfront_updateDomainAssociation2020_05_31Cmd.Flags().String("domain", "", "The domain to update.")
-	cloudfront_updateDomainAssociation2020_05_31Cmd.Flags().String("if-match", "", "The value of the `ETag` identifier for the standard distribution or distribution tenant that will be associated with the domain.")
-	cloudfront_updateDomainAssociation2020_05_31Cmd.Flags().String("target-resource", "", "The target standard distribution or distribution tenant resource for the domain.")
-	cloudfront_updateDomainAssociation2020_05_31Cmd.MarkFlagRequired("domain")
-	cloudfront_updateDomainAssociation2020_05_31Cmd.MarkFlagRequired("target-resource")
+		cloudfront_updateDomainAssociation2020_05_31Cmd.Flags().String("domain", "", "The domain to update.")
+		cloudfront_updateDomainAssociation2020_05_31Cmd.Flags().String("if-match", "", "The value of the `ETag` identifier for the standard distribution or distribution tenant that will be associated with the domain.")
+		cloudfront_updateDomainAssociation2020_05_31Cmd.Flags().String("target-resource", "", "The target standard distribution or distribution tenant resource for the domain.")
+		cloudfront_updateDomainAssociation2020_05_31Cmd.MarkFlagRequired("domain")
+		cloudfront_updateDomainAssociation2020_05_31Cmd.MarkFlagRequired("target-resource")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_updateDomainAssociation2020_05_31Cmd)
 }

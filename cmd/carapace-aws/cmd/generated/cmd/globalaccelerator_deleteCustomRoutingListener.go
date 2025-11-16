@@ -12,9 +12,11 @@ var globalaccelerator_deleteCustomRoutingListenerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_deleteCustomRoutingListenerCmd).Standalone()
+	carapace.Gen(globalaccelerator_deleteCustomRoutingListenerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_deleteCustomRoutingListenerCmd).Standalone()
 
-	globalaccelerator_deleteCustomRoutingListenerCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener to delete.")
-	globalaccelerator_deleteCustomRoutingListenerCmd.MarkFlagRequired("listener-arn")
+		globalaccelerator_deleteCustomRoutingListenerCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener to delete.")
+		globalaccelerator_deleteCustomRoutingListenerCmd.MarkFlagRequired("listener-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_deleteCustomRoutingListenerCmd)
 }

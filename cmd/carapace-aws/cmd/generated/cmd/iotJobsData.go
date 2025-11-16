@@ -12,7 +12,9 @@ var iotJobsDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotJobsDataCmd).Standalone()
+	carapace.Gen(iotJobsDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotJobsDataCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(iotJobsDataCmd)
 }

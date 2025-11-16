@@ -12,11 +12,13 @@ var servicediscovery_deregisterInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_deregisterInstanceCmd).Standalone()
+	carapace.Gen(servicediscovery_deregisterInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_deregisterInstanceCmd).Standalone()
 
-	servicediscovery_deregisterInstanceCmd.Flags().String("instance-id", "", "The value that you specified for `Id` in the [RegisterInstance](https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html) request.")
-	servicediscovery_deregisterInstanceCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service that the instance is associated with.")
-	servicediscovery_deregisterInstanceCmd.MarkFlagRequired("instance-id")
-	servicediscovery_deregisterInstanceCmd.MarkFlagRequired("service-id")
+		servicediscovery_deregisterInstanceCmd.Flags().String("instance-id", "", "The value that you specified for `Id` in the [RegisterInstance](https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html) request.")
+		servicediscovery_deregisterInstanceCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service that the instance is associated with.")
+		servicediscovery_deregisterInstanceCmd.MarkFlagRequired("instance-id")
+		servicediscovery_deregisterInstanceCmd.MarkFlagRequired("service-id")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_deregisterInstanceCmd)
 }

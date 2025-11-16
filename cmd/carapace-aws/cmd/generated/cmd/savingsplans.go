@@ -12,7 +12,9 @@ var savingsplansCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(savingsplansCmd).Standalone()
+	carapace.Gen(savingsplansCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(savingsplansCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(savingsplansCmd)
 }

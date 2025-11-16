@@ -12,11 +12,13 @@ var codecommit_putCommentReactionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_putCommentReactionCmd).Standalone()
+	carapace.Gen(codecommit_putCommentReactionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_putCommentReactionCmd).Standalone()
 
-	codecommit_putCommentReactionCmd.Flags().String("comment-id", "", "The ID of the comment to which you want to add or update a reaction.")
-	codecommit_putCommentReactionCmd.Flags().String("reaction-value", "", "The emoji reaction you want to add or update.")
-	codecommit_putCommentReactionCmd.MarkFlagRequired("comment-id")
-	codecommit_putCommentReactionCmd.MarkFlagRequired("reaction-value")
+		codecommit_putCommentReactionCmd.Flags().String("comment-id", "", "The ID of the comment to which you want to add or update a reaction.")
+		codecommit_putCommentReactionCmd.Flags().String("reaction-value", "", "The emoji reaction you want to add or update.")
+		codecommit_putCommentReactionCmd.MarkFlagRequired("comment-id")
+		codecommit_putCommentReactionCmd.MarkFlagRequired("reaction-value")
+	})
 	codecommitCmd.AddCommand(codecommit_putCommentReactionCmd)
 }

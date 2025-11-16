@@ -12,9 +12,11 @@ var pinpoint_deleteAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteAppCmd).Standalone()
+	carapace.Gen(pinpoint_deleteAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteAppCmd).Standalone()
 
-	pinpoint_deleteAppCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_deleteAppCmd.MarkFlagRequired("application-id")
+		pinpoint_deleteAppCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_deleteAppCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteAppCmd)
 }

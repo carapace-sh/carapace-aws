@@ -12,9 +12,11 @@ var events_deleteConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_deleteConnectionCmd).Standalone()
+	carapace.Gen(events_deleteConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_deleteConnectionCmd).Standalone()
 
-	events_deleteConnectionCmd.Flags().String("name", "", "The name of the connection to delete.")
-	events_deleteConnectionCmd.MarkFlagRequired("name")
+		events_deleteConnectionCmd.Flags().String("name", "", "The name of the connection to delete.")
+		events_deleteConnectionCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_deleteConnectionCmd)
 }

@@ -12,9 +12,11 @@ var cleanroomsml_listAudienceModelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_listAudienceModelsCmd).Standalone()
+	carapace.Gen(cleanroomsml_listAudienceModelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_listAudienceModelsCmd).Standalone()
 
-	cleanroomsml_listAudienceModelsCmd.Flags().String("max-results", "", "The maximum size of the results that is returned per call.")
-	cleanroomsml_listAudienceModelsCmd.Flags().String("next-token", "", "The token value retrieved from a previous call to access the next page of results.")
+		cleanroomsml_listAudienceModelsCmd.Flags().String("max-results", "", "The maximum size of the results that is returned per call.")
+		cleanroomsml_listAudienceModelsCmd.Flags().String("next-token", "", "The token value retrieved from a previous call to access the next page of results.")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_listAudienceModelsCmd)
 }

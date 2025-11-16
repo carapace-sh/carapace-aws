@@ -12,11 +12,13 @@ var elb_createLoadBalancerListenersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_createLoadBalancerListenersCmd).Standalone()
+	carapace.Gen(elb_createLoadBalancerListenersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_createLoadBalancerListenersCmd).Standalone()
 
-	elb_createLoadBalancerListenersCmd.Flags().String("listeners", "", "The listeners.")
-	elb_createLoadBalancerListenersCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_createLoadBalancerListenersCmd.MarkFlagRequired("listeners")
-	elb_createLoadBalancerListenersCmd.MarkFlagRequired("load-balancer-name")
+		elb_createLoadBalancerListenersCmd.Flags().String("listeners", "", "The listeners.")
+		elb_createLoadBalancerListenersCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_createLoadBalancerListenersCmd.MarkFlagRequired("listeners")
+		elb_createLoadBalancerListenersCmd.MarkFlagRequired("load-balancer-name")
+	})
 	elbCmd.AddCommand(elb_createLoadBalancerListenersCmd)
 }

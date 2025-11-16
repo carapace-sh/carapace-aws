@@ -12,11 +12,13 @@ var evidently_getExperimentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_getExperimentCmd).Standalone()
+	carapace.Gen(evidently_getExperimentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_getExperimentCmd).Standalone()
 
-	evidently_getExperimentCmd.Flags().String("experiment", "", "The name of the experiment that you want to see the details of.")
-	evidently_getExperimentCmd.Flags().String("project", "", "The name or ARN of the project that contains the experiment.")
-	evidently_getExperimentCmd.MarkFlagRequired("experiment")
-	evidently_getExperimentCmd.MarkFlagRequired("project")
+		evidently_getExperimentCmd.Flags().String("experiment", "", "The name of the experiment that you want to see the details of.")
+		evidently_getExperimentCmd.Flags().String("project", "", "The name or ARN of the project that contains the experiment.")
+		evidently_getExperimentCmd.MarkFlagRequired("experiment")
+		evidently_getExperimentCmd.MarkFlagRequired("project")
+	})
 	evidentlyCmd.AddCommand(evidently_getExperimentCmd)
 }

@@ -12,10 +12,12 @@ var iot_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listTagsForResourceCmd).Standalone()
+	carapace.Gen(iot_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listTagsForResourceCmd).Standalone()
 
-	iot_listTagsForResourceCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
-	iot_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	iot_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		iot_listTagsForResourceCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+		iot_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		iot_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	iotCmd.AddCommand(iot_listTagsForResourceCmd)
 }

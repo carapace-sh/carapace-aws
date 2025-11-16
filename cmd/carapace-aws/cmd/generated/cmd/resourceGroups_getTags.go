@@ -12,9 +12,11 @@ var resourceGroups_getTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceGroups_getTagsCmd).Standalone()
+	carapace.Gen(resourceGroups_getTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceGroups_getTagsCmd).Standalone()
 
-	resourceGroups_getTagsCmd.Flags().String("arn", "", "The Amazon resource name (ARN) of the resource group whose tags you want to retrieve.")
-	resourceGroups_getTagsCmd.MarkFlagRequired("arn")
+		resourceGroups_getTagsCmd.Flags().String("arn", "", "The Amazon resource name (ARN) of the resource group whose tags you want to retrieve.")
+		resourceGroups_getTagsCmd.MarkFlagRequired("arn")
+	})
 	resourceGroupsCmd.AddCommand(resourceGroups_getTagsCmd)
 }

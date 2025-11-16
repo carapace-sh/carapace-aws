@@ -12,13 +12,15 @@ var kafka_updateRebalancingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_updateRebalancingCmd).Standalone()
+	carapace.Gen(kafka_updateRebalancingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_updateRebalancingCmd).Standalone()
 
-	kafka_updateRebalancingCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
-	kafka_updateRebalancingCmd.Flags().String("current-version", "", "The current version of the cluster.")
-	kafka_updateRebalancingCmd.Flags().String("rebalancing", "", "Specifies if intelligent rebalancing should be turned on for your cluster.")
-	kafka_updateRebalancingCmd.MarkFlagRequired("cluster-arn")
-	kafka_updateRebalancingCmd.MarkFlagRequired("current-version")
-	kafka_updateRebalancingCmd.MarkFlagRequired("rebalancing")
+		kafka_updateRebalancingCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster.")
+		kafka_updateRebalancingCmd.Flags().String("current-version", "", "The current version of the cluster.")
+		kafka_updateRebalancingCmd.Flags().String("rebalancing", "", "Specifies if intelligent rebalancing should be turned on for your cluster.")
+		kafka_updateRebalancingCmd.MarkFlagRequired("cluster-arn")
+		kafka_updateRebalancingCmd.MarkFlagRequired("current-version")
+		kafka_updateRebalancingCmd.MarkFlagRequired("rebalancing")
+	})
 	kafkaCmd.AddCommand(kafka_updateRebalancingCmd)
 }

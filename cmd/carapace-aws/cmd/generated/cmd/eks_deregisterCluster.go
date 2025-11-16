@@ -12,9 +12,11 @@ var eks_deregisterClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_deregisterClusterCmd).Standalone()
+	carapace.Gen(eks_deregisterClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_deregisterClusterCmd).Standalone()
 
-	eks_deregisterClusterCmd.Flags().String("name", "", "The name of the connected cluster to deregister.")
-	eks_deregisterClusterCmd.MarkFlagRequired("name")
+		eks_deregisterClusterCmd.Flags().String("name", "", "The name of the connected cluster to deregister.")
+		eks_deregisterClusterCmd.MarkFlagRequired("name")
+	})
 	eksCmd.AddCommand(eks_deregisterClusterCmd)
 }

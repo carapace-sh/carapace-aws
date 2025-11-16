@@ -12,9 +12,11 @@ var opensearchserverless_batchGetVpcEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_batchGetVpcEndpointCmd).Standalone()
+	carapace.Gen(opensearchserverless_batchGetVpcEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_batchGetVpcEndpointCmd).Standalone()
 
-	opensearchserverless_batchGetVpcEndpointCmd.Flags().String("ids", "", "A list of VPC endpoint identifiers.")
-	opensearchserverless_batchGetVpcEndpointCmd.MarkFlagRequired("ids")
+		opensearchserverless_batchGetVpcEndpointCmd.Flags().String("ids", "", "A list of VPC endpoint identifiers.")
+		opensearchserverless_batchGetVpcEndpointCmd.MarkFlagRequired("ids")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_batchGetVpcEndpointCmd)
 }

@@ -12,11 +12,13 @@ var connect_deleteContactFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteContactFlowCmd).Standalone()
+	carapace.Gen(connect_deleteContactFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteContactFlowCmd).Standalone()
 
-	connect_deleteContactFlowCmd.Flags().String("contact-flow-id", "", "The identifier of the flow.")
-	connect_deleteContactFlowCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteContactFlowCmd.MarkFlagRequired("contact-flow-id")
-	connect_deleteContactFlowCmd.MarkFlagRequired("instance-id")
+		connect_deleteContactFlowCmd.Flags().String("contact-flow-id", "", "The identifier of the flow.")
+		connect_deleteContactFlowCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteContactFlowCmd.MarkFlagRequired("contact-flow-id")
+		connect_deleteContactFlowCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_deleteContactFlowCmd)
 }

@@ -12,12 +12,14 @@ var iot_getCommandExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getCommandExecutionCmd).Standalone()
+	carapace.Gen(iot_getCommandExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getCommandExecutionCmd).Standalone()
 
-	iot_getCommandExecutionCmd.Flags().String("execution-id", "", "The unique identifier for the command execution.")
-	iot_getCommandExecutionCmd.Flags().String("include-result", "", "Can be used to specify whether to include the result of the command execution in the `GetCommandExecution` API response.")
-	iot_getCommandExecutionCmd.Flags().String("target-arn", "", "The Amazon Resource Number (ARN) of the device on which the command execution is being performed.")
-	iot_getCommandExecutionCmd.MarkFlagRequired("execution-id")
-	iot_getCommandExecutionCmd.MarkFlagRequired("target-arn")
+		iot_getCommandExecutionCmd.Flags().String("execution-id", "", "The unique identifier for the command execution.")
+		iot_getCommandExecutionCmd.Flags().String("include-result", "", "Can be used to specify whether to include the result of the command execution in the `GetCommandExecution` API response.")
+		iot_getCommandExecutionCmd.Flags().String("target-arn", "", "The Amazon Resource Number (ARN) of the device on which the command execution is being performed.")
+		iot_getCommandExecutionCmd.MarkFlagRequired("execution-id")
+		iot_getCommandExecutionCmd.MarkFlagRequired("target-arn")
+	})
 	iotCmd.AddCommand(iot_getCommandExecutionCmd)
 }

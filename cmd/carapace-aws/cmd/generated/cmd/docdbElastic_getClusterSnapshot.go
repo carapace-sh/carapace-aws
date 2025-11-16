@@ -12,9 +12,11 @@ var docdbElastic_getClusterSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdbElastic_getClusterSnapshotCmd).Standalone()
+	carapace.Gen(docdbElastic_getClusterSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdbElastic_getClusterSnapshotCmd).Standalone()
 
-	docdbElastic_getClusterSnapshotCmd.Flags().String("snapshot-arn", "", "The ARN identifier of the elastic cluster snapshot.")
-	docdbElastic_getClusterSnapshotCmd.MarkFlagRequired("snapshot-arn")
+		docdbElastic_getClusterSnapshotCmd.Flags().String("snapshot-arn", "", "The ARN identifier of the elastic cluster snapshot.")
+		docdbElastic_getClusterSnapshotCmd.MarkFlagRequired("snapshot-arn")
+	})
 	docdbElasticCmd.AddCommand(docdbElastic_getClusterSnapshotCmd)
 }

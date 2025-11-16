@@ -12,7 +12,9 @@ var managedblockchainQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchainQueryCmd).Standalone()
+	carapace.Gen(managedblockchainQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchainQueryCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(managedblockchainQueryCmd)
 }

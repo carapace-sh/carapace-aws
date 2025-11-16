@@ -12,11 +12,13 @@ var groundstation_getMinuteUsageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_getMinuteUsageCmd).Standalone()
+	carapace.Gen(groundstation_getMinuteUsageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_getMinuteUsageCmd).Standalone()
 
-	groundstation_getMinuteUsageCmd.Flags().String("month", "", "The month being requested, with a value of 1-12.")
-	groundstation_getMinuteUsageCmd.Flags().String("year", "", "The year being requested, in the format of YYYY.")
-	groundstation_getMinuteUsageCmd.MarkFlagRequired("month")
-	groundstation_getMinuteUsageCmd.MarkFlagRequired("year")
+		groundstation_getMinuteUsageCmd.Flags().String("month", "", "The month being requested, with a value of 1-12.")
+		groundstation_getMinuteUsageCmd.Flags().String("year", "", "The year being requested, in the format of YYYY.")
+		groundstation_getMinuteUsageCmd.MarkFlagRequired("month")
+		groundstation_getMinuteUsageCmd.MarkFlagRequired("year")
+	})
 	groundstationCmd.AddCommand(groundstation_getMinuteUsageCmd)
 }

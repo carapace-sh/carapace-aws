@@ -12,11 +12,13 @@ var scheduler_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(scheduler_untagResourceCmd).Standalone()
+	carapace.Gen(scheduler_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(scheduler_untagResourceCmd).Standalone()
 
-	scheduler_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the schedule group from which you are removing tags.")
-	scheduler_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
-	scheduler_untagResourceCmd.MarkFlagRequired("resource-arn")
-	scheduler_untagResourceCmd.MarkFlagRequired("tag-keys")
+		scheduler_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the schedule group from which you are removing tags.")
+		scheduler_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
+		scheduler_untagResourceCmd.MarkFlagRequired("resource-arn")
+		scheduler_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	schedulerCmd.AddCommand(scheduler_untagResourceCmd)
 }

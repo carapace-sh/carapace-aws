@@ -12,11 +12,13 @@ var ssm_getOpsMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getOpsMetadataCmd).Standalone()
+	carapace.Gen(ssm_getOpsMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getOpsMetadataCmd).Standalone()
 
-	ssm_getOpsMetadataCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_getOpsMetadataCmd.Flags().String("next-token", "", "A token to start the list.")
-	ssm_getOpsMetadataCmd.Flags().String("ops-metadata-arn", "", "The Amazon Resource Name (ARN) of an OpsMetadata Object to view.")
-	ssm_getOpsMetadataCmd.MarkFlagRequired("ops-metadata-arn")
+		ssm_getOpsMetadataCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_getOpsMetadataCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_getOpsMetadataCmd.Flags().String("ops-metadata-arn", "", "The Amazon Resource Name (ARN) of an OpsMetadata Object to view.")
+		ssm_getOpsMetadataCmd.MarkFlagRequired("ops-metadata-arn")
+	})
 	ssmCmd.AddCommand(ssm_getOpsMetadataCmd)
 }

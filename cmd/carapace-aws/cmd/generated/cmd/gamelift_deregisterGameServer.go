@@ -12,11 +12,13 @@ var gamelift_deregisterGameServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deregisterGameServerCmd).Standalone()
+	carapace.Gen(gamelift_deregisterGameServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deregisterGameServerCmd).Standalone()
 
-	gamelift_deregisterGameServerCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group where the game server is running.")
-	gamelift_deregisterGameServerCmd.Flags().String("game-server-id", "", "A custom string that uniquely identifies the game server to deregister.")
-	gamelift_deregisterGameServerCmd.MarkFlagRequired("game-server-group-name")
-	gamelift_deregisterGameServerCmd.MarkFlagRequired("game-server-id")
+		gamelift_deregisterGameServerCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group where the game server is running.")
+		gamelift_deregisterGameServerCmd.Flags().String("game-server-id", "", "A custom string that uniquely identifies the game server to deregister.")
+		gamelift_deregisterGameServerCmd.MarkFlagRequired("game-server-group-name")
+		gamelift_deregisterGameServerCmd.MarkFlagRequired("game-server-id")
+	})
 	gameliftCmd.AddCommand(gamelift_deregisterGameServerCmd)
 }

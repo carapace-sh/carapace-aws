@@ -12,9 +12,11 @@ var route53RecoveryControlConfig_deleteSafetyRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_deleteSafetyRuleCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_deleteSafetyRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_deleteSafetyRuleCmd).Standalone()
 
-	route53RecoveryControlConfig_deleteSafetyRuleCmd.Flags().String("safety-rule-arn", "", "The ARN of the safety rule.")
-	route53RecoveryControlConfig_deleteSafetyRuleCmd.MarkFlagRequired("safety-rule-arn")
+		route53RecoveryControlConfig_deleteSafetyRuleCmd.Flags().String("safety-rule-arn", "", "The ARN of the safety rule.")
+		route53RecoveryControlConfig_deleteSafetyRuleCmd.MarkFlagRequired("safety-rule-arn")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_deleteSafetyRuleCmd)
 }

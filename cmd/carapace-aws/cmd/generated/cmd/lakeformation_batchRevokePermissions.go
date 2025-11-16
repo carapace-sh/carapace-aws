@@ -12,10 +12,12 @@ var lakeformation_batchRevokePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_batchRevokePermissionsCmd).Standalone()
+	carapace.Gen(lakeformation_batchRevokePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_batchRevokePermissionsCmd).Standalone()
 
-	lakeformation_batchRevokePermissionsCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
-	lakeformation_batchRevokePermissionsCmd.Flags().String("entries", "", "A list of up to 20 entries for resource permissions to be revoked by batch operation to the principal.")
-	lakeformation_batchRevokePermissionsCmd.MarkFlagRequired("entries")
+		lakeformation_batchRevokePermissionsCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+		lakeformation_batchRevokePermissionsCmd.Flags().String("entries", "", "A list of up to 20 entries for resource permissions to be revoked by batch operation to the principal.")
+		lakeformation_batchRevokePermissionsCmd.MarkFlagRequired("entries")
+	})
 	lakeformationCmd.AddCommand(lakeformation_batchRevokePermissionsCmd)
 }

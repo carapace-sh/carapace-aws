@@ -12,9 +12,11 @@ var elasticbeanstalk_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_listTagsForResourceCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_listTagsForResourceCmd).Standalone()
 
-	elasticbeanstalk_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.")
-	elasticbeanstalk_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		elasticbeanstalk_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.")
+		elasticbeanstalk_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_listTagsForResourceCmd)
 }

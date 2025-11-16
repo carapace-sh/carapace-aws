@@ -12,11 +12,13 @@ var grafana_disassociateLicenseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_disassociateLicenseCmd).Standalone()
+	carapace.Gen(grafana_disassociateLicenseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_disassociateLicenseCmd).Standalone()
 
-	grafana_disassociateLicenseCmd.Flags().String("license-type", "", "The type of license to remove from the workspace.")
-	grafana_disassociateLicenseCmd.Flags().String("workspace-id", "", "The ID of the workspace to remove the Grafana Enterprise license from.")
-	grafana_disassociateLicenseCmd.MarkFlagRequired("license-type")
-	grafana_disassociateLicenseCmd.MarkFlagRequired("workspace-id")
+		grafana_disassociateLicenseCmd.Flags().String("license-type", "", "The type of license to remove from the workspace.")
+		grafana_disassociateLicenseCmd.Flags().String("workspace-id", "", "The ID of the workspace to remove the Grafana Enterprise license from.")
+		grafana_disassociateLicenseCmd.MarkFlagRequired("license-type")
+		grafana_disassociateLicenseCmd.MarkFlagRequired("workspace-id")
+	})
 	grafanaCmd.AddCommand(grafana_disassociateLicenseCmd)
 }

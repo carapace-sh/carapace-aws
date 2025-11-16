@@ -12,9 +12,11 @@ var iotfleetwise_deleteDecoderManifestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_deleteDecoderManifestCmd).Standalone()
+	carapace.Gen(iotfleetwise_deleteDecoderManifestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_deleteDecoderManifestCmd).Standalone()
 
-	iotfleetwise_deleteDecoderManifestCmd.Flags().String("name", "", "The name of the decoder manifest to delete.")
-	iotfleetwise_deleteDecoderManifestCmd.MarkFlagRequired("name")
+		iotfleetwise_deleteDecoderManifestCmd.Flags().String("name", "", "The name of the decoder manifest to delete.")
+		iotfleetwise_deleteDecoderManifestCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_deleteDecoderManifestCmd)
 }

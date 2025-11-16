@@ -12,8 +12,10 @@ var elasticbeanstalk_describePlatformVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_describePlatformVersionCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_describePlatformVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_describePlatformVersionCmd).Standalone()
 
-	elasticbeanstalk_describePlatformVersionCmd.Flags().String("platform-arn", "", "The ARN of the platform version.")
+		elasticbeanstalk_describePlatformVersionCmd.Flags().String("platform-arn", "", "The ARN of the platform version.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_describePlatformVersionCmd)
 }

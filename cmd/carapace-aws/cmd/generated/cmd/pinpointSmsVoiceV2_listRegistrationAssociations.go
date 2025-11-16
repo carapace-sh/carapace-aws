@@ -12,12 +12,14 @@ var pinpointSmsVoiceV2_listRegistrationAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_listRegistrationAssociationsCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_listRegistrationAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_listRegistrationAssociationsCmd).Standalone()
 
-	pinpointSmsVoiceV2_listRegistrationAssociationsCmd.Flags().String("filters", "", "An array of RegistrationAssociationFilter to apply to the results that are returned.")
-	pinpointSmsVoiceV2_listRegistrationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
-	pinpointSmsVoiceV2_listRegistrationAssociationsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	pinpointSmsVoiceV2_listRegistrationAssociationsCmd.Flags().String("registration-id", "", "The unique identifier for the registration.")
-	pinpointSmsVoiceV2_listRegistrationAssociationsCmd.MarkFlagRequired("registration-id")
+		pinpointSmsVoiceV2_listRegistrationAssociationsCmd.Flags().String("filters", "", "An array of RegistrationAssociationFilter to apply to the results that are returned.")
+		pinpointSmsVoiceV2_listRegistrationAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
+		pinpointSmsVoiceV2_listRegistrationAssociationsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		pinpointSmsVoiceV2_listRegistrationAssociationsCmd.Flags().String("registration-id", "", "The unique identifier for the registration.")
+		pinpointSmsVoiceV2_listRegistrationAssociationsCmd.MarkFlagRequired("registration-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_listRegistrationAssociationsCmd)
 }

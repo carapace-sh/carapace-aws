@@ -12,9 +12,11 @@ var macie2_putClassificationExportConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_putClassificationExportConfigurationCmd).Standalone()
+	carapace.Gen(macie2_putClassificationExportConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_putClassificationExportConfigurationCmd).Standalone()
 
-	macie2_putClassificationExportConfigurationCmd.Flags().String("configuration", "", "The location to store data classification results in, and the encryption settings to use when storing results in that location.")
-	macie2_putClassificationExportConfigurationCmd.MarkFlagRequired("configuration")
+		macie2_putClassificationExportConfigurationCmd.Flags().String("configuration", "", "The location to store data classification results in, and the encryption settings to use when storing results in that location.")
+		macie2_putClassificationExportConfigurationCmd.MarkFlagRequired("configuration")
+	})
 	macie2Cmd.AddCommand(macie2_putClassificationExportConfigurationCmd)
 }

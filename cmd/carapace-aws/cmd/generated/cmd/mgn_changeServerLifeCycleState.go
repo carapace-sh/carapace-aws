@@ -12,12 +12,14 @@ var mgn_changeServerLifeCycleStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_changeServerLifeCycleStateCmd).Standalone()
+	carapace.Gen(mgn_changeServerLifeCycleStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_changeServerLifeCycleStateCmd).Standalone()
 
-	mgn_changeServerLifeCycleStateCmd.Flags().String("account-id", "", "The request to change the source server migration account ID.")
-	mgn_changeServerLifeCycleStateCmd.Flags().String("life-cycle", "", "The request to change the source server migration lifecycle state.")
-	mgn_changeServerLifeCycleStateCmd.Flags().String("source-server-id", "", "The request to change the source server migration lifecycle state by source server ID.")
-	mgn_changeServerLifeCycleStateCmd.MarkFlagRequired("life-cycle")
-	mgn_changeServerLifeCycleStateCmd.MarkFlagRequired("source-server-id")
+		mgn_changeServerLifeCycleStateCmd.Flags().String("account-id", "", "The request to change the source server migration account ID.")
+		mgn_changeServerLifeCycleStateCmd.Flags().String("life-cycle", "", "The request to change the source server migration lifecycle state.")
+		mgn_changeServerLifeCycleStateCmd.Flags().String("source-server-id", "", "The request to change the source server migration lifecycle state by source server ID.")
+		mgn_changeServerLifeCycleStateCmd.MarkFlagRequired("life-cycle")
+		mgn_changeServerLifeCycleStateCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_changeServerLifeCycleStateCmd)
 }

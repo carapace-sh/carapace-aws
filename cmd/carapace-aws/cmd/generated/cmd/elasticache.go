@@ -12,7 +12,9 @@ var elasticacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticacheCmd).Standalone()
+	carapace.Gen(elasticacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticacheCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(elasticacheCmd)
 }

@@ -12,14 +12,16 @@ var sagemaker_updateFeatureMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_updateFeatureMetadataCmd).Standalone()
+	carapace.Gen(sagemaker_updateFeatureMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_updateFeatureMetadataCmd).Standalone()
 
-	sagemaker_updateFeatureMetadataCmd.Flags().String("description", "", "A description that you can write to better describe the feature.")
-	sagemaker_updateFeatureMetadataCmd.Flags().String("feature-group-name", "", "The name or Amazon Resource Name (ARN) of the feature group containing the feature that you're updating.")
-	sagemaker_updateFeatureMetadataCmd.Flags().String("feature-name", "", "The name of the feature that you're updating.")
-	sagemaker_updateFeatureMetadataCmd.Flags().String("parameter-additions", "", "A list of key-value pairs that you can add to better describe the feature.")
-	sagemaker_updateFeatureMetadataCmd.Flags().String("parameter-removals", "", "A list of parameter keys that you can specify to remove parameters that describe your feature.")
-	sagemaker_updateFeatureMetadataCmd.MarkFlagRequired("feature-group-name")
-	sagemaker_updateFeatureMetadataCmd.MarkFlagRequired("feature-name")
+		sagemaker_updateFeatureMetadataCmd.Flags().String("description", "", "A description that you can write to better describe the feature.")
+		sagemaker_updateFeatureMetadataCmd.Flags().String("feature-group-name", "", "The name or Amazon Resource Name (ARN) of the feature group containing the feature that you're updating.")
+		sagemaker_updateFeatureMetadataCmd.Flags().String("feature-name", "", "The name of the feature that you're updating.")
+		sagemaker_updateFeatureMetadataCmd.Flags().String("parameter-additions", "", "A list of key-value pairs that you can add to better describe the feature.")
+		sagemaker_updateFeatureMetadataCmd.Flags().String("parameter-removals", "", "A list of parameter keys that you can specify to remove parameters that describe your feature.")
+		sagemaker_updateFeatureMetadataCmd.MarkFlagRequired("feature-group-name")
+		sagemaker_updateFeatureMetadataCmd.MarkFlagRequired("feature-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_updateFeatureMetadataCmd)
 }

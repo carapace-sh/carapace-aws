@@ -12,10 +12,12 @@ var ecr_getRepositoryPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_getRepositoryPolicyCmd).Standalone()
+	carapace.Gen(ecr_getRepositoryPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_getRepositoryPolicyCmd).Standalone()
 
-	ecr_getRepositoryPolicyCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the repository.")
-	ecr_getRepositoryPolicyCmd.Flags().String("repository-name", "", "The name of the repository with the policy to retrieve.")
-	ecr_getRepositoryPolicyCmd.MarkFlagRequired("repository-name")
+		ecr_getRepositoryPolicyCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry that contains the repository.")
+		ecr_getRepositoryPolicyCmd.Flags().String("repository-name", "", "The name of the repository with the policy to retrieve.")
+		ecr_getRepositoryPolicyCmd.MarkFlagRequired("repository-name")
+	})
 	ecrCmd.AddCommand(ecr_getRepositoryPolicyCmd)
 }

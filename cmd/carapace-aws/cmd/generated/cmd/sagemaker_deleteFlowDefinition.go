@@ -12,9 +12,11 @@ var sagemaker_deleteFlowDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteFlowDefinitionCmd).Standalone()
+	carapace.Gen(sagemaker_deleteFlowDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteFlowDefinitionCmd).Standalone()
 
-	sagemaker_deleteFlowDefinitionCmd.Flags().String("flow-definition-name", "", "The name of the flow definition you are deleting.")
-	sagemaker_deleteFlowDefinitionCmd.MarkFlagRequired("flow-definition-name")
+		sagemaker_deleteFlowDefinitionCmd.Flags().String("flow-definition-name", "", "The name of the flow definition you are deleting.")
+		sagemaker_deleteFlowDefinitionCmd.MarkFlagRequired("flow-definition-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteFlowDefinitionCmd)
 }

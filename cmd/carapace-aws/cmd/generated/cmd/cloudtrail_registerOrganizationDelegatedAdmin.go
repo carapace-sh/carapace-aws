@@ -12,9 +12,11 @@ var cloudtrail_registerOrganizationDelegatedAdminCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_registerOrganizationDelegatedAdminCmd).Standalone()
+	carapace.Gen(cloudtrail_registerOrganizationDelegatedAdminCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_registerOrganizationDelegatedAdminCmd).Standalone()
 
-	cloudtrail_registerOrganizationDelegatedAdminCmd.Flags().String("member-account-id", "", "An organization member account ID that you want to designate as a delegated administrator.")
-	cloudtrail_registerOrganizationDelegatedAdminCmd.MarkFlagRequired("member-account-id")
+		cloudtrail_registerOrganizationDelegatedAdminCmd.Flags().String("member-account-id", "", "An organization member account ID that you want to designate as a delegated administrator.")
+		cloudtrail_registerOrganizationDelegatedAdminCmd.MarkFlagRequired("member-account-id")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_registerOrganizationDelegatedAdminCmd)
 }

@@ -12,11 +12,13 @@ var sagemaker_describeUserProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeUserProfileCmd).Standalone()
+	carapace.Gen(sagemaker_describeUserProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeUserProfileCmd).Standalone()
 
-	sagemaker_describeUserProfileCmd.Flags().String("domain-id", "", "The domain ID.")
-	sagemaker_describeUserProfileCmd.Flags().String("user-profile-name", "", "The user profile name.")
-	sagemaker_describeUserProfileCmd.MarkFlagRequired("domain-id")
-	sagemaker_describeUserProfileCmd.MarkFlagRequired("user-profile-name")
+		sagemaker_describeUserProfileCmd.Flags().String("domain-id", "", "The domain ID.")
+		sagemaker_describeUserProfileCmd.Flags().String("user-profile-name", "", "The user profile name.")
+		sagemaker_describeUserProfileCmd.MarkFlagRequired("domain-id")
+		sagemaker_describeUserProfileCmd.MarkFlagRequired("user-profile-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeUserProfileCmd)
 }

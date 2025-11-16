@@ -12,11 +12,13 @@ var supplychain_getBillOfMaterialsImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_getBillOfMaterialsImportJobCmd).Standalone()
+	carapace.Gen(supplychain_getBillOfMaterialsImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_getBillOfMaterialsImportJobCmd).Standalone()
 
-	supplychain_getBillOfMaterialsImportJobCmd.Flags().String("instance-id", "", "The AWS Supply Chain instance identifier.")
-	supplychain_getBillOfMaterialsImportJobCmd.Flags().String("job-id", "", "The BillOfMaterialsImportJob identifier.")
-	supplychain_getBillOfMaterialsImportJobCmd.MarkFlagRequired("instance-id")
-	supplychain_getBillOfMaterialsImportJobCmd.MarkFlagRequired("job-id")
+		supplychain_getBillOfMaterialsImportJobCmd.Flags().String("instance-id", "", "The AWS Supply Chain instance identifier.")
+		supplychain_getBillOfMaterialsImportJobCmd.Flags().String("job-id", "", "The BillOfMaterialsImportJob identifier.")
+		supplychain_getBillOfMaterialsImportJobCmd.MarkFlagRequired("instance-id")
+		supplychain_getBillOfMaterialsImportJobCmd.MarkFlagRequired("job-id")
+	})
 	supplychainCmd.AddCommand(supplychain_getBillOfMaterialsImportJobCmd)
 }

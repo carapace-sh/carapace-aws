@@ -12,11 +12,13 @@ var events_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_untagResourceCmd).Standalone()
+	carapace.Gen(events_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_untagResourceCmd).Standalone()
 
-	events_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the EventBridge resource from which you are removing tags.")
-	events_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
-	events_untagResourceCmd.MarkFlagRequired("resource-arn")
-	events_untagResourceCmd.MarkFlagRequired("tag-keys")
+		events_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the EventBridge resource from which you are removing tags.")
+		events_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
+		events_untagResourceCmd.MarkFlagRequired("resource-arn")
+		events_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	eventsCmd.AddCommand(events_untagResourceCmd)
 }

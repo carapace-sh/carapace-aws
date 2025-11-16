@@ -12,12 +12,14 @@ var mgn_describeJobLogItemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_describeJobLogItemsCmd).Standalone()
+	carapace.Gen(mgn_describeJobLogItemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_describeJobLogItemsCmd).Standalone()
 
-	mgn_describeJobLogItemsCmd.Flags().String("account-id", "", "Request to describe Job log Account ID.")
-	mgn_describeJobLogItemsCmd.Flags().String("job-id", "", "Request to describe Job log job ID.")
-	mgn_describeJobLogItemsCmd.Flags().String("max-results", "", "Request to describe Job log item maximum results.")
-	mgn_describeJobLogItemsCmd.Flags().String("next-token", "", "Request to describe Job log next token.")
-	mgn_describeJobLogItemsCmd.MarkFlagRequired("job-id")
+		mgn_describeJobLogItemsCmd.Flags().String("account-id", "", "Request to describe Job log Account ID.")
+		mgn_describeJobLogItemsCmd.Flags().String("job-id", "", "Request to describe Job log job ID.")
+		mgn_describeJobLogItemsCmd.Flags().String("max-results", "", "Request to describe Job log item maximum results.")
+		mgn_describeJobLogItemsCmd.Flags().String("next-token", "", "Request to describe Job log next token.")
+		mgn_describeJobLogItemsCmd.MarkFlagRequired("job-id")
+	})
 	mgnCmd.AddCommand(mgn_describeJobLogItemsCmd)
 }

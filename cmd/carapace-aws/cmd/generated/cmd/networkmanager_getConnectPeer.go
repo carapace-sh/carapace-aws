@@ -12,9 +12,11 @@ var networkmanager_getConnectPeerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getConnectPeerCmd).Standalone()
+	carapace.Gen(networkmanager_getConnectPeerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getConnectPeerCmd).Standalone()
 
-	networkmanager_getConnectPeerCmd.Flags().String("connect-peer-id", "", "The ID of the Connect peer.")
-	networkmanager_getConnectPeerCmd.MarkFlagRequired("connect-peer-id")
+		networkmanager_getConnectPeerCmd.Flags().String("connect-peer-id", "", "The ID of the Connect peer.")
+		networkmanager_getConnectPeerCmd.MarkFlagRequired("connect-peer-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getConnectPeerCmd)
 }

@@ -12,9 +12,11 @@ var pcaConnectorAd_getConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorAd_getConnectorCmd).Standalone()
+	carapace.Gen(pcaConnectorAd_getConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorAd_getConnectorCmd).Standalone()
 
-	pcaConnectorAd_getConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).")
-	pcaConnectorAd_getConnectorCmd.MarkFlagRequired("connector-arn")
+		pcaConnectorAd_getConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateConnector](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html).")
+		pcaConnectorAd_getConnectorCmd.MarkFlagRequired("connector-arn")
+	})
 	pcaConnectorAdCmd.AddCommand(pcaConnectorAd_getConnectorCmd)
 }

@@ -12,9 +12,11 @@ var cleanrooms_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_listTagsForResourceCmd).Standalone()
+	carapace.Gen(cleanrooms_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_listTagsForResourceCmd).Standalone()
 
-	cleanrooms_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) associated with the resource you want to list tags on.")
-	cleanrooms_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		cleanrooms_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) associated with the resource you want to list tags on.")
+		cleanrooms_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_listTagsForResourceCmd)
 }

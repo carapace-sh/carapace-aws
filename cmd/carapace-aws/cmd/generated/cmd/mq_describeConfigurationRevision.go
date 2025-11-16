@@ -12,11 +12,13 @@ var mq_describeConfigurationRevisionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mq_describeConfigurationRevisionCmd).Standalone()
+	carapace.Gen(mq_describeConfigurationRevisionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mq_describeConfigurationRevisionCmd).Standalone()
 
-	mq_describeConfigurationRevisionCmd.Flags().String("configuration-id", "", "The unique ID that Amazon MQ generates for the configuration.")
-	mq_describeConfigurationRevisionCmd.Flags().String("configuration-revision", "", "The revision of the configuration.")
-	mq_describeConfigurationRevisionCmd.MarkFlagRequired("configuration-id")
-	mq_describeConfigurationRevisionCmd.MarkFlagRequired("configuration-revision")
+		mq_describeConfigurationRevisionCmd.Flags().String("configuration-id", "", "The unique ID that Amazon MQ generates for the configuration.")
+		mq_describeConfigurationRevisionCmd.Flags().String("configuration-revision", "", "The revision of the configuration.")
+		mq_describeConfigurationRevisionCmd.MarkFlagRequired("configuration-id")
+		mq_describeConfigurationRevisionCmd.MarkFlagRequired("configuration-revision")
+	})
 	mqCmd.AddCommand(mq_describeConfigurationRevisionCmd)
 }

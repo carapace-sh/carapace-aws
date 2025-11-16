@@ -12,11 +12,13 @@ var sagemaker_createPresignedMlflowTrackingServerUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_createPresignedMlflowTrackingServerUrlCmd).Standalone()
+	carapace.Gen(sagemaker_createPresignedMlflowTrackingServerUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_createPresignedMlflowTrackingServerUrlCmd).Standalone()
 
-	sagemaker_createPresignedMlflowTrackingServerUrlCmd.Flags().String("expires-in-seconds", "", "The duration in seconds that your presigned URL is valid.")
-	sagemaker_createPresignedMlflowTrackingServerUrlCmd.Flags().String("session-expiration-duration-in-seconds", "", "The duration in seconds that your MLflow UI session is valid.")
-	sagemaker_createPresignedMlflowTrackingServerUrlCmd.Flags().String("tracking-server-name", "", "The name of the tracking server to connect to your MLflow UI.")
-	sagemaker_createPresignedMlflowTrackingServerUrlCmd.MarkFlagRequired("tracking-server-name")
+		sagemaker_createPresignedMlflowTrackingServerUrlCmd.Flags().String("expires-in-seconds", "", "The duration in seconds that your presigned URL is valid.")
+		sagemaker_createPresignedMlflowTrackingServerUrlCmd.Flags().String("session-expiration-duration-in-seconds", "", "The duration in seconds that your MLflow UI session is valid.")
+		sagemaker_createPresignedMlflowTrackingServerUrlCmd.Flags().String("tracking-server-name", "", "The name of the tracking server to connect to your MLflow UI.")
+		sagemaker_createPresignedMlflowTrackingServerUrlCmd.MarkFlagRequired("tracking-server-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_createPresignedMlflowTrackingServerUrlCmd)
 }

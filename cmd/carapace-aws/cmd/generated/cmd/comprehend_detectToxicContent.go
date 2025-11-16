@@ -12,11 +12,13 @@ var comprehend_detectToxicContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_detectToxicContentCmd).Standalone()
+	carapace.Gen(comprehend_detectToxicContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_detectToxicContentCmd).Standalone()
 
-	comprehend_detectToxicContentCmd.Flags().String("language-code", "", "The language of the input text.")
-	comprehend_detectToxicContentCmd.Flags().String("text-segments", "", "A list of up to 10 text strings.")
-	comprehend_detectToxicContentCmd.MarkFlagRequired("language-code")
-	comprehend_detectToxicContentCmd.MarkFlagRequired("text-segments")
+		comprehend_detectToxicContentCmd.Flags().String("language-code", "", "The language of the input text.")
+		comprehend_detectToxicContentCmd.Flags().String("text-segments", "", "A list of up to 10 text strings.")
+		comprehend_detectToxicContentCmd.MarkFlagRequired("language-code")
+		comprehend_detectToxicContentCmd.MarkFlagRequired("text-segments")
+	})
 	comprehendCmd.AddCommand(comprehend_detectToxicContentCmd)
 }

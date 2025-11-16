@@ -12,10 +12,12 @@ var devopsGuru_describeResourceCollectionHealthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeResourceCollectionHealthCmd).Standalone()
+	carapace.Gen(devopsGuru_describeResourceCollectionHealthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeResourceCollectionHealthCmd).Standalone()
 
-	devopsGuru_describeResourceCollectionHealthCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
-	devopsGuru_describeResourceCollectionHealthCmd.Flags().String("resource-collection-type", "", "An Amazon Web Services resource collection type.")
-	devopsGuru_describeResourceCollectionHealthCmd.MarkFlagRequired("resource-collection-type")
+		devopsGuru_describeResourceCollectionHealthCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+		devopsGuru_describeResourceCollectionHealthCmd.Flags().String("resource-collection-type", "", "An Amazon Web Services resource collection type.")
+		devopsGuru_describeResourceCollectionHealthCmd.MarkFlagRequired("resource-collection-type")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeResourceCollectionHealthCmd)
 }

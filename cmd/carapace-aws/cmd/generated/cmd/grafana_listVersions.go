@@ -12,10 +12,12 @@ var grafana_listVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_listVersionsCmd).Standalone()
+	carapace.Gen(grafana_listVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_listVersionsCmd).Standalone()
 
-	grafana_listVersionsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	grafana_listVersionsCmd.Flags().String("next-token", "", "The token to use when requesting the next set of results.")
-	grafana_listVersionsCmd.Flags().String("workspace-id", "", "The ID of the workspace to list the available upgrade versions.")
+		grafana_listVersionsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		grafana_listVersionsCmd.Flags().String("next-token", "", "The token to use when requesting the next set of results.")
+		grafana_listVersionsCmd.Flags().String("workspace-id", "", "The ID of the workspace to list the available upgrade versions.")
+	})
 	grafanaCmd.AddCommand(grafana_listVersionsCmd)
 }

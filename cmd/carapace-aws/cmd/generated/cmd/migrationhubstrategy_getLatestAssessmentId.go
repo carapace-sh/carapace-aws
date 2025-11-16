@@ -12,7 +12,9 @@ var migrationhubstrategy_getLatestAssessmentIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubstrategy_getLatestAssessmentIdCmd).Standalone()
+	carapace.Gen(migrationhubstrategy_getLatestAssessmentIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubstrategy_getLatestAssessmentIdCmd).Standalone()
 
+	})
 	migrationhubstrategyCmd.AddCommand(migrationhubstrategy_getLatestAssessmentIdCmd)
 }

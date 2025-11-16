@@ -12,13 +12,15 @@ var pinpoint_getCampaignVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getCampaignVersionsCmd).Standalone()
+	carapace.Gen(pinpoint_getCampaignVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getCampaignVersionsCmd).Standalone()
 
-	pinpoint_getCampaignVersionsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getCampaignVersionsCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
-	pinpoint_getCampaignVersionsCmd.Flags().String("page-size", "", "The maximum number of items to include in each page of a paginated response.")
-	pinpoint_getCampaignVersionsCmd.Flags().String("token", "", "The NextToken string that specifies which page of results to return in a paginated response.")
-	pinpoint_getCampaignVersionsCmd.MarkFlagRequired("application-id")
-	pinpoint_getCampaignVersionsCmd.MarkFlagRequired("campaign-id")
+		pinpoint_getCampaignVersionsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getCampaignVersionsCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
+		pinpoint_getCampaignVersionsCmd.Flags().String("page-size", "", "The maximum number of items to include in each page of a paginated response.")
+		pinpoint_getCampaignVersionsCmd.Flags().String("token", "", "The NextToken string that specifies which page of results to return in a paginated response.")
+		pinpoint_getCampaignVersionsCmd.MarkFlagRequired("application-id")
+		pinpoint_getCampaignVersionsCmd.MarkFlagRequired("campaign-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getCampaignVersionsCmd)
 }

@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd).Standalone()
 
-	pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd.Flags().String("destination-phone-number", "", "The verified destination phone number, in E.164 format.")
-	pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd.Flags().String("tags", "", "An array of tags (key and value pairs) to associate with the destination number.")
-	pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd.MarkFlagRequired("destination-phone-number")
+		pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd.Flags().String("destination-phone-number", "", "The verified destination phone number, in E.164 format.")
+		pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd.Flags().String("tags", "", "An array of tags (key and value pairs) to associate with the destination number.")
+		pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd.MarkFlagRequired("destination-phone-number")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_createVerifiedDestinationNumberCmd)
 }

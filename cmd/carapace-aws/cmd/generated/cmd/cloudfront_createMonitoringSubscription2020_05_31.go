@@ -12,11 +12,13 @@ var cloudfront_createMonitoringSubscription2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_createMonitoringSubscription2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createMonitoringSubscription2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createMonitoringSubscription2020_05_31Cmd).Standalone()
 
-	cloudfront_createMonitoringSubscription2020_05_31Cmd.Flags().String("distribution-id", "", "The ID of the distribution that you are enabling metrics for.")
-	cloudfront_createMonitoringSubscription2020_05_31Cmd.Flags().String("monitoring-subscription", "", "A monitoring subscription.")
-	cloudfront_createMonitoringSubscription2020_05_31Cmd.MarkFlagRequired("distribution-id")
-	cloudfront_createMonitoringSubscription2020_05_31Cmd.MarkFlagRequired("monitoring-subscription")
+		cloudfront_createMonitoringSubscription2020_05_31Cmd.Flags().String("distribution-id", "", "The ID of the distribution that you are enabling metrics for.")
+		cloudfront_createMonitoringSubscription2020_05_31Cmd.Flags().String("monitoring-subscription", "", "A monitoring subscription.")
+		cloudfront_createMonitoringSubscription2020_05_31Cmd.MarkFlagRequired("distribution-id")
+		cloudfront_createMonitoringSubscription2020_05_31Cmd.MarkFlagRequired("monitoring-subscription")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createMonitoringSubscription2020_05_31Cmd)
 }

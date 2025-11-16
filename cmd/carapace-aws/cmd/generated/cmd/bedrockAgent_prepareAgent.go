@@ -12,9 +12,11 @@ var bedrockAgent_prepareAgentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_prepareAgentCmd).Standalone()
+	carapace.Gen(bedrockAgent_prepareAgentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_prepareAgentCmd).Standalone()
 
-	bedrockAgent_prepareAgentCmd.Flags().String("agent-id", "", "The unique identifier of the agent for which to create a `DRAFT` version.")
-	bedrockAgent_prepareAgentCmd.MarkFlagRequired("agent-id")
+		bedrockAgent_prepareAgentCmd.Flags().String("agent-id", "", "The unique identifier of the agent for which to create a `DRAFT` version.")
+		bedrockAgent_prepareAgentCmd.MarkFlagRequired("agent-id")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_prepareAgentCmd)
 }

@@ -12,9 +12,11 @@ var elastictranscoder_listPresetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elastictranscoder_listPresetsCmd).Standalone()
+	carapace.Gen(elastictranscoder_listPresetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elastictranscoder_listPresetsCmd).Standalone()
 
-	elastictranscoder_listPresetsCmd.Flags().String("ascending", "", "To list presets in chronological order by the date and time that they were created, enter `true`.")
-	elastictranscoder_listPresetsCmd.Flags().String("page-token", "", "When Elastic Transcoder returns more than one page of results, use `pageToken` in subsequent `GET` requests to get each successive page of results.")
+		elastictranscoder_listPresetsCmd.Flags().String("ascending", "", "To list presets in chronological order by the date and time that they were created, enter `true`.")
+		elastictranscoder_listPresetsCmd.Flags().String("page-token", "", "When Elastic Transcoder returns more than one page of results, use `pageToken` in subsequent `GET` requests to get each successive page of results.")
+	})
 	elastictranscoderCmd.AddCommand(elastictranscoder_listPresetsCmd)
 }

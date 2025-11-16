@@ -12,10 +12,12 @@ var dynamodb_listTagsOfResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_listTagsOfResourceCmd).Standalone()
+	carapace.Gen(dynamodb_listTagsOfResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_listTagsOfResourceCmd).Standalone()
 
-	dynamodb_listTagsOfResourceCmd.Flags().String("next-token", "", "An optional string that, if supplied, must be copied from the output of a previous call to ListTagOfResource.")
-	dynamodb_listTagsOfResourceCmd.Flags().String("resource-arn", "", "The Amazon DynamoDB resource with tags to be listed.")
-	dynamodb_listTagsOfResourceCmd.MarkFlagRequired("resource-arn")
+		dynamodb_listTagsOfResourceCmd.Flags().String("next-token", "", "An optional string that, if supplied, must be copied from the output of a previous call to ListTagOfResource.")
+		dynamodb_listTagsOfResourceCmd.Flags().String("resource-arn", "", "The Amazon DynamoDB resource with tags to be listed.")
+		dynamodb_listTagsOfResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	dynamodbCmd.AddCommand(dynamodb_listTagsOfResourceCmd)
 }

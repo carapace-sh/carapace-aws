@@ -12,9 +12,11 @@ var neptuneGraph_startGraphCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_startGraphCmd).Standalone()
+	carapace.Gen(neptuneGraph_startGraphCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_startGraphCmd).Standalone()
 
-	neptuneGraph_startGraphCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
-	neptuneGraph_startGraphCmd.MarkFlagRequired("graph-identifier")
+		neptuneGraph_startGraphCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
+		neptuneGraph_startGraphCmd.MarkFlagRequired("graph-identifier")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_startGraphCmd)
 }

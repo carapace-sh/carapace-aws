@@ -12,11 +12,13 @@ var supplychain_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_tagResourceCmd).Standalone()
+	carapace.Gen(supplychain_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_tagResourceCmd).Standalone()
 
-	supplychain_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Web Services Supply chain resource ARN that needs to be tagged.")
-	supplychain_tagResourceCmd.Flags().String("tags", "", "The tags of the Amazon Web Services Supply chain resource to be created.")
-	supplychain_tagResourceCmd.MarkFlagRequired("resource-arn")
-	supplychain_tagResourceCmd.MarkFlagRequired("tags")
+		supplychain_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Web Services Supply chain resource ARN that needs to be tagged.")
+		supplychain_tagResourceCmd.Flags().String("tags", "", "The tags of the Amazon Web Services Supply chain resource to be created.")
+		supplychain_tagResourceCmd.MarkFlagRequired("resource-arn")
+		supplychain_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	supplychainCmd.AddCommand(supplychain_tagResourceCmd)
 }

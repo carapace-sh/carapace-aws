@@ -12,9 +12,11 @@ var securityhub_batchDeleteAutomationRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_batchDeleteAutomationRulesCmd).Standalone()
+	carapace.Gen(securityhub_batchDeleteAutomationRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_batchDeleteAutomationRulesCmd).Standalone()
 
-	securityhub_batchDeleteAutomationRulesCmd.Flags().String("automation-rules-arns", "", "A list of Amazon Resource Names (ARNs) for the rules that are to be deleted.")
-	securityhub_batchDeleteAutomationRulesCmd.MarkFlagRequired("automation-rules-arns")
+		securityhub_batchDeleteAutomationRulesCmd.Flags().String("automation-rules-arns", "", "A list of Amazon Resource Names (ARNs) for the rules that are to be deleted.")
+		securityhub_batchDeleteAutomationRulesCmd.MarkFlagRequired("automation-rules-arns")
+	})
 	securityhubCmd.AddCommand(securityhub_batchDeleteAutomationRulesCmd)
 }

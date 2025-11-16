@@ -12,11 +12,13 @@ var connect_describeQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeQueueCmd).Standalone()
+	carapace.Gen(connect_describeQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeQueueCmd).Standalone()
 
-	connect_describeQueueCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeQueueCmd.Flags().String("queue-id", "", "The identifier for the queue.")
-	connect_describeQueueCmd.MarkFlagRequired("instance-id")
-	connect_describeQueueCmd.MarkFlagRequired("queue-id")
+		connect_describeQueueCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeQueueCmd.Flags().String("queue-id", "", "The identifier for the queue.")
+		connect_describeQueueCmd.MarkFlagRequired("instance-id")
+		connect_describeQueueCmd.MarkFlagRequired("queue-id")
+	})
 	connectCmd.AddCommand(connect_describeQueueCmd)
 }

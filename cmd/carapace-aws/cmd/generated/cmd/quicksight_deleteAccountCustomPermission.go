@@ -12,9 +12,11 @@ var quicksight_deleteAccountCustomPermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteAccountCustomPermissionCmd).Standalone()
+	carapace.Gen(quicksight_deleteAccountCustomPermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteAccountCustomPermissionCmd).Standalone()
 
-	quicksight_deleteAccountCustomPermissionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account from which you want to unapply the custom permissions profile.")
-	quicksight_deleteAccountCustomPermissionCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteAccountCustomPermissionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account from which you want to unapply the custom permissions profile.")
+		quicksight_deleteAccountCustomPermissionCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteAccountCustomPermissionCmd)
 }

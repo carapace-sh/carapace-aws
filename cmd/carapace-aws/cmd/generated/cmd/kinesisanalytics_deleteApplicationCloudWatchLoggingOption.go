@@ -12,13 +12,15 @@ var kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd = &cobra.Comman
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd).Standalone()
+	carapace.Gen(kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd).Standalone()
 
-	kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.Flags().String("application-name", "", "The Kinesis Analytics application name.")
-	kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.Flags().String("cloud-watch-logging-option-id", "", "The `CloudWatchLoggingOptionId` of the CloudWatch logging option to delete.")
-	kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.Flags().String("current-application-version-id", "", "The version ID of the Kinesis Analytics application.")
-	kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("cloud-watch-logging-option-id")
-	kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.Flags().String("application-name", "", "The Kinesis Analytics application name.")
+		kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.Flags().String("cloud-watch-logging-option-id", "", "The `CloudWatchLoggingOptionId` of the CloudWatch logging option to delete.")
+		kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.Flags().String("current-application-version-id", "", "The version ID of the Kinesis Analytics application.")
+		kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("cloud-watch-logging-option-id")
+		kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("current-application-version-id")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_deleteApplicationCloudWatchLoggingOptionCmd)
 }

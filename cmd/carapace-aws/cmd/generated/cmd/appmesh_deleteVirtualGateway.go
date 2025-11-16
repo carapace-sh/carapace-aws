@@ -12,12 +12,14 @@ var appmesh_deleteVirtualGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appmesh_deleteVirtualGatewayCmd).Standalone()
+	carapace.Gen(appmesh_deleteVirtualGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appmesh_deleteVirtualGatewayCmd).Standalone()
 
-	appmesh_deleteVirtualGatewayCmd.Flags().String("mesh-name", "", "The name of the service mesh to delete the virtual gateway from.")
-	appmesh_deleteVirtualGatewayCmd.Flags().String("mesh-owner", "", "The Amazon Web Services IAM account ID of the service mesh owner.")
-	appmesh_deleteVirtualGatewayCmd.Flags().String("virtual-gateway-name", "", "The name of the virtual gateway to delete.")
-	appmesh_deleteVirtualGatewayCmd.MarkFlagRequired("mesh-name")
-	appmesh_deleteVirtualGatewayCmd.MarkFlagRequired("virtual-gateway-name")
+		appmesh_deleteVirtualGatewayCmd.Flags().String("mesh-name", "", "The name of the service mesh to delete the virtual gateway from.")
+		appmesh_deleteVirtualGatewayCmd.Flags().String("mesh-owner", "", "The Amazon Web Services IAM account ID of the service mesh owner.")
+		appmesh_deleteVirtualGatewayCmd.Flags().String("virtual-gateway-name", "", "The name of the virtual gateway to delete.")
+		appmesh_deleteVirtualGatewayCmd.MarkFlagRequired("mesh-name")
+		appmesh_deleteVirtualGatewayCmd.MarkFlagRequired("virtual-gateway-name")
+	})
 	appmeshCmd.AddCommand(appmesh_deleteVirtualGatewayCmd)
 }

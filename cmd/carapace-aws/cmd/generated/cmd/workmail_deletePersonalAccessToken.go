@@ -12,11 +12,13 @@ var workmail_deletePersonalAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_deletePersonalAccessTokenCmd).Standalone()
+	carapace.Gen(workmail_deletePersonalAccessTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_deletePersonalAccessTokenCmd).Standalone()
 
-	workmail_deletePersonalAccessTokenCmd.Flags().String("organization-id", "", "The Organization ID.")
-	workmail_deletePersonalAccessTokenCmd.Flags().String("personal-access-token-id", "", "The Personal Access Token ID.")
-	workmail_deletePersonalAccessTokenCmd.MarkFlagRequired("organization-id")
-	workmail_deletePersonalAccessTokenCmd.MarkFlagRequired("personal-access-token-id")
+		workmail_deletePersonalAccessTokenCmd.Flags().String("organization-id", "", "The Organization ID.")
+		workmail_deletePersonalAccessTokenCmd.Flags().String("personal-access-token-id", "", "The Personal Access Token ID.")
+		workmail_deletePersonalAccessTokenCmd.MarkFlagRequired("organization-id")
+		workmail_deletePersonalAccessTokenCmd.MarkFlagRequired("personal-access-token-id")
+	})
 	workmailCmd.AddCommand(workmail_deletePersonalAccessTokenCmd)
 }

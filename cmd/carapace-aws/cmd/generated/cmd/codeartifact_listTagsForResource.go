@@ -12,9 +12,11 @@ var codeartifact_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeartifact_listTagsForResourceCmd).Standalone()
+	carapace.Gen(codeartifact_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeartifact_listTagsForResourceCmd).Standalone()
 
-	codeartifact_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to get tags for.")
-	codeartifact_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		codeartifact_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to get tags for.")
+		codeartifact_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	codeartifactCmd.AddCommand(codeartifact_listTagsForResourceCmd)
 }

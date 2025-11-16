@@ -12,9 +12,11 @@ var cloudfront_getDistributionTenant2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_getDistributionTenant2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getDistributionTenant2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getDistributionTenant2020_05_31Cmd).Standalone()
 
-	cloudfront_getDistributionTenant2020_05_31Cmd.Flags().String("identifier", "", "The identifier of the distribution tenant.")
-	cloudfront_getDistributionTenant2020_05_31Cmd.MarkFlagRequired("identifier")
+		cloudfront_getDistributionTenant2020_05_31Cmd.Flags().String("identifier", "", "The identifier of the distribution tenant.")
+		cloudfront_getDistributionTenant2020_05_31Cmd.MarkFlagRequired("identifier")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getDistributionTenant2020_05_31Cmd)
 }

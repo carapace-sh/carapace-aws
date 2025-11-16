@@ -12,13 +12,15 @@ var qconnect_notifyRecommendationsReceivedCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_notifyRecommendationsReceivedCmd).Standalone()
+	carapace.Gen(qconnect_notifyRecommendationsReceivedCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_notifyRecommendationsReceivedCmd).Standalone()
 
-	qconnect_notifyRecommendationsReceivedCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_notifyRecommendationsReceivedCmd.Flags().String("recommendation-ids", "", "The identifiers of the recommendations.")
-	qconnect_notifyRecommendationsReceivedCmd.Flags().String("session-id", "", "The identifier of the session.")
-	qconnect_notifyRecommendationsReceivedCmd.MarkFlagRequired("assistant-id")
-	qconnect_notifyRecommendationsReceivedCmd.MarkFlagRequired("recommendation-ids")
-	qconnect_notifyRecommendationsReceivedCmd.MarkFlagRequired("session-id")
+		qconnect_notifyRecommendationsReceivedCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_notifyRecommendationsReceivedCmd.Flags().String("recommendation-ids", "", "The identifiers of the recommendations.")
+		qconnect_notifyRecommendationsReceivedCmd.Flags().String("session-id", "", "The identifier of the session.")
+		qconnect_notifyRecommendationsReceivedCmd.MarkFlagRequired("assistant-id")
+		qconnect_notifyRecommendationsReceivedCmd.MarkFlagRequired("recommendation-ids")
+		qconnect_notifyRecommendationsReceivedCmd.MarkFlagRequired("session-id")
+	})
 	qconnectCmd.AddCommand(qconnect_notifyRecommendationsReceivedCmd)
 }

@@ -12,11 +12,13 @@ var connect_deleteEmailAddressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteEmailAddressCmd).Standalone()
+	carapace.Gen(connect_deleteEmailAddressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteEmailAddressCmd).Standalone()
 
-	connect_deleteEmailAddressCmd.Flags().String("email-address-id", "", "The identifier of the email address.")
-	connect_deleteEmailAddressCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteEmailAddressCmd.MarkFlagRequired("email-address-id")
-	connect_deleteEmailAddressCmd.MarkFlagRequired("instance-id")
+		connect_deleteEmailAddressCmd.Flags().String("email-address-id", "", "The identifier of the email address.")
+		connect_deleteEmailAddressCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteEmailAddressCmd.MarkFlagRequired("email-address-id")
+		connect_deleteEmailAddressCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_deleteEmailAddressCmd)
 }

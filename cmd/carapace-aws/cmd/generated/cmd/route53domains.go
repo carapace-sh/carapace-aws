@@ -12,7 +12,9 @@ var route53domainsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domainsCmd).Standalone()
+	carapace.Gen(route53domainsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domainsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(route53domainsCmd)
 }

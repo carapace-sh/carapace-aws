@@ -12,8 +12,10 @@ var cloudhsm_listHapgsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_listHapgsCmd).Standalone()
+	carapace.Gen(cloudhsm_listHapgsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_listHapgsCmd).Standalone()
 
-	cloudhsm_listHapgsCmd.Flags().String("next-token", "", "The `NextToken` value from a previous call to `ListHapgs`.")
+		cloudhsm_listHapgsCmd.Flags().String("next-token", "", "The `NextToken` value from a previous call to `ListHapgs`.")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_listHapgsCmd)
 }

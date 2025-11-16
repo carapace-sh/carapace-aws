@@ -12,13 +12,15 @@ var transfer_importSshPublicKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_importSshPublicKeyCmd).Standalone()
+	carapace.Gen(transfer_importSshPublicKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_importSshPublicKeyCmd).Standalone()
 
-	transfer_importSshPublicKeyCmd.Flags().String("server-id", "", "A system-assigned unique identifier for a server.")
-	transfer_importSshPublicKeyCmd.Flags().String("ssh-public-key-body", "", "The public key portion of an SSH key pair.")
-	transfer_importSshPublicKeyCmd.Flags().String("user-name", "", "The name of the Transfer Family user that is assigned to one or more servers.")
-	transfer_importSshPublicKeyCmd.MarkFlagRequired("server-id")
-	transfer_importSshPublicKeyCmd.MarkFlagRequired("ssh-public-key-body")
-	transfer_importSshPublicKeyCmd.MarkFlagRequired("user-name")
+		transfer_importSshPublicKeyCmd.Flags().String("server-id", "", "A system-assigned unique identifier for a server.")
+		transfer_importSshPublicKeyCmd.Flags().String("ssh-public-key-body", "", "The public key portion of an SSH key pair.")
+		transfer_importSshPublicKeyCmd.Flags().String("user-name", "", "The name of the Transfer Family user that is assigned to one or more servers.")
+		transfer_importSshPublicKeyCmd.MarkFlagRequired("server-id")
+		transfer_importSshPublicKeyCmd.MarkFlagRequired("ssh-public-key-body")
+		transfer_importSshPublicKeyCmd.MarkFlagRequired("user-name")
+	})
 	transferCmd.AddCommand(transfer_importSshPublicKeyCmd)
 }

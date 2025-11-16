@@ -12,9 +12,11 @@ var glue_deleteCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteCatalogCmd).Standalone()
+	carapace.Gen(glue_deleteCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteCatalogCmd).Standalone()
 
-	glue_deleteCatalogCmd.Flags().String("catalog-id", "", "The ID of the catalog.")
-	glue_deleteCatalogCmd.MarkFlagRequired("catalog-id")
+		glue_deleteCatalogCmd.Flags().String("catalog-id", "", "The ID of the catalog.")
+		glue_deleteCatalogCmd.MarkFlagRequired("catalog-id")
+	})
 	glueCmd.AddCommand(glue_deleteCatalogCmd)
 }

@@ -12,7 +12,9 @@ var ssmIncidentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidentsCmd).Standalone()
+	carapace.Gen(ssmIncidentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidentsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ssmIncidentsCmd)
 }

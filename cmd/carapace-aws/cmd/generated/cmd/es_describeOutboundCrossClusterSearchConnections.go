@@ -12,10 +12,12 @@ var es_describeOutboundCrossClusterSearchConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_describeOutboundCrossClusterSearchConnectionsCmd).Standalone()
+	carapace.Gen(es_describeOutboundCrossClusterSearchConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_describeOutboundCrossClusterSearchConnectionsCmd).Standalone()
 
-	es_describeOutboundCrossClusterSearchConnectionsCmd.Flags().String("filters", "", "A list of filters used to match properties for outbound cross-cluster search connection.")
-	es_describeOutboundCrossClusterSearchConnectionsCmd.Flags().String("max-results", "", "Set this value to limit the number of results returned.")
-	es_describeOutboundCrossClusterSearchConnectionsCmd.Flags().String("next-token", "", "NextToken is sent in case the earlier API call results contain the NextToken.")
+		es_describeOutboundCrossClusterSearchConnectionsCmd.Flags().String("filters", "", "A list of filters used to match properties for outbound cross-cluster search connection.")
+		es_describeOutboundCrossClusterSearchConnectionsCmd.Flags().String("max-results", "", "Set this value to limit the number of results returned.")
+		es_describeOutboundCrossClusterSearchConnectionsCmd.Flags().String("next-token", "", "NextToken is sent in case the earlier API call results contain the NextToken.")
+	})
 	esCmd.AddCommand(es_describeOutboundCrossClusterSearchConnectionsCmd)
 }

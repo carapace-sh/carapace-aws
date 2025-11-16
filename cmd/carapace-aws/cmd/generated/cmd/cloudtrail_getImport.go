@@ -12,9 +12,11 @@ var cloudtrail_getImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_getImportCmd).Standalone()
+	carapace.Gen(cloudtrail_getImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_getImportCmd).Standalone()
 
-	cloudtrail_getImportCmd.Flags().String("import-id", "", "The ID for the import.")
-	cloudtrail_getImportCmd.MarkFlagRequired("import-id")
+		cloudtrail_getImportCmd.Flags().String("import-id", "", "The ID for the import.")
+		cloudtrail_getImportCmd.MarkFlagRequired("import-id")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_getImportCmd)
 }

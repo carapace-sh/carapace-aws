@@ -12,9 +12,11 @@ var sagemaker_deleteModelPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteModelPackageCmd).Standalone()
+	carapace.Gen(sagemaker_deleteModelPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteModelPackageCmd).Standalone()
 
-	sagemaker_deleteModelPackageCmd.Flags().String("model-package-name", "", "The name or Amazon Resource Name (ARN) of the model package to delete.")
-	sagemaker_deleteModelPackageCmd.MarkFlagRequired("model-package-name")
+		sagemaker_deleteModelPackageCmd.Flags().String("model-package-name", "", "The name or Amazon Resource Name (ARN) of the model package to delete.")
+		sagemaker_deleteModelPackageCmd.MarkFlagRequired("model-package-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteModelPackageCmd)
 }

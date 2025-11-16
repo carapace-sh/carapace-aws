@@ -12,11 +12,13 @@ var iot_attachPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_attachPolicyCmd).Standalone()
+	carapace.Gen(iot_attachPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_attachPolicyCmd).Standalone()
 
-	iot_attachPolicyCmd.Flags().String("policy-name", "", "The name of the policy to attach.")
-	iot_attachPolicyCmd.Flags().String("target", "", "The [identity](https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html) to which the policy is attached.")
-	iot_attachPolicyCmd.MarkFlagRequired("policy-name")
-	iot_attachPolicyCmd.MarkFlagRequired("target")
+		iot_attachPolicyCmd.Flags().String("policy-name", "", "The name of the policy to attach.")
+		iot_attachPolicyCmd.Flags().String("target", "", "The [identity](https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html) to which the policy is attached.")
+		iot_attachPolicyCmd.MarkFlagRequired("policy-name")
+		iot_attachPolicyCmd.MarkFlagRequired("target")
+	})
 	iotCmd.AddCommand(iot_attachPolicyCmd)
 }

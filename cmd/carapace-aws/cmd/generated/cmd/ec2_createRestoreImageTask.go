@@ -12,16 +12,18 @@ var ec2_createRestoreImageTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_createRestoreImageTaskCmd).Standalone()
+	carapace.Gen(ec2_createRestoreImageTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_createRestoreImageTaskCmd).Standalone()
 
-	ec2_createRestoreImageTaskCmd.Flags().String("bucket", "", "The name of the Amazon S3 bucket that contains the stored AMI object.")
-	ec2_createRestoreImageTaskCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_createRestoreImageTaskCmd.Flags().String("name", "", "The name for the restored AMI.")
-	ec2_createRestoreImageTaskCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_createRestoreImageTaskCmd.Flags().String("object-key", "", "The name of the stored AMI object in the bucket.")
-	ec2_createRestoreImageTaskCmd.Flags().String("tag-specifications", "", "The tags to apply to the AMI and snapshots on restoration.")
-	ec2_createRestoreImageTaskCmd.MarkFlagRequired("bucket")
-	ec2_createRestoreImageTaskCmd.Flag("no-dry-run").Hidden = true
-	ec2_createRestoreImageTaskCmd.MarkFlagRequired("object-key")
+		ec2_createRestoreImageTaskCmd.Flags().String("bucket", "", "The name of the Amazon S3 bucket that contains the stored AMI object.")
+		ec2_createRestoreImageTaskCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_createRestoreImageTaskCmd.Flags().String("name", "", "The name for the restored AMI.")
+		ec2_createRestoreImageTaskCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_createRestoreImageTaskCmd.Flags().String("object-key", "", "The name of the stored AMI object in the bucket.")
+		ec2_createRestoreImageTaskCmd.Flags().String("tag-specifications", "", "The tags to apply to the AMI and snapshots on restoration.")
+		ec2_createRestoreImageTaskCmd.MarkFlagRequired("bucket")
+		ec2_createRestoreImageTaskCmd.Flag("no-dry-run").Hidden = true
+		ec2_createRestoreImageTaskCmd.MarkFlagRequired("object-key")
+	})
 	ec2Cmd.AddCommand(ec2_createRestoreImageTaskCmd)
 }

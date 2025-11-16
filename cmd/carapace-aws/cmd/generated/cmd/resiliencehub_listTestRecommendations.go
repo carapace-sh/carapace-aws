@@ -12,11 +12,13 @@ var resiliencehub_listTestRecommendationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_listTestRecommendationsCmd).Standalone()
+	carapace.Gen(resiliencehub_listTestRecommendationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_listTestRecommendationsCmd).Standalone()
 
-	resiliencehub_listTestRecommendationsCmd.Flags().String("assessment-arn", "", "Amazon Resource Name (ARN) of the assessment.")
-	resiliencehub_listTestRecommendationsCmd.Flags().String("max-results", "", "Maximum number of results to include in the response.")
-	resiliencehub_listTestRecommendationsCmd.Flags().String("next-token", "", "Null, or the token from a previous call to get the next set of results.")
-	resiliencehub_listTestRecommendationsCmd.MarkFlagRequired("assessment-arn")
+		resiliencehub_listTestRecommendationsCmd.Flags().String("assessment-arn", "", "Amazon Resource Name (ARN) of the assessment.")
+		resiliencehub_listTestRecommendationsCmd.Flags().String("max-results", "", "Maximum number of results to include in the response.")
+		resiliencehub_listTestRecommendationsCmd.Flags().String("next-token", "", "Null, or the token from a previous call to get the next set of results.")
+		resiliencehub_listTestRecommendationsCmd.MarkFlagRequired("assessment-arn")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_listTestRecommendationsCmd)
 }

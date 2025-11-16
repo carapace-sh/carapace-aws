@@ -12,8 +12,10 @@ var xray_getSamplingStatisticSummariesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getSamplingStatisticSummariesCmd).Standalone()
+	carapace.Gen(xray_getSamplingStatisticSummariesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getSamplingStatisticSummariesCmd).Standalone()
 
-	xray_getSamplingStatisticSummariesCmd.Flags().String("next-token", "", "Pagination token.")
+		xray_getSamplingStatisticSummariesCmd.Flags().String("next-token", "", "Pagination token.")
+	})
 	xrayCmd.AddCommand(xray_getSamplingStatisticSummariesCmd)
 }

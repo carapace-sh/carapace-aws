@@ -12,9 +12,11 @@ var rds_modifyCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_modifyCertificatesCmd).Standalone()
+	carapace.Gen(rds_modifyCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_modifyCertificatesCmd).Standalone()
 
-	rds_modifyCertificatesCmd.Flags().String("certificate-identifier", "", "The new default certificate identifier to override the current one with.")
-	rds_modifyCertificatesCmd.Flags().String("remove-customer-override", "", "Specifies whether to remove the override for the default certificate.")
+		rds_modifyCertificatesCmd.Flags().String("certificate-identifier", "", "The new default certificate identifier to override the current one with.")
+		rds_modifyCertificatesCmd.Flags().String("remove-customer-override", "", "Specifies whether to remove the override for the default certificate.")
+	})
 	rdsCmd.AddCommand(rds_modifyCertificatesCmd)
 }

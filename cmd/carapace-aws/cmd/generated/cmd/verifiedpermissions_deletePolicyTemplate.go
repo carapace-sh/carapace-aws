@@ -12,11 +12,13 @@ var verifiedpermissions_deletePolicyTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(verifiedpermissions_deletePolicyTemplateCmd).Standalone()
+	carapace.Gen(verifiedpermissions_deletePolicyTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(verifiedpermissions_deletePolicyTemplateCmd).Standalone()
 
-	verifiedpermissions_deletePolicyTemplateCmd.Flags().String("policy-store-id", "", "Specifies the ID of the policy store that contains the policy template that you want to delete.")
-	verifiedpermissions_deletePolicyTemplateCmd.Flags().String("policy-template-id", "", "Specifies the ID of the policy template that you want to delete.")
-	verifiedpermissions_deletePolicyTemplateCmd.MarkFlagRequired("policy-store-id")
-	verifiedpermissions_deletePolicyTemplateCmd.MarkFlagRequired("policy-template-id")
+		verifiedpermissions_deletePolicyTemplateCmd.Flags().String("policy-store-id", "", "Specifies the ID of the policy store that contains the policy template that you want to delete.")
+		verifiedpermissions_deletePolicyTemplateCmd.Flags().String("policy-template-id", "", "Specifies the ID of the policy template that you want to delete.")
+		verifiedpermissions_deletePolicyTemplateCmd.MarkFlagRequired("policy-store-id")
+		verifiedpermissions_deletePolicyTemplateCmd.MarkFlagRequired("policy-template-id")
+	})
 	verifiedpermissionsCmd.AddCommand(verifiedpermissions_deletePolicyTemplateCmd)
 }

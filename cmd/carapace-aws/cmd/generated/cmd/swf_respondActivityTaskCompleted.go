@@ -12,10 +12,12 @@ var swf_respondActivityTaskCompletedCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_respondActivityTaskCompletedCmd).Standalone()
+	carapace.Gen(swf_respondActivityTaskCompletedCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_respondActivityTaskCompletedCmd).Standalone()
 
-	swf_respondActivityTaskCompletedCmd.Flags().String("result", "", "The result of the activity task.")
-	swf_respondActivityTaskCompletedCmd.Flags().String("task-token", "", "The `taskToken` of the [ActivityTask]().")
-	swf_respondActivityTaskCompletedCmd.MarkFlagRequired("task-token")
+		swf_respondActivityTaskCompletedCmd.Flags().String("result", "", "The result of the activity task.")
+		swf_respondActivityTaskCompletedCmd.Flags().String("task-token", "", "The `taskToken` of the [ActivityTask]().")
+		swf_respondActivityTaskCompletedCmd.MarkFlagRequired("task-token")
+	})
 	swfCmd.AddCommand(swf_respondActivityTaskCompletedCmd)
 }

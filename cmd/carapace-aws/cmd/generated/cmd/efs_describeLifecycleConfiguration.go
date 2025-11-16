@@ -12,9 +12,11 @@ var efs_describeLifecycleConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_describeLifecycleConfigurationCmd).Standalone()
+	carapace.Gen(efs_describeLifecycleConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_describeLifecycleConfigurationCmd).Standalone()
 
-	efs_describeLifecycleConfigurationCmd.Flags().String("file-system-id", "", "The ID of the file system whose `LifecycleConfiguration` object you want to retrieve (String).")
-	efs_describeLifecycleConfigurationCmd.MarkFlagRequired("file-system-id")
+		efs_describeLifecycleConfigurationCmd.Flags().String("file-system-id", "", "The ID of the file system whose `LifecycleConfiguration` object you want to retrieve (String).")
+		efs_describeLifecycleConfigurationCmd.MarkFlagRequired("file-system-id")
+	})
 	efsCmd.AddCommand(efs_describeLifecycleConfigurationCmd)
 }

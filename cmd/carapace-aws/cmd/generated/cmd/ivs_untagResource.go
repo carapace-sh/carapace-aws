@@ -12,11 +12,13 @@ var ivs_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_untagResourceCmd).Standalone()
+	carapace.Gen(ivs_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_untagResourceCmd).Standalone()
 
-	ivs_untagResourceCmd.Flags().String("resource-arn", "", "ARN of the resource for which tags are to be removed.")
-	ivs_untagResourceCmd.Flags().String("tag-keys", "", "Array of tags to be removed.")
-	ivs_untagResourceCmd.MarkFlagRequired("resource-arn")
-	ivs_untagResourceCmd.MarkFlagRequired("tag-keys")
+		ivs_untagResourceCmd.Flags().String("resource-arn", "", "ARN of the resource for which tags are to be removed.")
+		ivs_untagResourceCmd.Flags().String("tag-keys", "", "Array of tags to be removed.")
+		ivs_untagResourceCmd.MarkFlagRequired("resource-arn")
+		ivs_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	ivsCmd.AddCommand(ivs_untagResourceCmd)
 }

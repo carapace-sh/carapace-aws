@@ -12,9 +12,11 @@ var ssmContacts_getContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_getContactCmd).Standalone()
+	carapace.Gen(ssmContacts_getContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_getContactCmd).Standalone()
 
-	ssmContacts_getContactCmd.Flags().String("contact-id", "", "The Amazon Resource Name (ARN) of the contact or escalation plan.")
-	ssmContacts_getContactCmd.MarkFlagRequired("contact-id")
+		ssmContacts_getContactCmd.Flags().String("contact-id", "", "The Amazon Resource Name (ARN) of the contact or escalation plan.")
+		ssmContacts_getContactCmd.MarkFlagRequired("contact-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_getContactCmd)
 }

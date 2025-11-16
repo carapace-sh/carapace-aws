@@ -12,11 +12,13 @@ var bcmDataExports_updateExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDataExports_updateExportCmd).Standalone()
+	carapace.Gen(bcmDataExports_updateExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDataExports_updateExportCmd).Standalone()
 
-	bcmDataExports_updateExportCmd.Flags().String("export", "", "The name and query details for the export.")
-	bcmDataExports_updateExportCmd.Flags().String("export-arn", "", "The Amazon Resource Name (ARN) for this export.")
-	bcmDataExports_updateExportCmd.MarkFlagRequired("export")
-	bcmDataExports_updateExportCmd.MarkFlagRequired("export-arn")
+		bcmDataExports_updateExportCmd.Flags().String("export", "", "The name and query details for the export.")
+		bcmDataExports_updateExportCmd.Flags().String("export-arn", "", "The Amazon Resource Name (ARN) for this export.")
+		bcmDataExports_updateExportCmd.MarkFlagRequired("export")
+		bcmDataExports_updateExportCmd.MarkFlagRequired("export-arn")
+	})
 	bcmDataExportsCmd.AddCommand(bcmDataExports_updateExportCmd)
 }

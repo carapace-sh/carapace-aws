@@ -12,11 +12,13 @@ var neptune_modifyDbclusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_modifyDbclusterParameterGroupCmd).Standalone()
+	carapace.Gen(neptune_modifyDbclusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_modifyDbclusterParameterGroupCmd).Standalone()
 
-	neptune_modifyDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the DB cluster parameter group to modify.")
-	neptune_modifyDbclusterParameterGroupCmd.Flags().String("parameters", "", "A list of parameters in the DB cluster parameter group to modify.")
-	neptune_modifyDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
-	neptune_modifyDbclusterParameterGroupCmd.MarkFlagRequired("parameters")
+		neptune_modifyDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the DB cluster parameter group to modify.")
+		neptune_modifyDbclusterParameterGroupCmd.Flags().String("parameters", "", "A list of parameters in the DB cluster parameter group to modify.")
+		neptune_modifyDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
+		neptune_modifyDbclusterParameterGroupCmd.MarkFlagRequired("parameters")
+	})
 	neptuneCmd.AddCommand(neptune_modifyDbclusterParameterGroupCmd)
 }

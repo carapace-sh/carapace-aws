@@ -12,9 +12,11 @@ var ivs_getRecordingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_getRecordingConfigurationCmd).Standalone()
+	carapace.Gen(ivs_getRecordingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_getRecordingConfigurationCmd).Standalone()
 
-	ivs_getRecordingConfigurationCmd.Flags().String("arn", "", "ARN of the recording configuration to be retrieved.")
-	ivs_getRecordingConfigurationCmd.MarkFlagRequired("arn")
+		ivs_getRecordingConfigurationCmd.Flags().String("arn", "", "ARN of the recording configuration to be retrieved.")
+		ivs_getRecordingConfigurationCmd.MarkFlagRequired("arn")
+	})
 	ivsCmd.AddCommand(ivs_getRecordingConfigurationCmd)
 }

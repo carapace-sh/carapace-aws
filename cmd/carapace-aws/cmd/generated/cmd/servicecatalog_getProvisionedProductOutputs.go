@@ -12,13 +12,15 @@ var servicecatalog_getProvisionedProductOutputsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_getProvisionedProductOutputsCmd).Standalone()
+	carapace.Gen(servicecatalog_getProvisionedProductOutputsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_getProvisionedProductOutputsCmd).Standalone()
 
-	servicecatalog_getProvisionedProductOutputsCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_getProvisionedProductOutputsCmd.Flags().String("output-keys", "", "The list of keys that the API should return with their values.")
-	servicecatalog_getProvisionedProductOutputsCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_getProvisionedProductOutputsCmd.Flags().String("page-token", "", "The page token for the next set of results.")
-	servicecatalog_getProvisionedProductOutputsCmd.Flags().String("provisioned-product-id", "", "The identifier of the provisioned product that you want the outputs from.")
-	servicecatalog_getProvisionedProductOutputsCmd.Flags().String("provisioned-product-name", "", "The name of the provisioned product that you want the outputs from.")
+		servicecatalog_getProvisionedProductOutputsCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_getProvisionedProductOutputsCmd.Flags().String("output-keys", "", "The list of keys that the API should return with their values.")
+		servicecatalog_getProvisionedProductOutputsCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_getProvisionedProductOutputsCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_getProvisionedProductOutputsCmd.Flags().String("provisioned-product-id", "", "The identifier of the provisioned product that you want the outputs from.")
+		servicecatalog_getProvisionedProductOutputsCmd.Flags().String("provisioned-product-name", "", "The name of the provisioned product that you want the outputs from.")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_getProvisionedProductOutputsCmd)
 }

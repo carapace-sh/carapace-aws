@@ -12,9 +12,11 @@ var iotwireless_deleteNetworkAnalyzerConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_deleteNetworkAnalyzerConfigurationCmd).Standalone()
+	carapace.Gen(iotwireless_deleteNetworkAnalyzerConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_deleteNetworkAnalyzerConfigurationCmd).Standalone()
 
-	iotwireless_deleteNetworkAnalyzerConfigurationCmd.Flags().String("configuration-name", "", "")
-	iotwireless_deleteNetworkAnalyzerConfigurationCmd.MarkFlagRequired("configuration-name")
+		iotwireless_deleteNetworkAnalyzerConfigurationCmd.Flags().String("configuration-name", "", "")
+		iotwireless_deleteNetworkAnalyzerConfigurationCmd.MarkFlagRequired("configuration-name")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_deleteNetworkAnalyzerConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var gameliftstreams_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftstreams_listTagsForResourceCmd).Standalone()
+	carapace.Gen(gameliftstreams_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftstreams_listTagsForResourceCmd).Standalone()
 
-	gameliftstreams_listTagsForResourceCmd.Flags().String("resource-arn", "", "The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) that you want to retrieve tags for.")
-	gameliftstreams_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		gameliftstreams_listTagsForResourceCmd.Flags().String("resource-arn", "", "The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) that you want to retrieve tags for.")
+		gameliftstreams_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	gameliftstreamsCmd.AddCommand(gameliftstreams_listTagsForResourceCmd)
 }

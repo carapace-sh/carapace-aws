@@ -12,13 +12,15 @@ var s3tables_listTablesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_listTablesCmd).Standalone()
+	carapace.Gen(s3tables_listTablesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_listTablesCmd).Standalone()
 
-	s3tables_listTablesCmd.Flags().String("continuation-token", "", "`ContinuationToken` indicates to Amazon S3 that the list is being continued on this bucket with a token.")
-	s3tables_listTablesCmd.Flags().String("max-tables", "", "The maximum number of tables to return.")
-	s3tables_listTablesCmd.Flags().String("namespace", "", "The namespace of the tables.")
-	s3tables_listTablesCmd.Flags().String("prefix", "", "The prefix of the tables.")
-	s3tables_listTablesCmd.Flags().String("table-bucket-arn", "", "The Amazon resource Name (ARN) of the table bucket.")
-	s3tables_listTablesCmd.MarkFlagRequired("table-bucket-arn")
+		s3tables_listTablesCmd.Flags().String("continuation-token", "", "`ContinuationToken` indicates to Amazon S3 that the list is being continued on this bucket with a token.")
+		s3tables_listTablesCmd.Flags().String("max-tables", "", "The maximum number of tables to return.")
+		s3tables_listTablesCmd.Flags().String("namespace", "", "The namespace of the tables.")
+		s3tables_listTablesCmd.Flags().String("prefix", "", "The prefix of the tables.")
+		s3tables_listTablesCmd.Flags().String("table-bucket-arn", "", "The Amazon resource Name (ARN) of the table bucket.")
+		s3tables_listTablesCmd.MarkFlagRequired("table-bucket-arn")
+	})
 	s3tablesCmd.AddCommand(s3tables_listTablesCmd)
 }

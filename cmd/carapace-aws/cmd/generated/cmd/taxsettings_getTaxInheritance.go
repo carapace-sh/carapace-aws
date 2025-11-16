@@ -12,7 +12,9 @@ var taxsettings_getTaxInheritanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_getTaxInheritanceCmd).Standalone()
+	carapace.Gen(taxsettings_getTaxInheritanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_getTaxInheritanceCmd).Standalone()
 
+	})
 	taxsettingsCmd.AddCommand(taxsettings_getTaxInheritanceCmd)
 }

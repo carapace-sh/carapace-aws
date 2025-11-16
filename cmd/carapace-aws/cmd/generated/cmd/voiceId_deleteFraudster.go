@@ -12,11 +12,13 @@ var voiceId_deleteFraudsterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_deleteFraudsterCmd).Standalone()
+	carapace.Gen(voiceId_deleteFraudsterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_deleteFraudsterCmd).Standalone()
 
-	voiceId_deleteFraudsterCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the fraudster.")
-	voiceId_deleteFraudsterCmd.Flags().String("fraudster-id", "", "The identifier of the fraudster you want to delete.")
-	voiceId_deleteFraudsterCmd.MarkFlagRequired("domain-id")
-	voiceId_deleteFraudsterCmd.MarkFlagRequired("fraudster-id")
+		voiceId_deleteFraudsterCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the fraudster.")
+		voiceId_deleteFraudsterCmd.Flags().String("fraudster-id", "", "The identifier of the fraudster you want to delete.")
+		voiceId_deleteFraudsterCmd.MarkFlagRequired("domain-id")
+		voiceId_deleteFraudsterCmd.MarkFlagRequired("fraudster-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_deleteFraudsterCmd)
 }

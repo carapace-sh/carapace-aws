@@ -12,9 +12,11 @@ var sagemaker_describeActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeActionCmd).Standalone()
+	carapace.Gen(sagemaker_describeActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeActionCmd).Standalone()
 
-	sagemaker_describeActionCmd.Flags().String("action-name", "", "The name of the action to describe.")
-	sagemaker_describeActionCmd.MarkFlagRequired("action-name")
+		sagemaker_describeActionCmd.Flags().String("action-name", "", "The name of the action to describe.")
+		sagemaker_describeActionCmd.MarkFlagRequired("action-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeActionCmd)
 }

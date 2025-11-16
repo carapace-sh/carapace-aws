@@ -12,11 +12,13 @@ var docdbElastic_listClusterSnapshotsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdbElastic_listClusterSnapshotsCmd).Standalone()
+	carapace.Gen(docdbElastic_listClusterSnapshotsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdbElastic_listClusterSnapshotsCmd).Standalone()
 
-	docdbElastic_listClusterSnapshotsCmd.Flags().String("cluster-arn", "", "The ARN identifier of the elastic cluster.")
-	docdbElastic_listClusterSnapshotsCmd.Flags().String("max-results", "", "The maximum number of elastic cluster snapshot results to receive in the response.")
-	docdbElastic_listClusterSnapshotsCmd.Flags().String("next-token", "", "A pagination token provided by a previous request.")
-	docdbElastic_listClusterSnapshotsCmd.Flags().String("snapshot-type", "", "The type of cluster snapshots to be returned.")
+		docdbElastic_listClusterSnapshotsCmd.Flags().String("cluster-arn", "", "The ARN identifier of the elastic cluster.")
+		docdbElastic_listClusterSnapshotsCmd.Flags().String("max-results", "", "The maximum number of elastic cluster snapshot results to receive in the response.")
+		docdbElastic_listClusterSnapshotsCmd.Flags().String("next-token", "", "A pagination token provided by a previous request.")
+		docdbElastic_listClusterSnapshotsCmd.Flags().String("snapshot-type", "", "The type of cluster snapshots to be returned.")
+	})
 	docdbElasticCmd.AddCommand(docdbElastic_listClusterSnapshotsCmd)
 }

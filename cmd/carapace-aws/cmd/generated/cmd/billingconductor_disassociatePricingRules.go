@@ -12,11 +12,13 @@ var billingconductor_disassociatePricingRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billingconductor_disassociatePricingRulesCmd).Standalone()
+	carapace.Gen(billingconductor_disassociatePricingRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_disassociatePricingRulesCmd).Standalone()
 
-	billingconductor_disassociatePricingRulesCmd.Flags().String("arn", "", "The pricing plan Amazon Resource Name (ARN) to disassociate pricing rules from.")
-	billingconductor_disassociatePricingRulesCmd.Flags().String("pricing-rule-arns", "", "A list containing the Amazon Resource Name (ARN) of the pricing rules that will be disassociated.")
-	billingconductor_disassociatePricingRulesCmd.MarkFlagRequired("arn")
-	billingconductor_disassociatePricingRulesCmd.MarkFlagRequired("pricing-rule-arns")
+		billingconductor_disassociatePricingRulesCmd.Flags().String("arn", "", "The pricing plan Amazon Resource Name (ARN) to disassociate pricing rules from.")
+		billingconductor_disassociatePricingRulesCmd.Flags().String("pricing-rule-arns", "", "A list containing the Amazon Resource Name (ARN) of the pricing rules that will be disassociated.")
+		billingconductor_disassociatePricingRulesCmd.MarkFlagRequired("arn")
+		billingconductor_disassociatePricingRulesCmd.MarkFlagRequired("pricing-rule-arns")
+	})
 	billingconductorCmd.AddCommand(billingconductor_disassociatePricingRulesCmd)
 }

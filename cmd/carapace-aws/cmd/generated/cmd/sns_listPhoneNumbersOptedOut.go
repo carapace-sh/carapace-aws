@@ -12,8 +12,10 @@ var sns_listPhoneNumbersOptedOutCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_listPhoneNumbersOptedOutCmd).Standalone()
+	carapace.Gen(sns_listPhoneNumbersOptedOutCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_listPhoneNumbersOptedOutCmd).Standalone()
 
-	sns_listPhoneNumbersOptedOutCmd.Flags().String("next-token", "", "A `NextToken` string is used when you call the `ListPhoneNumbersOptedOut` action to retrieve additional records that are available after the first page of results.")
+		sns_listPhoneNumbersOptedOutCmd.Flags().String("next-token", "", "A `NextToken` string is used when you call the `ListPhoneNumbersOptedOut` action to retrieve additional records that are available after the first page of results.")
+	})
 	snsCmd.AddCommand(sns_listPhoneNumbersOptedOutCmd)
 }

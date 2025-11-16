@@ -12,9 +12,11 @@ var docdbElastic_deleteClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdbElastic_deleteClusterCmd).Standalone()
+	carapace.Gen(docdbElastic_deleteClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdbElastic_deleteClusterCmd).Standalone()
 
-	docdbElastic_deleteClusterCmd.Flags().String("cluster-arn", "", "The ARN identifier of the elastic cluster that is to be deleted.")
-	docdbElastic_deleteClusterCmd.MarkFlagRequired("cluster-arn")
+		docdbElastic_deleteClusterCmd.Flags().String("cluster-arn", "", "The ARN identifier of the elastic cluster that is to be deleted.")
+		docdbElastic_deleteClusterCmd.MarkFlagRequired("cluster-arn")
+	})
 	docdbElasticCmd.AddCommand(docdbElastic_deleteClusterCmd)
 }

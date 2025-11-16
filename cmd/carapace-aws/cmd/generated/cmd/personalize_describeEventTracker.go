@@ -12,9 +12,11 @@ var personalize_describeEventTrackerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeEventTrackerCmd).Standalone()
+	carapace.Gen(personalize_describeEventTrackerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeEventTrackerCmd).Standalone()
 
-	personalize_describeEventTrackerCmd.Flags().String("event-tracker-arn", "", "The Amazon Resource Name (ARN) of the event tracker to describe.")
-	personalize_describeEventTrackerCmd.MarkFlagRequired("event-tracker-arn")
+		personalize_describeEventTrackerCmd.Flags().String("event-tracker-arn", "", "The Amazon Resource Name (ARN) of the event tracker to describe.")
+		personalize_describeEventTrackerCmd.MarkFlagRequired("event-tracker-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeEventTrackerCmd)
 }

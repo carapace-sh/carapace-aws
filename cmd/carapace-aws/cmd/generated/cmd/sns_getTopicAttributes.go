@@ -12,9 +12,11 @@ var sns_getTopicAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_getTopicAttributesCmd).Standalone()
+	carapace.Gen(sns_getTopicAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_getTopicAttributesCmd).Standalone()
 
-	sns_getTopicAttributesCmd.Flags().String("topic-arn", "", "The ARN of the topic whose properties you want to get.")
-	sns_getTopicAttributesCmd.MarkFlagRequired("topic-arn")
+		sns_getTopicAttributesCmd.Flags().String("topic-arn", "", "The ARN of the topic whose properties you want to get.")
+		sns_getTopicAttributesCmd.MarkFlagRequired("topic-arn")
+	})
 	snsCmd.AddCommand(sns_getTopicAttributesCmd)
 }

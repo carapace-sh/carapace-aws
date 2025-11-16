@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_deleteEventDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteEventDestinationCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteEventDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteEventDestinationCmd).Standalone()
 
-	pinpointSmsVoiceV2_deleteEventDestinationCmd.Flags().String("configuration-set-name", "", "The name of the configuration set or the configuration set's Amazon Resource Name (ARN) to remove the event destination from.")
-	pinpointSmsVoiceV2_deleteEventDestinationCmd.Flags().String("event-destination-name", "", "The name of the event destination to delete.")
-	pinpointSmsVoiceV2_deleteEventDestinationCmd.MarkFlagRequired("configuration-set-name")
-	pinpointSmsVoiceV2_deleteEventDestinationCmd.MarkFlagRequired("event-destination-name")
+		pinpointSmsVoiceV2_deleteEventDestinationCmd.Flags().String("configuration-set-name", "", "The name of the configuration set or the configuration set's Amazon Resource Name (ARN) to remove the event destination from.")
+		pinpointSmsVoiceV2_deleteEventDestinationCmd.Flags().String("event-destination-name", "", "The name of the event destination to delete.")
+		pinpointSmsVoiceV2_deleteEventDestinationCmd.MarkFlagRequired("configuration-set-name")
+		pinpointSmsVoiceV2_deleteEventDestinationCmd.MarkFlagRequired("event-destination-name")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteEventDestinationCmd)
 }

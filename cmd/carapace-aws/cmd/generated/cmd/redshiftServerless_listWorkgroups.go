@@ -12,10 +12,12 @@ var redshiftServerless_listWorkgroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_listWorkgroupsCmd).Standalone()
+	carapace.Gen(redshiftServerless_listWorkgroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_listWorkgroupsCmd).Standalone()
 
-	redshiftServerless_listWorkgroupsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
-	redshiftServerless_listWorkgroupsCmd.Flags().String("next-token", "", "If your initial ListWorkgroups operation returns a `nextToken`, you can include the returned `nextToken` in following ListNamespaces operations, which returns results in the next page.")
-	redshiftServerless_listWorkgroupsCmd.Flags().String("owner-account", "", "The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.")
+		redshiftServerless_listWorkgroupsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
+		redshiftServerless_listWorkgroupsCmd.Flags().String("next-token", "", "If your initial ListWorkgroups operation returns a `nextToken`, you can include the returned `nextToken` in following ListNamespaces operations, which returns results in the next page.")
+		redshiftServerless_listWorkgroupsCmd.Flags().String("owner-account", "", "The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_listWorkgroupsCmd)
 }

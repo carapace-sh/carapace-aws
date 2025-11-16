@@ -12,12 +12,14 @@ var ec2_deleteTransitGatewayConnectPeerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteTransitGatewayConnectPeerCmd).Standalone()
+	carapace.Gen(ec2_deleteTransitGatewayConnectPeerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteTransitGatewayConnectPeerCmd).Standalone()
 
-	ec2_deleteTransitGatewayConnectPeerCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteTransitGatewayConnectPeerCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteTransitGatewayConnectPeerCmd.Flags().String("transit-gateway-connect-peer-id", "", "The ID of the Connect peer.")
-	ec2_deleteTransitGatewayConnectPeerCmd.Flag("no-dry-run").Hidden = true
-	ec2_deleteTransitGatewayConnectPeerCmd.MarkFlagRequired("transit-gateway-connect-peer-id")
+		ec2_deleteTransitGatewayConnectPeerCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteTransitGatewayConnectPeerCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteTransitGatewayConnectPeerCmd.Flags().String("transit-gateway-connect-peer-id", "", "The ID of the Connect peer.")
+		ec2_deleteTransitGatewayConnectPeerCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteTransitGatewayConnectPeerCmd.MarkFlagRequired("transit-gateway-connect-peer-id")
+	})
 	ec2Cmd.AddCommand(ec2_deleteTransitGatewayConnectPeerCmd)
 }

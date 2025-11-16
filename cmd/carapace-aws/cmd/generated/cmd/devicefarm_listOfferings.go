@@ -12,8 +12,10 @@ var devicefarm_listOfferingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_listOfferingsCmd).Standalone()
+	carapace.Gen(devicefarm_listOfferingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_listOfferingsCmd).Standalone()
 
-	devicefarm_listOfferingsCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+		devicefarm_listOfferingsCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+	})
 	devicefarmCmd.AddCommand(devicefarm_listOfferingsCmd)
 }

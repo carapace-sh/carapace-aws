@@ -12,9 +12,11 @@ var machinelearning_deleteRealtimeEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_deleteRealtimeEndpointCmd).Standalone()
+	carapace.Gen(machinelearning_deleteRealtimeEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_deleteRealtimeEndpointCmd).Standalone()
 
-	machinelearning_deleteRealtimeEndpointCmd.Flags().String("mlmodel-id", "", "The ID assigned to the `MLModel` during creation.")
-	machinelearning_deleteRealtimeEndpointCmd.MarkFlagRequired("mlmodel-id")
+		machinelearning_deleteRealtimeEndpointCmd.Flags().String("mlmodel-id", "", "The ID assigned to the `MLModel` during creation.")
+		machinelearning_deleteRealtimeEndpointCmd.MarkFlagRequired("mlmodel-id")
+	})
 	machinelearningCmd.AddCommand(machinelearning_deleteRealtimeEndpointCmd)
 }

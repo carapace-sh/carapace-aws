@@ -12,9 +12,11 @@ var bedrock_putUseCaseForModelAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_putUseCaseForModelAccessCmd).Standalone()
+	carapace.Gen(bedrock_putUseCaseForModelAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_putUseCaseForModelAccessCmd).Standalone()
 
-	bedrock_putUseCaseForModelAccessCmd.Flags().String("form-data", "", "Put customer profile Request.")
-	bedrock_putUseCaseForModelAccessCmd.MarkFlagRequired("form-data")
+		bedrock_putUseCaseForModelAccessCmd.Flags().String("form-data", "", "Put customer profile Request.")
+		bedrock_putUseCaseForModelAccessCmd.MarkFlagRequired("form-data")
+	})
 	bedrockCmd.AddCommand(bedrock_putUseCaseForModelAccessCmd)
 }

@@ -12,12 +12,14 @@ var notificationscontacts_createEmailContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notificationscontacts_createEmailContactCmd).Standalone()
+	carapace.Gen(notificationscontacts_createEmailContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notificationscontacts_createEmailContactCmd).Standalone()
 
-	notificationscontacts_createEmailContactCmd.Flags().String("email-address", "", "The email address this email contact points to.")
-	notificationscontacts_createEmailContactCmd.Flags().String("name", "", "The name of the email contact.")
-	notificationscontacts_createEmailContactCmd.Flags().String("tags", "", "A map of tags assigned to a resource.")
-	notificationscontacts_createEmailContactCmd.MarkFlagRequired("email-address")
-	notificationscontacts_createEmailContactCmd.MarkFlagRequired("name")
+		notificationscontacts_createEmailContactCmd.Flags().String("email-address", "", "The email address this email contact points to.")
+		notificationscontacts_createEmailContactCmd.Flags().String("name", "", "The name of the email contact.")
+		notificationscontacts_createEmailContactCmd.Flags().String("tags", "", "A map of tags assigned to a resource.")
+		notificationscontacts_createEmailContactCmd.MarkFlagRequired("email-address")
+		notificationscontacts_createEmailContactCmd.MarkFlagRequired("name")
+	})
 	notificationscontactsCmd.AddCommand(notificationscontacts_createEmailContactCmd)
 }

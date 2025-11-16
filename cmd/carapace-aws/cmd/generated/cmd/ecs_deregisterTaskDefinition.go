@@ -12,9 +12,11 @@ var ecs_deregisterTaskDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_deregisterTaskDefinitionCmd).Standalone()
+	carapace.Gen(ecs_deregisterTaskDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_deregisterTaskDefinitionCmd).Standalone()
 
-	ecs_deregisterTaskDefinitionCmd.Flags().String("task-definition", "", "The `family` and `revision` (`family:revision`) or full Amazon Resource Name (ARN) of the task definition to deregister.")
-	ecs_deregisterTaskDefinitionCmd.MarkFlagRequired("task-definition")
+		ecs_deregisterTaskDefinitionCmd.Flags().String("task-definition", "", "The `family` and `revision` (`family:revision`) or full Amazon Resource Name (ARN) of the task definition to deregister.")
+		ecs_deregisterTaskDefinitionCmd.MarkFlagRequired("task-definition")
+	})
 	ecsCmd.AddCommand(ecs_deregisterTaskDefinitionCmd)
 }

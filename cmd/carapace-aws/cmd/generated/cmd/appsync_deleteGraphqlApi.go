@@ -12,9 +12,11 @@ var appsync_deleteGraphqlApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_deleteGraphqlApiCmd).Standalone()
+	carapace.Gen(appsync_deleteGraphqlApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_deleteGraphqlApiCmd).Standalone()
 
-	appsync_deleteGraphqlApiCmd.Flags().String("api-id", "", "The API ID.")
-	appsync_deleteGraphqlApiCmd.MarkFlagRequired("api-id")
+		appsync_deleteGraphqlApiCmd.Flags().String("api-id", "", "The API ID.")
+		appsync_deleteGraphqlApiCmd.MarkFlagRequired("api-id")
+	})
 	appsyncCmd.AddCommand(appsync_deleteGraphqlApiCmd)
 }

@@ -12,11 +12,13 @@ var elbv2_deleteSharedTrustStoreAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_deleteSharedTrustStoreAssociationCmd).Standalone()
+	carapace.Gen(elbv2_deleteSharedTrustStoreAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_deleteSharedTrustStoreAssociationCmd).Standalone()
 
-	elbv2_deleteSharedTrustStoreAssociationCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	elbv2_deleteSharedTrustStoreAssociationCmd.Flags().String("trust-store-arn", "", "The Amazon Resource Name (ARN) of the trust store.")
-	elbv2_deleteSharedTrustStoreAssociationCmd.MarkFlagRequired("resource-arn")
-	elbv2_deleteSharedTrustStoreAssociationCmd.MarkFlagRequired("trust-store-arn")
+		elbv2_deleteSharedTrustStoreAssociationCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		elbv2_deleteSharedTrustStoreAssociationCmd.Flags().String("trust-store-arn", "", "The Amazon Resource Name (ARN) of the trust store.")
+		elbv2_deleteSharedTrustStoreAssociationCmd.MarkFlagRequired("resource-arn")
+		elbv2_deleteSharedTrustStoreAssociationCmd.MarkFlagRequired("trust-store-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_deleteSharedTrustStoreAssociationCmd)
 }

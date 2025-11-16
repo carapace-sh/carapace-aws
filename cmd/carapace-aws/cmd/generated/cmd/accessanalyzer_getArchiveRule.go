@@ -12,11 +12,13 @@ var accessanalyzer_getArchiveRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_getArchiveRuleCmd).Standalone()
+	carapace.Gen(accessanalyzer_getArchiveRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_getArchiveRuleCmd).Standalone()
 
-	accessanalyzer_getArchiveRuleCmd.Flags().String("analyzer-name", "", "The name of the analyzer to retrieve rules from.")
-	accessanalyzer_getArchiveRuleCmd.Flags().String("rule-name", "", "The name of the rule to retrieve.")
-	accessanalyzer_getArchiveRuleCmd.MarkFlagRequired("analyzer-name")
-	accessanalyzer_getArchiveRuleCmd.MarkFlagRequired("rule-name")
+		accessanalyzer_getArchiveRuleCmd.Flags().String("analyzer-name", "", "The name of the analyzer to retrieve rules from.")
+		accessanalyzer_getArchiveRuleCmd.Flags().String("rule-name", "", "The name of the rule to retrieve.")
+		accessanalyzer_getArchiveRuleCmd.MarkFlagRequired("analyzer-name")
+		accessanalyzer_getArchiveRuleCmd.MarkFlagRequired("rule-name")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_getArchiveRuleCmd)
 }

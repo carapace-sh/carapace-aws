@@ -12,11 +12,13 @@ var s3tables_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_tagResourceCmd).Standalone()
+	carapace.Gen(s3tables_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_tagResourceCmd).Standalone()
 
-	s3tables_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon S3 Tables resource that you're applying tags to.")
-	s3tables_tagResourceCmd.Flags().String("tags", "", "The user-defined tag that you want to add to the specified S3 Tables resource.")
-	s3tables_tagResourceCmd.MarkFlagRequired("resource-arn")
-	s3tables_tagResourceCmd.MarkFlagRequired("tags")
+		s3tables_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon S3 Tables resource that you're applying tags to.")
+		s3tables_tagResourceCmd.Flags().String("tags", "", "The user-defined tag that you want to add to the specified S3 Tables resource.")
+		s3tables_tagResourceCmd.MarkFlagRequired("resource-arn")
+		s3tables_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	s3tablesCmd.AddCommand(s3tables_tagResourceCmd)
 }

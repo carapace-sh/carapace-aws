@@ -12,15 +12,17 @@ var groundstation_updateConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_updateConfigCmd).Standalone()
+	carapace.Gen(groundstation_updateConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_updateConfigCmd).Standalone()
 
-	groundstation_updateConfigCmd.Flags().String("config-data", "", "Parameters of a `Config`.")
-	groundstation_updateConfigCmd.Flags().String("config-id", "", "UUID of a `Config`.")
-	groundstation_updateConfigCmd.Flags().String("config-type", "", "Type of a `Config`.")
-	groundstation_updateConfigCmd.Flags().String("name", "", "Name of a `Config`.")
-	groundstation_updateConfigCmd.MarkFlagRequired("config-data")
-	groundstation_updateConfigCmd.MarkFlagRequired("config-id")
-	groundstation_updateConfigCmd.MarkFlagRequired("config-type")
-	groundstation_updateConfigCmd.MarkFlagRequired("name")
+		groundstation_updateConfigCmd.Flags().String("config-data", "", "Parameters of a `Config`.")
+		groundstation_updateConfigCmd.Flags().String("config-id", "", "UUID of a `Config`.")
+		groundstation_updateConfigCmd.Flags().String("config-type", "", "Type of a `Config`.")
+		groundstation_updateConfigCmd.Flags().String("name", "", "Name of a `Config`.")
+		groundstation_updateConfigCmd.MarkFlagRequired("config-data")
+		groundstation_updateConfigCmd.MarkFlagRequired("config-id")
+		groundstation_updateConfigCmd.MarkFlagRequired("config-type")
+		groundstation_updateConfigCmd.MarkFlagRequired("name")
+	})
 	groundstationCmd.AddCommand(groundstation_updateConfigCmd)
 }

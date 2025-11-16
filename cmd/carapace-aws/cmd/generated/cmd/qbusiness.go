@@ -12,7 +12,9 @@ var qbusinessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusinessCmd).Standalone()
+	carapace.Gen(qbusinessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusinessCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(qbusinessCmd)
 }

@@ -12,13 +12,15 @@ var elasticbeanstalk_describeConfigurationOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_describeConfigurationOptionsCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_describeConfigurationOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_describeConfigurationOptionsCmd).Standalone()
 
-	elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("application-name", "", "The name of the application associated with the configuration template or environment.")
-	elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("environment-name", "", "The name of the environment whose configuration options you want to describe.")
-	elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("options", "", "If specified, restricts the descriptions to only the specified options.")
-	elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("platform-arn", "", "The ARN of the custom platform.")
-	elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("solution-stack-name", "", "The name of the solution stack whose configuration options you want to describe.")
-	elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("template-name", "", "The name of the configuration template whose configuration options you want to describe.")
+		elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("application-name", "", "The name of the application associated with the configuration template or environment.")
+		elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("environment-name", "", "The name of the environment whose configuration options you want to describe.")
+		elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("options", "", "If specified, restricts the descriptions to only the specified options.")
+		elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("platform-arn", "", "The ARN of the custom platform.")
+		elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("solution-stack-name", "", "The name of the solution stack whose configuration options you want to describe.")
+		elasticbeanstalk_describeConfigurationOptionsCmd.Flags().String("template-name", "", "The name of the configuration template whose configuration options you want to describe.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_describeConfigurationOptionsCmd)
 }

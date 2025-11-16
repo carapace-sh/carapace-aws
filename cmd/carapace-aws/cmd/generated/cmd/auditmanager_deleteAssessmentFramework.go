@@ -12,9 +12,11 @@ var auditmanager_deleteAssessmentFrameworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_deleteAssessmentFrameworkCmd).Standalone()
+	carapace.Gen(auditmanager_deleteAssessmentFrameworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_deleteAssessmentFrameworkCmd).Standalone()
 
-	auditmanager_deleteAssessmentFrameworkCmd.Flags().String("framework-id", "", "The identifier for the custom framework.")
-	auditmanager_deleteAssessmentFrameworkCmd.MarkFlagRequired("framework-id")
+		auditmanager_deleteAssessmentFrameworkCmd.Flags().String("framework-id", "", "The identifier for the custom framework.")
+		auditmanager_deleteAssessmentFrameworkCmd.MarkFlagRequired("framework-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_deleteAssessmentFrameworkCmd)
 }

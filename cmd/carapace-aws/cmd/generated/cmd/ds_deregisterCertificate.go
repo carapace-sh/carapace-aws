@@ -12,11 +12,13 @@ var ds_deregisterCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_deregisterCertificateCmd).Standalone()
+	carapace.Gen(ds_deregisterCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_deregisterCertificateCmd).Standalone()
 
-	ds_deregisterCertificateCmd.Flags().String("certificate-id", "", "The identifier of the certificate.")
-	ds_deregisterCertificateCmd.Flags().String("directory-id", "", "The identifier of the directory.")
-	ds_deregisterCertificateCmd.MarkFlagRequired("certificate-id")
-	ds_deregisterCertificateCmd.MarkFlagRequired("directory-id")
+		ds_deregisterCertificateCmd.Flags().String("certificate-id", "", "The identifier of the certificate.")
+		ds_deregisterCertificateCmd.Flags().String("directory-id", "", "The identifier of the directory.")
+		ds_deregisterCertificateCmd.MarkFlagRequired("certificate-id")
+		ds_deregisterCertificateCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_deregisterCertificateCmd)
 }

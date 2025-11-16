@@ -12,9 +12,11 @@ var logs_deleteDeliveryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteDeliveryCmd).Standalone()
+	carapace.Gen(logs_deleteDeliveryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteDeliveryCmd).Standalone()
 
-	logs_deleteDeliveryCmd.Flags().String("id", "", "The unique ID of the delivery to delete.")
-	logs_deleteDeliveryCmd.MarkFlagRequired("id")
+		logs_deleteDeliveryCmd.Flags().String("id", "", "The unique ID of the delivery to delete.")
+		logs_deleteDeliveryCmd.MarkFlagRequired("id")
+	})
 	logsCmd.AddCommand(logs_deleteDeliveryCmd)
 }

@@ -12,8 +12,10 @@ var supportApp_listSlackWorkspaceConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supportApp_listSlackWorkspaceConfigurationsCmd).Standalone()
+	carapace.Gen(supportApp_listSlackWorkspaceConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supportApp_listSlackWorkspaceConfigurationsCmd).Standalone()
 
-	supportApp_listSlackWorkspaceConfigurationsCmd.Flags().String("next-token", "", "If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.")
+		supportApp_listSlackWorkspaceConfigurationsCmd.Flags().String("next-token", "", "If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.")
+	})
 	supportAppCmd.AddCommand(supportApp_listSlackWorkspaceConfigurationsCmd)
 }

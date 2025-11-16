@@ -12,9 +12,11 @@ var cognitoIdentity_describeIdentityPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdentity_describeIdentityPoolCmd).Standalone()
+	carapace.Gen(cognitoIdentity_describeIdentityPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdentity_describeIdentityPoolCmd).Standalone()
 
-	cognitoIdentity_describeIdentityPoolCmd.Flags().String("identity-pool-id", "", "An identity pool ID in the format REGION:GUID.")
-	cognitoIdentity_describeIdentityPoolCmd.MarkFlagRequired("identity-pool-id")
+		cognitoIdentity_describeIdentityPoolCmd.Flags().String("identity-pool-id", "", "An identity pool ID in the format REGION:GUID.")
+		cognitoIdentity_describeIdentityPoolCmd.MarkFlagRequired("identity-pool-id")
+	})
 	cognitoIdentityCmd.AddCommand(cognitoIdentity_describeIdentityPoolCmd)
 }

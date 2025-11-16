@@ -12,14 +12,16 @@ var ecr_completeLayerUploadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_completeLayerUploadCmd).Standalone()
+	carapace.Gen(ecr_completeLayerUploadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_completeLayerUploadCmd).Standalone()
 
-	ecr_completeLayerUploadCmd.Flags().String("layer-digests", "", "The `sha256` digest of the image layer.")
-	ecr_completeLayerUploadCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry to which to upload layers.")
-	ecr_completeLayerUploadCmd.Flags().String("repository-name", "", "The name of the repository to associate with the image layer.")
-	ecr_completeLayerUploadCmd.Flags().String("upload-id", "", "The upload ID from a previous [InitiateLayerUpload]() operation to associate with the image layer.")
-	ecr_completeLayerUploadCmd.MarkFlagRequired("layer-digests")
-	ecr_completeLayerUploadCmd.MarkFlagRequired("repository-name")
-	ecr_completeLayerUploadCmd.MarkFlagRequired("upload-id")
+		ecr_completeLayerUploadCmd.Flags().String("layer-digests", "", "The `sha256` digest of the image layer.")
+		ecr_completeLayerUploadCmd.Flags().String("registry-id", "", "The Amazon Web Services account ID associated with the registry to which to upload layers.")
+		ecr_completeLayerUploadCmd.Flags().String("repository-name", "", "The name of the repository to associate with the image layer.")
+		ecr_completeLayerUploadCmd.Flags().String("upload-id", "", "The upload ID from a previous [InitiateLayerUpload]() operation to associate with the image layer.")
+		ecr_completeLayerUploadCmd.MarkFlagRequired("layer-digests")
+		ecr_completeLayerUploadCmd.MarkFlagRequired("repository-name")
+		ecr_completeLayerUploadCmd.MarkFlagRequired("upload-id")
+	})
 	ecrCmd.AddCommand(ecr_completeLayerUploadCmd)
 }

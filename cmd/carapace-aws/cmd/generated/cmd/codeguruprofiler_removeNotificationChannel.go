@@ -12,11 +12,13 @@ var codeguruprofiler_removeNotificationChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruprofiler_removeNotificationChannelCmd).Standalone()
+	carapace.Gen(codeguruprofiler_removeNotificationChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruprofiler_removeNotificationChannelCmd).Standalone()
 
-	codeguruprofiler_removeNotificationChannelCmd.Flags().String("channel-id", "", "The id of the channel that we want to stop receiving notifications.")
-	codeguruprofiler_removeNotificationChannelCmd.Flags().String("profiling-group-name", "", "The name of the profiling group we want to change notification configuration for.")
-	codeguruprofiler_removeNotificationChannelCmd.MarkFlagRequired("channel-id")
-	codeguruprofiler_removeNotificationChannelCmd.MarkFlagRequired("profiling-group-name")
+		codeguruprofiler_removeNotificationChannelCmd.Flags().String("channel-id", "", "The id of the channel that we want to stop receiving notifications.")
+		codeguruprofiler_removeNotificationChannelCmd.Flags().String("profiling-group-name", "", "The name of the profiling group we want to change notification configuration for.")
+		codeguruprofiler_removeNotificationChannelCmd.MarkFlagRequired("channel-id")
+		codeguruprofiler_removeNotificationChannelCmd.MarkFlagRequired("profiling-group-name")
+	})
 	codeguruprofilerCmd.AddCommand(codeguruprofiler_removeNotificationChannelCmd)
 }

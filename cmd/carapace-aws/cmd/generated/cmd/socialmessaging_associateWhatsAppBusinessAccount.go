@@ -12,9 +12,11 @@ var socialmessaging_associateWhatsAppBusinessAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(socialmessaging_associateWhatsAppBusinessAccountCmd).Standalone()
+	carapace.Gen(socialmessaging_associateWhatsAppBusinessAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_associateWhatsAppBusinessAccountCmd).Standalone()
 
-	socialmessaging_associateWhatsAppBusinessAccountCmd.Flags().String("setup-finalization", "", "A JSON object that contains the phone numbers and WhatsApp Business Account to link to your account.")
-	socialmessaging_associateWhatsAppBusinessAccountCmd.Flags().String("signup-callback", "", "Contains the callback access token.")
+		socialmessaging_associateWhatsAppBusinessAccountCmd.Flags().String("setup-finalization", "", "A JSON object that contains the phone numbers and WhatsApp Business Account to link to your account.")
+		socialmessaging_associateWhatsAppBusinessAccountCmd.Flags().String("signup-callback", "", "Contains the callback access token.")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_associateWhatsAppBusinessAccountCmd)
 }

@@ -12,9 +12,11 @@ var proton_deleteEnvironmentTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_deleteEnvironmentTemplateCmd).Standalone()
+	carapace.Gen(proton_deleteEnvironmentTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_deleteEnvironmentTemplateCmd).Standalone()
 
-	proton_deleteEnvironmentTemplateCmd.Flags().String("name", "", "The name of the environment template to delete.")
-	proton_deleteEnvironmentTemplateCmd.MarkFlagRequired("name")
+		proton_deleteEnvironmentTemplateCmd.Flags().String("name", "", "The name of the environment template to delete.")
+		proton_deleteEnvironmentTemplateCmd.MarkFlagRequired("name")
+	})
 	protonCmd.AddCommand(proton_deleteEnvironmentTemplateCmd)
 }

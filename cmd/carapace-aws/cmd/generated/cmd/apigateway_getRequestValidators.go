@@ -12,11 +12,13 @@ var apigateway_getRequestValidatorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getRequestValidatorsCmd).Standalone()
+	carapace.Gen(apigateway_getRequestValidatorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getRequestValidatorsCmd).Standalone()
 
-	apigateway_getRequestValidatorsCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getRequestValidatorsCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
-	apigateway_getRequestValidatorsCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getRequestValidatorsCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getRequestValidatorsCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getRequestValidatorsCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getRequestValidatorsCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getRequestValidatorsCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getRequestValidatorsCmd)
 }

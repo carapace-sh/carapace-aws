@@ -12,7 +12,9 @@ var voiceIdCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceIdCmd).Standalone()
+	carapace.Gen(voiceIdCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceIdCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(voiceIdCmd)
 }

@@ -12,7 +12,9 @@ var servicediscoveryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscoveryCmd).Standalone()
+	carapace.Gen(servicediscoveryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscoveryCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(servicediscoveryCmd)
 }

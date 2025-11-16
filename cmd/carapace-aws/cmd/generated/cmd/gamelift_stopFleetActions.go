@@ -12,12 +12,14 @@ var gamelift_stopFleetActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_stopFleetActionsCmd).Standalone()
+	carapace.Gen(gamelift_stopFleetActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_stopFleetActionsCmd).Standalone()
 
-	gamelift_stopFleetActionsCmd.Flags().String("actions", "", "List of actions to suspend on the fleet.")
-	gamelift_stopFleetActionsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to stop actions on.")
-	gamelift_stopFleetActionsCmd.Flags().String("location", "", "The fleet location to stop fleet actions for.")
-	gamelift_stopFleetActionsCmd.MarkFlagRequired("actions")
-	gamelift_stopFleetActionsCmd.MarkFlagRequired("fleet-id")
+		gamelift_stopFleetActionsCmd.Flags().String("actions", "", "List of actions to suspend on the fleet.")
+		gamelift_stopFleetActionsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to stop actions on.")
+		gamelift_stopFleetActionsCmd.Flags().String("location", "", "The fleet location to stop fleet actions for.")
+		gamelift_stopFleetActionsCmd.MarkFlagRequired("actions")
+		gamelift_stopFleetActionsCmd.MarkFlagRequired("fleet-id")
+	})
 	gameliftCmd.AddCommand(gamelift_stopFleetActionsCmd)
 }

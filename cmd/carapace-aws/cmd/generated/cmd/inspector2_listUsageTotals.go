@@ -12,10 +12,12 @@ var inspector2_listUsageTotalsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_listUsageTotalsCmd).Standalone()
+	carapace.Gen(inspector2_listUsageTotalsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_listUsageTotalsCmd).Standalone()
 
-	inspector2_listUsageTotalsCmd.Flags().String("account-ids", "", "The Amazon Web Services account IDs to retrieve usage totals for.")
-	inspector2_listUsageTotalsCmd.Flags().String("max-results", "", "The maximum number of results the response can return.")
-	inspector2_listUsageTotalsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
+		inspector2_listUsageTotalsCmd.Flags().String("account-ids", "", "The Amazon Web Services account IDs to retrieve usage totals for.")
+		inspector2_listUsageTotalsCmd.Flags().String("max-results", "", "The maximum number of results the response can return.")
+		inspector2_listUsageTotalsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
+	})
 	inspector2Cmd.AddCommand(inspector2_listUsageTotalsCmd)
 }

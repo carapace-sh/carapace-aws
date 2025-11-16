@@ -12,9 +12,11 @@ var connectcampaigns_getInstanceOnboardingJobStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaigns_getInstanceOnboardingJobStatusCmd).Standalone()
+	carapace.Gen(connectcampaigns_getInstanceOnboardingJobStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaigns_getInstanceOnboardingJobStatusCmd).Standalone()
 
-	connectcampaigns_getInstanceOnboardingJobStatusCmd.Flags().String("connect-instance-id", "", "")
-	connectcampaigns_getInstanceOnboardingJobStatusCmd.MarkFlagRequired("connect-instance-id")
+		connectcampaigns_getInstanceOnboardingJobStatusCmd.Flags().String("connect-instance-id", "", "")
+		connectcampaigns_getInstanceOnboardingJobStatusCmd.MarkFlagRequired("connect-instance-id")
+	})
 	connectcampaignsCmd.AddCommand(connectcampaigns_getInstanceOnboardingJobStatusCmd)
 }

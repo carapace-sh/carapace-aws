@@ -12,9 +12,11 @@ var iot_cancelAuditMitigationActionsTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_cancelAuditMitigationActionsTaskCmd).Standalone()
+	carapace.Gen(iot_cancelAuditMitigationActionsTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_cancelAuditMitigationActionsTaskCmd).Standalone()
 
-	iot_cancelAuditMitigationActionsTaskCmd.Flags().String("task-id", "", "The unique identifier for the task that you want to cancel.")
-	iot_cancelAuditMitigationActionsTaskCmd.MarkFlagRequired("task-id")
+		iot_cancelAuditMitigationActionsTaskCmd.Flags().String("task-id", "", "The unique identifier for the task that you want to cancel.")
+		iot_cancelAuditMitigationActionsTaskCmd.MarkFlagRequired("task-id")
+	})
 	iotCmd.AddCommand(iot_cancelAuditMitigationActionsTaskCmd)
 }

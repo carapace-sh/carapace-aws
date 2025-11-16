@@ -12,10 +12,12 @@ var applicationInsights_describeProblemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_describeProblemCmd).Standalone()
+	carapace.Gen(applicationInsights_describeProblemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_describeProblemCmd).Standalone()
 
-	applicationInsights_describeProblemCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the owner of the resource group affected by the problem.")
-	applicationInsights_describeProblemCmd.Flags().String("problem-id", "", "The ID of the problem.")
-	applicationInsights_describeProblemCmd.MarkFlagRequired("problem-id")
+		applicationInsights_describeProblemCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the owner of the resource group affected by the problem.")
+		applicationInsights_describeProblemCmd.Flags().String("problem-id", "", "The ID of the problem.")
+		applicationInsights_describeProblemCmd.MarkFlagRequired("problem-id")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_describeProblemCmd)
 }

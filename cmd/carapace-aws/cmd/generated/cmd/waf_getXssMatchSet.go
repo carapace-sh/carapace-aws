@@ -12,9 +12,11 @@ var waf_getXssMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_getXssMatchSetCmd).Standalone()
+	carapace.Gen(waf_getXssMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_getXssMatchSetCmd).Standalone()
 
-	waf_getXssMatchSetCmd.Flags().String("xss-match-set-id", "", "The `XssMatchSetId` of the [XssMatchSet]() that you want to get.")
-	waf_getXssMatchSetCmd.MarkFlagRequired("xss-match-set-id")
+		waf_getXssMatchSetCmd.Flags().String("xss-match-set-id", "", "The `XssMatchSetId` of the [XssMatchSet]() that you want to get.")
+		waf_getXssMatchSetCmd.MarkFlagRequired("xss-match-set-id")
+	})
 	wafCmd.AddCommand(waf_getXssMatchSetCmd)
 }

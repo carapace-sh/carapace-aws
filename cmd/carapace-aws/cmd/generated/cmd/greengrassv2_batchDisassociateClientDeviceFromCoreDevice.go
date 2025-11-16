@@ -12,10 +12,12 @@ var greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd).Standalone()
+	carapace.Gen(greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd).Standalone()
 
-	greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd.Flags().String("core-device-thing-name", "", "The name of the core device.")
-	greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd.Flags().String("entries", "", "The list of client devices to disassociate.")
-	greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd.MarkFlagRequired("core-device-thing-name")
+		greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd.Flags().String("core-device-thing-name", "", "The name of the core device.")
+		greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd.Flags().String("entries", "", "The list of client devices to disassociate.")
+		greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd.MarkFlagRequired("core-device-thing-name")
+	})
 	greengrassv2Cmd.AddCommand(greengrassv2_batchDisassociateClientDeviceFromCoreDeviceCmd)
 }

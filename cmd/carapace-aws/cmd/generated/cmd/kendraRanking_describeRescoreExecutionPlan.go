@@ -12,9 +12,11 @@ var kendraRanking_describeRescoreExecutionPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendraRanking_describeRescoreExecutionPlanCmd).Standalone()
+	carapace.Gen(kendraRanking_describeRescoreExecutionPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendraRanking_describeRescoreExecutionPlanCmd).Standalone()
 
-	kendraRanking_describeRescoreExecutionPlanCmd.Flags().String("id", "", "The identifier of the rescore execution plan that you want to get information on.")
-	kendraRanking_describeRescoreExecutionPlanCmd.MarkFlagRequired("id")
+		kendraRanking_describeRescoreExecutionPlanCmd.Flags().String("id", "", "The identifier of the rescore execution plan that you want to get information on.")
+		kendraRanking_describeRescoreExecutionPlanCmd.MarkFlagRequired("id")
+	})
 	kendraRankingCmd.AddCommand(kendraRanking_describeRescoreExecutionPlanCmd)
 }

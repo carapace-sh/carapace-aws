@@ -12,9 +12,11 @@ var codecatalyst_deleteSpaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_deleteSpaceCmd).Standalone()
+	carapace.Gen(codecatalyst_deleteSpaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_deleteSpaceCmd).Standalone()
 
-	codecatalyst_deleteSpaceCmd.Flags().String("name", "", "The name of the space.")
-	codecatalyst_deleteSpaceCmd.MarkFlagRequired("name")
+		codecatalyst_deleteSpaceCmd.Flags().String("name", "", "The name of the space.")
+		codecatalyst_deleteSpaceCmd.MarkFlagRequired("name")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_deleteSpaceCmd)
 }

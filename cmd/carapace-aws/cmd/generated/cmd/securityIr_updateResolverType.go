@@ -12,11 +12,13 @@ var securityIr_updateResolverTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityIr_updateResolverTypeCmd).Standalone()
+	carapace.Gen(securityIr_updateResolverTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityIr_updateResolverTypeCmd).Standalone()
 
-	securityIr_updateResolverTypeCmd.Flags().String("case-id", "", "Required element for UpdateResolverType to identify the case to update.")
-	securityIr_updateResolverTypeCmd.Flags().String("resolver-type", "", "Required element for UpdateResolverType to identify the new resolver.")
-	securityIr_updateResolverTypeCmd.MarkFlagRequired("case-id")
-	securityIr_updateResolverTypeCmd.MarkFlagRequired("resolver-type")
+		securityIr_updateResolverTypeCmd.Flags().String("case-id", "", "Required element for UpdateResolverType to identify the case to update.")
+		securityIr_updateResolverTypeCmd.Flags().String("resolver-type", "", "Required element for UpdateResolverType to identify the new resolver.")
+		securityIr_updateResolverTypeCmd.MarkFlagRequired("case-id")
+		securityIr_updateResolverTypeCmd.MarkFlagRequired("resolver-type")
+	})
 	securityIrCmd.AddCommand(securityIr_updateResolverTypeCmd)
 }

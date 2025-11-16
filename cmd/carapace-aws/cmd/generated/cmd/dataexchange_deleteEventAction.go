@@ -12,9 +12,11 @@ var dataexchange_deleteEventActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_deleteEventActionCmd).Standalone()
+	carapace.Gen(dataexchange_deleteEventActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_deleteEventActionCmd).Standalone()
 
-	dataexchange_deleteEventActionCmd.Flags().String("event-action-id", "", "The unique identifier for the event action.")
-	dataexchange_deleteEventActionCmd.MarkFlagRequired("event-action-id")
+		dataexchange_deleteEventActionCmd.Flags().String("event-action-id", "", "The unique identifier for the event action.")
+		dataexchange_deleteEventActionCmd.MarkFlagRequired("event-action-id")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_deleteEventActionCmd)
 }

@@ -12,9 +12,11 @@ var forecast_getAccuracyMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_getAccuracyMetricsCmd).Standalone()
+	carapace.Gen(forecast_getAccuracyMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_getAccuracyMetricsCmd).Standalone()
 
-	forecast_getAccuracyMetricsCmd.Flags().String("predictor-arn", "", "The Amazon Resource Name (ARN) of the predictor to get metrics for.")
-	forecast_getAccuracyMetricsCmd.MarkFlagRequired("predictor-arn")
+		forecast_getAccuracyMetricsCmd.Flags().String("predictor-arn", "", "The Amazon Resource Name (ARN) of the predictor to get metrics for.")
+		forecast_getAccuracyMetricsCmd.MarkFlagRequired("predictor-arn")
+	})
 	forecastCmd.AddCommand(forecast_getAccuracyMetricsCmd)
 }

@@ -12,9 +12,11 @@ var devicefarm_stopRemoteAccessSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_stopRemoteAccessSessionCmd).Standalone()
+	carapace.Gen(devicefarm_stopRemoteAccessSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_stopRemoteAccessSessionCmd).Standalone()
 
-	devicefarm_stopRemoteAccessSessionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the remote access session to stop.")
-	devicefarm_stopRemoteAccessSessionCmd.MarkFlagRequired("arn")
+		devicefarm_stopRemoteAccessSessionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the remote access session to stop.")
+		devicefarm_stopRemoteAccessSessionCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_stopRemoteAccessSessionCmd)
 }

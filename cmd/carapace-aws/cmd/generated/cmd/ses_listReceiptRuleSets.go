@@ -12,8 +12,10 @@ var ses_listReceiptRuleSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_listReceiptRuleSetsCmd).Standalone()
+	carapace.Gen(ses_listReceiptRuleSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_listReceiptRuleSetsCmd).Standalone()
 
-	ses_listReceiptRuleSetsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListReceiptRuleSets` to indicate the position in the receipt rule set list.")
+		ses_listReceiptRuleSetsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListReceiptRuleSets` to indicate the position in the receipt rule set list.")
+	})
 	sesCmd.AddCommand(ses_listReceiptRuleSetsCmd)
 }

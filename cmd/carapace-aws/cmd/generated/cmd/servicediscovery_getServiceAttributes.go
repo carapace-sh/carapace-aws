@@ -12,9 +12,11 @@ var servicediscovery_getServiceAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_getServiceAttributesCmd).Standalone()
+	carapace.Gen(servicediscovery_getServiceAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_getServiceAttributesCmd).Standalone()
 
-	servicediscovery_getServiceAttributesCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to get attributes for.")
-	servicediscovery_getServiceAttributesCmd.MarkFlagRequired("service-id")
+		servicediscovery_getServiceAttributesCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to get attributes for.")
+		servicediscovery_getServiceAttributesCmd.MarkFlagRequired("service-id")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_getServiceAttributesCmd)
 }

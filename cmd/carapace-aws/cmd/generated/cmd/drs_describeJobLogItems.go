@@ -12,11 +12,13 @@ var drs_describeJobLogItemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_describeJobLogItemsCmd).Standalone()
+	carapace.Gen(drs_describeJobLogItemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_describeJobLogItemsCmd).Standalone()
 
-	drs_describeJobLogItemsCmd.Flags().String("job-id", "", "The ID of the Job for which Job log items will be retrieved.")
-	drs_describeJobLogItemsCmd.Flags().String("max-results", "", "Maximum number of Job log items to retrieve.")
-	drs_describeJobLogItemsCmd.Flags().String("next-token", "", "The token of the next Job log items to retrieve.")
-	drs_describeJobLogItemsCmd.MarkFlagRequired("job-id")
+		drs_describeJobLogItemsCmd.Flags().String("job-id", "", "The ID of the Job for which Job log items will be retrieved.")
+		drs_describeJobLogItemsCmd.Flags().String("max-results", "", "Maximum number of Job log items to retrieve.")
+		drs_describeJobLogItemsCmd.Flags().String("next-token", "", "The token of the next Job log items to retrieve.")
+		drs_describeJobLogItemsCmd.MarkFlagRequired("job-id")
+	})
 	drsCmd.AddCommand(drs_describeJobLogItemsCmd)
 }

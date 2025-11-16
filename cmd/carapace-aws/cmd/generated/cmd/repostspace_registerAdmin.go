@@ -12,11 +12,13 @@ var repostspace_registerAdminCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_registerAdminCmd).Standalone()
+	carapace.Gen(repostspace_registerAdminCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_registerAdminCmd).Standalone()
 
-	repostspace_registerAdminCmd.Flags().String("admin-id", "", "The ID of the administrator.")
-	repostspace_registerAdminCmd.Flags().String("space-id", "", "The ID of the private re:Post.")
-	repostspace_registerAdminCmd.MarkFlagRequired("admin-id")
-	repostspace_registerAdminCmd.MarkFlagRequired("space-id")
+		repostspace_registerAdminCmd.Flags().String("admin-id", "", "The ID of the administrator.")
+		repostspace_registerAdminCmd.Flags().String("space-id", "", "The ID of the private re:Post.")
+		repostspace_registerAdminCmd.MarkFlagRequired("admin-id")
+		repostspace_registerAdminCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_registerAdminCmd)
 }

@@ -12,7 +12,9 @@ var connectcasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcasesCmd).Standalone()
+	carapace.Gen(connectcasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcasesCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(connectcasesCmd)
 }

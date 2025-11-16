@@ -12,9 +12,11 @@ var forecast_describeExplainabilityExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_describeExplainabilityExportCmd).Standalone()
+	carapace.Gen(forecast_describeExplainabilityExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_describeExplainabilityExportCmd).Standalone()
 
-	forecast_describeExplainabilityExportCmd.Flags().String("explainability-export-arn", "", "The Amazon Resource Name (ARN) of the Explainability export.")
-	forecast_describeExplainabilityExportCmd.MarkFlagRequired("explainability-export-arn")
+		forecast_describeExplainabilityExportCmd.Flags().String("explainability-export-arn", "", "The Amazon Resource Name (ARN) of the Explainability export.")
+		forecast_describeExplainabilityExportCmd.MarkFlagRequired("explainability-export-arn")
+	})
 	forecastCmd.AddCommand(forecast_describeExplainabilityExportCmd)
 }

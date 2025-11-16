@@ -12,9 +12,11 @@ var lightsail_deleteDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteDomainCmd).Standalone()
+	carapace.Gen(lightsail_deleteDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteDomainCmd).Standalone()
 
-	lightsail_deleteDomainCmd.Flags().String("domain-name", "", "The specific domain name to delete.")
-	lightsail_deleteDomainCmd.MarkFlagRequired("domain-name")
+		lightsail_deleteDomainCmd.Flags().String("domain-name", "", "The specific domain name to delete.")
+		lightsail_deleteDomainCmd.MarkFlagRequired("domain-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteDomainCmd)
 }

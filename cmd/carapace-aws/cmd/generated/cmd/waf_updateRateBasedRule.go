@@ -12,15 +12,17 @@ var waf_updateRateBasedRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_updateRateBasedRuleCmd).Standalone()
+	carapace.Gen(waf_updateRateBasedRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_updateRateBasedRuleCmd).Standalone()
 
-	waf_updateRateBasedRuleCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	waf_updateRateBasedRuleCmd.Flags().String("rate-limit", "", "The maximum number of requests, which have an identical value in the field specified by the `RateKey`, allowed in a five-minute period.")
-	waf_updateRateBasedRuleCmd.Flags().String("rule-id", "", "The `RuleId` of the `RateBasedRule` that you want to update.")
-	waf_updateRateBasedRuleCmd.Flags().String("updates", "", "An array of `RuleUpdate` objects that you want to insert into or delete from a [RateBasedRule]().")
-	waf_updateRateBasedRuleCmd.MarkFlagRequired("change-token")
-	waf_updateRateBasedRuleCmd.MarkFlagRequired("rate-limit")
-	waf_updateRateBasedRuleCmd.MarkFlagRequired("rule-id")
-	waf_updateRateBasedRuleCmd.MarkFlagRequired("updates")
+		waf_updateRateBasedRuleCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		waf_updateRateBasedRuleCmd.Flags().String("rate-limit", "", "The maximum number of requests, which have an identical value in the field specified by the `RateKey`, allowed in a five-minute period.")
+		waf_updateRateBasedRuleCmd.Flags().String("rule-id", "", "The `RuleId` of the `RateBasedRule` that you want to update.")
+		waf_updateRateBasedRuleCmd.Flags().String("updates", "", "An array of `RuleUpdate` objects that you want to insert into or delete from a [RateBasedRule]().")
+		waf_updateRateBasedRuleCmd.MarkFlagRequired("change-token")
+		waf_updateRateBasedRuleCmd.MarkFlagRequired("rate-limit")
+		waf_updateRateBasedRuleCmd.MarkFlagRequired("rule-id")
+		waf_updateRateBasedRuleCmd.MarkFlagRequired("updates")
+	})
 	wafCmd.AddCommand(waf_updateRateBasedRuleCmd)
 }

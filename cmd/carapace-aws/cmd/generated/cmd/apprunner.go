@@ -12,7 +12,9 @@ var apprunnerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunnerCmd).Standalone()
+	carapace.Gen(apprunnerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunnerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(apprunnerCmd)
 }

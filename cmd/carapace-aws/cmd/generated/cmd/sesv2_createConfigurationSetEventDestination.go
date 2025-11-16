@@ -12,13 +12,15 @@ var sesv2_createConfigurationSetEventDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_createConfigurationSetEventDestinationCmd).Standalone()
+	carapace.Gen(sesv2_createConfigurationSetEventDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_createConfigurationSetEventDestinationCmd).Standalone()
 
-	sesv2_createConfigurationSetEventDestinationCmd.Flags().String("configuration-set-name", "", "The name of the configuration set .")
-	sesv2_createConfigurationSetEventDestinationCmd.Flags().String("event-destination", "", "An object that defines the event destination.")
-	sesv2_createConfigurationSetEventDestinationCmd.Flags().String("event-destination-name", "", "A name that identifies the event destination within the configuration set.")
-	sesv2_createConfigurationSetEventDestinationCmd.MarkFlagRequired("configuration-set-name")
-	sesv2_createConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination")
-	sesv2_createConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination-name")
+		sesv2_createConfigurationSetEventDestinationCmd.Flags().String("configuration-set-name", "", "The name of the configuration set .")
+		sesv2_createConfigurationSetEventDestinationCmd.Flags().String("event-destination", "", "An object that defines the event destination.")
+		sesv2_createConfigurationSetEventDestinationCmd.Flags().String("event-destination-name", "", "A name that identifies the event destination within the configuration set.")
+		sesv2_createConfigurationSetEventDestinationCmd.MarkFlagRequired("configuration-set-name")
+		sesv2_createConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination")
+		sesv2_createConfigurationSetEventDestinationCmd.MarkFlagRequired("event-destination-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_createConfigurationSetEventDestinationCmd)
 }

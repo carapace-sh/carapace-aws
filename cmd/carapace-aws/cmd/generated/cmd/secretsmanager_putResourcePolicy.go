@@ -12,12 +12,14 @@ var secretsmanager_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_putResourcePolicyCmd).Standalone()
+	carapace.Gen(secretsmanager_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_putResourcePolicyCmd).Standalone()
 
-	secretsmanager_putResourcePolicyCmd.Flags().String("block-public-policy", "", "Specifies whether to block resource-based policies that allow broad access to the secret, for example those that use a wildcard for the principal.")
-	secretsmanager_putResourcePolicyCmd.Flags().String("resource-policy", "", "A JSON-formatted string for an Amazon Web Services resource-based policy.")
-	secretsmanager_putResourcePolicyCmd.Flags().String("secret-id", "", "The ARN or name of the secret to attach the resource-based policy.")
-	secretsmanager_putResourcePolicyCmd.MarkFlagRequired("resource-policy")
-	secretsmanager_putResourcePolicyCmd.MarkFlagRequired("secret-id")
+		secretsmanager_putResourcePolicyCmd.Flags().String("block-public-policy", "", "Specifies whether to block resource-based policies that allow broad access to the secret, for example those that use a wildcard for the principal.")
+		secretsmanager_putResourcePolicyCmd.Flags().String("resource-policy", "", "A JSON-formatted string for an Amazon Web Services resource-based policy.")
+		secretsmanager_putResourcePolicyCmd.Flags().String("secret-id", "", "The ARN or name of the secret to attach the resource-based policy.")
+		secretsmanager_putResourcePolicyCmd.MarkFlagRequired("resource-policy")
+		secretsmanager_putResourcePolicyCmd.MarkFlagRequired("secret-id")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_putResourcePolicyCmd)
 }

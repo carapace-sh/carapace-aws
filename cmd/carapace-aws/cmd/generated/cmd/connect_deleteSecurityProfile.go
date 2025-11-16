@@ -12,11 +12,13 @@ var connect_deleteSecurityProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteSecurityProfileCmd).Standalone()
+	carapace.Gen(connect_deleteSecurityProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteSecurityProfileCmd).Standalone()
 
-	connect_deleteSecurityProfileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteSecurityProfileCmd.Flags().String("security-profile-id", "", "The identifier for the security profle.")
-	connect_deleteSecurityProfileCmd.MarkFlagRequired("instance-id")
-	connect_deleteSecurityProfileCmd.MarkFlagRequired("security-profile-id")
+		connect_deleteSecurityProfileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteSecurityProfileCmd.Flags().String("security-profile-id", "", "The identifier for the security profle.")
+		connect_deleteSecurityProfileCmd.MarkFlagRequired("instance-id")
+		connect_deleteSecurityProfileCmd.MarkFlagRequired("security-profile-id")
+	})
 	connectCmd.AddCommand(connect_deleteSecurityProfileCmd)
 }

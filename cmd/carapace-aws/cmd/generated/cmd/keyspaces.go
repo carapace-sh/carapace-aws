@@ -12,7 +12,9 @@ var keyspacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspacesCmd).Standalone()
+	carapace.Gen(keyspacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspacesCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(keyspacesCmd)
 }

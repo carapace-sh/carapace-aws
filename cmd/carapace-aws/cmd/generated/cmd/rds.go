@@ -12,7 +12,9 @@ var rdsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rdsCmd).Standalone()
+	carapace.Gen(rdsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rdsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(rdsCmd)
 }

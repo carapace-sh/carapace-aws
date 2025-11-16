@@ -12,12 +12,14 @@ var docdb_createDbclusterSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_createDbclusterSnapshotCmd).Standalone()
+	carapace.Gen(docdb_createDbclusterSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_createDbclusterSnapshotCmd).Standalone()
 
-	docdb_createDbclusterSnapshotCmd.Flags().String("dbcluster-identifier", "", "The identifier of the cluster to create a snapshot for.")
-	docdb_createDbclusterSnapshotCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier of the cluster snapshot.")
-	docdb_createDbclusterSnapshotCmd.Flags().String("tags", "", "The tags to be assigned to the cluster snapshot.")
-	docdb_createDbclusterSnapshotCmd.MarkFlagRequired("dbcluster-identifier")
-	docdb_createDbclusterSnapshotCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+		docdb_createDbclusterSnapshotCmd.Flags().String("dbcluster-identifier", "", "The identifier of the cluster to create a snapshot for.")
+		docdb_createDbclusterSnapshotCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier of the cluster snapshot.")
+		docdb_createDbclusterSnapshotCmd.Flags().String("tags", "", "The tags to be assigned to the cluster snapshot.")
+		docdb_createDbclusterSnapshotCmd.MarkFlagRequired("dbcluster-identifier")
+		docdb_createDbclusterSnapshotCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+	})
 	docdbCmd.AddCommand(docdb_createDbclusterSnapshotCmd)
 }

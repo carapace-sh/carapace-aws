@@ -12,13 +12,15 @@ var wellarchitected_createMilestoneCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_createMilestoneCmd).Standalone()
+	carapace.Gen(wellarchitected_createMilestoneCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_createMilestoneCmd).Standalone()
 
-	wellarchitected_createMilestoneCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_createMilestoneCmd.Flags().String("milestone-name", "", "")
-	wellarchitected_createMilestoneCmd.Flags().String("workload-id", "", "")
-	wellarchitected_createMilestoneCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_createMilestoneCmd.MarkFlagRequired("milestone-name")
-	wellarchitected_createMilestoneCmd.MarkFlagRequired("workload-id")
+		wellarchitected_createMilestoneCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_createMilestoneCmd.Flags().String("milestone-name", "", "")
+		wellarchitected_createMilestoneCmd.Flags().String("workload-id", "", "")
+		wellarchitected_createMilestoneCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_createMilestoneCmd.MarkFlagRequired("milestone-name")
+		wellarchitected_createMilestoneCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_createMilestoneCmd)
 }

@@ -12,11 +12,13 @@ var grafana_updatePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_updatePermissionsCmd).Standalone()
+	carapace.Gen(grafana_updatePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_updatePermissionsCmd).Standalone()
 
-	grafana_updatePermissionsCmd.Flags().String("update-instruction-batch", "", "An array of structures that contain the permission updates to make.")
-	grafana_updatePermissionsCmd.Flags().String("workspace-id", "", "The ID of the workspace to update.")
-	grafana_updatePermissionsCmd.MarkFlagRequired("update-instruction-batch")
-	grafana_updatePermissionsCmd.MarkFlagRequired("workspace-id")
+		grafana_updatePermissionsCmd.Flags().String("update-instruction-batch", "", "An array of structures that contain the permission updates to make.")
+		grafana_updatePermissionsCmd.Flags().String("workspace-id", "", "The ID of the workspace to update.")
+		grafana_updatePermissionsCmd.MarkFlagRequired("update-instruction-batch")
+		grafana_updatePermissionsCmd.MarkFlagRequired("workspace-id")
+	})
 	grafanaCmd.AddCommand(grafana_updatePermissionsCmd)
 }

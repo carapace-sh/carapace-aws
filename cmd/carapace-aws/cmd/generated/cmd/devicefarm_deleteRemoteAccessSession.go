@@ -12,9 +12,11 @@ var devicefarm_deleteRemoteAccessSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_deleteRemoteAccessSessionCmd).Standalone()
+	carapace.Gen(devicefarm_deleteRemoteAccessSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_deleteRemoteAccessSessionCmd).Standalone()
 
-	devicefarm_deleteRemoteAccessSessionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the session for which you want to delete remote access.")
-	devicefarm_deleteRemoteAccessSessionCmd.MarkFlagRequired("arn")
+		devicefarm_deleteRemoteAccessSessionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the session for which you want to delete remote access.")
+		devicefarm_deleteRemoteAccessSessionCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_deleteRemoteAccessSessionCmd)
 }

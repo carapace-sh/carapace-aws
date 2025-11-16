@@ -12,9 +12,11 @@ var redshift_deleteSnapshotCopyGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteSnapshotCopyGrantCmd).Standalone()
+	carapace.Gen(redshift_deleteSnapshotCopyGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteSnapshotCopyGrantCmd).Standalone()
 
-	redshift_deleteSnapshotCopyGrantCmd.Flags().String("snapshot-copy-grant-name", "", "The name of the snapshot copy grant to delete.")
-	redshift_deleteSnapshotCopyGrantCmd.MarkFlagRequired("snapshot-copy-grant-name")
+		redshift_deleteSnapshotCopyGrantCmd.Flags().String("snapshot-copy-grant-name", "", "The name of the snapshot copy grant to delete.")
+		redshift_deleteSnapshotCopyGrantCmd.MarkFlagRequired("snapshot-copy-grant-name")
+	})
 	redshiftCmd.AddCommand(redshift_deleteSnapshotCopyGrantCmd)
 }

@@ -12,9 +12,11 @@ var storagegateway_notifyWhenUploadedCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_notifyWhenUploadedCmd).Standalone()
+	carapace.Gen(storagegateway_notifyWhenUploadedCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_notifyWhenUploadedCmd).Standalone()
 
-	storagegateway_notifyWhenUploadedCmd.Flags().String("file-share-arn", "", "")
-	storagegateway_notifyWhenUploadedCmd.MarkFlagRequired("file-share-arn")
+		storagegateway_notifyWhenUploadedCmd.Flags().String("file-share-arn", "", "")
+		storagegateway_notifyWhenUploadedCmd.MarkFlagRequired("file-share-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_notifyWhenUploadedCmd)
 }

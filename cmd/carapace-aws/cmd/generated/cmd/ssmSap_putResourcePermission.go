@@ -12,13 +12,15 @@ var ssmSap_putResourcePermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_putResourcePermissionCmd).Standalone()
+	carapace.Gen(ssmSap_putResourcePermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_putResourcePermissionCmd).Standalone()
 
-	ssmSap_putResourcePermissionCmd.Flags().String("action-type", "", "")
-	ssmSap_putResourcePermissionCmd.Flags().String("resource-arn", "", "")
-	ssmSap_putResourcePermissionCmd.Flags().String("source-resource-arn", "", "")
-	ssmSap_putResourcePermissionCmd.MarkFlagRequired("action-type")
-	ssmSap_putResourcePermissionCmd.MarkFlagRequired("resource-arn")
-	ssmSap_putResourcePermissionCmd.MarkFlagRequired("source-resource-arn")
+		ssmSap_putResourcePermissionCmd.Flags().String("action-type", "", "")
+		ssmSap_putResourcePermissionCmd.Flags().String("resource-arn", "", "")
+		ssmSap_putResourcePermissionCmd.Flags().String("source-resource-arn", "", "")
+		ssmSap_putResourcePermissionCmd.MarkFlagRequired("action-type")
+		ssmSap_putResourcePermissionCmd.MarkFlagRequired("resource-arn")
+		ssmSap_putResourcePermissionCmd.MarkFlagRequired("source-resource-arn")
+	})
 	ssmSapCmd.AddCommand(ssmSap_putResourcePermissionCmd)
 }

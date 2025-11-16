@@ -12,11 +12,13 @@ var workmail_getPersonalAccessTokenMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_getPersonalAccessTokenMetadataCmd).Standalone()
+	carapace.Gen(workmail_getPersonalAccessTokenMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_getPersonalAccessTokenMetadataCmd).Standalone()
 
-	workmail_getPersonalAccessTokenMetadataCmd.Flags().String("organization-id", "", "The Organization ID.")
-	workmail_getPersonalAccessTokenMetadataCmd.Flags().String("personal-access-token-id", "", "The Personal Access Token ID.")
-	workmail_getPersonalAccessTokenMetadataCmd.MarkFlagRequired("organization-id")
-	workmail_getPersonalAccessTokenMetadataCmd.MarkFlagRequired("personal-access-token-id")
+		workmail_getPersonalAccessTokenMetadataCmd.Flags().String("organization-id", "", "The Organization ID.")
+		workmail_getPersonalAccessTokenMetadataCmd.Flags().String("personal-access-token-id", "", "The Personal Access Token ID.")
+		workmail_getPersonalAccessTokenMetadataCmd.MarkFlagRequired("organization-id")
+		workmail_getPersonalAccessTokenMetadataCmd.MarkFlagRequired("personal-access-token-id")
+	})
 	workmailCmd.AddCommand(workmail_getPersonalAccessTokenMetadataCmd)
 }

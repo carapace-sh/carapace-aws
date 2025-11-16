@@ -12,9 +12,11 @@ var sagemaker_describeFlowDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeFlowDefinitionCmd).Standalone()
+	carapace.Gen(sagemaker_describeFlowDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeFlowDefinitionCmd).Standalone()
 
-	sagemaker_describeFlowDefinitionCmd.Flags().String("flow-definition-name", "", "The name of the flow definition.")
-	sagemaker_describeFlowDefinitionCmd.MarkFlagRequired("flow-definition-name")
+		sagemaker_describeFlowDefinitionCmd.Flags().String("flow-definition-name", "", "The name of the flow definition.")
+		sagemaker_describeFlowDefinitionCmd.MarkFlagRequired("flow-definition-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeFlowDefinitionCmd)
 }

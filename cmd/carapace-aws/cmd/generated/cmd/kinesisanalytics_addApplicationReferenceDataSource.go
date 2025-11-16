@@ -12,13 +12,15 @@ var kinesisanalytics_addApplicationReferenceDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_addApplicationReferenceDataSourceCmd).Standalone()
+	carapace.Gen(kinesisanalytics_addApplicationReferenceDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_addApplicationReferenceDataSourceCmd).Standalone()
 
-	kinesisanalytics_addApplicationReferenceDataSourceCmd.Flags().String("application-name", "", "Name of an existing application.")
-	kinesisanalytics_addApplicationReferenceDataSourceCmd.Flags().String("current-application-version-id", "", "Version of the application for which you are adding the reference data source.")
-	kinesisanalytics_addApplicationReferenceDataSourceCmd.Flags().String("reference-data-source", "", "The reference data source can be an object in your Amazon S3 bucket.")
-	kinesisanalytics_addApplicationReferenceDataSourceCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_addApplicationReferenceDataSourceCmd.MarkFlagRequired("current-application-version-id")
-	kinesisanalytics_addApplicationReferenceDataSourceCmd.MarkFlagRequired("reference-data-source")
+		kinesisanalytics_addApplicationReferenceDataSourceCmd.Flags().String("application-name", "", "Name of an existing application.")
+		kinesisanalytics_addApplicationReferenceDataSourceCmd.Flags().String("current-application-version-id", "", "Version of the application for which you are adding the reference data source.")
+		kinesisanalytics_addApplicationReferenceDataSourceCmd.Flags().String("reference-data-source", "", "The reference data source can be an object in your Amazon S3 bucket.")
+		kinesisanalytics_addApplicationReferenceDataSourceCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_addApplicationReferenceDataSourceCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalytics_addApplicationReferenceDataSourceCmd.MarkFlagRequired("reference-data-source")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_addApplicationReferenceDataSourceCmd)
 }

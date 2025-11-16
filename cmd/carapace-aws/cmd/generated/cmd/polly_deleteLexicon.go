@@ -12,9 +12,11 @@ var polly_deleteLexiconCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(polly_deleteLexiconCmd).Standalone()
+	carapace.Gen(polly_deleteLexiconCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(polly_deleteLexiconCmd).Standalone()
 
-	polly_deleteLexiconCmd.Flags().String("name", "", "The name of the lexicon to delete.")
-	polly_deleteLexiconCmd.MarkFlagRequired("name")
+		polly_deleteLexiconCmd.Flags().String("name", "", "The name of the lexicon to delete.")
+		polly_deleteLexiconCmd.MarkFlagRequired("name")
+	})
 	pollyCmd.AddCommand(polly_deleteLexiconCmd)
 }

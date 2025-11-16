@@ -12,9 +12,11 @@ var iotanalytics_describePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_describePipelineCmd).Standalone()
+	carapace.Gen(iotanalytics_describePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_describePipelineCmd).Standalone()
 
-	iotanalytics_describePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline whose information is retrieved.")
-	iotanalytics_describePipelineCmd.MarkFlagRequired("pipeline-name")
+		iotanalytics_describePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline whose information is retrieved.")
+		iotanalytics_describePipelineCmd.MarkFlagRequired("pipeline-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_describePipelineCmd)
 }

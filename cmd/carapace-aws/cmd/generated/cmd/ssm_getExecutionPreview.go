@@ -12,9 +12,11 @@ var ssm_getExecutionPreviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getExecutionPreviewCmd).Standalone()
+	carapace.Gen(ssm_getExecutionPreviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getExecutionPreviewCmd).Standalone()
 
-	ssm_getExecutionPreviewCmd.Flags().String("execution-preview-id", "", "The ID of the existing execution preview.")
-	ssm_getExecutionPreviewCmd.MarkFlagRequired("execution-preview-id")
+		ssm_getExecutionPreviewCmd.Flags().String("execution-preview-id", "", "The ID of the existing execution preview.")
+		ssm_getExecutionPreviewCmd.MarkFlagRequired("execution-preview-id")
+	})
 	ssmCmd.AddCommand(ssm_getExecutionPreviewCmd)
 }

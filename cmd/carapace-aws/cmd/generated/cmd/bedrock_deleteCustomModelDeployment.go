@@ -12,9 +12,11 @@ var bedrock_deleteCustomModelDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deleteCustomModelDeploymentCmd).Standalone()
+	carapace.Gen(bedrock_deleteCustomModelDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deleteCustomModelDeploymentCmd).Standalone()
 
-	bedrock_deleteCustomModelDeploymentCmd.Flags().String("custom-model-deployment-identifier", "", "The Amazon Resource Name (ARN) or name of the custom model deployment to delete.")
-	bedrock_deleteCustomModelDeploymentCmd.MarkFlagRequired("custom-model-deployment-identifier")
+		bedrock_deleteCustomModelDeploymentCmd.Flags().String("custom-model-deployment-identifier", "", "The Amazon Resource Name (ARN) or name of the custom model deployment to delete.")
+		bedrock_deleteCustomModelDeploymentCmd.MarkFlagRequired("custom-model-deployment-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_deleteCustomModelDeploymentCmd)
 }

@@ -12,10 +12,12 @@ var oam_getLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_getLinkCmd).Standalone()
+	carapace.Gen(oam_getLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_getLinkCmd).Standalone()
 
-	oam_getLinkCmd.Flags().String("identifier", "", "The ARN of the link to retrieve information for.")
-	oam_getLinkCmd.Flags().String("include-tags", "", "Specifies whether to include the tags associated with the link in the response.")
-	oam_getLinkCmd.MarkFlagRequired("identifier")
+		oam_getLinkCmd.Flags().String("identifier", "", "The ARN of the link to retrieve information for.")
+		oam_getLinkCmd.Flags().String("include-tags", "", "Specifies whether to include the tags associated with the link in the response.")
+		oam_getLinkCmd.MarkFlagRequired("identifier")
+	})
 	oamCmd.AddCommand(oam_getLinkCmd)
 }

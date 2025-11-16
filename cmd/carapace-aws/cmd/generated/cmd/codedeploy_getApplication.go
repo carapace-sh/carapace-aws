@@ -12,9 +12,11 @@ var codedeploy_getApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_getApplicationCmd).Standalone()
+	carapace.Gen(codedeploy_getApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_getApplicationCmd).Standalone()
 
-	codedeploy_getApplicationCmd.Flags().String("application-name", "", "The name of an CodeDeploy application associated with the user or Amazon Web Services account.")
-	codedeploy_getApplicationCmd.MarkFlagRequired("application-name")
+		codedeploy_getApplicationCmd.Flags().String("application-name", "", "The name of an CodeDeploy application associated with the user or Amazon Web Services account.")
+		codedeploy_getApplicationCmd.MarkFlagRequired("application-name")
+	})
 	codedeployCmd.AddCommand(codedeploy_getApplicationCmd)
 }

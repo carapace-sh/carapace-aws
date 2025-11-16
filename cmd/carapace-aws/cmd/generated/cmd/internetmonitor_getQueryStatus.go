@@ -12,11 +12,13 @@ var internetmonitor_getQueryStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(internetmonitor_getQueryStatusCmd).Standalone()
+	carapace.Gen(internetmonitor_getQueryStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(internetmonitor_getQueryStatusCmd).Standalone()
 
-	internetmonitor_getQueryStatusCmd.Flags().String("monitor-name", "", "The name of the monitor.")
-	internetmonitor_getQueryStatusCmd.Flags().String("query-id", "", "The ID of the query that you want to return the status for.")
-	internetmonitor_getQueryStatusCmd.MarkFlagRequired("monitor-name")
-	internetmonitor_getQueryStatusCmd.MarkFlagRequired("query-id")
+		internetmonitor_getQueryStatusCmd.Flags().String("monitor-name", "", "The name of the monitor.")
+		internetmonitor_getQueryStatusCmd.Flags().String("query-id", "", "The ID of the query that you want to return the status for.")
+		internetmonitor_getQueryStatusCmd.MarkFlagRequired("monitor-name")
+		internetmonitor_getQueryStatusCmd.MarkFlagRequired("query-id")
+	})
 	internetmonitorCmd.AddCommand(internetmonitor_getQueryStatusCmd)
 }

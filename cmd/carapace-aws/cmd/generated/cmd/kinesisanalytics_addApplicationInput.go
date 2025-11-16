@@ -12,13 +12,15 @@ var kinesisanalytics_addApplicationInputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_addApplicationInputCmd).Standalone()
+	carapace.Gen(kinesisanalytics_addApplicationInputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_addApplicationInputCmd).Standalone()
 
-	kinesisanalytics_addApplicationInputCmd.Flags().String("application-name", "", "Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.")
-	kinesisanalytics_addApplicationInputCmd.Flags().String("current-application-version-id", "", "Current version of your Amazon Kinesis Analytics application.")
-	kinesisanalytics_addApplicationInputCmd.Flags().String("input", "", "The [Input](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html) to add.")
-	kinesisanalytics_addApplicationInputCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_addApplicationInputCmd.MarkFlagRequired("current-application-version-id")
-	kinesisanalytics_addApplicationInputCmd.MarkFlagRequired("input")
+		kinesisanalytics_addApplicationInputCmd.Flags().String("application-name", "", "Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.")
+		kinesisanalytics_addApplicationInputCmd.Flags().String("current-application-version-id", "", "Current version of your Amazon Kinesis Analytics application.")
+		kinesisanalytics_addApplicationInputCmd.Flags().String("input", "", "The [Input](https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html) to add.")
+		kinesisanalytics_addApplicationInputCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_addApplicationInputCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalytics_addApplicationInputCmd.MarkFlagRequired("input")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_addApplicationInputCmd)
 }

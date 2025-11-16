@@ -12,9 +12,11 @@ var iot_deleteTopicRuleDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteTopicRuleDestinationCmd).Standalone()
+	carapace.Gen(iot_deleteTopicRuleDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteTopicRuleDestinationCmd).Standalone()
 
-	iot_deleteTopicRuleDestinationCmd.Flags().String("arn", "", "The ARN of the topic rule destination to delete.")
-	iot_deleteTopicRuleDestinationCmd.MarkFlagRequired("arn")
+		iot_deleteTopicRuleDestinationCmd.Flags().String("arn", "", "The ARN of the topic rule destination to delete.")
+		iot_deleteTopicRuleDestinationCmd.MarkFlagRequired("arn")
+	})
 	iotCmd.AddCommand(iot_deleteTopicRuleDestinationCmd)
 }

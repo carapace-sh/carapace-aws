@@ -12,11 +12,13 @@ var iotdeviceadvisor_updateSuiteDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotdeviceadvisor_updateSuiteDefinitionCmd).Standalone()
+	carapace.Gen(iotdeviceadvisor_updateSuiteDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotdeviceadvisor_updateSuiteDefinitionCmd).Standalone()
 
-	iotdeviceadvisor_updateSuiteDefinitionCmd.Flags().String("suite-definition-configuration", "", "Updates a Device Advisor test suite with suite definition configuration.")
-	iotdeviceadvisor_updateSuiteDefinitionCmd.Flags().String("suite-definition-id", "", "Suite definition ID of the test suite to be updated.")
-	iotdeviceadvisor_updateSuiteDefinitionCmd.MarkFlagRequired("suite-definition-configuration")
-	iotdeviceadvisor_updateSuiteDefinitionCmd.MarkFlagRequired("suite-definition-id")
+		iotdeviceadvisor_updateSuiteDefinitionCmd.Flags().String("suite-definition-configuration", "", "Updates a Device Advisor test suite with suite definition configuration.")
+		iotdeviceadvisor_updateSuiteDefinitionCmd.Flags().String("suite-definition-id", "", "Suite definition ID of the test suite to be updated.")
+		iotdeviceadvisor_updateSuiteDefinitionCmd.MarkFlagRequired("suite-definition-configuration")
+		iotdeviceadvisor_updateSuiteDefinitionCmd.MarkFlagRequired("suite-definition-id")
+	})
 	iotdeviceadvisorCmd.AddCommand(iotdeviceadvisor_updateSuiteDefinitionCmd)
 }

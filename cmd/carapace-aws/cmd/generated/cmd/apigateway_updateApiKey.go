@@ -12,10 +12,12 @@ var apigateway_updateApiKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_updateApiKeyCmd).Standalone()
+	carapace.Gen(apigateway_updateApiKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_updateApiKeyCmd).Standalone()
 
-	apigateway_updateApiKeyCmd.Flags().String("api-key", "", "The identifier of the ApiKey resource to be updated.")
-	apigateway_updateApiKeyCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
-	apigateway_updateApiKeyCmd.MarkFlagRequired("api-key")
+		apigateway_updateApiKeyCmd.Flags().String("api-key", "", "The identifier of the ApiKey resource to be updated.")
+		apigateway_updateApiKeyCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
+		apigateway_updateApiKeyCmd.MarkFlagRequired("api-key")
+	})
 	apigatewayCmd.AddCommand(apigateway_updateApiKeyCmd)
 }

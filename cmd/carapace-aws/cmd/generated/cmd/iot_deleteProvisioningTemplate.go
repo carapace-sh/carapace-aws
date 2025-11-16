@@ -12,9 +12,11 @@ var iot_deleteProvisioningTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteProvisioningTemplateCmd).Standalone()
+	carapace.Gen(iot_deleteProvisioningTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteProvisioningTemplateCmd).Standalone()
 
-	iot_deleteProvisioningTemplateCmd.Flags().String("template-name", "", "The name of the fleet provision template to delete.")
-	iot_deleteProvisioningTemplateCmd.MarkFlagRequired("template-name")
+		iot_deleteProvisioningTemplateCmd.Flags().String("template-name", "", "The name of the fleet provision template to delete.")
+		iot_deleteProvisioningTemplateCmd.MarkFlagRequired("template-name")
+	})
 	iotCmd.AddCommand(iot_deleteProvisioningTemplateCmd)
 }

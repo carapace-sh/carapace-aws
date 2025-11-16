@@ -12,9 +12,11 @@ var dataexchange_listDataGrantsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_listDataGrantsCmd).Standalone()
+	carapace.Gen(dataexchange_listDataGrantsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_listDataGrantsCmd).Standalone()
 
-	dataexchange_listDataGrantsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
-	dataexchange_listDataGrantsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		dataexchange_listDataGrantsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
+		dataexchange_listDataGrantsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_listDataGrantsCmd)
 }

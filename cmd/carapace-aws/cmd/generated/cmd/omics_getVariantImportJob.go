@@ -12,9 +12,11 @@ var omics_getVariantImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getVariantImportJobCmd).Standalone()
+	carapace.Gen(omics_getVariantImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getVariantImportJobCmd).Standalone()
 
-	omics_getVariantImportJobCmd.Flags().String("job-id", "", "The job's ID.")
-	omics_getVariantImportJobCmd.MarkFlagRequired("job-id")
+		omics_getVariantImportJobCmd.Flags().String("job-id", "", "The job's ID.")
+		omics_getVariantImportJobCmd.MarkFlagRequired("job-id")
+	})
 	omicsCmd.AddCommand(omics_getVariantImportJobCmd)
 }

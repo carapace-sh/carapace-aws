@@ -12,13 +12,15 @@ var sagemakerFeaturestoreRuntime_putRecordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerFeaturestoreRuntime_putRecordCmd).Standalone()
+	carapace.Gen(sagemakerFeaturestoreRuntime_putRecordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerFeaturestoreRuntime_putRecordCmd).Standalone()
 
-	sagemakerFeaturestoreRuntime_putRecordCmd.Flags().String("feature-group-name", "", "The name or Amazon Resource Name (ARN) of the feature group that you want to insert the record into.")
-	sagemakerFeaturestoreRuntime_putRecordCmd.Flags().String("record", "", "List of FeatureValues to be inserted.")
-	sagemakerFeaturestoreRuntime_putRecordCmd.Flags().String("target-stores", "", "A list of stores to which you're adding the record.")
-	sagemakerFeaturestoreRuntime_putRecordCmd.Flags().String("ttl-duration", "", "Time to live duration, where the record is hard deleted after the expiration time is reached; `ExpiresAt` = `EventTime` + `TtlDuration`.")
-	sagemakerFeaturestoreRuntime_putRecordCmd.MarkFlagRequired("feature-group-name")
-	sagemakerFeaturestoreRuntime_putRecordCmd.MarkFlagRequired("record")
+		sagemakerFeaturestoreRuntime_putRecordCmd.Flags().String("feature-group-name", "", "The name or Amazon Resource Name (ARN) of the feature group that you want to insert the record into.")
+		sagemakerFeaturestoreRuntime_putRecordCmd.Flags().String("record", "", "List of FeatureValues to be inserted.")
+		sagemakerFeaturestoreRuntime_putRecordCmd.Flags().String("target-stores", "", "A list of stores to which you're adding the record.")
+		sagemakerFeaturestoreRuntime_putRecordCmd.Flags().String("ttl-duration", "", "Time to live duration, where the record is hard deleted after the expiration time is reached; `ExpiresAt` = `EventTime` + `TtlDuration`.")
+		sagemakerFeaturestoreRuntime_putRecordCmd.MarkFlagRequired("feature-group-name")
+		sagemakerFeaturestoreRuntime_putRecordCmd.MarkFlagRequired("record")
+	})
 	sagemakerFeaturestoreRuntimeCmd.AddCommand(sagemakerFeaturestoreRuntime_putRecordCmd)
 }

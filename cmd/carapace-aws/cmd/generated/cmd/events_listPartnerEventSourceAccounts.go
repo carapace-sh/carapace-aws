@@ -12,11 +12,13 @@ var events_listPartnerEventSourceAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_listPartnerEventSourceAccountsCmd).Standalone()
+	carapace.Gen(events_listPartnerEventSourceAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_listPartnerEventSourceAccountsCmd).Standalone()
 
-	events_listPartnerEventSourceAccountsCmd.Flags().String("event-source-name", "", "The name of the partner event source to display account information about.")
-	events_listPartnerEventSourceAccountsCmd.Flags().String("limit", "", "Specifying this limits the number of results returned by this operation.")
-	events_listPartnerEventSourceAccountsCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
-	events_listPartnerEventSourceAccountsCmd.MarkFlagRequired("event-source-name")
+		events_listPartnerEventSourceAccountsCmd.Flags().String("event-source-name", "", "The name of the partner event source to display account information about.")
+		events_listPartnerEventSourceAccountsCmd.Flags().String("limit", "", "Specifying this limits the number of results returned by this operation.")
+		events_listPartnerEventSourceAccountsCmd.Flags().String("next-token", "", "The token returned by a previous call, which you can use to retrieve the next set of results.")
+		events_listPartnerEventSourceAccountsCmd.MarkFlagRequired("event-source-name")
+	})
 	eventsCmd.AddCommand(events_listPartnerEventSourceAccountsCmd)
 }

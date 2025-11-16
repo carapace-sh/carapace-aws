@@ -12,7 +12,9 @@ var memorydbCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydbCmd).Standalone()
+	carapace.Gen(memorydbCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydbCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(memorydbCmd)
 }

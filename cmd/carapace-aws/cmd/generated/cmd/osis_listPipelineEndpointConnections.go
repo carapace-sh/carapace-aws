@@ -12,9 +12,11 @@ var osis_listPipelineEndpointConnectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_listPipelineEndpointConnectionsCmd).Standalone()
+	carapace.Gen(osis_listPipelineEndpointConnectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_listPipelineEndpointConnectionsCmd).Standalone()
 
-	osis_listPipelineEndpointConnectionsCmd.Flags().String("max-results", "", "The maximum number of pipeline endpoint connections to return in the response.")
-	osis_listPipelineEndpointConnectionsCmd.Flags().String("next-token", "", "If your initial `ListPipelineEndpointConnections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListPipelineEndpointConnections` operations, which returns results in the next page.")
+		osis_listPipelineEndpointConnectionsCmd.Flags().String("max-results", "", "The maximum number of pipeline endpoint connections to return in the response.")
+		osis_listPipelineEndpointConnectionsCmd.Flags().String("next-token", "", "If your initial `ListPipelineEndpointConnections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListPipelineEndpointConnections` operations, which returns results in the next page.")
+	})
 	osisCmd.AddCommand(osis_listPipelineEndpointConnectionsCmd)
 }

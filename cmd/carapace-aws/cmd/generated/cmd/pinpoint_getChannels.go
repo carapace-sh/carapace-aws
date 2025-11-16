@@ -12,9 +12,11 @@ var pinpoint_getChannelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getChannelsCmd).Standalone()
+	carapace.Gen(pinpoint_getChannelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getChannelsCmd).Standalone()
 
-	pinpoint_getChannelsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getChannelsCmd.MarkFlagRequired("application-id")
+		pinpoint_getChannelsCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getChannelsCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getChannelsCmd)
 }

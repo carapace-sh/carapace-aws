@@ -12,12 +12,14 @@ var s3_getBucketInventoryConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketInventoryConfigurationCmd).Standalone()
+	carapace.Gen(s3_getBucketInventoryConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketInventoryConfigurationCmd).Standalone()
 
-	s3_getBucketInventoryConfigurationCmd.Flags().String("bucket", "", "The name of the bucket containing the inventory configuration to retrieve.")
-	s3_getBucketInventoryConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketInventoryConfigurationCmd.Flags().String("id", "", "The ID used to identify the inventory configuration.")
-	s3_getBucketInventoryConfigurationCmd.MarkFlagRequired("bucket")
-	s3_getBucketInventoryConfigurationCmd.MarkFlagRequired("id")
+		s3_getBucketInventoryConfigurationCmd.Flags().String("bucket", "", "The name of the bucket containing the inventory configuration to retrieve.")
+		s3_getBucketInventoryConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketInventoryConfigurationCmd.Flags().String("id", "", "The ID used to identify the inventory configuration.")
+		s3_getBucketInventoryConfigurationCmd.MarkFlagRequired("bucket")
+		s3_getBucketInventoryConfigurationCmd.MarkFlagRequired("id")
+	})
 	s3Cmd.AddCommand(s3_getBucketInventoryConfigurationCmd)
 }

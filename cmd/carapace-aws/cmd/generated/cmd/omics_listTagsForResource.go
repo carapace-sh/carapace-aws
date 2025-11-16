@@ -12,9 +12,11 @@ var omics_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_listTagsForResourceCmd).Standalone()
+	carapace.Gen(omics_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_listTagsForResourceCmd).Standalone()
 
-	omics_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource's ARN.")
-	omics_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		omics_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource's ARN.")
+		omics_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	omicsCmd.AddCommand(omics_listTagsForResourceCmd)
 }

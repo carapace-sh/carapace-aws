@@ -12,7 +12,9 @@ var networkflowmonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkflowmonitorCmd).Standalone()
+	carapace.Gen(networkflowmonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitorCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(networkflowmonitorCmd)
 }

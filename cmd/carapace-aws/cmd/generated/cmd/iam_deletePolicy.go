@@ -12,9 +12,11 @@ var iam_deletePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deletePolicyCmd).Standalone()
+	carapace.Gen(iam_deletePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deletePolicyCmd).Standalone()
 
-	iam_deletePolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the IAM policy you want to delete.")
-	iam_deletePolicyCmd.MarkFlagRequired("policy-arn")
+		iam_deletePolicyCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the IAM policy you want to delete.")
+		iam_deletePolicyCmd.MarkFlagRequired("policy-arn")
+	})
 	iamCmd.AddCommand(iam_deletePolicyCmd)
 }

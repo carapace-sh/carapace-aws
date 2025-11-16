@@ -12,7 +12,9 @@ var organizations_leaveOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_leaveOrganizationCmd).Standalone()
+	carapace.Gen(organizations_leaveOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_leaveOrganizationCmd).Standalone()
 
+	})
 	organizationsCmd.AddCommand(organizations_leaveOrganizationCmd)
 }

@@ -12,11 +12,13 @@ var lexModels_deleteBotAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_deleteBotAliasCmd).Standalone()
+	carapace.Gen(lexModels_deleteBotAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_deleteBotAliasCmd).Standalone()
 
-	lexModels_deleteBotAliasCmd.Flags().String("bot-name", "", "The name of the bot that the alias points to.")
-	lexModels_deleteBotAliasCmd.Flags().String("name", "", "The name of the alias to delete.")
-	lexModels_deleteBotAliasCmd.MarkFlagRequired("bot-name")
-	lexModels_deleteBotAliasCmd.MarkFlagRequired("name")
+		lexModels_deleteBotAliasCmd.Flags().String("bot-name", "", "The name of the bot that the alias points to.")
+		lexModels_deleteBotAliasCmd.Flags().String("name", "", "The name of the alias to delete.")
+		lexModels_deleteBotAliasCmd.MarkFlagRequired("bot-name")
+		lexModels_deleteBotAliasCmd.MarkFlagRequired("name")
+	})
 	lexModelsCmd.AddCommand(lexModels_deleteBotAliasCmd)
 }

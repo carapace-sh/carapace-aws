@@ -12,13 +12,15 @@ var appconfig_deleteHostedConfigurationVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_deleteHostedConfigurationVersionCmd).Standalone()
+	carapace.Gen(appconfig_deleteHostedConfigurationVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_deleteHostedConfigurationVersionCmd).Standalone()
 
-	appconfig_deleteHostedConfigurationVersionCmd.Flags().String("application-id", "", "The application ID.")
-	appconfig_deleteHostedConfigurationVersionCmd.Flags().String("configuration-profile-id", "", "The configuration profile ID.")
-	appconfig_deleteHostedConfigurationVersionCmd.Flags().String("version-number", "", "The versions number to delete.")
-	appconfig_deleteHostedConfigurationVersionCmd.MarkFlagRequired("application-id")
-	appconfig_deleteHostedConfigurationVersionCmd.MarkFlagRequired("configuration-profile-id")
-	appconfig_deleteHostedConfigurationVersionCmd.MarkFlagRequired("version-number")
+		appconfig_deleteHostedConfigurationVersionCmd.Flags().String("application-id", "", "The application ID.")
+		appconfig_deleteHostedConfigurationVersionCmd.Flags().String("configuration-profile-id", "", "The configuration profile ID.")
+		appconfig_deleteHostedConfigurationVersionCmd.Flags().String("version-number", "", "The versions number to delete.")
+		appconfig_deleteHostedConfigurationVersionCmd.MarkFlagRequired("application-id")
+		appconfig_deleteHostedConfigurationVersionCmd.MarkFlagRequired("configuration-profile-id")
+		appconfig_deleteHostedConfigurationVersionCmd.MarkFlagRequired("version-number")
+	})
 	appconfigCmd.AddCommand(appconfig_deleteHostedConfigurationVersionCmd)
 }

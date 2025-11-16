@@ -12,11 +12,13 @@ var sagemaker_updateDevicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_updateDevicesCmd).Standalone()
+	carapace.Gen(sagemaker_updateDevicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_updateDevicesCmd).Standalone()
 
-	sagemaker_updateDevicesCmd.Flags().String("device-fleet-name", "", "The name of the fleet the devices belong to.")
-	sagemaker_updateDevicesCmd.Flags().String("devices", "", "List of devices to register with Edge Manager agent.")
-	sagemaker_updateDevicesCmd.MarkFlagRequired("device-fleet-name")
-	sagemaker_updateDevicesCmd.MarkFlagRequired("devices")
+		sagemaker_updateDevicesCmd.Flags().String("device-fleet-name", "", "The name of the fleet the devices belong to.")
+		sagemaker_updateDevicesCmd.Flags().String("devices", "", "List of devices to register with Edge Manager agent.")
+		sagemaker_updateDevicesCmd.MarkFlagRequired("device-fleet-name")
+		sagemaker_updateDevicesCmd.MarkFlagRequired("devices")
+	})
 	sagemakerCmd.AddCommand(sagemaker_updateDevicesCmd)
 }

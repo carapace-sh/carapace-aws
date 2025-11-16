@@ -12,11 +12,13 @@ var iot_deleteV2LoggingLevelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteV2LoggingLevelCmd).Standalone()
+	carapace.Gen(iot_deleteV2LoggingLevelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteV2LoggingLevelCmd).Standalone()
 
-	iot_deleteV2LoggingLevelCmd.Flags().String("target-name", "", "The name of the resource for which you are configuring logging.")
-	iot_deleteV2LoggingLevelCmd.Flags().String("target-type", "", "The type of resource for which you are configuring logging.")
-	iot_deleteV2LoggingLevelCmd.MarkFlagRequired("target-name")
-	iot_deleteV2LoggingLevelCmd.MarkFlagRequired("target-type")
+		iot_deleteV2LoggingLevelCmd.Flags().String("target-name", "", "The name of the resource for which you are configuring logging.")
+		iot_deleteV2LoggingLevelCmd.Flags().String("target-type", "", "The type of resource for which you are configuring logging.")
+		iot_deleteV2LoggingLevelCmd.MarkFlagRequired("target-name")
+		iot_deleteV2LoggingLevelCmd.MarkFlagRequired("target-type")
+	})
 	iotCmd.AddCommand(iot_deleteV2LoggingLevelCmd)
 }

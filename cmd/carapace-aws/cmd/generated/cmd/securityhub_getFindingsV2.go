@@ -12,11 +12,13 @@ var securityhub_getFindingsV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getFindingsV2Cmd).Standalone()
+	carapace.Gen(securityhub_getFindingsV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getFindingsV2Cmd).Standalone()
 
-	securityhub_getFindingsV2Cmd.Flags().String("filters", "", "The finding attributes used to define a condition to filter the returned OCSF findings.")
-	securityhub_getFindingsV2Cmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	securityhub_getFindingsV2Cmd.Flags().String("next-token", "", "The token required for pagination.")
-	securityhub_getFindingsV2Cmd.Flags().String("sort-criteria", "", "The finding attributes used to sort the list of returned findings.")
+		securityhub_getFindingsV2Cmd.Flags().String("filters", "", "The finding attributes used to define a condition to filter the returned OCSF findings.")
+		securityhub_getFindingsV2Cmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		securityhub_getFindingsV2Cmd.Flags().String("next-token", "", "The token required for pagination.")
+		securityhub_getFindingsV2Cmd.Flags().String("sort-criteria", "", "The finding attributes used to sort the list of returned findings.")
+	})
 	securityhubCmd.AddCommand(securityhub_getFindingsV2Cmd)
 }

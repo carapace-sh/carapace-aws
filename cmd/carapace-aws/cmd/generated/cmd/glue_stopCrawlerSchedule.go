@@ -12,9 +12,11 @@ var glue_stopCrawlerScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_stopCrawlerScheduleCmd).Standalone()
+	carapace.Gen(glue_stopCrawlerScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_stopCrawlerScheduleCmd).Standalone()
 
-	glue_stopCrawlerScheduleCmd.Flags().String("crawler-name", "", "Name of the crawler whose schedule state to set.")
-	glue_stopCrawlerScheduleCmd.MarkFlagRequired("crawler-name")
+		glue_stopCrawlerScheduleCmd.Flags().String("crawler-name", "", "Name of the crawler whose schedule state to set.")
+		glue_stopCrawlerScheduleCmd.MarkFlagRequired("crawler-name")
+	})
 	glueCmd.AddCommand(glue_stopCrawlerScheduleCmd)
 }

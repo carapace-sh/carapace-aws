@@ -12,11 +12,13 @@ var ds_unshareDirectoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_unshareDirectoryCmd).Standalone()
+	carapace.Gen(ds_unshareDirectoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_unshareDirectoryCmd).Standalone()
 
-	ds_unshareDirectoryCmd.Flags().String("directory-id", "", "The identifier of the Managed Microsoft AD directory that you want to stop sharing.")
-	ds_unshareDirectoryCmd.Flags().String("unshare-target", "", "Identifier for the directory consumer account with whom the directory has to be unshared.")
-	ds_unshareDirectoryCmd.MarkFlagRequired("directory-id")
-	ds_unshareDirectoryCmd.MarkFlagRequired("unshare-target")
+		ds_unshareDirectoryCmd.Flags().String("directory-id", "", "The identifier of the Managed Microsoft AD directory that you want to stop sharing.")
+		ds_unshareDirectoryCmd.Flags().String("unshare-target", "", "Identifier for the directory consumer account with whom the directory has to be unshared.")
+		ds_unshareDirectoryCmd.MarkFlagRequired("directory-id")
+		ds_unshareDirectoryCmd.MarkFlagRequired("unshare-target")
+	})
 	dsCmd.AddCommand(ds_unshareDirectoryCmd)
 }

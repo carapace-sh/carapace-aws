@@ -12,9 +12,11 @@ var ivs_listRecordingConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_listRecordingConfigurationsCmd).Standalone()
+	carapace.Gen(ivs_listRecordingConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_listRecordingConfigurationsCmd).Standalone()
 
-	ivs_listRecordingConfigurationsCmd.Flags().String("max-results", "", "Maximum number of recording configurations to return.")
-	ivs_listRecordingConfigurationsCmd.Flags().String("next-token", "", "The first recording configuration to retrieve.")
+		ivs_listRecordingConfigurationsCmd.Flags().String("max-results", "", "Maximum number of recording configurations to return.")
+		ivs_listRecordingConfigurationsCmd.Flags().String("next-token", "", "The first recording configuration to retrieve.")
+	})
 	ivsCmd.AddCommand(ivs_listRecordingConfigurationsCmd)
 }

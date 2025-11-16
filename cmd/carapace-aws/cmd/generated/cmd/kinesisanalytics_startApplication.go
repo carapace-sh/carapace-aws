@@ -12,11 +12,13 @@ var kinesisanalytics_startApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_startApplicationCmd).Standalone()
+	carapace.Gen(kinesisanalytics_startApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_startApplicationCmd).Standalone()
 
-	kinesisanalytics_startApplicationCmd.Flags().String("application-name", "", "Name of the application.")
-	kinesisanalytics_startApplicationCmd.Flags().String("input-configurations", "", "Identifies the specific input, by ID, that the application starts consuming.")
-	kinesisanalytics_startApplicationCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_startApplicationCmd.MarkFlagRequired("input-configurations")
+		kinesisanalytics_startApplicationCmd.Flags().String("application-name", "", "Name of the application.")
+		kinesisanalytics_startApplicationCmd.Flags().String("input-configurations", "", "Identifies the specific input, by ID, that the application starts consuming.")
+		kinesisanalytics_startApplicationCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_startApplicationCmd.MarkFlagRequired("input-configurations")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_startApplicationCmd)
 }

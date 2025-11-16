@@ -12,16 +12,18 @@ var appintegrations_createEventIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_createEventIntegrationCmd).Standalone()
+	carapace.Gen(appintegrations_createEventIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_createEventIntegrationCmd).Standalone()
 
-	appintegrations_createEventIntegrationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	appintegrations_createEventIntegrationCmd.Flags().String("description", "", "The description of the event integration.")
-	appintegrations_createEventIntegrationCmd.Flags().String("event-bridge-bus", "", "The EventBridge bus.")
-	appintegrations_createEventIntegrationCmd.Flags().String("event-filter", "", "The event filter.")
-	appintegrations_createEventIntegrationCmd.Flags().String("name", "", "The name of the event integration.")
-	appintegrations_createEventIntegrationCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
-	appintegrations_createEventIntegrationCmd.MarkFlagRequired("event-bridge-bus")
-	appintegrations_createEventIntegrationCmd.MarkFlagRequired("event-filter")
-	appintegrations_createEventIntegrationCmd.MarkFlagRequired("name")
+		appintegrations_createEventIntegrationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		appintegrations_createEventIntegrationCmd.Flags().String("description", "", "The description of the event integration.")
+		appintegrations_createEventIntegrationCmd.Flags().String("event-bridge-bus", "", "The EventBridge bus.")
+		appintegrations_createEventIntegrationCmd.Flags().String("event-filter", "", "The event filter.")
+		appintegrations_createEventIntegrationCmd.Flags().String("name", "", "The name of the event integration.")
+		appintegrations_createEventIntegrationCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
+		appintegrations_createEventIntegrationCmd.MarkFlagRequired("event-bridge-bus")
+		appintegrations_createEventIntegrationCmd.MarkFlagRequired("event-filter")
+		appintegrations_createEventIntegrationCmd.MarkFlagRequired("name")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_createEventIntegrationCmd)
 }

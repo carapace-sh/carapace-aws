@@ -12,9 +12,11 @@ var glue_getCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getCatalogCmd).Standalone()
+	carapace.Gen(glue_getCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getCatalogCmd).Standalone()
 
-	glue_getCatalogCmd.Flags().String("catalog-id", "", "The ID of the parent catalog in which the catalog resides.")
-	glue_getCatalogCmd.MarkFlagRequired("catalog-id")
+		glue_getCatalogCmd.Flags().String("catalog-id", "", "The ID of the parent catalog in which the catalog resides.")
+		glue_getCatalogCmd.MarkFlagRequired("catalog-id")
+	})
 	glueCmd.AddCommand(glue_getCatalogCmd)
 }

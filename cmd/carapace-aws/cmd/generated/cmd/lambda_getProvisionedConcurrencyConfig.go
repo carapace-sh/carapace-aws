@@ -12,11 +12,13 @@ var lambda_getProvisionedConcurrencyConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getProvisionedConcurrencyConfigCmd).Standalone()
+	carapace.Gen(lambda_getProvisionedConcurrencyConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getProvisionedConcurrencyConfigCmd).Standalone()
 
-	lambda_getProvisionedConcurrencyConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_getProvisionedConcurrencyConfigCmd.Flags().String("qualifier", "", "The version number or alias name.")
-	lambda_getProvisionedConcurrencyConfigCmd.MarkFlagRequired("function-name")
-	lambda_getProvisionedConcurrencyConfigCmd.MarkFlagRequired("qualifier")
+		lambda_getProvisionedConcurrencyConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_getProvisionedConcurrencyConfigCmd.Flags().String("qualifier", "", "The version number or alias name.")
+		lambda_getProvisionedConcurrencyConfigCmd.MarkFlagRequired("function-name")
+		lambda_getProvisionedConcurrencyConfigCmd.MarkFlagRequired("qualifier")
+	})
 	lambdaCmd.AddCommand(lambda_getProvisionedConcurrencyConfigCmd)
 }

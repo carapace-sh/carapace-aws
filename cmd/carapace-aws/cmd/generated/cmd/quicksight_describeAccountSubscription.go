@@ -12,9 +12,11 @@ var quicksight_describeAccountSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeAccountSubscriptionCmd).Standalone()
+	carapace.Gen(quicksight_describeAccountSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeAccountSubscriptionCmd).Standalone()
 
-	quicksight_describeAccountSubscriptionCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID associated with your Quick Sight account.")
-	quicksight_describeAccountSubscriptionCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeAccountSubscriptionCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID associated with your Quick Sight account.")
+		quicksight_describeAccountSubscriptionCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeAccountSubscriptionCmd)
 }

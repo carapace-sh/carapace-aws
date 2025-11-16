@@ -12,15 +12,17 @@ var iot_createCustomMetricCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createCustomMetricCmd).Standalone()
+	carapace.Gen(iot_createCustomMetricCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createCustomMetricCmd).Standalone()
 
-	iot_createCustomMetricCmd.Flags().String("client-request-token", "", "Each custom metric must have a unique client request token.")
-	iot_createCustomMetricCmd.Flags().String("display-name", "", "The friendly name in the console for the custom metric.")
-	iot_createCustomMetricCmd.Flags().String("metric-name", "", "The name of the custom metric.")
-	iot_createCustomMetricCmd.Flags().String("metric-type", "", "The type of the custom metric.")
-	iot_createCustomMetricCmd.Flags().String("tags", "", "Metadata that can be used to manage the custom metric.")
-	iot_createCustomMetricCmd.MarkFlagRequired("client-request-token")
-	iot_createCustomMetricCmd.MarkFlagRequired("metric-name")
-	iot_createCustomMetricCmd.MarkFlagRequired("metric-type")
+		iot_createCustomMetricCmd.Flags().String("client-request-token", "", "Each custom metric must have a unique client request token.")
+		iot_createCustomMetricCmd.Flags().String("display-name", "", "The friendly name in the console for the custom metric.")
+		iot_createCustomMetricCmd.Flags().String("metric-name", "", "The name of the custom metric.")
+		iot_createCustomMetricCmd.Flags().String("metric-type", "", "The type of the custom metric.")
+		iot_createCustomMetricCmd.Flags().String("tags", "", "Metadata that can be used to manage the custom metric.")
+		iot_createCustomMetricCmd.MarkFlagRequired("client-request-token")
+		iot_createCustomMetricCmd.MarkFlagRequired("metric-name")
+		iot_createCustomMetricCmd.MarkFlagRequired("metric-type")
+	})
 	iotCmd.AddCommand(iot_createCustomMetricCmd)
 }

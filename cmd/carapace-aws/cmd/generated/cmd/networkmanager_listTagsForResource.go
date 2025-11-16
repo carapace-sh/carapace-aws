@@ -12,9 +12,11 @@ var networkmanager_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_listTagsForResourceCmd).Standalone()
+	carapace.Gen(networkmanager_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_listTagsForResourceCmd).Standalone()
 
-	networkmanager_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	networkmanager_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		networkmanager_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		networkmanager_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_listTagsForResourceCmd)
 }

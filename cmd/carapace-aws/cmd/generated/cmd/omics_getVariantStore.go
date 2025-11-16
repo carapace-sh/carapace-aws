@@ -12,9 +12,11 @@ var omics_getVariantStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getVariantStoreCmd).Standalone()
+	carapace.Gen(omics_getVariantStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getVariantStoreCmd).Standalone()
 
-	omics_getVariantStoreCmd.Flags().String("name", "", "The store's name.")
-	omics_getVariantStoreCmd.MarkFlagRequired("name")
+		omics_getVariantStoreCmd.Flags().String("name", "", "The store's name.")
+		omics_getVariantStoreCmd.MarkFlagRequired("name")
+	})
 	omicsCmd.AddCommand(omics_getVariantStoreCmd)
 }

@@ -12,9 +12,11 @@ var wafRegional_getRegexMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_getRegexMatchSetCmd).Standalone()
+	carapace.Gen(wafRegional_getRegexMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_getRegexMatchSetCmd).Standalone()
 
-	wafRegional_getRegexMatchSetCmd.Flags().String("regex-match-set-id", "", "The `RegexMatchSetId` of the [RegexMatchSet]() that you want to get.")
-	wafRegional_getRegexMatchSetCmd.MarkFlagRequired("regex-match-set-id")
+		wafRegional_getRegexMatchSetCmd.Flags().String("regex-match-set-id", "", "The `RegexMatchSetId` of the [RegexMatchSet]() that you want to get.")
+		wafRegional_getRegexMatchSetCmd.MarkFlagRequired("regex-match-set-id")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_getRegexMatchSetCmd)
 }

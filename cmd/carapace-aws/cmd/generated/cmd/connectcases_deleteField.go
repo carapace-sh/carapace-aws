@@ -12,11 +12,13 @@ var connectcases_deleteFieldCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_deleteFieldCmd).Standalone()
+	carapace.Gen(connectcases_deleteFieldCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_deleteFieldCmd).Standalone()
 
-	connectcases_deleteFieldCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_deleteFieldCmd.Flags().String("field-id", "", "Unique identifier of the field.")
-	connectcases_deleteFieldCmd.MarkFlagRequired("domain-id")
-	connectcases_deleteFieldCmd.MarkFlagRequired("field-id")
+		connectcases_deleteFieldCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_deleteFieldCmd.Flags().String("field-id", "", "Unique identifier of the field.")
+		connectcases_deleteFieldCmd.MarkFlagRequired("domain-id")
+		connectcases_deleteFieldCmd.MarkFlagRequired("field-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_deleteFieldCmd)
 }

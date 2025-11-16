@@ -12,12 +12,14 @@ var emrServerless_cancelJobRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrServerless_cancelJobRunCmd).Standalone()
+	carapace.Gen(emrServerless_cancelJobRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrServerless_cancelJobRunCmd).Standalone()
 
-	emrServerless_cancelJobRunCmd.Flags().String("application-id", "", "The ID of the application on which the job run will be canceled.")
-	emrServerless_cancelJobRunCmd.Flags().String("job-run-id", "", "The ID of the job run to cancel.")
-	emrServerless_cancelJobRunCmd.Flags().String("shutdown-grace-period-in-seconds", "", "The duration in seconds to wait before forcefully terminating the job after cancellation is requested.")
-	emrServerless_cancelJobRunCmd.MarkFlagRequired("application-id")
-	emrServerless_cancelJobRunCmd.MarkFlagRequired("job-run-id")
+		emrServerless_cancelJobRunCmd.Flags().String("application-id", "", "The ID of the application on which the job run will be canceled.")
+		emrServerless_cancelJobRunCmd.Flags().String("job-run-id", "", "The ID of the job run to cancel.")
+		emrServerless_cancelJobRunCmd.Flags().String("shutdown-grace-period-in-seconds", "", "The duration in seconds to wait before forcefully terminating the job after cancellation is requested.")
+		emrServerless_cancelJobRunCmd.MarkFlagRequired("application-id")
+		emrServerless_cancelJobRunCmd.MarkFlagRequired("job-run-id")
+	})
 	emrServerlessCmd.AddCommand(emrServerless_cancelJobRunCmd)
 }

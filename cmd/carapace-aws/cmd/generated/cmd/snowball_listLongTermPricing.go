@@ -12,9 +12,11 @@ var snowball_listLongTermPricingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_listLongTermPricingCmd).Standalone()
+	carapace.Gen(snowball_listLongTermPricingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_listLongTermPricingCmd).Standalone()
 
-	snowball_listLongTermPricingCmd.Flags().String("max-results", "", "The maximum number of `ListLongTermPricing` objects to return.")
-	snowball_listLongTermPricingCmd.Flags().String("next-token", "", "Because HTTP requests are stateless, this is the starting point for your next list of `ListLongTermPricing` to return.")
+		snowball_listLongTermPricingCmd.Flags().String("max-results", "", "The maximum number of `ListLongTermPricing` objects to return.")
+		snowball_listLongTermPricingCmd.Flags().String("next-token", "", "Because HTTP requests are stateless, this is the starting point for your next list of `ListLongTermPricing` to return.")
+	})
 	snowballCmd.AddCommand(snowball_listLongTermPricingCmd)
 }

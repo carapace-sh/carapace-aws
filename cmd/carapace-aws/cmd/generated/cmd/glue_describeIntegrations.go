@@ -12,11 +12,13 @@ var glue_describeIntegrationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_describeIntegrationsCmd).Standalone()
+	carapace.Gen(glue_describeIntegrationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_describeIntegrationsCmd).Standalone()
 
-	glue_describeIntegrationsCmd.Flags().String("filters", "", "A list of key and values, to filter down the results.")
-	glue_describeIntegrationsCmd.Flags().String("integration-identifier", "", "The Amazon Resource Name (ARN) for the integration.")
-	glue_describeIntegrationsCmd.Flags().String("marker", "", "A value that indicates the starting point for the next set of response records in a subsequent request.")
-	glue_describeIntegrationsCmd.Flags().String("max-records", "", "The total number of items to return in the output.")
+		glue_describeIntegrationsCmd.Flags().String("filters", "", "A list of key and values, to filter down the results.")
+		glue_describeIntegrationsCmd.Flags().String("integration-identifier", "", "The Amazon Resource Name (ARN) for the integration.")
+		glue_describeIntegrationsCmd.Flags().String("marker", "", "A value that indicates the starting point for the next set of response records in a subsequent request.")
+		glue_describeIntegrationsCmd.Flags().String("max-records", "", "The total number of items to return in the output.")
+	})
 	glueCmd.AddCommand(glue_describeIntegrationsCmd)
 }

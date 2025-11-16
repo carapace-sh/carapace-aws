@@ -12,14 +12,16 @@ var apigateway_createUsagePlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_createUsagePlanCmd).Standalone()
+	carapace.Gen(apigateway_createUsagePlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_createUsagePlanCmd).Standalone()
 
-	apigateway_createUsagePlanCmd.Flags().String("api-stages", "", "The associated API stages of the usage plan.")
-	apigateway_createUsagePlanCmd.Flags().String("description", "", "The description of the usage plan.")
-	apigateway_createUsagePlanCmd.Flags().String("name", "", "The name of the usage plan.")
-	apigateway_createUsagePlanCmd.Flags().String("quota", "", "The quota of the usage plan.")
-	apigateway_createUsagePlanCmd.Flags().String("tags", "", "The key-value map of strings.")
-	apigateway_createUsagePlanCmd.Flags().String("throttle", "", "The throttling limits of the usage plan.")
-	apigateway_createUsagePlanCmd.MarkFlagRequired("name")
+		apigateway_createUsagePlanCmd.Flags().String("api-stages", "", "The associated API stages of the usage plan.")
+		apigateway_createUsagePlanCmd.Flags().String("description", "", "The description of the usage plan.")
+		apigateway_createUsagePlanCmd.Flags().String("name", "", "The name of the usage plan.")
+		apigateway_createUsagePlanCmd.Flags().String("quota", "", "The quota of the usage plan.")
+		apigateway_createUsagePlanCmd.Flags().String("tags", "", "The key-value map of strings.")
+		apigateway_createUsagePlanCmd.Flags().String("throttle", "", "The throttling limits of the usage plan.")
+		apigateway_createUsagePlanCmd.MarkFlagRequired("name")
+	})
 	apigatewayCmd.AddCommand(apigateway_createUsagePlanCmd)
 }

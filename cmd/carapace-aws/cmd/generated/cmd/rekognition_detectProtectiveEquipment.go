@@ -12,10 +12,12 @@ var rekognition_detectProtectiveEquipmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_detectProtectiveEquipmentCmd).Standalone()
+	carapace.Gen(rekognition_detectProtectiveEquipmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_detectProtectiveEquipmentCmd).Standalone()
 
-	rekognition_detectProtectiveEquipmentCmd.Flags().String("image", "", "The image in which you want to detect PPE on detected persons.")
-	rekognition_detectProtectiveEquipmentCmd.Flags().String("summarization-attributes", "", "An array of PPE types that you want to summarize.")
-	rekognition_detectProtectiveEquipmentCmd.MarkFlagRequired("image")
+		rekognition_detectProtectiveEquipmentCmd.Flags().String("image", "", "The image in which you want to detect PPE on detected persons.")
+		rekognition_detectProtectiveEquipmentCmd.Flags().String("summarization-attributes", "", "An array of PPE types that you want to summarize.")
+		rekognition_detectProtectiveEquipmentCmd.MarkFlagRequired("image")
+	})
 	rekognitionCmd.AddCommand(rekognition_detectProtectiveEquipmentCmd)
 }

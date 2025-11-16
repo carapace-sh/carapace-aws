@@ -12,11 +12,13 @@ var cloudfront_listDistributionsByWebAclid2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_listDistributionsByWebAclid2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listDistributionsByWebAclid2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listDistributionsByWebAclid2020_05_31Cmd).Standalone()
 
-	cloudfront_listDistributionsByWebAclid2020_05_31Cmd.Flags().String("marker", "", "Use `Marker` and `MaxItems` to control pagination of results.")
-	cloudfront_listDistributionsByWebAclid2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of distributions that you want CloudFront to return in the response body.")
-	cloudfront_listDistributionsByWebAclid2020_05_31Cmd.Flags().String("web-aclid", "", "The ID of the WAF web ACL that you want to list the associated distributions.")
-	cloudfront_listDistributionsByWebAclid2020_05_31Cmd.MarkFlagRequired("web-aclid")
+		cloudfront_listDistributionsByWebAclid2020_05_31Cmd.Flags().String("marker", "", "Use `Marker` and `MaxItems` to control pagination of results.")
+		cloudfront_listDistributionsByWebAclid2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of distributions that you want CloudFront to return in the response body.")
+		cloudfront_listDistributionsByWebAclid2020_05_31Cmd.Flags().String("web-aclid", "", "The ID of the WAF web ACL that you want to list the associated distributions.")
+		cloudfront_listDistributionsByWebAclid2020_05_31Cmd.MarkFlagRequired("web-aclid")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listDistributionsByWebAclid2020_05_31Cmd)
 }

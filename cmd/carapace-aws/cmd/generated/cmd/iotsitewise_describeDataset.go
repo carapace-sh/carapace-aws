@@ -12,9 +12,11 @@ var iotsitewise_describeDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeDatasetCmd).Standalone()
+	carapace.Gen(iotsitewise_describeDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeDatasetCmd).Standalone()
 
-	iotsitewise_describeDatasetCmd.Flags().String("dataset-id", "", "The ID of the dataset.")
-	iotsitewise_describeDatasetCmd.MarkFlagRequired("dataset-id")
+		iotsitewise_describeDatasetCmd.Flags().String("dataset-id", "", "The ID of the dataset.")
+		iotsitewise_describeDatasetCmd.MarkFlagRequired("dataset-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeDatasetCmd)
 }

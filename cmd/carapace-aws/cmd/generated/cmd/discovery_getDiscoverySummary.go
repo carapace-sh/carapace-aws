@@ -12,7 +12,9 @@ var discovery_getDiscoverySummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_getDiscoverySummaryCmd).Standalone()
+	carapace.Gen(discovery_getDiscoverySummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_getDiscoverySummaryCmd).Standalone()
 
+	})
 	discoveryCmd.AddCommand(discovery_getDiscoverySummaryCmd)
 }

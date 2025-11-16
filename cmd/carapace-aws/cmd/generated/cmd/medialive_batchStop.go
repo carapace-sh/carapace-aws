@@ -12,9 +12,11 @@ var medialive_batchStopCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_batchStopCmd).Standalone()
+	carapace.Gen(medialive_batchStopCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_batchStopCmd).Standalone()
 
-	medialive_batchStopCmd.Flags().String("channel-ids", "", "List of channel IDs")
-	medialive_batchStopCmd.Flags().String("multiplex-ids", "", "List of multiplex IDs")
+		medialive_batchStopCmd.Flags().String("channel-ids", "", "List of channel IDs")
+		medialive_batchStopCmd.Flags().String("multiplex-ids", "", "List of multiplex IDs")
+	})
 	medialiveCmd.AddCommand(medialive_batchStopCmd)
 }

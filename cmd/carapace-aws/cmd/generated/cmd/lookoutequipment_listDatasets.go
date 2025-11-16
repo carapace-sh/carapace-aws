@@ -12,10 +12,12 @@ var lookoutequipment_listDatasetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_listDatasetsCmd).Standalone()
+	carapace.Gen(lookoutequipment_listDatasetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_listDatasetsCmd).Standalone()
 
-	lookoutequipment_listDatasetsCmd.Flags().String("dataset-name-begins-with", "", "The beginning of the name of the datasets to be listed.")
-	lookoutequipment_listDatasetsCmd.Flags().String("max-results", "", "Specifies the maximum number of datasets to list.")
-	lookoutequipment_listDatasetsCmd.Flags().String("next-token", "", "An opaque pagination token indicating where to continue the listing of datasets.")
+		lookoutequipment_listDatasetsCmd.Flags().String("dataset-name-begins-with", "", "The beginning of the name of the datasets to be listed.")
+		lookoutequipment_listDatasetsCmd.Flags().String("max-results", "", "Specifies the maximum number of datasets to list.")
+		lookoutequipment_listDatasetsCmd.Flags().String("next-token", "", "An opaque pagination token indicating where to continue the listing of datasets.")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_listDatasetsCmd)
 }

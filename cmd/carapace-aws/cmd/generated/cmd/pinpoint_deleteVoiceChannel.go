@@ -12,9 +12,11 @@ var pinpoint_deleteVoiceChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteVoiceChannelCmd).Standalone()
+	carapace.Gen(pinpoint_deleteVoiceChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteVoiceChannelCmd).Standalone()
 
-	pinpoint_deleteVoiceChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_deleteVoiceChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_deleteVoiceChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_deleteVoiceChannelCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteVoiceChannelCmd)
 }

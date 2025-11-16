@@ -12,14 +12,16 @@ var config_selectAggregateResourceConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_selectAggregateResourceConfigCmd).Standalone()
+	carapace.Gen(config_selectAggregateResourceConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_selectAggregateResourceConfigCmd).Standalone()
 
-	config_selectAggregateResourceConfigCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
-	config_selectAggregateResourceConfigCmd.Flags().String("expression", "", "The SQL query SELECT command.")
-	config_selectAggregateResourceConfigCmd.Flags().String("limit", "", "The maximum number of query results returned on each page.")
-	config_selectAggregateResourceConfigCmd.Flags().String("max-results", "", "The maximum number of query results returned on each page.")
-	config_selectAggregateResourceConfigCmd.Flags().String("next-token", "", "The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.")
-	config_selectAggregateResourceConfigCmd.MarkFlagRequired("configuration-aggregator-name")
-	config_selectAggregateResourceConfigCmd.MarkFlagRequired("expression")
+		config_selectAggregateResourceConfigCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
+		config_selectAggregateResourceConfigCmd.Flags().String("expression", "", "The SQL query SELECT command.")
+		config_selectAggregateResourceConfigCmd.Flags().String("limit", "", "The maximum number of query results returned on each page.")
+		config_selectAggregateResourceConfigCmd.Flags().String("max-results", "", "The maximum number of query results returned on each page.")
+		config_selectAggregateResourceConfigCmd.Flags().String("next-token", "", "The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.")
+		config_selectAggregateResourceConfigCmd.MarkFlagRequired("configuration-aggregator-name")
+		config_selectAggregateResourceConfigCmd.MarkFlagRequired("expression")
+	})
 	configCmd.AddCommand(config_selectAggregateResourceConfigCmd)
 }

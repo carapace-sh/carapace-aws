@@ -12,9 +12,11 @@ var arcRegionSwitch_listPlansCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcRegionSwitch_listPlansCmd).Standalone()
+	carapace.Gen(arcRegionSwitch_listPlansCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcRegionSwitch_listPlansCmd).Standalone()
 
-	arcRegionSwitch_listPlansCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
-	arcRegionSwitch_listPlansCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		arcRegionSwitch_listPlansCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
+		arcRegionSwitch_listPlansCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+	})
 	arcRegionSwitchCmd.AddCommand(arcRegionSwitch_listPlansCmd)
 }

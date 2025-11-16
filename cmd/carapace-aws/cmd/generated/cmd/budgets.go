@@ -12,7 +12,9 @@ var budgetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(budgetsCmd).Standalone()
+	carapace.Gen(budgetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(budgetsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(budgetsCmd)
 }

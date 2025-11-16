@@ -12,9 +12,11 @@ var mq_deleteBrokerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mq_deleteBrokerCmd).Standalone()
+	carapace.Gen(mq_deleteBrokerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mq_deleteBrokerCmd).Standalone()
 
-	mq_deleteBrokerCmd.Flags().String("broker-id", "", "The unique ID that Amazon MQ generates for the broker.")
-	mq_deleteBrokerCmd.MarkFlagRequired("broker-id")
+		mq_deleteBrokerCmd.Flags().String("broker-id", "", "The unique ID that Amazon MQ generates for the broker.")
+		mq_deleteBrokerCmd.MarkFlagRequired("broker-id")
+	})
 	mqCmd.AddCommand(mq_deleteBrokerCmd)
 }

@@ -12,9 +12,11 @@ var iotthingsgraph_deprecateFlowTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_deprecateFlowTemplateCmd).Standalone()
+	carapace.Gen(iotthingsgraph_deprecateFlowTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_deprecateFlowTemplateCmd).Standalone()
 
-	iotthingsgraph_deprecateFlowTemplateCmd.Flags().String("id", "", "The ID of the workflow to be deleted.")
-	iotthingsgraph_deprecateFlowTemplateCmd.MarkFlagRequired("id")
+		iotthingsgraph_deprecateFlowTemplateCmd.Flags().String("id", "", "The ID of the workflow to be deleted.")
+		iotthingsgraph_deprecateFlowTemplateCmd.MarkFlagRequired("id")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_deprecateFlowTemplateCmd)
 }

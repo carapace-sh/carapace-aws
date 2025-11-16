@@ -12,11 +12,13 @@ var pcaConnectorScep_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorScep_tagResourceCmd).Standalone()
+	carapace.Gen(pcaConnectorScep_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorScep_tagResourceCmd).Standalone()
 
-	pcaConnectorScep_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	pcaConnectorScep_tagResourceCmd.Flags().String("tags", "", "The key-value pairs to associate with the resource.")
-	pcaConnectorScep_tagResourceCmd.MarkFlagRequired("resource-arn")
-	pcaConnectorScep_tagResourceCmd.MarkFlagRequired("tags")
+		pcaConnectorScep_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		pcaConnectorScep_tagResourceCmd.Flags().String("tags", "", "The key-value pairs to associate with the resource.")
+		pcaConnectorScep_tagResourceCmd.MarkFlagRequired("resource-arn")
+		pcaConnectorScep_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	pcaConnectorScepCmd.AddCommand(pcaConnectorScep_tagResourceCmd)
 }

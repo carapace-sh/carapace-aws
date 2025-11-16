@@ -12,7 +12,9 @@ var marketplaceReportingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceReportingCmd).Standalone()
+	carapace.Gen(marketplaceReportingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceReportingCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(marketplaceReportingCmd)
 }

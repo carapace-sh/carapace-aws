@@ -12,9 +12,11 @@ var gamelift_describeScriptCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeScriptCmd).Standalone()
+	carapace.Gen(gamelift_describeScriptCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeScriptCmd).Standalone()
 
-	gamelift_describeScriptCmd.Flags().String("script-id", "", "A unique identifier for the Realtime script to retrieve properties for.")
-	gamelift_describeScriptCmd.MarkFlagRequired("script-id")
+		gamelift_describeScriptCmd.Flags().String("script-id", "", "A unique identifier for the Realtime script to retrieve properties for.")
+		gamelift_describeScriptCmd.MarkFlagRequired("script-id")
+	})
 	gameliftCmd.AddCommand(gamelift_describeScriptCmd)
 }

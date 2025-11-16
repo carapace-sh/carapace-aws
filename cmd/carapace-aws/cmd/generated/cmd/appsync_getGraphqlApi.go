@@ -12,9 +12,11 @@ var appsync_getGraphqlApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_getGraphqlApiCmd).Standalone()
+	carapace.Gen(appsync_getGraphqlApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_getGraphqlApiCmd).Standalone()
 
-	appsync_getGraphqlApiCmd.Flags().String("api-id", "", "The API ID for the GraphQL API.")
-	appsync_getGraphqlApiCmd.MarkFlagRequired("api-id")
+		appsync_getGraphqlApiCmd.Flags().String("api-id", "", "The API ID for the GraphQL API.")
+		appsync_getGraphqlApiCmd.MarkFlagRequired("api-id")
+	})
 	appsyncCmd.AddCommand(appsync_getGraphqlApiCmd)
 }

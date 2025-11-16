@@ -12,11 +12,13 @@ var autoscaling_terminateInstanceInAutoScalingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_terminateInstanceInAutoScalingGroupCmd).Standalone()
+	carapace.Gen(autoscaling_terminateInstanceInAutoScalingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_terminateInstanceInAutoScalingGroupCmd).Standalone()
 
-	autoscaling_terminateInstanceInAutoScalingGroupCmd.Flags().String("instance-id", "", "The ID of the instance.")
-	autoscaling_terminateInstanceInAutoScalingGroupCmd.Flags().String("should-decrement-desired-capacity", "", "Indicates whether terminating the instance also decrements the size of the Auto Scaling group.")
-	autoscaling_terminateInstanceInAutoScalingGroupCmd.MarkFlagRequired("instance-id")
-	autoscaling_terminateInstanceInAutoScalingGroupCmd.MarkFlagRequired("should-decrement-desired-capacity")
+		autoscaling_terminateInstanceInAutoScalingGroupCmd.Flags().String("instance-id", "", "The ID of the instance.")
+		autoscaling_terminateInstanceInAutoScalingGroupCmd.Flags().String("should-decrement-desired-capacity", "", "Indicates whether terminating the instance also decrements the size of the Auto Scaling group.")
+		autoscaling_terminateInstanceInAutoScalingGroupCmd.MarkFlagRequired("instance-id")
+		autoscaling_terminateInstanceInAutoScalingGroupCmd.MarkFlagRequired("should-decrement-desired-capacity")
+	})
 	autoscalingCmd.AddCommand(autoscaling_terminateInstanceInAutoScalingGroupCmd)
 }

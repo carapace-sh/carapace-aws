@@ -12,10 +12,12 @@ var iot_listStreamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listStreamsCmd).Standalone()
+	carapace.Gen(iot_listStreamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listStreamsCmd).Standalone()
 
-	iot_listStreamsCmd.Flags().String("ascending-order", "", "Set to true to return the list of streams in ascending order.")
-	iot_listStreamsCmd.Flags().String("max-results", "", "The maximum number of results to return at a time.")
-	iot_listStreamsCmd.Flags().String("next-token", "", "A token used to get the next set of results.")
+		iot_listStreamsCmd.Flags().String("ascending-order", "", "Set to true to return the list of streams in ascending order.")
+		iot_listStreamsCmd.Flags().String("max-results", "", "The maximum number of results to return at a time.")
+		iot_listStreamsCmd.Flags().String("next-token", "", "A token used to get the next set of results.")
+	})
 	iotCmd.AddCommand(iot_listStreamsCmd)
 }

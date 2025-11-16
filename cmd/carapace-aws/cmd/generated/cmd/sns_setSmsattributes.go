@@ -12,9 +12,11 @@ var sns_setSmsattributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_setSmsattributesCmd).Standalone()
+	carapace.Gen(sns_setSmsattributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_setSmsattributesCmd).Standalone()
 
-	sns_setSmsattributesCmd.Flags().String("attributes", "", "The default settings for sending SMS messages from your Amazon Web Services account.")
-	sns_setSmsattributesCmd.MarkFlagRequired("attributes")
+		sns_setSmsattributesCmd.Flags().String("attributes", "", "The default settings for sending SMS messages from your Amazon Web Services account.")
+		sns_setSmsattributesCmd.MarkFlagRequired("attributes")
+	})
 	snsCmd.AddCommand(sns_setSmsattributesCmd)
 }

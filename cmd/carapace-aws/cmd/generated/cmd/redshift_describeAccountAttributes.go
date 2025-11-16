@@ -12,8 +12,10 @@ var redshift_describeAccountAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeAccountAttributesCmd).Standalone()
+	carapace.Gen(redshift_describeAccountAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeAccountAttributesCmd).Standalone()
 
-	redshift_describeAccountAttributesCmd.Flags().String("attribute-names", "", "A list of attribute names.")
+		redshift_describeAccountAttributesCmd.Flags().String("attribute-names", "", "A list of attribute names.")
+	})
 	redshiftCmd.AddCommand(redshift_describeAccountAttributesCmd)
 }

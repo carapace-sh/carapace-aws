@@ -12,9 +12,11 @@ var apigatewayv2_deleteApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_deleteApiCmd).Standalone()
+	carapace.Gen(apigatewayv2_deleteApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_deleteApiCmd).Standalone()
 
-	apigatewayv2_deleteApiCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_deleteApiCmd.MarkFlagRequired("api-id")
+		apigatewayv2_deleteApiCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_deleteApiCmd.MarkFlagRequired("api-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_deleteApiCmd)
 }

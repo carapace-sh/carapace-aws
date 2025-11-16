@@ -12,9 +12,11 @@ var opensearch_rejectInboundConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_rejectInboundConnectionCmd).Standalone()
+	carapace.Gen(opensearch_rejectInboundConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_rejectInboundConnectionCmd).Standalone()
 
-	opensearch_rejectInboundConnectionCmd.Flags().String("connection-id", "", "The unique identifier of the inbound connection to reject.")
-	opensearch_rejectInboundConnectionCmd.MarkFlagRequired("connection-id")
+		opensearch_rejectInboundConnectionCmd.Flags().String("connection-id", "", "The unique identifier of the inbound connection to reject.")
+		opensearch_rejectInboundConnectionCmd.MarkFlagRequired("connection-id")
+	})
 	opensearchCmd.AddCommand(opensearch_rejectInboundConnectionCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_describeImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeImageCmd).Standalone()
+	carapace.Gen(sagemaker_describeImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeImageCmd).Standalone()
 
-	sagemaker_describeImageCmd.Flags().String("image-name", "", "The name of the image to describe.")
-	sagemaker_describeImageCmd.MarkFlagRequired("image-name")
+		sagemaker_describeImageCmd.Flags().String("image-name", "", "The name of the image to describe.")
+		sagemaker_describeImageCmd.MarkFlagRequired("image-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeImageCmd)
 }

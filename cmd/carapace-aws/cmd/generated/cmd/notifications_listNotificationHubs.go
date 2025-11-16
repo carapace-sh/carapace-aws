@@ -12,9 +12,11 @@ var notifications_listNotificationHubsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_listNotificationHubsCmd).Standalone()
+	carapace.Gen(notifications_listNotificationHubsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_listNotificationHubsCmd).Standalone()
 
-	notifications_listNotificationHubsCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
-	notifications_listNotificationHubsCmd.Flags().String("next-token", "", "A pagination token.")
+		notifications_listNotificationHubsCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
+		notifications_listNotificationHubsCmd.Flags().String("next-token", "", "A pagination token.")
+	})
 	notificationsCmd.AddCommand(notifications_listNotificationHubsCmd)
 }

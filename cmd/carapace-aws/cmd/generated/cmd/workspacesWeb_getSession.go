@@ -12,11 +12,13 @@ var workspacesWeb_getSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getSessionCmd).Standalone()
+	carapace.Gen(workspacesWeb_getSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getSessionCmd).Standalone()
 
-	workspacesWeb_getSessionCmd.Flags().String("portal-id", "", "The ID of the web portal for the session.")
-	workspacesWeb_getSessionCmd.Flags().String("session-id", "", "The ID of the session.")
-	workspacesWeb_getSessionCmd.MarkFlagRequired("portal-id")
-	workspacesWeb_getSessionCmd.MarkFlagRequired("session-id")
+		workspacesWeb_getSessionCmd.Flags().String("portal-id", "", "The ID of the web portal for the session.")
+		workspacesWeb_getSessionCmd.Flags().String("session-id", "", "The ID of the session.")
+		workspacesWeb_getSessionCmd.MarkFlagRequired("portal-id")
+		workspacesWeb_getSessionCmd.MarkFlagRequired("session-id")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getSessionCmd)
 }

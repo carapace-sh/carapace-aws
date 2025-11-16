@@ -12,9 +12,11 @@ var osis_deletePipelineEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_deletePipelineEndpointCmd).Standalone()
+	carapace.Gen(osis_deletePipelineEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_deletePipelineEndpointCmd).Standalone()
 
-	osis_deletePipelineEndpointCmd.Flags().String("endpoint-id", "", "The unique identifier of the pipeline endpoint to delete.")
-	osis_deletePipelineEndpointCmd.MarkFlagRequired("endpoint-id")
+		osis_deletePipelineEndpointCmd.Flags().String("endpoint-id", "", "The unique identifier of the pipeline endpoint to delete.")
+		osis_deletePipelineEndpointCmd.MarkFlagRequired("endpoint-id")
+	})
 	osisCmd.AddCommand(osis_deletePipelineEndpointCmd)
 }

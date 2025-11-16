@@ -12,10 +12,12 @@ var codeartifact_listRepositoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeartifact_listRepositoriesCmd).Standalone()
+	carapace.Gen(codeartifact_listRepositoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeartifact_listRepositoriesCmd).Standalone()
 
-	codeartifact_listRepositoriesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	codeartifact_listRepositoriesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	codeartifact_listRepositoriesCmd.Flags().String("repository-prefix", "", "A prefix used to filter returned repositories.")
+		codeartifact_listRepositoriesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		codeartifact_listRepositoriesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		codeartifact_listRepositoriesCmd.Flags().String("repository-prefix", "", "A prefix used to filter returned repositories.")
+	})
 	codeartifactCmd.AddCommand(codeartifact_listRepositoriesCmd)
 }

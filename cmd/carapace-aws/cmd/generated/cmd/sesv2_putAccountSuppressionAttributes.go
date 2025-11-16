@@ -12,8 +12,10 @@ var sesv2_putAccountSuppressionAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putAccountSuppressionAttributesCmd).Standalone()
+	carapace.Gen(sesv2_putAccountSuppressionAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putAccountSuppressionAttributesCmd).Standalone()
 
-	sesv2_putAccountSuppressionAttributesCmd.Flags().String("suppressed-reasons", "", "A list that contains the reasons that email addresses will be automatically added to the suppression list for your account.")
+		sesv2_putAccountSuppressionAttributesCmd.Flags().String("suppressed-reasons", "", "A list that contains the reasons that email addresses will be automatically added to the suppression list for your account.")
+	})
 	sesv2Cmd.AddCommand(sesv2_putAccountSuppressionAttributesCmd)
 }

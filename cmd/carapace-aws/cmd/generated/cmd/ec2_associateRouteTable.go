@@ -12,15 +12,17 @@ var ec2_associateRouteTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_associateRouteTableCmd).Standalone()
+	carapace.Gen(ec2_associateRouteTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_associateRouteTableCmd).Standalone()
 
-	ec2_associateRouteTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_associateRouteTableCmd.Flags().String("gateway-id", "", "The ID of the internet gateway or virtual private gateway.")
-	ec2_associateRouteTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_associateRouteTableCmd.Flags().String("public-ipv4-pool", "", "The ID of a public IPv4 pool.")
-	ec2_associateRouteTableCmd.Flags().String("route-table-id", "", "The ID of the route table.")
-	ec2_associateRouteTableCmd.Flags().String("subnet-id", "", "The ID of the subnet.")
-	ec2_associateRouteTableCmd.Flag("no-dry-run").Hidden = true
-	ec2_associateRouteTableCmd.MarkFlagRequired("route-table-id")
+		ec2_associateRouteTableCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_associateRouteTableCmd.Flags().String("gateway-id", "", "The ID of the internet gateway or virtual private gateway.")
+		ec2_associateRouteTableCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_associateRouteTableCmd.Flags().String("public-ipv4-pool", "", "The ID of a public IPv4 pool.")
+		ec2_associateRouteTableCmd.Flags().String("route-table-id", "", "The ID of the route table.")
+		ec2_associateRouteTableCmd.Flags().String("subnet-id", "", "The ID of the subnet.")
+		ec2_associateRouteTableCmd.Flag("no-dry-run").Hidden = true
+		ec2_associateRouteTableCmd.MarkFlagRequired("route-table-id")
+	})
 	ec2Cmd.AddCommand(ec2_associateRouteTableCmd)
 }

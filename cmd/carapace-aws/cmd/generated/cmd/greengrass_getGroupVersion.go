@@ -12,11 +12,13 @@ var greengrass_getGroupVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getGroupVersionCmd).Standalone()
+	carapace.Gen(greengrass_getGroupVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getGroupVersionCmd).Standalone()
 
-	greengrass_getGroupVersionCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
-	greengrass_getGroupVersionCmd.Flags().String("group-version-id", "", "The ID of the group version.")
-	greengrass_getGroupVersionCmd.MarkFlagRequired("group-id")
-	greengrass_getGroupVersionCmd.MarkFlagRequired("group-version-id")
+		greengrass_getGroupVersionCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
+		greengrass_getGroupVersionCmd.Flags().String("group-version-id", "", "The ID of the group version.")
+		greengrass_getGroupVersionCmd.MarkFlagRequired("group-id")
+		greengrass_getGroupVersionCmd.MarkFlagRequired("group-version-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getGroupVersionCmd)
 }

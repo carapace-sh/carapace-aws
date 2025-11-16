@@ -12,7 +12,9 @@ var appfabricCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appfabricCmd).Standalone()
+	carapace.Gen(appfabricCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appfabricCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(appfabricCmd)
 }

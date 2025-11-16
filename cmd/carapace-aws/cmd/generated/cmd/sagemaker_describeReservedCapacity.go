@@ -12,9 +12,11 @@ var sagemaker_describeReservedCapacityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeReservedCapacityCmd).Standalone()
+	carapace.Gen(sagemaker_describeReservedCapacityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeReservedCapacityCmd).Standalone()
 
-	sagemaker_describeReservedCapacityCmd.Flags().String("reserved-capacity-arn", "", "ARN of the reserved capacity to describe.")
-	sagemaker_describeReservedCapacityCmd.MarkFlagRequired("reserved-capacity-arn")
+		sagemaker_describeReservedCapacityCmd.Flags().String("reserved-capacity-arn", "", "ARN of the reserved capacity to describe.")
+		sagemaker_describeReservedCapacityCmd.MarkFlagRequired("reserved-capacity-arn")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeReservedCapacityCmd)
 }

@@ -12,9 +12,11 @@ var mediastore_listContainersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_listContainersCmd).Standalone()
+	carapace.Gen(mediastore_listContainersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_listContainersCmd).Standalone()
 
-	mediastore_listContainersCmd.Flags().String("max-results", "", "Enter the maximum number of containers in the response.")
-	mediastore_listContainersCmd.Flags().String("next-token", "", "Only if you used `MaxResults` in the first command, enter the token (which was included in the previous response) to obtain the next set of containers.")
+		mediastore_listContainersCmd.Flags().String("max-results", "", "Enter the maximum number of containers in the response.")
+		mediastore_listContainersCmd.Flags().String("next-token", "", "Only if you used `MaxResults` in the first command, enter the token (which was included in the previous response) to obtain the next set of containers.")
+	})
 	mediastoreCmd.AddCommand(mediastore_listContainersCmd)
 }

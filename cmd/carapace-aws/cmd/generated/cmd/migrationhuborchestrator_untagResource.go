@@ -12,11 +12,13 @@ var migrationhuborchestrator_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_untagResourceCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_untagResourceCmd).Standalone()
 
-	migrationhuborchestrator_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource from which you want to remove tags.")
-	migrationhuborchestrator_untagResourceCmd.Flags().String("tag-keys", "", "One or more tag keys.")
-	migrationhuborchestrator_untagResourceCmd.MarkFlagRequired("resource-arn")
-	migrationhuborchestrator_untagResourceCmd.MarkFlagRequired("tag-keys")
+		migrationhuborchestrator_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource from which you want to remove tags.")
+		migrationhuborchestrator_untagResourceCmd.Flags().String("tag-keys", "", "One or more tag keys.")
+		migrationhuborchestrator_untagResourceCmd.MarkFlagRequired("resource-arn")
+		migrationhuborchestrator_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_untagResourceCmd)
 }

@@ -12,9 +12,11 @@ var sesv2_deleteSuppressedDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteSuppressedDestinationCmd).Standalone()
+	carapace.Gen(sesv2_deleteSuppressedDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteSuppressedDestinationCmd).Standalone()
 
-	sesv2_deleteSuppressedDestinationCmd.Flags().String("email-address", "", "The suppressed email destination to remove from the account suppression list.")
-	sesv2_deleteSuppressedDestinationCmd.MarkFlagRequired("email-address")
+		sesv2_deleteSuppressedDestinationCmd.Flags().String("email-address", "", "The suppressed email destination to remove from the account suppression list.")
+		sesv2_deleteSuppressedDestinationCmd.MarkFlagRequired("email-address")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteSuppressedDestinationCmd)
 }

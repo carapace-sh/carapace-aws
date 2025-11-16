@@ -12,11 +12,13 @@ var s3tables_getNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_getNamespaceCmd).Standalone()
+	carapace.Gen(s3tables_getNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_getNamespaceCmd).Standalone()
 
-	s3tables_getNamespaceCmd.Flags().String("namespace", "", "The name of the namespace.")
-	s3tables_getNamespaceCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
-	s3tables_getNamespaceCmd.MarkFlagRequired("namespace")
-	s3tables_getNamespaceCmd.MarkFlagRequired("table-bucket-arn")
+		s3tables_getNamespaceCmd.Flags().String("namespace", "", "The name of the namespace.")
+		s3tables_getNamespaceCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
+		s3tables_getNamespaceCmd.MarkFlagRequired("namespace")
+		s3tables_getNamespaceCmd.MarkFlagRequired("table-bucket-arn")
+	})
 	s3tablesCmd.AddCommand(s3tables_getNamespaceCmd)
 }

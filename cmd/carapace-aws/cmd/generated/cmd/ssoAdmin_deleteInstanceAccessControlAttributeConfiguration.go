@@ -12,9 +12,11 @@ var ssoAdmin_deleteInstanceAccessControlAttributeConfigurationCmd = &cobra.Comma
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_deleteInstanceAccessControlAttributeConfigurationCmd).Standalone()
+	carapace.Gen(ssoAdmin_deleteInstanceAccessControlAttributeConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_deleteInstanceAccessControlAttributeConfigurationCmd).Standalone()
 
-	ssoAdmin_deleteInstanceAccessControlAttributeConfigurationCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_deleteInstanceAccessControlAttributeConfigurationCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_deleteInstanceAccessControlAttributeConfigurationCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_deleteInstanceAccessControlAttributeConfigurationCmd.MarkFlagRequired("instance-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_deleteInstanceAccessControlAttributeConfigurationCmd)
 }

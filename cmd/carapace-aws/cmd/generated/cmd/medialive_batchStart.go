@@ -12,9 +12,11 @@ var medialive_batchStartCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_batchStartCmd).Standalone()
+	carapace.Gen(medialive_batchStartCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_batchStartCmd).Standalone()
 
-	medialive_batchStartCmd.Flags().String("channel-ids", "", "List of channel IDs")
-	medialive_batchStartCmd.Flags().String("multiplex-ids", "", "List of multiplex IDs")
+		medialive_batchStartCmd.Flags().String("channel-ids", "", "List of channel IDs")
+		medialive_batchStartCmd.Flags().String("multiplex-ids", "", "List of multiplex IDs")
+	})
 	medialiveCmd.AddCommand(medialive_batchStartCmd)
 }

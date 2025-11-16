@@ -12,9 +12,11 @@ var proton_deleteServiceSyncConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_deleteServiceSyncConfigCmd).Standalone()
+	carapace.Gen(proton_deleteServiceSyncConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_deleteServiceSyncConfigCmd).Standalone()
 
-	proton_deleteServiceSyncConfigCmd.Flags().String("service-name", "", "The name of the service that you want to delete the service sync configuration for.")
-	proton_deleteServiceSyncConfigCmd.MarkFlagRequired("service-name")
+		proton_deleteServiceSyncConfigCmd.Flags().String("service-name", "", "The name of the service that you want to delete the service sync configuration for.")
+		proton_deleteServiceSyncConfigCmd.MarkFlagRequired("service-name")
+	})
 	protonCmd.AddCommand(proton_deleteServiceSyncConfigCmd)
 }

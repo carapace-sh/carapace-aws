@@ -12,9 +12,11 @@ var elasticbeanstalk_rebuildEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_rebuildEnvironmentCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_rebuildEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_rebuildEnvironmentCmd).Standalone()
 
-	elasticbeanstalk_rebuildEnvironmentCmd.Flags().String("environment-id", "", "The ID of the environment to rebuild.")
-	elasticbeanstalk_rebuildEnvironmentCmd.Flags().String("environment-name", "", "The name of the environment to rebuild.")
+		elasticbeanstalk_rebuildEnvironmentCmd.Flags().String("environment-id", "", "The ID of the environment to rebuild.")
+		elasticbeanstalk_rebuildEnvironmentCmd.Flags().String("environment-name", "", "The name of the environment to rebuild.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_rebuildEnvironmentCmd)
 }

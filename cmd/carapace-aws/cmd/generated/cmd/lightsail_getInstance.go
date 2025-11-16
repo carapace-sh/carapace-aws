@@ -12,9 +12,11 @@ var lightsail_getInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getInstanceCmd).Standalone()
+	carapace.Gen(lightsail_getInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getInstanceCmd).Standalone()
 
-	lightsail_getInstanceCmd.Flags().String("instance-name", "", "The name of the instance.")
-	lightsail_getInstanceCmd.MarkFlagRequired("instance-name")
+		lightsail_getInstanceCmd.Flags().String("instance-name", "", "The name of the instance.")
+		lightsail_getInstanceCmd.MarkFlagRequired("instance-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getInstanceCmd)
 }

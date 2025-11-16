@@ -12,11 +12,13 @@ var sesv2_deleteTenantResourceAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteTenantResourceAssociationCmd).Standalone()
+	carapace.Gen(sesv2_deleteTenantResourceAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteTenantResourceAssociationCmd).Standalone()
 
-	sesv2_deleteTenantResourceAssociationCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to remove from the tenant association.")
-	sesv2_deleteTenantResourceAssociationCmd.Flags().String("tenant-name", "", "The name of the tenant to remove the resource association from.")
-	sesv2_deleteTenantResourceAssociationCmd.MarkFlagRequired("resource-arn")
-	sesv2_deleteTenantResourceAssociationCmd.MarkFlagRequired("tenant-name")
+		sesv2_deleteTenantResourceAssociationCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to remove from the tenant association.")
+		sesv2_deleteTenantResourceAssociationCmd.Flags().String("tenant-name", "", "The name of the tenant to remove the resource association from.")
+		sesv2_deleteTenantResourceAssociationCmd.MarkFlagRequired("resource-arn")
+		sesv2_deleteTenantResourceAssociationCmd.MarkFlagRequired("tenant-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteTenantResourceAssociationCmd)
 }

@@ -12,10 +12,12 @@ var iotsitewise_deleteDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_deleteDatasetCmd).Standalone()
+	carapace.Gen(iotsitewise_deleteDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_deleteDatasetCmd).Standalone()
 
-	iotsitewise_deleteDatasetCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_deleteDatasetCmd.Flags().String("dataset-id", "", "The ID of the dataset.")
-	iotsitewise_deleteDatasetCmd.MarkFlagRequired("dataset-id")
+		iotsitewise_deleteDatasetCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_deleteDatasetCmd.Flags().String("dataset-id", "", "The ID of the dataset.")
+		iotsitewise_deleteDatasetCmd.MarkFlagRequired("dataset-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_deleteDatasetCmd)
 }

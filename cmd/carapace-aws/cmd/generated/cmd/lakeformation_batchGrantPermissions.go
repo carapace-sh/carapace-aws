@@ -12,10 +12,12 @@ var lakeformation_batchGrantPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_batchGrantPermissionsCmd).Standalone()
+	carapace.Gen(lakeformation_batchGrantPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_batchGrantPermissionsCmd).Standalone()
 
-	lakeformation_batchGrantPermissionsCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
-	lakeformation_batchGrantPermissionsCmd.Flags().String("entries", "", "A list of up to 20 entries for resource permissions to be granted by batch operation to the principal.")
-	lakeformation_batchGrantPermissionsCmd.MarkFlagRequired("entries")
+		lakeformation_batchGrantPermissionsCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+		lakeformation_batchGrantPermissionsCmd.Flags().String("entries", "", "A list of up to 20 entries for resource permissions to be granted by batch operation to the principal.")
+		lakeformation_batchGrantPermissionsCmd.MarkFlagRequired("entries")
+	})
 	lakeformationCmd.AddCommand(lakeformation_batchGrantPermissionsCmd)
 }

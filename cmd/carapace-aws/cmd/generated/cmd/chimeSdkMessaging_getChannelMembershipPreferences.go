@@ -12,13 +12,15 @@ var chimeSdkMessaging_getChannelMembershipPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_getChannelMembershipPreferencesCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_getChannelMembershipPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_getChannelMembershipPreferencesCmd).Standalone()
 
-	chimeSdkMessaging_getChannelMembershipPreferencesCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
-	chimeSdkMessaging_getChannelMembershipPreferencesCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_getChannelMembershipPreferencesCmd.Flags().String("member-arn", "", "The `AppInstanceUserArn` of the member retrieving the preferences.")
-	chimeSdkMessaging_getChannelMembershipPreferencesCmd.MarkFlagRequired("channel-arn")
-	chimeSdkMessaging_getChannelMembershipPreferencesCmd.MarkFlagRequired("chime-bearer")
-	chimeSdkMessaging_getChannelMembershipPreferencesCmd.MarkFlagRequired("member-arn")
+		chimeSdkMessaging_getChannelMembershipPreferencesCmd.Flags().String("channel-arn", "", "The ARN of the channel.")
+		chimeSdkMessaging_getChannelMembershipPreferencesCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_getChannelMembershipPreferencesCmd.Flags().String("member-arn", "", "The `AppInstanceUserArn` of the member retrieving the preferences.")
+		chimeSdkMessaging_getChannelMembershipPreferencesCmd.MarkFlagRequired("channel-arn")
+		chimeSdkMessaging_getChannelMembershipPreferencesCmd.MarkFlagRequired("chime-bearer")
+		chimeSdkMessaging_getChannelMembershipPreferencesCmd.MarkFlagRequired("member-arn")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_getChannelMembershipPreferencesCmd)
 }

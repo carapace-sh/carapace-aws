@@ -12,9 +12,11 @@ var invoicing_getInvoicePdfCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(invoicing_getInvoicePdfCmd).Standalone()
+	carapace.Gen(invoicing_getInvoicePdfCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(invoicing_getInvoicePdfCmd).Standalone()
 
-	invoicing_getInvoicePdfCmd.Flags().String("invoice-id", "", "Your unique invoice ID.")
-	invoicing_getInvoicePdfCmd.MarkFlagRequired("invoice-id")
+		invoicing_getInvoicePdfCmd.Flags().String("invoice-id", "", "Your unique invoice ID.")
+		invoicing_getInvoicePdfCmd.MarkFlagRequired("invoice-id")
+	})
 	invoicingCmd.AddCommand(invoicing_getInvoicePdfCmd)
 }

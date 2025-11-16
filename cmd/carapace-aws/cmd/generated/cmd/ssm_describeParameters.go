@@ -12,14 +12,16 @@ var ssm_describeParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeParametersCmd).Standalone()
+	carapace.Gen(ssm_describeParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeParametersCmd).Standalone()
 
-	ssm_describeParametersCmd.Flags().String("filters", "", "This data type is deprecated.")
-	ssm_describeParametersCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_describeParametersCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	ssm_describeParametersCmd.Flags().Bool("no-shared", false, "Lists parameters that are shared with you.")
-	ssm_describeParametersCmd.Flags().String("parameter-filters", "", "Filters to limit the request results.")
-	ssm_describeParametersCmd.Flags().Bool("shared", false, "Lists parameters that are shared with you.")
-	ssm_describeParametersCmd.Flag("no-shared").Hidden = true
+		ssm_describeParametersCmd.Flags().String("filters", "", "This data type is deprecated.")
+		ssm_describeParametersCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_describeParametersCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_describeParametersCmd.Flags().Bool("no-shared", false, "Lists parameters that are shared with you.")
+		ssm_describeParametersCmd.Flags().String("parameter-filters", "", "Filters to limit the request results.")
+		ssm_describeParametersCmd.Flags().Bool("shared", false, "Lists parameters that are shared with you.")
+		ssm_describeParametersCmd.Flag("no-shared").Hidden = true
+	})
 	ssmCmd.AddCommand(ssm_describeParametersCmd)
 }

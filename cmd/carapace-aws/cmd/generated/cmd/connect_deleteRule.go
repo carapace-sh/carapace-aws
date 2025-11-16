@@ -12,11 +12,13 @@ var connect_deleteRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteRuleCmd).Standalone()
+	carapace.Gen(connect_deleteRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteRuleCmd).Standalone()
 
-	connect_deleteRuleCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteRuleCmd.Flags().String("rule-id", "", "A unique identifier for the rule.")
-	connect_deleteRuleCmd.MarkFlagRequired("instance-id")
-	connect_deleteRuleCmd.MarkFlagRequired("rule-id")
+		connect_deleteRuleCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteRuleCmd.Flags().String("rule-id", "", "A unique identifier for the rule.")
+		connect_deleteRuleCmd.MarkFlagRequired("instance-id")
+		connect_deleteRuleCmd.MarkFlagRequired("rule-id")
+	})
 	connectCmd.AddCommand(connect_deleteRuleCmd)
 }

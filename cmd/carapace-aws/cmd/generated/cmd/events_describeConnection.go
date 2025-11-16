@@ -12,9 +12,11 @@ var events_describeConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_describeConnectionCmd).Standalone()
+	carapace.Gen(events_describeConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_describeConnectionCmd).Standalone()
 
-	events_describeConnectionCmd.Flags().String("name", "", "The name of the connection to retrieve.")
-	events_describeConnectionCmd.MarkFlagRequired("name")
+		events_describeConnectionCmd.Flags().String("name", "", "The name of the connection to retrieve.")
+		events_describeConnectionCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_describeConnectionCmd)
 }

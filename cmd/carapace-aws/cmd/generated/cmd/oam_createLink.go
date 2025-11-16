@@ -12,15 +12,17 @@ var oam_createLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_createLinkCmd).Standalone()
+	carapace.Gen(oam_createLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_createLinkCmd).Standalone()
 
-	oam_createLinkCmd.Flags().String("label-template", "", "Specify a friendly human-readable name to use to identify this source account when you are viewing data from it in the monitoring account.")
-	oam_createLinkCmd.Flags().String("link-configuration", "", "Use this structure to optionally create filters that specify that only some metric namespaces or log groups are to be shared from the source account to the monitoring account.")
-	oam_createLinkCmd.Flags().String("resource-types", "", "An array of strings that define which types of data that the source account shares with the monitoring account.")
-	oam_createLinkCmd.Flags().String("sink-identifier", "", "The ARN of the sink to use to create this link.")
-	oam_createLinkCmd.Flags().String("tags", "", "Assigns one or more tags (key-value pairs) to the link.")
-	oam_createLinkCmd.MarkFlagRequired("label-template")
-	oam_createLinkCmd.MarkFlagRequired("resource-types")
-	oam_createLinkCmd.MarkFlagRequired("sink-identifier")
+		oam_createLinkCmd.Flags().String("label-template", "", "Specify a friendly human-readable name to use to identify this source account when you are viewing data from it in the monitoring account.")
+		oam_createLinkCmd.Flags().String("link-configuration", "", "Use this structure to optionally create filters that specify that only some metric namespaces or log groups are to be shared from the source account to the monitoring account.")
+		oam_createLinkCmd.Flags().String("resource-types", "", "An array of strings that define which types of data that the source account shares with the monitoring account.")
+		oam_createLinkCmd.Flags().String("sink-identifier", "", "The ARN of the sink to use to create this link.")
+		oam_createLinkCmd.Flags().String("tags", "", "Assigns one or more tags (key-value pairs) to the link.")
+		oam_createLinkCmd.MarkFlagRequired("label-template")
+		oam_createLinkCmd.MarkFlagRequired("resource-types")
+		oam_createLinkCmd.MarkFlagRequired("sink-identifier")
+	})
 	oamCmd.AddCommand(oam_createLinkCmd)
 }

@@ -12,12 +12,14 @@ var datazone_getListingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getListingCmd).Standalone()
+	carapace.Gen(datazone_getListingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getListingCmd).Standalone()
 
-	datazone_getListingCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain.")
-	datazone_getListingCmd.Flags().String("identifier", "", "The ID of the listing.")
-	datazone_getListingCmd.Flags().String("listing-revision", "", "The revision of the listing.")
-	datazone_getListingCmd.MarkFlagRequired("domain-identifier")
-	datazone_getListingCmd.MarkFlagRequired("identifier")
+		datazone_getListingCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain.")
+		datazone_getListingCmd.Flags().String("identifier", "", "The ID of the listing.")
+		datazone_getListingCmd.Flags().String("listing-revision", "", "The revision of the listing.")
+		datazone_getListingCmd.MarkFlagRequired("domain-identifier")
+		datazone_getListingCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getListingCmd)
 }

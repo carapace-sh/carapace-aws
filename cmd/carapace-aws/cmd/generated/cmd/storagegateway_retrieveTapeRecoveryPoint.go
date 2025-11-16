@@ -12,11 +12,13 @@ var storagegateway_retrieveTapeRecoveryPointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_retrieveTapeRecoveryPointCmd).Standalone()
+	carapace.Gen(storagegateway_retrieveTapeRecoveryPointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_retrieveTapeRecoveryPointCmd).Standalone()
 
-	storagegateway_retrieveTapeRecoveryPointCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_retrieveTapeRecoveryPointCmd.Flags().String("tape-arn", "", "The Amazon Resource Name (ARN) of the virtual tape for which you want to retrieve the recovery point.")
-	storagegateway_retrieveTapeRecoveryPointCmd.MarkFlagRequired("gateway-arn")
-	storagegateway_retrieveTapeRecoveryPointCmd.MarkFlagRequired("tape-arn")
+		storagegateway_retrieveTapeRecoveryPointCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_retrieveTapeRecoveryPointCmd.Flags().String("tape-arn", "", "The Amazon Resource Name (ARN) of the virtual tape for which you want to retrieve the recovery point.")
+		storagegateway_retrieveTapeRecoveryPointCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_retrieveTapeRecoveryPointCmd.MarkFlagRequired("tape-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_retrieveTapeRecoveryPointCmd)
 }

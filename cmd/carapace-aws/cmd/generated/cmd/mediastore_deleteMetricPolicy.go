@@ -12,9 +12,11 @@ var mediastore_deleteMetricPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_deleteMetricPolicyCmd).Standalone()
+	carapace.Gen(mediastore_deleteMetricPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_deleteMetricPolicyCmd).Standalone()
 
-	mediastore_deleteMetricPolicyCmd.Flags().String("container-name", "", "The name of the container that is associated with the metric policy that you want to delete.")
-	mediastore_deleteMetricPolicyCmd.MarkFlagRequired("container-name")
+		mediastore_deleteMetricPolicyCmd.Flags().String("container-name", "", "The name of the container that is associated with the metric policy that you want to delete.")
+		mediastore_deleteMetricPolicyCmd.MarkFlagRequired("container-name")
+	})
 	mediastoreCmd.AddCommand(mediastore_deleteMetricPolicyCmd)
 }

@@ -12,10 +12,12 @@ var cloudformation_describeStackSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeStackSetCmd).Standalone()
+	carapace.Gen(cloudformation_describeStackSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeStackSetCmd).Standalone()
 
-	cloudformation_describeStackSetCmd.Flags().String("call-as", "", "\\[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.")
-	cloudformation_describeStackSetCmd.Flags().String("stack-set-name", "", "The name or unique ID of the StackSet whose description you want.")
-	cloudformation_describeStackSetCmd.MarkFlagRequired("stack-set-name")
+		cloudformation_describeStackSetCmd.Flags().String("call-as", "", "\\[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.")
+		cloudformation_describeStackSetCmd.Flags().String("stack-set-name", "", "The name or unique ID of the StackSet whose description you want.")
+		cloudformation_describeStackSetCmd.MarkFlagRequired("stack-set-name")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeStackSetCmd)
 }

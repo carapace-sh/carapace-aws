@@ -12,11 +12,13 @@ var billingconductor_associatePricingRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billingconductor_associatePricingRulesCmd).Standalone()
+	carapace.Gen(billingconductor_associatePricingRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_associatePricingRulesCmd).Standalone()
 
-	billingconductor_associatePricingRulesCmd.Flags().String("arn", "", "The `PricingPlanArn` that the `PricingRuleArns` are associated with.")
-	billingconductor_associatePricingRulesCmd.Flags().String("pricing-rule-arns", "", "The `PricingRuleArns` that are associated with the Pricing Plan.")
-	billingconductor_associatePricingRulesCmd.MarkFlagRequired("arn")
-	billingconductor_associatePricingRulesCmd.MarkFlagRequired("pricing-rule-arns")
+		billingconductor_associatePricingRulesCmd.Flags().String("arn", "", "The `PricingPlanArn` that the `PricingRuleArns` are associated with.")
+		billingconductor_associatePricingRulesCmd.Flags().String("pricing-rule-arns", "", "The `PricingRuleArns` that are associated with the Pricing Plan.")
+		billingconductor_associatePricingRulesCmd.MarkFlagRequired("arn")
+		billingconductor_associatePricingRulesCmd.MarkFlagRequired("pricing-rule-arns")
+	})
 	billingconductorCmd.AddCommand(billingconductor_associatePricingRulesCmd)
 }

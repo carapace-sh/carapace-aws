@@ -12,11 +12,13 @@ var glue_getJobRunsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getJobRunsCmd).Standalone()
+	carapace.Gen(glue_getJobRunsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getJobRunsCmd).Standalone()
 
-	glue_getJobRunsCmd.Flags().String("job-name", "", "The name of the job definition for which to retrieve all job runs.")
-	glue_getJobRunsCmd.Flags().String("max-results", "", "The maximum size of the response.")
-	glue_getJobRunsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
-	glue_getJobRunsCmd.MarkFlagRequired("job-name")
+		glue_getJobRunsCmd.Flags().String("job-name", "", "The name of the job definition for which to retrieve all job runs.")
+		glue_getJobRunsCmd.Flags().String("max-results", "", "The maximum size of the response.")
+		glue_getJobRunsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		glue_getJobRunsCmd.MarkFlagRequired("job-name")
+	})
 	glueCmd.AddCommand(glue_getJobRunsCmd)
 }

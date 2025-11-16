@@ -12,10 +12,12 @@ var iam_generateServiceLastAccessedDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_generateServiceLastAccessedDetailsCmd).Standalone()
+	carapace.Gen(iam_generateServiceLastAccessedDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_generateServiceLastAccessedDetailsCmd).Standalone()
 
-	iam_generateServiceLastAccessedDetailsCmd.Flags().String("arn", "", "The ARN of the IAM resource (user, group, role, or managed policy) used to generate information about when the resource was last used in an attempt to access an Amazon Web Services service.")
-	iam_generateServiceLastAccessedDetailsCmd.Flags().String("granularity", "", "The level of detail that you want to generate.")
-	iam_generateServiceLastAccessedDetailsCmd.MarkFlagRequired("arn")
+		iam_generateServiceLastAccessedDetailsCmd.Flags().String("arn", "", "The ARN of the IAM resource (user, group, role, or managed policy) used to generate information about when the resource was last used in an attempt to access an Amazon Web Services service.")
+		iam_generateServiceLastAccessedDetailsCmd.Flags().String("granularity", "", "The level of detail that you want to generate.")
+		iam_generateServiceLastAccessedDetailsCmd.MarkFlagRequired("arn")
+	})
 	iamCmd.AddCommand(iam_generateServiceLastAccessedDetailsCmd)
 }

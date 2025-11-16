@@ -12,9 +12,11 @@ var route53_deleteQueryLoggingConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_deleteQueryLoggingConfigCmd).Standalone()
+	carapace.Gen(route53_deleteQueryLoggingConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_deleteQueryLoggingConfigCmd).Standalone()
 
-	route53_deleteQueryLoggingConfigCmd.Flags().String("id", "", "The ID of the configuration that you want to delete.")
-	route53_deleteQueryLoggingConfigCmd.MarkFlagRequired("id")
+		route53_deleteQueryLoggingConfigCmd.Flags().String("id", "", "The ID of the configuration that you want to delete.")
+		route53_deleteQueryLoggingConfigCmd.MarkFlagRequired("id")
+	})
 	route53Cmd.AddCommand(route53_deleteQueryLoggingConfigCmd)
 }

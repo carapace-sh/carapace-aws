@@ -12,9 +12,11 @@ var backup_getBackupPlanFromTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_getBackupPlanFromTemplateCmd).Standalone()
+	carapace.Gen(backup_getBackupPlanFromTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_getBackupPlanFromTemplateCmd).Standalone()
 
-	backup_getBackupPlanFromTemplateCmd.Flags().String("backup-plan-template-id", "", "Uniquely identifies a stored backup plan template.")
-	backup_getBackupPlanFromTemplateCmd.MarkFlagRequired("backup-plan-template-id")
+		backup_getBackupPlanFromTemplateCmd.Flags().String("backup-plan-template-id", "", "Uniquely identifies a stored backup plan template.")
+		backup_getBackupPlanFromTemplateCmd.MarkFlagRequired("backup-plan-template-id")
+	})
 	backupCmd.AddCommand(backup_getBackupPlanFromTemplateCmd)
 }

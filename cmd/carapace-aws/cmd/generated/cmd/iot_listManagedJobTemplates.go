@@ -12,10 +12,12 @@ var iot_listManagedJobTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listManagedJobTemplatesCmd).Standalone()
+	carapace.Gen(iot_listManagedJobTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listManagedJobTemplatesCmd).Standalone()
 
-	iot_listManagedJobTemplatesCmd.Flags().String("max-results", "", "Maximum number of entries that can be returned.")
-	iot_listManagedJobTemplatesCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
-	iot_listManagedJobTemplatesCmd.Flags().String("template-name", "", "An optional parameter for template name.")
+		iot_listManagedJobTemplatesCmd.Flags().String("max-results", "", "Maximum number of entries that can be returned.")
+		iot_listManagedJobTemplatesCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+		iot_listManagedJobTemplatesCmd.Flags().String("template-name", "", "An optional parameter for template name.")
+	})
 	iotCmd.AddCommand(iot_listManagedJobTemplatesCmd)
 }

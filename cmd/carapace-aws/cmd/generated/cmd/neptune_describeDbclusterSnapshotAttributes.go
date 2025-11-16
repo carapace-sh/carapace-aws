@@ -12,9 +12,11 @@ var neptune_describeDbclusterSnapshotAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_describeDbclusterSnapshotAttributesCmd).Standalone()
+	carapace.Gen(neptune_describeDbclusterSnapshotAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_describeDbclusterSnapshotAttributesCmd).Standalone()
 
-	neptune_describeDbclusterSnapshotAttributesCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier for the DB cluster snapshot to describe the attributes for.")
-	neptune_describeDbclusterSnapshotAttributesCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+		neptune_describeDbclusterSnapshotAttributesCmd.Flags().String("dbcluster-snapshot-identifier", "", "The identifier for the DB cluster snapshot to describe the attributes for.")
+		neptune_describeDbclusterSnapshotAttributesCmd.MarkFlagRequired("dbcluster-snapshot-identifier")
+	})
 	neptuneCmd.AddCommand(neptune_describeDbclusterSnapshotAttributesCmd)
 }

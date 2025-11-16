@@ -12,9 +12,11 @@ var networkmanager_deletePeeringCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_deletePeeringCmd).Standalone()
+	carapace.Gen(networkmanager_deletePeeringCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_deletePeeringCmd).Standalone()
 
-	networkmanager_deletePeeringCmd.Flags().String("peering-id", "", "The ID of the peering connection to delete.")
-	networkmanager_deletePeeringCmd.MarkFlagRequired("peering-id")
+		networkmanager_deletePeeringCmd.Flags().String("peering-id", "", "The ID of the peering connection to delete.")
+		networkmanager_deletePeeringCmd.MarkFlagRequired("peering-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_deletePeeringCmd)
 }

@@ -12,7 +12,9 @@ var eksAuthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eksAuthCmd).Standalone()
+	carapace.Gen(eksAuthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eksAuthCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(eksAuthCmd)
 }

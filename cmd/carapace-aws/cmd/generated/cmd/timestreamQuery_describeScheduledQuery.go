@@ -12,9 +12,11 @@ var timestreamQuery_describeScheduledQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_describeScheduledQueryCmd).Standalone()
+	carapace.Gen(timestreamQuery_describeScheduledQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_describeScheduledQueryCmd).Standalone()
 
-	timestreamQuery_describeScheduledQueryCmd.Flags().String("scheduled-query-arn", "", "The ARN of the scheduled query.")
-	timestreamQuery_describeScheduledQueryCmd.MarkFlagRequired("scheduled-query-arn")
+		timestreamQuery_describeScheduledQueryCmd.Flags().String("scheduled-query-arn", "", "The ARN of the scheduled query.")
+		timestreamQuery_describeScheduledQueryCmd.MarkFlagRequired("scheduled-query-arn")
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_describeScheduledQueryCmd)
 }

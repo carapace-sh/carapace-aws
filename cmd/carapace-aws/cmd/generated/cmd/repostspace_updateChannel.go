@@ -12,14 +12,16 @@ var repostspace_updateChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_updateChannelCmd).Standalone()
+	carapace.Gen(repostspace_updateChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_updateChannelCmd).Standalone()
 
-	repostspace_updateChannelCmd.Flags().String("channel-description", "", "A description for the channel.")
-	repostspace_updateChannelCmd.Flags().String("channel-id", "", "The unique ID of the private re:Post channel.")
-	repostspace_updateChannelCmd.Flags().String("channel-name", "", "The name for the channel.")
-	repostspace_updateChannelCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
-	repostspace_updateChannelCmd.MarkFlagRequired("channel-id")
-	repostspace_updateChannelCmd.MarkFlagRequired("channel-name")
-	repostspace_updateChannelCmd.MarkFlagRequired("space-id")
+		repostspace_updateChannelCmd.Flags().String("channel-description", "", "A description for the channel.")
+		repostspace_updateChannelCmd.Flags().String("channel-id", "", "The unique ID of the private re:Post channel.")
+		repostspace_updateChannelCmd.Flags().String("channel-name", "", "The name for the channel.")
+		repostspace_updateChannelCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
+		repostspace_updateChannelCmd.MarkFlagRequired("channel-id")
+		repostspace_updateChannelCmd.MarkFlagRequired("channel-name")
+		repostspace_updateChannelCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_updateChannelCmd)
 }

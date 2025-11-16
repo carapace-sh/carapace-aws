@@ -12,13 +12,15 @@ var connect_updateParticipantRoleConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateParticipantRoleConfigCmd).Standalone()
+	carapace.Gen(connect_updateParticipantRoleConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateParticipantRoleConfigCmd).Standalone()
 
-	connect_updateParticipantRoleConfigCmd.Flags().String("channel-configuration", "", "The Amazon Connect channel you want to configure.")
-	connect_updateParticipantRoleConfigCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
-	connect_updateParticipantRoleConfigCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateParticipantRoleConfigCmd.MarkFlagRequired("channel-configuration")
-	connect_updateParticipantRoleConfigCmd.MarkFlagRequired("contact-id")
-	connect_updateParticipantRoleConfigCmd.MarkFlagRequired("instance-id")
+		connect_updateParticipantRoleConfigCmd.Flags().String("channel-configuration", "", "The Amazon Connect channel you want to configure.")
+		connect_updateParticipantRoleConfigCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
+		connect_updateParticipantRoleConfigCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateParticipantRoleConfigCmd.MarkFlagRequired("channel-configuration")
+		connect_updateParticipantRoleConfigCmd.MarkFlagRequired("contact-id")
+		connect_updateParticipantRoleConfigCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_updateParticipantRoleConfigCmd)
 }

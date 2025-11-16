@@ -12,11 +12,13 @@ var amplifybackend_deleteTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_deleteTokenCmd).Standalone()
+	carapace.Gen(amplifybackend_deleteTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_deleteTokenCmd).Standalone()
 
-	amplifybackend_deleteTokenCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_deleteTokenCmd.Flags().String("session-id", "", "The session ID.")
-	amplifybackend_deleteTokenCmd.MarkFlagRequired("app-id")
-	amplifybackend_deleteTokenCmd.MarkFlagRequired("session-id")
+		amplifybackend_deleteTokenCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_deleteTokenCmd.Flags().String("session-id", "", "The session ID.")
+		amplifybackend_deleteTokenCmd.MarkFlagRequired("app-id")
+		amplifybackend_deleteTokenCmd.MarkFlagRequired("session-id")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_deleteTokenCmd)
 }

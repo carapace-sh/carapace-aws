@@ -12,17 +12,19 @@ var qconnect_createContentAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_createContentAssociationCmd).Standalone()
+	carapace.Gen(qconnect_createContentAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_createContentAssociationCmd).Standalone()
 
-	qconnect_createContentAssociationCmd.Flags().String("association", "", "The identifier of the associated resource.")
-	qconnect_createContentAssociationCmd.Flags().String("association-type", "", "The type of association.")
-	qconnect_createContentAssociationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	qconnect_createContentAssociationCmd.Flags().String("content-id", "", "The identifier of the content.")
-	qconnect_createContentAssociationCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_createContentAssociationCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
-	qconnect_createContentAssociationCmd.MarkFlagRequired("association")
-	qconnect_createContentAssociationCmd.MarkFlagRequired("association-type")
-	qconnect_createContentAssociationCmd.MarkFlagRequired("content-id")
-	qconnect_createContentAssociationCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_createContentAssociationCmd.Flags().String("association", "", "The identifier of the associated resource.")
+		qconnect_createContentAssociationCmd.Flags().String("association-type", "", "The type of association.")
+		qconnect_createContentAssociationCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		qconnect_createContentAssociationCmd.Flags().String("content-id", "", "The identifier of the content.")
+		qconnect_createContentAssociationCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_createContentAssociationCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
+		qconnect_createContentAssociationCmd.MarkFlagRequired("association")
+		qconnect_createContentAssociationCmd.MarkFlagRequired("association-type")
+		qconnect_createContentAssociationCmd.MarkFlagRequired("content-id")
+		qconnect_createContentAssociationCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	qconnectCmd.AddCommand(qconnect_createContentAssociationCmd)
 }

@@ -12,9 +12,11 @@ var sesv2_deleteEmailIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteEmailIdentityCmd).Standalone()
+	carapace.Gen(sesv2_deleteEmailIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteEmailIdentityCmd).Standalone()
 
-	sesv2_deleteEmailIdentityCmd.Flags().String("email-identity", "", "The identity (that is, the email address or domain) to delete.")
-	sesv2_deleteEmailIdentityCmd.MarkFlagRequired("email-identity")
+		sesv2_deleteEmailIdentityCmd.Flags().String("email-identity", "", "The identity (that is, the email address or domain) to delete.")
+		sesv2_deleteEmailIdentityCmd.MarkFlagRequired("email-identity")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteEmailIdentityCmd)
 }

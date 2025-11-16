@@ -12,9 +12,11 @@ var workspacesWeb_listNetworkSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_listNetworkSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_listNetworkSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_listNetworkSettingsCmd).Standalone()
 
-	workspacesWeb_listNetworkSettingsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
-	workspacesWeb_listNetworkSettingsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		workspacesWeb_listNetworkSettingsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
+		workspacesWeb_listNetworkSettingsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_listNetworkSettingsCmd)
 }

@@ -12,11 +12,13 @@ var inspector2_getEncryptionKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_getEncryptionKeyCmd).Standalone()
+	carapace.Gen(inspector2_getEncryptionKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_getEncryptionKeyCmd).Standalone()
 
-	inspector2_getEncryptionKeyCmd.Flags().String("resource-type", "", "The resource type the key encrypts.")
-	inspector2_getEncryptionKeyCmd.Flags().String("scan-type", "", "The scan type the key encrypts.")
-	inspector2_getEncryptionKeyCmd.MarkFlagRequired("resource-type")
-	inspector2_getEncryptionKeyCmd.MarkFlagRequired("scan-type")
+		inspector2_getEncryptionKeyCmd.Flags().String("resource-type", "", "The resource type the key encrypts.")
+		inspector2_getEncryptionKeyCmd.Flags().String("scan-type", "", "The scan type the key encrypts.")
+		inspector2_getEncryptionKeyCmd.MarkFlagRequired("resource-type")
+		inspector2_getEncryptionKeyCmd.MarkFlagRequired("scan-type")
+	})
 	inspector2Cmd.AddCommand(inspector2_getEncryptionKeyCmd)
 }

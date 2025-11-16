@@ -12,11 +12,13 @@ var codeconnections_listRepositorySyncDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeconnections_listRepositorySyncDefinitionsCmd).Standalone()
+	carapace.Gen(codeconnections_listRepositorySyncDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeconnections_listRepositorySyncDefinitionsCmd).Standalone()
 
-	codeconnections_listRepositorySyncDefinitionsCmd.Flags().String("repository-link-id", "", "The ID of the repository link for the sync definition for which you want to retrieve information.")
-	codeconnections_listRepositorySyncDefinitionsCmd.Flags().String("sync-type", "", "The sync type of the repository link for the the sync definition for which you want to retrieve information.")
-	codeconnections_listRepositorySyncDefinitionsCmd.MarkFlagRequired("repository-link-id")
-	codeconnections_listRepositorySyncDefinitionsCmd.MarkFlagRequired("sync-type")
+		codeconnections_listRepositorySyncDefinitionsCmd.Flags().String("repository-link-id", "", "The ID of the repository link for the sync definition for which you want to retrieve information.")
+		codeconnections_listRepositorySyncDefinitionsCmd.Flags().String("sync-type", "", "The sync type of the repository link for the the sync definition for which you want to retrieve information.")
+		codeconnections_listRepositorySyncDefinitionsCmd.MarkFlagRequired("repository-link-id")
+		codeconnections_listRepositorySyncDefinitionsCmd.MarkFlagRequired("sync-type")
+	})
 	codeconnectionsCmd.AddCommand(codeconnections_listRepositorySyncDefinitionsCmd)
 }

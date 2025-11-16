@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd).Standalone()
 
-	pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd.Flags().String("field-path", "", "The path to the registration form field.")
-	pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd.Flags().String("registration-id", "", "The unique identifier for the registration.")
-	pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd.MarkFlagRequired("field-path")
-	pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd.MarkFlagRequired("registration-id")
+		pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd.Flags().String("field-path", "", "The path to the registration form field.")
+		pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd.Flags().String("registration-id", "", "The unique identifier for the registration.")
+		pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd.MarkFlagRequired("field-path")
+		pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd.MarkFlagRequired("registration-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteRegistrationFieldValueCmd)
 }

@@ -12,9 +12,11 @@ var codeguruSecurity_updateAccountConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruSecurity_updateAccountConfigurationCmd).Standalone()
+	carapace.Gen(codeguruSecurity_updateAccountConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruSecurity_updateAccountConfigurationCmd).Standalone()
 
-	codeguruSecurity_updateAccountConfigurationCmd.Flags().String("encryption-config", "", "The customer-managed KMS key ARN you want to use for encryption.")
-	codeguruSecurity_updateAccountConfigurationCmd.MarkFlagRequired("encryption-config")
+		codeguruSecurity_updateAccountConfigurationCmd.Flags().String("encryption-config", "", "The customer-managed KMS key ARN you want to use for encryption.")
+		codeguruSecurity_updateAccountConfigurationCmd.MarkFlagRequired("encryption-config")
+	})
 	codeguruSecurityCmd.AddCommand(codeguruSecurity_updateAccountConfigurationCmd)
 }

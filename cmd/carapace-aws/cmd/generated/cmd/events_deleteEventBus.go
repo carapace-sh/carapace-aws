@@ -12,9 +12,11 @@ var events_deleteEventBusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_deleteEventBusCmd).Standalone()
+	carapace.Gen(events_deleteEventBusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_deleteEventBusCmd).Standalone()
 
-	events_deleteEventBusCmd.Flags().String("name", "", "The name of the event bus to delete.")
-	events_deleteEventBusCmd.MarkFlagRequired("name")
+		events_deleteEventBusCmd.Flags().String("name", "", "The name of the event bus to delete.")
+		events_deleteEventBusCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_deleteEventBusCmd)
 }

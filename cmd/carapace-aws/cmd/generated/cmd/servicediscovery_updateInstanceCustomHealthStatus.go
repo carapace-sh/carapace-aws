@@ -12,13 +12,15 @@ var servicediscovery_updateInstanceCustomHealthStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_updateInstanceCustomHealthStatusCmd).Standalone()
+	carapace.Gen(servicediscovery_updateInstanceCustomHealthStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_updateInstanceCustomHealthStatusCmd).Standalone()
 
-	servicediscovery_updateInstanceCustomHealthStatusCmd.Flags().String("instance-id", "", "The ID of the instance that you want to change the health status for.")
-	servicediscovery_updateInstanceCustomHealthStatusCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service that includes the configuration for the custom health check that you want to change the status for.")
-	servicediscovery_updateInstanceCustomHealthStatusCmd.Flags().String("status", "", "The new status of the instance, `HEALTHY` or `UNHEALTHY`.")
-	servicediscovery_updateInstanceCustomHealthStatusCmd.MarkFlagRequired("instance-id")
-	servicediscovery_updateInstanceCustomHealthStatusCmd.MarkFlagRequired("service-id")
-	servicediscovery_updateInstanceCustomHealthStatusCmd.MarkFlagRequired("status")
+		servicediscovery_updateInstanceCustomHealthStatusCmd.Flags().String("instance-id", "", "The ID of the instance that you want to change the health status for.")
+		servicediscovery_updateInstanceCustomHealthStatusCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service that includes the configuration for the custom health check that you want to change the status for.")
+		servicediscovery_updateInstanceCustomHealthStatusCmd.Flags().String("status", "", "The new status of the instance, `HEALTHY` or `UNHEALTHY`.")
+		servicediscovery_updateInstanceCustomHealthStatusCmd.MarkFlagRequired("instance-id")
+		servicediscovery_updateInstanceCustomHealthStatusCmd.MarkFlagRequired("service-id")
+		servicediscovery_updateInstanceCustomHealthStatusCmd.MarkFlagRequired("status")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_updateInstanceCustomHealthStatusCmd)
 }

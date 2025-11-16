@@ -12,9 +12,11 @@ var wafRegional_deleteLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_deleteLoggingConfigurationCmd).Standalone()
+	carapace.Gen(wafRegional_deleteLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_deleteLoggingConfigurationCmd).Standalone()
 
-	wafRegional_deleteLoggingConfigurationCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the web ACL from which you want to delete the [LoggingConfiguration]().")
-	wafRegional_deleteLoggingConfigurationCmd.MarkFlagRequired("resource-arn")
+		wafRegional_deleteLoggingConfigurationCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the web ACL from which you want to delete the [LoggingConfiguration]().")
+		wafRegional_deleteLoggingConfigurationCmd.MarkFlagRequired("resource-arn")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_deleteLoggingConfigurationCmd)
 }

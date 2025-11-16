@@ -12,7 +12,9 @@ var securityIrCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityIrCmd).Standalone()
+	carapace.Gen(securityIrCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityIrCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(securityIrCmd)
 }

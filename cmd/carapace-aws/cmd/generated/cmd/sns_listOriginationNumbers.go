@@ -12,9 +12,11 @@ var sns_listOriginationNumbersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_listOriginationNumbersCmd).Standalone()
+	carapace.Gen(sns_listOriginationNumbersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_listOriginationNumbersCmd).Standalone()
 
-	sns_listOriginationNumbersCmd.Flags().String("max-results", "", "The maximum number of origination numbers to return.")
-	sns_listOriginationNumbersCmd.Flags().String("next-token", "", "Token that the previous `ListOriginationNumbers` request returns.")
+		sns_listOriginationNumbersCmd.Flags().String("max-results", "", "The maximum number of origination numbers to return.")
+		sns_listOriginationNumbersCmd.Flags().String("next-token", "", "Token that the previous `ListOriginationNumbers` request returns.")
+	})
 	snsCmd.AddCommand(sns_listOriginationNumbersCmd)
 }

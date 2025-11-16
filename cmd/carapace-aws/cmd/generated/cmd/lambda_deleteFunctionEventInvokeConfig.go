@@ -12,10 +12,12 @@ var lambda_deleteFunctionEventInvokeConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_deleteFunctionEventInvokeConfigCmd).Standalone()
+	carapace.Gen(lambda_deleteFunctionEventInvokeConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_deleteFunctionEventInvokeConfigCmd).Standalone()
 
-	lambda_deleteFunctionEventInvokeConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
-	lambda_deleteFunctionEventInvokeConfigCmd.Flags().String("qualifier", "", "A version number or alias name.")
-	lambda_deleteFunctionEventInvokeConfigCmd.MarkFlagRequired("function-name")
+		lambda_deleteFunctionEventInvokeConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function, version, or alias.")
+		lambda_deleteFunctionEventInvokeConfigCmd.Flags().String("qualifier", "", "A version number or alias name.")
+		lambda_deleteFunctionEventInvokeConfigCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_deleteFunctionEventInvokeConfigCmd)
 }

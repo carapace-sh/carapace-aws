@@ -12,9 +12,11 @@ var workmail_deleteIdentityProviderConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_deleteIdentityProviderConfigurationCmd).Standalone()
+	carapace.Gen(workmail_deleteIdentityProviderConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_deleteIdentityProviderConfigurationCmd).Standalone()
 
-	workmail_deleteIdentityProviderConfigurationCmd.Flags().String("organization-id", "", "The Organization ID.")
-	workmail_deleteIdentityProviderConfigurationCmd.MarkFlagRequired("organization-id")
+		workmail_deleteIdentityProviderConfigurationCmd.Flags().String("organization-id", "", "The Organization ID.")
+		workmail_deleteIdentityProviderConfigurationCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_deleteIdentityProviderConfigurationCmd)
 }

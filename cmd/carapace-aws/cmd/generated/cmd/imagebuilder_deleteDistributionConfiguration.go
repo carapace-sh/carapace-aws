@@ -12,9 +12,11 @@ var imagebuilder_deleteDistributionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_deleteDistributionConfigurationCmd).Standalone()
+	carapace.Gen(imagebuilder_deleteDistributionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_deleteDistributionConfigurationCmd).Standalone()
 
-	imagebuilder_deleteDistributionConfigurationCmd.Flags().String("distribution-configuration-arn", "", "The Amazon Resource Name (ARN) of the distribution configuration to delete.")
-	imagebuilder_deleteDistributionConfigurationCmd.MarkFlagRequired("distribution-configuration-arn")
+		imagebuilder_deleteDistributionConfigurationCmd.Flags().String("distribution-configuration-arn", "", "The Amazon Resource Name (ARN) of the distribution configuration to delete.")
+		imagebuilder_deleteDistributionConfigurationCmd.MarkFlagRequired("distribution-configuration-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_deleteDistributionConfigurationCmd)
 }

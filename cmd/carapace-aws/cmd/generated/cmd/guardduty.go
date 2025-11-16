@@ -12,7 +12,9 @@ var guarddutyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guarddutyCmd).Standalone()
+	carapace.Gen(guarddutyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guarddutyCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(guarddutyCmd)
 }

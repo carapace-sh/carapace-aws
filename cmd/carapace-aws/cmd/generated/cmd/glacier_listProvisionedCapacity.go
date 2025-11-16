@@ -12,9 +12,11 @@ var glacier_listProvisionedCapacityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_listProvisionedCapacityCmd).Standalone()
+	carapace.Gen(glacier_listProvisionedCapacityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_listProvisionedCapacityCmd).Standalone()
 
-	glacier_listProvisionedCapacityCmd.Flags().String("account-id", "", "The AWS account ID of the account that owns the vault.")
-	glacier_listProvisionedCapacityCmd.MarkFlagRequired("account-id")
+		glacier_listProvisionedCapacityCmd.Flags().String("account-id", "", "The AWS account ID of the account that owns the vault.")
+		glacier_listProvisionedCapacityCmd.MarkFlagRequired("account-id")
+	})
 	glacierCmd.AddCommand(glacier_listProvisionedCapacityCmd)
 }

@@ -12,11 +12,13 @@ var cleanrooms_getProtectedJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_getProtectedJobCmd).Standalone()
+	carapace.Gen(cleanrooms_getProtectedJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_getProtectedJobCmd).Standalone()
 
-	cleanrooms_getProtectedJobCmd.Flags().String("membership-identifier", "", "The identifier for a membership in a protected job instance.")
-	cleanrooms_getProtectedJobCmd.Flags().String("protected-job-identifier", "", "The identifier for the protected job instance.")
-	cleanrooms_getProtectedJobCmd.MarkFlagRequired("membership-identifier")
-	cleanrooms_getProtectedJobCmd.MarkFlagRequired("protected-job-identifier")
+		cleanrooms_getProtectedJobCmd.Flags().String("membership-identifier", "", "The identifier for a membership in a protected job instance.")
+		cleanrooms_getProtectedJobCmd.Flags().String("protected-job-identifier", "", "The identifier for the protected job instance.")
+		cleanrooms_getProtectedJobCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_getProtectedJobCmd.MarkFlagRequired("protected-job-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_getProtectedJobCmd)
 }

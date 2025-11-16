@@ -12,9 +12,11 @@ var marketplaceAgreement_describeAgreementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceAgreement_describeAgreementCmd).Standalone()
+	carapace.Gen(marketplaceAgreement_describeAgreementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceAgreement_describeAgreementCmd).Standalone()
 
-	marketplaceAgreement_describeAgreementCmd.Flags().String("agreement-id", "", "The unique identifier of the agreement.")
-	marketplaceAgreement_describeAgreementCmd.MarkFlagRequired("agreement-id")
+		marketplaceAgreement_describeAgreementCmd.Flags().String("agreement-id", "", "The unique identifier of the agreement.")
+		marketplaceAgreement_describeAgreementCmd.MarkFlagRequired("agreement-id")
+	})
 	marketplaceAgreementCmd.AddCommand(marketplaceAgreement_describeAgreementCmd)
 }

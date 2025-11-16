@@ -12,9 +12,11 @@ var mailmanager_getAddressListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_getAddressListCmd).Standalone()
+	carapace.Gen(mailmanager_getAddressListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_getAddressListCmd).Standalone()
 
-	mailmanager_getAddressListCmd.Flags().String("address-list-id", "", "The identifier of an existing address list resource to be retrieved.")
-	mailmanager_getAddressListCmd.MarkFlagRequired("address-list-id")
+		mailmanager_getAddressListCmd.Flags().String("address-list-id", "", "The identifier of an existing address list resource to be retrieved.")
+		mailmanager_getAddressListCmd.MarkFlagRequired("address-list-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_getAddressListCmd)
 }

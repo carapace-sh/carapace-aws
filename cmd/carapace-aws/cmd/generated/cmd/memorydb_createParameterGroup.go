@@ -12,13 +12,15 @@ var memorydb_createParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_createParameterGroupCmd).Standalone()
+	carapace.Gen(memorydb_createParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_createParameterGroupCmd).Standalone()
 
-	memorydb_createParameterGroupCmd.Flags().String("description", "", "An optional description of the parameter group.")
-	memorydb_createParameterGroupCmd.Flags().String("family", "", "The name of the parameter group family that the parameter group can be used with.")
-	memorydb_createParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group.")
-	memorydb_createParameterGroupCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
-	memorydb_createParameterGroupCmd.MarkFlagRequired("family")
-	memorydb_createParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+		memorydb_createParameterGroupCmd.Flags().String("description", "", "An optional description of the parameter group.")
+		memorydb_createParameterGroupCmd.Flags().String("family", "", "The name of the parameter group family that the parameter group can be used with.")
+		memorydb_createParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the parameter group.")
+		memorydb_createParameterGroupCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
+		memorydb_createParameterGroupCmd.MarkFlagRequired("family")
+		memorydb_createParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+	})
 	memorydbCmd.AddCommand(memorydb_createParameterGroupCmd)
 }

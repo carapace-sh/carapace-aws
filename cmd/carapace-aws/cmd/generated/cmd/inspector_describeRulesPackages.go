@@ -12,10 +12,12 @@ var inspector_describeRulesPackagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_describeRulesPackagesCmd).Standalone()
+	carapace.Gen(inspector_describeRulesPackagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_describeRulesPackagesCmd).Standalone()
 
-	inspector_describeRulesPackagesCmd.Flags().String("locale", "", "The locale that you want to translate a rules package description into.")
-	inspector_describeRulesPackagesCmd.Flags().String("rules-package-arns", "", "The ARN that specifies the rules package that you want to describe.")
-	inspector_describeRulesPackagesCmd.MarkFlagRequired("rules-package-arns")
+		inspector_describeRulesPackagesCmd.Flags().String("locale", "", "The locale that you want to translate a rules package description into.")
+		inspector_describeRulesPackagesCmd.Flags().String("rules-package-arns", "", "The ARN that specifies the rules package that you want to describe.")
+		inspector_describeRulesPackagesCmd.MarkFlagRequired("rules-package-arns")
+	})
 	inspectorCmd.AddCommand(inspector_describeRulesPackagesCmd)
 }

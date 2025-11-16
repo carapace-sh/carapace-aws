@@ -12,9 +12,11 @@ var macie2_listClassificationScopesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_listClassificationScopesCmd).Standalone()
+	carapace.Gen(macie2_listClassificationScopesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_listClassificationScopesCmd).Standalone()
 
-	macie2_listClassificationScopesCmd.Flags().String("name", "", "The name of the classification scope to retrieve the unique identifier for.")
-	macie2_listClassificationScopesCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+		macie2_listClassificationScopesCmd.Flags().String("name", "", "The name of the classification scope to retrieve the unique identifier for.")
+		macie2_listClassificationScopesCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+	})
 	macie2Cmd.AddCommand(macie2_listClassificationScopesCmd)
 }

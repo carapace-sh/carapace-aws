@@ -12,8 +12,10 @@ var cloudformation_describePublisherCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describePublisherCmd).Standalone()
+	carapace.Gen(cloudformation_describePublisherCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describePublisherCmd).Standalone()
 
-	cloudformation_describePublisherCmd.Flags().String("publisher-id", "", "The ID of the extension publisher.")
+		cloudformation_describePublisherCmd.Flags().String("publisher-id", "", "The ID of the extension publisher.")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describePublisherCmd)
 }

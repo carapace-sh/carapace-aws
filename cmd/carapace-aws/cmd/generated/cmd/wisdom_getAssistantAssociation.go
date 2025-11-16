@@ -12,11 +12,13 @@ var wisdom_getAssistantAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_getAssistantAssociationCmd).Standalone()
+	carapace.Gen(wisdom_getAssistantAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_getAssistantAssociationCmd).Standalone()
 
-	wisdom_getAssistantAssociationCmd.Flags().String("assistant-association-id", "", "The identifier of the assistant association.")
-	wisdom_getAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
-	wisdom_getAssistantAssociationCmd.MarkFlagRequired("assistant-association-id")
-	wisdom_getAssistantAssociationCmd.MarkFlagRequired("assistant-id")
+		wisdom_getAssistantAssociationCmd.Flags().String("assistant-association-id", "", "The identifier of the assistant association.")
+		wisdom_getAssistantAssociationCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
+		wisdom_getAssistantAssociationCmd.MarkFlagRequired("assistant-association-id")
+		wisdom_getAssistantAssociationCmd.MarkFlagRequired("assistant-id")
+	})
 	wisdomCmd.AddCommand(wisdom_getAssistantAssociationCmd)
 }

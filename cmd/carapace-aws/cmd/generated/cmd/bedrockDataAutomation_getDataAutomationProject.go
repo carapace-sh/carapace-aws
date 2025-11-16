@@ -12,10 +12,12 @@ var bedrockDataAutomation_getDataAutomationProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockDataAutomation_getDataAutomationProjectCmd).Standalone()
+	carapace.Gen(bedrockDataAutomation_getDataAutomationProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockDataAutomation_getDataAutomationProjectCmd).Standalone()
 
-	bedrockDataAutomation_getDataAutomationProjectCmd.Flags().String("project-arn", "", "ARN generated at the server side when a DataAutomationProject is created")
-	bedrockDataAutomation_getDataAutomationProjectCmd.Flags().String("project-stage", "", "Optional field to delete a specific DataAutomationProject stage")
-	bedrockDataAutomation_getDataAutomationProjectCmd.MarkFlagRequired("project-arn")
+		bedrockDataAutomation_getDataAutomationProjectCmd.Flags().String("project-arn", "", "ARN generated at the server side when a DataAutomationProject is created")
+		bedrockDataAutomation_getDataAutomationProjectCmd.Flags().String("project-stage", "", "Optional field to delete a specific DataAutomationProject stage")
+		bedrockDataAutomation_getDataAutomationProjectCmd.MarkFlagRequired("project-arn")
+	})
 	bedrockDataAutomationCmd.AddCommand(bedrockDataAutomation_getDataAutomationProjectCmd)
 }

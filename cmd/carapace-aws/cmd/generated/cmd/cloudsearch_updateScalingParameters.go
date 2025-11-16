@@ -12,11 +12,13 @@ var cloudsearch_updateScalingParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_updateScalingParametersCmd).Standalone()
+	carapace.Gen(cloudsearch_updateScalingParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_updateScalingParametersCmd).Standalone()
 
-	cloudsearch_updateScalingParametersCmd.Flags().String("domain-name", "", "")
-	cloudsearch_updateScalingParametersCmd.Flags().String("scaling-parameters", "", "")
-	cloudsearch_updateScalingParametersCmd.MarkFlagRequired("domain-name")
-	cloudsearch_updateScalingParametersCmd.MarkFlagRequired("scaling-parameters")
+		cloudsearch_updateScalingParametersCmd.Flags().String("domain-name", "", "")
+		cloudsearch_updateScalingParametersCmd.Flags().String("scaling-parameters", "", "")
+		cloudsearch_updateScalingParametersCmd.MarkFlagRequired("domain-name")
+		cloudsearch_updateScalingParametersCmd.MarkFlagRequired("scaling-parameters")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_updateScalingParametersCmd)
 }

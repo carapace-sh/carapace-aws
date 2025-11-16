@@ -12,9 +12,11 @@ var mturk_getHitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_getHitCmd).Standalone()
+	carapace.Gen(mturk_getHitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_getHitCmd).Standalone()
 
-	mturk_getHitCmd.Flags().String("hitid", "", "The ID of the HIT to be retrieved.")
-	mturk_getHitCmd.MarkFlagRequired("hitid")
+		mturk_getHitCmd.Flags().String("hitid", "", "The ID of the HIT to be retrieved.")
+		mturk_getHitCmd.MarkFlagRequired("hitid")
+	})
 	mturkCmd.AddCommand(mturk_getHitCmd)
 }

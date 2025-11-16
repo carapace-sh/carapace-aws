@@ -12,11 +12,13 @@ var connectcampaigns_startInstanceOnboardingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaigns_startInstanceOnboardingJobCmd).Standalone()
+	carapace.Gen(connectcampaigns_startInstanceOnboardingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaigns_startInstanceOnboardingJobCmd).Standalone()
 
-	connectcampaigns_startInstanceOnboardingJobCmd.Flags().String("connect-instance-id", "", "")
-	connectcampaigns_startInstanceOnboardingJobCmd.Flags().String("encryption-config", "", "")
-	connectcampaigns_startInstanceOnboardingJobCmd.MarkFlagRequired("connect-instance-id")
-	connectcampaigns_startInstanceOnboardingJobCmd.MarkFlagRequired("encryption-config")
+		connectcampaigns_startInstanceOnboardingJobCmd.Flags().String("connect-instance-id", "", "")
+		connectcampaigns_startInstanceOnboardingJobCmd.Flags().String("encryption-config", "", "")
+		connectcampaigns_startInstanceOnboardingJobCmd.MarkFlagRequired("connect-instance-id")
+		connectcampaigns_startInstanceOnboardingJobCmd.MarkFlagRequired("encryption-config")
+	})
 	connectcampaignsCmd.AddCommand(connectcampaigns_startInstanceOnboardingJobCmd)
 }

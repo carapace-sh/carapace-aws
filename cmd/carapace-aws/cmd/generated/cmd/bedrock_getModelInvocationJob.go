@@ -12,9 +12,11 @@ var bedrock_getModelInvocationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getModelInvocationJobCmd).Standalone()
+	carapace.Gen(bedrock_getModelInvocationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getModelInvocationJobCmd).Standalone()
 
-	bedrock_getModelInvocationJobCmd.Flags().String("job-identifier", "", "The Amazon Resource Name (ARN) of the batch inference job.")
-	bedrock_getModelInvocationJobCmd.MarkFlagRequired("job-identifier")
+		bedrock_getModelInvocationJobCmd.Flags().String("job-identifier", "", "The Amazon Resource Name (ARN) of the batch inference job.")
+		bedrock_getModelInvocationJobCmd.MarkFlagRequired("job-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_getModelInvocationJobCmd)
 }

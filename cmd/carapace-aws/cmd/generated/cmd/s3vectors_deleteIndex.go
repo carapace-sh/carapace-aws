@@ -12,10 +12,12 @@ var s3vectors_deleteIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3vectors_deleteIndexCmd).Standalone()
+	carapace.Gen(s3vectors_deleteIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3vectors_deleteIndexCmd).Standalone()
 
-	s3vectors_deleteIndexCmd.Flags().String("index-arn", "", "The ARN of the vector index to delete.")
-	s3vectors_deleteIndexCmd.Flags().String("index-name", "", "The name of the vector index to delete.")
-	s3vectors_deleteIndexCmd.Flags().String("vector-bucket-name", "", "The name of the vector bucket that contains the vector index.")
+		s3vectors_deleteIndexCmd.Flags().String("index-arn", "", "The ARN of the vector index to delete.")
+		s3vectors_deleteIndexCmd.Flags().String("index-name", "", "The name of the vector index to delete.")
+		s3vectors_deleteIndexCmd.Flags().String("vector-bucket-name", "", "The name of the vector bucket that contains the vector index.")
+	})
 	s3vectorsCmd.AddCommand(s3vectors_deleteIndexCmd)
 }

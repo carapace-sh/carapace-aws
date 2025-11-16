@@ -12,11 +12,13 @@ var ds_enableRadiusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_enableRadiusCmd).Standalone()
+	carapace.Gen(ds_enableRadiusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_enableRadiusCmd).Standalone()
 
-	ds_enableRadiusCmd.Flags().String("directory-id", "", "The identifier of the directory for which to enable MFA.")
-	ds_enableRadiusCmd.Flags().String("radius-settings", "", "A [RadiusSettings]() object that contains information about the RADIUS server.")
-	ds_enableRadiusCmd.MarkFlagRequired("directory-id")
-	ds_enableRadiusCmd.MarkFlagRequired("radius-settings")
+		ds_enableRadiusCmd.Flags().String("directory-id", "", "The identifier of the directory for which to enable MFA.")
+		ds_enableRadiusCmd.Flags().String("radius-settings", "", "A [RadiusSettings]() object that contains information about the RADIUS server.")
+		ds_enableRadiusCmd.MarkFlagRequired("directory-id")
+		ds_enableRadiusCmd.MarkFlagRequired("radius-settings")
+	})
 	dsCmd.AddCommand(ds_enableRadiusCmd)
 }

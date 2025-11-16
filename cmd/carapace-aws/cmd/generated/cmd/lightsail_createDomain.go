@@ -12,10 +12,12 @@ var lightsail_createDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_createDomainCmd).Standalone()
+	carapace.Gen(lightsail_createDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_createDomainCmd).Standalone()
 
-	lightsail_createDomainCmd.Flags().String("domain-name", "", "The domain name to manage (`example.com`).")
-	lightsail_createDomainCmd.Flags().String("tags", "", "The tag keys and optional values to add to the resource during create.")
-	lightsail_createDomainCmd.MarkFlagRequired("domain-name")
+		lightsail_createDomainCmd.Flags().String("domain-name", "", "The domain name to manage (`example.com`).")
+		lightsail_createDomainCmd.Flags().String("tags", "", "The tag keys and optional values to add to the resource during create.")
+		lightsail_createDomainCmd.MarkFlagRequired("domain-name")
+	})
 	lightsailCmd.AddCommand(lightsail_createDomainCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_stopOptimizationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopOptimizationJobCmd).Standalone()
+	carapace.Gen(sagemaker_stopOptimizationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopOptimizationJobCmd).Standalone()
 
-	sagemaker_stopOptimizationJobCmd.Flags().String("optimization-job-name", "", "The name that you assigned to the optimization job.")
-	sagemaker_stopOptimizationJobCmd.MarkFlagRequired("optimization-job-name")
+		sagemaker_stopOptimizationJobCmd.Flags().String("optimization-job-name", "", "The name that you assigned to the optimization job.")
+		sagemaker_stopOptimizationJobCmd.MarkFlagRequired("optimization-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopOptimizationJobCmd)
 }

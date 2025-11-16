@@ -12,9 +12,11 @@ var greengrass_getCoreDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getCoreDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_getCoreDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getCoreDefinitionCmd).Standalone()
 
-	greengrass_getCoreDefinitionCmd.Flags().String("core-definition-id", "", "The ID of the core definition.")
-	greengrass_getCoreDefinitionCmd.MarkFlagRequired("core-definition-id")
+		greengrass_getCoreDefinitionCmd.Flags().String("core-definition-id", "", "The ID of the core definition.")
+		greengrass_getCoreDefinitionCmd.MarkFlagRequired("core-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getCoreDefinitionCmd)
 }

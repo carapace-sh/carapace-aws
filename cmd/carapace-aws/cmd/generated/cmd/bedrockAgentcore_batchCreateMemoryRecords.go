@@ -12,12 +12,14 @@ var bedrockAgentcore_batchCreateMemoryRecordsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_batchCreateMemoryRecordsCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_batchCreateMemoryRecordsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_batchCreateMemoryRecordsCmd).Standalone()
 
-	bedrockAgentcore_batchCreateMemoryRecordsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure idempotent processing of the batch request.")
-	bedrockAgentcore_batchCreateMemoryRecordsCmd.Flags().String("memory-id", "", "The unique ID of the memory resource where records will be created.")
-	bedrockAgentcore_batchCreateMemoryRecordsCmd.Flags().String("records", "", "A list of memory record creation inputs to be processed in the batch operation.")
-	bedrockAgentcore_batchCreateMemoryRecordsCmd.MarkFlagRequired("memory-id")
-	bedrockAgentcore_batchCreateMemoryRecordsCmd.MarkFlagRequired("records")
+		bedrockAgentcore_batchCreateMemoryRecordsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier to ensure idempotent processing of the batch request.")
+		bedrockAgentcore_batchCreateMemoryRecordsCmd.Flags().String("memory-id", "", "The unique ID of the memory resource where records will be created.")
+		bedrockAgentcore_batchCreateMemoryRecordsCmd.Flags().String("records", "", "A list of memory record creation inputs to be processed in the batch operation.")
+		bedrockAgentcore_batchCreateMemoryRecordsCmd.MarkFlagRequired("memory-id")
+		bedrockAgentcore_batchCreateMemoryRecordsCmd.MarkFlagRequired("records")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_batchCreateMemoryRecordsCmd)
 }

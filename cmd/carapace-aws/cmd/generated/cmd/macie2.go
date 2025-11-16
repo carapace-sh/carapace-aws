@@ -12,7 +12,9 @@ var macie2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2Cmd).Standalone()
+	carapace.Gen(macie2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2Cmd).Standalone()
 
+	})
 	rootCmd.AddCommand(macie2Cmd)
 }

@@ -12,9 +12,11 @@ var events_describeArchiveCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_describeArchiveCmd).Standalone()
+	carapace.Gen(events_describeArchiveCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_describeArchiveCmd).Standalone()
 
-	events_describeArchiveCmd.Flags().String("archive-name", "", "The name of the archive to retrieve.")
-	events_describeArchiveCmd.MarkFlagRequired("archive-name")
+		events_describeArchiveCmd.Flags().String("archive-name", "", "The name of the archive to retrieve.")
+		events_describeArchiveCmd.MarkFlagRequired("archive-name")
+	})
 	eventsCmd.AddCommand(events_describeArchiveCmd)
 }

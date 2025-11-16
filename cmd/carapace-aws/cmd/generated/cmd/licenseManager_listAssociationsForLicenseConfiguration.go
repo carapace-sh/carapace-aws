@@ -12,11 +12,13 @@ var licenseManager_listAssociationsForLicenseConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_listAssociationsForLicenseConfigurationCmd).Standalone()
+	carapace.Gen(licenseManager_listAssociationsForLicenseConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_listAssociationsForLicenseConfigurationCmd).Standalone()
 
-	licenseManager_listAssociationsForLicenseConfigurationCmd.Flags().String("license-configuration-arn", "", "Amazon Resource Name (ARN) of a license configuration.")
-	licenseManager_listAssociationsForLicenseConfigurationCmd.Flags().String("max-results", "", "Maximum number of results to return in a single call.")
-	licenseManager_listAssociationsForLicenseConfigurationCmd.Flags().String("next-token", "", "Token for the next set of results.")
-	licenseManager_listAssociationsForLicenseConfigurationCmd.MarkFlagRequired("license-configuration-arn")
+		licenseManager_listAssociationsForLicenseConfigurationCmd.Flags().String("license-configuration-arn", "", "Amazon Resource Name (ARN) of a license configuration.")
+		licenseManager_listAssociationsForLicenseConfigurationCmd.Flags().String("max-results", "", "Maximum number of results to return in a single call.")
+		licenseManager_listAssociationsForLicenseConfigurationCmd.Flags().String("next-token", "", "Token for the next set of results.")
+		licenseManager_listAssociationsForLicenseConfigurationCmd.MarkFlagRequired("license-configuration-arn")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_listAssociationsForLicenseConfigurationCmd)
 }

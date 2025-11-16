@@ -12,9 +12,11 @@ var devopsGuru_describeOrganizationHealthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeOrganizationHealthCmd).Standalone()
+	carapace.Gen(devopsGuru_describeOrganizationHealthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeOrganizationHealthCmd).Standalone()
 
-	devopsGuru_describeOrganizationHealthCmd.Flags().String("account-ids", "", "The ID of the Amazon Web Services account.")
-	devopsGuru_describeOrganizationHealthCmd.Flags().String("organizational-unit-ids", "", "The ID of the organizational unit.")
+		devopsGuru_describeOrganizationHealthCmd.Flags().String("account-ids", "", "The ID of the Amazon Web Services account.")
+		devopsGuru_describeOrganizationHealthCmd.Flags().String("organizational-unit-ids", "", "The ID of the organizational unit.")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeOrganizationHealthCmd)
 }

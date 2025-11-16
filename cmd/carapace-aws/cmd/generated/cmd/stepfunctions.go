@@ -12,7 +12,9 @@ var stepfunctionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctionsCmd).Standalone()
+	carapace.Gen(stepfunctionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctionsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(stepfunctionsCmd)
 }

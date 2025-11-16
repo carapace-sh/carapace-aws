@@ -12,13 +12,15 @@ var glacier_completeVaultLockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_completeVaultLockCmd).Standalone()
+	carapace.Gen(glacier_completeVaultLockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_completeVaultLockCmd).Standalone()
 
-	glacier_completeVaultLockCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
-	glacier_completeVaultLockCmd.Flags().String("lock-id", "", "The `lockId` value is the lock ID obtained from a [InitiateVaultLock]() request.")
-	glacier_completeVaultLockCmd.Flags().String("vault-name", "", "The name of the vault.")
-	glacier_completeVaultLockCmd.MarkFlagRequired("account-id")
-	glacier_completeVaultLockCmd.MarkFlagRequired("lock-id")
-	glacier_completeVaultLockCmd.MarkFlagRequired("vault-name")
+		glacier_completeVaultLockCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
+		glacier_completeVaultLockCmd.Flags().String("lock-id", "", "The `lockId` value is the lock ID obtained from a [InitiateVaultLock]() request.")
+		glacier_completeVaultLockCmd.Flags().String("vault-name", "", "The name of the vault.")
+		glacier_completeVaultLockCmd.MarkFlagRequired("account-id")
+		glacier_completeVaultLockCmd.MarkFlagRequired("lock-id")
+		glacier_completeVaultLockCmd.MarkFlagRequired("vault-name")
+	})
 	glacierCmd.AddCommand(glacier_completeVaultLockCmd)
 }

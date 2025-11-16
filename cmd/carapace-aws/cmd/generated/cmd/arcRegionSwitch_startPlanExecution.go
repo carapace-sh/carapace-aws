@@ -12,16 +12,18 @@ var arcRegionSwitch_startPlanExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcRegionSwitch_startPlanExecutionCmd).Standalone()
+	carapace.Gen(arcRegionSwitch_startPlanExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcRegionSwitch_startPlanExecutionCmd).Standalone()
 
-	arcRegionSwitch_startPlanExecutionCmd.Flags().String("action", "", "The action to perform.")
-	arcRegionSwitch_startPlanExecutionCmd.Flags().String("comment", "", "An optional comment explaining why the plan execution is being started.")
-	arcRegionSwitch_startPlanExecutionCmd.Flags().String("latest-version", "", "A boolean value indicating whether to use the latest version of the plan.")
-	arcRegionSwitch_startPlanExecutionCmd.Flags().String("mode", "", "The plan execution mode.")
-	arcRegionSwitch_startPlanExecutionCmd.Flags().String("plan-arn", "", "The Amazon Resource Name (ARN) of the plan to execute.")
-	arcRegionSwitch_startPlanExecutionCmd.Flags().String("target-region", "", "The Amazon Web Services Region to target with this execution.")
-	arcRegionSwitch_startPlanExecutionCmd.MarkFlagRequired("action")
-	arcRegionSwitch_startPlanExecutionCmd.MarkFlagRequired("plan-arn")
-	arcRegionSwitch_startPlanExecutionCmd.MarkFlagRequired("target-region")
+		arcRegionSwitch_startPlanExecutionCmd.Flags().String("action", "", "The action to perform.")
+		arcRegionSwitch_startPlanExecutionCmd.Flags().String("comment", "", "An optional comment explaining why the plan execution is being started.")
+		arcRegionSwitch_startPlanExecutionCmd.Flags().String("latest-version", "", "A boolean value indicating whether to use the latest version of the plan.")
+		arcRegionSwitch_startPlanExecutionCmd.Flags().String("mode", "", "The plan execution mode.")
+		arcRegionSwitch_startPlanExecutionCmd.Flags().String("plan-arn", "", "The Amazon Resource Name (ARN) of the plan to execute.")
+		arcRegionSwitch_startPlanExecutionCmd.Flags().String("target-region", "", "The Amazon Web Services Region to target with this execution.")
+		arcRegionSwitch_startPlanExecutionCmd.MarkFlagRequired("action")
+		arcRegionSwitch_startPlanExecutionCmd.MarkFlagRequired("plan-arn")
+		arcRegionSwitch_startPlanExecutionCmd.MarkFlagRequired("target-region")
+	})
 	arcRegionSwitchCmd.AddCommand(arcRegionSwitch_startPlanExecutionCmd)
 }

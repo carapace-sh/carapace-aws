@@ -12,9 +12,11 @@ var autoscaling_deleteLaunchConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_deleteLaunchConfigurationCmd).Standalone()
+	carapace.Gen(autoscaling_deleteLaunchConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_deleteLaunchConfigurationCmd).Standalone()
 
-	autoscaling_deleteLaunchConfigurationCmd.Flags().String("launch-configuration-name", "", "The name of the launch configuration.")
-	autoscaling_deleteLaunchConfigurationCmd.MarkFlagRequired("launch-configuration-name")
+		autoscaling_deleteLaunchConfigurationCmd.Flags().String("launch-configuration-name", "", "The name of the launch configuration.")
+		autoscaling_deleteLaunchConfigurationCmd.MarkFlagRequired("launch-configuration-name")
+	})
 	autoscalingCmd.AddCommand(autoscaling_deleteLaunchConfigurationCmd)
 }

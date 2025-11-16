@@ -12,8 +12,10 @@ var neptunedata_getRdfgraphSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_getRdfgraphSummaryCmd).Standalone()
+	carapace.Gen(neptunedata_getRdfgraphSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_getRdfgraphSummaryCmd).Standalone()
 
-	neptunedata_getRdfgraphSummaryCmd.Flags().String("mode", "", "Mode can take one of two values: `BASIC` (the default), and `DETAILED`.")
+		neptunedata_getRdfgraphSummaryCmd.Flags().String("mode", "", "Mode can take one of two values: `BASIC` (the default), and `DETAILED`.")
+	})
 	neptunedataCmd.AddCommand(neptunedata_getRdfgraphSummaryCmd)
 }

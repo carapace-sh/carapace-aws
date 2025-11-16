@@ -12,12 +12,14 @@ var networkmanager_getSitesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getSitesCmd).Standalone()
+	carapace.Gen(networkmanager_getSitesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getSitesCmd).Standalone()
 
-	networkmanager_getSitesCmd.Flags().String("global-network-id", "", "The ID of the global network.")
-	networkmanager_getSitesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	networkmanager_getSitesCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	networkmanager_getSitesCmd.Flags().String("site-ids", "", "One or more site IDs.")
-	networkmanager_getSitesCmd.MarkFlagRequired("global-network-id")
+		networkmanager_getSitesCmd.Flags().String("global-network-id", "", "The ID of the global network.")
+		networkmanager_getSitesCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		networkmanager_getSitesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		networkmanager_getSitesCmd.Flags().String("site-ids", "", "One or more site IDs.")
+		networkmanager_getSitesCmd.MarkFlagRequired("global-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getSitesCmd)
 }

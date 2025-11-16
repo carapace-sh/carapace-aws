@@ -12,10 +12,12 @@ var panorama_describeNodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_describeNodeCmd).Standalone()
+	carapace.Gen(panorama_describeNodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_describeNodeCmd).Standalone()
 
-	panorama_describeNodeCmd.Flags().String("node-id", "", "The node's ID.")
-	panorama_describeNodeCmd.Flags().String("owner-account", "", "The account ID of the node's owner.")
-	panorama_describeNodeCmd.MarkFlagRequired("node-id")
+		panorama_describeNodeCmd.Flags().String("node-id", "", "The node's ID.")
+		panorama_describeNodeCmd.Flags().String("owner-account", "", "The account ID of the node's owner.")
+		panorama_describeNodeCmd.MarkFlagRequired("node-id")
+	})
 	panoramaCmd.AddCommand(panorama_describeNodeCmd)
 }

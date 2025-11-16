@@ -12,9 +12,11 @@ var panorama_describeNodeFromTemplateJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_describeNodeFromTemplateJobCmd).Standalone()
+	carapace.Gen(panorama_describeNodeFromTemplateJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_describeNodeFromTemplateJobCmd).Standalone()
 
-	panorama_describeNodeFromTemplateJobCmd.Flags().String("job-id", "", "The job's ID.")
-	panorama_describeNodeFromTemplateJobCmd.MarkFlagRequired("job-id")
+		panorama_describeNodeFromTemplateJobCmd.Flags().String("job-id", "", "The job's ID.")
+		panorama_describeNodeFromTemplateJobCmd.MarkFlagRequired("job-id")
+	})
 	panoramaCmd.AddCommand(panorama_describeNodeFromTemplateJobCmd)
 }

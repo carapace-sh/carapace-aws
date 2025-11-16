@@ -12,11 +12,13 @@ var rbin_lockRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rbin_lockRuleCmd).Standalone()
+	carapace.Gen(rbin_lockRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rbin_lockRuleCmd).Standalone()
 
-	rbin_lockRuleCmd.Flags().String("identifier", "", "The unique ID of the retention rule.")
-	rbin_lockRuleCmd.Flags().String("lock-configuration", "", "Information about the retention rule lock configuration.")
-	rbin_lockRuleCmd.MarkFlagRequired("identifier")
-	rbin_lockRuleCmd.MarkFlagRequired("lock-configuration")
+		rbin_lockRuleCmd.Flags().String("identifier", "", "The unique ID of the retention rule.")
+		rbin_lockRuleCmd.Flags().String("lock-configuration", "", "Information about the retention rule lock configuration.")
+		rbin_lockRuleCmd.MarkFlagRequired("identifier")
+		rbin_lockRuleCmd.MarkFlagRequired("lock-configuration")
+	})
 	rbinCmd.AddCommand(rbin_lockRuleCmd)
 }

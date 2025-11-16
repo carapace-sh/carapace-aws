@@ -12,9 +12,11 @@ var detective_listGraphsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_listGraphsCmd).Standalone()
+	carapace.Gen(detective_listGraphsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_listGraphsCmd).Standalone()
 
-	detective_listGraphsCmd.Flags().String("max-results", "", "The maximum number of graphs to return at a time.")
-	detective_listGraphsCmd.Flags().String("next-token", "", "For requests to get the next page of results, the pagination token that was returned with the previous set of results.")
+		detective_listGraphsCmd.Flags().String("max-results", "", "The maximum number of graphs to return at a time.")
+		detective_listGraphsCmd.Flags().String("next-token", "", "For requests to get the next page of results, the pagination token that was returned with the previous set of results.")
+	})
 	detectiveCmd.AddCommand(detective_listGraphsCmd)
 }

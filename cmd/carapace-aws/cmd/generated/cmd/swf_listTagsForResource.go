@@ -12,9 +12,11 @@ var swf_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_listTagsForResourceCmd).Standalone()
+	carapace.Gen(swf_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_listTagsForResourceCmd).Standalone()
 
-	swf_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the Amazon SWF domain.")
-	swf_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		swf_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the Amazon SWF domain.")
+		swf_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	swfCmd.AddCommand(swf_listTagsForResourceCmd)
 }

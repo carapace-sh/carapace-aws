@@ -12,11 +12,13 @@ var connectparticipant_cancelParticipantAuthenticationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectparticipant_cancelParticipantAuthenticationCmd).Standalone()
+	carapace.Gen(connectparticipant_cancelParticipantAuthenticationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectparticipant_cancelParticipantAuthenticationCmd).Standalone()
 
-	connectparticipant_cancelParticipantAuthenticationCmd.Flags().String("connection-token", "", "The authentication token associated with the participant's connection.")
-	connectparticipant_cancelParticipantAuthenticationCmd.Flags().String("session-id", "", "The `sessionId` provided in the `authenticationInitiated` event.")
-	connectparticipant_cancelParticipantAuthenticationCmd.MarkFlagRequired("connection-token")
-	connectparticipant_cancelParticipantAuthenticationCmd.MarkFlagRequired("session-id")
+		connectparticipant_cancelParticipantAuthenticationCmd.Flags().String("connection-token", "", "The authentication token associated with the participant's connection.")
+		connectparticipant_cancelParticipantAuthenticationCmd.Flags().String("session-id", "", "The `sessionId` provided in the `authenticationInitiated` event.")
+		connectparticipant_cancelParticipantAuthenticationCmd.MarkFlagRequired("connection-token")
+		connectparticipant_cancelParticipantAuthenticationCmd.MarkFlagRequired("session-id")
+	})
 	connectparticipantCmd.AddCommand(connectparticipant_cancelParticipantAuthenticationCmd)
 }

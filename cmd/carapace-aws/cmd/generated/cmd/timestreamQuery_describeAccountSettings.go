@@ -12,7 +12,9 @@ var timestreamQuery_describeAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_describeAccountSettingsCmd).Standalone()
+	carapace.Gen(timestreamQuery_describeAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_describeAccountSettingsCmd).Standalone()
 
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_describeAccountSettingsCmd)
 }

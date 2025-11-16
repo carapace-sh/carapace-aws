@@ -12,11 +12,13 @@ var resourceExplorer2_listIndexesForMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_listIndexesForMembersCmd).Standalone()
+	carapace.Gen(resourceExplorer2_listIndexesForMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_listIndexesForMembersCmd).Standalone()
 
-	resourceExplorer2_listIndexesForMembersCmd.Flags().String("account-id-list", "", "The account IDs will limit the output to only indexes from these accounts.")
-	resourceExplorer2_listIndexesForMembersCmd.Flags().String("max-results", "", "The maximum number of results that you want included on each page of the response.")
-	resourceExplorer2_listIndexesForMembersCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
-	resourceExplorer2_listIndexesForMembersCmd.MarkFlagRequired("account-id-list")
+		resourceExplorer2_listIndexesForMembersCmd.Flags().String("account-id-list", "", "The account IDs will limit the output to only indexes from these accounts.")
+		resourceExplorer2_listIndexesForMembersCmd.Flags().String("max-results", "", "The maximum number of results that you want included on each page of the response.")
+		resourceExplorer2_listIndexesForMembersCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		resourceExplorer2_listIndexesForMembersCmd.MarkFlagRequired("account-id-list")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_listIndexesForMembersCmd)
 }

@@ -12,9 +12,11 @@ var comprehend_describeDominantLanguageDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeDominantLanguageDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_describeDominantLanguageDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeDominantLanguageDetectionJobCmd).Standalone()
 
-	comprehend_describeDominantLanguageDetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend generated for the job.")
-	comprehend_describeDominantLanguageDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_describeDominantLanguageDetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend generated for the job.")
+		comprehend_describeDominantLanguageDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_describeDominantLanguageDetectionJobCmd)
 }

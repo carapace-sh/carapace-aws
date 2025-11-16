@@ -12,9 +12,11 @@ var iotsitewise_describeDashboardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeDashboardCmd).Standalone()
+	carapace.Gen(iotsitewise_describeDashboardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeDashboardCmd).Standalone()
 
-	iotsitewise_describeDashboardCmd.Flags().String("dashboard-id", "", "The ID of the dashboard.")
-	iotsitewise_describeDashboardCmd.MarkFlagRequired("dashboard-id")
+		iotsitewise_describeDashboardCmd.Flags().String("dashboard-id", "", "The ID of the dashboard.")
+		iotsitewise_describeDashboardCmd.MarkFlagRequired("dashboard-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeDashboardCmd)
 }

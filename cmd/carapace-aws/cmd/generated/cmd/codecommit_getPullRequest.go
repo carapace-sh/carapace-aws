@@ -12,9 +12,11 @@ var codecommit_getPullRequestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_getPullRequestCmd).Standalone()
+	carapace.Gen(codecommit_getPullRequestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_getPullRequestCmd).Standalone()
 
-	codecommit_getPullRequestCmd.Flags().String("pull-request-id", "", "The system-generated ID of the pull request.")
-	codecommit_getPullRequestCmd.MarkFlagRequired("pull-request-id")
+		codecommit_getPullRequestCmd.Flags().String("pull-request-id", "", "The system-generated ID of the pull request.")
+		codecommit_getPullRequestCmd.MarkFlagRequired("pull-request-id")
+	})
 	codecommitCmd.AddCommand(codecommit_getPullRequestCmd)
 }

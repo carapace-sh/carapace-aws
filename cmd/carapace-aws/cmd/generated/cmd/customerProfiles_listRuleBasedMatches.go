@@ -12,11 +12,13 @@ var customerProfiles_listRuleBasedMatchesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_listRuleBasedMatchesCmd).Standalone()
+	carapace.Gen(customerProfiles_listRuleBasedMatchesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_listRuleBasedMatchesCmd).Standalone()
 
-	customerProfiles_listRuleBasedMatchesCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_listRuleBasedMatchesCmd.Flags().String("max-results", "", "The maximum number of `MatchIds` returned per page.")
-	customerProfiles_listRuleBasedMatchesCmd.Flags().String("next-token", "", "The pagination token from the previous `ListRuleBasedMatches` API call.")
-	customerProfiles_listRuleBasedMatchesCmd.MarkFlagRequired("domain-name")
+		customerProfiles_listRuleBasedMatchesCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_listRuleBasedMatchesCmd.Flags().String("max-results", "", "The maximum number of `MatchIds` returned per page.")
+		customerProfiles_listRuleBasedMatchesCmd.Flags().String("next-token", "", "The pagination token from the previous `ListRuleBasedMatches` API call.")
+		customerProfiles_listRuleBasedMatchesCmd.MarkFlagRequired("domain-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_listRuleBasedMatchesCmd)
 }

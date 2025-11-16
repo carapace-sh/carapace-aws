@@ -12,10 +12,12 @@ var pinpointEmail_putEmailIdentityDkimAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_putEmailIdentityDkimAttributesCmd).Standalone()
+	carapace.Gen(pinpointEmail_putEmailIdentityDkimAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_putEmailIdentityDkimAttributesCmd).Standalone()
 
-	pinpointEmail_putEmailIdentityDkimAttributesCmd.Flags().String("email-identity", "", "The email identity that you want to change the DKIM settings for.")
-	pinpointEmail_putEmailIdentityDkimAttributesCmd.Flags().String("signing-enabled", "", "Sets the DKIM signing configuration for the identity.")
-	pinpointEmail_putEmailIdentityDkimAttributesCmd.MarkFlagRequired("email-identity")
+		pinpointEmail_putEmailIdentityDkimAttributesCmd.Flags().String("email-identity", "", "The email identity that you want to change the DKIM settings for.")
+		pinpointEmail_putEmailIdentityDkimAttributesCmd.Flags().String("signing-enabled", "", "Sets the DKIM signing configuration for the identity.")
+		pinpointEmail_putEmailIdentityDkimAttributesCmd.MarkFlagRequired("email-identity")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_putEmailIdentityDkimAttributesCmd)
 }

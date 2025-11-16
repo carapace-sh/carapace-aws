@@ -12,11 +12,13 @@ var notifications_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_tagResourceCmd).Standalone()
+	carapace.Gen(notifications_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_tagResourceCmd).Standalone()
 
-	notifications_tagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) to use to tag a resource.")
-	notifications_tagResourceCmd.Flags().String("tags", "", "A map of tags assigned to a resource.")
-	notifications_tagResourceCmd.MarkFlagRequired("arn")
-	notifications_tagResourceCmd.MarkFlagRequired("tags")
+		notifications_tagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) to use to tag a resource.")
+		notifications_tagResourceCmd.Flags().String("tags", "", "A map of tags assigned to a resource.")
+		notifications_tagResourceCmd.MarkFlagRequired("arn")
+		notifications_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	notificationsCmd.AddCommand(notifications_tagResourceCmd)
 }

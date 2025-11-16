@@ -12,9 +12,11 @@ var personalize_deleteSolutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_deleteSolutionCmd).Standalone()
+	carapace.Gen(personalize_deleteSolutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_deleteSolutionCmd).Standalone()
 
-	personalize_deleteSolutionCmd.Flags().String("solution-arn", "", "The ARN of the solution to delete.")
-	personalize_deleteSolutionCmd.MarkFlagRequired("solution-arn")
+		personalize_deleteSolutionCmd.Flags().String("solution-arn", "", "The ARN of the solution to delete.")
+		personalize_deleteSolutionCmd.MarkFlagRequired("solution-arn")
+	})
 	personalizeCmd.AddCommand(personalize_deleteSolutionCmd)
 }

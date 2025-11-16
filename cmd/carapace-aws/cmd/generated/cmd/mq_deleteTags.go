@@ -12,11 +12,13 @@ var mq_deleteTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mq_deleteTagsCmd).Standalone()
+	carapace.Gen(mq_deleteTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mq_deleteTagsCmd).Standalone()
 
-	mq_deleteTagsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource tag.")
-	mq_deleteTagsCmd.Flags().String("tag-keys", "", "An array of tag keys to delete")
-	mq_deleteTagsCmd.MarkFlagRequired("resource-arn")
-	mq_deleteTagsCmd.MarkFlagRequired("tag-keys")
+		mq_deleteTagsCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource tag.")
+		mq_deleteTagsCmd.Flags().String("tag-keys", "", "An array of tag keys to delete")
+		mq_deleteTagsCmd.MarkFlagRequired("resource-arn")
+		mq_deleteTagsCmd.MarkFlagRequired("tag-keys")
+	})
 	mqCmd.AddCommand(mq_deleteTagsCmd)
 }

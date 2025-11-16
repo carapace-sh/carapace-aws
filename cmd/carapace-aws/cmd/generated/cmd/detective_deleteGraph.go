@@ -12,9 +12,11 @@ var detective_deleteGraphCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_deleteGraphCmd).Standalone()
+	carapace.Gen(detective_deleteGraphCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_deleteGraphCmd).Standalone()
 
-	detective_deleteGraphCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph to disable.")
-	detective_deleteGraphCmd.MarkFlagRequired("graph-arn")
+		detective_deleteGraphCmd.Flags().String("graph-arn", "", "The ARN of the behavior graph to disable.")
+		detective_deleteGraphCmd.MarkFlagRequired("graph-arn")
+	})
 	detectiveCmd.AddCommand(detective_deleteGraphCmd)
 }

@@ -12,9 +12,11 @@ var gamelift_deleteMatchmakingRuleSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteMatchmakingRuleSetCmd).Standalone()
+	carapace.Gen(gamelift_deleteMatchmakingRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteMatchmakingRuleSetCmd).Standalone()
 
-	gamelift_deleteMatchmakingRuleSetCmd.Flags().String("name", "", "A unique identifier for the matchmaking rule set to be deleted.")
-	gamelift_deleteMatchmakingRuleSetCmd.MarkFlagRequired("name")
+		gamelift_deleteMatchmakingRuleSetCmd.Flags().String("name", "", "A unique identifier for the matchmaking rule set to be deleted.")
+		gamelift_deleteMatchmakingRuleSetCmd.MarkFlagRequired("name")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteMatchmakingRuleSetCmd)
 }

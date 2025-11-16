@@ -12,9 +12,11 @@ var omics_getSequenceStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getSequenceStoreCmd).Standalone()
+	carapace.Gen(omics_getSequenceStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getSequenceStoreCmd).Standalone()
 
-	omics_getSequenceStoreCmd.Flags().String("id", "", "The store's ID.")
-	omics_getSequenceStoreCmd.MarkFlagRequired("id")
+		omics_getSequenceStoreCmd.Flags().String("id", "", "The store's ID.")
+		omics_getSequenceStoreCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_getSequenceStoreCmd)
 }

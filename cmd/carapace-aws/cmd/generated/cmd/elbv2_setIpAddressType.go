@@ -12,11 +12,13 @@ var elbv2_setIpAddressTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_setIpAddressTypeCmd).Standalone()
+	carapace.Gen(elbv2_setIpAddressTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_setIpAddressTypeCmd).Standalone()
 
-	elbv2_setIpAddressTypeCmd.Flags().String("ip-address-type", "", "The IP address type.")
-	elbv2_setIpAddressTypeCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
-	elbv2_setIpAddressTypeCmd.MarkFlagRequired("ip-address-type")
-	elbv2_setIpAddressTypeCmd.MarkFlagRequired("load-balancer-arn")
+		elbv2_setIpAddressTypeCmd.Flags().String("ip-address-type", "", "The IP address type.")
+		elbv2_setIpAddressTypeCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
+		elbv2_setIpAddressTypeCmd.MarkFlagRequired("ip-address-type")
+		elbv2_setIpAddressTypeCmd.MarkFlagRequired("load-balancer-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_setIpAddressTypeCmd)
 }

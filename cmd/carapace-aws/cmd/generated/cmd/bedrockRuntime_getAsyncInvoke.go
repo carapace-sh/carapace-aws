@@ -12,9 +12,11 @@ var bedrockRuntime_getAsyncInvokeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockRuntime_getAsyncInvokeCmd).Standalone()
+	carapace.Gen(bedrockRuntime_getAsyncInvokeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockRuntime_getAsyncInvokeCmd).Standalone()
 
-	bedrockRuntime_getAsyncInvokeCmd.Flags().String("invocation-arn", "", "The invocation's ARN.")
-	bedrockRuntime_getAsyncInvokeCmd.MarkFlagRequired("invocation-arn")
+		bedrockRuntime_getAsyncInvokeCmd.Flags().String("invocation-arn", "", "The invocation's ARN.")
+		bedrockRuntime_getAsyncInvokeCmd.MarkFlagRequired("invocation-arn")
+	})
 	bedrockRuntimeCmd.AddCommand(bedrockRuntime_getAsyncInvokeCmd)
 }

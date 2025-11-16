@@ -12,11 +12,13 @@ var qbusiness_cancelSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_cancelSubscriptionCmd).Standalone()
+	carapace.Gen(qbusiness_cancelSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_cancelSubscriptionCmd).Standalone()
 
-	qbusiness_cancelSubscriptionCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application for which the subscription is being cancelled.")
-	qbusiness_cancelSubscriptionCmd.Flags().String("subscription-id", "", "The identifier of the Amazon Q Business subscription being cancelled.")
-	qbusiness_cancelSubscriptionCmd.MarkFlagRequired("application-id")
-	qbusiness_cancelSubscriptionCmd.MarkFlagRequired("subscription-id")
+		qbusiness_cancelSubscriptionCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application for which the subscription is being cancelled.")
+		qbusiness_cancelSubscriptionCmd.Flags().String("subscription-id", "", "The identifier of the Amazon Q Business subscription being cancelled.")
+		qbusiness_cancelSubscriptionCmd.MarkFlagRequired("application-id")
+		qbusiness_cancelSubscriptionCmd.MarkFlagRequired("subscription-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_cancelSubscriptionCmd)
 }

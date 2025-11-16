@@ -12,12 +12,14 @@ var kinesisanalyticsv2_createApplicationPresignedUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_createApplicationPresignedUrlCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_createApplicationPresignedUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_createApplicationPresignedUrlCmd).Standalone()
 
-	kinesisanalyticsv2_createApplicationPresignedUrlCmd.Flags().String("application-name", "", "The name of the application.")
-	kinesisanalyticsv2_createApplicationPresignedUrlCmd.Flags().String("session-expiration-duration-in-seconds", "", "The duration in seconds for which the returned URL will be valid.")
-	kinesisanalyticsv2_createApplicationPresignedUrlCmd.Flags().String("url-type", "", "The type of the extension for which to create and return a URL.")
-	kinesisanalyticsv2_createApplicationPresignedUrlCmd.MarkFlagRequired("application-name")
-	kinesisanalyticsv2_createApplicationPresignedUrlCmd.MarkFlagRequired("url-type")
+		kinesisanalyticsv2_createApplicationPresignedUrlCmd.Flags().String("application-name", "", "The name of the application.")
+		kinesisanalyticsv2_createApplicationPresignedUrlCmd.Flags().String("session-expiration-duration-in-seconds", "", "The duration in seconds for which the returned URL will be valid.")
+		kinesisanalyticsv2_createApplicationPresignedUrlCmd.Flags().String("url-type", "", "The type of the extension for which to create and return a URL.")
+		kinesisanalyticsv2_createApplicationPresignedUrlCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_createApplicationPresignedUrlCmd.MarkFlagRequired("url-type")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_createApplicationPresignedUrlCmd)
 }

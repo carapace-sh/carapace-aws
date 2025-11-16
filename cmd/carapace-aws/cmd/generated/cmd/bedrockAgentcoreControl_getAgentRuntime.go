@@ -12,10 +12,12 @@ var bedrockAgentcoreControl_getAgentRuntimeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_getAgentRuntimeCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_getAgentRuntimeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_getAgentRuntimeCmd).Standalone()
 
-	bedrockAgentcoreControl_getAgentRuntimeCmd.Flags().String("agent-runtime-id", "", "The unique identifier of the AgentCore Runtime to retrieve.")
-	bedrockAgentcoreControl_getAgentRuntimeCmd.Flags().String("agent-runtime-version", "", "The version of the AgentCore Runtime to retrieve.")
-	bedrockAgentcoreControl_getAgentRuntimeCmd.MarkFlagRequired("agent-runtime-id")
+		bedrockAgentcoreControl_getAgentRuntimeCmd.Flags().String("agent-runtime-id", "", "The unique identifier of the AgentCore Runtime to retrieve.")
+		bedrockAgentcoreControl_getAgentRuntimeCmd.Flags().String("agent-runtime-version", "", "The version of the AgentCore Runtime to retrieve.")
+		bedrockAgentcoreControl_getAgentRuntimeCmd.MarkFlagRequired("agent-runtime-id")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_getAgentRuntimeCmd)
 }

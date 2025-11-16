@@ -12,7 +12,9 @@ var personalizeEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalizeEventsCmd).Standalone()
+	carapace.Gen(personalizeEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalizeEventsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(personalizeEventsCmd)
 }

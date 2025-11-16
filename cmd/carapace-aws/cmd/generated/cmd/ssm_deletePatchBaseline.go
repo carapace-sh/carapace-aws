@@ -12,9 +12,11 @@ var ssm_deletePatchBaselineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_deletePatchBaselineCmd).Standalone()
+	carapace.Gen(ssm_deletePatchBaselineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_deletePatchBaselineCmd).Standalone()
 
-	ssm_deletePatchBaselineCmd.Flags().String("baseline-id", "", "The ID of the patch baseline to delete.")
-	ssm_deletePatchBaselineCmd.MarkFlagRequired("baseline-id")
+		ssm_deletePatchBaselineCmd.Flags().String("baseline-id", "", "The ID of the patch baseline to delete.")
+		ssm_deletePatchBaselineCmd.MarkFlagRequired("baseline-id")
+	})
 	ssmCmd.AddCommand(ssm_deletePatchBaselineCmd)
 }

@@ -12,9 +12,11 @@ var lexv2Models_getTestExecutionArtifactsUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_getTestExecutionArtifactsUrlCmd).Standalone()
+	carapace.Gen(lexv2Models_getTestExecutionArtifactsUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_getTestExecutionArtifactsUrlCmd).Standalone()
 
-	lexv2Models_getTestExecutionArtifactsUrlCmd.Flags().String("test-execution-id", "", "The unique identifier of the completed test execution.")
-	lexv2Models_getTestExecutionArtifactsUrlCmd.MarkFlagRequired("test-execution-id")
+		lexv2Models_getTestExecutionArtifactsUrlCmd.Flags().String("test-execution-id", "", "The unique identifier of the completed test execution.")
+		lexv2Models_getTestExecutionArtifactsUrlCmd.MarkFlagRequired("test-execution-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_getTestExecutionArtifactsUrlCmd)
 }

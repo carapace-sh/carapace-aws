@@ -12,13 +12,15 @@ var rekognition_compareFacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_compareFacesCmd).Standalone()
+	carapace.Gen(rekognition_compareFacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_compareFacesCmd).Standalone()
 
-	rekognition_compareFacesCmd.Flags().String("quality-filter", "", "A filter that specifies a quality bar for how much filtering is done to identify faces.")
-	rekognition_compareFacesCmd.Flags().String("similarity-threshold", "", "The minimum level of confidence in the face matches that a match must meet to be included in the `FaceMatches` array.")
-	rekognition_compareFacesCmd.Flags().String("source-image", "", "The input image as base64-encoded bytes or an S3 object.")
-	rekognition_compareFacesCmd.Flags().String("target-image", "", "The target image as base64-encoded bytes or an S3 object.")
-	rekognition_compareFacesCmd.MarkFlagRequired("source-image")
-	rekognition_compareFacesCmd.MarkFlagRequired("target-image")
+		rekognition_compareFacesCmd.Flags().String("quality-filter", "", "A filter that specifies a quality bar for how much filtering is done to identify faces.")
+		rekognition_compareFacesCmd.Flags().String("similarity-threshold", "", "The minimum level of confidence in the face matches that a match must meet to be included in the `FaceMatches` array.")
+		rekognition_compareFacesCmd.Flags().String("source-image", "", "The input image as base64-encoded bytes or an S3 object.")
+		rekognition_compareFacesCmd.Flags().String("target-image", "", "The target image as base64-encoded bytes or an S3 object.")
+		rekognition_compareFacesCmd.MarkFlagRequired("source-image")
+		rekognition_compareFacesCmd.MarkFlagRequired("target-image")
+	})
 	rekognitionCmd.AddCommand(rekognition_compareFacesCmd)
 }

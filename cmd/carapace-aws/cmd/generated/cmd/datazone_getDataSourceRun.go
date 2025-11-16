@@ -12,11 +12,13 @@ var datazone_getDataSourceRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getDataSourceRunCmd).Standalone()
+	carapace.Gen(datazone_getDataSourceRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getDataSourceRunCmd).Standalone()
 
-	datazone_getDataSourceRunCmd.Flags().String("domain-identifier", "", "The ID of the domain in which this data source run was performed.")
-	datazone_getDataSourceRunCmd.Flags().String("identifier", "", "The ID of the data source run.")
-	datazone_getDataSourceRunCmd.MarkFlagRequired("domain-identifier")
-	datazone_getDataSourceRunCmd.MarkFlagRequired("identifier")
+		datazone_getDataSourceRunCmd.Flags().String("domain-identifier", "", "The ID of the domain in which this data source run was performed.")
+		datazone_getDataSourceRunCmd.Flags().String("identifier", "", "The ID of the data source run.")
+		datazone_getDataSourceRunCmd.MarkFlagRequired("domain-identifier")
+		datazone_getDataSourceRunCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getDataSourceRunCmd)
 }

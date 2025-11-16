@@ -12,13 +12,15 @@ var apigatewayv2_deleteRouteSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_deleteRouteSettingsCmd).Standalone()
+	carapace.Gen(apigatewayv2_deleteRouteSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_deleteRouteSettingsCmd).Standalone()
 
-	apigatewayv2_deleteRouteSettingsCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_deleteRouteSettingsCmd.Flags().String("route-key", "", "The route key.")
-	apigatewayv2_deleteRouteSettingsCmd.Flags().String("stage-name", "", "The stage name.")
-	apigatewayv2_deleteRouteSettingsCmd.MarkFlagRequired("api-id")
-	apigatewayv2_deleteRouteSettingsCmd.MarkFlagRequired("route-key")
-	apigatewayv2_deleteRouteSettingsCmd.MarkFlagRequired("stage-name")
+		apigatewayv2_deleteRouteSettingsCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_deleteRouteSettingsCmd.Flags().String("route-key", "", "The route key.")
+		apigatewayv2_deleteRouteSettingsCmd.Flags().String("stage-name", "", "The stage name.")
+		apigatewayv2_deleteRouteSettingsCmd.MarkFlagRequired("api-id")
+		apigatewayv2_deleteRouteSettingsCmd.MarkFlagRequired("route-key")
+		apigatewayv2_deleteRouteSettingsCmd.MarkFlagRequired("stage-name")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_deleteRouteSettingsCmd)
 }

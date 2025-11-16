@@ -12,10 +12,12 @@ var redshift_createHsmClientCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_createHsmClientCertificateCmd).Standalone()
+	carapace.Gen(redshift_createHsmClientCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_createHsmClientCertificateCmd).Standalone()
 
-	redshift_createHsmClientCertificateCmd.Flags().String("hsm-client-certificate-identifier", "", "The identifier to be assigned to the new HSM client certificate that the cluster will use to connect to the HSM to use the database encryption keys.")
-	redshift_createHsmClientCertificateCmd.Flags().String("tags", "", "A list of tag instances.")
-	redshift_createHsmClientCertificateCmd.MarkFlagRequired("hsm-client-certificate-identifier")
+		redshift_createHsmClientCertificateCmd.Flags().String("hsm-client-certificate-identifier", "", "The identifier to be assigned to the new HSM client certificate that the cluster will use to connect to the HSM to use the database encryption keys.")
+		redshift_createHsmClientCertificateCmd.Flags().String("tags", "", "A list of tag instances.")
+		redshift_createHsmClientCertificateCmd.MarkFlagRequired("hsm-client-certificate-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_createHsmClientCertificateCmd)
 }

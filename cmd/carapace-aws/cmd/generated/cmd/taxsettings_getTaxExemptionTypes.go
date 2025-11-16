@@ -12,7 +12,9 @@ var taxsettings_getTaxExemptionTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_getTaxExemptionTypesCmd).Standalone()
+	carapace.Gen(taxsettings_getTaxExemptionTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_getTaxExemptionTypesCmd).Standalone()
 
+	})
 	taxsettingsCmd.AddCommand(taxsettings_getTaxExemptionTypesCmd)
 }

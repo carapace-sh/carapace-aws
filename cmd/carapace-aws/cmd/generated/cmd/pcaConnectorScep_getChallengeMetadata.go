@@ -12,9 +12,11 @@ var pcaConnectorScep_getChallengeMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorScep_getChallengeMetadataCmd).Standalone()
+	carapace.Gen(pcaConnectorScep_getChallengeMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorScep_getChallengeMetadataCmd).Standalone()
 
-	pcaConnectorScep_getChallengeMetadataCmd.Flags().String("challenge-arn", "", "The Amazon Resource Name (ARN) of the challenge.")
-	pcaConnectorScep_getChallengeMetadataCmd.MarkFlagRequired("challenge-arn")
+		pcaConnectorScep_getChallengeMetadataCmd.Flags().String("challenge-arn", "", "The Amazon Resource Name (ARN) of the challenge.")
+		pcaConnectorScep_getChallengeMetadataCmd.MarkFlagRequired("challenge-arn")
+	})
 	pcaConnectorScepCmd.AddCommand(pcaConnectorScep_getChallengeMetadataCmd)
 }

@@ -12,11 +12,13 @@ var ssm_listDocumentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_listDocumentsCmd).Standalone()
+	carapace.Gen(ssm_listDocumentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_listDocumentsCmd).Standalone()
 
-	ssm_listDocumentsCmd.Flags().String("document-filter-list", "", "This data type is deprecated.")
-	ssm_listDocumentsCmd.Flags().String("filters", "", "One or more `DocumentKeyValuesFilter` objects.")
-	ssm_listDocumentsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_listDocumentsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		ssm_listDocumentsCmd.Flags().String("document-filter-list", "", "This data type is deprecated.")
+		ssm_listDocumentsCmd.Flags().String("filters", "", "One or more `DocumentKeyValuesFilter` objects.")
+		ssm_listDocumentsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_listDocumentsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	ssmCmd.AddCommand(ssm_listDocumentsCmd)
 }

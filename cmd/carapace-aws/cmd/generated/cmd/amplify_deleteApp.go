@@ -12,9 +12,11 @@ var amplify_deleteAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_deleteAppCmd).Standalone()
+	carapace.Gen(amplify_deleteAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_deleteAppCmd).Standalone()
 
-	amplify_deleteAppCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_deleteAppCmd.MarkFlagRequired("app-id")
+		amplify_deleteAppCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_deleteAppCmd.MarkFlagRequired("app-id")
+	})
 	amplifyCmd.AddCommand(amplify_deleteAppCmd)
 }

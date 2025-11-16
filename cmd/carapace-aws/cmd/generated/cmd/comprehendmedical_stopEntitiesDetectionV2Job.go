@@ -12,9 +12,11 @@ var comprehendmedical_stopEntitiesDetectionV2JobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_stopEntitiesDetectionV2JobCmd).Standalone()
+	carapace.Gen(comprehendmedical_stopEntitiesDetectionV2JobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_stopEntitiesDetectionV2JobCmd).Standalone()
 
-	comprehendmedical_stopEntitiesDetectionV2JobCmd.Flags().String("job-id", "", "The identifier of the medical entities job to stop.")
-	comprehendmedical_stopEntitiesDetectionV2JobCmd.MarkFlagRequired("job-id")
+		comprehendmedical_stopEntitiesDetectionV2JobCmd.Flags().String("job-id", "", "The identifier of the medical entities job to stop.")
+		comprehendmedical_stopEntitiesDetectionV2JobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_stopEntitiesDetectionV2JobCmd)
 }

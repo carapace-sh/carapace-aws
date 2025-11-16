@@ -12,10 +12,12 @@ var s3_getPublicAccessBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getPublicAccessBlockCmd).Standalone()
+	carapace.Gen(s3_getPublicAccessBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getPublicAccessBlockCmd).Standalone()
 
-	s3_getPublicAccessBlockCmd.Flags().String("bucket", "", "The name of the Amazon S3 bucket whose `PublicAccessBlock` configuration you want to retrieve.")
-	s3_getPublicAccessBlockCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getPublicAccessBlockCmd.MarkFlagRequired("bucket")
+		s3_getPublicAccessBlockCmd.Flags().String("bucket", "", "The name of the Amazon S3 bucket whose `PublicAccessBlock` configuration you want to retrieve.")
+		s3_getPublicAccessBlockCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getPublicAccessBlockCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getPublicAccessBlockCmd)
 }

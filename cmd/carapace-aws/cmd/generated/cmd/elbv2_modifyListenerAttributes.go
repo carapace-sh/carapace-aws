@@ -12,11 +12,13 @@ var elbv2_modifyListenerAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_modifyListenerAttributesCmd).Standalone()
+	carapace.Gen(elbv2_modifyListenerAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_modifyListenerAttributesCmd).Standalone()
 
-	elbv2_modifyListenerAttributesCmd.Flags().String("attributes", "", "The listener attributes.")
-	elbv2_modifyListenerAttributesCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
-	elbv2_modifyListenerAttributesCmd.MarkFlagRequired("attributes")
-	elbv2_modifyListenerAttributesCmd.MarkFlagRequired("listener-arn")
+		elbv2_modifyListenerAttributesCmd.Flags().String("attributes", "", "The listener attributes.")
+		elbv2_modifyListenerAttributesCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
+		elbv2_modifyListenerAttributesCmd.MarkFlagRequired("attributes")
+		elbv2_modifyListenerAttributesCmd.MarkFlagRequired("listener-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_modifyListenerAttributesCmd)
 }

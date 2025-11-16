@@ -12,9 +12,11 @@ var serviceQuotas_createSupportCaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_createSupportCaseCmd).Standalone()
+	carapace.Gen(serviceQuotas_createSupportCaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_createSupportCaseCmd).Standalone()
 
-	serviceQuotas_createSupportCaseCmd.Flags().String("request-id", "", "The ID of the pending quota increase request for which you want to open a Support case.")
-	serviceQuotas_createSupportCaseCmd.MarkFlagRequired("request-id")
+		serviceQuotas_createSupportCaseCmd.Flags().String("request-id", "", "The ID of the pending quota increase request for which you want to open a Support case.")
+		serviceQuotas_createSupportCaseCmd.MarkFlagRequired("request-id")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_createSupportCaseCmd)
 }

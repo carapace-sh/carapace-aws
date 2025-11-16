@@ -12,10 +12,12 @@ var oam_getSinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_getSinkCmd).Standalone()
+	carapace.Gen(oam_getSinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_getSinkCmd).Standalone()
 
-	oam_getSinkCmd.Flags().String("identifier", "", "The ARN of the sink to retrieve information for.")
-	oam_getSinkCmd.Flags().String("include-tags", "", "Specifies whether to include the tags associated with the sink in the response.")
-	oam_getSinkCmd.MarkFlagRequired("identifier")
+		oam_getSinkCmd.Flags().String("identifier", "", "The ARN of the sink to retrieve information for.")
+		oam_getSinkCmd.Flags().String("include-tags", "", "Specifies whether to include the tags associated with the sink in the response.")
+		oam_getSinkCmd.MarkFlagRequired("identifier")
+	})
 	oamCmd.AddCommand(oam_getSinkCmd)
 }

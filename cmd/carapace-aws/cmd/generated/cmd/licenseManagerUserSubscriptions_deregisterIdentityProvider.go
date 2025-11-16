@@ -12,10 +12,12 @@ var licenseManagerUserSubscriptions_deregisterIdentityProviderCmd = &cobra.Comma
 }
 
 func init() {
-	carapace.Gen(licenseManagerUserSubscriptions_deregisterIdentityProviderCmd).Standalone()
+	carapace.Gen(licenseManagerUserSubscriptions_deregisterIdentityProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerUserSubscriptions_deregisterIdentityProviderCmd).Standalone()
 
-	licenseManagerUserSubscriptions_deregisterIdentityProviderCmd.Flags().String("identity-provider", "", "An object that specifies details for the Active Directory identity provider.")
-	licenseManagerUserSubscriptions_deregisterIdentityProviderCmd.Flags().String("identity-provider-arn", "", "The Amazon Resource Name (ARN) that identifies the identity provider to deregister.")
-	licenseManagerUserSubscriptions_deregisterIdentityProviderCmd.Flags().String("product", "", "The name of the user-based subscription product.")
+		licenseManagerUserSubscriptions_deregisterIdentityProviderCmd.Flags().String("identity-provider", "", "An object that specifies details for the Active Directory identity provider.")
+		licenseManagerUserSubscriptions_deregisterIdentityProviderCmd.Flags().String("identity-provider-arn", "", "The Amazon Resource Name (ARN) that identifies the identity provider to deregister.")
+		licenseManagerUserSubscriptions_deregisterIdentityProviderCmd.Flags().String("product", "", "The name of the user-based subscription product.")
+	})
 	licenseManagerUserSubscriptionsCmd.AddCommand(licenseManagerUserSubscriptions_deregisterIdentityProviderCmd)
 }

@@ -12,9 +12,11 @@ var licenseManager_getLicenseManagerReportGeneratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_getLicenseManagerReportGeneratorCmd).Standalone()
+	carapace.Gen(licenseManager_getLicenseManagerReportGeneratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_getLicenseManagerReportGeneratorCmd).Standalone()
 
-	licenseManager_getLicenseManagerReportGeneratorCmd.Flags().String("license-manager-report-generator-arn", "", "Amazon Resource Name (ARN) of the report generator.")
-	licenseManager_getLicenseManagerReportGeneratorCmd.MarkFlagRequired("license-manager-report-generator-arn")
+		licenseManager_getLicenseManagerReportGeneratorCmd.Flags().String("license-manager-report-generator-arn", "", "Amazon Resource Name (ARN) of the report generator.")
+		licenseManager_getLicenseManagerReportGeneratorCmd.MarkFlagRequired("license-manager-report-generator-arn")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_getLicenseManagerReportGeneratorCmd)
 }

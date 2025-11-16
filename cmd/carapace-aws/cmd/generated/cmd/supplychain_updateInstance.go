@@ -12,11 +12,13 @@ var supplychain_updateInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_updateInstanceCmd).Standalone()
+	carapace.Gen(supplychain_updateInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_updateInstanceCmd).Standalone()
 
-	supplychain_updateInstanceCmd.Flags().String("instance-description", "", "The AWS Supply Chain instance description.")
-	supplychain_updateInstanceCmd.Flags().String("instance-id", "", "The AWS Supply Chain instance identifier.")
-	supplychain_updateInstanceCmd.Flags().String("instance-name", "", "The AWS Supply Chain instance name.")
-	supplychain_updateInstanceCmd.MarkFlagRequired("instance-id")
+		supplychain_updateInstanceCmd.Flags().String("instance-description", "", "The AWS Supply Chain instance description.")
+		supplychain_updateInstanceCmd.Flags().String("instance-id", "", "The AWS Supply Chain instance identifier.")
+		supplychain_updateInstanceCmd.Flags().String("instance-name", "", "The AWS Supply Chain instance name.")
+		supplychain_updateInstanceCmd.MarkFlagRequired("instance-id")
+	})
 	supplychainCmd.AddCommand(supplychain_updateInstanceCmd)
 }

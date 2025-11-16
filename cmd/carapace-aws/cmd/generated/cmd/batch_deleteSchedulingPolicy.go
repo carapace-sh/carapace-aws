@@ -12,9 +12,11 @@ var batch_deleteSchedulingPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_deleteSchedulingPolicyCmd).Standalone()
+	carapace.Gen(batch_deleteSchedulingPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_deleteSchedulingPolicyCmd).Standalone()
 
-	batch_deleteSchedulingPolicyCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the scheduling policy to delete.")
-	batch_deleteSchedulingPolicyCmd.MarkFlagRequired("arn")
+		batch_deleteSchedulingPolicyCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the scheduling policy to delete.")
+		batch_deleteSchedulingPolicyCmd.MarkFlagRequired("arn")
+	})
 	batchCmd.AddCommand(batch_deleteSchedulingPolicyCmd)
 }

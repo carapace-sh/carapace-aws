@@ -12,9 +12,11 @@ var comprehend_describeKeyPhrasesDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_describeKeyPhrasesDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_describeKeyPhrasesDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_describeKeyPhrasesDetectionJobCmd).Standalone()
 
-	comprehend_describeKeyPhrasesDetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend generated for the job.")
-	comprehend_describeKeyPhrasesDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_describeKeyPhrasesDetectionJobCmd.Flags().String("job-id", "", "The identifier that Amazon Comprehend generated for the job.")
+		comprehend_describeKeyPhrasesDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_describeKeyPhrasesDetectionJobCmd)
 }

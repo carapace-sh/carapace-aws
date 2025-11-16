@@ -12,7 +12,9 @@ var macie2_getAutomatedDiscoveryConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getAutomatedDiscoveryConfigurationCmd).Standalone()
+	carapace.Gen(macie2_getAutomatedDiscoveryConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getAutomatedDiscoveryConfigurationCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_getAutomatedDiscoveryConfigurationCmd)
 }

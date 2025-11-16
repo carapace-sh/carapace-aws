@@ -12,13 +12,15 @@ var migrationhuborchestrator_updateWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_updateWorkflowCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_updateWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_updateWorkflowCmd).Standalone()
 
-	migrationhuborchestrator_updateWorkflowCmd.Flags().String("description", "", "The description of the migration workflow.")
-	migrationhuborchestrator_updateWorkflowCmd.Flags().String("id", "", "The ID of the migration workflow.")
-	migrationhuborchestrator_updateWorkflowCmd.Flags().String("input-parameters", "", "The input parameters required to update a migration workflow.")
-	migrationhuborchestrator_updateWorkflowCmd.Flags().String("name", "", "The name of the migration workflow.")
-	migrationhuborchestrator_updateWorkflowCmd.Flags().String("step-targets", "", "The servers on which a step will be run.")
-	migrationhuborchestrator_updateWorkflowCmd.MarkFlagRequired("id")
+		migrationhuborchestrator_updateWorkflowCmd.Flags().String("description", "", "The description of the migration workflow.")
+		migrationhuborchestrator_updateWorkflowCmd.Flags().String("id", "", "The ID of the migration workflow.")
+		migrationhuborchestrator_updateWorkflowCmd.Flags().String("input-parameters", "", "The input parameters required to update a migration workflow.")
+		migrationhuborchestrator_updateWorkflowCmd.Flags().String("name", "", "The name of the migration workflow.")
+		migrationhuborchestrator_updateWorkflowCmd.Flags().String("step-targets", "", "The servers on which a step will be run.")
+		migrationhuborchestrator_updateWorkflowCmd.MarkFlagRequired("id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_updateWorkflowCmd)
 }

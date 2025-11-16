@@ -12,9 +12,11 @@ var observabilityadmin_deleteCentralizationRuleForOrganizationCmd = &cobra.Comma
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_deleteCentralizationRuleForOrganizationCmd).Standalone()
+	carapace.Gen(observabilityadmin_deleteCentralizationRuleForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_deleteCentralizationRuleForOrganizationCmd).Standalone()
 
-	observabilityadmin_deleteCentralizationRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization centralization rule to delete.")
-	observabilityadmin_deleteCentralizationRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+		observabilityadmin_deleteCentralizationRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization centralization rule to delete.")
+		observabilityadmin_deleteCentralizationRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_deleteCentralizationRuleForOrganizationCmd)
 }

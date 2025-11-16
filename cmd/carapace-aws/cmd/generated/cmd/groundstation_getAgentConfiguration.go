@@ -12,9 +12,11 @@ var groundstation_getAgentConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_getAgentConfigurationCmd).Standalone()
+	carapace.Gen(groundstation_getAgentConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_getAgentConfigurationCmd).Standalone()
 
-	groundstation_getAgentConfigurationCmd.Flags().String("agent-id", "", "UUID of agent to get configuration information for.")
-	groundstation_getAgentConfigurationCmd.MarkFlagRequired("agent-id")
+		groundstation_getAgentConfigurationCmd.Flags().String("agent-id", "", "UUID of agent to get configuration information for.")
+		groundstation_getAgentConfigurationCmd.MarkFlagRequired("agent-id")
+	})
 	groundstationCmd.AddCommand(groundstation_getAgentConfigurationCmd)
 }

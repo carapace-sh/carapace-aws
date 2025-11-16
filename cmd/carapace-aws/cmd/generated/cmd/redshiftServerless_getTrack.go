@@ -12,9 +12,11 @@ var redshiftServerless_getTrackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getTrackCmd).Standalone()
+	carapace.Gen(redshiftServerless_getTrackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getTrackCmd).Standalone()
 
-	redshiftServerless_getTrackCmd.Flags().String("track-name", "", "The name of the track of which its version is fetched.")
-	redshiftServerless_getTrackCmd.MarkFlagRequired("track-name")
+		redshiftServerless_getTrackCmd.Flags().String("track-name", "", "The name of the track of which its version is fetched.")
+		redshiftServerless_getTrackCmd.MarkFlagRequired("track-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getTrackCmd)
 }

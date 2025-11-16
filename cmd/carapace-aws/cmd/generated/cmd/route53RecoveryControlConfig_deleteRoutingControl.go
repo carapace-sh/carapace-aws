@@ -12,9 +12,11 @@ var route53RecoveryControlConfig_deleteRoutingControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_deleteRoutingControlCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_deleteRoutingControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_deleteRoutingControlCmd).Standalone()
 
-	route53RecoveryControlConfig_deleteRoutingControlCmd.Flags().String("routing-control-arn", "", "The Amazon Resource Name (ARN) of the routing control that you're deleting.")
-	route53RecoveryControlConfig_deleteRoutingControlCmd.MarkFlagRequired("routing-control-arn")
+		route53RecoveryControlConfig_deleteRoutingControlCmd.Flags().String("routing-control-arn", "", "The Amazon Resource Name (ARN) of the routing control that you're deleting.")
+		route53RecoveryControlConfig_deleteRoutingControlCmd.MarkFlagRequired("routing-control-arn")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_deleteRoutingControlCmd)
 }

@@ -12,8 +12,10 @@ var supportApp_listSlackChannelConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supportApp_listSlackChannelConfigurationsCmd).Standalone()
+	carapace.Gen(supportApp_listSlackChannelConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supportApp_listSlackChannelConfigurationsCmd).Standalone()
 
-	supportApp_listSlackChannelConfigurationsCmd.Flags().String("next-token", "", "If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.")
+		supportApp_listSlackChannelConfigurationsCmd.Flags().String("next-token", "", "If the results of a search are large, the API only returns a portion of the results and includes a `nextToken` pagination token in the response.")
+	})
 	supportAppCmd.AddCommand(supportApp_listSlackChannelConfigurationsCmd)
 }

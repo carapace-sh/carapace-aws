@@ -12,10 +12,12 @@ var iot_getEffectivePoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getEffectivePoliciesCmd).Standalone()
+	carapace.Gen(iot_getEffectivePoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getEffectivePoliciesCmd).Standalone()
 
-	iot_getEffectivePoliciesCmd.Flags().String("cognito-identity-pool-id", "", "The Cognito identity pool ID.")
-	iot_getEffectivePoliciesCmd.Flags().String("principal", "", "The principal.")
-	iot_getEffectivePoliciesCmd.Flags().String("thing-name", "", "The thing name.")
+		iot_getEffectivePoliciesCmd.Flags().String("cognito-identity-pool-id", "", "The Cognito identity pool ID.")
+		iot_getEffectivePoliciesCmd.Flags().String("principal", "", "The principal.")
+		iot_getEffectivePoliciesCmd.Flags().String("thing-name", "", "The thing name.")
+	})
 	iotCmd.AddCommand(iot_getEffectivePoliciesCmd)
 }

@@ -12,9 +12,11 @@ var batch_deleteComputeEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_deleteComputeEnvironmentCmd).Standalone()
+	carapace.Gen(batch_deleteComputeEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_deleteComputeEnvironmentCmd).Standalone()
 
-	batch_deleteComputeEnvironmentCmd.Flags().String("compute-environment", "", "The name or Amazon Resource Name (ARN) of the compute environment to delete.")
-	batch_deleteComputeEnvironmentCmd.MarkFlagRequired("compute-environment")
+		batch_deleteComputeEnvironmentCmd.Flags().String("compute-environment", "", "The name or Amazon Resource Name (ARN) of the compute environment to delete.")
+		batch_deleteComputeEnvironmentCmd.MarkFlagRequired("compute-environment")
+	})
 	batchCmd.AddCommand(batch_deleteComputeEnvironmentCmd)
 }

@@ -12,14 +12,16 @@ var auditmanager_createAssessmentFrameworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_createAssessmentFrameworkCmd).Standalone()
+	carapace.Gen(auditmanager_createAssessmentFrameworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_createAssessmentFrameworkCmd).Standalone()
 
-	auditmanager_createAssessmentFrameworkCmd.Flags().String("compliance-type", "", "The compliance type that the new custom framework supports, such as CIS or HIPAA.")
-	auditmanager_createAssessmentFrameworkCmd.Flags().String("control-sets", "", "The control sets that are associated with the framework.")
-	auditmanager_createAssessmentFrameworkCmd.Flags().String("description", "", "An optional description for the new custom framework.")
-	auditmanager_createAssessmentFrameworkCmd.Flags().String("name", "", "The name of the new custom framework.")
-	auditmanager_createAssessmentFrameworkCmd.Flags().String("tags", "", "The tags that are associated with the framework.")
-	auditmanager_createAssessmentFrameworkCmd.MarkFlagRequired("control-sets")
-	auditmanager_createAssessmentFrameworkCmd.MarkFlagRequired("name")
+		auditmanager_createAssessmentFrameworkCmd.Flags().String("compliance-type", "", "The compliance type that the new custom framework supports, such as CIS or HIPAA.")
+		auditmanager_createAssessmentFrameworkCmd.Flags().String("control-sets", "", "The control sets that are associated with the framework.")
+		auditmanager_createAssessmentFrameworkCmd.Flags().String("description", "", "An optional description for the new custom framework.")
+		auditmanager_createAssessmentFrameworkCmd.Flags().String("name", "", "The name of the new custom framework.")
+		auditmanager_createAssessmentFrameworkCmd.Flags().String("tags", "", "The tags that are associated with the framework.")
+		auditmanager_createAssessmentFrameworkCmd.MarkFlagRequired("control-sets")
+		auditmanager_createAssessmentFrameworkCmd.MarkFlagRequired("name")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_createAssessmentFrameworkCmd)
 }

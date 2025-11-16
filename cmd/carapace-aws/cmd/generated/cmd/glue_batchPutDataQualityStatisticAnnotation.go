@@ -12,10 +12,12 @@ var glue_batchPutDataQualityStatisticAnnotationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_batchPutDataQualityStatisticAnnotationCmd).Standalone()
+	carapace.Gen(glue_batchPutDataQualityStatisticAnnotationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_batchPutDataQualityStatisticAnnotationCmd).Standalone()
 
-	glue_batchPutDataQualityStatisticAnnotationCmd.Flags().String("client-token", "", "Client Token.")
-	glue_batchPutDataQualityStatisticAnnotationCmd.Flags().String("inclusion-annotations", "", "A list of `DatapointInclusionAnnotation`'s.")
-	glue_batchPutDataQualityStatisticAnnotationCmd.MarkFlagRequired("inclusion-annotations")
+		glue_batchPutDataQualityStatisticAnnotationCmd.Flags().String("client-token", "", "Client Token.")
+		glue_batchPutDataQualityStatisticAnnotationCmd.Flags().String("inclusion-annotations", "", "A list of `DatapointInclusionAnnotation`'s.")
+		glue_batchPutDataQualityStatisticAnnotationCmd.MarkFlagRequired("inclusion-annotations")
+	})
 	glueCmd.AddCommand(glue_batchPutDataQualityStatisticAnnotationCmd)
 }

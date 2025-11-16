@@ -12,11 +12,13 @@ var appconfig_updateApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_updateApplicationCmd).Standalone()
+	carapace.Gen(appconfig_updateApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_updateApplicationCmd).Standalone()
 
-	appconfig_updateApplicationCmd.Flags().String("application-id", "", "The application ID.")
-	appconfig_updateApplicationCmd.Flags().String("description", "", "A description of the application.")
-	appconfig_updateApplicationCmd.Flags().String("name", "", "The name of the application.")
-	appconfig_updateApplicationCmd.MarkFlagRequired("application-id")
+		appconfig_updateApplicationCmd.Flags().String("application-id", "", "The application ID.")
+		appconfig_updateApplicationCmd.Flags().String("description", "", "A description of the application.")
+		appconfig_updateApplicationCmd.Flags().String("name", "", "The name of the application.")
+		appconfig_updateApplicationCmd.MarkFlagRequired("application-id")
+	})
 	appconfigCmd.AddCommand(appconfig_updateApplicationCmd)
 }

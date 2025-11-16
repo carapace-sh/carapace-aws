@@ -12,11 +12,13 @@ var networkflowmonitor_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_untagResourceCmd).Standalone()
+	carapace.Gen(networkflowmonitor_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_untagResourceCmd).Standalone()
 
-	networkflowmonitor_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	networkflowmonitor_untagResourceCmd.Flags().String("tag-keys", "", "Keys that you specified when you tagged a resource.")
-	networkflowmonitor_untagResourceCmd.MarkFlagRequired("resource-arn")
-	networkflowmonitor_untagResourceCmd.MarkFlagRequired("tag-keys")
+		networkflowmonitor_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		networkflowmonitor_untagResourceCmd.Flags().String("tag-keys", "", "Keys that you specified when you tagged a resource.")
+		networkflowmonitor_untagResourceCmd.MarkFlagRequired("resource-arn")
+		networkflowmonitor_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_untagResourceCmd)
 }

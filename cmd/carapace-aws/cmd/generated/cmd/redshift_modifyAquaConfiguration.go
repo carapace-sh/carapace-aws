@@ -12,10 +12,12 @@ var redshift_modifyAquaConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_modifyAquaConfigurationCmd).Standalone()
+	carapace.Gen(redshift_modifyAquaConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_modifyAquaConfigurationCmd).Standalone()
 
-	redshift_modifyAquaConfigurationCmd.Flags().String("aqua-configuration-status", "", "This parameter is retired.")
-	redshift_modifyAquaConfigurationCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster to be modified.")
-	redshift_modifyAquaConfigurationCmd.MarkFlagRequired("cluster-identifier")
+		redshift_modifyAquaConfigurationCmd.Flags().String("aqua-configuration-status", "", "This parameter is retired.")
+		redshift_modifyAquaConfigurationCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster to be modified.")
+		redshift_modifyAquaConfigurationCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_modifyAquaConfigurationCmd)
 }

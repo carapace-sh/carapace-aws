@@ -12,10 +12,12 @@ var codepipeline_pollForThirdPartyJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_pollForThirdPartyJobsCmd).Standalone()
+	carapace.Gen(codepipeline_pollForThirdPartyJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_pollForThirdPartyJobsCmd).Standalone()
 
-	codepipeline_pollForThirdPartyJobsCmd.Flags().String("action-type-id", "", "Represents information about an action type.")
-	codepipeline_pollForThirdPartyJobsCmd.Flags().String("max-batch-size", "", "The maximum number of jobs to return in a poll for jobs call.")
-	codepipeline_pollForThirdPartyJobsCmd.MarkFlagRequired("action-type-id")
+		codepipeline_pollForThirdPartyJobsCmd.Flags().String("action-type-id", "", "Represents information about an action type.")
+		codepipeline_pollForThirdPartyJobsCmd.Flags().String("max-batch-size", "", "The maximum number of jobs to return in a poll for jobs call.")
+		codepipeline_pollForThirdPartyJobsCmd.MarkFlagRequired("action-type-id")
+	})
 	codepipelineCmd.AddCommand(codepipeline_pollForThirdPartyJobsCmd)
 }

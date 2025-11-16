@@ -12,9 +12,11 @@ var inspector_listRulesPackagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_listRulesPackagesCmd).Standalone()
+	carapace.Gen(inspector_listRulesPackagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_listRulesPackagesCmd).Standalone()
 
-	inspector_listRulesPackagesCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
-	inspector_listRulesPackagesCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+		inspector_listRulesPackagesCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
+		inspector_listRulesPackagesCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+	})
 	inspectorCmd.AddCommand(inspector_listRulesPackagesCmd)
 }

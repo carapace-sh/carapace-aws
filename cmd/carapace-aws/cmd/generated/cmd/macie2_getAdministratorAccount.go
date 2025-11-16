@@ -12,7 +12,9 @@ var macie2_getAdministratorAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getAdministratorAccountCmd).Standalone()
+	carapace.Gen(macie2_getAdministratorAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getAdministratorAccountCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_getAdministratorAccountCmd)
 }

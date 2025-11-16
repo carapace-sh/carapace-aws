@@ -12,14 +12,16 @@ var gamelift_updateGameServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_updateGameServerCmd).Standalone()
+	carapace.Gen(gamelift_updateGameServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_updateGameServerCmd).Standalone()
 
-	gamelift_updateGameServerCmd.Flags().String("game-server-data", "", "A set of custom game server properties, formatted as a single string value.")
-	gamelift_updateGameServerCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group where the game server is running.")
-	gamelift_updateGameServerCmd.Flags().String("game-server-id", "", "A custom string that uniquely identifies the game server to update.")
-	gamelift_updateGameServerCmd.Flags().String("health-check", "", "Indicates health status of the game server.")
-	gamelift_updateGameServerCmd.Flags().String("utilization-status", "", "Indicates if the game server is available or is currently hosting gameplay.")
-	gamelift_updateGameServerCmd.MarkFlagRequired("game-server-group-name")
-	gamelift_updateGameServerCmd.MarkFlagRequired("game-server-id")
+		gamelift_updateGameServerCmd.Flags().String("game-server-data", "", "A set of custom game server properties, formatted as a single string value.")
+		gamelift_updateGameServerCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group where the game server is running.")
+		gamelift_updateGameServerCmd.Flags().String("game-server-id", "", "A custom string that uniquely identifies the game server to update.")
+		gamelift_updateGameServerCmd.Flags().String("health-check", "", "Indicates health status of the game server.")
+		gamelift_updateGameServerCmd.Flags().String("utilization-status", "", "Indicates if the game server is available or is currently hosting gameplay.")
+		gamelift_updateGameServerCmd.MarkFlagRequired("game-server-group-name")
+		gamelift_updateGameServerCmd.MarkFlagRequired("game-server-id")
+	})
 	gameliftCmd.AddCommand(gamelift_updateGameServerCmd)
 }

@@ -12,9 +12,11 @@ var connectcampaigns_getConnectInstanceConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaigns_getConnectInstanceConfigCmd).Standalone()
+	carapace.Gen(connectcampaigns_getConnectInstanceConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaigns_getConnectInstanceConfigCmd).Standalone()
 
-	connectcampaigns_getConnectInstanceConfigCmd.Flags().String("connect-instance-id", "", "")
-	connectcampaigns_getConnectInstanceConfigCmd.MarkFlagRequired("connect-instance-id")
+		connectcampaigns_getConnectInstanceConfigCmd.Flags().String("connect-instance-id", "", "")
+		connectcampaigns_getConnectInstanceConfigCmd.MarkFlagRequired("connect-instance-id")
+	})
 	connectcampaignsCmd.AddCommand(connectcampaigns_getConnectInstanceConfigCmd)
 }

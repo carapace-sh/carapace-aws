@@ -12,11 +12,13 @@ var cognitoIdentity_getPrincipalTagAttributeMapCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdentity_getPrincipalTagAttributeMapCmd).Standalone()
+	carapace.Gen(cognitoIdentity_getPrincipalTagAttributeMapCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdentity_getPrincipalTagAttributeMapCmd).Standalone()
 
-	cognitoIdentity_getPrincipalTagAttributeMapCmd.Flags().String("identity-pool-id", "", "You can use this operation to get the ID of the Identity Pool you setup attribute mappings for.")
-	cognitoIdentity_getPrincipalTagAttributeMapCmd.Flags().String("identity-provider-name", "", "You can use this operation to get the provider name.")
-	cognitoIdentity_getPrincipalTagAttributeMapCmd.MarkFlagRequired("identity-pool-id")
-	cognitoIdentity_getPrincipalTagAttributeMapCmd.MarkFlagRequired("identity-provider-name")
+		cognitoIdentity_getPrincipalTagAttributeMapCmd.Flags().String("identity-pool-id", "", "You can use this operation to get the ID of the Identity Pool you setup attribute mappings for.")
+		cognitoIdentity_getPrincipalTagAttributeMapCmd.Flags().String("identity-provider-name", "", "You can use this operation to get the provider name.")
+		cognitoIdentity_getPrincipalTagAttributeMapCmd.MarkFlagRequired("identity-pool-id")
+		cognitoIdentity_getPrincipalTagAttributeMapCmd.MarkFlagRequired("identity-provider-name")
+	})
 	cognitoIdentityCmd.AddCommand(cognitoIdentity_getPrincipalTagAttributeMapCmd)
 }

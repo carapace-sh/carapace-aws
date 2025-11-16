@@ -12,15 +12,17 @@ var eks_describeClusterVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_describeClusterVersionsCmd).Standalone()
+	carapace.Gen(eks_describeClusterVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_describeClusterVersionsCmd).Standalone()
 
-	eks_describeClusterVersionsCmd.Flags().String("cluster-type", "", "The type of cluster to filter versions by.")
-	eks_describeClusterVersionsCmd.Flags().String("cluster-versions", "", "List of specific cluster versions to describe.")
-	eks_describeClusterVersionsCmd.Flags().String("default-only", "", "Filter to show only default versions.")
-	eks_describeClusterVersionsCmd.Flags().String("include-all", "", "Include all available versions in the response.")
-	eks_describeClusterVersionsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	eks_describeClusterVersionsCmd.Flags().String("next-token", "", "Pagination token for the next set of results.")
-	eks_describeClusterVersionsCmd.Flags().String("status", "", "This field is deprecated.")
-	eks_describeClusterVersionsCmd.Flags().String("version-status", "", "Filter versions by their current status.")
+		eks_describeClusterVersionsCmd.Flags().String("cluster-type", "", "The type of cluster to filter versions by.")
+		eks_describeClusterVersionsCmd.Flags().String("cluster-versions", "", "List of specific cluster versions to describe.")
+		eks_describeClusterVersionsCmd.Flags().String("default-only", "", "Filter to show only default versions.")
+		eks_describeClusterVersionsCmd.Flags().String("include-all", "", "Include all available versions in the response.")
+		eks_describeClusterVersionsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		eks_describeClusterVersionsCmd.Flags().String("next-token", "", "Pagination token for the next set of results.")
+		eks_describeClusterVersionsCmd.Flags().String("status", "", "This field is deprecated.")
+		eks_describeClusterVersionsCmd.Flags().String("version-status", "", "Filter versions by their current status.")
+	})
 	eksCmd.AddCommand(eks_describeClusterVersionsCmd)
 }

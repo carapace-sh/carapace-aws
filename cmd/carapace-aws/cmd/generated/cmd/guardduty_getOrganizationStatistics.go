@@ -12,7 +12,9 @@ var guardduty_getOrganizationStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_getOrganizationStatisticsCmd).Standalone()
+	carapace.Gen(guardduty_getOrganizationStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_getOrganizationStatisticsCmd).Standalone()
 
+	})
 	guarddutyCmd.AddCommand(guardduty_getOrganizationStatisticsCmd)
 }

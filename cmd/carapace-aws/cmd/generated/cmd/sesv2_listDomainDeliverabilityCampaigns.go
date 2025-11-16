@@ -12,15 +12,17 @@ var sesv2_listDomainDeliverabilityCampaignsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listDomainDeliverabilityCampaignsCmd).Standalone()
+	carapace.Gen(sesv2_listDomainDeliverabilityCampaignsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listDomainDeliverabilityCampaignsCmd).Standalone()
 
-	sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("end-date", "", "The last day that you want to obtain deliverability data for.")
-	sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("next-token", "", "A token that’s returned from a previous call to the `ListDomainDeliverabilityCampaigns` operation.")
-	sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("page-size", "", "The maximum number of results to include in response to a single call to the `ListDomainDeliverabilityCampaigns` operation.")
-	sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("start-date", "", "The first day that you want to obtain deliverability data for.")
-	sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("subscribed-domain", "", "The domain to obtain deliverability data for.")
-	sesv2_listDomainDeliverabilityCampaignsCmd.MarkFlagRequired("end-date")
-	sesv2_listDomainDeliverabilityCampaignsCmd.MarkFlagRequired("start-date")
-	sesv2_listDomainDeliverabilityCampaignsCmd.MarkFlagRequired("subscribed-domain")
+		sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("end-date", "", "The last day that you want to obtain deliverability data for.")
+		sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("next-token", "", "A token that’s returned from a previous call to the `ListDomainDeliverabilityCampaigns` operation.")
+		sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("page-size", "", "The maximum number of results to include in response to a single call to the `ListDomainDeliverabilityCampaigns` operation.")
+		sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("start-date", "", "The first day that you want to obtain deliverability data for.")
+		sesv2_listDomainDeliverabilityCampaignsCmd.Flags().String("subscribed-domain", "", "The domain to obtain deliverability data for.")
+		sesv2_listDomainDeliverabilityCampaignsCmd.MarkFlagRequired("end-date")
+		sesv2_listDomainDeliverabilityCampaignsCmd.MarkFlagRequired("start-date")
+		sesv2_listDomainDeliverabilityCampaignsCmd.MarkFlagRequired("subscribed-domain")
+	})
 	sesv2Cmd.AddCommand(sesv2_listDomainDeliverabilityCampaignsCmd)
 }

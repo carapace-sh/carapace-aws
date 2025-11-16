@@ -12,9 +12,11 @@ var chimeSdkVoice_deletePhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deletePhoneNumberCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deletePhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deletePhoneNumberCmd).Standalone()
 
-	chimeSdkVoice_deletePhoneNumberCmd.Flags().String("phone-number-id", "", "The phone number ID.")
-	chimeSdkVoice_deletePhoneNumberCmd.MarkFlagRequired("phone-number-id")
+		chimeSdkVoice_deletePhoneNumberCmd.Flags().String("phone-number-id", "", "The phone number ID.")
+		chimeSdkVoice_deletePhoneNumberCmd.MarkFlagRequired("phone-number-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deletePhoneNumberCmd)
 }

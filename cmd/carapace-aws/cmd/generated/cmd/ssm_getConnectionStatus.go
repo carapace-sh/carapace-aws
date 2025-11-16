@@ -12,9 +12,11 @@ var ssm_getConnectionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getConnectionStatusCmd).Standalone()
+	carapace.Gen(ssm_getConnectionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getConnectionStatusCmd).Standalone()
 
-	ssm_getConnectionStatusCmd.Flags().String("target", "", "The managed node ID.")
-	ssm_getConnectionStatusCmd.MarkFlagRequired("target")
+		ssm_getConnectionStatusCmd.Flags().String("target", "", "The managed node ID.")
+		ssm_getConnectionStatusCmd.MarkFlagRequired("target")
+	})
 	ssmCmd.AddCommand(ssm_getConnectionStatusCmd)
 }

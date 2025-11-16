@@ -12,11 +12,13 @@ var proton_getTemplateSyncConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getTemplateSyncConfigCmd).Standalone()
+	carapace.Gen(proton_getTemplateSyncConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getTemplateSyncConfigCmd).Standalone()
 
-	proton_getTemplateSyncConfigCmd.Flags().String("template-name", "", "The template name.")
-	proton_getTemplateSyncConfigCmd.Flags().String("template-type", "", "The template type.")
-	proton_getTemplateSyncConfigCmd.MarkFlagRequired("template-name")
-	proton_getTemplateSyncConfigCmd.MarkFlagRequired("template-type")
+		proton_getTemplateSyncConfigCmd.Flags().String("template-name", "", "The template name.")
+		proton_getTemplateSyncConfigCmd.Flags().String("template-type", "", "The template type.")
+		proton_getTemplateSyncConfigCmd.MarkFlagRequired("template-name")
+		proton_getTemplateSyncConfigCmd.MarkFlagRequired("template-type")
+	})
 	protonCmd.AddCommand(proton_getTemplateSyncConfigCmd)
 }

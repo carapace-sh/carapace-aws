@@ -12,9 +12,11 @@ var quicksight_describeQuickSightQsearchConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeQuickSightQsearchConfigurationCmd).Standalone()
+	carapace.Gen(quicksight_describeQuickSightQsearchConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeQuickSightQsearchConfigurationCmd).Standalone()
 
-	quicksight_describeQuickSightQsearchConfigurationCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the Quick Sight Q Search configuration that the user wants described.")
-	quicksight_describeQuickSightQsearchConfigurationCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeQuickSightQsearchConfigurationCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the Quick Sight Q Search configuration that the user wants described.")
+		quicksight_describeQuickSightQsearchConfigurationCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeQuickSightQsearchConfigurationCmd)
 }

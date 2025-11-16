@@ -12,11 +12,13 @@ var sagemaker_stopEdgeDeploymentStageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopEdgeDeploymentStageCmd).Standalone()
+	carapace.Gen(sagemaker_stopEdgeDeploymentStageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopEdgeDeploymentStageCmd).Standalone()
 
-	sagemaker_stopEdgeDeploymentStageCmd.Flags().String("edge-deployment-plan-name", "", "The name of the edge deployment plan to stop.")
-	sagemaker_stopEdgeDeploymentStageCmd.Flags().String("stage-name", "", "The name of the stage to stop.")
-	sagemaker_stopEdgeDeploymentStageCmd.MarkFlagRequired("edge-deployment-plan-name")
-	sagemaker_stopEdgeDeploymentStageCmd.MarkFlagRequired("stage-name")
+		sagemaker_stopEdgeDeploymentStageCmd.Flags().String("edge-deployment-plan-name", "", "The name of the edge deployment plan to stop.")
+		sagemaker_stopEdgeDeploymentStageCmd.Flags().String("stage-name", "", "The name of the stage to stop.")
+		sagemaker_stopEdgeDeploymentStageCmd.MarkFlagRequired("edge-deployment-plan-name")
+		sagemaker_stopEdgeDeploymentStageCmd.MarkFlagRequired("stage-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopEdgeDeploymentStageCmd)
 }

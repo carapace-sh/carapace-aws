@@ -12,9 +12,11 @@ var gamelift_listGameServerGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_listGameServerGroupsCmd).Standalone()
+	carapace.Gen(gamelift_listGameServerGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_listGameServerGroupsCmd).Standalone()
 
-	gamelift_listGameServerGroupsCmd.Flags().String("limit", "", "The game server groups' limit.")
-	gamelift_listGameServerGroupsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		gamelift_listGameServerGroupsCmd.Flags().String("limit", "", "The game server groups' limit.")
+		gamelift_listGameServerGroupsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+	})
 	gameliftCmd.AddCommand(gamelift_listGameServerGroupsCmd)
 }

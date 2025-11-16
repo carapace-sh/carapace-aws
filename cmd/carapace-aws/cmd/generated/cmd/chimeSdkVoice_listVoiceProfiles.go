@@ -12,11 +12,13 @@ var chimeSdkVoice_listVoiceProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_listVoiceProfilesCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_listVoiceProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_listVoiceProfilesCmd).Standalone()
 
-	chimeSdkVoice_listVoiceProfilesCmd.Flags().String("max-results", "", "The maximum number of results in the request.")
-	chimeSdkVoice_listVoiceProfilesCmd.Flags().String("next-token", "", "The token used to retrieve the next page of results.")
-	chimeSdkVoice_listVoiceProfilesCmd.Flags().String("voice-profile-domain-id", "", "The ID of the voice profile domain.")
-	chimeSdkVoice_listVoiceProfilesCmd.MarkFlagRequired("voice-profile-domain-id")
+		chimeSdkVoice_listVoiceProfilesCmd.Flags().String("max-results", "", "The maximum number of results in the request.")
+		chimeSdkVoice_listVoiceProfilesCmd.Flags().String("next-token", "", "The token used to retrieve the next page of results.")
+		chimeSdkVoice_listVoiceProfilesCmd.Flags().String("voice-profile-domain-id", "", "The ID of the voice profile domain.")
+		chimeSdkVoice_listVoiceProfilesCmd.MarkFlagRequired("voice-profile-domain-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_listVoiceProfilesCmd)
 }

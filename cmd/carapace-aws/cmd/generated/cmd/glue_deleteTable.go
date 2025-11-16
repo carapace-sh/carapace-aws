@@ -12,13 +12,15 @@ var glue_deleteTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteTableCmd).Standalone()
+	carapace.Gen(glue_deleteTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteTableCmd).Standalone()
 
-	glue_deleteTableCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the table resides.")
-	glue_deleteTableCmd.Flags().String("database-name", "", "The name of the catalog database in which the table resides.")
-	glue_deleteTableCmd.Flags().String("name", "", "The name of the table to be deleted.")
-	glue_deleteTableCmd.Flags().String("transaction-id", "", "The transaction ID at which to delete the table contents.")
-	glue_deleteTableCmd.MarkFlagRequired("database-name")
-	glue_deleteTableCmd.MarkFlagRequired("name")
+		glue_deleteTableCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the table resides.")
+		glue_deleteTableCmd.Flags().String("database-name", "", "The name of the catalog database in which the table resides.")
+		glue_deleteTableCmd.Flags().String("name", "", "The name of the table to be deleted.")
+		glue_deleteTableCmd.Flags().String("transaction-id", "", "The transaction ID at which to delete the table contents.")
+		glue_deleteTableCmd.MarkFlagRequired("database-name")
+		glue_deleteTableCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_deleteTableCmd)
 }

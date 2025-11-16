@@ -12,11 +12,13 @@ var codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd = &cobra
 }
 
 func init() {
-	carapace.Gen(codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd).Standalone()
+	carapace.Gen(codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd).Standalone()
 
-	codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd.Flags().String("approval-rule-template-name", "", "The name of the template that you want to disassociate from one or more repositories.")
-	codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd.Flags().String("repository-names", "", "The repository names that you want to disassociate from the approval rule template.")
-	codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd.MarkFlagRequired("approval-rule-template-name")
-	codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd.MarkFlagRequired("repository-names")
+		codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd.Flags().String("approval-rule-template-name", "", "The name of the template that you want to disassociate from one or more repositories.")
+		codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd.Flags().String("repository-names", "", "The repository names that you want to disassociate from the approval rule template.")
+		codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd.MarkFlagRequired("approval-rule-template-name")
+		codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd.MarkFlagRequired("repository-names")
+	})
 	codecommitCmd.AddCommand(codecommit_batchDisassociateApprovalRuleTemplateFromRepositoriesCmd)
 }

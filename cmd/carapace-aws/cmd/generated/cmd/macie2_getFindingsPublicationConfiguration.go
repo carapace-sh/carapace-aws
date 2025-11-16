@@ -12,7 +12,9 @@ var macie2_getFindingsPublicationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getFindingsPublicationConfigurationCmd).Standalone()
+	carapace.Gen(macie2_getFindingsPublicationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getFindingsPublicationConfigurationCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_getFindingsPublicationConfigurationCmd)
 }

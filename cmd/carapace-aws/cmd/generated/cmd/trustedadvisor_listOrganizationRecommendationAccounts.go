@@ -12,12 +12,14 @@ var trustedadvisor_listOrganizationRecommendationAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(trustedadvisor_listOrganizationRecommendationAccountsCmd).Standalone()
+	carapace.Gen(trustedadvisor_listOrganizationRecommendationAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(trustedadvisor_listOrganizationRecommendationAccountsCmd).Standalone()
 
-	trustedadvisor_listOrganizationRecommendationAccountsCmd.Flags().String("affected-account-id", "", "An account affected by this organization recommendation")
-	trustedadvisor_listOrganizationRecommendationAccountsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	trustedadvisor_listOrganizationRecommendationAccountsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	trustedadvisor_listOrganizationRecommendationAccountsCmd.Flags().String("organization-recommendation-identifier", "", "The Recommendation identifier")
-	trustedadvisor_listOrganizationRecommendationAccountsCmd.MarkFlagRequired("organization-recommendation-identifier")
+		trustedadvisor_listOrganizationRecommendationAccountsCmd.Flags().String("affected-account-id", "", "An account affected by this organization recommendation")
+		trustedadvisor_listOrganizationRecommendationAccountsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		trustedadvisor_listOrganizationRecommendationAccountsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		trustedadvisor_listOrganizationRecommendationAccountsCmd.Flags().String("organization-recommendation-identifier", "", "The Recommendation identifier")
+		trustedadvisor_listOrganizationRecommendationAccountsCmd.MarkFlagRequired("organization-recommendation-identifier")
+	})
 	trustedadvisorCmd.AddCommand(trustedadvisor_listOrganizationRecommendationAccountsCmd)
 }

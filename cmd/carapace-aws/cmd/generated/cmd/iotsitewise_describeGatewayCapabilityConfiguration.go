@@ -12,11 +12,13 @@ var iotsitewise_describeGatewayCapabilityConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeGatewayCapabilityConfigurationCmd).Standalone()
+	carapace.Gen(iotsitewise_describeGatewayCapabilityConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeGatewayCapabilityConfigurationCmd).Standalone()
 
-	iotsitewise_describeGatewayCapabilityConfigurationCmd.Flags().String("capability-namespace", "", "The namespace of the capability configuration.")
-	iotsitewise_describeGatewayCapabilityConfigurationCmd.Flags().String("gateway-id", "", "The ID of the gateway that defines the capability configuration.")
-	iotsitewise_describeGatewayCapabilityConfigurationCmd.MarkFlagRequired("capability-namespace")
-	iotsitewise_describeGatewayCapabilityConfigurationCmd.MarkFlagRequired("gateway-id")
+		iotsitewise_describeGatewayCapabilityConfigurationCmd.Flags().String("capability-namespace", "", "The namespace of the capability configuration.")
+		iotsitewise_describeGatewayCapabilityConfigurationCmd.Flags().String("gateway-id", "", "The ID of the gateway that defines the capability configuration.")
+		iotsitewise_describeGatewayCapabilityConfigurationCmd.MarkFlagRequired("capability-namespace")
+		iotsitewise_describeGatewayCapabilityConfigurationCmd.MarkFlagRequired("gateway-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeGatewayCapabilityConfigurationCmd)
 }

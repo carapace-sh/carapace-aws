@@ -12,9 +12,11 @@ var mgn_deleteVcenterClientCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_deleteVcenterClientCmd).Standalone()
+	carapace.Gen(mgn_deleteVcenterClientCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_deleteVcenterClientCmd).Standalone()
 
-	mgn_deleteVcenterClientCmd.Flags().String("vcenter-client-id", "", "ID of resource to be deleted.")
-	mgn_deleteVcenterClientCmd.MarkFlagRequired("vcenter-client-id")
+		mgn_deleteVcenterClientCmd.Flags().String("vcenter-client-id", "", "ID of resource to be deleted.")
+		mgn_deleteVcenterClientCmd.MarkFlagRequired("vcenter-client-id")
+	})
 	mgnCmd.AddCommand(mgn_deleteVcenterClientCmd)
 }

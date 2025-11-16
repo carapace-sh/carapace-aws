@@ -12,9 +12,11 @@ var appsync_listDomainNamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_listDomainNamesCmd).Standalone()
+	carapace.Gen(appsync_listDomainNamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_listDomainNamesCmd).Standalone()
 
-	appsync_listDomainNamesCmd.Flags().String("max-results", "", "The maximum number of results that you want the request to return.")
-	appsync_listDomainNamesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.")
+		appsync_listDomainNamesCmd.Flags().String("max-results", "", "The maximum number of results that you want the request to return.")
+		appsync_listDomainNamesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.")
+	})
 	appsyncCmd.AddCommand(appsync_listDomainNamesCmd)
 }

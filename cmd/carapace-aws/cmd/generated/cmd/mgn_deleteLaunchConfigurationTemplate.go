@@ -12,9 +12,11 @@ var mgn_deleteLaunchConfigurationTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_deleteLaunchConfigurationTemplateCmd).Standalone()
+	carapace.Gen(mgn_deleteLaunchConfigurationTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_deleteLaunchConfigurationTemplateCmd).Standalone()
 
-	mgn_deleteLaunchConfigurationTemplateCmd.Flags().String("launch-configuration-template-id", "", "ID of resource to be deleted.")
-	mgn_deleteLaunchConfigurationTemplateCmd.MarkFlagRequired("launch-configuration-template-id")
+		mgn_deleteLaunchConfigurationTemplateCmd.Flags().String("launch-configuration-template-id", "", "ID of resource to be deleted.")
+		mgn_deleteLaunchConfigurationTemplateCmd.MarkFlagRequired("launch-configuration-template-id")
+	})
 	mgnCmd.AddCommand(mgn_deleteLaunchConfigurationTemplateCmd)
 }

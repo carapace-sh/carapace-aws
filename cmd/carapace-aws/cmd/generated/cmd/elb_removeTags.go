@@ -12,11 +12,13 @@ var elb_removeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_removeTagsCmd).Standalone()
+	carapace.Gen(elb_removeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_removeTagsCmd).Standalone()
 
-	elb_removeTagsCmd.Flags().String("load-balancer-names", "", "The name of the load balancer.")
-	elb_removeTagsCmd.Flags().String("tags", "", "The list of tag keys to remove.")
-	elb_removeTagsCmd.MarkFlagRequired("load-balancer-names")
-	elb_removeTagsCmd.MarkFlagRequired("tags")
+		elb_removeTagsCmd.Flags().String("load-balancer-names", "", "The name of the load balancer.")
+		elb_removeTagsCmd.Flags().String("tags", "", "The list of tag keys to remove.")
+		elb_removeTagsCmd.MarkFlagRequired("load-balancer-names")
+		elb_removeTagsCmd.MarkFlagRequired("tags")
+	})
 	elbCmd.AddCommand(elb_removeTagsCmd)
 }

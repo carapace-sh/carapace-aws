@@ -12,12 +12,14 @@ var appsync_createApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_createApiCmd).Standalone()
+	carapace.Gen(appsync_createApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_createApiCmd).Standalone()
 
-	appsync_createApiCmd.Flags().String("event-config", "", "The Event API configuration.")
-	appsync_createApiCmd.Flags().String("name", "", "The name for the `Api`.")
-	appsync_createApiCmd.Flags().String("owner-contact", "", "The owner contact information for the `Api`.")
-	appsync_createApiCmd.Flags().String("tags", "", "")
-	appsync_createApiCmd.MarkFlagRequired("name")
+		appsync_createApiCmd.Flags().String("event-config", "", "The Event API configuration.")
+		appsync_createApiCmd.Flags().String("name", "", "The name for the `Api`.")
+		appsync_createApiCmd.Flags().String("owner-contact", "", "The owner contact information for the `Api`.")
+		appsync_createApiCmd.Flags().String("tags", "", "")
+		appsync_createApiCmd.MarkFlagRequired("name")
+	})
 	appsyncCmd.AddCommand(appsync_createApiCmd)
 }

@@ -12,12 +12,14 @@ var rds_createDbsnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_createDbsnapshotCmd).Standalone()
+	carapace.Gen(rds_createDbsnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_createDbsnapshotCmd).Standalone()
 
-	rds_createDbsnapshotCmd.Flags().String("dbinstance-identifier", "", "The identifier of the DB instance that you want to create the snapshot of.")
-	rds_createDbsnapshotCmd.Flags().String("dbsnapshot-identifier", "", "The identifier for the DB snapshot.")
-	rds_createDbsnapshotCmd.Flags().String("tags", "", "")
-	rds_createDbsnapshotCmd.MarkFlagRequired("dbinstance-identifier")
-	rds_createDbsnapshotCmd.MarkFlagRequired("dbsnapshot-identifier")
+		rds_createDbsnapshotCmd.Flags().String("dbinstance-identifier", "", "The identifier of the DB instance that you want to create the snapshot of.")
+		rds_createDbsnapshotCmd.Flags().String("dbsnapshot-identifier", "", "The identifier for the DB snapshot.")
+		rds_createDbsnapshotCmd.Flags().String("tags", "", "")
+		rds_createDbsnapshotCmd.MarkFlagRequired("dbinstance-identifier")
+		rds_createDbsnapshotCmd.MarkFlagRequired("dbsnapshot-identifier")
+	})
 	rdsCmd.AddCommand(rds_createDbsnapshotCmd)
 }

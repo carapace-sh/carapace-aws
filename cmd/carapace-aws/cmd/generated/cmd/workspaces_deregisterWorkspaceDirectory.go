@@ -12,9 +12,11 @@ var workspaces_deregisterWorkspaceDirectoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_deregisterWorkspaceDirectoryCmd).Standalone()
+	carapace.Gen(workspaces_deregisterWorkspaceDirectoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_deregisterWorkspaceDirectoryCmd).Standalone()
 
-	workspaces_deregisterWorkspaceDirectoryCmd.Flags().String("directory-id", "", "The identifier of the directory.")
-	workspaces_deregisterWorkspaceDirectoryCmd.MarkFlagRequired("directory-id")
+		workspaces_deregisterWorkspaceDirectoryCmd.Flags().String("directory-id", "", "The identifier of the directory.")
+		workspaces_deregisterWorkspaceDirectoryCmd.MarkFlagRequired("directory-id")
+	})
 	workspacesCmd.AddCommand(workspaces_deregisterWorkspaceDirectoryCmd)
 }

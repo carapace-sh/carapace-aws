@@ -12,11 +12,13 @@ var chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd).Standalone()
 
-	chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd.Flags().String("identifier", "", "The unique identifier of the resource to be updated.")
-	chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd.Flags().String("voice-tone-analysis-task-id", "", "The ID of the voice tone analysis task.")
-	chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd.MarkFlagRequired("identifier")
-	chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd.MarkFlagRequired("voice-tone-analysis-task-id")
+		chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd.Flags().String("identifier", "", "The unique identifier of the resource to be updated.")
+		chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd.Flags().String("voice-tone-analysis-task-id", "", "The ID of the voice tone analysis task.")
+		chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd.MarkFlagRequired("identifier")
+		chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd.MarkFlagRequired("voice-tone-analysis-task-id")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_getVoiceToneAnalysisTaskCmd)
 }

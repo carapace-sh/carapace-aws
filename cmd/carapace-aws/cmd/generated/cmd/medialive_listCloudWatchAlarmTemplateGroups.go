@@ -12,11 +12,13 @@ var medialive_listCloudWatchAlarmTemplateGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listCloudWatchAlarmTemplateGroupsCmd).Standalone()
+	carapace.Gen(medialive_listCloudWatchAlarmTemplateGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listCloudWatchAlarmTemplateGroupsCmd).Standalone()
 
-	medialive_listCloudWatchAlarmTemplateGroupsCmd.Flags().String("max-results", "", "")
-	medialive_listCloudWatchAlarmTemplateGroupsCmd.Flags().String("next-token", "", "A token used to retrieve the next set of results in paginated list responses.")
-	medialive_listCloudWatchAlarmTemplateGroupsCmd.Flags().String("scope", "", "Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.")
-	medialive_listCloudWatchAlarmTemplateGroupsCmd.Flags().String("signal-map-identifier", "", "A signal map's identifier.")
+		medialive_listCloudWatchAlarmTemplateGroupsCmd.Flags().String("max-results", "", "")
+		medialive_listCloudWatchAlarmTemplateGroupsCmd.Flags().String("next-token", "", "A token used to retrieve the next set of results in paginated list responses.")
+		medialive_listCloudWatchAlarmTemplateGroupsCmd.Flags().String("scope", "", "Represents the scope of a resource, with options for all scopes, AWS provided resources, or local resources.")
+		medialive_listCloudWatchAlarmTemplateGroupsCmd.Flags().String("signal-map-identifier", "", "A signal map's identifier.")
+	})
 	medialiveCmd.AddCommand(medialive_listCloudWatchAlarmTemplateGroupsCmd)
 }

@@ -12,9 +12,11 @@ var emr_modifyInstanceGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_modifyInstanceGroupsCmd).Standalone()
+	carapace.Gen(emr_modifyInstanceGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_modifyInstanceGroupsCmd).Standalone()
 
-	emr_modifyInstanceGroupsCmd.Flags().String("cluster-id", "", "The ID of the cluster to which the instance group belongs.")
-	emr_modifyInstanceGroupsCmd.Flags().String("instance-groups", "", "Instance groups to change.")
+		emr_modifyInstanceGroupsCmd.Flags().String("cluster-id", "", "The ID of the cluster to which the instance group belongs.")
+		emr_modifyInstanceGroupsCmd.Flags().String("instance-groups", "", "Instance groups to change.")
+	})
 	emrCmd.AddCommand(emr_modifyInstanceGroupsCmd)
 }

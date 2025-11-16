@@ -12,11 +12,13 @@ var pcaConnectorAd_listServicePrincipalNamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorAd_listServicePrincipalNamesCmd).Standalone()
+	carapace.Gen(pcaConnectorAd_listServicePrincipalNamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorAd_listServicePrincipalNamesCmd).Standalone()
 
-	pcaConnectorAd_listServicePrincipalNamesCmd.Flags().String("directory-registration-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).")
-	pcaConnectorAd_listServicePrincipalNamesCmd.Flags().String("max-results", "", "Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.")
-	pcaConnectorAd_listServicePrincipalNamesCmd.Flags().String("next-token", "", "Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.")
-	pcaConnectorAd_listServicePrincipalNamesCmd.MarkFlagRequired("directory-registration-arn")
+		pcaConnectorAd_listServicePrincipalNamesCmd.Flags().String("directory-registration-arn", "", "The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration](https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html).")
+		pcaConnectorAd_listServicePrincipalNamesCmd.Flags().String("max-results", "", "Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.")
+		pcaConnectorAd_listServicePrincipalNamesCmd.Flags().String("next-token", "", "Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.")
+		pcaConnectorAd_listServicePrincipalNamesCmd.MarkFlagRequired("directory-registration-arn")
+	})
 	pcaConnectorAdCmd.AddCommand(pcaConnectorAd_listServicePrincipalNamesCmd)
 }

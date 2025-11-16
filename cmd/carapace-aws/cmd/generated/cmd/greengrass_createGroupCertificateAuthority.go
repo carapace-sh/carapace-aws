@@ -12,10 +12,12 @@ var greengrass_createGroupCertificateAuthorityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createGroupCertificateAuthorityCmd).Standalone()
+	carapace.Gen(greengrass_createGroupCertificateAuthorityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createGroupCertificateAuthorityCmd).Standalone()
 
-	greengrass_createGroupCertificateAuthorityCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createGroupCertificateAuthorityCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
-	greengrass_createGroupCertificateAuthorityCmd.MarkFlagRequired("group-id")
+		greengrass_createGroupCertificateAuthorityCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createGroupCertificateAuthorityCmd.Flags().String("group-id", "", "The ID of the Greengrass group.")
+		greengrass_createGroupCertificateAuthorityCmd.MarkFlagRequired("group-id")
+	})
 	greengrassCmd.AddCommand(greengrass_createGroupCertificateAuthorityCmd)
 }

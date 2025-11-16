@@ -12,9 +12,11 @@ var mailmanager_getArchiveExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_getArchiveExportCmd).Standalone()
+	carapace.Gen(mailmanager_getArchiveExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_getArchiveExportCmd).Standalone()
 
-	mailmanager_getArchiveExportCmd.Flags().String("export-id", "", "The identifier of the export job to get details for.")
-	mailmanager_getArchiveExportCmd.MarkFlagRequired("export-id")
+		mailmanager_getArchiveExportCmd.Flags().String("export-id", "", "The identifier of the export job to get details for.")
+		mailmanager_getArchiveExportCmd.MarkFlagRequired("export-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_getArchiveExportCmd)
 }

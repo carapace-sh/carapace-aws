@@ -12,9 +12,11 @@ var drs_getLaunchConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_getLaunchConfigurationCmd).Standalone()
+	carapace.Gen(drs_getLaunchConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_getLaunchConfigurationCmd).Standalone()
 
-	drs_getLaunchConfigurationCmd.Flags().String("source-server-id", "", "The ID of the Source Server that we want to retrieve a Launch Configuration for.")
-	drs_getLaunchConfigurationCmd.MarkFlagRequired("source-server-id")
+		drs_getLaunchConfigurationCmd.Flags().String("source-server-id", "", "The ID of the Source Server that we want to retrieve a Launch Configuration for.")
+		drs_getLaunchConfigurationCmd.MarkFlagRequired("source-server-id")
+	})
 	drsCmd.AddCommand(drs_getLaunchConfigurationCmd)
 }

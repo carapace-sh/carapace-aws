@@ -12,9 +12,11 @@ var ssmContacts_deactivateContactChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_deactivateContactChannelCmd).Standalone()
+	carapace.Gen(ssmContacts_deactivateContactChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_deactivateContactChannelCmd).Standalone()
 
-	ssmContacts_deactivateContactChannelCmd.Flags().String("contact-channel-id", "", "The Amazon Resource Name (ARN) of the contact channel you're deactivating.")
-	ssmContacts_deactivateContactChannelCmd.MarkFlagRequired("contact-channel-id")
+		ssmContacts_deactivateContactChannelCmd.Flags().String("contact-channel-id", "", "The Amazon Resource Name (ARN) of the contact channel you're deactivating.")
+		ssmContacts_deactivateContactChannelCmd.MarkFlagRequired("contact-channel-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_deactivateContactChannelCmd)
 }

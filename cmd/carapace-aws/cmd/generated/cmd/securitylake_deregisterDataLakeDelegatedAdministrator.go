@@ -12,7 +12,9 @@ var securitylake_deregisterDataLakeDelegatedAdministratorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_deregisterDataLakeDelegatedAdministratorCmd).Standalone()
+	carapace.Gen(securitylake_deregisterDataLakeDelegatedAdministratorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_deregisterDataLakeDelegatedAdministratorCmd).Standalone()
 
+	})
 	securitylakeCmd.AddCommand(securitylake_deregisterDataLakeDelegatedAdministratorCmd)
 }

@@ -12,9 +12,11 @@ var devicefarm_deleteTestGridProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_deleteTestGridProjectCmd).Standalone()
+	carapace.Gen(devicefarm_deleteTestGridProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_deleteTestGridProjectCmd).Standalone()
 
-	devicefarm_deleteTestGridProjectCmd.Flags().String("project-arn", "", "The ARN of the project to delete, from [CreateTestGridProject]() or [ListTestGridProjects]().")
-	devicefarm_deleteTestGridProjectCmd.MarkFlagRequired("project-arn")
+		devicefarm_deleteTestGridProjectCmd.Flags().String("project-arn", "", "The ARN of the project to delete, from [CreateTestGridProject]() or [ListTestGridProjects]().")
+		devicefarm_deleteTestGridProjectCmd.MarkFlagRequired("project-arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_deleteTestGridProjectCmd)
 }

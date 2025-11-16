@@ -12,9 +12,11 @@ var dms_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_listTagsForResourceCmd).Standalone()
+	carapace.Gen(dms_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_listTagsForResourceCmd).Standalone()
 
-	dms_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource to list tags for.")
-	dms_listTagsForResourceCmd.Flags().String("resource-arn-list", "", "List of ARNs that identify multiple DMS resources that you want to list tags for.")
+		dms_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource to list tags for.")
+		dms_listTagsForResourceCmd.Flags().String("resource-arn-list", "", "List of ARNs that identify multiple DMS resources that you want to list tags for.")
+	})
 	dmsCmd.AddCommand(dms_listTagsForResourceCmd)
 }

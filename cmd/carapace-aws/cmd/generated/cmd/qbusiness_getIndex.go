@@ -12,11 +12,13 @@ var qbusiness_getIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_getIndexCmd).Standalone()
+	carapace.Gen(qbusiness_getIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_getIndexCmd).Standalone()
 
-	qbusiness_getIndexCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application connected to the index.")
-	qbusiness_getIndexCmd.Flags().String("index-id", "", "The identifier of the Amazon Q Business index you want information on.")
-	qbusiness_getIndexCmd.MarkFlagRequired("application-id")
-	qbusiness_getIndexCmd.MarkFlagRequired("index-id")
+		qbusiness_getIndexCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application connected to the index.")
+		qbusiness_getIndexCmd.Flags().String("index-id", "", "The identifier of the Amazon Q Business index you want information on.")
+		qbusiness_getIndexCmd.MarkFlagRequired("application-id")
+		qbusiness_getIndexCmd.MarkFlagRequired("index-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_getIndexCmd)
 }

@@ -12,7 +12,9 @@ var devopsGuruCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuruCmd).Standalone()
+	carapace.Gen(devopsGuruCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuruCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(devopsGuruCmd)
 }

@@ -12,15 +12,17 @@ var ec2_importInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_importInstanceCmd).Standalone()
+	carapace.Gen(ec2_importInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_importInstanceCmd).Standalone()
 
-	ec2_importInstanceCmd.Flags().String("description", "", "A description for the instance being imported.")
-	ec2_importInstanceCmd.Flags().String("disk-images", "", "The disk image.")
-	ec2_importInstanceCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_importInstanceCmd.Flags().String("launch-specification", "", "The launch specification.")
-	ec2_importInstanceCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_importInstanceCmd.Flags().String("platform", "", "The instance operating system.")
-	ec2_importInstanceCmd.Flag("no-dry-run").Hidden = true
-	ec2_importInstanceCmd.MarkFlagRequired("platform")
+		ec2_importInstanceCmd.Flags().String("description", "", "A description for the instance being imported.")
+		ec2_importInstanceCmd.Flags().String("disk-images", "", "The disk image.")
+		ec2_importInstanceCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_importInstanceCmd.Flags().String("launch-specification", "", "The launch specification.")
+		ec2_importInstanceCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_importInstanceCmd.Flags().String("platform", "", "The instance operating system.")
+		ec2_importInstanceCmd.Flag("no-dry-run").Hidden = true
+		ec2_importInstanceCmd.MarkFlagRequired("platform")
+	})
 	ec2Cmd.AddCommand(ec2_importInstanceCmd)
 }

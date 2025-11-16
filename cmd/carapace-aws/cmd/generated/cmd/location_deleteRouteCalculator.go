@@ -12,9 +12,11 @@ var location_deleteRouteCalculatorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_deleteRouteCalculatorCmd).Standalone()
+	carapace.Gen(location_deleteRouteCalculatorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_deleteRouteCalculatorCmd).Standalone()
 
-	location_deleteRouteCalculatorCmd.Flags().String("calculator-name", "", "The name of the route calculator resource to be deleted.")
-	location_deleteRouteCalculatorCmd.MarkFlagRequired("calculator-name")
+		location_deleteRouteCalculatorCmd.Flags().String("calculator-name", "", "The name of the route calculator resource to be deleted.")
+		location_deleteRouteCalculatorCmd.MarkFlagRequired("calculator-name")
+	})
 	locationCmd.AddCommand(location_deleteRouteCalculatorCmd)
 }

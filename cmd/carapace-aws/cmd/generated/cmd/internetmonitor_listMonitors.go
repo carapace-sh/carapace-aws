@@ -12,13 +12,15 @@ var internetmonitor_listMonitorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(internetmonitor_listMonitorsCmd).Standalone()
+	carapace.Gen(internetmonitor_listMonitorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(internetmonitor_listMonitorsCmd).Standalone()
 
-	internetmonitor_listMonitorsCmd.Flags().Bool("include-linked-accounts", false, "A boolean option that you can set to `TRUE` to include monitors for linked accounts in a list of monitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor.")
-	internetmonitor_listMonitorsCmd.Flags().String("max-results", "", "The number of monitor objects that you want to return with this call.")
-	internetmonitor_listMonitorsCmd.Flags().String("monitor-status", "", "The status of a monitor.")
-	internetmonitor_listMonitorsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	internetmonitor_listMonitorsCmd.Flags().Bool("no-include-linked-accounts", false, "A boolean option that you can set to `TRUE` to include monitors for linked accounts in a list of monitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor.")
-	internetmonitor_listMonitorsCmd.Flag("no-include-linked-accounts").Hidden = true
+		internetmonitor_listMonitorsCmd.Flags().Bool("include-linked-accounts", false, "A boolean option that you can set to `TRUE` to include monitors for linked accounts in a list of monitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor.")
+		internetmonitor_listMonitorsCmd.Flags().String("max-results", "", "The number of monitor objects that you want to return with this call.")
+		internetmonitor_listMonitorsCmd.Flags().String("monitor-status", "", "The status of a monitor.")
+		internetmonitor_listMonitorsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		internetmonitor_listMonitorsCmd.Flags().Bool("no-include-linked-accounts", false, "A boolean option that you can set to `TRUE` to include monitors for linked accounts in a list of monitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor.")
+		internetmonitor_listMonitorsCmd.Flag("no-include-linked-accounts").Hidden = true
+	})
 	internetmonitorCmd.AddCommand(internetmonitor_listMonitorsCmd)
 }

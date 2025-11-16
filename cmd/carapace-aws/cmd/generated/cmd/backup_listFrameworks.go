@@ -12,9 +12,11 @@ var backup_listFrameworksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_listFrameworksCmd).Standalone()
+	carapace.Gen(backup_listFrameworksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_listFrameworksCmd).Standalone()
 
-	backup_listFrameworksCmd.Flags().String("max-results", "", "The number of desired results from 1 to 1000. Optional.")
-	backup_listFrameworksCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+		backup_listFrameworksCmd.Flags().String("max-results", "", "The number of desired results from 1 to 1000. Optional.")
+		backup_listFrameworksCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+	})
 	backupCmd.AddCommand(backup_listFrameworksCmd)
 }

@@ -12,9 +12,11 @@ var ec2_disassociateVpcCidrBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_disassociateVpcCidrBlockCmd).Standalone()
+	carapace.Gen(ec2_disassociateVpcCidrBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_disassociateVpcCidrBlockCmd).Standalone()
 
-	ec2_disassociateVpcCidrBlockCmd.Flags().String("association-id", "", "The association ID for the CIDR block.")
-	ec2_disassociateVpcCidrBlockCmd.MarkFlagRequired("association-id")
+		ec2_disassociateVpcCidrBlockCmd.Flags().String("association-id", "", "The association ID for the CIDR block.")
+		ec2_disassociateVpcCidrBlockCmd.MarkFlagRequired("association-id")
+	})
 	ec2Cmd.AddCommand(ec2_disassociateVpcCidrBlockCmd)
 }

@@ -12,9 +12,11 @@ var opensearch_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_deleteApplicationCmd).Standalone()
+	carapace.Gen(opensearch_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_deleteApplicationCmd).Standalone()
 
-	opensearch_deleteApplicationCmd.Flags().String("id", "", "The unique identifier of the OpenSearch application to delete.")
-	opensearch_deleteApplicationCmd.MarkFlagRequired("id")
+		opensearch_deleteApplicationCmd.Flags().String("id", "", "The unique identifier of the OpenSearch application to delete.")
+		opensearch_deleteApplicationCmd.MarkFlagRequired("id")
+	})
 	opensearchCmd.AddCommand(opensearch_deleteApplicationCmd)
 }

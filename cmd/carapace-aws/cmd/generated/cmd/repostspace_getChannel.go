@@ -12,11 +12,13 @@ var repostspace_getChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_getChannelCmd).Standalone()
+	carapace.Gen(repostspace_getChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_getChannelCmd).Standalone()
 
-	repostspace_getChannelCmd.Flags().String("channel-id", "", "The unique ID of the private re:Post channel.")
-	repostspace_getChannelCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
-	repostspace_getChannelCmd.MarkFlagRequired("channel-id")
-	repostspace_getChannelCmd.MarkFlagRequired("space-id")
+		repostspace_getChannelCmd.Flags().String("channel-id", "", "The unique ID of the private re:Post channel.")
+		repostspace_getChannelCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
+		repostspace_getChannelCmd.MarkFlagRequired("channel-id")
+		repostspace_getChannelCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_getChannelCmd)
 }

@@ -12,9 +12,11 @@ var mturk_deleteHitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_deleteHitCmd).Standalone()
+	carapace.Gen(mturk_deleteHitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_deleteHitCmd).Standalone()
 
-	mturk_deleteHitCmd.Flags().String("hitid", "", "The ID of the HIT to be deleted.")
-	mturk_deleteHitCmd.MarkFlagRequired("hitid")
+		mturk_deleteHitCmd.Flags().String("hitid", "", "The ID of the HIT to be deleted.")
+		mturk_deleteHitCmd.MarkFlagRequired("hitid")
+	})
 	mturkCmd.AddCommand(mturk_deleteHitCmd)
 }

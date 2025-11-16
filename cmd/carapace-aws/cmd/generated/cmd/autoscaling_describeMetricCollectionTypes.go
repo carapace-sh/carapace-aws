@@ -12,7 +12,9 @@ var autoscaling_describeMetricCollectionTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_describeMetricCollectionTypesCmd).Standalone()
+	carapace.Gen(autoscaling_describeMetricCollectionTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_describeMetricCollectionTypesCmd).Standalone()
 
+	})
 	autoscalingCmd.AddCommand(autoscaling_describeMetricCollectionTypesCmd)
 }

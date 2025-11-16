@@ -12,9 +12,11 @@ var chime_getRetentionSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_getRetentionSettingsCmd).Standalone()
+	carapace.Gen(chime_getRetentionSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_getRetentionSettingsCmd).Standalone()
 
-	chime_getRetentionSettingsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_getRetentionSettingsCmd.MarkFlagRequired("account-id")
+		chime_getRetentionSettingsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_getRetentionSettingsCmd.MarkFlagRequired("account-id")
+	})
 	chimeCmd.AddCommand(chime_getRetentionSettingsCmd)
 }

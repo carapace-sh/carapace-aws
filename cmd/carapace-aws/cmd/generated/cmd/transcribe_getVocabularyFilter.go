@@ -12,9 +12,11 @@ var transcribe_getVocabularyFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_getVocabularyFilterCmd).Standalone()
+	carapace.Gen(transcribe_getVocabularyFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_getVocabularyFilterCmd).Standalone()
 
-	transcribe_getVocabularyFilterCmd.Flags().String("vocabulary-filter-name", "", "The name of the custom vocabulary filter you want information about.")
-	transcribe_getVocabularyFilterCmd.MarkFlagRequired("vocabulary-filter-name")
+		transcribe_getVocabularyFilterCmd.Flags().String("vocabulary-filter-name", "", "The name of the custom vocabulary filter you want information about.")
+		transcribe_getVocabularyFilterCmd.MarkFlagRequired("vocabulary-filter-name")
+	})
 	transcribeCmd.AddCommand(transcribe_getVocabularyFilterCmd)
 }

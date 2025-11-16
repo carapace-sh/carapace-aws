@@ -12,9 +12,11 @@ var socialmessaging_getLinkedWhatsAppBusinessAccountPhoneNumberCmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(socialmessaging_getLinkedWhatsAppBusinessAccountPhoneNumberCmd).Standalone()
+	carapace.Gen(socialmessaging_getLinkedWhatsAppBusinessAccountPhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_getLinkedWhatsAppBusinessAccountPhoneNumberCmd).Standalone()
 
-	socialmessaging_getLinkedWhatsAppBusinessAccountPhoneNumberCmd.Flags().String("id", "", "The unique identifier of the phone number.")
-	socialmessaging_getLinkedWhatsAppBusinessAccountPhoneNumberCmd.MarkFlagRequired("id")
+		socialmessaging_getLinkedWhatsAppBusinessAccountPhoneNumberCmd.Flags().String("id", "", "The unique identifier of the phone number.")
+		socialmessaging_getLinkedWhatsAppBusinessAccountPhoneNumberCmd.MarkFlagRequired("id")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_getLinkedWhatsAppBusinessAccountPhoneNumberCmd)
 }

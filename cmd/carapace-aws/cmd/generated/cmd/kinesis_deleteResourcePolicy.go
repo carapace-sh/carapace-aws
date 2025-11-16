@@ -12,9 +12,11 @@ var kinesis_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(kinesis_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_deleteResourcePolicyCmd).Standalone()
 
-	kinesis_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the data stream or consumer.")
-	kinesis_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		kinesis_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the data stream or consumer.")
+		kinesis_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	kinesisCmd.AddCommand(kinesis_deleteResourcePolicyCmd)
 }

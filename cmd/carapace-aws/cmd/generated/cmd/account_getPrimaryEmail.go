@@ -12,9 +12,11 @@ var account_getPrimaryEmailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(account_getPrimaryEmailCmd).Standalone()
+	carapace.Gen(account_getPrimaryEmailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(account_getPrimaryEmailCmd).Standalone()
 
-	account_getPrimaryEmailCmd.Flags().String("account-id", "", "Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
-	account_getPrimaryEmailCmd.MarkFlagRequired("account-id")
+		account_getPrimaryEmailCmd.Flags().String("account-id", "", "Specifies the 12-digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
+		account_getPrimaryEmailCmd.MarkFlagRequired("account-id")
+	})
 	accountCmd.AddCommand(account_getPrimaryEmailCmd)
 }

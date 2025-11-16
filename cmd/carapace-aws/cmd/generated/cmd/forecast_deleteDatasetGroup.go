@@ -12,9 +12,11 @@ var forecast_deleteDatasetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_deleteDatasetGroupCmd).Standalone()
+	carapace.Gen(forecast_deleteDatasetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_deleteDatasetGroupCmd).Standalone()
 
-	forecast_deleteDatasetGroupCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the dataset group to delete.")
-	forecast_deleteDatasetGroupCmd.MarkFlagRequired("dataset-group-arn")
+		forecast_deleteDatasetGroupCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the dataset group to delete.")
+		forecast_deleteDatasetGroupCmd.MarkFlagRequired("dataset-group-arn")
+	})
 	forecastCmd.AddCommand(forecast_deleteDatasetGroupCmd)
 }

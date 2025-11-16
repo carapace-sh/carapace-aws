@@ -12,11 +12,13 @@ var emr_addInstanceFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_addInstanceFleetCmd).Standalone()
+	carapace.Gen(emr_addInstanceFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_addInstanceFleetCmd).Standalone()
 
-	emr_addInstanceFleetCmd.Flags().String("cluster-id", "", "The unique identifier of the cluster.")
-	emr_addInstanceFleetCmd.Flags().String("instance-fleet", "", "Specifies the configuration of the instance fleet.")
-	emr_addInstanceFleetCmd.MarkFlagRequired("cluster-id")
-	emr_addInstanceFleetCmd.MarkFlagRequired("instance-fleet")
+		emr_addInstanceFleetCmd.Flags().String("cluster-id", "", "The unique identifier of the cluster.")
+		emr_addInstanceFleetCmd.Flags().String("instance-fleet", "", "Specifies the configuration of the instance fleet.")
+		emr_addInstanceFleetCmd.MarkFlagRequired("cluster-id")
+		emr_addInstanceFleetCmd.MarkFlagRequired("instance-fleet")
+	})
 	emrCmd.AddCommand(emr_addInstanceFleetCmd)
 }

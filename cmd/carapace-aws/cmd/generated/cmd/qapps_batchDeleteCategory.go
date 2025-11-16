@@ -12,11 +12,13 @@ var qapps_batchDeleteCategoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_batchDeleteCategoryCmd).Standalone()
+	carapace.Gen(qapps_batchDeleteCategoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_batchDeleteCategoryCmd).Standalone()
 
-	qapps_batchDeleteCategoryCmd.Flags().String("categories", "", "The list of IDs of the categories to be deleted.")
-	qapps_batchDeleteCategoryCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_batchDeleteCategoryCmd.MarkFlagRequired("categories")
-	qapps_batchDeleteCategoryCmd.MarkFlagRequired("instance-id")
+		qapps_batchDeleteCategoryCmd.Flags().String("categories", "", "The list of IDs of the categories to be deleted.")
+		qapps_batchDeleteCategoryCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_batchDeleteCategoryCmd.MarkFlagRequired("categories")
+		qapps_batchDeleteCategoryCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_batchDeleteCategoryCmd)
 }

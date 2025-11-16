@@ -12,7 +12,9 @@ var ssmQuicksetup_getServiceSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmQuicksetup_getServiceSettingsCmd).Standalone()
+	carapace.Gen(ssmQuicksetup_getServiceSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmQuicksetup_getServiceSettingsCmd).Standalone()
 
+	})
 	ssmQuicksetupCmd.AddCommand(ssmQuicksetup_getServiceSettingsCmd)
 }

@@ -12,10 +12,12 @@ var redshiftServerless_getSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getSnapshotCmd).Standalone()
+	carapace.Gen(redshiftServerless_getSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getSnapshotCmd).Standalone()
 
-	redshiftServerless_getSnapshotCmd.Flags().String("owner-account", "", "The owner Amazon Web Services account of a snapshot shared with another user.")
-	redshiftServerless_getSnapshotCmd.Flags().String("snapshot-arn", "", "The Amazon Resource Name (ARN) of the snapshot to return.")
-	redshiftServerless_getSnapshotCmd.Flags().String("snapshot-name", "", "The name of the snapshot to return.")
+		redshiftServerless_getSnapshotCmd.Flags().String("owner-account", "", "The owner Amazon Web Services account of a snapshot shared with another user.")
+		redshiftServerless_getSnapshotCmd.Flags().String("snapshot-arn", "", "The Amazon Resource Name (ARN) of the snapshot to return.")
+		redshiftServerless_getSnapshotCmd.Flags().String("snapshot-name", "", "The name of the snapshot to return.")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getSnapshotCmd)
 }

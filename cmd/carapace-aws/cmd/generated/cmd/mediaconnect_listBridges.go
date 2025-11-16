@@ -12,10 +12,12 @@ var mediaconnect_listBridgesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_listBridgesCmd).Standalone()
+	carapace.Gen(mediaconnect_listBridgesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_listBridgesCmd).Standalone()
 
-	mediaconnect_listBridgesCmd.Flags().String("filter-arn", "", "Filter the list results to display only the bridges associated with the selected ARN.")
-	mediaconnect_listBridgesCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
-	mediaconnect_listBridgesCmd.Flags().String("next-token", "", "The token that identifies the batch of results that you want to see.")
+		mediaconnect_listBridgesCmd.Flags().String("filter-arn", "", "Filter the list results to display only the bridges associated with the selected ARN.")
+		mediaconnect_listBridgesCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
+		mediaconnect_listBridgesCmd.Flags().String("next-token", "", "The token that identifies the batch of results that you want to see.")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_listBridgesCmd)
 }

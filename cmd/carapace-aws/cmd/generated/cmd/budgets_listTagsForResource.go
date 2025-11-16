@@ -12,9 +12,11 @@ var budgets_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(budgets_listTagsForResourceCmd).Standalone()
+	carapace.Gen(budgets_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(budgets_listTagsForResourceCmd).Standalone()
 
-	budgets_listTagsForResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
-	budgets_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		budgets_listTagsForResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
+		budgets_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	budgetsCmd.AddCommand(budgets_listTagsForResourceCmd)
 }

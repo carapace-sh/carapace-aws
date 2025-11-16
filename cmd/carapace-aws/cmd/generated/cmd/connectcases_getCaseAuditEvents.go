@@ -12,13 +12,15 @@ var connectcases_getCaseAuditEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_getCaseAuditEventsCmd).Standalone()
+	carapace.Gen(connectcases_getCaseAuditEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_getCaseAuditEventsCmd).Standalone()
 
-	connectcases_getCaseAuditEventsCmd.Flags().String("case-id", "", "A unique identifier of the case.")
-	connectcases_getCaseAuditEventsCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_getCaseAuditEventsCmd.Flags().String("max-results", "", "The maximum number of audit events to return.")
-	connectcases_getCaseAuditEventsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connectcases_getCaseAuditEventsCmd.MarkFlagRequired("case-id")
-	connectcases_getCaseAuditEventsCmd.MarkFlagRequired("domain-id")
+		connectcases_getCaseAuditEventsCmd.Flags().String("case-id", "", "A unique identifier of the case.")
+		connectcases_getCaseAuditEventsCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_getCaseAuditEventsCmd.Flags().String("max-results", "", "The maximum number of audit events to return.")
+		connectcases_getCaseAuditEventsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connectcases_getCaseAuditEventsCmd.MarkFlagRequired("case-id")
+		connectcases_getCaseAuditEventsCmd.MarkFlagRequired("domain-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_getCaseAuditEventsCmd)
 }

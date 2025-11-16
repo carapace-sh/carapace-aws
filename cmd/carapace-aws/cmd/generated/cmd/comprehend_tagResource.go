@@ -12,11 +12,13 @@ var comprehend_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_tagResourceCmd).Standalone()
+	carapace.Gen(comprehend_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_tagResourceCmd).Standalone()
 
-	comprehend_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the given Amazon Comprehend resource to which you want to associate the tags.")
-	comprehend_tagResourceCmd.Flags().String("tags", "", "Tags being associated with a specific Amazon Comprehend resource.")
-	comprehend_tagResourceCmd.MarkFlagRequired("resource-arn")
-	comprehend_tagResourceCmd.MarkFlagRequired("tags")
+		comprehend_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the given Amazon Comprehend resource to which you want to associate the tags.")
+		comprehend_tagResourceCmd.Flags().String("tags", "", "Tags being associated with a specific Amazon Comprehend resource.")
+		comprehend_tagResourceCmd.MarkFlagRequired("resource-arn")
+		comprehend_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	comprehendCmd.AddCommand(comprehend_tagResourceCmd)
 }

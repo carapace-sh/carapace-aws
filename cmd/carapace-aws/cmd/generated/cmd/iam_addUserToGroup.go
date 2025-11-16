@@ -12,11 +12,13 @@ var iam_addUserToGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_addUserToGroupCmd).Standalone()
+	carapace.Gen(iam_addUserToGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_addUserToGroupCmd).Standalone()
 
-	iam_addUserToGroupCmd.Flags().String("group-name", "", "The name of the group to update.")
-	iam_addUserToGroupCmd.Flags().String("user-name", "", "The name of the user to add.")
-	iam_addUserToGroupCmd.MarkFlagRequired("group-name")
-	iam_addUserToGroupCmd.MarkFlagRequired("user-name")
+		iam_addUserToGroupCmd.Flags().String("group-name", "", "The name of the group to update.")
+		iam_addUserToGroupCmd.Flags().String("user-name", "", "The name of the user to add.")
+		iam_addUserToGroupCmd.MarkFlagRequired("group-name")
+		iam_addUserToGroupCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_addUserToGroupCmd)
 }

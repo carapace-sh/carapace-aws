@@ -12,10 +12,12 @@ var connect_listTrafficDistributionGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listTrafficDistributionGroupsCmd).Standalone()
+	carapace.Gen(connect_listTrafficDistributionGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listTrafficDistributionGroupsCmd).Standalone()
 
-	connect_listTrafficDistributionGroupsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listTrafficDistributionGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listTrafficDistributionGroupsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listTrafficDistributionGroupsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listTrafficDistributionGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listTrafficDistributionGroupsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	connectCmd.AddCommand(connect_listTrafficDistributionGroupsCmd)
 }

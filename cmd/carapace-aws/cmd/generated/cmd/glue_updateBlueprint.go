@@ -12,12 +12,14 @@ var glue_updateBlueprintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_updateBlueprintCmd).Standalone()
+	carapace.Gen(glue_updateBlueprintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_updateBlueprintCmd).Standalone()
 
-	glue_updateBlueprintCmd.Flags().String("blueprint-location", "", "Specifies a path in Amazon S3 where the blueprint is published.")
-	glue_updateBlueprintCmd.Flags().String("description", "", "A description of the blueprint.")
-	glue_updateBlueprintCmd.Flags().String("name", "", "The name of the blueprint.")
-	glue_updateBlueprintCmd.MarkFlagRequired("blueprint-location")
-	glue_updateBlueprintCmd.MarkFlagRequired("name")
+		glue_updateBlueprintCmd.Flags().String("blueprint-location", "", "Specifies a path in Amazon S3 where the blueprint is published.")
+		glue_updateBlueprintCmd.Flags().String("description", "", "A description of the blueprint.")
+		glue_updateBlueprintCmd.Flags().String("name", "", "The name of the blueprint.")
+		glue_updateBlueprintCmd.MarkFlagRequired("blueprint-location")
+		glue_updateBlueprintCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_updateBlueprintCmd)
 }

@@ -12,11 +12,13 @@ var keyspaces_getTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspaces_getTableCmd).Standalone()
+	carapace.Gen(keyspaces_getTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspaces_getTableCmd).Standalone()
 
-	keyspaces_getTableCmd.Flags().String("keyspace-name", "", "The name of the keyspace that the table is stored in.")
-	keyspaces_getTableCmd.Flags().String("table-name", "", "The name of the table.")
-	keyspaces_getTableCmd.MarkFlagRequired("keyspace-name")
-	keyspaces_getTableCmd.MarkFlagRequired("table-name")
+		keyspaces_getTableCmd.Flags().String("keyspace-name", "", "The name of the keyspace that the table is stored in.")
+		keyspaces_getTableCmd.Flags().String("table-name", "", "The name of the table.")
+		keyspaces_getTableCmd.MarkFlagRequired("keyspace-name")
+		keyspaces_getTableCmd.MarkFlagRequired("table-name")
+	})
 	keyspacesCmd.AddCommand(keyspaces_getTableCmd)
 }

@@ -12,9 +12,11 @@ var lightsail_sendContactMethodVerificationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_sendContactMethodVerificationCmd).Standalone()
+	carapace.Gen(lightsail_sendContactMethodVerificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_sendContactMethodVerificationCmd).Standalone()
 
-	lightsail_sendContactMethodVerificationCmd.Flags().String("protocol", "", "The protocol to verify, such as `Email` or `SMS` (text messaging).")
-	lightsail_sendContactMethodVerificationCmd.MarkFlagRequired("protocol")
+		lightsail_sendContactMethodVerificationCmd.Flags().String("protocol", "", "The protocol to verify, such as `Email` or `SMS` (text messaging).")
+		lightsail_sendContactMethodVerificationCmd.MarkFlagRequired("protocol")
+	})
 	lightsailCmd.AddCommand(lightsail_sendContactMethodVerificationCmd)
 }

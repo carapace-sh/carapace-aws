@@ -12,14 +12,16 @@ var sagemakerA2iRuntime_startHumanLoopCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerA2iRuntime_startHumanLoopCmd).Standalone()
+	carapace.Gen(sagemakerA2iRuntime_startHumanLoopCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerA2iRuntime_startHumanLoopCmd).Standalone()
 
-	sagemakerA2iRuntime_startHumanLoopCmd.Flags().String("data-attributes", "", "Attributes of the specified data.")
-	sagemakerA2iRuntime_startHumanLoopCmd.Flags().String("flow-definition-arn", "", "The Amazon Resource Name (ARN) of the flow definition associated with this human loop.")
-	sagemakerA2iRuntime_startHumanLoopCmd.Flags().String("human-loop-input", "", "An object that contains information about the human loop.")
-	sagemakerA2iRuntime_startHumanLoopCmd.Flags().String("human-loop-name", "", "The name of the human loop.")
-	sagemakerA2iRuntime_startHumanLoopCmd.MarkFlagRequired("flow-definition-arn")
-	sagemakerA2iRuntime_startHumanLoopCmd.MarkFlagRequired("human-loop-input")
-	sagemakerA2iRuntime_startHumanLoopCmd.MarkFlagRequired("human-loop-name")
+		sagemakerA2iRuntime_startHumanLoopCmd.Flags().String("data-attributes", "", "Attributes of the specified data.")
+		sagemakerA2iRuntime_startHumanLoopCmd.Flags().String("flow-definition-arn", "", "The Amazon Resource Name (ARN) of the flow definition associated with this human loop.")
+		sagemakerA2iRuntime_startHumanLoopCmd.Flags().String("human-loop-input", "", "An object that contains information about the human loop.")
+		sagemakerA2iRuntime_startHumanLoopCmd.Flags().String("human-loop-name", "", "The name of the human loop.")
+		sagemakerA2iRuntime_startHumanLoopCmd.MarkFlagRequired("flow-definition-arn")
+		sagemakerA2iRuntime_startHumanLoopCmd.MarkFlagRequired("human-loop-input")
+		sagemakerA2iRuntime_startHumanLoopCmd.MarkFlagRequired("human-loop-name")
+	})
 	sagemakerA2iRuntimeCmd.AddCommand(sagemakerA2iRuntime_startHumanLoopCmd)
 }

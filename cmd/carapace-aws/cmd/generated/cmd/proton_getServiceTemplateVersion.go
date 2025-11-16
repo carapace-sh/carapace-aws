@@ -12,13 +12,15 @@ var proton_getServiceTemplateVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getServiceTemplateVersionCmd).Standalone()
+	carapace.Gen(proton_getServiceTemplateVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getServiceTemplateVersionCmd).Standalone()
 
-	proton_getServiceTemplateVersionCmd.Flags().String("major-version", "", "To get service template major version detail data, include `major Version`.")
-	proton_getServiceTemplateVersionCmd.Flags().String("minor-version", "", "To get service template minor version detail data, include `minorVersion`.")
-	proton_getServiceTemplateVersionCmd.Flags().String("template-name", "", "The name of the service template a version of which you want to get detailed data for.")
-	proton_getServiceTemplateVersionCmd.MarkFlagRequired("major-version")
-	proton_getServiceTemplateVersionCmd.MarkFlagRequired("minor-version")
-	proton_getServiceTemplateVersionCmd.MarkFlagRequired("template-name")
+		proton_getServiceTemplateVersionCmd.Flags().String("major-version", "", "To get service template major version detail data, include `major Version`.")
+		proton_getServiceTemplateVersionCmd.Flags().String("minor-version", "", "To get service template minor version detail data, include `minorVersion`.")
+		proton_getServiceTemplateVersionCmd.Flags().String("template-name", "", "The name of the service template a version of which you want to get detailed data for.")
+		proton_getServiceTemplateVersionCmd.MarkFlagRequired("major-version")
+		proton_getServiceTemplateVersionCmd.MarkFlagRequired("minor-version")
+		proton_getServiceTemplateVersionCmd.MarkFlagRequired("template-name")
+	})
 	protonCmd.AddCommand(proton_getServiceTemplateVersionCmd)
 }

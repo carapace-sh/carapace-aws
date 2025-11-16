@@ -12,9 +12,11 @@ var osis_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_getResourcePolicyCmd).Standalone()
+	carapace.Gen(osis_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_getResourcePolicyCmd).Standalone()
 
-	osis_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which to retrieve the policy.")
-	osis_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		osis_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which to retrieve the policy.")
+		osis_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	osisCmd.AddCommand(osis_getResourcePolicyCmd)
 }

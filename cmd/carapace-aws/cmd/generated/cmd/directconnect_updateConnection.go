@@ -12,11 +12,13 @@ var directconnect_updateConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_updateConnectionCmd).Standalone()
+	carapace.Gen(directconnect_updateConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_updateConnectionCmd).Standalone()
 
-	directconnect_updateConnectionCmd.Flags().String("connection-id", "", "The ID of the connection.")
-	directconnect_updateConnectionCmd.Flags().String("connection-name", "", "The name of the connection.")
-	directconnect_updateConnectionCmd.Flags().String("encryption-mode", "", "The connection MAC Security (MACsec) encryption mode.")
-	directconnect_updateConnectionCmd.MarkFlagRequired("connection-id")
+		directconnect_updateConnectionCmd.Flags().String("connection-id", "", "The ID of the connection.")
+		directconnect_updateConnectionCmd.Flags().String("connection-name", "", "The name of the connection.")
+		directconnect_updateConnectionCmd.Flags().String("encryption-mode", "", "The connection MAC Security (MACsec) encryption mode.")
+		directconnect_updateConnectionCmd.MarkFlagRequired("connection-id")
+	})
 	directconnectCmd.AddCommand(directconnect_updateConnectionCmd)
 }

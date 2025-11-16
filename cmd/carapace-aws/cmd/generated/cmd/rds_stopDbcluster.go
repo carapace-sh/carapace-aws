@@ -12,9 +12,11 @@ var rds_stopDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_stopDbclusterCmd).Standalone()
+	carapace.Gen(rds_stopDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_stopDbclusterCmd).Standalone()
 
-	rds_stopDbclusterCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the Amazon Aurora DB cluster to be stopped.")
-	rds_stopDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+		rds_stopDbclusterCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the Amazon Aurora DB cluster to be stopped.")
+		rds_stopDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+	})
 	rdsCmd.AddCommand(rds_stopDbclusterCmd)
 }

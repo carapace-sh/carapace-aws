@@ -12,9 +12,11 @@ var sagemaker_deleteMlflowTrackingServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteMlflowTrackingServerCmd).Standalone()
+	carapace.Gen(sagemaker_deleteMlflowTrackingServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteMlflowTrackingServerCmd).Standalone()
 
-	sagemaker_deleteMlflowTrackingServerCmd.Flags().String("tracking-server-name", "", "The name of the the tracking server to delete.")
-	sagemaker_deleteMlflowTrackingServerCmd.MarkFlagRequired("tracking-server-name")
+		sagemaker_deleteMlflowTrackingServerCmd.Flags().String("tracking-server-name", "", "The name of the the tracking server to delete.")
+		sagemaker_deleteMlflowTrackingServerCmd.MarkFlagRequired("tracking-server-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteMlflowTrackingServerCmd)
 }

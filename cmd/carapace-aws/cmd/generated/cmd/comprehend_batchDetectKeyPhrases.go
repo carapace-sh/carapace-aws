@@ -12,11 +12,13 @@ var comprehend_batchDetectKeyPhrasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_batchDetectKeyPhrasesCmd).Standalone()
+	carapace.Gen(comprehend_batchDetectKeyPhrasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_batchDetectKeyPhrasesCmd).Standalone()
 
-	comprehend_batchDetectKeyPhrasesCmd.Flags().String("language-code", "", "The language of the input documents.")
-	comprehend_batchDetectKeyPhrasesCmd.Flags().String("text-list", "", "A list containing the UTF-8 encoded text of the input documents.")
-	comprehend_batchDetectKeyPhrasesCmd.MarkFlagRequired("language-code")
-	comprehend_batchDetectKeyPhrasesCmd.MarkFlagRequired("text-list")
+		comprehend_batchDetectKeyPhrasesCmd.Flags().String("language-code", "", "The language of the input documents.")
+		comprehend_batchDetectKeyPhrasesCmd.Flags().String("text-list", "", "A list containing the UTF-8 encoded text of the input documents.")
+		comprehend_batchDetectKeyPhrasesCmd.MarkFlagRequired("language-code")
+		comprehend_batchDetectKeyPhrasesCmd.MarkFlagRequired("text-list")
+	})
 	comprehendCmd.AddCommand(comprehend_batchDetectKeyPhrasesCmd)
 }

@@ -12,11 +12,13 @@ var ds_deregisterEventTopicCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_deregisterEventTopicCmd).Standalone()
+	carapace.Gen(ds_deregisterEventTopicCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_deregisterEventTopicCmd).Standalone()
 
-	ds_deregisterEventTopicCmd.Flags().String("directory-id", "", "The Directory ID to remove as a publisher.")
-	ds_deregisterEventTopicCmd.Flags().String("topic-name", "", "The name of the Amazon SNS topic from which to remove the directory as a publisher.")
-	ds_deregisterEventTopicCmd.MarkFlagRequired("directory-id")
-	ds_deregisterEventTopicCmd.MarkFlagRequired("topic-name")
+		ds_deregisterEventTopicCmd.Flags().String("directory-id", "", "The Directory ID to remove as a publisher.")
+		ds_deregisterEventTopicCmd.Flags().String("topic-name", "", "The name of the Amazon SNS topic from which to remove the directory as a publisher.")
+		ds_deregisterEventTopicCmd.MarkFlagRequired("directory-id")
+		ds_deregisterEventTopicCmd.MarkFlagRequired("topic-name")
+	})
 	dsCmd.AddCommand(ds_deregisterEventTopicCmd)
 }

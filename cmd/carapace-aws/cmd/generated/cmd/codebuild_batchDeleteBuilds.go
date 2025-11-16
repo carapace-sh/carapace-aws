@@ -12,9 +12,11 @@ var codebuild_batchDeleteBuildsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_batchDeleteBuildsCmd).Standalone()
+	carapace.Gen(codebuild_batchDeleteBuildsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_batchDeleteBuildsCmd).Standalone()
 
-	codebuild_batchDeleteBuildsCmd.Flags().String("ids", "", "The IDs of the builds to delete.")
-	codebuild_batchDeleteBuildsCmd.MarkFlagRequired("ids")
+		codebuild_batchDeleteBuildsCmd.Flags().String("ids", "", "The IDs of the builds to delete.")
+		codebuild_batchDeleteBuildsCmd.MarkFlagRequired("ids")
+	})
 	codebuildCmd.AddCommand(codebuild_batchDeleteBuildsCmd)
 }

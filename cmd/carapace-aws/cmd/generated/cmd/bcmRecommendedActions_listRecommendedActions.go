@@ -12,10 +12,12 @@ var bcmRecommendedActions_listRecommendedActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmRecommendedActions_listRecommendedActionsCmd).Standalone()
+	carapace.Gen(bcmRecommendedActions_listRecommendedActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmRecommendedActions_listRecommendedActionsCmd).Standalone()
 
-	bcmRecommendedActions_listRecommendedActionsCmd.Flags().String("filter", "", "The criteria that you want all returned recommended actions to match.")
-	bcmRecommendedActions_listRecommendedActionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	bcmRecommendedActions_listRecommendedActionsCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results that you want to retrieve.")
+		bcmRecommendedActions_listRecommendedActionsCmd.Flags().String("filter", "", "The criteria that you want all returned recommended actions to match.")
+		bcmRecommendedActions_listRecommendedActionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		bcmRecommendedActions_listRecommendedActionsCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results that you want to retrieve.")
+	})
 	bcmRecommendedActionsCmd.AddCommand(bcmRecommendedActions_listRecommendedActionsCmd)
 }

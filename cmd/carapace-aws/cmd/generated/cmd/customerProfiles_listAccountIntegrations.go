@@ -12,12 +12,14 @@ var customerProfiles_listAccountIntegrationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_listAccountIntegrationsCmd).Standalone()
+	carapace.Gen(customerProfiles_listAccountIntegrationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_listAccountIntegrationsCmd).Standalone()
 
-	customerProfiles_listAccountIntegrationsCmd.Flags().String("include-hidden", "", "Boolean to indicate if hidden integration should be returned.")
-	customerProfiles_listAccountIntegrationsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
-	customerProfiles_listAccountIntegrationsCmd.Flags().String("next-token", "", "The pagination token from the previous ListAccountIntegrations API call.")
-	customerProfiles_listAccountIntegrationsCmd.Flags().String("uri", "", "The URI of the S3 bucket or any other type of data source.")
-	customerProfiles_listAccountIntegrationsCmd.MarkFlagRequired("uri")
+		customerProfiles_listAccountIntegrationsCmd.Flags().String("include-hidden", "", "Boolean to indicate if hidden integration should be returned.")
+		customerProfiles_listAccountIntegrationsCmd.Flags().String("max-results", "", "The maximum number of objects returned per page.")
+		customerProfiles_listAccountIntegrationsCmd.Flags().String("next-token", "", "The pagination token from the previous ListAccountIntegrations API call.")
+		customerProfiles_listAccountIntegrationsCmd.Flags().String("uri", "", "The URI of the S3 bucket or any other type of data source.")
+		customerProfiles_listAccountIntegrationsCmd.MarkFlagRequired("uri")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_listAccountIntegrationsCmd)
 }

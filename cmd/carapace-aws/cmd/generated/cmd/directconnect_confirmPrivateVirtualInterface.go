@@ -12,11 +12,13 @@ var directconnect_confirmPrivateVirtualInterfaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_confirmPrivateVirtualInterfaceCmd).Standalone()
+	carapace.Gen(directconnect_confirmPrivateVirtualInterfaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_confirmPrivateVirtualInterfaceCmd).Standalone()
 
-	directconnect_confirmPrivateVirtualInterfaceCmd.Flags().String("direct-connect-gateway-id", "", "The ID of the Direct Connect gateway.")
-	directconnect_confirmPrivateVirtualInterfaceCmd.Flags().String("virtual-gateway-id", "", "The ID of the virtual private gateway.")
-	directconnect_confirmPrivateVirtualInterfaceCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
-	directconnect_confirmPrivateVirtualInterfaceCmd.MarkFlagRequired("virtual-interface-id")
+		directconnect_confirmPrivateVirtualInterfaceCmd.Flags().String("direct-connect-gateway-id", "", "The ID of the Direct Connect gateway.")
+		directconnect_confirmPrivateVirtualInterfaceCmd.Flags().String("virtual-gateway-id", "", "The ID of the virtual private gateway.")
+		directconnect_confirmPrivateVirtualInterfaceCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
+		directconnect_confirmPrivateVirtualInterfaceCmd.MarkFlagRequired("virtual-interface-id")
+	})
 	directconnectCmd.AddCommand(directconnect_confirmPrivateVirtualInterfaceCmd)
 }

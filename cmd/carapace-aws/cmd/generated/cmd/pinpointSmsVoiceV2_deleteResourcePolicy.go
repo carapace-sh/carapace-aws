@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteResourcePolicyCmd).Standalone()
 
-	pinpointSmsVoiceV2_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the End User MessagingSMS resource you're deleting the resource-based policy from.")
-	pinpointSmsVoiceV2_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		pinpointSmsVoiceV2_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the End User MessagingSMS resource you're deleting the resource-based policy from.")
+		pinpointSmsVoiceV2_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteResourcePolicyCmd)
 }

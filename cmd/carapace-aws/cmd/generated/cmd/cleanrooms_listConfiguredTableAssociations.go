@@ -12,11 +12,13 @@ var cleanrooms_listConfiguredTableAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_listConfiguredTableAssociationsCmd).Standalone()
+	carapace.Gen(cleanrooms_listConfiguredTableAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_listConfiguredTableAssociationsCmd).Standalone()
 
-	cleanrooms_listConfiguredTableAssociationsCmd.Flags().String("max-results", "", "The maximum number of results that are returned for an API request call.")
-	cleanrooms_listConfiguredTableAssociationsCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership to list configured table associations for.")
-	cleanrooms_listConfiguredTableAssociationsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	cleanrooms_listConfiguredTableAssociationsCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_listConfiguredTableAssociationsCmd.Flags().String("max-results", "", "The maximum number of results that are returned for an API request call.")
+		cleanrooms_listConfiguredTableAssociationsCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership to list configured table associations for.")
+		cleanrooms_listConfiguredTableAssociationsCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		cleanrooms_listConfiguredTableAssociationsCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_listConfiguredTableAssociationsCmd)
 }

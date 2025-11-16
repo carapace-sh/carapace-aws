@@ -12,9 +12,11 @@ var workspacesThinClient_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClient_listTagsForResourceCmd).Standalone()
+	carapace.Gen(workspacesThinClient_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClient_listTagsForResourceCmd).Standalone()
 
-	workspacesThinClient_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.")
-	workspacesThinClient_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		workspacesThinClient_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.")
+		workspacesThinClient_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	workspacesThinClientCmd.AddCommand(workspacesThinClient_listTagsForResourceCmd)
 }

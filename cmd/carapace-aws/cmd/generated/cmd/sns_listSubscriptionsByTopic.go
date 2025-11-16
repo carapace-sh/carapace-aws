@@ -12,10 +12,12 @@ var sns_listSubscriptionsByTopicCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_listSubscriptionsByTopicCmd).Standalone()
+	carapace.Gen(sns_listSubscriptionsByTopicCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_listSubscriptionsByTopicCmd).Standalone()
 
-	sns_listSubscriptionsByTopicCmd.Flags().String("next-token", "", "Token returned by the previous `ListSubscriptionsByTopic` request.")
-	sns_listSubscriptionsByTopicCmd.Flags().String("topic-arn", "", "The ARN of the topic for which you wish to find subscriptions.")
-	sns_listSubscriptionsByTopicCmd.MarkFlagRequired("topic-arn")
+		sns_listSubscriptionsByTopicCmd.Flags().String("next-token", "", "Token returned by the previous `ListSubscriptionsByTopic` request.")
+		sns_listSubscriptionsByTopicCmd.Flags().String("topic-arn", "", "The ARN of the topic for which you wish to find subscriptions.")
+		sns_listSubscriptionsByTopicCmd.MarkFlagRequired("topic-arn")
+	})
 	snsCmd.AddCommand(sns_listSubscriptionsByTopicCmd)
 }

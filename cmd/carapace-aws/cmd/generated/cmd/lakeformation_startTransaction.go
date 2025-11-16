@@ -12,8 +12,10 @@ var lakeformation_startTransactionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_startTransactionCmd).Standalone()
+	carapace.Gen(lakeformation_startTransactionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_startTransactionCmd).Standalone()
 
-	lakeformation_startTransactionCmd.Flags().String("transaction-type", "", "Indicates whether this transaction should be read only or read and write.")
+		lakeformation_startTransactionCmd.Flags().String("transaction-type", "", "Indicates whether this transaction should be read only or read and write.")
+	})
 	lakeformationCmd.AddCommand(lakeformation_startTransactionCmd)
 }

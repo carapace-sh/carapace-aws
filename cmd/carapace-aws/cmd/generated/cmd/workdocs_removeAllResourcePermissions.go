@@ -12,10 +12,12 @@ var workdocs_removeAllResourcePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_removeAllResourcePermissionsCmd).Standalone()
+	carapace.Gen(workdocs_removeAllResourcePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_removeAllResourcePermissionsCmd).Standalone()
 
-	workdocs_removeAllResourcePermissionsCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_removeAllResourcePermissionsCmd.Flags().String("resource-id", "", "The ID of the resource.")
-	workdocs_removeAllResourcePermissionsCmd.MarkFlagRequired("resource-id")
+		workdocs_removeAllResourcePermissionsCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_removeAllResourcePermissionsCmd.Flags().String("resource-id", "", "The ID of the resource.")
+		workdocs_removeAllResourcePermissionsCmd.MarkFlagRequired("resource-id")
+	})
 	workdocsCmd.AddCommand(workdocs_removeAllResourcePermissionsCmd)
 }

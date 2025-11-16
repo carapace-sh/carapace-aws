@@ -12,9 +12,11 @@ var iotsitewise_describeGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeGatewayCmd).Standalone()
+	carapace.Gen(iotsitewise_describeGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeGatewayCmd).Standalone()
 
-	iotsitewise_describeGatewayCmd.Flags().String("gateway-id", "", "The ID of the gateway device.")
-	iotsitewise_describeGatewayCmd.MarkFlagRequired("gateway-id")
+		iotsitewise_describeGatewayCmd.Flags().String("gateway-id", "", "The ID of the gateway device.")
+		iotsitewise_describeGatewayCmd.MarkFlagRequired("gateway-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeGatewayCmd)
 }

@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_getOauth2CredentialProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_getOauth2CredentialProviderCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_getOauth2CredentialProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_getOauth2CredentialProviderCmd).Standalone()
 
-	bedrockAgentcoreControl_getOauth2CredentialProviderCmd.Flags().String("name", "", "The name of the OAuth2 credential provider to retrieve.")
-	bedrockAgentcoreControl_getOauth2CredentialProviderCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_getOauth2CredentialProviderCmd.Flags().String("name", "", "The name of the OAuth2 credential provider to retrieve.")
+		bedrockAgentcoreControl_getOauth2CredentialProviderCmd.MarkFlagRequired("name")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_getOauth2CredentialProviderCmd)
 }

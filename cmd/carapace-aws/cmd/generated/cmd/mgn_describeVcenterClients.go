@@ -12,9 +12,11 @@ var mgn_describeVcenterClientsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_describeVcenterClientsCmd).Standalone()
+	carapace.Gen(mgn_describeVcenterClientsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_describeVcenterClientsCmd).Standalone()
 
-	mgn_describeVcenterClientsCmd.Flags().String("max-results", "", "Maximum results to be returned in DescribeVcenterClients.")
-	mgn_describeVcenterClientsCmd.Flags().String("next-token", "", "Next pagination token to be provided for DescribeVcenterClients.")
+		mgn_describeVcenterClientsCmd.Flags().String("max-results", "", "Maximum results to be returned in DescribeVcenterClients.")
+		mgn_describeVcenterClientsCmd.Flags().String("next-token", "", "Next pagination token to be provided for DescribeVcenterClients.")
+	})
 	mgnCmd.AddCommand(mgn_describeVcenterClientsCmd)
 }

@@ -12,10 +12,12 @@ var s3control_listStorageLensConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_listStorageLensConfigurationsCmd).Standalone()
+	carapace.Gen(s3control_listStorageLensConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_listStorageLensConfigurationsCmd).Standalone()
 
-	s3control_listStorageLensConfigurationsCmd.Flags().String("account-id", "", "The account ID of the requester.")
-	s3control_listStorageLensConfigurationsCmd.Flags().String("next-token", "", "A pagination token to request the next page of results.")
-	s3control_listStorageLensConfigurationsCmd.MarkFlagRequired("account-id")
+		s3control_listStorageLensConfigurationsCmd.Flags().String("account-id", "", "The account ID of the requester.")
+		s3control_listStorageLensConfigurationsCmd.Flags().String("next-token", "", "A pagination token to request the next page of results.")
+		s3control_listStorageLensConfigurationsCmd.MarkFlagRequired("account-id")
+	})
 	s3controlCmd.AddCommand(s3control_listStorageLensConfigurationsCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_describeWorkforceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeWorkforceCmd).Standalone()
+	carapace.Gen(sagemaker_describeWorkforceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeWorkforceCmd).Standalone()
 
-	sagemaker_describeWorkforceCmd.Flags().String("workforce-name", "", "The name of the private workforce whose access you want to restrict.")
-	sagemaker_describeWorkforceCmd.MarkFlagRequired("workforce-name")
+		sagemaker_describeWorkforceCmd.Flags().String("workforce-name", "", "The name of the private workforce whose access you want to restrict.")
+		sagemaker_describeWorkforceCmd.MarkFlagRequired("workforce-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeWorkforceCmd)
 }

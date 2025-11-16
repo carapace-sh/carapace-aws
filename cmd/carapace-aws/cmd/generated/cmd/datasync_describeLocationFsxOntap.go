@@ -12,9 +12,11 @@ var datasync_describeLocationFsxOntapCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeLocationFsxOntapCmd).Standalone()
+	carapace.Gen(datasync_describeLocationFsxOntapCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeLocationFsxOntapCmd).Standalone()
 
-	datasync_describeLocationFsxOntapCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file system location that you want information about.")
-	datasync_describeLocationFsxOntapCmd.MarkFlagRequired("location-arn")
+		datasync_describeLocationFsxOntapCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file system location that you want information about.")
+		datasync_describeLocationFsxOntapCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeLocationFsxOntapCmd)
 }

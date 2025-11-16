@@ -12,9 +12,11 @@ var cloudtrail_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_getResourcePolicyCmd).Standalone()
+	carapace.Gen(cloudtrail_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_getResourcePolicyCmd).Standalone()
 
-	cloudtrail_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to the resource-based policy.")
-	cloudtrail_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		cloudtrail_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to the resource-based policy.")
+		cloudtrail_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_getResourcePolicyCmd)
 }

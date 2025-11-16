@@ -12,9 +12,11 @@ var redshift_describeResizeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeResizeCmd).Standalone()
+	carapace.Gen(redshift_describeResizeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeResizeCmd).Standalone()
 
-	redshift_describeResizeCmd.Flags().String("cluster-identifier", "", "The unique identifier of a cluster whose resize progress you are requesting.")
-	redshift_describeResizeCmd.MarkFlagRequired("cluster-identifier")
+		redshift_describeResizeCmd.Flags().String("cluster-identifier", "", "The unique identifier of a cluster whose resize progress you are requesting.")
+		redshift_describeResizeCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_describeResizeCmd)
 }

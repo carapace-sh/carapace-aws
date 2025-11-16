@@ -12,9 +12,11 @@ var glue_getDevEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getDevEndpointCmd).Standalone()
+	carapace.Gen(glue_getDevEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getDevEndpointCmd).Standalone()
 
-	glue_getDevEndpointCmd.Flags().String("endpoint-name", "", "Name of the `DevEndpoint` to retrieve information for.")
-	glue_getDevEndpointCmd.MarkFlagRequired("endpoint-name")
+		glue_getDevEndpointCmd.Flags().String("endpoint-name", "", "Name of the `DevEndpoint` to retrieve information for.")
+		glue_getDevEndpointCmd.MarkFlagRequired("endpoint-name")
+	})
 	glueCmd.AddCommand(glue_getDevEndpointCmd)
 }

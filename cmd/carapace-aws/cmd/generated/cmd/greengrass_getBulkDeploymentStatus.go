@@ -12,9 +12,11 @@ var greengrass_getBulkDeploymentStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getBulkDeploymentStatusCmd).Standalone()
+	carapace.Gen(greengrass_getBulkDeploymentStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getBulkDeploymentStatusCmd).Standalone()
 
-	greengrass_getBulkDeploymentStatusCmd.Flags().String("bulk-deployment-id", "", "The ID of the bulk deployment.")
-	greengrass_getBulkDeploymentStatusCmd.MarkFlagRequired("bulk-deployment-id")
+		greengrass_getBulkDeploymentStatusCmd.Flags().String("bulk-deployment-id", "", "The ID of the bulk deployment.")
+		greengrass_getBulkDeploymentStatusCmd.MarkFlagRequired("bulk-deployment-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getBulkDeploymentStatusCmd)
 }

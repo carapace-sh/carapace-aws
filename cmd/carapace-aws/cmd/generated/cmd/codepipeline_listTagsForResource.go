@@ -12,11 +12,13 @@ var codepipeline_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_listTagsForResourceCmd).Standalone()
+	carapace.Gen(codepipeline_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_listTagsForResourceCmd).Standalone()
 
-	codepipeline_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	codepipeline_listTagsForResourceCmd.Flags().String("next-token", "", "The token that was returned from the previous API call, which would be used to return the next page of the list.")
-	codepipeline_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to get tags for.")
-	codepipeline_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		codepipeline_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		codepipeline_listTagsForResourceCmd.Flags().String("next-token", "", "The token that was returned from the previous API call, which would be used to return the next page of the list.")
+		codepipeline_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to get tags for.")
+		codepipeline_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	codepipelineCmd.AddCommand(codepipeline_listTagsForResourceCmd)
 }

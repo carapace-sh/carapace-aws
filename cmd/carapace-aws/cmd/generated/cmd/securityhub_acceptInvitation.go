@@ -12,11 +12,13 @@ var securityhub_acceptInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_acceptInvitationCmd).Standalone()
+	carapace.Gen(securityhub_acceptInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_acceptInvitationCmd).Standalone()
 
-	securityhub_acceptInvitationCmd.Flags().String("invitation-id", "", "The identifier of the invitation sent from the Security Hub administrator account.")
-	securityhub_acceptInvitationCmd.Flags().String("master-id", "", "The account ID of the Security Hub administrator account that sent the invitation.")
-	securityhub_acceptInvitationCmd.MarkFlagRequired("invitation-id")
-	securityhub_acceptInvitationCmd.MarkFlagRequired("master-id")
+		securityhub_acceptInvitationCmd.Flags().String("invitation-id", "", "The identifier of the invitation sent from the Security Hub administrator account.")
+		securityhub_acceptInvitationCmd.Flags().String("master-id", "", "The account ID of the Security Hub administrator account that sent the invitation.")
+		securityhub_acceptInvitationCmd.MarkFlagRequired("invitation-id")
+		securityhub_acceptInvitationCmd.MarkFlagRequired("master-id")
+	})
 	securityhubCmd.AddCommand(securityhub_acceptInvitationCmd)
 }

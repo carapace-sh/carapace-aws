@@ -12,9 +12,11 @@ var lightsail_getOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getOperationCmd).Standalone()
+	carapace.Gen(lightsail_getOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getOperationCmd).Standalone()
 
-	lightsail_getOperationCmd.Flags().String("operation-id", "", "A GUID used to identify the operation.")
-	lightsail_getOperationCmd.MarkFlagRequired("operation-id")
+		lightsail_getOperationCmd.Flags().String("operation-id", "", "A GUID used to identify the operation.")
+		lightsail_getOperationCmd.MarkFlagRequired("operation-id")
+	})
 	lightsailCmd.AddCommand(lightsail_getOperationCmd)
 }

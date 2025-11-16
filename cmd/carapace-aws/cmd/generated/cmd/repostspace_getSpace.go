@@ -12,9 +12,11 @@ var repostspace_getSpaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_getSpaceCmd).Standalone()
+	carapace.Gen(repostspace_getSpaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_getSpaceCmd).Standalone()
 
-	repostspace_getSpaceCmd.Flags().String("space-id", "", "The ID of the private re:Post.")
-	repostspace_getSpaceCmd.MarkFlagRequired("space-id")
+		repostspace_getSpaceCmd.Flags().String("space-id", "", "The ID of the private re:Post.")
+		repostspace_getSpaceCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_getSpaceCmd)
 }

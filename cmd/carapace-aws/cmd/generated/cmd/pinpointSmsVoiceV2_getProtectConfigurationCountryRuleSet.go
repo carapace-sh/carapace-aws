@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd).Standalone()
 
-	pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd.Flags().String("number-capability", "", "The capability type to return the CountryRuleSet for.")
-	pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
-	pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("number-capability")
-	pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("protect-configuration-id")
+		pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd.Flags().String("number-capability", "", "The capability type to return the CountryRuleSet for.")
+		pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
+		pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("number-capability")
+		pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd.MarkFlagRequired("protect-configuration-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_getProtectConfigurationCountryRuleSetCmd)
 }

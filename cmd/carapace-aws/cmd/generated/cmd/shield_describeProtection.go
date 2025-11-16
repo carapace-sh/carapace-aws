@@ -12,9 +12,11 @@ var shield_describeProtectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_describeProtectionCmd).Standalone()
+	carapace.Gen(shield_describeProtectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_describeProtectionCmd).Standalone()
 
-	shield_describeProtectionCmd.Flags().String("protection-id", "", "The unique identifier (ID) for the [Protection]() object to describe.")
-	shield_describeProtectionCmd.Flags().String("resource-arn", "", "The ARN (Amazon Resource Name) of the protected Amazon Web Services resource.")
+		shield_describeProtectionCmd.Flags().String("protection-id", "", "The unique identifier (ID) for the [Protection]() object to describe.")
+		shield_describeProtectionCmd.Flags().String("resource-arn", "", "The ARN (Amazon Resource Name) of the protected Amazon Web Services resource.")
+	})
 	shieldCmd.AddCommand(shield_describeProtectionCmd)
 }

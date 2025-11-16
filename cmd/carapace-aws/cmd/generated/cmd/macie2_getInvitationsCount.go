@@ -12,7 +12,9 @@ var macie2_getInvitationsCountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getInvitationsCountCmd).Standalone()
+	carapace.Gen(macie2_getInvitationsCountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getInvitationsCountCmd).Standalone()
 
+	})
 	macie2Cmd.AddCommand(macie2_getInvitationsCountCmd)
 }

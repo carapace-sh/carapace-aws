@@ -12,10 +12,12 @@ var omics_deleteVariantStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_deleteVariantStoreCmd).Standalone()
+	carapace.Gen(omics_deleteVariantStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_deleteVariantStoreCmd).Standalone()
 
-	omics_deleteVariantStoreCmd.Flags().String("force", "", "Whether to force deletion.")
-	omics_deleteVariantStoreCmd.Flags().String("name", "", "The store's name.")
-	omics_deleteVariantStoreCmd.MarkFlagRequired("name")
+		omics_deleteVariantStoreCmd.Flags().String("force", "", "Whether to force deletion.")
+		omics_deleteVariantStoreCmd.Flags().String("name", "", "The store's name.")
+		omics_deleteVariantStoreCmd.MarkFlagRequired("name")
+	})
 	omicsCmd.AddCommand(omics_deleteVariantStoreCmd)
 }

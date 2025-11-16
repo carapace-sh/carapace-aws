@@ -12,7 +12,9 @@ var protonCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(protonCmd).Standalone()
+	carapace.Gen(protonCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(protonCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(protonCmd)
 }

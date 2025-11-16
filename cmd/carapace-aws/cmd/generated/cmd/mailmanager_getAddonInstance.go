@@ -12,9 +12,11 @@ var mailmanager_getAddonInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_getAddonInstanceCmd).Standalone()
+	carapace.Gen(mailmanager_getAddonInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_getAddonInstanceCmd).Standalone()
 
-	mailmanager_getAddonInstanceCmd.Flags().String("addon-instance-id", "", "The Add On instance ID to retrieve information for.")
-	mailmanager_getAddonInstanceCmd.MarkFlagRequired("addon-instance-id")
+		mailmanager_getAddonInstanceCmd.Flags().String("addon-instance-id", "", "The Add On instance ID to retrieve information for.")
+		mailmanager_getAddonInstanceCmd.MarkFlagRequired("addon-instance-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_getAddonInstanceCmd)
 }

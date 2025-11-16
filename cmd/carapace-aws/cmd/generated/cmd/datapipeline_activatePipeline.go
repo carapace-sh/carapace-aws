@@ -12,11 +12,13 @@ var datapipeline_activatePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_activatePipelineCmd).Standalone()
+	carapace.Gen(datapipeline_activatePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_activatePipelineCmd).Standalone()
 
-	datapipeline_activatePipelineCmd.Flags().String("parameter-values", "", "A list of parameter values to pass to the pipeline at activation.")
-	datapipeline_activatePipelineCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
-	datapipeline_activatePipelineCmd.Flags().String("start-timestamp", "", "The date and time to resume the pipeline.")
-	datapipeline_activatePipelineCmd.MarkFlagRequired("pipeline-id")
+		datapipeline_activatePipelineCmd.Flags().String("parameter-values", "", "A list of parameter values to pass to the pipeline at activation.")
+		datapipeline_activatePipelineCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
+		datapipeline_activatePipelineCmd.Flags().String("start-timestamp", "", "The date and time to resume the pipeline.")
+		datapipeline_activatePipelineCmd.MarkFlagRequired("pipeline-id")
+	})
 	datapipelineCmd.AddCommand(datapipeline_activatePipelineCmd)
 }

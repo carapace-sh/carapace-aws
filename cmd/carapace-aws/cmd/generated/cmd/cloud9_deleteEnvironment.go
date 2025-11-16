@@ -12,9 +12,11 @@ var cloud9_deleteEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloud9_deleteEnvironmentCmd).Standalone()
+	carapace.Gen(cloud9_deleteEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloud9_deleteEnvironmentCmd).Standalone()
 
-	cloud9_deleteEnvironmentCmd.Flags().String("environment-id", "", "The ID of the environment to delete.")
-	cloud9_deleteEnvironmentCmd.MarkFlagRequired("environment-id")
+		cloud9_deleteEnvironmentCmd.Flags().String("environment-id", "", "The ID of the environment to delete.")
+		cloud9_deleteEnvironmentCmd.MarkFlagRequired("environment-id")
+	})
 	cloud9Cmd.AddCommand(cloud9_deleteEnvironmentCmd)
 }

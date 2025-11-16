@@ -12,9 +12,11 @@ var sagemaker_deleteEdgeDeploymentPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteEdgeDeploymentPlanCmd).Standalone()
+	carapace.Gen(sagemaker_deleteEdgeDeploymentPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteEdgeDeploymentPlanCmd).Standalone()
 
-	sagemaker_deleteEdgeDeploymentPlanCmd.Flags().String("edge-deployment-plan-name", "", "The name of the edge deployment plan to delete.")
-	sagemaker_deleteEdgeDeploymentPlanCmd.MarkFlagRequired("edge-deployment-plan-name")
+		sagemaker_deleteEdgeDeploymentPlanCmd.Flags().String("edge-deployment-plan-name", "", "The name of the edge deployment plan to delete.")
+		sagemaker_deleteEdgeDeploymentPlanCmd.MarkFlagRequired("edge-deployment-plan-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteEdgeDeploymentPlanCmd)
 }

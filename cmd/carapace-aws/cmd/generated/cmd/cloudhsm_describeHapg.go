@@ -12,9 +12,11 @@ var cloudhsm_describeHapgCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_describeHapgCmd).Standalone()
+	carapace.Gen(cloudhsm_describeHapgCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_describeHapgCmd).Standalone()
 
-	cloudhsm_describeHapgCmd.Flags().String("hapg-arn", "", "The ARN of the high-availability partition group to describe.")
-	cloudhsm_describeHapgCmd.MarkFlagRequired("hapg-arn")
+		cloudhsm_describeHapgCmd.Flags().String("hapg-arn", "", "The ARN of the high-availability partition group to describe.")
+		cloudhsm_describeHapgCmd.MarkFlagRequired("hapg-arn")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_describeHapgCmd)
 }

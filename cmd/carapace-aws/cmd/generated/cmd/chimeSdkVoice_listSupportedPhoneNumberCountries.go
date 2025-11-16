@@ -12,9 +12,11 @@ var chimeSdkVoice_listSupportedPhoneNumberCountriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_listSupportedPhoneNumberCountriesCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_listSupportedPhoneNumberCountriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_listSupportedPhoneNumberCountriesCmd).Standalone()
 
-	chimeSdkVoice_listSupportedPhoneNumberCountriesCmd.Flags().String("product-type", "", "The phone number product type.")
-	chimeSdkVoice_listSupportedPhoneNumberCountriesCmd.MarkFlagRequired("product-type")
+		chimeSdkVoice_listSupportedPhoneNumberCountriesCmd.Flags().String("product-type", "", "The phone number product type.")
+		chimeSdkVoice_listSupportedPhoneNumberCountriesCmd.MarkFlagRequired("product-type")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_listSupportedPhoneNumberCountriesCmd)
 }

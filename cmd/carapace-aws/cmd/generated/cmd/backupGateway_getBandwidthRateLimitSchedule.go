@@ -12,9 +12,11 @@ var backupGateway_getBandwidthRateLimitScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_getBandwidthRateLimitScheduleCmd).Standalone()
+	carapace.Gen(backupGateway_getBandwidthRateLimitScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_getBandwidthRateLimitScheduleCmd).Standalone()
 
-	backupGateway_getBandwidthRateLimitScheduleCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway.")
-	backupGateway_getBandwidthRateLimitScheduleCmd.MarkFlagRequired("gateway-arn")
+		backupGateway_getBandwidthRateLimitScheduleCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway.")
+		backupGateway_getBandwidthRateLimitScheduleCmd.MarkFlagRequired("gateway-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_getBandwidthRateLimitScheduleCmd)
 }

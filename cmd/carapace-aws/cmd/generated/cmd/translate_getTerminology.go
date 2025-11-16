@@ -12,10 +12,12 @@ var translate_getTerminologyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_getTerminologyCmd).Standalone()
+	carapace.Gen(translate_getTerminologyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_getTerminologyCmd).Standalone()
 
-	translate_getTerminologyCmd.Flags().String("name", "", "The name of the custom terminology being retrieved.")
-	translate_getTerminologyCmd.Flags().String("terminology-data-format", "", "The data format of the custom terminology being retrieved.")
-	translate_getTerminologyCmd.MarkFlagRequired("name")
+		translate_getTerminologyCmd.Flags().String("name", "", "The name of the custom terminology being retrieved.")
+		translate_getTerminologyCmd.Flags().String("terminology-data-format", "", "The data format of the custom terminology being retrieved.")
+		translate_getTerminologyCmd.MarkFlagRequired("name")
+	})
 	translateCmd.AddCommand(translate_getTerminologyCmd)
 }

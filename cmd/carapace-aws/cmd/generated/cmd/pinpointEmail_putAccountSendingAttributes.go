@@ -12,8 +12,10 @@ var pinpointEmail_putAccountSendingAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_putAccountSendingAttributesCmd).Standalone()
+	carapace.Gen(pinpointEmail_putAccountSendingAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_putAccountSendingAttributesCmd).Standalone()
 
-	pinpointEmail_putAccountSendingAttributesCmd.Flags().String("sending-enabled", "", "Enables or disables your account's ability to send email.")
+		pinpointEmail_putAccountSendingAttributesCmd.Flags().String("sending-enabled", "", "Enables or disables your account's ability to send email.")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_putAccountSendingAttributesCmd)
 }

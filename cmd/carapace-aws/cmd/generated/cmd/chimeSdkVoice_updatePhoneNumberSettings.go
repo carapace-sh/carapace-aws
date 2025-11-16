@@ -12,9 +12,11 @@ var chimeSdkVoice_updatePhoneNumberSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_updatePhoneNumberSettingsCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_updatePhoneNumberSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_updatePhoneNumberSettingsCmd).Standalone()
 
-	chimeSdkVoice_updatePhoneNumberSettingsCmd.Flags().String("calling-name", "", "The default outbound calling name for the account.")
-	chimeSdkVoice_updatePhoneNumberSettingsCmd.MarkFlagRequired("calling-name")
+		chimeSdkVoice_updatePhoneNumberSettingsCmd.Flags().String("calling-name", "", "The default outbound calling name for the account.")
+		chimeSdkVoice_updatePhoneNumberSettingsCmd.MarkFlagRequired("calling-name")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_updatePhoneNumberSettingsCmd)
 }

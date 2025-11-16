@@ -12,9 +12,11 @@ var discovery_describeConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_describeConfigurationsCmd).Standalone()
+	carapace.Gen(discovery_describeConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_describeConfigurationsCmd).Standalone()
 
-	discovery_describeConfigurationsCmd.Flags().String("configuration-ids", "", "One or more configuration IDs.")
-	discovery_describeConfigurationsCmd.MarkFlagRequired("configuration-ids")
+		discovery_describeConfigurationsCmd.Flags().String("configuration-ids", "", "One or more configuration IDs.")
+		discovery_describeConfigurationsCmd.MarkFlagRequired("configuration-ids")
+	})
 	discoveryCmd.AddCommand(discovery_describeConfigurationsCmd)
 }

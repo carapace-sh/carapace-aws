@@ -12,12 +12,14 @@ var amplifyuibuilder_exportThemesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_exportThemesCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_exportThemesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_exportThemesCmd).Standalone()
 
-	amplifyuibuilder_exportThemesCmd.Flags().String("app-id", "", "The unique ID of the Amplify app to export the themes to.")
-	amplifyuibuilder_exportThemesCmd.Flags().String("environment-name", "", "The name of the backend environment that is part of the Amplify app.")
-	amplifyuibuilder_exportThemesCmd.Flags().String("next-token", "", "The token to request the next page of results.")
-	amplifyuibuilder_exportThemesCmd.MarkFlagRequired("app-id")
-	amplifyuibuilder_exportThemesCmd.MarkFlagRequired("environment-name")
+		amplifyuibuilder_exportThemesCmd.Flags().String("app-id", "", "The unique ID of the Amplify app to export the themes to.")
+		amplifyuibuilder_exportThemesCmd.Flags().String("environment-name", "", "The name of the backend environment that is part of the Amplify app.")
+		amplifyuibuilder_exportThemesCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		amplifyuibuilder_exportThemesCmd.MarkFlagRequired("app-id")
+		amplifyuibuilder_exportThemesCmd.MarkFlagRequired("environment-name")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_exportThemesCmd)
 }

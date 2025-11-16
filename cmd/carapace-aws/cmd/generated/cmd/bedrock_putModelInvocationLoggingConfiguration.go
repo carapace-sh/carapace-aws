@@ -12,9 +12,11 @@ var bedrock_putModelInvocationLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_putModelInvocationLoggingConfigurationCmd).Standalone()
+	carapace.Gen(bedrock_putModelInvocationLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_putModelInvocationLoggingConfigurationCmd).Standalone()
 
-	bedrock_putModelInvocationLoggingConfigurationCmd.Flags().String("logging-config", "", "The logging configuration values to set.")
-	bedrock_putModelInvocationLoggingConfigurationCmd.MarkFlagRequired("logging-config")
+		bedrock_putModelInvocationLoggingConfigurationCmd.Flags().String("logging-config", "", "The logging configuration values to set.")
+		bedrock_putModelInvocationLoggingConfigurationCmd.MarkFlagRequired("logging-config")
+	})
 	bedrockCmd.AddCommand(bedrock_putModelInvocationLoggingConfigurationCmd)
 }

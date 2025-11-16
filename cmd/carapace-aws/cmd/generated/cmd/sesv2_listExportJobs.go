@@ -12,11 +12,13 @@ var sesv2_listExportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listExportJobsCmd).Standalone()
+	carapace.Gen(sesv2_listExportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listExportJobsCmd).Standalone()
 
-	sesv2_listExportJobsCmd.Flags().String("export-source-type", "", "A value used to list export jobs that have a certain `ExportSourceType`.")
-	sesv2_listExportJobsCmd.Flags().String("job-status", "", "A value used to list export jobs that have a certain `JobStatus`.")
-	sesv2_listExportJobsCmd.Flags().String("next-token", "", "The pagination token returned from a previous call to `ListExportJobs` to indicate the position in the list of export jobs.")
-	sesv2_listExportJobsCmd.Flags().String("page-size", "", "Maximum number of export jobs to return at once.")
+		sesv2_listExportJobsCmd.Flags().String("export-source-type", "", "A value used to list export jobs that have a certain `ExportSourceType`.")
+		sesv2_listExportJobsCmd.Flags().String("job-status", "", "A value used to list export jobs that have a certain `JobStatus`.")
+		sesv2_listExportJobsCmd.Flags().String("next-token", "", "The pagination token returned from a previous call to `ListExportJobs` to indicate the position in the list of export jobs.")
+		sesv2_listExportJobsCmd.Flags().String("page-size", "", "Maximum number of export jobs to return at once.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listExportJobsCmd)
 }

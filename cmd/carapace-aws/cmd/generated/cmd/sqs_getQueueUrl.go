@@ -12,10 +12,12 @@ var sqs_getQueueUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_getQueueUrlCmd).Standalone()
+	carapace.Gen(sqs_getQueueUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_getQueueUrlCmd).Standalone()
 
-	sqs_getQueueUrlCmd.Flags().String("queue-name", "", "(Required) The name of the queue for which you want to fetch the URL.")
-	sqs_getQueueUrlCmd.Flags().String("queue-owner-awsaccount-id", "", "(Optional) The Amazon Web Services account ID of the account that created the queue.")
-	sqs_getQueueUrlCmd.MarkFlagRequired("queue-name")
+		sqs_getQueueUrlCmd.Flags().String("queue-name", "", "(Required) The name of the queue for which you want to fetch the URL.")
+		sqs_getQueueUrlCmd.Flags().String("queue-owner-awsaccount-id", "", "(Optional) The Amazon Web Services account ID of the account that created the queue.")
+		sqs_getQueueUrlCmd.MarkFlagRequired("queue-name")
+	})
 	sqsCmd.AddCommand(sqs_getQueueUrlCmd)
 }

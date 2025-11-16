@@ -12,11 +12,13 @@ var codecommit_listRepositoriesForApprovalRuleTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_listRepositoriesForApprovalRuleTemplateCmd).Standalone()
+	carapace.Gen(codecommit_listRepositoriesForApprovalRuleTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_listRepositoriesForApprovalRuleTemplateCmd).Standalone()
 
-	codecommit_listRepositoriesForApprovalRuleTemplateCmd.Flags().String("approval-rule-template-name", "", "The name of the approval rule template for which you want to list repositories that are associated with that template.")
-	codecommit_listRepositoriesForApprovalRuleTemplateCmd.Flags().String("max-results", "", "A non-zero, non-negative integer used to limit the number of returned results.")
-	codecommit_listRepositoriesForApprovalRuleTemplateCmd.Flags().String("next-token", "", "An enumeration token that, when provided in a request, returns the next batch of the results.")
-	codecommit_listRepositoriesForApprovalRuleTemplateCmd.MarkFlagRequired("approval-rule-template-name")
+		codecommit_listRepositoriesForApprovalRuleTemplateCmd.Flags().String("approval-rule-template-name", "", "The name of the approval rule template for which you want to list repositories that are associated with that template.")
+		codecommit_listRepositoriesForApprovalRuleTemplateCmd.Flags().String("max-results", "", "A non-zero, non-negative integer used to limit the number of returned results.")
+		codecommit_listRepositoriesForApprovalRuleTemplateCmd.Flags().String("next-token", "", "An enumeration token that, when provided in a request, returns the next batch of the results.")
+		codecommit_listRepositoriesForApprovalRuleTemplateCmd.MarkFlagRequired("approval-rule-template-name")
+	})
 	codecommitCmd.AddCommand(codecommit_listRepositoriesForApprovalRuleTemplateCmd)
 }

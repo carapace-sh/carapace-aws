@@ -12,13 +12,15 @@ var chimeSdkIdentity_updateAppInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_updateAppInstanceCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_updateAppInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_updateAppInstanceCmd).Standalone()
 
-	chimeSdkIdentity_updateAppInstanceCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
-	chimeSdkIdentity_updateAppInstanceCmd.Flags().String("metadata", "", "The metadata that you want to change.")
-	chimeSdkIdentity_updateAppInstanceCmd.Flags().String("name", "", "The name that you want to change.")
-	chimeSdkIdentity_updateAppInstanceCmd.MarkFlagRequired("app-instance-arn")
-	chimeSdkIdentity_updateAppInstanceCmd.MarkFlagRequired("metadata")
-	chimeSdkIdentity_updateAppInstanceCmd.MarkFlagRequired("name")
+		chimeSdkIdentity_updateAppInstanceCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
+		chimeSdkIdentity_updateAppInstanceCmd.Flags().String("metadata", "", "The metadata that you want to change.")
+		chimeSdkIdentity_updateAppInstanceCmd.Flags().String("name", "", "The name that you want to change.")
+		chimeSdkIdentity_updateAppInstanceCmd.MarkFlagRequired("app-instance-arn")
+		chimeSdkIdentity_updateAppInstanceCmd.MarkFlagRequired("metadata")
+		chimeSdkIdentity_updateAppInstanceCmd.MarkFlagRequired("name")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_updateAppInstanceCmd)
 }

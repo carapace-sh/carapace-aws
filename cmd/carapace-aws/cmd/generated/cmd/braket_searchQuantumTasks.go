@@ -12,11 +12,13 @@ var braket_searchQuantumTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(braket_searchQuantumTasksCmd).Standalone()
+	carapace.Gen(braket_searchQuantumTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(braket_searchQuantumTasksCmd).Standalone()
 
-	braket_searchQuantumTasksCmd.Flags().String("filters", "", "Array of `SearchQuantumTasksFilter` objects to use when searching for quantum tasks.")
-	braket_searchQuantumTasksCmd.Flags().String("max-results", "", "Maximum number of results to return in the response.")
-	braket_searchQuantumTasksCmd.Flags().String("next-token", "", "A token used for pagination of results returned in the response.")
-	braket_searchQuantumTasksCmd.MarkFlagRequired("filters")
+		braket_searchQuantumTasksCmd.Flags().String("filters", "", "Array of `SearchQuantumTasksFilter` objects to use when searching for quantum tasks.")
+		braket_searchQuantumTasksCmd.Flags().String("max-results", "", "Maximum number of results to return in the response.")
+		braket_searchQuantumTasksCmd.Flags().String("next-token", "", "A token used for pagination of results returned in the response.")
+		braket_searchQuantumTasksCmd.MarkFlagRequired("filters")
+	})
 	braketCmd.AddCommand(braket_searchQuantumTasksCmd)
 }

@@ -12,9 +12,11 @@ var socialmessaging_getLinkedWhatsAppBusinessAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(socialmessaging_getLinkedWhatsAppBusinessAccountCmd).Standalone()
+	carapace.Gen(socialmessaging_getLinkedWhatsAppBusinessAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_getLinkedWhatsAppBusinessAccountCmd).Standalone()
 
-	socialmessaging_getLinkedWhatsAppBusinessAccountCmd.Flags().String("id", "", "The unique identifier, from Amazon Web Services, of the linked WhatsApp Business Account.")
-	socialmessaging_getLinkedWhatsAppBusinessAccountCmd.MarkFlagRequired("id")
+		socialmessaging_getLinkedWhatsAppBusinessAccountCmd.Flags().String("id", "", "The unique identifier, from Amazon Web Services, of the linked WhatsApp Business Account.")
+		socialmessaging_getLinkedWhatsAppBusinessAccountCmd.MarkFlagRequired("id")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_getLinkedWhatsAppBusinessAccountCmd)
 }

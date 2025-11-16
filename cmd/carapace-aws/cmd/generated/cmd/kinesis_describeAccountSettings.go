@@ -12,7 +12,9 @@ var kinesis_describeAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_describeAccountSettingsCmd).Standalone()
+	carapace.Gen(kinesis_describeAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_describeAccountSettingsCmd).Standalone()
 
+	})
 	kinesisCmd.AddCommand(kinesis_describeAccountSettingsCmd)
 }

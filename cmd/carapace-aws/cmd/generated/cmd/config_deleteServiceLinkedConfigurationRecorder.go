@@ -12,9 +12,11 @@ var config_deleteServiceLinkedConfigurationRecorderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deleteServiceLinkedConfigurationRecorderCmd).Standalone()
+	carapace.Gen(config_deleteServiceLinkedConfigurationRecorderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deleteServiceLinkedConfigurationRecorderCmd).Standalone()
 
-	config_deleteServiceLinkedConfigurationRecorderCmd.Flags().String("service-principal", "", "The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.")
-	config_deleteServiceLinkedConfigurationRecorderCmd.MarkFlagRequired("service-principal")
+		config_deleteServiceLinkedConfigurationRecorderCmd.Flags().String("service-principal", "", "The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.")
+		config_deleteServiceLinkedConfigurationRecorderCmd.MarkFlagRequired("service-principal")
+	})
 	configCmd.AddCommand(config_deleteServiceLinkedConfigurationRecorderCmd)
 }

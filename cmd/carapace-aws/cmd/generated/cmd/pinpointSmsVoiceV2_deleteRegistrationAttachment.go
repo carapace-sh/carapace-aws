@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_deleteRegistrationAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteRegistrationAttachmentCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteRegistrationAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteRegistrationAttachmentCmd).Standalone()
 
-	pinpointSmsVoiceV2_deleteRegistrationAttachmentCmd.Flags().String("registration-attachment-id", "", "The unique identifier for the registration attachment.")
-	pinpointSmsVoiceV2_deleteRegistrationAttachmentCmd.MarkFlagRequired("registration-attachment-id")
+		pinpointSmsVoiceV2_deleteRegistrationAttachmentCmd.Flags().String("registration-attachment-id", "", "The unique identifier for the registration attachment.")
+		pinpointSmsVoiceV2_deleteRegistrationAttachmentCmd.MarkFlagRequired("registration-attachment-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteRegistrationAttachmentCmd)
 }

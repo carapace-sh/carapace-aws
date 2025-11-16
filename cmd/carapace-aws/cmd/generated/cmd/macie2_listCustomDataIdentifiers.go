@@ -12,9 +12,11 @@ var macie2_listCustomDataIdentifiersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_listCustomDataIdentifiersCmd).Standalone()
+	carapace.Gen(macie2_listCustomDataIdentifiersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_listCustomDataIdentifiersCmd).Standalone()
 
-	macie2_listCustomDataIdentifiersCmd.Flags().String("max-results", "", "The maximum number of items to include in each page of the response.")
-	macie2_listCustomDataIdentifiersCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+		macie2_listCustomDataIdentifiersCmd.Flags().String("max-results", "", "The maximum number of items to include in each page of the response.")
+		macie2_listCustomDataIdentifiersCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+	})
 	macie2Cmd.AddCommand(macie2_listCustomDataIdentifiersCmd)
 }

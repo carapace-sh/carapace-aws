@@ -12,11 +12,13 @@ var migrationHubRefactorSpaces_listEnvironmentVpcsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpaces_listEnvironmentVpcsCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpaces_listEnvironmentVpcsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpaces_listEnvironmentVpcsCmd).Standalone()
 
-	migrationHubRefactorSpaces_listEnvironmentVpcsCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
-	migrationHubRefactorSpaces_listEnvironmentVpcsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	migrationHubRefactorSpaces_listEnvironmentVpcsCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	migrationHubRefactorSpaces_listEnvironmentVpcsCmd.MarkFlagRequired("environment-identifier")
+		migrationHubRefactorSpaces_listEnvironmentVpcsCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
+		migrationHubRefactorSpaces_listEnvironmentVpcsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		migrationHubRefactorSpaces_listEnvironmentVpcsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		migrationHubRefactorSpaces_listEnvironmentVpcsCmd.MarkFlagRequired("environment-identifier")
+	})
 	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_listEnvironmentVpcsCmd)
 }

@@ -12,15 +12,17 @@ var chimeSdkVoice_startSpeakerSearchTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_startSpeakerSearchTaskCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_startSpeakerSearchTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_startSpeakerSearchTaskCmd).Standalone()
 
-	chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("call-leg", "", "Specifies which call leg to stream for speaker search.")
-	chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("client-request-token", "", "The unique identifier for the client request.")
-	chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("transaction-id", "", "The transaction ID of the call being analyzed.")
-	chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("voice-profile-domain-id", "", "The ID of the voice profile domain that will store the voice profile.")
-	chimeSdkVoice_startSpeakerSearchTaskCmd.MarkFlagRequired("transaction-id")
-	chimeSdkVoice_startSpeakerSearchTaskCmd.MarkFlagRequired("voice-connector-id")
-	chimeSdkVoice_startSpeakerSearchTaskCmd.MarkFlagRequired("voice-profile-domain-id")
+		chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("call-leg", "", "Specifies which call leg to stream for speaker search.")
+		chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("client-request-token", "", "The unique identifier for the client request.")
+		chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("transaction-id", "", "The transaction ID of the call being analyzed.")
+		chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_startSpeakerSearchTaskCmd.Flags().String("voice-profile-domain-id", "", "The ID of the voice profile domain that will store the voice profile.")
+		chimeSdkVoice_startSpeakerSearchTaskCmd.MarkFlagRequired("transaction-id")
+		chimeSdkVoice_startSpeakerSearchTaskCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_startSpeakerSearchTaskCmd.MarkFlagRequired("voice-profile-domain-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_startSpeakerSearchTaskCmd)
 }

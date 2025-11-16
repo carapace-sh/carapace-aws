@@ -12,12 +12,14 @@ var outposts_updateOutpostCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_updateOutpostCmd).Standalone()
+	carapace.Gen(outposts_updateOutpostCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_updateOutpostCmd).Standalone()
 
-	outposts_updateOutpostCmd.Flags().String("description", "", "")
-	outposts_updateOutpostCmd.Flags().String("name", "", "")
-	outposts_updateOutpostCmd.Flags().String("outpost-id", "", "The ID or ARN of the Outpost.")
-	outposts_updateOutpostCmd.Flags().String("supported-hardware-type", "", "The type of hardware for this Outpost.")
-	outposts_updateOutpostCmd.MarkFlagRequired("outpost-id")
+		outposts_updateOutpostCmd.Flags().String("description", "", "")
+		outposts_updateOutpostCmd.Flags().String("name", "", "")
+		outposts_updateOutpostCmd.Flags().String("outpost-id", "", "The ID or ARN of the Outpost.")
+		outposts_updateOutpostCmd.Flags().String("supported-hardware-type", "", "The type of hardware for this Outpost.")
+		outposts_updateOutpostCmd.MarkFlagRequired("outpost-id")
+	})
 	outpostsCmd.AddCommand(outposts_updateOutpostCmd)
 }

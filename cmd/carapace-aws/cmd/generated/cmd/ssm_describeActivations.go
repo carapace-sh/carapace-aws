@@ -12,10 +12,12 @@ var ssm_describeActivationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeActivationsCmd).Standalone()
+	carapace.Gen(ssm_describeActivationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeActivationsCmd).Standalone()
 
-	ssm_describeActivationsCmd.Flags().String("filters", "", "A filter to view information about your activations.")
-	ssm_describeActivationsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_describeActivationsCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_describeActivationsCmd.Flags().String("filters", "", "A filter to view information about your activations.")
+		ssm_describeActivationsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_describeActivationsCmd.Flags().String("next-token", "", "A token to start the list.")
+	})
 	ssmCmd.AddCommand(ssm_describeActivationsCmd)
 }

@@ -12,14 +12,16 @@ var glue_deletePartitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deletePartitionCmd).Standalone()
+	carapace.Gen(glue_deletePartitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deletePartitionCmd).Standalone()
 
-	glue_deletePartitionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the partition to be deleted resides.")
-	glue_deletePartitionCmd.Flags().String("database-name", "", "The name of the catalog database in which the table in question resides.")
-	glue_deletePartitionCmd.Flags().String("partition-values", "", "The values that define the partition.")
-	glue_deletePartitionCmd.Flags().String("table-name", "", "The name of the table that contains the partition to be deleted.")
-	glue_deletePartitionCmd.MarkFlagRequired("database-name")
-	glue_deletePartitionCmd.MarkFlagRequired("partition-values")
-	glue_deletePartitionCmd.MarkFlagRequired("table-name")
+		glue_deletePartitionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the partition to be deleted resides.")
+		glue_deletePartitionCmd.Flags().String("database-name", "", "The name of the catalog database in which the table in question resides.")
+		glue_deletePartitionCmd.Flags().String("partition-values", "", "The values that define the partition.")
+		glue_deletePartitionCmd.Flags().String("table-name", "", "The name of the table that contains the partition to be deleted.")
+		glue_deletePartitionCmd.MarkFlagRequired("database-name")
+		glue_deletePartitionCmd.MarkFlagRequired("partition-values")
+		glue_deletePartitionCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_deletePartitionCmd)
 }

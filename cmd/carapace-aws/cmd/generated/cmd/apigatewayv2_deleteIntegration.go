@@ -12,11 +12,13 @@ var apigatewayv2_deleteIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_deleteIntegrationCmd).Standalone()
+	carapace.Gen(apigatewayv2_deleteIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_deleteIntegrationCmd).Standalone()
 
-	apigatewayv2_deleteIntegrationCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_deleteIntegrationCmd.Flags().String("integration-id", "", "The integration ID.")
-	apigatewayv2_deleteIntegrationCmd.MarkFlagRequired("api-id")
-	apigatewayv2_deleteIntegrationCmd.MarkFlagRequired("integration-id")
+		apigatewayv2_deleteIntegrationCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_deleteIntegrationCmd.Flags().String("integration-id", "", "The integration ID.")
+		apigatewayv2_deleteIntegrationCmd.MarkFlagRequired("api-id")
+		apigatewayv2_deleteIntegrationCmd.MarkFlagRequired("integration-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_deleteIntegrationCmd)
 }

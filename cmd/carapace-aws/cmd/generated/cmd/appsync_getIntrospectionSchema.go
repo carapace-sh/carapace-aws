@@ -12,12 +12,14 @@ var appsync_getIntrospectionSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_getIntrospectionSchemaCmd).Standalone()
+	carapace.Gen(appsync_getIntrospectionSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_getIntrospectionSchemaCmd).Standalone()
 
-	appsync_getIntrospectionSchemaCmd.Flags().String("api-id", "", "The API ID.")
-	appsync_getIntrospectionSchemaCmd.Flags().String("format", "", "The schema format: SDL or JSON.")
-	appsync_getIntrospectionSchemaCmd.Flags().String("include-directives", "", "A flag that specifies whether the schema introspection should contain directives.")
-	appsync_getIntrospectionSchemaCmd.MarkFlagRequired("api-id")
-	appsync_getIntrospectionSchemaCmd.MarkFlagRequired("format")
+		appsync_getIntrospectionSchemaCmd.Flags().String("api-id", "", "The API ID.")
+		appsync_getIntrospectionSchemaCmd.Flags().String("format", "", "The schema format: SDL or JSON.")
+		appsync_getIntrospectionSchemaCmd.Flags().String("include-directives", "", "A flag that specifies whether the schema introspection should contain directives.")
+		appsync_getIntrospectionSchemaCmd.MarkFlagRequired("api-id")
+		appsync_getIntrospectionSchemaCmd.MarkFlagRequired("format")
+	})
 	appsyncCmd.AddCommand(appsync_getIntrospectionSchemaCmd)
 }

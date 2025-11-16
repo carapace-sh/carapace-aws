@@ -12,7 +12,9 @@ var ecr_deleteRegistryPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_deleteRegistryPolicyCmd).Standalone()
+	carapace.Gen(ecr_deleteRegistryPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_deleteRegistryPolicyCmd).Standalone()
 
+	})
 	ecrCmd.AddCommand(ecr_deleteRegistryPolicyCmd)
 }

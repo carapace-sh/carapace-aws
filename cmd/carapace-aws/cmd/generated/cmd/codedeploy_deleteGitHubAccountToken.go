@@ -12,8 +12,10 @@ var codedeploy_deleteGitHubAccountTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_deleteGitHubAccountTokenCmd).Standalone()
+	carapace.Gen(codedeploy_deleteGitHubAccountTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_deleteGitHubAccountTokenCmd).Standalone()
 
-	codedeploy_deleteGitHubAccountTokenCmd.Flags().String("token-name", "", "The name of the GitHub account connection to delete.")
+		codedeploy_deleteGitHubAccountTokenCmd.Flags().String("token-name", "", "The name of the GitHub account connection to delete.")
+	})
 	codedeployCmd.AddCommand(codedeploy_deleteGitHubAccountTokenCmd)
 }

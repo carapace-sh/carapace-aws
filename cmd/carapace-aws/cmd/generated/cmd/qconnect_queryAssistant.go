@@ -12,16 +12,18 @@ var qconnect_queryAssistantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_queryAssistantCmd).Standalone()
+	carapace.Gen(qconnect_queryAssistantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_queryAssistantCmd).Standalone()
 
-	qconnect_queryAssistantCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_queryAssistantCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_queryAssistantCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	qconnect_queryAssistantCmd.Flags().String("override-knowledge-base-search-type", "", "The search type to be used against the Knowledge Base for this request.")
-	qconnect_queryAssistantCmd.Flags().String("query-condition", "", "Information about how to query content.")
-	qconnect_queryAssistantCmd.Flags().String("query-input-data", "", "Information about the query.")
-	qconnect_queryAssistantCmd.Flags().String("query-text", "", "The text to search for.")
-	qconnect_queryAssistantCmd.Flags().String("session-id", "", "The identifier of the Amazon Q in Connect session.")
-	qconnect_queryAssistantCmd.MarkFlagRequired("assistant-id")
+		qconnect_queryAssistantCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_queryAssistantCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_queryAssistantCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_queryAssistantCmd.Flags().String("override-knowledge-base-search-type", "", "The search type to be used against the Knowledge Base for this request.")
+		qconnect_queryAssistantCmd.Flags().String("query-condition", "", "Information about how to query content.")
+		qconnect_queryAssistantCmd.Flags().String("query-input-data", "", "Information about the query.")
+		qconnect_queryAssistantCmd.Flags().String("query-text", "", "The text to search for.")
+		qconnect_queryAssistantCmd.Flags().String("session-id", "", "The identifier of the Amazon Q in Connect session.")
+		qconnect_queryAssistantCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_queryAssistantCmd)
 }

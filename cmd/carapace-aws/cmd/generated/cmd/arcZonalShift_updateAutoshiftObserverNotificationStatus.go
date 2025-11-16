@@ -12,9 +12,11 @@ var arcZonalShift_updateAutoshiftObserverNotificationStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_updateAutoshiftObserverNotificationStatusCmd).Standalone()
+	carapace.Gen(arcZonalShift_updateAutoshiftObserverNotificationStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_updateAutoshiftObserverNotificationStatusCmd).Standalone()
 
-	arcZonalShift_updateAutoshiftObserverNotificationStatusCmd.Flags().String("status", "", "The status to set for autoshift observer notification.")
-	arcZonalShift_updateAutoshiftObserverNotificationStatusCmd.MarkFlagRequired("status")
+		arcZonalShift_updateAutoshiftObserverNotificationStatusCmd.Flags().String("status", "", "The status to set for autoshift observer notification.")
+		arcZonalShift_updateAutoshiftObserverNotificationStatusCmd.MarkFlagRequired("status")
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_updateAutoshiftObserverNotificationStatusCmd)
 }

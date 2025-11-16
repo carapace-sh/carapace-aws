@@ -12,9 +12,11 @@ var pinpointEmail_listConfigurationSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_listConfigurationSetsCmd).Standalone()
+	carapace.Gen(pinpointEmail_listConfigurationSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_listConfigurationSetsCmd).Standalone()
 
-	pinpointEmail_listConfigurationSetsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListConfigurationSets` to indicate the position in the list of configuration sets.")
-	pinpointEmail_listConfigurationSetsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListConfigurationSets`.")
+		pinpointEmail_listConfigurationSetsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListConfigurationSets` to indicate the position in the list of configuration sets.")
+		pinpointEmail_listConfigurationSetsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListConfigurationSets`.")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_listConfigurationSetsCmd)
 }

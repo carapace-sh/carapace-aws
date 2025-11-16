@@ -12,13 +12,15 @@ var workmail_disassociateMemberFromGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_disassociateMemberFromGroupCmd).Standalone()
+	carapace.Gen(workmail_disassociateMemberFromGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_disassociateMemberFromGroupCmd).Standalone()
 
-	workmail_disassociateMemberFromGroupCmd.Flags().String("group-id", "", "The identifier for the group from which members are removed.")
-	workmail_disassociateMemberFromGroupCmd.Flags().String("member-id", "", "The identifier for the member to be removed from the group.")
-	workmail_disassociateMemberFromGroupCmd.Flags().String("organization-id", "", "The identifier for the organization under which the group exists.")
-	workmail_disassociateMemberFromGroupCmd.MarkFlagRequired("group-id")
-	workmail_disassociateMemberFromGroupCmd.MarkFlagRequired("member-id")
-	workmail_disassociateMemberFromGroupCmd.MarkFlagRequired("organization-id")
+		workmail_disassociateMemberFromGroupCmd.Flags().String("group-id", "", "The identifier for the group from which members are removed.")
+		workmail_disassociateMemberFromGroupCmd.Flags().String("member-id", "", "The identifier for the member to be removed from the group.")
+		workmail_disassociateMemberFromGroupCmd.Flags().String("organization-id", "", "The identifier for the organization under which the group exists.")
+		workmail_disassociateMemberFromGroupCmd.MarkFlagRequired("group-id")
+		workmail_disassociateMemberFromGroupCmd.MarkFlagRequired("member-id")
+		workmail_disassociateMemberFromGroupCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_disassociateMemberFromGroupCmd)
 }

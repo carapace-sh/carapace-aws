@@ -12,9 +12,11 @@ var aiops_listInvestigationGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(aiops_listInvestigationGroupsCmd).Standalone()
+	carapace.Gen(aiops_listInvestigationGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(aiops_listInvestigationGroupsCmd).Standalone()
 
-	aiops_listInvestigationGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return in one operation.")
-	aiops_listInvestigationGroupsCmd.Flags().String("next-token", "", "Include this value, if it was returned by the previous operation, to get the next set of service operations.")
+		aiops_listInvestigationGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return in one operation.")
+		aiops_listInvestigationGroupsCmd.Flags().String("next-token", "", "Include this value, if it was returned by the previous operation, to get the next set of service operations.")
+	})
 	aiopsCmd.AddCommand(aiops_listInvestigationGroupsCmd)
 }

@@ -12,7 +12,9 @@ var shield_createSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_createSubscriptionCmd).Standalone()
+	carapace.Gen(shield_createSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_createSubscriptionCmd).Standalone()
 
+	})
 	shieldCmd.AddCommand(shield_createSubscriptionCmd)
 }

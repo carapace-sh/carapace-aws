@@ -12,11 +12,13 @@ var fsx_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_untagResourceCmd).Standalone()
+	carapace.Gen(fsx_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_untagResourceCmd).Standalone()
 
-	fsx_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the Amazon FSx resource to untag.")
-	fsx_untagResourceCmd.Flags().String("tag-keys", "", "A list of keys of tags on the resource to untag.")
-	fsx_untagResourceCmd.MarkFlagRequired("resource-arn")
-	fsx_untagResourceCmd.MarkFlagRequired("tag-keys")
+		fsx_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the Amazon FSx resource to untag.")
+		fsx_untagResourceCmd.Flags().String("tag-keys", "", "A list of keys of tags on the resource to untag.")
+		fsx_untagResourceCmd.MarkFlagRequired("resource-arn")
+		fsx_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	fsxCmd.AddCommand(fsx_untagResourceCmd)
 }

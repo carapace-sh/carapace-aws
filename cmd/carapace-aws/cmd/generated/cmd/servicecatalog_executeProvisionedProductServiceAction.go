@@ -12,15 +12,17 @@ var servicecatalog_executeProvisionedProductServiceActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_executeProvisionedProductServiceActionCmd).Standalone()
+	carapace.Gen(servicecatalog_executeProvisionedProductServiceActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_executeProvisionedProductServiceActionCmd).Standalone()
 
-	servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("execute-token", "", "An idempotency token that uniquely identifies the execute request.")
-	servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("parameters", "", "A map of all self-service action parameters and their values.")
-	servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("provisioned-product-id", "", "The identifier of the provisioned product.")
-	servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("service-action-id", "", "The self-service action identifier.")
-	servicecatalog_executeProvisionedProductServiceActionCmd.MarkFlagRequired("execute-token")
-	servicecatalog_executeProvisionedProductServiceActionCmd.MarkFlagRequired("provisioned-product-id")
-	servicecatalog_executeProvisionedProductServiceActionCmd.MarkFlagRequired("service-action-id")
+		servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("execute-token", "", "An idempotency token that uniquely identifies the execute request.")
+		servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("parameters", "", "A map of all self-service action parameters and their values.")
+		servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("provisioned-product-id", "", "The identifier of the provisioned product.")
+		servicecatalog_executeProvisionedProductServiceActionCmd.Flags().String("service-action-id", "", "The self-service action identifier.")
+		servicecatalog_executeProvisionedProductServiceActionCmd.MarkFlagRequired("execute-token")
+		servicecatalog_executeProvisionedProductServiceActionCmd.MarkFlagRequired("provisioned-product-id")
+		servicecatalog_executeProvisionedProductServiceActionCmd.MarkFlagRequired("service-action-id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_executeProvisionedProductServiceActionCmd)
 }

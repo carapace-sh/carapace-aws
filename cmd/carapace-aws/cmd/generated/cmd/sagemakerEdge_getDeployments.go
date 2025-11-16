@@ -12,11 +12,13 @@ var sagemakerEdge_getDeploymentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerEdge_getDeploymentsCmd).Standalone()
+	carapace.Gen(sagemakerEdge_getDeploymentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerEdge_getDeploymentsCmd).Standalone()
 
-	sagemakerEdge_getDeploymentsCmd.Flags().String("device-fleet-name", "", "The name of the fleet that the device belongs to.")
-	sagemakerEdge_getDeploymentsCmd.Flags().String("device-name", "", "The unique name of the device you want to get the configuration of active deployments from.")
-	sagemakerEdge_getDeploymentsCmd.MarkFlagRequired("device-fleet-name")
-	sagemakerEdge_getDeploymentsCmd.MarkFlagRequired("device-name")
+		sagemakerEdge_getDeploymentsCmd.Flags().String("device-fleet-name", "", "The name of the fleet that the device belongs to.")
+		sagemakerEdge_getDeploymentsCmd.Flags().String("device-name", "", "The unique name of the device you want to get the configuration of active deployments from.")
+		sagemakerEdge_getDeploymentsCmd.MarkFlagRequired("device-fleet-name")
+		sagemakerEdge_getDeploymentsCmd.MarkFlagRequired("device-name")
+	})
 	sagemakerEdgeCmd.AddCommand(sagemakerEdge_getDeploymentsCmd)
 }

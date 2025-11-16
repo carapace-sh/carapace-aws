@@ -12,9 +12,11 @@ var ssmQuicksetup_getConfigurationManagerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmQuicksetup_getConfigurationManagerCmd).Standalone()
+	carapace.Gen(ssmQuicksetup_getConfigurationManagerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmQuicksetup_getConfigurationManagerCmd).Standalone()
 
-	ssmQuicksetup_getConfigurationManagerCmd.Flags().String("manager-arn", "", "The ARN of the configuration manager.")
-	ssmQuicksetup_getConfigurationManagerCmd.MarkFlagRequired("manager-arn")
+		ssmQuicksetup_getConfigurationManagerCmd.Flags().String("manager-arn", "", "The ARN of the configuration manager.")
+		ssmQuicksetup_getConfigurationManagerCmd.MarkFlagRequired("manager-arn")
+	})
 	ssmQuicksetupCmd.AddCommand(ssmQuicksetup_getConfigurationManagerCmd)
 }

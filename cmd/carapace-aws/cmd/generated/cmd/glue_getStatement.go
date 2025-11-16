@@ -12,12 +12,14 @@ var glue_getStatementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getStatementCmd).Standalone()
+	carapace.Gen(glue_getStatementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getStatementCmd).Standalone()
 
-	glue_getStatementCmd.Flags().String("id", "", "The Id of the statement.")
-	glue_getStatementCmd.Flags().String("request-origin", "", "The origin of the request.")
-	glue_getStatementCmd.Flags().String("session-id", "", "The Session ID of the statement.")
-	glue_getStatementCmd.MarkFlagRequired("id")
-	glue_getStatementCmd.MarkFlagRequired("session-id")
+		glue_getStatementCmd.Flags().String("id", "", "The Id of the statement.")
+		glue_getStatementCmd.Flags().String("request-origin", "", "The origin of the request.")
+		glue_getStatementCmd.Flags().String("session-id", "", "The Session ID of the statement.")
+		glue_getStatementCmd.MarkFlagRequired("id")
+		glue_getStatementCmd.MarkFlagRequired("session-id")
+	})
 	glueCmd.AddCommand(glue_getStatementCmd)
 }

@@ -12,9 +12,11 @@ var opensearchserverless_batchGetLifecyclePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_batchGetLifecyclePolicyCmd).Standalone()
+	carapace.Gen(opensearchserverless_batchGetLifecyclePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_batchGetLifecyclePolicyCmd).Standalone()
 
-	opensearchserverless_batchGetLifecyclePolicyCmd.Flags().String("identifiers", "", "The unique identifiers of policy types and policy names.")
-	opensearchserverless_batchGetLifecyclePolicyCmd.MarkFlagRequired("identifiers")
+		opensearchserverless_batchGetLifecyclePolicyCmd.Flags().String("identifiers", "", "The unique identifiers of policy types and policy names.")
+		opensearchserverless_batchGetLifecyclePolicyCmd.MarkFlagRequired("identifiers")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_batchGetLifecyclePolicyCmd)
 }

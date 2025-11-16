@@ -12,9 +12,11 @@ var storagegateway_deleteSnapshotScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_deleteSnapshotScheduleCmd).Standalone()
+	carapace.Gen(storagegateway_deleteSnapshotScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_deleteSnapshotScheduleCmd).Standalone()
 
-	storagegateway_deleteSnapshotScheduleCmd.Flags().String("volume-arn", "", "The volume which snapshot schedule to delete.")
-	storagegateway_deleteSnapshotScheduleCmd.MarkFlagRequired("volume-arn")
+		storagegateway_deleteSnapshotScheduleCmd.Flags().String("volume-arn", "", "The volume which snapshot schedule to delete.")
+		storagegateway_deleteSnapshotScheduleCmd.MarkFlagRequired("volume-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_deleteSnapshotScheduleCmd)
 }

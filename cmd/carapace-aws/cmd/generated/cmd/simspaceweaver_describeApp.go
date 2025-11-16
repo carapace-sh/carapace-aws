@@ -12,13 +12,15 @@ var simspaceweaver_describeAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_describeAppCmd).Standalone()
+	carapace.Gen(simspaceweaver_describeAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_describeAppCmd).Standalone()
 
-	simspaceweaver_describeAppCmd.Flags().String("app", "", "The name of the app.")
-	simspaceweaver_describeAppCmd.Flags().String("domain", "", "The name of the domain of the app.")
-	simspaceweaver_describeAppCmd.Flags().String("simulation", "", "The name of the simulation of the app.")
-	simspaceweaver_describeAppCmd.MarkFlagRequired("app")
-	simspaceweaver_describeAppCmd.MarkFlagRequired("domain")
-	simspaceweaver_describeAppCmd.MarkFlagRequired("simulation")
+		simspaceweaver_describeAppCmd.Flags().String("app", "", "The name of the app.")
+		simspaceweaver_describeAppCmd.Flags().String("domain", "", "The name of the domain of the app.")
+		simspaceweaver_describeAppCmd.Flags().String("simulation", "", "The name of the simulation of the app.")
+		simspaceweaver_describeAppCmd.MarkFlagRequired("app")
+		simspaceweaver_describeAppCmd.MarkFlagRequired("domain")
+		simspaceweaver_describeAppCmd.MarkFlagRequired("simulation")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_describeAppCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_stopEdgePackagingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopEdgePackagingJobCmd).Standalone()
+	carapace.Gen(sagemaker_stopEdgePackagingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopEdgePackagingJobCmd).Standalone()
 
-	sagemaker_stopEdgePackagingJobCmd.Flags().String("edge-packaging-job-name", "", "The name of the edge packaging job.")
-	sagemaker_stopEdgePackagingJobCmd.MarkFlagRequired("edge-packaging-job-name")
+		sagemaker_stopEdgePackagingJobCmd.Flags().String("edge-packaging-job-name", "", "The name of the edge packaging job.")
+		sagemaker_stopEdgePackagingJobCmd.MarkFlagRequired("edge-packaging-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopEdgePackagingJobCmd)
 }

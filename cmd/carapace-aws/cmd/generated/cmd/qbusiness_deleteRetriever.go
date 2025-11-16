@@ -12,11 +12,13 @@ var qbusiness_deleteRetrieverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_deleteRetrieverCmd).Standalone()
+	carapace.Gen(qbusiness_deleteRetrieverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_deleteRetrieverCmd).Standalone()
 
-	qbusiness_deleteRetrieverCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application using the retriever.")
-	qbusiness_deleteRetrieverCmd.Flags().String("retriever-id", "", "The identifier of the retriever being deleted.")
-	qbusiness_deleteRetrieverCmd.MarkFlagRequired("application-id")
-	qbusiness_deleteRetrieverCmd.MarkFlagRequired("retriever-id")
+		qbusiness_deleteRetrieverCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application using the retriever.")
+		qbusiness_deleteRetrieverCmd.Flags().String("retriever-id", "", "The identifier of the retriever being deleted.")
+		qbusiness_deleteRetrieverCmd.MarkFlagRequired("application-id")
+		qbusiness_deleteRetrieverCmd.MarkFlagRequired("retriever-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_deleteRetrieverCmd)
 }

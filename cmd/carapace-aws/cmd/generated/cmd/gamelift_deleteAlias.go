@@ -12,9 +12,11 @@ var gamelift_deleteAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteAliasCmd).Standalone()
+	carapace.Gen(gamelift_deleteAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteAliasCmd).Standalone()
 
-	gamelift_deleteAliasCmd.Flags().String("alias-id", "", "A unique identifier of the alias that you want to delete.")
-	gamelift_deleteAliasCmd.MarkFlagRequired("alias-id")
+		gamelift_deleteAliasCmd.Flags().String("alias-id", "", "A unique identifier of the alias that you want to delete.")
+		gamelift_deleteAliasCmd.MarkFlagRequired("alias-id")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteAliasCmd)
 }

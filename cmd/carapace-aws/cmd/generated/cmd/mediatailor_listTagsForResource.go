@@ -12,9 +12,11 @@ var mediatailor_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_listTagsForResourceCmd).Standalone()
+	carapace.Gen(mediatailor_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_listTagsForResourceCmd).Standalone()
 
-	mediatailor_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) associated with this resource.")
-	mediatailor_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		mediatailor_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) associated with this resource.")
+		mediatailor_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	mediatailorCmd.AddCommand(mediatailor_listTagsForResourceCmd)
 }

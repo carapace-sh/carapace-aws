@@ -12,10 +12,12 @@ var sns_listEndpointsByPlatformApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_listEndpointsByPlatformApplicationCmd).Standalone()
+	carapace.Gen(sns_listEndpointsByPlatformApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_listEndpointsByPlatformApplicationCmd).Standalone()
 
-	sns_listEndpointsByPlatformApplicationCmd.Flags().String("next-token", "", "`NextToken` string is used when calling `ListEndpointsByPlatformApplication` action to retrieve additional records that are available after the first page results.")
-	sns_listEndpointsByPlatformApplicationCmd.Flags().String("platform-application-arn", "", "`PlatformApplicationArn` for `ListEndpointsByPlatformApplicationInput` action.")
-	sns_listEndpointsByPlatformApplicationCmd.MarkFlagRequired("platform-application-arn")
+		sns_listEndpointsByPlatformApplicationCmd.Flags().String("next-token", "", "`NextToken` string is used when calling `ListEndpointsByPlatformApplication` action to retrieve additional records that are available after the first page results.")
+		sns_listEndpointsByPlatformApplicationCmd.Flags().String("platform-application-arn", "", "`PlatformApplicationArn` for `ListEndpointsByPlatformApplicationInput` action.")
+		sns_listEndpointsByPlatformApplicationCmd.MarkFlagRequired("platform-application-arn")
+	})
 	snsCmd.AddCommand(sns_listEndpointsByPlatformApplicationCmd)
 }

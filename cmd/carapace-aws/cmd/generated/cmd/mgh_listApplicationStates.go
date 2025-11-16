@@ -12,10 +12,12 @@ var mgh_listApplicationStatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgh_listApplicationStatesCmd).Standalone()
+	carapace.Gen(mgh_listApplicationStatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgh_listApplicationStatesCmd).Standalone()
 
-	mgh_listApplicationStatesCmd.Flags().String("application-ids", "", "The configurationIds from the Application Discovery Service that uniquely identifies your applications.")
-	mgh_listApplicationStatesCmd.Flags().String("max-results", "", "Maximum number of results to be returned per page.")
-	mgh_listApplicationStatesCmd.Flags().String("next-token", "", "If a `NextToken` was returned by a previous call, there are more results available.")
+		mgh_listApplicationStatesCmd.Flags().String("application-ids", "", "The configurationIds from the Application Discovery Service that uniquely identifies your applications.")
+		mgh_listApplicationStatesCmd.Flags().String("max-results", "", "Maximum number of results to be returned per page.")
+		mgh_listApplicationStatesCmd.Flags().String("next-token", "", "If a `NextToken` was returned by a previous call, there are more results available.")
+	})
 	mghCmd.AddCommand(mgh_listApplicationStatesCmd)
 }

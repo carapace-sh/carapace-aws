@@ -12,9 +12,11 @@ var sesv2_deleteMultiRegionEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_deleteMultiRegionEndpointCmd).Standalone()
+	carapace.Gen(sesv2_deleteMultiRegionEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_deleteMultiRegionEndpointCmd).Standalone()
 
-	sesv2_deleteMultiRegionEndpointCmd.Flags().String("endpoint-name", "", "The name of the multi-region endpoint (global-endpoint) to be deleted.")
-	sesv2_deleteMultiRegionEndpointCmd.MarkFlagRequired("endpoint-name")
+		sesv2_deleteMultiRegionEndpointCmd.Flags().String("endpoint-name", "", "The name of the multi-region endpoint (global-endpoint) to be deleted.")
+		sesv2_deleteMultiRegionEndpointCmd.MarkFlagRequired("endpoint-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_deleteMultiRegionEndpointCmd)
 }

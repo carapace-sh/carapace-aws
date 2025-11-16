@@ -12,18 +12,20 @@ var ecs_executeCommandCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_executeCommandCmd).Standalone()
+	carapace.Gen(ecs_executeCommandCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_executeCommandCmd).Standalone()
 
-	ecs_executeCommandCmd.Flags().String("cluster", "", "The Amazon Resource Name (ARN) or short name of the cluster the task is running in.")
-	ecs_executeCommandCmd.Flags().String("command", "", "The command to run on the container.")
-	ecs_executeCommandCmd.Flags().String("container", "", "The name of the container to execute the command on.")
-	ecs_executeCommandCmd.Flags().Bool("interactive", false, "Use this flag to run your command in interactive mode.")
-	ecs_executeCommandCmd.Flags().Bool("no-interactive", false, "Use this flag to run your command in interactive mode.")
-	ecs_executeCommandCmd.Flags().String("task", "", "The Amazon Resource Name (ARN) or ID of the task the container is part of.")
-	ecs_executeCommandCmd.MarkFlagRequired("command")
-	ecs_executeCommandCmd.MarkFlagRequired("interactive")
-	ecs_executeCommandCmd.Flag("no-interactive").Hidden = true
-	ecs_executeCommandCmd.MarkFlagRequired("no-interactive")
-	ecs_executeCommandCmd.MarkFlagRequired("task")
+		ecs_executeCommandCmd.Flags().String("cluster", "", "The Amazon Resource Name (ARN) or short name of the cluster the task is running in.")
+		ecs_executeCommandCmd.Flags().String("command", "", "The command to run on the container.")
+		ecs_executeCommandCmd.Flags().String("container", "", "The name of the container to execute the command on.")
+		ecs_executeCommandCmd.Flags().Bool("interactive", false, "Use this flag to run your command in interactive mode.")
+		ecs_executeCommandCmd.Flags().Bool("no-interactive", false, "Use this flag to run your command in interactive mode.")
+		ecs_executeCommandCmd.Flags().String("task", "", "The Amazon Resource Name (ARN) or ID of the task the container is part of.")
+		ecs_executeCommandCmd.MarkFlagRequired("command")
+		ecs_executeCommandCmd.MarkFlagRequired("interactive")
+		ecs_executeCommandCmd.Flag("no-interactive").Hidden = true
+		ecs_executeCommandCmd.MarkFlagRequired("no-interactive")
+		ecs_executeCommandCmd.MarkFlagRequired("task")
+	})
 	ecsCmd.AddCommand(ecs_executeCommandCmd)
 }

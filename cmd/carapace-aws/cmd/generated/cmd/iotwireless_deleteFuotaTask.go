@@ -12,9 +12,11 @@ var iotwireless_deleteFuotaTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_deleteFuotaTaskCmd).Standalone()
+	carapace.Gen(iotwireless_deleteFuotaTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_deleteFuotaTaskCmd).Standalone()
 
-	iotwireless_deleteFuotaTaskCmd.Flags().String("id", "", "")
-	iotwireless_deleteFuotaTaskCmd.MarkFlagRequired("id")
+		iotwireless_deleteFuotaTaskCmd.Flags().String("id", "", "")
+		iotwireless_deleteFuotaTaskCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_deleteFuotaTaskCmd)
 }

@@ -12,9 +12,11 @@ var sagemakerMetrics_batchGetMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerMetrics_batchGetMetricsCmd).Standalone()
+	carapace.Gen(sagemakerMetrics_batchGetMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerMetrics_batchGetMetricsCmd).Standalone()
 
-	sagemakerMetrics_batchGetMetricsCmd.Flags().String("metric-queries", "", "Queries made to retrieve training metrics from SageMaker.")
-	sagemakerMetrics_batchGetMetricsCmd.MarkFlagRequired("metric-queries")
+		sagemakerMetrics_batchGetMetricsCmd.Flags().String("metric-queries", "", "Queries made to retrieve training metrics from SageMaker.")
+		sagemakerMetrics_batchGetMetricsCmd.MarkFlagRequired("metric-queries")
+	})
 	sagemakerMetricsCmd.AddCommand(sagemakerMetrics_batchGetMetricsCmd)
 }

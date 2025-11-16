@@ -12,9 +12,11 @@ var medialive_startInputDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_startInputDeviceCmd).Standalone()
+	carapace.Gen(medialive_startInputDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_startInputDeviceCmd).Standalone()
 
-	medialive_startInputDeviceCmd.Flags().String("input-device-id", "", "The unique ID of the input device to start.")
-	medialive_startInputDeviceCmd.MarkFlagRequired("input-device-id")
+		medialive_startInputDeviceCmd.Flags().String("input-device-id", "", "The unique ID of the input device to start.")
+		medialive_startInputDeviceCmd.MarkFlagRequired("input-device-id")
+	})
 	medialiveCmd.AddCommand(medialive_startInputDeviceCmd)
 }

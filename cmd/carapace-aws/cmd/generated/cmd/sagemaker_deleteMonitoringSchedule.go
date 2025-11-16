@@ -12,9 +12,11 @@ var sagemaker_deleteMonitoringScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteMonitoringScheduleCmd).Standalone()
+	carapace.Gen(sagemaker_deleteMonitoringScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteMonitoringScheduleCmd).Standalone()
 
-	sagemaker_deleteMonitoringScheduleCmd.Flags().String("monitoring-schedule-name", "", "The name of the monitoring schedule to delete.")
-	sagemaker_deleteMonitoringScheduleCmd.MarkFlagRequired("monitoring-schedule-name")
+		sagemaker_deleteMonitoringScheduleCmd.Flags().String("monitoring-schedule-name", "", "The name of the monitoring schedule to delete.")
+		sagemaker_deleteMonitoringScheduleCmd.MarkFlagRequired("monitoring-schedule-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteMonitoringScheduleCmd)
 }

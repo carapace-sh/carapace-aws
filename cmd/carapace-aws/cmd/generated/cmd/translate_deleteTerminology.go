@@ -12,9 +12,11 @@ var translate_deleteTerminologyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_deleteTerminologyCmd).Standalone()
+	carapace.Gen(translate_deleteTerminologyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_deleteTerminologyCmd).Standalone()
 
-	translate_deleteTerminologyCmd.Flags().String("name", "", "The name of the custom terminology being deleted.")
-	translate_deleteTerminologyCmd.MarkFlagRequired("name")
+		translate_deleteTerminologyCmd.Flags().String("name", "", "The name of the custom terminology being deleted.")
+		translate_deleteTerminologyCmd.MarkFlagRequired("name")
+	})
 	translateCmd.AddCommand(translate_deleteTerminologyCmd)
 }

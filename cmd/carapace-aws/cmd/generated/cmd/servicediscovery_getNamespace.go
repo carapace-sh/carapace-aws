@@ -12,9 +12,11 @@ var servicediscovery_getNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_getNamespaceCmd).Standalone()
+	carapace.Gen(servicediscovery_getNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_getNamespaceCmd).Standalone()
 
-	servicediscovery_getNamespaceCmd.Flags().String("id", "", "The ID or Amazon Resource Name (ARN) of the namespace that you want to get information about.")
-	servicediscovery_getNamespaceCmd.MarkFlagRequired("id")
+		servicediscovery_getNamespaceCmd.Flags().String("id", "", "The ID or Amazon Resource Name (ARN) of the namespace that you want to get information about.")
+		servicediscovery_getNamespaceCmd.MarkFlagRequired("id")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_getNamespaceCmd)
 }

@@ -12,9 +12,11 @@ var transfer_listWebAppsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_listWebAppsCmd).Standalone()
+	carapace.Gen(transfer_listWebAppsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_listWebAppsCmd).Standalone()
 
-	transfer_listWebAppsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	transfer_listWebAppsCmd.Flags().String("next-token", "", "Returns the `NextToken` parameter in the output.")
+		transfer_listWebAppsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		transfer_listWebAppsCmd.Flags().String("next-token", "", "Returns the `NextToken` parameter in the output.")
+	})
 	transferCmd.AddCommand(transfer_listWebAppsCmd)
 }

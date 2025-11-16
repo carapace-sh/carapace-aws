@@ -12,11 +12,13 @@ var imagebuilder_listImageBuildVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_listImageBuildVersionsCmd).Standalone()
+	carapace.Gen(imagebuilder_listImageBuildVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_listImageBuildVersionsCmd).Standalone()
 
-	imagebuilder_listImageBuildVersionsCmd.Flags().String("filters", "", "Use the following filters to streamline results:")
-	imagebuilder_listImageBuildVersionsCmd.Flags().String("image-version-arn", "", "The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve.")
-	imagebuilder_listImageBuildVersionsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
-	imagebuilder_listImageBuildVersionsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		imagebuilder_listImageBuildVersionsCmd.Flags().String("filters", "", "Use the following filters to streamline results:")
+		imagebuilder_listImageBuildVersionsCmd.Flags().String("image-version-arn", "", "The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve.")
+		imagebuilder_listImageBuildVersionsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
+		imagebuilder_listImageBuildVersionsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_listImageBuildVersionsCmd)
 }

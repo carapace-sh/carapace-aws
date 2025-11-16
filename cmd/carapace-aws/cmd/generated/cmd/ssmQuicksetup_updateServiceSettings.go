@@ -12,8 +12,10 @@ var ssmQuicksetup_updateServiceSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmQuicksetup_updateServiceSettingsCmd).Standalone()
+	carapace.Gen(ssmQuicksetup_updateServiceSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmQuicksetup_updateServiceSettingsCmd).Standalone()
 
-	ssmQuicksetup_updateServiceSettingsCmd.Flags().String("explorer-enabling-role-arn", "", "The IAM role used to enable Explorer.")
+		ssmQuicksetup_updateServiceSettingsCmd.Flags().String("explorer-enabling-role-arn", "", "The IAM role used to enable Explorer.")
+	})
 	ssmQuicksetupCmd.AddCommand(ssmQuicksetup_updateServiceSettingsCmd)
 }

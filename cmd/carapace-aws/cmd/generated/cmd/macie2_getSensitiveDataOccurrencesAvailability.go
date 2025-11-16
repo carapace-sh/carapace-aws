@@ -12,9 +12,11 @@ var macie2_getSensitiveDataOccurrencesAvailabilityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getSensitiveDataOccurrencesAvailabilityCmd).Standalone()
+	carapace.Gen(macie2_getSensitiveDataOccurrencesAvailabilityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getSensitiveDataOccurrencesAvailabilityCmd).Standalone()
 
-	macie2_getSensitiveDataOccurrencesAvailabilityCmd.Flags().String("finding-id", "", "The unique identifier for the finding.")
-	macie2_getSensitiveDataOccurrencesAvailabilityCmd.MarkFlagRequired("finding-id")
+		macie2_getSensitiveDataOccurrencesAvailabilityCmd.Flags().String("finding-id", "", "The unique identifier for the finding.")
+		macie2_getSensitiveDataOccurrencesAvailabilityCmd.MarkFlagRequired("finding-id")
+	})
 	macie2Cmd.AddCommand(macie2_getSensitiveDataOccurrencesAvailabilityCmd)
 }

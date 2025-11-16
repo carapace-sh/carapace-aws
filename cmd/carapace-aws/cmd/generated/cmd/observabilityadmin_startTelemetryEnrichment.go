@@ -12,7 +12,9 @@ var observabilityadmin_startTelemetryEnrichmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_startTelemetryEnrichmentCmd).Standalone()
+	carapace.Gen(observabilityadmin_startTelemetryEnrichmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_startTelemetryEnrichmentCmd).Standalone()
 
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_startTelemetryEnrichmentCmd)
 }

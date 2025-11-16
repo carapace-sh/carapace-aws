@@ -12,11 +12,13 @@ var logs_describeExportTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_describeExportTasksCmd).Standalone()
+	carapace.Gen(logs_describeExportTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_describeExportTasksCmd).Standalone()
 
-	logs_describeExportTasksCmd.Flags().String("limit", "", "The maximum number of items returned.")
-	logs_describeExportTasksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	logs_describeExportTasksCmd.Flags().String("status-code", "", "The status code of the export task.")
-	logs_describeExportTasksCmd.Flags().String("task-id", "", "The ID of the export task.")
+		logs_describeExportTasksCmd.Flags().String("limit", "", "The maximum number of items returned.")
+		logs_describeExportTasksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		logs_describeExportTasksCmd.Flags().String("status-code", "", "The status code of the export task.")
+		logs_describeExportTasksCmd.Flags().String("task-id", "", "The ID of the export task.")
+	})
 	logsCmd.AddCommand(logs_describeExportTasksCmd)
 }

@@ -12,9 +12,11 @@ var devopsGuru_addNotificationChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_addNotificationChannelCmd).Standalone()
+	carapace.Gen(devopsGuru_addNotificationChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_addNotificationChannelCmd).Standalone()
 
-	devopsGuru_addNotificationChannelCmd.Flags().String("config", "", "A `NotificationChannelConfig` object that specifies what type of notification channel to add.")
-	devopsGuru_addNotificationChannelCmd.MarkFlagRequired("config")
+		devopsGuru_addNotificationChannelCmd.Flags().String("config", "", "A `NotificationChannelConfig` object that specifies what type of notification channel to add.")
+		devopsGuru_addNotificationChannelCmd.MarkFlagRequired("config")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_addNotificationChannelCmd)
 }

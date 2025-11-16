@@ -12,11 +12,13 @@ var braket_searchDevicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(braket_searchDevicesCmd).Standalone()
+	carapace.Gen(braket_searchDevicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(braket_searchDevicesCmd).Standalone()
 
-	braket_searchDevicesCmd.Flags().String("filters", "", "Array of SearchDevicesFilter objects to use when searching for devices.")
-	braket_searchDevicesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	braket_searchDevicesCmd.Flags().String("next-token", "", "A token used for pagination of results returned in the response.")
-	braket_searchDevicesCmd.MarkFlagRequired("filters")
+		braket_searchDevicesCmd.Flags().String("filters", "", "Array of SearchDevicesFilter objects to use when searching for devices.")
+		braket_searchDevicesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		braket_searchDevicesCmd.Flags().String("next-token", "", "A token used for pagination of results returned in the response.")
+		braket_searchDevicesCmd.MarkFlagRequired("filters")
+	})
 	braketCmd.AddCommand(braket_searchDevicesCmd)
 }

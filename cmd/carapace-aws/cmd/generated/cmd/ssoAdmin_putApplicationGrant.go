@@ -12,13 +12,15 @@ var ssoAdmin_putApplicationGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_putApplicationGrantCmd).Standalone()
+	carapace.Gen(ssoAdmin_putApplicationGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_putApplicationGrantCmd).Standalone()
 
-	ssoAdmin_putApplicationGrantCmd.Flags().String("application-arn", "", "Specifies the ARN of the application to update.")
-	ssoAdmin_putApplicationGrantCmd.Flags().String("grant", "", "Specifies a structure that describes the grant to update.")
-	ssoAdmin_putApplicationGrantCmd.Flags().String("grant-type", "", "Specifies the type of grant to update.")
-	ssoAdmin_putApplicationGrantCmd.MarkFlagRequired("application-arn")
-	ssoAdmin_putApplicationGrantCmd.MarkFlagRequired("grant")
-	ssoAdmin_putApplicationGrantCmd.MarkFlagRequired("grant-type")
+		ssoAdmin_putApplicationGrantCmd.Flags().String("application-arn", "", "Specifies the ARN of the application to update.")
+		ssoAdmin_putApplicationGrantCmd.Flags().String("grant", "", "Specifies a structure that describes the grant to update.")
+		ssoAdmin_putApplicationGrantCmd.Flags().String("grant-type", "", "Specifies the type of grant to update.")
+		ssoAdmin_putApplicationGrantCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_putApplicationGrantCmd.MarkFlagRequired("grant")
+		ssoAdmin_putApplicationGrantCmd.MarkFlagRequired("grant-type")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_putApplicationGrantCmd)
 }

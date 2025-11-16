@@ -12,10 +12,12 @@ var ssm_describeInventoryDeletionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeInventoryDeletionsCmd).Standalone()
+	carapace.Gen(ssm_describeInventoryDeletionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeInventoryDeletionsCmd).Standalone()
 
-	ssm_describeInventoryDeletionsCmd.Flags().String("deletion-id", "", "Specify the delete inventory ID for which you want information.")
-	ssm_describeInventoryDeletionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_describeInventoryDeletionsCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_describeInventoryDeletionsCmd.Flags().String("deletion-id", "", "Specify the delete inventory ID for which you want information.")
+		ssm_describeInventoryDeletionsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_describeInventoryDeletionsCmd.Flags().String("next-token", "", "A token to start the list.")
+	})
 	ssmCmd.AddCommand(ssm_describeInventoryDeletionsCmd)
 }

@@ -12,14 +12,16 @@ var ssm_describeAssociationExecutionTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_describeAssociationExecutionTargetsCmd).Standalone()
+	carapace.Gen(ssm_describeAssociationExecutionTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_describeAssociationExecutionTargetsCmd).Standalone()
 
-	ssm_describeAssociationExecutionTargetsCmd.Flags().String("association-id", "", "The association ID that includes the execution for which you want to view details.")
-	ssm_describeAssociationExecutionTargetsCmd.Flags().String("execution-id", "", "The execution ID for which you want to view details.")
-	ssm_describeAssociationExecutionTargetsCmd.Flags().String("filters", "", "Filters for the request.")
-	ssm_describeAssociationExecutionTargetsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_describeAssociationExecutionTargetsCmd.Flags().String("next-token", "", "A token to start the list.")
-	ssm_describeAssociationExecutionTargetsCmd.MarkFlagRequired("association-id")
-	ssm_describeAssociationExecutionTargetsCmd.MarkFlagRequired("execution-id")
+		ssm_describeAssociationExecutionTargetsCmd.Flags().String("association-id", "", "The association ID that includes the execution for which you want to view details.")
+		ssm_describeAssociationExecutionTargetsCmd.Flags().String("execution-id", "", "The execution ID for which you want to view details.")
+		ssm_describeAssociationExecutionTargetsCmd.Flags().String("filters", "", "Filters for the request.")
+		ssm_describeAssociationExecutionTargetsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_describeAssociationExecutionTargetsCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_describeAssociationExecutionTargetsCmd.MarkFlagRequired("association-id")
+		ssm_describeAssociationExecutionTargetsCmd.MarkFlagRequired("execution-id")
+	})
 	ssmCmd.AddCommand(ssm_describeAssociationExecutionTargetsCmd)
 }

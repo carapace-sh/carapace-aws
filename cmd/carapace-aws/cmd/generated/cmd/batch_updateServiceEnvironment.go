@@ -12,11 +12,13 @@ var batch_updateServiceEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_updateServiceEnvironmentCmd).Standalone()
+	carapace.Gen(batch_updateServiceEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_updateServiceEnvironmentCmd).Standalone()
 
-	batch_updateServiceEnvironmentCmd.Flags().String("capacity-limits", "", "The capacity limits for the service environment.")
-	batch_updateServiceEnvironmentCmd.Flags().String("service-environment", "", "The name or ARN of the service environment to update.")
-	batch_updateServiceEnvironmentCmd.Flags().String("state", "", "The state of the service environment.")
-	batch_updateServiceEnvironmentCmd.MarkFlagRequired("service-environment")
+		batch_updateServiceEnvironmentCmd.Flags().String("capacity-limits", "", "The capacity limits for the service environment.")
+		batch_updateServiceEnvironmentCmd.Flags().String("service-environment", "", "The name or ARN of the service environment to update.")
+		batch_updateServiceEnvironmentCmd.Flags().String("state", "", "The state of the service environment.")
+		batch_updateServiceEnvironmentCmd.MarkFlagRequired("service-environment")
+	})
 	batchCmd.AddCommand(batch_updateServiceEnvironmentCmd)
 }

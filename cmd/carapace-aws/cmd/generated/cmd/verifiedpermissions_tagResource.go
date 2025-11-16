@@ -12,11 +12,13 @@ var verifiedpermissions_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(verifiedpermissions_tagResourceCmd).Standalone()
+	carapace.Gen(verifiedpermissions_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(verifiedpermissions_tagResourceCmd).Standalone()
 
-	verifiedpermissions_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource that you're adding tags to.")
-	verifiedpermissions_tagResourceCmd.Flags().String("tags", "", "The list of key-value pairs to associate with the resource.")
-	verifiedpermissions_tagResourceCmd.MarkFlagRequired("resource-arn")
-	verifiedpermissions_tagResourceCmd.MarkFlagRequired("tags")
+		verifiedpermissions_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource that you're adding tags to.")
+		verifiedpermissions_tagResourceCmd.Flags().String("tags", "", "The list of key-value pairs to associate with the resource.")
+		verifiedpermissions_tagResourceCmd.MarkFlagRequired("resource-arn")
+		verifiedpermissions_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	verifiedpermissionsCmd.AddCommand(verifiedpermissions_tagResourceCmd)
 }

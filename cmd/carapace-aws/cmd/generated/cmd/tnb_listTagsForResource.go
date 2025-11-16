@@ -12,9 +12,11 @@ var tnb_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_listTagsForResourceCmd).Standalone()
+	carapace.Gen(tnb_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_listTagsForResourceCmd).Standalone()
 
-	tnb_listTagsForResourceCmd.Flags().String("resource-arn", "", "Resource ARN.")
-	tnb_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		tnb_listTagsForResourceCmd.Flags().String("resource-arn", "", "Resource ARN.")
+		tnb_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	tnbCmd.AddCommand(tnb_listTagsForResourceCmd)
 }

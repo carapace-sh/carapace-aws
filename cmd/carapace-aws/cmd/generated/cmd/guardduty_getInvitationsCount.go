@@ -12,7 +12,9 @@ var guardduty_getInvitationsCountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_getInvitationsCountCmd).Standalone()
+	carapace.Gen(guardduty_getInvitationsCountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_getInvitationsCountCmd).Standalone()
 
+	})
 	guarddutyCmd.AddCommand(guardduty_getInvitationsCountCmd)
 }

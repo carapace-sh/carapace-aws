@@ -12,10 +12,12 @@ var backup_disassociateBackupVaultMpaApprovalTeamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_disassociateBackupVaultMpaApprovalTeamCmd).Standalone()
+	carapace.Gen(backup_disassociateBackupVaultMpaApprovalTeamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_disassociateBackupVaultMpaApprovalTeamCmd).Standalone()
 
-	backup_disassociateBackupVaultMpaApprovalTeamCmd.Flags().String("backup-vault-name", "", "The name of the backup vault from which to disassociate the MPA approval team.")
-	backup_disassociateBackupVaultMpaApprovalTeamCmd.Flags().String("requester-comment", "", "An optional comment explaining the reason for disassociating the MPA approval team from the backup vault.")
-	backup_disassociateBackupVaultMpaApprovalTeamCmd.MarkFlagRequired("backup-vault-name")
+		backup_disassociateBackupVaultMpaApprovalTeamCmd.Flags().String("backup-vault-name", "", "The name of the backup vault from which to disassociate the MPA approval team.")
+		backup_disassociateBackupVaultMpaApprovalTeamCmd.Flags().String("requester-comment", "", "An optional comment explaining the reason for disassociating the MPA approval team from the backup vault.")
+		backup_disassociateBackupVaultMpaApprovalTeamCmd.MarkFlagRequired("backup-vault-name")
+	})
 	backupCmd.AddCommand(backup_disassociateBackupVaultMpaApprovalTeamCmd)
 }

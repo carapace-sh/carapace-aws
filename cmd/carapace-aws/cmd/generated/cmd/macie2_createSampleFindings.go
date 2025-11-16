@@ -12,8 +12,10 @@ var macie2_createSampleFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_createSampleFindingsCmd).Standalone()
+	carapace.Gen(macie2_createSampleFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_createSampleFindingsCmd).Standalone()
 
-	macie2_createSampleFindingsCmd.Flags().String("finding-types", "", "An array of finding types, one for each type of sample finding to create.")
+		macie2_createSampleFindingsCmd.Flags().String("finding-types", "", "An array of finding types, one for each type of sample finding to create.")
+	})
 	macie2Cmd.AddCommand(macie2_createSampleFindingsCmd)
 }

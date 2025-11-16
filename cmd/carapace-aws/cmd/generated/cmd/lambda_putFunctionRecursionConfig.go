@@ -12,11 +12,13 @@ var lambda_putFunctionRecursionConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_putFunctionRecursionConfigCmd).Standalone()
+	carapace.Gen(lambda_putFunctionRecursionConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_putFunctionRecursionConfigCmd).Standalone()
 
-	lambda_putFunctionRecursionConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_putFunctionRecursionConfigCmd.Flags().String("recursive-loop", "", "If you set your function's recursive loop detection configuration to `Allow`, Lambda doesn't take any action when it detects your function being invoked as part of a recursive loop.")
-	lambda_putFunctionRecursionConfigCmd.MarkFlagRequired("function-name")
-	lambda_putFunctionRecursionConfigCmd.MarkFlagRequired("recursive-loop")
+		lambda_putFunctionRecursionConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_putFunctionRecursionConfigCmd.Flags().String("recursive-loop", "", "If you set your function's recursive loop detection configuration to `Allow`, Lambda doesn't take any action when it detects your function being invoked as part of a recursive loop.")
+		lambda_putFunctionRecursionConfigCmd.MarkFlagRequired("function-name")
+		lambda_putFunctionRecursionConfigCmd.MarkFlagRequired("recursive-loop")
+	})
 	lambdaCmd.AddCommand(lambda_putFunctionRecursionConfigCmd)
 }

@@ -12,13 +12,15 @@ var kinesisanalytics_deleteApplicationReferenceDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_deleteApplicationReferenceDataSourceCmd).Standalone()
+	carapace.Gen(kinesisanalytics_deleteApplicationReferenceDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_deleteApplicationReferenceDataSourceCmd).Standalone()
 
-	kinesisanalytics_deleteApplicationReferenceDataSourceCmd.Flags().String("application-name", "", "Name of an existing application.")
-	kinesisanalytics_deleteApplicationReferenceDataSourceCmd.Flags().String("current-application-version-id", "", "Version of the application.")
-	kinesisanalytics_deleteApplicationReferenceDataSourceCmd.Flags().String("reference-id", "", "ID of the reference data source.")
-	kinesisanalytics_deleteApplicationReferenceDataSourceCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_deleteApplicationReferenceDataSourceCmd.MarkFlagRequired("current-application-version-id")
-	kinesisanalytics_deleteApplicationReferenceDataSourceCmd.MarkFlagRequired("reference-id")
+		kinesisanalytics_deleteApplicationReferenceDataSourceCmd.Flags().String("application-name", "", "Name of an existing application.")
+		kinesisanalytics_deleteApplicationReferenceDataSourceCmd.Flags().String("current-application-version-id", "", "Version of the application.")
+		kinesisanalytics_deleteApplicationReferenceDataSourceCmd.Flags().String("reference-id", "", "ID of the reference data source.")
+		kinesisanalytics_deleteApplicationReferenceDataSourceCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_deleteApplicationReferenceDataSourceCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalytics_deleteApplicationReferenceDataSourceCmd.MarkFlagRequired("reference-id")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_deleteApplicationReferenceDataSourceCmd)
 }

@@ -12,9 +12,11 @@ var mpa_cancelSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_cancelSessionCmd).Standalone()
+	carapace.Gen(mpa_cancelSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_cancelSessionCmd).Standalone()
 
-	mpa_cancelSessionCmd.Flags().String("session-arn", "", "Amazon Resource Name (ARN) for the session.")
-	mpa_cancelSessionCmd.MarkFlagRequired("session-arn")
+		mpa_cancelSessionCmd.Flags().String("session-arn", "", "Amazon Resource Name (ARN) for the session.")
+		mpa_cancelSessionCmd.MarkFlagRequired("session-arn")
+	})
 	mpaCmd.AddCommand(mpa_cancelSessionCmd)
 }

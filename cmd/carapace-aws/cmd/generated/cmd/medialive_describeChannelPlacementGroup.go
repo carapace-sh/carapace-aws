@@ -12,11 +12,13 @@ var medialive_describeChannelPlacementGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeChannelPlacementGroupCmd).Standalone()
+	carapace.Gen(medialive_describeChannelPlacementGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeChannelPlacementGroupCmd).Standalone()
 
-	medialive_describeChannelPlacementGroupCmd.Flags().String("channel-placement-group-id", "", "The ID of the channel placement group.")
-	medialive_describeChannelPlacementGroupCmd.Flags().String("cluster-id", "", "The ID of the cluster.")
-	medialive_describeChannelPlacementGroupCmd.MarkFlagRequired("channel-placement-group-id")
-	medialive_describeChannelPlacementGroupCmd.MarkFlagRequired("cluster-id")
+		medialive_describeChannelPlacementGroupCmd.Flags().String("channel-placement-group-id", "", "The ID of the channel placement group.")
+		medialive_describeChannelPlacementGroupCmd.Flags().String("cluster-id", "", "The ID of the cluster.")
+		medialive_describeChannelPlacementGroupCmd.MarkFlagRequired("channel-placement-group-id")
+		medialive_describeChannelPlacementGroupCmd.MarkFlagRequired("cluster-id")
+	})
 	medialiveCmd.AddCommand(medialive_describeChannelPlacementGroupCmd)
 }

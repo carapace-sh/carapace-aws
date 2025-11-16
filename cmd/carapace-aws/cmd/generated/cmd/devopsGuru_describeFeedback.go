@@ -12,8 +12,10 @@ var devopsGuru_describeFeedbackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_describeFeedbackCmd).Standalone()
+	carapace.Gen(devopsGuru_describeFeedbackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_describeFeedbackCmd).Standalone()
 
-	devopsGuru_describeFeedbackCmd.Flags().String("insight-id", "", "The ID of the insight for which the feedback was provided.")
+		devopsGuru_describeFeedbackCmd.Flags().String("insight-id", "", "The ID of the insight for which the feedback was provided.")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_describeFeedbackCmd)
 }

@@ -12,13 +12,15 @@ var mediaconvert_searchJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_searchJobsCmd).Standalone()
+	carapace.Gen(mediaconvert_searchJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_searchJobsCmd).Standalone()
 
-	mediaconvert_searchJobsCmd.Flags().String("input-file", "", "Optional.")
-	mediaconvert_searchJobsCmd.Flags().String("max-results", "", "Optional.")
-	mediaconvert_searchJobsCmd.Flags().String("next-token", "", "Optional.")
-	mediaconvert_searchJobsCmd.Flags().String("order", "", "Optional.")
-	mediaconvert_searchJobsCmd.Flags().String("queue", "", "Optional.")
-	mediaconvert_searchJobsCmd.Flags().String("status", "", "Optional.")
+		mediaconvert_searchJobsCmd.Flags().String("input-file", "", "Optional.")
+		mediaconvert_searchJobsCmd.Flags().String("max-results", "", "Optional.")
+		mediaconvert_searchJobsCmd.Flags().String("next-token", "", "Optional.")
+		mediaconvert_searchJobsCmd.Flags().String("order", "", "Optional.")
+		mediaconvert_searchJobsCmd.Flags().String("queue", "", "Optional.")
+		mediaconvert_searchJobsCmd.Flags().String("status", "", "Optional.")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_searchJobsCmd)
 }

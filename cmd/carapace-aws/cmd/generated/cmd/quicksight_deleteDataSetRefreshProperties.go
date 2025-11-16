@@ -12,11 +12,13 @@ var quicksight_deleteDataSetRefreshPropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteDataSetRefreshPropertiesCmd).Standalone()
+	carapace.Gen(quicksight_deleteDataSetRefreshPropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteDataSetRefreshPropertiesCmd).Standalone()
 
-	quicksight_deleteDataSetRefreshPropertiesCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
-	quicksight_deleteDataSetRefreshPropertiesCmd.Flags().String("data-set-id", "", "The ID of the dataset.")
-	quicksight_deleteDataSetRefreshPropertiesCmd.MarkFlagRequired("aws-account-id")
-	quicksight_deleteDataSetRefreshPropertiesCmd.MarkFlagRequired("data-set-id")
+		quicksight_deleteDataSetRefreshPropertiesCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
+		quicksight_deleteDataSetRefreshPropertiesCmd.Flags().String("data-set-id", "", "The ID of the dataset.")
+		quicksight_deleteDataSetRefreshPropertiesCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteDataSetRefreshPropertiesCmd.MarkFlagRequired("data-set-id")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteDataSetRefreshPropertiesCmd)
 }

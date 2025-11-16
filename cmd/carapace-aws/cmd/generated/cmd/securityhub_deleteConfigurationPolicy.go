@@ -12,9 +12,11 @@ var securityhub_deleteConfigurationPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_deleteConfigurationPolicyCmd).Standalone()
+	carapace.Gen(securityhub_deleteConfigurationPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_deleteConfigurationPolicyCmd).Standalone()
 
-	securityhub_deleteConfigurationPolicyCmd.Flags().String("identifier", "", "The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.")
-	securityhub_deleteConfigurationPolicyCmd.MarkFlagRequired("identifier")
+		securityhub_deleteConfigurationPolicyCmd.Flags().String("identifier", "", "The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.")
+		securityhub_deleteConfigurationPolicyCmd.MarkFlagRequired("identifier")
+	})
 	securityhubCmd.AddCommand(securityhub_deleteConfigurationPolicyCmd)
 }

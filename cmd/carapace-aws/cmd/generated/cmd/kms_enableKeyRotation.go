@@ -12,10 +12,12 @@ var kms_enableKeyRotationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_enableKeyRotationCmd).Standalone()
+	carapace.Gen(kms_enableKeyRotationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_enableKeyRotationCmd).Standalone()
 
-	kms_enableKeyRotationCmd.Flags().String("key-id", "", "Identifies a symmetric encryption KMS key.")
-	kms_enableKeyRotationCmd.Flags().String("rotation-period-in-days", "", "Use this parameter to specify a custom period of time between each rotation date.")
-	kms_enableKeyRotationCmd.MarkFlagRequired("key-id")
+		kms_enableKeyRotationCmd.Flags().String("key-id", "", "Identifies a symmetric encryption KMS key.")
+		kms_enableKeyRotationCmd.Flags().String("rotation-period-in-days", "", "Use this parameter to specify a custom period of time between each rotation date.")
+		kms_enableKeyRotationCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_enableKeyRotationCmd)
 }

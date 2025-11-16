@@ -12,11 +12,13 @@ var sagemaker_createEdgeDeploymentStageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_createEdgeDeploymentStageCmd).Standalone()
+	carapace.Gen(sagemaker_createEdgeDeploymentStageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_createEdgeDeploymentStageCmd).Standalone()
 
-	sagemaker_createEdgeDeploymentStageCmd.Flags().String("edge-deployment-plan-name", "", "The name of the edge deployment plan.")
-	sagemaker_createEdgeDeploymentStageCmd.Flags().String("stages", "", "List of stages to be added to the edge deployment plan.")
-	sagemaker_createEdgeDeploymentStageCmd.MarkFlagRequired("edge-deployment-plan-name")
-	sagemaker_createEdgeDeploymentStageCmd.MarkFlagRequired("stages")
+		sagemaker_createEdgeDeploymentStageCmd.Flags().String("edge-deployment-plan-name", "", "The name of the edge deployment plan.")
+		sagemaker_createEdgeDeploymentStageCmd.Flags().String("stages", "", "List of stages to be added to the edge deployment plan.")
+		sagemaker_createEdgeDeploymentStageCmd.MarkFlagRequired("edge-deployment-plan-name")
+		sagemaker_createEdgeDeploymentStageCmd.MarkFlagRequired("stages")
+	})
 	sagemakerCmd.AddCommand(sagemaker_createEdgeDeploymentStageCmd)
 }

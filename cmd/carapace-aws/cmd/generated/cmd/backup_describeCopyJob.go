@@ -12,9 +12,11 @@ var backup_describeCopyJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_describeCopyJobCmd).Standalone()
+	carapace.Gen(backup_describeCopyJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_describeCopyJobCmd).Standalone()
 
-	backup_describeCopyJobCmd.Flags().String("copy-job-id", "", "Uniquely identifies a copy job.")
-	backup_describeCopyJobCmd.MarkFlagRequired("copy-job-id")
+		backup_describeCopyJobCmd.Flags().String("copy-job-id", "", "Uniquely identifies a copy job.")
+		backup_describeCopyJobCmd.MarkFlagRequired("copy-job-id")
+	})
 	backupCmd.AddCommand(backup_describeCopyJobCmd)
 }

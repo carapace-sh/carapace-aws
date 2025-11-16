@@ -12,13 +12,15 @@ var proton_notifyResourceDeploymentStatusChangeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_notifyResourceDeploymentStatusChangeCmd).Standalone()
+	carapace.Gen(proton_notifyResourceDeploymentStatusChangeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_notifyResourceDeploymentStatusChangeCmd).Standalone()
 
-	proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("deployment-id", "", "The deployment ID for your provisioned resource.")
-	proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("outputs", "", "The provisioned resource state change detail data that's returned by Proton.")
-	proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("resource-arn", "", "The provisioned resource Amazon Resource Name (ARN).")
-	proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("status", "", "The status of your provisioned resource.")
-	proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("status-message", "", "The deployment status message for your provisioned resource.")
-	proton_notifyResourceDeploymentStatusChangeCmd.MarkFlagRequired("resource-arn")
+		proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("deployment-id", "", "The deployment ID for your provisioned resource.")
+		proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("outputs", "", "The provisioned resource state change detail data that's returned by Proton.")
+		proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("resource-arn", "", "The provisioned resource Amazon Resource Name (ARN).")
+		proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("status", "", "The status of your provisioned resource.")
+		proton_notifyResourceDeploymentStatusChangeCmd.Flags().String("status-message", "", "The deployment status message for your provisioned resource.")
+		proton_notifyResourceDeploymentStatusChangeCmd.MarkFlagRequired("resource-arn")
+	})
 	protonCmd.AddCommand(proton_notifyResourceDeploymentStatusChangeCmd)
 }

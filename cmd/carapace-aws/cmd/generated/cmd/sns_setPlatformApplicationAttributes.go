@@ -12,11 +12,13 @@ var sns_setPlatformApplicationAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_setPlatformApplicationAttributesCmd).Standalone()
+	carapace.Gen(sns_setPlatformApplicationAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_setPlatformApplicationAttributesCmd).Standalone()
 
-	sns_setPlatformApplicationAttributesCmd.Flags().String("attributes", "", "A map of the platform application attributes.")
-	sns_setPlatformApplicationAttributesCmd.Flags().String("platform-application-arn", "", "`PlatformApplicationArn` for `SetPlatformApplicationAttributes` action.")
-	sns_setPlatformApplicationAttributesCmd.MarkFlagRequired("attributes")
-	sns_setPlatformApplicationAttributesCmd.MarkFlagRequired("platform-application-arn")
+		sns_setPlatformApplicationAttributesCmd.Flags().String("attributes", "", "A map of the platform application attributes.")
+		sns_setPlatformApplicationAttributesCmd.Flags().String("platform-application-arn", "", "`PlatformApplicationArn` for `SetPlatformApplicationAttributes` action.")
+		sns_setPlatformApplicationAttributesCmd.MarkFlagRequired("attributes")
+		sns_setPlatformApplicationAttributesCmd.MarkFlagRequired("platform-application-arn")
+	})
 	snsCmd.AddCommand(sns_setPlatformApplicationAttributesCmd)
 }

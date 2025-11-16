@@ -12,11 +12,13 @@ var medialive_describeMultiplexProgramCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeMultiplexProgramCmd).Standalone()
+	carapace.Gen(medialive_describeMultiplexProgramCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeMultiplexProgramCmd).Standalone()
 
-	medialive_describeMultiplexProgramCmd.Flags().String("multiplex-id", "", "The ID of the multiplex that the program belongs to.")
-	medialive_describeMultiplexProgramCmd.Flags().String("program-name", "", "The name of the program.")
-	medialive_describeMultiplexProgramCmd.MarkFlagRequired("multiplex-id")
-	medialive_describeMultiplexProgramCmd.MarkFlagRequired("program-name")
+		medialive_describeMultiplexProgramCmd.Flags().String("multiplex-id", "", "The ID of the multiplex that the program belongs to.")
+		medialive_describeMultiplexProgramCmd.Flags().String("program-name", "", "The name of the program.")
+		medialive_describeMultiplexProgramCmd.MarkFlagRequired("multiplex-id")
+		medialive_describeMultiplexProgramCmd.MarkFlagRequired("program-name")
+	})
 	medialiveCmd.AddCommand(medialive_describeMultiplexProgramCmd)
 }

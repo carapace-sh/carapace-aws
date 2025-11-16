@@ -12,10 +12,12 @@ var greengrass_updateConnectorDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_updateConnectorDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_updateConnectorDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_updateConnectorDefinitionCmd).Standalone()
 
-	greengrass_updateConnectorDefinitionCmd.Flags().String("connector-definition-id", "", "The ID of the connector definition.")
-	greengrass_updateConnectorDefinitionCmd.Flags().String("name", "", "The name of the definition.")
-	greengrass_updateConnectorDefinitionCmd.MarkFlagRequired("connector-definition-id")
+		greengrass_updateConnectorDefinitionCmd.Flags().String("connector-definition-id", "", "The ID of the connector definition.")
+		greengrass_updateConnectorDefinitionCmd.Flags().String("name", "", "The name of the definition.")
+		greengrass_updateConnectorDefinitionCmd.MarkFlagRequired("connector-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_updateConnectorDefinitionCmd)
 }

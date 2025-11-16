@@ -12,9 +12,11 @@ var transcribe_listCallAnalyticsCategoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_listCallAnalyticsCategoriesCmd).Standalone()
+	carapace.Gen(transcribe_listCallAnalyticsCategoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_listCallAnalyticsCategoriesCmd).Standalone()
 
-	transcribe_listCallAnalyticsCategoriesCmd.Flags().String("max-results", "", "The maximum number of Call Analytics categories to return in each page of results.")
-	transcribe_listCallAnalyticsCategoriesCmd.Flags().String("next-token", "", "If your `ListCallAnalyticsCategories` request returns more results than can be displayed, `NextToken` is displayed in the response with an associated string.")
+		transcribe_listCallAnalyticsCategoriesCmd.Flags().String("max-results", "", "The maximum number of Call Analytics categories to return in each page of results.")
+		transcribe_listCallAnalyticsCategoriesCmd.Flags().String("next-token", "", "If your `ListCallAnalyticsCategories` request returns more results than can be displayed, `NextToken` is displayed in the response with an associated string.")
+	})
 	transcribeCmd.AddCommand(transcribe_listCallAnalyticsCategoriesCmd)
 }

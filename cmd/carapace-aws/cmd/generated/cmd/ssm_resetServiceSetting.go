@@ -12,9 +12,11 @@ var ssm_resetServiceSettingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_resetServiceSettingCmd).Standalone()
+	carapace.Gen(ssm_resetServiceSettingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_resetServiceSettingCmd).Standalone()
 
-	ssm_resetServiceSettingCmd.Flags().String("setting-id", "", "The Amazon Resource Name (ARN) of the service setting to reset.")
-	ssm_resetServiceSettingCmd.MarkFlagRequired("setting-id")
+		ssm_resetServiceSettingCmd.Flags().String("setting-id", "", "The Amazon Resource Name (ARN) of the service setting to reset.")
+		ssm_resetServiceSettingCmd.MarkFlagRequired("setting-id")
+	})
 	ssmCmd.AddCommand(ssm_resetServiceSettingCmd)
 }

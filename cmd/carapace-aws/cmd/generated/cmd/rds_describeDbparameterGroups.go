@@ -12,11 +12,13 @@ var rds_describeDbparameterGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeDbparameterGroupsCmd).Standalone()
+	carapace.Gen(rds_describeDbparameterGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeDbparameterGroupsCmd).Standalone()
 
-	rds_describeDbparameterGroupsCmd.Flags().String("dbparameter-group-name", "", "The name of a specific DB parameter group to return details for.")
-	rds_describeDbparameterGroupsCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
-	rds_describeDbparameterGroupsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeDBParameterGroups` request.")
-	rds_describeDbparameterGroupsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		rds_describeDbparameterGroupsCmd.Flags().String("dbparameter-group-name", "", "The name of a specific DB parameter group to return details for.")
+		rds_describeDbparameterGroupsCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
+		rds_describeDbparameterGroupsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribeDBParameterGroups` request.")
+		rds_describeDbparameterGroupsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	rdsCmd.AddCommand(rds_describeDbparameterGroupsCmd)
 }

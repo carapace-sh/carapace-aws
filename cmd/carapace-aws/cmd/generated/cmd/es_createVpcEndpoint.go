@@ -12,12 +12,14 @@ var es_createVpcEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_createVpcEndpointCmd).Standalone()
+	carapace.Gen(es_createVpcEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_createVpcEndpointCmd).Standalone()
 
-	es_createVpcEndpointCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
-	es_createVpcEndpointCmd.Flags().String("domain-arn", "", "The Amazon Resource Name (ARN) of the domain to grant access to.")
-	es_createVpcEndpointCmd.Flags().String("vpc-options", "", "Options to specify the subnets and security groups for the endpoint.")
-	es_createVpcEndpointCmd.MarkFlagRequired("domain-arn")
-	es_createVpcEndpointCmd.MarkFlagRequired("vpc-options")
+		es_createVpcEndpointCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
+		es_createVpcEndpointCmd.Flags().String("domain-arn", "", "The Amazon Resource Name (ARN) of the domain to grant access to.")
+		es_createVpcEndpointCmd.Flags().String("vpc-options", "", "Options to specify the subnets and security groups for the endpoint.")
+		es_createVpcEndpointCmd.MarkFlagRequired("domain-arn")
+		es_createVpcEndpointCmd.MarkFlagRequired("vpc-options")
+	})
 	esCmd.AddCommand(es_createVpcEndpointCmd)
 }

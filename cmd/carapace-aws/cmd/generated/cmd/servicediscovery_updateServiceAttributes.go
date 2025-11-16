@@ -12,11 +12,13 @@ var servicediscovery_updateServiceAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_updateServiceAttributesCmd).Standalone()
+	carapace.Gen(servicediscovery_updateServiceAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_updateServiceAttributesCmd).Standalone()
 
-	servicediscovery_updateServiceAttributesCmd.Flags().String("attributes", "", "A string map that contains attribute key-value pairs.")
-	servicediscovery_updateServiceAttributesCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to update.")
-	servicediscovery_updateServiceAttributesCmd.MarkFlagRequired("attributes")
-	servicediscovery_updateServiceAttributesCmd.MarkFlagRequired("service-id")
+		servicediscovery_updateServiceAttributesCmd.Flags().String("attributes", "", "A string map that contains attribute key-value pairs.")
+		servicediscovery_updateServiceAttributesCmd.Flags().String("service-id", "", "The ID or Amazon Resource Name (ARN) of the service that you want to update.")
+		servicediscovery_updateServiceAttributesCmd.MarkFlagRequired("attributes")
+		servicediscovery_updateServiceAttributesCmd.MarkFlagRequired("service-id")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_updateServiceAttributesCmd)
 }

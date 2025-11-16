@@ -12,9 +12,11 @@ var ecr_putRegistryScanningConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_putRegistryScanningConfigurationCmd).Standalone()
+	carapace.Gen(ecr_putRegistryScanningConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_putRegistryScanningConfigurationCmd).Standalone()
 
-	ecr_putRegistryScanningConfigurationCmd.Flags().String("rules", "", "The scanning rules to use for the registry.")
-	ecr_putRegistryScanningConfigurationCmd.Flags().String("scan-type", "", "The scanning type to set for the registry.")
+		ecr_putRegistryScanningConfigurationCmd.Flags().String("rules", "", "The scanning rules to use for the registry.")
+		ecr_putRegistryScanningConfigurationCmd.Flags().String("scan-type", "", "The scanning type to set for the registry.")
+	})
 	ecrCmd.AddCommand(ecr_putRegistryScanningConfigurationCmd)
 }

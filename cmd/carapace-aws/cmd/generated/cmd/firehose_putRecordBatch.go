@@ -12,11 +12,13 @@ var firehose_putRecordBatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(firehose_putRecordBatchCmd).Standalone()
+	carapace.Gen(firehose_putRecordBatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(firehose_putRecordBatchCmd).Standalone()
 
-	firehose_putRecordBatchCmd.Flags().String("delivery-stream-name", "", "The name of the Firehose stream.")
-	firehose_putRecordBatchCmd.Flags().String("records", "", "One or more records.")
-	firehose_putRecordBatchCmd.MarkFlagRequired("delivery-stream-name")
-	firehose_putRecordBatchCmd.MarkFlagRequired("records")
+		firehose_putRecordBatchCmd.Flags().String("delivery-stream-name", "", "The name of the Firehose stream.")
+		firehose_putRecordBatchCmd.Flags().String("records", "", "One or more records.")
+		firehose_putRecordBatchCmd.MarkFlagRequired("delivery-stream-name")
+		firehose_putRecordBatchCmd.MarkFlagRequired("records")
+	})
 	firehoseCmd.AddCommand(firehose_putRecordBatchCmd)
 }

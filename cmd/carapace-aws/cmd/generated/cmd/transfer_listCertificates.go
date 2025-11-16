@@ -12,9 +12,11 @@ var transfer_listCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_listCertificatesCmd).Standalone()
+	carapace.Gen(transfer_listCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_listCertificatesCmd).Standalone()
 
-	transfer_listCertificatesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	transfer_listCertificatesCmd.Flags().String("next-token", "", "When you can get additional results from the `ListCertificates` call, a `NextToken` parameter is returned in the output.")
+		transfer_listCertificatesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		transfer_listCertificatesCmd.Flags().String("next-token", "", "When you can get additional results from the `ListCertificates` call, a `NextToken` parameter is returned in the output.")
+	})
 	transferCmd.AddCommand(transfer_listCertificatesCmd)
 }

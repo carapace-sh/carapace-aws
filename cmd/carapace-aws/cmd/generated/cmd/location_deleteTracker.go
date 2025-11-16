@@ -12,9 +12,11 @@ var location_deleteTrackerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_deleteTrackerCmd).Standalone()
+	carapace.Gen(location_deleteTrackerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_deleteTrackerCmd).Standalone()
 
-	location_deleteTrackerCmd.Flags().String("tracker-name", "", "The name of the tracker resource to be deleted.")
-	location_deleteTrackerCmd.MarkFlagRequired("tracker-name")
+		location_deleteTrackerCmd.Flags().String("tracker-name", "", "The name of the tracker resource to be deleted.")
+		location_deleteTrackerCmd.MarkFlagRequired("tracker-name")
+	})
 	locationCmd.AddCommand(location_deleteTrackerCmd)
 }

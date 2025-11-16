@@ -12,11 +12,13 @@ var iotthingsgraph_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_tagResourceCmd).Standalone()
+	carapace.Gen(iotthingsgraph_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_tagResourceCmd).Standalone()
 
-	iotthingsgraph_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose tags are returned.")
-	iotthingsgraph_tagResourceCmd.Flags().String("tags", "", "A list of tags to add to the resource.&gt;")
-	iotthingsgraph_tagResourceCmd.MarkFlagRequired("resource-arn")
-	iotthingsgraph_tagResourceCmd.MarkFlagRequired("tags")
+		iotthingsgraph_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose tags are returned.")
+		iotthingsgraph_tagResourceCmd.Flags().String("tags", "", "A list of tags to add to the resource.&gt;")
+		iotthingsgraph_tagResourceCmd.MarkFlagRequired("resource-arn")
+		iotthingsgraph_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_tagResourceCmd)
 }

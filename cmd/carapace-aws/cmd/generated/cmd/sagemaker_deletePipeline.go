@@ -12,11 +12,13 @@ var sagemaker_deletePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deletePipelineCmd).Standalone()
+	carapace.Gen(sagemaker_deletePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deletePipelineCmd).Standalone()
 
-	sagemaker_deletePipelineCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.")
-	sagemaker_deletePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to delete.")
-	sagemaker_deletePipelineCmd.MarkFlagRequired("client-request-token")
-	sagemaker_deletePipelineCmd.MarkFlagRequired("pipeline-name")
+		sagemaker_deletePipelineCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation.")
+		sagemaker_deletePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to delete.")
+		sagemaker_deletePipelineCmd.MarkFlagRequired("client-request-token")
+		sagemaker_deletePipelineCmd.MarkFlagRequired("pipeline-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deletePipelineCmd)
 }

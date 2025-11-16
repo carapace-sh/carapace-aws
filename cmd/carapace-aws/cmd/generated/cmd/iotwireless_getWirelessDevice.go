@@ -12,11 +12,13 @@ var iotwireless_getWirelessDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getWirelessDeviceCmd).Standalone()
+	carapace.Gen(iotwireless_getWirelessDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getWirelessDeviceCmd).Standalone()
 
-	iotwireless_getWirelessDeviceCmd.Flags().String("identifier", "", "The identifier of the wireless device to get.")
-	iotwireless_getWirelessDeviceCmd.Flags().String("identifier-type", "", "The type of identifier used in `identifier`.")
-	iotwireless_getWirelessDeviceCmd.MarkFlagRequired("identifier")
-	iotwireless_getWirelessDeviceCmd.MarkFlagRequired("identifier-type")
+		iotwireless_getWirelessDeviceCmd.Flags().String("identifier", "", "The identifier of the wireless device to get.")
+		iotwireless_getWirelessDeviceCmd.Flags().String("identifier-type", "", "The type of identifier used in `identifier`.")
+		iotwireless_getWirelessDeviceCmd.MarkFlagRequired("identifier")
+		iotwireless_getWirelessDeviceCmd.MarkFlagRequired("identifier-type")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getWirelessDeviceCmd)
 }

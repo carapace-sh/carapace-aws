@@ -12,11 +12,13 @@ var ssm_updateServiceSettingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_updateServiceSettingCmd).Standalone()
+	carapace.Gen(ssm_updateServiceSettingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_updateServiceSettingCmd).Standalone()
 
-	ssm_updateServiceSettingCmd.Flags().String("setting-id", "", "The Amazon Resource Name (ARN) of the service setting to update.")
-	ssm_updateServiceSettingCmd.Flags().String("setting-value", "", "The new value to specify for the service setting.")
-	ssm_updateServiceSettingCmd.MarkFlagRequired("setting-id")
-	ssm_updateServiceSettingCmd.MarkFlagRequired("setting-value")
+		ssm_updateServiceSettingCmd.Flags().String("setting-id", "", "The Amazon Resource Name (ARN) of the service setting to update.")
+		ssm_updateServiceSettingCmd.Flags().String("setting-value", "", "The new value to specify for the service setting.")
+		ssm_updateServiceSettingCmd.MarkFlagRequired("setting-id")
+		ssm_updateServiceSettingCmd.MarkFlagRequired("setting-value")
+	})
 	ssmCmd.AddCommand(ssm_updateServiceSettingCmd)
 }

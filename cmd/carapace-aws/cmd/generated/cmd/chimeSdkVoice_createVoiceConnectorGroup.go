@@ -12,10 +12,12 @@ var chimeSdkVoice_createVoiceConnectorGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_createVoiceConnectorGroupCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_createVoiceConnectorGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_createVoiceConnectorGroupCmd).Standalone()
 
-	chimeSdkVoice_createVoiceConnectorGroupCmd.Flags().String("name", "", "The name of the Voice Connector group.")
-	chimeSdkVoice_createVoiceConnectorGroupCmd.Flags().String("voice-connector-items", "", "Lists the Voice Connectors that inbound calls are routed to.")
-	chimeSdkVoice_createVoiceConnectorGroupCmd.MarkFlagRequired("name")
+		chimeSdkVoice_createVoiceConnectorGroupCmd.Flags().String("name", "", "The name of the Voice Connector group.")
+		chimeSdkVoice_createVoiceConnectorGroupCmd.Flags().String("voice-connector-items", "", "Lists the Voice Connectors that inbound calls are routed to.")
+		chimeSdkVoice_createVoiceConnectorGroupCmd.MarkFlagRequired("name")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_createVoiceConnectorGroupCmd)
 }

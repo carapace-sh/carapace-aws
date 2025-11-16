@@ -12,11 +12,13 @@ var auditmanager_deleteAssessmentReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_deleteAssessmentReportCmd).Standalone()
+	carapace.Gen(auditmanager_deleteAssessmentReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_deleteAssessmentReportCmd).Standalone()
 
-	auditmanager_deleteAssessmentReportCmd.Flags().String("assessment-id", "", "The unique identifier for the assessment.")
-	auditmanager_deleteAssessmentReportCmd.Flags().String("assessment-report-id", "", "The unique identifier for the assessment report.")
-	auditmanager_deleteAssessmentReportCmd.MarkFlagRequired("assessment-id")
-	auditmanager_deleteAssessmentReportCmd.MarkFlagRequired("assessment-report-id")
+		auditmanager_deleteAssessmentReportCmd.Flags().String("assessment-id", "", "The unique identifier for the assessment.")
+		auditmanager_deleteAssessmentReportCmd.Flags().String("assessment-report-id", "", "The unique identifier for the assessment report.")
+		auditmanager_deleteAssessmentReportCmd.MarkFlagRequired("assessment-id")
+		auditmanager_deleteAssessmentReportCmd.MarkFlagRequired("assessment-report-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_deleteAssessmentReportCmd)
 }

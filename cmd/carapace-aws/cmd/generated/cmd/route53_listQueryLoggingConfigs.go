@@ -12,10 +12,12 @@ var route53_listQueryLoggingConfigsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_listQueryLoggingConfigsCmd).Standalone()
+	carapace.Gen(route53_listQueryLoggingConfigsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_listQueryLoggingConfigsCmd).Standalone()
 
-	route53_listQueryLoggingConfigsCmd.Flags().String("hosted-zone-id", "", "(Optional) If you want to list the query logging configuration that is associated with a hosted zone, specify the ID in `HostedZoneId`.")
-	route53_listQueryLoggingConfigsCmd.Flags().String("max-results", "", "(Optional) The maximum number of query logging configurations that you want Amazon Route 53 to return in response to the current request.")
-	route53_listQueryLoggingConfigsCmd.Flags().String("next-token", "", "(Optional) If the current Amazon Web Services account has more than `MaxResults` query logging configurations, use `NextToken` to get the second and subsequent pages of results.")
+		route53_listQueryLoggingConfigsCmd.Flags().String("hosted-zone-id", "", "(Optional) If you want to list the query logging configuration that is associated with a hosted zone, specify the ID in `HostedZoneId`.")
+		route53_listQueryLoggingConfigsCmd.Flags().String("max-results", "", "(Optional) The maximum number of query logging configurations that you want Amazon Route 53 to return in response to the current request.")
+		route53_listQueryLoggingConfigsCmd.Flags().String("next-token", "", "(Optional) If the current Amazon Web Services account has more than `MaxResults` query logging configurations, use `NextToken` to get the second and subsequent pages of results.")
+	})
 	route53Cmd.AddCommand(route53_listQueryLoggingConfigsCmd)
 }

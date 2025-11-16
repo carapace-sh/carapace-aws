@@ -12,10 +12,12 @@ var redshiftServerless_listScheduledActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_listScheduledActionsCmd).Standalone()
+	carapace.Gen(redshiftServerless_listScheduledActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_listScheduledActionsCmd).Standalone()
 
-	redshiftServerless_listScheduledActionsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
-	redshiftServerless_listScheduledActionsCmd.Flags().String("namespace-name", "", "The name of namespace associated with the scheduled action to retrieve.")
-	redshiftServerless_listScheduledActionsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		redshiftServerless_listScheduledActionsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
+		redshiftServerless_listScheduledActionsCmd.Flags().String("namespace-name", "", "The name of namespace associated with the scheduled action to retrieve.")
+		redshiftServerless_listScheduledActionsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_listScheduledActionsCmd)
 }

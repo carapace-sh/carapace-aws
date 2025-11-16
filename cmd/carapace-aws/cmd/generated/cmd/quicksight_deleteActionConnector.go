@@ -12,11 +12,13 @@ var quicksight_deleteActionConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteActionConnectorCmd).Standalone()
+	carapace.Gen(quicksight_deleteActionConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteActionConnectorCmd).Standalone()
 
-	quicksight_deleteActionConnectorCmd.Flags().String("action-connector-id", "", "The unique identifier of the action connector to delete.")
-	quicksight_deleteActionConnectorCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID that contains the action connector to delete.")
-	quicksight_deleteActionConnectorCmd.MarkFlagRequired("action-connector-id")
-	quicksight_deleteActionConnectorCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteActionConnectorCmd.Flags().String("action-connector-id", "", "The unique identifier of the action connector to delete.")
+		quicksight_deleteActionConnectorCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID that contains the action connector to delete.")
+		quicksight_deleteActionConnectorCmd.MarkFlagRequired("action-connector-id")
+		quicksight_deleteActionConnectorCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteActionConnectorCmd)
 }

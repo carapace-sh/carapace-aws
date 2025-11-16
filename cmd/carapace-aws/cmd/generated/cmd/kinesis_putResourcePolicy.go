@@ -12,11 +12,13 @@ var kinesis_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_putResourcePolicyCmd).Standalone()
+	carapace.Gen(kinesis_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_putResourcePolicyCmd).Standalone()
 
-	kinesis_putResourcePolicyCmd.Flags().String("policy", "", "Details of the resource policy.")
-	kinesis_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the data stream or consumer.")
-	kinesis_putResourcePolicyCmd.MarkFlagRequired("policy")
-	kinesis_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		kinesis_putResourcePolicyCmd.Flags().String("policy", "", "Details of the resource policy.")
+		kinesis_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the data stream or consumer.")
+		kinesis_putResourcePolicyCmd.MarkFlagRequired("policy")
+		kinesis_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	kinesisCmd.AddCommand(kinesis_putResourcePolicyCmd)
 }

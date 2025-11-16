@@ -12,8 +12,10 @@ var ecr_getAuthorizationTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecr_getAuthorizationTokenCmd).Standalone()
+	carapace.Gen(ecr_getAuthorizationTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecr_getAuthorizationTokenCmd).Standalone()
 
-	ecr_getAuthorizationTokenCmd.Flags().String("registry-ids", "", "A list of Amazon Web Services account IDs that are associated with the registries for which to get AuthorizationData objects.")
+		ecr_getAuthorizationTokenCmd.Flags().String("registry-ids", "", "A list of Amazon Web Services account IDs that are associated with the registries for which to get AuthorizationData objects.")
+	})
 	ecrCmd.AddCommand(ecr_getAuthorizationTokenCmd)
 }

@@ -12,9 +12,11 @@ var mailmanager_deleteIngressPointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_deleteIngressPointCmd).Standalone()
+	carapace.Gen(mailmanager_deleteIngressPointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_deleteIngressPointCmd).Standalone()
 
-	mailmanager_deleteIngressPointCmd.Flags().String("ingress-point-id", "", "The identifier of the ingress endpoint resource that you want to delete.")
-	mailmanager_deleteIngressPointCmd.MarkFlagRequired("ingress-point-id")
+		mailmanager_deleteIngressPointCmd.Flags().String("ingress-point-id", "", "The identifier of the ingress endpoint resource that you want to delete.")
+		mailmanager_deleteIngressPointCmd.MarkFlagRequired("ingress-point-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_deleteIngressPointCmd)
 }

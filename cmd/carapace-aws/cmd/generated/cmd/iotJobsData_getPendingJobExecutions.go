@@ -12,9 +12,11 @@ var iotJobsData_getPendingJobExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotJobsData_getPendingJobExecutionsCmd).Standalone()
+	carapace.Gen(iotJobsData_getPendingJobExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotJobsData_getPendingJobExecutionsCmd).Standalone()
 
-	iotJobsData_getPendingJobExecutionsCmd.Flags().String("thing-name", "", "The name of the thing that is executing the job.")
-	iotJobsData_getPendingJobExecutionsCmd.MarkFlagRequired("thing-name")
+		iotJobsData_getPendingJobExecutionsCmd.Flags().String("thing-name", "", "The name of the thing that is executing the job.")
+		iotJobsData_getPendingJobExecutionsCmd.MarkFlagRequired("thing-name")
+	})
 	iotJobsDataCmd.AddCommand(iotJobsData_getPendingJobExecutionsCmd)
 }

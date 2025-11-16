@@ -12,9 +12,11 @@ var drs_disconnectSourceServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_disconnectSourceServerCmd).Standalone()
+	carapace.Gen(drs_disconnectSourceServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_disconnectSourceServerCmd).Standalone()
 
-	drs_disconnectSourceServerCmd.Flags().String("source-server-id", "", "The ID of the Source Server to disconnect.")
-	drs_disconnectSourceServerCmd.MarkFlagRequired("source-server-id")
+		drs_disconnectSourceServerCmd.Flags().String("source-server-id", "", "The ID of the Source Server to disconnect.")
+		drs_disconnectSourceServerCmd.MarkFlagRequired("source-server-id")
+	})
 	drsCmd.AddCommand(drs_disconnectSourceServerCmd)
 }

@@ -12,9 +12,11 @@ var ssmIncidents_listResponsePlansCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_listResponsePlansCmd).Standalone()
+	carapace.Gen(ssmIncidents_listResponsePlansCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_listResponsePlansCmd).Standalone()
 
-	ssmIncidents_listResponsePlansCmd.Flags().String("max-results", "", "The maximum number of response plans per page.")
-	ssmIncidents_listResponsePlansCmd.Flags().String("next-token", "", "The pagination token for the next set of items to return.")
+		ssmIncidents_listResponsePlansCmd.Flags().String("max-results", "", "The maximum number of response plans per page.")
+		ssmIncidents_listResponsePlansCmd.Flags().String("next-token", "", "The pagination token for the next set of items to return.")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_listResponsePlansCmd)
 }

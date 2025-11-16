@@ -12,9 +12,11 @@ var mailmanager_getIngressPointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_getIngressPointCmd).Standalone()
+	carapace.Gen(mailmanager_getIngressPointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_getIngressPointCmd).Standalone()
 
-	mailmanager_getIngressPointCmd.Flags().String("ingress-point-id", "", "The identifier of an ingress endpoint.")
-	mailmanager_getIngressPointCmd.MarkFlagRequired("ingress-point-id")
+		mailmanager_getIngressPointCmd.Flags().String("ingress-point-id", "", "The identifier of an ingress endpoint.")
+		mailmanager_getIngressPointCmd.MarkFlagRequired("ingress-point-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_getIngressPointCmd)
 }

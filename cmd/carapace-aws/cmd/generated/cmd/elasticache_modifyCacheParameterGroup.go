@@ -12,11 +12,13 @@ var elasticache_modifyCacheParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_modifyCacheParameterGroupCmd).Standalone()
+	carapace.Gen(elasticache_modifyCacheParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_modifyCacheParameterGroupCmd).Standalone()
 
-	elasticache_modifyCacheParameterGroupCmd.Flags().String("cache-parameter-group-name", "", "The name of the cache parameter group to modify.")
-	elasticache_modifyCacheParameterGroupCmd.Flags().String("parameter-name-values", "", "An array of parameter names and values for the parameter update.")
-	elasticache_modifyCacheParameterGroupCmd.MarkFlagRequired("cache-parameter-group-name")
-	elasticache_modifyCacheParameterGroupCmd.MarkFlagRequired("parameter-name-values")
+		elasticache_modifyCacheParameterGroupCmd.Flags().String("cache-parameter-group-name", "", "The name of the cache parameter group to modify.")
+		elasticache_modifyCacheParameterGroupCmd.Flags().String("parameter-name-values", "", "An array of parameter names and values for the parameter update.")
+		elasticache_modifyCacheParameterGroupCmd.MarkFlagRequired("cache-parameter-group-name")
+		elasticache_modifyCacheParameterGroupCmd.MarkFlagRequired("parameter-name-values")
+	})
 	elasticacheCmd.AddCommand(elasticache_modifyCacheParameterGroupCmd)
 }

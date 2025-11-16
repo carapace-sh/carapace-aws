@@ -12,9 +12,11 @@ var bcmPricingCalculator_deleteWorkloadEstimateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_deleteWorkloadEstimateCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_deleteWorkloadEstimateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_deleteWorkloadEstimateCmd).Standalone()
 
-	bcmPricingCalculator_deleteWorkloadEstimateCmd.Flags().String("identifier", "", "The unique identifier of the workload estimate to delete.")
-	bcmPricingCalculator_deleteWorkloadEstimateCmd.MarkFlagRequired("identifier")
+		bcmPricingCalculator_deleteWorkloadEstimateCmd.Flags().String("identifier", "", "The unique identifier of the workload estimate to delete.")
+		bcmPricingCalculator_deleteWorkloadEstimateCmd.MarkFlagRequired("identifier")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_deleteWorkloadEstimateCmd)
 }

@@ -12,11 +12,13 @@ var dlm_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dlm_tagResourceCmd).Standalone()
+	carapace.Gen(dlm_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dlm_tagResourceCmd).Standalone()
 
-	dlm_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	dlm_tagResourceCmd.Flags().String("tags", "", "One or more tags.")
-	dlm_tagResourceCmd.MarkFlagRequired("resource-arn")
-	dlm_tagResourceCmd.MarkFlagRequired("tags")
+		dlm_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		dlm_tagResourceCmd.Flags().String("tags", "", "One or more tags.")
+		dlm_tagResourceCmd.MarkFlagRequired("resource-arn")
+		dlm_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	dlmCmd.AddCommand(dlm_tagResourceCmd)
 }

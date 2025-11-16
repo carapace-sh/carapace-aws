@@ -12,11 +12,13 @@ var datazone_deleteAccountPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteAccountPoolCmd).Standalone()
+	carapace.Gen(datazone_deleteAccountPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteAccountPoolCmd).Standalone()
 
-	datazone_deleteAccountPoolCmd.Flags().String("domain-identifier", "", "The ID of the domain where the account pool is deleted.")
-	datazone_deleteAccountPoolCmd.Flags().String("identifier", "", "The ID of the account pool to be deleted.")
-	datazone_deleteAccountPoolCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteAccountPoolCmd.MarkFlagRequired("identifier")
+		datazone_deleteAccountPoolCmd.Flags().String("domain-identifier", "", "The ID of the domain where the account pool is deleted.")
+		datazone_deleteAccountPoolCmd.Flags().String("identifier", "", "The ID of the account pool to be deleted.")
+		datazone_deleteAccountPoolCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteAccountPoolCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteAccountPoolCmd)
 }

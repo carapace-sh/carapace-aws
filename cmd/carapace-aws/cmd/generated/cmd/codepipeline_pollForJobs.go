@@ -12,11 +12,13 @@ var codepipeline_pollForJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_pollForJobsCmd).Standalone()
+	carapace.Gen(codepipeline_pollForJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_pollForJobsCmd).Standalone()
 
-	codepipeline_pollForJobsCmd.Flags().String("action-type-id", "", "Represents information about an action type.")
-	codepipeline_pollForJobsCmd.Flags().String("max-batch-size", "", "The maximum number of jobs to return in a poll for jobs call.")
-	codepipeline_pollForJobsCmd.Flags().String("query-param", "", "A map of property names and values.")
-	codepipeline_pollForJobsCmd.MarkFlagRequired("action-type-id")
+		codepipeline_pollForJobsCmd.Flags().String("action-type-id", "", "Represents information about an action type.")
+		codepipeline_pollForJobsCmd.Flags().String("max-batch-size", "", "The maximum number of jobs to return in a poll for jobs call.")
+		codepipeline_pollForJobsCmd.Flags().String("query-param", "", "A map of property names and values.")
+		codepipeline_pollForJobsCmd.MarkFlagRequired("action-type-id")
+	})
 	codepipelineCmd.AddCommand(codepipeline_pollForJobsCmd)
 }

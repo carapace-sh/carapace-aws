@@ -12,9 +12,11 @@ var iot_deleteRoleAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteRoleAliasCmd).Standalone()
+	carapace.Gen(iot_deleteRoleAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteRoleAliasCmd).Standalone()
 
-	iot_deleteRoleAliasCmd.Flags().String("role-alias", "", "The role alias to delete.")
-	iot_deleteRoleAliasCmd.MarkFlagRequired("role-alias")
+		iot_deleteRoleAliasCmd.Flags().String("role-alias", "", "The role alias to delete.")
+		iot_deleteRoleAliasCmd.MarkFlagRequired("role-alias")
+	})
 	iotCmd.AddCommand(iot_deleteRoleAliasCmd)
 }

@@ -12,9 +12,11 @@ var cognitoIdp_startWebAuthnRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_startWebAuthnRegistrationCmd).Standalone()
+	carapace.Gen(cognitoIdp_startWebAuthnRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_startWebAuthnRegistrationCmd).Standalone()
 
-	cognitoIdp_startWebAuthnRegistrationCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_startWebAuthnRegistrationCmd.MarkFlagRequired("access-token")
+		cognitoIdp_startWebAuthnRegistrationCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_startWebAuthnRegistrationCmd.MarkFlagRequired("access-token")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_startWebAuthnRegistrationCmd)
 }

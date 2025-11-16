@@ -12,11 +12,13 @@ var gamelift_getComputeAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_getComputeAccessCmd).Standalone()
+	carapace.Gen(gamelift_getComputeAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_getComputeAccessCmd).Standalone()
 
-	gamelift_getComputeAccessCmd.Flags().String("compute-name", "", "A unique identifier for the compute resource that you want to connect to.")
-	gamelift_getComputeAccessCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet that holds the compute resource that you want to connect to.")
-	gamelift_getComputeAccessCmd.MarkFlagRequired("compute-name")
-	gamelift_getComputeAccessCmd.MarkFlagRequired("fleet-id")
+		gamelift_getComputeAccessCmd.Flags().String("compute-name", "", "A unique identifier for the compute resource that you want to connect to.")
+		gamelift_getComputeAccessCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet that holds the compute resource that you want to connect to.")
+		gamelift_getComputeAccessCmd.MarkFlagRequired("compute-name")
+		gamelift_getComputeAccessCmd.MarkFlagRequired("fleet-id")
+	})
 	gameliftCmd.AddCommand(gamelift_getComputeAccessCmd)
 }

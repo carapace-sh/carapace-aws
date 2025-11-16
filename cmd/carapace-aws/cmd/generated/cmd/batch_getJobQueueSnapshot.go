@@ -12,9 +12,11 @@ var batch_getJobQueueSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_getJobQueueSnapshotCmd).Standalone()
+	carapace.Gen(batch_getJobQueueSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_getJobQueueSnapshotCmd).Standalone()
 
-	batch_getJobQueueSnapshotCmd.Flags().String("job-queue", "", "The job queue’s name or full queue Amazon Resource Name (ARN).")
-	batch_getJobQueueSnapshotCmd.MarkFlagRequired("job-queue")
+		batch_getJobQueueSnapshotCmd.Flags().String("job-queue", "", "The job queue’s name or full queue Amazon Resource Name (ARN).")
+		batch_getJobQueueSnapshotCmd.MarkFlagRequired("job-queue")
+	})
 	batchCmd.AddCommand(batch_getJobQueueSnapshotCmd)
 }

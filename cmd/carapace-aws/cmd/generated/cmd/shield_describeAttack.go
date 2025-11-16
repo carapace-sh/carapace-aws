@@ -12,9 +12,11 @@ var shield_describeAttackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_describeAttackCmd).Standalone()
+	carapace.Gen(shield_describeAttackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_describeAttackCmd).Standalone()
 
-	shield_describeAttackCmd.Flags().String("attack-id", "", "The unique identifier (ID) for the attack.")
-	shield_describeAttackCmd.MarkFlagRequired("attack-id")
+		shield_describeAttackCmd.Flags().String("attack-id", "", "The unique identifier (ID) for the attack.")
+		shield_describeAttackCmd.MarkFlagRequired("attack-id")
+	})
 	shieldCmd.AddCommand(shield_describeAttackCmd)
 }

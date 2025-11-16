@@ -12,9 +12,11 @@ var neptunedata_cancelGremlinQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_cancelGremlinQueryCmd).Standalone()
+	carapace.Gen(neptunedata_cancelGremlinQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_cancelGremlinQueryCmd).Standalone()
 
-	neptunedata_cancelGremlinQueryCmd.Flags().String("query-id", "", "The unique identifier that identifies the query to be canceled.")
-	neptunedata_cancelGremlinQueryCmd.MarkFlagRequired("query-id")
+		neptunedata_cancelGremlinQueryCmd.Flags().String("query-id", "", "The unique identifier that identifies the query to be canceled.")
+		neptunedata_cancelGremlinQueryCmd.MarkFlagRequired("query-id")
+	})
 	neptunedataCmd.AddCommand(neptunedata_cancelGremlinQueryCmd)
 }

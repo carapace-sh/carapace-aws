@@ -12,9 +12,11 @@ var inspector2_associateMemberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_associateMemberCmd).Standalone()
+	carapace.Gen(inspector2_associateMemberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_associateMemberCmd).Standalone()
 
-	inspector2_associateMemberCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the member account to be associated.")
-	inspector2_associateMemberCmd.MarkFlagRequired("account-id")
+		inspector2_associateMemberCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the member account to be associated.")
+		inspector2_associateMemberCmd.MarkFlagRequired("account-id")
+	})
 	inspector2Cmd.AddCommand(inspector2_associateMemberCmd)
 }

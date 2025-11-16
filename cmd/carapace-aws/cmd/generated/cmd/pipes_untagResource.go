@@ -12,11 +12,13 @@ var pipes_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pipes_untagResourceCmd).Standalone()
+	carapace.Gen(pipes_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pipes_untagResourceCmd).Standalone()
 
-	pipes_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the pipe.")
-	pipes_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the pipe.")
-	pipes_untagResourceCmd.MarkFlagRequired("resource-arn")
-	pipes_untagResourceCmd.MarkFlagRequired("tag-keys")
+		pipes_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the pipe.")
+		pipes_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the pipe.")
+		pipes_untagResourceCmd.MarkFlagRequired("resource-arn")
+		pipes_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	pipesCmd.AddCommand(pipes_untagResourceCmd)
 }

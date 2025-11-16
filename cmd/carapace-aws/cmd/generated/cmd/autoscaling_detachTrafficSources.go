@@ -12,11 +12,13 @@ var autoscaling_detachTrafficSourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_detachTrafficSourcesCmd).Standalone()
+	carapace.Gen(autoscaling_detachTrafficSourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_detachTrafficSourcesCmd).Standalone()
 
-	autoscaling_detachTrafficSourcesCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_detachTrafficSourcesCmd.Flags().String("traffic-sources", "", "The unique identifiers of one or more traffic sources.")
-	autoscaling_detachTrafficSourcesCmd.MarkFlagRequired("auto-scaling-group-name")
-	autoscaling_detachTrafficSourcesCmd.MarkFlagRequired("traffic-sources")
+		autoscaling_detachTrafficSourcesCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_detachTrafficSourcesCmd.Flags().String("traffic-sources", "", "The unique identifiers of one or more traffic sources.")
+		autoscaling_detachTrafficSourcesCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_detachTrafficSourcesCmd.MarkFlagRequired("traffic-sources")
+	})
 	autoscalingCmd.AddCommand(autoscaling_detachTrafficSourcesCmd)
 }

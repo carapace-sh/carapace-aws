@@ -12,11 +12,13 @@ var s3control_deleteBucketLifecycleConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_deleteBucketLifecycleConfigurationCmd).Standalone()
+	carapace.Gen(s3control_deleteBucketLifecycleConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_deleteBucketLifecycleConfigurationCmd).Standalone()
 
-	s3control_deleteBucketLifecycleConfigurationCmd.Flags().String("account-id", "", "The account ID of the lifecycle configuration to delete.")
-	s3control_deleteBucketLifecycleConfigurationCmd.Flags().String("bucket", "", "Specifies the bucket.")
-	s3control_deleteBucketLifecycleConfigurationCmd.MarkFlagRequired("account-id")
-	s3control_deleteBucketLifecycleConfigurationCmd.MarkFlagRequired("bucket")
+		s3control_deleteBucketLifecycleConfigurationCmd.Flags().String("account-id", "", "The account ID of the lifecycle configuration to delete.")
+		s3control_deleteBucketLifecycleConfigurationCmd.Flags().String("bucket", "", "Specifies the bucket.")
+		s3control_deleteBucketLifecycleConfigurationCmd.MarkFlagRequired("account-id")
+		s3control_deleteBucketLifecycleConfigurationCmd.MarkFlagRequired("bucket")
+	})
 	s3controlCmd.AddCommand(s3control_deleteBucketLifecycleConfigurationCmd)
 }

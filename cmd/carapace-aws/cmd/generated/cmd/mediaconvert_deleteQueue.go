@@ -12,9 +12,11 @@ var mediaconvert_deleteQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_deleteQueueCmd).Standalone()
+	carapace.Gen(mediaconvert_deleteQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_deleteQueueCmd).Standalone()
 
-	mediaconvert_deleteQueueCmd.Flags().String("name", "", "The name of the queue that you want to delete.")
-	mediaconvert_deleteQueueCmd.MarkFlagRequired("name")
+		mediaconvert_deleteQueueCmd.Flags().String("name", "", "The name of the queue that you want to delete.")
+		mediaconvert_deleteQueueCmd.MarkFlagRequired("name")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_deleteQueueCmd)
 }

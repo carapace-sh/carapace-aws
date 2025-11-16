@@ -12,11 +12,13 @@ var cloudhsmv2_modifyClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsmv2_modifyClusterCmd).Standalone()
+	carapace.Gen(cloudhsmv2_modifyClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsmv2_modifyClusterCmd).Standalone()
 
-	cloudhsmv2_modifyClusterCmd.Flags().String("backup-retention-policy", "", "A policy that defines how the service retains backups.")
-	cloudhsmv2_modifyClusterCmd.Flags().String("cluster-id", "", "The identifier (ID) of the cluster that you want to modify.")
-	cloudhsmv2_modifyClusterCmd.Flags().String("hsm-type", "", "The desired HSM type of the cluster.")
-	cloudhsmv2_modifyClusterCmd.MarkFlagRequired("cluster-id")
+		cloudhsmv2_modifyClusterCmd.Flags().String("backup-retention-policy", "", "A policy that defines how the service retains backups.")
+		cloudhsmv2_modifyClusterCmd.Flags().String("cluster-id", "", "The identifier (ID) of the cluster that you want to modify.")
+		cloudhsmv2_modifyClusterCmd.Flags().String("hsm-type", "", "The desired HSM type of the cluster.")
+		cloudhsmv2_modifyClusterCmd.MarkFlagRequired("cluster-id")
+	})
 	cloudhsmv2Cmd.AddCommand(cloudhsmv2_modifyClusterCmd)
 }

@@ -12,9 +12,11 @@ var workspacesWeb_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_listTagsForResourceCmd).Standalone()
+	carapace.Gen(workspacesWeb_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_listTagsForResourceCmd).Standalone()
 
-	workspacesWeb_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	workspacesWeb_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		workspacesWeb_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		workspacesWeb_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_listTagsForResourceCmd)
 }

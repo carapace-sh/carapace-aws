@@ -12,11 +12,13 @@ var cognitoIdp_listWebAuthnCredentialsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_listWebAuthnCredentialsCmd).Standalone()
+	carapace.Gen(cognitoIdp_listWebAuthnCredentialsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_listWebAuthnCredentialsCmd).Standalone()
 
-	cognitoIdp_listWebAuthnCredentialsCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_listWebAuthnCredentialsCmd.Flags().String("max-results", "", "The maximum number of the user's passkey credentials that you want to return.")
-	cognitoIdp_listWebAuthnCredentialsCmd.Flags().String("next-token", "", "This API operation returns a limited number of results.")
-	cognitoIdp_listWebAuthnCredentialsCmd.MarkFlagRequired("access-token")
+		cognitoIdp_listWebAuthnCredentialsCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_listWebAuthnCredentialsCmd.Flags().String("max-results", "", "The maximum number of the user's passkey credentials that you want to return.")
+		cognitoIdp_listWebAuthnCredentialsCmd.Flags().String("next-token", "", "This API operation returns a limited number of results.")
+		cognitoIdp_listWebAuthnCredentialsCmd.MarkFlagRequired("access-token")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_listWebAuthnCredentialsCmd)
 }

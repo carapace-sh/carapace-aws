@@ -12,9 +12,11 @@ var vpcLattice_getAuthPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getAuthPolicyCmd).Standalone()
+	carapace.Gen(vpcLattice_getAuthPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getAuthPolicyCmd).Standalone()
 
-	vpcLattice_getAuthPolicyCmd.Flags().String("resource-identifier", "", "The ID or ARN of the service network or service.")
-	vpcLattice_getAuthPolicyCmd.MarkFlagRequired("resource-identifier")
+		vpcLattice_getAuthPolicyCmd.Flags().String("resource-identifier", "", "The ID or ARN of the service network or service.")
+		vpcLattice_getAuthPolicyCmd.MarkFlagRequired("resource-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getAuthPolicyCmd)
 }

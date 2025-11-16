@@ -12,9 +12,11 @@ var iotwireless_cancelMulticastGroupSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_cancelMulticastGroupSessionCmd).Standalone()
+	carapace.Gen(iotwireless_cancelMulticastGroupSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_cancelMulticastGroupSessionCmd).Standalone()
 
-	iotwireless_cancelMulticastGroupSessionCmd.Flags().String("id", "", "")
-	iotwireless_cancelMulticastGroupSessionCmd.MarkFlagRequired("id")
+		iotwireless_cancelMulticastGroupSessionCmd.Flags().String("id", "", "")
+		iotwireless_cancelMulticastGroupSessionCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_cancelMulticastGroupSessionCmd)
 }

@@ -12,9 +12,11 @@ var rds_startDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_startDbclusterCmd).Standalone()
+	carapace.Gen(rds_startDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_startDbclusterCmd).Standalone()
 
-	rds_startDbclusterCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the Amazon Aurora DB cluster to be started.")
-	rds_startDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+		rds_startDbclusterCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the Amazon Aurora DB cluster to be started.")
+		rds_startDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+	})
 	rdsCmd.AddCommand(rds_startDbclusterCmd)
 }

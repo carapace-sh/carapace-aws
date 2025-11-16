@@ -12,11 +12,13 @@ var synthetics_listGroupResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_listGroupResourcesCmd).Standalone()
+	carapace.Gen(synthetics_listGroupResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_listGroupResourcesCmd).Standalone()
 
-	synthetics_listGroupResourcesCmd.Flags().String("group-identifier", "", "Specifies the group to return information for.")
-	synthetics_listGroupResourcesCmd.Flags().String("max-results", "", "Specify this parameter to limit how many canary ARNs are returned each time you use the `ListGroupResources` operation.")
-	synthetics_listGroupResourcesCmd.Flags().String("next-token", "", "A token that indicates that there is more data available.")
-	synthetics_listGroupResourcesCmd.MarkFlagRequired("group-identifier")
+		synthetics_listGroupResourcesCmd.Flags().String("group-identifier", "", "Specifies the group to return information for.")
+		synthetics_listGroupResourcesCmd.Flags().String("max-results", "", "Specify this parameter to limit how many canary ARNs are returned each time you use the `ListGroupResources` operation.")
+		synthetics_listGroupResourcesCmd.Flags().String("next-token", "", "A token that indicates that there is more data available.")
+		synthetics_listGroupResourcesCmd.MarkFlagRequired("group-identifier")
+	})
 	syntheticsCmd.AddCommand(synthetics_listGroupResourcesCmd)
 }

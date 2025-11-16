@@ -12,10 +12,12 @@ var ssmIncidents_listIncidentRecordsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_listIncidentRecordsCmd).Standalone()
+	carapace.Gen(ssmIncidents_listIncidentRecordsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_listIncidentRecordsCmd).Standalone()
 
-	ssmIncidents_listIncidentRecordsCmd.Flags().String("filters", "", "Filters the list of incident records you want to search through.")
-	ssmIncidents_listIncidentRecordsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
-	ssmIncidents_listIncidentRecordsCmd.Flags().String("next-token", "", "The pagination token for the next set of items to return.")
+		ssmIncidents_listIncidentRecordsCmd.Flags().String("filters", "", "Filters the list of incident records you want to search through.")
+		ssmIncidents_listIncidentRecordsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
+		ssmIncidents_listIncidentRecordsCmd.Flags().String("next-token", "", "The pagination token for the next set of items to return.")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_listIncidentRecordsCmd)
 }

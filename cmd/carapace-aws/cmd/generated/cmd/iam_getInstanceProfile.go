@@ -12,9 +12,11 @@ var iam_getInstanceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getInstanceProfileCmd).Standalone()
+	carapace.Gen(iam_getInstanceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getInstanceProfileCmd).Standalone()
 
-	iam_getInstanceProfileCmd.Flags().String("instance-profile-name", "", "The name of the instance profile to get information about.")
-	iam_getInstanceProfileCmd.MarkFlagRequired("instance-profile-name")
+		iam_getInstanceProfileCmd.Flags().String("instance-profile-name", "", "The name of the instance profile to get information about.")
+		iam_getInstanceProfileCmd.MarkFlagRequired("instance-profile-name")
+	})
 	iamCmd.AddCommand(iam_getInstanceProfileCmd)
 }

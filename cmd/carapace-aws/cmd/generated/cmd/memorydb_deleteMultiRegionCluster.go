@@ -12,9 +12,11 @@ var memorydb_deleteMultiRegionClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_deleteMultiRegionClusterCmd).Standalone()
+	carapace.Gen(memorydb_deleteMultiRegionClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_deleteMultiRegionClusterCmd).Standalone()
 
-	memorydb_deleteMultiRegionClusterCmd.Flags().String("multi-region-cluster-name", "", "The name of the multi-Region cluster to be deleted.")
-	memorydb_deleteMultiRegionClusterCmd.MarkFlagRequired("multi-region-cluster-name")
+		memorydb_deleteMultiRegionClusterCmd.Flags().String("multi-region-cluster-name", "", "The name of the multi-Region cluster to be deleted.")
+		memorydb_deleteMultiRegionClusterCmd.MarkFlagRequired("multi-region-cluster-name")
+	})
 	memorydbCmd.AddCommand(memorydb_deleteMultiRegionClusterCmd)
 }

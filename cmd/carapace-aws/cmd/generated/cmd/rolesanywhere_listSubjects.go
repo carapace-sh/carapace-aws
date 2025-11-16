@@ -12,9 +12,11 @@ var rolesanywhere_listSubjectsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_listSubjectsCmd).Standalone()
+	carapace.Gen(rolesanywhere_listSubjectsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_listSubjectsCmd).Standalone()
 
-	rolesanywhere_listSubjectsCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous request did not show all results.")
-	rolesanywhere_listSubjectsCmd.Flags().String("page-size", "", "The number of resources in the paginated list.")
+		rolesanywhere_listSubjectsCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous request did not show all results.")
+		rolesanywhere_listSubjectsCmd.Flags().String("page-size", "", "The number of resources in the paginated list.")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_listSubjectsCmd)
 }

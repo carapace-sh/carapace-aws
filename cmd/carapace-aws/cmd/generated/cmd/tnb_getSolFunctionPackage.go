@@ -12,9 +12,11 @@ var tnb_getSolFunctionPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_getSolFunctionPackageCmd).Standalone()
+	carapace.Gen(tnb_getSolFunctionPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_getSolFunctionPackageCmd).Standalone()
 
-	tnb_getSolFunctionPackageCmd.Flags().String("vnf-pkg-id", "", "ID of the function package.")
-	tnb_getSolFunctionPackageCmd.MarkFlagRequired("vnf-pkg-id")
+		tnb_getSolFunctionPackageCmd.Flags().String("vnf-pkg-id", "", "ID of the function package.")
+		tnb_getSolFunctionPackageCmd.MarkFlagRequired("vnf-pkg-id")
+	})
 	tnbCmd.AddCommand(tnb_getSolFunctionPackageCmd)
 }

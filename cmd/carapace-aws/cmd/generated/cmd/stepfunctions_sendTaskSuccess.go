@@ -12,11 +12,13 @@ var stepfunctions_sendTaskSuccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_sendTaskSuccessCmd).Standalone()
+	carapace.Gen(stepfunctions_sendTaskSuccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_sendTaskSuccessCmd).Standalone()
 
-	stepfunctions_sendTaskSuccessCmd.Flags().String("output", "", "The JSON output of the task.")
-	stepfunctions_sendTaskSuccessCmd.Flags().String("task-token", "", "The token that represents this task.")
-	stepfunctions_sendTaskSuccessCmd.MarkFlagRequired("output")
-	stepfunctions_sendTaskSuccessCmd.MarkFlagRequired("task-token")
+		stepfunctions_sendTaskSuccessCmd.Flags().String("output", "", "The JSON output of the task.")
+		stepfunctions_sendTaskSuccessCmd.Flags().String("task-token", "", "The token that represents this task.")
+		stepfunctions_sendTaskSuccessCmd.MarkFlagRequired("output")
+		stepfunctions_sendTaskSuccessCmd.MarkFlagRequired("task-token")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_sendTaskSuccessCmd)
 }

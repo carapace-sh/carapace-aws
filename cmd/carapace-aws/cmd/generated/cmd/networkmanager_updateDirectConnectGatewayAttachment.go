@@ -12,10 +12,12 @@ var networkmanager_updateDirectConnectGatewayAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_updateDirectConnectGatewayAttachmentCmd).Standalone()
+	carapace.Gen(networkmanager_updateDirectConnectGatewayAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_updateDirectConnectGatewayAttachmentCmd).Standalone()
 
-	networkmanager_updateDirectConnectGatewayAttachmentCmd.Flags().String("attachment-id", "", "The ID of the Direct Connect gateway attachment for the updated edge locations.")
-	networkmanager_updateDirectConnectGatewayAttachmentCmd.Flags().String("edge-locations", "", "One or more edge locations to update for the Direct Connect gateway attachment.")
-	networkmanager_updateDirectConnectGatewayAttachmentCmd.MarkFlagRequired("attachment-id")
+		networkmanager_updateDirectConnectGatewayAttachmentCmd.Flags().String("attachment-id", "", "The ID of the Direct Connect gateway attachment for the updated edge locations.")
+		networkmanager_updateDirectConnectGatewayAttachmentCmd.Flags().String("edge-locations", "", "One or more edge locations to update for the Direct Connect gateway attachment.")
+		networkmanager_updateDirectConnectGatewayAttachmentCmd.MarkFlagRequired("attachment-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_updateDirectConnectGatewayAttachmentCmd)
 }

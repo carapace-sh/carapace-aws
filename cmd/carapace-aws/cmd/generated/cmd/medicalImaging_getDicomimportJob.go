@@ -12,11 +12,13 @@ var medicalImaging_getDicomimportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medicalImaging_getDicomimportJobCmd).Standalone()
+	carapace.Gen(medicalImaging_getDicomimportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medicalImaging_getDicomimportJobCmd).Standalone()
 
-	medicalImaging_getDicomimportJobCmd.Flags().String("datastore-id", "", "The data store identifier.")
-	medicalImaging_getDicomimportJobCmd.Flags().String("job-id", "", "The import job identifier.")
-	medicalImaging_getDicomimportJobCmd.MarkFlagRequired("datastore-id")
-	medicalImaging_getDicomimportJobCmd.MarkFlagRequired("job-id")
+		medicalImaging_getDicomimportJobCmd.Flags().String("datastore-id", "", "The data store identifier.")
+		medicalImaging_getDicomimportJobCmd.Flags().String("job-id", "", "The import job identifier.")
+		medicalImaging_getDicomimportJobCmd.MarkFlagRequired("datastore-id")
+		medicalImaging_getDicomimportJobCmd.MarkFlagRequired("job-id")
+	})
 	medicalImagingCmd.AddCommand(medicalImaging_getDicomimportJobCmd)
 }

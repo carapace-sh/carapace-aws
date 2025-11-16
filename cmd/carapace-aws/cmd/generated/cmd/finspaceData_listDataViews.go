@@ -12,11 +12,13 @@ var finspaceData_listDataViewsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_listDataViewsCmd).Standalone()
+	carapace.Gen(finspaceData_listDataViewsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_listDataViewsCmd).Standalone()
 
-	finspaceData_listDataViewsCmd.Flags().String("dataset-id", "", "The unique identifier of the Dataset for which to retrieve Dataviews.")
-	finspaceData_listDataViewsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
-	finspaceData_listDataViewsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
-	finspaceData_listDataViewsCmd.MarkFlagRequired("dataset-id")
+		finspaceData_listDataViewsCmd.Flags().String("dataset-id", "", "The unique identifier of the Dataset for which to retrieve Dataviews.")
+		finspaceData_listDataViewsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
+		finspaceData_listDataViewsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+		finspaceData_listDataViewsCmd.MarkFlagRequired("dataset-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_listDataViewsCmd)
 }

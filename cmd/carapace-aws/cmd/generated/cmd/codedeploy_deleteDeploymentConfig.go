@@ -12,9 +12,11 @@ var codedeploy_deleteDeploymentConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_deleteDeploymentConfigCmd).Standalone()
+	carapace.Gen(codedeploy_deleteDeploymentConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_deleteDeploymentConfigCmd).Standalone()
 
-	codedeploy_deleteDeploymentConfigCmd.Flags().String("deployment-config-name", "", "The name of a deployment configuration associated with the user or Amazon Web Services account.")
-	codedeploy_deleteDeploymentConfigCmd.MarkFlagRequired("deployment-config-name")
+		codedeploy_deleteDeploymentConfigCmd.Flags().String("deployment-config-name", "", "The name of a deployment configuration associated with the user or Amazon Web Services account.")
+		codedeploy_deleteDeploymentConfigCmd.MarkFlagRequired("deployment-config-name")
+	})
 	codedeployCmd.AddCommand(codedeploy_deleteDeploymentConfigCmd)
 }

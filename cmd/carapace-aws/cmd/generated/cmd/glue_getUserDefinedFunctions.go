@@ -12,13 +12,15 @@ var glue_getUserDefinedFunctionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getUserDefinedFunctionsCmd).Standalone()
+	carapace.Gen(glue_getUserDefinedFunctionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getUserDefinedFunctionsCmd).Standalone()
 
-	glue_getUserDefinedFunctionsCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the functions to be retrieved are located.")
-	glue_getUserDefinedFunctionsCmd.Flags().String("database-name", "", "The name of the catalog database where the functions are located.")
-	glue_getUserDefinedFunctionsCmd.Flags().String("max-results", "", "The maximum number of functions to return in one response.")
-	glue_getUserDefinedFunctionsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
-	glue_getUserDefinedFunctionsCmd.Flags().String("pattern", "", "An optional function-name pattern string that filters the function definitions returned.")
-	glue_getUserDefinedFunctionsCmd.MarkFlagRequired("pattern")
+		glue_getUserDefinedFunctionsCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog where the functions to be retrieved are located.")
+		glue_getUserDefinedFunctionsCmd.Flags().String("database-name", "", "The name of the catalog database where the functions are located.")
+		glue_getUserDefinedFunctionsCmd.Flags().String("max-results", "", "The maximum number of functions to return in one response.")
+		glue_getUserDefinedFunctionsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		glue_getUserDefinedFunctionsCmd.Flags().String("pattern", "", "An optional function-name pattern string that filters the function definitions returned.")
+		glue_getUserDefinedFunctionsCmd.MarkFlagRequired("pattern")
+	})
 	glueCmd.AddCommand(glue_getUserDefinedFunctionsCmd)
 }

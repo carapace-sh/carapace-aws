@@ -12,9 +12,11 @@ var rds_deleteDbshardGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteDbshardGroupCmd).Standalone()
+	carapace.Gen(rds_deleteDbshardGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteDbshardGroupCmd).Standalone()
 
-	rds_deleteDbshardGroupCmd.Flags().String("dbshard-group-identifier", "", "The name of the DB shard group to delete.")
-	rds_deleteDbshardGroupCmd.MarkFlagRequired("dbshard-group-identifier")
+		rds_deleteDbshardGroupCmd.Flags().String("dbshard-group-identifier", "", "The name of the DB shard group to delete.")
+		rds_deleteDbshardGroupCmd.MarkFlagRequired("dbshard-group-identifier")
+	})
 	rdsCmd.AddCommand(rds_deleteDbshardGroupCmd)
 }

@@ -12,9 +12,11 @@ var bedrock_getModelImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getModelImportJobCmd).Standalone()
+	carapace.Gen(bedrock_getModelImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getModelImportJobCmd).Standalone()
 
-	bedrock_getModelImportJobCmd.Flags().String("job-identifier", "", "The identifier of the import job.")
-	bedrock_getModelImportJobCmd.MarkFlagRequired("job-identifier")
+		bedrock_getModelImportJobCmd.Flags().String("job-identifier", "", "The identifier of the import job.")
+		bedrock_getModelImportJobCmd.MarkFlagRequired("job-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_getModelImportJobCmd)
 }

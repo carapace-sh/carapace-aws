@@ -12,8 +12,10 @@ var appconfig_updateAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_updateAccountSettingsCmd).Standalone()
+	carapace.Gen(appconfig_updateAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_updateAccountSettingsCmd).Standalone()
 
-	appconfig_updateAccountSettingsCmd.Flags().String("deletion-protection", "", "A parameter to configure deletion protection.")
+		appconfig_updateAccountSettingsCmd.Flags().String("deletion-protection", "", "A parameter to configure deletion protection.")
+	})
 	appconfigCmd.AddCommand(appconfig_updateAccountSettingsCmd)
 }

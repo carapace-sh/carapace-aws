@@ -12,11 +12,13 @@ var cloudhsm_modifyHapgCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_modifyHapgCmd).Standalone()
+	carapace.Gen(cloudhsm_modifyHapgCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_modifyHapgCmd).Standalone()
 
-	cloudhsm_modifyHapgCmd.Flags().String("hapg-arn", "", "The ARN of the high-availability partition group to modify.")
-	cloudhsm_modifyHapgCmd.Flags().String("label", "", "The new label for the high-availability partition group.")
-	cloudhsm_modifyHapgCmd.Flags().String("partition-serial-list", "", "The list of partition serial numbers to make members of the high-availability partition group.")
-	cloudhsm_modifyHapgCmd.MarkFlagRequired("hapg-arn")
+		cloudhsm_modifyHapgCmd.Flags().String("hapg-arn", "", "The ARN of the high-availability partition group to modify.")
+		cloudhsm_modifyHapgCmd.Flags().String("label", "", "The new label for the high-availability partition group.")
+		cloudhsm_modifyHapgCmd.Flags().String("partition-serial-list", "", "The list of partition serial numbers to make members of the high-availability partition group.")
+		cloudhsm_modifyHapgCmd.MarkFlagRequired("hapg-arn")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_modifyHapgCmd)
 }

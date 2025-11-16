@@ -12,9 +12,11 @@ var glue_startCrawlerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_startCrawlerCmd).Standalone()
+	carapace.Gen(glue_startCrawlerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_startCrawlerCmd).Standalone()
 
-	glue_startCrawlerCmd.Flags().String("name", "", "Name of the crawler to start.")
-	glue_startCrawlerCmd.MarkFlagRequired("name")
+		glue_startCrawlerCmd.Flags().String("name", "", "Name of the crawler to start.")
+		glue_startCrawlerCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_startCrawlerCmd)
 }

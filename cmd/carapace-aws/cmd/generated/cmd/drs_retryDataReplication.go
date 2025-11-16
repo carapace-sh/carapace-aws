@@ -12,9 +12,11 @@ var drs_retryDataReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_retryDataReplicationCmd).Standalone()
+	carapace.Gen(drs_retryDataReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_retryDataReplicationCmd).Standalone()
 
-	drs_retryDataReplicationCmd.Flags().String("source-server-id", "", "The ID of the Source Server whose data replication should be retried.")
-	drs_retryDataReplicationCmd.MarkFlagRequired("source-server-id")
+		drs_retryDataReplicationCmd.Flags().String("source-server-id", "", "The ID of the Source Server whose data replication should be retried.")
+		drs_retryDataReplicationCmd.MarkFlagRequired("source-server-id")
+	})
 	drsCmd.AddCommand(drs_retryDataReplicationCmd)
 }

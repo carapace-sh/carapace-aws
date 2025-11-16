@@ -12,9 +12,11 @@ var ivsRealtime_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_listTagsForResourceCmd).Standalone()
+	carapace.Gen(ivsRealtime_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_listTagsForResourceCmd).Standalone()
 
-	ivsRealtime_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be retrieved.")
-	ivsRealtime_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		ivsRealtime_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to be retrieved.")
+		ivsRealtime_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_listTagsForResourceCmd)
 }

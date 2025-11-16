@@ -12,9 +12,11 @@ var redshiftServerless_getNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getNamespaceCmd).Standalone()
+	carapace.Gen(redshiftServerless_getNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getNamespaceCmd).Standalone()
 
-	redshiftServerless_getNamespaceCmd.Flags().String("namespace-name", "", "The name of the namespace to retrieve information for.")
-	redshiftServerless_getNamespaceCmd.MarkFlagRequired("namespace-name")
+		redshiftServerless_getNamespaceCmd.Flags().String("namespace-name", "", "The name of the namespace to retrieve information for.")
+		redshiftServerless_getNamespaceCmd.MarkFlagRequired("namespace-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getNamespaceCmd)
 }

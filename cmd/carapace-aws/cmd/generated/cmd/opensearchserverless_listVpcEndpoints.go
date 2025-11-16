@@ -12,10 +12,12 @@ var opensearchserverless_listVpcEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_listVpcEndpointsCmd).Standalone()
+	carapace.Gen(opensearchserverless_listVpcEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_listVpcEndpointsCmd).Standalone()
 
-	opensearchserverless_listVpcEndpointsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
-	opensearchserverless_listVpcEndpointsCmd.Flags().String("next-token", "", "If your initial `ListVpcEndpoints` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpoints` operations, which returns results in the next page.")
-	opensearchserverless_listVpcEndpointsCmd.Flags().String("vpc-endpoint-filters", "", "Filter the results according to the current status of the VPC endpoint.")
+		opensearchserverless_listVpcEndpointsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
+		opensearchserverless_listVpcEndpointsCmd.Flags().String("next-token", "", "If your initial `ListVpcEndpoints` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListVpcEndpoints` operations, which returns results in the next page.")
+		opensearchserverless_listVpcEndpointsCmd.Flags().String("vpc-endpoint-filters", "", "Filter the results according to the current status of the VPC endpoint.")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_listVpcEndpointsCmd)
 }

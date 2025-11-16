@@ -12,10 +12,12 @@ var braket_getJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(braket_getJobCmd).Standalone()
+	carapace.Gen(braket_getJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(braket_getJobCmd).Standalone()
 
-	braket_getJobCmd.Flags().String("additional-attribute-names", "", "A list of attributes to return additional information for.")
-	braket_getJobCmd.Flags().String("job-arn", "", "The ARN of the hybrid job to retrieve.")
-	braket_getJobCmd.MarkFlagRequired("job-arn")
+		braket_getJobCmd.Flags().String("additional-attribute-names", "", "A list of attributes to return additional information for.")
+		braket_getJobCmd.Flags().String("job-arn", "", "The ARN of the hybrid job to retrieve.")
+		braket_getJobCmd.MarkFlagRequired("job-arn")
+	})
 	braketCmd.AddCommand(braket_getJobCmd)
 }

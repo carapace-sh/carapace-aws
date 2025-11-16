@@ -12,10 +12,12 @@ var dms_describeReplicationInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeReplicationInstancesCmd).Standalone()
+	carapace.Gen(dms_describeReplicationInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeReplicationInstancesCmd).Standalone()
 
-	dms_describeReplicationInstancesCmd.Flags().String("filters", "", "Filters applied to replication instances.")
-	dms_describeReplicationInstancesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	dms_describeReplicationInstancesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		dms_describeReplicationInstancesCmd.Flags().String("filters", "", "Filters applied to replication instances.")
+		dms_describeReplicationInstancesCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		dms_describeReplicationInstancesCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	dmsCmd.AddCommand(dms_describeReplicationInstancesCmd)
 }

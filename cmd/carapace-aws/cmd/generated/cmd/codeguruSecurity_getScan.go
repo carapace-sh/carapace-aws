@@ -12,10 +12,12 @@ var codeguruSecurity_getScanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruSecurity_getScanCmd).Standalone()
+	carapace.Gen(codeguruSecurity_getScanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruSecurity_getScanCmd).Standalone()
 
-	codeguruSecurity_getScanCmd.Flags().String("run-id", "", "UUID that identifies the individual scan run you want to view details about.")
-	codeguruSecurity_getScanCmd.Flags().String("scan-name", "", "The name of the scan you want to view details about.")
-	codeguruSecurity_getScanCmd.MarkFlagRequired("scan-name")
+		codeguruSecurity_getScanCmd.Flags().String("run-id", "", "UUID that identifies the individual scan run you want to view details about.")
+		codeguruSecurity_getScanCmd.Flags().String("scan-name", "", "The name of the scan you want to view details about.")
+		codeguruSecurity_getScanCmd.MarkFlagRequired("scan-name")
+	})
 	codeguruSecurityCmd.AddCommand(codeguruSecurity_getScanCmd)
 }

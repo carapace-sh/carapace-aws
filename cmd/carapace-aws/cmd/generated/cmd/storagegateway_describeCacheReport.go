@@ -12,9 +12,11 @@ var storagegateway_describeCacheReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeCacheReportCmd).Standalone()
+	carapace.Gen(storagegateway_describeCacheReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeCacheReportCmd).Standalone()
 
-	storagegateway_describeCacheReportCmd.Flags().String("cache-report-arn", "", "The Amazon Resource Name (ARN) of the cache report you want to describe.")
-	storagegateway_describeCacheReportCmd.MarkFlagRequired("cache-report-arn")
+		storagegateway_describeCacheReportCmd.Flags().String("cache-report-arn", "", "The Amazon Resource Name (ARN) of the cache report you want to describe.")
+		storagegateway_describeCacheReportCmd.MarkFlagRequired("cache-report-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeCacheReportCmd)
 }

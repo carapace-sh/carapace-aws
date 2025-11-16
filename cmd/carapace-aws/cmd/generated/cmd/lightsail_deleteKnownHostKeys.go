@@ -12,9 +12,11 @@ var lightsail_deleteKnownHostKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteKnownHostKeysCmd).Standalone()
+	carapace.Gen(lightsail_deleteKnownHostKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteKnownHostKeysCmd).Standalone()
 
-	lightsail_deleteKnownHostKeysCmd.Flags().String("instance-name", "", "The name of the instance for which you want to reset the host key or certificate.")
-	lightsail_deleteKnownHostKeysCmd.MarkFlagRequired("instance-name")
+		lightsail_deleteKnownHostKeysCmd.Flags().String("instance-name", "", "The name of the instance for which you want to reset the host key or certificate.")
+		lightsail_deleteKnownHostKeysCmd.MarkFlagRequired("instance-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteKnownHostKeysCmd)
 }

@@ -12,11 +12,13 @@ var lightsail_updateDomainEntryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_updateDomainEntryCmd).Standalone()
+	carapace.Gen(lightsail_updateDomainEntryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_updateDomainEntryCmd).Standalone()
 
-	lightsail_updateDomainEntryCmd.Flags().String("domain-entry", "", "An array of key-value pairs containing information about the domain entry.")
-	lightsail_updateDomainEntryCmd.Flags().String("domain-name", "", "The name of the domain recordset to update.")
-	lightsail_updateDomainEntryCmd.MarkFlagRequired("domain-entry")
-	lightsail_updateDomainEntryCmd.MarkFlagRequired("domain-name")
+		lightsail_updateDomainEntryCmd.Flags().String("domain-entry", "", "An array of key-value pairs containing information about the domain entry.")
+		lightsail_updateDomainEntryCmd.Flags().String("domain-name", "", "The name of the domain recordset to update.")
+		lightsail_updateDomainEntryCmd.MarkFlagRequired("domain-entry")
+		lightsail_updateDomainEntryCmd.MarkFlagRequired("domain-name")
+	})
 	lightsailCmd.AddCommand(lightsail_updateDomainEntryCmd)
 }

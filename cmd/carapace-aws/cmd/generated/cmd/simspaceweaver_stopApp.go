@@ -12,13 +12,15 @@ var simspaceweaver_stopAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_stopAppCmd).Standalone()
+	carapace.Gen(simspaceweaver_stopAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_stopAppCmd).Standalone()
 
-	simspaceweaver_stopAppCmd.Flags().String("app", "", "The name of the app.")
-	simspaceweaver_stopAppCmd.Flags().String("domain", "", "The name of the domain of the app.")
-	simspaceweaver_stopAppCmd.Flags().String("simulation", "", "The name of the simulation of the app.")
-	simspaceweaver_stopAppCmd.MarkFlagRequired("app")
-	simspaceweaver_stopAppCmd.MarkFlagRequired("domain")
-	simspaceweaver_stopAppCmd.MarkFlagRequired("simulation")
+		simspaceweaver_stopAppCmd.Flags().String("app", "", "The name of the app.")
+		simspaceweaver_stopAppCmd.Flags().String("domain", "", "The name of the domain of the app.")
+		simspaceweaver_stopAppCmd.Flags().String("simulation", "", "The name of the simulation of the app.")
+		simspaceweaver_stopAppCmd.MarkFlagRequired("app")
+		simspaceweaver_stopAppCmd.MarkFlagRequired("domain")
+		simspaceweaver_stopAppCmd.MarkFlagRequired("simulation")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_stopAppCmd)
 }

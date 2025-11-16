@@ -12,11 +12,13 @@ var timestreamQuery_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_tagResourceCmd).Standalone()
+	carapace.Gen(timestreamQuery_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_tagResourceCmd).Standalone()
 
-	timestreamQuery_tagResourceCmd.Flags().String("resource-arn", "", "Identifies the Timestream resource to which tags should be added.")
-	timestreamQuery_tagResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Timestream resource.")
-	timestreamQuery_tagResourceCmd.MarkFlagRequired("resource-arn")
-	timestreamQuery_tagResourceCmd.MarkFlagRequired("tags")
+		timestreamQuery_tagResourceCmd.Flags().String("resource-arn", "", "Identifies the Timestream resource to which tags should be added.")
+		timestreamQuery_tagResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Timestream resource.")
+		timestreamQuery_tagResourceCmd.MarkFlagRequired("resource-arn")
+		timestreamQuery_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_tagResourceCmd)
 }

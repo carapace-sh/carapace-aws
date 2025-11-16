@@ -12,9 +12,11 @@ var snowball_listJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_listJobsCmd).Standalone()
+	carapace.Gen(snowball_listJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_listJobsCmd).Standalone()
 
-	snowball_listJobsCmd.Flags().String("max-results", "", "The number of `JobListEntry` objects to return.")
-	snowball_listJobsCmd.Flags().String("next-token", "", "HTTP requests are stateless.")
+		snowball_listJobsCmd.Flags().String("max-results", "", "The number of `JobListEntry` objects to return.")
+		snowball_listJobsCmd.Flags().String("next-token", "", "HTTP requests are stateless.")
+	})
 	snowballCmd.AddCommand(snowball_listJobsCmd)
 }

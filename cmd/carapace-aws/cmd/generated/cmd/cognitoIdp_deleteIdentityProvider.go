@@ -12,11 +12,13 @@ var cognitoIdp_deleteIdentityProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_deleteIdentityProviderCmd).Standalone()
+	carapace.Gen(cognitoIdp_deleteIdentityProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_deleteIdentityProviderCmd).Standalone()
 
-	cognitoIdp_deleteIdentityProviderCmd.Flags().String("provider-name", "", "The name of the IdP that you want to delete.")
-	cognitoIdp_deleteIdentityProviderCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to delete the identity provider.")
-	cognitoIdp_deleteIdentityProviderCmd.MarkFlagRequired("provider-name")
-	cognitoIdp_deleteIdentityProviderCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_deleteIdentityProviderCmd.Flags().String("provider-name", "", "The name of the IdP that you want to delete.")
+		cognitoIdp_deleteIdentityProviderCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to delete the identity provider.")
+		cognitoIdp_deleteIdentityProviderCmd.MarkFlagRequired("provider-name")
+		cognitoIdp_deleteIdentityProviderCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_deleteIdentityProviderCmd)
 }

@@ -12,11 +12,13 @@ var datapipeline_reportTaskRunnerHeartbeatCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_reportTaskRunnerHeartbeatCmd).Standalone()
+	carapace.Gen(datapipeline_reportTaskRunnerHeartbeatCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_reportTaskRunnerHeartbeatCmd).Standalone()
 
-	datapipeline_reportTaskRunnerHeartbeatCmd.Flags().String("hostname", "", "The public DNS name of the task runner.")
-	datapipeline_reportTaskRunnerHeartbeatCmd.Flags().String("taskrunner-id", "", "The ID of the task runner.")
-	datapipeline_reportTaskRunnerHeartbeatCmd.Flags().String("worker-group", "", "The type of task the task runner is configured to accept and process.")
-	datapipeline_reportTaskRunnerHeartbeatCmd.MarkFlagRequired("taskrunner-id")
+		datapipeline_reportTaskRunnerHeartbeatCmd.Flags().String("hostname", "", "The public DNS name of the task runner.")
+		datapipeline_reportTaskRunnerHeartbeatCmd.Flags().String("taskrunner-id", "", "The ID of the task runner.")
+		datapipeline_reportTaskRunnerHeartbeatCmd.Flags().String("worker-group", "", "The type of task the task runner is configured to accept and process.")
+		datapipeline_reportTaskRunnerHeartbeatCmd.MarkFlagRequired("taskrunner-id")
+	})
 	datapipelineCmd.AddCommand(datapipeline_reportTaskRunnerHeartbeatCmd)
 }

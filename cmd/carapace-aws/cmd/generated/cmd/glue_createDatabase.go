@@ -12,11 +12,13 @@ var glue_createDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_createDatabaseCmd).Standalone()
+	carapace.Gen(glue_createDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_createDatabaseCmd).Standalone()
 
-	glue_createDatabaseCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog in which to create the database.")
-	glue_createDatabaseCmd.Flags().String("database-input", "", "The metadata for the database.")
-	glue_createDatabaseCmd.Flags().String("tags", "", "The tags you assign to the database.")
-	glue_createDatabaseCmd.MarkFlagRequired("database-input")
+		glue_createDatabaseCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog in which to create the database.")
+		glue_createDatabaseCmd.Flags().String("database-input", "", "The metadata for the database.")
+		glue_createDatabaseCmd.Flags().String("tags", "", "The tags you assign to the database.")
+		glue_createDatabaseCmd.MarkFlagRequired("database-input")
+	})
 	glueCmd.AddCommand(glue_createDatabaseCmd)
 }

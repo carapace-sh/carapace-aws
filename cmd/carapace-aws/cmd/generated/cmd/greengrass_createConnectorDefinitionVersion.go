@@ -12,11 +12,13 @@ var greengrass_createConnectorDefinitionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createConnectorDefinitionVersionCmd).Standalone()
+	carapace.Gen(greengrass_createConnectorDefinitionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createConnectorDefinitionVersionCmd).Standalone()
 
-	greengrass_createConnectorDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createConnectorDefinitionVersionCmd.Flags().String("connector-definition-id", "", "The ID of the connector definition.")
-	greengrass_createConnectorDefinitionVersionCmd.Flags().String("connectors", "", "A list of references to connectors in this version, with their corresponding configuration settings.")
-	greengrass_createConnectorDefinitionVersionCmd.MarkFlagRequired("connector-definition-id")
+		greengrass_createConnectorDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createConnectorDefinitionVersionCmd.Flags().String("connector-definition-id", "", "The ID of the connector definition.")
+		greengrass_createConnectorDefinitionVersionCmd.Flags().String("connectors", "", "A list of references to connectors in this version, with their corresponding configuration settings.")
+		greengrass_createConnectorDefinitionVersionCmd.MarkFlagRequired("connector-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_createConnectorDefinitionVersionCmd)
 }

@@ -12,9 +12,11 @@ var drs_getFailbackReplicationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_getFailbackReplicationConfigurationCmd).Standalone()
+	carapace.Gen(drs_getFailbackReplicationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_getFailbackReplicationConfigurationCmd).Standalone()
 
-	drs_getFailbackReplicationConfigurationCmd.Flags().String("recovery-instance-id", "", "The ID of the Recovery Instance whose failback replication configuration should be returned.")
-	drs_getFailbackReplicationConfigurationCmd.MarkFlagRequired("recovery-instance-id")
+		drs_getFailbackReplicationConfigurationCmd.Flags().String("recovery-instance-id", "", "The ID of the Recovery Instance whose failback replication configuration should be returned.")
+		drs_getFailbackReplicationConfigurationCmd.MarkFlagRequired("recovery-instance-id")
+	})
 	drsCmd.AddCommand(drs_getFailbackReplicationConfigurationCmd)
 }

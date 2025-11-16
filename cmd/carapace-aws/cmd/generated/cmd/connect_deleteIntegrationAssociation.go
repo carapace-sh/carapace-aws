@@ -12,11 +12,13 @@ var connect_deleteIntegrationAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteIntegrationAssociationCmd).Standalone()
+	carapace.Gen(connect_deleteIntegrationAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteIntegrationAssociationCmd).Standalone()
 
-	connect_deleteIntegrationAssociationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteIntegrationAssociationCmd.Flags().String("integration-association-id", "", "The identifier for the integration association.")
-	connect_deleteIntegrationAssociationCmd.MarkFlagRequired("instance-id")
-	connect_deleteIntegrationAssociationCmd.MarkFlagRequired("integration-association-id")
+		connect_deleteIntegrationAssociationCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteIntegrationAssociationCmd.Flags().String("integration-association-id", "", "The identifier for the integration association.")
+		connect_deleteIntegrationAssociationCmd.MarkFlagRequired("instance-id")
+		connect_deleteIntegrationAssociationCmd.MarkFlagRequired("integration-association-id")
+	})
 	connectCmd.AddCommand(connect_deleteIntegrationAssociationCmd)
 }

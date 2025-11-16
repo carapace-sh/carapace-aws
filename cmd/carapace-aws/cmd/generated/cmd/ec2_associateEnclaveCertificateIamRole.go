@@ -12,14 +12,16 @@ var ec2_associateEnclaveCertificateIamRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_associateEnclaveCertificateIamRoleCmd).Standalone()
+	carapace.Gen(ec2_associateEnclaveCertificateIamRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_associateEnclaveCertificateIamRoleCmd).Standalone()
 
-	ec2_associateEnclaveCertificateIamRoleCmd.Flags().String("certificate-arn", "", "The ARN of the ACM certificate with which to associate the IAM role.")
-	ec2_associateEnclaveCertificateIamRoleCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_associateEnclaveCertificateIamRoleCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_associateEnclaveCertificateIamRoleCmd.Flags().String("role-arn", "", "The ARN of the IAM role to associate with the ACM certificate.")
-	ec2_associateEnclaveCertificateIamRoleCmd.MarkFlagRequired("certificate-arn")
-	ec2_associateEnclaveCertificateIamRoleCmd.Flag("no-dry-run").Hidden = true
-	ec2_associateEnclaveCertificateIamRoleCmd.MarkFlagRequired("role-arn")
+		ec2_associateEnclaveCertificateIamRoleCmd.Flags().String("certificate-arn", "", "The ARN of the ACM certificate with which to associate the IAM role.")
+		ec2_associateEnclaveCertificateIamRoleCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_associateEnclaveCertificateIamRoleCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_associateEnclaveCertificateIamRoleCmd.Flags().String("role-arn", "", "The ARN of the IAM role to associate with the ACM certificate.")
+		ec2_associateEnclaveCertificateIamRoleCmd.MarkFlagRequired("certificate-arn")
+		ec2_associateEnclaveCertificateIamRoleCmd.Flag("no-dry-run").Hidden = true
+		ec2_associateEnclaveCertificateIamRoleCmd.MarkFlagRequired("role-arn")
+	})
 	ec2Cmd.AddCommand(ec2_associateEnclaveCertificateIamRoleCmd)
 }

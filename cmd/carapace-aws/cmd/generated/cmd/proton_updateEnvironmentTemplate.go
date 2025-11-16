@@ -12,11 +12,13 @@ var proton_updateEnvironmentTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_updateEnvironmentTemplateCmd).Standalone()
+	carapace.Gen(proton_updateEnvironmentTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_updateEnvironmentTemplateCmd).Standalone()
 
-	proton_updateEnvironmentTemplateCmd.Flags().String("description", "", "A description of the environment template update.")
-	proton_updateEnvironmentTemplateCmd.Flags().String("display-name", "", "The name of the environment template to update as displayed in the developer interface.")
-	proton_updateEnvironmentTemplateCmd.Flags().String("name", "", "The name of the environment template to update.")
-	proton_updateEnvironmentTemplateCmd.MarkFlagRequired("name")
+		proton_updateEnvironmentTemplateCmd.Flags().String("description", "", "A description of the environment template update.")
+		proton_updateEnvironmentTemplateCmd.Flags().String("display-name", "", "The name of the environment template to update as displayed in the developer interface.")
+		proton_updateEnvironmentTemplateCmd.Flags().String("name", "", "The name of the environment template to update.")
+		proton_updateEnvironmentTemplateCmd.MarkFlagRequired("name")
+	})
 	protonCmd.AddCommand(proton_updateEnvironmentTemplateCmd)
 }

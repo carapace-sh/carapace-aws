@@ -12,11 +12,13 @@ var observabilityadmin_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_untagResourceCmd).Standalone()
+	carapace.Gen(observabilityadmin_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_untagResourceCmd).Standalone()
 
-	observabilityadmin_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the telemetry rule resource to remove tags from.")
-	observabilityadmin_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the telemetry rule resource.")
-	observabilityadmin_untagResourceCmd.MarkFlagRequired("resource-arn")
-	observabilityadmin_untagResourceCmd.MarkFlagRequired("tag-keys")
+		observabilityadmin_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the telemetry rule resource to remove tags from.")
+		observabilityadmin_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the telemetry rule resource.")
+		observabilityadmin_untagResourceCmd.MarkFlagRequired("resource-arn")
+		observabilityadmin_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_untagResourceCmd)
 }

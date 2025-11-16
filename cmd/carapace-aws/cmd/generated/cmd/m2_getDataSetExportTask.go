@@ -12,11 +12,13 @@ var m2_getDataSetExportTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_getDataSetExportTaskCmd).Standalone()
+	carapace.Gen(m2_getDataSetExportTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_getDataSetExportTaskCmd).Standalone()
 
-	m2_getDataSetExportTaskCmd.Flags().String("application-id", "", "The application identifier.")
-	m2_getDataSetExportTaskCmd.Flags().String("task-id", "", "The task identifier returned by the [CreateDataSetExportTask]() operation.")
-	m2_getDataSetExportTaskCmd.MarkFlagRequired("application-id")
-	m2_getDataSetExportTaskCmd.MarkFlagRequired("task-id")
+		m2_getDataSetExportTaskCmd.Flags().String("application-id", "", "The application identifier.")
+		m2_getDataSetExportTaskCmd.Flags().String("task-id", "", "The task identifier returned by the [CreateDataSetExportTask]() operation.")
+		m2_getDataSetExportTaskCmd.MarkFlagRequired("application-id")
+		m2_getDataSetExportTaskCmd.MarkFlagRequired("task-id")
+	})
 	m2Cmd.AddCommand(m2_getDataSetExportTaskCmd)
 }

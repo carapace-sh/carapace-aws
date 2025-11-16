@@ -12,11 +12,13 @@ var kinesisvideo_updateMediaStorageConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_updateMediaStorageConfigurationCmd).Standalone()
+	carapace.Gen(kinesisvideo_updateMediaStorageConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_updateMediaStorageConfigurationCmd).Standalone()
 
-	kinesisvideo_updateMediaStorageConfigurationCmd.Flags().String("channel-arn", "", "The Amazon Resource Name (ARN) of the channel.")
-	kinesisvideo_updateMediaStorageConfigurationCmd.Flags().String("media-storage-configuration", "", "A structure that encapsulates, or contains, the media storage configuration properties.")
-	kinesisvideo_updateMediaStorageConfigurationCmd.MarkFlagRequired("channel-arn")
-	kinesisvideo_updateMediaStorageConfigurationCmd.MarkFlagRequired("media-storage-configuration")
+		kinesisvideo_updateMediaStorageConfigurationCmd.Flags().String("channel-arn", "", "The Amazon Resource Name (ARN) of the channel.")
+		kinesisvideo_updateMediaStorageConfigurationCmd.Flags().String("media-storage-configuration", "", "A structure that encapsulates, or contains, the media storage configuration properties.")
+		kinesisvideo_updateMediaStorageConfigurationCmd.MarkFlagRequired("channel-arn")
+		kinesisvideo_updateMediaStorageConfigurationCmd.MarkFlagRequired("media-storage-configuration")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_updateMediaStorageConfigurationCmd)
 }

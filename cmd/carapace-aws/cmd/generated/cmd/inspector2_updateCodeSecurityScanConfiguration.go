@@ -12,11 +12,13 @@ var inspector2_updateCodeSecurityScanConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_updateCodeSecurityScanConfigurationCmd).Standalone()
+	carapace.Gen(inspector2_updateCodeSecurityScanConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_updateCodeSecurityScanConfigurationCmd).Standalone()
 
-	inspector2_updateCodeSecurityScanConfigurationCmd.Flags().String("configuration", "", "The updated configuration settings for the code security scan.")
-	inspector2_updateCodeSecurityScanConfigurationCmd.Flags().String("scan-configuration-arn", "", "The Amazon Resource Name (ARN) of the scan configuration to update.")
-	inspector2_updateCodeSecurityScanConfigurationCmd.MarkFlagRequired("configuration")
-	inspector2_updateCodeSecurityScanConfigurationCmd.MarkFlagRequired("scan-configuration-arn")
+		inspector2_updateCodeSecurityScanConfigurationCmd.Flags().String("configuration", "", "The updated configuration settings for the code security scan.")
+		inspector2_updateCodeSecurityScanConfigurationCmd.Flags().String("scan-configuration-arn", "", "The Amazon Resource Name (ARN) of the scan configuration to update.")
+		inspector2_updateCodeSecurityScanConfigurationCmd.MarkFlagRequired("configuration")
+		inspector2_updateCodeSecurityScanConfigurationCmd.MarkFlagRequired("scan-configuration-arn")
+	})
 	inspector2Cmd.AddCommand(inspector2_updateCodeSecurityScanConfigurationCmd)
 }

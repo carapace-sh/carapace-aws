@@ -12,9 +12,11 @@ var serverlessrepo_getApplicationPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serverlessrepo_getApplicationPolicyCmd).Standalone()
+	carapace.Gen(serverlessrepo_getApplicationPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serverlessrepo_getApplicationPolicyCmd).Standalone()
 
-	serverlessrepo_getApplicationPolicyCmd.Flags().String("application-id", "", "The Amazon Resource Name (ARN) of the application.")
-	serverlessrepo_getApplicationPolicyCmd.MarkFlagRequired("application-id")
+		serverlessrepo_getApplicationPolicyCmd.Flags().String("application-id", "", "The Amazon Resource Name (ARN) of the application.")
+		serverlessrepo_getApplicationPolicyCmd.MarkFlagRequired("application-id")
+	})
 	serverlessrepoCmd.AddCommand(serverlessrepo_getApplicationPolicyCmd)
 }

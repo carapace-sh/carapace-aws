@@ -12,9 +12,11 @@ var chimeSdkVoice_deleteVoiceConnectorGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorGroupCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteVoiceConnectorGroupCmd).Standalone()
 
-	chimeSdkVoice_deleteVoiceConnectorGroupCmd.Flags().String("voice-connector-group-id", "", "The Voice Connector Group ID.")
-	chimeSdkVoice_deleteVoiceConnectorGroupCmd.MarkFlagRequired("voice-connector-group-id")
+		chimeSdkVoice_deleteVoiceConnectorGroupCmd.Flags().String("voice-connector-group-id", "", "The Voice Connector Group ID.")
+		chimeSdkVoice_deleteVoiceConnectorGroupCmd.MarkFlagRequired("voice-connector-group-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteVoiceConnectorGroupCmd)
 }

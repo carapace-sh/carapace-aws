@@ -12,11 +12,13 @@ var amplify_getDomainAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_getDomainAssociationCmd).Standalone()
+	carapace.Gen(amplify_getDomainAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_getDomainAssociationCmd).Standalone()
 
-	amplify_getDomainAssociationCmd.Flags().String("app-id", "", "The unique id for an Amplify app.")
-	amplify_getDomainAssociationCmd.Flags().String("domain-name", "", "The name of the domain.")
-	amplify_getDomainAssociationCmd.MarkFlagRequired("app-id")
-	amplify_getDomainAssociationCmd.MarkFlagRequired("domain-name")
+		amplify_getDomainAssociationCmd.Flags().String("app-id", "", "The unique id for an Amplify app.")
+		amplify_getDomainAssociationCmd.Flags().String("domain-name", "", "The name of the domain.")
+		amplify_getDomainAssociationCmd.MarkFlagRequired("app-id")
+		amplify_getDomainAssociationCmd.MarkFlagRequired("domain-name")
+	})
 	amplifyCmd.AddCommand(amplify_getDomainAssociationCmd)
 }

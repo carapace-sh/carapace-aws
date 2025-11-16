@@ -12,13 +12,15 @@ var applicationInsights_createComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_createComponentCmd).Standalone()
+	carapace.Gen(applicationInsights_createComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_createComponentCmd).Standalone()
 
-	applicationInsights_createComponentCmd.Flags().String("component-name", "", "The name of the component.")
-	applicationInsights_createComponentCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
-	applicationInsights_createComponentCmd.Flags().String("resource-list", "", "The list of resource ARNs that belong to the component.")
-	applicationInsights_createComponentCmd.MarkFlagRequired("component-name")
-	applicationInsights_createComponentCmd.MarkFlagRequired("resource-group-name")
-	applicationInsights_createComponentCmd.MarkFlagRequired("resource-list")
+		applicationInsights_createComponentCmd.Flags().String("component-name", "", "The name of the component.")
+		applicationInsights_createComponentCmd.Flags().String("resource-group-name", "", "The name of the resource group.")
+		applicationInsights_createComponentCmd.Flags().String("resource-list", "", "The list of resource ARNs that belong to the component.")
+		applicationInsights_createComponentCmd.MarkFlagRequired("component-name")
+		applicationInsights_createComponentCmd.MarkFlagRequired("resource-group-name")
+		applicationInsights_createComponentCmd.MarkFlagRequired("resource-list")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_createComponentCmd)
 }

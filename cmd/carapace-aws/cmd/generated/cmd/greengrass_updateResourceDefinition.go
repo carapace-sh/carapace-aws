@@ -12,10 +12,12 @@ var greengrass_updateResourceDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_updateResourceDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_updateResourceDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_updateResourceDefinitionCmd).Standalone()
 
-	greengrass_updateResourceDefinitionCmd.Flags().String("name", "", "The name of the definition.")
-	greengrass_updateResourceDefinitionCmd.Flags().String("resource-definition-id", "", "The ID of the resource definition.")
-	greengrass_updateResourceDefinitionCmd.MarkFlagRequired("resource-definition-id")
+		greengrass_updateResourceDefinitionCmd.Flags().String("name", "", "The name of the definition.")
+		greengrass_updateResourceDefinitionCmd.Flags().String("resource-definition-id", "", "The ID of the resource definition.")
+		greengrass_updateResourceDefinitionCmd.MarkFlagRequired("resource-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_updateResourceDefinitionCmd)
 }

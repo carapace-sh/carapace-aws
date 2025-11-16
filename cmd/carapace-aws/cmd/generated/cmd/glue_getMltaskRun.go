@@ -12,11 +12,13 @@ var glue_getMltaskRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getMltaskRunCmd).Standalone()
+	carapace.Gen(glue_getMltaskRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getMltaskRunCmd).Standalone()
 
-	glue_getMltaskRunCmd.Flags().String("task-run-id", "", "The unique identifier of the task run.")
-	glue_getMltaskRunCmd.Flags().String("transform-id", "", "The unique identifier of the machine learning transform.")
-	glue_getMltaskRunCmd.MarkFlagRequired("task-run-id")
-	glue_getMltaskRunCmd.MarkFlagRequired("transform-id")
+		glue_getMltaskRunCmd.Flags().String("task-run-id", "", "The unique identifier of the task run.")
+		glue_getMltaskRunCmd.Flags().String("transform-id", "", "The unique identifier of the machine learning transform.")
+		glue_getMltaskRunCmd.MarkFlagRequired("task-run-id")
+		glue_getMltaskRunCmd.MarkFlagRequired("transform-id")
+	})
 	glueCmd.AddCommand(glue_getMltaskRunCmd)
 }

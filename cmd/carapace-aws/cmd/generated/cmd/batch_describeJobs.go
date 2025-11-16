@@ -12,9 +12,11 @@ var batch_describeJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_describeJobsCmd).Standalone()
+	carapace.Gen(batch_describeJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_describeJobsCmd).Standalone()
 
-	batch_describeJobsCmd.Flags().String("jobs", "", "A list of up to 100 job IDs.")
-	batch_describeJobsCmd.MarkFlagRequired("jobs")
+		batch_describeJobsCmd.Flags().String("jobs", "", "A list of up to 100 job IDs.")
+		batch_describeJobsCmd.MarkFlagRequired("jobs")
+	})
 	batchCmd.AddCommand(batch_describeJobsCmd)
 }

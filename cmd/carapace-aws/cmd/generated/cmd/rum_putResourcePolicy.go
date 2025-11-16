@@ -12,12 +12,14 @@ var rum_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rum_putResourcePolicyCmd).Standalone()
+	carapace.Gen(rum_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rum_putResourcePolicyCmd).Standalone()
 
-	rum_putResourcePolicyCmd.Flags().String("name", "", "The name of the app monitor that you want to apply this resource-based policy to.")
-	rum_putResourcePolicyCmd.Flags().String("policy-document", "", "The JSON to use as the resource policy.")
-	rum_putResourcePolicyCmd.Flags().String("policy-revision-id", "", "A string value that you can use to conditionally update your policy.")
-	rum_putResourcePolicyCmd.MarkFlagRequired("name")
-	rum_putResourcePolicyCmd.MarkFlagRequired("policy-document")
+		rum_putResourcePolicyCmd.Flags().String("name", "", "The name of the app monitor that you want to apply this resource-based policy to.")
+		rum_putResourcePolicyCmd.Flags().String("policy-document", "", "The JSON to use as the resource policy.")
+		rum_putResourcePolicyCmd.Flags().String("policy-revision-id", "", "A string value that you can use to conditionally update your policy.")
+		rum_putResourcePolicyCmd.MarkFlagRequired("name")
+		rum_putResourcePolicyCmd.MarkFlagRequired("policy-document")
+	})
 	rumCmd.AddCommand(rum_putResourcePolicyCmd)
 }

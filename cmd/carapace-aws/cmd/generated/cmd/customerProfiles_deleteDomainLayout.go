@@ -12,11 +12,13 @@ var customerProfiles_deleteDomainLayoutCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_deleteDomainLayoutCmd).Standalone()
+	carapace.Gen(customerProfiles_deleteDomainLayoutCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_deleteDomainLayoutCmd).Standalone()
 
-	customerProfiles_deleteDomainLayoutCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_deleteDomainLayoutCmd.Flags().String("layout-definition-name", "", "The unique name of the layout.")
-	customerProfiles_deleteDomainLayoutCmd.MarkFlagRequired("domain-name")
-	customerProfiles_deleteDomainLayoutCmd.MarkFlagRequired("layout-definition-name")
+		customerProfiles_deleteDomainLayoutCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_deleteDomainLayoutCmd.Flags().String("layout-definition-name", "", "The unique name of the layout.")
+		customerProfiles_deleteDomainLayoutCmd.MarkFlagRequired("domain-name")
+		customerProfiles_deleteDomainLayoutCmd.MarkFlagRequired("layout-definition-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_deleteDomainLayoutCmd)
 }

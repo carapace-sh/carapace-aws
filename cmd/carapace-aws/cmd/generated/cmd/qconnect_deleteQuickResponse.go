@@ -12,11 +12,13 @@ var qconnect_deleteQuickResponseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_deleteQuickResponseCmd).Standalone()
+	carapace.Gen(qconnect_deleteQuickResponseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_deleteQuickResponseCmd).Standalone()
 
-	qconnect_deleteQuickResponseCmd.Flags().String("knowledge-base-id", "", "The knowledge base from which the quick response is deleted.")
-	qconnect_deleteQuickResponseCmd.Flags().String("quick-response-id", "", "The identifier of the quick response to delete.")
-	qconnect_deleteQuickResponseCmd.MarkFlagRequired("knowledge-base-id")
-	qconnect_deleteQuickResponseCmd.MarkFlagRequired("quick-response-id")
+		qconnect_deleteQuickResponseCmd.Flags().String("knowledge-base-id", "", "The knowledge base from which the quick response is deleted.")
+		qconnect_deleteQuickResponseCmd.Flags().String("quick-response-id", "", "The identifier of the quick response to delete.")
+		qconnect_deleteQuickResponseCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_deleteQuickResponseCmd.MarkFlagRequired("quick-response-id")
+	})
 	qconnectCmd.AddCommand(qconnect_deleteQuickResponseCmd)
 }

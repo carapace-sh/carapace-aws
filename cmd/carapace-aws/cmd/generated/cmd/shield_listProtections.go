@@ -12,10 +12,12 @@ var shield_listProtectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_listProtectionsCmd).Standalone()
+	carapace.Gen(shield_listProtectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_listProtectionsCmd).Standalone()
 
-	shield_listProtectionsCmd.Flags().String("inclusion-filters", "", "Narrows the set of protections that the call retrieves.")
-	shield_listProtectionsCmd.Flags().String("max-results", "", "The greatest number of objects that you want Shield Advanced to return to the list request.")
-	shield_listProtectionsCmd.Flags().String("next-token", "", "When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a `NextToken` value in the response.")
+		shield_listProtectionsCmd.Flags().String("inclusion-filters", "", "Narrows the set of protections that the call retrieves.")
+		shield_listProtectionsCmd.Flags().String("max-results", "", "The greatest number of objects that you want Shield Advanced to return to the list request.")
+		shield_listProtectionsCmd.Flags().String("next-token", "", "When you request a list of objects from Shield Advanced, if the response does not include all of the remaining available objects, Shield Advanced includes a `NextToken` value in the response.")
+	})
 	shieldCmd.AddCommand(shield_listProtectionsCmd)
 }

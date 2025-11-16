@@ -12,10 +12,12 @@ var iotanalytics_deleteDatasetContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_deleteDatasetContentCmd).Standalone()
+	carapace.Gen(iotanalytics_deleteDatasetContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_deleteDatasetContentCmd).Standalone()
 
-	iotanalytics_deleteDatasetContentCmd.Flags().String("dataset-name", "", "The name of the dataset whose content is deleted.")
-	iotanalytics_deleteDatasetContentCmd.Flags().String("version-id", "", "The version of the dataset whose content is deleted.")
-	iotanalytics_deleteDatasetContentCmd.MarkFlagRequired("dataset-name")
+		iotanalytics_deleteDatasetContentCmd.Flags().String("dataset-name", "", "The name of the dataset whose content is deleted.")
+		iotanalytics_deleteDatasetContentCmd.Flags().String("version-id", "", "The version of the dataset whose content is deleted.")
+		iotanalytics_deleteDatasetContentCmd.MarkFlagRequired("dataset-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_deleteDatasetContentCmd)
 }

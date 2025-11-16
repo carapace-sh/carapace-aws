@@ -12,11 +12,13 @@ var cleanrooms_deleteConfiguredAudienceModelAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_deleteConfiguredAudienceModelAssociationCmd).Standalone()
+	carapace.Gen(cleanrooms_deleteConfiguredAudienceModelAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_deleteConfiguredAudienceModelAssociationCmd).Standalone()
 
-	cleanrooms_deleteConfiguredAudienceModelAssociationCmd.Flags().String("configured-audience-model-association-identifier", "", "A unique identifier of the configured audience model association that you want to delete.")
-	cleanrooms_deleteConfiguredAudienceModelAssociationCmd.Flags().String("membership-identifier", "", "A unique identifier of the membership that contains the audience model association that you want to delete.")
-	cleanrooms_deleteConfiguredAudienceModelAssociationCmd.MarkFlagRequired("configured-audience-model-association-identifier")
-	cleanrooms_deleteConfiguredAudienceModelAssociationCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_deleteConfiguredAudienceModelAssociationCmd.Flags().String("configured-audience-model-association-identifier", "", "A unique identifier of the configured audience model association that you want to delete.")
+		cleanrooms_deleteConfiguredAudienceModelAssociationCmd.Flags().String("membership-identifier", "", "A unique identifier of the membership that contains the audience model association that you want to delete.")
+		cleanrooms_deleteConfiguredAudienceModelAssociationCmd.MarkFlagRequired("configured-audience-model-association-identifier")
+		cleanrooms_deleteConfiguredAudienceModelAssociationCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_deleteConfiguredAudienceModelAssociationCmd)
 }

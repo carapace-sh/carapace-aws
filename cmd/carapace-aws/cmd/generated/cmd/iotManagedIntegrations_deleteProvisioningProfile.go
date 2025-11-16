@@ -12,9 +12,11 @@ var iotManagedIntegrations_deleteProvisioningProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_deleteProvisioningProfileCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_deleteProvisioningProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_deleteProvisioningProfileCmd).Standalone()
 
-	iotManagedIntegrations_deleteProvisioningProfileCmd.Flags().String("identifier", "", "The name of the provisioning template.")
-	iotManagedIntegrations_deleteProvisioningProfileCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_deleteProvisioningProfileCmd.Flags().String("identifier", "", "The name of the provisioning template.")
+		iotManagedIntegrations_deleteProvisioningProfileCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_deleteProvisioningProfileCmd)
 }

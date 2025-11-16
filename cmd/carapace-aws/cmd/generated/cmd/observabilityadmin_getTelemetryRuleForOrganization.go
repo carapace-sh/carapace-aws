@@ -12,9 +12,11 @@ var observabilityadmin_getTelemetryRuleForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_getTelemetryRuleForOrganizationCmd).Standalone()
+	carapace.Gen(observabilityadmin_getTelemetryRuleForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_getTelemetryRuleForOrganizationCmd).Standalone()
 
-	observabilityadmin_getTelemetryRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization telemetry rule to retrieve.")
-	observabilityadmin_getTelemetryRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+		observabilityadmin_getTelemetryRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization telemetry rule to retrieve.")
+		observabilityadmin_getTelemetryRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_getTelemetryRuleForOrganizationCmd)
 }

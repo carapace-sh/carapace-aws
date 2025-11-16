@@ -12,9 +12,11 @@ var securityhub_deleteInsightCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_deleteInsightCmd).Standalone()
+	carapace.Gen(securityhub_deleteInsightCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_deleteInsightCmd).Standalone()
 
-	securityhub_deleteInsightCmd.Flags().String("insight-arn", "", "The ARN of the insight to delete.")
-	securityhub_deleteInsightCmd.MarkFlagRequired("insight-arn")
+		securityhub_deleteInsightCmd.Flags().String("insight-arn", "", "The ARN of the insight to delete.")
+		securityhub_deleteInsightCmd.MarkFlagRequired("insight-arn")
+	})
 	securityhubCmd.AddCommand(securityhub_deleteInsightCmd)
 }

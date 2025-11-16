@@ -12,15 +12,17 @@ var ec2_getSecurityGroupsForVpcCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getSecurityGroupsForVpcCmd).Standalone()
+	carapace.Gen(ec2_getSecurityGroupsForVpcCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getSecurityGroupsForVpcCmd).Standalone()
 
-	ec2_getSecurityGroupsForVpcCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getSecurityGroupsForVpcCmd.Flags().String("filters", "", "The filters.")
-	ec2_getSecurityGroupsForVpcCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	ec2_getSecurityGroupsForVpcCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
-	ec2_getSecurityGroupsForVpcCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getSecurityGroupsForVpcCmd.Flags().String("vpc-id", "", "The VPC ID where the security group can be used.")
-	ec2_getSecurityGroupsForVpcCmd.Flag("no-dry-run").Hidden = true
-	ec2_getSecurityGroupsForVpcCmd.MarkFlagRequired("vpc-id")
+		ec2_getSecurityGroupsForVpcCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getSecurityGroupsForVpcCmd.Flags().String("filters", "", "The filters.")
+		ec2_getSecurityGroupsForVpcCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		ec2_getSecurityGroupsForVpcCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		ec2_getSecurityGroupsForVpcCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getSecurityGroupsForVpcCmd.Flags().String("vpc-id", "", "The VPC ID where the security group can be used.")
+		ec2_getSecurityGroupsForVpcCmd.Flag("no-dry-run").Hidden = true
+		ec2_getSecurityGroupsForVpcCmd.MarkFlagRequired("vpc-id")
+	})
 	ec2Cmd.AddCommand(ec2_getSecurityGroupsForVpcCmd)
 }

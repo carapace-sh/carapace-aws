@@ -12,10 +12,12 @@ var guardduty_getRemainingFreeTrialDaysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_getRemainingFreeTrialDaysCmd).Standalone()
+	carapace.Gen(guardduty_getRemainingFreeTrialDaysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_getRemainingFreeTrialDaysCmd).Standalone()
 
-	guardduty_getRemainingFreeTrialDaysCmd.Flags().String("account-ids", "", "A list of account identifiers of the GuardDuty member account.")
-	guardduty_getRemainingFreeTrialDaysCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty member account.")
-	guardduty_getRemainingFreeTrialDaysCmd.MarkFlagRequired("detector-id")
+		guardduty_getRemainingFreeTrialDaysCmd.Flags().String("account-ids", "", "A list of account identifiers of the GuardDuty member account.")
+		guardduty_getRemainingFreeTrialDaysCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty member account.")
+		guardduty_getRemainingFreeTrialDaysCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_getRemainingFreeTrialDaysCmd)
 }

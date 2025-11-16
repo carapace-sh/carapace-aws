@@ -12,11 +12,13 @@ var workspaces_describeConnectionAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeConnectionAliasesCmd).Standalone()
+	carapace.Gen(workspaces_describeConnectionAliasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeConnectionAliasesCmd).Standalone()
 
-	workspaces_describeConnectionAliasesCmd.Flags().String("alias-ids", "", "The identifiers of the connection aliases to describe.")
-	workspaces_describeConnectionAliasesCmd.Flags().String("limit", "", "The maximum number of connection aliases to return.")
-	workspaces_describeConnectionAliasesCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
-	workspaces_describeConnectionAliasesCmd.Flags().String("resource-id", "", "The identifier of the directory associated with the connection alias.")
+		workspaces_describeConnectionAliasesCmd.Flags().String("alias-ids", "", "The identifiers of the connection aliases to describe.")
+		workspaces_describeConnectionAliasesCmd.Flags().String("limit", "", "The maximum number of connection aliases to return.")
+		workspaces_describeConnectionAliasesCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+		workspaces_describeConnectionAliasesCmd.Flags().String("resource-id", "", "The identifier of the directory associated with the connection alias.")
+	})
 	workspacesCmd.AddCommand(workspaces_describeConnectionAliasesCmd)
 }

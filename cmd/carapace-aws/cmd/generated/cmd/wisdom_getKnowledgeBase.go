@@ -12,9 +12,11 @@ var wisdom_getKnowledgeBaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_getKnowledgeBaseCmd).Standalone()
+	carapace.Gen(wisdom_getKnowledgeBaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_getKnowledgeBaseCmd).Standalone()
 
-	wisdom_getKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	wisdom_getKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+		wisdom_getKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		wisdom_getKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	wisdomCmd.AddCommand(wisdom_getKnowledgeBaseCmd)
 }

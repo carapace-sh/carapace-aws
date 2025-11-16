@@ -12,9 +12,11 @@ var chimeSdkVoice_getSipMediaApplicationAlexaSkillConfigurationCmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_getSipMediaApplicationAlexaSkillConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_getSipMediaApplicationAlexaSkillConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_getSipMediaApplicationAlexaSkillConfigurationCmd).Standalone()
 
-	chimeSdkVoice_getSipMediaApplicationAlexaSkillConfigurationCmd.Flags().String("sip-media-application-id", "", "The SIP media application ID.")
-	chimeSdkVoice_getSipMediaApplicationAlexaSkillConfigurationCmd.MarkFlagRequired("sip-media-application-id")
+		chimeSdkVoice_getSipMediaApplicationAlexaSkillConfigurationCmd.Flags().String("sip-media-application-id", "", "The SIP media application ID.")
+		chimeSdkVoice_getSipMediaApplicationAlexaSkillConfigurationCmd.MarkFlagRequired("sip-media-application-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_getSipMediaApplicationAlexaSkillConfigurationCmd)
 }

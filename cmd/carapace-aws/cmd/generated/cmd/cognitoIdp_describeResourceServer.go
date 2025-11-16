@@ -12,11 +12,13 @@ var cognitoIdp_describeResourceServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_describeResourceServerCmd).Standalone()
+	carapace.Gen(cognitoIdp_describeResourceServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_describeResourceServerCmd).Standalone()
 
-	cognitoIdp_describeResourceServerCmd.Flags().String("identifier", "", "A unique resource server identifier for the resource server.")
-	cognitoIdp_describeResourceServerCmd.Flags().String("user-pool-id", "", "The ID of the user pool that hosts the resource server.")
-	cognitoIdp_describeResourceServerCmd.MarkFlagRequired("identifier")
-	cognitoIdp_describeResourceServerCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_describeResourceServerCmd.Flags().String("identifier", "", "A unique resource server identifier for the resource server.")
+		cognitoIdp_describeResourceServerCmd.Flags().String("user-pool-id", "", "The ID of the user pool that hosts the resource server.")
+		cognitoIdp_describeResourceServerCmd.MarkFlagRequired("identifier")
+		cognitoIdp_describeResourceServerCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_describeResourceServerCmd)
 }

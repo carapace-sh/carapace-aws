@@ -12,12 +12,14 @@ var guardduty_updatePublishingDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_updatePublishingDestinationCmd).Standalone()
+	carapace.Gen(guardduty_updatePublishingDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_updatePublishingDestinationCmd).Standalone()
 
-	guardduty_updatePublishingDestinationCmd.Flags().String("destination-id", "", "The ID of the publishing destination to update.")
-	guardduty_updatePublishingDestinationCmd.Flags().String("destination-properties", "", "A `DestinationProperties` object that includes the `DestinationArn` and `KmsKeyArn` of the publishing destination.")
-	guardduty_updatePublishingDestinationCmd.Flags().String("detector-id", "", "The ID of the detector associated with the publishing destinations to update.")
-	guardduty_updatePublishingDestinationCmd.MarkFlagRequired("destination-id")
-	guardduty_updatePublishingDestinationCmd.MarkFlagRequired("detector-id")
+		guardduty_updatePublishingDestinationCmd.Flags().String("destination-id", "", "The ID of the publishing destination to update.")
+		guardduty_updatePublishingDestinationCmd.Flags().String("destination-properties", "", "A `DestinationProperties` object that includes the `DestinationArn` and `KmsKeyArn` of the publishing destination.")
+		guardduty_updatePublishingDestinationCmd.Flags().String("detector-id", "", "The ID of the detector associated with the publishing destinations to update.")
+		guardduty_updatePublishingDestinationCmd.MarkFlagRequired("destination-id")
+		guardduty_updatePublishingDestinationCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_updatePublishingDestinationCmd)
 }

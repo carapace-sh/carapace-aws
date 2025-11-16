@@ -12,11 +12,13 @@ var mq_promoteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mq_promoteCmd).Standalone()
+	carapace.Gen(mq_promoteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mq_promoteCmd).Standalone()
 
-	mq_promoteCmd.Flags().String("broker-id", "", "The unique ID that Amazon MQ generates for the broker.")
-	mq_promoteCmd.Flags().String("mode", "", "The Promote mode requested.")
-	mq_promoteCmd.MarkFlagRequired("broker-id")
-	mq_promoteCmd.MarkFlagRequired("mode")
+		mq_promoteCmd.Flags().String("broker-id", "", "The unique ID that Amazon MQ generates for the broker.")
+		mq_promoteCmd.Flags().String("mode", "", "The Promote mode requested.")
+		mq_promoteCmd.MarkFlagRequired("broker-id")
+		mq_promoteCmd.MarkFlagRequired("mode")
+	})
 	mqCmd.AddCommand(mq_promoteCmd)
 }

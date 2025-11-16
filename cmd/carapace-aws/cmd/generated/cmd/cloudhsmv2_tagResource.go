@@ -12,11 +12,13 @@ var cloudhsmv2_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsmv2_tagResourceCmd).Standalone()
+	carapace.Gen(cloudhsmv2_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsmv2_tagResourceCmd).Standalone()
 
-	cloudhsmv2_tagResourceCmd.Flags().String("resource-id", "", "The cluster identifier (ID) for the cluster that you are tagging.")
-	cloudhsmv2_tagResourceCmd.Flags().String("tag-list", "", "A list of one or more tags.")
-	cloudhsmv2_tagResourceCmd.MarkFlagRequired("resource-id")
-	cloudhsmv2_tagResourceCmd.MarkFlagRequired("tag-list")
+		cloudhsmv2_tagResourceCmd.Flags().String("resource-id", "", "The cluster identifier (ID) for the cluster that you are tagging.")
+		cloudhsmv2_tagResourceCmd.Flags().String("tag-list", "", "A list of one or more tags.")
+		cloudhsmv2_tagResourceCmd.MarkFlagRequired("resource-id")
+		cloudhsmv2_tagResourceCmd.MarkFlagRequired("tag-list")
+	})
 	cloudhsmv2Cmd.AddCommand(cloudhsmv2_tagResourceCmd)
 }

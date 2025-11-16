@@ -12,12 +12,14 @@ var secretsmanager_listSecretsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_listSecretsCmd).Standalone()
+	carapace.Gen(secretsmanager_listSecretsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_listSecretsCmd).Standalone()
 
-	secretsmanager_listSecretsCmd.Flags().String("filters", "", "The filters to apply to the list of secrets.")
-	secretsmanager_listSecretsCmd.Flags().String("include-planned-deletion", "", "Specifies whether to include secrets scheduled for deletion.")
-	secretsmanager_listSecretsCmd.Flags().String("max-results", "", "The number of results to include in the response.")
-	secretsmanager_listSecretsCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous call did not show all results.")
-	secretsmanager_listSecretsCmd.Flags().String("sort-order", "", "Secrets are listed by `CreatedDate`.")
+		secretsmanager_listSecretsCmd.Flags().String("filters", "", "The filters to apply to the list of secrets.")
+		secretsmanager_listSecretsCmd.Flags().String("include-planned-deletion", "", "Specifies whether to include secrets scheduled for deletion.")
+		secretsmanager_listSecretsCmd.Flags().String("max-results", "", "The number of results to include in the response.")
+		secretsmanager_listSecretsCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous call did not show all results.")
+		secretsmanager_listSecretsCmd.Flags().String("sort-order", "", "Secrets are listed by `CreatedDate`.")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_listSecretsCmd)
 }

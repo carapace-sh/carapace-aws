@@ -12,12 +12,14 @@ var personalizeRuntime_getActionRecommendationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalizeRuntime_getActionRecommendationsCmd).Standalone()
+	carapace.Gen(personalizeRuntime_getActionRecommendationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalizeRuntime_getActionRecommendationsCmd).Standalone()
 
-	personalizeRuntime_getActionRecommendationsCmd.Flags().String("campaign-arn", "", "The Amazon Resource Name (ARN) of the campaign to use for getting action recommendations.")
-	personalizeRuntime_getActionRecommendationsCmd.Flags().String("filter-arn", "", "The ARN of the filter to apply to the returned recommendations.")
-	personalizeRuntime_getActionRecommendationsCmd.Flags().String("filter-values", "", "The values to use when filtering recommendations.")
-	personalizeRuntime_getActionRecommendationsCmd.Flags().String("num-results", "", "The number of results to return.")
-	personalizeRuntime_getActionRecommendationsCmd.Flags().String("user-id", "", "The user ID of the user to provide action recommendations for.")
+		personalizeRuntime_getActionRecommendationsCmd.Flags().String("campaign-arn", "", "The Amazon Resource Name (ARN) of the campaign to use for getting action recommendations.")
+		personalizeRuntime_getActionRecommendationsCmd.Flags().String("filter-arn", "", "The ARN of the filter to apply to the returned recommendations.")
+		personalizeRuntime_getActionRecommendationsCmd.Flags().String("filter-values", "", "The values to use when filtering recommendations.")
+		personalizeRuntime_getActionRecommendationsCmd.Flags().String("num-results", "", "The number of results to return.")
+		personalizeRuntime_getActionRecommendationsCmd.Flags().String("user-id", "", "The user ID of the user to provide action recommendations for.")
+	})
 	personalizeRuntimeCmd.AddCommand(personalizeRuntime_getActionRecommendationsCmd)
 }

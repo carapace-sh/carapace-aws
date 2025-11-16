@@ -12,9 +12,11 @@ var sns_listSmssandboxPhoneNumbersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_listSmssandboxPhoneNumbersCmd).Standalone()
+	carapace.Gen(sns_listSmssandboxPhoneNumbersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_listSmssandboxPhoneNumbersCmd).Standalone()
 
-	sns_listSmssandboxPhoneNumbersCmd.Flags().String("max-results", "", "The maximum number of phone numbers to return.")
-	sns_listSmssandboxPhoneNumbersCmd.Flags().String("next-token", "", "Token that the previous `ListSMSSandboxPhoneNumbersInput` request returns.")
+		sns_listSmssandboxPhoneNumbersCmd.Flags().String("max-results", "", "The maximum number of phone numbers to return.")
+		sns_listSmssandboxPhoneNumbersCmd.Flags().String("next-token", "", "Token that the previous `ListSMSSandboxPhoneNumbersInput` request returns.")
+	})
 	snsCmd.AddCommand(sns_listSmssandboxPhoneNumbersCmd)
 }

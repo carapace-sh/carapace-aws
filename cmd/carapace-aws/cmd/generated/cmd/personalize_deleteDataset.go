@@ -12,9 +12,11 @@ var personalize_deleteDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_deleteDatasetCmd).Standalone()
+	carapace.Gen(personalize_deleteDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_deleteDatasetCmd).Standalone()
 
-	personalize_deleteDatasetCmd.Flags().String("dataset-arn", "", "The Amazon Resource Name (ARN) of the dataset to delete.")
-	personalize_deleteDatasetCmd.MarkFlagRequired("dataset-arn")
+		personalize_deleteDatasetCmd.Flags().String("dataset-arn", "", "The Amazon Resource Name (ARN) of the dataset to delete.")
+		personalize_deleteDatasetCmd.MarkFlagRequired("dataset-arn")
+	})
 	personalizeCmd.AddCommand(personalize_deleteDatasetCmd)
 }

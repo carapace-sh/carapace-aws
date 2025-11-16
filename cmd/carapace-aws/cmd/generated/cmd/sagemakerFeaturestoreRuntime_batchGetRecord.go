@@ -12,10 +12,12 @@ var sagemakerFeaturestoreRuntime_batchGetRecordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerFeaturestoreRuntime_batchGetRecordCmd).Standalone()
+	carapace.Gen(sagemakerFeaturestoreRuntime_batchGetRecordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerFeaturestoreRuntime_batchGetRecordCmd).Standalone()
 
-	sagemakerFeaturestoreRuntime_batchGetRecordCmd.Flags().String("expiration-time-response", "", "Parameter to request `ExpiresAt` in response.")
-	sagemakerFeaturestoreRuntime_batchGetRecordCmd.Flags().String("identifiers", "", "A list containing the name or Amazon Resource Name (ARN) of the `FeatureGroup`, the list of names of `Feature`s to be retrieved, and the corresponding `RecordIdentifier` values as strings.")
-	sagemakerFeaturestoreRuntime_batchGetRecordCmd.MarkFlagRequired("identifiers")
+		sagemakerFeaturestoreRuntime_batchGetRecordCmd.Flags().String("expiration-time-response", "", "Parameter to request `ExpiresAt` in response.")
+		sagemakerFeaturestoreRuntime_batchGetRecordCmd.Flags().String("identifiers", "", "A list containing the name or Amazon Resource Name (ARN) of the `FeatureGroup`, the list of names of `Feature`s to be retrieved, and the corresponding `RecordIdentifier` values as strings.")
+		sagemakerFeaturestoreRuntime_batchGetRecordCmd.MarkFlagRequired("identifiers")
+	})
 	sagemakerFeaturestoreRuntimeCmd.AddCommand(sagemakerFeaturestoreRuntime_batchGetRecordCmd)
 }

@@ -12,13 +12,15 @@ var kinesisvideo_updateStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_updateStreamCmd).Standalone()
+	carapace.Gen(kinesisvideo_updateStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_updateStreamCmd).Standalone()
 
-	kinesisvideo_updateStreamCmd.Flags().String("current-version", "", "The version of the stream whose metadata you want to update.")
-	kinesisvideo_updateStreamCmd.Flags().String("device-name", "", "The name of the device that is writing to the stream.")
-	kinesisvideo_updateStreamCmd.Flags().String("media-type", "", "The stream's media type.")
-	kinesisvideo_updateStreamCmd.Flags().String("stream-arn", "", "The ARN of the stream whose metadata you want to update.")
-	kinesisvideo_updateStreamCmd.Flags().String("stream-name", "", "The name of the stream whose metadata you want to update.")
-	kinesisvideo_updateStreamCmd.MarkFlagRequired("current-version")
+		kinesisvideo_updateStreamCmd.Flags().String("current-version", "", "The version of the stream whose metadata you want to update.")
+		kinesisvideo_updateStreamCmd.Flags().String("device-name", "", "The name of the device that is writing to the stream.")
+		kinesisvideo_updateStreamCmd.Flags().String("media-type", "", "The stream's media type.")
+		kinesisvideo_updateStreamCmd.Flags().String("stream-arn", "", "The ARN of the stream whose metadata you want to update.")
+		kinesisvideo_updateStreamCmd.Flags().String("stream-name", "", "The name of the stream whose metadata you want to update.")
+		kinesisvideo_updateStreamCmd.MarkFlagRequired("current-version")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_updateStreamCmd)
 }

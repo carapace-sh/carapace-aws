@@ -12,9 +12,11 @@ var docdbElastic_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdbElastic_listTagsForResourceCmd).Standalone()
+	carapace.Gen(docdbElastic_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdbElastic_listTagsForResourceCmd).Standalone()
 
-	docdbElastic_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN identifier of the elastic cluster resource.")
-	docdbElastic_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		docdbElastic_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN identifier of the elastic cluster resource.")
+		docdbElastic_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	docdbElasticCmd.AddCommand(docdbElastic_listTagsForResourceCmd)
 }

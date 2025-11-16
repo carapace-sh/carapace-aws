@@ -12,11 +12,13 @@ var opensearch_listScheduledActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_listScheduledActionsCmd).Standalone()
+	carapace.Gen(opensearch_listScheduledActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_listScheduledActionsCmd).Standalone()
 
-	opensearch_listScheduledActionsCmd.Flags().String("domain-name", "", "The name of the domain.")
-	opensearch_listScheduledActionsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
-	opensearch_listScheduledActionsCmd.Flags().String("next-token", "", "If your initial `ListScheduledActions` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListScheduledActions` operations, which returns results in the next page.")
-	opensearch_listScheduledActionsCmd.MarkFlagRequired("domain-name")
+		opensearch_listScheduledActionsCmd.Flags().String("domain-name", "", "The name of the domain.")
+		opensearch_listScheduledActionsCmd.Flags().String("max-results", "", "An optional parameter that specifies the maximum number of results to return.")
+		opensearch_listScheduledActionsCmd.Flags().String("next-token", "", "If your initial `ListScheduledActions` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListScheduledActions` operations, which returns results in the next page.")
+		opensearch_listScheduledActionsCmd.MarkFlagRequired("domain-name")
+	})
 	opensearchCmd.AddCommand(opensearch_listScheduledActionsCmd)
 }

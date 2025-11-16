@@ -12,13 +12,15 @@ var cleanrooms_updateConfiguredAudienceModelAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_updateConfiguredAudienceModelAssociationCmd).Standalone()
+	carapace.Gen(cleanrooms_updateConfiguredAudienceModelAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_updateConfiguredAudienceModelAssociationCmd).Standalone()
 
-	cleanrooms_updateConfiguredAudienceModelAssociationCmd.Flags().String("configured-audience-model-association-identifier", "", "A unique identifier for the configured audience model association that you want to update.")
-	cleanrooms_updateConfiguredAudienceModelAssociationCmd.Flags().String("description", "", "A new description for the configured audience model association.")
-	cleanrooms_updateConfiguredAudienceModelAssociationCmd.Flags().String("membership-identifier", "", "A unique identifier of the membership that contains the configured audience model association that you want to update.")
-	cleanrooms_updateConfiguredAudienceModelAssociationCmd.Flags().String("name", "", "A new name for the configured audience model association.")
-	cleanrooms_updateConfiguredAudienceModelAssociationCmd.MarkFlagRequired("configured-audience-model-association-identifier")
-	cleanrooms_updateConfiguredAudienceModelAssociationCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_updateConfiguredAudienceModelAssociationCmd.Flags().String("configured-audience-model-association-identifier", "", "A unique identifier for the configured audience model association that you want to update.")
+		cleanrooms_updateConfiguredAudienceModelAssociationCmd.Flags().String("description", "", "A new description for the configured audience model association.")
+		cleanrooms_updateConfiguredAudienceModelAssociationCmd.Flags().String("membership-identifier", "", "A unique identifier of the membership that contains the configured audience model association that you want to update.")
+		cleanrooms_updateConfiguredAudienceModelAssociationCmd.Flags().String("name", "", "A new name for the configured audience model association.")
+		cleanrooms_updateConfiguredAudienceModelAssociationCmd.MarkFlagRequired("configured-audience-model-association-identifier")
+		cleanrooms_updateConfiguredAudienceModelAssociationCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_updateConfiguredAudienceModelAssociationCmd)
 }

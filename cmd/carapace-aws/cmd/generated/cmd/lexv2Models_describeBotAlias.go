@@ -12,11 +12,13 @@ var lexv2Models_describeBotAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_describeBotAliasCmd).Standalone()
+	carapace.Gen(lexv2Models_describeBotAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_describeBotAliasCmd).Standalone()
 
-	lexv2Models_describeBotAliasCmd.Flags().String("bot-alias-id", "", "The identifier of the bot alias to describe.")
-	lexv2Models_describeBotAliasCmd.Flags().String("bot-id", "", "The identifier of the bot associated with the bot alias to describe.")
-	lexv2Models_describeBotAliasCmd.MarkFlagRequired("bot-alias-id")
-	lexv2Models_describeBotAliasCmd.MarkFlagRequired("bot-id")
+		lexv2Models_describeBotAliasCmd.Flags().String("bot-alias-id", "", "The identifier of the bot alias to describe.")
+		lexv2Models_describeBotAliasCmd.Flags().String("bot-id", "", "The identifier of the bot associated with the bot alias to describe.")
+		lexv2Models_describeBotAliasCmd.MarkFlagRequired("bot-alias-id")
+		lexv2Models_describeBotAliasCmd.MarkFlagRequired("bot-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_describeBotAliasCmd)
 }

@@ -12,9 +12,11 @@ var workspaces_describeClientPropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeClientPropertiesCmd).Standalone()
+	carapace.Gen(workspaces_describeClientPropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeClientPropertiesCmd).Standalone()
 
-	workspaces_describeClientPropertiesCmd.Flags().String("resource-ids", "", "The resource identifier, in the form of directory IDs.")
-	workspaces_describeClientPropertiesCmd.MarkFlagRequired("resource-ids")
+		workspaces_describeClientPropertiesCmd.Flags().String("resource-ids", "", "The resource identifier, in the form of directory IDs.")
+		workspaces_describeClientPropertiesCmd.MarkFlagRequired("resource-ids")
+	})
 	workspacesCmd.AddCommand(workspaces_describeClientPropertiesCmd)
 }

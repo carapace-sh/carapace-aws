@@ -12,9 +12,11 @@ var glue_getMltransformCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getMltransformCmd).Standalone()
+	carapace.Gen(glue_getMltransformCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getMltransformCmd).Standalone()
 
-	glue_getMltransformCmd.Flags().String("transform-id", "", "The unique identifier of the transform, generated at the time that the transform was created.")
-	glue_getMltransformCmd.MarkFlagRequired("transform-id")
+		glue_getMltransformCmd.Flags().String("transform-id", "", "The unique identifier of the transform, generated at the time that the transform was created.")
+		glue_getMltransformCmd.MarkFlagRequired("transform-id")
+	})
 	glueCmd.AddCommand(glue_getMltransformCmd)
 }

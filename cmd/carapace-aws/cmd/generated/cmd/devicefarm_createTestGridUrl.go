@@ -12,11 +12,13 @@ var devicefarm_createTestGridUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_createTestGridUrlCmd).Standalone()
+	carapace.Gen(devicefarm_createTestGridUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_createTestGridUrlCmd).Standalone()
 
-	devicefarm_createTestGridUrlCmd.Flags().String("expires-in-seconds", "", "Lifetime, in seconds, of the URL.")
-	devicefarm_createTestGridUrlCmd.Flags().String("project-arn", "", "ARN (from [CreateTestGridProject]() or [ListTestGridProjects]()) to associate with the short-term URL.")
-	devicefarm_createTestGridUrlCmd.MarkFlagRequired("expires-in-seconds")
-	devicefarm_createTestGridUrlCmd.MarkFlagRequired("project-arn")
+		devicefarm_createTestGridUrlCmd.Flags().String("expires-in-seconds", "", "Lifetime, in seconds, of the URL.")
+		devicefarm_createTestGridUrlCmd.Flags().String("project-arn", "", "ARN (from [CreateTestGridProject]() or [ListTestGridProjects]()) to associate with the short-term URL.")
+		devicefarm_createTestGridUrlCmd.MarkFlagRequired("expires-in-seconds")
+		devicefarm_createTestGridUrlCmd.MarkFlagRequired("project-arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_createTestGridUrlCmd)
 }

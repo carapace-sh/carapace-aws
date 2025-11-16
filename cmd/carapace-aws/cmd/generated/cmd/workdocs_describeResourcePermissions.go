@@ -12,13 +12,15 @@ var workdocs_describeResourcePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_describeResourcePermissionsCmd).Standalone()
+	carapace.Gen(workdocs_describeResourcePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_describeResourcePermissionsCmd).Standalone()
 
-	workdocs_describeResourcePermissionsCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_describeResourcePermissionsCmd.Flags().String("limit", "", "The maximum number of items to return with this call.")
-	workdocs_describeResourcePermissionsCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	workdocs_describeResourcePermissionsCmd.Flags().String("principal-id", "", "The ID of the principal to filter permissions by.")
-	workdocs_describeResourcePermissionsCmd.Flags().String("resource-id", "", "The ID of the resource.")
-	workdocs_describeResourcePermissionsCmd.MarkFlagRequired("resource-id")
+		workdocs_describeResourcePermissionsCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_describeResourcePermissionsCmd.Flags().String("limit", "", "The maximum number of items to return with this call.")
+		workdocs_describeResourcePermissionsCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		workdocs_describeResourcePermissionsCmd.Flags().String("principal-id", "", "The ID of the principal to filter permissions by.")
+		workdocs_describeResourcePermissionsCmd.Flags().String("resource-id", "", "The ID of the resource.")
+		workdocs_describeResourcePermissionsCmd.MarkFlagRequired("resource-id")
+	})
 	workdocsCmd.AddCommand(workdocs_describeResourcePermissionsCmd)
 }

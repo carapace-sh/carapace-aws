@@ -12,9 +12,11 @@ var cleanroomsml_getAudienceModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_getAudienceModelCmd).Standalone()
+	carapace.Gen(cleanroomsml_getAudienceModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_getAudienceModelCmd).Standalone()
 
-	cleanroomsml_getAudienceModelCmd.Flags().String("audience-model-arn", "", "The Amazon Resource Name (ARN) of the audience model that you are interested in.")
-	cleanroomsml_getAudienceModelCmd.MarkFlagRequired("audience-model-arn")
+		cleanroomsml_getAudienceModelCmd.Flags().String("audience-model-arn", "", "The Amazon Resource Name (ARN) of the audience model that you are interested in.")
+		cleanroomsml_getAudienceModelCmd.MarkFlagRequired("audience-model-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_getAudienceModelCmd)
 }

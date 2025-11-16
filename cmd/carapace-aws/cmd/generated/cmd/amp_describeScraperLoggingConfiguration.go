@@ -12,9 +12,11 @@ var amp_describeScraperLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_describeScraperLoggingConfigurationCmd).Standalone()
+	carapace.Gen(amp_describeScraperLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_describeScraperLoggingConfigurationCmd).Standalone()
 
-	amp_describeScraperLoggingConfigurationCmd.Flags().String("scraper-id", "", "The ID of the scraper whose logging configuration will be described.")
-	amp_describeScraperLoggingConfigurationCmd.MarkFlagRequired("scraper-id")
+		amp_describeScraperLoggingConfigurationCmd.Flags().String("scraper-id", "", "The ID of the scraper whose logging configuration will be described.")
+		amp_describeScraperLoggingConfigurationCmd.MarkFlagRequired("scraper-id")
+	})
 	ampCmd.AddCommand(amp_describeScraperLoggingConfigurationCmd)
 }

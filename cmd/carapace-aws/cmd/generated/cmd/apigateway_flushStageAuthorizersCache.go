@@ -12,11 +12,13 @@ var apigateway_flushStageAuthorizersCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_flushStageAuthorizersCacheCmd).Standalone()
+	carapace.Gen(apigateway_flushStageAuthorizersCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_flushStageAuthorizersCacheCmd).Standalone()
 
-	apigateway_flushStageAuthorizersCacheCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_flushStageAuthorizersCacheCmd.Flags().String("stage-name", "", "The name of the stage to flush.")
-	apigateway_flushStageAuthorizersCacheCmd.MarkFlagRequired("rest-api-id")
-	apigateway_flushStageAuthorizersCacheCmd.MarkFlagRequired("stage-name")
+		apigateway_flushStageAuthorizersCacheCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_flushStageAuthorizersCacheCmd.Flags().String("stage-name", "", "The name of the stage to flush.")
+		apigateway_flushStageAuthorizersCacheCmd.MarkFlagRequired("rest-api-id")
+		apigateway_flushStageAuthorizersCacheCmd.MarkFlagRequired("stage-name")
+	})
 	apigatewayCmd.AddCommand(apigateway_flushStageAuthorizersCacheCmd)
 }

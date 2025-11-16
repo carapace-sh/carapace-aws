@@ -12,11 +12,13 @@ var mgn_removeTemplateActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_removeTemplateActionCmd).Standalone()
+	carapace.Gen(mgn_removeTemplateActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_removeTemplateActionCmd).Standalone()
 
-	mgn_removeTemplateActionCmd.Flags().String("action-id", "", "Template post migration custom action ID to remove.")
-	mgn_removeTemplateActionCmd.Flags().String("launch-configuration-template-id", "", "Launch configuration template ID of the post migration custom action to remove.")
-	mgn_removeTemplateActionCmd.MarkFlagRequired("action-id")
-	mgn_removeTemplateActionCmd.MarkFlagRequired("launch-configuration-template-id")
+		mgn_removeTemplateActionCmd.Flags().String("action-id", "", "Template post migration custom action ID to remove.")
+		mgn_removeTemplateActionCmd.Flags().String("launch-configuration-template-id", "", "Launch configuration template ID of the post migration custom action to remove.")
+		mgn_removeTemplateActionCmd.MarkFlagRequired("action-id")
+		mgn_removeTemplateActionCmd.MarkFlagRequired("launch-configuration-template-id")
+	})
 	mgnCmd.AddCommand(mgn_removeTemplateActionCmd)
 }

@@ -12,9 +12,11 @@ var logs_describeDeliveryDestinationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_describeDeliveryDestinationsCmd).Standalone()
+	carapace.Gen(logs_describeDeliveryDestinationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_describeDeliveryDestinationsCmd).Standalone()
 
-	logs_describeDeliveryDestinationsCmd.Flags().String("limit", "", "Optionally specify the maximum number of delivery destinations to return in the response.")
-	logs_describeDeliveryDestinationsCmd.Flags().String("next-token", "", "")
+		logs_describeDeliveryDestinationsCmd.Flags().String("limit", "", "Optionally specify the maximum number of delivery destinations to return in the response.")
+		logs_describeDeliveryDestinationsCmd.Flags().String("next-token", "", "")
+	})
 	logsCmd.AddCommand(logs_describeDeliveryDestinationsCmd)
 }

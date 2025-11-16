@@ -12,11 +12,13 @@ var ssm_getMaintenanceWindowTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getMaintenanceWindowTaskCmd).Standalone()
+	carapace.Gen(ssm_getMaintenanceWindowTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getMaintenanceWindowTaskCmd).Standalone()
 
-	ssm_getMaintenanceWindowTaskCmd.Flags().String("window-id", "", "The maintenance window ID that includes the task to retrieve.")
-	ssm_getMaintenanceWindowTaskCmd.Flags().String("window-task-id", "", "The maintenance window task ID to retrieve.")
-	ssm_getMaintenanceWindowTaskCmd.MarkFlagRequired("window-id")
-	ssm_getMaintenanceWindowTaskCmd.MarkFlagRequired("window-task-id")
+		ssm_getMaintenanceWindowTaskCmd.Flags().String("window-id", "", "The maintenance window ID that includes the task to retrieve.")
+		ssm_getMaintenanceWindowTaskCmd.Flags().String("window-task-id", "", "The maintenance window task ID to retrieve.")
+		ssm_getMaintenanceWindowTaskCmd.MarkFlagRequired("window-id")
+		ssm_getMaintenanceWindowTaskCmd.MarkFlagRequired("window-task-id")
+	})
 	ssmCmd.AddCommand(ssm_getMaintenanceWindowTaskCmd)
 }

@@ -12,11 +12,13 @@ var mediaconnect_removeFlowSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_removeFlowSourceCmd).Standalone()
+	carapace.Gen(mediaconnect_removeFlowSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_removeFlowSourceCmd).Standalone()
 
-	mediaconnect_removeFlowSourceCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to remove a source from.")
-	mediaconnect_removeFlowSourceCmd.Flags().String("source-arn", "", "The ARN of the source that you want to remove.")
-	mediaconnect_removeFlowSourceCmd.MarkFlagRequired("flow-arn")
-	mediaconnect_removeFlowSourceCmd.MarkFlagRequired("source-arn")
+		mediaconnect_removeFlowSourceCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to remove a source from.")
+		mediaconnect_removeFlowSourceCmd.Flags().String("source-arn", "", "The ARN of the source that you want to remove.")
+		mediaconnect_removeFlowSourceCmd.MarkFlagRequired("flow-arn")
+		mediaconnect_removeFlowSourceCmd.MarkFlagRequired("source-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_removeFlowSourceCmd)
 }

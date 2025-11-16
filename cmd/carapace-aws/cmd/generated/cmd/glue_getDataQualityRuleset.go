@@ -12,9 +12,11 @@ var glue_getDataQualityRulesetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getDataQualityRulesetCmd).Standalone()
+	carapace.Gen(glue_getDataQualityRulesetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getDataQualityRulesetCmd).Standalone()
 
-	glue_getDataQualityRulesetCmd.Flags().String("name", "", "The name of the ruleset.")
-	glue_getDataQualityRulesetCmd.MarkFlagRequired("name")
+		glue_getDataQualityRulesetCmd.Flags().String("name", "", "The name of the ruleset.")
+		glue_getDataQualityRulesetCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_getDataQualityRulesetCmd)
 }

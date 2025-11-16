@@ -12,12 +12,14 @@ var forecast_createMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_createMonitorCmd).Standalone()
+	carapace.Gen(forecast_createMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_createMonitorCmd).Standalone()
 
-	forecast_createMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor resource.")
-	forecast_createMonitorCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the predictor to monitor.")
-	forecast_createMonitorCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the monitor resource.")
-	forecast_createMonitorCmd.MarkFlagRequired("monitor-name")
-	forecast_createMonitorCmd.MarkFlagRequired("resource-arn")
+		forecast_createMonitorCmd.Flags().String("monitor-name", "", "The name of the monitor resource.")
+		forecast_createMonitorCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the predictor to monitor.")
+		forecast_createMonitorCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the monitor resource.")
+		forecast_createMonitorCmd.MarkFlagRequired("monitor-name")
+		forecast_createMonitorCmd.MarkFlagRequired("resource-arn")
+	})
 	forecastCmd.AddCommand(forecast_createMonitorCmd)
 }

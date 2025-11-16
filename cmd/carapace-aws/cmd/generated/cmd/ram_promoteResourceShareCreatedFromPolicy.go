@@ -12,9 +12,11 @@ var ram_promoteResourceShareCreatedFromPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ram_promoteResourceShareCreatedFromPolicyCmd).Standalone()
+	carapace.Gen(ram_promoteResourceShareCreatedFromPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ram_promoteResourceShareCreatedFromPolicyCmd).Standalone()
 
-	ram_promoteResourceShareCreatedFromPolicyCmd.Flags().String("resource-share-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share to promote.")
-	ram_promoteResourceShareCreatedFromPolicyCmd.MarkFlagRequired("resource-share-arn")
+		ram_promoteResourceShareCreatedFromPolicyCmd.Flags().String("resource-share-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share to promote.")
+		ram_promoteResourceShareCreatedFromPolicyCmd.MarkFlagRequired("resource-share-arn")
+	})
 	ramCmd.AddCommand(ram_promoteResourceShareCreatedFromPolicyCmd)
 }

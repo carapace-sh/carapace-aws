@@ -12,9 +12,11 @@ var config_describeRemediationConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_describeRemediationConfigurationsCmd).Standalone()
+	carapace.Gen(config_describeRemediationConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_describeRemediationConfigurationsCmd).Standalone()
 
-	config_describeRemediationConfigurationsCmd.Flags().String("config-rule-names", "", "A list of Config rule names of remediation configurations for which you want details.")
-	config_describeRemediationConfigurationsCmd.MarkFlagRequired("config-rule-names")
+		config_describeRemediationConfigurationsCmd.Flags().String("config-rule-names", "", "A list of Config rule names of remediation configurations for which you want details.")
+		config_describeRemediationConfigurationsCmd.MarkFlagRequired("config-rule-names")
+	})
 	configCmd.AddCommand(config_describeRemediationConfigurationsCmd)
 }

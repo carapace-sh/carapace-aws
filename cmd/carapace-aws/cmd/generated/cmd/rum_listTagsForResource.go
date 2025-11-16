@@ -12,9 +12,11 @@ var rum_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rum_listTagsForResourceCmd).Standalone()
+	carapace.Gen(rum_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rum_listTagsForResourceCmd).Standalone()
 
-	rum_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource that you want to see the tags of.")
-	rum_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		rum_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource that you want to see the tags of.")
+		rum_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	rumCmd.AddCommand(rum_listTagsForResourceCmd)
 }

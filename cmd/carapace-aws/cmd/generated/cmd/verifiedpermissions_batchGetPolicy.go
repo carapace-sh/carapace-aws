@@ -12,9 +12,11 @@ var verifiedpermissions_batchGetPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(verifiedpermissions_batchGetPolicyCmd).Standalone()
+	carapace.Gen(verifiedpermissions_batchGetPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(verifiedpermissions_batchGetPolicyCmd).Standalone()
 
-	verifiedpermissions_batchGetPolicyCmd.Flags().String("requests", "", "An array of up to 100 policies you want information about.")
-	verifiedpermissions_batchGetPolicyCmd.MarkFlagRequired("requests")
+		verifiedpermissions_batchGetPolicyCmd.Flags().String("requests", "", "An array of up to 100 policies you want information about.")
+		verifiedpermissions_batchGetPolicyCmd.MarkFlagRequired("requests")
+	})
 	verifiedpermissionsCmd.AddCommand(verifiedpermissions_batchGetPolicyCmd)
 }

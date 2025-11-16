@@ -12,9 +12,11 @@ var dataexchange_getDataGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_getDataGrantCmd).Standalone()
+	carapace.Gen(dataexchange_getDataGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_getDataGrantCmd).Standalone()
 
-	dataexchange_getDataGrantCmd.Flags().String("data-grant-id", "", "The ID of the data grant.")
-	dataexchange_getDataGrantCmd.MarkFlagRequired("data-grant-id")
+		dataexchange_getDataGrantCmd.Flags().String("data-grant-id", "", "The ID of the data grant.")
+		dataexchange_getDataGrantCmd.MarkFlagRequired("data-grant-id")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_getDataGrantCmd)
 }

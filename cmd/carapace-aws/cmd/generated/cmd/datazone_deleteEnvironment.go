@@ -12,11 +12,13 @@ var datazone_deleteEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteEnvironmentCmd).Standalone()
+	carapace.Gen(datazone_deleteEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteEnvironmentCmd).Standalone()
 
-	datazone_deleteEnvironmentCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the environment is deleted.")
-	datazone_deleteEnvironmentCmd.Flags().String("identifier", "", "The identifier of the environment that is to be deleted.")
-	datazone_deleteEnvironmentCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteEnvironmentCmd.MarkFlagRequired("identifier")
+		datazone_deleteEnvironmentCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which the environment is deleted.")
+		datazone_deleteEnvironmentCmd.Flags().String("identifier", "", "The identifier of the environment that is to be deleted.")
+		datazone_deleteEnvironmentCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteEnvironmentCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteEnvironmentCmd)
 }

@@ -12,11 +12,13 @@ var serviceQuotas_listAwsdefaultServiceQuotasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(serviceQuotas_listAwsdefaultServiceQuotasCmd).Standalone()
+	carapace.Gen(serviceQuotas_listAwsdefaultServiceQuotasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(serviceQuotas_listAwsdefaultServiceQuotasCmd).Standalone()
 
-	serviceQuotas_listAwsdefaultServiceQuotasCmd.Flags().String("max-results", "", "Specifies the maximum number of results that you want included on each page of the response.")
-	serviceQuotas_listAwsdefaultServiceQuotasCmd.Flags().String("next-token", "", "Specifies a value for receiving additional results after you receive a `NextToken` response in a previous request.")
-	serviceQuotas_listAwsdefaultServiceQuotasCmd.Flags().String("service-code", "", "Specifies the service identifier.")
-	serviceQuotas_listAwsdefaultServiceQuotasCmd.MarkFlagRequired("service-code")
+		serviceQuotas_listAwsdefaultServiceQuotasCmd.Flags().String("max-results", "", "Specifies the maximum number of results that you want included on each page of the response.")
+		serviceQuotas_listAwsdefaultServiceQuotasCmd.Flags().String("next-token", "", "Specifies a value for receiving additional results after you receive a `NextToken` response in a previous request.")
+		serviceQuotas_listAwsdefaultServiceQuotasCmd.Flags().String("service-code", "", "Specifies the service identifier.")
+		serviceQuotas_listAwsdefaultServiceQuotasCmd.MarkFlagRequired("service-code")
+	})
 	serviceQuotasCmd.AddCommand(serviceQuotas_listAwsdefaultServiceQuotasCmd)
 }

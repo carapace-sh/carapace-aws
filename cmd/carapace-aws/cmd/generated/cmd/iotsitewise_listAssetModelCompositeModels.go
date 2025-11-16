@@ -12,12 +12,14 @@ var iotsitewise_listAssetModelCompositeModelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_listAssetModelCompositeModelsCmd).Standalone()
+	carapace.Gen(iotsitewise_listAssetModelCompositeModelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_listAssetModelCompositeModelsCmd).Standalone()
 
-	iotsitewise_listAssetModelCompositeModelsCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
-	iotsitewise_listAssetModelCompositeModelsCmd.Flags().String("asset-model-version", "", "The version alias that specifies the latest or active version of the asset model.")
-	iotsitewise_listAssetModelCompositeModelsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
-	iotsitewise_listAssetModelCompositeModelsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	iotsitewise_listAssetModelCompositeModelsCmd.MarkFlagRequired("asset-model-id")
+		iotsitewise_listAssetModelCompositeModelsCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
+		iotsitewise_listAssetModelCompositeModelsCmd.Flags().String("asset-model-version", "", "The version alias that specifies the latest or active version of the asset model.")
+		iotsitewise_listAssetModelCompositeModelsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
+		iotsitewise_listAssetModelCompositeModelsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		iotsitewise_listAssetModelCompositeModelsCmd.MarkFlagRequired("asset-model-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_listAssetModelCompositeModelsCmd)
 }

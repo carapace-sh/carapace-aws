@@ -12,10 +12,12 @@ var cloudformation_listStackRefactorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_listStackRefactorsCmd).Standalone()
+	carapace.Gen(cloudformation_listStackRefactorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_listStackRefactorsCmd).Standalone()
 
-	cloudformation_listStackRefactorsCmd.Flags().String("execution-status-filter", "", "Execution status to use as a filter.")
-	cloudformation_listStackRefactorsCmd.Flags().String("max-results", "", "The maximum number of results to be returned with a single call.")
-	cloudformation_listStackRefactorsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		cloudformation_listStackRefactorsCmd.Flags().String("execution-status-filter", "", "Execution status to use as a filter.")
+		cloudformation_listStackRefactorsCmd.Flags().String("max-results", "", "The maximum number of results to be returned with a single call.")
+		cloudformation_listStackRefactorsCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+	})
 	cloudformationCmd.AddCommand(cloudformation_listStackRefactorsCmd)
 }

@@ -12,11 +12,13 @@ var wellarchitected_getMilestoneCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_getMilestoneCmd).Standalone()
+	carapace.Gen(wellarchitected_getMilestoneCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_getMilestoneCmd).Standalone()
 
-	wellarchitected_getMilestoneCmd.Flags().String("milestone-number", "", "")
-	wellarchitected_getMilestoneCmd.Flags().String("workload-id", "", "")
-	wellarchitected_getMilestoneCmd.MarkFlagRequired("milestone-number")
-	wellarchitected_getMilestoneCmd.MarkFlagRequired("workload-id")
+		wellarchitected_getMilestoneCmd.Flags().String("milestone-number", "", "")
+		wellarchitected_getMilestoneCmd.Flags().String("workload-id", "", "")
+		wellarchitected_getMilestoneCmd.MarkFlagRequired("milestone-number")
+		wellarchitected_getMilestoneCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_getMilestoneCmd)
 }

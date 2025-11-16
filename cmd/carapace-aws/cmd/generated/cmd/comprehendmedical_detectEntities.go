@@ -12,9 +12,11 @@ var comprehendmedical_detectEntitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_detectEntitiesCmd).Standalone()
+	carapace.Gen(comprehendmedical_detectEntitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_detectEntitiesCmd).Standalone()
 
-	comprehendmedical_detectEntitiesCmd.Flags().String("text", "", "A UTF-8 text string containing the clinical content being examined for entities.")
-	comprehendmedical_detectEntitiesCmd.MarkFlagRequired("text")
+		comprehendmedical_detectEntitiesCmd.Flags().String("text", "", "A UTF-8 text string containing the clinical content being examined for entities.")
+		comprehendmedical_detectEntitiesCmd.MarkFlagRequired("text")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_detectEntitiesCmd)
 }

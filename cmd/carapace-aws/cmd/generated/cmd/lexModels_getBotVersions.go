@@ -12,11 +12,13 @@ var lexModels_getBotVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getBotVersionsCmd).Standalone()
+	carapace.Gen(lexModels_getBotVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getBotVersionsCmd).Standalone()
 
-	lexModels_getBotVersionsCmd.Flags().String("max-results", "", "The maximum number of bot versions to return in the response.")
-	lexModels_getBotVersionsCmd.Flags().String("name", "", "The name of the bot for which versions should be returned.")
-	lexModels_getBotVersionsCmd.Flags().String("next-token", "", "A pagination token for fetching the next page of bot versions.")
-	lexModels_getBotVersionsCmd.MarkFlagRequired("name")
+		lexModels_getBotVersionsCmd.Flags().String("max-results", "", "The maximum number of bot versions to return in the response.")
+		lexModels_getBotVersionsCmd.Flags().String("name", "", "The name of the bot for which versions should be returned.")
+		lexModels_getBotVersionsCmd.Flags().String("next-token", "", "A pagination token for fetching the next page of bot versions.")
+		lexModels_getBotVersionsCmd.MarkFlagRequired("name")
+	})
 	lexModelsCmd.AddCommand(lexModels_getBotVersionsCmd)
 }

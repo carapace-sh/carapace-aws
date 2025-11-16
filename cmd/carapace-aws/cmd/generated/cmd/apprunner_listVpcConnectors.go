@@ -12,9 +12,11 @@ var apprunner_listVpcConnectorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_listVpcConnectorsCmd).Standalone()
+	carapace.Gen(apprunner_listVpcConnectorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_listVpcConnectorsCmd).Standalone()
 
-	apprunner_listVpcConnectorsCmd.Flags().String("max-results", "", "The maximum number of results to include in each response (result page).")
-	apprunner_listVpcConnectorsCmd.Flags().String("next-token", "", "A token from a previous result page.")
+		apprunner_listVpcConnectorsCmd.Flags().String("max-results", "", "The maximum number of results to include in each response (result page).")
+		apprunner_listVpcConnectorsCmd.Flags().String("next-token", "", "A token from a previous result page.")
+	})
 	apprunnerCmd.AddCommand(apprunner_listVpcConnectorsCmd)
 }

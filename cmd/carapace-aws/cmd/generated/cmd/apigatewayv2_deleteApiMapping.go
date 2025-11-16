@@ -12,11 +12,13 @@ var apigatewayv2_deleteApiMappingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_deleteApiMappingCmd).Standalone()
+	carapace.Gen(apigatewayv2_deleteApiMappingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_deleteApiMappingCmd).Standalone()
 
-	apigatewayv2_deleteApiMappingCmd.Flags().String("api-mapping-id", "", "The API mapping identifier.")
-	apigatewayv2_deleteApiMappingCmd.Flags().String("domain-name", "", "The domain name.")
-	apigatewayv2_deleteApiMappingCmd.MarkFlagRequired("api-mapping-id")
-	apigatewayv2_deleteApiMappingCmd.MarkFlagRequired("domain-name")
+		apigatewayv2_deleteApiMappingCmd.Flags().String("api-mapping-id", "", "The API mapping identifier.")
+		apigatewayv2_deleteApiMappingCmd.Flags().String("domain-name", "", "The domain name.")
+		apigatewayv2_deleteApiMappingCmd.MarkFlagRequired("api-mapping-id")
+		apigatewayv2_deleteApiMappingCmd.MarkFlagRequired("domain-name")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_deleteApiMappingCmd)
 }

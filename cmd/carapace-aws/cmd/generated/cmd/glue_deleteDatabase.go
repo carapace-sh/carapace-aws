@@ -12,10 +12,12 @@ var glue_deleteDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteDatabaseCmd).Standalone()
+	carapace.Gen(glue_deleteDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteDatabaseCmd).Standalone()
 
-	glue_deleteDatabaseCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog in which the database resides.")
-	glue_deleteDatabaseCmd.Flags().String("name", "", "The name of the database to delete.")
-	glue_deleteDatabaseCmd.MarkFlagRequired("name")
+		glue_deleteDatabaseCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog in which the database resides.")
+		glue_deleteDatabaseCmd.Flags().String("name", "", "The name of the database to delete.")
+		glue_deleteDatabaseCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_deleteDatabaseCmd)
 }

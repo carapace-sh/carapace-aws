@@ -12,10 +12,12 @@ var servicecatalog_describeConstraintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_describeConstraintCmd).Standalone()
+	carapace.Gen(servicecatalog_describeConstraintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_describeConstraintCmd).Standalone()
 
-	servicecatalog_describeConstraintCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_describeConstraintCmd.Flags().String("id", "", "The identifier of the constraint.")
-	servicecatalog_describeConstraintCmd.MarkFlagRequired("id")
+		servicecatalog_describeConstraintCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_describeConstraintCmd.Flags().String("id", "", "The identifier of the constraint.")
+		servicecatalog_describeConstraintCmd.MarkFlagRequired("id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_describeConstraintCmd)
 }

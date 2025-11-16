@@ -12,9 +12,11 @@ var sagemaker_deleteHumanTaskUiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteHumanTaskUiCmd).Standalone()
+	carapace.Gen(sagemaker_deleteHumanTaskUiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteHumanTaskUiCmd).Standalone()
 
-	sagemaker_deleteHumanTaskUiCmd.Flags().String("human-task-ui-name", "", "The name of the human task user interface (work task template) you want to delete.")
-	sagemaker_deleteHumanTaskUiCmd.MarkFlagRequired("human-task-ui-name")
+		sagemaker_deleteHumanTaskUiCmd.Flags().String("human-task-ui-name", "", "The name of the human task user interface (work task template) you want to delete.")
+		sagemaker_deleteHumanTaskUiCmd.MarkFlagRequired("human-task-ui-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteHumanTaskUiCmd)
 }

@@ -12,14 +12,16 @@ var transfer_testIdentityProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_testIdentityProviderCmd).Standalone()
+	carapace.Gen(transfer_testIdentityProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_testIdentityProviderCmd).Standalone()
 
-	transfer_testIdentityProviderCmd.Flags().String("server-id", "", "A system-assigned identifier for a specific server.")
-	transfer_testIdentityProviderCmd.Flags().String("server-protocol", "", "The type of file transfer protocol to be tested.")
-	transfer_testIdentityProviderCmd.Flags().String("source-ip", "", "The source IP address of the account to be tested.")
-	transfer_testIdentityProviderCmd.Flags().String("user-name", "", "The name of the account to be tested.")
-	transfer_testIdentityProviderCmd.Flags().String("user-password", "", "The password of the account to be tested.")
-	transfer_testIdentityProviderCmd.MarkFlagRequired("server-id")
-	transfer_testIdentityProviderCmd.MarkFlagRequired("user-name")
+		transfer_testIdentityProviderCmd.Flags().String("server-id", "", "A system-assigned identifier for a specific server.")
+		transfer_testIdentityProviderCmd.Flags().String("server-protocol", "", "The type of file transfer protocol to be tested.")
+		transfer_testIdentityProviderCmd.Flags().String("source-ip", "", "The source IP address of the account to be tested.")
+		transfer_testIdentityProviderCmd.Flags().String("user-name", "", "The name of the account to be tested.")
+		transfer_testIdentityProviderCmd.Flags().String("user-password", "", "The password of the account to be tested.")
+		transfer_testIdentityProviderCmd.MarkFlagRequired("server-id")
+		transfer_testIdentityProviderCmd.MarkFlagRequired("user-name")
+	})
 	transferCmd.AddCommand(transfer_testIdentityProviderCmd)
 }

@@ -12,9 +12,11 @@ var appintegrations_getEventIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_getEventIntegrationCmd).Standalone()
+	carapace.Gen(appintegrations_getEventIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_getEventIntegrationCmd).Standalone()
 
-	appintegrations_getEventIntegrationCmd.Flags().String("name", "", "The name of the event integration.")
-	appintegrations_getEventIntegrationCmd.MarkFlagRequired("name")
+		appintegrations_getEventIntegrationCmd.Flags().String("name", "", "The name of the event integration.")
+		appintegrations_getEventIntegrationCmd.MarkFlagRequired("name")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_getEventIntegrationCmd)
 }

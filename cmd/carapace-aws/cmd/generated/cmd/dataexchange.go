@@ -12,7 +12,9 @@ var dataexchangeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchangeCmd).Standalone()
+	carapace.Gen(dataexchangeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchangeCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(dataexchangeCmd)
 }

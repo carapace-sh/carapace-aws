@@ -12,8 +12,10 @@ var iotthingsgraph_undeploySystemInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_undeploySystemInstanceCmd).Standalone()
+	carapace.Gen(iotthingsgraph_undeploySystemInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_undeploySystemInstanceCmd).Standalone()
 
-	iotthingsgraph_undeploySystemInstanceCmd.Flags().String("id", "", "The ID of the system instance to remove from its target.")
+		iotthingsgraph_undeploySystemInstanceCmd.Flags().String("id", "", "The ID of the system instance to remove from its target.")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_undeploySystemInstanceCmd)
 }

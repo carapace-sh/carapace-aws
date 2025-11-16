@@ -12,11 +12,13 @@ var mediaconnect_removeFlowMediaStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_removeFlowMediaStreamCmd).Standalone()
+	carapace.Gen(mediaconnect_removeFlowMediaStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_removeFlowMediaStreamCmd).Standalone()
 
-	mediaconnect_removeFlowMediaStreamCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to update.")
-	mediaconnect_removeFlowMediaStreamCmd.Flags().String("media-stream-name", "", "The name of the media stream that you want to remove.")
-	mediaconnect_removeFlowMediaStreamCmd.MarkFlagRequired("flow-arn")
-	mediaconnect_removeFlowMediaStreamCmd.MarkFlagRequired("media-stream-name")
+		mediaconnect_removeFlowMediaStreamCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to update.")
+		mediaconnect_removeFlowMediaStreamCmd.Flags().String("media-stream-name", "", "The name of the media stream that you want to remove.")
+		mediaconnect_removeFlowMediaStreamCmd.MarkFlagRequired("flow-arn")
+		mediaconnect_removeFlowMediaStreamCmd.MarkFlagRequired("media-stream-name")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_removeFlowMediaStreamCmd)
 }

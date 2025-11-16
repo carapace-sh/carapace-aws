@@ -12,9 +12,11 @@ var personalize_describeBatchInferenceJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeBatchInferenceJobCmd).Standalone()
+	carapace.Gen(personalize_describeBatchInferenceJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeBatchInferenceJobCmd).Standalone()
 
-	personalize_describeBatchInferenceJobCmd.Flags().String("batch-inference-job-arn", "", "The ARN of the batch inference job to describe.")
-	personalize_describeBatchInferenceJobCmd.MarkFlagRequired("batch-inference-job-arn")
+		personalize_describeBatchInferenceJobCmd.Flags().String("batch-inference-job-arn", "", "The ARN of the batch inference job to describe.")
+		personalize_describeBatchInferenceJobCmd.MarkFlagRequired("batch-inference-job-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeBatchInferenceJobCmd)
 }

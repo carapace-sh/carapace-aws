@@ -12,12 +12,14 @@ var devicefarm_purchaseOfferingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_purchaseOfferingCmd).Standalone()
+	carapace.Gen(devicefarm_purchaseOfferingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_purchaseOfferingCmd).Standalone()
 
-	devicefarm_purchaseOfferingCmd.Flags().String("offering-id", "", "The ID of the offering.")
-	devicefarm_purchaseOfferingCmd.Flags().String("offering-promotion-id", "", "The ID of the offering promotion to be applied to the purchase.")
-	devicefarm_purchaseOfferingCmd.Flags().String("quantity", "", "The number of device slots to purchase in an offering request.")
-	devicefarm_purchaseOfferingCmd.MarkFlagRequired("offering-id")
-	devicefarm_purchaseOfferingCmd.MarkFlagRequired("quantity")
+		devicefarm_purchaseOfferingCmd.Flags().String("offering-id", "", "The ID of the offering.")
+		devicefarm_purchaseOfferingCmd.Flags().String("offering-promotion-id", "", "The ID of the offering promotion to be applied to the purchase.")
+		devicefarm_purchaseOfferingCmd.Flags().String("quantity", "", "The number of device slots to purchase in an offering request.")
+		devicefarm_purchaseOfferingCmd.MarkFlagRequired("offering-id")
+		devicefarm_purchaseOfferingCmd.MarkFlagRequired("quantity")
+	})
 	devicefarmCmd.AddCommand(devicefarm_purchaseOfferingCmd)
 }

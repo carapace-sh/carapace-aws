@@ -12,11 +12,13 @@ var billingconductor_listPricingPlansCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billingconductor_listPricingPlansCmd).Standalone()
+	carapace.Gen(billingconductor_listPricingPlansCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_listPricingPlansCmd).Standalone()
 
-	billingconductor_listPricingPlansCmd.Flags().String("billing-period", "", "The preferred billing period to get pricing plan.")
-	billingconductor_listPricingPlansCmd.Flags().String("filters", "", "A `ListPricingPlansFilter` that specifies the Amazon Resource Name (ARNs) of pricing plans to retrieve pricing plans information.")
-	billingconductor_listPricingPlansCmd.Flags().String("max-results", "", "The maximum number of pricing plans to retrieve.")
-	billingconductor_listPricingPlansCmd.Flags().String("next-token", "", "The pagination token that's used on subsequent call to get pricing plans.")
+		billingconductor_listPricingPlansCmd.Flags().String("billing-period", "", "The preferred billing period to get pricing plan.")
+		billingconductor_listPricingPlansCmd.Flags().String("filters", "", "A `ListPricingPlansFilter` that specifies the Amazon Resource Name (ARNs) of pricing plans to retrieve pricing plans information.")
+		billingconductor_listPricingPlansCmd.Flags().String("max-results", "", "The maximum number of pricing plans to retrieve.")
+		billingconductor_listPricingPlansCmd.Flags().String("next-token", "", "The pagination token that's used on subsequent call to get pricing plans.")
+	})
 	billingconductorCmd.AddCommand(billingconductor_listPricingPlansCmd)
 }

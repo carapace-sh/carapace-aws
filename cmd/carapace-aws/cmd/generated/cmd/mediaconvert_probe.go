@@ -12,8 +12,10 @@ var mediaconvert_probeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_probeCmd).Standalone()
+	carapace.Gen(mediaconvert_probeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_probeCmd).Standalone()
 
-	mediaconvert_probeCmd.Flags().String("input-files", "", "Specify a media file to probe.")
+		mediaconvert_probeCmd.Flags().String("input-files", "", "Specify a media file to probe.")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_probeCmd)
 }

@@ -12,10 +12,12 @@ var mgn_unarchiveWaveCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_unarchiveWaveCmd).Standalone()
+	carapace.Gen(mgn_unarchiveWaveCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_unarchiveWaveCmd).Standalone()
 
-	mgn_unarchiveWaveCmd.Flags().String("account-id", "", "Account ID.")
-	mgn_unarchiveWaveCmd.Flags().String("wave-id", "", "Wave ID.")
-	mgn_unarchiveWaveCmd.MarkFlagRequired("wave-id")
+		mgn_unarchiveWaveCmd.Flags().String("account-id", "", "Account ID.")
+		mgn_unarchiveWaveCmd.Flags().String("wave-id", "", "Wave ID.")
+		mgn_unarchiveWaveCmd.MarkFlagRequired("wave-id")
+	})
 	mgnCmd.AddCommand(mgn_unarchiveWaveCmd)
 }

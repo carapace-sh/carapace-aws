@@ -12,12 +12,14 @@ var signer_revokeSignatureCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(signer_revokeSignatureCmd).Standalone()
+	carapace.Gen(signer_revokeSignatureCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(signer_revokeSignatureCmd).Standalone()
 
-	signer_revokeSignatureCmd.Flags().String("job-id", "", "ID of the signing job to be revoked.")
-	signer_revokeSignatureCmd.Flags().String("job-owner", "", "AWS account ID of the job owner.")
-	signer_revokeSignatureCmd.Flags().String("reason", "", "The reason for revoking the signing job.")
-	signer_revokeSignatureCmd.MarkFlagRequired("job-id")
-	signer_revokeSignatureCmd.MarkFlagRequired("reason")
+		signer_revokeSignatureCmd.Flags().String("job-id", "", "ID of the signing job to be revoked.")
+		signer_revokeSignatureCmd.Flags().String("job-owner", "", "AWS account ID of the job owner.")
+		signer_revokeSignatureCmd.Flags().String("reason", "", "The reason for revoking the signing job.")
+		signer_revokeSignatureCmd.MarkFlagRequired("job-id")
+		signer_revokeSignatureCmd.MarkFlagRequired("reason")
+	})
 	signerCmd.AddCommand(signer_revokeSignatureCmd)
 }

@@ -12,9 +12,11 @@ var efs_deleteMountTargetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_deleteMountTargetCmd).Standalone()
+	carapace.Gen(efs_deleteMountTargetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_deleteMountTargetCmd).Standalone()
 
-	efs_deleteMountTargetCmd.Flags().String("mount-target-id", "", "The ID of the mount target to delete (String).")
-	efs_deleteMountTargetCmd.MarkFlagRequired("mount-target-id")
+		efs_deleteMountTargetCmd.Flags().String("mount-target-id", "", "The ID of the mount target to delete (String).")
+		efs_deleteMountTargetCmd.MarkFlagRequired("mount-target-id")
+	})
 	efsCmd.AddCommand(efs_deleteMountTargetCmd)
 }

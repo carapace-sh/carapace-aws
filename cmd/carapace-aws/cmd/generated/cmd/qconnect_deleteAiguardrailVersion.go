@@ -12,13 +12,15 @@ var qconnect_deleteAiguardrailVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_deleteAiguardrailVersionCmd).Standalone()
+	carapace.Gen(qconnect_deleteAiguardrailVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_deleteAiguardrailVersionCmd).Standalone()
 
-	qconnect_deleteAiguardrailVersionCmd.Flags().String("ai-guardrail-id", "", "The identifier of the Amazon Q in Connect AI Guardrail.")
-	qconnect_deleteAiguardrailVersionCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_deleteAiguardrailVersionCmd.Flags().String("version-number", "", "The version number of the AI Guardrail version to be deleted.")
-	qconnect_deleteAiguardrailVersionCmd.MarkFlagRequired("ai-guardrail-id")
-	qconnect_deleteAiguardrailVersionCmd.MarkFlagRequired("assistant-id")
-	qconnect_deleteAiguardrailVersionCmd.MarkFlagRequired("version-number")
+		qconnect_deleteAiguardrailVersionCmd.Flags().String("ai-guardrail-id", "", "The identifier of the Amazon Q in Connect AI Guardrail.")
+		qconnect_deleteAiguardrailVersionCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_deleteAiguardrailVersionCmd.Flags().String("version-number", "", "The version number of the AI Guardrail version to be deleted.")
+		qconnect_deleteAiguardrailVersionCmd.MarkFlagRequired("ai-guardrail-id")
+		qconnect_deleteAiguardrailVersionCmd.MarkFlagRequired("assistant-id")
+		qconnect_deleteAiguardrailVersionCmd.MarkFlagRequired("version-number")
+	})
 	qconnectCmd.AddCommand(qconnect_deleteAiguardrailVersionCmd)
 }

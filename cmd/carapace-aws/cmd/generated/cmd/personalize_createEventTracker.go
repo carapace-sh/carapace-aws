@@ -12,12 +12,14 @@ var personalize_createEventTrackerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_createEventTrackerCmd).Standalone()
+	carapace.Gen(personalize_createEventTrackerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_createEventTrackerCmd).Standalone()
 
-	personalize_createEventTrackerCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the dataset group that receives the event data.")
-	personalize_createEventTrackerCmd.Flags().String("name", "", "The name for the event tracker.")
-	personalize_createEventTrackerCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the event tracker.")
-	personalize_createEventTrackerCmd.MarkFlagRequired("dataset-group-arn")
-	personalize_createEventTrackerCmd.MarkFlagRequired("name")
+		personalize_createEventTrackerCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the dataset group that receives the event data.")
+		personalize_createEventTrackerCmd.Flags().String("name", "", "The name for the event tracker.")
+		personalize_createEventTrackerCmd.Flags().String("tags", "", "A list of [tags](https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html) to apply to the event tracker.")
+		personalize_createEventTrackerCmd.MarkFlagRequired("dataset-group-arn")
+		personalize_createEventTrackerCmd.MarkFlagRequired("name")
+	})
 	personalizeCmd.AddCommand(personalize_createEventTrackerCmd)
 }

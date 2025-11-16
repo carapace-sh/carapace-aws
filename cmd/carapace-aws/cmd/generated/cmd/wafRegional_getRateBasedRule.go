@@ -12,9 +12,11 @@ var wafRegional_getRateBasedRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_getRateBasedRuleCmd).Standalone()
+	carapace.Gen(wafRegional_getRateBasedRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_getRateBasedRuleCmd).Standalone()
 
-	wafRegional_getRateBasedRuleCmd.Flags().String("rule-id", "", "The `RuleId` of the [RateBasedRule]() that you want to get.")
-	wafRegional_getRateBasedRuleCmd.MarkFlagRequired("rule-id")
+		wafRegional_getRateBasedRuleCmd.Flags().String("rule-id", "", "The `RuleId` of the [RateBasedRule]() that you want to get.")
+		wafRegional_getRateBasedRuleCmd.MarkFlagRequired("rule-id")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_getRateBasedRuleCmd)
 }

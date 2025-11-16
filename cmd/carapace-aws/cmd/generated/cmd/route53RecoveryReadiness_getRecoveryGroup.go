@@ -12,9 +12,11 @@ var route53RecoveryReadiness_getRecoveryGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_getRecoveryGroupCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_getRecoveryGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_getRecoveryGroupCmd).Standalone()
 
-	route53RecoveryReadiness_getRecoveryGroupCmd.Flags().String("recovery-group-name", "", "The name of a recovery group.")
-	route53RecoveryReadiness_getRecoveryGroupCmd.MarkFlagRequired("recovery-group-name")
+		route53RecoveryReadiness_getRecoveryGroupCmd.Flags().String("recovery-group-name", "", "The name of a recovery group.")
+		route53RecoveryReadiness_getRecoveryGroupCmd.MarkFlagRequired("recovery-group-name")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_getRecoveryGroupCmd)
 }

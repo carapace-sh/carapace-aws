@@ -12,15 +12,17 @@ var events_createEventBusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_createEventBusCmd).Standalone()
+	carapace.Gen(events_createEventBusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_createEventBusCmd).Standalone()
 
-	events_createEventBusCmd.Flags().String("dead-letter-config", "", "")
-	events_createEventBusCmd.Flags().String("description", "", "The event bus description.")
-	events_createEventBusCmd.Flags().String("event-source-name", "", "If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.")
-	events_createEventBusCmd.Flags().String("kms-key-identifier", "", "The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus.")
-	events_createEventBusCmd.Flags().String("log-config", "", "The logging configuration settings for the event bus.")
-	events_createEventBusCmd.Flags().String("name", "", "The name of the new event bus.")
-	events_createEventBusCmd.Flags().String("tags", "", "Tags to associate with the event bus.")
-	events_createEventBusCmd.MarkFlagRequired("name")
+		events_createEventBusCmd.Flags().String("dead-letter-config", "", "")
+		events_createEventBusCmd.Flags().String("description", "", "The event bus description.")
+		events_createEventBusCmd.Flags().String("event-source-name", "", "If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.")
+		events_createEventBusCmd.Flags().String("kms-key-identifier", "", "The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus.")
+		events_createEventBusCmd.Flags().String("log-config", "", "The logging configuration settings for the event bus.")
+		events_createEventBusCmd.Flags().String("name", "", "The name of the new event bus.")
+		events_createEventBusCmd.Flags().String("tags", "", "Tags to associate with the event bus.")
+		events_createEventBusCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_createEventBusCmd)
 }

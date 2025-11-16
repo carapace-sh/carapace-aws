@@ -12,9 +12,11 @@ var networkFirewall_describeResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_describeResourcePolicyCmd).Standalone()
+	carapace.Gen(networkFirewall_describeResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_describeResourcePolicyCmd).Standalone()
 
-	networkFirewall_describeResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the rule group or firewall policy whose resource policy you want to retrieve.")
-	networkFirewall_describeResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		networkFirewall_describeResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the rule group or firewall policy whose resource policy you want to retrieve.")
+		networkFirewall_describeResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_describeResourcePolicyCmd)
 }

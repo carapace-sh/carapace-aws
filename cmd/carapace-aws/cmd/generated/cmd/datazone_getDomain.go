@@ -12,9 +12,11 @@ var datazone_getDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getDomainCmd).Standalone()
+	carapace.Gen(datazone_getDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getDomainCmd).Standalone()
 
-	datazone_getDomainCmd.Flags().String("identifier", "", "The identifier of the specified Amazon DataZone domain.")
-	datazone_getDomainCmd.MarkFlagRequired("identifier")
+		datazone_getDomainCmd.Flags().String("identifier", "", "The identifier of the specified Amazon DataZone domain.")
+		datazone_getDomainCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getDomainCmd)
 }

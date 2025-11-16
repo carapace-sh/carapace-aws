@@ -12,11 +12,13 @@ var voiceId_describeFraudsterRegistrationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_describeFraudsterRegistrationJobCmd).Standalone()
+	carapace.Gen(voiceId_describeFraudsterRegistrationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_describeFraudsterRegistrationJobCmd).Standalone()
 
-	voiceId_describeFraudsterRegistrationJobCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the fraudster registration job.")
-	voiceId_describeFraudsterRegistrationJobCmd.Flags().String("job-id", "", "The identifier of the fraudster registration job you are describing.")
-	voiceId_describeFraudsterRegistrationJobCmd.MarkFlagRequired("domain-id")
-	voiceId_describeFraudsterRegistrationJobCmd.MarkFlagRequired("job-id")
+		voiceId_describeFraudsterRegistrationJobCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the fraudster registration job.")
+		voiceId_describeFraudsterRegistrationJobCmd.Flags().String("job-id", "", "The identifier of the fraudster registration job you are describing.")
+		voiceId_describeFraudsterRegistrationJobCmd.MarkFlagRequired("domain-id")
+		voiceId_describeFraudsterRegistrationJobCmd.MarkFlagRequired("job-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_describeFraudsterRegistrationJobCmd)
 }

@@ -12,11 +12,13 @@ var docdb_removeTagsFromResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_removeTagsFromResourceCmd).Standalone()
+	carapace.Gen(docdb_removeTagsFromResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_removeTagsFromResourceCmd).Standalone()
 
-	docdb_removeTagsFromResourceCmd.Flags().String("resource-name", "", "The Amazon DocumentDB resource that the tags are removed from.")
-	docdb_removeTagsFromResourceCmd.Flags().String("tag-keys", "", "The tag key (name) of the tag to be removed.")
-	docdb_removeTagsFromResourceCmd.MarkFlagRequired("resource-name")
-	docdb_removeTagsFromResourceCmd.MarkFlagRequired("tag-keys")
+		docdb_removeTagsFromResourceCmd.Flags().String("resource-name", "", "The Amazon DocumentDB resource that the tags are removed from.")
+		docdb_removeTagsFromResourceCmd.Flags().String("tag-keys", "", "The tag key (name) of the tag to be removed.")
+		docdb_removeTagsFromResourceCmd.MarkFlagRequired("resource-name")
+		docdb_removeTagsFromResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	docdbCmd.AddCommand(docdb_removeTagsFromResourceCmd)
 }

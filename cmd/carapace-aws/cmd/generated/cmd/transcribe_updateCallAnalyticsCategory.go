@@ -12,12 +12,14 @@ var transcribe_updateCallAnalyticsCategoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_updateCallAnalyticsCategoryCmd).Standalone()
+	carapace.Gen(transcribe_updateCallAnalyticsCategoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_updateCallAnalyticsCategoryCmd).Standalone()
 
-	transcribe_updateCallAnalyticsCategoryCmd.Flags().String("category-name", "", "The name of the Call Analytics category you want to update.")
-	transcribe_updateCallAnalyticsCategoryCmd.Flags().String("input-type", "", "Choose whether you want to update a real-time or a post-call category.")
-	transcribe_updateCallAnalyticsCategoryCmd.Flags().String("rules", "", "The rules used for the updated Call Analytics category.")
-	transcribe_updateCallAnalyticsCategoryCmd.MarkFlagRequired("category-name")
-	transcribe_updateCallAnalyticsCategoryCmd.MarkFlagRequired("rules")
+		transcribe_updateCallAnalyticsCategoryCmd.Flags().String("category-name", "", "The name of the Call Analytics category you want to update.")
+		transcribe_updateCallAnalyticsCategoryCmd.Flags().String("input-type", "", "Choose whether you want to update a real-time or a post-call category.")
+		transcribe_updateCallAnalyticsCategoryCmd.Flags().String("rules", "", "The rules used for the updated Call Analytics category.")
+		transcribe_updateCallAnalyticsCategoryCmd.MarkFlagRequired("category-name")
+		transcribe_updateCallAnalyticsCategoryCmd.MarkFlagRequired("rules")
+	})
 	transcribeCmd.AddCommand(transcribe_updateCallAnalyticsCategoryCmd)
 }

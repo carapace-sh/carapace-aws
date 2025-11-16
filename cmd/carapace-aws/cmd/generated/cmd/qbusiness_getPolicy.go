@@ -12,9 +12,11 @@ var qbusiness_getPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_getPolicyCmd).Standalone()
+	carapace.Gen(qbusiness_getPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_getPolicyCmd).Standalone()
 
-	qbusiness_getPolicyCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application.")
-	qbusiness_getPolicyCmd.MarkFlagRequired("application-id")
+		qbusiness_getPolicyCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application.")
+		qbusiness_getPolicyCmd.MarkFlagRequired("application-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_getPolicyCmd)
 }

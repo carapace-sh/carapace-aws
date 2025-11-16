@@ -12,9 +12,11 @@ var inspector2_batchDisassociateCodeSecurityScanConfigurationCmd = &cobra.Comman
 }
 
 func init() {
-	carapace.Gen(inspector2_batchDisassociateCodeSecurityScanConfigurationCmd).Standalone()
+	carapace.Gen(inspector2_batchDisassociateCodeSecurityScanConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_batchDisassociateCodeSecurityScanConfigurationCmd).Standalone()
 
-	inspector2_batchDisassociateCodeSecurityScanConfigurationCmd.Flags().String("disassociate-configuration-requests", "", "A list of code repositories to disassociate from the specified scan configuration.")
-	inspector2_batchDisassociateCodeSecurityScanConfigurationCmd.MarkFlagRequired("disassociate-configuration-requests")
+		inspector2_batchDisassociateCodeSecurityScanConfigurationCmd.Flags().String("disassociate-configuration-requests", "", "A list of code repositories to disassociate from the specified scan configuration.")
+		inspector2_batchDisassociateCodeSecurityScanConfigurationCmd.MarkFlagRequired("disassociate-configuration-requests")
+	})
 	inspector2Cmd.AddCommand(inspector2_batchDisassociateCodeSecurityScanConfigurationCmd)
 }

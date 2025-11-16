@@ -12,9 +12,11 @@ var migrationHubRefactorSpaces_deleteEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpaces_deleteEnvironmentCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpaces_deleteEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpaces_deleteEnvironmentCmd).Standalone()
 
-	migrationHubRefactorSpaces_deleteEnvironmentCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
-	migrationHubRefactorSpaces_deleteEnvironmentCmd.MarkFlagRequired("environment-identifier")
+		migrationHubRefactorSpaces_deleteEnvironmentCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
+		migrationHubRefactorSpaces_deleteEnvironmentCmd.MarkFlagRequired("environment-identifier")
+	})
 	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_deleteEnvironmentCmd)
 }

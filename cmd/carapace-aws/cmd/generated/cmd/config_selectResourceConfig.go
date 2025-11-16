@@ -12,11 +12,13 @@ var config_selectResourceConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_selectResourceConfigCmd).Standalone()
+	carapace.Gen(config_selectResourceConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_selectResourceConfigCmd).Standalone()
 
-	config_selectResourceConfigCmd.Flags().String("expression", "", "The SQL query `SELECT` command.")
-	config_selectResourceConfigCmd.Flags().String("limit", "", "The maximum number of query results returned on each page.")
-	config_selectResourceConfigCmd.Flags().String("next-token", "", "The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.")
-	config_selectResourceConfigCmd.MarkFlagRequired("expression")
+		config_selectResourceConfigCmd.Flags().String("expression", "", "The SQL query `SELECT` command.")
+		config_selectResourceConfigCmd.Flags().String("limit", "", "The maximum number of query results returned on each page.")
+		config_selectResourceConfigCmd.Flags().String("next-token", "", "The `nextToken` string returned in a previous request that you use to request the next page of results in a paginated response.")
+		config_selectResourceConfigCmd.MarkFlagRequired("expression")
+	})
 	configCmd.AddCommand(config_selectResourceConfigCmd)
 }

@@ -12,13 +12,15 @@ var wellarchitected_deleteLensCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_deleteLensCmd).Standalone()
+	carapace.Gen(wellarchitected_deleteLensCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_deleteLensCmd).Standalone()
 
-	wellarchitected_deleteLensCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_deleteLensCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_deleteLensCmd.Flags().String("lens-status", "", "The status of the lens to be deleted.")
-	wellarchitected_deleteLensCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_deleteLensCmd.MarkFlagRequired("lens-alias")
-	wellarchitected_deleteLensCmd.MarkFlagRequired("lens-status")
+		wellarchitected_deleteLensCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_deleteLensCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_deleteLensCmd.Flags().String("lens-status", "", "The status of the lens to be deleted.")
+		wellarchitected_deleteLensCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_deleteLensCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_deleteLensCmd.MarkFlagRequired("lens-status")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_deleteLensCmd)
 }

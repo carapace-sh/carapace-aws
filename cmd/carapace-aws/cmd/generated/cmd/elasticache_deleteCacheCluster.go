@@ -12,10 +12,12 @@ var elasticache_deleteCacheClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_deleteCacheClusterCmd).Standalone()
+	carapace.Gen(elasticache_deleteCacheClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_deleteCacheClusterCmd).Standalone()
 
-	elasticache_deleteCacheClusterCmd.Flags().String("cache-cluster-id", "", "The cluster identifier for the cluster to be deleted.")
-	elasticache_deleteCacheClusterCmd.Flags().String("final-snapshot-identifier", "", "The user-supplied name of a final cluster snapshot.")
-	elasticache_deleteCacheClusterCmd.MarkFlagRequired("cache-cluster-id")
+		elasticache_deleteCacheClusterCmd.Flags().String("cache-cluster-id", "", "The cluster identifier for the cluster to be deleted.")
+		elasticache_deleteCacheClusterCmd.Flags().String("final-snapshot-identifier", "", "The user-supplied name of a final cluster snapshot.")
+		elasticache_deleteCacheClusterCmd.MarkFlagRequired("cache-cluster-id")
+	})
 	elasticacheCmd.AddCommand(elasticache_deleteCacheClusterCmd)
 }

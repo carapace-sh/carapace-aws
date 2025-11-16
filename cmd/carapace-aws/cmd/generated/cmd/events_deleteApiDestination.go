@@ -12,9 +12,11 @@ var events_deleteApiDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_deleteApiDestinationCmd).Standalone()
+	carapace.Gen(events_deleteApiDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_deleteApiDestinationCmd).Standalone()
 
-	events_deleteApiDestinationCmd.Flags().String("name", "", "The name of the destination to delete.")
-	events_deleteApiDestinationCmd.MarkFlagRequired("name")
+		events_deleteApiDestinationCmd.Flags().String("name", "", "The name of the destination to delete.")
+		events_deleteApiDestinationCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_deleteApiDestinationCmd)
 }

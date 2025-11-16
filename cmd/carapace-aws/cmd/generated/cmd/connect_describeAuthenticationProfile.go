@@ -12,11 +12,13 @@ var connect_describeAuthenticationProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeAuthenticationProfileCmd).Standalone()
+	carapace.Gen(connect_describeAuthenticationProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeAuthenticationProfileCmd).Standalone()
 
-	connect_describeAuthenticationProfileCmd.Flags().String("authentication-profile-id", "", "A unique identifier for the authentication profile.")
-	connect_describeAuthenticationProfileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeAuthenticationProfileCmd.MarkFlagRequired("authentication-profile-id")
-	connect_describeAuthenticationProfileCmd.MarkFlagRequired("instance-id")
+		connect_describeAuthenticationProfileCmd.Flags().String("authentication-profile-id", "", "A unique identifier for the authentication profile.")
+		connect_describeAuthenticationProfileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeAuthenticationProfileCmd.MarkFlagRequired("authentication-profile-id")
+		connect_describeAuthenticationProfileCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_describeAuthenticationProfileCmd)
 }

@@ -12,11 +12,13 @@ var ssoAdmin_updateTrustedTokenIssuerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_updateTrustedTokenIssuerCmd).Standalone()
+	carapace.Gen(ssoAdmin_updateTrustedTokenIssuerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_updateTrustedTokenIssuerCmd).Standalone()
 
-	ssoAdmin_updateTrustedTokenIssuerCmd.Flags().String("name", "", "Specifies the updated name to be applied to the trusted token issuer configuration.")
-	ssoAdmin_updateTrustedTokenIssuerCmd.Flags().String("trusted-token-issuer-arn", "", "Specifies the ARN of the trusted token issuer configuration that you want to update.")
-	ssoAdmin_updateTrustedTokenIssuerCmd.Flags().String("trusted-token-issuer-configuration", "", "Specifies a structure with settings to apply to the specified trusted token issuer.")
-	ssoAdmin_updateTrustedTokenIssuerCmd.MarkFlagRequired("trusted-token-issuer-arn")
+		ssoAdmin_updateTrustedTokenIssuerCmd.Flags().String("name", "", "Specifies the updated name to be applied to the trusted token issuer configuration.")
+		ssoAdmin_updateTrustedTokenIssuerCmd.Flags().String("trusted-token-issuer-arn", "", "Specifies the ARN of the trusted token issuer configuration that you want to update.")
+		ssoAdmin_updateTrustedTokenIssuerCmd.Flags().String("trusted-token-issuer-configuration", "", "Specifies a structure with settings to apply to the specified trusted token issuer.")
+		ssoAdmin_updateTrustedTokenIssuerCmd.MarkFlagRequired("trusted-token-issuer-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_updateTrustedTokenIssuerCmd)
 }

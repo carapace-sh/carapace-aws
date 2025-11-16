@@ -12,12 +12,14 @@ var glue_listDataQualityStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listDataQualityStatisticsCmd).Standalone()
+	carapace.Gen(glue_listDataQualityStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listDataQualityStatisticsCmd).Standalone()
 
-	glue_listDataQualityStatisticsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	glue_listDataQualityStatisticsCmd.Flags().String("next-token", "", "A pagination token to request the next page of results.")
-	glue_listDataQualityStatisticsCmd.Flags().String("profile-id", "", "The Profile ID.")
-	glue_listDataQualityStatisticsCmd.Flags().String("statistic-id", "", "The Statistic ID.")
-	glue_listDataQualityStatisticsCmd.Flags().String("timestamp-filter", "", "A timestamp filter.")
+		glue_listDataQualityStatisticsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		glue_listDataQualityStatisticsCmd.Flags().String("next-token", "", "A pagination token to request the next page of results.")
+		glue_listDataQualityStatisticsCmd.Flags().String("profile-id", "", "The Profile ID.")
+		glue_listDataQualityStatisticsCmd.Flags().String("statistic-id", "", "The Statistic ID.")
+		glue_listDataQualityStatisticsCmd.Flags().String("timestamp-filter", "", "A timestamp filter.")
+	})
 	glueCmd.AddCommand(glue_listDataQualityStatisticsCmd)
 }

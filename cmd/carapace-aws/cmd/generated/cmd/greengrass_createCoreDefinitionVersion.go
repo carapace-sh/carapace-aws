@@ -12,11 +12,13 @@ var greengrass_createCoreDefinitionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createCoreDefinitionVersionCmd).Standalone()
+	carapace.Gen(greengrass_createCoreDefinitionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createCoreDefinitionVersionCmd).Standalone()
 
-	greengrass_createCoreDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createCoreDefinitionVersionCmd.Flags().String("core-definition-id", "", "The ID of the core definition.")
-	greengrass_createCoreDefinitionVersionCmd.Flags().String("cores", "", "A list of cores in the core definition version.")
-	greengrass_createCoreDefinitionVersionCmd.MarkFlagRequired("core-definition-id")
+		greengrass_createCoreDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createCoreDefinitionVersionCmd.Flags().String("core-definition-id", "", "The ID of the core definition.")
+		greengrass_createCoreDefinitionVersionCmd.Flags().String("cores", "", "A list of cores in the core definition version.")
+		greengrass_createCoreDefinitionVersionCmd.MarkFlagRequired("core-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_createCoreDefinitionVersionCmd)
 }

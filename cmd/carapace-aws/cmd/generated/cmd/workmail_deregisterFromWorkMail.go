@@ -12,11 +12,13 @@ var workmail_deregisterFromWorkMailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_deregisterFromWorkMailCmd).Standalone()
+	carapace.Gen(workmail_deregisterFromWorkMailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_deregisterFromWorkMailCmd).Standalone()
 
-	workmail_deregisterFromWorkMailCmd.Flags().String("entity-id", "", "The identifier for the member to be updated.")
-	workmail_deregisterFromWorkMailCmd.Flags().String("organization-id", "", "The identifier for the organization under which the WorkMail entity exists.")
-	workmail_deregisterFromWorkMailCmd.MarkFlagRequired("entity-id")
-	workmail_deregisterFromWorkMailCmd.MarkFlagRequired("organization-id")
+		workmail_deregisterFromWorkMailCmd.Flags().String("entity-id", "", "The identifier for the member to be updated.")
+		workmail_deregisterFromWorkMailCmd.Flags().String("organization-id", "", "The identifier for the organization under which the WorkMail entity exists.")
+		workmail_deregisterFromWorkMailCmd.MarkFlagRequired("entity-id")
+		workmail_deregisterFromWorkMailCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_deregisterFromWorkMailCmd)
 }

@@ -12,11 +12,13 @@ var s3tables_createTableBucketCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_createTableBucketCmd).Standalone()
+	carapace.Gen(s3tables_createTableBucketCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_createTableBucketCmd).Standalone()
 
-	s3tables_createTableBucketCmd.Flags().String("encryption-configuration", "", "The encryption configuration to use for the table bucket.")
-	s3tables_createTableBucketCmd.Flags().String("name", "", "The name for the table bucket.")
-	s3tables_createTableBucketCmd.Flags().String("tags", "", "A map of user-defined tags that you would like to apply to the table bucket that you are creating.")
-	s3tables_createTableBucketCmd.MarkFlagRequired("name")
+		s3tables_createTableBucketCmd.Flags().String("encryption-configuration", "", "The encryption configuration to use for the table bucket.")
+		s3tables_createTableBucketCmd.Flags().String("name", "", "The name for the table bucket.")
+		s3tables_createTableBucketCmd.Flags().String("tags", "", "A map of user-defined tags that you would like to apply to the table bucket that you are creating.")
+		s3tables_createTableBucketCmd.MarkFlagRequired("name")
+	})
 	s3tablesCmd.AddCommand(s3tables_createTableBucketCmd)
 }

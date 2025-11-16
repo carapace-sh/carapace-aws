@@ -12,14 +12,16 @@ var connect_importPhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_importPhoneNumberCmd).Standalone()
+	carapace.Gen(connect_importPhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_importPhoneNumberCmd).Standalone()
 
-	connect_importPhoneNumberCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connect_importPhoneNumberCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_importPhoneNumberCmd.Flags().String("phone-number-description", "", "The description of the phone number.")
-	connect_importPhoneNumberCmd.Flags().String("source-phone-number-arn", "", "The claimed phone number ARN being imported from the external service, such as Amazon Web Services End User Messaging.")
-	connect_importPhoneNumberCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
-	connect_importPhoneNumberCmd.MarkFlagRequired("instance-id")
-	connect_importPhoneNumberCmd.MarkFlagRequired("source-phone-number-arn")
+		connect_importPhoneNumberCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connect_importPhoneNumberCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_importPhoneNumberCmd.Flags().String("phone-number-description", "", "The description of the phone number.")
+		connect_importPhoneNumberCmd.Flags().String("source-phone-number-arn", "", "The claimed phone number ARN being imported from the external service, such as Amazon Web Services End User Messaging.")
+		connect_importPhoneNumberCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for this resource.")
+		connect_importPhoneNumberCmd.MarkFlagRequired("instance-id")
+		connect_importPhoneNumberCmd.MarkFlagRequired("source-phone-number-arn")
+	})
 	connectCmd.AddCommand(connect_importPhoneNumberCmd)
 }

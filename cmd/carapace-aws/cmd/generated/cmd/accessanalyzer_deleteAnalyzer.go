@@ -12,10 +12,12 @@ var accessanalyzer_deleteAnalyzerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(accessanalyzer_deleteAnalyzerCmd).Standalone()
+	carapace.Gen(accessanalyzer_deleteAnalyzerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(accessanalyzer_deleteAnalyzerCmd).Standalone()
 
-	accessanalyzer_deleteAnalyzerCmd.Flags().String("analyzer-name", "", "The name of the analyzer to delete.")
-	accessanalyzer_deleteAnalyzerCmd.Flags().String("client-token", "", "A client token.")
-	accessanalyzer_deleteAnalyzerCmd.MarkFlagRequired("analyzer-name")
+		accessanalyzer_deleteAnalyzerCmd.Flags().String("analyzer-name", "", "The name of the analyzer to delete.")
+		accessanalyzer_deleteAnalyzerCmd.Flags().String("client-token", "", "A client token.")
+		accessanalyzer_deleteAnalyzerCmd.MarkFlagRequired("analyzer-name")
+	})
 	accessanalyzerCmd.AddCommand(accessanalyzer_deleteAnalyzerCmd)
 }

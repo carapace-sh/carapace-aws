@@ -12,7 +12,9 @@ var route53_getHostedZoneCountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getHostedZoneCountCmd).Standalone()
+	carapace.Gen(route53_getHostedZoneCountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getHostedZoneCountCmd).Standalone()
 
+	})
 	route53Cmd.AddCommand(route53_getHostedZoneCountCmd)
 }

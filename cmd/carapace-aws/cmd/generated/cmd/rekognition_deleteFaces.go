@@ -12,11 +12,13 @@ var rekognition_deleteFacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_deleteFacesCmd).Standalone()
+	carapace.Gen(rekognition_deleteFacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_deleteFacesCmd).Standalone()
 
-	rekognition_deleteFacesCmd.Flags().String("collection-id", "", "Collection from which to remove the specific faces.")
-	rekognition_deleteFacesCmd.Flags().String("face-ids", "", "An array of face IDs to delete.")
-	rekognition_deleteFacesCmd.MarkFlagRequired("collection-id")
-	rekognition_deleteFacesCmd.MarkFlagRequired("face-ids")
+		rekognition_deleteFacesCmd.Flags().String("collection-id", "", "Collection from which to remove the specific faces.")
+		rekognition_deleteFacesCmd.Flags().String("face-ids", "", "An array of face IDs to delete.")
+		rekognition_deleteFacesCmd.MarkFlagRequired("collection-id")
+		rekognition_deleteFacesCmd.MarkFlagRequired("face-ids")
+	})
 	rekognitionCmd.AddCommand(rekognition_deleteFacesCmd)
 }

@@ -12,11 +12,13 @@ var ds_updateNumberOfDomainControllersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_updateNumberOfDomainControllersCmd).Standalone()
+	carapace.Gen(ds_updateNumberOfDomainControllersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_updateNumberOfDomainControllersCmd).Standalone()
 
-	ds_updateNumberOfDomainControllersCmd.Flags().String("desired-number", "", "The number of domain controllers desired in the directory.")
-	ds_updateNumberOfDomainControllersCmd.Flags().String("directory-id", "", "Identifier of the directory to which the domain controllers will be added or removed.")
-	ds_updateNumberOfDomainControllersCmd.MarkFlagRequired("desired-number")
-	ds_updateNumberOfDomainControllersCmd.MarkFlagRequired("directory-id")
+		ds_updateNumberOfDomainControllersCmd.Flags().String("desired-number", "", "The number of domain controllers desired in the directory.")
+		ds_updateNumberOfDomainControllersCmd.Flags().String("directory-id", "", "Identifier of the directory to which the domain controllers will be added or removed.")
+		ds_updateNumberOfDomainControllersCmd.MarkFlagRequired("desired-number")
+		ds_updateNumberOfDomainControllersCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_updateNumberOfDomainControllersCmd)
 }

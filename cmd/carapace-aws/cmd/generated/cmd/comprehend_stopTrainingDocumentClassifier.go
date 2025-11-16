@@ -12,9 +12,11 @@ var comprehend_stopTrainingDocumentClassifierCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_stopTrainingDocumentClassifierCmd).Standalone()
+	carapace.Gen(comprehend_stopTrainingDocumentClassifierCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_stopTrainingDocumentClassifierCmd).Standalone()
 
-	comprehend_stopTrainingDocumentClassifierCmd.Flags().String("document-classifier-arn", "", "The Amazon Resource Name (ARN) that identifies the document classifier currently being trained.")
-	comprehend_stopTrainingDocumentClassifierCmd.MarkFlagRequired("document-classifier-arn")
+		comprehend_stopTrainingDocumentClassifierCmd.Flags().String("document-classifier-arn", "", "The Amazon Resource Name (ARN) that identifies the document classifier currently being trained.")
+		comprehend_stopTrainingDocumentClassifierCmd.MarkFlagRequired("document-classifier-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_stopTrainingDocumentClassifierCmd)
 }

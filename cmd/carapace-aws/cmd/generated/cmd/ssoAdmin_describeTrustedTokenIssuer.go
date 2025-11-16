@@ -12,9 +12,11 @@ var ssoAdmin_describeTrustedTokenIssuerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_describeTrustedTokenIssuerCmd).Standalone()
+	carapace.Gen(ssoAdmin_describeTrustedTokenIssuerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_describeTrustedTokenIssuerCmd).Standalone()
 
-	ssoAdmin_describeTrustedTokenIssuerCmd.Flags().String("trusted-token-issuer-arn", "", "Specifies the ARN of the trusted token issuer configuration that you want details about.")
-	ssoAdmin_describeTrustedTokenIssuerCmd.MarkFlagRequired("trusted-token-issuer-arn")
+		ssoAdmin_describeTrustedTokenIssuerCmd.Flags().String("trusted-token-issuer-arn", "", "Specifies the ARN of the trusted token issuer configuration that you want details about.")
+		ssoAdmin_describeTrustedTokenIssuerCmd.MarkFlagRequired("trusted-token-issuer-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_describeTrustedTokenIssuerCmd)
 }

@@ -12,11 +12,13 @@ var cur_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cur_tagResourceCmd).Standalone()
+	carapace.Gen(cur_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cur_tagResourceCmd).Standalone()
 
-	cur_tagResourceCmd.Flags().String("report-name", "", "The report name of the report definition that tags are to be associated with.")
-	cur_tagResourceCmd.Flags().String("tags", "", "The tags to be assigned to the report definition resource.")
-	cur_tagResourceCmd.MarkFlagRequired("report-name")
-	cur_tagResourceCmd.MarkFlagRequired("tags")
+		cur_tagResourceCmd.Flags().String("report-name", "", "The report name of the report definition that tags are to be associated with.")
+		cur_tagResourceCmd.Flags().String("tags", "", "The tags to be assigned to the report definition resource.")
+		cur_tagResourceCmd.MarkFlagRequired("report-name")
+		cur_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	curCmd.AddCommand(cur_tagResourceCmd)
 }

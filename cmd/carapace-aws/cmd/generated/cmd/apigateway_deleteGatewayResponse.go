@@ -12,11 +12,13 @@ var apigateway_deleteGatewayResponseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_deleteGatewayResponseCmd).Standalone()
+	carapace.Gen(apigateway_deleteGatewayResponseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_deleteGatewayResponseCmd).Standalone()
 
-	apigateway_deleteGatewayResponseCmd.Flags().String("response-type", "", "The response type of the associated GatewayResponse.")
-	apigateway_deleteGatewayResponseCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_deleteGatewayResponseCmd.MarkFlagRequired("response-type")
-	apigateway_deleteGatewayResponseCmd.MarkFlagRequired("rest-api-id")
+		apigateway_deleteGatewayResponseCmd.Flags().String("response-type", "", "The response type of the associated GatewayResponse.")
+		apigateway_deleteGatewayResponseCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_deleteGatewayResponseCmd.MarkFlagRequired("response-type")
+		apigateway_deleteGatewayResponseCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_deleteGatewayResponseCmd)
 }

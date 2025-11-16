@@ -12,14 +12,16 @@ var rds_copyDbparameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_copyDbparameterGroupCmd).Standalone()
+	carapace.Gen(rds_copyDbparameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_copyDbparameterGroupCmd).Standalone()
 
-	rds_copyDbparameterGroupCmd.Flags().String("source-dbparameter-group-identifier", "", "The identifier or ARN for the source DB parameter group.")
-	rds_copyDbparameterGroupCmd.Flags().String("tags", "", "")
-	rds_copyDbparameterGroupCmd.Flags().String("target-dbparameter-group-description", "", "A description for the copied DB parameter group.")
-	rds_copyDbparameterGroupCmd.Flags().String("target-dbparameter-group-identifier", "", "The identifier for the copied DB parameter group.")
-	rds_copyDbparameterGroupCmd.MarkFlagRequired("source-dbparameter-group-identifier")
-	rds_copyDbparameterGroupCmd.MarkFlagRequired("target-dbparameter-group-description")
-	rds_copyDbparameterGroupCmd.MarkFlagRequired("target-dbparameter-group-identifier")
+		rds_copyDbparameterGroupCmd.Flags().String("source-dbparameter-group-identifier", "", "The identifier or ARN for the source DB parameter group.")
+		rds_copyDbparameterGroupCmd.Flags().String("tags", "", "")
+		rds_copyDbparameterGroupCmd.Flags().String("target-dbparameter-group-description", "", "A description for the copied DB parameter group.")
+		rds_copyDbparameterGroupCmd.Flags().String("target-dbparameter-group-identifier", "", "The identifier for the copied DB parameter group.")
+		rds_copyDbparameterGroupCmd.MarkFlagRequired("source-dbparameter-group-identifier")
+		rds_copyDbparameterGroupCmd.MarkFlagRequired("target-dbparameter-group-description")
+		rds_copyDbparameterGroupCmd.MarkFlagRequired("target-dbparameter-group-identifier")
+	})
 	rdsCmd.AddCommand(rds_copyDbparameterGroupCmd)
 }

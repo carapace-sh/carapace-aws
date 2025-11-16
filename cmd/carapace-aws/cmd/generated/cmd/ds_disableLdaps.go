@@ -12,11 +12,13 @@ var ds_disableLdapsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_disableLdapsCmd).Standalone()
+	carapace.Gen(ds_disableLdapsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_disableLdapsCmd).Standalone()
 
-	ds_disableLdapsCmd.Flags().String("directory-id", "", "The identifier of the directory.")
-	ds_disableLdapsCmd.Flags().String("type", "", "The type of LDAP security to enable.")
-	ds_disableLdapsCmd.MarkFlagRequired("directory-id")
-	ds_disableLdapsCmd.MarkFlagRequired("type")
+		ds_disableLdapsCmd.Flags().String("directory-id", "", "The identifier of the directory.")
+		ds_disableLdapsCmd.Flags().String("type", "", "The type of LDAP security to enable.")
+		ds_disableLdapsCmd.MarkFlagRequired("directory-id")
+		ds_disableLdapsCmd.MarkFlagRequired("type")
+	})
 	dsCmd.AddCommand(ds_disableLdapsCmd)
 }

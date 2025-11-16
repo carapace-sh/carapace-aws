@@ -12,15 +12,17 @@ var apigatewayv2_updateModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_updateModelCmd).Standalone()
+	carapace.Gen(apigatewayv2_updateModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_updateModelCmd).Standalone()
 
-	apigatewayv2_updateModelCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_updateModelCmd.Flags().String("content-type", "", "The content-type for the model, for example, \"application/json\".")
-	apigatewayv2_updateModelCmd.Flags().String("description", "", "The description of the model.")
-	apigatewayv2_updateModelCmd.Flags().String("model-id", "", "The model ID.")
-	apigatewayv2_updateModelCmd.Flags().String("name", "", "The name of the model.")
-	apigatewayv2_updateModelCmd.Flags().String("schema", "", "The schema for the model.")
-	apigatewayv2_updateModelCmd.MarkFlagRequired("api-id")
-	apigatewayv2_updateModelCmd.MarkFlagRequired("model-id")
+		apigatewayv2_updateModelCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_updateModelCmd.Flags().String("content-type", "", "The content-type for the model, for example, \"application/json\".")
+		apigatewayv2_updateModelCmd.Flags().String("description", "", "The description of the model.")
+		apigatewayv2_updateModelCmd.Flags().String("model-id", "", "The model ID.")
+		apigatewayv2_updateModelCmd.Flags().String("name", "", "The name of the model.")
+		apigatewayv2_updateModelCmd.Flags().String("schema", "", "The schema for the model.")
+		apigatewayv2_updateModelCmd.MarkFlagRequired("api-id")
+		apigatewayv2_updateModelCmd.MarkFlagRequired("model-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_updateModelCmd)
 }

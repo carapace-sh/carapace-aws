@@ -12,9 +12,11 @@ var wafRegional_listRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_listRulesCmd).Standalone()
+	carapace.Gen(wafRegional_listRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_listRulesCmd).Standalone()
 
-	wafRegional_listRulesCmd.Flags().String("limit", "", "Specifies the number of `Rules` that you want AWS WAF to return for this request.")
-	wafRegional_listRulesCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `Rules` than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `Rules`.")
+		wafRegional_listRulesCmd.Flags().String("limit", "", "Specifies the number of `Rules` that you want AWS WAF to return for this request.")
+		wafRegional_listRulesCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `Rules` than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `Rules`.")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_listRulesCmd)
 }

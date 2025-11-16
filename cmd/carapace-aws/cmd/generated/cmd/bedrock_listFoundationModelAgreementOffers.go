@@ -12,10 +12,12 @@ var bedrock_listFoundationModelAgreementOffersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_listFoundationModelAgreementOffersCmd).Standalone()
+	carapace.Gen(bedrock_listFoundationModelAgreementOffersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_listFoundationModelAgreementOffersCmd).Standalone()
 
-	bedrock_listFoundationModelAgreementOffersCmd.Flags().String("model-id", "", "Model Id of the foundation model.")
-	bedrock_listFoundationModelAgreementOffersCmd.Flags().String("offer-type", "", "Type of offer associated with the model.")
-	bedrock_listFoundationModelAgreementOffersCmd.MarkFlagRequired("model-id")
+		bedrock_listFoundationModelAgreementOffersCmd.Flags().String("model-id", "", "Model Id of the foundation model.")
+		bedrock_listFoundationModelAgreementOffersCmd.Flags().String("offer-type", "", "Type of offer associated with the model.")
+		bedrock_listFoundationModelAgreementOffersCmd.MarkFlagRequired("model-id")
+	})
 	bedrockCmd.AddCommand(bedrock_listFoundationModelAgreementOffersCmd)
 }

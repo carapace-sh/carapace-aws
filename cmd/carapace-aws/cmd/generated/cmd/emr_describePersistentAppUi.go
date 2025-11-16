@@ -12,9 +12,11 @@ var emr_describePersistentAppUiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_describePersistentAppUiCmd).Standalone()
+	carapace.Gen(emr_describePersistentAppUiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_describePersistentAppUiCmd).Standalone()
 
-	emr_describePersistentAppUiCmd.Flags().String("persistent-app-uiid", "", "The identifier for the persistent application user interface.")
-	emr_describePersistentAppUiCmd.MarkFlagRequired("persistent-app-uiid")
+		emr_describePersistentAppUiCmd.Flags().String("persistent-app-uiid", "", "The identifier for the persistent application user interface.")
+		emr_describePersistentAppUiCmd.MarkFlagRequired("persistent-app-uiid")
+	})
 	emrCmd.AddCommand(emr_describePersistentAppUiCmd)
 }

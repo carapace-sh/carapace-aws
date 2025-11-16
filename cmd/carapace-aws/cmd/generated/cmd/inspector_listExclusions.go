@@ -12,11 +12,13 @@ var inspector_listExclusionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_listExclusionsCmd).Standalone()
+	carapace.Gen(inspector_listExclusionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_listExclusionsCmd).Standalone()
 
-	inspector_listExclusionsCmd.Flags().String("assessment-run-arn", "", "The ARN of the assessment run that generated the exclusions that you want to list.")
-	inspector_listExclusionsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
-	inspector_listExclusionsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
-	inspector_listExclusionsCmd.MarkFlagRequired("assessment-run-arn")
+		inspector_listExclusionsCmd.Flags().String("assessment-run-arn", "", "The ARN of the assessment run that generated the exclusions that you want to list.")
+		inspector_listExclusionsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
+		inspector_listExclusionsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+		inspector_listExclusionsCmd.MarkFlagRequired("assessment-run-arn")
+	})
 	inspectorCmd.AddCommand(inspector_listExclusionsCmd)
 }

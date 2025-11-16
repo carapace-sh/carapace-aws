@@ -12,7 +12,9 @@ var neptunedata_getEngineStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_getEngineStatusCmd).Standalone()
+	carapace.Gen(neptunedata_getEngineStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_getEngineStatusCmd).Standalone()
 
+	})
 	neptunedataCmd.AddCommand(neptunedata_getEngineStatusCmd)
 }

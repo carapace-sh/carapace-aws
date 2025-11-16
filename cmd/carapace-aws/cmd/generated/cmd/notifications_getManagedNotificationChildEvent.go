@@ -12,10 +12,12 @@ var notifications_getManagedNotificationChildEventCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_getManagedNotificationChildEventCmd).Standalone()
+	carapace.Gen(notifications_getManagedNotificationChildEventCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_getManagedNotificationChildEventCmd).Standalone()
 
-	notifications_getManagedNotificationChildEventCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `ManagedNotificationChildEvent` to return.")
-	notifications_getManagedNotificationChildEventCmd.Flags().String("locale", "", "The locale code of the language used for the retrieved `ManagedNotificationChildEvent`.")
-	notifications_getManagedNotificationChildEventCmd.MarkFlagRequired("arn")
+		notifications_getManagedNotificationChildEventCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `ManagedNotificationChildEvent` to return.")
+		notifications_getManagedNotificationChildEventCmd.Flags().String("locale", "", "The locale code of the language used for the retrieved `ManagedNotificationChildEvent`.")
+		notifications_getManagedNotificationChildEventCmd.MarkFlagRequired("arn")
+	})
 	notificationsCmd.AddCommand(notifications_getManagedNotificationChildEventCmd)
 }

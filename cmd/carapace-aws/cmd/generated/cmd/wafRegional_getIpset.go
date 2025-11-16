@@ -12,9 +12,11 @@ var wafRegional_getIpsetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_getIpsetCmd).Standalone()
+	carapace.Gen(wafRegional_getIpsetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_getIpsetCmd).Standalone()
 
-	wafRegional_getIpsetCmd.Flags().String("ipset-id", "", "The `IPSetId` of the [IPSet]() that you want to get.")
-	wafRegional_getIpsetCmd.MarkFlagRequired("ipset-id")
+		wafRegional_getIpsetCmd.Flags().String("ipset-id", "", "The `IPSetId` of the [IPSet]() that you want to get.")
+		wafRegional_getIpsetCmd.MarkFlagRequired("ipset-id")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_getIpsetCmd)
 }

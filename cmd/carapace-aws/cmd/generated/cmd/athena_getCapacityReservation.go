@@ -12,9 +12,11 @@ var athena_getCapacityReservationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_getCapacityReservationCmd).Standalone()
+	carapace.Gen(athena_getCapacityReservationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_getCapacityReservationCmd).Standalone()
 
-	athena_getCapacityReservationCmd.Flags().String("name", "", "The name of the capacity reservation.")
-	athena_getCapacityReservationCmd.MarkFlagRequired("name")
+		athena_getCapacityReservationCmd.Flags().String("name", "", "The name of the capacity reservation.")
+		athena_getCapacityReservationCmd.MarkFlagRequired("name")
+	})
 	athenaCmd.AddCommand(athena_getCapacityReservationCmd)
 }

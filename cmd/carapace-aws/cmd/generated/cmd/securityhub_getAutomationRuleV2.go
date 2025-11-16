@@ -12,9 +12,11 @@ var securityhub_getAutomationRuleV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getAutomationRuleV2Cmd).Standalone()
+	carapace.Gen(securityhub_getAutomationRuleV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getAutomationRuleV2Cmd).Standalone()
 
-	securityhub_getAutomationRuleV2Cmd.Flags().String("identifier", "", "The ARN of the V2 automation rule.")
-	securityhub_getAutomationRuleV2Cmd.MarkFlagRequired("identifier")
+		securityhub_getAutomationRuleV2Cmd.Flags().String("identifier", "", "The ARN of the V2 automation rule.")
+		securityhub_getAutomationRuleV2Cmd.MarkFlagRequired("identifier")
+	})
 	securityhubCmd.AddCommand(securityhub_getAutomationRuleV2Cmd)
 }

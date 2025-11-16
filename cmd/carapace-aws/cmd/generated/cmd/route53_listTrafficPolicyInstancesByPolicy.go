@@ -12,15 +12,17 @@ var route53_listTrafficPolicyInstancesByPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_listTrafficPolicyInstancesByPolicyCmd).Standalone()
+	carapace.Gen(route53_listTrafficPolicyInstancesByPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_listTrafficPolicyInstancesByPolicyCmd).Standalone()
 
-	route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("hosted-zone-id-marker", "", "If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.")
-	route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("max-items", "", "The maximum number of traffic policy instances to be included in the response body for this request.")
-	route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("traffic-policy-id", "", "The ID of the traffic policy for which you want to list traffic policy instances.")
-	route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("traffic-policy-instance-name-marker", "", "If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.")
-	route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("traffic-policy-instance-type-marker", "", "If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.")
-	route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("traffic-policy-version", "", "The version of the traffic policy for which you want to list traffic policy instances.")
-	route53_listTrafficPolicyInstancesByPolicyCmd.MarkFlagRequired("traffic-policy-id")
-	route53_listTrafficPolicyInstancesByPolicyCmd.MarkFlagRequired("traffic-policy-version")
+		route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("hosted-zone-id-marker", "", "If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.")
+		route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("max-items", "", "The maximum number of traffic policy instances to be included in the response body for this request.")
+		route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("traffic-policy-id", "", "The ID of the traffic policy for which you want to list traffic policy instances.")
+		route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("traffic-policy-instance-name-marker", "", "If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.")
+		route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("traffic-policy-instance-type-marker", "", "If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.")
+		route53_listTrafficPolicyInstancesByPolicyCmd.Flags().String("traffic-policy-version", "", "The version of the traffic policy for which you want to list traffic policy instances.")
+		route53_listTrafficPolicyInstancesByPolicyCmd.MarkFlagRequired("traffic-policy-id")
+		route53_listTrafficPolicyInstancesByPolicyCmd.MarkFlagRequired("traffic-policy-version")
+	})
 	route53Cmd.AddCommand(route53_listTrafficPolicyInstancesByPolicyCmd)
 }

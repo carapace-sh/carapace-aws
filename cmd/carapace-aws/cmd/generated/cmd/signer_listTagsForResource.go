@@ -12,9 +12,11 @@ var signer_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(signer_listTagsForResourceCmd).Standalone()
+	carapace.Gen(signer_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(signer_listTagsForResourceCmd).Standalone()
 
-	signer_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the signing profile.")
-	signer_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		signer_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the signing profile.")
+		signer_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	signerCmd.AddCommand(signer_listTagsForResourceCmd)
 }

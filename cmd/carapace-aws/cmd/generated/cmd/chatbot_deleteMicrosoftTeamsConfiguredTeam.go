@@ -12,9 +12,11 @@ var chatbot_deleteMicrosoftTeamsConfiguredTeamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_deleteMicrosoftTeamsConfiguredTeamCmd).Standalone()
+	carapace.Gen(chatbot_deleteMicrosoftTeamsConfiguredTeamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_deleteMicrosoftTeamsConfiguredTeamCmd).Standalone()
 
-	chatbot_deleteMicrosoftTeamsConfiguredTeamCmd.Flags().String("team-id", "", "The ID of the Microsoft Teams team authorized with AWS Chatbot.")
-	chatbot_deleteMicrosoftTeamsConfiguredTeamCmd.MarkFlagRequired("team-id")
+		chatbot_deleteMicrosoftTeamsConfiguredTeamCmd.Flags().String("team-id", "", "The ID of the Microsoft Teams team authorized with AWS Chatbot.")
+		chatbot_deleteMicrosoftTeamsConfiguredTeamCmd.MarkFlagRequired("team-id")
+	})
 	chatbotCmd.AddCommand(chatbot_deleteMicrosoftTeamsConfiguredTeamCmd)
 }

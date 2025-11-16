@@ -12,9 +12,11 @@ var codebuild_deleteWebhookCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_deleteWebhookCmd).Standalone()
+	carapace.Gen(codebuild_deleteWebhookCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_deleteWebhookCmd).Standalone()
 
-	codebuild_deleteWebhookCmd.Flags().String("project-name", "", "The name of the CodeBuild project.")
-	codebuild_deleteWebhookCmd.MarkFlagRequired("project-name")
+		codebuild_deleteWebhookCmd.Flags().String("project-name", "", "The name of the CodeBuild project.")
+		codebuild_deleteWebhookCmd.MarkFlagRequired("project-name")
+	})
 	codebuildCmd.AddCommand(codebuild_deleteWebhookCmd)
 }

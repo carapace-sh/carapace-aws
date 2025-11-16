@@ -12,9 +12,11 @@ var mq_listBrokersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mq_listBrokersCmd).Standalone()
+	carapace.Gen(mq_listBrokersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mq_listBrokersCmd).Standalone()
 
-	mq_listBrokersCmd.Flags().String("max-results", "", "The maximum number of brokers that Amazon MQ can return per page (20 by default).")
-	mq_listBrokersCmd.Flags().String("next-token", "", "The token that specifies the next page of results Amazon MQ should return.")
+		mq_listBrokersCmd.Flags().String("max-results", "", "The maximum number of brokers that Amazon MQ can return per page (20 by default).")
+		mq_listBrokersCmd.Flags().String("next-token", "", "The token that specifies the next page of results Amazon MQ should return.")
+	})
 	mqCmd.AddCommand(mq_listBrokersCmd)
 }

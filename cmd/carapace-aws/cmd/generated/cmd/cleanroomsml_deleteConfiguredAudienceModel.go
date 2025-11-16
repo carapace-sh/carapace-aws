@@ -12,9 +12,11 @@ var cleanroomsml_deleteConfiguredAudienceModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_deleteConfiguredAudienceModelCmd).Standalone()
+	carapace.Gen(cleanroomsml_deleteConfiguredAudienceModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_deleteConfiguredAudienceModelCmd).Standalone()
 
-	cleanroomsml_deleteConfiguredAudienceModelCmd.Flags().String("configured-audience-model-arn", "", "The Amazon Resource Name (ARN) of the configured audience model that you want to delete.")
-	cleanroomsml_deleteConfiguredAudienceModelCmd.MarkFlagRequired("configured-audience-model-arn")
+		cleanroomsml_deleteConfiguredAudienceModelCmd.Flags().String("configured-audience-model-arn", "", "The Amazon Resource Name (ARN) of the configured audience model that you want to delete.")
+		cleanroomsml_deleteConfiguredAudienceModelCmd.MarkFlagRequired("configured-audience-model-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_deleteConfiguredAudienceModelCmd)
 }

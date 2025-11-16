@@ -12,11 +12,13 @@ var voiceId_evaluateSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_evaluateSessionCmd).Standalone()
+	carapace.Gen(voiceId_evaluateSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_evaluateSessionCmd).Standalone()
 
-	voiceId_evaluateSessionCmd.Flags().String("domain-id", "", "The identifier of the domain where the session started.")
-	voiceId_evaluateSessionCmd.Flags().String("session-name-or-id", "", "The session identifier, or name of the session, that you want to evaluate.")
-	voiceId_evaluateSessionCmd.MarkFlagRequired("domain-id")
-	voiceId_evaluateSessionCmd.MarkFlagRequired("session-name-or-id")
+		voiceId_evaluateSessionCmd.Flags().String("domain-id", "", "The identifier of the domain where the session started.")
+		voiceId_evaluateSessionCmd.Flags().String("session-name-or-id", "", "The session identifier, or name of the session, that you want to evaluate.")
+		voiceId_evaluateSessionCmd.MarkFlagRequired("domain-id")
+		voiceId_evaluateSessionCmd.MarkFlagRequired("session-name-or-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_evaluateSessionCmd)
 }

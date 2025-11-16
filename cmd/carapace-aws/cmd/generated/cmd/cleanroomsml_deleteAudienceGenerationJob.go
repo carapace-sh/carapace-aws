@@ -12,9 +12,11 @@ var cleanroomsml_deleteAudienceGenerationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsml_deleteAudienceGenerationJobCmd).Standalone()
+	carapace.Gen(cleanroomsml_deleteAudienceGenerationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsml_deleteAudienceGenerationJobCmd).Standalone()
 
-	cleanroomsml_deleteAudienceGenerationJobCmd.Flags().String("audience-generation-job-arn", "", "The Amazon Resource Name (ARN) of the audience generation job that you want to delete.")
-	cleanroomsml_deleteAudienceGenerationJobCmd.MarkFlagRequired("audience-generation-job-arn")
+		cleanroomsml_deleteAudienceGenerationJobCmd.Flags().String("audience-generation-job-arn", "", "The Amazon Resource Name (ARN) of the audience generation job that you want to delete.")
+		cleanroomsml_deleteAudienceGenerationJobCmd.MarkFlagRequired("audience-generation-job-arn")
+	})
 	cleanroomsmlCmd.AddCommand(cleanroomsml_deleteAudienceGenerationJobCmd)
 }

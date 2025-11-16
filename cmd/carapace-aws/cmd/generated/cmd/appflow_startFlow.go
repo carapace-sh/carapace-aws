@@ -12,10 +12,12 @@ var appflow_startFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appflow_startFlowCmd).Standalone()
+	carapace.Gen(appflow_startFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appflow_startFlowCmd).Standalone()
 
-	appflow_startFlowCmd.Flags().String("client-token", "", "The `clientToken` parameter is an idempotency token.")
-	appflow_startFlowCmd.Flags().String("flow-name", "", "The specified name of the flow.")
-	appflow_startFlowCmd.MarkFlagRequired("flow-name")
+		appflow_startFlowCmd.Flags().String("client-token", "", "The `clientToken` parameter is an idempotency token.")
+		appflow_startFlowCmd.Flags().String("flow-name", "", "The specified name of the flow.")
+		appflow_startFlowCmd.MarkFlagRequired("flow-name")
+	})
 	appflowCmd.AddCommand(appflow_startFlowCmd)
 }

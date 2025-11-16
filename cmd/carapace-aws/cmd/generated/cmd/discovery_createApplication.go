@@ -12,11 +12,13 @@ var discovery_createApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_createApplicationCmd).Standalone()
+	carapace.Gen(discovery_createApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_createApplicationCmd).Standalone()
 
-	discovery_createApplicationCmd.Flags().String("description", "", "The description of the application to be created.")
-	discovery_createApplicationCmd.Flags().String("name", "", "The name of the application to be created.")
-	discovery_createApplicationCmd.Flags().String("wave", "", "The name of the migration wave of the application to be created.")
-	discovery_createApplicationCmd.MarkFlagRequired("name")
+		discovery_createApplicationCmd.Flags().String("description", "", "The description of the application to be created.")
+		discovery_createApplicationCmd.Flags().String("name", "", "The name of the application to be created.")
+		discovery_createApplicationCmd.Flags().String("wave", "", "The name of the migration wave of the application to be created.")
+		discovery_createApplicationCmd.MarkFlagRequired("name")
+	})
 	discoveryCmd.AddCommand(discovery_createApplicationCmd)
 }

@@ -12,10 +12,12 @@ var ecs_deleteAccountSettingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_deleteAccountSettingCmd).Standalone()
+	carapace.Gen(ecs_deleteAccountSettingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_deleteAccountSettingCmd).Standalone()
 
-	ecs_deleteAccountSettingCmd.Flags().String("name", "", "The resource name to disable the account setting for.")
-	ecs_deleteAccountSettingCmd.Flags().String("principal-arn", "", "The Amazon Resource Name (ARN) of the principal.")
-	ecs_deleteAccountSettingCmd.MarkFlagRequired("name")
+		ecs_deleteAccountSettingCmd.Flags().String("name", "", "The resource name to disable the account setting for.")
+		ecs_deleteAccountSettingCmd.Flags().String("principal-arn", "", "The Amazon Resource Name (ARN) of the principal.")
+		ecs_deleteAccountSettingCmd.MarkFlagRequired("name")
+	})
 	ecsCmd.AddCommand(ecs_deleteAccountSettingCmd)
 }

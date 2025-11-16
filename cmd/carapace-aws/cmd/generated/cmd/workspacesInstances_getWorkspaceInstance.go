@@ -12,9 +12,11 @@ var workspacesInstances_getWorkspaceInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_getWorkspaceInstanceCmd).Standalone()
+	carapace.Gen(workspacesInstances_getWorkspaceInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_getWorkspaceInstanceCmd).Standalone()
 
-	workspacesInstances_getWorkspaceInstanceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpace Instance to retrieve.")
-	workspacesInstances_getWorkspaceInstanceCmd.MarkFlagRequired("workspace-instance-id")
+		workspacesInstances_getWorkspaceInstanceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpace Instance to retrieve.")
+		workspacesInstances_getWorkspaceInstanceCmd.MarkFlagRequired("workspace-instance-id")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_getWorkspaceInstanceCmd)
 }

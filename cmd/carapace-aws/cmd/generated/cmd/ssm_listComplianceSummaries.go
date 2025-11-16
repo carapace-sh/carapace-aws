@@ -12,10 +12,12 @@ var ssm_listComplianceSummariesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_listComplianceSummariesCmd).Standalone()
+	carapace.Gen(ssm_listComplianceSummariesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_listComplianceSummariesCmd).Standalone()
 
-	ssm_listComplianceSummariesCmd.Flags().String("filters", "", "One or more compliance or inventory filters.")
-	ssm_listComplianceSummariesCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_listComplianceSummariesCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_listComplianceSummariesCmd.Flags().String("filters", "", "One or more compliance or inventory filters.")
+		ssm_listComplianceSummariesCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_listComplianceSummariesCmd.Flags().String("next-token", "", "A token to start the list.")
+	})
 	ssmCmd.AddCommand(ssm_listComplianceSummariesCmd)
 }

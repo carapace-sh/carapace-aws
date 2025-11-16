@@ -12,15 +12,17 @@ var partnercentralSelling_listEngagementsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(partnercentralSelling_listEngagementsCmd).Standalone()
+	carapace.Gen(partnercentralSelling_listEngagementsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSelling_listEngagementsCmd).Standalone()
 
-	partnercentralSelling_listEngagementsCmd.Flags().String("catalog", "", "Specifies the catalog related to the request.")
-	partnercentralSelling_listEngagementsCmd.Flags().String("created-by", "", "A list of AWS account IDs.")
-	partnercentralSelling_listEngagementsCmd.Flags().String("engagement-identifier", "", "An array of strings representing engagement identifiers to retrieve.")
-	partnercentralSelling_listEngagementsCmd.Flags().String("exclude-created-by", "", "An array of strings representing AWS Account IDs.")
-	partnercentralSelling_listEngagementsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	partnercentralSelling_listEngagementsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	partnercentralSelling_listEngagementsCmd.Flags().String("sort", "", "")
-	partnercentralSelling_listEngagementsCmd.MarkFlagRequired("catalog")
+		partnercentralSelling_listEngagementsCmd.Flags().String("catalog", "", "Specifies the catalog related to the request.")
+		partnercentralSelling_listEngagementsCmd.Flags().String("created-by", "", "A list of AWS account IDs.")
+		partnercentralSelling_listEngagementsCmd.Flags().String("engagement-identifier", "", "An array of strings representing engagement identifiers to retrieve.")
+		partnercentralSelling_listEngagementsCmd.Flags().String("exclude-created-by", "", "An array of strings representing AWS Account IDs.")
+		partnercentralSelling_listEngagementsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		partnercentralSelling_listEngagementsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		partnercentralSelling_listEngagementsCmd.Flags().String("sort", "", "")
+		partnercentralSelling_listEngagementsCmd.MarkFlagRequired("catalog")
+	})
 	partnercentralSellingCmd.AddCommand(partnercentralSelling_listEngagementsCmd)
 }

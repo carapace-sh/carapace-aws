@@ -12,11 +12,13 @@ var iam_getPolicyVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getPolicyVersionCmd).Standalone()
+	carapace.Gen(iam_getPolicyVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getPolicyVersionCmd).Standalone()
 
-	iam_getPolicyVersionCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the managed policy that you want information about.")
-	iam_getPolicyVersionCmd.Flags().String("version-id", "", "Identifies the policy version to retrieve.")
-	iam_getPolicyVersionCmd.MarkFlagRequired("policy-arn")
-	iam_getPolicyVersionCmd.MarkFlagRequired("version-id")
+		iam_getPolicyVersionCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the managed policy that you want information about.")
+		iam_getPolicyVersionCmd.Flags().String("version-id", "", "Identifies the policy version to retrieve.")
+		iam_getPolicyVersionCmd.MarkFlagRequired("policy-arn")
+		iam_getPolicyVersionCmd.MarkFlagRequired("version-id")
+	})
 	iamCmd.AddCommand(iam_getPolicyVersionCmd)
 }

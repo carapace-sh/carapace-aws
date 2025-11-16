@@ -12,16 +12,18 @@ var redshift_describeNodeConfigurationOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeNodeConfigurationOptionsCmd).Standalone()
+	carapace.Gen(redshift_describeNodeConfigurationOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeNodeConfigurationOptionsCmd).Standalone()
 
-	redshift_describeNodeConfigurationOptionsCmd.Flags().String("action-type", "", "The action type to evaluate for possible node configurations.")
-	redshift_describeNodeConfigurationOptionsCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster to evaluate for possible node configurations.")
-	redshift_describeNodeConfigurationOptionsCmd.Flags().String("filters", "", "A set of name, operator, and value items to filter the results.")
-	redshift_describeNodeConfigurationOptionsCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
-	redshift_describeNodeConfigurationOptionsCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
-	redshift_describeNodeConfigurationOptionsCmd.Flags().String("owner-account", "", "The Amazon Web Services account used to create or copy the snapshot.")
-	redshift_describeNodeConfigurationOptionsCmd.Flags().String("snapshot-arn", "", "The Amazon Resource Name (ARN) of the snapshot associated with the message to describe node configuration.")
-	redshift_describeNodeConfigurationOptionsCmd.Flags().String("snapshot-identifier", "", "The identifier of the snapshot to evaluate for possible node configurations.")
-	redshift_describeNodeConfigurationOptionsCmd.MarkFlagRequired("action-type")
+		redshift_describeNodeConfigurationOptionsCmd.Flags().String("action-type", "", "The action type to evaluate for possible node configurations.")
+		redshift_describeNodeConfigurationOptionsCmd.Flags().String("cluster-identifier", "", "The identifier of the cluster to evaluate for possible node configurations.")
+		redshift_describeNodeConfigurationOptionsCmd.Flags().String("filters", "", "A set of name, operator, and value items to filter the results.")
+		redshift_describeNodeConfigurationOptionsCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
+		redshift_describeNodeConfigurationOptionsCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
+		redshift_describeNodeConfigurationOptionsCmd.Flags().String("owner-account", "", "The Amazon Web Services account used to create or copy the snapshot.")
+		redshift_describeNodeConfigurationOptionsCmd.Flags().String("snapshot-arn", "", "The Amazon Resource Name (ARN) of the snapshot associated with the message to describe node configuration.")
+		redshift_describeNodeConfigurationOptionsCmd.Flags().String("snapshot-identifier", "", "The identifier of the snapshot to evaluate for possible node configurations.")
+		redshift_describeNodeConfigurationOptionsCmd.MarkFlagRequired("action-type")
+	})
 	redshiftCmd.AddCommand(redshift_describeNodeConfigurationOptionsCmd)
 }

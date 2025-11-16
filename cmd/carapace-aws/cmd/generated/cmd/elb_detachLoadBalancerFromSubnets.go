@@ -12,11 +12,13 @@ var elb_detachLoadBalancerFromSubnetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_detachLoadBalancerFromSubnetsCmd).Standalone()
+	carapace.Gen(elb_detachLoadBalancerFromSubnetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_detachLoadBalancerFromSubnetsCmd).Standalone()
 
-	elb_detachLoadBalancerFromSubnetsCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_detachLoadBalancerFromSubnetsCmd.Flags().String("subnets", "", "The IDs of the subnets.")
-	elb_detachLoadBalancerFromSubnetsCmd.MarkFlagRequired("load-balancer-name")
-	elb_detachLoadBalancerFromSubnetsCmd.MarkFlagRequired("subnets")
+		elb_detachLoadBalancerFromSubnetsCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_detachLoadBalancerFromSubnetsCmd.Flags().String("subnets", "", "The IDs of the subnets.")
+		elb_detachLoadBalancerFromSubnetsCmd.MarkFlagRequired("load-balancer-name")
+		elb_detachLoadBalancerFromSubnetsCmd.MarkFlagRequired("subnets")
+	})
 	elbCmd.AddCommand(elb_detachLoadBalancerFromSubnetsCmd)
 }

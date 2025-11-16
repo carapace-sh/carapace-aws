@@ -12,9 +12,11 @@ var ssmContacts_deleteRotationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_deleteRotationCmd).Standalone()
+	carapace.Gen(ssmContacts_deleteRotationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_deleteRotationCmd).Standalone()
 
-	ssmContacts_deleteRotationCmd.Flags().String("rotation-id", "", "The Amazon Resource Name (ARN) of the on-call rotation to delete.")
-	ssmContacts_deleteRotationCmd.MarkFlagRequired("rotation-id")
+		ssmContacts_deleteRotationCmd.Flags().String("rotation-id", "", "The Amazon Resource Name (ARN) of the on-call rotation to delete.")
+		ssmContacts_deleteRotationCmd.MarkFlagRequired("rotation-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_deleteRotationCmd)
 }

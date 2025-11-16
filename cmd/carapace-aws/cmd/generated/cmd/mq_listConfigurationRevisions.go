@@ -12,11 +12,13 @@ var mq_listConfigurationRevisionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mq_listConfigurationRevisionsCmd).Standalone()
+	carapace.Gen(mq_listConfigurationRevisionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mq_listConfigurationRevisionsCmd).Standalone()
 
-	mq_listConfigurationRevisionsCmd.Flags().String("configuration-id", "", "The unique ID that Amazon MQ generates for the configuration.")
-	mq_listConfigurationRevisionsCmd.Flags().String("max-results", "", "The maximum number of brokers that Amazon MQ can return per page (20 by default).")
-	mq_listConfigurationRevisionsCmd.Flags().String("next-token", "", "The token that specifies the next page of results Amazon MQ should return.")
-	mq_listConfigurationRevisionsCmd.MarkFlagRequired("configuration-id")
+		mq_listConfigurationRevisionsCmd.Flags().String("configuration-id", "", "The unique ID that Amazon MQ generates for the configuration.")
+		mq_listConfigurationRevisionsCmd.Flags().String("max-results", "", "The maximum number of brokers that Amazon MQ can return per page (20 by default).")
+		mq_listConfigurationRevisionsCmd.Flags().String("next-token", "", "The token that specifies the next page of results Amazon MQ should return.")
+		mq_listConfigurationRevisionsCmd.MarkFlagRequired("configuration-id")
+	})
 	mqCmd.AddCommand(mq_listConfigurationRevisionsCmd)
 }

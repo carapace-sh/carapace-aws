@@ -12,10 +12,12 @@ var lambda_getRuntimeManagementConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getRuntimeManagementConfigCmd).Standalone()
+	carapace.Gen(lambda_getRuntimeManagementConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getRuntimeManagementConfigCmd).Standalone()
 
-	lambda_getRuntimeManagementConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_getRuntimeManagementConfigCmd.Flags().String("qualifier", "", "Specify a version of the function.")
-	lambda_getRuntimeManagementConfigCmd.MarkFlagRequired("function-name")
+		lambda_getRuntimeManagementConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_getRuntimeManagementConfigCmd.Flags().String("qualifier", "", "Specify a version of the function.")
+		lambda_getRuntimeManagementConfigCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_getRuntimeManagementConfigCmd)
 }

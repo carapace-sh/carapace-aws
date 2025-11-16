@@ -12,9 +12,11 @@ var pinpoint_deleteEventStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteEventStreamCmd).Standalone()
+	carapace.Gen(pinpoint_deleteEventStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteEventStreamCmd).Standalone()
 
-	pinpoint_deleteEventStreamCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_deleteEventStreamCmd.MarkFlagRequired("application-id")
+		pinpoint_deleteEventStreamCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_deleteEventStreamCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteEventStreamCmd)
 }

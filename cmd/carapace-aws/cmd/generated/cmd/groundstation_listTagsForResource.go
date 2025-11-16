@@ -12,9 +12,11 @@ var groundstation_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_listTagsForResourceCmd).Standalone()
+	carapace.Gen(groundstation_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_listTagsForResourceCmd).Standalone()
 
-	groundstation_listTagsForResourceCmd.Flags().String("resource-arn", "", "ARN of a resource.")
-	groundstation_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		groundstation_listTagsForResourceCmd.Flags().String("resource-arn", "", "ARN of a resource.")
+		groundstation_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	groundstationCmd.AddCommand(groundstation_listTagsForResourceCmd)
 }

@@ -12,11 +12,13 @@ var apigatewayv2_getStageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_getStageCmd).Standalone()
+	carapace.Gen(apigatewayv2_getStageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_getStageCmd).Standalone()
 
-	apigatewayv2_getStageCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_getStageCmd.Flags().String("stage-name", "", "The stage name.")
-	apigatewayv2_getStageCmd.MarkFlagRequired("api-id")
-	apigatewayv2_getStageCmd.MarkFlagRequired("stage-name")
+		apigatewayv2_getStageCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_getStageCmd.Flags().String("stage-name", "", "The stage name.")
+		apigatewayv2_getStageCmd.MarkFlagRequired("api-id")
+		apigatewayv2_getStageCmd.MarkFlagRequired("stage-name")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_getStageCmd)
 }

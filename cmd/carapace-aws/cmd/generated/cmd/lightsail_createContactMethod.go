@@ -12,11 +12,13 @@ var lightsail_createContactMethodCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_createContactMethodCmd).Standalone()
+	carapace.Gen(lightsail_createContactMethodCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_createContactMethodCmd).Standalone()
 
-	lightsail_createContactMethodCmd.Flags().String("contact-endpoint", "", "The destination of the contact method, such as an email address or a mobile phone number.")
-	lightsail_createContactMethodCmd.Flags().String("protocol", "", "The protocol of the contact method, such as `Email` or `SMS` (text messaging).")
-	lightsail_createContactMethodCmd.MarkFlagRequired("contact-endpoint")
-	lightsail_createContactMethodCmd.MarkFlagRequired("protocol")
+		lightsail_createContactMethodCmd.Flags().String("contact-endpoint", "", "The destination of the contact method, such as an email address or a mobile phone number.")
+		lightsail_createContactMethodCmd.Flags().String("protocol", "", "The protocol of the contact method, such as `Email` or `SMS` (text messaging).")
+		lightsail_createContactMethodCmd.MarkFlagRequired("contact-endpoint")
+		lightsail_createContactMethodCmd.MarkFlagRequired("protocol")
+	})
 	lightsailCmd.AddCommand(lightsail_createContactMethodCmd)
 }

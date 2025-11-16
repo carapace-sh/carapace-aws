@@ -12,7 +12,9 @@ var lightsailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsailCmd).Standalone()
+	carapace.Gen(lightsailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsailCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(lightsailCmd)
 }

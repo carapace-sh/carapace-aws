@@ -12,9 +12,11 @@ var sesv2_listConfigurationSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listConfigurationSetsCmd).Standalone()
+	carapace.Gen(sesv2_listConfigurationSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listConfigurationSetsCmd).Standalone()
 
-	sesv2_listConfigurationSetsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListConfigurationSets` to indicate the position in the list of configuration sets.")
-	sesv2_listConfigurationSetsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListConfigurationSets`.")
+		sesv2_listConfigurationSetsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListConfigurationSets` to indicate the position in the list of configuration sets.")
+		sesv2_listConfigurationSetsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListConfigurationSets`.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listConfigurationSetsCmd)
 }

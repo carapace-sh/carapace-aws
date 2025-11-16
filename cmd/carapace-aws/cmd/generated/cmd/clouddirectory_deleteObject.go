@@ -12,11 +12,13 @@ var clouddirectory_deleteObjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_deleteObjectCmd).Standalone()
+	carapace.Gen(clouddirectory_deleteObjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_deleteObjectCmd).Standalone()
 
-	clouddirectory_deleteObjectCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.")
-	clouddirectory_deleteObjectCmd.Flags().String("object-reference", "", "A reference that identifies the object.")
-	clouddirectory_deleteObjectCmd.MarkFlagRequired("directory-arn")
-	clouddirectory_deleteObjectCmd.MarkFlagRequired("object-reference")
+		clouddirectory_deleteObjectCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]() where the object resides.")
+		clouddirectory_deleteObjectCmd.Flags().String("object-reference", "", "A reference that identifies the object.")
+		clouddirectory_deleteObjectCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_deleteObjectCmd.MarkFlagRequired("object-reference")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_deleteObjectCmd)
 }

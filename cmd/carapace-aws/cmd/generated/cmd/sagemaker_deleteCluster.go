@@ -12,9 +12,11 @@ var sagemaker_deleteClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteClusterCmd).Standalone()
+	carapace.Gen(sagemaker_deleteClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteClusterCmd).Standalone()
 
-	sagemaker_deleteClusterCmd.Flags().String("cluster-name", "", "The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster to delete.")
-	sagemaker_deleteClusterCmd.MarkFlagRequired("cluster-name")
+		sagemaker_deleteClusterCmd.Flags().String("cluster-name", "", "The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster to delete.")
+		sagemaker_deleteClusterCmd.MarkFlagRequired("cluster-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteClusterCmd)
 }

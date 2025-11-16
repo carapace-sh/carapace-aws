@@ -12,13 +12,15 @@ var connect_updateContactScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateContactScheduleCmd).Standalone()
+	carapace.Gen(connect_updateContactScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateContactScheduleCmd).Standalone()
 
-	connect_updateContactScheduleCmd.Flags().String("contact-id", "", "The identifier of the contact.")
-	connect_updateContactScheduleCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateContactScheduleCmd.Flags().String("scheduled-time", "", "The timestamp, in Unix Epoch seconds format, at which to start running the inbound flow.")
-	connect_updateContactScheduleCmd.MarkFlagRequired("contact-id")
-	connect_updateContactScheduleCmd.MarkFlagRequired("instance-id")
-	connect_updateContactScheduleCmd.MarkFlagRequired("scheduled-time")
+		connect_updateContactScheduleCmd.Flags().String("contact-id", "", "The identifier of the contact.")
+		connect_updateContactScheduleCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateContactScheduleCmd.Flags().String("scheduled-time", "", "The timestamp, in Unix Epoch seconds format, at which to start running the inbound flow.")
+		connect_updateContactScheduleCmd.MarkFlagRequired("contact-id")
+		connect_updateContactScheduleCmd.MarkFlagRequired("instance-id")
+		connect_updateContactScheduleCmd.MarkFlagRequired("scheduled-time")
+	})
 	connectCmd.AddCommand(connect_updateContactScheduleCmd)
 }

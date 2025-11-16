@@ -12,13 +12,15 @@ var repostspace_updateSpaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_updateSpaceCmd).Standalone()
+	carapace.Gen(repostspace_updateSpaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_updateSpaceCmd).Standalone()
 
-	repostspace_updateSpaceCmd.Flags().String("description", "", "A description for the private re:Post.")
-	repostspace_updateSpaceCmd.Flags().String("role-arn", "", "The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.")
-	repostspace_updateSpaceCmd.Flags().String("space-id", "", "The unique ID of this private re:Post.")
-	repostspace_updateSpaceCmd.Flags().String("supported-email-domains", "", "")
-	repostspace_updateSpaceCmd.Flags().String("tier", "", "The pricing tier of this private re:Post.")
-	repostspace_updateSpaceCmd.MarkFlagRequired("space-id")
+		repostspace_updateSpaceCmd.Flags().String("description", "", "A description for the private re:Post.")
+		repostspace_updateSpaceCmd.Flags().String("role-arn", "", "The IAM role that grants permissions to the private re:Post to convert unanswered questions into AWS support tickets.")
+		repostspace_updateSpaceCmd.Flags().String("space-id", "", "The unique ID of this private re:Post.")
+		repostspace_updateSpaceCmd.Flags().String("supported-email-domains", "", "")
+		repostspace_updateSpaceCmd.Flags().String("tier", "", "The pricing tier of this private re:Post.")
+		repostspace_updateSpaceCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_updateSpaceCmd)
 }

@@ -12,11 +12,13 @@ var datapipeline_addTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_addTagsCmd).Standalone()
+	carapace.Gen(datapipeline_addTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_addTagsCmd).Standalone()
 
-	datapipeline_addTagsCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
-	datapipeline_addTagsCmd.Flags().String("tags", "", "The tags to add, as key/value pairs.")
-	datapipeline_addTagsCmd.MarkFlagRequired("pipeline-id")
-	datapipeline_addTagsCmd.MarkFlagRequired("tags")
+		datapipeline_addTagsCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
+		datapipeline_addTagsCmd.Flags().String("tags", "", "The tags to add, as key/value pairs.")
+		datapipeline_addTagsCmd.MarkFlagRequired("pipeline-id")
+		datapipeline_addTagsCmd.MarkFlagRequired("tags")
+	})
 	datapipelineCmd.AddCommand(datapipeline_addTagsCmd)
 }

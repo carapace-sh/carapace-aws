@@ -12,11 +12,13 @@ var customerProfiles_listProfileAttributeValuesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_listProfileAttributeValuesCmd).Standalone()
+	carapace.Gen(customerProfiles_listProfileAttributeValuesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_listProfileAttributeValuesCmd).Standalone()
 
-	customerProfiles_listProfileAttributeValuesCmd.Flags().String("attribute-name", "", "The attribute name.")
-	customerProfiles_listProfileAttributeValuesCmd.Flags().String("domain-name", "", "The unique identifier of the domain.")
-	customerProfiles_listProfileAttributeValuesCmd.MarkFlagRequired("attribute-name")
-	customerProfiles_listProfileAttributeValuesCmd.MarkFlagRequired("domain-name")
+		customerProfiles_listProfileAttributeValuesCmd.Flags().String("attribute-name", "", "The attribute name.")
+		customerProfiles_listProfileAttributeValuesCmd.Flags().String("domain-name", "", "The unique identifier of the domain.")
+		customerProfiles_listProfileAttributeValuesCmd.MarkFlagRequired("attribute-name")
+		customerProfiles_listProfileAttributeValuesCmd.MarkFlagRequired("domain-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_listProfileAttributeValuesCmd)
 }

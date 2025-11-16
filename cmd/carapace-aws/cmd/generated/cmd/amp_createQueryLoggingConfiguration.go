@@ -12,12 +12,14 @@ var amp_createQueryLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_createQueryLoggingConfigurationCmd).Standalone()
+	carapace.Gen(amp_createQueryLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_createQueryLoggingConfigurationCmd).Standalone()
 
-	amp_createQueryLoggingConfigurationCmd.Flags().String("client-token", "", "(Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	amp_createQueryLoggingConfigurationCmd.Flags().String("destinations", "", "The destinations where query logs will be sent.")
-	amp_createQueryLoggingConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace for which to create the query logging configuration.")
-	amp_createQueryLoggingConfigurationCmd.MarkFlagRequired("destinations")
-	amp_createQueryLoggingConfigurationCmd.MarkFlagRequired("workspace-id")
+		amp_createQueryLoggingConfigurationCmd.Flags().String("client-token", "", "(Optional) A unique, case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		amp_createQueryLoggingConfigurationCmd.Flags().String("destinations", "", "The destinations where query logs will be sent.")
+		amp_createQueryLoggingConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace for which to create the query logging configuration.")
+		amp_createQueryLoggingConfigurationCmd.MarkFlagRequired("destinations")
+		amp_createQueryLoggingConfigurationCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_createQueryLoggingConfigurationCmd)
 }

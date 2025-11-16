@@ -12,9 +12,11 @@ var sagemaker_listPartnerAppsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_listPartnerAppsCmd).Standalone()
+	carapace.Gen(sagemaker_listPartnerAppsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_listPartnerAppsCmd).Standalone()
 
-	sagemaker_listPartnerAppsCmd.Flags().String("max-results", "", "This parameter defines the maximum number of results that can be returned in a single response.")
-	sagemaker_listPartnerAppsCmd.Flags().String("next-token", "", "If the previous response was truncated, you will receive this token.")
+		sagemaker_listPartnerAppsCmd.Flags().String("max-results", "", "This parameter defines the maximum number of results that can be returned in a single response.")
+		sagemaker_listPartnerAppsCmd.Flags().String("next-token", "", "If the previous response was truncated, you will receive this token.")
+	})
 	sagemakerCmd.AddCommand(sagemaker_listPartnerAppsCmd)
 }

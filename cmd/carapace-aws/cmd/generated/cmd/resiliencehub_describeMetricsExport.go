@@ -12,9 +12,11 @@ var resiliencehub_describeMetricsExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_describeMetricsExportCmd).Standalone()
+	carapace.Gen(resiliencehub_describeMetricsExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_describeMetricsExportCmd).Standalone()
 
-	resiliencehub_describeMetricsExportCmd.Flags().String("metrics-export-id", "", "Identifier of the metrics export task.")
-	resiliencehub_describeMetricsExportCmd.MarkFlagRequired("metrics-export-id")
+		resiliencehub_describeMetricsExportCmd.Flags().String("metrics-export-id", "", "Identifier of the metrics export task.")
+		resiliencehub_describeMetricsExportCmd.MarkFlagRequired("metrics-export-id")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_describeMetricsExportCmd)
 }

@@ -12,10 +12,12 @@ var lexv2Models_listTestSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_listTestSetsCmd).Standalone()
+	carapace.Gen(lexv2Models_listTestSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_listTestSetsCmd).Standalone()
 
-	lexv2Models_listTestSetsCmd.Flags().String("max-results", "", "The maximum number of test sets to return in each page.")
-	lexv2Models_listTestSetsCmd.Flags().String("next-token", "", "If the response from the ListTestSets operation contains more results than specified in the maxResults parameter, a token is returned in the response.")
-	lexv2Models_listTestSetsCmd.Flags().String("sort-by", "", "The sort order for the list of test sets.")
+		lexv2Models_listTestSetsCmd.Flags().String("max-results", "", "The maximum number of test sets to return in each page.")
+		lexv2Models_listTestSetsCmd.Flags().String("next-token", "", "If the response from the ListTestSets operation contains more results than specified in the maxResults parameter, a token is returned in the response.")
+		lexv2Models_listTestSetsCmd.Flags().String("sort-by", "", "The sort order for the list of test sets.")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_listTestSetsCmd)
 }

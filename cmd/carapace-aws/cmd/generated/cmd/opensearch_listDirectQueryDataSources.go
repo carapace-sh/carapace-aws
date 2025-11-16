@@ -12,8 +12,10 @@ var opensearch_listDirectQueryDataSourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_listDirectQueryDataSourcesCmd).Standalone()
+	carapace.Gen(opensearch_listDirectQueryDataSourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_listDirectQueryDataSourcesCmd).Standalone()
 
-	opensearch_listDirectQueryDataSourcesCmd.Flags().String("next-token", "", "")
+		opensearch_listDirectQueryDataSourcesCmd.Flags().String("next-token", "", "")
+	})
 	opensearchCmd.AddCommand(opensearch_listDirectQueryDataSourcesCmd)
 }

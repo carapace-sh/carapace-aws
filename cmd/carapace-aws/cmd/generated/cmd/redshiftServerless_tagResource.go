@@ -12,11 +12,13 @@ var redshiftServerless_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_tagResourceCmd).Standalone()
+	carapace.Gen(redshiftServerless_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_tagResourceCmd).Standalone()
 
-	redshiftServerless_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to tag.")
-	redshiftServerless_tagResourceCmd.Flags().String("tags", "", "The map of the key-value pairs used to tag the resource.")
-	redshiftServerless_tagResourceCmd.MarkFlagRequired("resource-arn")
-	redshiftServerless_tagResourceCmd.MarkFlagRequired("tags")
+		redshiftServerless_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to tag.")
+		redshiftServerless_tagResourceCmd.Flags().String("tags", "", "The map of the key-value pairs used to tag the resource.")
+		redshiftServerless_tagResourceCmd.MarkFlagRequired("resource-arn")
+		redshiftServerless_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_tagResourceCmd)
 }

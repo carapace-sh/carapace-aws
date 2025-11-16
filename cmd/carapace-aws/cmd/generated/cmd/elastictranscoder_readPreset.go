@@ -12,9 +12,11 @@ var elastictranscoder_readPresetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elastictranscoder_readPresetCmd).Standalone()
+	carapace.Gen(elastictranscoder_readPresetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elastictranscoder_readPresetCmd).Standalone()
 
-	elastictranscoder_readPresetCmd.Flags().String("id", "", "The identifier of the preset for which you want to get detailed information.")
-	elastictranscoder_readPresetCmd.MarkFlagRequired("id")
+		elastictranscoder_readPresetCmd.Flags().String("id", "", "The identifier of the preset for which you want to get detailed information.")
+		elastictranscoder_readPresetCmd.MarkFlagRequired("id")
+	})
 	elastictranscoderCmd.AddCommand(elastictranscoder_readPresetCmd)
 }

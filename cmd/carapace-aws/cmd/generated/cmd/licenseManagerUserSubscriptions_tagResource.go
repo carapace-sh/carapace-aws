@@ -12,11 +12,13 @@ var licenseManagerUserSubscriptions_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManagerUserSubscriptions_tagResourceCmd).Standalone()
+	carapace.Gen(licenseManagerUserSubscriptions_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerUserSubscriptions_tagResourceCmd).Standalone()
 
-	licenseManagerUserSubscriptions_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
-	licenseManagerUserSubscriptions_tagResourceCmd.Flags().String("tags", "", "The tags to apply to the specified resource.")
-	licenseManagerUserSubscriptions_tagResourceCmd.MarkFlagRequired("resource-arn")
-	licenseManagerUserSubscriptions_tagResourceCmd.MarkFlagRequired("tags")
+		licenseManagerUserSubscriptions_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
+		licenseManagerUserSubscriptions_tagResourceCmd.Flags().String("tags", "", "The tags to apply to the specified resource.")
+		licenseManagerUserSubscriptions_tagResourceCmd.MarkFlagRequired("resource-arn")
+		licenseManagerUserSubscriptions_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	licenseManagerUserSubscriptionsCmd.AddCommand(licenseManagerUserSubscriptions_tagResourceCmd)
 }

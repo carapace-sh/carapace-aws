@@ -12,11 +12,13 @@ var bedrockAgent_getAgentVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_getAgentVersionCmd).Standalone()
+	carapace.Gen(bedrockAgent_getAgentVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_getAgentVersionCmd).Standalone()
 
-	bedrockAgent_getAgentVersionCmd.Flags().String("agent-id", "", "The unique identifier of the agent.")
-	bedrockAgent_getAgentVersionCmd.Flags().String("agent-version", "", "The version of the agent.")
-	bedrockAgent_getAgentVersionCmd.MarkFlagRequired("agent-id")
-	bedrockAgent_getAgentVersionCmd.MarkFlagRequired("agent-version")
+		bedrockAgent_getAgentVersionCmd.Flags().String("agent-id", "", "The unique identifier of the agent.")
+		bedrockAgent_getAgentVersionCmd.Flags().String("agent-version", "", "The version of the agent.")
+		bedrockAgent_getAgentVersionCmd.MarkFlagRequired("agent-id")
+		bedrockAgent_getAgentVersionCmd.MarkFlagRequired("agent-version")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_getAgentVersionCmd)
 }

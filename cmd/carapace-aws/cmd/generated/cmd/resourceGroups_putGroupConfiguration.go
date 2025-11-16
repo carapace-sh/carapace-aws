@@ -12,9 +12,11 @@ var resourceGroups_putGroupConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceGroups_putGroupConfigurationCmd).Standalone()
+	carapace.Gen(resourceGroups_putGroupConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceGroups_putGroupConfigurationCmd).Standalone()
 
-	resourceGroups_putGroupConfigurationCmd.Flags().String("configuration", "", "The new configuration to associate with the specified group.")
-	resourceGroups_putGroupConfigurationCmd.Flags().String("group", "", "The name or Amazon resource name (ARN) of the resource group with the configuration that you want to update.")
+		resourceGroups_putGroupConfigurationCmd.Flags().String("configuration", "", "The new configuration to associate with the specified group.")
+		resourceGroups_putGroupConfigurationCmd.Flags().String("group", "", "The name or Amazon resource name (ARN) of the resource group with the configuration that you want to update.")
+	})
 	resourceGroupsCmd.AddCommand(resourceGroups_putGroupConfigurationCmd)
 }

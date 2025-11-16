@@ -12,10 +12,12 @@ var frauddetector_getVariablesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getVariablesCmd).Standalone()
+	carapace.Gen(frauddetector_getVariablesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getVariablesCmd).Standalone()
 
-	frauddetector_getVariablesCmd.Flags().String("max-results", "", "The max size per page determined for the get variable request.")
-	frauddetector_getVariablesCmd.Flags().String("name", "", "The name of the variable.")
-	frauddetector_getVariablesCmd.Flags().String("next-token", "", "The next page token of the get variable request.")
+		frauddetector_getVariablesCmd.Flags().String("max-results", "", "The max size per page determined for the get variable request.")
+		frauddetector_getVariablesCmd.Flags().String("name", "", "The name of the variable.")
+		frauddetector_getVariablesCmd.Flags().String("next-token", "", "The next page token of the get variable request.")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getVariablesCmd)
 }

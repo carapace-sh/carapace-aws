@@ -12,7 +12,9 @@ var odb_getOciOnboardingStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_getOciOnboardingStatusCmd).Standalone()
+	carapace.Gen(odb_getOciOnboardingStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_getOciOnboardingStatusCmd).Standalone()
 
+	})
 	odbCmd.AddCommand(odb_getOciOnboardingStatusCmd)
 }

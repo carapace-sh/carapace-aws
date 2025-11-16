@@ -12,11 +12,13 @@ var entityresolution_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_untagResourceCmd).Standalone()
+	carapace.Gen(entityresolution_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_untagResourceCmd).Standalone()
 
-	entityresolution_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which you want to untag.")
-	entityresolution_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
-	entityresolution_untagResourceCmd.MarkFlagRequired("resource-arn")
-	entityresolution_untagResourceCmd.MarkFlagRequired("tag-keys")
+		entityresolution_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which you want to untag.")
+		entityresolution_untagResourceCmd.Flags().String("tag-keys", "", "The list of tag keys to remove from the resource.")
+		entityresolution_untagResourceCmd.MarkFlagRequired("resource-arn")
+		entityresolution_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_untagResourceCmd)
 }

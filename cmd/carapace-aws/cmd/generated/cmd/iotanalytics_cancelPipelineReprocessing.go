@@ -12,11 +12,13 @@ var iotanalytics_cancelPipelineReprocessingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_cancelPipelineReprocessingCmd).Standalone()
+	carapace.Gen(iotanalytics_cancelPipelineReprocessingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_cancelPipelineReprocessingCmd).Standalone()
 
-	iotanalytics_cancelPipelineReprocessingCmd.Flags().String("pipeline-name", "", "The name of pipeline for which data reprocessing is canceled.")
-	iotanalytics_cancelPipelineReprocessingCmd.Flags().String("reprocessing-id", "", "The ID of the reprocessing task (returned by `StartPipelineReprocessing`).")
-	iotanalytics_cancelPipelineReprocessingCmd.MarkFlagRequired("pipeline-name")
-	iotanalytics_cancelPipelineReprocessingCmd.MarkFlagRequired("reprocessing-id")
+		iotanalytics_cancelPipelineReprocessingCmd.Flags().String("pipeline-name", "", "The name of pipeline for which data reprocessing is canceled.")
+		iotanalytics_cancelPipelineReprocessingCmd.Flags().String("reprocessing-id", "", "The ID of the reprocessing task (returned by `StartPipelineReprocessing`).")
+		iotanalytics_cancelPipelineReprocessingCmd.MarkFlagRequired("pipeline-name")
+		iotanalytics_cancelPipelineReprocessingCmd.MarkFlagRequired("reprocessing-id")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_cancelPipelineReprocessingCmd)
 }

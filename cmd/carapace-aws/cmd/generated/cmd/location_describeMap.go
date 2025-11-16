@@ -12,9 +12,11 @@ var location_describeMapCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_describeMapCmd).Standalone()
+	carapace.Gen(location_describeMapCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_describeMapCmd).Standalone()
 
-	location_describeMapCmd.Flags().String("map-name", "", "The name of the map resource.")
-	location_describeMapCmd.MarkFlagRequired("map-name")
+		location_describeMapCmd.Flags().String("map-name", "", "The name of the map resource.")
+		location_describeMapCmd.MarkFlagRequired("map-name")
+	})
 	locationCmd.AddCommand(location_describeMapCmd)
 }

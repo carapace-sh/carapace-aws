@@ -12,7 +12,9 @@ var supportApp_getAccountAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supportApp_getAccountAliasCmd).Standalone()
+	carapace.Gen(supportApp_getAccountAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supportApp_getAccountAliasCmd).Standalone()
 
+	})
 	supportAppCmd.AddCommand(supportApp_getAccountAliasCmd)
 }

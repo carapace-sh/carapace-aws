@@ -12,12 +12,14 @@ var apigateway_getResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getResourcesCmd).Standalone()
+	carapace.Gen(apigateway_getResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getResourcesCmd).Standalone()
 
-	apigateway_getResourcesCmd.Flags().String("embed", "", "A query parameter used to retrieve the specified resources embedded in the returned Resources resource in the response.")
-	apigateway_getResourcesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getResourcesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
-	apigateway_getResourcesCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getResourcesCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getResourcesCmd.Flags().String("embed", "", "A query parameter used to retrieve the specified resources embedded in the returned Resources resource in the response.")
+		apigateway_getResourcesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getResourcesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getResourcesCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getResourcesCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getResourcesCmd)
 }

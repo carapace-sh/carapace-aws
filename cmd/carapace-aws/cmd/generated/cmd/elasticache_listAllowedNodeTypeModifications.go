@@ -12,9 +12,11 @@ var elasticache_listAllowedNodeTypeModificationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_listAllowedNodeTypeModificationsCmd).Standalone()
+	carapace.Gen(elasticache_listAllowedNodeTypeModificationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_listAllowedNodeTypeModificationsCmd).Standalone()
 
-	elasticache_listAllowedNodeTypeModificationsCmd.Flags().String("cache-cluster-id", "", "The name of the cluster you want to scale up to a larger node instanced type.")
-	elasticache_listAllowedNodeTypeModificationsCmd.Flags().String("replication-group-id", "", "The name of the replication group want to scale up to a larger node type.")
+		elasticache_listAllowedNodeTypeModificationsCmd.Flags().String("cache-cluster-id", "", "The name of the cluster you want to scale up to a larger node instanced type.")
+		elasticache_listAllowedNodeTypeModificationsCmd.Flags().String("replication-group-id", "", "The name of the replication group want to scale up to a larger node type.")
+	})
 	elasticacheCmd.AddCommand(elasticache_listAllowedNodeTypeModificationsCmd)
 }

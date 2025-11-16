@@ -12,8 +12,10 @@ var es_listVpcEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_listVpcEndpointsCmd).Standalone()
+	carapace.Gen(es_listVpcEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_listVpcEndpointsCmd).Standalone()
 
-	es_listVpcEndpointsCmd.Flags().String("next-token", "", "Identifier to allow retrieval of paginated results.")
+		es_listVpcEndpointsCmd.Flags().String("next-token", "", "Identifier to allow retrieval of paginated results.")
+	})
 	esCmd.AddCommand(es_listVpcEndpointsCmd)
 }

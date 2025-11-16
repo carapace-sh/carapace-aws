@@ -12,13 +12,15 @@ var voiceId_associateFraudsterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_associateFraudsterCmd).Standalone()
+	carapace.Gen(voiceId_associateFraudsterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_associateFraudsterCmd).Standalone()
 
-	voiceId_associateFraudsterCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the fraudster.")
-	voiceId_associateFraudsterCmd.Flags().String("fraudster-id", "", "The identifier of the fraudster to be associated with the watchlist.")
-	voiceId_associateFraudsterCmd.Flags().String("watchlist-id", "", "The identifier of the watchlist you want to associate with the fraudster.")
-	voiceId_associateFraudsterCmd.MarkFlagRequired("domain-id")
-	voiceId_associateFraudsterCmd.MarkFlagRequired("fraudster-id")
-	voiceId_associateFraudsterCmd.MarkFlagRequired("watchlist-id")
+		voiceId_associateFraudsterCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the fraudster.")
+		voiceId_associateFraudsterCmd.Flags().String("fraudster-id", "", "The identifier of the fraudster to be associated with the watchlist.")
+		voiceId_associateFraudsterCmd.Flags().String("watchlist-id", "", "The identifier of the watchlist you want to associate with the fraudster.")
+		voiceId_associateFraudsterCmd.MarkFlagRequired("domain-id")
+		voiceId_associateFraudsterCmd.MarkFlagRequired("fraudster-id")
+		voiceId_associateFraudsterCmd.MarkFlagRequired("watchlist-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_associateFraudsterCmd)
 }

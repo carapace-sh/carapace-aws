@@ -12,7 +12,9 @@ var computeOptimizer_getEnrollmentStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(computeOptimizer_getEnrollmentStatusCmd).Standalone()
+	carapace.Gen(computeOptimizer_getEnrollmentStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(computeOptimizer_getEnrollmentStatusCmd).Standalone()
 
+	})
 	computeOptimizerCmd.AddCommand(computeOptimizer_getEnrollmentStatusCmd)
 }

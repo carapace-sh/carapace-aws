@@ -12,9 +12,11 @@ var iotanalytics_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_listTagsForResourceCmd).Standalone()
+	carapace.Gen(iotanalytics_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_listTagsForResourceCmd).Standalone()
 
-	iotanalytics_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource whose tags you want to list.")
-	iotanalytics_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		iotanalytics_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource whose tags you want to list.")
+		iotanalytics_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_listTagsForResourceCmd)
 }

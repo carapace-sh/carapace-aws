@@ -12,9 +12,11 @@ var ses_updateTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_updateTemplateCmd).Standalone()
+	carapace.Gen(ses_updateTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_updateTemplateCmd).Standalone()
 
-	ses_updateTemplateCmd.Flags().String("template", "", "")
-	ses_updateTemplateCmd.MarkFlagRequired("template")
+		ses_updateTemplateCmd.Flags().String("template", "", "")
+		ses_updateTemplateCmd.MarkFlagRequired("template")
+	})
 	sesCmd.AddCommand(ses_updateTemplateCmd)
 }

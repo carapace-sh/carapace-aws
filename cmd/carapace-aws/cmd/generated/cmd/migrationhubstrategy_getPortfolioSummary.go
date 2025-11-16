@@ -12,7 +12,9 @@ var migrationhubstrategy_getPortfolioSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubstrategy_getPortfolioSummaryCmd).Standalone()
+	carapace.Gen(migrationhubstrategy_getPortfolioSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubstrategy_getPortfolioSummaryCmd).Standalone()
 
+	})
 	migrationhubstrategyCmd.AddCommand(migrationhubstrategy_getPortfolioSummaryCmd)
 }

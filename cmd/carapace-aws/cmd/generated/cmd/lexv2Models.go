@@ -12,7 +12,9 @@ var lexv2ModelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2ModelsCmd).Standalone()
+	carapace.Gen(lexv2ModelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2ModelsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(lexv2ModelsCmd)
 }

@@ -12,10 +12,12 @@ var ram_deleteResourceShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ram_deleteResourceShareCmd).Standalone()
+	carapace.Gen(ram_deleteResourceShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ram_deleteResourceShareCmd).Standalone()
 
-	ram_deleteResourceShareCmd.Flags().String("client-token", "", "Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	ram_deleteResourceShareCmd.Flags().String("resource-share-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share to delete.")
-	ram_deleteResourceShareCmd.MarkFlagRequired("resource-share-arn")
+		ram_deleteResourceShareCmd.Flags().String("client-token", "", "Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		ram_deleteResourceShareCmd.Flags().String("resource-share-arn", "", "Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share to delete.")
+		ram_deleteResourceShareCmd.MarkFlagRequired("resource-share-arn")
+	})
 	ramCmd.AddCommand(ram_deleteResourceShareCmd)
 }

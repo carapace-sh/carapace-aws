@@ -12,11 +12,13 @@ var docdb_modifyGlobalClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_modifyGlobalClusterCmd).Standalone()
+	carapace.Gen(docdb_modifyGlobalClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_modifyGlobalClusterCmd).Standalone()
 
-	docdb_modifyGlobalClusterCmd.Flags().String("deletion-protection", "", "Indicates if the global cluster has deletion protection enabled.")
-	docdb_modifyGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The identifier for the global cluster being modified.")
-	docdb_modifyGlobalClusterCmd.Flags().String("new-global-cluster-identifier", "", "The new identifier for a global cluster when you modify a global cluster.")
-	docdb_modifyGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+		docdb_modifyGlobalClusterCmd.Flags().String("deletion-protection", "", "Indicates if the global cluster has deletion protection enabled.")
+		docdb_modifyGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The identifier for the global cluster being modified.")
+		docdb_modifyGlobalClusterCmd.Flags().String("new-global-cluster-identifier", "", "The new identifier for a global cluster when you modify a global cluster.")
+		docdb_modifyGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+	})
 	docdbCmd.AddCommand(docdb_modifyGlobalClusterCmd)
 }

@@ -12,9 +12,11 @@ var athena_createPresignedNotebookUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_createPresignedNotebookUrlCmd).Standalone()
+	carapace.Gen(athena_createPresignedNotebookUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_createPresignedNotebookUrlCmd).Standalone()
 
-	athena_createPresignedNotebookUrlCmd.Flags().String("session-id", "", "The session ID.")
-	athena_createPresignedNotebookUrlCmd.MarkFlagRequired("session-id")
+		athena_createPresignedNotebookUrlCmd.Flags().String("session-id", "", "The session ID.")
+		athena_createPresignedNotebookUrlCmd.MarkFlagRequired("session-id")
+	})
 	athenaCmd.AddCommand(athena_createPresignedNotebookUrlCmd)
 }

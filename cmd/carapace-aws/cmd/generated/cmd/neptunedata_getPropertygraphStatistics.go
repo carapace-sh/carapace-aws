@@ -12,7 +12,9 @@ var neptunedata_getPropertygraphStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_getPropertygraphStatisticsCmd).Standalone()
+	carapace.Gen(neptunedata_getPropertygraphStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_getPropertygraphStatisticsCmd).Standalone()
 
+	})
 	neptunedataCmd.AddCommand(neptunedata_getPropertygraphStatisticsCmd)
 }

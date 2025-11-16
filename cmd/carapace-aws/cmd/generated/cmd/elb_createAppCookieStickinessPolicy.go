@@ -12,13 +12,15 @@ var elb_createAppCookieStickinessPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_createAppCookieStickinessPolicyCmd).Standalone()
+	carapace.Gen(elb_createAppCookieStickinessPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_createAppCookieStickinessPolicyCmd).Standalone()
 
-	elb_createAppCookieStickinessPolicyCmd.Flags().String("cookie-name", "", "The name of the application cookie used for stickiness.")
-	elb_createAppCookieStickinessPolicyCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_createAppCookieStickinessPolicyCmd.Flags().String("policy-name", "", "The name of the policy being created.")
-	elb_createAppCookieStickinessPolicyCmd.MarkFlagRequired("cookie-name")
-	elb_createAppCookieStickinessPolicyCmd.MarkFlagRequired("load-balancer-name")
-	elb_createAppCookieStickinessPolicyCmd.MarkFlagRequired("policy-name")
+		elb_createAppCookieStickinessPolicyCmd.Flags().String("cookie-name", "", "The name of the application cookie used for stickiness.")
+		elb_createAppCookieStickinessPolicyCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_createAppCookieStickinessPolicyCmd.Flags().String("policy-name", "", "The name of the policy being created.")
+		elb_createAppCookieStickinessPolicyCmd.MarkFlagRequired("cookie-name")
+		elb_createAppCookieStickinessPolicyCmd.MarkFlagRequired("load-balancer-name")
+		elb_createAppCookieStickinessPolicyCmd.MarkFlagRequired("policy-name")
+	})
 	elbCmd.AddCommand(elb_createAppCookieStickinessPolicyCmd)
 }

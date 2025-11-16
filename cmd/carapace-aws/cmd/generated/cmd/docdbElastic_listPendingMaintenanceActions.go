@@ -12,9 +12,11 @@ var docdbElastic_listPendingMaintenanceActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdbElastic_listPendingMaintenanceActionsCmd).Standalone()
+	carapace.Gen(docdbElastic_listPendingMaintenanceActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdbElastic_listPendingMaintenanceActionsCmd).Standalone()
 
-	docdbElastic_listPendingMaintenanceActionsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	docdbElastic_listPendingMaintenanceActionsCmd.Flags().String("next-token", "", "An optional pagination token provided by a previous request.")
+		docdbElastic_listPendingMaintenanceActionsCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		docdbElastic_listPendingMaintenanceActionsCmd.Flags().String("next-token", "", "An optional pagination token provided by a previous request.")
+	})
 	docdbElasticCmd.AddCommand(docdbElastic_listPendingMaintenanceActionsCmd)
 }

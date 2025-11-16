@@ -12,9 +12,11 @@ var frauddetector_getDeleteEventsByEventTypeStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getDeleteEventsByEventTypeStatusCmd).Standalone()
+	carapace.Gen(frauddetector_getDeleteEventsByEventTypeStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getDeleteEventsByEventTypeStatusCmd).Standalone()
 
-	frauddetector_getDeleteEventsByEventTypeStatusCmd.Flags().String("event-type-name", "", "Name of event type for which to get the deletion status.")
-	frauddetector_getDeleteEventsByEventTypeStatusCmd.MarkFlagRequired("event-type-name")
+		frauddetector_getDeleteEventsByEventTypeStatusCmd.Flags().String("event-type-name", "", "Name of event type for which to get the deletion status.")
+		frauddetector_getDeleteEventsByEventTypeStatusCmd.MarkFlagRequired("event-type-name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getDeleteEventsByEventTypeStatusCmd)
 }

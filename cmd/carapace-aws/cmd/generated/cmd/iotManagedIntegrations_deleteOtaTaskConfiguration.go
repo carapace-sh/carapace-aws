@@ -12,9 +12,11 @@ var iotManagedIntegrations_deleteOtaTaskConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_deleteOtaTaskConfigurationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_deleteOtaTaskConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_deleteOtaTaskConfigurationCmd).Standalone()
 
-	iotManagedIntegrations_deleteOtaTaskConfigurationCmd.Flags().String("identifier", "", "The identifier of the over-the-air (OTA) task configuration.")
-	iotManagedIntegrations_deleteOtaTaskConfigurationCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_deleteOtaTaskConfigurationCmd.Flags().String("identifier", "", "The identifier of the over-the-air (OTA) task configuration.")
+		iotManagedIntegrations_deleteOtaTaskConfigurationCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_deleteOtaTaskConfigurationCmd)
 }

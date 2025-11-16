@@ -12,9 +12,11 @@ var codebuild_deleteProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_deleteProjectCmd).Standalone()
+	carapace.Gen(codebuild_deleteProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_deleteProjectCmd).Standalone()
 
-	codebuild_deleteProjectCmd.Flags().String("name", "", "The name of the build project.")
-	codebuild_deleteProjectCmd.MarkFlagRequired("name")
+		codebuild_deleteProjectCmd.Flags().String("name", "", "The name of the build project.")
+		codebuild_deleteProjectCmd.MarkFlagRequired("name")
+	})
 	codebuildCmd.AddCommand(codebuild_deleteProjectCmd)
 }

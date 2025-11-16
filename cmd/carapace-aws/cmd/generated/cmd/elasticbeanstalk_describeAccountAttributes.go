@@ -12,7 +12,9 @@ var elasticbeanstalk_describeAccountAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_describeAccountAttributesCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_describeAccountAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_describeAccountAttributesCmd).Standalone()
 
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_describeAccountAttributesCmd)
 }

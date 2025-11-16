@@ -12,9 +12,11 @@ var iotwireless_getDeviceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getDeviceProfileCmd).Standalone()
+	carapace.Gen(iotwireless_getDeviceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getDeviceProfileCmd).Standalone()
 
-	iotwireless_getDeviceProfileCmd.Flags().String("id", "", "The ID of the resource to get.")
-	iotwireless_getDeviceProfileCmd.MarkFlagRequired("id")
+		iotwireless_getDeviceProfileCmd.Flags().String("id", "", "The ID of the resource to get.")
+		iotwireless_getDeviceProfileCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getDeviceProfileCmd)
 }

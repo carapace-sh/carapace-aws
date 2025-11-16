@@ -12,11 +12,13 @@ var medialive_deleteNodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteNodeCmd).Standalone()
+	carapace.Gen(medialive_deleteNodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteNodeCmd).Standalone()
 
-	medialive_deleteNodeCmd.Flags().String("cluster-id", "", "The ID of the cluster")
-	medialive_deleteNodeCmd.Flags().String("node-id", "", "The ID of the node.")
-	medialive_deleteNodeCmd.MarkFlagRequired("cluster-id")
-	medialive_deleteNodeCmd.MarkFlagRequired("node-id")
+		medialive_deleteNodeCmd.Flags().String("cluster-id", "", "The ID of the cluster")
+		medialive_deleteNodeCmd.Flags().String("node-id", "", "The ID of the node.")
+		medialive_deleteNodeCmd.MarkFlagRequired("cluster-id")
+		medialive_deleteNodeCmd.MarkFlagRequired("node-id")
+	})
 	medialiveCmd.AddCommand(medialive_deleteNodeCmd)
 }

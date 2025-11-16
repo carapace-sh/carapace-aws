@@ -12,9 +12,11 @@ var medialive_stopInputDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_stopInputDeviceCmd).Standalone()
+	carapace.Gen(medialive_stopInputDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_stopInputDeviceCmd).Standalone()
 
-	medialive_stopInputDeviceCmd.Flags().String("input-device-id", "", "The unique ID of the input device to stop.")
-	medialive_stopInputDeviceCmd.MarkFlagRequired("input-device-id")
+		medialive_stopInputDeviceCmd.Flags().String("input-device-id", "", "The unique ID of the input device to stop.")
+		medialive_stopInputDeviceCmd.MarkFlagRequired("input-device-id")
+	})
 	medialiveCmd.AddCommand(medialive_stopInputDeviceCmd)
 }

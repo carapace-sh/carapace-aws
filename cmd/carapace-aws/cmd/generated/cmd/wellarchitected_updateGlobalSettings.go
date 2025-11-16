@@ -12,10 +12,12 @@ var wellarchitected_updateGlobalSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_updateGlobalSettingsCmd).Standalone()
+	carapace.Gen(wellarchitected_updateGlobalSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_updateGlobalSettingsCmd).Standalone()
 
-	wellarchitected_updateGlobalSettingsCmd.Flags().String("discovery-integration-status", "", "The status of discovery support settings.")
-	wellarchitected_updateGlobalSettingsCmd.Flags().String("jira-configuration", "", "The status of Jira integration settings.")
-	wellarchitected_updateGlobalSettingsCmd.Flags().String("organization-sharing-status", "", "The status of organization sharing settings.")
+		wellarchitected_updateGlobalSettingsCmd.Flags().String("discovery-integration-status", "", "The status of discovery support settings.")
+		wellarchitected_updateGlobalSettingsCmd.Flags().String("jira-configuration", "", "The status of Jira integration settings.")
+		wellarchitected_updateGlobalSettingsCmd.Flags().String("organization-sharing-status", "", "The status of organization sharing settings.")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_updateGlobalSettingsCmd)
 }

@@ -12,9 +12,11 @@ var cloudformation_describeResourceScanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeResourceScanCmd).Standalone()
+	carapace.Gen(cloudformation_describeResourceScanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeResourceScanCmd).Standalone()
 
-	cloudformation_describeResourceScanCmd.Flags().String("resource-scan-id", "", "The Amazon Resource Name (ARN) of the resource scan.")
-	cloudformation_describeResourceScanCmd.MarkFlagRequired("resource-scan-id")
+		cloudformation_describeResourceScanCmd.Flags().String("resource-scan-id", "", "The Amazon Resource Name (ARN) of the resource scan.")
+		cloudformation_describeResourceScanCmd.MarkFlagRequired("resource-scan-id")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeResourceScanCmd)
 }

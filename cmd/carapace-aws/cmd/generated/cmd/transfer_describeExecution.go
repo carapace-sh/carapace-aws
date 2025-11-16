@@ -12,11 +12,13 @@ var transfer_describeExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_describeExecutionCmd).Standalone()
+	carapace.Gen(transfer_describeExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_describeExecutionCmd).Standalone()
 
-	transfer_describeExecutionCmd.Flags().String("execution-id", "", "A unique identifier for the execution of a workflow.")
-	transfer_describeExecutionCmd.Flags().String("workflow-id", "", "A unique identifier for the workflow.")
-	transfer_describeExecutionCmd.MarkFlagRequired("execution-id")
-	transfer_describeExecutionCmd.MarkFlagRequired("workflow-id")
+		transfer_describeExecutionCmd.Flags().String("execution-id", "", "A unique identifier for the execution of a workflow.")
+		transfer_describeExecutionCmd.Flags().String("workflow-id", "", "A unique identifier for the workflow.")
+		transfer_describeExecutionCmd.MarkFlagRequired("execution-id")
+		transfer_describeExecutionCmd.MarkFlagRequired("workflow-id")
+	})
 	transferCmd.AddCommand(transfer_describeExecutionCmd)
 }

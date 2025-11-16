@@ -12,9 +12,11 @@ var securityhub_getFindingAggregatorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getFindingAggregatorCmd).Standalone()
+	carapace.Gen(securityhub_getFindingAggregatorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getFindingAggregatorCmd).Standalone()
 
-	securityhub_getFindingAggregatorCmd.Flags().String("finding-aggregator-arn", "", "The ARN of the finding aggregator to return details for.")
-	securityhub_getFindingAggregatorCmd.MarkFlagRequired("finding-aggregator-arn")
+		securityhub_getFindingAggregatorCmd.Flags().String("finding-aggregator-arn", "", "The ARN of the finding aggregator to return details for.")
+		securityhub_getFindingAggregatorCmd.MarkFlagRequired("finding-aggregator-arn")
+	})
 	securityhubCmd.AddCommand(securityhub_getFindingAggregatorCmd)
 }

@@ -12,9 +12,11 @@ var entityresolution_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_listTagsForResourceCmd).Standalone()
+	carapace.Gen(entityresolution_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_listTagsForResourceCmd).Standalone()
 
-	entityresolution_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which you want to view tags.")
-	entityresolution_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		entityresolution_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which you want to view tags.")
+		entityresolution_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_listTagsForResourceCmd)
 }

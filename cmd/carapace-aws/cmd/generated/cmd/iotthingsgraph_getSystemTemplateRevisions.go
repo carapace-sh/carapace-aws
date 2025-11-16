@@ -12,11 +12,13 @@ var iotthingsgraph_getSystemTemplateRevisionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_getSystemTemplateRevisionsCmd).Standalone()
+	carapace.Gen(iotthingsgraph_getSystemTemplateRevisionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_getSystemTemplateRevisionsCmd).Standalone()
 
-	iotthingsgraph_getSystemTemplateRevisionsCmd.Flags().String("id", "", "The ID of the system template.")
-	iotthingsgraph_getSystemTemplateRevisionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	iotthingsgraph_getSystemTemplateRevisionsCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
-	iotthingsgraph_getSystemTemplateRevisionsCmd.MarkFlagRequired("id")
+		iotthingsgraph_getSystemTemplateRevisionsCmd.Flags().String("id", "", "The ID of the system template.")
+		iotthingsgraph_getSystemTemplateRevisionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		iotthingsgraph_getSystemTemplateRevisionsCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
+		iotthingsgraph_getSystemTemplateRevisionsCmd.MarkFlagRequired("id")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_getSystemTemplateRevisionsCmd)
 }

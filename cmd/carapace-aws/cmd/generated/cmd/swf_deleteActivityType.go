@@ -12,11 +12,13 @@ var swf_deleteActivityTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_deleteActivityTypeCmd).Standalone()
+	carapace.Gen(swf_deleteActivityTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_deleteActivityTypeCmd).Standalone()
 
-	swf_deleteActivityTypeCmd.Flags().String("activity-type", "", "The activity type to delete.")
-	swf_deleteActivityTypeCmd.Flags().String("domain", "", "The name of the domain in which the activity type is registered.")
-	swf_deleteActivityTypeCmd.MarkFlagRequired("activity-type")
-	swf_deleteActivityTypeCmd.MarkFlagRequired("domain")
+		swf_deleteActivityTypeCmd.Flags().String("activity-type", "", "The activity type to delete.")
+		swf_deleteActivityTypeCmd.Flags().String("domain", "", "The name of the domain in which the activity type is registered.")
+		swf_deleteActivityTypeCmd.MarkFlagRequired("activity-type")
+		swf_deleteActivityTypeCmd.MarkFlagRequired("domain")
+	})
 	swfCmd.AddCommand(swf_deleteActivityTypeCmd)
 }

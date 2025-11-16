@@ -12,10 +12,12 @@ var odb_updateCloudExadataInfrastructureCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_updateCloudExadataInfrastructureCmd).Standalone()
+	carapace.Gen(odb_updateCloudExadataInfrastructureCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_updateCloudExadataInfrastructureCmd).Standalone()
 
-	odb_updateCloudExadataInfrastructureCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Exadata infrastructure to update.")
-	odb_updateCloudExadataInfrastructureCmd.Flags().String("maintenance-window", "", "")
-	odb_updateCloudExadataInfrastructureCmd.MarkFlagRequired("cloud-exadata-infrastructure-id")
+		odb_updateCloudExadataInfrastructureCmd.Flags().String("cloud-exadata-infrastructure-id", "", "The unique identifier of the Exadata infrastructure to update.")
+		odb_updateCloudExadataInfrastructureCmd.Flags().String("maintenance-window", "", "")
+		odb_updateCloudExadataInfrastructureCmd.MarkFlagRequired("cloud-exadata-infrastructure-id")
+	})
 	odbCmd.AddCommand(odb_updateCloudExadataInfrastructureCmd)
 }

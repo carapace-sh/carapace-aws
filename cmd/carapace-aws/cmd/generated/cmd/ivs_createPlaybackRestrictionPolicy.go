@@ -12,12 +12,14 @@ var ivs_createPlaybackRestrictionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_createPlaybackRestrictionPolicyCmd).Standalone()
+	carapace.Gen(ivs_createPlaybackRestrictionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_createPlaybackRestrictionPolicyCmd).Standalone()
 
-	ivs_createPlaybackRestrictionPolicyCmd.Flags().String("allowed-countries", "", "A list of country codes that control geoblocking restriction.")
-	ivs_createPlaybackRestrictionPolicyCmd.Flags().String("allowed-origins", "", "A list of origin sites that control CORS restriction.")
-	ivs_createPlaybackRestrictionPolicyCmd.Flags().String("enable-strict-origin-enforcement", "", "Whether channel playback is constrained by origin site.")
-	ivs_createPlaybackRestrictionPolicyCmd.Flags().String("name", "", "Playback-restriction-policy name.")
-	ivs_createPlaybackRestrictionPolicyCmd.Flags().String("tags", "", "Array of 1-50 maps, each of the form `string:string (key:value)`.")
+		ivs_createPlaybackRestrictionPolicyCmd.Flags().String("allowed-countries", "", "A list of country codes that control geoblocking restriction.")
+		ivs_createPlaybackRestrictionPolicyCmd.Flags().String("allowed-origins", "", "A list of origin sites that control CORS restriction.")
+		ivs_createPlaybackRestrictionPolicyCmd.Flags().String("enable-strict-origin-enforcement", "", "Whether channel playback is constrained by origin site.")
+		ivs_createPlaybackRestrictionPolicyCmd.Flags().String("name", "", "Playback-restriction-policy name.")
+		ivs_createPlaybackRestrictionPolicyCmd.Flags().String("tags", "", "Array of 1-50 maps, each of the form `string:string (key:value)`.")
+	})
 	ivsCmd.AddCommand(ivs_createPlaybackRestrictionPolicyCmd)
 }

@@ -12,10 +12,12 @@ var securityhub_listSecurityControlDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_listSecurityControlDefinitionsCmd).Standalone()
+	carapace.Gen(securityhub_listSecurityControlDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_listSecurityControlDefinitionsCmd).Standalone()
 
-	securityhub_listSecurityControlDefinitionsCmd.Flags().String("max-results", "", "An optional parameter that limits the total results of the API response to the specified number.")
-	securityhub_listSecurityControlDefinitionsCmd.Flags().String("next-token", "", "Optional pagination parameter.")
-	securityhub_listSecurityControlDefinitionsCmd.Flags().String("standards-arn", "", "The Amazon Resource Name (ARN) of the standard that you want to view controls for.")
+		securityhub_listSecurityControlDefinitionsCmd.Flags().String("max-results", "", "An optional parameter that limits the total results of the API response to the specified number.")
+		securityhub_listSecurityControlDefinitionsCmd.Flags().String("next-token", "", "Optional pagination parameter.")
+		securityhub_listSecurityControlDefinitionsCmd.Flags().String("standards-arn", "", "The Amazon Resource Name (ARN) of the standard that you want to view controls for.")
+	})
 	securityhubCmd.AddCommand(securityhub_listSecurityControlDefinitionsCmd)
 }

@@ -12,9 +12,11 @@ var greengrass_getResourceDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getResourceDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_getResourceDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getResourceDefinitionCmd).Standalone()
 
-	greengrass_getResourceDefinitionCmd.Flags().String("resource-definition-id", "", "The ID of the resource definition.")
-	greengrass_getResourceDefinitionCmd.MarkFlagRequired("resource-definition-id")
+		greengrass_getResourceDefinitionCmd.Flags().String("resource-definition-id", "", "The ID of the resource definition.")
+		greengrass_getResourceDefinitionCmd.MarkFlagRequired("resource-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getResourceDefinitionCmd)
 }

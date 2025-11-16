@@ -12,9 +12,11 @@ var pinpoint_deleteApnsChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteApnsChannelCmd).Standalone()
+	carapace.Gen(pinpoint_deleteApnsChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteApnsChannelCmd).Standalone()
 
-	pinpoint_deleteApnsChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_deleteApnsChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_deleteApnsChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_deleteApnsChannelCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteApnsChannelCmd)
 }

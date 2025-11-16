@@ -12,12 +12,14 @@ var connect_listAgentStatusesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listAgentStatusesCmd).Standalone()
+	carapace.Gen(connect_listAgentStatusesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listAgentStatusesCmd).Standalone()
 
-	connect_listAgentStatusesCmd.Flags().String("agent-status-types", "", "Available agent status types.")
-	connect_listAgentStatusesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listAgentStatusesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listAgentStatusesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listAgentStatusesCmd.MarkFlagRequired("instance-id")
+		connect_listAgentStatusesCmd.Flags().String("agent-status-types", "", "Available agent status types.")
+		connect_listAgentStatusesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listAgentStatusesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listAgentStatusesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listAgentStatusesCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listAgentStatusesCmd)
 }

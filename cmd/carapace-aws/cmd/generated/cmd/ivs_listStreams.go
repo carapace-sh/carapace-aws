@@ -12,10 +12,12 @@ var ivs_listStreamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_listStreamsCmd).Standalone()
+	carapace.Gen(ivs_listStreamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_listStreamsCmd).Standalone()
 
-	ivs_listStreamsCmd.Flags().String("filter-by", "", "Filters the stream list to match the specified criterion.")
-	ivs_listStreamsCmd.Flags().String("max-results", "", "Maximum number of streams to return.")
-	ivs_listStreamsCmd.Flags().String("next-token", "", "The first stream to retrieve.")
+		ivs_listStreamsCmd.Flags().String("filter-by", "", "Filters the stream list to match the specified criterion.")
+		ivs_listStreamsCmd.Flags().String("max-results", "", "Maximum number of streams to return.")
+		ivs_listStreamsCmd.Flags().String("next-token", "", "The first stream to retrieve.")
+	})
 	ivsCmd.AddCommand(ivs_listStreamsCmd)
 }

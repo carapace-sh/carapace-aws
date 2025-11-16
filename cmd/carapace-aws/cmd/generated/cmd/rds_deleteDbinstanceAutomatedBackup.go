@@ -12,9 +12,11 @@ var rds_deleteDbinstanceAutomatedBackupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteDbinstanceAutomatedBackupCmd).Standalone()
+	carapace.Gen(rds_deleteDbinstanceAutomatedBackupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteDbinstanceAutomatedBackupCmd).Standalone()
 
-	rds_deleteDbinstanceAutomatedBackupCmd.Flags().String("dbi-resource-id", "", "The identifier for the source DB instance, which can't be changed and which is unique to an Amazon Web Services Region.")
-	rds_deleteDbinstanceAutomatedBackupCmd.Flags().String("dbinstance-automated-backups-arn", "", "The Amazon Resource Name (ARN) of the automated backups to delete, for example, `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.")
+		rds_deleteDbinstanceAutomatedBackupCmd.Flags().String("dbi-resource-id", "", "The identifier for the source DB instance, which can't be changed and which is unique to an Amazon Web Services Region.")
+		rds_deleteDbinstanceAutomatedBackupCmd.Flags().String("dbinstance-automated-backups-arn", "", "The Amazon Resource Name (ARN) of the automated backups to delete, for example, `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.")
+	})
 	rdsCmd.AddCommand(rds_deleteDbinstanceAutomatedBackupCmd)
 }

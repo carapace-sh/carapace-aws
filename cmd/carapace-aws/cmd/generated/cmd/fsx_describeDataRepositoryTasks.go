@@ -12,11 +12,13 @@ var fsx_describeDataRepositoryTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_describeDataRepositoryTasksCmd).Standalone()
+	carapace.Gen(fsx_describeDataRepositoryTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_describeDataRepositoryTasksCmd).Standalone()
 
-	fsx_describeDataRepositoryTasksCmd.Flags().String("filters", "", "(Optional) You can use filters to narrow the `DescribeDataRepositoryTasks` response to include just tasks for specific file systems, or tasks in a specific lifecycle state.")
-	fsx_describeDataRepositoryTasksCmd.Flags().String("max-results", "", "")
-	fsx_describeDataRepositoryTasksCmd.Flags().String("next-token", "", "")
-	fsx_describeDataRepositoryTasksCmd.Flags().String("task-ids", "", "(Optional) IDs of the tasks whose descriptions you want to retrieve (String).")
+		fsx_describeDataRepositoryTasksCmd.Flags().String("filters", "", "(Optional) You can use filters to narrow the `DescribeDataRepositoryTasks` response to include just tasks for specific file systems, or tasks in a specific lifecycle state.")
+		fsx_describeDataRepositoryTasksCmd.Flags().String("max-results", "", "")
+		fsx_describeDataRepositoryTasksCmd.Flags().String("next-token", "", "")
+		fsx_describeDataRepositoryTasksCmd.Flags().String("task-ids", "", "(Optional) IDs of the tasks whose descriptions you want to retrieve (String).")
+	})
 	fsxCmd.AddCommand(fsx_describeDataRepositoryTasksCmd)
 }

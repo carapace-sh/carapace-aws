@@ -12,15 +12,17 @@ var ec2_purchaseCapacityBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_purchaseCapacityBlockCmd).Standalone()
+	carapace.Gen(ec2_purchaseCapacityBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_purchaseCapacityBlockCmd).Standalone()
 
-	ec2_purchaseCapacityBlockCmd.Flags().String("capacity-block-offering-id", "", "The ID of the Capacity Block offering.")
-	ec2_purchaseCapacityBlockCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_purchaseCapacityBlockCmd.Flags().String("instance-platform", "", "The type of operating system for which to reserve capacity.")
-	ec2_purchaseCapacityBlockCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_purchaseCapacityBlockCmd.Flags().String("tag-specifications", "", "The tags to apply to the Capacity Block during launch.")
-	ec2_purchaseCapacityBlockCmd.MarkFlagRequired("capacity-block-offering-id")
-	ec2_purchaseCapacityBlockCmd.MarkFlagRequired("instance-platform")
-	ec2_purchaseCapacityBlockCmd.Flag("no-dry-run").Hidden = true
+		ec2_purchaseCapacityBlockCmd.Flags().String("capacity-block-offering-id", "", "The ID of the Capacity Block offering.")
+		ec2_purchaseCapacityBlockCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_purchaseCapacityBlockCmd.Flags().String("instance-platform", "", "The type of operating system for which to reserve capacity.")
+		ec2_purchaseCapacityBlockCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_purchaseCapacityBlockCmd.Flags().String("tag-specifications", "", "The tags to apply to the Capacity Block during launch.")
+		ec2_purchaseCapacityBlockCmd.MarkFlagRequired("capacity-block-offering-id")
+		ec2_purchaseCapacityBlockCmd.MarkFlagRequired("instance-platform")
+		ec2_purchaseCapacityBlockCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_purchaseCapacityBlockCmd)
 }

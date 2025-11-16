@@ -12,9 +12,11 @@ var omics_deleteRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_deleteRunCmd).Standalone()
+	carapace.Gen(omics_deleteRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_deleteRunCmd).Standalone()
 
-	omics_deleteRunCmd.Flags().String("id", "", "The run's ID.")
-	omics_deleteRunCmd.MarkFlagRequired("id")
+		omics_deleteRunCmd.Flags().String("id", "", "The run's ID.")
+		omics_deleteRunCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_deleteRunCmd)
 }

@@ -12,11 +12,13 @@ var medialive_updateInputSecurityGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_updateInputSecurityGroupCmd).Standalone()
+	carapace.Gen(medialive_updateInputSecurityGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_updateInputSecurityGroupCmd).Standalone()
 
-	medialive_updateInputSecurityGroupCmd.Flags().String("input-security-group-id", "", "The id of the Input Security Group to update.")
-	medialive_updateInputSecurityGroupCmd.Flags().String("tags", "", "A collection of key-value pairs.")
-	medialive_updateInputSecurityGroupCmd.Flags().String("whitelist-rules", "", "List of IPv4 CIDR addresses to whitelist")
-	medialive_updateInputSecurityGroupCmd.MarkFlagRequired("input-security-group-id")
+		medialive_updateInputSecurityGroupCmd.Flags().String("input-security-group-id", "", "The id of the Input Security Group to update.")
+		medialive_updateInputSecurityGroupCmd.Flags().String("tags", "", "A collection of key-value pairs.")
+		medialive_updateInputSecurityGroupCmd.Flags().String("whitelist-rules", "", "List of IPv4 CIDR addresses to whitelist")
+		medialive_updateInputSecurityGroupCmd.MarkFlagRequired("input-security-group-id")
+	})
 	medialiveCmd.AddCommand(medialive_updateInputSecurityGroupCmd)
 }

@@ -12,9 +12,11 @@ var grafana_describeWorkspaceConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_describeWorkspaceConfigurationCmd).Standalone()
+	carapace.Gen(grafana_describeWorkspaceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_describeWorkspaceConfigurationCmd).Standalone()
 
-	grafana_describeWorkspaceConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace to get configuration information for.")
-	grafana_describeWorkspaceConfigurationCmd.MarkFlagRequired("workspace-id")
+		grafana_describeWorkspaceConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace to get configuration information for.")
+		grafana_describeWorkspaceConfigurationCmd.MarkFlagRequired("workspace-id")
+	})
 	grafanaCmd.AddCommand(grafana_describeWorkspaceConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var dynamodb_describeContinuousBackupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeContinuousBackupsCmd).Standalone()
+	carapace.Gen(dynamodb_describeContinuousBackupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeContinuousBackupsCmd).Standalone()
 
-	dynamodb_describeContinuousBackupsCmd.Flags().String("table-name", "", "Name of the table for which the customer wants to check the continuous backups and point in time recovery settings.")
-	dynamodb_describeContinuousBackupsCmd.MarkFlagRequired("table-name")
+		dynamodb_describeContinuousBackupsCmd.Flags().String("table-name", "", "Name of the table for which the customer wants to check the continuous backups and point in time recovery settings.")
+		dynamodb_describeContinuousBackupsCmd.MarkFlagRequired("table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeContinuousBackupsCmd)
 }

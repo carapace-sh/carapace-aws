@@ -12,11 +12,13 @@ var databrew_updateRecipeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_updateRecipeCmd).Standalone()
+	carapace.Gen(databrew_updateRecipeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_updateRecipeCmd).Standalone()
 
-	databrew_updateRecipeCmd.Flags().String("description", "", "A description of the recipe.")
-	databrew_updateRecipeCmd.Flags().String("name", "", "The name of the recipe to be updated.")
-	databrew_updateRecipeCmd.Flags().String("steps", "", "One or more steps to be performed by the recipe.")
-	databrew_updateRecipeCmd.MarkFlagRequired("name")
+		databrew_updateRecipeCmd.Flags().String("description", "", "A description of the recipe.")
+		databrew_updateRecipeCmd.Flags().String("name", "", "The name of the recipe to be updated.")
+		databrew_updateRecipeCmd.Flags().String("steps", "", "One or more steps to be performed by the recipe.")
+		databrew_updateRecipeCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_updateRecipeCmd)
 }

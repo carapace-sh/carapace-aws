@@ -12,11 +12,13 @@ var ssmQuicksetup_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmQuicksetup_untagResourceCmd).Standalone()
+	carapace.Gen(ssmQuicksetup_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmQuicksetup_untagResourceCmd).Standalone()
 
-	ssmQuicksetup_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to remove tags from.")
-	ssmQuicksetup_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to remove from the resource.")
-	ssmQuicksetup_untagResourceCmd.MarkFlagRequired("resource-arn")
-	ssmQuicksetup_untagResourceCmd.MarkFlagRequired("tag-keys")
+		ssmQuicksetup_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to remove tags from.")
+		ssmQuicksetup_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to remove from the resource.")
+		ssmQuicksetup_untagResourceCmd.MarkFlagRequired("resource-arn")
+		ssmQuicksetup_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	ssmQuicksetupCmd.AddCommand(ssmQuicksetup_untagResourceCmd)
 }

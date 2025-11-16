@@ -12,9 +12,11 @@ var bcmPricingCalculator_getBillScenarioCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_getBillScenarioCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_getBillScenarioCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_getBillScenarioCmd).Standalone()
 
-	bcmPricingCalculator_getBillScenarioCmd.Flags().String("identifier", "", "The unique identifier of the bill scenario to retrieve.")
-	bcmPricingCalculator_getBillScenarioCmd.MarkFlagRequired("identifier")
+		bcmPricingCalculator_getBillScenarioCmd.Flags().String("identifier", "", "The unique identifier of the bill scenario to retrieve.")
+		bcmPricingCalculator_getBillScenarioCmd.MarkFlagRequired("identifier")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_getBillScenarioCmd)
 }

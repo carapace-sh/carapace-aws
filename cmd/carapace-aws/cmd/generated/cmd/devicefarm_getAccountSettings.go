@@ -12,7 +12,9 @@ var devicefarm_getAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_getAccountSettingsCmd).Standalone()
+	carapace.Gen(devicefarm_getAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_getAccountSettingsCmd).Standalone()
 
+	})
 	devicefarmCmd.AddCommand(devicefarm_getAccountSettingsCmd)
 }

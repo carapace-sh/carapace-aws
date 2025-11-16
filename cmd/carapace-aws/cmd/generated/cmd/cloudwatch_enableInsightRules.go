@@ -12,9 +12,11 @@ var cloudwatch_enableInsightRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_enableInsightRulesCmd).Standalone()
+	carapace.Gen(cloudwatch_enableInsightRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_enableInsightRulesCmd).Standalone()
 
-	cloudwatch_enableInsightRulesCmd.Flags().String("rule-names", "", "An array of the rule names to enable.")
-	cloudwatch_enableInsightRulesCmd.MarkFlagRequired("rule-names")
+		cloudwatch_enableInsightRulesCmd.Flags().String("rule-names", "", "An array of the rule names to enable.")
+		cloudwatch_enableInsightRulesCmd.MarkFlagRequired("rule-names")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_enableInsightRulesCmd)
 }

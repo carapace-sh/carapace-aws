@@ -12,13 +12,15 @@ var kendra_disassociateEntitiesFromExperienceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_disassociateEntitiesFromExperienceCmd).Standalone()
+	carapace.Gen(kendra_disassociateEntitiesFromExperienceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_disassociateEntitiesFromExperienceCmd).Standalone()
 
-	kendra_disassociateEntitiesFromExperienceCmd.Flags().String("entity-list", "", "Lists users or groups in your IAM Identity Center identity source.")
-	kendra_disassociateEntitiesFromExperienceCmd.Flags().String("id", "", "The identifier of your Amazon Kendra experience.")
-	kendra_disassociateEntitiesFromExperienceCmd.Flags().String("index-id", "", "The identifier of the index for your Amazon Kendra experience.")
-	kendra_disassociateEntitiesFromExperienceCmd.MarkFlagRequired("entity-list")
-	kendra_disassociateEntitiesFromExperienceCmd.MarkFlagRequired("id")
-	kendra_disassociateEntitiesFromExperienceCmd.MarkFlagRequired("index-id")
+		kendra_disassociateEntitiesFromExperienceCmd.Flags().String("entity-list", "", "Lists users or groups in your IAM Identity Center identity source.")
+		kendra_disassociateEntitiesFromExperienceCmd.Flags().String("id", "", "The identifier of your Amazon Kendra experience.")
+		kendra_disassociateEntitiesFromExperienceCmd.Flags().String("index-id", "", "The identifier of the index for your Amazon Kendra experience.")
+		kendra_disassociateEntitiesFromExperienceCmd.MarkFlagRequired("entity-list")
+		kendra_disassociateEntitiesFromExperienceCmd.MarkFlagRequired("id")
+		kendra_disassociateEntitiesFromExperienceCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_disassociateEntitiesFromExperienceCmd)
 }

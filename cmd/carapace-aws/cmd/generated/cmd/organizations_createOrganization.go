@@ -12,8 +12,10 @@ var organizations_createOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_createOrganizationCmd).Standalone()
+	carapace.Gen(organizations_createOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_createOrganizationCmd).Standalone()
 
-	organizations_createOrganizationCmd.Flags().String("feature-set", "", "Specifies the feature set supported by the new organization.")
+		organizations_createOrganizationCmd.Flags().String("feature-set", "", "Specifies the feature set supported by the new organization.")
+	})
 	organizationsCmd.AddCommand(organizations_createOrganizationCmd)
 }

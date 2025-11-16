@@ -12,12 +12,14 @@ var verifiedpermissions_getPolicyStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(verifiedpermissions_getPolicyStoreCmd).Standalone()
+	carapace.Gen(verifiedpermissions_getPolicyStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(verifiedpermissions_getPolicyStoreCmd).Standalone()
 
-	verifiedpermissions_getPolicyStoreCmd.Flags().Bool("no-tags", false, "Specifies whether to return the tags that are attached to the policy store.")
-	verifiedpermissions_getPolicyStoreCmd.Flags().String("policy-store-id", "", "Specifies the ID of the policy store that you want information about.")
-	verifiedpermissions_getPolicyStoreCmd.Flags().Bool("tags", false, "Specifies whether to return the tags that are attached to the policy store.")
-	verifiedpermissions_getPolicyStoreCmd.Flag("no-tags").Hidden = true
-	verifiedpermissions_getPolicyStoreCmd.MarkFlagRequired("policy-store-id")
+		verifiedpermissions_getPolicyStoreCmd.Flags().Bool("no-tags", false, "Specifies whether to return the tags that are attached to the policy store.")
+		verifiedpermissions_getPolicyStoreCmd.Flags().String("policy-store-id", "", "Specifies the ID of the policy store that you want information about.")
+		verifiedpermissions_getPolicyStoreCmd.Flags().Bool("tags", false, "Specifies whether to return the tags that are attached to the policy store.")
+		verifiedpermissions_getPolicyStoreCmd.Flag("no-tags").Hidden = true
+		verifiedpermissions_getPolicyStoreCmd.MarkFlagRequired("policy-store-id")
+	})
 	verifiedpermissionsCmd.AddCommand(verifiedpermissions_getPolicyStoreCmd)
 }

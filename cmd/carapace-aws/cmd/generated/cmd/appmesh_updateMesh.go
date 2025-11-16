@@ -12,11 +12,13 @@ var appmesh_updateMeshCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appmesh_updateMeshCmd).Standalone()
+	carapace.Gen(appmesh_updateMeshCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appmesh_updateMeshCmd).Standalone()
 
-	appmesh_updateMeshCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	appmesh_updateMeshCmd.Flags().String("mesh-name", "", "The name of the service mesh to update.")
-	appmesh_updateMeshCmd.Flags().String("spec", "", "The service mesh specification to apply.")
-	appmesh_updateMeshCmd.MarkFlagRequired("mesh-name")
+		appmesh_updateMeshCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		appmesh_updateMeshCmd.Flags().String("mesh-name", "", "The name of the service mesh to update.")
+		appmesh_updateMeshCmd.Flags().String("spec", "", "The service mesh specification to apply.")
+		appmesh_updateMeshCmd.MarkFlagRequired("mesh-name")
+	})
 	appmeshCmd.AddCommand(appmesh_updateMeshCmd)
 }

@@ -12,9 +12,11 @@ var ds_deleteAdassessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_deleteAdassessmentCmd).Standalone()
+	carapace.Gen(ds_deleteAdassessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_deleteAdassessmentCmd).Standalone()
 
-	ds_deleteAdassessmentCmd.Flags().String("assessment-id", "", "The unique identifier of the directory assessment to delete.")
-	ds_deleteAdassessmentCmd.MarkFlagRequired("assessment-id")
+		ds_deleteAdassessmentCmd.Flags().String("assessment-id", "", "The unique identifier of the directory assessment to delete.")
+		ds_deleteAdassessmentCmd.MarkFlagRequired("assessment-id")
+	})
 	dsCmd.AddCommand(ds_deleteAdassessmentCmd)
 }

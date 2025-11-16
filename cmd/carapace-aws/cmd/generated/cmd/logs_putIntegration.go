@@ -12,13 +12,15 @@ var logs_putIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_putIntegrationCmd).Standalone()
+	carapace.Gen(logs_putIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_putIntegrationCmd).Standalone()
 
-	logs_putIntegrationCmd.Flags().String("integration-name", "", "A name for the integration.")
-	logs_putIntegrationCmd.Flags().String("integration-type", "", "The type of integration.")
-	logs_putIntegrationCmd.Flags().String("resource-config", "", "A structure that contains configuration information for the integration that you are creating.")
-	logs_putIntegrationCmd.MarkFlagRequired("integration-name")
-	logs_putIntegrationCmd.MarkFlagRequired("integration-type")
-	logs_putIntegrationCmd.MarkFlagRequired("resource-config")
+		logs_putIntegrationCmd.Flags().String("integration-name", "", "A name for the integration.")
+		logs_putIntegrationCmd.Flags().String("integration-type", "", "The type of integration.")
+		logs_putIntegrationCmd.Flags().String("resource-config", "", "A structure that contains configuration information for the integration that you are creating.")
+		logs_putIntegrationCmd.MarkFlagRequired("integration-name")
+		logs_putIntegrationCmd.MarkFlagRequired("integration-type")
+		logs_putIntegrationCmd.MarkFlagRequired("resource-config")
+	})
 	logsCmd.AddCommand(logs_putIntegrationCmd)
 }

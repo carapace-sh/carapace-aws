@@ -12,9 +12,11 @@ var s3control_getPublicAccessBlockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_getPublicAccessBlockCmd).Standalone()
+	carapace.Gen(s3control_getPublicAccessBlockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_getPublicAccessBlockCmd).Standalone()
 
-	s3control_getPublicAccessBlockCmd.Flags().String("account-id", "", "The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to retrieve.")
-	s3control_getPublicAccessBlockCmd.MarkFlagRequired("account-id")
+		s3control_getPublicAccessBlockCmd.Flags().String("account-id", "", "The account ID for the Amazon Web Services account whose `PublicAccessBlock` configuration you want to retrieve.")
+		s3control_getPublicAccessBlockCmd.MarkFlagRequired("account-id")
+	})
 	s3controlCmd.AddCommand(s3control_getPublicAccessBlockCmd)
 }

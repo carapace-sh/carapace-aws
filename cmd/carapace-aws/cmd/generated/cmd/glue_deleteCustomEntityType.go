@@ -12,9 +12,11 @@ var glue_deleteCustomEntityTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteCustomEntityTypeCmd).Standalone()
+	carapace.Gen(glue_deleteCustomEntityTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteCustomEntityTypeCmd).Standalone()
 
-	glue_deleteCustomEntityTypeCmd.Flags().String("name", "", "The name of the custom pattern that you want to delete.")
-	glue_deleteCustomEntityTypeCmd.MarkFlagRequired("name")
+		glue_deleteCustomEntityTypeCmd.Flags().String("name", "", "The name of the custom pattern that you want to delete.")
+		glue_deleteCustomEntityTypeCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_deleteCustomEntityTypeCmd)
 }

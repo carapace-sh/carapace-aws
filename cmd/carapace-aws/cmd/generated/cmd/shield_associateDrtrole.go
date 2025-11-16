@@ -12,9 +12,11 @@ var shield_associateDrtroleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_associateDrtroleCmd).Standalone()
+	carapace.Gen(shield_associateDrtroleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_associateDrtroleCmd).Standalone()
 
-	shield_associateDrtroleCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the role the SRT will use to access your Amazon Web Services account.")
-	shield_associateDrtroleCmd.MarkFlagRequired("role-arn")
+		shield_associateDrtroleCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of the role the SRT will use to access your Amazon Web Services account.")
+		shield_associateDrtroleCmd.MarkFlagRequired("role-arn")
+	})
 	shieldCmd.AddCommand(shield_associateDrtroleCmd)
 }

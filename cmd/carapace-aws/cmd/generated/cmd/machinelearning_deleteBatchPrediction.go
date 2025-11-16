@@ -12,9 +12,11 @@ var machinelearning_deleteBatchPredictionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_deleteBatchPredictionCmd).Standalone()
+	carapace.Gen(machinelearning_deleteBatchPredictionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_deleteBatchPredictionCmd).Standalone()
 
-	machinelearning_deleteBatchPredictionCmd.Flags().String("batch-prediction-id", "", "A user-supplied ID that uniquely identifies the `BatchPrediction`.")
-	machinelearning_deleteBatchPredictionCmd.MarkFlagRequired("batch-prediction-id")
+		machinelearning_deleteBatchPredictionCmd.Flags().String("batch-prediction-id", "", "A user-supplied ID that uniquely identifies the `BatchPrediction`.")
+		machinelearning_deleteBatchPredictionCmd.MarkFlagRequired("batch-prediction-id")
+	})
 	machinelearningCmd.AddCommand(machinelearning_deleteBatchPredictionCmd)
 }

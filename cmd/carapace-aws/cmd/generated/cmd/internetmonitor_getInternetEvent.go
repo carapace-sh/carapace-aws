@@ -12,9 +12,11 @@ var internetmonitor_getInternetEventCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(internetmonitor_getInternetEventCmd).Standalone()
+	carapace.Gen(internetmonitor_getInternetEventCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(internetmonitor_getInternetEventCmd).Standalone()
 
-	internetmonitor_getInternetEventCmd.Flags().String("event-id", "", "The `EventId` of the internet event to return information for.")
-	internetmonitor_getInternetEventCmd.MarkFlagRequired("event-id")
+		internetmonitor_getInternetEventCmd.Flags().String("event-id", "", "The `EventId` of the internet event to return information for.")
+		internetmonitor_getInternetEventCmd.MarkFlagRequired("event-id")
+	})
 	internetmonitorCmd.AddCommand(internetmonitor_getInternetEventCmd)
 }

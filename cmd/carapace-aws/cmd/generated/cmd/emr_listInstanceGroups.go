@@ -12,10 +12,12 @@ var emr_listInstanceGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_listInstanceGroupsCmd).Standalone()
+	carapace.Gen(emr_listInstanceGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_listInstanceGroupsCmd).Standalone()
 
-	emr_listInstanceGroupsCmd.Flags().String("cluster-id", "", "The identifier of the cluster for which to list the instance groups.")
-	emr_listInstanceGroupsCmd.Flags().String("marker", "", "The pagination token that indicates the next set of results to retrieve.")
-	emr_listInstanceGroupsCmd.MarkFlagRequired("cluster-id")
+		emr_listInstanceGroupsCmd.Flags().String("cluster-id", "", "The identifier of the cluster for which to list the instance groups.")
+		emr_listInstanceGroupsCmd.Flags().String("marker", "", "The pagination token that indicates the next set of results to retrieve.")
+		emr_listInstanceGroupsCmd.MarkFlagRequired("cluster-id")
+	})
 	emrCmd.AddCommand(emr_listInstanceGroupsCmd)
 }

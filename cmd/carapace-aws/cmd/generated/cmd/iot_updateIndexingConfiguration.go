@@ -12,9 +12,11 @@ var iot_updateIndexingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateIndexingConfigurationCmd).Standalone()
+	carapace.Gen(iot_updateIndexingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateIndexingConfigurationCmd).Standalone()
 
-	iot_updateIndexingConfigurationCmd.Flags().String("thing-group-indexing-configuration", "", "Thing group indexing configuration.")
-	iot_updateIndexingConfigurationCmd.Flags().String("thing-indexing-configuration", "", "Thing indexing configuration.")
+		iot_updateIndexingConfigurationCmd.Flags().String("thing-group-indexing-configuration", "", "Thing group indexing configuration.")
+		iot_updateIndexingConfigurationCmd.Flags().String("thing-indexing-configuration", "", "Thing indexing configuration.")
+	})
 	iotCmd.AddCommand(iot_updateIndexingConfigurationCmd)
 }

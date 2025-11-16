@@ -12,9 +12,11 @@ var kms_disableKeyRotationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_disableKeyRotationCmd).Standalone()
+	carapace.Gen(kms_disableKeyRotationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_disableKeyRotationCmd).Standalone()
 
-	kms_disableKeyRotationCmd.Flags().String("key-id", "", "Identifies a symmetric encryption KMS key.")
-	kms_disableKeyRotationCmd.MarkFlagRequired("key-id")
+		kms_disableKeyRotationCmd.Flags().String("key-id", "", "Identifies a symmetric encryption KMS key.")
+		kms_disableKeyRotationCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_disableKeyRotationCmd)
 }

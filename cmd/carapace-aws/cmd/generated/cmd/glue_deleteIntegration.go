@@ -12,9 +12,11 @@ var glue_deleteIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteIntegrationCmd).Standalone()
+	carapace.Gen(glue_deleteIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteIntegrationCmd).Standalone()
 
-	glue_deleteIntegrationCmd.Flags().String("integration-identifier", "", "The Amazon Resource Name (ARN) for the integration.")
-	glue_deleteIntegrationCmd.MarkFlagRequired("integration-identifier")
+		glue_deleteIntegrationCmd.Flags().String("integration-identifier", "", "The Amazon Resource Name (ARN) for the integration.")
+		glue_deleteIntegrationCmd.MarkFlagRequired("integration-identifier")
+	})
 	glueCmd.AddCommand(glue_deleteIntegrationCmd)
 }

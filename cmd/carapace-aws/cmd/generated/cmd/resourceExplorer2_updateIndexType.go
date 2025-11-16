@@ -12,11 +12,13 @@ var resourceExplorer2_updateIndexTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_updateIndexTypeCmd).Standalone()
+	carapace.Gen(resourceExplorer2_updateIndexTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_updateIndexTypeCmd).Standalone()
 
-	resourceExplorer2_updateIndexTypeCmd.Flags().String("arn", "", "The [Amazon resource name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the index that you want to update.")
-	resourceExplorer2_updateIndexTypeCmd.Flags().String("type", "", "The type of the index.")
-	resourceExplorer2_updateIndexTypeCmd.MarkFlagRequired("arn")
-	resourceExplorer2_updateIndexTypeCmd.MarkFlagRequired("type")
+		resourceExplorer2_updateIndexTypeCmd.Flags().String("arn", "", "The [Amazon resource name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the index that you want to update.")
+		resourceExplorer2_updateIndexTypeCmd.Flags().String("type", "", "The type of the index.")
+		resourceExplorer2_updateIndexTypeCmd.MarkFlagRequired("arn")
+		resourceExplorer2_updateIndexTypeCmd.MarkFlagRequired("type")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_updateIndexTypeCmd)
 }

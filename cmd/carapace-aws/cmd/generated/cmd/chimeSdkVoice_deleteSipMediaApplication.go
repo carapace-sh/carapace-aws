@@ -12,9 +12,11 @@ var chimeSdkVoice_deleteSipMediaApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteSipMediaApplicationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteSipMediaApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteSipMediaApplicationCmd).Standalone()
 
-	chimeSdkVoice_deleteSipMediaApplicationCmd.Flags().String("sip-media-application-id", "", "The SIP media application ID.")
-	chimeSdkVoice_deleteSipMediaApplicationCmd.MarkFlagRequired("sip-media-application-id")
+		chimeSdkVoice_deleteSipMediaApplicationCmd.Flags().String("sip-media-application-id", "", "The SIP media application ID.")
+		chimeSdkVoice_deleteSipMediaApplicationCmd.MarkFlagRequired("sip-media-application-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteSipMediaApplicationCmd)
 }

@@ -12,11 +12,13 @@ var elbv2_describeTargetHealthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_describeTargetHealthCmd).Standalone()
+	carapace.Gen(elbv2_describeTargetHealthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_describeTargetHealthCmd).Standalone()
 
-	elbv2_describeTargetHealthCmd.Flags().String("include", "", "Used to include anomaly detection information.")
-	elbv2_describeTargetHealthCmd.Flags().String("target-group-arn", "", "The Amazon Resource Name (ARN) of the target group.")
-	elbv2_describeTargetHealthCmd.Flags().String("targets", "", "The targets.")
-	elbv2_describeTargetHealthCmd.MarkFlagRequired("target-group-arn")
+		elbv2_describeTargetHealthCmd.Flags().String("include", "", "Used to include anomaly detection information.")
+		elbv2_describeTargetHealthCmd.Flags().String("target-group-arn", "", "The Amazon Resource Name (ARN) of the target group.")
+		elbv2_describeTargetHealthCmd.Flags().String("targets", "", "The targets.")
+		elbv2_describeTargetHealthCmd.MarkFlagRequired("target-group-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_describeTargetHealthCmd)
 }

@@ -12,13 +12,15 @@ var connect_batchGetAttachedFileMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_batchGetAttachedFileMetadataCmd).Standalone()
+	carapace.Gen(connect_batchGetAttachedFileMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_batchGetAttachedFileMetadataCmd).Standalone()
 
-	connect_batchGetAttachedFileMetadataCmd.Flags().String("associated-resource-arn", "", "The resource to which the attached file is (being) uploaded to.")
-	connect_batchGetAttachedFileMetadataCmd.Flags().String("file-ids", "", "The unique identifiers of the attached file resource.")
-	connect_batchGetAttachedFileMetadataCmd.Flags().String("instance-id", "", "The unique identifier of the Connect instance.")
-	connect_batchGetAttachedFileMetadataCmd.MarkFlagRequired("associated-resource-arn")
-	connect_batchGetAttachedFileMetadataCmd.MarkFlagRequired("file-ids")
-	connect_batchGetAttachedFileMetadataCmd.MarkFlagRequired("instance-id")
+		connect_batchGetAttachedFileMetadataCmd.Flags().String("associated-resource-arn", "", "The resource to which the attached file is (being) uploaded to.")
+		connect_batchGetAttachedFileMetadataCmd.Flags().String("file-ids", "", "The unique identifiers of the attached file resource.")
+		connect_batchGetAttachedFileMetadataCmd.Flags().String("instance-id", "", "The unique identifier of the Connect instance.")
+		connect_batchGetAttachedFileMetadataCmd.MarkFlagRequired("associated-resource-arn")
+		connect_batchGetAttachedFileMetadataCmd.MarkFlagRequired("file-ids")
+		connect_batchGetAttachedFileMetadataCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_batchGetAttachedFileMetadataCmd)
 }

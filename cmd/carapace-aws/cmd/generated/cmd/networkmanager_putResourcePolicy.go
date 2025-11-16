@@ -12,11 +12,13 @@ var networkmanager_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_putResourcePolicyCmd).Standalone()
+	carapace.Gen(networkmanager_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_putResourcePolicyCmd).Standalone()
 
-	networkmanager_putResourcePolicyCmd.Flags().String("policy-document", "", "The JSON resource policy document.")
-	networkmanager_putResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the resource policy.")
-	networkmanager_putResourcePolicyCmd.MarkFlagRequired("policy-document")
-	networkmanager_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		networkmanager_putResourcePolicyCmd.Flags().String("policy-document", "", "The JSON resource policy document.")
+		networkmanager_putResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the resource policy.")
+		networkmanager_putResourcePolicyCmd.MarkFlagRequired("policy-document")
+		networkmanager_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_putResourcePolicyCmd)
 }

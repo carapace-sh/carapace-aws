@@ -12,10 +12,12 @@ var elasticache_deleteServerlessCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_deleteServerlessCacheCmd).Standalone()
+	carapace.Gen(elasticache_deleteServerlessCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_deleteServerlessCacheCmd).Standalone()
 
-	elasticache_deleteServerlessCacheCmd.Flags().String("final-snapshot-name", "", "Name of the final snapshot to be taken before the serverless cache is deleted.")
-	elasticache_deleteServerlessCacheCmd.Flags().String("serverless-cache-name", "", "The identifier of the serverless cache to be deleted.")
-	elasticache_deleteServerlessCacheCmd.MarkFlagRequired("serverless-cache-name")
+		elasticache_deleteServerlessCacheCmd.Flags().String("final-snapshot-name", "", "Name of the final snapshot to be taken before the serverless cache is deleted.")
+		elasticache_deleteServerlessCacheCmd.Flags().String("serverless-cache-name", "", "The identifier of the serverless cache to be deleted.")
+		elasticache_deleteServerlessCacheCmd.MarkFlagRequired("serverless-cache-name")
+	})
 	elasticacheCmd.AddCommand(elasticache_deleteServerlessCacheCmd)
 }

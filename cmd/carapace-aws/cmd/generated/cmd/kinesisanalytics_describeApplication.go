@@ -12,9 +12,11 @@ var kinesisanalytics_describeApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_describeApplicationCmd).Standalone()
+	carapace.Gen(kinesisanalytics_describeApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_describeApplicationCmd).Standalone()
 
-	kinesisanalytics_describeApplicationCmd.Flags().String("application-name", "", "Name of the application.")
-	kinesisanalytics_describeApplicationCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_describeApplicationCmd.Flags().String("application-name", "", "Name of the application.")
+		kinesisanalytics_describeApplicationCmd.MarkFlagRequired("application-name")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_describeApplicationCmd)
 }

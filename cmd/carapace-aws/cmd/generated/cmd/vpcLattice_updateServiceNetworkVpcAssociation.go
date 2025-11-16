@@ -12,11 +12,13 @@ var vpcLattice_updateServiceNetworkVpcAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_updateServiceNetworkVpcAssociationCmd).Standalone()
+	carapace.Gen(vpcLattice_updateServiceNetworkVpcAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_updateServiceNetworkVpcAssociationCmd).Standalone()
 
-	vpcLattice_updateServiceNetworkVpcAssociationCmd.Flags().String("security-group-ids", "", "The IDs of the security groups.")
-	vpcLattice_updateServiceNetworkVpcAssociationCmd.Flags().String("service-network-vpc-association-identifier", "", "The ID or ARN of the association.")
-	vpcLattice_updateServiceNetworkVpcAssociationCmd.MarkFlagRequired("security-group-ids")
-	vpcLattice_updateServiceNetworkVpcAssociationCmd.MarkFlagRequired("service-network-vpc-association-identifier")
+		vpcLattice_updateServiceNetworkVpcAssociationCmd.Flags().String("security-group-ids", "", "The IDs of the security groups.")
+		vpcLattice_updateServiceNetworkVpcAssociationCmd.Flags().String("service-network-vpc-association-identifier", "", "The ID or ARN of the association.")
+		vpcLattice_updateServiceNetworkVpcAssociationCmd.MarkFlagRequired("security-group-ids")
+		vpcLattice_updateServiceNetworkVpcAssociationCmd.MarkFlagRequired("service-network-vpc-association-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_updateServiceNetworkVpcAssociationCmd)
 }

@@ -12,11 +12,13 @@ var connect_describeUserHierarchyGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeUserHierarchyGroupCmd).Standalone()
+	carapace.Gen(connect_describeUserHierarchyGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeUserHierarchyGroupCmd).Standalone()
 
-	connect_describeUserHierarchyGroupCmd.Flags().String("hierarchy-group-id", "", "The identifier of the hierarchy group.")
-	connect_describeUserHierarchyGroupCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeUserHierarchyGroupCmd.MarkFlagRequired("hierarchy-group-id")
-	connect_describeUserHierarchyGroupCmd.MarkFlagRequired("instance-id")
+		connect_describeUserHierarchyGroupCmd.Flags().String("hierarchy-group-id", "", "The identifier of the hierarchy group.")
+		connect_describeUserHierarchyGroupCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeUserHierarchyGroupCmd.MarkFlagRequired("hierarchy-group-id")
+		connect_describeUserHierarchyGroupCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_describeUserHierarchyGroupCmd)
 }

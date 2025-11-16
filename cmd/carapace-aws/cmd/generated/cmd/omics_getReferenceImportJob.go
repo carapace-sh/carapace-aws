@@ -12,11 +12,13 @@ var omics_getReferenceImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getReferenceImportJobCmd).Standalone()
+	carapace.Gen(omics_getReferenceImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getReferenceImportJobCmd).Standalone()
 
-	omics_getReferenceImportJobCmd.Flags().String("id", "", "The job's ID.")
-	omics_getReferenceImportJobCmd.Flags().String("reference-store-id", "", "The job's reference store ID.")
-	omics_getReferenceImportJobCmd.MarkFlagRequired("id")
-	omics_getReferenceImportJobCmd.MarkFlagRequired("reference-store-id")
+		omics_getReferenceImportJobCmd.Flags().String("id", "", "The job's ID.")
+		omics_getReferenceImportJobCmd.Flags().String("reference-store-id", "", "The job's reference store ID.")
+		omics_getReferenceImportJobCmd.MarkFlagRequired("id")
+		omics_getReferenceImportJobCmd.MarkFlagRequired("reference-store-id")
+	})
 	omicsCmd.AddCommand(omics_getReferenceImportJobCmd)
 }

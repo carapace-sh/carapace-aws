@@ -12,14 +12,16 @@ var elasticache_createCacheSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_createCacheSubnetGroupCmd).Standalone()
+	carapace.Gen(elasticache_createCacheSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_createCacheSubnetGroupCmd).Standalone()
 
-	elasticache_createCacheSubnetGroupCmd.Flags().String("cache-subnet-group-description", "", "A description for the cache subnet group.")
-	elasticache_createCacheSubnetGroupCmd.Flags().String("cache-subnet-group-name", "", "A name for the cache subnet group.")
-	elasticache_createCacheSubnetGroupCmd.Flags().String("subnet-ids", "", "A list of VPC subnet IDs for the cache subnet group.")
-	elasticache_createCacheSubnetGroupCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
-	elasticache_createCacheSubnetGroupCmd.MarkFlagRequired("cache-subnet-group-description")
-	elasticache_createCacheSubnetGroupCmd.MarkFlagRequired("cache-subnet-group-name")
-	elasticache_createCacheSubnetGroupCmd.MarkFlagRequired("subnet-ids")
+		elasticache_createCacheSubnetGroupCmd.Flags().String("cache-subnet-group-description", "", "A description for the cache subnet group.")
+		elasticache_createCacheSubnetGroupCmd.Flags().String("cache-subnet-group-name", "", "A name for the cache subnet group.")
+		elasticache_createCacheSubnetGroupCmd.Flags().String("subnet-ids", "", "A list of VPC subnet IDs for the cache subnet group.")
+		elasticache_createCacheSubnetGroupCmd.Flags().String("tags", "", "A list of tags to be added to this resource.")
+		elasticache_createCacheSubnetGroupCmd.MarkFlagRequired("cache-subnet-group-description")
+		elasticache_createCacheSubnetGroupCmd.MarkFlagRequired("cache-subnet-group-name")
+		elasticache_createCacheSubnetGroupCmd.MarkFlagRequired("subnet-ids")
+	})
 	elasticacheCmd.AddCommand(elasticache_createCacheSubnetGroupCmd)
 }

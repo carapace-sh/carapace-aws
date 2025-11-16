@@ -12,9 +12,11 @@ var migrationhubConfig_deleteHomeRegionControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubConfig_deleteHomeRegionControlCmd).Standalone()
+	carapace.Gen(migrationhubConfig_deleteHomeRegionControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubConfig_deleteHomeRegionControlCmd).Standalone()
 
-	migrationhubConfig_deleteHomeRegionControlCmd.Flags().String("control-id", "", "A unique identifier that's generated for each home region control.")
-	migrationhubConfig_deleteHomeRegionControlCmd.MarkFlagRequired("control-id")
+		migrationhubConfig_deleteHomeRegionControlCmd.Flags().String("control-id", "", "A unique identifier that's generated for each home region control.")
+		migrationhubConfig_deleteHomeRegionControlCmd.MarkFlagRequired("control-id")
+	})
 	migrationhubConfigCmd.AddCommand(migrationhubConfig_deleteHomeRegionControlCmd)
 }

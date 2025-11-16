@@ -12,9 +12,11 @@ var cloudtrail_getInsightSelectorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_getInsightSelectorsCmd).Standalone()
+	carapace.Gen(cloudtrail_getInsightSelectorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_getInsightSelectorsCmd).Standalone()
 
-	cloudtrail_getInsightSelectorsCmd.Flags().String("event-data-store", "", "Specifies the ARN (or ID suffix of the ARN) of the event data store for which you want to get Insights selectors.")
-	cloudtrail_getInsightSelectorsCmd.Flags().String("trail-name", "", "Specifies the name of the trail or trail ARN.")
+		cloudtrail_getInsightSelectorsCmd.Flags().String("event-data-store", "", "Specifies the ARN (or ID suffix of the ARN) of the event data store for which you want to get Insights selectors.")
+		cloudtrail_getInsightSelectorsCmd.Flags().String("trail-name", "", "Specifies the name of the trail or trail ARN.")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_getInsightSelectorsCmd)
 }

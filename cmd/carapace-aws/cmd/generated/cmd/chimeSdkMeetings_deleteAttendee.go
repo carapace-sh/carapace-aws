@@ -12,11 +12,13 @@ var chimeSdkMeetings_deleteAttendeeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMeetings_deleteAttendeeCmd).Standalone()
+	carapace.Gen(chimeSdkMeetings_deleteAttendeeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMeetings_deleteAttendeeCmd).Standalone()
 
-	chimeSdkMeetings_deleteAttendeeCmd.Flags().String("attendee-id", "", "The Amazon Chime SDK attendee ID.")
-	chimeSdkMeetings_deleteAttendeeCmd.Flags().String("meeting-id", "", "The Amazon Chime SDK meeting ID.")
-	chimeSdkMeetings_deleteAttendeeCmd.MarkFlagRequired("attendee-id")
-	chimeSdkMeetings_deleteAttendeeCmd.MarkFlagRequired("meeting-id")
+		chimeSdkMeetings_deleteAttendeeCmd.Flags().String("attendee-id", "", "The Amazon Chime SDK attendee ID.")
+		chimeSdkMeetings_deleteAttendeeCmd.Flags().String("meeting-id", "", "The Amazon Chime SDK meeting ID.")
+		chimeSdkMeetings_deleteAttendeeCmd.MarkFlagRequired("attendee-id")
+		chimeSdkMeetings_deleteAttendeeCmd.MarkFlagRequired("meeting-id")
+	})
 	chimeSdkMeetingsCmd.AddCommand(chimeSdkMeetings_deleteAttendeeCmd)
 }

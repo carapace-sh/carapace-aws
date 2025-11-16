@@ -12,11 +12,13 @@ var odb_listDbNodesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_listDbNodesCmd).Standalone()
+	carapace.Gen(odb_listDbNodesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_listDbNodesCmd).Standalone()
 
-	odb_listDbNodesCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster.")
-	odb_listDbNodesCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	odb_listDbNodesCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
-	odb_listDbNodesCmd.MarkFlagRequired("cloud-vm-cluster-id")
+		odb_listDbNodesCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster.")
+		odb_listDbNodesCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		odb_listDbNodesCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		odb_listDbNodesCmd.MarkFlagRequired("cloud-vm-cluster-id")
+	})
 	odbCmd.AddCommand(odb_listDbNodesCmd)
 }

@@ -12,10 +12,12 @@ var socialmessaging_createWhatsAppMessageTemplateMediaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(socialmessaging_createWhatsAppMessageTemplateMediaCmd).Standalone()
+	carapace.Gen(socialmessaging_createWhatsAppMessageTemplateMediaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_createWhatsAppMessageTemplateMediaCmd).Standalone()
 
-	socialmessaging_createWhatsAppMessageTemplateMediaCmd.Flags().String("id", "", "The ID of the WhatsApp Business Account associated with this media upload.")
-	socialmessaging_createWhatsAppMessageTemplateMediaCmd.Flags().String("source-s3-file", "", "")
-	socialmessaging_createWhatsAppMessageTemplateMediaCmd.MarkFlagRequired("id")
+		socialmessaging_createWhatsAppMessageTemplateMediaCmd.Flags().String("id", "", "The ID of the WhatsApp Business Account associated with this media upload.")
+		socialmessaging_createWhatsAppMessageTemplateMediaCmd.Flags().String("source-s3-file", "", "")
+		socialmessaging_createWhatsAppMessageTemplateMediaCmd.MarkFlagRequired("id")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_createWhatsAppMessageTemplateMediaCmd)
 }

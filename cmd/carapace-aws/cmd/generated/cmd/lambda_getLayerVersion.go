@@ -12,11 +12,13 @@ var lambda_getLayerVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getLayerVersionCmd).Standalone()
+	carapace.Gen(lambda_getLayerVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getLayerVersionCmd).Standalone()
 
-	lambda_getLayerVersionCmd.Flags().String("layer-name", "", "The name or Amazon Resource Name (ARN) of the layer.")
-	lambda_getLayerVersionCmd.Flags().String("version-number", "", "The version number.")
-	lambda_getLayerVersionCmd.MarkFlagRequired("layer-name")
-	lambda_getLayerVersionCmd.MarkFlagRequired("version-number")
+		lambda_getLayerVersionCmd.Flags().String("layer-name", "", "The name or Amazon Resource Name (ARN) of the layer.")
+		lambda_getLayerVersionCmd.Flags().String("version-number", "", "The version number.")
+		lambda_getLayerVersionCmd.MarkFlagRequired("layer-name")
+		lambda_getLayerVersionCmd.MarkFlagRequired("version-number")
+	})
 	lambdaCmd.AddCommand(lambda_getLayerVersionCmd)
 }

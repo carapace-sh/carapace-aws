@@ -12,12 +12,14 @@ var glue_removeSchemaVersionMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_removeSchemaVersionMetadataCmd).Standalone()
+	carapace.Gen(glue_removeSchemaVersionMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_removeSchemaVersionMetadataCmd).Standalone()
 
-	glue_removeSchemaVersionMetadataCmd.Flags().String("metadata-key-value", "", "The value of the metadata key.")
-	glue_removeSchemaVersionMetadataCmd.Flags().String("schema-id", "", "A wrapper structure that may contain the schema name and Amazon Resource Name (ARN).")
-	glue_removeSchemaVersionMetadataCmd.Flags().String("schema-version-id", "", "The unique version ID of the schema version.")
-	glue_removeSchemaVersionMetadataCmd.Flags().String("schema-version-number", "", "The version number of the schema.")
-	glue_removeSchemaVersionMetadataCmd.MarkFlagRequired("metadata-key-value")
+		glue_removeSchemaVersionMetadataCmd.Flags().String("metadata-key-value", "", "The value of the metadata key.")
+		glue_removeSchemaVersionMetadataCmd.Flags().String("schema-id", "", "A wrapper structure that may contain the schema name and Amazon Resource Name (ARN).")
+		glue_removeSchemaVersionMetadataCmd.Flags().String("schema-version-id", "", "The unique version ID of the schema version.")
+		glue_removeSchemaVersionMetadataCmd.Flags().String("schema-version-number", "", "The version number of the schema.")
+		glue_removeSchemaVersionMetadataCmd.MarkFlagRequired("metadata-key-value")
+	})
 	glueCmd.AddCommand(glue_removeSchemaVersionMetadataCmd)
 }

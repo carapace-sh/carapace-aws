@@ -12,9 +12,11 @@ var sesv2_listEmailIdentitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listEmailIdentitiesCmd).Standalone()
+	carapace.Gen(sesv2_listEmailIdentitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listEmailIdentitiesCmd).Standalone()
 
-	sesv2_listEmailIdentitiesCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListEmailIdentities` to indicate the position in the list of identities.")
-	sesv2_listEmailIdentitiesCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListEmailIdentities`.")
+		sesv2_listEmailIdentitiesCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListEmailIdentities` to indicate the position in the list of identities.")
+		sesv2_listEmailIdentitiesCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListEmailIdentities`.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listEmailIdentitiesCmd)
 }

@@ -12,9 +12,11 @@ var inspector2_disableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_disableCmd).Standalone()
+	carapace.Gen(inspector2_disableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_disableCmd).Standalone()
 
-	inspector2_disableCmd.Flags().String("account-ids", "", "An array of account IDs you want to disable Amazon Inspector scans for.")
-	inspector2_disableCmd.Flags().String("resource-types", "", "The resource scan types you want to disable.")
+		inspector2_disableCmd.Flags().String("account-ids", "", "An array of account IDs you want to disable Amazon Inspector scans for.")
+		inspector2_disableCmd.Flags().String("resource-types", "", "The resource scan types you want to disable.")
+	})
 	inspector2Cmd.AddCommand(inspector2_disableCmd)
 }

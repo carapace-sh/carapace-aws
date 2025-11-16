@@ -12,11 +12,13 @@ var auditmanager_listControlInsightsByControlDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_listControlInsightsByControlDomainCmd).Standalone()
+	carapace.Gen(auditmanager_listControlInsightsByControlDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_listControlInsightsByControlDomainCmd).Standalone()
 
-	auditmanager_listControlInsightsByControlDomainCmd.Flags().String("control-domain-id", "", "The unique identifier for the control domain.")
-	auditmanager_listControlInsightsByControlDomainCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
-	auditmanager_listControlInsightsByControlDomainCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
-	auditmanager_listControlInsightsByControlDomainCmd.MarkFlagRequired("control-domain-id")
+		auditmanager_listControlInsightsByControlDomainCmd.Flags().String("control-domain-id", "", "The unique identifier for the control domain.")
+		auditmanager_listControlInsightsByControlDomainCmd.Flags().String("max-results", "", "Represents the maximum number of results on a page or for an API request call.")
+		auditmanager_listControlInsightsByControlDomainCmd.Flags().String("next-token", "", "The pagination token that's used to fetch the next set of results.")
+		auditmanager_listControlInsightsByControlDomainCmd.MarkFlagRequired("control-domain-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_listControlInsightsByControlDomainCmd)
 }

@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_deleteApiKeyCredentialProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_deleteApiKeyCredentialProviderCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_deleteApiKeyCredentialProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_deleteApiKeyCredentialProviderCmd).Standalone()
 
-	bedrockAgentcoreControl_deleteApiKeyCredentialProviderCmd.Flags().String("name", "", "The name of the API key credential provider to delete.")
-	bedrockAgentcoreControl_deleteApiKeyCredentialProviderCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_deleteApiKeyCredentialProviderCmd.Flags().String("name", "", "The name of the API key credential provider to delete.")
+		bedrockAgentcoreControl_deleteApiKeyCredentialProviderCmd.MarkFlagRequired("name")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_deleteApiKeyCredentialProviderCmd)
 }

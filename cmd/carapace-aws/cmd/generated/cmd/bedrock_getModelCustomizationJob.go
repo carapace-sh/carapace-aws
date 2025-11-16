@@ -12,9 +12,11 @@ var bedrock_getModelCustomizationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getModelCustomizationJobCmd).Standalone()
+	carapace.Gen(bedrock_getModelCustomizationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getModelCustomizationJobCmd).Standalone()
 
-	bedrock_getModelCustomizationJobCmd.Flags().String("job-identifier", "", "Identifier for the customization job.")
-	bedrock_getModelCustomizationJobCmd.MarkFlagRequired("job-identifier")
+		bedrock_getModelCustomizationJobCmd.Flags().String("job-identifier", "", "Identifier for the customization job.")
+		bedrock_getModelCustomizationJobCmd.MarkFlagRequired("job-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_getModelCustomizationJobCmd)
 }

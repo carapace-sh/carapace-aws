@@ -12,10 +12,12 @@ var securityhub_createFindingAggregatorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_createFindingAggregatorCmd).Standalone()
+	carapace.Gen(securityhub_createFindingAggregatorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_createFindingAggregatorCmd).Standalone()
 
-	securityhub_createFindingAggregatorCmd.Flags().String("region-linking-mode", "", "Indicates whether to aggregate findings from all of the available Regions in the current partition.")
-	securityhub_createFindingAggregatorCmd.Flags().String("regions", "", "If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is a space-separated list of Regions that don't replicate and send findings to the home Region.")
-	securityhub_createFindingAggregatorCmd.MarkFlagRequired("region-linking-mode")
+		securityhub_createFindingAggregatorCmd.Flags().String("region-linking-mode", "", "Indicates whether to aggregate findings from all of the available Regions in the current partition.")
+		securityhub_createFindingAggregatorCmd.Flags().String("regions", "", "If `RegionLinkingMode` is `ALL_REGIONS_EXCEPT_SPECIFIED`, then this is a space-separated list of Regions that don't replicate and send findings to the home Region.")
+		securityhub_createFindingAggregatorCmd.MarkFlagRequired("region-linking-mode")
+	})
 	securityhubCmd.AddCommand(securityhub_createFindingAggregatorCmd)
 }

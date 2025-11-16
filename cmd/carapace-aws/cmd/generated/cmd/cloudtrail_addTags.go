@@ -12,11 +12,13 @@ var cloudtrail_addTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_addTagsCmd).Standalone()
+	carapace.Gen(cloudtrail_addTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_addTagsCmd).Standalone()
 
-	cloudtrail_addTagsCmd.Flags().String("resource-id", "", "Specifies the ARN of the trail, event data store, dashboard, or channel to which one or more tags will be added.")
-	cloudtrail_addTagsCmd.Flags().String("tags-list", "", "Contains a list of tags, up to a limit of 50")
-	cloudtrail_addTagsCmd.MarkFlagRequired("resource-id")
-	cloudtrail_addTagsCmd.MarkFlagRequired("tags-list")
+		cloudtrail_addTagsCmd.Flags().String("resource-id", "", "Specifies the ARN of the trail, event data store, dashboard, or channel to which one or more tags will be added.")
+		cloudtrail_addTagsCmd.Flags().String("tags-list", "", "Contains a list of tags, up to a limit of 50")
+		cloudtrail_addTagsCmd.MarkFlagRequired("resource-id")
+		cloudtrail_addTagsCmd.MarkFlagRequired("tags-list")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_addTagsCmd)
 }

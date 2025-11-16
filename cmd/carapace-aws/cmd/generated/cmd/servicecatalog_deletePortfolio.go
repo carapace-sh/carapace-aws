@@ -12,10 +12,12 @@ var servicecatalog_deletePortfolioCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_deletePortfolioCmd).Standalone()
+	carapace.Gen(servicecatalog_deletePortfolioCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_deletePortfolioCmd).Standalone()
 
-	servicecatalog_deletePortfolioCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_deletePortfolioCmd.Flags().String("id", "", "The portfolio identifier.")
-	servicecatalog_deletePortfolioCmd.MarkFlagRequired("id")
+		servicecatalog_deletePortfolioCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_deletePortfolioCmd.Flags().String("id", "", "The portfolio identifier.")
+		servicecatalog_deletePortfolioCmd.MarkFlagRequired("id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_deletePortfolioCmd)
 }

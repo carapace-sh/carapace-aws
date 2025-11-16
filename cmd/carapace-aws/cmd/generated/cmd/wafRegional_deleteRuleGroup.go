@@ -12,11 +12,13 @@ var wafRegional_deleteRuleGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_deleteRuleGroupCmd).Standalone()
+	carapace.Gen(wafRegional_deleteRuleGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_deleteRuleGroupCmd).Standalone()
 
-	wafRegional_deleteRuleGroupCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	wafRegional_deleteRuleGroupCmd.Flags().String("rule-group-id", "", "The `RuleGroupId` of the [RuleGroup]() that you want to delete.")
-	wafRegional_deleteRuleGroupCmd.MarkFlagRequired("change-token")
-	wafRegional_deleteRuleGroupCmd.MarkFlagRequired("rule-group-id")
+		wafRegional_deleteRuleGroupCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		wafRegional_deleteRuleGroupCmd.Flags().String("rule-group-id", "", "The `RuleGroupId` of the [RuleGroup]() that you want to delete.")
+		wafRegional_deleteRuleGroupCmd.MarkFlagRequired("change-token")
+		wafRegional_deleteRuleGroupCmd.MarkFlagRequired("rule-group-id")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_deleteRuleGroupCmd)
 }

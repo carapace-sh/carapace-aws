@@ -12,7 +12,9 @@ var pricingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pricingCmd).Standalone()
+	carapace.Gen(pricingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pricingCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(pricingCmd)
 }

@@ -12,12 +12,14 @@ var ec2_deleteTransitGatewayRouteTableAnnouncementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteTransitGatewayRouteTableAnnouncementCmd).Standalone()
+	carapace.Gen(ec2_deleteTransitGatewayRouteTableAnnouncementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteTransitGatewayRouteTableAnnouncementCmd).Standalone()
 
-	ec2_deleteTransitGatewayRouteTableAnnouncementCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteTransitGatewayRouteTableAnnouncementCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteTransitGatewayRouteTableAnnouncementCmd.Flags().String("transit-gateway-route-table-announcement-id", "", "The transit gateway route table ID that's being deleted.")
-	ec2_deleteTransitGatewayRouteTableAnnouncementCmd.Flag("no-dry-run").Hidden = true
-	ec2_deleteTransitGatewayRouteTableAnnouncementCmd.MarkFlagRequired("transit-gateway-route-table-announcement-id")
+		ec2_deleteTransitGatewayRouteTableAnnouncementCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteTransitGatewayRouteTableAnnouncementCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteTransitGatewayRouteTableAnnouncementCmd.Flags().String("transit-gateway-route-table-announcement-id", "", "The transit gateway route table ID that's being deleted.")
+		ec2_deleteTransitGatewayRouteTableAnnouncementCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteTransitGatewayRouteTableAnnouncementCmd.MarkFlagRequired("transit-gateway-route-table-announcement-id")
+	})
 	ec2Cmd.AddCommand(ec2_deleteTransitGatewayRouteTableAnnouncementCmd)
 }

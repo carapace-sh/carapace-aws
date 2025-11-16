@@ -12,11 +12,13 @@ var eks_describeNodegroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_describeNodegroupCmd).Standalone()
+	carapace.Gen(eks_describeNodegroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_describeNodegroupCmd).Standalone()
 
-	eks_describeNodegroupCmd.Flags().String("cluster-name", "", "The name of your cluster.")
-	eks_describeNodegroupCmd.Flags().String("nodegroup-name", "", "The name of the node group to describe.")
-	eks_describeNodegroupCmd.MarkFlagRequired("cluster-name")
-	eks_describeNodegroupCmd.MarkFlagRequired("nodegroup-name")
+		eks_describeNodegroupCmd.Flags().String("cluster-name", "", "The name of your cluster.")
+		eks_describeNodegroupCmd.Flags().String("nodegroup-name", "", "The name of the node group to describe.")
+		eks_describeNodegroupCmd.MarkFlagRequired("cluster-name")
+		eks_describeNodegroupCmd.MarkFlagRequired("nodegroup-name")
+	})
 	eksCmd.AddCommand(eks_describeNodegroupCmd)
 }

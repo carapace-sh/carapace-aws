@@ -12,9 +12,11 @@ var aiops_getInvestigationGroupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(aiops_getInvestigationGroupPolicyCmd).Standalone()
+	carapace.Gen(aiops_getInvestigationGroupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(aiops_getInvestigationGroupPolicyCmd).Standalone()
 
-	aiops_getInvestigationGroupPolicyCmd.Flags().String("identifier", "", "Specify either the name or the ARN of the investigation group that you want to view the policy of.")
-	aiops_getInvestigationGroupPolicyCmd.MarkFlagRequired("identifier")
+		aiops_getInvestigationGroupPolicyCmd.Flags().String("identifier", "", "Specify either the name or the ARN of the investigation group that you want to view the policy of.")
+		aiops_getInvestigationGroupPolicyCmd.MarkFlagRequired("identifier")
+	})
 	aiopsCmd.AddCommand(aiops_getInvestigationGroupPolicyCmd)
 }

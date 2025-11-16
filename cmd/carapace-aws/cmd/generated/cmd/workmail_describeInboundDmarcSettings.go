@@ -12,9 +12,11 @@ var workmail_describeInboundDmarcSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_describeInboundDmarcSettingsCmd).Standalone()
+	carapace.Gen(workmail_describeInboundDmarcSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_describeInboundDmarcSettingsCmd).Standalone()
 
-	workmail_describeInboundDmarcSettingsCmd.Flags().String("organization-id", "", "Lists the ID of the given organization.")
-	workmail_describeInboundDmarcSettingsCmd.MarkFlagRequired("organization-id")
+		workmail_describeInboundDmarcSettingsCmd.Flags().String("organization-id", "", "Lists the ID of the given organization.")
+		workmail_describeInboundDmarcSettingsCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_describeInboundDmarcSettingsCmd)
 }

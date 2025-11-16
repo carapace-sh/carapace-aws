@@ -12,9 +12,11 @@ var dms_deleteReplicationConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteReplicationConfigCmd).Standalone()
+	carapace.Gen(dms_deleteReplicationConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteReplicationConfigCmd).Standalone()
 
-	dms_deleteReplicationConfigCmd.Flags().String("replication-config-arn", "", "The replication config to delete.")
-	dms_deleteReplicationConfigCmd.MarkFlagRequired("replication-config-arn")
+		dms_deleteReplicationConfigCmd.Flags().String("replication-config-arn", "", "The replication config to delete.")
+		dms_deleteReplicationConfigCmd.MarkFlagRequired("replication-config-arn")
+	})
 	dmsCmd.AddCommand(dms_deleteReplicationConfigCmd)
 }

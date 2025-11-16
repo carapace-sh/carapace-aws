@@ -12,11 +12,13 @@ var elbv2_modifyCapacityReservationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_modifyCapacityReservationCmd).Standalone()
+	carapace.Gen(elbv2_modifyCapacityReservationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_modifyCapacityReservationCmd).Standalone()
 
-	elbv2_modifyCapacityReservationCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
-	elbv2_modifyCapacityReservationCmd.Flags().String("minimum-load-balancer-capacity", "", "The minimum load balancer capacity reserved.")
-	elbv2_modifyCapacityReservationCmd.Flags().String("reset-capacity-reservation", "", "Resets the capacity reservation.")
-	elbv2_modifyCapacityReservationCmd.MarkFlagRequired("load-balancer-arn")
+		elbv2_modifyCapacityReservationCmd.Flags().String("load-balancer-arn", "", "The Amazon Resource Name (ARN) of the load balancer.")
+		elbv2_modifyCapacityReservationCmd.Flags().String("minimum-load-balancer-capacity", "", "The minimum load balancer capacity reserved.")
+		elbv2_modifyCapacityReservationCmd.Flags().String("reset-capacity-reservation", "", "Resets the capacity reservation.")
+		elbv2_modifyCapacityReservationCmd.MarkFlagRequired("load-balancer-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_modifyCapacityReservationCmd)
 }

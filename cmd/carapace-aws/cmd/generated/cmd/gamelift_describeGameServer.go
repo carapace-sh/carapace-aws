@@ -12,11 +12,13 @@ var gamelift_describeGameServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeGameServerCmd).Standalone()
+	carapace.Gen(gamelift_describeGameServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeGameServerCmd).Standalone()
 
-	gamelift_describeGameServerCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group where the game server is running.")
-	gamelift_describeGameServerCmd.Flags().String("game-server-id", "", "A custom string that uniquely identifies the game server information to be retrieved.")
-	gamelift_describeGameServerCmd.MarkFlagRequired("game-server-group-name")
-	gamelift_describeGameServerCmd.MarkFlagRequired("game-server-id")
+		gamelift_describeGameServerCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group where the game server is running.")
+		gamelift_describeGameServerCmd.Flags().String("game-server-id", "", "A custom string that uniquely identifies the game server information to be retrieved.")
+		gamelift_describeGameServerCmd.MarkFlagRequired("game-server-group-name")
+		gamelift_describeGameServerCmd.MarkFlagRequired("game-server-id")
+	})
 	gameliftCmd.AddCommand(gamelift_describeGameServerCmd)
 }

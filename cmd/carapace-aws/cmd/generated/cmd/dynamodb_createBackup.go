@@ -12,11 +12,13 @@ var dynamodb_createBackupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_createBackupCmd).Standalone()
+	carapace.Gen(dynamodb_createBackupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_createBackupCmd).Standalone()
 
-	dynamodb_createBackupCmd.Flags().String("backup-name", "", "Specified name for the backup.")
-	dynamodb_createBackupCmd.Flags().String("table-name", "", "The name of the table.")
-	dynamodb_createBackupCmd.MarkFlagRequired("backup-name")
-	dynamodb_createBackupCmd.MarkFlagRequired("table-name")
+		dynamodb_createBackupCmd.Flags().String("backup-name", "", "Specified name for the backup.")
+		dynamodb_createBackupCmd.Flags().String("table-name", "", "The name of the table.")
+		dynamodb_createBackupCmd.MarkFlagRequired("backup-name")
+		dynamodb_createBackupCmd.MarkFlagRequired("table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_createBackupCmd)
 }

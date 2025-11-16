@@ -12,9 +12,11 @@ var acmPca_getCertificateAuthorityCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acmPca_getCertificateAuthorityCertificateCmd).Standalone()
+	carapace.Gen(acmPca_getCertificateAuthorityCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acmPca_getCertificateAuthorityCertificateCmd).Standalone()
 
-	acmPca_getCertificateAuthorityCertificateCmd.Flags().String("certificate-authority-arn", "", "The Amazon Resource Name (ARN) of your private CA.")
-	acmPca_getCertificateAuthorityCertificateCmd.MarkFlagRequired("certificate-authority-arn")
+		acmPca_getCertificateAuthorityCertificateCmd.Flags().String("certificate-authority-arn", "", "The Amazon Resource Name (ARN) of your private CA.")
+		acmPca_getCertificateAuthorityCertificateCmd.MarkFlagRequired("certificate-authority-arn")
+	})
 	acmPcaCmd.AddCommand(acmPca_getCertificateAuthorityCertificateCmd)
 }

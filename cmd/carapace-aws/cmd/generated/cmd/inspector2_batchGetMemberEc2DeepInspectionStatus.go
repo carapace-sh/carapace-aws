@@ -12,8 +12,10 @@ var inspector2_batchGetMemberEc2DeepInspectionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_batchGetMemberEc2DeepInspectionStatusCmd).Standalone()
+	carapace.Gen(inspector2_batchGetMemberEc2DeepInspectionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_batchGetMemberEc2DeepInspectionStatusCmd).Standalone()
 
-	inspector2_batchGetMemberEc2DeepInspectionStatusCmd.Flags().String("account-ids", "", "The unique identifiers for the Amazon Web Services accounts to retrieve Amazon Inspector deep inspection activation status for.")
+		inspector2_batchGetMemberEc2DeepInspectionStatusCmd.Flags().String("account-ids", "", "The unique identifiers for the Amazon Web Services accounts to retrieve Amazon Inspector deep inspection activation status for.")
+	})
 	inspector2Cmd.AddCommand(inspector2_batchGetMemberEc2DeepInspectionStatusCmd)
 }

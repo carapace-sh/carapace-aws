@@ -12,11 +12,13 @@ var appmesh_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appmesh_untagResourceCmd).Standalone()
+	carapace.Gen(appmesh_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appmesh_untagResourceCmd).Standalone()
 
-	appmesh_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to delete tags from.")
-	appmesh_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to be removed.")
-	appmesh_untagResourceCmd.MarkFlagRequired("resource-arn")
-	appmesh_untagResourceCmd.MarkFlagRequired("tag-keys")
+		appmesh_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to delete tags from.")
+		appmesh_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to be removed.")
+		appmesh_untagResourceCmd.MarkFlagRequired("resource-arn")
+		appmesh_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	appmeshCmd.AddCommand(appmesh_untagResourceCmd)
 }

@@ -12,9 +12,11 @@ var paymentCryptography_getAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_getAliasCmd).Standalone()
+	carapace.Gen(paymentCryptography_getAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_getAliasCmd).Standalone()
 
-	paymentCryptography_getAliasCmd.Flags().String("alias-name", "", "The alias of the Amazon Web Services Payment Cryptography key.")
-	paymentCryptography_getAliasCmd.MarkFlagRequired("alias-name")
+		paymentCryptography_getAliasCmd.Flags().String("alias-name", "", "The alias of the Amazon Web Services Payment Cryptography key.")
+		paymentCryptography_getAliasCmd.MarkFlagRequired("alias-name")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_getAliasCmd)
 }

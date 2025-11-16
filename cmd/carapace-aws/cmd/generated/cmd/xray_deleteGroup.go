@@ -12,9 +12,11 @@ var xray_deleteGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_deleteGroupCmd).Standalone()
+	carapace.Gen(xray_deleteGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_deleteGroupCmd).Standalone()
 
-	xray_deleteGroupCmd.Flags().String("group-arn", "", "The ARN of the group that was generated on creation.")
-	xray_deleteGroupCmd.Flags().String("group-name", "", "The case-sensitive name of the group.")
+		xray_deleteGroupCmd.Flags().String("group-arn", "", "The ARN of the group that was generated on creation.")
+		xray_deleteGroupCmd.Flags().String("group-name", "", "The case-sensitive name of the group.")
+	})
 	xrayCmd.AddCommand(xray_deleteGroupCmd)
 }

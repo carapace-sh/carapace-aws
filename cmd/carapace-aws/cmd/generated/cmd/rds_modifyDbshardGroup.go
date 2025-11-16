@@ -12,12 +12,14 @@ var rds_modifyDbshardGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_modifyDbshardGroupCmd).Standalone()
+	carapace.Gen(rds_modifyDbshardGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_modifyDbshardGroupCmd).Standalone()
 
-	rds_modifyDbshardGroupCmd.Flags().String("compute-redundancy", "", "Specifies whether to create standby DB shard groups for the DB shard group.")
-	rds_modifyDbshardGroupCmd.Flags().String("dbshard-group-identifier", "", "The name of the DB shard group to modify.")
-	rds_modifyDbshardGroupCmd.Flags().String("max-acu", "", "The maximum capacity of the DB shard group in Aurora capacity units (ACUs).")
-	rds_modifyDbshardGroupCmd.Flags().String("min-acu", "", "The minimum capacity of the DB shard group in Aurora capacity units (ACUs).")
-	rds_modifyDbshardGroupCmd.MarkFlagRequired("dbshard-group-identifier")
+		rds_modifyDbshardGroupCmd.Flags().String("compute-redundancy", "", "Specifies whether to create standby DB shard groups for the DB shard group.")
+		rds_modifyDbshardGroupCmd.Flags().String("dbshard-group-identifier", "", "The name of the DB shard group to modify.")
+		rds_modifyDbshardGroupCmd.Flags().String("max-acu", "", "The maximum capacity of the DB shard group in Aurora capacity units (ACUs).")
+		rds_modifyDbshardGroupCmd.Flags().String("min-acu", "", "The minimum capacity of the DB shard group in Aurora capacity units (ACUs).")
+		rds_modifyDbshardGroupCmd.MarkFlagRequired("dbshard-group-identifier")
+	})
 	rdsCmd.AddCommand(rds_modifyDbshardGroupCmd)
 }

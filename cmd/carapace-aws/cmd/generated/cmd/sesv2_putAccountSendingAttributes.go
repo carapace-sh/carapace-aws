@@ -12,8 +12,10 @@ var sesv2_putAccountSendingAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putAccountSendingAttributesCmd).Standalone()
+	carapace.Gen(sesv2_putAccountSendingAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putAccountSendingAttributesCmd).Standalone()
 
-	sesv2_putAccountSendingAttributesCmd.Flags().String("sending-enabled", "", "Enables or disables your account's ability to send email.")
+		sesv2_putAccountSendingAttributesCmd.Flags().String("sending-enabled", "", "Enables or disables your account's ability to send email.")
+	})
 	sesv2Cmd.AddCommand(sesv2_putAccountSendingAttributesCmd)
 }

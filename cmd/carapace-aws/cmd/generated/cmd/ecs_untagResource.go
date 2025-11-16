@@ -12,11 +12,13 @@ var ecs_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_untagResourceCmd).Standalone()
+	carapace.Gen(ecs_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_untagResourceCmd).Standalone()
 
-	ecs_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to delete tags from.")
-	ecs_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to be removed.")
-	ecs_untagResourceCmd.MarkFlagRequired("resource-arn")
-	ecs_untagResourceCmd.MarkFlagRequired("tag-keys")
+		ecs_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to delete tags from.")
+		ecs_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to be removed.")
+		ecs_untagResourceCmd.MarkFlagRequired("resource-arn")
+		ecs_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	ecsCmd.AddCommand(ecs_untagResourceCmd)
 }

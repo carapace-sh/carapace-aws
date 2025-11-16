@@ -12,11 +12,13 @@ var appsync_deleteChannelNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_deleteChannelNamespaceCmd).Standalone()
+	carapace.Gen(appsync_deleteChannelNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_deleteChannelNamespaceCmd).Standalone()
 
-	appsync_deleteChannelNamespaceCmd.Flags().String("api-id", "", "The ID of the `Api` associated with the `ChannelNamespace`.")
-	appsync_deleteChannelNamespaceCmd.Flags().String("name", "", "The name of the `ChannelNamespace`.")
-	appsync_deleteChannelNamespaceCmd.MarkFlagRequired("api-id")
-	appsync_deleteChannelNamespaceCmd.MarkFlagRequired("name")
+		appsync_deleteChannelNamespaceCmd.Flags().String("api-id", "", "The ID of the `Api` associated with the `ChannelNamespace`.")
+		appsync_deleteChannelNamespaceCmd.Flags().String("name", "", "The name of the `ChannelNamespace`.")
+		appsync_deleteChannelNamespaceCmd.MarkFlagRequired("api-id")
+		appsync_deleteChannelNamespaceCmd.MarkFlagRequired("name")
+	})
 	appsyncCmd.AddCommand(appsync_deleteChannelNamespaceCmd)
 }

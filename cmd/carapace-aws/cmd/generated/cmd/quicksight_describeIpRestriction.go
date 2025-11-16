@@ -12,9 +12,11 @@ var quicksight_describeIpRestrictionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeIpRestrictionCmd).Standalone()
+	carapace.Gen(quicksight_describeIpRestrictionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeIpRestrictionCmd).Standalone()
 
-	quicksight_describeIpRestrictionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the IP rules.")
-	quicksight_describeIpRestrictionCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeIpRestrictionCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the IP rules.")
+		quicksight_describeIpRestrictionCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeIpRestrictionCmd)
 }

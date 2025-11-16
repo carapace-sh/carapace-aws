@@ -12,9 +12,11 @@ var pinpoint_deleteApnsVoipSandboxChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_deleteApnsVoipSandboxChannelCmd).Standalone()
+	carapace.Gen(pinpoint_deleteApnsVoipSandboxChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_deleteApnsVoipSandboxChannelCmd).Standalone()
 
-	pinpoint_deleteApnsVoipSandboxChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_deleteApnsVoipSandboxChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_deleteApnsVoipSandboxChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_deleteApnsVoipSandboxChannelCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_deleteApnsVoipSandboxChannelCmd)
 }

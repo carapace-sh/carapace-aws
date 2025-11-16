@@ -12,11 +12,13 @@ var lakeformation_deleteDataCellsFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_deleteDataCellsFilterCmd).Standalone()
+	carapace.Gen(lakeformation_deleteDataCellsFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_deleteDataCellsFilterCmd).Standalone()
 
-	lakeformation_deleteDataCellsFilterCmd.Flags().String("database-name", "", "A database in the Glue Data Catalog.")
-	lakeformation_deleteDataCellsFilterCmd.Flags().String("name", "", "The name given by the user to the data filter cell.")
-	lakeformation_deleteDataCellsFilterCmd.Flags().String("table-catalog-id", "", "The ID of the catalog to which the table belongs.")
-	lakeformation_deleteDataCellsFilterCmd.Flags().String("table-name", "", "A table in the database.")
+		lakeformation_deleteDataCellsFilterCmd.Flags().String("database-name", "", "A database in the Glue Data Catalog.")
+		lakeformation_deleteDataCellsFilterCmd.Flags().String("name", "", "The name given by the user to the data filter cell.")
+		lakeformation_deleteDataCellsFilterCmd.Flags().String("table-catalog-id", "", "The ID of the catalog to which the table belongs.")
+		lakeformation_deleteDataCellsFilterCmd.Flags().String("table-name", "", "A table in the database.")
+	})
 	lakeformationCmd.AddCommand(lakeformation_deleteDataCellsFilterCmd)
 }

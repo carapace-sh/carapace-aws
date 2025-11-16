@@ -12,7 +12,9 @@ var resourcegroupstaggingapiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourcegroupstaggingapiCmd).Standalone()
+	carapace.Gen(resourcegroupstaggingapiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourcegroupstaggingapiCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(resourcegroupstaggingapiCmd)
 }

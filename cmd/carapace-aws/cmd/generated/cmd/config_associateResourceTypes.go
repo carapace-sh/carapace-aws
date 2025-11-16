@@ -12,11 +12,13 @@ var config_associateResourceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_associateResourceTypesCmd).Standalone()
+	carapace.Gen(config_associateResourceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_associateResourceTypesCmd).Standalone()
 
-	config_associateResourceTypesCmd.Flags().String("configuration-recorder-arn", "", "The Amazon Resource Name (ARN) of the specified configuration recorder.")
-	config_associateResourceTypesCmd.Flags().String("resource-types", "", "The list of resource types you want to add to the recording group of the specified configuration recorder.")
-	config_associateResourceTypesCmd.MarkFlagRequired("configuration-recorder-arn")
-	config_associateResourceTypesCmd.MarkFlagRequired("resource-types")
+		config_associateResourceTypesCmd.Flags().String("configuration-recorder-arn", "", "The Amazon Resource Name (ARN) of the specified configuration recorder.")
+		config_associateResourceTypesCmd.Flags().String("resource-types", "", "The list of resource types you want to add to the recording group of the specified configuration recorder.")
+		config_associateResourceTypesCmd.MarkFlagRequired("configuration-recorder-arn")
+		config_associateResourceTypesCmd.MarkFlagRequired("resource-types")
+	})
 	configCmd.AddCommand(config_associateResourceTypesCmd)
 }

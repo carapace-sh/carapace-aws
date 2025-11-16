@@ -12,12 +12,14 @@ var cognitoIdp_listUserImportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_listUserImportJobsCmd).Standalone()
+	carapace.Gen(cognitoIdp_listUserImportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_listUserImportJobsCmd).Standalone()
 
-	cognitoIdp_listUserImportJobsCmd.Flags().String("max-results", "", "The maximum number of import jobs that you want Amazon Cognito to return in the response.")
-	cognitoIdp_listUserImportJobsCmd.Flags().String("pagination-token", "", "This API operation returns a limited number of results.")
-	cognitoIdp_listUserImportJobsCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to list import jobs.")
-	cognitoIdp_listUserImportJobsCmd.MarkFlagRequired("max-results")
-	cognitoIdp_listUserImportJobsCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_listUserImportJobsCmd.Flags().String("max-results", "", "The maximum number of import jobs that you want Amazon Cognito to return in the response.")
+		cognitoIdp_listUserImportJobsCmd.Flags().String("pagination-token", "", "This API operation returns a limited number of results.")
+		cognitoIdp_listUserImportJobsCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to list import jobs.")
+		cognitoIdp_listUserImportJobsCmd.MarkFlagRequired("max-results")
+		cognitoIdp_listUserImportJobsCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_listUserImportJobsCmd)
 }

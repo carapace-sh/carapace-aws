@@ -12,9 +12,11 @@ var omics_getS3AccessPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getS3AccessPolicyCmd).Standalone()
+	carapace.Gen(omics_getS3AccessPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getS3AccessPolicyCmd).Standalone()
 
-	omics_getS3AccessPolicyCmd.Flags().String("s3-access-point-arn", "", "The S3 access point ARN that has the access policy.")
-	omics_getS3AccessPolicyCmd.MarkFlagRequired("s3-access-point-arn")
+		omics_getS3AccessPolicyCmd.Flags().String("s3-access-point-arn", "", "The S3 access point ARN that has the access policy.")
+		omics_getS3AccessPolicyCmd.MarkFlagRequired("s3-access-point-arn")
+	})
 	omicsCmd.AddCommand(omics_getS3AccessPolicyCmd)
 }

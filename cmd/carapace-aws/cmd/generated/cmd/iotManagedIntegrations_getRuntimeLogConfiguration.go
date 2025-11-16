@@ -12,9 +12,11 @@ var iotManagedIntegrations_getRuntimeLogConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getRuntimeLogConfigurationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getRuntimeLogConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getRuntimeLogConfigurationCmd).Standalone()
 
-	iotManagedIntegrations_getRuntimeLogConfigurationCmd.Flags().String("managed-thing-id", "", "The id for a managed thing.")
-	iotManagedIntegrations_getRuntimeLogConfigurationCmd.MarkFlagRequired("managed-thing-id")
+		iotManagedIntegrations_getRuntimeLogConfigurationCmd.Flags().String("managed-thing-id", "", "The id for a managed thing.")
+		iotManagedIntegrations_getRuntimeLogConfigurationCmd.MarkFlagRequired("managed-thing-id")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getRuntimeLogConfigurationCmd)
 }

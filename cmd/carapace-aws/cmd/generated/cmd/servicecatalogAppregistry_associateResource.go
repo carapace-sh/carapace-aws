@@ -12,14 +12,16 @@ var servicecatalogAppregistry_associateResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalogAppregistry_associateResourceCmd).Standalone()
+	carapace.Gen(servicecatalogAppregistry_associateResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalogAppregistry_associateResourceCmd).Standalone()
 
-	servicecatalogAppregistry_associateResourceCmd.Flags().String("application", "", "The name, ID, or ARN of the application.")
-	servicecatalogAppregistry_associateResourceCmd.Flags().String("options", "", "Determines whether an application tag is applied or skipped.")
-	servicecatalogAppregistry_associateResourceCmd.Flags().String("resource", "", "The name or ID of the resource of which the application will be associated.")
-	servicecatalogAppregistry_associateResourceCmd.Flags().String("resource-type", "", "The type of resource of which the application will be associated.")
-	servicecatalogAppregistry_associateResourceCmd.MarkFlagRequired("application")
-	servicecatalogAppregistry_associateResourceCmd.MarkFlagRequired("resource")
-	servicecatalogAppregistry_associateResourceCmd.MarkFlagRequired("resource-type")
+		servicecatalogAppregistry_associateResourceCmd.Flags().String("application", "", "The name, ID, or ARN of the application.")
+		servicecatalogAppregistry_associateResourceCmd.Flags().String("options", "", "Determines whether an application tag is applied or skipped.")
+		servicecatalogAppregistry_associateResourceCmd.Flags().String("resource", "", "The name or ID of the resource of which the application will be associated.")
+		servicecatalogAppregistry_associateResourceCmd.Flags().String("resource-type", "", "The type of resource of which the application will be associated.")
+		servicecatalogAppregistry_associateResourceCmd.MarkFlagRequired("application")
+		servicecatalogAppregistry_associateResourceCmd.MarkFlagRequired("resource")
+		servicecatalogAppregistry_associateResourceCmd.MarkFlagRequired("resource-type")
+	})
 	servicecatalogAppregistryCmd.AddCommand(servicecatalogAppregistry_associateResourceCmd)
 }

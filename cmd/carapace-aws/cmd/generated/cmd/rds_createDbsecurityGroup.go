@@ -12,12 +12,14 @@ var rds_createDbsecurityGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_createDbsecurityGroupCmd).Standalone()
+	carapace.Gen(rds_createDbsecurityGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_createDbsecurityGroupCmd).Standalone()
 
-	rds_createDbsecurityGroupCmd.Flags().String("dbsecurity-group-description", "", "The description for the DB security group.")
-	rds_createDbsecurityGroupCmd.Flags().String("dbsecurity-group-name", "", "The name for the DB security group.")
-	rds_createDbsecurityGroupCmd.Flags().String("tags", "", "Tags to assign to the DB security group.")
-	rds_createDbsecurityGroupCmd.MarkFlagRequired("dbsecurity-group-description")
-	rds_createDbsecurityGroupCmd.MarkFlagRequired("dbsecurity-group-name")
+		rds_createDbsecurityGroupCmd.Flags().String("dbsecurity-group-description", "", "The description for the DB security group.")
+		rds_createDbsecurityGroupCmd.Flags().String("dbsecurity-group-name", "", "The name for the DB security group.")
+		rds_createDbsecurityGroupCmd.Flags().String("tags", "", "Tags to assign to the DB security group.")
+		rds_createDbsecurityGroupCmd.MarkFlagRequired("dbsecurity-group-description")
+		rds_createDbsecurityGroupCmd.MarkFlagRequired("dbsecurity-group-name")
+	})
 	rdsCmd.AddCommand(rds_createDbsecurityGroupCmd)
 }

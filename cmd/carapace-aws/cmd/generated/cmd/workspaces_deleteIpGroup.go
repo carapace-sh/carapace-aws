@@ -12,9 +12,11 @@ var workspaces_deleteIpGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_deleteIpGroupCmd).Standalone()
+	carapace.Gen(workspaces_deleteIpGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_deleteIpGroupCmd).Standalone()
 
-	workspaces_deleteIpGroupCmd.Flags().String("group-id", "", "The identifier of the IP access control group.")
-	workspaces_deleteIpGroupCmd.MarkFlagRequired("group-id")
+		workspaces_deleteIpGroupCmd.Flags().String("group-id", "", "The identifier of the IP access control group.")
+		workspaces_deleteIpGroupCmd.MarkFlagRequired("group-id")
+	})
 	workspacesCmd.AddCommand(workspaces_deleteIpGroupCmd)
 }

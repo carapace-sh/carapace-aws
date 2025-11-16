@@ -12,9 +12,11 @@ var taxsettings_putSupplementalTaxRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_putSupplementalTaxRegistrationCmd).Standalone()
+	carapace.Gen(taxsettings_putSupplementalTaxRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_putSupplementalTaxRegistrationCmd).Standalone()
 
-	taxsettings_putSupplementalTaxRegistrationCmd.Flags().String("tax-registration-entry", "", "The supplemental TRN information that will be stored for the caller account ID.")
-	taxsettings_putSupplementalTaxRegistrationCmd.MarkFlagRequired("tax-registration-entry")
+		taxsettings_putSupplementalTaxRegistrationCmd.Flags().String("tax-registration-entry", "", "The supplemental TRN information that will be stored for the caller account ID.")
+		taxsettings_putSupplementalTaxRegistrationCmd.MarkFlagRequired("tax-registration-entry")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_putSupplementalTaxRegistrationCmd)
 }

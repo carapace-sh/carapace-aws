@@ -12,9 +12,11 @@ var comprehend_stopDominantLanguageDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_stopDominantLanguageDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_stopDominantLanguageDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_stopDominantLanguageDetectionJobCmd).Standalone()
 
-	comprehend_stopDominantLanguageDetectionJobCmd.Flags().String("job-id", "", "The identifier of the dominant language detection job to stop.")
-	comprehend_stopDominantLanguageDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_stopDominantLanguageDetectionJobCmd.Flags().String("job-id", "", "The identifier of the dominant language detection job to stop.")
+		comprehend_stopDominantLanguageDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_stopDominantLanguageDetectionJobCmd)
 }

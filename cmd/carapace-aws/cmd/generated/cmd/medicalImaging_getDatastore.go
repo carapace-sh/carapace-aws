@@ -12,9 +12,11 @@ var medicalImaging_getDatastoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medicalImaging_getDatastoreCmd).Standalone()
+	carapace.Gen(medicalImaging_getDatastoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medicalImaging_getDatastoreCmd).Standalone()
 
-	medicalImaging_getDatastoreCmd.Flags().String("datastore-id", "", "The data store identifier.")
-	medicalImaging_getDatastoreCmd.MarkFlagRequired("datastore-id")
+		medicalImaging_getDatastoreCmd.Flags().String("datastore-id", "", "The data store identifier.")
+		medicalImaging_getDatastoreCmd.MarkFlagRequired("datastore-id")
+	})
 	medicalImagingCmd.AddCommand(medicalImaging_getDatastoreCmd)
 }

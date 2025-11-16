@@ -12,11 +12,13 @@ var cloudtrail_searchSampleQueriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_searchSampleQueriesCmd).Standalone()
+	carapace.Gen(cloudtrail_searchSampleQueriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_searchSampleQueriesCmd).Standalone()
 
-	cloudtrail_searchSampleQueriesCmd.Flags().String("max-results", "", "The maximum number of results to return on a single page.")
-	cloudtrail_searchSampleQueriesCmd.Flags().String("next-token", "", "A token you can use to get the next page of results.")
-	cloudtrail_searchSampleQueriesCmd.Flags().String("search-phrase", "", "The natural language phrase to use for the semantic search.")
-	cloudtrail_searchSampleQueriesCmd.MarkFlagRequired("search-phrase")
+		cloudtrail_searchSampleQueriesCmd.Flags().String("max-results", "", "The maximum number of results to return on a single page.")
+		cloudtrail_searchSampleQueriesCmd.Flags().String("next-token", "", "A token you can use to get the next page of results.")
+		cloudtrail_searchSampleQueriesCmd.Flags().String("search-phrase", "", "The natural language phrase to use for the semantic search.")
+		cloudtrail_searchSampleQueriesCmd.MarkFlagRequired("search-phrase")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_searchSampleQueriesCmd)
 }

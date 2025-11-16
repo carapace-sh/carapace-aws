@@ -12,13 +12,15 @@ var connect_listHoursOfOperationOverridesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listHoursOfOperationOverridesCmd).Standalone()
+	carapace.Gen(connect_listHoursOfOperationOverridesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listHoursOfOperationOverridesCmd).Standalone()
 
-	connect_listHoursOfOperationOverridesCmd.Flags().String("hours-of-operation-id", "", "The identifier for the hours of operation.")
-	connect_listHoursOfOperationOverridesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listHoursOfOperationOverridesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listHoursOfOperationOverridesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listHoursOfOperationOverridesCmd.MarkFlagRequired("hours-of-operation-id")
-	connect_listHoursOfOperationOverridesCmd.MarkFlagRequired("instance-id")
+		connect_listHoursOfOperationOverridesCmd.Flags().String("hours-of-operation-id", "", "The identifier for the hours of operation.")
+		connect_listHoursOfOperationOverridesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listHoursOfOperationOverridesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listHoursOfOperationOverridesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listHoursOfOperationOverridesCmd.MarkFlagRequired("hours-of-operation-id")
+		connect_listHoursOfOperationOverridesCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listHoursOfOperationOverridesCmd)
 }

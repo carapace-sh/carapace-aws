@@ -12,8 +12,10 @@ var cloudhsm_listHsmsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_listHsmsCmd).Standalone()
+	carapace.Gen(cloudhsm_listHsmsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_listHsmsCmd).Standalone()
 
-	cloudhsm_listHsmsCmd.Flags().String("next-token", "", "The `NextToken` value from a previous call to `ListHsms`.")
+		cloudhsm_listHsmsCmd.Flags().String("next-token", "", "The `NextToken` value from a previous call to `ListHsms`.")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_listHsmsCmd)
 }

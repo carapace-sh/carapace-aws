@@ -12,7 +12,9 @@ var devicefarmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarmCmd).Standalone()
+	carapace.Gen(devicefarmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarmCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(devicefarmCmd)
 }

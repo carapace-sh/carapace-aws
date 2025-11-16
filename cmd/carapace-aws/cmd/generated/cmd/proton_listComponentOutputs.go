@@ -12,11 +12,13 @@ var proton_listComponentOutputsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_listComponentOutputsCmd).Standalone()
+	carapace.Gen(proton_listComponentOutputsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_listComponentOutputsCmd).Standalone()
 
-	proton_listComponentOutputsCmd.Flags().String("component-name", "", "The name of the component whose outputs you want.")
-	proton_listComponentOutputsCmd.Flags().String("deployment-id", "", "The ID of the deployment whose outputs you want.")
-	proton_listComponentOutputsCmd.Flags().String("next-token", "", "A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.")
-	proton_listComponentOutputsCmd.MarkFlagRequired("component-name")
+		proton_listComponentOutputsCmd.Flags().String("component-name", "", "The name of the component whose outputs you want.")
+		proton_listComponentOutputsCmd.Flags().String("deployment-id", "", "The ID of the deployment whose outputs you want.")
+		proton_listComponentOutputsCmd.Flags().String("next-token", "", "A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.")
+		proton_listComponentOutputsCmd.MarkFlagRequired("component-name")
+	})
 	protonCmd.AddCommand(proton_listComponentOutputsCmd)
 }

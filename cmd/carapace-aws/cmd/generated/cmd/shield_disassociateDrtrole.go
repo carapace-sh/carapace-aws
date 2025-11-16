@@ -12,7 +12,9 @@ var shield_disassociateDrtroleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_disassociateDrtroleCmd).Standalone()
+	carapace.Gen(shield_disassociateDrtroleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_disassociateDrtroleCmd).Standalone()
 
+	})
 	shieldCmd.AddCommand(shield_disassociateDrtroleCmd)
 }

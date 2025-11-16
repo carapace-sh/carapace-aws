@@ -12,9 +12,11 @@ var notificationscontacts_getEmailContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notificationscontacts_getEmailContactCmd).Standalone()
+	carapace.Gen(notificationscontacts_getEmailContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notificationscontacts_getEmailContactCmd).Standalone()
 
-	notificationscontacts_getEmailContactCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the email contact to get.")
-	notificationscontacts_getEmailContactCmd.MarkFlagRequired("arn")
+		notificationscontacts_getEmailContactCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the email contact to get.")
+		notificationscontacts_getEmailContactCmd.MarkFlagRequired("arn")
+	})
 	notificationscontactsCmd.AddCommand(notificationscontacts_getEmailContactCmd)
 }

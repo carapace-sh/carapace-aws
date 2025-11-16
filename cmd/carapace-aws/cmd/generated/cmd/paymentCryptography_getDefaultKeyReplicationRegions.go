@@ -12,7 +12,9 @@ var paymentCryptography_getDefaultKeyReplicationRegionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_getDefaultKeyReplicationRegionsCmd).Standalone()
+	carapace.Gen(paymentCryptography_getDefaultKeyReplicationRegionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_getDefaultKeyReplicationRegionsCmd).Standalone()
 
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_getDefaultKeyReplicationRegionsCmd)
 }

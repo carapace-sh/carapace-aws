@@ -12,12 +12,14 @@ var iotsitewise_batchDisassociateProjectAssetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_batchDisassociateProjectAssetsCmd).Standalone()
+	carapace.Gen(iotsitewise_batchDisassociateProjectAssetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_batchDisassociateProjectAssetsCmd).Standalone()
 
-	iotsitewise_batchDisassociateProjectAssetsCmd.Flags().String("asset-ids", "", "The IDs of the assets to be disassociated from the project.")
-	iotsitewise_batchDisassociateProjectAssetsCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_batchDisassociateProjectAssetsCmd.Flags().String("project-id", "", "The ID of the project from which to disassociate the assets.")
-	iotsitewise_batchDisassociateProjectAssetsCmd.MarkFlagRequired("asset-ids")
-	iotsitewise_batchDisassociateProjectAssetsCmd.MarkFlagRequired("project-id")
+		iotsitewise_batchDisassociateProjectAssetsCmd.Flags().String("asset-ids", "", "The IDs of the assets to be disassociated from the project.")
+		iotsitewise_batchDisassociateProjectAssetsCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_batchDisassociateProjectAssetsCmd.Flags().String("project-id", "", "The ID of the project from which to disassociate the assets.")
+		iotsitewise_batchDisassociateProjectAssetsCmd.MarkFlagRequired("asset-ids")
+		iotsitewise_batchDisassociateProjectAssetsCmd.MarkFlagRequired("project-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_batchDisassociateProjectAssetsCmd)
 }

@@ -12,11 +12,13 @@ var iotsecuretunneling_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsecuretunneling_untagResourceCmd).Standalone()
+	carapace.Gen(iotsecuretunneling_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsecuretunneling_untagResourceCmd).Standalone()
 
-	iotsecuretunneling_untagResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
-	iotsecuretunneling_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to remove.")
-	iotsecuretunneling_untagResourceCmd.MarkFlagRequired("resource-arn")
-	iotsecuretunneling_untagResourceCmd.MarkFlagRequired("tag-keys")
+		iotsecuretunneling_untagResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
+		iotsecuretunneling_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to remove.")
+		iotsecuretunneling_untagResourceCmd.MarkFlagRequired("resource-arn")
+		iotsecuretunneling_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	iotsecuretunnelingCmd.AddCommand(iotsecuretunneling_untagResourceCmd)
 }

@@ -12,9 +12,11 @@ var comprehend_listEntityRecognizerSummariesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_listEntityRecognizerSummariesCmd).Standalone()
+	carapace.Gen(comprehend_listEntityRecognizerSummariesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_listEntityRecognizerSummariesCmd).Standalone()
 
-	comprehend_listEntityRecognizerSummariesCmd.Flags().String("max-results", "", "The maximum number of results to return on each page.")
-	comprehend_listEntityRecognizerSummariesCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehend_listEntityRecognizerSummariesCmd.Flags().String("max-results", "", "The maximum number of results to return on each page.")
+		comprehend_listEntityRecognizerSummariesCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendCmd.AddCommand(comprehend_listEntityRecognizerSummariesCmd)
 }

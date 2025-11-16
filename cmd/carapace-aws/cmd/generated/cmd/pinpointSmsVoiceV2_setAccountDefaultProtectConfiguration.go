@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_setAccountDefaultProtectConfigurationCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_setAccountDefaultProtectConfigurationCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_setAccountDefaultProtectConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_setAccountDefaultProtectConfigurationCmd).Standalone()
 
-	pinpointSmsVoiceV2_setAccountDefaultProtectConfigurationCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
-	pinpointSmsVoiceV2_setAccountDefaultProtectConfigurationCmd.MarkFlagRequired("protect-configuration-id")
+		pinpointSmsVoiceV2_setAccountDefaultProtectConfigurationCmd.Flags().String("protect-configuration-id", "", "The unique identifier for the protect configuration.")
+		pinpointSmsVoiceV2_setAccountDefaultProtectConfigurationCmd.MarkFlagRequired("protect-configuration-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_setAccountDefaultProtectConfigurationCmd)
 }

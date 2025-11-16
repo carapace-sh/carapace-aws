@@ -12,15 +12,17 @@ var repostspace_batchRemoveChannelRoleFromAccessorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspace_batchRemoveChannelRoleFromAccessorsCmd).Standalone()
+	carapace.Gen(repostspace_batchRemoveChannelRoleFromAccessorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspace_batchRemoveChannelRoleFromAccessorsCmd).Standalone()
 
-	repostspace_batchRemoveChannelRoleFromAccessorsCmd.Flags().String("accessor-ids", "", "The users or groups identifiers to remove the role from.")
-	repostspace_batchRemoveChannelRoleFromAccessorsCmd.Flags().String("channel-id", "", "The unique ID of the private re:Post channel.")
-	repostspace_batchRemoveChannelRoleFromAccessorsCmd.Flags().String("channel-role", "", "The channel role to remove from the users or groups.")
-	repostspace_batchRemoveChannelRoleFromAccessorsCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
-	repostspace_batchRemoveChannelRoleFromAccessorsCmd.MarkFlagRequired("accessor-ids")
-	repostspace_batchRemoveChannelRoleFromAccessorsCmd.MarkFlagRequired("channel-id")
-	repostspace_batchRemoveChannelRoleFromAccessorsCmd.MarkFlagRequired("channel-role")
-	repostspace_batchRemoveChannelRoleFromAccessorsCmd.MarkFlagRequired("space-id")
+		repostspace_batchRemoveChannelRoleFromAccessorsCmd.Flags().String("accessor-ids", "", "The users or groups identifiers to remove the role from.")
+		repostspace_batchRemoveChannelRoleFromAccessorsCmd.Flags().String("channel-id", "", "The unique ID of the private re:Post channel.")
+		repostspace_batchRemoveChannelRoleFromAccessorsCmd.Flags().String("channel-role", "", "The channel role to remove from the users or groups.")
+		repostspace_batchRemoveChannelRoleFromAccessorsCmd.Flags().String("space-id", "", "The unique ID of the private re:Post.")
+		repostspace_batchRemoveChannelRoleFromAccessorsCmd.MarkFlagRequired("accessor-ids")
+		repostspace_batchRemoveChannelRoleFromAccessorsCmd.MarkFlagRequired("channel-id")
+		repostspace_batchRemoveChannelRoleFromAccessorsCmd.MarkFlagRequired("channel-role")
+		repostspace_batchRemoveChannelRoleFromAccessorsCmd.MarkFlagRequired("space-id")
+	})
 	repostspaceCmd.AddCommand(repostspace_batchRemoveChannelRoleFromAccessorsCmd)
 }

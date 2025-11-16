@@ -12,13 +12,15 @@ var kinesisanalytics_deleteApplicationOutputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_deleteApplicationOutputCmd).Standalone()
+	carapace.Gen(kinesisanalytics_deleteApplicationOutputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_deleteApplicationOutputCmd).Standalone()
 
-	kinesisanalytics_deleteApplicationOutputCmd.Flags().String("application-name", "", "Amazon Kinesis Analytics application name.")
-	kinesisanalytics_deleteApplicationOutputCmd.Flags().String("current-application-version-id", "", "Amazon Kinesis Analytics application version.")
-	kinesisanalytics_deleteApplicationOutputCmd.Flags().String("output-id", "", "The ID of the configuration to delete.")
-	kinesisanalytics_deleteApplicationOutputCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_deleteApplicationOutputCmd.MarkFlagRequired("current-application-version-id")
-	kinesisanalytics_deleteApplicationOutputCmd.MarkFlagRequired("output-id")
+		kinesisanalytics_deleteApplicationOutputCmd.Flags().String("application-name", "", "Amazon Kinesis Analytics application name.")
+		kinesisanalytics_deleteApplicationOutputCmd.Flags().String("current-application-version-id", "", "Amazon Kinesis Analytics application version.")
+		kinesisanalytics_deleteApplicationOutputCmd.Flags().String("output-id", "", "The ID of the configuration to delete.")
+		kinesisanalytics_deleteApplicationOutputCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_deleteApplicationOutputCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalytics_deleteApplicationOutputCmd.MarkFlagRequired("output-id")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_deleteApplicationOutputCmd)
 }

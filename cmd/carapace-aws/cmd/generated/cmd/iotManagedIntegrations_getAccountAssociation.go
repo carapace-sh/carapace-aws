@@ -12,9 +12,11 @@ var iotManagedIntegrations_getAccountAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getAccountAssociationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getAccountAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getAccountAssociationCmd).Standalone()
 
-	iotManagedIntegrations_getAccountAssociationCmd.Flags().String("account-association-id", "", "The unique identifier of the account association to retrieve.")
-	iotManagedIntegrations_getAccountAssociationCmd.MarkFlagRequired("account-association-id")
+		iotManagedIntegrations_getAccountAssociationCmd.Flags().String("account-association-id", "", "The unique identifier of the account association to retrieve.")
+		iotManagedIntegrations_getAccountAssociationCmd.MarkFlagRequired("account-association-id")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getAccountAssociationCmd)
 }

@@ -12,9 +12,11 @@ var transcribe_deleteVocabularyFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_deleteVocabularyFilterCmd).Standalone()
+	carapace.Gen(transcribe_deleteVocabularyFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_deleteVocabularyFilterCmd).Standalone()
 
-	transcribe_deleteVocabularyFilterCmd.Flags().String("vocabulary-filter-name", "", "The name of the custom vocabulary filter you want to delete.")
-	transcribe_deleteVocabularyFilterCmd.MarkFlagRequired("vocabulary-filter-name")
+		transcribe_deleteVocabularyFilterCmd.Flags().String("vocabulary-filter-name", "", "The name of the custom vocabulary filter you want to delete.")
+		transcribe_deleteVocabularyFilterCmd.MarkFlagRequired("vocabulary-filter-name")
+	})
 	transcribeCmd.AddCommand(transcribe_deleteVocabularyFilterCmd)
 }

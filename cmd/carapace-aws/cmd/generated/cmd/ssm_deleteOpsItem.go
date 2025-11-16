@@ -12,9 +12,11 @@ var ssm_deleteOpsItemCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_deleteOpsItemCmd).Standalone()
+	carapace.Gen(ssm_deleteOpsItemCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_deleteOpsItemCmd).Standalone()
 
-	ssm_deleteOpsItemCmd.Flags().String("ops-item-id", "", "The ID of the OpsItem that you want to delete.")
-	ssm_deleteOpsItemCmd.MarkFlagRequired("ops-item-id")
+		ssm_deleteOpsItemCmd.Flags().String("ops-item-id", "", "The ID of the OpsItem that you want to delete.")
+		ssm_deleteOpsItemCmd.MarkFlagRequired("ops-item-id")
+	})
 	ssmCmd.AddCommand(ssm_deleteOpsItemCmd)
 }

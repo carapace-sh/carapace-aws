@@ -12,8 +12,10 @@ var es_getCompatibleElasticsearchVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_getCompatibleElasticsearchVersionsCmd).Standalone()
+	carapace.Gen(es_getCompatibleElasticsearchVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_getCompatibleElasticsearchVersionsCmd).Standalone()
 
-	es_getCompatibleElasticsearchVersionsCmd.Flags().String("domain-name", "", "")
+		es_getCompatibleElasticsearchVersionsCmd.Flags().String("domain-name", "", "")
+	})
 	esCmd.AddCommand(es_getCompatibleElasticsearchVersionsCmd)
 }

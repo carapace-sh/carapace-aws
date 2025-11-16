@@ -12,9 +12,11 @@ var sqs_listQueueTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_listQueueTagsCmd).Standalone()
+	carapace.Gen(sqs_listQueueTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_listQueueTagsCmd).Standalone()
 
-	sqs_listQueueTagsCmd.Flags().String("queue-url", "", "The URL of the queue.")
-	sqs_listQueueTagsCmd.MarkFlagRequired("queue-url")
+		sqs_listQueueTagsCmd.Flags().String("queue-url", "", "The URL of the queue.")
+		sqs_listQueueTagsCmd.MarkFlagRequired("queue-url")
+	})
 	sqsCmd.AddCommand(sqs_listQueueTagsCmd)
 }

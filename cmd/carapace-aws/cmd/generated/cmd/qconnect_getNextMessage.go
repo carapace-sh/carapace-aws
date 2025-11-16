@@ -12,13 +12,15 @@ var qconnect_getNextMessageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_getNextMessageCmd).Standalone()
+	carapace.Gen(qconnect_getNextMessageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_getNextMessageCmd).Standalone()
 
-	qconnect_getNextMessageCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_getNextMessageCmd.Flags().String("next-message-token", "", "The token for the next message.")
-	qconnect_getNextMessageCmd.Flags().String("session-id", "", "The identifier of the Amazon Q in Connect session.")
-	qconnect_getNextMessageCmd.MarkFlagRequired("assistant-id")
-	qconnect_getNextMessageCmd.MarkFlagRequired("next-message-token")
-	qconnect_getNextMessageCmd.MarkFlagRequired("session-id")
+		qconnect_getNextMessageCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_getNextMessageCmd.Flags().String("next-message-token", "", "The token for the next message.")
+		qconnect_getNextMessageCmd.Flags().String("session-id", "", "The identifier of the Amazon Q in Connect session.")
+		qconnect_getNextMessageCmd.MarkFlagRequired("assistant-id")
+		qconnect_getNextMessageCmd.MarkFlagRequired("next-message-token")
+		qconnect_getNextMessageCmd.MarkFlagRequired("session-id")
+	})
 	qconnectCmd.AddCommand(qconnect_getNextMessageCmd)
 }

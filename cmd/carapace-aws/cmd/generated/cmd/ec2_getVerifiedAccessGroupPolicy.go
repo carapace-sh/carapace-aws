@@ -12,12 +12,14 @@ var ec2_getVerifiedAccessGroupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getVerifiedAccessGroupPolicyCmd).Standalone()
+	carapace.Gen(ec2_getVerifiedAccessGroupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getVerifiedAccessGroupPolicyCmd).Standalone()
 
-	ec2_getVerifiedAccessGroupPolicyCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getVerifiedAccessGroupPolicyCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getVerifiedAccessGroupPolicyCmd.Flags().String("verified-access-group-id", "", "The ID of the Verified Access group.")
-	ec2_getVerifiedAccessGroupPolicyCmd.Flag("no-dry-run").Hidden = true
-	ec2_getVerifiedAccessGroupPolicyCmd.MarkFlagRequired("verified-access-group-id")
+		ec2_getVerifiedAccessGroupPolicyCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getVerifiedAccessGroupPolicyCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getVerifiedAccessGroupPolicyCmd.Flags().String("verified-access-group-id", "", "The ID of the Verified Access group.")
+		ec2_getVerifiedAccessGroupPolicyCmd.Flag("no-dry-run").Hidden = true
+		ec2_getVerifiedAccessGroupPolicyCmd.MarkFlagRequired("verified-access-group-id")
+	})
 	ec2Cmd.AddCommand(ec2_getVerifiedAccessGroupPolicyCmd)
 }

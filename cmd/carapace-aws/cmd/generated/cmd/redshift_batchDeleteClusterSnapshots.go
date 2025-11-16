@@ -12,9 +12,11 @@ var redshift_batchDeleteClusterSnapshotsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_batchDeleteClusterSnapshotsCmd).Standalone()
+	carapace.Gen(redshift_batchDeleteClusterSnapshotsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_batchDeleteClusterSnapshotsCmd).Standalone()
 
-	redshift_batchDeleteClusterSnapshotsCmd.Flags().String("identifiers", "", "A list of identifiers for the snapshots that you want to delete.")
-	redshift_batchDeleteClusterSnapshotsCmd.MarkFlagRequired("identifiers")
+		redshift_batchDeleteClusterSnapshotsCmd.Flags().String("identifiers", "", "A list of identifiers for the snapshots that you want to delete.")
+		redshift_batchDeleteClusterSnapshotsCmd.MarkFlagRequired("identifiers")
+	})
 	redshiftCmd.AddCommand(redshift_batchDeleteClusterSnapshotsCmd)
 }

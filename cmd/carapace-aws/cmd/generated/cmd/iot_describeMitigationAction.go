@@ -12,9 +12,11 @@ var iot_describeMitigationActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeMitigationActionCmd).Standalone()
+	carapace.Gen(iot_describeMitigationActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeMitigationActionCmd).Standalone()
 
-	iot_describeMitigationActionCmd.Flags().String("action-name", "", "The friendly name that uniquely identifies the mitigation action.")
-	iot_describeMitigationActionCmd.MarkFlagRequired("action-name")
+		iot_describeMitigationActionCmd.Flags().String("action-name", "", "The friendly name that uniquely identifies the mitigation action.")
+		iot_describeMitigationActionCmd.MarkFlagRequired("action-name")
+	})
 	iotCmd.AddCommand(iot_describeMitigationActionCmd)
 }

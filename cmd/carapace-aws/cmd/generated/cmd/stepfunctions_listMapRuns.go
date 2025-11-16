@@ -12,11 +12,13 @@ var stepfunctions_listMapRunsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_listMapRunsCmd).Standalone()
+	carapace.Gen(stepfunctions_listMapRunsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_listMapRunsCmd).Standalone()
 
-	stepfunctions_listMapRunsCmd.Flags().String("execution-arn", "", "The Amazon Resource Name (ARN) of the execution for which the Map Runs must be listed.")
-	stepfunctions_listMapRunsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	stepfunctions_listMapRunsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
-	stepfunctions_listMapRunsCmd.MarkFlagRequired("execution-arn")
+		stepfunctions_listMapRunsCmd.Flags().String("execution-arn", "", "The Amazon Resource Name (ARN) of the execution for which the Map Runs must be listed.")
+		stepfunctions_listMapRunsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		stepfunctions_listMapRunsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		stepfunctions_listMapRunsCmd.MarkFlagRequired("execution-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_listMapRunsCmd)
 }

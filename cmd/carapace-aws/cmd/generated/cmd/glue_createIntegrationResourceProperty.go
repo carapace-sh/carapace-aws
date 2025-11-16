@@ -12,11 +12,13 @@ var glue_createIntegrationResourcePropertyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_createIntegrationResourcePropertyCmd).Standalone()
+	carapace.Gen(glue_createIntegrationResourcePropertyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_createIntegrationResourcePropertyCmd).Standalone()
 
-	glue_createIntegrationResourcePropertyCmd.Flags().String("resource-arn", "", "The connection ARN of the source, or the database ARN of the target.")
-	glue_createIntegrationResourcePropertyCmd.Flags().String("source-processing-properties", "", "The resource properties associated with the integration source.")
-	glue_createIntegrationResourcePropertyCmd.Flags().String("target-processing-properties", "", "The resource properties associated with the integration target.")
-	glue_createIntegrationResourcePropertyCmd.MarkFlagRequired("resource-arn")
+		glue_createIntegrationResourcePropertyCmd.Flags().String("resource-arn", "", "The connection ARN of the source, or the database ARN of the target.")
+		glue_createIntegrationResourcePropertyCmd.Flags().String("source-processing-properties", "", "The resource properties associated with the integration source.")
+		glue_createIntegrationResourcePropertyCmd.Flags().String("target-processing-properties", "", "The resource properties associated with the integration target.")
+		glue_createIntegrationResourcePropertyCmd.MarkFlagRequired("resource-arn")
+	})
 	glueCmd.AddCommand(glue_createIntegrationResourcePropertyCmd)
 }

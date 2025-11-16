@@ -12,12 +12,14 @@ var storagegateway_describeTapesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeTapesCmd).Standalone()
+	carapace.Gen(storagegateway_describeTapesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeTapesCmd).Standalone()
 
-	storagegateway_describeTapesCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_describeTapesCmd.Flags().String("limit", "", "Specifies that the number of virtual tapes described be limited to the specified number.")
-	storagegateway_describeTapesCmd.Flags().String("marker", "", "A marker value, obtained in a previous call to `DescribeTapes`.")
-	storagegateway_describeTapesCmd.Flags().String("tape-arns", "", "Specifies one or more unique Amazon Resource Names (ARNs) that represent the virtual tapes you want to describe.")
-	storagegateway_describeTapesCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_describeTapesCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_describeTapesCmd.Flags().String("limit", "", "Specifies that the number of virtual tapes described be limited to the specified number.")
+		storagegateway_describeTapesCmd.Flags().String("marker", "", "A marker value, obtained in a previous call to `DescribeTapes`.")
+		storagegateway_describeTapesCmd.Flags().String("tape-arns", "", "Specifies one or more unique Amazon Resource Names (ARNs) that represent the virtual tapes you want to describe.")
+		storagegateway_describeTapesCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeTapesCmd)
 }

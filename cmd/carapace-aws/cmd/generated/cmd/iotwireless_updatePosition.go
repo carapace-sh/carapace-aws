@@ -12,13 +12,15 @@ var iotwireless_updatePositionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_updatePositionCmd).Standalone()
+	carapace.Gen(iotwireless_updatePositionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_updatePositionCmd).Standalone()
 
-	iotwireless_updatePositionCmd.Flags().String("position", "", "The position information of the resource.")
-	iotwireless_updatePositionCmd.Flags().String("resource-identifier", "", "Resource identifier of the resource for which position is updated.")
-	iotwireless_updatePositionCmd.Flags().String("resource-type", "", "Resource type of the resource for which position is updated.")
-	iotwireless_updatePositionCmd.MarkFlagRequired("position")
-	iotwireless_updatePositionCmd.MarkFlagRequired("resource-identifier")
-	iotwireless_updatePositionCmd.MarkFlagRequired("resource-type")
+		iotwireless_updatePositionCmd.Flags().String("position", "", "The position information of the resource.")
+		iotwireless_updatePositionCmd.Flags().String("resource-identifier", "", "Resource identifier of the resource for which position is updated.")
+		iotwireless_updatePositionCmd.Flags().String("resource-type", "", "Resource type of the resource for which position is updated.")
+		iotwireless_updatePositionCmd.MarkFlagRequired("position")
+		iotwireless_updatePositionCmd.MarkFlagRequired("resource-identifier")
+		iotwireless_updatePositionCmd.MarkFlagRequired("resource-type")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_updatePositionCmd)
 }

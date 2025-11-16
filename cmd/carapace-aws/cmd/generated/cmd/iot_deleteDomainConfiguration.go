@@ -12,9 +12,11 @@ var iot_deleteDomainConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteDomainConfigurationCmd).Standalone()
+	carapace.Gen(iot_deleteDomainConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteDomainConfigurationCmd).Standalone()
 
-	iot_deleteDomainConfigurationCmd.Flags().String("domain-configuration-name", "", "The name of the domain configuration to be deleted.")
-	iot_deleteDomainConfigurationCmd.MarkFlagRequired("domain-configuration-name")
+		iot_deleteDomainConfigurationCmd.Flags().String("domain-configuration-name", "", "The name of the domain configuration to be deleted.")
+		iot_deleteDomainConfigurationCmd.MarkFlagRequired("domain-configuration-name")
+	})
 	iotCmd.AddCommand(iot_deleteDomainConfigurationCmd)
 }

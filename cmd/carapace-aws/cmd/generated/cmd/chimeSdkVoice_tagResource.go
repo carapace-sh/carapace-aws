@@ -12,11 +12,13 @@ var chimeSdkVoice_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_tagResourceCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_tagResourceCmd).Standalone()
 
-	chimeSdkVoice_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource being tagged.")
-	chimeSdkVoice_tagResourceCmd.Flags().String("tags", "", "A list of the tags being added to the resource.")
-	chimeSdkVoice_tagResourceCmd.MarkFlagRequired("resource-arn")
-	chimeSdkVoice_tagResourceCmd.MarkFlagRequired("tags")
+		chimeSdkVoice_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource being tagged.")
+		chimeSdkVoice_tagResourceCmd.Flags().String("tags", "", "A list of the tags being added to the resource.")
+		chimeSdkVoice_tagResourceCmd.MarkFlagRequired("resource-arn")
+		chimeSdkVoice_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_tagResourceCmd)
 }

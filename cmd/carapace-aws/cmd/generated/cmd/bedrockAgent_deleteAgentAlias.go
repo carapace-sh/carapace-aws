@@ -12,11 +12,13 @@ var bedrockAgent_deleteAgentAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_deleteAgentAliasCmd).Standalone()
+	carapace.Gen(bedrockAgent_deleteAgentAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_deleteAgentAliasCmd).Standalone()
 
-	bedrockAgent_deleteAgentAliasCmd.Flags().String("agent-alias-id", "", "The unique identifier of the alias to delete.")
-	bedrockAgent_deleteAgentAliasCmd.Flags().String("agent-id", "", "The unique identifier of the agent that the alias belongs to.")
-	bedrockAgent_deleteAgentAliasCmd.MarkFlagRequired("agent-alias-id")
-	bedrockAgent_deleteAgentAliasCmd.MarkFlagRequired("agent-id")
+		bedrockAgent_deleteAgentAliasCmd.Flags().String("agent-alias-id", "", "The unique identifier of the alias to delete.")
+		bedrockAgent_deleteAgentAliasCmd.Flags().String("agent-id", "", "The unique identifier of the agent that the alias belongs to.")
+		bedrockAgent_deleteAgentAliasCmd.MarkFlagRequired("agent-alias-id")
+		bedrockAgent_deleteAgentAliasCmd.MarkFlagRequired("agent-id")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_deleteAgentAliasCmd)
 }

@@ -12,11 +12,13 @@ var opensearchserverless_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_untagResourceCmd).Standalone()
+	carapace.Gen(opensearchserverless_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_untagResourceCmd).Standalone()
 
-	opensearchserverless_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to remove tags from.")
-	opensearchserverless_untagResourceCmd.Flags().String("tag-keys", "", "The tag or set of tags to remove from the resource.")
-	opensearchserverless_untagResourceCmd.MarkFlagRequired("resource-arn")
-	opensearchserverless_untagResourceCmd.MarkFlagRequired("tag-keys")
+		opensearchserverless_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to remove tags from.")
+		opensearchserverless_untagResourceCmd.Flags().String("tag-keys", "", "The tag or set of tags to remove from the resource.")
+		opensearchserverless_untagResourceCmd.MarkFlagRequired("resource-arn")
+		opensearchserverless_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_untagResourceCmd)
 }

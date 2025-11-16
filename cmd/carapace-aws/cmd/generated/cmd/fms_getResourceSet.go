@@ -12,9 +12,11 @@ var fms_getResourceSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_getResourceSetCmd).Standalone()
+	carapace.Gen(fms_getResourceSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_getResourceSetCmd).Standalone()
 
-	fms_getResourceSetCmd.Flags().String("identifier", "", "A unique identifier for the resource set, used in a request to refer to the resource set.")
-	fms_getResourceSetCmd.MarkFlagRequired("identifier")
+		fms_getResourceSetCmd.Flags().String("identifier", "", "A unique identifier for the resource set, used in a request to refer to the resource set.")
+		fms_getResourceSetCmd.MarkFlagRequired("identifier")
+	})
 	fmsCmd.AddCommand(fms_getResourceSetCmd)
 }

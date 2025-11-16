@@ -12,10 +12,12 @@ var mediapackageVod_configureLogsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackageVod_configureLogsCmd).Standalone()
+	carapace.Gen(mediapackageVod_configureLogsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackageVod_configureLogsCmd).Standalone()
 
-	mediapackageVod_configureLogsCmd.Flags().String("egress-access-logs", "", "")
-	mediapackageVod_configureLogsCmd.Flags().String("id", "", "The ID of a MediaPackage VOD PackagingGroup resource.")
-	mediapackageVod_configureLogsCmd.MarkFlagRequired("id")
+		mediapackageVod_configureLogsCmd.Flags().String("egress-access-logs", "", "")
+		mediapackageVod_configureLogsCmd.Flags().String("id", "", "The ID of a MediaPackage VOD PackagingGroup resource.")
+		mediapackageVod_configureLogsCmd.MarkFlagRequired("id")
+	})
 	mediapackageVodCmd.AddCommand(mediapackageVod_configureLogsCmd)
 }

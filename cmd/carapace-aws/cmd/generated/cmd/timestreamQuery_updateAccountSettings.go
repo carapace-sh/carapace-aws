@@ -12,10 +12,12 @@ var timestreamQuery_updateAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_updateAccountSettingsCmd).Standalone()
+	carapace.Gen(timestreamQuery_updateAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_updateAccountSettingsCmd).Standalone()
 
-	timestreamQuery_updateAccountSettingsCmd.Flags().String("max-query-tcu", "", "The maximum number of compute units the service will use at any point in time to serve your queries.")
-	timestreamQuery_updateAccountSettingsCmd.Flags().String("query-compute", "", "Modifies the query compute settings configured in your account, including the query pricing model and provisioned Timestream Compute Units (TCUs) in your account.")
-	timestreamQuery_updateAccountSettingsCmd.Flags().String("query-pricing-model", "", "The pricing model for queries in an account.")
+		timestreamQuery_updateAccountSettingsCmd.Flags().String("max-query-tcu", "", "The maximum number of compute units the service will use at any point in time to serve your queries.")
+		timestreamQuery_updateAccountSettingsCmd.Flags().String("query-compute", "", "Modifies the query compute settings configured in your account, including the query pricing model and provisioned Timestream Compute Units (TCUs) in your account.")
+		timestreamQuery_updateAccountSettingsCmd.Flags().String("query-pricing-model", "", "The pricing model for queries in an account.")
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_updateAccountSettingsCmd)
 }

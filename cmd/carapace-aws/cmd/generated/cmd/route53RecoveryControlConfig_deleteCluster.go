@@ -12,9 +12,11 @@ var route53RecoveryControlConfig_deleteClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_deleteClusterCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_deleteClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_deleteClusterCmd).Standalone()
 
-	route53RecoveryControlConfig_deleteClusterCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster that you're deleting.")
-	route53RecoveryControlConfig_deleteClusterCmd.MarkFlagRequired("cluster-arn")
+		route53RecoveryControlConfig_deleteClusterCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster that you're deleting.")
+		route53RecoveryControlConfig_deleteClusterCmd.MarkFlagRequired("cluster-arn")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_deleteClusterCmd)
 }

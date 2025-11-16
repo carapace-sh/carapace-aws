@@ -12,13 +12,15 @@ var bedrockAgent_listAgentKnowledgeBasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_listAgentKnowledgeBasesCmd).Standalone()
+	carapace.Gen(bedrockAgent_listAgentKnowledgeBasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_listAgentKnowledgeBasesCmd).Standalone()
 
-	bedrockAgent_listAgentKnowledgeBasesCmd.Flags().String("agent-id", "", "The unique identifier of the agent for which to return information about knowledge bases associated with it.")
-	bedrockAgent_listAgentKnowledgeBasesCmd.Flags().String("agent-version", "", "The version of the agent for which to return information about knowledge bases associated with it.")
-	bedrockAgent_listAgentKnowledgeBasesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	bedrockAgent_listAgentKnowledgeBasesCmd.Flags().String("next-token", "", "If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.")
-	bedrockAgent_listAgentKnowledgeBasesCmd.MarkFlagRequired("agent-id")
-	bedrockAgent_listAgentKnowledgeBasesCmd.MarkFlagRequired("agent-version")
+		bedrockAgent_listAgentKnowledgeBasesCmd.Flags().String("agent-id", "", "The unique identifier of the agent for which to return information about knowledge bases associated with it.")
+		bedrockAgent_listAgentKnowledgeBasesCmd.Flags().String("agent-version", "", "The version of the agent for which to return information about knowledge bases associated with it.")
+		bedrockAgent_listAgentKnowledgeBasesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		bedrockAgent_listAgentKnowledgeBasesCmd.Flags().String("next-token", "", "If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.")
+		bedrockAgent_listAgentKnowledgeBasesCmd.MarkFlagRequired("agent-id")
+		bedrockAgent_listAgentKnowledgeBasesCmd.MarkFlagRequired("agent-version")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_listAgentKnowledgeBasesCmd)
 }

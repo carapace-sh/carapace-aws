@@ -12,12 +12,14 @@ var supplychain_updateDataLakeNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_updateDataLakeNamespaceCmd).Standalone()
+	carapace.Gen(supplychain_updateDataLakeNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_updateDataLakeNamespaceCmd).Standalone()
 
-	supplychain_updateDataLakeNamespaceCmd.Flags().String("description", "", "The updated description of the data lake namespace.")
-	supplychain_updateDataLakeNamespaceCmd.Flags().String("instance-id", "", "The Amazon Web Services Chain instance identifier.")
-	supplychain_updateDataLakeNamespaceCmd.Flags().String("name", "", "The name of the namespace.")
-	supplychain_updateDataLakeNamespaceCmd.MarkFlagRequired("instance-id")
-	supplychain_updateDataLakeNamespaceCmd.MarkFlagRequired("name")
+		supplychain_updateDataLakeNamespaceCmd.Flags().String("description", "", "The updated description of the data lake namespace.")
+		supplychain_updateDataLakeNamespaceCmd.Flags().String("instance-id", "", "The Amazon Web Services Chain instance identifier.")
+		supplychain_updateDataLakeNamespaceCmd.Flags().String("name", "", "The name of the namespace.")
+		supplychain_updateDataLakeNamespaceCmd.MarkFlagRequired("instance-id")
+		supplychain_updateDataLakeNamespaceCmd.MarkFlagRequired("name")
+	})
 	supplychainCmd.AddCommand(supplychain_updateDataLakeNamespaceCmd)
 }

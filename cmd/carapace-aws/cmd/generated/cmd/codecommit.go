@@ -12,7 +12,9 @@ var codecommitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommitCmd).Standalone()
+	carapace.Gen(codecommitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommitCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(codecommitCmd)
 }

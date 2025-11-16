@@ -12,9 +12,11 @@ var qapps_listCategoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_listCategoriesCmd).Standalone()
+	carapace.Gen(qapps_listCategoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_listCategoriesCmd).Standalone()
 
-	qapps_listCategoriesCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_listCategoriesCmd.MarkFlagRequired("instance-id")
+		qapps_listCategoriesCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_listCategoriesCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_listCategoriesCmd)
 }

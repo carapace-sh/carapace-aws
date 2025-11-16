@@ -12,9 +12,11 @@ var iotfleetwise_deleteVehicleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_deleteVehicleCmd).Standalone()
+	carapace.Gen(iotfleetwise_deleteVehicleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_deleteVehicleCmd).Standalone()
 
-	iotfleetwise_deleteVehicleCmd.Flags().String("vehicle-name", "", "The ID of the vehicle to delete.")
-	iotfleetwise_deleteVehicleCmd.MarkFlagRequired("vehicle-name")
+		iotfleetwise_deleteVehicleCmd.Flags().String("vehicle-name", "", "The ID of the vehicle to delete.")
+		iotfleetwise_deleteVehicleCmd.MarkFlagRequired("vehicle-name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_deleteVehicleCmd)
 }

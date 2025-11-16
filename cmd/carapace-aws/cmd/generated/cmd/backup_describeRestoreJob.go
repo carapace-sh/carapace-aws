@@ -12,9 +12,11 @@ var backup_describeRestoreJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_describeRestoreJobCmd).Standalone()
+	carapace.Gen(backup_describeRestoreJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_describeRestoreJobCmd).Standalone()
 
-	backup_describeRestoreJobCmd.Flags().String("restore-job-id", "", "Uniquely identifies the job that restores a recovery point.")
-	backup_describeRestoreJobCmd.MarkFlagRequired("restore-job-id")
+		backup_describeRestoreJobCmd.Flags().String("restore-job-id", "", "Uniquely identifies the job that restores a recovery point.")
+		backup_describeRestoreJobCmd.MarkFlagRequired("restore-job-id")
+	})
 	backupCmd.AddCommand(backup_describeRestoreJobCmd)
 }

@@ -12,9 +12,11 @@ var kinesis_updateAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_updateAccountSettingsCmd).Standalone()
+	carapace.Gen(kinesis_updateAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_updateAccountSettingsCmd).Standalone()
 
-	kinesis_updateAccountSettingsCmd.Flags().String("minimum-throughput-billing-commitment", "", "Specifies the minimum throughput billing commitment configuration for your account.")
-	kinesis_updateAccountSettingsCmd.MarkFlagRequired("minimum-throughput-billing-commitment")
+		kinesis_updateAccountSettingsCmd.Flags().String("minimum-throughput-billing-commitment", "", "Specifies the minimum throughput billing commitment configuration for your account.")
+		kinesis_updateAccountSettingsCmd.MarkFlagRequired("minimum-throughput-billing-commitment")
+	})
 	kinesisCmd.AddCommand(kinesis_updateAccountSettingsCmd)
 }

@@ -12,9 +12,11 @@ var lightsail_rebootRelationalDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_rebootRelationalDatabaseCmd).Standalone()
+	carapace.Gen(lightsail_rebootRelationalDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_rebootRelationalDatabaseCmd).Standalone()
 
-	lightsail_rebootRelationalDatabaseCmd.Flags().String("relational-database-name", "", "The name of your database to reboot.")
-	lightsail_rebootRelationalDatabaseCmd.MarkFlagRequired("relational-database-name")
+		lightsail_rebootRelationalDatabaseCmd.Flags().String("relational-database-name", "", "The name of your database to reboot.")
+		lightsail_rebootRelationalDatabaseCmd.MarkFlagRequired("relational-database-name")
+	})
 	lightsailCmd.AddCommand(lightsail_rebootRelationalDatabaseCmd)
 }

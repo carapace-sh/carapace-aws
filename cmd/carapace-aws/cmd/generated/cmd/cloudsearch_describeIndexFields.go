@@ -12,13 +12,15 @@ var cloudsearch_describeIndexFieldsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_describeIndexFieldsCmd).Standalone()
+	carapace.Gen(cloudsearch_describeIndexFieldsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_describeIndexFieldsCmd).Standalone()
 
-	cloudsearch_describeIndexFieldsCmd.Flags().Bool("deployed", false, "Whether to display the deployed configuration (`true`) or include any pending changes (`false`).")
-	cloudsearch_describeIndexFieldsCmd.Flags().String("domain-name", "", "The name of the domain you want to describe.")
-	cloudsearch_describeIndexFieldsCmd.Flags().String("field-names", "", "A list of the index fields you want to describe.")
-	cloudsearch_describeIndexFieldsCmd.Flags().Bool("no-deployed", false, "Whether to display the deployed configuration (`true`) or include any pending changes (`false`).")
-	cloudsearch_describeIndexFieldsCmd.MarkFlagRequired("domain-name")
-	cloudsearch_describeIndexFieldsCmd.Flag("no-deployed").Hidden = true
+		cloudsearch_describeIndexFieldsCmd.Flags().Bool("deployed", false, "Whether to display the deployed configuration (`true`) or include any pending changes (`false`).")
+		cloudsearch_describeIndexFieldsCmd.Flags().String("domain-name", "", "The name of the domain you want to describe.")
+		cloudsearch_describeIndexFieldsCmd.Flags().String("field-names", "", "A list of the index fields you want to describe.")
+		cloudsearch_describeIndexFieldsCmd.Flags().Bool("no-deployed", false, "Whether to display the deployed configuration (`true`) or include any pending changes (`false`).")
+		cloudsearch_describeIndexFieldsCmd.MarkFlagRequired("domain-name")
+		cloudsearch_describeIndexFieldsCmd.Flag("no-deployed").Hidden = true
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_describeIndexFieldsCmd)
 }

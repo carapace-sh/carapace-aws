@@ -12,12 +12,14 @@ var mpa_updateApprovalTeamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_updateApprovalTeamCmd).Standalone()
+	carapace.Gen(mpa_updateApprovalTeamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_updateApprovalTeamCmd).Standalone()
 
-	mpa_updateApprovalTeamCmd.Flags().String("approval-strategy", "", "An `ApprovalStrategy` object.")
-	mpa_updateApprovalTeamCmd.Flags().String("approvers", "", "An array of `ApprovalTeamRequestApprover` objects.")
-	mpa_updateApprovalTeamCmd.Flags().String("arn", "", "Amazon Resource Name (ARN) for the team.")
-	mpa_updateApprovalTeamCmd.Flags().String("description", "", "Description for the team.")
-	mpa_updateApprovalTeamCmd.MarkFlagRequired("arn")
+		mpa_updateApprovalTeamCmd.Flags().String("approval-strategy", "", "An `ApprovalStrategy` object.")
+		mpa_updateApprovalTeamCmd.Flags().String("approvers", "", "An array of `ApprovalTeamRequestApprover` objects.")
+		mpa_updateApprovalTeamCmd.Flags().String("arn", "", "Amazon Resource Name (ARN) for the team.")
+		mpa_updateApprovalTeamCmd.Flags().String("description", "", "Description for the team.")
+		mpa_updateApprovalTeamCmd.MarkFlagRequired("arn")
+	})
 	mpaCmd.AddCommand(mpa_updateApprovalTeamCmd)
 }

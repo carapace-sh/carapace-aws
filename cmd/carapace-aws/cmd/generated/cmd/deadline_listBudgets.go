@@ -12,12 +12,14 @@ var deadline_listBudgetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_listBudgetsCmd).Standalone()
+	carapace.Gen(deadline_listBudgetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_listBudgetsCmd).Standalone()
 
-	deadline_listBudgetsCmd.Flags().String("farm-id", "", "The farm ID associated with the budgets.")
-	deadline_listBudgetsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	deadline_listBudgetsCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
-	deadline_listBudgetsCmd.Flags().String("status", "", "The status to list for the budgets.")
-	deadline_listBudgetsCmd.MarkFlagRequired("farm-id")
+		deadline_listBudgetsCmd.Flags().String("farm-id", "", "The farm ID associated with the budgets.")
+		deadline_listBudgetsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		deadline_listBudgetsCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
+		deadline_listBudgetsCmd.Flags().String("status", "", "The status to list for the budgets.")
+		deadline_listBudgetsCmd.MarkFlagRequired("farm-id")
+	})
 	deadlineCmd.AddCommand(deadline_listBudgetsCmd)
 }

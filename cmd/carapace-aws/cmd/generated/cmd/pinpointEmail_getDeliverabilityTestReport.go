@@ -12,9 +12,11 @@ var pinpointEmail_getDeliverabilityTestReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getDeliverabilityTestReportCmd).Standalone()
+	carapace.Gen(pinpointEmail_getDeliverabilityTestReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getDeliverabilityTestReportCmd).Standalone()
 
-	pinpointEmail_getDeliverabilityTestReportCmd.Flags().String("report-id", "", "A unique string that identifies the predictive inbox placement test.")
-	pinpointEmail_getDeliverabilityTestReportCmd.MarkFlagRequired("report-id")
+		pinpointEmail_getDeliverabilityTestReportCmd.Flags().String("report-id", "", "A unique string that identifies the predictive inbox placement test.")
+		pinpointEmail_getDeliverabilityTestReportCmd.MarkFlagRequired("report-id")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getDeliverabilityTestReportCmd)
 }

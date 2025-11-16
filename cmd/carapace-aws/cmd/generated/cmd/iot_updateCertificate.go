@@ -12,11 +12,13 @@ var iot_updateCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateCertificateCmd).Standalone()
+	carapace.Gen(iot_updateCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateCertificateCmd).Standalone()
 
-	iot_updateCertificateCmd.Flags().String("certificate-id", "", "The ID of the certificate.")
-	iot_updateCertificateCmd.Flags().String("new-status", "", "The new status.")
-	iot_updateCertificateCmd.MarkFlagRequired("certificate-id")
-	iot_updateCertificateCmd.MarkFlagRequired("new-status")
+		iot_updateCertificateCmd.Flags().String("certificate-id", "", "The ID of the certificate.")
+		iot_updateCertificateCmd.Flags().String("new-status", "", "The new status.")
+		iot_updateCertificateCmd.MarkFlagRequired("certificate-id")
+		iot_updateCertificateCmd.MarkFlagRequired("new-status")
+	})
 	iotCmd.AddCommand(iot_updateCertificateCmd)
 }

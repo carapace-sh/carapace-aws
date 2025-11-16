@@ -12,9 +12,11 @@ var networkFirewall_describeLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_describeLoggingConfigurationCmd).Standalone()
+	carapace.Gen(networkFirewall_describeLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_describeLoggingConfigurationCmd).Standalone()
 
-	networkFirewall_describeLoggingConfigurationCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
-	networkFirewall_describeLoggingConfigurationCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
+		networkFirewall_describeLoggingConfigurationCmd.Flags().String("firewall-arn", "", "The Amazon Resource Name (ARN) of the firewall.")
+		networkFirewall_describeLoggingConfigurationCmd.Flags().String("firewall-name", "", "The descriptive name of the firewall.")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_describeLoggingConfigurationCmd)
 }

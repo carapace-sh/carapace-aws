@@ -12,9 +12,11 @@ var devicefarm_listDeviceInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_listDeviceInstancesCmd).Standalone()
+	carapace.Gen(devicefarm_listDeviceInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_listDeviceInstancesCmd).Standalone()
 
-	devicefarm_listDeviceInstancesCmd.Flags().String("max-results", "", "An integer that specifies the maximum number of items you want to return in the API response.")
-	devicefarm_listDeviceInstancesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+		devicefarm_listDeviceInstancesCmd.Flags().String("max-results", "", "An integer that specifies the maximum number of items you want to return in the API response.")
+		devicefarm_listDeviceInstancesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+	})
 	devicefarmCmd.AddCommand(devicefarm_listDeviceInstancesCmd)
 }

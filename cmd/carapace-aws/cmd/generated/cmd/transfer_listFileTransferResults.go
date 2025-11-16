@@ -12,13 +12,15 @@ var transfer_listFileTransferResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_listFileTransferResultsCmd).Standalone()
+	carapace.Gen(transfer_listFileTransferResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_listFileTransferResultsCmd).Standalone()
 
-	transfer_listFileTransferResultsCmd.Flags().String("connector-id", "", "A unique identifier for a connector.")
-	transfer_listFileTransferResultsCmd.Flags().String("max-results", "", "The maximum number of files to return in a single page.")
-	transfer_listFileTransferResultsCmd.Flags().String("next-token", "", "If there are more file details than returned in this call, use this value for a subsequent call to `ListFileTransferResults` to retrieve them.")
-	transfer_listFileTransferResultsCmd.Flags().String("transfer-id", "", "A unique identifier for a file transfer.")
-	transfer_listFileTransferResultsCmd.MarkFlagRequired("connector-id")
-	transfer_listFileTransferResultsCmd.MarkFlagRequired("transfer-id")
+		transfer_listFileTransferResultsCmd.Flags().String("connector-id", "", "A unique identifier for a connector.")
+		transfer_listFileTransferResultsCmd.Flags().String("max-results", "", "The maximum number of files to return in a single page.")
+		transfer_listFileTransferResultsCmd.Flags().String("next-token", "", "If there are more file details than returned in this call, use this value for a subsequent call to `ListFileTransferResults` to retrieve them.")
+		transfer_listFileTransferResultsCmd.Flags().String("transfer-id", "", "A unique identifier for a file transfer.")
+		transfer_listFileTransferResultsCmd.MarkFlagRequired("connector-id")
+		transfer_listFileTransferResultsCmd.MarkFlagRequired("transfer-id")
+	})
 	transferCmd.AddCommand(transfer_listFileTransferResultsCmd)
 }

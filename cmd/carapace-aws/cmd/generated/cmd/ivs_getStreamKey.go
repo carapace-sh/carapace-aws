@@ -12,9 +12,11 @@ var ivs_getStreamKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_getStreamKeyCmd).Standalone()
+	carapace.Gen(ivs_getStreamKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_getStreamKeyCmd).Standalone()
 
-	ivs_getStreamKeyCmd.Flags().String("arn", "", "ARN for the stream key to be retrieved.")
-	ivs_getStreamKeyCmd.MarkFlagRequired("arn")
+		ivs_getStreamKeyCmd.Flags().String("arn", "", "ARN for the stream key to be retrieved.")
+		ivs_getStreamKeyCmd.MarkFlagRequired("arn")
+	})
 	ivsCmd.AddCommand(ivs_getStreamKeyCmd)
 }

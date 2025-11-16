@@ -12,9 +12,11 @@ var vpcLattice_deleteTargetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deleteTargetGroupCmd).Standalone()
+	carapace.Gen(vpcLattice_deleteTargetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deleteTargetGroupCmd).Standalone()
 
-	vpcLattice_deleteTargetGroupCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
-	vpcLattice_deleteTargetGroupCmd.MarkFlagRequired("target-group-identifier")
+		vpcLattice_deleteTargetGroupCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
+		vpcLattice_deleteTargetGroupCmd.MarkFlagRequired("target-group-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deleteTargetGroupCmd)
 }

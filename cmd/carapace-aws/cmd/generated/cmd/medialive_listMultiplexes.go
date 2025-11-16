@@ -12,9 +12,11 @@ var medialive_listMultiplexesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listMultiplexesCmd).Standalone()
+	carapace.Gen(medialive_listMultiplexesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listMultiplexesCmd).Standalone()
 
-	medialive_listMultiplexesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	medialive_listMultiplexesCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+		medialive_listMultiplexesCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		medialive_listMultiplexesCmd.Flags().String("next-token", "", "The token to retrieve the next page of results.")
+	})
 	medialiveCmd.AddCommand(medialive_listMultiplexesCmd)
 }

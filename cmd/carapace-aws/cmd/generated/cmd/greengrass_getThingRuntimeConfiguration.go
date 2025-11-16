@@ -12,9 +12,11 @@ var greengrass_getThingRuntimeConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getThingRuntimeConfigurationCmd).Standalone()
+	carapace.Gen(greengrass_getThingRuntimeConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getThingRuntimeConfigurationCmd).Standalone()
 
-	greengrass_getThingRuntimeConfigurationCmd.Flags().String("thing-name", "", "The thing name.")
-	greengrass_getThingRuntimeConfigurationCmd.MarkFlagRequired("thing-name")
+		greengrass_getThingRuntimeConfigurationCmd.Flags().String("thing-name", "", "The thing name.")
+		greengrass_getThingRuntimeConfigurationCmd.MarkFlagRequired("thing-name")
+	})
 	greengrassCmd.AddCommand(greengrass_getThingRuntimeConfigurationCmd)
 }

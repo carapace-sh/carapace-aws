@@ -12,9 +12,11 @@ var devopsGuru_updateServiceIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_updateServiceIntegrationCmd).Standalone()
+	carapace.Gen(devopsGuru_updateServiceIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_updateServiceIntegrationCmd).Standalone()
 
-	devopsGuru_updateServiceIntegrationCmd.Flags().String("service-integration", "", "An `IntegratedServiceConfig` object used to specify the integrated service you want to update, and whether you want to update it to enabled or disabled.")
-	devopsGuru_updateServiceIntegrationCmd.MarkFlagRequired("service-integration")
+		devopsGuru_updateServiceIntegrationCmd.Flags().String("service-integration", "", "An `IntegratedServiceConfig` object used to specify the integrated service you want to update, and whether you want to update it to enabled or disabled.")
+		devopsGuru_updateServiceIntegrationCmd.MarkFlagRequired("service-integration")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_updateServiceIntegrationCmd)
 }

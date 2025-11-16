@@ -12,11 +12,13 @@ var rolesanywhere_resetNotificationSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_resetNotificationSettingsCmd).Standalone()
+	carapace.Gen(rolesanywhere_resetNotificationSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_resetNotificationSettingsCmd).Standalone()
 
-	rolesanywhere_resetNotificationSettingsCmd.Flags().String("notification-setting-keys", "", "A list of notification setting keys to reset.")
-	rolesanywhere_resetNotificationSettingsCmd.Flags().String("trust-anchor-id", "", "The unique identifier of the trust anchor.")
-	rolesanywhere_resetNotificationSettingsCmd.MarkFlagRequired("notification-setting-keys")
-	rolesanywhere_resetNotificationSettingsCmd.MarkFlagRequired("trust-anchor-id")
+		rolesanywhere_resetNotificationSettingsCmd.Flags().String("notification-setting-keys", "", "A list of notification setting keys to reset.")
+		rolesanywhere_resetNotificationSettingsCmd.Flags().String("trust-anchor-id", "", "The unique identifier of the trust anchor.")
+		rolesanywhere_resetNotificationSettingsCmd.MarkFlagRequired("notification-setting-keys")
+		rolesanywhere_resetNotificationSettingsCmd.MarkFlagRequired("trust-anchor-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_resetNotificationSettingsCmd)
 }

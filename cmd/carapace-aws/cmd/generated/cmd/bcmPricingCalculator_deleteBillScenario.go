@@ -12,9 +12,11 @@ var bcmPricingCalculator_deleteBillScenarioCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_deleteBillScenarioCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_deleteBillScenarioCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_deleteBillScenarioCmd).Standalone()
 
-	bcmPricingCalculator_deleteBillScenarioCmd.Flags().String("identifier", "", "The unique identifier of the bill scenario to delete.")
-	bcmPricingCalculator_deleteBillScenarioCmd.MarkFlagRequired("identifier")
+		bcmPricingCalculator_deleteBillScenarioCmd.Flags().String("identifier", "", "The unique identifier of the bill scenario to delete.")
+		bcmPricingCalculator_deleteBillScenarioCmd.MarkFlagRequired("identifier")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_deleteBillScenarioCmd)
 }

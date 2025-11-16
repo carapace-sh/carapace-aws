@@ -12,11 +12,13 @@ var transfer_listHostKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_listHostKeysCmd).Standalone()
+	carapace.Gen(transfer_listHostKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_listHostKeysCmd).Standalone()
 
-	transfer_listHostKeysCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	transfer_listHostKeysCmd.Flags().String("next-token", "", "When there are additional results that were not returned, a `NextToken` parameter is returned.")
-	transfer_listHostKeysCmd.Flags().String("server-id", "", "The identifier of the server that contains the host keys that you want to view.")
-	transfer_listHostKeysCmd.MarkFlagRequired("server-id")
+		transfer_listHostKeysCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		transfer_listHostKeysCmd.Flags().String("next-token", "", "When there are additional results that were not returned, a `NextToken` parameter is returned.")
+		transfer_listHostKeysCmd.Flags().String("server-id", "", "The identifier of the server that contains the host keys that you want to view.")
+		transfer_listHostKeysCmd.MarkFlagRequired("server-id")
+	})
 	transferCmd.AddCommand(transfer_listHostKeysCmd)
 }

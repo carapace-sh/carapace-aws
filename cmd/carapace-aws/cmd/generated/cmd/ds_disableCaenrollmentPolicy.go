@@ -12,9 +12,11 @@ var ds_disableCaenrollmentPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_disableCaenrollmentPolicyCmd).Standalone()
+	carapace.Gen(ds_disableCaenrollmentPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_disableCaenrollmentPolicyCmd).Standalone()
 
-	ds_disableCaenrollmentPolicyCmd.Flags().String("directory-id", "", "The identifier of the directory for which to disable the CA enrollment policy.")
-	ds_disableCaenrollmentPolicyCmd.MarkFlagRequired("directory-id")
+		ds_disableCaenrollmentPolicyCmd.Flags().String("directory-id", "", "The identifier of the directory for which to disable the CA enrollment policy.")
+		ds_disableCaenrollmentPolicyCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_disableCaenrollmentPolicyCmd)
 }

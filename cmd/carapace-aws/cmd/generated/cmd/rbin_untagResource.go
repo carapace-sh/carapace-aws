@@ -12,11 +12,13 @@ var rbin_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rbin_untagResourceCmd).Standalone()
+	carapace.Gen(rbin_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rbin_untagResourceCmd).Standalone()
 
-	rbin_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the retention rule.")
-	rbin_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys of the tags to unassign.")
-	rbin_untagResourceCmd.MarkFlagRequired("resource-arn")
-	rbin_untagResourceCmd.MarkFlagRequired("tag-keys")
+		rbin_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the retention rule.")
+		rbin_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys of the tags to unassign.")
+		rbin_untagResourceCmd.MarkFlagRequired("resource-arn")
+		rbin_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	rbinCmd.AddCommand(rbin_untagResourceCmd)
 }

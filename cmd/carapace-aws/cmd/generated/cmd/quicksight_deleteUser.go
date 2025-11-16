@@ -12,13 +12,15 @@ var quicksight_deleteUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteUserCmd).Standalone()
+	carapace.Gen(quicksight_deleteUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteUserCmd).Standalone()
 
-	quicksight_deleteUserCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that the user is in.")
-	quicksight_deleteUserCmd.Flags().String("namespace", "", "The namespace.")
-	quicksight_deleteUserCmd.Flags().String("user-name", "", "The name of the user that you want to delete.")
-	quicksight_deleteUserCmd.MarkFlagRequired("aws-account-id")
-	quicksight_deleteUserCmd.MarkFlagRequired("namespace")
-	quicksight_deleteUserCmd.MarkFlagRequired("user-name")
+		quicksight_deleteUserCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that the user is in.")
+		quicksight_deleteUserCmd.Flags().String("namespace", "", "The namespace.")
+		quicksight_deleteUserCmd.Flags().String("user-name", "", "The name of the user that you want to delete.")
+		quicksight_deleteUserCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteUserCmd.MarkFlagRequired("namespace")
+		quicksight_deleteUserCmd.MarkFlagRequired("user-name")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteUserCmd)
 }

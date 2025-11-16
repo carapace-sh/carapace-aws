@@ -12,11 +12,13 @@ var devicefarm_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_tagResourceCmd).Standalone()
+	carapace.Gen(devicefarm_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_tagResourceCmd).Standalone()
 
-	devicefarm_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource or resources to which to add tags.")
-	devicefarm_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
-	devicefarm_tagResourceCmd.MarkFlagRequired("resource-arn")
-	devicefarm_tagResourceCmd.MarkFlagRequired("tags")
+		devicefarm_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource or resources to which to add tags.")
+		devicefarm_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
+		devicefarm_tagResourceCmd.MarkFlagRequired("resource-arn")
+		devicefarm_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	devicefarmCmd.AddCommand(devicefarm_tagResourceCmd)
 }

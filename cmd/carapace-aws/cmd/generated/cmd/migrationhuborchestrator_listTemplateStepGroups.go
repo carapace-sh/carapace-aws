@@ -12,11 +12,13 @@ var migrationhuborchestrator_listTemplateStepGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_listTemplateStepGroupsCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_listTemplateStepGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_listTemplateStepGroupsCmd).Standalone()
 
-	migrationhuborchestrator_listTemplateStepGroupsCmd.Flags().String("max-results", "", "The maximum number of results that can be returned.")
-	migrationhuborchestrator_listTemplateStepGroupsCmd.Flags().String("next-token", "", "The pagination token.")
-	migrationhuborchestrator_listTemplateStepGroupsCmd.Flags().String("template-id", "", "The ID of the template.")
-	migrationhuborchestrator_listTemplateStepGroupsCmd.MarkFlagRequired("template-id")
+		migrationhuborchestrator_listTemplateStepGroupsCmd.Flags().String("max-results", "", "The maximum number of results that can be returned.")
+		migrationhuborchestrator_listTemplateStepGroupsCmd.Flags().String("next-token", "", "The pagination token.")
+		migrationhuborchestrator_listTemplateStepGroupsCmd.Flags().String("template-id", "", "The ID of the template.")
+		migrationhuborchestrator_listTemplateStepGroupsCmd.MarkFlagRequired("template-id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_listTemplateStepGroupsCmd)
 }

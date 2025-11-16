@@ -12,13 +12,15 @@ var connect_updateQueueOutboundCallerConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateQueueOutboundCallerConfigCmd).Standalone()
+	carapace.Gen(connect_updateQueueOutboundCallerConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateQueueOutboundCallerConfigCmd).Standalone()
 
-	connect_updateQueueOutboundCallerConfigCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateQueueOutboundCallerConfigCmd.Flags().String("outbound-caller-config", "", "The outbound caller ID name, number, and outbound whisper flow.")
-	connect_updateQueueOutboundCallerConfigCmd.Flags().String("queue-id", "", "The identifier for the queue.")
-	connect_updateQueueOutboundCallerConfigCmd.MarkFlagRequired("instance-id")
-	connect_updateQueueOutboundCallerConfigCmd.MarkFlagRequired("outbound-caller-config")
-	connect_updateQueueOutboundCallerConfigCmd.MarkFlagRequired("queue-id")
+		connect_updateQueueOutboundCallerConfigCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateQueueOutboundCallerConfigCmd.Flags().String("outbound-caller-config", "", "The outbound caller ID name, number, and outbound whisper flow.")
+		connect_updateQueueOutboundCallerConfigCmd.Flags().String("queue-id", "", "The identifier for the queue.")
+		connect_updateQueueOutboundCallerConfigCmd.MarkFlagRequired("instance-id")
+		connect_updateQueueOutboundCallerConfigCmd.MarkFlagRequired("outbound-caller-config")
+		connect_updateQueueOutboundCallerConfigCmd.MarkFlagRequired("queue-id")
+	})
 	connectCmd.AddCommand(connect_updateQueueOutboundCallerConfigCmd)
 }

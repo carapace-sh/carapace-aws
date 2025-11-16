@@ -12,10 +12,12 @@ var iotwireless_deregisterWirelessDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_deregisterWirelessDeviceCmd).Standalone()
+	carapace.Gen(iotwireless_deregisterWirelessDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_deregisterWirelessDeviceCmd).Standalone()
 
-	iotwireless_deregisterWirelessDeviceCmd.Flags().String("identifier", "", "The identifier of the wireless device to deregister from AWS IoT Wireless.")
-	iotwireless_deregisterWirelessDeviceCmd.Flags().String("wireless-device-type", "", "The type of wireless device to deregister from AWS IoT Wireless, which can be `LoRaWAN` or `Sidewalk`.")
-	iotwireless_deregisterWirelessDeviceCmd.MarkFlagRequired("identifier")
+		iotwireless_deregisterWirelessDeviceCmd.Flags().String("identifier", "", "The identifier of the wireless device to deregister from AWS IoT Wireless.")
+		iotwireless_deregisterWirelessDeviceCmd.Flags().String("wireless-device-type", "", "The type of wireless device to deregister from AWS IoT Wireless, which can be `LoRaWAN` or `Sidewalk`.")
+		iotwireless_deregisterWirelessDeviceCmd.MarkFlagRequired("identifier")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_deregisterWirelessDeviceCmd)
 }

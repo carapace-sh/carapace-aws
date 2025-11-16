@@ -12,9 +12,11 @@ var route53_deleteTrafficPolicyInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_deleteTrafficPolicyInstanceCmd).Standalone()
+	carapace.Gen(route53_deleteTrafficPolicyInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_deleteTrafficPolicyInstanceCmd).Standalone()
 
-	route53_deleteTrafficPolicyInstanceCmd.Flags().String("id", "", "The ID of the traffic policy instance that you want to delete.")
-	route53_deleteTrafficPolicyInstanceCmd.MarkFlagRequired("id")
+		route53_deleteTrafficPolicyInstanceCmd.Flags().String("id", "", "The ID of the traffic policy instance that you want to delete.")
+		route53_deleteTrafficPolicyInstanceCmd.MarkFlagRequired("id")
+	})
 	route53Cmd.AddCommand(route53_deleteTrafficPolicyInstanceCmd)
 }

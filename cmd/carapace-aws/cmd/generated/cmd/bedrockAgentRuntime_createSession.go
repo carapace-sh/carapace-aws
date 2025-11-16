@@ -12,10 +12,12 @@ var bedrockAgentRuntime_createSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentRuntime_createSessionCmd).Standalone()
+	carapace.Gen(bedrockAgentRuntime_createSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentRuntime_createSessionCmd).Standalone()
 
-	bedrockAgentRuntime_createSessionCmd.Flags().String("encryption-key-arn", "", "The Amazon Resource Name (ARN) of the KMS key to use to encrypt the session data.")
-	bedrockAgentRuntime_createSessionCmd.Flags().String("session-metadata", "", "A map of key-value pairs containing attributes to be persisted across the session.")
-	bedrockAgentRuntime_createSessionCmd.Flags().String("tags", "", "Specify the key-value pairs for the tags that you want to attach to the session.")
+		bedrockAgentRuntime_createSessionCmd.Flags().String("encryption-key-arn", "", "The Amazon Resource Name (ARN) of the KMS key to use to encrypt the session data.")
+		bedrockAgentRuntime_createSessionCmd.Flags().String("session-metadata", "", "A map of key-value pairs containing attributes to be persisted across the session.")
+		bedrockAgentRuntime_createSessionCmd.Flags().String("tags", "", "Specify the key-value pairs for the tags that you want to attach to the session.")
+	})
 	bedrockAgentRuntimeCmd.AddCommand(bedrockAgentRuntime_createSessionCmd)
 }

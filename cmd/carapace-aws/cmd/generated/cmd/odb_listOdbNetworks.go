@@ -12,9 +12,11 @@ var odb_listOdbNetworksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_listOdbNetworksCmd).Standalone()
+	carapace.Gen(odb_listOdbNetworksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_listOdbNetworksCmd).Standalone()
 
-	odb_listOdbNetworksCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	odb_listOdbNetworksCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		odb_listOdbNetworksCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		odb_listOdbNetworksCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+	})
 	odbCmd.AddCommand(odb_listOdbNetworksCmd)
 }

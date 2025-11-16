@@ -12,11 +12,13 @@ var cloudformation_updateTerminationProtectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_updateTerminationProtectionCmd).Standalone()
+	carapace.Gen(cloudformation_updateTerminationProtectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_updateTerminationProtectionCmd).Standalone()
 
-	cloudformation_updateTerminationProtectionCmd.Flags().String("enable-termination-protection", "", "Whether to enable termination protection on the specified stack.")
-	cloudformation_updateTerminationProtectionCmd.Flags().String("stack-name", "", "The name or unique ID of the stack for which you want to set termination protection.")
-	cloudformation_updateTerminationProtectionCmd.MarkFlagRequired("enable-termination-protection")
-	cloudformation_updateTerminationProtectionCmd.MarkFlagRequired("stack-name")
+		cloudformation_updateTerminationProtectionCmd.Flags().String("enable-termination-protection", "", "Whether to enable termination protection on the specified stack.")
+		cloudformation_updateTerminationProtectionCmd.Flags().String("stack-name", "", "The name or unique ID of the stack for which you want to set termination protection.")
+		cloudformation_updateTerminationProtectionCmd.MarkFlagRequired("enable-termination-protection")
+		cloudformation_updateTerminationProtectionCmd.MarkFlagRequired("stack-name")
+	})
 	cloudformationCmd.AddCommand(cloudformation_updateTerminationProtectionCmd)
 }

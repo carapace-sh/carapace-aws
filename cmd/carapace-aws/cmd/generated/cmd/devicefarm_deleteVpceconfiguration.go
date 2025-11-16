@@ -12,9 +12,11 @@ var devicefarm_deleteVpceconfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_deleteVpceconfigurationCmd).Standalone()
+	carapace.Gen(devicefarm_deleteVpceconfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_deleteVpceconfigurationCmd).Standalone()
 
-	devicefarm_deleteVpceconfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to delete.")
-	devicefarm_deleteVpceconfigurationCmd.MarkFlagRequired("arn")
+		devicefarm_deleteVpceconfigurationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to delete.")
+		devicefarm_deleteVpceconfigurationCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_deleteVpceconfigurationCmd)
 }

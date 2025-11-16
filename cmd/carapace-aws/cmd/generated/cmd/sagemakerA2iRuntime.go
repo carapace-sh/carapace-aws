@@ -12,7 +12,9 @@ var sagemakerA2iRuntimeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerA2iRuntimeCmd).Standalone()
+	carapace.Gen(sagemakerA2iRuntimeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerA2iRuntimeCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(sagemakerA2iRuntimeCmd)
 }

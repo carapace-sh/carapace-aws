@@ -12,11 +12,13 @@ var apigatewayv2_deleteDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_deleteDeploymentCmd).Standalone()
+	carapace.Gen(apigatewayv2_deleteDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_deleteDeploymentCmd).Standalone()
 
-	apigatewayv2_deleteDeploymentCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_deleteDeploymentCmd.Flags().String("deployment-id", "", "The deployment ID.")
-	apigatewayv2_deleteDeploymentCmd.MarkFlagRequired("api-id")
-	apigatewayv2_deleteDeploymentCmd.MarkFlagRequired("deployment-id")
+		apigatewayv2_deleteDeploymentCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_deleteDeploymentCmd.Flags().String("deployment-id", "", "The deployment ID.")
+		apigatewayv2_deleteDeploymentCmd.MarkFlagRequired("api-id")
+		apigatewayv2_deleteDeploymentCmd.MarkFlagRequired("deployment-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_deleteDeploymentCmd)
 }

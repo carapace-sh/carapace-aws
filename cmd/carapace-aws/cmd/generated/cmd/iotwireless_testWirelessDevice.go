@@ -12,9 +12,11 @@ var iotwireless_testWirelessDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_testWirelessDeviceCmd).Standalone()
+	carapace.Gen(iotwireless_testWirelessDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_testWirelessDeviceCmd).Standalone()
 
-	iotwireless_testWirelessDeviceCmd.Flags().String("id", "", "The ID of the wireless device to test.")
-	iotwireless_testWirelessDeviceCmd.MarkFlagRequired("id")
+		iotwireless_testWirelessDeviceCmd.Flags().String("id", "", "The ID of the wireless device to test.")
+		iotwireless_testWirelessDeviceCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_testWirelessDeviceCmd)
 }

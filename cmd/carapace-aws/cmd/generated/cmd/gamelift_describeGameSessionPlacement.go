@@ -12,9 +12,11 @@ var gamelift_describeGameSessionPlacementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeGameSessionPlacementCmd).Standalone()
+	carapace.Gen(gamelift_describeGameSessionPlacementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeGameSessionPlacementCmd).Standalone()
 
-	gamelift_describeGameSessionPlacementCmd.Flags().String("placement-id", "", "A unique identifier for a game session placement to retrieve.")
-	gamelift_describeGameSessionPlacementCmd.MarkFlagRequired("placement-id")
+		gamelift_describeGameSessionPlacementCmd.Flags().String("placement-id", "", "A unique identifier for a game session placement to retrieve.")
+		gamelift_describeGameSessionPlacementCmd.MarkFlagRequired("placement-id")
+	})
 	gameliftCmd.AddCommand(gamelift_describeGameSessionPlacementCmd)
 }

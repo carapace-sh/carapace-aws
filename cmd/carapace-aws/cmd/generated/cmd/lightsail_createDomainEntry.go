@@ -12,11 +12,13 @@ var lightsail_createDomainEntryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_createDomainEntryCmd).Standalone()
+	carapace.Gen(lightsail_createDomainEntryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_createDomainEntryCmd).Standalone()
 
-	lightsail_createDomainEntryCmd.Flags().String("domain-entry", "", "An array of key-value pairs containing information about the domain entry request.")
-	lightsail_createDomainEntryCmd.Flags().String("domain-name", "", "The domain name (`example.com`) for which you want to create the domain entry.")
-	lightsail_createDomainEntryCmd.MarkFlagRequired("domain-entry")
-	lightsail_createDomainEntryCmd.MarkFlagRequired("domain-name")
+		lightsail_createDomainEntryCmd.Flags().String("domain-entry", "", "An array of key-value pairs containing information about the domain entry request.")
+		lightsail_createDomainEntryCmd.Flags().String("domain-name", "", "The domain name (`example.com`) for which you want to create the domain entry.")
+		lightsail_createDomainEntryCmd.MarkFlagRequired("domain-entry")
+		lightsail_createDomainEntryCmd.MarkFlagRequired("domain-name")
+	})
 	lightsailCmd.AddCommand(lightsail_createDomainEntryCmd)
 }

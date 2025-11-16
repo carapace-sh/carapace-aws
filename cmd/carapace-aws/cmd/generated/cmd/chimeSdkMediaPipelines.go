@@ -12,7 +12,9 @@ var chimeSdkMediaPipelinesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelinesCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelinesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelinesCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(chimeSdkMediaPipelinesCmd)
 }

@@ -12,11 +12,13 @@ var odb_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_tagResourceCmd).Standalone()
+	carapace.Gen(odb_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_tagResourceCmd).Standalone()
 
-	odb_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to apply tags to.")
-	odb_tagResourceCmd.Flags().String("tags", "", "The list of tags to apply to the resource.")
-	odb_tagResourceCmd.MarkFlagRequired("resource-arn")
-	odb_tagResourceCmd.MarkFlagRequired("tags")
+		odb_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to apply tags to.")
+		odb_tagResourceCmd.Flags().String("tags", "", "The list of tags to apply to the resource.")
+		odb_tagResourceCmd.MarkFlagRequired("resource-arn")
+		odb_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	odbCmd.AddCommand(odb_tagResourceCmd)
 }

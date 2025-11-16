@@ -12,9 +12,11 @@ var comprehend_stopEntitiesDetectionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_stopEntitiesDetectionJobCmd).Standalone()
+	carapace.Gen(comprehend_stopEntitiesDetectionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_stopEntitiesDetectionJobCmd).Standalone()
 
-	comprehend_stopEntitiesDetectionJobCmd.Flags().String("job-id", "", "The identifier of the entities detection job to stop.")
-	comprehend_stopEntitiesDetectionJobCmd.MarkFlagRequired("job-id")
+		comprehend_stopEntitiesDetectionJobCmd.Flags().String("job-id", "", "The identifier of the entities detection job to stop.")
+		comprehend_stopEntitiesDetectionJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendCmd.AddCommand(comprehend_stopEntitiesDetectionJobCmd)
 }

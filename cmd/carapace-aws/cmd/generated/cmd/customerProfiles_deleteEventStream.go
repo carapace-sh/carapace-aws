@@ -12,11 +12,13 @@ var customerProfiles_deleteEventStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_deleteEventStreamCmd).Standalone()
+	carapace.Gen(customerProfiles_deleteEventStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_deleteEventStreamCmd).Standalone()
 
-	customerProfiles_deleteEventStreamCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_deleteEventStreamCmd.Flags().String("event-stream-name", "", "The name of the event stream")
-	customerProfiles_deleteEventStreamCmd.MarkFlagRequired("domain-name")
-	customerProfiles_deleteEventStreamCmd.MarkFlagRequired("event-stream-name")
+		customerProfiles_deleteEventStreamCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_deleteEventStreamCmd.Flags().String("event-stream-name", "", "The name of the event stream")
+		customerProfiles_deleteEventStreamCmd.MarkFlagRequired("domain-name")
+		customerProfiles_deleteEventStreamCmd.MarkFlagRequired("event-stream-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_deleteEventStreamCmd)
 }

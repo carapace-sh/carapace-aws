@@ -12,17 +12,19 @@ var cognitoIdp_createIdentityProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_createIdentityProviderCmd).Standalone()
+	carapace.Gen(cognitoIdp_createIdentityProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_createIdentityProviderCmd).Standalone()
 
-	cognitoIdp_createIdentityProviderCmd.Flags().String("attribute-mapping", "", "A mapping of IdP attributes to standard and custom user pool attributes.")
-	cognitoIdp_createIdentityProviderCmd.Flags().String("idp-identifiers", "", "An array of IdP identifiers, for example `\"IdPIdentifiers\": [ \"MyIdP\", \"MyIdP2\" ]`.")
-	cognitoIdp_createIdentityProviderCmd.Flags().String("provider-details", "", "The scopes, URLs, and identifiers for your external identity provider.")
-	cognitoIdp_createIdentityProviderCmd.Flags().String("provider-name", "", "The name that you want to assign to the IdP.")
-	cognitoIdp_createIdentityProviderCmd.Flags().String("provider-type", "", "The type of IdP that you want to add.")
-	cognitoIdp_createIdentityProviderCmd.Flags().String("user-pool-id", "", "The Id of the user pool where you want to create an IdP.")
-	cognitoIdp_createIdentityProviderCmd.MarkFlagRequired("provider-details")
-	cognitoIdp_createIdentityProviderCmd.MarkFlagRequired("provider-name")
-	cognitoIdp_createIdentityProviderCmd.MarkFlagRequired("provider-type")
-	cognitoIdp_createIdentityProviderCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_createIdentityProviderCmd.Flags().String("attribute-mapping", "", "A mapping of IdP attributes to standard and custom user pool attributes.")
+		cognitoIdp_createIdentityProviderCmd.Flags().String("idp-identifiers", "", "An array of IdP identifiers, for example `\"IdPIdentifiers\": [ \"MyIdP\", \"MyIdP2\" ]`.")
+		cognitoIdp_createIdentityProviderCmd.Flags().String("provider-details", "", "The scopes, URLs, and identifiers for your external identity provider.")
+		cognitoIdp_createIdentityProviderCmd.Flags().String("provider-name", "", "The name that you want to assign to the IdP.")
+		cognitoIdp_createIdentityProviderCmd.Flags().String("provider-type", "", "The type of IdP that you want to add.")
+		cognitoIdp_createIdentityProviderCmd.Flags().String("user-pool-id", "", "The Id of the user pool where you want to create an IdP.")
+		cognitoIdp_createIdentityProviderCmd.MarkFlagRequired("provider-details")
+		cognitoIdp_createIdentityProviderCmd.MarkFlagRequired("provider-name")
+		cognitoIdp_createIdentityProviderCmd.MarkFlagRequired("provider-type")
+		cognitoIdp_createIdentityProviderCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_createIdentityProviderCmd)
 }

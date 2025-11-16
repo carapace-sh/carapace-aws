@@ -12,9 +12,11 @@ var bcmDataExports_listExportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDataExports_listExportsCmd).Standalone()
+	carapace.Gen(bcmDataExports_listExportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDataExports_listExportsCmd).Standalone()
 
-	bcmDataExports_listExportsCmd.Flags().String("max-results", "", "The maximum number of objects that are returned for the request.")
-	bcmDataExports_listExportsCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+		bcmDataExports_listExportsCmd.Flags().String("max-results", "", "The maximum number of objects that are returned for the request.")
+		bcmDataExports_listExportsCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+	})
 	bcmDataExportsCmd.AddCommand(bcmDataExports_listExportsCmd)
 }

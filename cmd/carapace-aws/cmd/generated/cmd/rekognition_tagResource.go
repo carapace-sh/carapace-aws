@@ -12,11 +12,13 @@ var rekognition_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_tagResourceCmd).Standalone()
+	carapace.Gen(rekognition_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_tagResourceCmd).Standalone()
 
-	rekognition_tagResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to assign the tags to.")
-	rekognition_tagResourceCmd.Flags().String("tags", "", "The key-value tags to assign to the resource.")
-	rekognition_tagResourceCmd.MarkFlagRequired("resource-arn")
-	rekognition_tagResourceCmd.MarkFlagRequired("tags")
+		rekognition_tagResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to assign the tags to.")
+		rekognition_tagResourceCmd.Flags().String("tags", "", "The key-value tags to assign to the resource.")
+		rekognition_tagResourceCmd.MarkFlagRequired("resource-arn")
+		rekognition_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	rekognitionCmd.AddCommand(rekognition_tagResourceCmd)
 }

@@ -12,7 +12,9 @@ var iotwireless_getEventConfigurationByResourceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getEventConfigurationByResourceTypesCmd).Standalone()
+	carapace.Gen(iotwireless_getEventConfigurationByResourceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getEventConfigurationByResourceTypesCmd).Standalone()
 
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getEventConfigurationByResourceTypesCmd)
 }

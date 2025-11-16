@@ -12,9 +12,11 @@ var timestreamInfluxdb_getDbClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamInfluxdb_getDbClusterCmd).Standalone()
+	carapace.Gen(timestreamInfluxdb_getDbClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamInfluxdb_getDbClusterCmd).Standalone()
 
-	timestreamInfluxdb_getDbClusterCmd.Flags().String("db-cluster-id", "", "Service-generated unique identifier of the DB cluster to retrieve.")
-	timestreamInfluxdb_getDbClusterCmd.MarkFlagRequired("db-cluster-id")
+		timestreamInfluxdb_getDbClusterCmd.Flags().String("db-cluster-id", "", "Service-generated unique identifier of the DB cluster to retrieve.")
+		timestreamInfluxdb_getDbClusterCmd.MarkFlagRequired("db-cluster-id")
+	})
 	timestreamInfluxdbCmd.AddCommand(timestreamInfluxdb_getDbClusterCmd)
 }

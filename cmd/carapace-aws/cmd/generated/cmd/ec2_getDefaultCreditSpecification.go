@@ -12,12 +12,14 @@ var ec2_getDefaultCreditSpecificationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getDefaultCreditSpecificationCmd).Standalone()
+	carapace.Gen(ec2_getDefaultCreditSpecificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getDefaultCreditSpecificationCmd).Standalone()
 
-	ec2_getDefaultCreditSpecificationCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_getDefaultCreditSpecificationCmd.Flags().String("instance-family", "", "The instance family.")
-	ec2_getDefaultCreditSpecificationCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
-	ec2_getDefaultCreditSpecificationCmd.MarkFlagRequired("instance-family")
-	ec2_getDefaultCreditSpecificationCmd.Flag("no-dry-run").Hidden = true
+		ec2_getDefaultCreditSpecificationCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_getDefaultCreditSpecificationCmd.Flags().String("instance-family", "", "The instance family.")
+		ec2_getDefaultCreditSpecificationCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.")
+		ec2_getDefaultCreditSpecificationCmd.MarkFlagRequired("instance-family")
+		ec2_getDefaultCreditSpecificationCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_getDefaultCreditSpecificationCmd)
 }

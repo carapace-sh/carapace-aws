@@ -12,12 +12,14 @@ var observabilityadmin_listTelemetryRulesForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_listTelemetryRulesForOrganizationCmd).Standalone()
+	carapace.Gen(observabilityadmin_listTelemetryRulesForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_listTelemetryRulesForOrganizationCmd).Standalone()
 
-	observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("max-results", "", "The maximum number of organization telemetry rules to return in a single call.")
-	observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("rule-name-prefix", "", "A string to filter organization telemetry rules whose names begin with the specified prefix.")
-	observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("source-account-ids", "", "The list of account IDs to filter organization telemetry rules by their source accounts.")
-	observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("source-organization-unit-ids", "", "The list of organizational unit IDs to filter organization telemetry rules by their source organizational units.")
+		observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("max-results", "", "The maximum number of organization telemetry rules to return in a single call.")
+		observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("rule-name-prefix", "", "A string to filter organization telemetry rules whose names begin with the specified prefix.")
+		observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("source-account-ids", "", "The list of account IDs to filter organization telemetry rules by their source accounts.")
+		observabilityadmin_listTelemetryRulesForOrganizationCmd.Flags().String("source-organization-unit-ids", "", "The list of organizational unit IDs to filter organization telemetry rules by their source organizational units.")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_listTelemetryRulesForOrganizationCmd)
 }

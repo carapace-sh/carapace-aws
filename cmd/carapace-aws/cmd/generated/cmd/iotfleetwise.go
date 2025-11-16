@@ -12,7 +12,9 @@ var iotfleetwiseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwiseCmd).Standalone()
+	carapace.Gen(iotfleetwiseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwiseCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(iotfleetwiseCmd)
 }

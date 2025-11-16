@@ -12,7 +12,9 @@ var ecrPublic_getAuthorizationTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecrPublic_getAuthorizationTokenCmd).Standalone()
+	carapace.Gen(ecrPublic_getAuthorizationTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecrPublic_getAuthorizationTokenCmd).Standalone()
 
+	})
 	ecrPublicCmd.AddCommand(ecrPublic_getAuthorizationTokenCmd)
 }

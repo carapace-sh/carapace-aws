@@ -12,12 +12,14 @@ var ivschat_listRoomsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_listRoomsCmd).Standalone()
+	carapace.Gen(ivschat_listRoomsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_listRoomsCmd).Standalone()
 
-	ivschat_listRoomsCmd.Flags().String("logging-configuration-identifier", "", "Logging-configuration identifier.")
-	ivschat_listRoomsCmd.Flags().String("max-results", "", "Maximum number of rooms to return.")
-	ivschat_listRoomsCmd.Flags().String("message-review-handler-uri", "", "Filters the list to match the specified message review handler URI.")
-	ivschat_listRoomsCmd.Flags().String("name", "", "Filters the list to match the specified room name.")
-	ivschat_listRoomsCmd.Flags().String("next-token", "", "The first room to retrieve.")
+		ivschat_listRoomsCmd.Flags().String("logging-configuration-identifier", "", "Logging-configuration identifier.")
+		ivschat_listRoomsCmd.Flags().String("max-results", "", "Maximum number of rooms to return.")
+		ivschat_listRoomsCmd.Flags().String("message-review-handler-uri", "", "Filters the list to match the specified message review handler URI.")
+		ivschat_listRoomsCmd.Flags().String("name", "", "Filters the list to match the specified room name.")
+		ivschat_listRoomsCmd.Flags().String("next-token", "", "The first room to retrieve.")
+	})
 	ivschatCmd.AddCommand(ivschat_listRoomsCmd)
 }

@@ -12,9 +12,11 @@ var ssmIncidents_deleteReplicationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_deleteReplicationSetCmd).Standalone()
+	carapace.Gen(ssmIncidents_deleteReplicationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_deleteReplicationSetCmd).Standalone()
 
-	ssmIncidents_deleteReplicationSetCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the replication set you're deleting.")
-	ssmIncidents_deleteReplicationSetCmd.MarkFlagRequired("arn")
+		ssmIncidents_deleteReplicationSetCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the replication set you're deleting.")
+		ssmIncidents_deleteReplicationSetCmd.MarkFlagRequired("arn")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_deleteReplicationSetCmd)
 }

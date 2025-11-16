@@ -12,9 +12,11 @@ var arcRegionSwitch_deletePlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcRegionSwitch_deletePlanCmd).Standalone()
+	carapace.Gen(arcRegionSwitch_deletePlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcRegionSwitch_deletePlanCmd).Standalone()
 
-	arcRegionSwitch_deletePlanCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the plan.")
-	arcRegionSwitch_deletePlanCmd.MarkFlagRequired("arn")
+		arcRegionSwitch_deletePlanCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the plan.")
+		arcRegionSwitch_deletePlanCmd.MarkFlagRequired("arn")
+	})
 	arcRegionSwitchCmd.AddCommand(arcRegionSwitch_deletePlanCmd)
 }

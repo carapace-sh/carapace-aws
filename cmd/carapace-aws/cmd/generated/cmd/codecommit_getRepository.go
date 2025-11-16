@@ -12,9 +12,11 @@ var codecommit_getRepositoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_getRepositoryCmd).Standalone()
+	carapace.Gen(codecommit_getRepositoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_getRepositoryCmd).Standalone()
 
-	codecommit_getRepositoryCmd.Flags().String("repository-name", "", "The name of the repository to get information about.")
-	codecommit_getRepositoryCmd.MarkFlagRequired("repository-name")
+		codecommit_getRepositoryCmd.Flags().String("repository-name", "", "The name of the repository to get information about.")
+		codecommit_getRepositoryCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_getRepositoryCmd)
 }

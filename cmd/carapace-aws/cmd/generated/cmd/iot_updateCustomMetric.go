@@ -12,11 +12,13 @@ var iot_updateCustomMetricCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateCustomMetricCmd).Standalone()
+	carapace.Gen(iot_updateCustomMetricCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateCustomMetricCmd).Standalone()
 
-	iot_updateCustomMetricCmd.Flags().String("display-name", "", "Field represents a friendly name in the console for the custom metric, it doesn't have to be unique.")
-	iot_updateCustomMetricCmd.Flags().String("metric-name", "", "The name of the custom metric.")
-	iot_updateCustomMetricCmd.MarkFlagRequired("display-name")
-	iot_updateCustomMetricCmd.MarkFlagRequired("metric-name")
+		iot_updateCustomMetricCmd.Flags().String("display-name", "", "Field represents a friendly name in the console for the custom metric, it doesn't have to be unique.")
+		iot_updateCustomMetricCmd.Flags().String("metric-name", "", "The name of the custom metric.")
+		iot_updateCustomMetricCmd.MarkFlagRequired("display-name")
+		iot_updateCustomMetricCmd.MarkFlagRequired("metric-name")
+	})
 	iotCmd.AddCommand(iot_updateCustomMetricCmd)
 }

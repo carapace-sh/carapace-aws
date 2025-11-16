@@ -12,12 +12,14 @@ var rekognition_getPersonTrackingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_getPersonTrackingCmd).Standalone()
+	carapace.Gen(rekognition_getPersonTrackingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_getPersonTrackingCmd).Standalone()
 
-	rekognition_getPersonTrackingCmd.Flags().String("job-id", "", "The identifier for a job that tracks persons in a video.")
-	rekognition_getPersonTrackingCmd.Flags().String("max-results", "", "Maximum number of results to return per paginated call.")
-	rekognition_getPersonTrackingCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there are more persons to retrieve), Amazon Rekognition Video returns a pagination token in the response.")
-	rekognition_getPersonTrackingCmd.Flags().String("sort-by", "", "Sort to use for elements in the `Persons` array.")
-	rekognition_getPersonTrackingCmd.MarkFlagRequired("job-id")
+		rekognition_getPersonTrackingCmd.Flags().String("job-id", "", "The identifier for a job that tracks persons in a video.")
+		rekognition_getPersonTrackingCmd.Flags().String("max-results", "", "Maximum number of results to return per paginated call.")
+		rekognition_getPersonTrackingCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there are more persons to retrieve), Amazon Rekognition Video returns a pagination token in the response.")
+		rekognition_getPersonTrackingCmd.Flags().String("sort-by", "", "Sort to use for elements in the `Persons` array.")
+		rekognition_getPersonTrackingCmd.MarkFlagRequired("job-id")
+	})
 	rekognitionCmd.AddCommand(rekognition_getPersonTrackingCmd)
 }

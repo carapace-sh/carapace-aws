@@ -12,9 +12,11 @@ var ses_deleteReceiptFilterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_deleteReceiptFilterCmd).Standalone()
+	carapace.Gen(ses_deleteReceiptFilterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_deleteReceiptFilterCmd).Standalone()
 
-	ses_deleteReceiptFilterCmd.Flags().String("filter-name", "", "The name of the IP address filter to delete.")
-	ses_deleteReceiptFilterCmd.MarkFlagRequired("filter-name")
+		ses_deleteReceiptFilterCmd.Flags().String("filter-name", "", "The name of the IP address filter to delete.")
+		ses_deleteReceiptFilterCmd.MarkFlagRequired("filter-name")
+	})
 	sesCmd.AddCommand(ses_deleteReceiptFilterCmd)
 }

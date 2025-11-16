@@ -12,11 +12,13 @@ var cloudformation_setStackPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_setStackPolicyCmd).Standalone()
+	carapace.Gen(cloudformation_setStackPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_setStackPolicyCmd).Standalone()
 
-	cloudformation_setStackPolicyCmd.Flags().String("stack-name", "", "The name or unique stack ID that you want to associate a policy with.")
-	cloudformation_setStackPolicyCmd.Flags().String("stack-policy-body", "", "Structure that contains the stack policy body.")
-	cloudformation_setStackPolicyCmd.Flags().String("stack-policy-url", "", "Location of a file that contains the stack policy.")
-	cloudformation_setStackPolicyCmd.MarkFlagRequired("stack-name")
+		cloudformation_setStackPolicyCmd.Flags().String("stack-name", "", "The name or unique stack ID that you want to associate a policy with.")
+		cloudformation_setStackPolicyCmd.Flags().String("stack-policy-body", "", "Structure that contains the stack policy body.")
+		cloudformation_setStackPolicyCmd.Flags().String("stack-policy-url", "", "Location of a file that contains the stack policy.")
+		cloudformation_setStackPolicyCmd.MarkFlagRequired("stack-name")
+	})
 	cloudformationCmd.AddCommand(cloudformation_setStackPolicyCmd)
 }

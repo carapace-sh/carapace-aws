@@ -12,11 +12,13 @@ var connect_listSecurityKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listSecurityKeysCmd).Standalone()
+	carapace.Gen(connect_listSecurityKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listSecurityKeysCmd).Standalone()
 
-	connect_listSecurityKeysCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listSecurityKeysCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listSecurityKeysCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listSecurityKeysCmd.MarkFlagRequired("instance-id")
+		connect_listSecurityKeysCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listSecurityKeysCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listSecurityKeysCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listSecurityKeysCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listSecurityKeysCmd)
 }

@@ -12,9 +12,11 @@ var ivsRealtime_deleteStageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_deleteStageCmd).Standalone()
+	carapace.Gen(ivsRealtime_deleteStageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_deleteStageCmd).Standalone()
 
-	ivsRealtime_deleteStageCmd.Flags().String("arn", "", "ARN of the stage to be deleted.")
-	ivsRealtime_deleteStageCmd.MarkFlagRequired("arn")
+		ivsRealtime_deleteStageCmd.Flags().String("arn", "", "ARN of the stage to be deleted.")
+		ivsRealtime_deleteStageCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_deleteStageCmd)
 }

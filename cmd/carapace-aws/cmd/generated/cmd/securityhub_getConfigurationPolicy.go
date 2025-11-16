@@ -12,9 +12,11 @@ var securityhub_getConfigurationPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getConfigurationPolicyCmd).Standalone()
+	carapace.Gen(securityhub_getConfigurationPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getConfigurationPolicyCmd).Standalone()
 
-	securityhub_getConfigurationPolicyCmd.Flags().String("identifier", "", "The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.")
-	securityhub_getConfigurationPolicyCmd.MarkFlagRequired("identifier")
+		securityhub_getConfigurationPolicyCmd.Flags().String("identifier", "", "The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.")
+		securityhub_getConfigurationPolicyCmd.MarkFlagRequired("identifier")
+	})
 	securityhubCmd.AddCommand(securityhub_getConfigurationPolicyCmd)
 }

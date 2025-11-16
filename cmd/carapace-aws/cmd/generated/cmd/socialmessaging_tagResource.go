@@ -12,11 +12,13 @@ var socialmessaging_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(socialmessaging_tagResourceCmd).Standalone()
+	carapace.Gen(socialmessaging_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_tagResourceCmd).Standalone()
 
-	socialmessaging_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to tag.")
-	socialmessaging_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
-	socialmessaging_tagResourceCmd.MarkFlagRequired("resource-arn")
-	socialmessaging_tagResourceCmd.MarkFlagRequired("tags")
+		socialmessaging_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to tag.")
+		socialmessaging_tagResourceCmd.Flags().String("tags", "", "The tags to add to the resource.")
+		socialmessaging_tagResourceCmd.MarkFlagRequired("resource-arn")
+		socialmessaging_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_tagResourceCmd)
 }

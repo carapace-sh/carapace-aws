@@ -12,9 +12,11 @@ var panorama_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_listTagsForResourceCmd).Standalone()
+	carapace.Gen(panorama_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_listTagsForResourceCmd).Standalone()
 
-	panorama_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource's ARN.")
-	panorama_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		panorama_listTagsForResourceCmd.Flags().String("resource-arn", "", "The resource's ARN.")
+		panorama_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	panoramaCmd.AddCommand(panorama_listTagsForResourceCmd)
 }

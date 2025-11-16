@@ -12,12 +12,14 @@ var iot_listPrincipalPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listPrincipalPoliciesCmd).Standalone()
+	carapace.Gen(iot_listPrincipalPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listPrincipalPoliciesCmd).Standalone()
 
-	iot_listPrincipalPoliciesCmd.Flags().String("ascending-order", "", "Specifies the order for results.")
-	iot_listPrincipalPoliciesCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	iot_listPrincipalPoliciesCmd.Flags().String("page-size", "", "The result page size.")
-	iot_listPrincipalPoliciesCmd.Flags().String("principal", "", "The principal.")
-	iot_listPrincipalPoliciesCmd.MarkFlagRequired("principal")
+		iot_listPrincipalPoliciesCmd.Flags().String("ascending-order", "", "Specifies the order for results.")
+		iot_listPrincipalPoliciesCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		iot_listPrincipalPoliciesCmd.Flags().String("page-size", "", "The result page size.")
+		iot_listPrincipalPoliciesCmd.Flags().String("principal", "", "The principal.")
+		iot_listPrincipalPoliciesCmd.MarkFlagRequired("principal")
+	})
 	iotCmd.AddCommand(iot_listPrincipalPoliciesCmd)
 }

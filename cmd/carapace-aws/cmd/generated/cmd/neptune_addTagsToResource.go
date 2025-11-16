@@ -12,11 +12,13 @@ var neptune_addTagsToResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_addTagsToResourceCmd).Standalone()
+	carapace.Gen(neptune_addTagsToResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_addTagsToResourceCmd).Standalone()
 
-	neptune_addTagsToResourceCmd.Flags().String("resource-name", "", "The Amazon Neptune resource that the tags are added to.")
-	neptune_addTagsToResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Amazon Neptune resource.")
-	neptune_addTagsToResourceCmd.MarkFlagRequired("resource-name")
-	neptune_addTagsToResourceCmd.MarkFlagRequired("tags")
+		neptune_addTagsToResourceCmd.Flags().String("resource-name", "", "The Amazon Neptune resource that the tags are added to.")
+		neptune_addTagsToResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Amazon Neptune resource.")
+		neptune_addTagsToResourceCmd.MarkFlagRequired("resource-name")
+		neptune_addTagsToResourceCmd.MarkFlagRequired("tags")
+	})
 	neptuneCmd.AddCommand(neptune_addTagsToResourceCmd)
 }

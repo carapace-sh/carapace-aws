@@ -12,10 +12,12 @@ var fsx_detachAndDeleteS3AccessPointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_detachAndDeleteS3AccessPointCmd).Standalone()
+	carapace.Gen(fsx_detachAndDeleteS3AccessPointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_detachAndDeleteS3AccessPointCmd).Standalone()
 
-	fsx_detachAndDeleteS3AccessPointCmd.Flags().String("client-request-token", "", "")
-	fsx_detachAndDeleteS3AccessPointCmd.Flags().String("name", "", "The name of the S3 access point attachment that you want to delete.")
-	fsx_detachAndDeleteS3AccessPointCmd.MarkFlagRequired("name")
+		fsx_detachAndDeleteS3AccessPointCmd.Flags().String("client-request-token", "", "")
+		fsx_detachAndDeleteS3AccessPointCmd.Flags().String("name", "", "The name of the S3 access point attachment that you want to delete.")
+		fsx_detachAndDeleteS3AccessPointCmd.MarkFlagRequired("name")
+	})
 	fsxCmd.AddCommand(fsx_detachAndDeleteS3AccessPointCmd)
 }

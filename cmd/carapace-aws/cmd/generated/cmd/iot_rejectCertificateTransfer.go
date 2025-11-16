@@ -12,10 +12,12 @@ var iot_rejectCertificateTransferCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_rejectCertificateTransferCmd).Standalone()
+	carapace.Gen(iot_rejectCertificateTransferCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_rejectCertificateTransferCmd).Standalone()
 
-	iot_rejectCertificateTransferCmd.Flags().String("certificate-id", "", "The ID of the certificate.")
-	iot_rejectCertificateTransferCmd.Flags().String("reject-reason", "", "The reason the certificate transfer was rejected.")
-	iot_rejectCertificateTransferCmd.MarkFlagRequired("certificate-id")
+		iot_rejectCertificateTransferCmd.Flags().String("certificate-id", "", "The ID of the certificate.")
+		iot_rejectCertificateTransferCmd.Flags().String("reject-reason", "", "The reason the certificate transfer was rejected.")
+		iot_rejectCertificateTransferCmd.MarkFlagRequired("certificate-id")
+	})
 	iotCmd.AddCommand(iot_rejectCertificateTransferCmd)
 }

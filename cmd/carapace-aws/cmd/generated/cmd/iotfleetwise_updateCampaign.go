@@ -12,13 +12,15 @@ var iotfleetwise_updateCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_updateCampaignCmd).Standalone()
+	carapace.Gen(iotfleetwise_updateCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_updateCampaignCmd).Standalone()
 
-	iotfleetwise_updateCampaignCmd.Flags().String("action", "", "Specifies how to update a campaign.")
-	iotfleetwise_updateCampaignCmd.Flags().String("data-extra-dimensions", "", "A list of vehicle attributes to associate with a signal.")
-	iotfleetwise_updateCampaignCmd.Flags().String("description", "", "The description of the campaign.")
-	iotfleetwise_updateCampaignCmd.Flags().String("name", "", "The name of the campaign to update.")
-	iotfleetwise_updateCampaignCmd.MarkFlagRequired("action")
-	iotfleetwise_updateCampaignCmd.MarkFlagRequired("name")
+		iotfleetwise_updateCampaignCmd.Flags().String("action", "", "Specifies how to update a campaign.")
+		iotfleetwise_updateCampaignCmd.Flags().String("data-extra-dimensions", "", "A list of vehicle attributes to associate with a signal.")
+		iotfleetwise_updateCampaignCmd.Flags().String("description", "", "The description of the campaign.")
+		iotfleetwise_updateCampaignCmd.Flags().String("name", "", "The name of the campaign to update.")
+		iotfleetwise_updateCampaignCmd.MarkFlagRequired("action")
+		iotfleetwise_updateCampaignCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_updateCampaignCmd)
 }

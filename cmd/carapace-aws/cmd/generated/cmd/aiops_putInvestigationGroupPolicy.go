@@ -12,11 +12,13 @@ var aiops_putInvestigationGroupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(aiops_putInvestigationGroupPolicyCmd).Standalone()
+	carapace.Gen(aiops_putInvestigationGroupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(aiops_putInvestigationGroupPolicyCmd).Standalone()
 
-	aiops_putInvestigationGroupPolicyCmd.Flags().String("identifier", "", "Specify either the name or the ARN of the investigation group that you want to assign the policy to.")
-	aiops_putInvestigationGroupPolicyCmd.Flags().String("policy", "", "The policy, in JSON format.")
-	aiops_putInvestigationGroupPolicyCmd.MarkFlagRequired("identifier")
-	aiops_putInvestigationGroupPolicyCmd.MarkFlagRequired("policy")
+		aiops_putInvestigationGroupPolicyCmd.Flags().String("identifier", "", "Specify either the name or the ARN of the investigation group that you want to assign the policy to.")
+		aiops_putInvestigationGroupPolicyCmd.Flags().String("policy", "", "The policy, in JSON format.")
+		aiops_putInvestigationGroupPolicyCmd.MarkFlagRequired("identifier")
+		aiops_putInvestigationGroupPolicyCmd.MarkFlagRequired("policy")
+	})
 	aiopsCmd.AddCommand(aiops_putInvestigationGroupPolicyCmd)
 }

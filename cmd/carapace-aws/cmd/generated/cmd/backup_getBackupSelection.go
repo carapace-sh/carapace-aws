@@ -12,11 +12,13 @@ var backup_getBackupSelectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_getBackupSelectionCmd).Standalone()
+	carapace.Gen(backup_getBackupSelectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_getBackupSelectionCmd).Standalone()
 
-	backup_getBackupSelectionCmd.Flags().String("backup-plan-id", "", "Uniquely identifies a backup plan.")
-	backup_getBackupSelectionCmd.Flags().String("selection-id", "", "Uniquely identifies the body of a request to assign a set of resources to a backup plan.")
-	backup_getBackupSelectionCmd.MarkFlagRequired("backup-plan-id")
-	backup_getBackupSelectionCmd.MarkFlagRequired("selection-id")
+		backup_getBackupSelectionCmd.Flags().String("backup-plan-id", "", "Uniquely identifies a backup plan.")
+		backup_getBackupSelectionCmd.Flags().String("selection-id", "", "Uniquely identifies the body of a request to assign a set of resources to a backup plan.")
+		backup_getBackupSelectionCmd.MarkFlagRequired("backup-plan-id")
+		backup_getBackupSelectionCmd.MarkFlagRequired("selection-id")
+	})
 	backupCmd.AddCommand(backup_getBackupSelectionCmd)
 }

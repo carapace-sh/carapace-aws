@@ -12,9 +12,11 @@ var clouddirectory_deleteDirectoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_deleteDirectoryCmd).Standalone()
+	carapace.Gen(clouddirectory_deleteDirectoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_deleteDirectoryCmd).Standalone()
 
-	clouddirectory_deleteDirectoryCmd.Flags().String("directory-arn", "", "The ARN of the directory to delete.")
-	clouddirectory_deleteDirectoryCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_deleteDirectoryCmd.Flags().String("directory-arn", "", "The ARN of the directory to delete.")
+		clouddirectory_deleteDirectoryCmd.MarkFlagRequired("directory-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_deleteDirectoryCmd)
 }

@@ -12,9 +12,11 @@ var ses_getIdentityMailFromDomainAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_getIdentityMailFromDomainAttributesCmd).Standalone()
+	carapace.Gen(ses_getIdentityMailFromDomainAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_getIdentityMailFromDomainAttributesCmd).Standalone()
 
-	ses_getIdentityMailFromDomainAttributesCmd.Flags().String("identities", "", "A list of one or more identities.")
-	ses_getIdentityMailFromDomainAttributesCmd.MarkFlagRequired("identities")
+		ses_getIdentityMailFromDomainAttributesCmd.Flags().String("identities", "", "A list of one or more identities.")
+		ses_getIdentityMailFromDomainAttributesCmd.MarkFlagRequired("identities")
+	})
 	sesCmd.AddCommand(ses_getIdentityMailFromDomainAttributesCmd)
 }

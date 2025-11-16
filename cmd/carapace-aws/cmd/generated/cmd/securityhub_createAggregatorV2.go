@@ -12,12 +12,14 @@ var securityhub_createAggregatorV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_createAggregatorV2Cmd).Standalone()
+	carapace.Gen(securityhub_createAggregatorV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_createAggregatorV2Cmd).Standalone()
 
-	securityhub_createAggregatorV2Cmd.Flags().String("client-token", "", "A unique identifier used to ensure idempotency.")
-	securityhub_createAggregatorV2Cmd.Flags().String("linked-regions", "", "The list of Regions that are linked to the aggregation Region.")
-	securityhub_createAggregatorV2Cmd.Flags().String("region-linking-mode", "", "Determines how Regions are linked to an Aggregator V2.")
-	securityhub_createAggregatorV2Cmd.Flags().String("tags", "", "A list of key-value pairs to be applied to the AggregatorV2.")
-	securityhub_createAggregatorV2Cmd.MarkFlagRequired("region-linking-mode")
+		securityhub_createAggregatorV2Cmd.Flags().String("client-token", "", "A unique identifier used to ensure idempotency.")
+		securityhub_createAggregatorV2Cmd.Flags().String("linked-regions", "", "The list of Regions that are linked to the aggregation Region.")
+		securityhub_createAggregatorV2Cmd.Flags().String("region-linking-mode", "", "Determines how Regions are linked to an Aggregator V2.")
+		securityhub_createAggregatorV2Cmd.Flags().String("tags", "", "A list of key-value pairs to be applied to the AggregatorV2.")
+		securityhub_createAggregatorV2Cmd.MarkFlagRequired("region-linking-mode")
+	})
 	securityhubCmd.AddCommand(securityhub_createAggregatorV2Cmd)
 }

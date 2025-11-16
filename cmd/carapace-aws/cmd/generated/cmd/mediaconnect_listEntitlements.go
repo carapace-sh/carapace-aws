@@ -12,9 +12,11 @@ var mediaconnect_listEntitlementsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_listEntitlementsCmd).Standalone()
+	carapace.Gen(mediaconnect_listEntitlementsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_listEntitlementsCmd).Standalone()
 
-	mediaconnect_listEntitlementsCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
-	mediaconnect_listEntitlementsCmd.Flags().String("next-token", "", "The token that identifies the batch of results that you want to see.")
+		mediaconnect_listEntitlementsCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
+		mediaconnect_listEntitlementsCmd.Flags().String("next-token", "", "The token that identifies the batch of results that you want to see.")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_listEntitlementsCmd)
 }

@@ -12,9 +12,11 @@ var textract_deleteAdapterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(textract_deleteAdapterCmd).Standalone()
+	carapace.Gen(textract_deleteAdapterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(textract_deleteAdapterCmd).Standalone()
 
-	textract_deleteAdapterCmd.Flags().String("adapter-id", "", "A string containing a unique ID for the adapter to be deleted.")
-	textract_deleteAdapterCmd.MarkFlagRequired("adapter-id")
+		textract_deleteAdapterCmd.Flags().String("adapter-id", "", "A string containing a unique ID for the adapter to be deleted.")
+		textract_deleteAdapterCmd.MarkFlagRequired("adapter-id")
+	})
 	textractCmd.AddCommand(textract_deleteAdapterCmd)
 }

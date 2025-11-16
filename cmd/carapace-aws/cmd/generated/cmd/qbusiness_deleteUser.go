@@ -12,11 +12,13 @@ var qbusiness_deleteUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_deleteUserCmd).Standalone()
+	carapace.Gen(qbusiness_deleteUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_deleteUserCmd).Standalone()
 
-	qbusiness_deleteUserCmd.Flags().String("application-id", "", "The identifier of the application from which the user is being deleted.")
-	qbusiness_deleteUserCmd.Flags().String("user-id", "", "The user email being deleted.")
-	qbusiness_deleteUserCmd.MarkFlagRequired("application-id")
-	qbusiness_deleteUserCmd.MarkFlagRequired("user-id")
+		qbusiness_deleteUserCmd.Flags().String("application-id", "", "The identifier of the application from which the user is being deleted.")
+		qbusiness_deleteUserCmd.Flags().String("user-id", "", "The user email being deleted.")
+		qbusiness_deleteUserCmd.MarkFlagRequired("application-id")
+		qbusiness_deleteUserCmd.MarkFlagRequired("user-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_deleteUserCmd)
 }

@@ -12,9 +12,11 @@ var osis_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_listTagsForResourceCmd).Standalone()
+	carapace.Gen(osis_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_listTagsForResourceCmd).Standalone()
 
-	osis_listTagsForResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the pipeline to retrieve tags for.")
-	osis_listTagsForResourceCmd.MarkFlagRequired("arn")
+		osis_listTagsForResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the pipeline to retrieve tags for.")
+		osis_listTagsForResourceCmd.MarkFlagRequired("arn")
+	})
 	osisCmd.AddCommand(osis_listTagsForResourceCmd)
 }

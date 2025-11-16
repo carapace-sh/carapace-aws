@@ -12,10 +12,12 @@ var gamelift_describeFleetDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeFleetDeploymentCmd).Standalone()
+	carapace.Gen(gamelift_describeFleetDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeFleetDeploymentCmd).Standalone()
 
-	gamelift_describeFleetDeploymentCmd.Flags().String("deployment-id", "", "A unique identifier for the deployment to return information for.")
-	gamelift_describeFleetDeploymentCmd.Flags().String("fleet-id", "", "A unique identifier for the container fleet.")
-	gamelift_describeFleetDeploymentCmd.MarkFlagRequired("fleet-id")
+		gamelift_describeFleetDeploymentCmd.Flags().String("deployment-id", "", "A unique identifier for the deployment to return information for.")
+		gamelift_describeFleetDeploymentCmd.Flags().String("fleet-id", "", "A unique identifier for the container fleet.")
+		gamelift_describeFleetDeploymentCmd.MarkFlagRequired("fleet-id")
+	})
 	gameliftCmd.AddCommand(gamelift_describeFleetDeploymentCmd)
 }

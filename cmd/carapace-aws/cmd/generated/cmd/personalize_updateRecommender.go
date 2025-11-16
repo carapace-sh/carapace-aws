@@ -12,11 +12,13 @@ var personalize_updateRecommenderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_updateRecommenderCmd).Standalone()
+	carapace.Gen(personalize_updateRecommenderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_updateRecommenderCmd).Standalone()
 
-	personalize_updateRecommenderCmd.Flags().String("recommender-arn", "", "The Amazon Resource Name (ARN) of the recommender to modify.")
-	personalize_updateRecommenderCmd.Flags().String("recommender-config", "", "The configuration details of the recommender.")
-	personalize_updateRecommenderCmd.MarkFlagRequired("recommender-arn")
-	personalize_updateRecommenderCmd.MarkFlagRequired("recommender-config")
+		personalize_updateRecommenderCmd.Flags().String("recommender-arn", "", "The Amazon Resource Name (ARN) of the recommender to modify.")
+		personalize_updateRecommenderCmd.Flags().String("recommender-config", "", "The configuration details of the recommender.")
+		personalize_updateRecommenderCmd.MarkFlagRequired("recommender-arn")
+		personalize_updateRecommenderCmd.MarkFlagRequired("recommender-config")
+	})
 	personalizeCmd.AddCommand(personalize_updateRecommenderCmd)
 }

@@ -12,9 +12,11 @@ var controltower_resetEnabledBaselineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_resetEnabledBaselineCmd).Standalone()
+	carapace.Gen(controltower_resetEnabledBaselineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_resetEnabledBaselineCmd).Standalone()
 
-	controltower_resetEnabledBaselineCmd.Flags().String("enabled-baseline-identifier", "", "Specifies the ID of the `EnabledBaseline` resource to be re-enabled, in ARN format.")
-	controltower_resetEnabledBaselineCmd.MarkFlagRequired("enabled-baseline-identifier")
+		controltower_resetEnabledBaselineCmd.Flags().String("enabled-baseline-identifier", "", "Specifies the ID of the `EnabledBaseline` resource to be re-enabled, in ARN format.")
+		controltower_resetEnabledBaselineCmd.MarkFlagRequired("enabled-baseline-identifier")
+	})
 	controltowerCmd.AddCommand(controltower_resetEnabledBaselineCmd)
 }

@@ -12,9 +12,11 @@ var transfer_describeCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_describeCertificateCmd).Standalone()
+	carapace.Gen(transfer_describeCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_describeCertificateCmd).Standalone()
 
-	transfer_describeCertificateCmd.Flags().String("certificate-id", "", "An array of identifiers for the imported certificates.")
-	transfer_describeCertificateCmd.MarkFlagRequired("certificate-id")
+		transfer_describeCertificateCmd.Flags().String("certificate-id", "", "An array of identifiers for the imported certificates.")
+		transfer_describeCertificateCmd.MarkFlagRequired("certificate-id")
+	})
 	transferCmd.AddCommand(transfer_describeCertificateCmd)
 }

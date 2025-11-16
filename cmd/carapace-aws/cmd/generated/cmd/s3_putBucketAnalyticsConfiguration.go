@@ -12,14 +12,16 @@ var s3_putBucketAnalyticsConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_putBucketAnalyticsConfigurationCmd).Standalone()
+	carapace.Gen(s3_putBucketAnalyticsConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_putBucketAnalyticsConfigurationCmd).Standalone()
 
-	s3_putBucketAnalyticsConfigurationCmd.Flags().String("analytics-configuration", "", "The configuration and any analyses for the analytics filter.")
-	s3_putBucketAnalyticsConfigurationCmd.Flags().String("bucket", "", "The name of the bucket to which an analytics configuration is stored.")
-	s3_putBucketAnalyticsConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_putBucketAnalyticsConfigurationCmd.Flags().String("id", "", "The ID that identifies the analytics configuration.")
-	s3_putBucketAnalyticsConfigurationCmd.MarkFlagRequired("analytics-configuration")
-	s3_putBucketAnalyticsConfigurationCmd.MarkFlagRequired("bucket")
-	s3_putBucketAnalyticsConfigurationCmd.MarkFlagRequired("id")
+		s3_putBucketAnalyticsConfigurationCmd.Flags().String("analytics-configuration", "", "The configuration and any analyses for the analytics filter.")
+		s3_putBucketAnalyticsConfigurationCmd.Flags().String("bucket", "", "The name of the bucket to which an analytics configuration is stored.")
+		s3_putBucketAnalyticsConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_putBucketAnalyticsConfigurationCmd.Flags().String("id", "", "The ID that identifies the analytics configuration.")
+		s3_putBucketAnalyticsConfigurationCmd.MarkFlagRequired("analytics-configuration")
+		s3_putBucketAnalyticsConfigurationCmd.MarkFlagRequired("bucket")
+		s3_putBucketAnalyticsConfigurationCmd.MarkFlagRequired("id")
+	})
 	s3Cmd.AddCommand(s3_putBucketAnalyticsConfigurationCmd)
 }

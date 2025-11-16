@@ -12,12 +12,14 @@ var sagemaker_listHumanTaskUisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_listHumanTaskUisCmd).Standalone()
+	carapace.Gen(sagemaker_listHumanTaskUisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_listHumanTaskUisCmd).Standalone()
 
-	sagemaker_listHumanTaskUisCmd.Flags().String("creation-time-after", "", "A filter that returns only human task user interfaces with a creation time greater than or equal to the specified timestamp.")
-	sagemaker_listHumanTaskUisCmd.Flags().String("creation-time-before", "", "A filter that returns only human task user interfaces that were created before the specified timestamp.")
-	sagemaker_listHumanTaskUisCmd.Flags().String("max-results", "", "The total number of items to return.")
-	sagemaker_listHumanTaskUisCmd.Flags().String("next-token", "", "A token to resume pagination.")
-	sagemaker_listHumanTaskUisCmd.Flags().String("sort-order", "", "An optional value that specifies whether you want the results sorted in `Ascending` or `Descending` order.")
+		sagemaker_listHumanTaskUisCmd.Flags().String("creation-time-after", "", "A filter that returns only human task user interfaces with a creation time greater than or equal to the specified timestamp.")
+		sagemaker_listHumanTaskUisCmd.Flags().String("creation-time-before", "", "A filter that returns only human task user interfaces that were created before the specified timestamp.")
+		sagemaker_listHumanTaskUisCmd.Flags().String("max-results", "", "The total number of items to return.")
+		sagemaker_listHumanTaskUisCmd.Flags().String("next-token", "", "A token to resume pagination.")
+		sagemaker_listHumanTaskUisCmd.Flags().String("sort-order", "", "An optional value that specifies whether you want the results sorted in `Ascending` or `Descending` order.")
+	})
 	sagemakerCmd.AddCommand(sagemaker_listHumanTaskUisCmd)
 }

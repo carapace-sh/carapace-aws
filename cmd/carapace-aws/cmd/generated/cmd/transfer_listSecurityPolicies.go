@@ -12,9 +12,11 @@ var transfer_listSecurityPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_listSecurityPoliciesCmd).Standalone()
+	carapace.Gen(transfer_listSecurityPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_listSecurityPoliciesCmd).Standalone()
 
-	transfer_listSecurityPoliciesCmd.Flags().String("max-results", "", "Specifies the number of security policies to return as a response to the `ListSecurityPolicies` query.")
-	transfer_listSecurityPoliciesCmd.Flags().String("next-token", "", "When additional results are obtained from the `ListSecurityPolicies` command, a `NextToken` parameter is returned in the output.")
+		transfer_listSecurityPoliciesCmd.Flags().String("max-results", "", "Specifies the number of security policies to return as a response to the `ListSecurityPolicies` query.")
+		transfer_listSecurityPoliciesCmd.Flags().String("next-token", "", "When additional results are obtained from the `ListSecurityPolicies` command, a `NextToken` parameter is returned in the output.")
+	})
 	transferCmd.AddCommand(transfer_listSecurityPoliciesCmd)
 }

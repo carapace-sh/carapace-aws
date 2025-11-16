@@ -12,9 +12,11 @@ var customerProfiles_getDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getDomainCmd).Standalone()
+	carapace.Gen(customerProfiles_getDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getDomainCmd).Standalone()
 
-	customerProfiles_getDomainCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getDomainCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getDomainCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getDomainCmd.MarkFlagRequired("domain-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getDomainCmd)
 }

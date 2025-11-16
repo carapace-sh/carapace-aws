@@ -12,12 +12,14 @@ var servicecatalog_listResourcesForTagOptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_listResourcesForTagOptionCmd).Standalone()
+	carapace.Gen(servicecatalog_listResourcesForTagOptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_listResourcesForTagOptionCmd).Standalone()
 
-	servicecatalog_listResourcesForTagOptionCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_listResourcesForTagOptionCmd.Flags().String("page-token", "", "The page token for the next set of results.")
-	servicecatalog_listResourcesForTagOptionCmd.Flags().String("resource-type", "", "The resource type.")
-	servicecatalog_listResourcesForTagOptionCmd.Flags().String("tag-option-id", "", "The TagOption identifier.")
-	servicecatalog_listResourcesForTagOptionCmd.MarkFlagRequired("tag-option-id")
+		servicecatalog_listResourcesForTagOptionCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_listResourcesForTagOptionCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_listResourcesForTagOptionCmd.Flags().String("resource-type", "", "The resource type.")
+		servicecatalog_listResourcesForTagOptionCmd.Flags().String("tag-option-id", "", "The TagOption identifier.")
+		servicecatalog_listResourcesForTagOptionCmd.MarkFlagRequired("tag-option-id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_listResourcesForTagOptionCmd)
 }

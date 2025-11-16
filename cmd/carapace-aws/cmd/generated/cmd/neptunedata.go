@@ -12,7 +12,9 @@ var neptunedataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedataCmd).Standalone()
+	carapace.Gen(neptunedataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedataCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(neptunedataCmd)
 }

@@ -12,9 +12,11 @@ var stepfunctions_deleteStateMachineVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_deleteStateMachineVersionCmd).Standalone()
+	carapace.Gen(stepfunctions_deleteStateMachineVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_deleteStateMachineVersionCmd).Standalone()
 
-	stepfunctions_deleteStateMachineVersionCmd.Flags().String("state-machine-version-arn", "", "The Amazon Resource Name (ARN) of the state machine version to delete.")
-	stepfunctions_deleteStateMachineVersionCmd.MarkFlagRequired("state-machine-version-arn")
+		stepfunctions_deleteStateMachineVersionCmd.Flags().String("state-machine-version-arn", "", "The Amazon Resource Name (ARN) of the state machine version to delete.")
+		stepfunctions_deleteStateMachineVersionCmd.MarkFlagRequired("state-machine-version-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_deleteStateMachineVersionCmd)
 }

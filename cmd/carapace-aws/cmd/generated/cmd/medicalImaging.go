@@ -12,7 +12,9 @@ var medicalImagingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medicalImagingCmd).Standalone()
+	carapace.Gen(medicalImagingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medicalImagingCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(medicalImagingCmd)
 }

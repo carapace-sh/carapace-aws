@@ -12,11 +12,13 @@ var waf_createXssMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_createXssMatchSetCmd).Standalone()
+	carapace.Gen(waf_createXssMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_createXssMatchSetCmd).Standalone()
 
-	waf_createXssMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	waf_createXssMatchSetCmd.Flags().String("name", "", "A friendly name or description for the [XssMatchSet]() that you're creating.")
-	waf_createXssMatchSetCmd.MarkFlagRequired("change-token")
-	waf_createXssMatchSetCmd.MarkFlagRequired("name")
+		waf_createXssMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		waf_createXssMatchSetCmd.Flags().String("name", "", "A friendly name or description for the [XssMatchSet]() that you're creating.")
+		waf_createXssMatchSetCmd.MarkFlagRequired("change-token")
+		waf_createXssMatchSetCmd.MarkFlagRequired("name")
+	})
 	wafCmd.AddCommand(waf_createXssMatchSetCmd)
 }

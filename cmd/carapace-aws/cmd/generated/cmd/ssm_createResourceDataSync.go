@@ -12,12 +12,14 @@ var ssm_createResourceDataSyncCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_createResourceDataSyncCmd).Standalone()
+	carapace.Gen(ssm_createResourceDataSyncCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_createResourceDataSyncCmd).Standalone()
 
-	ssm_createResourceDataSyncCmd.Flags().String("s3-destination", "", "Amazon S3 configuration details for the sync.")
-	ssm_createResourceDataSyncCmd.Flags().String("sync-name", "", "A name for the configuration.")
-	ssm_createResourceDataSyncCmd.Flags().String("sync-source", "", "Specify information about the data sources to synchronize.")
-	ssm_createResourceDataSyncCmd.Flags().String("sync-type", "", "Specify `SyncToDestination` to create a resource data sync that synchronizes data to an S3 bucket for Inventory.")
-	ssm_createResourceDataSyncCmd.MarkFlagRequired("sync-name")
+		ssm_createResourceDataSyncCmd.Flags().String("s3-destination", "", "Amazon S3 configuration details for the sync.")
+		ssm_createResourceDataSyncCmd.Flags().String("sync-name", "", "A name for the configuration.")
+		ssm_createResourceDataSyncCmd.Flags().String("sync-source", "", "Specify information about the data sources to synchronize.")
+		ssm_createResourceDataSyncCmd.Flags().String("sync-type", "", "Specify `SyncToDestination` to create a resource data sync that synchronizes data to an S3 bucket for Inventory.")
+		ssm_createResourceDataSyncCmd.MarkFlagRequired("sync-name")
+	})
 	ssmCmd.AddCommand(ssm_createResourceDataSyncCmd)
 }

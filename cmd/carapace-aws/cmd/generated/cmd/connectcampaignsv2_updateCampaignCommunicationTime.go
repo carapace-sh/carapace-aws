@@ -12,11 +12,13 @@ var connectcampaignsv2_updateCampaignCommunicationTimeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_updateCampaignCommunicationTimeCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_updateCampaignCommunicationTimeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_updateCampaignCommunicationTimeCmd).Standalone()
 
-	connectcampaignsv2_updateCampaignCommunicationTimeCmd.Flags().String("communication-time-config", "", "")
-	connectcampaignsv2_updateCampaignCommunicationTimeCmd.Flags().String("id", "", "")
-	connectcampaignsv2_updateCampaignCommunicationTimeCmd.MarkFlagRequired("communication-time-config")
-	connectcampaignsv2_updateCampaignCommunicationTimeCmd.MarkFlagRequired("id")
+		connectcampaignsv2_updateCampaignCommunicationTimeCmd.Flags().String("communication-time-config", "", "")
+		connectcampaignsv2_updateCampaignCommunicationTimeCmd.Flags().String("id", "", "")
+		connectcampaignsv2_updateCampaignCommunicationTimeCmd.MarkFlagRequired("communication-time-config")
+		connectcampaignsv2_updateCampaignCommunicationTimeCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_updateCampaignCommunicationTimeCmd)
 }

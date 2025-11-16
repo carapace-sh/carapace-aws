@@ -12,10 +12,12 @@ var mgn_markAsArchivedCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_markAsArchivedCmd).Standalone()
+	carapace.Gen(mgn_markAsArchivedCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_markAsArchivedCmd).Standalone()
 
-	mgn_markAsArchivedCmd.Flags().String("account-id", "", "Mark as archived by Account ID.")
-	mgn_markAsArchivedCmd.Flags().String("source-server-id", "", "Mark as archived by Source Server ID.")
-	mgn_markAsArchivedCmd.MarkFlagRequired("source-server-id")
+		mgn_markAsArchivedCmd.Flags().String("account-id", "", "Mark as archived by Account ID.")
+		mgn_markAsArchivedCmd.Flags().String("source-server-id", "", "Mark as archived by Source Server ID.")
+		mgn_markAsArchivedCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_markAsArchivedCmd)
 }

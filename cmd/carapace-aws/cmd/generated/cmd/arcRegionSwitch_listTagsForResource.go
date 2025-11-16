@@ -12,9 +12,11 @@ var arcRegionSwitch_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcRegionSwitch_listTagsForResourceCmd).Standalone()
+	carapace.Gen(arcRegionSwitch_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcRegionSwitch_listTagsForResourceCmd).Standalone()
 
-	arcRegionSwitch_listTagsForResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	arcRegionSwitch_listTagsForResourceCmd.MarkFlagRequired("arn")
+		arcRegionSwitch_listTagsForResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		arcRegionSwitch_listTagsForResourceCmd.MarkFlagRequired("arn")
+	})
 	arcRegionSwitchCmd.AddCommand(arcRegionSwitch_listTagsForResourceCmd)
 }

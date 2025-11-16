@@ -12,11 +12,13 @@ var quicksight_listRefreshSchedulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_listRefreshSchedulesCmd).Standalone()
+	carapace.Gen(quicksight_listRefreshSchedulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_listRefreshSchedulesCmd).Standalone()
 
-	quicksight_listRefreshSchedulesCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
-	quicksight_listRefreshSchedulesCmd.Flags().String("data-set-id", "", "The ID of the dataset.")
-	quicksight_listRefreshSchedulesCmd.MarkFlagRequired("aws-account-id")
-	quicksight_listRefreshSchedulesCmd.MarkFlagRequired("data-set-id")
+		quicksight_listRefreshSchedulesCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
+		quicksight_listRefreshSchedulesCmd.Flags().String("data-set-id", "", "The ID of the dataset.")
+		quicksight_listRefreshSchedulesCmd.MarkFlagRequired("aws-account-id")
+		quicksight_listRefreshSchedulesCmd.MarkFlagRequired("data-set-id")
+	})
 	quicksightCmd.AddCommand(quicksight_listRefreshSchedulesCmd)
 }

@@ -12,10 +12,12 @@ var mgn_listExportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_listExportsCmd).Standalone()
+	carapace.Gen(mgn_listExportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_listExportsCmd).Standalone()
 
-	mgn_listExportsCmd.Flags().String("filters", "", "")
-	mgn_listExportsCmd.Flags().String("max-results", "", "List export request max results.")
-	mgn_listExportsCmd.Flags().String("next-token", "", "List export request next token.")
+		mgn_listExportsCmd.Flags().String("filters", "", "")
+		mgn_listExportsCmd.Flags().String("max-results", "", "List export request max results.")
+		mgn_listExportsCmd.Flags().String("next-token", "", "List export request next token.")
+	})
 	mgnCmd.AddCommand(mgn_listExportsCmd)
 }

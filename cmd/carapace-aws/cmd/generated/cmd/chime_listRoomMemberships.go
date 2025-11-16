@@ -12,13 +12,15 @@ var chime_listRoomMembershipsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_listRoomMembershipsCmd).Standalone()
+	carapace.Gen(chime_listRoomMembershipsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_listRoomMembershipsCmd).Standalone()
 
-	chime_listRoomMembershipsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_listRoomMembershipsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	chime_listRoomMembershipsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
-	chime_listRoomMembershipsCmd.Flags().String("room-id", "", "The room ID.")
-	chime_listRoomMembershipsCmd.MarkFlagRequired("account-id")
-	chime_listRoomMembershipsCmd.MarkFlagRequired("room-id")
+		chime_listRoomMembershipsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_listRoomMembershipsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		chime_listRoomMembershipsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+		chime_listRoomMembershipsCmd.Flags().String("room-id", "", "The room ID.")
+		chime_listRoomMembershipsCmd.MarkFlagRequired("account-id")
+		chime_listRoomMembershipsCmd.MarkFlagRequired("room-id")
+	})
 	chimeCmd.AddCommand(chime_listRoomMembershipsCmd)
 }

@@ -12,12 +12,14 @@ var savingsplans_describeSavingsPlanRatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(savingsplans_describeSavingsPlanRatesCmd).Standalone()
+	carapace.Gen(savingsplans_describeSavingsPlanRatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(savingsplans_describeSavingsPlanRatesCmd).Standalone()
 
-	savingsplans_describeSavingsPlanRatesCmd.Flags().String("filters", "", "The filters.")
-	savingsplans_describeSavingsPlanRatesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	savingsplans_describeSavingsPlanRatesCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	savingsplans_describeSavingsPlanRatesCmd.Flags().String("savings-plan-id", "", "The ID of the Savings Plan.")
-	savingsplans_describeSavingsPlanRatesCmd.MarkFlagRequired("savings-plan-id")
+		savingsplans_describeSavingsPlanRatesCmd.Flags().String("filters", "", "The filters.")
+		savingsplans_describeSavingsPlanRatesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		savingsplans_describeSavingsPlanRatesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		savingsplans_describeSavingsPlanRatesCmd.Flags().String("savings-plan-id", "", "The ID of the Savings Plan.")
+		savingsplans_describeSavingsPlanRatesCmd.MarkFlagRequired("savings-plan-id")
+	})
 	savingsplansCmd.AddCommand(savingsplans_describeSavingsPlanRatesCmd)
 }

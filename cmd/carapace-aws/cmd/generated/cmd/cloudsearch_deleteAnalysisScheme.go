@@ -12,11 +12,13 @@ var cloudsearch_deleteAnalysisSchemeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_deleteAnalysisSchemeCmd).Standalone()
+	carapace.Gen(cloudsearch_deleteAnalysisSchemeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_deleteAnalysisSchemeCmd).Standalone()
 
-	cloudsearch_deleteAnalysisSchemeCmd.Flags().String("analysis-scheme-name", "", "The name of the analysis scheme you want to delete.")
-	cloudsearch_deleteAnalysisSchemeCmd.Flags().String("domain-name", "", "")
-	cloudsearch_deleteAnalysisSchemeCmd.MarkFlagRequired("analysis-scheme-name")
-	cloudsearch_deleteAnalysisSchemeCmd.MarkFlagRequired("domain-name")
+		cloudsearch_deleteAnalysisSchemeCmd.Flags().String("analysis-scheme-name", "", "The name of the analysis scheme you want to delete.")
+		cloudsearch_deleteAnalysisSchemeCmd.Flags().String("domain-name", "", "")
+		cloudsearch_deleteAnalysisSchemeCmd.MarkFlagRequired("analysis-scheme-name")
+		cloudsearch_deleteAnalysisSchemeCmd.MarkFlagRequired("domain-name")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_deleteAnalysisSchemeCmd)
 }

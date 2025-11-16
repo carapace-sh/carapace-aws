@@ -12,9 +12,11 @@ var apigateway_getSdkTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getSdkTypesCmd).Standalone()
+	carapace.Gen(apigateway_getSdkTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getSdkTypesCmd).Standalone()
 
-	apigateway_getSdkTypesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getSdkTypesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getSdkTypesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getSdkTypesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+	})
 	apigatewayCmd.AddCommand(apigateway_getSdkTypesCmd)
 }

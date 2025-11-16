@@ -12,11 +12,13 @@ var dms_deleteConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteConnectionCmd).Standalone()
+	carapace.Gen(dms_deleteConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteConnectionCmd).Standalone()
 
-	dms_deleteConnectionCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.")
-	dms_deleteConnectionCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
-	dms_deleteConnectionCmd.MarkFlagRequired("endpoint-arn")
-	dms_deleteConnectionCmd.MarkFlagRequired("replication-instance-arn")
+		dms_deleteConnectionCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.")
+		dms_deleteConnectionCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
+		dms_deleteConnectionCmd.MarkFlagRequired("endpoint-arn")
+		dms_deleteConnectionCmd.MarkFlagRequired("replication-instance-arn")
+	})
 	dmsCmd.AddCommand(dms_deleteConnectionCmd)
 }

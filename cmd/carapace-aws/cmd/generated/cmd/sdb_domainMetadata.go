@@ -12,9 +12,11 @@ var sdb_domainMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sdb_domainMetadataCmd).Standalone()
+	carapace.Gen(sdb_domainMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sdb_domainMetadataCmd).Standalone()
 
-	sdb_domainMetadataCmd.Flags().String("domain-name", "", "The name of the domain for which to display the metadata of.")
-	sdb_domainMetadataCmd.MarkFlagRequired("domain-name")
+		sdb_domainMetadataCmd.Flags().String("domain-name", "", "The name of the domain for which to display the metadata of.")
+		sdb_domainMetadataCmd.MarkFlagRequired("domain-name")
+	})
 	sdbCmd.AddCommand(sdb_domainMetadataCmd)
 }

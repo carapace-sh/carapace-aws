@@ -12,7 +12,9 @@ var frauddetectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetectorCmd).Standalone()
+	carapace.Gen(frauddetectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetectorCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(frauddetectorCmd)
 }

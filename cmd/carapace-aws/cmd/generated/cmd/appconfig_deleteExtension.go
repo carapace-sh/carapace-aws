@@ -12,10 +12,12 @@ var appconfig_deleteExtensionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_deleteExtensionCmd).Standalone()
+	carapace.Gen(appconfig_deleteExtensionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_deleteExtensionCmd).Standalone()
 
-	appconfig_deleteExtensionCmd.Flags().String("extension-identifier", "", "The name, ID, or Amazon Resource Name (ARN) of the extension you want to delete.")
-	appconfig_deleteExtensionCmd.Flags().String("version-number", "", "A specific version of an extension to delete.")
-	appconfig_deleteExtensionCmd.MarkFlagRequired("extension-identifier")
+		appconfig_deleteExtensionCmd.Flags().String("extension-identifier", "", "The name, ID, or Amazon Resource Name (ARN) of the extension you want to delete.")
+		appconfig_deleteExtensionCmd.Flags().String("version-number", "", "A specific version of an extension to delete.")
+		appconfig_deleteExtensionCmd.MarkFlagRequired("extension-identifier")
+	})
 	appconfigCmd.AddCommand(appconfig_deleteExtensionCmd)
 }

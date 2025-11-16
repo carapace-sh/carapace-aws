@@ -12,9 +12,11 @@ var ssmIncidents_listReplicationSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_listReplicationSetsCmd).Standalone()
+	carapace.Gen(ssmIncidents_listReplicationSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_listReplicationSetsCmd).Standalone()
 
-	ssmIncidents_listReplicationSetsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
-	ssmIncidents_listReplicationSetsCmd.Flags().String("next-token", "", "The pagination token for the next set of items to return.")
+		ssmIncidents_listReplicationSetsCmd.Flags().String("max-results", "", "The maximum number of results per page.")
+		ssmIncidents_listReplicationSetsCmd.Flags().String("next-token", "", "The pagination token for the next set of items to return.")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_listReplicationSetsCmd)
 }

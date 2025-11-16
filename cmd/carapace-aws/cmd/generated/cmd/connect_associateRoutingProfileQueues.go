@@ -12,13 +12,15 @@ var connect_associateRoutingProfileQueuesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_associateRoutingProfileQueuesCmd).Standalone()
+	carapace.Gen(connect_associateRoutingProfileQueuesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_associateRoutingProfileQueuesCmd).Standalone()
 
-	connect_associateRoutingProfileQueuesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_associateRoutingProfileQueuesCmd.Flags().String("manual-assignment-queue-configs", "", "The manual assignment queues to associate with this routing profile.")
-	connect_associateRoutingProfileQueuesCmd.Flags().String("queue-configs", "", "The queues to associate with this routing profile.")
-	connect_associateRoutingProfileQueuesCmd.Flags().String("routing-profile-id", "", "The identifier of the routing profile.")
-	connect_associateRoutingProfileQueuesCmd.MarkFlagRequired("instance-id")
-	connect_associateRoutingProfileQueuesCmd.MarkFlagRequired("routing-profile-id")
+		connect_associateRoutingProfileQueuesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_associateRoutingProfileQueuesCmd.Flags().String("manual-assignment-queue-configs", "", "The manual assignment queues to associate with this routing profile.")
+		connect_associateRoutingProfileQueuesCmd.Flags().String("queue-configs", "", "The queues to associate with this routing profile.")
+		connect_associateRoutingProfileQueuesCmd.Flags().String("routing-profile-id", "", "The identifier of the routing profile.")
+		connect_associateRoutingProfileQueuesCmd.MarkFlagRequired("instance-id")
+		connect_associateRoutingProfileQueuesCmd.MarkFlagRequired("routing-profile-id")
+	})
 	connectCmd.AddCommand(connect_associateRoutingProfileQueuesCmd)
 }

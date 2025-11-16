@@ -12,11 +12,13 @@ var machinelearning_updateDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_updateDataSourceCmd).Standalone()
+	carapace.Gen(machinelearning_updateDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_updateDataSourceCmd).Standalone()
 
-	machinelearning_updateDataSourceCmd.Flags().String("data-source-id", "", "The ID assigned to the `DataSource` during creation.")
-	machinelearning_updateDataSourceCmd.Flags().String("data-source-name", "", "A new user-supplied name or description of the `DataSource` that will replace the current description.")
-	machinelearning_updateDataSourceCmd.MarkFlagRequired("data-source-id")
-	machinelearning_updateDataSourceCmd.MarkFlagRequired("data-source-name")
+		machinelearning_updateDataSourceCmd.Flags().String("data-source-id", "", "The ID assigned to the `DataSource` during creation.")
+		machinelearning_updateDataSourceCmd.Flags().String("data-source-name", "", "A new user-supplied name or description of the `DataSource` that will replace the current description.")
+		machinelearning_updateDataSourceCmd.MarkFlagRequired("data-source-id")
+		machinelearning_updateDataSourceCmd.MarkFlagRequired("data-source-name")
+	})
 	machinelearningCmd.AddCommand(machinelearning_updateDataSourceCmd)
 }

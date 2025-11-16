@@ -12,11 +12,13 @@ var quicksight_describeAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeAnalysisCmd).Standalone()
+	carapace.Gen(quicksight_describeAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeAnalysisCmd).Standalone()
 
-	quicksight_describeAnalysisCmd.Flags().String("analysis-id", "", "The ID of the analysis that you're describing.")
-	quicksight_describeAnalysisCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the analysis.")
-	quicksight_describeAnalysisCmd.MarkFlagRequired("analysis-id")
-	quicksight_describeAnalysisCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeAnalysisCmd.Flags().String("analysis-id", "", "The ID of the analysis that you're describing.")
+		quicksight_describeAnalysisCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the analysis.")
+		quicksight_describeAnalysisCmd.MarkFlagRequired("analysis-id")
+		quicksight_describeAnalysisCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeAnalysisCmd)
 }

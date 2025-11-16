@@ -12,9 +12,11 @@ var marketplaceCatalog_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceCatalog_getResourcePolicyCmd).Standalone()
+	carapace.Gen(marketplaceCatalog_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceCatalog_getResourcePolicyCmd).Standalone()
 
-	marketplaceCatalog_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the entity resource that is associated with the resource policy.")
-	marketplaceCatalog_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		marketplaceCatalog_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the entity resource that is associated with the resource policy.")
+		marketplaceCatalog_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	marketplaceCatalogCmd.AddCommand(marketplaceCatalog_getResourcePolicyCmd)
 }

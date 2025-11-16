@@ -12,9 +12,11 @@ var docdb_deleteDbsubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_deleteDbsubnetGroupCmd).Standalone()
+	carapace.Gen(docdb_deleteDbsubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_deleteDbsubnetGroupCmd).Standalone()
 
-	docdb_deleteDbsubnetGroupCmd.Flags().String("dbsubnet-group-name", "", "The name of the database subnet group to delete.")
-	docdb_deleteDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-name")
+		docdb_deleteDbsubnetGroupCmd.Flags().String("dbsubnet-group-name", "", "The name of the database subnet group to delete.")
+		docdb_deleteDbsubnetGroupCmd.MarkFlagRequired("dbsubnet-group-name")
+	})
 	docdbCmd.AddCommand(docdb_deleteDbsubnetGroupCmd)
 }

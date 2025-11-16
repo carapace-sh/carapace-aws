@@ -12,9 +12,11 @@ var networkmanager_getVpcAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getVpcAttachmentCmd).Standalone()
+	carapace.Gen(networkmanager_getVpcAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getVpcAttachmentCmd).Standalone()
 
-	networkmanager_getVpcAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment.")
-	networkmanager_getVpcAttachmentCmd.MarkFlagRequired("attachment-id")
+		networkmanager_getVpcAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment.")
+		networkmanager_getVpcAttachmentCmd.MarkFlagRequired("attachment-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getVpcAttachmentCmd)
 }

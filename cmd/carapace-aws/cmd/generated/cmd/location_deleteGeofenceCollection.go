@@ -12,9 +12,11 @@ var location_deleteGeofenceCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_deleteGeofenceCollectionCmd).Standalone()
+	carapace.Gen(location_deleteGeofenceCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_deleteGeofenceCollectionCmd).Standalone()
 
-	location_deleteGeofenceCollectionCmd.Flags().String("collection-name", "", "The name of the geofence collection to be deleted.")
-	location_deleteGeofenceCollectionCmd.MarkFlagRequired("collection-name")
+		location_deleteGeofenceCollectionCmd.Flags().String("collection-name", "", "The name of the geofence collection to be deleted.")
+		location_deleteGeofenceCollectionCmd.MarkFlagRequired("collection-name")
+	})
 	locationCmd.AddCommand(location_deleteGeofenceCollectionCmd)
 }

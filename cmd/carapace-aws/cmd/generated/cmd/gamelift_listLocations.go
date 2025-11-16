@@ -12,10 +12,12 @@ var gamelift_listLocationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_listLocationsCmd).Standalone()
+	carapace.Gen(gamelift_listLocationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_listLocationsCmd).Standalone()
 
-	gamelift_listLocationsCmd.Flags().String("filters", "", "Filters the list for `AWS` or `CUSTOM` locations.")
-	gamelift_listLocationsCmd.Flags().String("limit", "", "The maximum number of results to return.")
-	gamelift_listLocationsCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+		gamelift_listLocationsCmd.Flags().String("filters", "", "Filters the list for `AWS` or `CUSTOM` locations.")
+		gamelift_listLocationsCmd.Flags().String("limit", "", "The maximum number of results to return.")
+		gamelift_listLocationsCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+	})
 	gameliftCmd.AddCommand(gamelift_listLocationsCmd)
 }

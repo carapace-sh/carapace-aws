@@ -12,9 +12,11 @@ var waf_getRuleGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_getRuleGroupCmd).Standalone()
+	carapace.Gen(waf_getRuleGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_getRuleGroupCmd).Standalone()
 
-	waf_getRuleGroupCmd.Flags().String("rule-group-id", "", "The `RuleGroupId` of the [RuleGroup]() that you want to get.")
-	waf_getRuleGroupCmd.MarkFlagRequired("rule-group-id")
+		waf_getRuleGroupCmd.Flags().String("rule-group-id", "", "The `RuleGroupId` of the [RuleGroup]() that you want to get.")
+		waf_getRuleGroupCmd.MarkFlagRequired("rule-group-id")
+	})
 	wafCmd.AddCommand(waf_getRuleGroupCmd)
 }

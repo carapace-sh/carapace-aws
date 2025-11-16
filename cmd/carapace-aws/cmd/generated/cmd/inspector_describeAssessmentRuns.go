@@ -12,9 +12,11 @@ var inspector_describeAssessmentRunsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_describeAssessmentRunsCmd).Standalone()
+	carapace.Gen(inspector_describeAssessmentRunsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_describeAssessmentRunsCmd).Standalone()
 
-	inspector_describeAssessmentRunsCmd.Flags().String("assessment-run-arns", "", "The ARN that specifies the assessment run that you want to describe.")
-	inspector_describeAssessmentRunsCmd.MarkFlagRequired("assessment-run-arns")
+		inspector_describeAssessmentRunsCmd.Flags().String("assessment-run-arns", "", "The ARN that specifies the assessment run that you want to describe.")
+		inspector_describeAssessmentRunsCmd.MarkFlagRequired("assessment-run-arns")
+	})
 	inspectorCmd.AddCommand(inspector_describeAssessmentRunsCmd)
 }

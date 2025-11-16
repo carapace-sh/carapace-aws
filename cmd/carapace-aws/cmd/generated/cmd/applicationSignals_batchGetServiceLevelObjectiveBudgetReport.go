@@ -12,11 +12,13 @@ var applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd = &cobra.Com
 }
 
 func init() {
-	carapace.Gen(applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd).Standalone()
+	carapace.Gen(applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd).Standalone()
 
-	applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd.Flags().String("slo-ids", "", "An array containing the IDs of the service level objectives that you want to include in the report.")
-	applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd.Flags().String("timestamp", "", "The date and time that you want the report to be for.")
-	applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd.MarkFlagRequired("slo-ids")
-	applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd.MarkFlagRequired("timestamp")
+		applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd.Flags().String("slo-ids", "", "An array containing the IDs of the service level objectives that you want to include in the report.")
+		applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd.Flags().String("timestamp", "", "The date and time that you want the report to be for.")
+		applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd.MarkFlagRequired("slo-ids")
+		applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd.MarkFlagRequired("timestamp")
+	})
 	applicationSignalsCmd.AddCommand(applicationSignals_batchGetServiceLevelObjectiveBudgetReportCmd)
 }

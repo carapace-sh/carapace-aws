@@ -12,9 +12,11 @@ var databrew_describeProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_describeProjectCmd).Standalone()
+	carapace.Gen(databrew_describeProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_describeProjectCmd).Standalone()
 
-	databrew_describeProjectCmd.Flags().String("name", "", "The name of the project to be described.")
-	databrew_describeProjectCmd.MarkFlagRequired("name")
+		databrew_describeProjectCmd.Flags().String("name", "", "The name of the project to be described.")
+		databrew_describeProjectCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_describeProjectCmd)
 }

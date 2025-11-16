@@ -12,11 +12,13 @@ var chimeSdkMeetings_batchCreateAttendeeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMeetings_batchCreateAttendeeCmd).Standalone()
+	carapace.Gen(chimeSdkMeetings_batchCreateAttendeeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMeetings_batchCreateAttendeeCmd).Standalone()
 
-	chimeSdkMeetings_batchCreateAttendeeCmd.Flags().String("attendees", "", "The attendee information, including attendees' IDs and join tokens.")
-	chimeSdkMeetings_batchCreateAttendeeCmd.Flags().String("meeting-id", "", "The Amazon Chime SDK ID of the meeting to which you're adding attendees.")
-	chimeSdkMeetings_batchCreateAttendeeCmd.MarkFlagRequired("attendees")
-	chimeSdkMeetings_batchCreateAttendeeCmd.MarkFlagRequired("meeting-id")
+		chimeSdkMeetings_batchCreateAttendeeCmd.Flags().String("attendees", "", "The attendee information, including attendees' IDs and join tokens.")
+		chimeSdkMeetings_batchCreateAttendeeCmd.Flags().String("meeting-id", "", "The Amazon Chime SDK ID of the meeting to which you're adding attendees.")
+		chimeSdkMeetings_batchCreateAttendeeCmd.MarkFlagRequired("attendees")
+		chimeSdkMeetings_batchCreateAttendeeCmd.MarkFlagRequired("meeting-id")
+	})
 	chimeSdkMeetingsCmd.AddCommand(chimeSdkMeetings_batchCreateAttendeeCmd)
 }

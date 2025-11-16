@@ -12,11 +12,13 @@ var apigatewayv2_getStagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_getStagesCmd).Standalone()
+	carapace.Gen(apigatewayv2_getStagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_getStagesCmd).Standalone()
 
-	apigatewayv2_getStagesCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_getStagesCmd.Flags().String("max-results", "", "The maximum number of elements to be returned for this resource.")
-	apigatewayv2_getStagesCmd.Flags().String("next-token", "", "The next page of elements from this collection.")
-	apigatewayv2_getStagesCmd.MarkFlagRequired("api-id")
+		apigatewayv2_getStagesCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_getStagesCmd.Flags().String("max-results", "", "The maximum number of elements to be returned for this resource.")
+		apigatewayv2_getStagesCmd.Flags().String("next-token", "", "The next page of elements from this collection.")
+		apigatewayv2_getStagesCmd.MarkFlagRequired("api-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_getStagesCmd)
 }

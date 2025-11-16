@@ -12,9 +12,11 @@ var kafkaconnect_describeConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnect_describeConnectorCmd).Standalone()
+	carapace.Gen(kafkaconnect_describeConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnect_describeConnectorCmd).Standalone()
 
-	kafkaconnect_describeConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector that you want to describe.")
-	kafkaconnect_describeConnectorCmd.MarkFlagRequired("connector-arn")
+		kafkaconnect_describeConnectorCmd.Flags().String("connector-arn", "", "The Amazon Resource Name (ARN) of the connector that you want to describe.")
+		kafkaconnect_describeConnectorCmd.MarkFlagRequired("connector-arn")
+	})
 	kafkaconnectCmd.AddCommand(kafkaconnect_describeConnectorCmd)
 }

@@ -12,12 +12,14 @@ var iot_listSecurityProfilesForTargetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listSecurityProfilesForTargetCmd).Standalone()
+	carapace.Gen(iot_listSecurityProfilesForTargetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listSecurityProfilesForTargetCmd).Standalone()
 
-	iot_listSecurityProfilesForTargetCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_listSecurityProfilesForTargetCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	iot_listSecurityProfilesForTargetCmd.Flags().String("recursive", "", "If true, return child groups too.")
-	iot_listSecurityProfilesForTargetCmd.Flags().String("security-profile-target-arn", "", "The ARN of the target (thing group) whose attached security profiles you want to get.")
-	iot_listSecurityProfilesForTargetCmd.MarkFlagRequired("security-profile-target-arn")
+		iot_listSecurityProfilesForTargetCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_listSecurityProfilesForTargetCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iot_listSecurityProfilesForTargetCmd.Flags().String("recursive", "", "If true, return child groups too.")
+		iot_listSecurityProfilesForTargetCmd.Flags().String("security-profile-target-arn", "", "The ARN of the target (thing group) whose attached security profiles you want to get.")
+		iot_listSecurityProfilesForTargetCmd.MarkFlagRequired("security-profile-target-arn")
+	})
 	iotCmd.AddCommand(iot_listSecurityProfilesForTargetCmd)
 }

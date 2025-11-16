@@ -12,9 +12,11 @@ var docdb_startDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_startDbclusterCmd).Standalone()
+	carapace.Gen(docdb_startDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_startDbclusterCmd).Standalone()
 
-	docdb_startDbclusterCmd.Flags().String("dbcluster-identifier", "", "The identifier of the cluster to restart.")
-	docdb_startDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+		docdb_startDbclusterCmd.Flags().String("dbcluster-identifier", "", "The identifier of the cluster to restart.")
+		docdb_startDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+	})
 	docdbCmd.AddCommand(docdb_startDbclusterCmd)
 }

@@ -12,9 +12,11 @@ var resourceExplorer2_createIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_createIndexCmd).Standalone()
+	carapace.Gen(resourceExplorer2_createIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_createIndexCmd).Standalone()
 
-	resourceExplorer2_createIndexCmd.Flags().String("client-token", "", "This value helps ensure idempotency.")
-	resourceExplorer2_createIndexCmd.Flags().String("tags", "", "The specified tags are attached only to the index created in this Amazon Web Services Region.")
+		resourceExplorer2_createIndexCmd.Flags().String("client-token", "", "This value helps ensure idempotency.")
+		resourceExplorer2_createIndexCmd.Flags().String("tags", "", "The specified tags are attached only to the index created in this Amazon Web Services Region.")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_createIndexCmd)
 }

@@ -12,13 +12,15 @@ var s3control_createAccessPointForObjectLambdaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_createAccessPointForObjectLambdaCmd).Standalone()
+	carapace.Gen(s3control_createAccessPointForObjectLambdaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_createAccessPointForObjectLambdaCmd).Standalone()
 
-	s3control_createAccessPointForObjectLambdaCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.")
-	s3control_createAccessPointForObjectLambdaCmd.Flags().String("configuration", "", "Object Lambda Access Point configuration as a JSON document.")
-	s3control_createAccessPointForObjectLambdaCmd.Flags().String("name", "", "The name you want to assign to this Object Lambda Access Point.")
-	s3control_createAccessPointForObjectLambdaCmd.MarkFlagRequired("account-id")
-	s3control_createAccessPointForObjectLambdaCmd.MarkFlagRequired("configuration")
-	s3control_createAccessPointForObjectLambdaCmd.MarkFlagRequired("name")
+		s3control_createAccessPointForObjectLambdaCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.")
+		s3control_createAccessPointForObjectLambdaCmd.Flags().String("configuration", "", "Object Lambda Access Point configuration as a JSON document.")
+		s3control_createAccessPointForObjectLambdaCmd.Flags().String("name", "", "The name you want to assign to this Object Lambda Access Point.")
+		s3control_createAccessPointForObjectLambdaCmd.MarkFlagRequired("account-id")
+		s3control_createAccessPointForObjectLambdaCmd.MarkFlagRequired("configuration")
+		s3control_createAccessPointForObjectLambdaCmd.MarkFlagRequired("name")
+	})
 	s3controlCmd.AddCommand(s3control_createAccessPointForObjectLambdaCmd)
 }

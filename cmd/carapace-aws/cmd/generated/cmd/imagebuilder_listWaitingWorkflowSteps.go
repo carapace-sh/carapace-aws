@@ -12,9 +12,11 @@ var imagebuilder_listWaitingWorkflowStepsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_listWaitingWorkflowStepsCmd).Standalone()
+	carapace.Gen(imagebuilder_listWaitingWorkflowStepsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_listWaitingWorkflowStepsCmd).Standalone()
 
-	imagebuilder_listWaitingWorkflowStepsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
-	imagebuilder_listWaitingWorkflowStepsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		imagebuilder_listWaitingWorkflowStepsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
+		imagebuilder_listWaitingWorkflowStepsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_listWaitingWorkflowStepsCmd)
 }

@@ -12,9 +12,11 @@ var elbv2_deleteTargetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_deleteTargetGroupCmd).Standalone()
+	carapace.Gen(elbv2_deleteTargetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_deleteTargetGroupCmd).Standalone()
 
-	elbv2_deleteTargetGroupCmd.Flags().String("target-group-arn", "", "The Amazon Resource Name (ARN) of the target group.")
-	elbv2_deleteTargetGroupCmd.MarkFlagRequired("target-group-arn")
+		elbv2_deleteTargetGroupCmd.Flags().String("target-group-arn", "", "The Amazon Resource Name (ARN) of the target group.")
+		elbv2_deleteTargetGroupCmd.MarkFlagRequired("target-group-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_deleteTargetGroupCmd)
 }

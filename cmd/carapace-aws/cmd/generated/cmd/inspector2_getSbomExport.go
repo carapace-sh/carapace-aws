@@ -12,9 +12,11 @@ var inspector2_getSbomExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_getSbomExportCmd).Standalone()
+	carapace.Gen(inspector2_getSbomExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_getSbomExportCmd).Standalone()
 
-	inspector2_getSbomExportCmd.Flags().String("report-id", "", "The report ID of the SBOM export to get details for.")
-	inspector2_getSbomExportCmd.MarkFlagRequired("report-id")
+		inspector2_getSbomExportCmd.Flags().String("report-id", "", "The report ID of the SBOM export to get details for.")
+		inspector2_getSbomExportCmd.MarkFlagRequired("report-id")
+	})
 	inspector2Cmd.AddCommand(inspector2_getSbomExportCmd)
 }

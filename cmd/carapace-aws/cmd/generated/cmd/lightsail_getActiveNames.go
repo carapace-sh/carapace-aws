@@ -12,8 +12,10 @@ var lightsail_getActiveNamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getActiveNamesCmd).Standalone()
+	carapace.Gen(lightsail_getActiveNamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getActiveNamesCmd).Standalone()
 
-	lightsail_getActiveNamesCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+		lightsail_getActiveNamesCmd.Flags().String("page-token", "", "The token to advance to the next page of results from your request.")
+	})
 	lightsailCmd.AddCommand(lightsail_getActiveNamesCmd)
 }

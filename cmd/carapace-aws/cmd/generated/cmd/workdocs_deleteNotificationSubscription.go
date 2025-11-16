@@ -12,11 +12,13 @@ var workdocs_deleteNotificationSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_deleteNotificationSubscriptionCmd).Standalone()
+	carapace.Gen(workdocs_deleteNotificationSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_deleteNotificationSubscriptionCmd).Standalone()
 
-	workdocs_deleteNotificationSubscriptionCmd.Flags().String("organization-id", "", "The ID of the organization.")
-	workdocs_deleteNotificationSubscriptionCmd.Flags().String("subscription-id", "", "The ID of the subscription.")
-	workdocs_deleteNotificationSubscriptionCmd.MarkFlagRequired("organization-id")
-	workdocs_deleteNotificationSubscriptionCmd.MarkFlagRequired("subscription-id")
+		workdocs_deleteNotificationSubscriptionCmd.Flags().String("organization-id", "", "The ID of the organization.")
+		workdocs_deleteNotificationSubscriptionCmd.Flags().String("subscription-id", "", "The ID of the subscription.")
+		workdocs_deleteNotificationSubscriptionCmd.MarkFlagRequired("organization-id")
+		workdocs_deleteNotificationSubscriptionCmd.MarkFlagRequired("subscription-id")
+	})
 	workdocsCmd.AddCommand(workdocs_deleteNotificationSubscriptionCmd)
 }

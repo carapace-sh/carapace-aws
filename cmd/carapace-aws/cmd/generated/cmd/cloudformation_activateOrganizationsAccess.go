@@ -12,7 +12,9 @@ var cloudformation_activateOrganizationsAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_activateOrganizationsAccessCmd).Standalone()
+	carapace.Gen(cloudformation_activateOrganizationsAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_activateOrganizationsAccessCmd).Standalone()
 
+	})
 	cloudformationCmd.AddCommand(cloudformation_activateOrganizationsAccessCmd)
 }

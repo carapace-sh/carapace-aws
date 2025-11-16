@@ -12,11 +12,13 @@ var kinesis_putRecordsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_putRecordsCmd).Standalone()
+	carapace.Gen(kinesis_putRecordsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_putRecordsCmd).Standalone()
 
-	kinesis_putRecordsCmd.Flags().String("records", "", "The records associated with the request.")
-	kinesis_putRecordsCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
-	kinesis_putRecordsCmd.Flags().String("stream-name", "", "The stream name associated with the request.")
-	kinesis_putRecordsCmd.MarkFlagRequired("records")
+		kinesis_putRecordsCmd.Flags().String("records", "", "The records associated with the request.")
+		kinesis_putRecordsCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
+		kinesis_putRecordsCmd.Flags().String("stream-name", "", "The stream name associated with the request.")
+		kinesis_putRecordsCmd.MarkFlagRequired("records")
+	})
 	kinesisCmd.AddCommand(kinesis_putRecordsCmd)
 }

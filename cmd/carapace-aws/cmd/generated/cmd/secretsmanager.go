@@ -12,7 +12,9 @@ var secretsmanagerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanagerCmd).Standalone()
+	carapace.Gen(secretsmanagerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanagerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(secretsmanagerCmd)
 }

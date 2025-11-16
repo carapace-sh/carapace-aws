@@ -12,11 +12,13 @@ var workspaces_describeConnectionAliasPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeConnectionAliasPermissionsCmd).Standalone()
+	carapace.Gen(workspaces_describeConnectionAliasPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeConnectionAliasPermissionsCmd).Standalone()
 
-	workspaces_describeConnectionAliasPermissionsCmd.Flags().String("alias-id", "", "The identifier of the connection alias.")
-	workspaces_describeConnectionAliasPermissionsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	workspaces_describeConnectionAliasPermissionsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
-	workspaces_describeConnectionAliasPermissionsCmd.MarkFlagRequired("alias-id")
+		workspaces_describeConnectionAliasPermissionsCmd.Flags().String("alias-id", "", "The identifier of the connection alias.")
+		workspaces_describeConnectionAliasPermissionsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		workspaces_describeConnectionAliasPermissionsCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+		workspaces_describeConnectionAliasPermissionsCmd.MarkFlagRequired("alias-id")
+	})
 	workspacesCmd.AddCommand(workspaces_describeConnectionAliasPermissionsCmd)
 }

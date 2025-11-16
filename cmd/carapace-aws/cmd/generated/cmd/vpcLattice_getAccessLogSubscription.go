@@ -12,9 +12,11 @@ var vpcLattice_getAccessLogSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getAccessLogSubscriptionCmd).Standalone()
+	carapace.Gen(vpcLattice_getAccessLogSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getAccessLogSubscriptionCmd).Standalone()
 
-	vpcLattice_getAccessLogSubscriptionCmd.Flags().String("access-log-subscription-identifier", "", "The ID or ARN of the access log subscription.")
-	vpcLattice_getAccessLogSubscriptionCmd.MarkFlagRequired("access-log-subscription-identifier")
+		vpcLattice_getAccessLogSubscriptionCmd.Flags().String("access-log-subscription-identifier", "", "The ID or ARN of the access log subscription.")
+		vpcLattice_getAccessLogSubscriptionCmd.MarkFlagRequired("access-log-subscription-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getAccessLogSubscriptionCmd)
 }

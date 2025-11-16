@@ -12,9 +12,11 @@ var sqs_purgeQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_purgeQueueCmd).Standalone()
+	carapace.Gen(sqs_purgeQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_purgeQueueCmd).Standalone()
 
-	sqs_purgeQueueCmd.Flags().String("queue-url", "", "The URL of the queue from which the `PurgeQueue` action deletes messages.")
-	sqs_purgeQueueCmd.MarkFlagRequired("queue-url")
+		sqs_purgeQueueCmd.Flags().String("queue-url", "", "The URL of the queue from which the `PurgeQueue` action deletes messages.")
+		sqs_purgeQueueCmd.MarkFlagRequired("queue-url")
+	})
 	sqsCmd.AddCommand(sqs_purgeQueueCmd)
 }

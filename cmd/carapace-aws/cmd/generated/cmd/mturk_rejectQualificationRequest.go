@@ -12,10 +12,12 @@ var mturk_rejectQualificationRequestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_rejectQualificationRequestCmd).Standalone()
+	carapace.Gen(mturk_rejectQualificationRequestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_rejectQualificationRequestCmd).Standalone()
 
-	mturk_rejectQualificationRequestCmd.Flags().String("qualification-request-id", "", "The ID of the Qualification request, as returned by the `ListQualificationRequests` operation.")
-	mturk_rejectQualificationRequestCmd.Flags().String("reason", "", "A text message explaining why the request was rejected, to be shown to the Worker who made the request.")
-	mturk_rejectQualificationRequestCmd.MarkFlagRequired("qualification-request-id")
+		mturk_rejectQualificationRequestCmd.Flags().String("qualification-request-id", "", "The ID of the Qualification request, as returned by the `ListQualificationRequests` operation.")
+		mturk_rejectQualificationRequestCmd.Flags().String("reason", "", "A text message explaining why the request was rejected, to be shown to the Worker who made the request.")
+		mturk_rejectQualificationRequestCmd.MarkFlagRequired("qualification-request-id")
+	})
 	mturkCmd.AddCommand(mturk_rejectQualificationRequestCmd)
 }

@@ -12,13 +12,15 @@ var proton_deleteServiceTemplateVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_deleteServiceTemplateVersionCmd).Standalone()
+	carapace.Gen(proton_deleteServiceTemplateVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_deleteServiceTemplateVersionCmd).Standalone()
 
-	proton_deleteServiceTemplateVersionCmd.Flags().String("major-version", "", "The service template major version to delete.")
-	proton_deleteServiceTemplateVersionCmd.Flags().String("minor-version", "", "The service template minor version to delete.")
-	proton_deleteServiceTemplateVersionCmd.Flags().String("template-name", "", "The name of the service template.")
-	proton_deleteServiceTemplateVersionCmd.MarkFlagRequired("major-version")
-	proton_deleteServiceTemplateVersionCmd.MarkFlagRequired("minor-version")
-	proton_deleteServiceTemplateVersionCmd.MarkFlagRequired("template-name")
+		proton_deleteServiceTemplateVersionCmd.Flags().String("major-version", "", "The service template major version to delete.")
+		proton_deleteServiceTemplateVersionCmd.Flags().String("minor-version", "", "The service template minor version to delete.")
+		proton_deleteServiceTemplateVersionCmd.Flags().String("template-name", "", "The name of the service template.")
+		proton_deleteServiceTemplateVersionCmd.MarkFlagRequired("major-version")
+		proton_deleteServiceTemplateVersionCmd.MarkFlagRequired("minor-version")
+		proton_deleteServiceTemplateVersionCmd.MarkFlagRequired("template-name")
+	})
 	protonCmd.AddCommand(proton_deleteServiceTemplateVersionCmd)
 }

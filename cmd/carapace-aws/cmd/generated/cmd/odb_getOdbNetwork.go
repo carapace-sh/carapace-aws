@@ -12,9 +12,11 @@ var odb_getOdbNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_getOdbNetworkCmd).Standalone()
+	carapace.Gen(odb_getOdbNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_getOdbNetworkCmd).Standalone()
 
-	odb_getOdbNetworkCmd.Flags().String("odb-network-id", "", "The unique identifier of the ODB network.")
-	odb_getOdbNetworkCmd.MarkFlagRequired("odb-network-id")
+		odb_getOdbNetworkCmd.Flags().String("odb-network-id", "", "The unique identifier of the ODB network.")
+		odb_getOdbNetworkCmd.MarkFlagRequired("odb-network-id")
+	})
 	odbCmd.AddCommand(odb_getOdbNetworkCmd)
 }

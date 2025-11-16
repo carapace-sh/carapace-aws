@@ -12,7 +12,9 @@ var iotthingsgraph_getNamespaceDeletionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_getNamespaceDeletionStatusCmd).Standalone()
+	carapace.Gen(iotthingsgraph_getNamespaceDeletionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_getNamespaceDeletionStatusCmd).Standalone()
 
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_getNamespaceDeletionStatusCmd)
 }

@@ -12,9 +12,11 @@ var greengrass_getSubscriptionDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getSubscriptionDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_getSubscriptionDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getSubscriptionDefinitionCmd).Standalone()
 
-	greengrass_getSubscriptionDefinitionCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
-	greengrass_getSubscriptionDefinitionCmd.MarkFlagRequired("subscription-definition-id")
+		greengrass_getSubscriptionDefinitionCmd.Flags().String("subscription-definition-id", "", "The ID of the subscription definition.")
+		greengrass_getSubscriptionDefinitionCmd.MarkFlagRequired("subscription-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getSubscriptionDefinitionCmd)
 }

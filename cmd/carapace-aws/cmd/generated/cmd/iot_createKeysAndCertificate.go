@@ -12,8 +12,10 @@ var iot_createKeysAndCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createKeysAndCertificateCmd).Standalone()
+	carapace.Gen(iot_createKeysAndCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createKeysAndCertificateCmd).Standalone()
 
-	iot_createKeysAndCertificateCmd.Flags().String("set-as-active", "", "Specifies whether the certificate is active.")
+		iot_createKeysAndCertificateCmd.Flags().String("set-as-active", "", "Specifies whether the certificate is active.")
+	})
 	iotCmd.AddCommand(iot_createKeysAndCertificateCmd)
 }

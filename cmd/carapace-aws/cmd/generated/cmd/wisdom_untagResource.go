@@ -12,11 +12,13 @@ var wisdom_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_untagResourceCmd).Standalone()
+	carapace.Gen(wisdom_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_untagResourceCmd).Standalone()
 
-	wisdom_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	wisdom_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
-	wisdom_untagResourceCmd.MarkFlagRequired("resource-arn")
-	wisdom_untagResourceCmd.MarkFlagRequired("tag-keys")
+		wisdom_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		wisdom_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
+		wisdom_untagResourceCmd.MarkFlagRequired("resource-arn")
+		wisdom_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	wisdomCmd.AddCommand(wisdom_untagResourceCmd)
 }

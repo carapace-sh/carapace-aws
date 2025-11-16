@@ -12,11 +12,13 @@ var ds_addTagsToResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_addTagsToResourceCmd).Standalone()
+	carapace.Gen(ds_addTagsToResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_addTagsToResourceCmd).Standalone()
 
-	ds_addTagsToResourceCmd.Flags().String("resource-id", "", "Identifier (ID) for the directory to which to add the tag.")
-	ds_addTagsToResourceCmd.Flags().String("tags", "", "The tags to be assigned to the directory.")
-	ds_addTagsToResourceCmd.MarkFlagRequired("resource-id")
-	ds_addTagsToResourceCmd.MarkFlagRequired("tags")
+		ds_addTagsToResourceCmd.Flags().String("resource-id", "", "Identifier (ID) for the directory to which to add the tag.")
+		ds_addTagsToResourceCmd.Flags().String("tags", "", "The tags to be assigned to the directory.")
+		ds_addTagsToResourceCmd.MarkFlagRequired("resource-id")
+		ds_addTagsToResourceCmd.MarkFlagRequired("tags")
+	})
 	dsCmd.AddCommand(ds_addTagsToResourceCmd)
 }

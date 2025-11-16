@@ -12,13 +12,15 @@ var kinesisanalytics_addApplicationOutputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_addApplicationOutputCmd).Standalone()
+	carapace.Gen(kinesisanalytics_addApplicationOutputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_addApplicationOutputCmd).Standalone()
 
-	kinesisanalytics_addApplicationOutputCmd.Flags().String("application-name", "", "Name of the application to which you want to add the output configuration.")
-	kinesisanalytics_addApplicationOutputCmd.Flags().String("current-application-version-id", "", "Version of the application to which you want to add the output configuration.")
-	kinesisanalytics_addApplicationOutputCmd.Flags().String("output", "", "An array of objects, each describing one output configuration.")
-	kinesisanalytics_addApplicationOutputCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_addApplicationOutputCmd.MarkFlagRequired("current-application-version-id")
-	kinesisanalytics_addApplicationOutputCmd.MarkFlagRequired("output")
+		kinesisanalytics_addApplicationOutputCmd.Flags().String("application-name", "", "Name of the application to which you want to add the output configuration.")
+		kinesisanalytics_addApplicationOutputCmd.Flags().String("current-application-version-id", "", "Version of the application to which you want to add the output configuration.")
+		kinesisanalytics_addApplicationOutputCmd.Flags().String("output", "", "An array of objects, each describing one output configuration.")
+		kinesisanalytics_addApplicationOutputCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_addApplicationOutputCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalytics_addApplicationOutputCmd.MarkFlagRequired("output")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_addApplicationOutputCmd)
 }

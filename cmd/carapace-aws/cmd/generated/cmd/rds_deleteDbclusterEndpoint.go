@@ -12,9 +12,11 @@ var rds_deleteDbclusterEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_deleteDbclusterEndpointCmd).Standalone()
+	carapace.Gen(rds_deleteDbclusterEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_deleteDbclusterEndpointCmd).Standalone()
 
-	rds_deleteDbclusterEndpointCmd.Flags().String("dbcluster-endpoint-identifier", "", "The identifier associated with the custom endpoint.")
-	rds_deleteDbclusterEndpointCmd.MarkFlagRequired("dbcluster-endpoint-identifier")
+		rds_deleteDbclusterEndpointCmd.Flags().String("dbcluster-endpoint-identifier", "", "The identifier associated with the custom endpoint.")
+		rds_deleteDbclusterEndpointCmd.MarkFlagRequired("dbcluster-endpoint-identifier")
+	})
 	rdsCmd.AddCommand(rds_deleteDbclusterEndpointCmd)
 }

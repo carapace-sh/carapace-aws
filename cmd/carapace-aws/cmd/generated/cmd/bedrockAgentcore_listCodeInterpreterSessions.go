@@ -12,12 +12,14 @@ var bedrockAgentcore_listCodeInterpreterSessionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_listCodeInterpreterSessionsCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_listCodeInterpreterSessionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_listCodeInterpreterSessionsCmd).Standalone()
 
-	bedrockAgentcore_listCodeInterpreterSessionsCmd.Flags().String("code-interpreter-identifier", "", "The unique identifier of the code interpreter to list sessions for.")
-	bedrockAgentcore_listCodeInterpreterSessionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	bedrockAgentcore_listCodeInterpreterSessionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	bedrockAgentcore_listCodeInterpreterSessionsCmd.Flags().String("status", "", "The status of the code interpreter sessions to list.")
-	bedrockAgentcore_listCodeInterpreterSessionsCmd.MarkFlagRequired("code-interpreter-identifier")
+		bedrockAgentcore_listCodeInterpreterSessionsCmd.Flags().String("code-interpreter-identifier", "", "The unique identifier of the code interpreter to list sessions for.")
+		bedrockAgentcore_listCodeInterpreterSessionsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		bedrockAgentcore_listCodeInterpreterSessionsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		bedrockAgentcore_listCodeInterpreterSessionsCmd.Flags().String("status", "", "The status of the code interpreter sessions to list.")
+		bedrockAgentcore_listCodeInterpreterSessionsCmd.MarkFlagRequired("code-interpreter-identifier")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_listCodeInterpreterSessionsCmd)
 }

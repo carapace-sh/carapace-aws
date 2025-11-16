@@ -12,11 +12,13 @@ var voiceId_describeSpeakerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(voiceId_describeSpeakerCmd).Standalone()
+	carapace.Gen(voiceId_describeSpeakerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(voiceId_describeSpeakerCmd).Standalone()
 
-	voiceId_describeSpeakerCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the speaker.")
-	voiceId_describeSpeakerCmd.Flags().String("speaker-id", "", "The identifier of the speaker you are describing.")
-	voiceId_describeSpeakerCmd.MarkFlagRequired("domain-id")
-	voiceId_describeSpeakerCmd.MarkFlagRequired("speaker-id")
+		voiceId_describeSpeakerCmd.Flags().String("domain-id", "", "The identifier of the domain that contains the speaker.")
+		voiceId_describeSpeakerCmd.Flags().String("speaker-id", "", "The identifier of the speaker you are describing.")
+		voiceId_describeSpeakerCmd.MarkFlagRequired("domain-id")
+		voiceId_describeSpeakerCmd.MarkFlagRequired("speaker-id")
+	})
 	voiceIdCmd.AddCommand(voiceId_describeSpeakerCmd)
 }

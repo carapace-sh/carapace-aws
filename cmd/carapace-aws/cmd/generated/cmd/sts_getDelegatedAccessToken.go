@@ -12,9 +12,11 @@ var sts_getDelegatedAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sts_getDelegatedAccessTokenCmd).Standalone()
+	carapace.Gen(sts_getDelegatedAccessTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sts_getDelegatedAccessTokenCmd).Standalone()
 
-	sts_getDelegatedAccessTokenCmd.Flags().String("trade-in-token", "", "")
-	sts_getDelegatedAccessTokenCmd.MarkFlagRequired("trade-in-token")
+		sts_getDelegatedAccessTokenCmd.Flags().String("trade-in-token", "", "")
+		sts_getDelegatedAccessTokenCmd.MarkFlagRequired("trade-in-token")
+	})
 	stsCmd.AddCommand(sts_getDelegatedAccessTokenCmd)
 }

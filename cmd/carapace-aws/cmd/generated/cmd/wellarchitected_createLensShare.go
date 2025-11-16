@@ -12,13 +12,15 @@ var wellarchitected_createLensShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_createLensShareCmd).Standalone()
+	carapace.Gen(wellarchitected_createLensShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_createLensShareCmd).Standalone()
 
-	wellarchitected_createLensShareCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_createLensShareCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_createLensShareCmd.Flags().String("shared-with", "", "")
-	wellarchitected_createLensShareCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_createLensShareCmd.MarkFlagRequired("lens-alias")
-	wellarchitected_createLensShareCmd.MarkFlagRequired("shared-with")
+		wellarchitected_createLensShareCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_createLensShareCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_createLensShareCmd.Flags().String("shared-with", "", "")
+		wellarchitected_createLensShareCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_createLensShareCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_createLensShareCmd.MarkFlagRequired("shared-with")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_createLensShareCmd)
 }

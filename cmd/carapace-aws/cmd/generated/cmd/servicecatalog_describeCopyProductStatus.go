@@ -12,10 +12,12 @@ var servicecatalog_describeCopyProductStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_describeCopyProductStatusCmd).Standalone()
+	carapace.Gen(servicecatalog_describeCopyProductStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_describeCopyProductStatusCmd).Standalone()
 
-	servicecatalog_describeCopyProductStatusCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_describeCopyProductStatusCmd.Flags().String("copy-product-token", "", "The token for the copy product operation.")
-	servicecatalog_describeCopyProductStatusCmd.MarkFlagRequired("copy-product-token")
+		servicecatalog_describeCopyProductStatusCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_describeCopyProductStatusCmd.Flags().String("copy-product-token", "", "The token for the copy product operation.")
+		servicecatalog_describeCopyProductStatusCmd.MarkFlagRequired("copy-product-token")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_describeCopyProductStatusCmd)
 }

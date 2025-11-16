@@ -12,7 +12,9 @@ var controltowerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltowerCmd).Standalone()
+	carapace.Gen(controltowerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltowerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(controltowerCmd)
 }

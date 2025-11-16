@@ -12,11 +12,13 @@ var mediaconnect_updateBridgeStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_updateBridgeStateCmd).Standalone()
+	carapace.Gen(mediaconnect_updateBridgeStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_updateBridgeStateCmd).Standalone()
 
-	mediaconnect_updateBridgeStateCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to update the state of.")
-	mediaconnect_updateBridgeStateCmd.Flags().String("desired-state", "", "The desired state for the bridge.")
-	mediaconnect_updateBridgeStateCmd.MarkFlagRequired("bridge-arn")
-	mediaconnect_updateBridgeStateCmd.MarkFlagRequired("desired-state")
+		mediaconnect_updateBridgeStateCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to update the state of.")
+		mediaconnect_updateBridgeStateCmd.Flags().String("desired-state", "", "The desired state for the bridge.")
+		mediaconnect_updateBridgeStateCmd.MarkFlagRequired("bridge-arn")
+		mediaconnect_updateBridgeStateCmd.MarkFlagRequired("desired-state")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_updateBridgeStateCmd)
 }

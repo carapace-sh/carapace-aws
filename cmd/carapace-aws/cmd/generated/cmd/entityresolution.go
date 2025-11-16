@@ -12,7 +12,9 @@ var entityresolutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolutionCmd).Standalone()
+	carapace.Gen(entityresolutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolutionCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(entityresolutionCmd)
 }

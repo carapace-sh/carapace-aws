@@ -12,11 +12,13 @@ var ecs_describeContainerInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_describeContainerInstancesCmd).Standalone()
+	carapace.Gen(ecs_describeContainerInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_describeContainerInstancesCmd).Standalone()
 
-	ecs_describeContainerInstancesCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to describe.")
-	ecs_describeContainerInstancesCmd.Flags().String("container-instances", "", "A list of up to 100 container instance IDs or full Amazon Resource Name (ARN) entries.")
-	ecs_describeContainerInstancesCmd.Flags().String("include", "", "Specifies whether you want to see the resource tags for the container instance.")
-	ecs_describeContainerInstancesCmd.MarkFlagRequired("container-instances")
+		ecs_describeContainerInstancesCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to describe.")
+		ecs_describeContainerInstancesCmd.Flags().String("container-instances", "", "A list of up to 100 container instance IDs or full Amazon Resource Name (ARN) entries.")
+		ecs_describeContainerInstancesCmd.Flags().String("include", "", "Specifies whether you want to see the resource tags for the container instance.")
+		ecs_describeContainerInstancesCmd.MarkFlagRequired("container-instances")
+	})
 	ecsCmd.AddCommand(ecs_describeContainerInstancesCmd)
 }

@@ -12,13 +12,15 @@ var appsync_associateSourceGraphqlApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_associateSourceGraphqlApiCmd).Standalone()
+	carapace.Gen(appsync_associateSourceGraphqlApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_associateSourceGraphqlApiCmd).Standalone()
 
-	appsync_associateSourceGraphqlApiCmd.Flags().String("description", "", "The description field.")
-	appsync_associateSourceGraphqlApiCmd.Flags().String("merged-api-identifier", "", "The identifier of the AppSync Merged API.")
-	appsync_associateSourceGraphqlApiCmd.Flags().String("source-api-association-config", "", "The `SourceApiAssociationConfig` object data.")
-	appsync_associateSourceGraphqlApiCmd.Flags().String("source-api-identifier", "", "The identifier of the AppSync Source API.")
-	appsync_associateSourceGraphqlApiCmd.MarkFlagRequired("merged-api-identifier")
-	appsync_associateSourceGraphqlApiCmd.MarkFlagRequired("source-api-identifier")
+		appsync_associateSourceGraphqlApiCmd.Flags().String("description", "", "The description field.")
+		appsync_associateSourceGraphqlApiCmd.Flags().String("merged-api-identifier", "", "The identifier of the AppSync Merged API.")
+		appsync_associateSourceGraphqlApiCmd.Flags().String("source-api-association-config", "", "The `SourceApiAssociationConfig` object data.")
+		appsync_associateSourceGraphqlApiCmd.Flags().String("source-api-identifier", "", "The identifier of the AppSync Source API.")
+		appsync_associateSourceGraphqlApiCmd.MarkFlagRequired("merged-api-identifier")
+		appsync_associateSourceGraphqlApiCmd.MarkFlagRequired("source-api-identifier")
+	})
 	appsyncCmd.AddCommand(appsync_associateSourceGraphqlApiCmd)
 }

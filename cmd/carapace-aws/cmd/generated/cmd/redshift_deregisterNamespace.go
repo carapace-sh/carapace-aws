@@ -12,11 +12,13 @@ var redshift_deregisterNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deregisterNamespaceCmd).Standalone()
+	carapace.Gen(redshift_deregisterNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deregisterNamespaceCmd).Standalone()
 
-	redshift_deregisterNamespaceCmd.Flags().String("consumer-identifiers", "", "An array containing the ID of the consumer account that you want to deregister the cluster or serverless namespace from.")
-	redshift_deregisterNamespaceCmd.Flags().String("namespace-identifier", "", "The unique identifier of the cluster or serverless namespace that you want to deregister.")
-	redshift_deregisterNamespaceCmd.MarkFlagRequired("consumer-identifiers")
-	redshift_deregisterNamespaceCmd.MarkFlagRequired("namespace-identifier")
+		redshift_deregisterNamespaceCmd.Flags().String("consumer-identifiers", "", "An array containing the ID of the consumer account that you want to deregister the cluster or serverless namespace from.")
+		redshift_deregisterNamespaceCmd.Flags().String("namespace-identifier", "", "The unique identifier of the cluster or serverless namespace that you want to deregister.")
+		redshift_deregisterNamespaceCmd.MarkFlagRequired("consumer-identifiers")
+		redshift_deregisterNamespaceCmd.MarkFlagRequired("namespace-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_deregisterNamespaceCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_describeNotebookInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeNotebookInstanceCmd).Standalone()
+	carapace.Gen(sagemaker_describeNotebookInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeNotebookInstanceCmd).Standalone()
 
-	sagemaker_describeNotebookInstanceCmd.Flags().String("notebook-instance-name", "", "The name of the notebook instance that you want information about.")
-	sagemaker_describeNotebookInstanceCmd.MarkFlagRequired("notebook-instance-name")
+		sagemaker_describeNotebookInstanceCmd.Flags().String("notebook-instance-name", "", "The name of the notebook instance that you want information about.")
+		sagemaker_describeNotebookInstanceCmd.MarkFlagRequired("notebook-instance-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeNotebookInstanceCmd)
 }

@@ -12,7 +12,9 @@ var kmsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kmsCmd).Standalone()
+	carapace.Gen(kmsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kmsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(kmsCmd)
 }

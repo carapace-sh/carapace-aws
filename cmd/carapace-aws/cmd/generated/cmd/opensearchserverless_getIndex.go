@@ -12,11 +12,13 @@ var opensearchserverless_getIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_getIndexCmd).Standalone()
+	carapace.Gen(opensearchserverless_getIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_getIndexCmd).Standalone()
 
-	opensearchserverless_getIndexCmd.Flags().String("id", "", "The unique identifier of the collection containing the index.")
-	opensearchserverless_getIndexCmd.Flags().String("index-name", "", "The name of the index to retrieve information about.")
-	opensearchserverless_getIndexCmd.MarkFlagRequired("id")
-	opensearchserverless_getIndexCmd.MarkFlagRequired("index-name")
+		opensearchserverless_getIndexCmd.Flags().String("id", "", "The unique identifier of the collection containing the index.")
+		opensearchserverless_getIndexCmd.Flags().String("index-name", "", "The name of the index to retrieve information about.")
+		opensearchserverless_getIndexCmd.MarkFlagRequired("id")
+		opensearchserverless_getIndexCmd.MarkFlagRequired("index-name")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_getIndexCmd)
 }

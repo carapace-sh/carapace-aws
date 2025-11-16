@@ -12,9 +12,11 @@ var dynamodb_describeKinesisStreamingDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeKinesisStreamingDestinationCmd).Standalone()
+	carapace.Gen(dynamodb_describeKinesisStreamingDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeKinesisStreamingDestinationCmd).Standalone()
 
-	dynamodb_describeKinesisStreamingDestinationCmd.Flags().String("table-name", "", "The name of the table being described.")
-	dynamodb_describeKinesisStreamingDestinationCmd.MarkFlagRequired("table-name")
+		dynamodb_describeKinesisStreamingDestinationCmd.Flags().String("table-name", "", "The name of the table being described.")
+		dynamodb_describeKinesisStreamingDestinationCmd.MarkFlagRequired("table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeKinesisStreamingDestinationCmd)
 }

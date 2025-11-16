@@ -12,9 +12,11 @@ var ivsRealtime_getIngestConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_getIngestConfigurationCmd).Standalone()
+	carapace.Gen(ivsRealtime_getIngestConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_getIngestConfigurationCmd).Standalone()
 
-	ivsRealtime_getIngestConfigurationCmd.Flags().String("arn", "", "ARN of the ingest for which the information is to be retrieved.")
-	ivsRealtime_getIngestConfigurationCmd.MarkFlagRequired("arn")
+		ivsRealtime_getIngestConfigurationCmd.Flags().String("arn", "", "ARN of the ingest for which the information is to be retrieved.")
+		ivsRealtime_getIngestConfigurationCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_getIngestConfigurationCmd)
 }

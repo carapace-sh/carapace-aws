@@ -12,11 +12,13 @@ var sqs_listDeadLetterSourceQueuesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_listDeadLetterSourceQueuesCmd).Standalone()
+	carapace.Gen(sqs_listDeadLetterSourceQueuesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_listDeadLetterSourceQueuesCmd).Standalone()
 
-	sqs_listDeadLetterSourceQueuesCmd.Flags().String("max-results", "", "Maximum number of results to include in the response.")
-	sqs_listDeadLetterSourceQueuesCmd.Flags().String("next-token", "", "Pagination token to request the next set of results.")
-	sqs_listDeadLetterSourceQueuesCmd.Flags().String("queue-url", "", "The URL of a dead-letter queue.")
-	sqs_listDeadLetterSourceQueuesCmd.MarkFlagRequired("queue-url")
+		sqs_listDeadLetterSourceQueuesCmd.Flags().String("max-results", "", "Maximum number of results to include in the response.")
+		sqs_listDeadLetterSourceQueuesCmd.Flags().String("next-token", "", "Pagination token to request the next set of results.")
+		sqs_listDeadLetterSourceQueuesCmd.Flags().String("queue-url", "", "The URL of a dead-letter queue.")
+		sqs_listDeadLetterSourceQueuesCmd.MarkFlagRequired("queue-url")
+	})
 	sqsCmd.AddCommand(sqs_listDeadLetterSourceQueuesCmd)
 }

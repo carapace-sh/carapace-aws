@@ -12,11 +12,13 @@ var schemas_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_tagResourceCmd).Standalone()
+	carapace.Gen(schemas_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_tagResourceCmd).Standalone()
 
-	schemas_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	schemas_tagResourceCmd.Flags().String("tags", "", "Tags associated with the resource.")
-	schemas_tagResourceCmd.MarkFlagRequired("resource-arn")
-	schemas_tagResourceCmd.MarkFlagRequired("tags")
+		schemas_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		schemas_tagResourceCmd.Flags().String("tags", "", "Tags associated with the resource.")
+		schemas_tagResourceCmd.MarkFlagRequired("resource-arn")
+		schemas_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	schemasCmd.AddCommand(schemas_tagResourceCmd)
 }

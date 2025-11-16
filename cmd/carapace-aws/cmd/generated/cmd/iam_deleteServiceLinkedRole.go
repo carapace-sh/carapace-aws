@@ -12,9 +12,11 @@ var iam_deleteServiceLinkedRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteServiceLinkedRoleCmd).Standalone()
+	carapace.Gen(iam_deleteServiceLinkedRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteServiceLinkedRoleCmd).Standalone()
 
-	iam_deleteServiceLinkedRoleCmd.Flags().String("role-name", "", "The name of the service-linked role to be deleted.")
-	iam_deleteServiceLinkedRoleCmd.MarkFlagRequired("role-name")
+		iam_deleteServiceLinkedRoleCmd.Flags().String("role-name", "", "The name of the service-linked role to be deleted.")
+		iam_deleteServiceLinkedRoleCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_deleteServiceLinkedRoleCmd)
 }

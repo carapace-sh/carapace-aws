@@ -12,12 +12,14 @@ var bedrockAgentcoreControl_createApiKeyCredentialProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_createApiKeyCredentialProviderCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_createApiKeyCredentialProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_createApiKeyCredentialProviderCmd).Standalone()
 
-	bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.Flags().String("api-key", "", "The API key to use for authentication.")
-	bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.Flags().String("name", "", "The name of the API key credential provider.")
-	bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.Flags().String("tags", "", "A map of tag keys and values to assign to the API key credential provider.")
-	bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.MarkFlagRequired("api-key")
-	bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.Flags().String("api-key", "", "The API key to use for authentication.")
+		bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.Flags().String("name", "", "The name of the API key credential provider.")
+		bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.Flags().String("tags", "", "A map of tag keys and values to assign to the API key credential provider.")
+		bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.MarkFlagRequired("api-key")
+		bedrockAgentcoreControl_createApiKeyCredentialProviderCmd.MarkFlagRequired("name")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_createApiKeyCredentialProviderCmd)
 }

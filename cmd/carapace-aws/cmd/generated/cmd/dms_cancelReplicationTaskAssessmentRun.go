@@ -12,9 +12,11 @@ var dms_cancelReplicationTaskAssessmentRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_cancelReplicationTaskAssessmentRunCmd).Standalone()
+	carapace.Gen(dms_cancelReplicationTaskAssessmentRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_cancelReplicationTaskAssessmentRunCmd).Standalone()
 
-	dms_cancelReplicationTaskAssessmentRunCmd.Flags().String("replication-task-assessment-run-arn", "", "Amazon Resource Name (ARN) of the premigration assessment run to be canceled.")
-	dms_cancelReplicationTaskAssessmentRunCmd.MarkFlagRequired("replication-task-assessment-run-arn")
+		dms_cancelReplicationTaskAssessmentRunCmd.Flags().String("replication-task-assessment-run-arn", "", "Amazon Resource Name (ARN) of the premigration assessment run to be canceled.")
+		dms_cancelReplicationTaskAssessmentRunCmd.MarkFlagRequired("replication-task-assessment-run-arn")
+	})
 	dmsCmd.AddCommand(dms_cancelReplicationTaskAssessmentRunCmd)
 }

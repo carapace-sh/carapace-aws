@@ -12,10 +12,12 @@ var workdocs_restoreDocumentVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_restoreDocumentVersionsCmd).Standalone()
+	carapace.Gen(workdocs_restoreDocumentVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_restoreDocumentVersionsCmd).Standalone()
 
-	workdocs_restoreDocumentVersionsCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_restoreDocumentVersionsCmd.Flags().String("document-id", "", "The ID of the document.")
-	workdocs_restoreDocumentVersionsCmd.MarkFlagRequired("document-id")
+		workdocs_restoreDocumentVersionsCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_restoreDocumentVersionsCmd.Flags().String("document-id", "", "The ID of the document.")
+		workdocs_restoreDocumentVersionsCmd.MarkFlagRequired("document-id")
+	})
 	workdocsCmd.AddCommand(workdocs_restoreDocumentVersionsCmd)
 }

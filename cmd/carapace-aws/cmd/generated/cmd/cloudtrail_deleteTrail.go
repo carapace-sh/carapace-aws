@@ -12,9 +12,11 @@ var cloudtrail_deleteTrailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_deleteTrailCmd).Standalone()
+	carapace.Gen(cloudtrail_deleteTrailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_deleteTrailCmd).Standalone()
 
-	cloudtrail_deleteTrailCmd.Flags().String("name", "", "Specifies the name or the CloudTrail ARN of the trail to be deleted.")
-	cloudtrail_deleteTrailCmd.MarkFlagRequired("name")
+		cloudtrail_deleteTrailCmd.Flags().String("name", "", "Specifies the name or the CloudTrail ARN of the trail to be deleted.")
+		cloudtrail_deleteTrailCmd.MarkFlagRequired("name")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_deleteTrailCmd)
 }

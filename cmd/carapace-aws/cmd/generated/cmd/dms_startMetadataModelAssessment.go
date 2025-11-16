@@ -12,11 +12,13 @@ var dms_startMetadataModelAssessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_startMetadataModelAssessmentCmd).Standalone()
+	carapace.Gen(dms_startMetadataModelAssessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_startMetadataModelAssessmentCmd).Standalone()
 
-	dms_startMetadataModelAssessmentCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
-	dms_startMetadataModelAssessmentCmd.Flags().String("selection-rules", "", "A value that specifies the database objects to assess.")
-	dms_startMetadataModelAssessmentCmd.MarkFlagRequired("migration-project-identifier")
-	dms_startMetadataModelAssessmentCmd.MarkFlagRequired("selection-rules")
+		dms_startMetadataModelAssessmentCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
+		dms_startMetadataModelAssessmentCmd.Flags().String("selection-rules", "", "A value that specifies the database objects to assess.")
+		dms_startMetadataModelAssessmentCmd.MarkFlagRequired("migration-project-identifier")
+		dms_startMetadataModelAssessmentCmd.MarkFlagRequired("selection-rules")
+	})
 	dmsCmd.AddCommand(dms_startMetadataModelAssessmentCmd)
 }

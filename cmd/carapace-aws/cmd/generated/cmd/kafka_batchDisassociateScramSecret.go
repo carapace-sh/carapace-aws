@@ -12,11 +12,13 @@ var kafka_batchDisassociateScramSecretCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_batchDisassociateScramSecretCmd).Standalone()
+	carapace.Gen(kafka_batchDisassociateScramSecretCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_batchDisassociateScramSecretCmd).Standalone()
 
-	kafka_batchDisassociateScramSecretCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster to be updated.")
-	kafka_batchDisassociateScramSecretCmd.Flags().String("secret-arn-list", "", "List of AWS Secrets Manager secret ARNs.")
-	kafka_batchDisassociateScramSecretCmd.MarkFlagRequired("cluster-arn")
-	kafka_batchDisassociateScramSecretCmd.MarkFlagRequired("secret-arn-list")
+		kafka_batchDisassociateScramSecretCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster to be updated.")
+		kafka_batchDisassociateScramSecretCmd.Flags().String("secret-arn-list", "", "List of AWS Secrets Manager secret ARNs.")
+		kafka_batchDisassociateScramSecretCmd.MarkFlagRequired("cluster-arn")
+		kafka_batchDisassociateScramSecretCmd.MarkFlagRequired("secret-arn-list")
+	})
 	kafkaCmd.AddCommand(kafka_batchDisassociateScramSecretCmd)
 }

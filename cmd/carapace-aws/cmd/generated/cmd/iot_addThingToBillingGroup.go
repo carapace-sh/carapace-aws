@@ -12,11 +12,13 @@ var iot_addThingToBillingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_addThingToBillingGroupCmd).Standalone()
+	carapace.Gen(iot_addThingToBillingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_addThingToBillingGroupCmd).Standalone()
 
-	iot_addThingToBillingGroupCmd.Flags().String("billing-group-arn", "", "The ARN of the billing group.")
-	iot_addThingToBillingGroupCmd.Flags().String("billing-group-name", "", "The name of the billing group.")
-	iot_addThingToBillingGroupCmd.Flags().String("thing-arn", "", "The ARN of the thing to be added to the billing group.")
-	iot_addThingToBillingGroupCmd.Flags().String("thing-name", "", "The name of the thing to be added to the billing group.")
+		iot_addThingToBillingGroupCmd.Flags().String("billing-group-arn", "", "The ARN of the billing group.")
+		iot_addThingToBillingGroupCmd.Flags().String("billing-group-name", "", "The name of the billing group.")
+		iot_addThingToBillingGroupCmd.Flags().String("thing-arn", "", "The ARN of the thing to be added to the billing group.")
+		iot_addThingToBillingGroupCmd.Flags().String("thing-name", "", "The name of the thing to be added to the billing group.")
+	})
 	iotCmd.AddCommand(iot_addThingToBillingGroupCmd)
 }

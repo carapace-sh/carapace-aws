@@ -12,11 +12,13 @@ var securityhub_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_untagResourceCmd).Standalone()
+	carapace.Gen(securityhub_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_untagResourceCmd).Standalone()
 
-	securityhub_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to remove the tags from.")
-	securityhub_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys associated with the tags to remove from the resource.")
-	securityhub_untagResourceCmd.MarkFlagRequired("resource-arn")
-	securityhub_untagResourceCmd.MarkFlagRequired("tag-keys")
+		securityhub_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to remove the tags from.")
+		securityhub_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys associated with the tags to remove from the resource.")
+		securityhub_untagResourceCmd.MarkFlagRequired("resource-arn")
+		securityhub_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	securityhubCmd.AddCommand(securityhub_untagResourceCmd)
 }

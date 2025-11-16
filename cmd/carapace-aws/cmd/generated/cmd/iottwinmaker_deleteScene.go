@@ -12,11 +12,13 @@ var iottwinmaker_deleteSceneCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_deleteSceneCmd).Standalone()
+	carapace.Gen(iottwinmaker_deleteSceneCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_deleteSceneCmd).Standalone()
 
-	iottwinmaker_deleteSceneCmd.Flags().String("scene-id", "", "The ID of the scene to delete.")
-	iottwinmaker_deleteSceneCmd.Flags().String("workspace-id", "", "The ID of the workspace.")
-	iottwinmaker_deleteSceneCmd.MarkFlagRequired("scene-id")
-	iottwinmaker_deleteSceneCmd.MarkFlagRequired("workspace-id")
+		iottwinmaker_deleteSceneCmd.Flags().String("scene-id", "", "The ID of the scene to delete.")
+		iottwinmaker_deleteSceneCmd.Flags().String("workspace-id", "", "The ID of the workspace.")
+		iottwinmaker_deleteSceneCmd.MarkFlagRequired("scene-id")
+		iottwinmaker_deleteSceneCmd.MarkFlagRequired("workspace-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_deleteSceneCmd)
 }

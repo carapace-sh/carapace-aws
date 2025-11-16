@@ -12,11 +12,13 @@ var outposts_getOutpostBillingInformationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_getOutpostBillingInformationCmd).Standalone()
+	carapace.Gen(outposts_getOutpostBillingInformationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_getOutpostBillingInformationCmd).Standalone()
 
-	outposts_getOutpostBillingInformationCmd.Flags().String("max-results", "", "")
-	outposts_getOutpostBillingInformationCmd.Flags().String("next-token", "", "")
-	outposts_getOutpostBillingInformationCmd.Flags().String("outpost-identifier", "", "The ID or ARN of the Outpost.")
-	outposts_getOutpostBillingInformationCmd.MarkFlagRequired("outpost-identifier")
+		outposts_getOutpostBillingInformationCmd.Flags().String("max-results", "", "")
+		outposts_getOutpostBillingInformationCmd.Flags().String("next-token", "", "")
+		outposts_getOutpostBillingInformationCmd.Flags().String("outpost-identifier", "", "The ID or ARN of the Outpost.")
+		outposts_getOutpostBillingInformationCmd.MarkFlagRequired("outpost-identifier")
+	})
 	outpostsCmd.AddCommand(outposts_getOutpostBillingInformationCmd)
 }

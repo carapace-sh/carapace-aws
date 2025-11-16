@@ -12,13 +12,15 @@ var wellarchitected_deleteWorkloadShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_deleteWorkloadShareCmd).Standalone()
+	carapace.Gen(wellarchitected_deleteWorkloadShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_deleteWorkloadShareCmd).Standalone()
 
-	wellarchitected_deleteWorkloadShareCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_deleteWorkloadShareCmd.Flags().String("share-id", "", "")
-	wellarchitected_deleteWorkloadShareCmd.Flags().String("workload-id", "", "")
-	wellarchitected_deleteWorkloadShareCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_deleteWorkloadShareCmd.MarkFlagRequired("share-id")
-	wellarchitected_deleteWorkloadShareCmd.MarkFlagRequired("workload-id")
+		wellarchitected_deleteWorkloadShareCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_deleteWorkloadShareCmd.Flags().String("share-id", "", "")
+		wellarchitected_deleteWorkloadShareCmd.Flags().String("workload-id", "", "")
+		wellarchitected_deleteWorkloadShareCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_deleteWorkloadShareCmd.MarkFlagRequired("share-id")
+		wellarchitected_deleteWorkloadShareCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_deleteWorkloadShareCmd)
 }

@@ -12,11 +12,13 @@ var datapipeline_removeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_removeTagsCmd).Standalone()
+	carapace.Gen(datapipeline_removeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_removeTagsCmd).Standalone()
 
-	datapipeline_removeTagsCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
-	datapipeline_removeTagsCmd.Flags().String("tag-keys", "", "The keys of the tags to remove.")
-	datapipeline_removeTagsCmd.MarkFlagRequired("pipeline-id")
-	datapipeline_removeTagsCmd.MarkFlagRequired("tag-keys")
+		datapipeline_removeTagsCmd.Flags().String("pipeline-id", "", "The ID of the pipeline.")
+		datapipeline_removeTagsCmd.Flags().String("tag-keys", "", "The keys of the tags to remove.")
+		datapipeline_removeTagsCmd.MarkFlagRequired("pipeline-id")
+		datapipeline_removeTagsCmd.MarkFlagRequired("tag-keys")
+	})
 	datapipelineCmd.AddCommand(datapipeline_removeTagsCmd)
 }

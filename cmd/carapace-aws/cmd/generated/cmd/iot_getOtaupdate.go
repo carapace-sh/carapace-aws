@@ -12,9 +12,11 @@ var iot_getOtaupdateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getOtaupdateCmd).Standalone()
+	carapace.Gen(iot_getOtaupdateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getOtaupdateCmd).Standalone()
 
-	iot_getOtaupdateCmd.Flags().String("ota-update-id", "", "The OTA update ID.")
-	iot_getOtaupdateCmd.MarkFlagRequired("ota-update-id")
+		iot_getOtaupdateCmd.Flags().String("ota-update-id", "", "The OTA update ID.")
+		iot_getOtaupdateCmd.MarkFlagRequired("ota-update-id")
+	})
 	iotCmd.AddCommand(iot_getOtaupdateCmd)
 }

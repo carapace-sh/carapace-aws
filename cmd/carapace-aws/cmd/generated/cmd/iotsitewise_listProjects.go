@@ -12,11 +12,13 @@ var iotsitewise_listProjectsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_listProjectsCmd).Standalone()
+	carapace.Gen(iotsitewise_listProjectsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_listProjectsCmd).Standalone()
 
-	iotsitewise_listProjectsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
-	iotsitewise_listProjectsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	iotsitewise_listProjectsCmd.Flags().String("portal-id", "", "The ID of the portal.")
-	iotsitewise_listProjectsCmd.MarkFlagRequired("portal-id")
+		iotsitewise_listProjectsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
+		iotsitewise_listProjectsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		iotsitewise_listProjectsCmd.Flags().String("portal-id", "", "The ID of the portal.")
+		iotsitewise_listProjectsCmd.MarkFlagRequired("portal-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_listProjectsCmd)
 }

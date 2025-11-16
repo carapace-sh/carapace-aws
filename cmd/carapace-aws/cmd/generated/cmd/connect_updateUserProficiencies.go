@@ -12,13 +12,15 @@ var connect_updateUserProficienciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateUserProficienciesCmd).Standalone()
+	carapace.Gen(connect_updateUserProficienciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateUserProficienciesCmd).Standalone()
 
-	connect_updateUserProficienciesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateUserProficienciesCmd.Flags().String("user-id", "", "The identifier of the user account.")
-	connect_updateUserProficienciesCmd.Flags().String("user-proficiencies", "", "The proficiencies to be updated for the user.")
-	connect_updateUserProficienciesCmd.MarkFlagRequired("instance-id")
-	connect_updateUserProficienciesCmd.MarkFlagRequired("user-id")
-	connect_updateUserProficienciesCmd.MarkFlagRequired("user-proficiencies")
+		connect_updateUserProficienciesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateUserProficienciesCmd.Flags().String("user-id", "", "The identifier of the user account.")
+		connect_updateUserProficienciesCmd.Flags().String("user-proficiencies", "", "The proficiencies to be updated for the user.")
+		connect_updateUserProficienciesCmd.MarkFlagRequired("instance-id")
+		connect_updateUserProficienciesCmd.MarkFlagRequired("user-id")
+		connect_updateUserProficienciesCmd.MarkFlagRequired("user-proficiencies")
+	})
 	connectCmd.AddCommand(connect_updateUserProficienciesCmd)
 }

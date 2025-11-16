@@ -12,9 +12,11 @@ var ivsRealtime_getEncoderConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_getEncoderConfigurationCmd).Standalone()
+	carapace.Gen(ivsRealtime_getEncoderConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_getEncoderConfigurationCmd).Standalone()
 
-	ivsRealtime_getEncoderConfigurationCmd.Flags().String("arn", "", "ARN of the EncoderConfiguration resource.")
-	ivsRealtime_getEncoderConfigurationCmd.MarkFlagRequired("arn")
+		ivsRealtime_getEncoderConfigurationCmd.Flags().String("arn", "", "ARN of the EncoderConfiguration resource.")
+		ivsRealtime_getEncoderConfigurationCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_getEncoderConfigurationCmd)
 }

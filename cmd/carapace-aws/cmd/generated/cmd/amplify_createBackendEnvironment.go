@@ -12,13 +12,15 @@ var amplify_createBackendEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_createBackendEnvironmentCmd).Standalone()
+	carapace.Gen(amplify_createBackendEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_createBackendEnvironmentCmd).Standalone()
 
-	amplify_createBackendEnvironmentCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_createBackendEnvironmentCmd.Flags().String("deployment-artifacts", "", "The name of deployment artifacts.")
-	amplify_createBackendEnvironmentCmd.Flags().String("environment-name", "", "The name for the backend environment.")
-	amplify_createBackendEnvironmentCmd.Flags().String("stack-name", "", "The AWS CloudFormation stack name of a backend environment.")
-	amplify_createBackendEnvironmentCmd.MarkFlagRequired("app-id")
-	amplify_createBackendEnvironmentCmd.MarkFlagRequired("environment-name")
+		amplify_createBackendEnvironmentCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_createBackendEnvironmentCmd.Flags().String("deployment-artifacts", "", "The name of deployment artifacts.")
+		amplify_createBackendEnvironmentCmd.Flags().String("environment-name", "", "The name for the backend environment.")
+		amplify_createBackendEnvironmentCmd.Flags().String("stack-name", "", "The AWS CloudFormation stack name of a backend environment.")
+		amplify_createBackendEnvironmentCmd.MarkFlagRequired("app-id")
+		amplify_createBackendEnvironmentCmd.MarkFlagRequired("environment-name")
+	})
 	amplifyCmd.AddCommand(amplify_createBackendEnvironmentCmd)
 }

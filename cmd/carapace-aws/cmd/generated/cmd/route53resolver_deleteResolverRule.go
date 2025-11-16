@@ -12,9 +12,11 @@ var route53resolver_deleteResolverRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_deleteResolverRuleCmd).Standalone()
+	carapace.Gen(route53resolver_deleteResolverRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_deleteResolverRuleCmd).Standalone()
 
-	route53resolver_deleteResolverRuleCmd.Flags().String("resolver-rule-id", "", "The ID of the Resolver rule that you want to delete.")
-	route53resolver_deleteResolverRuleCmd.MarkFlagRequired("resolver-rule-id")
+		route53resolver_deleteResolverRuleCmd.Flags().String("resolver-rule-id", "", "The ID of the Resolver rule that you want to delete.")
+		route53resolver_deleteResolverRuleCmd.MarkFlagRequired("resolver-rule-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_deleteResolverRuleCmd)
 }

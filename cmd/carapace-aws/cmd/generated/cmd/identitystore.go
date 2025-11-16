@@ -12,7 +12,9 @@ var identitystoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(identitystoreCmd).Standalone()
+	carapace.Gen(identitystoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(identitystoreCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(identitystoreCmd)
 }

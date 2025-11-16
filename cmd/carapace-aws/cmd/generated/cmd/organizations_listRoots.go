@@ -12,9 +12,11 @@ var organizations_listRootsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_listRootsCmd).Standalone()
+	carapace.Gen(organizations_listRootsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_listRootsCmd).Standalone()
 
-	organizations_listRootsCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
-	organizations_listRootsCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+		organizations_listRootsCmd.Flags().String("max-results", "", "The total number of results that you want included on each page of the response.")
+		organizations_listRootsCmd.Flags().String("next-token", "", "The parameter for receiving additional results if you receive a `NextToken` response in a previous request.")
+	})
 	organizationsCmd.AddCommand(organizations_listRootsCmd)
 }

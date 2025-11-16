@@ -12,11 +12,13 @@ var datasync_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_tagResourceCmd).Standalone()
+	carapace.Gen(datasync_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_tagResourceCmd).Standalone()
 
-	datasync_tagResourceCmd.Flags().String("resource-arn", "", "Specifies the Amazon Resource Name (ARN) of the resource to apply the tag to.")
-	datasync_tagResourceCmd.Flags().String("tags", "", "Specifies the tags that you want to apply to the resource.")
-	datasync_tagResourceCmd.MarkFlagRequired("resource-arn")
-	datasync_tagResourceCmd.MarkFlagRequired("tags")
+		datasync_tagResourceCmd.Flags().String("resource-arn", "", "Specifies the Amazon Resource Name (ARN) of the resource to apply the tag to.")
+		datasync_tagResourceCmd.Flags().String("tags", "", "Specifies the tags that you want to apply to the resource.")
+		datasync_tagResourceCmd.MarkFlagRequired("resource-arn")
+		datasync_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	datasyncCmd.AddCommand(datasync_tagResourceCmd)
 }

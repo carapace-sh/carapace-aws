@@ -12,12 +12,14 @@ var appflow_unregisterConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appflow_unregisterConnectorCmd).Standalone()
+	carapace.Gen(appflow_unregisterConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appflow_unregisterConnectorCmd).Standalone()
 
-	appflow_unregisterConnectorCmd.Flags().String("connector-label", "", "The label of the connector.")
-	appflow_unregisterConnectorCmd.Flags().Bool("force-delete", false, "Indicates whether Amazon AppFlow should unregister the connector, even if it is currently in use in one or more connector profiles.")
-	appflow_unregisterConnectorCmd.Flags().Bool("no-force-delete", false, "Indicates whether Amazon AppFlow should unregister the connector, even if it is currently in use in one or more connector profiles.")
-	appflow_unregisterConnectorCmd.MarkFlagRequired("connector-label")
-	appflow_unregisterConnectorCmd.Flag("no-force-delete").Hidden = true
+		appflow_unregisterConnectorCmd.Flags().String("connector-label", "", "The label of the connector.")
+		appflow_unregisterConnectorCmd.Flags().Bool("force-delete", false, "Indicates whether Amazon AppFlow should unregister the connector, even if it is currently in use in one or more connector profiles.")
+		appflow_unregisterConnectorCmd.Flags().Bool("no-force-delete", false, "Indicates whether Amazon AppFlow should unregister the connector, even if it is currently in use in one or more connector profiles.")
+		appflow_unregisterConnectorCmd.MarkFlagRequired("connector-label")
+		appflow_unregisterConnectorCmd.Flag("no-force-delete").Hidden = true
+	})
 	appflowCmd.AddCommand(appflow_unregisterConnectorCmd)
 }

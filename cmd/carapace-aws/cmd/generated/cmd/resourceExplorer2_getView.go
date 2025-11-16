@@ -12,9 +12,11 @@ var resourceExplorer2_getViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_getViewCmd).Standalone()
+	carapace.Gen(resourceExplorer2_getViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_getViewCmd).Standalone()
 
-	resourceExplorer2_getViewCmd.Flags().String("view-arn", "", "The [Amazon resource name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the view that you want information about.")
-	resourceExplorer2_getViewCmd.MarkFlagRequired("view-arn")
+		resourceExplorer2_getViewCmd.Flags().String("view-arn", "", "The [Amazon resource name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the view that you want information about.")
+		resourceExplorer2_getViewCmd.MarkFlagRequired("view-arn")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_getViewCmd)
 }

@@ -12,13 +12,15 @@ var rds_revokeDbsecurityGroupIngressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_revokeDbsecurityGroupIngressCmd).Standalone()
+	carapace.Gen(rds_revokeDbsecurityGroupIngressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_revokeDbsecurityGroupIngressCmd).Standalone()
 
-	rds_revokeDbsecurityGroupIngressCmd.Flags().String("cidrip", "", "The IP range to revoke access from.")
-	rds_revokeDbsecurityGroupIngressCmd.Flags().String("dbsecurity-group-name", "", "The name of the DB security group to revoke ingress from.")
-	rds_revokeDbsecurityGroupIngressCmd.Flags().String("ec2-security-group-id", "", "The id of the EC2 security group to revoke access from.")
-	rds_revokeDbsecurityGroupIngressCmd.Flags().String("ec2-security-group-name", "", "The name of the EC2 security group to revoke access from.")
-	rds_revokeDbsecurityGroupIngressCmd.Flags().String("ec2-security-group-owner-id", "", "The Amazon Web Services account number of the owner of the EC2 security group specified in the `EC2SecurityGroupName` parameter.")
-	rds_revokeDbsecurityGroupIngressCmd.MarkFlagRequired("dbsecurity-group-name")
+		rds_revokeDbsecurityGroupIngressCmd.Flags().String("cidrip", "", "The IP range to revoke access from.")
+		rds_revokeDbsecurityGroupIngressCmd.Flags().String("dbsecurity-group-name", "", "The name of the DB security group to revoke ingress from.")
+		rds_revokeDbsecurityGroupIngressCmd.Flags().String("ec2-security-group-id", "", "The id of the EC2 security group to revoke access from.")
+		rds_revokeDbsecurityGroupIngressCmd.Flags().String("ec2-security-group-name", "", "The name of the EC2 security group to revoke access from.")
+		rds_revokeDbsecurityGroupIngressCmd.Flags().String("ec2-security-group-owner-id", "", "The Amazon Web Services account number of the owner of the EC2 security group specified in the `EC2SecurityGroupName` parameter.")
+		rds_revokeDbsecurityGroupIngressCmd.MarkFlagRequired("dbsecurity-group-name")
+	})
 	rdsCmd.AddCommand(rds_revokeDbsecurityGroupIngressCmd)
 }

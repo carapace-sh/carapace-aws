@@ -12,9 +12,11 @@ var licenseManager_getLicenseConversionTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_getLicenseConversionTaskCmd).Standalone()
+	carapace.Gen(licenseManager_getLicenseConversionTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_getLicenseConversionTaskCmd).Standalone()
 
-	licenseManager_getLicenseConversionTaskCmd.Flags().String("license-conversion-task-id", "", "ID of the license type conversion task to retrieve information on.")
-	licenseManager_getLicenseConversionTaskCmd.MarkFlagRequired("license-conversion-task-id")
+		licenseManager_getLicenseConversionTaskCmd.Flags().String("license-conversion-task-id", "", "ID of the license type conversion task to retrieve information on.")
+		licenseManager_getLicenseConversionTaskCmd.MarkFlagRequired("license-conversion-task-id")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_getLicenseConversionTaskCmd)
 }

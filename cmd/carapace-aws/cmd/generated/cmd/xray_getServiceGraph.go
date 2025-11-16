@@ -12,14 +12,16 @@ var xray_getServiceGraphCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getServiceGraphCmd).Standalone()
+	carapace.Gen(xray_getServiceGraphCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getServiceGraphCmd).Standalone()
 
-	xray_getServiceGraphCmd.Flags().String("end-time", "", "The end of the timeframe for which to generate a graph.")
-	xray_getServiceGraphCmd.Flags().String("group-arn", "", "The Amazon Resource Name (ARN) of a group based on which you want to generate a graph.")
-	xray_getServiceGraphCmd.Flags().String("group-name", "", "The name of a group based on which you want to generate a graph.")
-	xray_getServiceGraphCmd.Flags().String("next-token", "", "Pagination token.")
-	xray_getServiceGraphCmd.Flags().String("start-time", "", "The start of the time frame for which to generate a graph.")
-	xray_getServiceGraphCmd.MarkFlagRequired("end-time")
-	xray_getServiceGraphCmd.MarkFlagRequired("start-time")
+		xray_getServiceGraphCmd.Flags().String("end-time", "", "The end of the timeframe for which to generate a graph.")
+		xray_getServiceGraphCmd.Flags().String("group-arn", "", "The Amazon Resource Name (ARN) of a group based on which you want to generate a graph.")
+		xray_getServiceGraphCmd.Flags().String("group-name", "", "The name of a group based on which you want to generate a graph.")
+		xray_getServiceGraphCmd.Flags().String("next-token", "", "Pagination token.")
+		xray_getServiceGraphCmd.Flags().String("start-time", "", "The start of the time frame for which to generate a graph.")
+		xray_getServiceGraphCmd.MarkFlagRequired("end-time")
+		xray_getServiceGraphCmd.MarkFlagRequired("start-time")
+	})
 	xrayCmd.AddCommand(xray_getServiceGraphCmd)
 }

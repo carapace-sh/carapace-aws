@@ -12,9 +12,11 @@ var elb_deleteLoadBalancerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_deleteLoadBalancerCmd).Standalone()
+	carapace.Gen(elb_deleteLoadBalancerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_deleteLoadBalancerCmd).Standalone()
 
-	elb_deleteLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_deleteLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+		elb_deleteLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_deleteLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+	})
 	elbCmd.AddCommand(elb_deleteLoadBalancerCmd)
 }

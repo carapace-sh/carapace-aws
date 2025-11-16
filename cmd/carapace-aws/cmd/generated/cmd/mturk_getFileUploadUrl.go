@@ -12,11 +12,13 @@ var mturk_getFileUploadUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_getFileUploadUrlCmd).Standalone()
+	carapace.Gen(mturk_getFileUploadUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_getFileUploadUrlCmd).Standalone()
 
-	mturk_getFileUploadUrlCmd.Flags().String("assignment-id", "", "The ID of the assignment that contains the question with a FileUploadAnswer.")
-	mturk_getFileUploadUrlCmd.Flags().String("question-identifier", "", "The identifier of the question with a FileUploadAnswer, as specified in the QuestionForm of the HIT.")
-	mturk_getFileUploadUrlCmd.MarkFlagRequired("assignment-id")
-	mturk_getFileUploadUrlCmd.MarkFlagRequired("question-identifier")
+		mturk_getFileUploadUrlCmd.Flags().String("assignment-id", "", "The ID of the assignment that contains the question with a FileUploadAnswer.")
+		mturk_getFileUploadUrlCmd.Flags().String("question-identifier", "", "The identifier of the question with a FileUploadAnswer, as specified in the QuestionForm of the HIT.")
+		mturk_getFileUploadUrlCmd.MarkFlagRequired("assignment-id")
+		mturk_getFileUploadUrlCmd.MarkFlagRequired("question-identifier")
+	})
 	mturkCmd.AddCommand(mturk_getFileUploadUrlCmd)
 }

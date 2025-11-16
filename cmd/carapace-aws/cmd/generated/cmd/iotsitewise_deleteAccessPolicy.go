@@ -12,10 +12,12 @@ var iotsitewise_deleteAccessPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_deleteAccessPolicyCmd).Standalone()
+	carapace.Gen(iotsitewise_deleteAccessPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_deleteAccessPolicyCmd).Standalone()
 
-	iotsitewise_deleteAccessPolicyCmd.Flags().String("access-policy-id", "", "The ID of the access policy to be deleted.")
-	iotsitewise_deleteAccessPolicyCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_deleteAccessPolicyCmd.MarkFlagRequired("access-policy-id")
+		iotsitewise_deleteAccessPolicyCmd.Flags().String("access-policy-id", "", "The ID of the access policy to be deleted.")
+		iotsitewise_deleteAccessPolicyCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_deleteAccessPolicyCmd.MarkFlagRequired("access-policy-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_deleteAccessPolicyCmd)
 }

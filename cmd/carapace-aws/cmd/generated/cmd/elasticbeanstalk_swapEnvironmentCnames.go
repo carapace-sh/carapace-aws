@@ -12,11 +12,13 @@ var elasticbeanstalk_swapEnvironmentCnamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_swapEnvironmentCnamesCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_swapEnvironmentCnamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_swapEnvironmentCnamesCmd).Standalone()
 
-	elasticbeanstalk_swapEnvironmentCnamesCmd.Flags().String("destination-environment-id", "", "The ID of the destination environment.")
-	elasticbeanstalk_swapEnvironmentCnamesCmd.Flags().String("destination-environment-name", "", "The name of the destination environment.")
-	elasticbeanstalk_swapEnvironmentCnamesCmd.Flags().String("source-environment-id", "", "The ID of the source environment.")
-	elasticbeanstalk_swapEnvironmentCnamesCmd.Flags().String("source-environment-name", "", "The name of the source environment.")
+		elasticbeanstalk_swapEnvironmentCnamesCmd.Flags().String("destination-environment-id", "", "The ID of the destination environment.")
+		elasticbeanstalk_swapEnvironmentCnamesCmd.Flags().String("destination-environment-name", "", "The name of the destination environment.")
+		elasticbeanstalk_swapEnvironmentCnamesCmd.Flags().String("source-environment-id", "", "The ID of the source environment.")
+		elasticbeanstalk_swapEnvironmentCnamesCmd.Flags().String("source-environment-name", "", "The name of the source environment.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_swapEnvironmentCnamesCmd)
 }

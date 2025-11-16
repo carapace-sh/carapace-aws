@@ -12,9 +12,11 @@ var qconnect_getAssistantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_getAssistantCmd).Standalone()
+	carapace.Gen(qconnect_getAssistantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_getAssistantCmd).Standalone()
 
-	qconnect_getAssistantCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_getAssistantCmd.MarkFlagRequired("assistant-id")
+		qconnect_getAssistantCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_getAssistantCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_getAssistantCmd)
 }

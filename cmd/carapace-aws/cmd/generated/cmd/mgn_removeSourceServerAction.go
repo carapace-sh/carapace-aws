@@ -12,12 +12,14 @@ var mgn_removeSourceServerActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_removeSourceServerActionCmd).Standalone()
+	carapace.Gen(mgn_removeSourceServerActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_removeSourceServerActionCmd).Standalone()
 
-	mgn_removeSourceServerActionCmd.Flags().String("account-id", "", "Source server post migration account ID.")
-	mgn_removeSourceServerActionCmd.Flags().String("action-id", "", "Source server post migration custom action ID to remove.")
-	mgn_removeSourceServerActionCmd.Flags().String("source-server-id", "", "Source server ID of the post migration custom action to remove.")
-	mgn_removeSourceServerActionCmd.MarkFlagRequired("action-id")
-	mgn_removeSourceServerActionCmd.MarkFlagRequired("source-server-id")
+		mgn_removeSourceServerActionCmd.Flags().String("account-id", "", "Source server post migration account ID.")
+		mgn_removeSourceServerActionCmd.Flags().String("action-id", "", "Source server post migration custom action ID to remove.")
+		mgn_removeSourceServerActionCmd.Flags().String("source-server-id", "", "Source server ID of the post migration custom action to remove.")
+		mgn_removeSourceServerActionCmd.MarkFlagRequired("action-id")
+		mgn_removeSourceServerActionCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_removeSourceServerActionCmd)
 }

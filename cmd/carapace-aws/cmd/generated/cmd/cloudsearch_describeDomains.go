@@ -12,8 +12,10 @@ var cloudsearch_describeDomainsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_describeDomainsCmd).Standalone()
+	carapace.Gen(cloudsearch_describeDomainsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_describeDomainsCmd).Standalone()
 
-	cloudsearch_describeDomainsCmd.Flags().String("domain-names", "", "The names of the domains you want to include in the response.")
+		cloudsearch_describeDomainsCmd.Flags().String("domain-names", "", "The names of the domains you want to include in the response.")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_describeDomainsCmd)
 }

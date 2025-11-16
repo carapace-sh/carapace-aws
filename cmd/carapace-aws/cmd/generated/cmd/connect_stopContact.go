@@ -12,12 +12,14 @@ var connect_stopContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_stopContactCmd).Standalone()
+	carapace.Gen(connect_stopContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_stopContactCmd).Standalone()
 
-	connect_stopContactCmd.Flags().String("contact-id", "", "The ID of the contact.")
-	connect_stopContactCmd.Flags().String("disconnect-reason", "", "The reason a contact can be disconnected.")
-	connect_stopContactCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_stopContactCmd.MarkFlagRequired("contact-id")
-	connect_stopContactCmd.MarkFlagRequired("instance-id")
+		connect_stopContactCmd.Flags().String("contact-id", "", "The ID of the contact.")
+		connect_stopContactCmd.Flags().String("disconnect-reason", "", "The reason a contact can be disconnected.")
+		connect_stopContactCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_stopContactCmd.MarkFlagRequired("contact-id")
+		connect_stopContactCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_stopContactCmd)
 }

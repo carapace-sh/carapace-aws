@@ -12,9 +12,11 @@ var config_batchGetResourceConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_batchGetResourceConfigCmd).Standalone()
+	carapace.Gen(config_batchGetResourceConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_batchGetResourceConfigCmd).Standalone()
 
-	config_batchGetResourceConfigCmd.Flags().String("resource-keys", "", "A list of resource keys to be processed with the current request.")
-	config_batchGetResourceConfigCmd.MarkFlagRequired("resource-keys")
+		config_batchGetResourceConfigCmd.Flags().String("resource-keys", "", "A list of resource keys to be processed with the current request.")
+		config_batchGetResourceConfigCmd.MarkFlagRequired("resource-keys")
+	})
 	configCmd.AddCommand(config_batchGetResourceConfigCmd)
 }

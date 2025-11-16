@@ -12,11 +12,13 @@ var route53domains_disassociateDelegationSignerFromDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_disassociateDelegationSignerFromDomainCmd).Standalone()
+	carapace.Gen(route53domains_disassociateDelegationSignerFromDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_disassociateDelegationSignerFromDomainCmd).Standalone()
 
-	route53domains_disassociateDelegationSignerFromDomainCmd.Flags().String("domain-name", "", "Name of the domain.")
-	route53domains_disassociateDelegationSignerFromDomainCmd.Flags().String("id", "", "An internal identification number assigned to each DS record after it’s created.")
-	route53domains_disassociateDelegationSignerFromDomainCmd.MarkFlagRequired("domain-name")
-	route53domains_disassociateDelegationSignerFromDomainCmd.MarkFlagRequired("id")
+		route53domains_disassociateDelegationSignerFromDomainCmd.Flags().String("domain-name", "", "Name of the domain.")
+		route53domains_disassociateDelegationSignerFromDomainCmd.Flags().String("id", "", "An internal identification number assigned to each DS record after it’s created.")
+		route53domains_disassociateDelegationSignerFromDomainCmd.MarkFlagRequired("domain-name")
+		route53domains_disassociateDelegationSignerFromDomainCmd.MarkFlagRequired("id")
+	})
 	route53domainsCmd.AddCommand(route53domains_disassociateDelegationSignerFromDomainCmd)
 }

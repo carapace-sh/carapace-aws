@@ -12,11 +12,13 @@ var workmail_deleteMobileDeviceAccessRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_deleteMobileDeviceAccessRuleCmd).Standalone()
+	carapace.Gen(workmail_deleteMobileDeviceAccessRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_deleteMobileDeviceAccessRuleCmd).Standalone()
 
-	workmail_deleteMobileDeviceAccessRuleCmd.Flags().String("mobile-device-access-rule-id", "", "The identifier of the rule to be deleted.")
-	workmail_deleteMobileDeviceAccessRuleCmd.Flags().String("organization-id", "", "The WorkMail organization under which the rule will be deleted.")
-	workmail_deleteMobileDeviceAccessRuleCmd.MarkFlagRequired("mobile-device-access-rule-id")
-	workmail_deleteMobileDeviceAccessRuleCmd.MarkFlagRequired("organization-id")
+		workmail_deleteMobileDeviceAccessRuleCmd.Flags().String("mobile-device-access-rule-id", "", "The identifier of the rule to be deleted.")
+		workmail_deleteMobileDeviceAccessRuleCmd.Flags().String("organization-id", "", "The WorkMail organization under which the rule will be deleted.")
+		workmail_deleteMobileDeviceAccessRuleCmd.MarkFlagRequired("mobile-device-access-rule-id")
+		workmail_deleteMobileDeviceAccessRuleCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_deleteMobileDeviceAccessRuleCmd)
 }

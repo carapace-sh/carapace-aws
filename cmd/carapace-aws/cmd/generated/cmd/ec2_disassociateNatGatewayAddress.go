@@ -12,15 +12,17 @@ var ec2_disassociateNatGatewayAddressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_disassociateNatGatewayAddressCmd).Standalone()
+	carapace.Gen(ec2_disassociateNatGatewayAddressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_disassociateNatGatewayAddressCmd).Standalone()
 
-	ec2_disassociateNatGatewayAddressCmd.Flags().String("association-ids", "", "The association IDs of EIPs that have been associated with the NAT gateway.")
-	ec2_disassociateNatGatewayAddressCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disassociateNatGatewayAddressCmd.Flags().String("max-drain-duration-seconds", "", "The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress.")
-	ec2_disassociateNatGatewayAddressCmd.Flags().String("nat-gateway-id", "", "The ID of the NAT gateway.")
-	ec2_disassociateNatGatewayAddressCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_disassociateNatGatewayAddressCmd.MarkFlagRequired("association-ids")
-	ec2_disassociateNatGatewayAddressCmd.MarkFlagRequired("nat-gateway-id")
-	ec2_disassociateNatGatewayAddressCmd.Flag("no-dry-run").Hidden = true
+		ec2_disassociateNatGatewayAddressCmd.Flags().String("association-ids", "", "The association IDs of EIPs that have been associated with the NAT gateway.")
+		ec2_disassociateNatGatewayAddressCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disassociateNatGatewayAddressCmd.Flags().String("max-drain-duration-seconds", "", "The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress.")
+		ec2_disassociateNatGatewayAddressCmd.Flags().String("nat-gateway-id", "", "The ID of the NAT gateway.")
+		ec2_disassociateNatGatewayAddressCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_disassociateNatGatewayAddressCmd.MarkFlagRequired("association-ids")
+		ec2_disassociateNatGatewayAddressCmd.MarkFlagRequired("nat-gateway-id")
+		ec2_disassociateNatGatewayAddressCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_disassociateNatGatewayAddressCmd)
 }

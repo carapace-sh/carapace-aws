@@ -12,9 +12,11 @@ var sagemaker_describeDeviceFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeDeviceFleetCmd).Standalone()
+	carapace.Gen(sagemaker_describeDeviceFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeDeviceFleetCmd).Standalone()
 
-	sagemaker_describeDeviceFleetCmd.Flags().String("device-fleet-name", "", "The name of the fleet.")
-	sagemaker_describeDeviceFleetCmd.MarkFlagRequired("device-fleet-name")
+		sagemaker_describeDeviceFleetCmd.Flags().String("device-fleet-name", "", "The name of the fleet.")
+		sagemaker_describeDeviceFleetCmd.MarkFlagRequired("device-fleet-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeDeviceFleetCmd)
 }

@@ -12,11 +12,13 @@ var codecommit_getBlobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_getBlobCmd).Standalone()
+	carapace.Gen(codecommit_getBlobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_getBlobCmd).Standalone()
 
-	codecommit_getBlobCmd.Flags().String("blob-id", "", "The ID of the blob, which is its SHA-1 pointer.")
-	codecommit_getBlobCmd.Flags().String("repository-name", "", "The name of the repository that contains the blob.")
-	codecommit_getBlobCmd.MarkFlagRequired("blob-id")
-	codecommit_getBlobCmd.MarkFlagRequired("repository-name")
+		codecommit_getBlobCmd.Flags().String("blob-id", "", "The ID of the blob, which is its SHA-1 pointer.")
+		codecommit_getBlobCmd.Flags().String("repository-name", "", "The name of the repository that contains the blob.")
+		codecommit_getBlobCmd.MarkFlagRequired("blob-id")
+		codecommit_getBlobCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_getBlobCmd)
 }

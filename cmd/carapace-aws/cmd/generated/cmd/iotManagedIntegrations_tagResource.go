@@ -12,11 +12,13 @@ var iotManagedIntegrations_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_tagResourceCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_tagResourceCmd).Standalone()
 
-	iotManagedIntegrations_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to which to add tags.")
-	iotManagedIntegrations_tagResourceCmd.Flags().String("tags", "", "A set of key/value pairs that are used to manage the resource")
-	iotManagedIntegrations_tagResourceCmd.MarkFlagRequired("resource-arn")
-	iotManagedIntegrations_tagResourceCmd.MarkFlagRequired("tags")
+		iotManagedIntegrations_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to which to add tags.")
+		iotManagedIntegrations_tagResourceCmd.Flags().String("tags", "", "A set of key/value pairs that are used to manage the resource")
+		iotManagedIntegrations_tagResourceCmd.MarkFlagRequired("resource-arn")
+		iotManagedIntegrations_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_tagResourceCmd)
 }

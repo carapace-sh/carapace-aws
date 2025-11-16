@@ -12,10 +12,12 @@ var iottwinmaker_updatePricingPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_updatePricingPlanCmd).Standalone()
+	carapace.Gen(iottwinmaker_updatePricingPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_updatePricingPlanCmd).Standalone()
 
-	iottwinmaker_updatePricingPlanCmd.Flags().String("bundle-names", "", "The bundle names.")
-	iottwinmaker_updatePricingPlanCmd.Flags().String("pricing-mode", "", "The pricing mode.")
-	iottwinmaker_updatePricingPlanCmd.MarkFlagRequired("pricing-mode")
+		iottwinmaker_updatePricingPlanCmd.Flags().String("bundle-names", "", "The bundle names.")
+		iottwinmaker_updatePricingPlanCmd.Flags().String("pricing-mode", "", "The pricing mode.")
+		iottwinmaker_updatePricingPlanCmd.MarkFlagRequired("pricing-mode")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_updatePricingPlanCmd)
 }

@@ -12,9 +12,11 @@ var pcaConnectorScep_deleteChallengeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorScep_deleteChallengeCmd).Standalone()
+	carapace.Gen(pcaConnectorScep_deleteChallengeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorScep_deleteChallengeCmd).Standalone()
 
-	pcaConnectorScep_deleteChallengeCmd.Flags().String("challenge-arn", "", "The Amazon Resource Name (ARN) of the challenge password to delete.")
-	pcaConnectorScep_deleteChallengeCmd.MarkFlagRequired("challenge-arn")
+		pcaConnectorScep_deleteChallengeCmd.Flags().String("challenge-arn", "", "The Amazon Resource Name (ARN) of the challenge password to delete.")
+		pcaConnectorScep_deleteChallengeCmd.MarkFlagRequired("challenge-arn")
+	})
 	pcaConnectorScepCmd.AddCommand(pcaConnectorScep_deleteChallengeCmd)
 }

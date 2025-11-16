@@ -12,9 +12,11 @@ var eks_describeClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_describeClusterCmd).Standalone()
+	carapace.Gen(eks_describeClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_describeClusterCmd).Standalone()
 
-	eks_describeClusterCmd.Flags().String("name", "", "The name of your cluster.")
-	eks_describeClusterCmd.MarkFlagRequired("name")
+		eks_describeClusterCmd.Flags().String("name", "", "The name of your cluster.")
+		eks_describeClusterCmd.MarkFlagRequired("name")
+	})
 	eksCmd.AddCommand(eks_describeClusterCmd)
 }

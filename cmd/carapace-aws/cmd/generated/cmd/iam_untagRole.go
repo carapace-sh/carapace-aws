@@ -12,11 +12,13 @@ var iam_untagRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_untagRoleCmd).Standalone()
+	carapace.Gen(iam_untagRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_untagRoleCmd).Standalone()
 
-	iam_untagRoleCmd.Flags().String("role-name", "", "The name of the IAM role from which you want to remove tags.")
-	iam_untagRoleCmd.Flags().String("tag-keys", "", "A list of key names as a simple array of strings.")
-	iam_untagRoleCmd.MarkFlagRequired("role-name")
-	iam_untagRoleCmd.MarkFlagRequired("tag-keys")
+		iam_untagRoleCmd.Flags().String("role-name", "", "The name of the IAM role from which you want to remove tags.")
+		iam_untagRoleCmd.Flags().String("tag-keys", "", "A list of key names as a simple array of strings.")
+		iam_untagRoleCmd.MarkFlagRequired("role-name")
+		iam_untagRoleCmd.MarkFlagRequired("tag-keys")
+	})
 	iamCmd.AddCommand(iam_untagRoleCmd)
 }

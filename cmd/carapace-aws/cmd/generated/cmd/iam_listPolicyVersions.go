@@ -12,11 +12,13 @@ var iam_listPolicyVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_listPolicyVersionsCmd).Standalone()
+	carapace.Gen(iam_listPolicyVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_listPolicyVersionsCmd).Standalone()
 
-	iam_listPolicyVersionsCmd.Flags().String("marker", "", "Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated.")
-	iam_listPolicyVersionsCmd.Flags().String("max-items", "", "Use this only when paginating results to indicate the maximum number of items you want in the response.")
-	iam_listPolicyVersionsCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the IAM policy for which you want the versions.")
-	iam_listPolicyVersionsCmd.MarkFlagRequired("policy-arn")
+		iam_listPolicyVersionsCmd.Flags().String("marker", "", "Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated.")
+		iam_listPolicyVersionsCmd.Flags().String("max-items", "", "Use this only when paginating results to indicate the maximum number of items you want in the response.")
+		iam_listPolicyVersionsCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the IAM policy for which you want the versions.")
+		iam_listPolicyVersionsCmd.MarkFlagRequired("policy-arn")
+	})
 	iamCmd.AddCommand(iam_listPolicyVersionsCmd)
 }

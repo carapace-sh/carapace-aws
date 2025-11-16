@@ -12,7 +12,9 @@ var connectcampaignsv2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2Cmd).Standalone()
+	carapace.Gen(connectcampaignsv2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2Cmd).Standalone()
 
+	})
 	rootCmd.AddCommand(connectcampaignsv2Cmd)
 }

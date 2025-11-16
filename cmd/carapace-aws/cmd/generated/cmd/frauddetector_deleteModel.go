@@ -12,11 +12,13 @@ var frauddetector_deleteModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteModelCmd).Standalone()
+	carapace.Gen(frauddetector_deleteModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteModelCmd).Standalone()
 
-	frauddetector_deleteModelCmd.Flags().String("model-id", "", "The model ID of the model to delete.")
-	frauddetector_deleteModelCmd.Flags().String("model-type", "", "The model type of the model to delete.")
-	frauddetector_deleteModelCmd.MarkFlagRequired("model-id")
-	frauddetector_deleteModelCmd.MarkFlagRequired("model-type")
+		frauddetector_deleteModelCmd.Flags().String("model-id", "", "The model ID of the model to delete.")
+		frauddetector_deleteModelCmd.Flags().String("model-type", "", "The model type of the model to delete.")
+		frauddetector_deleteModelCmd.MarkFlagRequired("model-id")
+		frauddetector_deleteModelCmd.MarkFlagRequired("model-type")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteModelCmd)
 }

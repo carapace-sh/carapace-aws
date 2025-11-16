@@ -12,9 +12,11 @@ var transcribe_deleteCallAnalyticsJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_deleteCallAnalyticsJobCmd).Standalone()
+	carapace.Gen(transcribe_deleteCallAnalyticsJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_deleteCallAnalyticsJobCmd).Standalone()
 
-	transcribe_deleteCallAnalyticsJobCmd.Flags().String("call-analytics-job-name", "", "The name of the Call Analytics job you want to delete.")
-	transcribe_deleteCallAnalyticsJobCmd.MarkFlagRequired("call-analytics-job-name")
+		transcribe_deleteCallAnalyticsJobCmd.Flags().String("call-analytics-job-name", "", "The name of the Call Analytics job you want to delete.")
+		transcribe_deleteCallAnalyticsJobCmd.MarkFlagRequired("call-analytics-job-name")
+	})
 	transcribeCmd.AddCommand(transcribe_deleteCallAnalyticsJobCmd)
 }

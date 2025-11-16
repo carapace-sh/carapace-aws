@@ -12,11 +12,13 @@ var stepfunctions_listStateMachineVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_listStateMachineVersionsCmd).Standalone()
+	carapace.Gen(stepfunctions_listStateMachineVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_listStateMachineVersionsCmd).Standalone()
 
-	stepfunctions_listStateMachineVersionsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	stepfunctions_listStateMachineVersionsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
-	stepfunctions_listStateMachineVersionsCmd.Flags().String("state-machine-arn", "", "The Amazon Resource Name (ARN) of the state machine.")
-	stepfunctions_listStateMachineVersionsCmd.MarkFlagRequired("state-machine-arn")
+		stepfunctions_listStateMachineVersionsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		stepfunctions_listStateMachineVersionsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		stepfunctions_listStateMachineVersionsCmd.Flags().String("state-machine-arn", "", "The Amazon Resource Name (ARN) of the state machine.")
+		stepfunctions_listStateMachineVersionsCmd.MarkFlagRequired("state-machine-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_listStateMachineVersionsCmd)
 }

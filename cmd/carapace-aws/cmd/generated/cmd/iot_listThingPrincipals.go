@@ -12,11 +12,13 @@ var iot_listThingPrincipalsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listThingPrincipalsCmd).Standalone()
+	carapace.Gen(iot_listThingPrincipalsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listThingPrincipalsCmd).Standalone()
 
-	iot_listThingPrincipalsCmd.Flags().String("max-results", "", "The maximum number of results to return in this operation.")
-	iot_listThingPrincipalsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
-	iot_listThingPrincipalsCmd.Flags().String("thing-name", "", "The name of the thing.")
-	iot_listThingPrincipalsCmd.MarkFlagRequired("thing-name")
+		iot_listThingPrincipalsCmd.Flags().String("max-results", "", "The maximum number of results to return in this operation.")
+		iot_listThingPrincipalsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+		iot_listThingPrincipalsCmd.Flags().String("thing-name", "", "The name of the thing.")
+		iot_listThingPrincipalsCmd.MarkFlagRequired("thing-name")
+	})
 	iotCmd.AddCommand(iot_listThingPrincipalsCmd)
 }

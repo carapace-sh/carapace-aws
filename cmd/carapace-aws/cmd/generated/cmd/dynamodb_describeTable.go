@@ -12,9 +12,11 @@ var dynamodb_describeTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_describeTableCmd).Standalone()
+	carapace.Gen(dynamodb_describeTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_describeTableCmd).Standalone()
 
-	dynamodb_describeTableCmd.Flags().String("table-name", "", "The name of the table to describe.")
-	dynamodb_describeTableCmd.MarkFlagRequired("table-name")
+		dynamodb_describeTableCmd.Flags().String("table-name", "", "The name of the table to describe.")
+		dynamodb_describeTableCmd.MarkFlagRequired("table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_describeTableCmd)
 }

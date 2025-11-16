@@ -12,12 +12,14 @@ var iot_getCardinalityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getCardinalityCmd).Standalone()
+	carapace.Gen(iot_getCardinalityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getCardinalityCmd).Standalone()
 
-	iot_getCardinalityCmd.Flags().String("aggregation-field", "", "The field to aggregate.")
-	iot_getCardinalityCmd.Flags().String("index-name", "", "The name of the index to search.")
-	iot_getCardinalityCmd.Flags().String("query-string", "", "The search query string.")
-	iot_getCardinalityCmd.Flags().String("query-version", "", "The query version.")
-	iot_getCardinalityCmd.MarkFlagRequired("query-string")
+		iot_getCardinalityCmd.Flags().String("aggregation-field", "", "The field to aggregate.")
+		iot_getCardinalityCmd.Flags().String("index-name", "", "The name of the index to search.")
+		iot_getCardinalityCmd.Flags().String("query-string", "", "The search query string.")
+		iot_getCardinalityCmd.Flags().String("query-version", "", "The query version.")
+		iot_getCardinalityCmd.MarkFlagRequired("query-string")
+	})
 	iotCmd.AddCommand(iot_getCardinalityCmd)
 }

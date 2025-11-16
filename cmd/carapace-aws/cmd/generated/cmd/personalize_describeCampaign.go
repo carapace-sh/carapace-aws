@@ -12,9 +12,11 @@ var personalize_describeCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeCampaignCmd).Standalone()
+	carapace.Gen(personalize_describeCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeCampaignCmd).Standalone()
 
-	personalize_describeCampaignCmd.Flags().String("campaign-arn", "", "The Amazon Resource Name (ARN) of the campaign.")
-	personalize_describeCampaignCmd.MarkFlagRequired("campaign-arn")
+		personalize_describeCampaignCmd.Flags().String("campaign-arn", "", "The Amazon Resource Name (ARN) of the campaign.")
+		personalize_describeCampaignCmd.MarkFlagRequired("campaign-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeCampaignCmd)
 }

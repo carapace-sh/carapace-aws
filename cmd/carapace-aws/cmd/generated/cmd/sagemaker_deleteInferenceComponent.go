@@ -12,9 +12,11 @@ var sagemaker_deleteInferenceComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteInferenceComponentCmd).Standalone()
+	carapace.Gen(sagemaker_deleteInferenceComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteInferenceComponentCmd).Standalone()
 
-	sagemaker_deleteInferenceComponentCmd.Flags().String("inference-component-name", "", "The name of the inference component to delete.")
-	sagemaker_deleteInferenceComponentCmd.MarkFlagRequired("inference-component-name")
+		sagemaker_deleteInferenceComponentCmd.Flags().String("inference-component-name", "", "The name of the inference component to delete.")
+		sagemaker_deleteInferenceComponentCmd.MarkFlagRequired("inference-component-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteInferenceComponentCmd)
 }

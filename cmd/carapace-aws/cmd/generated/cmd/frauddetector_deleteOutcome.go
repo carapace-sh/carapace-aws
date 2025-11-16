@@ -12,9 +12,11 @@ var frauddetector_deleteOutcomeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteOutcomeCmd).Standalone()
+	carapace.Gen(frauddetector_deleteOutcomeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteOutcomeCmd).Standalone()
 
-	frauddetector_deleteOutcomeCmd.Flags().String("name", "", "The name of the outcome to delete.")
-	frauddetector_deleteOutcomeCmd.MarkFlagRequired("name")
+		frauddetector_deleteOutcomeCmd.Flags().String("name", "", "The name of the outcome to delete.")
+		frauddetector_deleteOutcomeCmd.MarkFlagRequired("name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteOutcomeCmd)
 }

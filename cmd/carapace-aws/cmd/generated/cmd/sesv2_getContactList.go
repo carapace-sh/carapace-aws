@@ -12,9 +12,11 @@ var sesv2_getContactListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getContactListCmd).Standalone()
+	carapace.Gen(sesv2_getContactListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getContactListCmd).Standalone()
 
-	sesv2_getContactListCmd.Flags().String("contact-list-name", "", "The name of the contact list.")
-	sesv2_getContactListCmd.MarkFlagRequired("contact-list-name")
+		sesv2_getContactListCmd.Flags().String("contact-list-name", "", "The name of the contact list.")
+		sesv2_getContactListCmd.MarkFlagRequired("contact-list-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_getContactListCmd)
 }

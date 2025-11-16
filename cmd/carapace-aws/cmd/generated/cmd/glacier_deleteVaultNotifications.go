@@ -12,11 +12,13 @@ var glacier_deleteVaultNotificationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_deleteVaultNotificationsCmd).Standalone()
+	carapace.Gen(glacier_deleteVaultNotificationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_deleteVaultNotificationsCmd).Standalone()
 
-	glacier_deleteVaultNotificationsCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
-	glacier_deleteVaultNotificationsCmd.Flags().String("vault-name", "", "The name of the vault.")
-	glacier_deleteVaultNotificationsCmd.MarkFlagRequired("account-id")
-	glacier_deleteVaultNotificationsCmd.MarkFlagRequired("vault-name")
+		glacier_deleteVaultNotificationsCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
+		glacier_deleteVaultNotificationsCmd.Flags().String("vault-name", "", "The name of the vault.")
+		glacier_deleteVaultNotificationsCmd.MarkFlagRequired("account-id")
+		glacier_deleteVaultNotificationsCmd.MarkFlagRequired("vault-name")
+	})
 	glacierCmd.AddCommand(glacier_deleteVaultNotificationsCmd)
 }

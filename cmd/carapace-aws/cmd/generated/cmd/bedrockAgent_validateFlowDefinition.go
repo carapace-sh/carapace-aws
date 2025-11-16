@@ -12,9 +12,11 @@ var bedrockAgent_validateFlowDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_validateFlowDefinitionCmd).Standalone()
+	carapace.Gen(bedrockAgent_validateFlowDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_validateFlowDefinitionCmd).Standalone()
 
-	bedrockAgent_validateFlowDefinitionCmd.Flags().String("definition", "", "The definition of a flow to validate.")
-	bedrockAgent_validateFlowDefinitionCmd.MarkFlagRequired("definition")
+		bedrockAgent_validateFlowDefinitionCmd.Flags().String("definition", "", "The definition of a flow to validate.")
+		bedrockAgent_validateFlowDefinitionCmd.MarkFlagRequired("definition")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_validateFlowDefinitionCmd)
 }

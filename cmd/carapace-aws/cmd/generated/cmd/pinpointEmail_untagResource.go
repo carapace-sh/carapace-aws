@@ -12,11 +12,13 @@ var pinpointEmail_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_untagResourceCmd).Standalone()
+	carapace.Gen(pinpointEmail_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_untagResourceCmd).Standalone()
 
-	pinpointEmail_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove one or more tags from.")
-	pinpointEmail_untagResourceCmd.Flags().String("tag-keys", "", "The tags (tag keys) that you want to remove from the resource.")
-	pinpointEmail_untagResourceCmd.MarkFlagRequired("resource-arn")
-	pinpointEmail_untagResourceCmd.MarkFlagRequired("tag-keys")
+		pinpointEmail_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove one or more tags from.")
+		pinpointEmail_untagResourceCmd.Flags().String("tag-keys", "", "The tags (tag keys) that you want to remove from the resource.")
+		pinpointEmail_untagResourceCmd.MarkFlagRequired("resource-arn")
+		pinpointEmail_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_untagResourceCmd)
 }

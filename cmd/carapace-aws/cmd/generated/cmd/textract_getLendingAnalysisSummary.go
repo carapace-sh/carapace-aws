@@ -12,9 +12,11 @@ var textract_getLendingAnalysisSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(textract_getLendingAnalysisSummaryCmd).Standalone()
+	carapace.Gen(textract_getLendingAnalysisSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(textract_getLendingAnalysisSummaryCmd).Standalone()
 
-	textract_getLendingAnalysisSummaryCmd.Flags().String("job-id", "", "A unique identifier for the lending or text-detection job.")
-	textract_getLendingAnalysisSummaryCmd.MarkFlagRequired("job-id")
+		textract_getLendingAnalysisSummaryCmd.Flags().String("job-id", "", "A unique identifier for the lending or text-detection job.")
+		textract_getLendingAnalysisSummaryCmd.MarkFlagRequired("job-id")
+	})
 	textractCmd.AddCommand(textract_getLendingAnalysisSummaryCmd)
 }

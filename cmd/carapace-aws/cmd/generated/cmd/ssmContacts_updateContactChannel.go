@@ -12,11 +12,13 @@ var ssmContacts_updateContactChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_updateContactChannelCmd).Standalone()
+	carapace.Gen(ssmContacts_updateContactChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_updateContactChannelCmd).Standalone()
 
-	ssmContacts_updateContactChannelCmd.Flags().String("contact-channel-id", "", "The Amazon Resource Name (ARN) of the contact channel you want to update.")
-	ssmContacts_updateContactChannelCmd.Flags().String("delivery-address", "", "The details that Incident Manager uses when trying to engage the contact channel.")
-	ssmContacts_updateContactChannelCmd.Flags().String("name", "", "The name of the contact channel.")
-	ssmContacts_updateContactChannelCmd.MarkFlagRequired("contact-channel-id")
+		ssmContacts_updateContactChannelCmd.Flags().String("contact-channel-id", "", "The Amazon Resource Name (ARN) of the contact channel you want to update.")
+		ssmContacts_updateContactChannelCmd.Flags().String("delivery-address", "", "The details that Incident Manager uses when trying to engage the contact channel.")
+		ssmContacts_updateContactChannelCmd.Flags().String("name", "", "The name of the contact channel.")
+		ssmContacts_updateContactChannelCmd.MarkFlagRequired("contact-channel-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_updateContactChannelCmd)
 }

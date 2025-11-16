@@ -12,9 +12,11 @@ var chimeSdkMediaPipelines_getMediaInsightsPipelineConfigurationCmd = &cobra.Com
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_getMediaInsightsPipelineConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_getMediaInsightsPipelineConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_getMediaInsightsPipelineConfigurationCmd).Standalone()
 
-	chimeSdkMediaPipelines_getMediaInsightsPipelineConfigurationCmd.Flags().String("identifier", "", "The unique identifier of the requested resource.")
-	chimeSdkMediaPipelines_getMediaInsightsPipelineConfigurationCmd.MarkFlagRequired("identifier")
+		chimeSdkMediaPipelines_getMediaInsightsPipelineConfigurationCmd.Flags().String("identifier", "", "The unique identifier of the requested resource.")
+		chimeSdkMediaPipelines_getMediaInsightsPipelineConfigurationCmd.MarkFlagRequired("identifier")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_getMediaInsightsPipelineConfigurationCmd)
 }

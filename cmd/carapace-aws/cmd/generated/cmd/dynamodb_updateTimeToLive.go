@@ -12,11 +12,13 @@ var dynamodb_updateTimeToLiveCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_updateTimeToLiveCmd).Standalone()
+	carapace.Gen(dynamodb_updateTimeToLiveCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_updateTimeToLiveCmd).Standalone()
 
-	dynamodb_updateTimeToLiveCmd.Flags().String("table-name", "", "The name of the table to be configured.")
-	dynamodb_updateTimeToLiveCmd.Flags().String("time-to-live-specification", "", "Represents the settings used to enable or disable Time to Live for the specified table.")
-	dynamodb_updateTimeToLiveCmd.MarkFlagRequired("table-name")
-	dynamodb_updateTimeToLiveCmd.MarkFlagRequired("time-to-live-specification")
+		dynamodb_updateTimeToLiveCmd.Flags().String("table-name", "", "The name of the table to be configured.")
+		dynamodb_updateTimeToLiveCmd.Flags().String("time-to-live-specification", "", "Represents the settings used to enable or disable Time to Live for the specified table.")
+		dynamodb_updateTimeToLiveCmd.MarkFlagRequired("table-name")
+		dynamodb_updateTimeToLiveCmd.MarkFlagRequired("time-to-live-specification")
+	})
 	dynamodbCmd.AddCommand(dynamodb_updateTimeToLiveCmd)
 }

@@ -12,11 +12,13 @@ var proton_getServiceInstanceSyncStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_getServiceInstanceSyncStatusCmd).Standalone()
+	carapace.Gen(proton_getServiceInstanceSyncStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_getServiceInstanceSyncStatusCmd).Standalone()
 
-	proton_getServiceInstanceSyncStatusCmd.Flags().String("service-instance-name", "", "The name of the service instance that you want the sync status input for.")
-	proton_getServiceInstanceSyncStatusCmd.Flags().String("service-name", "", "The name of the service that the service instance belongs to.")
-	proton_getServiceInstanceSyncStatusCmd.MarkFlagRequired("service-instance-name")
-	proton_getServiceInstanceSyncStatusCmd.MarkFlagRequired("service-name")
+		proton_getServiceInstanceSyncStatusCmd.Flags().String("service-instance-name", "", "The name of the service instance that you want the sync status input for.")
+		proton_getServiceInstanceSyncStatusCmd.Flags().String("service-name", "", "The name of the service that the service instance belongs to.")
+		proton_getServiceInstanceSyncStatusCmd.MarkFlagRequired("service-instance-name")
+		proton_getServiceInstanceSyncStatusCmd.MarkFlagRequired("service-name")
+	})
 	protonCmd.AddCommand(proton_getServiceInstanceSyncStatusCmd)
 }

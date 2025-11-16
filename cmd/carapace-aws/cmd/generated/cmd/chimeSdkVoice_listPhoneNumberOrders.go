@@ -12,9 +12,11 @@ var chimeSdkVoice_listPhoneNumberOrdersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_listPhoneNumberOrdersCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_listPhoneNumberOrdersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_listPhoneNumberOrdersCmd).Standalone()
 
-	chimeSdkVoice_listPhoneNumberOrdersCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	chimeSdkVoice_listPhoneNumberOrdersCmd.Flags().String("next-token", "", "The token used to retrieve the next page of results.")
+		chimeSdkVoice_listPhoneNumberOrdersCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		chimeSdkVoice_listPhoneNumberOrdersCmd.Flags().String("next-token", "", "The token used to retrieve the next page of results.")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_listPhoneNumberOrdersCmd)
 }

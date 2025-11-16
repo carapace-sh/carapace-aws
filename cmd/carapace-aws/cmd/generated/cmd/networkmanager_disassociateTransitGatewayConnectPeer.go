@@ -12,11 +12,13 @@ var networkmanager_disassociateTransitGatewayConnectPeerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_disassociateTransitGatewayConnectPeerCmd).Standalone()
+	carapace.Gen(networkmanager_disassociateTransitGatewayConnectPeerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_disassociateTransitGatewayConnectPeerCmd).Standalone()
 
-	networkmanager_disassociateTransitGatewayConnectPeerCmd.Flags().String("global-network-id", "", "The ID of the global network.")
-	networkmanager_disassociateTransitGatewayConnectPeerCmd.Flags().String("transit-gateway-connect-peer-arn", "", "The Amazon Resource Name (ARN) of the transit gateway Connect peer.")
-	networkmanager_disassociateTransitGatewayConnectPeerCmd.MarkFlagRequired("global-network-id")
-	networkmanager_disassociateTransitGatewayConnectPeerCmd.MarkFlagRequired("transit-gateway-connect-peer-arn")
+		networkmanager_disassociateTransitGatewayConnectPeerCmd.Flags().String("global-network-id", "", "The ID of the global network.")
+		networkmanager_disassociateTransitGatewayConnectPeerCmd.Flags().String("transit-gateway-connect-peer-arn", "", "The Amazon Resource Name (ARN) of the transit gateway Connect peer.")
+		networkmanager_disassociateTransitGatewayConnectPeerCmd.MarkFlagRequired("global-network-id")
+		networkmanager_disassociateTransitGatewayConnectPeerCmd.MarkFlagRequired("transit-gateway-connect-peer-arn")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_disassociateTransitGatewayConnectPeerCmd)
 }

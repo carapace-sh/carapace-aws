@@ -12,11 +12,13 @@ var resiliencehub_addDraftAppVersionResourceMappingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_addDraftAppVersionResourceMappingsCmd).Standalone()
+	carapace.Gen(resiliencehub_addDraftAppVersionResourceMappingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_addDraftAppVersionResourceMappingsCmd).Standalone()
 
-	resiliencehub_addDraftAppVersionResourceMappingsCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
-	resiliencehub_addDraftAppVersionResourceMappingsCmd.Flags().String("resource-mappings", "", "Mappings used to map logical resources from the template to physical resources.")
-	resiliencehub_addDraftAppVersionResourceMappingsCmd.MarkFlagRequired("app-arn")
-	resiliencehub_addDraftAppVersionResourceMappingsCmd.MarkFlagRequired("resource-mappings")
+		resiliencehub_addDraftAppVersionResourceMappingsCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
+		resiliencehub_addDraftAppVersionResourceMappingsCmd.Flags().String("resource-mappings", "", "Mappings used to map logical resources from the template to physical resources.")
+		resiliencehub_addDraftAppVersionResourceMappingsCmd.MarkFlagRequired("app-arn")
+		resiliencehub_addDraftAppVersionResourceMappingsCmd.MarkFlagRequired("resource-mappings")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_addDraftAppVersionResourceMappingsCmd)
 }

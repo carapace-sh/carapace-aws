@@ -12,12 +12,14 @@ var glue_updateUsageProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_updateUsageProfileCmd).Standalone()
+	carapace.Gen(glue_updateUsageProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_updateUsageProfileCmd).Standalone()
 
-	glue_updateUsageProfileCmd.Flags().String("configuration", "", "A `ProfileConfiguration` object specifying the job and session values for the profile.")
-	glue_updateUsageProfileCmd.Flags().String("description", "", "A description of the usage profile.")
-	glue_updateUsageProfileCmd.Flags().String("name", "", "The name of the usage profile.")
-	glue_updateUsageProfileCmd.MarkFlagRequired("configuration")
-	glue_updateUsageProfileCmd.MarkFlagRequired("name")
+		glue_updateUsageProfileCmd.Flags().String("configuration", "", "A `ProfileConfiguration` object specifying the job and session values for the profile.")
+		glue_updateUsageProfileCmd.Flags().String("description", "", "A description of the usage profile.")
+		glue_updateUsageProfileCmd.Flags().String("name", "", "The name of the usage profile.")
+		glue_updateUsageProfileCmd.MarkFlagRequired("configuration")
+		glue_updateUsageProfileCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_updateUsageProfileCmd)
 }

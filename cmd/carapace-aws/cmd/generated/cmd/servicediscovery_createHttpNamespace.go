@@ -12,12 +12,14 @@ var servicediscovery_createHttpNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicediscovery_createHttpNamespaceCmd).Standalone()
+	carapace.Gen(servicediscovery_createHttpNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicediscovery_createHttpNamespaceCmd).Standalone()
 
-	servicediscovery_createHttpNamespaceCmd.Flags().String("creator-request-id", "", "A unique string that identifies the request and that allows failed `CreateHttpNamespace` requests to be retried without the risk of running the operation twice.")
-	servicediscovery_createHttpNamespaceCmd.Flags().String("description", "", "A description for the namespace.")
-	servicediscovery_createHttpNamespaceCmd.Flags().String("name", "", "The name that you want to assign to this namespace.")
-	servicediscovery_createHttpNamespaceCmd.Flags().String("tags", "", "The tags to add to the namespace.")
-	servicediscovery_createHttpNamespaceCmd.MarkFlagRequired("name")
+		servicediscovery_createHttpNamespaceCmd.Flags().String("creator-request-id", "", "A unique string that identifies the request and that allows failed `CreateHttpNamespace` requests to be retried without the risk of running the operation twice.")
+		servicediscovery_createHttpNamespaceCmd.Flags().String("description", "", "A description for the namespace.")
+		servicediscovery_createHttpNamespaceCmd.Flags().String("name", "", "The name that you want to assign to this namespace.")
+		servicediscovery_createHttpNamespaceCmd.Flags().String("tags", "", "The tags to add to the namespace.")
+		servicediscovery_createHttpNamespaceCmd.MarkFlagRequired("name")
+	})
 	servicediscoveryCmd.AddCommand(servicediscovery_createHttpNamespaceCmd)
 }

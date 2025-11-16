@@ -12,9 +12,11 @@ var backup_describeReportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_describeReportJobCmd).Standalone()
+	carapace.Gen(backup_describeReportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_describeReportJobCmd).Standalone()
 
-	backup_describeReportJobCmd.Flags().String("report-job-id", "", "The identifier of the report job.")
-	backup_describeReportJobCmd.MarkFlagRequired("report-job-id")
+		backup_describeReportJobCmd.Flags().String("report-job-id", "", "The identifier of the report job.")
+		backup_describeReportJobCmd.MarkFlagRequired("report-job-id")
+	})
 	backupCmd.AddCommand(backup_describeReportJobCmd)
 }

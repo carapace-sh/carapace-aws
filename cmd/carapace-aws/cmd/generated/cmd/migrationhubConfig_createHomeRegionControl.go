@@ -12,12 +12,14 @@ var migrationhubConfig_createHomeRegionControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubConfig_createHomeRegionControlCmd).Standalone()
+	carapace.Gen(migrationhubConfig_createHomeRegionControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubConfig_createHomeRegionControlCmd).Standalone()
 
-	migrationhubConfig_createHomeRegionControlCmd.Flags().String("dry-run", "", "Optional Boolean flag to indicate whether any effect should take place.")
-	migrationhubConfig_createHomeRegionControlCmd.Flags().String("home-region", "", "The name of the home region of the calling account.")
-	migrationhubConfig_createHomeRegionControlCmd.Flags().String("target", "", "The account for which this command sets up a home region control.")
-	migrationhubConfig_createHomeRegionControlCmd.MarkFlagRequired("home-region")
-	migrationhubConfig_createHomeRegionControlCmd.MarkFlagRequired("target")
+		migrationhubConfig_createHomeRegionControlCmd.Flags().String("dry-run", "", "Optional Boolean flag to indicate whether any effect should take place.")
+		migrationhubConfig_createHomeRegionControlCmd.Flags().String("home-region", "", "The name of the home region of the calling account.")
+		migrationhubConfig_createHomeRegionControlCmd.Flags().String("target", "", "The account for which this command sets up a home region control.")
+		migrationhubConfig_createHomeRegionControlCmd.MarkFlagRequired("home-region")
+		migrationhubConfig_createHomeRegionControlCmd.MarkFlagRequired("target")
+	})
 	migrationhubConfigCmd.AddCommand(migrationhubConfig_createHomeRegionControlCmd)
 }

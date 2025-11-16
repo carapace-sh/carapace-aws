@@ -12,7 +12,9 @@ var oamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oamCmd).Standalone()
+	carapace.Gen(oamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oamCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(oamCmd)
 }

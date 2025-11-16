@@ -12,7 +12,9 @@ var fms_deleteNotificationChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_deleteNotificationChannelCmd).Standalone()
+	carapace.Gen(fms_deleteNotificationChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_deleteNotificationChannelCmd).Standalone()
 
+	})
 	fmsCmd.AddCommand(fms_deleteNotificationChannelCmd)
 }

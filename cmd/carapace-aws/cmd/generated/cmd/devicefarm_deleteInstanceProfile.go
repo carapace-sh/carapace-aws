@@ -12,9 +12,11 @@ var devicefarm_deleteInstanceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_deleteInstanceProfileCmd).Standalone()
+	carapace.Gen(devicefarm_deleteInstanceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_deleteInstanceProfileCmd).Standalone()
 
-	devicefarm_deleteInstanceProfileCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the instance profile you are requesting to delete.")
-	devicefarm_deleteInstanceProfileCmd.MarkFlagRequired("arn")
+		devicefarm_deleteInstanceProfileCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the instance profile you are requesting to delete.")
+		devicefarm_deleteInstanceProfileCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_deleteInstanceProfileCmd)
 }

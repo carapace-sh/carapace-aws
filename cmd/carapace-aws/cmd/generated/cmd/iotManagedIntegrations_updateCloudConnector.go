@@ -12,11 +12,13 @@ var iotManagedIntegrations_updateCloudConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_updateCloudConnectorCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_updateCloudConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_updateCloudConnectorCmd).Standalone()
 
-	iotManagedIntegrations_updateCloudConnectorCmd.Flags().String("description", "", "The new description to assign to the cloud connector.")
-	iotManagedIntegrations_updateCloudConnectorCmd.Flags().String("identifier", "", "The unique identifier of the cloud connector to update.")
-	iotManagedIntegrations_updateCloudConnectorCmd.Flags().String("name", "", "The new display name to assign to the cloud connector.")
-	iotManagedIntegrations_updateCloudConnectorCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_updateCloudConnectorCmd.Flags().String("description", "", "The new description to assign to the cloud connector.")
+		iotManagedIntegrations_updateCloudConnectorCmd.Flags().String("identifier", "", "The unique identifier of the cloud connector to update.")
+		iotManagedIntegrations_updateCloudConnectorCmd.Flags().String("name", "", "The new display name to assign to the cloud connector.")
+		iotManagedIntegrations_updateCloudConnectorCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_updateCloudConnectorCmd)
 }

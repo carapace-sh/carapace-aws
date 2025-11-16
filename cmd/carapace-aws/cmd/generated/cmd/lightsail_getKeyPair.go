@@ -12,9 +12,11 @@ var lightsail_getKeyPairCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getKeyPairCmd).Standalone()
+	carapace.Gen(lightsail_getKeyPairCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getKeyPairCmd).Standalone()
 
-	lightsail_getKeyPairCmd.Flags().String("key-pair-name", "", "The name of the key pair for which you are requesting information.")
-	lightsail_getKeyPairCmd.MarkFlagRequired("key-pair-name")
+		lightsail_getKeyPairCmd.Flags().String("key-pair-name", "", "The name of the key pair for which you are requesting information.")
+		lightsail_getKeyPairCmd.MarkFlagRequired("key-pair-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getKeyPairCmd)
 }

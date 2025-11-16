@@ -12,8 +12,10 @@ var macie2_batchUpdateAutomatedDiscoveryAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_batchUpdateAutomatedDiscoveryAccountsCmd).Standalone()
+	carapace.Gen(macie2_batchUpdateAutomatedDiscoveryAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_batchUpdateAutomatedDiscoveryAccountsCmd).Standalone()
 
-	macie2_batchUpdateAutomatedDiscoveryAccountsCmd.Flags().String("accounts", "", "An array of objects, one for each account to change the status of automated sensitive data discovery for.")
+		macie2_batchUpdateAutomatedDiscoveryAccountsCmd.Flags().String("accounts", "", "An array of objects, one for each account to change the status of automated sensitive data discovery for.")
+	})
 	macie2Cmd.AddCommand(macie2_batchUpdateAutomatedDiscoveryAccountsCmd)
 }

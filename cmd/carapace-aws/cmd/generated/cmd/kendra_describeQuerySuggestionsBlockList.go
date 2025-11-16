@@ -12,11 +12,13 @@ var kendra_describeQuerySuggestionsBlockListCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_describeQuerySuggestionsBlockListCmd).Standalone()
+	carapace.Gen(kendra_describeQuerySuggestionsBlockListCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_describeQuerySuggestionsBlockListCmd).Standalone()
 
-	kendra_describeQuerySuggestionsBlockListCmd.Flags().String("id", "", "The identifier of the block list you want to get information on.")
-	kendra_describeQuerySuggestionsBlockListCmd.Flags().String("index-id", "", "The identifier of the index for the block list.")
-	kendra_describeQuerySuggestionsBlockListCmd.MarkFlagRequired("id")
-	kendra_describeQuerySuggestionsBlockListCmd.MarkFlagRequired("index-id")
+		kendra_describeQuerySuggestionsBlockListCmd.Flags().String("id", "", "The identifier of the block list you want to get information on.")
+		kendra_describeQuerySuggestionsBlockListCmd.Flags().String("index-id", "", "The identifier of the index for the block list.")
+		kendra_describeQuerySuggestionsBlockListCmd.MarkFlagRequired("id")
+		kendra_describeQuerySuggestionsBlockListCmd.MarkFlagRequired("index-id")
+	})
 	kendraCmd.AddCommand(kendra_describeQuerySuggestionsBlockListCmd)
 }

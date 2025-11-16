@@ -12,9 +12,11 @@ var acm_listTagsForCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acm_listTagsForCertificateCmd).Standalone()
+	carapace.Gen(acm_listTagsForCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acm_listTagsForCertificateCmd).Standalone()
 
-	acm_listTagsForCertificateCmd.Flags().String("certificate-arn", "", "String that contains the ARN of the ACM certificate for which you want to list the tags.")
-	acm_listTagsForCertificateCmd.MarkFlagRequired("certificate-arn")
+		acm_listTagsForCertificateCmd.Flags().String("certificate-arn", "", "String that contains the ARN of the ACM certificate for which you want to list the tags.")
+		acm_listTagsForCertificateCmd.MarkFlagRequired("certificate-arn")
+	})
 	acmCmd.AddCommand(acm_listTagsForCertificateCmd)
 }

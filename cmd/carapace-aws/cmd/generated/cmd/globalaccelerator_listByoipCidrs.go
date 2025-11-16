@@ -12,9 +12,11 @@ var globalaccelerator_listByoipCidrsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_listByoipCidrsCmd).Standalone()
+	carapace.Gen(globalaccelerator_listByoipCidrsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_listByoipCidrsCmd).Standalone()
 
-	globalaccelerator_listByoipCidrsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	globalaccelerator_listByoipCidrsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		globalaccelerator_listByoipCidrsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		globalaccelerator_listByoipCidrsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_listByoipCidrsCmd)
 }

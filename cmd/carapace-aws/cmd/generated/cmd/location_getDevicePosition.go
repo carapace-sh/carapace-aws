@@ -12,11 +12,13 @@ var location_getDevicePositionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_getDevicePositionCmd).Standalone()
+	carapace.Gen(location_getDevicePositionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_getDevicePositionCmd).Standalone()
 
-	location_getDevicePositionCmd.Flags().String("device-id", "", "The device whose position you want to retrieve.")
-	location_getDevicePositionCmd.Flags().String("tracker-name", "", "The tracker resource receiving the position update.")
-	location_getDevicePositionCmd.MarkFlagRequired("device-id")
-	location_getDevicePositionCmd.MarkFlagRequired("tracker-name")
+		location_getDevicePositionCmd.Flags().String("device-id", "", "The device whose position you want to retrieve.")
+		location_getDevicePositionCmd.Flags().String("tracker-name", "", "The tracker resource receiving the position update.")
+		location_getDevicePositionCmd.MarkFlagRequired("device-id")
+		location_getDevicePositionCmd.MarkFlagRequired("tracker-name")
+	})
 	locationCmd.AddCommand(location_getDevicePositionCmd)
 }

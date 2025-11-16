@@ -12,9 +12,11 @@ var pinpointEmail_getConfigurationSetEventDestinationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getConfigurationSetEventDestinationsCmd).Standalone()
+	carapace.Gen(pinpointEmail_getConfigurationSetEventDestinationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getConfigurationSetEventDestinationsCmd).Standalone()
 
-	pinpointEmail_getConfigurationSetEventDestinationsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that contains the event destination.")
-	pinpointEmail_getConfigurationSetEventDestinationsCmd.MarkFlagRequired("configuration-set-name")
+		pinpointEmail_getConfigurationSetEventDestinationsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set that contains the event destination.")
+		pinpointEmail_getConfigurationSetEventDestinationsCmd.MarkFlagRequired("configuration-set-name")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getConfigurationSetEventDestinationsCmd)
 }

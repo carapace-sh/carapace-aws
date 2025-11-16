@@ -12,10 +12,12 @@ var invoicing_getInvoiceUnitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(invoicing_getInvoiceUnitCmd).Standalone()
+	carapace.Gen(invoicing_getInvoiceUnitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(invoicing_getInvoiceUnitCmd).Standalone()
 
-	invoicing_getInvoiceUnitCmd.Flags().String("as-of", "", "The state of an invoice unit at a specified time.")
-	invoicing_getInvoiceUnitCmd.Flags().String("invoice-unit-arn", "", "The ARN to identify an invoice unit.")
-	invoicing_getInvoiceUnitCmd.MarkFlagRequired("invoice-unit-arn")
+		invoicing_getInvoiceUnitCmd.Flags().String("as-of", "", "The state of an invoice unit at a specified time.")
+		invoicing_getInvoiceUnitCmd.Flags().String("invoice-unit-arn", "", "The ARN to identify an invoice unit.")
+		invoicing_getInvoiceUnitCmd.MarkFlagRequired("invoice-unit-arn")
+	})
 	invoicingCmd.AddCommand(invoicing_getInvoiceUnitCmd)
 }

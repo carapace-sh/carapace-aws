@@ -12,9 +12,11 @@ var chime_deleteAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_deleteAccountCmd).Standalone()
+	carapace.Gen(chime_deleteAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_deleteAccountCmd).Standalone()
 
-	chime_deleteAccountCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_deleteAccountCmd.MarkFlagRequired("account-id")
+		chime_deleteAccountCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_deleteAccountCmd.MarkFlagRequired("account-id")
+	})
 	chimeCmd.AddCommand(chime_deleteAccountCmd)
 }

@@ -12,11 +12,13 @@ var es_authorizeVpcEndpointAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_authorizeVpcEndpointAccessCmd).Standalone()
+	carapace.Gen(es_authorizeVpcEndpointAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_authorizeVpcEndpointAccessCmd).Standalone()
 
-	es_authorizeVpcEndpointAccessCmd.Flags().String("account", "", "The account ID to grant access to.")
-	es_authorizeVpcEndpointAccessCmd.Flags().String("domain-name", "", "The name of the OpenSearch Service domain to provide access to.")
-	es_authorizeVpcEndpointAccessCmd.MarkFlagRequired("account")
-	es_authorizeVpcEndpointAccessCmd.MarkFlagRequired("domain-name")
+		es_authorizeVpcEndpointAccessCmd.Flags().String("account", "", "The account ID to grant access to.")
+		es_authorizeVpcEndpointAccessCmd.Flags().String("domain-name", "", "The name of the OpenSearch Service domain to provide access to.")
+		es_authorizeVpcEndpointAccessCmd.MarkFlagRequired("account")
+		es_authorizeVpcEndpointAccessCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_authorizeVpcEndpointAccessCmd)
 }

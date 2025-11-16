@@ -12,11 +12,13 @@ var backupGateway_putBandwidthRateLimitScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_putBandwidthRateLimitScheduleCmd).Standalone()
+	carapace.Gen(backupGateway_putBandwidthRateLimitScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_putBandwidthRateLimitScheduleCmd).Standalone()
 
-	backupGateway_putBandwidthRateLimitScheduleCmd.Flags().String("bandwidth-rate-limit-intervals", "", "An array containing bandwidth rate limit schedule intervals for a gateway.")
-	backupGateway_putBandwidthRateLimitScheduleCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway.")
-	backupGateway_putBandwidthRateLimitScheduleCmd.MarkFlagRequired("bandwidth-rate-limit-intervals")
-	backupGateway_putBandwidthRateLimitScheduleCmd.MarkFlagRequired("gateway-arn")
+		backupGateway_putBandwidthRateLimitScheduleCmd.Flags().String("bandwidth-rate-limit-intervals", "", "An array containing bandwidth rate limit schedule intervals for a gateway.")
+		backupGateway_putBandwidthRateLimitScheduleCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway.")
+		backupGateway_putBandwidthRateLimitScheduleCmd.MarkFlagRequired("bandwidth-rate-limit-intervals")
+		backupGateway_putBandwidthRateLimitScheduleCmd.MarkFlagRequired("gateway-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_putBandwidthRateLimitScheduleCmd)
 }

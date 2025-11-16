@@ -12,9 +12,11 @@ var cloudtrail_getChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_getChannelCmd).Standalone()
+	carapace.Gen(cloudtrail_getChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_getChannelCmd).Standalone()
 
-	cloudtrail_getChannelCmd.Flags().String("channel", "", "The ARN or `UUID` of a channel.")
-	cloudtrail_getChannelCmd.MarkFlagRequired("channel")
+		cloudtrail_getChannelCmd.Flags().String("channel", "", "The ARN or `UUID` of a channel.")
+		cloudtrail_getChannelCmd.MarkFlagRequired("channel")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_getChannelCmd)
 }

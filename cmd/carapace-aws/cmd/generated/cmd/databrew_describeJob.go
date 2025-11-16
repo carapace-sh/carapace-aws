@@ -12,9 +12,11 @@ var databrew_describeJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_describeJobCmd).Standalone()
+	carapace.Gen(databrew_describeJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_describeJobCmd).Standalone()
 
-	databrew_describeJobCmd.Flags().String("name", "", "The name of the job to be described.")
-	databrew_describeJobCmd.MarkFlagRequired("name")
+		databrew_describeJobCmd.Flags().String("name", "", "The name of the job to be described.")
+		databrew_describeJobCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_describeJobCmd)
 }

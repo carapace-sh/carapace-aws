@@ -12,11 +12,13 @@ var clouddirectory_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_untagResourceCmd).Standalone()
+	carapace.Gen(clouddirectory_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_untagResourceCmd).Standalone()
 
-	clouddirectory_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	clouddirectory_untagResourceCmd.Flags().String("tag-keys", "", "Keys of the tag that need to be removed from the resource.")
-	clouddirectory_untagResourceCmd.MarkFlagRequired("resource-arn")
-	clouddirectory_untagResourceCmd.MarkFlagRequired("tag-keys")
+		clouddirectory_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		clouddirectory_untagResourceCmd.Flags().String("tag-keys", "", "Keys of the tag that need to be removed from the resource.")
+		clouddirectory_untagResourceCmd.MarkFlagRequired("resource-arn")
+		clouddirectory_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_untagResourceCmd)
 }

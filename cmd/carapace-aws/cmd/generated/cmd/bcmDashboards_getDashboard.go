@@ -12,9 +12,11 @@ var bcmDashboards_getDashboardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDashboards_getDashboardCmd).Standalone()
+	carapace.Gen(bcmDashboards_getDashboardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDashboards_getDashboardCmd).Standalone()
 
-	bcmDashboards_getDashboardCmd.Flags().String("arn", "", "The ARN of the dashboard to retrieve.")
-	bcmDashboards_getDashboardCmd.MarkFlagRequired("arn")
+		bcmDashboards_getDashboardCmd.Flags().String("arn", "", "The ARN of the dashboard to retrieve.")
+		bcmDashboards_getDashboardCmd.MarkFlagRequired("arn")
+	})
 	bcmDashboardsCmd.AddCommand(bcmDashboards_getDashboardCmd)
 }

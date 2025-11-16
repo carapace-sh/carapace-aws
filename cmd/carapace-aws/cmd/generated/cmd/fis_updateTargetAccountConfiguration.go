@@ -12,13 +12,15 @@ var fis_updateTargetAccountConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_updateTargetAccountConfigurationCmd).Standalone()
+	carapace.Gen(fis_updateTargetAccountConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_updateTargetAccountConfigurationCmd).Standalone()
 
-	fis_updateTargetAccountConfigurationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the target account.")
-	fis_updateTargetAccountConfigurationCmd.Flags().String("description", "", "The description of the target account.")
-	fis_updateTargetAccountConfigurationCmd.Flags().String("experiment-template-id", "", "The ID of the experiment template.")
-	fis_updateTargetAccountConfigurationCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of an IAM role for the target account.")
-	fis_updateTargetAccountConfigurationCmd.MarkFlagRequired("account-id")
-	fis_updateTargetAccountConfigurationCmd.MarkFlagRequired("experiment-template-id")
+		fis_updateTargetAccountConfigurationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the target account.")
+		fis_updateTargetAccountConfigurationCmd.Flags().String("description", "", "The description of the target account.")
+		fis_updateTargetAccountConfigurationCmd.Flags().String("experiment-template-id", "", "The ID of the experiment template.")
+		fis_updateTargetAccountConfigurationCmd.Flags().String("role-arn", "", "The Amazon Resource Name (ARN) of an IAM role for the target account.")
+		fis_updateTargetAccountConfigurationCmd.MarkFlagRequired("account-id")
+		fis_updateTargetAccountConfigurationCmd.MarkFlagRequired("experiment-template-id")
+	})
 	fisCmd.AddCommand(fis_updateTargetAccountConfigurationCmd)
 }

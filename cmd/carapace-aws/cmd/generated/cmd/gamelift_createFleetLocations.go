@@ -12,11 +12,13 @@ var gamelift_createFleetLocationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_createFleetLocationsCmd).Standalone()
+	carapace.Gen(gamelift_createFleetLocationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_createFleetLocationsCmd).Standalone()
 
-	gamelift_createFleetLocationsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to add locations to.")
-	gamelift_createFleetLocationsCmd.Flags().String("locations", "", "A list of locations to deploy additional instances to and manage as part of the fleet.")
-	gamelift_createFleetLocationsCmd.MarkFlagRequired("fleet-id")
-	gamelift_createFleetLocationsCmd.MarkFlagRequired("locations")
+		gamelift_createFleetLocationsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to add locations to.")
+		gamelift_createFleetLocationsCmd.Flags().String("locations", "", "A list of locations to deploy additional instances to and manage as part of the fleet.")
+		gamelift_createFleetLocationsCmd.MarkFlagRequired("fleet-id")
+		gamelift_createFleetLocationsCmd.MarkFlagRequired("locations")
+	})
 	gameliftCmd.AddCommand(gamelift_createFleetLocationsCmd)
 }

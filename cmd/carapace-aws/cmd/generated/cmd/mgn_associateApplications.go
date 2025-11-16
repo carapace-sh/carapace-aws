@@ -12,12 +12,14 @@ var mgn_associateApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_associateApplicationsCmd).Standalone()
+	carapace.Gen(mgn_associateApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_associateApplicationsCmd).Standalone()
 
-	mgn_associateApplicationsCmd.Flags().String("account-id", "", "Account ID.")
-	mgn_associateApplicationsCmd.Flags().String("application-ids", "", "Application IDs list.")
-	mgn_associateApplicationsCmd.Flags().String("wave-id", "", "Wave ID.")
-	mgn_associateApplicationsCmd.MarkFlagRequired("application-ids")
-	mgn_associateApplicationsCmd.MarkFlagRequired("wave-id")
+		mgn_associateApplicationsCmd.Flags().String("account-id", "", "Account ID.")
+		mgn_associateApplicationsCmd.Flags().String("application-ids", "", "Application IDs list.")
+		mgn_associateApplicationsCmd.Flags().String("wave-id", "", "Wave ID.")
+		mgn_associateApplicationsCmd.MarkFlagRequired("application-ids")
+		mgn_associateApplicationsCmd.MarkFlagRequired("wave-id")
+	})
 	mgnCmd.AddCommand(mgn_associateApplicationsCmd)
 }

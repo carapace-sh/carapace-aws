@@ -12,11 +12,13 @@ var amplifyuibuilder_getMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilder_getMetadataCmd).Standalone()
+	carapace.Gen(amplifyuibuilder_getMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilder_getMetadataCmd).Standalone()
 
-	amplifyuibuilder_getMetadataCmd.Flags().String("app-id", "", "The unique ID of the Amplify app.")
-	amplifyuibuilder_getMetadataCmd.Flags().String("environment-name", "", "The name of the backend environment that is part of the Amplify app.")
-	amplifyuibuilder_getMetadataCmd.MarkFlagRequired("app-id")
-	amplifyuibuilder_getMetadataCmd.MarkFlagRequired("environment-name")
+		amplifyuibuilder_getMetadataCmd.Flags().String("app-id", "", "The unique ID of the Amplify app.")
+		amplifyuibuilder_getMetadataCmd.Flags().String("environment-name", "", "The name of the backend environment that is part of the Amplify app.")
+		amplifyuibuilder_getMetadataCmd.MarkFlagRequired("app-id")
+		amplifyuibuilder_getMetadataCmd.MarkFlagRequired("environment-name")
+	})
 	amplifyuibuilderCmd.AddCommand(amplifyuibuilder_getMetadataCmd)
 }

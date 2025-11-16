@@ -12,9 +12,11 @@ var emr_getAutoTerminationPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_getAutoTerminationPolicyCmd).Standalone()
+	carapace.Gen(emr_getAutoTerminationPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_getAutoTerminationPolicyCmd).Standalone()
 
-	emr_getAutoTerminationPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of the Amazon EMR cluster for which the auto-termination policy will be fetched.")
-	emr_getAutoTerminationPolicyCmd.MarkFlagRequired("cluster-id")
+		emr_getAutoTerminationPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of the Amazon EMR cluster for which the auto-termination policy will be fetched.")
+		emr_getAutoTerminationPolicyCmd.MarkFlagRequired("cluster-id")
+	})
 	emrCmd.AddCommand(emr_getAutoTerminationPolicyCmd)
 }

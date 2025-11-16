@@ -12,9 +12,11 @@ var cloudtrail_deleteEventDataStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_deleteEventDataStoreCmd).Standalone()
+	carapace.Gen(cloudtrail_deleteEventDataStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_deleteEventDataStoreCmd).Standalone()
 
-	cloudtrail_deleteEventDataStoreCmd.Flags().String("event-data-store", "", "The ARN (or the ID suffix of the ARN) of the event data store to delete.")
-	cloudtrail_deleteEventDataStoreCmd.MarkFlagRequired("event-data-store")
+		cloudtrail_deleteEventDataStoreCmd.Flags().String("event-data-store", "", "The ARN (or the ID suffix of the ARN) of the event data store to delete.")
+		cloudtrail_deleteEventDataStoreCmd.MarkFlagRequired("event-data-store")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_deleteEventDataStoreCmd)
 }

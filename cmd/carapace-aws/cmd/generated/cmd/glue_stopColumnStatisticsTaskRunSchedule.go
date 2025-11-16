@@ -12,11 +12,13 @@ var glue_stopColumnStatisticsTaskRunScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_stopColumnStatisticsTaskRunScheduleCmd).Standalone()
+	carapace.Gen(glue_stopColumnStatisticsTaskRunScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_stopColumnStatisticsTaskRunScheduleCmd).Standalone()
 
-	glue_stopColumnStatisticsTaskRunScheduleCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
-	glue_stopColumnStatisticsTaskRunScheduleCmd.Flags().String("table-name", "", "The name of the table for which to stop a column statistic task run schedule.")
-	glue_stopColumnStatisticsTaskRunScheduleCmd.MarkFlagRequired("database-name")
-	glue_stopColumnStatisticsTaskRunScheduleCmd.MarkFlagRequired("table-name")
+		glue_stopColumnStatisticsTaskRunScheduleCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
+		glue_stopColumnStatisticsTaskRunScheduleCmd.Flags().String("table-name", "", "The name of the table for which to stop a column statistic task run schedule.")
+		glue_stopColumnStatisticsTaskRunScheduleCmd.MarkFlagRequired("database-name")
+		glue_stopColumnStatisticsTaskRunScheduleCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_stopColumnStatisticsTaskRunScheduleCmd)
 }

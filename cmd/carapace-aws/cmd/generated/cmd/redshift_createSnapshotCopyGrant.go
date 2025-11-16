@@ -12,11 +12,13 @@ var redshift_createSnapshotCopyGrantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_createSnapshotCopyGrantCmd).Standalone()
+	carapace.Gen(redshift_createSnapshotCopyGrantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_createSnapshotCopyGrantCmd).Standalone()
 
-	redshift_createSnapshotCopyGrantCmd.Flags().String("kms-key-id", "", "The unique identifier of the encrypted symmetric key to which to grant Amazon Redshift permission.")
-	redshift_createSnapshotCopyGrantCmd.Flags().String("snapshot-copy-grant-name", "", "The name of the snapshot copy grant.")
-	redshift_createSnapshotCopyGrantCmd.Flags().String("tags", "", "A list of tag instances.")
-	redshift_createSnapshotCopyGrantCmd.MarkFlagRequired("snapshot-copy-grant-name")
+		redshift_createSnapshotCopyGrantCmd.Flags().String("kms-key-id", "", "The unique identifier of the encrypted symmetric key to which to grant Amazon Redshift permission.")
+		redshift_createSnapshotCopyGrantCmd.Flags().String("snapshot-copy-grant-name", "", "The name of the snapshot copy grant.")
+		redshift_createSnapshotCopyGrantCmd.Flags().String("tags", "", "A list of tag instances.")
+		redshift_createSnapshotCopyGrantCmd.MarkFlagRequired("snapshot-copy-grant-name")
+	})
 	redshiftCmd.AddCommand(redshift_createSnapshotCopyGrantCmd)
 }

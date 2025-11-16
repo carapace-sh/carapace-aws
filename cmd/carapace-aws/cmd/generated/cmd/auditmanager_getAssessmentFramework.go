@@ -12,9 +12,11 @@ var auditmanager_getAssessmentFrameworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_getAssessmentFrameworkCmd).Standalone()
+	carapace.Gen(auditmanager_getAssessmentFrameworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_getAssessmentFrameworkCmd).Standalone()
 
-	auditmanager_getAssessmentFrameworkCmd.Flags().String("framework-id", "", "The identifier for the framework.")
-	auditmanager_getAssessmentFrameworkCmd.MarkFlagRequired("framework-id")
+		auditmanager_getAssessmentFrameworkCmd.Flags().String("framework-id", "", "The identifier for the framework.")
+		auditmanager_getAssessmentFrameworkCmd.MarkFlagRequired("framework-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_getAssessmentFrameworkCmd)
 }

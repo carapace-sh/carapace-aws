@@ -12,10 +12,12 @@ var ce_listCostCategoryDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_listCostCategoryDefinitionsCmd).Standalone()
+	carapace.Gen(ce_listCostCategoryDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_listCostCategoryDefinitionsCmd).Standalone()
 
-	ce_listCostCategoryDefinitionsCmd.Flags().String("effective-on", "", "The date when the Cost Category was effective.")
-	ce_listCostCategoryDefinitionsCmd.Flags().String("max-results", "", "The number of entries a paginated response contains.")
-	ce_listCostCategoryDefinitionsCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+		ce_listCostCategoryDefinitionsCmd.Flags().String("effective-on", "", "The date when the Cost Category was effective.")
+		ce_listCostCategoryDefinitionsCmd.Flags().String("max-results", "", "The number of entries a paginated response contains.")
+		ce_listCostCategoryDefinitionsCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+	})
 	ceCmd.AddCommand(ce_listCostCategoryDefinitionsCmd)
 }

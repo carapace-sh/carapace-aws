@@ -12,13 +12,15 @@ var migrationHubRefactorSpaces_getServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpaces_getServiceCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpaces_getServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpaces_getServiceCmd).Standalone()
 
-	migrationHubRefactorSpaces_getServiceCmd.Flags().String("application-identifier", "", "The ID of the application.")
-	migrationHubRefactorSpaces_getServiceCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
-	migrationHubRefactorSpaces_getServiceCmd.Flags().String("service-identifier", "", "The ID of the service.")
-	migrationHubRefactorSpaces_getServiceCmd.MarkFlagRequired("application-identifier")
-	migrationHubRefactorSpaces_getServiceCmd.MarkFlagRequired("environment-identifier")
-	migrationHubRefactorSpaces_getServiceCmd.MarkFlagRequired("service-identifier")
+		migrationHubRefactorSpaces_getServiceCmd.Flags().String("application-identifier", "", "The ID of the application.")
+		migrationHubRefactorSpaces_getServiceCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
+		migrationHubRefactorSpaces_getServiceCmd.Flags().String("service-identifier", "", "The ID of the service.")
+		migrationHubRefactorSpaces_getServiceCmd.MarkFlagRequired("application-identifier")
+		migrationHubRefactorSpaces_getServiceCmd.MarkFlagRequired("environment-identifier")
+		migrationHubRefactorSpaces_getServiceCmd.MarkFlagRequired("service-identifier")
+	})
 	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_getServiceCmd)
 }

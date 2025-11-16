@@ -12,9 +12,11 @@ var secretsmanager_restoreSecretCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_restoreSecretCmd).Standalone()
+	carapace.Gen(secretsmanager_restoreSecretCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_restoreSecretCmd).Standalone()
 
-	secretsmanager_restoreSecretCmd.Flags().String("secret-id", "", "The ARN or name of the secret to restore.")
-	secretsmanager_restoreSecretCmd.MarkFlagRequired("secret-id")
+		secretsmanager_restoreSecretCmd.Flags().String("secret-id", "", "The ARN or name of the secret to restore.")
+		secretsmanager_restoreSecretCmd.MarkFlagRequired("secret-id")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_restoreSecretCmd)
 }

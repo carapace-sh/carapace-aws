@@ -12,9 +12,11 @@ var iam_deleteRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteRoleCmd).Standalone()
+	carapace.Gen(iam_deleteRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteRoleCmd).Standalone()
 
-	iam_deleteRoleCmd.Flags().String("role-name", "", "The name of the role to delete.")
-	iam_deleteRoleCmd.MarkFlagRequired("role-name")
+		iam_deleteRoleCmd.Flags().String("role-name", "", "The name of the role to delete.")
+		iam_deleteRoleCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_deleteRoleCmd)
 }

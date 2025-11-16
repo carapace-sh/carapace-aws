@@ -12,9 +12,11 @@ var lookoutequipment_deleteModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_deleteModelCmd).Standalone()
+	carapace.Gen(lookoutequipment_deleteModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_deleteModelCmd).Standalone()
 
-	lookoutequipment_deleteModelCmd.Flags().String("model-name", "", "The name of the machine learning model to be deleted.")
-	lookoutequipment_deleteModelCmd.MarkFlagRequired("model-name")
+		lookoutequipment_deleteModelCmd.Flags().String("model-name", "", "The name of the machine learning model to be deleted.")
+		lookoutequipment_deleteModelCmd.MarkFlagRequired("model-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_deleteModelCmd)
 }

@@ -12,10 +12,12 @@ var storagegateway_listFileSystemAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_listFileSystemAssociationsCmd).Standalone()
+	carapace.Gen(storagegateway_listFileSystemAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_listFileSystemAssociationsCmd).Standalone()
 
-	storagegateway_listFileSystemAssociationsCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_listFileSystemAssociationsCmd.Flags().String("limit", "", "The maximum number of file system associations to return in the response.")
-	storagegateway_listFileSystemAssociationsCmd.Flags().String("marker", "", "Opaque pagination token returned from a previous `ListFileSystemAssociations` operation.")
+		storagegateway_listFileSystemAssociationsCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_listFileSystemAssociationsCmd.Flags().String("limit", "", "The maximum number of file system associations to return in the response.")
+		storagegateway_listFileSystemAssociationsCmd.Flags().String("marker", "", "Opaque pagination token returned from a previous `ListFileSystemAssociations` operation.")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_listFileSystemAssociationsCmd)
 }

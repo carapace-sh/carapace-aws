@@ -12,11 +12,13 @@ var apigateway_getGatewayResponseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getGatewayResponseCmd).Standalone()
+	carapace.Gen(apigateway_getGatewayResponseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getGatewayResponseCmd).Standalone()
 
-	apigateway_getGatewayResponseCmd.Flags().String("response-type", "", "The response type of the associated GatewayResponse.")
-	apigateway_getGatewayResponseCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_getGatewayResponseCmd.MarkFlagRequired("response-type")
-	apigateway_getGatewayResponseCmd.MarkFlagRequired("rest-api-id")
+		apigateway_getGatewayResponseCmd.Flags().String("response-type", "", "The response type of the associated GatewayResponse.")
+		apigateway_getGatewayResponseCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_getGatewayResponseCmd.MarkFlagRequired("response-type")
+		apigateway_getGatewayResponseCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getGatewayResponseCmd)
 }

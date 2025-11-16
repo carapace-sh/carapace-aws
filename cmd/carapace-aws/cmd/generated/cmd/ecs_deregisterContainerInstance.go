@@ -12,11 +12,13 @@ var ecs_deregisterContainerInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_deregisterContainerInstanceCmd).Standalone()
+	carapace.Gen(ecs_deregisterContainerInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_deregisterContainerInstanceCmd).Standalone()
 
-	ecs_deregisterContainerInstanceCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to deregister.")
-	ecs_deregisterContainerInstanceCmd.Flags().String("container-instance", "", "The container instance ID or full ARN of the container instance to deregister.")
-	ecs_deregisterContainerInstanceCmd.Flags().String("force", "", "Forces the container instance to be deregistered.")
-	ecs_deregisterContainerInstanceCmd.MarkFlagRequired("container-instance")
+		ecs_deregisterContainerInstanceCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to deregister.")
+		ecs_deregisterContainerInstanceCmd.Flags().String("container-instance", "", "The container instance ID or full ARN of the container instance to deregister.")
+		ecs_deregisterContainerInstanceCmd.Flags().String("force", "", "Forces the container instance to be deregistered.")
+		ecs_deregisterContainerInstanceCmd.MarkFlagRequired("container-instance")
+	})
 	ecsCmd.AddCommand(ecs_deregisterContainerInstanceCmd)
 }

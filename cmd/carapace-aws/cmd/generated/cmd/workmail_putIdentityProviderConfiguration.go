@@ -12,15 +12,17 @@ var workmail_putIdentityProviderConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_putIdentityProviderConfigurationCmd).Standalone()
+	carapace.Gen(workmail_putIdentityProviderConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_putIdentityProviderConfigurationCmd).Standalone()
 
-	workmail_putIdentityProviderConfigurationCmd.Flags().String("authentication-mode", "", "The authentication mode used in WorkMail.")
-	workmail_putIdentityProviderConfigurationCmd.Flags().String("identity-center-configuration", "", "The details of the IAM Identity Center configuration.")
-	workmail_putIdentityProviderConfigurationCmd.Flags().String("organization-id", "", "The ID of the WorkMail Organization.")
-	workmail_putIdentityProviderConfigurationCmd.Flags().String("personal-access-token-configuration", "", "The details of the Personal Access Token configuration.")
-	workmail_putIdentityProviderConfigurationCmd.MarkFlagRequired("authentication-mode")
-	workmail_putIdentityProviderConfigurationCmd.MarkFlagRequired("identity-center-configuration")
-	workmail_putIdentityProviderConfigurationCmd.MarkFlagRequired("organization-id")
-	workmail_putIdentityProviderConfigurationCmd.MarkFlagRequired("personal-access-token-configuration")
+		workmail_putIdentityProviderConfigurationCmd.Flags().String("authentication-mode", "", "The authentication mode used in WorkMail.")
+		workmail_putIdentityProviderConfigurationCmd.Flags().String("identity-center-configuration", "", "The details of the IAM Identity Center configuration.")
+		workmail_putIdentityProviderConfigurationCmd.Flags().String("organization-id", "", "The ID of the WorkMail Organization.")
+		workmail_putIdentityProviderConfigurationCmd.Flags().String("personal-access-token-configuration", "", "The details of the Personal Access Token configuration.")
+		workmail_putIdentityProviderConfigurationCmd.MarkFlagRequired("authentication-mode")
+		workmail_putIdentityProviderConfigurationCmd.MarkFlagRequired("identity-center-configuration")
+		workmail_putIdentityProviderConfigurationCmd.MarkFlagRequired("organization-id")
+		workmail_putIdentityProviderConfigurationCmd.MarkFlagRequired("personal-access-token-configuration")
+	})
 	workmailCmd.AddCommand(workmail_putIdentityProviderConfigurationCmd)
 }

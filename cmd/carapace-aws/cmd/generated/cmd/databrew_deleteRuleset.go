@@ -12,9 +12,11 @@ var databrew_deleteRulesetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_deleteRulesetCmd).Standalone()
+	carapace.Gen(databrew_deleteRulesetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_deleteRulesetCmd).Standalone()
 
-	databrew_deleteRulesetCmd.Flags().String("name", "", "The name of the ruleset to be deleted.")
-	databrew_deleteRulesetCmd.MarkFlagRequired("name")
+		databrew_deleteRulesetCmd.Flags().String("name", "", "The name of the ruleset to be deleted.")
+		databrew_deleteRulesetCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_deleteRulesetCmd)
 }

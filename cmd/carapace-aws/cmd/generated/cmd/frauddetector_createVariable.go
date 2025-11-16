@@ -12,18 +12,20 @@ var frauddetector_createVariableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_createVariableCmd).Standalone()
+	carapace.Gen(frauddetector_createVariableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_createVariableCmd).Standalone()
 
-	frauddetector_createVariableCmd.Flags().String("data-source", "", "The source of the data.")
-	frauddetector_createVariableCmd.Flags().String("data-type", "", "The data type of the variable.")
-	frauddetector_createVariableCmd.Flags().String("default-value", "", "The default value for the variable when no value is received.")
-	frauddetector_createVariableCmd.Flags().String("description", "", "The description.")
-	frauddetector_createVariableCmd.Flags().String("name", "", "The name of the variable.")
-	frauddetector_createVariableCmd.Flags().String("tags", "", "A collection of key and value pairs.")
-	frauddetector_createVariableCmd.Flags().String("variable-type", "", "The variable type.")
-	frauddetector_createVariableCmd.MarkFlagRequired("data-source")
-	frauddetector_createVariableCmd.MarkFlagRequired("data-type")
-	frauddetector_createVariableCmd.MarkFlagRequired("default-value")
-	frauddetector_createVariableCmd.MarkFlagRequired("name")
+		frauddetector_createVariableCmd.Flags().String("data-source", "", "The source of the data.")
+		frauddetector_createVariableCmd.Flags().String("data-type", "", "The data type of the variable.")
+		frauddetector_createVariableCmd.Flags().String("default-value", "", "The default value for the variable when no value is received.")
+		frauddetector_createVariableCmd.Flags().String("description", "", "The description.")
+		frauddetector_createVariableCmd.Flags().String("name", "", "The name of the variable.")
+		frauddetector_createVariableCmd.Flags().String("tags", "", "A collection of key and value pairs.")
+		frauddetector_createVariableCmd.Flags().String("variable-type", "", "The variable type.")
+		frauddetector_createVariableCmd.MarkFlagRequired("data-source")
+		frauddetector_createVariableCmd.MarkFlagRequired("data-type")
+		frauddetector_createVariableCmd.MarkFlagRequired("default-value")
+		frauddetector_createVariableCmd.MarkFlagRequired("name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_createVariableCmd)
 }

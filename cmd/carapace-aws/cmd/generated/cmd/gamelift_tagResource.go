@@ -12,11 +12,13 @@ var gamelift_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_tagResourceCmd).Standalone()
+	carapace.Gen(gamelift_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_tagResourceCmd).Standalone()
 
-	gamelift_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that uniquely identifies the Amazon GameLift Servers resource that you want to assign tags to.")
-	gamelift_tagResourceCmd.Flags().String("tags", "", "A list of one or more tags to assign to the specified Amazon GameLift Servers resource.")
-	gamelift_tagResourceCmd.MarkFlagRequired("resource-arn")
-	gamelift_tagResourceCmd.MarkFlagRequired("tags")
+		gamelift_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that uniquely identifies the Amazon GameLift Servers resource that you want to assign tags to.")
+		gamelift_tagResourceCmd.Flags().String("tags", "", "A list of one or more tags to assign to the specified Amazon GameLift Servers resource.")
+		gamelift_tagResourceCmd.MarkFlagRequired("resource-arn")
+		gamelift_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	gameliftCmd.AddCommand(gamelift_tagResourceCmd)
 }

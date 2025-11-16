@@ -12,12 +12,14 @@ var iotwireless_updateEventConfigurationByResourceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_updateEventConfigurationByResourceTypesCmd).Standalone()
+	carapace.Gen(iotwireless_updateEventConfigurationByResourceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_updateEventConfigurationByResourceTypesCmd).Standalone()
 
-	iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("connection-status", "", "Connection status resource type event configuration object for enabling and disabling wireless gateway topic.")
-	iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("device-registration-state", "", "Device registration state resource type event configuration object for enabling and disabling wireless gateway topic.")
-	iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("join", "", "Join resource type event configuration object for enabling and disabling wireless device topic.")
-	iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("message-delivery-status", "", "Message delivery status resource type event configuration object for enabling and disabling wireless device topic.")
-	iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("proximity", "", "Proximity resource type event configuration object for enabling and disabling wireless gateway topic.")
+		iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("connection-status", "", "Connection status resource type event configuration object for enabling and disabling wireless gateway topic.")
+		iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("device-registration-state", "", "Device registration state resource type event configuration object for enabling and disabling wireless gateway topic.")
+		iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("join", "", "Join resource type event configuration object for enabling and disabling wireless device topic.")
+		iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("message-delivery-status", "", "Message delivery status resource type event configuration object for enabling and disabling wireless device topic.")
+		iotwireless_updateEventConfigurationByResourceTypesCmd.Flags().String("proximity", "", "Proximity resource type event configuration object for enabling and disabling wireless gateway topic.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_updateEventConfigurationByResourceTypesCmd)
 }

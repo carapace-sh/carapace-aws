@@ -12,10 +12,12 @@ var controltower_listLandingZoneOperationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_listLandingZoneOperationsCmd).Standalone()
+	carapace.Gen(controltower_listLandingZoneOperationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_listLandingZoneOperationsCmd).Standalone()
 
-	controltower_listLandingZoneOperationsCmd.Flags().String("filter", "", "An input filter for the `ListLandingZoneOperations` API that lets you select the types of landing zone operations to view.")
-	controltower_listLandingZoneOperationsCmd.Flags().String("max-results", "", "How many results to return per API call.")
-	controltower_listLandingZoneOperationsCmd.Flags().String("next-token", "", "The token to continue the list from a previous API call with the same parameters.")
+		controltower_listLandingZoneOperationsCmd.Flags().String("filter", "", "An input filter for the `ListLandingZoneOperations` API that lets you select the types of landing zone operations to view.")
+		controltower_listLandingZoneOperationsCmd.Flags().String("max-results", "", "How many results to return per API call.")
+		controltower_listLandingZoneOperationsCmd.Flags().String("next-token", "", "The token to continue the list from a previous API call with the same parameters.")
+	})
 	controltowerCmd.AddCommand(controltower_listLandingZoneOperationsCmd)
 }

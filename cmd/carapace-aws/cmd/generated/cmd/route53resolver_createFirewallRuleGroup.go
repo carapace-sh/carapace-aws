@@ -12,12 +12,14 @@ var route53resolver_createFirewallRuleGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_createFirewallRuleGroupCmd).Standalone()
+	carapace.Gen(route53resolver_createFirewallRuleGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_createFirewallRuleGroupCmd).Standalone()
 
-	route53resolver_createFirewallRuleGroupCmd.Flags().String("creator-request-id", "", "A unique string defined by you to identify the request.")
-	route53resolver_createFirewallRuleGroupCmd.Flags().String("name", "", "A name that lets you identify the rule group, to manage and use it.")
-	route53resolver_createFirewallRuleGroupCmd.Flags().String("tags", "", "A list of the tag keys and values that you want to associate with the rule group.")
-	route53resolver_createFirewallRuleGroupCmd.MarkFlagRequired("creator-request-id")
-	route53resolver_createFirewallRuleGroupCmd.MarkFlagRequired("name")
+		route53resolver_createFirewallRuleGroupCmd.Flags().String("creator-request-id", "", "A unique string defined by you to identify the request.")
+		route53resolver_createFirewallRuleGroupCmd.Flags().String("name", "", "A name that lets you identify the rule group, to manage and use it.")
+		route53resolver_createFirewallRuleGroupCmd.Flags().String("tags", "", "A list of the tag keys and values that you want to associate with the rule group.")
+		route53resolver_createFirewallRuleGroupCmd.MarkFlagRequired("creator-request-id")
+		route53resolver_createFirewallRuleGroupCmd.MarkFlagRequired("name")
+	})
 	route53resolverCmd.AddCommand(route53resolver_createFirewallRuleGroupCmd)
 }

@@ -12,9 +12,11 @@ var migrationHubRefactorSpaces_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpaces_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpaces_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpaces_deleteResourcePolicyCmd).Standalone()
 
-	migrationHubRefactorSpaces_deleteResourcePolicyCmd.Flags().String("identifier", "", "Amazon Resource Name (ARN) of the resource associated with the policy.")
-	migrationHubRefactorSpaces_deleteResourcePolicyCmd.MarkFlagRequired("identifier")
+		migrationHubRefactorSpaces_deleteResourcePolicyCmd.Flags().String("identifier", "", "Amazon Resource Name (ARN) of the resource associated with the policy.")
+		migrationHubRefactorSpaces_deleteResourcePolicyCmd.MarkFlagRequired("identifier")
+	})
 	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_deleteResourcePolicyCmd)
 }

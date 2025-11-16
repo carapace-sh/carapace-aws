@@ -12,11 +12,13 @@ var oam_listAttachedLinksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_listAttachedLinksCmd).Standalone()
+	carapace.Gen(oam_listAttachedLinksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_listAttachedLinksCmd).Standalone()
 
-	oam_listAttachedLinksCmd.Flags().String("max-results", "", "Limits the number of returned links to the specified number.")
-	oam_listAttachedLinksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	oam_listAttachedLinksCmd.Flags().String("sink-identifier", "", "The ARN of the sink that you want to retrieve links for.")
-	oam_listAttachedLinksCmd.MarkFlagRequired("sink-identifier")
+		oam_listAttachedLinksCmd.Flags().String("max-results", "", "Limits the number of returned links to the specified number.")
+		oam_listAttachedLinksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		oam_listAttachedLinksCmd.Flags().String("sink-identifier", "", "The ARN of the sink that you want to retrieve links for.")
+		oam_listAttachedLinksCmd.MarkFlagRequired("sink-identifier")
+	})
 	oamCmd.AddCommand(oam_listAttachedLinksCmd)
 }

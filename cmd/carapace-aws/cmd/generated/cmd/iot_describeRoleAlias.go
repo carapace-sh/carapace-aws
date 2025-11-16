@@ -12,9 +12,11 @@ var iot_describeRoleAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeRoleAliasCmd).Standalone()
+	carapace.Gen(iot_describeRoleAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeRoleAliasCmd).Standalone()
 
-	iot_describeRoleAliasCmd.Flags().String("role-alias", "", "The role alias to describe.")
-	iot_describeRoleAliasCmd.MarkFlagRequired("role-alias")
+		iot_describeRoleAliasCmd.Flags().String("role-alias", "", "The role alias to describe.")
+		iot_describeRoleAliasCmd.MarkFlagRequired("role-alias")
+	})
 	iotCmd.AddCommand(iot_describeRoleAliasCmd)
 }

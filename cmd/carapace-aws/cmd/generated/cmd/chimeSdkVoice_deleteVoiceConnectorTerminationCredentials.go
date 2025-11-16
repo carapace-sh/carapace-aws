@@ -12,11 +12,13 @@ var chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd).Standalone()
 
-	chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd.Flags().String("usernames", "", "The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.")
-	chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd.MarkFlagRequired("usernames")
-	chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd.Flags().String("usernames", "", "The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.")
+		chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd.MarkFlagRequired("usernames")
+		chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteVoiceConnectorTerminationCredentialsCmd)
 }

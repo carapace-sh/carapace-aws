@@ -12,9 +12,11 @@ var signer_cancelSigningProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(signer_cancelSigningProfileCmd).Standalone()
+	carapace.Gen(signer_cancelSigningProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(signer_cancelSigningProfileCmd).Standalone()
 
-	signer_cancelSigningProfileCmd.Flags().String("profile-name", "", "The name of the signing profile to be canceled.")
-	signer_cancelSigningProfileCmd.MarkFlagRequired("profile-name")
+		signer_cancelSigningProfileCmd.Flags().String("profile-name", "", "The name of the signing profile to be canceled.")
+		signer_cancelSigningProfileCmd.MarkFlagRequired("profile-name")
+	})
 	signerCmd.AddCommand(signer_cancelSigningProfileCmd)
 }

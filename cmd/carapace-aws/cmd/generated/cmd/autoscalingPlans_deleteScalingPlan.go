@@ -12,11 +12,13 @@ var autoscalingPlans_deleteScalingPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscalingPlans_deleteScalingPlanCmd).Standalone()
+	carapace.Gen(autoscalingPlans_deleteScalingPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscalingPlans_deleteScalingPlanCmd).Standalone()
 
-	autoscalingPlans_deleteScalingPlanCmd.Flags().String("scaling-plan-name", "", "The name of the scaling plan.")
-	autoscalingPlans_deleteScalingPlanCmd.Flags().String("scaling-plan-version", "", "The version number of the scaling plan.")
-	autoscalingPlans_deleteScalingPlanCmd.MarkFlagRequired("scaling-plan-name")
-	autoscalingPlans_deleteScalingPlanCmd.MarkFlagRequired("scaling-plan-version")
+		autoscalingPlans_deleteScalingPlanCmd.Flags().String("scaling-plan-name", "", "The name of the scaling plan.")
+		autoscalingPlans_deleteScalingPlanCmd.Flags().String("scaling-plan-version", "", "The version number of the scaling plan.")
+		autoscalingPlans_deleteScalingPlanCmd.MarkFlagRequired("scaling-plan-name")
+		autoscalingPlans_deleteScalingPlanCmd.MarkFlagRequired("scaling-plan-version")
+	})
 	autoscalingPlansCmd.AddCommand(autoscalingPlans_deleteScalingPlanCmd)
 }

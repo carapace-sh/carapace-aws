@@ -12,11 +12,13 @@ var route53_createVpcassociationAuthorizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_createVpcassociationAuthorizationCmd).Standalone()
+	carapace.Gen(route53_createVpcassociationAuthorizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_createVpcassociationAuthorizationCmd).Standalone()
 
-	route53_createVpcassociationAuthorizationCmd.Flags().String("hosted-zone-id", "", "The ID of the private hosted zone that you want to authorize associating a VPC with.")
-	route53_createVpcassociationAuthorizationCmd.Flags().String("vpc", "", "A complex type that contains the VPC ID and region for the VPC that you want to authorize associating with your hosted zone.")
-	route53_createVpcassociationAuthorizationCmd.MarkFlagRequired("hosted-zone-id")
-	route53_createVpcassociationAuthorizationCmd.MarkFlagRequired("vpc")
+		route53_createVpcassociationAuthorizationCmd.Flags().String("hosted-zone-id", "", "The ID of the private hosted zone that you want to authorize associating a VPC with.")
+		route53_createVpcassociationAuthorizationCmd.Flags().String("vpc", "", "A complex type that contains the VPC ID and region for the VPC that you want to authorize associating with your hosted zone.")
+		route53_createVpcassociationAuthorizationCmd.MarkFlagRequired("hosted-zone-id")
+		route53_createVpcassociationAuthorizationCmd.MarkFlagRequired("vpc")
+	})
 	route53Cmd.AddCommand(route53_createVpcassociationAuthorizationCmd)
 }

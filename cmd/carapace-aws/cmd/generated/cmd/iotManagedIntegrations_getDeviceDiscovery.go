@@ -12,9 +12,11 @@ var iotManagedIntegrations_getDeviceDiscoveryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getDeviceDiscoveryCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getDeviceDiscoveryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getDeviceDiscoveryCmd).Standalone()
 
-	iotManagedIntegrations_getDeviceDiscoveryCmd.Flags().String("identifier", "", "The id of the device discovery job request.")
-	iotManagedIntegrations_getDeviceDiscoveryCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_getDeviceDiscoveryCmd.Flags().String("identifier", "", "The id of the device discovery job request.")
+		iotManagedIntegrations_getDeviceDiscoveryCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getDeviceDiscoveryCmd)
 }

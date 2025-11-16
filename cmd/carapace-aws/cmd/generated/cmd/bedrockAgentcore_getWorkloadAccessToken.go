@@ -12,9 +12,11 @@ var bedrockAgentcore_getWorkloadAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcore_getWorkloadAccessTokenCmd).Standalone()
+	carapace.Gen(bedrockAgentcore_getWorkloadAccessTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcore_getWorkloadAccessTokenCmd).Standalone()
 
-	bedrockAgentcore_getWorkloadAccessTokenCmd.Flags().String("workload-name", "", "The unique identifier for the registered workload.")
-	bedrockAgentcore_getWorkloadAccessTokenCmd.MarkFlagRequired("workload-name")
+		bedrockAgentcore_getWorkloadAccessTokenCmd.Flags().String("workload-name", "", "The unique identifier for the registered workload.")
+		bedrockAgentcore_getWorkloadAccessTokenCmd.MarkFlagRequired("workload-name")
+	})
 	bedrockAgentcoreCmd.AddCommand(bedrockAgentcore_getWorkloadAccessTokenCmd)
 }

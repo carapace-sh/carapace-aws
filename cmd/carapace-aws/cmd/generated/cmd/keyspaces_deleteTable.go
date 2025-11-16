@@ -12,11 +12,13 @@ var keyspaces_deleteTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspaces_deleteTableCmd).Standalone()
+	carapace.Gen(keyspaces_deleteTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspaces_deleteTableCmd).Standalone()
 
-	keyspaces_deleteTableCmd.Flags().String("keyspace-name", "", "The name of the keyspace of the to be deleted table.")
-	keyspaces_deleteTableCmd.Flags().String("table-name", "", "The name of the table to be deleted.")
-	keyspaces_deleteTableCmd.MarkFlagRequired("keyspace-name")
-	keyspaces_deleteTableCmd.MarkFlagRequired("table-name")
+		keyspaces_deleteTableCmd.Flags().String("keyspace-name", "", "The name of the keyspace of the to be deleted table.")
+		keyspaces_deleteTableCmd.Flags().String("table-name", "", "The name of the table to be deleted.")
+		keyspaces_deleteTableCmd.MarkFlagRequired("keyspace-name")
+		keyspaces_deleteTableCmd.MarkFlagRequired("table-name")
+	})
 	keyspacesCmd.AddCommand(keyspaces_deleteTableCmd)
 }

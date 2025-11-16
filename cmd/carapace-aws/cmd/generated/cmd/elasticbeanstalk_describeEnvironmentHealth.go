@@ -12,10 +12,12 @@ var elasticbeanstalk_describeEnvironmentHealthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_describeEnvironmentHealthCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_describeEnvironmentHealthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_describeEnvironmentHealthCmd).Standalone()
 
-	elasticbeanstalk_describeEnvironmentHealthCmd.Flags().String("attribute-names", "", "Specify the response elements to return.")
-	elasticbeanstalk_describeEnvironmentHealthCmd.Flags().String("environment-id", "", "Specify the environment by ID.")
-	elasticbeanstalk_describeEnvironmentHealthCmd.Flags().String("environment-name", "", "Specify the environment by name.")
+		elasticbeanstalk_describeEnvironmentHealthCmd.Flags().String("attribute-names", "", "Specify the response elements to return.")
+		elasticbeanstalk_describeEnvironmentHealthCmd.Flags().String("environment-id", "", "Specify the environment by ID.")
+		elasticbeanstalk_describeEnvironmentHealthCmd.Flags().String("environment-name", "", "Specify the environment by name.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_describeEnvironmentHealthCmd)
 }

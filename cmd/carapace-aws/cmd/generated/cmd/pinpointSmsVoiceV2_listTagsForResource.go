@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_listTagsForResourceCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_listTagsForResourceCmd).Standalone()
 
-	pinpointSmsVoiceV2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to query for.")
-	pinpointSmsVoiceV2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		pinpointSmsVoiceV2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to query for.")
+		pinpointSmsVoiceV2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_listTagsForResourceCmd)
 }

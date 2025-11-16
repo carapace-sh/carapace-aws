@@ -12,13 +12,15 @@ var connect_updateUserIdentityInfoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateUserIdentityInfoCmd).Standalone()
+	carapace.Gen(connect_updateUserIdentityInfoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateUserIdentityInfoCmd).Standalone()
 
-	connect_updateUserIdentityInfoCmd.Flags().String("identity-info", "", "The identity information for the user.")
-	connect_updateUserIdentityInfoCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateUserIdentityInfoCmd.Flags().String("user-id", "", "The identifier of the user account.")
-	connect_updateUserIdentityInfoCmd.MarkFlagRequired("identity-info")
-	connect_updateUserIdentityInfoCmd.MarkFlagRequired("instance-id")
-	connect_updateUserIdentityInfoCmd.MarkFlagRequired("user-id")
+		connect_updateUserIdentityInfoCmd.Flags().String("identity-info", "", "The identity information for the user.")
+		connect_updateUserIdentityInfoCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateUserIdentityInfoCmd.Flags().String("user-id", "", "The identifier of the user account.")
+		connect_updateUserIdentityInfoCmd.MarkFlagRequired("identity-info")
+		connect_updateUserIdentityInfoCmd.MarkFlagRequired("instance-id")
+		connect_updateUserIdentityInfoCmd.MarkFlagRequired("user-id")
+	})
 	connectCmd.AddCommand(connect_updateUserIdentityInfoCmd)
 }

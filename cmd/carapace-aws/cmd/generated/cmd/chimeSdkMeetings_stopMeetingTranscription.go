@@ -12,9 +12,11 @@ var chimeSdkMeetings_stopMeetingTranscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMeetings_stopMeetingTranscriptionCmd).Standalone()
+	carapace.Gen(chimeSdkMeetings_stopMeetingTranscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMeetings_stopMeetingTranscriptionCmd).Standalone()
 
-	chimeSdkMeetings_stopMeetingTranscriptionCmd.Flags().String("meeting-id", "", "The unique ID of the meeting for which you stop transcription.")
-	chimeSdkMeetings_stopMeetingTranscriptionCmd.MarkFlagRequired("meeting-id")
+		chimeSdkMeetings_stopMeetingTranscriptionCmd.Flags().String("meeting-id", "", "The unique ID of the meeting for which you stop transcription.")
+		chimeSdkMeetings_stopMeetingTranscriptionCmd.MarkFlagRequired("meeting-id")
+	})
 	chimeSdkMeetingsCmd.AddCommand(chimeSdkMeetings_stopMeetingTranscriptionCmd)
 }

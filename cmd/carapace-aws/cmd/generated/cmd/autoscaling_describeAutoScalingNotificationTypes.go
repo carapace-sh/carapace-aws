@@ -12,7 +12,9 @@ var autoscaling_describeAutoScalingNotificationTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_describeAutoScalingNotificationTypesCmd).Standalone()
+	carapace.Gen(autoscaling_describeAutoScalingNotificationTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_describeAutoScalingNotificationTypesCmd).Standalone()
 
+	})
 	autoscalingCmd.AddCommand(autoscaling_describeAutoScalingNotificationTypesCmd)
 }

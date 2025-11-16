@@ -12,7 +12,9 @@ var elasticbeanstalkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalkCmd).Standalone()
+	carapace.Gen(elasticbeanstalkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalkCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(elasticbeanstalkCmd)
 }

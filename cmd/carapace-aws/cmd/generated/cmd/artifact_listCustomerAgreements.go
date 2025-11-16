@@ -12,9 +12,11 @@ var artifact_listCustomerAgreementsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(artifact_listCustomerAgreementsCmd).Standalone()
+	carapace.Gen(artifact_listCustomerAgreementsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(artifact_listCustomerAgreementsCmd).Standalone()
 
-	artifact_listCustomerAgreementsCmd.Flags().String("max-results", "", "Maximum number of resources to return in the paginated response.")
-	artifact_listCustomerAgreementsCmd.Flags().String("next-token", "", "Pagination token to request the next page of resources.")
+		artifact_listCustomerAgreementsCmd.Flags().String("max-results", "", "Maximum number of resources to return in the paginated response.")
+		artifact_listCustomerAgreementsCmd.Flags().String("next-token", "", "Pagination token to request the next page of resources.")
+	})
 	artifactCmd.AddCommand(artifact_listCustomerAgreementsCmd)
 }

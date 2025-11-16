@@ -12,9 +12,11 @@ var rds_describeDbsnapshotAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeDbsnapshotAttributesCmd).Standalone()
+	carapace.Gen(rds_describeDbsnapshotAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeDbsnapshotAttributesCmd).Standalone()
 
-	rds_describeDbsnapshotAttributesCmd.Flags().String("dbsnapshot-identifier", "", "The identifier for the DB snapshot to describe the attributes for.")
-	rds_describeDbsnapshotAttributesCmd.MarkFlagRequired("dbsnapshot-identifier")
+		rds_describeDbsnapshotAttributesCmd.Flags().String("dbsnapshot-identifier", "", "The identifier for the DB snapshot to describe the attributes for.")
+		rds_describeDbsnapshotAttributesCmd.MarkFlagRequired("dbsnapshot-identifier")
+	})
 	rdsCmd.AddCommand(rds_describeDbsnapshotAttributesCmd)
 }

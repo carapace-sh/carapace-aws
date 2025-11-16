@@ -12,9 +12,11 @@ var redshift_deleteIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteIntegrationCmd).Standalone()
+	carapace.Gen(redshift_deleteIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteIntegrationCmd).Standalone()
 
-	redshift_deleteIntegrationCmd.Flags().String("integration-arn", "", "The unique identifier of the integration to delete.")
-	redshift_deleteIntegrationCmd.MarkFlagRequired("integration-arn")
+		redshift_deleteIntegrationCmd.Flags().String("integration-arn", "", "The unique identifier of the integration to delete.")
+		redshift_deleteIntegrationCmd.MarkFlagRequired("integration-arn")
+	})
 	redshiftCmd.AddCommand(redshift_deleteIntegrationCmd)
 }

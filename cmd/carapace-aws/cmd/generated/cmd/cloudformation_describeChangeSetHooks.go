@@ -12,12 +12,14 @@ var cloudformation_describeChangeSetHooksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_describeChangeSetHooksCmd).Standalone()
+	carapace.Gen(cloudformation_describeChangeSetHooksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_describeChangeSetHooksCmd).Standalone()
 
-	cloudformation_describeChangeSetHooksCmd.Flags().String("change-set-name", "", "The name or Amazon Resource Name (ARN) of the change set that you want to describe.")
-	cloudformation_describeChangeSetHooksCmd.Flags().String("logical-resource-id", "", "If specified, lists only the Hooks related to the specified `LogicalResourceId`.")
-	cloudformation_describeChangeSetHooksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	cloudformation_describeChangeSetHooksCmd.Flags().String("stack-name", "", "If you specified the name of a change set, specify the stack name or stack ID (ARN) of the change set you want to describe.")
-	cloudformation_describeChangeSetHooksCmd.MarkFlagRequired("change-set-name")
+		cloudformation_describeChangeSetHooksCmd.Flags().String("change-set-name", "", "The name or Amazon Resource Name (ARN) of the change set that you want to describe.")
+		cloudformation_describeChangeSetHooksCmd.Flags().String("logical-resource-id", "", "If specified, lists only the Hooks related to the specified `LogicalResourceId`.")
+		cloudformation_describeChangeSetHooksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		cloudformation_describeChangeSetHooksCmd.Flags().String("stack-name", "", "If you specified the name of a change set, specify the stack name or stack ID (ARN) of the change set you want to describe.")
+		cloudformation_describeChangeSetHooksCmd.MarkFlagRequired("change-set-name")
+	})
 	cloudformationCmd.AddCommand(cloudformation_describeChangeSetHooksCmd)
 }

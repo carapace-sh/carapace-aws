@@ -12,9 +12,11 @@ var globalaccelerator_describeCustomRoutingListenerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_describeCustomRoutingListenerCmd).Standalone()
+	carapace.Gen(globalaccelerator_describeCustomRoutingListenerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_describeCustomRoutingListenerCmd).Standalone()
 
-	globalaccelerator_describeCustomRoutingListenerCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener to describe.")
-	globalaccelerator_describeCustomRoutingListenerCmd.MarkFlagRequired("listener-arn")
+		globalaccelerator_describeCustomRoutingListenerCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener to describe.")
+		globalaccelerator_describeCustomRoutingListenerCmd.MarkFlagRequired("listener-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_describeCustomRoutingListenerCmd)
 }

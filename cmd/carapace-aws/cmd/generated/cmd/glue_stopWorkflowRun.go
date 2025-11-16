@@ -12,11 +12,13 @@ var glue_stopWorkflowRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_stopWorkflowRunCmd).Standalone()
+	carapace.Gen(glue_stopWorkflowRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_stopWorkflowRunCmd).Standalone()
 
-	glue_stopWorkflowRunCmd.Flags().String("name", "", "The name of the workflow to stop.")
-	glue_stopWorkflowRunCmd.Flags().String("run-id", "", "The ID of the workflow run to stop.")
-	glue_stopWorkflowRunCmd.MarkFlagRequired("name")
-	glue_stopWorkflowRunCmd.MarkFlagRequired("run-id")
+		glue_stopWorkflowRunCmd.Flags().String("name", "", "The name of the workflow to stop.")
+		glue_stopWorkflowRunCmd.Flags().String("run-id", "", "The ID of the workflow run to stop.")
+		glue_stopWorkflowRunCmd.MarkFlagRequired("name")
+		glue_stopWorkflowRunCmd.MarkFlagRequired("run-id")
+	})
 	glueCmd.AddCommand(glue_stopWorkflowRunCmd)
 }

@@ -12,9 +12,11 @@ var comprehendmedical_inferRxNormCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_inferRxNormCmd).Standalone()
+	carapace.Gen(comprehendmedical_inferRxNormCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_inferRxNormCmd).Standalone()
 
-	comprehendmedical_inferRxNormCmd.Flags().String("text", "", "The input text used for analysis.")
-	comprehendmedical_inferRxNormCmd.MarkFlagRequired("text")
+		comprehendmedical_inferRxNormCmd.Flags().String("text", "", "The input text used for analysis.")
+		comprehendmedical_inferRxNormCmd.MarkFlagRequired("text")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_inferRxNormCmd)
 }

@@ -12,9 +12,11 @@ var drs_startReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_startReplicationCmd).Standalone()
+	carapace.Gen(drs_startReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_startReplicationCmd).Standalone()
 
-	drs_startReplicationCmd.Flags().String("source-server-id", "", "The ID of the Source Server to start replication for.")
-	drs_startReplicationCmd.MarkFlagRequired("source-server-id")
+		drs_startReplicationCmd.Flags().String("source-server-id", "", "The ID of the Source Server to start replication for.")
+		drs_startReplicationCmd.MarkFlagRequired("source-server-id")
+	})
 	drsCmd.AddCommand(drs_startReplicationCmd)
 }

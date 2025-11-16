@@ -12,13 +12,15 @@ var deadline_getQueueEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_getQueueEnvironmentCmd).Standalone()
+	carapace.Gen(deadline_getQueueEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_getQueueEnvironmentCmd).Standalone()
 
-	deadline_getQueueEnvironmentCmd.Flags().String("farm-id", "", "The farm ID for the queue environment.")
-	deadline_getQueueEnvironmentCmd.Flags().String("queue-environment-id", "", "The queue environment ID.")
-	deadline_getQueueEnvironmentCmd.Flags().String("queue-id", "", "The queue ID for the queue environment.")
-	deadline_getQueueEnvironmentCmd.MarkFlagRequired("farm-id")
-	deadline_getQueueEnvironmentCmd.MarkFlagRequired("queue-environment-id")
-	deadline_getQueueEnvironmentCmd.MarkFlagRequired("queue-id")
+		deadline_getQueueEnvironmentCmd.Flags().String("farm-id", "", "The farm ID for the queue environment.")
+		deadline_getQueueEnvironmentCmd.Flags().String("queue-environment-id", "", "The queue environment ID.")
+		deadline_getQueueEnvironmentCmd.Flags().String("queue-id", "", "The queue ID for the queue environment.")
+		deadline_getQueueEnvironmentCmd.MarkFlagRequired("farm-id")
+		deadline_getQueueEnvironmentCmd.MarkFlagRequired("queue-environment-id")
+		deadline_getQueueEnvironmentCmd.MarkFlagRequired("queue-id")
+	})
 	deadlineCmd.AddCommand(deadline_getQueueEnvironmentCmd)
 }

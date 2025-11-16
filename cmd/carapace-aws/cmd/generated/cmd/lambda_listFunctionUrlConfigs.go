@@ -12,11 +12,13 @@ var lambda_listFunctionUrlConfigsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_listFunctionUrlConfigsCmd).Standalone()
+	carapace.Gen(lambda_listFunctionUrlConfigsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_listFunctionUrlConfigsCmd).Standalone()
 
-	lambda_listFunctionUrlConfigsCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_listFunctionUrlConfigsCmd.Flags().String("marker", "", "Specify the pagination token that's returned by a previous request to retrieve the next page of results.")
-	lambda_listFunctionUrlConfigsCmd.Flags().String("max-items", "", "The maximum number of function URLs to return in the response.")
-	lambda_listFunctionUrlConfigsCmd.MarkFlagRequired("function-name")
+		lambda_listFunctionUrlConfigsCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_listFunctionUrlConfigsCmd.Flags().String("marker", "", "Specify the pagination token that's returned by a previous request to retrieve the next page of results.")
+		lambda_listFunctionUrlConfigsCmd.Flags().String("max-items", "", "The maximum number of function URLs to return in the response.")
+		lambda_listFunctionUrlConfigsCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_listFunctionUrlConfigsCmd)
 }

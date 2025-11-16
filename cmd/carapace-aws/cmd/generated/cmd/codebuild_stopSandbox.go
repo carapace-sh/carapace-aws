@@ -12,9 +12,11 @@ var codebuild_stopSandboxCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_stopSandboxCmd).Standalone()
+	carapace.Gen(codebuild_stopSandboxCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_stopSandboxCmd).Standalone()
 
-	codebuild_stopSandboxCmd.Flags().String("id", "", "Information about the requested sandbox ID.")
-	codebuild_stopSandboxCmd.MarkFlagRequired("id")
+		codebuild_stopSandboxCmd.Flags().String("id", "", "Information about the requested sandbox ID.")
+		codebuild_stopSandboxCmd.MarkFlagRequired("id")
+	})
 	codebuildCmd.AddCommand(codebuild_stopSandboxCmd)
 }

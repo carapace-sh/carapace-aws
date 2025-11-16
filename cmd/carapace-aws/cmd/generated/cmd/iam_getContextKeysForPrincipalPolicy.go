@@ -12,10 +12,12 @@ var iam_getContextKeysForPrincipalPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_getContextKeysForPrincipalPolicyCmd).Standalone()
+	carapace.Gen(iam_getContextKeysForPrincipalPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_getContextKeysForPrincipalPolicyCmd).Standalone()
 
-	iam_getContextKeysForPrincipalPolicyCmd.Flags().String("policy-input-list", "", "An optional list of additional policies for which you want the list of context keys that are referenced.")
-	iam_getContextKeysForPrincipalPolicyCmd.Flags().String("policy-source-arn", "", "The ARN of a user, group, or role whose policies contain the context keys that you want listed.")
-	iam_getContextKeysForPrincipalPolicyCmd.MarkFlagRequired("policy-source-arn")
+		iam_getContextKeysForPrincipalPolicyCmd.Flags().String("policy-input-list", "", "An optional list of additional policies for which you want the list of context keys that are referenced.")
+		iam_getContextKeysForPrincipalPolicyCmd.Flags().String("policy-source-arn", "", "The ARN of a user, group, or role whose policies contain the context keys that you want listed.")
+		iam_getContextKeysForPrincipalPolicyCmd.MarkFlagRequired("policy-source-arn")
+	})
 	iamCmd.AddCommand(iam_getContextKeysForPrincipalPolicyCmd)
 }

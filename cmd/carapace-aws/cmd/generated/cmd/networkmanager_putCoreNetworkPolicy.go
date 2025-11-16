@@ -12,14 +12,16 @@ var networkmanager_putCoreNetworkPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_putCoreNetworkPolicyCmd).Standalone()
+	carapace.Gen(networkmanager_putCoreNetworkPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_putCoreNetworkPolicyCmd).Standalone()
 
-	networkmanager_putCoreNetworkPolicyCmd.Flags().String("client-token", "", "The client token associated with the request.")
-	networkmanager_putCoreNetworkPolicyCmd.Flags().String("core-network-id", "", "The ID of a core network.")
-	networkmanager_putCoreNetworkPolicyCmd.Flags().String("description", "", "a core network policy description.")
-	networkmanager_putCoreNetworkPolicyCmd.Flags().String("latest-version-id", "", "The ID of a core network policy.")
-	networkmanager_putCoreNetworkPolicyCmd.Flags().String("policy-document", "", "The policy document.")
-	networkmanager_putCoreNetworkPolicyCmd.MarkFlagRequired("core-network-id")
-	networkmanager_putCoreNetworkPolicyCmd.MarkFlagRequired("policy-document")
+		networkmanager_putCoreNetworkPolicyCmd.Flags().String("client-token", "", "The client token associated with the request.")
+		networkmanager_putCoreNetworkPolicyCmd.Flags().String("core-network-id", "", "The ID of a core network.")
+		networkmanager_putCoreNetworkPolicyCmd.Flags().String("description", "", "a core network policy description.")
+		networkmanager_putCoreNetworkPolicyCmd.Flags().String("latest-version-id", "", "The ID of a core network policy.")
+		networkmanager_putCoreNetworkPolicyCmd.Flags().String("policy-document", "", "The policy document.")
+		networkmanager_putCoreNetworkPolicyCmd.MarkFlagRequired("core-network-id")
+		networkmanager_putCoreNetworkPolicyCmd.MarkFlagRequired("policy-document")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_putCoreNetworkPolicyCmd)
 }

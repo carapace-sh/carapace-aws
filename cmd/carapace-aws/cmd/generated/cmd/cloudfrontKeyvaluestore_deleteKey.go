@@ -12,13 +12,15 @@ var cloudfrontKeyvaluestore_deleteKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfrontKeyvaluestore_deleteKeyCmd).Standalone()
+	carapace.Gen(cloudfrontKeyvaluestore_deleteKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfrontKeyvaluestore_deleteKeyCmd).Standalone()
 
-	cloudfrontKeyvaluestore_deleteKeyCmd.Flags().String("if-match", "", "The current version (ETag) of the Key Value Store that you are deleting keys from, which you can get using DescribeKeyValueStore.")
-	cloudfrontKeyvaluestore_deleteKeyCmd.Flags().String("key", "", "The key to delete.")
-	cloudfrontKeyvaluestore_deleteKeyCmd.Flags().String("kvs-arn", "", "The Amazon Resource Name (ARN) of the Key Value Store.")
-	cloudfrontKeyvaluestore_deleteKeyCmd.MarkFlagRequired("if-match")
-	cloudfrontKeyvaluestore_deleteKeyCmd.MarkFlagRequired("key")
-	cloudfrontKeyvaluestore_deleteKeyCmd.MarkFlagRequired("kvs-arn")
+		cloudfrontKeyvaluestore_deleteKeyCmd.Flags().String("if-match", "", "The current version (ETag) of the Key Value Store that you are deleting keys from, which you can get using DescribeKeyValueStore.")
+		cloudfrontKeyvaluestore_deleteKeyCmd.Flags().String("key", "", "The key to delete.")
+		cloudfrontKeyvaluestore_deleteKeyCmd.Flags().String("kvs-arn", "", "The Amazon Resource Name (ARN) of the Key Value Store.")
+		cloudfrontKeyvaluestore_deleteKeyCmd.MarkFlagRequired("if-match")
+		cloudfrontKeyvaluestore_deleteKeyCmd.MarkFlagRequired("key")
+		cloudfrontKeyvaluestore_deleteKeyCmd.MarkFlagRequired("kvs-arn")
+	})
 	cloudfrontKeyvaluestoreCmd.AddCommand(cloudfrontKeyvaluestore_deleteKeyCmd)
 }

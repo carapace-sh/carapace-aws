@@ -12,9 +12,11 @@ var ses_deleteVerifiedEmailAddressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_deleteVerifiedEmailAddressCmd).Standalone()
+	carapace.Gen(ses_deleteVerifiedEmailAddressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_deleteVerifiedEmailAddressCmd).Standalone()
 
-	ses_deleteVerifiedEmailAddressCmd.Flags().String("email-address", "", "An email address to be removed from the list of verified addresses.")
-	ses_deleteVerifiedEmailAddressCmd.MarkFlagRequired("email-address")
+		ses_deleteVerifiedEmailAddressCmd.Flags().String("email-address", "", "An email address to be removed from the list of verified addresses.")
+		ses_deleteVerifiedEmailAddressCmd.MarkFlagRequired("email-address")
+	})
 	sesCmd.AddCommand(ses_deleteVerifiedEmailAddressCmd)
 }

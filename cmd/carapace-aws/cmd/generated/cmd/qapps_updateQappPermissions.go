@@ -12,13 +12,15 @@ var qapps_updateQappPermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_updateQappPermissionsCmd).Standalone()
+	carapace.Gen(qapps_updateQappPermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_updateQappPermissionsCmd).Standalone()
 
-	qapps_updateQappPermissionsCmd.Flags().String("app-id", "", "The unique identifier of the Amazon Q App for which permissions are being updated.")
-	qapps_updateQappPermissionsCmd.Flags().String("grant-permissions", "", "The list of permissions to grant for the Amazon Q App.")
-	qapps_updateQappPermissionsCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_updateQappPermissionsCmd.Flags().String("revoke-permissions", "", "The list of permissions to revoke for the Amazon Q App.")
-	qapps_updateQappPermissionsCmd.MarkFlagRequired("app-id")
-	qapps_updateQappPermissionsCmd.MarkFlagRequired("instance-id")
+		qapps_updateQappPermissionsCmd.Flags().String("app-id", "", "The unique identifier of the Amazon Q App for which permissions are being updated.")
+		qapps_updateQappPermissionsCmd.Flags().String("grant-permissions", "", "The list of permissions to grant for the Amazon Q App.")
+		qapps_updateQappPermissionsCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_updateQappPermissionsCmd.Flags().String("revoke-permissions", "", "The list of permissions to revoke for the Amazon Q App.")
+		qapps_updateQappPermissionsCmd.MarkFlagRequired("app-id")
+		qapps_updateQappPermissionsCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_updateQappPermissionsCmd)
 }

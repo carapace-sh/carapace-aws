@@ -12,10 +12,12 @@ var iam_resetServiceSpecificCredentialCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_resetServiceSpecificCredentialCmd).Standalone()
+	carapace.Gen(iam_resetServiceSpecificCredentialCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_resetServiceSpecificCredentialCmd).Standalone()
 
-	iam_resetServiceSpecificCredentialCmd.Flags().String("service-specific-credential-id", "", "The unique identifier of the service-specific credential.")
-	iam_resetServiceSpecificCredentialCmd.Flags().String("user-name", "", "The name of the IAM user associated with the service-specific credential.")
-	iam_resetServiceSpecificCredentialCmd.MarkFlagRequired("service-specific-credential-id")
+		iam_resetServiceSpecificCredentialCmd.Flags().String("service-specific-credential-id", "", "The unique identifier of the service-specific credential.")
+		iam_resetServiceSpecificCredentialCmd.Flags().String("user-name", "", "The name of the IAM user associated with the service-specific credential.")
+		iam_resetServiceSpecificCredentialCmd.MarkFlagRequired("service-specific-credential-id")
+	})
 	iamCmd.AddCommand(iam_resetServiceSpecificCredentialCmd)
 }

@@ -12,11 +12,13 @@ var cloudsearch_updateDomainEndpointOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_updateDomainEndpointOptionsCmd).Standalone()
+	carapace.Gen(cloudsearch_updateDomainEndpointOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_updateDomainEndpointOptionsCmd).Standalone()
 
-	cloudsearch_updateDomainEndpointOptionsCmd.Flags().String("domain-endpoint-options", "", "Whether to require that all requests to the domain arrive over HTTPS.")
-	cloudsearch_updateDomainEndpointOptionsCmd.Flags().String("domain-name", "", "A string that represents the name of a domain.")
-	cloudsearch_updateDomainEndpointOptionsCmd.MarkFlagRequired("domain-endpoint-options")
-	cloudsearch_updateDomainEndpointOptionsCmd.MarkFlagRequired("domain-name")
+		cloudsearch_updateDomainEndpointOptionsCmd.Flags().String("domain-endpoint-options", "", "Whether to require that all requests to the domain arrive over HTTPS.")
+		cloudsearch_updateDomainEndpointOptionsCmd.Flags().String("domain-name", "", "A string that represents the name of a domain.")
+		cloudsearch_updateDomainEndpointOptionsCmd.MarkFlagRequired("domain-endpoint-options")
+		cloudsearch_updateDomainEndpointOptionsCmd.MarkFlagRequired("domain-name")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_updateDomainEndpointOptionsCmd)
 }

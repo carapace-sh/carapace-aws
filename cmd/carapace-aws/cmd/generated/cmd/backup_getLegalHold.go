@@ -12,9 +12,11 @@ var backup_getLegalHoldCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_getLegalHoldCmd).Standalone()
+	carapace.Gen(backup_getLegalHoldCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_getLegalHoldCmd).Standalone()
 
-	backup_getLegalHoldCmd.Flags().String("legal-hold-id", "", "The ID of the legal hold.")
-	backup_getLegalHoldCmd.MarkFlagRequired("legal-hold-id")
+		backup_getLegalHoldCmd.Flags().String("legal-hold-id", "", "The ID of the legal hold.")
+		backup_getLegalHoldCmd.MarkFlagRequired("legal-hold-id")
+	})
 	backupCmd.AddCommand(backup_getLegalHoldCmd)
 }

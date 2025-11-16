@@ -12,11 +12,13 @@ var iotsitewise_batchGetAssetPropertyValueHistoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_batchGetAssetPropertyValueHistoryCmd).Standalone()
+	carapace.Gen(iotsitewise_batchGetAssetPropertyValueHistoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_batchGetAssetPropertyValueHistoryCmd).Standalone()
 
-	iotsitewise_batchGetAssetPropertyValueHistoryCmd.Flags().String("entries", "", "The list of asset property historical value entries for the batch get request.")
-	iotsitewise_batchGetAssetPropertyValueHistoryCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
-	iotsitewise_batchGetAssetPropertyValueHistoryCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	iotsitewise_batchGetAssetPropertyValueHistoryCmd.MarkFlagRequired("entries")
+		iotsitewise_batchGetAssetPropertyValueHistoryCmd.Flags().String("entries", "", "The list of asset property historical value entries for the batch get request.")
+		iotsitewise_batchGetAssetPropertyValueHistoryCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
+		iotsitewise_batchGetAssetPropertyValueHistoryCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		iotsitewise_batchGetAssetPropertyValueHistoryCmd.MarkFlagRequired("entries")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_batchGetAssetPropertyValueHistoryCmd)
 }

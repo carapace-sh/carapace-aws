@@ -12,7 +12,9 @@ var sagemaker_getSagemakerServicecatalogPortfolioStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_getSagemakerServicecatalogPortfolioStatusCmd).Standalone()
+	carapace.Gen(sagemaker_getSagemakerServicecatalogPortfolioStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_getSagemakerServicecatalogPortfolioStatusCmd).Standalone()
 
+	})
 	sagemakerCmd.AddCommand(sagemaker_getSagemakerServicecatalogPortfolioStatusCmd)
 }

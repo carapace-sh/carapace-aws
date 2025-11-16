@@ -12,15 +12,17 @@ var partnercentralSelling_listSolutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(partnercentralSelling_listSolutionsCmd).Standalone()
+	carapace.Gen(partnercentralSelling_listSolutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(partnercentralSelling_listSolutionsCmd).Standalone()
 
-	partnercentralSelling_listSolutionsCmd.Flags().String("catalog", "", "Specifies the catalog associated with the request.")
-	partnercentralSelling_listSolutionsCmd.Flags().String("category", "", "Filters the solutions based on the category to which they belong.")
-	partnercentralSelling_listSolutionsCmd.Flags().String("identifier", "", "Filters the solutions based on their unique identifier.")
-	partnercentralSelling_listSolutionsCmd.Flags().String("max-results", "", "The maximum number of results returned by a single call.")
-	partnercentralSelling_listSolutionsCmd.Flags().String("next-token", "", "A pagination token used to retrieve the next set of results in subsequent calls.")
-	partnercentralSelling_listSolutionsCmd.Flags().String("sort", "", "Object that configures sorting done on the response.")
-	partnercentralSelling_listSolutionsCmd.Flags().String("status", "", "Filters solutions based on their status.")
-	partnercentralSelling_listSolutionsCmd.MarkFlagRequired("catalog")
+		partnercentralSelling_listSolutionsCmd.Flags().String("catalog", "", "Specifies the catalog associated with the request.")
+		partnercentralSelling_listSolutionsCmd.Flags().String("category", "", "Filters the solutions based on the category to which they belong.")
+		partnercentralSelling_listSolutionsCmd.Flags().String("identifier", "", "Filters the solutions based on their unique identifier.")
+		partnercentralSelling_listSolutionsCmd.Flags().String("max-results", "", "The maximum number of results returned by a single call.")
+		partnercentralSelling_listSolutionsCmd.Flags().String("next-token", "", "A pagination token used to retrieve the next set of results in subsequent calls.")
+		partnercentralSelling_listSolutionsCmd.Flags().String("sort", "", "Object that configures sorting done on the response.")
+		partnercentralSelling_listSolutionsCmd.Flags().String("status", "", "Filters solutions based on their status.")
+		partnercentralSelling_listSolutionsCmd.MarkFlagRequired("catalog")
+	})
 	partnercentralSellingCmd.AddCommand(partnercentralSelling_listSolutionsCmd)
 }

@@ -12,9 +12,11 @@ var redshift_failoverPrimaryComputeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_failoverPrimaryComputeCmd).Standalone()
+	carapace.Gen(redshift_failoverPrimaryComputeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_failoverPrimaryComputeCmd).Standalone()
 
-	redshift_failoverPrimaryComputeCmd.Flags().String("cluster-identifier", "", "The unique identifier of the cluster for which the primary compute unit will be failed over to another Availability Zone.")
-	redshift_failoverPrimaryComputeCmd.MarkFlagRequired("cluster-identifier")
+		redshift_failoverPrimaryComputeCmd.Flags().String("cluster-identifier", "", "The unique identifier of the cluster for which the primary compute unit will be failed over to another Availability Zone.")
+		redshift_failoverPrimaryComputeCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_failoverPrimaryComputeCmd)
 }

@@ -12,11 +12,13 @@ var gamelift_deleteFleetLocationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteFleetLocationsCmd).Standalone()
+	carapace.Gen(gamelift_deleteFleetLocationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteFleetLocationsCmd).Standalone()
 
-	gamelift_deleteFleetLocationsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to delete locations for.")
-	gamelift_deleteFleetLocationsCmd.Flags().String("locations", "", "The list of fleet locations to delete.")
-	gamelift_deleteFleetLocationsCmd.MarkFlagRequired("fleet-id")
-	gamelift_deleteFleetLocationsCmd.MarkFlagRequired("locations")
+		gamelift_deleteFleetLocationsCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to delete locations for.")
+		gamelift_deleteFleetLocationsCmd.Flags().String("locations", "", "The list of fleet locations to delete.")
+		gamelift_deleteFleetLocationsCmd.MarkFlagRequired("fleet-id")
+		gamelift_deleteFleetLocationsCmd.MarkFlagRequired("locations")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteFleetLocationsCmd)
 }

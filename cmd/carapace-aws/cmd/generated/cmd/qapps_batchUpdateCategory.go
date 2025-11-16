@@ -12,11 +12,13 @@ var qapps_batchUpdateCategoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_batchUpdateCategoryCmd).Standalone()
+	carapace.Gen(qapps_batchUpdateCategoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_batchUpdateCategoryCmd).Standalone()
 
-	qapps_batchUpdateCategoryCmd.Flags().String("categories", "", "The list of categories to be updated with their new values.")
-	qapps_batchUpdateCategoryCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_batchUpdateCategoryCmd.MarkFlagRequired("categories")
-	qapps_batchUpdateCategoryCmd.MarkFlagRequired("instance-id")
+		qapps_batchUpdateCategoryCmd.Flags().String("categories", "", "The list of categories to be updated with their new values.")
+		qapps_batchUpdateCategoryCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_batchUpdateCategoryCmd.MarkFlagRequired("categories")
+		qapps_batchUpdateCategoryCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_batchUpdateCategoryCmd)
 }

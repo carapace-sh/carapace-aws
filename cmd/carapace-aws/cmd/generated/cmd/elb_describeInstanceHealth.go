@@ -12,10 +12,12 @@ var elb_describeInstanceHealthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_describeInstanceHealthCmd).Standalone()
+	carapace.Gen(elb_describeInstanceHealthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_describeInstanceHealthCmd).Standalone()
 
-	elb_describeInstanceHealthCmd.Flags().String("instances", "", "The IDs of the instances.")
-	elb_describeInstanceHealthCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_describeInstanceHealthCmd.MarkFlagRequired("load-balancer-name")
+		elb_describeInstanceHealthCmd.Flags().String("instances", "", "The IDs of the instances.")
+		elb_describeInstanceHealthCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_describeInstanceHealthCmd.MarkFlagRequired("load-balancer-name")
+	})
 	elbCmd.AddCommand(elb_describeInstanceHealthCmd)
 }

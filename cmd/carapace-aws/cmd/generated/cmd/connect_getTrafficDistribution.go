@@ -12,9 +12,11 @@ var connect_getTrafficDistributionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_getTrafficDistributionCmd).Standalone()
+	carapace.Gen(connect_getTrafficDistributionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_getTrafficDistributionCmd).Standalone()
 
-	connect_getTrafficDistributionCmd.Flags().String("id", "", "The identifier of the traffic distribution group.")
-	connect_getTrafficDistributionCmd.MarkFlagRequired("id")
+		connect_getTrafficDistributionCmd.Flags().String("id", "", "The identifier of the traffic distribution group.")
+		connect_getTrafficDistributionCmd.MarkFlagRequired("id")
+	})
 	connectCmd.AddCommand(connect_getTrafficDistributionCmd)
 }

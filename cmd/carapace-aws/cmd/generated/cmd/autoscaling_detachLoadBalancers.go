@@ -12,11 +12,13 @@ var autoscaling_detachLoadBalancersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_detachLoadBalancersCmd).Standalone()
+	carapace.Gen(autoscaling_detachLoadBalancersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_detachLoadBalancersCmd).Standalone()
 
-	autoscaling_detachLoadBalancersCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_detachLoadBalancersCmd.Flags().String("load-balancer-names", "", "The names of the load balancers.")
-	autoscaling_detachLoadBalancersCmd.MarkFlagRequired("auto-scaling-group-name")
-	autoscaling_detachLoadBalancersCmd.MarkFlagRequired("load-balancer-names")
+		autoscaling_detachLoadBalancersCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_detachLoadBalancersCmd.Flags().String("load-balancer-names", "", "The names of the load balancers.")
+		autoscaling_detachLoadBalancersCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_detachLoadBalancersCmd.MarkFlagRequired("load-balancer-names")
+	})
 	autoscalingCmd.AddCommand(autoscaling_detachLoadBalancersCmd)
 }

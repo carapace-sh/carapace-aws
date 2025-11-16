@@ -12,9 +12,11 @@ var inspector2_deleteCisScanConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_deleteCisScanConfigurationCmd).Standalone()
+	carapace.Gen(inspector2_deleteCisScanConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_deleteCisScanConfigurationCmd).Standalone()
 
-	inspector2_deleteCisScanConfigurationCmd.Flags().String("scan-configuration-arn", "", "The ARN of the CIS scan configuration.")
-	inspector2_deleteCisScanConfigurationCmd.MarkFlagRequired("scan-configuration-arn")
+		inspector2_deleteCisScanConfigurationCmd.Flags().String("scan-configuration-arn", "", "The ARN of the CIS scan configuration.")
+		inspector2_deleteCisScanConfigurationCmd.MarkFlagRequired("scan-configuration-arn")
+	})
 	inspector2Cmd.AddCommand(inspector2_deleteCisScanConfigurationCmd)
 }

@@ -12,10 +12,12 @@ var connectcampaigns_listCampaignsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaigns_listCampaignsCmd).Standalone()
+	carapace.Gen(connectcampaigns_listCampaignsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaigns_listCampaignsCmd).Standalone()
 
-	connectcampaigns_listCampaignsCmd.Flags().String("filters", "", "")
-	connectcampaigns_listCampaignsCmd.Flags().String("max-results", "", "")
-	connectcampaigns_listCampaignsCmd.Flags().String("next-token", "", "")
+		connectcampaigns_listCampaignsCmd.Flags().String("filters", "", "")
+		connectcampaigns_listCampaignsCmd.Flags().String("max-results", "", "")
+		connectcampaigns_listCampaignsCmd.Flags().String("next-token", "", "")
+	})
 	connectcampaignsCmd.AddCommand(connectcampaigns_listCampaignsCmd)
 }

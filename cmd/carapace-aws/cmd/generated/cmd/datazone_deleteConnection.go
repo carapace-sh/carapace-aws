@@ -12,11 +12,13 @@ var datazone_deleteConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteConnectionCmd).Standalone()
+	carapace.Gen(datazone_deleteConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteConnectionCmd).Standalone()
 
-	datazone_deleteConnectionCmd.Flags().String("domain-identifier", "", "The ID of the domain where the connection is deleted.")
-	datazone_deleteConnectionCmd.Flags().String("identifier", "", "The ID of the connection that is deleted.")
-	datazone_deleteConnectionCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteConnectionCmd.MarkFlagRequired("identifier")
+		datazone_deleteConnectionCmd.Flags().String("domain-identifier", "", "The ID of the domain where the connection is deleted.")
+		datazone_deleteConnectionCmd.Flags().String("identifier", "", "The ID of the connection that is deleted.")
+		datazone_deleteConnectionCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteConnectionCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteConnectionCmd)
 }

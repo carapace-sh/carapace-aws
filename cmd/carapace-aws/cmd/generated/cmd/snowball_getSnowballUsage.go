@@ -12,7 +12,9 @@ var snowball_getSnowballUsageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowball_getSnowballUsageCmd).Standalone()
+	carapace.Gen(snowball_getSnowballUsageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowball_getSnowballUsageCmd).Standalone()
 
+	})
 	snowballCmd.AddCommand(snowball_getSnowballUsageCmd)
 }

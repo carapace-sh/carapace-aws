@@ -12,11 +12,13 @@ var machinelearning_updateEvaluationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_updateEvaluationCmd).Standalone()
+	carapace.Gen(machinelearning_updateEvaluationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_updateEvaluationCmd).Standalone()
 
-	machinelearning_updateEvaluationCmd.Flags().String("evaluation-id", "", "The ID assigned to the `Evaluation` during creation.")
-	machinelearning_updateEvaluationCmd.Flags().String("evaluation-name", "", "A new user-supplied name or description of the `Evaluation` that will replace the current content.")
-	machinelearning_updateEvaluationCmd.MarkFlagRequired("evaluation-id")
-	machinelearning_updateEvaluationCmd.MarkFlagRequired("evaluation-name")
+		machinelearning_updateEvaluationCmd.Flags().String("evaluation-id", "", "The ID assigned to the `Evaluation` during creation.")
+		machinelearning_updateEvaluationCmd.Flags().String("evaluation-name", "", "A new user-supplied name or description of the `Evaluation` that will replace the current content.")
+		machinelearning_updateEvaluationCmd.MarkFlagRequired("evaluation-id")
+		machinelearning_updateEvaluationCmd.MarkFlagRequired("evaluation-name")
+	})
 	machinelearningCmd.AddCommand(machinelearning_updateEvaluationCmd)
 }

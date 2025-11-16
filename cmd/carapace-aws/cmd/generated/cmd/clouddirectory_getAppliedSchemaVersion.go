@@ -12,9 +12,11 @@ var clouddirectory_getAppliedSchemaVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_getAppliedSchemaVersionCmd).Standalone()
+	carapace.Gen(clouddirectory_getAppliedSchemaVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_getAppliedSchemaVersionCmd).Standalone()
 
-	clouddirectory_getAppliedSchemaVersionCmd.Flags().String("schema-arn", "", "The ARN of the applied schema.")
-	clouddirectory_getAppliedSchemaVersionCmd.MarkFlagRequired("schema-arn")
+		clouddirectory_getAppliedSchemaVersionCmd.Flags().String("schema-arn", "", "The ARN of the applied schema.")
+		clouddirectory_getAppliedSchemaVersionCmd.MarkFlagRequired("schema-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_getAppliedSchemaVersionCmd)
 }

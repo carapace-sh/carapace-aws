@@ -12,9 +12,11 @@ var clouddirectory_getSchemaAsJsonCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_getSchemaAsJsonCmd).Standalone()
+	carapace.Gen(clouddirectory_getSchemaAsJsonCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_getSchemaAsJsonCmd).Standalone()
 
-	clouddirectory_getSchemaAsJsonCmd.Flags().String("schema-arn", "", "The ARN of the schema to retrieve.")
-	clouddirectory_getSchemaAsJsonCmd.MarkFlagRequired("schema-arn")
+		clouddirectory_getSchemaAsJsonCmd.Flags().String("schema-arn", "", "The ARN of the schema to retrieve.")
+		clouddirectory_getSchemaAsJsonCmd.MarkFlagRequired("schema-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_getSchemaAsJsonCmd)
 }

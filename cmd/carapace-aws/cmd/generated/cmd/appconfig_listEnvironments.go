@@ -12,11 +12,13 @@ var appconfig_listEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_listEnvironmentsCmd).Standalone()
+	carapace.Gen(appconfig_listEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_listEnvironmentsCmd).Standalone()
 
-	appconfig_listEnvironmentsCmd.Flags().String("application-id", "", "The application ID.")
-	appconfig_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	appconfig_listEnvironmentsCmd.Flags().String("next-token", "", "A token to start the list.")
-	appconfig_listEnvironmentsCmd.MarkFlagRequired("application-id")
+		appconfig_listEnvironmentsCmd.Flags().String("application-id", "", "The application ID.")
+		appconfig_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		appconfig_listEnvironmentsCmd.Flags().String("next-token", "", "A token to start the list.")
+		appconfig_listEnvironmentsCmd.MarkFlagRequired("application-id")
+	})
 	appconfigCmd.AddCommand(appconfig_listEnvironmentsCmd)
 }

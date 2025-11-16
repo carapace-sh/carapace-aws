@@ -12,10 +12,12 @@ var inspector2_startCodeSecurityScanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_startCodeSecurityScanCmd).Standalone()
+	carapace.Gen(inspector2_startCodeSecurityScanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_startCodeSecurityScanCmd).Standalone()
 
-	inspector2_startCodeSecurityScanCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	inspector2_startCodeSecurityScanCmd.Flags().String("resource", "", "The resource identifier for the code repository to scan.")
-	inspector2_startCodeSecurityScanCmd.MarkFlagRequired("resource")
+		inspector2_startCodeSecurityScanCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		inspector2_startCodeSecurityScanCmd.Flags().String("resource", "", "The resource identifier for the code repository to scan.")
+		inspector2_startCodeSecurityScanCmd.MarkFlagRequired("resource")
+	})
 	inspector2Cmd.AddCommand(inspector2_startCodeSecurityScanCmd)
 }

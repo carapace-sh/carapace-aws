@@ -12,11 +12,13 @@ var iotwireless_updateLogLevelsByResourceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_updateLogLevelsByResourceTypesCmd).Standalone()
+	carapace.Gen(iotwireless_updateLogLevelsByResourceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_updateLogLevelsByResourceTypesCmd).Standalone()
 
-	iotwireless_updateLogLevelsByResourceTypesCmd.Flags().String("default-log-level", "", "")
-	iotwireless_updateLogLevelsByResourceTypesCmd.Flags().String("fuota-task-log-options", "", "")
-	iotwireless_updateLogLevelsByResourceTypesCmd.Flags().String("wireless-device-log-options", "", "")
-	iotwireless_updateLogLevelsByResourceTypesCmd.Flags().String("wireless-gateway-log-options", "", "")
+		iotwireless_updateLogLevelsByResourceTypesCmd.Flags().String("default-log-level", "", "")
+		iotwireless_updateLogLevelsByResourceTypesCmd.Flags().String("fuota-task-log-options", "", "")
+		iotwireless_updateLogLevelsByResourceTypesCmd.Flags().String("wireless-device-log-options", "", "")
+		iotwireless_updateLogLevelsByResourceTypesCmd.Flags().String("wireless-gateway-log-options", "", "")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_updateLogLevelsByResourceTypesCmd)
 }

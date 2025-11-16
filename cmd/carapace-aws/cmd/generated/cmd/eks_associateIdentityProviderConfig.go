@@ -12,13 +12,15 @@ var eks_associateIdentityProviderConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(eks_associateIdentityProviderConfigCmd).Standalone()
+	carapace.Gen(eks_associateIdentityProviderConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(eks_associateIdentityProviderConfigCmd).Standalone()
 
-	eks_associateIdentityProviderConfigCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	eks_associateIdentityProviderConfigCmd.Flags().String("cluster-name", "", "The name of your cluster.")
-	eks_associateIdentityProviderConfigCmd.Flags().String("oidc", "", "An object representing an OpenID Connect (OIDC) identity provider configuration.")
-	eks_associateIdentityProviderConfigCmd.Flags().String("tags", "", "Metadata that assists with categorization and organization.")
-	eks_associateIdentityProviderConfigCmd.MarkFlagRequired("cluster-name")
-	eks_associateIdentityProviderConfigCmd.MarkFlagRequired("oidc")
+		eks_associateIdentityProviderConfigCmd.Flags().String("client-request-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		eks_associateIdentityProviderConfigCmd.Flags().String("cluster-name", "", "The name of your cluster.")
+		eks_associateIdentityProviderConfigCmd.Flags().String("oidc", "", "An object representing an OpenID Connect (OIDC) identity provider configuration.")
+		eks_associateIdentityProviderConfigCmd.Flags().String("tags", "", "Metadata that assists with categorization and organization.")
+		eks_associateIdentityProviderConfigCmd.MarkFlagRequired("cluster-name")
+		eks_associateIdentityProviderConfigCmd.MarkFlagRequired("oidc")
+	})
 	eksCmd.AddCommand(eks_associateIdentityProviderConfigCmd)
 }

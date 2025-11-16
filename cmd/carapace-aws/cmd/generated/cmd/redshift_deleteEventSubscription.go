@@ -12,9 +12,11 @@ var redshift_deleteEventSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteEventSubscriptionCmd).Standalone()
+	carapace.Gen(redshift_deleteEventSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteEventSubscriptionCmd).Standalone()
 
-	redshift_deleteEventSubscriptionCmd.Flags().String("subscription-name", "", "The name of the Amazon Redshift event notification subscription to be deleted.")
-	redshift_deleteEventSubscriptionCmd.MarkFlagRequired("subscription-name")
+		redshift_deleteEventSubscriptionCmd.Flags().String("subscription-name", "", "The name of the Amazon Redshift event notification subscription to be deleted.")
+		redshift_deleteEventSubscriptionCmd.MarkFlagRequired("subscription-name")
+	})
 	redshiftCmd.AddCommand(redshift_deleteEventSubscriptionCmd)
 }

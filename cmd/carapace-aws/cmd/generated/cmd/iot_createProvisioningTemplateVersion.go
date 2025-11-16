@@ -12,12 +12,14 @@ var iot_createProvisioningTemplateVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_createProvisioningTemplateVersionCmd).Standalone()
+	carapace.Gen(iot_createProvisioningTemplateVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_createProvisioningTemplateVersionCmd).Standalone()
 
-	iot_createProvisioningTemplateVersionCmd.Flags().String("set-as-default", "", "Sets a fleet provision template version as the default version.")
-	iot_createProvisioningTemplateVersionCmd.Flags().String("template-body", "", "The JSON formatted contents of the provisioning template.")
-	iot_createProvisioningTemplateVersionCmd.Flags().String("template-name", "", "The name of the provisioning template.")
-	iot_createProvisioningTemplateVersionCmd.MarkFlagRequired("template-body")
-	iot_createProvisioningTemplateVersionCmd.MarkFlagRequired("template-name")
+		iot_createProvisioningTemplateVersionCmd.Flags().String("set-as-default", "", "Sets a fleet provision template version as the default version.")
+		iot_createProvisioningTemplateVersionCmd.Flags().String("template-body", "", "The JSON formatted contents of the provisioning template.")
+		iot_createProvisioningTemplateVersionCmd.Flags().String("template-name", "", "The name of the provisioning template.")
+		iot_createProvisioningTemplateVersionCmd.MarkFlagRequired("template-body")
+		iot_createProvisioningTemplateVersionCmd.MarkFlagRequired("template-name")
+	})
 	iotCmd.AddCommand(iot_createProvisioningTemplateVersionCmd)
 }

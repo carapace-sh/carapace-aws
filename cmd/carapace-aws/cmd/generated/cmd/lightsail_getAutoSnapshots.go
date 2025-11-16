@@ -12,9 +12,11 @@ var lightsail_getAutoSnapshotsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getAutoSnapshotsCmd).Standalone()
+	carapace.Gen(lightsail_getAutoSnapshotsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getAutoSnapshotsCmd).Standalone()
 
-	lightsail_getAutoSnapshotsCmd.Flags().String("resource-name", "", "The name of the source instance or disk from which to get automatic snapshot information.")
-	lightsail_getAutoSnapshotsCmd.MarkFlagRequired("resource-name")
+		lightsail_getAutoSnapshotsCmd.Flags().String("resource-name", "", "The name of the source instance or disk from which to get automatic snapshot information.")
+		lightsail_getAutoSnapshotsCmd.MarkFlagRequired("resource-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getAutoSnapshotsCmd)
 }

@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_deleteDefaultMessageTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_deleteDefaultMessageTypeCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_deleteDefaultMessageTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_deleteDefaultMessageTypeCmd).Standalone()
 
-	pinpointSmsVoiceV2_deleteDefaultMessageTypeCmd.Flags().String("configuration-set-name", "", "The name of the configuration set or the configuration set Amazon Resource Name (ARN) to delete the default message type from.")
-	pinpointSmsVoiceV2_deleteDefaultMessageTypeCmd.MarkFlagRequired("configuration-set-name")
+		pinpointSmsVoiceV2_deleteDefaultMessageTypeCmd.Flags().String("configuration-set-name", "", "The name of the configuration set or the configuration set Amazon Resource Name (ARN) to delete the default message type from.")
+		pinpointSmsVoiceV2_deleteDefaultMessageTypeCmd.MarkFlagRequired("configuration-set-name")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_deleteDefaultMessageTypeCmd)
 }

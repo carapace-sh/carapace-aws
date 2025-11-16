@@ -12,9 +12,11 @@ var networkmanager_getTransitGatewayRouteTableAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getTransitGatewayRouteTableAttachmentCmd).Standalone()
+	carapace.Gen(networkmanager_getTransitGatewayRouteTableAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getTransitGatewayRouteTableAttachmentCmd).Standalone()
 
-	networkmanager_getTransitGatewayRouteTableAttachmentCmd.Flags().String("attachment-id", "", "The ID of the transit gateway route table attachment.")
-	networkmanager_getTransitGatewayRouteTableAttachmentCmd.MarkFlagRequired("attachment-id")
+		networkmanager_getTransitGatewayRouteTableAttachmentCmd.Flags().String("attachment-id", "", "The ID of the transit gateway route table attachment.")
+		networkmanager_getTransitGatewayRouteTableAttachmentCmd.MarkFlagRequired("attachment-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getTransitGatewayRouteTableAttachmentCmd)
 }

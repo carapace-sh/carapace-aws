@@ -12,11 +12,13 @@ var databrew_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_untagResourceCmd).Standalone()
+	carapace.Gen(databrew_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_untagResourceCmd).Standalone()
 
-	databrew_untagResourceCmd.Flags().String("resource-arn", "", "A DataBrew resource from which you want to remove a tag or tags.")
-	databrew_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys (names) of one or more tags to be removed.")
-	databrew_untagResourceCmd.MarkFlagRequired("resource-arn")
-	databrew_untagResourceCmd.MarkFlagRequired("tag-keys")
+		databrew_untagResourceCmd.Flags().String("resource-arn", "", "A DataBrew resource from which you want to remove a tag or tags.")
+		databrew_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys (names) of one or more tags to be removed.")
+		databrew_untagResourceCmd.MarkFlagRequired("resource-arn")
+		databrew_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	databrewCmd.AddCommand(databrew_untagResourceCmd)
 }

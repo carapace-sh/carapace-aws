@@ -12,9 +12,11 @@ var workspacesInstances_deleteWorkspaceInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_deleteWorkspaceInstanceCmd).Standalone()
+	carapace.Gen(workspacesInstances_deleteWorkspaceInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_deleteWorkspaceInstanceCmd).Standalone()
 
-	workspacesInstances_deleteWorkspaceInstanceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpaces Instance targeted for deletion.")
-	workspacesInstances_deleteWorkspaceInstanceCmd.MarkFlagRequired("workspace-instance-id")
+		workspacesInstances_deleteWorkspaceInstanceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpaces Instance targeted for deletion.")
+		workspacesInstances_deleteWorkspaceInstanceCmd.MarkFlagRequired("workspace-instance-id")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_deleteWorkspaceInstanceCmd)
 }

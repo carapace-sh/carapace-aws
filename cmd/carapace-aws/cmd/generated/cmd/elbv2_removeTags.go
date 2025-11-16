@@ -12,11 +12,13 @@ var elbv2_removeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_removeTagsCmd).Standalone()
+	carapace.Gen(elbv2_removeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_removeTagsCmd).Standalone()
 
-	elbv2_removeTagsCmd.Flags().String("resource-arns", "", "The Amazon Resource Name (ARN) of the resource.")
-	elbv2_removeTagsCmd.Flags().String("tag-keys", "", "The tag keys for the tags to remove.")
-	elbv2_removeTagsCmd.MarkFlagRequired("resource-arns")
-	elbv2_removeTagsCmd.MarkFlagRequired("tag-keys")
+		elbv2_removeTagsCmd.Flags().String("resource-arns", "", "The Amazon Resource Name (ARN) of the resource.")
+		elbv2_removeTagsCmd.Flags().String("tag-keys", "", "The tag keys for the tags to remove.")
+		elbv2_removeTagsCmd.MarkFlagRequired("resource-arns")
+		elbv2_removeTagsCmd.MarkFlagRequired("tag-keys")
+	})
 	elbv2Cmd.AddCommand(elbv2_removeTagsCmd)
 }

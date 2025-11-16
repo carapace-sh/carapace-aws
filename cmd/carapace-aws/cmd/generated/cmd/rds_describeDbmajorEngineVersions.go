@@ -12,11 +12,13 @@ var rds_describeDbmajorEngineVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeDbmajorEngineVersionsCmd).Standalone()
+	carapace.Gen(rds_describeDbmajorEngineVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeDbmajorEngineVersionsCmd).Standalone()
 
-	rds_describeDbmajorEngineVersionsCmd.Flags().String("engine", "", "The database engine to return major version details for.")
-	rds_describeDbmajorEngineVersionsCmd.Flags().String("major-engine-version", "", "A specific database major engine version to return details for.")
-	rds_describeDbmajorEngineVersionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	rds_describeDbmajorEngineVersionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		rds_describeDbmajorEngineVersionsCmd.Flags().String("engine", "", "The database engine to return major version details for.")
+		rds_describeDbmajorEngineVersionsCmd.Flags().String("major-engine-version", "", "A specific database major engine version to return details for.")
+		rds_describeDbmajorEngineVersionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		rds_describeDbmajorEngineVersionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	rdsCmd.AddCommand(rds_describeDbmajorEngineVersionsCmd)
 }

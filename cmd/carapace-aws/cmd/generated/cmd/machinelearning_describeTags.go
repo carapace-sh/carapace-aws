@@ -12,11 +12,13 @@ var machinelearning_describeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_describeTagsCmd).Standalone()
+	carapace.Gen(machinelearning_describeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_describeTagsCmd).Standalone()
 
-	machinelearning_describeTagsCmd.Flags().String("resource-id", "", "The ID of the ML object.")
-	machinelearning_describeTagsCmd.Flags().String("resource-type", "", "The type of the ML object.")
-	machinelearning_describeTagsCmd.MarkFlagRequired("resource-id")
-	machinelearning_describeTagsCmd.MarkFlagRequired("resource-type")
+		machinelearning_describeTagsCmd.Flags().String("resource-id", "", "The ID of the ML object.")
+		machinelearning_describeTagsCmd.Flags().String("resource-type", "", "The type of the ML object.")
+		machinelearning_describeTagsCmd.MarkFlagRequired("resource-id")
+		machinelearning_describeTagsCmd.MarkFlagRequired("resource-type")
+	})
 	machinelearningCmd.AddCommand(machinelearning_describeTagsCmd)
 }

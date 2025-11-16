@@ -12,10 +12,12 @@ var codeartifact_deleteDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeartifact_deleteDomainCmd).Standalone()
+	carapace.Gen(codeartifact_deleteDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeartifact_deleteDomainCmd).Standalone()
 
-	codeartifact_deleteDomainCmd.Flags().String("domain", "", "The name of the domain to delete.")
-	codeartifact_deleteDomainCmd.Flags().String("domain-owner", "", "The 12-digit account number of the Amazon Web Services account that owns the domain.")
-	codeartifact_deleteDomainCmd.MarkFlagRequired("domain")
+		codeartifact_deleteDomainCmd.Flags().String("domain", "", "The name of the domain to delete.")
+		codeartifact_deleteDomainCmd.Flags().String("domain-owner", "", "The 12-digit account number of the Amazon Web Services account that owns the domain.")
+		codeartifact_deleteDomainCmd.MarkFlagRequired("domain")
+	})
 	codeartifactCmd.AddCommand(codeartifact_deleteDomainCmd)
 }

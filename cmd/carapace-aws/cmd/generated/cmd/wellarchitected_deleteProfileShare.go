@@ -12,13 +12,15 @@ var wellarchitected_deleteProfileShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_deleteProfileShareCmd).Standalone()
+	carapace.Gen(wellarchitected_deleteProfileShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_deleteProfileShareCmd).Standalone()
 
-	wellarchitected_deleteProfileShareCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_deleteProfileShareCmd.Flags().String("profile-arn", "", "The profile ARN.")
-	wellarchitected_deleteProfileShareCmd.Flags().String("share-id", "", "")
-	wellarchitected_deleteProfileShareCmd.MarkFlagRequired("client-request-token")
-	wellarchitected_deleteProfileShareCmd.MarkFlagRequired("profile-arn")
-	wellarchitected_deleteProfileShareCmd.MarkFlagRequired("share-id")
+		wellarchitected_deleteProfileShareCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_deleteProfileShareCmd.Flags().String("profile-arn", "", "The profile ARN.")
+		wellarchitected_deleteProfileShareCmd.Flags().String("share-id", "", "")
+		wellarchitected_deleteProfileShareCmd.MarkFlagRequired("client-request-token")
+		wellarchitected_deleteProfileShareCmd.MarkFlagRequired("profile-arn")
+		wellarchitected_deleteProfileShareCmd.MarkFlagRequired("share-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_deleteProfileShareCmd)
 }

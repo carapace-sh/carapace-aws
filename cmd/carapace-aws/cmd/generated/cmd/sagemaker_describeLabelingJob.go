@@ -12,9 +12,11 @@ var sagemaker_describeLabelingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeLabelingJobCmd).Standalone()
+	carapace.Gen(sagemaker_describeLabelingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeLabelingJobCmd).Standalone()
 
-	sagemaker_describeLabelingJobCmd.Flags().String("labeling-job-name", "", "The name of the labeling job to return information for.")
-	sagemaker_describeLabelingJobCmd.MarkFlagRequired("labeling-job-name")
+		sagemaker_describeLabelingJobCmd.Flags().String("labeling-job-name", "", "The name of the labeling job to return information for.")
+		sagemaker_describeLabelingJobCmd.MarkFlagRequired("labeling-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeLabelingJobCmd)
 }

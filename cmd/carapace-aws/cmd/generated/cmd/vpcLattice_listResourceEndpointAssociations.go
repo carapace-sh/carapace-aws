@@ -12,14 +12,16 @@ var vpcLattice_listResourceEndpointAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listResourceEndpointAssociationsCmd).Standalone()
+	carapace.Gen(vpcLattice_listResourceEndpointAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listResourceEndpointAssociationsCmd).Standalone()
 
-	vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("max-results", "", "The maximum page size.")
-	vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
-	vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("resource-configuration-identifier", "", "The ID for the resource configuration associated with the VPC endpoint.")
-	vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("resource-endpoint-association-identifier", "", "The ID of the association.")
-	vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("vpc-endpoint-id", "", "The ID of the VPC endpoint in the association.")
-	vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("vpc-endpoint-owner", "", "The owner of the VPC endpoint in the association.")
-	vpcLattice_listResourceEndpointAssociationsCmd.MarkFlagRequired("resource-configuration-identifier")
+		vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("max-results", "", "The maximum page size.")
+		vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+		vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("resource-configuration-identifier", "", "The ID for the resource configuration associated with the VPC endpoint.")
+		vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("resource-endpoint-association-identifier", "", "The ID of the association.")
+		vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("vpc-endpoint-id", "", "The ID of the VPC endpoint in the association.")
+		vpcLattice_listResourceEndpointAssociationsCmd.Flags().String("vpc-endpoint-owner", "", "The owner of the VPC endpoint in the association.")
+		vpcLattice_listResourceEndpointAssociationsCmd.MarkFlagRequired("resource-configuration-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listResourceEndpointAssociationsCmd)
 }

@@ -12,12 +12,14 @@ var b2bi_createStarterMappingTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_createStarterMappingTemplateCmd).Standalone()
+	carapace.Gen(b2bi_createStarterMappingTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_createStarterMappingTemplateCmd).Standalone()
 
-	b2bi_createStarterMappingTemplateCmd.Flags().String("mapping-type", "", "Specify the format for the mapping template: either JSONATA or XSLT.")
-	b2bi_createStarterMappingTemplateCmd.Flags().String("output-sample-location", "", "Specify the location of the sample EDI file that is used to generate the mapping template.")
-	b2bi_createStarterMappingTemplateCmd.Flags().String("template-details", "", "Describes the details needed for generating the template.")
-	b2bi_createStarterMappingTemplateCmd.MarkFlagRequired("mapping-type")
-	b2bi_createStarterMappingTemplateCmd.MarkFlagRequired("template-details")
+		b2bi_createStarterMappingTemplateCmd.Flags().String("mapping-type", "", "Specify the format for the mapping template: either JSONATA or XSLT.")
+		b2bi_createStarterMappingTemplateCmd.Flags().String("output-sample-location", "", "Specify the location of the sample EDI file that is used to generate the mapping template.")
+		b2bi_createStarterMappingTemplateCmd.Flags().String("template-details", "", "Describes the details needed for generating the template.")
+		b2bi_createStarterMappingTemplateCmd.MarkFlagRequired("mapping-type")
+		b2bi_createStarterMappingTemplateCmd.MarkFlagRequired("template-details")
+	})
 	b2biCmd.AddCommand(b2bi_createStarterMappingTemplateCmd)
 }

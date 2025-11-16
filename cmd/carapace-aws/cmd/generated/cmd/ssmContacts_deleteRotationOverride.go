@@ -12,11 +12,13 @@ var ssmContacts_deleteRotationOverrideCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_deleteRotationOverrideCmd).Standalone()
+	carapace.Gen(ssmContacts_deleteRotationOverrideCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_deleteRotationOverrideCmd).Standalone()
 
-	ssmContacts_deleteRotationOverrideCmd.Flags().String("rotation-id", "", "The Amazon Resource Name (ARN) of the rotation that was overridden.")
-	ssmContacts_deleteRotationOverrideCmd.Flags().String("rotation-override-id", "", "The Amazon Resource Name (ARN) of the on-call rotation override to delete.")
-	ssmContacts_deleteRotationOverrideCmd.MarkFlagRequired("rotation-id")
-	ssmContacts_deleteRotationOverrideCmd.MarkFlagRequired("rotation-override-id")
+		ssmContacts_deleteRotationOverrideCmd.Flags().String("rotation-id", "", "The Amazon Resource Name (ARN) of the rotation that was overridden.")
+		ssmContacts_deleteRotationOverrideCmd.Flags().String("rotation-override-id", "", "The Amazon Resource Name (ARN) of the on-call rotation override to delete.")
+		ssmContacts_deleteRotationOverrideCmd.MarkFlagRequired("rotation-id")
+		ssmContacts_deleteRotationOverrideCmd.MarkFlagRequired("rotation-override-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_deleteRotationOverrideCmd)
 }

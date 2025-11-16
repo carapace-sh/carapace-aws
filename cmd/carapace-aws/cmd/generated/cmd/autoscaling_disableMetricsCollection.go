@@ -12,10 +12,12 @@ var autoscaling_disableMetricsCollectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_disableMetricsCollectionCmd).Standalone()
+	carapace.Gen(autoscaling_disableMetricsCollectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_disableMetricsCollectionCmd).Standalone()
 
-	autoscaling_disableMetricsCollectionCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
-	autoscaling_disableMetricsCollectionCmd.Flags().String("metrics", "", "Identifies the metrics to disable.")
-	autoscaling_disableMetricsCollectionCmd.MarkFlagRequired("auto-scaling-group-name")
+		autoscaling_disableMetricsCollectionCmd.Flags().String("auto-scaling-group-name", "", "The name of the Auto Scaling group.")
+		autoscaling_disableMetricsCollectionCmd.Flags().String("metrics", "", "Identifies the metrics to disable.")
+		autoscaling_disableMetricsCollectionCmd.MarkFlagRequired("auto-scaling-group-name")
+	})
 	autoscalingCmd.AddCommand(autoscaling_disableMetricsCollectionCmd)
 }

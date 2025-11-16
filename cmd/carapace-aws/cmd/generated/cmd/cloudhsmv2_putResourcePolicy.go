@@ -12,9 +12,11 @@ var cloudhsmv2_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsmv2_putResourcePolicyCmd).Standalone()
+	carapace.Gen(cloudhsmv2_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsmv2_putResourcePolicyCmd).Standalone()
 
-	cloudhsmv2_putResourcePolicyCmd.Flags().String("policy", "", "The policy you want to associate with a resource.")
-	cloudhsmv2_putResourcePolicyCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the resource to which you want to attach a policy.")
+		cloudhsmv2_putResourcePolicyCmd.Flags().String("policy", "", "The policy you want to associate with a resource.")
+		cloudhsmv2_putResourcePolicyCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the resource to which you want to attach a policy.")
+	})
 	cloudhsmv2Cmd.AddCommand(cloudhsmv2_putResourcePolicyCmd)
 }

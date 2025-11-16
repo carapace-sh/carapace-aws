@@ -12,11 +12,13 @@ var workspaces_modifySamlPropertiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_modifySamlPropertiesCmd).Standalone()
+	carapace.Gen(workspaces_modifySamlPropertiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_modifySamlPropertiesCmd).Standalone()
 
-	workspaces_modifySamlPropertiesCmd.Flags().String("properties-to-delete", "", "The SAML properties to delete as part of your request.")
-	workspaces_modifySamlPropertiesCmd.Flags().String("resource-id", "", "The directory identifier for which you want to configure SAML properties.")
-	workspaces_modifySamlPropertiesCmd.Flags().String("saml-properties", "", "The properties for configuring SAML 2.0 authentication.")
-	workspaces_modifySamlPropertiesCmd.MarkFlagRequired("resource-id")
+		workspaces_modifySamlPropertiesCmd.Flags().String("properties-to-delete", "", "The SAML properties to delete as part of your request.")
+		workspaces_modifySamlPropertiesCmd.Flags().String("resource-id", "", "The directory identifier for which you want to configure SAML properties.")
+		workspaces_modifySamlPropertiesCmd.Flags().String("saml-properties", "", "The properties for configuring SAML 2.0 authentication.")
+		workspaces_modifySamlPropertiesCmd.MarkFlagRequired("resource-id")
+	})
 	workspacesCmd.AddCommand(workspaces_modifySamlPropertiesCmd)
 }

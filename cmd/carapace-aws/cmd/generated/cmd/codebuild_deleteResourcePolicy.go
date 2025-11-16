@@ -12,9 +12,11 @@ var codebuild_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(codebuild_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_deleteResourcePolicyCmd).Standalone()
 
-	codebuild_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the resource that is associated with the resource policy.")
-	codebuild_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		codebuild_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the resource that is associated with the resource policy.")
+		codebuild_deleteResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	codebuildCmd.AddCommand(codebuild_deleteResourcePolicyCmd)
 }

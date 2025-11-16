@@ -12,11 +12,13 @@ var redshift_deauthorizeDataShareCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deauthorizeDataShareCmd).Standalone()
+	carapace.Gen(redshift_deauthorizeDataShareCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deauthorizeDataShareCmd).Standalone()
 
-	redshift_deauthorizeDataShareCmd.Flags().String("consumer-identifier", "", "The identifier of the data consumer that is to have authorization removed from the datashare.")
-	redshift_deauthorizeDataShareCmd.Flags().String("data-share-arn", "", "The namespace Amazon Resource Name (ARN) of the datashare to remove authorization from.")
-	redshift_deauthorizeDataShareCmd.MarkFlagRequired("consumer-identifier")
-	redshift_deauthorizeDataShareCmd.MarkFlagRequired("data-share-arn")
+		redshift_deauthorizeDataShareCmd.Flags().String("consumer-identifier", "", "The identifier of the data consumer that is to have authorization removed from the datashare.")
+		redshift_deauthorizeDataShareCmd.Flags().String("data-share-arn", "", "The namespace Amazon Resource Name (ARN) of the datashare to remove authorization from.")
+		redshift_deauthorizeDataShareCmd.MarkFlagRequired("consumer-identifier")
+		redshift_deauthorizeDataShareCmd.MarkFlagRequired("data-share-arn")
+	})
 	redshiftCmd.AddCommand(redshift_deauthorizeDataShareCmd)
 }

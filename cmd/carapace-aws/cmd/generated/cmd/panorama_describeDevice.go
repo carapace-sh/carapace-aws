@@ -12,9 +12,11 @@ var panorama_describeDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_describeDeviceCmd).Standalone()
+	carapace.Gen(panorama_describeDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_describeDeviceCmd).Standalone()
 
-	panorama_describeDeviceCmd.Flags().String("device-id", "", "The device's ID.")
-	panorama_describeDeviceCmd.MarkFlagRequired("device-id")
+		panorama_describeDeviceCmd.Flags().String("device-id", "", "The device's ID.")
+		panorama_describeDeviceCmd.MarkFlagRequired("device-id")
+	})
 	panoramaCmd.AddCommand(panorama_describeDeviceCmd)
 }

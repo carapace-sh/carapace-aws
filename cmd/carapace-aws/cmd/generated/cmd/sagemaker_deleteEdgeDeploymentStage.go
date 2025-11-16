@@ -12,11 +12,13 @@ var sagemaker_deleteEdgeDeploymentStageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteEdgeDeploymentStageCmd).Standalone()
+	carapace.Gen(sagemaker_deleteEdgeDeploymentStageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteEdgeDeploymentStageCmd).Standalone()
 
-	sagemaker_deleteEdgeDeploymentStageCmd.Flags().String("edge-deployment-plan-name", "", "The name of the edge deployment plan from which the stage will be deleted.")
-	sagemaker_deleteEdgeDeploymentStageCmd.Flags().String("stage-name", "", "The name of the stage.")
-	sagemaker_deleteEdgeDeploymentStageCmd.MarkFlagRequired("edge-deployment-plan-name")
-	sagemaker_deleteEdgeDeploymentStageCmd.MarkFlagRequired("stage-name")
+		sagemaker_deleteEdgeDeploymentStageCmd.Flags().String("edge-deployment-plan-name", "", "The name of the edge deployment plan from which the stage will be deleted.")
+		sagemaker_deleteEdgeDeploymentStageCmd.Flags().String("stage-name", "", "The name of the stage.")
+		sagemaker_deleteEdgeDeploymentStageCmd.MarkFlagRequired("edge-deployment-plan-name")
+		sagemaker_deleteEdgeDeploymentStageCmd.MarkFlagRequired("stage-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteEdgeDeploymentStageCmd)
 }

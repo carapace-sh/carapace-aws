@@ -12,10 +12,12 @@ var servicecatalog_describePortfolioCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_describePortfolioCmd).Standalone()
+	carapace.Gen(servicecatalog_describePortfolioCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_describePortfolioCmd).Standalone()
 
-	servicecatalog_describePortfolioCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_describePortfolioCmd.Flags().String("id", "", "The portfolio identifier.")
-	servicecatalog_describePortfolioCmd.MarkFlagRequired("id")
+		servicecatalog_describePortfolioCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_describePortfolioCmd.Flags().String("id", "", "The portfolio identifier.")
+		servicecatalog_describePortfolioCmd.MarkFlagRequired("id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_describePortfolioCmd)
 }

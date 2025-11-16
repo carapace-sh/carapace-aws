@@ -12,12 +12,14 @@ var cloudfront_updateOriginAccessControl2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_updateOriginAccessControl2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_updateOriginAccessControl2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_updateOriginAccessControl2020_05_31Cmd).Standalone()
 
-	cloudfront_updateOriginAccessControl2020_05_31Cmd.Flags().String("id", "", "The unique identifier of the origin access control that you are updating.")
-	cloudfront_updateOriginAccessControl2020_05_31Cmd.Flags().String("if-match", "", "The current version (`ETag` value) of the origin access control that you are updating.")
-	cloudfront_updateOriginAccessControl2020_05_31Cmd.Flags().String("origin-access-control-config", "", "An origin access control.")
-	cloudfront_updateOriginAccessControl2020_05_31Cmd.MarkFlagRequired("id")
-	cloudfront_updateOriginAccessControl2020_05_31Cmd.MarkFlagRequired("origin-access-control-config")
+		cloudfront_updateOriginAccessControl2020_05_31Cmd.Flags().String("id", "", "The unique identifier of the origin access control that you are updating.")
+		cloudfront_updateOriginAccessControl2020_05_31Cmd.Flags().String("if-match", "", "The current version (`ETag` value) of the origin access control that you are updating.")
+		cloudfront_updateOriginAccessControl2020_05_31Cmd.Flags().String("origin-access-control-config", "", "An origin access control.")
+		cloudfront_updateOriginAccessControl2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_updateOriginAccessControl2020_05_31Cmd.MarkFlagRequired("origin-access-control-config")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_updateOriginAccessControl2020_05_31Cmd)
 }

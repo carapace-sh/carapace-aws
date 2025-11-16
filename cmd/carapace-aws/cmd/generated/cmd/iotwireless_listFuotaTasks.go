@@ -12,9 +12,11 @@ var iotwireless_listFuotaTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_listFuotaTasksCmd).Standalone()
+	carapace.Gen(iotwireless_listFuotaTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_listFuotaTasksCmd).Standalone()
 
-	iotwireless_listFuotaTasksCmd.Flags().String("max-results", "", "")
-	iotwireless_listFuotaTasksCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+		iotwireless_listFuotaTasksCmd.Flags().String("max-results", "", "")
+		iotwireless_listFuotaTasksCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_listFuotaTasksCmd)
 }

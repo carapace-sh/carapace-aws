@@ -12,12 +12,14 @@ var s3_deleteBucketInventoryConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_deleteBucketInventoryConfigurationCmd).Standalone()
+	carapace.Gen(s3_deleteBucketInventoryConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_deleteBucketInventoryConfigurationCmd).Standalone()
 
-	s3_deleteBucketInventoryConfigurationCmd.Flags().String("bucket", "", "The name of the bucket containing the inventory configuration to delete.")
-	s3_deleteBucketInventoryConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_deleteBucketInventoryConfigurationCmd.Flags().String("id", "", "The ID used to identify the inventory configuration.")
-	s3_deleteBucketInventoryConfigurationCmd.MarkFlagRequired("bucket")
-	s3_deleteBucketInventoryConfigurationCmd.MarkFlagRequired("id")
+		s3_deleteBucketInventoryConfigurationCmd.Flags().String("bucket", "", "The name of the bucket containing the inventory configuration to delete.")
+		s3_deleteBucketInventoryConfigurationCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_deleteBucketInventoryConfigurationCmd.Flags().String("id", "", "The ID used to identify the inventory configuration.")
+		s3_deleteBucketInventoryConfigurationCmd.MarkFlagRequired("bucket")
+		s3_deleteBucketInventoryConfigurationCmd.MarkFlagRequired("id")
+	})
 	s3Cmd.AddCommand(s3_deleteBucketInventoryConfigurationCmd)
 }

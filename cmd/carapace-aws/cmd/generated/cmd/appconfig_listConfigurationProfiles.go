@@ -12,12 +12,14 @@ var appconfig_listConfigurationProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_listConfigurationProfilesCmd).Standalone()
+	carapace.Gen(appconfig_listConfigurationProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_listConfigurationProfilesCmd).Standalone()
 
-	appconfig_listConfigurationProfilesCmd.Flags().String("application-id", "", "The application ID.")
-	appconfig_listConfigurationProfilesCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	appconfig_listConfigurationProfilesCmd.Flags().String("next-token", "", "A token to start the list.")
-	appconfig_listConfigurationProfilesCmd.Flags().String("type", "", "A filter based on the type of configurations that the configuration profile contains.")
-	appconfig_listConfigurationProfilesCmd.MarkFlagRequired("application-id")
+		appconfig_listConfigurationProfilesCmd.Flags().String("application-id", "", "The application ID.")
+		appconfig_listConfigurationProfilesCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		appconfig_listConfigurationProfilesCmd.Flags().String("next-token", "", "A token to start the list.")
+		appconfig_listConfigurationProfilesCmd.Flags().String("type", "", "A filter based on the type of configurations that the configuration profile contains.")
+		appconfig_listConfigurationProfilesCmd.MarkFlagRequired("application-id")
+	})
 	appconfigCmd.AddCommand(appconfig_listConfigurationProfilesCmd)
 }

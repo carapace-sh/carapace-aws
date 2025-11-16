@@ -12,11 +12,13 @@ var qconnect_removeAssistantAiagentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_removeAssistantAiagentCmd).Standalone()
+	carapace.Gen(qconnect_removeAssistantAiagentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_removeAssistantAiagentCmd).Standalone()
 
-	qconnect_removeAssistantAiagentCmd.Flags().String("ai-agent-type", "", "The type of the AI Agent being removed for use by default from the Amazon Q in Connect Assistant.")
-	qconnect_removeAssistantAiagentCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
-	qconnect_removeAssistantAiagentCmd.MarkFlagRequired("ai-agent-type")
-	qconnect_removeAssistantAiagentCmd.MarkFlagRequired("assistant-id")
+		qconnect_removeAssistantAiagentCmd.Flags().String("ai-agent-type", "", "The type of the AI Agent being removed for use by default from the Amazon Q in Connect Assistant.")
+		qconnect_removeAssistantAiagentCmd.Flags().String("assistant-id", "", "The identifier of the Amazon Q in Connect assistant.")
+		qconnect_removeAssistantAiagentCmd.MarkFlagRequired("ai-agent-type")
+		qconnect_removeAssistantAiagentCmd.MarkFlagRequired("assistant-id")
+	})
 	qconnectCmd.AddCommand(qconnect_removeAssistantAiagentCmd)
 }

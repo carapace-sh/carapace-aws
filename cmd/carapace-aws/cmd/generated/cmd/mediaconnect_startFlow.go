@@ -12,9 +12,11 @@ var mediaconnect_startFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_startFlowCmd).Standalone()
+	carapace.Gen(mediaconnect_startFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_startFlowCmd).Standalone()
 
-	mediaconnect_startFlowCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to start.")
-	mediaconnect_startFlowCmd.MarkFlagRequired("flow-arn")
+		mediaconnect_startFlowCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to start.")
+		mediaconnect_startFlowCmd.MarkFlagRequired("flow-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_startFlowCmd)
 }

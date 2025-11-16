@@ -12,9 +12,11 @@ var cloudtrail_disableFederationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_disableFederationCmd).Standalone()
+	carapace.Gen(cloudtrail_disableFederationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_disableFederationCmd).Standalone()
 
-	cloudtrail_disableFederationCmd.Flags().String("event-data-store", "", "The ARN (or ID suffix of the ARN) of the event data store for which you want to disable Lake query federation.")
-	cloudtrail_disableFederationCmd.MarkFlagRequired("event-data-store")
+		cloudtrail_disableFederationCmd.Flags().String("event-data-store", "", "The ARN (or ID suffix of the ARN) of the event data store for which you want to disable Lake query federation.")
+		cloudtrail_disableFederationCmd.MarkFlagRequired("event-data-store")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_disableFederationCmd)
 }

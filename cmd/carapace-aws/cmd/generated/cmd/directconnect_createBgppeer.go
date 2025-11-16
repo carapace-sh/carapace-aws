@@ -12,9 +12,11 @@ var directconnect_createBgppeerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_createBgppeerCmd).Standalone()
+	carapace.Gen(directconnect_createBgppeerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_createBgppeerCmd).Standalone()
 
-	directconnect_createBgppeerCmd.Flags().String("new-bgppeer", "", "Information about the BGP peer.")
-	directconnect_createBgppeerCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
+		directconnect_createBgppeerCmd.Flags().String("new-bgppeer", "", "Information about the BGP peer.")
+		directconnect_createBgppeerCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface.")
+	})
 	directconnectCmd.AddCommand(directconnect_createBgppeerCmd)
 }

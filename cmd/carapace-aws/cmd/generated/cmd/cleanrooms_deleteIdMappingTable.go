@@ -12,11 +12,13 @@ var cleanrooms_deleteIdMappingTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_deleteIdMappingTableCmd).Standalone()
+	carapace.Gen(cleanrooms_deleteIdMappingTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_deleteIdMappingTableCmd).Standalone()
 
-	cleanrooms_deleteIdMappingTableCmd.Flags().String("id-mapping-table-identifier", "", "The unique identifier of the ID mapping table that you want to delete.")
-	cleanrooms_deleteIdMappingTableCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID mapping table that you want to delete.")
-	cleanrooms_deleteIdMappingTableCmd.MarkFlagRequired("id-mapping-table-identifier")
-	cleanrooms_deleteIdMappingTableCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_deleteIdMappingTableCmd.Flags().String("id-mapping-table-identifier", "", "The unique identifier of the ID mapping table that you want to delete.")
+		cleanrooms_deleteIdMappingTableCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID mapping table that you want to delete.")
+		cleanrooms_deleteIdMappingTableCmd.MarkFlagRequired("id-mapping-table-identifier")
+		cleanrooms_deleteIdMappingTableCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_deleteIdMappingTableCmd)
 }

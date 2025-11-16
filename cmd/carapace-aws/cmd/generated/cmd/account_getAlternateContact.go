@@ -12,10 +12,12 @@ var account_getAlternateContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(account_getAlternateContactCmd).Standalone()
+	carapace.Gen(account_getAlternateContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(account_getAlternateContactCmd).Standalone()
 
-	account_getAlternateContactCmd.Flags().String("account-id", "", "Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
-	account_getAlternateContactCmd.Flags().String("alternate-contact-type", "", "Specifies which alternate contact you want to retrieve.")
-	account_getAlternateContactCmd.MarkFlagRequired("alternate-contact-type")
+		account_getAlternateContactCmd.Flags().String("account-id", "", "Specifies the 12 digit account ID number of the Amazon Web Services account that you want to access or modify with this operation.")
+		account_getAlternateContactCmd.Flags().String("alternate-contact-type", "", "Specifies which alternate contact you want to retrieve.")
+		account_getAlternateContactCmd.MarkFlagRequired("alternate-contact-type")
+	})
 	accountCmd.AddCommand(account_getAlternateContactCmd)
 }

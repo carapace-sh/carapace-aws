@@ -12,10 +12,12 @@ var iot_updateThingTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateThingTypeCmd).Standalone()
+	carapace.Gen(iot_updateThingTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateThingTypeCmd).Standalone()
 
-	iot_updateThingTypeCmd.Flags().String("thing-type-name", "", "The name of a thing type.")
-	iot_updateThingTypeCmd.Flags().String("thing-type-properties", "", "")
-	iot_updateThingTypeCmd.MarkFlagRequired("thing-type-name")
+		iot_updateThingTypeCmd.Flags().String("thing-type-name", "", "The name of a thing type.")
+		iot_updateThingTypeCmd.Flags().String("thing-type-properties", "", "")
+		iot_updateThingTypeCmd.MarkFlagRequired("thing-type-name")
+	})
 	iotCmd.AddCommand(iot_updateThingTypeCmd)
 }

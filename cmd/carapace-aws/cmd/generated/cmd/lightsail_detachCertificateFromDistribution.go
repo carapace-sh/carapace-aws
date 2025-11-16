@@ -12,9 +12,11 @@ var lightsail_detachCertificateFromDistributionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_detachCertificateFromDistributionCmd).Standalone()
+	carapace.Gen(lightsail_detachCertificateFromDistributionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_detachCertificateFromDistributionCmd).Standalone()
 
-	lightsail_detachCertificateFromDistributionCmd.Flags().String("distribution-name", "", "The name of the distribution from which to detach the certificate.")
-	lightsail_detachCertificateFromDistributionCmd.MarkFlagRequired("distribution-name")
+		lightsail_detachCertificateFromDistributionCmd.Flags().String("distribution-name", "", "The name of the distribution from which to detach the certificate.")
+		lightsail_detachCertificateFromDistributionCmd.MarkFlagRequired("distribution-name")
+	})
 	lightsailCmd.AddCommand(lightsail_detachCertificateFromDistributionCmd)
 }

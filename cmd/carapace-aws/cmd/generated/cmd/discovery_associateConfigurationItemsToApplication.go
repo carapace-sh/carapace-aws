@@ -12,11 +12,13 @@ var discovery_associateConfigurationItemsToApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_associateConfigurationItemsToApplicationCmd).Standalone()
+	carapace.Gen(discovery_associateConfigurationItemsToApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_associateConfigurationItemsToApplicationCmd).Standalone()
 
-	discovery_associateConfigurationItemsToApplicationCmd.Flags().String("application-configuration-id", "", "The configuration ID of an application with which items are to be associated.")
-	discovery_associateConfigurationItemsToApplicationCmd.Flags().String("configuration-ids", "", "The ID of each configuration item to be associated with an application.")
-	discovery_associateConfigurationItemsToApplicationCmd.MarkFlagRequired("application-configuration-id")
-	discovery_associateConfigurationItemsToApplicationCmd.MarkFlagRequired("configuration-ids")
+		discovery_associateConfigurationItemsToApplicationCmd.Flags().String("application-configuration-id", "", "The configuration ID of an application with which items are to be associated.")
+		discovery_associateConfigurationItemsToApplicationCmd.Flags().String("configuration-ids", "", "The ID of each configuration item to be associated with an application.")
+		discovery_associateConfigurationItemsToApplicationCmd.MarkFlagRequired("application-configuration-id")
+		discovery_associateConfigurationItemsToApplicationCmd.MarkFlagRequired("configuration-ids")
+	})
 	discoveryCmd.AddCommand(discovery_associateConfigurationItemsToApplicationCmd)
 }

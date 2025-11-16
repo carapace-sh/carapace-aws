@@ -12,11 +12,13 @@ var workspacesThinClient_updateSoftwareSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClient_updateSoftwareSetCmd).Standalone()
+	carapace.Gen(workspacesThinClient_updateSoftwareSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClient_updateSoftwareSetCmd).Standalone()
 
-	workspacesThinClient_updateSoftwareSetCmd.Flags().String("id", "", "The ID of the software set to update.")
-	workspacesThinClient_updateSoftwareSetCmd.Flags().String("validation-status", "", "An option to define if the software set has been validated.")
-	workspacesThinClient_updateSoftwareSetCmd.MarkFlagRequired("id")
-	workspacesThinClient_updateSoftwareSetCmd.MarkFlagRequired("validation-status")
+		workspacesThinClient_updateSoftwareSetCmd.Flags().String("id", "", "The ID of the software set to update.")
+		workspacesThinClient_updateSoftwareSetCmd.Flags().String("validation-status", "", "An option to define if the software set has been validated.")
+		workspacesThinClient_updateSoftwareSetCmd.MarkFlagRequired("id")
+		workspacesThinClient_updateSoftwareSetCmd.MarkFlagRequired("validation-status")
+	})
 	workspacesThinClientCmd.AddCommand(workspacesThinClient_updateSoftwareSetCmd)
 }

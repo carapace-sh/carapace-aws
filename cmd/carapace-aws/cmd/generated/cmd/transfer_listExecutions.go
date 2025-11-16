@@ -12,11 +12,13 @@ var transfer_listExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_listExecutionsCmd).Standalone()
+	carapace.Gen(transfer_listExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_listExecutionsCmd).Standalone()
 
-	transfer_listExecutionsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
-	transfer_listExecutionsCmd.Flags().String("next-token", "", "`ListExecutions` returns the `NextToken` parameter in the output.")
-	transfer_listExecutionsCmd.Flags().String("workflow-id", "", "A unique identifier for the workflow.")
-	transfer_listExecutionsCmd.MarkFlagRequired("workflow-id")
+		transfer_listExecutionsCmd.Flags().String("max-results", "", "The maximum number of items to return.")
+		transfer_listExecutionsCmd.Flags().String("next-token", "", "`ListExecutions` returns the `NextToken` parameter in the output.")
+		transfer_listExecutionsCmd.Flags().String("workflow-id", "", "A unique identifier for the workflow.")
+		transfer_listExecutionsCmd.MarkFlagRequired("workflow-id")
+	})
 	transferCmd.AddCommand(transfer_listExecutionsCmd)
 }

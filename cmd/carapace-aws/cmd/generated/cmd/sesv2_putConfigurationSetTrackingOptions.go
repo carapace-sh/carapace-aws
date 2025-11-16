@@ -12,11 +12,13 @@ var sesv2_putConfigurationSetTrackingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putConfigurationSetTrackingOptionsCmd).Standalone()
+	carapace.Gen(sesv2_putConfigurationSetTrackingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putConfigurationSetTrackingOptionsCmd).Standalone()
 
-	sesv2_putConfigurationSetTrackingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
-	sesv2_putConfigurationSetTrackingOptionsCmd.Flags().String("custom-redirect-domain", "", "The domain to use to track open and click events.")
-	sesv2_putConfigurationSetTrackingOptionsCmd.Flags().String("https-policy", "", "")
-	sesv2_putConfigurationSetTrackingOptionsCmd.MarkFlagRequired("configuration-set-name")
+		sesv2_putConfigurationSetTrackingOptionsCmd.Flags().String("configuration-set-name", "", "The name of the configuration set.")
+		sesv2_putConfigurationSetTrackingOptionsCmd.Flags().String("custom-redirect-domain", "", "The domain to use to track open and click events.")
+		sesv2_putConfigurationSetTrackingOptionsCmd.Flags().String("https-policy", "", "")
+		sesv2_putConfigurationSetTrackingOptionsCmd.MarkFlagRequired("configuration-set-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_putConfigurationSetTrackingOptionsCmd)
 }

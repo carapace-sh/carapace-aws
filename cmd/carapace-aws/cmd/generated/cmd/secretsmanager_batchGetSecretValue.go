@@ -12,11 +12,13 @@ var secretsmanager_batchGetSecretValueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_batchGetSecretValueCmd).Standalone()
+	carapace.Gen(secretsmanager_batchGetSecretValueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_batchGetSecretValueCmd).Standalone()
 
-	secretsmanager_batchGetSecretValueCmd.Flags().String("filters", "", "The filters to choose which secrets to retrieve.")
-	secretsmanager_batchGetSecretValueCmd.Flags().String("max-results", "", "The number of results to include in the response.")
-	secretsmanager_batchGetSecretValueCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous call did not show all results.")
-	secretsmanager_batchGetSecretValueCmd.Flags().String("secret-id-list", "", "The ARN or names of the secrets to retrieve.")
+		secretsmanager_batchGetSecretValueCmd.Flags().String("filters", "", "The filters to choose which secrets to retrieve.")
+		secretsmanager_batchGetSecretValueCmd.Flags().String("max-results", "", "The number of results to include in the response.")
+		secretsmanager_batchGetSecretValueCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous call did not show all results.")
+		secretsmanager_batchGetSecretValueCmd.Flags().String("secret-id-list", "", "The ARN or names of the secrets to retrieve.")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_batchGetSecretValueCmd)
 }

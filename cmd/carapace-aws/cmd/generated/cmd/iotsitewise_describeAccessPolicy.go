@@ -12,9 +12,11 @@ var iotsitewise_describeAccessPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeAccessPolicyCmd).Standalone()
+	carapace.Gen(iotsitewise_describeAccessPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeAccessPolicyCmd).Standalone()
 
-	iotsitewise_describeAccessPolicyCmd.Flags().String("access-policy-id", "", "The ID of the access policy.")
-	iotsitewise_describeAccessPolicyCmd.MarkFlagRequired("access-policy-id")
+		iotsitewise_describeAccessPolicyCmd.Flags().String("access-policy-id", "", "The ID of the access policy.")
+		iotsitewise_describeAccessPolicyCmd.MarkFlagRequired("access-policy-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeAccessPolicyCmd)
 }

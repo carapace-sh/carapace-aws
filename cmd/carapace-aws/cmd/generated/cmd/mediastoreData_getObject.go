@@ -12,10 +12,12 @@ var mediastoreData_getObjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastoreData_getObjectCmd).Standalone()
+	carapace.Gen(mediastoreData_getObjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastoreData_getObjectCmd).Standalone()
 
-	mediastoreData_getObjectCmd.Flags().String("path", "", "The path (including the file name) where the object is stored in the container.")
-	mediastoreData_getObjectCmd.Flags().String("range", "", "The range bytes of an object to retrieve.")
-	mediastoreData_getObjectCmd.MarkFlagRequired("path")
+		mediastoreData_getObjectCmd.Flags().String("path", "", "The path (including the file name) where the object is stored in the container.")
+		mediastoreData_getObjectCmd.Flags().String("range", "", "The range bytes of an object to retrieve.")
+		mediastoreData_getObjectCmd.MarkFlagRequired("path")
+	})
 	mediastoreDataCmd.AddCommand(mediastoreData_getObjectCmd)
 }

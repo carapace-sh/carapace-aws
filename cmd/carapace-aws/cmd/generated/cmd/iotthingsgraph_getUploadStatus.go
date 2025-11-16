@@ -12,9 +12,11 @@ var iotthingsgraph_getUploadStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_getUploadStatusCmd).Standalone()
+	carapace.Gen(iotthingsgraph_getUploadStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_getUploadStatusCmd).Standalone()
 
-	iotthingsgraph_getUploadStatusCmd.Flags().String("upload-id", "", "The ID of the upload.")
-	iotthingsgraph_getUploadStatusCmd.MarkFlagRequired("upload-id")
+		iotthingsgraph_getUploadStatusCmd.Flags().String("upload-id", "", "The ID of the upload.")
+		iotthingsgraph_getUploadStatusCmd.MarkFlagRequired("upload-id")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_getUploadStatusCmd)
 }

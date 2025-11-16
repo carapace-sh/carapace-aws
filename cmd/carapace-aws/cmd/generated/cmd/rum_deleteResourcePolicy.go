@@ -12,10 +12,12 @@ var rum_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rum_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(rum_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rum_deleteResourcePolicyCmd).Standalone()
 
-	rum_deleteResourcePolicyCmd.Flags().String("name", "", "The app monitor that you want to remove the resource policy from.")
-	rum_deleteResourcePolicyCmd.Flags().String("policy-revision-id", "", "Specifies a specific policy revision to delete.")
-	rum_deleteResourcePolicyCmd.MarkFlagRequired("name")
+		rum_deleteResourcePolicyCmd.Flags().String("name", "", "The app monitor that you want to remove the resource policy from.")
+		rum_deleteResourcePolicyCmd.Flags().String("policy-revision-id", "", "Specifies a specific policy revision to delete.")
+		rum_deleteResourcePolicyCmd.MarkFlagRequired("name")
+	})
 	rumCmd.AddCommand(rum_deleteResourcePolicyCmd)
 }

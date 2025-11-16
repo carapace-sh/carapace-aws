@@ -12,12 +12,14 @@ var marketplaceEntitlement_getEntitlementsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceEntitlement_getEntitlementsCmd).Standalone()
+	carapace.Gen(marketplaceEntitlement_getEntitlementsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceEntitlement_getEntitlementsCmd).Standalone()
 
-	marketplaceEntitlement_getEntitlementsCmd.Flags().String("filter", "", "Filter is used to return entitlements for a specific customer or for a specific dimension.")
-	marketplaceEntitlement_getEntitlementsCmd.Flags().String("max-results", "", "The maximum number of items to retrieve from the GetEntitlements operation.")
-	marketplaceEntitlement_getEntitlementsCmd.Flags().String("next-token", "", "For paginated calls to GetEntitlements, pass the NextToken from the previous GetEntitlementsResult.")
-	marketplaceEntitlement_getEntitlementsCmd.Flags().String("product-code", "", "Product code is used to uniquely identify a product in AWS Marketplace.")
-	marketplaceEntitlement_getEntitlementsCmd.MarkFlagRequired("product-code")
+		marketplaceEntitlement_getEntitlementsCmd.Flags().String("filter", "", "Filter is used to return entitlements for a specific customer or for a specific dimension.")
+		marketplaceEntitlement_getEntitlementsCmd.Flags().String("max-results", "", "The maximum number of items to retrieve from the GetEntitlements operation.")
+		marketplaceEntitlement_getEntitlementsCmd.Flags().String("next-token", "", "For paginated calls to GetEntitlements, pass the NextToken from the previous GetEntitlementsResult.")
+		marketplaceEntitlement_getEntitlementsCmd.Flags().String("product-code", "", "Product code is used to uniquely identify a product in AWS Marketplace.")
+		marketplaceEntitlement_getEntitlementsCmd.MarkFlagRequired("product-code")
+	})
 	marketplaceEntitlementCmd.AddCommand(marketplaceEntitlement_getEntitlementsCmd)
 }

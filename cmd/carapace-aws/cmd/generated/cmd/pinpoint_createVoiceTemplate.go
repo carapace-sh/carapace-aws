@@ -12,11 +12,13 @@ var pinpoint_createVoiceTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_createVoiceTemplateCmd).Standalone()
+	carapace.Gen(pinpoint_createVoiceTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_createVoiceTemplateCmd).Standalone()
 
-	pinpoint_createVoiceTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_createVoiceTemplateCmd.Flags().String("voice-template-request", "", "")
-	pinpoint_createVoiceTemplateCmd.MarkFlagRequired("template-name")
-	pinpoint_createVoiceTemplateCmd.MarkFlagRequired("voice-template-request")
+		pinpoint_createVoiceTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_createVoiceTemplateCmd.Flags().String("voice-template-request", "", "")
+		pinpoint_createVoiceTemplateCmd.MarkFlagRequired("template-name")
+		pinpoint_createVoiceTemplateCmd.MarkFlagRequired("voice-template-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_createVoiceTemplateCmd)
 }

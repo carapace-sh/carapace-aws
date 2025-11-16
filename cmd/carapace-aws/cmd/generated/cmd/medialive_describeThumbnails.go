@@ -12,13 +12,15 @@ var medialive_describeThumbnailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeThumbnailsCmd).Standalone()
+	carapace.Gen(medialive_describeThumbnailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeThumbnailsCmd).Standalone()
 
-	medialive_describeThumbnailsCmd.Flags().String("channel-id", "", "Unique ID of the channel")
-	medialive_describeThumbnailsCmd.Flags().String("pipeline-id", "", "Pipeline ID (\"0\" or \"1\")")
-	medialive_describeThumbnailsCmd.Flags().String("thumbnail-type", "", "thumbnail type")
-	medialive_describeThumbnailsCmd.MarkFlagRequired("channel-id")
-	medialive_describeThumbnailsCmd.MarkFlagRequired("pipeline-id")
-	medialive_describeThumbnailsCmd.MarkFlagRequired("thumbnail-type")
+		medialive_describeThumbnailsCmd.Flags().String("channel-id", "", "Unique ID of the channel")
+		medialive_describeThumbnailsCmd.Flags().String("pipeline-id", "", "Pipeline ID (\"0\" or \"1\")")
+		medialive_describeThumbnailsCmd.Flags().String("thumbnail-type", "", "thumbnail type")
+		medialive_describeThumbnailsCmd.MarkFlagRequired("channel-id")
+		medialive_describeThumbnailsCmd.MarkFlagRequired("pipeline-id")
+		medialive_describeThumbnailsCmd.MarkFlagRequired("thumbnail-type")
+	})
 	medialiveCmd.AddCommand(medialive_describeThumbnailsCmd)
 }

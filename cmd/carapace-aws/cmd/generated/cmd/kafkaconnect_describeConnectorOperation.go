@@ -12,9 +12,11 @@ var kafkaconnect_describeConnectorOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnect_describeConnectorOperationCmd).Standalone()
+	carapace.Gen(kafkaconnect_describeConnectorOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnect_describeConnectorOperationCmd).Standalone()
 
-	kafkaconnect_describeConnectorOperationCmd.Flags().String("connector-operation-arn", "", "ARN of the connector operation to be described.")
-	kafkaconnect_describeConnectorOperationCmd.MarkFlagRequired("connector-operation-arn")
+		kafkaconnect_describeConnectorOperationCmd.Flags().String("connector-operation-arn", "", "ARN of the connector operation to be described.")
+		kafkaconnect_describeConnectorOperationCmd.MarkFlagRequired("connector-operation-arn")
+	})
 	kafkaconnectCmd.AddCommand(kafkaconnect_describeConnectorOperationCmd)
 }

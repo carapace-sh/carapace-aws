@@ -12,9 +12,11 @@ var autoscaling_createOrUpdateTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_createOrUpdateTagsCmd).Standalone()
+	carapace.Gen(autoscaling_createOrUpdateTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_createOrUpdateTagsCmd).Standalone()
 
-	autoscaling_createOrUpdateTagsCmd.Flags().String("tags", "", "One or more tags.")
-	autoscaling_createOrUpdateTagsCmd.MarkFlagRequired("tags")
+		autoscaling_createOrUpdateTagsCmd.Flags().String("tags", "", "One or more tags.")
+		autoscaling_createOrUpdateTagsCmd.MarkFlagRequired("tags")
+	})
 	autoscalingCmd.AddCommand(autoscaling_createOrUpdateTagsCmd)
 }

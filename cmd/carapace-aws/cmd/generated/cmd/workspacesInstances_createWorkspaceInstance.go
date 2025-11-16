@@ -12,11 +12,13 @@ var workspacesInstances_createWorkspaceInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_createWorkspaceInstanceCmd).Standalone()
+	carapace.Gen(workspacesInstances_createWorkspaceInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_createWorkspaceInstanceCmd).Standalone()
 
-	workspacesInstances_createWorkspaceInstanceCmd.Flags().String("client-token", "", "Unique token to ensure idempotent instance creation, preventing duplicate workspace launches.")
-	workspacesInstances_createWorkspaceInstanceCmd.Flags().String("managed-instance", "", "Comprehensive configuration settings for the WorkSpaces Instance, including network, compute, and storage parameters.")
-	workspacesInstances_createWorkspaceInstanceCmd.Flags().String("tags", "", "Optional metadata tags for categorizing and managing WorkSpaces Instances.")
-	workspacesInstances_createWorkspaceInstanceCmd.MarkFlagRequired("managed-instance")
+		workspacesInstances_createWorkspaceInstanceCmd.Flags().String("client-token", "", "Unique token to ensure idempotent instance creation, preventing duplicate workspace launches.")
+		workspacesInstances_createWorkspaceInstanceCmd.Flags().String("managed-instance", "", "Comprehensive configuration settings for the WorkSpaces Instance, including network, compute, and storage parameters.")
+		workspacesInstances_createWorkspaceInstanceCmd.Flags().String("tags", "", "Optional metadata tags for categorizing and managing WorkSpaces Instances.")
+		workspacesInstances_createWorkspaceInstanceCmd.MarkFlagRequired("managed-instance")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_createWorkspaceInstanceCmd)
 }

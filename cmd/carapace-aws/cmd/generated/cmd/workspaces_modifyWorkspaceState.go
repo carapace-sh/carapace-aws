@@ -12,11 +12,13 @@ var workspaces_modifyWorkspaceStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_modifyWorkspaceStateCmd).Standalone()
+	carapace.Gen(workspaces_modifyWorkspaceStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_modifyWorkspaceStateCmd).Standalone()
 
-	workspaces_modifyWorkspaceStateCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
-	workspaces_modifyWorkspaceStateCmd.Flags().String("workspace-state", "", "The WorkSpace state.")
-	workspaces_modifyWorkspaceStateCmd.MarkFlagRequired("workspace-id")
-	workspaces_modifyWorkspaceStateCmd.MarkFlagRequired("workspace-state")
+		workspaces_modifyWorkspaceStateCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
+		workspaces_modifyWorkspaceStateCmd.Flags().String("workspace-state", "", "The WorkSpace state.")
+		workspaces_modifyWorkspaceStateCmd.MarkFlagRequired("workspace-id")
+		workspaces_modifyWorkspaceStateCmd.MarkFlagRequired("workspace-state")
+	})
 	workspacesCmd.AddCommand(workspaces_modifyWorkspaceStateCmd)
 }

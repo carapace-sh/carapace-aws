@@ -12,10 +12,12 @@ var importexport_getStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(importexport_getStatusCmd).Standalone()
+	carapace.Gen(importexport_getStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(importexport_getStatusCmd).Standalone()
 
-	importexport_getStatusCmd.Flags().String("apiversion", "", "")
-	importexport_getStatusCmd.Flags().String("job-id", "", "")
-	importexport_getStatusCmd.MarkFlagRequired("job-id")
+		importexport_getStatusCmd.Flags().String("apiversion", "", "")
+		importexport_getStatusCmd.Flags().String("job-id", "", "")
+		importexport_getStatusCmd.MarkFlagRequired("job-id")
+	})
 	importexportCmd.AddCommand(importexport_getStatusCmd)
 }

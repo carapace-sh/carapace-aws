@@ -12,14 +12,16 @@ var servicecatalog_associatePrincipalWithPortfolioCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_associatePrincipalWithPortfolioCmd).Standalone()
+	carapace.Gen(servicecatalog_associatePrincipalWithPortfolioCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_associatePrincipalWithPortfolioCmd).Standalone()
 
-	servicecatalog_associatePrincipalWithPortfolioCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_associatePrincipalWithPortfolioCmd.Flags().String("portfolio-id", "", "The portfolio identifier.")
-	servicecatalog_associatePrincipalWithPortfolioCmd.Flags().String("principal-arn", "", "The ARN of the principal (user, role, or group).")
-	servicecatalog_associatePrincipalWithPortfolioCmd.Flags().String("principal-type", "", "The principal type.")
-	servicecatalog_associatePrincipalWithPortfolioCmd.MarkFlagRequired("portfolio-id")
-	servicecatalog_associatePrincipalWithPortfolioCmd.MarkFlagRequired("principal-arn")
-	servicecatalog_associatePrincipalWithPortfolioCmd.MarkFlagRequired("principal-type")
+		servicecatalog_associatePrincipalWithPortfolioCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_associatePrincipalWithPortfolioCmd.Flags().String("portfolio-id", "", "The portfolio identifier.")
+		servicecatalog_associatePrincipalWithPortfolioCmd.Flags().String("principal-arn", "", "The ARN of the principal (user, role, or group).")
+		servicecatalog_associatePrincipalWithPortfolioCmd.Flags().String("principal-type", "", "The principal type.")
+		servicecatalog_associatePrincipalWithPortfolioCmd.MarkFlagRequired("portfolio-id")
+		servicecatalog_associatePrincipalWithPortfolioCmd.MarkFlagRequired("principal-arn")
+		servicecatalog_associatePrincipalWithPortfolioCmd.MarkFlagRequired("principal-type")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_associatePrincipalWithPortfolioCmd)
 }

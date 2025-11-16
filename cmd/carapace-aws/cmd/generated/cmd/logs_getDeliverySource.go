@@ -12,9 +12,11 @@ var logs_getDeliverySourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_getDeliverySourceCmd).Standalone()
+	carapace.Gen(logs_getDeliverySourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_getDeliverySourceCmd).Standalone()
 
-	logs_getDeliverySourceCmd.Flags().String("name", "", "The name of the delivery source that you want to retrieve.")
-	logs_getDeliverySourceCmd.MarkFlagRequired("name")
+		logs_getDeliverySourceCmd.Flags().String("name", "", "The name of the delivery source that you want to retrieve.")
+		logs_getDeliverySourceCmd.MarkFlagRequired("name")
+	})
 	logsCmd.AddCommand(logs_getDeliverySourceCmd)
 }

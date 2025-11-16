@@ -12,11 +12,13 @@ var ivsRealtime_listIngestConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_listIngestConfigurationsCmd).Standalone()
+	carapace.Gen(ivsRealtime_listIngestConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_listIngestConfigurationsCmd).Standalone()
 
-	ivsRealtime_listIngestConfigurationsCmd.Flags().String("filter-by-stage-arn", "", "Filters the response list to match the specified stage ARN.")
-	ivsRealtime_listIngestConfigurationsCmd.Flags().String("filter-by-state", "", "Filters the response list to match the specified state.")
-	ivsRealtime_listIngestConfigurationsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
-	ivsRealtime_listIngestConfigurationsCmd.Flags().String("next-token", "", "The first IngestConfiguration to retrieve.")
+		ivsRealtime_listIngestConfigurationsCmd.Flags().String("filter-by-stage-arn", "", "Filters the response list to match the specified stage ARN.")
+		ivsRealtime_listIngestConfigurationsCmd.Flags().String("filter-by-state", "", "Filters the response list to match the specified state.")
+		ivsRealtime_listIngestConfigurationsCmd.Flags().String("max-results", "", "Maximum number of results to return.")
+		ivsRealtime_listIngestConfigurationsCmd.Flags().String("next-token", "", "The first IngestConfiguration to retrieve.")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_listIngestConfigurationsCmd)
 }

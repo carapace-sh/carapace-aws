@@ -12,11 +12,13 @@ var mediatailor_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediatailor_untagResourceCmd).Standalone()
+	carapace.Gen(mediatailor_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediatailor_untagResourceCmd).Standalone()
 
-	mediatailor_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to untag.")
-	mediatailor_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys associated with the resource.")
-	mediatailor_untagResourceCmd.MarkFlagRequired("resource-arn")
-	mediatailor_untagResourceCmd.MarkFlagRequired("tag-keys")
+		mediatailor_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to untag.")
+		mediatailor_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys associated with the resource.")
+		mediatailor_untagResourceCmd.MarkFlagRequired("resource-arn")
+		mediatailor_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	mediatailorCmd.AddCommand(mediatailor_untagResourceCmd)
 }

@@ -12,11 +12,13 @@ var gamelift_deregisterComputeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deregisterComputeCmd).Standalone()
+	carapace.Gen(gamelift_deregisterComputeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deregisterComputeCmd).Standalone()
 
-	gamelift_deregisterComputeCmd.Flags().String("compute-name", "", "The unique identifier of the compute resource to deregister.")
-	gamelift_deregisterComputeCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet the compute resource is currently registered to.")
-	gamelift_deregisterComputeCmd.MarkFlagRequired("compute-name")
-	gamelift_deregisterComputeCmd.MarkFlagRequired("fleet-id")
+		gamelift_deregisterComputeCmd.Flags().String("compute-name", "", "The unique identifier of the compute resource to deregister.")
+		gamelift_deregisterComputeCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet the compute resource is currently registered to.")
+		gamelift_deregisterComputeCmd.MarkFlagRequired("compute-name")
+		gamelift_deregisterComputeCmd.MarkFlagRequired("fleet-id")
+	})
 	gameliftCmd.AddCommand(gamelift_deregisterComputeCmd)
 }

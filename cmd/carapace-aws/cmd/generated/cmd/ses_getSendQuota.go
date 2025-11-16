@@ -12,7 +12,9 @@ var ses_getSendQuotaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_getSendQuotaCmd).Standalone()
+	carapace.Gen(ses_getSendQuotaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_getSendQuotaCmd).Standalone()
 
+	})
 	sesCmd.AddCommand(ses_getSendQuotaCmd)
 }

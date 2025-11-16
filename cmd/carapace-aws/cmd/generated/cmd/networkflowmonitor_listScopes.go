@@ -12,9 +12,11 @@ var networkflowmonitor_listScopesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_listScopesCmd).Standalone()
+	carapace.Gen(networkflowmonitor_listScopesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_listScopesCmd).Standalone()
 
-	networkflowmonitor_listScopesCmd.Flags().String("max-results", "", "The number of query results that you want to return with this call.")
-	networkflowmonitor_listScopesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		networkflowmonitor_listScopesCmd.Flags().String("max-results", "", "The number of query results that you want to return with this call.")
+		networkflowmonitor_listScopesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_listScopesCmd)
 }

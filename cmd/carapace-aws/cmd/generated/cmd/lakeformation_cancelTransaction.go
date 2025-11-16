@@ -12,9 +12,11 @@ var lakeformation_cancelTransactionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_cancelTransactionCmd).Standalone()
+	carapace.Gen(lakeformation_cancelTransactionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_cancelTransactionCmd).Standalone()
 
-	lakeformation_cancelTransactionCmd.Flags().String("transaction-id", "", "The transaction to cancel.")
-	lakeformation_cancelTransactionCmd.MarkFlagRequired("transaction-id")
+		lakeformation_cancelTransactionCmd.Flags().String("transaction-id", "", "The transaction to cancel.")
+		lakeformation_cancelTransactionCmd.MarkFlagRequired("transaction-id")
+	})
 	lakeformationCmd.AddCommand(lakeformation_cancelTransactionCmd)
 }

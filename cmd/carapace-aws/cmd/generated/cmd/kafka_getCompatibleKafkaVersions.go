@@ -12,8 +12,10 @@ var kafka_getCompatibleKafkaVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_getCompatibleKafkaVersionsCmd).Standalone()
+	carapace.Gen(kafka_getCompatibleKafkaVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_getCompatibleKafkaVersionsCmd).Standalone()
 
-	kafka_getCompatibleKafkaVersionsCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster check.")
+		kafka_getCompatibleKafkaVersionsCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) of the cluster check.")
+	})
 	kafkaCmd.AddCommand(kafka_getCompatibleKafkaVersionsCmd)
 }

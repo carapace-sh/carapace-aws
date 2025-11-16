@@ -12,9 +12,11 @@ var apigateway_getSdkTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getSdkTypeCmd).Standalone()
+	carapace.Gen(apigateway_getSdkTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getSdkTypeCmd).Standalone()
 
-	apigateway_getSdkTypeCmd.Flags().String("id", "", "The identifier of the queried SdkType instance.")
-	apigateway_getSdkTypeCmd.MarkFlagRequired("id")
+		apigateway_getSdkTypeCmd.Flags().String("id", "", "The identifier of the queried SdkType instance.")
+		apigateway_getSdkTypeCmd.MarkFlagRequired("id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getSdkTypeCmd)
 }

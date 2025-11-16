@@ -12,7 +12,9 @@ var amplifyuibuilderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifyuibuilderCmd).Standalone()
+	carapace.Gen(amplifyuibuilderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifyuibuilderCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(amplifyuibuilderCmd)
 }

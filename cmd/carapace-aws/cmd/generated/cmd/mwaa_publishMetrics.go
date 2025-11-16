@@ -12,11 +12,13 @@ var mwaa_publishMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mwaa_publishMetricsCmd).Standalone()
+	carapace.Gen(mwaa_publishMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mwaa_publishMetricsCmd).Standalone()
 
-	mwaa_publishMetricsCmd.Flags().String("environment-name", "", "**Internal only**.")
-	mwaa_publishMetricsCmd.Flags().String("metric-data", "", "**Internal only**.")
-	mwaa_publishMetricsCmd.MarkFlagRequired("environment-name")
-	mwaa_publishMetricsCmd.MarkFlagRequired("metric-data")
+		mwaa_publishMetricsCmd.Flags().String("environment-name", "", "**Internal only**.")
+		mwaa_publishMetricsCmd.Flags().String("metric-data", "", "**Internal only**.")
+		mwaa_publishMetricsCmd.MarkFlagRequired("environment-name")
+		mwaa_publishMetricsCmd.MarkFlagRequired("metric-data")
+	})
 	mwaaCmd.AddCommand(mwaa_publishMetricsCmd)
 }

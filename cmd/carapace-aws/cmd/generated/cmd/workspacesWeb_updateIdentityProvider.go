@@ -12,13 +12,15 @@ var workspacesWeb_updateIdentityProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_updateIdentityProviderCmd).Standalone()
+	carapace.Gen(workspacesWeb_updateIdentityProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_updateIdentityProviderCmd).Standalone()
 
-	workspacesWeb_updateIdentityProviderCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	workspacesWeb_updateIdentityProviderCmd.Flags().String("identity-provider-arn", "", "The ARN of the identity provider.")
-	workspacesWeb_updateIdentityProviderCmd.Flags().String("identity-provider-details", "", "The details of the identity provider.")
-	workspacesWeb_updateIdentityProviderCmd.Flags().String("identity-provider-name", "", "The name of the identity provider.")
-	workspacesWeb_updateIdentityProviderCmd.Flags().String("identity-provider-type", "", "The type of the identity provider.")
-	workspacesWeb_updateIdentityProviderCmd.MarkFlagRequired("identity-provider-arn")
+		workspacesWeb_updateIdentityProviderCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		workspacesWeb_updateIdentityProviderCmd.Flags().String("identity-provider-arn", "", "The ARN of the identity provider.")
+		workspacesWeb_updateIdentityProviderCmd.Flags().String("identity-provider-details", "", "The details of the identity provider.")
+		workspacesWeb_updateIdentityProviderCmd.Flags().String("identity-provider-name", "", "The name of the identity provider.")
+		workspacesWeb_updateIdentityProviderCmd.Flags().String("identity-provider-type", "", "The type of the identity provider.")
+		workspacesWeb_updateIdentityProviderCmd.MarkFlagRequired("identity-provider-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_updateIdentityProviderCmd)
 }

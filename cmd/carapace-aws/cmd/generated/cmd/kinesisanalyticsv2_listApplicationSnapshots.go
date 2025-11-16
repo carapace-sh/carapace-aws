@@ -12,11 +12,13 @@ var kinesisanalyticsv2_listApplicationSnapshotsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_listApplicationSnapshotsCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_listApplicationSnapshotsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_listApplicationSnapshotsCmd).Standalone()
 
-	kinesisanalyticsv2_listApplicationSnapshotsCmd.Flags().String("application-name", "", "The name of an existing application.")
-	kinesisanalyticsv2_listApplicationSnapshotsCmd.Flags().String("limit", "", "The maximum number of application snapshots to list.")
-	kinesisanalyticsv2_listApplicationSnapshotsCmd.Flags().String("next-token", "", "Use this parameter if you receive a `NextToken` response in a previous request that indicates that there is more output available.")
-	kinesisanalyticsv2_listApplicationSnapshotsCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_listApplicationSnapshotsCmd.Flags().String("application-name", "", "The name of an existing application.")
+		kinesisanalyticsv2_listApplicationSnapshotsCmd.Flags().String("limit", "", "The maximum number of application snapshots to list.")
+		kinesisanalyticsv2_listApplicationSnapshotsCmd.Flags().String("next-token", "", "Use this parameter if you receive a `NextToken` response in a previous request that indicates that there is more output available.")
+		kinesisanalyticsv2_listApplicationSnapshotsCmd.MarkFlagRequired("application-name")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_listApplicationSnapshotsCmd)
 }

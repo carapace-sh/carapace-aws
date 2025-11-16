@@ -12,11 +12,13 @@ var ds_listSchemaExtensionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_listSchemaExtensionsCmd).Standalone()
+	carapace.Gen(ds_listSchemaExtensionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_listSchemaExtensionsCmd).Standalone()
 
-	ds_listSchemaExtensionsCmd.Flags().String("directory-id", "", "The identifier of the directory from which to retrieve the schema extension information.")
-	ds_listSchemaExtensionsCmd.Flags().String("limit", "", "The maximum number of items to return.")
-	ds_listSchemaExtensionsCmd.Flags().String("next-token", "", "The `ListSchemaExtensions.NextToken` value from a previous call to `ListSchemaExtensions`.")
-	ds_listSchemaExtensionsCmd.MarkFlagRequired("directory-id")
+		ds_listSchemaExtensionsCmd.Flags().String("directory-id", "", "The identifier of the directory from which to retrieve the schema extension information.")
+		ds_listSchemaExtensionsCmd.Flags().String("limit", "", "The maximum number of items to return.")
+		ds_listSchemaExtensionsCmd.Flags().String("next-token", "", "The `ListSchemaExtensions.NextToken` value from a previous call to `ListSchemaExtensions`.")
+		ds_listSchemaExtensionsCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_listSchemaExtensionsCmd)
 }

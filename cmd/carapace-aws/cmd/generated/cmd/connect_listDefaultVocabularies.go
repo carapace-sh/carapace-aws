@@ -12,12 +12,14 @@ var connect_listDefaultVocabulariesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listDefaultVocabulariesCmd).Standalone()
+	carapace.Gen(connect_listDefaultVocabulariesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listDefaultVocabulariesCmd).Standalone()
 
-	connect_listDefaultVocabulariesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listDefaultVocabulariesCmd.Flags().String("language-code", "", "The language code of the vocabulary entries.")
-	connect_listDefaultVocabulariesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listDefaultVocabulariesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listDefaultVocabulariesCmd.MarkFlagRequired("instance-id")
+		connect_listDefaultVocabulariesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listDefaultVocabulariesCmd.Flags().String("language-code", "", "The language code of the vocabulary entries.")
+		connect_listDefaultVocabulariesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listDefaultVocabulariesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listDefaultVocabulariesCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listDefaultVocabulariesCmd)
 }

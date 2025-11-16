@@ -12,9 +12,11 @@ var xray_putTraceSegmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_putTraceSegmentsCmd).Standalone()
+	carapace.Gen(xray_putTraceSegmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_putTraceSegmentsCmd).Standalone()
 
-	xray_putTraceSegmentsCmd.Flags().String("trace-segment-documents", "", "A string containing a JSON document defining one or more segments or subsegments.")
-	xray_putTraceSegmentsCmd.MarkFlagRequired("trace-segment-documents")
+		xray_putTraceSegmentsCmd.Flags().String("trace-segment-documents", "", "A string containing a JSON document defining one or more segments or subsegments.")
+		xray_putTraceSegmentsCmd.MarkFlagRequired("trace-segment-documents")
+	})
 	xrayCmd.AddCommand(xray_putTraceSegmentsCmd)
 }

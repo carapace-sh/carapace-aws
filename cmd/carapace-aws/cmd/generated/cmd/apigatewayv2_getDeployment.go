@@ -12,11 +12,13 @@ var apigatewayv2_getDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_getDeploymentCmd).Standalone()
+	carapace.Gen(apigatewayv2_getDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_getDeploymentCmd).Standalone()
 
-	apigatewayv2_getDeploymentCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_getDeploymentCmd.Flags().String("deployment-id", "", "The deployment ID.")
-	apigatewayv2_getDeploymentCmd.MarkFlagRequired("api-id")
-	apigatewayv2_getDeploymentCmd.MarkFlagRequired("deployment-id")
+		apigatewayv2_getDeploymentCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_getDeploymentCmd.Flags().String("deployment-id", "", "The deployment ID.")
+		apigatewayv2_getDeploymentCmd.MarkFlagRequired("api-id")
+		apigatewayv2_getDeploymentCmd.MarkFlagRequired("deployment-id")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_getDeploymentCmd)
 }

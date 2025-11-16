@@ -12,11 +12,13 @@ var lexModels_getBotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getBotCmd).Standalone()
+	carapace.Gen(lexModels_getBotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getBotCmd).Standalone()
 
-	lexModels_getBotCmd.Flags().String("name", "", "The name of the bot.")
-	lexModels_getBotCmd.Flags().String("version-or-alias", "", "The version or alias of the bot.")
-	lexModels_getBotCmd.MarkFlagRequired("name")
-	lexModels_getBotCmd.MarkFlagRequired("version-or-alias")
+		lexModels_getBotCmd.Flags().String("name", "", "The name of the bot.")
+		lexModels_getBotCmd.Flags().String("version-or-alias", "", "The version or alias of the bot.")
+		lexModels_getBotCmd.MarkFlagRequired("name")
+		lexModels_getBotCmd.MarkFlagRequired("version-or-alias")
+	})
 	lexModelsCmd.AddCommand(lexModels_getBotCmd)
 }

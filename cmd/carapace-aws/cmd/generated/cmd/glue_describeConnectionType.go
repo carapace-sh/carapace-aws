@@ -12,9 +12,11 @@ var glue_describeConnectionTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_describeConnectionTypeCmd).Standalone()
+	carapace.Gen(glue_describeConnectionTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_describeConnectionTypeCmd).Standalone()
 
-	glue_describeConnectionTypeCmd.Flags().String("connection-type", "", "The name of the connection type to be described.")
-	glue_describeConnectionTypeCmd.MarkFlagRequired("connection-type")
+		glue_describeConnectionTypeCmd.Flags().String("connection-type", "", "The name of the connection type to be described.")
+		glue_describeConnectionTypeCmd.MarkFlagRequired("connection-type")
+	})
 	glueCmd.AddCommand(glue_describeConnectionTypeCmd)
 }

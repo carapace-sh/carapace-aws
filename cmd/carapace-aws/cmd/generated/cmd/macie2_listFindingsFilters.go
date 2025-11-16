@@ -12,9 +12,11 @@ var macie2_listFindingsFiltersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_listFindingsFiltersCmd).Standalone()
+	carapace.Gen(macie2_listFindingsFiltersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_listFindingsFiltersCmd).Standalone()
 
-	macie2_listFindingsFiltersCmd.Flags().String("max-results", "", "The maximum number of items to include in each page of a paginated response.")
-	macie2_listFindingsFiltersCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+		macie2_listFindingsFiltersCmd.Flags().String("max-results", "", "The maximum number of items to include in each page of a paginated response.")
+		macie2_listFindingsFiltersCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+	})
 	macie2Cmd.AddCommand(macie2_listFindingsFiltersCmd)
 }

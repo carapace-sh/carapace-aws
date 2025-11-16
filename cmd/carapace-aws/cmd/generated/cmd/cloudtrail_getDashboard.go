@@ -12,9 +12,11 @@ var cloudtrail_getDashboardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_getDashboardCmd).Standalone()
+	carapace.Gen(cloudtrail_getDashboardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_getDashboardCmd).Standalone()
 
-	cloudtrail_getDashboardCmd.Flags().String("dashboard-id", "", "The name or ARN for the dashboard.")
-	cloudtrail_getDashboardCmd.MarkFlagRequired("dashboard-id")
+		cloudtrail_getDashboardCmd.Flags().String("dashboard-id", "", "The name or ARN for the dashboard.")
+		cloudtrail_getDashboardCmd.MarkFlagRequired("dashboard-id")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_getDashboardCmd)
 }

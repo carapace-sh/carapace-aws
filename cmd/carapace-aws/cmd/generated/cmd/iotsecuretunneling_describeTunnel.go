@@ -12,9 +12,11 @@ var iotsecuretunneling_describeTunnelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsecuretunneling_describeTunnelCmd).Standalone()
+	carapace.Gen(iotsecuretunneling_describeTunnelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsecuretunneling_describeTunnelCmd).Standalone()
 
-	iotsecuretunneling_describeTunnelCmd.Flags().String("tunnel-id", "", "The tunnel to describe.")
-	iotsecuretunneling_describeTunnelCmd.MarkFlagRequired("tunnel-id")
+		iotsecuretunneling_describeTunnelCmd.Flags().String("tunnel-id", "", "The tunnel to describe.")
+		iotsecuretunneling_describeTunnelCmd.MarkFlagRequired("tunnel-id")
+	})
 	iotsecuretunnelingCmd.AddCommand(iotsecuretunneling_describeTunnelCmd)
 }

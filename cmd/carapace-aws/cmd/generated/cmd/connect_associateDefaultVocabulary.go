@@ -12,12 +12,14 @@ var connect_associateDefaultVocabularyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_associateDefaultVocabularyCmd).Standalone()
+	carapace.Gen(connect_associateDefaultVocabularyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_associateDefaultVocabularyCmd).Standalone()
 
-	connect_associateDefaultVocabularyCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_associateDefaultVocabularyCmd.Flags().String("language-code", "", "The language code of the vocabulary entries.")
-	connect_associateDefaultVocabularyCmd.Flags().String("vocabulary-id", "", "The identifier of the custom vocabulary.")
-	connect_associateDefaultVocabularyCmd.MarkFlagRequired("instance-id")
-	connect_associateDefaultVocabularyCmd.MarkFlagRequired("language-code")
+		connect_associateDefaultVocabularyCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_associateDefaultVocabularyCmd.Flags().String("language-code", "", "The language code of the vocabulary entries.")
+		connect_associateDefaultVocabularyCmd.Flags().String("vocabulary-id", "", "The identifier of the custom vocabulary.")
+		connect_associateDefaultVocabularyCmd.MarkFlagRequired("instance-id")
+		connect_associateDefaultVocabularyCmd.MarkFlagRequired("language-code")
+	})
 	connectCmd.AddCommand(connect_associateDefaultVocabularyCmd)
 }

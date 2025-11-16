@@ -12,7 +12,9 @@ var inspectorScanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspectorScanCmd).Standalone()
+	carapace.Gen(inspectorScanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspectorScanCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(inspectorScanCmd)
 }

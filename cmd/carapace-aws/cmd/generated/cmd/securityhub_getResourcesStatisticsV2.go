@@ -12,11 +12,13 @@ var securityhub_getResourcesStatisticsV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getResourcesStatisticsV2Cmd).Standalone()
+	carapace.Gen(securityhub_getResourcesStatisticsV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getResourcesStatisticsV2Cmd).Standalone()
 
-	securityhub_getResourcesStatisticsV2Cmd.Flags().String("group-by-rules", "", "How resource statistics should be aggregated and organized in the response.")
-	securityhub_getResourcesStatisticsV2Cmd.Flags().String("max-statistic-results", "", "The maximum number of results to be returned.")
-	securityhub_getResourcesStatisticsV2Cmd.Flags().String("sort-order", "", "Sorts aggregated statistics.")
-	securityhub_getResourcesStatisticsV2Cmd.MarkFlagRequired("group-by-rules")
+		securityhub_getResourcesStatisticsV2Cmd.Flags().String("group-by-rules", "", "How resource statistics should be aggregated and organized in the response.")
+		securityhub_getResourcesStatisticsV2Cmd.Flags().String("max-statistic-results", "", "The maximum number of results to be returned.")
+		securityhub_getResourcesStatisticsV2Cmd.Flags().String("sort-order", "", "Sorts aggregated statistics.")
+		securityhub_getResourcesStatisticsV2Cmd.MarkFlagRequired("group-by-rules")
+	})
 	securityhubCmd.AddCommand(securityhub_getResourcesStatisticsV2Cmd)
 }

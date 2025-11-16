@@ -12,13 +12,15 @@ var connectcases_searchAllRelatedItemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_searchAllRelatedItemsCmd).Standalone()
+	carapace.Gen(connectcases_searchAllRelatedItemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_searchAllRelatedItemsCmd).Standalone()
 
-	connectcases_searchAllRelatedItemsCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_searchAllRelatedItemsCmd.Flags().String("filters", "", "The list of types of related items and their parameters to use for filtering.")
-	connectcases_searchAllRelatedItemsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connectcases_searchAllRelatedItemsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connectcases_searchAllRelatedItemsCmd.Flags().String("sorts", "", "A structured set of sort terms to specify the order in which related items should be returned.")
-	connectcases_searchAllRelatedItemsCmd.MarkFlagRequired("domain-id")
+		connectcases_searchAllRelatedItemsCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_searchAllRelatedItemsCmd.Flags().String("filters", "", "The list of types of related items and their parameters to use for filtering.")
+		connectcases_searchAllRelatedItemsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connectcases_searchAllRelatedItemsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connectcases_searchAllRelatedItemsCmd.Flags().String("sorts", "", "A structured set of sort terms to specify the order in which related items should be returned.")
+		connectcases_searchAllRelatedItemsCmd.MarkFlagRequired("domain-id")
+	})
 	connectcasesCmd.AddCommand(connectcases_searchAllRelatedItemsCmd)
 }

@@ -12,11 +12,13 @@ var gameliftstreams_associateApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftstreams_associateApplicationsCmd).Standalone()
+	carapace.Gen(gameliftstreams_associateApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftstreams_associateApplicationsCmd).Standalone()
 
-	gameliftstreams_associateApplicationsCmd.Flags().String("application-identifiers", "", "A set of applications to associate with the stream group.")
-	gameliftstreams_associateApplicationsCmd.Flags().String("identifier", "", "A stream group to associate to the applications.")
-	gameliftstreams_associateApplicationsCmd.MarkFlagRequired("application-identifiers")
-	gameliftstreams_associateApplicationsCmd.MarkFlagRequired("identifier")
+		gameliftstreams_associateApplicationsCmd.Flags().String("application-identifiers", "", "A set of applications to associate with the stream group.")
+		gameliftstreams_associateApplicationsCmd.Flags().String("identifier", "", "A stream group to associate to the applications.")
+		gameliftstreams_associateApplicationsCmd.MarkFlagRequired("application-identifiers")
+		gameliftstreams_associateApplicationsCmd.MarkFlagRequired("identifier")
+	})
 	gameliftstreamsCmd.AddCommand(gameliftstreams_associateApplicationsCmd)
 }

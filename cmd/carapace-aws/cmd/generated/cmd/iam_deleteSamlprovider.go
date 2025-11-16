@@ -12,9 +12,11 @@ var iam_deleteSamlproviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteSamlproviderCmd).Standalone()
+	carapace.Gen(iam_deleteSamlproviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteSamlproviderCmd).Standalone()
 
-	iam_deleteSamlproviderCmd.Flags().String("samlprovider-arn", "", "The Amazon Resource Name (ARN) of the SAML provider to delete.")
-	iam_deleteSamlproviderCmd.MarkFlagRequired("samlprovider-arn")
+		iam_deleteSamlproviderCmd.Flags().String("samlprovider-arn", "", "The Amazon Resource Name (ARN) of the SAML provider to delete.")
+		iam_deleteSamlproviderCmd.MarkFlagRequired("samlprovider-arn")
+	})
 	iamCmd.AddCommand(iam_deleteSamlproviderCmd)
 }

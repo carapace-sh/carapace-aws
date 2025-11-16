@@ -12,9 +12,11 @@ var iot_stopThingRegistrationTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_stopThingRegistrationTaskCmd).Standalone()
+	carapace.Gen(iot_stopThingRegistrationTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_stopThingRegistrationTaskCmd).Standalone()
 
-	iot_stopThingRegistrationTaskCmd.Flags().String("task-id", "", "The bulk thing provisioning task ID.")
-	iot_stopThingRegistrationTaskCmd.MarkFlagRequired("task-id")
+		iot_stopThingRegistrationTaskCmd.Flags().String("task-id", "", "The bulk thing provisioning task ID.")
+		iot_stopThingRegistrationTaskCmd.MarkFlagRequired("task-id")
+	})
 	iotCmd.AddCommand(iot_stopThingRegistrationTaskCmd)
 }

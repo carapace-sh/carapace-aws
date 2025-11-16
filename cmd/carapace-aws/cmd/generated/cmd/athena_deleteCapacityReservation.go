@@ -12,9 +12,11 @@ var athena_deleteCapacityReservationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_deleteCapacityReservationCmd).Standalone()
+	carapace.Gen(athena_deleteCapacityReservationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_deleteCapacityReservationCmd).Standalone()
 
-	athena_deleteCapacityReservationCmd.Flags().String("name", "", "The name of the capacity reservation to delete.")
-	athena_deleteCapacityReservationCmd.MarkFlagRequired("name")
+		athena_deleteCapacityReservationCmd.Flags().String("name", "", "The name of the capacity reservation to delete.")
+		athena_deleteCapacityReservationCmd.MarkFlagRequired("name")
+	})
 	athenaCmd.AddCommand(athena_deleteCapacityReservationCmd)
 }

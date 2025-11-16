@@ -12,7 +12,9 @@ var appintegrationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrationsCmd).Standalone()
+	carapace.Gen(appintegrationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrationsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(appintegrationsCmd)
 }

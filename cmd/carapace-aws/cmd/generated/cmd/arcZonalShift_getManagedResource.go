@@ -12,9 +12,11 @@ var arcZonalShift_getManagedResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_getManagedResourceCmd).Standalone()
+	carapace.Gen(arcZonalShift_getManagedResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_getManagedResourceCmd).Standalone()
 
-	arcZonalShift_getManagedResourceCmd.Flags().String("resource-identifier", "", "The identifier for the resource that Amazon Web Services shifts traffic for.")
-	arcZonalShift_getManagedResourceCmd.MarkFlagRequired("resource-identifier")
+		arcZonalShift_getManagedResourceCmd.Flags().String("resource-identifier", "", "The identifier for the resource that Amazon Web Services shifts traffic for.")
+		arcZonalShift_getManagedResourceCmd.MarkFlagRequired("resource-identifier")
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_getManagedResourceCmd)
 }

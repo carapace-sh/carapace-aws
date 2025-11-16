@@ -12,10 +12,12 @@ var emr_listInstanceFleetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_listInstanceFleetsCmd).Standalone()
+	carapace.Gen(emr_listInstanceFleetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_listInstanceFleetsCmd).Standalone()
 
-	emr_listInstanceFleetsCmd.Flags().String("cluster-id", "", "The unique identifier of the cluster.")
-	emr_listInstanceFleetsCmd.Flags().String("marker", "", "The pagination token that indicates the next set of results to retrieve.")
-	emr_listInstanceFleetsCmd.MarkFlagRequired("cluster-id")
+		emr_listInstanceFleetsCmd.Flags().String("cluster-id", "", "The unique identifier of the cluster.")
+		emr_listInstanceFleetsCmd.Flags().String("marker", "", "The pagination token that indicates the next set of results to retrieve.")
+		emr_listInstanceFleetsCmd.MarkFlagRequired("cluster-id")
+	})
 	emrCmd.AddCommand(emr_listInstanceFleetsCmd)
 }

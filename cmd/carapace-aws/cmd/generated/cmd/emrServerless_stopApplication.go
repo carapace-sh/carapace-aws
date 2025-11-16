@@ -12,9 +12,11 @@ var emrServerless_stopApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrServerless_stopApplicationCmd).Standalone()
+	carapace.Gen(emrServerless_stopApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrServerless_stopApplicationCmd).Standalone()
 
-	emrServerless_stopApplicationCmd.Flags().String("application-id", "", "The ID of the application to stop.")
-	emrServerless_stopApplicationCmd.MarkFlagRequired("application-id")
+		emrServerless_stopApplicationCmd.Flags().String("application-id", "", "The ID of the application to stop.")
+		emrServerless_stopApplicationCmd.MarkFlagRequired("application-id")
+	})
 	emrServerlessCmd.AddCommand(emrServerless_stopApplicationCmd)
 }

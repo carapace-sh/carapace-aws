@@ -12,11 +12,13 @@ var chime_getEventsConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_getEventsConfigurationCmd).Standalone()
+	carapace.Gen(chime_getEventsConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_getEventsConfigurationCmd).Standalone()
 
-	chime_getEventsConfigurationCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_getEventsConfigurationCmd.Flags().String("bot-id", "", "The bot ID.")
-	chime_getEventsConfigurationCmd.MarkFlagRequired("account-id")
-	chime_getEventsConfigurationCmd.MarkFlagRequired("bot-id")
+		chime_getEventsConfigurationCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_getEventsConfigurationCmd.Flags().String("bot-id", "", "The bot ID.")
+		chime_getEventsConfigurationCmd.MarkFlagRequired("account-id")
+		chime_getEventsConfigurationCmd.MarkFlagRequired("bot-id")
+	})
 	chimeCmd.AddCommand(chime_getEventsConfigurationCmd)
 }

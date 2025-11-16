@@ -12,11 +12,13 @@ var workmail_describeResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_describeResourceCmd).Standalone()
+	carapace.Gen(workmail_describeResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_describeResourceCmd).Standalone()
 
-	workmail_describeResourceCmd.Flags().String("organization-id", "", "The identifier associated with the organization for which the resource is described.")
-	workmail_describeResourceCmd.Flags().String("resource-id", "", "The identifier of the resource to be described.")
-	workmail_describeResourceCmd.MarkFlagRequired("organization-id")
-	workmail_describeResourceCmd.MarkFlagRequired("resource-id")
+		workmail_describeResourceCmd.Flags().String("organization-id", "", "The identifier associated with the organization for which the resource is described.")
+		workmail_describeResourceCmd.Flags().String("resource-id", "", "The identifier of the resource to be described.")
+		workmail_describeResourceCmd.MarkFlagRequired("organization-id")
+		workmail_describeResourceCmd.MarkFlagRequired("resource-id")
+	})
 	workmailCmd.AddCommand(workmail_describeResourceCmd)
 }

@@ -12,7 +12,9 @@ var fmsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fmsCmd).Standalone()
+	carapace.Gen(fmsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fmsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(fmsCmd)
 }

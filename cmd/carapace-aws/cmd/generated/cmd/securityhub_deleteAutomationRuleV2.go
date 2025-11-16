@@ -12,9 +12,11 @@ var securityhub_deleteAutomationRuleV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_deleteAutomationRuleV2Cmd).Standalone()
+	carapace.Gen(securityhub_deleteAutomationRuleV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_deleteAutomationRuleV2Cmd).Standalone()
 
-	securityhub_deleteAutomationRuleV2Cmd.Flags().String("identifier", "", "The ARN of the V2 automation rule.")
-	securityhub_deleteAutomationRuleV2Cmd.MarkFlagRequired("identifier")
+		securityhub_deleteAutomationRuleV2Cmd.Flags().String("identifier", "", "The ARN of the V2 automation rule.")
+		securityhub_deleteAutomationRuleV2Cmd.MarkFlagRequired("identifier")
+	})
 	securityhubCmd.AddCommand(securityhub_deleteAutomationRuleV2Cmd)
 }

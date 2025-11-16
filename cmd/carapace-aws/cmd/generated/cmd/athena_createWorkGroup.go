@@ -12,12 +12,14 @@ var athena_createWorkGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_createWorkGroupCmd).Standalone()
+	carapace.Gen(athena_createWorkGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_createWorkGroupCmd).Standalone()
 
-	athena_createWorkGroupCmd.Flags().String("configuration", "", "Contains configuration information for creating an Athena SQL workgroup or Spark enabled Athena workgroup.")
-	athena_createWorkGroupCmd.Flags().String("description", "", "The workgroup description.")
-	athena_createWorkGroupCmd.Flags().String("name", "", "The workgroup name.")
-	athena_createWorkGroupCmd.Flags().String("tags", "", "A list of comma separated tags to add to the workgroup that is created.")
-	athena_createWorkGroupCmd.MarkFlagRequired("name")
+		athena_createWorkGroupCmd.Flags().String("configuration", "", "Contains configuration information for creating an Athena SQL workgroup or Spark enabled Athena workgroup.")
+		athena_createWorkGroupCmd.Flags().String("description", "", "The workgroup description.")
+		athena_createWorkGroupCmd.Flags().String("name", "", "The workgroup name.")
+		athena_createWorkGroupCmd.Flags().String("tags", "", "A list of comma separated tags to add to the workgroup that is created.")
+		athena_createWorkGroupCmd.MarkFlagRequired("name")
+	})
 	athenaCmd.AddCommand(athena_createWorkGroupCmd)
 }

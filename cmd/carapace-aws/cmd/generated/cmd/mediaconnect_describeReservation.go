@@ -12,9 +12,11 @@ var mediaconnect_describeReservationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_describeReservationCmd).Standalone()
+	carapace.Gen(mediaconnect_describeReservationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_describeReservationCmd).Standalone()
 
-	mediaconnect_describeReservationCmd.Flags().String("reservation-arn", "", "The Amazon Resource Name (ARN) of the offering.")
-	mediaconnect_describeReservationCmd.MarkFlagRequired("reservation-arn")
+		mediaconnect_describeReservationCmd.Flags().String("reservation-arn", "", "The Amazon Resource Name (ARN) of the offering.")
+		mediaconnect_describeReservationCmd.MarkFlagRequired("reservation-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_describeReservationCmd)
 }

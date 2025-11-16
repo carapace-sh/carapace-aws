@@ -12,9 +12,11 @@ var macie2_deleteInvitationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_deleteInvitationsCmd).Standalone()
+	carapace.Gen(macie2_deleteInvitationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_deleteInvitationsCmd).Standalone()
 
-	macie2_deleteInvitationsCmd.Flags().String("account-ids", "", "An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to delete.")
-	macie2_deleteInvitationsCmd.MarkFlagRequired("account-ids")
+		macie2_deleteInvitationsCmd.Flags().String("account-ids", "", "An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to delete.")
+		macie2_deleteInvitationsCmd.MarkFlagRequired("account-ids")
+	})
 	macie2Cmd.AddCommand(macie2_deleteInvitationsCmd)
 }

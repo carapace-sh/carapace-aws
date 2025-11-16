@@ -12,9 +12,11 @@ var securityhub_inviteMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_inviteMembersCmd).Standalone()
+	carapace.Gen(securityhub_inviteMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_inviteMembersCmd).Standalone()
 
-	securityhub_inviteMembersCmd.Flags().String("account-ids", "", "The list of account IDs of the Amazon Web Services accounts to invite to Security Hub as members.")
-	securityhub_inviteMembersCmd.MarkFlagRequired("account-ids")
+		securityhub_inviteMembersCmd.Flags().String("account-ids", "", "The list of account IDs of the Amazon Web Services accounts to invite to Security Hub as members.")
+		securityhub_inviteMembersCmd.MarkFlagRequired("account-ids")
+	})
 	securityhubCmd.AddCommand(securityhub_inviteMembersCmd)
 }

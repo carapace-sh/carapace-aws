@@ -12,13 +12,15 @@ var lexModels_getBotChannelAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getBotChannelAssociationCmd).Standalone()
+	carapace.Gen(lexModels_getBotChannelAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getBotChannelAssociationCmd).Standalone()
 
-	lexModels_getBotChannelAssociationCmd.Flags().String("bot-alias", "", "An alias pointing to the specific version of the Amazon Lex bot to which this association is being made.")
-	lexModels_getBotChannelAssociationCmd.Flags().String("bot-name", "", "The name of the Amazon Lex bot.")
-	lexModels_getBotChannelAssociationCmd.Flags().String("name", "", "The name of the association between the bot and the channel.")
-	lexModels_getBotChannelAssociationCmd.MarkFlagRequired("bot-alias")
-	lexModels_getBotChannelAssociationCmd.MarkFlagRequired("bot-name")
-	lexModels_getBotChannelAssociationCmd.MarkFlagRequired("name")
+		lexModels_getBotChannelAssociationCmd.Flags().String("bot-alias", "", "An alias pointing to the specific version of the Amazon Lex bot to which this association is being made.")
+		lexModels_getBotChannelAssociationCmd.Flags().String("bot-name", "", "The name of the Amazon Lex bot.")
+		lexModels_getBotChannelAssociationCmd.Flags().String("name", "", "The name of the association between the bot and the channel.")
+		lexModels_getBotChannelAssociationCmd.MarkFlagRequired("bot-alias")
+		lexModels_getBotChannelAssociationCmd.MarkFlagRequired("bot-name")
+		lexModels_getBotChannelAssociationCmd.MarkFlagRequired("name")
+	})
 	lexModelsCmd.AddCommand(lexModels_getBotChannelAssociationCmd)
 }

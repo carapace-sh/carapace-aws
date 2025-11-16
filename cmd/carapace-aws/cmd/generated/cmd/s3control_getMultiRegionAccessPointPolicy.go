@@ -12,11 +12,13 @@ var s3control_getMultiRegionAccessPointPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_getMultiRegionAccessPointPolicyCmd).Standalone()
+	carapace.Gen(s3control_getMultiRegionAccessPointPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_getMultiRegionAccessPointPolicyCmd).Standalone()
 
-	s3control_getMultiRegionAccessPointPolicyCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the owner of the Multi-Region Access Point.")
-	s3control_getMultiRegionAccessPointPolicyCmd.Flags().String("name", "", "Specifies the Multi-Region Access Point.")
-	s3control_getMultiRegionAccessPointPolicyCmd.MarkFlagRequired("account-id")
-	s3control_getMultiRegionAccessPointPolicyCmd.MarkFlagRequired("name")
+		s3control_getMultiRegionAccessPointPolicyCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the owner of the Multi-Region Access Point.")
+		s3control_getMultiRegionAccessPointPolicyCmd.Flags().String("name", "", "Specifies the Multi-Region Access Point.")
+		s3control_getMultiRegionAccessPointPolicyCmd.MarkFlagRequired("account-id")
+		s3control_getMultiRegionAccessPointPolicyCmd.MarkFlagRequired("name")
+	})
 	s3controlCmd.AddCommand(s3control_getMultiRegionAccessPointPolicyCmd)
 }

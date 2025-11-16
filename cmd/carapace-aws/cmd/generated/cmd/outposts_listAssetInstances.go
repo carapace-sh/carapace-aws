@@ -12,15 +12,17 @@ var outposts_listAssetInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_listAssetInstancesCmd).Standalone()
+	carapace.Gen(outposts_listAssetInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_listAssetInstancesCmd).Standalone()
 
-	outposts_listAssetInstancesCmd.Flags().String("account-id-filter", "", "Filters the results by account ID.")
-	outposts_listAssetInstancesCmd.Flags().String("asset-id-filter", "", "Filters the results by asset ID.")
-	outposts_listAssetInstancesCmd.Flags().String("aws-service-filter", "", "Filters the results by Amazon Web Services service.")
-	outposts_listAssetInstancesCmd.Flags().String("instance-type-filter", "", "Filters the results by instance ID.")
-	outposts_listAssetInstancesCmd.Flags().String("max-results", "", "")
-	outposts_listAssetInstancesCmd.Flags().String("next-token", "", "")
-	outposts_listAssetInstancesCmd.Flags().String("outpost-identifier", "", "The ID of the Outpost.")
-	outposts_listAssetInstancesCmd.MarkFlagRequired("outpost-identifier")
+		outposts_listAssetInstancesCmd.Flags().String("account-id-filter", "", "Filters the results by account ID.")
+		outposts_listAssetInstancesCmd.Flags().String("asset-id-filter", "", "Filters the results by asset ID.")
+		outposts_listAssetInstancesCmd.Flags().String("aws-service-filter", "", "Filters the results by Amazon Web Services service.")
+		outposts_listAssetInstancesCmd.Flags().String("instance-type-filter", "", "Filters the results by instance ID.")
+		outposts_listAssetInstancesCmd.Flags().String("max-results", "", "")
+		outposts_listAssetInstancesCmd.Flags().String("next-token", "", "")
+		outposts_listAssetInstancesCmd.Flags().String("outpost-identifier", "", "The ID of the Outpost.")
+		outposts_listAssetInstancesCmd.MarkFlagRequired("outpost-identifier")
+	})
 	outpostsCmd.AddCommand(outposts_listAssetInstancesCmd)
 }

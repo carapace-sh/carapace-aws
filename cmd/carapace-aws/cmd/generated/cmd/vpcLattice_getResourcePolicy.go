@@ -12,9 +12,11 @@ var vpcLattice_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getResourcePolicyCmd).Standalone()
+	carapace.Gen(vpcLattice_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getResourcePolicyCmd).Standalone()
 
-	vpcLattice_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the service network or service.")
-	vpcLattice_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		vpcLattice_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the service network or service.")
+		vpcLattice_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getResourcePolicyCmd)
 }

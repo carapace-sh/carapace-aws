@@ -12,12 +12,14 @@ var glacier_initiateVaultLockCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_initiateVaultLockCmd).Standalone()
+	carapace.Gen(glacier_initiateVaultLockCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_initiateVaultLockCmd).Standalone()
 
-	glacier_initiateVaultLockCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
-	glacier_initiateVaultLockCmd.Flags().String("policy", "", "The vault lock policy as a JSON string, which uses \"\\\\\" as an escape character.")
-	glacier_initiateVaultLockCmd.Flags().String("vault-name", "", "The name of the vault.")
-	glacier_initiateVaultLockCmd.MarkFlagRequired("account-id")
-	glacier_initiateVaultLockCmd.MarkFlagRequired("vault-name")
+		glacier_initiateVaultLockCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
+		glacier_initiateVaultLockCmd.Flags().String("policy", "", "The vault lock policy as a JSON string, which uses \"\\\\\" as an escape character.")
+		glacier_initiateVaultLockCmd.Flags().String("vault-name", "", "The name of the vault.")
+		glacier_initiateVaultLockCmd.MarkFlagRequired("account-id")
+		glacier_initiateVaultLockCmd.MarkFlagRequired("vault-name")
+	})
 	glacierCmd.AddCommand(glacier_initiateVaultLockCmd)
 }

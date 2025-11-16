@@ -12,9 +12,11 @@ var shield_deleteProtectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_deleteProtectionCmd).Standalone()
+	carapace.Gen(shield_deleteProtectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_deleteProtectionCmd).Standalone()
 
-	shield_deleteProtectionCmd.Flags().String("protection-id", "", "The unique identifier (ID) for the [Protection]() object to be deleted.")
-	shield_deleteProtectionCmd.MarkFlagRequired("protection-id")
+		shield_deleteProtectionCmd.Flags().String("protection-id", "", "The unique identifier (ID) for the [Protection]() object to be deleted.")
+		shield_deleteProtectionCmd.MarkFlagRequired("protection-id")
+	})
 	shieldCmd.AddCommand(shield_deleteProtectionCmd)
 }

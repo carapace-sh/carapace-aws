@@ -12,8 +12,10 @@ var storagegateway_listCacheReportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_listCacheReportsCmd).Standalone()
+	carapace.Gen(storagegateway_listCacheReportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_listCacheReportsCmd).Standalone()
 
-	storagegateway_listCacheReportsCmd.Flags().String("marker", "", "Opaque pagination token returned from a previous `ListCacheReports` operation.")
+		storagegateway_listCacheReportsCmd.Flags().String("marker", "", "Opaque pagination token returned from a previous `ListCacheReports` operation.")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_listCacheReportsCmd)
 }

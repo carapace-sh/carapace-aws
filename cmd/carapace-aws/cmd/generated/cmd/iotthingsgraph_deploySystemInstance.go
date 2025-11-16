@@ -12,8 +12,10 @@ var iotthingsgraph_deploySystemInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_deploySystemInstanceCmd).Standalone()
+	carapace.Gen(iotthingsgraph_deploySystemInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_deploySystemInstanceCmd).Standalone()
 
-	iotthingsgraph_deploySystemInstanceCmd.Flags().String("id", "", "The ID of the system instance.")
+		iotthingsgraph_deploySystemInstanceCmd.Flags().String("id", "", "The ID of the system instance.")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_deploySystemInstanceCmd)
 }

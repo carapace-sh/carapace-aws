@@ -12,11 +12,13 @@ var ssmContacts_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_tagResourceCmd).Standalone()
+	carapace.Gen(ssmContacts_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_tagResourceCmd).Standalone()
 
-	ssmContacts_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the contact or escalation plan.")
-	ssmContacts_tagResourceCmd.Flags().String("tags", "", "A list of tags that you are adding to the contact or escalation plan.")
-	ssmContacts_tagResourceCmd.MarkFlagRequired("resource-arn")
-	ssmContacts_tagResourceCmd.MarkFlagRequired("tags")
+		ssmContacts_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the contact or escalation plan.")
+		ssmContacts_tagResourceCmd.Flags().String("tags", "", "A list of tags that you are adding to the contact or escalation plan.")
+		ssmContacts_tagResourceCmd.MarkFlagRequired("resource-arn")
+		ssmContacts_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_tagResourceCmd)
 }

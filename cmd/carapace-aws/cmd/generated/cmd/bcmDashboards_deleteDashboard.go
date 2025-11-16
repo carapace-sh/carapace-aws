@@ -12,9 +12,11 @@ var bcmDashboards_deleteDashboardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDashboards_deleteDashboardCmd).Standalone()
+	carapace.Gen(bcmDashboards_deleteDashboardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDashboards_deleteDashboardCmd).Standalone()
 
-	bcmDashboards_deleteDashboardCmd.Flags().String("arn", "", "The ARN of the dashboard to be deleted.")
-	bcmDashboards_deleteDashboardCmd.MarkFlagRequired("arn")
+		bcmDashboards_deleteDashboardCmd.Flags().String("arn", "", "The ARN of the dashboard to be deleted.")
+		bcmDashboards_deleteDashboardCmd.MarkFlagRequired("arn")
+	})
 	bcmDashboardsCmd.AddCommand(bcmDashboards_deleteDashboardCmd)
 }

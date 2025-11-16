@@ -12,12 +12,14 @@ var ecs_updateContainerInstancesStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_updateContainerInstancesStateCmd).Standalone()
+	carapace.Gen(ecs_updateContainerInstancesStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_updateContainerInstancesStateCmd).Standalone()
 
-	ecs_updateContainerInstancesStateCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to update.")
-	ecs_updateContainerInstancesStateCmd.Flags().String("container-instances", "", "A list of up to 10 container instance IDs or full ARN entries.")
-	ecs_updateContainerInstancesStateCmd.Flags().String("status", "", "The container instance state to update the container instance with.")
-	ecs_updateContainerInstancesStateCmd.MarkFlagRequired("container-instances")
-	ecs_updateContainerInstancesStateCmd.MarkFlagRequired("status")
+		ecs_updateContainerInstancesStateCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to update.")
+		ecs_updateContainerInstancesStateCmd.Flags().String("container-instances", "", "A list of up to 10 container instance IDs or full ARN entries.")
+		ecs_updateContainerInstancesStateCmd.Flags().String("status", "", "The container instance state to update the container instance with.")
+		ecs_updateContainerInstancesStateCmd.MarkFlagRequired("container-instances")
+		ecs_updateContainerInstancesStateCmd.MarkFlagRequired("status")
+	})
 	ecsCmd.AddCommand(ecs_updateContainerInstancesStateCmd)
 }

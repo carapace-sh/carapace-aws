@@ -12,13 +12,15 @@ var appconfig_updateExtensionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_updateExtensionCmd).Standalone()
+	carapace.Gen(appconfig_updateExtensionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_updateExtensionCmd).Standalone()
 
-	appconfig_updateExtensionCmd.Flags().String("actions", "", "The actions defined in the extension.")
-	appconfig_updateExtensionCmd.Flags().String("description", "", "Information about the extension.")
-	appconfig_updateExtensionCmd.Flags().String("extension-identifier", "", "The name, the ID, or the Amazon Resource Name (ARN) of the extension.")
-	appconfig_updateExtensionCmd.Flags().String("parameters", "", "One or more parameters for the actions called by the extension.")
-	appconfig_updateExtensionCmd.Flags().String("version-number", "", "The extension version number.")
-	appconfig_updateExtensionCmd.MarkFlagRequired("extension-identifier")
+		appconfig_updateExtensionCmd.Flags().String("actions", "", "The actions defined in the extension.")
+		appconfig_updateExtensionCmd.Flags().String("description", "", "Information about the extension.")
+		appconfig_updateExtensionCmd.Flags().String("extension-identifier", "", "The name, the ID, or the Amazon Resource Name (ARN) of the extension.")
+		appconfig_updateExtensionCmd.Flags().String("parameters", "", "One or more parameters for the actions called by the extension.")
+		appconfig_updateExtensionCmd.Flags().String("version-number", "", "The extension version number.")
+		appconfig_updateExtensionCmd.MarkFlagRequired("extension-identifier")
+	})
 	appconfigCmd.AddCommand(appconfig_updateExtensionCmd)
 }

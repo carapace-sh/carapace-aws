@@ -12,9 +12,11 @@ var storagegateway_describeSmbfileSharesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_describeSmbfileSharesCmd).Standalone()
+	carapace.Gen(storagegateway_describeSmbfileSharesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_describeSmbfileSharesCmd).Standalone()
 
-	storagegateway_describeSmbfileSharesCmd.Flags().String("file-share-arnlist", "", "An array containing the Amazon Resource Name (ARN) of each file share to be described.")
-	storagegateway_describeSmbfileSharesCmd.MarkFlagRequired("file-share-arnlist")
+		storagegateway_describeSmbfileSharesCmd.Flags().String("file-share-arnlist", "", "An array containing the Amazon Resource Name (ARN) of each file share to be described.")
+		storagegateway_describeSmbfileSharesCmd.MarkFlagRequired("file-share-arnlist")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_describeSmbfileSharesCmd)
 }

@@ -12,9 +12,11 @@ var storagegateway_listVolumeRecoveryPointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_listVolumeRecoveryPointsCmd).Standalone()
+	carapace.Gen(storagegateway_listVolumeRecoveryPointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_listVolumeRecoveryPointsCmd).Standalone()
 
-	storagegateway_listVolumeRecoveryPointsCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_listVolumeRecoveryPointsCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_listVolumeRecoveryPointsCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_listVolumeRecoveryPointsCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_listVolumeRecoveryPointsCmd)
 }

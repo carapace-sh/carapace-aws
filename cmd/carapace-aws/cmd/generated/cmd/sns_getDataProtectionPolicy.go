@@ -12,9 +12,11 @@ var sns_getDataProtectionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_getDataProtectionPolicyCmd).Standalone()
+	carapace.Gen(sns_getDataProtectionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_getDataProtectionPolicyCmd).Standalone()
 
-	sns_getDataProtectionPolicyCmd.Flags().String("resource-arn", "", "The ARN of the topic whose `DataProtectionPolicy` you want to get.")
-	sns_getDataProtectionPolicyCmd.MarkFlagRequired("resource-arn")
+		sns_getDataProtectionPolicyCmd.Flags().String("resource-arn", "", "The ARN of the topic whose `DataProtectionPolicy` you want to get.")
+		sns_getDataProtectionPolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	snsCmd.AddCommand(sns_getDataProtectionPolicyCmd)
 }

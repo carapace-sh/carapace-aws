@@ -12,9 +12,11 @@ var amp_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_listTagsForResourceCmd).Standalone()
+	carapace.Gen(amp_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_listTagsForResourceCmd).Standalone()
 
-	amp_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to list tages for.")
-	amp_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		amp_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource to list tages for.")
+		amp_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	ampCmd.AddCommand(amp_listTagsForResourceCmd)
 }

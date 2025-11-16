@@ -12,9 +12,11 @@ var personalize_deleteSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_deleteSchemaCmd).Standalone()
+	carapace.Gen(personalize_deleteSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_deleteSchemaCmd).Standalone()
 
-	personalize_deleteSchemaCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) of the schema to delete.")
-	personalize_deleteSchemaCmd.MarkFlagRequired("schema-arn")
+		personalize_deleteSchemaCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) of the schema to delete.")
+		personalize_deleteSchemaCmd.MarkFlagRequired("schema-arn")
+	})
 	personalizeCmd.AddCommand(personalize_deleteSchemaCmd)
 }

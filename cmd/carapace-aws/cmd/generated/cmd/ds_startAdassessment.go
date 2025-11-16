@@ -12,9 +12,11 @@ var ds_startAdassessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_startAdassessmentCmd).Standalone()
+	carapace.Gen(ds_startAdassessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_startAdassessmentCmd).Standalone()
 
-	ds_startAdassessmentCmd.Flags().String("assessment-configuration", "", "Configuration parameters for the directory assessment, including DNS server information, domain name, Amazon VPC subnet, and Amazon Web Services System Manager managed node details.")
-	ds_startAdassessmentCmd.Flags().String("directory-id", "", "The identifier of the directory for which to perform the assessment.")
+		ds_startAdassessmentCmd.Flags().String("assessment-configuration", "", "Configuration parameters for the directory assessment, including DNS server information, domain name, Amazon VPC subnet, and Amazon Web Services System Manager managed node details.")
+		ds_startAdassessmentCmd.Flags().String("directory-id", "", "The identifier of the directory for which to perform the assessment.")
+	})
 	dsCmd.AddCommand(ds_startAdassessmentCmd)
 }

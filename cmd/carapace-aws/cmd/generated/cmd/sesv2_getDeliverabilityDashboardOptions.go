@@ -12,7 +12,9 @@ var sesv2_getDeliverabilityDashboardOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getDeliverabilityDashboardOptionsCmd).Standalone()
+	carapace.Gen(sesv2_getDeliverabilityDashboardOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getDeliverabilityDashboardOptionsCmd).Standalone()
 
+	})
 	sesv2Cmd.AddCommand(sesv2_getDeliverabilityDashboardOptionsCmd)
 }

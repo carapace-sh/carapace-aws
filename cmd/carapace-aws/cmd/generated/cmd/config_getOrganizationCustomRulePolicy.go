@@ -12,9 +12,11 @@ var config_getOrganizationCustomRulePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getOrganizationCustomRulePolicyCmd).Standalone()
+	carapace.Gen(config_getOrganizationCustomRulePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getOrganizationCustomRulePolicyCmd).Standalone()
 
-	config_getOrganizationCustomRulePolicyCmd.Flags().String("organization-config-rule-name", "", "The name of your organization Config Custom Policy rule.")
-	config_getOrganizationCustomRulePolicyCmd.MarkFlagRequired("organization-config-rule-name")
+		config_getOrganizationCustomRulePolicyCmd.Flags().String("organization-config-rule-name", "", "The name of your organization Config Custom Policy rule.")
+		config_getOrganizationCustomRulePolicyCmd.MarkFlagRequired("organization-config-rule-name")
+	})
 	configCmd.AddCommand(config_getOrganizationCustomRulePolicyCmd)
 }

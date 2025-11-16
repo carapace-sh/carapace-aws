@@ -12,11 +12,13 @@ var launchWizard_listWorkloadDeploymentPatternsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(launchWizard_listWorkloadDeploymentPatternsCmd).Standalone()
+	carapace.Gen(launchWizard_listWorkloadDeploymentPatternsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(launchWizard_listWorkloadDeploymentPatternsCmd).Standalone()
 
-	launchWizard_listWorkloadDeploymentPatternsCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	launchWizard_listWorkloadDeploymentPatternsCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
-	launchWizard_listWorkloadDeploymentPatternsCmd.Flags().String("workload-name", "", "The name of the workload.")
-	launchWizard_listWorkloadDeploymentPatternsCmd.MarkFlagRequired("workload-name")
+		launchWizard_listWorkloadDeploymentPatternsCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		launchWizard_listWorkloadDeploymentPatternsCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		launchWizard_listWorkloadDeploymentPatternsCmd.Flags().String("workload-name", "", "The name of the workload.")
+		launchWizard_listWorkloadDeploymentPatternsCmd.MarkFlagRequired("workload-name")
+	})
 	launchWizardCmd.AddCommand(launchWizard_listWorkloadDeploymentPatternsCmd)
 }

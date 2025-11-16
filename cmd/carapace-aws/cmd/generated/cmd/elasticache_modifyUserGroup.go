@@ -12,12 +12,14 @@ var elasticache_modifyUserGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_modifyUserGroupCmd).Standalone()
+	carapace.Gen(elasticache_modifyUserGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_modifyUserGroupCmd).Standalone()
 
-	elasticache_modifyUserGroupCmd.Flags().String("engine", "", "Modifies the engine listed in a user group.")
-	elasticache_modifyUserGroupCmd.Flags().String("user-group-id", "", "The ID of the user group.")
-	elasticache_modifyUserGroupCmd.Flags().String("user-ids-to-add", "", "The list of user IDs to add to the user group.")
-	elasticache_modifyUserGroupCmd.Flags().String("user-ids-to-remove", "", "The list of user IDs to remove from the user group.")
-	elasticache_modifyUserGroupCmd.MarkFlagRequired("user-group-id")
+		elasticache_modifyUserGroupCmd.Flags().String("engine", "", "Modifies the engine listed in a user group.")
+		elasticache_modifyUserGroupCmd.Flags().String("user-group-id", "", "The ID of the user group.")
+		elasticache_modifyUserGroupCmd.Flags().String("user-ids-to-add", "", "The list of user IDs to add to the user group.")
+		elasticache_modifyUserGroupCmd.Flags().String("user-ids-to-remove", "", "The list of user IDs to remove from the user group.")
+		elasticache_modifyUserGroupCmd.MarkFlagRequired("user-group-id")
+	})
 	elasticacheCmd.AddCommand(elasticache_modifyUserGroupCmd)
 }

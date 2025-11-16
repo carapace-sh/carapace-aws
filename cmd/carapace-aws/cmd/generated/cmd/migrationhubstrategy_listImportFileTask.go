@@ -12,9 +12,11 @@ var migrationhubstrategy_listImportFileTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhubstrategy_listImportFileTaskCmd).Standalone()
+	carapace.Gen(migrationhubstrategy_listImportFileTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubstrategy_listImportFileTaskCmd).Standalone()
 
-	migrationhubstrategy_listImportFileTaskCmd.Flags().String("max-results", "", "The total number of items to return.")
-	migrationhubstrategy_listImportFileTaskCmd.Flags().String("next-token", "", "The token from a previous call that you use to retrieve the next set of results.")
+		migrationhubstrategy_listImportFileTaskCmd.Flags().String("max-results", "", "The total number of items to return.")
+		migrationhubstrategy_listImportFileTaskCmd.Flags().String("next-token", "", "The token from a previous call that you use to retrieve the next set of results.")
+	})
 	migrationhubstrategyCmd.AddCommand(migrationhubstrategy_listImportFileTaskCmd)
 }

@@ -12,9 +12,11 @@ var pinpointSmsVoiceV2_describeAccountLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_describeAccountLimitsCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_describeAccountLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_describeAccountLimitsCmd).Standalone()
 
-	pinpointSmsVoiceV2_describeAccountLimitsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
-	pinpointSmsVoiceV2_describeAccountLimitsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		pinpointSmsVoiceV2_describeAccountLimitsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
+		pinpointSmsVoiceV2_describeAccountLimitsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_describeAccountLimitsCmd)
 }

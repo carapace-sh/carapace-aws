@@ -12,9 +12,11 @@ var cloudfront_getCloudFrontOriginAccessIdentity2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_getCloudFrontOriginAccessIdentity2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getCloudFrontOriginAccessIdentity2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getCloudFrontOriginAccessIdentity2020_05_31Cmd).Standalone()
 
-	cloudfront_getCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("id", "", "The identity's ID.")
-	cloudfront_getCloudFrontOriginAccessIdentity2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("id", "", "The identity's ID.")
+		cloudfront_getCloudFrontOriginAccessIdentity2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getCloudFrontOriginAccessIdentity2020_05_31Cmd)
 }

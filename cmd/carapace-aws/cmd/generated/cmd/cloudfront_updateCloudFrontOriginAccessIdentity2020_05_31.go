@@ -12,12 +12,14 @@ var cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd = &cobra.Comman
 }
 
 func init() {
-	carapace.Gen(cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd).Standalone()
 
-	cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("cloud-front-origin-access-identity-config", "", "The identity's configuration information.")
-	cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("id", "", "The identity's id.")
-	cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("if-match", "", "The value of the `ETag` header that you received when retrieving the identity's configuration.")
-	cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.MarkFlagRequired("cloud-front-origin-access-identity-config")
-	cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("cloud-front-origin-access-identity-config", "", "The identity's configuration information.")
+		cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("id", "", "The identity's id.")
+		cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("if-match", "", "The value of the `ETag` header that you received when retrieving the identity's configuration.")
+		cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.MarkFlagRequired("cloud-front-origin-access-identity-config")
+		cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_updateCloudFrontOriginAccessIdentity2020_05_31Cmd)
 }

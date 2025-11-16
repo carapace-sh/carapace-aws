@@ -12,11 +12,13 @@ var bcmDataExports_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDataExports_listTagsForResourceCmd).Standalone()
+	carapace.Gen(bcmDataExports_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDataExports_listTagsForResourceCmd).Standalone()
 
-	bcmDataExports_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of objects that are returned for the request.")
-	bcmDataExports_listTagsForResourceCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
-	bcmDataExports_listTagsForResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
-	bcmDataExports_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		bcmDataExports_listTagsForResourceCmd.Flags().String("max-results", "", "The maximum number of objects that are returned for the request.")
+		bcmDataExports_listTagsForResourceCmd.Flags().String("next-token", "", "The token to retrieve the next set of results.")
+		bcmDataExports_listTagsForResourceCmd.Flags().String("resource-arn", "", "The unique identifier for the resource.")
+		bcmDataExports_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	bcmDataExportsCmd.AddCommand(bcmDataExports_listTagsForResourceCmd)
 }

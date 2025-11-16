@@ -12,10 +12,12 @@ var connect_releasePhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_releasePhoneNumberCmd).Standalone()
+	carapace.Gen(connect_releasePhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_releasePhoneNumberCmd).Standalone()
 
-	connect_releasePhoneNumberCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connect_releasePhoneNumberCmd.Flags().String("phone-number-id", "", "A unique identifier for the phone number.")
-	connect_releasePhoneNumberCmd.MarkFlagRequired("phone-number-id")
+		connect_releasePhoneNumberCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connect_releasePhoneNumberCmd.Flags().String("phone-number-id", "", "A unique identifier for the phone number.")
+		connect_releasePhoneNumberCmd.MarkFlagRequired("phone-number-id")
+	})
 	connectCmd.AddCommand(connect_releasePhoneNumberCmd)
 }

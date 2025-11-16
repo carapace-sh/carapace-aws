@@ -12,9 +12,11 @@ var dax_deleteClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_deleteClusterCmd).Standalone()
+	carapace.Gen(dax_deleteClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_deleteClusterCmd).Standalone()
 
-	dax_deleteClusterCmd.Flags().String("cluster-name", "", "The name of the cluster to be deleted.")
-	dax_deleteClusterCmd.MarkFlagRequired("cluster-name")
+		dax_deleteClusterCmd.Flags().String("cluster-name", "", "The name of the cluster to be deleted.")
+		dax_deleteClusterCmd.MarkFlagRequired("cluster-name")
+	})
 	daxCmd.AddCommand(dax_deleteClusterCmd)
 }

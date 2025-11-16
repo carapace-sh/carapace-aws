@@ -12,9 +12,11 @@ var logs_cancelExportTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_cancelExportTaskCmd).Standalone()
+	carapace.Gen(logs_cancelExportTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_cancelExportTaskCmd).Standalone()
 
-	logs_cancelExportTaskCmd.Flags().String("task-id", "", "The ID of the export task.")
-	logs_cancelExportTaskCmd.MarkFlagRequired("task-id")
+		logs_cancelExportTaskCmd.Flags().String("task-id", "", "The ID of the export task.")
+		logs_cancelExportTaskCmd.MarkFlagRequired("task-id")
+	})
 	logsCmd.AddCommand(logs_cancelExportTaskCmd)
 }

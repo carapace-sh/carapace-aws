@@ -12,11 +12,13 @@ var mediaconnect_removeBridgeOutputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_removeBridgeOutputCmd).Standalone()
+	carapace.Gen(mediaconnect_removeBridgeOutputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_removeBridgeOutputCmd).Standalone()
 
-	mediaconnect_removeBridgeOutputCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to update.")
-	mediaconnect_removeBridgeOutputCmd.Flags().String("output-name", "", "The name of the bridge output that you want to remove.")
-	mediaconnect_removeBridgeOutputCmd.MarkFlagRequired("bridge-arn")
-	mediaconnect_removeBridgeOutputCmd.MarkFlagRequired("output-name")
+		mediaconnect_removeBridgeOutputCmd.Flags().String("bridge-arn", "", "The Amazon Resource Name (ARN) of the bridge that you want to update.")
+		mediaconnect_removeBridgeOutputCmd.Flags().String("output-name", "", "The name of the bridge output that you want to remove.")
+		mediaconnect_removeBridgeOutputCmd.MarkFlagRequired("bridge-arn")
+		mediaconnect_removeBridgeOutputCmd.MarkFlagRequired("output-name")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_removeBridgeOutputCmd)
 }

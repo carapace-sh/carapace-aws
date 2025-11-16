@@ -12,8 +12,10 @@ var cloudhsmv2_deleteResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsmv2_deleteResourcePolicyCmd).Standalone()
+	carapace.Gen(cloudhsmv2_deleteResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsmv2_deleteResourcePolicyCmd).Standalone()
 
-	cloudhsmv2_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the resource from which the policy will be removed.")
+		cloudhsmv2_deleteResourcePolicyCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the resource from which the policy will be removed.")
+	})
 	cloudhsmv2Cmd.AddCommand(cloudhsmv2_deleteResourcePolicyCmd)
 }

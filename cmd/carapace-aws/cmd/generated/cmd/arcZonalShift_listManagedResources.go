@@ -12,9 +12,11 @@ var arcZonalShift_listManagedResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_listManagedResourcesCmd).Standalone()
+	carapace.Gen(arcZonalShift_listManagedResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_listManagedResourcesCmd).Standalone()
 
-	arcZonalShift_listManagedResourcesCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
-	arcZonalShift_listManagedResourcesCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		arcZonalShift_listManagedResourcesCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
+		arcZonalShift_listManagedResourcesCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_listManagedResourcesCmd)
 }

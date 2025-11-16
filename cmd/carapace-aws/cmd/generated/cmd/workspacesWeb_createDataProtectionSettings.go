@@ -12,14 +12,16 @@ var workspacesWeb_createDataProtectionSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_createDataProtectionSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_createDataProtectionSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_createDataProtectionSettingsCmd).Standalone()
 
-	workspacesWeb_createDataProtectionSettingsCmd.Flags().String("additional-encryption-context", "", "Additional encryption context of the data protection settings.")
-	workspacesWeb_createDataProtectionSettingsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	workspacesWeb_createDataProtectionSettingsCmd.Flags().String("customer-managed-key", "", "The custom managed key of the data protection settings.")
-	workspacesWeb_createDataProtectionSettingsCmd.Flags().String("description", "", "The description of the data protection settings.")
-	workspacesWeb_createDataProtectionSettingsCmd.Flags().String("display-name", "", "The display name of the data protection settings.")
-	workspacesWeb_createDataProtectionSettingsCmd.Flags().String("inline-redaction-configuration", "", "The inline redaction configuration of the data protection settings that will be applied to all sessions.")
-	workspacesWeb_createDataProtectionSettingsCmd.Flags().String("tags", "", "The tags to add to the data protection settings resource.")
+		workspacesWeb_createDataProtectionSettingsCmd.Flags().String("additional-encryption-context", "", "Additional encryption context of the data protection settings.")
+		workspacesWeb_createDataProtectionSettingsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		workspacesWeb_createDataProtectionSettingsCmd.Flags().String("customer-managed-key", "", "The custom managed key of the data protection settings.")
+		workspacesWeb_createDataProtectionSettingsCmd.Flags().String("description", "", "The description of the data protection settings.")
+		workspacesWeb_createDataProtectionSettingsCmd.Flags().String("display-name", "", "The display name of the data protection settings.")
+		workspacesWeb_createDataProtectionSettingsCmd.Flags().String("inline-redaction-configuration", "", "The inline redaction configuration of the data protection settings that will be applied to all sessions.")
+		workspacesWeb_createDataProtectionSettingsCmd.Flags().String("tags", "", "The tags to add to the data protection settings resource.")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_createDataProtectionSettingsCmd)
 }

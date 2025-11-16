@@ -12,12 +12,14 @@ var chimeSdkMeetings_createAttendeeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMeetings_createAttendeeCmd).Standalone()
+	carapace.Gen(chimeSdkMeetings_createAttendeeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMeetings_createAttendeeCmd).Standalone()
 
-	chimeSdkMeetings_createAttendeeCmd.Flags().String("capabilities", "", "The capabilities (`audio`, `video`, or `content`) that you want to grant an attendee.")
-	chimeSdkMeetings_createAttendeeCmd.Flags().String("external-user-id", "", "The Amazon Chime SDK external user ID.")
-	chimeSdkMeetings_createAttendeeCmd.Flags().String("meeting-id", "", "The unique ID of the meeting.")
-	chimeSdkMeetings_createAttendeeCmd.MarkFlagRequired("external-user-id")
-	chimeSdkMeetings_createAttendeeCmd.MarkFlagRequired("meeting-id")
+		chimeSdkMeetings_createAttendeeCmd.Flags().String("capabilities", "", "The capabilities (`audio`, `video`, or `content`) that you want to grant an attendee.")
+		chimeSdkMeetings_createAttendeeCmd.Flags().String("external-user-id", "", "The Amazon Chime SDK external user ID.")
+		chimeSdkMeetings_createAttendeeCmd.Flags().String("meeting-id", "", "The unique ID of the meeting.")
+		chimeSdkMeetings_createAttendeeCmd.MarkFlagRequired("external-user-id")
+		chimeSdkMeetings_createAttendeeCmd.MarkFlagRequired("meeting-id")
+	})
 	chimeSdkMeetingsCmd.AddCommand(chimeSdkMeetings_createAttendeeCmd)
 }

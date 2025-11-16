@@ -12,8 +12,10 @@ var iam_deleteLoginProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteLoginProfileCmd).Standalone()
+	carapace.Gen(iam_deleteLoginProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteLoginProfileCmd).Standalone()
 
-	iam_deleteLoginProfileCmd.Flags().String("user-name", "", "The name of the user whose password you want to delete.")
+		iam_deleteLoginProfileCmd.Flags().String("user-name", "", "The name of the user whose password you want to delete.")
+	})
 	iamCmd.AddCommand(iam_deleteLoginProfileCmd)
 }

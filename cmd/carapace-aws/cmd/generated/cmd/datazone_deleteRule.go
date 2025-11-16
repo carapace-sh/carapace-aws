@@ -12,11 +12,13 @@ var datazone_deleteRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteRuleCmd).Standalone()
+	carapace.Gen(datazone_deleteRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteRuleCmd).Standalone()
 
-	datazone_deleteRuleCmd.Flags().String("domain-identifier", "", "The ID of the domain that where the rule is to be deleted.")
-	datazone_deleteRuleCmd.Flags().String("identifier", "", "The ID of the rule that is to be deleted.")
-	datazone_deleteRuleCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteRuleCmd.MarkFlagRequired("identifier")
+		datazone_deleteRuleCmd.Flags().String("domain-identifier", "", "The ID of the domain that where the rule is to be deleted.")
+		datazone_deleteRuleCmd.Flags().String("identifier", "", "The ID of the rule that is to be deleted.")
+		datazone_deleteRuleCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteRuleCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteRuleCmd)
 }

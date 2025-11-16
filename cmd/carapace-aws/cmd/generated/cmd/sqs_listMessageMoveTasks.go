@@ -12,10 +12,12 @@ var sqs_listMessageMoveTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_listMessageMoveTasksCmd).Standalone()
+	carapace.Gen(sqs_listMessageMoveTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_listMessageMoveTasksCmd).Standalone()
 
-	sqs_listMessageMoveTasksCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	sqs_listMessageMoveTasksCmd.Flags().String("source-arn", "", "The ARN of the queue whose message movement tasks are to be listed.")
-	sqs_listMessageMoveTasksCmd.MarkFlagRequired("source-arn")
+		sqs_listMessageMoveTasksCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		sqs_listMessageMoveTasksCmd.Flags().String("source-arn", "", "The ARN of the queue whose message movement tasks are to be listed.")
+		sqs_listMessageMoveTasksCmd.MarkFlagRequired("source-arn")
+	})
 	sqsCmd.AddCommand(sqs_listMessageMoveTasksCmd)
 }

@@ -12,9 +12,11 @@ var secretsmanager_cancelRotateSecretCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_cancelRotateSecretCmd).Standalone()
+	carapace.Gen(secretsmanager_cancelRotateSecretCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_cancelRotateSecretCmd).Standalone()
 
-	secretsmanager_cancelRotateSecretCmd.Flags().String("secret-id", "", "The ARN or name of the secret.")
-	secretsmanager_cancelRotateSecretCmd.MarkFlagRequired("secret-id")
+		secretsmanager_cancelRotateSecretCmd.Flags().String("secret-id", "", "The ARN or name of the secret.")
+		secretsmanager_cancelRotateSecretCmd.MarkFlagRequired("secret-id")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_cancelRotateSecretCmd)
 }

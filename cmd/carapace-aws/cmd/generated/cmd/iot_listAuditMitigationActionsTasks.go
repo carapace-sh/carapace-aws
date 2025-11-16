@@ -12,16 +12,18 @@ var iot_listAuditMitigationActionsTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listAuditMitigationActionsTasksCmd).Standalone()
+	carapace.Gen(iot_listAuditMitigationActionsTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listAuditMitigationActionsTasksCmd).Standalone()
 
-	iot_listAuditMitigationActionsTasksCmd.Flags().String("audit-task-id", "", "Specify this filter to limit results to tasks that were applied to results for a specific audit.")
-	iot_listAuditMitigationActionsTasksCmd.Flags().String("end-time", "", "Specify this filter to limit results to tasks that were completed or canceled on or before a specific date and time.")
-	iot_listAuditMitigationActionsTasksCmd.Flags().String("finding-id", "", "Specify this filter to limit results to tasks that were applied to a specific audit finding.")
-	iot_listAuditMitigationActionsTasksCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_listAuditMitigationActionsTasksCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	iot_listAuditMitigationActionsTasksCmd.Flags().String("start-time", "", "Specify this filter to limit results to tasks that began on or after a specific date and time.")
-	iot_listAuditMitigationActionsTasksCmd.Flags().String("task-status", "", "Specify this filter to limit results to tasks that are in a specific state.")
-	iot_listAuditMitigationActionsTasksCmd.MarkFlagRequired("end-time")
-	iot_listAuditMitigationActionsTasksCmd.MarkFlagRequired("start-time")
+		iot_listAuditMitigationActionsTasksCmd.Flags().String("audit-task-id", "", "Specify this filter to limit results to tasks that were applied to results for a specific audit.")
+		iot_listAuditMitigationActionsTasksCmd.Flags().String("end-time", "", "Specify this filter to limit results to tasks that were completed or canceled on or before a specific date and time.")
+		iot_listAuditMitigationActionsTasksCmd.Flags().String("finding-id", "", "Specify this filter to limit results to tasks that were applied to a specific audit finding.")
+		iot_listAuditMitigationActionsTasksCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_listAuditMitigationActionsTasksCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iot_listAuditMitigationActionsTasksCmd.Flags().String("start-time", "", "Specify this filter to limit results to tasks that began on or after a specific date and time.")
+		iot_listAuditMitigationActionsTasksCmd.Flags().String("task-status", "", "Specify this filter to limit results to tasks that are in a specific state.")
+		iot_listAuditMitigationActionsTasksCmd.MarkFlagRequired("end-time")
+		iot_listAuditMitigationActionsTasksCmd.MarkFlagRequired("start-time")
+	})
 	iotCmd.AddCommand(iot_listAuditMitigationActionsTasksCmd)
 }

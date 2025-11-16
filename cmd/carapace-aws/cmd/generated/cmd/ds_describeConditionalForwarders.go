@@ -12,10 +12,12 @@ var ds_describeConditionalForwardersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_describeConditionalForwardersCmd).Standalone()
+	carapace.Gen(ds_describeConditionalForwardersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_describeConditionalForwardersCmd).Standalone()
 
-	ds_describeConditionalForwardersCmd.Flags().String("directory-id", "", "The directory ID for which to get the list of associated conditional forwarders.")
-	ds_describeConditionalForwardersCmd.Flags().String("remote-domain-names", "", "The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders.")
-	ds_describeConditionalForwardersCmd.MarkFlagRequired("directory-id")
+		ds_describeConditionalForwardersCmd.Flags().String("directory-id", "", "The directory ID for which to get the list of associated conditional forwarders.")
+		ds_describeConditionalForwardersCmd.Flags().String("remote-domain-names", "", "The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders.")
+		ds_describeConditionalForwardersCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_describeConditionalForwardersCmd)
 }

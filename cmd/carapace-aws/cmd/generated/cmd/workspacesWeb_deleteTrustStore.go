@@ -12,9 +12,11 @@ var workspacesWeb_deleteTrustStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_deleteTrustStoreCmd).Standalone()
+	carapace.Gen(workspacesWeb_deleteTrustStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_deleteTrustStoreCmd).Standalone()
 
-	workspacesWeb_deleteTrustStoreCmd.Flags().String("trust-store-arn", "", "The ARN of the trust store.")
-	workspacesWeb_deleteTrustStoreCmd.MarkFlagRequired("trust-store-arn")
+		workspacesWeb_deleteTrustStoreCmd.Flags().String("trust-store-arn", "", "The ARN of the trust store.")
+		workspacesWeb_deleteTrustStoreCmd.MarkFlagRequired("trust-store-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_deleteTrustStoreCmd)
 }

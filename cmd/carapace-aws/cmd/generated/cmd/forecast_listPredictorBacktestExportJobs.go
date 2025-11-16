@@ -12,10 +12,12 @@ var forecast_listPredictorBacktestExportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_listPredictorBacktestExportJobsCmd).Standalone()
+	carapace.Gen(forecast_listPredictorBacktestExportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_listPredictorBacktestExportJobsCmd).Standalone()
 
-	forecast_listPredictorBacktestExportJobsCmd.Flags().String("filters", "", "An array of filters.")
-	forecast_listPredictorBacktestExportJobsCmd.Flags().String("max-results", "", "The number of items to return in the response.")
-	forecast_listPredictorBacktestExportJobsCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a NextToken.")
+		forecast_listPredictorBacktestExportJobsCmd.Flags().String("filters", "", "An array of filters.")
+		forecast_listPredictorBacktestExportJobsCmd.Flags().String("max-results", "", "The number of items to return in the response.")
+		forecast_listPredictorBacktestExportJobsCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a NextToken.")
+	})
 	forecastCmd.AddCommand(forecast_listPredictorBacktestExportJobsCmd)
 }

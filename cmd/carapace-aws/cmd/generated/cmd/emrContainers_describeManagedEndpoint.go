@@ -12,11 +12,13 @@ var emrContainers_describeManagedEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_describeManagedEndpointCmd).Standalone()
+	carapace.Gen(emrContainers_describeManagedEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_describeManagedEndpointCmd).Standalone()
 
-	emrContainers_describeManagedEndpointCmd.Flags().String("id", "", "This output displays ID of the managed endpoint.")
-	emrContainers_describeManagedEndpointCmd.Flags().String("virtual-cluster-id", "", "The ID of the endpoint's virtual cluster.")
-	emrContainers_describeManagedEndpointCmd.MarkFlagRequired("id")
-	emrContainers_describeManagedEndpointCmd.MarkFlagRequired("virtual-cluster-id")
+		emrContainers_describeManagedEndpointCmd.Flags().String("id", "", "This output displays ID of the managed endpoint.")
+		emrContainers_describeManagedEndpointCmd.Flags().String("virtual-cluster-id", "", "The ID of the endpoint's virtual cluster.")
+		emrContainers_describeManagedEndpointCmd.MarkFlagRequired("id")
+		emrContainers_describeManagedEndpointCmd.MarkFlagRequired("virtual-cluster-id")
+	})
 	emrContainersCmd.AddCommand(emrContainers_describeManagedEndpointCmd)
 }

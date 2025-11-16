@@ -12,9 +12,11 @@ var ivs_deletePlaybackKeyPairCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_deletePlaybackKeyPairCmd).Standalone()
+	carapace.Gen(ivs_deletePlaybackKeyPairCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_deletePlaybackKeyPairCmd).Standalone()
 
-	ivs_deletePlaybackKeyPairCmd.Flags().String("arn", "", "ARN of the key pair to be deleted.")
-	ivs_deletePlaybackKeyPairCmd.MarkFlagRequired("arn")
+		ivs_deletePlaybackKeyPairCmd.Flags().String("arn", "", "ARN of the key pair to be deleted.")
+		ivs_deletePlaybackKeyPairCmd.MarkFlagRequired("arn")
+	})
 	ivsCmd.AddCommand(ivs_deletePlaybackKeyPairCmd)
 }

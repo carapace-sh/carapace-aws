@@ -12,13 +12,15 @@ var route53resolver_updateResolverEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_updateResolverEndpointCmd).Standalone()
+	carapace.Gen(route53resolver_updateResolverEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_updateResolverEndpointCmd).Standalone()
 
-	route53resolver_updateResolverEndpointCmd.Flags().String("name", "", "The name of the Resolver endpoint that you want to update.")
-	route53resolver_updateResolverEndpointCmd.Flags().String("protocols", "", "The protocols you want to use for the endpoint.")
-	route53resolver_updateResolverEndpointCmd.Flags().String("resolver-endpoint-id", "", "The ID of the Resolver endpoint that you want to update.")
-	route53resolver_updateResolverEndpointCmd.Flags().String("resolver-endpoint-type", "", "Specifies the endpoint type for what type of IP address the endpoint uses to forward DNS queries.")
-	route53resolver_updateResolverEndpointCmd.Flags().String("update-ip-addresses", "", "Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to dual-stack.")
-	route53resolver_updateResolverEndpointCmd.MarkFlagRequired("resolver-endpoint-id")
+		route53resolver_updateResolverEndpointCmd.Flags().String("name", "", "The name of the Resolver endpoint that you want to update.")
+		route53resolver_updateResolverEndpointCmd.Flags().String("protocols", "", "The protocols you want to use for the endpoint.")
+		route53resolver_updateResolverEndpointCmd.Flags().String("resolver-endpoint-id", "", "The ID of the Resolver endpoint that you want to update.")
+		route53resolver_updateResolverEndpointCmd.Flags().String("resolver-endpoint-type", "", "Specifies the endpoint type for what type of IP address the endpoint uses to forward DNS queries.")
+		route53resolver_updateResolverEndpointCmd.Flags().String("update-ip-addresses", "", "Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to dual-stack.")
+		route53resolver_updateResolverEndpointCmd.MarkFlagRequired("resolver-endpoint-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_updateResolverEndpointCmd)
 }

@@ -12,11 +12,13 @@ var servicecatalog_describeProductAsAdminCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_describeProductAsAdminCmd).Standalone()
+	carapace.Gen(servicecatalog_describeProductAsAdminCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_describeProductAsAdminCmd).Standalone()
 
-	servicecatalog_describeProductAsAdminCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_describeProductAsAdminCmd.Flags().String("id", "", "The product identifier.")
-	servicecatalog_describeProductAsAdminCmd.Flags().String("name", "", "The product name.")
-	servicecatalog_describeProductAsAdminCmd.Flags().String("source-portfolio-id", "", "The unique identifier of the shared portfolio that the specified product is associated with.")
+		servicecatalog_describeProductAsAdminCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_describeProductAsAdminCmd.Flags().String("id", "", "The product identifier.")
+		servicecatalog_describeProductAsAdminCmd.Flags().String("name", "", "The product name.")
+		servicecatalog_describeProductAsAdminCmd.Flags().String("source-portfolio-id", "", "The unique identifier of the shared portfolio that the specified product is associated with.")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_describeProductAsAdminCmd)
 }

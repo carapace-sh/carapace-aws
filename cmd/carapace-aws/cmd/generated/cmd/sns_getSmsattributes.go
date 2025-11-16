@@ -12,8 +12,10 @@ var sns_getSmsattributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_getSmsattributesCmd).Standalone()
+	carapace.Gen(sns_getSmsattributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_getSmsattributesCmd).Standalone()
 
-	sns_getSmsattributesCmd.Flags().String("attributes", "", "A list of the individual attribute names, such as `MonthlySpendLimit`, for which you want values.")
+		sns_getSmsattributesCmd.Flags().String("attributes", "", "A list of the individual attribute names, such as `MonthlySpendLimit`, for which you want values.")
+	})
 	snsCmd.AddCommand(sns_getSmsattributesCmd)
 }

@@ -12,9 +12,11 @@ var transfer_listServersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_listServersCmd).Standalone()
+	carapace.Gen(transfer_listServersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_listServersCmd).Standalone()
 
-	transfer_listServersCmd.Flags().String("max-results", "", "Specifies the number of servers to return as a response to the `ListServers` query.")
-	transfer_listServersCmd.Flags().String("next-token", "", "When additional results are obtained from the `ListServers` command, a `NextToken` parameter is returned in the output.")
+		transfer_listServersCmd.Flags().String("max-results", "", "Specifies the number of servers to return as a response to the `ListServers` query.")
+		transfer_listServersCmd.Flags().String("next-token", "", "When additional results are obtained from the `ListServers` command, a `NextToken` parameter is returned in the output.")
+	})
 	transferCmd.AddCommand(transfer_listServersCmd)
 }

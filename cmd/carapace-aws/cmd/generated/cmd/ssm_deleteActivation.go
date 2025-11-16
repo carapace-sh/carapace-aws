@@ -12,9 +12,11 @@ var ssm_deleteActivationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_deleteActivationCmd).Standalone()
+	carapace.Gen(ssm_deleteActivationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_deleteActivationCmd).Standalone()
 
-	ssm_deleteActivationCmd.Flags().String("activation-id", "", "The ID of the activation that you want to delete.")
-	ssm_deleteActivationCmd.MarkFlagRequired("activation-id")
+		ssm_deleteActivationCmd.Flags().String("activation-id", "", "The ID of the activation that you want to delete.")
+		ssm_deleteActivationCmd.MarkFlagRequired("activation-id")
+	})
 	ssmCmd.AddCommand(ssm_deleteActivationCmd)
 }

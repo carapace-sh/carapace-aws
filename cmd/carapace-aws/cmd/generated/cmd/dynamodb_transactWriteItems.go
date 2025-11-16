@@ -12,12 +12,14 @@ var dynamodb_transactWriteItemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_transactWriteItemsCmd).Standalone()
+	carapace.Gen(dynamodb_transactWriteItemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_transactWriteItemsCmd).Standalone()
 
-	dynamodb_transactWriteItemsCmd.Flags().String("client-request-token", "", "Providing a `ClientRequestToken` makes the call to `TransactWriteItems` idempotent, meaning that multiple identical calls have the same effect as one single call.")
-	dynamodb_transactWriteItemsCmd.Flags().String("return-consumed-capacity", "", "")
-	dynamodb_transactWriteItemsCmd.Flags().String("return-item-collection-metrics", "", "Determines whether item collection metrics are returned.")
-	dynamodb_transactWriteItemsCmd.Flags().String("transact-items", "", "An ordered array of up to 100 `TransactWriteItem` objects, each of which contains a `ConditionCheck`, `Put`, `Update`, or `Delete` object.")
-	dynamodb_transactWriteItemsCmd.MarkFlagRequired("transact-items")
+		dynamodb_transactWriteItemsCmd.Flags().String("client-request-token", "", "Providing a `ClientRequestToken` makes the call to `TransactWriteItems` idempotent, meaning that multiple identical calls have the same effect as one single call.")
+		dynamodb_transactWriteItemsCmd.Flags().String("return-consumed-capacity", "", "")
+		dynamodb_transactWriteItemsCmd.Flags().String("return-item-collection-metrics", "", "Determines whether item collection metrics are returned.")
+		dynamodb_transactWriteItemsCmd.Flags().String("transact-items", "", "An ordered array of up to 100 `TransactWriteItem` objects, each of which contains a `ConditionCheck`, `Put`, `Update`, or `Delete` object.")
+		dynamodb_transactWriteItemsCmd.MarkFlagRequired("transact-items")
+	})
 	dynamodbCmd.AddCommand(dynamodb_transactWriteItemsCmd)
 }

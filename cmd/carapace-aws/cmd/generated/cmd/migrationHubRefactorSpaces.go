@@ -12,7 +12,9 @@ var migrationHubRefactorSpacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpacesCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpacesCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(migrationHubRefactorSpacesCmd)
 }

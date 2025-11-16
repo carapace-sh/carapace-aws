@@ -12,11 +12,13 @@ var apigatewayv2_resetAuthorizersCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigatewayv2_resetAuthorizersCacheCmd).Standalone()
+	carapace.Gen(apigatewayv2_resetAuthorizersCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigatewayv2_resetAuthorizersCacheCmd).Standalone()
 
-	apigatewayv2_resetAuthorizersCacheCmd.Flags().String("api-id", "", "The API identifier.")
-	apigatewayv2_resetAuthorizersCacheCmd.Flags().String("stage-name", "", "The stage name.")
-	apigatewayv2_resetAuthorizersCacheCmd.MarkFlagRequired("api-id")
-	apigatewayv2_resetAuthorizersCacheCmd.MarkFlagRequired("stage-name")
+		apigatewayv2_resetAuthorizersCacheCmd.Flags().String("api-id", "", "The API identifier.")
+		apigatewayv2_resetAuthorizersCacheCmd.Flags().String("stage-name", "", "The stage name.")
+		apigatewayv2_resetAuthorizersCacheCmd.MarkFlagRequired("api-id")
+		apigatewayv2_resetAuthorizersCacheCmd.MarkFlagRequired("stage-name")
+	})
 	apigatewayv2Cmd.AddCommand(apigatewayv2_resetAuthorizersCacheCmd)
 }

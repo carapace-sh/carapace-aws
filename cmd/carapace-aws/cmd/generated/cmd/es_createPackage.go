@@ -12,14 +12,16 @@ var es_createPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_createPackageCmd).Standalone()
+	carapace.Gen(es_createPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_createPackageCmd).Standalone()
 
-	es_createPackageCmd.Flags().String("package-description", "", "Description of the package.")
-	es_createPackageCmd.Flags().String("package-name", "", "Unique identifier for the package.")
-	es_createPackageCmd.Flags().String("package-source", "", "The customer S3 location `PackageSource` for importing the package.")
-	es_createPackageCmd.Flags().String("package-type", "", "Type of package.")
-	es_createPackageCmd.MarkFlagRequired("package-name")
-	es_createPackageCmd.MarkFlagRequired("package-source")
-	es_createPackageCmd.MarkFlagRequired("package-type")
+		es_createPackageCmd.Flags().String("package-description", "", "Description of the package.")
+		es_createPackageCmd.Flags().String("package-name", "", "Unique identifier for the package.")
+		es_createPackageCmd.Flags().String("package-source", "", "The customer S3 location `PackageSource` for importing the package.")
+		es_createPackageCmd.Flags().String("package-type", "", "Type of package.")
+		es_createPackageCmd.MarkFlagRequired("package-name")
+		es_createPackageCmd.MarkFlagRequired("package-source")
+		es_createPackageCmd.MarkFlagRequired("package-type")
+	})
 	esCmd.AddCommand(es_createPackageCmd)
 }

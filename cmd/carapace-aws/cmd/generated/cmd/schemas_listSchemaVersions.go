@@ -12,13 +12,15 @@ var schemas_listSchemaVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_listSchemaVersionsCmd).Standalone()
+	carapace.Gen(schemas_listSchemaVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_listSchemaVersionsCmd).Standalone()
 
-	schemas_listSchemaVersionsCmd.Flags().String("limit", "", "")
-	schemas_listSchemaVersionsCmd.Flags().String("next-token", "", "The token that specifies the next page of results to return.")
-	schemas_listSchemaVersionsCmd.Flags().String("registry-name", "", "The name of the registry.")
-	schemas_listSchemaVersionsCmd.Flags().String("schema-name", "", "The name of the schema.")
-	schemas_listSchemaVersionsCmd.MarkFlagRequired("registry-name")
-	schemas_listSchemaVersionsCmd.MarkFlagRequired("schema-name")
+		schemas_listSchemaVersionsCmd.Flags().String("limit", "", "")
+		schemas_listSchemaVersionsCmd.Flags().String("next-token", "", "The token that specifies the next page of results to return.")
+		schemas_listSchemaVersionsCmd.Flags().String("registry-name", "", "The name of the registry.")
+		schemas_listSchemaVersionsCmd.Flags().String("schema-name", "", "The name of the schema.")
+		schemas_listSchemaVersionsCmd.MarkFlagRequired("registry-name")
+		schemas_listSchemaVersionsCmd.MarkFlagRequired("schema-name")
+	})
 	schemasCmd.AddCommand(schemas_listSchemaVersionsCmd)
 }

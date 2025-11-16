@@ -12,11 +12,13 @@ var clouddirectory_detachTypedLinkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_detachTypedLinkCmd).Standalone()
+	carapace.Gen(clouddirectory_detachTypedLinkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_detachTypedLinkCmd).Standalone()
 
-	clouddirectory_detachTypedLinkCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) of the directory where you want to detach the typed link.")
-	clouddirectory_detachTypedLinkCmd.Flags().String("typed-link-specifier", "", "Used to accept a typed link specifier as input.")
-	clouddirectory_detachTypedLinkCmd.MarkFlagRequired("directory-arn")
-	clouddirectory_detachTypedLinkCmd.MarkFlagRequired("typed-link-specifier")
+		clouddirectory_detachTypedLinkCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) of the directory where you want to detach the typed link.")
+		clouddirectory_detachTypedLinkCmd.Flags().String("typed-link-specifier", "", "Used to accept a typed link specifier as input.")
+		clouddirectory_detachTypedLinkCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_detachTypedLinkCmd.MarkFlagRequired("typed-link-specifier")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_detachTypedLinkCmd)
 }

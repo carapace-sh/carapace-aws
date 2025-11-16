@@ -12,9 +12,11 @@ var lexv2Models_describeTestSetGenerationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_describeTestSetGenerationCmd).Standalone()
+	carapace.Gen(lexv2Models_describeTestSetGenerationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_describeTestSetGenerationCmd).Standalone()
 
-	lexv2Models_describeTestSetGenerationCmd.Flags().String("test-set-generation-id", "", "The unique identifier of the test set generation.")
-	lexv2Models_describeTestSetGenerationCmd.MarkFlagRequired("test-set-generation-id")
+		lexv2Models_describeTestSetGenerationCmd.Flags().String("test-set-generation-id", "", "The unique identifier of the test set generation.")
+		lexv2Models_describeTestSetGenerationCmd.MarkFlagRequired("test-set-generation-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_describeTestSetGenerationCmd)
 }

@@ -12,11 +12,13 @@ var iam_removeUserFromGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_removeUserFromGroupCmd).Standalone()
+	carapace.Gen(iam_removeUserFromGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_removeUserFromGroupCmd).Standalone()
 
-	iam_removeUserFromGroupCmd.Flags().String("group-name", "", "The name of the group to update.")
-	iam_removeUserFromGroupCmd.Flags().String("user-name", "", "The name of the user to remove.")
-	iam_removeUserFromGroupCmd.MarkFlagRequired("group-name")
-	iam_removeUserFromGroupCmd.MarkFlagRequired("user-name")
+		iam_removeUserFromGroupCmd.Flags().String("group-name", "", "The name of the group to update.")
+		iam_removeUserFromGroupCmd.Flags().String("user-name", "", "The name of the user to remove.")
+		iam_removeUserFromGroupCmd.MarkFlagRequired("group-name")
+		iam_removeUserFromGroupCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_removeUserFromGroupCmd)
 }

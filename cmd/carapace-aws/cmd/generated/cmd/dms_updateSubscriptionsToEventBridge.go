@@ -12,8 +12,10 @@ var dms_updateSubscriptionsToEventBridgeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_updateSubscriptionsToEventBridgeCmd).Standalone()
+	carapace.Gen(dms_updateSubscriptionsToEventBridgeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_updateSubscriptionsToEventBridgeCmd).Standalone()
 
-	dms_updateSubscriptionsToEventBridgeCmd.Flags().String("force-move", "", "When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is.")
+		dms_updateSubscriptionsToEventBridgeCmd.Flags().String("force-move", "", "When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is.")
+	})
 	dmsCmd.AddCommand(dms_updateSubscriptionsToEventBridgeCmd)
 }

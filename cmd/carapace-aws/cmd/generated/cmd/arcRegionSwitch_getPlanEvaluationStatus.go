@@ -12,11 +12,13 @@ var arcRegionSwitch_getPlanEvaluationStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcRegionSwitch_getPlanEvaluationStatusCmd).Standalone()
+	carapace.Gen(arcRegionSwitch_getPlanEvaluationStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcRegionSwitch_getPlanEvaluationStatusCmd).Standalone()
 
-	arcRegionSwitch_getPlanEvaluationStatusCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
-	arcRegionSwitch_getPlanEvaluationStatusCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
-	arcRegionSwitch_getPlanEvaluationStatusCmd.Flags().String("plan-arn", "", "The Amazon Resource Name (ARN) of the Region switch plan to retrieve evaluation status for.")
-	arcRegionSwitch_getPlanEvaluationStatusCmd.MarkFlagRequired("plan-arn")
+		arcRegionSwitch_getPlanEvaluationStatusCmd.Flags().String("max-results", "", "The number of objects that you want to return with this call.")
+		arcRegionSwitch_getPlanEvaluationStatusCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		arcRegionSwitch_getPlanEvaluationStatusCmd.Flags().String("plan-arn", "", "The Amazon Resource Name (ARN) of the Region switch plan to retrieve evaluation status for.")
+		arcRegionSwitch_getPlanEvaluationStatusCmd.MarkFlagRequired("plan-arn")
+	})
 	arcRegionSwitchCmd.AddCommand(arcRegionSwitch_getPlanEvaluationStatusCmd)
 }

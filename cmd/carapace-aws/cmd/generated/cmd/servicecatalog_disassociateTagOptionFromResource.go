@@ -12,11 +12,13 @@ var servicecatalog_disassociateTagOptionFromResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_disassociateTagOptionFromResourceCmd).Standalone()
+	carapace.Gen(servicecatalog_disassociateTagOptionFromResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_disassociateTagOptionFromResourceCmd).Standalone()
 
-	servicecatalog_disassociateTagOptionFromResourceCmd.Flags().String("resource-id", "", "The resource identifier.")
-	servicecatalog_disassociateTagOptionFromResourceCmd.Flags().String("tag-option-id", "", "The TagOption identifier.")
-	servicecatalog_disassociateTagOptionFromResourceCmd.MarkFlagRequired("resource-id")
-	servicecatalog_disassociateTagOptionFromResourceCmd.MarkFlagRequired("tag-option-id")
+		servicecatalog_disassociateTagOptionFromResourceCmd.Flags().String("resource-id", "", "The resource identifier.")
+		servicecatalog_disassociateTagOptionFromResourceCmd.Flags().String("tag-option-id", "", "The TagOption identifier.")
+		servicecatalog_disassociateTagOptionFromResourceCmd.MarkFlagRequired("resource-id")
+		servicecatalog_disassociateTagOptionFromResourceCmd.MarkFlagRequired("tag-option-id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_disassociateTagOptionFromResourceCmd)
 }

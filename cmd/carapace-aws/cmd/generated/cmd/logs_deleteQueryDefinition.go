@@ -12,9 +12,11 @@ var logs_deleteQueryDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteQueryDefinitionCmd).Standalone()
+	carapace.Gen(logs_deleteQueryDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteQueryDefinitionCmd).Standalone()
 
-	logs_deleteQueryDefinitionCmd.Flags().String("query-definition-id", "", "The ID of the query definition that you want to delete.")
-	logs_deleteQueryDefinitionCmd.MarkFlagRequired("query-definition-id")
+		logs_deleteQueryDefinitionCmd.Flags().String("query-definition-id", "", "The ID of the query definition that you want to delete.")
+		logs_deleteQueryDefinitionCmd.MarkFlagRequired("query-definition-id")
+	})
 	logsCmd.AddCommand(logs_deleteQueryDefinitionCmd)
 }

@@ -12,7 +12,9 @@ var workspacesThinClientCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClientCmd).Standalone()
+	carapace.Gen(workspacesThinClientCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClientCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(workspacesThinClientCmd)
 }

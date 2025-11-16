@@ -12,9 +12,11 @@ var kms_disableKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_disableKeyCmd).Standalone()
+	carapace.Gen(kms_disableKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_disableKeyCmd).Standalone()
 
-	kms_disableKeyCmd.Flags().String("key-id", "", "Identifies the KMS key to disable.")
-	kms_disableKeyCmd.MarkFlagRequired("key-id")
+		kms_disableKeyCmd.Flags().String("key-id", "", "Identifies the KMS key to disable.")
+		kms_disableKeyCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_disableKeyCmd)
 }

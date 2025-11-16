@@ -12,11 +12,13 @@ var cloudtrail_describeTrailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_describeTrailsCmd).Standalone()
+	carapace.Gen(cloudtrail_describeTrailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_describeTrailsCmd).Standalone()
 
-	cloudtrail_describeTrailsCmd.Flags().Bool("include-shadow-trails", false, "Specifies whether to include shadow trails in the response.")
-	cloudtrail_describeTrailsCmd.Flags().Bool("no-include-shadow-trails", false, "Specifies whether to include shadow trails in the response.")
-	cloudtrail_describeTrailsCmd.Flags().String("trail-name-list", "", "Specifies a list of trail names, trail ARNs, or both, of the trails to describe.")
-	cloudtrail_describeTrailsCmd.Flag("no-include-shadow-trails").Hidden = true
+		cloudtrail_describeTrailsCmd.Flags().Bool("include-shadow-trails", false, "Specifies whether to include shadow trails in the response.")
+		cloudtrail_describeTrailsCmd.Flags().Bool("no-include-shadow-trails", false, "Specifies whether to include shadow trails in the response.")
+		cloudtrail_describeTrailsCmd.Flags().String("trail-name-list", "", "Specifies a list of trail names, trail ARNs, or both, of the trails to describe.")
+		cloudtrail_describeTrailsCmd.Flag("no-include-shadow-trails").Hidden = true
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_describeTrailsCmd)
 }

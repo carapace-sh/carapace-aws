@@ -12,10 +12,12 @@ var inspectorScan_scanSbomCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspectorScan_scanSbomCmd).Standalone()
+	carapace.Gen(inspectorScan_scanSbomCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspectorScan_scanSbomCmd).Standalone()
 
-	inspectorScan_scanSbomCmd.Flags().String("output-format", "", "The output format for the vulnerability report.")
-	inspectorScan_scanSbomCmd.Flags().String("sbom", "", "The JSON file for the SBOM you want to scan.")
-	inspectorScan_scanSbomCmd.MarkFlagRequired("sbom")
+		inspectorScan_scanSbomCmd.Flags().String("output-format", "", "The output format for the vulnerability report.")
+		inspectorScan_scanSbomCmd.Flags().String("sbom", "", "The JSON file for the SBOM you want to scan.")
+		inspectorScan_scanSbomCmd.MarkFlagRequired("sbom")
+	})
 	inspectorScanCmd.AddCommand(inspectorScan_scanSbomCmd)
 }

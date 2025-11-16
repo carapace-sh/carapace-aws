@@ -12,9 +12,11 @@ var globalaccelerator_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_listTagsForResourceCmd).Standalone()
+	carapace.Gen(globalaccelerator_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_listTagsForResourceCmd).Standalone()
 
-	globalaccelerator_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the accelerator to list tags for.")
-	globalaccelerator_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		globalaccelerator_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the accelerator to list tags for.")
+		globalaccelerator_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_listTagsForResourceCmd)
 }

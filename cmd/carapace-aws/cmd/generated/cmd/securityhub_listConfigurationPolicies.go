@@ -12,9 +12,11 @@ var securityhub_listConfigurationPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_listConfigurationPoliciesCmd).Standalone()
+	carapace.Gen(securityhub_listConfigurationPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_listConfigurationPoliciesCmd).Standalone()
 
-	securityhub_listConfigurationPoliciesCmd.Flags().String("max-results", "", "The maximum number of results that's returned by `ListConfigurationPolicies` in each page of the response.")
-	securityhub_listConfigurationPoliciesCmd.Flags().String("next-token", "", "The NextToken value that's returned from a previous paginated `ListConfigurationPolicies` request where `MaxResults` was used but the results exceeded the value of that parameter.")
+		securityhub_listConfigurationPoliciesCmd.Flags().String("max-results", "", "The maximum number of results that's returned by `ListConfigurationPolicies` in each page of the response.")
+		securityhub_listConfigurationPoliciesCmd.Flags().String("next-token", "", "The NextToken value that's returned from a previous paginated `ListConfigurationPolicies` request where `MaxResults` was used but the results exceeded the value of that parameter.")
+	})
 	securityhubCmd.AddCommand(securityhub_listConfigurationPoliciesCmd)
 }

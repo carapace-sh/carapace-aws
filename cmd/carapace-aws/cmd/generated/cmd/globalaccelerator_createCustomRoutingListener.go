@@ -12,13 +12,15 @@ var globalaccelerator_createCustomRoutingListenerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_createCustomRoutingListenerCmd).Standalone()
+	carapace.Gen(globalaccelerator_createCustomRoutingListenerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_createCustomRoutingListenerCmd).Standalone()
 
-	globalaccelerator_createCustomRoutingListenerCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the accelerator for a custom routing listener.")
-	globalaccelerator_createCustomRoutingListenerCmd.Flags().String("idempotency-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.")
-	globalaccelerator_createCustomRoutingListenerCmd.Flags().String("port-ranges", "", "The port range to support for connections from clients to your accelerator.")
-	globalaccelerator_createCustomRoutingListenerCmd.MarkFlagRequired("accelerator-arn")
-	globalaccelerator_createCustomRoutingListenerCmd.MarkFlagRequired("idempotency-token")
-	globalaccelerator_createCustomRoutingListenerCmd.MarkFlagRequired("port-ranges")
+		globalaccelerator_createCustomRoutingListenerCmd.Flags().String("accelerator-arn", "", "The Amazon Resource Name (ARN) of the accelerator for a custom routing listener.")
+		globalaccelerator_createCustomRoutingListenerCmd.Flags().String("idempotency-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.")
+		globalaccelerator_createCustomRoutingListenerCmd.Flags().String("port-ranges", "", "The port range to support for connections from clients to your accelerator.")
+		globalaccelerator_createCustomRoutingListenerCmd.MarkFlagRequired("accelerator-arn")
+		globalaccelerator_createCustomRoutingListenerCmd.MarkFlagRequired("idempotency-token")
+		globalaccelerator_createCustomRoutingListenerCmd.MarkFlagRequired("port-ranges")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_createCustomRoutingListenerCmd)
 }

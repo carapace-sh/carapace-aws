@@ -12,9 +12,11 @@ var dataexchange_getDataSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_getDataSetCmd).Standalone()
+	carapace.Gen(dataexchange_getDataSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_getDataSetCmd).Standalone()
 
-	dataexchange_getDataSetCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
-	dataexchange_getDataSetCmd.MarkFlagRequired("data-set-id")
+		dataexchange_getDataSetCmd.Flags().String("data-set-id", "", "The unique identifier for a data set.")
+		dataexchange_getDataSetCmd.MarkFlagRequired("data-set-id")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_getDataSetCmd)
 }

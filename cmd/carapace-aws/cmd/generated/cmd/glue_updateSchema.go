@@ -12,12 +12,14 @@ var glue_updateSchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_updateSchemaCmd).Standalone()
+	carapace.Gen(glue_updateSchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_updateSchemaCmd).Standalone()
 
-	glue_updateSchemaCmd.Flags().String("compatibility", "", "The new compatibility setting for the schema.")
-	glue_updateSchemaCmd.Flags().String("description", "", "The new description for the schema.")
-	glue_updateSchemaCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
-	glue_updateSchemaCmd.Flags().String("schema-version-number", "", "Version number required for check pointing.")
-	glue_updateSchemaCmd.MarkFlagRequired("schema-id")
+		glue_updateSchemaCmd.Flags().String("compatibility", "", "The new compatibility setting for the schema.")
+		glue_updateSchemaCmd.Flags().String("description", "", "The new description for the schema.")
+		glue_updateSchemaCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
+		glue_updateSchemaCmd.Flags().String("schema-version-number", "", "Version number required for check pointing.")
+		glue_updateSchemaCmd.MarkFlagRequired("schema-id")
+	})
 	glueCmd.AddCommand(glue_updateSchemaCmd)
 }

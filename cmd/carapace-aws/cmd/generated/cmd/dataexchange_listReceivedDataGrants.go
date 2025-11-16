@@ -12,10 +12,12 @@ var dataexchange_listReceivedDataGrantsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_listReceivedDataGrantsCmd).Standalone()
+	carapace.Gen(dataexchange_listReceivedDataGrantsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_listReceivedDataGrantsCmd).Standalone()
 
-	dataexchange_listReceivedDataGrantsCmd.Flags().String("acceptance-state", "", "The acceptance state of the data grants to list.")
-	dataexchange_listReceivedDataGrantsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
-	dataexchange_listReceivedDataGrantsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		dataexchange_listReceivedDataGrantsCmd.Flags().String("acceptance-state", "", "The acceptance state of the data grants to list.")
+		dataexchange_listReceivedDataGrantsCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
+		dataexchange_listReceivedDataGrantsCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_listReceivedDataGrantsCmd)
 }

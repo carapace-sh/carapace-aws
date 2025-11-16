@@ -12,9 +12,11 @@ var mediapackage_describeHarvestJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackage_describeHarvestJobCmd).Standalone()
+	carapace.Gen(mediapackage_describeHarvestJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackage_describeHarvestJobCmd).Standalone()
 
-	mediapackage_describeHarvestJobCmd.Flags().String("id", "", "The ID of the HarvestJob.")
-	mediapackage_describeHarvestJobCmd.MarkFlagRequired("id")
+		mediapackage_describeHarvestJobCmd.Flags().String("id", "", "The ID of the HarvestJob.")
+		mediapackage_describeHarvestJobCmd.MarkFlagRequired("id")
+	})
 	mediapackageCmd.AddCommand(mediapackage_describeHarvestJobCmd)
 }

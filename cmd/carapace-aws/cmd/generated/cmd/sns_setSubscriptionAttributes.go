@@ -12,12 +12,14 @@ var sns_setSubscriptionAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_setSubscriptionAttributesCmd).Standalone()
+	carapace.Gen(sns_setSubscriptionAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_setSubscriptionAttributesCmd).Standalone()
 
-	sns_setSubscriptionAttributesCmd.Flags().String("attribute-name", "", "A map of attributes with their corresponding values.")
-	sns_setSubscriptionAttributesCmd.Flags().String("attribute-value", "", "The new value for the attribute in JSON format.")
-	sns_setSubscriptionAttributesCmd.Flags().String("subscription-arn", "", "The ARN of the subscription to modify.")
-	sns_setSubscriptionAttributesCmd.MarkFlagRequired("attribute-name")
-	sns_setSubscriptionAttributesCmd.MarkFlagRequired("subscription-arn")
+		sns_setSubscriptionAttributesCmd.Flags().String("attribute-name", "", "A map of attributes with their corresponding values.")
+		sns_setSubscriptionAttributesCmd.Flags().String("attribute-value", "", "The new value for the attribute in JSON format.")
+		sns_setSubscriptionAttributesCmd.Flags().String("subscription-arn", "", "The ARN of the subscription to modify.")
+		sns_setSubscriptionAttributesCmd.MarkFlagRequired("attribute-name")
+		sns_setSubscriptionAttributesCmd.MarkFlagRequired("subscription-arn")
+	})
 	snsCmd.AddCommand(sns_setSubscriptionAttributesCmd)
 }

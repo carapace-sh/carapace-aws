@@ -12,9 +12,11 @@ var securitylake_listSubscribersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_listSubscribersCmd).Standalone()
+	carapace.Gen(securitylake_listSubscribersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_listSubscribersCmd).Standalone()
 
-	securitylake_listSubscribersCmd.Flags().String("max-results", "", "The maximum number of accounts for which the configuration is displayed.")
-	securitylake_listSubscribersCmd.Flags().String("next-token", "", "If nextToken is returned, there are more results available.")
+		securitylake_listSubscribersCmd.Flags().String("max-results", "", "The maximum number of accounts for which the configuration is displayed.")
+		securitylake_listSubscribersCmd.Flags().String("next-token", "", "If nextToken is returned, there are more results available.")
+	})
 	securitylakeCmd.AddCommand(securitylake_listSubscribersCmd)
 }

@@ -12,8 +12,10 @@ var codepipeline_deregisterWebhookWithThirdPartyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_deregisterWebhookWithThirdPartyCmd).Standalone()
+	carapace.Gen(codepipeline_deregisterWebhookWithThirdPartyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_deregisterWebhookWithThirdPartyCmd).Standalone()
 
-	codepipeline_deregisterWebhookWithThirdPartyCmd.Flags().String("webhook-name", "", "The name of the webhook you want to deregister.")
+		codepipeline_deregisterWebhookWithThirdPartyCmd.Flags().String("webhook-name", "", "The name of the webhook you want to deregister.")
+	})
 	codepipelineCmd.AddCommand(codepipeline_deregisterWebhookWithThirdPartyCmd)
 }

@@ -12,13 +12,15 @@ var ssm_addTagsToResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_addTagsToResourceCmd).Standalone()
+	carapace.Gen(ssm_addTagsToResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_addTagsToResourceCmd).Standalone()
 
-	ssm_addTagsToResourceCmd.Flags().String("resource-id", "", "The resource ID you want to tag.")
-	ssm_addTagsToResourceCmd.Flags().String("resource-type", "", "Specifies the type of resource you are tagging.")
-	ssm_addTagsToResourceCmd.Flags().String("tags", "", "One or more tags.")
-	ssm_addTagsToResourceCmd.MarkFlagRequired("resource-id")
-	ssm_addTagsToResourceCmd.MarkFlagRequired("resource-type")
-	ssm_addTagsToResourceCmd.MarkFlagRequired("tags")
+		ssm_addTagsToResourceCmd.Flags().String("resource-id", "", "The resource ID you want to tag.")
+		ssm_addTagsToResourceCmd.Flags().String("resource-type", "", "Specifies the type of resource you are tagging.")
+		ssm_addTagsToResourceCmd.Flags().String("tags", "", "One or more tags.")
+		ssm_addTagsToResourceCmd.MarkFlagRequired("resource-id")
+		ssm_addTagsToResourceCmd.MarkFlagRequired("resource-type")
+		ssm_addTagsToResourceCmd.MarkFlagRequired("tags")
+	})
 	ssmCmd.AddCommand(ssm_addTagsToResourceCmd)
 }

@@ -12,11 +12,13 @@ var workspaces_describeImageAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeImageAssociationsCmd).Standalone()
+	carapace.Gen(workspaces_describeImageAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeImageAssociationsCmd).Standalone()
 
-	workspaces_describeImageAssociationsCmd.Flags().String("associated-resource-types", "", "The resource types of the associated resource.")
-	workspaces_describeImageAssociationsCmd.Flags().String("image-id", "", "The identifier of the image.")
-	workspaces_describeImageAssociationsCmd.MarkFlagRequired("associated-resource-types")
-	workspaces_describeImageAssociationsCmd.MarkFlagRequired("image-id")
+		workspaces_describeImageAssociationsCmd.Flags().String("associated-resource-types", "", "The resource types of the associated resource.")
+		workspaces_describeImageAssociationsCmd.Flags().String("image-id", "", "The identifier of the image.")
+		workspaces_describeImageAssociationsCmd.MarkFlagRequired("associated-resource-types")
+		workspaces_describeImageAssociationsCmd.MarkFlagRequired("image-id")
+	})
 	workspacesCmd.AddCommand(workspaces_describeImageAssociationsCmd)
 }

@@ -12,9 +12,11 @@ var greengrass_getLoggerDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_getLoggerDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_getLoggerDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_getLoggerDefinitionCmd).Standalone()
 
-	greengrass_getLoggerDefinitionCmd.Flags().String("logger-definition-id", "", "The ID of the logger definition.")
-	greengrass_getLoggerDefinitionCmd.MarkFlagRequired("logger-definition-id")
+		greengrass_getLoggerDefinitionCmd.Flags().String("logger-definition-id", "", "The ID of the logger definition.")
+		greengrass_getLoggerDefinitionCmd.MarkFlagRequired("logger-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_getLoggerDefinitionCmd)
 }

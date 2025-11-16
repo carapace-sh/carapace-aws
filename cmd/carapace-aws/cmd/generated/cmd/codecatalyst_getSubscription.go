@@ -12,9 +12,11 @@ var codecatalyst_getSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_getSubscriptionCmd).Standalone()
+	carapace.Gen(codecatalyst_getSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_getSubscriptionCmd).Standalone()
 
-	codecatalyst_getSubscriptionCmd.Flags().String("space-name", "", "The name of the space.")
-	codecatalyst_getSubscriptionCmd.MarkFlagRequired("space-name")
+		codecatalyst_getSubscriptionCmd.Flags().String("space-name", "", "The name of the space.")
+		codecatalyst_getSubscriptionCmd.MarkFlagRequired("space-name")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_getSubscriptionCmd)
 }

@@ -12,11 +12,13 @@ var ivschat_updateLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_updateLoggingConfigurationCmd).Standalone()
+	carapace.Gen(ivschat_updateLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_updateLoggingConfigurationCmd).Standalone()
 
-	ivschat_updateLoggingConfigurationCmd.Flags().String("destination-configuration", "", "A complex type that contains a destination configuration for where chat content will be logged.")
-	ivschat_updateLoggingConfigurationCmd.Flags().String("identifier", "", "Identifier of the logging configuration to be updated.")
-	ivschat_updateLoggingConfigurationCmd.Flags().String("name", "", "Logging-configuration name.")
-	ivschat_updateLoggingConfigurationCmd.MarkFlagRequired("identifier")
+		ivschat_updateLoggingConfigurationCmd.Flags().String("destination-configuration", "", "A complex type that contains a destination configuration for where chat content will be logged.")
+		ivschat_updateLoggingConfigurationCmd.Flags().String("identifier", "", "Identifier of the logging configuration to be updated.")
+		ivschat_updateLoggingConfigurationCmd.Flags().String("name", "", "Logging-configuration name.")
+		ivschat_updateLoggingConfigurationCmd.MarkFlagRequired("identifier")
+	})
 	ivschatCmd.AddCommand(ivschat_updateLoggingConfigurationCmd)
 }

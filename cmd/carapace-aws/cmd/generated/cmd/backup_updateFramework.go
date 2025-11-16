@@ -12,12 +12,14 @@ var backup_updateFrameworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_updateFrameworkCmd).Standalone()
+	carapace.Gen(backup_updateFrameworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_updateFrameworkCmd).Standalone()
 
-	backup_updateFrameworkCmd.Flags().String("framework-controls", "", "The controls that make up the framework.")
-	backup_updateFrameworkCmd.Flags().String("framework-description", "", "An optional description of the framework with a maximum 1,024 characters.")
-	backup_updateFrameworkCmd.Flags().String("framework-name", "", "The unique name of a framework.")
-	backup_updateFrameworkCmd.Flags().String("idempotency-token", "", "A customer-chosen string that you can use to distinguish between otherwise identical calls to `UpdateFrameworkInput`.")
-	backup_updateFrameworkCmd.MarkFlagRequired("framework-name")
+		backup_updateFrameworkCmd.Flags().String("framework-controls", "", "The controls that make up the framework.")
+		backup_updateFrameworkCmd.Flags().String("framework-description", "", "An optional description of the framework with a maximum 1,024 characters.")
+		backup_updateFrameworkCmd.Flags().String("framework-name", "", "The unique name of a framework.")
+		backup_updateFrameworkCmd.Flags().String("idempotency-token", "", "A customer-chosen string that you can use to distinguish between otherwise identical calls to `UpdateFrameworkInput`.")
+		backup_updateFrameworkCmd.MarkFlagRequired("framework-name")
+	})
 	backupCmd.AddCommand(backup_updateFrameworkCmd)
 }

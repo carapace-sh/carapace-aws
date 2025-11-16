@@ -12,9 +12,11 @@ var iotData_listRetainedMessagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotData_listRetainedMessagesCmd).Standalone()
+	carapace.Gen(iotData_listRetainedMessagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotData_listRetainedMessagesCmd).Standalone()
 
-	iotData_listRetainedMessagesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iotData_listRetainedMessagesCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+		iotData_listRetainedMessagesCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iotData_listRetainedMessagesCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+	})
 	iotDataCmd.AddCommand(iotData_listRetainedMessagesCmd)
 }

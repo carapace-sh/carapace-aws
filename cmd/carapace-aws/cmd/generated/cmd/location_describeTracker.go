@@ -12,9 +12,11 @@ var location_describeTrackerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_describeTrackerCmd).Standalone()
+	carapace.Gen(location_describeTrackerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_describeTrackerCmd).Standalone()
 
-	location_describeTrackerCmd.Flags().String("tracker-name", "", "The name of the tracker resource.")
-	location_describeTrackerCmd.MarkFlagRequired("tracker-name")
+		location_describeTrackerCmd.Flags().String("tracker-name", "", "The name of the tracker resource.")
+		location_describeTrackerCmd.MarkFlagRequired("tracker-name")
+	})
 	locationCmd.AddCommand(location_describeTrackerCmd)
 }

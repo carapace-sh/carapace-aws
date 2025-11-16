@@ -12,7 +12,9 @@ var cognitoIdpCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdpCmd).Standalone()
+	carapace.Gen(cognitoIdpCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdpCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cognitoIdpCmd)
 }

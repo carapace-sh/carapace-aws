@@ -12,11 +12,13 @@ var pi_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pi_listTagsForResourceCmd).Standalone()
+	carapace.Gen(pi_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pi_listTagsForResourceCmd).Standalone()
 
-	pi_listTagsForResourceCmd.Flags().String("resource-arn", "", "Lists all the tags for the Amazon RDS Performance Insights resource.")
-	pi_listTagsForResourceCmd.Flags().String("service-type", "", "List the tags for the Amazon Web Services service for which Performance Insights returns metrics.")
-	pi_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
-	pi_listTagsForResourceCmd.MarkFlagRequired("service-type")
+		pi_listTagsForResourceCmd.Flags().String("resource-arn", "", "Lists all the tags for the Amazon RDS Performance Insights resource.")
+		pi_listTagsForResourceCmd.Flags().String("service-type", "", "List the tags for the Amazon Web Services service for which Performance Insights returns metrics.")
+		pi_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		pi_listTagsForResourceCmd.MarkFlagRequired("service-type")
+	})
 	piCmd.AddCommand(pi_listTagsForResourceCmd)
 }

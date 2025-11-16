@@ -12,10 +12,12 @@ var iotsitewise_batchGetAssetPropertyValueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_batchGetAssetPropertyValueCmd).Standalone()
+	carapace.Gen(iotsitewise_batchGetAssetPropertyValueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_batchGetAssetPropertyValueCmd).Standalone()
 
-	iotsitewise_batchGetAssetPropertyValueCmd.Flags().String("entries", "", "The list of asset property value entries for the batch get request.")
-	iotsitewise_batchGetAssetPropertyValueCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	iotsitewise_batchGetAssetPropertyValueCmd.MarkFlagRequired("entries")
+		iotsitewise_batchGetAssetPropertyValueCmd.Flags().String("entries", "", "The list of asset property value entries for the batch get request.")
+		iotsitewise_batchGetAssetPropertyValueCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		iotsitewise_batchGetAssetPropertyValueCmd.MarkFlagRequired("entries")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_batchGetAssetPropertyValueCmd)
 }

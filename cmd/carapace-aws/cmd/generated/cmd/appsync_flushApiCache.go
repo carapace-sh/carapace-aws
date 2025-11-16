@@ -12,9 +12,11 @@ var appsync_flushApiCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_flushApiCacheCmd).Standalone()
+	carapace.Gen(appsync_flushApiCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_flushApiCacheCmd).Standalone()
 
-	appsync_flushApiCacheCmd.Flags().String("api-id", "", "The API ID.")
-	appsync_flushApiCacheCmd.MarkFlagRequired("api-id")
+		appsync_flushApiCacheCmd.Flags().String("api-id", "", "The API ID.")
+		appsync_flushApiCacheCmd.MarkFlagRequired("api-id")
+	})
 	appsyncCmd.AddCommand(appsync_flushApiCacheCmd)
 }

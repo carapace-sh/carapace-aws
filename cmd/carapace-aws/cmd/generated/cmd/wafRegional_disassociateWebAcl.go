@@ -12,9 +12,11 @@ var wafRegional_disassociateWebAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_disassociateWebAclCmd).Standalone()
+	carapace.Gen(wafRegional_disassociateWebAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_disassociateWebAclCmd).Standalone()
 
-	wafRegional_disassociateWebAclCmd.Flags().String("resource-arn", "", "The ARN (Amazon Resource Name) of the resource from which the web ACL is being removed, either an application load balancer or Amazon API Gateway stage.")
-	wafRegional_disassociateWebAclCmd.MarkFlagRequired("resource-arn")
+		wafRegional_disassociateWebAclCmd.Flags().String("resource-arn", "", "The ARN (Amazon Resource Name) of the resource from which the web ACL is being removed, either an application load balancer or Amazon API Gateway stage.")
+		wafRegional_disassociateWebAclCmd.MarkFlagRequired("resource-arn")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_disassociateWebAclCmd)
 }

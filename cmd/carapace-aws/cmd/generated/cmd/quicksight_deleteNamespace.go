@@ -12,11 +12,13 @@ var quicksight_deleteNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteNamespaceCmd).Standalone()
+	carapace.Gen(quicksight_deleteNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteNamespaceCmd).Standalone()
 
-	quicksight_deleteNamespaceCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that you want to delete the Quick Sight namespace from.")
-	quicksight_deleteNamespaceCmd.Flags().String("namespace", "", "The namespace that you want to delete.")
-	quicksight_deleteNamespaceCmd.MarkFlagRequired("aws-account-id")
-	quicksight_deleteNamespaceCmd.MarkFlagRequired("namespace")
+		quicksight_deleteNamespaceCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that you want to delete the Quick Sight namespace from.")
+		quicksight_deleteNamespaceCmd.Flags().String("namespace", "", "The namespace that you want to delete.")
+		quicksight_deleteNamespaceCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteNamespaceCmd.MarkFlagRequired("namespace")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteNamespaceCmd)
 }

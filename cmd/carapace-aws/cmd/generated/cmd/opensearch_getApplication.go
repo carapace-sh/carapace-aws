@@ -12,9 +12,11 @@ var opensearch_getApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_getApplicationCmd).Standalone()
+	carapace.Gen(opensearch_getApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_getApplicationCmd).Standalone()
 
-	opensearch_getApplicationCmd.Flags().String("id", "", "The unique identifier of the OpenSearch application to retrieve.")
-	opensearch_getApplicationCmd.MarkFlagRequired("id")
+		opensearch_getApplicationCmd.Flags().String("id", "", "The unique identifier of the OpenSearch application to retrieve.")
+		opensearch_getApplicationCmd.MarkFlagRequired("id")
+	})
 	opensearchCmd.AddCommand(opensearch_getApplicationCmd)
 }

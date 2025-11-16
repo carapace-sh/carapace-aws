@@ -12,11 +12,13 @@ var datazone_getSubscriptionRequestDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getSubscriptionRequestDetailsCmd).Standalone()
+	carapace.Gen(datazone_getSubscriptionRequestDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getSubscriptionRequestDetailsCmd).Standalone()
 
-	datazone_getSubscriptionRequestDetailsCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain in which to get the subscription request details.")
-	datazone_getSubscriptionRequestDetailsCmd.Flags().String("identifier", "", "The identifier of the subscription request the details of which to get.")
-	datazone_getSubscriptionRequestDetailsCmd.MarkFlagRequired("domain-identifier")
-	datazone_getSubscriptionRequestDetailsCmd.MarkFlagRequired("identifier")
+		datazone_getSubscriptionRequestDetailsCmd.Flags().String("domain-identifier", "", "The identifier of the Amazon DataZone domain in which to get the subscription request details.")
+		datazone_getSubscriptionRequestDetailsCmd.Flags().String("identifier", "", "The identifier of the subscription request the details of which to get.")
+		datazone_getSubscriptionRequestDetailsCmd.MarkFlagRequired("domain-identifier")
+		datazone_getSubscriptionRequestDetailsCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getSubscriptionRequestDetailsCmd)
 }

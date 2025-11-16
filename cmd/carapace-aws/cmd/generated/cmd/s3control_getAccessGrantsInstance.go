@@ -12,9 +12,11 @@ var s3control_getAccessGrantsInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_getAccessGrantsInstanceCmd).Standalone()
+	carapace.Gen(s3control_getAccessGrantsInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_getAccessGrantsInstanceCmd).Standalone()
 
-	s3control_getAccessGrantsInstanceCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
-	s3control_getAccessGrantsInstanceCmd.MarkFlagRequired("account-id")
+		s3control_getAccessGrantsInstanceCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
+		s3control_getAccessGrantsInstanceCmd.MarkFlagRequired("account-id")
+	})
 	s3controlCmd.AddCommand(s3control_getAccessGrantsInstanceCmd)
 }

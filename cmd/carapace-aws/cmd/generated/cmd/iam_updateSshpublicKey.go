@@ -12,13 +12,15 @@ var iam_updateSshpublicKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_updateSshpublicKeyCmd).Standalone()
+	carapace.Gen(iam_updateSshpublicKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_updateSshpublicKeyCmd).Standalone()
 
-	iam_updateSshpublicKeyCmd.Flags().String("sshpublic-key-id", "", "The unique identifier for the SSH public key.")
-	iam_updateSshpublicKeyCmd.Flags().String("status", "", "The status to assign to the SSH public key.")
-	iam_updateSshpublicKeyCmd.Flags().String("user-name", "", "The name of the IAM user associated with the SSH public key.")
-	iam_updateSshpublicKeyCmd.MarkFlagRequired("sshpublic-key-id")
-	iam_updateSshpublicKeyCmd.MarkFlagRequired("status")
-	iam_updateSshpublicKeyCmd.MarkFlagRequired("user-name")
+		iam_updateSshpublicKeyCmd.Flags().String("sshpublic-key-id", "", "The unique identifier for the SSH public key.")
+		iam_updateSshpublicKeyCmd.Flags().String("status", "", "The status to assign to the SSH public key.")
+		iam_updateSshpublicKeyCmd.Flags().String("user-name", "", "The name of the IAM user associated with the SSH public key.")
+		iam_updateSshpublicKeyCmd.MarkFlagRequired("sshpublic-key-id")
+		iam_updateSshpublicKeyCmd.MarkFlagRequired("status")
+		iam_updateSshpublicKeyCmd.MarkFlagRequired("user-name")
+	})
 	iamCmd.AddCommand(iam_updateSshpublicKeyCmd)
 }

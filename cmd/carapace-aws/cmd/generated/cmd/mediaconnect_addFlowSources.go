@@ -12,11 +12,13 @@ var mediaconnect_addFlowSourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_addFlowSourcesCmd).Standalone()
+	carapace.Gen(mediaconnect_addFlowSourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_addFlowSourcesCmd).Standalone()
 
-	mediaconnect_addFlowSourcesCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to update.")
-	mediaconnect_addFlowSourcesCmd.Flags().String("sources", "", "A list of sources that you want to add to the flow.")
-	mediaconnect_addFlowSourcesCmd.MarkFlagRequired("flow-arn")
-	mediaconnect_addFlowSourcesCmd.MarkFlagRequired("sources")
+		mediaconnect_addFlowSourcesCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow that you want to update.")
+		mediaconnect_addFlowSourcesCmd.Flags().String("sources", "", "A list of sources that you want to add to the flow.")
+		mediaconnect_addFlowSourcesCmd.MarkFlagRequired("flow-arn")
+		mediaconnect_addFlowSourcesCmd.MarkFlagRequired("sources")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_addFlowSourcesCmd)
 }

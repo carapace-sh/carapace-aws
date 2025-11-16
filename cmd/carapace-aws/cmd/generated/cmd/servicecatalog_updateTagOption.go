@@ -12,11 +12,13 @@ var servicecatalog_updateTagOptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_updateTagOptionCmd).Standalone()
+	carapace.Gen(servicecatalog_updateTagOptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_updateTagOptionCmd).Standalone()
 
-	servicecatalog_updateTagOptionCmd.Flags().String("active", "", "The updated active state.")
-	servicecatalog_updateTagOptionCmd.Flags().String("id", "", "The TagOption identifier.")
-	servicecatalog_updateTagOptionCmd.Flags().String("value", "", "The updated value.")
-	servicecatalog_updateTagOptionCmd.MarkFlagRequired("id")
+		servicecatalog_updateTagOptionCmd.Flags().String("active", "", "The updated active state.")
+		servicecatalog_updateTagOptionCmd.Flags().String("id", "", "The TagOption identifier.")
+		servicecatalog_updateTagOptionCmd.Flags().String("value", "", "The updated value.")
+		servicecatalog_updateTagOptionCmd.MarkFlagRequired("id")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_updateTagOptionCmd)
 }

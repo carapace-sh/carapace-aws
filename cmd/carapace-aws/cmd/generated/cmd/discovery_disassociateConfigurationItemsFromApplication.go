@@ -12,11 +12,13 @@ var discovery_disassociateConfigurationItemsFromApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_disassociateConfigurationItemsFromApplicationCmd).Standalone()
+	carapace.Gen(discovery_disassociateConfigurationItemsFromApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_disassociateConfigurationItemsFromApplicationCmd).Standalone()
 
-	discovery_disassociateConfigurationItemsFromApplicationCmd.Flags().String("application-configuration-id", "", "Configuration ID of an application from which each item is disassociated.")
-	discovery_disassociateConfigurationItemsFromApplicationCmd.Flags().String("configuration-ids", "", "Configuration ID of each item to be disassociated from an application.")
-	discovery_disassociateConfigurationItemsFromApplicationCmd.MarkFlagRequired("application-configuration-id")
-	discovery_disassociateConfigurationItemsFromApplicationCmd.MarkFlagRequired("configuration-ids")
+		discovery_disassociateConfigurationItemsFromApplicationCmd.Flags().String("application-configuration-id", "", "Configuration ID of an application from which each item is disassociated.")
+		discovery_disassociateConfigurationItemsFromApplicationCmd.Flags().String("configuration-ids", "", "Configuration ID of each item to be disassociated from an application.")
+		discovery_disassociateConfigurationItemsFromApplicationCmd.MarkFlagRequired("application-configuration-id")
+		discovery_disassociateConfigurationItemsFromApplicationCmd.MarkFlagRequired("configuration-ids")
+	})
 	discoveryCmd.AddCommand(discovery_disassociateConfigurationItemsFromApplicationCmd)
 }

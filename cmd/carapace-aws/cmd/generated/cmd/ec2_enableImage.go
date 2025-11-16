@@ -12,12 +12,14 @@ var ec2_enableImageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_enableImageCmd).Standalone()
+	carapace.Gen(ec2_enableImageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_enableImageCmd).Standalone()
 
-	ec2_enableImageCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_enableImageCmd.Flags().String("image-id", "", "The ID of the AMI.")
-	ec2_enableImageCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_enableImageCmd.MarkFlagRequired("image-id")
-	ec2_enableImageCmd.Flag("no-dry-run").Hidden = true
+		ec2_enableImageCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_enableImageCmd.Flags().String("image-id", "", "The ID of the AMI.")
+		ec2_enableImageCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_enableImageCmd.MarkFlagRequired("image-id")
+		ec2_enableImageCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_enableImageCmd)
 }

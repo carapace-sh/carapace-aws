@@ -12,9 +12,11 @@ var medialive_getCloudWatchAlarmTemplateGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_getCloudWatchAlarmTemplateGroupCmd).Standalone()
+	carapace.Gen(medialive_getCloudWatchAlarmTemplateGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_getCloudWatchAlarmTemplateGroupCmd).Standalone()
 
-	medialive_getCloudWatchAlarmTemplateGroupCmd.Flags().String("identifier", "", "A cloudwatch alarm template group's identifier.")
-	medialive_getCloudWatchAlarmTemplateGroupCmd.MarkFlagRequired("identifier")
+		medialive_getCloudWatchAlarmTemplateGroupCmd.Flags().String("identifier", "", "A cloudwatch alarm template group's identifier.")
+		medialive_getCloudWatchAlarmTemplateGroupCmd.MarkFlagRequired("identifier")
+	})
 	medialiveCmd.AddCommand(medialive_getCloudWatchAlarmTemplateGroupCmd)
 }

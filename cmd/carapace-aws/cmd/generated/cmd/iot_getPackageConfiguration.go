@@ -12,7 +12,9 @@ var iot_getPackageConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getPackageConfigurationCmd).Standalone()
+	carapace.Gen(iot_getPackageConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getPackageConfigurationCmd).Standalone()
 
+	})
 	iotCmd.AddCommand(iot_getPackageConfigurationCmd)
 }

@@ -12,9 +12,11 @@ var es_getUpgradeStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_getUpgradeStatusCmd).Standalone()
+	carapace.Gen(es_getUpgradeStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_getUpgradeStatusCmd).Standalone()
 
-	es_getUpgradeStatusCmd.Flags().String("domain-name", "", "")
-	es_getUpgradeStatusCmd.MarkFlagRequired("domain-name")
+		es_getUpgradeStatusCmd.Flags().String("domain-name", "", "")
+		es_getUpgradeStatusCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_getUpgradeStatusCmd)
 }

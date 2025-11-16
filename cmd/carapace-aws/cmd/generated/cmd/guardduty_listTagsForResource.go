@@ -12,9 +12,11 @@ var guardduty_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_listTagsForResourceCmd).Standalone()
+	carapace.Gen(guardduty_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_listTagsForResourceCmd).Standalone()
 
-	guardduty_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the given GuardDuty resource.")
-	guardduty_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		guardduty_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the given GuardDuty resource.")
+		guardduty_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	guarddutyCmd.AddCommand(guardduty_listTagsForResourceCmd)
 }

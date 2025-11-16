@@ -12,9 +12,11 @@ var iot_deleteCustomMetricCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteCustomMetricCmd).Standalone()
+	carapace.Gen(iot_deleteCustomMetricCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteCustomMetricCmd).Standalone()
 
-	iot_deleteCustomMetricCmd.Flags().String("metric-name", "", "The name of the custom metric.")
-	iot_deleteCustomMetricCmd.MarkFlagRequired("metric-name")
+		iot_deleteCustomMetricCmd.Flags().String("metric-name", "", "The name of the custom metric.")
+		iot_deleteCustomMetricCmd.MarkFlagRequired("metric-name")
+	})
 	iotCmd.AddCommand(iot_deleteCustomMetricCmd)
 }

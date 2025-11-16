@@ -12,10 +12,12 @@ var gamelift_deleteGameServerGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_deleteGameServerGroupCmd).Standalone()
+	carapace.Gen(gamelift_deleteGameServerGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_deleteGameServerGroupCmd).Standalone()
 
-	gamelift_deleteGameServerGroupCmd.Flags().String("delete-option", "", "The type of delete to perform.")
-	gamelift_deleteGameServerGroupCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group.")
-	gamelift_deleteGameServerGroupCmd.MarkFlagRequired("game-server-group-name")
+		gamelift_deleteGameServerGroupCmd.Flags().String("delete-option", "", "The type of delete to perform.")
+		gamelift_deleteGameServerGroupCmd.Flags().String("game-server-group-name", "", "A unique identifier for the game server group.")
+		gamelift_deleteGameServerGroupCmd.MarkFlagRequired("game-server-group-name")
+	})
 	gameliftCmd.AddCommand(gamelift_deleteGameServerGroupCmd)
 }

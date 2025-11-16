@@ -12,9 +12,11 @@ var chime_restorePhoneNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_restorePhoneNumberCmd).Standalone()
+	carapace.Gen(chime_restorePhoneNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_restorePhoneNumberCmd).Standalone()
 
-	chime_restorePhoneNumberCmd.Flags().String("phone-number-id", "", "The phone number.")
-	chime_restorePhoneNumberCmd.MarkFlagRequired("phone-number-id")
+		chime_restorePhoneNumberCmd.Flags().String("phone-number-id", "", "The phone number.")
+		chime_restorePhoneNumberCmd.MarkFlagRequired("phone-number-id")
+	})
 	chimeCmd.AddCommand(chime_restorePhoneNumberCmd)
 }

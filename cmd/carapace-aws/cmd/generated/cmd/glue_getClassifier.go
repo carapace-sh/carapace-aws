@@ -12,9 +12,11 @@ var glue_getClassifierCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getClassifierCmd).Standalone()
+	carapace.Gen(glue_getClassifierCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getClassifierCmd).Standalone()
 
-	glue_getClassifierCmd.Flags().String("name", "", "Name of the classifier to retrieve.")
-	glue_getClassifierCmd.MarkFlagRequired("name")
+		glue_getClassifierCmd.Flags().String("name", "", "Name of the classifier to retrieve.")
+		glue_getClassifierCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_getClassifierCmd)
 }

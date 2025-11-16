@@ -12,9 +12,11 @@ var location_listGeofenceCollectionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_listGeofenceCollectionsCmd).Standalone()
+	carapace.Gen(location_listGeofenceCollectionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_listGeofenceCollectionsCmd).Standalone()
 
-	location_listGeofenceCollectionsCmd.Flags().String("max-results", "", "An optional limit for the number of resources returned in a single call.")
-	location_listGeofenceCollectionsCmd.Flags().String("next-token", "", "The pagination token specifying which page of results to return in the response.")
+		location_listGeofenceCollectionsCmd.Flags().String("max-results", "", "An optional limit for the number of resources returned in a single call.")
+		location_listGeofenceCollectionsCmd.Flags().String("next-token", "", "The pagination token specifying which page of results to return in the response.")
+	})
 	locationCmd.AddCommand(location_listGeofenceCollectionsCmd)
 }

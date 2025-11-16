@@ -12,11 +12,13 @@ var neptuneGraph_listPrivateGraphEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_listPrivateGraphEndpointsCmd).Standalone()
+	carapace.Gen(neptuneGraph_listPrivateGraphEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_listPrivateGraphEndpointsCmd).Standalone()
 
-	neptuneGraph_listPrivateGraphEndpointsCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
-	neptuneGraph_listPrivateGraphEndpointsCmd.Flags().String("max-results", "", "The total number of records to return in the command's output.")
-	neptuneGraph_listPrivateGraphEndpointsCmd.Flags().String("next-token", "", "Pagination token used to paginate output.")
-	neptuneGraph_listPrivateGraphEndpointsCmd.MarkFlagRequired("graph-identifier")
+		neptuneGraph_listPrivateGraphEndpointsCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
+		neptuneGraph_listPrivateGraphEndpointsCmd.Flags().String("max-results", "", "The total number of records to return in the command's output.")
+		neptuneGraph_listPrivateGraphEndpointsCmd.Flags().String("next-token", "", "Pagination token used to paginate output.")
+		neptuneGraph_listPrivateGraphEndpointsCmd.MarkFlagRequired("graph-identifier")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_listPrivateGraphEndpointsCmd)
 }

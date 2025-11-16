@@ -12,7 +12,9 @@ var meteringmarketplaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(meteringmarketplaceCmd).Standalone()
+	carapace.Gen(meteringmarketplaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(meteringmarketplaceCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(meteringmarketplaceCmd)
 }

@@ -12,9 +12,11 @@ var route53RecoveryReadiness_getResourceSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_getResourceSetCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_getResourceSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_getResourceSetCmd).Standalone()
 
-	route53RecoveryReadiness_getResourceSetCmd.Flags().String("resource-set-name", "", "Name of a resource set.")
-	route53RecoveryReadiness_getResourceSetCmd.MarkFlagRequired("resource-set-name")
+		route53RecoveryReadiness_getResourceSetCmd.Flags().String("resource-set-name", "", "Name of a resource set.")
+		route53RecoveryReadiness_getResourceSetCmd.MarkFlagRequired("resource-set-name")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_getResourceSetCmd)
 }

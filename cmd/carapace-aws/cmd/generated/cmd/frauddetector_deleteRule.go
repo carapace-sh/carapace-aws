@@ -12,9 +12,11 @@ var frauddetector_deleteRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteRuleCmd).Standalone()
+	carapace.Gen(frauddetector_deleteRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteRuleCmd).Standalone()
 
-	frauddetector_deleteRuleCmd.Flags().String("rule", "", "")
-	frauddetector_deleteRuleCmd.MarkFlagRequired("rule")
+		frauddetector_deleteRuleCmd.Flags().String("rule", "", "")
+		frauddetector_deleteRuleCmd.MarkFlagRequired("rule")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteRuleCmd)
 }

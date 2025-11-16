@@ -12,10 +12,12 @@ var workdocs_deleteFolderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_deleteFolderCmd).Standalone()
+	carapace.Gen(workdocs_deleteFolderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_deleteFolderCmd).Standalone()
 
-	workdocs_deleteFolderCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_deleteFolderCmd.Flags().String("folder-id", "", "The ID of the folder.")
-	workdocs_deleteFolderCmd.MarkFlagRequired("folder-id")
+		workdocs_deleteFolderCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_deleteFolderCmd.Flags().String("folder-id", "", "The ID of the folder.")
+		workdocs_deleteFolderCmd.MarkFlagRequired("folder-id")
+	})
 	workdocsCmd.AddCommand(workdocs_deleteFolderCmd)
 }

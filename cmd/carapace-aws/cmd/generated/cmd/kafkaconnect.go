@@ -12,7 +12,9 @@ var kafkaconnectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafkaconnectCmd).Standalone()
+	carapace.Gen(kafkaconnectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafkaconnectCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(kafkaconnectCmd)
 }

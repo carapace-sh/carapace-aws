@@ -12,10 +12,12 @@ var amplifybackend_updateBackendConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_updateBackendConfigCmd).Standalone()
+	carapace.Gen(amplifybackend_updateBackendConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_updateBackendConfigCmd).Standalone()
 
-	amplifybackend_updateBackendConfigCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_updateBackendConfigCmd.Flags().String("login-auth-config", "", "Describes the Amazon Cognito configuration for Admin UI access.")
-	amplifybackend_updateBackendConfigCmd.MarkFlagRequired("app-id")
+		amplifybackend_updateBackendConfigCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_updateBackendConfigCmd.Flags().String("login-auth-config", "", "Describes the Amazon Cognito configuration for Admin UI access.")
+		amplifybackend_updateBackendConfigCmd.MarkFlagRequired("app-id")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_updateBackendConfigCmd)
 }

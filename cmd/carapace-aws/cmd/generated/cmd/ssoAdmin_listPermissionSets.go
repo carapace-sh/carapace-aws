@@ -12,11 +12,13 @@ var ssoAdmin_listPermissionSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_listPermissionSetsCmd).Standalone()
+	carapace.Gen(ssoAdmin_listPermissionSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_listPermissionSetsCmd).Standalone()
 
-	ssoAdmin_listPermissionSetsCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_listPermissionSetsCmd.Flags().String("max-results", "", "The maximum number of results to display for the assignment.")
-	ssoAdmin_listPermissionSetsCmd.Flags().String("next-token", "", "The pagination token for the list API.")
-	ssoAdmin_listPermissionSetsCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_listPermissionSetsCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_listPermissionSetsCmd.Flags().String("max-results", "", "The maximum number of results to display for the assignment.")
+		ssoAdmin_listPermissionSetsCmd.Flags().String("next-token", "", "The pagination token for the list API.")
+		ssoAdmin_listPermissionSetsCmd.MarkFlagRequired("instance-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_listPermissionSetsCmd)
 }

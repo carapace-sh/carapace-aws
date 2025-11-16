@@ -12,9 +12,11 @@ var backupGateway_startVirtualMachinesMetadataSyncCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_startVirtualMachinesMetadataSyncCmd).Standalone()
+	carapace.Gen(backupGateway_startVirtualMachinesMetadataSyncCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_startVirtualMachinesMetadataSyncCmd).Standalone()
 
-	backupGateway_startVirtualMachinesMetadataSyncCmd.Flags().String("hypervisor-arn", "", "The Amazon Resource Name (ARN) of the hypervisor.")
-	backupGateway_startVirtualMachinesMetadataSyncCmd.MarkFlagRequired("hypervisor-arn")
+		backupGateway_startVirtualMachinesMetadataSyncCmd.Flags().String("hypervisor-arn", "", "The Amazon Resource Name (ARN) of the hypervisor.")
+		backupGateway_startVirtualMachinesMetadataSyncCmd.MarkFlagRequired("hypervisor-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_startVirtualMachinesMetadataSyncCmd)
 }

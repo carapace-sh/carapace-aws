@@ -12,15 +12,17 @@ var databrew_createRulesetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_createRulesetCmd).Standalone()
+	carapace.Gen(databrew_createRulesetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_createRulesetCmd).Standalone()
 
-	databrew_createRulesetCmd.Flags().String("description", "", "The description of the ruleset.")
-	databrew_createRulesetCmd.Flags().String("name", "", "The name of the ruleset to be created.")
-	databrew_createRulesetCmd.Flags().String("rules", "", "A list of rules that are defined with the ruleset.")
-	databrew_createRulesetCmd.Flags().String("tags", "", "Metadata tags to apply to the ruleset.")
-	databrew_createRulesetCmd.Flags().String("target-arn", "", "The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.")
-	databrew_createRulesetCmd.MarkFlagRequired("name")
-	databrew_createRulesetCmd.MarkFlagRequired("rules")
-	databrew_createRulesetCmd.MarkFlagRequired("target-arn")
+		databrew_createRulesetCmd.Flags().String("description", "", "The description of the ruleset.")
+		databrew_createRulesetCmd.Flags().String("name", "", "The name of the ruleset to be created.")
+		databrew_createRulesetCmd.Flags().String("rules", "", "A list of rules that are defined with the ruleset.")
+		databrew_createRulesetCmd.Flags().String("tags", "", "Metadata tags to apply to the ruleset.")
+		databrew_createRulesetCmd.Flags().String("target-arn", "", "The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is associated with.")
+		databrew_createRulesetCmd.MarkFlagRequired("name")
+		databrew_createRulesetCmd.MarkFlagRequired("rules")
+		databrew_createRulesetCmd.MarkFlagRequired("target-arn")
+	})
 	databrewCmd.AddCommand(databrew_createRulesetCmd)
 }

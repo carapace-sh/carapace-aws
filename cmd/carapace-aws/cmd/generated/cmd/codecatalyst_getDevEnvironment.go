@@ -12,13 +12,15 @@ var codecatalyst_getDevEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_getDevEnvironmentCmd).Standalone()
+	carapace.Gen(codecatalyst_getDevEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_getDevEnvironmentCmd).Standalone()
 
-	codecatalyst_getDevEnvironmentCmd.Flags().String("id", "", "The system-generated unique ID of the Dev Environment for which you want to view information.")
-	codecatalyst_getDevEnvironmentCmd.Flags().String("project-name", "", "The name of the project in the space.")
-	codecatalyst_getDevEnvironmentCmd.Flags().String("space-name", "", "The name of the space.")
-	codecatalyst_getDevEnvironmentCmd.MarkFlagRequired("id")
-	codecatalyst_getDevEnvironmentCmd.MarkFlagRequired("project-name")
-	codecatalyst_getDevEnvironmentCmd.MarkFlagRequired("space-name")
+		codecatalyst_getDevEnvironmentCmd.Flags().String("id", "", "The system-generated unique ID of the Dev Environment for which you want to view information.")
+		codecatalyst_getDevEnvironmentCmd.Flags().String("project-name", "", "The name of the project in the space.")
+		codecatalyst_getDevEnvironmentCmd.Flags().String("space-name", "", "The name of the space.")
+		codecatalyst_getDevEnvironmentCmd.MarkFlagRequired("id")
+		codecatalyst_getDevEnvironmentCmd.MarkFlagRequired("project-name")
+		codecatalyst_getDevEnvironmentCmd.MarkFlagRequired("space-name")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_getDevEnvironmentCmd)
 }

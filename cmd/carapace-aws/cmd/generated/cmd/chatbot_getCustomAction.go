@@ -12,9 +12,11 @@ var chatbot_getCustomActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_getCustomActionCmd).Standalone()
+	carapace.Gen(chatbot_getCustomActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_getCustomActionCmd).Standalone()
 
-	chatbot_getCustomActionCmd.Flags().String("custom-action-arn", "", "Returns the fully defined Amazon Resource Name (ARN) of the custom action.")
-	chatbot_getCustomActionCmd.MarkFlagRequired("custom-action-arn")
+		chatbot_getCustomActionCmd.Flags().String("custom-action-arn", "", "Returns the fully defined Amazon Resource Name (ARN) of the custom action.")
+		chatbot_getCustomActionCmd.MarkFlagRequired("custom-action-arn")
+	})
 	chatbotCmd.AddCommand(chatbot_getCustomActionCmd)
 }

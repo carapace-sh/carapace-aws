@@ -12,10 +12,12 @@ var datapipeline_reportTaskProgressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_reportTaskProgressCmd).Standalone()
+	carapace.Gen(datapipeline_reportTaskProgressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_reportTaskProgressCmd).Standalone()
 
-	datapipeline_reportTaskProgressCmd.Flags().String("fields", "", "Key-value pairs that define the properties of the ReportTaskProgressInput object.")
-	datapipeline_reportTaskProgressCmd.Flags().String("task-id", "", "The ID of the task assigned to the task runner.")
-	datapipeline_reportTaskProgressCmd.MarkFlagRequired("task-id")
+		datapipeline_reportTaskProgressCmd.Flags().String("fields", "", "Key-value pairs that define the properties of the ReportTaskProgressInput object.")
+		datapipeline_reportTaskProgressCmd.Flags().String("task-id", "", "The ID of the task assigned to the task runner.")
+		datapipeline_reportTaskProgressCmd.MarkFlagRequired("task-id")
+	})
 	datapipelineCmd.AddCommand(datapipeline_reportTaskProgressCmd)
 }

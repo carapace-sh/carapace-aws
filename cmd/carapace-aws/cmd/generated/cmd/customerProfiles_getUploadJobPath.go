@@ -12,11 +12,13 @@ var customerProfiles_getUploadJobPathCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getUploadJobPathCmd).Standalone()
+	carapace.Gen(customerProfiles_getUploadJobPathCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getUploadJobPathCmd).Standalone()
 
-	customerProfiles_getUploadJobPathCmd.Flags().String("domain-name", "", "The unique name of the domain containing the upload job.")
-	customerProfiles_getUploadJobPathCmd.Flags().String("job-id", "", "The unique identifier of the upload job to retrieve the upload path for.")
-	customerProfiles_getUploadJobPathCmd.MarkFlagRequired("domain-name")
-	customerProfiles_getUploadJobPathCmd.MarkFlagRequired("job-id")
+		customerProfiles_getUploadJobPathCmd.Flags().String("domain-name", "", "The unique name of the domain containing the upload job.")
+		customerProfiles_getUploadJobPathCmd.Flags().String("job-id", "", "The unique identifier of the upload job to retrieve the upload path for.")
+		customerProfiles_getUploadJobPathCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getUploadJobPathCmd.MarkFlagRequired("job-id")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getUploadJobPathCmd)
 }

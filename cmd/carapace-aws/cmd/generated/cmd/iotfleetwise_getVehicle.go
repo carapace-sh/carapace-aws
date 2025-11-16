@@ -12,9 +12,11 @@ var iotfleetwise_getVehicleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_getVehicleCmd).Standalone()
+	carapace.Gen(iotfleetwise_getVehicleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_getVehicleCmd).Standalone()
 
-	iotfleetwise_getVehicleCmd.Flags().String("vehicle-name", "", "The ID of the vehicle to retrieve information about.")
-	iotfleetwise_getVehicleCmd.MarkFlagRequired("vehicle-name")
+		iotfleetwise_getVehicleCmd.Flags().String("vehicle-name", "", "The ID of the vehicle to retrieve information about.")
+		iotfleetwise_getVehicleCmd.MarkFlagRequired("vehicle-name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_getVehicleCmd)
 }

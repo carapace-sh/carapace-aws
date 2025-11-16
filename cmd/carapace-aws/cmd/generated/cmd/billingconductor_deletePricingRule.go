@@ -12,9 +12,11 @@ var billingconductor_deletePricingRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billingconductor_deletePricingRuleCmd).Standalone()
+	carapace.Gen(billingconductor_deletePricingRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billingconductor_deletePricingRuleCmd).Standalone()
 
-	billingconductor_deletePricingRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the pricing rule that you are deleting.")
-	billingconductor_deletePricingRuleCmd.MarkFlagRequired("arn")
+		billingconductor_deletePricingRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the pricing rule that you are deleting.")
+		billingconductor_deletePricingRuleCmd.MarkFlagRequired("arn")
+	})
 	billingconductorCmd.AddCommand(billingconductor_deletePricingRuleCmd)
 }

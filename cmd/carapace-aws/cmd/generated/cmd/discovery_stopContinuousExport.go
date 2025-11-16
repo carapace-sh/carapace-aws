@@ -12,9 +12,11 @@ var discovery_stopContinuousExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_stopContinuousExportCmd).Standalone()
+	carapace.Gen(discovery_stopContinuousExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_stopContinuousExportCmd).Standalone()
 
-	discovery_stopContinuousExportCmd.Flags().String("export-id", "", "The unique ID assigned to this export.")
-	discovery_stopContinuousExportCmd.MarkFlagRequired("export-id")
+		discovery_stopContinuousExportCmd.Flags().String("export-id", "", "The unique ID assigned to this export.")
+		discovery_stopContinuousExportCmd.MarkFlagRequired("export-id")
+	})
 	discoveryCmd.AddCommand(discovery_stopContinuousExportCmd)
 }

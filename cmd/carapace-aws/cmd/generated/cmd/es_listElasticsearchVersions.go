@@ -12,9 +12,11 @@ var es_listElasticsearchVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_listElasticsearchVersionsCmd).Standalone()
+	carapace.Gen(es_listElasticsearchVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_listElasticsearchVersionsCmd).Standalone()
 
-	es_listElasticsearchVersionsCmd.Flags().String("max-results", "", "Set this value to limit the number of results returned.")
-	es_listElasticsearchVersionsCmd.Flags().String("next-token", "", "")
+		es_listElasticsearchVersionsCmd.Flags().String("max-results", "", "Set this value to limit the number of results returned.")
+		es_listElasticsearchVersionsCmd.Flags().String("next-token", "", "")
+	})
 	esCmd.AddCommand(es_listElasticsearchVersionsCmd)
 }

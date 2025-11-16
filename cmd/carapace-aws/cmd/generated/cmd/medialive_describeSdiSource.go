@@ -12,9 +12,11 @@ var medialive_describeSdiSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeSdiSourceCmd).Standalone()
+	carapace.Gen(medialive_describeSdiSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeSdiSourceCmd).Standalone()
 
-	medialive_describeSdiSourceCmd.Flags().String("sdi-source-id", "", "Get details about an SdiSource.")
-	medialive_describeSdiSourceCmd.MarkFlagRequired("sdi-source-id")
+		medialive_describeSdiSourceCmd.Flags().String("sdi-source-id", "", "Get details about an SdiSource.")
+		medialive_describeSdiSourceCmd.MarkFlagRequired("sdi-source-id")
+	})
 	medialiveCmd.AddCommand(medialive_describeSdiSourceCmd)
 }

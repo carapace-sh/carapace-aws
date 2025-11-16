@@ -12,9 +12,11 @@ var emrContainers_describeSecurityConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_describeSecurityConfigurationCmd).Standalone()
+	carapace.Gen(emrContainers_describeSecurityConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_describeSecurityConfigurationCmd).Standalone()
 
-	emrContainers_describeSecurityConfigurationCmd.Flags().String("id", "", "The ID of the security configuration.")
-	emrContainers_describeSecurityConfigurationCmd.MarkFlagRequired("id")
+		emrContainers_describeSecurityConfigurationCmd.Flags().String("id", "", "The ID of the security configuration.")
+		emrContainers_describeSecurityConfigurationCmd.MarkFlagRequired("id")
+	})
 	emrContainersCmd.AddCommand(emrContainers_describeSecurityConfigurationCmd)
 }

@@ -12,12 +12,14 @@ var marketplaceAgreement_searchAgreementsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceAgreement_searchAgreementsCmd).Standalone()
+	carapace.Gen(marketplaceAgreement_searchAgreementsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceAgreement_searchAgreementsCmd).Standalone()
 
-	marketplaceAgreement_searchAgreementsCmd.Flags().String("catalog", "", "The catalog in which the agreement was created.")
-	marketplaceAgreement_searchAgreementsCmd.Flags().String("filters", "", "The filter name and value pair used to return a specific list of results.")
-	marketplaceAgreement_searchAgreementsCmd.Flags().String("max-results", "", "The maximum number of agreements to return in the response.")
-	marketplaceAgreement_searchAgreementsCmd.Flags().String("next-token", "", "A token to specify where to start pagination.")
-	marketplaceAgreement_searchAgreementsCmd.Flags().String("sort", "", "An object that contains the `SortBy` and `SortOrder` attributes.")
+		marketplaceAgreement_searchAgreementsCmd.Flags().String("catalog", "", "The catalog in which the agreement was created.")
+		marketplaceAgreement_searchAgreementsCmd.Flags().String("filters", "", "The filter name and value pair used to return a specific list of results.")
+		marketplaceAgreement_searchAgreementsCmd.Flags().String("max-results", "", "The maximum number of agreements to return in the response.")
+		marketplaceAgreement_searchAgreementsCmd.Flags().String("next-token", "", "A token to specify where to start pagination.")
+		marketplaceAgreement_searchAgreementsCmd.Flags().String("sort", "", "An object that contains the `SortBy` and `SortOrder` attributes.")
+	})
 	marketplaceAgreementCmd.AddCommand(marketplaceAgreement_searchAgreementsCmd)
 }

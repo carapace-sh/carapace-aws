@@ -12,9 +12,11 @@ var sdb_deleteDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sdb_deleteDomainCmd).Standalone()
+	carapace.Gen(sdb_deleteDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sdb_deleteDomainCmd).Standalone()
 
-	sdb_deleteDomainCmd.Flags().String("domain-name", "", "The name of the domain to delete.")
-	sdb_deleteDomainCmd.MarkFlagRequired("domain-name")
+		sdb_deleteDomainCmd.Flags().String("domain-name", "", "The name of the domain to delete.")
+		sdb_deleteDomainCmd.MarkFlagRequired("domain-name")
+	})
 	sdbCmd.AddCommand(sdb_deleteDomainCmd)
 }

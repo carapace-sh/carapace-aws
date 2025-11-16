@@ -12,12 +12,14 @@ var glue_updateConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_updateConnectionCmd).Standalone()
+	carapace.Gen(glue_updateConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_updateConnectionCmd).Standalone()
 
-	glue_updateConnectionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog in which the connection resides.")
-	glue_updateConnectionCmd.Flags().String("connection-input", "", "A `ConnectionInput` object that redefines the connection in question.")
-	glue_updateConnectionCmd.Flags().String("name", "", "The name of the connection definition to update.")
-	glue_updateConnectionCmd.MarkFlagRequired("connection-input")
-	glue_updateConnectionCmd.MarkFlagRequired("name")
+		glue_updateConnectionCmd.Flags().String("catalog-id", "", "The ID of the Data Catalog in which the connection resides.")
+		glue_updateConnectionCmd.Flags().String("connection-input", "", "A `ConnectionInput` object that redefines the connection in question.")
+		glue_updateConnectionCmd.Flags().String("name", "", "The name of the connection definition to update.")
+		glue_updateConnectionCmd.MarkFlagRequired("connection-input")
+		glue_updateConnectionCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_updateConnectionCmd)
 }

@@ -12,11 +12,13 @@ var ssoAdmin_describeAccountAssignmentCreationStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_describeAccountAssignmentCreationStatusCmd).Standalone()
+	carapace.Gen(ssoAdmin_describeAccountAssignmentCreationStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_describeAccountAssignmentCreationStatusCmd).Standalone()
 
-	ssoAdmin_describeAccountAssignmentCreationStatusCmd.Flags().String("account-assignment-creation-request-id", "", "The identifier that is used to track the request operation progress.")
-	ssoAdmin_describeAccountAssignmentCreationStatusCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_describeAccountAssignmentCreationStatusCmd.MarkFlagRequired("account-assignment-creation-request-id")
-	ssoAdmin_describeAccountAssignmentCreationStatusCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_describeAccountAssignmentCreationStatusCmd.Flags().String("account-assignment-creation-request-id", "", "The identifier that is used to track the request operation progress.")
+		ssoAdmin_describeAccountAssignmentCreationStatusCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_describeAccountAssignmentCreationStatusCmd.MarkFlagRequired("account-assignment-creation-request-id")
+		ssoAdmin_describeAccountAssignmentCreationStatusCmd.MarkFlagRequired("instance-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_describeAccountAssignmentCreationStatusCmd)
 }

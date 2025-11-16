@@ -12,9 +12,11 @@ var kinesisvideo_describeEdgeConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_describeEdgeConfigurationCmd).Standalone()
+	carapace.Gen(kinesisvideo_describeEdgeConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_describeEdgeConfigurationCmd).Standalone()
 
-	kinesisvideo_describeEdgeConfigurationCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream.")
-	kinesisvideo_describeEdgeConfigurationCmd.Flags().String("stream-name", "", "The name of the stream whose edge configuration you want to update.")
+		kinesisvideo_describeEdgeConfigurationCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the stream.")
+		kinesisvideo_describeEdgeConfigurationCmd.Flags().String("stream-name", "", "The name of the stream whose edge configuration you want to update.")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_describeEdgeConfigurationCmd)
 }

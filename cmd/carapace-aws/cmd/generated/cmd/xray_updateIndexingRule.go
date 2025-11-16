@@ -12,11 +12,13 @@ var xray_updateIndexingRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_updateIndexingRuleCmd).Standalone()
+	carapace.Gen(xray_updateIndexingRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_updateIndexingRuleCmd).Standalone()
 
-	xray_updateIndexingRuleCmd.Flags().String("name", "", "Name of the indexing rule to be updated.")
-	xray_updateIndexingRuleCmd.Flags().String("rule", "", "Rule configuration to be updated.")
-	xray_updateIndexingRuleCmd.MarkFlagRequired("name")
-	xray_updateIndexingRuleCmd.MarkFlagRequired("rule")
+		xray_updateIndexingRuleCmd.Flags().String("name", "", "Name of the indexing rule to be updated.")
+		xray_updateIndexingRuleCmd.Flags().String("rule", "", "Rule configuration to be updated.")
+		xray_updateIndexingRuleCmd.MarkFlagRequired("name")
+		xray_updateIndexingRuleCmd.MarkFlagRequired("rule")
+	})
 	xrayCmd.AddCommand(xray_updateIndexingRuleCmd)
 }

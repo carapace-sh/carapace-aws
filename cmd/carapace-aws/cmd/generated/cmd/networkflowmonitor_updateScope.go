@@ -12,11 +12,13 @@ var networkflowmonitor_updateScopeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_updateScopeCmd).Standalone()
+	carapace.Gen(networkflowmonitor_updateScopeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_updateScopeCmd).Standalone()
 
-	networkflowmonitor_updateScopeCmd.Flags().String("resources-to-add", "", "A list of resources to add to a scope.")
-	networkflowmonitor_updateScopeCmd.Flags().String("resources-to-delete", "", "A list of resources to delete from a scope.")
-	networkflowmonitor_updateScopeCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
-	networkflowmonitor_updateScopeCmd.MarkFlagRequired("scope-id")
+		networkflowmonitor_updateScopeCmd.Flags().String("resources-to-add", "", "A list of resources to add to a scope.")
+		networkflowmonitor_updateScopeCmd.Flags().String("resources-to-delete", "", "A list of resources to delete from a scope.")
+		networkflowmonitor_updateScopeCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
+		networkflowmonitor_updateScopeCmd.MarkFlagRequired("scope-id")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_updateScopeCmd)
 }

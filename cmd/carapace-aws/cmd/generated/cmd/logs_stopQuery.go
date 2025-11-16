@@ -12,9 +12,11 @@ var logs_stopQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_stopQueryCmd).Standalone()
+	carapace.Gen(logs_stopQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_stopQueryCmd).Standalone()
 
-	logs_stopQueryCmd.Flags().String("query-id", "", "The ID number of the query to stop.")
-	logs_stopQueryCmd.MarkFlagRequired("query-id")
+		logs_stopQueryCmd.Flags().String("query-id", "", "The ID number of the query to stop.")
+		logs_stopQueryCmd.MarkFlagRequired("query-id")
+	})
 	logsCmd.AddCommand(logs_stopQueryCmd)
 }

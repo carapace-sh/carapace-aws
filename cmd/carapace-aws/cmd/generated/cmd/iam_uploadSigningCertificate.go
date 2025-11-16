@@ -12,10 +12,12 @@ var iam_uploadSigningCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_uploadSigningCertificateCmd).Standalone()
+	carapace.Gen(iam_uploadSigningCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_uploadSigningCertificateCmd).Standalone()
 
-	iam_uploadSigningCertificateCmd.Flags().String("certificate-body", "", "The contents of the signing certificate.")
-	iam_uploadSigningCertificateCmd.Flags().String("user-name", "", "The name of the user the signing certificate is for.")
-	iam_uploadSigningCertificateCmd.MarkFlagRequired("certificate-body")
+		iam_uploadSigningCertificateCmd.Flags().String("certificate-body", "", "The contents of the signing certificate.")
+		iam_uploadSigningCertificateCmd.Flags().String("user-name", "", "The name of the user the signing certificate is for.")
+		iam_uploadSigningCertificateCmd.MarkFlagRequired("certificate-body")
+	})
 	iamCmd.AddCommand(iam_uploadSigningCertificateCmd)
 }

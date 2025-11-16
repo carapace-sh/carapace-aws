@@ -12,11 +12,13 @@ var vpcLattice_updateServiceNetworkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_updateServiceNetworkCmd).Standalone()
+	carapace.Gen(vpcLattice_updateServiceNetworkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_updateServiceNetworkCmd).Standalone()
 
-	vpcLattice_updateServiceNetworkCmd.Flags().String("auth-type", "", "The type of IAM policy.")
-	vpcLattice_updateServiceNetworkCmd.Flags().String("service-network-identifier", "", "The ID or ARN of the service network.")
-	vpcLattice_updateServiceNetworkCmd.MarkFlagRequired("auth-type")
-	vpcLattice_updateServiceNetworkCmd.MarkFlagRequired("service-network-identifier")
+		vpcLattice_updateServiceNetworkCmd.Flags().String("auth-type", "", "The type of IAM policy.")
+		vpcLattice_updateServiceNetworkCmd.Flags().String("service-network-identifier", "", "The ID or ARN of the service network.")
+		vpcLattice_updateServiceNetworkCmd.MarkFlagRequired("auth-type")
+		vpcLattice_updateServiceNetworkCmd.MarkFlagRequired("service-network-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_updateServiceNetworkCmd)
 }

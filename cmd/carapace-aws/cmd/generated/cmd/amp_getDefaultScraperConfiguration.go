@@ -12,7 +12,9 @@ var amp_getDefaultScraperConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_getDefaultScraperConfigurationCmd).Standalone()
+	carapace.Gen(amp_getDefaultScraperConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_getDefaultScraperConfigurationCmd).Standalone()
 
+	})
 	ampCmd.AddCommand(amp_getDefaultScraperConfigurationCmd)
 }

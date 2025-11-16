@@ -12,9 +12,11 @@ var config_describeAggregationAuthorizationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_describeAggregationAuthorizationsCmd).Standalone()
+	carapace.Gen(config_describeAggregationAuthorizationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_describeAggregationAuthorizationsCmd).Standalone()
 
-	config_describeAggregationAuthorizationsCmd.Flags().String("limit", "", "The maximum number of AggregationAuthorizations returned on each page.")
-	config_describeAggregationAuthorizationsCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+		config_describeAggregationAuthorizationsCmd.Flags().String("limit", "", "The maximum number of AggregationAuthorizations returned on each page.")
+		config_describeAggregationAuthorizationsCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+	})
 	configCmd.AddCommand(config_describeAggregationAuthorizationsCmd)
 }

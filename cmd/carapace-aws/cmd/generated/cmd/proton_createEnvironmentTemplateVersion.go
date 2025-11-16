@@ -12,15 +12,17 @@ var proton_createEnvironmentTemplateVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_createEnvironmentTemplateVersionCmd).Standalone()
+	carapace.Gen(proton_createEnvironmentTemplateVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_createEnvironmentTemplateVersionCmd).Standalone()
 
-	proton_createEnvironmentTemplateVersionCmd.Flags().String("client-token", "", "When included, if two identical requests are made with the same client token, Proton returns the environment template version that the first request created.")
-	proton_createEnvironmentTemplateVersionCmd.Flags().String("description", "", "A description of the new version of an environment template.")
-	proton_createEnvironmentTemplateVersionCmd.Flags().String("major-version", "", "To create a new minor version of the environment template, include `major Version`.")
-	proton_createEnvironmentTemplateVersionCmd.Flags().String("source", "", "An object that includes the template bundle S3 bucket path and name for the new version of an template.")
-	proton_createEnvironmentTemplateVersionCmd.Flags().String("tags", "", "An optional list of metadata items that you can associate with the Proton environment template version.")
-	proton_createEnvironmentTemplateVersionCmd.Flags().String("template-name", "", "The name of the environment template.")
-	proton_createEnvironmentTemplateVersionCmd.MarkFlagRequired("source")
-	proton_createEnvironmentTemplateVersionCmd.MarkFlagRequired("template-name")
+		proton_createEnvironmentTemplateVersionCmd.Flags().String("client-token", "", "When included, if two identical requests are made with the same client token, Proton returns the environment template version that the first request created.")
+		proton_createEnvironmentTemplateVersionCmd.Flags().String("description", "", "A description of the new version of an environment template.")
+		proton_createEnvironmentTemplateVersionCmd.Flags().String("major-version", "", "To create a new minor version of the environment template, include `major Version`.")
+		proton_createEnvironmentTemplateVersionCmd.Flags().String("source", "", "An object that includes the template bundle S3 bucket path and name for the new version of an template.")
+		proton_createEnvironmentTemplateVersionCmd.Flags().String("tags", "", "An optional list of metadata items that you can associate with the Proton environment template version.")
+		proton_createEnvironmentTemplateVersionCmd.Flags().String("template-name", "", "The name of the environment template.")
+		proton_createEnvironmentTemplateVersionCmd.MarkFlagRequired("source")
+		proton_createEnvironmentTemplateVersionCmd.MarkFlagRequired("template-name")
+	})
 	protonCmd.AddCommand(proton_createEnvironmentTemplateVersionCmd)
 }

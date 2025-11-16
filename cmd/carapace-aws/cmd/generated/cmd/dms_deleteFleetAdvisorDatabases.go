@@ -12,9 +12,11 @@ var dms_deleteFleetAdvisorDatabasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteFleetAdvisorDatabasesCmd).Standalone()
+	carapace.Gen(dms_deleteFleetAdvisorDatabasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteFleetAdvisorDatabasesCmd).Standalone()
 
-	dms_deleteFleetAdvisorDatabasesCmd.Flags().String("database-ids", "", "The IDs of the Fleet Advisor collector databases to delete.")
-	dms_deleteFleetAdvisorDatabasesCmd.MarkFlagRequired("database-ids")
+		dms_deleteFleetAdvisorDatabasesCmd.Flags().String("database-ids", "", "The IDs of the Fleet Advisor collector databases to delete.")
+		dms_deleteFleetAdvisorDatabasesCmd.MarkFlagRequired("database-ids")
+	})
 	dmsCmd.AddCommand(dms_deleteFleetAdvisorDatabasesCmd)
 }

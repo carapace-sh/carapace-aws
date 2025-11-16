@@ -12,9 +12,11 @@ var amp_describeAlertManagerDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_describeAlertManagerDefinitionCmd).Standalone()
+	carapace.Gen(amp_describeAlertManagerDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_describeAlertManagerDefinitionCmd).Standalone()
 
-	amp_describeAlertManagerDefinitionCmd.Flags().String("workspace-id", "", "The ID of the workspace to retrieve the alert manager definition from.")
-	amp_describeAlertManagerDefinitionCmd.MarkFlagRequired("workspace-id")
+		amp_describeAlertManagerDefinitionCmd.Flags().String("workspace-id", "", "The ID of the workspace to retrieve the alert manager definition from.")
+		amp_describeAlertManagerDefinitionCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_describeAlertManagerDefinitionCmd)
 }

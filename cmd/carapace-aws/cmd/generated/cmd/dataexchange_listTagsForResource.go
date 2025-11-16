@@ -12,9 +12,11 @@ var dataexchange_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_listTagsForResourceCmd).Standalone()
+	carapace.Gen(dataexchange_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_listTagsForResourceCmd).Standalone()
 
-	dataexchange_listTagsForResourceCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.")
-	dataexchange_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		dataexchange_listTagsForResourceCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.")
+		dataexchange_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_listTagsForResourceCmd)
 }

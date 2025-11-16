@@ -12,9 +12,11 @@ var lexModels_getImportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getImportCmd).Standalone()
+	carapace.Gen(lexModels_getImportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getImportCmd).Standalone()
 
-	lexModels_getImportCmd.Flags().String("import-id", "", "The identifier of the import job information to return.")
-	lexModels_getImportCmd.MarkFlagRequired("import-id")
+		lexModels_getImportCmd.Flags().String("import-id", "", "The identifier of the import job information to return.")
+		lexModels_getImportCmd.MarkFlagRequired("import-id")
+	})
 	lexModelsCmd.AddCommand(lexModels_getImportCmd)
 }

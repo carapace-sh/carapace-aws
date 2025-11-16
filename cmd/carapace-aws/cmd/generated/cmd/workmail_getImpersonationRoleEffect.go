@@ -12,13 +12,15 @@ var workmail_getImpersonationRoleEffectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_getImpersonationRoleEffectCmd).Standalone()
+	carapace.Gen(workmail_getImpersonationRoleEffectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_getImpersonationRoleEffectCmd).Standalone()
 
-	workmail_getImpersonationRoleEffectCmd.Flags().String("impersonation-role-id", "", "The impersonation role ID to test.")
-	workmail_getImpersonationRoleEffectCmd.Flags().String("organization-id", "", "The WorkMail organization where the impersonation role is defined.")
-	workmail_getImpersonationRoleEffectCmd.Flags().String("target-user", "", "The WorkMail organization user chosen to test the impersonation role.")
-	workmail_getImpersonationRoleEffectCmd.MarkFlagRequired("impersonation-role-id")
-	workmail_getImpersonationRoleEffectCmd.MarkFlagRequired("organization-id")
-	workmail_getImpersonationRoleEffectCmd.MarkFlagRequired("target-user")
+		workmail_getImpersonationRoleEffectCmd.Flags().String("impersonation-role-id", "", "The impersonation role ID to test.")
+		workmail_getImpersonationRoleEffectCmd.Flags().String("organization-id", "", "The WorkMail organization where the impersonation role is defined.")
+		workmail_getImpersonationRoleEffectCmd.Flags().String("target-user", "", "The WorkMail organization user chosen to test the impersonation role.")
+		workmail_getImpersonationRoleEffectCmd.MarkFlagRequired("impersonation-role-id")
+		workmail_getImpersonationRoleEffectCmd.MarkFlagRequired("organization-id")
+		workmail_getImpersonationRoleEffectCmd.MarkFlagRequired("target-user")
+	})
 	workmailCmd.AddCommand(workmail_getImpersonationRoleEffectCmd)
 }

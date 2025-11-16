@@ -12,11 +12,13 @@ var pinpoint_putEventStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_putEventStreamCmd).Standalone()
+	carapace.Gen(pinpoint_putEventStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_putEventStreamCmd).Standalone()
 
-	pinpoint_putEventStreamCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_putEventStreamCmd.Flags().String("write-event-stream", "", "")
-	pinpoint_putEventStreamCmd.MarkFlagRequired("application-id")
-	pinpoint_putEventStreamCmd.MarkFlagRequired("write-event-stream")
+		pinpoint_putEventStreamCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_putEventStreamCmd.Flags().String("write-event-stream", "", "")
+		pinpoint_putEventStreamCmd.MarkFlagRequired("application-id")
+		pinpoint_putEventStreamCmd.MarkFlagRequired("write-event-stream")
+	})
 	pinpointCmd.AddCommand(pinpoint_putEventStreamCmd)
 }

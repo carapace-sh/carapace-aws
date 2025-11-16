@@ -12,9 +12,11 @@ var vpcLattice_getResourceGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getResourceGatewayCmd).Standalone()
+	carapace.Gen(vpcLattice_getResourceGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getResourceGatewayCmd).Standalone()
 
-	vpcLattice_getResourceGatewayCmd.Flags().String("resource-gateway-identifier", "", "The ID of the resource gateway.")
-	vpcLattice_getResourceGatewayCmd.MarkFlagRequired("resource-gateway-identifier")
+		vpcLattice_getResourceGatewayCmd.Flags().String("resource-gateway-identifier", "", "The ID of the resource gateway.")
+		vpcLattice_getResourceGatewayCmd.MarkFlagRequired("resource-gateway-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getResourceGatewayCmd)
 }

@@ -12,8 +12,10 @@ var events_describeEventBusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_describeEventBusCmd).Standalone()
+	carapace.Gen(events_describeEventBusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_describeEventBusCmd).Standalone()
 
-	events_describeEventBusCmd.Flags().String("name", "", "The name or ARN of the event bus to show details for.")
+		events_describeEventBusCmd.Flags().String("name", "", "The name or ARN of the event bus to show details for.")
+	})
 	eventsCmd.AddCommand(events_describeEventBusCmd)
 }

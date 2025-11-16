@@ -12,8 +12,10 @@ var shield_updateSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_updateSubscriptionCmd).Standalone()
+	carapace.Gen(shield_updateSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_updateSubscriptionCmd).Standalone()
 
-	shield_updateSubscriptionCmd.Flags().String("auto-renew", "", "When you initally create a subscription, `AutoRenew` is set to `ENABLED`.")
+		shield_updateSubscriptionCmd.Flags().String("auto-renew", "", "When you initally create a subscription, `AutoRenew` is set to `ENABLED`.")
+	})
 	shieldCmd.AddCommand(shield_updateSubscriptionCmd)
 }

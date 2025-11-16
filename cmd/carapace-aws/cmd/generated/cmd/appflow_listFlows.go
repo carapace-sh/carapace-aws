@@ -12,9 +12,11 @@ var appflow_listFlowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appflow_listFlowsCmd).Standalone()
+	carapace.Gen(appflow_listFlowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appflow_listFlowsCmd).Standalone()
 
-	appflow_listFlowsCmd.Flags().String("max-results", "", "Specifies the maximum number of items that should be returned in the result set.")
-	appflow_listFlowsCmd.Flags().String("next-token", "", "The pagination token for next page of data.")
+		appflow_listFlowsCmd.Flags().String("max-results", "", "Specifies the maximum number of items that should be returned in the result set.")
+		appflow_listFlowsCmd.Flags().String("next-token", "", "The pagination token for next page of data.")
+	})
 	appflowCmd.AddCommand(appflow_listFlowsCmd)
 }

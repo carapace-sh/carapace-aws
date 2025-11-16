@@ -12,9 +12,11 @@ var iot_setDefaultAuthorizerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_setDefaultAuthorizerCmd).Standalone()
+	carapace.Gen(iot_setDefaultAuthorizerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_setDefaultAuthorizerCmd).Standalone()
 
-	iot_setDefaultAuthorizerCmd.Flags().String("authorizer-name", "", "The authorizer name.")
-	iot_setDefaultAuthorizerCmd.MarkFlagRequired("authorizer-name")
+		iot_setDefaultAuthorizerCmd.Flags().String("authorizer-name", "", "The authorizer name.")
+		iot_setDefaultAuthorizerCmd.MarkFlagRequired("authorizer-name")
+	})
 	iotCmd.AddCommand(iot_setDefaultAuthorizerCmd)
 }

@@ -12,11 +12,13 @@ var location_batchDeleteGeofenceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_batchDeleteGeofenceCmd).Standalone()
+	carapace.Gen(location_batchDeleteGeofenceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_batchDeleteGeofenceCmd).Standalone()
 
-	location_batchDeleteGeofenceCmd.Flags().String("collection-name", "", "The geofence collection storing the geofences to be deleted.")
-	location_batchDeleteGeofenceCmd.Flags().String("geofence-ids", "", "The batch of geofences to be deleted.")
-	location_batchDeleteGeofenceCmd.MarkFlagRequired("collection-name")
-	location_batchDeleteGeofenceCmd.MarkFlagRequired("geofence-ids")
+		location_batchDeleteGeofenceCmd.Flags().String("collection-name", "", "The geofence collection storing the geofences to be deleted.")
+		location_batchDeleteGeofenceCmd.Flags().String("geofence-ids", "", "The batch of geofences to be deleted.")
+		location_batchDeleteGeofenceCmd.MarkFlagRequired("collection-name")
+		location_batchDeleteGeofenceCmd.MarkFlagRequired("geofence-ids")
+	})
 	locationCmd.AddCommand(location_batchDeleteGeofenceCmd)
 }

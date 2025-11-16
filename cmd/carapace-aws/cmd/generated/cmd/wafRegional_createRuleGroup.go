@@ -12,14 +12,16 @@ var wafRegional_createRuleGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_createRuleGroupCmd).Standalone()
+	carapace.Gen(wafRegional_createRuleGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_createRuleGroupCmd).Standalone()
 
-	wafRegional_createRuleGroupCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	wafRegional_createRuleGroupCmd.Flags().String("metric-name", "", "A friendly name or description for the metrics for this `RuleGroup`.")
-	wafRegional_createRuleGroupCmd.Flags().String("name", "", "A friendly name or description of the [RuleGroup]().")
-	wafRegional_createRuleGroupCmd.Flags().String("tags", "", "")
-	wafRegional_createRuleGroupCmd.MarkFlagRequired("change-token")
-	wafRegional_createRuleGroupCmd.MarkFlagRequired("metric-name")
-	wafRegional_createRuleGroupCmd.MarkFlagRequired("name")
+		wafRegional_createRuleGroupCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		wafRegional_createRuleGroupCmd.Flags().String("metric-name", "", "A friendly name or description for the metrics for this `RuleGroup`.")
+		wafRegional_createRuleGroupCmd.Flags().String("name", "", "A friendly name or description of the [RuleGroup]().")
+		wafRegional_createRuleGroupCmd.Flags().String("tags", "", "")
+		wafRegional_createRuleGroupCmd.MarkFlagRequired("change-token")
+		wafRegional_createRuleGroupCmd.MarkFlagRequired("metric-name")
+		wafRegional_createRuleGroupCmd.MarkFlagRequired("name")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_createRuleGroupCmd)
 }

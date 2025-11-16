@@ -12,11 +12,13 @@ var route53RecoveryReadiness_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_tagResourceCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_tagResourceCmd).Standalone()
 
-	route53RecoveryReadiness_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a resource.")
-	route53RecoveryReadiness_tagResourceCmd.Flags().String("tags", "", "")
-	route53RecoveryReadiness_tagResourceCmd.MarkFlagRequired("resource-arn")
-	route53RecoveryReadiness_tagResourceCmd.MarkFlagRequired("tags")
+		route53RecoveryReadiness_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a resource.")
+		route53RecoveryReadiness_tagResourceCmd.Flags().String("tags", "", "")
+		route53RecoveryReadiness_tagResourceCmd.MarkFlagRequired("resource-arn")
+		route53RecoveryReadiness_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_tagResourceCmd)
 }

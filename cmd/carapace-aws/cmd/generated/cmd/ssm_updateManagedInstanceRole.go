@@ -12,11 +12,13 @@ var ssm_updateManagedInstanceRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_updateManagedInstanceRoleCmd).Standalone()
+	carapace.Gen(ssm_updateManagedInstanceRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_updateManagedInstanceRoleCmd).Standalone()
 
-	ssm_updateManagedInstanceRoleCmd.Flags().String("iam-role", "", "The name of the Identity and Access Management (IAM) role that you want to assign to the managed node.")
-	ssm_updateManagedInstanceRoleCmd.Flags().String("instance-id", "", "The ID of the managed node where you want to update the role.")
-	ssm_updateManagedInstanceRoleCmd.MarkFlagRequired("iam-role")
-	ssm_updateManagedInstanceRoleCmd.MarkFlagRequired("instance-id")
+		ssm_updateManagedInstanceRoleCmd.Flags().String("iam-role", "", "The name of the Identity and Access Management (IAM) role that you want to assign to the managed node.")
+		ssm_updateManagedInstanceRoleCmd.Flags().String("instance-id", "", "The ID of the managed node where you want to update the role.")
+		ssm_updateManagedInstanceRoleCmd.MarkFlagRequired("iam-role")
+		ssm_updateManagedInstanceRoleCmd.MarkFlagRequired("instance-id")
+	})
 	ssmCmd.AddCommand(ssm_updateManagedInstanceRoleCmd)
 }

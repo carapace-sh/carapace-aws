@@ -12,11 +12,13 @@ var medialive_listInputDeviceTransfersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_listInputDeviceTransfersCmd).Standalone()
+	carapace.Gen(medialive_listInputDeviceTransfersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_listInputDeviceTransfersCmd).Standalone()
 
-	medialive_listInputDeviceTransfersCmd.Flags().String("max-results", "", "")
-	medialive_listInputDeviceTransfersCmd.Flags().String("next-token", "", "")
-	medialive_listInputDeviceTransfersCmd.Flags().String("transfer-type", "", "")
-	medialive_listInputDeviceTransfersCmd.MarkFlagRequired("transfer-type")
+		medialive_listInputDeviceTransfersCmd.Flags().String("max-results", "", "")
+		medialive_listInputDeviceTransfersCmd.Flags().String("next-token", "", "")
+		medialive_listInputDeviceTransfersCmd.Flags().String("transfer-type", "", "")
+		medialive_listInputDeviceTransfersCmd.MarkFlagRequired("transfer-type")
+	})
 	medialiveCmd.AddCommand(medialive_listInputDeviceTransfersCmd)
 }

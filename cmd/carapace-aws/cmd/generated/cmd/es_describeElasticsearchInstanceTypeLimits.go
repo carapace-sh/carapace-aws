@@ -12,12 +12,14 @@ var es_describeElasticsearchInstanceTypeLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_describeElasticsearchInstanceTypeLimitsCmd).Standalone()
+	carapace.Gen(es_describeElasticsearchInstanceTypeLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_describeElasticsearchInstanceTypeLimitsCmd).Standalone()
 
-	es_describeElasticsearchInstanceTypeLimitsCmd.Flags().String("domain-name", "", "DomainName represents the name of the Domain that we are trying to modify.")
-	es_describeElasticsearchInstanceTypeLimitsCmd.Flags().String("elasticsearch-version", "", "Version of Elasticsearch for which `Limits` are needed.")
-	es_describeElasticsearchInstanceTypeLimitsCmd.Flags().String("instance-type", "", "The instance type for an Elasticsearch cluster for which Elasticsearch `Limits` are needed.")
-	es_describeElasticsearchInstanceTypeLimitsCmd.MarkFlagRequired("elasticsearch-version")
-	es_describeElasticsearchInstanceTypeLimitsCmd.MarkFlagRequired("instance-type")
+		es_describeElasticsearchInstanceTypeLimitsCmd.Flags().String("domain-name", "", "DomainName represents the name of the Domain that we are trying to modify.")
+		es_describeElasticsearchInstanceTypeLimitsCmd.Flags().String("elasticsearch-version", "", "Version of Elasticsearch for which `Limits` are needed.")
+		es_describeElasticsearchInstanceTypeLimitsCmd.Flags().String("instance-type", "", "The instance type for an Elasticsearch cluster for which Elasticsearch `Limits` are needed.")
+		es_describeElasticsearchInstanceTypeLimitsCmd.MarkFlagRequired("elasticsearch-version")
+		es_describeElasticsearchInstanceTypeLimitsCmd.MarkFlagRequired("instance-type")
+	})
 	esCmd.AddCommand(es_describeElasticsearchInstanceTypeLimitsCmd)
 }

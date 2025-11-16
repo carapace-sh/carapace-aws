@@ -12,10 +12,12 @@ var sesv2_listRecommendationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_listRecommendationsCmd).Standalone()
+	carapace.Gen(sesv2_listRecommendationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_listRecommendationsCmd).Standalone()
 
-	sesv2_listRecommendationsCmd.Flags().String("filter", "", "Filters applied when retrieving recommendations.")
-	sesv2_listRecommendationsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListRecommendations` to indicate the position in the list of recommendations.")
-	sesv2_listRecommendationsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListRecommendations`.")
+		sesv2_listRecommendationsCmd.Flags().String("filter", "", "Filters applied when retrieving recommendations.")
+		sesv2_listRecommendationsCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListRecommendations` to indicate the position in the list of recommendations.")
+		sesv2_listRecommendationsCmd.Flags().String("page-size", "", "The number of results to show in a single call to `ListRecommendations`.")
+	})
 	sesv2Cmd.AddCommand(sesv2_listRecommendationsCmd)
 }

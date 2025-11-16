@@ -12,13 +12,15 @@ var chimeSdkMessaging_updateChannelFlowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_updateChannelFlowCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_updateChannelFlowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_updateChannelFlowCmd).Standalone()
 
-	chimeSdkMessaging_updateChannelFlowCmd.Flags().String("channel-flow-arn", "", "The ARN of the channel flow.")
-	chimeSdkMessaging_updateChannelFlowCmd.Flags().String("name", "", "The name of the channel flow.")
-	chimeSdkMessaging_updateChannelFlowCmd.Flags().String("processors", "", "Information about the processor Lambda functions")
-	chimeSdkMessaging_updateChannelFlowCmd.MarkFlagRequired("channel-flow-arn")
-	chimeSdkMessaging_updateChannelFlowCmd.MarkFlagRequired("name")
-	chimeSdkMessaging_updateChannelFlowCmd.MarkFlagRequired("processors")
+		chimeSdkMessaging_updateChannelFlowCmd.Flags().String("channel-flow-arn", "", "The ARN of the channel flow.")
+		chimeSdkMessaging_updateChannelFlowCmd.Flags().String("name", "", "The name of the channel flow.")
+		chimeSdkMessaging_updateChannelFlowCmd.Flags().String("processors", "", "Information about the processor Lambda functions")
+		chimeSdkMessaging_updateChannelFlowCmd.MarkFlagRequired("channel-flow-arn")
+		chimeSdkMessaging_updateChannelFlowCmd.MarkFlagRequired("name")
+		chimeSdkMessaging_updateChannelFlowCmd.MarkFlagRequired("processors")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_updateChannelFlowCmd)
 }

@@ -12,9 +12,11 @@ var events_deauthorizeConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_deauthorizeConnectionCmd).Standalone()
+	carapace.Gen(events_deauthorizeConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_deauthorizeConnectionCmd).Standalone()
 
-	events_deauthorizeConnectionCmd.Flags().String("name", "", "The name of the connection to remove authorization from.")
-	events_deauthorizeConnectionCmd.MarkFlagRequired("name")
+		events_deauthorizeConnectionCmd.Flags().String("name", "", "The name of the connection to remove authorization from.")
+		events_deauthorizeConnectionCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_deauthorizeConnectionCmd)
 }

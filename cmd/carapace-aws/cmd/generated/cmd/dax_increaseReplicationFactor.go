@@ -12,12 +12,14 @@ var dax_increaseReplicationFactorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_increaseReplicationFactorCmd).Standalone()
+	carapace.Gen(dax_increaseReplicationFactorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_increaseReplicationFactorCmd).Standalone()
 
-	dax_increaseReplicationFactorCmd.Flags().String("availability-zones", "", "The Availability Zones (AZs) in which the cluster nodes will be created.")
-	dax_increaseReplicationFactorCmd.Flags().String("cluster-name", "", "The name of the DAX cluster that will receive additional nodes.")
-	dax_increaseReplicationFactorCmd.Flags().String("new-replication-factor", "", "The new number of nodes for the DAX cluster.")
-	dax_increaseReplicationFactorCmd.MarkFlagRequired("cluster-name")
-	dax_increaseReplicationFactorCmd.MarkFlagRequired("new-replication-factor")
+		dax_increaseReplicationFactorCmd.Flags().String("availability-zones", "", "The Availability Zones (AZs) in which the cluster nodes will be created.")
+		dax_increaseReplicationFactorCmd.Flags().String("cluster-name", "", "The name of the DAX cluster that will receive additional nodes.")
+		dax_increaseReplicationFactorCmd.Flags().String("new-replication-factor", "", "The new number of nodes for the DAX cluster.")
+		dax_increaseReplicationFactorCmd.MarkFlagRequired("cluster-name")
+		dax_increaseReplicationFactorCmd.MarkFlagRequired("new-replication-factor")
+	})
 	daxCmd.AddCommand(dax_increaseReplicationFactorCmd)
 }

@@ -12,9 +12,11 @@ var networkflowmonitor_deleteScopeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkflowmonitor_deleteScopeCmd).Standalone()
+	carapace.Gen(networkflowmonitor_deleteScopeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkflowmonitor_deleteScopeCmd).Standalone()
 
-	networkflowmonitor_deleteScopeCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
-	networkflowmonitor_deleteScopeCmd.MarkFlagRequired("scope-id")
+		networkflowmonitor_deleteScopeCmd.Flags().String("scope-id", "", "The identifier for the scope that includes the resources you want to get data results for.")
+		networkflowmonitor_deleteScopeCmd.MarkFlagRequired("scope-id")
+	})
 	networkflowmonitorCmd.AddCommand(networkflowmonitor_deleteScopeCmd)
 }

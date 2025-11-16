@@ -12,9 +12,11 @@ var dms_deleteReplicationTaskAssessmentRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteReplicationTaskAssessmentRunCmd).Standalone()
+	carapace.Gen(dms_deleteReplicationTaskAssessmentRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteReplicationTaskAssessmentRunCmd).Standalone()
 
-	dms_deleteReplicationTaskAssessmentRunCmd.Flags().String("replication-task-assessment-run-arn", "", "Amazon Resource Name (ARN) of the premigration assessment run to be deleted.")
-	dms_deleteReplicationTaskAssessmentRunCmd.MarkFlagRequired("replication-task-assessment-run-arn")
+		dms_deleteReplicationTaskAssessmentRunCmd.Flags().String("replication-task-assessment-run-arn", "", "Amazon Resource Name (ARN) of the premigration assessment run to be deleted.")
+		dms_deleteReplicationTaskAssessmentRunCmd.MarkFlagRequired("replication-task-assessment-run-arn")
+	})
 	dmsCmd.AddCommand(dms_deleteReplicationTaskAssessmentRunCmd)
 }

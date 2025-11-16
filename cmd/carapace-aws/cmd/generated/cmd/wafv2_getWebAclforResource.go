@@ -12,9 +12,11 @@ var wafv2_getWebAclforResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_getWebAclforResourceCmd).Standalone()
+	carapace.Gen(wafv2_getWebAclforResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_getWebAclforResourceCmd).Standalone()
 
-	wafv2_getWebAclforResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose web ACL you want to retrieve.")
-	wafv2_getWebAclforResourceCmd.MarkFlagRequired("resource-arn")
+		wafv2_getWebAclforResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose web ACL you want to retrieve.")
+		wafv2_getWebAclforResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	wafv2Cmd.AddCommand(wafv2_getWebAclforResourceCmd)
 }

@@ -12,11 +12,13 @@ var workspacesWeb_expireSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_expireSessionCmd).Standalone()
+	carapace.Gen(workspacesWeb_expireSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_expireSessionCmd).Standalone()
 
-	workspacesWeb_expireSessionCmd.Flags().String("portal-id", "", "The ID of the web portal for the session.")
-	workspacesWeb_expireSessionCmd.Flags().String("session-id", "", "The ID of the session to expire.")
-	workspacesWeb_expireSessionCmd.MarkFlagRequired("portal-id")
-	workspacesWeb_expireSessionCmd.MarkFlagRequired("session-id")
+		workspacesWeb_expireSessionCmd.Flags().String("portal-id", "", "The ID of the web portal for the session.")
+		workspacesWeb_expireSessionCmd.Flags().String("session-id", "", "The ID of the session to expire.")
+		workspacesWeb_expireSessionCmd.MarkFlagRequired("portal-id")
+		workspacesWeb_expireSessionCmd.MarkFlagRequired("session-id")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_expireSessionCmd)
 }

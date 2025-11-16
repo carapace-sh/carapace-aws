@@ -12,11 +12,13 @@ var xray_updateGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_updateGroupCmd).Standalone()
+	carapace.Gen(xray_updateGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_updateGroupCmd).Standalone()
 
-	xray_updateGroupCmd.Flags().String("filter-expression", "", "The updated filter expression defining criteria by which to group traces.")
-	xray_updateGroupCmd.Flags().String("group-arn", "", "The ARN that was generated upon creation.")
-	xray_updateGroupCmd.Flags().String("group-name", "", "The case-sensitive name of the group.")
-	xray_updateGroupCmd.Flags().String("insights-configuration", "", "The structure containing configurations related to insights.")
+		xray_updateGroupCmd.Flags().String("filter-expression", "", "The updated filter expression defining criteria by which to group traces.")
+		xray_updateGroupCmd.Flags().String("group-arn", "", "The ARN that was generated upon creation.")
+		xray_updateGroupCmd.Flags().String("group-name", "", "The case-sensitive name of the group.")
+		xray_updateGroupCmd.Flags().String("insights-configuration", "", "The structure containing configurations related to insights.")
+	})
 	xrayCmd.AddCommand(xray_updateGroupCmd)
 }

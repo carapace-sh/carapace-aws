@@ -12,7 +12,9 @@ var directconnect_describeVirtualGatewaysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_describeVirtualGatewaysCmd).Standalone()
+	carapace.Gen(directconnect_describeVirtualGatewaysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_describeVirtualGatewaysCmd).Standalone()
 
+	})
 	directconnectCmd.AddCommand(directconnect_describeVirtualGatewaysCmd)
 }

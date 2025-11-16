@@ -12,9 +12,11 @@ var events_deleteArchiveCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_deleteArchiveCmd).Standalone()
+	carapace.Gen(events_deleteArchiveCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_deleteArchiveCmd).Standalone()
 
-	events_deleteArchiveCmd.Flags().String("archive-name", "", "The name of the archive to delete.")
-	events_deleteArchiveCmd.MarkFlagRequired("archive-name")
+		events_deleteArchiveCmd.Flags().String("archive-name", "", "The name of the archive to delete.")
+		events_deleteArchiveCmd.MarkFlagRequired("archive-name")
+	})
 	eventsCmd.AddCommand(events_deleteArchiveCmd)
 }

@@ -12,9 +12,11 @@ var redshiftServerless_getScheduledActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_getScheduledActionCmd).Standalone()
+	carapace.Gen(redshiftServerless_getScheduledActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_getScheduledActionCmd).Standalone()
 
-	redshiftServerless_getScheduledActionCmd.Flags().String("scheduled-action-name", "", "The name of the scheduled action.")
-	redshiftServerless_getScheduledActionCmd.MarkFlagRequired("scheduled-action-name")
+		redshiftServerless_getScheduledActionCmd.Flags().String("scheduled-action-name", "", "The name of the scheduled action.")
+		redshiftServerless_getScheduledActionCmd.MarkFlagRequired("scheduled-action-name")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_getScheduledActionCmd)
 }

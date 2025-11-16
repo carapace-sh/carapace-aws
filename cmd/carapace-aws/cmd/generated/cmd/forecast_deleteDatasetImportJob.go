@@ -12,9 +12,11 @@ var forecast_deleteDatasetImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_deleteDatasetImportJobCmd).Standalone()
+	carapace.Gen(forecast_deleteDatasetImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_deleteDatasetImportJobCmd).Standalone()
 
-	forecast_deleteDatasetImportJobCmd.Flags().String("dataset-import-job-arn", "", "The Amazon Resource Name (ARN) of the dataset import job to delete.")
-	forecast_deleteDatasetImportJobCmd.MarkFlagRequired("dataset-import-job-arn")
+		forecast_deleteDatasetImportJobCmd.Flags().String("dataset-import-job-arn", "", "The Amazon Resource Name (ARN) of the dataset import job to delete.")
+		forecast_deleteDatasetImportJobCmd.MarkFlagRequired("dataset-import-job-arn")
+	})
 	forecastCmd.AddCommand(forecast_deleteDatasetImportJobCmd)
 }

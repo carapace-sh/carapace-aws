@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_untagResourceCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_untagResourceCmd).Standalone()
 
-	pinpointSmsVoiceV2_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	pinpointSmsVoiceV2_untagResourceCmd.Flags().String("tag-keys", "", "An array of tag key values to unassociate with the resource.")
-	pinpointSmsVoiceV2_untagResourceCmd.MarkFlagRequired("resource-arn")
-	pinpointSmsVoiceV2_untagResourceCmd.MarkFlagRequired("tag-keys")
+		pinpointSmsVoiceV2_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		pinpointSmsVoiceV2_untagResourceCmd.Flags().String("tag-keys", "", "An array of tag key values to unassociate with the resource.")
+		pinpointSmsVoiceV2_untagResourceCmd.MarkFlagRequired("resource-arn")
+		pinpointSmsVoiceV2_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_untagResourceCmd)
 }

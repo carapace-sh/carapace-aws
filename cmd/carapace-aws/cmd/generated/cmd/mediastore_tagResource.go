@@ -12,11 +12,13 @@ var mediastore_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_tagResourceCmd).Standalone()
+	carapace.Gen(mediastore_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_tagResourceCmd).Standalone()
 
-	mediastore_tagResourceCmd.Flags().String("resource", "", "The Amazon Resource Name (ARN) for the container.")
-	mediastore_tagResourceCmd.Flags().String("tags", "", "An array of key:value pairs that you want to add to the container.")
-	mediastore_tagResourceCmd.MarkFlagRequired("resource")
-	mediastore_tagResourceCmd.MarkFlagRequired("tags")
+		mediastore_tagResourceCmd.Flags().String("resource", "", "The Amazon Resource Name (ARN) for the container.")
+		mediastore_tagResourceCmd.Flags().String("tags", "", "An array of key:value pairs that you want to add to the container.")
+		mediastore_tagResourceCmd.MarkFlagRequired("resource")
+		mediastore_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	mediastoreCmd.AddCommand(mediastore_tagResourceCmd)
 }

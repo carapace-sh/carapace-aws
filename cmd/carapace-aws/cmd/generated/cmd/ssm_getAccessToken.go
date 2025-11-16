@@ -12,9 +12,11 @@ var ssm_getAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getAccessTokenCmd).Standalone()
+	carapace.Gen(ssm_getAccessTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getAccessTokenCmd).Standalone()
 
-	ssm_getAccessTokenCmd.Flags().String("access-request-id", "", "The ID of a just-in-time node access request.")
-	ssm_getAccessTokenCmd.MarkFlagRequired("access-request-id")
+		ssm_getAccessTokenCmd.Flags().String("access-request-id", "", "The ID of a just-in-time node access request.")
+		ssm_getAccessTokenCmd.MarkFlagRequired("access-request-id")
+	})
 	ssmCmd.AddCommand(ssm_getAccessTokenCmd)
 }

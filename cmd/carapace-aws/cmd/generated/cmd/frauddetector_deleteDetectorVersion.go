@@ -12,11 +12,13 @@ var frauddetector_deleteDetectorVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteDetectorVersionCmd).Standalone()
+	carapace.Gen(frauddetector_deleteDetectorVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteDetectorVersionCmd).Standalone()
 
-	frauddetector_deleteDetectorVersionCmd.Flags().String("detector-id", "", "The ID of the parent detector for the detector version to delete.")
-	frauddetector_deleteDetectorVersionCmd.Flags().String("detector-version-id", "", "The ID of the detector version to delete.")
-	frauddetector_deleteDetectorVersionCmd.MarkFlagRequired("detector-id")
-	frauddetector_deleteDetectorVersionCmd.MarkFlagRequired("detector-version-id")
+		frauddetector_deleteDetectorVersionCmd.Flags().String("detector-id", "", "The ID of the parent detector for the detector version to delete.")
+		frauddetector_deleteDetectorVersionCmd.Flags().String("detector-version-id", "", "The ID of the detector version to delete.")
+		frauddetector_deleteDetectorVersionCmd.MarkFlagRequired("detector-id")
+		frauddetector_deleteDetectorVersionCmd.MarkFlagRequired("detector-version-id")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteDetectorVersionCmd)
 }

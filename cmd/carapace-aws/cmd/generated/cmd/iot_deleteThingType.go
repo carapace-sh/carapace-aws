@@ -12,9 +12,11 @@ var iot_deleteThingTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteThingTypeCmd).Standalone()
+	carapace.Gen(iot_deleteThingTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteThingTypeCmd).Standalone()
 
-	iot_deleteThingTypeCmd.Flags().String("thing-type-name", "", "The name of the thing type.")
-	iot_deleteThingTypeCmd.MarkFlagRequired("thing-type-name")
+		iot_deleteThingTypeCmd.Flags().String("thing-type-name", "", "The name of the thing type.")
+		iot_deleteThingTypeCmd.MarkFlagRequired("thing-type-name")
+	})
 	iotCmd.AddCommand(iot_deleteThingTypeCmd)
 }

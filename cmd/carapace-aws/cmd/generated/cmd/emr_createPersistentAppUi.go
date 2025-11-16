@@ -12,13 +12,15 @@ var emr_createPersistentAppUiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_createPersistentAppUiCmd).Standalone()
+	carapace.Gen(emr_createPersistentAppUiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_createPersistentAppUiCmd).Standalone()
 
-	emr_createPersistentAppUiCmd.Flags().String("emrcontainers-config", "", "The EMR containers configuration.")
-	emr_createPersistentAppUiCmd.Flags().String("profiler-type", "", "The profiler type for the persistent application user interface.")
-	emr_createPersistentAppUiCmd.Flags().String("tags", "", "Tags for the persistent application user interface.")
-	emr_createPersistentAppUiCmd.Flags().String("target-resource-arn", "", "The unique Amazon Resource Name (ARN) of the target resource.")
-	emr_createPersistentAppUiCmd.Flags().String("xreferer", "", "The cross reference for the persistent application user interface.")
-	emr_createPersistentAppUiCmd.MarkFlagRequired("target-resource-arn")
+		emr_createPersistentAppUiCmd.Flags().String("emrcontainers-config", "", "The EMR containers configuration.")
+		emr_createPersistentAppUiCmd.Flags().String("profiler-type", "", "The profiler type for the persistent application user interface.")
+		emr_createPersistentAppUiCmd.Flags().String("tags", "", "Tags for the persistent application user interface.")
+		emr_createPersistentAppUiCmd.Flags().String("target-resource-arn", "", "The unique Amazon Resource Name (ARN) of the target resource.")
+		emr_createPersistentAppUiCmd.Flags().String("xreferer", "", "The cross reference for the persistent application user interface.")
+		emr_createPersistentAppUiCmd.MarkFlagRequired("target-resource-arn")
+	})
 	emrCmd.AddCommand(emr_createPersistentAppUiCmd)
 }

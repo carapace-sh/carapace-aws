@@ -12,9 +12,11 @@ var ec2_disassociateIamInstanceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_disassociateIamInstanceProfileCmd).Standalone()
+	carapace.Gen(ec2_disassociateIamInstanceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_disassociateIamInstanceProfileCmd).Standalone()
 
-	ec2_disassociateIamInstanceProfileCmd.Flags().String("association-id", "", "The ID of the IAM instance profile association.")
-	ec2_disassociateIamInstanceProfileCmd.MarkFlagRequired("association-id")
+		ec2_disassociateIamInstanceProfileCmd.Flags().String("association-id", "", "The ID of the IAM instance profile association.")
+		ec2_disassociateIamInstanceProfileCmd.MarkFlagRequired("association-id")
+	})
 	ec2Cmd.AddCommand(ec2_disassociateIamInstanceProfileCmd)
 }

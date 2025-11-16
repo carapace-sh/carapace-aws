@@ -12,11 +12,13 @@ var greengrass_createCoreDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createCoreDefinitionCmd).Standalone()
+	carapace.Gen(greengrass_createCoreDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createCoreDefinitionCmd).Standalone()
 
-	greengrass_createCoreDefinitionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createCoreDefinitionCmd.Flags().String("initial-version", "", "Information about the initial version of the core definition.")
-	greengrass_createCoreDefinitionCmd.Flags().String("name", "", "The name of the core definition.")
-	greengrass_createCoreDefinitionCmd.Flags().String("tags", "", "Tag(s) to add to the new resource.")
+		greengrass_createCoreDefinitionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createCoreDefinitionCmd.Flags().String("initial-version", "", "Information about the initial version of the core definition.")
+		greengrass_createCoreDefinitionCmd.Flags().String("name", "", "The name of the core definition.")
+		greengrass_createCoreDefinitionCmd.Flags().String("tags", "", "Tag(s) to add to the new resource.")
+	})
 	greengrassCmd.AddCommand(greengrass_createCoreDefinitionCmd)
 }

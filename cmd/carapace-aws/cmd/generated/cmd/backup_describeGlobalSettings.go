@@ -12,7 +12,9 @@ var backup_describeGlobalSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_describeGlobalSettingsCmd).Standalone()
+	carapace.Gen(backup_describeGlobalSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_describeGlobalSettingsCmd).Standalone()
 
+	})
 	backupCmd.AddCommand(backup_describeGlobalSettingsCmd)
 }

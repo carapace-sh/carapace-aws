@@ -12,9 +12,11 @@ var lightsail_deleteCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteCertificateCmd).Standalone()
+	carapace.Gen(lightsail_deleteCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteCertificateCmd).Standalone()
 
-	lightsail_deleteCertificateCmd.Flags().String("certificate-name", "", "The name of the certificate to delete.")
-	lightsail_deleteCertificateCmd.MarkFlagRequired("certificate-name")
+		lightsail_deleteCertificateCmd.Flags().String("certificate-name", "", "The name of the certificate to delete.")
+		lightsail_deleteCertificateCmd.MarkFlagRequired("certificate-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteCertificateCmd)
 }

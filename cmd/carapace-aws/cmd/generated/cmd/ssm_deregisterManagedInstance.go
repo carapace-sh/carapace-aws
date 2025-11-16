@@ -12,9 +12,11 @@ var ssm_deregisterManagedInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_deregisterManagedInstanceCmd).Standalone()
+	carapace.Gen(ssm_deregisterManagedInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_deregisterManagedInstanceCmd).Standalone()
 
-	ssm_deregisterManagedInstanceCmd.Flags().String("instance-id", "", "The ID assigned to the managed node when you registered it using the activation process.")
-	ssm_deregisterManagedInstanceCmd.MarkFlagRequired("instance-id")
+		ssm_deregisterManagedInstanceCmd.Flags().String("instance-id", "", "The ID assigned to the managed node when you registered it using the activation process.")
+		ssm_deregisterManagedInstanceCmd.MarkFlagRequired("instance-id")
+	})
 	ssmCmd.AddCommand(ssm_deregisterManagedInstanceCmd)
 }

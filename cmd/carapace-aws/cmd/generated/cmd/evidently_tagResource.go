@@ -12,11 +12,13 @@ var evidently_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_tagResourceCmd).Standalone()
+	carapace.Gen(evidently_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_tagResourceCmd).Standalone()
 
-	evidently_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch Evidently resource that you're adding tags to.")
-	evidently_tagResourceCmd.Flags().String("tags", "", "The list of key-value pairs to associate with the resource.")
-	evidently_tagResourceCmd.MarkFlagRequired("resource-arn")
-	evidently_tagResourceCmd.MarkFlagRequired("tags")
+		evidently_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch Evidently resource that you're adding tags to.")
+		evidently_tagResourceCmd.Flags().String("tags", "", "The list of key-value pairs to associate with the resource.")
+		evidently_tagResourceCmd.MarkFlagRequired("resource-arn")
+		evidently_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	evidentlyCmd.AddCommand(evidently_tagResourceCmd)
 }

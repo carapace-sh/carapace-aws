@@ -12,9 +12,11 @@ var ivsRealtime_deletePublicKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_deletePublicKeyCmd).Standalone()
+	carapace.Gen(ivsRealtime_deletePublicKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_deletePublicKeyCmd).Standalone()
 
-	ivsRealtime_deletePublicKeyCmd.Flags().String("arn", "", "ARN of the public key to be deleted.")
-	ivsRealtime_deletePublicKeyCmd.MarkFlagRequired("arn")
+		ivsRealtime_deletePublicKeyCmd.Flags().String("arn", "", "ARN of the public key to be deleted.")
+		ivsRealtime_deletePublicKeyCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_deletePublicKeyCmd)
 }

@@ -12,13 +12,15 @@ var connect_listQueueQuickConnectsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listQueueQuickConnectsCmd).Standalone()
+	carapace.Gen(connect_listQueueQuickConnectsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listQueueQuickConnectsCmd).Standalone()
 
-	connect_listQueueQuickConnectsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listQueueQuickConnectsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listQueueQuickConnectsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listQueueQuickConnectsCmd.Flags().String("queue-id", "", "The identifier for the queue.")
-	connect_listQueueQuickConnectsCmd.MarkFlagRequired("instance-id")
-	connect_listQueueQuickConnectsCmd.MarkFlagRequired("queue-id")
+		connect_listQueueQuickConnectsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listQueueQuickConnectsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listQueueQuickConnectsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listQueueQuickConnectsCmd.Flags().String("queue-id", "", "The identifier for the queue.")
+		connect_listQueueQuickConnectsCmd.MarkFlagRequired("instance-id")
+		connect_listQueueQuickConnectsCmd.MarkFlagRequired("queue-id")
+	})
 	connectCmd.AddCommand(connect_listQueueQuickConnectsCmd)
 }

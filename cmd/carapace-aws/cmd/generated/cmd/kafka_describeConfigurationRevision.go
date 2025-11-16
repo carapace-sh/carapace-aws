@@ -12,11 +12,13 @@ var kafka_describeConfigurationRevisionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_describeConfigurationRevisionCmd).Standalone()
+	carapace.Gen(kafka_describeConfigurationRevisionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_describeConfigurationRevisionCmd).Standalone()
 
-	kafka_describeConfigurationRevisionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.")
-	kafka_describeConfigurationRevisionCmd.Flags().String("revision", "", "A string that uniquely identifies a revision of an MSK configuration.")
-	kafka_describeConfigurationRevisionCmd.MarkFlagRequired("arn")
-	kafka_describeConfigurationRevisionCmd.MarkFlagRequired("revision")
+		kafka_describeConfigurationRevisionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.")
+		kafka_describeConfigurationRevisionCmd.Flags().String("revision", "", "A string that uniquely identifies a revision of an MSK configuration.")
+		kafka_describeConfigurationRevisionCmd.MarkFlagRequired("arn")
+		kafka_describeConfigurationRevisionCmd.MarkFlagRequired("revision")
+	})
 	kafkaCmd.AddCommand(kafka_describeConfigurationRevisionCmd)
 }

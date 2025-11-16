@@ -12,9 +12,11 @@ var logs_deleteRetentionPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteRetentionPolicyCmd).Standalone()
+	carapace.Gen(logs_deleteRetentionPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteRetentionPolicyCmd).Standalone()
 
-	logs_deleteRetentionPolicyCmd.Flags().String("log-group-name", "", "The name of the log group.")
-	logs_deleteRetentionPolicyCmd.MarkFlagRequired("log-group-name")
+		logs_deleteRetentionPolicyCmd.Flags().String("log-group-name", "", "The name of the log group.")
+		logs_deleteRetentionPolicyCmd.MarkFlagRequired("log-group-name")
+	})
 	logsCmd.AddCommand(logs_deleteRetentionPolicyCmd)
 }

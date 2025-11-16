@@ -12,11 +12,13 @@ var mgn_startTestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_startTestCmd).Standalone()
+	carapace.Gen(mgn_startTestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_startTestCmd).Standalone()
 
-	mgn_startTestCmd.Flags().String("account-id", "", "Start Test for Account ID.")
-	mgn_startTestCmd.Flags().String("source-server-ids", "", "Start Test for Source Server IDs.")
-	mgn_startTestCmd.Flags().String("tags", "", "Start Test by Tags.")
-	mgn_startTestCmd.MarkFlagRequired("source-server-ids")
+		mgn_startTestCmd.Flags().String("account-id", "", "Start Test for Account ID.")
+		mgn_startTestCmd.Flags().String("source-server-ids", "", "Start Test for Source Server IDs.")
+		mgn_startTestCmd.Flags().String("tags", "", "Start Test by Tags.")
+		mgn_startTestCmd.MarkFlagRequired("source-server-ids")
+	})
 	mgnCmd.AddCommand(mgn_startTestCmd)
 }

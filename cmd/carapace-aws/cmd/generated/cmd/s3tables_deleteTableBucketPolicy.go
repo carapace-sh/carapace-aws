@@ -12,9 +12,11 @@ var s3tables_deleteTableBucketPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tables_deleteTableBucketPolicyCmd).Standalone()
+	carapace.Gen(s3tables_deleteTableBucketPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tables_deleteTableBucketPolicyCmd).Standalone()
 
-	s3tables_deleteTableBucketPolicyCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
-	s3tables_deleteTableBucketPolicyCmd.MarkFlagRequired("table-bucket-arn")
+		s3tables_deleteTableBucketPolicyCmd.Flags().String("table-bucket-arn", "", "The Amazon Resource Name (ARN) of the table bucket.")
+		s3tables_deleteTableBucketPolicyCmd.MarkFlagRequired("table-bucket-arn")
+	})
 	s3tablesCmd.AddCommand(s3tables_deleteTableBucketPolicyCmd)
 }

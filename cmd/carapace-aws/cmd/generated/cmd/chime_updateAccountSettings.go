@@ -12,11 +12,13 @@ var chime_updateAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_updateAccountSettingsCmd).Standalone()
+	carapace.Gen(chime_updateAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_updateAccountSettingsCmd).Standalone()
 
-	chime_updateAccountSettingsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_updateAccountSettingsCmd.Flags().String("account-settings", "", "The Amazon Chime account settings to update.")
-	chime_updateAccountSettingsCmd.MarkFlagRequired("account-id")
-	chime_updateAccountSettingsCmd.MarkFlagRequired("account-settings")
+		chime_updateAccountSettingsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_updateAccountSettingsCmd.Flags().String("account-settings", "", "The Amazon Chime account settings to update.")
+		chime_updateAccountSettingsCmd.MarkFlagRequired("account-id")
+		chime_updateAccountSettingsCmd.MarkFlagRequired("account-settings")
+	})
 	chimeCmd.AddCommand(chime_updateAccountSettingsCmd)
 }

@@ -12,11 +12,13 @@ var bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd).Standalone()
+	carapace.Gen(bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd).Standalone()
 
-	bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd.Flags().String("max-results", "", "The maximum number of build workflows to return in a single response.")
-	bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd.Flags().String("next-token", "", "A pagination token from a previous request to continue listing build workflows from where the previous request left off.")
-	bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflows you want to list.")
-	bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd.MarkFlagRequired("policy-arn")
+		bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd.Flags().String("max-results", "", "The maximum number of build workflows to return in a single response.")
+		bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd.Flags().String("next-token", "", "A pagination token from a previous request to continue listing build workflows from where the previous request left off.")
+		bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd.Flags().String("policy-arn", "", "The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflows you want to list.")
+		bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd.MarkFlagRequired("policy-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_listAutomatedReasoningPolicyBuildWorkflowsCmd)
 }

@@ -12,9 +12,11 @@ var medialive_describeChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_describeChannelCmd).Standalone()
+	carapace.Gen(medialive_describeChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_describeChannelCmd).Standalone()
 
-	medialive_describeChannelCmd.Flags().String("channel-id", "", "channel ID")
-	medialive_describeChannelCmd.MarkFlagRequired("channel-id")
+		medialive_describeChannelCmd.Flags().String("channel-id", "", "channel ID")
+		medialive_describeChannelCmd.MarkFlagRequired("channel-id")
+	})
 	medialiveCmd.AddCommand(medialive_describeChannelCmd)
 }

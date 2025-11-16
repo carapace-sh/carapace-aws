@@ -12,12 +12,14 @@ var config_describeAggregateComplianceByConformancePacksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_describeAggregateComplianceByConformancePacksCmd).Standalone()
+	carapace.Gen(config_describeAggregateComplianceByConformancePacksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_describeAggregateComplianceByConformancePacksCmd).Standalone()
 
-	config_describeAggregateComplianceByConformancePacksCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
-	config_describeAggregateComplianceByConformancePacksCmd.Flags().String("filters", "", "Filters the result by `AggregateConformancePackComplianceFilters` object.")
-	config_describeAggregateComplianceByConformancePacksCmd.Flags().String("limit", "", "The maximum number of conformance packs compliance details returned on each page.")
-	config_describeAggregateComplianceByConformancePacksCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
-	config_describeAggregateComplianceByConformancePacksCmd.MarkFlagRequired("configuration-aggregator-name")
+		config_describeAggregateComplianceByConformancePacksCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
+		config_describeAggregateComplianceByConformancePacksCmd.Flags().String("filters", "", "Filters the result by `AggregateConformancePackComplianceFilters` object.")
+		config_describeAggregateComplianceByConformancePacksCmd.Flags().String("limit", "", "The maximum number of conformance packs compliance details returned on each page.")
+		config_describeAggregateComplianceByConformancePacksCmd.Flags().String("next-token", "", "The `nextToken` string returned on a previous page that you use to get the next page of results in a paginated response.")
+		config_describeAggregateComplianceByConformancePacksCmd.MarkFlagRequired("configuration-aggregator-name")
+	})
 	configCmd.AddCommand(config_describeAggregateComplianceByConformancePacksCmd)
 }

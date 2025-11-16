@@ -12,7 +12,9 @@ var route53RecoveryClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryClusterCmd).Standalone()
+	carapace.Gen(route53RecoveryClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryClusterCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(route53RecoveryClusterCmd)
 }

@@ -12,9 +12,11 @@ var gamelift_describeRuntimeConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_describeRuntimeConfigurationCmd).Standalone()
+	carapace.Gen(gamelift_describeRuntimeConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_describeRuntimeConfigurationCmd).Standalone()
 
-	gamelift_describeRuntimeConfigurationCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to get the runtime configuration for.")
-	gamelift_describeRuntimeConfigurationCmd.MarkFlagRequired("fleet-id")
+		gamelift_describeRuntimeConfigurationCmd.Flags().String("fleet-id", "", "A unique identifier for the fleet to get the runtime configuration for.")
+		gamelift_describeRuntimeConfigurationCmd.MarkFlagRequired("fleet-id")
+	})
 	gameliftCmd.AddCommand(gamelift_describeRuntimeConfigurationCmd)
 }

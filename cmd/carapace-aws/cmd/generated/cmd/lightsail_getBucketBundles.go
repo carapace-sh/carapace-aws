@@ -12,8 +12,10 @@ var lightsail_getBucketBundlesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getBucketBundlesCmd).Standalone()
+	carapace.Gen(lightsail_getBucketBundlesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getBucketBundlesCmd).Standalone()
 
-	lightsail_getBucketBundlesCmd.Flags().String("include-inactive", "", "A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.")
+		lightsail_getBucketBundlesCmd.Flags().String("include-inactive", "", "A Boolean value that indicates whether to include inactive (unavailable) bundles in the response of your request.")
+	})
 	lightsailCmd.AddCommand(lightsail_getBucketBundlesCmd)
 }

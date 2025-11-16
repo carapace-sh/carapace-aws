@@ -12,10 +12,12 @@ var iam_deleteServiceSpecificCredentialCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_deleteServiceSpecificCredentialCmd).Standalone()
+	carapace.Gen(iam_deleteServiceSpecificCredentialCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_deleteServiceSpecificCredentialCmd).Standalone()
 
-	iam_deleteServiceSpecificCredentialCmd.Flags().String("service-specific-credential-id", "", "The unique identifier of the service-specific credential.")
-	iam_deleteServiceSpecificCredentialCmd.Flags().String("user-name", "", "The name of the IAM user associated with the service-specific credential.")
-	iam_deleteServiceSpecificCredentialCmd.MarkFlagRequired("service-specific-credential-id")
+		iam_deleteServiceSpecificCredentialCmd.Flags().String("service-specific-credential-id", "", "The unique identifier of the service-specific credential.")
+		iam_deleteServiceSpecificCredentialCmd.Flags().String("user-name", "", "The name of the IAM user associated with the service-specific credential.")
+		iam_deleteServiceSpecificCredentialCmd.MarkFlagRequired("service-specific-credential-id")
+	})
 	iamCmd.AddCommand(iam_deleteServiceSpecificCredentialCmd)
 }

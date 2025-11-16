@@ -12,9 +12,11 @@ var workspacesWeb_getPortalCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getPortalCmd).Standalone()
+	carapace.Gen(workspacesWeb_getPortalCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getPortalCmd).Standalone()
 
-	workspacesWeb_getPortalCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
-	workspacesWeb_getPortalCmd.MarkFlagRequired("portal-arn")
+		workspacesWeb_getPortalCmd.Flags().String("portal-arn", "", "The ARN of the web portal.")
+		workspacesWeb_getPortalCmd.MarkFlagRequired("portal-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getPortalCmd)
 }

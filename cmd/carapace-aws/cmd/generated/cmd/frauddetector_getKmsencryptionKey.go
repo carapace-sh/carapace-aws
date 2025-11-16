@@ -12,7 +12,9 @@ var frauddetector_getKmsencryptionKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getKmsencryptionKeyCmd).Standalone()
+	carapace.Gen(frauddetector_getKmsencryptionKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getKmsencryptionKeyCmd).Standalone()
 
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getKmsencryptionKeyCmd)
 }

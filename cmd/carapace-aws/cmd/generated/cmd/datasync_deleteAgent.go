@@ -12,9 +12,11 @@ var datasync_deleteAgentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_deleteAgentCmd).Standalone()
+	carapace.Gen(datasync_deleteAgentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_deleteAgentCmd).Standalone()
 
-	datasync_deleteAgentCmd.Flags().String("agent-arn", "", "The Amazon Resource Name (ARN) of the agent to delete.")
-	datasync_deleteAgentCmd.MarkFlagRequired("agent-arn")
+		datasync_deleteAgentCmd.Flags().String("agent-arn", "", "The Amazon Resource Name (ARN) of the agent to delete.")
+		datasync_deleteAgentCmd.MarkFlagRequired("agent-arn")
+	})
 	datasyncCmd.AddCommand(datasync_deleteAgentCmd)
 }

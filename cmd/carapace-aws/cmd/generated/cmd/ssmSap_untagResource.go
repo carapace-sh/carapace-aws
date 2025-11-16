@@ -12,11 +12,13 @@ var ssmSap_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_untagResourceCmd).Standalone()
+	carapace.Gen(ssmSap_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_untagResourceCmd).Standalone()
 
-	ssmSap_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	ssmSap_untagResourceCmd.Flags().String("tag-keys", "", "Adds/updates or removes credentials for applications registered with AWS Systems Manager for SAP.")
-	ssmSap_untagResourceCmd.MarkFlagRequired("resource-arn")
-	ssmSap_untagResourceCmd.MarkFlagRequired("tag-keys")
+		ssmSap_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		ssmSap_untagResourceCmd.Flags().String("tag-keys", "", "Adds/updates or removes credentials for applications registered with AWS Systems Manager for SAP.")
+		ssmSap_untagResourceCmd.MarkFlagRequired("resource-arn")
+		ssmSap_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	ssmSapCmd.AddCommand(ssmSap_untagResourceCmd)
 }

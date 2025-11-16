@@ -12,13 +12,15 @@ var emrServerless_listJobRunAttemptsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrServerless_listJobRunAttemptsCmd).Standalone()
+	carapace.Gen(emrServerless_listJobRunAttemptsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrServerless_listJobRunAttemptsCmd).Standalone()
 
-	emrServerless_listJobRunAttemptsCmd.Flags().String("application-id", "", "The ID of the application for which to list job runs.")
-	emrServerless_listJobRunAttemptsCmd.Flags().String("job-run-id", "", "The ID of the job run to list.")
-	emrServerless_listJobRunAttemptsCmd.Flags().String("max-results", "", "The maximum number of job run attempts to list.")
-	emrServerless_listJobRunAttemptsCmd.Flags().String("next-token", "", "The token for the next set of job run attempt results.")
-	emrServerless_listJobRunAttemptsCmd.MarkFlagRequired("application-id")
-	emrServerless_listJobRunAttemptsCmd.MarkFlagRequired("job-run-id")
+		emrServerless_listJobRunAttemptsCmd.Flags().String("application-id", "", "The ID of the application for which to list job runs.")
+		emrServerless_listJobRunAttemptsCmd.Flags().String("job-run-id", "", "The ID of the job run to list.")
+		emrServerless_listJobRunAttemptsCmd.Flags().String("max-results", "", "The maximum number of job run attempts to list.")
+		emrServerless_listJobRunAttemptsCmd.Flags().String("next-token", "", "The token for the next set of job run attempt results.")
+		emrServerless_listJobRunAttemptsCmd.MarkFlagRequired("application-id")
+		emrServerless_listJobRunAttemptsCmd.MarkFlagRequired("job-run-id")
+	})
 	emrServerlessCmd.AddCommand(emrServerless_listJobRunAttemptsCmd)
 }

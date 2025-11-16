@@ -12,11 +12,13 @@ var ssm_putInventoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_putInventoryCmd).Standalone()
+	carapace.Gen(ssm_putInventoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_putInventoryCmd).Standalone()
 
-	ssm_putInventoryCmd.Flags().String("instance-id", "", "An managed node ID where you want to add or update inventory items.")
-	ssm_putInventoryCmd.Flags().String("items", "", "The inventory items that you want to add or update on managed nodes.")
-	ssm_putInventoryCmd.MarkFlagRequired("instance-id")
-	ssm_putInventoryCmd.MarkFlagRequired("items")
+		ssm_putInventoryCmd.Flags().String("instance-id", "", "An managed node ID where you want to add or update inventory items.")
+		ssm_putInventoryCmd.Flags().String("items", "", "The inventory items that you want to add or update on managed nodes.")
+		ssm_putInventoryCmd.MarkFlagRequired("instance-id")
+		ssm_putInventoryCmd.MarkFlagRequired("items")
+	})
 	ssmCmd.AddCommand(ssm_putInventoryCmd)
 }

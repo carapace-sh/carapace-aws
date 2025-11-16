@@ -12,11 +12,13 @@ var supplychain_getDataLakeNamespaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_getDataLakeNamespaceCmd).Standalone()
+	carapace.Gen(supplychain_getDataLakeNamespaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_getDataLakeNamespaceCmd).Standalone()
 
-	supplychain_getDataLakeNamespaceCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
-	supplychain_getDataLakeNamespaceCmd.Flags().String("name", "", "The name of the namespace.")
-	supplychain_getDataLakeNamespaceCmd.MarkFlagRequired("instance-id")
-	supplychain_getDataLakeNamespaceCmd.MarkFlagRequired("name")
+		supplychain_getDataLakeNamespaceCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
+		supplychain_getDataLakeNamespaceCmd.Flags().String("name", "", "The name of the namespace.")
+		supplychain_getDataLakeNamespaceCmd.MarkFlagRequired("instance-id")
+		supplychain_getDataLakeNamespaceCmd.MarkFlagRequired("name")
+	})
 	supplychainCmd.AddCommand(supplychain_getDataLakeNamespaceCmd)
 }

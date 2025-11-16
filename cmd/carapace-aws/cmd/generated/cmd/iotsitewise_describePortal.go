@@ -12,9 +12,11 @@ var iotsitewise_describePortalCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describePortalCmd).Standalone()
+	carapace.Gen(iotsitewise_describePortalCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describePortalCmd).Standalone()
 
-	iotsitewise_describePortalCmd.Flags().String("portal-id", "", "The ID of the portal.")
-	iotsitewise_describePortalCmd.MarkFlagRequired("portal-id")
+		iotsitewise_describePortalCmd.Flags().String("portal-id", "", "The ID of the portal.")
+		iotsitewise_describePortalCmd.MarkFlagRequired("portal-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describePortalCmd)
 }

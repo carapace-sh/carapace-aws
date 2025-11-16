@@ -12,9 +12,11 @@ var kafka_describeVpcConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_describeVpcConnectionCmd).Standalone()
+	carapace.Gen(kafka_describeVpcConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_describeVpcConnectionCmd).Standalone()
 
-	kafka_describeVpcConnectionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.")
-	kafka_describeVpcConnectionCmd.MarkFlagRequired("arn")
+		kafka_describeVpcConnectionCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.")
+		kafka_describeVpcConnectionCmd.MarkFlagRequired("arn")
+	})
 	kafkaCmd.AddCommand(kafka_describeVpcConnectionCmd)
 }

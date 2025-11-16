@@ -12,7 +12,9 @@ var chimeSdkIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentityCmd).Standalone()
+	carapace.Gen(chimeSdkIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentityCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(chimeSdkIdentityCmd)
 }

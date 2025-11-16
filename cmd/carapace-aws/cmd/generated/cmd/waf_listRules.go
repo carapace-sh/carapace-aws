@@ -12,9 +12,11 @@ var waf_listRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_listRulesCmd).Standalone()
+	carapace.Gen(waf_listRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_listRulesCmd).Standalone()
 
-	waf_listRulesCmd.Flags().String("limit", "", "Specifies the number of `Rules` that you want AWS WAF to return for this request.")
-	waf_listRulesCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `Rules` than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `Rules`.")
+		waf_listRulesCmd.Flags().String("limit", "", "Specifies the number of `Rules` that you want AWS WAF to return for this request.")
+		waf_listRulesCmd.Flags().String("next-marker", "", "If you specify a value for `Limit` and you have more `Rules` than the value of `Limit`, AWS WAF returns a `NextMarker` value in the response that allows you to list another group of `Rules`.")
+	})
 	wafCmd.AddCommand(waf_listRulesCmd)
 }

@@ -12,9 +12,11 @@ var sagemakerGeospatial_getEarthObservationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerGeospatial_getEarthObservationJobCmd).Standalone()
+	carapace.Gen(sagemakerGeospatial_getEarthObservationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerGeospatial_getEarthObservationJobCmd).Standalone()
 
-	sagemakerGeospatial_getEarthObservationJobCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Earth Observation job.")
-	sagemakerGeospatial_getEarthObservationJobCmd.MarkFlagRequired("arn")
+		sagemakerGeospatial_getEarthObservationJobCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Earth Observation job.")
+		sagemakerGeospatial_getEarthObservationJobCmd.MarkFlagRequired("arn")
+	})
 	sagemakerGeospatialCmd.AddCommand(sagemakerGeospatial_getEarthObservationJobCmd)
 }

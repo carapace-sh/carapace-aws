@@ -12,11 +12,13 @@ var rds_removeFromGlobalClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_removeFromGlobalClusterCmd).Standalone()
+	carapace.Gen(rds_removeFromGlobalClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_removeFromGlobalClusterCmd).Standalone()
 
-	rds_removeFromGlobalClusterCmd.Flags().String("db-cluster-identifier", "", "The Amazon Resource Name (ARN) identifying the cluster that was detached from the Aurora global database cluster.")
-	rds_removeFromGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier to detach from the Aurora global database cluster.")
-	rds_removeFromGlobalClusterCmd.MarkFlagRequired("db-cluster-identifier")
-	rds_removeFromGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+		rds_removeFromGlobalClusterCmd.Flags().String("db-cluster-identifier", "", "The Amazon Resource Name (ARN) identifying the cluster that was detached from the Aurora global database cluster.")
+		rds_removeFromGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier to detach from the Aurora global database cluster.")
+		rds_removeFromGlobalClusterCmd.MarkFlagRequired("db-cluster-identifier")
+		rds_removeFromGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+	})
 	rdsCmd.AddCommand(rds_removeFromGlobalClusterCmd)
 }

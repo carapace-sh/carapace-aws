@@ -12,11 +12,13 @@ var cognitoSync_setCognitoEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoSync_setCognitoEventsCmd).Standalone()
+	carapace.Gen(cognitoSync_setCognitoEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoSync_setCognitoEventsCmd).Standalone()
 
-	cognitoSync_setCognitoEventsCmd.Flags().String("events", "", "The events to configure")
-	cognitoSync_setCognitoEventsCmd.Flags().String("identity-pool-id", "", "The Cognito Identity Pool to use when configuring Cognito Events")
-	cognitoSync_setCognitoEventsCmd.MarkFlagRequired("events")
-	cognitoSync_setCognitoEventsCmd.MarkFlagRequired("identity-pool-id")
+		cognitoSync_setCognitoEventsCmd.Flags().String("events", "", "The events to configure")
+		cognitoSync_setCognitoEventsCmd.Flags().String("identity-pool-id", "", "The Cognito Identity Pool to use when configuring Cognito Events")
+		cognitoSync_setCognitoEventsCmd.MarkFlagRequired("events")
+		cognitoSync_setCognitoEventsCmd.MarkFlagRequired("identity-pool-id")
+	})
 	cognitoSyncCmd.AddCommand(cognitoSync_setCognitoEventsCmd)
 }

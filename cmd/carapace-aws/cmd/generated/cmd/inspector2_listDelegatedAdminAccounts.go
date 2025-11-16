@@ -12,9 +12,11 @@ var inspector2_listDelegatedAdminAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_listDelegatedAdminAccountsCmd).Standalone()
+	carapace.Gen(inspector2_listDelegatedAdminAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_listDelegatedAdminAccountsCmd).Standalone()
 
-	inspector2_listDelegatedAdminAccountsCmd.Flags().String("max-results", "", "The maximum number of results the response can return.")
-	inspector2_listDelegatedAdminAccountsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
+		inspector2_listDelegatedAdminAccountsCmd.Flags().String("max-results", "", "The maximum number of results the response can return.")
+		inspector2_listDelegatedAdminAccountsCmd.Flags().String("next-token", "", "A token to use for paginating results that are returned in the response.")
+	})
 	inspector2Cmd.AddCommand(inspector2_listDelegatedAdminAccountsCmd)
 }

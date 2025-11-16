@@ -12,11 +12,13 @@ var config_getAggregateResourceConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getAggregateResourceConfigCmd).Standalone()
+	carapace.Gen(config_getAggregateResourceConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getAggregateResourceConfigCmd).Standalone()
 
-	config_getAggregateResourceConfigCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
-	config_getAggregateResourceConfigCmd.Flags().String("resource-identifier", "", "An object that identifies aggregate resource.")
-	config_getAggregateResourceConfigCmd.MarkFlagRequired("configuration-aggregator-name")
-	config_getAggregateResourceConfigCmd.MarkFlagRequired("resource-identifier")
+		config_getAggregateResourceConfigCmd.Flags().String("configuration-aggregator-name", "", "The name of the configuration aggregator.")
+		config_getAggregateResourceConfigCmd.Flags().String("resource-identifier", "", "An object that identifies aggregate resource.")
+		config_getAggregateResourceConfigCmd.MarkFlagRequired("configuration-aggregator-name")
+		config_getAggregateResourceConfigCmd.MarkFlagRequired("resource-identifier")
+	})
 	configCmd.AddCommand(config_getAggregateResourceConfigCmd)
 }

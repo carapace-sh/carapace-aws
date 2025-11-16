@@ -12,9 +12,11 @@ var iotfleetwise_getSignalCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_getSignalCatalogCmd).Standalone()
+	carapace.Gen(iotfleetwise_getSignalCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_getSignalCatalogCmd).Standalone()
 
-	iotfleetwise_getSignalCatalogCmd.Flags().String("name", "", "The name of the signal catalog to retrieve information about.")
-	iotfleetwise_getSignalCatalogCmd.MarkFlagRequired("name")
+		iotfleetwise_getSignalCatalogCmd.Flags().String("name", "", "The name of the signal catalog to retrieve information about.")
+		iotfleetwise_getSignalCatalogCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_getSignalCatalogCmd)
 }

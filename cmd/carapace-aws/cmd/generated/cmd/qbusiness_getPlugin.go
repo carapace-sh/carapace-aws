@@ -12,11 +12,13 @@ var qbusiness_getPluginCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_getPluginCmd).Standalone()
+	carapace.Gen(qbusiness_getPluginCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_getPluginCmd).Standalone()
 
-	qbusiness_getPluginCmd.Flags().String("application-id", "", "The identifier of the application which contains the plugin.")
-	qbusiness_getPluginCmd.Flags().String("plugin-id", "", "The identifier of the plugin.")
-	qbusiness_getPluginCmd.MarkFlagRequired("application-id")
-	qbusiness_getPluginCmd.MarkFlagRequired("plugin-id")
+		qbusiness_getPluginCmd.Flags().String("application-id", "", "The identifier of the application which contains the plugin.")
+		qbusiness_getPluginCmd.Flags().String("plugin-id", "", "The identifier of the plugin.")
+		qbusiness_getPluginCmd.MarkFlagRequired("application-id")
+		qbusiness_getPluginCmd.MarkFlagRequired("plugin-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_getPluginCmd)
 }

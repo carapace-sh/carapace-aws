@@ -12,9 +12,11 @@ var rekognition_deleteProjectVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_deleteProjectVersionCmd).Standalone()
+	carapace.Gen(rekognition_deleteProjectVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_deleteProjectVersionCmd).Standalone()
 
-	rekognition_deleteProjectVersionCmd.Flags().String("project-version-arn", "", "The Amazon Resource Name (ARN) of the project version that you want to delete.")
-	rekognition_deleteProjectVersionCmd.MarkFlagRequired("project-version-arn")
+		rekognition_deleteProjectVersionCmd.Flags().String("project-version-arn", "", "The Amazon Resource Name (ARN) of the project version that you want to delete.")
+		rekognition_deleteProjectVersionCmd.MarkFlagRequired("project-version-arn")
+	})
 	rekognitionCmd.AddCommand(rekognition_deleteProjectVersionCmd)
 }

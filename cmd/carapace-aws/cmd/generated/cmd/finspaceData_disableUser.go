@@ -12,10 +12,12 @@ var finspaceData_disableUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_disableUserCmd).Standalone()
+	carapace.Gen(finspaceData_disableUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_disableUserCmd).Standalone()
 
-	finspaceData_disableUserCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
-	finspaceData_disableUserCmd.Flags().String("user-id", "", "The unique identifier for the user that you want to deactivate.")
-	finspaceData_disableUserCmd.MarkFlagRequired("user-id")
+		finspaceData_disableUserCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
+		finspaceData_disableUserCmd.Flags().String("user-id", "", "The unique identifier for the user that you want to deactivate.")
+		finspaceData_disableUserCmd.MarkFlagRequired("user-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_disableUserCmd)
 }

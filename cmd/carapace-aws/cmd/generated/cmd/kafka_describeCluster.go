@@ -12,9 +12,11 @@ var kafka_describeClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_describeClusterCmd).Standalone()
+	carapace.Gen(kafka_describeClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_describeClusterCmd).Standalone()
 
-	kafka_describeClusterCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the cluster.")
-	kafka_describeClusterCmd.MarkFlagRequired("cluster-arn")
+		kafka_describeClusterCmd.Flags().String("cluster-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the cluster.")
+		kafka_describeClusterCmd.MarkFlagRequired("cluster-arn")
+	})
 	kafkaCmd.AddCommand(kafka_describeClusterCmd)
 }

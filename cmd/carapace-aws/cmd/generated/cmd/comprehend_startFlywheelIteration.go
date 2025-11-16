@@ -12,10 +12,12 @@ var comprehend_startFlywheelIterationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_startFlywheelIterationCmd).Standalone()
+	carapace.Gen(comprehend_startFlywheelIterationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_startFlywheelIterationCmd).Standalone()
 
-	comprehend_startFlywheelIterationCmd.Flags().String("client-request-token", "", "A unique identifier for the request.")
-	comprehend_startFlywheelIterationCmd.Flags().String("flywheel-arn", "", "The ARN of the flywheel.")
-	comprehend_startFlywheelIterationCmd.MarkFlagRequired("flywheel-arn")
+		comprehend_startFlywheelIterationCmd.Flags().String("client-request-token", "", "A unique identifier for the request.")
+		comprehend_startFlywheelIterationCmd.Flags().String("flywheel-arn", "", "The ARN of the flywheel.")
+		comprehend_startFlywheelIterationCmd.MarkFlagRequired("flywheel-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_startFlywheelIterationCmd)
 }

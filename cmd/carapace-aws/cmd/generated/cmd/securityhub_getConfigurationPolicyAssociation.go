@@ -12,9 +12,11 @@ var securityhub_getConfigurationPolicyAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getConfigurationPolicyAssociationCmd).Standalone()
+	carapace.Gen(securityhub_getConfigurationPolicyAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getConfigurationPolicyAssociationCmd).Standalone()
 
-	securityhub_getConfigurationPolicyAssociationCmd.Flags().String("target", "", "The target account ID, organizational unit ID, or the root ID to retrieve the association for.")
-	securityhub_getConfigurationPolicyAssociationCmd.MarkFlagRequired("target")
+		securityhub_getConfigurationPolicyAssociationCmd.Flags().String("target", "", "The target account ID, organizational unit ID, or the root ID to retrieve the association for.")
+		securityhub_getConfigurationPolicyAssociationCmd.MarkFlagRequired("target")
+	})
 	securityhubCmd.AddCommand(securityhub_getConfigurationPolicyAssociationCmd)
 }

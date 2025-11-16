@@ -12,11 +12,13 @@ var lightsail_deleteBucketAccessKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteBucketAccessKeyCmd).Standalone()
+	carapace.Gen(lightsail_deleteBucketAccessKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteBucketAccessKeyCmd).Standalone()
 
-	lightsail_deleteBucketAccessKeyCmd.Flags().String("access-key-id", "", "The ID of the access key to delete.")
-	lightsail_deleteBucketAccessKeyCmd.Flags().String("bucket-name", "", "The name of the bucket that the access key belongs to.")
-	lightsail_deleteBucketAccessKeyCmd.MarkFlagRequired("access-key-id")
-	lightsail_deleteBucketAccessKeyCmd.MarkFlagRequired("bucket-name")
+		lightsail_deleteBucketAccessKeyCmd.Flags().String("access-key-id", "", "The ID of the access key to delete.")
+		lightsail_deleteBucketAccessKeyCmd.Flags().String("bucket-name", "", "The name of the bucket that the access key belongs to.")
+		lightsail_deleteBucketAccessKeyCmd.MarkFlagRequired("access-key-id")
+		lightsail_deleteBucketAccessKeyCmd.MarkFlagRequired("bucket-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteBucketAccessKeyCmd)
 }

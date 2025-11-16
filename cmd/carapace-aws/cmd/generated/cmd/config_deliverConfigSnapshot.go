@@ -12,9 +12,11 @@ var config_deliverConfigSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_deliverConfigSnapshotCmd).Standalone()
+	carapace.Gen(config_deliverConfigSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_deliverConfigSnapshotCmd).Standalone()
 
-	config_deliverConfigSnapshotCmd.Flags().String("delivery-channel-name", "", "The name of the delivery channel through which the snapshot is delivered.")
-	config_deliverConfigSnapshotCmd.MarkFlagRequired("delivery-channel-name")
+		config_deliverConfigSnapshotCmd.Flags().String("delivery-channel-name", "", "The name of the delivery channel through which the snapshot is delivered.")
+		config_deliverConfigSnapshotCmd.MarkFlagRequired("delivery-channel-name")
+	})
 	configCmd.AddCommand(config_deliverConfigSnapshotCmd)
 }

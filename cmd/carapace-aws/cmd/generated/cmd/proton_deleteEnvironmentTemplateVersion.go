@@ -12,13 +12,15 @@ var proton_deleteEnvironmentTemplateVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_deleteEnvironmentTemplateVersionCmd).Standalone()
+	carapace.Gen(proton_deleteEnvironmentTemplateVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_deleteEnvironmentTemplateVersionCmd).Standalone()
 
-	proton_deleteEnvironmentTemplateVersionCmd.Flags().String("major-version", "", "The environment template major version to delete.")
-	proton_deleteEnvironmentTemplateVersionCmd.Flags().String("minor-version", "", "The environment template minor version to delete.")
-	proton_deleteEnvironmentTemplateVersionCmd.Flags().String("template-name", "", "The name of the environment template.")
-	proton_deleteEnvironmentTemplateVersionCmd.MarkFlagRequired("major-version")
-	proton_deleteEnvironmentTemplateVersionCmd.MarkFlagRequired("minor-version")
-	proton_deleteEnvironmentTemplateVersionCmd.MarkFlagRequired("template-name")
+		proton_deleteEnvironmentTemplateVersionCmd.Flags().String("major-version", "", "The environment template major version to delete.")
+		proton_deleteEnvironmentTemplateVersionCmd.Flags().String("minor-version", "", "The environment template minor version to delete.")
+		proton_deleteEnvironmentTemplateVersionCmd.Flags().String("template-name", "", "The name of the environment template.")
+		proton_deleteEnvironmentTemplateVersionCmd.MarkFlagRequired("major-version")
+		proton_deleteEnvironmentTemplateVersionCmd.MarkFlagRequired("minor-version")
+		proton_deleteEnvironmentTemplateVersionCmd.MarkFlagRequired("template-name")
+	})
 	protonCmd.AddCommand(proton_deleteEnvironmentTemplateVersionCmd)
 }

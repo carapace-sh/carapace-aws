@@ -12,11 +12,13 @@ var ds_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_listTagsForResourceCmd).Standalone()
+	carapace.Gen(ds_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_listTagsForResourceCmd).Standalone()
 
-	ds_listTagsForResourceCmd.Flags().String("limit", "", "Reserved for future use.")
-	ds_listTagsForResourceCmd.Flags().String("next-token", "", "Reserved for future use.")
-	ds_listTagsForResourceCmd.Flags().String("resource-id", "", "Identifier (ID) of the directory for which you want to retrieve tags.")
-	ds_listTagsForResourceCmd.MarkFlagRequired("resource-id")
+		ds_listTagsForResourceCmd.Flags().String("limit", "", "Reserved for future use.")
+		ds_listTagsForResourceCmd.Flags().String("next-token", "", "Reserved for future use.")
+		ds_listTagsForResourceCmd.Flags().String("resource-id", "", "Identifier (ID) of the directory for which you want to retrieve tags.")
+		ds_listTagsForResourceCmd.MarkFlagRequired("resource-id")
+	})
 	dsCmd.AddCommand(ds_listTagsForResourceCmd)
 }

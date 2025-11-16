@@ -12,11 +12,13 @@ var customerProfiles_getWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getWorkflowCmd).Standalone()
+	carapace.Gen(customerProfiles_getWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getWorkflowCmd).Standalone()
 
-	customerProfiles_getWorkflowCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getWorkflowCmd.Flags().String("workflow-id", "", "Unique identifier for the workflow.")
-	customerProfiles_getWorkflowCmd.MarkFlagRequired("domain-name")
-	customerProfiles_getWorkflowCmd.MarkFlagRequired("workflow-id")
+		customerProfiles_getWorkflowCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getWorkflowCmd.Flags().String("workflow-id", "", "Unique identifier for the workflow.")
+		customerProfiles_getWorkflowCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getWorkflowCmd.MarkFlagRequired("workflow-id")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getWorkflowCmd)
 }

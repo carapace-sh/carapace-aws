@@ -12,11 +12,13 @@ var elasticbeanstalk_terminateEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_terminateEnvironmentCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_terminateEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_terminateEnvironmentCmd).Standalone()
 
-	elasticbeanstalk_terminateEnvironmentCmd.Flags().String("environment-id", "", "The ID of the environment to terminate.")
-	elasticbeanstalk_terminateEnvironmentCmd.Flags().String("environment-name", "", "The name of the environment to terminate.")
-	elasticbeanstalk_terminateEnvironmentCmd.Flags().String("force-terminate", "", "Terminates the target environment even if another environment in the same group is dependent on it.")
-	elasticbeanstalk_terminateEnvironmentCmd.Flags().String("terminate-resources", "", "Indicates whether the associated AWS resources should shut down when the environment is terminated:")
+		elasticbeanstalk_terminateEnvironmentCmd.Flags().String("environment-id", "", "The ID of the environment to terminate.")
+		elasticbeanstalk_terminateEnvironmentCmd.Flags().String("environment-name", "", "The name of the environment to terminate.")
+		elasticbeanstalk_terminateEnvironmentCmd.Flags().String("force-terminate", "", "Terminates the target environment even if another environment in the same group is dependent on it.")
+		elasticbeanstalk_terminateEnvironmentCmd.Flags().String("terminate-resources", "", "Indicates whether the associated AWS resources should shut down when the environment is terminated:")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_terminateEnvironmentCmd)
 }

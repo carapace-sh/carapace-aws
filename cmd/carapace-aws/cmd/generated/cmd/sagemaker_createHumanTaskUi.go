@@ -12,12 +12,14 @@ var sagemaker_createHumanTaskUiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_createHumanTaskUiCmd).Standalone()
+	carapace.Gen(sagemaker_createHumanTaskUiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_createHumanTaskUiCmd).Standalone()
 
-	sagemaker_createHumanTaskUiCmd.Flags().String("human-task-ui-name", "", "The name of the user interface you are creating.")
-	sagemaker_createHumanTaskUiCmd.Flags().String("tags", "", "An array of key-value pairs that contain metadata to help you categorize and organize a human review workflow user interface.")
-	sagemaker_createHumanTaskUiCmd.Flags().String("ui-template", "", "")
-	sagemaker_createHumanTaskUiCmd.MarkFlagRequired("human-task-ui-name")
-	sagemaker_createHumanTaskUiCmd.MarkFlagRequired("ui-template")
+		sagemaker_createHumanTaskUiCmd.Flags().String("human-task-ui-name", "", "The name of the user interface you are creating.")
+		sagemaker_createHumanTaskUiCmd.Flags().String("tags", "", "An array of key-value pairs that contain metadata to help you categorize and organize a human review workflow user interface.")
+		sagemaker_createHumanTaskUiCmd.Flags().String("ui-template", "", "")
+		sagemaker_createHumanTaskUiCmd.MarkFlagRequired("human-task-ui-name")
+		sagemaker_createHumanTaskUiCmd.MarkFlagRequired("ui-template")
+	})
 	sagemakerCmd.AddCommand(sagemaker_createHumanTaskUiCmd)
 }

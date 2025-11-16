@@ -12,9 +12,11 @@ var ssoAdmin_listApplicationProvidersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_listApplicationProvidersCmd).Standalone()
+	carapace.Gen(ssoAdmin_listApplicationProvidersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_listApplicationProvidersCmd).Standalone()
 
-	ssoAdmin_listApplicationProvidersCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included in each response.")
-	ssoAdmin_listApplicationProvidersCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+		ssoAdmin_listApplicationProvidersCmd.Flags().String("max-results", "", "Specifies the total number of results that you want included in each response.")
+		ssoAdmin_listApplicationProvidersCmd.Flags().String("next-token", "", "Specifies that you want to receive the next page of results.")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_listApplicationProvidersCmd)
 }

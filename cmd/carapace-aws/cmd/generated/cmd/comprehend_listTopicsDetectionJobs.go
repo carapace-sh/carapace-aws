@@ -12,10 +12,12 @@ var comprehend_listTopicsDetectionJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_listTopicsDetectionJobsCmd).Standalone()
+	carapace.Gen(comprehend_listTopicsDetectionJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_listTopicsDetectionJobsCmd).Standalone()
 
-	comprehend_listTopicsDetectionJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
-	comprehend_listTopicsDetectionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
-	comprehend_listTopicsDetectionJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehend_listTopicsDetectionJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
+		comprehend_listTopicsDetectionJobsCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
+		comprehend_listTopicsDetectionJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendCmd.AddCommand(comprehend_listTopicsDetectionJobsCmd)
 }

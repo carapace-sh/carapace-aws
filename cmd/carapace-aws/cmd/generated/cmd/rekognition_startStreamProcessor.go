@@ -12,11 +12,13 @@ var rekognition_startStreamProcessorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_startStreamProcessorCmd).Standalone()
+	carapace.Gen(rekognition_startStreamProcessorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_startStreamProcessorCmd).Standalone()
 
-	rekognition_startStreamProcessorCmd.Flags().String("name", "", "The name of the stream processor to start processing.")
-	rekognition_startStreamProcessorCmd.Flags().String("start-selector", "", "Specifies the starting point in the Kinesis stream to start processing.")
-	rekognition_startStreamProcessorCmd.Flags().String("stop-selector", "", "Specifies when to stop processing the stream.")
-	rekognition_startStreamProcessorCmd.MarkFlagRequired("name")
+		rekognition_startStreamProcessorCmd.Flags().String("name", "", "The name of the stream processor to start processing.")
+		rekognition_startStreamProcessorCmd.Flags().String("start-selector", "", "Specifies the starting point in the Kinesis stream to start processing.")
+		rekognition_startStreamProcessorCmd.Flags().String("stop-selector", "", "Specifies when to stop processing the stream.")
+		rekognition_startStreamProcessorCmd.MarkFlagRequired("name")
+	})
 	rekognitionCmd.AddCommand(rekognition_startStreamProcessorCmd)
 }

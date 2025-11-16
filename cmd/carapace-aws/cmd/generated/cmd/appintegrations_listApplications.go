@@ -12,9 +12,11 @@ var appintegrations_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_listApplicationsCmd).Standalone()
+	carapace.Gen(appintegrations_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_listApplicationsCmd).Standalone()
 
-	appintegrations_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	appintegrations_listApplicationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		appintegrations_listApplicationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		appintegrations_listApplicationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_listApplicationsCmd)
 }

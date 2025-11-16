@@ -12,9 +12,11 @@ var securityhub_batchDisableStandardsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_batchDisableStandardsCmd).Standalone()
+	carapace.Gen(securityhub_batchDisableStandardsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_batchDisableStandardsCmd).Standalone()
 
-	securityhub_batchDisableStandardsCmd.Flags().String("standards-subscription-arns", "", "The ARNs of the standards subscriptions to disable.")
-	securityhub_batchDisableStandardsCmd.MarkFlagRequired("standards-subscription-arns")
+		securityhub_batchDisableStandardsCmd.Flags().String("standards-subscription-arns", "", "The ARNs of the standards subscriptions to disable.")
+		securityhub_batchDisableStandardsCmd.MarkFlagRequired("standards-subscription-arns")
+	})
 	securityhubCmd.AddCommand(securityhub_batchDisableStandardsCmd)
 }

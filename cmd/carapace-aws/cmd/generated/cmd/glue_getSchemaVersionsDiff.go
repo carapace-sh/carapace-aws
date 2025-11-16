@@ -12,15 +12,17 @@ var glue_getSchemaVersionsDiffCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getSchemaVersionsDiffCmd).Standalone()
+	carapace.Gen(glue_getSchemaVersionsDiffCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getSchemaVersionsDiffCmd).Standalone()
 
-	glue_getSchemaVersionsDiffCmd.Flags().String("first-schema-version-number", "", "The first of the two schema versions to be compared.")
-	glue_getSchemaVersionsDiffCmd.Flags().String("schema-diff-type", "", "Refers to `SYNTAX_DIFF`, which is the currently supported diff type.")
-	glue_getSchemaVersionsDiffCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
-	glue_getSchemaVersionsDiffCmd.Flags().String("second-schema-version-number", "", "The second of the two schema versions to be compared.")
-	glue_getSchemaVersionsDiffCmd.MarkFlagRequired("first-schema-version-number")
-	glue_getSchemaVersionsDiffCmd.MarkFlagRequired("schema-diff-type")
-	glue_getSchemaVersionsDiffCmd.MarkFlagRequired("schema-id")
-	glue_getSchemaVersionsDiffCmd.MarkFlagRequired("second-schema-version-number")
+		glue_getSchemaVersionsDiffCmd.Flags().String("first-schema-version-number", "", "The first of the two schema versions to be compared.")
+		glue_getSchemaVersionsDiffCmd.Flags().String("schema-diff-type", "", "Refers to `SYNTAX_DIFF`, which is the currently supported diff type.")
+		glue_getSchemaVersionsDiffCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
+		glue_getSchemaVersionsDiffCmd.Flags().String("second-schema-version-number", "", "The second of the two schema versions to be compared.")
+		glue_getSchemaVersionsDiffCmd.MarkFlagRequired("first-schema-version-number")
+		glue_getSchemaVersionsDiffCmd.MarkFlagRequired("schema-diff-type")
+		glue_getSchemaVersionsDiffCmd.MarkFlagRequired("schema-id")
+		glue_getSchemaVersionsDiffCmd.MarkFlagRequired("second-schema-version-number")
+	})
 	glueCmd.AddCommand(glue_getSchemaVersionsDiffCmd)
 }

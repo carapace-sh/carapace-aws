@@ -12,15 +12,17 @@ var cognitoSync_unsubscribeFromDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoSync_unsubscribeFromDatasetCmd).Standalone()
+	carapace.Gen(cognitoSync_unsubscribeFromDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoSync_unsubscribeFromDatasetCmd).Standalone()
 
-	cognitoSync_unsubscribeFromDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset from which to unsubcribe.")
-	cognitoSync_unsubscribeFromDatasetCmd.Flags().String("device-id", "", "The unique ID generated for this device by Cognito.")
-	cognitoSync_unsubscribeFromDatasetCmd.Flags().String("identity-id", "", "Unique ID for this identity.")
-	cognitoSync_unsubscribeFromDatasetCmd.Flags().String("identity-pool-id", "", "A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.")
-	cognitoSync_unsubscribeFromDatasetCmd.MarkFlagRequired("dataset-name")
-	cognitoSync_unsubscribeFromDatasetCmd.MarkFlagRequired("device-id")
-	cognitoSync_unsubscribeFromDatasetCmd.MarkFlagRequired("identity-id")
-	cognitoSync_unsubscribeFromDatasetCmd.MarkFlagRequired("identity-pool-id")
+		cognitoSync_unsubscribeFromDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset from which to unsubcribe.")
+		cognitoSync_unsubscribeFromDatasetCmd.Flags().String("device-id", "", "The unique ID generated for this device by Cognito.")
+		cognitoSync_unsubscribeFromDatasetCmd.Flags().String("identity-id", "", "Unique ID for this identity.")
+		cognitoSync_unsubscribeFromDatasetCmd.Flags().String("identity-pool-id", "", "A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.")
+		cognitoSync_unsubscribeFromDatasetCmd.MarkFlagRequired("dataset-name")
+		cognitoSync_unsubscribeFromDatasetCmd.MarkFlagRequired("device-id")
+		cognitoSync_unsubscribeFromDatasetCmd.MarkFlagRequired("identity-id")
+		cognitoSync_unsubscribeFromDatasetCmd.MarkFlagRequired("identity-pool-id")
+	})
 	cognitoSyncCmd.AddCommand(cognitoSync_unsubscribeFromDatasetCmd)
 }

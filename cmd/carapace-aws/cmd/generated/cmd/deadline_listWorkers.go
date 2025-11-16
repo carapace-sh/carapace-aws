@@ -12,13 +12,15 @@ var deadline_listWorkersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_listWorkersCmd).Standalone()
+	carapace.Gen(deadline_listWorkersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_listWorkersCmd).Standalone()
 
-	deadline_listWorkersCmd.Flags().String("farm-id", "", "The farm ID connected to the workers.")
-	deadline_listWorkersCmd.Flags().String("fleet-id", "", "The fleet ID of the workers.")
-	deadline_listWorkersCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	deadline_listWorkersCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
-	deadline_listWorkersCmd.MarkFlagRequired("farm-id")
-	deadline_listWorkersCmd.MarkFlagRequired("fleet-id")
+		deadline_listWorkersCmd.Flags().String("farm-id", "", "The farm ID connected to the workers.")
+		deadline_listWorkersCmd.Flags().String("fleet-id", "", "The fleet ID of the workers.")
+		deadline_listWorkersCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		deadline_listWorkersCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` to start from the beginning.")
+		deadline_listWorkersCmd.MarkFlagRequired("farm-id")
+		deadline_listWorkersCmd.MarkFlagRequired("fleet-id")
+	})
 	deadlineCmd.AddCommand(deadline_listWorkersCmd)
 }

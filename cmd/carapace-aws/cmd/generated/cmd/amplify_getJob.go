@@ -12,13 +12,15 @@ var amplify_getJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_getJobCmd).Standalone()
+	carapace.Gen(amplify_getJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_getJobCmd).Standalone()
 
-	amplify_getJobCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_getJobCmd.Flags().String("branch-name", "", "The name of the branch to use for the job.")
-	amplify_getJobCmd.Flags().String("job-id", "", "The unique ID for the job.")
-	amplify_getJobCmd.MarkFlagRequired("app-id")
-	amplify_getJobCmd.MarkFlagRequired("branch-name")
-	amplify_getJobCmd.MarkFlagRequired("job-id")
+		amplify_getJobCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_getJobCmd.Flags().String("branch-name", "", "The name of the branch to use for the job.")
+		amplify_getJobCmd.Flags().String("job-id", "", "The unique ID for the job.")
+		amplify_getJobCmd.MarkFlagRequired("app-id")
+		amplify_getJobCmd.MarkFlagRequired("branch-name")
+		amplify_getJobCmd.MarkFlagRequired("job-id")
+	})
 	amplifyCmd.AddCommand(amplify_getJobCmd)
 }

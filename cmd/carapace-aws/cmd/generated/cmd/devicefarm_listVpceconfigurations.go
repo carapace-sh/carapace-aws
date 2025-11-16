@@ -12,9 +12,11 @@ var devicefarm_listVpceconfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_listVpceconfigurationsCmd).Standalone()
+	carapace.Gen(devicefarm_listVpceconfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_listVpceconfigurationsCmd).Standalone()
 
-	devicefarm_listVpceconfigurationsCmd.Flags().String("max-results", "", "An integer that specifies the maximum number of items you want to return in the API response.")
-	devicefarm_listVpceconfigurationsCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+		devicefarm_listVpceconfigurationsCmd.Flags().String("max-results", "", "An integer that specifies the maximum number of items you want to return in the API response.")
+		devicefarm_listVpceconfigurationsCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+	})
 	devicefarmCmd.AddCommand(devicefarm_listVpceconfigurationsCmd)
 }

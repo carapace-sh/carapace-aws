@@ -12,7 +12,9 @@ var timestreamQuery_describeEndpointsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_describeEndpointsCmd).Standalone()
+	carapace.Gen(timestreamQuery_describeEndpointsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_describeEndpointsCmd).Standalone()
 
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_describeEndpointsCmd)
 }

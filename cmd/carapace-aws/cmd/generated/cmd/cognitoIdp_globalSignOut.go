@@ -12,9 +12,11 @@ var cognitoIdp_globalSignOutCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_globalSignOutCmd).Standalone()
+	carapace.Gen(cognitoIdp_globalSignOutCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_globalSignOutCmd).Standalone()
 
-	cognitoIdp_globalSignOutCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_globalSignOutCmd.MarkFlagRequired("access-token")
+		cognitoIdp_globalSignOutCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_globalSignOutCmd.MarkFlagRequired("access-token")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_globalSignOutCmd)
 }

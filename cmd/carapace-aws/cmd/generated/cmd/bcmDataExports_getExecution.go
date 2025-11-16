@@ -12,11 +12,13 @@ var bcmDataExports_getExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDataExports_getExecutionCmd).Standalone()
+	carapace.Gen(bcmDataExports_getExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDataExports_getExecutionCmd).Standalone()
 
-	bcmDataExports_getExecutionCmd.Flags().String("execution-id", "", "The ID for this specific execution.")
-	bcmDataExports_getExecutionCmd.Flags().String("export-arn", "", "The Amazon Resource Name (ARN) of the Export object that generated this specific execution.")
-	bcmDataExports_getExecutionCmd.MarkFlagRequired("execution-id")
-	bcmDataExports_getExecutionCmd.MarkFlagRequired("export-arn")
+		bcmDataExports_getExecutionCmd.Flags().String("execution-id", "", "The ID for this specific execution.")
+		bcmDataExports_getExecutionCmd.Flags().String("export-arn", "", "The Amazon Resource Name (ARN) of the Export object that generated this specific execution.")
+		bcmDataExports_getExecutionCmd.MarkFlagRequired("execution-id")
+		bcmDataExports_getExecutionCmd.MarkFlagRequired("export-arn")
+	})
 	bcmDataExportsCmd.AddCommand(bcmDataExports_getExecutionCmd)
 }

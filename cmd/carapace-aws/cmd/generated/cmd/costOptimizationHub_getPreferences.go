@@ -12,7 +12,9 @@ var costOptimizationHub_getPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(costOptimizationHub_getPreferencesCmd).Standalone()
+	carapace.Gen(costOptimizationHub_getPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(costOptimizationHub_getPreferencesCmd).Standalone()
 
+	})
 	costOptimizationHubCmd.AddCommand(costOptimizationHub_getPreferencesCmd)
 }

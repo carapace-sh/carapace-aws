@@ -12,9 +12,11 @@ var chimeSdkMediaPipelines_deleteMediaCapturePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_deleteMediaCapturePipelineCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_deleteMediaCapturePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_deleteMediaCapturePipelineCmd).Standalone()
 
-	chimeSdkMediaPipelines_deleteMediaCapturePipelineCmd.Flags().String("media-pipeline-id", "", "The ID of the media pipeline being deleted.")
-	chimeSdkMediaPipelines_deleteMediaCapturePipelineCmd.MarkFlagRequired("media-pipeline-id")
+		chimeSdkMediaPipelines_deleteMediaCapturePipelineCmd.Flags().String("media-pipeline-id", "", "The ID of the media pipeline being deleted.")
+		chimeSdkMediaPipelines_deleteMediaCapturePipelineCmd.MarkFlagRequired("media-pipeline-id")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_deleteMediaCapturePipelineCmd)
 }

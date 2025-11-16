@@ -12,11 +12,13 @@ var workmail_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_untagResourceCmd).Standalone()
+	carapace.Gen(workmail_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_untagResourceCmd).Standalone()
 
-	workmail_untagResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
-	workmail_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
-	workmail_untagResourceCmd.MarkFlagRequired("resource-arn")
-	workmail_untagResourceCmd.MarkFlagRequired("tag-keys")
+		workmail_untagResourceCmd.Flags().String("resource-arn", "", "The resource ARN.")
+		workmail_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys.")
+		workmail_untagResourceCmd.MarkFlagRequired("resource-arn")
+		workmail_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	workmailCmd.AddCommand(workmail_untagResourceCmd)
 }

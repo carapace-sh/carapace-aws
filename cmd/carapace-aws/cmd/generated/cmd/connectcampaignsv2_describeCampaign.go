@@ -12,9 +12,11 @@ var connectcampaignsv2_describeCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_describeCampaignCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_describeCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_describeCampaignCmd).Standalone()
 
-	connectcampaignsv2_describeCampaignCmd.Flags().String("id", "", "")
-	connectcampaignsv2_describeCampaignCmd.MarkFlagRequired("id")
+		connectcampaignsv2_describeCampaignCmd.Flags().String("id", "", "")
+		connectcampaignsv2_describeCampaignCmd.MarkFlagRequired("id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_describeCampaignCmd)
 }

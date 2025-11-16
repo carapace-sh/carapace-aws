@@ -12,10 +12,12 @@ var inspector_listAssessmentTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector_listAssessmentTargetsCmd).Standalone()
+	carapace.Gen(inspector_listAssessmentTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector_listAssessmentTargetsCmd).Standalone()
 
-	inspector_listAssessmentTargetsCmd.Flags().String("filter", "", "You can use this parameter to specify a subset of data to be included in the action's response.")
-	inspector_listAssessmentTargetsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
-	inspector_listAssessmentTargetsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+		inspector_listAssessmentTargetsCmd.Flags().String("filter", "", "You can use this parameter to specify a subset of data to be included in the action's response.")
+		inspector_listAssessmentTargetsCmd.Flags().String("max-results", "", "You can use this parameter to indicate the maximum number of items you want in the response.")
+		inspector_listAssessmentTargetsCmd.Flags().String("next-token", "", "You can use this parameter when paginating results.")
+	})
 	inspectorCmd.AddCommand(inspector_listAssessmentTargetsCmd)
 }

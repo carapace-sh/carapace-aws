@@ -12,9 +12,11 @@ var cloudsearch_buildSuggestersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudsearch_buildSuggestersCmd).Standalone()
+	carapace.Gen(cloudsearch_buildSuggestersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudsearch_buildSuggestersCmd).Standalone()
 
-	cloudsearch_buildSuggestersCmd.Flags().String("domain-name", "", "")
-	cloudsearch_buildSuggestersCmd.MarkFlagRequired("domain-name")
+		cloudsearch_buildSuggestersCmd.Flags().String("domain-name", "", "")
+		cloudsearch_buildSuggestersCmd.MarkFlagRequired("domain-name")
+	})
 	cloudsearchCmd.AddCommand(cloudsearch_buildSuggestersCmd)
 }

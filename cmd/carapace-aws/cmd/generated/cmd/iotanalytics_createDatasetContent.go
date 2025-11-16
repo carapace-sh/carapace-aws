@@ -12,10 +12,12 @@ var iotanalytics_createDatasetContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_createDatasetContentCmd).Standalone()
+	carapace.Gen(iotanalytics_createDatasetContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_createDatasetContentCmd).Standalone()
 
-	iotanalytics_createDatasetContentCmd.Flags().String("dataset-name", "", "The name of the dataset.")
-	iotanalytics_createDatasetContentCmd.Flags().String("version-id", "", "The version ID of the dataset content.")
-	iotanalytics_createDatasetContentCmd.MarkFlagRequired("dataset-name")
+		iotanalytics_createDatasetContentCmd.Flags().String("dataset-name", "", "The name of the dataset.")
+		iotanalytics_createDatasetContentCmd.Flags().String("version-id", "", "The version ID of the dataset content.")
+		iotanalytics_createDatasetContentCmd.MarkFlagRequired("dataset-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_createDatasetContentCmd)
 }

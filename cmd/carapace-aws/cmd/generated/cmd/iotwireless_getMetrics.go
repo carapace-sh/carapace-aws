@@ -12,8 +12,10 @@ var iotwireless_getMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getMetricsCmd).Standalone()
+	carapace.Gen(iotwireless_getMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getMetricsCmd).Standalone()
 
-	iotwireless_getMetricsCmd.Flags().String("summary-metric-queries", "", "The list of queries to retrieve the summary metrics.")
+		iotwireless_getMetricsCmd.Flags().String("summary-metric-queries", "", "The list of queries to retrieve the summary metrics.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getMetricsCmd)
 }

@@ -12,12 +12,14 @@ var mgn_associateSourceServersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_associateSourceServersCmd).Standalone()
+	carapace.Gen(mgn_associateSourceServersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_associateSourceServersCmd).Standalone()
 
-	mgn_associateSourceServersCmd.Flags().String("account-id", "", "Account ID.")
-	mgn_associateSourceServersCmd.Flags().String("application-id", "", "Application ID.")
-	mgn_associateSourceServersCmd.Flags().String("source-server-ids", "", "Source server IDs list.")
-	mgn_associateSourceServersCmd.MarkFlagRequired("application-id")
-	mgn_associateSourceServersCmd.MarkFlagRequired("source-server-ids")
+		mgn_associateSourceServersCmd.Flags().String("account-id", "", "Account ID.")
+		mgn_associateSourceServersCmd.Flags().String("application-id", "", "Application ID.")
+		mgn_associateSourceServersCmd.Flags().String("source-server-ids", "", "Source server IDs list.")
+		mgn_associateSourceServersCmd.MarkFlagRequired("application-id")
+		mgn_associateSourceServersCmd.MarkFlagRequired("source-server-ids")
+	})
 	mgnCmd.AddCommand(mgn_associateSourceServersCmd)
 }

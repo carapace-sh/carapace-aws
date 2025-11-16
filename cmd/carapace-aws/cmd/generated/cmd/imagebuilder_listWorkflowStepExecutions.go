@@ -12,11 +12,13 @@ var imagebuilder_listWorkflowStepExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_listWorkflowStepExecutionsCmd).Standalone()
+	carapace.Gen(imagebuilder_listWorkflowStepExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_listWorkflowStepExecutionsCmd).Standalone()
 
-	imagebuilder_listWorkflowStepExecutionsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
-	imagebuilder_listWorkflowStepExecutionsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
-	imagebuilder_listWorkflowStepExecutionsCmd.Flags().String("workflow-execution-id", "", "The unique identifier that Image Builder assigned to keep track of runtime details when it ran the workflow.")
-	imagebuilder_listWorkflowStepExecutionsCmd.MarkFlagRequired("workflow-execution-id")
+		imagebuilder_listWorkflowStepExecutionsCmd.Flags().String("max-results", "", "Specify the maximum number of items to return in a request.")
+		imagebuilder_listWorkflowStepExecutionsCmd.Flags().String("next-token", "", "A token to specify where to start paginating.")
+		imagebuilder_listWorkflowStepExecutionsCmd.Flags().String("workflow-execution-id", "", "The unique identifier that Image Builder assigned to keep track of runtime details when it ran the workflow.")
+		imagebuilder_listWorkflowStepExecutionsCmd.MarkFlagRequired("workflow-execution-id")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_listWorkflowStepExecutionsCmd)
 }

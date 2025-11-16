@@ -12,12 +12,14 @@ var cognitoIdp_revokeTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_revokeTokenCmd).Standalone()
+	carapace.Gen(cognitoIdp_revokeTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_revokeTokenCmd).Standalone()
 
-	cognitoIdp_revokeTokenCmd.Flags().String("client-id", "", "The ID of the app client where the token that you want to revoke was issued.")
-	cognitoIdp_revokeTokenCmd.Flags().String("client-secret", "", "The client secret of the requested app client, if the client has a secret.")
-	cognitoIdp_revokeTokenCmd.Flags().String("token", "", "The refresh token that you want to revoke.")
-	cognitoIdp_revokeTokenCmd.MarkFlagRequired("client-id")
-	cognitoIdp_revokeTokenCmd.MarkFlagRequired("token")
+		cognitoIdp_revokeTokenCmd.Flags().String("client-id", "", "The ID of the app client where the token that you want to revoke was issued.")
+		cognitoIdp_revokeTokenCmd.Flags().String("client-secret", "", "The client secret of the requested app client, if the client has a secret.")
+		cognitoIdp_revokeTokenCmd.Flags().String("token", "", "The refresh token that you want to revoke.")
+		cognitoIdp_revokeTokenCmd.MarkFlagRequired("client-id")
+		cognitoIdp_revokeTokenCmd.MarkFlagRequired("token")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_revokeTokenCmd)
 }

@@ -12,10 +12,12 @@ var personalize_listMetricAttributionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_listMetricAttributionsCmd).Standalone()
+	carapace.Gen(personalize_listMetricAttributionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_listMetricAttributionsCmd).Standalone()
 
-	personalize_listMetricAttributionsCmd.Flags().String("dataset-group-arn", "", "The metric attributions' dataset group Amazon Resource Name (ARN).")
-	personalize_listMetricAttributionsCmd.Flags().String("max-results", "", "The maximum number of metric attributions to return in one page of results.")
-	personalize_listMetricAttributionsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		personalize_listMetricAttributionsCmd.Flags().String("dataset-group-arn", "", "The metric attributions' dataset group Amazon Resource Name (ARN).")
+		personalize_listMetricAttributionsCmd.Flags().String("max-results", "", "The maximum number of metric attributions to return in one page of results.")
+		personalize_listMetricAttributionsCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+	})
 	personalizeCmd.AddCommand(personalize_listMetricAttributionsCmd)
 }

@@ -12,10 +12,12 @@ var mgn_resumeReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_resumeReplicationCmd).Standalone()
+	carapace.Gen(mgn_resumeReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_resumeReplicationCmd).Standalone()
 
-	mgn_resumeReplicationCmd.Flags().String("account-id", "", "Resume Replication Request account ID.")
-	mgn_resumeReplicationCmd.Flags().String("source-server-id", "", "Resume Replication Request source server ID.")
-	mgn_resumeReplicationCmd.MarkFlagRequired("source-server-id")
+		mgn_resumeReplicationCmd.Flags().String("account-id", "", "Resume Replication Request account ID.")
+		mgn_resumeReplicationCmd.Flags().String("source-server-id", "", "Resume Replication Request source server ID.")
+		mgn_resumeReplicationCmd.MarkFlagRequired("source-server-id")
+	})
 	mgnCmd.AddCommand(mgn_resumeReplicationCmd)
 }

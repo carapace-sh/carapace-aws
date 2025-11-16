@@ -12,11 +12,13 @@ var lambda_getAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getAliasCmd).Standalone()
+	carapace.Gen(lambda_getAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getAliasCmd).Standalone()
 
-	lambda_getAliasCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_getAliasCmd.Flags().String("name", "", "The name of the alias.")
-	lambda_getAliasCmd.MarkFlagRequired("function-name")
-	lambda_getAliasCmd.MarkFlagRequired("name")
+		lambda_getAliasCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_getAliasCmd.Flags().String("name", "", "The name of the alias.")
+		lambda_getAliasCmd.MarkFlagRequired("function-name")
+		lambda_getAliasCmd.MarkFlagRequired("name")
+	})
 	lambdaCmd.AddCommand(lambda_getAliasCmd)
 }

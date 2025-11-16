@@ -12,9 +12,11 @@ var drs_deleteSourceServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_deleteSourceServerCmd).Standalone()
+	carapace.Gen(drs_deleteSourceServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_deleteSourceServerCmd).Standalone()
 
-	drs_deleteSourceServerCmd.Flags().String("source-server-id", "", "The ID of the Source Server to be deleted.")
-	drs_deleteSourceServerCmd.MarkFlagRequired("source-server-id")
+		drs_deleteSourceServerCmd.Flags().String("source-server-id", "", "The ID of the Source Server to be deleted.")
+		drs_deleteSourceServerCmd.MarkFlagRequired("source-server-id")
+	})
 	drsCmd.AddCommand(drs_deleteSourceServerCmd)
 }

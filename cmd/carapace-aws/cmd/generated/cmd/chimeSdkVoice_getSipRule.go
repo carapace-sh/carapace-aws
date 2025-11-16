@@ -12,9 +12,11 @@ var chimeSdkVoice_getSipRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_getSipRuleCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_getSipRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_getSipRuleCmd).Standalone()
 
-	chimeSdkVoice_getSipRuleCmd.Flags().String("sip-rule-id", "", "The SIP rule ID.")
-	chimeSdkVoice_getSipRuleCmd.MarkFlagRequired("sip-rule-id")
+		chimeSdkVoice_getSipRuleCmd.Flags().String("sip-rule-id", "", "The SIP rule ID.")
+		chimeSdkVoice_getSipRuleCmd.MarkFlagRequired("sip-rule-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_getSipRuleCmd)
 }

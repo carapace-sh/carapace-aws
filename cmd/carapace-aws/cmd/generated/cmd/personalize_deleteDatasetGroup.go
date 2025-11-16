@@ -12,9 +12,11 @@ var personalize_deleteDatasetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_deleteDatasetGroupCmd).Standalone()
+	carapace.Gen(personalize_deleteDatasetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_deleteDatasetGroupCmd).Standalone()
 
-	personalize_deleteDatasetGroupCmd.Flags().String("dataset-group-arn", "", "The ARN of the dataset group to delete.")
-	personalize_deleteDatasetGroupCmd.MarkFlagRequired("dataset-group-arn")
+		personalize_deleteDatasetGroupCmd.Flags().String("dataset-group-arn", "", "The ARN of the dataset group to delete.")
+		personalize_deleteDatasetGroupCmd.MarkFlagRequired("dataset-group-arn")
+	})
 	personalizeCmd.AddCommand(personalize_deleteDatasetGroupCmd)
 }

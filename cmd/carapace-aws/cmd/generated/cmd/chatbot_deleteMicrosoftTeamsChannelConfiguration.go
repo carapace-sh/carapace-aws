@@ -12,9 +12,11 @@ var chatbot_deleteMicrosoftTeamsChannelConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_deleteMicrosoftTeamsChannelConfigurationCmd).Standalone()
+	carapace.Gen(chatbot_deleteMicrosoftTeamsChannelConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_deleteMicrosoftTeamsChannelConfigurationCmd).Standalone()
 
-	chatbot_deleteMicrosoftTeamsChannelConfigurationCmd.Flags().String("chat-configuration-arn", "", "The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.")
-	chatbot_deleteMicrosoftTeamsChannelConfigurationCmd.MarkFlagRequired("chat-configuration-arn")
+		chatbot_deleteMicrosoftTeamsChannelConfigurationCmd.Flags().String("chat-configuration-arn", "", "The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.")
+		chatbot_deleteMicrosoftTeamsChannelConfigurationCmd.MarkFlagRequired("chat-configuration-arn")
+	})
 	chatbotCmd.AddCommand(chatbot_deleteMicrosoftTeamsChannelConfigurationCmd)
 }

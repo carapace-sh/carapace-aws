@@ -12,9 +12,11 @@ var panorama_listPackagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_listPackagesCmd).Standalone()
+	carapace.Gen(panorama_listPackagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_listPackagesCmd).Standalone()
 
-	panorama_listPackagesCmd.Flags().String("max-results", "", "The maximum number of packages to return in one page of results.")
-	panorama_listPackagesCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+		panorama_listPackagesCmd.Flags().String("max-results", "", "The maximum number of packages to return in one page of results.")
+		panorama_listPackagesCmd.Flags().String("next-token", "", "Specify the pagination token from a previous request to retrieve the next page of results.")
+	})
 	panoramaCmd.AddCommand(panorama_listPackagesCmd)
 }

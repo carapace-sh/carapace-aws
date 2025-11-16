@@ -12,9 +12,11 @@ var memorydb_deleteSubnetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(memorydb_deleteSubnetGroupCmd).Standalone()
+	carapace.Gen(memorydb_deleteSubnetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(memorydb_deleteSubnetGroupCmd).Standalone()
 
-	memorydb_deleteSubnetGroupCmd.Flags().String("subnet-group-name", "", "The name of the subnet group to delete.")
-	memorydb_deleteSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
+		memorydb_deleteSubnetGroupCmd.Flags().String("subnet-group-name", "", "The name of the subnet group to delete.")
+		memorydb_deleteSubnetGroupCmd.MarkFlagRequired("subnet-group-name")
+	})
 	memorydbCmd.AddCommand(memorydb_deleteSubnetGroupCmd)
 }

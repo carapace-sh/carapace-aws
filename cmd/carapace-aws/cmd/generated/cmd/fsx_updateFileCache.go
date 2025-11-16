@@ -12,11 +12,13 @@ var fsx_updateFileCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_updateFileCacheCmd).Standalone()
+	carapace.Gen(fsx_updateFileCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_updateFileCacheCmd).Standalone()
 
-	fsx_updateFileCacheCmd.Flags().String("client-request-token", "", "")
-	fsx_updateFileCacheCmd.Flags().String("file-cache-id", "", "The ID of the cache that you are updating.")
-	fsx_updateFileCacheCmd.Flags().String("lustre-configuration", "", "The configuration updates for an Amazon File Cache resource.")
-	fsx_updateFileCacheCmd.MarkFlagRequired("file-cache-id")
+		fsx_updateFileCacheCmd.Flags().String("client-request-token", "", "")
+		fsx_updateFileCacheCmd.Flags().String("file-cache-id", "", "The ID of the cache that you are updating.")
+		fsx_updateFileCacheCmd.Flags().String("lustre-configuration", "", "The configuration updates for an Amazon File Cache resource.")
+		fsx_updateFileCacheCmd.MarkFlagRequired("file-cache-id")
+	})
 	fsxCmd.AddCommand(fsx_updateFileCacheCmd)
 }

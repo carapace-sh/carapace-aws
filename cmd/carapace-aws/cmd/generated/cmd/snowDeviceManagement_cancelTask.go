@@ -12,9 +12,11 @@ var snowDeviceManagement_cancelTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowDeviceManagement_cancelTaskCmd).Standalone()
+	carapace.Gen(snowDeviceManagement_cancelTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowDeviceManagement_cancelTaskCmd).Standalone()
 
-	snowDeviceManagement_cancelTaskCmd.Flags().String("task-id", "", "The ID of the task that you are attempting to cancel.")
-	snowDeviceManagement_cancelTaskCmd.MarkFlagRequired("task-id")
+		snowDeviceManagement_cancelTaskCmd.Flags().String("task-id", "", "The ID of the task that you are attempting to cancel.")
+		snowDeviceManagement_cancelTaskCmd.MarkFlagRequired("task-id")
+	})
 	snowDeviceManagementCmd.AddCommand(snowDeviceManagement_cancelTaskCmd)
 }

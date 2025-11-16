@@ -12,9 +12,11 @@ var arcZonalShift_deletePracticeRunConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_deletePracticeRunConfigurationCmd).Standalone()
+	carapace.Gen(arcZonalShift_deletePracticeRunConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_deletePracticeRunConfigurationCmd).Standalone()
 
-	arcZonalShift_deletePracticeRunConfigurationCmd.Flags().String("resource-identifier", "", "The identifier for the resource that you want to delete the practice run configuration for.")
-	arcZonalShift_deletePracticeRunConfigurationCmd.MarkFlagRequired("resource-identifier")
+		arcZonalShift_deletePracticeRunConfigurationCmd.Flags().String("resource-identifier", "", "The identifier for the resource that you want to delete the practice run configuration for.")
+		arcZonalShift_deletePracticeRunConfigurationCmd.MarkFlagRequired("resource-identifier")
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_deletePracticeRunConfigurationCmd)
 }

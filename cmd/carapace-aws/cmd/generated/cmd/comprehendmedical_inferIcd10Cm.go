@@ -12,9 +12,11 @@ var comprehendmedical_inferIcd10CmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_inferIcd10CmCmd).Standalone()
+	carapace.Gen(comprehendmedical_inferIcd10CmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_inferIcd10CmCmd).Standalone()
 
-	comprehendmedical_inferIcd10CmCmd.Flags().String("text", "", "The input text used for analysis.")
-	comprehendmedical_inferIcd10CmCmd.MarkFlagRequired("text")
+		comprehendmedical_inferIcd10CmCmd.Flags().String("text", "", "The input text used for analysis.")
+		comprehendmedical_inferIcd10CmCmd.MarkFlagRequired("text")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_inferIcd10CmCmd)
 }

@@ -12,10 +12,12 @@ var appstream_describeDirectoryConfigsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_describeDirectoryConfigsCmd).Standalone()
+	carapace.Gen(appstream_describeDirectoryConfigsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_describeDirectoryConfigsCmd).Standalone()
 
-	appstream_describeDirectoryConfigsCmd.Flags().String("directory-names", "", "The directory names.")
-	appstream_describeDirectoryConfigsCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
-	appstream_describeDirectoryConfigsCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+		appstream_describeDirectoryConfigsCmd.Flags().String("directory-names", "", "The directory names.")
+		appstream_describeDirectoryConfigsCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
+		appstream_describeDirectoryConfigsCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+	})
 	appstreamCmd.AddCommand(appstream_describeDirectoryConfigsCmd)
 }

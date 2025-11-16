@@ -12,9 +12,11 @@ var finspaceData_getUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_getUserCmd).Standalone()
+	carapace.Gen(finspaceData_getUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_getUserCmd).Standalone()
 
-	finspaceData_getUserCmd.Flags().String("user-id", "", "The unique identifier of the user to get data for.")
-	finspaceData_getUserCmd.MarkFlagRequired("user-id")
+		finspaceData_getUserCmd.Flags().String("user-id", "", "The unique identifier of the user to get data for.")
+		finspaceData_getUserCmd.MarkFlagRequired("user-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_getUserCmd)
 }

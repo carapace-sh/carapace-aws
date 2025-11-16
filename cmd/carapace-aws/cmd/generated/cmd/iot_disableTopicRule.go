@@ -12,9 +12,11 @@ var iot_disableTopicRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_disableTopicRuleCmd).Standalone()
+	carapace.Gen(iot_disableTopicRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_disableTopicRuleCmd).Standalone()
 
-	iot_disableTopicRuleCmd.Flags().String("rule-name", "", "The name of the rule to disable.")
-	iot_disableTopicRuleCmd.MarkFlagRequired("rule-name")
+		iot_disableTopicRuleCmd.Flags().String("rule-name", "", "The name of the rule to disable.")
+		iot_disableTopicRuleCmd.MarkFlagRequired("rule-name")
+	})
 	iotCmd.AddCommand(iot_disableTopicRuleCmd)
 }

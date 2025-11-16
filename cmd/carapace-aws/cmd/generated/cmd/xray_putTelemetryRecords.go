@@ -12,12 +12,14 @@ var xray_putTelemetryRecordsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_putTelemetryRecordsCmd).Standalone()
+	carapace.Gen(xray_putTelemetryRecordsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_putTelemetryRecordsCmd).Standalone()
 
-	xray_putTelemetryRecordsCmd.Flags().String("ec2-instance-id", "", "")
-	xray_putTelemetryRecordsCmd.Flags().String("hostname", "", "")
-	xray_putTelemetryRecordsCmd.Flags().String("resource-arn", "", "")
-	xray_putTelemetryRecordsCmd.Flags().String("telemetry-records", "", "")
-	xray_putTelemetryRecordsCmd.MarkFlagRequired("telemetry-records")
+		xray_putTelemetryRecordsCmd.Flags().String("ec2-instance-id", "", "")
+		xray_putTelemetryRecordsCmd.Flags().String("hostname", "", "")
+		xray_putTelemetryRecordsCmd.Flags().String("resource-arn", "", "")
+		xray_putTelemetryRecordsCmd.Flags().String("telemetry-records", "", "")
+		xray_putTelemetryRecordsCmd.MarkFlagRequired("telemetry-records")
+	})
 	xrayCmd.AddCommand(xray_putTelemetryRecordsCmd)
 }

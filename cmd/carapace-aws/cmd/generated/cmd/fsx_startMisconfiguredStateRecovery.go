@@ -12,10 +12,12 @@ var fsx_startMisconfiguredStateRecoveryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_startMisconfiguredStateRecoveryCmd).Standalone()
+	carapace.Gen(fsx_startMisconfiguredStateRecoveryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_startMisconfiguredStateRecoveryCmd).Standalone()
 
-	fsx_startMisconfiguredStateRecoveryCmd.Flags().String("client-request-token", "", "")
-	fsx_startMisconfiguredStateRecoveryCmd.Flags().String("file-system-id", "", "")
-	fsx_startMisconfiguredStateRecoveryCmd.MarkFlagRequired("file-system-id")
+		fsx_startMisconfiguredStateRecoveryCmd.Flags().String("client-request-token", "", "")
+		fsx_startMisconfiguredStateRecoveryCmd.Flags().String("file-system-id", "", "")
+		fsx_startMisconfiguredStateRecoveryCmd.MarkFlagRequired("file-system-id")
+	})
 	fsxCmd.AddCommand(fsx_startMisconfiguredStateRecoveryCmd)
 }

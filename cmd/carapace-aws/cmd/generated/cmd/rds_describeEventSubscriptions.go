@@ -12,11 +12,13 @@ var rds_describeEventSubscriptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeEventSubscriptionsCmd).Standalone()
+	carapace.Gen(rds_describeEventSubscriptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeEventSubscriptionsCmd).Standalone()
 
-	rds_describeEventSubscriptionsCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
-	rds_describeEventSubscriptionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request.")
-	rds_describeEventSubscriptionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	rds_describeEventSubscriptionsCmd.Flags().String("subscription-name", "", "The name of the RDS event notification subscription you want to describe.")
+		rds_describeEventSubscriptionsCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
+		rds_describeEventSubscriptionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request.")
+		rds_describeEventSubscriptionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		rds_describeEventSubscriptionsCmd.Flags().String("subscription-name", "", "The name of the RDS event notification subscription you want to describe.")
+	})
 	rdsCmd.AddCommand(rds_describeEventSubscriptionsCmd)
 }

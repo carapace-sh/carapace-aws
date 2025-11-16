@@ -12,11 +12,13 @@ var glacier_deleteVaultAccessPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_deleteVaultAccessPolicyCmd).Standalone()
+	carapace.Gen(glacier_deleteVaultAccessPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_deleteVaultAccessPolicyCmd).Standalone()
 
-	glacier_deleteVaultAccessPolicyCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
-	glacier_deleteVaultAccessPolicyCmd.Flags().String("vault-name", "", "The name of the vault.")
-	glacier_deleteVaultAccessPolicyCmd.MarkFlagRequired("account-id")
-	glacier_deleteVaultAccessPolicyCmd.MarkFlagRequired("vault-name")
+		glacier_deleteVaultAccessPolicyCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID of the account that owns the vault.")
+		glacier_deleteVaultAccessPolicyCmd.Flags().String("vault-name", "", "The name of the vault.")
+		glacier_deleteVaultAccessPolicyCmd.MarkFlagRequired("account-id")
+		glacier_deleteVaultAccessPolicyCmd.MarkFlagRequired("vault-name")
+	})
 	glacierCmd.AddCommand(glacier_deleteVaultAccessPolicyCmd)
 }

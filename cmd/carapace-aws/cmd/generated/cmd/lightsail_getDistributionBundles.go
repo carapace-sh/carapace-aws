@@ -12,7 +12,9 @@ var lightsail_getDistributionBundlesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getDistributionBundlesCmd).Standalone()
+	carapace.Gen(lightsail_getDistributionBundlesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getDistributionBundlesCmd).Standalone()
 
+	})
 	lightsailCmd.AddCommand(lightsail_getDistributionBundlesCmd)
 }

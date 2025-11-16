@@ -12,9 +12,11 @@ var codebuild_batchGetBuildBatchesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_batchGetBuildBatchesCmd).Standalone()
+	carapace.Gen(codebuild_batchGetBuildBatchesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_batchGetBuildBatchesCmd).Standalone()
 
-	codebuild_batchGetBuildBatchesCmd.Flags().String("ids", "", "An array that contains the batch build identifiers to retrieve.")
-	codebuild_batchGetBuildBatchesCmd.MarkFlagRequired("ids")
+		codebuild_batchGetBuildBatchesCmd.Flags().String("ids", "", "An array that contains the batch build identifiers to retrieve.")
+		codebuild_batchGetBuildBatchesCmd.MarkFlagRequired("ids")
+	})
 	codebuildCmd.AddCommand(codebuild_batchGetBuildBatchesCmd)
 }

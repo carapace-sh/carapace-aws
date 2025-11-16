@@ -12,11 +12,13 @@ var docdb_addTagsToResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_addTagsToResourceCmd).Standalone()
+	carapace.Gen(docdb_addTagsToResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_addTagsToResourceCmd).Standalone()
 
-	docdb_addTagsToResourceCmd.Flags().String("resource-name", "", "The Amazon DocumentDB resource that the tags are added to.")
-	docdb_addTagsToResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Amazon DocumentDB resource.")
-	docdb_addTagsToResourceCmd.MarkFlagRequired("resource-name")
-	docdb_addTagsToResourceCmd.MarkFlagRequired("tags")
+		docdb_addTagsToResourceCmd.Flags().String("resource-name", "", "The Amazon DocumentDB resource that the tags are added to.")
+		docdb_addTagsToResourceCmd.Flags().String("tags", "", "The tags to be assigned to the Amazon DocumentDB resource.")
+		docdb_addTagsToResourceCmd.MarkFlagRequired("resource-name")
+		docdb_addTagsToResourceCmd.MarkFlagRequired("tags")
+	})
 	docdbCmd.AddCommand(docdb_addTagsToResourceCmd)
 }

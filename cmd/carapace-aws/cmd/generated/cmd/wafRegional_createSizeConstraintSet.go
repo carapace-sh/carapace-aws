@@ -12,11 +12,13 @@ var wafRegional_createSizeConstraintSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_createSizeConstraintSetCmd).Standalone()
+	carapace.Gen(wafRegional_createSizeConstraintSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_createSizeConstraintSetCmd).Standalone()
 
-	wafRegional_createSizeConstraintSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	wafRegional_createSizeConstraintSetCmd.Flags().String("name", "", "A friendly name or description of the [SizeConstraintSet]().")
-	wafRegional_createSizeConstraintSetCmd.MarkFlagRequired("change-token")
-	wafRegional_createSizeConstraintSetCmd.MarkFlagRequired("name")
+		wafRegional_createSizeConstraintSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		wafRegional_createSizeConstraintSetCmd.Flags().String("name", "", "A friendly name or description of the [SizeConstraintSet]().")
+		wafRegional_createSizeConstraintSetCmd.MarkFlagRequired("change-token")
+		wafRegional_createSizeConstraintSetCmd.MarkFlagRequired("name")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_createSizeConstraintSetCmd)
 }

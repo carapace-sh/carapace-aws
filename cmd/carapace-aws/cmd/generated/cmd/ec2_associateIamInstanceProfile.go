@@ -12,11 +12,13 @@ var ec2_associateIamInstanceProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_associateIamInstanceProfileCmd).Standalone()
+	carapace.Gen(ec2_associateIamInstanceProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_associateIamInstanceProfileCmd).Standalone()
 
-	ec2_associateIamInstanceProfileCmd.Flags().String("iam-instance-profile", "", "The IAM instance profile.")
-	ec2_associateIamInstanceProfileCmd.Flags().String("instance-id", "", "The ID of the instance.")
-	ec2_associateIamInstanceProfileCmd.MarkFlagRequired("iam-instance-profile")
-	ec2_associateIamInstanceProfileCmd.MarkFlagRequired("instance-id")
+		ec2_associateIamInstanceProfileCmd.Flags().String("iam-instance-profile", "", "The IAM instance profile.")
+		ec2_associateIamInstanceProfileCmd.Flags().String("instance-id", "", "The ID of the instance.")
+		ec2_associateIamInstanceProfileCmd.MarkFlagRequired("iam-instance-profile")
+		ec2_associateIamInstanceProfileCmd.MarkFlagRequired("instance-id")
+	})
 	ec2Cmd.AddCommand(ec2_associateIamInstanceProfileCmd)
 }

@@ -12,9 +12,11 @@ var securityhub_batchGetAutomationRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_batchGetAutomationRulesCmd).Standalone()
+	carapace.Gen(securityhub_batchGetAutomationRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_batchGetAutomationRulesCmd).Standalone()
 
-	securityhub_batchGetAutomationRulesCmd.Flags().String("automation-rules-arns", "", "A list of rule ARNs to get details for.")
-	securityhub_batchGetAutomationRulesCmd.MarkFlagRequired("automation-rules-arns")
+		securityhub_batchGetAutomationRulesCmd.Flags().String("automation-rules-arns", "", "A list of rule ARNs to get details for.")
+		securityhub_batchGetAutomationRulesCmd.MarkFlagRequired("automation-rules-arns")
+	})
 	securityhubCmd.AddCommand(securityhub_batchGetAutomationRulesCmd)
 }

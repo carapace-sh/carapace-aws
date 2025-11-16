@@ -12,11 +12,13 @@ var greengrass_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_untagResourceCmd).Standalone()
+	carapace.Gen(greengrass_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_untagResourceCmd).Standalone()
 
-	greengrass_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	greengrass_untagResourceCmd.Flags().String("tag-keys", "", "An array of tag keys to delete")
-	greengrass_untagResourceCmd.MarkFlagRequired("resource-arn")
-	greengrass_untagResourceCmd.MarkFlagRequired("tag-keys")
+		greengrass_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		greengrass_untagResourceCmd.Flags().String("tag-keys", "", "An array of tag keys to delete")
+		greengrass_untagResourceCmd.MarkFlagRequired("resource-arn")
+		greengrass_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	greengrassCmd.AddCommand(greengrass_untagResourceCmd)
 }

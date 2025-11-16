@@ -12,8 +12,10 @@ var iotwireless_getServiceEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getServiceEndpointCmd).Standalone()
+	carapace.Gen(iotwireless_getServiceEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getServiceEndpointCmd).Standalone()
 
-	iotwireless_getServiceEndpointCmd.Flags().String("service-type", "", "The service type for which to get endpoint information about.")
+		iotwireless_getServiceEndpointCmd.Flags().String("service-type", "", "The service type for which to get endpoint information about.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getServiceEndpointCmd)
 }

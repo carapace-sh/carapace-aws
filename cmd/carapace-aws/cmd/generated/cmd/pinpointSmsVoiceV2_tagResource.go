@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_tagResourceCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_tagResourceCmd).Standalone()
 
-	pinpointSmsVoiceV2_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	pinpointSmsVoiceV2_tagResourceCmd.Flags().String("tags", "", "An array of key and value pair tags that are associated with the resource.")
-	pinpointSmsVoiceV2_tagResourceCmd.MarkFlagRequired("resource-arn")
-	pinpointSmsVoiceV2_tagResourceCmd.MarkFlagRequired("tags")
+		pinpointSmsVoiceV2_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		pinpointSmsVoiceV2_tagResourceCmd.Flags().String("tags", "", "An array of key and value pair tags that are associated with the resource.")
+		pinpointSmsVoiceV2_tagResourceCmd.MarkFlagRequired("resource-arn")
+		pinpointSmsVoiceV2_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_tagResourceCmd)
 }

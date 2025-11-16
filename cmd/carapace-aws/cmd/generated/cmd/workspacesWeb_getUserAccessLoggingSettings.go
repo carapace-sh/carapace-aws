@@ -12,9 +12,11 @@ var workspacesWeb_getUserAccessLoggingSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getUserAccessLoggingSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_getUserAccessLoggingSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getUserAccessLoggingSettingsCmd).Standalone()
 
-	workspacesWeb_getUserAccessLoggingSettingsCmd.Flags().String("user-access-logging-settings-arn", "", "The ARN of the user access logging settings.")
-	workspacesWeb_getUserAccessLoggingSettingsCmd.MarkFlagRequired("user-access-logging-settings-arn")
+		workspacesWeb_getUserAccessLoggingSettingsCmd.Flags().String("user-access-logging-settings-arn", "", "The ARN of the user access logging settings.")
+		workspacesWeb_getUserAccessLoggingSettingsCmd.MarkFlagRequired("user-access-logging-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getUserAccessLoggingSettingsCmd)
 }

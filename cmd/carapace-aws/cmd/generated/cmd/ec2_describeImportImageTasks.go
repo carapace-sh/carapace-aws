@@ -12,14 +12,16 @@ var ec2_describeImportImageTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeImportImageTasksCmd).Standalone()
+	carapace.Gen(ec2_describeImportImageTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeImportImageTasksCmd).Standalone()
 
-	ec2_describeImportImageTasksCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeImportImageTasksCmd.Flags().String("filters", "", "Filter tasks using the `task-state` filter and one of the following values: `active`, `completed`, `deleting`, or `deleted`.")
-	ec2_describeImportImageTasksCmd.Flags().String("import-task-ids", "", "The IDs of the import image tasks.")
-	ec2_describeImportImageTasksCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	ec2_describeImportImageTasksCmd.Flags().String("next-token", "", "A token that indicates the next page of results.")
-	ec2_describeImportImageTasksCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeImportImageTasksCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeImportImageTasksCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeImportImageTasksCmd.Flags().String("filters", "", "Filter tasks using the `task-state` filter and one of the following values: `active`, `completed`, `deleting`, or `deleted`.")
+		ec2_describeImportImageTasksCmd.Flags().String("import-task-ids", "", "The IDs of the import image tasks.")
+		ec2_describeImportImageTasksCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		ec2_describeImportImageTasksCmd.Flags().String("next-token", "", "A token that indicates the next page of results.")
+		ec2_describeImportImageTasksCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeImportImageTasksCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeImportImageTasksCmd)
 }

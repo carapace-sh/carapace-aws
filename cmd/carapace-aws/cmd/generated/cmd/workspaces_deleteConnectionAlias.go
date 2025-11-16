@@ -12,9 +12,11 @@ var workspaces_deleteConnectionAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_deleteConnectionAliasCmd).Standalone()
+	carapace.Gen(workspaces_deleteConnectionAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_deleteConnectionAliasCmd).Standalone()
 
-	workspaces_deleteConnectionAliasCmd.Flags().String("alias-id", "", "The identifier of the connection alias to delete.")
-	workspaces_deleteConnectionAliasCmd.MarkFlagRequired("alias-id")
+		workspaces_deleteConnectionAliasCmd.Flags().String("alias-id", "", "The identifier of the connection alias to delete.")
+		workspaces_deleteConnectionAliasCmd.MarkFlagRequired("alias-id")
+	})
 	workspacesCmd.AddCommand(workspaces_deleteConnectionAliasCmd)
 }

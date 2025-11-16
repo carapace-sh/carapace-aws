@@ -12,9 +12,11 @@ var storagegateway_deleteGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_deleteGatewayCmd).Standalone()
+	carapace.Gen(storagegateway_deleteGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_deleteGatewayCmd).Standalone()
 
-	storagegateway_deleteGatewayCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_deleteGatewayCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_deleteGatewayCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_deleteGatewayCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_deleteGatewayCmd)
 }

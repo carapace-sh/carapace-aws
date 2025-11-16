@@ -12,10 +12,12 @@ var mediaconnect_listGatewayInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_listGatewayInstancesCmd).Standalone()
+	carapace.Gen(mediaconnect_listGatewayInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_listGatewayInstancesCmd).Standalone()
 
-	mediaconnect_listGatewayInstancesCmd.Flags().String("filter-arn", "", "Filter the list results to display only the instances associated with the selected Gateway ARN.")
-	mediaconnect_listGatewayInstancesCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
-	mediaconnect_listGatewayInstancesCmd.Flags().String("next-token", "", "The token that identifies the batch of results that you want to see.")
+		mediaconnect_listGatewayInstancesCmd.Flags().String("filter-arn", "", "Filter the list results to display only the instances associated with the selected Gateway ARN.")
+		mediaconnect_listGatewayInstancesCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
+		mediaconnect_listGatewayInstancesCmd.Flags().String("next-token", "", "The token that identifies the batch of results that you want to see.")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_listGatewayInstancesCmd)
 }

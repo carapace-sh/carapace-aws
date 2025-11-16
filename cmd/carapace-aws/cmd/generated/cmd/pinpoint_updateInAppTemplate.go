@@ -12,13 +12,15 @@ var pinpoint_updateInAppTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateInAppTemplateCmd).Standalone()
+	carapace.Gen(pinpoint_updateInAppTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateInAppTemplateCmd).Standalone()
 
-	pinpoint_updateInAppTemplateCmd.Flags().String("create-new-version", "", "Specifies whether to save the updates as a new version of the message template.")
-	pinpoint_updateInAppTemplateCmd.Flags().String("in-app-template-request", "", "")
-	pinpoint_updateInAppTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
-	pinpoint_updateInAppTemplateCmd.Flags().String("version", "", "The unique identifier for the version of the message template to update, retrieve information about, or delete.")
-	pinpoint_updateInAppTemplateCmd.MarkFlagRequired("in-app-template-request")
-	pinpoint_updateInAppTemplateCmd.MarkFlagRequired("template-name")
+		pinpoint_updateInAppTemplateCmd.Flags().String("create-new-version", "", "Specifies whether to save the updates as a new version of the message template.")
+		pinpoint_updateInAppTemplateCmd.Flags().String("in-app-template-request", "", "")
+		pinpoint_updateInAppTemplateCmd.Flags().String("template-name", "", "The name of the message template.")
+		pinpoint_updateInAppTemplateCmd.Flags().String("version", "", "The unique identifier for the version of the message template to update, retrieve information about, or delete.")
+		pinpoint_updateInAppTemplateCmd.MarkFlagRequired("in-app-template-request")
+		pinpoint_updateInAppTemplateCmd.MarkFlagRequired("template-name")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateInAppTemplateCmd)
 }

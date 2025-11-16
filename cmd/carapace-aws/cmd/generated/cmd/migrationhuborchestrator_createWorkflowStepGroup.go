@@ -12,14 +12,16 @@ var migrationhuborchestrator_createWorkflowStepGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_createWorkflowStepGroupCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_createWorkflowStepGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_createWorkflowStepGroupCmd).Standalone()
 
-	migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("description", "", "The description of the step group.")
-	migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("name", "", "The name of the step group.")
-	migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("next", "", "The next step group.")
-	migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("previous", "", "The previous step group.")
-	migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("workflow-id", "", "The ID of the migration workflow that will contain the step group.")
-	migrationhuborchestrator_createWorkflowStepGroupCmd.MarkFlagRequired("name")
-	migrationhuborchestrator_createWorkflowStepGroupCmd.MarkFlagRequired("workflow-id")
+		migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("description", "", "The description of the step group.")
+		migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("name", "", "The name of the step group.")
+		migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("next", "", "The next step group.")
+		migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("previous", "", "The previous step group.")
+		migrationhuborchestrator_createWorkflowStepGroupCmd.Flags().String("workflow-id", "", "The ID of the migration workflow that will contain the step group.")
+		migrationhuborchestrator_createWorkflowStepGroupCmd.MarkFlagRequired("name")
+		migrationhuborchestrator_createWorkflowStepGroupCmd.MarkFlagRequired("workflow-id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_createWorkflowStepGroupCmd)
 }

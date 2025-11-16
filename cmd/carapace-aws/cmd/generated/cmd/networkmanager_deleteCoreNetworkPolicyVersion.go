@@ -12,11 +12,13 @@ var networkmanager_deleteCoreNetworkPolicyVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_deleteCoreNetworkPolicyVersionCmd).Standalone()
+	carapace.Gen(networkmanager_deleteCoreNetworkPolicyVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_deleteCoreNetworkPolicyVersionCmd).Standalone()
 
-	networkmanager_deleteCoreNetworkPolicyVersionCmd.Flags().String("core-network-id", "", "The ID of a core network for the deleted policy.")
-	networkmanager_deleteCoreNetworkPolicyVersionCmd.Flags().String("policy-version-id", "", "The version ID of the deleted policy.")
-	networkmanager_deleteCoreNetworkPolicyVersionCmd.MarkFlagRequired("core-network-id")
-	networkmanager_deleteCoreNetworkPolicyVersionCmd.MarkFlagRequired("policy-version-id")
+		networkmanager_deleteCoreNetworkPolicyVersionCmd.Flags().String("core-network-id", "", "The ID of a core network for the deleted policy.")
+		networkmanager_deleteCoreNetworkPolicyVersionCmd.Flags().String("policy-version-id", "", "The version ID of the deleted policy.")
+		networkmanager_deleteCoreNetworkPolicyVersionCmd.MarkFlagRequired("core-network-id")
+		networkmanager_deleteCoreNetworkPolicyVersionCmd.MarkFlagRequired("policy-version-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_deleteCoreNetworkPolicyVersionCmd)
 }

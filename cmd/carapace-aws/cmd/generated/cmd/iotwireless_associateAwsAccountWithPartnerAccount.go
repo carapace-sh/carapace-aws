@@ -12,11 +12,13 @@ var iotwireless_associateAwsAccountWithPartnerAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_associateAwsAccountWithPartnerAccountCmd).Standalone()
+	carapace.Gen(iotwireless_associateAwsAccountWithPartnerAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_associateAwsAccountWithPartnerAccountCmd).Standalone()
 
-	iotwireless_associateAwsAccountWithPartnerAccountCmd.Flags().String("client-request-token", "", "Each resource must have a unique client request token.")
-	iotwireless_associateAwsAccountWithPartnerAccountCmd.Flags().String("sidewalk", "", "The Sidewalk account credentials.")
-	iotwireless_associateAwsAccountWithPartnerAccountCmd.Flags().String("tags", "", "The tags to attach to the specified resource.")
-	iotwireless_associateAwsAccountWithPartnerAccountCmd.MarkFlagRequired("sidewalk")
+		iotwireless_associateAwsAccountWithPartnerAccountCmd.Flags().String("client-request-token", "", "Each resource must have a unique client request token.")
+		iotwireless_associateAwsAccountWithPartnerAccountCmd.Flags().String("sidewalk", "", "The Sidewalk account credentials.")
+		iotwireless_associateAwsAccountWithPartnerAccountCmd.Flags().String("tags", "", "The tags to attach to the specified resource.")
+		iotwireless_associateAwsAccountWithPartnerAccountCmd.MarkFlagRequired("sidewalk")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_associateAwsAccountWithPartnerAccountCmd)
 }

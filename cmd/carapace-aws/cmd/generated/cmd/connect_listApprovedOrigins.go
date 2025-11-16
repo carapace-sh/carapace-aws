@@ -12,11 +12,13 @@ var connect_listApprovedOriginsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_listApprovedOriginsCmd).Standalone()
+	carapace.Gen(connect_listApprovedOriginsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_listApprovedOriginsCmd).Standalone()
 
-	connect_listApprovedOriginsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_listApprovedOriginsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_listApprovedOriginsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_listApprovedOriginsCmd.MarkFlagRequired("instance-id")
+		connect_listApprovedOriginsCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_listApprovedOriginsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_listApprovedOriginsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_listApprovedOriginsCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_listApprovedOriginsCmd)
 }

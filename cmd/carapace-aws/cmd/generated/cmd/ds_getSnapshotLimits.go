@@ -12,9 +12,11 @@ var ds_getSnapshotLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_getSnapshotLimitsCmd).Standalone()
+	carapace.Gen(ds_getSnapshotLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_getSnapshotLimitsCmd).Standalone()
 
-	ds_getSnapshotLimitsCmd.Flags().String("directory-id", "", "Contains the identifier of the directory to obtain the limits for.")
-	ds_getSnapshotLimitsCmd.MarkFlagRequired("directory-id")
+		ds_getSnapshotLimitsCmd.Flags().String("directory-id", "", "Contains the identifier of the directory to obtain the limits for.")
+		ds_getSnapshotLimitsCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_getSnapshotLimitsCmd)
 }

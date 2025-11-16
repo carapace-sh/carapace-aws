@@ -12,9 +12,11 @@ var route53resolver_getResolverQueryLogConfigPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_getResolverQueryLogConfigPolicyCmd).Standalone()
+	carapace.Gen(route53resolver_getResolverQueryLogConfigPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_getResolverQueryLogConfigPolicyCmd).Standalone()
 
-	route53resolver_getResolverQueryLogConfigPolicyCmd.Flags().String("arn", "", "The ARN of the query logging configuration that you want to get the query logging policy for.")
-	route53resolver_getResolverQueryLogConfigPolicyCmd.MarkFlagRequired("arn")
+		route53resolver_getResolverQueryLogConfigPolicyCmd.Flags().String("arn", "", "The ARN of the query logging configuration that you want to get the query logging policy for.")
+		route53resolver_getResolverQueryLogConfigPolicyCmd.MarkFlagRequired("arn")
+	})
 	route53resolverCmd.AddCommand(route53resolver_getResolverQueryLogConfigPolicyCmd)
 }

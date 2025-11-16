@@ -12,9 +12,11 @@ var route53RecoveryControlConfig_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_getResourcePolicyCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_getResourcePolicyCmd).Standalone()
 
-	route53RecoveryControlConfig_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	route53RecoveryControlConfig_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		route53RecoveryControlConfig_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		route53RecoveryControlConfig_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_getResourcePolicyCmd)
 }

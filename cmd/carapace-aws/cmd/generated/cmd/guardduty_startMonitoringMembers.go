@@ -12,11 +12,13 @@ var guardduty_startMonitoringMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_startMonitoringMembersCmd).Standalone()
+	carapace.Gen(guardduty_startMonitoringMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_startMonitoringMembersCmd).Standalone()
 
-	guardduty_startMonitoringMembersCmd.Flags().String("account-ids", "", "A list of account IDs of the GuardDuty member accounts to start monitoring.")
-	guardduty_startMonitoringMembersCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.")
-	guardduty_startMonitoringMembersCmd.MarkFlagRequired("account-ids")
-	guardduty_startMonitoringMembersCmd.MarkFlagRequired("detector-id")
+		guardduty_startMonitoringMembersCmd.Flags().String("account-ids", "", "A list of account IDs of the GuardDuty member accounts to start monitoring.")
+		guardduty_startMonitoringMembersCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.")
+		guardduty_startMonitoringMembersCmd.MarkFlagRequired("account-ids")
+		guardduty_startMonitoringMembersCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_startMonitoringMembersCmd)
 }

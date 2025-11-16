@@ -12,9 +12,11 @@ var rekognition_recognizeCelebritiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_recognizeCelebritiesCmd).Standalone()
+	carapace.Gen(rekognition_recognizeCelebritiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_recognizeCelebritiesCmd).Standalone()
 
-	rekognition_recognizeCelebritiesCmd.Flags().String("image", "", "The input image as base64-encoded bytes or an S3 object.")
-	rekognition_recognizeCelebritiesCmd.MarkFlagRequired("image")
+		rekognition_recognizeCelebritiesCmd.Flags().String("image", "", "The input image as base64-encoded bytes or an S3 object.")
+		rekognition_recognizeCelebritiesCmd.MarkFlagRequired("image")
+	})
 	rekognitionCmd.AddCommand(rekognition_recognizeCelebritiesCmd)
 }

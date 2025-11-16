@@ -12,9 +12,11 @@ var wisdom_getAssistantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_getAssistantCmd).Standalone()
+	carapace.Gen(wisdom_getAssistantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_getAssistantCmd).Standalone()
 
-	wisdom_getAssistantCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
-	wisdom_getAssistantCmd.MarkFlagRequired("assistant-id")
+		wisdom_getAssistantCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
+		wisdom_getAssistantCmd.MarkFlagRequired("assistant-id")
+	})
 	wisdomCmd.AddCommand(wisdom_getAssistantCmd)
 }

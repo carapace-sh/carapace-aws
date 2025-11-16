@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_describeProtectConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_describeProtectConfigurationsCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_describeProtectConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_describeProtectConfigurationsCmd).Standalone()
 
-	pinpointSmsVoiceV2_describeProtectConfigurationsCmd.Flags().String("filters", "", "An array of ProtectConfigurationFilter objects to filter the results.")
-	pinpointSmsVoiceV2_describeProtectConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
-	pinpointSmsVoiceV2_describeProtectConfigurationsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	pinpointSmsVoiceV2_describeProtectConfigurationsCmd.Flags().String("protect-configuration-ids", "", "An array of protect configuration identifiers to search for.")
+		pinpointSmsVoiceV2_describeProtectConfigurationsCmd.Flags().String("filters", "", "An array of ProtectConfigurationFilter objects to filter the results.")
+		pinpointSmsVoiceV2_describeProtectConfigurationsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
+		pinpointSmsVoiceV2_describeProtectConfigurationsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		pinpointSmsVoiceV2_describeProtectConfigurationsCmd.Flags().String("protect-configuration-ids", "", "An array of protect configuration identifiers to search for.")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_describeProtectConfigurationsCmd)
 }

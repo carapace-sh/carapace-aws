@@ -12,9 +12,11 @@ var glue_deleteCrawlerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteCrawlerCmd).Standalone()
+	carapace.Gen(glue_deleteCrawlerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteCrawlerCmd).Standalone()
 
-	glue_deleteCrawlerCmd.Flags().String("name", "", "The name of the crawler to remove.")
-	glue_deleteCrawlerCmd.MarkFlagRequired("name")
+		glue_deleteCrawlerCmd.Flags().String("name", "", "The name of the crawler to remove.")
+		glue_deleteCrawlerCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_deleteCrawlerCmd)
 }

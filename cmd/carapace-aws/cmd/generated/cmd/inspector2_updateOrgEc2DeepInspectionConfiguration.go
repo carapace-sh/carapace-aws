@@ -12,9 +12,11 @@ var inspector2_updateOrgEc2DeepInspectionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_updateOrgEc2DeepInspectionConfigurationCmd).Standalone()
+	carapace.Gen(inspector2_updateOrgEc2DeepInspectionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_updateOrgEc2DeepInspectionConfigurationCmd).Standalone()
 
-	inspector2_updateOrgEc2DeepInspectionConfigurationCmd.Flags().String("org-package-paths", "", "The Amazon Inspector deep inspection custom paths you are adding for your organization.")
-	inspector2_updateOrgEc2DeepInspectionConfigurationCmd.MarkFlagRequired("org-package-paths")
+		inspector2_updateOrgEc2DeepInspectionConfigurationCmd.Flags().String("org-package-paths", "", "The Amazon Inspector deep inspection custom paths you are adding for your organization.")
+		inspector2_updateOrgEc2DeepInspectionConfigurationCmd.MarkFlagRequired("org-package-paths")
+	})
 	inspector2Cmd.AddCommand(inspector2_updateOrgEc2DeepInspectionConfigurationCmd)
 }

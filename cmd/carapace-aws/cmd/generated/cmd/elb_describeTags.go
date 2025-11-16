@@ -12,9 +12,11 @@ var elb_describeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_describeTagsCmd).Standalone()
+	carapace.Gen(elb_describeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_describeTagsCmd).Standalone()
 
-	elb_describeTagsCmd.Flags().String("load-balancer-names", "", "The names of the load balancers.")
-	elb_describeTagsCmd.MarkFlagRequired("load-balancer-names")
+		elb_describeTagsCmd.Flags().String("load-balancer-names", "", "The names of the load balancers.")
+		elb_describeTagsCmd.MarkFlagRequired("load-balancer-names")
+	})
 	elbCmd.AddCommand(elb_describeTagsCmd)
 }

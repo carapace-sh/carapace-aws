@@ -12,8 +12,10 @@ var lakeformation_getDataLakeSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lakeformation_getDataLakeSettingsCmd).Standalone()
+	carapace.Gen(lakeformation_getDataLakeSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lakeformation_getDataLakeSettingsCmd).Standalone()
 
-	lakeformation_getDataLakeSettingsCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+		lakeformation_getDataLakeSettingsCmd.Flags().String("catalog-id", "", "The identifier for the Data Catalog.")
+	})
 	lakeformationCmd.AddCommand(lakeformation_getDataLakeSettingsCmd)
 }

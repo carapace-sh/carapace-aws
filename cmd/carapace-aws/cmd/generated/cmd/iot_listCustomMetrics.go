@@ -12,9 +12,11 @@ var iot_listCustomMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listCustomMetricsCmd).Standalone()
+	carapace.Gen(iot_listCustomMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listCustomMetricsCmd).Standalone()
 
-	iot_listCustomMetricsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iot_listCustomMetricsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iot_listCustomMetricsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iot_listCustomMetricsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	iotCmd.AddCommand(iot_listCustomMetricsCmd)
 }

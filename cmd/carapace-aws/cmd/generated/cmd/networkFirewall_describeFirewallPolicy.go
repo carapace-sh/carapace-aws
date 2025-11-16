@@ -12,9 +12,11 @@ var networkFirewall_describeFirewallPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_describeFirewallPolicyCmd).Standalone()
+	carapace.Gen(networkFirewall_describeFirewallPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_describeFirewallPolicyCmd).Standalone()
 
-	networkFirewall_describeFirewallPolicyCmd.Flags().String("firewall-policy-arn", "", "The Amazon Resource Name (ARN) of the firewall policy.")
-	networkFirewall_describeFirewallPolicyCmd.Flags().String("firewall-policy-name", "", "The descriptive name of the firewall policy.")
+		networkFirewall_describeFirewallPolicyCmd.Flags().String("firewall-policy-arn", "", "The Amazon Resource Name (ARN) of the firewall policy.")
+		networkFirewall_describeFirewallPolicyCmd.Flags().String("firewall-policy-name", "", "The descriptive name of the firewall policy.")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_describeFirewallPolicyCmd)
 }

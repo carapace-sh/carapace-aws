@@ -12,9 +12,11 @@ var entityresolution_deleteIdMappingWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_deleteIdMappingWorkflowCmd).Standalone()
+	carapace.Gen(entityresolution_deleteIdMappingWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_deleteIdMappingWorkflowCmd).Standalone()
 
-	entityresolution_deleteIdMappingWorkflowCmd.Flags().String("workflow-name", "", "The name of the workflow to be deleted.")
-	entityresolution_deleteIdMappingWorkflowCmd.MarkFlagRequired("workflow-name")
+		entityresolution_deleteIdMappingWorkflowCmd.Flags().String("workflow-name", "", "The name of the workflow to be deleted.")
+		entityresolution_deleteIdMappingWorkflowCmd.MarkFlagRequired("workflow-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_deleteIdMappingWorkflowCmd)
 }

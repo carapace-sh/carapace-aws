@@ -12,10 +12,12 @@ var frauddetector_getBatchImportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getBatchImportJobsCmd).Standalone()
+	carapace.Gen(frauddetector_getBatchImportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getBatchImportJobsCmd).Standalone()
 
-	frauddetector_getBatchImportJobsCmd.Flags().String("job-id", "", "The ID of the batch import job to get.")
-	frauddetector_getBatchImportJobsCmd.Flags().String("max-results", "", "The maximum number of objects to return for request.")
-	frauddetector_getBatchImportJobsCmd.Flags().String("next-token", "", "The next token from the previous request.")
+		frauddetector_getBatchImportJobsCmd.Flags().String("job-id", "", "The ID of the batch import job to get.")
+		frauddetector_getBatchImportJobsCmd.Flags().String("max-results", "", "The maximum number of objects to return for request.")
+		frauddetector_getBatchImportJobsCmd.Flags().String("next-token", "", "The next token from the previous request.")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getBatchImportJobsCmd)
 }

@@ -12,11 +12,13 @@ var rds_describePendingMaintenanceActionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describePendingMaintenanceActionsCmd).Standalone()
+	carapace.Gen(rds_describePendingMaintenanceActionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describePendingMaintenanceActionsCmd).Standalone()
 
-	rds_describePendingMaintenanceActionsCmd.Flags().String("filters", "", "A filter that specifies one or more resources to return pending maintenance actions for.")
-	rds_describePendingMaintenanceActionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribePendingMaintenanceActions` request.")
-	rds_describePendingMaintenanceActionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	rds_describePendingMaintenanceActionsCmd.Flags().String("resource-identifier", "", "The ARN of a resource to return pending maintenance actions for.")
+		rds_describePendingMaintenanceActionsCmd.Flags().String("filters", "", "A filter that specifies one or more resources to return pending maintenance actions for.")
+		rds_describePendingMaintenanceActionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribePendingMaintenanceActions` request.")
+		rds_describePendingMaintenanceActionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		rds_describePendingMaintenanceActionsCmd.Flags().String("resource-identifier", "", "The ARN of a resource to return pending maintenance actions for.")
+	})
 	rdsCmd.AddCommand(rds_describePendingMaintenanceActionsCmd)
 }

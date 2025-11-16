@@ -12,10 +12,12 @@ var omics_deleteAnnotationStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_deleteAnnotationStoreCmd).Standalone()
+	carapace.Gen(omics_deleteAnnotationStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_deleteAnnotationStoreCmd).Standalone()
 
-	omics_deleteAnnotationStoreCmd.Flags().String("force", "", "Whether to force deletion.")
-	omics_deleteAnnotationStoreCmd.Flags().String("name", "", "The store's name.")
-	omics_deleteAnnotationStoreCmd.MarkFlagRequired("name")
+		omics_deleteAnnotationStoreCmd.Flags().String("force", "", "Whether to force deletion.")
+		omics_deleteAnnotationStoreCmd.Flags().String("name", "", "The store's name.")
+		omics_deleteAnnotationStoreCmd.MarkFlagRequired("name")
+	})
 	omicsCmd.AddCommand(omics_deleteAnnotationStoreCmd)
 }

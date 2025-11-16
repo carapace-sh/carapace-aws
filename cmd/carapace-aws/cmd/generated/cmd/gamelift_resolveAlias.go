@@ -12,9 +12,11 @@ var gamelift_resolveAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_resolveAliasCmd).Standalone()
+	carapace.Gen(gamelift_resolveAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_resolveAliasCmd).Standalone()
 
-	gamelift_resolveAliasCmd.Flags().String("alias-id", "", "The unique identifier of the alias that you want to retrieve a fleet ID for.")
-	gamelift_resolveAliasCmd.MarkFlagRequired("alias-id")
+		gamelift_resolveAliasCmd.Flags().String("alias-id", "", "The unique identifier of the alias that you want to retrieve a fleet ID for.")
+		gamelift_resolveAliasCmd.MarkFlagRequired("alias-id")
+	})
 	gameliftCmd.AddCommand(gamelift_resolveAliasCmd)
 }

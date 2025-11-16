@@ -12,11 +12,13 @@ var lexModels_getSlotTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getSlotTypeCmd).Standalone()
+	carapace.Gen(lexModels_getSlotTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getSlotTypeCmd).Standalone()
 
-	lexModels_getSlotTypeCmd.Flags().String("name", "", "The name of the slot type.")
-	lexModels_getSlotTypeCmd.Flags().String("version", "", "The version of the slot type.")
-	lexModels_getSlotTypeCmd.MarkFlagRequired("name")
-	lexModels_getSlotTypeCmd.MarkFlagRequired("version")
+		lexModels_getSlotTypeCmd.Flags().String("name", "", "The name of the slot type.")
+		lexModels_getSlotTypeCmd.Flags().String("version", "", "The version of the slot type.")
+		lexModels_getSlotTypeCmd.MarkFlagRequired("name")
+		lexModels_getSlotTypeCmd.MarkFlagRequired("version")
+	})
 	lexModelsCmd.AddCommand(lexModels_getSlotTypeCmd)
 }

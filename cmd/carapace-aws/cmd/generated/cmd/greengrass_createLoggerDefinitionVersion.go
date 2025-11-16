@@ -12,11 +12,13 @@ var greengrass_createLoggerDefinitionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createLoggerDefinitionVersionCmd).Standalone()
+	carapace.Gen(greengrass_createLoggerDefinitionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createLoggerDefinitionVersionCmd).Standalone()
 
-	greengrass_createLoggerDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createLoggerDefinitionVersionCmd.Flags().String("logger-definition-id", "", "The ID of the logger definition.")
-	greengrass_createLoggerDefinitionVersionCmd.Flags().String("loggers", "", "A list of loggers.")
-	greengrass_createLoggerDefinitionVersionCmd.MarkFlagRequired("logger-definition-id")
+		greengrass_createLoggerDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createLoggerDefinitionVersionCmd.Flags().String("logger-definition-id", "", "The ID of the logger definition.")
+		greengrass_createLoggerDefinitionVersionCmd.Flags().String("loggers", "", "A list of loggers.")
+		greengrass_createLoggerDefinitionVersionCmd.MarkFlagRequired("logger-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_createLoggerDefinitionVersionCmd)
 }

@@ -12,9 +12,11 @@ var sesv2_getImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getImportJobCmd).Standalone()
+	carapace.Gen(sesv2_getImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getImportJobCmd).Standalone()
 
-	sesv2_getImportJobCmd.Flags().String("job-id", "", "The ID of the import job.")
-	sesv2_getImportJobCmd.MarkFlagRequired("job-id")
+		sesv2_getImportJobCmd.Flags().String("job-id", "", "The ID of the import job.")
+		sesv2_getImportJobCmd.MarkFlagRequired("job-id")
+	})
 	sesv2Cmd.AddCommand(sesv2_getImportJobCmd)
 }

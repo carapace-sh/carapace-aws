@@ -12,9 +12,11 @@ var route53domains_getOperationDetailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_getOperationDetailCmd).Standalone()
+	carapace.Gen(route53domains_getOperationDetailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_getOperationDetailCmd).Standalone()
 
-	route53domains_getOperationDetailCmd.Flags().String("operation-id", "", "The identifier for the operation for which you want to get the status.")
-	route53domains_getOperationDetailCmd.MarkFlagRequired("operation-id")
+		route53domains_getOperationDetailCmd.Flags().String("operation-id", "", "The identifier for the operation for which you want to get the status.")
+		route53domains_getOperationDetailCmd.MarkFlagRequired("operation-id")
+	})
 	route53domainsCmd.AddCommand(route53domains_getOperationDetailCmd)
 }

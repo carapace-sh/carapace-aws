@@ -12,10 +12,12 @@ var ses_describeConfigurationSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_describeConfigurationSetCmd).Standalone()
+	carapace.Gen(ses_describeConfigurationSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_describeConfigurationSetCmd).Standalone()
 
-	ses_describeConfigurationSetCmd.Flags().String("configuration-set-attribute-names", "", "A list of configuration set attributes to return.")
-	ses_describeConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set to describe.")
-	ses_describeConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+		ses_describeConfigurationSetCmd.Flags().String("configuration-set-attribute-names", "", "A list of configuration set attributes to return.")
+		ses_describeConfigurationSetCmd.Flags().String("configuration-set-name", "", "The name of the configuration set to describe.")
+		ses_describeConfigurationSetCmd.MarkFlagRequired("configuration-set-name")
+	})
 	sesCmd.AddCommand(ses_describeConfigurationSetCmd)
 }

@@ -12,11 +12,13 @@ var elbv2_describeListenerCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_describeListenerCertificatesCmd).Standalone()
+	carapace.Gen(elbv2_describeListenerCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_describeListenerCertificatesCmd).Standalone()
 
-	elbv2_describeListenerCertificatesCmd.Flags().String("listener-arn", "", "The Amazon Resource Names (ARN) of the listener.")
-	elbv2_describeListenerCertificatesCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	elbv2_describeListenerCertificatesCmd.Flags().String("page-size", "", "The maximum number of results to return with this call.")
-	elbv2_describeListenerCertificatesCmd.MarkFlagRequired("listener-arn")
+		elbv2_describeListenerCertificatesCmd.Flags().String("listener-arn", "", "The Amazon Resource Names (ARN) of the listener.")
+		elbv2_describeListenerCertificatesCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		elbv2_describeListenerCertificatesCmd.Flags().String("page-size", "", "The maximum number of results to return with this call.")
+		elbv2_describeListenerCertificatesCmd.MarkFlagRequired("listener-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_describeListenerCertificatesCmd)
 }

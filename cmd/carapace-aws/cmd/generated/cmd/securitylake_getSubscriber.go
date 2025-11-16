@@ -12,9 +12,11 @@ var securitylake_getSubscriberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_getSubscriberCmd).Standalone()
+	carapace.Gen(securitylake_getSubscriberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_getSubscriberCmd).Standalone()
 
-	securitylake_getSubscriberCmd.Flags().String("subscriber-id", "", "A value created by Amazon Security Lake that uniquely identifies your `GetSubscriber` API request.")
-	securitylake_getSubscriberCmd.MarkFlagRequired("subscriber-id")
+		securitylake_getSubscriberCmd.Flags().String("subscriber-id", "", "A value created by Amazon Security Lake that uniquely identifies your `GetSubscriber` API request.")
+		securitylake_getSubscriberCmd.MarkFlagRequired("subscriber-id")
+	})
 	securitylakeCmd.AddCommand(securitylake_getSubscriberCmd)
 }

@@ -12,7 +12,9 @@ var pinpointEmail_getDeliverabilityDashboardOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_getDeliverabilityDashboardOptionsCmd).Standalone()
+	carapace.Gen(pinpointEmail_getDeliverabilityDashboardOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_getDeliverabilityDashboardOptionsCmd).Standalone()
 
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_getDeliverabilityDashboardOptionsCmd)
 }

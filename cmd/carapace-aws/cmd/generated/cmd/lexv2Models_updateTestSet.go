@@ -12,12 +12,14 @@ var lexv2Models_updateTestSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_updateTestSetCmd).Standalone()
+	carapace.Gen(lexv2Models_updateTestSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_updateTestSetCmd).Standalone()
 
-	lexv2Models_updateTestSetCmd.Flags().String("description", "", "The new test set description.")
-	lexv2Models_updateTestSetCmd.Flags().String("test-set-id", "", "The test set Id for which update test operation to be performed.")
-	lexv2Models_updateTestSetCmd.Flags().String("test-set-name", "", "The new test set name.")
-	lexv2Models_updateTestSetCmd.MarkFlagRequired("test-set-id")
-	lexv2Models_updateTestSetCmd.MarkFlagRequired("test-set-name")
+		lexv2Models_updateTestSetCmd.Flags().String("description", "", "The new test set description.")
+		lexv2Models_updateTestSetCmd.Flags().String("test-set-id", "", "The test set Id for which update test operation to be performed.")
+		lexv2Models_updateTestSetCmd.Flags().String("test-set-name", "", "The new test set name.")
+		lexv2Models_updateTestSetCmd.MarkFlagRequired("test-set-id")
+		lexv2Models_updateTestSetCmd.MarkFlagRequired("test-set-name")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_updateTestSetCmd)
 }

@@ -12,9 +12,11 @@ var supportApp_putAccountAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supportApp_putAccountAliasCmd).Standalone()
+	carapace.Gen(supportApp_putAccountAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supportApp_putAccountAliasCmd).Standalone()
 
-	supportApp_putAccountAliasCmd.Flags().String("account-alias", "", "An alias or short name for an Amazon Web Services account.")
-	supportApp_putAccountAliasCmd.MarkFlagRequired("account-alias")
+		supportApp_putAccountAliasCmd.Flags().String("account-alias", "", "An alias or short name for an Amazon Web Services account.")
+		supportApp_putAccountAliasCmd.MarkFlagRequired("account-alias")
+	})
 	supportAppCmd.AddCommand(supportApp_putAccountAliasCmd)
 }

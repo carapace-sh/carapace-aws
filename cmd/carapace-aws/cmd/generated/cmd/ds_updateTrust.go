@@ -12,10 +12,12 @@ var ds_updateTrustCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_updateTrustCmd).Standalone()
+	carapace.Gen(ds_updateTrustCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_updateTrustCmd).Standalone()
 
-	ds_updateTrustCmd.Flags().String("selective-auth", "", "Updates selective authentication for the trust.")
-	ds_updateTrustCmd.Flags().String("trust-id", "", "Identifier of the trust relationship.")
-	ds_updateTrustCmd.MarkFlagRequired("trust-id")
+		ds_updateTrustCmd.Flags().String("selective-auth", "", "Updates selective authentication for the trust.")
+		ds_updateTrustCmd.Flags().String("trust-id", "", "Identifier of the trust relationship.")
+		ds_updateTrustCmd.MarkFlagRequired("trust-id")
+	})
 	dsCmd.AddCommand(ds_updateTrustCmd)
 }

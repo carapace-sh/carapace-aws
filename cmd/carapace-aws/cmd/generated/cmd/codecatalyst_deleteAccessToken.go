@@ -12,9 +12,11 @@ var codecatalyst_deleteAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_deleteAccessTokenCmd).Standalone()
+	carapace.Gen(codecatalyst_deleteAccessTokenCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_deleteAccessTokenCmd).Standalone()
 
-	codecatalyst_deleteAccessTokenCmd.Flags().String("id", "", "The ID of the personal access token to delete.")
-	codecatalyst_deleteAccessTokenCmd.MarkFlagRequired("id")
+		codecatalyst_deleteAccessTokenCmd.Flags().String("id", "", "The ID of the personal access token to delete.")
+		codecatalyst_deleteAccessTokenCmd.MarkFlagRequired("id")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_deleteAccessTokenCmd)
 }

@@ -12,11 +12,13 @@ var chatbot_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_tagResourceCmd).Standalone()
+	carapace.Gen(chatbot_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_tagResourceCmd).Standalone()
 
-	chatbot_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the configuration.")
-	chatbot_tagResourceCmd.Flags().String("tags", "", "A list of tags to apply to the configuration.")
-	chatbot_tagResourceCmd.MarkFlagRequired("resource-arn")
-	chatbot_tagResourceCmd.MarkFlagRequired("tags")
+		chatbot_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the configuration.")
+		chatbot_tagResourceCmd.Flags().String("tags", "", "A list of tags to apply to the configuration.")
+		chatbot_tagResourceCmd.MarkFlagRequired("resource-arn")
+		chatbot_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	chatbotCmd.AddCommand(chatbot_tagResourceCmd)
 }

@@ -12,11 +12,13 @@ var sagemaker_describeClusterEventCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeClusterEventCmd).Standalone()
+	carapace.Gen(sagemaker_describeClusterEventCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeClusterEventCmd).Standalone()
 
-	sagemaker_describeClusterEventCmd.Flags().String("cluster-name", "", "The name or Amazon Resource Name (ARN) of the HyperPod cluster associated with the event.")
-	sagemaker_describeClusterEventCmd.Flags().String("event-id", "", "The unique identifier (UUID) of the event to describe.")
-	sagemaker_describeClusterEventCmd.MarkFlagRequired("cluster-name")
-	sagemaker_describeClusterEventCmd.MarkFlagRequired("event-id")
+		sagemaker_describeClusterEventCmd.Flags().String("cluster-name", "", "The name or Amazon Resource Name (ARN) of the HyperPod cluster associated with the event.")
+		sagemaker_describeClusterEventCmd.Flags().String("event-id", "", "The unique identifier (UUID) of the event to describe.")
+		sagemaker_describeClusterEventCmd.MarkFlagRequired("cluster-name")
+		sagemaker_describeClusterEventCmd.MarkFlagRequired("event-id")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeClusterEventCmd)
 }

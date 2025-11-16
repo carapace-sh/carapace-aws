@@ -12,7 +12,9 @@ var workdocsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocsCmd).Standalone()
+	carapace.Gen(workdocsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(workdocsCmd)
 }

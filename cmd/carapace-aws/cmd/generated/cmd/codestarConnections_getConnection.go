@@ -12,9 +12,11 @@ var codestarConnections_getConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codestarConnections_getConnectionCmd).Standalone()
+	carapace.Gen(codestarConnections_getConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codestarConnections_getConnectionCmd).Standalone()
 
-	codestarConnections_getConnectionCmd.Flags().String("connection-arn", "", "The Amazon Resource Name (ARN) of a connection.")
-	codestarConnections_getConnectionCmd.MarkFlagRequired("connection-arn")
+		codestarConnections_getConnectionCmd.Flags().String("connection-arn", "", "The Amazon Resource Name (ARN) of a connection.")
+		codestarConnections_getConnectionCmd.MarkFlagRequired("connection-arn")
+	})
 	codestarConnectionsCmd.AddCommand(codestarConnections_getConnectionCmd)
 }

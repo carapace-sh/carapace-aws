@@ -12,9 +12,11 @@ var cur_describeReportDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cur_describeReportDefinitionsCmd).Standalone()
+	carapace.Gen(cur_describeReportDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cur_describeReportDefinitionsCmd).Standalone()
 
-	cur_describeReportDefinitionsCmd.Flags().String("max-results", "", "")
-	cur_describeReportDefinitionsCmd.Flags().String("next-token", "", "")
+		cur_describeReportDefinitionsCmd.Flags().String("max-results", "", "")
+		cur_describeReportDefinitionsCmd.Flags().String("next-token", "", "")
+	})
 	curCmd.AddCommand(cur_describeReportDefinitionsCmd)
 }

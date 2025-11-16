@@ -12,11 +12,13 @@ var migrationHubRefactorSpaces_putResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpaces_putResourcePolicyCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpaces_putResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpaces_putResourcePolicyCmd).Standalone()
 
-	migrationHubRefactorSpaces_putResourcePolicyCmd.Flags().String("policy", "", "A JSON-formatted string for an Amazon Web Services resource-based policy.")
-	migrationHubRefactorSpaces_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which the policy is being attached.")
-	migrationHubRefactorSpaces_putResourcePolicyCmd.MarkFlagRequired("policy")
-	migrationHubRefactorSpaces_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		migrationHubRefactorSpaces_putResourcePolicyCmd.Flags().String("policy", "", "A JSON-formatted string for an Amazon Web Services resource-based policy.")
+		migrationHubRefactorSpaces_putResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which the policy is being attached.")
+		migrationHubRefactorSpaces_putResourcePolicyCmd.MarkFlagRequired("policy")
+		migrationHubRefactorSpaces_putResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_putResourcePolicyCmd)
 }

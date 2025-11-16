@@ -12,9 +12,11 @@ var observabilityadmin_getCentralizationRuleForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_getCentralizationRuleForOrganizationCmd).Standalone()
+	carapace.Gen(observabilityadmin_getCentralizationRuleForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_getCentralizationRuleForOrganizationCmd).Standalone()
 
-	observabilityadmin_getCentralizationRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization centralization rule to retrieve.")
-	observabilityadmin_getCentralizationRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+		observabilityadmin_getCentralizationRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization centralization rule to retrieve.")
+		observabilityadmin_getCentralizationRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_getCentralizationRuleForOrganizationCmd)
 }

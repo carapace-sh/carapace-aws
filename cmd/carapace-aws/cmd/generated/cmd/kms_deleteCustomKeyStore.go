@@ -12,9 +12,11 @@ var kms_deleteCustomKeyStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_deleteCustomKeyStoreCmd).Standalone()
+	carapace.Gen(kms_deleteCustomKeyStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_deleteCustomKeyStoreCmd).Standalone()
 
-	kms_deleteCustomKeyStoreCmd.Flags().String("custom-key-store-id", "", "Enter the ID of the custom key store you want to delete.")
-	kms_deleteCustomKeyStoreCmd.MarkFlagRequired("custom-key-store-id")
+		kms_deleteCustomKeyStoreCmd.Flags().String("custom-key-store-id", "", "Enter the ID of the custom key store you want to delete.")
+		kms_deleteCustomKeyStoreCmd.MarkFlagRequired("custom-key-store-id")
+	})
 	kmsCmd.AddCommand(kms_deleteCustomKeyStoreCmd)
 }

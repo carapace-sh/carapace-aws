@@ -12,11 +12,13 @@ var supplychain_listDataIntegrationFlowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_listDataIntegrationFlowsCmd).Standalone()
+	carapace.Gen(supplychain_listDataIntegrationFlowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_listDataIntegrationFlowsCmd).Standalone()
 
-	supplychain_listDataIntegrationFlowsCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
-	supplychain_listDataIntegrationFlowsCmd.Flags().String("max-results", "", "Specify the maximum number of DataIntegrationFlows to fetch in one paginated request.")
-	supplychain_listDataIntegrationFlowsCmd.Flags().String("next-token", "", "The pagination token to fetch the next page of the DataIntegrationFlows.")
-	supplychain_listDataIntegrationFlowsCmd.MarkFlagRequired("instance-id")
+		supplychain_listDataIntegrationFlowsCmd.Flags().String("instance-id", "", "The Amazon Web Services Supply Chain instance identifier.")
+		supplychain_listDataIntegrationFlowsCmd.Flags().String("max-results", "", "Specify the maximum number of DataIntegrationFlows to fetch in one paginated request.")
+		supplychain_listDataIntegrationFlowsCmd.Flags().String("next-token", "", "The pagination token to fetch the next page of the DataIntegrationFlows.")
+		supplychain_listDataIntegrationFlowsCmd.MarkFlagRequired("instance-id")
+	})
 	supplychainCmd.AddCommand(supplychain_listDataIntegrationFlowsCmd)
 }

@@ -12,12 +12,14 @@ var lambda_createCodeSigningConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_createCodeSigningConfigCmd).Standalone()
+	carapace.Gen(lambda_createCodeSigningConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_createCodeSigningConfigCmd).Standalone()
 
-	lambda_createCodeSigningConfigCmd.Flags().String("allowed-publishers", "", "Signing profiles for this code signing configuration.")
-	lambda_createCodeSigningConfigCmd.Flags().String("code-signing-policies", "", "The code signing policies define the actions to take if the validation checks fail.")
-	lambda_createCodeSigningConfigCmd.Flags().String("description", "", "Descriptive name for this code signing configuration.")
-	lambda_createCodeSigningConfigCmd.Flags().String("tags", "", "A list of tags to add to the code signing configuration.")
-	lambda_createCodeSigningConfigCmd.MarkFlagRequired("allowed-publishers")
+		lambda_createCodeSigningConfigCmd.Flags().String("allowed-publishers", "", "Signing profiles for this code signing configuration.")
+		lambda_createCodeSigningConfigCmd.Flags().String("code-signing-policies", "", "The code signing policies define the actions to take if the validation checks fail.")
+		lambda_createCodeSigningConfigCmd.Flags().String("description", "", "Descriptive name for this code signing configuration.")
+		lambda_createCodeSigningConfigCmd.Flags().String("tags", "", "A list of tags to add to the code signing configuration.")
+		lambda_createCodeSigningConfigCmd.MarkFlagRequired("allowed-publishers")
+	})
 	lambdaCmd.AddCommand(lambda_createCodeSigningConfigCmd)
 }

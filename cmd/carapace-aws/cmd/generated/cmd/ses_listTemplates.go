@@ -12,9 +12,11 @@ var ses_listTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_listTemplatesCmd).Standalone()
+	carapace.Gen(ses_listTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_listTemplatesCmd).Standalone()
 
-	ses_listTemplatesCmd.Flags().String("max-items", "", "The maximum number of templates to return.")
-	ses_listTemplatesCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListTemplates` to indicate the position in the list of email templates.")
+		ses_listTemplatesCmd.Flags().String("max-items", "", "The maximum number of templates to return.")
+		ses_listTemplatesCmd.Flags().String("next-token", "", "A token returned from a previous call to `ListTemplates` to indicate the position in the list of email templates.")
+	})
 	sesCmd.AddCommand(ses_listTemplatesCmd)
 }

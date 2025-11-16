@@ -12,9 +12,11 @@ var neptuneGraph_listImportTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_listImportTasksCmd).Standalone()
+	carapace.Gen(neptuneGraph_listImportTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_listImportTasksCmd).Standalone()
 
-	neptuneGraph_listImportTasksCmd.Flags().String("max-results", "", "The total number of records to return in the command's output.")
-	neptuneGraph_listImportTasksCmd.Flags().String("next-token", "", "Pagination token used to paginate output.")
+		neptuneGraph_listImportTasksCmd.Flags().String("max-results", "", "The total number of records to return in the command's output.")
+		neptuneGraph_listImportTasksCmd.Flags().String("next-token", "", "Pagination token used to paginate output.")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_listImportTasksCmd)
 }

@@ -12,9 +12,11 @@ var mpa_getSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_getSessionCmd).Standalone()
+	carapace.Gen(mpa_getSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_getSessionCmd).Standalone()
 
-	mpa_getSessionCmd.Flags().String("session-arn", "", "Amazon Resource Name (ARN) for the session.")
-	mpa_getSessionCmd.MarkFlagRequired("session-arn")
+		mpa_getSessionCmd.Flags().String("session-arn", "", "Amazon Resource Name (ARN) for the session.")
+		mpa_getSessionCmd.MarkFlagRequired("session-arn")
+	})
 	mpaCmd.AddCommand(mpa_getSessionCmd)
 }

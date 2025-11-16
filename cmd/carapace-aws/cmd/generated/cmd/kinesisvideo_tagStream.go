@@ -12,11 +12,13 @@ var kinesisvideo_tagStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisvideo_tagStreamCmd).Standalone()
+	carapace.Gen(kinesisvideo_tagStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisvideo_tagStreamCmd).Standalone()
 
-	kinesisvideo_tagStreamCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags to.")
-	kinesisvideo_tagStreamCmd.Flags().String("stream-name", "", "The name of the stream that you want to add the tag or tags to.")
-	kinesisvideo_tagStreamCmd.Flags().String("tags", "", "A list of tags to associate with the specified stream.")
-	kinesisvideo_tagStreamCmd.MarkFlagRequired("tags")
+		kinesisvideo_tagStreamCmd.Flags().String("stream-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags to.")
+		kinesisvideo_tagStreamCmd.Flags().String("stream-name", "", "The name of the stream that you want to add the tag or tags to.")
+		kinesisvideo_tagStreamCmd.Flags().String("tags", "", "A list of tags to associate with the specified stream.")
+		kinesisvideo_tagStreamCmd.MarkFlagRequired("tags")
+	})
 	kinesisvideoCmd.AddCommand(kinesisvideo_tagStreamCmd)
 }

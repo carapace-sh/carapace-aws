@@ -12,9 +12,11 @@ var pcaConnectorScep_getChallengePasswordCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcaConnectorScep_getChallengePasswordCmd).Standalone()
+	carapace.Gen(pcaConnectorScep_getChallengePasswordCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcaConnectorScep_getChallengePasswordCmd).Standalone()
 
-	pcaConnectorScep_getChallengePasswordCmd.Flags().String("challenge-arn", "", "The Amazon Resource Name (ARN) of the challenge.")
-	pcaConnectorScep_getChallengePasswordCmd.MarkFlagRequired("challenge-arn")
+		pcaConnectorScep_getChallengePasswordCmd.Flags().String("challenge-arn", "", "The Amazon Resource Name (ARN) of the challenge.")
+		pcaConnectorScep_getChallengePasswordCmd.MarkFlagRequired("challenge-arn")
+	})
 	pcaConnectorScepCmd.AddCommand(pcaConnectorScep_getChallengePasswordCmd)
 }

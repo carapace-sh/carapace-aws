@@ -12,13 +12,15 @@ var customerProfiles_getSegmentMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getSegmentMembershipCmd).Standalone()
+	carapace.Gen(customerProfiles_getSegmentMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getSegmentMembershipCmd).Standalone()
 
-	customerProfiles_getSegmentMembershipCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getSegmentMembershipCmd.Flags().String("profile-ids", "", "The list of profile IDs to query for.")
-	customerProfiles_getSegmentMembershipCmd.Flags().String("segment-definition-name", "", "The Id of the wanted segment.")
-	customerProfiles_getSegmentMembershipCmd.MarkFlagRequired("domain-name")
-	customerProfiles_getSegmentMembershipCmd.MarkFlagRequired("profile-ids")
-	customerProfiles_getSegmentMembershipCmd.MarkFlagRequired("segment-definition-name")
+		customerProfiles_getSegmentMembershipCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getSegmentMembershipCmd.Flags().String("profile-ids", "", "The list of profile IDs to query for.")
+		customerProfiles_getSegmentMembershipCmd.Flags().String("segment-definition-name", "", "The Id of the wanted segment.")
+		customerProfiles_getSegmentMembershipCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getSegmentMembershipCmd.MarkFlagRequired("profile-ids")
+		customerProfiles_getSegmentMembershipCmd.MarkFlagRequired("segment-definition-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getSegmentMembershipCmd)
 }

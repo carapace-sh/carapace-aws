@@ -12,14 +12,16 @@ var ec2_modifyVpcEndpointServicePermissionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_modifyVpcEndpointServicePermissionsCmd).Standalone()
+	carapace.Gen(ec2_modifyVpcEndpointServicePermissionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_modifyVpcEndpointServicePermissionsCmd).Standalone()
 
-	ec2_modifyVpcEndpointServicePermissionsCmd.Flags().String("add-allowed-principals", "", "The Amazon Resource Names (ARN) of the principals.")
-	ec2_modifyVpcEndpointServicePermissionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_modifyVpcEndpointServicePermissionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_modifyVpcEndpointServicePermissionsCmd.Flags().String("remove-allowed-principals", "", "The Amazon Resource Names (ARN) of the principals.")
-	ec2_modifyVpcEndpointServicePermissionsCmd.Flags().String("service-id", "", "The ID of the service.")
-	ec2_modifyVpcEndpointServicePermissionsCmd.Flag("no-dry-run").Hidden = true
-	ec2_modifyVpcEndpointServicePermissionsCmd.MarkFlagRequired("service-id")
+		ec2_modifyVpcEndpointServicePermissionsCmd.Flags().String("add-allowed-principals", "", "The Amazon Resource Names (ARN) of the principals.")
+		ec2_modifyVpcEndpointServicePermissionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_modifyVpcEndpointServicePermissionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_modifyVpcEndpointServicePermissionsCmd.Flags().String("remove-allowed-principals", "", "The Amazon Resource Names (ARN) of the principals.")
+		ec2_modifyVpcEndpointServicePermissionsCmd.Flags().String("service-id", "", "The ID of the service.")
+		ec2_modifyVpcEndpointServicePermissionsCmd.Flag("no-dry-run").Hidden = true
+		ec2_modifyVpcEndpointServicePermissionsCmd.MarkFlagRequired("service-id")
+	})
 	ec2Cmd.AddCommand(ec2_modifyVpcEndpointServicePermissionsCmd)
 }

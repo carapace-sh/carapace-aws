@@ -12,8 +12,10 @@ var schemas_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_getResourcePolicyCmd).Standalone()
+	carapace.Gen(schemas_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_getResourcePolicyCmd).Standalone()
 
-	schemas_getResourcePolicyCmd.Flags().String("registry-name", "", "The name of the registry.")
+		schemas_getResourcePolicyCmd.Flags().String("registry-name", "", "The name of the registry.")
+	})
 	schemasCmd.AddCommand(schemas_getResourcePolicyCmd)
 }

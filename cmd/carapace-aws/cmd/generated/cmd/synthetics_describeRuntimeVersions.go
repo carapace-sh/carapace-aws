@@ -12,9 +12,11 @@ var synthetics_describeRuntimeVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_describeRuntimeVersionsCmd).Standalone()
+	carapace.Gen(synthetics_describeRuntimeVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_describeRuntimeVersionsCmd).Standalone()
 
-	synthetics_describeRuntimeVersionsCmd.Flags().String("max-results", "", "Specify this parameter to limit how many runs are returned each time you use the `DescribeRuntimeVersions` operation.")
-	synthetics_describeRuntimeVersionsCmd.Flags().String("next-token", "", "A token that indicates that there is more data available.")
+		synthetics_describeRuntimeVersionsCmd.Flags().String("max-results", "", "Specify this parameter to limit how many runs are returned each time you use the `DescribeRuntimeVersions` operation.")
+		synthetics_describeRuntimeVersionsCmd.Flags().String("next-token", "", "A token that indicates that there is more data available.")
+	})
 	syntheticsCmd.AddCommand(synthetics_describeRuntimeVersionsCmd)
 }

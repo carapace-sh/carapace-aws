@@ -12,9 +12,11 @@ var cognitoIdp_getCsvheaderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_getCsvheaderCmd).Standalone()
+	carapace.Gen(cognitoIdp_getCsvheaderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_getCsvheaderCmd).Standalone()
 
-	cognitoIdp_getCsvheaderCmd.Flags().String("user-pool-id", "", "The ID of the user pool that you want to import users into.")
-	cognitoIdp_getCsvheaderCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_getCsvheaderCmd.Flags().String("user-pool-id", "", "The ID of the user pool that you want to import users into.")
+		cognitoIdp_getCsvheaderCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_getCsvheaderCmd)
 }

@@ -12,10 +12,12 @@ var stepfunctions_describeStateMachineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_describeStateMachineCmd).Standalone()
+	carapace.Gen(stepfunctions_describeStateMachineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_describeStateMachineCmd).Standalone()
 
-	stepfunctions_describeStateMachineCmd.Flags().String("included-data", "", "If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.")
-	stepfunctions_describeStateMachineCmd.Flags().String("state-machine-arn", "", "The Amazon Resource Name (ARN) of the state machine for which you want the information.")
-	stepfunctions_describeStateMachineCmd.MarkFlagRequired("state-machine-arn")
+		stepfunctions_describeStateMachineCmd.Flags().String("included-data", "", "If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition.")
+		stepfunctions_describeStateMachineCmd.Flags().String("state-machine-arn", "", "The Amazon Resource Name (ARN) of the state machine for which you want the information.")
+		stepfunctions_describeStateMachineCmd.MarkFlagRequired("state-machine-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_describeStateMachineCmd)
 }

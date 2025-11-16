@@ -12,11 +12,13 @@ var lookoutequipment_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_untagResourceCmd).Standalone()
+	carapace.Gen(lookoutequipment_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_untagResourceCmd).Standalone()
 
-	lookoutequipment_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which the tag is currently associated.")
-	lookoutequipment_untagResourceCmd.Flags().String("tag-keys", "", "Specifies the key of the tag to be removed from a specified resource.")
-	lookoutequipment_untagResourceCmd.MarkFlagRequired("resource-arn")
-	lookoutequipment_untagResourceCmd.MarkFlagRequired("tag-keys")
+		lookoutequipment_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to which the tag is currently associated.")
+		lookoutequipment_untagResourceCmd.Flags().String("tag-keys", "", "Specifies the key of the tag to be removed from a specified resource.")
+		lookoutequipment_untagResourceCmd.MarkFlagRequired("resource-arn")
+		lookoutequipment_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_untagResourceCmd)
 }

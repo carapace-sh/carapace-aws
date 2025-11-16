@@ -12,7 +12,9 @@ var cloudwatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatchCmd).Standalone()
+	carapace.Gen(cloudwatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatchCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cloudwatchCmd)
 }

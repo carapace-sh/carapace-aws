@@ -12,7 +12,9 @@ var fms_getAdminAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_getAdminAccountCmd).Standalone()
+	carapace.Gen(fms_getAdminAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_getAdminAccountCmd).Standalone()
 
+	})
 	fmsCmd.AddCommand(fms_getAdminAccountCmd)
 }

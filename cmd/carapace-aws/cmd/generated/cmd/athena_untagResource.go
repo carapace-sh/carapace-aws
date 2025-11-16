@@ -12,11 +12,13 @@ var athena_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_untagResourceCmd).Standalone()
+	carapace.Gen(athena_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_untagResourceCmd).Standalone()
 
-	athena_untagResourceCmd.Flags().String("resource-arn", "", "Specifies the ARN of the resource from which tags are to be removed.")
-	athena_untagResourceCmd.Flags().String("tag-keys", "", "A comma-separated list of one or more tag keys whose tags are to be removed from the specified resource.")
-	athena_untagResourceCmd.MarkFlagRequired("resource-arn")
-	athena_untagResourceCmd.MarkFlagRequired("tag-keys")
+		athena_untagResourceCmd.Flags().String("resource-arn", "", "Specifies the ARN of the resource from which tags are to be removed.")
+		athena_untagResourceCmd.Flags().String("tag-keys", "", "A comma-separated list of one or more tag keys whose tags are to be removed from the specified resource.")
+		athena_untagResourceCmd.MarkFlagRequired("resource-arn")
+		athena_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	athenaCmd.AddCommand(athena_untagResourceCmd)
 }

@@ -12,9 +12,11 @@ var lightsail_getContainerImagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getContainerImagesCmd).Standalone()
+	carapace.Gen(lightsail_getContainerImagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getContainerImagesCmd).Standalone()
 
-	lightsail_getContainerImagesCmd.Flags().String("service-name", "", "The name of the container service for which to return registered container images.")
-	lightsail_getContainerImagesCmd.MarkFlagRequired("service-name")
+		lightsail_getContainerImagesCmd.Flags().String("service-name", "", "The name of the container service for which to return registered container images.")
+		lightsail_getContainerImagesCmd.MarkFlagRequired("service-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getContainerImagesCmd)
 }

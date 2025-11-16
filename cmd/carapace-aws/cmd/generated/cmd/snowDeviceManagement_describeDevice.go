@@ -12,9 +12,11 @@ var snowDeviceManagement_describeDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(snowDeviceManagement_describeDeviceCmd).Standalone()
+	carapace.Gen(snowDeviceManagement_describeDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(snowDeviceManagement_describeDeviceCmd).Standalone()
 
-	snowDeviceManagement_describeDeviceCmd.Flags().String("managed-device-id", "", "The ID of the device that you are checking the information of.")
-	snowDeviceManagement_describeDeviceCmd.MarkFlagRequired("managed-device-id")
+		snowDeviceManagement_describeDeviceCmd.Flags().String("managed-device-id", "", "The ID of the device that you are checking the information of.")
+		snowDeviceManagement_describeDeviceCmd.MarkFlagRequired("managed-device-id")
+	})
 	snowDeviceManagementCmd.AddCommand(snowDeviceManagement_describeDeviceCmd)
 }

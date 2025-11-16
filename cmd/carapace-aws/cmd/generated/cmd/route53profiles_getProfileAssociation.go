@@ -12,9 +12,11 @@ var route53profiles_getProfileAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53profiles_getProfileAssociationCmd).Standalone()
+	carapace.Gen(route53profiles_getProfileAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53profiles_getProfileAssociationCmd).Standalone()
 
-	route53profiles_getProfileAssociationCmd.Flags().String("profile-association-id", "", "The identifier of the association you want to get information about.")
-	route53profiles_getProfileAssociationCmd.MarkFlagRequired("profile-association-id")
+		route53profiles_getProfileAssociationCmd.Flags().String("profile-association-id", "", "The identifier of the association you want to get information about.")
+		route53profiles_getProfileAssociationCmd.MarkFlagRequired("profile-association-id")
+	})
 	route53profilesCmd.AddCommand(route53profiles_getProfileAssociationCmd)
 }

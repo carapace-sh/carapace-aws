@@ -12,12 +12,14 @@ var devicefarm_updateTestGridProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_updateTestGridProjectCmd).Standalone()
+	carapace.Gen(devicefarm_updateTestGridProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_updateTestGridProjectCmd).Standalone()
 
-	devicefarm_updateTestGridProjectCmd.Flags().String("description", "", "Human-readable description for the project.")
-	devicefarm_updateTestGridProjectCmd.Flags().String("name", "", "Human-readable name for the project.")
-	devicefarm_updateTestGridProjectCmd.Flags().String("project-arn", "", "ARN of the project to update.")
-	devicefarm_updateTestGridProjectCmd.Flags().String("vpc-config", "", "The VPC security groups and subnets that are attached to a project.")
-	devicefarm_updateTestGridProjectCmd.MarkFlagRequired("project-arn")
+		devicefarm_updateTestGridProjectCmd.Flags().String("description", "", "Human-readable description for the project.")
+		devicefarm_updateTestGridProjectCmd.Flags().String("name", "", "Human-readable name for the project.")
+		devicefarm_updateTestGridProjectCmd.Flags().String("project-arn", "", "ARN of the project to update.")
+		devicefarm_updateTestGridProjectCmd.Flags().String("vpc-config", "", "The VPC security groups and subnets that are attached to a project.")
+		devicefarm_updateTestGridProjectCmd.MarkFlagRequired("project-arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_updateTestGridProjectCmd)
 }

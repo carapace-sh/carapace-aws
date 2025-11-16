@@ -12,9 +12,11 @@ var cloudfront_createFieldLevelEncryptionProfile2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_createFieldLevelEncryptionProfile2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createFieldLevelEncryptionProfile2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createFieldLevelEncryptionProfile2020_05_31Cmd).Standalone()
 
-	cloudfront_createFieldLevelEncryptionProfile2020_05_31Cmd.Flags().String("field-level-encryption-profile-config", "", "The request to create a field-level encryption profile.")
-	cloudfront_createFieldLevelEncryptionProfile2020_05_31Cmd.MarkFlagRequired("field-level-encryption-profile-config")
+		cloudfront_createFieldLevelEncryptionProfile2020_05_31Cmd.Flags().String("field-level-encryption-profile-config", "", "The request to create a field-level encryption profile.")
+		cloudfront_createFieldLevelEncryptionProfile2020_05_31Cmd.MarkFlagRequired("field-level-encryption-profile-config")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createFieldLevelEncryptionProfile2020_05_31Cmd)
 }

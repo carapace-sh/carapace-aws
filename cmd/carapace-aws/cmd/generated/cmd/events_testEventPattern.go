@@ -12,11 +12,13 @@ var events_testEventPatternCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_testEventPatternCmd).Standalone()
+	carapace.Gen(events_testEventPatternCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_testEventPatternCmd).Standalone()
 
-	events_testEventPatternCmd.Flags().String("event", "", "The event, in JSON format, to test against the event pattern.")
-	events_testEventPatternCmd.Flags().String("event-pattern", "", "The event pattern.")
-	events_testEventPatternCmd.MarkFlagRequired("event")
-	events_testEventPatternCmd.MarkFlagRequired("event-pattern")
+		events_testEventPatternCmd.Flags().String("event", "", "The event, in JSON format, to test against the event pattern.")
+		events_testEventPatternCmd.Flags().String("event-pattern", "", "The event pattern.")
+		events_testEventPatternCmd.MarkFlagRequired("event")
+		events_testEventPatternCmd.MarkFlagRequired("event-pattern")
+	})
 	eventsCmd.AddCommand(events_testEventPatternCmd)
 }

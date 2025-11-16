@@ -12,11 +12,13 @@ var appsync_getDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_getDataSourceCmd).Standalone()
+	carapace.Gen(appsync_getDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_getDataSourceCmd).Standalone()
 
-	appsync_getDataSourceCmd.Flags().String("api-id", "", "The API ID.")
-	appsync_getDataSourceCmd.Flags().String("name", "", "The name of the data source.")
-	appsync_getDataSourceCmd.MarkFlagRequired("api-id")
-	appsync_getDataSourceCmd.MarkFlagRequired("name")
+		appsync_getDataSourceCmd.Flags().String("api-id", "", "The API ID.")
+		appsync_getDataSourceCmd.Flags().String("name", "", "The name of the data source.")
+		appsync_getDataSourceCmd.MarkFlagRequired("api-id")
+		appsync_getDataSourceCmd.MarkFlagRequired("name")
+	})
 	appsyncCmd.AddCommand(appsync_getDataSourceCmd)
 }

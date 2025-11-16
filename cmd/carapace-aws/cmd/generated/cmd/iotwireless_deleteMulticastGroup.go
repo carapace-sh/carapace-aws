@@ -12,9 +12,11 @@ var iotwireless_deleteMulticastGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_deleteMulticastGroupCmd).Standalone()
+	carapace.Gen(iotwireless_deleteMulticastGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_deleteMulticastGroupCmd).Standalone()
 
-	iotwireless_deleteMulticastGroupCmd.Flags().String("id", "", "")
-	iotwireless_deleteMulticastGroupCmd.MarkFlagRequired("id")
+		iotwireless_deleteMulticastGroupCmd.Flags().String("id", "", "")
+		iotwireless_deleteMulticastGroupCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_deleteMulticastGroupCmd)
 }

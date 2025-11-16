@@ -12,12 +12,14 @@ var storagegateway_deleteTapeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_deleteTapeCmd).Standalone()
+	carapace.Gen(storagegateway_deleteTapeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_deleteTapeCmd).Standalone()
 
-	storagegateway_deleteTapeCmd.Flags().String("bypass-governance-retention", "", "Set to `TRUE` to delete an archived tape that belongs to a custom pool with tape retention lock.")
-	storagegateway_deleteTapeCmd.Flags().String("gateway-arn", "", "The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is associated with.")
-	storagegateway_deleteTapeCmd.Flags().String("tape-arn", "", "The Amazon Resource Name (ARN) of the virtual tape to delete.")
-	storagegateway_deleteTapeCmd.MarkFlagRequired("gateway-arn")
-	storagegateway_deleteTapeCmd.MarkFlagRequired("tape-arn")
+		storagegateway_deleteTapeCmd.Flags().String("bypass-governance-retention", "", "Set to `TRUE` to delete an archived tape that belongs to a custom pool with tape retention lock.")
+		storagegateway_deleteTapeCmd.Flags().String("gateway-arn", "", "The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is associated with.")
+		storagegateway_deleteTapeCmd.Flags().String("tape-arn", "", "The Amazon Resource Name (ARN) of the virtual tape to delete.")
+		storagegateway_deleteTapeCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_deleteTapeCmd.MarkFlagRequired("tape-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_deleteTapeCmd)
 }

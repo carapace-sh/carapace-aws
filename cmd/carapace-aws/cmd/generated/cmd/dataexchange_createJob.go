@@ -12,11 +12,13 @@ var dataexchange_createJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_createJobCmd).Standalone()
+	carapace.Gen(dataexchange_createJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_createJobCmd).Standalone()
 
-	dataexchange_createJobCmd.Flags().String("details", "", "The details for the CreateJob request.")
-	dataexchange_createJobCmd.Flags().String("type", "", "The type of job to be created.")
-	dataexchange_createJobCmd.MarkFlagRequired("details")
-	dataexchange_createJobCmd.MarkFlagRequired("type")
+		dataexchange_createJobCmd.Flags().String("details", "", "The details for the CreateJob request.")
+		dataexchange_createJobCmd.Flags().String("type", "", "The type of job to be created.")
+		dataexchange_createJobCmd.MarkFlagRequired("details")
+		dataexchange_createJobCmd.MarkFlagRequired("type")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_createJobCmd)
 }

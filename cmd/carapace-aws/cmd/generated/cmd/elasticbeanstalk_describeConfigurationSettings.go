@@ -12,11 +12,13 @@ var elasticbeanstalk_describeConfigurationSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_describeConfigurationSettingsCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_describeConfigurationSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_describeConfigurationSettingsCmd).Standalone()
 
-	elasticbeanstalk_describeConfigurationSettingsCmd.Flags().String("application-name", "", "The application for the environment or configuration template.")
-	elasticbeanstalk_describeConfigurationSettingsCmd.Flags().String("environment-name", "", "The name of the environment to describe.")
-	elasticbeanstalk_describeConfigurationSettingsCmd.Flags().String("template-name", "", "The name of the configuration template to describe.")
-	elasticbeanstalk_describeConfigurationSettingsCmd.MarkFlagRequired("application-name")
+		elasticbeanstalk_describeConfigurationSettingsCmd.Flags().String("application-name", "", "The application for the environment or configuration template.")
+		elasticbeanstalk_describeConfigurationSettingsCmd.Flags().String("environment-name", "", "The name of the environment to describe.")
+		elasticbeanstalk_describeConfigurationSettingsCmd.Flags().String("template-name", "", "The name of the configuration template to describe.")
+		elasticbeanstalk_describeConfigurationSettingsCmd.MarkFlagRequired("application-name")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_describeConfigurationSettingsCmd)
 }

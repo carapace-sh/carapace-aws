@@ -12,9 +12,11 @@ var dms_startExtensionPackAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_startExtensionPackAssociationCmd).Standalone()
+	carapace.Gen(dms_startExtensionPackAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_startExtensionPackAssociationCmd).Standalone()
 
-	dms_startExtensionPackAssociationCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
-	dms_startExtensionPackAssociationCmd.MarkFlagRequired("migration-project-identifier")
+		dms_startExtensionPackAssociationCmd.Flags().String("migration-project-identifier", "", "The migration project name or Amazon Resource Name (ARN).")
+		dms_startExtensionPackAssociationCmd.MarkFlagRequired("migration-project-identifier")
+	})
 	dmsCmd.AddCommand(dms_startExtensionPackAssociationCmd)
 }

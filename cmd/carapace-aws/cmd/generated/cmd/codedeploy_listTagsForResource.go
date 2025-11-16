@@ -12,10 +12,12 @@ var codedeploy_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_listTagsForResourceCmd).Standalone()
+	carapace.Gen(codedeploy_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_listTagsForResourceCmd).Standalone()
 
-	codedeploy_listTagsForResourceCmd.Flags().String("next-token", "", "An identifier returned from the previous `ListTagsForResource` call.")
-	codedeploy_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of a CodeDeploy resource.")
-	codedeploy_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		codedeploy_listTagsForResourceCmd.Flags().String("next-token", "", "An identifier returned from the previous `ListTagsForResource` call.")
+		codedeploy_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of a CodeDeploy resource.")
+		codedeploy_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	codedeployCmd.AddCommand(codedeploy_listTagsForResourceCmd)
 }

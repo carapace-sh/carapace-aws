@@ -12,9 +12,11 @@ var sns_deleteEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_deleteEndpointCmd).Standalone()
+	carapace.Gen(sns_deleteEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_deleteEndpointCmd).Standalone()
 
-	sns_deleteEndpointCmd.Flags().String("endpoint-arn", "", "`EndpointArn` of endpoint to delete.")
-	sns_deleteEndpointCmd.MarkFlagRequired("endpoint-arn")
+		sns_deleteEndpointCmd.Flags().String("endpoint-arn", "", "`EndpointArn` of endpoint to delete.")
+		sns_deleteEndpointCmd.MarkFlagRequired("endpoint-arn")
+	})
 	snsCmd.AddCommand(sns_deleteEndpointCmd)
 }

@@ -12,9 +12,11 @@ var datazone_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_listTagsForResourceCmd).Standalone()
+	carapace.Gen(datazone_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_listTagsForResourceCmd).Standalone()
 
-	datazone_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource whose tags you want to list.")
-	datazone_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		datazone_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource whose tags you want to list.")
+		datazone_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	datazoneCmd.AddCommand(datazone_listTagsForResourceCmd)
 }

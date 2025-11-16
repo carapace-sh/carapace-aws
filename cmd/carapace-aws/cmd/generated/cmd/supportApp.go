@@ -12,7 +12,9 @@ var supportAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supportAppCmd).Standalone()
+	carapace.Gen(supportAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supportAppCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(supportAppCmd)
 }

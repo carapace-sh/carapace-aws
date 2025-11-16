@@ -12,11 +12,13 @@ var route53resolver_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_untagResourceCmd).Standalone()
+	carapace.Gen(route53resolver_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_untagResourceCmd).Standalone()
 
-	route53resolver_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource that you want to remove tags from.")
-	route53resolver_untagResourceCmd.Flags().String("tag-keys", "", "The tags that you want to remove to the specified resource.")
-	route53resolver_untagResourceCmd.MarkFlagRequired("resource-arn")
-	route53resolver_untagResourceCmd.MarkFlagRequired("tag-keys")
+		route53resolver_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource that you want to remove tags from.")
+		route53resolver_untagResourceCmd.Flags().String("tag-keys", "", "The tags that you want to remove to the specified resource.")
+		route53resolver_untagResourceCmd.MarkFlagRequired("resource-arn")
+		route53resolver_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	route53resolverCmd.AddCommand(route53resolver_untagResourceCmd)
 }

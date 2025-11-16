@@ -12,10 +12,12 @@ var personalize_listRecommendersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_listRecommendersCmd).Standalone()
+	carapace.Gen(personalize_listRecommendersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_listRecommendersCmd).Standalone()
 
-	personalize_listRecommendersCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the Domain dataset group to list the recommenders for.")
-	personalize_listRecommendersCmd.Flags().String("max-results", "", "The maximum number of recommenders to return.")
-	personalize_listRecommendersCmd.Flags().String("next-token", "", "A token returned from the previous call to `ListRecommenders` for getting the next set of recommenders (if they exist).")
+		personalize_listRecommendersCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the Domain dataset group to list the recommenders for.")
+		personalize_listRecommendersCmd.Flags().String("max-results", "", "The maximum number of recommenders to return.")
+		personalize_listRecommendersCmd.Flags().String("next-token", "", "A token returned from the previous call to `ListRecommenders` for getting the next set of recommenders (if they exist).")
+	})
 	personalizeCmd.AddCommand(personalize_listRecommendersCmd)
 }

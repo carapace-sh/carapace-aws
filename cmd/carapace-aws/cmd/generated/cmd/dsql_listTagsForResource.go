@@ -12,9 +12,11 @@ var dsql_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsql_listTagsForResourceCmd).Standalone()
+	carapace.Gen(dsql_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsql_listTagsForResourceCmd).Standalone()
 
-	dsql_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which you want to list the tags.")
-	dsql_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		dsql_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource for which you want to list the tags.")
+		dsql_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	dsqlCmd.AddCommand(dsql_listTagsForResourceCmd)
 }

@@ -12,9 +12,11 @@ var ecs_deleteClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecs_deleteClusterCmd).Standalone()
+	carapace.Gen(ecs_deleteClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecs_deleteClusterCmd).Standalone()
 
-	ecs_deleteClusterCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster to delete.")
-	ecs_deleteClusterCmd.MarkFlagRequired("cluster")
+		ecs_deleteClusterCmd.Flags().String("cluster", "", "The short name or full Amazon Resource Name (ARN) of the cluster to delete.")
+		ecs_deleteClusterCmd.MarkFlagRequired("cluster")
+	})
 	ecsCmd.AddCommand(ecs_deleteClusterCmd)
 }

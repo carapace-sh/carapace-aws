@@ -12,9 +12,11 @@ var evidently_deleteProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_deleteProjectCmd).Standalone()
+	carapace.Gen(evidently_deleteProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_deleteProjectCmd).Standalone()
 
-	evidently_deleteProjectCmd.Flags().String("project", "", "The name or ARN of the project to delete.")
-	evidently_deleteProjectCmd.MarkFlagRequired("project")
+		evidently_deleteProjectCmd.Flags().String("project", "", "The name or ARN of the project to delete.")
+		evidently_deleteProjectCmd.MarkFlagRequired("project")
+	})
 	evidentlyCmd.AddCommand(evidently_deleteProjectCmd)
 }

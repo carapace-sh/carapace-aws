@@ -12,10 +12,12 @@ var kms_getKeyPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_getKeyPolicyCmd).Standalone()
+	carapace.Gen(kms_getKeyPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_getKeyPolicyCmd).Standalone()
 
-	kms_getKeyPolicyCmd.Flags().String("key-id", "", "Gets the key policy for the specified KMS key.")
-	kms_getKeyPolicyCmd.Flags().String("policy-name", "", "Specifies the name of the key policy.")
-	kms_getKeyPolicyCmd.MarkFlagRequired("key-id")
+		kms_getKeyPolicyCmd.Flags().String("key-id", "", "Gets the key policy for the specified KMS key.")
+		kms_getKeyPolicyCmd.Flags().String("policy-name", "", "Specifies the name of the key policy.")
+		kms_getKeyPolicyCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_getKeyPolicyCmd)
 }

@@ -12,7 +12,9 @@ var s3tablesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3tablesCmd).Standalone()
+	carapace.Gen(s3tablesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3tablesCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(s3tablesCmd)
 }

@@ -12,9 +12,11 @@ var chimeSdkVoice_deleteVoiceConnectorProxyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorProxyCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorProxyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteVoiceConnectorProxyCmd).Standalone()
 
-	chimeSdkVoice_deleteVoiceConnectorProxyCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_deleteVoiceConnectorProxyCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_deleteVoiceConnectorProxyCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_deleteVoiceConnectorProxyCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteVoiceConnectorProxyCmd)
 }

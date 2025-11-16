@@ -12,9 +12,11 @@ var codeguruprofiler_getNotificationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruprofiler_getNotificationConfigurationCmd).Standalone()
+	carapace.Gen(codeguruprofiler_getNotificationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruprofiler_getNotificationConfigurationCmd).Standalone()
 
-	codeguruprofiler_getNotificationConfigurationCmd.Flags().String("profiling-group-name", "", "The name of the profiling group we want to get the notification configuration for.")
-	codeguruprofiler_getNotificationConfigurationCmd.MarkFlagRequired("profiling-group-name")
+		codeguruprofiler_getNotificationConfigurationCmd.Flags().String("profiling-group-name", "", "The name of the profiling group we want to get the notification configuration for.")
+		codeguruprofiler_getNotificationConfigurationCmd.MarkFlagRequired("profiling-group-name")
+	})
 	codeguruprofilerCmd.AddCommand(codeguruprofiler_getNotificationConfigurationCmd)
 }

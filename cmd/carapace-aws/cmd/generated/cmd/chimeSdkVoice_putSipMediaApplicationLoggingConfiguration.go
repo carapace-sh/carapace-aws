@@ -12,10 +12,12 @@ var chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd).Standalone()
 
-	chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd.Flags().String("sip-media-application-id", "", "The SIP media application ID.")
-	chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd.Flags().String("sip-media-application-logging-configuration", "", "The logging configuration for the specified SIP media application.")
-	chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd.MarkFlagRequired("sip-media-application-id")
+		chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd.Flags().String("sip-media-application-id", "", "The SIP media application ID.")
+		chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd.Flags().String("sip-media-application-logging-configuration", "", "The logging configuration for the specified SIP media application.")
+		chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd.MarkFlagRequired("sip-media-application-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_putSipMediaApplicationLoggingConfigurationCmd)
 }

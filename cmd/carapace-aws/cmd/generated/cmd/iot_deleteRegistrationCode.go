@@ -12,7 +12,9 @@ var iot_deleteRegistrationCodeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteRegistrationCodeCmd).Standalone()
+	carapace.Gen(iot_deleteRegistrationCodeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteRegistrationCodeCmd).Standalone()
 
+	})
 	iotCmd.AddCommand(iot_deleteRegistrationCodeCmd)
 }

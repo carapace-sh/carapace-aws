@@ -12,14 +12,16 @@ var waf_createRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_createRuleCmd).Standalone()
+	carapace.Gen(waf_createRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_createRuleCmd).Standalone()
 
-	waf_createRuleCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	waf_createRuleCmd.Flags().String("metric-name", "", "A friendly name or description for the metrics for this `Rule`.")
-	waf_createRuleCmd.Flags().String("name", "", "A friendly name or description of the [Rule]().")
-	waf_createRuleCmd.Flags().String("tags", "", "")
-	waf_createRuleCmd.MarkFlagRequired("change-token")
-	waf_createRuleCmd.MarkFlagRequired("metric-name")
-	waf_createRuleCmd.MarkFlagRequired("name")
+		waf_createRuleCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		waf_createRuleCmd.Flags().String("metric-name", "", "A friendly name or description for the metrics for this `Rule`.")
+		waf_createRuleCmd.Flags().String("name", "", "A friendly name or description of the [Rule]().")
+		waf_createRuleCmd.Flags().String("tags", "", "")
+		waf_createRuleCmd.MarkFlagRequired("change-token")
+		waf_createRuleCmd.MarkFlagRequired("metric-name")
+		waf_createRuleCmd.MarkFlagRequired("name")
+	})
 	wafCmd.AddCommand(waf_createRuleCmd)
 }

@@ -12,7 +12,9 @@ var groundstationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstationCmd).Standalone()
+	carapace.Gen(groundstationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstationCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(groundstationCmd)
 }

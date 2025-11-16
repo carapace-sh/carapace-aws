@@ -12,7 +12,9 @@ var paymentCryptographyDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptographyDataCmd).Standalone()
+	carapace.Gen(paymentCryptographyDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptographyDataCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(paymentCryptographyDataCmd)
 }

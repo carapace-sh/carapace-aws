@@ -12,11 +12,13 @@ var elasticbeanstalk_retrieveEnvironmentInfoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_retrieveEnvironmentInfoCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_retrieveEnvironmentInfoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_retrieveEnvironmentInfoCmd).Standalone()
 
-	elasticbeanstalk_retrieveEnvironmentInfoCmd.Flags().String("environment-id", "", "The ID of the data's environment.")
-	elasticbeanstalk_retrieveEnvironmentInfoCmd.Flags().String("environment-name", "", "The name of the data's environment.")
-	elasticbeanstalk_retrieveEnvironmentInfoCmd.Flags().String("info-type", "", "The type of information to retrieve.")
-	elasticbeanstalk_retrieveEnvironmentInfoCmd.MarkFlagRequired("info-type")
+		elasticbeanstalk_retrieveEnvironmentInfoCmd.Flags().String("environment-id", "", "The ID of the data's environment.")
+		elasticbeanstalk_retrieveEnvironmentInfoCmd.Flags().String("environment-name", "", "The name of the data's environment.")
+		elasticbeanstalk_retrieveEnvironmentInfoCmd.Flags().String("info-type", "", "The type of information to retrieve.")
+		elasticbeanstalk_retrieveEnvironmentInfoCmd.MarkFlagRequired("info-type")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_retrieveEnvironmentInfoCmd)
 }

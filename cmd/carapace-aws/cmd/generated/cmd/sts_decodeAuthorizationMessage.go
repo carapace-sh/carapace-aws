@@ -12,9 +12,11 @@ var sts_decodeAuthorizationMessageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sts_decodeAuthorizationMessageCmd).Standalone()
+	carapace.Gen(sts_decodeAuthorizationMessageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sts_decodeAuthorizationMessageCmd).Standalone()
 
-	sts_decodeAuthorizationMessageCmd.Flags().String("encoded-message", "", "The encoded message that was returned with the response.")
-	sts_decodeAuthorizationMessageCmd.MarkFlagRequired("encoded-message")
+		sts_decodeAuthorizationMessageCmd.Flags().String("encoded-message", "", "The encoded message that was returned with the response.")
+		sts_decodeAuthorizationMessageCmd.MarkFlagRequired("encoded-message")
+	})
 	stsCmd.AddCommand(sts_decodeAuthorizationMessageCmd)
 }

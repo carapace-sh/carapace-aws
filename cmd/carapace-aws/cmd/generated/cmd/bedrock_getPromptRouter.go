@@ -12,9 +12,11 @@ var bedrock_getPromptRouterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_getPromptRouterCmd).Standalone()
+	carapace.Gen(bedrock_getPromptRouterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_getPromptRouterCmd).Standalone()
 
-	bedrock_getPromptRouterCmd.Flags().String("prompt-router-arn", "", "The prompt router's ARN")
-	bedrock_getPromptRouterCmd.MarkFlagRequired("prompt-router-arn")
+		bedrock_getPromptRouterCmd.Flags().String("prompt-router-arn", "", "The prompt router's ARN")
+		bedrock_getPromptRouterCmd.MarkFlagRequired("prompt-router-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_getPromptRouterCmd)
 }

@@ -12,9 +12,11 @@ var codebuild_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_getResourcePolicyCmd).Standalone()
+	carapace.Gen(codebuild_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_getResourcePolicyCmd).Standalone()
 
-	codebuild_getResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the resource that is associated with the resource policy.")
-	codebuild_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		codebuild_getResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the resource that is associated with the resource policy.")
+		codebuild_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	codebuildCmd.AddCommand(codebuild_getResourcePolicyCmd)
 }

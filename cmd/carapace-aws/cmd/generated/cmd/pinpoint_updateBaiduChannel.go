@@ -12,11 +12,13 @@ var pinpoint_updateBaiduChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateBaiduChannelCmd).Standalone()
+	carapace.Gen(pinpoint_updateBaiduChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateBaiduChannelCmd).Standalone()
 
-	pinpoint_updateBaiduChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_updateBaiduChannelCmd.Flags().String("baidu-channel-request", "", "")
-	pinpoint_updateBaiduChannelCmd.MarkFlagRequired("application-id")
-	pinpoint_updateBaiduChannelCmd.MarkFlagRequired("baidu-channel-request")
+		pinpoint_updateBaiduChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_updateBaiduChannelCmd.Flags().String("baidu-channel-request", "", "")
+		pinpoint_updateBaiduChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_updateBaiduChannelCmd.MarkFlagRequired("baidu-channel-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateBaiduChannelCmd)
 }

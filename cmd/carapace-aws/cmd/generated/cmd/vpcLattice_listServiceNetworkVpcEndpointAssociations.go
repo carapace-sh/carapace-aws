@@ -12,11 +12,13 @@ var vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd).Standalone()
+	carapace.Gen(vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd).Standalone()
 
-	vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd.Flags().String("max-results", "", "The maximum page size.")
-	vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd.Flags().String("next-token", "", "If there are additional results, a pagination token for the next page of results.")
-	vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd.Flags().String("service-network-identifier", "", "The ID of the service network associated with the VPC endpoint.")
-	vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd.MarkFlagRequired("service-network-identifier")
+		vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd.Flags().String("max-results", "", "The maximum page size.")
+		vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd.Flags().String("next-token", "", "If there are additional results, a pagination token for the next page of results.")
+		vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd.Flags().String("service-network-identifier", "", "The ID of the service network associated with the VPC endpoint.")
+		vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd.MarkFlagRequired("service-network-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listServiceNetworkVpcEndpointAssociationsCmd)
 }

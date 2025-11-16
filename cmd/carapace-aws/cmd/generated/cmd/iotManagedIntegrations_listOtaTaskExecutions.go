@@ -12,11 +12,13 @@ var iotManagedIntegrations_listOtaTaskExecutionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_listOtaTaskExecutionsCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_listOtaTaskExecutionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_listOtaTaskExecutionsCmd).Standalone()
 
-	iotManagedIntegrations_listOtaTaskExecutionsCmd.Flags().String("identifier", "", "The over-the-air (OTA) task id.")
-	iotManagedIntegrations_listOtaTaskExecutionsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iotManagedIntegrations_listOtaTaskExecutionsCmd.Flags().String("next-token", "", "A token that can be used to retrieve the next set of results.")
-	iotManagedIntegrations_listOtaTaskExecutionsCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_listOtaTaskExecutionsCmd.Flags().String("identifier", "", "The over-the-air (OTA) task id.")
+		iotManagedIntegrations_listOtaTaskExecutionsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iotManagedIntegrations_listOtaTaskExecutionsCmd.Flags().String("next-token", "", "A token that can be used to retrieve the next set of results.")
+		iotManagedIntegrations_listOtaTaskExecutionsCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_listOtaTaskExecutionsCmd)
 }

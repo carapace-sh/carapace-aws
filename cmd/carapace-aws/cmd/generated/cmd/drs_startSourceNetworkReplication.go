@@ -12,9 +12,11 @@ var drs_startSourceNetworkReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_startSourceNetworkReplicationCmd).Standalone()
+	carapace.Gen(drs_startSourceNetworkReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_startSourceNetworkReplicationCmd).Standalone()
 
-	drs_startSourceNetworkReplicationCmd.Flags().String("source-network-id", "", "ID of the Source Network to replicate.")
-	drs_startSourceNetworkReplicationCmd.MarkFlagRequired("source-network-id")
+		drs_startSourceNetworkReplicationCmd.Flags().String("source-network-id", "", "ID of the Source Network to replicate.")
+		drs_startSourceNetworkReplicationCmd.MarkFlagRequired("source-network-id")
+	})
 	drsCmd.AddCommand(drs_startSourceNetworkReplicationCmd)
 }

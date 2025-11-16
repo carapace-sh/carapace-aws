@@ -12,9 +12,11 @@ var gamelift_validateMatchmakingRuleSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_validateMatchmakingRuleSetCmd).Standalone()
+	carapace.Gen(gamelift_validateMatchmakingRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_validateMatchmakingRuleSetCmd).Standalone()
 
-	gamelift_validateMatchmakingRuleSetCmd.Flags().String("rule-set-body", "", "A collection of matchmaking rules to validate, formatted as a JSON string.")
-	gamelift_validateMatchmakingRuleSetCmd.MarkFlagRequired("rule-set-body")
+		gamelift_validateMatchmakingRuleSetCmd.Flags().String("rule-set-body", "", "A collection of matchmaking rules to validate, formatted as a JSON string.")
+		gamelift_validateMatchmakingRuleSetCmd.MarkFlagRequired("rule-set-body")
+	})
 	gameliftCmd.AddCommand(gamelift_validateMatchmakingRuleSetCmd)
 }

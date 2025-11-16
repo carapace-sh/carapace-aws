@@ -12,12 +12,14 @@ var kendraRanking_updateRescoreExecutionPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendraRanking_updateRescoreExecutionPlanCmd).Standalone()
+	carapace.Gen(kendraRanking_updateRescoreExecutionPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendraRanking_updateRescoreExecutionPlanCmd).Standalone()
 
-	kendraRanking_updateRescoreExecutionPlanCmd.Flags().String("capacity-units", "", "You can set additional capacity units to meet the needs of your rescore execution plan.")
-	kendraRanking_updateRescoreExecutionPlanCmd.Flags().String("description", "", "A new description for the rescore execution plan.")
-	kendraRanking_updateRescoreExecutionPlanCmd.Flags().String("id", "", "The identifier of the rescore execution plan that you want to update.")
-	kendraRanking_updateRescoreExecutionPlanCmd.Flags().String("name", "", "A new name for the rescore execution plan.")
-	kendraRanking_updateRescoreExecutionPlanCmd.MarkFlagRequired("id")
+		kendraRanking_updateRescoreExecutionPlanCmd.Flags().String("capacity-units", "", "You can set additional capacity units to meet the needs of your rescore execution plan.")
+		kendraRanking_updateRescoreExecutionPlanCmd.Flags().String("description", "", "A new description for the rescore execution plan.")
+		kendraRanking_updateRescoreExecutionPlanCmd.Flags().String("id", "", "The identifier of the rescore execution plan that you want to update.")
+		kendraRanking_updateRescoreExecutionPlanCmd.Flags().String("name", "", "A new name for the rescore execution plan.")
+		kendraRanking_updateRescoreExecutionPlanCmd.MarkFlagRequired("id")
+	})
 	kendraRankingCmd.AddCommand(kendraRanking_updateRescoreExecutionPlanCmd)
 }

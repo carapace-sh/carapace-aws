@@ -12,7 +12,9 @@ var appstream_createUsageReportSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_createUsageReportSubscriptionCmd).Standalone()
+	carapace.Gen(appstream_createUsageReportSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_createUsageReportSubscriptionCmd).Standalone()
 
+	})
 	appstreamCmd.AddCommand(appstream_createUsageReportSubscriptionCmd)
 }

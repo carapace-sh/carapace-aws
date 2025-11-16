@@ -12,11 +12,13 @@ var ssoAdmin_deleteApplicationAccessScopeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_deleteApplicationAccessScopeCmd).Standalone()
+	carapace.Gen(ssoAdmin_deleteApplicationAccessScopeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_deleteApplicationAccessScopeCmd).Standalone()
 
-	ssoAdmin_deleteApplicationAccessScopeCmd.Flags().String("application-arn", "", "Specifies the ARN of the application with the access scope to delete.")
-	ssoAdmin_deleteApplicationAccessScopeCmd.Flags().String("scope", "", "Specifies the name of the access scope to remove from the application.")
-	ssoAdmin_deleteApplicationAccessScopeCmd.MarkFlagRequired("application-arn")
-	ssoAdmin_deleteApplicationAccessScopeCmd.MarkFlagRequired("scope")
+		ssoAdmin_deleteApplicationAccessScopeCmd.Flags().String("application-arn", "", "Specifies the ARN of the application with the access scope to delete.")
+		ssoAdmin_deleteApplicationAccessScopeCmd.Flags().String("scope", "", "Specifies the name of the access scope to remove from the application.")
+		ssoAdmin_deleteApplicationAccessScopeCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_deleteApplicationAccessScopeCmd.MarkFlagRequired("scope")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_deleteApplicationAccessScopeCmd)
 }

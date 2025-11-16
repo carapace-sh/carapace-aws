@@ -12,11 +12,13 @@ var launchWizard_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(launchWizard_untagResourceCmd).Standalone()
+	carapace.Gen(launchWizard_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(launchWizard_untagResourceCmd).Standalone()
 
-	launchWizard_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	launchWizard_untagResourceCmd.Flags().String("tag-keys", "", "Keys identifying the tags to remove.")
-	launchWizard_untagResourceCmd.MarkFlagRequired("resource-arn")
-	launchWizard_untagResourceCmd.MarkFlagRequired("tag-keys")
+		launchWizard_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		launchWizard_untagResourceCmd.Flags().String("tag-keys", "", "Keys identifying the tags to remove.")
+		launchWizard_untagResourceCmd.MarkFlagRequired("resource-arn")
+		launchWizard_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	launchWizardCmd.AddCommand(launchWizard_untagResourceCmd)
 }

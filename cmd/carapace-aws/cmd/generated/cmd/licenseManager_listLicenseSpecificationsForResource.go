@@ -12,11 +12,13 @@ var licenseManager_listLicenseSpecificationsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManager_listLicenseSpecificationsForResourceCmd).Standalone()
+	carapace.Gen(licenseManager_listLicenseSpecificationsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManager_listLicenseSpecificationsForResourceCmd).Standalone()
 
-	licenseManager_listLicenseSpecificationsForResourceCmd.Flags().String("max-results", "", "Maximum number of results to return in a single call.")
-	licenseManager_listLicenseSpecificationsForResourceCmd.Flags().String("next-token", "", "Token for the next set of results.")
-	licenseManager_listLicenseSpecificationsForResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of a resource that has an associated license configuration.")
-	licenseManager_listLicenseSpecificationsForResourceCmd.MarkFlagRequired("resource-arn")
+		licenseManager_listLicenseSpecificationsForResourceCmd.Flags().String("max-results", "", "Maximum number of results to return in a single call.")
+		licenseManager_listLicenseSpecificationsForResourceCmd.Flags().String("next-token", "", "Token for the next set of results.")
+		licenseManager_listLicenseSpecificationsForResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of a resource that has an associated license configuration.")
+		licenseManager_listLicenseSpecificationsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	licenseManagerCmd.AddCommand(licenseManager_listLicenseSpecificationsForResourceCmd)
 }

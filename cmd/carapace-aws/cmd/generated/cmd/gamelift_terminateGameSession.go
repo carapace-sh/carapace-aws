@@ -12,11 +12,13 @@ var gamelift_terminateGameSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_terminateGameSessionCmd).Standalone()
+	carapace.Gen(gamelift_terminateGameSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_terminateGameSessionCmd).Standalone()
 
-	gamelift_terminateGameSessionCmd.Flags().String("game-session-id", "", "A unique identifier for the game session to be terminated.")
-	gamelift_terminateGameSessionCmd.Flags().String("termination-mode", "", "The method to use to terminate the game session.")
-	gamelift_terminateGameSessionCmd.MarkFlagRequired("game-session-id")
-	gamelift_terminateGameSessionCmd.MarkFlagRequired("termination-mode")
+		gamelift_terminateGameSessionCmd.Flags().String("game-session-id", "", "A unique identifier for the game session to be terminated.")
+		gamelift_terminateGameSessionCmd.Flags().String("termination-mode", "", "The method to use to terminate the game session.")
+		gamelift_terminateGameSessionCmd.MarkFlagRequired("game-session-id")
+		gamelift_terminateGameSessionCmd.MarkFlagRequired("termination-mode")
+	})
 	gameliftCmd.AddCommand(gamelift_terminateGameSessionCmd)
 }

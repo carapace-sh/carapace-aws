@@ -12,9 +12,11 @@ var opensearch_getDirectQueryDataSourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_getDirectQueryDataSourceCmd).Standalone()
+	carapace.Gen(opensearch_getDirectQueryDataSourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_getDirectQueryDataSourceCmd).Standalone()
 
-	opensearch_getDirectQueryDataSourceCmd.Flags().String("data-source-name", "", "A unique, user-defined label that identifies the data source within your OpenSearch Service environment.")
-	opensearch_getDirectQueryDataSourceCmd.MarkFlagRequired("data-source-name")
+		opensearch_getDirectQueryDataSourceCmd.Flags().String("data-source-name", "", "A unique, user-defined label that identifies the data source within your OpenSearch Service environment.")
+		opensearch_getDirectQueryDataSourceCmd.MarkFlagRequired("data-source-name")
+	})
 	opensearchCmd.AddCommand(opensearch_getDirectQueryDataSourceCmd)
 }

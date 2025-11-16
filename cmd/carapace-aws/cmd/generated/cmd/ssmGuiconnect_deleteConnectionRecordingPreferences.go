@@ -12,8 +12,10 @@ var ssmGuiconnect_deleteConnectionRecordingPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmGuiconnect_deleteConnectionRecordingPreferencesCmd).Standalone()
+	carapace.Gen(ssmGuiconnect_deleteConnectionRecordingPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmGuiconnect_deleteConnectionRecordingPreferencesCmd).Standalone()
 
-	ssmGuiconnect_deleteConnectionRecordingPreferencesCmd.Flags().String("client-token", "", "User-provided idempotency token.")
+		ssmGuiconnect_deleteConnectionRecordingPreferencesCmd.Flags().String("client-token", "", "User-provided idempotency token.")
+	})
 	ssmGuiconnectCmd.AddCommand(ssmGuiconnect_deleteConnectionRecordingPreferencesCmd)
 }

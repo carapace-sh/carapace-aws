@@ -12,10 +12,12 @@ var rds_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_listTagsForResourceCmd).Standalone()
+	carapace.Gen(rds_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_listTagsForResourceCmd).Standalone()
 
-	rds_listTagsForResourceCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
-	rds_listTagsForResourceCmd.Flags().String("resource-name", "", "The Amazon RDS resource with tags to be listed.")
-	rds_listTagsForResourceCmd.MarkFlagRequired("resource-name")
+		rds_listTagsForResourceCmd.Flags().String("filters", "", "This parameter isn't currently supported.")
+		rds_listTagsForResourceCmd.Flags().String("resource-name", "", "The Amazon RDS resource with tags to be listed.")
+		rds_listTagsForResourceCmd.MarkFlagRequired("resource-name")
+	})
 	rdsCmd.AddCommand(rds_listTagsForResourceCmd)
 }

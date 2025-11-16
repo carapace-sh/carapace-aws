@@ -12,9 +12,11 @@ var iotwireless_getDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_getDestinationCmd).Standalone()
+	carapace.Gen(iotwireless_getDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_getDestinationCmd).Standalone()
 
-	iotwireless_getDestinationCmd.Flags().String("name", "", "The name of the resource to get.")
-	iotwireless_getDestinationCmd.MarkFlagRequired("name")
+		iotwireless_getDestinationCmd.Flags().String("name", "", "The name of the resource to get.")
+		iotwireless_getDestinationCmd.MarkFlagRequired("name")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_getDestinationCmd)
 }

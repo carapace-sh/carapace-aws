@@ -12,10 +12,12 @@ var securitylake_listDataLakeExceptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securitylake_listDataLakeExceptionsCmd).Standalone()
+	carapace.Gen(securitylake_listDataLakeExceptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securitylake_listDataLakeExceptionsCmd).Standalone()
 
-	securitylake_listDataLakeExceptionsCmd.Flags().String("max-results", "", "Lists the maximum number of failures in Security Lake.")
-	securitylake_listDataLakeExceptionsCmd.Flags().String("next-token", "", "Lists if there are more results available.")
-	securitylake_listDataLakeExceptionsCmd.Flags().String("regions", "", "The Amazon Web Services Regions from which exceptions are retrieved.")
+		securitylake_listDataLakeExceptionsCmd.Flags().String("max-results", "", "Lists the maximum number of failures in Security Lake.")
+		securitylake_listDataLakeExceptionsCmd.Flags().String("next-token", "", "Lists if there are more results available.")
+		securitylake_listDataLakeExceptionsCmd.Flags().String("regions", "", "The Amazon Web Services Regions from which exceptions are retrieved.")
+	})
 	securitylakeCmd.AddCommand(securitylake_listDataLakeExceptionsCmd)
 }

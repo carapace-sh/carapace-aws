@@ -12,10 +12,12 @@ var codecommit_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_listTagsForResourceCmd).Standalone()
+	carapace.Gen(codecommit_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_listTagsForResourceCmd).Standalone()
 
-	codecommit_listTagsForResourceCmd.Flags().String("next-token", "", "An enumeration token that, when provided in a request, returns the next batch of the results.")
-	codecommit_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.")
-	codecommit_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		codecommit_listTagsForResourceCmd.Flags().String("next-token", "", "An enumeration token that, when provided in a request, returns the next batch of the results.")
+		codecommit_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.")
+		codecommit_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	codecommitCmd.AddCommand(codecommit_listTagsForResourceCmd)
 }

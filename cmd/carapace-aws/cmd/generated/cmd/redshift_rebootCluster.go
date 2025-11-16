@@ -12,9 +12,11 @@ var redshift_rebootClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_rebootClusterCmd).Standalone()
+	carapace.Gen(redshift_rebootClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_rebootClusterCmd).Standalone()
 
-	redshift_rebootClusterCmd.Flags().String("cluster-identifier", "", "The cluster identifier.")
-	redshift_rebootClusterCmd.MarkFlagRequired("cluster-identifier")
+		redshift_rebootClusterCmd.Flags().String("cluster-identifier", "", "The cluster identifier.")
+		redshift_rebootClusterCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_rebootClusterCmd)
 }

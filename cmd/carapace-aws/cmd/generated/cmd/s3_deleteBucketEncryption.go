@@ -12,10 +12,12 @@ var s3_deleteBucketEncryptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_deleteBucketEncryptionCmd).Standalone()
+	carapace.Gen(s3_deleteBucketEncryptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_deleteBucketEncryptionCmd).Standalone()
 
-	s3_deleteBucketEncryptionCmd.Flags().String("bucket", "", "The name of the bucket containing the server-side encryption configuration to delete.")
-	s3_deleteBucketEncryptionCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_deleteBucketEncryptionCmd.MarkFlagRequired("bucket")
+		s3_deleteBucketEncryptionCmd.Flags().String("bucket", "", "The name of the bucket containing the server-side encryption configuration to delete.")
+		s3_deleteBucketEncryptionCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_deleteBucketEncryptionCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_deleteBucketEncryptionCmd)
 }

@@ -12,9 +12,11 @@ var machinelearning_getEvaluationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearning_getEvaluationCmd).Standalone()
+	carapace.Gen(machinelearning_getEvaluationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearning_getEvaluationCmd).Standalone()
 
-	machinelearning_getEvaluationCmd.Flags().String("evaluation-id", "", "The ID of the `Evaluation` to retrieve.")
-	machinelearning_getEvaluationCmd.MarkFlagRequired("evaluation-id")
+		machinelearning_getEvaluationCmd.Flags().String("evaluation-id", "", "The ID of the `Evaluation` to retrieve.")
+		machinelearning_getEvaluationCmd.MarkFlagRequired("evaluation-id")
+	})
 	machinelearningCmd.AddCommand(machinelearning_getEvaluationCmd)
 }

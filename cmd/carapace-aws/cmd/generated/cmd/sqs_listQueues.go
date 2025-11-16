@@ -12,10 +12,12 @@ var sqs_listQueuesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_listQueuesCmd).Standalone()
+	carapace.Gen(sqs_listQueuesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_listQueuesCmd).Standalone()
 
-	sqs_listQueuesCmd.Flags().String("max-results", "", "Maximum number of results to include in the response.")
-	sqs_listQueuesCmd.Flags().String("next-token", "", "Pagination token to request the next set of results.")
-	sqs_listQueuesCmd.Flags().String("queue-name-prefix", "", "A string to use for filtering the list results.")
+		sqs_listQueuesCmd.Flags().String("max-results", "", "Maximum number of results to include in the response.")
+		sqs_listQueuesCmd.Flags().String("next-token", "", "Pagination token to request the next set of results.")
+		sqs_listQueuesCmd.Flags().String("queue-name-prefix", "", "A string to use for filtering the list results.")
+	})
 	sqsCmd.AddCommand(sqs_listQueuesCmd)
 }

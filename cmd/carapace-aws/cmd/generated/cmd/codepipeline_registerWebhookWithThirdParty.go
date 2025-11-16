@@ -12,8 +12,10 @@ var codepipeline_registerWebhookWithThirdPartyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_registerWebhookWithThirdPartyCmd).Standalone()
+	carapace.Gen(codepipeline_registerWebhookWithThirdPartyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_registerWebhookWithThirdPartyCmd).Standalone()
 
-	codepipeline_registerWebhookWithThirdPartyCmd.Flags().String("webhook-name", "", "The name of an existing webhook created with PutWebhook to register with a supported third party.")
+		codepipeline_registerWebhookWithThirdPartyCmd.Flags().String("webhook-name", "", "The name of an existing webhook created with PutWebhook to register with a supported third party.")
+	})
 	codepipelineCmd.AddCommand(codepipeline_registerWebhookWithThirdPartyCmd)
 }

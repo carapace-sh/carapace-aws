@@ -12,10 +12,12 @@ var s3_getBucketLoggingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketLoggingCmd).Standalone()
+	carapace.Gen(s3_getBucketLoggingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketLoggingCmd).Standalone()
 
-	s3_getBucketLoggingCmd.Flags().String("bucket", "", "The bucket name for which to get the logging information.")
-	s3_getBucketLoggingCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketLoggingCmd.MarkFlagRequired("bucket")
+		s3_getBucketLoggingCmd.Flags().String("bucket", "", "The bucket name for which to get the logging information.")
+		s3_getBucketLoggingCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketLoggingCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getBucketLoggingCmd)
 }

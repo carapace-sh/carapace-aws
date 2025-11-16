@@ -12,13 +12,15 @@ var codecatalyst_getSourceRepositoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_getSourceRepositoryCmd).Standalone()
+	carapace.Gen(codecatalyst_getSourceRepositoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_getSourceRepositoryCmd).Standalone()
 
-	codecatalyst_getSourceRepositoryCmd.Flags().String("name", "", "The name of the source repository.")
-	codecatalyst_getSourceRepositoryCmd.Flags().String("project-name", "", "The name of the project in the space.")
-	codecatalyst_getSourceRepositoryCmd.Flags().String("space-name", "", "The name of the space.")
-	codecatalyst_getSourceRepositoryCmd.MarkFlagRequired("name")
-	codecatalyst_getSourceRepositoryCmd.MarkFlagRequired("project-name")
-	codecatalyst_getSourceRepositoryCmd.MarkFlagRequired("space-name")
+		codecatalyst_getSourceRepositoryCmd.Flags().String("name", "", "The name of the source repository.")
+		codecatalyst_getSourceRepositoryCmd.Flags().String("project-name", "", "The name of the project in the space.")
+		codecatalyst_getSourceRepositoryCmd.Flags().String("space-name", "", "The name of the space.")
+		codecatalyst_getSourceRepositoryCmd.MarkFlagRequired("name")
+		codecatalyst_getSourceRepositoryCmd.MarkFlagRequired("project-name")
+		codecatalyst_getSourceRepositoryCmd.MarkFlagRequired("space-name")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_getSourceRepositoryCmd)
 }

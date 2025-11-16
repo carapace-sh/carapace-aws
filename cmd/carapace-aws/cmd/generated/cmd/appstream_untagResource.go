@@ -12,11 +12,13 @@ var appstream_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_untagResourceCmd).Standalone()
+	carapace.Gen(appstream_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_untagResourceCmd).Standalone()
 
-	appstream_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	appstream_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys for the tags to disassociate.")
-	appstream_untagResourceCmd.MarkFlagRequired("resource-arn")
-	appstream_untagResourceCmd.MarkFlagRequired("tag-keys")
+		appstream_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		appstream_untagResourceCmd.Flags().String("tag-keys", "", "The tag keys for the tags to disassociate.")
+		appstream_untagResourceCmd.MarkFlagRequired("resource-arn")
+		appstream_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	appstreamCmd.AddCommand(appstream_untagResourceCmd)
 }

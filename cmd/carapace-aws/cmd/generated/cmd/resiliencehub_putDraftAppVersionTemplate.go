@@ -12,11 +12,13 @@ var resiliencehub_putDraftAppVersionTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_putDraftAppVersionTemplateCmd).Standalone()
+	carapace.Gen(resiliencehub_putDraftAppVersionTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_putDraftAppVersionTemplateCmd).Standalone()
 
-	resiliencehub_putDraftAppVersionTemplateCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
-	resiliencehub_putDraftAppVersionTemplateCmd.Flags().String("app-template-body", "", "A JSON string that provides information about your application structure.")
-	resiliencehub_putDraftAppVersionTemplateCmd.MarkFlagRequired("app-arn")
-	resiliencehub_putDraftAppVersionTemplateCmd.MarkFlagRequired("app-template-body")
+		resiliencehub_putDraftAppVersionTemplateCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
+		resiliencehub_putDraftAppVersionTemplateCmd.Flags().String("app-template-body", "", "A JSON string that provides information about your application structure.")
+		resiliencehub_putDraftAppVersionTemplateCmd.MarkFlagRequired("app-arn")
+		resiliencehub_putDraftAppVersionTemplateCmd.MarkFlagRequired("app-template-body")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_putDraftAppVersionTemplateCmd)
 }

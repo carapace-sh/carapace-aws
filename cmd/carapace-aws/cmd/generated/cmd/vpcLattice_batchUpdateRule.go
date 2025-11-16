@@ -12,13 +12,15 @@ var vpcLattice_batchUpdateRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_batchUpdateRuleCmd).Standalone()
+	carapace.Gen(vpcLattice_batchUpdateRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_batchUpdateRuleCmd).Standalone()
 
-	vpcLattice_batchUpdateRuleCmd.Flags().String("listener-identifier", "", "The ID or ARN of the listener.")
-	vpcLattice_batchUpdateRuleCmd.Flags().String("rules", "", "The rules for the specified listener.")
-	vpcLattice_batchUpdateRuleCmd.Flags().String("service-identifier", "", "The ID or ARN of the service.")
-	vpcLattice_batchUpdateRuleCmd.MarkFlagRequired("listener-identifier")
-	vpcLattice_batchUpdateRuleCmd.MarkFlagRequired("rules")
-	vpcLattice_batchUpdateRuleCmd.MarkFlagRequired("service-identifier")
+		vpcLattice_batchUpdateRuleCmd.Flags().String("listener-identifier", "", "The ID or ARN of the listener.")
+		vpcLattice_batchUpdateRuleCmd.Flags().String("rules", "", "The rules for the specified listener.")
+		vpcLattice_batchUpdateRuleCmd.Flags().String("service-identifier", "", "The ID or ARN of the service.")
+		vpcLattice_batchUpdateRuleCmd.MarkFlagRequired("listener-identifier")
+		vpcLattice_batchUpdateRuleCmd.MarkFlagRequired("rules")
+		vpcLattice_batchUpdateRuleCmd.MarkFlagRequired("service-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_batchUpdateRuleCmd)
 }

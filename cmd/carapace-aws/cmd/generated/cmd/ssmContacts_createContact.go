@@ -12,16 +12,18 @@ var ssmContacts_createContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_createContactCmd).Standalone()
+	carapace.Gen(ssmContacts_createContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_createContactCmd).Standalone()
 
-	ssmContacts_createContactCmd.Flags().String("alias", "", "The short name to quickly identify a contact or escalation plan.")
-	ssmContacts_createContactCmd.Flags().String("display-name", "", "The full name of the contact or escalation plan.")
-	ssmContacts_createContactCmd.Flags().String("idempotency-token", "", "A token ensuring that the operation is called only once with the specified details.")
-	ssmContacts_createContactCmd.Flags().String("plan", "", "A list of stages.")
-	ssmContacts_createContactCmd.Flags().String("tags", "", "Adds a tag to the target.")
-	ssmContacts_createContactCmd.Flags().String("type", "", "The type of contact to create.")
-	ssmContacts_createContactCmd.MarkFlagRequired("alias")
-	ssmContacts_createContactCmd.MarkFlagRequired("plan")
-	ssmContacts_createContactCmd.MarkFlagRequired("type")
+		ssmContacts_createContactCmd.Flags().String("alias", "", "The short name to quickly identify a contact or escalation plan.")
+		ssmContacts_createContactCmd.Flags().String("display-name", "", "The full name of the contact or escalation plan.")
+		ssmContacts_createContactCmd.Flags().String("idempotency-token", "", "A token ensuring that the operation is called only once with the specified details.")
+		ssmContacts_createContactCmd.Flags().String("plan", "", "A list of stages.")
+		ssmContacts_createContactCmd.Flags().String("tags", "", "Adds a tag to the target.")
+		ssmContacts_createContactCmd.Flags().String("type", "", "The type of contact to create.")
+		ssmContacts_createContactCmd.MarkFlagRequired("alias")
+		ssmContacts_createContactCmd.MarkFlagRequired("plan")
+		ssmContacts_createContactCmd.MarkFlagRequired("type")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_createContactCmd)
 }

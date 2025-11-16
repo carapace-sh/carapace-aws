@@ -12,10 +12,12 @@ var panorama_updateDeviceMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(panorama_updateDeviceMetadataCmd).Standalone()
+	carapace.Gen(panorama_updateDeviceMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(panorama_updateDeviceMetadataCmd).Standalone()
 
-	panorama_updateDeviceMetadataCmd.Flags().String("description", "", "A description for the device.")
-	panorama_updateDeviceMetadataCmd.Flags().String("device-id", "", "The device's ID.")
-	panorama_updateDeviceMetadataCmd.MarkFlagRequired("device-id")
+		panorama_updateDeviceMetadataCmd.Flags().String("description", "", "A description for the device.")
+		panorama_updateDeviceMetadataCmd.Flags().String("device-id", "", "The device's ID.")
+		panorama_updateDeviceMetadataCmd.MarkFlagRequired("device-id")
+	})
 	panoramaCmd.AddCommand(panorama_updateDeviceMetadataCmd)
 }

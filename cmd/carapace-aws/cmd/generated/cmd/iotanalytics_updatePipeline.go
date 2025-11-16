@@ -12,11 +12,13 @@ var iotanalytics_updatePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_updatePipelineCmd).Standalone()
+	carapace.Gen(iotanalytics_updatePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_updatePipelineCmd).Standalone()
 
-	iotanalytics_updatePipelineCmd.Flags().String("pipeline-activities", "", "A list of `PipelineActivity` objects.")
-	iotanalytics_updatePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to update.")
-	iotanalytics_updatePipelineCmd.MarkFlagRequired("pipeline-activities")
-	iotanalytics_updatePipelineCmd.MarkFlagRequired("pipeline-name")
+		iotanalytics_updatePipelineCmd.Flags().String("pipeline-activities", "", "A list of `PipelineActivity` objects.")
+		iotanalytics_updatePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to update.")
+		iotanalytics_updatePipelineCmd.MarkFlagRequired("pipeline-activities")
+		iotanalytics_updatePipelineCmd.MarkFlagRequired("pipeline-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_updatePipelineCmd)
 }

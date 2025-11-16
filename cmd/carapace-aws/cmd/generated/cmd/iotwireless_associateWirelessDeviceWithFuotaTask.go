@@ -12,11 +12,13 @@ var iotwireless_associateWirelessDeviceWithFuotaTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_associateWirelessDeviceWithFuotaTaskCmd).Standalone()
+	carapace.Gen(iotwireless_associateWirelessDeviceWithFuotaTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_associateWirelessDeviceWithFuotaTaskCmd).Standalone()
 
-	iotwireless_associateWirelessDeviceWithFuotaTaskCmd.Flags().String("id", "", "")
-	iotwireless_associateWirelessDeviceWithFuotaTaskCmd.Flags().String("wireless-device-id", "", "")
-	iotwireless_associateWirelessDeviceWithFuotaTaskCmd.MarkFlagRequired("id")
-	iotwireless_associateWirelessDeviceWithFuotaTaskCmd.MarkFlagRequired("wireless-device-id")
+		iotwireless_associateWirelessDeviceWithFuotaTaskCmd.Flags().String("id", "", "")
+		iotwireless_associateWirelessDeviceWithFuotaTaskCmd.Flags().String("wireless-device-id", "", "")
+		iotwireless_associateWirelessDeviceWithFuotaTaskCmd.MarkFlagRequired("id")
+		iotwireless_associateWirelessDeviceWithFuotaTaskCmd.MarkFlagRequired("wireless-device-id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_associateWirelessDeviceWithFuotaTaskCmd)
 }

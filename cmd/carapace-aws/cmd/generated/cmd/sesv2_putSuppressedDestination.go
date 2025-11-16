@@ -12,11 +12,13 @@ var sesv2_putSuppressedDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putSuppressedDestinationCmd).Standalone()
+	carapace.Gen(sesv2_putSuppressedDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putSuppressedDestinationCmd).Standalone()
 
-	sesv2_putSuppressedDestinationCmd.Flags().String("email-address", "", "The email address that should be added to the suppression list for your account.")
-	sesv2_putSuppressedDestinationCmd.Flags().String("reason", "", "The factors that should cause the email address to be added to the suppression list for your account.")
-	sesv2_putSuppressedDestinationCmd.MarkFlagRequired("email-address")
-	sesv2_putSuppressedDestinationCmd.MarkFlagRequired("reason")
+		sesv2_putSuppressedDestinationCmd.Flags().String("email-address", "", "The email address that should be added to the suppression list for your account.")
+		sesv2_putSuppressedDestinationCmd.Flags().String("reason", "", "The factors that should cause the email address to be added to the suppression list for your account.")
+		sesv2_putSuppressedDestinationCmd.MarkFlagRequired("email-address")
+		sesv2_putSuppressedDestinationCmd.MarkFlagRequired("reason")
+	})
 	sesv2Cmd.AddCommand(sesv2_putSuppressedDestinationCmd)
 }

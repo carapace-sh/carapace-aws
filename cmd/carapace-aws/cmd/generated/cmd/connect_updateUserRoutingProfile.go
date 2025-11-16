@@ -12,13 +12,15 @@ var connect_updateUserRoutingProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateUserRoutingProfileCmd).Standalone()
+	carapace.Gen(connect_updateUserRoutingProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateUserRoutingProfileCmd).Standalone()
 
-	connect_updateUserRoutingProfileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateUserRoutingProfileCmd.Flags().String("routing-profile-id", "", "The identifier of the routing profile for the user.")
-	connect_updateUserRoutingProfileCmd.Flags().String("user-id", "", "The identifier of the user account.")
-	connect_updateUserRoutingProfileCmd.MarkFlagRequired("instance-id")
-	connect_updateUserRoutingProfileCmd.MarkFlagRequired("routing-profile-id")
-	connect_updateUserRoutingProfileCmd.MarkFlagRequired("user-id")
+		connect_updateUserRoutingProfileCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateUserRoutingProfileCmd.Flags().String("routing-profile-id", "", "The identifier of the routing profile for the user.")
+		connect_updateUserRoutingProfileCmd.Flags().String("user-id", "", "The identifier of the user account.")
+		connect_updateUserRoutingProfileCmd.MarkFlagRequired("instance-id")
+		connect_updateUserRoutingProfileCmd.MarkFlagRequired("routing-profile-id")
+		connect_updateUserRoutingProfileCmd.MarkFlagRequired("user-id")
+	})
 	connectCmd.AddCommand(connect_updateUserRoutingProfileCmd)
 }

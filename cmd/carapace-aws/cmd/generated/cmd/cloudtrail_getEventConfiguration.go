@@ -12,8 +12,10 @@ var cloudtrail_getEventConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_getEventConfigurationCmd).Standalone()
+	carapace.Gen(cloudtrail_getEventConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_getEventConfigurationCmd).Standalone()
 
-	cloudtrail_getEventConfigurationCmd.Flags().String("event-data-store", "", "The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which you want to retrieve event configuration settings.")
+		cloudtrail_getEventConfigurationCmd.Flags().String("event-data-store", "", "The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which you want to retrieve event configuration settings.")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_getEventConfigurationCmd)
 }

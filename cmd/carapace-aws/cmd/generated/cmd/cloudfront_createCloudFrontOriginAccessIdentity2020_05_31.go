@@ -12,9 +12,11 @@ var cloudfront_createCloudFrontOriginAccessIdentity2020_05_31Cmd = &cobra.Comman
 }
 
 func init() {
-	carapace.Gen(cloudfront_createCloudFrontOriginAccessIdentity2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createCloudFrontOriginAccessIdentity2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createCloudFrontOriginAccessIdentity2020_05_31Cmd).Standalone()
 
-	cloudfront_createCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("cloud-front-origin-access-identity-config", "", "The current configuration information for the identity.")
-	cloudfront_createCloudFrontOriginAccessIdentity2020_05_31Cmd.MarkFlagRequired("cloud-front-origin-access-identity-config")
+		cloudfront_createCloudFrontOriginAccessIdentity2020_05_31Cmd.Flags().String("cloud-front-origin-access-identity-config", "", "The current configuration information for the identity.")
+		cloudfront_createCloudFrontOriginAccessIdentity2020_05_31Cmd.MarkFlagRequired("cloud-front-origin-access-identity-config")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createCloudFrontOriginAccessIdentity2020_05_31Cmd)
 }

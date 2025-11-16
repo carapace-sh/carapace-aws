@@ -12,9 +12,11 @@ var cloudfront_getContinuousDeploymentPolicyConfig2020_05_31Cmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(cloudfront_getContinuousDeploymentPolicyConfig2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getContinuousDeploymentPolicyConfig2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getContinuousDeploymentPolicyConfig2020_05_31Cmd).Standalone()
 
-	cloudfront_getContinuousDeploymentPolicyConfig2020_05_31Cmd.Flags().String("id", "", "The identifier of the continuous deployment policy whose configuration you are getting.")
-	cloudfront_getContinuousDeploymentPolicyConfig2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getContinuousDeploymentPolicyConfig2020_05_31Cmd.Flags().String("id", "", "The identifier of the continuous deployment policy whose configuration you are getting.")
+		cloudfront_getContinuousDeploymentPolicyConfig2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getContinuousDeploymentPolicyConfig2020_05_31Cmd)
 }

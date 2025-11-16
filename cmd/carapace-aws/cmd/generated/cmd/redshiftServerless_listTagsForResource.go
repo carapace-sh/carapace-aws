@@ -12,9 +12,11 @@ var redshiftServerless_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftServerless_listTagsForResourceCmd).Standalone()
+	carapace.Gen(redshiftServerless_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftServerless_listTagsForResourceCmd).Standalone()
 
-	redshiftServerless_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to list tags for.")
-	redshiftServerless_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		redshiftServerless_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to list tags for.")
+		redshiftServerless_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	redshiftServerlessCmd.AddCommand(redshiftServerless_listTagsForResourceCmd)
 }

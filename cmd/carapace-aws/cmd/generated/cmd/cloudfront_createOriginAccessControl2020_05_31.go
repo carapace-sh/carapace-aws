@@ -12,9 +12,11 @@ var cloudfront_createOriginAccessControl2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_createOriginAccessControl2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createOriginAccessControl2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createOriginAccessControl2020_05_31Cmd).Standalone()
 
-	cloudfront_createOriginAccessControl2020_05_31Cmd.Flags().String("origin-access-control-config", "", "Contains the origin access control.")
-	cloudfront_createOriginAccessControl2020_05_31Cmd.MarkFlagRequired("origin-access-control-config")
+		cloudfront_createOriginAccessControl2020_05_31Cmd.Flags().String("origin-access-control-config", "", "Contains the origin access control.")
+		cloudfront_createOriginAccessControl2020_05_31Cmd.MarkFlagRequired("origin-access-control-config")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createOriginAccessControl2020_05_31Cmd)
 }

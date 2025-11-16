@@ -12,9 +12,11 @@ var apprunner_describeServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_describeServiceCmd).Standalone()
+	carapace.Gen(apprunner_describeServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_describeServiceCmd).Standalone()
 
-	apprunner_describeServiceCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want a description for.")
-	apprunner_describeServiceCmd.MarkFlagRequired("service-arn")
+		apprunner_describeServiceCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want a description for.")
+		apprunner_describeServiceCmd.MarkFlagRequired("service-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_describeServiceCmd)
 }

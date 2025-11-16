@@ -12,9 +12,11 @@ var transcribe_getCallAnalyticsCategoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_getCallAnalyticsCategoryCmd).Standalone()
+	carapace.Gen(transcribe_getCallAnalyticsCategoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_getCallAnalyticsCategoryCmd).Standalone()
 
-	transcribe_getCallAnalyticsCategoryCmd.Flags().String("category-name", "", "The name of the Call Analytics category you want information about.")
-	transcribe_getCallAnalyticsCategoryCmd.MarkFlagRequired("category-name")
+		transcribe_getCallAnalyticsCategoryCmd.Flags().String("category-name", "", "The name of the Call Analytics category you want information about.")
+		transcribe_getCallAnalyticsCategoryCmd.MarkFlagRequired("category-name")
+	})
 	transcribeCmd.AddCommand(transcribe_getCallAnalyticsCategoryCmd)
 }

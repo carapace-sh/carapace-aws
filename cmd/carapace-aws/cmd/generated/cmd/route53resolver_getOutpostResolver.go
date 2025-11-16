@@ -12,9 +12,11 @@ var route53resolver_getOutpostResolverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_getOutpostResolverCmd).Standalone()
+	carapace.Gen(route53resolver_getOutpostResolverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_getOutpostResolverCmd).Standalone()
 
-	route53resolver_getOutpostResolverCmd.Flags().String("id", "", "The ID of the Resolver on the Outpost.")
-	route53resolver_getOutpostResolverCmd.MarkFlagRequired("id")
+		route53resolver_getOutpostResolverCmd.Flags().String("id", "", "The ID of the Resolver on the Outpost.")
+		route53resolver_getOutpostResolverCmd.MarkFlagRequired("id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_getOutpostResolverCmd)
 }

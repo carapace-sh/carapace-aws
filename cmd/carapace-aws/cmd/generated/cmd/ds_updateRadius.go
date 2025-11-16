@@ -12,11 +12,13 @@ var ds_updateRadiusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_updateRadiusCmd).Standalone()
+	carapace.Gen(ds_updateRadiusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_updateRadiusCmd).Standalone()
 
-	ds_updateRadiusCmd.Flags().String("directory-id", "", "The identifier of the directory for which to update the RADIUS server information.")
-	ds_updateRadiusCmd.Flags().String("radius-settings", "", "A [RadiusSettings]() object that contains information about the RADIUS server.")
-	ds_updateRadiusCmd.MarkFlagRequired("directory-id")
-	ds_updateRadiusCmd.MarkFlagRequired("radius-settings")
+		ds_updateRadiusCmd.Flags().String("directory-id", "", "The identifier of the directory for which to update the RADIUS server information.")
+		ds_updateRadiusCmd.Flags().String("radius-settings", "", "A [RadiusSettings]() object that contains information about the RADIUS server.")
+		ds_updateRadiusCmd.MarkFlagRequired("directory-id")
+		ds_updateRadiusCmd.MarkFlagRequired("radius-settings")
+	})
 	dsCmd.AddCommand(ds_updateRadiusCmd)
 }

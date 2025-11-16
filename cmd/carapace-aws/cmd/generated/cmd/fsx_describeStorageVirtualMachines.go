@@ -12,11 +12,13 @@ var fsx_describeStorageVirtualMachinesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_describeStorageVirtualMachinesCmd).Standalone()
+	carapace.Gen(fsx_describeStorageVirtualMachinesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_describeStorageVirtualMachinesCmd).Standalone()
 
-	fsx_describeStorageVirtualMachinesCmd.Flags().String("filters", "", "Enter a filter name:value pair to view a select set of SVMs.")
-	fsx_describeStorageVirtualMachinesCmd.Flags().String("max-results", "", "")
-	fsx_describeStorageVirtualMachinesCmd.Flags().String("next-token", "", "")
-	fsx_describeStorageVirtualMachinesCmd.Flags().String("storage-virtual-machine-ids", "", "Enter the ID of one or more SVMs that you want to view.")
+		fsx_describeStorageVirtualMachinesCmd.Flags().String("filters", "", "Enter a filter name:value pair to view a select set of SVMs.")
+		fsx_describeStorageVirtualMachinesCmd.Flags().String("max-results", "", "")
+		fsx_describeStorageVirtualMachinesCmd.Flags().String("next-token", "", "")
+		fsx_describeStorageVirtualMachinesCmd.Flags().String("storage-virtual-machine-ids", "", "Enter the ID of one or more SVMs that you want to view.")
+	})
 	fsxCmd.AddCommand(fsx_describeStorageVirtualMachinesCmd)
 }

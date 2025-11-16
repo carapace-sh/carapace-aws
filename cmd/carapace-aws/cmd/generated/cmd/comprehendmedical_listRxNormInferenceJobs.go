@@ -12,10 +12,12 @@ var comprehendmedical_listRxNormInferenceJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_listRxNormInferenceJobsCmd).Standalone()
+	carapace.Gen(comprehendmedical_listRxNormInferenceJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_listRxNormInferenceJobsCmd).Standalone()
 
-	comprehendmedical_listRxNormInferenceJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
-	comprehendmedical_listRxNormInferenceJobsCmd.Flags().String("max-results", "", "Identifies the next page of results to return.")
-	comprehendmedical_listRxNormInferenceJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehendmedical_listRxNormInferenceJobsCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
+		comprehendmedical_listRxNormInferenceJobsCmd.Flags().String("max-results", "", "Identifies the next page of results to return.")
+		comprehendmedical_listRxNormInferenceJobsCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_listRxNormInferenceJobsCmd)
 }

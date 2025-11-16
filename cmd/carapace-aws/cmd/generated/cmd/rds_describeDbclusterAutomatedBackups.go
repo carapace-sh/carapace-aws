@@ -12,12 +12,14 @@ var rds_describeDbclusterAutomatedBackupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_describeDbclusterAutomatedBackupsCmd).Standalone()
+	carapace.Gen(rds_describeDbclusterAutomatedBackupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_describeDbclusterAutomatedBackupsCmd).Standalone()
 
-	rds_describeDbclusterAutomatedBackupsCmd.Flags().String("db-cluster-resource-id", "", "The resource ID of the DB cluster that is the source of the automated backup.")
-	rds_describeDbclusterAutomatedBackupsCmd.Flags().String("dbcluster-identifier", "", "(Optional) The user-supplied DB cluster identifier.")
-	rds_describeDbclusterAutomatedBackupsCmd.Flags().String("filters", "", "A filter that specifies which resources to return based on status.")
-	rds_describeDbclusterAutomatedBackupsCmd.Flags().String("marker", "", "The pagination token provided in the previous request.")
-	rds_describeDbclusterAutomatedBackupsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		rds_describeDbclusterAutomatedBackupsCmd.Flags().String("db-cluster-resource-id", "", "The resource ID of the DB cluster that is the source of the automated backup.")
+		rds_describeDbclusterAutomatedBackupsCmd.Flags().String("dbcluster-identifier", "", "(Optional) The user-supplied DB cluster identifier.")
+		rds_describeDbclusterAutomatedBackupsCmd.Flags().String("filters", "", "A filter that specifies which resources to return based on status.")
+		rds_describeDbclusterAutomatedBackupsCmd.Flags().String("marker", "", "The pagination token provided in the previous request.")
+		rds_describeDbclusterAutomatedBackupsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	})
 	rdsCmd.AddCommand(rds_describeDbclusterAutomatedBackupsCmd)
 }

@@ -12,9 +12,11 @@ var rum_deleteAppMonitorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rum_deleteAppMonitorCmd).Standalone()
+	carapace.Gen(rum_deleteAppMonitorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rum_deleteAppMonitorCmd).Standalone()
 
-	rum_deleteAppMonitorCmd.Flags().String("name", "", "The name of the app monitor to delete.")
-	rum_deleteAppMonitorCmd.MarkFlagRequired("name")
+		rum_deleteAppMonitorCmd.Flags().String("name", "", "The name of the app monitor to delete.")
+		rum_deleteAppMonitorCmd.MarkFlagRequired("name")
+	})
 	rumCmd.AddCommand(rum_deleteAppMonitorCmd)
 }

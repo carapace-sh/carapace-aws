@@ -12,9 +12,11 @@ var mailmanager_deleteAddonInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_deleteAddonInstanceCmd).Standalone()
+	carapace.Gen(mailmanager_deleteAddonInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_deleteAddonInstanceCmd).Standalone()
 
-	mailmanager_deleteAddonInstanceCmd.Flags().String("addon-instance-id", "", "The Add On instance ID to delete.")
-	mailmanager_deleteAddonInstanceCmd.MarkFlagRequired("addon-instance-id")
+		mailmanager_deleteAddonInstanceCmd.Flags().String("addon-instance-id", "", "The Add On instance ID to delete.")
+		mailmanager_deleteAddonInstanceCmd.MarkFlagRequired("addon-instance-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_deleteAddonInstanceCmd)
 }

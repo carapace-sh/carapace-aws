@@ -12,11 +12,13 @@ var iot_attachSecurityProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_attachSecurityProfileCmd).Standalone()
+	carapace.Gen(iot_attachSecurityProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_attachSecurityProfileCmd).Standalone()
 
-	iot_attachSecurityProfileCmd.Flags().String("security-profile-name", "", "The security profile that is attached.")
-	iot_attachSecurityProfileCmd.Flags().String("security-profile-target-arn", "", "The ARN of the target (thing group) to which the security profile is attached.")
-	iot_attachSecurityProfileCmd.MarkFlagRequired("security-profile-name")
-	iot_attachSecurityProfileCmd.MarkFlagRequired("security-profile-target-arn")
+		iot_attachSecurityProfileCmd.Flags().String("security-profile-name", "", "The security profile that is attached.")
+		iot_attachSecurityProfileCmd.Flags().String("security-profile-target-arn", "", "The ARN of the target (thing group) to which the security profile is attached.")
+		iot_attachSecurityProfileCmd.MarkFlagRequired("security-profile-name")
+		iot_attachSecurityProfileCmd.MarkFlagRequired("security-profile-target-arn")
+	})
 	iotCmd.AddCommand(iot_attachSecurityProfileCmd)
 }

@@ -12,9 +12,11 @@ var cloudfront_getFieldLevelEncryptionProfileConfig2020_05_31Cmd = &cobra.Comman
 }
 
 func init() {
-	carapace.Gen(cloudfront_getFieldLevelEncryptionProfileConfig2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getFieldLevelEncryptionProfileConfig2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getFieldLevelEncryptionProfileConfig2020_05_31Cmd).Standalone()
 
-	cloudfront_getFieldLevelEncryptionProfileConfig2020_05_31Cmd.Flags().String("id", "", "Get the ID for the field-level encryption profile configuration information.")
-	cloudfront_getFieldLevelEncryptionProfileConfig2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getFieldLevelEncryptionProfileConfig2020_05_31Cmd.Flags().String("id", "", "Get the ID for the field-level encryption profile configuration information.")
+		cloudfront_getFieldLevelEncryptionProfileConfig2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getFieldLevelEncryptionProfileConfig2020_05_31Cmd)
 }

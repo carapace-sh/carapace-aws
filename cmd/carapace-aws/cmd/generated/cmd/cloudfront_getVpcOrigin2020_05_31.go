@@ -12,9 +12,11 @@ var cloudfront_getVpcOrigin2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_getVpcOrigin2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getVpcOrigin2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getVpcOrigin2020_05_31Cmd).Standalone()
 
-	cloudfront_getVpcOrigin2020_05_31Cmd.Flags().String("id", "", "The VPC origin ID.")
-	cloudfront_getVpcOrigin2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getVpcOrigin2020_05_31Cmd.Flags().String("id", "", "The VPC origin ID.")
+		cloudfront_getVpcOrigin2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getVpcOrigin2020_05_31Cmd)
 }

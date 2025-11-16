@@ -12,9 +12,11 @@ var elbv2_deleteListenerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_deleteListenerCmd).Standalone()
+	carapace.Gen(elbv2_deleteListenerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_deleteListenerCmd).Standalone()
 
-	elbv2_deleteListenerCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
-	elbv2_deleteListenerCmd.MarkFlagRequired("listener-arn")
+		elbv2_deleteListenerCmd.Flags().String("listener-arn", "", "The Amazon Resource Name (ARN) of the listener.")
+		elbv2_deleteListenerCmd.MarkFlagRequired("listener-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_deleteListenerCmd)
 }

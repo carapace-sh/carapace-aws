@@ -12,11 +12,13 @@ var workmail_deleteImpersonationRoleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_deleteImpersonationRoleCmd).Standalone()
+	carapace.Gen(workmail_deleteImpersonationRoleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_deleteImpersonationRoleCmd).Standalone()
 
-	workmail_deleteImpersonationRoleCmd.Flags().String("impersonation-role-id", "", "The ID of the impersonation role to delete.")
-	workmail_deleteImpersonationRoleCmd.Flags().String("organization-id", "", "The WorkMail organization from which to delete the impersonation role.")
-	workmail_deleteImpersonationRoleCmd.MarkFlagRequired("impersonation-role-id")
-	workmail_deleteImpersonationRoleCmd.MarkFlagRequired("organization-id")
+		workmail_deleteImpersonationRoleCmd.Flags().String("impersonation-role-id", "", "The ID of the impersonation role to delete.")
+		workmail_deleteImpersonationRoleCmd.Flags().String("organization-id", "", "The WorkMail organization from which to delete the impersonation role.")
+		workmail_deleteImpersonationRoleCmd.MarkFlagRequired("impersonation-role-id")
+		workmail_deleteImpersonationRoleCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_deleteImpersonationRoleCmd)
 }

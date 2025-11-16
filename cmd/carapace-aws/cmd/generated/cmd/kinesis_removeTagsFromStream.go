@@ -12,11 +12,13 @@ var kinesis_removeTagsFromStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesis_removeTagsFromStreamCmd).Standalone()
+	carapace.Gen(kinesis_removeTagsFromStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesis_removeTagsFromStreamCmd).Standalone()
 
-	kinesis_removeTagsFromStreamCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
-	kinesis_removeTagsFromStreamCmd.Flags().String("stream-name", "", "The name of the stream.")
-	kinesis_removeTagsFromStreamCmd.Flags().String("tag-keys", "", "A list of tag keys.")
-	kinesis_removeTagsFromStreamCmd.MarkFlagRequired("tag-keys")
+		kinesis_removeTagsFromStreamCmd.Flags().String("stream-arn", "", "The ARN of the stream.")
+		kinesis_removeTagsFromStreamCmd.Flags().String("stream-name", "", "The name of the stream.")
+		kinesis_removeTagsFromStreamCmd.Flags().String("tag-keys", "", "A list of tag keys.")
+		kinesis_removeTagsFromStreamCmd.MarkFlagRequired("tag-keys")
+	})
 	kinesisCmd.AddCommand(kinesis_removeTagsFromStreamCmd)
 }

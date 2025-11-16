@@ -12,10 +12,12 @@ var neptunedata_getMlmodelTrainingJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_getMlmodelTrainingJobCmd).Standalone()
+	carapace.Gen(neptunedata_getMlmodelTrainingJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_getMlmodelTrainingJobCmd).Standalone()
 
-	neptunedata_getMlmodelTrainingJobCmd.Flags().String("id", "", "The unique identifier of the model-training job to retrieve.")
-	neptunedata_getMlmodelTrainingJobCmd.Flags().String("neptune-iam-role-arn", "", "The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.")
-	neptunedata_getMlmodelTrainingJobCmd.MarkFlagRequired("id")
+		neptunedata_getMlmodelTrainingJobCmd.Flags().String("id", "", "The unique identifier of the model-training job to retrieve.")
+		neptunedata_getMlmodelTrainingJobCmd.Flags().String("neptune-iam-role-arn", "", "The ARN of an IAM role that provides Neptune access to SageMaker and Amazon S3 resources.")
+		neptunedata_getMlmodelTrainingJobCmd.MarkFlagRequired("id")
+	})
 	neptunedataCmd.AddCommand(neptunedata_getMlmodelTrainingJobCmd)
 }

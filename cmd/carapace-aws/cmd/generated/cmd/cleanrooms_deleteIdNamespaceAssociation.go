@@ -12,11 +12,13 @@ var cleanrooms_deleteIdNamespaceAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_deleteIdNamespaceAssociationCmd).Standalone()
+	carapace.Gen(cleanrooms_deleteIdNamespaceAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_deleteIdNamespaceAssociationCmd).Standalone()
 
-	cleanrooms_deleteIdNamespaceAssociationCmd.Flags().String("id-namespace-association-identifier", "", "The unique identifier of the ID namespace association that you want to delete.")
-	cleanrooms_deleteIdNamespaceAssociationCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID namespace association that you want to delete.")
-	cleanrooms_deleteIdNamespaceAssociationCmd.MarkFlagRequired("id-namespace-association-identifier")
-	cleanrooms_deleteIdNamespaceAssociationCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_deleteIdNamespaceAssociationCmd.Flags().String("id-namespace-association-identifier", "", "The unique identifier of the ID namespace association that you want to delete.")
+		cleanrooms_deleteIdNamespaceAssociationCmd.Flags().String("membership-identifier", "", "The unique identifier of the membership that contains the ID namespace association that you want to delete.")
+		cleanrooms_deleteIdNamespaceAssociationCmd.MarkFlagRequired("id-namespace-association-identifier")
+		cleanrooms_deleteIdNamespaceAssociationCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_deleteIdNamespaceAssociationCmd)
 }

@@ -12,9 +12,11 @@ var applicationInsights_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(applicationInsights_listTagsForResourceCmd).Standalone()
+	carapace.Gen(applicationInsights_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(applicationInsights_listTagsForResourceCmd).Standalone()
 
-	applicationInsights_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the application that you want to retrieve tag information for.")
-	applicationInsights_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		applicationInsights_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the application that you want to retrieve tag information for.")
+		applicationInsights_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	applicationInsightsCmd.AddCommand(applicationInsights_listTagsForResourceCmd)
 }

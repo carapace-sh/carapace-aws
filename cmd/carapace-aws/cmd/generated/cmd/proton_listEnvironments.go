@@ -12,10 +12,12 @@ var proton_listEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_listEnvironmentsCmd).Standalone()
+	carapace.Gen(proton_listEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_listEnvironmentsCmd).Standalone()
 
-	proton_listEnvironmentsCmd.Flags().String("environment-templates", "", "An array of the versions of the environment template.")
-	proton_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of environments to list.")
-	proton_listEnvironmentsCmd.Flags().String("next-token", "", "A token that indicates the location of the next environment in the array of environments, after the list of environments that was previously requested.")
+		proton_listEnvironmentsCmd.Flags().String("environment-templates", "", "An array of the versions of the environment template.")
+		proton_listEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of environments to list.")
+		proton_listEnvironmentsCmd.Flags().String("next-token", "", "A token that indicates the location of the next environment in the array of environments, after the list of environments that was previously requested.")
+	})
 	protonCmd.AddCommand(proton_listEnvironmentsCmd)
 }

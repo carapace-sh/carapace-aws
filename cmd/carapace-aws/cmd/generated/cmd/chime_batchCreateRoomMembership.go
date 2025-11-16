@@ -12,13 +12,15 @@ var chime_batchCreateRoomMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_batchCreateRoomMembershipCmd).Standalone()
+	carapace.Gen(chime_batchCreateRoomMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_batchCreateRoomMembershipCmd).Standalone()
 
-	chime_batchCreateRoomMembershipCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_batchCreateRoomMembershipCmd.Flags().String("membership-item-list", "", "The list of membership items.")
-	chime_batchCreateRoomMembershipCmd.Flags().String("room-id", "", "The room ID.")
-	chime_batchCreateRoomMembershipCmd.MarkFlagRequired("account-id")
-	chime_batchCreateRoomMembershipCmd.MarkFlagRequired("membership-item-list")
-	chime_batchCreateRoomMembershipCmd.MarkFlagRequired("room-id")
+		chime_batchCreateRoomMembershipCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_batchCreateRoomMembershipCmd.Flags().String("membership-item-list", "", "The list of membership items.")
+		chime_batchCreateRoomMembershipCmd.Flags().String("room-id", "", "The room ID.")
+		chime_batchCreateRoomMembershipCmd.MarkFlagRequired("account-id")
+		chime_batchCreateRoomMembershipCmd.MarkFlagRequired("membership-item-list")
+		chime_batchCreateRoomMembershipCmd.MarkFlagRequired("room-id")
+	})
 	chimeCmd.AddCommand(chime_batchCreateRoomMembershipCmd)
 }

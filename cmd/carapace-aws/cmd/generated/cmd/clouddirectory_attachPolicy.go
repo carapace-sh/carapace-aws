@@ -12,13 +12,15 @@ var clouddirectory_attachPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_attachPolicyCmd).Standalone()
+	carapace.Gen(clouddirectory_attachPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_attachPolicyCmd).Standalone()
 
-	clouddirectory_attachPolicyCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]() where both objects reside.")
-	clouddirectory_attachPolicyCmd.Flags().String("object-reference", "", "The reference that identifies the object to which the policy will be attached.")
-	clouddirectory_attachPolicyCmd.Flags().String("policy-reference", "", "The reference that is associated with the policy object.")
-	clouddirectory_attachPolicyCmd.MarkFlagRequired("directory-arn")
-	clouddirectory_attachPolicyCmd.MarkFlagRequired("object-reference")
-	clouddirectory_attachPolicyCmd.MarkFlagRequired("policy-reference")
+		clouddirectory_attachPolicyCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]() where both objects reside.")
+		clouddirectory_attachPolicyCmd.Flags().String("object-reference", "", "The reference that identifies the object to which the policy will be attached.")
+		clouddirectory_attachPolicyCmd.Flags().String("policy-reference", "", "The reference that is associated with the policy object.")
+		clouddirectory_attachPolicyCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_attachPolicyCmd.MarkFlagRequired("object-reference")
+		clouddirectory_attachPolicyCmd.MarkFlagRequired("policy-reference")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_attachPolicyCmd)
 }

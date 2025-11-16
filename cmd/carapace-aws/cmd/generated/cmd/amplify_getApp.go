@@ -12,9 +12,11 @@ var amplify_getAppCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_getAppCmd).Standalone()
+	carapace.Gen(amplify_getAppCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_getAppCmd).Standalone()
 
-	amplify_getAppCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_getAppCmd.MarkFlagRequired("app-id")
+		amplify_getAppCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_getAppCmd.MarkFlagRequired("app-id")
+	})
 	amplifyCmd.AddCommand(amplify_getAppCmd)
 }

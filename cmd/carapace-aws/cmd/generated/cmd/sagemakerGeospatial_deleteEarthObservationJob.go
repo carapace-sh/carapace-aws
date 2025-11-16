@@ -12,9 +12,11 @@ var sagemakerGeospatial_deleteEarthObservationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerGeospatial_deleteEarthObservationJobCmd).Standalone()
+	carapace.Gen(sagemakerGeospatial_deleteEarthObservationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerGeospatial_deleteEarthObservationJobCmd).Standalone()
 
-	sagemakerGeospatial_deleteEarthObservationJobCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Earth Observation job being deleted.")
-	sagemakerGeospatial_deleteEarthObservationJobCmd.MarkFlagRequired("arn")
+		sagemakerGeospatial_deleteEarthObservationJobCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Earth Observation job being deleted.")
+		sagemakerGeospatial_deleteEarthObservationJobCmd.MarkFlagRequired("arn")
+	})
 	sagemakerGeospatialCmd.AddCommand(sagemakerGeospatial_deleteEarthObservationJobCmd)
 }

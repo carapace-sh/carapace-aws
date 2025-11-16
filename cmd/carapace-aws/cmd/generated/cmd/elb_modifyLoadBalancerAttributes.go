@@ -12,11 +12,13 @@ var elb_modifyLoadBalancerAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_modifyLoadBalancerAttributesCmd).Standalone()
+	carapace.Gen(elb_modifyLoadBalancerAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_modifyLoadBalancerAttributesCmd).Standalone()
 
-	elb_modifyLoadBalancerAttributesCmd.Flags().String("load-balancer-attributes", "", "The attributes for the load balancer.")
-	elb_modifyLoadBalancerAttributesCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_modifyLoadBalancerAttributesCmd.MarkFlagRequired("load-balancer-attributes")
-	elb_modifyLoadBalancerAttributesCmd.MarkFlagRequired("load-balancer-name")
+		elb_modifyLoadBalancerAttributesCmd.Flags().String("load-balancer-attributes", "", "The attributes for the load balancer.")
+		elb_modifyLoadBalancerAttributesCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_modifyLoadBalancerAttributesCmd.MarkFlagRequired("load-balancer-attributes")
+		elb_modifyLoadBalancerAttributesCmd.MarkFlagRequired("load-balancer-name")
+	})
 	elbCmd.AddCommand(elb_modifyLoadBalancerAttributesCmd)
 }

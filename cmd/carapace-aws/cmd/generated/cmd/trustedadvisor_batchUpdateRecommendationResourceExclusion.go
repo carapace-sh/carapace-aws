@@ -12,9 +12,11 @@ var trustedadvisor_batchUpdateRecommendationResourceExclusionCmd = &cobra.Comman
 }
 
 func init() {
-	carapace.Gen(trustedadvisor_batchUpdateRecommendationResourceExclusionCmd).Standalone()
+	carapace.Gen(trustedadvisor_batchUpdateRecommendationResourceExclusionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(trustedadvisor_batchUpdateRecommendationResourceExclusionCmd).Standalone()
 
-	trustedadvisor_batchUpdateRecommendationResourceExclusionCmd.Flags().String("recommendation-resource-exclusions", "", "A list of recommendation resource ARNs and exclusion status to update")
-	trustedadvisor_batchUpdateRecommendationResourceExclusionCmd.MarkFlagRequired("recommendation-resource-exclusions")
+		trustedadvisor_batchUpdateRecommendationResourceExclusionCmd.Flags().String("recommendation-resource-exclusions", "", "A list of recommendation resource ARNs and exclusion status to update")
+		trustedadvisor_batchUpdateRecommendationResourceExclusionCmd.MarkFlagRequired("recommendation-resource-exclusions")
+	})
 	trustedadvisorCmd.AddCommand(trustedadvisor_batchUpdateRecommendationResourceExclusionCmd)
 }

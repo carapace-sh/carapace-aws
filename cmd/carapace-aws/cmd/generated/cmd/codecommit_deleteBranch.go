@@ -12,11 +12,13 @@ var codecommit_deleteBranchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_deleteBranchCmd).Standalone()
+	carapace.Gen(codecommit_deleteBranchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_deleteBranchCmd).Standalone()
 
-	codecommit_deleteBranchCmd.Flags().String("branch-name", "", "The name of the branch to delete.")
-	codecommit_deleteBranchCmd.Flags().String("repository-name", "", "The name of the repository that contains the branch to be deleted.")
-	codecommit_deleteBranchCmd.MarkFlagRequired("branch-name")
-	codecommit_deleteBranchCmd.MarkFlagRequired("repository-name")
+		codecommit_deleteBranchCmd.Flags().String("branch-name", "", "The name of the branch to delete.")
+		codecommit_deleteBranchCmd.Flags().String("repository-name", "", "The name of the repository that contains the branch to be deleted.")
+		codecommit_deleteBranchCmd.MarkFlagRequired("branch-name")
+		codecommit_deleteBranchCmd.MarkFlagRequired("repository-name")
+	})
 	codecommitCmd.AddCommand(codecommit_deleteBranchCmd)
 }

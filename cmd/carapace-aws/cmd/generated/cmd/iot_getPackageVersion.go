@@ -12,11 +12,13 @@ var iot_getPackageVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getPackageVersionCmd).Standalone()
+	carapace.Gen(iot_getPackageVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getPackageVersionCmd).Standalone()
 
-	iot_getPackageVersionCmd.Flags().String("package-name", "", "The name of the associated package.")
-	iot_getPackageVersionCmd.Flags().String("version-name", "", "The name of the target package version.")
-	iot_getPackageVersionCmd.MarkFlagRequired("package-name")
-	iot_getPackageVersionCmd.MarkFlagRequired("version-name")
+		iot_getPackageVersionCmd.Flags().String("package-name", "", "The name of the associated package.")
+		iot_getPackageVersionCmd.Flags().String("version-name", "", "The name of the target package version.")
+		iot_getPackageVersionCmd.MarkFlagRequired("package-name")
+		iot_getPackageVersionCmd.MarkFlagRequired("version-name")
+	})
 	iotCmd.AddCommand(iot_getPackageVersionCmd)
 }

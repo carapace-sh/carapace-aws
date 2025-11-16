@@ -12,9 +12,11 @@ var sagemaker_startMlflowTrackingServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_startMlflowTrackingServerCmd).Standalone()
+	carapace.Gen(sagemaker_startMlflowTrackingServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_startMlflowTrackingServerCmd).Standalone()
 
-	sagemaker_startMlflowTrackingServerCmd.Flags().String("tracking-server-name", "", "The name of the tracking server to start.")
-	sagemaker_startMlflowTrackingServerCmd.MarkFlagRequired("tracking-server-name")
+		sagemaker_startMlflowTrackingServerCmd.Flags().String("tracking-server-name", "", "The name of the tracking server to start.")
+		sagemaker_startMlflowTrackingServerCmd.MarkFlagRequired("tracking-server-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_startMlflowTrackingServerCmd)
 }

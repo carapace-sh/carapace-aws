@@ -12,11 +12,13 @@ var ssmIncidents_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmIncidents_tagResourceCmd).Standalone()
+	carapace.Gen(ssmIncidents_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmIncidents_tagResourceCmd).Standalone()
 
-	ssmIncidents_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the response plan you're adding the tags to.")
-	ssmIncidents_tagResourceCmd.Flags().String("tags", "", "A list of tags to add to the response plan.")
-	ssmIncidents_tagResourceCmd.MarkFlagRequired("resource-arn")
-	ssmIncidents_tagResourceCmd.MarkFlagRequired("tags")
+		ssmIncidents_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the response plan you're adding the tags to.")
+		ssmIncidents_tagResourceCmd.Flags().String("tags", "", "A list of tags to add to the response plan.")
+		ssmIncidents_tagResourceCmd.MarkFlagRequired("resource-arn")
+		ssmIncidents_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	ssmIncidentsCmd.AddCommand(ssmIncidents_tagResourceCmd)
 }

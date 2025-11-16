@@ -12,13 +12,15 @@ var connect_searchEmailAddressesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_searchEmailAddressesCmd).Standalone()
+	carapace.Gen(connect_searchEmailAddressesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_searchEmailAddressesCmd).Standalone()
 
-	connect_searchEmailAddressesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_searchEmailAddressesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connect_searchEmailAddressesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	connect_searchEmailAddressesCmd.Flags().String("search-criteria", "", "The search criteria to be used to return email addresses.")
-	connect_searchEmailAddressesCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
-	connect_searchEmailAddressesCmd.MarkFlagRequired("instance-id")
+		connect_searchEmailAddressesCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_searchEmailAddressesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connect_searchEmailAddressesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connect_searchEmailAddressesCmd.Flags().String("search-criteria", "", "The search criteria to be used to return email addresses.")
+		connect_searchEmailAddressesCmd.Flags().String("search-filter", "", "Filters to be applied to search results.")
+		connect_searchEmailAddressesCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_searchEmailAddressesCmd)
 }

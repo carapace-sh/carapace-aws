@@ -12,9 +12,11 @@ var inspector2_updateOrganizationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_updateOrganizationConfigurationCmd).Standalone()
+	carapace.Gen(inspector2_updateOrganizationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_updateOrganizationConfigurationCmd).Standalone()
 
-	inspector2_updateOrganizationConfigurationCmd.Flags().String("auto-enable", "", "Defines which scan types are enabled automatically for new members of your Amazon Inspector organization.")
-	inspector2_updateOrganizationConfigurationCmd.MarkFlagRequired("auto-enable")
+		inspector2_updateOrganizationConfigurationCmd.Flags().String("auto-enable", "", "Defines which scan types are enabled automatically for new members of your Amazon Inspector organization.")
+		inspector2_updateOrganizationConfigurationCmd.MarkFlagRequired("auto-enable")
+	})
 	inspector2Cmd.AddCommand(inspector2_updateOrganizationConfigurationCmd)
 }

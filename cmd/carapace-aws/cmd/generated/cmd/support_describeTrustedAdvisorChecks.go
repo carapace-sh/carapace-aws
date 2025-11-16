@@ -12,9 +12,11 @@ var support_describeTrustedAdvisorChecksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(support_describeTrustedAdvisorChecksCmd).Standalone()
+	carapace.Gen(support_describeTrustedAdvisorChecksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(support_describeTrustedAdvisorChecksCmd).Standalone()
 
-	support_describeTrustedAdvisorChecksCmd.Flags().String("language", "", "The ISO 639-1 code for the language that you want your checks to appear in.")
-	support_describeTrustedAdvisorChecksCmd.MarkFlagRequired("language")
+		support_describeTrustedAdvisorChecksCmd.Flags().String("language", "", "The ISO 639-1 code for the language that you want your checks to appear in.")
+		support_describeTrustedAdvisorChecksCmd.MarkFlagRequired("language")
+	})
 	supportCmd.AddCommand(support_describeTrustedAdvisorChecksCmd)
 }

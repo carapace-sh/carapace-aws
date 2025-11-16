@@ -12,9 +12,11 @@ var pinpointSmsVoice_listConfigurationSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoice_listConfigurationSetsCmd).Standalone()
+	carapace.Gen(pinpointSmsVoice_listConfigurationSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoice_listConfigurationSetsCmd).Standalone()
 
-	pinpointSmsVoice_listConfigurationSetsCmd.Flags().String("next-token", "", "A token returned from a previous call to the API that indicates the position in the list of results.")
-	pinpointSmsVoice_listConfigurationSetsCmd.Flags().String("page-size", "", "Used to specify the number of items that should be returned in the response.")
+		pinpointSmsVoice_listConfigurationSetsCmd.Flags().String("next-token", "", "A token returned from a previous call to the API that indicates the position in the list of results.")
+		pinpointSmsVoice_listConfigurationSetsCmd.Flags().String("page-size", "", "Used to specify the number of items that should be returned in the response.")
+	})
 	pinpointSmsVoiceCmd.AddCommand(pinpointSmsVoice_listConfigurationSetsCmd)
 }

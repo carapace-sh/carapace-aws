@@ -12,10 +12,12 @@ var cognitoIdp_getDeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_getDeviceCmd).Standalone()
+	carapace.Gen(cognitoIdp_getDeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_getDeviceCmd).Standalone()
 
-	cognitoIdp_getDeviceCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
-	cognitoIdp_getDeviceCmd.Flags().String("device-key", "", "The key of the device that you want to get information about.")
-	cognitoIdp_getDeviceCmd.MarkFlagRequired("device-key")
+		cognitoIdp_getDeviceCmd.Flags().String("access-token", "", "A valid access token that Amazon Cognito issued to the currently signed-in user.")
+		cognitoIdp_getDeviceCmd.Flags().String("device-key", "", "The key of the device that you want to get information about.")
+		cognitoIdp_getDeviceCmd.MarkFlagRequired("device-key")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_getDeviceCmd)
 }

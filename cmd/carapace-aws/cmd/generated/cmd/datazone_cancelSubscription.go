@@ -12,11 +12,13 @@ var datazone_cancelSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_cancelSubscriptionCmd).Standalone()
+	carapace.Gen(datazone_cancelSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_cancelSubscriptionCmd).Standalone()
 
-	datazone_cancelSubscriptionCmd.Flags().String("domain-identifier", "", "The unique identifier of the Amazon DataZone domain where the subscription request is being cancelled.")
-	datazone_cancelSubscriptionCmd.Flags().String("identifier", "", "The unique identifier of the subscription that is being cancelled.")
-	datazone_cancelSubscriptionCmd.MarkFlagRequired("domain-identifier")
-	datazone_cancelSubscriptionCmd.MarkFlagRequired("identifier")
+		datazone_cancelSubscriptionCmd.Flags().String("domain-identifier", "", "The unique identifier of the Amazon DataZone domain where the subscription request is being cancelled.")
+		datazone_cancelSubscriptionCmd.Flags().String("identifier", "", "The unique identifier of the subscription that is being cancelled.")
+		datazone_cancelSubscriptionCmd.MarkFlagRequired("domain-identifier")
+		datazone_cancelSubscriptionCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_cancelSubscriptionCmd)
 }

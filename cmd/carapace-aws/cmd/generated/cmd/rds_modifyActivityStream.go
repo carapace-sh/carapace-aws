@@ -12,9 +12,11 @@ var rds_modifyActivityStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_modifyActivityStreamCmd).Standalone()
+	carapace.Gen(rds_modifyActivityStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_modifyActivityStreamCmd).Standalone()
 
-	rds_modifyActivityStreamCmd.Flags().String("audit-policy-state", "", "The audit policy state.")
-	rds_modifyActivityStreamCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server DB instance.")
+		rds_modifyActivityStreamCmd.Flags().String("audit-policy-state", "", "The audit policy state.")
+		rds_modifyActivityStreamCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server DB instance.")
+	})
 	rdsCmd.AddCommand(rds_modifyActivityStreamCmd)
 }

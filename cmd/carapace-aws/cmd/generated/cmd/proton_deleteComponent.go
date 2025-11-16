@@ -12,9 +12,11 @@ var proton_deleteComponentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_deleteComponentCmd).Standalone()
+	carapace.Gen(proton_deleteComponentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_deleteComponentCmd).Standalone()
 
-	proton_deleteComponentCmd.Flags().String("name", "", "The name of the component to delete.")
-	proton_deleteComponentCmd.MarkFlagRequired("name")
+		proton_deleteComponentCmd.Flags().String("name", "", "The name of the component to delete.")
+		proton_deleteComponentCmd.MarkFlagRequired("name")
+	})
 	protonCmd.AddCommand(proton_deleteComponentCmd)
 }

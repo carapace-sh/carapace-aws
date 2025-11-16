@@ -12,9 +12,11 @@ var ssoAdmin_describeInstanceAccessControlAttributeConfigurationCmd = &cobra.Com
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_describeInstanceAccessControlAttributeConfigurationCmd).Standalone()
+	carapace.Gen(ssoAdmin_describeInstanceAccessControlAttributeConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_describeInstanceAccessControlAttributeConfigurationCmd).Standalone()
 
-	ssoAdmin_describeInstanceAccessControlAttributeConfigurationCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
-	ssoAdmin_describeInstanceAccessControlAttributeConfigurationCmd.MarkFlagRequired("instance-arn")
+		ssoAdmin_describeInstanceAccessControlAttributeConfigurationCmd.Flags().String("instance-arn", "", "The ARN of the IAM Identity Center instance under which the operation will be executed.")
+		ssoAdmin_describeInstanceAccessControlAttributeConfigurationCmd.MarkFlagRequired("instance-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_describeInstanceAccessControlAttributeConfigurationCmd)
 }

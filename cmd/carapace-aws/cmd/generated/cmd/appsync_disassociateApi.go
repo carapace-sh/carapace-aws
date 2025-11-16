@@ -12,9 +12,11 @@ var appsync_disassociateApiCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_disassociateApiCmd).Standalone()
+	carapace.Gen(appsync_disassociateApiCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_disassociateApiCmd).Standalone()
 
-	appsync_disassociateApiCmd.Flags().String("domain-name", "", "The domain name.")
-	appsync_disassociateApiCmd.MarkFlagRequired("domain-name")
+		appsync_disassociateApiCmd.Flags().String("domain-name", "", "The domain name.")
+		appsync_disassociateApiCmd.MarkFlagRequired("domain-name")
+	})
 	appsyncCmd.AddCommand(appsync_disassociateApiCmd)
 }

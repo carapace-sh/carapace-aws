@@ -12,9 +12,11 @@ var timestreamQuery_deleteScheduledQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_deleteScheduledQueryCmd).Standalone()
+	carapace.Gen(timestreamQuery_deleteScheduledQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_deleteScheduledQueryCmd).Standalone()
 
-	timestreamQuery_deleteScheduledQueryCmd.Flags().String("scheduled-query-arn", "", "The ARN of the scheduled query.")
-	timestreamQuery_deleteScheduledQueryCmd.MarkFlagRequired("scheduled-query-arn")
+		timestreamQuery_deleteScheduledQueryCmd.Flags().String("scheduled-query-arn", "", "The ARN of the scheduled query.")
+		timestreamQuery_deleteScheduledQueryCmd.MarkFlagRequired("scheduled-query-arn")
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_deleteScheduledQueryCmd)
 }

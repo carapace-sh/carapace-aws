@@ -12,11 +12,13 @@ var ssm_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_listTagsForResourceCmd).Standalone()
+	carapace.Gen(ssm_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_listTagsForResourceCmd).Standalone()
 
-	ssm_listTagsForResourceCmd.Flags().String("resource-id", "", "The resource ID for which you want to see a list of tags.")
-	ssm_listTagsForResourceCmd.Flags().String("resource-type", "", "Returns a list of tags for a specific resource type.")
-	ssm_listTagsForResourceCmd.MarkFlagRequired("resource-id")
-	ssm_listTagsForResourceCmd.MarkFlagRequired("resource-type")
+		ssm_listTagsForResourceCmd.Flags().String("resource-id", "", "The resource ID for which you want to see a list of tags.")
+		ssm_listTagsForResourceCmd.Flags().String("resource-type", "", "Returns a list of tags for a specific resource type.")
+		ssm_listTagsForResourceCmd.MarkFlagRequired("resource-id")
+		ssm_listTagsForResourceCmd.MarkFlagRequired("resource-type")
+	})
 	ssmCmd.AddCommand(ssm_listTagsForResourceCmd)
 }

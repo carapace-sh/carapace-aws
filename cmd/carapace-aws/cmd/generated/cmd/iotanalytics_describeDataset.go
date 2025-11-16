@@ -12,9 +12,11 @@ var iotanalytics_describeDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_describeDatasetCmd).Standalone()
+	carapace.Gen(iotanalytics_describeDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_describeDatasetCmd).Standalone()
 
-	iotanalytics_describeDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset whose information is retrieved.")
-	iotanalytics_describeDatasetCmd.MarkFlagRequired("dataset-name")
+		iotanalytics_describeDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset whose information is retrieved.")
+		iotanalytics_describeDatasetCmd.MarkFlagRequired("dataset-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_describeDatasetCmd)
 }

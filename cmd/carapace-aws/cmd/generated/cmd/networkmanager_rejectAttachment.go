@@ -12,9 +12,11 @@ var networkmanager_rejectAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_rejectAttachmentCmd).Standalone()
+	carapace.Gen(networkmanager_rejectAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_rejectAttachmentCmd).Standalone()
 
-	networkmanager_rejectAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment.")
-	networkmanager_rejectAttachmentCmd.MarkFlagRequired("attachment-id")
+		networkmanager_rejectAttachmentCmd.Flags().String("attachment-id", "", "The ID of the attachment.")
+		networkmanager_rejectAttachmentCmd.MarkFlagRequired("attachment-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_rejectAttachmentCmd)
 }

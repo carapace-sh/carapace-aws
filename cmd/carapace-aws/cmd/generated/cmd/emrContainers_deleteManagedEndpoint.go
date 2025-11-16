@@ -12,11 +12,13 @@ var emrContainers_deleteManagedEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_deleteManagedEndpointCmd).Standalone()
+	carapace.Gen(emrContainers_deleteManagedEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_deleteManagedEndpointCmd).Standalone()
 
-	emrContainers_deleteManagedEndpointCmd.Flags().String("id", "", "The ID of the managed endpoint.")
-	emrContainers_deleteManagedEndpointCmd.Flags().String("virtual-cluster-id", "", "The ID of the endpoint's virtual cluster.")
-	emrContainers_deleteManagedEndpointCmd.MarkFlagRequired("id")
-	emrContainers_deleteManagedEndpointCmd.MarkFlagRequired("virtual-cluster-id")
+		emrContainers_deleteManagedEndpointCmd.Flags().String("id", "", "The ID of the managed endpoint.")
+		emrContainers_deleteManagedEndpointCmd.Flags().String("virtual-cluster-id", "", "The ID of the endpoint's virtual cluster.")
+		emrContainers_deleteManagedEndpointCmd.MarkFlagRequired("id")
+		emrContainers_deleteManagedEndpointCmd.MarkFlagRequired("virtual-cluster-id")
+	})
 	emrContainersCmd.AddCommand(emrContainers_deleteManagedEndpointCmd)
 }

@@ -12,9 +12,11 @@ var codeguruSecurity_getMetricsSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruSecurity_getMetricsSummaryCmd).Standalone()
+	carapace.Gen(codeguruSecurity_getMetricsSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruSecurity_getMetricsSummaryCmd).Standalone()
 
-	codeguruSecurity_getMetricsSummaryCmd.Flags().String("date", "", "The date you want to retrieve summary metrics from, rounded to the nearest day.")
-	codeguruSecurity_getMetricsSummaryCmd.MarkFlagRequired("date")
+		codeguruSecurity_getMetricsSummaryCmd.Flags().String("date", "", "The date you want to retrieve summary metrics from, rounded to the nearest day.")
+		codeguruSecurity_getMetricsSummaryCmd.MarkFlagRequired("date")
+	})
 	codeguruSecurityCmd.AddCommand(codeguruSecurity_getMetricsSummaryCmd)
 }

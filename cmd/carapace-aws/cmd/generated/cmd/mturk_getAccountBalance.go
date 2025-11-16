@@ -12,7 +12,9 @@ var mturk_getAccountBalanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_getAccountBalanceCmd).Standalone()
+	carapace.Gen(mturk_getAccountBalanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_getAccountBalanceCmd).Standalone()
 
+	})
 	mturkCmd.AddCommand(mturk_getAccountBalanceCmd)
 }

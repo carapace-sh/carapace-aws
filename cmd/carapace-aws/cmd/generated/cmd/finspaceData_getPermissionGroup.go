@@ -12,9 +12,11 @@ var finspaceData_getPermissionGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_getPermissionGroupCmd).Standalone()
+	carapace.Gen(finspaceData_getPermissionGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_getPermissionGroupCmd).Standalone()
 
-	finspaceData_getPermissionGroupCmd.Flags().String("permission-group-id", "", "The unique identifier for the permission group.")
-	finspaceData_getPermissionGroupCmd.MarkFlagRequired("permission-group-id")
+		finspaceData_getPermissionGroupCmd.Flags().String("permission-group-id", "", "The unique identifier for the permission group.")
+		finspaceData_getPermissionGroupCmd.MarkFlagRequired("permission-group-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_getPermissionGroupCmd)
 }

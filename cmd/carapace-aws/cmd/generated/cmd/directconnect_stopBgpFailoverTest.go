@@ -12,9 +12,11 @@ var directconnect_stopBgpFailoverTestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_stopBgpFailoverTestCmd).Standalone()
+	carapace.Gen(directconnect_stopBgpFailoverTestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_stopBgpFailoverTestCmd).Standalone()
 
-	directconnect_stopBgpFailoverTestCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface you no longer want to test.")
-	directconnect_stopBgpFailoverTestCmd.MarkFlagRequired("virtual-interface-id")
+		directconnect_stopBgpFailoverTestCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface you no longer want to test.")
+		directconnect_stopBgpFailoverTestCmd.MarkFlagRequired("virtual-interface-id")
+	})
 	directconnectCmd.AddCommand(directconnect_stopBgpFailoverTestCmd)
 }

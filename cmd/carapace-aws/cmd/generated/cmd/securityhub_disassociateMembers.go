@@ -12,9 +12,11 @@ var securityhub_disassociateMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_disassociateMembersCmd).Standalone()
+	carapace.Gen(securityhub_disassociateMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_disassociateMembersCmd).Standalone()
 
-	securityhub_disassociateMembersCmd.Flags().String("account-ids", "", "The account IDs of the member accounts to disassociate from the administrator account.")
-	securityhub_disassociateMembersCmd.MarkFlagRequired("account-ids")
+		securityhub_disassociateMembersCmd.Flags().String("account-ids", "", "The account IDs of the member accounts to disassociate from the administrator account.")
+		securityhub_disassociateMembersCmd.MarkFlagRequired("account-ids")
+	})
 	securityhubCmd.AddCommand(securityhub_disassociateMembersCmd)
 }

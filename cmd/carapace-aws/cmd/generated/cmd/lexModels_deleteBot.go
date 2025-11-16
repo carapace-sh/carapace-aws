@@ -12,9 +12,11 @@ var lexModels_deleteBotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_deleteBotCmd).Standalone()
+	carapace.Gen(lexModels_deleteBotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_deleteBotCmd).Standalone()
 
-	lexModels_deleteBotCmd.Flags().String("name", "", "The name of the bot.")
-	lexModels_deleteBotCmd.MarkFlagRequired("name")
+		lexModels_deleteBotCmd.Flags().String("name", "", "The name of the bot.")
+		lexModels_deleteBotCmd.MarkFlagRequired("name")
+	})
 	lexModelsCmd.AddCommand(lexModels_deleteBotCmd)
 }

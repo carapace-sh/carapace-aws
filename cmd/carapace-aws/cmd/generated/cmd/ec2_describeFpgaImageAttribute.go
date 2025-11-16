@@ -12,14 +12,16 @@ var ec2_describeFpgaImageAttributeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeFpgaImageAttributeCmd).Standalone()
+	carapace.Gen(ec2_describeFpgaImageAttributeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeFpgaImageAttributeCmd).Standalone()
 
-	ec2_describeFpgaImageAttributeCmd.Flags().String("attribute", "", "The AFI attribute.")
-	ec2_describeFpgaImageAttributeCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeFpgaImageAttributeCmd.Flags().String("fpga-image-id", "", "The ID of the AFI.")
-	ec2_describeFpgaImageAttributeCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeFpgaImageAttributeCmd.MarkFlagRequired("attribute")
-	ec2_describeFpgaImageAttributeCmd.MarkFlagRequired("fpga-image-id")
-	ec2_describeFpgaImageAttributeCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeFpgaImageAttributeCmd.Flags().String("attribute", "", "The AFI attribute.")
+		ec2_describeFpgaImageAttributeCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeFpgaImageAttributeCmd.Flags().String("fpga-image-id", "", "The ID of the AFI.")
+		ec2_describeFpgaImageAttributeCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeFpgaImageAttributeCmd.MarkFlagRequired("attribute")
+		ec2_describeFpgaImageAttributeCmd.MarkFlagRequired("fpga-image-id")
+		ec2_describeFpgaImageAttributeCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeFpgaImageAttributeCmd)
 }

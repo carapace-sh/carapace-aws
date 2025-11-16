@@ -12,9 +12,11 @@ var rekognition_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_listTagsForResourceCmd).Standalone()
+	carapace.Gen(rekognition_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_listTagsForResourceCmd).Standalone()
 
-	rekognition_listTagsForResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the model, collection, or stream processor that contains the tags that you want a list of.")
-	rekognition_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		rekognition_listTagsForResourceCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) of the model, collection, or stream processor that contains the tags that you want a list of.")
+		rekognition_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	rekognitionCmd.AddCommand(rekognition_listTagsForResourceCmd)
 }

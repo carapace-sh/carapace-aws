@@ -12,11 +12,13 @@ var glue_stopColumnStatisticsTaskRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_stopColumnStatisticsTaskRunCmd).Standalone()
+	carapace.Gen(glue_stopColumnStatisticsTaskRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_stopColumnStatisticsTaskRunCmd).Standalone()
 
-	glue_stopColumnStatisticsTaskRunCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
-	glue_stopColumnStatisticsTaskRunCmd.Flags().String("table-name", "", "The name of the table.")
-	glue_stopColumnStatisticsTaskRunCmd.MarkFlagRequired("database-name")
-	glue_stopColumnStatisticsTaskRunCmd.MarkFlagRequired("table-name")
+		glue_stopColumnStatisticsTaskRunCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
+		glue_stopColumnStatisticsTaskRunCmd.Flags().String("table-name", "", "The name of the table.")
+		glue_stopColumnStatisticsTaskRunCmd.MarkFlagRequired("database-name")
+		glue_stopColumnStatisticsTaskRunCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_stopColumnStatisticsTaskRunCmd)
 }

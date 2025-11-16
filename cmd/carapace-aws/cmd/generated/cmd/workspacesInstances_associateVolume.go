@@ -12,13 +12,15 @@ var workspacesInstances_associateVolumeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_associateVolumeCmd).Standalone()
+	carapace.Gen(workspacesInstances_associateVolumeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_associateVolumeCmd).Standalone()
 
-	workspacesInstances_associateVolumeCmd.Flags().String("device", "", "Device path for volume attachment.")
-	workspacesInstances_associateVolumeCmd.Flags().String("volume-id", "", "Volume to be attached.")
-	workspacesInstances_associateVolumeCmd.Flags().String("workspace-instance-id", "", "WorkSpace Instance to attach volume to.")
-	workspacesInstances_associateVolumeCmd.MarkFlagRequired("device")
-	workspacesInstances_associateVolumeCmd.MarkFlagRequired("volume-id")
-	workspacesInstances_associateVolumeCmd.MarkFlagRequired("workspace-instance-id")
+		workspacesInstances_associateVolumeCmd.Flags().String("device", "", "Device path for volume attachment.")
+		workspacesInstances_associateVolumeCmd.Flags().String("volume-id", "", "Volume to be attached.")
+		workspacesInstances_associateVolumeCmd.Flags().String("workspace-instance-id", "", "WorkSpace Instance to attach volume to.")
+		workspacesInstances_associateVolumeCmd.MarkFlagRequired("device")
+		workspacesInstances_associateVolumeCmd.MarkFlagRequired("volume-id")
+		workspacesInstances_associateVolumeCmd.MarkFlagRequired("workspace-instance-id")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_associateVolumeCmd)
 }

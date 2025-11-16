@@ -12,13 +12,15 @@ var chatbot_deleteSlackUserIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_deleteSlackUserIdentityCmd).Standalone()
+	carapace.Gen(chatbot_deleteSlackUserIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_deleteSlackUserIdentityCmd).Standalone()
 
-	chatbot_deleteSlackUserIdentityCmd.Flags().String("chat-configuration-arn", "", "The ARN of the SlackChannelConfiguration associated with the user identity to delete.")
-	chatbot_deleteSlackUserIdentityCmd.Flags().String("slack-team-id", "", "The ID of the Slack workspace authorized with AWS Chatbot.")
-	chatbot_deleteSlackUserIdentityCmd.Flags().String("slack-user-id", "", "The ID of the user in Slack")
-	chatbot_deleteSlackUserIdentityCmd.MarkFlagRequired("chat-configuration-arn")
-	chatbot_deleteSlackUserIdentityCmd.MarkFlagRequired("slack-team-id")
-	chatbot_deleteSlackUserIdentityCmd.MarkFlagRequired("slack-user-id")
+		chatbot_deleteSlackUserIdentityCmd.Flags().String("chat-configuration-arn", "", "The ARN of the SlackChannelConfiguration associated with the user identity to delete.")
+		chatbot_deleteSlackUserIdentityCmd.Flags().String("slack-team-id", "", "The ID of the Slack workspace authorized with AWS Chatbot.")
+		chatbot_deleteSlackUserIdentityCmd.Flags().String("slack-user-id", "", "The ID of the user in Slack")
+		chatbot_deleteSlackUserIdentityCmd.MarkFlagRequired("chat-configuration-arn")
+		chatbot_deleteSlackUserIdentityCmd.MarkFlagRequired("slack-team-id")
+		chatbot_deleteSlackUserIdentityCmd.MarkFlagRequired("slack-user-id")
+	})
 	chatbotCmd.AddCommand(chatbot_deleteSlackUserIdentityCmd)
 }

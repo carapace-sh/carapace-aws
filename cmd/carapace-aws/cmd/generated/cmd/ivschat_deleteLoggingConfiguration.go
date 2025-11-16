@@ -12,9 +12,11 @@ var ivschat_deleteLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_deleteLoggingConfigurationCmd).Standalone()
+	carapace.Gen(ivschat_deleteLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_deleteLoggingConfigurationCmd).Standalone()
 
-	ivschat_deleteLoggingConfigurationCmd.Flags().String("identifier", "", "Identifier of the logging configuration to be deleted.")
-	ivschat_deleteLoggingConfigurationCmd.MarkFlagRequired("identifier")
+		ivschat_deleteLoggingConfigurationCmd.Flags().String("identifier", "", "Identifier of the logging configuration to be deleted.")
+		ivschat_deleteLoggingConfigurationCmd.MarkFlagRequired("identifier")
+	})
 	ivschatCmd.AddCommand(ivschat_deleteLoggingConfigurationCmd)
 }

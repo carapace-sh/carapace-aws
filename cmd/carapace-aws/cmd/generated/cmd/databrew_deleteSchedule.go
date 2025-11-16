@@ -12,9 +12,11 @@ var databrew_deleteScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_deleteScheduleCmd).Standalone()
+	carapace.Gen(databrew_deleteScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_deleteScheduleCmd).Standalone()
 
-	databrew_deleteScheduleCmd.Flags().String("name", "", "The name of the schedule to be deleted.")
-	databrew_deleteScheduleCmd.MarkFlagRequired("name")
+		databrew_deleteScheduleCmd.Flags().String("name", "", "The name of the schedule to be deleted.")
+		databrew_deleteScheduleCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_deleteScheduleCmd)
 }

@@ -12,13 +12,15 @@ var s3control_putBucketReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_putBucketReplicationCmd).Standalone()
+	carapace.Gen(s3control_putBucketReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_putBucketReplicationCmd).Standalone()
 
-	s3control_putBucketReplicationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Outposts bucket.")
-	s3control_putBucketReplicationCmd.Flags().String("bucket", "", "Specifies the S3 on Outposts bucket to set the configuration for.")
-	s3control_putBucketReplicationCmd.Flags().String("replication-configuration", "", "")
-	s3control_putBucketReplicationCmd.MarkFlagRequired("account-id")
-	s3control_putBucketReplicationCmd.MarkFlagRequired("bucket")
-	s3control_putBucketReplicationCmd.MarkFlagRequired("replication-configuration")
+		s3control_putBucketReplicationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the Outposts bucket.")
+		s3control_putBucketReplicationCmd.Flags().String("bucket", "", "Specifies the S3 on Outposts bucket to set the configuration for.")
+		s3control_putBucketReplicationCmd.Flags().String("replication-configuration", "", "")
+		s3control_putBucketReplicationCmd.MarkFlagRequired("account-id")
+		s3control_putBucketReplicationCmd.MarkFlagRequired("bucket")
+		s3control_putBucketReplicationCmd.MarkFlagRequired("replication-configuration")
+	})
 	s3controlCmd.AddCommand(s3control_putBucketReplicationCmd)
 }

@@ -12,9 +12,11 @@ var macie2_getSensitivityInspectionTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_getSensitivityInspectionTemplateCmd).Standalone()
+	carapace.Gen(macie2_getSensitivityInspectionTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_getSensitivityInspectionTemplateCmd).Standalone()
 
-	macie2_getSensitivityInspectionTemplateCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
-	macie2_getSensitivityInspectionTemplateCmd.MarkFlagRequired("id")
+		macie2_getSensitivityInspectionTemplateCmd.Flags().String("id", "", "The unique identifier for the Amazon Macie resource that the request applies to.")
+		macie2_getSensitivityInspectionTemplateCmd.MarkFlagRequired("id")
+	})
 	macie2Cmd.AddCommand(macie2_getSensitivityInspectionTemplateCmd)
 }

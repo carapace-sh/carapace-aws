@@ -12,8 +12,10 @@ var macie2_listManagedDataIdentifiersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_listManagedDataIdentifiersCmd).Standalone()
+	carapace.Gen(macie2_listManagedDataIdentifiersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_listManagedDataIdentifiersCmd).Standalone()
 
-	macie2_listManagedDataIdentifiersCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+		macie2_listManagedDataIdentifiersCmd.Flags().String("next-token", "", "The nextToken string that specifies which page of results to return in a paginated response.")
+	})
 	macie2Cmd.AddCommand(macie2_listManagedDataIdentifiersCmd)
 }

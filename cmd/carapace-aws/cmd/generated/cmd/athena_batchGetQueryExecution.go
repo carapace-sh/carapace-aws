@@ -12,9 +12,11 @@ var athena_batchGetQueryExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_batchGetQueryExecutionCmd).Standalone()
+	carapace.Gen(athena_batchGetQueryExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_batchGetQueryExecutionCmd).Standalone()
 
-	athena_batchGetQueryExecutionCmd.Flags().String("query-execution-ids", "", "An array of query execution IDs.")
-	athena_batchGetQueryExecutionCmd.MarkFlagRequired("query-execution-ids")
+		athena_batchGetQueryExecutionCmd.Flags().String("query-execution-ids", "", "An array of query execution IDs.")
+		athena_batchGetQueryExecutionCmd.MarkFlagRequired("query-execution-ids")
+	})
 	athenaCmd.AddCommand(athena_batchGetQueryExecutionCmd)
 }

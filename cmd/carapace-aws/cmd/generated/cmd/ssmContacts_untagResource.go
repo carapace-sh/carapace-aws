@@ -12,11 +12,13 @@ var ssmContacts_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_untagResourceCmd).Standalone()
+	carapace.Gen(ssmContacts_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_untagResourceCmd).Standalone()
 
-	ssmContacts_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the contact or escalation plan.")
-	ssmContacts_untagResourceCmd.Flags().String("tag-keys", "", "The key of the tag that you want to remove.")
-	ssmContacts_untagResourceCmd.MarkFlagRequired("resource-arn")
-	ssmContacts_untagResourceCmd.MarkFlagRequired("tag-keys")
+		ssmContacts_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the contact or escalation plan.")
+		ssmContacts_untagResourceCmd.Flags().String("tag-keys", "", "The key of the tag that you want to remove.")
+		ssmContacts_untagResourceCmd.MarkFlagRequired("resource-arn")
+		ssmContacts_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_untagResourceCmd)
 }

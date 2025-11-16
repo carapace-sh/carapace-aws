@@ -12,7 +12,9 @@ var arcZonalShiftCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShiftCmd).Standalone()
+	carapace.Gen(arcZonalShiftCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShiftCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(arcZonalShiftCmd)
 }

@@ -12,11 +12,13 @@ var omics_listAnnotationImportJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_listAnnotationImportJobsCmd).Standalone()
+	carapace.Gen(omics_listAnnotationImportJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_listAnnotationImportJobsCmd).Standalone()
 
-	omics_listAnnotationImportJobsCmd.Flags().String("filter", "", "A filter to apply to the list.")
-	omics_listAnnotationImportJobsCmd.Flags().String("ids", "", "IDs of annotation import jobs to retrieve.")
-	omics_listAnnotationImportJobsCmd.Flags().String("max-results", "", "The maximum number of jobs to return in one page of results.")
-	omics_listAnnotationImportJobsCmd.Flags().String("next-token", "", "Specifies the pagination token from a previous request to retrieve the next page of results.")
+		omics_listAnnotationImportJobsCmd.Flags().String("filter", "", "A filter to apply to the list.")
+		omics_listAnnotationImportJobsCmd.Flags().String("ids", "", "IDs of annotation import jobs to retrieve.")
+		omics_listAnnotationImportJobsCmd.Flags().String("max-results", "", "The maximum number of jobs to return in one page of results.")
+		omics_listAnnotationImportJobsCmd.Flags().String("next-token", "", "Specifies the pagination token from a previous request to retrieve the next page of results.")
+	})
 	omicsCmd.AddCommand(omics_listAnnotationImportJobsCmd)
 }

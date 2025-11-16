@@ -12,9 +12,11 @@ var iot_deleteMitigationActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteMitigationActionCmd).Standalone()
+	carapace.Gen(iot_deleteMitigationActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteMitigationActionCmd).Standalone()
 
-	iot_deleteMitigationActionCmd.Flags().String("action-name", "", "The name of the mitigation action that you want to delete.")
-	iot_deleteMitigationActionCmd.MarkFlagRequired("action-name")
+		iot_deleteMitigationActionCmd.Flags().String("action-name", "", "The name of the mitigation action that you want to delete.")
+		iot_deleteMitigationActionCmd.MarkFlagRequired("action-name")
+	})
 	iotCmd.AddCommand(iot_deleteMitigationActionCmd)
 }

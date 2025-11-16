@@ -12,11 +12,13 @@ var sagemaker_describeSpaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeSpaceCmd).Standalone()
+	carapace.Gen(sagemaker_describeSpaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeSpaceCmd).Standalone()
 
-	sagemaker_describeSpaceCmd.Flags().String("domain-id", "", "The ID of the associated domain.")
-	sagemaker_describeSpaceCmd.Flags().String("space-name", "", "The name of the space.")
-	sagemaker_describeSpaceCmd.MarkFlagRequired("domain-id")
-	sagemaker_describeSpaceCmd.MarkFlagRequired("space-name")
+		sagemaker_describeSpaceCmd.Flags().String("domain-id", "", "The ID of the associated domain.")
+		sagemaker_describeSpaceCmd.Flags().String("space-name", "", "The name of the space.")
+		sagemaker_describeSpaceCmd.MarkFlagRequired("domain-id")
+		sagemaker_describeSpaceCmd.MarkFlagRequired("space-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeSpaceCmd)
 }

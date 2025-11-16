@@ -12,9 +12,11 @@ var workspacesWeb_deleteIpAccessSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_deleteIpAccessSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_deleteIpAccessSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_deleteIpAccessSettingsCmd).Standalone()
 
-	workspacesWeb_deleteIpAccessSettingsCmd.Flags().String("ip-access-settings-arn", "", "The ARN of the IP access settings.")
-	workspacesWeb_deleteIpAccessSettingsCmd.MarkFlagRequired("ip-access-settings-arn")
+		workspacesWeb_deleteIpAccessSettingsCmd.Flags().String("ip-access-settings-arn", "", "The ARN of the IP access settings.")
+		workspacesWeb_deleteIpAccessSettingsCmd.MarkFlagRequired("ip-access-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_deleteIpAccessSettingsCmd)
 }

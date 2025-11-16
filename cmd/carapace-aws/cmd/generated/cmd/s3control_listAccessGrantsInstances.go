@@ -12,11 +12,13 @@ var s3control_listAccessGrantsInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_listAccessGrantsInstancesCmd).Standalone()
+	carapace.Gen(s3control_listAccessGrantsInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_listAccessGrantsInstancesCmd).Standalone()
 
-	s3control_listAccessGrantsInstancesCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
-	s3control_listAccessGrantsInstancesCmd.Flags().String("max-results", "", "The maximum number of access grants that you would like returned in the `List Access Grants` response.")
-	s3control_listAccessGrantsInstancesCmd.Flags().String("next-token", "", "A pagination token to request the next page of results.")
-	s3control_listAccessGrantsInstancesCmd.MarkFlagRequired("account-id")
+		s3control_listAccessGrantsInstancesCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
+		s3control_listAccessGrantsInstancesCmd.Flags().String("max-results", "", "The maximum number of access grants that you would like returned in the `List Access Grants` response.")
+		s3control_listAccessGrantsInstancesCmd.Flags().String("next-token", "", "A pagination token to request the next page of results.")
+		s3control_listAccessGrantsInstancesCmd.MarkFlagRequired("account-id")
+	})
 	s3controlCmd.AddCommand(s3control_listAccessGrantsInstancesCmd)
 }

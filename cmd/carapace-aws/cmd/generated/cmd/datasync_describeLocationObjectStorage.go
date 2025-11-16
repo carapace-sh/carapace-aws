@@ -12,9 +12,11 @@ var datasync_describeLocationObjectStorageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeLocationObjectStorageCmd).Standalone()
+	carapace.Gen(datasync_describeLocationObjectStorageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeLocationObjectStorageCmd).Standalone()
 
-	datasync_describeLocationObjectStorageCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the object storage system location.")
-	datasync_describeLocationObjectStorageCmd.MarkFlagRequired("location-arn")
+		datasync_describeLocationObjectStorageCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the object storage system location.")
+		datasync_describeLocationObjectStorageCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeLocationObjectStorageCmd)
 }

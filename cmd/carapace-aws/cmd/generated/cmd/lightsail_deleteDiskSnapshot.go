@@ -12,9 +12,11 @@ var lightsail_deleteDiskSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_deleteDiskSnapshotCmd).Standalone()
+	carapace.Gen(lightsail_deleteDiskSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_deleteDiskSnapshotCmd).Standalone()
 
-	lightsail_deleteDiskSnapshotCmd.Flags().String("disk-snapshot-name", "", "The name of the disk snapshot you want to delete (`my-disk-snapshot`).")
-	lightsail_deleteDiskSnapshotCmd.MarkFlagRequired("disk-snapshot-name")
+		lightsail_deleteDiskSnapshotCmd.Flags().String("disk-snapshot-name", "", "The name of the disk snapshot you want to delete (`my-disk-snapshot`).")
+		lightsail_deleteDiskSnapshotCmd.MarkFlagRequired("disk-snapshot-name")
+	})
 	lightsailCmd.AddCommand(lightsail_deleteDiskSnapshotCmd)
 }

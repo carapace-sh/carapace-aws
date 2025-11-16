@@ -12,11 +12,13 @@ var iotsitewise_listCompositionRelationshipsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_listCompositionRelationshipsCmd).Standalone()
+	carapace.Gen(iotsitewise_listCompositionRelationshipsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_listCompositionRelationshipsCmd).Standalone()
 
-	iotsitewise_listCompositionRelationshipsCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
-	iotsitewise_listCompositionRelationshipsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
-	iotsitewise_listCompositionRelationshipsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	iotsitewise_listCompositionRelationshipsCmd.MarkFlagRequired("asset-model-id")
+		iotsitewise_listCompositionRelationshipsCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
+		iotsitewise_listCompositionRelationshipsCmd.Flags().String("max-results", "", "The maximum number of results to return for each paginated request.")
+		iotsitewise_listCompositionRelationshipsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		iotsitewise_listCompositionRelationshipsCmd.MarkFlagRequired("asset-model-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_listCompositionRelationshipsCmd)
 }

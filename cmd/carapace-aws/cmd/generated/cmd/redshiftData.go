@@ -12,7 +12,9 @@ var redshiftDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshiftDataCmd).Standalone()
+	carapace.Gen(redshiftDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshiftDataCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(redshiftDataCmd)
 }

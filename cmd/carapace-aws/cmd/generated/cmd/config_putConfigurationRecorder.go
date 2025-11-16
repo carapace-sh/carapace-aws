@@ -12,10 +12,12 @@ var config_putConfigurationRecorderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_putConfigurationRecorderCmd).Standalone()
+	carapace.Gen(config_putConfigurationRecorderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_putConfigurationRecorderCmd).Standalone()
 
-	config_putConfigurationRecorderCmd.Flags().String("configuration-recorder", "", "An object for the configuration recorder.")
-	config_putConfigurationRecorderCmd.Flags().String("tags", "", "The tags for the customer managed configuration recorder.")
-	config_putConfigurationRecorderCmd.MarkFlagRequired("configuration-recorder")
+		config_putConfigurationRecorderCmd.Flags().String("configuration-recorder", "", "An object for the configuration recorder.")
+		config_putConfigurationRecorderCmd.Flags().String("tags", "", "The tags for the customer managed configuration recorder.")
+		config_putConfigurationRecorderCmd.MarkFlagRequired("configuration-recorder")
+	})
 	configCmd.AddCommand(config_putConfigurationRecorderCmd)
 }

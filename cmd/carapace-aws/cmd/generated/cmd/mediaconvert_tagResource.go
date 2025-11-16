@@ -12,11 +12,13 @@ var mediaconvert_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_tagResourceCmd).Standalone()
+	carapace.Gen(mediaconvert_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_tagResourceCmd).Standalone()
 
-	mediaconvert_tagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
-	mediaconvert_tagResourceCmd.Flags().String("tags", "", "The tags that you want to add to the resource.")
-	mediaconvert_tagResourceCmd.MarkFlagRequired("arn")
-	mediaconvert_tagResourceCmd.MarkFlagRequired("tags")
+		mediaconvert_tagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
+		mediaconvert_tagResourceCmd.Flags().String("tags", "", "The tags that you want to add to the resource.")
+		mediaconvert_tagResourceCmd.MarkFlagRequired("arn")
+		mediaconvert_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_tagResourceCmd)
 }

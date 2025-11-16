@@ -12,11 +12,13 @@ var iot_replaceTopicRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_replaceTopicRuleCmd).Standalone()
+	carapace.Gen(iot_replaceTopicRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_replaceTopicRuleCmd).Standalone()
 
-	iot_replaceTopicRuleCmd.Flags().String("rule-name", "", "The name of the rule.")
-	iot_replaceTopicRuleCmd.Flags().String("topic-rule-payload", "", "The rule payload.")
-	iot_replaceTopicRuleCmd.MarkFlagRequired("rule-name")
-	iot_replaceTopicRuleCmd.MarkFlagRequired("topic-rule-payload")
+		iot_replaceTopicRuleCmd.Flags().String("rule-name", "", "The name of the rule.")
+		iot_replaceTopicRuleCmd.Flags().String("topic-rule-payload", "", "The rule payload.")
+		iot_replaceTopicRuleCmd.MarkFlagRequired("rule-name")
+		iot_replaceTopicRuleCmd.MarkFlagRequired("topic-rule-payload")
+	})
 	iotCmd.AddCommand(iot_replaceTopicRuleCmd)
 }

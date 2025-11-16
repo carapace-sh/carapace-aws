@@ -12,9 +12,11 @@ var billing_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(billing_getResourcePolicyCmd).Standalone()
+	carapace.Gen(billing_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(billing_getResourcePolicyCmd).Standalone()
 
-	billing_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to.")
-	billing_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		billing_getResourcePolicyCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the billing view resource to which the policy is attached to.")
+		billing_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	billingCmd.AddCommand(billing_getResourcePolicyCmd)
 }

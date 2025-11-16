@@ -12,9 +12,11 @@ var datasync_describeLocationNfsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeLocationNfsCmd).Standalone()
+	carapace.Gen(datasync_describeLocationNfsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeLocationNfsCmd).Standalone()
 
-	datasync_describeLocationNfsCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the NFS location that you want information about.")
-	datasync_describeLocationNfsCmd.MarkFlagRequired("location-arn")
+		datasync_describeLocationNfsCmd.Flags().String("location-arn", "", "Specifies the Amazon Resource Name (ARN) of the NFS location that you want information about.")
+		datasync_describeLocationNfsCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeLocationNfsCmd)
 }

@@ -12,9 +12,11 @@ var rolesanywhere_listTrustAnchorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_listTrustAnchorsCmd).Standalone()
+	carapace.Gen(rolesanywhere_listTrustAnchorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_listTrustAnchorsCmd).Standalone()
 
-	rolesanywhere_listTrustAnchorsCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous request did not show all results.")
-	rolesanywhere_listTrustAnchorsCmd.Flags().String("page-size", "", "The number of resources in the paginated list.")
+		rolesanywhere_listTrustAnchorsCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous request did not show all results.")
+		rolesanywhere_listTrustAnchorsCmd.Flags().String("page-size", "", "The number of resources in the paginated list.")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_listTrustAnchorsCmd)
 }

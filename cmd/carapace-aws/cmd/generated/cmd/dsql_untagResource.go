@@ -12,11 +12,13 @@ var dsql_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsql_untagResourceCmd).Standalone()
+	carapace.Gen(dsql_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsql_untagResourceCmd).Standalone()
 
-	dsql_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource from which to remove tags.")
-	dsql_untagResourceCmd.Flags().String("tag-keys", "", "The array of keys of the tags that you want to remove.")
-	dsql_untagResourceCmd.MarkFlagRequired("resource-arn")
-	dsql_untagResourceCmd.MarkFlagRequired("tag-keys")
+		dsql_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource from which to remove tags.")
+		dsql_untagResourceCmd.Flags().String("tag-keys", "", "The array of keys of the tags that you want to remove.")
+		dsql_untagResourceCmd.MarkFlagRequired("resource-arn")
+		dsql_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	dsqlCmd.AddCommand(dsql_untagResourceCmd)
 }

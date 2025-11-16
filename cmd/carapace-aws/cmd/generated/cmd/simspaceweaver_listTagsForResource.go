@@ -12,9 +12,11 @@ var simspaceweaver_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_listTagsForResourceCmd).Standalone()
+	carapace.Gen(simspaceweaver_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_listTagsForResourceCmd).Standalone()
 
-	simspaceweaver_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	simspaceweaver_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		simspaceweaver_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		simspaceweaver_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_listTagsForResourceCmd)
 }

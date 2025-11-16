@@ -12,7 +12,9 @@ var emrServerlessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrServerlessCmd).Standalone()
+	carapace.Gen(emrServerlessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrServerlessCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(emrServerlessCmd)
 }

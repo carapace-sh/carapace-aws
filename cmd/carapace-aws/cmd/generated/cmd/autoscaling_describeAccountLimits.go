@@ -12,7 +12,9 @@ var autoscaling_describeAccountLimitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(autoscaling_describeAccountLimitsCmd).Standalone()
+	carapace.Gen(autoscaling_describeAccountLimitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(autoscaling_describeAccountLimitsCmd).Standalone()
 
+	})
 	autoscalingCmd.AddCommand(autoscaling_describeAccountLimitsCmd)
 }

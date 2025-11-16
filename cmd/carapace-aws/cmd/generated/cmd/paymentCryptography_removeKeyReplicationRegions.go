@@ -12,11 +12,13 @@ var paymentCryptography_removeKeyReplicationRegionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_removeKeyReplicationRegionsCmd).Standalone()
+	carapace.Gen(paymentCryptography_removeKeyReplicationRegionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_removeKeyReplicationRegionsCmd).Standalone()
 
-	paymentCryptography_removeKeyReplicationRegionsCmd.Flags().String("key-identifier", "", "The key identifier (ARN or alias) of the key from which to remove replication regions.")
-	paymentCryptography_removeKeyReplicationRegionsCmd.Flags().String("replication-regions", "", "The list of Amazon Web Services Regions to remove from the key's replication configuration.")
-	paymentCryptography_removeKeyReplicationRegionsCmd.MarkFlagRequired("key-identifier")
-	paymentCryptography_removeKeyReplicationRegionsCmd.MarkFlagRequired("replication-regions")
+		paymentCryptography_removeKeyReplicationRegionsCmd.Flags().String("key-identifier", "", "The key identifier (ARN or alias) of the key from which to remove replication regions.")
+		paymentCryptography_removeKeyReplicationRegionsCmd.Flags().String("replication-regions", "", "The list of Amazon Web Services Regions to remove from the key's replication configuration.")
+		paymentCryptography_removeKeyReplicationRegionsCmd.MarkFlagRequired("key-identifier")
+		paymentCryptography_removeKeyReplicationRegionsCmd.MarkFlagRequired("replication-regions")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_removeKeyReplicationRegionsCmd)
 }

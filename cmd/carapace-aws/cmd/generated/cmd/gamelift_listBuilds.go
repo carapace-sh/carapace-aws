@@ -12,10 +12,12 @@ var gamelift_listBuildsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_listBuildsCmd).Standalone()
+	carapace.Gen(gamelift_listBuildsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_listBuildsCmd).Standalone()
 
-	gamelift_listBuildsCmd.Flags().String("limit", "", "The maximum number of results to return.")
-	gamelift_listBuildsCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
-	gamelift_listBuildsCmd.Flags().String("status", "", "Build status to filter results by.")
+		gamelift_listBuildsCmd.Flags().String("limit", "", "The maximum number of results to return.")
+		gamelift_listBuildsCmd.Flags().String("next-token", "", "A token that indicates the start of the next sequential page of results.")
+		gamelift_listBuildsCmd.Flags().String("status", "", "Build status to filter results by.")
+	})
 	gameliftCmd.AddCommand(gamelift_listBuildsCmd)
 }

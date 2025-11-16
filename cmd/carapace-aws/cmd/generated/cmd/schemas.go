@@ -12,7 +12,9 @@ var schemasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemasCmd).Standalone()
+	carapace.Gen(schemasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemasCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(schemasCmd)
 }

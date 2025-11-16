@@ -12,11 +12,13 @@ var location_batchPutGeofenceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_batchPutGeofenceCmd).Standalone()
+	carapace.Gen(location_batchPutGeofenceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_batchPutGeofenceCmd).Standalone()
 
-	location_batchPutGeofenceCmd.Flags().String("collection-name", "", "The geofence collection storing the geofences.")
-	location_batchPutGeofenceCmd.Flags().String("entries", "", "The batch of geofences to be stored in a geofence collection.")
-	location_batchPutGeofenceCmd.MarkFlagRequired("collection-name")
-	location_batchPutGeofenceCmd.MarkFlagRequired("entries")
+		location_batchPutGeofenceCmd.Flags().String("collection-name", "", "The geofence collection storing the geofences.")
+		location_batchPutGeofenceCmd.Flags().String("entries", "", "The batch of geofences to be stored in a geofence collection.")
+		location_batchPutGeofenceCmd.MarkFlagRequired("collection-name")
+		location_batchPutGeofenceCmd.MarkFlagRequired("entries")
+	})
 	locationCmd.AddCommand(location_batchPutGeofenceCmd)
 }

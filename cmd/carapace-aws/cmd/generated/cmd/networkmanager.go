@@ -12,7 +12,9 @@ var networkmanagerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanagerCmd).Standalone()
+	carapace.Gen(networkmanagerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanagerCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(networkmanagerCmd)
 }

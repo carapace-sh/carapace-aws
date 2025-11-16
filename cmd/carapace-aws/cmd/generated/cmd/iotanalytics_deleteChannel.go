@@ -12,9 +12,11 @@ var iotanalytics_deleteChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_deleteChannelCmd).Standalone()
+	carapace.Gen(iotanalytics_deleteChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_deleteChannelCmd).Standalone()
 
-	iotanalytics_deleteChannelCmd.Flags().String("channel-name", "", "The name of the channel to delete.")
-	iotanalytics_deleteChannelCmd.MarkFlagRequired("channel-name")
+		iotanalytics_deleteChannelCmd.Flags().String("channel-name", "", "The name of the channel to delete.")
+		iotanalytics_deleteChannelCmd.MarkFlagRequired("channel-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_deleteChannelCmd)
 }

@@ -12,9 +12,11 @@ var grafana_listWorkspacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_listWorkspacesCmd).Standalone()
+	carapace.Gen(grafana_listWorkspacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_listWorkspacesCmd).Standalone()
 
-	grafana_listWorkspacesCmd.Flags().String("max-results", "", "The maximum number of workspaces to include in the results.")
-	grafana_listWorkspacesCmd.Flags().String("next-token", "", "The token for the next set of workspaces to return.")
+		grafana_listWorkspacesCmd.Flags().String("max-results", "", "The maximum number of workspaces to include in the results.")
+		grafana_listWorkspacesCmd.Flags().String("next-token", "", "The token for the next set of workspaces to return.")
+	})
 	grafanaCmd.AddCommand(grafana_listWorkspacesCmd)
 }

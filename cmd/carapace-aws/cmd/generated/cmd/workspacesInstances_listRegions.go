@@ -12,9 +12,11 @@ var workspacesInstances_listRegionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_listRegionsCmd).Standalone()
+	carapace.Gen(workspacesInstances_listRegionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_listRegionsCmd).Standalone()
 
-	workspacesInstances_listRegionsCmd.Flags().String("max-results", "", "Maximum number of regions to return in a single API call.")
-	workspacesInstances_listRegionsCmd.Flags().String("next-token", "", "Pagination token for retrieving subsequent pages of region results.")
+		workspacesInstances_listRegionsCmd.Flags().String("max-results", "", "Maximum number of regions to return in a single API call.")
+		workspacesInstances_listRegionsCmd.Flags().String("next-token", "", "Pagination token for retrieving subsequent pages of region results.")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_listRegionsCmd)
 }

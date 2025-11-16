@@ -12,10 +12,12 @@ var appstream_describeImageBuildersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_describeImageBuildersCmd).Standalone()
+	carapace.Gen(appstream_describeImageBuildersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_describeImageBuildersCmd).Standalone()
 
-	appstream_describeImageBuildersCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
-	appstream_describeImageBuildersCmd.Flags().String("names", "", "The names of the image builders to describe.")
-	appstream_describeImageBuildersCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+		appstream_describeImageBuildersCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
+		appstream_describeImageBuildersCmd.Flags().String("names", "", "The names of the image builders to describe.")
+		appstream_describeImageBuildersCmd.Flags().String("next-token", "", "The pagination token to use to retrieve the next page of results for this operation.")
+	})
 	appstreamCmd.AddCommand(appstream_describeImageBuildersCmd)
 }

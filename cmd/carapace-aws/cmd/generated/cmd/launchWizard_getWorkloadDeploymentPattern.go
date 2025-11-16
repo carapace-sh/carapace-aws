@@ -12,11 +12,13 @@ var launchWizard_getWorkloadDeploymentPatternCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(launchWizard_getWorkloadDeploymentPatternCmd).Standalone()
+	carapace.Gen(launchWizard_getWorkloadDeploymentPatternCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(launchWizard_getWorkloadDeploymentPatternCmd).Standalone()
 
-	launchWizard_getWorkloadDeploymentPatternCmd.Flags().String("deployment-pattern-name", "", "The name of the deployment pattern.")
-	launchWizard_getWorkloadDeploymentPatternCmd.Flags().String("workload-name", "", "The name of the workload.")
-	launchWizard_getWorkloadDeploymentPatternCmd.MarkFlagRequired("deployment-pattern-name")
-	launchWizard_getWorkloadDeploymentPatternCmd.MarkFlagRequired("workload-name")
+		launchWizard_getWorkloadDeploymentPatternCmd.Flags().String("deployment-pattern-name", "", "The name of the deployment pattern.")
+		launchWizard_getWorkloadDeploymentPatternCmd.Flags().String("workload-name", "", "The name of the workload.")
+		launchWizard_getWorkloadDeploymentPatternCmd.MarkFlagRequired("deployment-pattern-name")
+		launchWizard_getWorkloadDeploymentPatternCmd.MarkFlagRequired("workload-name")
+	})
 	launchWizardCmd.AddCommand(launchWizard_getWorkloadDeploymentPatternCmd)
 }

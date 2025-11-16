@@ -12,11 +12,13 @@ var wellarchitected_updateShareInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_updateShareInvitationCmd).Standalone()
+	carapace.Gen(wellarchitected_updateShareInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_updateShareInvitationCmd).Standalone()
 
-	wellarchitected_updateShareInvitationCmd.Flags().String("share-invitation-action", "", "")
-	wellarchitected_updateShareInvitationCmd.Flags().String("share-invitation-id", "", "The ID assigned to the share invitation.")
-	wellarchitected_updateShareInvitationCmd.MarkFlagRequired("share-invitation-action")
-	wellarchitected_updateShareInvitationCmd.MarkFlagRequired("share-invitation-id")
+		wellarchitected_updateShareInvitationCmd.Flags().String("share-invitation-action", "", "")
+		wellarchitected_updateShareInvitationCmd.Flags().String("share-invitation-id", "", "The ID assigned to the share invitation.")
+		wellarchitected_updateShareInvitationCmd.MarkFlagRequired("share-invitation-action")
+		wellarchitected_updateShareInvitationCmd.MarkFlagRequired("share-invitation-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_updateShareInvitationCmd)
 }

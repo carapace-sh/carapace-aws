@@ -12,11 +12,13 @@ var bedrockAgent_listFlowAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_listFlowAliasesCmd).Standalone()
+	carapace.Gen(bedrockAgent_listFlowAliasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_listFlowAliasesCmd).Standalone()
 
-	bedrockAgent_listFlowAliasesCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow for which aliases are being returned.")
-	bedrockAgent_listFlowAliasesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	bedrockAgent_listFlowAliasesCmd.Flags().String("next-token", "", "If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.")
-	bedrockAgent_listFlowAliasesCmd.MarkFlagRequired("flow-identifier")
+		bedrockAgent_listFlowAliasesCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow for which aliases are being returned.")
+		bedrockAgent_listFlowAliasesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		bedrockAgent_listFlowAliasesCmd.Flags().String("next-token", "", "If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.")
+		bedrockAgent_listFlowAliasesCmd.MarkFlagRequired("flow-identifier")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_listFlowAliasesCmd)
 }

@@ -12,14 +12,16 @@ var wellarchitected_upgradeLensReviewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_upgradeLensReviewCmd).Standalone()
+	carapace.Gen(wellarchitected_upgradeLensReviewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_upgradeLensReviewCmd).Standalone()
 
-	wellarchitected_upgradeLensReviewCmd.Flags().String("client-request-token", "", "")
-	wellarchitected_upgradeLensReviewCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_upgradeLensReviewCmd.Flags().String("milestone-name", "", "")
-	wellarchitected_upgradeLensReviewCmd.Flags().String("workload-id", "", "")
-	wellarchitected_upgradeLensReviewCmd.MarkFlagRequired("lens-alias")
-	wellarchitected_upgradeLensReviewCmd.MarkFlagRequired("milestone-name")
-	wellarchitected_upgradeLensReviewCmd.MarkFlagRequired("workload-id")
+		wellarchitected_upgradeLensReviewCmd.Flags().String("client-request-token", "", "")
+		wellarchitected_upgradeLensReviewCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_upgradeLensReviewCmd.Flags().String("milestone-name", "", "")
+		wellarchitected_upgradeLensReviewCmd.Flags().String("workload-id", "", "")
+		wellarchitected_upgradeLensReviewCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_upgradeLensReviewCmd.MarkFlagRequired("milestone-name")
+		wellarchitected_upgradeLensReviewCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_upgradeLensReviewCmd)
 }

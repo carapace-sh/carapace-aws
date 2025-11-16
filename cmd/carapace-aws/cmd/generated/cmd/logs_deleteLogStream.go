@@ -12,11 +12,13 @@ var logs_deleteLogStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_deleteLogStreamCmd).Standalone()
+	carapace.Gen(logs_deleteLogStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_deleteLogStreamCmd).Standalone()
 
-	logs_deleteLogStreamCmd.Flags().String("log-group-name", "", "The name of the log group.")
-	logs_deleteLogStreamCmd.Flags().String("log-stream-name", "", "The name of the log stream.")
-	logs_deleteLogStreamCmd.MarkFlagRequired("log-group-name")
-	logs_deleteLogStreamCmd.MarkFlagRequired("log-stream-name")
+		logs_deleteLogStreamCmd.Flags().String("log-group-name", "", "The name of the log group.")
+		logs_deleteLogStreamCmd.Flags().String("log-stream-name", "", "The name of the log stream.")
+		logs_deleteLogStreamCmd.MarkFlagRequired("log-group-name")
+		logs_deleteLogStreamCmd.MarkFlagRequired("log-stream-name")
+	})
 	logsCmd.AddCommand(logs_deleteLogStreamCmd)
 }

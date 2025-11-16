@@ -12,9 +12,11 @@ var mailmanager_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_listTagsForResourceCmd).Standalone()
+	carapace.Gen(mailmanager_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_listTagsForResourceCmd).Standalone()
 
-	mailmanager_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to retrieve tags from.")
-	mailmanager_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		mailmanager_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to retrieve tags from.")
+		mailmanager_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_listTagsForResourceCmd)
 }

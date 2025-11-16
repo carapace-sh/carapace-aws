@@ -12,9 +12,11 @@ var workspacesThinClient_listSoftwareSetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesThinClient_listSoftwareSetsCmd).Standalone()
+	carapace.Gen(workspacesThinClient_listSoftwareSetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesThinClient_listSoftwareSetsCmd).Standalone()
 
-	workspacesThinClient_listSoftwareSetsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	workspacesThinClient_listSoftwareSetsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		workspacesThinClient_listSoftwareSetsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		workspacesThinClient_listSoftwareSetsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+	})
 	workspacesThinClientCmd.AddCommand(workspacesThinClient_listSoftwareSetsCmd)
 }

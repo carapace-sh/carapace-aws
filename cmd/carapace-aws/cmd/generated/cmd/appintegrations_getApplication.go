@@ -12,9 +12,11 @@ var appintegrations_getApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_getApplicationCmd).Standalone()
+	carapace.Gen(appintegrations_getApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_getApplicationCmd).Standalone()
 
-	appintegrations_getApplicationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Application.")
-	appintegrations_getApplicationCmd.MarkFlagRequired("arn")
+		appintegrations_getApplicationCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Application.")
+		appintegrations_getApplicationCmd.MarkFlagRequired("arn")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_getApplicationCmd)
 }

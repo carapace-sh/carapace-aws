@@ -12,10 +12,12 @@ var neptunedata_executeFastResetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_executeFastResetCmd).Standalone()
+	carapace.Gen(neptunedata_executeFastResetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_executeFastResetCmd).Standalone()
 
-	neptunedata_executeFastResetCmd.Flags().String("action", "", "The fast reset action.")
-	neptunedata_executeFastResetCmd.Flags().String("token", "", "The fast-reset token to initiate the reset.")
-	neptunedata_executeFastResetCmd.MarkFlagRequired("action")
+		neptunedata_executeFastResetCmd.Flags().String("action", "", "The fast reset action.")
+		neptunedata_executeFastResetCmd.Flags().String("token", "", "The fast-reset token to initiate the reset.")
+		neptunedata_executeFastResetCmd.MarkFlagRequired("action")
+	})
 	neptunedataCmd.AddCommand(neptunedata_executeFastResetCmd)
 }

@@ -12,9 +12,11 @@ var redshift_deleteHsmClientCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteHsmClientCertificateCmd).Standalone()
+	carapace.Gen(redshift_deleteHsmClientCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteHsmClientCertificateCmd).Standalone()
 
-	redshift_deleteHsmClientCertificateCmd.Flags().String("hsm-client-certificate-identifier", "", "The identifier of the HSM client certificate to be deleted.")
-	redshift_deleteHsmClientCertificateCmd.MarkFlagRequired("hsm-client-certificate-identifier")
+		redshift_deleteHsmClientCertificateCmd.Flags().String("hsm-client-certificate-identifier", "", "The identifier of the HSM client certificate to be deleted.")
+		redshift_deleteHsmClientCertificateCmd.MarkFlagRequired("hsm-client-certificate-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_deleteHsmClientCertificateCmd)
 }

@@ -12,11 +12,13 @@ var dms_describeReplicationInstanceTaskLogsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeReplicationInstanceTaskLogsCmd).Standalone()
+	carapace.Gen(dms_describeReplicationInstanceTaskLogsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeReplicationInstanceTaskLogsCmd).Standalone()
 
-	dms_describeReplicationInstanceTaskLogsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	dms_describeReplicationInstanceTaskLogsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	dms_describeReplicationInstanceTaskLogsCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
-	dms_describeReplicationInstanceTaskLogsCmd.MarkFlagRequired("replication-instance-arn")
+		dms_describeReplicationInstanceTaskLogsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		dms_describeReplicationInstanceTaskLogsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		dms_describeReplicationInstanceTaskLogsCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance.")
+		dms_describeReplicationInstanceTaskLogsCmd.MarkFlagRequired("replication-instance-arn")
+	})
 	dmsCmd.AddCommand(dms_describeReplicationInstanceTaskLogsCmd)
 }

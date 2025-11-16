@@ -12,9 +12,11 @@ var mediaconnect_describeFlowSourceThumbnailCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_describeFlowSourceThumbnailCmd).Standalone()
+	carapace.Gen(mediaconnect_describeFlowSourceThumbnailCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_describeFlowSourceThumbnailCmd).Standalone()
 
-	mediaconnect_describeFlowSourceThumbnailCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow.")
-	mediaconnect_describeFlowSourceThumbnailCmd.MarkFlagRequired("flow-arn")
+		mediaconnect_describeFlowSourceThumbnailCmd.Flags().String("flow-arn", "", "The Amazon Resource Name (ARN) of the flow.")
+		mediaconnect_describeFlowSourceThumbnailCmd.MarkFlagRequired("flow-arn")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_describeFlowSourceThumbnailCmd)
 }

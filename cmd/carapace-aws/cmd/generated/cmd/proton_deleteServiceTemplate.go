@@ -12,9 +12,11 @@ var proton_deleteServiceTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(proton_deleteServiceTemplateCmd).Standalone()
+	carapace.Gen(proton_deleteServiceTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(proton_deleteServiceTemplateCmd).Standalone()
 
-	proton_deleteServiceTemplateCmd.Flags().String("name", "", "The name of the service template to delete.")
-	proton_deleteServiceTemplateCmd.MarkFlagRequired("name")
+		proton_deleteServiceTemplateCmd.Flags().String("name", "", "The name of the service template to delete.")
+		proton_deleteServiceTemplateCmd.MarkFlagRequired("name")
+	})
 	protonCmd.AddCommand(proton_deleteServiceTemplateCmd)
 }

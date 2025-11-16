@@ -12,13 +12,15 @@ var pinpoint_updateJourneyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateJourneyCmd).Standalone()
+	carapace.Gen(pinpoint_updateJourneyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateJourneyCmd).Standalone()
 
-	pinpoint_updateJourneyCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_updateJourneyCmd.Flags().String("journey-id", "", "The unique identifier for the journey.")
-	pinpoint_updateJourneyCmd.Flags().String("write-journey-request", "", "")
-	pinpoint_updateJourneyCmd.MarkFlagRequired("application-id")
-	pinpoint_updateJourneyCmd.MarkFlagRequired("journey-id")
-	pinpoint_updateJourneyCmd.MarkFlagRequired("write-journey-request")
+		pinpoint_updateJourneyCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_updateJourneyCmd.Flags().String("journey-id", "", "The unique identifier for the journey.")
+		pinpoint_updateJourneyCmd.Flags().String("write-journey-request", "", "")
+		pinpoint_updateJourneyCmd.MarkFlagRequired("application-id")
+		pinpoint_updateJourneyCmd.MarkFlagRequired("journey-id")
+		pinpoint_updateJourneyCmd.MarkFlagRequired("write-journey-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateJourneyCmd)
 }

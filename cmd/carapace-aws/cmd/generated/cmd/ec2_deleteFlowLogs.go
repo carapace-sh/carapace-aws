@@ -12,12 +12,14 @@ var ec2_deleteFlowLogsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_deleteFlowLogsCmd).Standalone()
+	carapace.Gen(ec2_deleteFlowLogsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_deleteFlowLogsCmd).Standalone()
 
-	ec2_deleteFlowLogsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteFlowLogsCmd.Flags().String("flow-log-ids", "", "One or more flow log IDs.")
-	ec2_deleteFlowLogsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_deleteFlowLogsCmd.MarkFlagRequired("flow-log-ids")
-	ec2_deleteFlowLogsCmd.Flag("no-dry-run").Hidden = true
+		ec2_deleteFlowLogsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteFlowLogsCmd.Flags().String("flow-log-ids", "", "One or more flow log IDs.")
+		ec2_deleteFlowLogsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_deleteFlowLogsCmd.MarkFlagRequired("flow-log-ids")
+		ec2_deleteFlowLogsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_deleteFlowLogsCmd)
 }

@@ -12,7 +12,9 @@ var glue_getGlueIdentityCenterConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getGlueIdentityCenterConfigurationCmd).Standalone()
+	carapace.Gen(glue_getGlueIdentityCenterConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getGlueIdentityCenterConfigurationCmd).Standalone()
 
+	})
 	glueCmd.AddCommand(glue_getGlueIdentityCenterConfigurationCmd)
 }

@@ -12,11 +12,13 @@ var bedrockRuntime_invokeModelWithBidirectionalStreamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockRuntime_invokeModelWithBidirectionalStreamCmd).Standalone()
+	carapace.Gen(bedrockRuntime_invokeModelWithBidirectionalStreamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockRuntime_invokeModelWithBidirectionalStreamCmd).Standalone()
 
-	bedrockRuntime_invokeModelWithBidirectionalStreamCmd.Flags().String("body", "", "The prompt and inference parameters in the format specified in the `BidirectionalInputPayloadPart` in the header.")
-	bedrockRuntime_invokeModelWithBidirectionalStreamCmd.Flags().String("model-id", "", "The model ID or ARN of the model ID to use.")
-	bedrockRuntime_invokeModelWithBidirectionalStreamCmd.MarkFlagRequired("body")
-	bedrockRuntime_invokeModelWithBidirectionalStreamCmd.MarkFlagRequired("model-id")
+		bedrockRuntime_invokeModelWithBidirectionalStreamCmd.Flags().String("body", "", "The prompt and inference parameters in the format specified in the `BidirectionalInputPayloadPart` in the header.")
+		bedrockRuntime_invokeModelWithBidirectionalStreamCmd.Flags().String("model-id", "", "The model ID or ARN of the model ID to use.")
+		bedrockRuntime_invokeModelWithBidirectionalStreamCmd.MarkFlagRequired("body")
+		bedrockRuntime_invokeModelWithBidirectionalStreamCmd.MarkFlagRequired("model-id")
+	})
 	bedrockRuntimeCmd.AddCommand(bedrockRuntime_invokeModelWithBidirectionalStreamCmd)
 }

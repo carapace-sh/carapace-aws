@@ -12,9 +12,11 @@ var securityhub_getConnectorV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getConnectorV2Cmd).Standalone()
+	carapace.Gen(securityhub_getConnectorV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getConnectorV2Cmd).Standalone()
 
-	securityhub_getConnectorV2Cmd.Flags().String("connector-id", "", "The UUID of the connectorV2 to identify connectorV2 resource.")
-	securityhub_getConnectorV2Cmd.MarkFlagRequired("connector-id")
+		securityhub_getConnectorV2Cmd.Flags().String("connector-id", "", "The UUID of the connectorV2 to identify connectorV2 resource.")
+		securityhub_getConnectorV2Cmd.MarkFlagRequired("connector-id")
+	})
 	securityhubCmd.AddCommand(securityhub_getConnectorV2Cmd)
 }

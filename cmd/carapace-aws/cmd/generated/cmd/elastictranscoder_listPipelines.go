@@ -12,9 +12,11 @@ var elastictranscoder_listPipelinesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elastictranscoder_listPipelinesCmd).Standalone()
+	carapace.Gen(elastictranscoder_listPipelinesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elastictranscoder_listPipelinesCmd).Standalone()
 
-	elastictranscoder_listPipelinesCmd.Flags().String("ascending", "", "To list pipelines in chronological order by the date and time that they were created, enter `true`.")
-	elastictranscoder_listPipelinesCmd.Flags().String("page-token", "", "When Elastic Transcoder returns more than one page of results, use `pageToken` in subsequent `GET` requests to get each successive page of results.")
+		elastictranscoder_listPipelinesCmd.Flags().String("ascending", "", "To list pipelines in chronological order by the date and time that they were created, enter `true`.")
+		elastictranscoder_listPipelinesCmd.Flags().String("page-token", "", "When Elastic Transcoder returns more than one page of results, use `pageToken` in subsequent `GET` requests to get each successive page of results.")
+	})
 	elastictranscoderCmd.AddCommand(elastictranscoder_listPipelinesCmd)
 }

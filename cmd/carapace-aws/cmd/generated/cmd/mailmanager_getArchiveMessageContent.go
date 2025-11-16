@@ -12,9 +12,11 @@ var mailmanager_getArchiveMessageContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_getArchiveMessageContentCmd).Standalone()
+	carapace.Gen(mailmanager_getArchiveMessageContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_getArchiveMessageContentCmd).Standalone()
 
-	mailmanager_getArchiveMessageContentCmd.Flags().String("archived-message-id", "", "The unique identifier of the archived email message.")
-	mailmanager_getArchiveMessageContentCmd.MarkFlagRequired("archived-message-id")
+		mailmanager_getArchiveMessageContentCmd.Flags().String("archived-message-id", "", "The unique identifier of the archived email message.")
+		mailmanager_getArchiveMessageContentCmd.MarkFlagRequired("archived-message-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_getArchiveMessageContentCmd)
 }

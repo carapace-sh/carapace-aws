@@ -12,10 +12,12 @@ var dax_describeClustersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dax_describeClustersCmd).Standalone()
+	carapace.Gen(dax_describeClustersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dax_describeClustersCmd).Standalone()
 
-	dax_describeClustersCmd.Flags().String("cluster-names", "", "The names of the DAX clusters being described.")
-	dax_describeClustersCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
-	dax_describeClustersCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
+		dax_describeClustersCmd.Flags().String("cluster-names", "", "The names of the DAX clusters being described.")
+		dax_describeClustersCmd.Flags().String("max-results", "", "The maximum number of results to include in the response.")
+		dax_describeClustersCmd.Flags().String("next-token", "", "An optional token returned from a prior request.")
+	})
 	daxCmd.AddCommand(dax_describeClustersCmd)
 }

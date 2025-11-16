@@ -12,9 +12,11 @@ var shield_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_listTagsForResourceCmd).Standalone()
+	carapace.Gen(shield_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_listTagsForResourceCmd).Standalone()
 
-	shield_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to get tags for.")
-	shield_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		shield_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to get tags for.")
+		shield_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	shieldCmd.AddCommand(shield_listTagsForResourceCmd)
 }

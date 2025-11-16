@@ -12,11 +12,13 @@ var datazone_getEnvironmentProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getEnvironmentProfileCmd).Standalone()
+	carapace.Gen(datazone_getEnvironmentProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getEnvironmentProfileCmd).Standalone()
 
-	datazone_getEnvironmentProfileCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which this environment profile exists.")
-	datazone_getEnvironmentProfileCmd.Flags().String("identifier", "", "The ID of the environment profile.")
-	datazone_getEnvironmentProfileCmd.MarkFlagRequired("domain-identifier")
-	datazone_getEnvironmentProfileCmd.MarkFlagRequired("identifier")
+		datazone_getEnvironmentProfileCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which this environment profile exists.")
+		datazone_getEnvironmentProfileCmd.Flags().String("identifier", "", "The ID of the environment profile.")
+		datazone_getEnvironmentProfileCmd.MarkFlagRequired("domain-identifier")
+		datazone_getEnvironmentProfileCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getEnvironmentProfileCmd)
 }

@@ -12,13 +12,15 @@ var socialmessaging_deleteWhatsAppMessageTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(socialmessaging_deleteWhatsAppMessageTemplateCmd).Standalone()
+	carapace.Gen(socialmessaging_deleteWhatsAppMessageTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_deleteWhatsAppMessageTemplateCmd).Standalone()
 
-	socialmessaging_deleteWhatsAppMessageTemplateCmd.Flags().String("delete-all-languages", "", "If true, deletes all language versions of the template.")
-	socialmessaging_deleteWhatsAppMessageTemplateCmd.Flags().String("id", "", "The ID of the WhatsApp Business Account associated with this template.")
-	socialmessaging_deleteWhatsAppMessageTemplateCmd.Flags().String("meta-template-id", "", "The numeric ID of the template assigned by Meta.")
-	socialmessaging_deleteWhatsAppMessageTemplateCmd.Flags().String("template-name", "", "The name of the template to delete.")
-	socialmessaging_deleteWhatsAppMessageTemplateCmd.MarkFlagRequired("id")
-	socialmessaging_deleteWhatsAppMessageTemplateCmd.MarkFlagRequired("template-name")
+		socialmessaging_deleteWhatsAppMessageTemplateCmd.Flags().String("delete-all-languages", "", "If true, deletes all language versions of the template.")
+		socialmessaging_deleteWhatsAppMessageTemplateCmd.Flags().String("id", "", "The ID of the WhatsApp Business Account associated with this template.")
+		socialmessaging_deleteWhatsAppMessageTemplateCmd.Flags().String("meta-template-id", "", "The numeric ID of the template assigned by Meta.")
+		socialmessaging_deleteWhatsAppMessageTemplateCmd.Flags().String("template-name", "", "The name of the template to delete.")
+		socialmessaging_deleteWhatsAppMessageTemplateCmd.MarkFlagRequired("id")
+		socialmessaging_deleteWhatsAppMessageTemplateCmd.MarkFlagRequired("template-name")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_deleteWhatsAppMessageTemplateCmd)
 }

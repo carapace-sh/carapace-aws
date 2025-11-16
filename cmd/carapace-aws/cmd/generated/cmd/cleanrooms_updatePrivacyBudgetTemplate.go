@@ -12,14 +12,16 @@ var cleanrooms_updatePrivacyBudgetTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_updatePrivacyBudgetTemplateCmd).Standalone()
+	carapace.Gen(cleanrooms_updatePrivacyBudgetTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_updatePrivacyBudgetTemplateCmd).Standalone()
 
-	cleanrooms_updatePrivacyBudgetTemplateCmd.Flags().String("membership-identifier", "", "A unique identifier for one of your memberships for a collaboration.")
-	cleanrooms_updatePrivacyBudgetTemplateCmd.Flags().String("parameters", "", "Specifies the epsilon and noise parameters for the privacy budget template.")
-	cleanrooms_updatePrivacyBudgetTemplateCmd.Flags().String("privacy-budget-template-identifier", "", "A unique identifier for your privacy budget template that you want to update.")
-	cleanrooms_updatePrivacyBudgetTemplateCmd.Flags().String("privacy-budget-type", "", "Specifies the type of the privacy budget template.")
-	cleanrooms_updatePrivacyBudgetTemplateCmd.MarkFlagRequired("membership-identifier")
-	cleanrooms_updatePrivacyBudgetTemplateCmd.MarkFlagRequired("privacy-budget-template-identifier")
-	cleanrooms_updatePrivacyBudgetTemplateCmd.MarkFlagRequired("privacy-budget-type")
+		cleanrooms_updatePrivacyBudgetTemplateCmd.Flags().String("membership-identifier", "", "A unique identifier for one of your memberships for a collaboration.")
+		cleanrooms_updatePrivacyBudgetTemplateCmd.Flags().String("parameters", "", "Specifies the epsilon and noise parameters for the privacy budget template.")
+		cleanrooms_updatePrivacyBudgetTemplateCmd.Flags().String("privacy-budget-template-identifier", "", "A unique identifier for your privacy budget template that you want to update.")
+		cleanrooms_updatePrivacyBudgetTemplateCmd.Flags().String("privacy-budget-type", "", "Specifies the type of the privacy budget template.")
+		cleanrooms_updatePrivacyBudgetTemplateCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_updatePrivacyBudgetTemplateCmd.MarkFlagRequired("privacy-budget-template-identifier")
+		cleanrooms_updatePrivacyBudgetTemplateCmd.MarkFlagRequired("privacy-budget-type")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_updatePrivacyBudgetTemplateCmd)
 }

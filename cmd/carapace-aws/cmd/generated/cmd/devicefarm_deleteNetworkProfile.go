@@ -12,9 +12,11 @@ var devicefarm_deleteNetworkProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_deleteNetworkProfileCmd).Standalone()
+	carapace.Gen(devicefarm_deleteNetworkProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_deleteNetworkProfileCmd).Standalone()
 
-	devicefarm_deleteNetworkProfileCmd.Flags().String("arn", "", "The ARN of the network profile to delete.")
-	devicefarm_deleteNetworkProfileCmd.MarkFlagRequired("arn")
+		devicefarm_deleteNetworkProfileCmd.Flags().String("arn", "", "The ARN of the network profile to delete.")
+		devicefarm_deleteNetworkProfileCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_deleteNetworkProfileCmd)
 }

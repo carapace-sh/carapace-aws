@@ -12,14 +12,16 @@ var s3_createBucketMetadataTableConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_createBucketMetadataTableConfigurationCmd).Standalone()
+	carapace.Gen(s3_createBucketMetadataTableConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_createBucketMetadataTableConfigurationCmd).Standalone()
 
-	s3_createBucketMetadataTableConfigurationCmd.Flags().String("bucket", "", "The general purpose bucket that you want to create the metadata table configuration for.")
-	s3_createBucketMetadataTableConfigurationCmd.Flags().String("checksum-algorithm", "", "The checksum algorithm to use with your metadata table configuration.")
-	s3_createBucketMetadataTableConfigurationCmd.Flags().String("content-md5", "", "The `Content-MD5` header for the metadata table configuration.")
-	s3_createBucketMetadataTableConfigurationCmd.Flags().String("expected-bucket-owner", "", "The expected owner of the general purpose bucket that corresponds to your metadata table configuration.")
-	s3_createBucketMetadataTableConfigurationCmd.Flags().String("metadata-table-configuration", "", "The contents of your metadata table configuration.")
-	s3_createBucketMetadataTableConfigurationCmd.MarkFlagRequired("bucket")
-	s3_createBucketMetadataTableConfigurationCmd.MarkFlagRequired("metadata-table-configuration")
+		s3_createBucketMetadataTableConfigurationCmd.Flags().String("bucket", "", "The general purpose bucket that you want to create the metadata table configuration for.")
+		s3_createBucketMetadataTableConfigurationCmd.Flags().String("checksum-algorithm", "", "The checksum algorithm to use with your metadata table configuration.")
+		s3_createBucketMetadataTableConfigurationCmd.Flags().String("content-md5", "", "The `Content-MD5` header for the metadata table configuration.")
+		s3_createBucketMetadataTableConfigurationCmd.Flags().String("expected-bucket-owner", "", "The expected owner of the general purpose bucket that corresponds to your metadata table configuration.")
+		s3_createBucketMetadataTableConfigurationCmd.Flags().String("metadata-table-configuration", "", "The contents of your metadata table configuration.")
+		s3_createBucketMetadataTableConfigurationCmd.MarkFlagRequired("bucket")
+		s3_createBucketMetadataTableConfigurationCmd.MarkFlagRequired("metadata-table-configuration")
+	})
 	s3Cmd.AddCommand(s3_createBucketMetadataTableConfigurationCmd)
 }

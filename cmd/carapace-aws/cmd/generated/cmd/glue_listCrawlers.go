@@ -12,10 +12,12 @@ var glue_listCrawlersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listCrawlersCmd).Standalone()
+	carapace.Gen(glue_listCrawlersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listCrawlersCmd).Standalone()
 
-	glue_listCrawlersCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
-	glue_listCrawlersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
-	glue_listCrawlersCmd.Flags().String("tags", "", "Specifies to return only these tagged resources.")
+		glue_listCrawlersCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
+		glue_listCrawlersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+		glue_listCrawlersCmd.Flags().String("tags", "", "Specifies to return only these tagged resources.")
+	})
 	glueCmd.AddCommand(glue_listCrawlersCmd)
 }

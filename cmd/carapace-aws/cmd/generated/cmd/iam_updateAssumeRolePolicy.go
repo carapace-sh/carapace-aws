@@ -12,11 +12,13 @@ var iam_updateAssumeRolePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_updateAssumeRolePolicyCmd).Standalone()
+	carapace.Gen(iam_updateAssumeRolePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_updateAssumeRolePolicyCmd).Standalone()
 
-	iam_updateAssumeRolePolicyCmd.Flags().String("policy-document", "", "The policy that grants an entity permission to assume the role.")
-	iam_updateAssumeRolePolicyCmd.Flags().String("role-name", "", "The name of the role to update with the new policy.")
-	iam_updateAssumeRolePolicyCmd.MarkFlagRequired("policy-document")
-	iam_updateAssumeRolePolicyCmd.MarkFlagRequired("role-name")
+		iam_updateAssumeRolePolicyCmd.Flags().String("policy-document", "", "The policy that grants an entity permission to assume the role.")
+		iam_updateAssumeRolePolicyCmd.Flags().String("role-name", "", "The name of the role to update with the new policy.")
+		iam_updateAssumeRolePolicyCmd.MarkFlagRequired("policy-document")
+		iam_updateAssumeRolePolicyCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_updateAssumeRolePolicyCmd)
 }

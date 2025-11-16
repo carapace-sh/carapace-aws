@@ -12,11 +12,13 @@ var mturk_listReviewableHitsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_listReviewableHitsCmd).Standalone()
+	carapace.Gen(mturk_listReviewableHitsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_listReviewableHitsCmd).Standalone()
 
-	mturk_listReviewableHitsCmd.Flags().String("hittype-id", "", "The ID of the HIT type of the HITs to consider for the query.")
-	mturk_listReviewableHitsCmd.Flags().String("max-results", "", "Limit the number of results returned.")
-	mturk_listReviewableHitsCmd.Flags().String("next-token", "", "Pagination Token")
-	mturk_listReviewableHitsCmd.Flags().String("status", "", "Can be either `Reviewable` or `Reviewing`.")
+		mturk_listReviewableHitsCmd.Flags().String("hittype-id", "", "The ID of the HIT type of the HITs to consider for the query.")
+		mturk_listReviewableHitsCmd.Flags().String("max-results", "", "Limit the number of results returned.")
+		mturk_listReviewableHitsCmd.Flags().String("next-token", "", "Pagination Token")
+		mturk_listReviewableHitsCmd.Flags().String("status", "", "Can be either `Reviewable` or `Reviewing`.")
+	})
 	mturkCmd.AddCommand(mturk_listReviewableHitsCmd)
 }

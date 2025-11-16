@@ -12,15 +12,17 @@ var rekognition_associateFacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_associateFacesCmd).Standalone()
+	carapace.Gen(rekognition_associateFacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_associateFacesCmd).Standalone()
 
-	rekognition_associateFacesCmd.Flags().String("client-request-token", "", "Idempotent token used to identify the request to `AssociateFaces`.")
-	rekognition_associateFacesCmd.Flags().String("collection-id", "", "The ID of an existing collection containing the UserID.")
-	rekognition_associateFacesCmd.Flags().String("face-ids", "", "An array of FaceIDs to associate with the UserID.")
-	rekognition_associateFacesCmd.Flags().String("user-id", "", "The ID for the existing UserID.")
-	rekognition_associateFacesCmd.Flags().String("user-match-threshold", "", "An optional value specifying the minimum confidence in the UserID match to return.")
-	rekognition_associateFacesCmd.MarkFlagRequired("collection-id")
-	rekognition_associateFacesCmd.MarkFlagRequired("face-ids")
-	rekognition_associateFacesCmd.MarkFlagRequired("user-id")
+		rekognition_associateFacesCmd.Flags().String("client-request-token", "", "Idempotent token used to identify the request to `AssociateFaces`.")
+		rekognition_associateFacesCmd.Flags().String("collection-id", "", "The ID of an existing collection containing the UserID.")
+		rekognition_associateFacesCmd.Flags().String("face-ids", "", "An array of FaceIDs to associate with the UserID.")
+		rekognition_associateFacesCmd.Flags().String("user-id", "", "The ID for the existing UserID.")
+		rekognition_associateFacesCmd.Flags().String("user-match-threshold", "", "An optional value specifying the minimum confidence in the UserID match to return.")
+		rekognition_associateFacesCmd.MarkFlagRequired("collection-id")
+		rekognition_associateFacesCmd.MarkFlagRequired("face-ids")
+		rekognition_associateFacesCmd.MarkFlagRequired("user-id")
+	})
 	rekognitionCmd.AddCommand(rekognition_associateFacesCmd)
 }

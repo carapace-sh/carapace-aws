@@ -12,9 +12,11 @@ var lookoutequipment_describeDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_describeDatasetCmd).Standalone()
+	carapace.Gen(lookoutequipment_describeDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_describeDatasetCmd).Standalone()
 
-	lookoutequipment_describeDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset to be described.")
-	lookoutequipment_describeDatasetCmd.MarkFlagRequired("dataset-name")
+		lookoutequipment_describeDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset to be described.")
+		lookoutequipment_describeDatasetCmd.MarkFlagRequired("dataset-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_describeDatasetCmd)
 }

@@ -12,9 +12,11 @@ var groundstation_deleteEphemerisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_deleteEphemerisCmd).Standalone()
+	carapace.Gen(groundstation_deleteEphemerisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_deleteEphemerisCmd).Standalone()
 
-	groundstation_deleteEphemerisCmd.Flags().String("ephemeris-id", "", "The AWS Ground Station ephemeris ID.")
-	groundstation_deleteEphemerisCmd.MarkFlagRequired("ephemeris-id")
+		groundstation_deleteEphemerisCmd.Flags().String("ephemeris-id", "", "The AWS Ground Station ephemeris ID.")
+		groundstation_deleteEphemerisCmd.MarkFlagRequired("ephemeris-id")
+	})
 	groundstationCmd.AddCommand(groundstation_deleteEphemerisCmd)
 }

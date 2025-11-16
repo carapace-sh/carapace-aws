@@ -12,9 +12,11 @@ var iotfleetwise_getDecoderManifestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_getDecoderManifestCmd).Standalone()
+	carapace.Gen(iotfleetwise_getDecoderManifestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_getDecoderManifestCmd).Standalone()
 
-	iotfleetwise_getDecoderManifestCmd.Flags().String("name", "", "The name of the decoder manifest to retrieve information about.")
-	iotfleetwise_getDecoderManifestCmd.MarkFlagRequired("name")
+		iotfleetwise_getDecoderManifestCmd.Flags().String("name", "", "The name of the decoder manifest to retrieve information about.")
+		iotfleetwise_getDecoderManifestCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_getDecoderManifestCmd)
 }

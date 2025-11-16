@@ -12,9 +12,11 @@ var resiliencehub_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_listTagsForResourceCmd).Standalone()
+	carapace.Gen(resiliencehub_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_listTagsForResourceCmd).Standalone()
 
-	resiliencehub_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a specific resource in your Resilience Hub application.")
-	resiliencehub_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		resiliencehub_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for a specific resource in your Resilience Hub application.")
+		resiliencehub_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_listTagsForResourceCmd)
 }

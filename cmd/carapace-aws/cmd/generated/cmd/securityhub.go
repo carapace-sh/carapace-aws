@@ -12,7 +12,9 @@ var securityhubCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhubCmd).Standalone()
+	carapace.Gen(securityhubCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhubCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(securityhubCmd)
 }

@@ -12,10 +12,12 @@ var guardduty_createSampleFindingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_createSampleFindingsCmd).Standalone()
+	carapace.Gen(guardduty_createSampleFindingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_createSampleFindingsCmd).Standalone()
 
-	guardduty_createSampleFindingsCmd.Flags().String("detector-id", "", "The ID of the detector for which you need to create sample findings.")
-	guardduty_createSampleFindingsCmd.Flags().String("finding-types", "", "The types of sample findings to generate.")
-	guardduty_createSampleFindingsCmd.MarkFlagRequired("detector-id")
+		guardduty_createSampleFindingsCmd.Flags().String("detector-id", "", "The ID of the detector for which you need to create sample findings.")
+		guardduty_createSampleFindingsCmd.Flags().String("finding-types", "", "The types of sample findings to generate.")
+		guardduty_createSampleFindingsCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_createSampleFindingsCmd)
 }

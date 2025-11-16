@@ -12,9 +12,11 @@ var ses_verifyDomainDkimCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_verifyDomainDkimCmd).Standalone()
+	carapace.Gen(ses_verifyDomainDkimCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_verifyDomainDkimCmd).Standalone()
 
-	ses_verifyDomainDkimCmd.Flags().String("domain", "", "The name of the domain to be verified for Easy DKIM signing.")
-	ses_verifyDomainDkimCmd.MarkFlagRequired("domain")
+		ses_verifyDomainDkimCmd.Flags().String("domain", "", "The name of the domain to be verified for Easy DKIM signing.")
+		ses_verifyDomainDkimCmd.MarkFlagRequired("domain")
+	})
 	sesCmd.AddCommand(ses_verifyDomainDkimCmd)
 }

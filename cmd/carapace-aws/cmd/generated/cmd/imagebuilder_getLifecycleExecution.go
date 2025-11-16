@@ -12,9 +12,11 @@ var imagebuilder_getLifecycleExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_getLifecycleExecutionCmd).Standalone()
+	carapace.Gen(imagebuilder_getLifecycleExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_getLifecycleExecutionCmd).Standalone()
 
-	imagebuilder_getLifecycleExecutionCmd.Flags().String("lifecycle-execution-id", "", "Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.")
-	imagebuilder_getLifecycleExecutionCmd.MarkFlagRequired("lifecycle-execution-id")
+		imagebuilder_getLifecycleExecutionCmd.Flags().String("lifecycle-execution-id", "", "Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.")
+		imagebuilder_getLifecycleExecutionCmd.MarkFlagRequired("lifecycle-execution-id")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_getLifecycleExecutionCmd)
 }

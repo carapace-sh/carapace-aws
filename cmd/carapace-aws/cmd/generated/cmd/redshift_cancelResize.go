@@ -12,9 +12,11 @@ var redshift_cancelResizeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_cancelResizeCmd).Standalone()
+	carapace.Gen(redshift_cancelResizeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_cancelResizeCmd).Standalone()
 
-	redshift_cancelResizeCmd.Flags().String("cluster-identifier", "", "The unique identifier for the cluster that you want to cancel a resize operation for.")
-	redshift_cancelResizeCmd.MarkFlagRequired("cluster-identifier")
+		redshift_cancelResizeCmd.Flags().String("cluster-identifier", "", "The unique identifier for the cluster that you want to cancel a resize operation for.")
+		redshift_cancelResizeCmd.MarkFlagRequired("cluster-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_cancelResizeCmd)
 }

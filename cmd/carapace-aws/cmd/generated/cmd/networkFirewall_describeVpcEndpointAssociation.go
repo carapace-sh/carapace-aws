@@ -12,9 +12,11 @@ var networkFirewall_describeVpcEndpointAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkFirewall_describeVpcEndpointAssociationCmd).Standalone()
+	carapace.Gen(networkFirewall_describeVpcEndpointAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkFirewall_describeVpcEndpointAssociationCmd).Standalone()
 
-	networkFirewall_describeVpcEndpointAssociationCmd.Flags().String("vpc-endpoint-association-arn", "", "The Amazon Resource Name (ARN) of a VPC endpoint association.")
-	networkFirewall_describeVpcEndpointAssociationCmd.MarkFlagRequired("vpc-endpoint-association-arn")
+		networkFirewall_describeVpcEndpointAssociationCmd.Flags().String("vpc-endpoint-association-arn", "", "The Amazon Resource Name (ARN) of a VPC endpoint association.")
+		networkFirewall_describeVpcEndpointAssociationCmd.MarkFlagRequired("vpc-endpoint-association-arn")
+	})
 	networkFirewallCmd.AddCommand(networkFirewall_describeVpcEndpointAssociationCmd)
 }

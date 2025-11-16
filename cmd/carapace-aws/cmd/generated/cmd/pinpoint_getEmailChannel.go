@@ -12,9 +12,11 @@ var pinpoint_getEmailChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getEmailChannelCmd).Standalone()
+	carapace.Gen(pinpoint_getEmailChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getEmailChannelCmd).Standalone()
 
-	pinpoint_getEmailChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getEmailChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_getEmailChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getEmailChannelCmd.MarkFlagRequired("application-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getEmailChannelCmd)
 }

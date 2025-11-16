@@ -12,11 +12,13 @@ var drs_associateSourceNetworkStackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_associateSourceNetworkStackCmd).Standalone()
+	carapace.Gen(drs_associateSourceNetworkStackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_associateSourceNetworkStackCmd).Standalone()
 
-	drs_associateSourceNetworkStackCmd.Flags().String("cfn-stack-name", "", "CloudFormation template to associate with a Source Network.")
-	drs_associateSourceNetworkStackCmd.Flags().String("source-network-id", "", "The Source Network ID to associate with CloudFormation template.")
-	drs_associateSourceNetworkStackCmd.MarkFlagRequired("cfn-stack-name")
-	drs_associateSourceNetworkStackCmd.MarkFlagRequired("source-network-id")
+		drs_associateSourceNetworkStackCmd.Flags().String("cfn-stack-name", "", "CloudFormation template to associate with a Source Network.")
+		drs_associateSourceNetworkStackCmd.Flags().String("source-network-id", "", "The Source Network ID to associate with CloudFormation template.")
+		drs_associateSourceNetworkStackCmd.MarkFlagRequired("cfn-stack-name")
+		drs_associateSourceNetworkStackCmd.MarkFlagRequired("source-network-id")
+	})
 	drsCmd.AddCommand(drs_associateSourceNetworkStackCmd)
 }

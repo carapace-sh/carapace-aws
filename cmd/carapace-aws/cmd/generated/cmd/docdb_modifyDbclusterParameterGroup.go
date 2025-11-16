@@ -12,11 +12,13 @@ var docdb_modifyDbclusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_modifyDbclusterParameterGroupCmd).Standalone()
+	carapace.Gen(docdb_modifyDbclusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_modifyDbclusterParameterGroupCmd).Standalone()
 
-	docdb_modifyDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the cluster parameter group to modify.")
-	docdb_modifyDbclusterParameterGroupCmd.Flags().String("parameters", "", "A list of parameters in the cluster parameter group to modify.")
-	docdb_modifyDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
-	docdb_modifyDbclusterParameterGroupCmd.MarkFlagRequired("parameters")
+		docdb_modifyDbclusterParameterGroupCmd.Flags().String("dbcluster-parameter-group-name", "", "The name of the cluster parameter group to modify.")
+		docdb_modifyDbclusterParameterGroupCmd.Flags().String("parameters", "", "A list of parameters in the cluster parameter group to modify.")
+		docdb_modifyDbclusterParameterGroupCmd.MarkFlagRequired("dbcluster-parameter-group-name")
+		docdb_modifyDbclusterParameterGroupCmd.MarkFlagRequired("parameters")
+	})
 	docdbCmd.AddCommand(docdb_modifyDbclusterParameterGroupCmd)
 }

@@ -12,9 +12,11 @@ var cognitoIdentity_describeIdentityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdentity_describeIdentityCmd).Standalone()
+	carapace.Gen(cognitoIdentity_describeIdentityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdentity_describeIdentityCmd).Standalone()
 
-	cognitoIdentity_describeIdentityCmd.Flags().String("identity-id", "", "A unique identifier in the format REGION:GUID.")
-	cognitoIdentity_describeIdentityCmd.MarkFlagRequired("identity-id")
+		cognitoIdentity_describeIdentityCmd.Flags().String("identity-id", "", "A unique identifier in the format REGION:GUID.")
+		cognitoIdentity_describeIdentityCmd.MarkFlagRequired("identity-id")
+	})
 	cognitoIdentityCmd.AddCommand(cognitoIdentity_describeIdentityCmd)
 }

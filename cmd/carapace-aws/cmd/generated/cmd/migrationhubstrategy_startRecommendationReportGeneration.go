@@ -12,9 +12,11 @@ var migrationhubstrategy_startRecommendationReportGenerationCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(migrationhubstrategy_startRecommendationReportGenerationCmd).Standalone()
+	carapace.Gen(migrationhubstrategy_startRecommendationReportGenerationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhubstrategy_startRecommendationReportGenerationCmd).Standalone()
 
-	migrationhubstrategy_startRecommendationReportGenerationCmd.Flags().String("group-id-filter", "", "Groups the resources in the recommendation report with a unique name.")
-	migrationhubstrategy_startRecommendationReportGenerationCmd.Flags().String("output-format", "", "The output format for the recommendation report file.")
+		migrationhubstrategy_startRecommendationReportGenerationCmd.Flags().String("group-id-filter", "", "Groups the resources in the recommendation report with a unique name.")
+		migrationhubstrategy_startRecommendationReportGenerationCmd.Flags().String("output-format", "", "The output format for the recommendation report file.")
+	})
 	migrationhubstrategyCmd.AddCommand(migrationhubstrategy_startRecommendationReportGenerationCmd)
 }

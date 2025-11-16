@@ -12,12 +12,14 @@ var ec2_modifyVpcBlockPublicAccessOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_modifyVpcBlockPublicAccessOptionsCmd).Standalone()
+	carapace.Gen(ec2_modifyVpcBlockPublicAccessOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_modifyVpcBlockPublicAccessOptionsCmd).Standalone()
 
-	ec2_modifyVpcBlockPublicAccessOptionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_modifyVpcBlockPublicAccessOptionsCmd.Flags().String("internet-gateway-block-mode", "", "The mode of VPC BPA.")
-	ec2_modifyVpcBlockPublicAccessOptionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_modifyVpcBlockPublicAccessOptionsCmd.MarkFlagRequired("internet-gateway-block-mode")
-	ec2_modifyVpcBlockPublicAccessOptionsCmd.Flag("no-dry-run").Hidden = true
+		ec2_modifyVpcBlockPublicAccessOptionsCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_modifyVpcBlockPublicAccessOptionsCmd.Flags().String("internet-gateway-block-mode", "", "The mode of VPC BPA.")
+		ec2_modifyVpcBlockPublicAccessOptionsCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_modifyVpcBlockPublicAccessOptionsCmd.MarkFlagRequired("internet-gateway-block-mode")
+		ec2_modifyVpcBlockPublicAccessOptionsCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_modifyVpcBlockPublicAccessOptionsCmd)
 }

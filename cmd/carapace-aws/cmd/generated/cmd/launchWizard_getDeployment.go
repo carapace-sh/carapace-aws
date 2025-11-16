@@ -12,9 +12,11 @@ var launchWizard_getDeploymentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(launchWizard_getDeploymentCmd).Standalone()
+	carapace.Gen(launchWizard_getDeploymentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(launchWizard_getDeploymentCmd).Standalone()
 
-	launchWizard_getDeploymentCmd.Flags().String("deployment-id", "", "The ID of the deployment.")
-	launchWizard_getDeploymentCmd.MarkFlagRequired("deployment-id")
+		launchWizard_getDeploymentCmd.Flags().String("deployment-id", "", "The ID of the deployment.")
+		launchWizard_getDeploymentCmd.MarkFlagRequired("deployment-id")
+	})
 	launchWizardCmd.AddCommand(launchWizard_getDeploymentCmd)
 }

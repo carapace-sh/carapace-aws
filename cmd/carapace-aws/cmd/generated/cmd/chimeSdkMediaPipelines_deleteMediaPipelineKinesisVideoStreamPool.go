@@ -12,9 +12,11 @@ var chimeSdkMediaPipelines_deleteMediaPipelineKinesisVideoStreamPoolCmd = &cobra
 }
 
 func init() {
-	carapace.Gen(chimeSdkMediaPipelines_deleteMediaPipelineKinesisVideoStreamPoolCmd).Standalone()
+	carapace.Gen(chimeSdkMediaPipelines_deleteMediaPipelineKinesisVideoStreamPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMediaPipelines_deleteMediaPipelineKinesisVideoStreamPoolCmd).Standalone()
 
-	chimeSdkMediaPipelines_deleteMediaPipelineKinesisVideoStreamPoolCmd.Flags().String("identifier", "", "The unique identifier of the requested resource.")
-	chimeSdkMediaPipelines_deleteMediaPipelineKinesisVideoStreamPoolCmd.MarkFlagRequired("identifier")
+		chimeSdkMediaPipelines_deleteMediaPipelineKinesisVideoStreamPoolCmd.Flags().String("identifier", "", "The unique identifier of the requested resource.")
+		chimeSdkMediaPipelines_deleteMediaPipelineKinesisVideoStreamPoolCmd.MarkFlagRequired("identifier")
+	})
 	chimeSdkMediaPipelinesCmd.AddCommand(chimeSdkMediaPipelines_deleteMediaPipelineKinesisVideoStreamPoolCmd)
 }

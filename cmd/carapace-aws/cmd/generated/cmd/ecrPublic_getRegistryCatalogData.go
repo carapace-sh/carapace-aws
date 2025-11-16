@@ -12,7 +12,9 @@ var ecrPublic_getRegistryCatalogDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ecrPublic_getRegistryCatalogDataCmd).Standalone()
+	carapace.Gen(ecrPublic_getRegistryCatalogDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ecrPublic_getRegistryCatalogDataCmd).Standalone()
 
+	})
 	ecrPublicCmd.AddCommand(ecrPublic_getRegistryCatalogDataCmd)
 }

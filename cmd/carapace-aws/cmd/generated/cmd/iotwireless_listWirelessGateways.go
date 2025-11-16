@@ -12,9 +12,11 @@ var iotwireless_listWirelessGatewaysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_listWirelessGatewaysCmd).Standalone()
+	carapace.Gen(iotwireless_listWirelessGatewaysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_listWirelessGatewaysCmd).Standalone()
 
-	iotwireless_listWirelessGatewaysCmd.Flags().String("max-results", "", "The maximum number of results to return in this operation.")
-	iotwireless_listWirelessGatewaysCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+		iotwireless_listWirelessGatewaysCmd.Flags().String("max-results", "", "The maximum number of results to return in this operation.")
+		iotwireless_listWirelessGatewaysCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_listWirelessGatewaysCmd)
 }

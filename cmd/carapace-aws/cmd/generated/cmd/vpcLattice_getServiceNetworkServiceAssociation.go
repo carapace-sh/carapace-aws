@@ -12,9 +12,11 @@ var vpcLattice_getServiceNetworkServiceAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getServiceNetworkServiceAssociationCmd).Standalone()
+	carapace.Gen(vpcLattice_getServiceNetworkServiceAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getServiceNetworkServiceAssociationCmd).Standalone()
 
-	vpcLattice_getServiceNetworkServiceAssociationCmd.Flags().String("service-network-service-association-identifier", "", "The ID or ARN of the association.")
-	vpcLattice_getServiceNetworkServiceAssociationCmd.MarkFlagRequired("service-network-service-association-identifier")
+		vpcLattice_getServiceNetworkServiceAssociationCmd.Flags().String("service-network-service-association-identifier", "", "The ID or ARN of the association.")
+		vpcLattice_getServiceNetworkServiceAssociationCmd.MarkFlagRequired("service-network-service-association-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getServiceNetworkServiceAssociationCmd)
 }

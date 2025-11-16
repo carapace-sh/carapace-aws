@@ -12,9 +12,11 @@ var cloudfront_createDistribution2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_createDistribution2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_createDistribution2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_createDistribution2020_05_31Cmd).Standalone()
 
-	cloudfront_createDistribution2020_05_31Cmd.Flags().String("distribution-config", "", "The distribution's configuration information.")
-	cloudfront_createDistribution2020_05_31Cmd.MarkFlagRequired("distribution-config")
+		cloudfront_createDistribution2020_05_31Cmd.Flags().String("distribution-config", "", "The distribution's configuration information.")
+		cloudfront_createDistribution2020_05_31Cmd.MarkFlagRequired("distribution-config")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_createDistribution2020_05_31Cmd)
 }

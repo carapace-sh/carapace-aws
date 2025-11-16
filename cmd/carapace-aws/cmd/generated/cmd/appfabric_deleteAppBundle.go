@@ -12,9 +12,11 @@ var appfabric_deleteAppBundleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appfabric_deleteAppBundleCmd).Standalone()
+	carapace.Gen(appfabric_deleteAppBundleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appfabric_deleteAppBundleCmd).Standalone()
 
-	appfabric_deleteAppBundleCmd.Flags().String("app-bundle-identifier", "", "The ID or Amazon Resource Name (ARN) of the app bundle that needs to be deleted.")
-	appfabric_deleteAppBundleCmd.MarkFlagRequired("app-bundle-identifier")
+		appfabric_deleteAppBundleCmd.Flags().String("app-bundle-identifier", "", "The ID or Amazon Resource Name (ARN) of the app bundle that needs to be deleted.")
+		appfabric_deleteAppBundleCmd.MarkFlagRequired("app-bundle-identifier")
+	})
 	appfabricCmd.AddCommand(appfabric_deleteAppBundleCmd)
 }

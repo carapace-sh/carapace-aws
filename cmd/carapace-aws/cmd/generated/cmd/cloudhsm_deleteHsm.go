@@ -12,9 +12,11 @@ var cloudhsm_deleteHsmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_deleteHsmCmd).Standalone()
+	carapace.Gen(cloudhsm_deleteHsmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_deleteHsmCmd).Standalone()
 
-	cloudhsm_deleteHsmCmd.Flags().String("hsm-arn", "", "The ARN of the HSM to delete.")
-	cloudhsm_deleteHsmCmd.MarkFlagRequired("hsm-arn")
+		cloudhsm_deleteHsmCmd.Flags().String("hsm-arn", "", "The ARN of the HSM to delete.")
+		cloudhsm_deleteHsmCmd.MarkFlagRequired("hsm-arn")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_deleteHsmCmd)
 }

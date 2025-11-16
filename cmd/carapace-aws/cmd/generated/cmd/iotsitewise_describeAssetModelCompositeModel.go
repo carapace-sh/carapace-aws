@@ -12,12 +12,14 @@ var iotsitewise_describeAssetModelCompositeModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeAssetModelCompositeModelCmd).Standalone()
+	carapace.Gen(iotsitewise_describeAssetModelCompositeModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeAssetModelCompositeModelCmd).Standalone()
 
-	iotsitewise_describeAssetModelCompositeModelCmd.Flags().String("asset-model-composite-model-id", "", "The ID of a composite model on this asset model.")
-	iotsitewise_describeAssetModelCompositeModelCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
-	iotsitewise_describeAssetModelCompositeModelCmd.Flags().String("asset-model-version", "", "The version alias that specifies the latest or active version of the asset model.")
-	iotsitewise_describeAssetModelCompositeModelCmd.MarkFlagRequired("asset-model-composite-model-id")
-	iotsitewise_describeAssetModelCompositeModelCmd.MarkFlagRequired("asset-model-id")
+		iotsitewise_describeAssetModelCompositeModelCmd.Flags().String("asset-model-composite-model-id", "", "The ID of a composite model on this asset model.")
+		iotsitewise_describeAssetModelCompositeModelCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
+		iotsitewise_describeAssetModelCompositeModelCmd.Flags().String("asset-model-version", "", "The version alias that specifies the latest or active version of the asset model.")
+		iotsitewise_describeAssetModelCompositeModelCmd.MarkFlagRequired("asset-model-composite-model-id")
+		iotsitewise_describeAssetModelCompositeModelCmd.MarkFlagRequired("asset-model-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeAssetModelCompositeModelCmd)
 }

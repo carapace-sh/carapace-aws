@@ -12,9 +12,11 @@ var pinpointEmail_deleteDedicatedIpPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_deleteDedicatedIpPoolCmd).Standalone()
+	carapace.Gen(pinpointEmail_deleteDedicatedIpPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_deleteDedicatedIpPoolCmd).Standalone()
 
-	pinpointEmail_deleteDedicatedIpPoolCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool that you want to delete.")
-	pinpointEmail_deleteDedicatedIpPoolCmd.MarkFlagRequired("pool-name")
+		pinpointEmail_deleteDedicatedIpPoolCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool that you want to delete.")
+		pinpointEmail_deleteDedicatedIpPoolCmd.MarkFlagRequired("pool-name")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_deleteDedicatedIpPoolCmd)
 }

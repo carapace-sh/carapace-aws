@@ -12,9 +12,11 @@ var iotManagedIntegrations_getOtaTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getOtaTaskCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getOtaTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getOtaTaskCmd).Standalone()
 
-	iotManagedIntegrations_getOtaTaskCmd.Flags().String("identifier", "", "The over-the-air (OTA) task id.")
-	iotManagedIntegrations_getOtaTaskCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_getOtaTaskCmd.Flags().String("identifier", "", "The over-the-air (OTA) task id.")
+		iotManagedIntegrations_getOtaTaskCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getOtaTaskCmd)
 }

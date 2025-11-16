@@ -12,9 +12,11 @@ var route53resolver_deleteResolverQueryLogConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_deleteResolverQueryLogConfigCmd).Standalone()
+	carapace.Gen(route53resolver_deleteResolverQueryLogConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_deleteResolverQueryLogConfigCmd).Standalone()
 
-	route53resolver_deleteResolverQueryLogConfigCmd.Flags().String("resolver-query-log-config-id", "", "The ID of the query logging configuration that you want to delete.")
-	route53resolver_deleteResolverQueryLogConfigCmd.MarkFlagRequired("resolver-query-log-config-id")
+		route53resolver_deleteResolverQueryLogConfigCmd.Flags().String("resolver-query-log-config-id", "", "The ID of the query logging configuration that you want to delete.")
+		route53resolver_deleteResolverQueryLogConfigCmd.MarkFlagRequired("resolver-query-log-config-id")
+	})
 	route53resolverCmd.AddCommand(route53resolver_deleteResolverQueryLogConfigCmd)
 }

@@ -12,11 +12,13 @@ var acm_removeTagsFromCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(acm_removeTagsFromCertificateCmd).Standalone()
+	carapace.Gen(acm_removeTagsFromCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(acm_removeTagsFromCertificateCmd).Standalone()
 
-	acm_removeTagsFromCertificateCmd.Flags().String("certificate-arn", "", "String that contains the ARN of the ACM Certificate with one or more tags that you want to remove.")
-	acm_removeTagsFromCertificateCmd.Flags().String("tags", "", "The key-value pair that defines the tag to remove.")
-	acm_removeTagsFromCertificateCmd.MarkFlagRequired("certificate-arn")
-	acm_removeTagsFromCertificateCmd.MarkFlagRequired("tags")
+		acm_removeTagsFromCertificateCmd.Flags().String("certificate-arn", "", "String that contains the ARN of the ACM Certificate with one or more tags that you want to remove.")
+		acm_removeTagsFromCertificateCmd.Flags().String("tags", "", "The key-value pair that defines the tag to remove.")
+		acm_removeTagsFromCertificateCmd.MarkFlagRequired("certificate-arn")
+		acm_removeTagsFromCertificateCmd.MarkFlagRequired("tags")
+	})
 	acmCmd.AddCommand(acm_removeTagsFromCertificateCmd)
 }

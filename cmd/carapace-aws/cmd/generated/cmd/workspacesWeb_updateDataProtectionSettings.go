@@ -12,13 +12,15 @@ var workspacesWeb_updateDataProtectionSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_updateDataProtectionSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_updateDataProtectionSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_updateDataProtectionSettingsCmd).Standalone()
 
-	workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("data-protection-settings-arn", "", "The ARN of the data protection settings.")
-	workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("description", "", "The description of the data protection settings.")
-	workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("display-name", "", "The display name of the data protection settings.")
-	workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("inline-redaction-configuration", "", "The inline redaction configuration of the data protection settings that will be applied to all sessions.")
-	workspacesWeb_updateDataProtectionSettingsCmd.MarkFlagRequired("data-protection-settings-arn")
+		workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("data-protection-settings-arn", "", "The ARN of the data protection settings.")
+		workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("description", "", "The description of the data protection settings.")
+		workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("display-name", "", "The display name of the data protection settings.")
+		workspacesWeb_updateDataProtectionSettingsCmd.Flags().String("inline-redaction-configuration", "", "The inline redaction configuration of the data protection settings that will be applied to all sessions.")
+		workspacesWeb_updateDataProtectionSettingsCmd.MarkFlagRequired("data-protection-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_updateDataProtectionSettingsCmd)
 }

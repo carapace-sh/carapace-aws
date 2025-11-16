@@ -12,8 +12,10 @@ var lightsail_getDistributionLatestCacheResetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getDistributionLatestCacheResetCmd).Standalone()
+	carapace.Gen(lightsail_getDistributionLatestCacheResetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getDistributionLatestCacheResetCmd).Standalone()
 
-	lightsail_getDistributionLatestCacheResetCmd.Flags().String("distribution-name", "", "The name of the distribution for which to return the timestamp of the last cache reset.")
+		lightsail_getDistributionLatestCacheResetCmd.Flags().String("distribution-name", "", "The name of the distribution for which to return the timestamp of the last cache reset.")
+	})
 	lightsailCmd.AddCommand(lightsail_getDistributionLatestCacheResetCmd)
 }

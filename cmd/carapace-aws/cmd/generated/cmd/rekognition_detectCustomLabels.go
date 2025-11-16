@@ -12,13 +12,15 @@ var rekognition_detectCustomLabelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_detectCustomLabelsCmd).Standalone()
+	carapace.Gen(rekognition_detectCustomLabelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_detectCustomLabelsCmd).Standalone()
 
-	rekognition_detectCustomLabelsCmd.Flags().String("image", "", "")
-	rekognition_detectCustomLabelsCmd.Flags().String("max-results", "", "Maximum number of results you want the service to return in the response.")
-	rekognition_detectCustomLabelsCmd.Flags().String("min-confidence", "", "Specifies the minimum confidence level for the labels to return.")
-	rekognition_detectCustomLabelsCmd.Flags().String("project-version-arn", "", "The ARN of the model version that you want to use.")
-	rekognition_detectCustomLabelsCmd.MarkFlagRequired("image")
-	rekognition_detectCustomLabelsCmd.MarkFlagRequired("project-version-arn")
+		rekognition_detectCustomLabelsCmd.Flags().String("image", "", "")
+		rekognition_detectCustomLabelsCmd.Flags().String("max-results", "", "Maximum number of results you want the service to return in the response.")
+		rekognition_detectCustomLabelsCmd.Flags().String("min-confidence", "", "Specifies the minimum confidence level for the labels to return.")
+		rekognition_detectCustomLabelsCmd.Flags().String("project-version-arn", "", "The ARN of the model version that you want to use.")
+		rekognition_detectCustomLabelsCmd.MarkFlagRequired("image")
+		rekognition_detectCustomLabelsCmd.MarkFlagRequired("project-version-arn")
+	})
 	rekognitionCmd.AddCommand(rekognition_detectCustomLabelsCmd)
 }

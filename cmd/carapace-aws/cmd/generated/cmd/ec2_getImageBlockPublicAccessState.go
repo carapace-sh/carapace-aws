@@ -12,10 +12,12 @@ var ec2_getImageBlockPublicAccessStateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_getImageBlockPublicAccessStateCmd).Standalone()
+	carapace.Gen(ec2_getImageBlockPublicAccessStateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_getImageBlockPublicAccessStateCmd).Standalone()
 
-	ec2_getImageBlockPublicAccessStateCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getImageBlockPublicAccessStateCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_getImageBlockPublicAccessStateCmd.Flag("no-dry-run").Hidden = true
+		ec2_getImageBlockPublicAccessStateCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getImageBlockPublicAccessStateCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_getImageBlockPublicAccessStateCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_getImageBlockPublicAccessStateCmd)
 }

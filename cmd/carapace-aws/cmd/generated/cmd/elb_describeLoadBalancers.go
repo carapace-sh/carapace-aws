@@ -12,10 +12,12 @@ var elb_describeLoadBalancersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_describeLoadBalancersCmd).Standalone()
+	carapace.Gen(elb_describeLoadBalancersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_describeLoadBalancersCmd).Standalone()
 
-	elb_describeLoadBalancersCmd.Flags().String("load-balancer-names", "", "The names of the load balancers.")
-	elb_describeLoadBalancersCmd.Flags().String("marker", "", "The marker for the next set of results.")
-	elb_describeLoadBalancersCmd.Flags().String("page-size", "", "The maximum number of results to return with this call (a number from 1 to 400).")
+		elb_describeLoadBalancersCmd.Flags().String("load-balancer-names", "", "The names of the load balancers.")
+		elb_describeLoadBalancersCmd.Flags().String("marker", "", "The marker for the next set of results.")
+		elb_describeLoadBalancersCmd.Flags().String("page-size", "", "The maximum number of results to return with this call (a number from 1 to 400).")
+	})
 	elbCmd.AddCommand(elb_describeLoadBalancersCmd)
 }

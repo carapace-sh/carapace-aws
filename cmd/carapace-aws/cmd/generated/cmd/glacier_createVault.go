@@ -12,11 +12,13 @@ var glacier_createVaultCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_createVaultCmd).Standalone()
+	carapace.Gen(glacier_createVaultCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_createVaultCmd).Standalone()
 
-	glacier_createVaultCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
-	glacier_createVaultCmd.Flags().String("vault-name", "", "The name of the vault.")
-	glacier_createVaultCmd.MarkFlagRequired("account-id")
-	glacier_createVaultCmd.MarkFlagRequired("vault-name")
+		glacier_createVaultCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
+		glacier_createVaultCmd.Flags().String("vault-name", "", "The name of the vault.")
+		glacier_createVaultCmd.MarkFlagRequired("account-id")
+		glacier_createVaultCmd.MarkFlagRequired("vault-name")
+	})
 	glacierCmd.AddCommand(glacier_createVaultCmd)
 }

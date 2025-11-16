@@ -12,13 +12,15 @@ var sdb_selectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sdb_selectCmd).Standalone()
+	carapace.Gen(sdb_selectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sdb_selectCmd).Standalone()
 
-	sdb_selectCmd.Flags().Bool("consistent-read", false, "Determines whether or not strong consistency should be enforced when data is read from SimpleDB.")
-	sdb_selectCmd.Flags().String("next-token", "", "A string informing Amazon SimpleDB where to start the next list of `ItemNames`.")
-	sdb_selectCmd.Flags().Bool("no-consistent-read", false, "Determines whether or not strong consistency should be enforced when data is read from SimpleDB.")
-	sdb_selectCmd.Flags().String("select-expression", "", "The expression used to query the domain.")
-	sdb_selectCmd.Flag("no-consistent-read").Hidden = true
-	sdb_selectCmd.MarkFlagRequired("select-expression")
+		sdb_selectCmd.Flags().Bool("consistent-read", false, "Determines whether or not strong consistency should be enforced when data is read from SimpleDB.")
+		sdb_selectCmd.Flags().String("next-token", "", "A string informing Amazon SimpleDB where to start the next list of `ItemNames`.")
+		sdb_selectCmd.Flags().Bool("no-consistent-read", false, "Determines whether or not strong consistency should be enforced when data is read from SimpleDB.")
+		sdb_selectCmd.Flags().String("select-expression", "", "The expression used to query the domain.")
+		sdb_selectCmd.Flag("no-consistent-read").Hidden = true
+		sdb_selectCmd.MarkFlagRequired("select-expression")
+	})
 	sdbCmd.AddCommand(sdb_selectCmd)
 }

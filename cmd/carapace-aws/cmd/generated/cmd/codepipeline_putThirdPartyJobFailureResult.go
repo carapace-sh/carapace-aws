@@ -12,13 +12,15 @@ var codepipeline_putThirdPartyJobFailureResultCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_putThirdPartyJobFailureResultCmd).Standalone()
+	carapace.Gen(codepipeline_putThirdPartyJobFailureResultCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_putThirdPartyJobFailureResultCmd).Standalone()
 
-	codepipeline_putThirdPartyJobFailureResultCmd.Flags().String("client-token", "", "The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.")
-	codepipeline_putThirdPartyJobFailureResultCmd.Flags().String("failure-details", "", "Represents information about failure details.")
-	codepipeline_putThirdPartyJobFailureResultCmd.Flags().String("job-id", "", "The ID of the job that failed.")
-	codepipeline_putThirdPartyJobFailureResultCmd.MarkFlagRequired("client-token")
-	codepipeline_putThirdPartyJobFailureResultCmd.MarkFlagRequired("failure-details")
-	codepipeline_putThirdPartyJobFailureResultCmd.MarkFlagRequired("job-id")
+		codepipeline_putThirdPartyJobFailureResultCmd.Flags().String("client-token", "", "The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.")
+		codepipeline_putThirdPartyJobFailureResultCmd.Flags().String("failure-details", "", "Represents information about failure details.")
+		codepipeline_putThirdPartyJobFailureResultCmd.Flags().String("job-id", "", "The ID of the job that failed.")
+		codepipeline_putThirdPartyJobFailureResultCmd.MarkFlagRequired("client-token")
+		codepipeline_putThirdPartyJobFailureResultCmd.MarkFlagRequired("failure-details")
+		codepipeline_putThirdPartyJobFailureResultCmd.MarkFlagRequired("job-id")
+	})
 	codepipelineCmd.AddCommand(codepipeline_putThirdPartyJobFailureResultCmd)
 }

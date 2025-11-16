@@ -12,11 +12,13 @@ var directconnect_associateHostedConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_associateHostedConnectionCmd).Standalone()
+	carapace.Gen(directconnect_associateHostedConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_associateHostedConnectionCmd).Standalone()
 
-	directconnect_associateHostedConnectionCmd.Flags().String("connection-id", "", "The ID of the hosted connection.")
-	directconnect_associateHostedConnectionCmd.Flags().String("parent-connection-id", "", "The ID of the interconnect or the LAG.")
-	directconnect_associateHostedConnectionCmd.MarkFlagRequired("connection-id")
-	directconnect_associateHostedConnectionCmd.MarkFlagRequired("parent-connection-id")
+		directconnect_associateHostedConnectionCmd.Flags().String("connection-id", "", "The ID of the hosted connection.")
+		directconnect_associateHostedConnectionCmd.Flags().String("parent-connection-id", "", "The ID of the interconnect or the LAG.")
+		directconnect_associateHostedConnectionCmd.MarkFlagRequired("connection-id")
+		directconnect_associateHostedConnectionCmd.MarkFlagRequired("parent-connection-id")
+	})
 	directconnectCmd.AddCommand(directconnect_associateHostedConnectionCmd)
 }

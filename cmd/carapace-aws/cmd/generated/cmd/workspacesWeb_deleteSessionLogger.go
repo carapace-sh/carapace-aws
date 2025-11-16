@@ -12,9 +12,11 @@ var workspacesWeb_deleteSessionLoggerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_deleteSessionLoggerCmd).Standalone()
+	carapace.Gen(workspacesWeb_deleteSessionLoggerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_deleteSessionLoggerCmd).Standalone()
 
-	workspacesWeb_deleteSessionLoggerCmd.Flags().String("session-logger-arn", "", "The ARN of the session logger.")
-	workspacesWeb_deleteSessionLoggerCmd.MarkFlagRequired("session-logger-arn")
+		workspacesWeb_deleteSessionLoggerCmd.Flags().String("session-logger-arn", "", "The ARN of the session logger.")
+		workspacesWeb_deleteSessionLoggerCmd.MarkFlagRequired("session-logger-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_deleteSessionLoggerCmd)
 }

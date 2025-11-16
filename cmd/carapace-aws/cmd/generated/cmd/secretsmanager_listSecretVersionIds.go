@@ -12,12 +12,14 @@ var secretsmanager_listSecretVersionIdsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(secretsmanager_listSecretVersionIdsCmd).Standalone()
+	carapace.Gen(secretsmanager_listSecretVersionIdsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(secretsmanager_listSecretVersionIdsCmd).Standalone()
 
-	secretsmanager_listSecretVersionIdsCmd.Flags().String("include-deprecated", "", "Specifies whether to include versions of secrets that don't have any staging labels attached to them.")
-	secretsmanager_listSecretVersionIdsCmd.Flags().String("max-results", "", "The number of results to include in the response.")
-	secretsmanager_listSecretVersionIdsCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous call did not show all results.")
-	secretsmanager_listSecretVersionIdsCmd.Flags().String("secret-id", "", "The ARN or name of the secret whose versions you want to list.")
-	secretsmanager_listSecretVersionIdsCmd.MarkFlagRequired("secret-id")
+		secretsmanager_listSecretVersionIdsCmd.Flags().String("include-deprecated", "", "Specifies whether to include versions of secrets that don't have any staging labels attached to them.")
+		secretsmanager_listSecretVersionIdsCmd.Flags().String("max-results", "", "The number of results to include in the response.")
+		secretsmanager_listSecretVersionIdsCmd.Flags().String("next-token", "", "A token that indicates where the output should continue from, if a previous call did not show all results.")
+		secretsmanager_listSecretVersionIdsCmd.Flags().String("secret-id", "", "The ARN or name of the secret whose versions you want to list.")
+		secretsmanager_listSecretVersionIdsCmd.MarkFlagRequired("secret-id")
+	})
 	secretsmanagerCmd.AddCommand(secretsmanager_listSecretVersionIdsCmd)
 }

@@ -12,11 +12,13 @@ var codepipeline_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_tagResourceCmd).Standalone()
+	carapace.Gen(codepipeline_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_tagResourceCmd).Standalone()
 
-	codepipeline_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you want to add tags to.")
-	codepipeline_tagResourceCmd.Flags().String("tags", "", "The tags you want to modify or add to the resource.")
-	codepipeline_tagResourceCmd.MarkFlagRequired("resource-arn")
-	codepipeline_tagResourceCmd.MarkFlagRequired("tags")
+		codepipeline_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you want to add tags to.")
+		codepipeline_tagResourceCmd.Flags().String("tags", "", "The tags you want to modify or add to the resource.")
+		codepipeline_tagResourceCmd.MarkFlagRequired("resource-arn")
+		codepipeline_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	codepipelineCmd.AddCommand(codepipeline_tagResourceCmd)
 }

@@ -12,11 +12,13 @@ var managedblockchainQuery_listAssetContractsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchainQuery_listAssetContractsCmd).Standalone()
+	carapace.Gen(managedblockchainQuery_listAssetContractsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchainQuery_listAssetContractsCmd).Standalone()
 
-	managedblockchainQuery_listAssetContractsCmd.Flags().String("contract-filter", "", "Contains the filter parameter for the request.")
-	managedblockchainQuery_listAssetContractsCmd.Flags().String("max-results", "", "The maximum number of contracts to list.")
-	managedblockchainQuery_listAssetContractsCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results to retrieve.")
-	managedblockchainQuery_listAssetContractsCmd.MarkFlagRequired("contract-filter")
+		managedblockchainQuery_listAssetContractsCmd.Flags().String("contract-filter", "", "Contains the filter parameter for the request.")
+		managedblockchainQuery_listAssetContractsCmd.Flags().String("max-results", "", "The maximum number of contracts to list.")
+		managedblockchainQuery_listAssetContractsCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results to retrieve.")
+		managedblockchainQuery_listAssetContractsCmd.MarkFlagRequired("contract-filter")
+	})
 	managedblockchainQueryCmd.AddCommand(managedblockchainQuery_listAssetContractsCmd)
 }

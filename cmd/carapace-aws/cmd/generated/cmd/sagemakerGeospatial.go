@@ -12,7 +12,9 @@ var sagemakerGeospatialCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerGeospatialCmd).Standalone()
+	carapace.Gen(sagemakerGeospatialCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerGeospatialCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(sagemakerGeospatialCmd)
 }

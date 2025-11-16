@@ -12,7 +12,9 @@ var shield_enableProactiveEngagementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_enableProactiveEngagementCmd).Standalone()
+	carapace.Gen(shield_enableProactiveEngagementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_enableProactiveEngagementCmd).Standalone()
 
+	})
 	shieldCmd.AddCommand(shield_enableProactiveEngagementCmd)
 }

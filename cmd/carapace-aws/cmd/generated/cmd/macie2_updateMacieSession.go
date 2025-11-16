@@ -12,9 +12,11 @@ var macie2_updateMacieSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_updateMacieSessionCmd).Standalone()
+	carapace.Gen(macie2_updateMacieSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_updateMacieSessionCmd).Standalone()
 
-	macie2_updateMacieSessionCmd.Flags().String("finding-publishing-frequency", "", "Specifies how often to publish updates to policy findings for the account.")
-	macie2_updateMacieSessionCmd.Flags().String("status", "", "Specifies a new status for the account.")
+		macie2_updateMacieSessionCmd.Flags().String("finding-publishing-frequency", "", "Specifies how often to publish updates to policy findings for the account.")
+		macie2_updateMacieSessionCmd.Flags().String("status", "", "Specifies a new status for the account.")
+	})
 	macie2Cmd.AddCommand(macie2_updateMacieSessionCmd)
 }

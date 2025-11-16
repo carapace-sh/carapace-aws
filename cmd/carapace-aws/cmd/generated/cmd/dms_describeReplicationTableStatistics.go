@@ -12,12 +12,14 @@ var dms_describeReplicationTableStatisticsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeReplicationTableStatisticsCmd).Standalone()
+	carapace.Gen(dms_describeReplicationTableStatisticsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeReplicationTableStatisticsCmd).Standalone()
 
-	dms_describeReplicationTableStatisticsCmd.Flags().String("filters", "", "Filters applied to the replication table statistics.")
-	dms_describeReplicationTableStatisticsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
-	dms_describeReplicationTableStatisticsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
-	dms_describeReplicationTableStatisticsCmd.Flags().String("replication-config-arn", "", "The replication config to describe.")
-	dms_describeReplicationTableStatisticsCmd.MarkFlagRequired("replication-config-arn")
+		dms_describeReplicationTableStatisticsCmd.Flags().String("filters", "", "Filters applied to the replication table statistics.")
+		dms_describeReplicationTableStatisticsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous request.")
+		dms_describeReplicationTableStatisticsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+		dms_describeReplicationTableStatisticsCmd.Flags().String("replication-config-arn", "", "The replication config to describe.")
+		dms_describeReplicationTableStatisticsCmd.MarkFlagRequired("replication-config-arn")
+	})
 	dmsCmd.AddCommand(dms_describeReplicationTableStatisticsCmd)
 }

@@ -12,11 +12,13 @@ var cognitoIdp_addCustomAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cognitoIdp_addCustomAttributesCmd).Standalone()
+	carapace.Gen(cognitoIdp_addCustomAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cognitoIdp_addCustomAttributesCmd).Standalone()
 
-	cognitoIdp_addCustomAttributesCmd.Flags().String("custom-attributes", "", "An array of custom attribute names and other properties.")
-	cognitoIdp_addCustomAttributesCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to add custom attributes.")
-	cognitoIdp_addCustomAttributesCmd.MarkFlagRequired("custom-attributes")
-	cognitoIdp_addCustomAttributesCmd.MarkFlagRequired("user-pool-id")
+		cognitoIdp_addCustomAttributesCmd.Flags().String("custom-attributes", "", "An array of custom attribute names and other properties.")
+		cognitoIdp_addCustomAttributesCmd.Flags().String("user-pool-id", "", "The ID of the user pool where you want to add custom attributes.")
+		cognitoIdp_addCustomAttributesCmd.MarkFlagRequired("custom-attributes")
+		cognitoIdp_addCustomAttributesCmd.MarkFlagRequired("user-pool-id")
+	})
 	cognitoIdpCmd.AddCommand(cognitoIdp_addCustomAttributesCmd)
 }

@@ -12,11 +12,13 @@ var qapps_batchCreateCategoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_batchCreateCategoryCmd).Standalone()
+	carapace.Gen(qapps_batchCreateCategoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_batchCreateCategoryCmd).Standalone()
 
-	qapps_batchCreateCategoryCmd.Flags().String("categories", "", "The list of category objects to be created")
-	qapps_batchCreateCategoryCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_batchCreateCategoryCmd.MarkFlagRequired("categories")
-	qapps_batchCreateCategoryCmd.MarkFlagRequired("instance-id")
+		qapps_batchCreateCategoryCmd.Flags().String("categories", "", "The list of category objects to be created")
+		qapps_batchCreateCategoryCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_batchCreateCategoryCmd.MarkFlagRequired("categories")
+		qapps_batchCreateCategoryCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_batchCreateCategoryCmd)
 }

@@ -12,9 +12,11 @@ var taxsettings_batchGetTaxExemptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_batchGetTaxExemptionsCmd).Standalone()
+	carapace.Gen(taxsettings_batchGetTaxExemptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_batchGetTaxExemptionsCmd).Standalone()
 
-	taxsettings_batchGetTaxExemptionsCmd.Flags().String("account-ids", "", "List of unique account identifiers.")
-	taxsettings_batchGetTaxExemptionsCmd.MarkFlagRequired("account-ids")
+		taxsettings_batchGetTaxExemptionsCmd.Flags().String("account-ids", "", "List of unique account identifiers.")
+		taxsettings_batchGetTaxExemptionsCmd.MarkFlagRequired("account-ids")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_batchGetTaxExemptionsCmd)
 }

@@ -12,11 +12,13 @@ var networkmanager_deleteSiteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_deleteSiteCmd).Standalone()
+	carapace.Gen(networkmanager_deleteSiteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_deleteSiteCmd).Standalone()
 
-	networkmanager_deleteSiteCmd.Flags().String("global-network-id", "", "The ID of the global network.")
-	networkmanager_deleteSiteCmd.Flags().String("site-id", "", "The ID of the site.")
-	networkmanager_deleteSiteCmd.MarkFlagRequired("global-network-id")
-	networkmanager_deleteSiteCmd.MarkFlagRequired("site-id")
+		networkmanager_deleteSiteCmd.Flags().String("global-network-id", "", "The ID of the global network.")
+		networkmanager_deleteSiteCmd.Flags().String("site-id", "", "The ID of the site.")
+		networkmanager_deleteSiteCmd.MarkFlagRequired("global-network-id")
+		networkmanager_deleteSiteCmd.MarkFlagRequired("site-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_deleteSiteCmd)
 }

@@ -12,11 +12,13 @@ var groundstation_getConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_getConfigCmd).Standalone()
+	carapace.Gen(groundstation_getConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_getConfigCmd).Standalone()
 
-	groundstation_getConfigCmd.Flags().String("config-id", "", "UUID of a `Config`.")
-	groundstation_getConfigCmd.Flags().String("config-type", "", "Type of a `Config`.")
-	groundstation_getConfigCmd.MarkFlagRequired("config-id")
-	groundstation_getConfigCmd.MarkFlagRequired("config-type")
+		groundstation_getConfigCmd.Flags().String("config-id", "", "UUID of a `Config`.")
+		groundstation_getConfigCmd.Flags().String("config-type", "", "Type of a `Config`.")
+		groundstation_getConfigCmd.MarkFlagRequired("config-id")
+		groundstation_getConfigCmd.MarkFlagRequired("config-type")
+	})
 	groundstationCmd.AddCommand(groundstation_getConfigCmd)
 }

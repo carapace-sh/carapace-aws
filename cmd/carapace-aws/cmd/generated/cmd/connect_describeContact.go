@@ -12,11 +12,13 @@ var connect_describeContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_describeContactCmd).Standalone()
+	carapace.Gen(connect_describeContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_describeContactCmd).Standalone()
 
-	connect_describeContactCmd.Flags().String("contact-id", "", "The identifier of the contact.")
-	connect_describeContactCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_describeContactCmd.MarkFlagRequired("contact-id")
-	connect_describeContactCmd.MarkFlagRequired("instance-id")
+		connect_describeContactCmd.Flags().String("contact-id", "", "The identifier of the contact.")
+		connect_describeContactCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_describeContactCmd.MarkFlagRequired("contact-id")
+		connect_describeContactCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_describeContactCmd)
 }

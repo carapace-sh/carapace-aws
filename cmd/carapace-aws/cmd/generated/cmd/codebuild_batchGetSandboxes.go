@@ -12,9 +12,11 @@ var codebuild_batchGetSandboxesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_batchGetSandboxesCmd).Standalone()
+	carapace.Gen(codebuild_batchGetSandboxesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_batchGetSandboxesCmd).Standalone()
 
-	codebuild_batchGetSandboxesCmd.Flags().String("ids", "", "A comma separated list of `sandboxIds` or `sandboxArns`.")
-	codebuild_batchGetSandboxesCmd.MarkFlagRequired("ids")
+		codebuild_batchGetSandboxesCmd.Flags().String("ids", "", "A comma separated list of `sandboxIds` or `sandboxArns`.")
+		codebuild_batchGetSandboxesCmd.MarkFlagRequired("ids")
+	})
 	codebuildCmd.AddCommand(codebuild_batchGetSandboxesCmd)
 }

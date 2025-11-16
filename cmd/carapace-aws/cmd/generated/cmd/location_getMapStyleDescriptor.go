@@ -12,10 +12,12 @@ var location_getMapStyleDescriptorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_getMapStyleDescriptorCmd).Standalone()
+	carapace.Gen(location_getMapStyleDescriptorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_getMapStyleDescriptorCmd).Standalone()
 
-	location_getMapStyleDescriptorCmd.Flags().String("key", "", "The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.")
-	location_getMapStyleDescriptorCmd.Flags().String("map-name", "", "The map resource to retrieve the style descriptor from.")
-	location_getMapStyleDescriptorCmd.MarkFlagRequired("map-name")
+		location_getMapStyleDescriptorCmd.Flags().String("key", "", "The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.")
+		location_getMapStyleDescriptorCmd.Flags().String("map-name", "", "The map resource to retrieve the style descriptor from.")
+		location_getMapStyleDescriptorCmd.MarkFlagRequired("map-name")
+	})
 	locationCmd.AddCommand(location_getMapStyleDescriptorCmd)
 }

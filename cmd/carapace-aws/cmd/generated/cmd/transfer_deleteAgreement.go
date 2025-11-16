@@ -12,11 +12,13 @@ var transfer_deleteAgreementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transfer_deleteAgreementCmd).Standalone()
+	carapace.Gen(transfer_deleteAgreementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transfer_deleteAgreementCmd).Standalone()
 
-	transfer_deleteAgreementCmd.Flags().String("agreement-id", "", "A unique identifier for the agreement.")
-	transfer_deleteAgreementCmd.Flags().String("server-id", "", "The server identifier associated with the agreement that you are deleting.")
-	transfer_deleteAgreementCmd.MarkFlagRequired("agreement-id")
-	transfer_deleteAgreementCmd.MarkFlagRequired("server-id")
+		transfer_deleteAgreementCmd.Flags().String("agreement-id", "", "A unique identifier for the agreement.")
+		transfer_deleteAgreementCmd.Flags().String("server-id", "", "The server identifier associated with the agreement that you are deleting.")
+		transfer_deleteAgreementCmd.MarkFlagRequired("agreement-id")
+		transfer_deleteAgreementCmd.MarkFlagRequired("server-id")
+	})
 	transferCmd.AddCommand(transfer_deleteAgreementCmd)
 }

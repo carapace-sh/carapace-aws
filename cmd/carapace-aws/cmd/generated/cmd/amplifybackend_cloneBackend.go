@@ -12,13 +12,15 @@ var amplifybackend_cloneBackendCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_cloneBackendCmd).Standalone()
+	carapace.Gen(amplifybackend_cloneBackendCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_cloneBackendCmd).Standalone()
 
-	amplifybackend_cloneBackendCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_cloneBackendCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
-	amplifybackend_cloneBackendCmd.Flags().String("target-environment-name", "", "The name of the destination backend environment to be created.")
-	amplifybackend_cloneBackendCmd.MarkFlagRequired("app-id")
-	amplifybackend_cloneBackendCmd.MarkFlagRequired("backend-environment-name")
-	amplifybackend_cloneBackendCmd.MarkFlagRequired("target-environment-name")
+		amplifybackend_cloneBackendCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_cloneBackendCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
+		amplifybackend_cloneBackendCmd.Flags().String("target-environment-name", "", "The name of the destination backend environment to be created.")
+		amplifybackend_cloneBackendCmd.MarkFlagRequired("app-id")
+		amplifybackend_cloneBackendCmd.MarkFlagRequired("backend-environment-name")
+		amplifybackend_cloneBackendCmd.MarkFlagRequired("target-environment-name")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_cloneBackendCmd)
 }

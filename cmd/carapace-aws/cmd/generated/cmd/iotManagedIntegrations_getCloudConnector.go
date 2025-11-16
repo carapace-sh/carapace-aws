@@ -12,9 +12,11 @@ var iotManagedIntegrations_getCloudConnectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getCloudConnectorCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getCloudConnectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getCloudConnectorCmd).Standalone()
 
-	iotManagedIntegrations_getCloudConnectorCmd.Flags().String("identifier", "", "The identifier of the C2C connector.")
-	iotManagedIntegrations_getCloudConnectorCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_getCloudConnectorCmd.Flags().String("identifier", "", "The identifier of the C2C connector.")
+		iotManagedIntegrations_getCloudConnectorCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getCloudConnectorCmd)
 }

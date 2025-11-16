@@ -12,9 +12,11 @@ var supportApp_deleteSlackWorkspaceConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supportApp_deleteSlackWorkspaceConfigurationCmd).Standalone()
+	carapace.Gen(supportApp_deleteSlackWorkspaceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supportApp_deleteSlackWorkspaceConfigurationCmd).Standalone()
 
-	supportApp_deleteSlackWorkspaceConfigurationCmd.Flags().String("team-id", "", "The team ID in Slack.")
-	supportApp_deleteSlackWorkspaceConfigurationCmd.MarkFlagRequired("team-id")
+		supportApp_deleteSlackWorkspaceConfigurationCmd.Flags().String("team-id", "", "The team ID in Slack.")
+		supportApp_deleteSlackWorkspaceConfigurationCmd.MarkFlagRequired("team-id")
+	})
 	supportAppCmd.AddCommand(supportApp_deleteSlackWorkspaceConfigurationCmd)
 }

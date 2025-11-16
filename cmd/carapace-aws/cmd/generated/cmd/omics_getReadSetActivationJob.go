@@ -12,11 +12,13 @@ var omics_getReadSetActivationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getReadSetActivationJobCmd).Standalone()
+	carapace.Gen(omics_getReadSetActivationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getReadSetActivationJobCmd).Standalone()
 
-	omics_getReadSetActivationJobCmd.Flags().String("id", "", "The job's ID.")
-	omics_getReadSetActivationJobCmd.Flags().String("sequence-store-id", "", "The job's sequence store ID.")
-	omics_getReadSetActivationJobCmd.MarkFlagRequired("id")
-	omics_getReadSetActivationJobCmd.MarkFlagRequired("sequence-store-id")
+		omics_getReadSetActivationJobCmd.Flags().String("id", "", "The job's ID.")
+		omics_getReadSetActivationJobCmd.Flags().String("sequence-store-id", "", "The job's sequence store ID.")
+		omics_getReadSetActivationJobCmd.MarkFlagRequired("id")
+		omics_getReadSetActivationJobCmd.MarkFlagRequired("sequence-store-id")
+	})
 	omicsCmd.AddCommand(omics_getReadSetActivationJobCmd)
 }

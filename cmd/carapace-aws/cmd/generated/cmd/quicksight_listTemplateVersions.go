@@ -12,13 +12,15 @@ var quicksight_listTemplateVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_listTemplateVersionsCmd).Standalone()
+	carapace.Gen(quicksight_listTemplateVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_listTemplateVersionsCmd).Standalone()
 
-	quicksight_listTemplateVersionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the templates that you're listing.")
-	quicksight_listTemplateVersionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
-	quicksight_listTemplateVersionsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
-	quicksight_listTemplateVersionsCmd.Flags().String("template-id", "", "The ID for the template.")
-	quicksight_listTemplateVersionsCmd.MarkFlagRequired("aws-account-id")
-	quicksight_listTemplateVersionsCmd.MarkFlagRequired("template-id")
+		quicksight_listTemplateVersionsCmd.Flags().String("aws-account-id", "", "The ID of the Amazon Web Services account that contains the templates that you're listing.")
+		quicksight_listTemplateVersionsCmd.Flags().String("max-results", "", "The maximum number of results to be returned per request.")
+		quicksight_listTemplateVersionsCmd.Flags().String("next-token", "", "The token for the next set of results, or null if there are no more results.")
+		quicksight_listTemplateVersionsCmd.Flags().String("template-id", "", "The ID for the template.")
+		quicksight_listTemplateVersionsCmd.MarkFlagRequired("aws-account-id")
+		quicksight_listTemplateVersionsCmd.MarkFlagRequired("template-id")
+	})
 	quicksightCmd.AddCommand(quicksight_listTemplateVersionsCmd)
 }

@@ -12,9 +12,11 @@ var iotwireless_listNetworkAnalyzerConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_listNetworkAnalyzerConfigurationsCmd).Standalone()
+	carapace.Gen(iotwireless_listNetworkAnalyzerConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_listNetworkAnalyzerConfigurationsCmd).Standalone()
 
-	iotwireless_listNetworkAnalyzerConfigurationsCmd.Flags().String("max-results", "", "")
-	iotwireless_listNetworkAnalyzerConfigurationsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+		iotwireless_listNetworkAnalyzerConfigurationsCmd.Flags().String("max-results", "", "")
+		iotwireless_listNetworkAnalyzerConfigurationsCmd.Flags().String("next-token", "", "To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_listNetworkAnalyzerConfigurationsCmd)
 }

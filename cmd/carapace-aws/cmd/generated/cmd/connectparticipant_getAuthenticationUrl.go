@@ -12,13 +12,15 @@ var connectparticipant_getAuthenticationUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectparticipant_getAuthenticationUrlCmd).Standalone()
+	carapace.Gen(connectparticipant_getAuthenticationUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectparticipant_getAuthenticationUrlCmd).Standalone()
 
-	connectparticipant_getAuthenticationUrlCmd.Flags().String("connection-token", "", "The authentication token associated with the participant's connection.")
-	connectparticipant_getAuthenticationUrlCmd.Flags().String("redirect-uri", "", "The URL where the customer will be redirected after Amazon Cognito authorizes the user.")
-	connectparticipant_getAuthenticationUrlCmd.Flags().String("session-id", "", "The sessionId provided in the authenticationInitiated event.")
-	connectparticipant_getAuthenticationUrlCmd.MarkFlagRequired("connection-token")
-	connectparticipant_getAuthenticationUrlCmd.MarkFlagRequired("redirect-uri")
-	connectparticipant_getAuthenticationUrlCmd.MarkFlagRequired("session-id")
+		connectparticipant_getAuthenticationUrlCmd.Flags().String("connection-token", "", "The authentication token associated with the participant's connection.")
+		connectparticipant_getAuthenticationUrlCmd.Flags().String("redirect-uri", "", "The URL where the customer will be redirected after Amazon Cognito authorizes the user.")
+		connectparticipant_getAuthenticationUrlCmd.Flags().String("session-id", "", "The sessionId provided in the authenticationInitiated event.")
+		connectparticipant_getAuthenticationUrlCmd.MarkFlagRequired("connection-token")
+		connectparticipant_getAuthenticationUrlCmd.MarkFlagRequired("redirect-uri")
+		connectparticipant_getAuthenticationUrlCmd.MarkFlagRequired("session-id")
+	})
 	connectparticipantCmd.AddCommand(connectparticipant_getAuthenticationUrlCmd)
 }

@@ -12,11 +12,13 @@ var fsx_describeDataRepositoryAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_describeDataRepositoryAssociationsCmd).Standalone()
+	carapace.Gen(fsx_describeDataRepositoryAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_describeDataRepositoryAssociationsCmd).Standalone()
 
-	fsx_describeDataRepositoryAssociationsCmd.Flags().String("association-ids", "", "IDs of the data repository associations whose descriptions you want to retrieve (String).")
-	fsx_describeDataRepositoryAssociationsCmd.Flags().String("filters", "", "")
-	fsx_describeDataRepositoryAssociationsCmd.Flags().String("max-results", "", "The maximum number of resources to return in the response.")
-	fsx_describeDataRepositoryAssociationsCmd.Flags().String("next-token", "", "")
+		fsx_describeDataRepositoryAssociationsCmd.Flags().String("association-ids", "", "IDs of the data repository associations whose descriptions you want to retrieve (String).")
+		fsx_describeDataRepositoryAssociationsCmd.Flags().String("filters", "", "")
+		fsx_describeDataRepositoryAssociationsCmd.Flags().String("max-results", "", "The maximum number of resources to return in the response.")
+		fsx_describeDataRepositoryAssociationsCmd.Flags().String("next-token", "", "")
+	})
 	fsxCmd.AddCommand(fsx_describeDataRepositoryAssociationsCmd)
 }

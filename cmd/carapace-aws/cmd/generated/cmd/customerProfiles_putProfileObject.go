@@ -12,13 +12,15 @@ var customerProfiles_putProfileObjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_putProfileObjectCmd).Standalone()
+	carapace.Gen(customerProfiles_putProfileObjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_putProfileObjectCmd).Standalone()
 
-	customerProfiles_putProfileObjectCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_putProfileObjectCmd.Flags().String("object", "", "A string that is serialized from a JSON object.")
-	customerProfiles_putProfileObjectCmd.Flags().String("object-type-name", "", "The name of the profile object type.")
-	customerProfiles_putProfileObjectCmd.MarkFlagRequired("domain-name")
-	customerProfiles_putProfileObjectCmd.MarkFlagRequired("object")
-	customerProfiles_putProfileObjectCmd.MarkFlagRequired("object-type-name")
+		customerProfiles_putProfileObjectCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_putProfileObjectCmd.Flags().String("object", "", "A string that is serialized from a JSON object.")
+		customerProfiles_putProfileObjectCmd.Flags().String("object-type-name", "", "The name of the profile object type.")
+		customerProfiles_putProfileObjectCmd.MarkFlagRequired("domain-name")
+		customerProfiles_putProfileObjectCmd.MarkFlagRequired("object")
+		customerProfiles_putProfileObjectCmd.MarkFlagRequired("object-type-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_putProfileObjectCmd)
 }

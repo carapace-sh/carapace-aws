@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_verifyDestinationNumberCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_verifyDestinationNumberCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_verifyDestinationNumberCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_verifyDestinationNumberCmd).Standalone()
 
-	pinpointSmsVoiceV2_verifyDestinationNumberCmd.Flags().String("verification-code", "", "The verification code that was received by the verified destination phone number.")
-	pinpointSmsVoiceV2_verifyDestinationNumberCmd.Flags().String("verified-destination-number-id", "", "The unique identifier for the verififed destination phone number.")
-	pinpointSmsVoiceV2_verifyDestinationNumberCmd.MarkFlagRequired("verification-code")
-	pinpointSmsVoiceV2_verifyDestinationNumberCmd.MarkFlagRequired("verified-destination-number-id")
+		pinpointSmsVoiceV2_verifyDestinationNumberCmd.Flags().String("verification-code", "", "The verification code that was received by the verified destination phone number.")
+		pinpointSmsVoiceV2_verifyDestinationNumberCmd.Flags().String("verified-destination-number-id", "", "The unique identifier for the verififed destination phone number.")
+		pinpointSmsVoiceV2_verifyDestinationNumberCmd.MarkFlagRequired("verification-code")
+		pinpointSmsVoiceV2_verifyDestinationNumberCmd.MarkFlagRequired("verified-destination-number-id")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_verifyDestinationNumberCmd)
 }

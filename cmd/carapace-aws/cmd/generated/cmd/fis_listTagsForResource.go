@@ -12,9 +12,11 @@ var fis_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_listTagsForResourceCmd).Standalone()
+	carapace.Gen(fis_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_listTagsForResourceCmd).Standalone()
 
-	fis_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	fis_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		fis_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		fis_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	fisCmd.AddCommand(fis_listTagsForResourceCmd)
 }

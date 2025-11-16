@@ -12,9 +12,11 @@ var opensearch_cancelServiceSoftwareUpdateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_cancelServiceSoftwareUpdateCmd).Standalone()
+	carapace.Gen(opensearch_cancelServiceSoftwareUpdateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_cancelServiceSoftwareUpdateCmd).Standalone()
 
-	opensearch_cancelServiceSoftwareUpdateCmd.Flags().String("domain-name", "", "Name of the OpenSearch Service domain that you want to cancel the service software update on.")
-	opensearch_cancelServiceSoftwareUpdateCmd.MarkFlagRequired("domain-name")
+		opensearch_cancelServiceSoftwareUpdateCmd.Flags().String("domain-name", "", "Name of the OpenSearch Service domain that you want to cancel the service software update on.")
+		opensearch_cancelServiceSoftwareUpdateCmd.MarkFlagRequired("domain-name")
+	})
 	opensearchCmd.AddCommand(opensearch_cancelServiceSoftwareUpdateCmd)
 }

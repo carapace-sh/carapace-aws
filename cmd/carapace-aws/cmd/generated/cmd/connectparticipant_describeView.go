@@ -12,11 +12,13 @@ var connectparticipant_describeViewCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectparticipant_describeViewCmd).Standalone()
+	carapace.Gen(connectparticipant_describeViewCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectparticipant_describeViewCmd).Standalone()
 
-	connectparticipant_describeViewCmd.Flags().String("connection-token", "", "The connection token.")
-	connectparticipant_describeViewCmd.Flags().String("view-token", "", "An encrypted token originating from the interactive message of a ShowView block operation.")
-	connectparticipant_describeViewCmd.MarkFlagRequired("connection-token")
-	connectparticipant_describeViewCmd.MarkFlagRequired("view-token")
+		connectparticipant_describeViewCmd.Flags().String("connection-token", "", "The connection token.")
+		connectparticipant_describeViewCmd.Flags().String("view-token", "", "An encrypted token originating from the interactive message of a ShowView block operation.")
+		connectparticipant_describeViewCmd.MarkFlagRequired("connection-token")
+		connectparticipant_describeViewCmd.MarkFlagRequired("view-token")
+	})
 	connectparticipantCmd.AddCommand(connectparticipant_describeViewCmd)
 }

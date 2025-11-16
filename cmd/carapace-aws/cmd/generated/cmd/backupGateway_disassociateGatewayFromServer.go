@@ -12,9 +12,11 @@ var backupGateway_disassociateGatewayFromServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backupGateway_disassociateGatewayFromServerCmd).Standalone()
+	carapace.Gen(backupGateway_disassociateGatewayFromServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backupGateway_disassociateGatewayFromServerCmd).Standalone()
 
-	backupGateway_disassociateGatewayFromServerCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway to disassociate.")
-	backupGateway_disassociateGatewayFromServerCmd.MarkFlagRequired("gateway-arn")
+		backupGateway_disassociateGatewayFromServerCmd.Flags().String("gateway-arn", "", "The Amazon Resource Name (ARN) of the gateway to disassociate.")
+		backupGateway_disassociateGatewayFromServerCmd.MarkFlagRequired("gateway-arn")
+	})
 	backupGatewayCmd.AddCommand(backupGateway_disassociateGatewayFromServerCmd)
 }

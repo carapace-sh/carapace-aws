@@ -12,11 +12,13 @@ var sns_publishBatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sns_publishBatchCmd).Standalone()
+	carapace.Gen(sns_publishBatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sns_publishBatchCmd).Standalone()
 
-	sns_publishBatchCmd.Flags().String("publish-batch-request-entries", "", "A list of `PublishBatch` request entries to be sent to the SNS topic.")
-	sns_publishBatchCmd.Flags().String("topic-arn", "", "The Amazon resource name (ARN) of the topic you want to batch publish to.")
-	sns_publishBatchCmd.MarkFlagRequired("publish-batch-request-entries")
-	sns_publishBatchCmd.MarkFlagRequired("topic-arn")
+		sns_publishBatchCmd.Flags().String("publish-batch-request-entries", "", "A list of `PublishBatch` request entries to be sent to the SNS topic.")
+		sns_publishBatchCmd.Flags().String("topic-arn", "", "The Amazon resource name (ARN) of the topic you want to batch publish to.")
+		sns_publishBatchCmd.MarkFlagRequired("publish-batch-request-entries")
+		sns_publishBatchCmd.MarkFlagRequired("topic-arn")
+	})
 	snsCmd.AddCommand(sns_publishBatchCmd)
 }

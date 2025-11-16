@@ -12,8 +12,10 @@ var backup_updateGlobalSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_updateGlobalSettingsCmd).Standalone()
+	carapace.Gen(backup_updateGlobalSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_updateGlobalSettingsCmd).Standalone()
 
-	backup_updateGlobalSettingsCmd.Flags().String("global-settings", "", "Inputs can include:")
+		backup_updateGlobalSettingsCmd.Flags().String("global-settings", "", "Inputs can include:")
+	})
 	backupCmd.AddCommand(backup_updateGlobalSettingsCmd)
 }

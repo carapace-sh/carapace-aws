@@ -12,9 +12,11 @@ var elasticbeanstalk_restartAppServerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_restartAppServerCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_restartAppServerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_restartAppServerCmd).Standalone()
 
-	elasticbeanstalk_restartAppServerCmd.Flags().String("environment-id", "", "The ID of the environment to restart the server for.")
-	elasticbeanstalk_restartAppServerCmd.Flags().String("environment-name", "", "The name of the environment to restart the server for.")
+		elasticbeanstalk_restartAppServerCmd.Flags().String("environment-id", "", "The ID of the environment to restart the server for.")
+		elasticbeanstalk_restartAppServerCmd.Flags().String("environment-name", "", "The name of the environment to restart the server for.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_restartAppServerCmd)
 }

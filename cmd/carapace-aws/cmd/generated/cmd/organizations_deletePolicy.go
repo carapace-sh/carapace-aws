@@ -12,9 +12,11 @@ var organizations_deletePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_deletePolicyCmd).Standalone()
+	carapace.Gen(organizations_deletePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_deletePolicyCmd).Standalone()
 
-	organizations_deletePolicyCmd.Flags().String("policy-id", "", "The unique identifier (ID) of the policy that you want to delete.")
-	organizations_deletePolicyCmd.MarkFlagRequired("policy-id")
+		organizations_deletePolicyCmd.Flags().String("policy-id", "", "The unique identifier (ID) of the policy that you want to delete.")
+		organizations_deletePolicyCmd.MarkFlagRequired("policy-id")
+	})
 	organizationsCmd.AddCommand(organizations_deletePolicyCmd)
 }

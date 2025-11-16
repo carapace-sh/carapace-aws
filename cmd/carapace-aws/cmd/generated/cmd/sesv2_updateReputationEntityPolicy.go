@@ -12,13 +12,15 @@ var sesv2_updateReputationEntityPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_updateReputationEntityPolicyCmd).Standalone()
+	carapace.Gen(sesv2_updateReputationEntityPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_updateReputationEntityPolicyCmd).Standalone()
 
-	sesv2_updateReputationEntityPolicyCmd.Flags().String("reputation-entity-policy", "", "The Amazon Resource Name (ARN) of the reputation management policy to apply to this entity.")
-	sesv2_updateReputationEntityPolicyCmd.Flags().String("reputation-entity-reference", "", "The unique identifier for the reputation entity.")
-	sesv2_updateReputationEntityPolicyCmd.Flags().String("reputation-entity-type", "", "The type of reputation entity.")
-	sesv2_updateReputationEntityPolicyCmd.MarkFlagRequired("reputation-entity-policy")
-	sesv2_updateReputationEntityPolicyCmd.MarkFlagRequired("reputation-entity-reference")
-	sesv2_updateReputationEntityPolicyCmd.MarkFlagRequired("reputation-entity-type")
+		sesv2_updateReputationEntityPolicyCmd.Flags().String("reputation-entity-policy", "", "The Amazon Resource Name (ARN) of the reputation management policy to apply to this entity.")
+		sesv2_updateReputationEntityPolicyCmd.Flags().String("reputation-entity-reference", "", "The unique identifier for the reputation entity.")
+		sesv2_updateReputationEntityPolicyCmd.Flags().String("reputation-entity-type", "", "The type of reputation entity.")
+		sesv2_updateReputationEntityPolicyCmd.MarkFlagRequired("reputation-entity-policy")
+		sesv2_updateReputationEntityPolicyCmd.MarkFlagRequired("reputation-entity-reference")
+		sesv2_updateReputationEntityPolicyCmd.MarkFlagRequired("reputation-entity-type")
+	})
 	sesv2Cmd.AddCommand(sesv2_updateReputationEntityPolicyCmd)
 }

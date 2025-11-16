@@ -12,9 +12,11 @@ var neptuneGraph_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_listTagsForResourceCmd).Standalone()
+	carapace.Gen(neptuneGraph_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_listTagsForResourceCmd).Standalone()
 
-	neptuneGraph_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	neptuneGraph_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		neptuneGraph_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		neptuneGraph_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_listTagsForResourceCmd)
 }

@@ -12,11 +12,13 @@ var directconnect_associateConnectionWithLagCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_associateConnectionWithLagCmd).Standalone()
+	carapace.Gen(directconnect_associateConnectionWithLagCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_associateConnectionWithLagCmd).Standalone()
 
-	directconnect_associateConnectionWithLagCmd.Flags().String("connection-id", "", "The ID of the connection.")
-	directconnect_associateConnectionWithLagCmd.Flags().String("lag-id", "", "The ID of the LAG with which to associate the connection.")
-	directconnect_associateConnectionWithLagCmd.MarkFlagRequired("connection-id")
-	directconnect_associateConnectionWithLagCmd.MarkFlagRequired("lag-id")
+		directconnect_associateConnectionWithLagCmd.Flags().String("connection-id", "", "The ID of the connection.")
+		directconnect_associateConnectionWithLagCmd.Flags().String("lag-id", "", "The ID of the LAG with which to associate the connection.")
+		directconnect_associateConnectionWithLagCmd.MarkFlagRequired("connection-id")
+		directconnect_associateConnectionWithLagCmd.MarkFlagRequired("lag-id")
+	})
 	directconnectCmd.AddCommand(directconnect_associateConnectionWithLagCmd)
 }

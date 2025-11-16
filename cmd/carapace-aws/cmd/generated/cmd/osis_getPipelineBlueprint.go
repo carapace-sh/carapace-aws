@@ -12,10 +12,12 @@ var osis_getPipelineBlueprintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(osis_getPipelineBlueprintCmd).Standalone()
+	carapace.Gen(osis_getPipelineBlueprintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(osis_getPipelineBlueprintCmd).Standalone()
 
-	osis_getPipelineBlueprintCmd.Flags().String("blueprint-name", "", "The name of the blueprint to retrieve.")
-	osis_getPipelineBlueprintCmd.Flags().String("format", "", "The format format of the blueprint to retrieve.")
-	osis_getPipelineBlueprintCmd.MarkFlagRequired("blueprint-name")
+		osis_getPipelineBlueprintCmd.Flags().String("blueprint-name", "", "The name of the blueprint to retrieve.")
+		osis_getPipelineBlueprintCmd.Flags().String("format", "", "The format format of the blueprint to retrieve.")
+		osis_getPipelineBlueprintCmd.MarkFlagRequired("blueprint-name")
+	})
 	osisCmd.AddCommand(osis_getPipelineBlueprintCmd)
 }

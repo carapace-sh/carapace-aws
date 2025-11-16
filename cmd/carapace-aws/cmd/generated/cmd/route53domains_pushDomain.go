@@ -12,11 +12,13 @@ var route53domains_pushDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53domains_pushDomainCmd).Standalone()
+	carapace.Gen(route53domains_pushDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53domains_pushDomainCmd).Standalone()
 
-	route53domains_pushDomainCmd.Flags().String("domain-name", "", "Name of the domain.")
-	route53domains_pushDomainCmd.Flags().String("target", "", "New IPS tag for the domain.")
-	route53domains_pushDomainCmd.MarkFlagRequired("domain-name")
-	route53domains_pushDomainCmd.MarkFlagRequired("target")
+		route53domains_pushDomainCmd.Flags().String("domain-name", "", "Name of the domain.")
+		route53domains_pushDomainCmd.Flags().String("target", "", "New IPS tag for the domain.")
+		route53domains_pushDomainCmd.MarkFlagRequired("domain-name")
+		route53domains_pushDomainCmd.MarkFlagRequired("target")
+	})
 	route53domainsCmd.AddCommand(route53domains_pushDomainCmd)
 }

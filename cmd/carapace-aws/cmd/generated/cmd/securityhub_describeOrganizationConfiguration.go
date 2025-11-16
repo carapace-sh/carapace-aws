@@ -12,7 +12,9 @@ var securityhub_describeOrganizationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_describeOrganizationConfigurationCmd).Standalone()
+	carapace.Gen(securityhub_describeOrganizationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_describeOrganizationConfigurationCmd).Standalone()
 
+	})
 	securityhubCmd.AddCommand(securityhub_describeOrganizationConfigurationCmd)
 }

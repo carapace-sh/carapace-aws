@@ -12,7 +12,9 @@ var xray_getTraceSegmentDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getTraceSegmentDestinationCmd).Standalone()
+	carapace.Gen(xray_getTraceSegmentDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getTraceSegmentDestinationCmd).Standalone()
 
+	})
 	xrayCmd.AddCommand(xray_getTraceSegmentDestinationCmd)
 }

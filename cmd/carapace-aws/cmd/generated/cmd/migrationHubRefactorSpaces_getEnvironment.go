@@ -12,9 +12,11 @@ var migrationHubRefactorSpaces_getEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationHubRefactorSpaces_getEnvironmentCmd).Standalone()
+	carapace.Gen(migrationHubRefactorSpaces_getEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationHubRefactorSpaces_getEnvironmentCmd).Standalone()
 
-	migrationHubRefactorSpaces_getEnvironmentCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
-	migrationHubRefactorSpaces_getEnvironmentCmd.MarkFlagRequired("environment-identifier")
+		migrationHubRefactorSpaces_getEnvironmentCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
+		migrationHubRefactorSpaces_getEnvironmentCmd.MarkFlagRequired("environment-identifier")
+	})
 	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_getEnvironmentCmd)
 }

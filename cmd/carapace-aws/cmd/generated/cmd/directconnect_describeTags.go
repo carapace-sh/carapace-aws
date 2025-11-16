@@ -12,9 +12,11 @@ var directconnect_describeTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_describeTagsCmd).Standalone()
+	carapace.Gen(directconnect_describeTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_describeTagsCmd).Standalone()
 
-	directconnect_describeTagsCmd.Flags().String("resource-arns", "", "The Amazon Resource Names (ARNs) of the resources.")
-	directconnect_describeTagsCmd.MarkFlagRequired("resource-arns")
+		directconnect_describeTagsCmd.Flags().String("resource-arns", "", "The Amazon Resource Names (ARNs) of the resources.")
+		directconnect_describeTagsCmd.MarkFlagRequired("resource-arns")
+	})
 	directconnectCmd.AddCommand(directconnect_describeTagsCmd)
 }

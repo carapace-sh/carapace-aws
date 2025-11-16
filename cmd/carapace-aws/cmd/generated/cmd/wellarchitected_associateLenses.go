@@ -12,11 +12,13 @@ var wellarchitected_associateLensesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_associateLensesCmd).Standalone()
+	carapace.Gen(wellarchitected_associateLensesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_associateLensesCmd).Standalone()
 
-	wellarchitected_associateLensesCmd.Flags().String("lens-aliases", "", "")
-	wellarchitected_associateLensesCmd.Flags().String("workload-id", "", "")
-	wellarchitected_associateLensesCmd.MarkFlagRequired("lens-aliases")
-	wellarchitected_associateLensesCmd.MarkFlagRequired("workload-id")
+		wellarchitected_associateLensesCmd.Flags().String("lens-aliases", "", "")
+		wellarchitected_associateLensesCmd.Flags().String("workload-id", "", "")
+		wellarchitected_associateLensesCmd.MarkFlagRequired("lens-aliases")
+		wellarchitected_associateLensesCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_associateLensesCmd)
 }

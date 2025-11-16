@@ -12,11 +12,13 @@ var tnb_getSolNetworkPackageContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_getSolNetworkPackageContentCmd).Standalone()
+	carapace.Gen(tnb_getSolNetworkPackageContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_getSolNetworkPackageContentCmd).Standalone()
 
-	tnb_getSolNetworkPackageContentCmd.Flags().String("accept", "", "The format of the package you want to download from the network package.")
-	tnb_getSolNetworkPackageContentCmd.Flags().String("nsd-info-id", "", "ID of the network service descriptor in the network package.")
-	tnb_getSolNetworkPackageContentCmd.MarkFlagRequired("accept")
-	tnb_getSolNetworkPackageContentCmd.MarkFlagRequired("nsd-info-id")
+		tnb_getSolNetworkPackageContentCmd.Flags().String("accept", "", "The format of the package you want to download from the network package.")
+		tnb_getSolNetworkPackageContentCmd.Flags().String("nsd-info-id", "", "ID of the network service descriptor in the network package.")
+		tnb_getSolNetworkPackageContentCmd.MarkFlagRequired("accept")
+		tnb_getSolNetworkPackageContentCmd.MarkFlagRequired("nsd-info-id")
+	})
 	tnbCmd.AddCommand(tnb_getSolNetworkPackageContentCmd)
 }

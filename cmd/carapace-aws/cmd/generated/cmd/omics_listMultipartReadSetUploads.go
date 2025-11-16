@@ -12,11 +12,13 @@ var omics_listMultipartReadSetUploadsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_listMultipartReadSetUploadsCmd).Standalone()
+	carapace.Gen(omics_listMultipartReadSetUploadsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_listMultipartReadSetUploadsCmd).Standalone()
 
-	omics_listMultipartReadSetUploadsCmd.Flags().String("max-results", "", "The maximum number of multipart uploads returned in a page.")
-	omics_listMultipartReadSetUploadsCmd.Flags().String("next-token", "", "Next token returned in the response of a previous ListMultipartReadSetUploads call.")
-	omics_listMultipartReadSetUploadsCmd.Flags().String("sequence-store-id", "", "The Sequence Store ID used for the multipart uploads.")
-	omics_listMultipartReadSetUploadsCmd.MarkFlagRequired("sequence-store-id")
+		omics_listMultipartReadSetUploadsCmd.Flags().String("max-results", "", "The maximum number of multipart uploads returned in a page.")
+		omics_listMultipartReadSetUploadsCmd.Flags().String("next-token", "", "Next token returned in the response of a previous ListMultipartReadSetUploads call.")
+		omics_listMultipartReadSetUploadsCmd.Flags().String("sequence-store-id", "", "The Sequence Store ID used for the multipart uploads.")
+		omics_listMultipartReadSetUploadsCmd.MarkFlagRequired("sequence-store-id")
+	})
 	omicsCmd.AddCommand(omics_listMultipartReadSetUploadsCmd)
 }

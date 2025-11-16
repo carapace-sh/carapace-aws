@@ -12,7 +12,9 @@ var globalaccelerator_listCrossAccountResourceAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_listCrossAccountResourceAccountsCmd).Standalone()
+	carapace.Gen(globalaccelerator_listCrossAccountResourceAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_listCrossAccountResourceAccountsCmd).Standalone()
 
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_listCrossAccountResourceAccountsCmd)
 }

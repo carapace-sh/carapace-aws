@@ -12,7 +12,9 @@ var piCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(piCmd).Standalone()
+	carapace.Gen(piCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(piCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(piCmd)
 }

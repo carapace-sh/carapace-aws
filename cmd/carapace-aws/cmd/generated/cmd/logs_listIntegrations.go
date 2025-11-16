@@ -12,10 +12,12 @@ var logs_listIntegrationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_listIntegrationsCmd).Standalone()
+	carapace.Gen(logs_listIntegrationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_listIntegrationsCmd).Standalone()
 
-	logs_listIntegrationsCmd.Flags().String("integration-name-prefix", "", "To limit the results to integrations that start with a certain name prefix, specify that name prefix here.")
-	logs_listIntegrationsCmd.Flags().String("integration-status", "", "To limit the results to integrations with a certain status, specify that status here.")
-	logs_listIntegrationsCmd.Flags().String("integration-type", "", "To limit the results to integrations of a certain type, specify that type here.")
+		logs_listIntegrationsCmd.Flags().String("integration-name-prefix", "", "To limit the results to integrations that start with a certain name prefix, specify that name prefix here.")
+		logs_listIntegrationsCmd.Flags().String("integration-status", "", "To limit the results to integrations with a certain status, specify that status here.")
+		logs_listIntegrationsCmd.Flags().String("integration-type", "", "To limit the results to integrations of a certain type, specify that type here.")
+	})
 	logsCmd.AddCommand(logs_listIntegrationsCmd)
 }

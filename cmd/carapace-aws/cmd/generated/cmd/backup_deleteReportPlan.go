@@ -12,9 +12,11 @@ var backup_deleteReportPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_deleteReportPlanCmd).Standalone()
+	carapace.Gen(backup_deleteReportPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_deleteReportPlanCmd).Standalone()
 
-	backup_deleteReportPlanCmd.Flags().String("report-plan-name", "", "The unique name of a report plan.")
-	backup_deleteReportPlanCmd.MarkFlagRequired("report-plan-name")
+		backup_deleteReportPlanCmd.Flags().String("report-plan-name", "", "The unique name of a report plan.")
+		backup_deleteReportPlanCmd.MarkFlagRequired("report-plan-name")
+	})
 	backupCmd.AddCommand(backup_deleteReportPlanCmd)
 }

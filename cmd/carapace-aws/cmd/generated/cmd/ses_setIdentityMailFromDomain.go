@@ -12,11 +12,13 @@ var ses_setIdentityMailFromDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ses_setIdentityMailFromDomainCmd).Standalone()
+	carapace.Gen(ses_setIdentityMailFromDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ses_setIdentityMailFromDomainCmd).Standalone()
 
-	ses_setIdentityMailFromDomainCmd.Flags().String("behavior-on-mxfailure", "", "The action for Amazon SES to take if it cannot successfully read the required MX record when you send an email.")
-	ses_setIdentityMailFromDomainCmd.Flags().String("identity", "", "The verified identity.")
-	ses_setIdentityMailFromDomainCmd.Flags().String("mail-from-domain", "", "The custom MAIL FROM domain for the verified identity to use.")
-	ses_setIdentityMailFromDomainCmd.MarkFlagRequired("identity")
+		ses_setIdentityMailFromDomainCmd.Flags().String("behavior-on-mxfailure", "", "The action for Amazon SES to take if it cannot successfully read the required MX record when you send an email.")
+		ses_setIdentityMailFromDomainCmd.Flags().String("identity", "", "The verified identity.")
+		ses_setIdentityMailFromDomainCmd.Flags().String("mail-from-domain", "", "The custom MAIL FROM domain for the verified identity to use.")
+		ses_setIdentityMailFromDomainCmd.MarkFlagRequired("identity")
+	})
 	sesCmd.AddCommand(ses_setIdentityMailFromDomainCmd)
 }

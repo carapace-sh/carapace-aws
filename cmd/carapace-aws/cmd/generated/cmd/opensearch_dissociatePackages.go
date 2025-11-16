@@ -12,11 +12,13 @@ var opensearch_dissociatePackagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_dissociatePackagesCmd).Standalone()
+	carapace.Gen(opensearch_dissociatePackagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_dissociatePackagesCmd).Standalone()
 
-	opensearch_dissociatePackagesCmd.Flags().String("domain-name", "", "")
-	opensearch_dissociatePackagesCmd.Flags().String("package-list", "", "A list of package IDs to be dissociated from a domain.")
-	opensearch_dissociatePackagesCmd.MarkFlagRequired("domain-name")
-	opensearch_dissociatePackagesCmd.MarkFlagRequired("package-list")
+		opensearch_dissociatePackagesCmd.Flags().String("domain-name", "", "")
+		opensearch_dissociatePackagesCmd.Flags().String("package-list", "", "A list of package IDs to be dissociated from a domain.")
+		opensearch_dissociatePackagesCmd.MarkFlagRequired("domain-name")
+		opensearch_dissociatePackagesCmd.MarkFlagRequired("package-list")
+	})
 	opensearchCmd.AddCommand(opensearch_dissociatePackagesCmd)
 }

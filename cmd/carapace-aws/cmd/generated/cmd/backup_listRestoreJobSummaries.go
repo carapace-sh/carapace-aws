@@ -12,13 +12,15 @@ var backup_listRestoreJobSummariesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_listRestoreJobSummariesCmd).Standalone()
+	carapace.Gen(backup_listRestoreJobSummariesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_listRestoreJobSummariesCmd).Standalone()
 
-	backup_listRestoreJobSummariesCmd.Flags().String("account-id", "", "Returns the job count for the specified account.")
-	backup_listRestoreJobSummariesCmd.Flags().String("aggregation-period", "", "The period for the returned results.")
-	backup_listRestoreJobSummariesCmd.Flags().String("max-results", "", "This parameter sets the maximum number of items to be returned.")
-	backup_listRestoreJobSummariesCmd.Flags().String("next-token", "", "The next item following a partial list of returned resources.")
-	backup_listRestoreJobSummariesCmd.Flags().String("resource-type", "", "Returns the job count for the specified resource type.")
-	backup_listRestoreJobSummariesCmd.Flags().String("state", "", "This parameter returns the job count for jobs with the specified state.")
+		backup_listRestoreJobSummariesCmd.Flags().String("account-id", "", "Returns the job count for the specified account.")
+		backup_listRestoreJobSummariesCmd.Flags().String("aggregation-period", "", "The period for the returned results.")
+		backup_listRestoreJobSummariesCmd.Flags().String("max-results", "", "This parameter sets the maximum number of items to be returned.")
+		backup_listRestoreJobSummariesCmd.Flags().String("next-token", "", "The next item following a partial list of returned resources.")
+		backup_listRestoreJobSummariesCmd.Flags().String("resource-type", "", "Returns the job count for the specified resource type.")
+		backup_listRestoreJobSummariesCmd.Flags().String("state", "", "This parameter returns the job count for jobs with the specified state.")
+	})
 	backupCmd.AddCommand(backup_listRestoreJobSummariesCmd)
 }

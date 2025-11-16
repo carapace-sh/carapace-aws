@@ -12,9 +12,11 @@ var ssmSap_listConfigurationCheckDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_listConfigurationCheckDefinitionsCmd).Standalone()
+	carapace.Gen(ssmSap_listConfigurationCheckDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_listConfigurationCheckDefinitionsCmd).Standalone()
 
-	ssmSap_listConfigurationCheckDefinitionsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	ssmSap_listConfigurationCheckDefinitionsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		ssmSap_listConfigurationCheckDefinitionsCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		ssmSap_listConfigurationCheckDefinitionsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	ssmSapCmd.AddCommand(ssmSap_listConfigurationCheckDefinitionsCmd)
 }

@@ -12,7 +12,9 @@ var m2_getSignedBluinsightsUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(m2_getSignedBluinsightsUrlCmd).Standalone()
+	carapace.Gen(m2_getSignedBluinsightsUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(m2_getSignedBluinsightsUrlCmd).Standalone()
 
+	})
 	m2Cmd.AddCommand(m2_getSignedBluinsightsUrlCmd)
 }

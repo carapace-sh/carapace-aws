@@ -12,9 +12,11 @@ var cloudhsm_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_listTagsForResourceCmd).Standalone()
+	carapace.Gen(cloudhsm_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_listTagsForResourceCmd).Standalone()
 
-	cloudhsm_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the AWS CloudHSM resource.")
-	cloudhsm_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		cloudhsm_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the AWS CloudHSM resource.")
+		cloudhsm_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_listTagsForResourceCmd)
 }

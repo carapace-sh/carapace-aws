@@ -12,11 +12,13 @@ var keyspaces_listTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(keyspaces_listTypesCmd).Standalone()
+	carapace.Gen(keyspaces_listTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(keyspaces_listTypesCmd).Standalone()
 
-	keyspaces_listTypesCmd.Flags().String("keyspace-name", "", "The name of the keyspace that contains the listed types.")
-	keyspaces_listTypesCmd.Flags().String("max-results", "", "The total number of types to return in the output.")
-	keyspaces_listTypesCmd.Flags().String("next-token", "", "The pagination token.")
-	keyspaces_listTypesCmd.MarkFlagRequired("keyspace-name")
+		keyspaces_listTypesCmd.Flags().String("keyspace-name", "", "The name of the keyspace that contains the listed types.")
+		keyspaces_listTypesCmd.Flags().String("max-results", "", "The total number of types to return in the output.")
+		keyspaces_listTypesCmd.Flags().String("next-token", "", "The pagination token.")
+		keyspaces_listTypesCmd.MarkFlagRequired("keyspace-name")
+	})
 	keyspacesCmd.AddCommand(keyspaces_listTypesCmd)
 }

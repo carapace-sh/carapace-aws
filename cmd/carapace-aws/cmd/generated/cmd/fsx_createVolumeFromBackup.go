@@ -12,14 +12,16 @@ var fsx_createVolumeFromBackupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fsx_createVolumeFromBackupCmd).Standalone()
+	carapace.Gen(fsx_createVolumeFromBackupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fsx_createVolumeFromBackupCmd).Standalone()
 
-	fsx_createVolumeFromBackupCmd.Flags().String("backup-id", "", "")
-	fsx_createVolumeFromBackupCmd.Flags().String("client-request-token", "", "")
-	fsx_createVolumeFromBackupCmd.Flags().String("name", "", "The name of the new volume you're creating.")
-	fsx_createVolumeFromBackupCmd.Flags().String("ontap-configuration", "", "Specifies the configuration of the ONTAP volume that you are creating.")
-	fsx_createVolumeFromBackupCmd.Flags().String("tags", "", "")
-	fsx_createVolumeFromBackupCmd.MarkFlagRequired("backup-id")
-	fsx_createVolumeFromBackupCmd.MarkFlagRequired("name")
+		fsx_createVolumeFromBackupCmd.Flags().String("backup-id", "", "")
+		fsx_createVolumeFromBackupCmd.Flags().String("client-request-token", "", "")
+		fsx_createVolumeFromBackupCmd.Flags().String("name", "", "The name of the new volume you're creating.")
+		fsx_createVolumeFromBackupCmd.Flags().String("ontap-configuration", "", "Specifies the configuration of the ONTAP volume that you are creating.")
+		fsx_createVolumeFromBackupCmd.Flags().String("tags", "", "")
+		fsx_createVolumeFromBackupCmd.MarkFlagRequired("backup-id")
+		fsx_createVolumeFromBackupCmd.MarkFlagRequired("name")
+	})
 	fsxCmd.AddCommand(fsx_createVolumeFromBackupCmd)
 }

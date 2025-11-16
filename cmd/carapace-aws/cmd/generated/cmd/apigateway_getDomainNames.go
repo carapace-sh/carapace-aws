@@ -12,10 +12,12 @@ var apigateway_getDomainNamesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getDomainNamesCmd).Standalone()
+	carapace.Gen(apigateway_getDomainNamesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getDomainNamesCmd).Standalone()
 
-	apigateway_getDomainNamesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
-	apigateway_getDomainNamesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
-	apigateway_getDomainNamesCmd.Flags().String("resource-owner", "", "The owner of the domain name access association.")
+		apigateway_getDomainNamesCmd.Flags().String("limit", "", "The maximum number of returned results per page.")
+		apigateway_getDomainNamesCmd.Flags().String("position", "", "The current pagination position in the paged result set.")
+		apigateway_getDomainNamesCmd.Flags().String("resource-owner", "", "The owner of the domain name access association.")
+	})
 	apigatewayCmd.AddCommand(apigateway_getDomainNamesCmd)
 }

@@ -12,11 +12,13 @@ var healthlake_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(healthlake_tagResourceCmd).Standalone()
+	carapace.Gen(healthlake_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(healthlake_tagResourceCmd).Standalone()
 
-	healthlake_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that grants access to the data store tags are being added to.")
-	healthlake_tagResourceCmd.Flags().String("tags", "", "The user-specified key and value pair tags being added to a data store.")
-	healthlake_tagResourceCmd.MarkFlagRequired("resource-arn")
-	healthlake_tagResourceCmd.MarkFlagRequired("tags")
+		healthlake_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that grants access to the data store tags are being added to.")
+		healthlake_tagResourceCmd.Flags().String("tags", "", "The user-specified key and value pair tags being added to a data store.")
+		healthlake_tagResourceCmd.MarkFlagRequired("resource-arn")
+		healthlake_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	healthlakeCmd.AddCommand(healthlake_tagResourceCmd)
 }

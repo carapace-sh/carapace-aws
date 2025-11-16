@@ -12,9 +12,11 @@ var opensearch_describeDomainHealthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_describeDomainHealthCmd).Standalone()
+	carapace.Gen(opensearch_describeDomainHealthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_describeDomainHealthCmd).Standalone()
 
-	opensearch_describeDomainHealthCmd.Flags().String("domain-name", "", "The name of the domain.")
-	opensearch_describeDomainHealthCmd.MarkFlagRequired("domain-name")
+		opensearch_describeDomainHealthCmd.Flags().String("domain-name", "", "The name of the domain.")
+		opensearch_describeDomainHealthCmd.MarkFlagRequired("domain-name")
+	})
 	opensearchCmd.AddCommand(opensearch_describeDomainHealthCmd)
 }

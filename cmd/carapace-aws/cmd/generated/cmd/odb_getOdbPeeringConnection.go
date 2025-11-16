@@ -12,9 +12,11 @@ var odb_getOdbPeeringConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_getOdbPeeringConnectionCmd).Standalone()
+	carapace.Gen(odb_getOdbPeeringConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_getOdbPeeringConnectionCmd).Standalone()
 
-	odb_getOdbPeeringConnectionCmd.Flags().String("odb-peering-connection-id", "", "The unique identifier of the ODB peering connection to retrieve information about.")
-	odb_getOdbPeeringConnectionCmd.MarkFlagRequired("odb-peering-connection-id")
+		odb_getOdbPeeringConnectionCmd.Flags().String("odb-peering-connection-id", "", "The unique identifier of the ODB peering connection to retrieve information about.")
+		odb_getOdbPeeringConnectionCmd.MarkFlagRequired("odb-peering-connection-id")
+	})
 	odbCmd.AddCommand(odb_getOdbPeeringConnectionCmd)
 }

@@ -12,9 +12,11 @@ var glue_deleteUsageProfileCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteUsageProfileCmd).Standalone()
+	carapace.Gen(glue_deleteUsageProfileCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteUsageProfileCmd).Standalone()
 
-	glue_deleteUsageProfileCmd.Flags().String("name", "", "The name of the usage profile to delete.")
-	glue_deleteUsageProfileCmd.MarkFlagRequired("name")
+		glue_deleteUsageProfileCmd.Flags().String("name", "", "The name of the usage profile to delete.")
+		glue_deleteUsageProfileCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_deleteUsageProfileCmd)
 }

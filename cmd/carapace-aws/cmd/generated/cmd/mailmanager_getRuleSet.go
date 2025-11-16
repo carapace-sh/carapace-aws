@@ -12,9 +12,11 @@ var mailmanager_getRuleSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_getRuleSetCmd).Standalone()
+	carapace.Gen(mailmanager_getRuleSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_getRuleSetCmd).Standalone()
 
-	mailmanager_getRuleSetCmd.Flags().String("rule-set-id", "", "The identifier of an existing rule set to be retrieved.")
-	mailmanager_getRuleSetCmd.MarkFlagRequired("rule-set-id")
+		mailmanager_getRuleSetCmd.Flags().String("rule-set-id", "", "The identifier of an existing rule set to be retrieved.")
+		mailmanager_getRuleSetCmd.MarkFlagRequired("rule-set-id")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_getRuleSetCmd)
 }

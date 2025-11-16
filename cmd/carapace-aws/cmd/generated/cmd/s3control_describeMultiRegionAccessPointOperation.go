@@ -12,11 +12,13 @@ var s3control_describeMultiRegionAccessPointOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_describeMultiRegionAccessPointOperationCmd).Standalone()
+	carapace.Gen(s3control_describeMultiRegionAccessPointOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_describeMultiRegionAccessPointOperationCmd).Standalone()
 
-	s3control_describeMultiRegionAccessPointOperationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the owner of the Multi-Region Access Point.")
-	s3control_describeMultiRegionAccessPointOperationCmd.Flags().String("request-token-arn", "", "The request token associated with the request you want to know about.")
-	s3control_describeMultiRegionAccessPointOperationCmd.MarkFlagRequired("account-id")
-	s3control_describeMultiRegionAccessPointOperationCmd.MarkFlagRequired("request-token-arn")
+		s3control_describeMultiRegionAccessPointOperationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID for the owner of the Multi-Region Access Point.")
+		s3control_describeMultiRegionAccessPointOperationCmd.Flags().String("request-token-arn", "", "The request token associated with the request you want to know about.")
+		s3control_describeMultiRegionAccessPointOperationCmd.MarkFlagRequired("account-id")
+		s3control_describeMultiRegionAccessPointOperationCmd.MarkFlagRequired("request-token-arn")
+	})
 	s3controlCmd.AddCommand(s3control_describeMultiRegionAccessPointOperationCmd)
 }

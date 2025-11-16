@@ -12,11 +12,13 @@ var iotsitewise_listComputationModelDataBindingUsagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_listComputationModelDataBindingUsagesCmd).Standalone()
+	carapace.Gen(iotsitewise_listComputationModelDataBindingUsagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_listComputationModelDataBindingUsagesCmd).Standalone()
 
-	iotsitewise_listComputationModelDataBindingUsagesCmd.Flags().String("data-binding-value-filter", "", "A filter used to limit the returned data binding usages based on specific data binding values.")
-	iotsitewise_listComputationModelDataBindingUsagesCmd.Flags().String("max-results", "", "The maximum number of results returned for each paginated request.")
-	iotsitewise_listComputationModelDataBindingUsagesCmd.Flags().String("next-token", "", "The token used for the next set of paginated results.")
-	iotsitewise_listComputationModelDataBindingUsagesCmd.MarkFlagRequired("data-binding-value-filter")
+		iotsitewise_listComputationModelDataBindingUsagesCmd.Flags().String("data-binding-value-filter", "", "A filter used to limit the returned data binding usages based on specific data binding values.")
+		iotsitewise_listComputationModelDataBindingUsagesCmd.Flags().String("max-results", "", "The maximum number of results returned for each paginated request.")
+		iotsitewise_listComputationModelDataBindingUsagesCmd.Flags().String("next-token", "", "The token used for the next set of paginated results.")
+		iotsitewise_listComputationModelDataBindingUsagesCmd.MarkFlagRequired("data-binding-value-filter")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_listComputationModelDataBindingUsagesCmd)
 }

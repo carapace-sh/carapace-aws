@@ -12,9 +12,11 @@ var controltower_getBaselineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_getBaselineCmd).Standalone()
+	carapace.Gen(controltower_getBaselineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_getBaselineCmd).Standalone()
 
-	controltower_getBaselineCmd.Flags().String("baseline-identifier", "", "The ARN of the `Baseline` resource to be retrieved.")
-	controltower_getBaselineCmd.MarkFlagRequired("baseline-identifier")
+		controltower_getBaselineCmd.Flags().String("baseline-identifier", "", "The ARN of the `Baseline` resource to be retrieved.")
+		controltower_getBaselineCmd.MarkFlagRequired("baseline-identifier")
+	})
 	controltowerCmd.AddCommand(controltower_getBaselineCmd)
 }

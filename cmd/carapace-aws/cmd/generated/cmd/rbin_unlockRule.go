@@ -12,9 +12,11 @@ var rbin_unlockRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rbin_unlockRuleCmd).Standalone()
+	carapace.Gen(rbin_unlockRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rbin_unlockRuleCmd).Standalone()
 
-	rbin_unlockRuleCmd.Flags().String("identifier", "", "The unique ID of the retention rule.")
-	rbin_unlockRuleCmd.MarkFlagRequired("identifier")
+		rbin_unlockRuleCmd.Flags().String("identifier", "", "The unique ID of the retention rule.")
+		rbin_unlockRuleCmd.MarkFlagRequired("identifier")
+	})
 	rbinCmd.AddCommand(rbin_unlockRuleCmd)
 }

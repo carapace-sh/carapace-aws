@@ -12,12 +12,14 @@ var frauddetector_updateVariableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_updateVariableCmd).Standalone()
+	carapace.Gen(frauddetector_updateVariableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_updateVariableCmd).Standalone()
 
-	frauddetector_updateVariableCmd.Flags().String("default-value", "", "The new default value of the variable.")
-	frauddetector_updateVariableCmd.Flags().String("description", "", "The new description.")
-	frauddetector_updateVariableCmd.Flags().String("name", "", "The name of the variable.")
-	frauddetector_updateVariableCmd.Flags().String("variable-type", "", "The variable type.")
-	frauddetector_updateVariableCmd.MarkFlagRequired("name")
+		frauddetector_updateVariableCmd.Flags().String("default-value", "", "The new default value of the variable.")
+		frauddetector_updateVariableCmd.Flags().String("description", "", "The new description.")
+		frauddetector_updateVariableCmd.Flags().String("name", "", "The name of the variable.")
+		frauddetector_updateVariableCmd.Flags().String("variable-type", "", "The variable type.")
+		frauddetector_updateVariableCmd.MarkFlagRequired("name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_updateVariableCmd)
 }

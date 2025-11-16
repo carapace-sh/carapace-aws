@@ -12,9 +12,11 @@ var sagemaker_deleteCodeRepositoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteCodeRepositoryCmd).Standalone()
+	carapace.Gen(sagemaker_deleteCodeRepositoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteCodeRepositoryCmd).Standalone()
 
-	sagemaker_deleteCodeRepositoryCmd.Flags().String("code-repository-name", "", "The name of the Git repository to delete.")
-	sagemaker_deleteCodeRepositoryCmd.MarkFlagRequired("code-repository-name")
+		sagemaker_deleteCodeRepositoryCmd.Flags().String("code-repository-name", "", "The name of the Git repository to delete.")
+		sagemaker_deleteCodeRepositoryCmd.MarkFlagRequired("code-repository-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteCodeRepositoryCmd)
 }

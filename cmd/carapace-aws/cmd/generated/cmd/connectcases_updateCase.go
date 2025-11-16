@@ -12,14 +12,16 @@ var connectcases_updateCaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_updateCaseCmd).Standalone()
+	carapace.Gen(connectcases_updateCaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_updateCaseCmd).Standalone()
 
-	connectcases_updateCaseCmd.Flags().String("case-id", "", "A unique identifier of the case.")
-	connectcases_updateCaseCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
-	connectcases_updateCaseCmd.Flags().String("fields", "", "An array of objects with `fieldId` (matching ListFields/DescribeField) and value union data, structured identical to `CreateCase`.")
-	connectcases_updateCaseCmd.Flags().String("performed-by", "", "")
-	connectcases_updateCaseCmd.MarkFlagRequired("case-id")
-	connectcases_updateCaseCmd.MarkFlagRequired("domain-id")
-	connectcases_updateCaseCmd.MarkFlagRequired("fields")
+		connectcases_updateCaseCmd.Flags().String("case-id", "", "A unique identifier of the case.")
+		connectcases_updateCaseCmd.Flags().String("domain-id", "", "The unique identifier of the Cases domain.")
+		connectcases_updateCaseCmd.Flags().String("fields", "", "An array of objects with `fieldId` (matching ListFields/DescribeField) and value union data, structured identical to `CreateCase`.")
+		connectcases_updateCaseCmd.Flags().String("performed-by", "", "")
+		connectcases_updateCaseCmd.MarkFlagRequired("case-id")
+		connectcases_updateCaseCmd.MarkFlagRequired("domain-id")
+		connectcases_updateCaseCmd.MarkFlagRequired("fields")
+	})
 	connectcasesCmd.AddCommand(connectcases_updateCaseCmd)
 }

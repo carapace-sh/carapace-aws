@@ -12,11 +12,13 @@ var mailmanager_createAddonSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mailmanager_createAddonSubscriptionCmd).Standalone()
+	carapace.Gen(mailmanager_createAddonSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mailmanager_createAddonSubscriptionCmd).Standalone()
 
-	mailmanager_createAddonSubscriptionCmd.Flags().String("addon-name", "", "The name of the Add On to subscribe to.")
-	mailmanager_createAddonSubscriptionCmd.Flags().String("client-token", "", "A unique token that Amazon SES uses to recognize subsequent retries of the same request.")
-	mailmanager_createAddonSubscriptionCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for the resource.")
-	mailmanager_createAddonSubscriptionCmd.MarkFlagRequired("addon-name")
+		mailmanager_createAddonSubscriptionCmd.Flags().String("addon-name", "", "The name of the Add On to subscribe to.")
+		mailmanager_createAddonSubscriptionCmd.Flags().String("client-token", "", "A unique token that Amazon SES uses to recognize subsequent retries of the same request.")
+		mailmanager_createAddonSubscriptionCmd.Flags().String("tags", "", "The tags used to organize, track, or control access for the resource.")
+		mailmanager_createAddonSubscriptionCmd.MarkFlagRequired("addon-name")
+	})
 	mailmanagerCmd.AddCommand(mailmanager_createAddonSubscriptionCmd)
 }

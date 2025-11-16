@@ -12,10 +12,12 @@ var healthlake_listFhirdatastoresCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(healthlake_listFhirdatastoresCmd).Standalone()
+	carapace.Gen(healthlake_listFhirdatastoresCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(healthlake_listFhirdatastoresCmd).Standalone()
 
-	healthlake_listFhirdatastoresCmd.Flags().String("filter", "", "List all filters associated with a FHIR data store request.")
-	healthlake_listFhirdatastoresCmd.Flags().String("max-results", "", "The maximum number of data stores returned on a page.")
-	healthlake_listFhirdatastoresCmd.Flags().String("next-token", "", "The token used to retrieve the next page of data stores when results are paginated.")
+		healthlake_listFhirdatastoresCmd.Flags().String("filter", "", "List all filters associated with a FHIR data store request.")
+		healthlake_listFhirdatastoresCmd.Flags().String("max-results", "", "The maximum number of data stores returned on a page.")
+		healthlake_listFhirdatastoresCmd.Flags().String("next-token", "", "The token used to retrieve the next page of data stores when results are paginated.")
+	})
 	healthlakeCmd.AddCommand(healthlake_listFhirdatastoresCmd)
 }

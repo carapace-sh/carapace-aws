@@ -12,13 +12,15 @@ var omics_createVariantStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_createVariantStoreCmd).Standalone()
+	carapace.Gen(omics_createVariantStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_createVariantStoreCmd).Standalone()
 
-	omics_createVariantStoreCmd.Flags().String("description", "", "A description for the store.")
-	omics_createVariantStoreCmd.Flags().String("name", "", "A name for the store.")
-	omics_createVariantStoreCmd.Flags().String("reference", "", "The genome reference for the store's variants.")
-	omics_createVariantStoreCmd.Flags().String("sse-config", "", "Server-side encryption (SSE) settings for the store.")
-	omics_createVariantStoreCmd.Flags().String("tags", "", "Tags for the store.")
-	omics_createVariantStoreCmd.MarkFlagRequired("reference")
+		omics_createVariantStoreCmd.Flags().String("description", "", "A description for the store.")
+		omics_createVariantStoreCmd.Flags().String("name", "", "A name for the store.")
+		omics_createVariantStoreCmd.Flags().String("reference", "", "The genome reference for the store's variants.")
+		omics_createVariantStoreCmd.Flags().String("sse-config", "", "Server-side encryption (SSE) settings for the store.")
+		omics_createVariantStoreCmd.Flags().String("tags", "", "Tags for the store.")
+		omics_createVariantStoreCmd.MarkFlagRequired("reference")
+	})
 	omicsCmd.AddCommand(omics_createVariantStoreCmd)
 }

@@ -12,11 +12,13 @@ var finspace_listKxDatabasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_listKxDatabasesCmd).Standalone()
+	carapace.Gen(finspace_listKxDatabasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_listKxDatabasesCmd).Standalone()
 
-	finspace_listKxDatabasesCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_listKxDatabasesCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	finspace_listKxDatabasesCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
-	finspace_listKxDatabasesCmd.MarkFlagRequired("environment-id")
+		finspace_listKxDatabasesCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_listKxDatabasesCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		finspace_listKxDatabasesCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+		finspace_listKxDatabasesCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_listKxDatabasesCmd)
 }

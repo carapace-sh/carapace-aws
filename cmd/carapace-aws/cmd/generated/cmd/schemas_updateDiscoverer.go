@@ -12,11 +12,13 @@ var schemas_updateDiscovererCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_updateDiscovererCmd).Standalone()
+	carapace.Gen(schemas_updateDiscovererCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_updateDiscovererCmd).Standalone()
 
-	schemas_updateDiscovererCmd.Flags().String("cross-account", "", "Support discovery of schemas in events sent to the bus from another account.")
-	schemas_updateDiscovererCmd.Flags().String("description", "", "The description of the discoverer to update.")
-	schemas_updateDiscovererCmd.Flags().String("discoverer-id", "", "The ID of the discoverer.")
-	schemas_updateDiscovererCmd.MarkFlagRequired("discoverer-id")
+		schemas_updateDiscovererCmd.Flags().String("cross-account", "", "Support discovery of schemas in events sent to the bus from another account.")
+		schemas_updateDiscovererCmd.Flags().String("description", "", "The description of the discoverer to update.")
+		schemas_updateDiscovererCmd.Flags().String("discoverer-id", "", "The ID of the discoverer.")
+		schemas_updateDiscovererCmd.MarkFlagRequired("discoverer-id")
+	})
 	schemasCmd.AddCommand(schemas_updateDiscovererCmd)
 }

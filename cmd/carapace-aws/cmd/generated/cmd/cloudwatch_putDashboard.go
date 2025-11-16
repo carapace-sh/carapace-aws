@@ -12,11 +12,13 @@ var cloudwatch_putDashboardCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_putDashboardCmd).Standalone()
+	carapace.Gen(cloudwatch_putDashboardCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_putDashboardCmd).Standalone()
 
-	cloudwatch_putDashboardCmd.Flags().String("dashboard-body", "", "The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard.")
-	cloudwatch_putDashboardCmd.Flags().String("dashboard-name", "", "The name of the dashboard.")
-	cloudwatch_putDashboardCmd.MarkFlagRequired("dashboard-body")
-	cloudwatch_putDashboardCmd.MarkFlagRequired("dashboard-name")
+		cloudwatch_putDashboardCmd.Flags().String("dashboard-body", "", "The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard.")
+		cloudwatch_putDashboardCmd.Flags().String("dashboard-name", "", "The name of the dashboard.")
+		cloudwatch_putDashboardCmd.MarkFlagRequired("dashboard-body")
+		cloudwatch_putDashboardCmd.MarkFlagRequired("dashboard-name")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_putDashboardCmd)
 }

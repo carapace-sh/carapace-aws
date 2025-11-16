@@ -12,9 +12,11 @@ var neptune_stopDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_stopDbclusterCmd).Standalone()
+	carapace.Gen(neptune_stopDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_stopDbclusterCmd).Standalone()
 
-	neptune_stopDbclusterCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the Neptune DB cluster to be stopped.")
-	neptune_stopDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+		neptune_stopDbclusterCmd.Flags().String("dbcluster-identifier", "", "The DB cluster identifier of the Neptune DB cluster to be stopped.")
+		neptune_stopDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+	})
 	neptuneCmd.AddCommand(neptune_stopDbclusterCmd)
 }

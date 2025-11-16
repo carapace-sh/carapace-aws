@@ -12,9 +12,11 @@ var imagebuilder_deleteWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_deleteWorkflowCmd).Standalone()
+	carapace.Gen(imagebuilder_deleteWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_deleteWorkflowCmd).Standalone()
 
-	imagebuilder_deleteWorkflowCmd.Flags().String("workflow-build-version-arn", "", "The Amazon Resource Name (ARN) of the workflow resource to delete.")
-	imagebuilder_deleteWorkflowCmd.MarkFlagRequired("workflow-build-version-arn")
+		imagebuilder_deleteWorkflowCmd.Flags().String("workflow-build-version-arn", "", "The Amazon Resource Name (ARN) of the workflow resource to delete.")
+		imagebuilder_deleteWorkflowCmd.MarkFlagRequired("workflow-build-version-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_deleteWorkflowCmd)
 }

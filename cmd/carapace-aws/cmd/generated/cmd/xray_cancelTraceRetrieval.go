@@ -12,9 +12,11 @@ var xray_cancelTraceRetrievalCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_cancelTraceRetrievalCmd).Standalone()
+	carapace.Gen(xray_cancelTraceRetrievalCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_cancelTraceRetrievalCmd).Standalone()
 
-	xray_cancelTraceRetrievalCmd.Flags().String("retrieval-token", "", "Retrieval token.")
-	xray_cancelTraceRetrievalCmd.MarkFlagRequired("retrieval-token")
+		xray_cancelTraceRetrievalCmd.Flags().String("retrieval-token", "", "Retrieval token.")
+		xray_cancelTraceRetrievalCmd.MarkFlagRequired("retrieval-token")
+	})
 	xrayCmd.AddCommand(xray_cancelTraceRetrievalCmd)
 }

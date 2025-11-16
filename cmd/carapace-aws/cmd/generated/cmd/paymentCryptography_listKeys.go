@@ -12,10 +12,12 @@ var paymentCryptography_listKeysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_listKeysCmd).Standalone()
+	carapace.Gen(paymentCryptography_listKeysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_listKeysCmd).Standalone()
 
-	paymentCryptography_listKeysCmd.Flags().String("key-state", "", "The key state of the keys you want to list.")
-	paymentCryptography_listKeysCmd.Flags().String("max-results", "", "Use this parameter to specify the maximum number of items to return.")
-	paymentCryptography_listKeysCmd.Flags().String("next-token", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
+		paymentCryptography_listKeysCmd.Flags().String("key-state", "", "The key state of the keys you want to list.")
+		paymentCryptography_listKeysCmd.Flags().String("max-results", "", "Use this parameter to specify the maximum number of items to return.")
+		paymentCryptography_listKeysCmd.Flags().String("next-token", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_listKeysCmd)
 }

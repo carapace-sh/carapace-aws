@@ -12,9 +12,11 @@ var iot_describeAuditFindingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeAuditFindingCmd).Standalone()
+	carapace.Gen(iot_describeAuditFindingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeAuditFindingCmd).Standalone()
 
-	iot_describeAuditFindingCmd.Flags().String("finding-id", "", "A unique identifier for a single audit finding.")
-	iot_describeAuditFindingCmd.MarkFlagRequired("finding-id")
+		iot_describeAuditFindingCmd.Flags().String("finding-id", "", "A unique identifier for a single audit finding.")
+		iot_describeAuditFindingCmd.MarkFlagRequired("finding-id")
+	})
 	iotCmd.AddCommand(iot_describeAuditFindingCmd)
 }

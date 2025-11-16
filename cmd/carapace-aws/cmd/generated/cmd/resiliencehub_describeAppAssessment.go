@@ -12,9 +12,11 @@ var resiliencehub_describeAppAssessmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_describeAppAssessmentCmd).Standalone()
+	carapace.Gen(resiliencehub_describeAppAssessmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_describeAppAssessmentCmd).Standalone()
 
-	resiliencehub_describeAppAssessmentCmd.Flags().String("assessment-arn", "", "Amazon Resource Name (ARN) of the assessment.")
-	resiliencehub_describeAppAssessmentCmd.MarkFlagRequired("assessment-arn")
+		resiliencehub_describeAppAssessmentCmd.Flags().String("assessment-arn", "", "Amazon Resource Name (ARN) of the assessment.")
+		resiliencehub_describeAppAssessmentCmd.MarkFlagRequired("assessment-arn")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_describeAppAssessmentCmd)
 }

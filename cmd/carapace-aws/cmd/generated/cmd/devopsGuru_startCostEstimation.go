@@ -12,10 +12,12 @@ var devopsGuru_startCostEstimationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devopsGuru_startCostEstimationCmd).Standalone()
+	carapace.Gen(devopsGuru_startCostEstimationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devopsGuru_startCostEstimationCmd).Standalone()
 
-	devopsGuru_startCostEstimationCmd.Flags().String("client-token", "", "The idempotency token used to identify each cost estimate request.")
-	devopsGuru_startCostEstimationCmd.Flags().String("resource-collection", "", "The collection of Amazon Web Services resources used to create a monthly DevOps Guru cost estimate.")
-	devopsGuru_startCostEstimationCmd.MarkFlagRequired("resource-collection")
+		devopsGuru_startCostEstimationCmd.Flags().String("client-token", "", "The idempotency token used to identify each cost estimate request.")
+		devopsGuru_startCostEstimationCmd.Flags().String("resource-collection", "", "The collection of Amazon Web Services resources used to create a monthly DevOps Guru cost estimate.")
+		devopsGuru_startCostEstimationCmd.MarkFlagRequired("resource-collection")
+	})
 	devopsGuruCmd.AddCommand(devopsGuru_startCostEstimationCmd)
 }

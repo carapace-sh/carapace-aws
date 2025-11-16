@@ -12,18 +12,20 @@ var wellarchitected_updateReviewTemplateAnswerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_updateReviewTemplateAnswerCmd).Standalone()
+	carapace.Gen(wellarchitected_updateReviewTemplateAnswerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_updateReviewTemplateAnswerCmd).Standalone()
 
-	wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("choice-updates", "", "A list of choices to be updated.")
-	wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("is-applicable", "", "")
-	wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("notes", "", "")
-	wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("question-id", "", "")
-	wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("reason", "", "The update reason.")
-	wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("selected-choices", "", "")
-	wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("template-arn", "", "The review template ARN.")
-	wellarchitected_updateReviewTemplateAnswerCmd.MarkFlagRequired("lens-alias")
-	wellarchitected_updateReviewTemplateAnswerCmd.MarkFlagRequired("question-id")
-	wellarchitected_updateReviewTemplateAnswerCmd.MarkFlagRequired("template-arn")
+		wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("choice-updates", "", "A list of choices to be updated.")
+		wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("is-applicable", "", "")
+		wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("notes", "", "")
+		wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("question-id", "", "")
+		wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("reason", "", "The update reason.")
+		wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("selected-choices", "", "")
+		wellarchitected_updateReviewTemplateAnswerCmd.Flags().String("template-arn", "", "The review template ARN.")
+		wellarchitected_updateReviewTemplateAnswerCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_updateReviewTemplateAnswerCmd.MarkFlagRequired("question-id")
+		wellarchitected_updateReviewTemplateAnswerCmd.MarkFlagRequired("template-arn")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_updateReviewTemplateAnswerCmd)
 }

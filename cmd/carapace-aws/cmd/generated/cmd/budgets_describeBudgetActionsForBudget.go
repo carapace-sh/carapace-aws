@@ -12,13 +12,15 @@ var budgets_describeBudgetActionsForBudgetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(budgets_describeBudgetActionsForBudgetCmd).Standalone()
+	carapace.Gen(budgets_describeBudgetActionsForBudgetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(budgets_describeBudgetActionsForBudgetCmd).Standalone()
 
-	budgets_describeBudgetActionsForBudgetCmd.Flags().String("account-id", "", "")
-	budgets_describeBudgetActionsForBudgetCmd.Flags().String("budget-name", "", "")
-	budgets_describeBudgetActionsForBudgetCmd.Flags().String("max-results", "", "")
-	budgets_describeBudgetActionsForBudgetCmd.Flags().String("next-token", "", "")
-	budgets_describeBudgetActionsForBudgetCmd.MarkFlagRequired("account-id")
-	budgets_describeBudgetActionsForBudgetCmd.MarkFlagRequired("budget-name")
+		budgets_describeBudgetActionsForBudgetCmd.Flags().String("account-id", "", "")
+		budgets_describeBudgetActionsForBudgetCmd.Flags().String("budget-name", "", "")
+		budgets_describeBudgetActionsForBudgetCmd.Flags().String("max-results", "", "")
+		budgets_describeBudgetActionsForBudgetCmd.Flags().String("next-token", "", "")
+		budgets_describeBudgetActionsForBudgetCmd.MarkFlagRequired("account-id")
+		budgets_describeBudgetActionsForBudgetCmd.MarkFlagRequired("budget-name")
+	})
 	budgetsCmd.AddCommand(budgets_describeBudgetActionsForBudgetCmd)
 }

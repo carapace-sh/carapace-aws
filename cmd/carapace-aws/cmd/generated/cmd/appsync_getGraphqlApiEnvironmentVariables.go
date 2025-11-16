@@ -12,9 +12,11 @@ var appsync_getGraphqlApiEnvironmentVariablesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_getGraphqlApiEnvironmentVariablesCmd).Standalone()
+	carapace.Gen(appsync_getGraphqlApiEnvironmentVariablesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_getGraphqlApiEnvironmentVariablesCmd).Standalone()
 
-	appsync_getGraphqlApiEnvironmentVariablesCmd.Flags().String("api-id", "", "The ID of the API from which the environmental variable list will be retrieved.")
-	appsync_getGraphqlApiEnvironmentVariablesCmd.MarkFlagRequired("api-id")
+		appsync_getGraphqlApiEnvironmentVariablesCmd.Flags().String("api-id", "", "The ID of the API from which the environmental variable list will be retrieved.")
+		appsync_getGraphqlApiEnvironmentVariablesCmd.MarkFlagRequired("api-id")
+	})
 	appsyncCmd.AddCommand(appsync_getGraphqlApiEnvironmentVariablesCmd)
 }

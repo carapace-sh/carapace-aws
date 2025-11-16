@@ -12,9 +12,11 @@ var drs_reverseReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_reverseReplicationCmd).Standalone()
+	carapace.Gen(drs_reverseReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_reverseReplicationCmd).Standalone()
 
-	drs_reverseReplicationCmd.Flags().String("recovery-instance-id", "", "The ID of the Recovery Instance that we want to reverse the replication for.")
-	drs_reverseReplicationCmd.MarkFlagRequired("recovery-instance-id")
+		drs_reverseReplicationCmd.Flags().String("recovery-instance-id", "", "The ID of the Recovery Instance that we want to reverse the replication for.")
+		drs_reverseReplicationCmd.MarkFlagRequired("recovery-instance-id")
+	})
 	drsCmd.AddCommand(drs_reverseReplicationCmd)
 }

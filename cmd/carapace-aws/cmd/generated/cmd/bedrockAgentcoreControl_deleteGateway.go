@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_deleteGatewayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_deleteGatewayCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_deleteGatewayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_deleteGatewayCmd).Standalone()
 
-	bedrockAgentcoreControl_deleteGatewayCmd.Flags().String("gateway-identifier", "", "The identifier of the gateway to delete.")
-	bedrockAgentcoreControl_deleteGatewayCmd.MarkFlagRequired("gateway-identifier")
+		bedrockAgentcoreControl_deleteGatewayCmd.Flags().String("gateway-identifier", "", "The identifier of the gateway to delete.")
+		bedrockAgentcoreControl_deleteGatewayCmd.MarkFlagRequired("gateway-identifier")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_deleteGatewayCmd)
 }

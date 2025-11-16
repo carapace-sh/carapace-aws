@@ -12,9 +12,11 @@ var route53RecoveryControlConfig_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryControlConfig_listTagsForResourceCmd).Standalone()
+	carapace.Gen(route53RecoveryControlConfig_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryControlConfig_listTagsForResourceCmd).Standalone()
 
-	route53RecoveryControlConfig_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource that's tagged.")
-	route53RecoveryControlConfig_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		route53RecoveryControlConfig_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the resource that's tagged.")
+		route53RecoveryControlConfig_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	route53RecoveryControlConfigCmd.AddCommand(route53RecoveryControlConfig_listTagsForResourceCmd)
 }

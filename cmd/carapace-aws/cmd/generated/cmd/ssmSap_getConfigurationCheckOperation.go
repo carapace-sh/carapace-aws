@@ -12,9 +12,11 @@ var ssmSap_getConfigurationCheckOperationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_getConfigurationCheckOperationCmd).Standalone()
+	carapace.Gen(ssmSap_getConfigurationCheckOperationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_getConfigurationCheckOperationCmd).Standalone()
 
-	ssmSap_getConfigurationCheckOperationCmd.Flags().String("operation-id", "", "The ID of the configuration check operation.")
-	ssmSap_getConfigurationCheckOperationCmd.MarkFlagRequired("operation-id")
+		ssmSap_getConfigurationCheckOperationCmd.Flags().String("operation-id", "", "The ID of the configuration check operation.")
+		ssmSap_getConfigurationCheckOperationCmd.MarkFlagRequired("operation-id")
+	})
 	ssmSapCmd.AddCommand(ssmSap_getConfigurationCheckOperationCmd)
 }

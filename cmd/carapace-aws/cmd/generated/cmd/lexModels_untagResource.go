@@ -12,11 +12,13 @@ var lexModels_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_untagResourceCmd).Standalone()
+	carapace.Gen(lexModels_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_untagResourceCmd).Standalone()
 
-	lexModels_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to remove the tags from.")
-	lexModels_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the resource.")
-	lexModels_untagResourceCmd.MarkFlagRequired("resource-arn")
-	lexModels_untagResourceCmd.MarkFlagRequired("tag-keys")
+		lexModels_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to remove the tags from.")
+		lexModels_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the resource.")
+		lexModels_untagResourceCmd.MarkFlagRequired("resource-arn")
+		lexModels_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	lexModelsCmd.AddCommand(lexModels_untagResourceCmd)
 }

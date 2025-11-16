@@ -12,9 +12,11 @@ var rolesanywhere_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_listTagsForResourceCmd).Standalone()
+	carapace.Gen(rolesanywhere_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_listTagsForResourceCmd).Standalone()
 
-	rolesanywhere_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
-	rolesanywhere_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		rolesanywhere_listTagsForResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource.")
+		rolesanywhere_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_listTagsForResourceCmd)
 }

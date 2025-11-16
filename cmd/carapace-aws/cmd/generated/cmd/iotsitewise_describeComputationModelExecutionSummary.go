@@ -12,11 +12,13 @@ var iotsitewise_describeComputationModelExecutionSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeComputationModelExecutionSummaryCmd).Standalone()
+	carapace.Gen(iotsitewise_describeComputationModelExecutionSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeComputationModelExecutionSummaryCmd).Standalone()
 
-	iotsitewise_describeComputationModelExecutionSummaryCmd.Flags().String("computation-model-id", "", "The ID of the computation model.")
-	iotsitewise_describeComputationModelExecutionSummaryCmd.Flags().String("resolve-to-resource-id", "", "The ID of the resolved resource.")
-	iotsitewise_describeComputationModelExecutionSummaryCmd.Flags().String("resolve-to-resource-type", "", "The type of the resolved resource.")
-	iotsitewise_describeComputationModelExecutionSummaryCmd.MarkFlagRequired("computation-model-id")
+		iotsitewise_describeComputationModelExecutionSummaryCmd.Flags().String("computation-model-id", "", "The ID of the computation model.")
+		iotsitewise_describeComputationModelExecutionSummaryCmd.Flags().String("resolve-to-resource-id", "", "The ID of the resolved resource.")
+		iotsitewise_describeComputationModelExecutionSummaryCmd.Flags().String("resolve-to-resource-type", "", "The type of the resolved resource.")
+		iotsitewise_describeComputationModelExecutionSummaryCmd.MarkFlagRequired("computation-model-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeComputationModelExecutionSummaryCmd)
 }

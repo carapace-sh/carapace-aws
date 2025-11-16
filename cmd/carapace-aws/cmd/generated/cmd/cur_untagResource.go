@@ -12,11 +12,13 @@ var cur_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cur_untagResourceCmd).Standalone()
+	carapace.Gen(cur_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cur_untagResourceCmd).Standalone()
 
-	cur_untagResourceCmd.Flags().String("report-name", "", "The report name of the report definition that tags are to be disassociated from.")
-	cur_untagResourceCmd.Flags().String("tag-keys", "", "The tags to be disassociated from the report definition resource.")
-	cur_untagResourceCmd.MarkFlagRequired("report-name")
-	cur_untagResourceCmd.MarkFlagRequired("tag-keys")
+		cur_untagResourceCmd.Flags().String("report-name", "", "The report name of the report definition that tags are to be disassociated from.")
+		cur_untagResourceCmd.Flags().String("tag-keys", "", "The tags to be disassociated from the report definition resource.")
+		cur_untagResourceCmd.MarkFlagRequired("report-name")
+		cur_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	curCmd.AddCommand(cur_untagResourceCmd)
 }

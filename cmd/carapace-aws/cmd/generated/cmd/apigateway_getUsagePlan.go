@@ -12,9 +12,11 @@ var apigateway_getUsagePlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getUsagePlanCmd).Standalone()
+	carapace.Gen(apigateway_getUsagePlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getUsagePlanCmd).Standalone()
 
-	apigateway_getUsagePlanCmd.Flags().String("usage-plan-id", "", "The identifier of the UsagePlan resource to be retrieved.")
-	apigateway_getUsagePlanCmd.MarkFlagRequired("usage-plan-id")
+		apigateway_getUsagePlanCmd.Flags().String("usage-plan-id", "", "The identifier of the UsagePlan resource to be retrieved.")
+		apigateway_getUsagePlanCmd.MarkFlagRequired("usage-plan-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_getUsagePlanCmd)
 }

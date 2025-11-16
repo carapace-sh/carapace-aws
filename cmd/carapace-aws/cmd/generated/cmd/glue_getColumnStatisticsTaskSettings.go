@@ -12,11 +12,13 @@ var glue_getColumnStatisticsTaskSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getColumnStatisticsTaskSettingsCmd).Standalone()
+	carapace.Gen(glue_getColumnStatisticsTaskSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getColumnStatisticsTaskSettingsCmd).Standalone()
 
-	glue_getColumnStatisticsTaskSettingsCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
-	glue_getColumnStatisticsTaskSettingsCmd.Flags().String("table-name", "", "The name of the table for which to retrieve column statistics.")
-	glue_getColumnStatisticsTaskSettingsCmd.MarkFlagRequired("database-name")
-	glue_getColumnStatisticsTaskSettingsCmd.MarkFlagRequired("table-name")
+		glue_getColumnStatisticsTaskSettingsCmd.Flags().String("database-name", "", "The name of the database where the table resides.")
+		glue_getColumnStatisticsTaskSettingsCmd.Flags().String("table-name", "", "The name of the table for which to retrieve column statistics.")
+		glue_getColumnStatisticsTaskSettingsCmd.MarkFlagRequired("database-name")
+		glue_getColumnStatisticsTaskSettingsCmd.MarkFlagRequired("table-name")
+	})
 	glueCmd.AddCommand(glue_getColumnStatisticsTaskSettingsCmd)
 }

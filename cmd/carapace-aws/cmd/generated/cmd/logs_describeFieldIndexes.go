@@ -12,10 +12,12 @@ var logs_describeFieldIndexesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_describeFieldIndexesCmd).Standalone()
+	carapace.Gen(logs_describeFieldIndexesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_describeFieldIndexesCmd).Standalone()
 
-	logs_describeFieldIndexesCmd.Flags().String("log-group-identifiers", "", "An array containing the names or ARNs of the log groups that you want to retrieve field indexes for.")
-	logs_describeFieldIndexesCmd.Flags().String("next-token", "", "")
-	logs_describeFieldIndexesCmd.MarkFlagRequired("log-group-identifiers")
+		logs_describeFieldIndexesCmd.Flags().String("log-group-identifiers", "", "An array containing the names or ARNs of the log groups that you want to retrieve field indexes for.")
+		logs_describeFieldIndexesCmd.Flags().String("next-token", "", "")
+		logs_describeFieldIndexesCmd.MarkFlagRequired("log-group-identifiers")
+	})
 	logsCmd.AddCommand(logs_describeFieldIndexesCmd)
 }

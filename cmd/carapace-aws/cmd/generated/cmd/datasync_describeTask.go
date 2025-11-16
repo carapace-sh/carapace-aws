@@ -12,9 +12,11 @@ var datasync_describeTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_describeTaskCmd).Standalone()
+	carapace.Gen(datasync_describeTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_describeTaskCmd).Standalone()
 
-	datasync_describeTaskCmd.Flags().String("task-arn", "", "Specifies the Amazon Resource Name (ARN) of the transfer task that you want information about.")
-	datasync_describeTaskCmd.MarkFlagRequired("task-arn")
+		datasync_describeTaskCmd.Flags().String("task-arn", "", "Specifies the Amazon Resource Name (ARN) of the transfer task that you want information about.")
+		datasync_describeTaskCmd.MarkFlagRequired("task-arn")
+	})
 	datasyncCmd.AddCommand(datasync_describeTaskCmd)
 }

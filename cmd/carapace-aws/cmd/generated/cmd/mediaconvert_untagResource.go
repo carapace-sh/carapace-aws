@@ -12,10 +12,12 @@ var mediaconvert_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_untagResourceCmd).Standalone()
+	carapace.Gen(mediaconvert_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_untagResourceCmd).Standalone()
 
-	mediaconvert_untagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
-	mediaconvert_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags that you want to remove from the resource.")
-	mediaconvert_untagResourceCmd.MarkFlagRequired("arn")
+		mediaconvert_untagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
+		mediaconvert_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags that you want to remove from the resource.")
+		mediaconvert_untagResourceCmd.MarkFlagRequired("arn")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_untagResourceCmd)
 }

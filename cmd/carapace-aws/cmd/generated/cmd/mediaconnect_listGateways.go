@@ -12,9 +12,11 @@ var mediaconnect_listGatewaysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconnect_listGatewaysCmd).Standalone()
+	carapace.Gen(mediaconnect_listGatewaysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconnect_listGatewaysCmd).Standalone()
 
-	mediaconnect_listGatewaysCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
-	mediaconnect_listGatewaysCmd.Flags().String("next-token", "", "The token that identifies the batch of results that you want to see.")
+		mediaconnect_listGatewaysCmd.Flags().String("max-results", "", "The maximum number of results to return per API request.")
+		mediaconnect_listGatewaysCmd.Flags().String("next-token", "", "The token that identifies the batch of results that you want to see.")
+	})
 	mediaconnectCmd.AddCommand(mediaconnect_listGatewaysCmd)
 }

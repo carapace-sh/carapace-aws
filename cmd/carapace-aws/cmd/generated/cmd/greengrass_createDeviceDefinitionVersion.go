@@ -12,11 +12,13 @@ var greengrass_createDeviceDefinitionVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_createDeviceDefinitionVersionCmd).Standalone()
+	carapace.Gen(greengrass_createDeviceDefinitionVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_createDeviceDefinitionVersionCmd).Standalone()
 
-	greengrass_createDeviceDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
-	greengrass_createDeviceDefinitionVersionCmd.Flags().String("device-definition-id", "", "The ID of the device definition.")
-	greengrass_createDeviceDefinitionVersionCmd.Flags().String("devices", "", "A list of devices in the definition version.")
-	greengrass_createDeviceDefinitionVersionCmd.MarkFlagRequired("device-definition-id")
+		greengrass_createDeviceDefinitionVersionCmd.Flags().String("amzn-client-token", "", "A client token used to correlate requests and responses.")
+		greengrass_createDeviceDefinitionVersionCmd.Flags().String("device-definition-id", "", "The ID of the device definition.")
+		greengrass_createDeviceDefinitionVersionCmd.Flags().String("devices", "", "A list of devices in the definition version.")
+		greengrass_createDeviceDefinitionVersionCmd.MarkFlagRequired("device-definition-id")
+	})
 	greengrassCmd.AddCommand(greengrass_createDeviceDefinitionVersionCmd)
 }

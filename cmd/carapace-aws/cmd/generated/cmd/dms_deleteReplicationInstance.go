@@ -12,9 +12,11 @@ var dms_deleteReplicationInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteReplicationInstanceCmd).Standalone()
+	carapace.Gen(dms_deleteReplicationInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteReplicationInstanceCmd).Standalone()
 
-	dms_deleteReplicationInstanceCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance to be deleted.")
-	dms_deleteReplicationInstanceCmd.MarkFlagRequired("replication-instance-arn")
+		dms_deleteReplicationInstanceCmd.Flags().String("replication-instance-arn", "", "The Amazon Resource Name (ARN) of the replication instance to be deleted.")
+		dms_deleteReplicationInstanceCmd.MarkFlagRequired("replication-instance-arn")
+	})
 	dmsCmd.AddCommand(dms_deleteReplicationInstanceCmd)
 }

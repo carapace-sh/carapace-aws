@@ -12,9 +12,11 @@ var ssoAdmin_deleteTrustedTokenIssuerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_deleteTrustedTokenIssuerCmd).Standalone()
+	carapace.Gen(ssoAdmin_deleteTrustedTokenIssuerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_deleteTrustedTokenIssuerCmd).Standalone()
 
-	ssoAdmin_deleteTrustedTokenIssuerCmd.Flags().String("trusted-token-issuer-arn", "", "Specifies the ARN of the trusted token issuer configuration to delete.")
-	ssoAdmin_deleteTrustedTokenIssuerCmd.MarkFlagRequired("trusted-token-issuer-arn")
+		ssoAdmin_deleteTrustedTokenIssuerCmd.Flags().String("trusted-token-issuer-arn", "", "Specifies the ARN of the trusted token issuer configuration to delete.")
+		ssoAdmin_deleteTrustedTokenIssuerCmd.MarkFlagRequired("trusted-token-issuer-arn")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_deleteTrustedTokenIssuerCmd)
 }

@@ -12,10 +12,12 @@ var lightsail_stopInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_stopInstanceCmd).Standalone()
+	carapace.Gen(lightsail_stopInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_stopInstanceCmd).Standalone()
 
-	lightsail_stopInstanceCmd.Flags().String("force", "", "When set to `True`, forces a Lightsail instance that is stuck in a `stopping` state to stop.")
-	lightsail_stopInstanceCmd.Flags().String("instance-name", "", "The name of the instance (a virtual private server) to stop.")
-	lightsail_stopInstanceCmd.MarkFlagRequired("instance-name")
+		lightsail_stopInstanceCmd.Flags().String("force", "", "When set to `True`, forces a Lightsail instance that is stuck in a `stopping` state to stop.")
+		lightsail_stopInstanceCmd.Flags().String("instance-name", "", "The name of the instance (a virtual private server) to stop.")
+		lightsail_stopInstanceCmd.MarkFlagRequired("instance-name")
+	})
 	lightsailCmd.AddCommand(lightsail_stopInstanceCmd)
 }

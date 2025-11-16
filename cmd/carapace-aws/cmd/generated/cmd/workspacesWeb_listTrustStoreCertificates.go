@@ -12,11 +12,13 @@ var workspacesWeb_listTrustStoreCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_listTrustStoreCertificatesCmd).Standalone()
+	carapace.Gen(workspacesWeb_listTrustStoreCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_listTrustStoreCertificatesCmd).Standalone()
 
-	workspacesWeb_listTrustStoreCertificatesCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
-	workspacesWeb_listTrustStoreCertificatesCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
-	workspacesWeb_listTrustStoreCertificatesCmd.Flags().String("trust-store-arn", "", "The ARN of the trust store")
-	workspacesWeb_listTrustStoreCertificatesCmd.MarkFlagRequired("trust-store-arn")
+		workspacesWeb_listTrustStoreCertificatesCmd.Flags().String("max-results", "", "The maximum number of results to be included in the next page.")
+		workspacesWeb_listTrustStoreCertificatesCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		workspacesWeb_listTrustStoreCertificatesCmd.Flags().String("trust-store-arn", "", "The ARN of the trust store")
+		workspacesWeb_listTrustStoreCertificatesCmd.MarkFlagRequired("trust-store-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_listTrustStoreCertificatesCmd)
 }

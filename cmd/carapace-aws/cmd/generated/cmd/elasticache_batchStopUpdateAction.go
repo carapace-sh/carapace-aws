@@ -12,11 +12,13 @@ var elasticache_batchStopUpdateActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticache_batchStopUpdateActionCmd).Standalone()
+	carapace.Gen(elasticache_batchStopUpdateActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticache_batchStopUpdateActionCmd).Standalone()
 
-	elasticache_batchStopUpdateActionCmd.Flags().String("cache-cluster-ids", "", "The cache cluster IDs")
-	elasticache_batchStopUpdateActionCmd.Flags().String("replication-group-ids", "", "The replication group IDs")
-	elasticache_batchStopUpdateActionCmd.Flags().String("service-update-name", "", "The unique ID of the service update")
-	elasticache_batchStopUpdateActionCmd.MarkFlagRequired("service-update-name")
+		elasticache_batchStopUpdateActionCmd.Flags().String("cache-cluster-ids", "", "The cache cluster IDs")
+		elasticache_batchStopUpdateActionCmd.Flags().String("replication-group-ids", "", "The replication group IDs")
+		elasticache_batchStopUpdateActionCmd.Flags().String("service-update-name", "", "The unique ID of the service update")
+		elasticache_batchStopUpdateActionCmd.MarkFlagRequired("service-update-name")
+	})
 	elasticacheCmd.AddCommand(elasticache_batchStopUpdateActionCmd)
 }

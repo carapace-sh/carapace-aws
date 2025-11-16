@@ -12,10 +12,12 @@ var athena_deleteWorkGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_deleteWorkGroupCmd).Standalone()
+	carapace.Gen(athena_deleteWorkGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_deleteWorkGroupCmd).Standalone()
 
-	athena_deleteWorkGroupCmd.Flags().String("recursive-delete-option", "", "The option to delete the workgroup and its contents even if the workgroup contains any named queries, query executions, or notebooks.")
-	athena_deleteWorkGroupCmd.Flags().String("work-group", "", "The unique name of the workgroup to delete.")
-	athena_deleteWorkGroupCmd.MarkFlagRequired("work-group")
+		athena_deleteWorkGroupCmd.Flags().String("recursive-delete-option", "", "The option to delete the workgroup and its contents even if the workgroup contains any named queries, query executions, or notebooks.")
+		athena_deleteWorkGroupCmd.Flags().String("work-group", "", "The unique name of the workgroup to delete.")
+		athena_deleteWorkGroupCmd.MarkFlagRequired("work-group")
+	})
 	athenaCmd.AddCommand(athena_deleteWorkGroupCmd)
 }

@@ -12,13 +12,15 @@ var kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd = &cobra.C
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd).Standalone()
+	carapace.Gen(kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd).Standalone()
 
-	kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.Flags().String("application-name", "", "The Kinesis Analytics application name.")
-	kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.Flags().String("current-application-version-id", "", "The version ID of the Kinesis Analytics application.")
-	kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.Flags().String("input-id", "", "The ID of the input configuration from which to delete the input processing configuration.")
-	kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.MarkFlagRequired("current-application-version-id")
-	kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.MarkFlagRequired("input-id")
+		kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.Flags().String("application-name", "", "The Kinesis Analytics application name.")
+		kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.Flags().String("current-application-version-id", "", "The version ID of the Kinesis Analytics application.")
+		kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.Flags().String("input-id", "", "The ID of the input configuration from which to delete the input processing configuration.")
+		kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd.MarkFlagRequired("input-id")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_deleteApplicationInputProcessingConfigurationCmd)
 }

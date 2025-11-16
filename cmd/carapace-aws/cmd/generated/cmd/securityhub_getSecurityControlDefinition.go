@@ -12,9 +12,11 @@ var securityhub_getSecurityControlDefinitionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getSecurityControlDefinitionCmd).Standalone()
+	carapace.Gen(securityhub_getSecurityControlDefinitionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getSecurityControlDefinitionCmd).Standalone()
 
-	securityhub_getSecurityControlDefinitionCmd.Flags().String("security-control-id", "", "The ID of the security control to retrieve the definition for.")
-	securityhub_getSecurityControlDefinitionCmd.MarkFlagRequired("security-control-id")
+		securityhub_getSecurityControlDefinitionCmd.Flags().String("security-control-id", "", "The ID of the security control to retrieve the definition for.")
+		securityhub_getSecurityControlDefinitionCmd.MarkFlagRequired("security-control-id")
+	})
 	securityhubCmd.AddCommand(securityhub_getSecurityControlDefinitionCmd)
 }

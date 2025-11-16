@@ -12,9 +12,11 @@ var apprunner_resumeServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_resumeServiceCmd).Standalone()
+	carapace.Gen(apprunner_resumeServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_resumeServiceCmd).Standalone()
 
-	apprunner_resumeServiceCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to resume.")
-	apprunner_resumeServiceCmd.MarkFlagRequired("service-arn")
+		apprunner_resumeServiceCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to resume.")
+		apprunner_resumeServiceCmd.MarkFlagRequired("service-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_resumeServiceCmd)
 }

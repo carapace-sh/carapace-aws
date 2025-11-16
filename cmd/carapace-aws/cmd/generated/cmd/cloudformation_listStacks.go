@@ -12,9 +12,11 @@ var cloudformation_listStacksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_listStacksCmd).Standalone()
+	carapace.Gen(cloudformation_listStacksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_listStacksCmd).Standalone()
 
-	cloudformation_listStacksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
-	cloudformation_listStacksCmd.Flags().String("stack-status-filter", "", "Stack status to use as a filter.")
+		cloudformation_listStacksCmd.Flags().String("next-token", "", "The token for the next set of items to return.")
+		cloudformation_listStacksCmd.Flags().String("stack-status-filter", "", "Stack status to use as a filter.")
+	})
 	cloudformationCmd.AddCommand(cloudformation_listStacksCmd)
 }

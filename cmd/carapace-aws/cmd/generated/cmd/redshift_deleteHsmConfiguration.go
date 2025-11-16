@@ -12,9 +12,11 @@ var redshift_deleteHsmConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteHsmConfigurationCmd).Standalone()
+	carapace.Gen(redshift_deleteHsmConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteHsmConfigurationCmd).Standalone()
 
-	redshift_deleteHsmConfigurationCmd.Flags().String("hsm-configuration-identifier", "", "The identifier of the Amazon Redshift HSM configuration to be deleted.")
-	redshift_deleteHsmConfigurationCmd.MarkFlagRequired("hsm-configuration-identifier")
+		redshift_deleteHsmConfigurationCmd.Flags().String("hsm-configuration-identifier", "", "The identifier of the Amazon Redshift HSM configuration to be deleted.")
+		redshift_deleteHsmConfigurationCmd.MarkFlagRequired("hsm-configuration-identifier")
+	})
 	redshiftCmd.AddCommand(redshift_deleteHsmConfigurationCmd)
 }

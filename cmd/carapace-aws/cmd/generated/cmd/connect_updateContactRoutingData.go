@@ -12,14 +12,16 @@ var connect_updateContactRoutingDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateContactRoutingDataCmd).Standalone()
+	carapace.Gen(connect_updateContactRoutingDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateContactRoutingDataCmd).Standalone()
 
-	connect_updateContactRoutingDataCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
-	connect_updateContactRoutingDataCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateContactRoutingDataCmd.Flags().String("queue-priority", "", "Priority of the contact in the queue.")
-	connect_updateContactRoutingDataCmd.Flags().String("queue-time-adjustment-seconds", "", "The number of seconds to add or subtract from the contact's routing age.")
-	connect_updateContactRoutingDataCmd.Flags().String("routing-criteria", "", "Updates the routing criteria on the contact.")
-	connect_updateContactRoutingDataCmd.MarkFlagRequired("contact-id")
-	connect_updateContactRoutingDataCmd.MarkFlagRequired("instance-id")
+		connect_updateContactRoutingDataCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
+		connect_updateContactRoutingDataCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateContactRoutingDataCmd.Flags().String("queue-priority", "", "Priority of the contact in the queue.")
+		connect_updateContactRoutingDataCmd.Flags().String("queue-time-adjustment-seconds", "", "The number of seconds to add or subtract from the contact's routing age.")
+		connect_updateContactRoutingDataCmd.Flags().String("routing-criteria", "", "Updates the routing criteria on the contact.")
+		connect_updateContactRoutingDataCmd.MarkFlagRequired("contact-id")
+		connect_updateContactRoutingDataCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_updateContactRoutingDataCmd)
 }

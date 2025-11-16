@@ -12,11 +12,13 @@ var ds_listCertificatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_listCertificatesCmd).Standalone()
+	carapace.Gen(ds_listCertificatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_listCertificatesCmd).Standalone()
 
-	ds_listCertificatesCmd.Flags().String("directory-id", "", "The identifier of the directory.")
-	ds_listCertificatesCmd.Flags().String("limit", "", "The number of items that should show up on one page")
-	ds_listCertificatesCmd.Flags().String("next-token", "", "A token for requesting another page of certificates if the `NextToken` response element indicates that more certificates are available.")
-	ds_listCertificatesCmd.MarkFlagRequired("directory-id")
+		ds_listCertificatesCmd.Flags().String("directory-id", "", "The identifier of the directory.")
+		ds_listCertificatesCmd.Flags().String("limit", "", "The number of items that should show up on one page")
+		ds_listCertificatesCmd.Flags().String("next-token", "", "A token for requesting another page of certificates if the `NextToken` response element indicates that more certificates are available.")
+		ds_listCertificatesCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_listCertificatesCmd)
 }

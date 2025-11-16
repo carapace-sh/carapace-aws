@@ -12,10 +12,12 @@ var iot_deleteBillingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteBillingGroupCmd).Standalone()
+	carapace.Gen(iot_deleteBillingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteBillingGroupCmd).Standalone()
 
-	iot_deleteBillingGroupCmd.Flags().String("billing-group-name", "", "The name of the billing group.")
-	iot_deleteBillingGroupCmd.Flags().String("expected-version", "", "The expected version of the billing group.")
-	iot_deleteBillingGroupCmd.MarkFlagRequired("billing-group-name")
+		iot_deleteBillingGroupCmd.Flags().String("billing-group-name", "", "The name of the billing group.")
+		iot_deleteBillingGroupCmd.Flags().String("expected-version", "", "The expected version of the billing group.")
+		iot_deleteBillingGroupCmd.MarkFlagRequired("billing-group-name")
+	})
 	iotCmd.AddCommand(iot_deleteBillingGroupCmd)
 }

@@ -12,11 +12,13 @@ var cloudfront_getInvalidation2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_getInvalidation2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_getInvalidation2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_getInvalidation2020_05_31Cmd).Standalone()
 
-	cloudfront_getInvalidation2020_05_31Cmd.Flags().String("distribution-id", "", "The distribution's ID.")
-	cloudfront_getInvalidation2020_05_31Cmd.Flags().String("id", "", "The identifier for the invalidation request, for example, `IDFDVBD632BHDS5`.")
-	cloudfront_getInvalidation2020_05_31Cmd.MarkFlagRequired("distribution-id")
-	cloudfront_getInvalidation2020_05_31Cmd.MarkFlagRequired("id")
+		cloudfront_getInvalidation2020_05_31Cmd.Flags().String("distribution-id", "", "The distribution's ID.")
+		cloudfront_getInvalidation2020_05_31Cmd.Flags().String("id", "", "The identifier for the invalidation request, for example, `IDFDVBD632BHDS5`.")
+		cloudfront_getInvalidation2020_05_31Cmd.MarkFlagRequired("distribution-id")
+		cloudfront_getInvalidation2020_05_31Cmd.MarkFlagRequired("id")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_getInvalidation2020_05_31Cmd)
 }

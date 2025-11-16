@@ -12,9 +12,11 @@ var cloudfrontKeyvaluestore_describeKeyValueStoreCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfrontKeyvaluestore_describeKeyValueStoreCmd).Standalone()
+	carapace.Gen(cloudfrontKeyvaluestore_describeKeyValueStoreCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfrontKeyvaluestore_describeKeyValueStoreCmd).Standalone()
 
-	cloudfrontKeyvaluestore_describeKeyValueStoreCmd.Flags().String("kvs-arn", "", "The Amazon Resource Name (ARN) of the Key Value Store.")
-	cloudfrontKeyvaluestore_describeKeyValueStoreCmd.MarkFlagRequired("kvs-arn")
+		cloudfrontKeyvaluestore_describeKeyValueStoreCmd.Flags().String("kvs-arn", "", "The Amazon Resource Name (ARN) of the Key Value Store.")
+		cloudfrontKeyvaluestore_describeKeyValueStoreCmd.MarkFlagRequired("kvs-arn")
+	})
 	cloudfrontKeyvaluestoreCmd.AddCommand(cloudfrontKeyvaluestore_describeKeyValueStoreCmd)
 }

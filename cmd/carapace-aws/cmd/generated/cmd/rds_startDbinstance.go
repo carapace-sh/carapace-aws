@@ -12,9 +12,11 @@ var rds_startDbinstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_startDbinstanceCmd).Standalone()
+	carapace.Gen(rds_startDbinstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_startDbinstanceCmd).Standalone()
 
-	rds_startDbinstanceCmd.Flags().String("dbinstance-identifier", "", "The user-supplied instance identifier.")
-	rds_startDbinstanceCmd.MarkFlagRequired("dbinstance-identifier")
+		rds_startDbinstanceCmd.Flags().String("dbinstance-identifier", "", "The user-supplied instance identifier.")
+		rds_startDbinstanceCmd.MarkFlagRequired("dbinstance-identifier")
+	})
 	rdsCmd.AddCommand(rds_startDbinstanceCmd)
 }

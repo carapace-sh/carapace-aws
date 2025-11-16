@@ -12,13 +12,15 @@ var ssoAdmin_describeApplicationAssignmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_describeApplicationAssignmentCmd).Standalone()
+	carapace.Gen(ssoAdmin_describeApplicationAssignmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_describeApplicationAssignmentCmd).Standalone()
 
-	ssoAdmin_describeApplicationAssignmentCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
-	ssoAdmin_describeApplicationAssignmentCmd.Flags().String("principal-id", "", "An identifier for an object in IAM Identity Center, such as a user or group.")
-	ssoAdmin_describeApplicationAssignmentCmd.Flags().String("principal-type", "", "The entity type for which the assignment will be created.")
-	ssoAdmin_describeApplicationAssignmentCmd.MarkFlagRequired("application-arn")
-	ssoAdmin_describeApplicationAssignmentCmd.MarkFlagRequired("principal-id")
-	ssoAdmin_describeApplicationAssignmentCmd.MarkFlagRequired("principal-type")
+		ssoAdmin_describeApplicationAssignmentCmd.Flags().String("application-arn", "", "Specifies the ARN of the application.")
+		ssoAdmin_describeApplicationAssignmentCmd.Flags().String("principal-id", "", "An identifier for an object in IAM Identity Center, such as a user or group.")
+		ssoAdmin_describeApplicationAssignmentCmd.Flags().String("principal-type", "", "The entity type for which the assignment will be created.")
+		ssoAdmin_describeApplicationAssignmentCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_describeApplicationAssignmentCmd.MarkFlagRequired("principal-id")
+		ssoAdmin_describeApplicationAssignmentCmd.MarkFlagRequired("principal-type")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_describeApplicationAssignmentCmd)
 }

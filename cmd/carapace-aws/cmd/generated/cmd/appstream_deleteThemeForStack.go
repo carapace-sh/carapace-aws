@@ -12,9 +12,11 @@ var appstream_deleteThemeForStackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_deleteThemeForStackCmd).Standalone()
+	carapace.Gen(appstream_deleteThemeForStackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_deleteThemeForStackCmd).Standalone()
 
-	appstream_deleteThemeForStackCmd.Flags().String("stack-name", "", "The name of the stack for the theme.")
-	appstream_deleteThemeForStackCmd.MarkFlagRequired("stack-name")
+		appstream_deleteThemeForStackCmd.Flags().String("stack-name", "", "The name of the stack for the theme.")
+		appstream_deleteThemeForStackCmd.MarkFlagRequired("stack-name")
+	})
 	appstreamCmd.AddCommand(appstream_deleteThemeForStackCmd)
 }

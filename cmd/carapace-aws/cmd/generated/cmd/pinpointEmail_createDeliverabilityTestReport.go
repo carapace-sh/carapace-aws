@@ -12,13 +12,15 @@ var pinpointEmail_createDeliverabilityTestReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointEmail_createDeliverabilityTestReportCmd).Standalone()
+	carapace.Gen(pinpointEmail_createDeliverabilityTestReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointEmail_createDeliverabilityTestReportCmd).Standalone()
 
-	pinpointEmail_createDeliverabilityTestReportCmd.Flags().String("content", "", "The HTML body of the message that you sent when you performed the predictive inbox placement test.")
-	pinpointEmail_createDeliverabilityTestReportCmd.Flags().String("from-email-address", "", "The email address that the predictive inbox placement test email was sent from.")
-	pinpointEmail_createDeliverabilityTestReportCmd.Flags().String("report-name", "", "A unique name that helps you to identify the predictive inbox placement test when you retrieve the results.")
-	pinpointEmail_createDeliverabilityTestReportCmd.Flags().String("tags", "", "An array of objects that define the tags (keys and values) that you want to associate with the predictive inbox placement test.")
-	pinpointEmail_createDeliverabilityTestReportCmd.MarkFlagRequired("content")
-	pinpointEmail_createDeliverabilityTestReportCmd.MarkFlagRequired("from-email-address")
+		pinpointEmail_createDeliverabilityTestReportCmd.Flags().String("content", "", "The HTML body of the message that you sent when you performed the predictive inbox placement test.")
+		pinpointEmail_createDeliverabilityTestReportCmd.Flags().String("from-email-address", "", "The email address that the predictive inbox placement test email was sent from.")
+		pinpointEmail_createDeliverabilityTestReportCmd.Flags().String("report-name", "", "A unique name that helps you to identify the predictive inbox placement test when you retrieve the results.")
+		pinpointEmail_createDeliverabilityTestReportCmd.Flags().String("tags", "", "An array of objects that define the tags (keys and values) that you want to associate with the predictive inbox placement test.")
+		pinpointEmail_createDeliverabilityTestReportCmd.MarkFlagRequired("content")
+		pinpointEmail_createDeliverabilityTestReportCmd.MarkFlagRequired("from-email-address")
+	})
 	pinpointEmailCmd.AddCommand(pinpointEmail_createDeliverabilityTestReportCmd)
 }

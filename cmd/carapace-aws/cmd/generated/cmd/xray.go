@@ -12,7 +12,9 @@ var xrayCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xrayCmd).Standalone()
+	carapace.Gen(xrayCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xrayCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(xrayCmd)
 }

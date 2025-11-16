@@ -12,9 +12,11 @@ var codecatalyst_listAccessTokensCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecatalyst_listAccessTokensCmd).Standalone()
+	carapace.Gen(codecatalyst_listAccessTokensCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecatalyst_listAccessTokensCmd).Standalone()
 
-	codecatalyst_listAccessTokensCmd.Flags().String("max-results", "", "The maximum number of results to show in a single call to this API.")
-	codecatalyst_listAccessTokensCmd.Flags().String("next-token", "", "A token returned from a call to this API to indicate the next batch of results to return, if any.")
+		codecatalyst_listAccessTokensCmd.Flags().String("max-results", "", "The maximum number of results to show in a single call to this API.")
+		codecatalyst_listAccessTokensCmd.Flags().String("next-token", "", "A token returned from a call to this API to indicate the next batch of results to return, if any.")
+	})
 	codecatalystCmd.AddCommand(codecatalyst_listAccessTokensCmd)
 }

@@ -12,12 +12,14 @@ var comprehend_listFlywheelIterationHistoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_listFlywheelIterationHistoryCmd).Standalone()
+	carapace.Gen(comprehend_listFlywheelIterationHistoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_listFlywheelIterationHistoryCmd).Standalone()
 
-	comprehend_listFlywheelIterationHistoryCmd.Flags().String("filter", "", "Filter the flywheel iteration history based on creation time.")
-	comprehend_listFlywheelIterationHistoryCmd.Flags().String("flywheel-arn", "", "The ARN of the flywheel.")
-	comprehend_listFlywheelIterationHistoryCmd.Flags().String("max-results", "", "Maximum number of iteration history results to return")
-	comprehend_listFlywheelIterationHistoryCmd.Flags().String("next-token", "", "Next token")
-	comprehend_listFlywheelIterationHistoryCmd.MarkFlagRequired("flywheel-arn")
+		comprehend_listFlywheelIterationHistoryCmd.Flags().String("filter", "", "Filter the flywheel iteration history based on creation time.")
+		comprehend_listFlywheelIterationHistoryCmd.Flags().String("flywheel-arn", "", "The ARN of the flywheel.")
+		comprehend_listFlywheelIterationHistoryCmd.Flags().String("max-results", "", "Maximum number of iteration history results to return")
+		comprehend_listFlywheelIterationHistoryCmd.Flags().String("next-token", "", "Next token")
+		comprehend_listFlywheelIterationHistoryCmd.MarkFlagRequired("flywheel-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_listFlywheelIterationHistoryCmd)
 }

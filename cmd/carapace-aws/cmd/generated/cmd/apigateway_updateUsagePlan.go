@@ -12,10 +12,12 @@ var apigateway_updateUsagePlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_updateUsagePlanCmd).Standalone()
+	carapace.Gen(apigateway_updateUsagePlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_updateUsagePlanCmd).Standalone()
 
-	apigateway_updateUsagePlanCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
-	apigateway_updateUsagePlanCmd.Flags().String("usage-plan-id", "", "The Id of the to-be-updated usage plan.")
-	apigateway_updateUsagePlanCmd.MarkFlagRequired("usage-plan-id")
+		apigateway_updateUsagePlanCmd.Flags().String("patch-operations", "", "For more information about supported patch operations, see [Patch Operations](https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html).")
+		apigateway_updateUsagePlanCmd.Flags().String("usage-plan-id", "", "The Id of the to-be-updated usage plan.")
+		apigateway_updateUsagePlanCmd.MarkFlagRequired("usage-plan-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_updateUsagePlanCmd)
 }

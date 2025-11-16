@@ -12,9 +12,11 @@ var synthetics_deleteGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(synthetics_deleteGroupCmd).Standalone()
+	carapace.Gen(synthetics_deleteGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(synthetics_deleteGroupCmd).Standalone()
 
-	synthetics_deleteGroupCmd.Flags().String("group-identifier", "", "Specifies which group to delete.")
-	synthetics_deleteGroupCmd.MarkFlagRequired("group-identifier")
+		synthetics_deleteGroupCmd.Flags().String("group-identifier", "", "Specifies which group to delete.")
+		synthetics_deleteGroupCmd.MarkFlagRequired("group-identifier")
+	})
 	syntheticsCmd.AddCommand(synthetics_deleteGroupCmd)
 }

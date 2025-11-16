@@ -12,9 +12,11 @@ var chimeSdkIdentity_listAppInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_listAppInstancesCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_listAppInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_listAppInstancesCmd).Standalone()
 
-	chimeSdkIdentity_listAppInstancesCmd.Flags().String("max-results", "", "The maximum number of `AppInstance`s that you want to return.")
-	chimeSdkIdentity_listAppInstancesCmd.Flags().String("next-token", "", "The token passed by previous API requests until you reach the maximum number of `AppInstances`.")
+		chimeSdkIdentity_listAppInstancesCmd.Flags().String("max-results", "", "The maximum number of `AppInstance`s that you want to return.")
+		chimeSdkIdentity_listAppInstancesCmd.Flags().String("next-token", "", "The token passed by previous API requests until you reach the maximum number of `AppInstances`.")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_listAppInstancesCmd)
 }

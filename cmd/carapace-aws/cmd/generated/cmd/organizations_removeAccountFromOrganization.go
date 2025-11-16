@@ -12,9 +12,11 @@ var organizations_removeAccountFromOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_removeAccountFromOrganizationCmd).Standalone()
+	carapace.Gen(organizations_removeAccountFromOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_removeAccountFromOrganizationCmd).Standalone()
 
-	organizations_removeAccountFromOrganizationCmd.Flags().String("account-id", "", "The unique identifier (ID) of the member account that you want to remove from the organization.")
-	organizations_removeAccountFromOrganizationCmd.MarkFlagRequired("account-id")
+		organizations_removeAccountFromOrganizationCmd.Flags().String("account-id", "", "The unique identifier (ID) of the member account that you want to remove from the organization.")
+		organizations_removeAccountFromOrganizationCmd.MarkFlagRequired("account-id")
+	})
 	organizationsCmd.AddCommand(organizations_removeAccountFromOrganizationCmd)
 }

@@ -12,9 +12,11 @@ var textract_analyzeExpenseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(textract_analyzeExpenseCmd).Standalone()
+	carapace.Gen(textract_analyzeExpenseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(textract_analyzeExpenseCmd).Standalone()
 
-	textract_analyzeExpenseCmd.Flags().String("document", "", "")
-	textract_analyzeExpenseCmd.MarkFlagRequired("document")
+		textract_analyzeExpenseCmd.Flags().String("document", "", "")
+		textract_analyzeExpenseCmd.MarkFlagRequired("document")
+	})
 	textractCmd.AddCommand(textract_analyzeExpenseCmd)
 }

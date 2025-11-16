@@ -12,11 +12,13 @@ var chimeSdkIdentity_listAppInstanceUsersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_listAppInstanceUsersCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_listAppInstanceUsersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_listAppInstanceUsersCmd).Standalone()
 
-	chimeSdkIdentity_listAppInstanceUsersCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
-	chimeSdkIdentity_listAppInstanceUsersCmd.Flags().String("max-results", "", "The maximum number of requests that you want returned.")
-	chimeSdkIdentity_listAppInstanceUsersCmd.Flags().String("next-token", "", "The token passed by previous API calls until all requested users are returned.")
-	chimeSdkIdentity_listAppInstanceUsersCmd.MarkFlagRequired("app-instance-arn")
+		chimeSdkIdentity_listAppInstanceUsersCmd.Flags().String("app-instance-arn", "", "The ARN of the `AppInstance`.")
+		chimeSdkIdentity_listAppInstanceUsersCmd.Flags().String("max-results", "", "The maximum number of requests that you want returned.")
+		chimeSdkIdentity_listAppInstanceUsersCmd.Flags().String("next-token", "", "The token passed by previous API calls until all requested users are returned.")
+		chimeSdkIdentity_listAppInstanceUsersCmd.MarkFlagRequired("app-instance-arn")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_listAppInstanceUsersCmd)
 }

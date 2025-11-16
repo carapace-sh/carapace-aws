@@ -12,18 +12,20 @@ var qconnect_createMessageTemplateAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_createMessageTemplateAttachmentCmd).Standalone()
+	carapace.Gen(qconnect_createMessageTemplateAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_createMessageTemplateAttachmentCmd).Standalone()
 
-	qconnect_createMessageTemplateAttachmentCmd.Flags().String("body", "", "The body of the attachment file being uploaded.")
-	qconnect_createMessageTemplateAttachmentCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	qconnect_createMessageTemplateAttachmentCmd.Flags().String("content-disposition", "", "The presentation information for the attachment file.")
-	qconnect_createMessageTemplateAttachmentCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_createMessageTemplateAttachmentCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
-	qconnect_createMessageTemplateAttachmentCmd.Flags().String("name", "", "The name of the attachment file being uploaded.")
-	qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("body")
-	qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("content-disposition")
-	qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("knowledge-base-id")
-	qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("message-template-id")
-	qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("name")
+		qconnect_createMessageTemplateAttachmentCmd.Flags().String("body", "", "The body of the attachment file being uploaded.")
+		qconnect_createMessageTemplateAttachmentCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		qconnect_createMessageTemplateAttachmentCmd.Flags().String("content-disposition", "", "The presentation information for the attachment file.")
+		qconnect_createMessageTemplateAttachmentCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_createMessageTemplateAttachmentCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
+		qconnect_createMessageTemplateAttachmentCmd.Flags().String("name", "", "The name of the attachment file being uploaded.")
+		qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("body")
+		qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("content-disposition")
+		qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("message-template-id")
+		qconnect_createMessageTemplateAttachmentCmd.MarkFlagRequired("name")
+	})
 	qconnectCmd.AddCommand(qconnect_createMessageTemplateAttachmentCmd)
 }

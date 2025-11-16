@@ -12,9 +12,11 @@ var kendra_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_listTagsForResourceCmd).Standalone()
+	carapace.Gen(kendra_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_listTagsForResourceCmd).Standalone()
 
-	kendra_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to get a list of tags for.")
-	kendra_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		kendra_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to get a list of tags for.")
+		kendra_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	kendraCmd.AddCommand(kendra_listTagsForResourceCmd)
 }

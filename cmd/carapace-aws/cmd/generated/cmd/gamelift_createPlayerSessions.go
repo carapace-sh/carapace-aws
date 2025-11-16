@@ -12,12 +12,14 @@ var gamelift_createPlayerSessionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_createPlayerSessionsCmd).Standalone()
+	carapace.Gen(gamelift_createPlayerSessionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_createPlayerSessionsCmd).Standalone()
 
-	gamelift_createPlayerSessionsCmd.Flags().String("game-session-id", "", "A unique identifier for the game session to add players to.")
-	gamelift_createPlayerSessionsCmd.Flags().String("player-data-map", "", "Map of string pairs, each specifying a player ID and a set of developer-defined information related to the player.")
-	gamelift_createPlayerSessionsCmd.Flags().String("player-ids", "", "List of unique identifiers for the players to be added.")
-	gamelift_createPlayerSessionsCmd.MarkFlagRequired("game-session-id")
-	gamelift_createPlayerSessionsCmd.MarkFlagRequired("player-ids")
+		gamelift_createPlayerSessionsCmd.Flags().String("game-session-id", "", "A unique identifier for the game session to add players to.")
+		gamelift_createPlayerSessionsCmd.Flags().String("player-data-map", "", "Map of string pairs, each specifying a player ID and a set of developer-defined information related to the player.")
+		gamelift_createPlayerSessionsCmd.Flags().String("player-ids", "", "List of unique identifiers for the players to be added.")
+		gamelift_createPlayerSessionsCmd.MarkFlagRequired("game-session-id")
+		gamelift_createPlayerSessionsCmd.MarkFlagRequired("player-ids")
+	})
 	gameliftCmd.AddCommand(gamelift_createPlayerSessionsCmd)
 }

@@ -12,11 +12,13 @@ var clouddirectory_batchWriteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_batchWriteCmd).Standalone()
+	carapace.Gen(clouddirectory_batchWriteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_batchWriteCmd).Standalone()
 
-	clouddirectory_batchWriteCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]().")
-	clouddirectory_batchWriteCmd.Flags().String("operations", "", "A list of operations that are part of the batch.")
-	clouddirectory_batchWriteCmd.MarkFlagRequired("directory-arn")
-	clouddirectory_batchWriteCmd.MarkFlagRequired("operations")
+		clouddirectory_batchWriteCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]().")
+		clouddirectory_batchWriteCmd.Flags().String("operations", "", "A list of operations that are part of the batch.")
+		clouddirectory_batchWriteCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_batchWriteCmd.MarkFlagRequired("operations")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_batchWriteCmd)
 }

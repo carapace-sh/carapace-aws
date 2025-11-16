@@ -12,10 +12,12 @@ var codedeploy_listDeploymentGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_listDeploymentGroupsCmd).Standalone()
+	carapace.Gen(codedeploy_listDeploymentGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_listDeploymentGroupsCmd).Standalone()
 
-	codedeploy_listDeploymentGroupsCmd.Flags().String("application-name", "", "The name of an CodeDeploy application associated with the user or Amazon Web Services account.")
-	codedeploy_listDeploymentGroupsCmd.Flags().String("next-token", "", "An identifier returned from the previous list deployment groups call.")
-	codedeploy_listDeploymentGroupsCmd.MarkFlagRequired("application-name")
+		codedeploy_listDeploymentGroupsCmd.Flags().String("application-name", "", "The name of an CodeDeploy application associated with the user or Amazon Web Services account.")
+		codedeploy_listDeploymentGroupsCmd.Flags().String("next-token", "", "An identifier returned from the previous list deployment groups call.")
+		codedeploy_listDeploymentGroupsCmd.MarkFlagRequired("application-name")
+	})
 	codedeployCmd.AddCommand(codedeploy_listDeploymentGroupsCmd)
 }

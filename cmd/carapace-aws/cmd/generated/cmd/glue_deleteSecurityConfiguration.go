@@ -12,9 +12,11 @@ var glue_deleteSecurityConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_deleteSecurityConfigurationCmd).Standalone()
+	carapace.Gen(glue_deleteSecurityConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_deleteSecurityConfigurationCmd).Standalone()
 
-	glue_deleteSecurityConfigurationCmd.Flags().String("name", "", "The name of the security configuration to delete.")
-	glue_deleteSecurityConfigurationCmd.MarkFlagRequired("name")
+		glue_deleteSecurityConfigurationCmd.Flags().String("name", "", "The name of the security configuration to delete.")
+		glue_deleteSecurityConfigurationCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_deleteSecurityConfigurationCmd)
 }

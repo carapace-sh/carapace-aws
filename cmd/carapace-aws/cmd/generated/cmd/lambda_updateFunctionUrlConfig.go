@@ -12,13 +12,15 @@ var lambda_updateFunctionUrlConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_updateFunctionUrlConfigCmd).Standalone()
+	carapace.Gen(lambda_updateFunctionUrlConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_updateFunctionUrlConfigCmd).Standalone()
 
-	lambda_updateFunctionUrlConfigCmd.Flags().String("auth-type", "", "The type of authentication that your function URL uses.")
-	lambda_updateFunctionUrlConfigCmd.Flags().String("cors", "", "The [cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your function URL.")
-	lambda_updateFunctionUrlConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_updateFunctionUrlConfigCmd.Flags().String("invoke-mode", "", "Use one of the following options:")
-	lambda_updateFunctionUrlConfigCmd.Flags().String("qualifier", "", "The alias name.")
-	lambda_updateFunctionUrlConfigCmd.MarkFlagRequired("function-name")
+		lambda_updateFunctionUrlConfigCmd.Flags().String("auth-type", "", "The type of authentication that your function URL uses.")
+		lambda_updateFunctionUrlConfigCmd.Flags().String("cors", "", "The [cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your function URL.")
+		lambda_updateFunctionUrlConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_updateFunctionUrlConfigCmd.Flags().String("invoke-mode", "", "Use one of the following options:")
+		lambda_updateFunctionUrlConfigCmd.Flags().String("qualifier", "", "The alias name.")
+		lambda_updateFunctionUrlConfigCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_updateFunctionUrlConfigCmd)
 }

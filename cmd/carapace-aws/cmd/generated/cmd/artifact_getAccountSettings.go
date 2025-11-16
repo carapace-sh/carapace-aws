@@ -12,7 +12,9 @@ var artifact_getAccountSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(artifact_getAccountSettingsCmd).Standalone()
+	carapace.Gen(artifact_getAccountSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(artifact_getAccountSettingsCmd).Standalone()
 
+	})
 	artifactCmd.AddCommand(artifact_getAccountSettingsCmd)
 }

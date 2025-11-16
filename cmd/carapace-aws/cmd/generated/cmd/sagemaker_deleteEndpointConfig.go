@@ -12,9 +12,11 @@ var sagemaker_deleteEndpointConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteEndpointConfigCmd).Standalone()
+	carapace.Gen(sagemaker_deleteEndpointConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteEndpointConfigCmd).Standalone()
 
-	sagemaker_deleteEndpointConfigCmd.Flags().String("endpoint-config-name", "", "The name of the endpoint configuration that you want to delete.")
-	sagemaker_deleteEndpointConfigCmd.MarkFlagRequired("endpoint-config-name")
+		sagemaker_deleteEndpointConfigCmd.Flags().String("endpoint-config-name", "", "The name of the endpoint configuration that you want to delete.")
+		sagemaker_deleteEndpointConfigCmd.MarkFlagRequired("endpoint-config-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteEndpointConfigCmd)
 }

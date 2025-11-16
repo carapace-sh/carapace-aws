@@ -12,11 +12,13 @@ var amplify_listBranchesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_listBranchesCmd).Standalone()
+	carapace.Gen(amplify_listBranchesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_listBranchesCmd).Standalone()
 
-	amplify_listBranchesCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
-	amplify_listBranchesCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
-	amplify_listBranchesCmd.Flags().String("next-token", "", "A pagination token.")
-	amplify_listBranchesCmd.MarkFlagRequired("app-id")
+		amplify_listBranchesCmd.Flags().String("app-id", "", "The unique ID for an Amplify app.")
+		amplify_listBranchesCmd.Flags().String("max-results", "", "The maximum number of records to list in a single response.")
+		amplify_listBranchesCmd.Flags().String("next-token", "", "A pagination token.")
+		amplify_listBranchesCmd.MarkFlagRequired("app-id")
+	})
 	amplifyCmd.AddCommand(amplify_listBranchesCmd)
 }

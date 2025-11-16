@@ -12,11 +12,13 @@ var iam_tagMfadeviceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_tagMfadeviceCmd).Standalone()
+	carapace.Gen(iam_tagMfadeviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_tagMfadeviceCmd).Standalone()
 
-	iam_tagMfadeviceCmd.Flags().String("serial-number", "", "The unique identifier for the IAM virtual MFA device to which you want to add tags.")
-	iam_tagMfadeviceCmd.Flags().String("tags", "", "The list of tags that you want to attach to the IAM virtual MFA device.")
-	iam_tagMfadeviceCmd.MarkFlagRequired("serial-number")
-	iam_tagMfadeviceCmd.MarkFlagRequired("tags")
+		iam_tagMfadeviceCmd.Flags().String("serial-number", "", "The unique identifier for the IAM virtual MFA device to which you want to add tags.")
+		iam_tagMfadeviceCmd.Flags().String("tags", "", "The list of tags that you want to attach to the IAM virtual MFA device.")
+		iam_tagMfadeviceCmd.MarkFlagRequired("serial-number")
+		iam_tagMfadeviceCmd.MarkFlagRequired("tags")
+	})
 	iamCmd.AddCommand(iam_tagMfadeviceCmd)
 }

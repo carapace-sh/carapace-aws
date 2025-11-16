@@ -12,12 +12,14 @@ var iam_listAttachedRolePoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_listAttachedRolePoliciesCmd).Standalone()
+	carapace.Gen(iam_listAttachedRolePoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_listAttachedRolePoliciesCmd).Standalone()
 
-	iam_listAttachedRolePoliciesCmd.Flags().String("marker", "", "Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated.")
-	iam_listAttachedRolePoliciesCmd.Flags().String("max-items", "", "Use this only when paginating results to indicate the maximum number of items you want in the response.")
-	iam_listAttachedRolePoliciesCmd.Flags().String("path-prefix", "", "The path prefix for filtering the results.")
-	iam_listAttachedRolePoliciesCmd.Flags().String("role-name", "", "The name (friendly name, not ARN) of the role to list attached policies for.")
-	iam_listAttachedRolePoliciesCmd.MarkFlagRequired("role-name")
+		iam_listAttachedRolePoliciesCmd.Flags().String("marker", "", "Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated.")
+		iam_listAttachedRolePoliciesCmd.Flags().String("max-items", "", "Use this only when paginating results to indicate the maximum number of items you want in the response.")
+		iam_listAttachedRolePoliciesCmd.Flags().String("path-prefix", "", "The path prefix for filtering the results.")
+		iam_listAttachedRolePoliciesCmd.Flags().String("role-name", "", "The name (friendly name, not ARN) of the role to list attached policies for.")
+		iam_listAttachedRolePoliciesCmd.MarkFlagRequired("role-name")
+	})
 	iamCmd.AddCommand(iam_listAttachedRolePoliciesCmd)
 }

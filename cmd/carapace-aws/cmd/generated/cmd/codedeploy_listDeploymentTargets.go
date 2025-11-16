@@ -12,11 +12,13 @@ var codedeploy_listDeploymentTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_listDeploymentTargetsCmd).Standalone()
+	carapace.Gen(codedeploy_listDeploymentTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_listDeploymentTargetsCmd).Standalone()
 
-	codedeploy_listDeploymentTargetsCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
-	codedeploy_listDeploymentTargetsCmd.Flags().String("next-token", "", "A token identifier returned from the previous `ListDeploymentTargets` call.")
-	codedeploy_listDeploymentTargetsCmd.Flags().String("target-filters", "", "A key used to filter the returned targets.")
-	codedeploy_listDeploymentTargetsCmd.MarkFlagRequired("deployment-id")
+		codedeploy_listDeploymentTargetsCmd.Flags().String("deployment-id", "", "The unique ID of a deployment.")
+		codedeploy_listDeploymentTargetsCmd.Flags().String("next-token", "", "A token identifier returned from the previous `ListDeploymentTargets` call.")
+		codedeploy_listDeploymentTargetsCmd.Flags().String("target-filters", "", "A key used to filter the returned targets.")
+		codedeploy_listDeploymentTargetsCmd.MarkFlagRequired("deployment-id")
+	})
 	codedeployCmd.AddCommand(codedeploy_listDeploymentTargetsCmd)
 }

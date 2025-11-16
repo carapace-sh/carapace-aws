@@ -12,7 +12,9 @@ var invoicingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(invoicingCmd).Standalone()
+	carapace.Gen(invoicingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(invoicingCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(invoicingCmd)
 }

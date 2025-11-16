@@ -12,7 +12,9 @@ var machinelearningCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(machinelearningCmd).Standalone()
+	carapace.Gen(machinelearningCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(machinelearningCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(machinelearningCmd)
 }

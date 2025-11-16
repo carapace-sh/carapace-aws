@@ -12,9 +12,11 @@ var kendra_listIndicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendra_listIndicesCmd).Standalone()
+	carapace.Gen(kendra_listIndicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendra_listIndicesCmd).Standalone()
 
-	kendra_listIndicesCmd.Flags().String("max-results", "", "The maximum number of indices to return.")
-	kendra_listIndicesCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.")
+		kendra_listIndicesCmd.Flags().String("max-results", "", "The maximum number of indices to return.")
+		kendra_listIndicesCmd.Flags().String("next-token", "", "If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.")
+	})
 	kendraCmd.AddCommand(kendra_listIndicesCmd)
 }

@@ -12,10 +12,12 @@ var rekognition_createFaceLivenessSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_createFaceLivenessSessionCmd).Standalone()
+	carapace.Gen(rekognition_createFaceLivenessSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_createFaceLivenessSessionCmd).Standalone()
 
-	rekognition_createFaceLivenessSessionCmd.Flags().String("client-request-token", "", "Idempotent token is used to recognize the Face Liveness request.")
-	rekognition_createFaceLivenessSessionCmd.Flags().String("kms-key-id", "", "The identifier for your AWS Key Management Service key (AWS KMS key).")
-	rekognition_createFaceLivenessSessionCmd.Flags().String("settings", "", "A session settings object.")
+		rekognition_createFaceLivenessSessionCmd.Flags().String("client-request-token", "", "Idempotent token is used to recognize the Face Liveness request.")
+		rekognition_createFaceLivenessSessionCmd.Flags().String("kms-key-id", "", "The identifier for your AWS Key Management Service key (AWS KMS key).")
+		rekognition_createFaceLivenessSessionCmd.Flags().String("settings", "", "A session settings object.")
+	})
 	rekognitionCmd.AddCommand(rekognition_createFaceLivenessSessionCmd)
 }

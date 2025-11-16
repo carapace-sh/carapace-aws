@@ -12,14 +12,16 @@ var wellarchitected_listReviewTemplateAnswersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listReviewTemplateAnswersCmd).Standalone()
+	carapace.Gen(wellarchitected_listReviewTemplateAnswersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listReviewTemplateAnswersCmd).Standalone()
 
-	wellarchitected_listReviewTemplateAnswersCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_listReviewTemplateAnswersCmd.Flags().String("max-results", "", "The maximum number of results to return for this request.")
-	wellarchitected_listReviewTemplateAnswersCmd.Flags().String("next-token", "", "")
-	wellarchitected_listReviewTemplateAnswersCmd.Flags().String("pillar-id", "", "")
-	wellarchitected_listReviewTemplateAnswersCmd.Flags().String("template-arn", "", "The ARN of the review template.")
-	wellarchitected_listReviewTemplateAnswersCmd.MarkFlagRequired("lens-alias")
-	wellarchitected_listReviewTemplateAnswersCmd.MarkFlagRequired("template-arn")
+		wellarchitected_listReviewTemplateAnswersCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_listReviewTemplateAnswersCmd.Flags().String("max-results", "", "The maximum number of results to return for this request.")
+		wellarchitected_listReviewTemplateAnswersCmd.Flags().String("next-token", "", "")
+		wellarchitected_listReviewTemplateAnswersCmd.Flags().String("pillar-id", "", "")
+		wellarchitected_listReviewTemplateAnswersCmd.Flags().String("template-arn", "", "The ARN of the review template.")
+		wellarchitected_listReviewTemplateAnswersCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_listReviewTemplateAnswersCmd.MarkFlagRequired("template-arn")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listReviewTemplateAnswersCmd)
 }

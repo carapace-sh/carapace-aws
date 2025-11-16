@@ -12,9 +12,11 @@ var neptune_promoteReadReplicaDbclusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_promoteReadReplicaDbclusterCmd).Standalone()
+	carapace.Gen(neptune_promoteReadReplicaDbclusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_promoteReadReplicaDbclusterCmd).Standalone()
 
-	neptune_promoteReadReplicaDbclusterCmd.Flags().String("dbcluster-identifier", "", "Not supported.")
-	neptune_promoteReadReplicaDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+		neptune_promoteReadReplicaDbclusterCmd.Flags().String("dbcluster-identifier", "", "Not supported.")
+		neptune_promoteReadReplicaDbclusterCmd.MarkFlagRequired("dbcluster-identifier")
+	})
 	neptuneCmd.AddCommand(neptune_promoteReadReplicaDbclusterCmd)
 }

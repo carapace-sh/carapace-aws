@@ -12,10 +12,12 @@ var glue_listDataQualityResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listDataQualityResultsCmd).Standalone()
+	carapace.Gen(glue_listDataQualityResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listDataQualityResultsCmd).Standalone()
 
-	glue_listDataQualityResultsCmd.Flags().String("filter", "", "The filter criteria.")
-	glue_listDataQualityResultsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	glue_listDataQualityResultsCmd.Flags().String("next-token", "", "A paginated token to offset the results.")
+		glue_listDataQualityResultsCmd.Flags().String("filter", "", "The filter criteria.")
+		glue_listDataQualityResultsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		glue_listDataQualityResultsCmd.Flags().String("next-token", "", "A paginated token to offset the results.")
+	})
 	glueCmd.AddCommand(glue_listDataQualityResultsCmd)
 }

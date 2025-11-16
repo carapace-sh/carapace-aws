@@ -12,11 +12,13 @@ var licenseManagerLinuxSubscriptions_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(licenseManagerLinuxSubscriptions_tagResourceCmd).Standalone()
+	carapace.Gen(licenseManagerLinuxSubscriptions_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(licenseManagerLinuxSubscriptions_tagResourceCmd).Standalone()
 
-	licenseManagerLinuxSubscriptions_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Web Services resource to which to add the specified metadata tags.")
-	licenseManagerLinuxSubscriptions_tagResourceCmd.Flags().String("tags", "", "The metadata tags to assign to the Amazon Web Services resource.")
-	licenseManagerLinuxSubscriptions_tagResourceCmd.MarkFlagRequired("resource-arn")
-	licenseManagerLinuxSubscriptions_tagResourceCmd.MarkFlagRequired("tags")
+		licenseManagerLinuxSubscriptions_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Web Services resource to which to add the specified metadata tags.")
+		licenseManagerLinuxSubscriptions_tagResourceCmd.Flags().String("tags", "", "The metadata tags to assign to the Amazon Web Services resource.")
+		licenseManagerLinuxSubscriptions_tagResourceCmd.MarkFlagRequired("resource-arn")
+		licenseManagerLinuxSubscriptions_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	licenseManagerLinuxSubscriptionsCmd.AddCommand(licenseManagerLinuxSubscriptions_tagResourceCmd)
 }

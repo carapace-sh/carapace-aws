@@ -12,9 +12,11 @@ var iot_deleteJobTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteJobTemplateCmd).Standalone()
+	carapace.Gen(iot_deleteJobTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteJobTemplateCmd).Standalone()
 
-	iot_deleteJobTemplateCmd.Flags().String("job-template-id", "", "The unique identifier of the job template to delete.")
-	iot_deleteJobTemplateCmd.MarkFlagRequired("job-template-id")
+		iot_deleteJobTemplateCmd.Flags().String("job-template-id", "", "The unique identifier of the job template to delete.")
+		iot_deleteJobTemplateCmd.MarkFlagRequired("job-template-id")
+	})
 	iotCmd.AddCommand(iot_deleteJobTemplateCmd)
 }

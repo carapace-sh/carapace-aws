@@ -12,9 +12,11 @@ var apprunner_listServicesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_listServicesCmd).Standalone()
+	carapace.Gen(apprunner_listServicesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_listServicesCmd).Standalone()
 
-	apprunner_listServicesCmd.Flags().String("max-results", "", "The maximum number of results to include in each response (result page).")
-	apprunner_listServicesCmd.Flags().String("next-token", "", "A token from a previous result page.")
+		apprunner_listServicesCmd.Flags().String("max-results", "", "The maximum number of results to include in each response (result page).")
+		apprunner_listServicesCmd.Flags().String("next-token", "", "A token from a previous result page.")
+	})
 	apprunnerCmd.AddCommand(apprunner_listServicesCmd)
 }

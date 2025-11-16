@@ -12,16 +12,18 @@ var translate_createParallelDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_createParallelDataCmd).Standalone()
+	carapace.Gen(translate_createParallelDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_createParallelDataCmd).Standalone()
 
-	translate_createParallelDataCmd.Flags().String("client-token", "", "A unique identifier for the request.")
-	translate_createParallelDataCmd.Flags().String("description", "", "A custom description for the parallel data resource in Amazon Translate.")
-	translate_createParallelDataCmd.Flags().String("encryption-key", "", "")
-	translate_createParallelDataCmd.Flags().String("name", "", "A custom name for the parallel data resource in Amazon Translate.")
-	translate_createParallelDataCmd.Flags().String("parallel-data-config", "", "Specifies the format and S3 location of the parallel data input file.")
-	translate_createParallelDataCmd.Flags().String("tags", "", "Tags to be associated with this resource.")
-	translate_createParallelDataCmd.MarkFlagRequired("client-token")
-	translate_createParallelDataCmd.MarkFlagRequired("name")
-	translate_createParallelDataCmd.MarkFlagRequired("parallel-data-config")
+		translate_createParallelDataCmd.Flags().String("client-token", "", "A unique identifier for the request.")
+		translate_createParallelDataCmd.Flags().String("description", "", "A custom description for the parallel data resource in Amazon Translate.")
+		translate_createParallelDataCmd.Flags().String("encryption-key", "", "")
+		translate_createParallelDataCmd.Flags().String("name", "", "A custom name for the parallel data resource in Amazon Translate.")
+		translate_createParallelDataCmd.Flags().String("parallel-data-config", "", "Specifies the format and S3 location of the parallel data input file.")
+		translate_createParallelDataCmd.Flags().String("tags", "", "Tags to be associated with this resource.")
+		translate_createParallelDataCmd.MarkFlagRequired("client-token")
+		translate_createParallelDataCmd.MarkFlagRequired("name")
+		translate_createParallelDataCmd.MarkFlagRequired("parallel-data-config")
+	})
 	translateCmd.AddCommand(translate_createParallelDataCmd)
 }

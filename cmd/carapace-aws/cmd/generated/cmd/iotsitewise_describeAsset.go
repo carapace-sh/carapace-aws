@@ -12,10 +12,12 @@ var iotsitewise_describeAssetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeAssetCmd).Standalone()
+	carapace.Gen(iotsitewise_describeAssetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeAssetCmd).Standalone()
 
-	iotsitewise_describeAssetCmd.Flags().String("asset-id", "", "The ID of the asset.")
-	iotsitewise_describeAssetCmd.Flags().String("exclude-properties", "", "Whether or not to exclude asset properties from the response.")
-	iotsitewise_describeAssetCmd.MarkFlagRequired("asset-id")
+		iotsitewise_describeAssetCmd.Flags().String("asset-id", "", "The ID of the asset.")
+		iotsitewise_describeAssetCmd.Flags().String("exclude-properties", "", "Whether or not to exclude asset properties from the response.")
+		iotsitewise_describeAssetCmd.MarkFlagRequired("asset-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeAssetCmd)
 }

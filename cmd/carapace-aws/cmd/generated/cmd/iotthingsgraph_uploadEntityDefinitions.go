@@ -12,10 +12,12 @@ var iotthingsgraph_uploadEntityDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_uploadEntityDefinitionsCmd).Standalone()
+	carapace.Gen(iotthingsgraph_uploadEntityDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_uploadEntityDefinitionsCmd).Standalone()
 
-	iotthingsgraph_uploadEntityDefinitionsCmd.Flags().String("deprecate-existing-entities", "", "A Boolean that specifies whether to deprecate all entities in the latest version before uploading the new `DefinitionDocument`.")
-	iotthingsgraph_uploadEntityDefinitionsCmd.Flags().String("document", "", "The `DefinitionDocument` that defines the updated entities.")
-	iotthingsgraph_uploadEntityDefinitionsCmd.Flags().String("sync-with-public-namespace", "", "A Boolean that specifies whether to synchronize with the latest version of the public namespace.")
+		iotthingsgraph_uploadEntityDefinitionsCmd.Flags().String("deprecate-existing-entities", "", "A Boolean that specifies whether to deprecate all entities in the latest version before uploading the new `DefinitionDocument`.")
+		iotthingsgraph_uploadEntityDefinitionsCmd.Flags().String("document", "", "The `DefinitionDocument` that defines the updated entities.")
+		iotthingsgraph_uploadEntityDefinitionsCmd.Flags().String("sync-with-public-namespace", "", "A Boolean that specifies whether to synchronize with the latest version of the public namespace.")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_uploadEntityDefinitionsCmd)
 }

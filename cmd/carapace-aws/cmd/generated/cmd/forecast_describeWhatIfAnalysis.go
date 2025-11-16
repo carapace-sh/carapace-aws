@@ -12,9 +12,11 @@ var forecast_describeWhatIfAnalysisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_describeWhatIfAnalysisCmd).Standalone()
+	carapace.Gen(forecast_describeWhatIfAnalysisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_describeWhatIfAnalysisCmd).Standalone()
 
-	forecast_describeWhatIfAnalysisCmd.Flags().String("what-if-analysis-arn", "", "The Amazon Resource Name (ARN) of the what-if analysis that you are interested in.")
-	forecast_describeWhatIfAnalysisCmd.MarkFlagRequired("what-if-analysis-arn")
+		forecast_describeWhatIfAnalysisCmd.Flags().String("what-if-analysis-arn", "", "The Amazon Resource Name (ARN) of the what-if analysis that you are interested in.")
+		forecast_describeWhatIfAnalysisCmd.MarkFlagRequired("what-if-analysis-arn")
+	})
 	forecastCmd.AddCommand(forecast_describeWhatIfAnalysisCmd)
 }

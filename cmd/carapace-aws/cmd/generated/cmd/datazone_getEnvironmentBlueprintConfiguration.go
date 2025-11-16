@@ -12,11 +12,13 @@ var datazone_getEnvironmentBlueprintConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getEnvironmentBlueprintConfigurationCmd).Standalone()
+	carapace.Gen(datazone_getEnvironmentBlueprintConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getEnvironmentBlueprintConfigurationCmd).Standalone()
 
-	datazone_getEnvironmentBlueprintConfigurationCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain where this blueprint exists.")
-	datazone_getEnvironmentBlueprintConfigurationCmd.Flags().String("environment-blueprint-identifier", "", "He ID of the blueprint.")
-	datazone_getEnvironmentBlueprintConfigurationCmd.MarkFlagRequired("domain-identifier")
-	datazone_getEnvironmentBlueprintConfigurationCmd.MarkFlagRequired("environment-blueprint-identifier")
+		datazone_getEnvironmentBlueprintConfigurationCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain where this blueprint exists.")
+		datazone_getEnvironmentBlueprintConfigurationCmd.Flags().String("environment-blueprint-identifier", "", "He ID of the blueprint.")
+		datazone_getEnvironmentBlueprintConfigurationCmd.MarkFlagRequired("domain-identifier")
+		datazone_getEnvironmentBlueprintConfigurationCmd.MarkFlagRequired("environment-blueprint-identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getEnvironmentBlueprintConfigurationCmd)
 }

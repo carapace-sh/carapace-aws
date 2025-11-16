@@ -12,11 +12,13 @@ var appintegrations_updateDataIntegrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appintegrations_updateDataIntegrationCmd).Standalone()
+	carapace.Gen(appintegrations_updateDataIntegrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appintegrations_updateDataIntegrationCmd).Standalone()
 
-	appintegrations_updateDataIntegrationCmd.Flags().String("description", "", "A description of the DataIntegration.")
-	appintegrations_updateDataIntegrationCmd.Flags().String("identifier", "", "A unique identifier for the DataIntegration.")
-	appintegrations_updateDataIntegrationCmd.Flags().String("name", "", "The name of the DataIntegration.")
-	appintegrations_updateDataIntegrationCmd.MarkFlagRequired("identifier")
+		appintegrations_updateDataIntegrationCmd.Flags().String("description", "", "A description of the DataIntegration.")
+		appintegrations_updateDataIntegrationCmd.Flags().String("identifier", "", "A unique identifier for the DataIntegration.")
+		appintegrations_updateDataIntegrationCmd.Flags().String("name", "", "The name of the DataIntegration.")
+		appintegrations_updateDataIntegrationCmd.MarkFlagRequired("identifier")
+	})
 	appintegrationsCmd.AddCommand(appintegrations_updateDataIntegrationCmd)
 }

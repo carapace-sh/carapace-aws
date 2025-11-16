@@ -12,9 +12,11 @@ var iot_describeThingTypeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeThingTypeCmd).Standalone()
+	carapace.Gen(iot_describeThingTypeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeThingTypeCmd).Standalone()
 
-	iot_describeThingTypeCmd.Flags().String("thing-type-name", "", "The name of the thing type.")
-	iot_describeThingTypeCmd.MarkFlagRequired("thing-type-name")
+		iot_describeThingTypeCmd.Flags().String("thing-type-name", "", "The name of the thing type.")
+		iot_describeThingTypeCmd.MarkFlagRequired("thing-type-name")
+	})
 	iotCmd.AddCommand(iot_describeThingTypeCmd)
 }

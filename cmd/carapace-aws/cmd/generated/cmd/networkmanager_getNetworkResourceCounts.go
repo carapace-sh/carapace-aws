@@ -12,12 +12,14 @@ var networkmanager_getNetworkResourceCountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getNetworkResourceCountsCmd).Standalone()
+	carapace.Gen(networkmanager_getNetworkResourceCountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getNetworkResourceCountsCmd).Standalone()
 
-	networkmanager_getNetworkResourceCountsCmd.Flags().String("global-network-id", "", "The ID of the global network.")
-	networkmanager_getNetworkResourceCountsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	networkmanager_getNetworkResourceCountsCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	networkmanager_getNetworkResourceCountsCmd.Flags().String("resource-type", "", "The resource type.")
-	networkmanager_getNetworkResourceCountsCmd.MarkFlagRequired("global-network-id")
+		networkmanager_getNetworkResourceCountsCmd.Flags().String("global-network-id", "", "The ID of the global network.")
+		networkmanager_getNetworkResourceCountsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		networkmanager_getNetworkResourceCountsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		networkmanager_getNetworkResourceCountsCmd.Flags().String("resource-type", "", "The resource type.")
+		networkmanager_getNetworkResourceCountsCmd.MarkFlagRequired("global-network-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getNetworkResourceCountsCmd)
 }

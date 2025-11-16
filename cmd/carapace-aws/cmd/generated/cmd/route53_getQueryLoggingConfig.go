@@ -12,9 +12,11 @@ var route53_getQueryLoggingConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getQueryLoggingConfigCmd).Standalone()
+	carapace.Gen(route53_getQueryLoggingConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getQueryLoggingConfigCmd).Standalone()
 
-	route53_getQueryLoggingConfigCmd.Flags().String("id", "", "The ID of the configuration for DNS query logging that you want to get information about.")
-	route53_getQueryLoggingConfigCmd.MarkFlagRequired("id")
+		route53_getQueryLoggingConfigCmd.Flags().String("id", "", "The ID of the configuration for DNS query logging that you want to get information about.")
+		route53_getQueryLoggingConfigCmd.MarkFlagRequired("id")
+	})
 	route53Cmd.AddCommand(route53_getQueryLoggingConfigCmd)
 }

@@ -12,9 +12,11 @@ var arcZonalShift_cancelPracticeRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(arcZonalShift_cancelPracticeRunCmd).Standalone()
+	carapace.Gen(arcZonalShift_cancelPracticeRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(arcZonalShift_cancelPracticeRunCmd).Standalone()
 
-	arcZonalShift_cancelPracticeRunCmd.Flags().String("zonal-shift-id", "", "The identifier of a practice run zonal shift in Amazon Application Recovery Controller that you want to cancel.")
-	arcZonalShift_cancelPracticeRunCmd.MarkFlagRequired("zonal-shift-id")
+		arcZonalShift_cancelPracticeRunCmd.Flags().String("zonal-shift-id", "", "The identifier of a practice run zonal shift in Amazon Application Recovery Controller that you want to cancel.")
+		arcZonalShift_cancelPracticeRunCmd.MarkFlagRequired("zonal-shift-id")
+	})
 	arcZonalShiftCmd.AddCommand(arcZonalShift_cancelPracticeRunCmd)
 }

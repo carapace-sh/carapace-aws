@@ -12,9 +12,11 @@ var apigateway_deleteClientCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_deleteClientCertificateCmd).Standalone()
+	carapace.Gen(apigateway_deleteClientCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_deleteClientCertificateCmd).Standalone()
 
-	apigateway_deleteClientCertificateCmd.Flags().String("client-certificate-id", "", "The identifier of the ClientCertificate resource to be deleted.")
-	apigateway_deleteClientCertificateCmd.MarkFlagRequired("client-certificate-id")
+		apigateway_deleteClientCertificateCmd.Flags().String("client-certificate-id", "", "The identifier of the ClientCertificate resource to be deleted.")
+		apigateway_deleteClientCertificateCmd.MarkFlagRequired("client-certificate-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_deleteClientCertificateCmd)
 }

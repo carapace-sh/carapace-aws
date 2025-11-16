@@ -12,9 +12,11 @@ var globalaccelerator_deleteCrossAccountAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(globalaccelerator_deleteCrossAccountAttachmentCmd).Standalone()
+	carapace.Gen(globalaccelerator_deleteCrossAccountAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(globalaccelerator_deleteCrossAccountAttachmentCmd).Standalone()
 
-	globalaccelerator_deleteCrossAccountAttachmentCmd.Flags().String("attachment-arn", "", "The Amazon Resource Name (ARN) for the cross-account attachment to delete.")
-	globalaccelerator_deleteCrossAccountAttachmentCmd.MarkFlagRequired("attachment-arn")
+		globalaccelerator_deleteCrossAccountAttachmentCmd.Flags().String("attachment-arn", "", "The Amazon Resource Name (ARN) for the cross-account attachment to delete.")
+		globalaccelerator_deleteCrossAccountAttachmentCmd.MarkFlagRequired("attachment-arn")
+	})
 	globalacceleratorCmd.AddCommand(globalaccelerator_deleteCrossAccountAttachmentCmd)
 }

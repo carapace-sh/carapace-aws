@@ -12,7 +12,9 @@ var auditmanager_deregisterAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_deregisterAccountCmd).Standalone()
+	carapace.Gen(auditmanager_deregisterAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_deregisterAccountCmd).Standalone()
 
+	})
 	auditmanagerCmd.AddCommand(auditmanager_deregisterAccountCmd)
 }

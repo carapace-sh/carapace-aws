@@ -12,9 +12,11 @@ var networkmanager_getDirectConnectGatewayAttachmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(networkmanager_getDirectConnectGatewayAttachmentCmd).Standalone()
+	carapace.Gen(networkmanager_getDirectConnectGatewayAttachmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(networkmanager_getDirectConnectGatewayAttachmentCmd).Standalone()
 
-	networkmanager_getDirectConnectGatewayAttachmentCmd.Flags().String("attachment-id", "", "The ID of the Direct Connect gateway attachment that you want to see details about.")
-	networkmanager_getDirectConnectGatewayAttachmentCmd.MarkFlagRequired("attachment-id")
+		networkmanager_getDirectConnectGatewayAttachmentCmd.Flags().String("attachment-id", "", "The ID of the Direct Connect gateway attachment that you want to see details about.")
+		networkmanager_getDirectConnectGatewayAttachmentCmd.MarkFlagRequired("attachment-id")
+	})
 	networkmanagerCmd.AddCommand(networkmanager_getDirectConnectGatewayAttachmentCmd)
 }

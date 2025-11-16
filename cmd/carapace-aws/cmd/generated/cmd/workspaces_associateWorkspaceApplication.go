@@ -12,11 +12,13 @@ var workspaces_associateWorkspaceApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_associateWorkspaceApplicationCmd).Standalone()
+	carapace.Gen(workspaces_associateWorkspaceApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_associateWorkspaceApplicationCmd).Standalone()
 
-	workspaces_associateWorkspaceApplicationCmd.Flags().String("application-id", "", "The identifier of the application.")
-	workspaces_associateWorkspaceApplicationCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
-	workspaces_associateWorkspaceApplicationCmd.MarkFlagRequired("application-id")
-	workspaces_associateWorkspaceApplicationCmd.MarkFlagRequired("workspace-id")
+		workspaces_associateWorkspaceApplicationCmd.Flags().String("application-id", "", "The identifier of the application.")
+		workspaces_associateWorkspaceApplicationCmd.Flags().String("workspace-id", "", "The identifier of the WorkSpace.")
+		workspaces_associateWorkspaceApplicationCmd.MarkFlagRequired("application-id")
+		workspaces_associateWorkspaceApplicationCmd.MarkFlagRequired("workspace-id")
+	})
 	workspacesCmd.AddCommand(workspaces_associateWorkspaceApplicationCmd)
 }

@@ -12,11 +12,13 @@ var logs_describeQueryDefinitionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(logs_describeQueryDefinitionsCmd).Standalone()
+	carapace.Gen(logs_describeQueryDefinitionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(logs_describeQueryDefinitionsCmd).Standalone()
 
-	logs_describeQueryDefinitionsCmd.Flags().String("max-results", "", "Limits the number of returned query definitions to the specified number.")
-	logs_describeQueryDefinitionsCmd.Flags().String("next-token", "", "")
-	logs_describeQueryDefinitionsCmd.Flags().String("query-definition-name-prefix", "", "Use this parameter to filter your results to only the query definitions that have names that start with the prefix you specify.")
-	logs_describeQueryDefinitionsCmd.Flags().String("query-language", "", "The query language used for this query.")
+		logs_describeQueryDefinitionsCmd.Flags().String("max-results", "", "Limits the number of returned query definitions to the specified number.")
+		logs_describeQueryDefinitionsCmd.Flags().String("next-token", "", "")
+		logs_describeQueryDefinitionsCmd.Flags().String("query-definition-name-prefix", "", "Use this parameter to filter your results to only the query definitions that have names that start with the prefix you specify.")
+		logs_describeQueryDefinitionsCmd.Flags().String("query-language", "", "The query language used for this query.")
+	})
 	logsCmd.AddCommand(logs_describeQueryDefinitionsCmd)
 }

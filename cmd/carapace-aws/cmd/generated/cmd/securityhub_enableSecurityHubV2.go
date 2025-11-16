@@ -12,8 +12,10 @@ var securityhub_enableSecurityHubV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_enableSecurityHubV2Cmd).Standalone()
+	carapace.Gen(securityhub_enableSecurityHubV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_enableSecurityHubV2Cmd).Standalone()
 
-	securityhub_enableSecurityHubV2Cmd.Flags().String("tags", "", "The tags to add to the hub V2 resource when you enable Security Hub.")
+		securityhub_enableSecurityHubV2Cmd.Flags().String("tags", "", "The tags to add to the hub V2 resource when you enable Security Hub.")
+	})
 	securityhubCmd.AddCommand(securityhub_enableSecurityHubV2Cmd)
 }

@@ -12,9 +12,11 @@ var inspector2_batchAssociateCodeSecurityScanConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_batchAssociateCodeSecurityScanConfigurationCmd).Standalone()
+	carapace.Gen(inspector2_batchAssociateCodeSecurityScanConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_batchAssociateCodeSecurityScanConfigurationCmd).Standalone()
 
-	inspector2_batchAssociateCodeSecurityScanConfigurationCmd.Flags().String("associate-configuration-requests", "", "A list of code repositories to associate with the specified scan configuration.")
-	inspector2_batchAssociateCodeSecurityScanConfigurationCmd.MarkFlagRequired("associate-configuration-requests")
+		inspector2_batchAssociateCodeSecurityScanConfigurationCmd.Flags().String("associate-configuration-requests", "", "A list of code repositories to associate with the specified scan configuration.")
+		inspector2_batchAssociateCodeSecurityScanConfigurationCmd.MarkFlagRequired("associate-configuration-requests")
+	})
 	inspector2Cmd.AddCommand(inspector2_batchAssociateCodeSecurityScanConfigurationCmd)
 }

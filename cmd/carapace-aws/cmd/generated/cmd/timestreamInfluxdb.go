@@ -12,7 +12,9 @@ var timestreamInfluxdbCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamInfluxdbCmd).Standalone()
+	carapace.Gen(timestreamInfluxdbCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamInfluxdbCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(timestreamInfluxdbCmd)
 }

@@ -12,9 +12,11 @@ var ssoAdmin_listInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_listInstancesCmd).Standalone()
+	carapace.Gen(ssoAdmin_listInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_listInstancesCmd).Standalone()
 
-	ssoAdmin_listInstancesCmd.Flags().String("max-results", "", "The maximum number of results to display for the instance.")
-	ssoAdmin_listInstancesCmd.Flags().String("next-token", "", "The pagination token for the list API.")
+		ssoAdmin_listInstancesCmd.Flags().String("max-results", "", "The maximum number of results to display for the instance.")
+		ssoAdmin_listInstancesCmd.Flags().String("next-token", "", "The pagination token for the list API.")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_listInstancesCmd)
 }

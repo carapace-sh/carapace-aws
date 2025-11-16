@@ -12,15 +12,17 @@ var chimeSdkVoice_createSipRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_createSipRuleCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_createSipRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_createSipRuleCmd).Standalone()
 
-	chimeSdkVoice_createSipRuleCmd.Flags().String("disabled", "", "Disables or enables a SIP rule.")
-	chimeSdkVoice_createSipRuleCmd.Flags().String("name", "", "The name of the SIP rule.")
-	chimeSdkVoice_createSipRuleCmd.Flags().String("target-applications", "", "List of SIP media applications, with priority and AWS Region.")
-	chimeSdkVoice_createSipRuleCmd.Flags().String("trigger-type", "", "The type of trigger assigned to the SIP rule in `TriggerValue`, currently `RequestUriHostname` or `ToPhoneNumber`.")
-	chimeSdkVoice_createSipRuleCmd.Flags().String("trigger-value", "", "If `TriggerType` is `RequestUriHostname`, the value can be the outbound host name of a Voice Connector.")
-	chimeSdkVoice_createSipRuleCmd.MarkFlagRequired("name")
-	chimeSdkVoice_createSipRuleCmd.MarkFlagRequired("trigger-type")
-	chimeSdkVoice_createSipRuleCmd.MarkFlagRequired("trigger-value")
+		chimeSdkVoice_createSipRuleCmd.Flags().String("disabled", "", "Disables or enables a SIP rule.")
+		chimeSdkVoice_createSipRuleCmd.Flags().String("name", "", "The name of the SIP rule.")
+		chimeSdkVoice_createSipRuleCmd.Flags().String("target-applications", "", "List of SIP media applications, with priority and AWS Region.")
+		chimeSdkVoice_createSipRuleCmd.Flags().String("trigger-type", "", "The type of trigger assigned to the SIP rule in `TriggerValue`, currently `RequestUriHostname` or `ToPhoneNumber`.")
+		chimeSdkVoice_createSipRuleCmd.Flags().String("trigger-value", "", "If `TriggerType` is `RequestUriHostname`, the value can be the outbound host name of a Voice Connector.")
+		chimeSdkVoice_createSipRuleCmd.MarkFlagRequired("name")
+		chimeSdkVoice_createSipRuleCmd.MarkFlagRequired("trigger-type")
+		chimeSdkVoice_createSipRuleCmd.MarkFlagRequired("trigger-value")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_createSipRuleCmd)
 }

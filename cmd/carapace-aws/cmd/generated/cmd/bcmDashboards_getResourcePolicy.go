@@ -12,9 +12,11 @@ var bcmDashboards_getResourcePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDashboards_getResourcePolicyCmd).Standalone()
+	carapace.Gen(bcmDashboards_getResourcePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDashboards_getResourcePolicyCmd).Standalone()
 
-	bcmDashboards_getResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the dashboard whose resource-based policy you want to retrieve.")
-	bcmDashboards_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+		bcmDashboards_getResourcePolicyCmd.Flags().String("resource-arn", "", "The ARN of the dashboard whose resource-based policy you want to retrieve.")
+		bcmDashboards_getResourcePolicyCmd.MarkFlagRequired("resource-arn")
+	})
 	bcmDashboardsCmd.AddCommand(bcmDashboards_getResourcePolicyCmd)
 }

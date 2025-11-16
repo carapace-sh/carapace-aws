@@ -12,10 +12,12 @@ var storagegateway_listTapesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_listTapesCmd).Standalone()
+	carapace.Gen(storagegateway_listTapesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_listTapesCmd).Standalone()
 
-	storagegateway_listTapesCmd.Flags().String("limit", "", "An optional number limit for the tapes in the list returned by this call.")
-	storagegateway_listTapesCmd.Flags().String("marker", "", "A string that indicates the position at which to begin the returned list of tapes.")
-	storagegateway_listTapesCmd.Flags().String("tape-arns", "", "")
+		storagegateway_listTapesCmd.Flags().String("limit", "", "An optional number limit for the tapes in the list returned by this call.")
+		storagegateway_listTapesCmd.Flags().String("marker", "", "A string that indicates the position at which to begin the returned list of tapes.")
+		storagegateway_listTapesCmd.Flags().String("tape-arns", "", "")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_listTapesCmd)
 }

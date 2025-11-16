@@ -12,11 +12,13 @@ var workspaces_associateConnectionAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_associateConnectionAliasCmd).Standalone()
+	carapace.Gen(workspaces_associateConnectionAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_associateConnectionAliasCmd).Standalone()
 
-	workspaces_associateConnectionAliasCmd.Flags().String("alias-id", "", "The identifier of the connection alias.")
-	workspaces_associateConnectionAliasCmd.Flags().String("resource-id", "", "The identifier of the directory to associate the connection alias with.")
-	workspaces_associateConnectionAliasCmd.MarkFlagRequired("alias-id")
-	workspaces_associateConnectionAliasCmd.MarkFlagRequired("resource-id")
+		workspaces_associateConnectionAliasCmd.Flags().String("alias-id", "", "The identifier of the connection alias.")
+		workspaces_associateConnectionAliasCmd.Flags().String("resource-id", "", "The identifier of the directory to associate the connection alias with.")
+		workspaces_associateConnectionAliasCmd.MarkFlagRequired("alias-id")
+		workspaces_associateConnectionAliasCmd.MarkFlagRequired("resource-id")
+	})
 	workspacesCmd.AddCommand(workspaces_associateConnectionAliasCmd)
 }

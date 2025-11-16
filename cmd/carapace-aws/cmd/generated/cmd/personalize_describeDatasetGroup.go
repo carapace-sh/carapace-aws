@@ -12,9 +12,11 @@ var personalize_describeDatasetGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_describeDatasetGroupCmd).Standalone()
+	carapace.Gen(personalize_describeDatasetGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_describeDatasetGroupCmd).Standalone()
 
-	personalize_describeDatasetGroupCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the dataset group to describe.")
-	personalize_describeDatasetGroupCmd.MarkFlagRequired("dataset-group-arn")
+		personalize_describeDatasetGroupCmd.Flags().String("dataset-group-arn", "", "The Amazon Resource Name (ARN) of the dataset group to describe.")
+		personalize_describeDatasetGroupCmd.MarkFlagRequired("dataset-group-arn")
+	})
 	personalizeCmd.AddCommand(personalize_describeDatasetGroupCmd)
 }

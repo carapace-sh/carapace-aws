@@ -12,16 +12,18 @@ var appstream_createStreamingUrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_createStreamingUrlCmd).Standalone()
+	carapace.Gen(appstream_createStreamingUrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_createStreamingUrlCmd).Standalone()
 
-	appstream_createStreamingUrlCmd.Flags().String("application-id", "", "The name of the application to launch after the session starts.")
-	appstream_createStreamingUrlCmd.Flags().String("fleet-name", "", "The name of the fleet.")
-	appstream_createStreamingUrlCmd.Flags().String("session-context", "", "The session context.")
-	appstream_createStreamingUrlCmd.Flags().String("stack-name", "", "The name of the stack.")
-	appstream_createStreamingUrlCmd.Flags().String("user-id", "", "The identifier of the user.")
-	appstream_createStreamingUrlCmd.Flags().String("validity", "", "The time that the streaming URL will be valid, in seconds.")
-	appstream_createStreamingUrlCmd.MarkFlagRequired("fleet-name")
-	appstream_createStreamingUrlCmd.MarkFlagRequired("stack-name")
-	appstream_createStreamingUrlCmd.MarkFlagRequired("user-id")
+		appstream_createStreamingUrlCmd.Flags().String("application-id", "", "The name of the application to launch after the session starts.")
+		appstream_createStreamingUrlCmd.Flags().String("fleet-name", "", "The name of the fleet.")
+		appstream_createStreamingUrlCmd.Flags().String("session-context", "", "The session context.")
+		appstream_createStreamingUrlCmd.Flags().String("stack-name", "", "The name of the stack.")
+		appstream_createStreamingUrlCmd.Flags().String("user-id", "", "The identifier of the user.")
+		appstream_createStreamingUrlCmd.Flags().String("validity", "", "The time that the streaming URL will be valid, in seconds.")
+		appstream_createStreamingUrlCmd.MarkFlagRequired("fleet-name")
+		appstream_createStreamingUrlCmd.MarkFlagRequired("stack-name")
+		appstream_createStreamingUrlCmd.MarkFlagRequired("user-id")
+	})
 	appstreamCmd.AddCommand(appstream_createStreamingUrlCmd)
 }

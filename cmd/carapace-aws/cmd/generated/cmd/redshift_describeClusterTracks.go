@@ -12,10 +12,12 @@ var redshift_describeClusterTracksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeClusterTracksCmd).Standalone()
+	carapace.Gen(redshift_describeClusterTracksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeClusterTracksCmd).Standalone()
 
-	redshift_describeClusterTracksCmd.Flags().String("maintenance-track-name", "", "The name of the maintenance track.")
-	redshift_describeClusterTracksCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
-	redshift_describeClusterTracksCmd.Flags().String("max-records", "", "An integer value for the maximum number of maintenance tracks to return.")
+		redshift_describeClusterTracksCmd.Flags().String("maintenance-track-name", "", "The name of the maintenance track.")
+		redshift_describeClusterTracksCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
+		redshift_describeClusterTracksCmd.Flags().String("max-records", "", "An integer value for the maximum number of maintenance tracks to return.")
+	})
 	redshiftCmd.AddCommand(redshift_describeClusterTracksCmd)
 }

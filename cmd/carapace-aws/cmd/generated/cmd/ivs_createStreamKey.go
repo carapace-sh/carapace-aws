@@ -12,10 +12,12 @@ var ivs_createStreamKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_createStreamKeyCmd).Standalone()
+	carapace.Gen(ivs_createStreamKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_createStreamKeyCmd).Standalone()
 
-	ivs_createStreamKeyCmd.Flags().String("channel-arn", "", "ARN of the channel for which to create the stream key.")
-	ivs_createStreamKeyCmd.Flags().String("tags", "", "Array of 1-50 maps, each of the form `string:string (key:value)`.")
-	ivs_createStreamKeyCmd.MarkFlagRequired("channel-arn")
+		ivs_createStreamKeyCmd.Flags().String("channel-arn", "", "ARN of the channel for which to create the stream key.")
+		ivs_createStreamKeyCmd.Flags().String("tags", "", "Array of 1-50 maps, each of the form `string:string (key:value)`.")
+		ivs_createStreamKeyCmd.MarkFlagRequired("channel-arn")
+	})
 	ivsCmd.AddCommand(ivs_createStreamKeyCmd)
 }

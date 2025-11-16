@@ -12,11 +12,13 @@ var stepfunctions_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_tagResourceCmd).Standalone()
+	carapace.Gen(stepfunctions_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_tagResourceCmd).Standalone()
 
-	stepfunctions_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the Step Functions state machine or activity.")
-	stepfunctions_tagResourceCmd.Flags().String("tags", "", "The list of tags to add to a resource.")
-	stepfunctions_tagResourceCmd.MarkFlagRequired("resource-arn")
-	stepfunctions_tagResourceCmd.MarkFlagRequired("tags")
+		stepfunctions_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) for the Step Functions state machine or activity.")
+		stepfunctions_tagResourceCmd.Flags().String("tags", "", "The list of tags to add to a resource.")
+		stepfunctions_tagResourceCmd.MarkFlagRequired("resource-arn")
+		stepfunctions_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_tagResourceCmd)
 }

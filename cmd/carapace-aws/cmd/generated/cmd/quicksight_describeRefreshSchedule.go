@@ -12,13 +12,15 @@ var quicksight_describeRefreshScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeRefreshScheduleCmd).Standalone()
+	carapace.Gen(quicksight_describeRefreshScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeRefreshScheduleCmd).Standalone()
 
-	quicksight_describeRefreshScheduleCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
-	quicksight_describeRefreshScheduleCmd.Flags().String("data-set-id", "", "The ID of the dataset.")
-	quicksight_describeRefreshScheduleCmd.Flags().String("schedule-id", "", "The ID of the refresh schedule.")
-	quicksight_describeRefreshScheduleCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeRefreshScheduleCmd.MarkFlagRequired("data-set-id")
-	quicksight_describeRefreshScheduleCmd.MarkFlagRequired("schedule-id")
+		quicksight_describeRefreshScheduleCmd.Flags().String("aws-account-id", "", "The Amazon Web Services account ID.")
+		quicksight_describeRefreshScheduleCmd.Flags().String("data-set-id", "", "The ID of the dataset.")
+		quicksight_describeRefreshScheduleCmd.Flags().String("schedule-id", "", "The ID of the refresh schedule.")
+		quicksight_describeRefreshScheduleCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeRefreshScheduleCmd.MarkFlagRequired("data-set-id")
+		quicksight_describeRefreshScheduleCmd.MarkFlagRequired("schedule-id")
+	})
 	quicksightCmd.AddCommand(quicksight_describeRefreshScheduleCmd)
 }

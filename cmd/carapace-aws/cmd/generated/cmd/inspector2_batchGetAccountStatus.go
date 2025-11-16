@@ -12,8 +12,10 @@ var inspector2_batchGetAccountStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_batchGetAccountStatusCmd).Standalone()
+	carapace.Gen(inspector2_batchGetAccountStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_batchGetAccountStatusCmd).Standalone()
 
-	inspector2_batchGetAccountStatusCmd.Flags().String("account-ids", "", "The 12-digit Amazon Web Services account IDs of the accounts to retrieve Amazon Inspector status for.")
+		inspector2_batchGetAccountStatusCmd.Flags().String("account-ids", "", "The 12-digit Amazon Web Services account IDs of the accounts to retrieve Amazon Inspector status for.")
+	})
 	inspector2Cmd.AddCommand(inspector2_batchGetAccountStatusCmd)
 }

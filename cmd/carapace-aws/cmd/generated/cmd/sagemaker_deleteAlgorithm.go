@@ -12,9 +12,11 @@ var sagemaker_deleteAlgorithmCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_deleteAlgorithmCmd).Standalone()
+	carapace.Gen(sagemaker_deleteAlgorithmCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_deleteAlgorithmCmd).Standalone()
 
-	sagemaker_deleteAlgorithmCmd.Flags().String("algorithm-name", "", "The name of the algorithm to delete.")
-	sagemaker_deleteAlgorithmCmd.MarkFlagRequired("algorithm-name")
+		sagemaker_deleteAlgorithmCmd.Flags().String("algorithm-name", "", "The name of the algorithm to delete.")
+		sagemaker_deleteAlgorithmCmd.MarkFlagRequired("algorithm-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_deleteAlgorithmCmd)
 }

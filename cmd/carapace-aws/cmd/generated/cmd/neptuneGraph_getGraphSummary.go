@@ -12,10 +12,12 @@ var neptuneGraph_getGraphSummaryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_getGraphSummaryCmd).Standalone()
+	carapace.Gen(neptuneGraph_getGraphSummaryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_getGraphSummaryCmd).Standalone()
 
-	neptuneGraph_getGraphSummaryCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
-	neptuneGraph_getGraphSummaryCmd.Flags().String("mode", "", "The summary mode can take one of two values: `basic` (the default), and `detailed`.")
-	neptuneGraph_getGraphSummaryCmd.MarkFlagRequired("graph-identifier")
+		neptuneGraph_getGraphSummaryCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
+		neptuneGraph_getGraphSummaryCmd.Flags().String("mode", "", "The summary mode can take one of two values: `basic` (the default), and `detailed`.")
+		neptuneGraph_getGraphSummaryCmd.MarkFlagRequired("graph-identifier")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_getGraphSummaryCmd)
 }

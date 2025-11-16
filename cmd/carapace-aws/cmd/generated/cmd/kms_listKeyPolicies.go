@@ -12,11 +12,13 @@ var kms_listKeyPoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_listKeyPoliciesCmd).Standalone()
+	carapace.Gen(kms_listKeyPoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_listKeyPoliciesCmd).Standalone()
 
-	kms_listKeyPoliciesCmd.Flags().String("key-id", "", "Gets the names of key policies for the specified KMS key.")
-	kms_listKeyPoliciesCmd.Flags().String("limit", "", "Use this parameter to specify the maximum number of items to return.")
-	kms_listKeyPoliciesCmd.Flags().String("marker", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
-	kms_listKeyPoliciesCmd.MarkFlagRequired("key-id")
+		kms_listKeyPoliciesCmd.Flags().String("key-id", "", "Gets the names of key policies for the specified KMS key.")
+		kms_listKeyPoliciesCmd.Flags().String("limit", "", "Use this parameter to specify the maximum number of items to return.")
+		kms_listKeyPoliciesCmd.Flags().String("marker", "", "Use this parameter in a subsequent request after you receive a response with truncated results.")
+		kms_listKeyPoliciesCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_listKeyPoliciesCmd)
 }

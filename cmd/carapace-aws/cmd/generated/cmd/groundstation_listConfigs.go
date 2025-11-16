@@ -12,9 +12,11 @@ var groundstation_listConfigsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_listConfigsCmd).Standalone()
+	carapace.Gen(groundstation_listConfigsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_listConfigsCmd).Standalone()
 
-	groundstation_listConfigsCmd.Flags().String("max-results", "", "Maximum number of `Configs` returned.")
-	groundstation_listConfigsCmd.Flags().String("next-token", "", "Next token returned in the request of a previous `ListConfigs` call.")
+		groundstation_listConfigsCmd.Flags().String("max-results", "", "Maximum number of `Configs` returned.")
+		groundstation_listConfigsCmd.Flags().String("next-token", "", "Next token returned in the request of a previous `ListConfigs` call.")
+	})
 	groundstationCmd.AddCommand(groundstation_listConfigsCmd)
 }

@@ -12,13 +12,15 @@ var elbv2_modifyRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_modifyRuleCmd).Standalone()
+	carapace.Gen(elbv2_modifyRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_modifyRuleCmd).Standalone()
 
-	elbv2_modifyRuleCmd.Flags().String("actions", "", "The actions.")
-	elbv2_modifyRuleCmd.Flags().String("conditions", "", "The conditions.")
-	elbv2_modifyRuleCmd.Flags().String("reset-transforms", "", "Indicates whether to remove all transforms from the rule.")
-	elbv2_modifyRuleCmd.Flags().String("rule-arn", "", "The Amazon Resource Name (ARN) of the rule.")
-	elbv2_modifyRuleCmd.Flags().String("transforms", "", "The transforms to apply to requests that match this rule.")
-	elbv2_modifyRuleCmd.MarkFlagRequired("rule-arn")
+		elbv2_modifyRuleCmd.Flags().String("actions", "", "The actions.")
+		elbv2_modifyRuleCmd.Flags().String("conditions", "", "The conditions.")
+		elbv2_modifyRuleCmd.Flags().String("reset-transforms", "", "Indicates whether to remove all transforms from the rule.")
+		elbv2_modifyRuleCmd.Flags().String("rule-arn", "", "The Amazon Resource Name (ARN) of the rule.")
+		elbv2_modifyRuleCmd.Flags().String("transforms", "", "The transforms to apply to requests that match this rule.")
+		elbv2_modifyRuleCmd.MarkFlagRequired("rule-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_modifyRuleCmd)
 }

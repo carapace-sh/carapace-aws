@@ -12,7 +12,9 @@ var mediapackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackageCmd).Standalone()
+	carapace.Gen(mediapackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackageCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(mediapackageCmd)
 }

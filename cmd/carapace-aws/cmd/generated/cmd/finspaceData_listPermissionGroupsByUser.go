@@ -12,12 +12,14 @@ var finspaceData_listPermissionGroupsByUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspaceData_listPermissionGroupsByUserCmd).Standalone()
+	carapace.Gen(finspaceData_listPermissionGroupsByUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspaceData_listPermissionGroupsByUserCmd).Standalone()
 
-	finspaceData_listPermissionGroupsByUserCmd.Flags().String("max-results", "", "The maximum number of results per page.")
-	finspaceData_listPermissionGroupsByUserCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
-	finspaceData_listPermissionGroupsByUserCmd.Flags().String("user-id", "", "The unique identifier for the user.")
-	finspaceData_listPermissionGroupsByUserCmd.MarkFlagRequired("max-results")
-	finspaceData_listPermissionGroupsByUserCmd.MarkFlagRequired("user-id")
+		finspaceData_listPermissionGroupsByUserCmd.Flags().String("max-results", "", "The maximum number of results per page.")
+		finspaceData_listPermissionGroupsByUserCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+		finspaceData_listPermissionGroupsByUserCmd.Flags().String("user-id", "", "The unique identifier for the user.")
+		finspaceData_listPermissionGroupsByUserCmd.MarkFlagRequired("max-results")
+		finspaceData_listPermissionGroupsByUserCmd.MarkFlagRequired("user-id")
+	})
 	finspaceDataCmd.AddCommand(finspaceData_listPermissionGroupsByUserCmd)
 }

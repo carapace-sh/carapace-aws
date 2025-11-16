@@ -12,7 +12,9 @@ var mediaconvert_deletePolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_deletePolicyCmd).Standalone()
+	carapace.Gen(mediaconvert_deletePolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_deletePolicyCmd).Standalone()
 
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_deletePolicyCmd)
 }

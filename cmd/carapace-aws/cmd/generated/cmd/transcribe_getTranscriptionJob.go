@@ -12,9 +12,11 @@ var transcribe_getTranscriptionJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_getTranscriptionJobCmd).Standalone()
+	carapace.Gen(transcribe_getTranscriptionJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_getTranscriptionJobCmd).Standalone()
 
-	transcribe_getTranscriptionJobCmd.Flags().String("transcription-job-name", "", "The name of the transcription job you want information about.")
-	transcribe_getTranscriptionJobCmd.MarkFlagRequired("transcription-job-name")
+		transcribe_getTranscriptionJobCmd.Flags().String("transcription-job-name", "", "The name of the transcription job you want information about.")
+		transcribe_getTranscriptionJobCmd.MarkFlagRequired("transcription-job-name")
+	})
 	transcribeCmd.AddCommand(transcribe_getTranscriptionJobCmd)
 }

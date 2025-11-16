@@ -12,11 +12,13 @@ var rtbfabric_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_tagResourceCmd).Standalone()
+	carapace.Gen(rtbfabric_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_tagResourceCmd).Standalone()
 
-	rtbfabric_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
-	rtbfabric_tagResourceCmd.Flags().String("tags", "", "A map of the key-value pairs of the tag or tags to assign to the resource.")
-	rtbfabric_tagResourceCmd.MarkFlagRequired("resource-arn")
-	rtbfabric_tagResourceCmd.MarkFlagRequired("tags")
+		rtbfabric_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to tag.")
+		rtbfabric_tagResourceCmd.Flags().String("tags", "", "A map of the key-value pairs of the tag or tags to assign to the resource.")
+		rtbfabric_tagResourceCmd.MarkFlagRequired("resource-arn")
+		rtbfabric_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_tagResourceCmd)
 }

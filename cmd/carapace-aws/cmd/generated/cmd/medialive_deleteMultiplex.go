@@ -12,9 +12,11 @@ var medialive_deleteMultiplexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteMultiplexCmd).Standalone()
+	carapace.Gen(medialive_deleteMultiplexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteMultiplexCmd).Standalone()
 
-	medialive_deleteMultiplexCmd.Flags().String("multiplex-id", "", "The ID of the multiplex.")
-	medialive_deleteMultiplexCmd.MarkFlagRequired("multiplex-id")
+		medialive_deleteMultiplexCmd.Flags().String("multiplex-id", "", "The ID of the multiplex.")
+		medialive_deleteMultiplexCmd.MarkFlagRequired("multiplex-id")
+	})
 	medialiveCmd.AddCommand(medialive_deleteMultiplexCmd)
 }

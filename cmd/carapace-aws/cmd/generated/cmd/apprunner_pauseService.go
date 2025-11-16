@@ -12,9 +12,11 @@ var apprunner_pauseServiceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_pauseServiceCmd).Standalone()
+	carapace.Gen(apprunner_pauseServiceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_pauseServiceCmd).Standalone()
 
-	apprunner_pauseServiceCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to pause.")
-	apprunner_pauseServiceCmd.MarkFlagRequired("service-arn")
+		apprunner_pauseServiceCmd.Flags().String("service-arn", "", "The Amazon Resource Name (ARN) of the App Runner service that you want to pause.")
+		apprunner_pauseServiceCmd.MarkFlagRequired("service-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_pauseServiceCmd)
 }

@@ -12,9 +12,11 @@ var medialive_deleteInputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_deleteInputCmd).Standalone()
+	carapace.Gen(medialive_deleteInputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_deleteInputCmd).Standalone()
 
-	medialive_deleteInputCmd.Flags().String("input-id", "", "Unique ID of the input")
-	medialive_deleteInputCmd.MarkFlagRequired("input-id")
+		medialive_deleteInputCmd.Flags().String("input-id", "", "Unique ID of the input")
+		medialive_deleteInputCmd.MarkFlagRequired("input-id")
+	})
 	medialiveCmd.AddCommand(medialive_deleteInputCmd)
 }

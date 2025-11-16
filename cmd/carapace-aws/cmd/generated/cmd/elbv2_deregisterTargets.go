@@ -12,11 +12,13 @@ var elbv2_deregisterTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_deregisterTargetsCmd).Standalone()
+	carapace.Gen(elbv2_deregisterTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_deregisterTargetsCmd).Standalone()
 
-	elbv2_deregisterTargetsCmd.Flags().String("target-group-arn", "", "The Amazon Resource Name (ARN) of the target group.")
-	elbv2_deregisterTargetsCmd.Flags().String("targets", "", "The targets.")
-	elbv2_deregisterTargetsCmd.MarkFlagRequired("target-group-arn")
-	elbv2_deregisterTargetsCmd.MarkFlagRequired("targets")
+		elbv2_deregisterTargetsCmd.Flags().String("target-group-arn", "", "The Amazon Resource Name (ARN) of the target group.")
+		elbv2_deregisterTargetsCmd.Flags().String("targets", "", "The targets.")
+		elbv2_deregisterTargetsCmd.MarkFlagRequired("target-group-arn")
+		elbv2_deregisterTargetsCmd.MarkFlagRequired("targets")
+	})
 	elbv2Cmd.AddCommand(elbv2_deregisterTargetsCmd)
 }

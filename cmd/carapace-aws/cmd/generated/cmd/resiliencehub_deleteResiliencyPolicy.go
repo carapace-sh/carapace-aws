@@ -12,10 +12,12 @@ var resiliencehub_deleteResiliencyPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_deleteResiliencyPolicyCmd).Standalone()
+	carapace.Gen(resiliencehub_deleteResiliencyPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_deleteResiliencyPolicyCmd).Standalone()
 
-	resiliencehub_deleteResiliencyPolicyCmd.Flags().String("client-token", "", "Used for an idempotency token.")
-	resiliencehub_deleteResiliencyPolicyCmd.Flags().String("policy-arn", "", "Amazon Resource Name (ARN) of the resiliency policy.")
-	resiliencehub_deleteResiliencyPolicyCmd.MarkFlagRequired("policy-arn")
+		resiliencehub_deleteResiliencyPolicyCmd.Flags().String("client-token", "", "Used for an idempotency token.")
+		resiliencehub_deleteResiliencyPolicyCmd.Flags().String("policy-arn", "", "Amazon Resource Name (ARN) of the resiliency policy.")
+		resiliencehub_deleteResiliencyPolicyCmd.MarkFlagRequired("policy-arn")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_deleteResiliencyPolicyCmd)
 }

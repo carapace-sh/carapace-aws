@@ -12,10 +12,12 @@ var cloudtrail_listTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_listTagsCmd).Standalone()
+	carapace.Gen(cloudtrail_listTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_listTagsCmd).Standalone()
 
-	cloudtrail_listTagsCmd.Flags().String("next-token", "", "Reserved for future use.")
-	cloudtrail_listTagsCmd.Flags().String("resource-id-list", "", "Specifies a list of trail, event data store, dashboard, or channel ARNs whose tags will be listed.")
-	cloudtrail_listTagsCmd.MarkFlagRequired("resource-id-list")
+		cloudtrail_listTagsCmd.Flags().String("next-token", "", "Reserved for future use.")
+		cloudtrail_listTagsCmd.Flags().String("resource-id-list", "", "Specifies a list of trail, event data store, dashboard, or channel ARNs whose tags will be listed.")
+		cloudtrail_listTagsCmd.MarkFlagRequired("resource-id-list")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_listTagsCmd)
 }

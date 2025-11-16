@@ -12,11 +12,13 @@ var redshift_describeDataSharesForProducerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_describeDataSharesForProducerCmd).Standalone()
+	carapace.Gen(redshift_describeDataSharesForProducerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_describeDataSharesForProducerCmd).Standalone()
 
-	redshift_describeDataSharesForProducerCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
-	redshift_describeDataSharesForProducerCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
-	redshift_describeDataSharesForProducerCmd.Flags().String("producer-arn", "", "The Amazon Resource Name (ARN) of the producer namespace that returns in the list of datashares.")
-	redshift_describeDataSharesForProducerCmd.Flags().String("status", "", "An identifier giving the status of a datashare in the producer.")
+		redshift_describeDataSharesForProducerCmd.Flags().String("marker", "", "An optional parameter that specifies the starting point to return a set of response records.")
+		redshift_describeDataSharesForProducerCmd.Flags().String("max-records", "", "The maximum number of response records to return in each call.")
+		redshift_describeDataSharesForProducerCmd.Flags().String("producer-arn", "", "The Amazon Resource Name (ARN) of the producer namespace that returns in the list of datashares.")
+		redshift_describeDataSharesForProducerCmd.Flags().String("status", "", "An identifier giving the status of a datashare in the producer.")
+	})
 	redshiftCmd.AddCommand(redshift_describeDataSharesForProducerCmd)
 }

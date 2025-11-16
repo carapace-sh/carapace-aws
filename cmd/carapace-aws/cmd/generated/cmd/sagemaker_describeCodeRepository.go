@@ -12,9 +12,11 @@ var sagemaker_describeCodeRepositoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeCodeRepositoryCmd).Standalone()
+	carapace.Gen(sagemaker_describeCodeRepositoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeCodeRepositoryCmd).Standalone()
 
-	sagemaker_describeCodeRepositoryCmd.Flags().String("code-repository-name", "", "The name of the Git repository to describe.")
-	sagemaker_describeCodeRepositoryCmd.MarkFlagRequired("code-repository-name")
+		sagemaker_describeCodeRepositoryCmd.Flags().String("code-repository-name", "", "The name of the Git repository to describe.")
+		sagemaker_describeCodeRepositoryCmd.MarkFlagRequired("code-repository-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeCodeRepositoryCmd)
 }

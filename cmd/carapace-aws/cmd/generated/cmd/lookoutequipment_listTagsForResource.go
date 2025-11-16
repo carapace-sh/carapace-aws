@@ -12,9 +12,11 @@ var lookoutequipment_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_listTagsForResourceCmd).Standalone()
+	carapace.Gen(lookoutequipment_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_listTagsForResourceCmd).Standalone()
 
-	lookoutequipment_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource (such as the dataset or model) that is the focus of the `ListTagsForResource` operation.")
-	lookoutequipment_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		lookoutequipment_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource (such as the dataset or model) that is the focus of the `ListTagsForResource` operation.")
+		lookoutequipment_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_listTagsForResourceCmd)
 }

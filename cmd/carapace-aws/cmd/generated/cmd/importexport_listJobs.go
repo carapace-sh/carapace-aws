@@ -12,10 +12,12 @@ var importexport_listJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(importexport_listJobsCmd).Standalone()
+	carapace.Gen(importexport_listJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(importexport_listJobsCmd).Standalone()
 
-	importexport_listJobsCmd.Flags().String("apiversion", "", "")
-	importexport_listJobsCmd.Flags().String("marker", "", "")
-	importexport_listJobsCmd.Flags().String("max-jobs", "", "")
+		importexport_listJobsCmd.Flags().String("apiversion", "", "")
+		importexport_listJobsCmd.Flags().String("marker", "", "")
+		importexport_listJobsCmd.Flags().String("max-jobs", "", "")
+	})
 	importexportCmd.AddCommand(importexport_listJobsCmd)
 }

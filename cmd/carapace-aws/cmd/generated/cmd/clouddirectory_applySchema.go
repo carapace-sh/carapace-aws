@@ -12,11 +12,13 @@ var clouddirectory_applySchemaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_applySchemaCmd).Standalone()
+	carapace.Gen(clouddirectory_applySchemaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_applySchemaCmd).Standalone()
 
-	clouddirectory_applySchemaCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]() into which the schema is copied.")
-	clouddirectory_applySchemaCmd.Flags().String("published-schema-arn", "", "Published schema Amazon Resource Name (ARN) that needs to be copied.")
-	clouddirectory_applySchemaCmd.MarkFlagRequired("directory-arn")
-	clouddirectory_applySchemaCmd.MarkFlagRequired("published-schema-arn")
+		clouddirectory_applySchemaCmd.Flags().String("directory-arn", "", "The Amazon Resource Name (ARN) that is associated with the [Directory]() into which the schema is copied.")
+		clouddirectory_applySchemaCmd.Flags().String("published-schema-arn", "", "Published schema Amazon Resource Name (ARN) that needs to be copied.")
+		clouddirectory_applySchemaCmd.MarkFlagRequired("directory-arn")
+		clouddirectory_applySchemaCmd.MarkFlagRequired("published-schema-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_applySchemaCmd)
 }

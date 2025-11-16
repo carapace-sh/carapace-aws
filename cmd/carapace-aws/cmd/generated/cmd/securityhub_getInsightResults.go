@@ -12,9 +12,11 @@ var securityhub_getInsightResultsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getInsightResultsCmd).Standalone()
+	carapace.Gen(securityhub_getInsightResultsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getInsightResultsCmd).Standalone()
 
-	securityhub_getInsightResultsCmd.Flags().String("insight-arn", "", "The ARN of the insight for which to return results.")
-	securityhub_getInsightResultsCmd.MarkFlagRequired("insight-arn")
+		securityhub_getInsightResultsCmd.Flags().String("insight-arn", "", "The ARN of the insight for which to return results.")
+		securityhub_getInsightResultsCmd.MarkFlagRequired("insight-arn")
+	})
 	securityhubCmd.AddCommand(securityhub_getInsightResultsCmd)
 }

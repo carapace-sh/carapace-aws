@@ -12,11 +12,13 @@ var qbusiness_getDataAccessorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_getDataAccessorCmd).Standalone()
+	carapace.Gen(qbusiness_getDataAccessorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_getDataAccessorCmd).Standalone()
 
-	qbusiness_getDataAccessorCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application.")
-	qbusiness_getDataAccessorCmd.Flags().String("data-accessor-id", "", "The unique identifier of the data accessor to retrieve.")
-	qbusiness_getDataAccessorCmd.MarkFlagRequired("application-id")
-	qbusiness_getDataAccessorCmd.MarkFlagRequired("data-accessor-id")
+		qbusiness_getDataAccessorCmd.Flags().String("application-id", "", "The unique identifier of the Amazon Q Business application.")
+		qbusiness_getDataAccessorCmd.Flags().String("data-accessor-id", "", "The unique identifier of the data accessor to retrieve.")
+		qbusiness_getDataAccessorCmd.MarkFlagRequired("application-id")
+		qbusiness_getDataAccessorCmd.MarkFlagRequired("data-accessor-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_getDataAccessorCmd)
 }

@@ -12,11 +12,13 @@ var paymentCryptography_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_tagResourceCmd).Standalone()
+	carapace.Gen(paymentCryptography_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_tagResourceCmd).Standalone()
 
-	paymentCryptography_tagResourceCmd.Flags().String("resource-arn", "", "The `KeyARN` of the key whose tags are being updated.")
-	paymentCryptography_tagResourceCmd.Flags().String("tags", "", "One or more tags.")
-	paymentCryptography_tagResourceCmd.MarkFlagRequired("resource-arn")
-	paymentCryptography_tagResourceCmd.MarkFlagRequired("tags")
+		paymentCryptography_tagResourceCmd.Flags().String("resource-arn", "", "The `KeyARN` of the key whose tags are being updated.")
+		paymentCryptography_tagResourceCmd.Flags().String("tags", "", "One or more tags.")
+		paymentCryptography_tagResourceCmd.MarkFlagRequired("resource-arn")
+		paymentCryptography_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_tagResourceCmd)
 }

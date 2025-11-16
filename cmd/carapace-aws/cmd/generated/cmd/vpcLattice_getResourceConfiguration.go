@@ -12,9 +12,11 @@ var vpcLattice_getResourceConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_getResourceConfigurationCmd).Standalone()
+	carapace.Gen(vpcLattice_getResourceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_getResourceConfigurationCmd).Standalone()
 
-	vpcLattice_getResourceConfigurationCmd.Flags().String("resource-configuration-identifier", "", "The ID of the resource configuration.")
-	vpcLattice_getResourceConfigurationCmd.MarkFlagRequired("resource-configuration-identifier")
+		vpcLattice_getResourceConfigurationCmd.Flags().String("resource-configuration-identifier", "", "The ID of the resource configuration.")
+		vpcLattice_getResourceConfigurationCmd.MarkFlagRequired("resource-configuration-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_getResourceConfigurationCmd)
 }

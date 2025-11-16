@@ -12,11 +12,13 @@ var wellarchitected_listProfilesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listProfilesCmd).Standalone()
+	carapace.Gen(wellarchitected_listProfilesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listProfilesCmd).Standalone()
 
-	wellarchitected_listProfilesCmd.Flags().String("max-results", "", "")
-	wellarchitected_listProfilesCmd.Flags().String("next-token", "", "")
-	wellarchitected_listProfilesCmd.Flags().String("profile-name-prefix", "", "An optional string added to the beginning of each profile name returned in the results.")
-	wellarchitected_listProfilesCmd.Flags().String("profile-owner-type", "", "Profile owner type.")
+		wellarchitected_listProfilesCmd.Flags().String("max-results", "", "")
+		wellarchitected_listProfilesCmd.Flags().String("next-token", "", "")
+		wellarchitected_listProfilesCmd.Flags().String("profile-name-prefix", "", "An optional string added to the beginning of each profile name returned in the results.")
+		wellarchitected_listProfilesCmd.Flags().String("profile-owner-type", "", "Profile owner type.")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listProfilesCmd)
 }

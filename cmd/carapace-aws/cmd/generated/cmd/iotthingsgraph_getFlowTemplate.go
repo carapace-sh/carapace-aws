@@ -12,10 +12,12 @@ var iotthingsgraph_getFlowTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_getFlowTemplateCmd).Standalone()
+	carapace.Gen(iotthingsgraph_getFlowTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_getFlowTemplateCmd).Standalone()
 
-	iotthingsgraph_getFlowTemplateCmd.Flags().String("id", "", "The ID of the workflow.")
-	iotthingsgraph_getFlowTemplateCmd.Flags().String("revision-number", "", "The number of the workflow revision to retrieve.")
-	iotthingsgraph_getFlowTemplateCmd.MarkFlagRequired("id")
+		iotthingsgraph_getFlowTemplateCmd.Flags().String("id", "", "The ID of the workflow.")
+		iotthingsgraph_getFlowTemplateCmd.Flags().String("revision-number", "", "The number of the workflow revision to retrieve.")
+		iotthingsgraph_getFlowTemplateCmd.MarkFlagRequired("id")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_getFlowTemplateCmd)
 }

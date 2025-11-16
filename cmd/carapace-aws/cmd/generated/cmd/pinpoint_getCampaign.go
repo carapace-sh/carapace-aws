@@ -12,11 +12,13 @@ var pinpoint_getCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getCampaignCmd).Standalone()
+	carapace.Gen(pinpoint_getCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getCampaignCmd).Standalone()
 
-	pinpoint_getCampaignCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getCampaignCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
-	pinpoint_getCampaignCmd.MarkFlagRequired("application-id")
-	pinpoint_getCampaignCmd.MarkFlagRequired("campaign-id")
+		pinpoint_getCampaignCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getCampaignCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
+		pinpoint_getCampaignCmd.MarkFlagRequired("application-id")
+		pinpoint_getCampaignCmd.MarkFlagRequired("campaign-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getCampaignCmd)
 }

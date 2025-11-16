@@ -12,8 +12,10 @@ var taxsettings_getTaxRegistrationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(taxsettings_getTaxRegistrationCmd).Standalone()
+	carapace.Gen(taxsettings_getTaxRegistrationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(taxsettings_getTaxRegistrationCmd).Standalone()
 
-	taxsettings_getTaxRegistrationCmd.Flags().String("account-id", "", "Your unique account identifier.")
+		taxsettings_getTaxRegistrationCmd.Flags().String("account-id", "", "Your unique account identifier.")
+	})
 	taxsettingsCmd.AddCommand(taxsettings_getTaxRegistrationCmd)
 }

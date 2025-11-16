@@ -12,11 +12,13 @@ var pinpoint_sendOtpmessageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_sendOtpmessageCmd).Standalone()
+	carapace.Gen(pinpoint_sendOtpmessageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_sendOtpmessageCmd).Standalone()
 
-	pinpoint_sendOtpmessageCmd.Flags().String("application-id", "", "The unique ID of your Amazon Pinpoint application.")
-	pinpoint_sendOtpmessageCmd.Flags().String("send-otpmessage-request-parameters", "", "")
-	pinpoint_sendOtpmessageCmd.MarkFlagRequired("application-id")
-	pinpoint_sendOtpmessageCmd.MarkFlagRequired("send-otpmessage-request-parameters")
+		pinpoint_sendOtpmessageCmd.Flags().String("application-id", "", "The unique ID of your Amazon Pinpoint application.")
+		pinpoint_sendOtpmessageCmd.Flags().String("send-otpmessage-request-parameters", "", "")
+		pinpoint_sendOtpmessageCmd.MarkFlagRequired("application-id")
+		pinpoint_sendOtpmessageCmd.MarkFlagRequired("send-otpmessage-request-parameters")
+	})
 	pinpointCmd.AddCommand(pinpoint_sendOtpmessageCmd)
 }

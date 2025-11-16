@@ -12,9 +12,11 @@ var route53RecoveryReadiness_deleteResourceSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53RecoveryReadiness_deleteResourceSetCmd).Standalone()
+	carapace.Gen(route53RecoveryReadiness_deleteResourceSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53RecoveryReadiness_deleteResourceSetCmd).Standalone()
 
-	route53RecoveryReadiness_deleteResourceSetCmd.Flags().String("resource-set-name", "", "Name of a resource set.")
-	route53RecoveryReadiness_deleteResourceSetCmd.MarkFlagRequired("resource-set-name")
+		route53RecoveryReadiness_deleteResourceSetCmd.Flags().String("resource-set-name", "", "Name of a resource set.")
+		route53RecoveryReadiness_deleteResourceSetCmd.MarkFlagRequired("resource-set-name")
+	})
 	route53RecoveryReadinessCmd.AddCommand(route53RecoveryReadiness_deleteResourceSetCmd)
 }

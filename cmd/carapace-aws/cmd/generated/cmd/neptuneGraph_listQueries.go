@@ -12,12 +12,14 @@ var neptuneGraph_listQueriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptuneGraph_listQueriesCmd).Standalone()
+	carapace.Gen(neptuneGraph_listQueriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptuneGraph_listQueriesCmd).Standalone()
 
-	neptuneGraph_listQueriesCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
-	neptuneGraph_listQueriesCmd.Flags().String("max-results", "", "The maximum number of results to be fetched by the API.")
-	neptuneGraph_listQueriesCmd.Flags().String("state", "", "Filtered list of queries based on state.")
-	neptuneGraph_listQueriesCmd.MarkFlagRequired("graph-identifier")
-	neptuneGraph_listQueriesCmd.MarkFlagRequired("max-results")
+		neptuneGraph_listQueriesCmd.Flags().String("graph-identifier", "", "The unique identifier of the Neptune Analytics graph.")
+		neptuneGraph_listQueriesCmd.Flags().String("max-results", "", "The maximum number of results to be fetched by the API.")
+		neptuneGraph_listQueriesCmd.Flags().String("state", "", "Filtered list of queries based on state.")
+		neptuneGraph_listQueriesCmd.MarkFlagRequired("graph-identifier")
+		neptuneGraph_listQueriesCmd.MarkFlagRequired("max-results")
+	})
 	neptuneGraphCmd.AddCommand(neptuneGraph_listQueriesCmd)
 }

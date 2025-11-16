@@ -12,9 +12,11 @@ var xray_getGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_getGroupCmd).Standalone()
+	carapace.Gen(xray_getGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_getGroupCmd).Standalone()
 
-	xray_getGroupCmd.Flags().String("group-arn", "", "The ARN of the group that was generated on creation.")
-	xray_getGroupCmd.Flags().String("group-name", "", "The case-sensitive name of the group.")
+		xray_getGroupCmd.Flags().String("group-arn", "", "The ARN of the group that was generated on creation.")
+		xray_getGroupCmd.Flags().String("group-name", "", "The case-sensitive name of the group.")
+	})
 	xrayCmd.AddCommand(xray_getGroupCmd)
 }

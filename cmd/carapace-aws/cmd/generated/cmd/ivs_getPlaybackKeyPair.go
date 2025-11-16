@@ -12,9 +12,11 @@ var ivs_getPlaybackKeyPairCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_getPlaybackKeyPairCmd).Standalone()
+	carapace.Gen(ivs_getPlaybackKeyPairCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_getPlaybackKeyPairCmd).Standalone()
 
-	ivs_getPlaybackKeyPairCmd.Flags().String("arn", "", "ARN of the key pair to be returned.")
-	ivs_getPlaybackKeyPairCmd.MarkFlagRequired("arn")
+		ivs_getPlaybackKeyPairCmd.Flags().String("arn", "", "ARN of the key pair to be returned.")
+		ivs_getPlaybackKeyPairCmd.MarkFlagRequired("arn")
+	})
 	ivsCmd.AddCommand(ivs_getPlaybackKeyPairCmd)
 }

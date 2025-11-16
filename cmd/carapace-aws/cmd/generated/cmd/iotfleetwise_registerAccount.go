@@ -12,9 +12,11 @@ var iotfleetwise_registerAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_registerAccountCmd).Standalone()
+	carapace.Gen(iotfleetwise_registerAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_registerAccountCmd).Standalone()
 
-	iotfleetwise_registerAccountCmd.Flags().String("iam-resources", "", "The IAM resource that allows Amazon Web Services IoT FleetWise to send data to Amazon Timestream.")
-	iotfleetwise_registerAccountCmd.Flags().String("timestream-resources", "", "")
+		iotfleetwise_registerAccountCmd.Flags().String("iam-resources", "", "The IAM resource that allows Amazon Web Services IoT FleetWise to send data to Amazon Timestream.")
+		iotfleetwise_registerAccountCmd.Flags().String("timestream-resources", "", "")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_registerAccountCmd)
 }

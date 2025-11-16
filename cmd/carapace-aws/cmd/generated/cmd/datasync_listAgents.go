@@ -12,9 +12,11 @@ var datasync_listAgentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_listAgentsCmd).Standalone()
+	carapace.Gen(datasync_listAgentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_listAgentsCmd).Standalone()
 
-	datasync_listAgentsCmd.Flags().String("max-results", "", "Specifies the maximum number of DataSync agents to list in a response.")
-	datasync_listAgentsCmd.Flags().String("next-token", "", "Specifies an opaque string that indicates the position to begin the next list of results in the response.")
+		datasync_listAgentsCmd.Flags().String("max-results", "", "Specifies the maximum number of DataSync agents to list in a response.")
+		datasync_listAgentsCmd.Flags().String("next-token", "", "Specifies an opaque string that indicates the position to begin the next list of results in the response.")
+	})
 	datasyncCmd.AddCommand(datasync_listAgentsCmd)
 }

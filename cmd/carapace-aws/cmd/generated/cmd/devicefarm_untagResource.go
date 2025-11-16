@@ -12,11 +12,13 @@ var devicefarm_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_untagResourceCmd).Standalone()
+	carapace.Gen(devicefarm_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_untagResourceCmd).Standalone()
 
-	devicefarm_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource or resources from which to delete tags.")
-	devicefarm_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to be removed.")
-	devicefarm_untagResourceCmd.MarkFlagRequired("resource-arn")
-	devicefarm_untagResourceCmd.MarkFlagRequired("tag-keys")
+		devicefarm_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource or resources from which to delete tags.")
+		devicefarm_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to be removed.")
+		devicefarm_untagResourceCmd.MarkFlagRequired("resource-arn")
+		devicefarm_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	devicefarmCmd.AddCommand(devicefarm_untagResourceCmd)
 }

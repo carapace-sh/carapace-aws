@@ -12,10 +12,12 @@ var bcmDataExports_getTableCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmDataExports_getTableCmd).Standalone()
+	carapace.Gen(bcmDataExports_getTableCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmDataExports_getTableCmd).Standalone()
 
-	bcmDataExports_getTableCmd.Flags().String("table-name", "", "The name of the table.")
-	bcmDataExports_getTableCmd.Flags().String("table-properties", "", "TableProperties are additional configurations you can provide to change the data and schema of a table.")
-	bcmDataExports_getTableCmd.MarkFlagRequired("table-name")
+		bcmDataExports_getTableCmd.Flags().String("table-name", "", "The name of the table.")
+		bcmDataExports_getTableCmd.Flags().String("table-properties", "", "TableProperties are additional configurations you can provide to change the data and schema of a table.")
+		bcmDataExports_getTableCmd.MarkFlagRequired("table-name")
+	})
 	bcmDataExportsCmd.AddCommand(bcmDataExports_getTableCmd)
 }

@@ -12,9 +12,11 @@ var forecast_describeForecastCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_describeForecastCmd).Standalone()
+	carapace.Gen(forecast_describeForecastCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_describeForecastCmd).Standalone()
 
-	forecast_describeForecastCmd.Flags().String("forecast-arn", "", "The Amazon Resource Name (ARN) of the forecast.")
-	forecast_describeForecastCmd.MarkFlagRequired("forecast-arn")
+		forecast_describeForecastCmd.Flags().String("forecast-arn", "", "The Amazon Resource Name (ARN) of the forecast.")
+		forecast_describeForecastCmd.MarkFlagRequired("forecast-arn")
+	})
 	forecastCmd.AddCommand(forecast_describeForecastCmd)
 }

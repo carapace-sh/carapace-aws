@@ -12,15 +12,17 @@ var emrContainers_createVirtualClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_createVirtualClusterCmd).Standalone()
+	carapace.Gen(emrContainers_createVirtualClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_createVirtualClusterCmd).Standalone()
 
-	emrContainers_createVirtualClusterCmd.Flags().String("client-token", "", "The client token of the virtual cluster.")
-	emrContainers_createVirtualClusterCmd.Flags().String("container-provider", "", "The container provider of the virtual cluster.")
-	emrContainers_createVirtualClusterCmd.Flags().String("name", "", "The specified name of the virtual cluster.")
-	emrContainers_createVirtualClusterCmd.Flags().String("security-configuration-id", "", "The ID of the security configuration.")
-	emrContainers_createVirtualClusterCmd.Flags().String("tags", "", "The tags assigned to the virtual cluster.")
-	emrContainers_createVirtualClusterCmd.MarkFlagRequired("client-token")
-	emrContainers_createVirtualClusterCmd.MarkFlagRequired("container-provider")
-	emrContainers_createVirtualClusterCmd.MarkFlagRequired("name")
+		emrContainers_createVirtualClusterCmd.Flags().String("client-token", "", "The client token of the virtual cluster.")
+		emrContainers_createVirtualClusterCmd.Flags().String("container-provider", "", "The container provider of the virtual cluster.")
+		emrContainers_createVirtualClusterCmd.Flags().String("name", "", "The specified name of the virtual cluster.")
+		emrContainers_createVirtualClusterCmd.Flags().String("security-configuration-id", "", "The ID of the security configuration.")
+		emrContainers_createVirtualClusterCmd.Flags().String("tags", "", "The tags assigned to the virtual cluster.")
+		emrContainers_createVirtualClusterCmd.MarkFlagRequired("client-token")
+		emrContainers_createVirtualClusterCmd.MarkFlagRequired("container-provider")
+		emrContainers_createVirtualClusterCmd.MarkFlagRequired("name")
+	})
 	emrContainersCmd.AddCommand(emrContainers_createVirtualClusterCmd)
 }

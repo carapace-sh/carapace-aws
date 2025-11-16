@@ -12,11 +12,13 @@ var glue_createSecurityConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_createSecurityConfigurationCmd).Standalone()
+	carapace.Gen(glue_createSecurityConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_createSecurityConfigurationCmd).Standalone()
 
-	glue_createSecurityConfigurationCmd.Flags().String("encryption-configuration", "", "The encryption configuration for the new security configuration.")
-	glue_createSecurityConfigurationCmd.Flags().String("name", "", "The name for the new security configuration.")
-	glue_createSecurityConfigurationCmd.MarkFlagRequired("encryption-configuration")
-	glue_createSecurityConfigurationCmd.MarkFlagRequired("name")
+		glue_createSecurityConfigurationCmd.Flags().String("encryption-configuration", "", "The encryption configuration for the new security configuration.")
+		glue_createSecurityConfigurationCmd.Flags().String("name", "", "The name for the new security configuration.")
+		glue_createSecurityConfigurationCmd.MarkFlagRequired("encryption-configuration")
+		glue_createSecurityConfigurationCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_createSecurityConfigurationCmd)
 }

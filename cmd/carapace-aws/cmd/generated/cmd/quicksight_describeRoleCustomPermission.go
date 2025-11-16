@@ -12,13 +12,15 @@ var quicksight_describeRoleCustomPermissionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_describeRoleCustomPermissionCmd).Standalone()
+	carapace.Gen(quicksight_describeRoleCustomPermissionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_describeRoleCustomPermissionCmd).Standalone()
 
-	quicksight_describeRoleCustomPermissionCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that you want to create a group in.")
-	quicksight_describeRoleCustomPermissionCmd.Flags().String("namespace", "", "The namespace that contains the role.")
-	quicksight_describeRoleCustomPermissionCmd.Flags().String("role", "", "The name of the role whose permissions you want described.")
-	quicksight_describeRoleCustomPermissionCmd.MarkFlagRequired("aws-account-id")
-	quicksight_describeRoleCustomPermissionCmd.MarkFlagRequired("namespace")
-	quicksight_describeRoleCustomPermissionCmd.MarkFlagRequired("role")
+		quicksight_describeRoleCustomPermissionCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that you want to create a group in.")
+		quicksight_describeRoleCustomPermissionCmd.Flags().String("namespace", "", "The namespace that contains the role.")
+		quicksight_describeRoleCustomPermissionCmd.Flags().String("role", "", "The name of the role whose permissions you want described.")
+		quicksight_describeRoleCustomPermissionCmd.MarkFlagRequired("aws-account-id")
+		quicksight_describeRoleCustomPermissionCmd.MarkFlagRequired("namespace")
+		quicksight_describeRoleCustomPermissionCmd.MarkFlagRequired("role")
+	})
 	quicksightCmd.AddCommand(quicksight_describeRoleCustomPermissionCmd)
 }

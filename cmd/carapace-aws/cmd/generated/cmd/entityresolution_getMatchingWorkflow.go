@@ -12,9 +12,11 @@ var entityresolution_getMatchingWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_getMatchingWorkflowCmd).Standalone()
+	carapace.Gen(entityresolution_getMatchingWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_getMatchingWorkflowCmd).Standalone()
 
-	entityresolution_getMatchingWorkflowCmd.Flags().String("workflow-name", "", "The name of the workflow.")
-	entityresolution_getMatchingWorkflowCmd.MarkFlagRequired("workflow-name")
+		entityresolution_getMatchingWorkflowCmd.Flags().String("workflow-name", "", "The name of the workflow.")
+		entityresolution_getMatchingWorkflowCmd.MarkFlagRequired("workflow-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_getMatchingWorkflowCmd)
 }

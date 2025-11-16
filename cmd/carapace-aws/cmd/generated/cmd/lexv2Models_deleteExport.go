@@ -12,9 +12,11 @@ var lexv2Models_deleteExportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexv2Models_deleteExportCmd).Standalone()
+	carapace.Gen(lexv2Models_deleteExportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexv2Models_deleteExportCmd).Standalone()
 
-	lexv2Models_deleteExportCmd.Flags().String("export-id", "", "The unique identifier of the export to delete.")
-	lexv2Models_deleteExportCmd.MarkFlagRequired("export-id")
+		lexv2Models_deleteExportCmd.Flags().String("export-id", "", "The unique identifier of the export to delete.")
+		lexv2Models_deleteExportCmd.MarkFlagRequired("export-id")
+	})
 	lexv2ModelsCmd.AddCommand(lexv2Models_deleteExportCmd)
 }

@@ -12,11 +12,13 @@ var apprunner_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_untagResourceCmd).Standalone()
+	carapace.Gen(apprunner_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_untagResourceCmd).Standalone()
 
-	apprunner_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
-	apprunner_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys that you want to remove.")
-	apprunner_untagResourceCmd.MarkFlagRequired("resource-arn")
-	apprunner_untagResourceCmd.MarkFlagRequired("tag-keys")
+		apprunner_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
+		apprunner_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys that you want to remove.")
+		apprunner_untagResourceCmd.MarkFlagRequired("resource-arn")
+		apprunner_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	apprunnerCmd.AddCommand(apprunner_untagResourceCmd)
 }

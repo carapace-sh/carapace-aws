@@ -12,9 +12,11 @@ var personalize_getSolutionMetricsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(personalize_getSolutionMetricsCmd).Standalone()
+	carapace.Gen(personalize_getSolutionMetricsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(personalize_getSolutionMetricsCmd).Standalone()
 
-	personalize_getSolutionMetricsCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version for which to get metrics.")
-	personalize_getSolutionMetricsCmd.MarkFlagRequired("solution-version-arn")
+		personalize_getSolutionMetricsCmd.Flags().String("solution-version-arn", "", "The Amazon Resource Name (ARN) of the solution version for which to get metrics.")
+		personalize_getSolutionMetricsCmd.MarkFlagRequired("solution-version-arn")
+	})
 	personalizeCmd.AddCommand(personalize_getSolutionMetricsCmd)
 }

@@ -12,9 +12,11 @@ var odb_listCloudExadataInfrastructuresCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_listCloudExadataInfrastructuresCmd).Standalone()
+	carapace.Gen(odb_listCloudExadataInfrastructuresCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_listCloudExadataInfrastructuresCmd).Standalone()
 
-	odb_listCloudExadataInfrastructuresCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
-	odb_listCloudExadataInfrastructuresCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+		odb_listCloudExadataInfrastructuresCmd.Flags().String("max-results", "", "The maximum number of items to return for this request.")
+		odb_listCloudExadataInfrastructuresCmd.Flags().String("next-token", "", "The token returned from a previous paginated request.")
+	})
 	odbCmd.AddCommand(odb_listCloudExadataInfrastructuresCmd)
 }

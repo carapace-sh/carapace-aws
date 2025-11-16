@@ -12,7 +12,9 @@ var vpcLatticeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLatticeCmd).Standalone()
+	carapace.Gen(vpcLatticeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLatticeCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(vpcLatticeCmd)
 }

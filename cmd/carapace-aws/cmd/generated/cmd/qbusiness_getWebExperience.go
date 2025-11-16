@@ -12,11 +12,13 @@ var qbusiness_getWebExperienceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_getWebExperienceCmd).Standalone()
+	carapace.Gen(qbusiness_getWebExperienceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_getWebExperienceCmd).Standalone()
 
-	qbusiness_getWebExperienceCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application linked to the web experience.")
-	qbusiness_getWebExperienceCmd.Flags().String("web-experience-id", "", "The identifier of the Amazon Q Business web experience.")
-	qbusiness_getWebExperienceCmd.MarkFlagRequired("application-id")
-	qbusiness_getWebExperienceCmd.MarkFlagRequired("web-experience-id")
+		qbusiness_getWebExperienceCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application linked to the web experience.")
+		qbusiness_getWebExperienceCmd.Flags().String("web-experience-id", "", "The identifier of the Amazon Q Business web experience.")
+		qbusiness_getWebExperienceCmd.MarkFlagRequired("application-id")
+		qbusiness_getWebExperienceCmd.MarkFlagRequired("web-experience-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_getWebExperienceCmd)
 }

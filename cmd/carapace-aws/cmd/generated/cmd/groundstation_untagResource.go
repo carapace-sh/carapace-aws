@@ -12,11 +12,13 @@ var groundstation_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_untagResourceCmd).Standalone()
+	carapace.Gen(groundstation_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_untagResourceCmd).Standalone()
 
-	groundstation_untagResourceCmd.Flags().String("resource-arn", "", "ARN of a resource.")
-	groundstation_untagResourceCmd.Flags().String("tag-keys", "", "Keys of a resource tag.")
-	groundstation_untagResourceCmd.MarkFlagRequired("resource-arn")
-	groundstation_untagResourceCmd.MarkFlagRequired("tag-keys")
+		groundstation_untagResourceCmd.Flags().String("resource-arn", "", "ARN of a resource.")
+		groundstation_untagResourceCmd.Flags().String("tag-keys", "", "Keys of a resource tag.")
+		groundstation_untagResourceCmd.MarkFlagRequired("resource-arn")
+		groundstation_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	groundstationCmd.AddCommand(groundstation_untagResourceCmd)
 }

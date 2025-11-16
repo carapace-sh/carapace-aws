@@ -12,11 +12,13 @@ var cleanrooms_getProtectedQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_getProtectedQueryCmd).Standalone()
+	carapace.Gen(cleanrooms_getProtectedQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_getProtectedQueryCmd).Standalone()
 
-	cleanrooms_getProtectedQueryCmd.Flags().String("membership-identifier", "", "The identifier for a membership in a protected query instance.")
-	cleanrooms_getProtectedQueryCmd.Flags().String("protected-query-identifier", "", "The identifier for a protected query instance.")
-	cleanrooms_getProtectedQueryCmd.MarkFlagRequired("membership-identifier")
-	cleanrooms_getProtectedQueryCmd.MarkFlagRequired("protected-query-identifier")
+		cleanrooms_getProtectedQueryCmd.Flags().String("membership-identifier", "", "The identifier for a membership in a protected query instance.")
+		cleanrooms_getProtectedQueryCmd.Flags().String("protected-query-identifier", "", "The identifier for a protected query instance.")
+		cleanrooms_getProtectedQueryCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_getProtectedQueryCmd.MarkFlagRequired("protected-query-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_getProtectedQueryCmd)
 }

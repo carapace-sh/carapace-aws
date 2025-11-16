@@ -12,9 +12,11 @@ var kinesisanalyticsv2_listApplicationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_listApplicationsCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_listApplicationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_listApplicationsCmd).Standalone()
 
-	kinesisanalyticsv2_listApplicationsCmd.Flags().String("limit", "", "The maximum number of applications to list.")
-	kinesisanalyticsv2_listApplicationsCmd.Flags().String("next-token", "", "If a previous command returned a pagination token, pass it into this value to retrieve the next set of results.")
+		kinesisanalyticsv2_listApplicationsCmd.Flags().String("limit", "", "The maximum number of applications to list.")
+		kinesisanalyticsv2_listApplicationsCmd.Flags().String("next-token", "", "If a previous command returned a pagination token, pass it into this value to retrieve the next set of results.")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_listApplicationsCmd)
 }

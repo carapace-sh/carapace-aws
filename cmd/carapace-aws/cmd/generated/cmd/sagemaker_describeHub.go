@@ -12,9 +12,11 @@ var sagemaker_describeHubCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeHubCmd).Standalone()
+	carapace.Gen(sagemaker_describeHubCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeHubCmd).Standalone()
 
-	sagemaker_describeHubCmd.Flags().String("hub-name", "", "The name of the hub to describe.")
-	sagemaker_describeHubCmd.MarkFlagRequired("hub-name")
+		sagemaker_describeHubCmd.Flags().String("hub-name", "", "The name of the hub to describe.")
+		sagemaker_describeHubCmd.MarkFlagRequired("hub-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeHubCmd)
 }

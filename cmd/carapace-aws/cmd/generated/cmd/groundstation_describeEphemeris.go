@@ -12,9 +12,11 @@ var groundstation_describeEphemerisCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(groundstation_describeEphemerisCmd).Standalone()
+	carapace.Gen(groundstation_describeEphemerisCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(groundstation_describeEphemerisCmd).Standalone()
 
-	groundstation_describeEphemerisCmd.Flags().String("ephemeris-id", "", "The AWS Ground Station ephemeris ID.")
-	groundstation_describeEphemerisCmd.MarkFlagRequired("ephemeris-id")
+		groundstation_describeEphemerisCmd.Flags().String("ephemeris-id", "", "The AWS Ground Station ephemeris ID.")
+		groundstation_describeEphemerisCmd.MarkFlagRequired("ephemeris-id")
+	})
 	groundstationCmd.AddCommand(groundstation_describeEphemerisCmd)
 }

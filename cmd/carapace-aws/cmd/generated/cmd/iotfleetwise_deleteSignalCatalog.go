@@ -12,9 +12,11 @@ var iotfleetwise_deleteSignalCatalogCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_deleteSignalCatalogCmd).Standalone()
+	carapace.Gen(iotfleetwise_deleteSignalCatalogCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_deleteSignalCatalogCmd).Standalone()
 
-	iotfleetwise_deleteSignalCatalogCmd.Flags().String("name", "", "The name of the signal catalog to delete.")
-	iotfleetwise_deleteSignalCatalogCmd.MarkFlagRequired("name")
+		iotfleetwise_deleteSignalCatalogCmd.Flags().String("name", "", "The name of the signal catalog to delete.")
+		iotfleetwise_deleteSignalCatalogCmd.MarkFlagRequired("name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_deleteSignalCatalogCmd)
 }

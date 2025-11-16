@@ -12,11 +12,13 @@ var chime_batchUnsuspendUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_batchUnsuspendUserCmd).Standalone()
+	carapace.Gen(chime_batchUnsuspendUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_batchUnsuspendUserCmd).Standalone()
 
-	chime_batchUnsuspendUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_batchUnsuspendUserCmd.Flags().String("user-id-list", "", "The request containing the user IDs to unsuspend.")
-	chime_batchUnsuspendUserCmd.MarkFlagRequired("account-id")
-	chime_batchUnsuspendUserCmd.MarkFlagRequired("user-id-list")
+		chime_batchUnsuspendUserCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_batchUnsuspendUserCmd.Flags().String("user-id-list", "", "The request containing the user IDs to unsuspend.")
+		chime_batchUnsuspendUserCmd.MarkFlagRequired("account-id")
+		chime_batchUnsuspendUserCmd.MarkFlagRequired("user-id-list")
+	})
 	chimeCmd.AddCommand(chime_batchUnsuspendUserCmd)
 }

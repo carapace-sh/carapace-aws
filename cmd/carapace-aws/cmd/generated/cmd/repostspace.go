@@ -12,7 +12,9 @@ var repostspaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(repostspaceCmd).Standalone()
+	carapace.Gen(repostspaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(repostspaceCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(repostspaceCmd)
 }

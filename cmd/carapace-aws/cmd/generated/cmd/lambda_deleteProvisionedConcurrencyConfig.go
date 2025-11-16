@@ -12,11 +12,13 @@ var lambda_deleteProvisionedConcurrencyConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_deleteProvisionedConcurrencyConfigCmd).Standalone()
+	carapace.Gen(lambda_deleteProvisionedConcurrencyConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_deleteProvisionedConcurrencyConfigCmd).Standalone()
 
-	lambda_deleteProvisionedConcurrencyConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
-	lambda_deleteProvisionedConcurrencyConfigCmd.Flags().String("qualifier", "", "The version number or alias name.")
-	lambda_deleteProvisionedConcurrencyConfigCmd.MarkFlagRequired("function-name")
-	lambda_deleteProvisionedConcurrencyConfigCmd.MarkFlagRequired("qualifier")
+		lambda_deleteProvisionedConcurrencyConfigCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function.")
+		lambda_deleteProvisionedConcurrencyConfigCmd.Flags().String("qualifier", "", "The version number or alias name.")
+		lambda_deleteProvisionedConcurrencyConfigCmd.MarkFlagRequired("function-name")
+		lambda_deleteProvisionedConcurrencyConfigCmd.MarkFlagRequired("qualifier")
+	})
 	lambdaCmd.AddCommand(lambda_deleteProvisionedConcurrencyConfigCmd)
 }

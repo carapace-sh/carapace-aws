@@ -12,9 +12,11 @@ var iotManagedIntegrations_getDestinationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getDestinationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getDestinationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getDestinationCmd).Standalone()
 
-	iotManagedIntegrations_getDestinationCmd.Flags().String("name", "", "The name of the customer-managed destination.")
-	iotManagedIntegrations_getDestinationCmd.MarkFlagRequired("name")
+		iotManagedIntegrations_getDestinationCmd.Flags().String("name", "", "The name of the customer-managed destination.")
+		iotManagedIntegrations_getDestinationCmd.MarkFlagRequired("name")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getDestinationCmd)
 }

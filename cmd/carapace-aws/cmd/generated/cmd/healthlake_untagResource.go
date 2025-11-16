@@ -12,11 +12,13 @@ var healthlake_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(healthlake_untagResourceCmd).Standalone()
+	carapace.Gen(healthlake_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(healthlake_untagResourceCmd).Standalone()
 
-	healthlake_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the data store from which tags are being removed.")
-	healthlake_untagResourceCmd.Flags().String("tag-keys", "", "The keys for the tags to be removed from the data store.")
-	healthlake_untagResourceCmd.MarkFlagRequired("resource-arn")
-	healthlake_untagResourceCmd.MarkFlagRequired("tag-keys")
+		healthlake_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the data store from which tags are being removed.")
+		healthlake_untagResourceCmd.Flags().String("tag-keys", "", "The keys for the tags to be removed from the data store.")
+		healthlake_untagResourceCmd.MarkFlagRequired("resource-arn")
+		healthlake_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	healthlakeCmd.AddCommand(healthlake_untagResourceCmd)
 }

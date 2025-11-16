@@ -12,10 +12,12 @@ var s3_getBucketLifecycleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_getBucketLifecycleCmd).Standalone()
+	carapace.Gen(s3_getBucketLifecycleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_getBucketLifecycleCmd).Standalone()
 
-	s3_getBucketLifecycleCmd.Flags().String("bucket", "", "The name of the bucket for which to get the lifecycle information.")
-	s3_getBucketLifecycleCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_getBucketLifecycleCmd.MarkFlagRequired("bucket")
+		s3_getBucketLifecycleCmd.Flags().String("bucket", "", "The name of the bucket for which to get the lifecycle information.")
+		s3_getBucketLifecycleCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_getBucketLifecycleCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_getBucketLifecycleCmd)
 }

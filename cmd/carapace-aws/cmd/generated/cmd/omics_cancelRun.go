@@ -12,9 +12,11 @@ var omics_cancelRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_cancelRunCmd).Standalone()
+	carapace.Gen(omics_cancelRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_cancelRunCmd).Standalone()
 
-	omics_cancelRunCmd.Flags().String("id", "", "The run's ID.")
-	omics_cancelRunCmd.MarkFlagRequired("id")
+		omics_cancelRunCmd.Flags().String("id", "", "The run's ID.")
+		omics_cancelRunCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_cancelRunCmd)
 }

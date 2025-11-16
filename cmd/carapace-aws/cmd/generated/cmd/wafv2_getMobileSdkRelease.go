@@ -12,11 +12,13 @@ var wafv2_getMobileSdkReleaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_getMobileSdkReleaseCmd).Standalone()
+	carapace.Gen(wafv2_getMobileSdkReleaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_getMobileSdkReleaseCmd).Standalone()
 
-	wafv2_getMobileSdkReleaseCmd.Flags().String("platform", "", "The device platform.")
-	wafv2_getMobileSdkReleaseCmd.Flags().String("release-version", "", "The release version.")
-	wafv2_getMobileSdkReleaseCmd.MarkFlagRequired("platform")
-	wafv2_getMobileSdkReleaseCmd.MarkFlagRequired("release-version")
+		wafv2_getMobileSdkReleaseCmd.Flags().String("platform", "", "The device platform.")
+		wafv2_getMobileSdkReleaseCmd.Flags().String("release-version", "", "The release version.")
+		wafv2_getMobileSdkReleaseCmd.MarkFlagRequired("platform")
+		wafv2_getMobileSdkReleaseCmd.MarkFlagRequired("release-version")
+	})
 	wafv2Cmd.AddCommand(wafv2_getMobileSdkReleaseCmd)
 }

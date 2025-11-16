@@ -12,13 +12,15 @@ var kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd).Standalone()
+	carapace.Gen(kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd).Standalone()
 
-	kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.Flags().String("application-name", "", "The Kinesis Analytics application name.")
-	kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.Flags().String("cloud-watch-logging-option", "", "Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role ARN.")
-	kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.Flags().String("current-application-version-id", "", "The version ID of the Kinesis Analytics application.")
-	kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("application-name")
-	kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("cloud-watch-logging-option")
-	kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("current-application-version-id")
+		kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.Flags().String("application-name", "", "The Kinesis Analytics application name.")
+		kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.Flags().String("cloud-watch-logging-option", "", "Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role ARN.")
+		kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.Flags().String("current-application-version-id", "", "The version ID of the Kinesis Analytics application.")
+		kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("application-name")
+		kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("cloud-watch-logging-option")
+		kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd.MarkFlagRequired("current-application-version-id")
+	})
 	kinesisanalyticsCmd.AddCommand(kinesisanalytics_addApplicationCloudWatchLoggingOptionCmd)
 }

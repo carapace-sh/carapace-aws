@@ -12,9 +12,11 @@ var route53_getDnssecCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_getDnssecCmd).Standalone()
+	carapace.Gen(route53_getDnssecCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_getDnssecCmd).Standalone()
 
-	route53_getDnssecCmd.Flags().String("hosted-zone-id", "", "A unique string used to identify a hosted zone.")
-	route53_getDnssecCmd.MarkFlagRequired("hosted-zone-id")
+		route53_getDnssecCmd.Flags().String("hosted-zone-id", "", "A unique string used to identify a hosted zone.")
+		route53_getDnssecCmd.MarkFlagRequired("hosted-zone-id")
+	})
 	route53Cmd.AddCommand(route53_getDnssecCmd)
 }

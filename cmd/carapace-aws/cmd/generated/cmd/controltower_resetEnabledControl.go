@@ -12,9 +12,11 @@ var controltower_resetEnabledControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(controltower_resetEnabledControlCmd).Standalone()
+	carapace.Gen(controltower_resetEnabledControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(controltower_resetEnabledControlCmd).Standalone()
 
-	controltower_resetEnabledControlCmd.Flags().String("enabled-control-identifier", "", "The ARN of the enabled control to be reset.")
-	controltower_resetEnabledControlCmd.MarkFlagRequired("enabled-control-identifier")
+		controltower_resetEnabledControlCmd.Flags().String("enabled-control-identifier", "", "The ARN of the enabled control to be reset.")
+		controltower_resetEnabledControlCmd.MarkFlagRequired("enabled-control-identifier")
+	})
 	controltowerCmd.AddCommand(controltower_resetEnabledControlCmd)
 }

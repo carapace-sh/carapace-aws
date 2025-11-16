@@ -12,9 +12,11 @@ var elastictranscoder_deletePresetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elastictranscoder_deletePresetCmd).Standalone()
+	carapace.Gen(elastictranscoder_deletePresetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elastictranscoder_deletePresetCmd).Standalone()
 
-	elastictranscoder_deletePresetCmd.Flags().String("id", "", "The identifier of the preset for which you want to get detailed information.")
-	elastictranscoder_deletePresetCmd.MarkFlagRequired("id")
+		elastictranscoder_deletePresetCmd.Flags().String("id", "", "The identifier of the preset for which you want to get detailed information.")
+		elastictranscoder_deletePresetCmd.MarkFlagRequired("id")
+	})
 	elastictranscoderCmd.AddCommand(elastictranscoder_deletePresetCmd)
 }

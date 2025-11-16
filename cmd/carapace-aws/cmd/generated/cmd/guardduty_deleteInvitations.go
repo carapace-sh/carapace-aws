@@ -12,9 +12,11 @@ var guardduty_deleteInvitationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_deleteInvitationsCmd).Standalone()
+	carapace.Gen(guardduty_deleteInvitationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_deleteInvitationsCmd).Standalone()
 
-	guardduty_deleteInvitationsCmd.Flags().String("account-ids", "", "A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to delete invitations from.")
-	guardduty_deleteInvitationsCmd.MarkFlagRequired("account-ids")
+		guardduty_deleteInvitationsCmd.Flags().String("account-ids", "", "A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to delete invitations from.")
+		guardduty_deleteInvitationsCmd.MarkFlagRequired("account-ids")
+	})
 	guarddutyCmd.AddCommand(guardduty_deleteInvitationsCmd)
 }

@@ -12,9 +12,11 @@ var cloudwatch_startMetricStreamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudwatch_startMetricStreamsCmd).Standalone()
+	carapace.Gen(cloudwatch_startMetricStreamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudwatch_startMetricStreamsCmd).Standalone()
 
-	cloudwatch_startMetricStreamsCmd.Flags().String("names", "", "The array of the names of metric streams to start streaming.")
-	cloudwatch_startMetricStreamsCmd.MarkFlagRequired("names")
+		cloudwatch_startMetricStreamsCmd.Flags().String("names", "", "The array of the names of metric streams to start streaming.")
+		cloudwatch_startMetricStreamsCmd.MarkFlagRequired("names")
+	})
 	cloudwatchCmd.AddCommand(cloudwatch_startMetricStreamsCmd)
 }

@@ -12,7 +12,9 @@ var ssmGuiconnectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmGuiconnectCmd).Standalone()
+	carapace.Gen(ssmGuiconnectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmGuiconnectCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ssmGuiconnectCmd)
 }

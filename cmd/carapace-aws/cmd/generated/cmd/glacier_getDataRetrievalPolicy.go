@@ -12,9 +12,11 @@ var glacier_getDataRetrievalPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glacier_getDataRetrievalPolicyCmd).Standalone()
+	carapace.Gen(glacier_getDataRetrievalPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glacier_getDataRetrievalPolicyCmd).Standalone()
 
-	glacier_getDataRetrievalPolicyCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
-	glacier_getDataRetrievalPolicyCmd.MarkFlagRequired("account-id")
+		glacier_getDataRetrievalPolicyCmd.Flags().String("account-id", "", "The `AccountId` value is the AWS account ID.")
+		glacier_getDataRetrievalPolicyCmd.MarkFlagRequired("account-id")
+	})
 	glacierCmd.AddCommand(glacier_getDataRetrievalPolicyCmd)
 }

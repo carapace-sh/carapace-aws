@@ -12,11 +12,13 @@ var qbusiness_deleteWebExperienceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_deleteWebExperienceCmd).Standalone()
+	carapace.Gen(qbusiness_deleteWebExperienceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_deleteWebExperienceCmd).Standalone()
 
-	qbusiness_deleteWebExperienceCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application linked to the Amazon Q Business web experience.")
-	qbusiness_deleteWebExperienceCmd.Flags().String("web-experience-id", "", "The identifier of the Amazon Q Business web experience being deleted.")
-	qbusiness_deleteWebExperienceCmd.MarkFlagRequired("application-id")
-	qbusiness_deleteWebExperienceCmd.MarkFlagRequired("web-experience-id")
+		qbusiness_deleteWebExperienceCmd.Flags().String("application-id", "", "The identifier of the Amazon Q Business application linked to the Amazon Q Business web experience.")
+		qbusiness_deleteWebExperienceCmd.Flags().String("web-experience-id", "", "The identifier of the Amazon Q Business web experience being deleted.")
+		qbusiness_deleteWebExperienceCmd.MarkFlagRequired("application-id")
+		qbusiness_deleteWebExperienceCmd.MarkFlagRequired("web-experience-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_deleteWebExperienceCmd)
 }

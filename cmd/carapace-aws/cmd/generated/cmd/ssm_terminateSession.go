@@ -12,9 +12,11 @@ var ssm_terminateSessionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_terminateSessionCmd).Standalone()
+	carapace.Gen(ssm_terminateSessionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_terminateSessionCmd).Standalone()
 
-	ssm_terminateSessionCmd.Flags().String("session-id", "", "The ID of the session to terminate.")
-	ssm_terminateSessionCmd.MarkFlagRequired("session-id")
+		ssm_terminateSessionCmd.Flags().String("session-id", "", "The ID of the session to terminate.")
+		ssm_terminateSessionCmd.MarkFlagRequired("session-id")
+	})
 	ssmCmd.AddCommand(ssm_terminateSessionCmd)
 }

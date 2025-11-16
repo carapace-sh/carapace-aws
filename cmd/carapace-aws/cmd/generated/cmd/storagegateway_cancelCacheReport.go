@@ -12,9 +12,11 @@ var storagegateway_cancelCacheReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_cancelCacheReportCmd).Standalone()
+	carapace.Gen(storagegateway_cancelCacheReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_cancelCacheReportCmd).Standalone()
 
-	storagegateway_cancelCacheReportCmd.Flags().String("cache-report-arn", "", "The Amazon Resource Name (ARN) of the cache report you want to cancel.")
-	storagegateway_cancelCacheReportCmd.MarkFlagRequired("cache-report-arn")
+		storagegateway_cancelCacheReportCmd.Flags().String("cache-report-arn", "", "The Amazon Resource Name (ARN) of the cache report you want to cancel.")
+		storagegateway_cancelCacheReportCmd.MarkFlagRequired("cache-report-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_cancelCacheReportCmd)
 }

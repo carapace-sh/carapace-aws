@@ -12,9 +12,11 @@ var sagemaker_stopInferenceRecommendationsJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopInferenceRecommendationsJobCmd).Standalone()
+	carapace.Gen(sagemaker_stopInferenceRecommendationsJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopInferenceRecommendationsJobCmd).Standalone()
 
-	sagemaker_stopInferenceRecommendationsJobCmd.Flags().String("job-name", "", "The name of the job you want to stop.")
-	sagemaker_stopInferenceRecommendationsJobCmd.MarkFlagRequired("job-name")
+		sagemaker_stopInferenceRecommendationsJobCmd.Flags().String("job-name", "", "The name of the job you want to stop.")
+		sagemaker_stopInferenceRecommendationsJobCmd.MarkFlagRequired("job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopInferenceRecommendationsJobCmd)
 }

@@ -12,10 +12,12 @@ var neptunedata_listGremlinQueriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_listGremlinQueriesCmd).Standalone()
+	carapace.Gen(neptunedata_listGremlinQueriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_listGremlinQueriesCmd).Standalone()
 
-	neptunedata_listGremlinQueriesCmd.Flags().Bool("include-waiting", false, "If set to `TRUE`, the list returned includes waiting queries.")
-	neptunedata_listGremlinQueriesCmd.Flags().Bool("no-include-waiting", false, "If set to `TRUE`, the list returned includes waiting queries.")
-	neptunedata_listGremlinQueriesCmd.Flag("no-include-waiting").Hidden = true
+		neptunedata_listGremlinQueriesCmd.Flags().Bool("include-waiting", false, "If set to `TRUE`, the list returned includes waiting queries.")
+		neptunedata_listGremlinQueriesCmd.Flags().Bool("no-include-waiting", false, "If set to `TRUE`, the list returned includes waiting queries.")
+		neptunedata_listGremlinQueriesCmd.Flag("no-include-waiting").Hidden = true
+	})
 	neptunedataCmd.AddCommand(neptunedata_listGremlinQueriesCmd)
 }

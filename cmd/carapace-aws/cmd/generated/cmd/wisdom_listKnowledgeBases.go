@@ -12,9 +12,11 @@ var wisdom_listKnowledgeBasesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_listKnowledgeBasesCmd).Standalone()
+	carapace.Gen(wisdom_listKnowledgeBasesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_listKnowledgeBasesCmd).Standalone()
 
-	wisdom_listKnowledgeBasesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	wisdom_listKnowledgeBasesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		wisdom_listKnowledgeBasesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		wisdom_listKnowledgeBasesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	wisdomCmd.AddCommand(wisdom_listKnowledgeBasesCmd)
 }

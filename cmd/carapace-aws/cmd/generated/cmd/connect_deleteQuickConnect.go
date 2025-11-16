@@ -12,11 +12,13 @@ var connect_deleteQuickConnectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_deleteQuickConnectCmd).Standalone()
+	carapace.Gen(connect_deleteQuickConnectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_deleteQuickConnectCmd).Standalone()
 
-	connect_deleteQuickConnectCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_deleteQuickConnectCmd.Flags().String("quick-connect-id", "", "The identifier for the quick connect.")
-	connect_deleteQuickConnectCmd.MarkFlagRequired("instance-id")
-	connect_deleteQuickConnectCmd.MarkFlagRequired("quick-connect-id")
+		connect_deleteQuickConnectCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_deleteQuickConnectCmd.Flags().String("quick-connect-id", "", "The identifier for the quick connect.")
+		connect_deleteQuickConnectCmd.MarkFlagRequired("instance-id")
+		connect_deleteQuickConnectCmd.MarkFlagRequired("quick-connect-id")
+	})
 	connectCmd.AddCommand(connect_deleteQuickConnectCmd)
 }

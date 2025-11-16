@@ -12,11 +12,13 @@ var iot_setV2LoggingLevelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_setV2LoggingLevelCmd).Standalone()
+	carapace.Gen(iot_setV2LoggingLevelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_setV2LoggingLevelCmd).Standalone()
 
-	iot_setV2LoggingLevelCmd.Flags().String("log-level", "", "The log level.")
-	iot_setV2LoggingLevelCmd.Flags().String("log-target", "", "The log target.")
-	iot_setV2LoggingLevelCmd.MarkFlagRequired("log-level")
-	iot_setV2LoggingLevelCmd.MarkFlagRequired("log-target")
+		iot_setV2LoggingLevelCmd.Flags().String("log-level", "", "The log level.")
+		iot_setV2LoggingLevelCmd.Flags().String("log-target", "", "The log target.")
+		iot_setV2LoggingLevelCmd.MarkFlagRequired("log-level")
+		iot_setV2LoggingLevelCmd.MarkFlagRequired("log-target")
+	})
 	iotCmd.AddCommand(iot_setV2LoggingLevelCmd)
 }

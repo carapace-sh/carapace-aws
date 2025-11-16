@@ -12,11 +12,13 @@ var clouddirectory_createDirectoryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_createDirectoryCmd).Standalone()
+	carapace.Gen(clouddirectory_createDirectoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_createDirectoryCmd).Standalone()
 
-	clouddirectory_createDirectoryCmd.Flags().String("name", "", "The name of the [Directory]().")
-	clouddirectory_createDirectoryCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) of the published schema that will be copied into the data [Directory]().")
-	clouddirectory_createDirectoryCmd.MarkFlagRequired("name")
-	clouddirectory_createDirectoryCmd.MarkFlagRequired("schema-arn")
+		clouddirectory_createDirectoryCmd.Flags().String("name", "", "The name of the [Directory]().")
+		clouddirectory_createDirectoryCmd.Flags().String("schema-arn", "", "The Amazon Resource Name (ARN) of the published schema that will be copied into the data [Directory]().")
+		clouddirectory_createDirectoryCmd.MarkFlagRequired("name")
+		clouddirectory_createDirectoryCmd.MarkFlagRequired("schema-arn")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_createDirectoryCmd)
 }

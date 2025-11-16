@@ -12,12 +12,14 @@ var qconnect_createMessageTemplateVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_createMessageTemplateVersionCmd).Standalone()
+	carapace.Gen(qconnect_createMessageTemplateVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_createMessageTemplateVersionCmd).Standalone()
 
-	qconnect_createMessageTemplateVersionCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_createMessageTemplateVersionCmd.Flags().String("message-template-content-sha256", "", "The checksum value of the message template content that is referenced by the `$LATEST` qualifier.")
-	qconnect_createMessageTemplateVersionCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
-	qconnect_createMessageTemplateVersionCmd.MarkFlagRequired("knowledge-base-id")
-	qconnect_createMessageTemplateVersionCmd.MarkFlagRequired("message-template-id")
+		qconnect_createMessageTemplateVersionCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_createMessageTemplateVersionCmd.Flags().String("message-template-content-sha256", "", "The checksum value of the message template content that is referenced by the `$LATEST` qualifier.")
+		qconnect_createMessageTemplateVersionCmd.Flags().String("message-template-id", "", "The identifier of the message template.")
+		qconnect_createMessageTemplateVersionCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_createMessageTemplateVersionCmd.MarkFlagRequired("message-template-id")
+	})
 	qconnectCmd.AddCommand(qconnect_createMessageTemplateVersionCmd)
 }

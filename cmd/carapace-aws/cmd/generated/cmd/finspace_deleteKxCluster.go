@@ -12,12 +12,14 @@ var finspace_deleteKxClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_deleteKxClusterCmd).Standalone()
+	carapace.Gen(finspace_deleteKxClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_deleteKxClusterCmd).Standalone()
 
-	finspace_deleteKxClusterCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
-	finspace_deleteKxClusterCmd.Flags().String("cluster-name", "", "The name of the cluster that you want to delete.")
-	finspace_deleteKxClusterCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_deleteKxClusterCmd.MarkFlagRequired("cluster-name")
-	finspace_deleteKxClusterCmd.MarkFlagRequired("environment-id")
+		finspace_deleteKxClusterCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
+		finspace_deleteKxClusterCmd.Flags().String("cluster-name", "", "The name of the cluster that you want to delete.")
+		finspace_deleteKxClusterCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_deleteKxClusterCmd.MarkFlagRequired("cluster-name")
+		finspace_deleteKxClusterCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_deleteKxClusterCmd)
 }

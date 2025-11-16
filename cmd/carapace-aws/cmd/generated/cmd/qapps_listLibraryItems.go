@@ -12,12 +12,14 @@ var qapps_listLibraryItemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_listLibraryItemsCmd).Standalone()
+	carapace.Gen(qapps_listLibraryItemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_listLibraryItemsCmd).Standalone()
 
-	qapps_listLibraryItemsCmd.Flags().String("category-id", "", "Optional category to filter the library items by.")
-	qapps_listLibraryItemsCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_listLibraryItemsCmd.Flags().String("limit", "", "The maximum number of library items to return in the response.")
-	qapps_listLibraryItemsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
-	qapps_listLibraryItemsCmd.MarkFlagRequired("instance-id")
+		qapps_listLibraryItemsCmd.Flags().String("category-id", "", "Optional category to filter the library items by.")
+		qapps_listLibraryItemsCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_listLibraryItemsCmd.Flags().String("limit", "", "The maximum number of library items to return in the response.")
+		qapps_listLibraryItemsCmd.Flags().String("next-token", "", "The token to request the next page of results.")
+		qapps_listLibraryItemsCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_listLibraryItemsCmd)
 }

@@ -12,11 +12,13 @@ var chatbot_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chatbot_untagResourceCmd).Standalone()
+	carapace.Gen(chatbot_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chatbot_untagResourceCmd).Standalone()
 
-	chatbot_untagResourceCmd.Flags().String("resource-arn", "", "The value of the resource that will have the tag removed.")
-	chatbot_untagResourceCmd.Flags().String("tag-keys", "", "TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type.")
-	chatbot_untagResourceCmd.MarkFlagRequired("resource-arn")
-	chatbot_untagResourceCmd.MarkFlagRequired("tag-keys")
+		chatbot_untagResourceCmd.Flags().String("resource-arn", "", "The value of the resource that will have the tag removed.")
+		chatbot_untagResourceCmd.Flags().String("tag-keys", "", "TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type.")
+		chatbot_untagResourceCmd.MarkFlagRequired("resource-arn")
+		chatbot_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	chatbotCmd.AddCommand(chatbot_untagResourceCmd)
 }

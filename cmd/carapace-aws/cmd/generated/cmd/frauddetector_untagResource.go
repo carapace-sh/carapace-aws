@@ -12,11 +12,13 @@ var frauddetector_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_untagResourceCmd).Standalone()
+	carapace.Gen(frauddetector_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_untagResourceCmd).Standalone()
 
-	frauddetector_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource from which to remove the tag.")
-	frauddetector_untagResourceCmd.Flags().String("tag-keys", "", "The resource ARN.")
-	frauddetector_untagResourceCmd.MarkFlagRequired("resource-arn")
-	frauddetector_untagResourceCmd.MarkFlagRequired("tag-keys")
+		frauddetector_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource from which to remove the tag.")
+		frauddetector_untagResourceCmd.Flags().String("tag-keys", "", "The resource ARN.")
+		frauddetector_untagResourceCmd.MarkFlagRequired("resource-arn")
+		frauddetector_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_untagResourceCmd)
 }

@@ -12,9 +12,11 @@ var codebuild_stopBuildBatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_stopBuildBatchCmd).Standalone()
+	carapace.Gen(codebuild_stopBuildBatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_stopBuildBatchCmd).Standalone()
 
-	codebuild_stopBuildBatchCmd.Flags().String("id", "", "The identifier of the batch build to stop.")
-	codebuild_stopBuildBatchCmd.MarkFlagRequired("id")
+		codebuild_stopBuildBatchCmd.Flags().String("id", "", "The identifier of the batch build to stop.")
+		codebuild_stopBuildBatchCmd.MarkFlagRequired("id")
+	})
 	codebuildCmd.AddCommand(codebuild_stopBuildBatchCmd)
 }

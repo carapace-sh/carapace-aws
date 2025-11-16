@@ -12,13 +12,15 @@ var timestreamQuery_executeScheduledQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamQuery_executeScheduledQueryCmd).Standalone()
+	carapace.Gen(timestreamQuery_executeScheduledQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamQuery_executeScheduledQueryCmd).Standalone()
 
-	timestreamQuery_executeScheduledQueryCmd.Flags().String("client-token", "", "Not used.")
-	timestreamQuery_executeScheduledQueryCmd.Flags().String("invocation-time", "", "The timestamp in UTC.")
-	timestreamQuery_executeScheduledQueryCmd.Flags().String("query-insights", "", "Encapsulates settings for enabling `QueryInsights`.")
-	timestreamQuery_executeScheduledQueryCmd.Flags().String("scheduled-query-arn", "", "ARN of the scheduled query.")
-	timestreamQuery_executeScheduledQueryCmd.MarkFlagRequired("invocation-time")
-	timestreamQuery_executeScheduledQueryCmd.MarkFlagRequired("scheduled-query-arn")
+		timestreamQuery_executeScheduledQueryCmd.Flags().String("client-token", "", "Not used.")
+		timestreamQuery_executeScheduledQueryCmd.Flags().String("invocation-time", "", "The timestamp in UTC.")
+		timestreamQuery_executeScheduledQueryCmd.Flags().String("query-insights", "", "Encapsulates settings for enabling `QueryInsights`.")
+		timestreamQuery_executeScheduledQueryCmd.Flags().String("scheduled-query-arn", "", "ARN of the scheduled query.")
+		timestreamQuery_executeScheduledQueryCmd.MarkFlagRequired("invocation-time")
+		timestreamQuery_executeScheduledQueryCmd.MarkFlagRequired("scheduled-query-arn")
+	})
 	timestreamQueryCmd.AddCommand(timestreamQuery_executeScheduledQueryCmd)
 }

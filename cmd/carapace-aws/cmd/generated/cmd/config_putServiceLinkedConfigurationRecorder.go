@@ -12,10 +12,12 @@ var config_putServiceLinkedConfigurationRecorderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_putServiceLinkedConfigurationRecorderCmd).Standalone()
+	carapace.Gen(config_putServiceLinkedConfigurationRecorderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_putServiceLinkedConfigurationRecorderCmd).Standalone()
 
-	config_putServiceLinkedConfigurationRecorderCmd.Flags().String("service-principal", "", "The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to create.")
-	config_putServiceLinkedConfigurationRecorderCmd.Flags().String("tags", "", "The tags for a service-linked configuration recorder.")
-	config_putServiceLinkedConfigurationRecorderCmd.MarkFlagRequired("service-principal")
+		config_putServiceLinkedConfigurationRecorderCmd.Flags().String("service-principal", "", "The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to create.")
+		config_putServiceLinkedConfigurationRecorderCmd.Flags().String("tags", "", "The tags for a service-linked configuration recorder.")
+		config_putServiceLinkedConfigurationRecorderCmd.MarkFlagRequired("service-principal")
+	})
 	configCmd.AddCommand(config_putServiceLinkedConfigurationRecorderCmd)
 }

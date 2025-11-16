@@ -12,9 +12,11 @@ var waf_getGeoMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_getGeoMatchSetCmd).Standalone()
+	carapace.Gen(waf_getGeoMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_getGeoMatchSetCmd).Standalone()
 
-	waf_getGeoMatchSetCmd.Flags().String("geo-match-set-id", "", "The `GeoMatchSetId` of the [GeoMatchSet]() that you want to get.")
-	waf_getGeoMatchSetCmd.MarkFlagRequired("geo-match-set-id")
+		waf_getGeoMatchSetCmd.Flags().String("geo-match-set-id", "", "The `GeoMatchSetId` of the [GeoMatchSet]() that you want to get.")
+		waf_getGeoMatchSetCmd.MarkFlagRequired("geo-match-set-id")
+	})
 	wafCmd.AddCommand(waf_getGeoMatchSetCmd)
 }

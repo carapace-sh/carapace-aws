@@ -12,10 +12,12 @@ var clouddirectory_listManagedSchemaArnsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_listManagedSchemaArnsCmd).Standalone()
+	carapace.Gen(clouddirectory_listManagedSchemaArnsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_listManagedSchemaArnsCmd).Standalone()
 
-	clouddirectory_listManagedSchemaArnsCmd.Flags().String("max-results", "", "The maximum number of results to retrieve.")
-	clouddirectory_listManagedSchemaArnsCmd.Flags().String("next-token", "", "The pagination token.")
-	clouddirectory_listManagedSchemaArnsCmd.Flags().String("schema-arn", "", "The response for ListManagedSchemaArns.")
+		clouddirectory_listManagedSchemaArnsCmd.Flags().String("max-results", "", "The maximum number of results to retrieve.")
+		clouddirectory_listManagedSchemaArnsCmd.Flags().String("next-token", "", "The pagination token.")
+		clouddirectory_listManagedSchemaArnsCmd.Flags().String("schema-arn", "", "The response for ListManagedSchemaArns.")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_listManagedSchemaArnsCmd)
 }

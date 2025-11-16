@@ -12,12 +12,14 @@ var chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd = &cobra.Comma
 }
 
 func init() {
-	carapace.Gen(chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd).Standalone()
+	carapace.Gen(chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd).Standalone()
 
-	chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.Flags().String("app-instance-user-arn", "", "The ARN of the user or bot.")
-	chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
-	chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.Flags().String("max-results", "", "The maximum number of users that you want returned.")
-	chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.Flags().String("next-token", "", "The token returned from previous API requests until the number of channel memberships is reached.")
-	chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.MarkFlagRequired("chime-bearer")
+		chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.Flags().String("app-instance-user-arn", "", "The ARN of the user or bot.")
+		chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.Flags().String("chime-bearer", "", "The ARN of the `AppInstanceUser` or `AppInstanceBot` that makes the API call.")
+		chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.Flags().String("max-results", "", "The maximum number of users that you want returned.")
+		chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.Flags().String("next-token", "", "The token returned from previous API requests until the number of channel memberships is reached.")
+		chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd.MarkFlagRequired("chime-bearer")
+	})
 	chimeSdkMessagingCmd.AddCommand(chimeSdkMessaging_listChannelMembershipsForAppInstanceUserCmd)
 }

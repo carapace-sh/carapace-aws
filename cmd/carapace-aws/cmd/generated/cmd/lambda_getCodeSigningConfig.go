@@ -12,9 +12,11 @@ var lambda_getCodeSigningConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_getCodeSigningConfigCmd).Standalone()
+	carapace.Gen(lambda_getCodeSigningConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_getCodeSigningConfigCmd).Standalone()
 
-	lambda_getCodeSigningConfigCmd.Flags().String("code-signing-config-arn", "", "The The Amazon Resource Name (ARN) of the code signing configuration.")
-	lambda_getCodeSigningConfigCmd.MarkFlagRequired("code-signing-config-arn")
+		lambda_getCodeSigningConfigCmd.Flags().String("code-signing-config-arn", "", "The The Amazon Resource Name (ARN) of the code signing configuration.")
+		lambda_getCodeSigningConfigCmd.MarkFlagRequired("code-signing-config-arn")
+	})
 	lambdaCmd.AddCommand(lambda_getCodeSigningConfigCmd)
 }

@@ -12,11 +12,13 @@ var storagegateway_updateBandwidthRateLimitScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_updateBandwidthRateLimitScheduleCmd).Standalone()
+	carapace.Gen(storagegateway_updateBandwidthRateLimitScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_updateBandwidthRateLimitScheduleCmd).Standalone()
 
-	storagegateway_updateBandwidthRateLimitScheduleCmd.Flags().String("bandwidth-rate-limit-intervals", "", "An array containing bandwidth rate limit schedule intervals for a gateway.")
-	storagegateway_updateBandwidthRateLimitScheduleCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_updateBandwidthRateLimitScheduleCmd.MarkFlagRequired("bandwidth-rate-limit-intervals")
-	storagegateway_updateBandwidthRateLimitScheduleCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_updateBandwidthRateLimitScheduleCmd.Flags().String("bandwidth-rate-limit-intervals", "", "An array containing bandwidth rate limit schedule intervals for a gateway.")
+		storagegateway_updateBandwidthRateLimitScheduleCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_updateBandwidthRateLimitScheduleCmd.MarkFlagRequired("bandwidth-rate-limit-intervals")
+		storagegateway_updateBandwidthRateLimitScheduleCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_updateBandwidthRateLimitScheduleCmd)
 }

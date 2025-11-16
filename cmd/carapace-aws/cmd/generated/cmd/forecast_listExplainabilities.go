@@ -12,10 +12,12 @@ var forecast_listExplainabilitiesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_listExplainabilitiesCmd).Standalone()
+	carapace.Gen(forecast_listExplainabilitiesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_listExplainabilitiesCmd).Standalone()
 
-	forecast_listExplainabilitiesCmd.Flags().String("filters", "", "An array of filters.")
-	forecast_listExplainabilitiesCmd.Flags().String("max-results", "", "The number of items returned in the response.")
-	forecast_listExplainabilitiesCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a NextToken.")
+		forecast_listExplainabilitiesCmd.Flags().String("filters", "", "An array of filters.")
+		forecast_listExplainabilitiesCmd.Flags().String("max-results", "", "The number of items returned in the response.")
+		forecast_listExplainabilitiesCmd.Flags().String("next-token", "", "If the result of the previous request was truncated, the response includes a NextToken.")
+	})
 	forecastCmd.AddCommand(forecast_listExplainabilitiesCmd)
 }

@@ -12,11 +12,13 @@ var workmail_deleteResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_deleteResourceCmd).Standalone()
+	carapace.Gen(workmail_deleteResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_deleteResourceCmd).Standalone()
 
-	workmail_deleteResourceCmd.Flags().String("organization-id", "", "The identifier associated with the organization from which the resource is deleted.")
-	workmail_deleteResourceCmd.Flags().String("resource-id", "", "The identifier of the resource to be deleted.")
-	workmail_deleteResourceCmd.MarkFlagRequired("organization-id")
-	workmail_deleteResourceCmd.MarkFlagRequired("resource-id")
+		workmail_deleteResourceCmd.Flags().String("organization-id", "", "The identifier associated with the organization from which the resource is deleted.")
+		workmail_deleteResourceCmd.Flags().String("resource-id", "", "The identifier of the resource to be deleted.")
+		workmail_deleteResourceCmd.MarkFlagRequired("organization-id")
+		workmail_deleteResourceCmd.MarkFlagRequired("resource-id")
+	})
 	workmailCmd.AddCommand(workmail_deleteResourceCmd)
 }

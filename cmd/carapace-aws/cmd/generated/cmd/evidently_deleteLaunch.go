@@ -12,11 +12,13 @@ var evidently_deleteLaunchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_deleteLaunchCmd).Standalone()
+	carapace.Gen(evidently_deleteLaunchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_deleteLaunchCmd).Standalone()
 
-	evidently_deleteLaunchCmd.Flags().String("launch", "", "The name of the launch to delete.")
-	evidently_deleteLaunchCmd.Flags().String("project", "", "The name or ARN of the project that contains the launch to delete.")
-	evidently_deleteLaunchCmd.MarkFlagRequired("launch")
-	evidently_deleteLaunchCmd.MarkFlagRequired("project")
+		evidently_deleteLaunchCmd.Flags().String("launch", "", "The name of the launch to delete.")
+		evidently_deleteLaunchCmd.Flags().String("project", "", "The name or ARN of the project that contains the launch to delete.")
+		evidently_deleteLaunchCmd.MarkFlagRequired("launch")
+		evidently_deleteLaunchCmd.MarkFlagRequired("project")
+	})
 	evidentlyCmd.AddCommand(evidently_deleteLaunchCmd)
 }

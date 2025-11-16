@@ -12,9 +12,11 @@ var resourceGroups_getTagSyncTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceGroups_getTagSyncTaskCmd).Standalone()
+	carapace.Gen(resourceGroups_getTagSyncTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceGroups_getTagSyncTaskCmd).Standalone()
 
-	resourceGroups_getTagSyncTaskCmd.Flags().String("task-arn", "", "The Amazon resource name (ARN) of the tag-sync task.")
-	resourceGroups_getTagSyncTaskCmd.MarkFlagRequired("task-arn")
+		resourceGroups_getTagSyncTaskCmd.Flags().String("task-arn", "", "The Amazon resource name (ARN) of the tag-sync task.")
+		resourceGroups_getTagSyncTaskCmd.MarkFlagRequired("task-arn")
+	})
 	resourceGroupsCmd.AddCommand(resourceGroups_getTagSyncTaskCmd)
 }

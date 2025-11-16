@@ -12,11 +12,13 @@ var codeconnections_getResourceSyncStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeconnections_getResourceSyncStatusCmd).Standalone()
+	carapace.Gen(codeconnections_getResourceSyncStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeconnections_getResourceSyncStatusCmd).Standalone()
 
-	codeconnections_getResourceSyncStatusCmd.Flags().String("resource-name", "", "The name of the Amazon Web Services resource for the sync status with the Git repository.")
-	codeconnections_getResourceSyncStatusCmd.Flags().String("sync-type", "", "The sync type for the sync status with the Git repository.")
-	codeconnections_getResourceSyncStatusCmd.MarkFlagRequired("resource-name")
-	codeconnections_getResourceSyncStatusCmd.MarkFlagRequired("sync-type")
+		codeconnections_getResourceSyncStatusCmd.Flags().String("resource-name", "", "The name of the Amazon Web Services resource for the sync status with the Git repository.")
+		codeconnections_getResourceSyncStatusCmd.Flags().String("sync-type", "", "The sync type for the sync status with the Git repository.")
+		codeconnections_getResourceSyncStatusCmd.MarkFlagRequired("resource-name")
+		codeconnections_getResourceSyncStatusCmd.MarkFlagRequired("sync-type")
+	})
 	codeconnectionsCmd.AddCommand(codeconnections_getResourceSyncStatusCmd)
 }

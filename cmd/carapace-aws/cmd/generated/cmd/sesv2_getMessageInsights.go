@@ -12,9 +12,11 @@ var sesv2_getMessageInsightsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getMessageInsightsCmd).Standalone()
+	carapace.Gen(sesv2_getMessageInsightsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getMessageInsightsCmd).Standalone()
 
-	sesv2_getMessageInsightsCmd.Flags().String("message-id", "", "A `MessageId` is a unique identifier for a message, and is returned when sending emails through Amazon SES.")
-	sesv2_getMessageInsightsCmd.MarkFlagRequired("message-id")
+		sesv2_getMessageInsightsCmd.Flags().String("message-id", "", "A `MessageId` is a unique identifier for a message, and is returned when sending emails through Amazon SES.")
+		sesv2_getMessageInsightsCmd.MarkFlagRequired("message-id")
+	})
 	sesv2Cmd.AddCommand(sesv2_getMessageInsightsCmd)
 }

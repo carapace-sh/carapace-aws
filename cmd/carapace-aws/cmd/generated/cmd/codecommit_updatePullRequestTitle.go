@@ -12,11 +12,13 @@ var codecommit_updatePullRequestTitleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_updatePullRequestTitleCmd).Standalone()
+	carapace.Gen(codecommit_updatePullRequestTitleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_updatePullRequestTitleCmd).Standalone()
 
-	codecommit_updatePullRequestTitleCmd.Flags().String("pull-request-id", "", "The system-generated ID of the pull request.")
-	codecommit_updatePullRequestTitleCmd.Flags().String("title", "", "The updated title of the pull request.")
-	codecommit_updatePullRequestTitleCmd.MarkFlagRequired("pull-request-id")
-	codecommit_updatePullRequestTitleCmd.MarkFlagRequired("title")
+		codecommit_updatePullRequestTitleCmd.Flags().String("pull-request-id", "", "The system-generated ID of the pull request.")
+		codecommit_updatePullRequestTitleCmd.Flags().String("title", "", "The updated title of the pull request.")
+		codecommit_updatePullRequestTitleCmd.MarkFlagRequired("pull-request-id")
+		codecommit_updatePullRequestTitleCmd.MarkFlagRequired("title")
+	})
 	codecommitCmd.AddCommand(codecommit_updatePullRequestTitleCmd)
 }

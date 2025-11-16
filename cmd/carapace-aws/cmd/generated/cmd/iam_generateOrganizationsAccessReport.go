@@ -12,10 +12,12 @@ var iam_generateOrganizationsAccessReportCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_generateOrganizationsAccessReportCmd).Standalone()
+	carapace.Gen(iam_generateOrganizationsAccessReportCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_generateOrganizationsAccessReportCmd).Standalone()
 
-	iam_generateOrganizationsAccessReportCmd.Flags().String("entity-path", "", "The path of the Organizations entity (root, OU, or account).")
-	iam_generateOrganizationsAccessReportCmd.Flags().String("organizations-policy-id", "", "The identifier of the Organizations service control policy (SCP).")
-	iam_generateOrganizationsAccessReportCmd.MarkFlagRequired("entity-path")
+		iam_generateOrganizationsAccessReportCmd.Flags().String("entity-path", "", "The path of the Organizations entity (root, OU, or account).")
+		iam_generateOrganizationsAccessReportCmd.Flags().String("organizations-policy-id", "", "The identifier of the Organizations service control policy (SCP).")
+		iam_generateOrganizationsAccessReportCmd.MarkFlagRequired("entity-path")
+	})
 	iamCmd.AddCommand(iam_generateOrganizationsAccessReportCmd)
 }

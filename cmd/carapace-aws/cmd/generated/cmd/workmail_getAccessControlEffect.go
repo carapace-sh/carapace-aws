@@ -12,15 +12,17 @@ var workmail_getAccessControlEffectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_getAccessControlEffectCmd).Standalone()
+	carapace.Gen(workmail_getAccessControlEffectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_getAccessControlEffectCmd).Standalone()
 
-	workmail_getAccessControlEffectCmd.Flags().String("action", "", "The access protocol action.")
-	workmail_getAccessControlEffectCmd.Flags().String("impersonation-role-id", "", "The impersonation role ID.")
-	workmail_getAccessControlEffectCmd.Flags().String("ip-address", "", "The IPv4 address.")
-	workmail_getAccessControlEffectCmd.Flags().String("organization-id", "", "The identifier for the organization.")
-	workmail_getAccessControlEffectCmd.Flags().String("user-id", "", "The user ID.")
-	workmail_getAccessControlEffectCmd.MarkFlagRequired("action")
-	workmail_getAccessControlEffectCmd.MarkFlagRequired("ip-address")
-	workmail_getAccessControlEffectCmd.MarkFlagRequired("organization-id")
+		workmail_getAccessControlEffectCmd.Flags().String("action", "", "The access protocol action.")
+		workmail_getAccessControlEffectCmd.Flags().String("impersonation-role-id", "", "The impersonation role ID.")
+		workmail_getAccessControlEffectCmd.Flags().String("ip-address", "", "The IPv4 address.")
+		workmail_getAccessControlEffectCmd.Flags().String("organization-id", "", "The identifier for the organization.")
+		workmail_getAccessControlEffectCmd.Flags().String("user-id", "", "The user ID.")
+		workmail_getAccessControlEffectCmd.MarkFlagRequired("action")
+		workmail_getAccessControlEffectCmd.MarkFlagRequired("ip-address")
+		workmail_getAccessControlEffectCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_getAccessControlEffectCmd)
 }

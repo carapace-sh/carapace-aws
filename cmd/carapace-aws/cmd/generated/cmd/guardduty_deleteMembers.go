@@ -12,11 +12,13 @@ var guardduty_deleteMembersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_deleteMembersCmd).Standalone()
+	carapace.Gen(guardduty_deleteMembersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_deleteMembersCmd).Standalone()
 
-	guardduty_deleteMembersCmd.Flags().String("account-ids", "", "A list of account IDs of the GuardDuty member accounts that you want to delete.")
-	guardduty_deleteMembersCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty account whose members you want to delete.")
-	guardduty_deleteMembersCmd.MarkFlagRequired("account-ids")
-	guardduty_deleteMembersCmd.MarkFlagRequired("detector-id")
+		guardduty_deleteMembersCmd.Flags().String("account-ids", "", "A list of account IDs of the GuardDuty member accounts that you want to delete.")
+		guardduty_deleteMembersCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty account whose members you want to delete.")
+		guardduty_deleteMembersCmd.MarkFlagRequired("account-ids")
+		guardduty_deleteMembersCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_deleteMembersCmd)
 }

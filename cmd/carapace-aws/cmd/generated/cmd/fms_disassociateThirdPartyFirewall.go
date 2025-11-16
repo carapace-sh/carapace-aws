@@ -12,9 +12,11 @@ var fms_disassociateThirdPartyFirewallCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_disassociateThirdPartyFirewallCmd).Standalone()
+	carapace.Gen(fms_disassociateThirdPartyFirewallCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_disassociateThirdPartyFirewallCmd).Standalone()
 
-	fms_disassociateThirdPartyFirewallCmd.Flags().String("third-party-firewall", "", "The name of the third-party firewall vendor.")
-	fms_disassociateThirdPartyFirewallCmd.MarkFlagRequired("third-party-firewall")
+		fms_disassociateThirdPartyFirewallCmd.Flags().String("third-party-firewall", "", "The name of the third-party firewall vendor.")
+		fms_disassociateThirdPartyFirewallCmd.MarkFlagRequired("third-party-firewall")
+	})
 	fmsCmd.AddCommand(fms_disassociateThirdPartyFirewallCmd)
 }

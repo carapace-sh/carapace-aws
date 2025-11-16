@@ -12,10 +12,12 @@ var codebuild_listProjectsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_listProjectsCmd).Standalone()
+	carapace.Gen(codebuild_listProjectsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_listProjectsCmd).Standalone()
 
-	codebuild_listProjectsCmd.Flags().String("next-token", "", "During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.")
-	codebuild_listProjectsCmd.Flags().String("sort-by", "", "The criterion to be used to list build project names.")
-	codebuild_listProjectsCmd.Flags().String("sort-order", "", "The order in which to list build projects.")
+		codebuild_listProjectsCmd.Flags().String("next-token", "", "During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.")
+		codebuild_listProjectsCmd.Flags().String("sort-by", "", "The criterion to be used to list build project names.")
+		codebuild_listProjectsCmd.Flags().String("sort-order", "", "The order in which to list build projects.")
+	})
 	codebuildCmd.AddCommand(codebuild_listProjectsCmd)
 }

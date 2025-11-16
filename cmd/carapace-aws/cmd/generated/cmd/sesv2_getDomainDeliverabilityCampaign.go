@@ -12,9 +12,11 @@ var sesv2_getDomainDeliverabilityCampaignCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_getDomainDeliverabilityCampaignCmd).Standalone()
+	carapace.Gen(sesv2_getDomainDeliverabilityCampaignCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_getDomainDeliverabilityCampaignCmd).Standalone()
 
-	sesv2_getDomainDeliverabilityCampaignCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
-	sesv2_getDomainDeliverabilityCampaignCmd.MarkFlagRequired("campaign-id")
+		sesv2_getDomainDeliverabilityCampaignCmd.Flags().String("campaign-id", "", "The unique identifier for the campaign.")
+		sesv2_getDomainDeliverabilityCampaignCmd.MarkFlagRequired("campaign-id")
+	})
 	sesv2Cmd.AddCommand(sesv2_getDomainDeliverabilityCampaignCmd)
 }

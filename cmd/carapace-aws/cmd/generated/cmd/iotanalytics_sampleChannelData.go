@@ -12,12 +12,14 @@ var iotanalytics_sampleChannelDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_sampleChannelDataCmd).Standalone()
+	carapace.Gen(iotanalytics_sampleChannelDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_sampleChannelDataCmd).Standalone()
 
-	iotanalytics_sampleChannelDataCmd.Flags().String("channel-name", "", "The name of the channel whose message samples are retrieved.")
-	iotanalytics_sampleChannelDataCmd.Flags().String("end-time", "", "The end of the time window from which sample messages are retrieved.")
-	iotanalytics_sampleChannelDataCmd.Flags().String("max-messages", "", "The number of sample messages to be retrieved.")
-	iotanalytics_sampleChannelDataCmd.Flags().String("start-time", "", "The start of the time window from which sample messages are retrieved.")
-	iotanalytics_sampleChannelDataCmd.MarkFlagRequired("channel-name")
+		iotanalytics_sampleChannelDataCmd.Flags().String("channel-name", "", "The name of the channel whose message samples are retrieved.")
+		iotanalytics_sampleChannelDataCmd.Flags().String("end-time", "", "The end of the time window from which sample messages are retrieved.")
+		iotanalytics_sampleChannelDataCmd.Flags().String("max-messages", "", "The number of sample messages to be retrieved.")
+		iotanalytics_sampleChannelDataCmd.Flags().String("start-time", "", "The start of the time window from which sample messages are retrieved.")
+		iotanalytics_sampleChannelDataCmd.MarkFlagRequired("channel-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_sampleChannelDataCmd)
 }

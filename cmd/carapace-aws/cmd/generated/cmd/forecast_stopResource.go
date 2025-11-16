@@ -12,9 +12,11 @@ var forecast_stopResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecast_stopResourceCmd).Standalone()
+	carapace.Gen(forecast_stopResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecast_stopResourceCmd).Standalone()
 
-	forecast_stopResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to stop.")
-	forecast_stopResourceCmd.MarkFlagRequired("resource-arn")
+		forecast_stopResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that identifies the resource to stop.")
+		forecast_stopResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	forecastCmd.AddCommand(forecast_stopResourceCmd)
 }

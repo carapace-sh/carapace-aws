@@ -12,10 +12,12 @@ var securityhub_describeActionTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_describeActionTargetsCmd).Standalone()
+	carapace.Gen(securityhub_describeActionTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_describeActionTargetsCmd).Standalone()
 
-	securityhub_describeActionTargetsCmd.Flags().String("action-target-arns", "", "A list of custom action target ARNs for the custom action targets to retrieve.")
-	securityhub_describeActionTargetsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	securityhub_describeActionTargetsCmd.Flags().String("next-token", "", "The token that is required for pagination.")
+		securityhub_describeActionTargetsCmd.Flags().String("action-target-arns", "", "A list of custom action target ARNs for the custom action targets to retrieve.")
+		securityhub_describeActionTargetsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		securityhub_describeActionTargetsCmd.Flags().String("next-token", "", "The token that is required for pagination.")
+	})
 	securityhubCmd.AddCommand(securityhub_describeActionTargetsCmd)
 }

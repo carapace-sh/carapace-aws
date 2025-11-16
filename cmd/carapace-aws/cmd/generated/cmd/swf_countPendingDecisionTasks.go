@@ -12,11 +12,13 @@ var swf_countPendingDecisionTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_countPendingDecisionTasksCmd).Standalone()
+	carapace.Gen(swf_countPendingDecisionTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_countPendingDecisionTasksCmd).Standalone()
 
-	swf_countPendingDecisionTasksCmd.Flags().String("domain", "", "The name of the domain that contains the task list.")
-	swf_countPendingDecisionTasksCmd.Flags().String("task-list", "", "The name of the task list.")
-	swf_countPendingDecisionTasksCmd.MarkFlagRequired("domain")
-	swf_countPendingDecisionTasksCmd.MarkFlagRequired("task-list")
+		swf_countPendingDecisionTasksCmd.Flags().String("domain", "", "The name of the domain that contains the task list.")
+		swf_countPendingDecisionTasksCmd.Flags().String("task-list", "", "The name of the task list.")
+		swf_countPendingDecisionTasksCmd.MarkFlagRequired("domain")
+		swf_countPendingDecisionTasksCmd.MarkFlagRequired("task-list")
+	})
 	swfCmd.AddCommand(swf_countPendingDecisionTasksCmd)
 }

@@ -12,9 +12,11 @@ var frauddetector_deleteLabelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_deleteLabelCmd).Standalone()
+	carapace.Gen(frauddetector_deleteLabelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_deleteLabelCmd).Standalone()
 
-	frauddetector_deleteLabelCmd.Flags().String("name", "", "The name of the label to delete.")
-	frauddetector_deleteLabelCmd.MarkFlagRequired("name")
+		frauddetector_deleteLabelCmd.Flags().String("name", "", "The name of the label to delete.")
+		frauddetector_deleteLabelCmd.MarkFlagRequired("name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_deleteLabelCmd)
 }

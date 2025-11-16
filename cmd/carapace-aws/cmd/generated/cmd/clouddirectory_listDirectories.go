@@ -12,10 +12,12 @@ var clouddirectory_listDirectoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(clouddirectory_listDirectoriesCmd).Standalone()
+	carapace.Gen(clouddirectory_listDirectoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(clouddirectory_listDirectoriesCmd).Standalone()
 
-	clouddirectory_listDirectoriesCmd.Flags().String("max-results", "", "The maximum number of results to retrieve.")
-	clouddirectory_listDirectoriesCmd.Flags().String("next-token", "", "The pagination token.")
-	clouddirectory_listDirectoriesCmd.Flags().String("state", "", "The state of the directories in the list.")
+		clouddirectory_listDirectoriesCmd.Flags().String("max-results", "", "The maximum number of results to retrieve.")
+		clouddirectory_listDirectoriesCmd.Flags().String("next-token", "", "The pagination token.")
+		clouddirectory_listDirectoriesCmd.Flags().String("state", "", "The state of the directories in the list.")
+	})
 	clouddirectoryCmd.AddCommand(clouddirectory_listDirectoriesCmd)
 }

@@ -12,9 +12,11 @@ var rekognition_getCelebrityInfoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_getCelebrityInfoCmd).Standalone()
+	carapace.Gen(rekognition_getCelebrityInfoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_getCelebrityInfoCmd).Standalone()
 
-	rekognition_getCelebrityInfoCmd.Flags().String("id", "", "The ID for the celebrity.")
-	rekognition_getCelebrityInfoCmd.MarkFlagRequired("id")
+		rekognition_getCelebrityInfoCmd.Flags().String("id", "", "The ID for the celebrity.")
+		rekognition_getCelebrityInfoCmd.MarkFlagRequired("id")
+	})
 	rekognitionCmd.AddCommand(rekognition_getCelebrityInfoCmd)
 }

@@ -12,11 +12,13 @@ var workdocs_getDocumentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workdocs_getDocumentCmd).Standalone()
+	carapace.Gen(workdocs_getDocumentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workdocs_getDocumentCmd).Standalone()
 
-	workdocs_getDocumentCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
-	workdocs_getDocumentCmd.Flags().String("document-id", "", "The ID of the document.")
-	workdocs_getDocumentCmd.Flags().String("include-custom-metadata", "", "Set this to `TRUE` to include custom metadata in the response.")
-	workdocs_getDocumentCmd.MarkFlagRequired("document-id")
+		workdocs_getDocumentCmd.Flags().String("authentication-token", "", "Amazon WorkDocs authentication token.")
+		workdocs_getDocumentCmd.Flags().String("document-id", "", "The ID of the document.")
+		workdocs_getDocumentCmd.Flags().String("include-custom-metadata", "", "Set this to `TRUE` to include custom metadata in the response.")
+		workdocs_getDocumentCmd.MarkFlagRequired("document-id")
+	})
 	workdocsCmd.AddCommand(workdocs_getDocumentCmd)
 }

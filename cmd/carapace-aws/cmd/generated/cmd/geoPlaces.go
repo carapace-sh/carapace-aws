@@ -12,7 +12,9 @@ var geoPlacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(geoPlacesCmd).Standalone()
+	carapace.Gen(geoPlacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(geoPlacesCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(geoPlacesCmd)
 }

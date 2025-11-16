@@ -12,9 +12,11 @@ var transcribe_describeLanguageModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(transcribe_describeLanguageModelCmd).Standalone()
+	carapace.Gen(transcribe_describeLanguageModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(transcribe_describeLanguageModelCmd).Standalone()
 
-	transcribe_describeLanguageModelCmd.Flags().String("model-name", "", "The name of the custom language model you want information about.")
-	transcribe_describeLanguageModelCmd.MarkFlagRequired("model-name")
+		transcribe_describeLanguageModelCmd.Flags().String("model-name", "", "The name of the custom language model you want information about.")
+		transcribe_describeLanguageModelCmd.MarkFlagRequired("model-name")
+	})
 	transcribeCmd.AddCommand(transcribe_describeLanguageModelCmd)
 }

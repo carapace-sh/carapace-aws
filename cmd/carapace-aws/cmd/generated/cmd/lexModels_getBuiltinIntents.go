@@ -12,11 +12,13 @@ var lexModels_getBuiltinIntentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lexModels_getBuiltinIntentsCmd).Standalone()
+	carapace.Gen(lexModels_getBuiltinIntentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lexModels_getBuiltinIntentsCmd).Standalone()
 
-	lexModels_getBuiltinIntentsCmd.Flags().String("locale", "", "A list of locales that the intent supports.")
-	lexModels_getBuiltinIntentsCmd.Flags().String("max-results", "", "The maximum number of intents to return in the response.")
-	lexModels_getBuiltinIntentsCmd.Flags().String("next-token", "", "A pagination token that fetches the next page of intents.")
-	lexModels_getBuiltinIntentsCmd.Flags().String("signature-contains", "", "Substring to match in built-in intent signatures.")
+		lexModels_getBuiltinIntentsCmd.Flags().String("locale", "", "A list of locales that the intent supports.")
+		lexModels_getBuiltinIntentsCmd.Flags().String("max-results", "", "The maximum number of intents to return in the response.")
+		lexModels_getBuiltinIntentsCmd.Flags().String("next-token", "", "A pagination token that fetches the next page of intents.")
+		lexModels_getBuiltinIntentsCmd.Flags().String("signature-contains", "", "Substring to match in built-in intent signatures.")
+	})
 	lexModelsCmd.AddCommand(lexModels_getBuiltinIntentsCmd)
 }

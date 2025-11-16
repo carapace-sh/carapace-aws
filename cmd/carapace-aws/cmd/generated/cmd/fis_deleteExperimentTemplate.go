@@ -12,9 +12,11 @@ var fis_deleteExperimentTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_deleteExperimentTemplateCmd).Standalone()
+	carapace.Gen(fis_deleteExperimentTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_deleteExperimentTemplateCmd).Standalone()
 
-	fis_deleteExperimentTemplateCmd.Flags().String("id", "", "The ID of the experiment template.")
-	fis_deleteExperimentTemplateCmd.MarkFlagRequired("id")
+		fis_deleteExperimentTemplateCmd.Flags().String("id", "", "The ID of the experiment template.")
+		fis_deleteExperimentTemplateCmd.MarkFlagRequired("id")
+	})
 	fisCmd.AddCommand(fis_deleteExperimentTemplateCmd)
 }

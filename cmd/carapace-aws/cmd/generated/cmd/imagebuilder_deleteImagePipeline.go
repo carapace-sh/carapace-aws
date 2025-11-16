@@ -12,9 +12,11 @@ var imagebuilder_deleteImagePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_deleteImagePipelineCmd).Standalone()
+	carapace.Gen(imagebuilder_deleteImagePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_deleteImagePipelineCmd).Standalone()
 
-	imagebuilder_deleteImagePipelineCmd.Flags().String("image-pipeline-arn", "", "The Amazon Resource Name (ARN) of the image pipeline to delete.")
-	imagebuilder_deleteImagePipelineCmd.MarkFlagRequired("image-pipeline-arn")
+		imagebuilder_deleteImagePipelineCmd.Flags().String("image-pipeline-arn", "", "The Amazon Resource Name (ARN) of the image pipeline to delete.")
+		imagebuilder_deleteImagePipelineCmd.MarkFlagRequired("image-pipeline-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_deleteImagePipelineCmd)
 }

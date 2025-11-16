@@ -12,11 +12,13 @@ var notifications_listChannelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_listChannelsCmd).Standalone()
+	carapace.Gen(notifications_listChannelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_listChannelsCmd).Standalone()
 
-	notifications_listChannelsCmd.Flags().String("max-results", "", "The maximum number of results to be returned in this call.")
-	notifications_listChannelsCmd.Flags().String("next-token", "", "The start token for paginated calls.")
-	notifications_listChannelsCmd.Flags().String("notification-configuration-arn", "", "The Amazon Resource Name (ARN) of the `NotificationConfiguration`.")
-	notifications_listChannelsCmd.MarkFlagRequired("notification-configuration-arn")
+		notifications_listChannelsCmd.Flags().String("max-results", "", "The maximum number of results to be returned in this call.")
+		notifications_listChannelsCmd.Flags().String("next-token", "", "The start token for paginated calls.")
+		notifications_listChannelsCmd.Flags().String("notification-configuration-arn", "", "The Amazon Resource Name (ARN) of the `NotificationConfiguration`.")
+		notifications_listChannelsCmd.MarkFlagRequired("notification-configuration-arn")
+	})
 	notificationsCmd.AddCommand(notifications_listChannelsCmd)
 }

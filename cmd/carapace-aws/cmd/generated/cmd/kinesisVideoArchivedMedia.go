@@ -12,7 +12,9 @@ var kinesisVideoArchivedMediaCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisVideoArchivedMediaCmd).Standalone()
+	carapace.Gen(kinesisVideoArchivedMediaCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisVideoArchivedMediaCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(kinesisVideoArchivedMediaCmd)
 }

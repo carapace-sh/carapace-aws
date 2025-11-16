@@ -12,11 +12,13 @@ var fis_deleteTargetAccountConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_deleteTargetAccountConfigurationCmd).Standalone()
+	carapace.Gen(fis_deleteTargetAccountConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_deleteTargetAccountConfigurationCmd).Standalone()
 
-	fis_deleteTargetAccountConfigurationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the target account.")
-	fis_deleteTargetAccountConfigurationCmd.Flags().String("experiment-template-id", "", "The ID of the experiment template.")
-	fis_deleteTargetAccountConfigurationCmd.MarkFlagRequired("account-id")
-	fis_deleteTargetAccountConfigurationCmd.MarkFlagRequired("experiment-template-id")
+		fis_deleteTargetAccountConfigurationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the target account.")
+		fis_deleteTargetAccountConfigurationCmd.Flags().String("experiment-template-id", "", "The ID of the experiment template.")
+		fis_deleteTargetAccountConfigurationCmd.MarkFlagRequired("account-id")
+		fis_deleteTargetAccountConfigurationCmd.MarkFlagRequired("experiment-template-id")
+	})
 	fisCmd.AddCommand(fis_deleteTargetAccountConfigurationCmd)
 }

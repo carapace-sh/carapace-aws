@@ -12,9 +12,11 @@ var ivsRealtime_stopCompositionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivsRealtime_stopCompositionCmd).Standalone()
+	carapace.Gen(ivsRealtime_stopCompositionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivsRealtime_stopCompositionCmd).Standalone()
 
-	ivsRealtime_stopCompositionCmd.Flags().String("arn", "", "ARN of the Composition.")
-	ivsRealtime_stopCompositionCmd.MarkFlagRequired("arn")
+		ivsRealtime_stopCompositionCmd.Flags().String("arn", "", "ARN of the Composition.")
+		ivsRealtime_stopCompositionCmd.MarkFlagRequired("arn")
+	})
 	ivsRealtimeCmd.AddCommand(ivsRealtime_stopCompositionCmd)
 }

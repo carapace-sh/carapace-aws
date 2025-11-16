@@ -12,10 +12,12 @@ var iotsitewise_batchPutAssetPropertyValueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_batchPutAssetPropertyValueCmd).Standalone()
+	carapace.Gen(iotsitewise_batchPutAssetPropertyValueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_batchPutAssetPropertyValueCmd).Standalone()
 
-	iotsitewise_batchPutAssetPropertyValueCmd.Flags().String("enable-partial-entry-processing", "", "This setting enables partial ingestion at entry-level.")
-	iotsitewise_batchPutAssetPropertyValueCmd.Flags().String("entries", "", "The list of asset property value entries for the batch put request.")
-	iotsitewise_batchPutAssetPropertyValueCmd.MarkFlagRequired("entries")
+		iotsitewise_batchPutAssetPropertyValueCmd.Flags().String("enable-partial-entry-processing", "", "This setting enables partial ingestion at entry-level.")
+		iotsitewise_batchPutAssetPropertyValueCmd.Flags().String("entries", "", "The list of asset property value entries for the batch put request.")
+		iotsitewise_batchPutAssetPropertyValueCmd.MarkFlagRequired("entries")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_batchPutAssetPropertyValueCmd)
 }

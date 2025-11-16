@@ -12,11 +12,13 @@ var vpcLattice_deregisterTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deregisterTargetsCmd).Standalone()
+	carapace.Gen(vpcLattice_deregisterTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deregisterTargetsCmd).Standalone()
 
-	vpcLattice_deregisterTargetsCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
-	vpcLattice_deregisterTargetsCmd.Flags().String("targets", "", "The targets to deregister.")
-	vpcLattice_deregisterTargetsCmd.MarkFlagRequired("target-group-identifier")
-	vpcLattice_deregisterTargetsCmd.MarkFlagRequired("targets")
+		vpcLattice_deregisterTargetsCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
+		vpcLattice_deregisterTargetsCmd.Flags().String("targets", "", "The targets to deregister.")
+		vpcLattice_deregisterTargetsCmd.MarkFlagRequired("target-group-identifier")
+		vpcLattice_deregisterTargetsCmd.MarkFlagRequired("targets")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deregisterTargetsCmd)
 }

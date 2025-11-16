@@ -12,11 +12,13 @@ var wisdom_listAssistantAssociationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wisdom_listAssistantAssociationsCmd).Standalone()
+	carapace.Gen(wisdom_listAssistantAssociationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wisdom_listAssistantAssociationsCmd).Standalone()
 
-	wisdom_listAssistantAssociationsCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
-	wisdom_listAssistantAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	wisdom_listAssistantAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	wisdom_listAssistantAssociationsCmd.MarkFlagRequired("assistant-id")
+		wisdom_listAssistantAssociationsCmd.Flags().String("assistant-id", "", "The identifier of the Wisdom assistant.")
+		wisdom_listAssistantAssociationsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		wisdom_listAssistantAssociationsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		wisdom_listAssistantAssociationsCmd.MarkFlagRequired("assistant-id")
+	})
 	wisdomCmd.AddCommand(wisdom_listAssistantAssociationsCmd)
 }

@@ -12,12 +12,14 @@ var tnb_validateSolFunctionPackageContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_validateSolFunctionPackageContentCmd).Standalone()
+	carapace.Gen(tnb_validateSolFunctionPackageContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_validateSolFunctionPackageContentCmd).Standalone()
 
-	tnb_validateSolFunctionPackageContentCmd.Flags().String("content-type", "", "Function package content type.")
-	tnb_validateSolFunctionPackageContentCmd.Flags().String("file", "", "Function package file.")
-	tnb_validateSolFunctionPackageContentCmd.Flags().String("vnf-pkg-id", "", "Function package ID.")
-	tnb_validateSolFunctionPackageContentCmd.MarkFlagRequired("file")
-	tnb_validateSolFunctionPackageContentCmd.MarkFlagRequired("vnf-pkg-id")
+		tnb_validateSolFunctionPackageContentCmd.Flags().String("content-type", "", "Function package content type.")
+		tnb_validateSolFunctionPackageContentCmd.Flags().String("file", "", "Function package file.")
+		tnb_validateSolFunctionPackageContentCmd.Flags().String("vnf-pkg-id", "", "Function package ID.")
+		tnb_validateSolFunctionPackageContentCmd.MarkFlagRequired("file")
+		tnb_validateSolFunctionPackageContentCmd.MarkFlagRequired("vnf-pkg-id")
+	})
 	tnbCmd.AddCommand(tnb_validateSolFunctionPackageContentCmd)
 }

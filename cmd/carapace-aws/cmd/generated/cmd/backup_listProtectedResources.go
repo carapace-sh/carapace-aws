@@ -12,9 +12,11 @@ var backup_listProtectedResourcesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_listProtectedResourcesCmd).Standalone()
+	carapace.Gen(backup_listProtectedResourcesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_listProtectedResourcesCmd).Standalone()
 
-	backup_listProtectedResourcesCmd.Flags().String("max-results", "", "The maximum number of items to be returned.")
-	backup_listProtectedResourcesCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
+		backup_listProtectedResourcesCmd.Flags().String("max-results", "", "The maximum number of items to be returned.")
+		backup_listProtectedResourcesCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
+	})
 	backupCmd.AddCommand(backup_listProtectedResourcesCmd)
 }

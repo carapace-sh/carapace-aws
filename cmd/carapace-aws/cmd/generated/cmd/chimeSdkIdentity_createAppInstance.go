@@ -12,13 +12,15 @@ var chimeSdkIdentity_createAppInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkIdentity_createAppInstanceCmd).Standalone()
+	carapace.Gen(chimeSdkIdentity_createAppInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkIdentity_createAppInstanceCmd).Standalone()
 
-	chimeSdkIdentity_createAppInstanceCmd.Flags().String("client-request-token", "", "The unique ID of the request.")
-	chimeSdkIdentity_createAppInstanceCmd.Flags().String("metadata", "", "The metadata of the `AppInstance`.")
-	chimeSdkIdentity_createAppInstanceCmd.Flags().String("name", "", "The name of the `AppInstance`.")
-	chimeSdkIdentity_createAppInstanceCmd.Flags().String("tags", "", "Tags assigned to the `AppInstance`.")
-	chimeSdkIdentity_createAppInstanceCmd.MarkFlagRequired("client-request-token")
-	chimeSdkIdentity_createAppInstanceCmd.MarkFlagRequired("name")
+		chimeSdkIdentity_createAppInstanceCmd.Flags().String("client-request-token", "", "The unique ID of the request.")
+		chimeSdkIdentity_createAppInstanceCmd.Flags().String("metadata", "", "The metadata of the `AppInstance`.")
+		chimeSdkIdentity_createAppInstanceCmd.Flags().String("name", "", "The name of the `AppInstance`.")
+		chimeSdkIdentity_createAppInstanceCmd.Flags().String("tags", "", "Tags assigned to the `AppInstance`.")
+		chimeSdkIdentity_createAppInstanceCmd.MarkFlagRequired("client-request-token")
+		chimeSdkIdentity_createAppInstanceCmd.MarkFlagRequired("name")
+	})
 	chimeSdkIdentityCmd.AddCommand(chimeSdkIdentity_createAppInstanceCmd)
 }

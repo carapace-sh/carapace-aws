@@ -12,9 +12,11 @@ var ssm_deleteOpsMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_deleteOpsMetadataCmd).Standalone()
+	carapace.Gen(ssm_deleteOpsMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_deleteOpsMetadataCmd).Standalone()
 
-	ssm_deleteOpsMetadataCmd.Flags().String("ops-metadata-arn", "", "The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.")
-	ssm_deleteOpsMetadataCmd.MarkFlagRequired("ops-metadata-arn")
+		ssm_deleteOpsMetadataCmd.Flags().String("ops-metadata-arn", "", "The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.")
+		ssm_deleteOpsMetadataCmd.MarkFlagRequired("ops-metadata-arn")
+	})
 	ssmCmd.AddCommand(ssm_deleteOpsMetadataCmd)
 }

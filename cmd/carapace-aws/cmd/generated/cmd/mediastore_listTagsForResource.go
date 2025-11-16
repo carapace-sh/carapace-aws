@@ -12,9 +12,11 @@ var mediastore_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediastore_listTagsForResourceCmd).Standalone()
+	carapace.Gen(mediastore_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediastore_listTagsForResourceCmd).Standalone()
 
-	mediastore_listTagsForResourceCmd.Flags().String("resource", "", "The Amazon Resource Name (ARN) for the container.")
-	mediastore_listTagsForResourceCmd.MarkFlagRequired("resource")
+		mediastore_listTagsForResourceCmd.Flags().String("resource", "", "The Amazon Resource Name (ARN) for the container.")
+		mediastore_listTagsForResourceCmd.MarkFlagRequired("resource")
+	})
 	mediastoreCmd.AddCommand(mediastore_listTagsForResourceCmd)
 }

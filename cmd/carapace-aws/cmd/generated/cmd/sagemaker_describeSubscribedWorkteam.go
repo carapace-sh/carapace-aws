@@ -12,9 +12,11 @@ var sagemaker_describeSubscribedWorkteamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeSubscribedWorkteamCmd).Standalone()
+	carapace.Gen(sagemaker_describeSubscribedWorkteamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeSubscribedWorkteamCmd).Standalone()
 
-	sagemaker_describeSubscribedWorkteamCmd.Flags().String("workteam-arn", "", "The Amazon Resource Name (ARN) of the subscribed work team to describe.")
-	sagemaker_describeSubscribedWorkteamCmd.MarkFlagRequired("workteam-arn")
+		sagemaker_describeSubscribedWorkteamCmd.Flags().String("workteam-arn", "", "The Amazon Resource Name (ARN) of the subscribed work team to describe.")
+		sagemaker_describeSubscribedWorkteamCmd.MarkFlagRequired("workteam-arn")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeSubscribedWorkteamCmd)
 }

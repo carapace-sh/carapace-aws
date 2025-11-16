@@ -12,9 +12,11 @@ var config_getStoredQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(config_getStoredQueryCmd).Standalone()
+	carapace.Gen(config_getStoredQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(config_getStoredQueryCmd).Standalone()
 
-	config_getStoredQueryCmd.Flags().String("query-name", "", "The name of the query.")
-	config_getStoredQueryCmd.MarkFlagRequired("query-name")
+		config_getStoredQueryCmd.Flags().String("query-name", "", "The name of the query.")
+		config_getStoredQueryCmd.MarkFlagRequired("query-name")
+	})
 	configCmd.AddCommand(config_getStoredQueryCmd)
 }

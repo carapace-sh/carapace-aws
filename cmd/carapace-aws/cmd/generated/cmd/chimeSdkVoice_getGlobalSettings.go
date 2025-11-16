@@ -12,7 +12,9 @@ var chimeSdkVoice_getGlobalSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_getGlobalSettingsCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_getGlobalSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_getGlobalSettingsCmd).Standalone()
 
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_getGlobalSettingsCmd)
 }

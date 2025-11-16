@@ -12,9 +12,11 @@ var iottwinmaker_getMetadataTransferJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_getMetadataTransferJobCmd).Standalone()
+	carapace.Gen(iottwinmaker_getMetadataTransferJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_getMetadataTransferJobCmd).Standalone()
 
-	iottwinmaker_getMetadataTransferJobCmd.Flags().String("metadata-transfer-job-id", "", "The metadata transfer job Id.")
-	iottwinmaker_getMetadataTransferJobCmd.MarkFlagRequired("metadata-transfer-job-id")
+		iottwinmaker_getMetadataTransferJobCmd.Flags().String("metadata-transfer-job-id", "", "The metadata transfer job Id.")
+		iottwinmaker_getMetadataTransferJobCmd.MarkFlagRequired("metadata-transfer-job-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_getMetadataTransferJobCmd)
 }

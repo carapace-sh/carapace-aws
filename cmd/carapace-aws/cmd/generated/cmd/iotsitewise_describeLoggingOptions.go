@@ -12,7 +12,9 @@ var iotsitewise_describeLoggingOptionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeLoggingOptionsCmd).Standalone()
+	carapace.Gen(iotsitewise_describeLoggingOptionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeLoggingOptionsCmd).Standalone()
 
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeLoggingOptionsCmd)
 }

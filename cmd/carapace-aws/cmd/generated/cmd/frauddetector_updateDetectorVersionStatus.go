@@ -12,13 +12,15 @@ var frauddetector_updateDetectorVersionStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_updateDetectorVersionStatusCmd).Standalone()
+	carapace.Gen(frauddetector_updateDetectorVersionStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_updateDetectorVersionStatusCmd).Standalone()
 
-	frauddetector_updateDetectorVersionStatusCmd.Flags().String("detector-id", "", "The detector ID.")
-	frauddetector_updateDetectorVersionStatusCmd.Flags().String("detector-version-id", "", "The detector version ID.")
-	frauddetector_updateDetectorVersionStatusCmd.Flags().String("status", "", "The new status.")
-	frauddetector_updateDetectorVersionStatusCmd.MarkFlagRequired("detector-id")
-	frauddetector_updateDetectorVersionStatusCmd.MarkFlagRequired("detector-version-id")
-	frauddetector_updateDetectorVersionStatusCmd.MarkFlagRequired("status")
+		frauddetector_updateDetectorVersionStatusCmd.Flags().String("detector-id", "", "The detector ID.")
+		frauddetector_updateDetectorVersionStatusCmd.Flags().String("detector-version-id", "", "The detector version ID.")
+		frauddetector_updateDetectorVersionStatusCmd.Flags().String("status", "", "The new status.")
+		frauddetector_updateDetectorVersionStatusCmd.MarkFlagRequired("detector-id")
+		frauddetector_updateDetectorVersionStatusCmd.MarkFlagRequired("detector-version-id")
+		frauddetector_updateDetectorVersionStatusCmd.MarkFlagRequired("status")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_updateDetectorVersionStatusCmd)
 }

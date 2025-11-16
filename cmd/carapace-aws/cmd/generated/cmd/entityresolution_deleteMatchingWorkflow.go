@@ -12,9 +12,11 @@ var entityresolution_deleteMatchingWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(entityresolution_deleteMatchingWorkflowCmd).Standalone()
+	carapace.Gen(entityresolution_deleteMatchingWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(entityresolution_deleteMatchingWorkflowCmd).Standalone()
 
-	entityresolution_deleteMatchingWorkflowCmd.Flags().String("workflow-name", "", "The name of the workflow to be retrieved.")
-	entityresolution_deleteMatchingWorkflowCmd.MarkFlagRequired("workflow-name")
+		entityresolution_deleteMatchingWorkflowCmd.Flags().String("workflow-name", "", "The name of the workflow to be retrieved.")
+		entityresolution_deleteMatchingWorkflowCmd.MarkFlagRequired("workflow-name")
+	})
 	entityresolutionCmd.AddCommand(entityresolution_deleteMatchingWorkflowCmd)
 }

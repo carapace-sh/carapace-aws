@@ -12,9 +12,11 @@ var mediapackage_rotateChannelCredentialsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackage_rotateChannelCredentialsCmd).Standalone()
+	carapace.Gen(mediapackage_rotateChannelCredentialsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackage_rotateChannelCredentialsCmd).Standalone()
 
-	mediapackage_rotateChannelCredentialsCmd.Flags().String("id", "", "The ID of the channel to update.")
-	mediapackage_rotateChannelCredentialsCmd.MarkFlagRequired("id")
+		mediapackage_rotateChannelCredentialsCmd.Flags().String("id", "", "The ID of the channel to update.")
+		mediapackage_rotateChannelCredentialsCmd.MarkFlagRequired("id")
+	})
 	mediapackageCmd.AddCommand(mediapackage_rotateChannelCredentialsCmd)
 }

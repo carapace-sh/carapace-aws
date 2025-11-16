@@ -12,10 +12,12 @@ var mgn_listImportsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_listImportsCmd).Standalone()
+	carapace.Gen(mgn_listImportsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_listImportsCmd).Standalone()
 
-	mgn_listImportsCmd.Flags().String("filters", "", "List imports request filters.")
-	mgn_listImportsCmd.Flags().String("max-results", "", "List imports request max results.")
-	mgn_listImportsCmd.Flags().String("next-token", "", "List imports request next token.")
+		mgn_listImportsCmd.Flags().String("filters", "", "List imports request filters.")
+		mgn_listImportsCmd.Flags().String("max-results", "", "List imports request max results.")
+		mgn_listImportsCmd.Flags().String("next-token", "", "List imports request next token.")
+	})
 	mgnCmd.AddCommand(mgn_listImportsCmd)
 }

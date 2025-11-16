@@ -12,9 +12,11 @@ var managedblockchain_listInvitationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchain_listInvitationsCmd).Standalone()
+	carapace.Gen(managedblockchain_listInvitationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchain_listInvitationsCmd).Standalone()
 
-	managedblockchain_listInvitationsCmd.Flags().String("max-results", "", "The maximum number of invitations to return.")
-	managedblockchain_listInvitationsCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results to retrieve.")
+		managedblockchain_listInvitationsCmd.Flags().String("max-results", "", "The maximum number of invitations to return.")
+		managedblockchain_listInvitationsCmd.Flags().String("next-token", "", "The pagination token that indicates the next set of results to retrieve.")
+	})
 	managedblockchainCmd.AddCommand(managedblockchain_listInvitationsCmd)
 }

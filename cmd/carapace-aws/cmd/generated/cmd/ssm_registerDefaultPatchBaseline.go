@@ -12,9 +12,11 @@ var ssm_registerDefaultPatchBaselineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_registerDefaultPatchBaselineCmd).Standalone()
+	carapace.Gen(ssm_registerDefaultPatchBaselineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_registerDefaultPatchBaselineCmd).Standalone()
 
-	ssm_registerDefaultPatchBaselineCmd.Flags().String("baseline-id", "", "The ID of the patch baseline that should be the default patch baseline.")
-	ssm_registerDefaultPatchBaselineCmd.MarkFlagRequired("baseline-id")
+		ssm_registerDefaultPatchBaselineCmd.Flags().String("baseline-id", "", "The ID of the patch baseline that should be the default patch baseline.")
+		ssm_registerDefaultPatchBaselineCmd.MarkFlagRequired("baseline-id")
+	})
 	ssmCmd.AddCommand(ssm_registerDefaultPatchBaselineCmd)
 }

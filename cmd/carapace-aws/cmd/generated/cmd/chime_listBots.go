@@ -12,11 +12,13 @@ var chime_listBotsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chime_listBotsCmd).Standalone()
+	carapace.Gen(chime_listBotsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chime_listBotsCmd).Standalone()
 
-	chime_listBotsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
-	chime_listBotsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	chime_listBotsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
-	chime_listBotsCmd.MarkFlagRequired("account-id")
+		chime_listBotsCmd.Flags().String("account-id", "", "The Amazon Chime account ID.")
+		chime_listBotsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		chime_listBotsCmd.Flags().String("next-token", "", "The token to use to retrieve the next page of results.")
+		chime_listBotsCmd.MarkFlagRequired("account-id")
+	})
 	chimeCmd.AddCommand(chime_listBotsCmd)
 }

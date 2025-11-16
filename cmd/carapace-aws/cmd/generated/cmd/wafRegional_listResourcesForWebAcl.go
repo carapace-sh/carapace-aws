@@ -12,10 +12,12 @@ var wafRegional_listResourcesForWebAclCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafRegional_listResourcesForWebAclCmd).Standalone()
+	carapace.Gen(wafRegional_listResourcesForWebAclCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafRegional_listResourcesForWebAclCmd).Standalone()
 
-	wafRegional_listResourcesForWebAclCmd.Flags().String("resource-type", "", "The type of resource to list, either an application load balancer or Amazon API Gateway.")
-	wafRegional_listResourcesForWebAclCmd.Flags().String("web-aclid", "", "The unique identifier (ID) of the web ACL for which to list the associated resources.")
-	wafRegional_listResourcesForWebAclCmd.MarkFlagRequired("web-aclid")
+		wafRegional_listResourcesForWebAclCmd.Flags().String("resource-type", "", "The type of resource to list, either an application load balancer or Amazon API Gateway.")
+		wafRegional_listResourcesForWebAclCmd.Flags().String("web-aclid", "", "The unique identifier (ID) of the web ACL for which to list the associated resources.")
+		wafRegional_listResourcesForWebAclCmd.MarkFlagRequired("web-aclid")
+	})
 	wafRegionalCmd.AddCommand(wafRegional_listResourcesForWebAclCmd)
 }

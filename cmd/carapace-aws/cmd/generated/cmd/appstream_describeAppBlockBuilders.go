@@ -12,10 +12,12 @@ var appstream_describeAppBlockBuildersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_describeAppBlockBuildersCmd).Standalone()
+	carapace.Gen(appstream_describeAppBlockBuildersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_describeAppBlockBuildersCmd).Standalone()
 
-	appstream_describeAppBlockBuildersCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
-	appstream_describeAppBlockBuildersCmd.Flags().String("names", "", "The names of the app block builders.")
-	appstream_describeAppBlockBuildersCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+		appstream_describeAppBlockBuildersCmd.Flags().String("max-results", "", "The maximum size of each page of results.")
+		appstream_describeAppBlockBuildersCmd.Flags().String("names", "", "The names of the app block builders.")
+		appstream_describeAppBlockBuildersCmd.Flags().String("next-token", "", "The pagination token used to retrieve the next page of results for this operation.")
+	})
 	appstreamCmd.AddCommand(appstream_describeAppBlockBuildersCmd)
 }

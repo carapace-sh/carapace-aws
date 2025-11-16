@@ -12,9 +12,11 @@ var ssmContacts_deleteContactChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_deleteContactChannelCmd).Standalone()
+	carapace.Gen(ssmContacts_deleteContactChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_deleteContactChannelCmd).Standalone()
 
-	ssmContacts_deleteContactChannelCmd.Flags().String("contact-channel-id", "", "The Amazon Resource Name (ARN) of the contact channel.")
-	ssmContacts_deleteContactChannelCmd.MarkFlagRequired("contact-channel-id")
+		ssmContacts_deleteContactChannelCmd.Flags().String("contact-channel-id", "", "The Amazon Resource Name (ARN) of the contact channel.")
+		ssmContacts_deleteContactChannelCmd.MarkFlagRequired("contact-channel-id")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_deleteContactChannelCmd)
 }

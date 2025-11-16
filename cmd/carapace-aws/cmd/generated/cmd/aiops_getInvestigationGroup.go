@@ -12,9 +12,11 @@ var aiops_getInvestigationGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(aiops_getInvestigationGroupCmd).Standalone()
+	carapace.Gen(aiops_getInvestigationGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(aiops_getInvestigationGroupCmd).Standalone()
 
-	aiops_getInvestigationGroupCmd.Flags().String("identifier", "", "Specify either the name or the ARN of the investigation group that you want to view.")
-	aiops_getInvestigationGroupCmd.MarkFlagRequired("identifier")
+		aiops_getInvestigationGroupCmd.Flags().String("identifier", "", "Specify either the name or the ARN of the investigation group that you want to view.")
+		aiops_getInvestigationGroupCmd.MarkFlagRequired("identifier")
+	})
 	aiopsCmd.AddCommand(aiops_getInvestigationGroupCmd)
 }

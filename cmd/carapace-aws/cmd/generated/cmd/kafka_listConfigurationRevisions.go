@@ -12,11 +12,13 @@ var kafka_listConfigurationRevisionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_listConfigurationRevisionsCmd).Standalone()
+	carapace.Gen(kafka_listConfigurationRevisionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_listConfigurationRevisionsCmd).Standalone()
 
-	kafka_listConfigurationRevisionsCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.")
-	kafka_listConfigurationRevisionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	kafka_listConfigurationRevisionsCmd.Flags().String("next-token", "", "The paginated results marker.")
-	kafka_listConfigurationRevisionsCmd.MarkFlagRequired("arn")
+		kafka_listConfigurationRevisionsCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.")
+		kafka_listConfigurationRevisionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		kafka_listConfigurationRevisionsCmd.Flags().String("next-token", "", "The paginated results marker.")
+		kafka_listConfigurationRevisionsCmd.MarkFlagRequired("arn")
+	})
 	kafkaCmd.AddCommand(kafka_listConfigurationRevisionsCmd)
 }

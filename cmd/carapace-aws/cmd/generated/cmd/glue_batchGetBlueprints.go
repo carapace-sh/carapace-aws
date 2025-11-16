@@ -12,11 +12,13 @@ var glue_batchGetBlueprintsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_batchGetBlueprintsCmd).Standalone()
+	carapace.Gen(glue_batchGetBlueprintsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_batchGetBlueprintsCmd).Standalone()
 
-	glue_batchGetBlueprintsCmd.Flags().String("include-blueprint", "", "Specifies whether or not to include the blueprint in the response.")
-	glue_batchGetBlueprintsCmd.Flags().String("include-parameter-spec", "", "Specifies whether or not to include the parameters, as a JSON string, for the blueprint in the response.")
-	glue_batchGetBlueprintsCmd.Flags().String("names", "", "A list of blueprint names.")
-	glue_batchGetBlueprintsCmd.MarkFlagRequired("names")
+		glue_batchGetBlueprintsCmd.Flags().String("include-blueprint", "", "Specifies whether or not to include the blueprint in the response.")
+		glue_batchGetBlueprintsCmd.Flags().String("include-parameter-spec", "", "Specifies whether or not to include the parameters, as a JSON string, for the blueprint in the response.")
+		glue_batchGetBlueprintsCmd.Flags().String("names", "", "A list of blueprint names.")
+		glue_batchGetBlueprintsCmd.MarkFlagRequired("names")
+	})
 	glueCmd.AddCommand(glue_batchGetBlueprintsCmd)
 }

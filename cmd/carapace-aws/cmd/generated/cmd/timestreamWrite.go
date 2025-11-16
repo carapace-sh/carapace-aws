@@ -12,7 +12,9 @@ var timestreamWriteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamWriteCmd).Standalone()
+	carapace.Gen(timestreamWriteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamWriteCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(timestreamWriteCmd)
 }

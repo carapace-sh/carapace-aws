@@ -12,10 +12,12 @@ var glue_getTriggersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getTriggersCmd).Standalone()
+	carapace.Gen(glue_getTriggersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getTriggersCmd).Standalone()
 
-	glue_getTriggersCmd.Flags().String("dependent-job-name", "", "The name of the job to retrieve triggers for.")
-	glue_getTriggersCmd.Flags().String("max-results", "", "The maximum size of the response.")
-	glue_getTriggersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+		glue_getTriggersCmd.Flags().String("dependent-job-name", "", "The name of the job to retrieve triggers for.")
+		glue_getTriggersCmd.Flags().String("max-results", "", "The maximum size of the response.")
+		glue_getTriggersCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation call.")
+	})
 	glueCmd.AddCommand(glue_getTriggersCmd)
 }

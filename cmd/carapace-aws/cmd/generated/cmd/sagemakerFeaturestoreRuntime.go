@@ -12,7 +12,9 @@ var sagemakerFeaturestoreRuntimeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerFeaturestoreRuntimeCmd).Standalone()
+	carapace.Gen(sagemakerFeaturestoreRuntimeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerFeaturestoreRuntimeCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(sagemakerFeaturestoreRuntimeCmd)
 }

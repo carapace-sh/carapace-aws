@@ -12,13 +12,15 @@ var qbusiness_updateUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_updateUserCmd).Standalone()
+	carapace.Gen(qbusiness_updateUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_updateUserCmd).Standalone()
 
-	qbusiness_updateUserCmd.Flags().String("application-id", "", "The identifier of the application the user is attached to.")
-	qbusiness_updateUserCmd.Flags().String("user-aliases-to-delete", "", "The user aliases attached to the user id that are to be deleted.")
-	qbusiness_updateUserCmd.Flags().String("user-aliases-to-update", "", "The user aliases attached to the user id that are to be updated.")
-	qbusiness_updateUserCmd.Flags().String("user-id", "", "The email id attached to the user.")
-	qbusiness_updateUserCmd.MarkFlagRequired("application-id")
-	qbusiness_updateUserCmd.MarkFlagRequired("user-id")
+		qbusiness_updateUserCmd.Flags().String("application-id", "", "The identifier of the application the user is attached to.")
+		qbusiness_updateUserCmd.Flags().String("user-aliases-to-delete", "", "The user aliases attached to the user id that are to be deleted.")
+		qbusiness_updateUserCmd.Flags().String("user-aliases-to-update", "", "The user aliases attached to the user id that are to be updated.")
+		qbusiness_updateUserCmd.Flags().String("user-id", "", "The email id attached to the user.")
+		qbusiness_updateUserCmd.MarkFlagRequired("application-id")
+		qbusiness_updateUserCmd.MarkFlagRequired("user-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_updateUserCmd)
 }

@@ -12,9 +12,11 @@ var mgn_listManagedAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_listManagedAccountsCmd).Standalone()
+	carapace.Gen(mgn_listManagedAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_listManagedAccountsCmd).Standalone()
 
-	mgn_listManagedAccountsCmd.Flags().String("max-results", "", "List managed accounts request max results.")
-	mgn_listManagedAccountsCmd.Flags().String("next-token", "", "List managed accounts request next token.")
+		mgn_listManagedAccountsCmd.Flags().String("max-results", "", "List managed accounts request max results.")
+		mgn_listManagedAccountsCmd.Flags().String("next-token", "", "List managed accounts request next token.")
+	})
 	mgnCmd.AddCommand(mgn_listManagedAccountsCmd)
 }

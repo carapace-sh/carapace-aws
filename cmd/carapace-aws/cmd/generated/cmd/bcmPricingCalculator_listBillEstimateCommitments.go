@@ -12,11 +12,13 @@ var bcmPricingCalculator_listBillEstimateCommitmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_listBillEstimateCommitmentsCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_listBillEstimateCommitmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_listBillEstimateCommitmentsCmd).Standalone()
 
-	bcmPricingCalculator_listBillEstimateCommitmentsCmd.Flags().String("bill-estimate-id", "", "The unique identifier of the bill estimate to list commitments for.")
-	bcmPricingCalculator_listBillEstimateCommitmentsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	bcmPricingCalculator_listBillEstimateCommitmentsCmd.Flags().String("next-token", "", "A token to retrieve the next page of results.")
-	bcmPricingCalculator_listBillEstimateCommitmentsCmd.MarkFlagRequired("bill-estimate-id")
+		bcmPricingCalculator_listBillEstimateCommitmentsCmd.Flags().String("bill-estimate-id", "", "The unique identifier of the bill estimate to list commitments for.")
+		bcmPricingCalculator_listBillEstimateCommitmentsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		bcmPricingCalculator_listBillEstimateCommitmentsCmd.Flags().String("next-token", "", "A token to retrieve the next page of results.")
+		bcmPricingCalculator_listBillEstimateCommitmentsCmd.MarkFlagRequired("bill-estimate-id")
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_listBillEstimateCommitmentsCmd)
 }

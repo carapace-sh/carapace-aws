@@ -12,9 +12,11 @@ var b2bi_getCapabilityCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_getCapabilityCmd).Standalone()
+	carapace.Gen(b2bi_getCapabilityCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_getCapabilityCmd).Standalone()
 
-	b2bi_getCapabilityCmd.Flags().String("capability-id", "", "Specifies a system-assigned unique identifier for the capability.")
-	b2bi_getCapabilityCmd.MarkFlagRequired("capability-id")
+		b2bi_getCapabilityCmd.Flags().String("capability-id", "", "Specifies a system-assigned unique identifier for the capability.")
+		b2bi_getCapabilityCmd.MarkFlagRequired("capability-id")
+	})
 	b2biCmd.AddCommand(b2bi_getCapabilityCmd)
 }

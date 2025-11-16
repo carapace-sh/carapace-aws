@@ -12,11 +12,13 @@ var sesv2_createDedicatedIpPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_createDedicatedIpPoolCmd).Standalone()
+	carapace.Gen(sesv2_createDedicatedIpPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_createDedicatedIpPoolCmd).Standalone()
 
-	sesv2_createDedicatedIpPoolCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool.")
-	sesv2_createDedicatedIpPoolCmd.Flags().String("scaling-mode", "", "The type of scaling mode.")
-	sesv2_createDedicatedIpPoolCmd.Flags().String("tags", "", "An object that defines the tags (keys and values) that you want to associate with the pool.")
-	sesv2_createDedicatedIpPoolCmd.MarkFlagRequired("pool-name")
+		sesv2_createDedicatedIpPoolCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool.")
+		sesv2_createDedicatedIpPoolCmd.Flags().String("scaling-mode", "", "The type of scaling mode.")
+		sesv2_createDedicatedIpPoolCmd.Flags().String("tags", "", "An object that defines the tags (keys and values) that you want to associate with the pool.")
+		sesv2_createDedicatedIpPoolCmd.MarkFlagRequired("pool-name")
+	})
 	sesv2Cmd.AddCommand(sesv2_createDedicatedIpPoolCmd)
 }

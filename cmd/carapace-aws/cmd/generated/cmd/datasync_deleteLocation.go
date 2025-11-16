@@ -12,9 +12,11 @@ var datasync_deleteLocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datasync_deleteLocationCmd).Standalone()
+	carapace.Gen(datasync_deleteLocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datasync_deleteLocationCmd).Standalone()
 
-	datasync_deleteLocationCmd.Flags().String("location-arn", "", "The Amazon Resource Name (ARN) of the location to delete.")
-	datasync_deleteLocationCmd.MarkFlagRequired("location-arn")
+		datasync_deleteLocationCmd.Flags().String("location-arn", "", "The Amazon Resource Name (ARN) of the location to delete.")
+		datasync_deleteLocationCmd.MarkFlagRequired("location-arn")
+	})
 	datasyncCmd.AddCommand(datasync_deleteLocationCmd)
 }

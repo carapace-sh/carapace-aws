@@ -12,13 +12,15 @@ var datazone_deleteEnvironmentActionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_deleteEnvironmentActionCmd).Standalone()
+	carapace.Gen(datazone_deleteEnvironmentActionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_deleteEnvironmentActionCmd).Standalone()
 
-	datazone_deleteEnvironmentActionCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which an environment action is deleted.")
-	datazone_deleteEnvironmentActionCmd.Flags().String("environment-identifier", "", "The ID of the environment where an environment action is deleted.")
-	datazone_deleteEnvironmentActionCmd.Flags().String("identifier", "", "The ID of the environment action that is deleted.")
-	datazone_deleteEnvironmentActionCmd.MarkFlagRequired("domain-identifier")
-	datazone_deleteEnvironmentActionCmd.MarkFlagRequired("environment-identifier")
-	datazone_deleteEnvironmentActionCmd.MarkFlagRequired("identifier")
+		datazone_deleteEnvironmentActionCmd.Flags().String("domain-identifier", "", "The ID of the Amazon DataZone domain in which an environment action is deleted.")
+		datazone_deleteEnvironmentActionCmd.Flags().String("environment-identifier", "", "The ID of the environment where an environment action is deleted.")
+		datazone_deleteEnvironmentActionCmd.Flags().String("identifier", "", "The ID of the environment action that is deleted.")
+		datazone_deleteEnvironmentActionCmd.MarkFlagRequired("domain-identifier")
+		datazone_deleteEnvironmentActionCmd.MarkFlagRequired("environment-identifier")
+		datazone_deleteEnvironmentActionCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_deleteEnvironmentActionCmd)
 }

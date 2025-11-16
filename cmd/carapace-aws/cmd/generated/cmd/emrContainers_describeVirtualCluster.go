@@ -12,9 +12,11 @@ var emrContainers_describeVirtualClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrContainers_describeVirtualClusterCmd).Standalone()
+	carapace.Gen(emrContainers_describeVirtualClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrContainers_describeVirtualClusterCmd).Standalone()
 
-	emrContainers_describeVirtualClusterCmd.Flags().String("id", "", "The ID of the virtual cluster that will be described.")
-	emrContainers_describeVirtualClusterCmd.MarkFlagRequired("id")
+		emrContainers_describeVirtualClusterCmd.Flags().String("id", "", "The ID of the virtual cluster that will be described.")
+		emrContainers_describeVirtualClusterCmd.MarkFlagRequired("id")
+	})
 	emrContainersCmd.AddCommand(emrContainers_describeVirtualClusterCmd)
 }

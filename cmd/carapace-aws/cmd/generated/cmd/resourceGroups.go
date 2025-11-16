@@ -12,7 +12,9 @@ var resourceGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceGroupsCmd).Standalone()
+	carapace.Gen(resourceGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceGroupsCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(resourceGroupsCmd)
 }

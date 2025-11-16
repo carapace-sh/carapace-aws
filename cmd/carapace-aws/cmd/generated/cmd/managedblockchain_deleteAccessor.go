@@ -12,9 +12,11 @@ var managedblockchain_deleteAccessorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchain_deleteAccessorCmd).Standalone()
+	carapace.Gen(managedblockchain_deleteAccessorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchain_deleteAccessorCmd).Standalone()
 
-	managedblockchain_deleteAccessorCmd.Flags().String("accessor-id", "", "The unique identifier of the accessor.")
-	managedblockchain_deleteAccessorCmd.MarkFlagRequired("accessor-id")
+		managedblockchain_deleteAccessorCmd.Flags().String("accessor-id", "", "The unique identifier of the accessor.")
+		managedblockchain_deleteAccessorCmd.MarkFlagRequired("accessor-id")
+	})
 	managedblockchainCmd.AddCommand(managedblockchain_deleteAccessorCmd)
 }

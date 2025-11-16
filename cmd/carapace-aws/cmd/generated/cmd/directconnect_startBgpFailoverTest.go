@@ -12,11 +12,13 @@ var directconnect_startBgpFailoverTestCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_startBgpFailoverTestCmd).Standalone()
+	carapace.Gen(directconnect_startBgpFailoverTestCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_startBgpFailoverTestCmd).Standalone()
 
-	directconnect_startBgpFailoverTestCmd.Flags().String("bgp-peers", "", "The BGP peers to place in the DOWN state.")
-	directconnect_startBgpFailoverTestCmd.Flags().String("test-duration-in-minutes", "", "The time in minutes that the virtual interface failover test will last.")
-	directconnect_startBgpFailoverTestCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface you want to test.")
-	directconnect_startBgpFailoverTestCmd.MarkFlagRequired("virtual-interface-id")
+		directconnect_startBgpFailoverTestCmd.Flags().String("bgp-peers", "", "The BGP peers to place in the DOWN state.")
+		directconnect_startBgpFailoverTestCmd.Flags().String("test-duration-in-minutes", "", "The time in minutes that the virtual interface failover test will last.")
+		directconnect_startBgpFailoverTestCmd.Flags().String("virtual-interface-id", "", "The ID of the virtual interface you want to test.")
+		directconnect_startBgpFailoverTestCmd.MarkFlagRequired("virtual-interface-id")
+	})
 	directconnectCmd.AddCommand(directconnect_startBgpFailoverTestCmd)
 }

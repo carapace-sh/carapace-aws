@@ -12,13 +12,15 @@ var supplychain_getDataIntegrationFlowExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supplychain_getDataIntegrationFlowExecutionCmd).Standalone()
+	carapace.Gen(supplychain_getDataIntegrationFlowExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supplychain_getDataIntegrationFlowExecutionCmd).Standalone()
 
-	supplychain_getDataIntegrationFlowExecutionCmd.Flags().String("execution-id", "", "The flow execution identifier.")
-	supplychain_getDataIntegrationFlowExecutionCmd.Flags().String("flow-name", "", "The flow name.")
-	supplychain_getDataIntegrationFlowExecutionCmd.Flags().String("instance-id", "", "The AWS Supply Chain instance identifier.")
-	supplychain_getDataIntegrationFlowExecutionCmd.MarkFlagRequired("execution-id")
-	supplychain_getDataIntegrationFlowExecutionCmd.MarkFlagRequired("flow-name")
-	supplychain_getDataIntegrationFlowExecutionCmd.MarkFlagRequired("instance-id")
+		supplychain_getDataIntegrationFlowExecutionCmd.Flags().String("execution-id", "", "The flow execution identifier.")
+		supplychain_getDataIntegrationFlowExecutionCmd.Flags().String("flow-name", "", "The flow name.")
+		supplychain_getDataIntegrationFlowExecutionCmd.Flags().String("instance-id", "", "The AWS Supply Chain instance identifier.")
+		supplychain_getDataIntegrationFlowExecutionCmd.MarkFlagRequired("execution-id")
+		supplychain_getDataIntegrationFlowExecutionCmd.MarkFlagRequired("flow-name")
+		supplychain_getDataIntegrationFlowExecutionCmd.MarkFlagRequired("instance-id")
+	})
 	supplychainCmd.AddCommand(supplychain_getDataIntegrationFlowExecutionCmd)
 }

@@ -12,11 +12,13 @@ var wafv2_getRuleGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wafv2_getRuleGroupCmd).Standalone()
+	carapace.Gen(wafv2_getRuleGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wafv2_getRuleGroupCmd).Standalone()
 
-	wafv2_getRuleGroupCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the entity.")
-	wafv2_getRuleGroupCmd.Flags().String("id", "", "A unique identifier for the rule group.")
-	wafv2_getRuleGroupCmd.Flags().String("name", "", "The name of the rule group.")
-	wafv2_getRuleGroupCmd.Flags().String("scope", "", "Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.")
+		wafv2_getRuleGroupCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the entity.")
+		wafv2_getRuleGroupCmd.Flags().String("id", "", "A unique identifier for the rule group.")
+		wafv2_getRuleGroupCmd.Flags().String("name", "", "The name of the rule group.")
+		wafv2_getRuleGroupCmd.Flags().String("scope", "", "Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.")
+	})
 	wafv2Cmd.AddCommand(wafv2_getRuleGroupCmd)
 }

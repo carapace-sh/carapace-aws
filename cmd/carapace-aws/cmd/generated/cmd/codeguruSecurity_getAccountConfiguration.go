@@ -12,7 +12,9 @@ var codeguruSecurity_getAccountConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codeguruSecurity_getAccountConfigurationCmd).Standalone()
+	carapace.Gen(codeguruSecurity_getAccountConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codeguruSecurity_getAccountConfigurationCmd).Standalone()
 
+	})
 	codeguruSecurityCmd.AddCommand(codeguruSecurity_getAccountConfigurationCmd)
 }

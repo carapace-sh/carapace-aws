@@ -12,9 +12,11 @@ var iotanalytics_deletePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_deletePipelineCmd).Standalone()
+	carapace.Gen(iotanalytics_deletePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_deletePipelineCmd).Standalone()
 
-	iotanalytics_deletePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to delete.")
-	iotanalytics_deletePipelineCmd.MarkFlagRequired("pipeline-name")
+		iotanalytics_deletePipelineCmd.Flags().String("pipeline-name", "", "The name of the pipeline to delete.")
+		iotanalytics_deletePipelineCmd.MarkFlagRequired("pipeline-name")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_deletePipelineCmd)
 }

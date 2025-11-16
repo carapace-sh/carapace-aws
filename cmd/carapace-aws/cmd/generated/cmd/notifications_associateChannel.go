@@ -12,11 +12,13 @@ var notifications_associateChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_associateChannelCmd).Standalone()
+	carapace.Gen(notifications_associateChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_associateChannelCmd).Standalone()
 
-	notifications_associateChannelCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Channel to associate with the `NotificationConfiguration`.")
-	notifications_associateChannelCmd.Flags().String("notification-configuration-arn", "", "The ARN of the `NotificationConfiguration` to associate with the Channel.")
-	notifications_associateChannelCmd.MarkFlagRequired("arn")
-	notifications_associateChannelCmd.MarkFlagRequired("notification-configuration-arn")
+		notifications_associateChannelCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the Channel to associate with the `NotificationConfiguration`.")
+		notifications_associateChannelCmd.Flags().String("notification-configuration-arn", "", "The ARN of the `NotificationConfiguration` to associate with the Channel.")
+		notifications_associateChannelCmd.MarkFlagRequired("arn")
+		notifications_associateChannelCmd.MarkFlagRequired("notification-configuration-arn")
+	})
 	notificationsCmd.AddCommand(notifications_associateChannelCmd)
 }

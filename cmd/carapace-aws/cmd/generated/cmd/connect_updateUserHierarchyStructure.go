@@ -12,11 +12,13 @@ var connect_updateUserHierarchyStructureCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_updateUserHierarchyStructureCmd).Standalone()
+	carapace.Gen(connect_updateUserHierarchyStructureCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_updateUserHierarchyStructureCmd).Standalone()
 
-	connect_updateUserHierarchyStructureCmd.Flags().String("hierarchy-structure", "", "The hierarchy levels to update.")
-	connect_updateUserHierarchyStructureCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_updateUserHierarchyStructureCmd.MarkFlagRequired("hierarchy-structure")
-	connect_updateUserHierarchyStructureCmd.MarkFlagRequired("instance-id")
+		connect_updateUserHierarchyStructureCmd.Flags().String("hierarchy-structure", "", "The hierarchy levels to update.")
+		connect_updateUserHierarchyStructureCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_updateUserHierarchyStructureCmd.MarkFlagRequired("hierarchy-structure")
+		connect_updateUserHierarchyStructureCmd.MarkFlagRequired("instance-id")
+	})
 	connectCmd.AddCommand(connect_updateUserHierarchyStructureCmd)
 }

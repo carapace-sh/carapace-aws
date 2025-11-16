@@ -12,13 +12,15 @@ var iotManagedIntegrations_registerAccountAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_registerAccountAssociationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_registerAccountAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_registerAccountAssociationCmd).Standalone()
 
-	iotManagedIntegrations_registerAccountAssociationCmd.Flags().String("account-association-id", "", "The identifier of the account association to register with the managed thing.")
-	iotManagedIntegrations_registerAccountAssociationCmd.Flags().String("device-discovery-id", "", "The identifier of the device discovery job associated with this registration.")
-	iotManagedIntegrations_registerAccountAssociationCmd.Flags().String("managed-thing-id", "", "The identifier of the managed thing to register with the account association.")
-	iotManagedIntegrations_registerAccountAssociationCmd.MarkFlagRequired("account-association-id")
-	iotManagedIntegrations_registerAccountAssociationCmd.MarkFlagRequired("device-discovery-id")
-	iotManagedIntegrations_registerAccountAssociationCmd.MarkFlagRequired("managed-thing-id")
+		iotManagedIntegrations_registerAccountAssociationCmd.Flags().String("account-association-id", "", "The identifier of the account association to register with the managed thing.")
+		iotManagedIntegrations_registerAccountAssociationCmd.Flags().String("device-discovery-id", "", "The identifier of the device discovery job associated with this registration.")
+		iotManagedIntegrations_registerAccountAssociationCmd.Flags().String("managed-thing-id", "", "The identifier of the managed thing to register with the account association.")
+		iotManagedIntegrations_registerAccountAssociationCmd.MarkFlagRequired("account-association-id")
+		iotManagedIntegrations_registerAccountAssociationCmd.MarkFlagRequired("device-discovery-id")
+		iotManagedIntegrations_registerAccountAssociationCmd.MarkFlagRequired("managed-thing-id")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_registerAccountAssociationCmd)
 }

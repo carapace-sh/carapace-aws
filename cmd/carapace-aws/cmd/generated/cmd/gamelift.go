@@ -12,7 +12,9 @@ var gameliftCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gameliftCmd).Standalone()
+	carapace.Gen(gameliftCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gameliftCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(gameliftCmd)
 }

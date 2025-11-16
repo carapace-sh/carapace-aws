@@ -12,9 +12,11 @@ var chimeSdkVoice_listVoiceConnectorGroupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_listVoiceConnectorGroupsCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_listVoiceConnectorGroupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_listVoiceConnectorGroupsCmd).Standalone()
 
-	chimeSdkVoice_listVoiceConnectorGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
-	chimeSdkVoice_listVoiceConnectorGroupsCmd.Flags().String("next-token", "", "The token used to return the next page of results.")
+		chimeSdkVoice_listVoiceConnectorGroupsCmd.Flags().String("max-results", "", "The maximum number of results to return in a single call.")
+		chimeSdkVoice_listVoiceConnectorGroupsCmd.Flags().String("next-token", "", "The token used to return the next page of results.")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_listVoiceConnectorGroupsCmd)
 }

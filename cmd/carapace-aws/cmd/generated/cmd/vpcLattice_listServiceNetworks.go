@@ -12,9 +12,11 @@ var vpcLattice_listServiceNetworksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listServiceNetworksCmd).Standalone()
+	carapace.Gen(vpcLattice_listServiceNetworksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listServiceNetworksCmd).Standalone()
 
-	vpcLattice_listServiceNetworksCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	vpcLattice_listServiceNetworksCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+		vpcLattice_listServiceNetworksCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		vpcLattice_listServiceNetworksCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listServiceNetworksCmd)
 }

@@ -12,9 +12,11 @@ var securityhub_getAggregatorV2Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityhub_getAggregatorV2Cmd).Standalone()
+	carapace.Gen(securityhub_getAggregatorV2Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityhub_getAggregatorV2Cmd).Standalone()
 
-	securityhub_getAggregatorV2Cmd.Flags().String("aggregator-v2-arn", "", "The ARN of the Aggregator V2.")
-	securityhub_getAggregatorV2Cmd.MarkFlagRequired("aggregator-v2-arn")
+		securityhub_getAggregatorV2Cmd.Flags().String("aggregator-v2-arn", "", "The ARN of the Aggregator V2.")
+		securityhub_getAggregatorV2Cmd.MarkFlagRequired("aggregator-v2-arn")
+	})
 	securityhubCmd.AddCommand(securityhub_getAggregatorV2Cmd)
 }

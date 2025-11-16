@@ -12,9 +12,11 @@ var iotanalytics_listChannelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotanalytics_listChannelsCmd).Standalone()
+	carapace.Gen(iotanalytics_listChannelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotanalytics_listChannelsCmd).Standalone()
 
-	iotanalytics_listChannelsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	iotanalytics_listChannelsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		iotanalytics_listChannelsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		iotanalytics_listChannelsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	iotanalyticsCmd.AddCommand(iotanalytics_listChannelsCmd)
 }

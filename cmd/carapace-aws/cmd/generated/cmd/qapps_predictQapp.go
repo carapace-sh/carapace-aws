@@ -12,10 +12,12 @@ var qapps_predictQappCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qapps_predictQappCmd).Standalone()
+	carapace.Gen(qapps_predictQappCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qapps_predictQappCmd).Standalone()
 
-	qapps_predictQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
-	qapps_predictQappCmd.Flags().String("options", "", "The input to generate the Q App definition from, either a conversation or problem statement.")
-	qapps_predictQappCmd.MarkFlagRequired("instance-id")
+		qapps_predictQappCmd.Flags().String("instance-id", "", "The unique identifier of the Amazon Q Business application environment instance.")
+		qapps_predictQappCmd.Flags().String("options", "", "The input to generate the Q App definition from, either a conversation or problem statement.")
+		qapps_predictQappCmd.MarkFlagRequired("instance-id")
+	})
 	qappsCmd.AddCommand(qapps_predictQappCmd)
 }

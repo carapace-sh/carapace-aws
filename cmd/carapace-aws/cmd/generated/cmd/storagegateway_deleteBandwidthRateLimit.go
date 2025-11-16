@@ -12,11 +12,13 @@ var storagegateway_deleteBandwidthRateLimitCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_deleteBandwidthRateLimitCmd).Standalone()
+	carapace.Gen(storagegateway_deleteBandwidthRateLimitCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_deleteBandwidthRateLimitCmd).Standalone()
 
-	storagegateway_deleteBandwidthRateLimitCmd.Flags().String("bandwidth-type", "", "One of the BandwidthType values that indicates the gateway bandwidth rate limit to delete.")
-	storagegateway_deleteBandwidthRateLimitCmd.Flags().String("gateway-arn", "", "")
-	storagegateway_deleteBandwidthRateLimitCmd.MarkFlagRequired("bandwidth-type")
-	storagegateway_deleteBandwidthRateLimitCmd.MarkFlagRequired("gateway-arn")
+		storagegateway_deleteBandwidthRateLimitCmd.Flags().String("bandwidth-type", "", "One of the BandwidthType values that indicates the gateway bandwidth rate limit to delete.")
+		storagegateway_deleteBandwidthRateLimitCmd.Flags().String("gateway-arn", "", "")
+		storagegateway_deleteBandwidthRateLimitCmd.MarkFlagRequired("bandwidth-type")
+		storagegateway_deleteBandwidthRateLimitCmd.MarkFlagRequired("gateway-arn")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_deleteBandwidthRateLimitCmd)
 }

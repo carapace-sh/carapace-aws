@@ -12,7 +12,9 @@ var iot_clearDefaultAuthorizerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_clearDefaultAuthorizerCmd).Standalone()
+	carapace.Gen(iot_clearDefaultAuthorizerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_clearDefaultAuthorizerCmd).Standalone()
 
+	})
 	iotCmd.AddCommand(iot_clearDefaultAuthorizerCmd)
 }

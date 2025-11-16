@@ -12,9 +12,11 @@ var neptune_describeEventCategoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptune_describeEventCategoriesCmd).Standalone()
+	carapace.Gen(neptune_describeEventCategoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptune_describeEventCategoriesCmd).Standalone()
 
-	neptune_describeEventCategoriesCmd.Flags().String("filters", "", "This parameter is not currently supported.")
-	neptune_describeEventCategoriesCmd.Flags().String("source-type", "", "The type of source that is generating the events.")
+		neptune_describeEventCategoriesCmd.Flags().String("filters", "", "This parameter is not currently supported.")
+		neptune_describeEventCategoriesCmd.Flags().String("source-type", "", "The type of source that is generating the events.")
+	})
 	neptuneCmd.AddCommand(neptune_describeEventCategoriesCmd)
 }

@@ -12,9 +12,11 @@ var mgh_listProgressUpdateStreamsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgh_listProgressUpdateStreamsCmd).Standalone()
+	carapace.Gen(mgh_listProgressUpdateStreamsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgh_listProgressUpdateStreamsCmd).Standalone()
 
-	mgh_listProgressUpdateStreamsCmd.Flags().String("max-results", "", "Filter to limit the maximum number of results to list per page.")
-	mgh_listProgressUpdateStreamsCmd.Flags().String("next-token", "", "If a `NextToken` was returned by a previous call, there are more results available.")
+		mgh_listProgressUpdateStreamsCmd.Flags().String("max-results", "", "Filter to limit the maximum number of results to list per page.")
+		mgh_listProgressUpdateStreamsCmd.Flags().String("next-token", "", "If a `NextToken` was returned by a previous call, there are more results available.")
+	})
 	mghCmd.AddCommand(mgh_listProgressUpdateStreamsCmd)
 }

@@ -12,9 +12,11 @@ var codebuild_batchGetProjectsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codebuild_batchGetProjectsCmd).Standalone()
+	carapace.Gen(codebuild_batchGetProjectsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codebuild_batchGetProjectsCmd).Standalone()
 
-	codebuild_batchGetProjectsCmd.Flags().String("names", "", "The names or ARNs of the build projects.")
-	codebuild_batchGetProjectsCmd.MarkFlagRequired("names")
+		codebuild_batchGetProjectsCmd.Flags().String("names", "", "The names or ARNs of the build projects.")
+		codebuild_batchGetProjectsCmd.MarkFlagRequired("names")
+	})
 	codebuildCmd.AddCommand(codebuild_batchGetProjectsCmd)
 }

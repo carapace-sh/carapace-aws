@@ -12,7 +12,9 @@ var lightsail_downloadDefaultKeyPairCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_downloadDefaultKeyPairCmd).Standalone()
+	carapace.Gen(lightsail_downloadDefaultKeyPairCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_downloadDefaultKeyPairCmd).Standalone()
 
+	})
 	lightsailCmd.AddCommand(lightsail_downloadDefaultKeyPairCmd)
 }

@@ -12,9 +12,11 @@ var lightsail_getDiskSnapshotCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getDiskSnapshotCmd).Standalone()
+	carapace.Gen(lightsail_getDiskSnapshotCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getDiskSnapshotCmd).Standalone()
 
-	lightsail_getDiskSnapshotCmd.Flags().String("disk-snapshot-name", "", "The name of the disk snapshot (`my-disk-snapshot`).")
-	lightsail_getDiskSnapshotCmd.MarkFlagRequired("disk-snapshot-name")
+		lightsail_getDiskSnapshotCmd.Flags().String("disk-snapshot-name", "", "The name of the disk snapshot (`my-disk-snapshot`).")
+		lightsail_getDiskSnapshotCmd.MarkFlagRequired("disk-snapshot-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getDiskSnapshotCmd)
 }

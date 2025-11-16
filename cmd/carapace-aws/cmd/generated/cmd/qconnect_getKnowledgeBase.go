@@ -12,9 +12,11 @@ var qconnect_getKnowledgeBaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_getKnowledgeBaseCmd).Standalone()
+	carapace.Gen(qconnect_getKnowledgeBaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_getKnowledgeBaseCmd).Standalone()
 
-	qconnect_getKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_getKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_getKnowledgeBaseCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_getKnowledgeBaseCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	qconnectCmd.AddCommand(qconnect_getKnowledgeBaseCmd)
 }

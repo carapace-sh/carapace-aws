@@ -12,9 +12,11 @@ var iotwireless_deleteWirelessGatewayTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_deleteWirelessGatewayTaskCmd).Standalone()
+	carapace.Gen(iotwireless_deleteWirelessGatewayTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_deleteWirelessGatewayTaskCmd).Standalone()
 
-	iotwireless_deleteWirelessGatewayTaskCmd.Flags().String("id", "", "The ID of the resource to delete.")
-	iotwireless_deleteWirelessGatewayTaskCmd.MarkFlagRequired("id")
+		iotwireless_deleteWirelessGatewayTaskCmd.Flags().String("id", "", "The ID of the resource to delete.")
+		iotwireless_deleteWirelessGatewayTaskCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_deleteWirelessGatewayTaskCmd)
 }

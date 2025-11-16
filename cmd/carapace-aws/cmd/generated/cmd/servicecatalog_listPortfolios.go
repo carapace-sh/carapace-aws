@@ -12,10 +12,12 @@ var servicecatalog_listPortfoliosCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(servicecatalog_listPortfoliosCmd).Standalone()
+	carapace.Gen(servicecatalog_listPortfoliosCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalog_listPortfoliosCmd).Standalone()
 
-	servicecatalog_listPortfoliosCmd.Flags().String("accept-language", "", "The language code.")
-	servicecatalog_listPortfoliosCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
-	servicecatalog_listPortfoliosCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+		servicecatalog_listPortfoliosCmd.Flags().String("accept-language", "", "The language code.")
+		servicecatalog_listPortfoliosCmd.Flags().String("page-size", "", "The maximum number of items to return with this call.")
+		servicecatalog_listPortfoliosCmd.Flags().String("page-token", "", "The page token for the next set of results.")
+	})
 	servicecatalogCmd.AddCommand(servicecatalog_listPortfoliosCmd)
 }

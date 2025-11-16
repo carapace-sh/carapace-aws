@@ -12,10 +12,12 @@ var es_listVpcEndpointAccessCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_listVpcEndpointAccessCmd).Standalone()
+	carapace.Gen(es_listVpcEndpointAccessCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_listVpcEndpointAccessCmd).Standalone()
 
-	es_listVpcEndpointAccessCmd.Flags().String("domain-name", "", "The name of the OpenSearch Service domain to retrieve access information for.")
-	es_listVpcEndpointAccessCmd.Flags().String("next-token", "", "Provides an identifier to allow retrieval of paginated results.")
-	es_listVpcEndpointAccessCmd.MarkFlagRequired("domain-name")
+		es_listVpcEndpointAccessCmd.Flags().String("domain-name", "", "The name of the OpenSearch Service domain to retrieve access information for.")
+		es_listVpcEndpointAccessCmd.Flags().String("next-token", "", "Provides an identifier to allow retrieval of paginated results.")
+		es_listVpcEndpointAccessCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_listVpcEndpointAccessCmd)
 }

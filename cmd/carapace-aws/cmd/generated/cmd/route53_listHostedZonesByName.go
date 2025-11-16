@@ -12,10 +12,12 @@ var route53_listHostedZonesByNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53_listHostedZonesByNameCmd).Standalone()
+	carapace.Gen(route53_listHostedZonesByNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53_listHostedZonesByNameCmd).Standalone()
 
-	route53_listHostedZonesByNameCmd.Flags().String("dnsname", "", "(Optional) For your first request to `ListHostedZonesByName`, include the `dnsname` parameter only if you want to specify the name of the first hosted zone in the response.")
-	route53_listHostedZonesByNameCmd.Flags().String("hosted-zone-id", "", "(Optional) For your first request to `ListHostedZonesByName`, do not include the `hostedzoneid` parameter.")
-	route53_listHostedZonesByNameCmd.Flags().String("max-items", "", "The maximum number of hosted zones to be included in the response body for this request.")
+		route53_listHostedZonesByNameCmd.Flags().String("dnsname", "", "(Optional) For your first request to `ListHostedZonesByName`, include the `dnsname` parameter only if you want to specify the name of the first hosted zone in the response.")
+		route53_listHostedZonesByNameCmd.Flags().String("hosted-zone-id", "", "(Optional) For your first request to `ListHostedZonesByName`, do not include the `hostedzoneid` parameter.")
+		route53_listHostedZonesByNameCmd.Flags().String("max-items", "", "The maximum number of hosted zones to be included in the response body for this request.")
+	})
 	route53Cmd.AddCommand(route53_listHostedZonesByNameCmd)
 }

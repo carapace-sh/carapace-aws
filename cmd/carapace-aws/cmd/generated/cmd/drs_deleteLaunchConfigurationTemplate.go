@@ -12,9 +12,11 @@ var drs_deleteLaunchConfigurationTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_deleteLaunchConfigurationTemplateCmd).Standalone()
+	carapace.Gen(drs_deleteLaunchConfigurationTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_deleteLaunchConfigurationTemplateCmd).Standalone()
 
-	drs_deleteLaunchConfigurationTemplateCmd.Flags().String("launch-configuration-template-id", "", "The ID of the Launch Configuration Template to be deleted.")
-	drs_deleteLaunchConfigurationTemplateCmd.MarkFlagRequired("launch-configuration-template-id")
+		drs_deleteLaunchConfigurationTemplateCmd.Flags().String("launch-configuration-template-id", "", "The ID of the Launch Configuration Template to be deleted.")
+		drs_deleteLaunchConfigurationTemplateCmd.MarkFlagRequired("launch-configuration-template-id")
+	})
 	drsCmd.AddCommand(drs_deleteLaunchConfigurationTemplateCmd)
 }

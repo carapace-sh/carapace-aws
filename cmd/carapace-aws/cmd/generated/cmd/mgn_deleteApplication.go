@@ -12,10 +12,12 @@ var mgn_deleteApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mgn_deleteApplicationCmd).Standalone()
+	carapace.Gen(mgn_deleteApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mgn_deleteApplicationCmd).Standalone()
 
-	mgn_deleteApplicationCmd.Flags().String("account-id", "", "Account ID.")
-	mgn_deleteApplicationCmd.Flags().String("application-id", "", "Application ID.")
-	mgn_deleteApplicationCmd.MarkFlagRequired("application-id")
+		mgn_deleteApplicationCmd.Flags().String("account-id", "", "Account ID.")
+		mgn_deleteApplicationCmd.Flags().String("application-id", "", "Application ID.")
+		mgn_deleteApplicationCmd.MarkFlagRequired("application-id")
+	})
 	mgnCmd.AddCommand(mgn_deleteApplicationCmd)
 }

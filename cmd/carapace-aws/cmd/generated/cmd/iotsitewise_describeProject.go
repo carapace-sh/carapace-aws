@@ -12,9 +12,11 @@ var iotsitewise_describeProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeProjectCmd).Standalone()
+	carapace.Gen(iotsitewise_describeProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeProjectCmd).Standalone()
 
-	iotsitewise_describeProjectCmd.Flags().String("project-id", "", "The ID of the project.")
-	iotsitewise_describeProjectCmd.MarkFlagRequired("project-id")
+		iotsitewise_describeProjectCmd.Flags().String("project-id", "", "The ID of the project.")
+		iotsitewise_describeProjectCmd.MarkFlagRequired("project-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeProjectCmd)
 }

@@ -12,12 +12,14 @@ var ssm_getParametersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getParametersCmd).Standalone()
+	carapace.Gen(ssm_getParametersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getParametersCmd).Standalone()
 
-	ssm_getParametersCmd.Flags().String("names", "", "The names or Amazon Resource Names (ARNs) of the parameters that you want to query.")
-	ssm_getParametersCmd.Flags().Bool("no-with-decryption", false, "Return decrypted secure string value.")
-	ssm_getParametersCmd.Flags().Bool("with-decryption", false, "Return decrypted secure string value.")
-	ssm_getParametersCmd.MarkFlagRequired("names")
-	ssm_getParametersCmd.Flag("no-with-decryption").Hidden = true
+		ssm_getParametersCmd.Flags().String("names", "", "The names or Amazon Resource Names (ARNs) of the parameters that you want to query.")
+		ssm_getParametersCmd.Flags().Bool("no-with-decryption", false, "Return decrypted secure string value.")
+		ssm_getParametersCmd.Flags().Bool("with-decryption", false, "Return decrypted secure string value.")
+		ssm_getParametersCmd.MarkFlagRequired("names")
+		ssm_getParametersCmd.Flag("no-with-decryption").Hidden = true
+	})
 	ssmCmd.AddCommand(ssm_getParametersCmd)
 }

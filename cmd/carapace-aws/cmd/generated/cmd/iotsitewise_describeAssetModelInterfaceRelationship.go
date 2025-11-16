@@ -12,11 +12,13 @@ var iotsitewise_describeAssetModelInterfaceRelationshipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_describeAssetModelInterfaceRelationshipCmd).Standalone()
+	carapace.Gen(iotsitewise_describeAssetModelInterfaceRelationshipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_describeAssetModelInterfaceRelationshipCmd).Standalone()
 
-	iotsitewise_describeAssetModelInterfaceRelationshipCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
-	iotsitewise_describeAssetModelInterfaceRelationshipCmd.Flags().String("interface-asset-model-id", "", "The ID of the interface asset model.")
-	iotsitewise_describeAssetModelInterfaceRelationshipCmd.MarkFlagRequired("asset-model-id")
-	iotsitewise_describeAssetModelInterfaceRelationshipCmd.MarkFlagRequired("interface-asset-model-id")
+		iotsitewise_describeAssetModelInterfaceRelationshipCmd.Flags().String("asset-model-id", "", "The ID of the asset model.")
+		iotsitewise_describeAssetModelInterfaceRelationshipCmd.Flags().String("interface-asset-model-id", "", "The ID of the interface asset model.")
+		iotsitewise_describeAssetModelInterfaceRelationshipCmd.MarkFlagRequired("asset-model-id")
+		iotsitewise_describeAssetModelInterfaceRelationshipCmd.MarkFlagRequired("interface-asset-model-id")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_describeAssetModelInterfaceRelationshipCmd)
 }

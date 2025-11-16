@@ -12,10 +12,12 @@ var s3_deleteBucketOwnershipControlsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_deleteBucketOwnershipControlsCmd).Standalone()
+	carapace.Gen(s3_deleteBucketOwnershipControlsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_deleteBucketOwnershipControlsCmd).Standalone()
 
-	s3_deleteBucketOwnershipControlsCmd.Flags().String("bucket", "", "The Amazon S3 bucket whose `OwnershipControls` you want to delete.")
-	s3_deleteBucketOwnershipControlsCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_deleteBucketOwnershipControlsCmd.MarkFlagRequired("bucket")
+		s3_deleteBucketOwnershipControlsCmd.Flags().String("bucket", "", "The Amazon S3 bucket whose `OwnershipControls` you want to delete.")
+		s3_deleteBucketOwnershipControlsCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_deleteBucketOwnershipControlsCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_deleteBucketOwnershipControlsCmd)
 }

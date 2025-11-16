@@ -12,15 +12,17 @@ var iotsitewise_createDatasetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_createDatasetCmd).Standalone()
+	carapace.Gen(iotsitewise_createDatasetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_createDatasetCmd).Standalone()
 
-	iotsitewise_createDatasetCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
-	iotsitewise_createDatasetCmd.Flags().String("dataset-description", "", "A description about the dataset, and its functionality.")
-	iotsitewise_createDatasetCmd.Flags().String("dataset-id", "", "The ID of the dataset.")
-	iotsitewise_createDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset.")
-	iotsitewise_createDatasetCmd.Flags().String("dataset-source", "", "The data source for the dataset.")
-	iotsitewise_createDatasetCmd.Flags().String("tags", "", "A list of key-value pairs that contain metadata for the access policy.")
-	iotsitewise_createDatasetCmd.MarkFlagRequired("dataset-name")
-	iotsitewise_createDatasetCmd.MarkFlagRequired("dataset-source")
+		iotsitewise_createDatasetCmd.Flags().String("client-token", "", "A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.")
+		iotsitewise_createDatasetCmd.Flags().String("dataset-description", "", "A description about the dataset, and its functionality.")
+		iotsitewise_createDatasetCmd.Flags().String("dataset-id", "", "The ID of the dataset.")
+		iotsitewise_createDatasetCmd.Flags().String("dataset-name", "", "The name of the dataset.")
+		iotsitewise_createDatasetCmd.Flags().String("dataset-source", "", "The data source for the dataset.")
+		iotsitewise_createDatasetCmd.Flags().String("tags", "", "A list of key-value pairs that contain metadata for the access policy.")
+		iotsitewise_createDatasetCmd.MarkFlagRequired("dataset-name")
+		iotsitewise_createDatasetCmd.MarkFlagRequired("dataset-source")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_createDatasetCmd)
 }

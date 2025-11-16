@@ -12,9 +12,11 @@ var mediapackageVod_describePackagingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackageVod_describePackagingConfigurationCmd).Standalone()
+	carapace.Gen(mediapackageVod_describePackagingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackageVod_describePackagingConfigurationCmd).Standalone()
 
-	mediapackageVod_describePackagingConfigurationCmd.Flags().String("id", "", "The ID of a MediaPackage VOD PackagingConfiguration resource.")
-	mediapackageVod_describePackagingConfigurationCmd.MarkFlagRequired("id")
+		mediapackageVod_describePackagingConfigurationCmd.Flags().String("id", "", "The ID of a MediaPackage VOD PackagingConfiguration resource.")
+		mediapackageVod_describePackagingConfigurationCmd.MarkFlagRequired("id")
+	})
 	mediapackageVodCmd.AddCommand(mediapackageVod_describePackagingConfigurationCmd)
 }

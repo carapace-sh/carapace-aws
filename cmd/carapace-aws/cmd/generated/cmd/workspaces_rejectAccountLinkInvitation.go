@@ -12,10 +12,12 @@ var workspaces_rejectAccountLinkInvitationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_rejectAccountLinkInvitationCmd).Standalone()
+	carapace.Gen(workspaces_rejectAccountLinkInvitationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_rejectAccountLinkInvitationCmd).Standalone()
 
-	workspaces_rejectAccountLinkInvitationCmd.Flags().String("client-token", "", "The client token of the account link invitation to reject.")
-	workspaces_rejectAccountLinkInvitationCmd.Flags().String("link-id", "", "The identifier of the account link")
-	workspaces_rejectAccountLinkInvitationCmd.MarkFlagRequired("link-id")
+		workspaces_rejectAccountLinkInvitationCmd.Flags().String("client-token", "", "The client token of the account link invitation to reject.")
+		workspaces_rejectAccountLinkInvitationCmd.Flags().String("link-id", "", "The identifier of the account link")
+		workspaces_rejectAccountLinkInvitationCmd.MarkFlagRequired("link-id")
+	})
 	workspacesCmd.AddCommand(workspaces_rejectAccountLinkInvitationCmd)
 }

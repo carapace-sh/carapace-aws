@@ -12,11 +12,13 @@ var glue_registerSchemaVersionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_registerSchemaVersionCmd).Standalone()
+	carapace.Gen(glue_registerSchemaVersionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_registerSchemaVersionCmd).Standalone()
 
-	glue_registerSchemaVersionCmd.Flags().String("schema-definition", "", "The schema definition using the `DataFormat` setting for the `SchemaName`.")
-	glue_registerSchemaVersionCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
-	glue_registerSchemaVersionCmd.MarkFlagRequired("schema-definition")
-	glue_registerSchemaVersionCmd.MarkFlagRequired("schema-id")
+		glue_registerSchemaVersionCmd.Flags().String("schema-definition", "", "The schema definition using the `DataFormat` setting for the `SchemaName`.")
+		glue_registerSchemaVersionCmd.Flags().String("schema-id", "", "This is a wrapper structure to contain schema identity fields.")
+		glue_registerSchemaVersionCmd.MarkFlagRequired("schema-definition")
+		glue_registerSchemaVersionCmd.MarkFlagRequired("schema-id")
+	})
 	glueCmd.AddCommand(glue_registerSchemaVersionCmd)
 }

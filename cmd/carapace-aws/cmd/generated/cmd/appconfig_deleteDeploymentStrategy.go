@@ -12,9 +12,11 @@ var appconfig_deleteDeploymentStrategyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_deleteDeploymentStrategyCmd).Standalone()
+	carapace.Gen(appconfig_deleteDeploymentStrategyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_deleteDeploymentStrategyCmd).Standalone()
 
-	appconfig_deleteDeploymentStrategyCmd.Flags().String("deployment-strategy-id", "", "The ID of the deployment strategy you want to delete.")
-	appconfig_deleteDeploymentStrategyCmd.MarkFlagRequired("deployment-strategy-id")
+		appconfig_deleteDeploymentStrategyCmd.Flags().String("deployment-strategy-id", "", "The ID of the deployment strategy you want to delete.")
+		appconfig_deleteDeploymentStrategyCmd.MarkFlagRequired("deployment-strategy-id")
+	})
 	appconfigCmd.AddCommand(appconfig_deleteDeploymentStrategyCmd)
 }

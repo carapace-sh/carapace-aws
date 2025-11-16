@@ -12,9 +12,11 @@ var lightsail_getInstancePortStatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getInstancePortStatesCmd).Standalone()
+	carapace.Gen(lightsail_getInstancePortStatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getInstancePortStatesCmd).Standalone()
 
-	lightsail_getInstancePortStatesCmd.Flags().String("instance-name", "", "The name of the instance for which to return firewall port states.")
-	lightsail_getInstancePortStatesCmd.MarkFlagRequired("instance-name")
+		lightsail_getInstancePortStatesCmd.Flags().String("instance-name", "", "The name of the instance for which to return firewall port states.")
+		lightsail_getInstancePortStatesCmd.MarkFlagRequired("instance-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getInstancePortStatesCmd)
 }

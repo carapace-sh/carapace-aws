@@ -12,14 +12,16 @@ var ec2_describeImageAttributeCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ec2_describeImageAttributeCmd).Standalone()
+	carapace.Gen(ec2_describeImageAttributeCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ec2_describeImageAttributeCmd).Standalone()
 
-	ec2_describeImageAttributeCmd.Flags().String("attribute", "", "The AMI attribute.")
-	ec2_describeImageAttributeCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeImageAttributeCmd.Flags().String("image-id", "", "The ID of the AMI.")
-	ec2_describeImageAttributeCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
-	ec2_describeImageAttributeCmd.MarkFlagRequired("attribute")
-	ec2_describeImageAttributeCmd.MarkFlagRequired("image-id")
-	ec2_describeImageAttributeCmd.Flag("no-dry-run").Hidden = true
+		ec2_describeImageAttributeCmd.Flags().String("attribute", "", "The AMI attribute.")
+		ec2_describeImageAttributeCmd.Flags().Bool("dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeImageAttributeCmd.Flags().String("image-id", "", "The ID of the AMI.")
+		ec2_describeImageAttributeCmd.Flags().Bool("no-dry-run", false, "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.")
+		ec2_describeImageAttributeCmd.MarkFlagRequired("attribute")
+		ec2_describeImageAttributeCmd.MarkFlagRequired("image-id")
+		ec2_describeImageAttributeCmd.Flag("no-dry-run").Hidden = true
+	})
 	ec2Cmd.AddCommand(ec2_describeImageAttributeCmd)
 }

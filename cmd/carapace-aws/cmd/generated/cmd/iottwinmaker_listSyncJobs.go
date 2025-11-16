@@ -12,11 +12,13 @@ var iottwinmaker_listSyncJobsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iottwinmaker_listSyncJobsCmd).Standalone()
+	carapace.Gen(iottwinmaker_listSyncJobsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iottwinmaker_listSyncJobsCmd).Standalone()
 
-	iottwinmaker_listSyncJobsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
-	iottwinmaker_listSyncJobsCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
-	iottwinmaker_listSyncJobsCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the sync job.")
-	iottwinmaker_listSyncJobsCmd.MarkFlagRequired("workspace-id")
+		iottwinmaker_listSyncJobsCmd.Flags().String("max-results", "", "The maximum number of results to return at one time.")
+		iottwinmaker_listSyncJobsCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
+		iottwinmaker_listSyncJobsCmd.Flags().String("workspace-id", "", "The ID of the workspace that contains the sync job.")
+		iottwinmaker_listSyncJobsCmd.MarkFlagRequired("workspace-id")
+	})
 	iottwinmakerCmd.AddCommand(iottwinmaker_listSyncJobsCmd)
 }

@@ -12,11 +12,13 @@ var outposts_listCapacityTasksCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(outposts_listCapacityTasksCmd).Standalone()
+	carapace.Gen(outposts_listCapacityTasksCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(outposts_listCapacityTasksCmd).Standalone()
 
-	outposts_listCapacityTasksCmd.Flags().String("capacity-task-status-filter", "", "A list of statuses.")
-	outposts_listCapacityTasksCmd.Flags().String("max-results", "", "")
-	outposts_listCapacityTasksCmd.Flags().String("next-token", "", "")
-	outposts_listCapacityTasksCmd.Flags().String("outpost-identifier-filter", "", "Filters the results by an Outpost ID or an Outpost ARN.")
+		outposts_listCapacityTasksCmd.Flags().String("capacity-task-status-filter", "", "A list of statuses.")
+		outposts_listCapacityTasksCmd.Flags().String("max-results", "", "")
+		outposts_listCapacityTasksCmd.Flags().String("next-token", "", "")
+		outposts_listCapacityTasksCmd.Flags().String("outpost-identifier-filter", "", "Filters the results by an Outpost ID or an Outpost ARN.")
+	})
 	outpostsCmd.AddCommand(outposts_listCapacityTasksCmd)
 }

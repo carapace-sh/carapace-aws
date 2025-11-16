@@ -12,15 +12,17 @@ var marketplaceCatalog_startChangeSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(marketplaceCatalog_startChangeSetCmd).Standalone()
+	carapace.Gen(marketplaceCatalog_startChangeSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(marketplaceCatalog_startChangeSetCmd).Standalone()
 
-	marketplaceCatalog_startChangeSetCmd.Flags().String("catalog", "", "The catalog related to the request.")
-	marketplaceCatalog_startChangeSetCmd.Flags().String("change-set", "", "Array of `change` object.")
-	marketplaceCatalog_startChangeSetCmd.Flags().String("change-set-name", "", "Optional case sensitive string of up to 100 ASCII characters.")
-	marketplaceCatalog_startChangeSetCmd.Flags().String("change-set-tags", "", "A list of objects specifying each key name and value for the `ChangeSetTags` property.")
-	marketplaceCatalog_startChangeSetCmd.Flags().String("client-request-token", "", "A unique token to identify the request to ensure idempotency.")
-	marketplaceCatalog_startChangeSetCmd.Flags().String("intent", "", "The intent related to the request.")
-	marketplaceCatalog_startChangeSetCmd.MarkFlagRequired("catalog")
-	marketplaceCatalog_startChangeSetCmd.MarkFlagRequired("change-set")
+		marketplaceCatalog_startChangeSetCmd.Flags().String("catalog", "", "The catalog related to the request.")
+		marketplaceCatalog_startChangeSetCmd.Flags().String("change-set", "", "Array of `change` object.")
+		marketplaceCatalog_startChangeSetCmd.Flags().String("change-set-name", "", "Optional case sensitive string of up to 100 ASCII characters.")
+		marketplaceCatalog_startChangeSetCmd.Flags().String("change-set-tags", "", "A list of objects specifying each key name and value for the `ChangeSetTags` property.")
+		marketplaceCatalog_startChangeSetCmd.Flags().String("client-request-token", "", "A unique token to identify the request to ensure idempotency.")
+		marketplaceCatalog_startChangeSetCmd.Flags().String("intent", "", "The intent related to the request.")
+		marketplaceCatalog_startChangeSetCmd.MarkFlagRequired("catalog")
+		marketplaceCatalog_startChangeSetCmd.MarkFlagRequired("change-set")
+	})
 	marketplaceCatalogCmd.AddCommand(marketplaceCatalog_startChangeSetCmd)
 }

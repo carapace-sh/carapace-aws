@@ -12,11 +12,13 @@ var kms_updatePrimaryRegionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_updatePrimaryRegionCmd).Standalone()
+	carapace.Gen(kms_updatePrimaryRegionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_updatePrimaryRegionCmd).Standalone()
 
-	kms_updatePrimaryRegionCmd.Flags().String("key-id", "", "Identifies the current primary key.")
-	kms_updatePrimaryRegionCmd.Flags().String("primary-region", "", "The Amazon Web Services Region of the new primary key.")
-	kms_updatePrimaryRegionCmd.MarkFlagRequired("key-id")
-	kms_updatePrimaryRegionCmd.MarkFlagRequired("primary-region")
+		kms_updatePrimaryRegionCmd.Flags().String("key-id", "", "Identifies the current primary key.")
+		kms_updatePrimaryRegionCmd.Flags().String("primary-region", "", "The Amazon Web Services Region of the new primary key.")
+		kms_updatePrimaryRegionCmd.MarkFlagRequired("key-id")
+		kms_updatePrimaryRegionCmd.MarkFlagRequired("primary-region")
+	})
 	kmsCmd.AddCommand(kms_updatePrimaryRegionCmd)
 }

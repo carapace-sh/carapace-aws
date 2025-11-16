@@ -12,9 +12,11 @@ var ivs_listPlaybackKeyPairsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_listPlaybackKeyPairsCmd).Standalone()
+	carapace.Gen(ivs_listPlaybackKeyPairsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_listPlaybackKeyPairsCmd).Standalone()
 
-	ivs_listPlaybackKeyPairsCmd.Flags().String("max-results", "", "Maximum number of key pairs to return.")
-	ivs_listPlaybackKeyPairsCmd.Flags().String("next-token", "", "The first key pair to retrieve.")
+		ivs_listPlaybackKeyPairsCmd.Flags().String("max-results", "", "Maximum number of key pairs to return.")
+		ivs_listPlaybackKeyPairsCmd.Flags().String("next-token", "", "The first key pair to retrieve.")
+	})
 	ivsCmd.AddCommand(ivs_listPlaybackKeyPairsCmd)
 }

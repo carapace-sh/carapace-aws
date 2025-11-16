@@ -12,9 +12,11 @@ var lightsail_createBucketAccessKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_createBucketAccessKeyCmd).Standalone()
+	carapace.Gen(lightsail_createBucketAccessKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_createBucketAccessKeyCmd).Standalone()
 
-	lightsail_createBucketAccessKeyCmd.Flags().String("bucket-name", "", "The name of the bucket that the new access key will belong to, and grant access to.")
-	lightsail_createBucketAccessKeyCmd.MarkFlagRequired("bucket-name")
+		lightsail_createBucketAccessKeyCmd.Flags().String("bucket-name", "", "The name of the bucket that the new access key will belong to, and grant access to.")
+		lightsail_createBucketAccessKeyCmd.MarkFlagRequired("bucket-name")
+	})
 	lightsailCmd.AddCommand(lightsail_createBucketAccessKeyCmd)
 }

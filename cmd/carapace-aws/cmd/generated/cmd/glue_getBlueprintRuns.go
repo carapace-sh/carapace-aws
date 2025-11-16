@@ -12,11 +12,13 @@ var glue_getBlueprintRunsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getBlueprintRunsCmd).Standalone()
+	carapace.Gen(glue_getBlueprintRunsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getBlueprintRunsCmd).Standalone()
 
-	glue_getBlueprintRunsCmd.Flags().String("blueprint-name", "", "The name of the blueprint.")
-	glue_getBlueprintRunsCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
-	glue_getBlueprintRunsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
-	glue_getBlueprintRunsCmd.MarkFlagRequired("blueprint-name")
+		glue_getBlueprintRunsCmd.Flags().String("blueprint-name", "", "The name of the blueprint.")
+		glue_getBlueprintRunsCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
+		glue_getBlueprintRunsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+		glue_getBlueprintRunsCmd.MarkFlagRequired("blueprint-name")
+	})
 	glueCmd.AddCommand(glue_getBlueprintRunsCmd)
 }

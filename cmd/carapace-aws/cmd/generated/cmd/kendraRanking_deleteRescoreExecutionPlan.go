@@ -12,9 +12,11 @@ var kendraRanking_deleteRescoreExecutionPlanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kendraRanking_deleteRescoreExecutionPlanCmd).Standalone()
+	carapace.Gen(kendraRanking_deleteRescoreExecutionPlanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kendraRanking_deleteRescoreExecutionPlanCmd).Standalone()
 
-	kendraRanking_deleteRescoreExecutionPlanCmd.Flags().String("id", "", "The identifier of the rescore execution plan that you want to delete.")
-	kendraRanking_deleteRescoreExecutionPlanCmd.MarkFlagRequired("id")
+		kendraRanking_deleteRescoreExecutionPlanCmd.Flags().String("id", "", "The identifier of the rescore execution plan that you want to delete.")
+		kendraRanking_deleteRescoreExecutionPlanCmd.MarkFlagRequired("id")
+	})
 	kendraRankingCmd.AddCommand(kendraRanking_deleteRescoreExecutionPlanCmd)
 }

@@ -12,11 +12,13 @@ var swf_describeWorkflowExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(swf_describeWorkflowExecutionCmd).Standalone()
+	carapace.Gen(swf_describeWorkflowExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(swf_describeWorkflowExecutionCmd).Standalone()
 
-	swf_describeWorkflowExecutionCmd.Flags().String("domain", "", "The name of the domain containing the workflow execution.")
-	swf_describeWorkflowExecutionCmd.Flags().String("execution", "", "The workflow execution to describe.")
-	swf_describeWorkflowExecutionCmd.MarkFlagRequired("domain")
-	swf_describeWorkflowExecutionCmd.MarkFlagRequired("execution")
+		swf_describeWorkflowExecutionCmd.Flags().String("domain", "", "The name of the domain containing the workflow execution.")
+		swf_describeWorkflowExecutionCmd.Flags().String("execution", "", "The workflow execution to describe.")
+		swf_describeWorkflowExecutionCmd.MarkFlagRequired("domain")
+		swf_describeWorkflowExecutionCmd.MarkFlagRequired("execution")
+	})
 	swfCmd.AddCommand(swf_describeWorkflowExecutionCmd)
 }

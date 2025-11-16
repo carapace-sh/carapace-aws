@@ -12,9 +12,11 @@ var databrew_describeScheduleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(databrew_describeScheduleCmd).Standalone()
+	carapace.Gen(databrew_describeScheduleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(databrew_describeScheduleCmd).Standalone()
 
-	databrew_describeScheduleCmd.Flags().String("name", "", "The name of the schedule to be described.")
-	databrew_describeScheduleCmd.MarkFlagRequired("name")
+		databrew_describeScheduleCmd.Flags().String("name", "", "The name of the schedule to be described.")
+		databrew_describeScheduleCmd.MarkFlagRequired("name")
+	})
 	databrewCmd.AddCommand(databrew_describeScheduleCmd)
 }

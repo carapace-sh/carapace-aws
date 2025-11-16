@@ -12,11 +12,13 @@ var imagebuilder_putComponentPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_putComponentPolicyCmd).Standalone()
+	carapace.Gen(imagebuilder_putComponentPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_putComponentPolicyCmd).Standalone()
 
-	imagebuilder_putComponentPolicyCmd.Flags().String("component-arn", "", "The Amazon Resource Name (ARN) of the component that this policy should be applied to.")
-	imagebuilder_putComponentPolicyCmd.Flags().String("policy", "", "The policy to apply.")
-	imagebuilder_putComponentPolicyCmd.MarkFlagRequired("component-arn")
-	imagebuilder_putComponentPolicyCmd.MarkFlagRequired("policy")
+		imagebuilder_putComponentPolicyCmd.Flags().String("component-arn", "", "The Amazon Resource Name (ARN) of the component that this policy should be applied to.")
+		imagebuilder_putComponentPolicyCmd.Flags().String("policy", "", "The policy to apply.")
+		imagebuilder_putComponentPolicyCmd.MarkFlagRequired("component-arn")
+		imagebuilder_putComponentPolicyCmd.MarkFlagRequired("policy")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_putComponentPolicyCmd)
 }

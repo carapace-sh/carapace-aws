@@ -12,9 +12,11 @@ var glue_getSecurityConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getSecurityConfigurationCmd).Standalone()
+	carapace.Gen(glue_getSecurityConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getSecurityConfigurationCmd).Standalone()
 
-	glue_getSecurityConfigurationCmd.Flags().String("name", "", "The name of the security configuration to retrieve.")
-	glue_getSecurityConfigurationCmd.MarkFlagRequired("name")
+		glue_getSecurityConfigurationCmd.Flags().String("name", "", "The name of the security configuration to retrieve.")
+		glue_getSecurityConfigurationCmd.MarkFlagRequired("name")
+	})
 	glueCmd.AddCommand(glue_getSecurityConfigurationCmd)
 }

@@ -12,12 +12,14 @@ var ssm_listComplianceItemsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_listComplianceItemsCmd).Standalone()
+	carapace.Gen(ssm_listComplianceItemsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_listComplianceItemsCmd).Standalone()
 
-	ssm_listComplianceItemsCmd.Flags().String("filters", "", "One or more compliance filters.")
-	ssm_listComplianceItemsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_listComplianceItemsCmd.Flags().String("next-token", "", "A token to start the list.")
-	ssm_listComplianceItemsCmd.Flags().String("resource-ids", "", "The ID for the resources from which to get compliance information.")
-	ssm_listComplianceItemsCmd.Flags().String("resource-types", "", "The type of resource from which to get compliance information.")
+		ssm_listComplianceItemsCmd.Flags().String("filters", "", "One or more compliance filters.")
+		ssm_listComplianceItemsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_listComplianceItemsCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_listComplianceItemsCmd.Flags().String("resource-ids", "", "The ID for the resources from which to get compliance information.")
+		ssm_listComplianceItemsCmd.Flags().String("resource-types", "", "The type of resource from which to get compliance information.")
+	})
 	ssmCmd.AddCommand(ssm_listComplianceItemsCmd)
 }

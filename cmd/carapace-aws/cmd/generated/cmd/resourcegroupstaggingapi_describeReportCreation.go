@@ -12,7 +12,9 @@ var resourcegroupstaggingapi_describeReportCreationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourcegroupstaggingapi_describeReportCreationCmd).Standalone()
+	carapace.Gen(resourcegroupstaggingapi_describeReportCreationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourcegroupstaggingapi_describeReportCreationCmd).Standalone()
 
+	})
 	resourcegroupstaggingapiCmd.AddCommand(resourcegroupstaggingapi_describeReportCreationCmd)
 }

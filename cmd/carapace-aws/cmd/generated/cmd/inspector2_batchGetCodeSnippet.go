@@ -12,9 +12,11 @@ var inspector2_batchGetCodeSnippetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(inspector2_batchGetCodeSnippetCmd).Standalone()
+	carapace.Gen(inspector2_batchGetCodeSnippetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(inspector2_batchGetCodeSnippetCmd).Standalone()
 
-	inspector2_batchGetCodeSnippetCmd.Flags().String("finding-arns", "", "An array of finding ARNs for the findings you want to retrieve code snippets from.")
-	inspector2_batchGetCodeSnippetCmd.MarkFlagRequired("finding-arns")
+		inspector2_batchGetCodeSnippetCmd.Flags().String("finding-arns", "", "An array of finding ARNs for the findings you want to retrieve code snippets from.")
+		inspector2_batchGetCodeSnippetCmd.MarkFlagRequired("finding-arns")
+	})
 	inspector2Cmd.AddCommand(inspector2_batchGetCodeSnippetCmd)
 }

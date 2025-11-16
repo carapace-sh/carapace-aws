@@ -12,10 +12,12 @@ var appconfig_updateExtensionAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appconfig_updateExtensionAssociationCmd).Standalone()
+	carapace.Gen(appconfig_updateExtensionAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appconfig_updateExtensionAssociationCmd).Standalone()
 
-	appconfig_updateExtensionAssociationCmd.Flags().String("extension-association-id", "", "The system-generated ID for the association.")
-	appconfig_updateExtensionAssociationCmd.Flags().String("parameters", "", "The parameter names and values defined in the extension.")
-	appconfig_updateExtensionAssociationCmd.MarkFlagRequired("extension-association-id")
+		appconfig_updateExtensionAssociationCmd.Flags().String("extension-association-id", "", "The system-generated ID for the association.")
+		appconfig_updateExtensionAssociationCmd.Flags().String("parameters", "", "The parameter names and values defined in the extension.")
+		appconfig_updateExtensionAssociationCmd.MarkFlagRequired("extension-association-id")
+	})
 	appconfigCmd.AddCommand(appconfig_updateExtensionAssociationCmd)
 }

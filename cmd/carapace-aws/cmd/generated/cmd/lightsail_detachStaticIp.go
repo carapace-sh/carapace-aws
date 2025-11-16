@@ -12,9 +12,11 @@ var lightsail_detachStaticIpCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_detachStaticIpCmd).Standalone()
+	carapace.Gen(lightsail_detachStaticIpCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_detachStaticIpCmd).Standalone()
 
-	lightsail_detachStaticIpCmd.Flags().String("static-ip-name", "", "The name of the static IP to detach from the instance.")
-	lightsail_detachStaticIpCmd.MarkFlagRequired("static-ip-name")
+		lightsail_detachStaticIpCmd.Flags().String("static-ip-name", "", "The name of the static IP to detach from the instance.")
+		lightsail_detachStaticIpCmd.MarkFlagRequired("static-ip-name")
+	})
 	lightsailCmd.AddCommand(lightsail_detachStaticIpCmd)
 }

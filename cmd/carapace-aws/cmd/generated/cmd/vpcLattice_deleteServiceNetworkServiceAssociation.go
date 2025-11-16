@@ -12,9 +12,11 @@ var vpcLattice_deleteServiceNetworkServiceAssociationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_deleteServiceNetworkServiceAssociationCmd).Standalone()
+	carapace.Gen(vpcLattice_deleteServiceNetworkServiceAssociationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_deleteServiceNetworkServiceAssociationCmd).Standalone()
 
-	vpcLattice_deleteServiceNetworkServiceAssociationCmd.Flags().String("service-network-service-association-identifier", "", "The ID or ARN of the association.")
-	vpcLattice_deleteServiceNetworkServiceAssociationCmd.MarkFlagRequired("service-network-service-association-identifier")
+		vpcLattice_deleteServiceNetworkServiceAssociationCmd.Flags().String("service-network-service-association-identifier", "", "The ID or ARN of the association.")
+		vpcLattice_deleteServiceNetworkServiceAssociationCmd.MarkFlagRequired("service-network-service-association-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_deleteServiceNetworkServiceAssociationCmd)
 }

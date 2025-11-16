@@ -12,18 +12,20 @@ var ssm_getParametersByPathCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_getParametersByPathCmd).Standalone()
+	carapace.Gen(ssm_getParametersByPathCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_getParametersByPathCmd).Standalone()
 
-	ssm_getParametersByPathCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_getParametersByPathCmd.Flags().String("next-token", "", "A token to start the list.")
-	ssm_getParametersByPathCmd.Flags().Bool("no-recursive", false, "Retrieve all parameters within a hierarchy.")
-	ssm_getParametersByPathCmd.Flags().Bool("no-with-decryption", false, "Retrieve all parameters in a hierarchy with their value decrypted.")
-	ssm_getParametersByPathCmd.Flags().String("parameter-filters", "", "Filters to limit the request results.")
-	ssm_getParametersByPathCmd.Flags().String("path", "", "The hierarchy for the parameter.")
-	ssm_getParametersByPathCmd.Flags().Bool("recursive", false, "Retrieve all parameters within a hierarchy.")
-	ssm_getParametersByPathCmd.Flags().Bool("with-decryption", false, "Retrieve all parameters in a hierarchy with their value decrypted.")
-	ssm_getParametersByPathCmd.Flag("no-recursive").Hidden = true
-	ssm_getParametersByPathCmd.Flag("no-with-decryption").Hidden = true
-	ssm_getParametersByPathCmd.MarkFlagRequired("path")
+		ssm_getParametersByPathCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_getParametersByPathCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_getParametersByPathCmd.Flags().Bool("no-recursive", false, "Retrieve all parameters within a hierarchy.")
+		ssm_getParametersByPathCmd.Flags().Bool("no-with-decryption", false, "Retrieve all parameters in a hierarchy with their value decrypted.")
+		ssm_getParametersByPathCmd.Flags().String("parameter-filters", "", "Filters to limit the request results.")
+		ssm_getParametersByPathCmd.Flags().String("path", "", "The hierarchy for the parameter.")
+		ssm_getParametersByPathCmd.Flags().Bool("recursive", false, "Retrieve all parameters within a hierarchy.")
+		ssm_getParametersByPathCmd.Flags().Bool("with-decryption", false, "Retrieve all parameters in a hierarchy with their value decrypted.")
+		ssm_getParametersByPathCmd.Flag("no-recursive").Hidden = true
+		ssm_getParametersByPathCmd.Flag("no-with-decryption").Hidden = true
+		ssm_getParametersByPathCmd.MarkFlagRequired("path")
+	})
 	ssmCmd.AddCommand(ssm_getParametersByPathCmd)
 }

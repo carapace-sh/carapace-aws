@@ -12,9 +12,11 @@ var iotManagedIntegrations_deleteEventLogConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_deleteEventLogConfigurationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_deleteEventLogConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_deleteEventLogConfigurationCmd).Standalone()
 
-	iotManagedIntegrations_deleteEventLogConfigurationCmd.Flags().String("id", "", "The identifier of the event log configuration.")
-	iotManagedIntegrations_deleteEventLogConfigurationCmd.MarkFlagRequired("id")
+		iotManagedIntegrations_deleteEventLogConfigurationCmd.Flags().String("id", "", "The identifier of the event log configuration.")
+		iotManagedIntegrations_deleteEventLogConfigurationCmd.MarkFlagRequired("id")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_deleteEventLogConfigurationCmd)
 }

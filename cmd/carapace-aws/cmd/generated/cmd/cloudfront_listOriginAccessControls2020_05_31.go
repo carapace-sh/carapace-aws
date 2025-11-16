@@ -12,9 +12,11 @@ var cloudfront_listOriginAccessControls2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_listOriginAccessControls2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listOriginAccessControls2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listOriginAccessControls2020_05_31Cmd).Standalone()
 
-	cloudfront_listOriginAccessControls2020_05_31Cmd.Flags().String("marker", "", "Use this field when paginating results to indicate where to begin in your list of origin access controls.")
-	cloudfront_listOriginAccessControls2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of origin access controls that you want in the response.")
+		cloudfront_listOriginAccessControls2020_05_31Cmd.Flags().String("marker", "", "Use this field when paginating results to indicate where to begin in your list of origin access controls.")
+		cloudfront_listOriginAccessControls2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of origin access controls that you want in the response.")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listOriginAccessControls2020_05_31Cmd)
 }

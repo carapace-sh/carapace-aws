@@ -12,9 +12,11 @@ var comprehend_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_listTagsForResourceCmd).Standalone()
+	carapace.Gen(comprehend_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_listTagsForResourceCmd).Standalone()
 
-	comprehend_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying.")
-	comprehend_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		comprehend_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying.")
+		comprehend_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	comprehendCmd.AddCommand(comprehend_listTagsForResourceCmd)
 }

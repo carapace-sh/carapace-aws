@@ -12,9 +12,11 @@ var shield_associateProactiveEngagementDetailsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shield_associateProactiveEngagementDetailsCmd).Standalone()
+	carapace.Gen(shield_associateProactiveEngagementDetailsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shield_associateProactiveEngagementDetailsCmd).Standalone()
 
-	shield_associateProactiveEngagementDetailsCmd.Flags().String("emergency-contact-list", "", "A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you for escalations to the SRT and to initiate proactive customer support.")
-	shield_associateProactiveEngagementDetailsCmd.MarkFlagRequired("emergency-contact-list")
+		shield_associateProactiveEngagementDetailsCmd.Flags().String("emergency-contact-list", "", "A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you for escalations to the SRT and to initiate proactive customer support.")
+		shield_associateProactiveEngagementDetailsCmd.MarkFlagRequired("emergency-contact-list")
+	})
 	shieldCmd.AddCommand(shield_associateProactiveEngagementDetailsCmd)
 }

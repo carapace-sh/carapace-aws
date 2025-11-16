@@ -12,9 +12,11 @@ var dms_describeConversionConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_describeConversionConfigurationCmd).Standalone()
+	carapace.Gen(dms_describeConversionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_describeConversionConfigurationCmd).Standalone()
 
-	dms_describeConversionConfigurationCmd.Flags().String("migration-project-identifier", "", "The name or Amazon Resource Name (ARN) for the schema conversion project to describe.")
-	dms_describeConversionConfigurationCmd.MarkFlagRequired("migration-project-identifier")
+		dms_describeConversionConfigurationCmd.Flags().String("migration-project-identifier", "", "The name or Amazon Resource Name (ARN) for the schema conversion project to describe.")
+		dms_describeConversionConfigurationCmd.MarkFlagRequired("migration-project-identifier")
+	})
 	dmsCmd.AddCommand(dms_describeConversionConfigurationCmd)
 }

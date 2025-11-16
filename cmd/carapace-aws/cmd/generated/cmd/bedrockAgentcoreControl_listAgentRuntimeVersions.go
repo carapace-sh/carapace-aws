@@ -12,11 +12,13 @@ var bedrockAgentcoreControl_listAgentRuntimeVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_listAgentRuntimeVersionsCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_listAgentRuntimeVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_listAgentRuntimeVersionsCmd).Standalone()
 
-	bedrockAgentcoreControl_listAgentRuntimeVersionsCmd.Flags().String("agent-runtime-id", "", "The unique identifier of the AgentCore Runtime to list versions for.")
-	bedrockAgentcoreControl_listAgentRuntimeVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	bedrockAgentcoreControl_listAgentRuntimeVersionsCmd.Flags().String("next-token", "", "A token to retrieve the next page of results.")
-	bedrockAgentcoreControl_listAgentRuntimeVersionsCmd.MarkFlagRequired("agent-runtime-id")
+		bedrockAgentcoreControl_listAgentRuntimeVersionsCmd.Flags().String("agent-runtime-id", "", "The unique identifier of the AgentCore Runtime to list versions for.")
+		bedrockAgentcoreControl_listAgentRuntimeVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		bedrockAgentcoreControl_listAgentRuntimeVersionsCmd.Flags().String("next-token", "", "A token to retrieve the next page of results.")
+		bedrockAgentcoreControl_listAgentRuntimeVersionsCmd.MarkFlagRequired("agent-runtime-id")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_listAgentRuntimeVersionsCmd)
 }

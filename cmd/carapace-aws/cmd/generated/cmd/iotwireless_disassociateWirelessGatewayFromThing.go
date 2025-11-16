@@ -12,9 +12,11 @@ var iotwireless_disassociateWirelessGatewayFromThingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_disassociateWirelessGatewayFromThingCmd).Standalone()
+	carapace.Gen(iotwireless_disassociateWirelessGatewayFromThingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_disassociateWirelessGatewayFromThingCmd).Standalone()
 
-	iotwireless_disassociateWirelessGatewayFromThingCmd.Flags().String("id", "", "The ID of the resource to update.")
-	iotwireless_disassociateWirelessGatewayFromThingCmd.MarkFlagRequired("id")
+		iotwireless_disassociateWirelessGatewayFromThingCmd.Flags().String("id", "", "The ID of the resource to update.")
+		iotwireless_disassociateWirelessGatewayFromThingCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_disassociateWirelessGatewayFromThingCmd)
 }

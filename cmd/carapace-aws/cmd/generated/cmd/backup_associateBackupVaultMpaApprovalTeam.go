@@ -12,12 +12,14 @@ var backup_associateBackupVaultMpaApprovalTeamCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_associateBackupVaultMpaApprovalTeamCmd).Standalone()
+	carapace.Gen(backup_associateBackupVaultMpaApprovalTeamCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_associateBackupVaultMpaApprovalTeamCmd).Standalone()
 
-	backup_associateBackupVaultMpaApprovalTeamCmd.Flags().String("backup-vault-name", "", "The name of the backup vault to associate with the MPA approval team.")
-	backup_associateBackupVaultMpaApprovalTeamCmd.Flags().String("mpa-approval-team-arn", "", "The Amazon Resource Name (ARN) of the MPA approval team to associate with the backup vault.")
-	backup_associateBackupVaultMpaApprovalTeamCmd.Flags().String("requester-comment", "", "A comment provided by the requester explaining the association request.")
-	backup_associateBackupVaultMpaApprovalTeamCmd.MarkFlagRequired("backup-vault-name")
-	backup_associateBackupVaultMpaApprovalTeamCmd.MarkFlagRequired("mpa-approval-team-arn")
+		backup_associateBackupVaultMpaApprovalTeamCmd.Flags().String("backup-vault-name", "", "The name of the backup vault to associate with the MPA approval team.")
+		backup_associateBackupVaultMpaApprovalTeamCmd.Flags().String("mpa-approval-team-arn", "", "The Amazon Resource Name (ARN) of the MPA approval team to associate with the backup vault.")
+		backup_associateBackupVaultMpaApprovalTeamCmd.Flags().String("requester-comment", "", "A comment provided by the requester explaining the association request.")
+		backup_associateBackupVaultMpaApprovalTeamCmd.MarkFlagRequired("backup-vault-name")
+		backup_associateBackupVaultMpaApprovalTeamCmd.MarkFlagRequired("mpa-approval-team-arn")
+	})
 	backupCmd.AddCommand(backup_associateBackupVaultMpaApprovalTeamCmd)
 }

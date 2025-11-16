@@ -12,9 +12,11 @@ var bedrock_deleteCustomModelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deleteCustomModelCmd).Standalone()
+	carapace.Gen(bedrock_deleteCustomModelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deleteCustomModelCmd).Standalone()
 
-	bedrock_deleteCustomModelCmd.Flags().String("model-identifier", "", "Name of the model to delete.")
-	bedrock_deleteCustomModelCmd.MarkFlagRequired("model-identifier")
+		bedrock_deleteCustomModelCmd.Flags().String("model-identifier", "", "Name of the model to delete.")
+		bedrock_deleteCustomModelCmd.MarkFlagRequired("model-identifier")
+	})
 	bedrockCmd.AddCommand(bedrock_deleteCustomModelCmd)
 }

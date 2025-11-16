@@ -12,11 +12,13 @@ var bedrockDataAutomation_getBlueprintCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockDataAutomation_getBlueprintCmd).Standalone()
+	carapace.Gen(bedrockDataAutomation_getBlueprintCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockDataAutomation_getBlueprintCmd).Standalone()
 
-	bedrockDataAutomation_getBlueprintCmd.Flags().String("blueprint-arn", "", "ARN generated at the server side when a Blueprint is created")
-	bedrockDataAutomation_getBlueprintCmd.Flags().String("blueprint-stage", "", "Optional field to get a specific Blueprint stage")
-	bedrockDataAutomation_getBlueprintCmd.Flags().String("blueprint-version", "", "Optional field to get a specific Blueprint version")
-	bedrockDataAutomation_getBlueprintCmd.MarkFlagRequired("blueprint-arn")
+		bedrockDataAutomation_getBlueprintCmd.Flags().String("blueprint-arn", "", "ARN generated at the server side when a Blueprint is created")
+		bedrockDataAutomation_getBlueprintCmd.Flags().String("blueprint-stage", "", "Optional field to get a specific Blueprint stage")
+		bedrockDataAutomation_getBlueprintCmd.Flags().String("blueprint-version", "", "Optional field to get a specific Blueprint version")
+		bedrockDataAutomation_getBlueprintCmd.MarkFlagRequired("blueprint-arn")
+	})
 	bedrockDataAutomationCmd.AddCommand(bedrockDataAutomation_getBlueprintCmd)
 }

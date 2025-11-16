@@ -12,9 +12,11 @@ var comprehend_batchDetectDominantLanguageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_batchDetectDominantLanguageCmd).Standalone()
+	carapace.Gen(comprehend_batchDetectDominantLanguageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_batchDetectDominantLanguageCmd).Standalone()
 
-	comprehend_batchDetectDominantLanguageCmd.Flags().String("text-list", "", "A list containing the UTF-8 encoded text of the input documents.")
-	comprehend_batchDetectDominantLanguageCmd.MarkFlagRequired("text-list")
+		comprehend_batchDetectDominantLanguageCmd.Flags().String("text-list", "", "A list containing the UTF-8 encoded text of the input documents.")
+		comprehend_batchDetectDominantLanguageCmd.MarkFlagRequired("text-list")
+	})
 	comprehendCmd.AddCommand(comprehend_batchDetectDominantLanguageCmd)
 }

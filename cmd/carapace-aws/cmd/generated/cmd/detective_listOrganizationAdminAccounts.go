@@ -12,9 +12,11 @@ var detective_listOrganizationAdminAccountsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(detective_listOrganizationAdminAccountsCmd).Standalone()
+	carapace.Gen(detective_listOrganizationAdminAccountsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(detective_listOrganizationAdminAccountsCmd).Standalone()
 
-	detective_listOrganizationAdminAccountsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	detective_listOrganizationAdminAccountsCmd.Flags().String("next-token", "", "For requests to get the next page of results, the pagination token that was returned with the previous set of results.")
+		detective_listOrganizationAdminAccountsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		detective_listOrganizationAdminAccountsCmd.Flags().String("next-token", "", "For requests to get the next page of results, the pagination token that was returned with the previous set of results.")
+	})
 	detectiveCmd.AddCommand(detective_listOrganizationAdminAccountsCmd)
 }

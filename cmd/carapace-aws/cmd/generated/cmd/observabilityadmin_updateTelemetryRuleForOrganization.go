@@ -12,11 +12,13 @@ var observabilityadmin_updateTelemetryRuleForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(observabilityadmin_updateTelemetryRuleForOrganizationCmd).Standalone()
+	carapace.Gen(observabilityadmin_updateTelemetryRuleForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(observabilityadmin_updateTelemetryRuleForOrganizationCmd).Standalone()
 
-	observabilityadmin_updateTelemetryRuleForOrganizationCmd.Flags().String("rule", "", "The new configuration details for the organization telemetry rule, including resource type, telemetry type, and destination configuration.")
-	observabilityadmin_updateTelemetryRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization telemetry rule to update.")
-	observabilityadmin_updateTelemetryRuleForOrganizationCmd.MarkFlagRequired("rule")
-	observabilityadmin_updateTelemetryRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+		observabilityadmin_updateTelemetryRuleForOrganizationCmd.Flags().String("rule", "", "The new configuration details for the organization telemetry rule, including resource type, telemetry type, and destination configuration.")
+		observabilityadmin_updateTelemetryRuleForOrganizationCmd.Flags().String("rule-identifier", "", "The identifier (name or ARN) of the organization telemetry rule to update.")
+		observabilityadmin_updateTelemetryRuleForOrganizationCmd.MarkFlagRequired("rule")
+		observabilityadmin_updateTelemetryRuleForOrganizationCmd.MarkFlagRequired("rule-identifier")
+	})
 	observabilityadminCmd.AddCommand(observabilityadmin_updateTelemetryRuleForOrganizationCmd)
 }

@@ -12,10 +12,12 @@ var rekognition_detectFacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_detectFacesCmd).Standalone()
+	carapace.Gen(rekognition_detectFacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_detectFacesCmd).Standalone()
 
-	rekognition_detectFacesCmd.Flags().String("attributes", "", "An array of facial attributes you want to be returned.")
-	rekognition_detectFacesCmd.Flags().String("image", "", "The input image as base64-encoded bytes or an S3 object.")
-	rekognition_detectFacesCmd.MarkFlagRequired("image")
+		rekognition_detectFacesCmd.Flags().String("attributes", "", "An array of facial attributes you want to be returned.")
+		rekognition_detectFacesCmd.Flags().String("image", "", "The input image as base64-encoded bytes or an S3 object.")
+		rekognition_detectFacesCmd.MarkFlagRequired("image")
+	})
 	rekognitionCmd.AddCommand(rekognition_detectFacesCmd)
 }

@@ -12,11 +12,13 @@ var elb_registerInstancesWithLoadBalancerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_registerInstancesWithLoadBalancerCmd).Standalone()
+	carapace.Gen(elb_registerInstancesWithLoadBalancerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_registerInstancesWithLoadBalancerCmd).Standalone()
 
-	elb_registerInstancesWithLoadBalancerCmd.Flags().String("instances", "", "The IDs of the instances.")
-	elb_registerInstancesWithLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_registerInstancesWithLoadBalancerCmd.MarkFlagRequired("instances")
-	elb_registerInstancesWithLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+		elb_registerInstancesWithLoadBalancerCmd.Flags().String("instances", "", "The IDs of the instances.")
+		elb_registerInstancesWithLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_registerInstancesWithLoadBalancerCmd.MarkFlagRequired("instances")
+		elb_registerInstancesWithLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+	})
 	elbCmd.AddCommand(elb_registerInstancesWithLoadBalancerCmd)
 }

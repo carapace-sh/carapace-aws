@@ -12,11 +12,13 @@ var workspacesInstances_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesInstances_tagResourceCmd).Standalone()
+	carapace.Gen(workspacesInstances_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesInstances_tagResourceCmd).Standalone()
 
-	workspacesInstances_tagResourceCmd.Flags().String("tags", "", "Tags to be added to the WorkSpace Instance.")
-	workspacesInstances_tagResourceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpace Instance to tag.")
-	workspacesInstances_tagResourceCmd.MarkFlagRequired("tags")
-	workspacesInstances_tagResourceCmd.MarkFlagRequired("workspace-instance-id")
+		workspacesInstances_tagResourceCmd.Flags().String("tags", "", "Tags to be added to the WorkSpace Instance.")
+		workspacesInstances_tagResourceCmd.Flags().String("workspace-instance-id", "", "Unique identifier of the WorkSpace Instance to tag.")
+		workspacesInstances_tagResourceCmd.MarkFlagRequired("tags")
+		workspacesInstances_tagResourceCmd.MarkFlagRequired("workspace-instance-id")
+	})
 	workspacesInstancesCmd.AddCommand(workspacesInstances_tagResourceCmd)
 }

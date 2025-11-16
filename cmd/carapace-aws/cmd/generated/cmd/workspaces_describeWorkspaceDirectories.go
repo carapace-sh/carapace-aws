@@ -12,12 +12,14 @@ var workspaces_describeWorkspaceDirectoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_describeWorkspaceDirectoriesCmd).Standalone()
+	carapace.Gen(workspaces_describeWorkspaceDirectoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_describeWorkspaceDirectoriesCmd).Standalone()
 
-	workspaces_describeWorkspaceDirectoriesCmd.Flags().String("directory-ids", "", "The identifiers of the directories.")
-	workspaces_describeWorkspaceDirectoriesCmd.Flags().String("filters", "", "The filter condition for the WorkSpaces.")
-	workspaces_describeWorkspaceDirectoriesCmd.Flags().String("limit", "", "The maximum number of directories to return.")
-	workspaces_describeWorkspaceDirectoriesCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
-	workspaces_describeWorkspaceDirectoriesCmd.Flags().String("workspace-directory-names", "", "The names of the WorkSpace directories.")
+		workspaces_describeWorkspaceDirectoriesCmd.Flags().String("directory-ids", "", "The identifiers of the directories.")
+		workspaces_describeWorkspaceDirectoriesCmd.Flags().String("filters", "", "The filter condition for the WorkSpaces.")
+		workspaces_describeWorkspaceDirectoriesCmd.Flags().String("limit", "", "The maximum number of directories to return.")
+		workspaces_describeWorkspaceDirectoriesCmd.Flags().String("next-token", "", "If you received a `NextToken` from a previous call that was paginated, provide this token to receive the next set of results.")
+		workspaces_describeWorkspaceDirectoriesCmd.Flags().String("workspace-directory-names", "", "The names of the WorkSpace directories.")
+	})
 	workspacesCmd.AddCommand(workspaces_describeWorkspaceDirectoriesCmd)
 }

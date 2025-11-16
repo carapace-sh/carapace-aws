@@ -12,11 +12,13 @@ var qbusiness_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_tagResourceCmd).Standalone()
+	carapace.Gen(qbusiness_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_tagResourceCmd).Standalone()
 
-	qbusiness_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Q Business application or data source to tag.")
-	qbusiness_tagResourceCmd.Flags().String("tags", "", "A list of tag keys to add to the Amazon Q Business application or data source.")
-	qbusiness_tagResourceCmd.MarkFlagRequired("resource-arn")
-	qbusiness_tagResourceCmd.MarkFlagRequired("tags")
+		qbusiness_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the Amazon Q Business application or data source to tag.")
+		qbusiness_tagResourceCmd.Flags().String("tags", "", "A list of tag keys to add to the Amazon Q Business application or data source.")
+		qbusiness_tagResourceCmd.MarkFlagRequired("resource-arn")
+		qbusiness_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	qbusinessCmd.AddCommand(qbusiness_tagResourceCmd)
 }

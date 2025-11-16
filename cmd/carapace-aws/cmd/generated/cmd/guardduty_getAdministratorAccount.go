@@ -12,9 +12,11 @@ var guardduty_getAdministratorAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_getAdministratorAccountCmd).Standalone()
+	carapace.Gen(guardduty_getAdministratorAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_getAdministratorAccountCmd).Standalone()
 
-	guardduty_getAdministratorAccountCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty member account.")
-	guardduty_getAdministratorAccountCmd.MarkFlagRequired("detector-id")
+		guardduty_getAdministratorAccountCmd.Flags().String("detector-id", "", "The unique ID of the detector of the GuardDuty member account.")
+		guardduty_getAdministratorAccountCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_getAdministratorAccountCmd)
 }

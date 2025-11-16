@@ -12,9 +12,11 @@ var apigateway_deleteApiKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_deleteApiKeyCmd).Standalone()
+	carapace.Gen(apigateway_deleteApiKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_deleteApiKeyCmd).Standalone()
 
-	apigateway_deleteApiKeyCmd.Flags().String("api-key", "", "The identifier of the ApiKey resource to be deleted.")
-	apigateway_deleteApiKeyCmd.MarkFlagRequired("api-key")
+		apigateway_deleteApiKeyCmd.Flags().String("api-key", "", "The identifier of the ApiKey resource to be deleted.")
+		apigateway_deleteApiKeyCmd.MarkFlagRequired("api-key")
+	})
 	apigatewayCmd.AddCommand(apigateway_deleteApiKeyCmd)
 }

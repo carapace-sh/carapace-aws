@@ -12,9 +12,11 @@ var vpcLattice_listDomainVerificationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listDomainVerificationsCmd).Standalone()
+	carapace.Gen(vpcLattice_listDomainVerificationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listDomainVerificationsCmd).Standalone()
 
-	vpcLattice_listDomainVerificationsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	vpcLattice_listDomainVerificationsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+		vpcLattice_listDomainVerificationsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		vpcLattice_listDomainVerificationsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listDomainVerificationsCmd)
 }

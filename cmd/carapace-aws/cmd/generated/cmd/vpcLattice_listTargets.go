@@ -12,12 +12,14 @@ var vpcLattice_listTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(vpcLattice_listTargetsCmd).Standalone()
+	carapace.Gen(vpcLattice_listTargetsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(vpcLattice_listTargetsCmd).Standalone()
 
-	vpcLattice_listTargetsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	vpcLattice_listTargetsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
-	vpcLattice_listTargetsCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
-	vpcLattice_listTargetsCmd.Flags().String("targets", "", "The targets.")
-	vpcLattice_listTargetsCmd.MarkFlagRequired("target-group-identifier")
+		vpcLattice_listTargetsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		vpcLattice_listTargetsCmd.Flags().String("next-token", "", "A pagination token for the next page of results.")
+		vpcLattice_listTargetsCmd.Flags().String("target-group-identifier", "", "The ID or ARN of the target group.")
+		vpcLattice_listTargetsCmd.Flags().String("targets", "", "The targets.")
+		vpcLattice_listTargetsCmd.MarkFlagRequired("target-group-identifier")
+	})
 	vpcLatticeCmd.AddCommand(vpcLattice_listTargetsCmd)
 }

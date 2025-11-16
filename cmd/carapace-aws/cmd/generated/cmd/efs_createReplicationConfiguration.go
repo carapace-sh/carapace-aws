@@ -12,11 +12,13 @@ var efs_createReplicationConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_createReplicationConfigurationCmd).Standalone()
+	carapace.Gen(efs_createReplicationConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_createReplicationConfigurationCmd).Standalone()
 
-	efs_createReplicationConfigurationCmd.Flags().String("destinations", "", "An array of destination configuration objects.")
-	efs_createReplicationConfigurationCmd.Flags().String("source-file-system-id", "", "Specifies the Amazon EFS file system that you want to replicate.")
-	efs_createReplicationConfigurationCmd.MarkFlagRequired("destinations")
-	efs_createReplicationConfigurationCmd.MarkFlagRequired("source-file-system-id")
+		efs_createReplicationConfigurationCmd.Flags().String("destinations", "", "An array of destination configuration objects.")
+		efs_createReplicationConfigurationCmd.Flags().String("source-file-system-id", "", "Specifies the Amazon EFS file system that you want to replicate.")
+		efs_createReplicationConfigurationCmd.MarkFlagRequired("destinations")
+		efs_createReplicationConfigurationCmd.MarkFlagRequired("source-file-system-id")
+	})
 	efsCmd.AddCommand(efs_createReplicationConfigurationCmd)
 }

@@ -12,11 +12,13 @@ var socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd).Standalone()
+	carapace.Gen(socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd).Standalone()
 
-	socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd.Flags().String("id", "", "The ID of the WhatsApp Business Account to associate with this template.")
-	socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd.Flags().String("meta-library-template", "", "The template configuration from Meta's library, including customizations for buttons and body text.")
-	socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd.MarkFlagRequired("id")
-	socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd.MarkFlagRequired("meta-library-template")
+		socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd.Flags().String("id", "", "The ID of the WhatsApp Business Account to associate with this template.")
+		socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd.Flags().String("meta-library-template", "", "The template configuration from Meta's library, including customizations for buttons and body text.")
+		socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd.MarkFlagRequired("id")
+		socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd.MarkFlagRequired("meta-library-template")
+	})
 	socialmessagingCmd.AddCommand(socialmessaging_createWhatsAppMessageTemplateFromLibraryCmd)
 }

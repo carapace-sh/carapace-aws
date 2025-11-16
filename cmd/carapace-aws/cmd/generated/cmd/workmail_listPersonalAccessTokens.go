@@ -12,12 +12,14 @@ var workmail_listPersonalAccessTokensCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_listPersonalAccessTokensCmd).Standalone()
+	carapace.Gen(workmail_listPersonalAccessTokensCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_listPersonalAccessTokensCmd).Standalone()
 
-	workmail_listPersonalAccessTokensCmd.Flags().String("max-results", "", "The maximum amount of items that should be returned in a response.")
-	workmail_listPersonalAccessTokensCmd.Flags().String("next-token", "", "The token from the previous response to query the next page.")
-	workmail_listPersonalAccessTokensCmd.Flags().String("organization-id", "", "The Organization ID.")
-	workmail_listPersonalAccessTokensCmd.Flags().String("user-id", "", "The WorkMail User ID.")
-	workmail_listPersonalAccessTokensCmd.MarkFlagRequired("organization-id")
+		workmail_listPersonalAccessTokensCmd.Flags().String("max-results", "", "The maximum amount of items that should be returned in a response.")
+		workmail_listPersonalAccessTokensCmd.Flags().String("next-token", "", "The token from the previous response to query the next page.")
+		workmail_listPersonalAccessTokensCmd.Flags().String("organization-id", "", "The Organization ID.")
+		workmail_listPersonalAccessTokensCmd.Flags().String("user-id", "", "The WorkMail User ID.")
+		workmail_listPersonalAccessTokensCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_listPersonalAccessTokensCmd)
 }

@@ -12,13 +12,15 @@ var cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd).Standalone()
+	carapace.Gen(cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd).Standalone()
 
-	cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.Flags().String("analysis-rule-type", "", "The type of analysis rule that you want to retrieve.")
-	cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.Flags().String("configured-table-association-identifier", "", "The identiﬁer for the conﬁgured table association that's related to the analysis rule.")
-	cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership that the configured table association belongs to.")
-	cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.MarkFlagRequired("analysis-rule-type")
-	cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.MarkFlagRequired("configured-table-association-identifier")
-	cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.MarkFlagRequired("membership-identifier")
+		cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.Flags().String("analysis-rule-type", "", "The type of analysis rule that you want to retrieve.")
+		cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.Flags().String("configured-table-association-identifier", "", "The identiﬁer for the conﬁgured table association that's related to the analysis rule.")
+		cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.Flags().String("membership-identifier", "", "A unique identifier for the membership that the configured table association belongs to.")
+		cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.MarkFlagRequired("analysis-rule-type")
+		cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.MarkFlagRequired("configured-table-association-identifier")
+		cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd.MarkFlagRequired("membership-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_getConfiguredTableAssociationAnalysisRuleCmd)
 }

@@ -12,14 +12,16 @@ var docdb_copyDbclusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(docdb_copyDbclusterParameterGroupCmd).Standalone()
+	carapace.Gen(docdb_copyDbclusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(docdb_copyDbclusterParameterGroupCmd).Standalone()
 
-	docdb_copyDbclusterParameterGroupCmd.Flags().String("source-dbcluster-parameter-group-identifier", "", "The identifier or Amazon Resource Name (ARN) for the source cluster parameter group.")
-	docdb_copyDbclusterParameterGroupCmd.Flags().String("tags", "", "The tags that are to be assigned to the parameter group.")
-	docdb_copyDbclusterParameterGroupCmd.Flags().String("target-dbcluster-parameter-group-description", "", "A description for the copied cluster parameter group.")
-	docdb_copyDbclusterParameterGroupCmd.Flags().String("target-dbcluster-parameter-group-identifier", "", "The identifier for the copied cluster parameter group.")
-	docdb_copyDbclusterParameterGroupCmd.MarkFlagRequired("source-dbcluster-parameter-group-identifier")
-	docdb_copyDbclusterParameterGroupCmd.MarkFlagRequired("target-dbcluster-parameter-group-description")
-	docdb_copyDbclusterParameterGroupCmd.MarkFlagRequired("target-dbcluster-parameter-group-identifier")
+		docdb_copyDbclusterParameterGroupCmd.Flags().String("source-dbcluster-parameter-group-identifier", "", "The identifier or Amazon Resource Name (ARN) for the source cluster parameter group.")
+		docdb_copyDbclusterParameterGroupCmd.Flags().String("tags", "", "The tags that are to be assigned to the parameter group.")
+		docdb_copyDbclusterParameterGroupCmd.Flags().String("target-dbcluster-parameter-group-description", "", "A description for the copied cluster parameter group.")
+		docdb_copyDbclusterParameterGroupCmd.Flags().String("target-dbcluster-parameter-group-identifier", "", "The identifier for the copied cluster parameter group.")
+		docdb_copyDbclusterParameterGroupCmd.MarkFlagRequired("source-dbcluster-parameter-group-identifier")
+		docdb_copyDbclusterParameterGroupCmd.MarkFlagRequired("target-dbcluster-parameter-group-description")
+		docdb_copyDbclusterParameterGroupCmd.MarkFlagRequired("target-dbcluster-parameter-group-identifier")
+	})
 	docdbCmd.AddCommand(docdb_copyDbclusterParameterGroupCmd)
 }

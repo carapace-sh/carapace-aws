@@ -12,9 +12,11 @@ var meteringmarketplace_resolveCustomerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(meteringmarketplace_resolveCustomerCmd).Standalone()
+	carapace.Gen(meteringmarketplace_resolveCustomerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(meteringmarketplace_resolveCustomerCmd).Standalone()
 
-	meteringmarketplace_resolveCustomerCmd.Flags().String("registration-token", "", "When a buyer visits your website during the registration process, the buyer submits a registration token through the browser.")
-	meteringmarketplace_resolveCustomerCmd.MarkFlagRequired("registration-token")
+		meteringmarketplace_resolveCustomerCmd.Flags().String("registration-token", "", "When a buyer visits your website during the registration process, the buyer submits a registration token through the browser.")
+		meteringmarketplace_resolveCustomerCmd.MarkFlagRequired("registration-token")
+	})
 	meteringmarketplaceCmd.AddCommand(meteringmarketplace_resolveCustomerCmd)
 }

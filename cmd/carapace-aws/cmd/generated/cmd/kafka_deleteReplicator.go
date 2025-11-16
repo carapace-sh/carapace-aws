@@ -12,10 +12,12 @@ var kafka_deleteReplicatorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_deleteReplicatorCmd).Standalone()
+	carapace.Gen(kafka_deleteReplicatorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_deleteReplicatorCmd).Standalone()
 
-	kafka_deleteReplicatorCmd.Flags().String("current-version", "", "The current version of the replicator.")
-	kafka_deleteReplicatorCmd.Flags().String("replicator-arn", "", "The Amazon Resource Name (ARN) of the replicator to be deleted.")
-	kafka_deleteReplicatorCmd.MarkFlagRequired("replicator-arn")
+		kafka_deleteReplicatorCmd.Flags().String("current-version", "", "The current version of the replicator.")
+		kafka_deleteReplicatorCmd.Flags().String("replicator-arn", "", "The Amazon Resource Name (ARN) of the replicator to be deleted.")
+		kafka_deleteReplicatorCmd.MarkFlagRequired("replicator-arn")
+	})
 	kafkaCmd.AddCommand(kafka_deleteReplicatorCmd)
 }

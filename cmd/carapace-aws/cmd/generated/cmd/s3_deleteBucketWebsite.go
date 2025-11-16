@@ -12,10 +12,12 @@ var s3_deleteBucketWebsiteCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3_deleteBucketWebsiteCmd).Standalone()
+	carapace.Gen(s3_deleteBucketWebsiteCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3_deleteBucketWebsiteCmd).Standalone()
 
-	s3_deleteBucketWebsiteCmd.Flags().String("bucket", "", "The bucket name for which you want to remove the website configuration.")
-	s3_deleteBucketWebsiteCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
-	s3_deleteBucketWebsiteCmd.MarkFlagRequired("bucket")
+		s3_deleteBucketWebsiteCmd.Flags().String("bucket", "", "The bucket name for which you want to remove the website configuration.")
+		s3_deleteBucketWebsiteCmd.Flags().String("expected-bucket-owner", "", "The account ID of the expected bucket owner.")
+		s3_deleteBucketWebsiteCmd.MarkFlagRequired("bucket")
+	})
 	s3Cmd.AddCommand(s3_deleteBucketWebsiteCmd)
 }

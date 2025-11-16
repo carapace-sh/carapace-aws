@@ -12,11 +12,13 @@ var qconnect_deleteImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_deleteImportJobCmd).Standalone()
+	carapace.Gen(qconnect_deleteImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_deleteImportJobCmd).Standalone()
 
-	qconnect_deleteImportJobCmd.Flags().String("import-job-id", "", "The identifier of the import job to be deleted.")
-	qconnect_deleteImportJobCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_deleteImportJobCmd.MarkFlagRequired("import-job-id")
-	qconnect_deleteImportJobCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_deleteImportJobCmd.Flags().String("import-job-id", "", "The identifier of the import job to be deleted.")
+		qconnect_deleteImportJobCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_deleteImportJobCmd.MarkFlagRequired("import-job-id")
+		qconnect_deleteImportJobCmd.MarkFlagRequired("knowledge-base-id")
+	})
 	qconnectCmd.AddCommand(qconnect_deleteImportJobCmd)
 }

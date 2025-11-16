@@ -12,14 +12,16 @@ var resourceGroups_startTagSyncTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceGroups_startTagSyncTaskCmd).Standalone()
+	carapace.Gen(resourceGroups_startTagSyncTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceGroups_startTagSyncTaskCmd).Standalone()
 
-	resourceGroups_startTagSyncTaskCmd.Flags().String("group", "", "The Amazon resource name (ARN) or name of the application group for which you want to create a tag-sync task.")
-	resourceGroups_startTagSyncTaskCmd.Flags().String("resource-query", "", "The query you can use to create the tag-sync task.")
-	resourceGroups_startTagSyncTaskCmd.Flags().String("role-arn", "", "The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.")
-	resourceGroups_startTagSyncTaskCmd.Flags().String("tag-key", "", "The tag key.")
-	resourceGroups_startTagSyncTaskCmd.Flags().String("tag-value", "", "The tag value.")
-	resourceGroups_startTagSyncTaskCmd.MarkFlagRequired("group")
-	resourceGroups_startTagSyncTaskCmd.MarkFlagRequired("role-arn")
+		resourceGroups_startTagSyncTaskCmd.Flags().String("group", "", "The Amazon resource name (ARN) or name of the application group for which you want to create a tag-sync task.")
+		resourceGroups_startTagSyncTaskCmd.Flags().String("resource-query", "", "The query you can use to create the tag-sync task.")
+		resourceGroups_startTagSyncTaskCmd.Flags().String("role-arn", "", "The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.")
+		resourceGroups_startTagSyncTaskCmd.Flags().String("tag-key", "", "The tag key.")
+		resourceGroups_startTagSyncTaskCmd.Flags().String("tag-value", "", "The tag value.")
+		resourceGroups_startTagSyncTaskCmd.MarkFlagRequired("group")
+		resourceGroups_startTagSyncTaskCmd.MarkFlagRequired("role-arn")
+	})
 	resourceGroupsCmd.AddCommand(resourceGroups_startTagSyncTaskCmd)
 }

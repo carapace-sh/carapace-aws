@@ -12,11 +12,13 @@ var appstream_disableUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_disableUserCmd).Standalone()
+	carapace.Gen(appstream_disableUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_disableUserCmd).Standalone()
 
-	appstream_disableUserCmd.Flags().String("authentication-type", "", "The authentication type for the user.")
-	appstream_disableUserCmd.Flags().String("user-name", "", "The email address of the user.")
-	appstream_disableUserCmd.MarkFlagRequired("authentication-type")
-	appstream_disableUserCmd.MarkFlagRequired("user-name")
+		appstream_disableUserCmd.Flags().String("authentication-type", "", "The authentication type for the user.")
+		appstream_disableUserCmd.Flags().String("user-name", "", "The email address of the user.")
+		appstream_disableUserCmd.MarkFlagRequired("authentication-type")
+		appstream_disableUserCmd.MarkFlagRequired("user-name")
+	})
 	appstreamCmd.AddCommand(appstream_disableUserCmd)
 }

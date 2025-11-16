@@ -12,13 +12,15 @@ var connectparticipant_completeAttachmentUploadCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectparticipant_completeAttachmentUploadCmd).Standalone()
+	carapace.Gen(connectparticipant_completeAttachmentUploadCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectparticipant_completeAttachmentUploadCmd).Standalone()
 
-	connectparticipant_completeAttachmentUploadCmd.Flags().String("attachment-ids", "", "A list of unique identifiers for the attachments.")
-	connectparticipant_completeAttachmentUploadCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
-	connectparticipant_completeAttachmentUploadCmd.Flags().String("connection-token", "", "The authentication token associated with the participant's connection.")
-	connectparticipant_completeAttachmentUploadCmd.MarkFlagRequired("attachment-ids")
-	connectparticipant_completeAttachmentUploadCmd.MarkFlagRequired("client-token")
-	connectparticipant_completeAttachmentUploadCmd.MarkFlagRequired("connection-token")
+		connectparticipant_completeAttachmentUploadCmd.Flags().String("attachment-ids", "", "A list of unique identifiers for the attachments.")
+		connectparticipant_completeAttachmentUploadCmd.Flags().String("client-token", "", "A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.")
+		connectparticipant_completeAttachmentUploadCmd.Flags().String("connection-token", "", "The authentication token associated with the participant's connection.")
+		connectparticipant_completeAttachmentUploadCmd.MarkFlagRequired("attachment-ids")
+		connectparticipant_completeAttachmentUploadCmd.MarkFlagRequired("client-token")
+		connectparticipant_completeAttachmentUploadCmd.MarkFlagRequired("connection-token")
+	})
 	connectparticipantCmd.AddCommand(connectparticipant_completeAttachmentUploadCmd)
 }

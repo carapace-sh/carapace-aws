@@ -12,10 +12,12 @@ var quicksight_deleteAccountCustomizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(quicksight_deleteAccountCustomizationCmd).Standalone()
+	carapace.Gen(quicksight_deleteAccountCustomizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(quicksight_deleteAccountCustomizationCmd).Standalone()
 
-	quicksight_deleteAccountCustomizationCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that you want to delete Quick Sight customizations from.")
-	quicksight_deleteAccountCustomizationCmd.Flags().String("namespace", "", "The Quick Sight namespace that you're deleting the customizations from.")
-	quicksight_deleteAccountCustomizationCmd.MarkFlagRequired("aws-account-id")
+		quicksight_deleteAccountCustomizationCmd.Flags().String("aws-account-id", "", "The ID for the Amazon Web Services account that you want to delete Quick Sight customizations from.")
+		quicksight_deleteAccountCustomizationCmd.Flags().String("namespace", "", "The Quick Sight namespace that you're deleting the customizations from.")
+		quicksight_deleteAccountCustomizationCmd.MarkFlagRequired("aws-account-id")
+	})
 	quicksightCmd.AddCommand(quicksight_deleteAccountCustomizationCmd)
 }

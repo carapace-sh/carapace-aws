@@ -12,9 +12,11 @@ var schemas_deleteRegistryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(schemas_deleteRegistryCmd).Standalone()
+	carapace.Gen(schemas_deleteRegistryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(schemas_deleteRegistryCmd).Standalone()
 
-	schemas_deleteRegistryCmd.Flags().String("registry-name", "", "The name of the registry.")
-	schemas_deleteRegistryCmd.MarkFlagRequired("registry-name")
+		schemas_deleteRegistryCmd.Flags().String("registry-name", "", "The name of the registry.")
+		schemas_deleteRegistryCmd.MarkFlagRequired("registry-name")
+	})
 	schemasCmd.AddCommand(schemas_deleteRegistryCmd)
 }

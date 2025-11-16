@@ -12,11 +12,13 @@ var grafana_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(grafana_untagResourceCmd).Standalone()
+	carapace.Gen(grafana_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(grafana_untagResourceCmd).Standalone()
 
-	grafana_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource the tag association is removed from.")
-	grafana_untagResourceCmd.Flags().String("tag-keys", "", "The key values of the tag to be removed from the resource.")
-	grafana_untagResourceCmd.MarkFlagRequired("resource-arn")
-	grafana_untagResourceCmd.MarkFlagRequired("tag-keys")
+		grafana_untagResourceCmd.Flags().String("resource-arn", "", "The ARN of the resource the tag association is removed from.")
+		grafana_untagResourceCmd.Flags().String("tag-keys", "", "The key values of the tag to be removed from the resource.")
+		grafana_untagResourceCmd.MarkFlagRequired("resource-arn")
+		grafana_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	grafanaCmd.AddCommand(grafana_untagResourceCmd)
 }

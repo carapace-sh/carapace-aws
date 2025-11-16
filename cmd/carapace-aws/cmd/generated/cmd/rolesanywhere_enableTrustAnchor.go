@@ -12,9 +12,11 @@ var rolesanywhere_enableTrustAnchorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_enableTrustAnchorCmd).Standalone()
+	carapace.Gen(rolesanywhere_enableTrustAnchorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_enableTrustAnchorCmd).Standalone()
 
-	rolesanywhere_enableTrustAnchorCmd.Flags().String("trust-anchor-id", "", "The unique identifier of the trust anchor.")
-	rolesanywhere_enableTrustAnchorCmd.MarkFlagRequired("trust-anchor-id")
+		rolesanywhere_enableTrustAnchorCmd.Flags().String("trust-anchor-id", "", "The unique identifier of the trust anchor.")
+		rolesanywhere_enableTrustAnchorCmd.MarkFlagRequired("trust-anchor-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_enableTrustAnchorCmd)
 }

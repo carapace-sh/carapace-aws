@@ -12,9 +12,11 @@ var location_listTrackersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(location_listTrackersCmd).Standalone()
+	carapace.Gen(location_listTrackersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(location_listTrackersCmd).Standalone()
 
-	location_listTrackersCmd.Flags().String("max-results", "", "An optional limit for the number of resources returned in a single call.")
-	location_listTrackersCmd.Flags().String("next-token", "", "The pagination token specifying which page of results to return in the response.")
+		location_listTrackersCmd.Flags().String("max-results", "", "An optional limit for the number of resources returned in a single call.")
+		location_listTrackersCmd.Flags().String("next-token", "", "The pagination token specifying which page of results to return in the response.")
+	})
 	locationCmd.AddCommand(location_listTrackersCmd)
 }

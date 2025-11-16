@@ -12,12 +12,14 @@ var frauddetector_describeModelVersionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_describeModelVersionsCmd).Standalone()
+	carapace.Gen(frauddetector_describeModelVersionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_describeModelVersionsCmd).Standalone()
 
-	frauddetector_describeModelVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
-	frauddetector_describeModelVersionsCmd.Flags().String("model-id", "", "The model ID.")
-	frauddetector_describeModelVersionsCmd.Flags().String("model-type", "", "The model type.")
-	frauddetector_describeModelVersionsCmd.Flags().String("model-version-number", "", "The model version number.")
-	frauddetector_describeModelVersionsCmd.Flags().String("next-token", "", "The next token from the previous results.")
+		frauddetector_describeModelVersionsCmd.Flags().String("max-results", "", "The maximum number of results to return.")
+		frauddetector_describeModelVersionsCmd.Flags().String("model-id", "", "The model ID.")
+		frauddetector_describeModelVersionsCmd.Flags().String("model-type", "", "The model type.")
+		frauddetector_describeModelVersionsCmd.Flags().String("model-version-number", "", "The model version number.")
+		frauddetector_describeModelVersionsCmd.Flags().String("next-token", "", "The next token from the previous results.")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_describeModelVersionsCmd)
 }

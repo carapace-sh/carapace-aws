@@ -12,9 +12,11 @@ var workspacesWeb_getUserSettingsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspacesWeb_getUserSettingsCmd).Standalone()
+	carapace.Gen(workspacesWeb_getUserSettingsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspacesWeb_getUserSettingsCmd).Standalone()
 
-	workspacesWeb_getUserSettingsCmd.Flags().String("user-settings-arn", "", "The ARN of the user settings.")
-	workspacesWeb_getUserSettingsCmd.MarkFlagRequired("user-settings-arn")
+		workspacesWeb_getUserSettingsCmd.Flags().String("user-settings-arn", "", "The ARN of the user settings.")
+		workspacesWeb_getUserSettingsCmd.MarkFlagRequired("user-settings-arn")
+	})
 	workspacesWebCmd.AddCommand(workspacesWeb_getUserSettingsCmd)
 }

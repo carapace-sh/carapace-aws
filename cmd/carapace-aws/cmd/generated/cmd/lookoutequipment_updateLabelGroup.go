@@ -12,10 +12,12 @@ var lookoutequipment_updateLabelGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lookoutequipment_updateLabelGroupCmd).Standalone()
+	carapace.Gen(lookoutequipment_updateLabelGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lookoutequipment_updateLabelGroupCmd).Standalone()
 
-	lookoutequipment_updateLabelGroupCmd.Flags().String("fault-codes", "", "Updates the code indicating the type of anomaly associated with the label.")
-	lookoutequipment_updateLabelGroupCmd.Flags().String("label-group-name", "", "The name of the label group to be updated.")
-	lookoutequipment_updateLabelGroupCmd.MarkFlagRequired("label-group-name")
+		lookoutequipment_updateLabelGroupCmd.Flags().String("fault-codes", "", "Updates the code indicating the type of anomaly associated with the label.")
+		lookoutequipment_updateLabelGroupCmd.Flags().String("label-group-name", "", "The name of the label group to be updated.")
+		lookoutequipment_updateLabelGroupCmd.MarkFlagRequired("label-group-name")
+	})
 	lookoutequipmentCmd.AddCommand(lookoutequipment_updateLabelGroupCmd)
 }

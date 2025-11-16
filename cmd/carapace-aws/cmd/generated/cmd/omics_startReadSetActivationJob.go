@@ -12,12 +12,14 @@ var omics_startReadSetActivationJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_startReadSetActivationJobCmd).Standalone()
+	carapace.Gen(omics_startReadSetActivationJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_startReadSetActivationJobCmd).Standalone()
 
-	omics_startReadSetActivationJobCmd.Flags().String("client-token", "", "To ensure that jobs don't run multiple times, specify a unique token for each job.")
-	omics_startReadSetActivationJobCmd.Flags().String("sequence-store-id", "", "The read set's sequence store ID.")
-	omics_startReadSetActivationJobCmd.Flags().String("sources", "", "The job's source files.")
-	omics_startReadSetActivationJobCmd.MarkFlagRequired("sequence-store-id")
-	omics_startReadSetActivationJobCmd.MarkFlagRequired("sources")
+		omics_startReadSetActivationJobCmd.Flags().String("client-token", "", "To ensure that jobs don't run multiple times, specify a unique token for each job.")
+		omics_startReadSetActivationJobCmd.Flags().String("sequence-store-id", "", "The read set's sequence store ID.")
+		omics_startReadSetActivationJobCmd.Flags().String("sources", "", "The job's source files.")
+		omics_startReadSetActivationJobCmd.MarkFlagRequired("sequence-store-id")
+		omics_startReadSetActivationJobCmd.MarkFlagRequired("sources")
+	})
 	omicsCmd.AddCommand(omics_startReadSetActivationJobCmd)
 }

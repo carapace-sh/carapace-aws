@@ -12,10 +12,12 @@ var support_describeTrustedAdvisorCheckResultCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(support_describeTrustedAdvisorCheckResultCmd).Standalone()
+	carapace.Gen(support_describeTrustedAdvisorCheckResultCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(support_describeTrustedAdvisorCheckResultCmd).Standalone()
 
-	support_describeTrustedAdvisorCheckResultCmd.Flags().String("check-id", "", "The unique identifier for the Trusted Advisor check.")
-	support_describeTrustedAdvisorCheckResultCmd.Flags().String("language", "", "The ISO 639-1 code for the language that you want your check results to appear in.")
-	support_describeTrustedAdvisorCheckResultCmd.MarkFlagRequired("check-id")
+		support_describeTrustedAdvisorCheckResultCmd.Flags().String("check-id", "", "The unique identifier for the Trusted Advisor check.")
+		support_describeTrustedAdvisorCheckResultCmd.Flags().String("language", "", "The ISO 639-1 code for the language that you want your check results to appear in.")
+		support_describeTrustedAdvisorCheckResultCmd.MarkFlagRequired("check-id")
+	})
 	supportCmd.AddCommand(support_describeTrustedAdvisorCheckResultCmd)
 }

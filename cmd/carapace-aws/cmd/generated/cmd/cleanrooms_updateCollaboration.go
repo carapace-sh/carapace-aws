@@ -12,12 +12,14 @@ var cleanrooms_updateCollaborationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanrooms_updateCollaborationCmd).Standalone()
+	carapace.Gen(cleanrooms_updateCollaborationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanrooms_updateCollaborationCmd).Standalone()
 
-	cleanrooms_updateCollaborationCmd.Flags().String("analytics-engine", "", "The analytics engine.")
-	cleanrooms_updateCollaborationCmd.Flags().String("collaboration-identifier", "", "The identifier for the collaboration.")
-	cleanrooms_updateCollaborationCmd.Flags().String("description", "", "A description of the collaboration.")
-	cleanrooms_updateCollaborationCmd.Flags().String("name", "", "A human-readable identifier provided by the collaboration owner.")
-	cleanrooms_updateCollaborationCmd.MarkFlagRequired("collaboration-identifier")
+		cleanrooms_updateCollaborationCmd.Flags().String("analytics-engine", "", "The analytics engine.")
+		cleanrooms_updateCollaborationCmd.Flags().String("collaboration-identifier", "", "The identifier for the collaboration.")
+		cleanrooms_updateCollaborationCmd.Flags().String("description", "", "A description of the collaboration.")
+		cleanrooms_updateCollaborationCmd.Flags().String("name", "", "A human-readable identifier provided by the collaboration owner.")
+		cleanrooms_updateCollaborationCmd.MarkFlagRequired("collaboration-identifier")
+	})
 	cleanroomsCmd.AddCommand(cleanrooms_updateCollaborationCmd)
 }

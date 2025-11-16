@@ -12,9 +12,11 @@ var iotManagedIntegrations_getManagedThingConnectivityDataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_getManagedThingConnectivityDataCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_getManagedThingConnectivityDataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_getManagedThingConnectivityDataCmd).Standalone()
 
-	iotManagedIntegrations_getManagedThingConnectivityDataCmd.Flags().String("identifier", "", "The identifier of a managed thing.")
-	iotManagedIntegrations_getManagedThingConnectivityDataCmd.MarkFlagRequired("identifier")
+		iotManagedIntegrations_getManagedThingConnectivityDataCmd.Flags().String("identifier", "", "The identifier of a managed thing.")
+		iotManagedIntegrations_getManagedThingConnectivityDataCmd.MarkFlagRequired("identifier")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_getManagedThingConnectivityDataCmd)
 }

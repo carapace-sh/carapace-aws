@@ -12,9 +12,11 @@ var fis_listTargetResourceTypesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_listTargetResourceTypesCmd).Standalone()
+	carapace.Gen(fis_listTargetResourceTypesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_listTargetResourceTypesCmd).Standalone()
 
-	fis_listTargetResourceTypesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
-	fis_listTargetResourceTypesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		fis_listTargetResourceTypesCmd.Flags().String("max-results", "", "The maximum number of results to return with a single call.")
+		fis_listTargetResourceTypesCmd.Flags().String("next-token", "", "The token for the next page of results.")
+	})
 	fisCmd.AddCommand(fis_listTargetResourceTypesCmd)
 }

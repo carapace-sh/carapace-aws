@@ -12,7 +12,9 @@ var apigateway_getAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_getAccountCmd).Standalone()
+	carapace.Gen(apigateway_getAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_getAccountCmd).Standalone()
 
+	})
 	apigatewayCmd.AddCommand(apigateway_getAccountCmd)
 }

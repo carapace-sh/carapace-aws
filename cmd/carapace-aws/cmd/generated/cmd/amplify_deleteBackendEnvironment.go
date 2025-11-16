@@ -12,11 +12,13 @@ var amplify_deleteBackendEnvironmentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplify_deleteBackendEnvironmentCmd).Standalone()
+	carapace.Gen(amplify_deleteBackendEnvironmentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplify_deleteBackendEnvironmentCmd).Standalone()
 
-	amplify_deleteBackendEnvironmentCmd.Flags().String("app-id", "", "The unique ID of an Amplify app.")
-	amplify_deleteBackendEnvironmentCmd.Flags().String("environment-name", "", "The name of a backend environment of an Amplify app.")
-	amplify_deleteBackendEnvironmentCmd.MarkFlagRequired("app-id")
-	amplify_deleteBackendEnvironmentCmd.MarkFlagRequired("environment-name")
+		amplify_deleteBackendEnvironmentCmd.Flags().String("app-id", "", "The unique ID of an Amplify app.")
+		amplify_deleteBackendEnvironmentCmd.Flags().String("environment-name", "", "The name of a backend environment of an Amplify app.")
+		amplify_deleteBackendEnvironmentCmd.MarkFlagRequired("app-id")
+		amplify_deleteBackendEnvironmentCmd.MarkFlagRequired("environment-name")
+	})
 	amplifyCmd.AddCommand(amplify_deleteBackendEnvironmentCmd)
 }

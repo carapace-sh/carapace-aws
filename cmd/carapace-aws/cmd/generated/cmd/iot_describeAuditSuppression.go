@@ -12,11 +12,13 @@ var iot_describeAuditSuppressionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeAuditSuppressionCmd).Standalone()
+	carapace.Gen(iot_describeAuditSuppressionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeAuditSuppressionCmd).Standalone()
 
-	iot_describeAuditSuppressionCmd.Flags().String("check-name", "", "")
-	iot_describeAuditSuppressionCmd.Flags().String("resource-identifier", "", "")
-	iot_describeAuditSuppressionCmd.MarkFlagRequired("check-name")
-	iot_describeAuditSuppressionCmd.MarkFlagRequired("resource-identifier")
+		iot_describeAuditSuppressionCmd.Flags().String("check-name", "", "")
+		iot_describeAuditSuppressionCmd.Flags().String("resource-identifier", "", "")
+		iot_describeAuditSuppressionCmd.MarkFlagRequired("check-name")
+		iot_describeAuditSuppressionCmd.MarkFlagRequired("resource-identifier")
+	})
 	iotCmd.AddCommand(iot_describeAuditSuppressionCmd)
 }

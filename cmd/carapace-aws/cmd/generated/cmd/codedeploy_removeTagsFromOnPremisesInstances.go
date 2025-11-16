@@ -12,11 +12,13 @@ var codedeploy_removeTagsFromOnPremisesInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codedeploy_removeTagsFromOnPremisesInstancesCmd).Standalone()
+	carapace.Gen(codedeploy_removeTagsFromOnPremisesInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codedeploy_removeTagsFromOnPremisesInstancesCmd).Standalone()
 
-	codedeploy_removeTagsFromOnPremisesInstancesCmd.Flags().String("instance-names", "", "The names of the on-premises instances from which to remove tags.")
-	codedeploy_removeTagsFromOnPremisesInstancesCmd.Flags().String("tags", "", "The tag key-value pairs to remove from the on-premises instances.")
-	codedeploy_removeTagsFromOnPremisesInstancesCmd.MarkFlagRequired("instance-names")
-	codedeploy_removeTagsFromOnPremisesInstancesCmd.MarkFlagRequired("tags")
+		codedeploy_removeTagsFromOnPremisesInstancesCmd.Flags().String("instance-names", "", "The names of the on-premises instances from which to remove tags.")
+		codedeploy_removeTagsFromOnPremisesInstancesCmd.Flags().String("tags", "", "The tag key-value pairs to remove from the on-premises instances.")
+		codedeploy_removeTagsFromOnPremisesInstancesCmd.MarkFlagRequired("instance-names")
+		codedeploy_removeTagsFromOnPremisesInstancesCmd.MarkFlagRequired("tags")
+	})
 	codedeployCmd.AddCommand(codedeploy_removeTagsFromOnPremisesInstancesCmd)
 }

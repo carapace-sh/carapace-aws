@@ -12,11 +12,13 @@ var iotsitewise_invokeAssistantCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotsitewise_invokeAssistantCmd).Standalone()
+	carapace.Gen(iotsitewise_invokeAssistantCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotsitewise_invokeAssistantCmd).Standalone()
 
-	iotsitewise_invokeAssistantCmd.Flags().String("conversation-id", "", "The ID assigned to a conversation.")
-	iotsitewise_invokeAssistantCmd.Flags().String("enable-trace", "", "Specifies if to turn trace on or not.")
-	iotsitewise_invokeAssistantCmd.Flags().String("message", "", "A text message sent to the SiteWise Assistant by the user.")
-	iotsitewise_invokeAssistantCmd.MarkFlagRequired("message")
+		iotsitewise_invokeAssistantCmd.Flags().String("conversation-id", "", "The ID assigned to a conversation.")
+		iotsitewise_invokeAssistantCmd.Flags().String("enable-trace", "", "Specifies if to turn trace on or not.")
+		iotsitewise_invokeAssistantCmd.Flags().String("message", "", "A text message sent to the SiteWise Assistant by the user.")
+		iotsitewise_invokeAssistantCmd.MarkFlagRequired("message")
+	})
 	iotsitewiseCmd.AddCommand(iotsitewise_invokeAssistantCmd)
 }

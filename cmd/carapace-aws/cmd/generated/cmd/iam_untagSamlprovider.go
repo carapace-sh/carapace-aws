@@ -12,11 +12,13 @@ var iam_untagSamlproviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_untagSamlproviderCmd).Standalone()
+	carapace.Gen(iam_untagSamlproviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_untagSamlproviderCmd).Standalone()
 
-	iam_untagSamlproviderCmd.Flags().String("samlprovider-arn", "", "The ARN of the SAML identity provider in IAM from which you want to remove tags.")
-	iam_untagSamlproviderCmd.Flags().String("tag-keys", "", "A list of key names as a simple array of strings.")
-	iam_untagSamlproviderCmd.MarkFlagRequired("samlprovider-arn")
-	iam_untagSamlproviderCmd.MarkFlagRequired("tag-keys")
+		iam_untagSamlproviderCmd.Flags().String("samlprovider-arn", "", "The ARN of the SAML identity provider in IAM from which you want to remove tags.")
+		iam_untagSamlproviderCmd.Flags().String("tag-keys", "", "A list of key names as a simple array of strings.")
+		iam_untagSamlproviderCmd.MarkFlagRequired("samlprovider-arn")
+		iam_untagSamlproviderCmd.MarkFlagRequired("tag-keys")
+	})
 	iamCmd.AddCommand(iam_untagSamlproviderCmd)
 }

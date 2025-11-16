@@ -12,13 +12,15 @@ var datapipeline_setStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datapipeline_setStatusCmd).Standalone()
+	carapace.Gen(datapipeline_setStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datapipeline_setStatusCmd).Standalone()
 
-	datapipeline_setStatusCmd.Flags().String("object-ids", "", "The IDs of the objects.")
-	datapipeline_setStatusCmd.Flags().String("pipeline-id", "", "The ID of the pipeline that contains the objects.")
-	datapipeline_setStatusCmd.Flags().String("status", "", "The status to be set on all the objects specified in `objectIds`.")
-	datapipeline_setStatusCmd.MarkFlagRequired("object-ids")
-	datapipeline_setStatusCmd.MarkFlagRequired("pipeline-id")
-	datapipeline_setStatusCmd.MarkFlagRequired("status")
+		datapipeline_setStatusCmd.Flags().String("object-ids", "", "The IDs of the objects.")
+		datapipeline_setStatusCmd.Flags().String("pipeline-id", "", "The ID of the pipeline that contains the objects.")
+		datapipeline_setStatusCmd.Flags().String("status", "", "The status to be set on all the objects specified in `objectIds`.")
+		datapipeline_setStatusCmd.MarkFlagRequired("object-ids")
+		datapipeline_setStatusCmd.MarkFlagRequired("pipeline-id")
+		datapipeline_setStatusCmd.MarkFlagRequired("status")
+	})
 	datapipelineCmd.AddCommand(datapipeline_setStatusCmd)
 }

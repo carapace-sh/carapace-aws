@@ -12,9 +12,11 @@ var lightsail_getDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_getDomainCmd).Standalone()
+	carapace.Gen(lightsail_getDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_getDomainCmd).Standalone()
 
-	lightsail_getDomainCmd.Flags().String("domain-name", "", "The domain name for which your want to return information about.")
-	lightsail_getDomainCmd.MarkFlagRequired("domain-name")
+		lightsail_getDomainCmd.Flags().String("domain-name", "", "The domain name for which your want to return information about.")
+		lightsail_getDomainCmd.MarkFlagRequired("domain-name")
+	})
 	lightsailCmd.AddCommand(lightsail_getDomainCmd)
 }

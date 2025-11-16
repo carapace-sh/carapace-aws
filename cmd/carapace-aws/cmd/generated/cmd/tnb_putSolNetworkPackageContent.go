@@ -12,12 +12,14 @@ var tnb_putSolNetworkPackageContentCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(tnb_putSolNetworkPackageContentCmd).Standalone()
+	carapace.Gen(tnb_putSolNetworkPackageContentCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(tnb_putSolNetworkPackageContentCmd).Standalone()
 
-	tnb_putSolNetworkPackageContentCmd.Flags().String("content-type", "", "Network package content type.")
-	tnb_putSolNetworkPackageContentCmd.Flags().String("file", "", "Network package file.")
-	tnb_putSolNetworkPackageContentCmd.Flags().String("nsd-info-id", "", "Network service descriptor info ID.")
-	tnb_putSolNetworkPackageContentCmd.MarkFlagRequired("file")
-	tnb_putSolNetworkPackageContentCmd.MarkFlagRequired("nsd-info-id")
+		tnb_putSolNetworkPackageContentCmd.Flags().String("content-type", "", "Network package content type.")
+		tnb_putSolNetworkPackageContentCmd.Flags().String("file", "", "Network package file.")
+		tnb_putSolNetworkPackageContentCmd.Flags().String("nsd-info-id", "", "Network service descriptor info ID.")
+		tnb_putSolNetworkPackageContentCmd.MarkFlagRequired("file")
+		tnb_putSolNetworkPackageContentCmd.MarkFlagRequired("nsd-info-id")
+	})
 	tnbCmd.AddCommand(tnb_putSolNetworkPackageContentCmd)
 }

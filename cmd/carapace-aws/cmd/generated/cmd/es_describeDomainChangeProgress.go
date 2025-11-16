@@ -12,10 +12,12 @@ var es_describeDomainChangeProgressCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_describeDomainChangeProgressCmd).Standalone()
+	carapace.Gen(es_describeDomainChangeProgressCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_describeDomainChangeProgressCmd).Standalone()
 
-	es_describeDomainChangeProgressCmd.Flags().String("change-id", "", "The specific change ID for which you want to get progress information.")
-	es_describeDomainChangeProgressCmd.Flags().String("domain-name", "", "The domain you want to get the progress information about.")
-	es_describeDomainChangeProgressCmd.MarkFlagRequired("domain-name")
+		es_describeDomainChangeProgressCmd.Flags().String("change-id", "", "The specific change ID for which you want to get progress information.")
+		es_describeDomainChangeProgressCmd.Flags().String("domain-name", "", "The domain you want to get the progress information about.")
+		es_describeDomainChangeProgressCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_describeDomainChangeProgressCmd)
 }

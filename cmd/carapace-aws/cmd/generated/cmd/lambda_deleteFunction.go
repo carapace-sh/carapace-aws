@@ -12,10 +12,12 @@ var lambda_deleteFunctionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lambda_deleteFunctionCmd).Standalone()
+	carapace.Gen(lambda_deleteFunctionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lambda_deleteFunctionCmd).Standalone()
 
-	lambda_deleteFunctionCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function or version.")
-	lambda_deleteFunctionCmd.Flags().String("qualifier", "", "Specify a version to delete.")
-	lambda_deleteFunctionCmd.MarkFlagRequired("function-name")
+		lambda_deleteFunctionCmd.Flags().String("function-name", "", "The name or ARN of the Lambda function or version.")
+		lambda_deleteFunctionCmd.Flags().String("qualifier", "", "Specify a version to delete.")
+		lambda_deleteFunctionCmd.MarkFlagRequired("function-name")
+	})
 	lambdaCmd.AddCommand(lambda_deleteFunctionCmd)
 }

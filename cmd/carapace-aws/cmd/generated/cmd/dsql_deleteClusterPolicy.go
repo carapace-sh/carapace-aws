@@ -12,11 +12,13 @@ var dsql_deleteClusterPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dsql_deleteClusterPolicyCmd).Standalone()
+	carapace.Gen(dsql_deleteClusterPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dsql_deleteClusterPolicyCmd).Standalone()
 
-	dsql_deleteClusterPolicyCmd.Flags().String("client-token", "", "")
-	dsql_deleteClusterPolicyCmd.Flags().String("expected-policy-version", "", "The expected version of the policy to delete.")
-	dsql_deleteClusterPolicyCmd.Flags().String("identifier", "", "")
-	dsql_deleteClusterPolicyCmd.MarkFlagRequired("identifier")
+		dsql_deleteClusterPolicyCmd.Flags().String("client-token", "", "")
+		dsql_deleteClusterPolicyCmd.Flags().String("expected-policy-version", "", "The expected version of the policy to delete.")
+		dsql_deleteClusterPolicyCmd.Flags().String("identifier", "", "")
+		dsql_deleteClusterPolicyCmd.MarkFlagRequired("identifier")
+	})
 	dsqlCmd.AddCommand(dsql_deleteClusterPolicyCmd)
 }

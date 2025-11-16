@@ -12,9 +12,11 @@ var directconnect_confirmConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_confirmConnectionCmd).Standalone()
+	carapace.Gen(directconnect_confirmConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_confirmConnectionCmd).Standalone()
 
-	directconnect_confirmConnectionCmd.Flags().String("connection-id", "", "The ID of the hosted connection.")
-	directconnect_confirmConnectionCmd.MarkFlagRequired("connection-id")
+		directconnect_confirmConnectionCmd.Flags().String("connection-id", "", "The ID of the hosted connection.")
+		directconnect_confirmConnectionCmd.MarkFlagRequired("connection-id")
+	})
 	directconnectCmd.AddCommand(directconnect_confirmConnectionCmd)
 }

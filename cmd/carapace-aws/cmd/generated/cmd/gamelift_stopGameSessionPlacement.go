@@ -12,9 +12,11 @@ var gamelift_stopGameSessionPlacementCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(gamelift_stopGameSessionPlacementCmd).Standalone()
+	carapace.Gen(gamelift_stopGameSessionPlacementCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(gamelift_stopGameSessionPlacementCmd).Standalone()
 
-	gamelift_stopGameSessionPlacementCmd.Flags().String("placement-id", "", "A unique identifier for a game session placement to stop.")
-	gamelift_stopGameSessionPlacementCmd.MarkFlagRequired("placement-id")
+		gamelift_stopGameSessionPlacementCmd.Flags().String("placement-id", "", "A unique identifier for a game session placement to stop.")
+		gamelift_stopGameSessionPlacementCmd.MarkFlagRequired("placement-id")
+	})
 	gameliftCmd.AddCommand(gamelift_stopGameSessionPlacementCmd)
 }

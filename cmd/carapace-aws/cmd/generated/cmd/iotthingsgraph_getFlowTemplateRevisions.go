@@ -12,11 +12,13 @@ var iotthingsgraph_getFlowTemplateRevisionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_getFlowTemplateRevisionsCmd).Standalone()
+	carapace.Gen(iotthingsgraph_getFlowTemplateRevisionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_getFlowTemplateRevisionsCmd).Standalone()
 
-	iotthingsgraph_getFlowTemplateRevisionsCmd.Flags().String("id", "", "The ID of the workflow.")
-	iotthingsgraph_getFlowTemplateRevisionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	iotthingsgraph_getFlowTemplateRevisionsCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
-	iotthingsgraph_getFlowTemplateRevisionsCmd.MarkFlagRequired("id")
+		iotthingsgraph_getFlowTemplateRevisionsCmd.Flags().String("id", "", "The ID of the workflow.")
+		iotthingsgraph_getFlowTemplateRevisionsCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		iotthingsgraph_getFlowTemplateRevisionsCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
+		iotthingsgraph_getFlowTemplateRevisionsCmd.MarkFlagRequired("id")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_getFlowTemplateRevisionsCmd)
 }

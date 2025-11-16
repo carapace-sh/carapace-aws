@@ -12,10 +12,12 @@ var iotManagedIntegrations_putDefaultEncryptionConfigurationCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(iotManagedIntegrations_putDefaultEncryptionConfigurationCmd).Standalone()
+	carapace.Gen(iotManagedIntegrations_putDefaultEncryptionConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotManagedIntegrations_putDefaultEncryptionConfigurationCmd).Standalone()
 
-	iotManagedIntegrations_putDefaultEncryptionConfigurationCmd.Flags().String("encryption-type", "", "The type of encryption used for the encryption configuration.")
-	iotManagedIntegrations_putDefaultEncryptionConfigurationCmd.Flags().String("kms-key-arn", "", "The Key Amazon Resource Name (ARN) of the AWS KMS key used for KMS encryption if you use `KMS_BASED_ENCRYPTION`.")
-	iotManagedIntegrations_putDefaultEncryptionConfigurationCmd.MarkFlagRequired("encryption-type")
+		iotManagedIntegrations_putDefaultEncryptionConfigurationCmd.Flags().String("encryption-type", "", "The type of encryption used for the encryption configuration.")
+		iotManagedIntegrations_putDefaultEncryptionConfigurationCmd.Flags().String("kms-key-arn", "", "The Key Amazon Resource Name (ARN) of the AWS KMS key used for KMS encryption if you use `KMS_BASED_ENCRYPTION`.")
+		iotManagedIntegrations_putDefaultEncryptionConfigurationCmd.MarkFlagRequired("encryption-type")
+	})
 	iotManagedIntegrationsCmd.AddCommand(iotManagedIntegrations_putDefaultEncryptionConfigurationCmd)
 }

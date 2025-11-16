@@ -12,9 +12,11 @@ var paymentCryptography_getKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(paymentCryptography_getKeyCmd).Standalone()
+	carapace.Gen(paymentCryptography_getKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(paymentCryptography_getKeyCmd).Standalone()
 
-	paymentCryptography_getKeyCmd.Flags().String("key-identifier", "", "The `KeyARN` of the Amazon Web Services Payment Cryptography key.")
-	paymentCryptography_getKeyCmd.MarkFlagRequired("key-identifier")
+		paymentCryptography_getKeyCmd.Flags().String("key-identifier", "", "The `KeyARN` of the Amazon Web Services Payment Cryptography key.")
+		paymentCryptography_getKeyCmd.MarkFlagRequired("key-identifier")
+	})
 	paymentCryptographyCmd.AddCommand(paymentCryptography_getKeyCmd)
 }

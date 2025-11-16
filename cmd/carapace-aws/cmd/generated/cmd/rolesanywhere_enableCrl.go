@@ -12,9 +12,11 @@ var rolesanywhere_enableCrlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rolesanywhere_enableCrlCmd).Standalone()
+	carapace.Gen(rolesanywhere_enableCrlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rolesanywhere_enableCrlCmd).Standalone()
 
-	rolesanywhere_enableCrlCmd.Flags().String("crl-id", "", "The unique identifier of the certificate revocation list (CRL).")
-	rolesanywhere_enableCrlCmd.MarkFlagRequired("crl-id")
+		rolesanywhere_enableCrlCmd.Flags().String("crl-id", "", "The unique identifier of the certificate revocation list (CRL).")
+		rolesanywhere_enableCrlCmd.MarkFlagRequired("crl-id")
+	})
 	rolesanywhereCmd.AddCommand(rolesanywhere_enableCrlCmd)
 }

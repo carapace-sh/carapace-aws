@@ -12,13 +12,15 @@ var pinpoint_updateEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateEndpointCmd).Standalone()
+	carapace.Gen(pinpoint_updateEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateEndpointCmd).Standalone()
 
-	pinpoint_updateEndpointCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_updateEndpointCmd.Flags().String("endpoint-id", "", "The case insensitive unique identifier for the endpoint.")
-	pinpoint_updateEndpointCmd.Flags().String("endpoint-request", "", "")
-	pinpoint_updateEndpointCmd.MarkFlagRequired("application-id")
-	pinpoint_updateEndpointCmd.MarkFlagRequired("endpoint-id")
-	pinpoint_updateEndpointCmd.MarkFlagRequired("endpoint-request")
+		pinpoint_updateEndpointCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_updateEndpointCmd.Flags().String("endpoint-id", "", "The case insensitive unique identifier for the endpoint.")
+		pinpoint_updateEndpointCmd.Flags().String("endpoint-request", "", "")
+		pinpoint_updateEndpointCmd.MarkFlagRequired("application-id")
+		pinpoint_updateEndpointCmd.MarkFlagRequired("endpoint-id")
+		pinpoint_updateEndpointCmd.MarkFlagRequired("endpoint-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateEndpointCmd)
 }

@@ -12,9 +12,11 @@ var codepipeline_updatePipelineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_updatePipelineCmd).Standalone()
+	carapace.Gen(codepipeline_updatePipelineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_updatePipelineCmd).Standalone()
 
-	codepipeline_updatePipelineCmd.Flags().String("pipeline", "", "The name of the pipeline to be updated.")
-	codepipeline_updatePipelineCmd.MarkFlagRequired("pipeline")
+		codepipeline_updatePipelineCmd.Flags().String("pipeline", "", "The name of the pipeline to be updated.")
+		codepipeline_updatePipelineCmd.MarkFlagRequired("pipeline")
+	})
 	codepipelineCmd.AddCommand(codepipeline_updatePipelineCmd)
 }

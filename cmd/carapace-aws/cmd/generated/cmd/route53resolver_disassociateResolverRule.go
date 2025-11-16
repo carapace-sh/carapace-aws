@@ -12,11 +12,13 @@ var route53resolver_disassociateResolverRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(route53resolver_disassociateResolverRuleCmd).Standalone()
+	carapace.Gen(route53resolver_disassociateResolverRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(route53resolver_disassociateResolverRuleCmd).Standalone()
 
-	route53resolver_disassociateResolverRuleCmd.Flags().String("resolver-rule-id", "", "The ID of the Resolver rule that you want to disassociate from the specified VPC.")
-	route53resolver_disassociateResolverRuleCmd.Flags().String("vpcid", "", "The ID of the VPC that you want to disassociate the Resolver rule from.")
-	route53resolver_disassociateResolverRuleCmd.MarkFlagRequired("resolver-rule-id")
-	route53resolver_disassociateResolverRuleCmd.MarkFlagRequired("vpcid")
+		route53resolver_disassociateResolverRuleCmd.Flags().String("resolver-rule-id", "", "The ID of the Resolver rule that you want to disassociate from the specified VPC.")
+		route53resolver_disassociateResolverRuleCmd.Flags().String("vpcid", "", "The ID of the VPC that you want to disassociate the Resolver rule from.")
+		route53resolver_disassociateResolverRuleCmd.MarkFlagRequired("resolver-rule-id")
+		route53resolver_disassociateResolverRuleCmd.MarkFlagRequired("vpcid")
+	})
 	route53resolverCmd.AddCommand(route53resolver_disassociateResolverRuleCmd)
 }

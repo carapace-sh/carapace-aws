@@ -12,9 +12,11 @@ var ce_startCostAllocationTagBackfillCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_startCostAllocationTagBackfillCmd).Standalone()
+	carapace.Gen(ce_startCostAllocationTagBackfillCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_startCostAllocationTagBackfillCmd).Standalone()
 
-	ce_startCostAllocationTagBackfillCmd.Flags().String("backfill-from", "", "The date you want the backfill to start from.")
-	ce_startCostAllocationTagBackfillCmd.MarkFlagRequired("backfill-from")
+		ce_startCostAllocationTagBackfillCmd.Flags().String("backfill-from", "", "The date you want the backfill to start from.")
+		ce_startCostAllocationTagBackfillCmd.MarkFlagRequired("backfill-from")
+	})
 	ceCmd.AddCommand(ce_startCostAllocationTagBackfillCmd)
 }

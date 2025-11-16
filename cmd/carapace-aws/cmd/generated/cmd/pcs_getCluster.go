@@ -12,9 +12,11 @@ var pcs_getClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pcs_getClusterCmd).Standalone()
+	carapace.Gen(pcs_getClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pcs_getClusterCmd).Standalone()
 
-	pcs_getClusterCmd.Flags().String("cluster-identifier", "", "The name or ID of the cluster.")
-	pcs_getClusterCmd.MarkFlagRequired("cluster-identifier")
+		pcs_getClusterCmd.Flags().String("cluster-identifier", "", "The name or ID of the cluster.")
+		pcs_getClusterCmd.MarkFlagRequired("cluster-identifier")
+	})
 	pcsCmd.AddCommand(pcs_getClusterCmd)
 }

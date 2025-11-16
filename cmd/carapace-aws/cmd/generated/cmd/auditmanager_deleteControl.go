@@ -12,9 +12,11 @@ var auditmanager_deleteControlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(auditmanager_deleteControlCmd).Standalone()
+	carapace.Gen(auditmanager_deleteControlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(auditmanager_deleteControlCmd).Standalone()
 
-	auditmanager_deleteControlCmd.Flags().String("control-id", "", "The unique identifier for the control.")
-	auditmanager_deleteControlCmd.MarkFlagRequired("control-id")
+		auditmanager_deleteControlCmd.Flags().String("control-id", "", "The unique identifier for the control.")
+		auditmanager_deleteControlCmd.MarkFlagRequired("control-id")
+	})
 	auditmanagerCmd.AddCommand(auditmanager_deleteControlCmd)
 }

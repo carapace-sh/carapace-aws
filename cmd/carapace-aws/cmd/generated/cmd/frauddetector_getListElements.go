@@ -12,11 +12,13 @@ var frauddetector_getListElementsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getListElementsCmd).Standalone()
+	carapace.Gen(frauddetector_getListElementsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getListElementsCmd).Standalone()
 
-	frauddetector_getListElementsCmd.Flags().String("max-results", "", "The maximum number of objects to return for the request.")
-	frauddetector_getListElementsCmd.Flags().String("name", "", "The name of the list.")
-	frauddetector_getListElementsCmd.Flags().String("next-token", "", "The next token for the subsequent request.")
-	frauddetector_getListElementsCmd.MarkFlagRequired("name")
+		frauddetector_getListElementsCmd.Flags().String("max-results", "", "The maximum number of objects to return for the request.")
+		frauddetector_getListElementsCmd.Flags().String("name", "", "The name of the list.")
+		frauddetector_getListElementsCmd.Flags().String("next-token", "", "The next token for the subsequent request.")
+		frauddetector_getListElementsCmd.MarkFlagRequired("name")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getListElementsCmd)
 }

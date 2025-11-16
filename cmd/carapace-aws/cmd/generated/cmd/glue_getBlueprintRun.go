@@ -12,11 +12,13 @@ var glue_getBlueprintRunCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getBlueprintRunCmd).Standalone()
+	carapace.Gen(glue_getBlueprintRunCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getBlueprintRunCmd).Standalone()
 
-	glue_getBlueprintRunCmd.Flags().String("blueprint-name", "", "The name of the blueprint.")
-	glue_getBlueprintRunCmd.Flags().String("run-id", "", "The run ID for the blueprint run you want to retrieve.")
-	glue_getBlueprintRunCmd.MarkFlagRequired("blueprint-name")
-	glue_getBlueprintRunCmd.MarkFlagRequired("run-id")
+		glue_getBlueprintRunCmd.Flags().String("blueprint-name", "", "The name of the blueprint.")
+		glue_getBlueprintRunCmd.Flags().String("run-id", "", "The run ID for the blueprint run you want to retrieve.")
+		glue_getBlueprintRunCmd.MarkFlagRequired("blueprint-name")
+		glue_getBlueprintRunCmd.MarkFlagRequired("run-id")
+	})
 	glueCmd.AddCommand(glue_getBlueprintRunCmd)
 }

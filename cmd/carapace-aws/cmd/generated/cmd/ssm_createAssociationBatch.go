@@ -12,9 +12,11 @@ var ssm_createAssociationBatchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_createAssociationBatchCmd).Standalone()
+	carapace.Gen(ssm_createAssociationBatchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_createAssociationBatchCmd).Standalone()
 
-	ssm_createAssociationBatchCmd.Flags().String("entries", "", "One or more associations.")
-	ssm_createAssociationBatchCmd.MarkFlagRequired("entries")
+		ssm_createAssociationBatchCmd.Flags().String("entries", "", "One or more associations.")
+		ssm_createAssociationBatchCmd.MarkFlagRequired("entries")
+	})
 	ssmCmd.AddCommand(ssm_createAssociationBatchCmd)
 }

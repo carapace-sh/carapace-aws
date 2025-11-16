@@ -12,9 +12,11 @@ var events_deleteEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(events_deleteEndpointCmd).Standalone()
+	carapace.Gen(events_deleteEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(events_deleteEndpointCmd).Standalone()
 
-	events_deleteEndpointCmd.Flags().String("name", "", "The name of the endpoint you want to delete.")
-	events_deleteEndpointCmd.MarkFlagRequired("name")
+		events_deleteEndpointCmd.Flags().String("name", "", "The name of the endpoint you want to delete.")
+		events_deleteEndpointCmd.MarkFlagRequired("name")
+	})
 	eventsCmd.AddCommand(events_deleteEndpointCmd)
 }

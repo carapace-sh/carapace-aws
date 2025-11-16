@@ -12,9 +12,11 @@ var discovery_describeBatchDeleteConfigurationTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(discovery_describeBatchDeleteConfigurationTaskCmd).Standalone()
+	carapace.Gen(discovery_describeBatchDeleteConfigurationTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(discovery_describeBatchDeleteConfigurationTaskCmd).Standalone()
 
-	discovery_describeBatchDeleteConfigurationTaskCmd.Flags().String("task-id", "", "The ID of the task to delete.")
-	discovery_describeBatchDeleteConfigurationTaskCmd.MarkFlagRequired("task-id")
+		discovery_describeBatchDeleteConfigurationTaskCmd.Flags().String("task-id", "", "The ID of the task to delete.")
+		discovery_describeBatchDeleteConfigurationTaskCmd.MarkFlagRequired("task-id")
+	})
 	discoveryCmd.AddCommand(discovery_describeBatchDeleteConfigurationTaskCmd)
 }

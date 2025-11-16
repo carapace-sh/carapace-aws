@@ -12,13 +12,15 @@ var bedrockAgentRuntime_getFlowExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentRuntime_getFlowExecutionCmd).Standalone()
+	carapace.Gen(bedrockAgentRuntime_getFlowExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentRuntime_getFlowExecutionCmd).Standalone()
 
-	bedrockAgentRuntime_getFlowExecutionCmd.Flags().String("execution-identifier", "", "The unique identifier of the flow execution to retrieve.")
-	bedrockAgentRuntime_getFlowExecutionCmd.Flags().String("flow-alias-identifier", "", "The unique identifier of the flow alias used for the execution.")
-	bedrockAgentRuntime_getFlowExecutionCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow.")
-	bedrockAgentRuntime_getFlowExecutionCmd.MarkFlagRequired("execution-identifier")
-	bedrockAgentRuntime_getFlowExecutionCmd.MarkFlagRequired("flow-alias-identifier")
-	bedrockAgentRuntime_getFlowExecutionCmd.MarkFlagRequired("flow-identifier")
+		bedrockAgentRuntime_getFlowExecutionCmd.Flags().String("execution-identifier", "", "The unique identifier of the flow execution to retrieve.")
+		bedrockAgentRuntime_getFlowExecutionCmd.Flags().String("flow-alias-identifier", "", "The unique identifier of the flow alias used for the execution.")
+		bedrockAgentRuntime_getFlowExecutionCmd.Flags().String("flow-identifier", "", "The unique identifier of the flow.")
+		bedrockAgentRuntime_getFlowExecutionCmd.MarkFlagRequired("execution-identifier")
+		bedrockAgentRuntime_getFlowExecutionCmd.MarkFlagRequired("flow-alias-identifier")
+		bedrockAgentRuntime_getFlowExecutionCmd.MarkFlagRequired("flow-identifier")
+	})
 	bedrockAgentRuntimeCmd.AddCommand(bedrockAgentRuntime_getFlowExecutionCmd)
 }

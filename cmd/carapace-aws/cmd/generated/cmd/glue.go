@@ -12,7 +12,9 @@ var glueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glueCmd).Standalone()
+	carapace.Gen(glueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glueCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(glueCmd)
 }

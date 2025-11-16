@@ -12,11 +12,13 @@ var xray_listRetrievedTracesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(xray_listRetrievedTracesCmd).Standalone()
+	carapace.Gen(xray_listRetrievedTracesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(xray_listRetrievedTracesCmd).Standalone()
 
-	xray_listRetrievedTracesCmd.Flags().String("next-token", "", "Specify the pagination token returned by a previous request to retrieve the next page of indexes.")
-	xray_listRetrievedTracesCmd.Flags().String("retrieval-token", "", "Retrieval token.")
-	xray_listRetrievedTracesCmd.Flags().String("trace-format", "", "Format of the requested traces.")
-	xray_listRetrievedTracesCmd.MarkFlagRequired("retrieval-token")
+		xray_listRetrievedTracesCmd.Flags().String("next-token", "", "Specify the pagination token returned by a previous request to retrieve the next page of indexes.")
+		xray_listRetrievedTracesCmd.Flags().String("retrieval-token", "", "Retrieval token.")
+		xray_listRetrievedTracesCmd.Flags().String("trace-format", "", "Format of the requested traces.")
+		xray_listRetrievedTracesCmd.MarkFlagRequired("retrieval-token")
+	})
 	xrayCmd.AddCommand(xray_listRetrievedTracesCmd)
 }

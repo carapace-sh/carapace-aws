@@ -12,10 +12,12 @@ var ssm_stopAutomationExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_stopAutomationExecutionCmd).Standalone()
+	carapace.Gen(ssm_stopAutomationExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_stopAutomationExecutionCmd).Standalone()
 
-	ssm_stopAutomationExecutionCmd.Flags().String("automation-execution-id", "", "The execution ID of the Automation to stop.")
-	ssm_stopAutomationExecutionCmd.Flags().String("type", "", "The stop request type.")
-	ssm_stopAutomationExecutionCmd.MarkFlagRequired("automation-execution-id")
+		ssm_stopAutomationExecutionCmd.Flags().String("automation-execution-id", "", "The execution ID of the Automation to stop.")
+		ssm_stopAutomationExecutionCmd.Flags().String("type", "", "The stop request type.")
+		ssm_stopAutomationExecutionCmd.MarkFlagRequired("automation-execution-id")
+	})
 	ssmCmd.AddCommand(ssm_stopAutomationExecutionCmd)
 }

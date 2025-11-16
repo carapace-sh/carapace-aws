@@ -12,9 +12,11 @@ var stepfunctions_deleteStateMachineCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_deleteStateMachineCmd).Standalone()
+	carapace.Gen(stepfunctions_deleteStateMachineCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_deleteStateMachineCmd).Standalone()
 
-	stepfunctions_deleteStateMachineCmd.Flags().String("state-machine-arn", "", "The Amazon Resource Name (ARN) of the state machine to delete.")
-	stepfunctions_deleteStateMachineCmd.MarkFlagRequired("state-machine-arn")
+		stepfunctions_deleteStateMachineCmd.Flags().String("state-machine-arn", "", "The Amazon Resource Name (ARN) of the state machine to delete.")
+		stepfunctions_deleteStateMachineCmd.MarkFlagRequired("state-machine-arn")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_deleteStateMachineCmd)
 }

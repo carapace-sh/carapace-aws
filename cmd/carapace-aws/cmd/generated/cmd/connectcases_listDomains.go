@@ -12,9 +12,11 @@ var connectcases_listDomainsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_listDomainsCmd).Standalone()
+	carapace.Gen(connectcases_listDomainsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_listDomainsCmd).Standalone()
 
-	connectcases_listDomainsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	connectcases_listDomainsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		connectcases_listDomainsCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		connectcases_listDomainsCmd.Flags().String("next-token", "", "The token for the next set of results.")
+	})
 	connectcasesCmd.AddCommand(connectcases_listDomainsCmd)
 }

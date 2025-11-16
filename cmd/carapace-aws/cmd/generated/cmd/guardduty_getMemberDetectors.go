@@ -12,11 +12,13 @@ var guardduty_getMemberDetectorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(guardduty_getMemberDetectorsCmd).Standalone()
+	carapace.Gen(guardduty_getMemberDetectorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(guardduty_getMemberDetectorsCmd).Standalone()
 
-	guardduty_getMemberDetectorsCmd.Flags().String("account-ids", "", "A list of member account IDs.")
-	guardduty_getMemberDetectorsCmd.Flags().String("detector-id", "", "The detector ID for the administrator account.")
-	guardduty_getMemberDetectorsCmd.MarkFlagRequired("account-ids")
-	guardduty_getMemberDetectorsCmd.MarkFlagRequired("detector-id")
+		guardduty_getMemberDetectorsCmd.Flags().String("account-ids", "", "A list of member account IDs.")
+		guardduty_getMemberDetectorsCmd.Flags().String("detector-id", "", "The detector ID for the administrator account.")
+		guardduty_getMemberDetectorsCmd.MarkFlagRequired("account-ids")
+		guardduty_getMemberDetectorsCmd.MarkFlagRequired("detector-id")
+	})
 	guarddutyCmd.AddCommand(guardduty_getMemberDetectorsCmd)
 }

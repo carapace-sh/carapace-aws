@@ -12,11 +12,13 @@ var simspaceweaver_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_tagResourceCmd).Standalone()
+	carapace.Gen(simspaceweaver_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_tagResourceCmd).Standalone()
 
-	simspaceweaver_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to add tags to.")
-	simspaceweaver_tagResourceCmd.Flags().String("tags", "", "A list of tags to apply to the resource.")
-	simspaceweaver_tagResourceCmd.MarkFlagRequired("resource-arn")
-	simspaceweaver_tagResourceCmd.MarkFlagRequired("tags")
+		simspaceweaver_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to add tags to.")
+		simspaceweaver_tagResourceCmd.Flags().String("tags", "", "A list of tags to apply to the resource.")
+		simspaceweaver_tagResourceCmd.MarkFlagRequired("resource-arn")
+		simspaceweaver_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_tagResourceCmd)
 }

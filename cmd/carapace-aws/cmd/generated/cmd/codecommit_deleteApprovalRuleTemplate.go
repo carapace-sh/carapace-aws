@@ -12,9 +12,11 @@ var codecommit_deleteApprovalRuleTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codecommit_deleteApprovalRuleTemplateCmd).Standalone()
+	carapace.Gen(codecommit_deleteApprovalRuleTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codecommit_deleteApprovalRuleTemplateCmd).Standalone()
 
-	codecommit_deleteApprovalRuleTemplateCmd.Flags().String("approval-rule-template-name", "", "The name of the approval rule template to delete.")
-	codecommit_deleteApprovalRuleTemplateCmd.MarkFlagRequired("approval-rule-template-name")
+		codecommit_deleteApprovalRuleTemplateCmd.Flags().String("approval-rule-template-name", "", "The name of the approval rule template to delete.")
+		codecommit_deleteApprovalRuleTemplateCmd.MarkFlagRequired("approval-rule-template-name")
+	})
 	codecommitCmd.AddCommand(codecommit_deleteApprovalRuleTemplateCmd)
 }

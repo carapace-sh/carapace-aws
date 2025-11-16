@@ -12,13 +12,15 @@ var redshift_resetClusterParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_resetClusterParameterGroupCmd).Standalone()
+	carapace.Gen(redshift_resetClusterParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_resetClusterParameterGroupCmd).Standalone()
 
-	redshift_resetClusterParameterGroupCmd.Flags().Bool("no-reset-all-parameters", false, "If `true`, all parameters in the specified parameter group will be reset to their default values.")
-	redshift_resetClusterParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the cluster parameter group to be reset.")
-	redshift_resetClusterParameterGroupCmd.Flags().String("parameters", "", "An array of names of parameters to be reset.")
-	redshift_resetClusterParameterGroupCmd.Flags().Bool("reset-all-parameters", false, "If `true`, all parameters in the specified parameter group will be reset to their default values.")
-	redshift_resetClusterParameterGroupCmd.Flag("no-reset-all-parameters").Hidden = true
-	redshift_resetClusterParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+		redshift_resetClusterParameterGroupCmd.Flags().Bool("no-reset-all-parameters", false, "If `true`, all parameters in the specified parameter group will be reset to their default values.")
+		redshift_resetClusterParameterGroupCmd.Flags().String("parameter-group-name", "", "The name of the cluster parameter group to be reset.")
+		redshift_resetClusterParameterGroupCmd.Flags().String("parameters", "", "An array of names of parameters to be reset.")
+		redshift_resetClusterParameterGroupCmd.Flags().Bool("reset-all-parameters", false, "If `true`, all parameters in the specified parameter group will be reset to their default values.")
+		redshift_resetClusterParameterGroupCmd.Flag("no-reset-all-parameters").Hidden = true
+		redshift_resetClusterParameterGroupCmd.MarkFlagRequired("parameter-group-name")
+	})
 	redshiftCmd.AddCommand(redshift_resetClusterParameterGroupCmd)
 }

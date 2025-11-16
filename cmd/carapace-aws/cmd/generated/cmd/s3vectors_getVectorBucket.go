@@ -12,9 +12,11 @@ var s3vectors_getVectorBucketCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3vectors_getVectorBucketCmd).Standalone()
+	carapace.Gen(s3vectors_getVectorBucketCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3vectors_getVectorBucketCmd).Standalone()
 
-	s3vectors_getVectorBucketCmd.Flags().String("vector-bucket-arn", "", "The ARN of the vector bucket to retrieve information about.")
-	s3vectors_getVectorBucketCmd.Flags().String("vector-bucket-name", "", "The name of the vector bucket to retrieve information about.")
+		s3vectors_getVectorBucketCmd.Flags().String("vector-bucket-arn", "", "The ARN of the vector bucket to retrieve information about.")
+		s3vectors_getVectorBucketCmd.Flags().String("vector-bucket-name", "", "The name of the vector bucket to retrieve information about.")
+	})
 	s3vectorsCmd.AddCommand(s3vectors_getVectorBucketCmd)
 }

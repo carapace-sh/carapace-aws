@@ -12,11 +12,13 @@ var s3control_getAccessGrantsLocationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(s3control_getAccessGrantsLocationCmd).Standalone()
+	carapace.Gen(s3control_getAccessGrantsLocationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(s3control_getAccessGrantsLocationCmd).Standalone()
 
-	s3control_getAccessGrantsLocationCmd.Flags().String("access-grants-location-id", "", "The ID of the registered location that you are retrieving.")
-	s3control_getAccessGrantsLocationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
-	s3control_getAccessGrantsLocationCmd.MarkFlagRequired("access-grants-location-id")
-	s3control_getAccessGrantsLocationCmd.MarkFlagRequired("account-id")
+		s3control_getAccessGrantsLocationCmd.Flags().String("access-grants-location-id", "", "The ID of the registered location that you are retrieving.")
+		s3control_getAccessGrantsLocationCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
+		s3control_getAccessGrantsLocationCmd.MarkFlagRequired("access-grants-location-id")
+		s3control_getAccessGrantsLocationCmd.MarkFlagRequired("account-id")
+	})
 	s3controlCmd.AddCommand(s3control_getAccessGrantsLocationCmd)
 }

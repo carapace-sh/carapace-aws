@@ -12,11 +12,13 @@ var backup_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_untagResourceCmd).Standalone()
+	carapace.Gen(backup_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_untagResourceCmd).Standalone()
 
-	backup_untagResourceCmd.Flags().String("resource-arn", "", "An ARN that uniquely identifies a resource.")
-	backup_untagResourceCmd.Flags().String("tag-key-list", "", "The keys to identify which key-value tags to remove from a resource.")
-	backup_untagResourceCmd.MarkFlagRequired("resource-arn")
-	backup_untagResourceCmd.MarkFlagRequired("tag-key-list")
+		backup_untagResourceCmd.Flags().String("resource-arn", "", "An ARN that uniquely identifies a resource.")
+		backup_untagResourceCmd.Flags().String("tag-key-list", "", "The keys to identify which key-value tags to remove from a resource.")
+		backup_untagResourceCmd.MarkFlagRequired("resource-arn")
+		backup_untagResourceCmd.MarkFlagRequired("tag-key-list")
+	})
 	backupCmd.AddCommand(backup_untagResourceCmd)
 }

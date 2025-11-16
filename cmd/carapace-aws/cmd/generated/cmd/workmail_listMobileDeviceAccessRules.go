@@ -12,9 +12,11 @@ var workmail_listMobileDeviceAccessRulesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workmail_listMobileDeviceAccessRulesCmd).Standalone()
+	carapace.Gen(workmail_listMobileDeviceAccessRulesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workmail_listMobileDeviceAccessRulesCmd).Standalone()
 
-	workmail_listMobileDeviceAccessRulesCmd.Flags().String("organization-id", "", "The WorkMail organization for which to list the rules.")
-	workmail_listMobileDeviceAccessRulesCmd.MarkFlagRequired("organization-id")
+		workmail_listMobileDeviceAccessRulesCmd.Flags().String("organization-id", "", "The WorkMail organization for which to list the rules.")
+		workmail_listMobileDeviceAccessRulesCmd.MarkFlagRequired("organization-id")
+	})
 	workmailCmd.AddCommand(workmail_listMobileDeviceAccessRulesCmd)
 }

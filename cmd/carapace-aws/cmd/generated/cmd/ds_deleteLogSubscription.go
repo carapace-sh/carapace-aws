@@ -12,9 +12,11 @@ var ds_deleteLogSubscriptionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_deleteLogSubscriptionCmd).Standalone()
+	carapace.Gen(ds_deleteLogSubscriptionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_deleteLogSubscriptionCmd).Standalone()
 
-	ds_deleteLogSubscriptionCmd.Flags().String("directory-id", "", "Identifier of the directory whose log subscription you want to delete.")
-	ds_deleteLogSubscriptionCmd.MarkFlagRequired("directory-id")
+		ds_deleteLogSubscriptionCmd.Flags().String("directory-id", "", "Identifier of the directory whose log subscription you want to delete.")
+		ds_deleteLogSubscriptionCmd.MarkFlagRequired("directory-id")
+	})
 	dsCmd.AddCommand(ds_deleteLogSubscriptionCmd)
 }

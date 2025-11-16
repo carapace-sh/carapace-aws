@@ -12,9 +12,11 @@ var iotwireless_deleteWirelessDeviceImportTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_deleteWirelessDeviceImportTaskCmd).Standalone()
+	carapace.Gen(iotwireless_deleteWirelessDeviceImportTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_deleteWirelessDeviceImportTaskCmd).Standalone()
 
-	iotwireless_deleteWirelessDeviceImportTaskCmd.Flags().String("id", "", "The unique identifier of the import task to be deleted.")
-	iotwireless_deleteWirelessDeviceImportTaskCmd.MarkFlagRequired("id")
+		iotwireless_deleteWirelessDeviceImportTaskCmd.Flags().String("id", "", "The unique identifier of the import task to be deleted.")
+		iotwireless_deleteWirelessDeviceImportTaskCmd.MarkFlagRequired("id")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_deleteWirelessDeviceImportTaskCmd)
 }

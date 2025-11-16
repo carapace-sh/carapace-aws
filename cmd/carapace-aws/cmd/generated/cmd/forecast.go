@@ -12,7 +12,9 @@ var forecastCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(forecastCmd).Standalone()
+	carapace.Gen(forecastCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(forecastCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(forecastCmd)
 }

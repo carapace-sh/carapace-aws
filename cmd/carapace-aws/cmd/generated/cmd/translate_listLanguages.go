@@ -12,10 +12,12 @@ var translate_listLanguagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(translate_listLanguagesCmd).Standalone()
+	carapace.Gen(translate_listLanguagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(translate_listLanguagesCmd).Standalone()
 
-	translate_listLanguagesCmd.Flags().String("display-language-code", "", "The language code for the language to use to display the language names in the response.")
-	translate_listLanguagesCmd.Flags().String("max-results", "", "The maximum number of results to return in each response.")
-	translate_listLanguagesCmd.Flags().String("next-token", "", "Include the NextToken value to fetch the next group of supported languages.")
+		translate_listLanguagesCmd.Flags().String("display-language-code", "", "The language code for the language to use to display the language names in the response.")
+		translate_listLanguagesCmd.Flags().String("max-results", "", "The maximum number of results to return in each response.")
+		translate_listLanguagesCmd.Flags().String("next-token", "", "Include the NextToken value to fetch the next group of supported languages.")
+	})
 	translateCmd.AddCommand(translate_listLanguagesCmd)
 }

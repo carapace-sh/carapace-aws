@@ -12,9 +12,11 @@ var medialive_getSignalMapCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_getSignalMapCmd).Standalone()
+	carapace.Gen(medialive_getSignalMapCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_getSignalMapCmd).Standalone()
 
-	medialive_getSignalMapCmd.Flags().String("identifier", "", "A signal map's identifier.")
-	medialive_getSignalMapCmd.MarkFlagRequired("identifier")
+		medialive_getSignalMapCmd.Flags().String("identifier", "", "A signal map's identifier.")
+		medialive_getSignalMapCmd.MarkFlagRequired("identifier")
+	})
 	medialiveCmd.AddCommand(medialive_getSignalMapCmd)
 }

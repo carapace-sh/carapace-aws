@@ -12,11 +12,13 @@ var batch_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(batch_tagResourceCmd).Standalone()
+	carapace.Gen(batch_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(batch_tagResourceCmd).Standalone()
 
-	batch_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that tags are added to.")
-	batch_tagResourceCmd.Flags().String("tags", "", "The tags that you apply to the resource to help you categorize and organize your resources.")
-	batch_tagResourceCmd.MarkFlagRequired("resource-arn")
-	batch_tagResourceCmd.MarkFlagRequired("tags")
+		batch_tagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that tags are added to.")
+		batch_tagResourceCmd.Flags().String("tags", "", "The tags that you apply to the resource to help you categorize and organize your resources.")
+		batch_tagResourceCmd.MarkFlagRequired("resource-arn")
+		batch_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	batchCmd.AddCommand(batch_tagResourceCmd)
 }

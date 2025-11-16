@@ -12,9 +12,11 @@ var es_startElasticsearchServiceSoftwareUpdateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_startElasticsearchServiceSoftwareUpdateCmd).Standalone()
+	carapace.Gen(es_startElasticsearchServiceSoftwareUpdateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_startElasticsearchServiceSoftwareUpdateCmd).Standalone()
 
-	es_startElasticsearchServiceSoftwareUpdateCmd.Flags().String("domain-name", "", "The name of the domain that you want to update to the latest service software.")
-	es_startElasticsearchServiceSoftwareUpdateCmd.MarkFlagRequired("domain-name")
+		es_startElasticsearchServiceSoftwareUpdateCmd.Flags().String("domain-name", "", "The name of the domain that you want to update to the latest service software.")
+		es_startElasticsearchServiceSoftwareUpdateCmd.MarkFlagRequired("domain-name")
+	})
 	esCmd.AddCommand(es_startElasticsearchServiceSoftwareUpdateCmd)
 }

@@ -12,11 +12,13 @@ var iotfleetwise_associateVehicleFleetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotfleetwise_associateVehicleFleetCmd).Standalone()
+	carapace.Gen(iotfleetwise_associateVehicleFleetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotfleetwise_associateVehicleFleetCmd).Standalone()
 
-	iotfleetwise_associateVehicleFleetCmd.Flags().String("fleet-id", "", "The ID of a fleet.")
-	iotfleetwise_associateVehicleFleetCmd.Flags().String("vehicle-name", "", "The unique ID of the vehicle to associate with the fleet.")
-	iotfleetwise_associateVehicleFleetCmd.MarkFlagRequired("fleet-id")
-	iotfleetwise_associateVehicleFleetCmd.MarkFlagRequired("vehicle-name")
+		iotfleetwise_associateVehicleFleetCmd.Flags().String("fleet-id", "", "The ID of a fleet.")
+		iotfleetwise_associateVehicleFleetCmd.Flags().String("vehicle-name", "", "The unique ID of the vehicle to associate with the fleet.")
+		iotfleetwise_associateVehicleFleetCmd.MarkFlagRequired("fleet-id")
+		iotfleetwise_associateVehicleFleetCmd.MarkFlagRequired("vehicle-name")
+	})
 	iotfleetwiseCmd.AddCommand(iotfleetwise_associateVehicleFleetCmd)
 }

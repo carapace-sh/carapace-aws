@@ -12,11 +12,13 @@ var pinpoint_updateVoiceChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_updateVoiceChannelCmd).Standalone()
+	carapace.Gen(pinpoint_updateVoiceChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_updateVoiceChannelCmd).Standalone()
 
-	pinpoint_updateVoiceChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_updateVoiceChannelCmd.Flags().String("voice-channel-request", "", "")
-	pinpoint_updateVoiceChannelCmd.MarkFlagRequired("application-id")
-	pinpoint_updateVoiceChannelCmd.MarkFlagRequired("voice-channel-request")
+		pinpoint_updateVoiceChannelCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_updateVoiceChannelCmd.Flags().String("voice-channel-request", "", "")
+		pinpoint_updateVoiceChannelCmd.MarkFlagRequired("application-id")
+		pinpoint_updateVoiceChannelCmd.MarkFlagRequired("voice-channel-request")
+	})
 	pinpointCmd.AddCommand(pinpoint_updateVoiceChannelCmd)
 }

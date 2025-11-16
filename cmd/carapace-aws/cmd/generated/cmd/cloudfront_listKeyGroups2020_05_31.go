@@ -12,9 +12,11 @@ var cloudfront_listKeyGroups2020_05_31Cmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudfront_listKeyGroups2020_05_31Cmd).Standalone()
+	carapace.Gen(cloudfront_listKeyGroups2020_05_31Cmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudfront_listKeyGroups2020_05_31Cmd).Standalone()
 
-	cloudfront_listKeyGroups2020_05_31Cmd.Flags().String("marker", "", "Use this field when paginating results to indicate where to begin in your list of key groups.")
-	cloudfront_listKeyGroups2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of key groups that you want in the response.")
+		cloudfront_listKeyGroups2020_05_31Cmd.Flags().String("marker", "", "Use this field when paginating results to indicate where to begin in your list of key groups.")
+		cloudfront_listKeyGroups2020_05_31Cmd.Flags().String("max-items", "", "The maximum number of key groups that you want in the response.")
+	})
 	cloudfrontCmd.AddCommand(cloudfront_listKeyGroups2020_05_31Cmd)
 }

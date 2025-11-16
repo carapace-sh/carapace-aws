@@ -12,14 +12,16 @@ var opensearchserverless_updateVpcEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearchserverless_updateVpcEndpointCmd).Standalone()
+	carapace.Gen(opensearchserverless_updateVpcEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearchserverless_updateVpcEndpointCmd).Standalone()
 
-	opensearchserverless_updateVpcEndpointCmd.Flags().String("add-security-group-ids", "", "The unique identifiers of the security groups to add to the endpoint.")
-	opensearchserverless_updateVpcEndpointCmd.Flags().String("add-subnet-ids", "", "The ID of one or more subnets to add to the endpoint.")
-	opensearchserverless_updateVpcEndpointCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
-	opensearchserverless_updateVpcEndpointCmd.Flags().String("id", "", "The unique identifier of the interface endpoint to update.")
-	opensearchserverless_updateVpcEndpointCmd.Flags().String("remove-security-group-ids", "", "The unique identifiers of the security groups to remove from the endpoint.")
-	opensearchserverless_updateVpcEndpointCmd.Flags().String("remove-subnet-ids", "", "The unique identifiers of the subnets to remove from the endpoint.")
-	opensearchserverless_updateVpcEndpointCmd.MarkFlagRequired("id")
+		opensearchserverless_updateVpcEndpointCmd.Flags().String("add-security-group-ids", "", "The unique identifiers of the security groups to add to the endpoint.")
+		opensearchserverless_updateVpcEndpointCmd.Flags().String("add-subnet-ids", "", "The ID of one or more subnets to add to the endpoint.")
+		opensearchserverless_updateVpcEndpointCmd.Flags().String("client-token", "", "Unique, case-sensitive identifier to ensure idempotency of the request.")
+		opensearchserverless_updateVpcEndpointCmd.Flags().String("id", "", "The unique identifier of the interface endpoint to update.")
+		opensearchserverless_updateVpcEndpointCmd.Flags().String("remove-security-group-ids", "", "The unique identifiers of the security groups to remove from the endpoint.")
+		opensearchserverless_updateVpcEndpointCmd.Flags().String("remove-subnet-ids", "", "The unique identifiers of the subnets to remove from the endpoint.")
+		opensearchserverless_updateVpcEndpointCmd.MarkFlagRequired("id")
+	})
 	opensearchserverlessCmd.AddCommand(opensearchserverless_updateVpcEndpointCmd)
 }

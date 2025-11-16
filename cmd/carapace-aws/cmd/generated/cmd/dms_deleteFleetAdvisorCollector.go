@@ -12,9 +12,11 @@ var dms_deleteFleetAdvisorCollectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteFleetAdvisorCollectorCmd).Standalone()
+	carapace.Gen(dms_deleteFleetAdvisorCollectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteFleetAdvisorCollectorCmd).Standalone()
 
-	dms_deleteFleetAdvisorCollectorCmd.Flags().String("collector-referenced-id", "", "The reference ID of the Fleet Advisor collector to delete.")
-	dms_deleteFleetAdvisorCollectorCmd.MarkFlagRequired("collector-referenced-id")
+		dms_deleteFleetAdvisorCollectorCmd.Flags().String("collector-referenced-id", "", "The reference ID of the Fleet Advisor collector to delete.")
+		dms_deleteFleetAdvisorCollectorCmd.MarkFlagRequired("collector-referenced-id")
+	})
 	dmsCmd.AddCommand(dms_deleteFleetAdvisorCollectorCmd)
 }

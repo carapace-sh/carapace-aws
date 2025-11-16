@@ -12,9 +12,11 @@ var managedblockchain_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(managedblockchain_listTagsForResourceCmd).Standalone()
+	carapace.Gen(managedblockchain_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(managedblockchain_listTagsForResourceCmd).Standalone()
 
-	managedblockchain_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	managedblockchain_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		managedblockchain_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		managedblockchain_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	managedblockchainCmd.AddCommand(managedblockchain_listTagsForResourceCmd)
 }

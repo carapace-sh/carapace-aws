@@ -12,9 +12,11 @@ var omics_getAnnotationImportJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_getAnnotationImportJobCmd).Standalone()
+	carapace.Gen(omics_getAnnotationImportJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_getAnnotationImportJobCmd).Standalone()
 
-	omics_getAnnotationImportJobCmd.Flags().String("job-id", "", "The job's ID.")
-	omics_getAnnotationImportJobCmd.MarkFlagRequired("job-id")
+		omics_getAnnotationImportJobCmd.Flags().String("job-id", "", "The job's ID.")
+		omics_getAnnotationImportJobCmd.MarkFlagRequired("job-id")
+	})
 	omicsCmd.AddCommand(omics_getAnnotationImportJobCmd)
 }

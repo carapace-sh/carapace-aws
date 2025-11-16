@@ -12,12 +12,14 @@ var ds_addIpRoutesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_addIpRoutesCmd).Standalone()
+	carapace.Gen(ds_addIpRoutesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_addIpRoutesCmd).Standalone()
 
-	ds_addIpRoutesCmd.Flags().String("directory-id", "", "Identifier (ID) of the directory to which to add the address block.")
-	ds_addIpRoutesCmd.Flags().String("ip-routes", "", "IP address blocks, using CIDR format, of the traffic to route.")
-	ds_addIpRoutesCmd.Flags().String("update-security-group-for-directory-controllers", "", "If set to true, updates the inbound and outbound rules of the security group that has the description: \"Amazon Web Services created security group for *directory ID* directory controllers.\"")
-	ds_addIpRoutesCmd.MarkFlagRequired("directory-id")
-	ds_addIpRoutesCmd.MarkFlagRequired("ip-routes")
+		ds_addIpRoutesCmd.Flags().String("directory-id", "", "Identifier (ID) of the directory to which to add the address block.")
+		ds_addIpRoutesCmd.Flags().String("ip-routes", "", "IP address blocks, using CIDR format, of the traffic to route.")
+		ds_addIpRoutesCmd.Flags().String("update-security-group-for-directory-controllers", "", "If set to true, updates the inbound and outbound rules of the security group that has the description: \"Amazon Web Services created security group for *directory ID* directory controllers.\"")
+		ds_addIpRoutesCmd.MarkFlagRequired("directory-id")
+		ds_addIpRoutesCmd.MarkFlagRequired("ip-routes")
+	})
 	dsCmd.AddCommand(ds_addIpRoutesCmd)
 }

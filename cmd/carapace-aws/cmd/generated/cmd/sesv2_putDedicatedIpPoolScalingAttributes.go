@@ -12,11 +12,13 @@ var sesv2_putDedicatedIpPoolScalingAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putDedicatedIpPoolScalingAttributesCmd).Standalone()
+	carapace.Gen(sesv2_putDedicatedIpPoolScalingAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putDedicatedIpPoolScalingAttributesCmd).Standalone()
 
-	sesv2_putDedicatedIpPoolScalingAttributesCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool.")
-	sesv2_putDedicatedIpPoolScalingAttributesCmd.Flags().String("scaling-mode", "", "The scaling mode to apply to the dedicated IP pool.")
-	sesv2_putDedicatedIpPoolScalingAttributesCmd.MarkFlagRequired("pool-name")
-	sesv2_putDedicatedIpPoolScalingAttributesCmd.MarkFlagRequired("scaling-mode")
+		sesv2_putDedicatedIpPoolScalingAttributesCmd.Flags().String("pool-name", "", "The name of the dedicated IP pool.")
+		sesv2_putDedicatedIpPoolScalingAttributesCmd.Flags().String("scaling-mode", "", "The scaling mode to apply to the dedicated IP pool.")
+		sesv2_putDedicatedIpPoolScalingAttributesCmd.MarkFlagRequired("pool-name")
+		sesv2_putDedicatedIpPoolScalingAttributesCmd.MarkFlagRequired("scaling-mode")
+	})
 	sesv2Cmd.AddCommand(sesv2_putDedicatedIpPoolScalingAttributesCmd)
 }

@@ -12,11 +12,13 @@ var servicecatalogAppregistry_listAttributeGroupsForApplicationCmd = &cobra.Comm
 }
 
 func init() {
-	carapace.Gen(servicecatalogAppregistry_listAttributeGroupsForApplicationCmd).Standalone()
+	carapace.Gen(servicecatalogAppregistry_listAttributeGroupsForApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(servicecatalogAppregistry_listAttributeGroupsForApplicationCmd).Standalone()
 
-	servicecatalogAppregistry_listAttributeGroupsForApplicationCmd.Flags().String("application", "", "The name or ID of the application.")
-	servicecatalogAppregistry_listAttributeGroupsForApplicationCmd.Flags().String("max-results", "", "The upper bound of the number of results to return.")
-	servicecatalogAppregistry_listAttributeGroupsForApplicationCmd.Flags().String("next-token", "", "This token retrieves the next page of results after a previous API call.")
-	servicecatalogAppregistry_listAttributeGroupsForApplicationCmd.MarkFlagRequired("application")
+		servicecatalogAppregistry_listAttributeGroupsForApplicationCmd.Flags().String("application", "", "The name or ID of the application.")
+		servicecatalogAppregistry_listAttributeGroupsForApplicationCmd.Flags().String("max-results", "", "The upper bound of the number of results to return.")
+		servicecatalogAppregistry_listAttributeGroupsForApplicationCmd.Flags().String("next-token", "", "This token retrieves the next page of results after a previous API call.")
+		servicecatalogAppregistry_listAttributeGroupsForApplicationCmd.MarkFlagRequired("application")
+	})
 	servicecatalogAppregistryCmd.AddCommand(servicecatalogAppregistry_listAttributeGroupsForApplicationCmd)
 }

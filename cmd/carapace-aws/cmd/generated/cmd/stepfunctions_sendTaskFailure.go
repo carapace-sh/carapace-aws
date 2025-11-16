@@ -12,11 +12,13 @@ var stepfunctions_sendTaskFailureCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(stepfunctions_sendTaskFailureCmd).Standalone()
+	carapace.Gen(stepfunctions_sendTaskFailureCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(stepfunctions_sendTaskFailureCmd).Standalone()
 
-	stepfunctions_sendTaskFailureCmd.Flags().String("cause", "", "A more detailed explanation of the cause of the failure.")
-	stepfunctions_sendTaskFailureCmd.Flags().String("error", "", "The error code of the failure.")
-	stepfunctions_sendTaskFailureCmd.Flags().String("task-token", "", "The token that represents this task.")
-	stepfunctions_sendTaskFailureCmd.MarkFlagRequired("task-token")
+		stepfunctions_sendTaskFailureCmd.Flags().String("cause", "", "A more detailed explanation of the cause of the failure.")
+		stepfunctions_sendTaskFailureCmd.Flags().String("error", "", "The error code of the failure.")
+		stepfunctions_sendTaskFailureCmd.Flags().String("task-token", "", "The token that represents this task.")
+		stepfunctions_sendTaskFailureCmd.MarkFlagRequired("task-token")
+	})
 	stepfunctionsCmd.AddCommand(stepfunctions_sendTaskFailureCmd)
 }

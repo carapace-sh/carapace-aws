@@ -12,9 +12,11 @@ var mediaconvert_disassociateCertificateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediaconvert_disassociateCertificateCmd).Standalone()
+	carapace.Gen(mediaconvert_disassociateCertificateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediaconvert_disassociateCertificateCmd).Standalone()
 
-	mediaconvert_disassociateCertificateCmd.Flags().String("arn", "", "The ARN of the ACM certificate that you want to disassociate from your MediaConvert resource.")
-	mediaconvert_disassociateCertificateCmd.MarkFlagRequired("arn")
+		mediaconvert_disassociateCertificateCmd.Flags().String("arn", "", "The ARN of the ACM certificate that you want to disassociate from your MediaConvert resource.")
+		mediaconvert_disassociateCertificateCmd.MarkFlagRequired("arn")
+	})
 	mediaconvertCmd.AddCommand(mediaconvert_disassociateCertificateCmd)
 }

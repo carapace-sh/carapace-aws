@@ -12,15 +12,17 @@ var bedrockAgent_updatePromptCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgent_updatePromptCmd).Standalone()
+	carapace.Gen(bedrockAgent_updatePromptCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgent_updatePromptCmd).Standalone()
 
-	bedrockAgent_updatePromptCmd.Flags().String("customer-encryption-key-arn", "", "The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.")
-	bedrockAgent_updatePromptCmd.Flags().String("default-variant", "", "The name of the default variant for the prompt.")
-	bedrockAgent_updatePromptCmd.Flags().String("description", "", "A description for the prompt.")
-	bedrockAgent_updatePromptCmd.Flags().String("name", "", "A name for the prompt.")
-	bedrockAgent_updatePromptCmd.Flags().String("prompt-identifier", "", "The unique identifier of the prompt.")
-	bedrockAgent_updatePromptCmd.Flags().String("variants", "", "A list of objects, each containing details about a variant of the prompt.")
-	bedrockAgent_updatePromptCmd.MarkFlagRequired("name")
-	bedrockAgent_updatePromptCmd.MarkFlagRequired("prompt-identifier")
+		bedrockAgent_updatePromptCmd.Flags().String("customer-encryption-key-arn", "", "The Amazon Resource Name (ARN) of the KMS key to encrypt the prompt.")
+		bedrockAgent_updatePromptCmd.Flags().String("default-variant", "", "The name of the default variant for the prompt.")
+		bedrockAgent_updatePromptCmd.Flags().String("description", "", "A description for the prompt.")
+		bedrockAgent_updatePromptCmd.Flags().String("name", "", "A name for the prompt.")
+		bedrockAgent_updatePromptCmd.Flags().String("prompt-identifier", "", "The unique identifier of the prompt.")
+		bedrockAgent_updatePromptCmd.Flags().String("variants", "", "A list of objects, each containing details about a variant of the prompt.")
+		bedrockAgent_updatePromptCmd.MarkFlagRequired("name")
+		bedrockAgent_updatePromptCmd.MarkFlagRequired("prompt-identifier")
+	})
 	bedrockAgentCmd.AddCommand(bedrockAgent_updatePromptCmd)
 }

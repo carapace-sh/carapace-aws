@@ -12,7 +12,9 @@ var bcmPricingCalculator_getPreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bcmPricingCalculator_getPreferencesCmd).Standalone()
+	carapace.Gen(bcmPricingCalculator_getPreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bcmPricingCalculator_getPreferencesCmd).Standalone()
 
+	})
 	bcmPricingCalculatorCmd.AddCommand(bcmPricingCalculator_getPreferencesCmd)
 }

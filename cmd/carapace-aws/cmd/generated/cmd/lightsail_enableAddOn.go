@@ -12,11 +12,13 @@ var lightsail_enableAddOnCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(lightsail_enableAddOnCmd).Standalone()
+	carapace.Gen(lightsail_enableAddOnCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(lightsail_enableAddOnCmd).Standalone()
 
-	lightsail_enableAddOnCmd.Flags().String("add-on-request", "", "An array of strings representing the add-on to enable or modify.")
-	lightsail_enableAddOnCmd.Flags().String("resource-name", "", "The name of the source resource for which to enable or modify the add-on.")
-	lightsail_enableAddOnCmd.MarkFlagRequired("add-on-request")
-	lightsail_enableAddOnCmd.MarkFlagRequired("resource-name")
+		lightsail_enableAddOnCmd.Flags().String("add-on-request", "", "An array of strings representing the add-on to enable or modify.")
+		lightsail_enableAddOnCmd.Flags().String("resource-name", "", "The name of the source resource for which to enable or modify the add-on.")
+		lightsail_enableAddOnCmd.MarkFlagRequired("add-on-request")
+		lightsail_enableAddOnCmd.MarkFlagRequired("resource-name")
+	})
 	lightsailCmd.AddCommand(lightsail_enableAddOnCmd)
 }

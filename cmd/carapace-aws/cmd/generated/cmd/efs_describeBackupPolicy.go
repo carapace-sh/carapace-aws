@@ -12,9 +12,11 @@ var efs_describeBackupPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(efs_describeBackupPolicyCmd).Standalone()
+	carapace.Gen(efs_describeBackupPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(efs_describeBackupPolicyCmd).Standalone()
 
-	efs_describeBackupPolicyCmd.Flags().String("file-system-id", "", "Specifies which EFS file system for which to retrieve the `BackupPolicy`.")
-	efs_describeBackupPolicyCmd.MarkFlagRequired("file-system-id")
+		efs_describeBackupPolicyCmd.Flags().String("file-system-id", "", "Specifies which EFS file system for which to retrieve the `BackupPolicy`.")
+		efs_describeBackupPolicyCmd.MarkFlagRequired("file-system-id")
+	})
 	efsCmd.AddCommand(efs_describeBackupPolicyCmd)
 }

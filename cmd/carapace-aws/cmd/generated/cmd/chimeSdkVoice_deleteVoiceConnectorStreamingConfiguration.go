@@ -12,9 +12,11 @@ var chimeSdkVoice_deleteVoiceConnectorStreamingConfigurationCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorStreamingConfigurationCmd).Standalone()
+	carapace.Gen(chimeSdkVoice_deleteVoiceConnectorStreamingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(chimeSdkVoice_deleteVoiceConnectorStreamingConfigurationCmd).Standalone()
 
-	chimeSdkVoice_deleteVoiceConnectorStreamingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
-	chimeSdkVoice_deleteVoiceConnectorStreamingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+		chimeSdkVoice_deleteVoiceConnectorStreamingConfigurationCmd.Flags().String("voice-connector-id", "", "The Voice Connector ID.")
+		chimeSdkVoice_deleteVoiceConnectorStreamingConfigurationCmd.MarkFlagRequired("voice-connector-id")
+	})
 	chimeSdkVoiceCmd.AddCommand(chimeSdkVoice_deleteVoiceConnectorStreamingConfigurationCmd)
 }

@@ -12,11 +12,13 @@ var evidently_getLaunchCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(evidently_getLaunchCmd).Standalone()
+	carapace.Gen(evidently_getLaunchCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(evidently_getLaunchCmd).Standalone()
 
-	evidently_getLaunchCmd.Flags().String("launch", "", "The name of the launch that you want to see the details of.")
-	evidently_getLaunchCmd.Flags().String("project", "", "The name or ARN of the project that contains the launch.")
-	evidently_getLaunchCmd.MarkFlagRequired("launch")
-	evidently_getLaunchCmd.MarkFlagRequired("project")
+		evidently_getLaunchCmd.Flags().String("launch", "", "The name of the launch that you want to see the details of.")
+		evidently_getLaunchCmd.Flags().String("project", "", "The name or ARN of the project that contains the launch.")
+		evidently_getLaunchCmd.MarkFlagRequired("launch")
+		evidently_getLaunchCmd.MarkFlagRequired("project")
+	})
 	evidentlyCmd.AddCommand(evidently_getLaunchCmd)
 }

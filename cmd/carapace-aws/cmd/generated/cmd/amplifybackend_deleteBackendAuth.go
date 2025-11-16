@@ -12,13 +12,15 @@ var amplifybackend_deleteBackendAuthCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amplifybackend_deleteBackendAuthCmd).Standalone()
+	carapace.Gen(amplifybackend_deleteBackendAuthCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amplifybackend_deleteBackendAuthCmd).Standalone()
 
-	amplifybackend_deleteBackendAuthCmd.Flags().String("app-id", "", "The app ID.")
-	amplifybackend_deleteBackendAuthCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
-	amplifybackend_deleteBackendAuthCmd.Flags().String("resource-name", "", "The name of this resource.")
-	amplifybackend_deleteBackendAuthCmd.MarkFlagRequired("app-id")
-	amplifybackend_deleteBackendAuthCmd.MarkFlagRequired("backend-environment-name")
-	amplifybackend_deleteBackendAuthCmd.MarkFlagRequired("resource-name")
+		amplifybackend_deleteBackendAuthCmd.Flags().String("app-id", "", "The app ID.")
+		amplifybackend_deleteBackendAuthCmd.Flags().String("backend-environment-name", "", "The name of the backend environment.")
+		amplifybackend_deleteBackendAuthCmd.Flags().String("resource-name", "", "The name of this resource.")
+		amplifybackend_deleteBackendAuthCmd.MarkFlagRequired("app-id")
+		amplifybackend_deleteBackendAuthCmd.MarkFlagRequired("backend-environment-name")
+		amplifybackend_deleteBackendAuthCmd.MarkFlagRequired("resource-name")
+	})
 	amplifybackendCmd.AddCommand(amplifybackend_deleteBackendAuthCmd)
 }

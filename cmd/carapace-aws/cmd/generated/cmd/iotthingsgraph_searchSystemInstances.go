@@ -12,10 +12,12 @@ var iotthingsgraph_searchSystemInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotthingsgraph_searchSystemInstancesCmd).Standalone()
+	carapace.Gen(iotthingsgraph_searchSystemInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotthingsgraph_searchSystemInstancesCmd).Standalone()
 
-	iotthingsgraph_searchSystemInstancesCmd.Flags().String("filters", "", "Optional filter to apply to the search.")
-	iotthingsgraph_searchSystemInstancesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
-	iotthingsgraph_searchSystemInstancesCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
+		iotthingsgraph_searchSystemInstancesCmd.Flags().String("filters", "", "Optional filter to apply to the search.")
+		iotthingsgraph_searchSystemInstancesCmd.Flags().String("max-results", "", "The maximum number of results to return in the response.")
+		iotthingsgraph_searchSystemInstancesCmd.Flags().String("next-token", "", "The string that specifies the next page of results.")
+	})
 	iotthingsgraphCmd.AddCommand(iotthingsgraph_searchSystemInstancesCmd)
 }

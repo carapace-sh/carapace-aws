@@ -12,18 +12,20 @@ var directconnect_allocateHostedConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(directconnect_allocateHostedConnectionCmd).Standalone()
+	carapace.Gen(directconnect_allocateHostedConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(directconnect_allocateHostedConnectionCmd).Standalone()
 
-	directconnect_allocateHostedConnectionCmd.Flags().String("bandwidth", "", "The bandwidth of the connection.")
-	directconnect_allocateHostedConnectionCmd.Flags().String("connection-id", "", "The ID of the interconnect or LAG.")
-	directconnect_allocateHostedConnectionCmd.Flags().String("connection-name", "", "The name of the hosted connection.")
-	directconnect_allocateHostedConnectionCmd.Flags().String("owner-account", "", "The ID of the Amazon Web Services account ID of the customer for the connection.")
-	directconnect_allocateHostedConnectionCmd.Flags().String("tags", "", "The tags associated with the connection.")
-	directconnect_allocateHostedConnectionCmd.Flags().String("vlan", "", "The dedicated VLAN provisioned to the hosted connection.")
-	directconnect_allocateHostedConnectionCmd.MarkFlagRequired("bandwidth")
-	directconnect_allocateHostedConnectionCmd.MarkFlagRequired("connection-id")
-	directconnect_allocateHostedConnectionCmd.MarkFlagRequired("connection-name")
-	directconnect_allocateHostedConnectionCmd.MarkFlagRequired("owner-account")
-	directconnect_allocateHostedConnectionCmd.MarkFlagRequired("vlan")
+		directconnect_allocateHostedConnectionCmd.Flags().String("bandwidth", "", "The bandwidth of the connection.")
+		directconnect_allocateHostedConnectionCmd.Flags().String("connection-id", "", "The ID of the interconnect or LAG.")
+		directconnect_allocateHostedConnectionCmd.Flags().String("connection-name", "", "The name of the hosted connection.")
+		directconnect_allocateHostedConnectionCmd.Flags().String("owner-account", "", "The ID of the Amazon Web Services account ID of the customer for the connection.")
+		directconnect_allocateHostedConnectionCmd.Flags().String("tags", "", "The tags associated with the connection.")
+		directconnect_allocateHostedConnectionCmd.Flags().String("vlan", "", "The dedicated VLAN provisioned to the hosted connection.")
+		directconnect_allocateHostedConnectionCmd.MarkFlagRequired("bandwidth")
+		directconnect_allocateHostedConnectionCmd.MarkFlagRequired("connection-id")
+		directconnect_allocateHostedConnectionCmd.MarkFlagRequired("connection-name")
+		directconnect_allocateHostedConnectionCmd.MarkFlagRequired("owner-account")
+		directconnect_allocateHostedConnectionCmd.MarkFlagRequired("vlan")
+	})
 	directconnectCmd.AddCommand(directconnect_allocateHostedConnectionCmd)
 }

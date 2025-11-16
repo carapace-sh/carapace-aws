@@ -12,9 +12,11 @@ var resourceExplorer2_deleteIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceExplorer2_deleteIndexCmd).Standalone()
+	carapace.Gen(resourceExplorer2_deleteIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceExplorer2_deleteIndexCmd).Standalone()
 
-	resourceExplorer2_deleteIndexCmd.Flags().String("arn", "", "The [Amazon resource name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the index that you want to delete.")
-	resourceExplorer2_deleteIndexCmd.MarkFlagRequired("arn")
+		resourceExplorer2_deleteIndexCmd.Flags().String("arn", "", "The [Amazon resource name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the index that you want to delete.")
+		resourceExplorer2_deleteIndexCmd.MarkFlagRequired("arn")
+	})
 	resourceExplorer2Cmd.AddCommand(resourceExplorer2_deleteIndexCmd)
 }

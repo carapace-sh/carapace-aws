@@ -12,7 +12,9 @@ var shieldCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(shieldCmd).Standalone()
+	carapace.Gen(shieldCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(shieldCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(shieldCmd)
 }

@@ -12,11 +12,13 @@ var dataexchange_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dataexchange_untagResourceCmd).Standalone()
+	carapace.Gen(dataexchange_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dataexchange_untagResourceCmd).Standalone()
 
-	dataexchange_untagResourceCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.")
-	dataexchange_untagResourceCmd.Flags().String("tag-keys", "", "The key tags.")
-	dataexchange_untagResourceCmd.MarkFlagRequired("resource-arn")
-	dataexchange_untagResourceCmd.MarkFlagRequired("tag-keys")
+		dataexchange_untagResourceCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.")
+		dataexchange_untagResourceCmd.Flags().String("tag-keys", "", "The key tags.")
+		dataexchange_untagResourceCmd.MarkFlagRequired("resource-arn")
+		dataexchange_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	dataexchangeCmd.AddCommand(dataexchange_untagResourceCmd)
 }

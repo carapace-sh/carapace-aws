@@ -12,13 +12,15 @@ var connect_tagContactCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connect_tagContactCmd).Standalone()
+	carapace.Gen(connect_tagContactCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connect_tagContactCmd).Standalone()
 
-	connect_tagContactCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
-	connect_tagContactCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
-	connect_tagContactCmd.Flags().String("tags", "", "The tags to be assigned to the contact resource.")
-	connect_tagContactCmd.MarkFlagRequired("contact-id")
-	connect_tagContactCmd.MarkFlagRequired("instance-id")
-	connect_tagContactCmd.MarkFlagRequired("tags")
+		connect_tagContactCmd.Flags().String("contact-id", "", "The identifier of the contact in this instance of Amazon Connect.")
+		connect_tagContactCmd.Flags().String("instance-id", "", "The identifier of the Amazon Connect instance.")
+		connect_tagContactCmd.Flags().String("tags", "", "The tags to be assigned to the contact resource.")
+		connect_tagContactCmd.MarkFlagRequired("contact-id")
+		connect_tagContactCmd.MarkFlagRequired("instance-id")
+		connect_tagContactCmd.MarkFlagRequired("tags")
+	})
 	connectCmd.AddCommand(connect_tagContactCmd)
 }

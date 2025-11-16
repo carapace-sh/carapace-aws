@@ -12,10 +12,12 @@ var greengrass_updateConnectivityInfoCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_updateConnectivityInfoCmd).Standalone()
+	carapace.Gen(greengrass_updateConnectivityInfoCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_updateConnectivityInfoCmd).Standalone()
 
-	greengrass_updateConnectivityInfoCmd.Flags().String("connectivity-info", "", "A list of connectivity info.")
-	greengrass_updateConnectivityInfoCmd.Flags().String("thing-name", "", "The thing name.")
-	greengrass_updateConnectivityInfoCmd.MarkFlagRequired("thing-name")
+		greengrass_updateConnectivityInfoCmd.Flags().String("connectivity-info", "", "A list of connectivity info.")
+		greengrass_updateConnectivityInfoCmd.Flags().String("thing-name", "", "The thing name.")
+		greengrass_updateConnectivityInfoCmd.MarkFlagRequired("thing-name")
+	})
 	greengrassCmd.AddCommand(greengrass_updateConnectivityInfoCmd)
 }

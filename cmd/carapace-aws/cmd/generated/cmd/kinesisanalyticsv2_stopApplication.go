@@ -12,10 +12,12 @@ var kinesisanalyticsv2_stopApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kinesisanalyticsv2_stopApplicationCmd).Standalone()
+	carapace.Gen(kinesisanalyticsv2_stopApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kinesisanalyticsv2_stopApplicationCmd).Standalone()
 
-	kinesisanalyticsv2_stopApplicationCmd.Flags().String("application-name", "", "The name of the running application to stop.")
-	kinesisanalyticsv2_stopApplicationCmd.Flags().String("force", "", "Set to `true` to force the application to stop.")
-	kinesisanalyticsv2_stopApplicationCmd.MarkFlagRequired("application-name")
+		kinesisanalyticsv2_stopApplicationCmd.Flags().String("application-name", "", "The name of the running application to stop.")
+		kinesisanalyticsv2_stopApplicationCmd.Flags().String("force", "", "Set to `true` to force the application to stop.")
+		kinesisanalyticsv2_stopApplicationCmd.MarkFlagRequired("application-name")
+	})
 	kinesisanalyticsv2Cmd.AddCommand(kinesisanalyticsv2_stopApplicationCmd)
 }

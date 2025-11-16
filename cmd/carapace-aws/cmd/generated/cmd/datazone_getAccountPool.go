@@ -12,11 +12,13 @@ var datazone_getAccountPoolCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(datazone_getAccountPoolCmd).Standalone()
+	carapace.Gen(datazone_getAccountPoolCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(datazone_getAccountPoolCmd).Standalone()
 
-	datazone_getAccountPoolCmd.Flags().String("domain-identifier", "", "The ID of the domain in which the account pool lives whose details are to be displayed.")
-	datazone_getAccountPoolCmd.Flags().String("identifier", "", "The ID of the account pool whose details are to be displayed.")
-	datazone_getAccountPoolCmd.MarkFlagRequired("domain-identifier")
-	datazone_getAccountPoolCmd.MarkFlagRequired("identifier")
+		datazone_getAccountPoolCmd.Flags().String("domain-identifier", "", "The ID of the domain in which the account pool lives whose details are to be displayed.")
+		datazone_getAccountPoolCmd.Flags().String("identifier", "", "The ID of the account pool whose details are to be displayed.")
+		datazone_getAccountPoolCmd.MarkFlagRequired("domain-identifier")
+		datazone_getAccountPoolCmd.MarkFlagRequired("identifier")
+	})
 	datazoneCmd.AddCommand(datazone_getAccountPoolCmd)
 }

@@ -12,9 +12,11 @@ var cloudformation_startResourceScanCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudformation_startResourceScanCmd).Standalone()
+	carapace.Gen(cloudformation_startResourceScanCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudformation_startResourceScanCmd).Standalone()
 
-	cloudformation_startResourceScanCmd.Flags().String("client-request-token", "", "A unique identifier for this `StartResourceScan` request.")
-	cloudformation_startResourceScanCmd.Flags().String("scan-filters", "", "The scan filters to use.")
+		cloudformation_startResourceScanCmd.Flags().String("client-request-token", "", "A unique identifier for this `StartResourceScan` request.")
+		cloudformation_startResourceScanCmd.Flags().String("scan-filters", "", "The scan filters to use.")
+	})
 	cloudformationCmd.AddCommand(cloudformation_startResourceScanCmd)
 }

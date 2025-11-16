@@ -12,9 +12,11 @@ var emr_getManagedScalingPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_getManagedScalingPolicyCmd).Standalone()
+	carapace.Gen(emr_getManagedScalingPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_getManagedScalingPolicyCmd).Standalone()
 
-	emr_getManagedScalingPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of the cluster for which the managed scaling policy will be fetched.")
-	emr_getManagedScalingPolicyCmd.MarkFlagRequired("cluster-id")
+		emr_getManagedScalingPolicyCmd.Flags().String("cluster-id", "", "Specifies the ID of the cluster for which the managed scaling policy will be fetched.")
+		emr_getManagedScalingPolicyCmd.MarkFlagRequired("cluster-id")
+	})
 	emrCmd.AddCommand(emr_getManagedScalingPolicyCmd)
 }

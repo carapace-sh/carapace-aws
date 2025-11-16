@@ -12,11 +12,13 @@ var resiliencehub_describeAppVersionTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resiliencehub_describeAppVersionTemplateCmd).Standalone()
+	carapace.Gen(resiliencehub_describeAppVersionTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resiliencehub_describeAppVersionTemplateCmd).Standalone()
 
-	resiliencehub_describeAppVersionTemplateCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
-	resiliencehub_describeAppVersionTemplateCmd.Flags().String("app-version", "", "The version of the application.")
-	resiliencehub_describeAppVersionTemplateCmd.MarkFlagRequired("app-arn")
-	resiliencehub_describeAppVersionTemplateCmd.MarkFlagRequired("app-version")
+		resiliencehub_describeAppVersionTemplateCmd.Flags().String("app-arn", "", "Amazon Resource Name (ARN) of the Resilience Hub application.")
+		resiliencehub_describeAppVersionTemplateCmd.Flags().String("app-version", "", "The version of the application.")
+		resiliencehub_describeAppVersionTemplateCmd.MarkFlagRequired("app-arn")
+		resiliencehub_describeAppVersionTemplateCmd.MarkFlagRequired("app-version")
+	})
 	resiliencehubCmd.AddCommand(resiliencehub_describeAppVersionTemplateCmd)
 }

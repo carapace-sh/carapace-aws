@@ -12,9 +12,11 @@ var glue_listWorkflowsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_listWorkflowsCmd).Standalone()
+	carapace.Gen(glue_listWorkflowsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_listWorkflowsCmd).Standalone()
 
-	glue_listWorkflowsCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
-	glue_listWorkflowsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+		glue_listWorkflowsCmd.Flags().String("max-results", "", "The maximum size of a list to return.")
+		glue_listWorkflowsCmd.Flags().String("next-token", "", "A continuation token, if this is a continuation request.")
+	})
 	glueCmd.AddCommand(glue_listWorkflowsCmd)
 }

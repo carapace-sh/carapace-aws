@@ -12,10 +12,12 @@ var mediapackageVod_listPackagingConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mediapackageVod_listPackagingConfigurationsCmd).Standalone()
+	carapace.Gen(mediapackageVod_listPackagingConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mediapackageVod_listPackagingConfigurationsCmd).Standalone()
 
-	mediapackageVod_listPackagingConfigurationsCmd.Flags().String("max-results", "", "Upper bound on number of records to return.")
-	mediapackageVod_listPackagingConfigurationsCmd.Flags().String("next-token", "", "A token used to resume pagination from the end of a previous request.")
-	mediapackageVod_listPackagingConfigurationsCmd.Flags().String("packaging-group-id", "", "Returns MediaPackage VOD PackagingConfigurations associated with the specified PackagingGroup.")
+		mediapackageVod_listPackagingConfigurationsCmd.Flags().String("max-results", "", "Upper bound on number of records to return.")
+		mediapackageVod_listPackagingConfigurationsCmd.Flags().String("next-token", "", "A token used to resume pagination from the end of a previous request.")
+		mediapackageVod_listPackagingConfigurationsCmd.Flags().String("packaging-group-id", "", "Returns MediaPackage VOD PackagingConfigurations associated with the specified PackagingGroup.")
+	})
 	mediapackageVodCmd.AddCommand(mediapackageVod_listPackagingConfigurationsCmd)
 }

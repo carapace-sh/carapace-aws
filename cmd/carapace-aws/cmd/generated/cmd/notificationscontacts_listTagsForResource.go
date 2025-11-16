@@ -12,9 +12,11 @@ var notificationscontacts_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notificationscontacts_listTagsForResourceCmd).Standalone()
+	carapace.Gen(notificationscontacts_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notificationscontacts_listTagsForResourceCmd).Standalone()
 
-	notificationscontacts_listTagsForResourceCmd.Flags().String("arn", "", "The ARN you specified to list the tags of.")
-	notificationscontacts_listTagsForResourceCmd.MarkFlagRequired("arn")
+		notificationscontacts_listTagsForResourceCmd.Flags().String("arn", "", "The ARN you specified to list the tags of.")
+		notificationscontacts_listTagsForResourceCmd.MarkFlagRequired("arn")
+	})
 	notificationscontactsCmd.AddCommand(notificationscontacts_listTagsForResourceCmd)
 }

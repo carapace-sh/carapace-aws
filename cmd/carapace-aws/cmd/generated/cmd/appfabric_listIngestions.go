@@ -12,11 +12,13 @@ var appfabric_listIngestionsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appfabric_listIngestionsCmd).Standalone()
+	carapace.Gen(appfabric_listIngestionsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appfabric_listIngestionsCmd).Standalone()
 
-	appfabric_listIngestionsCmd.Flags().String("app-bundle-identifier", "", "The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.")
-	appfabric_listIngestionsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
-	appfabric_listIngestionsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
-	appfabric_listIngestionsCmd.MarkFlagRequired("app-bundle-identifier")
+		appfabric_listIngestionsCmd.Flags().String("app-bundle-identifier", "", "The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.")
+		appfabric_listIngestionsCmd.Flags().String("max-results", "", "The maximum number of results that are returned per call.")
+		appfabric_listIngestionsCmd.Flags().String("next-token", "", "If `nextToken` is returned, there are more results available.")
+		appfabric_listIngestionsCmd.MarkFlagRequired("app-bundle-identifier")
+	})
 	appfabricCmd.AddCommand(appfabric_listIngestionsCmd)
 }

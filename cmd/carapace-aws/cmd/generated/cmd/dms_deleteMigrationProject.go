@@ -12,9 +12,11 @@ var dms_deleteMigrationProjectCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dms_deleteMigrationProjectCmd).Standalone()
+	carapace.Gen(dms_deleteMigrationProjectCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dms_deleteMigrationProjectCmd).Standalone()
 
-	dms_deleteMigrationProjectCmd.Flags().String("migration-project-identifier", "", "The name or Amazon Resource Name (ARN) of the migration project to delete.")
-	dms_deleteMigrationProjectCmd.MarkFlagRequired("migration-project-identifier")
+		dms_deleteMigrationProjectCmd.Flags().String("migration-project-identifier", "", "The name or Amazon Resource Name (ARN) of the migration project to delete.")
+		dms_deleteMigrationProjectCmd.MarkFlagRequired("migration-project-identifier")
+	})
 	dmsCmd.AddCommand(dms_deleteMigrationProjectCmd)
 }

@@ -12,9 +12,11 @@ var glue_getRegistryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getRegistryCmd).Standalone()
+	carapace.Gen(glue_getRegistryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getRegistryCmd).Standalone()
 
-	glue_getRegistryCmd.Flags().String("registry-id", "", "This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).")
-	glue_getRegistryCmd.MarkFlagRequired("registry-id")
+		glue_getRegistryCmd.Flags().String("registry-id", "", "This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).")
+		glue_getRegistryCmd.MarkFlagRequired("registry-id")
+	})
 	glueCmd.AddCommand(glue_getRegistryCmd)
 }

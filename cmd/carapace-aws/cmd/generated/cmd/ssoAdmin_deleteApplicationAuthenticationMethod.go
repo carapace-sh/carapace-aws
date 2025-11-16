@@ -12,11 +12,13 @@ var ssoAdmin_deleteApplicationAuthenticationMethodCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssoAdmin_deleteApplicationAuthenticationMethodCmd).Standalone()
+	carapace.Gen(ssoAdmin_deleteApplicationAuthenticationMethodCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssoAdmin_deleteApplicationAuthenticationMethodCmd).Standalone()
 
-	ssoAdmin_deleteApplicationAuthenticationMethodCmd.Flags().String("application-arn", "", "Specifies the ARN of the application with the authentication method to delete.")
-	ssoAdmin_deleteApplicationAuthenticationMethodCmd.Flags().String("authentication-method-type", "", "Specifies the authentication method type to delete from the application.")
-	ssoAdmin_deleteApplicationAuthenticationMethodCmd.MarkFlagRequired("application-arn")
-	ssoAdmin_deleteApplicationAuthenticationMethodCmd.MarkFlagRequired("authentication-method-type")
+		ssoAdmin_deleteApplicationAuthenticationMethodCmd.Flags().String("application-arn", "", "Specifies the ARN of the application with the authentication method to delete.")
+		ssoAdmin_deleteApplicationAuthenticationMethodCmd.Flags().String("authentication-method-type", "", "Specifies the authentication method type to delete from the application.")
+		ssoAdmin_deleteApplicationAuthenticationMethodCmd.MarkFlagRequired("application-arn")
+		ssoAdmin_deleteApplicationAuthenticationMethodCmd.MarkFlagRequired("authentication-method-type")
+	})
 	ssoAdminCmd.AddCommand(ssoAdmin_deleteApplicationAuthenticationMethodCmd)
 }

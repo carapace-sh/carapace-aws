@@ -12,11 +12,13 @@ var appsync_deleteFunctionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_deleteFunctionCmd).Standalone()
+	carapace.Gen(appsync_deleteFunctionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_deleteFunctionCmd).Standalone()
 
-	appsync_deleteFunctionCmd.Flags().String("api-id", "", "The GraphQL API ID.")
-	appsync_deleteFunctionCmd.Flags().String("function-id", "", "The `Function` ID.")
-	appsync_deleteFunctionCmd.MarkFlagRequired("api-id")
-	appsync_deleteFunctionCmd.MarkFlagRequired("function-id")
+		appsync_deleteFunctionCmd.Flags().String("api-id", "", "The GraphQL API ID.")
+		appsync_deleteFunctionCmd.Flags().String("function-id", "", "The `Function` ID.")
+		appsync_deleteFunctionCmd.MarkFlagRequired("api-id")
+		appsync_deleteFunctionCmd.MarkFlagRequired("function-id")
+	})
 	appsyncCmd.AddCommand(appsync_deleteFunctionCmd)
 }

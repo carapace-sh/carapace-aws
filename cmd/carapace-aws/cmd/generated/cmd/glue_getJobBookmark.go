@@ -12,10 +12,12 @@ var glue_getJobBookmarkCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(glue_getJobBookmarkCmd).Standalone()
+	carapace.Gen(glue_getJobBookmarkCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(glue_getJobBookmarkCmd).Standalone()
 
-	glue_getJobBookmarkCmd.Flags().String("job-name", "", "The name of the job in question.")
-	glue_getJobBookmarkCmd.Flags().String("run-id", "", "The unique run identifier associated with this job run.")
-	glue_getJobBookmarkCmd.MarkFlagRequired("job-name")
+		glue_getJobBookmarkCmd.Flags().String("job-name", "", "The name of the job in question.")
+		glue_getJobBookmarkCmd.Flags().String("run-id", "", "The unique run identifier associated with this job run.")
+		glue_getJobBookmarkCmd.MarkFlagRequired("job-name")
+	})
 	glueCmd.AddCommand(glue_getJobBookmarkCmd)
 }

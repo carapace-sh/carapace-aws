@@ -12,11 +12,13 @@ var cloudtrail_putEventSelectorsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudtrail_putEventSelectorsCmd).Standalone()
+	carapace.Gen(cloudtrail_putEventSelectorsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudtrail_putEventSelectorsCmd).Standalone()
 
-	cloudtrail_putEventSelectorsCmd.Flags().String("advanced-event-selectors", "", "Specifies the settings for advanced event selectors.")
-	cloudtrail_putEventSelectorsCmd.Flags().String("event-selectors", "", "Specifies the settings for your event selectors.")
-	cloudtrail_putEventSelectorsCmd.Flags().String("trail-name", "", "Specifies the name of the trail or trail ARN.")
-	cloudtrail_putEventSelectorsCmd.MarkFlagRequired("trail-name")
+		cloudtrail_putEventSelectorsCmd.Flags().String("advanced-event-selectors", "", "Specifies the settings for advanced event selectors.")
+		cloudtrail_putEventSelectorsCmd.Flags().String("event-selectors", "", "Specifies the settings for your event selectors.")
+		cloudtrail_putEventSelectorsCmd.Flags().String("trail-name", "", "Specifies the name of the trail or trail ARN.")
+		cloudtrail_putEventSelectorsCmd.MarkFlagRequired("trail-name")
+	})
 	cloudtrailCmd.AddCommand(cloudtrail_putEventSelectorsCmd)
 }

@@ -12,13 +12,15 @@ var iotevents_createInputCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotevents_createInputCmd).Standalone()
+	carapace.Gen(iotevents_createInputCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotevents_createInputCmd).Standalone()
 
-	iotevents_createInputCmd.Flags().String("input-definition", "", "The definition of the input.")
-	iotevents_createInputCmd.Flags().String("input-description", "", "A brief description of the input.")
-	iotevents_createInputCmd.Flags().String("input-name", "", "The name you want to give to the input.")
-	iotevents_createInputCmd.Flags().String("tags", "", "Metadata that can be used to manage the input.")
-	iotevents_createInputCmd.MarkFlagRequired("input-definition")
-	iotevents_createInputCmd.MarkFlagRequired("input-name")
+		iotevents_createInputCmd.Flags().String("input-definition", "", "The definition of the input.")
+		iotevents_createInputCmd.Flags().String("input-description", "", "A brief description of the input.")
+		iotevents_createInputCmd.Flags().String("input-name", "", "The name you want to give to the input.")
+		iotevents_createInputCmd.Flags().String("tags", "", "Metadata that can be used to manage the input.")
+		iotevents_createInputCmd.MarkFlagRequired("input-definition")
+		iotevents_createInputCmd.MarkFlagRequired("input-name")
+	})
 	ioteventsCmd.AddCommand(iotevents_createInputCmd)
 }

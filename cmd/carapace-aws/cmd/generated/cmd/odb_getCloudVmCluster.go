@@ -12,9 +12,11 @@ var odb_getCloudVmClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(odb_getCloudVmClusterCmd).Standalone()
+	carapace.Gen(odb_getCloudVmClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(odb_getCloudVmClusterCmd).Standalone()
 
-	odb_getCloudVmClusterCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster.")
-	odb_getCloudVmClusterCmd.MarkFlagRequired("cloud-vm-cluster-id")
+		odb_getCloudVmClusterCmd.Flags().String("cloud-vm-cluster-id", "", "The unique identifier of the VM cluster.")
+		odb_getCloudVmClusterCmd.MarkFlagRequired("cloud-vm-cluster-id")
+	})
 	odbCmd.AddCommand(odb_getCloudVmClusterCmd)
 }

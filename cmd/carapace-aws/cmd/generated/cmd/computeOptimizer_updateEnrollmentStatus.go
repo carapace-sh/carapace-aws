@@ -12,10 +12,12 @@ var computeOptimizer_updateEnrollmentStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(computeOptimizer_updateEnrollmentStatusCmd).Standalone()
+	carapace.Gen(computeOptimizer_updateEnrollmentStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(computeOptimizer_updateEnrollmentStatusCmd).Standalone()
 
-	computeOptimizer_updateEnrollmentStatusCmd.Flags().String("include-member-accounts", "", "Indicates whether to enroll member accounts of the organization if the account is the management account of an organization.")
-	computeOptimizer_updateEnrollmentStatusCmd.Flags().String("status", "", "The new enrollment status of the account.")
-	computeOptimizer_updateEnrollmentStatusCmd.MarkFlagRequired("status")
+		computeOptimizer_updateEnrollmentStatusCmd.Flags().String("include-member-accounts", "", "Indicates whether to enroll member accounts of the organization if the account is the management account of an organization.")
+		computeOptimizer_updateEnrollmentStatusCmd.Flags().String("status", "", "The new enrollment status of the account.")
+		computeOptimizer_updateEnrollmentStatusCmd.MarkFlagRequired("status")
+	})
 	computeOptimizerCmd.AddCommand(computeOptimizer_updateEnrollmentStatusCmd)
 }

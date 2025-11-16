@@ -12,13 +12,15 @@ var elb_setLoadBalancerPoliciesOfListenerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_setLoadBalancerPoliciesOfListenerCmd).Standalone()
+	carapace.Gen(elb_setLoadBalancerPoliciesOfListenerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_setLoadBalancerPoliciesOfListenerCmd).Standalone()
 
-	elb_setLoadBalancerPoliciesOfListenerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_setLoadBalancerPoliciesOfListenerCmd.Flags().String("load-balancer-port", "", "The external port of the load balancer.")
-	elb_setLoadBalancerPoliciesOfListenerCmd.Flags().String("policy-names", "", "The names of the policies.")
-	elb_setLoadBalancerPoliciesOfListenerCmd.MarkFlagRequired("load-balancer-name")
-	elb_setLoadBalancerPoliciesOfListenerCmd.MarkFlagRequired("load-balancer-port")
-	elb_setLoadBalancerPoliciesOfListenerCmd.MarkFlagRequired("policy-names")
+		elb_setLoadBalancerPoliciesOfListenerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_setLoadBalancerPoliciesOfListenerCmd.Flags().String("load-balancer-port", "", "The external port of the load balancer.")
+		elb_setLoadBalancerPoliciesOfListenerCmd.Flags().String("policy-names", "", "The names of the policies.")
+		elb_setLoadBalancerPoliciesOfListenerCmd.MarkFlagRequired("load-balancer-name")
+		elb_setLoadBalancerPoliciesOfListenerCmd.MarkFlagRequired("load-balancer-port")
+		elb_setLoadBalancerPoliciesOfListenerCmd.MarkFlagRequired("policy-names")
+	})
 	elbCmd.AddCommand(elb_setLoadBalancerPoliciesOfListenerCmd)
 }

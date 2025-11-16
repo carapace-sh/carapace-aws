@@ -12,7 +12,9 @@ var supportApp_deleteAccountAliasCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supportApp_deleteAccountAliasCmd).Standalone()
+	carapace.Gen(supportApp_deleteAccountAliasCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supportApp_deleteAccountAliasCmd).Standalone()
 
+	})
 	supportAppCmd.AddCommand(supportApp_deleteAccountAliasCmd)
 }

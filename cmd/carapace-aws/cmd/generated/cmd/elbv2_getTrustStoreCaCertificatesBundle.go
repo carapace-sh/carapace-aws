@@ -12,9 +12,11 @@ var elbv2_getTrustStoreCaCertificatesBundleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elbv2_getTrustStoreCaCertificatesBundleCmd).Standalone()
+	carapace.Gen(elbv2_getTrustStoreCaCertificatesBundleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elbv2_getTrustStoreCaCertificatesBundleCmd).Standalone()
 
-	elbv2_getTrustStoreCaCertificatesBundleCmd.Flags().String("trust-store-arn", "", "The Amazon Resource Name (ARN) of the trust store.")
-	elbv2_getTrustStoreCaCertificatesBundleCmd.MarkFlagRequired("trust-store-arn")
+		elbv2_getTrustStoreCaCertificatesBundleCmd.Flags().String("trust-store-arn", "", "The Amazon Resource Name (ARN) of the trust store.")
+		elbv2_getTrustStoreCaCertificatesBundleCmd.MarkFlagRequired("trust-store-arn")
+	})
 	elbv2Cmd.AddCommand(elbv2_getTrustStoreCaCertificatesBundleCmd)
 }

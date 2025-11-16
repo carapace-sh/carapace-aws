@@ -12,10 +12,12 @@ var wellarchitected_listWorkloadsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listWorkloadsCmd).Standalone()
+	carapace.Gen(wellarchitected_listWorkloadsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listWorkloadsCmd).Standalone()
 
-	wellarchitected_listWorkloadsCmd.Flags().String("max-results", "", "The maximum number of results to return for this request.")
-	wellarchitected_listWorkloadsCmd.Flags().String("next-token", "", "")
-	wellarchitected_listWorkloadsCmd.Flags().String("workload-name-prefix", "", "")
+		wellarchitected_listWorkloadsCmd.Flags().String("max-results", "", "The maximum number of results to return for this request.")
+		wellarchitected_listWorkloadsCmd.Flags().String("next-token", "", "")
+		wellarchitected_listWorkloadsCmd.Flags().String("workload-name-prefix", "", "")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listWorkloadsCmd)
 }

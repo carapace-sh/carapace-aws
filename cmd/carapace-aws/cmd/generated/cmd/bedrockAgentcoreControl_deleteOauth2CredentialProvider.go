@@ -12,9 +12,11 @@ var bedrockAgentcoreControl_deleteOauth2CredentialProviderCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrockAgentcoreControl_deleteOauth2CredentialProviderCmd).Standalone()
+	carapace.Gen(bedrockAgentcoreControl_deleteOauth2CredentialProviderCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrockAgentcoreControl_deleteOauth2CredentialProviderCmd).Standalone()
 
-	bedrockAgentcoreControl_deleteOauth2CredentialProviderCmd.Flags().String("name", "", "The name of the OAuth2 credential provider to delete.")
-	bedrockAgentcoreControl_deleteOauth2CredentialProviderCmd.MarkFlagRequired("name")
+		bedrockAgentcoreControl_deleteOauth2CredentialProviderCmd.Flags().String("name", "", "The name of the OAuth2 credential provider to delete.")
+		bedrockAgentcoreControl_deleteOauth2CredentialProviderCmd.MarkFlagRequired("name")
+	})
 	bedrockAgentcoreControlCmd.AddCommand(bedrockAgentcoreControl_deleteOauth2CredentialProviderCmd)
 }

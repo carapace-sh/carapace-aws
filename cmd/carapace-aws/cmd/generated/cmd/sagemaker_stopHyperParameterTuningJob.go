@@ -12,9 +12,11 @@ var sagemaker_stopHyperParameterTuningJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopHyperParameterTuningJobCmd).Standalone()
+	carapace.Gen(sagemaker_stopHyperParameterTuningJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopHyperParameterTuningJobCmd).Standalone()
 
-	sagemaker_stopHyperParameterTuningJobCmd.Flags().String("hyper-parameter-tuning-job-name", "", "The name of the tuning job to stop.")
-	sagemaker_stopHyperParameterTuningJobCmd.MarkFlagRequired("hyper-parameter-tuning-job-name")
+		sagemaker_stopHyperParameterTuningJobCmd.Flags().String("hyper-parameter-tuning-job-name", "", "The name of the tuning job to stop.")
+		sagemaker_stopHyperParameterTuningJobCmd.MarkFlagRequired("hyper-parameter-tuning-job-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopHyperParameterTuningJobCmd)
 }

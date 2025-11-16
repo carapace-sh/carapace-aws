@@ -12,9 +12,11 @@ var drs_stopReplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(drs_stopReplicationCmd).Standalone()
+	carapace.Gen(drs_stopReplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(drs_stopReplicationCmd).Standalone()
 
-	drs_stopReplicationCmd.Flags().String("source-server-id", "", "The ID of the Source Server to stop replication for.")
-	drs_stopReplicationCmd.MarkFlagRequired("source-server-id")
+		drs_stopReplicationCmd.Flags().String("source-server-id", "", "The ID of the Source Server to stop replication for.")
+		drs_stopReplicationCmd.MarkFlagRequired("source-server-id")
+	})
 	drsCmd.AddCommand(drs_stopReplicationCmd)
 }

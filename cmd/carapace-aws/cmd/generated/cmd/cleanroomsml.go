@@ -12,7 +12,9 @@ var cleanroomsmlCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cleanroomsmlCmd).Standalone()
+	carapace.Gen(cleanroomsmlCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cleanroomsmlCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(cleanroomsmlCmd)
 }

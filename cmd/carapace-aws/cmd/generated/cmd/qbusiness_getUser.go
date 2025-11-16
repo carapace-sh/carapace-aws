@@ -12,11 +12,13 @@ var qbusiness_getUserCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qbusiness_getUserCmd).Standalone()
+	carapace.Gen(qbusiness_getUserCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qbusiness_getUserCmd).Standalone()
 
-	qbusiness_getUserCmd.Flags().String("application-id", "", "The identifier of the application connected to the user.")
-	qbusiness_getUserCmd.Flags().String("user-id", "", "The user email address attached to the user.")
-	qbusiness_getUserCmd.MarkFlagRequired("application-id")
-	qbusiness_getUserCmd.MarkFlagRequired("user-id")
+		qbusiness_getUserCmd.Flags().String("application-id", "", "The identifier of the application connected to the user.")
+		qbusiness_getUserCmd.Flags().String("user-id", "", "The user email address attached to the user.")
+		qbusiness_getUserCmd.MarkFlagRequired("application-id")
+		qbusiness_getUserCmd.MarkFlagRequired("user-id")
+	})
 	qbusinessCmd.AddCommand(qbusiness_getUserCmd)
 }

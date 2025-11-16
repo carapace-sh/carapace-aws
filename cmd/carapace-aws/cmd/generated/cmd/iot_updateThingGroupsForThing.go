@@ -12,11 +12,13 @@ var iot_updateThingGroupsForThingCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_updateThingGroupsForThingCmd).Standalone()
+	carapace.Gen(iot_updateThingGroupsForThingCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_updateThingGroupsForThingCmd).Standalone()
 
-	iot_updateThingGroupsForThingCmd.Flags().String("override-dynamic-groups", "", "Override dynamic thing groups with static thing groups when 10-group limit is reached.")
-	iot_updateThingGroupsForThingCmd.Flags().String("thing-groups-to-add", "", "The groups to which the thing will be added.")
-	iot_updateThingGroupsForThingCmd.Flags().String("thing-groups-to-remove", "", "The groups from which the thing will be removed.")
-	iot_updateThingGroupsForThingCmd.Flags().String("thing-name", "", "The thing whose group memberships will be updated.")
+		iot_updateThingGroupsForThingCmd.Flags().String("override-dynamic-groups", "", "Override dynamic thing groups with static thing groups when 10-group limit is reached.")
+		iot_updateThingGroupsForThingCmd.Flags().String("thing-groups-to-add", "", "The groups to which the thing will be added.")
+		iot_updateThingGroupsForThingCmd.Flags().String("thing-groups-to-remove", "", "The groups from which the thing will be removed.")
+		iot_updateThingGroupsForThingCmd.Flags().String("thing-name", "", "The thing whose group memberships will be updated.")
+	})
 	iotCmd.AddCommand(iot_updateThingGroupsForThingCmd)
 }

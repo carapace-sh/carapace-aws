@@ -12,9 +12,11 @@ var iot_describeIndexCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeIndexCmd).Standalone()
+	carapace.Gen(iot_describeIndexCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeIndexCmd).Standalone()
 
-	iot_describeIndexCmd.Flags().String("index-name", "", "The index name.")
-	iot_describeIndexCmd.MarkFlagRequired("index-name")
+		iot_describeIndexCmd.Flags().String("index-name", "", "The index name.")
+		iot_describeIndexCmd.MarkFlagRequired("index-name")
+	})
 	iotCmd.AddCommand(iot_describeIndexCmd)
 }

@@ -12,9 +12,11 @@ var workspaces_terminateWorkspacesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_terminateWorkspacesCmd).Standalone()
+	carapace.Gen(workspaces_terminateWorkspacesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_terminateWorkspacesCmd).Standalone()
 
-	workspaces_terminateWorkspacesCmd.Flags().String("terminate-workspace-requests", "", "The WorkSpaces to terminate.")
-	workspaces_terminateWorkspacesCmd.MarkFlagRequired("terminate-workspace-requests")
+		workspaces_terminateWorkspacesCmd.Flags().String("terminate-workspace-requests", "", "The WorkSpaces to terminate.")
+		workspaces_terminateWorkspacesCmd.MarkFlagRequired("terminate-workspace-requests")
+	})
 	workspacesCmd.AddCommand(workspaces_terminateWorkspacesCmd)
 }

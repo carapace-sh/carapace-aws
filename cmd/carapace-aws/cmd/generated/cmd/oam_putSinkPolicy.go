@@ -12,11 +12,13 @@ var oam_putSinkPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(oam_putSinkPolicyCmd).Standalone()
+	carapace.Gen(oam_putSinkPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(oam_putSinkPolicyCmd).Standalone()
 
-	oam_putSinkPolicyCmd.Flags().String("policy", "", "The JSON policy to use.")
-	oam_putSinkPolicyCmd.Flags().String("sink-identifier", "", "The ARN of the sink to attach this policy to.")
-	oam_putSinkPolicyCmd.MarkFlagRequired("policy")
-	oam_putSinkPolicyCmd.MarkFlagRequired("sink-identifier")
+		oam_putSinkPolicyCmd.Flags().String("policy", "", "The JSON policy to use.")
+		oam_putSinkPolicyCmd.Flags().String("sink-identifier", "", "The ARN of the sink to attach this policy to.")
+		oam_putSinkPolicyCmd.MarkFlagRequired("policy")
+		oam_putSinkPolicyCmd.MarkFlagRequired("sink-identifier")
+	})
 	oamCmd.AddCommand(oam_putSinkPolicyCmd)
 }

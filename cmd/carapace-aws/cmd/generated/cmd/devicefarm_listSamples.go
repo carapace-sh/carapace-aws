@@ -12,10 +12,12 @@ var devicefarm_listSamplesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(devicefarm_listSamplesCmd).Standalone()
+	carapace.Gen(devicefarm_listSamplesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(devicefarm_listSamplesCmd).Standalone()
 
-	devicefarm_listSamplesCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the job used to list samples.")
-	devicefarm_listSamplesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
-	devicefarm_listSamplesCmd.MarkFlagRequired("arn")
+		devicefarm_listSamplesCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the job used to list samples.")
+		devicefarm_listSamplesCmd.Flags().String("next-token", "", "An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.")
+		devicefarm_listSamplesCmd.MarkFlagRequired("arn")
+	})
 	devicefarmCmd.AddCommand(devicefarm_listSamplesCmd)
 }

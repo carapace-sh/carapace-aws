@@ -12,11 +12,13 @@ var rum_tagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rum_tagResourceCmd).Standalone()
+	carapace.Gen(rum_tagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rum_tagResourceCmd).Standalone()
 
-	rum_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch RUM resource that you're adding tags to.")
-	rum_tagResourceCmd.Flags().String("tags", "", "The list of key-value pairs to associate with the resource.")
-	rum_tagResourceCmd.MarkFlagRequired("resource-arn")
-	rum_tagResourceCmd.MarkFlagRequired("tags")
+		rum_tagResourceCmd.Flags().String("resource-arn", "", "The ARN of the CloudWatch RUM resource that you're adding tags to.")
+		rum_tagResourceCmd.Flags().String("tags", "", "The list of key-value pairs to associate with the resource.")
+		rum_tagResourceCmd.MarkFlagRequired("resource-arn")
+		rum_tagResourceCmd.MarkFlagRequired("tags")
+	})
 	rumCmd.AddCommand(rum_tagResourceCmd)
 }

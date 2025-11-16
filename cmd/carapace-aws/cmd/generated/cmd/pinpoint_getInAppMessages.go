@@ -12,11 +12,13 @@ var pinpoint_getInAppMessagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpoint_getInAppMessagesCmd).Standalone()
+	carapace.Gen(pinpoint_getInAppMessagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpoint_getInAppMessagesCmd).Standalone()
 
-	pinpoint_getInAppMessagesCmd.Flags().String("application-id", "", "The unique identifier for the application.")
-	pinpoint_getInAppMessagesCmd.Flags().String("endpoint-id", "", "The unique identifier for the endpoint.")
-	pinpoint_getInAppMessagesCmd.MarkFlagRequired("application-id")
-	pinpoint_getInAppMessagesCmd.MarkFlagRequired("endpoint-id")
+		pinpoint_getInAppMessagesCmd.Flags().String("application-id", "", "The unique identifier for the application.")
+		pinpoint_getInAppMessagesCmd.Flags().String("endpoint-id", "", "The unique identifier for the endpoint.")
+		pinpoint_getInAppMessagesCmd.MarkFlagRequired("application-id")
+		pinpoint_getInAppMessagesCmd.MarkFlagRequired("endpoint-id")
+	})
 	pinpointCmd.AddCommand(pinpoint_getInAppMessagesCmd)
 }

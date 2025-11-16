@@ -12,11 +12,13 @@ var pinpointSmsVoiceV2_describeOptOutListsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointSmsVoiceV2_describeOptOutListsCmd).Standalone()
+	carapace.Gen(pinpointSmsVoiceV2_describeOptOutListsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointSmsVoiceV2_describeOptOutListsCmd).Standalone()
 
-	pinpointSmsVoiceV2_describeOptOutListsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
-	pinpointSmsVoiceV2_describeOptOutListsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
-	pinpointSmsVoiceV2_describeOptOutListsCmd.Flags().String("opt-out-list-names", "", "The OptOutLists to show the details of.")
-	pinpointSmsVoiceV2_describeOptOutListsCmd.Flags().String("owner", "", "Use `SELF` to filter the list of Opt-Out List to ones your account owns or use `SHARED` to filter on Opt-Out List shared with your account.")
+		pinpointSmsVoiceV2_describeOptOutListsCmd.Flags().String("max-results", "", "The maximum number of results to return per each request.")
+		pinpointSmsVoiceV2_describeOptOutListsCmd.Flags().String("next-token", "", "The token to be used for the next set of paginated results.")
+		pinpointSmsVoiceV2_describeOptOutListsCmd.Flags().String("opt-out-list-names", "", "The OptOutLists to show the details of.")
+		pinpointSmsVoiceV2_describeOptOutListsCmd.Flags().String("owner", "", "Use `SELF` to filter the list of Opt-Out List to ones your account owns or use `SHARED` to filter on Opt-Out List shared with your account.")
+	})
 	pinpointSmsVoiceV2Cmd.AddCommand(pinpointSmsVoiceV2_describeOptOutListsCmd)
 }

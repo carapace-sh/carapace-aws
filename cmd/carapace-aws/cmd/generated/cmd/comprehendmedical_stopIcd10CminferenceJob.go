@@ -12,9 +12,11 @@ var comprehendmedical_stopIcd10CminferenceJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehendmedical_stopIcd10CminferenceJobCmd).Standalone()
+	carapace.Gen(comprehendmedical_stopIcd10CminferenceJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehendmedical_stopIcd10CminferenceJobCmd).Standalone()
 
-	comprehendmedical_stopIcd10CminferenceJobCmd.Flags().String("job-id", "", "The identifier of the job.")
-	comprehendmedical_stopIcd10CminferenceJobCmd.MarkFlagRequired("job-id")
+		comprehendmedical_stopIcd10CminferenceJobCmd.Flags().String("job-id", "", "The identifier of the job.")
+		comprehendmedical_stopIcd10CminferenceJobCmd.MarkFlagRequired("job-id")
+	})
 	comprehendmedicalCmd.AddCommand(comprehendmedical_stopIcd10CminferenceJobCmd)
 }

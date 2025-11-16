@@ -12,11 +12,13 @@ var iotwireless_resetResourceLogLevelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iotwireless_resetResourceLogLevelCmd).Standalone()
+	carapace.Gen(iotwireless_resetResourceLogLevelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iotwireless_resetResourceLogLevelCmd).Standalone()
 
-	iotwireless_resetResourceLogLevelCmd.Flags().String("resource-identifier", "", "")
-	iotwireless_resetResourceLogLevelCmd.Flags().String("resource-type", "", "The type of resource, which can be `WirelessDevice`, `WirelessGateway`, or `FuotaTask`.")
-	iotwireless_resetResourceLogLevelCmd.MarkFlagRequired("resource-identifier")
-	iotwireless_resetResourceLogLevelCmd.MarkFlagRequired("resource-type")
+		iotwireless_resetResourceLogLevelCmd.Flags().String("resource-identifier", "", "")
+		iotwireless_resetResourceLogLevelCmd.Flags().String("resource-type", "", "The type of resource, which can be `WirelessDevice`, `WirelessGateway`, or `FuotaTask`.")
+		iotwireless_resetResourceLogLevelCmd.MarkFlagRequired("resource-identifier")
+		iotwireless_resetResourceLogLevelCmd.MarkFlagRequired("resource-type")
+	})
 	iotwirelessCmd.AddCommand(iotwireless_resetResourceLogLevelCmd)
 }

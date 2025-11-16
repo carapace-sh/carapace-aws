@@ -12,9 +12,11 @@ var finspace_listKxEnvironmentsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_listKxEnvironmentsCmd).Standalone()
+	carapace.Gen(finspace_listKxEnvironmentsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_listKxEnvironmentsCmd).Standalone()
 
-	finspace_listKxEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
-	finspace_listKxEnvironmentsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+		finspace_listKxEnvironmentsCmd.Flags().String("max-results", "", "The maximum number of results to return in this request.")
+		finspace_listKxEnvironmentsCmd.Flags().String("next-token", "", "A token that indicates where a results page should begin.")
+	})
 	finspaceCmd.AddCommand(finspace_listKxEnvironmentsCmd)
 }

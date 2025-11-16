@@ -12,13 +12,15 @@ var finspace_deleteKxDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(finspace_deleteKxDatabaseCmd).Standalone()
+	carapace.Gen(finspace_deleteKxDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(finspace_deleteKxDatabaseCmd).Standalone()
 
-	finspace_deleteKxDatabaseCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
-	finspace_deleteKxDatabaseCmd.Flags().String("database-name", "", "The name of the kdb database that you want to delete.")
-	finspace_deleteKxDatabaseCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
-	finspace_deleteKxDatabaseCmd.MarkFlagRequired("client-token")
-	finspace_deleteKxDatabaseCmd.MarkFlagRequired("database-name")
-	finspace_deleteKxDatabaseCmd.MarkFlagRequired("environment-id")
+		finspace_deleteKxDatabaseCmd.Flags().String("client-token", "", "A token that ensures idempotency.")
+		finspace_deleteKxDatabaseCmd.Flags().String("database-name", "", "The name of the kdb database that you want to delete.")
+		finspace_deleteKxDatabaseCmd.Flags().String("environment-id", "", "A unique identifier for the kdb environment.")
+		finspace_deleteKxDatabaseCmd.MarkFlagRequired("client-token")
+		finspace_deleteKxDatabaseCmd.MarkFlagRequired("database-name")
+		finspace_deleteKxDatabaseCmd.MarkFlagRequired("environment-id")
+	})
 	finspaceCmd.AddCommand(finspace_deleteKxDatabaseCmd)
 }

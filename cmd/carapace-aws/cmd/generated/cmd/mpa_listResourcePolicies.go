@@ -12,11 +12,13 @@ var mpa_listResourcePoliciesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mpa_listResourcePoliciesCmd).Standalone()
+	carapace.Gen(mpa_listResourcePoliciesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mpa_listResourcePoliciesCmd).Standalone()
 
-	mpa_listResourcePoliciesCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
-	mpa_listResourcePoliciesCmd.Flags().String("next-token", "", "If present, indicates that more output is available than is included in the current response.")
-	mpa_listResourcePoliciesCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) for the resource.")
-	mpa_listResourcePoliciesCmd.MarkFlagRequired("resource-arn")
+		mpa_listResourcePoliciesCmd.Flags().String("max-results", "", "The maximum number of items to return in the response.")
+		mpa_listResourcePoliciesCmd.Flags().String("next-token", "", "If present, indicates that more output is available than is included in the current response.")
+		mpa_listResourcePoliciesCmd.Flags().String("resource-arn", "", "Amazon Resource Name (ARN) for the resource.")
+		mpa_listResourcePoliciesCmd.MarkFlagRequired("resource-arn")
+	})
 	mpaCmd.AddCommand(mpa_listResourcePoliciesCmd)
 }

@@ -12,8 +12,10 @@ var sesv2_putAccountDedicatedIpWarmupAttributesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sesv2_putAccountDedicatedIpWarmupAttributesCmd).Standalone()
+	carapace.Gen(sesv2_putAccountDedicatedIpWarmupAttributesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sesv2_putAccountDedicatedIpWarmupAttributesCmd).Standalone()
 
-	sesv2_putAccountDedicatedIpWarmupAttributesCmd.Flags().String("auto-warmup-enabled", "", "Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon SES account in the current Amazon Web Services Region.")
+		sesv2_putAccountDedicatedIpWarmupAttributesCmd.Flags().String("auto-warmup-enabled", "", "Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon SES account in the current Amazon Web Services Region.")
+	})
 	sesv2Cmd.AddCommand(sesv2_putAccountDedicatedIpWarmupAttributesCmd)
 }

@@ -12,9 +12,11 @@ var b2bi_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(b2bi_listTagsForResourceCmd).Standalone()
+	carapace.Gen(b2bi_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(b2bi_listTagsForResourceCmd).Standalone()
 
-	b2bi_listTagsForResourceCmd.Flags().String("resource-arn", "", "Requests the tags associated with a particular Amazon Resource Name (ARN).")
-	b2bi_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		b2bi_listTagsForResourceCmd.Flags().String("resource-arn", "", "Requests the tags associated with a particular Amazon Resource Name (ARN).")
+		b2bi_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	b2biCmd.AddCommand(b2bi_listTagsForResourceCmd)
 }

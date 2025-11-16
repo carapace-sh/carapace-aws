@@ -12,9 +12,11 @@ var bedrock_deleteMarketplaceModelEndpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(bedrock_deleteMarketplaceModelEndpointCmd).Standalone()
+	carapace.Gen(bedrock_deleteMarketplaceModelEndpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(bedrock_deleteMarketplaceModelEndpointCmd).Standalone()
 
-	bedrock_deleteMarketplaceModelEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) of the endpoint you want to delete.")
-	bedrock_deleteMarketplaceModelEndpointCmd.MarkFlagRequired("endpoint-arn")
+		bedrock_deleteMarketplaceModelEndpointCmd.Flags().String("endpoint-arn", "", "The Amazon Resource Name (ARN) of the endpoint you want to delete.")
+		bedrock_deleteMarketplaceModelEndpointCmd.MarkFlagRequired("endpoint-arn")
+	})
 	bedrockCmd.AddCommand(bedrock_deleteMarketplaceModelEndpointCmd)
 }

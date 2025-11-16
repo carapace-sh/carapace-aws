@@ -12,7 +12,9 @@ var pinpointCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(pinpointCmd).Standalone()
+	carapace.Gen(pinpointCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(pinpointCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(pinpointCmd)
 }

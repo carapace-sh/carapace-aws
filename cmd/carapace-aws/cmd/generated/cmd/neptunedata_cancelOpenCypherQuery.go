@@ -12,12 +12,14 @@ var neptunedata_cancelOpenCypherQueryCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_cancelOpenCypherQueryCmd).Standalone()
+	carapace.Gen(neptunedata_cancelOpenCypherQueryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_cancelOpenCypherQueryCmd).Standalone()
 
-	neptunedata_cancelOpenCypherQueryCmd.Flags().Bool("no-silent", false, "If set to `TRUE`, causes the cancelation of the openCypher query to happen silently.")
-	neptunedata_cancelOpenCypherQueryCmd.Flags().String("query-id", "", "The unique ID of the openCypher query to cancel.")
-	neptunedata_cancelOpenCypherQueryCmd.Flags().Bool("silent", false, "If set to `TRUE`, causes the cancelation of the openCypher query to happen silently.")
-	neptunedata_cancelOpenCypherQueryCmd.Flag("no-silent").Hidden = true
-	neptunedata_cancelOpenCypherQueryCmd.MarkFlagRequired("query-id")
+		neptunedata_cancelOpenCypherQueryCmd.Flags().Bool("no-silent", false, "If set to `TRUE`, causes the cancelation of the openCypher query to happen silently.")
+		neptunedata_cancelOpenCypherQueryCmd.Flags().String("query-id", "", "The unique ID of the openCypher query to cancel.")
+		neptunedata_cancelOpenCypherQueryCmd.Flags().Bool("silent", false, "If set to `TRUE`, causes the cancelation of the openCypher query to happen silently.")
+		neptunedata_cancelOpenCypherQueryCmd.Flag("no-silent").Hidden = true
+		neptunedata_cancelOpenCypherQueryCmd.MarkFlagRequired("query-id")
+	})
 	neptunedataCmd.AddCommand(neptunedata_cancelOpenCypherQueryCmd)
 }

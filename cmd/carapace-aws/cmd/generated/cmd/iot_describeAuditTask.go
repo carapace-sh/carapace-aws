@@ -12,9 +12,11 @@ var iot_describeAuditTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_describeAuditTaskCmd).Standalone()
+	carapace.Gen(iot_describeAuditTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_describeAuditTaskCmd).Standalone()
 
-	iot_describeAuditTaskCmd.Flags().String("task-id", "", "The ID of the audit whose information you want to get.")
-	iot_describeAuditTaskCmd.MarkFlagRequired("task-id")
+		iot_describeAuditTaskCmd.Flags().String("task-id", "", "The ID of the audit whose information you want to get.")
+		iot_describeAuditTaskCmd.MarkFlagRequired("task-id")
+	})
 	iotCmd.AddCommand(iot_describeAuditTaskCmd)
 }

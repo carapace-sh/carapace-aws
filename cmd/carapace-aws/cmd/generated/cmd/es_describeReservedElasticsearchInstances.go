@@ -12,10 +12,12 @@ var es_describeReservedElasticsearchInstancesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(es_describeReservedElasticsearchInstancesCmd).Standalone()
+	carapace.Gen(es_describeReservedElasticsearchInstancesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(es_describeReservedElasticsearchInstancesCmd).Standalone()
 
-	es_describeReservedElasticsearchInstancesCmd.Flags().String("max-results", "", "Set this value to limit the number of results returned.")
-	es_describeReservedElasticsearchInstancesCmd.Flags().String("next-token", "", "NextToken should be sent in case if earlier API call produced result containing NextToken.")
-	es_describeReservedElasticsearchInstancesCmd.Flags().String("reserved-elasticsearch-instance-id", "", "The reserved instance identifier filter value.")
+		es_describeReservedElasticsearchInstancesCmd.Flags().String("max-results", "", "Set this value to limit the number of results returned.")
+		es_describeReservedElasticsearchInstancesCmd.Flags().String("next-token", "", "NextToken should be sent in case if earlier API call produced result containing NextToken.")
+		es_describeReservedElasticsearchInstancesCmd.Flags().String("reserved-elasticsearch-instance-id", "", "The reserved instance identifier filter value.")
+	})
 	esCmd.AddCommand(es_describeReservedElasticsearchInstancesCmd)
 }

@@ -12,14 +12,16 @@ var apigateway_putGatewayResponseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apigateway_putGatewayResponseCmd).Standalone()
+	carapace.Gen(apigateway_putGatewayResponseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apigateway_putGatewayResponseCmd).Standalone()
 
-	apigateway_putGatewayResponseCmd.Flags().String("response-parameters", "", "Response parameters (paths, query strings and headers) of the GatewayResponse as a string-to-string map of key-value pairs.")
-	apigateway_putGatewayResponseCmd.Flags().String("response-templates", "", "Response templates of the GatewayResponse as a string-to-string map of key-value pairs.")
-	apigateway_putGatewayResponseCmd.Flags().String("response-type", "", "The response type of the associated GatewayResponse")
-	apigateway_putGatewayResponseCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
-	apigateway_putGatewayResponseCmd.Flags().String("status-code", "", "The HTTP status code of the GatewayResponse.")
-	apigateway_putGatewayResponseCmd.MarkFlagRequired("response-type")
-	apigateway_putGatewayResponseCmd.MarkFlagRequired("rest-api-id")
+		apigateway_putGatewayResponseCmd.Flags().String("response-parameters", "", "Response parameters (paths, query strings and headers) of the GatewayResponse as a string-to-string map of key-value pairs.")
+		apigateway_putGatewayResponseCmd.Flags().String("response-templates", "", "Response templates of the GatewayResponse as a string-to-string map of key-value pairs.")
+		apigateway_putGatewayResponseCmd.Flags().String("response-type", "", "The response type of the associated GatewayResponse")
+		apigateway_putGatewayResponseCmd.Flags().String("rest-api-id", "", "The string identifier of the associated RestApi.")
+		apigateway_putGatewayResponseCmd.Flags().String("status-code", "", "The HTTP status code of the GatewayResponse.")
+		apigateway_putGatewayResponseCmd.MarkFlagRequired("response-type")
+		apigateway_putGatewayResponseCmd.MarkFlagRequired("rest-api-id")
+	})
 	apigatewayCmd.AddCommand(apigateway_putGatewayResponseCmd)
 }

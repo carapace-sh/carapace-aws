@@ -12,11 +12,13 @@ var redshift_deleteTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(redshift_deleteTagsCmd).Standalone()
+	carapace.Gen(redshift_deleteTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(redshift_deleteTagsCmd).Standalone()
 
-	redshift_deleteTagsCmd.Flags().String("resource-name", "", "The Amazon Resource Name (ARN) from which you want to remove the tag or tags.")
-	redshift_deleteTagsCmd.Flags().String("tag-keys", "", "The tag key that you want to delete.")
-	redshift_deleteTagsCmd.MarkFlagRequired("resource-name")
-	redshift_deleteTagsCmd.MarkFlagRequired("tag-keys")
+		redshift_deleteTagsCmd.Flags().String("resource-name", "", "The Amazon Resource Name (ARN) from which you want to remove the tag or tags.")
+		redshift_deleteTagsCmd.Flags().String("tag-keys", "", "The tag key that you want to delete.")
+		redshift_deleteTagsCmd.MarkFlagRequired("resource-name")
+		redshift_deleteTagsCmd.MarkFlagRequired("tag-keys")
+	})
 	redshiftCmd.AddCommand(redshift_deleteTagsCmd)
 }

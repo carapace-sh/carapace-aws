@@ -12,12 +12,14 @@ var athena_getDatabaseCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(athena_getDatabaseCmd).Standalone()
+	carapace.Gen(athena_getDatabaseCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(athena_getDatabaseCmd).Standalone()
 
-	athena_getDatabaseCmd.Flags().String("catalog-name", "", "The name of the data catalog that contains the database to return.")
-	athena_getDatabaseCmd.Flags().String("database-name", "", "The name of the database to return.")
-	athena_getDatabaseCmd.Flags().String("work-group", "", "The name of the workgroup for which the metadata is being fetched.")
-	athena_getDatabaseCmd.MarkFlagRequired("catalog-name")
-	athena_getDatabaseCmd.MarkFlagRequired("database-name")
+		athena_getDatabaseCmd.Flags().String("catalog-name", "", "The name of the data catalog that contains the database to return.")
+		athena_getDatabaseCmd.Flags().String("database-name", "", "The name of the database to return.")
+		athena_getDatabaseCmd.Flags().String("work-group", "", "The name of the workgroup for which the metadata is being fetched.")
+		athena_getDatabaseCmd.MarkFlagRequired("catalog-name")
+		athena_getDatabaseCmd.MarkFlagRequired("database-name")
+	})
 	athenaCmd.AddCommand(athena_getDatabaseCmd)
 }

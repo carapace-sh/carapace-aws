@@ -12,9 +12,11 @@ var ivschat_getLoggingConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_getLoggingConfigurationCmd).Standalone()
+	carapace.Gen(ivschat_getLoggingConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_getLoggingConfigurationCmd).Standalone()
 
-	ivschat_getLoggingConfigurationCmd.Flags().String("identifier", "", "Identifier of the logging configuration to be retrieved.")
-	ivschat_getLoggingConfigurationCmd.MarkFlagRequired("identifier")
+		ivschat_getLoggingConfigurationCmd.Flags().String("identifier", "", "Identifier of the logging configuration to be retrieved.")
+		ivschat_getLoggingConfigurationCmd.MarkFlagRequired("identifier")
+	})
 	ivschatCmd.AddCommand(ivschat_getLoggingConfigurationCmd)
 }

@@ -12,11 +12,13 @@ var simspaceweaver_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(simspaceweaver_untagResourceCmd).Standalone()
+	carapace.Gen(simspaceweaver_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(simspaceweaver_untagResourceCmd).Standalone()
 
-	simspaceweaver_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
-	simspaceweaver_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the resource.")
-	simspaceweaver_untagResourceCmd.MarkFlagRequired("resource-arn")
-	simspaceweaver_untagResourceCmd.MarkFlagRequired("tag-keys")
+		simspaceweaver_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource that you want to remove tags from.")
+		simspaceweaver_untagResourceCmd.Flags().String("tag-keys", "", "A list of tag keys to remove from the resource.")
+		simspaceweaver_untagResourceCmd.MarkFlagRequired("resource-arn")
+		simspaceweaver_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	simspaceweaverCmd.AddCommand(simspaceweaver_untagResourceCmd)
 }

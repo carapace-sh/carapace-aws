@@ -12,9 +12,11 @@ var resourceGroups_getGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(resourceGroups_getGroupCmd).Standalone()
+	carapace.Gen(resourceGroups_getGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(resourceGroups_getGroupCmd).Standalone()
 
-	resourceGroups_getGroupCmd.Flags().String("group", "", "The name or the Amazon resource name (ARN) of the resource group to retrieve.")
-	resourceGroups_getGroupCmd.Flags().String("group-name", "", "Deprecated - don't use this parameter.")
+		resourceGroups_getGroupCmd.Flags().String("group", "", "The name or the Amazon resource name (ARN) of the resource group to retrieve.")
+		resourceGroups_getGroupCmd.Flags().String("group-name", "", "Deprecated - don't use this parameter.")
+	})
 	resourceGroupsCmd.AddCommand(resourceGroups_getGroupCmd)
 }

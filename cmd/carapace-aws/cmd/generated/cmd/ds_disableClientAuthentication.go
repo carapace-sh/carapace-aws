@@ -12,11 +12,13 @@ var ds_disableClientAuthenticationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_disableClientAuthenticationCmd).Standalone()
+	carapace.Gen(ds_disableClientAuthenticationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_disableClientAuthenticationCmd).Standalone()
 
-	ds_disableClientAuthenticationCmd.Flags().String("directory-id", "", "The identifier of the directory")
-	ds_disableClientAuthenticationCmd.Flags().String("type", "", "The type of client authentication to disable.")
-	ds_disableClientAuthenticationCmd.MarkFlagRequired("directory-id")
-	ds_disableClientAuthenticationCmd.MarkFlagRequired("type")
+		ds_disableClientAuthenticationCmd.Flags().String("directory-id", "", "The identifier of the directory")
+		ds_disableClientAuthenticationCmd.Flags().String("type", "", "The type of client authentication to disable.")
+		ds_disableClientAuthenticationCmd.MarkFlagRequired("directory-id")
+		ds_disableClientAuthenticationCmd.MarkFlagRequired("type")
+	})
 	dsCmd.AddCommand(ds_disableClientAuthenticationCmd)
 }

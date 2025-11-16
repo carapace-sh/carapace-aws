@@ -12,9 +12,11 @@ var timestreamInfluxdb_getDbParameterGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(timestreamInfluxdb_getDbParameterGroupCmd).Standalone()
+	carapace.Gen(timestreamInfluxdb_getDbParameterGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(timestreamInfluxdb_getDbParameterGroupCmd).Standalone()
 
-	timestreamInfluxdb_getDbParameterGroupCmd.Flags().String("identifier", "", "The id of the DB parameter group.")
-	timestreamInfluxdb_getDbParameterGroupCmd.MarkFlagRequired("identifier")
+		timestreamInfluxdb_getDbParameterGroupCmd.Flags().String("identifier", "", "The id of the DB parameter group.")
+		timestreamInfluxdb_getDbParameterGroupCmd.MarkFlagRequired("identifier")
+	})
 	timestreamInfluxdbCmd.AddCommand(timestreamInfluxdb_getDbParameterGroupCmd)
 }

@@ -12,9 +12,11 @@ var macie2_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(macie2_listTagsForResourceCmd).Standalone()
+	carapace.Gen(macie2_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(macie2_listTagsForResourceCmd).Standalone()
 
-	macie2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
-	macie2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		macie2_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource.")
+		macie2_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	macie2Cmd.AddCommand(macie2_listTagsForResourceCmd)
 }

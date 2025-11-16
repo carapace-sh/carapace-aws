@@ -12,13 +12,15 @@ var appsync_deleteResolverCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_deleteResolverCmd).Standalone()
+	carapace.Gen(appsync_deleteResolverCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_deleteResolverCmd).Standalone()
 
-	appsync_deleteResolverCmd.Flags().String("api-id", "", "The API ID.")
-	appsync_deleteResolverCmd.Flags().String("field-name", "", "The resolver field name.")
-	appsync_deleteResolverCmd.Flags().String("type-name", "", "The name of the resolver type.")
-	appsync_deleteResolverCmd.MarkFlagRequired("api-id")
-	appsync_deleteResolverCmd.MarkFlagRequired("field-name")
-	appsync_deleteResolverCmd.MarkFlagRequired("type-name")
+		appsync_deleteResolverCmd.Flags().String("api-id", "", "The API ID.")
+		appsync_deleteResolverCmd.Flags().String("field-name", "", "The resolver field name.")
+		appsync_deleteResolverCmd.Flags().String("type-name", "", "The name of the resolver type.")
+		appsync_deleteResolverCmd.MarkFlagRequired("api-id")
+		appsync_deleteResolverCmd.MarkFlagRequired("field-name")
+		appsync_deleteResolverCmd.MarkFlagRequired("type-name")
+	})
 	appsyncCmd.AddCommand(appsync_deleteResolverCmd)
 }

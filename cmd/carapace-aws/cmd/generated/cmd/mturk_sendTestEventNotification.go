@@ -12,11 +12,13 @@ var mturk_sendTestEventNotificationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(mturk_sendTestEventNotificationCmd).Standalone()
+	carapace.Gen(mturk_sendTestEventNotificationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(mturk_sendTestEventNotificationCmd).Standalone()
 
-	mturk_sendTestEventNotificationCmd.Flags().String("notification", "", "The notification specification to test.")
-	mturk_sendTestEventNotificationCmd.Flags().String("test-event-type", "", "The event to simulate to test the notification specification.")
-	mturk_sendTestEventNotificationCmd.MarkFlagRequired("notification")
-	mturk_sendTestEventNotificationCmd.MarkFlagRequired("test-event-type")
+		mturk_sendTestEventNotificationCmd.Flags().String("notification", "", "The notification specification to test.")
+		mturk_sendTestEventNotificationCmd.Flags().String("test-event-type", "", "The event to simulate to test the notification specification.")
+		mturk_sendTestEventNotificationCmd.MarkFlagRequired("notification")
+		mturk_sendTestEventNotificationCmd.MarkFlagRequired("test-event-type")
+	})
 	mturkCmd.AddCommand(mturk_sendTestEventNotificationCmd)
 }

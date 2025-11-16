@@ -12,11 +12,13 @@ var connectcases_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcases_untagResourceCmd).Standalone()
+	carapace.Gen(connectcases_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcases_untagResourceCmd).Standalone()
 
-	connectcases_untagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN)")
-	connectcases_untagResourceCmd.Flags().String("tag-keys", "", "List of tag keys.")
-	connectcases_untagResourceCmd.MarkFlagRequired("arn")
-	connectcases_untagResourceCmd.MarkFlagRequired("tag-keys")
+		connectcases_untagResourceCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN)")
+		connectcases_untagResourceCmd.Flags().String("tag-keys", "", "List of tag keys.")
+		connectcases_untagResourceCmd.MarkFlagRequired("arn")
+		connectcases_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	connectcasesCmd.AddCommand(connectcases_untagResourceCmd)
 }

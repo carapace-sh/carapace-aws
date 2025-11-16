@@ -12,11 +12,13 @@ var frauddetector_getModelsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(frauddetector_getModelsCmd).Standalone()
+	carapace.Gen(frauddetector_getModelsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(frauddetector_getModelsCmd).Standalone()
 
-	frauddetector_getModelsCmd.Flags().String("max-results", "", "The maximum number of objects to return for the request.")
-	frauddetector_getModelsCmd.Flags().String("model-id", "", "The model ID.")
-	frauddetector_getModelsCmd.Flags().String("model-type", "", "The model type.")
-	frauddetector_getModelsCmd.Flags().String("next-token", "", "The next token for the subsequent request.")
+		frauddetector_getModelsCmd.Flags().String("max-results", "", "The maximum number of objects to return for the request.")
+		frauddetector_getModelsCmd.Flags().String("model-id", "", "The model ID.")
+		frauddetector_getModelsCmd.Flags().String("model-type", "", "The model type.")
+		frauddetector_getModelsCmd.Flags().String("next-token", "", "The next token for the subsequent request.")
+	})
 	frauddetectorCmd.AddCommand(frauddetector_getModelsCmd)
 }

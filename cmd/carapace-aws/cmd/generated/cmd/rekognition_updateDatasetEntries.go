@@ -12,11 +12,13 @@ var rekognition_updateDatasetEntriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rekognition_updateDatasetEntriesCmd).Standalone()
+	carapace.Gen(rekognition_updateDatasetEntriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rekognition_updateDatasetEntriesCmd).Standalone()
 
-	rekognition_updateDatasetEntriesCmd.Flags().String("changes", "", "The changes that you want to make to the dataset.")
-	rekognition_updateDatasetEntriesCmd.Flags().String("dataset-arn", "", "The Amazon Resource Name (ARN) of the dataset that you want to update.")
-	rekognition_updateDatasetEntriesCmd.MarkFlagRequired("changes")
-	rekognition_updateDatasetEntriesCmd.MarkFlagRequired("dataset-arn")
+		rekognition_updateDatasetEntriesCmd.Flags().String("changes", "", "The changes that you want to make to the dataset.")
+		rekognition_updateDatasetEntriesCmd.Flags().String("dataset-arn", "", "The Amazon Resource Name (ARN) of the dataset that you want to update.")
+		rekognition_updateDatasetEntriesCmd.MarkFlagRequired("changes")
+		rekognition_updateDatasetEntriesCmd.MarkFlagRequired("dataset-arn")
+	})
 	rekognitionCmd.AddCommand(rekognition_updateDatasetEntriesCmd)
 }

@@ -12,10 +12,12 @@ var comprehend_listDocumentClassifiersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(comprehend_listDocumentClassifiersCmd).Standalone()
+	carapace.Gen(comprehend_listDocumentClassifiersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(comprehend_listDocumentClassifiersCmd).Standalone()
 
-	comprehend_listDocumentClassifiersCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
-	comprehend_listDocumentClassifiersCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
-	comprehend_listDocumentClassifiersCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+		comprehend_listDocumentClassifiersCmd.Flags().String("filter", "", "Filters the jobs that are returned.")
+		comprehend_listDocumentClassifiersCmd.Flags().String("max-results", "", "The maximum number of results to return in each page.")
+		comprehend_listDocumentClassifiersCmd.Flags().String("next-token", "", "Identifies the next page of results to return.")
+	})
 	comprehendCmd.AddCommand(comprehend_listDocumentClassifiersCmd)
 }

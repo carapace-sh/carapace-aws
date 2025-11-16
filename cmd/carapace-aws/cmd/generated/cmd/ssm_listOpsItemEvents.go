@@ -12,10 +12,12 @@ var ssm_listOpsItemEventsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssm_listOpsItemEventsCmd).Standalone()
+	carapace.Gen(ssm_listOpsItemEventsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssm_listOpsItemEventsCmd).Standalone()
 
-	ssm_listOpsItemEventsCmd.Flags().String("filters", "", "One or more OpsItem filters.")
-	ssm_listOpsItemEventsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
-	ssm_listOpsItemEventsCmd.Flags().String("next-token", "", "A token to start the list.")
+		ssm_listOpsItemEventsCmd.Flags().String("filters", "", "One or more OpsItem filters.")
+		ssm_listOpsItemEventsCmd.Flags().String("max-results", "", "The maximum number of items to return for this call.")
+		ssm_listOpsItemEventsCmd.Flags().String("next-token", "", "A token to start the list.")
+	})
 	ssmCmd.AddCommand(ssm_listOpsItemEventsCmd)
 }

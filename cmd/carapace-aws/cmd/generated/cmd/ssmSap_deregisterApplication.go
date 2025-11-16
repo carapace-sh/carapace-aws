@@ -12,9 +12,11 @@ var ssmSap_deregisterApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmSap_deregisterApplicationCmd).Standalone()
+	carapace.Gen(ssmSap_deregisterApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmSap_deregisterApplicationCmd).Standalone()
 
-	ssmSap_deregisterApplicationCmd.Flags().String("application-id", "", "The ID of the application.")
-	ssmSap_deregisterApplicationCmd.MarkFlagRequired("application-id")
+		ssmSap_deregisterApplicationCmd.Flags().String("application-id", "", "The ID of the application.")
+		ssmSap_deregisterApplicationCmd.MarkFlagRequired("application-id")
+	})
 	ssmSapCmd.AddCommand(ssmSap_deregisterApplicationCmd)
 }

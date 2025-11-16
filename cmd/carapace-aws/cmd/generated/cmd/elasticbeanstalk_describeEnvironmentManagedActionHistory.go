@@ -12,11 +12,13 @@ var elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd = &cobra.Command
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd).Standalone()
 
-	elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd.Flags().String("environment-id", "", "The environment ID of the target environment.")
-	elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd.Flags().String("environment-name", "", "The name of the target environment.")
-	elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd.Flags().String("max-items", "", "The maximum number of items to return for a single request.")
-	elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd.Flags().String("next-token", "", "The pagination token returned by a previous request.")
+		elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd.Flags().String("environment-id", "", "The environment ID of the target environment.")
+		elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd.Flags().String("environment-name", "", "The name of the target environment.")
+		elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd.Flags().String("max-items", "", "The maximum number of items to return for a single request.")
+		elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd.Flags().String("next-token", "", "The pagination token returned by a previous request.")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_describeEnvironmentManagedActionHistoryCmd)
 }

@@ -12,11 +12,13 @@ var elb_disableAvailabilityZonesForLoadBalancerCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elb_disableAvailabilityZonesForLoadBalancerCmd).Standalone()
+	carapace.Gen(elb_disableAvailabilityZonesForLoadBalancerCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elb_disableAvailabilityZonesForLoadBalancerCmd).Standalone()
 
-	elb_disableAvailabilityZonesForLoadBalancerCmd.Flags().String("availability-zones", "", "The Availability Zones.")
-	elb_disableAvailabilityZonesForLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
-	elb_disableAvailabilityZonesForLoadBalancerCmd.MarkFlagRequired("availability-zones")
-	elb_disableAvailabilityZonesForLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+		elb_disableAvailabilityZonesForLoadBalancerCmd.Flags().String("availability-zones", "", "The Availability Zones.")
+		elb_disableAvailabilityZonesForLoadBalancerCmd.Flags().String("load-balancer-name", "", "The name of the load balancer.")
+		elb_disableAvailabilityZonesForLoadBalancerCmd.MarkFlagRequired("availability-zones")
+		elb_disableAvailabilityZonesForLoadBalancerCmd.MarkFlagRequired("load-balancer-name")
+	})
 	elbCmd.AddCommand(elb_disableAvailabilityZonesForLoadBalancerCmd)
 }

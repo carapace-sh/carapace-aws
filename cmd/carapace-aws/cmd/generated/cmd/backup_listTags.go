@@ -12,11 +12,13 @@ var backup_listTagsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(backup_listTagsCmd).Standalone()
+	carapace.Gen(backup_listTagsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(backup_listTagsCmd).Standalone()
 
-	backup_listTagsCmd.Flags().String("max-results", "", "The maximum number of items to be returned.")
-	backup_listTagsCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
-	backup_listTagsCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies a resource.")
-	backup_listTagsCmd.MarkFlagRequired("resource-arn")
+		backup_listTagsCmd.Flags().String("max-results", "", "The maximum number of items to be returned.")
+		backup_listTagsCmd.Flags().String("next-token", "", "The next item following a partial list of returned items.")
+		backup_listTagsCmd.Flags().String("resource-arn", "", "An Amazon Resource Name (ARN) that uniquely identifies a resource.")
+		backup_listTagsCmd.MarkFlagRequired("resource-arn")
+	})
 	backupCmd.AddCommand(backup_listTagsCmd)
 }

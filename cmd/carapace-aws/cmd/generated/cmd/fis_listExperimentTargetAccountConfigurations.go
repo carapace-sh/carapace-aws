@@ -12,10 +12,12 @@ var fis_listExperimentTargetAccountConfigurationsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fis_listExperimentTargetAccountConfigurationsCmd).Standalone()
+	carapace.Gen(fis_listExperimentTargetAccountConfigurationsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fis_listExperimentTargetAccountConfigurationsCmd).Standalone()
 
-	fis_listExperimentTargetAccountConfigurationsCmd.Flags().String("experiment-id", "", "The ID of the experiment.")
-	fis_listExperimentTargetAccountConfigurationsCmd.Flags().String("next-token", "", "The token for the next page of results.")
-	fis_listExperimentTargetAccountConfigurationsCmd.MarkFlagRequired("experiment-id")
+		fis_listExperimentTargetAccountConfigurationsCmd.Flags().String("experiment-id", "", "The ID of the experiment.")
+		fis_listExperimentTargetAccountConfigurationsCmd.Flags().String("next-token", "", "The token for the next page of results.")
+		fis_listExperimentTargetAccountConfigurationsCmd.MarkFlagRequired("experiment-id")
+	})
 	fisCmd.AddCommand(fis_listExperimentTargetAccountConfigurationsCmd)
 }

@@ -12,9 +12,11 @@ var emr_stopNotebookExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emr_stopNotebookExecutionCmd).Standalone()
+	carapace.Gen(emr_stopNotebookExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emr_stopNotebookExecutionCmd).Standalone()
 
-	emr_stopNotebookExecutionCmd.Flags().String("notebook-execution-id", "", "The unique identifier of the notebook execution.")
-	emr_stopNotebookExecutionCmd.MarkFlagRequired("notebook-execution-id")
+		emr_stopNotebookExecutionCmd.Flags().String("notebook-execution-id", "", "The unique identifier of the notebook execution.")
+		emr_stopNotebookExecutionCmd.MarkFlagRequired("notebook-execution-id")
+	})
 	emrCmd.AddCommand(emr_stopNotebookExecutionCmd)
 }

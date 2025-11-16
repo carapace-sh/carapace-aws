@@ -12,9 +12,11 @@ var sagemaker_stopNotebookInstanceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_stopNotebookInstanceCmd).Standalone()
+	carapace.Gen(sagemaker_stopNotebookInstanceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_stopNotebookInstanceCmd).Standalone()
 
-	sagemaker_stopNotebookInstanceCmd.Flags().String("notebook-instance-name", "", "The name of the notebook instance to terminate.")
-	sagemaker_stopNotebookInstanceCmd.MarkFlagRequired("notebook-instance-name")
+		sagemaker_stopNotebookInstanceCmd.Flags().String("notebook-instance-name", "", "The name of the notebook instance to terminate.")
+		sagemaker_stopNotebookInstanceCmd.MarkFlagRequired("notebook-instance-name")
+	})
 	sagemakerCmd.AddCommand(sagemaker_stopNotebookInstanceCmd)
 }

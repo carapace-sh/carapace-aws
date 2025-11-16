@@ -12,9 +12,11 @@ var ioteventsData_batchUpdateDetectorCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ioteventsData_batchUpdateDetectorCmd).Standalone()
+	carapace.Gen(ioteventsData_batchUpdateDetectorCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ioteventsData_batchUpdateDetectorCmd).Standalone()
 
-	ioteventsData_batchUpdateDetectorCmd.Flags().String("detectors", "", "The list of detectors (instances) to update, along with the values to update.")
-	ioteventsData_batchUpdateDetectorCmd.MarkFlagRequired("detectors")
+		ioteventsData_batchUpdateDetectorCmd.Flags().String("detectors", "", "The list of detectors (instances) to update, along with the values to update.")
+		ioteventsData_batchUpdateDetectorCmd.MarkFlagRequired("detectors")
+	})
 	ioteventsDataCmd.AddCommand(ioteventsData_batchUpdateDetectorCmd)
 }

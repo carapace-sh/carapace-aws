@@ -12,9 +12,11 @@ var apprunner_describeVpcIngressConnectionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(apprunner_describeVpcIngressConnectionCmd).Standalone()
+	carapace.Gen(apprunner_describeVpcIngressConnectionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(apprunner_describeVpcIngressConnectionCmd).Standalone()
 
-	apprunner_describeVpcIngressConnectionCmd.Flags().String("vpc-ingress-connection-arn", "", "The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want a description for.")
-	apprunner_describeVpcIngressConnectionCmd.MarkFlagRequired("vpc-ingress-connection-arn")
+		apprunner_describeVpcIngressConnectionCmd.Flags().String("vpc-ingress-connection-arn", "", "The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want a description for.")
+		apprunner_describeVpcIngressConnectionCmd.MarkFlagRequired("vpc-ingress-connection-arn")
+	})
 	apprunnerCmd.AddCommand(apprunner_describeVpcIngressConnectionCmd)
 }

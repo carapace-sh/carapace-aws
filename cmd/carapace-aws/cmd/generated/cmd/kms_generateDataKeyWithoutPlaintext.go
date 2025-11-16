@@ -12,14 +12,16 @@ var kms_generateDataKeyWithoutPlaintextCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_generateDataKeyWithoutPlaintextCmd).Standalone()
+	carapace.Gen(kms_generateDataKeyWithoutPlaintextCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_generateDataKeyWithoutPlaintextCmd).Standalone()
 
-	kms_generateDataKeyWithoutPlaintextCmd.Flags().String("dry-run", "", "Checks if your request will succeed.")
-	kms_generateDataKeyWithoutPlaintextCmd.Flags().String("encryption-context", "", "Specifies the encryption context that will be used when encrypting the data key.")
-	kms_generateDataKeyWithoutPlaintextCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
-	kms_generateDataKeyWithoutPlaintextCmd.Flags().String("key-id", "", "Specifies the symmetric encryption KMS key that encrypts the data key.")
-	kms_generateDataKeyWithoutPlaintextCmd.Flags().String("key-spec", "", "The length of the data key.")
-	kms_generateDataKeyWithoutPlaintextCmd.Flags().String("number-of-bytes", "", "The length of the data key in bytes.")
-	kms_generateDataKeyWithoutPlaintextCmd.MarkFlagRequired("key-id")
+		kms_generateDataKeyWithoutPlaintextCmd.Flags().String("dry-run", "", "Checks if your request will succeed.")
+		kms_generateDataKeyWithoutPlaintextCmd.Flags().String("encryption-context", "", "Specifies the encryption context that will be used when encrypting the data key.")
+		kms_generateDataKeyWithoutPlaintextCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
+		kms_generateDataKeyWithoutPlaintextCmd.Flags().String("key-id", "", "Specifies the symmetric encryption KMS key that encrypts the data key.")
+		kms_generateDataKeyWithoutPlaintextCmd.Flags().String("key-spec", "", "The length of the data key.")
+		kms_generateDataKeyWithoutPlaintextCmd.Flags().String("number-of-bytes", "", "The length of the data key in bytes.")
+		kms_generateDataKeyWithoutPlaintextCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_generateDataKeyWithoutPlaintextCmd)
 }

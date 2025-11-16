@@ -12,10 +12,12 @@ var ds_describeDirectoriesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ds_describeDirectoriesCmd).Standalone()
+	carapace.Gen(ds_describeDirectoriesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ds_describeDirectoriesCmd).Standalone()
 
-	ds_describeDirectoriesCmd.Flags().String("directory-ids", "", "A list of identifiers of the directories for which to obtain the information.")
-	ds_describeDirectoriesCmd.Flags().String("limit", "", "The maximum number of items to return.")
-	ds_describeDirectoriesCmd.Flags().String("next-token", "", "The `DescribeDirectoriesResult.NextToken` value from a previous call to [DescribeDirectories]().")
+		ds_describeDirectoriesCmd.Flags().String("directory-ids", "", "A list of identifiers of the directories for which to obtain the information.")
+		ds_describeDirectoriesCmd.Flags().String("limit", "", "The maximum number of items to return.")
+		ds_describeDirectoriesCmd.Flags().String("next-token", "", "The `DescribeDirectoriesResult.NextToken` value from a previous call to [DescribeDirectories]().")
+	})
 	dsCmd.AddCommand(ds_describeDirectoriesCmd)
 }

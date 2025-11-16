@@ -12,11 +12,13 @@ var organizations_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(organizations_untagResourceCmd).Standalone()
+	carapace.Gen(organizations_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(organizations_untagResourceCmd).Standalone()
 
-	organizations_untagResourceCmd.Flags().String("resource-id", "", "The ID of the resource to remove a tag from.")
-	organizations_untagResourceCmd.Flags().String("tag-keys", "", "The list of keys for tags to remove from the specified resource.")
-	organizations_untagResourceCmd.MarkFlagRequired("resource-id")
-	organizations_untagResourceCmd.MarkFlagRequired("tag-keys")
+		organizations_untagResourceCmd.Flags().String("resource-id", "", "The ID of the resource to remove a tag from.")
+		organizations_untagResourceCmd.Flags().String("tag-keys", "", "The list of keys for tags to remove from the specified resource.")
+		organizations_untagResourceCmd.MarkFlagRequired("resource-id")
+		organizations_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	organizationsCmd.AddCommand(organizations_untagResourceCmd)
 }

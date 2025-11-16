@@ -12,9 +12,11 @@ var sagemakerGeospatial_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemakerGeospatial_listTagsForResourceCmd).Standalone()
+	carapace.Gen(sagemakerGeospatial_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemakerGeospatial_listTagsForResourceCmd).Standalone()
 
-	sagemakerGeospatial_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you want to tag.")
-	sagemakerGeospatial_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		sagemakerGeospatial_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource you want to tag.")
+		sagemakerGeospatial_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	sagemakerGeospatialCmd.AddCommand(sagemakerGeospatial_listTagsForResourceCmd)
 }

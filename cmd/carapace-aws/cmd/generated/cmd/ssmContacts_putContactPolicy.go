@@ -12,11 +12,13 @@ var ssmContacts_putContactPolicyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmContacts_putContactPolicyCmd).Standalone()
+	carapace.Gen(ssmContacts_putContactPolicyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmContacts_putContactPolicyCmd).Standalone()
 
-	ssmContacts_putContactPolicyCmd.Flags().String("contact-arn", "", "The Amazon Resource Name (ARN) of the contact or escalation plan.")
-	ssmContacts_putContactPolicyCmd.Flags().String("policy", "", "Details of the resource policy.")
-	ssmContacts_putContactPolicyCmd.MarkFlagRequired("contact-arn")
-	ssmContacts_putContactPolicyCmd.MarkFlagRequired("policy")
+		ssmContacts_putContactPolicyCmd.Flags().String("contact-arn", "", "The Amazon Resource Name (ARN) of the contact or escalation plan.")
+		ssmContacts_putContactPolicyCmd.Flags().String("policy", "", "Details of the resource policy.")
+		ssmContacts_putContactPolicyCmd.MarkFlagRequired("contact-arn")
+		ssmContacts_putContactPolicyCmd.MarkFlagRequired("policy")
+	})
 	ssmContactsCmd.AddCommand(ssmContacts_putContactPolicyCmd)
 }

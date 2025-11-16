@@ -12,10 +12,12 @@ var iot_deleteThingGroupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_deleteThingGroupCmd).Standalone()
+	carapace.Gen(iot_deleteThingGroupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_deleteThingGroupCmd).Standalone()
 
-	iot_deleteThingGroupCmd.Flags().String("expected-version", "", "The expected version of the thing group to delete.")
-	iot_deleteThingGroupCmd.Flags().String("thing-group-name", "", "The name of the thing group to delete.")
-	iot_deleteThingGroupCmd.MarkFlagRequired("thing-group-name")
+		iot_deleteThingGroupCmd.Flags().String("expected-version", "", "The expected version of the thing group to delete.")
+		iot_deleteThingGroupCmd.Flags().String("thing-group-name", "", "The name of the thing group to delete.")
+		iot_deleteThingGroupCmd.MarkFlagRequired("thing-group-name")
+	})
 	iotCmd.AddCommand(iot_deleteThingGroupCmd)
 }

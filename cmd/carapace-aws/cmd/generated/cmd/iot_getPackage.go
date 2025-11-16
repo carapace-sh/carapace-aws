@@ -12,9 +12,11 @@ var iot_getPackageCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_getPackageCmd).Standalone()
+	carapace.Gen(iot_getPackageCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_getPackageCmd).Standalone()
 
-	iot_getPackageCmd.Flags().String("package-name", "", "The name of the target software package.")
-	iot_getPackageCmd.MarkFlagRequired("package-name")
+		iot_getPackageCmd.Flags().String("package-name", "", "The name of the target software package.")
+		iot_getPackageCmd.MarkFlagRequired("package-name")
+	})
 	iotCmd.AddCommand(iot_getPackageCmd)
 }

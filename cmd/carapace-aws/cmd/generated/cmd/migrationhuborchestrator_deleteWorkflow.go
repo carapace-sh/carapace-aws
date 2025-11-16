@@ -12,9 +12,11 @@ var migrationhuborchestrator_deleteWorkflowCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(migrationhuborchestrator_deleteWorkflowCmd).Standalone()
+	carapace.Gen(migrationhuborchestrator_deleteWorkflowCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(migrationhuborchestrator_deleteWorkflowCmd).Standalone()
 
-	migrationhuborchestrator_deleteWorkflowCmd.Flags().String("id", "", "The ID of the migration workflow you want to delete.")
-	migrationhuborchestrator_deleteWorkflowCmd.MarkFlagRequired("id")
+		migrationhuborchestrator_deleteWorkflowCmd.Flags().String("id", "", "The ID of the migration workflow you want to delete.")
+		migrationhuborchestrator_deleteWorkflowCmd.MarkFlagRequired("id")
+	})
 	migrationhuborchestratorCmd.AddCommand(migrationhuborchestrator_deleteWorkflowCmd)
 }

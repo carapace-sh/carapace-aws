@@ -12,12 +12,14 @@ var amp_updateWorkspaceConfigurationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(amp_updateWorkspaceConfigurationCmd).Standalone()
+	carapace.Gen(amp_updateWorkspaceConfigurationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(amp_updateWorkspaceConfigurationCmd).Standalone()
 
-	amp_updateWorkspaceConfigurationCmd.Flags().String("client-token", "", "You can include a token in your operation to make it an idempotent opeartion.")
-	amp_updateWorkspaceConfigurationCmd.Flags().String("limits-per-label-set", "", "This is an array of structures, where each structure defines a label set for the workspace, and defines the active time series limit for each of those label sets.")
-	amp_updateWorkspaceConfigurationCmd.Flags().String("retention-period-in-days", "", "Specifies how many days that metrics will be retained in the workspace.")
-	amp_updateWorkspaceConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace that you want to update.")
-	amp_updateWorkspaceConfigurationCmd.MarkFlagRequired("workspace-id")
+		amp_updateWorkspaceConfigurationCmd.Flags().String("client-token", "", "You can include a token in your operation to make it an idempotent opeartion.")
+		amp_updateWorkspaceConfigurationCmd.Flags().String("limits-per-label-set", "", "This is an array of structures, where each structure defines a label set for the workspace, and defines the active time series limit for each of those label sets.")
+		amp_updateWorkspaceConfigurationCmd.Flags().String("retention-period-in-days", "", "Specifies how many days that metrics will be retained in the workspace.")
+		amp_updateWorkspaceConfigurationCmd.Flags().String("workspace-id", "", "The ID of the workspace that you want to update.")
+		amp_updateWorkspaceConfigurationCmd.MarkFlagRequired("workspace-id")
+	})
 	ampCmd.AddCommand(amp_updateWorkspaceConfigurationCmd)
 }

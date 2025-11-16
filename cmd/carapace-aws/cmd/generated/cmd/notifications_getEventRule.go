@@ -12,9 +12,11 @@ var notifications_getEventRuleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(notifications_getEventRuleCmd).Standalone()
+	carapace.Gen(notifications_getEventRuleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(notifications_getEventRuleCmd).Standalone()
 
-	notifications_getEventRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `EventRule` to return.")
-	notifications_getEventRuleCmd.MarkFlagRequired("arn")
+		notifications_getEventRuleCmd.Flags().String("arn", "", "The Amazon Resource Name (ARN) of the `EventRule` to return.")
+		notifications_getEventRuleCmd.MarkFlagRequired("arn")
+	})
 	notificationsCmd.AddCommand(notifications_getEventRuleCmd)
 }

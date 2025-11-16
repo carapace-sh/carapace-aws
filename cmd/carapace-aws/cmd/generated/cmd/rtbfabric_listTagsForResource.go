@@ -12,9 +12,11 @@ var rtbfabric_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rtbfabric_listTagsForResourceCmd).Standalone()
+	carapace.Gen(rtbfabric_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rtbfabric_listTagsForResourceCmd).Standalone()
 
-	rtbfabric_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.")
-	rtbfabric_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		rtbfabric_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.")
+		rtbfabric_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	rtbfabricCmd.AddCommand(rtbfabric_listTagsForResourceCmd)
 }

@@ -12,9 +12,11 @@ var sagemaker_describeDomainCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sagemaker_describeDomainCmd).Standalone()
+	carapace.Gen(sagemaker_describeDomainCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sagemaker_describeDomainCmd).Standalone()
 
-	sagemaker_describeDomainCmd.Flags().String("domain-id", "", "The domain ID.")
-	sagemaker_describeDomainCmd.MarkFlagRequired("domain-id")
+		sagemaker_describeDomainCmd.Flags().String("domain-id", "", "The domain ID.")
+		sagemaker_describeDomainCmd.MarkFlagRequired("domain-id")
+	})
 	sagemakerCmd.AddCommand(sagemaker_describeDomainCmd)
 }

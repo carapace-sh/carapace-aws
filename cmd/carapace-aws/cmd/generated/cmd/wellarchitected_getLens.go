@@ -12,10 +12,12 @@ var wellarchitected_getLensCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_getLensCmd).Standalone()
+	carapace.Gen(wellarchitected_getLensCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_getLensCmd).Standalone()
 
-	wellarchitected_getLensCmd.Flags().String("lens-alias", "", "")
-	wellarchitected_getLensCmd.Flags().String("lens-version", "", "The lens version to be retrieved.")
-	wellarchitected_getLensCmd.MarkFlagRequired("lens-alias")
+		wellarchitected_getLensCmd.Flags().String("lens-alias", "", "")
+		wellarchitected_getLensCmd.Flags().String("lens-version", "", "The lens version to be retrieved.")
+		wellarchitected_getLensCmd.MarkFlagRequired("lens-alias")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_getLensCmd)
 }

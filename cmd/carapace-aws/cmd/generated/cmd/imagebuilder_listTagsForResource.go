@@ -12,9 +12,11 @@ var imagebuilder_listTagsForResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(imagebuilder_listTagsForResourceCmd).Standalone()
+	carapace.Gen(imagebuilder_listTagsForResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(imagebuilder_listTagsForResourceCmd).Standalone()
 
-	imagebuilder_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.")
-	imagebuilder_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+		imagebuilder_listTagsForResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.")
+		imagebuilder_listTagsForResourceCmd.MarkFlagRequired("resource-arn")
+	})
 	imagebuilderCmd.AddCommand(imagebuilder_listTagsForResourceCmd)
 }

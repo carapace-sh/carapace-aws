@@ -12,11 +12,13 @@ var deadline_deleteQueueCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(deadline_deleteQueueCmd).Standalone()
+	carapace.Gen(deadline_deleteQueueCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(deadline_deleteQueueCmd).Standalone()
 
-	deadline_deleteQueueCmd.Flags().String("farm-id", "", "The ID of the farm from which to remove the queue.")
-	deadline_deleteQueueCmd.Flags().String("queue-id", "", "The queue ID of the queue to delete.")
-	deadline_deleteQueueCmd.MarkFlagRequired("farm-id")
-	deadline_deleteQueueCmd.MarkFlagRequired("queue-id")
+		deadline_deleteQueueCmd.Flags().String("farm-id", "", "The ID of the farm from which to remove the queue.")
+		deadline_deleteQueueCmd.Flags().String("queue-id", "", "The queue ID of the queue to delete.")
+		deadline_deleteQueueCmd.MarkFlagRequired("farm-id")
+		deadline_deleteQueueCmd.MarkFlagRequired("queue-id")
+	})
 	deadlineCmd.AddCommand(deadline_deleteQueueCmd)
 }

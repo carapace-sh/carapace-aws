@@ -12,9 +12,11 @@ var medialive_getEventBridgeRuleTemplateCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(medialive_getEventBridgeRuleTemplateCmd).Standalone()
+	carapace.Gen(medialive_getEventBridgeRuleTemplateCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(medialive_getEventBridgeRuleTemplateCmd).Standalone()
 
-	medialive_getEventBridgeRuleTemplateCmd.Flags().String("identifier", "", "An eventbridge rule template's identifier.")
-	medialive_getEventBridgeRuleTemplateCmd.MarkFlagRequired("identifier")
+		medialive_getEventBridgeRuleTemplateCmd.Flags().String("identifier", "", "An eventbridge rule template's identifier.")
+		medialive_getEventBridgeRuleTemplateCmd.MarkFlagRequired("identifier")
+	})
 	medialiveCmd.AddCommand(medialive_getEventBridgeRuleTemplateCmd)
 }

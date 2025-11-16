@@ -12,11 +12,13 @@ var waf_createGeoMatchSetCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(waf_createGeoMatchSetCmd).Standalone()
+	carapace.Gen(waf_createGeoMatchSetCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(waf_createGeoMatchSetCmd).Standalone()
 
-	waf_createGeoMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
-	waf_createGeoMatchSetCmd.Flags().String("name", "", "A friendly name or description of the [GeoMatchSet]().")
-	waf_createGeoMatchSetCmd.MarkFlagRequired("change-token")
-	waf_createGeoMatchSetCmd.MarkFlagRequired("name")
+		waf_createGeoMatchSetCmd.Flags().String("change-token", "", "The value returned by the most recent call to [GetChangeToken]().")
+		waf_createGeoMatchSetCmd.Flags().String("name", "", "A friendly name or description of the [GeoMatchSet]().")
+		waf_createGeoMatchSetCmd.MarkFlagRequired("change-token")
+		waf_createGeoMatchSetCmd.MarkFlagRequired("name")
+	})
 	wafCmd.AddCommand(waf_createGeoMatchSetCmd)
 }

@@ -12,10 +12,12 @@ var kms_describeKeyCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kms_describeKeyCmd).Standalone()
+	carapace.Gen(kms_describeKeyCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kms_describeKeyCmd).Standalone()
 
-	kms_describeKeyCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
-	kms_describeKeyCmd.Flags().String("key-id", "", "Describes the specified KMS key.")
-	kms_describeKeyCmd.MarkFlagRequired("key-id")
+		kms_describeKeyCmd.Flags().String("grant-tokens", "", "A list of grant tokens.")
+		kms_describeKeyCmd.Flags().String("key-id", "", "Describes the specified KMS key.")
+		kms_describeKeyCmd.MarkFlagRequired("key-id")
+	})
 	kmsCmd.AddCommand(kms_describeKeyCmd)
 }

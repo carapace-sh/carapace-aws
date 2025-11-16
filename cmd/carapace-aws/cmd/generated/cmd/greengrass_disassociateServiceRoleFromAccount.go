@@ -12,7 +12,9 @@ var greengrass_disassociateServiceRoleFromAccountCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(greengrass_disassociateServiceRoleFromAccountCmd).Standalone()
+	carapace.Gen(greengrass_disassociateServiceRoleFromAccountCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(greengrass_disassociateServiceRoleFromAccountCmd).Standalone()
 
+	})
 	greengrassCmd.AddCommand(greengrass_disassociateServiceRoleFromAccountCmd)
 }

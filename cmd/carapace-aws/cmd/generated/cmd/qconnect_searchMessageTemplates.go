@@ -12,13 +12,15 @@ var qconnect_searchMessageTemplatesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(qconnect_searchMessageTemplatesCmd).Standalone()
+	carapace.Gen(qconnect_searchMessageTemplatesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(qconnect_searchMessageTemplatesCmd).Standalone()
 
-	qconnect_searchMessageTemplatesCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
-	qconnect_searchMessageTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	qconnect_searchMessageTemplatesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	qconnect_searchMessageTemplatesCmd.Flags().String("search-expression", "", "The search expression for querying the message template.")
-	qconnect_searchMessageTemplatesCmd.MarkFlagRequired("knowledge-base-id")
-	qconnect_searchMessageTemplatesCmd.MarkFlagRequired("search-expression")
+		qconnect_searchMessageTemplatesCmd.Flags().String("knowledge-base-id", "", "The identifier of the knowledge base.")
+		qconnect_searchMessageTemplatesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		qconnect_searchMessageTemplatesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		qconnect_searchMessageTemplatesCmd.Flags().String("search-expression", "", "The search expression for querying the message template.")
+		qconnect_searchMessageTemplatesCmd.MarkFlagRequired("knowledge-base-id")
+		qconnect_searchMessageTemplatesCmd.MarkFlagRequired("search-expression")
+	})
 	qconnectCmd.AddCommand(qconnect_searchMessageTemplatesCmd)
 }

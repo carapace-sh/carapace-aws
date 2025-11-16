@@ -12,11 +12,13 @@ var elasticbeanstalk_updateApplicationResourceLifecycleCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(elasticbeanstalk_updateApplicationResourceLifecycleCmd).Standalone()
+	carapace.Gen(elasticbeanstalk_updateApplicationResourceLifecycleCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(elasticbeanstalk_updateApplicationResourceLifecycleCmd).Standalone()
 
-	elasticbeanstalk_updateApplicationResourceLifecycleCmd.Flags().String("application-name", "", "The name of the application.")
-	elasticbeanstalk_updateApplicationResourceLifecycleCmd.Flags().String("resource-lifecycle-config", "", "The lifecycle configuration.")
-	elasticbeanstalk_updateApplicationResourceLifecycleCmd.MarkFlagRequired("application-name")
-	elasticbeanstalk_updateApplicationResourceLifecycleCmd.MarkFlagRequired("resource-lifecycle-config")
+		elasticbeanstalk_updateApplicationResourceLifecycleCmd.Flags().String("application-name", "", "The name of the application.")
+		elasticbeanstalk_updateApplicationResourceLifecycleCmd.Flags().String("resource-lifecycle-config", "", "The lifecycle configuration.")
+		elasticbeanstalk_updateApplicationResourceLifecycleCmd.MarkFlagRequired("application-name")
+		elasticbeanstalk_updateApplicationResourceLifecycleCmd.MarkFlagRequired("resource-lifecycle-config")
+	})
 	elasticbeanstalkCmd.AddCommand(elasticbeanstalk_updateApplicationResourceLifecycleCmd)
 }

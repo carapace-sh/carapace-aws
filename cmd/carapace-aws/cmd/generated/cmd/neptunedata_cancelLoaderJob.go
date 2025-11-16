@@ -12,9 +12,11 @@ var neptunedata_cancelLoaderJobCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(neptunedata_cancelLoaderJobCmd).Standalone()
+	carapace.Gen(neptunedata_cancelLoaderJobCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(neptunedata_cancelLoaderJobCmd).Standalone()
 
-	neptunedata_cancelLoaderJobCmd.Flags().String("load-id", "", "The ID of the load job to be deleted.")
-	neptunedata_cancelLoaderJobCmd.MarkFlagRequired("load-id")
+		neptunedata_cancelLoaderJobCmd.Flags().String("load-id", "", "The ID of the load job to be deleted.")
+		neptunedata_cancelLoaderJobCmd.MarkFlagRequired("load-id")
+	})
 	neptunedataCmd.AddCommand(neptunedata_cancelLoaderJobCmd)
 }

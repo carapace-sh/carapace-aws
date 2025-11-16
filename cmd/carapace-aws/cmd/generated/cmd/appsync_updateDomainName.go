@@ -12,10 +12,12 @@ var appsync_updateDomainNameCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appsync_updateDomainNameCmd).Standalone()
+	carapace.Gen(appsync_updateDomainNameCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appsync_updateDomainNameCmd).Standalone()
 
-	appsync_updateDomainNameCmd.Flags().String("description", "", "A description of the `DomainName`.")
-	appsync_updateDomainNameCmd.Flags().String("domain-name", "", "The domain name.")
-	appsync_updateDomainNameCmd.MarkFlagRequired("domain-name")
+		appsync_updateDomainNameCmd.Flags().String("description", "", "A description of the `DomainName`.")
+		appsync_updateDomainNameCmd.Flags().String("domain-name", "", "The domain name.")
+		appsync_updateDomainNameCmd.MarkFlagRequired("domain-name")
+	})
 	appsyncCmd.AddCommand(appsync_updateDomainNameCmd)
 }

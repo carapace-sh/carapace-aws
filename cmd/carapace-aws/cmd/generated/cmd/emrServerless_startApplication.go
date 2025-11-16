@@ -12,9 +12,11 @@ var emrServerless_startApplicationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(emrServerless_startApplicationCmd).Standalone()
+	carapace.Gen(emrServerless_startApplicationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(emrServerless_startApplicationCmd).Standalone()
 
-	emrServerless_startApplicationCmd.Flags().String("application-id", "", "The ID of the application to start.")
-	emrServerless_startApplicationCmd.MarkFlagRequired("application-id")
+		emrServerless_startApplicationCmd.Flags().String("application-id", "", "The ID of the application to start.")
+		emrServerless_startApplicationCmd.MarkFlagRequired("application-id")
+	})
 	emrServerlessCmd.AddCommand(emrServerless_startApplicationCmd)
 }

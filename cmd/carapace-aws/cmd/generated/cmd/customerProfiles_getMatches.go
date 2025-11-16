@@ -12,11 +12,13 @@ var customerProfiles_getMatchesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(customerProfiles_getMatchesCmd).Standalone()
+	carapace.Gen(customerProfiles_getMatchesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(customerProfiles_getMatchesCmd).Standalone()
 
-	customerProfiles_getMatchesCmd.Flags().String("domain-name", "", "The unique name of the domain.")
-	customerProfiles_getMatchesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
-	customerProfiles_getMatchesCmd.Flags().String("next-token", "", "The token for the next set of results.")
-	customerProfiles_getMatchesCmd.MarkFlagRequired("domain-name")
+		customerProfiles_getMatchesCmd.Flags().String("domain-name", "", "The unique name of the domain.")
+		customerProfiles_getMatchesCmd.Flags().String("max-results", "", "The maximum number of results to return per page.")
+		customerProfiles_getMatchesCmd.Flags().String("next-token", "", "The token for the next set of results.")
+		customerProfiles_getMatchesCmd.MarkFlagRequired("domain-name")
+	})
 	customerProfilesCmd.AddCommand(customerProfiles_getMatchesCmd)
 }

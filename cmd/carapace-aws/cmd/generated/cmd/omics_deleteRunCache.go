@@ -12,9 +12,11 @@ var omics_deleteRunCacheCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(omics_deleteRunCacheCmd).Standalone()
+	carapace.Gen(omics_deleteRunCacheCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(omics_deleteRunCacheCmd).Standalone()
 
-	omics_deleteRunCacheCmd.Flags().String("id", "", "Run cache identifier for the cache you want to delete.")
-	omics_deleteRunCacheCmd.MarkFlagRequired("id")
+		omics_deleteRunCacheCmd.Flags().String("id", "", "Run cache identifier for the cache you want to delete.")
+		omics_deleteRunCacheCmd.MarkFlagRequired("id")
+	})
 	omicsCmd.AddCommand(omics_deleteRunCacheCmd)
 }

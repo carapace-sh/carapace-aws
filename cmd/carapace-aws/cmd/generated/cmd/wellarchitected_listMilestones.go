@@ -12,11 +12,13 @@ var wellarchitected_listMilestonesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(wellarchitected_listMilestonesCmd).Standalone()
+	carapace.Gen(wellarchitected_listMilestonesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(wellarchitected_listMilestonesCmd).Standalone()
 
-	wellarchitected_listMilestonesCmd.Flags().String("max-results", "", "")
-	wellarchitected_listMilestonesCmd.Flags().String("next-token", "", "")
-	wellarchitected_listMilestonesCmd.Flags().String("workload-id", "", "")
-	wellarchitected_listMilestonesCmd.MarkFlagRequired("workload-id")
+		wellarchitected_listMilestonesCmd.Flags().String("max-results", "", "")
+		wellarchitected_listMilestonesCmd.Flags().String("next-token", "", "")
+		wellarchitected_listMilestonesCmd.Flags().String("workload-id", "", "")
+		wellarchitected_listMilestonesCmd.MarkFlagRequired("workload-id")
+	})
 	wellarchitectedCmd.AddCommand(wellarchitected_listMilestonesCmd)
 }

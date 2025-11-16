@@ -12,13 +12,15 @@ var rds_modifyGlobalClusterCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(rds_modifyGlobalClusterCmd).Standalone()
+	carapace.Gen(rds_modifyGlobalClusterCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(rds_modifyGlobalClusterCmd).Standalone()
 
-	rds_modifyGlobalClusterCmd.Flags().String("allow-major-version-upgrade", "", "Specifies whether to allow major version upgrades.")
-	rds_modifyGlobalClusterCmd.Flags().String("deletion-protection", "", "Specifies whether to enable deletion protection for the global database cluster.")
-	rds_modifyGlobalClusterCmd.Flags().String("engine-version", "", "The version number of the database engine to which you want to upgrade.")
-	rds_modifyGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier for the global cluster to modify.")
-	rds_modifyGlobalClusterCmd.Flags().String("new-global-cluster-identifier", "", "The new cluster identifier for the global database cluster.")
-	rds_modifyGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+		rds_modifyGlobalClusterCmd.Flags().String("allow-major-version-upgrade", "", "Specifies whether to allow major version upgrades.")
+		rds_modifyGlobalClusterCmd.Flags().String("deletion-protection", "", "Specifies whether to enable deletion protection for the global database cluster.")
+		rds_modifyGlobalClusterCmd.Flags().String("engine-version", "", "The version number of the database engine to which you want to upgrade.")
+		rds_modifyGlobalClusterCmd.Flags().String("global-cluster-identifier", "", "The cluster identifier for the global cluster to modify.")
+		rds_modifyGlobalClusterCmd.Flags().String("new-global-cluster-identifier", "", "The new cluster identifier for the global database cluster.")
+		rds_modifyGlobalClusterCmd.MarkFlagRequired("global-cluster-identifier")
+	})
 	rdsCmd.AddCommand(rds_modifyGlobalClusterCmd)
 }

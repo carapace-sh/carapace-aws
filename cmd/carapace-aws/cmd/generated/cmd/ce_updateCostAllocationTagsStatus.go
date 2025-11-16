@@ -12,9 +12,11 @@ var ce_updateCostAllocationTagsStatusCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ce_updateCostAllocationTagsStatusCmd).Standalone()
+	carapace.Gen(ce_updateCostAllocationTagsStatusCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ce_updateCostAllocationTagsStatusCmd).Standalone()
 
-	ce_updateCostAllocationTagsStatusCmd.Flags().String("cost-allocation-tags-status", "", "The list of `CostAllocationTagStatusEntry` objects that are used to update cost allocation tags status for this request.")
-	ce_updateCostAllocationTagsStatusCmd.MarkFlagRequired("cost-allocation-tags-status")
+		ce_updateCostAllocationTagsStatusCmd.Flags().String("cost-allocation-tags-status", "", "The list of `CostAllocationTagStatusEntry` objects that are used to update cost allocation tags status for this request.")
+		ce_updateCostAllocationTagsStatusCmd.MarkFlagRequired("cost-allocation-tags-status")
+	})
 	ceCmd.AddCommand(ce_updateCostAllocationTagsStatusCmd)
 }

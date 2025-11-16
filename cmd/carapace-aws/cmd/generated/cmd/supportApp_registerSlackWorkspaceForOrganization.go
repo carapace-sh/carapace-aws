@@ -12,9 +12,11 @@ var supportApp_registerSlackWorkspaceForOrganizationCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(supportApp_registerSlackWorkspaceForOrganizationCmd).Standalone()
+	carapace.Gen(supportApp_registerSlackWorkspaceForOrganizationCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(supportApp_registerSlackWorkspaceForOrganizationCmd).Standalone()
 
-	supportApp_registerSlackWorkspaceForOrganizationCmd.Flags().String("team-id", "", "The team ID in Slack.")
-	supportApp_registerSlackWorkspaceForOrganizationCmd.MarkFlagRequired("team-id")
+		supportApp_registerSlackWorkspaceForOrganizationCmd.Flags().String("team-id", "", "The team ID in Slack.")
+		supportApp_registerSlackWorkspaceForOrganizationCmd.MarkFlagRequired("team-id")
+	})
 	supportAppCmd.AddCommand(supportApp_registerSlackWorkspaceForOrganizationCmd)
 }

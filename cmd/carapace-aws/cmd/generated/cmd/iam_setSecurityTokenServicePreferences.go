@@ -12,9 +12,11 @@ var iam_setSecurityTokenServicePreferencesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iam_setSecurityTokenServicePreferencesCmd).Standalone()
+	carapace.Gen(iam_setSecurityTokenServicePreferencesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iam_setSecurityTokenServicePreferencesCmd).Standalone()
 
-	iam_setSecurityTokenServicePreferencesCmd.Flags().String("global-endpoint-token-version", "", "The version of the global endpoint token.")
-	iam_setSecurityTokenServicePreferencesCmd.MarkFlagRequired("global-endpoint-token-version")
+		iam_setSecurityTokenServicePreferencesCmd.Flags().String("global-endpoint-token-version", "", "The version of the global endpoint token.")
+		iam_setSecurityTokenServicePreferencesCmd.MarkFlagRequired("global-endpoint-token-version")
+	})
 	iamCmd.AddCommand(iam_setSecurityTokenServicePreferencesCmd)
 }

@@ -12,9 +12,11 @@ var appstream_describeThemeForStackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_describeThemeForStackCmd).Standalone()
+	carapace.Gen(appstream_describeThemeForStackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_describeThemeForStackCmd).Standalone()
 
-	appstream_describeThemeForStackCmd.Flags().String("stack-name", "", "The name of the stack for the theme.")
-	appstream_describeThemeForStackCmd.MarkFlagRequired("stack-name")
+		appstream_describeThemeForStackCmd.Flags().String("stack-name", "", "The name of the stack for the theme.")
+		appstream_describeThemeForStackCmd.MarkFlagRequired("stack-name")
+	})
 	appstreamCmd.AddCommand(appstream_describeThemeForStackCmd)
 }

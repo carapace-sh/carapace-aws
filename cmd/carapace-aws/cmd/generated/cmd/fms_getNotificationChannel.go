@@ -12,7 +12,9 @@ var fms_getNotificationChannelCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(fms_getNotificationChannelCmd).Standalone()
+	carapace.Gen(fms_getNotificationChannelCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(fms_getNotificationChannelCmd).Standalone()
 
+	})
 	fmsCmd.AddCommand(fms_getNotificationChannelCmd)
 }

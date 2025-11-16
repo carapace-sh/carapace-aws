@@ -12,7 +12,9 @@ var cloudhsm_listAvailableZonesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(cloudhsm_listAvailableZonesCmd).Standalone()
+	carapace.Gen(cloudhsm_listAvailableZonesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(cloudhsm_listAvailableZonesCmd).Standalone()
 
+	})
 	cloudhsmCmd.AddCommand(cloudhsm_listAvailableZonesCmd)
 }

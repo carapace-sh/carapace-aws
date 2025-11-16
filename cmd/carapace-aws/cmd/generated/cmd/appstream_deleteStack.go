@@ -12,9 +12,11 @@ var appstream_deleteStackCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(appstream_deleteStackCmd).Standalone()
+	carapace.Gen(appstream_deleteStackCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(appstream_deleteStackCmd).Standalone()
 
-	appstream_deleteStackCmd.Flags().String("name", "", "The name of the stack.")
-	appstream_deleteStackCmd.MarkFlagRequired("name")
+		appstream_deleteStackCmd.Flags().String("name", "", "The name of the stack.")
+		appstream_deleteStackCmd.MarkFlagRequired("name")
+	})
 	appstreamCmd.AddCommand(appstream_deleteStackCmd)
 }

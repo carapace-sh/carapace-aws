@@ -12,9 +12,11 @@ var securityIr_getMembershipCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(securityIr_getMembershipCmd).Standalone()
+	carapace.Gen(securityIr_getMembershipCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(securityIr_getMembershipCmd).Standalone()
 
-	securityIr_getMembershipCmd.Flags().String("membership-id", "", "Required element for GetMembership to identify the membership ID to query.")
-	securityIr_getMembershipCmd.MarkFlagRequired("membership-id")
+		securityIr_getMembershipCmd.Flags().String("membership-id", "", "Required element for GetMembership to identify the membership ID to query.")
+		securityIr_getMembershipCmd.MarkFlagRequired("membership-id")
+	})
 	securityIrCmd.AddCommand(securityIr_getMembershipCmd)
 }

@@ -12,11 +12,13 @@ var kafka_untagResourceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(kafka_untagResourceCmd).Standalone()
+	carapace.Gen(kafka_untagResourceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(kafka_untagResourceCmd).Standalone()
 
-	kafka_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.")
-	kafka_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys must be unique for a given cluster.")
-	kafka_untagResourceCmd.MarkFlagRequired("resource-arn")
-	kafka_untagResourceCmd.MarkFlagRequired("tag-keys")
+		kafka_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.")
+		kafka_untagResourceCmd.Flags().String("tag-keys", "", "Tag keys must be unique for a given cluster.")
+		kafka_untagResourceCmd.MarkFlagRequired("resource-arn")
+		kafka_untagResourceCmd.MarkFlagRequired("tag-keys")
+	})
 	kafkaCmd.AddCommand(kafka_untagResourceCmd)
 }

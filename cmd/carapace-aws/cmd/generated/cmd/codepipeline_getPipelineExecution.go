@@ -12,11 +12,13 @@ var codepipeline_getPipelineExecutionCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(codepipeline_getPipelineExecutionCmd).Standalone()
+	carapace.Gen(codepipeline_getPipelineExecutionCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(codepipeline_getPipelineExecutionCmd).Standalone()
 
-	codepipeline_getPipelineExecutionCmd.Flags().String("pipeline-execution-id", "", "The ID of the pipeline execution about which you want to get execution details.")
-	codepipeline_getPipelineExecutionCmd.Flags().String("pipeline-name", "", "The name of the pipeline about which you want to get execution details.")
-	codepipeline_getPipelineExecutionCmd.MarkFlagRequired("pipeline-execution-id")
-	codepipeline_getPipelineExecutionCmd.MarkFlagRequired("pipeline-name")
+		codepipeline_getPipelineExecutionCmd.Flags().String("pipeline-execution-id", "", "The ID of the pipeline execution about which you want to get execution details.")
+		codepipeline_getPipelineExecutionCmd.Flags().String("pipeline-name", "", "The name of the pipeline about which you want to get execution details.")
+		codepipeline_getPipelineExecutionCmd.MarkFlagRequired("pipeline-execution-id")
+		codepipeline_getPipelineExecutionCmd.MarkFlagRequired("pipeline-name")
+	})
 	codepipelineCmd.AddCommand(codepipeline_getPipelineExecutionCmd)
 }

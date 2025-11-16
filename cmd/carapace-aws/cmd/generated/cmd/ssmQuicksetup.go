@@ -12,7 +12,9 @@ var ssmQuicksetupCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ssmQuicksetupCmd).Standalone()
+	carapace.Gen(ssmQuicksetupCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ssmQuicksetupCmd).Standalone()
 
+	})
 	rootCmd.AddCommand(ssmQuicksetupCmd)
 }

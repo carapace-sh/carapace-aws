@@ -12,9 +12,11 @@ var sqs_cancelMessageMoveTaskCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(sqs_cancelMessageMoveTaskCmd).Standalone()
+	carapace.Gen(sqs_cancelMessageMoveTaskCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(sqs_cancelMessageMoveTaskCmd).Standalone()
 
-	sqs_cancelMessageMoveTaskCmd.Flags().String("task-handle", "", "An identifier associated with a message movement task.")
-	sqs_cancelMessageMoveTaskCmd.MarkFlagRequired("task-handle")
+		sqs_cancelMessageMoveTaskCmd.Flags().String("task-handle", "", "An identifier associated with a message movement task.")
+		sqs_cancelMessageMoveTaskCmd.MarkFlagRequired("task-handle")
+	})
 	sqsCmd.AddCommand(sqs_cancelMessageMoveTaskCmd)
 }

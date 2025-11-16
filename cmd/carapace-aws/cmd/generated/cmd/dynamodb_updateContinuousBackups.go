@@ -12,11 +12,13 @@ var dynamodb_updateContinuousBackupsCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(dynamodb_updateContinuousBackupsCmd).Standalone()
+	carapace.Gen(dynamodb_updateContinuousBackupsCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(dynamodb_updateContinuousBackupsCmd).Standalone()
 
-	dynamodb_updateContinuousBackupsCmd.Flags().String("point-in-time-recovery-specification", "", "Represents the settings used to enable point in time recovery.")
-	dynamodb_updateContinuousBackupsCmd.Flags().String("table-name", "", "The name of the table.")
-	dynamodb_updateContinuousBackupsCmd.MarkFlagRequired("point-in-time-recovery-specification")
-	dynamodb_updateContinuousBackupsCmd.MarkFlagRequired("table-name")
+		dynamodb_updateContinuousBackupsCmd.Flags().String("point-in-time-recovery-specification", "", "Represents the settings used to enable point in time recovery.")
+		dynamodb_updateContinuousBackupsCmd.Flags().String("table-name", "", "The name of the table.")
+		dynamodb_updateContinuousBackupsCmd.MarkFlagRequired("point-in-time-recovery-specification")
+		dynamodb_updateContinuousBackupsCmd.MarkFlagRequired("table-name")
+	})
 	dynamodbCmd.AddCommand(dynamodb_updateContinuousBackupsCmd)
 }

@@ -12,11 +12,13 @@ var opensearch_associatePackagesCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(opensearch_associatePackagesCmd).Standalone()
+	carapace.Gen(opensearch_associatePackagesCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(opensearch_associatePackagesCmd).Standalone()
 
-	opensearch_associatePackagesCmd.Flags().String("domain-name", "", "")
-	opensearch_associatePackagesCmd.Flags().String("package-list", "", "A list of packages and their prerequisites to be associated with a domain.")
-	opensearch_associatePackagesCmd.MarkFlagRequired("domain-name")
-	opensearch_associatePackagesCmd.MarkFlagRequired("package-list")
+		opensearch_associatePackagesCmd.Flags().String("domain-name", "", "")
+		opensearch_associatePackagesCmd.Flags().String("package-list", "", "A list of packages and their prerequisites to be associated with a domain.")
+		opensearch_associatePackagesCmd.MarkFlagRequired("domain-name")
+		opensearch_associatePackagesCmd.MarkFlagRequired("package-list")
+	})
 	opensearchCmd.AddCommand(opensearch_associatePackagesCmd)
 }

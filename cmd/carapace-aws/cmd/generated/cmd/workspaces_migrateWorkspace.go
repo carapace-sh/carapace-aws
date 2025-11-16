@@ -12,11 +12,13 @@ var workspaces_migrateWorkspaceCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(workspaces_migrateWorkspaceCmd).Standalone()
+	carapace.Gen(workspaces_migrateWorkspaceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(workspaces_migrateWorkspaceCmd).Standalone()
 
-	workspaces_migrateWorkspaceCmd.Flags().String("bundle-id", "", "The identifier of the target bundle type to migrate the WorkSpace to.")
-	workspaces_migrateWorkspaceCmd.Flags().String("source-workspace-id", "", "The identifier of the WorkSpace to migrate from.")
-	workspaces_migrateWorkspaceCmd.MarkFlagRequired("bundle-id")
-	workspaces_migrateWorkspaceCmd.MarkFlagRequired("source-workspace-id")
+		workspaces_migrateWorkspaceCmd.Flags().String("bundle-id", "", "The identifier of the target bundle type to migrate the WorkSpace to.")
+		workspaces_migrateWorkspaceCmd.Flags().String("source-workspace-id", "", "The identifier of the WorkSpace to migrate from.")
+		workspaces_migrateWorkspaceCmd.MarkFlagRequired("bundle-id")
+		workspaces_migrateWorkspaceCmd.MarkFlagRequired("source-workspace-id")
+	})
 	workspacesCmd.AddCommand(workspaces_migrateWorkspaceCmd)
 }

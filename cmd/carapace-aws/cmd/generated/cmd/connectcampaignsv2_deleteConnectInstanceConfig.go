@@ -12,10 +12,12 @@ var connectcampaignsv2_deleteConnectInstanceConfigCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(connectcampaignsv2_deleteConnectInstanceConfigCmd).Standalone()
+	carapace.Gen(connectcampaignsv2_deleteConnectInstanceConfigCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(connectcampaignsv2_deleteConnectInstanceConfigCmd).Standalone()
 
-	connectcampaignsv2_deleteConnectInstanceConfigCmd.Flags().String("campaign-deletion-policy", "", "")
-	connectcampaignsv2_deleteConnectInstanceConfigCmd.Flags().String("connect-instance-id", "", "")
-	connectcampaignsv2_deleteConnectInstanceConfigCmd.MarkFlagRequired("connect-instance-id")
+		connectcampaignsv2_deleteConnectInstanceConfigCmd.Flags().String("campaign-deletion-policy", "", "")
+		connectcampaignsv2_deleteConnectInstanceConfigCmd.Flags().String("connect-instance-id", "", "")
+		connectcampaignsv2_deleteConnectInstanceConfigCmd.MarkFlagRequired("connect-instance-id")
+	})
 	connectcampaignsv2Cmd.AddCommand(connectcampaignsv2_deleteConnectInstanceConfigCmd)
 }

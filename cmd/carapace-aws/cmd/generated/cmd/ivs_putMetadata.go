@@ -12,11 +12,13 @@ var ivs_putMetadataCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivs_putMetadataCmd).Standalone()
+	carapace.Gen(ivs_putMetadataCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivs_putMetadataCmd).Standalone()
 
-	ivs_putMetadataCmd.Flags().String("channel-arn", "", "ARN of the channel into which metadata is inserted.")
-	ivs_putMetadataCmd.Flags().String("metadata", "", "Metadata to insert into the stream.")
-	ivs_putMetadataCmd.MarkFlagRequired("channel-arn")
-	ivs_putMetadataCmd.MarkFlagRequired("metadata")
+		ivs_putMetadataCmd.Flags().String("channel-arn", "", "ARN of the channel into which metadata is inserted.")
+		ivs_putMetadataCmd.Flags().String("metadata", "", "Metadata to insert into the stream.")
+		ivs_putMetadataCmd.MarkFlagRequired("channel-arn")
+		ivs_putMetadataCmd.MarkFlagRequired("metadata")
+	})
 	ivsCmd.AddCommand(ivs_putMetadataCmd)
 }

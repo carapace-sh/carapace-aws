@@ -12,9 +12,11 @@ var storagegateway_listGatewaysCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(storagegateway_listGatewaysCmd).Standalone()
+	carapace.Gen(storagegateway_listGatewaysCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(storagegateway_listGatewaysCmd).Standalone()
 
-	storagegateway_listGatewaysCmd.Flags().String("limit", "", "Specifies that the list of gateways returned be limited to the specified number of items.")
-	storagegateway_listGatewaysCmd.Flags().String("marker", "", "An opaque string that indicates the position at which to begin the returned list of gateways.")
+		storagegateway_listGatewaysCmd.Flags().String("limit", "", "Specifies that the list of gateways returned be limited to the specified number of items.")
+		storagegateway_listGatewaysCmd.Flags().String("marker", "", "An opaque string that indicates the position at which to begin the returned list of gateways.")
+	})
 	storagegatewayCmd.AddCommand(storagegateway_listGatewaysCmd)
 }

@@ -12,9 +12,11 @@ var iot_listCertificateProvidersCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(iot_listCertificateProvidersCmd).Standalone()
+	carapace.Gen(iot_listCertificateProvidersCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(iot_listCertificateProvidersCmd).Standalone()
 
-	iot_listCertificateProvidersCmd.Flags().String("ascending-order", "", "Returns the list of certificate providers in ascending alphabetical order.")
-	iot_listCertificateProvidersCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` if there are no more results.")
+		iot_listCertificateProvidersCmd.Flags().String("ascending-order", "", "Returns the list of certificate providers in ascending alphabetical order.")
+		iot_listCertificateProvidersCmd.Flags().String("next-token", "", "The token for the next set of results, or `null` if there are no more results.")
+	})
 	iotCmd.AddCommand(iot_listCertificateProvidersCmd)
 }

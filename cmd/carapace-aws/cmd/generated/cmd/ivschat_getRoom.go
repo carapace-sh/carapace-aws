@@ -12,9 +12,11 @@ var ivschat_getRoomCmd = &cobra.Command{
 }
 
 func init() {
-	carapace.Gen(ivschat_getRoomCmd).Standalone()
+	carapace.Gen(ivschat_getRoomCmd).PreRun(func(cmd *cobra.Command, args []string) {
+		carapace.Gen(ivschat_getRoomCmd).Standalone()
 
-	ivschat_getRoomCmd.Flags().String("identifier", "", "Identifier of the room for which the configuration is to be retrieved.")
-	ivschat_getRoomCmd.MarkFlagRequired("identifier")
+		ivschat_getRoomCmd.Flags().String("identifier", "", "Identifier of the room for which the configuration is to be retrieved.")
+		ivschat_getRoomCmd.MarkFlagRequired("identifier")
+	})
 	ivschatCmd.AddCommand(ivschat_getRoomCmd)
 }
