@@ -6,7 +6,7 @@ require (
 	github.com/carapace-sh/carapace v1.10.2
 	github.com/carapace-sh/carapace-spec v1.3.5
 	github.com/spf13/cobra v1.10.1
-	github.com/spf13/pflag v1.0.9
+	github.com/spf13/pflag v1.0.10
 )
 
 require (
