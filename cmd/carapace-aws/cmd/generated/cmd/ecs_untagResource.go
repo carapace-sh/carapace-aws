@@ -1,0 +1,22 @@
+package cmd
+
+import (
+	"github.com/carapace-sh/carapace"
+	"github.com/spf13/cobra"
+)
+
+var ecs_untagResourceCmd = &cobra.Command{
+	Use:   "untag-resource",
+	Short: "Deletes specified tags from a resource.",
+	Run:   func(cmd *cobra.Command, args []string) {},
+}
+
+func init() {
+	carapace.Gen(ecs_untagResourceCmd).Standalone()
+
+	ecs_untagResourceCmd.Flags().String("resource-arn", "", "The Amazon Resource Name (ARN) of the resource to delete tags from.")
+	ecs_untagResourceCmd.Flags().String("tag-keys", "", "The keys of the tags to be removed.")
+	ecs_untagResourceCmd.MarkFlagRequired("resource-arn")
+	ecs_untagResourceCmd.MarkFlagRequired("tag-keys")
+	ecsCmd.AddCommand(ecs_untagResourceCmd)
+}

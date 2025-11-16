@@ -1,0 +1,22 @@
+package cmd
+
+import (
+	"github.com/carapace-sh/carapace"
+	"github.com/spf13/cobra"
+)
+
+var rds_describePendingMaintenanceActionsCmd = &cobra.Command{
+	Use:   "describe-pending-maintenance-actions",
+	Short: "Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.",
+	Run:   func(cmd *cobra.Command, args []string) {},
+}
+
+func init() {
+	carapace.Gen(rds_describePendingMaintenanceActionsCmd).Standalone()
+
+	rds_describePendingMaintenanceActionsCmd.Flags().String("filters", "", "A filter that specifies one or more resources to return pending maintenance actions for.")
+	rds_describePendingMaintenanceActionsCmd.Flags().String("marker", "", "An optional pagination token provided by a previous `DescribePendingMaintenanceActions` request.")
+	rds_describePendingMaintenanceActionsCmd.Flags().String("max-records", "", "The maximum number of records to include in the response.")
+	rds_describePendingMaintenanceActionsCmd.Flags().String("resource-identifier", "", "The ARN of a resource to return pending maintenance actions for.")
+	rdsCmd.AddCommand(rds_describePendingMaintenanceActionsCmd)
+}

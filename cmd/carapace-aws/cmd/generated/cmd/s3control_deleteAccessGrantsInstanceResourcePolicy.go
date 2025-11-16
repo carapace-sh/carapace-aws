@@ -1,0 +1,20 @@
+package cmd
+
+import (
+	"github.com/carapace-sh/carapace"
+	"github.com/spf13/cobra"
+)
+
+var s3control_deleteAccessGrantsInstanceResourcePolicyCmd = &cobra.Command{
+	Use:   "delete-access-grants-instance-resource-policy",
+	Short: "Deletes the resource policy of the S3 Access Grants instance.",
+	Run:   func(cmd *cobra.Command, args []string) {},
+}
+
+func init() {
+	carapace.Gen(s3control_deleteAccessGrantsInstanceResourcePolicyCmd).Standalone()
+
+	s3control_deleteAccessGrantsInstanceResourcePolicyCmd.Flags().String("account-id", "", "The Amazon Web Services account ID of the S3 Access Grants instance.")
+	s3control_deleteAccessGrantsInstanceResourcePolicyCmd.MarkFlagRequired("account-id")
+	s3controlCmd.AddCommand(s3control_deleteAccessGrantsInstanceResourcePolicyCmd)
+}

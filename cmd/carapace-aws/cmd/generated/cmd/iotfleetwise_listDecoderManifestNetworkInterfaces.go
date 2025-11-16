@@ -1,0 +1,22 @@
+package cmd
+
+import (
+	"github.com/carapace-sh/carapace"
+	"github.com/spf13/cobra"
+)
+
+var iotfleetwise_listDecoderManifestNetworkInterfacesCmd = &cobra.Command{
+	Use:   "list-decoder-manifest-network-interfaces",
+	Short: "Lists the network interfaces specified in a decoder manifest.",
+	Run:   func(cmd *cobra.Command, args []string) {},
+}
+
+func init() {
+	carapace.Gen(iotfleetwise_listDecoderManifestNetworkInterfacesCmd).Standalone()
+
+	iotfleetwise_listDecoderManifestNetworkInterfacesCmd.Flags().String("max-results", "", "The maximum number of items to return, between 1 and 100, inclusive.")
+	iotfleetwise_listDecoderManifestNetworkInterfacesCmd.Flags().String("name", "", "The name of the decoder manifest to list information about.")
+	iotfleetwise_listDecoderManifestNetworkInterfacesCmd.Flags().String("next-token", "", "A pagination token for the next set of results.")
+	iotfleetwise_listDecoderManifestNetworkInterfacesCmd.MarkFlagRequired("name")
+	iotfleetwiseCmd.AddCommand(iotfleetwise_listDecoderManifestNetworkInterfacesCmd)
+}

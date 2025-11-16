@@ -1,0 +1,18 @@
+package cmd
+
+import (
+	"github.com/carapace-sh/carapace"
+	"github.com/spf13/cobra"
+)
+
+var acmCmd = &cobra.Command{
+	Use:   "acm",
+	Short: "Certificate Manager\n\nYou can use Certificate Manager (ACM) to manage SSL/TLS certificates for your Amazon Web Services-based websites and applications.",
+	Run:   func(cmd *cobra.Command, args []string) {},
+}
+
+func init() {
+	carapace.Gen(acmCmd).Standalone()
+
+	rootCmd.AddCommand(acmCmd)
+}

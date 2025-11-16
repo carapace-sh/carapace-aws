@@ -1,0 +1,20 @@
+package cmd
+
+import (
+	"github.com/carapace-sh/carapace"
+	"github.com/spf13/cobra"
+)
+
+var migrationHubRefactorSpaces_getEnvironmentCmd = &cobra.Command{
+	Use:   "get-environment",
+	Short: "Gets an Amazon Web Services Migration Hub Refactor Spaces environment.",
+	Run:   func(cmd *cobra.Command, args []string) {},
+}
+
+func init() {
+	carapace.Gen(migrationHubRefactorSpaces_getEnvironmentCmd).Standalone()
+
+	migrationHubRefactorSpaces_getEnvironmentCmd.Flags().String("environment-identifier", "", "The ID of the environment.")
+	migrationHubRefactorSpaces_getEnvironmentCmd.MarkFlagRequired("environment-identifier")
+	migrationHubRefactorSpacesCmd.AddCommand(migrationHubRefactorSpaces_getEnvironmentCmd)
+}
