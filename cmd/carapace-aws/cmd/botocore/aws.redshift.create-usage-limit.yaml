@@ -1,0 +1,27 @@
+name: create-usage-limit
+description: Creates a usage limit for a specified Amazon Redshift feature on a cluster.
+flags:
+    --amount=!: The limit amount.
+    --breach-action=: The action that Amazon Redshift takes when the limit is reached.
+    --cluster-identifier=!: The identifier of the cluster that you want to limit usage.
+    --feature-type=!: The Amazon Redshift feature that you want to limit.
+    --limit-type=!: The type of limit.
+    --period=: The time period that the amount applies to.
+    --tags=: A list of tag instances.
+completion:
+    flag:
+        breach-action:
+            - log
+            - emit-metric
+            - disable
+        feature-type:
+            - spectrum
+            - concurrency-scaling
+            - cross-region-datasharing
+        limit-type:
+            - time
+            - data-scanned
+        period:
+            - daily
+            - weekly
+            - monthly

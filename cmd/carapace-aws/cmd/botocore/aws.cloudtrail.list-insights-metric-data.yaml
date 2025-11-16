@@ -1,0 +1,21 @@
+name: list-insights-metric-data
+description: Returns Insights metrics data for trails that have enabled Insights.
+flags:
+    --data-type=: Type of data points to return.
+    --end-time=: Specifies, in UTC, the end time for time-series data.
+    --error-code=: Conditionally required if the `InsightType` parameter is set to `ApiErrorRateInsight`.
+    --event-name=!: The name of the event, typically the Amazon Web Services API on which unusual levels of activity were recorded.
+    --event-source=!: The Amazon Web Services service to which the request was made, such as `iam.amazonaws.com` or `s3.amazonaws.com`.
+    --insight-type=!: The type of CloudTrail Insights event, which is either `ApiCallRateInsight` or `ApiErrorRateInsight`.
+    --max-results=: The maximum number of data points to return.
+    --next-token=: Returned if all datapoints can't be returned in a single call.
+    --period=: Granularity of data to retrieve, in seconds.
+    --start-time=: Specifies, in UTC, the start time for time-series data.
+completion:
+    flag:
+        data-type:
+            - FillWithZeros
+            - NonZeroData
+        insight-type:
+            - ApiCallRateInsight
+            - ApiErrorRateInsight

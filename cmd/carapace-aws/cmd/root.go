@@ -1,16 +1,21 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/carapace-sh/carapace"
+	"github.com/carapace-sh/carapace-aws/cmd/carapace-aws/cmd/botocore"
 	"github.com/carapace-sh/carapace-aws/cmd/carapace-aws/cmd/common"
-	"github.com/carapace-sh/carapace-aws/cmd/carapace-aws/cmd/generated/cmd"
 	spec "github.com/carapace-sh/carapace-spec"
 	"github.com/carapace-sh/carapace/pkg/style"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
 
-var rootCmd = cmd.RootCmd()
+var rootCmd = &cobra.Command{
+	Use:   "aws",
+	Short: "An enriched aws completer",
+}
 
 func Execute() error {
 	return rootCmd.Execute()
@@ -46,12 +51,34 @@ func init() {
 		"region":  spec.ActionMacro("$carapace.tools.aws.Regions"),
 	})
 
-	carapace.Gen(rootCmd).PreInvoke(func(cmd *cobra.Command, flag *pflag.Flag, action carapace.Action) carapace.Action {
-		if flag != nil && cmd != rootCmd {
-			return common.ActionBridgeAwsCompleter()
+	for name, description := range botocore.Services() {
+		serviceCmd := &cobra.Command{
+			Use:   name,
+			Short: description,
+			Run:   func(cmd *cobra.Command, args []string) {},
 		}
-		return action
-	})
+		rootCmd.AddCommand(serviceCmd)
+		carapace.Gen(serviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
+			for name := range botocore.Operations(cmd.Use) {
+				botoCommand, err := botocore.Get(fmt.Sprintf("aws.%s.%s.yaml", serviceCmd.Use, name))
+				if err != nil {
+					carapace.LOG.Println(err.Error()) // TODO handle error
+					return
+				}
+				operationCmd := botoCommand.ToCobra()
+				serviceCmd.AddCommand(operationCmd)
+
+				carapace.Gen(operationCmd).PreInvoke(func(cmd *cobra.Command, flag *pflag.Flag, action carapace.Action) carapace.Action {
+					if flag != nil && flag.Value.Type() == "string" {
+						if _, ok := botoCommand.Completion.Flag[flag.Name]; !ok {
+							return common.ActionBridgeAwsCompleter()
+						}
+					}
+					return action
+				})
+			}
+		})
+	}
 
 	for _, extension := range []string{
 		"apptest",

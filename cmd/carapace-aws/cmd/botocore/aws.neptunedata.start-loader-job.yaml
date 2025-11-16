@@ -1,0 +1,74 @@
+name: start-loader-job
+description: Starts a Neptune bulk loader job to load data from an Amazon S3 bucket into a Neptune DB instance.
+flags:
+    --dependencies=: This is an optional parameter that can make a queued load request contingent on the successful completion of one or more previous jobs in the queue.
+    --fail-on-error: '**`failOnError`**   –   A flag to toggle a complete stop on an error.'
+    --format=!: The format of the data.
+    --iam-role-arn=!: The Amazon Resource Name (ARN) for an IAM role to be assumed by the Neptune DB instance for access to the S3 bucket.
+    --mode=: The load job mode.
+    --no-fail-on-error&: '**`failOnError`**   –   A flag to toggle a complete stop on an error.'
+    --no-queue-request&: This is an optional flag parameter that indicates whether the load request can be queued up or not.
+    --no-update-single-cardinality-properties&: '`updateSingleCardinalityProperties` is an optional parameter that controls how the bulk loader treats a new value for single-cardinality vertex or edge properties.'
+    --no-user-provided-edge-ids&: This parameter is required only when loading openCypher data that contains relationship IDs.
+    --parallelism=: The optional `parallelism` parameter can be set to reduce the number of threads used by the bulk load process.
+    --parser-configuration=: '**`parserConfiguration`**   –   An optional object with additional parser configuration values.'
+    --queue-request: This is an optional flag parameter that indicates whether the load request can be queued up or not.
+    --s3-bucket-region=!: The Amazon region of the S3 bucket.
+    --source=!: The `source` parameter accepts an S3 URI that identifies a single file, multiple files, a folder, or multiple folders.
+    --update-single-cardinality-properties: '`updateSingleCardinalityProperties` is an optional parameter that controls how the bulk loader treats a new value for single-cardinality vertex or edge properties.'
+    --user-provided-edge-ids: This parameter is required only when loading openCypher data that contains relationship IDs.
+completion:
+    flag:
+        format:
+            - csv
+            - opencypher
+            - ntriples
+            - nquads
+            - rdfxml
+            - turtle
+        mode:
+            - RESUME
+            - NEW
+            - AUTO
+        parallelism:
+            - LOW
+            - MEDIUM
+            - HIGH
+            - OVERSUBSCRIBE
+        s3-bucket-region:
+            - us-east-1
+            - us-east-2
+            - us-west-1
+            - us-west-2
+            - ca-central-1
+            - sa-east-1
+            - eu-north-1
+            - eu-west-1
+            - eu-west-2
+            - eu-west-3
+            - eu-central-1
+            - me-south-1
+            - af-south-1
+            - ap-east-1
+            - ap-northeast-1
+            - ap-northeast-2
+            - ap-southeast-1
+            - ap-southeast-2
+            - ap-south-1
+            - cn-north-1
+            - cn-northwest-1
+            - us-gov-west-1
+            - us-gov-east-1
+            - ca-west-1
+            - eu-south-2
+            - il-central-1
+            - me-central-1
+            - ap-northeast-3
+            - ap-southeast-3
+            - ap-southeast-4
+            - ap-southeast-5
+            - ap-southeast-7
+            - mx-central-1
+            - ap-east-2
+            - ap-south-2
+            - eu-central-2

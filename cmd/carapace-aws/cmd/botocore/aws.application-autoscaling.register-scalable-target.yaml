@@ -1,0 +1,54 @@
+name: register-scalable-target
+description: Registers or updates a scalable target, which is the resource that you want to scale.
+flags:
+    --max-capacity=: The maximum value that you plan to scale out to.
+    --min-capacity=: The minimum value that you plan to scale in to.
+    --resource-id=!: The identifier of the resource that is associated with the scalable target.
+    --role-arn=: This parameter is required for services that do not support service-linked roles (such as Amazon EMR), and it must specify the ARN of an IAM role that allows Application Auto Scaling to modify the scalable target on your behalf.
+    --scalable-dimension=!: The scalable dimension associated with the scalable target.
+    --service-namespace=!: The namespace of the Amazon Web Services service that provides the resource.
+    --suspended-state=: An embedded object that contains attributes and attribute values that are used to suspend and resume automatic scaling.
+    --tags=: Assigns one or more tags to the scalable target.
+completion:
+    flag:
+        scalable-dimension:
+            - ecs:service:DesiredCount
+            - ec2:spot-fleet-request:TargetCapacity
+            - elasticmapreduce:instancegroup:InstanceCount
+            - appstream:fleet:DesiredCapacity
+            - dynamodb:table:ReadCapacityUnits
+            - dynamodb:table:WriteCapacityUnits
+            - dynamodb:index:ReadCapacityUnits
+            - dynamodb:index:WriteCapacityUnits
+            - rds:cluster:ReadReplicaCount
+            - sagemaker:variant:DesiredInstanceCount
+            - custom-resource:ResourceType:Property
+            - comprehend:document-classifier-endpoint:DesiredInferenceUnits
+            - comprehend:entity-recognizer-endpoint:DesiredInferenceUnits
+            - lambda:function:ProvisionedConcurrency
+            - cassandra:table:ReadCapacityUnits
+            - cassandra:table:WriteCapacityUnits
+            - kafka:broker-storage:VolumeSize
+            - elasticache:cache-cluster:Nodes
+            - elasticache:replication-group:NodeGroups
+            - elasticache:replication-group:Replicas
+            - neptune:cluster:ReadReplicaCount
+            - sagemaker:variant:DesiredProvisionedConcurrency
+            - sagemaker:inference-component:DesiredCopyCount
+            - workspaces:workspacespool:DesiredUserSessions
+        service-namespace:
+            - ecs
+            - elasticmapreduce
+            - ec2
+            - appstream
+            - dynamodb
+            - rds
+            - sagemaker
+            - custom-resource
+            - comprehend
+            - lambda
+            - cassandra
+            - kafka
+            - elasticache
+            - neptune
+            - workspaces

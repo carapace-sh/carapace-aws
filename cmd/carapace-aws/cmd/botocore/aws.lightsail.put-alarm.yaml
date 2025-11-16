@@ -1,0 +1,52 @@
+name: put-alarm
+description: Creates or updates an alarm, and associates it with the specified metric.
+flags:
+    --alarm-name=!: The name for the alarm.
+    --comparison-operator=!: The arithmetic operation to use when comparing the specified statistic to the threshold.
+    --contact-protocols=: The contact protocols to use for the alarm, such as `Email`, `SMS` (text messaging), or both.
+    --datapoints-to-alarm=: The number of data points that must be not within the specified threshold to trigger the alarm.
+    --evaluation-periods=!: The number of most recent periods over which data is compared to the specified threshold.
+    --metric-name=!: The name of the metric to associate with the alarm.
+    --monitored-resource-name=!: The name of the Lightsail resource that will be monitored.
+    --notification-enabled=: Indicates whether the alarm is enabled.
+    --notification-triggers=: The alarm states that trigger a notification.
+    --threshold=!: The value against which the specified statistic is compared.
+    --treat-missing-data=: Sets how this alarm will handle missing data points.
+completion:
+    flag:
+        comparison-operator:
+            - GreaterThanOrEqualToThreshold
+            - GreaterThanThreshold
+            - LessThanThreshold
+            - LessThanOrEqualToThreshold
+        metric-name:
+            - CPUUtilization
+            - NetworkIn
+            - NetworkOut
+            - StatusCheckFailed
+            - StatusCheckFailed_Instance
+            - StatusCheckFailed_System
+            - ClientTLSNegotiationErrorCount
+            - HealthyHostCount
+            - UnhealthyHostCount
+            - HTTPCode_LB_4XX_Count
+            - HTTPCode_LB_5XX_Count
+            - HTTPCode_Instance_2XX_Count
+            - HTTPCode_Instance_3XX_Count
+            - HTTPCode_Instance_4XX_Count
+            - HTTPCode_Instance_5XX_Count
+            - InstanceResponseTime
+            - RejectedConnectionCount
+            - RequestCount
+            - DatabaseConnections
+            - DiskQueueDepth
+            - FreeStorageSpace
+            - NetworkReceiveThroughput
+            - NetworkTransmitThroughput
+            - BurstCapacityTime
+            - BurstCapacityPercentage
+        treat-missing-data:
+            - breaching
+            - notBreaching
+            - ignore
+            - missing

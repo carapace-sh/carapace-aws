@@ -1,0 +1,21 @@
+name: create-inference-scheduler
+description: Creates a scheduled inference.
+flags:
+    --client-token=!: A unique identifier for the request.
+    --data-delay-offset-in-minutes=: The interval (in minutes) of planned delay at the start of each inference segment.
+    --data-input-configuration=!: Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location.
+    --data-output-configuration=!: Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output.
+    --data-upload-frequency=!: How often data is uploaded to the source Amazon S3 bucket for the input data.
+    --inference-scheduler-name=!: The name of the inference scheduler being created.
+    --model-name=!: The name of the previously trained machine learning model being used to create the inference scheduler.
+    --role-arn=!: The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.
+    --server-side-kms-key-id=: Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment.
+    --tags=: Any tags associated with the inference scheduler.
+completion:
+    flag:
+        data-upload-frequency:
+            - PT5M
+            - PT10M
+            - PT15M
+            - PT30M
+            - PT1H

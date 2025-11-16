@@ -1,0 +1,23 @@
+name: create-resiliency-policy
+description: Creates a resiliency policy for an application.
+flags:
+    --client-token=: Used for an idempotency token.
+    --data-location-constraint=: Specifies a high-level geographical location constraint for where your resilience policy data can be stored.
+    --policy-description=: Description of the resiliency policy.
+    --policy-name=!: Name of the resiliency policy.
+    --policy=!: The type of resiliency policy to be created, including the recovery time objective (RTO) and recovery point objective (RPO) in seconds.
+    --tags=: Tags assigned to the resource.
+    --tier=!: The tier for this resiliency policy, ranging from the highest severity (`MissionCritical`) to lowest (`NonCritical`).
+completion:
+    flag:
+        data-location-constraint:
+            - AnyLocation
+            - SameContinent
+            - SameCountry
+        tier:
+            - MissionCritical
+            - Critical
+            - Important
+            - CoreServices
+            - NonCritical
+            - NotApplicable
