@@ -1,6 +1,6 @@
 module github.com/carapace-sh/carapace-aws
 
-go 1.25.1
+go 1.23.1
 
 require (
 	github.com/carapace-sh/carapace v1.10.2
