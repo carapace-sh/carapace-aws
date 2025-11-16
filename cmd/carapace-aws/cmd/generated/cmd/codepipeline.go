@@ -7,7 +7,7 @@ import (
 
 var codepipelineCmd = &cobra.Command{
 	Use:   "codepipeline",
-	Short: "CodePipeline\n\n**Overview**\n\nThis is the CodePipeline API Reference.",
+	Short: "CodePipeline",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

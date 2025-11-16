@@ -7,7 +7,7 @@ import (
 
 var dynamodbCmd = &cobra.Command{
 	Use:   "dynamodb",
-	Short: "Amazon DynamoDB\n\nAmazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.",
+	Short: "Amazon DynamoDB",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var kmsCmd = &cobra.Command{
 	Use:   "kms",
-	Short: "Key Management Service\n\nKey Management Service (KMS) is an encryption and key management web service.",
+	Short: "Key Management Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

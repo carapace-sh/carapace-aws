@@ -7,7 +7,7 @@ import (
 
 var glueCmd = &cobra.Command{
 	Use:   "glue",
-	Short: "Glue\n\nDefines the public endpoint for the Glue service.",
+	Short: "Glue",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

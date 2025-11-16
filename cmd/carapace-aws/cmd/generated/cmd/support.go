@@ -7,7 +7,7 @@ import (
 
 var supportCmd = &cobra.Command{
 	Use:   "support",
-	Short: "Amazon Web Services Support\n\nThe *Amazon Web Services Support API Reference* is intended for programmers who need detailed information about the Amazon Web Services Support operations and data types.",
+	Short: "Amazon Web Services Support",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

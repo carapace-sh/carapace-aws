@@ -7,7 +7,7 @@ import (
 
 var docdbElasticCmd = &cobra.Command{
 	Use:   "docdb-elastic",
-	Short: "Amazon DocumentDB elastic clusters\n\nAmazon DocumentDB elastic-clusters support workloads with millions of reads/writes per second and petabytes of storage capacity.",
+	Short: "Amazon DocumentDB elastic clusters",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

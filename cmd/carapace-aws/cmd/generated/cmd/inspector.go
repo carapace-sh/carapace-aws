@@ -7,7 +7,7 @@ import (
 
 var inspectorCmd = &cobra.Command{
 	Use:   "inspector",
-	Short: "Amazon Inspector\n\nAmazon Inspector enables you to analyze the behavior of your AWS resources and to identify potential security issues.",
+	Short: "Amazon Inspector",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

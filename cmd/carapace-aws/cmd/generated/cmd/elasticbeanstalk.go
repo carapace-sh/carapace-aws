@@ -7,7 +7,7 @@ import (
 
 var elasticbeanstalkCmd = &cobra.Command{
 	Use:   "elasticbeanstalk",
-	Short: "AWS Elastic Beanstalk\n\nAWS Elastic Beanstalk makes it easy for you to create, deploy, and manage scalable, fault-tolerant applications running on the Amazon Web Services cloud.",
+	Short: "AWS Elastic Beanstalk",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var storagegatewayCmd = &cobra.Command{
 	Use:   "storagegateway",
-	Short: "Storage Gateway Service\n\nAmazon FSx File Gateway is no longer available to new customers.",
+	Short: "Storage Gateway Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

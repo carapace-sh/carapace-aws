@@ -7,7 +7,7 @@ import (
 
 var ecsCmd = &cobra.Command{
 	Use:   "ecs",
-	Short: "Amazon Elastic Container Service\n\nAmazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service.",
+	Short: "Amazon Elastic Container Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

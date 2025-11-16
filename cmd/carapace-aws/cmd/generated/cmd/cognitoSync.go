@@ -7,7 +7,7 @@ import (
 
 var cognitoSyncCmd = &cobra.Command{
 	Use:   "cognito-sync",
-	Short: "Amazon Cognito Sync\n\nAmazon Cognito Sync provides an AWS service and client library that enable cross-device syncing of application-related user data.",
+	Short: "Amazon Cognito Sync",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

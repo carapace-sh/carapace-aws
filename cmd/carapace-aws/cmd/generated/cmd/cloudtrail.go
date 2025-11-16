@@ -7,7 +7,7 @@ import (
 
 var cloudtrailCmd = &cobra.Command{
 	Use:   "cloudtrail",
-	Short: "CloudTrail\n\nThis is the CloudTrail API Reference.",
+	Short: "CloudTrail",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

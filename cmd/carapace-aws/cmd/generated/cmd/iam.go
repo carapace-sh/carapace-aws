@@ -7,7 +7,7 @@ import (
 
 var iamCmd = &cobra.Command{
 	Use:   "iam",
-	Short: "Identity and Access Management\n\nIdentity and Access Management (IAM) is a web service for securely controlling access to Amazon Web Services services.",
+	Short: "Identity and Access Management",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

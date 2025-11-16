@@ -7,7 +7,7 @@ import (
 
 var ssmGuiconnectCmd = &cobra.Command{
 	Use:   "ssm-guiconnect",
-	Short: "AWS Systems Manager GUI Connect\n\nSystems Manager GUI Connect, a component of Fleet Manager, lets you connect to your Window Server-type Amazon Elastic Compute Cloud (Amazon EC2) instances using the Remote Desktop Protocol (RDP).",
+	Short: "AWS Systems Manager GUI Connect",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var dlmCmd = &cobra.Command{
 	Use:   "dlm",
-	Short: "Amazon Data Lifecycle Manager\n\nWith Amazon Data Lifecycle Manager, you can manage the lifecycle of your Amazon Web Services resources.",
+	Short: "Amazon Data Lifecycle Manager",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

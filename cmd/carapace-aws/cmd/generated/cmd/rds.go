@@ -7,7 +7,7 @@ import (
 
 var rdsCmd = &cobra.Command{
 	Use:   "rds",
-	Short: "Amazon Relational Database Service\n\nAmazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and scale a relational database in the cloud.",
+	Short: "Amazon Relational Database Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

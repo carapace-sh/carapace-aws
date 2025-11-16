@@ -7,7 +7,7 @@ import (
 
 var shieldCmd = &cobra.Command{
 	Use:   "shield",
-	Short: "Shield Advanced\n\nThis is the *Shield Advanced API Reference*.",
+	Short: "Shield Advanced",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

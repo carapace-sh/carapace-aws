@@ -7,7 +7,7 @@ import (
 
 var wellarchitectedCmd = &cobra.Command{
 	Use:   "wellarchitected",
-	Short: "Well-Architected Tool\n\nThis is the *Well-Architected Tool API Reference*.",
+	Short: "Well-Architected Tool",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

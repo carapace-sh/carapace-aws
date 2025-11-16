@@ -7,7 +7,7 @@ import (
 
 var iotDataCmd = &cobra.Command{
 	Use:   "iot-data",
-	Short: "IoT data\n\nIoT data enables secure, bi-directional communication between Internet-connected things (such as sensors, actuators, embedded devices, or smart appliances) and the Amazon Web Services cloud.",
+	Short: "IoT data",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

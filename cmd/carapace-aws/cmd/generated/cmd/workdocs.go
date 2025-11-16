@@ -7,7 +7,7 @@ import (
 
 var workdocsCmd = &cobra.Command{
 	Use:   "workdocs",
-	Short: "The Amazon WorkDocs API is designed for the following use cases:\n\n- File Migration: File migration applications are supported for users who want to migrate their files from an on-premises or off-premises file system or service.",
+	Short: "The Amazon WorkDocs API is designed for the following use cases:",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var panoramaCmd = &cobra.Command{
 	Use:   "panorama",
-	Short: "AWS Panorama\n\n**Overview**\n\nThis is the *AWS Panorama API Reference*.",
+	Short: "AWS Panorama",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

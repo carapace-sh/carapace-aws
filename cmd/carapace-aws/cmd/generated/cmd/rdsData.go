@@ -7,7 +7,7 @@ import (
 
 var rdsDataCmd = &cobra.Command{
 	Use:   "rds-data",
-	Short: "RDS Data API\n\nAmazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora DB cluster.",
+	Short: "RDS Data API",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

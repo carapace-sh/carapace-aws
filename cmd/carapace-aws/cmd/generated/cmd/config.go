@@ -7,7 +7,7 @@ import (
 
 var configCmd = &cobra.Command{
 	Use:   "config",
-	Short: "Config\n\nConfig provides a way to keep track of the configurations of all the Amazon Web Services resources associated with your Amazon Web Services account.",
+	Short: "Config",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var iotsecuretunnelingCmd = &cobra.Command{
 	Use:   "iotsecuretunneling",
-	Short: "IoT Secure Tunneling\n\nIoT Secure Tunneling creates remote connections to devices deployed in the field.",
+	Short: "IoT Secure Tunneling",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

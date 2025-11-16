@@ -7,7 +7,7 @@ import (
 
 var elasticacheCmd = &cobra.Command{
 	Use:   "elasticache",
-	Short: "Amazon ElastiCache\n\nAmazon ElastiCache is a web service that makes it easier to set up, operate, and scale a distributed cache in the cloud.",
+	Short: "Amazon ElastiCache",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

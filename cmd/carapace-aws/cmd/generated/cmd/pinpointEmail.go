@@ -7,7 +7,7 @@ import (
 
 var pinpointEmailCmd = &cobra.Command{
 	Use:   "pinpoint-email",
-	Short: "Amazon Pinpoint Email Service\n\nWelcome to the *Amazon Pinpoint Email API Reference*.",
+	Short: "Amazon Pinpoint Email Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

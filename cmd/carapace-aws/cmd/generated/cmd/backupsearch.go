@@ -7,7 +7,7 @@ import (
 
 var backupsearchCmd = &cobra.Command{
 	Use:   "backupsearch",
-	Short: "Backup Search\n\nBackup Search is the recovery point and item level search for Backup.",
+	Short: "Backup Search",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

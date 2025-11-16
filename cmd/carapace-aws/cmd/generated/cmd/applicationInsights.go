@@ -7,7 +7,7 @@ import (
 
 var applicationInsightsCmd = &cobra.Command{
 	Use:   "application-insights",
-	Short: "Amazon CloudWatch Application Insights\n\nAmazon CloudWatch Application Insights is a service that helps you detect common problems with your applications.",
+	Short: "Amazon CloudWatch Application Insights",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var timestreamWriteCmd = &cobra.Command{
 	Use:   "timestream-write",
-	Short: "Amazon Timestream Write\n\nAmazon Timestream is a fast, scalable, fully managed time-series database service that makes it easy to store and analyze trillions of time-series data points per day.",
+	Short: "Amazon Timestream Write",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

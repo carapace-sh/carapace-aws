@@ -7,7 +7,7 @@ import (
 
 var dynamodbstreamsCmd = &cobra.Command{
 	Use:   "dynamodbstreams",
-	Short: "Amazon DynamoDB\n\nAmazon DynamoDB Streams provides API actions for accessing streams and processing stream records.",
+	Short: "Amazon DynamoDB",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

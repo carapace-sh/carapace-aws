@@ -7,7 +7,7 @@ import (
 
 var neptunedataCmd = &cobra.Command{
 	Use:   "neptunedata",
-	Short: "Neptune Data API\n\nThe Amazon Neptune data API provides SDK support for more than 40 of Neptune's data operations, including data loading, query execution, data inquiry, and machine learning.",
+	Short: "Neptune Data API",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

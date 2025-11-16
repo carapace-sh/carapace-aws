@@ -7,7 +7,7 @@ import (
 
 var esCmd = &cobra.Command{
 	Use:   "es",
-	Short: "Amazon Elasticsearch Configuration Service\n\nUse the Amazon Elasticsearch Configuration API to create, configure, and manage Elasticsearch domains.",
+	Short: "Amazon Elasticsearch Configuration Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

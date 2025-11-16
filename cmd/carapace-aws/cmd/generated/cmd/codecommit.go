@@ -7,7 +7,7 @@ import (
 
 var codecommitCmd = &cobra.Command{
 	Use:   "codecommit",
-	Short: "CodeCommit\n\nThis is the *CodeCommit API Reference*.",
+	Short: "CodeCommit",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var swfCmd = &cobra.Command{
 	Use:   "swf",
-	Short: "Amazon Simple Workflow Service\n\nThe Amazon Simple Workflow Service (Amazon SWF) makes it easy to build applications that use Amazon's cloud to coordinate work across distributed components.",
+	Short: "Amazon Simple Workflow Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

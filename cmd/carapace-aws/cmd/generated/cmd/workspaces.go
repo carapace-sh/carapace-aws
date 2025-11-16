@@ -7,7 +7,7 @@ import (
 
 var workspacesCmd = &cobra.Command{
 	Use:   "workspaces",
-	Short: "Amazon WorkSpaces Service\n\nAmazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows or Amazon Linux desktops for your users, known as *WorkSpaces*.",
+	Short: "Amazon WorkSpaces Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

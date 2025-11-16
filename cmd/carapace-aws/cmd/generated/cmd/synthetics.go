@@ -7,7 +7,7 @@ import (
 
 var syntheticsCmd = &cobra.Command{
 	Use:   "synthetics",
-	Short: "Amazon CloudWatch Synthetics\n\nYou can use Amazon CloudWatch Synthetics to continually monitor your services.",
+	Short: "Amazon CloudWatch Synthetics",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

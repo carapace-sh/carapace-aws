@@ -7,7 +7,7 @@ import (
 
 var piCmd = &cobra.Command{
 	Use:   "pi",
-	Short: "Amazon RDS Performance Insights\n\nAmazon RDS Performance Insights enables you to monitor and explore different dimensions of database load based on data captured from a running DB instance.",
+	Short: "Amazon RDS Performance Insights",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

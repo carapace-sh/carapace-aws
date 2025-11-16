@@ -7,7 +7,7 @@ import (
 
 var cognitoIdentityCmd = &cobra.Command{
 	Use:   "cognito-identity",
-	Short: "Amazon Cognito Federated Identities\n\nAmazon Cognito Federated Identities is a web service that delivers scoped temporary credentials to mobile devices and other untrusted environments.",
+	Short: "Amazon Cognito Federated Identities",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

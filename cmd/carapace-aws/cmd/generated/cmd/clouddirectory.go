@@ -7,7 +7,7 @@ import (
 
 var clouddirectoryCmd = &cobra.Command{
 	Use:   "clouddirectory",
-	Short: "Amazon Cloud Directory\n\nAmazon Cloud Directory is a component of the AWS Directory Service that simplifies the development and management of cloud-scale web, mobile, and IoT applications.",
+	Short: "Amazon Cloud Directory",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

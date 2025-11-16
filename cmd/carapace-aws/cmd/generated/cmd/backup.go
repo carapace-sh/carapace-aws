@@ -7,7 +7,7 @@ import (
 
 var backupCmd = &cobra.Command{
 	Use:   "backup",
-	Short: "Backup\n\nBackup is a unified backup service designed to protect Amazon Web Services services and their associated data.",
+	Short: "Backup",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

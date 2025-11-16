@@ -7,7 +7,7 @@ import (
 
 var cloudfrontCmd = &cobra.Command{
 	Use:   "cloudfront",
-	Short: "Amazon CloudFront\n\nThis is the *Amazon CloudFront API Reference*.",
+	Short: "Amazon CloudFront",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

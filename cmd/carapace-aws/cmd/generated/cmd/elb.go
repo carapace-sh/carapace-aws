@@ -7,7 +7,7 @@ import (
 
 var elbCmd = &cobra.Command{
 	Use:   "elb",
-	Short: "Elastic Load Balancing\n\nA load balancer can distribute incoming traffic across your EC2 instances.",
+	Short: "Elastic Load Balancing",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

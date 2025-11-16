@@ -7,7 +7,7 @@ import (
 
 var stepfunctionsCmd = &cobra.Command{
 	Use:   "stepfunctions",
-	Short: "Step Functions\n\nWith Step Functions, you can create workflows, also called *state machines*, to build distributed applications, automate processes, orchestrate microservices, and create data and machine learning pipelines.",
+	Short: "Step Functions",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

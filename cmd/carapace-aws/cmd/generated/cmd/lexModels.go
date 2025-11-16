@@ -7,7 +7,7 @@ import (
 
 var lexModelsCmd = &cobra.Command{
 	Use:   "lex-models",
-	Short: "Amazon Lex Build-Time Actions\n\nAmazon Lex is an AWS service for building conversational voice and text interfaces.",
+	Short: "Amazon Lex Build-Time Actions",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

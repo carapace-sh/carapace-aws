@@ -7,7 +7,7 @@ import (
 
 var firehoseCmd = &cobra.Command{
 	Use:   "firehose",
-	Short: "Amazon Data Firehose\n\nAmazon Data Firehose was previously known as Amazon Kinesis Data Firehose.",
+	Short: "Amazon Data Firehose",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var acmCmd = &cobra.Command{
 	Use:   "acm",
-	Short: "Certificate Manager\n\nYou can use Certificate Manager (ACM) to manage SSL/TLS certificates for your Amazon Web Services-based websites and applications.",
+	Short: "Certificate Manager",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

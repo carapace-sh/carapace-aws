@@ -7,7 +7,7 @@ import (
 
 var codeconnectionsCmd = &cobra.Command{
 	Use:   "codeconnections",
-	Short: "AWS CodeConnections\n\nThis Amazon Web Services CodeConnections API Reference provides descriptions and usage examples of the operations and data types for the Amazon Web Services CodeConnections API.",
+	Short: "AWS CodeConnections",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

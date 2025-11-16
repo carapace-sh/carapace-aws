@@ -7,7 +7,7 @@ import (
 
 var appstreamCmd = &cobra.Command{
 	Use:   "appstream",
-	Short: "Amazon AppStream 2.0\n\nThis is the *Amazon AppStream 2.0 API Reference*.",
+	Short: "Amazon AppStream 2.0",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

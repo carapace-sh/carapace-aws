@@ -7,7 +7,7 @@ import (
 
 var invoicingCmd = &cobra.Command{
 	Use:   "invoicing",
-	Short: "**Amazon Web Services Invoice Configuration**\n\nYou can use Amazon Web Services Invoice Configuration APIs to programmatically create, update, delete, get, and list invoice units.",
+	Short: "**Amazon Web Services Invoice Configuration**",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

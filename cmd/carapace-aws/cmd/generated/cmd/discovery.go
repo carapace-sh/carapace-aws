@@ -7,7 +7,7 @@ import (
 
 var discoveryCmd = &cobra.Command{
 	Use:   "discovery",
-	Short: "Amazon Web Services Application Discovery Service\n\nAmazon Web Services Application Discovery Service (Application Discovery Service) helps you plan application migration projects.",
+	Short: "Amazon Web Services Application Discovery Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

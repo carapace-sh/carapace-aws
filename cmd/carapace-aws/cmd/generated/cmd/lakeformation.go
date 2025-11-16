@@ -7,7 +7,7 @@ import (
 
 var lakeformationCmd = &cobra.Command{
 	Use:   "lakeformation",
-	Short: "Lake Formation\n\nDefines the public endpoint for the Lake Formation service.",
+	Short: "Lake Formation",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

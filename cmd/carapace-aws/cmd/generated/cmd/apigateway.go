@@ -7,7 +7,7 @@ import (
 
 var apigatewayCmd = &cobra.Command{
 	Use:   "apigateway",
-	Short: "Amazon API Gateway\n\nAmazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends.",
+	Short: "Amazon API Gateway",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

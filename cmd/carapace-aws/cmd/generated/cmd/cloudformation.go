@@ -7,7 +7,7 @@ import (
 
 var cloudformationCmd = &cobra.Command{
 	Use:   "cloudformation",
-	Short: "CloudFormation\n\nCloudFormation allows you to create and manage Amazon Web Services infrastructure deployments predictably and repeatedly.",
+	Short: "CloudFormation",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

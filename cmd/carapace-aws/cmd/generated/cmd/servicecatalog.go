@@ -7,7 +7,7 @@ import (
 
 var servicecatalogCmd = &cobra.Command{
 	Use:   "servicecatalog",
-	Short: "Service Catalog\n\n[Service Catalog](http://aws.amazon.com/servicecatalog) enables organizations to create and manage catalogs of IT services that are approved for Amazon Web Services.",
+	Short: "Service Catalog",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

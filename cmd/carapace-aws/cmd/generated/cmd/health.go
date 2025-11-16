@@ -7,7 +7,7 @@ import (
 
 var healthCmd = &cobra.Command{
 	Use:   "health",
-	Short: "Health\n\nThe Health API provides access to the Health information that appears in the [Health Dashboard](https://health.aws.amazon.com/health/home). You can use the API operations to get information about events that might affect your Amazon Web Services services and resources.",
+	Short: "Health",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

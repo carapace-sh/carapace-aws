@@ -7,7 +7,7 @@ import (
 
 var gameliftstreamsCmd = &cobra.Command{
 	Use:   "gameliftstreams",
-	Short: "Amazon GameLift Streams\n\nAmazon GameLift Streams provides a global cloud solution for content streaming experiences.",
+	Short: "Amazon GameLift Streams",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

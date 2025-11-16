@@ -7,7 +7,7 @@ import (
 
 var sesCmd = &cobra.Command{
 	Use:   "ses",
-	Short: "Amazon Simple Email Service\n\nThis document contains reference information for the [Amazon Simple Email Service](https://aws.amazon.com/ses/) (Amazon SES) API, version 2010-12-01.",
+	Short: "Amazon Simple Email Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

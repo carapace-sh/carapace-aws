@@ -7,7 +7,7 @@ import (
 
 var ecrPublicCmd = &cobra.Command{
 	Use:   "ecr-public",
-	Short: "Amazon Elastic Container Registry Public\n\nAmazon Elastic Container Registry Public (Amazon ECR Public) is a managed container image registry service.",
+	Short: "Amazon Elastic Container Registry Public",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

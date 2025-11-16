@@ -7,7 +7,7 @@ import (
 
 var redshiftCmd = &cobra.Command{
 	Use:   "redshift",
-	Short: "Amazon Redshift\n\n**Overview**\n\nThis is an interface reference for Amazon Redshift.",
+	Short: "Amazon Redshift",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

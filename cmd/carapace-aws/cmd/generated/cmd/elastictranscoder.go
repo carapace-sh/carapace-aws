@@ -7,7 +7,7 @@ import (
 
 var elastictranscoderCmd = &cobra.Command{
 	Use:   "elastictranscoder",
-	Short: "AWS Elastic Transcoder Service\n\nThe AWS Elastic Transcoder Service.",
+	Short: "AWS Elastic Transcoder Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

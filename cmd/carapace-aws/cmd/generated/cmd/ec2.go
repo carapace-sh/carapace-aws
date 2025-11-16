@@ -7,7 +7,7 @@ import (
 
 var ec2Cmd = &cobra.Command{
 	Use:   "ec2",
-	Short: "Amazon Elastic Compute Cloud\n\nYou can access the features of Amazon Elastic Compute Cloud (Amazon EC2) programmatically.",
+	Short: "Amazon Elastic Compute Cloud",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

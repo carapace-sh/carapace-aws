@@ -7,7 +7,7 @@ import (
 
 var devicefarmCmd = &cobra.Command{
 	Use:   "devicefarm",
-	Short: "Welcome to the AWS Device Farm API documentation, which contains APIs for:\n\n- Testing on desktop browsers\n  \n  Device Farm makes it possible for you to test your web applications on desktop browsers using Selenium.",
+	Short: "Welcome to the AWS Device Farm API documentation, which contains APIs for:",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

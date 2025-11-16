@@ -7,7 +7,7 @@ import (
 
 var stsCmd = &cobra.Command{
 	Use:   "sts",
-	Short: "Security Token Service\n\nSecurity Token Service (STS) enables you to request temporary, limited-privilege credentials for users.",
+	Short: "Security Token Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

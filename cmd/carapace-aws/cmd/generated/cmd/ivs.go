@@ -7,7 +7,7 @@ import (
 
 var ivsCmd = &cobra.Command{
 	Use:   "ivs",
-	Short: "**Introduction**\n\nThe Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP API and an Amazon Web Services EventBridge event stream for responses.",
+	Short: "**Introduction**",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

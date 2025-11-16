@@ -7,7 +7,7 @@ import (
 
 var autoscalingCmd = &cobra.Command{
 	Use:   "autoscaling",
-	Short: "Amazon EC2 Auto Scaling\n\nThe [DescribeAutoScalingGroups](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html) API operation might be throttled when retrieving details for an Auto Scaling group that contains many instances.",
+	Short: "Amazon EC2 Auto Scaling",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

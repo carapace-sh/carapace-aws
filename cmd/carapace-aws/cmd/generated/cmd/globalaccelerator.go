@@ -7,7 +7,7 @@ import (
 
 var globalacceleratorCmd = &cobra.Command{
 	Use:   "globalaccelerator",
-	Short: "Global Accelerator\n\nThis is the *Global Accelerator API Reference*.",
+	Short: "Global Accelerator",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

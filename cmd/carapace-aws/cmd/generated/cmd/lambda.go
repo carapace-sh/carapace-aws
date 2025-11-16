@@ -7,7 +7,7 @@ import (
 
 var lambdaCmd = &cobra.Command{
 	Use:   "lambda",
-	Short: "Lambda\n\n**Overview**\n\nLambda is a compute service that lets you run code without provisioning or managing servers.",
+	Short: "Lambda",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

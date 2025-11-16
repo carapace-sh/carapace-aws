@@ -7,7 +7,7 @@ import (
 
 var codestarConnectionsCmd = &cobra.Command{
 	Use:   "codestar-connections",
-	Short: "AWS CodeStar Connections\n\nThis Amazon Web Services CodeStar Connections API Reference provides descriptions and usage examples of the operations and data types for the Amazon Web Services CodeStar Connections API.",
+	Short: "AWS CodeStar Connections",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

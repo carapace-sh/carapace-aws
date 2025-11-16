@@ -7,7 +7,7 @@ import (
 
 var mwaaCmd = &cobra.Command{
 	Use:   "mwaa",
-	Short: "Amazon Managed Workflows for Apache Airflow\n\nThis section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation.",
+	Short: "Amazon Managed Workflows for Apache Airflow",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

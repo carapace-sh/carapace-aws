@@ -7,7 +7,7 @@ import (
 
 var secretsmanagerCmd = &cobra.Command{
 	Use:   "secretsmanager",
-	Short: "Amazon Web Services Secrets Manager\n\nAmazon Web Services Secrets Manager provides a service to enable you to store, manage, and retrieve, secrets.",
+	Short: "Amazon Web Services Secrets Manager",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

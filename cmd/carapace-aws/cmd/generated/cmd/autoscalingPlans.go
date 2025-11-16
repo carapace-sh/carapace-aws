@@ -7,7 +7,7 @@ import (
 
 var autoscalingPlansCmd = &cobra.Command{
 	Use:   "autoscaling-plans",
-	Short: "AWS Auto Scaling\n\nUse AWS Auto Scaling to create scaling plans for your applications to automatically scale your scalable AWS resources.",
+	Short: "AWS Auto Scaling",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var codebuildCmd = &cobra.Command{
 	Use:   "codebuild",
-	Short: "CodeBuild\n\nCodeBuild is a fully managed build service in the cloud.",
+	Short: "CodeBuild",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

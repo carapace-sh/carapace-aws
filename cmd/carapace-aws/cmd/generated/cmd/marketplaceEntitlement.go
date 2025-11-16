@@ -7,7 +7,7 @@ import (
 
 var marketplaceEntitlementCmd = &cobra.Command{
 	Use:   "marketplace-entitlement",
-	Short: "AWS Marketplace Entitlement Service\n\nThis reference provides descriptions of the AWS Marketplace Entitlement Service API.",
+	Short: "AWS Marketplace Entitlement Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

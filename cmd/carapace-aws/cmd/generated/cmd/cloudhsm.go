@@ -7,7 +7,7 @@ import (
 
 var cloudhsmCmd = &cobra.Command{
 	Use:   "cloudhsm",
-	Short: "AWS CloudHSM Service\n\nThis is documentation for **AWS CloudHSM Classic**.",
+	Short: "AWS CloudHSM Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var snsCmd = &cobra.Command{
 	Use:   "sns",
-	Short: "Amazon Simple Notification Service\n\nAmazon Simple Notification Service (Amazon SNS) is a web service that enables you to build distributed web-enabled applications.",
+	Short: "Amazon Simple Notification Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

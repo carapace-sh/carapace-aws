@@ -7,7 +7,7 @@ import (
 
 var dsCmd = &cobra.Command{
 	Use:   "ds",
-	Short: "Directory Service\n\nDirectory Service is a web service that makes it easy for you to setup and run directories in the Amazon Web Services cloud, or connect your Amazon Web Services resources with an existing self-managed Microsoft Active Directory.",
+	Short: "Directory Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

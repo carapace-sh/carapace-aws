@@ -7,7 +7,7 @@ import (
 
 var meteringmarketplaceCmd = &cobra.Command{
 	Use:   "meteringmarketplace",
-	Short: "Amazon Web Services Marketplace Metering Service\n\nThis reference provides descriptions of the low-level Marketplace Metering Service API.",
+	Short: "Amazon Web Services Marketplace Metering Service",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

@@ -7,7 +7,7 @@ import (
 
 var cloud9Cmd = &cobra.Command{
 	Use:   "cloud9",
-	Short: "Cloud9\n\nCloud9 is a collection of tools that you can use to code, build, run, test, debug, and release software in the cloud.",
+	Short: "Cloud9",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

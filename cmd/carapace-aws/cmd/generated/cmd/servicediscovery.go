@@ -7,7 +7,7 @@ import (
 
 var servicediscoveryCmd = &cobra.Command{
 	Use:   "servicediscovery",
-	Short: "Cloud Map\n\nWith Cloud Map, you can configure public DNS, private DNS, or HTTP namespaces that your microservice applications run in.",
+	Short: "Cloud Map",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 

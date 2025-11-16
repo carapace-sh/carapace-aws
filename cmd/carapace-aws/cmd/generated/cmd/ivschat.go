@@ -7,7 +7,7 @@ import (
 
 var ivschatCmd = &cobra.Command{
 	Use:   "ivschat",
-	Short: "**Introduction**\n\nThe Amazon IVS Chat control-plane API enables you to create and manage Amazon IVS Chat resources.",
+	Short: "**Introduction**",
 	Run:   func(cmd *cobra.Command, args []string) {},
 }
 
