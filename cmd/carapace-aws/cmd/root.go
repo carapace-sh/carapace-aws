@@ -6,6 +6,8 @@ import (
 	"github.com/carapace-sh/carapace"
 	"github.com/carapace-sh/carapace-aws/cmd/carapace-aws/cmd/botocore"
 	"github.com/carapace-sh/carapace-aws/cmd/carapace-aws/cmd/common"
+	_ "github.com/carapace-sh/carapace-aws/pkg/actions"
+	"github.com/carapace-sh/carapace-aws/pkg/actions/aws"
 	spec "github.com/carapace-sh/carapace-spec"
 	"github.com/carapace-sh/carapace/pkg/style"
 	"github.com/spf13/cobra"
@@ -49,8 +51,8 @@ func init() {
 		),
 		"color":   carapace.ActionValues("on", "off", "auto").StyleF(style.ForKeyword),
 		"output":  carapace.ActionValues("json", "text", "table", "yaml", "yaml-stream"),
-		"profile": spec.ActionMacro("$carapace.tools.aws.Profiles"),
-		"region":  spec.ActionMacro("$carapace.tools.aws.Regions"),
+		"profile": aws.ActionProfiles(),
+		"region":  aws.ActionRegions(),
 	})
 
 	for name, description := range botocore.Services() {
@@ -110,4 +112,6 @@ func init() {
 			common.ActionBridgeAwsCompleter(),
 		)
 	}
+
+	spec.Register(rootCmd)
 }

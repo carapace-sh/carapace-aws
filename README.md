@@ -7,7 +7,7 @@ Carapace-aws is an enriched completer for [aws-cli].
 ## How it works
 
 The subcommands in [aws-cli] are mostly based on the [botocore] service definitions.
-These are `json` files that contain additional information and static completions.
+Which are `json` files that contain additional information and static completions.
 But these are not fully exposed to the shell completion and only accessible in [auto-prompt].
 
 Carapace-aws parses the [botocore] service definitions into a [carapace] based completer.
@@ -16,7 +16,7 @@ Undefined completions are simply delegated to the official [aws_completer].
 
 ## Getting Started
 
-When using [carapace-bin] this happens implicitly when the `carapace-aws` binary is in [PATH].
+When using [carapace-bin] `carapace-aws` is implicitly used when the binary is in [PATH].
 
 Otherwise the completions can be loaded directly with [`carapace-aws _carapace`](https://carapace-sh.github.io/carapace/carapace/gen.html#hidden-subcommand).
 
