@@ -21,6 +21,8 @@ func Execute() error {
 	return rootCmd.Execute()
 }
 func init() {
+	rootCmd.SetUsageFunc(func(c *cobra.Command) error { return nil })
+
 	rootCmd.PersistentFlags().Bool("ca-bundle", false, "The CA certificate bundle to use when verifying SSL certificates.")
 	rootCmd.PersistentFlags().Bool("cli-auto-prompt", false, "Automatically prompt for CLI input parameters.")
 	rootCmd.PersistentFlags().String("cli-binary-format", "", "The formatting style to be used for binary blobs.")
