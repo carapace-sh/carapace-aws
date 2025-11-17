@@ -1,0 +1,44 @@
+name: update-cloud-watch-alarm-template
+description: Updates the specified cloudwatch alarm template.
+flags:
+    --comparison-operator=: ""
+    --datapoints-to-alarm=: The number of datapoints within the evaluation period that must be breaching to trigger the alarm.
+    --description=: A resource's optional description.
+    --evaluation-periods=: The number of periods over which data is compared to the specified threshold.
+    --group-identifier=: A cloudwatch alarm template group's identifier.
+    --identifier=!: A cloudwatch alarm template's identifier.
+    --metric-name=: The name of the metric associated with the alarm.
+    --name=: A resource's name.
+    --period=: The period, in seconds, over which the specified statistic is applied.
+    --statistic=: ""
+    --target-resource-type=: ""
+    --threshold=: The threshold value to compare with the specified statistic.
+    --treat-missing-data=: ""
+completion:
+    flag:
+        comparison-operator:
+            - GreaterThanOrEqualToThreshold
+            - GreaterThanThreshold
+            - LessThanThreshold
+            - LessThanOrEqualToThreshold
+        statistic:
+            - SampleCount
+            - Average
+            - Sum
+            - Minimum
+            - Maximum
+        target-resource-type:
+            - CLOUDFRONT_DISTRIBUTION
+            - MEDIALIVE_MULTIPLEX
+            - MEDIALIVE_CHANNEL
+            - MEDIALIVE_INPUT_DEVICE
+            - MEDIAPACKAGE_CHANNEL
+            - MEDIAPACKAGE_ORIGIN_ENDPOINT
+            - MEDIACONNECT_FLOW
+            - S3_BUCKET
+            - MEDIATAILOR_PLAYBACK_CONFIGURATION
+        treat-missing-data:
+            - notBreaching
+            - breaching
+            - ignore
+            - missing

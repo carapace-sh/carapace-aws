@@ -1,0 +1,16 @@
+name: generate-mac-emv-pin-change
+description: Generates an issuer script mac for EMV payment cards that use offline PINs as the cardholder verification method (CVM).
+flags:
+    --derivation-method-attributes=!: The attributes and data values to derive payment card specific confidentiality and integrity keys.
+    --message-data=!: The message data is the APDU command from the card reader or terminal.
+    --new-encrypted-pin-block=!: The incoming new encrypted PIN block data for offline pin change on an EMV card.
+    --new-pin-pek-identifier=!: The `keyARN` of the PEK protecting the incoming new encrypted PIN block.
+    --pin-block-format=!: The PIN encoding format of the incoming new encrypted PIN block as specified in ISO 9564.
+    --secure-messaging-confidentiality-key-identifier=!: The `keyARN` of the issuer master key (IMK-SMC) used to protect the PIN block data in the issuer script response.
+    --secure-messaging-integrity-key-identifier=!: The `keyARN` of the issuer master key (IMK-SMI) used to authenticate the issuer script response.
+completion:
+    flag:
+        pin-block-format:
+            - ISO_FORMAT_0
+            - ISO_FORMAT_1
+            - ISO_FORMAT_3

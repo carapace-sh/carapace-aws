@@ -1,0 +1,43 @@
+name: put-scaling-policy
+description: |-
+    **This API works with the following fleet types:** EC2
+
+    Creates or updates a scaling policy for a fleet.
+flags:
+    --comparison-operator=: Comparison operator to use when measuring the metric against the threshold value.
+    --evaluation-periods=: Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.
+    --fleet-id=!: A unique identifier for the fleet to apply this policy to.
+    --metric-name=!: Name of the Amazon GameLift Servers-defined metric that is used to trigger a scaling adjustment.
+    --name=!: A descriptive label that is associated with a fleet's scaling policy.
+    --policy-type=: The type of scaling policy to create.
+    --scaling-adjustment-type=: 'The type of adjustment to make to a fleet''s instance count:'
+    --scaling-adjustment=: Amount of adjustment to make, based on the scaling adjustment type.
+    --target-configuration=: An object that contains settings for a target-based scaling policy.
+    --threshold=: Metric value used to trigger a scaling event.
+completion:
+    flag:
+        comparison-operator:
+            - GreaterThanOrEqualToThreshold
+            - GreaterThanThreshold
+            - LessThanThreshold
+            - LessThanOrEqualToThreshold
+        metric-name:
+            - ActivatingGameSessions
+            - ActiveGameSessions
+            - ActiveInstances
+            - AvailableGameSessions
+            - AvailablePlayerSessions
+            - CurrentPlayerSessions
+            - IdleInstances
+            - PercentAvailableGameSessions
+            - PercentIdleInstances
+            - QueueDepth
+            - WaitTime
+            - ConcurrentActivatableGameSessions
+        policy-type:
+            - RuleBased
+            - TargetBased
+        scaling-adjustment-type:
+            - ChangeInCapacity
+            - ExactCapacity
+            - PercentChangeInCapacity

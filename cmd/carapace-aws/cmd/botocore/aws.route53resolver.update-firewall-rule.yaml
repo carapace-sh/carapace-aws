@@ -1,0 +1,39 @@
+name: update-firewall-rule
+description: Updates the specified firewall rule.
+flags:
+    --action=: 'The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule''s domain list, or a threat in a DNS Firewall Advanced rule:'
+    --block-override-dns-type=: The DNS record's type.
+    --block-override-domain=: The custom DNS record to send back in response to the query.
+    --block-override-ttl=: The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record.
+    --block-response=: The way that you want DNS Firewall to block the request.
+    --confidence-threshold=: The confidence threshold for DNS Firewall Advanced.
+    --dns-threat-protection=: The type of the DNS Firewall Advanced rule.
+    --firewall-domain-list-id=: The ID of the domain list to use in the rule.
+    --firewall-domain-redirection-action=: How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.
+    --firewall-rule-group-id=!: The unique identifier of the firewall rule group for the rule.
+    --firewall-threat-protection-id=: The DNS Firewall Advanced rule ID.
+    --name=: The name of the rule.
+    --priority=: The setting that determines the processing order of the rule in the rule group.
+    --qtype=: The DNS query type you want the rule to evaluate.
+completion:
+    flag:
+        action:
+            - ALLOW
+            - BLOCK
+            - ALERT
+        block-override-dns-type:
+            - CNAME
+        block-response:
+            - NODATA
+            - NXDOMAIN
+            - OVERRIDE
+        confidence-threshold:
+            - LOW
+            - MEDIUM
+            - HIGH
+        dns-threat-protection:
+            - DGA
+            - DNS_TUNNELING
+        firewall-domain-redirection-action:
+            - INSPECT_REDIRECTION_DOMAIN
+            - TRUST_REDIRECTION_DOMAIN

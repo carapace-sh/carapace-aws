@@ -1,0 +1,43 @@
+name: create-db-instance
+description: Creates a new Timestream for InfluxDB DB instance.
+flags:
+    --allocated-storage=!: The amount of storage to allocate for your DB storage type in GiB (gibibytes).
+    --bucket=: The name of the initial InfluxDB bucket.
+    --db-instance-type=!: The Timestream for InfluxDB DB instance type to run InfluxDB on.
+    --db-parameter-group-identifier=: The id of the DB parameter group to assign to your DB instance.
+    --db-storage-type=: The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
+    --deployment-type=: Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.
+    --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to a specified S3 bucket.
+    --name=!: The name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands.
+    --network-type=: Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+    --no-publicly-accessible&: Configures the DB instance with a public IP to facilitate access.
+    --organization=: The name of the initial organization for the initial admin user in InfluxDB.
+    --password=!: The password of the initial admin user created in InfluxDB v2.
+    --port=: The port number on which InfluxDB accepts connections.
+    --publicly-accessible: Configures the DB instance with a public IP to facilitate access.
+    --tags=: A list of key-value pairs to associate with the DB instance.
+    --username=: The username of the initial admin user created in InfluxDB.
+    --vpc-security-group-ids=!: A list of VPC security group IDs to associate with the DB instance.
+    --vpc-subnet-ids=!: A list of VPC subnet IDs to associate with the DB instance.
+completion:
+    flag:
+        db-instance-type:
+            - db.influx.medium
+            - db.influx.large
+            - db.influx.xlarge
+            - db.influx.2xlarge
+            - db.influx.4xlarge
+            - db.influx.8xlarge
+            - db.influx.12xlarge
+            - db.influx.16xlarge
+            - db.influx.24xlarge
+        db-storage-type:
+            - InfluxIOIncludedT1
+            - InfluxIOIncludedT2
+            - InfluxIOIncludedT3
+        deployment-type:
+            - SINGLE_AZ
+            - WITH_MULTIAZ_STANDBY
+        network-type:
+            - IPV4
+            - DUAL

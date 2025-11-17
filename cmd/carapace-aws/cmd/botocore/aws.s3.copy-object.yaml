@@ -1,0 +1,94 @@
+name: copy-object
+description: Creates a copy of an object that is already stored in Amazon S3.
+flags:
+    --acl=: The canned access control list (ACL) to apply to the object.
+    --bucket-key-enabled=: Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption with server-side encryption using Key Management Service (KMS) keys (SSE-KMS).
+    --bucket=!: The name of the destination bucket.
+    --cache-control=: Specifies the caching behavior along the request/reply chain.
+    --checksum-algorithm=: Indicates the algorithm that you want Amazon S3 to use to create the checksum for the object.
+    --content-disposition=: Specifies presentational information for the object.
+    --content-encoding=: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
+    --content-language=: The language the content is in.
+    --content-type=: A standard MIME type that describes the format of the object data.
+    --copy-source-if-match=: Copies the object if its entity tag (ETag) matches the specified tag.
+    --copy-source-if-modified-since=: Copies the object if it has been modified since the specified time.
+    --copy-source-if-none-match=: Copies the object if its entity tag (ETag) is different than the specified ETag.
+    --copy-source-if-unmodified-since=: Copies the object if it hasn't been modified since the specified time.
+    --copy-source-ssecustomer-algorithm=: Specifies the algorithm to use when decrypting the source object (for example, `AES256`).
+    --copy-source-ssecustomer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+    --copy-source-ssecustomer-key=: Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object.
+    --copy-source=!: Specifies the source object for the copy operation.
+    --expected-bucket-owner=: The account ID of the expected destination bucket owner.
+    --expected-source-bucket-owner=: The account ID of the expected source bucket owner.
+    --expires=: The date and time at which the object is no longer cacheable.
+    --grant-full-control=: Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the object.
+    --grant-read-acp=: Allows grantee to read the object ACL.
+    --grant-read=: Allows grantee to read the object data and its metadata.
+    --grant-write-acp=: Allows grantee to write the ACL for the applicable object.
+    --if-match=: Copies the object if the entity tag (ETag) of the destination object matches the specified tag.
+    --if-none-match=: Copies the object only if the object key name at the destination does not already exist in the bucket specified.
+    --key=!: The key of the destination object.
+    --metadata-directive=: Specifies whether the metadata is copied from the source object or replaced with metadata that's provided in the request.
+    --metadata=: A map of metadata to store with the object in S3.
+    --object-lock-legal-hold-status=: Specifies whether you want to apply a legal hold to the object copy.
+    --object-lock-mode=: The Object Lock mode that you want to apply to the object copy.
+    --object-lock-retain-until-date=: The date and time when you want the Object Lock of the object copy to expire.
+    --request-payer=: ""
+    --server-side-encryption=: The server-side encryption algorithm used when storing this object in Amazon S3.
+    --ssecustomer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, `AES256`).
+    --ssecustomer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+    --ssecustomer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
+    --ssekmsencryption-context=: Specifies the Amazon Web Services KMS Encryption Context as an additional encryption context to use for the destination object encryption.
+    --ssekmskey-id=: Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption.
+    --storage-class=: If the `x-amz-storage-class` header is not used, the copied object will be stored in the `STANDARD` Storage Class by default.
+    --tagging-directive=: Specifies whether the object tag-set is copied from the source object or replaced with the tag-set that's provided in the request.
+    --tagging=: The tag-set for the object copy in the destination bucket.
+    --website-redirect-location=: If the destination bucket is configured as a website, redirects requests for this object copy to another object in the same bucket or to an external URL.
+completion:
+    flag:
+        acl:
+            - private
+            - public-read
+            - public-read-write
+            - authenticated-read
+            - aws-exec-read
+            - bucket-owner-read
+            - bucket-owner-full-control
+        checksum-algorithm:
+            - CRC32
+            - CRC32C
+            - SHA1
+            - SHA256
+            - CRC64NVME
+        metadata-directive:
+            - COPY
+            - REPLACE
+        object-lock-legal-hold-status:
+            - "ON"
+            - "OFF"
+        object-lock-mode:
+            - GOVERNANCE
+            - COMPLIANCE
+        request-payer:
+            - requester
+        server-side-encryption:
+            - AES256
+            - aws:fsx
+            - aws:kms
+            - aws:kms:dsse
+        storage-class:
+            - STANDARD
+            - REDUCED_REDUNDANCY
+            - STANDARD_IA
+            - ONEZONE_IA
+            - INTELLIGENT_TIERING
+            - GLACIER
+            - DEEP_ARCHIVE
+            - OUTPOSTS
+            - GLACIER_IR
+            - SNOW
+            - EXPRESS_ONEZONE
+            - FSX_OPENZFS
+        tagging-directive:
+            - COPY
+            - REPLACE

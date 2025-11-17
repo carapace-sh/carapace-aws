@@ -1,0 +1,29 @@
+name: list-evaluation-jobs
+description: Lists all existing evaluation jobs.
+flags:
+    --application-type-equals=: A filter to only list evaluation jobs that are either model evaluations or knowledge base evaluations.
+    --creation-time-after=: A filter to only list evaluation jobs created after a specified time.
+    --creation-time-before=: A filter to only list evaluation jobs created before a specified time.
+    --max-results=: The maximum number of results to return.
+    --name-contains=: A filter to only list evaluation jobs that contain a specified string in the job name.
+    --next-token=: Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
+    --sort-by=: Specifies a creation time to sort the list of evaluation jobs by when they were created.
+    --sort-order=: Specifies whether to sort the list of evaluation jobs by either ascending or descending order.
+    --status-equals=: A filter to only list evaluation jobs that are of a certain status.
+completion:
+    flag:
+        application-type-equals:
+            - ModelEvaluation
+            - RagEvaluation
+        sort-by:
+            - CreationTime
+        sort-order:
+            - Ascending
+            - Descending
+        status-equals:
+            - InProgress
+            - Completed
+            - Failed
+            - Stopping
+            - Stopped
+            - Deleting
