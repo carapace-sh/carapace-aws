@@ -16,7 +16,7 @@ Undefined completions are simply delegated to the official [aws_completer].
 
 ## Getting Started
 
-When using [carapace-bin] this happens implicitly when then `carapace-aws` binary is in [PATH].
+When using [carapace-bin] this happens implicitly when the `carapace-aws` binary is in [PATH].
 
 Otherwise the completions can be loaded directly with [`carapace-aws _carapace`](https://carapace-sh.github.io/carapace/carapace/gen.html#hidden-subcommand).
 
