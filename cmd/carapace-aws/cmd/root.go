@@ -50,7 +50,7 @@ func init() {
 			"raw-in-base64-out",
 		),
 		"color":   carapace.ActionValues("on", "off", "auto").StyleF(style.ForKeyword),
-		"output":  carapace.ActionValues("json", "text", "table", "yaml", "yaml-stream"),
+		"output":  carapace.ActionValues("json", "text", "table", "yaml", "yaml-stream").StyleF(style.ForExtension),
 		"profile": aws.ActionProfiles(),
 		"region":  aws.ActionRegions(),
 	})
