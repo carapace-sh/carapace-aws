@@ -1,5 +1,10 @@
 # carapace-aws
 
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/carapace-sh/carapace-aws)](https://pkg.go.dev/github.com/carapace-sh/carapace-aws)
+[![GoReportCard](https://goreportcard.com/badge/github.com/carapace-sh/carapace-aws)](https://goreportcard.com/report/github.com/carapace-sh/carapace-aws)
+[![Coverage Status](https://coveralls.io/repos/github/carapace-sh/carapace-aws/badge.svg?branch=master)](https://coveralls.io/github/carapace-sh/carapace-aws?branch=master)
+[![Packaging status](https://repology.org/badge/tiny-repos/carapace-aws.svg)](https://repology.org/project/carapace-aws/versions)
+
 Carapace-aws is an enriched completer for [aws-cli].
 
 ![](./carapace-aws.png)
