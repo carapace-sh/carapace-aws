@@ -24,6 +24,7 @@ func Execute() error {
 }
 func init() {
 	rootCmd.SetUsageFunc(func(c *cobra.Command) error { return nil })
+	carapace.Gen(rootCmd).Standalone()
 
 	rootCmd.PersistentFlags().Bool("ca-bundle", false, "The CA certificate bundle to use when verifying SSL certificates.")
 	rootCmd.PersistentFlags().Bool("cli-auto-prompt", false, "Automatically prompt for CLI input parameters.")
@@ -61,6 +62,7 @@ func init() {
 			Short: description,
 			Run:   func(cmd *cobra.Command, args []string) {},
 		}
+		carapace.Gen(serviceCmd).Standalone()
 		rootCmd.AddCommand(serviceCmd)
 		carapace.Gen(serviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
 			for name := range botocore.Operations(cmd.Use) {
