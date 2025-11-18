@@ -1,0 +1,54 @@
+name: create-smb-file-share
+description: Creates a Server Message Block (SMB) file share on an existing S3 File Gateway.
+flags:
+    --access-based-enumeration: The files and folders on this share will only be visible to users with read access.
+    --admin-user-list=: A list of users or groups in the Active Directory that will be granted administrator privileges on the file share.
+    --audit-destination-arn=: The Amazon Resource Name (ARN) of the storage used for audit logs.
+    --authentication=: The authentication method that users use to access the file share.
+    --bucket-region=: Specifies the Region of the S3 bucket where the SMB file share stores files.
+    --cache-attributes=: Specifies refresh cache information for the file share.
+    --case-sensitivity=: The case of an object name in an Amazon S3 bucket.
+    --client-token=!: A unique string value that you supply that is used by S3 File Gateway to ensure idempotent file share creation.
+    --default-storage-class=: The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway.
+    --encryption-type=: A value that specifies the type of server-side encryption that the file share will use for the data that it stores in Amazon S3.
+    --file-share-name=: The name of the file share.
+    --gateway-arn=!: The ARN of the S3 File Gateway on which you want to create a file share.
+    --guess-mime-type-enabled: A value that enables guessing of the MIME type for uploaded objects based on file extensions.
+    --invalid-user-list=: A list of users or groups in the Active Directory that are not allowed to access the file share.
+    --kms-encrypted: Optional.
+    --kms-key=: Optional.
+    --location-arn=!: A custom ARN for the backend storage used for storing data for file shares.
+    --no-access-based-enumeration: The files and folders on this share will only be visible to users with read access.
+    --no-guess-mime-type-enabled: A value that enables guessing of the MIME type for uploaded objects based on file extensions.
+    --no-kms-encrypted: Optional.
+    --no-oplocks-enabled: Specifies whether opportunistic locking is enabled for the SMB file share.
+    --no-read-only: A value that sets the write status of a file share.
+    --no-requester-pays: A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket.
+    --no-smbacl-enabled: Set this value to `true` to enable access control list (ACL) on the SMB file share.
+    --notification-policy=: The notification policy of the file share.
+    --object-acl=: A value that sets the access control list (ACL) permission for objects in the S3 bucket that a S3 File Gateway puts objects into.
+    --oplocks-enabled: Specifies whether opportunistic locking is enabled for the SMB file share.
+    --read-only: A value that sets the write status of a file share.
+    --requester-pays: A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket.
+    --role=!: The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway assumes when it accesses the underlying storage.
+    --smbacl-enabled: Set this value to `true` to enable access control list (ACL) on the SMB file share.
+    --tags=: A list of up to 50 tags that can be assigned to the NFS file share.
+    --valid-user-list=: A list of users or groups in the Active Directory that are allowed to access the file [share.
+    --vpc-endpoint-dns-name=: Specifies the DNS name for the VPC endpoint that the SMB file share uses to connect to Amazon S3.
+completion:
+    flag:
+        case-sensitivity:
+            - ClientSpecified
+            - CaseSensitive
+        encryption-type:
+            - SseS3
+            - SseKms
+            - DsseKms
+        object-acl:
+            - private
+            - public-read
+            - public-read-write
+            - authenticated-read
+            - bucket-owner-read
+            - bucket-owner-full-control
+            - aws-exec-read
