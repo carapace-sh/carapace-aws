@@ -114,7 +114,7 @@ func parse(path string) {
 			panic(err.Error())
 		}
 		cmd.Commands = append(cmd.Commands,
-			parseService(serviceDir.Name(), filepath.Join(path, versions[len(versions)-1].Name(), "service-2.json")),
+			parseService(serviceDir.Name(), filepath.Join(path, versions[len(versions)-1].Name())),
 		)
 	}
 
@@ -126,19 +126,46 @@ func parse(path string) {
 
 }
 
-func parseService(name, path string) command.Command {
+type Paginator struct {
+	LimitKey *string `json:"limit_key,omitempty"`
+}
+
+func parsePaginators(folder string) (map[string]Paginator, error) {
+	content, err := os.ReadFile(filepath.Join(folder, "paginators-1.json"))
+	if err != nil {
+		if os.IsNotExist(err) {
+			return make(map[string]Paginator), nil
+		}
+		return nil, err
+	}
+
+	var paginators struct {
+		Pagination map[string]Paginator `json:"pagination"`
+	}
+	if err := json.Unmarshal(content, &paginators); err != nil {
+		return nil, err
+	}
+	return paginators.Pagination, nil
+}
+
+func parseService(name, folder string) command.Command {
 	tokenizer, err := english.NewSentenceTokenizer(nil)
 	if err != nil {
 		panic(err.Error())
 	}
 
-	content, err := os.ReadFile(path)
+	content, err := os.ReadFile(filepath.Join(folder, "service-2.json"))
 	if err != nil {
 		panic(err.Error())
 	}
 
 	var service Service
 	if err := json.Unmarshal(content, &service); err != nil {
+		panic(err.Error())
+	}
+
+	paginators, err := parsePaginators(folder)
+	if err != nil {
 		panic(err.Error())
 	}
 
@@ -158,9 +185,49 @@ func parseService(name, path string) command.Command {
 		subCmd.Documentation.Flag = make(map[string]string)
 
 		// custom flags added by awscli
-		subCmd.AddFlag(command.Flag{Longhand: "--cli-input-json", Usage: "Read arguments from the JSON string provided", Value: true})
-		subCmd.AddFlag(command.Flag{Longhand: "--cli-input-yaml", Usage: "Read arguments from the YAML string provided", Value: true})
-		subCmd.AddFlag(command.Flag{Longhand: "--generate-cli-skeleton", Usage: "Prints a JSON skeleton to standard output without sending an API request"})
+		subCmd.AddFlag(command.Flag{Longhand: "--cli-input-json", Usage: "Read arguments from the JSON string provided.", Value: true})
+		subCmd.AddFlag(command.Flag{Longhand: "--cli-input-yaml", Usage: "Read arguments from the YAML string provided.", Value: true})
+		subCmd.AddFlag(command.Flag{Longhand: "--generate-cli-skeleton", Usage: "Prints a JSON skeleton to standard output without sending an API request."})
+
+		subCmd.Documentation.Flag["cli-input-json"] = `Reads arguments from the JSON string provided.
+The JSON string follows the  format  provided  by --generate-cli-skeleton.
+If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+This may  not  be  specified  along with --cli-input-yaml.`
+		subCmd.Documentation.Flag["cli-input-yaml"] = `Reads arguments from the JSON string provided.
+The JSON string follows the  format  provided  by --generate-cli-skeleton.
+If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+This may  not  be  specified  along with --cli-input-yaml.`
+		subCmd.Documentation.Flag["generate-cli-skeleton"] = `If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+This may  not  be  specified  along with --cli-input-yaml.`
+
+		if paginator, ok := paginators[name]; ok {
+			subCmd.AddFlag(command.Flag{Longhand: "--max-items", Usage: "The  total number of items to return in the command's output.", Value: true})
+			subCmd.AddFlag(command.Flag{Longhand: "--starting-token", Usage: "A token to specify where to start paginating.", Value: true})
+
+			subCmd.Documentation.Flag["max-items"] = `The total number of items to return in the command's output.
+If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+Do not use the NextToken response element directly outside of the AWS CLI.
+
+For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
+			subCmd.Documentation.Flag["starting-token"] = `A token to specify where to start paginating.
+This is the NextToken from a previously truncated response.
+
+For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
+
+			if paginator.LimitKey != nil {
+				subCmd.AddFlag(command.Flag{Longhand: "--page-size", Usage: "The size of each page to get in the AWS service call.", Value: true})
+
+				subCmd.Documentation.Flag["page-size"] = `The size of each page to get in the AWS service call.
+This does not affect the number of items returned in the command's output.
+Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+This can help prevent the AWS service calls from timing out.
+
+For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
+			}
+		}
 
 		if shape, ok := service.Shapes[operation.Input.Shape]; ok {
 			switch shape.Type {
@@ -174,7 +241,13 @@ func parseService(name, path string) command.Command {
 						memberdoc = strings.Split(tokens[0].Text, "\n")[0]
 					}
 
-					boolFlag := strings.ToLower(member.Shape) == "boolean" || strings.HasSuffix(member.Shape, "AttributeBooleanValue")
+					boolFlag := isBoolean(member.Shape)
+					if !boolFlag {
+						if shape, ok := service.Shapes[member.Shape]; ok && isBoolean(shape.Type) {
+							boolFlag = true
+						}
+					}
+
 					subCmd.AddFlag(command.Flag{
 						Longhand: "--" + CamelCaseToDash(name),
 						Usage:    memberdoc,
@@ -204,4 +277,8 @@ func parseService(name, path string) command.Command {
 		cmd.Commands = append(cmd.Commands, subCmd)
 	}
 	return cmd
+}
+
+func isBoolean(s string) bool {
+	return (strings.HasSuffix(strings.ToLower(s), "boolean") && !strings.HasPrefix(strings.ToLower(s), "map")) || strings.HasSuffix(s, "AttributeBooleanValue")
 }
