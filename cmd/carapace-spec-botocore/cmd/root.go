@@ -236,7 +236,9 @@ For usage examples, see Pagination in the AWS Command Line Interface User Guide.
 				for name, member := range shape.Members {
 					required := slices.Contains(shape.Required, name)
 					memberdoc, _ := htmltomarkdown.ConvertString(member.Documentation)
-					subCmd.Documentation.Flag[CamelCaseToDash(name)] = memberdoc
+
+					flagName := renameFlag(cmd.Name, subCmd.Name, CamelCaseToDash(name))
+					subCmd.Documentation.Flag[flagName] = memberdoc
 					if tokens := tokenizer.Tokenize(memberdoc); len(tokens) > 0 {
 						memberdoc = strings.Split(tokens[0].Text, "\n")[0]
 					}
@@ -249,14 +251,14 @@ For usage examples, see Pagination in the AWS Command Line Interface User Guide.
 					}
 
 					subCmd.AddFlag(command.Flag{
-						Longhand: "--" + CamelCaseToDash(name),
+						Longhand: "--" + flagName,
 						Usage:    memberdoc,
 						Value:    !boolFlag,
 						Required: required,
 					})
 					if boolFlag {
 						subCmd.AddFlag(command.Flag{
-							Longhand: "--no-" + CamelCaseToDash(name),
+							Longhand: "--no-" + flagName,
 							Usage:    memberdoc,
 							Required: required,
 						})
