@@ -43,41 +43,44 @@ func CamelCaseToDash(s string) string {
 
 	s = strings.ToLower(s)
 
-	quickfix := strings.NewReplacer(
-		"application-i-ds", "application-ids",
-		"asset-sh-a256", "asset-sha256",
-		"autonomous-data-storage-size-in-t-bs", "autonomous-data-storage-size-in-tbs",
-		"callback-ur-ls", "callback-urls",
-		"data-storage-size-in-t-bs", "data-storage-size-in-tbs",
-		"db-node-storage-size-in-g-bs", "db-node-storage-size-in-gbs",
-		"e-c2-family-filter", "ec2-family-filter",
-		"e-c2-inbound-permissions", "ec2-inbound-permissions",
-		"e-c2-instance-id", "ec2-instance-id",
-		"e-c2-instance-type", "ec2-instance-type",
-		"e-c2-security-group-id", "ec2-security-group-id",
-		"e-c2-security-group-name", "ec2-security-group-name",
-		"e-c2-security-group-owner-id", "ec2-security-group-owner-id",
-		"edn-s0-client-subnet-ip", "edn-s0-client-subnet-mask",
-		"edns0-client-subnet-ip", "edns0-client-subnet-mask",
-		"launch-configuration-template-i-ds", "launch-configuration-template-ids",
-		"logout-ur-ls", "logout-urls",
-		"memory-per-oracle-compute-unit-in-g-bs", "memory-per-oracle-compute-unit-in-gbs",
-		"memory-size-in-g-bs", "memory-size-in-gbs",
-		"no-retrieve-a-zs", "no-retrieve-azs",
-		"notification-ar-ns", "notification-arns",
-		"open-id-connect-provider-ar-ns", "open-id-connect-provider-arns",
-		"pool-ar-ns", "pool-arns",
-		"provider-ar-ns", "provider-arns",
-		"recovery-instance-i-ds", "recovery-instance-ids",
-		"replication-servers-security-groups-i-ds", "replication-servers-security-groups-ids",
-		"retrieve-a-zs", "retrieve-azs",
-		"saml-provider-ar-ns", "saml-provider-arns",
-		"source-server-i-d", "source-server-ids",
-		"tape-ar-ns", "tape-arns",
-		"target-group-ar-ns", "target-group-arns",
-		"vtl-device-ar-ns", "vtl-device-arns",
-	)
-	return quickfix.Replace(s)
+	quickfix := map[string]string{
+		"application-i-ds":                         "application-ids",
+		"asset-sh-a256":                            "asset-sha256",
+		"autonomous-data-storage-size-in-t-bs":     "autonomous-data-storage-size-in-tbs",
+		"callback-ur-ls":                           "callback-urls",
+		"data-storage-size-in-t-bs":                "data-storage-size-in-tbs",
+		"db-node-storage-size-in-g-bs":             "db-node-storage-size-in-gbs",
+		"e-c2-family-filter":                       "ec2-family-filter",
+		"e-c2-inbound-permissions":                 "ec2-inbound-permissions",
+		"e-c2-instance-id":                         "ec2-instance-id",
+		"e-c2-instance-type":                       "ec2-instance-type",
+		"e-c2-security-group-id":                   "ec2-security-group-id",
+		"e-c2-security-group-name":                 "ec2-security-group-name",
+		"e-c2-security-group-owner-id":             "ec2-security-group-owner-id",
+		"edn-s0-client-subnet-ip":                  "edn-s0-client-subnet-mask",
+		"edns0-client-subnet-ip":                   "edns0-client-subnet-mask",
+		"launch-configuration-template-i-ds":       "launch-configuration-template-ids",
+		"logout-ur-ls":                             "logout-urls",
+		"memory-per-oracle-compute-unit-in-g-bs":   "memory-per-oracle-compute-unit-in-gbs",
+		"memory-size-in-g-bs":                      "memory-size-in-gbs",
+		"no-retrieve-a-zs":                         "no-retrieve-azs",
+		"notification-ar-ns":                       "notification-arns",
+		"open-id-connect-provider-ar-ns":           "open-id-connect-provider-arns",
+		"pool-ar-ns":                               "pool-arns",
+		"provider-ar-ns":                           "provider-arns",
+		"recovery-instance-i-ds":                   "recovery-instance-ids",
+		"replication-servers-security-groups-i-ds": "replication-servers-security-groups-ids",
+		"retrieve-a-zs":                            "retrieve-azs",
+		"saml-provider-ar-ns":                      "saml-provider-arns",
+		"source-server-i-d":                        "source-server-ids",
+		"tape-ar-ns":                               "tape-arns",
+		"target-group-ar-ns":                       "target-group-arns",
+		"vtl-device-ar-ns":                         "vtl-device-arns",
+	}
+	if replacement, ok := quickfix[s]; ok {
+		return replacement
+	}
+	return s
 }
 
 type Service struct {
