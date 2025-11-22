@@ -1,0 +1,25 @@
+name: aws template
+
+on:
+  workflow_call:
+    inputs:
+      service:
+        required: true
+        type: string
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    container: amazon/aws-cli:2.32.2
+
+    steps:
+    - uses: actions/download-artifact@v6
+      with:
+        name: carapace-aws
+        path: /usr/local/bin/
+
+    - name: fix permissions
+      run: chmod +x /usr/local/bin/carapace-aws*
+
+    - name: run carapace-aws.test
+      run: SERVICE=${{ inputs.service }} carapace-aws.test
