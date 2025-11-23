@@ -65,16 +65,18 @@ func init() {
 		carapace.Gen(serviceCmd).Standalone()
 		rootCmd.AddCommand(serviceCmd)
 		carapace.Gen(serviceCmd).PreRun(func(cmd *cobra.Command, args []string) {
-			for name := range botocore.Operations(cmd.Use) {
-				botoCommand, err := botocore.Get(fmt.Sprintf("aws.%s.%s.yaml", serviceCmd.Use, name))
-				if err != nil {
-					carapace.LOG.Println(err.Error()) // TODO handle error
-					return
-				}
-				operationCmd := botoCommand.ToCobra()
+			botoCommand, err := botocore.Get(fmt.Sprintf("aws.%s.yaml", serviceCmd.Use))
+			if err != nil {
+				carapace.LOG.Println(err.Error()) // TODO handle error
+				return
+			}
+
+			for _, subCmd := range botoCommand.Commands {
+				operationCmd := spec.Command(subCmd).ToCobra()
 				serviceCmd.AddCommand(operationCmd)
 
 				carapace.Gen(operationCmd).PreInvoke(func(cmd *cobra.Command, flag *pflag.Flag, action carapace.Action) carapace.Action {
+					// TODO same for deeper wait subcommands
 					if flag != nil && flag.Value.Type() == "string" {
 						if _, ok := botoCommand.Completion.Flag[flag.Name]; !ok {
 							return common.ActionBridgeAwsCompleter()

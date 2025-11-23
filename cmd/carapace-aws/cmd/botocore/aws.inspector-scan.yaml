@@ -1,2 +1,38 @@
 name: inspector-scan
 description: Inspector Scan
+commands:
+    - name: scan-sbom
+      description: Scans a provided CycloneDX 1.5 SBOM and reports on any vulnerabilities discovered in that SBOM.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --output-format=: The output format for the vulnerability report.
+        --sbom=!: The JSON file for the SBOM you want to scan.
+      completion:
+        flag:
+            output-format:
+                - CYCLONE_DX_1_5
+                - INSPECTOR
+      documentation:
+        command: Scans a provided CycloneDX 1.5 SBOM and reports on any vulnerabilities discovered in that SBOM. You can generate compatible SBOMs for your resources using the [Amazon Inspector SBOM generator]().
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            output-format: The output format for the vulnerability report.
+            sbom: The JSON file for the SBOM you want to scan. The SBOM must be in CycloneDX 1.5 format.
+documentation:
+    command: Amazon Inspector Scan is a vulnerability discovery service that scans a provided Software Bill of Materials (SBOM) for security vulnerabilities.

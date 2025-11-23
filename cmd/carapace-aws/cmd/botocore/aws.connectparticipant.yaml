@@ -1,2 +1,500 @@
 name: connectparticipant
 description: Amazon Connect Participant Service
+commands:
+    - name: disconnect-participant
+      description: Disconnects a participant.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: |-
+            Disconnects a participant.
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+
+            `ConnectionToken` is used for invoking this API instead of `ParticipantToken`.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+            connection-token: The authentication token associated with the participant's connection.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: get-authentication-url
+      description: Retrieves the AuthenticationUrl for the current authentication session for the AuthenticateCustomer flow block.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --redirect-uri=!: The URL where the customer will be redirected after Amazon Cognito authorizes the user.
+        --session-id=!: The sessionId provided in the authenticationInitiated event.
+      documentation:
+        command: |-
+            Retrieves the AuthenticationUrl for the current authentication session for the AuthenticateCustomer flow block.
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+
+            - This API can only be called within one minute of receiving the authenticationInitiated event.
+            - The current supported channel is chat. This API is not supported for Apple Messages for Business, WhatsApp, or SMS chats.
+
+            `ConnectionToken` is used for invoking this API instead of `ParticipantToken`.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            connection-token: The authentication token associated with the participant's connection.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            redirect-uri: The URL where the customer will be redirected after Amazon Cognito authorizes the user.
+            session-id: The sessionId provided in the authenticationInitiated event.
+    - name: get-transcript
+      description: Retrieves a transcript of the session, including details about any attachments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --contact-id=: The contactId from the current contact chain for which transcript is needed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in the page.
+        --next-token=: The pagination token.
+        --scan-direction=: The direction from StartPosition from which to retrieve message.
+        --sort-order=: The sort order for the records.
+        --start-position=: A filtering option for where to start.
+      completion:
+        flag:
+            scan-direction:
+                - FORWARD
+                - BACKWARD
+            sort-order:
+                - DESCENDING
+                - ASCENDING
+      documentation:
+        command: |-
+            Retrieves a transcript of the session, including details about any attachments. For information about accessing past chat contact transcripts for a persistent chat, see [Enable persistent chat](https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html).
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+
+            If you have a process that consumes events in the transcript of an chat that has ended, note that chat transcripts contain the following event content types if the event has occurred during the chat session:
+
+            - `application/vnd.amazonaws.connect.event.participant.invited`
+            - `application/vnd.amazonaws.connect.event.participant.joined`
+            - `application/vnd.amazonaws.connect.event.participant.left`
+            - `application/vnd.amazonaws.connect.event.chat.ended`
+            - `application/vnd.amazonaws.connect.event.transfer.succeeded`
+            - `application/vnd.amazonaws.connect.event.transfer.failed`
+
+            `ConnectionToken` is used for invoking this API instead of `ParticipantToken`.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            connection-token: The authentication token associated with the participant's connection.
+            contact-id: The contactId from the current contact chain for which transcript is needed.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-results: 'The maximum number of results to return in the page. Default: 10.'
+            next-token: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+            scan-direction: 'The direction from StartPosition from which to retrieve message. Default: BACKWARD when no StartPosition is provided, FORWARD with StartPosition.'
+            sort-order: 'The sort order for the records. Default: DESCENDING.'
+            start-position: A filtering option for where to start.
+    - name: send-event
+      description: The `application/vnd.amazonaws.connect.event.connection.acknowledged` ContentType is no longer maintained since December 31, 2024. This event has been migrated to the [CreateParticipantConnection](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html) API using the `ConnectParticipant` field.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --content-type=!: The content type of the request.
+        --content=: The content of the event to be sent (for example, message text).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: |-
+            The `application/vnd.amazonaws.connect.event.connection.acknowledged` ContentType is no longer maintained since December 31, 2024. This event has been migrated to the [CreateParticipantConnection](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html) API using the `ConnectParticipant` field.
+
+            Sends an event. Message receipts are not supported when there are more than two active participants in the chat. Using the SendEvent API for message receipts when a supervisor is barged-in will result in a conflict exception.
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+
+            `ConnectionToken` is used for invoking this API instead of `ParticipantToken`.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+            connection-token: The authentication token associated with the participant's connection.
+            content: |-
+                The content of the event to be sent (for example, message text). For content related to message receipts, this is supported in the form of a JSON string.
+
+                Sample Content: "{\\"messageId\\":\\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\\"}"
+            content-type: |-
+                The content type of the request. Supported types are:
+
+                - application/vnd.amazonaws.connect.event.typing
+                - application/vnd.amazonaws.connect.event.connection.acknowledged (is no longer maintained since December 31, 2024)
+                - application/vnd.amazonaws.connect.event.message.delivered
+                - application/vnd.amazonaws.connect.event.message.read
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: cancel-participant-authentication
+      description: Cancels the authentication session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The `sessionId` provided in the `authenticationInitiated` event.
+      documentation:
+        command: |-
+            Cancels the authentication session. The opted out branch of the Authenticate Customer flow block will be taken.
+
+            The current supported channel is chat. This API is not supported for Apple Messages for Business, WhatsApp, or SMS chats.
+
+            `ConnectionToken` is used for invoking this API instead of `ParticipantToken`.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            connection-token: The authentication token associated with the participant's connection.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            session-id: The `sessionId` provided in the `authenticationInitiated` event.
+    - name: complete-attachment-upload
+      description: Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API.
+      flags:
+        --attachment-ids=!: A list of unique identifiers for the attachments.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: |-
+            Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API. A conflict exception is thrown when an attachment with that identifier is already being uploaded.
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+
+            `ConnectionToken` is used for invoking this API instead of `ParticipantToken`.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            attachment-ids: A list of unique identifiers for the attachments.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+            connection-token: The authentication token associated with the participant's connection.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: create-participant-connection
+      description: Creates the participant's connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connect-participant: Amazon Connect Participant is used to mark the participant as connected for customer participant in message streaming, as well as for agent or manager participant in non-streaming chats.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-connect-participant: Amazon Connect Participant is used to mark the participant as connected for customer participant in message streaming, as well as for agent or manager participant in non-streaming chats.
+        --participant-token=!: This is a header parameter.
+        --type=: Type of connection information required.
+      documentation:
+        command: |-
+            Creates the participant's connection.
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+
+            For WebRTC security recommendations, see [Amazon Connect WebRTC security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security).
+
+            `ParticipantToken` is used for invoking this API instead of `ConnectionToken`.
+
+            The participant token is valid for the lifetime of the participant – until they are part of a contact. For WebRTC participants, if they leave or are disconnected for 60 seconds, a new participant needs to be created using the [CreateParticipant](https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateParticipant.html) API.
+
+            **For `WEBSOCKET` Type**:
+
+            The response URL for has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic.
+
+            For chat, you need to publish the following on the established websocket connection:
+
+            `{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}`
+
+            Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.
+
+            The expiry time for the connection token is different than the `ChatDurationInMinutes`. Expiry time for the connection token is 1 day.
+
+            **For `WEBRTC_CONNECTION` Type**:
+
+            The response includes connection data required for the client application to join the call using the Amazon Chime SDK client libraries. The WebRTCConnection response contains Meeting and Attendee information needed to establish the media connection.
+
+            The attendee join token in WebRTCConnection response is valid for the lifetime of the participant in the call. If a participant leaves or is disconnected for 60 seconds, their participant credentials will no longer be valid, and a new participant will need to be created to rejoin the call.
+
+            **Message streaming support**: This API can also be used together with the [StartContactStreaming](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html) API to create a participant connection for chat contacts that are not using a websocket. For more information about message streaming, [Enable real-time chat message streaming](https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html) in the *Amazon Connect Administrator Guide*.
+
+            **Multi-user web, in-app, video calling support**:
+
+            For WebRTC calls, this API is used in conjunction with the CreateParticipant API to enable multi-party calling. The StartWebRTCContact API creates the initial contact and routes it to an agent, while CreateParticipant adds additional participants to the ongoing call. For more information about multi-party WebRTC calls, see [Enable multi-user web, in-app, and video calling](https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html) in the *Amazon Connect Administrator Guide*.
+
+            **Feature specifications**: For information about feature specifications, such as the allowed number of open websocket connections per participant or maximum number of WebRTC participants, see [Feature specifications](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits) in the *Amazon Connect Administrator Guide*.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            connect-participant: Amazon Connect Participant is used to mark the participant as connected for customer participant in message streaming, as well as for agent or manager participant in non-streaming chats.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            participant-token: |-
+                This is a header parameter.
+
+                The ParticipantToken as obtained from [StartChatContact](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html) API response.
+            type: Type of connection information required. If you need `CONNECTION_CREDENTIALS` along with marking participant as connected, pass `CONNECTION_CREDENTIALS` in `Type`.
+    - name: get-attachment
+      description: Provides a pre-signed URL for download of a completed attachment.
+      flags:
+        --attachment-id=!: A unique identifier for the attachment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --url-expiry-in-seconds=: The expiration time of the URL in ISO timestamp.
+      documentation:
+        command: |-
+            Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts.
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+
+            - The participant role `CUSTOM_BOT` is not permitted to access attachments customers may upload. An `AccessDeniedException` can indicate that the participant may be a CUSTOM\_BOT, and it doesn't have access to attachments.
+            - `ConnectionToken` is used for invoking this API instead of `ParticipantToken`.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            attachment-id: A unique identifier for the attachment.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            connection-token: The authentication token associated with the participant's connection.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            url-expiry-in-seconds: 'The expiration time of the URL in ISO timestamp. It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.'
+    - name: send-message
+      description: Sends a message.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --connection-token=!: The authentication token associated with the connection.
+        --content-type=!: The type of the content.
+        --content=!: The content of the message.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: |-
+            Sends a message.
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+
+            `ConnectionToken` is used for invoking this API instead of `ParticipantToken`.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+            connection-token: The authentication token associated with the connection.
+            content: |-
+                The content of the message.
+
+                - For `text/plain` and `text/markdown`, the Length Constraints are Minimum of 1, Maximum of 1024.
+                - For `application/json`, the Length Constraints are Minimum of 1, Maximum of 12000.
+                - For `application/vnd.amazonaws.connect.message.interactive.response`, the Length Constraints are Minimum of 1, Maximum of 12288.
+            content-type: |-
+                The type of the content. Possible types are `text/plain`, `text/markdown`, `application/json`, and `application/vnd.amazonaws.connect.message.interactive.response`.
+
+                Supported types on the contact are configured through `SupportedMessagingContentTypes` on [StartChatContact](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html) and [StartOutboundChatContact](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html).
+
+                For Apple Messages for Business, SMS, and WhatsApp Business Messaging contacts, only `text/plain` is supported.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: start-attachment-upload
+      description: Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.
+      flags:
+        --attachment-name=!: A case-sensitive name of the attachment being uploaded.
+        --attachment-size-in-bytes=!: The size of the attachment in bytes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --connection-token=!: The authentication token associated with the participant's connection.
+        --content-type=!: Describes the MIME file type of the attachment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: |-
+            Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+
+            `ConnectionToken` is used for invoking this API instead of `ParticipantToken`.
+
+            The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
+        flag:
+            attachment-name: A case-sensitive name of the attachment being uploaded.
+            attachment-size-in-bytes: The size of the attachment in bytes.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see [Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+            connection-token: The authentication token associated with the participant's connection.
+            content-type: Describes the MIME file type of the attachment. For a list of supported file types, see [Feature specifications](https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html) in the *Amazon Connect Administrator Guide*.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: describe-view
+      description: Retrieves the view for the specified view token.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connection-token=!: The connection token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --view-token=!: An encrypted token originating from the interactive message of a ShowView block operation.
+      documentation:
+        command: |-
+            Retrieves the view for the specified view token.
+
+            For security recommendations, see [Amazon Connect Chat security best practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            connection-token: The connection token.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            view-token: An encrypted token originating from the interactive message of a ShowView block operation. Represents the desired view.
+documentation:
+    command: |-
+        - [Participant Service actions](https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Participant_Service.html)
+        - [Participant Service data types](https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Participant_Service.html)
+
+        Amazon Connect is an easy-to-use omnichannel cloud contact center service that enables companies of any size to deliver superior customer service at a lower cost. Amazon Connect communications capabilities make it easy for companies to deliver personalized interactions across communication channels, including chat.
+
+        Use the Amazon Connect Participant Service to manage participants (for example, agents, customers, and managers listening in), and to send messages and events within a chat contact. The APIs in the service enable the following: sending chat messages, attachment sharing, managing a participant's connection state and message events, and retrieving chat transcripts.

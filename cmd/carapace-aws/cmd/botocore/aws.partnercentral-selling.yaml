@@ -1,2 +1,1746 @@
 name: partnercentral-selling
 description: Partner Central Selling API
+commands:
+    - name: list-resource-snapshots
+      description: Retrieves a list of resource view snapshots based on specified criteria.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-by=: Filters the response to include only snapshots of resources owned by the specified AWS account.
+        --engagement-identifier=!: The unique identifier of the engagement associated with the snapshots.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-identifier=: Filters the response to include only snapshots of the specified resource.
+        --resource-snapshot-template-identifier=: Filters the response to include only snapshots created using the specified template.
+        --resource-type=: Filters the response to include only snapshots of the specified resource type.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-type:
+                - Opportunity
+      documentation:
+        command: |-
+            Retrieves a list of resource view snapshots based on specified criteria. This operation supports various use cases, including:
+
+            - Fetching all snapshots associated with an engagement.
+            - Retrieving snapshots of a specific resource type within an engagement.
+            - Obtaining snapshots for a particular resource using a specified template.
+            - Accessing the latest snapshot of a resource within an engagement.
+            - Filtering snapshots by resource owner.
+        flag:
+            catalog: Specifies the catalog related to the request.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            created-by: Filters the response to include only snapshots of resources owned by the specified AWS account.
+            engagement-identifier: The unique identifier of the engagement associated with the snapshots.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in a single call.
+            next-token: The token for the next set of results.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            resource-identifier: Filters the response to include only snapshots of the specified resource.
+            resource-snapshot-template-identifier: Filters the response to include only snapshots created using the specified template.
+            resource-type: Filters the response to include only snapshots of the specified resource type.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: reject-engagement-invitation
+      description: This action rejects an `EngagementInvitation` that AWS shared.
+      flags:
+        --catalog=!: This is the catalog that's associated with the engagement invitation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: This is the unique identifier of the rejected `EngagementInvitation`.
+        --rejection-reason=: This describes the reason for rejecting the engagement invitation, which helps AWS track usage patterns.
+      documentation:
+        command: This action rejects an `EngagementInvitation` that AWS shared. Rejecting an invitation indicates that the partner doesn't want to pursue the opportunity, and all related data will become inaccessible thereafter.
+        flag:
+            catalog: This is the catalog that's associated with the engagement invitation. Acceptable values are `AWS` or `Sandbox`, and these values determine the environment in which the opportunity is managed.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: This is the unique identifier of the rejected `EngagementInvitation`. Providing the correct identifier helps to ensure that the intended invitation is rejected.
+            rejection-reason: |-
+                This describes the reason for rejecting the engagement invitation, which helps AWS track usage patterns. Acceptable values include the following:
+
+                - *Customer problem unclear:* The customer's problem isn't understood.
+                - *Next steps unclear:* The next steps required to proceed aren't understood.
+                - *Unable to support:* The partner is unable to provide support due to resource or capability constraints.
+                - *Duplicate of partner referral:* The opportunity is a duplicate of an existing referral.
+                - *Other:* Any reason not covered by other values.
+    - name: accept-engagement-invitation
+      description: Use the `AcceptEngagementInvitation` action to accept an engagement invitation shared by AWS.
+      flags:
+        --catalog=!: The `CatalogType` parameter specifies the catalog associated with the engagement invitation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The `Identifier` parameter in the `AcceptEngagementInvitationRequest` specifies the unique identifier of the `EngagementInvitation` to be accepted.
+      documentation:
+        command: Use the `AcceptEngagementInvitation` action to accept an engagement invitation shared by AWS. Accepting the invitation indicates your willingness to participate in the engagement, granting you access to all engagement-related data.
+        flag:
+            catalog: The `CatalogType` parameter specifies the catalog associated with the engagement invitation. Accepted values are `AWS` and `Sandbox`, which determine the environment in which the engagement invitation is managed.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: The `Identifier` parameter in the `AcceptEngagementInvitationRequest` specifies the unique identifier of the `EngagementInvitation` to be accepted. Providing the correct identifier ensures that the intended invitation is accepted.
+    - name: create-opportunity
+      description: Creates an `Opportunity` record in Partner Central.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Required to be unique, and should be unchanging, it can be randomly generated or a meaningful string.
+        --customer=: Specifies customer details associated with the `Opportunity`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --life-cycle=: An object that contains lifecycle details for the `Opportunity`.
+        --marketing=: This object contains marketing details and is optional for an opportunity.
+        --national-security=: Indicates whether the `Opportunity` pertains to a national security project.
+        --opportunity-team=: Represents the internal team handling the opportunity.
+        --opportunity-type=: Specifies the opportunity type as a renewal, new, or expansion.
+        --origin=: Specifies the origin of the opportunity, indicating if it was sourced from Amazon Web Services or the partner.
+        --partner-opportunity-identifier=: Specifies the opportunity's unique identifier in the partner's CRM system.
+        --primary-needs-from-aws=: Identifies the type of support the partner needs from Amazon Web Services.
+        --project=: An object that contains project details for the `Opportunity`.
+        --software-revenue=: Specifies details of a customer's procurement terms.
+        --tags=: A map of the key-value pairs of the tag or tags to assign.
+      completion:
+        flag:
+            national-security:
+                - "Yes"
+                - "No"
+            opportunity-type:
+                - Net New Business
+                - Flat Renewal
+                - Expansion
+            origin:
+                - AWS Referral
+                - Partner Referral
+      documentation:
+        command: |-
+            Creates an `Opportunity` record in Partner Central. Use this operation to create a potential business opportunity for submission to Amazon Web Services. Creating an opportunity sets `Lifecycle.ReviewStatus` to `Pending Submission`.
+
+            To submit an opportunity, follow these steps:
+
+            1. To create the opportunity, use `CreateOpportunity`.
+            2. To associate a solution with the opportunity, use `AssociateOpportunity`.
+            3. To start the engagement with AWS, use `StartEngagementFromOpportunity`.
+
+            After submission, you can't edit the opportunity until the review is complete. But opportunities in the `Pending Submission` state must have complete details. You can update the opportunity while it's in the `Pending Submission` state.
+
+            There's a set of mandatory fields to create opportunities, but consider providing optional fields to enrich the opportunity record.
+        flag:
+            catalog: 'Specifies the catalog associated with the request. This field takes a string value from a predefined list: `AWS` or `Sandbox`. The catalog determines which environment the opportunity is created in. Use `AWS` to create opportunities in the Amazon Web Services catalog, and `Sandbox` for testing in secure, isolated environments.'
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: |-
+                Required to be unique, and should be unchanging, it can be randomly generated or a meaningful string.
+
+                Default: None
+
+                Best practice: To help ensure uniqueness and avoid conflicts, use a Universally Unique Identifier (UUID) as the `ClientToken`. You can use standard libraries from most programming languages to generate this. If you use the same client token, the API returns the following error: "Conflicting client token submitted for a new request body."
+            customer: Specifies customer details associated with the `Opportunity`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            life-cycle: An object that contains lifecycle details for the `Opportunity`.
+            marketing: This object contains marketing details and is optional for an opportunity.
+            national-security: Indicates whether the `Opportunity` pertains to a national security project. This field must be set to `true` only when the customer's industry is *Government*. Additional privacy and security measures apply during the review and management process for opportunities marked as `NationalSecurity`.
+            opportunity-team: Represents the internal team handling the opportunity. Specify collaborating members of this opportunity who are within the partner's organization.
+            opportunity-type: |-
+                Specifies the opportunity type as a renewal, new, or expansion.
+
+                Opportunity types:
+
+                - New opportunity: Represents a new business opportunity with a potential customer that's not previously engaged with your solutions or services.
+                - Renewal opportunity: Represents an opportunity to renew an existing contract or subscription with a current customer, ensuring continuity of service.
+                - Expansion opportunity: Represents an opportunity to expand the scope of an existing contract or subscription, either by adding new services or increasing the volume of existing services for a current customer.
+            origin: 'Specifies the origin of the opportunity, indicating if it was sourced from Amazon Web Services or the partner. For all opportunities created with `Catalog: AWS`, this field must only be `Partner Referral`. However, when using `Catalog: Sandbox`, you can set this field to `AWS Referral` to simulate Amazon Web Services referral creation. This allows Amazon Web Services-originated flows testing in the sandbox catalog.'
+            partner-opportunity-identifier: |-
+                Specifies the opportunity's unique identifier in the partner's CRM system. This value is essential to track and reconcile because it's included in the outbound payload to the partner.
+
+                This field allows partners to link an opportunity to their CRM, which helps to ensure seamless integration and accurate synchronization between the Partner Central API and the partner's internal systems.
+            primary-needs-from-aws: |-
+                Identifies the type of support the partner needs from Amazon Web Services.
+
+                Valid values:
+
+                - Cosell—Architectural Validation: Confirmation from Amazon Web Services that the partner's proposed solution architecture is aligned with Amazon Web Services best practices and poses minimal architectural risks.
+                - Cosell—Business Presentation: Request Amazon Web Services seller's participation in a joint customer presentation.
+                - Cosell—Competitive Information: Access to Amazon Web Services competitive resources and support for the partner's proposed solution.
+                - Cosell—Pricing Assistance: Connect with an Amazon Web Services seller for support situations where a partner may be receiving an upfront discount on a service (for example: EDP deals).
+                - Cosell—Technical Consultation: Connect with an Amazon Web Services Solutions Architect to address the partner's questions about the proposed solution.
+                - Cosell—Total Cost of Ownership Evaluation: Assistance with quoting different cost savings of proposed solutions on Amazon Web Services versus on-premises or a traditional hosting environment.
+                - Cosell—Deal Support: Request Amazon Web Services seller's support to progress the opportunity (for example: joint customer call, strategic positioning).
+                - Cosell—Support for Public Tender/RFx: Opportunity related to the public sector where the partner needs Amazon Web Services RFx support.
+            project: An object that contains project details for the `Opportunity`.
+            software-revenue: Specifies details of a customer's procurement terms. This is required only for partners in eligible programs.
+            tags: A map of the key-value pairs of the tag or tags to assign.
+    - name: create-resource-snapshot-job
+      description: Use this action to create a job to generate a snapshot of the specified resource within an engagement.
+      flags:
+        --catalog=!: Specifies the catalog in which to create the snapshot job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A client-generated UUID used for idempotency check.
+        --engagement-identifier=!: Specifies the identifier of the engagement associated with the resource to be snapshotted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: Specifies the identifier of the specific resource to be snapshotted.
+        --resource-snapshot-template-identifier=!: Specifies the name of the template that defines the schema for the snapshot.
+        --resource-type=!: The type of resource for which the snapshot job is being created.
+        --tags=: A map of the key-value pairs of the tag or tags to assign.
+      completion:
+        flag:
+            resource-type:
+                - Opportunity
+      documentation:
+        command: Use this action to create a job to generate a snapshot of the specified resource within an engagement. It initiates an asynchronous process to create a resource snapshot. The job creates a new snapshot only if the resource state has changed, adhering to the same access control and immutability rules as direct snapshot creation.
+        flag:
+            catalog: Specifies the catalog in which to create the snapshot job. Valid values are `AWS` and `Sandbox`.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: A client-generated UUID used for idempotency check. The token helps prevent duplicate job creations.
+            engagement-identifier: Specifies the identifier of the engagement associated with the resource to be snapshotted.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-identifier: Specifies the identifier of the specific resource to be snapshotted. The format depends on the `ResourceType`.
+            resource-snapshot-template-identifier: Specifies the name of the template that defines the schema for the snapshot.
+            resource-type: The type of resource for which the snapshot job is being created. Must be one of the supported resource types i.e. `Opportunity`
+            tags: A map of the key-value pairs of the tag or tags to assign.
+    - name: get-opportunity
+      description: Fetches the `Opportunity` record from Partner Central by a given `Identifier`.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Read-only, system generated `Opportunity` unique identifier.
+      documentation:
+        command: |-
+            Fetches the `Opportunity` record from Partner Central by a given `Identifier`.
+
+            Use the `ListOpportunities` action or the event notification (from Amazon EventBridge) to obtain this identifier.
+        flag:
+            catalog: 'Specifies the catalog associated with the request. This field takes a string value from a predefined list: `AWS` or `Sandbox`. The catalog determines which environment the opportunity is fetched from. Use `AWS` to retrieve opportunities in the Amazon Web Services catalog, and `Sandbox` to retrieve opportunities in a secure, isolated testing environment.'
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: Read-only, system generated `Opportunity` unique identifier.
+    - name: list-engagement-from-opportunity-tasks
+      description: Lists all in-progress, completed, or failed `EngagementFromOpportunity` tasks that were initiated by the caller's account.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-identifier=: Filters tasks by the identifiers of the engagements they created or are associated with.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single page of the response.Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.
+        --next-token=: The token for requesting the next page of results.
+        --opportunity-identifier=: The identifier of the original opportunity associated with this task.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Specifies the sorting criteria for the returned results.
+        --starting-token=: A token to specify where to start paginating.
+        --task-identifier=: Filters tasks by their unique identifiers.
+        --task-status=: Filters the tasks based on their current status.
+      documentation:
+        command: Lists all in-progress, completed, or failed `EngagementFromOpportunity` tasks that were initiated by the caller's account.
+        flag:
+            catalog: |-
+                Specifies the catalog related to the request. Valid values are:
+
+                - AWS: Retrieves the request from the production AWS environment.
+                - Sandbox: Retrieves the request from a sandbox environment used for testing or development purposes.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            engagement-identifier: Filters tasks by the identifiers of the engagements they created or are associated with.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Specifies the maximum number of results to return in a single page of the response.Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.
+            next-token: The token for requesting the next page of results. This value is obtained from the NextToken field in the response of a previous call to this API. Use this parameter for pagination when the result set spans multiple pages.
+            opportunity-identifier: The identifier of the original opportunity associated with this task.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            sort: Specifies the sorting criteria for the returned results. This allows you to order the tasks based on specific attributes.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            task-identifier: Filters tasks by their unique identifiers. Use this when you want to retrieve information about specific tasks.
+            task-status: Filters the tasks based on their current status. This allows you to focus on tasks in specific states.
+    - name: put-selling-system-settings
+      description: Updates the currently set system settings, which include the IAM Role used for resource snapshot jobs.
+      flags:
+        --catalog=!: Specifies the catalog in which the settings will be updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-snapshot-job-role-identifier=: Specifies the ARN of the IAM Role used for resource snapshot job executions.
+      documentation:
+        command: Updates the currently set system settings, which include the IAM Role used for resource snapshot jobs.
+        flag:
+            catalog: Specifies the catalog in which the settings will be updated. Acceptable values include `AWS` for production and `Sandbox` for testing environments.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-snapshot-job-role-identifier: Specifies the ARN of the IAM Role used for resource snapshot job executions.
+    - name: get-engagement-invitation
+      description: Retrieves the details of an engagement invitation shared by AWS with a partner.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the unique identifier for the retrieved engagement invitation.
+      documentation:
+        command: Retrieves the details of an engagement invitation shared by AWS with a partner. The information includes aspects such as customer, project details, and lifecycle information. To connect an engagement invitation with an opportunity, match the invitation’s `Payload.Project.Title` with opportunity `Project.Title`.
+        flag:
+            catalog: 'Specifies the catalog associated with the request. The field accepts values from the predefined set: `AWS` for live operations or `Sandbox` for testing environments.'
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: Specifies the unique identifier for the retrieved engagement invitation.
+    - name: list-engagement-members
+      description: Retrieves the details of member partners in an Engagement.
+      flags:
+        --catalog=!: The catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Identifier of the Engagement record to retrieve members from.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: Retrieves the details of member partners in an Engagement. This operation can only be invoked by members of the Engagement. The `ListEngagementMembers` operation allows you to fetch information about the members of a specific Engagement. This action is restricted to members of the Engagement being queried.
+        flag:
+            catalog: The catalog related to the request.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: Identifier of the Engagement record to retrieve members from.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in a single call.
+            next-token: The token for the next set of results.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-solutions
+      description: Retrieves a list of Partner Solutions that the partner registered on Partner Central.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --category=: Filters the solutions based on the category to which they belong.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=: Filters the solutions based on their unique identifier.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results returned by a single call.
+        --next-token=: A pagination token used to retrieve the next set of results in subsequent calls.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Object that configures sorting done on the response.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filters solutions based on their status.
+      documentation:
+        command: Retrieves a list of Partner Solutions that the partner registered on Partner Central. This API is used to generate a list of solutions that an end user selects from for association with an opportunity.
+        flag:
+            catalog: 'Specifies the catalog associated with the request. This field takes a string value from a predefined list: `AWS` or `Sandbox`. The catalog determines which environment the solutions are listed in. Use `AWS` to list solutions in the Amazon Web Services catalog, and `Sandbox` to list solutions in a secure and isolated testing environment.'
+            category: Filters the solutions based on the category to which they belong. This allows partners to search for solutions within specific categories, such as `Software`, `Consulting`, or `Managed Services`.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: Filters the solutions based on their unique identifier. Use this filter to retrieve specific solutions by providing the solution's identifier for accurate results.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: |-
+                The maximum number of results returned by a single call. This value must be provided in the next call to retrieve the next set of results.
+
+                Default: 20
+            next-token: A pagination token used to retrieve the next set of results in subsequent calls. This token is included in the response only if there are additional result pages available.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            sort: Object that configures sorting done on the response. Default `Sort.SortBy` is `Identifier`.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            status: Filters solutions based on their status. This filter helps partners manage their solution portfolios effectively.
+    - name: create-resource-snapshot
+      description: This action allows you to create an immutable snapshot of a specific resource, such as an opportunity, within the context of an engagement.
+      flags:
+        --catalog=!: Specifies the catalog where the snapshot is created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Specifies a unique, client-generated UUID to ensure that the request is handled exactly once.
+        --engagement-identifier=!: The unique identifier of the engagement associated with this snapshot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: The unique identifier of the specific resource to be snapshotted.
+        --resource-snapshot-template-identifier=!: The name of the template that defines the schema for the snapshot.
+        --resource-type=!: Specifies the type of resource for which the snapshot is being created.
+      completion:
+        flag:
+            resource-type:
+                - Opportunity
+      documentation:
+        command: This action allows you to create an immutable snapshot of a specific resource, such as an opportunity, within the context of an engagement. The snapshot captures a subset of the resource's data based on the schema defined by the provided template.
+        flag:
+            catalog: Specifies the catalog where the snapshot is created. Valid values are `AWS` and `Sandbox`.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Specifies a unique, client-generated UUID to ensure that the request is handled exactly once. This token helps prevent duplicate snapshot creations.
+            engagement-identifier: The unique identifier of the engagement associated with this snapshot. This field links the snapshot to a specific engagement context.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-identifier: 'The unique identifier of the specific resource to be snapshotted. The format and constraints of this identifier depend on the `ResourceType` specified. For example: For `Opportunity` type, it will be an opportunity ID.'
+            resource-snapshot-template-identifier: The name of the template that defines the schema for the snapshot. This template determines which subset of the resource data will be included in the snapshot. Must correspond to an existing and valid template for the specified `ResourceType`.
+            resource-type: 'Specifies the type of resource for which the snapshot is being created. This field determines the structure and content of the snapshot. Must be one of the supported resource types, such as: `Opportunity`.'
+    - name: create-engagement-invitation
+      description: This action creates an invitation from a sender to a single receiver to join an engagement.
+      flags:
+        --catalog=!: Specifies the catalog related to the engagement.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Specifies a unique, client-generated UUID to ensure that the request is handled exactly once.
+        --engagement-identifier=!: The unique identifier of the `Engagement` associated with the invitation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invitation=!: The `Invitation` object all information necessary to initiate an engagement invitation to a partner.
+      documentation:
+        command: This action creates an invitation from a sender to a single receiver to join an engagement.
+        flag:
+            catalog: Specifies the catalog related to the engagement. Accepted values are `AWS` and `Sandbox`, which determine the environment in which the engagement is managed.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: Specifies a unique, client-generated UUID to ensure that the request is handled exactly once. This token helps prevent duplicate invitation creations.
+            engagement-identifier: The unique identifier of the `Engagement` associated with the invitation. This parameter ensures the invitation is created within the correct `Engagement` context.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            invitation: The `Invitation` object all information necessary to initiate an engagement invitation to a partner. It contains a personalized message from the sender, the invitation's receiver, and a payload. The `Payload` can be the `OpportunityInvitation`, which includes detailed structures for sender contacts, partner responsibilities, customer information, and project details.
+    - name: disassociate-opportunity
+      description: Allows you to remove an existing association between an `Opportunity` and related entities, such as a Partner Solution, Amazon Web Services product, or an Amazon Web Services Marketplace offer.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --opportunity-identifier=!: The opportunity's unique identifier for when you want to disassociate it from related entities.
+        --related-entity-identifier=!: The related entity's identifier that you want to disassociate from the opportunity.
+        --related-entity-type=!: The type of the entity that you're disassociating from the opportunity.
+      completion:
+        flag:
+            related-entity-type:
+                - Solutions
+                - AwsProducts
+                - AwsMarketplaceOffers
+      documentation:
+        command: |-
+            Allows you to remove an existing association between an `Opportunity` and related entities, such as a Partner Solution, Amazon Web Services product, or an Amazon Web Services Marketplace offer. This operation is the counterpart to `AssociateOpportunity`, and it provides flexibility to manage associations as business needs change.
+
+            Use this operation to update the associations of an `Opportunity` due to changes in the related entities, or if an association was made in error. Ensuring accurate associations helps maintain clarity and accuracy to track and manage business opportunities. When you replace an entity, first attach the new entity and then disassociate the one to be removed, especially if it's the last remaining entity that's required.
+        flag:
+            catalog: 'Specifies the catalog associated with the request. This field takes a string value from a predefined list: `AWS` or `Sandbox`. The catalog determines which environment the opportunity disassociation is made in. Use `AWS` to disassociate opportunities in the Amazon Web Services catalog, and `Sandbox` for testing in secure, isolated environments.'
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            opportunity-identifier: |-
+                The opportunity's unique identifier for when you want to disassociate it from related entities. This identifier helps to ensure that the correct opportunity is updated.
+
+                Validation: Ensure that the provided identifier corresponds to an existing opportunity in the Amazon Web Services system because incorrect identifiers result in an error and no changes are made.
+            related-entity-identifier: |-
+                The related entity's identifier that you want to disassociate from the opportunity. Depending on the type of entity, this could be a simple identifier or an Amazon Resource Name (ARN) for entities managed through Amazon Web Services Marketplace.
+
+                For Amazon Web Services Marketplace entities, use the Amazon Web Services Marketplace API to obtain the necessary ARNs. For guidance on retrieving these ARNs, see [Amazon Web Services MarketplaceUsing the Amazon Web Services Marketplace Catalog API](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html).
+
+                Validation: Ensure the identifier or ARN is valid and corresponds to an existing entity. An incorrect or invalid identifier results in an error.
+            related-entity-type: |-
+                The type of the entity that you're disassociating from the opportunity. When you specify the entity type, it helps the system correctly process the disassociation request to ensure that the right connections are removed.
+
+                Examples of entity types include Partner Solution, Amazon Web Services product, and Amazon Web Services Marketplaceoffer. Ensure that the value matches one of the expected entity types.
+
+                Validation: Provide a valid entity type to help ensure successful disassociation. An invalid or incorrect entity type results in an error.
+    - name: stop-resource-snapshot-job
+      description: Stops a resource snapshot job.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-snapshot-job-identifier=!: The identifier of the job to stop.
+      documentation:
+        command: Stops a resource snapshot job. The job must be started prior to being stopped.
+        flag:
+            catalog: |-
+                Specifies the catalog related to the request. Valid values are:
+
+                - AWS: Stops the request from the production AWS environment.
+                - Sandbox: Stops the request from a sandbox environment used for testing or development purposes.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-snapshot-job-identifier: The identifier of the job to stop.
+    - name: submit-opportunity
+      description: Use this action to submit an Opportunity that was previously created by partner for AWS review.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the Opportunity previously created by partner and needs to be submitted.
+        --involvement-type=!: Specifies the level of AWS sellers' involvement on the opportunity.
+        --visibility=: Determines whether to restrict visibility of the opportunity from AWS sales.
+      completion:
+        flag:
+            involvement-type:
+                - For Visibility Only
+                - Co-Sell
+            visibility:
+                - Full
+                - Limited
+      documentation:
+        command: Use this action to submit an Opportunity that was previously created by partner for AWS review. After you perform this action, the Opportunity becomes non-editable until it is reviewed by AWS and has `LifeCycle.ReviewStatus` as either `Approved` or `Action Required`.
+        flag:
+            catalog: |-
+                Specifies the catalog related to the request. Valid values are:
+
+                - AWS: Submits the opportunity request from the production AWS environment.
+                - Sandbox: Submits the opportunity request from a sandbox environment used for testing or development purposes.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: The identifier of the Opportunity previously created by partner and needs to be submitted.
+            involvement-type: |-
+                Specifies the level of AWS sellers' involvement on the opportunity. Valid values:
+
+                - `Co-sell`: Indicates the user wants to co-sell with AWS. Share the opportunity with AWS to receive deal assistance and support.
+                - `For Visibility Only`: Indicates that the user does not need support from AWS Sales Rep. Share this opportunity with AWS for visibility only, you will not receive deal assistance and support.
+            visibility: |-
+                Determines whether to restrict visibility of the opportunity from AWS sales. Default value is Full. Valid values:
+
+                - `Full`: The opportunity is fully visible to AWS sales.
+                - `Limited`: The opportunity has restricted visibility to AWS sales.
+    - name: get-selling-system-settings
+      description: Retrieves the currently set system settings, which include the IAM Role used for resource snapshot jobs.
+      flags:
+        --catalog=!: Specifies the catalog in which the settings are defined.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      documentation:
+        command: Retrieves the currently set system settings, which include the IAM Role used for resource snapshot jobs.
+        flag:
+            catalog: Specifies the catalog in which the settings are defined. Acceptable values include `AWS` for production and `Sandbox` for testing environments.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+    - name: list-tags-for-resource
+      description: Returns a list of tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.
+      documentation:
+        command: Returns a list of tags for a resource.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.
+    - name: start-resource-snapshot-job
+      description: Starts a resource snapshot job that has been previously created.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-snapshot-job-identifier=!: The identifier of the resource snapshot job to start.
+      documentation:
+        command: Starts a resource snapshot job that has been previously created.
+        flag:
+            catalog: |-
+                Specifies the catalog related to the request. Valid values are:
+
+                - AWS: Starts the request from the production AWS environment.
+                - Sandbox: Starts the request from a sandbox environment used for testing or development purposes.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-snapshot-job-identifier: The identifier of the resource snapshot job to start.
+    - name: assign-opportunity
+      description: Enables you to reassign an existing `Opportunity` to another user within your Partner Central account.
+      flags:
+        --assignee=!: Specifies the user or team member responsible for managing the assigned opportunity.
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Requires the `Opportunity`'s unique identifier when you want to assign it to another user.
+      documentation:
+        command: |-
+            Enables you to reassign an existing `Opportunity` to another user within your Partner Central account. The specified user receives the opportunity, and it appears on their Partner Central dashboard, allowing them to take necessary actions or proceed with the opportunity.
+
+            This is useful for distributing opportunities to the appropriate team members or departments within your organization, ensuring that each opportunity is handled by the right person. By default, the opportunity owner is the one who creates it. Currently, there's no API to enumerate the list of available users.
+        flag:
+            assignee: Specifies the user or team member responsible for managing the assigned opportunity. This field identifies the *Assignee* based on the partner's internal team structure. Ensure that the email address is associated with a registered user in your Partner Central account.
+            catalog: 'Specifies the catalog associated with the request. This field takes a string value from a predefined list: `AWS` or `Sandbox`. The catalog determines which environment the opportunity is assigned in. Use `AWS` to assign real opportunities in the Amazon Web Services catalog, and `Sandbox` for testing in secure, isolated environments.'
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: Requires the `Opportunity`'s unique identifier when you want to assign it to another user. Provide the correct identifier so the intended opportunity is reassigned.
+    - name: create-engagement
+      description: The `CreateEngagement` action allows you to create an `Engagement`, which serves as a collaborative space between different parties such as AWS Partners and AWS Sellers.
+      flags:
+        --catalog=!: The `CreateEngagementRequest$Catalog` parameter specifies the catalog related to the engagement.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: The `CreateEngagementRequest$ClientToken` parameter specifies a unique, case-sensitive identifier to ensure that the request is handled exactly once.
+        --contexts=: The `Contexts` field is a required array of objects, with a maximum of 5 contexts allowed, specifying detailed information about customer projects associated with the Engagement.
+        --description=!: Provides a description of the `Engagement`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --title=!: Specifies the title of the `Engagement`.
+      documentation:
+        command: The `CreateEngagement` action allows you to create an `Engagement`, which serves as a collaborative space between different parties such as AWS Partners and AWS Sellers. This action automatically adds the caller's AWS account as an active member of the newly created `Engagement`.
+        flag:
+            catalog: The `CreateEngagementRequest$Catalog` parameter specifies the catalog related to the engagement. Accepted values are `AWS` and `Sandbox`, which determine the environment in which the engagement is managed.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: The `CreateEngagementRequest$ClientToken` parameter specifies a unique, case-sensitive identifier to ensure that the request is handled exactly once. The value must not exceed sixty-four alphanumeric characters.
+            contexts: 'The `Contexts` field is a required array of objects, with a maximum of 5 contexts allowed, specifying detailed information about customer projects associated with the Engagement. Each context object contains a `Type` field indicating the context type, which must be `CustomerProject` in this version, and a `Payload` field containing the `CustomerProject` details. The `CustomerProject` object is composed of two main components: `Customer` and `Project`. The `Customer` object includes information such as `CompanyName`, `WebsiteUrl`, `Industry`, and `CountryCode`, providing essential details about the customer. The `Project` object contains `Title`, `BusinessProblem`, and `TargetCompletionDate`, offering insights into the specific project associated with the customer. This structure allows comprehensive context to be included within the Engagement, facilitating effective collaboration between parties by providing relevant customer and project information.'
+            description: Provides a description of the `Engagement`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            title: Specifies the title of the `Engagement`.
+    - name: get-aws-opportunity-summary
+      description: Retrieves a summary of an AWS Opportunity.
+      flags:
+        --catalog=!: Specifies the catalog in which the AWS Opportunity is located.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --related-opportunity-identifier=!: The unique identifier for the related partner opportunity.
+      documentation:
+        command: Retrieves a summary of an AWS Opportunity. This summary includes high-level details about the opportunity sourced from AWS, such as lifecycle information, customer details, and involvement type. It is useful for tracking updates on the AWS opportunity corresponding to an opportunity in the partner's account.
+        flag:
+            catalog: Specifies the catalog in which the AWS Opportunity is located. Accepted values include `AWS` for production opportunities or `Sandbox` for testing purposes. The catalog determines which environment the opportunity data is pulled from.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            related-opportunity-identifier: The unique identifier for the related partner opportunity. Use this field to correlate an AWS opportunity with its corresponding partner opportunity.
+    - name: get-engagement
+      description: Use this action to retrieve the engagement record for a given `EngagementIdentifier`.
+      flags:
+        --catalog=!: Specifies the catalog related to the engagement request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the identifier of the Engagement record to retrieve.
+      documentation:
+        command: Use this action to retrieve the engagement record for a given `EngagementIdentifier`.
+        flag:
+            catalog: Specifies the catalog related to the engagement request. Valid values are `AWS` and `Sandbox`.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: Specifies the identifier of the Engagement record to retrieve.
+    - name: list-engagement-invitations
+      description: Retrieves a list of engagement invitations sent to the partner.
+      flags:
+        --catalog=!: Specifies the catalog from which to list the engagement invitations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-identifier=: Retrieves a list of engagement invitation summaries based on specified filters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of engagement invitations to return in the response.
+        --next-token=: A pagination token used to retrieve additional pages of results when the response to a previous request was truncated.
+        --page-size=: The size of each page to get in the AWS service call.
+        --participant-type=!: Specifies the type of participant for which to list engagement invitations.
+        --payload-type=: Defines the type of payload associated with the engagement invitations to be listed.
+        --sender-aws-account-id=: List of sender AWS account IDs to filter the invitations.
+        --sort=: Specifies the sorting options for listing engagement invitations.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Status values to filter the invitations.
+      completion:
+        flag:
+            participant-type:
+                - SENDER
+                - RECEIVER
+      documentation:
+        command: Retrieves a list of engagement invitations sent to the partner. This allows partners to view all pending or past engagement invitations, helping them track opportunities shared by AWS.
+        flag:
+            catalog: Specifies the catalog from which to list the engagement invitations. Use `AWS` for production invitations or `Sandbox` for testing environments.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            engagement-identifier: Retrieves a list of engagement invitation summaries based on specified filters. The ListEngagementInvitations operation allows you to view all invitations that you have sent or received. You must specify the ParticipantType to filter invitations where you are either the SENDER or the RECEIVER. Invitations will automatically expire if not accepted within 15 days.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Specifies the maximum number of engagement invitations to return in the response. If more results are available, a pagination token will be provided.
+            next-token: A pagination token used to retrieve additional pages of results when the response to a previous request was truncated. Pass this token to continue listing invitations from where the previous call left off.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            participant-type: Specifies the type of participant for which to list engagement invitations. Identifies the role of the participant.
+            payload-type: Defines the type of payload associated with the engagement invitations to be listed. The attributes in this payload help decide on acceptance or rejection of the invitation.
+            sender-aws-account-id: List of sender AWS account IDs to filter the invitations.
+            sort: Specifies the sorting options for listing engagement invitations. Invitations can be sorted by fields such as `InvitationDate` or `Status` to help partners view results in their preferred order.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            status: Status values to filter the invitations.
+    - name: list-engagement-resource-associations
+      description: Lists the associations between resources and engagements where the caller is a member and has at least one snapshot in the engagement.
+      flags:
+        --catalog=!: Specifies the catalog in which to search for engagement-resource associations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-by=: Filters the response to include only snapshots of resources owned by the specified AWS account ID.
+        --engagement-identifier=: Filters the results to include only associations related to the specified engagement.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Limits the number of results returned in a single call.
+        --next-token=: A token used for pagination of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-identifier=: Filters the results to include only associations with the specified resource.
+        --resource-type=: Filters the results to include only associations with resources of the specified type.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-type:
+                - Opportunity
+      documentation:
+        command: Lists the associations between resources and engagements where the caller is a member and has at least one snapshot in the engagement.
+        flag:
+            catalog: |-
+                Specifies the catalog in which to search for engagement-resource associations. Valid Values: "AWS" or "Sandbox"
+
+                - `AWS` for production environments.
+                - `Sandbox` for testing and development purposes.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            created-by: Filters the response to include only snapshots of resources owned by the specified AWS account ID. Use this when you want to find associations related to resources owned by a particular account.
+            engagement-identifier: Filters the results to include only associations related to the specified engagement. Use this when you want to find all resources associated with a specific engagement.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Limits the number of results returned in a single call. Use this to control the number of results returned, especially useful for pagination.
+            next-token: A token used for pagination of results. Include this token in subsequent requests to retrieve the next set of results.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            resource-identifier: Filters the results to include only associations with the specified resource. Varies depending on the resource type. Use this when you want to find all engagements associated with a specific resource.
+            resource-type: Filters the results to include only associations with resources of the specified type.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: list-engagements
+      description: This action allows users to retrieve a list of Engagement records from Partner Central.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-by=: A list of AWS account IDs.
+        --engagement-identifier=: An array of strings representing engagement identifiers to retrieve.
+        --exclude-created-by=: An array of strings representing AWS Account IDs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: ""
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: This action allows users to retrieve a list of Engagement records from Partner Central. This action can be used to manage and track various engagements across different stages of the partner selling process.
+        flag:
+            catalog: Specifies the catalog related to the request.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            created-by: A list of AWS account IDs. When specified, the response includes engagements created by these accounts. This filter is useful for finding engagements created by specific team members.
+            engagement-identifier: An array of strings representing engagement identifiers to retrieve.
+            exclude-created-by: An array of strings representing AWS Account IDs. Use this to exclude engagements created by specific users.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in a single call.
+            next-token: The token for the next set of results. This value is returned from a previous call.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            sort: ""
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+    - name: tag-resource
+      description: Assigns one or more tags (key-value pairs) to the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to tag.
+        --tags=!: A map of the key-value pairs of the tag or tags to assign.
+      documentation:
+        command: Assigns one or more tags (key-value pairs) to the specified resource.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The Amazon Resource Name (ARN) of the resource that you want to tag.
+            tags: A map of the key-value pairs of the tag or tags to assign.
+    - name: delete-resource-snapshot-job
+      description: Use this action to deletes a previously created resource snapshot job.
+      flags:
+        --catalog=!: Specifies the catalog from which to delete the snapshot job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-snapshot-job-identifier=!: The unique identifier of the resource snapshot job to be deleted.
+      documentation:
+        command: Use this action to deletes a previously created resource snapshot job. The job must be in a stopped state before it can be deleted.
+        flag:
+            catalog: Specifies the catalog from which to delete the snapshot job. Valid values are `AWS` and `Sandbox`.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-snapshot-job-identifier: The unique identifier of the resource snapshot job to be deleted.
+    - name: get-resource-snapshot-job
+      description: Use this action to retrieves information about a specific resource snapshot job.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-snapshot-job-identifier=!: The unique identifier of the resource snapshot job to be retrieved.
+      documentation:
+        command: Use this action to retrieves information about a specific resource snapshot job.
+        flag:
+            catalog: |-
+                Specifies the catalog related to the request. Valid values are:
+
+                - AWS: Retrieves the snapshot job from the production AWS environment.
+                - Sandbox: Retrieves the snapshot job from a sandbox environment used for testing or development purposes.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-snapshot-job-identifier: The unique identifier of the resource snapshot job to be retrieved. This identifier is crucial for pinpointing the specific job you want to query.
+    - name: list-engagement-by-accepting-invitation-tasks
+      description: Lists all in-progress, completed, or failed StartEngagementByAcceptingInvitationTask tasks that were initiated by the caller's account.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-invitation-identifier=: Filters tasks by the identifiers of the engagement invitations they are processing.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.
+        --next-token=: Use this parameter for pagination when the result set spans multiple pages.
+        --opportunity-identifier=: Filters tasks by the identifiers of the opportunities they created or are associated with.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Specifies the sorting criteria for the returned results.
+        --starting-token=: A token to specify where to start paginating.
+        --task-identifier=: Filters tasks by their unique identifiers.
+        --task-status=: Filters the tasks based on their current status.
+      documentation:
+        command: Lists all in-progress, completed, or failed StartEngagementByAcceptingInvitationTask tasks that were initiated by the caller's account.
+        flag:
+            catalog: |-
+                Specifies the catalog related to the request. Valid values are:
+
+                - AWS: Retrieves the request from the production AWS environment.
+                - Sandbox: Retrieves the request from a sandbox environment used for testing or development purposes.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            engagement-invitation-identifier: Filters tasks by the identifiers of the engagement invitations they are processing.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.
+            next-token: Use this parameter for pagination when the result set spans multiple pages. This value is obtained from the NextToken field in the response of a previous call to this API.
+            opportunity-identifier: Filters tasks by the identifiers of the opportunities they created or are associated with.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            sort: Specifies the sorting criteria for the returned results. This allows you to order the tasks based on specific attributes.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            task-identifier: Filters tasks by their unique identifiers. Use this when you want to retrieve information about specific tasks.
+            task-status: Filters the tasks based on their current status. This allows you to focus on tasks in specific states.
+    - name: list-resource-snapshot-jobs
+      description: Lists resource snapshot jobs owned by the customer.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-identifier=: The identifier of the engagement to filter the response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Configures the sorting of the response.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status of the jobs to filter the response.
+      completion:
+        flag:
+            status:
+                - Running
+                - Stopped
+      documentation:
+        command: Lists resource snapshot jobs owned by the customer. This operation supports various filtering scenarios, including listing all jobs owned by the caller, jobs for a specific engagement, jobs with a specific status, or any combination of these filters.
+        flag:
+            catalog: Specifies the catalog related to the request.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            engagement-identifier: The identifier of the engagement to filter the response.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: The maximum number of results to return in a single call. If omitted, defaults to 50.
+            next-token: The token for the next set of results.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            sort: Configures the sorting of the response. If omitted, results are sorted by `CreatedDate` in descending order.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            status: The status of the jobs to filter the response.
+    - name: start-engagement-by-accepting-invitation-task
+      description: This action starts the engagement by accepting an `EngagementInvitation`.
+      flags:
+        --catalog=!: Specifies the catalog related to the task.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier provided by the client that helps to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the unique identifier of the `EngagementInvitation` to be accepted.
+        --tags=: A map of the key-value pairs of the tag or tags to assign.
+      documentation:
+        command: 'This action starts the engagement by accepting an `EngagementInvitation`. The task is asynchronous and involves the following steps: accepting the invitation, creating an opportunity in the partner’s account from the AWS opportunity, and copying details for tracking. When completed, an `Opportunity Created` event is generated, indicating that the opportunity has been successfully created in the partner''s account.'
+        flag:
+            catalog: Specifies the catalog related to the task. Use `AWS` for production engagements and `Sandbox` for testing scenarios.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: A unique, case-sensitive identifier provided by the client that helps to ensure the idempotency of the request. This can be a random or meaningful string but must be unique for each request.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: Specifies the unique identifier of the `EngagementInvitation` to be accepted. Providing the correct identifier helps ensure that the correct engagement is processed.
+            tags: A map of the key-value pairs of the tag or tags to assign.
+    - name: start-engagement-from-opportunity-task
+      description: Similar to `StartEngagementByAcceptingInvitationTask`, this action is asynchronous and performs multiple steps before completion.
+      flags:
+        --aws-submission=!: ""
+        --catalog=!: Specifies the catalog in which the engagement is tracked.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique token provided by the client to help ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the opportunity from which the engagement task is to be initiated.
+        --tags=: A map of the key-value pairs of the tag or tags to assign.
+      documentation:
+        command: Similar to `StartEngagementByAcceptingInvitationTask`, this action is asynchronous and performs multiple steps before completion. This action orchestrates a comprehensive workflow that combines multiple API operations into a single task to create and initiate an engagement from an existing opportunity. It automatically executes a sequence of operations including `GetOpportunity`, `CreateEngagement` (if it doesn't exist), `CreateResourceSnapshot`, `CreateResourceSnapshotJob`, `CreateEngagementInvitation` (if not already invited/accepted), and `SubmitOpportunity`.
+        flag:
+            aws-submission: ""
+            catalog: Specifies the catalog in which the engagement is tracked. Acceptable values include `AWS` for production and `Sandbox` for testing environments.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            client-token: A unique token provided by the client to help ensure the idempotency of the request. It helps prevent the same task from being performed multiple times.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: The unique identifier of the opportunity from which the engagement task is to be initiated. This helps ensure that the task is applied to the correct opportunity.
+            tags: A map of the key-value pairs of the tag or tags to assign.
+    - name: untag-resource
+      description: Removes a tag or tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
+        --tag-keys=!: The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.
+      documentation:
+        command: Removes a tag or tags from a resource.
+        flag:
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-arn: The Amazon Resource Name (ARN) of the resource that you want to untag.
+            tag-keys: The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.
+    - name: update-opportunity
+      description: Updates the `Opportunity` record identified by a given `Identifier`.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer=: Specifies details of the customer associated with the `Opportunity`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Read-only, system generated `Opportunity` unique identifier.
+        --last-modified-date=!: '`DateTime` when the opportunity was last modified.'
+        --life-cycle=: An object that contains lifecycle details for the `Opportunity`.
+        --marketing=: An object that contains marketing details for the `Opportunity`.
+        --national-security=: Specifies if the opportunity is associated with national security concerns.
+        --opportunity-type=: Specifies the opportunity type as a renewal, new, or expansion.
+        --partner-opportunity-identifier=: Specifies the opportunity's unique identifier in the partner's CRM system.
+        --primary-needs-from-aws=: Identifies the type of support the partner needs from Amazon Web Services.
+        --project=: An object that contains project details summary for the `Opportunity`.
+        --software-revenue=: Specifies details of a customer's procurement terms.
+      completion:
+        flag:
+            national-security:
+                - "Yes"
+                - "No"
+            opportunity-type:
+                - Net New Business
+                - Flat Renewal
+                - Expansion
+      documentation:
+        command: |-
+            Updates the `Opportunity` record identified by a given `Identifier`. This operation allows you to modify the details of an existing opportunity to reflect the latest information and progress. Use this action to keep the opportunity record up-to-date and accurate.
+
+            When you perform updates, include the entire payload with each request. If any field is omitted, the API assumes that the field is set to `null`. The best practice is to always perform a `GetOpportunity` to retrieve the latest values, then send the complete payload with the updated values to be changed.
+        flag:
+            catalog: 'Specifies the catalog associated with the request. This field takes a string value from a predefined list: `AWS` or `Sandbox`. The catalog determines which environment the opportunity is updated in. Use `AWS` to update real opportunities in the production environment, and `Sandbox` for testing in secure, isolated environments. When you use the `Sandbox` catalog, it allows you to simulate and validate your interactions with Amazon Web Services services without affecting live data or operations.'
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            customer: Specifies details of the customer associated with the `Opportunity`.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: Read-only, system generated `Opportunity` unique identifier.
+            last-modified-date: '`DateTime` when the opportunity was last modified.'
+            life-cycle: An object that contains lifecycle details for the `Opportunity`.
+            marketing: An object that contains marketing details for the `Opportunity`.
+            national-security: Specifies if the opportunity is associated with national security concerns. This flag is only applicable when the industry is `Government`. For national-security-related opportunities, validation and compliance rules may apply, impacting the opportunity's visibility and processing.
+            opportunity-type: |-
+                Specifies the opportunity type as a renewal, new, or expansion.
+
+                Opportunity types:
+
+                - New opportunity: Represents a new business opportunity with a potential customer that's not previously engaged with your solutions or services.
+                - Renewal opportunity: Represents an opportunity to renew an existing contract or subscription with a current customer, ensuring continuity of service.
+                - Expansion opportunity: Represents an opportunity to expand the scope of an existing contract or subscription, either by adding new services or increasing the volume of existing services for a current customer.
+            partner-opportunity-identifier: Specifies the opportunity's unique identifier in the partner's CRM system. This value is essential to track and reconcile because it's included in the outbound payload sent back to the partner.
+            primary-needs-from-aws: |-
+                Identifies the type of support the partner needs from Amazon Web Services.
+
+                Valid values:
+
+                - Cosell—Architectural Validation: Confirmation from Amazon Web Services that the partner's proposed solution architecture is aligned with Amazon Web Services best practices and poses minimal architectural risks.
+                - Cosell—Business Presentation: Request Amazon Web Services seller's participation in a joint customer presentation.
+                - Cosell—Competitive Information: Access to Amazon Web Services competitive resources and support for the partner's proposed solution.
+                - Cosell—Pricing Assistance: Connect with an AWS seller for support situations where a partner may be receiving an upfront discount on a service (for example: EDP deals).
+                - Cosell—Technical Consultation: Connection with an Amazon Web Services Solutions Architect to address the partner's questions about the proposed solution.
+                - Cosell—Total Cost of Ownership Evaluation: Assistance with quoting different cost savings of proposed solutions on Amazon Web Services versus on-premises or a traditional hosting environment.
+                - Cosell—Deal Support: Request Amazon Web Services seller's support to progress the opportunity (for example: joint customer call, strategic positioning).
+                - Cosell—Support for Public Tender/RFx: Opportunity related to the public sector where the partner needs RFx support from Amazon Web Services.
+            project: An object that contains project details summary for the `Opportunity`.
+            software-revenue: Specifies details of a customer's procurement terms. Required only for partners in eligible programs.
+    - name: associate-opportunity
+      description: Enables you to create a formal association between an `Opportunity` and various related entities, enriching the context and details of the opportunity for better collaboration and decision making.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --opportunity-identifier=!: Requires the `Opportunity`'s unique identifier when you want to associate it with a related entity.
+        --related-entity-identifier=!: Requires the related entity's unique identifier when you want to associate it with the `Opportunity`.
+        --related-entity-type=!: Specifies the entity type that you're associating with the `Opportunity`.
+      completion:
+        flag:
+            related-entity-type:
+                - Solutions
+                - AwsProducts
+                - AwsMarketplaceOffers
+      documentation:
+        command: |-
+            Enables you to create a formal association between an `Opportunity` and various related entities, enriching the context and details of the opportunity for better collaboration and decision making. You can associate an opportunity with the following entity types:
+
+            - Partner Solution: A software product or consulting practice created and delivered by Partners. Partner Solutions help customers address business challenges using Amazon Web Services services.
+            - Amazon Web Services Products: Amazon Web Services offers many products and services that provide scalable, reliable, and cost-effective infrastructure solutions. For the latest list of Amazon Web Services products, see [Amazon Web Services products](https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json).
+            - Amazon Web Services Marketplace private offer: Allows Amazon Web Services Marketplace sellers to extend custom pricing and terms to individual Amazon Web Services customers. Sellers can negotiate custom prices, payment schedules, and end user license terms through private offers, enabling Amazon Web Services customers to acquire software solutions tailored to their specific needs. For more information, see [Private offers in Amazon Web Services Marketplace](https://docs.aws.amazon.com/marketplace/latest/buyerguide/buyer-private-offers.html).
+
+            To obtain identifiers for these entities, use the following methods:
+
+            - Solution: Use the `ListSolutions` operation.
+            - AWS Products: For the latest list of Amazon Web Services products, see [Amazon Web Services products](https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json).
+            - Amazon Web Services Marketplace private offer: Use the [Using the Amazon Web Services Marketplace Catalog API](https://docs.aws.amazon.com/marketplace/latest/APIReference/catalog-apis.html) to list entities. Specifically, use the `ListEntities` operation to retrieve a list of private offers. The request returns the details of available private offers. For more information, see [ListEntities](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_ListEntities.html).
+        flag:
+            catalog: 'Specifies the catalog associated with the request. This field takes a string value from a predefined list: `AWS` or `Sandbox`. The catalog determines which environment the opportunity association is made in. Use `AWS` to associate opportunities in the Amazon Web Services catalog, and `Sandbox` for testing in secure, isolated environments.'
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            opportunity-identifier: Requires the `Opportunity`'s unique identifier when you want to associate it with a related entity. Provide the correct identifier so the intended opportunity is updated with the association.
+            related-entity-identifier: Requires the related entity's unique identifier when you want to associate it with the `Opportunity`. For Amazon Web Services Marketplace entities, provide the Amazon Resource Name (ARN). Use the [Amazon Web Services Marketplace API](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html) to obtain the ARN.
+            related-entity-type: Specifies the entity type that you're associating with the `Opportunity`. This helps to categorize and properly process the association.
+    - name: get-resource-snapshot
+      description: Use this action to retrieve a specific snapshot record.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-identifier=!: The unique identifier of the engagement associated with the snapshot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: The unique identifier of the specific resource that was snapshotted.
+        --resource-snapshot-template-identifier=!: he name of the template that defines the schema for the snapshot.
+        --resource-type=!: Specifies the type of resource that was snapshotted.
+        --revision=: Specifies which revision of the snapshot to retrieve.
+      completion:
+        flag:
+            resource-type:
+                - Opportunity
+      documentation:
+        command: Use this action to retrieve a specific snapshot record.
+        flag:
+            catalog: |-
+                Specifies the catalog related to the request. Valid values are:
+
+                - AWS: Retrieves the snapshot from the production AWS environment.
+                - Sandbox: Retrieves the snapshot from a sandbox environment used for testing or development purposes.
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            engagement-identifier: The unique identifier of the engagement associated with the snapshot. This field links the snapshot to a specific engagement context.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            resource-identifier: The unique identifier of the specific resource that was snapshotted. The format and constraints of this identifier depend on the ResourceType specified. For `Opportunity` type, it will be an `opportunity ID`
+            resource-snapshot-template-identifier: he name of the template that defines the schema for the snapshot. This template determines which subset of the resource data is included in the snapshot and must correspond to an existing and valid template for the specified `ResourceType`.
+            resource-type: 'Specifies the type of resource that was snapshotted. This field determines the structure and content of the snapshot payload. Valid value includes:`Opportunity`: For opportunity-related data.'
+            revision: Specifies which revision of the snapshot to retrieve. If omitted returns the latest revision.
+    - name: list-opportunities
+      description: This request accepts a list of filters that retrieve opportunity subsets as well as sort options.
+      flags:
+        --catalog=!: Specifies the catalog associated with the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-company-name=: Filters the opportunities based on the customer's company name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=: Filters the opportunities based on the opportunity identifier.
+        --last-modified-date=: Filters the opportunities based on their last modified date.
+        --life-cycle-review-status=: Filters the opportunities based on their current lifecycle approval status.
+        --life-cycle-stage=: Filters the opportunities based on their lifecycle stage.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single call.
+        --next-token=: A pagination token used to retrieve the next set of results in subsequent calls.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: An object that specifies how the response is sorted.
+        --starting-token=: A token to specify where to start paginating.
+      documentation:
+        command: |-
+            This request accepts a list of filters that retrieve opportunity subsets as well as sort options. This feature is available to partners from [Partner Central](https://partnercentral.awspartner.com/) using the `ListOpportunities` API action.
+
+            To synchronize your system with Amazon Web Services, list only the opportunities that were newly created or updated. We recommend you rely on events emitted by the service into your Amazon Web Services account’s Amazon EventBridge default event bus. You can also use the `ListOpportunities` action.
+
+            We recommend the following approach:
+
+            1. Find the latest `LastModifiedDate` that you stored, and only use the values that came from Amazon Web Services. Don’t use values generated by your system.
+            2. When you send a `ListOpportunities` request, submit the date in ISO 8601 format in the `AfterLastModifiedDate` filter.
+            3. Amazon Web Services only returns opportunities created or updated on or after that date and time. Use `NextToken` to iterate over all pages.
+        flag:
+            catalog: 'Specifies the catalog associated with the request. This field takes a string value from a predefined list: `AWS` or `Sandbox`. The catalog determines which environment the opportunities are listed in. Use `AWS` for listing real opportunities in the Amazon Web Services catalog, and `Sandbox` for testing in secure, isolated environments.'
+            cli-input-json: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            cli-input-yaml: |-
+                Reads arguments from the JSON string provided.
+                The JSON string follows the  format  provided  by --generate-cli-skeleton.
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values.
+                It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            customer-company-name: Filters the opportunities based on the customer's company name. This allows partners to search for opportunities associated with a specific customer by matching the provided company name string.
+            generate-cli-skeleton: |-
+                If other arguments are provided on the command line,  those  values  will override the JSON-provided values. It is not possible to pass arbitrary binary values using a JSON-provided value as the string will be taken literally.
+                This may  not  be  specified  along with --cli-input-yaml.
+            identifier: Filters the opportunities based on the opportunity identifier. This allows partners to retrieve specific opportunities by providing their unique identifiers, ensuring precise results.
+            last-modified-date: Filters the opportunities based on their last modified date. This filter helps retrieve opportunities that were updated after the specified date, allowing partners to track recent changes or updates.
+            life-cycle-review-status: Filters the opportunities based on their current lifecycle approval status. Use this filter to retrieve opportunities with statuses such as `Pending Submission`, `In Review`, `Action Required`, or `Approved`.
+            life-cycle-stage: Filters the opportunities based on their lifecycle stage. This filter allows partners to retrieve opportunities at various stages in the sales cycle, such as `Qualified`, `Technical Validation`, `Business Validation`, or `Closed Won`.
+            max-items: |-
+                The total number of items to return in the command's output.
+                If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+                To resume pagination, provide the NextToken value in the starting-token argument of a subsequent  command.
+                Do not use the NextToken response element directly outside of the AWS CLI.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            max-results: |-
+                Specifies the maximum number of results to return in a single call. This limits the number of opportunities returned in the response to avoid providing too many results at once.
+
+                Default: 20
+            next-token: A pagination token used to retrieve the next set of results in subsequent calls. This token is included in the response only if there are additional result pages available.
+            page-size: |-
+                The size of each page to get in the AWS service call.
+                This does not affect the number of items returned in the command's output.
+                Setting a smaller page size results in more calls to the AWS service, retrieving fewer items in each call.
+                This can help prevent the AWS service calls from timing out.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+            sort: An object that specifies how the response is sorted. The default `Sort.SortBy` value is `LastModifiedDate`.
+            starting-token: |-
+                A token to specify where to start paginating.
+                This is the NextToken from a previously truncated response.
+
+                For usage examples, see Pagination in the AWS Command Line Interface User Guide.
+documentation:
+    command: |-
+        AWS Partner Central API for Selling
+
+        **AWS Partner Central API for Selling Reference Guide**
+
+        This Amazon Web Services (AWS) Partner Central API reference is designed to help [AWS Partners](http://aws.amazon.com/partners/programs/) integrate Customer Relationship Management (CRM) systems with AWS Partner Central. Partners can automate interactions with AWS Partner Central, which helps to ensure effective engagements in joint business activities.
+
+        The API provides standard AWS API functionality. Access it by either using API [Actions](https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html) or by using an AWS SDK that's tailored to your programming language or platform. For more information, see [Getting Started with AWS](http://aws.amazon.com/getting-started) and [Tools to Build on AWS](http://aws.amazon.com/developer/tools/).
+
+        **Features offered by AWS Partner Central API**
+
+        1. **Opportunity management:** Manages coselling opportunities through API actions such as `CreateOpportunity`, `UpdateOpportunity`, `ListOpportunities`, `GetOpportunity`, and `AssignOpportunity`.
+        2. **AWS referral management:** Manages referrals shared by AWS using actions such as `ListEngagementInvitations`, `GetEngagementInvitation`, `StartEngagementByAcceptingInvitation`, and `RejectEngagementInvitation`.
+        3. **Entity association:** Associates related entities such as *AWS Products*, *Partner Solutions*, and *AWS Marketplace Private Offers* with opportunities using the actions `AssociateOpportunity`, and `DisassociateOpportunity`.
+        4. **View AWS opportunity details:** Retrieves real-time summaries of AWS opportunities using the `GetAWSOpportunitySummary` action.
+        5. **List solutions:** Provides list APIs for listing partner offers using `ListSolutions`.
+        6. **Event subscription:** Subscribe to real-time opportunity updates through AWS EventBridge by using actions such as *Opportunity Created*, *Opportunity Updated*, *Engagement Invitation Accepted*, *Engagement Invitation Rejected*, and *Engagement Invitation Created*.
