@@ -1,6 +1,24 @@
 name: appsync
 description: AWS AppSync
 commands:
+    - name: evaluate-mapping-template
+      description: Evaluates a given template and returns the response.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context=!: The map that holds all of the contextual information for your resolver invocation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --template=!: The mapping template; this can be a request or response template.
+    - name: associate-merged-graphql-api
+      description: Creates an association between a Merged API and source API using the source API's identifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description field.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --merged-api-identifier=!: The identifier of the AppSync Merged API.
+        --source-api-association-config=: The `SourceApiAssociationConfig` object data.
+        --source-api-identifier=!: The identifier of the AppSync Source API.
     - name: list-resolvers-by-function
       description: List the resolvers that are associated with a specific function.
       flags:
@@ -14,117 +32,64 @@ commands:
         --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: delete-api-cache
-      description: Deletes an `ApiCache` object.
+    - name: list-tags-for-resource
+      description: Lists the tags for a resource.
       flags:
-        --api-id=!: The API ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-api-key
-      description: Deletes an API key.
+        --resource-arn=!: The `GraphqlApi` Amazon Resource Name (ARN).
+    - name: get-function
+      description: Get a `Function`.
       flags:
-        --api-id=!: The API ID.
+        --api-id=!: The GraphQL API ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-id=!: The `Function` ID.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID for the API key.
-    - name: delete-data-source
-      description: Deletes a `DataSource` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the data source.
-    - name: get-api
-      description: Retrieves an `Api` object.
+    - name: list-channel-namespaces
+      description: Lists the channel namespaces for a specified `Api`.
       flags:
         --api-id=!: The `Api` ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-type
-      description: Retrieves a `Type` object.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-functions
+      description: List multiple functions.
       flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --format=!: 'The type format: SDL or JSON.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type-name=!: The type name.
-      completion:
-        flag:
-            format:
-                - SDL
-                - JSON
-    - name: associate-api
-      description: Maps an endpoint to your custom domain.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-api-cache
-      description: Creates a cache for the GraphQL API.
-      flags:
-        --api-caching-behavior=!: Caching behavior.
         --api-id=!: The GraphQL API ID.
-        --at-rest-encryption-enabled: At-rest encryption flag for cache.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-metrics-config=: Controls how cache health metrics will be emitted to CloudWatch.
-        --no-at-rest-encryption-enabled: At-rest encryption flag for cache.
-        --no-transit-encryption-enabled: Transit encryption flag when connecting to cache.
-        --transit-encryption-enabled: Transit encryption flag when connecting to cache.
-        --ttl=!: TTL in seconds for cache entries.
-        --type=!: The cache instance type.
-      completion:
-        flag:
-            api-caching-behavior:
-                - FULL_REQUEST_CACHING
-                - PER_RESOLVER_CACHING
-                - OPERATION_LEVEL_CACHING
-            health-metrics-config:
-                - ENABLED
-                - DISABLED
-            type:
-                - T2_SMALL
-                - T2_MEDIUM
-                - R4_LARGE
-                - R4_XLARGE
-                - R4_2XLARGE
-                - R4_4XLARGE
-                - R4_8XLARGE
-                - SMALL
-                - MEDIUM
-                - LARGE
-                - XLARGE
-                - LARGE_2X
-                - LARGE_4X
-                - LARGE_8X
-                - LARGE_12X
-    - name: create-data-source
-      description: Creates a `DataSource` object.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-data-source
+      description: Updates a `DataSource` object.
       flags:
-        --api-id=!: The API ID for the GraphQL API for the `DataSource`.
+        --api-id=!: The API ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the `DataSource`.
-        --dynamodb-config=: Amazon DynamoDB settings.
-        --elasticsearch-config=: Amazon OpenSearch Service settings.
-        --event-bridge-config=: Amazon EventBridge settings.
+        --description=: The new description for the data source.
+        --dynamodb-config=: The new Amazon DynamoDB configuration.
+        --elasticsearch-config=: The new OpenSearch configuration.
+        --event-bridge-config=: The new Amazon EventBridge settings.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --http-config=: HTTP endpoint settings.
-        --lambda-config=: Lambda settings.
+        --http-config=: The new HTTP endpoint configuration.
+        --lambda-config=: The new Lambda configuration.
         --metrics-config=: Enables or disables enhanced data source metrics for specified data sources.
-        --name=!: A user-supplied name for the `DataSource`.
-        --open-search-service-config=: Amazon OpenSearch Service settings.
-        --relational-database-config=: Relational database settings.
-        --service-role-arn=: The Identity and Access Management (IAM) service role Amazon Resource Name (ARN) for the data source.
-        --type=!: The type of the `DataSource`.
+        --name=!: The new name for the data source.
+        --open-search-service-config=: The new OpenSearch configuration.
+        --relational-database-config=: The new relational database configuration.
+        --service-role-arn=: The new service role Amazon Resource Name (ARN) for the data source.
+        --type=!: The new data source type.
       completion:
         flag:
             metrics-config:
@@ -140,58 +105,6 @@ commands:
                 - AMAZON_OPENSEARCH_SERVICE
                 - AMAZON_EVENTBRIDGE
                 - AMAZON_BEDROCK_RUNTIME
-    - name: delete-channel-namespace
-      description: Deletes a `ChannelNamespace`.
-      flags:
-        --api-id=!: The ID of the `Api` associated with the `ChannelNamespace`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the `ChannelNamespace`.
-    - name: delete-type
-      description: Deletes a `Type` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type-name=!: The type name.
-    - name: disassociate-source-graphql-api
-      description: Deletes an association between a Merged API and source API using the Merged API's identifier and the association ID.
-      flags:
-        --association-id=!: The ID generated by the AppSync service for the source API association.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --merged-api-identifier=!: The identifier of the AppSync Merged API.
-    - name: evaluate-code
-      description: Evaluates the given code and returns the response.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code=!: The code definition to be evaluated.
-        --context=!: The map that holds all of the contextual information for your resolver invocation.
-        --function=: The function within the code to be evaluated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --runtime=!: The runtime to be used when evaluating the code.
-    - name: get-function
-      description: Get a `Function`.
-      flags:
-        --api-id=!: The GraphQL API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-id=!: The `Function` ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-api
-      description: Creates an `Api` object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-config=: The Event API configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name for the `Api`.
-        --owner-contact=: The owner contact information for the `Api`.
-        --tags=: ""
     - name: create-api-key
       description: Creates a unique key that you can distribute to clients who invoke your API.
       flags:
@@ -201,86 +114,16 @@ commands:
         --description=: A description of the purpose of the API key.
         --expires=: From the creation time, the time after which the API key expires.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-channel-namespace
-      description: Creates a `ChannelNamespace` for an `Api`.
+    - name: create-domain-name
+      description: Creates a custom `DomainName` object.
       flags:
-        --api-id=!: The `Api` ID.
+        --certificate-arn=!: The Amazon Resource Name (ARN) of the certificate.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-handlers=: The event handler functions that run custom business logic to process published events and subscribe requests.
+        --description=: A description of the `DomainName`.
+        --domain-name=!: The domain name.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --handler-configs=: The configuration for the `OnPublish` and `OnSubscribe` handlers.
-        --name=!: The name of the `ChannelNamespace`.
-        --publish-auth-modes=: The authorization mode to use for publishing messages on the channel namespace.
-        --subscribe-auth-modes=: The authorization mode to use for subscribing to messages on the channel namespace.
         --tags=: ""
-    - name: get-schema-creation-status
-      description: Retrieves the current status of a schema creation operation.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-domain-names
-      description: Lists multiple custom domain names.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-schema-creation
-      description: Adds a new schema to your GraphQL API.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --definition=!: The schema definition, in GraphQL schema language format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: Tags a resource with user-supplied tags.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The `GraphqlApi` Amazon Resource Name (ARN).
-        --tags=!: A `TagMap` object.
-    - name: update-graphql-api
-      description: Updates a `GraphqlApi` object.
-      flags:
-        --additional-authentication-providers=: A list of additional authentication providers for the `GraphqlApi` API.
-        --api-id=!: The API ID.
-        --authentication-type=!: The new authentication type for the `GraphqlApi` object.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enhanced-metrics-config=: The `enhancedMetricsConfig` object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --introspection-config=: Sets the value of the GraphQL API to enable (`ENABLED`) or disable (`DISABLED`) introspection.
-        --lambda-authorizer-config=: Configuration for Lambda function authorization.
-        --log-config=: The Amazon CloudWatch Logs configuration for the `GraphqlApi` object.
-        --merged-api-execution-role-arn=: The Identity and Access Management service role ARN for a merged API.
-        --name=!: The new name for the `GraphqlApi` object.
-        --no-xray-enabled: A flag indicating whether to use X-Ray tracing for the `GraphqlApi`.
-        --open-id-connect-config=: The OpenID Connect configuration for the `GraphqlApi` object.
-        --owner-contact=: The owner contact information for an API resource.
-        --query-depth-limit=: The maximum depth a query can have in a single request.
-        --resolver-count-limit=: The maximum number of resolvers that can be invoked in a single request.
-        --user-pool-config=: The new Amazon Cognito user pool configuration for the `~GraphqlApi` object.
-        --xray-enabled: A flag indicating whether to use X-Ray tracing for the `GraphqlApi`.
-      completion:
-        flag:
-            authentication-type:
-                - API_KEY
-                - AWS_IAM
-                - AMAZON_COGNITO_USER_POOLS
-                - OPENID_CONNECT
-                - AWS_LAMBDA
-            introspection-config:
-                - ENABLED
-                - DISABLED
     - name: delete-domain-name
       description: Deletes a custom `DomainName` object.
       flags:
@@ -288,233 +131,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The domain name.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: evaluate-mapping-template
-      description: Evaluates a given template and returns the response.
+    - name: disassociate-api
+      description: Removes an `ApiAssociation` object from a custom domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --context=!: The map that holds all of the contextual information for your resolver invocation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --template=!: The mapping template; this can be a request or response template.
-    - name: flush-api-cache
-      description: Flushes an `ApiCache` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-graphql-api-environment-variables
-      description: Retrieves the list of environmental variable key-value pairs associated with an API by its ID value.
-      flags:
-        --api-id=!: The ID of the API from which the environmental variable list will be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-types-by-association
-      description: Lists `Type` objects by the source API association ID.
-      flags:
-        --association-id=!: The ID generated by the AppSync service for the source API association.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --format=!: The format type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --merged-api-identifier=!: The identifier of the AppSync Merged API.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            format:
-                - SDL
-                - JSON
-    - name: start-schema-merge
-      description: Initiates a merge operation.
-      flags:
-        --association-id=!: The ID generated by the AppSync service for the source API association.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --merged-api-identifier=!: The identifier of the AppSync Merged API.
-    - name: get-graphql-api
-      description: Retrieves a `GraphqlApi` object.
-      flags:
-        --api-id=!: The API ID for the GraphQL API.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-api
-      description: Deletes an `Api` object
-      flags:
-        --api-id=!: The `Api` ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-graphql-api
-      description: Deletes a `GraphqlApi` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-data-source
-      description: Retrieves a `DataSource` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the data source.
-    - name: list-source-api-associations
-      description: Lists the `SourceApiAssociationSummary` data.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-channel-namespace
-      description: Updates a `ChannelNamespace` associated with an `Api`.
-      flags:
-        --api-id=!: The `Api` ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-handlers=: The event handler functions that run custom business logic to process published events and subscribe requests.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --handler-configs=: The configuration for the `OnPublish` and `OnSubscribe` handlers.
-        --name=!: The name of the `ChannelNamespace`.
-        --publish-auth-modes=: The authorization mode to use for publishing messages on the channel namespace.
-        --subscribe-auth-modes=: The authorization mode to use for subscribing to messages on the channel namespace.
-    - name: delete-resolver
-      description: Deletes a `Resolver` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --field-name=!: The resolver field name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type-name=!: The name of the resolver type.
-    - name: list-api-keys
-      description: Lists the API keys for a given API.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-channel-namespaces
-      description: Lists the channel namespaces for a specified `Api`.
-      flags:
-        --api-id=!: The `Api` ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-api-cache
-      description: Updates the cache for the GraphQL API.
-      flags:
-        --api-caching-behavior=!: Caching behavior.
-        --api-id=!: The GraphQL API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-metrics-config=: Controls how cache health metrics will be emitted to CloudWatch.
-        --ttl=!: TTL in seconds for cache entries.
-        --type=!: The cache instance type.
-      completion:
-        flag:
-            api-caching-behavior:
-                - FULL_REQUEST_CACHING
-                - PER_RESOLVER_CACHING
-                - OPERATION_LEVEL_CACHING
-            health-metrics-config:
-                - ENABLED
-                - DISABLED
-            type:
-                - T2_SMALL
-                - T2_MEDIUM
-                - R4_LARGE
-                - R4_XLARGE
-                - R4_2XLARGE
-                - R4_4XLARGE
-                - R4_8XLARGE
-                - SMALL
-                - MEDIUM
-                - LARGE
-                - XLARGE
-                - LARGE_2X
-                - LARGE_4X
-                - LARGE_8X
-                - LARGE_12X
-    - name: update-api-key
-      description: Updates an API key.
-      flags:
-        --api-id=!: The ID for the GraphQL API.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the purpose of the API key.
-        --expires=: From the update time, the time after which the API key expires.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The API key ID.
-    - name: get-introspection-schema
-      description: Retrieves the introspection schema for a GraphQL API.
-      flags:
-        --api-id=!: The API ID.
-        --format=!: 'The schema format: SDL or JSON.'
-        --include-directives: A flag that specifies whether the schema introspection should contain directives.
-        --no-include-directives: A flag that specifies whether the schema introspection should contain directives.
-      completion:
-        flag:
-            format:
-                - SDL
-                - JSON
-        positional:
-            - - $files
-    - name: update-type
-      description: Updates a `Type` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --definition=: The new definition.
-        --format=!: 'The new type format: SDL or JSON.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type-name=!: The new type name.
-      completion:
-        flag:
-            format:
-                - SDL
-                - JSON
-    - name: associate-merged-graphql-api
-      description: Creates an association between a Merged API and source API using the source API's identifier.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description field.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --merged-api-identifier=!: The identifier of the AppSync Merged API.
-        --source-api-association-config=: The `SourceApiAssociationConfig` object data.
-        --source-api-identifier=!: The identifier of the AppSync Source API.
-    - name: delete-function
-      description: Deletes a `Function`.
-      flags:
-        --api-id=!: The GraphQL API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-id=!: The `Function` ID.
+        --domain-name=!: The domain name.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-channel-namespace
       description: Retrieves the channel namespace for a specified `Api`.
@@ -524,25 +146,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the `ChannelNamespace`.
-    - name: get-data-source-introspection
-      description: Retrieves the record of an existing introspection.
+    - name: get-source-api-association
+      description: Retrieves a `SourceApiAssociation` object.
       flags:
+        --association-id=!: The ID generated by the AppSync service for the source API association.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-models-sdl: A boolean flag that determines whether SDL should be generated for introspected types.
-        --introspection-id=!: The introspection ID.
-        --max-results=: The maximum number of introspected types that will be returned in a single response.
-        --next-token=: Determines the number of types to be returned in a single response before paginating.
-        --no-include-models-sdl: A boolean flag that determines whether SDL should be generated for introspected types.
-    - name: put-graphql-api-environment-variables
-      description: Creates a list of environmental variables in an API by its ID value.
-      flags:
-        --api-id=!: The ID of the API to which the environmental variable list will be written.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-variables=!: The list of environmental variables to add to the API.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --merged-api-identifier=!: The identifier of the AppSync Merged API.
     - name: create-graphql-api
       description: Creates a `GraphqlApi` object.
       flags:
@@ -584,276 +195,6 @@ commands:
             visibility:
                 - GLOBAL
                 - PRIVATE
-    - name: get-api-association
-      description: Retrieves an `ApiAssociation` object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-apis
-      description: Lists the APIs in your AppSync account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-graphql-apis
-      description: Lists your GraphQL APIs.
-      flags:
-        --api-type=: The value that indicates whether the GraphQL API is a standard API (`GRAPHQL`) or merged API (`MERGED`).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --owner=: The account owner of the GraphQL API.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            api-type:
-                - GRAPHQL
-                - MERGED
-            owner:
-                - CURRENT_ACCOUNT
-                - OTHER_ACCOUNTS
-    - name: create-domain-name
-      description: Creates a custom `DomainName` object.
-      flags:
-        --certificate-arn=!: The Amazon Resource Name (ARN) of the certificate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the `DomainName`.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: ""
-    - name: list-functions
-      description: List multiple functions.
-      flags:
-        --api-id=!: The GraphQL API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists the tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The `GraphqlApi` Amazon Resource Name (ARN).
-    - name: start-data-source-introspection
-      description: Creates a new introspection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rds-data-api-config=: The `rdsDataApiConfig` object data.
-    - name: update-resolver
-      description: Updates a `Resolver` object.
-      flags:
-        --api-id=!: The API ID.
-        --caching-config=: The caching configuration for the resolver.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code=: The `resolver` code that contains the request and response functions.
-        --data-source-name=: The new data source name.
-        --field-name=!: The new field name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kind=: The resolver type.
-        --max-batch-size=: The maximum batching size for a resolver.
-        --metrics-config=: Enables or disables enhanced resolver metrics for specified resolvers.
-        --pipeline-config=: The `PipelineConfig`.
-        --request-mapping-template=: The new request mapping template.
-        --response-mapping-template=: The new response mapping template.
-        --runtime=: ""
-        --sync-config=: The `SyncConfig` for a resolver attached to a versioned data source.
-        --type-name=!: The new type name.
-      completion:
-        flag:
-            kind:
-                - UNIT
-                - PIPELINE
-            metrics-config:
-                - ENABLED
-                - DISABLED
-    - name: create-type
-      description: Creates a `Type` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --definition=!: The type definition, in GraphQL Schema Definition Language (SDL) format.
-        --format=!: 'The type format: SDL or JSON.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            format:
-                - SDL
-                - JSON
-    - name: list-data-sources
-      description: Lists the data sources for a given API.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-resolvers
-      description: Lists the resolvers for a given API and type.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that you want the request to return.
-        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --type-name=!: The type name.
-    - name: untag-resource
-      description: Untags a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The `GraphqlApi` Amazon Resource Name (ARN).
-        --tag-keys=!: A list of `TagKey` objects.
-    - name: update-data-source
-      description: Updates a `DataSource` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The new description for the data source.
-        --dynamodb-config=: The new Amazon DynamoDB configuration.
-        --elasticsearch-config=: The new OpenSearch configuration.
-        --event-bridge-config=: The new Amazon EventBridge settings.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --http-config=: The new HTTP endpoint configuration.
-        --lambda-config=: The new Lambda configuration.
-        --metrics-config=: Enables or disables enhanced data source metrics for specified data sources.
-        --name=!: The new name for the data source.
-        --open-search-service-config=: The new OpenSearch configuration.
-        --relational-database-config=: The new relational database configuration.
-        --service-role-arn=: The new service role Amazon Resource Name (ARN) for the data source.
-        --type=!: The new data source type.
-      completion:
-        flag:
-            metrics-config:
-                - ENABLED
-                - DISABLED
-            type:
-                - AWS_LAMBDA
-                - AMAZON_DYNAMODB
-                - AMAZON_ELASTICSEARCH
-                - NONE
-                - HTTP
-                - RELATIONAL_DATABASE
-                - AMAZON_OPENSEARCH_SERVICE
-                - AMAZON_EVENTBRIDGE
-                - AMAZON_BEDROCK_RUNTIME
-    - name: update-domain-name
-      description: Updates a custom `DomainName` object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the `DomainName`.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-function
-      description: Creates a `Function` object.
-      flags:
-        --api-id=!: The GraphQL API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code=: The `function` code that contains the request and response functions.
-        --data-source-name=!: The `Function` `DataSource` name.
-        --description=: The `Function` description.
-        --function-version=: The `version` of the request mapping template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-batch-size=: The maximum batching size for a resolver.
-        --name=!: The `Function` name.
-        --request-mapping-template=: The `Function` request mapping template.
-        --response-mapping-template=: The `Function` response mapping template.
-        --runtime=: ""
-        --sync-config=: ""
-    - name: get-api-cache
-      description: Retrieves an `ApiCache` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-domain-name
-      description: Retrieves a custom `DomainName` object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-resolver
-      description: Retrieves a `Resolver` object.
-      flags:
-        --api-id=!: The API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --field-name=!: The resolver field name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type-name=!: The resolver type name.
-    - name: update-api
-      description: Updates an `Api`.
-      flags:
-        --api-id=!: The `Api` ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-config=: The new event configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Api.
-        --owner-contact=: The owner contact information for the `Api`.
-    - name: update-function
-      description: Updates a `Function` object.
-      flags:
-        --api-id=!: The GraphQL API ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code=: The `function` code that contains the request and response functions.
-        --data-source-name=!: The `Function` `DataSource` name.
-        --description=: The `Function` description.
-        --function-id=!: The function ID.
-        --function-version=: The `version` of the request mapping template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-batch-size=: The maximum batching size for a resolver.
-        --name=!: The `Function` name.
-        --request-mapping-template=: The `Function` request mapping template.
-        --response-mapping-template=: The `Function` request mapping template.
-        --runtime=: ""
-        --sync-config=: ""
-    - name: associate-source-graphql-api
-      description: Creates an association between a Merged API and source API using the Merged API's identifier.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description field.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --merged-api-identifier=!: The identifier of the AppSync Merged API.
-        --source-api-association-config=: The `SourceApiAssociationConfig` object data.
-        --source-api-identifier=!: The identifier of the AppSync Source API.
     - name: create-resolver
       description: Creates a `Resolver` object.
       flags:
@@ -882,39 +223,281 @@ commands:
             metrics-config:
                 - ENABLED
                 - DISABLED
-    - name: disassociate-merged-graphql-api
-      description: Deletes an association between a Merged API and source API using the source API's identifier and the association ID.
+    - name: delete-channel-namespace
+      description: Deletes a `ChannelNamespace`.
       flags:
-        --association-id=!: The ID generated by the AppSync service for the source API association.
+        --api-id=!: The ID of the `Api` associated with the `ChannelNamespace`.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-api-identifier=!: The identifier of the AppSync Source API.
-    - name: update-source-api-association
-      description: Updates some of the configuration choices of a particular source API association.
+        --name=!: The name of the `ChannelNamespace`.
+    - name: get-api-association
+      description: Retrieves an `ApiAssociation` object.
       flags:
-        --association-id=!: The ID generated by the AppSync service for the source API association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The domain name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-data-source
+      description: Retrieves a `DataSource` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the data source.
+    - name: put-graphql-api-environment-variables
+      description: Creates a list of environmental variables in an API by its ID value.
+      flags:
+        --api-id=!: The ID of the API to which the environmental variable list will be written.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-variables=!: The list of environmental variables to add to the API.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-function
+      description: Updates a `Function` object.
+      flags:
+        --api-id=!: The GraphQL API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code=: The `function` code that contains the request and response functions.
+        --data-source-name=!: The `Function` `DataSource` name.
+        --description=: The `Function` description.
+        --function-id=!: The function ID.
+        --function-version=: The `version` of the request mapping template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-batch-size=: The maximum batching size for a resolver.
+        --name=!: The `Function` name.
+        --request-mapping-template=: The `Function` request mapping template.
+        --response-mapping-template=: The `Function` request mapping template.
+        --runtime=: ""
+        --sync-config=: ""
+    - name: create-channel-namespace
+      description: Creates a `ChannelNamespace` for an `Api`.
+      flags:
+        --api-id=!: The `Api` ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-handlers=: The event handler functions that run custom business logic to process published events and subscribe requests.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --handler-configs=: The configuration for the `OnPublish` and `OnSubscribe` handlers.
+        --name=!: The name of the `ChannelNamespace`.
+        --publish-auth-modes=: The authorization mode to use for publishing messages on the channel namespace.
+        --subscribe-auth-modes=: The authorization mode to use for subscribing to messages on the channel namespace.
+        --tags=: ""
+    - name: create-data-source
+      description: Creates a `DataSource` object.
+      flags:
+        --api-id=!: The API ID for the GraphQL API for the `DataSource`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the `DataSource`.
+        --dynamodb-config=: Amazon DynamoDB settings.
+        --elasticsearch-config=: Amazon OpenSearch Service settings.
+        --event-bridge-config=: Amazon EventBridge settings.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --http-config=: HTTP endpoint settings.
+        --lambda-config=: Lambda settings.
+        --metrics-config=: Enables or disables enhanced data source metrics for specified data sources.
+        --name=!: A user-supplied name for the `DataSource`.
+        --open-search-service-config=: Amazon OpenSearch Service settings.
+        --relational-database-config=: Relational database settings.
+        --service-role-arn=: The Identity and Access Management (IAM) service role Amazon Resource Name (ARN) for the data source.
+        --type=!: The type of the `DataSource`.
+      completion:
+        flag:
+            metrics-config:
+                - ENABLED
+                - DISABLED
+            type:
+                - AWS_LAMBDA
+                - AMAZON_DYNAMODB
+                - AMAZON_ELASTICSEARCH
+                - NONE
+                - HTTP
+                - RELATIONAL_DATABASE
+                - AMAZON_OPENSEARCH_SERVICE
+                - AMAZON_EVENTBRIDGE
+                - AMAZON_BEDROCK_RUNTIME
+    - name: flush-api-cache
+      description: Flushes an `ApiCache` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-graphql-api
+      description: Retrieves a `GraphqlApi` object.
+      flags:
+        --api-id=!: The API ID for the GraphQL API.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-api-key
+      description: Updates an API key.
+      flags:
+        --api-id=!: The ID for the GraphQL API.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the purpose of the API key.
+        --expires=: From the update time, the time after which the API key expires.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The API key ID.
+    - name: associate-source-graphql-api
+      description: Creates an association between a Merged API and source API using the Merged API's identifier.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description field.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --merged-api-identifier=!: The identifier of the AppSync Merged API.
         --source-api-association-config=: The `SourceApiAssociationConfig` object data.
-    - name: get-source-api-association
-      description: Retrieves a `SourceApiAssociation` object.
+        --source-api-identifier=!: The identifier of the AppSync Source API.
+    - name: delete-data-source
+      description: Deletes a `DataSource` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the data source.
+    - name: create-function
+      description: Creates a `Function` object.
+      flags:
+        --api-id=!: The GraphQL API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code=: The `function` code that contains the request and response functions.
+        --data-source-name=!: The `Function` `DataSource` name.
+        --description=: The `Function` description.
+        --function-version=: The `version` of the request mapping template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-batch-size=: The maximum batching size for a resolver.
+        --name=!: The `Function` name.
+        --request-mapping-template=: The `Function` request mapping template.
+        --response-mapping-template=: The `Function` response mapping template.
+        --runtime=: ""
+        --sync-config=: ""
+    - name: create-type
+      description: Creates a `Type` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --definition=!: The type definition, in GraphQL Schema Definition Language (SDL) format.
+        --format=!: 'The type format: SDL or JSON.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            format:
+                - SDL
+                - JSON
+    - name: get-data-source-introspection
+      description: Retrieves the record of an existing introspection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-models-sdl: A boolean flag that determines whether SDL should be generated for introspected types.
+        --introspection-id=!: The introspection ID.
+        --max-results=: The maximum number of introspected types that will be returned in a single response.
+        --next-token=: Determines the number of types to be returned in a single response before paginating.
+        --no-include-models-sdl: A boolean flag that determines whether SDL should be generated for introspected types.
+    - name: get-resolver
+      description: Retrieves a `Resolver` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --field-name=!: The resolver field name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type-name=!: The resolver type name.
+    - name: update-channel-namespace
+      description: Updates a `ChannelNamespace` associated with an `Api`.
+      flags:
+        --api-id=!: The `Api` ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-handlers=: The event handler functions that run custom business logic to process published events and subscribe requests.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --handler-configs=: The configuration for the `OnPublish` and `OnSubscribe` handlers.
+        --name=!: The name of the `ChannelNamespace`.
+        --publish-auth-modes=: The authorization mode to use for publishing messages on the channel namespace.
+        --subscribe-auth-modes=: The authorization mode to use for subscribing to messages on the channel namespace.
+    - name: create-api
+      description: Creates an `Api` object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-config=: The Event API configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the `Api`.
+        --owner-contact=: The owner contact information for the `Api`.
+        --tags=: ""
+    - name: delete-function
+      description: Deletes a `Function`.
+      flags:
+        --api-id=!: The GraphQL API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-id=!: The `Function` ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-resolver
+      description: Deletes a `Resolver` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --field-name=!: The resolver field name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type-name=!: The name of the resolver type.
+    - name: evaluate-code
+      description: Evaluates the given code and returns the response.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code=!: The code definition to be evaluated.
+        --context=!: The map that holds all of the contextual information for your resolver invocation.
+        --function=: The function within the code to be evaluated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --runtime=!: The runtime to be used when evaluating the code.
+    - name: get-introspection-schema
+      description: Retrieves the introspection schema for a GraphQL API.
+      flags:
+        --api-id=!: The API ID.
+        --format=!: 'The schema format: SDL or JSON.'
+        --include-directives: A flag that specifies whether the schema introspection should contain directives.
+        --no-include-directives: A flag that specifies whether the schema introspection should contain directives.
+      completion:
+        flag:
+            format:
+                - SDL
+                - JSON
+        positional:
+            - - $files
+    - name: update-type
+      description: Updates a `Type` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --definition=: The new definition.
+        --format=!: 'The new type format: SDL or JSON.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type-name=!: The new type name.
+      completion:
+        flag:
+            format:
+                - SDL
+                - JSON
+    - name: disassociate-source-graphql-api
+      description: Deletes an association between a Merged API and source API using the Merged API's identifier and the association ID.
       flags:
         --association-id=!: The ID generated by the AppSync service for the source API association.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --merged-api-identifier=!: The identifier of the AppSync Merged API.
-    - name: disassociate-api
-      description: Removes an `ApiAssociation` object from a custom domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-types
       description: Lists the types for a given API.
       flags:
@@ -933,3 +516,420 @@ commands:
             format:
                 - SDL
                 - JSON
+    - name: update-api
+      description: Updates an `Api`.
+      flags:
+        --api-id=!: The `Api` ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-config=: The new event configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the Api.
+        --owner-contact=: The owner contact information for the `Api`.
+    - name: create-api-cache
+      description: Creates a cache for the GraphQL API.
+      flags:
+        --api-caching-behavior=!: Caching behavior.
+        --api-id=!: The GraphQL API ID.
+        --at-rest-encryption-enabled: At-rest encryption flag for cache.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-metrics-config=: Controls how cache health metrics will be emitted to CloudWatch.
+        --no-at-rest-encryption-enabled: At-rest encryption flag for cache.
+        --no-transit-encryption-enabled: Transit encryption flag when connecting to cache.
+        --transit-encryption-enabled: Transit encryption flag when connecting to cache.
+        --ttl=!: TTL in seconds for cache entries.
+        --type=!: The cache instance type.
+      completion:
+        flag:
+            api-caching-behavior:
+                - FULL_REQUEST_CACHING
+                - PER_RESOLVER_CACHING
+                - OPERATION_LEVEL_CACHING
+            health-metrics-config:
+                - ENABLED
+                - DISABLED
+            type:
+                - T2_SMALL
+                - T2_MEDIUM
+                - R4_LARGE
+                - R4_XLARGE
+                - R4_2XLARGE
+                - R4_4XLARGE
+                - R4_8XLARGE
+                - SMALL
+                - MEDIUM
+                - LARGE
+                - XLARGE
+                - LARGE_2X
+                - LARGE_4X
+                - LARGE_8X
+                - LARGE_12X
+    - name: delete-graphql-api
+      description: Deletes a `GraphqlApi` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disassociate-merged-graphql-api
+      description: Deletes an association between a Merged API and source API using the source API's identifier and the association ID.
+      flags:
+        --association-id=!: The ID generated by the AppSync service for the source API association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-api-identifier=!: The identifier of the AppSync Source API.
+    - name: list-domain-names
+      description: Lists multiple custom domain names.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-source-api-association
+      description: Updates some of the configuration choices of a particular source API association.
+      flags:
+        --association-id=!: The ID generated by the AppSync service for the source API association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description field.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --merged-api-identifier=!: The identifier of the AppSync Merged API.
+        --source-api-association-config=: The `SourceApiAssociationConfig` object data.
+    - name: get-schema-creation-status
+      description: Retrieves the current status of a schema creation operation.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-api-keys
+      description: Lists the API keys for a given API.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-data-sources
+      description: Lists the data sources for a given API.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-source-api-associations
+      description: Lists the `SourceApiAssociationSummary` data.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-data-source-introspection
+      description: Creates a new introspection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rds-data-api-config=: The `rdsDataApiConfig` object data.
+    - name: get-type
+      description: Retrieves a `Type` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format=!: 'The type format: SDL or JSON.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type-name=!: The type name.
+      completion:
+        flag:
+            format:
+                - SDL
+                - JSON
+    - name: list-apis
+      description: Lists the APIs in your AppSync account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-resolvers
+      description: Lists the resolvers for a given API and type.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --type-name=!: The type name.
+    - name: associate-api
+      description: Maps an endpoint to your custom domain.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The domain name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-type
+      description: Deletes a `Type` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type-name=!: The type name.
+    - name: get-api
+      description: Retrieves an `Api` object.
+      flags:
+        --api-id=!: The `Api` ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-domain-name
+      description: Retrieves a custom `DomainName` object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The domain name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-graphql-api-environment-variables
+      description: Retrieves the list of environmental variable key-value pairs associated with an API by its ID value.
+      flags:
+        --api-id=!: The ID of the API from which the environmental variable list will be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-api-cache
+      description: Retrieves an `ApiCache` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-graphql-apis
+      description: Lists your GraphQL APIs.
+      flags:
+        --api-type=: The value that indicates whether the GraphQL API is a standard API (`GRAPHQL`) or merged API (`MERGED`).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --owner=: The account owner of the GraphQL API.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            api-type:
+                - GRAPHQL
+                - MERGED
+            owner:
+                - CURRENT_ACCOUNT
+                - OTHER_ACCOUNTS
+    - name: list-types-by-association
+      description: Lists `Type` objects by the source API association ID.
+      flags:
+        --association-id=!: The ID generated by the AppSync service for the source API association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format=!: The format type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that you want the request to return.
+        --merged-api-identifier=!: The identifier of the AppSync Merged API.
+        --next-token=: An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            format:
+                - SDL
+                - JSON
+    - name: start-schema-creation
+      description: Adds a new schema to your GraphQL API.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --definition=!: The schema definition, in GraphQL schema language format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-schema-merge
+      description: Initiates a merge operation.
+      flags:
+        --association-id=!: The ID generated by the AppSync service for the source API association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --merged-api-identifier=!: The identifier of the AppSync Merged API.
+    - name: untag-resource
+      description: Untags a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The `GraphqlApi` Amazon Resource Name (ARN).
+        --tag-keys=!: A list of `TagKey` objects.
+    - name: update-api-cache
+      description: Updates the cache for the GraphQL API.
+      flags:
+        --api-caching-behavior=!: Caching behavior.
+        --api-id=!: The GraphQL API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-metrics-config=: Controls how cache health metrics will be emitted to CloudWatch.
+        --ttl=!: TTL in seconds for cache entries.
+        --type=!: The cache instance type.
+      completion:
+        flag:
+            api-caching-behavior:
+                - FULL_REQUEST_CACHING
+                - PER_RESOLVER_CACHING
+                - OPERATION_LEVEL_CACHING
+            health-metrics-config:
+                - ENABLED
+                - DISABLED
+            type:
+                - T2_SMALL
+                - T2_MEDIUM
+                - R4_LARGE
+                - R4_XLARGE
+                - R4_2XLARGE
+                - R4_4XLARGE
+                - R4_8XLARGE
+                - SMALL
+                - MEDIUM
+                - LARGE
+                - XLARGE
+                - LARGE_2X
+                - LARGE_4X
+                - LARGE_8X
+                - LARGE_12X
+    - name: update-graphql-api
+      description: Updates a `GraphqlApi` object.
+      flags:
+        --additional-authentication-providers=: A list of additional authentication providers for the `GraphqlApi` API.
+        --api-id=!: The API ID.
+        --authentication-type=!: The new authentication type for the `GraphqlApi` object.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enhanced-metrics-config=: The `enhancedMetricsConfig` object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --introspection-config=: Sets the value of the GraphQL API to enable (`ENABLED`) or disable (`DISABLED`) introspection.
+        --lambda-authorizer-config=: Configuration for Lambda function authorization.
+        --log-config=: The Amazon CloudWatch Logs configuration for the `GraphqlApi` object.
+        --merged-api-execution-role-arn=: The Identity and Access Management service role ARN for a merged API.
+        --name=!: The new name for the `GraphqlApi` object.
+        --no-xray-enabled: A flag indicating whether to use X-Ray tracing for the `GraphqlApi`.
+        --open-id-connect-config=: The OpenID Connect configuration for the `GraphqlApi` object.
+        --owner-contact=: The owner contact information for an API resource.
+        --query-depth-limit=: The maximum depth a query can have in a single request.
+        --resolver-count-limit=: The maximum number of resolvers that can be invoked in a single request.
+        --user-pool-config=: The new Amazon Cognito user pool configuration for the `~GraphqlApi` object.
+        --xray-enabled: A flag indicating whether to use X-Ray tracing for the `GraphqlApi`.
+      completion:
+        flag:
+            authentication-type:
+                - API_KEY
+                - AWS_IAM
+                - AMAZON_COGNITO_USER_POOLS
+                - OPENID_CONNECT
+                - AWS_LAMBDA
+            introspection-config:
+                - ENABLED
+                - DISABLED
+    - name: delete-api-cache
+      description: Deletes an `ApiCache` object.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-domain-name
+      description: Updates a custom `DomainName` object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the `DomainName`.
+        --domain-name=!: The domain name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-resolver
+      description: Updates a `Resolver` object.
+      flags:
+        --api-id=!: The API ID.
+        --caching-config=: The caching configuration for the resolver.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code=: The `resolver` code that contains the request and response functions.
+        --data-source-name=: The new data source name.
+        --field-name=!: The new field name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kind=: The resolver type.
+        --max-batch-size=: The maximum batching size for a resolver.
+        --metrics-config=: Enables or disables enhanced resolver metrics for specified resolvers.
+        --pipeline-config=: The `PipelineConfig`.
+        --request-mapping-template=: The new request mapping template.
+        --response-mapping-template=: The new response mapping template.
+        --runtime=: ""
+        --sync-config=: The `SyncConfig` for a resolver attached to a versioned data source.
+        --type-name=!: The new type name.
+      completion:
+        flag:
+            kind:
+                - UNIT
+                - PIPELINE
+            metrics-config:
+                - ENABLED
+                - DISABLED
+    - name: delete-api
+      description: Deletes an `Api` object
+      flags:
+        --api-id=!: The `Api` ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-api-key
+      description: Deletes an API key.
+      flags:
+        --api-id=!: The API ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID for the API key.
+    - name: tag-resource
+      description: Tags a resource with user-supplied tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The `GraphqlApi` Amazon Resource Name (ARN).
+        --tags=!: A `TagMap` object.

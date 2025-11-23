@@ -1,98 +1,13 @@
 name: ssm-sap
 description: AWS Systems Manager for SAP
 commands:
-    - name: start-application-refresh
-      description: Refreshes a registered application.
-      flags:
-        --application-id=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-application
-      description: Gets an application registered with AWS Systems Manager for SAP.
-      flags:
-        --app-registry-arn=: The Amazon Resource Name (ARN) of the application registry.
-        --application-arn=: The Amazon Resource Name (ARN) of the application.
-        --application-id=: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-component
-      description: Gets the component of an application registered with AWS Systems Manager for SAP.
-      flags:
-        --application-id=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-id=!: The ID of the component.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-operation-events
-      description: Returns a list of operations events.
+    - name: get-operation
+      description: Gets the details of an operation by specifying the operation ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Optionally specify filters to narrow the returned operation event items.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token to use to retrieve the next page of results.
         --operation-id=!: The ID of the operation.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-application
-      description: Request is an operation which starts an application.
-      flags:
-        --application-id=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: stop-application
-      description: Request is an operation to stop an application.
-      flags:
-        --application-id=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-ec2-instance-shutdown: Boolean.
-        --no-include-ec2-instance-shutdown: Boolean.
-        --stop-connected-entity=: Specify the `ConnectedEntityType`.
-      completion:
-        flag:
-            stop-connected-entity:
-                - DBMS
-    - name: tag-resource
-      description: Creates tag for a resource by specifying the ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: The tags on a resource.
-    - name: get-configuration-check-operation
-      description: Gets the details of a configuration check operation by specifying the operation ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=!: The ID of the configuration check operation.
-    - name: list-configuration-check-operations
-      description: Lists the configuration check operations performed by AWS Systems Manager for SAP.
-      flags:
-        --application-id=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filters of an operation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --list-mode=: The mode for listing configuration check operations.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            list-mode:
-                - ALL_OPERATIONS
-                - LATEST_PER_CHECK
     - name: list-operations
       description: Lists the operations performed by AWS Systems Manager for SAP.
       flags:
@@ -106,18 +21,40 @@ commands:
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-sub-check-rule-results
-      description: Lists the rules of a specified sub-check belonging to a configuration check operation.
+    - name: list-tags-for-resource
+      description: Lists all tags on an SAP HANA application and/or database registered with AWS Systems Manager for SAP.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --sub-check-result-id=!: The ID of the sub check result.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: register-application
+      description: Register an SAP application with AWS Systems Manager for SAP.
+      flags:
+        --application-id=!: The ID of the application.
+        --application-type=!: The type of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --components-info=: This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.
+        --credentials=: The credentials of the SAP application.
+        --database-arn=: The Amazon Resource Name of the SAP HANA database.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instances=!: The Amazon EC2 instances on which your SAP application is running.
+        --sap-instance-number=: The SAP instance number of the application.
+        --sid=: The System ID of the application.
+        --tags=: The tags to be attached to the SAP application.
+      completion:
+        flag:
+            application-type:
+                - HANA
+                - SAP_ABAP
+    - name: start-application
+      description: Request is an operation which starts an application.
+      flags:
+        --application-id=!: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-configuration-checks
       description: Initiates configuration check operations against a specified application.
       flags:
@@ -126,27 +63,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration-check-ids=: The list of configuration checks to perform.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: untag-resource
-      description: Delete the tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: Adds/updates or removes credentials for applications registered with AWS Systems Manager for SAP.
-    - name: delete-resource-permission
-      description: Removes permissions associated with the target database.
-      flags:
-        --action-type=: Delete or restore the permissions on the target database.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --source-resource-arn=: The Amazon Resource Name (ARN) of the source resource.
-      completion:
-        flag:
-            action-type:
-                - RESTORE
     - name: get-resource-permission
       description: Gets permissions associated with the target database.
       flags:
@@ -159,86 +75,6 @@ commands:
         flag:
             action-type:
                 - RESTORE
-    - name: list-databases
-      description: Lists the SAP HANA databases of an application registered with AWS Systems Manager for SAP.
-      flags:
-        --application-id=: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-id=: The ID of the component.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-sub-check-results
-      description: Lists the sub-check results of a specified configuration check operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return with a single call.
-        --next-token=: The token for the next page of results.
-        --operation-id=!: The ID of the configuration check operation.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists all tags on an SAP HANA application and/or database registered with AWS Systems Manager for SAP.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: put-resource-permission
-      description: Adds permissions to the target database.
-      flags:
-        --action-type=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ""
-        --source-resource-arn=!: ""
-      completion:
-        flag:
-            action-type:
-                - RESTORE
-    - name: update-application-settings
-      description: Updates the settings of an application registered with AWS Systems Manager for SAP.
-      flags:
-        --application-id=!: The ID of the application.
-        --backint=: Installation of AWS Backint Agent for SAP HANA.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --credentials-to-add-or-update=: The credentials to be added or updated.
-        --credentials-to-remove=: The credentials to be removed.
-        --database-arn=: The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA connection with the SAP\_ABAP application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: deregister-application
-      description: Deregister an SAP application with AWS Systems Manager for SAP.
-      flags:
-        --application-id=!: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-database
-      description: Gets the SAP HANA database of an application registered with AWS Systems Manager for SAP.
-      flags:
-        --application-id=: The ID of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-id=: The ID of the component.
-        --database-arn=: The Amazon Resource Name (ARN) of the database.
-        --database-id=: The ID of the database.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-operation
-      description: Gets the details of an operation by specifying the operation ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=!: The ID of the operation.
     - name: list-applications
       description: Lists all the applications registered with AWS Systems Manager for SAP.
       flags:
@@ -274,23 +110,187 @@ commands:
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: register-application
-      description: Register an SAP application with AWS Systems Manager for SAP.
+    - name: list-configuration-check-operations
+      description: Lists the configuration check operations performed by AWS Systems Manager for SAP.
       flags:
         --application-id=!: The ID of the application.
-        --application-type=!: The type of the application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --components-info=: This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.
-        --credentials=: The credentials of the SAP application.
-        --database-arn=: The Amazon Resource Name of the SAP HANA database.
+        --filters=: The filters of an operation.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instances=!: The Amazon EC2 instances on which your SAP application is running.
-        --sap-instance-number=: The SAP instance number of the application.
-        --sid=: The System ID of the application.
-        --tags=: The tags to be attached to the SAP application.
+        --list-mode=: The mode for listing configuration check operations.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
-            application-type:
-                - HANA
-                - SAP_ABAP
+            list-mode:
+                - ALL_OPERATIONS
+                - LATEST_PER_CHECK
+    - name: list-sub-check-rule-results
+      description: Lists the rules of a specified sub-check belonging to a configuration check operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --sub-check-result-id=!: The ID of the sub check result.
+    - name: start-application-refresh
+      description: Refreshes a registered application.
+      flags:
+        --application-id=!: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-application
+      description: Request is an operation to stop an application.
+      flags:
+        --application-id=!: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-ec2-instance-shutdown: Boolean.
+        --no-include-ec2-instance-shutdown: Boolean.
+        --stop-connected-entity=: Specify the `ConnectedEntityType`.
+      completion:
+        flag:
+            stop-connected-entity:
+                - DBMS
+    - name: delete-resource-permission
+      description: Removes permissions associated with the target database.
+      flags:
+        --action-type=: Delete or restore the permissions on the target database.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --source-resource-arn=: The Amazon Resource Name (ARN) of the source resource.
+      completion:
+        flag:
+            action-type:
+                - RESTORE
+    - name: get-database
+      description: Gets the SAP HANA database of an application registered with AWS Systems Manager for SAP.
+      flags:
+        --application-id=: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-id=: The ID of the component.
+        --database-arn=: The Amazon Resource Name (ARN) of the database.
+        --database-id=: The ID of the database.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-operation-events
+      description: Returns a list of operations events.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Optionally specify filters to narrow the returned operation event items.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token to use to retrieve the next page of results.
+        --operation-id=!: The ID of the operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-sub-check-results
+      description: Lists the sub-check results of a specified configuration check operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --operation-id=!: The ID of the configuration check operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Creates tag for a resource by specifying the ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tags=!: The tags on a resource.
+    - name: untag-resource
+      description: Delete the tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+        --tag-keys=!: Adds/updates or removes credentials for applications registered with AWS Systems Manager for SAP.
+    - name: deregister-application
+      description: Deregister an SAP application with AWS Systems Manager for SAP.
+      flags:
+        --application-id=!: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-component
+      description: Gets the component of an application registered with AWS Systems Manager for SAP.
+      flags:
+        --application-id=!: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-id=!: The ID of the component.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-databases
+      description: Lists the SAP HANA databases of an application registered with AWS Systems Manager for SAP.
+      flags:
+        --application-id=: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-id=: The ID of the component.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-resource-permission
+      description: Adds permissions to the target database.
+      flags:
+        --action-type=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ""
+        --source-resource-arn=!: ""
+      completion:
+        flag:
+            action-type:
+                - RESTORE
+    - name: update-application-settings
+      description: Updates the settings of an application registered with AWS Systems Manager for SAP.
+      flags:
+        --application-id=!: The ID of the application.
+        --backint=: Installation of AWS Backint Agent for SAP HANA.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --credentials-to-add-or-update=: The credentials to be added or updated.
+        --credentials-to-remove=: The credentials to be removed.
+        --database-arn=: The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA connection with the SAP\_ABAP application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-application
+      description: Gets an application registered with AWS Systems Manager for SAP.
+      flags:
+        --app-registry-arn=: The Amazon Resource Name (ARN) of the application registry.
+        --application-arn=: The Amazon Resource Name (ARN) of the application.
+        --application-id=: The ID of the application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-configuration-check-operation
+      description: Gets the details of a configuration check operation by specifying the operation ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operation-id=!: The ID of the configuration check operation.

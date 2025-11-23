@@ -1,75 +1,30 @@
 name: iotthingsgraph
 description: AWS IoT Things Graph
 commands:
-    - name: delete-system-template
-      description: Deletes a system.
+    - name: deprecate-system-template
+      description: Deprecates the specified system.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the system to be deleted.
-    - name: untag-resource
-      description: Removes a tag from the specified resource.
+        --id=!: The ID of the system to delete.
+    - name: associate-entity-to-thing
+      description: Associates a device with a concrete thing that is in the user's registry.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-id=!: The ID of the device to be associated with the thing.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags are to be removed.
-        --tag-keys=!: A list of tag key names to remove from the resource.
-    - name: search-system-templates
-      description: Searches for summary information about systems in the user's account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An array of filters that limit the result set.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The string that specifies the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-flow-template
-      description: Creates a workflow template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compatible-namespace-version=: The namespace version in which the workflow is to be created.
-        --definition=!: The workflow `DefinitionDocument`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-flow-template
-      description: Deletes a workflow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the workflow to be deleted.
-    - name: delete-system-instance
-      description: Deletes a system instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: The ID of the system instance to be deleted.
-    - name: get-flow-template-revisions
-      description: Gets revisions of the specified workflow.
+        --namespace-version=: The version of the user's namespace.
+        --thing-name=!: The name of the thing to which the entity is to be associated.
+    - name: get-flow-template
+      description: Gets the latest version of the `DefinitionDocument` and `FlowTemplateSummary` for the specified workflow.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the workflow.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The string that specifies the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-system-template
-      description: Gets a system.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the system to get.
-        --revision-number=: The number that specifies the revision of the system to get.
+        --revision-number=: The number of the workflow revision to retrieve.
     - name: get-upload-status
       description: Gets the status of the specified upload.
       flags:
@@ -89,21 +44,18 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags are to be returned.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-system-template
-      description: Creates a system.
+    - name: search-system-templates
+      description: Searches for summary information about systems in the user's account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compatible-namespace-version=: The namespace version in which the system is to be created.
-        --definition=!: The `DefinitionDocument` used to create the system.
+        --filters=: An array of filters that limit the result set.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-namespace
-      description: Gets the latest version of the user's namespace and the public version that it is tracking.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-name=: The name of the user's namespace.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The string that specifies the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: dissociate-entity-from-thing
       description: Dissociates a device entity from a concrete thing.
       flags:
@@ -125,20 +77,26 @@ commands:
                 - PROPERTY
                 - MAPPING
                 - ENUM
-    - name: search-entities
-      description: Searches for entities of the specified type.
+    - name: get-flow-template-revisions
+      description: Gets revisions of the specified workflow.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-types=!: The entity types for which to search.
-        --filters=: Optional filter to apply to the search.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the workflow.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in the response.
-        --namespace-version=: The version of the user's namespace.
         --next-token=: The string that specifies the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: get-system-template
+      description: Gets a system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the system to get.
+        --revision-number=: The number that specifies the revision of the system to get.
     - name: search-flow-executions
       description: Searches for AWS IoT Things Graph workflow execution instances.
       flags:
@@ -154,66 +112,14 @@ commands:
         --start-time=: The date and time of the earliest flow execution to return.
         --starting-token=: A token to specify where to start paginating.
         --system-instance-id=!: The ID of the system instance that contains the flow.
-    - name: update-flow-template
-      description: Updates the specified workflow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compatible-namespace-version=: The version of the user's namespace.
-        --definition=!: The `DefinitionDocument` that contains the updated workflow definition.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the workflow to be updated.
-    - name: update-system-template
-      description: Updates the specified system.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compatible-namespace-version=: The version of the user's namespace.
-        --definition=!: The `DefinitionDocument` that contains the updated system definition.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the system to be updated.
-    - name: deprecate-flow-template
-      description: Deprecates the specified workflow.
+    - name: tag-resource
+      description: Creates a tag for the specified resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the workflow to be deleted.
-    - name: get-entities
-      description: Gets definitions of the specified entities.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ids=!: An array of entity IDs.
-        --namespace-version=: The version of the user's namespace.
-    - name: get-flow-template
-      description: Gets the latest version of the `DefinitionDocument` and `FlowTemplateSummary` for the specified workflow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the workflow.
-        --revision-number=: The number of the workflow revision to retrieve.
-    - name: list-flow-execution-messages
-      description: Returns a list of objects that contain information about events in a flow execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-execution-id=!: The ID of the flow execution.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: The string that specifies the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: deprecate-system-template
-      description: Deprecates the specified system.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the system to delete.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags are returned.
+        --tags=!: A list of tags to add to the resource.&gt;
     - name: get-system-template-revisions
       description: Gets revisions made to the specified system template.
       flags:
@@ -226,31 +132,56 @@ commands:
         --next-token=: The string that specifies the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: search-system-instances
-      description: Searches for system instances in the user's account.
+    - name: search-entities
+      description: Searches for entities of the specified type.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-types=!: The entity types for which to search.
         --filters=: Optional filter to apply to the search.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --namespace-version=: The version of the user's namespace.
+        --next-token=: The string that specifies the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-entities
+      description: Gets definitions of the specified entities.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ids=!: An array of entity IDs.
+        --namespace-version=: The version of the user's namespace.
+    - name: delete-flow-template
+      description: Deletes a workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the workflow to be deleted.
+    - name: update-system-template
+      description: Updates the specified system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compatible-namespace-version=: The version of the user's namespace.
+        --definition=!: The `DefinitionDocument` that contains the updated system definition.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the system to be updated.
+    - name: list-flow-execution-messages
+      description: Returns a list of objects that contain information about events in a flow execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-execution-id=!: The ID of the flow execution.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: The string that specifies the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: delete-namespace
-      description: Deletes the specified namespace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: deploy-system-instance
-      description: '**Greengrass and Cloud Deployments**'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: The ID of the system instance.
     - name: search-flow-templates
       description: Searches for summary information about workflows.
       flags:
@@ -276,30 +207,15 @@ commands:
         --next-token=: The string that specifies the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Creates a tag for the specified resource.
+    - name: update-flow-template
+      description: Updates the specified workflow.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compatible-namespace-version=: The version of the user's namespace.
+        --definition=!: The `DefinitionDocument` that contains the updated workflow definition.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags are returned.
-        --tags=!: A list of tags to add to the resource.&gt;
-    - name: associate-entity-to-thing
-      description: Associates a device with a concrete thing that is in the user's registry.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-id=!: The ID of the device to be associated with the thing.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-version=: The version of the user's namespace.
-        --thing-name=!: The name of the thing to which the entity is to be associated.
-    - name: undeploy-system-instance
-      description: Removes a system instance from its target (Cloud or Greengrass).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: The ID of the system instance to remove from its target.
+        --id=!: The ID of the workflow to be updated.
     - name: create-system-instance
       description: Creates a system instance.
       flags:
@@ -331,6 +247,90 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the system deployment instance.
+    - name: untag-resource
+      description: Removes a tag from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags are to be removed.
+        --tag-keys=!: A list of tag key names to remove from the resource.
+    - name: deploy-system-instance
+      description: '**Greengrass and Cloud Deployments**'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: The ID of the system instance.
+    - name: search-system-instances
+      description: Searches for system instances in the user's account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Optional filter to apply to the search.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The string that specifies the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: undeploy-system-instance
+      description: Removes a system instance from its target (Cloud or Greengrass).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: The ID of the system instance to remove from its target.
+    - name: describe-namespace
+      description: Gets the latest version of the user's namespace and the public version that it is tracking.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --namespace-name=: The name of the user's namespace.
+    - name: create-flow-template
+      description: Creates a workflow template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compatible-namespace-version=: The namespace version in which the workflow is to be created.
+        --definition=!: The workflow `DefinitionDocument`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-system-template
+      description: Creates a system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compatible-namespace-version=: The namespace version in which the system is to be created.
+        --definition=!: The `DefinitionDocument` used to create the system.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-system-instance
+      description: Deletes a system instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: The ID of the system instance to be deleted.
+    - name: delete-system-template
+      description: Deletes a system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the system to be deleted.
+    - name: deprecate-flow-template
+      description: Deprecates the specified workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the workflow to be deleted.
+    - name: delete-namespace
+      description: Deletes the specified namespace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: upload-entity-definitions
       description: Asynchronously uploads one or more entity definitions to the user's namespace.
       flags:

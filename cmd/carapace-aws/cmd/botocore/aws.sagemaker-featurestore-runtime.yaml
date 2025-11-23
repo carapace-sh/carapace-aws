@@ -1,6 +1,31 @@
 name: sagemaker-featurestore-runtime
 description: Amazon SageMaker Feature Store Runtime
 commands:
+    - name: get-record
+      description: Use for `OnlineStore` serving from a `FeatureStore`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expiration-time-response=: Parameter to request `ExpiresAt` in response.
+        --feature-group-name=!: The name or Amazon Resource Name (ARN) of the feature group from which you want to retrieve a record.
+        --feature-names=: List of names of Features to be retrieved.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --record-identifier-value-as-string=!: The value that corresponds to `RecordIdentifier` type and uniquely identifies the record in the `FeatureGroup`.
+      completion:
+        flag:
+            expiration-time-response:
+                - Enabled
+                - Disabled
+    - name: put-record
+      description: The `PutRecord` API is used to ingest a list of `Records` into your feature group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --feature-group-name=!: The name or Amazon Resource Name (ARN) of the feature group that you want to insert the record into.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --record=!: List of FeatureValues to be inserted.
+        --target-stores=: A list of stores to which you're adding the record.
+        --ttl-duration=: Time to live duration, where the record is hard deleted after the expiration time is reached; `ExpiresAt` = `EventTime` + `TtlDuration`.
     - name: batch-get-record
       description: Retrieves a batch of `Records` from a `FeatureGroup`.
       flags:
@@ -30,28 +55,3 @@ commands:
             deletion-mode:
                 - SoftDelete
                 - HardDelete
-    - name: get-record
-      description: Use for `OnlineStore` serving from a `FeatureStore`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expiration-time-response=: Parameter to request `ExpiresAt` in response.
-        --feature-group-name=!: The name or Amazon Resource Name (ARN) of the feature group from which you want to retrieve a record.
-        --feature-names=: List of names of Features to be retrieved.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --record-identifier-value-as-string=!: The value that corresponds to `RecordIdentifier` type and uniquely identifies the record in the `FeatureGroup`.
-      completion:
-        flag:
-            expiration-time-response:
-                - Enabled
-                - Disabled
-    - name: put-record
-      description: The `PutRecord` API is used to ingest a list of `Records` into your feature group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --feature-group-name=!: The name or Amazon Resource Name (ARN) of the feature group that you want to insert the record into.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --record=!: List of FeatureValues to be inserted.
-        --target-stores=: A list of stores to which you're adding the record.
-        --ttl-duration=: Time to live duration, where the record is hard deleted after the expiration time is reached; `ExpiresAt` = `EventTime` + `TtlDuration`.

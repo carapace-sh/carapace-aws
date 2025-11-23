@@ -8,57 +8,6 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-account-configuration
-      description: Returns the account configuration options associated with an Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-certificate
-      description: Lists the tags that have been applied to the ACM certificate.
-      flags:
-        --certificate-arn=!: String that contains the ARN of the ACM certificate for which you want to list the tags.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: remove-tags-from-certificate
-      description: Remove one or more tags from an ACM certificate.
-      flags:
-        --certificate-arn=!: String that contains the ARN of the ACM Certificate with one or more tags that you want to remove.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: The key-value pair that defines the tag to remove.
-    - name: revoke-certificate
-      description: Revokes a public ACM certificate.
-      flags:
-        --certificate-arn=!: The Amazon Resource Name (ARN) of the public or private certificate that will be revoked.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --revocation-reason=!: Specifies why you revoked the certificate.
-      completion:
-        flag:
-            revocation-reason:
-                - UNSPECIFIED
-                - KEY_COMPROMISE
-                - CA_COMPROMISE
-                - AFFILIATION_CHANGED
-                - SUPERCEDED
-                - SUPERSEDED
-                - CESSATION_OF_OPERATION
-                - CERTIFICATE_HOLD
-                - REMOVE_FROM_CRL
-                - PRIVILEGE_WITHDRAWN
-                - A_A_COMPROMISE
-    - name: update-certificate-options
-      description: Updates a certificate.
-      flags:
-        --certificate-arn=!: ARN of the requested certificate to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=!: Use to update the options for your certificate.
     - name: describe-certificate
       description: Returns detailed metadata about the specified ACM certificate.
       flags:
@@ -66,22 +15,6 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-certificate
-      description: Retrieves a certificate and its certificate chain.
-      flags:
-        --certificate-arn=!: 'String that contains a certificate ARN in the following format:'
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: resend-validation-email
-      description: Resends the email that requests domain ownership validation.
-      flags:
-        --certificate-arn=!: String that contains the ARN of the requested certificate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=!: The fully qualified domain name (FQDN) of the certificate that needs to be validated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --validation-domain=!: The base validation domain that will act as the suffix of the email addresses that are used to send the emails.
     - name: export-certificate
       description: Exports a private certificate issued by a private certificate authority (CA) or public certificate for use anywhere.
       flags:
@@ -111,25 +44,6 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-    - name: add-tags-to-certificate
-      description: Adds one or more tags to an ACM certificate.
-      flags:
-        --certificate-arn=!: String that contains the ARN of the ACM certificate to which the tag is to be applied.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: The key-value pair that defines the tag.
-    - name: import-certificate
-      description: Imports a certificate into Certificate Manager (ACM) to use with services that are integrated with ACM.
-      flags:
-        --certificate-arn=: The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of an imported certificate to replace.
-        --certificate-chain=: The PEM encoded certificate chain.
-        --certificate=!: The certificate to import.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --private-key=!: The private key that matches the public key in the certificate.
-        --tags=: One or more resource tags to associate with the imported certificate.
     - name: put-account-configuration
       description: Adds or modifies account-level configurations in ACM.
       flags:
@@ -138,13 +52,29 @@ commands:
         --expiry-events=: Specifies expiration events associated with an account.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idempotency-token=!: Customer-chosen string used to distinguish between calls to `PutAccountConfiguration`.
-    - name: renew-certificate
-      description: Renews an [eligible ACM certificate](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html).
+    - name: add-tags-to-certificate
+      description: Adds one or more tags to an ACM certificate.
       flags:
-        --certificate-arn=!: String that contains the ARN of the ACM certificate to be renewed.
+        --certificate-arn=!: String that contains the ARN of the ACM certificate to which the tag is to be applied.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: The key-value pair that defines the tag.
+    - name: get-certificate
+      description: Retrieves a certificate and its certificate chain.
+      flags:
+        --certificate-arn=!: 'String that contains a certificate ARN in the following format:'
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: remove-tags-from-certificate
+      description: Remove one or more tags from an ACM certificate.
+      flags:
+        --certificate-arn=!: String that contains the ARN of the ACM Certificate with one or more tags that you want to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: The key-value pair that defines the tag to remove.
     - name: request-certificate
       description: Requests an ACM certificate for use with other Amazon Web Services services.
       flags:
@@ -177,6 +107,76 @@ commands:
                 - EMAIL
                 - DNS
                 - HTTP
+    - name: resend-validation-email
+      description: Resends the email that requests domain ownership validation.
+      flags:
+        --certificate-arn=!: String that contains the ARN of the requested certificate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=!: The fully qualified domain name (FQDN) of the certificate that needs to be validated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --validation-domain=!: The base validation domain that will act as the suffix of the email addresses that are used to send the emails.
+    - name: revoke-certificate
+      description: Revokes a public ACM certificate.
+      flags:
+        --certificate-arn=!: The Amazon Resource Name (ARN) of the public or private certificate that will be revoked.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revocation-reason=!: Specifies why you revoked the certificate.
+      completion:
+        flag:
+            revocation-reason:
+                - UNSPECIFIED
+                - KEY_COMPROMISE
+                - CA_COMPROMISE
+                - AFFILIATION_CHANGED
+                - SUPERCEDED
+                - SUPERSEDED
+                - CESSATION_OF_OPERATION
+                - CERTIFICATE_HOLD
+                - REMOVE_FROM_CRL
+                - PRIVILEGE_WITHDRAWN
+                - A_A_COMPROMISE
+    - name: update-certificate-options
+      description: Updates a certificate.
+      flags:
+        --certificate-arn=!: ARN of the requested certificate to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --options=!: Use to update the options for your certificate.
+    - name: import-certificate
+      description: Imports a certificate into Certificate Manager (ACM) to use with services that are integrated with ACM.
+      flags:
+        --certificate-arn=: The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of an imported certificate to replace.
+        --certificate-chain=: The PEM encoded certificate chain.
+        --certificate=!: The certificate to import.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --private-key=!: The private key that matches the public key in the certificate.
+        --tags=: One or more resource tags to associate with the imported certificate.
+    - name: list-tags-for-certificate
+      description: Lists the tags that have been applied to the ACM certificate.
+      flags:
+        --certificate-arn=!: String that contains the ARN of the ACM certificate for which you want to list the tags.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: renew-certificate
+      description: Renews an [eligible ACM certificate](https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html).
+      flags:
+        --certificate-arn=!: String that contains the ARN of the ACM certificate to be renewed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-account-configuration
+      description: Returns the account configuration options associated with an Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

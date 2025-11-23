@@ -1,13 +1,21 @@
 name: chime-sdk-identity
 description: Amazon Chime SDK Identity
 commands:
-    - name: describe-app-instance
-      description: Returns the full details of an `AppInstance`.
+    - name: create-app-instance-admin
+      description: Promotes an `AppInstanceUser` or `AppInstanceBot` to an `AppInstanceAdmin`.
       flags:
+        --app-instance-admin-arn=!: The ARN of the administrator of the current `AppInstance`.
         --app-instance-arn=!: The ARN of the `AppInstance`.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags-for-resource
+      description: Lists the tags applied to an Amazon Chime SDK identity resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
     - name: describe-app-instance-user
       description: Returns the full details of an `AppInstanceUser`.
       flags:
@@ -15,24 +23,91 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-app-instance-bots
-      description: Lists all `AppInstanceBots` created under a single `AppInstance`.
+    - name: create-app-instance
+      description: Creates an Amazon Chime SDK messaging `AppInstance` under an AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: The unique ID of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=: The metadata of the `AppInstance`.
+        --name=!: The name of the `AppInstance`.
+        --tags=: Tags assigned to the `AppInstance`.
+    - name: create-app-instance-user
+      description: Creates a user under an Amazon Chime `AppInstance`.
+      flags:
+        --app-instance-arn=!: The ARN of the `AppInstance` request.
+        --app-instance-user-id=!: The user ID of the `AppInstance`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: The unique ID of the request.
+        --expiration-settings=: Settings that control the interval after which the `AppInstanceUser` is automatically deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=: The request's metadata.
+        --name=!: The user's name.
+        --tags=: Tags assigned to the `AppInstanceUser`.
+    - name: describe-app-instance
+      description: Returns the full details of an `AppInstance`.
       flags:
         --app-instance-arn=!: The ARN of the `AppInstance`.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of requests to return.
-        --next-token=: The token passed by previous API calls until all requested bots are returned.
-    - name: list-app-instance-users
-      description: List all `AppInstanceUsers` created under a single `AppInstance`.
+    - name: describe-app-instance-admin
+      description: Returns the full details of an `AppInstanceAdmin`.
+      flags:
+        --app-instance-admin-arn=!: The ARN of the `AppInstanceAdmin`.
+        --app-instance-arn=!: The ARN of the `AppInstance`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-app-instances
+      description: Lists all Amazon Chime `AppInstance`s created under a single AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of `AppInstance`s that you want to return.
+        --next-token=: The token passed by previous API requests until you reach the maximum number of `AppInstances`.
+    - name: update-app-instance-user
+      description: Updates the details of an `AppInstanceUser`.
+      flags:
+        --app-instance-user-arn=!: The ARN of the `AppInstanceUser`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=!: The metadata of the `AppInstanceUser`.
+        --name=!: The name of the `AppInstanceUser`.
+    - name: delete-app-instance
+      description: Deletes an `AppInstance` and all associated data asynchronously.
       flags:
         --app-instance-arn=!: The ARN of the `AppInstance`.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of requests that you want returned.
-        --next-token=: The token passed by previous API calls until all requested users are returned.
+    - name: delete-app-instance-bot
+      description: Deletes an `AppInstanceBot`.
+      flags:
+        --app-instance-bot-arn=!: The ARN of the `AppInstanceBot` being deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-app-instance-user
+      description: Deletes an `AppInstanceUser`.
+      flags:
+        --app-instance-user-arn=!: The ARN of the user request being deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-app-instance
+      description: Updates `AppInstance` metadata.
+      flags:
+        --app-instance-arn=!: The ARN of the `AppInstance`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=!: The metadata that you want to change.
+        --name=!: The name that you want to change.
     - name: update-app-instance-bot
       description: Updates the name and metadata of an `AppInstanceBot`.
       flags:
@@ -43,10 +118,57 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --metadata=!: The metadata of the `AppInstanceBot`.
         --name=!: The name of the `AppInstanceBot`.
-    - name: get-app-instance-retention-settings
-      description: Gets the retention settings for an `AppInstance`.
+    - name: create-app-instance-bot
+      description: Creates a bot under an Amazon Chime `AppInstance`.
+      flags:
+        --app-instance-arn=!: The ARN of the `AppInstance` request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=!: The unique ID for the client making the request.
+        --configuration=!: Configuration information about the Amazon Lex V2 V2 bot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=: The request metadata.
+        --name=: The user's name.
+        --tags=: The tags assigned to the `AppInstanceBot`.
+    - name: delete-app-instance-admin
+      description: Demotes an `AppInstanceAdmin` to an `AppInstanceUser` or `AppInstanceBot`.
+      flags:
+        --app-instance-admin-arn=!: The ARN of the `AppInstance`'s administrator.
+        --app-instance-arn=!: The ARN of the `AppInstance`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: deregister-app-instance-user-endpoint
+      description: Deregisters an `AppInstanceUserEndpoint`.
+      flags:
+        --app-instance-user-arn=!: The ARN of the `AppInstanceUser`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-id=!: The unique identifier of the `AppInstanceUserEndpoint`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-app-instance-user-endpoints
+      description: Lists all the `AppInstanceUserEndpoints` created under a single `AppInstanceUser`.
+      flags:
+        --app-instance-user-arn=!: The ARN of the `AppInstanceUser`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of endpoints that you want to return.
+        --next-token=: The token passed by previous API calls until all requested endpoints are returned.
+    - name: list-app-instance-users
+      description: List all `AppInstanceUsers` created under a single `AppInstance`.
       flags:
         --app-instance-arn=!: The ARN of the `AppInstance`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of requests that you want returned.
+        --next-token=: The token passed by previous API calls until all requested users are returned.
+    - name: put-app-instance-retention-settings
+      description: Sets the amount of time in days that a given `AppInstance` retains data.
+      flags:
+        --app-instance-arn=!: The ARN of the `AppInstance`.
+        --app-instance-retention-settings=!: The time in days to retain data.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -72,14 +194,6 @@ commands:
                 - APNS
                 - APNS_SANDBOX
                 - GCM
-    - name: describe-app-instance-admin
-      description: Returns the full details of an `AppInstanceAdmin`.
-      flags:
-        --app-instance-admin-arn=!: The ARN of the `AppInstanceAdmin`.
-        --app-instance-arn=!: The ARN of the `AppInstance`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-app-instance-user-endpoint
       description: Returns the full details of an `AppInstanceUserEndpoint`.
       flags:
@@ -88,15 +202,31 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --endpoint-id=!: The unique identifier of the `AppInstanceUserEndpoint`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-app-instance-user-endpoints
-      description: Lists all the `AppInstanceUserEndpoints` created under a single `AppInstanceUser`.
+    - name: get-app-instance-retention-settings
+      description: Gets the retention settings for an `AppInstance`.
       flags:
-        --app-instance-user-arn=!: The ARN of the `AppInstanceUser`.
+        --app-instance-arn=!: The ARN of the `AppInstance`.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of endpoints that you want to return.
-        --next-token=: The token passed by previous API calls until all requested endpoints are returned.
+    - name: list-app-instance-admins
+      description: Returns a list of the administrators in the `AppInstance`.
+      flags:
+        --app-instance-arn=!: The ARN of the `AppInstance`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of administrators that you want to return.
+        --next-token=: The token returned from previous API requests until the number of administrators is reached.
+    - name: list-app-instance-bots
+      description: Lists all `AppInstanceBots` created under a single `AppInstance`.
+      flags:
+        --app-instance-arn=!: The ARN of the `AppInstance`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of requests to return.
+        --next-token=: The token passed by previous API calls until all requested bots are returned.
     - name: put-app-instance-user-expiration-settings
       description: Sets the number of days before the `AppInstanceUser` is automatically deleted.
       flags:
@@ -104,28 +234,6 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expiration-settings=: Settings that control the interval after which an `AppInstanceUser` is automatically deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-app-instance-user
-      description: Deletes an `AppInstanceUser`.
-      flags:
-        --app-instance-user-arn=!: The ARN of the user request being deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-app-instance-retention-settings
-      description: Sets the amount of time in days that a given `AppInstance` retains data.
-      flags:
-        --app-instance-arn=!: The ARN of the `AppInstance`.
-        --app-instance-retention-settings=!: The time in days to retain data.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-app-instance-bot
-      description: The `AppInstanceBot's` information.
-      flags:
-        --app-instance-bot-arn=!: The ARN of the `AppInstanceBot`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-app-instance-user-endpoint
       description: Updates the details of an `AppInstanceUserEndpoint`.
@@ -142,121 +250,13 @@ commands:
             allow-messages:
                 - ALL
                 - NONE
-    - name: create-app-instance
-      description: Creates an Amazon Chime SDK messaging `AppInstance` under an AWS account.
+    - name: describe-app-instance-bot
+      description: The `AppInstanceBot's` information.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: The unique ID of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata=: The metadata of the `AppInstance`.
-        --name=!: The name of the `AppInstance`.
-        --tags=: Tags assigned to the `AppInstance`.
-    - name: delete-app-instance-bot
-      description: Deletes an `AppInstanceBot`.
-      flags:
-        --app-instance-bot-arn=!: The ARN of the `AppInstanceBot` being deleted.
+        --app-instance-bot-arn=!: The ARN of the `AppInstanceBot`.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: deregister-app-instance-user-endpoint
-      description: Deregisters an `AppInstanceUserEndpoint`.
-      flags:
-        --app-instance-user-arn=!: The ARN of the `AppInstanceUser`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-id=!: The unique identifier of the `AppInstanceUserEndpoint`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-app-instances
-      description: Lists all Amazon Chime `AppInstance`s created under a single AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of `AppInstance`s that you want to return.
-        --next-token=: The token passed by previous API requests until you reach the maximum number of `AppInstances`.
-    - name: update-app-instance
-      description: Updates `AppInstance` metadata.
-      flags:
-        --app-instance-arn=!: The ARN of the `AppInstance`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata=!: The metadata that you want to change.
-        --name=!: The name that you want to change.
-    - name: update-app-instance-user
-      description: Updates the details of an `AppInstanceUser`.
-      flags:
-        --app-instance-user-arn=!: The ARN of the `AppInstanceUser`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata=!: The metadata of the `AppInstanceUser`.
-        --name=!: The name of the `AppInstanceUser`.
-    - name: create-app-instance-bot
-      description: Creates a bot under an Amazon Chime `AppInstance`.
-      flags:
-        --app-instance-arn=!: The ARN of the `AppInstance` request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: The unique ID for the client making the request.
-        --configuration=!: Configuration information about the Amazon Lex V2 V2 bot.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata=: The request metadata.
-        --name=: The user's name.
-        --tags=: The tags assigned to the `AppInstanceBot`.
-    - name: delete-app-instance
-      description: Deletes an `AppInstance` and all associated data asynchronously.
-      flags:
-        --app-instance-arn=!: The ARN of the `AppInstance`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-app-instance-admin
-      description: Demotes an `AppInstanceAdmin` to an `AppInstanceUser` or `AppInstanceBot`.
-      flags:
-        --app-instance-admin-arn=!: The ARN of the `AppInstance`'s administrator.
-        --app-instance-arn=!: The ARN of the `AppInstance`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-app-instance-admins
-      description: Returns a list of the administrators in the `AppInstance`.
-      flags:
-        --app-instance-arn=!: The ARN of the `AppInstance`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of administrators that you want to return.
-        --next-token=: The token returned from previous API requests until the number of administrators is reached.
-    - name: list-tags-for-resource
-      description: Lists the tags applied to an Amazon Chime SDK identity resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource.
-    - name: untag-resource
-      description: Removes the specified tags from the specified Amazon Chime SDK identity resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource ARN.
-        --tag-keys=!: The tag keys.
-    - name: create-app-instance-user
-      description: Creates a user under an Amazon Chime `AppInstance`.
-      flags:
-        --app-instance-arn=!: The ARN of the `AppInstance` request.
-        --app-instance-user-id=!: The user ID of the `AppInstance`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=!: The unique ID of the request.
-        --expiration-settings=: Settings that control the interval after which the `AppInstanceUser` is automatically deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata=: The request's metadata.
-        --name=!: The user's name.
-        --tags=: Tags assigned to the `AppInstanceUser`.
     - name: tag-resource
       description: Applies the specified tags to the specified Amazon Chime SDK identity resource.
       flags:
@@ -265,11 +265,11 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The resource ARN.
         --tags=!: The tag key-value pairs.
-    - name: create-app-instance-admin
-      description: Promotes an `AppInstanceUser` or `AppInstanceBot` to an `AppInstanceAdmin`.
+    - name: untag-resource
+      description: Removes the specified tags from the specified Amazon Chime SDK identity resource.
       flags:
-        --app-instance-admin-arn=!: The ARN of the administrator of the current `AppInstance`.
-        --app-instance-arn=!: The ARN of the `AppInstance`.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource ARN.
+        --tag-keys=!: The tag keys.

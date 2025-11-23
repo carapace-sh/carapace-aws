@@ -1,6 +1,76 @@
 name: timestream-influxdb
 description: Timestream InfluxDB
 commands:
+    - name: delete-db-instance
+      description: Deletes a Timestream for InfluxDB DB instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The id of the DB instance.
+    - name: get-db-cluster
+      description: Retrieves information about a Timestream for InfluxDB cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-cluster-id=!: Service-generated unique identifier of the DB cluster to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-db-cluster
+      description: Creates a new Timestream for InfluxDB cluster.
+      flags:
+        --allocated-storage=: The amount of storage to allocate for your DB storage type in GiB (gibibytes).
+        --bucket=: The name of the initial InfluxDB bucket.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-instance-type=!: The Timestream for InfluxDB DB instance type to run InfluxDB on.
+        --db-parameter-group-identifier=: The ID of the DB parameter group to assign to your DB cluster.
+        --db-storage-type=: The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
+        --deployment-type=: Specifies the type of cluster to create.
+        --failover-mode=: Specifies the behavior of failure recovery when the primary node of the cluster fails.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to a specified S3 bucket.
+        --name=!: The name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands.
+        --network-type=: Specifies whether the network type of the Timestream for InfluxDB cluster is IPv4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+        --no-publicly-accessible: Configures the Timestream for InfluxDB cluster with a public IP to facilitate access from outside the VPC.
+        --organization=: The name of the initial organization for the initial admin user in InfluxDB.
+        --password=: The password of the initial admin user created in InfluxDB.
+        --port=: The port number on which InfluxDB accepts connections.
+        --publicly-accessible: Configures the Timestream for InfluxDB cluster with a public IP to facilitate access from outside the VPC.
+        --tags=: A list of key-value pairs to associate with the DB instance.
+        --username=: The username of the initial admin user created in InfluxDB.
+        --vpc-security-group-ids=!: A list of VPC security group IDs to associate with the Timestream for InfluxDB cluster.
+        --vpc-subnet-ids=!: A list of VPC subnet IDs to associate with the DB cluster.
+      completion:
+        flag:
+            db-instance-type:
+                - db.influx.medium
+                - db.influx.large
+                - db.influx.xlarge
+                - db.influx.2xlarge
+                - db.influx.4xlarge
+                - db.influx.8xlarge
+                - db.influx.12xlarge
+                - db.influx.16xlarge
+                - db.influx.24xlarge
+            db-storage-type:
+                - InfluxIOIncludedT1
+                - InfluxIOIncludedT2
+                - InfluxIOIncludedT3
+            deployment-type:
+                - MULTI_NODE_READ_REPLICAS
+            failover-mode:
+                - AUTOMATIC
+                - NO_FAILOVER
+            network-type:
+                - IPV4
+                - DUAL
+    - name: get-db-parameter-group
+      description: Returns a Timestream for InfluxDB DB parameter group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The id of the DB parameter group.
     - name: tag-resource
       description: Tags are composed of a Key/Value pairs.
       flags:
@@ -9,22 +79,136 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the tagged resource.
         --tags=!: A list of tags used to categorize and track resources.
-    - name: delete-db-instance
-      description: Deletes a Timestream for InfluxDB DB instance.
+    - name: untag-resource
+      description: Removes the tag from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the tagged resource.
+        --tag-keys=!: The keys used to identify the tags.
+    - name: update-db-instance
+      description: Updates a Timestream for InfluxDB DB instance.
+      flags:
+        --allocated-storage=: The amount of storage to allocate for your DB storage type (in gibibytes).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-instance-type=: The Timestream for InfluxDB DB instance type to run InfluxDB on.
+        --db-parameter-group-identifier=: The id of the DB parameter group to assign to your DB instance.
+        --db-storage-type=: The Timestream for InfluxDB DB storage type that InfluxDB stores data on.
+        --deployment-type=: Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The id of the DB instance.
+        --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
+        --port=: The port number on which InfluxDB accepts connections.
+      completion:
+        flag:
+            db-instance-type:
+                - db.influx.medium
+                - db.influx.large
+                - db.influx.xlarge
+                - db.influx.2xlarge
+                - db.influx.4xlarge
+                - db.influx.8xlarge
+                - db.influx.12xlarge
+                - db.influx.16xlarge
+                - db.influx.24xlarge
+            db-storage-type:
+                - InfluxIOIncludedT1
+                - InfluxIOIncludedT2
+                - InfluxIOIncludedT3
+            deployment-type:
+                - SINGLE_AZ
+                - WITH_MULTIAZ_STANDBY
+    - name: create-db-instance
+      description: Creates a new Timestream for InfluxDB DB instance.
+      flags:
+        --allocated-storage=!: The amount of storage to allocate for your DB storage type in GiB (gibibytes).
+        --bucket=: The name of the initial InfluxDB bucket.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-instance-type=!: The Timestream for InfluxDB DB instance type to run InfluxDB on.
+        --db-parameter-group-identifier=: The id of the DB parameter group to assign to your DB instance.
+        --db-storage-type=: The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
+        --deployment-type=: Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to a specified S3 bucket.
+        --name=!: The name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands.
+        --network-type=: Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
+        --no-publicly-accessible: Configures the DB instance with a public IP to facilitate access.
+        --organization=: The name of the initial organization for the initial admin user in InfluxDB.
+        --password=!: The password of the initial admin user created in InfluxDB v2.
+        --port=: The port number on which InfluxDB accepts connections.
+        --publicly-accessible: Configures the DB instance with a public IP to facilitate access.
+        --tags=: A list of key-value pairs to associate with the DB instance.
+        --username=: The username of the initial admin user created in InfluxDB.
+        --vpc-security-group-ids=!: A list of VPC security group IDs to associate with the DB instance.
+        --vpc-subnet-ids=!: A list of VPC subnet IDs to associate with the DB instance.
+      completion:
+        flag:
+            db-instance-type:
+                - db.influx.medium
+                - db.influx.large
+                - db.influx.xlarge
+                - db.influx.2xlarge
+                - db.influx.4xlarge
+                - db.influx.8xlarge
+                - db.influx.12xlarge
+                - db.influx.16xlarge
+                - db.influx.24xlarge
+            db-storage-type:
+                - InfluxIOIncludedT1
+                - InfluxIOIncludedT2
+                - InfluxIOIncludedT3
+            deployment-type:
+                - SINGLE_AZ
+                - WITH_MULTIAZ_STANDBY
+            network-type:
+                - IPV4
+                - DUAL
+    - name: get-db-instance
+      description: Returns a Timestream for InfluxDB DB instance.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The id of the DB instance.
-    - name: get-db-parameter-group
-      description: Returns a Timestream for InfluxDB DB parameter group.
+    - name: list-db-clusters
+      description: Returns a list of Timestream for InfluxDB DB clusters.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The id of the DB parameter group.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the output.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-db-instances
       description: Returns a list of Timestream for InfluxDB DB instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the output.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-db-instances-for-cluster
+      description: Returns a list of Timestream for InfluxDB clusters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-cluster-id=!: Service-generated unique identifier of the DB cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the output.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-db-parameter-groups
+      description: Returns a list of Timestream for InfluxDB DB parameter groups.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -78,153 +262,6 @@ commands:
         --name=!: The name of the DB parameter group.
         --parameters=: A list of the parameters that comprise the DB parameter group.
         --tags=: A list of key-value pairs to associate with the DB parameter group.
-    - name: list-db-clusters
-      description: Returns a list of Timestream for InfluxDB DB clusters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the output.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes the tag from the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the tagged resource.
-        --tag-keys=!: The keys used to identify the tags.
-    - name: update-db-instance
-      description: Updates a Timestream for InfluxDB DB instance.
-      flags:
-        --allocated-storage=: The amount of storage to allocate for your DB storage type (in gibibytes).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-instance-type=: The Timestream for InfluxDB DB instance type to run InfluxDB on.
-        --db-parameter-group-identifier=: The id of the DB parameter group to assign to your DB instance.
-        --db-storage-type=: The Timestream for InfluxDB DB storage type that InfluxDB stores data on.
-        --deployment-type=: Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The id of the DB instance.
-        --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
-        --port=: The port number on which InfluxDB accepts connections.
-      completion:
-        flag:
-            db-instance-type:
-                - db.influx.medium
-                - db.influx.large
-                - db.influx.xlarge
-                - db.influx.2xlarge
-                - db.influx.4xlarge
-                - db.influx.8xlarge
-                - db.influx.12xlarge
-                - db.influx.16xlarge
-                - db.influx.24xlarge
-            db-storage-type:
-                - InfluxIOIncludedT1
-                - InfluxIOIncludedT2
-                - InfluxIOIncludedT3
-            deployment-type:
-                - SINGLE_AZ
-                - WITH_MULTIAZ_STANDBY
-    - name: create-db-cluster
-      description: Creates a new Timestream for InfluxDB cluster.
-      flags:
-        --allocated-storage=: The amount of storage to allocate for your DB storage type in GiB (gibibytes).
-        --bucket=: The name of the initial InfluxDB bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-instance-type=!: The Timestream for InfluxDB DB instance type to run InfluxDB on.
-        --db-parameter-group-identifier=: The ID of the DB parameter group to assign to your DB cluster.
-        --db-storage-type=: The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
-        --deployment-type=: Specifies the type of cluster to create.
-        --failover-mode=: Specifies the behavior of failure recovery when the primary node of the cluster fails.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to a specified S3 bucket.
-        --name=!: The name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands.
-        --network-type=: Specifies whether the network type of the Timestream for InfluxDB cluster is IPv4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
-        --no-publicly-accessible: Configures the Timestream for InfluxDB cluster with a public IP to facilitate access from outside the VPC.
-        --organization=: The name of the initial organization for the initial admin user in InfluxDB.
-        --password=: The password of the initial admin user created in InfluxDB.
-        --port=: The port number on which InfluxDB accepts connections.
-        --publicly-accessible: Configures the Timestream for InfluxDB cluster with a public IP to facilitate access from outside the VPC.
-        --tags=: A list of key-value pairs to associate with the DB instance.
-        --username=: The username of the initial admin user created in InfluxDB.
-        --vpc-security-group-ids=!: A list of VPC security group IDs to associate with the Timestream for InfluxDB cluster.
-        --vpc-subnet-ids=!: A list of VPC subnet IDs to associate with the DB cluster.
-      completion:
-        flag:
-            db-instance-type:
-                - db.influx.medium
-                - db.influx.large
-                - db.influx.xlarge
-                - db.influx.2xlarge
-                - db.influx.4xlarge
-                - db.influx.8xlarge
-                - db.influx.12xlarge
-                - db.influx.16xlarge
-                - db.influx.24xlarge
-            db-storage-type:
-                - InfluxIOIncludedT1
-                - InfluxIOIncludedT2
-                - InfluxIOIncludedT3
-            deployment-type:
-                - MULTI_NODE_READ_REPLICAS
-            failover-mode:
-                - AUTOMATIC
-                - NO_FAILOVER
-            network-type:
-                - IPV4
-                - DUAL
-    - name: create-db-instance
-      description: Creates a new Timestream for InfluxDB DB instance.
-      flags:
-        --allocated-storage=!: The amount of storage to allocate for your DB storage type in GiB (gibibytes).
-        --bucket=: The name of the initial InfluxDB bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-instance-type=!: The Timestream for InfluxDB DB instance type to run InfluxDB on.
-        --db-parameter-group-identifier=: The id of the DB parameter group to assign to your DB instance.
-        --db-storage-type=: The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
-        --deployment-type=: Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to a specified S3 bucket.
-        --name=!: The name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands.
-        --network-type=: Specifies whether the networkType of the Timestream for InfluxDB instance is IPV4, which can communicate over IPv4 protocol only, or DUAL, which can communicate over both IPv4 and IPv6 protocols.
-        --no-publicly-accessible: Configures the DB instance with a public IP to facilitate access.
-        --organization=: The name of the initial organization for the initial admin user in InfluxDB.
-        --password=!: The password of the initial admin user created in InfluxDB v2.
-        --port=: The port number on which InfluxDB accepts connections.
-        --publicly-accessible: Configures the DB instance with a public IP to facilitate access.
-        --tags=: A list of key-value pairs to associate with the DB instance.
-        --username=: The username of the initial admin user created in InfluxDB.
-        --vpc-security-group-ids=!: A list of VPC security group IDs to associate with the DB instance.
-        --vpc-subnet-ids=!: A list of VPC subnet IDs to associate with the DB instance.
-      completion:
-        flag:
-            db-instance-type:
-                - db.influx.medium
-                - db.influx.large
-                - db.influx.xlarge
-                - db.influx.2xlarge
-                - db.influx.4xlarge
-                - db.influx.8xlarge
-                - db.influx.12xlarge
-                - db.influx.16xlarge
-                - db.influx.24xlarge
-            db-storage-type:
-                - InfluxIOIncludedT1
-                - InfluxIOIncludedT2
-                - InfluxIOIncludedT3
-            deployment-type:
-                - SINGLE_AZ
-                - WITH_MULTIAZ_STANDBY
-            network-type:
-                - IPV4
-                - DUAL
     - name: delete-db-cluster
       description: Deletes a Timestream for InfluxDB cluster.
       flags:
@@ -232,40 +269,3 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-id=!: Service-generated unique identifier of the DB cluster.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-db-cluster
-      description: Retrieves information about a Timestream for InfluxDB cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-id=!: Service-generated unique identifier of the DB cluster to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-db-instances-for-cluster
-      description: Returns a list of Timestream for InfluxDB clusters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-id=!: Service-generated unique identifier of the DB cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the output.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-db-instance
-      description: Returns a Timestream for InfluxDB DB instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The id of the DB instance.
-    - name: list-db-parameter-groups
-      description: Returns a list of Timestream for InfluxDB DB parameter groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the output.
-        --next-token=: The pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.

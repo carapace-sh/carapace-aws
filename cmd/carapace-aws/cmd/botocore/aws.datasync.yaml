@@ -1,126 +1,6 @@
 name: datasync
 description: AWS DataSync
 commands:
-    - name: describe-task
-      description: Provides information about a *task*, which defines where and how DataSync transfers your data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-arn=!: Specifies the Amazon Resource Name (ARN) of the transfer task that you want information about.
-    - name: update-location-nfs
-      description: Modifies the following configuration parameters of the Network File System (NFS) transfer location that you're using with DataSync.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the NFS transfer location that you want to update.
-        --mount-options=: ""
-        --on-prem-config=: ""
-        --server-hostname=: Specifies the DNS name or IP address (IPv4 or IPv6) of the NFS file server that your DataSync agent connects to.
-        --subdirectory=: Specifies the export path in your NFS file server that you want DataSync to mount.
-    - name: update-location-object-storage
-      description: Modifies the following configuration parameters of the object storage transfer location that you're using with DataSync.
-      flags:
-        --access-key=: Specifies the access key (for example, a user name) if credentials are required to authenticate with the object storage server.
-        --agent-arns=: (Optional) Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can connect with your object storage system.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cmk-secret-config=: Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed KMS key.
-        --custom-secret-config=: Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed KMS key.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the ARN of the object storage system location that you're updating.
-        --secret-key=: Specifies the secret key (for example, a password) if credentials are required to authenticate with the object storage server.
-        --server-certificate=: Specifies a certificate chain for DataSync to authenticate with your object storage system if the system uses a private or self-signed certificate authority (CA).
-        --server-hostname=: Specifies the domain name or IP address (IPv4 or IPv6) of the object storage server that your DataSync agent connects to.
-        --server-port=: Specifies the port that your object storage server accepts inbound network traffic on (for example, port 443).
-        --server-protocol=: Specifies the protocol that your object storage server uses to communicate.
-        --subdirectory=: Specifies the object prefix for your object storage server.
-      completion:
-        flag:
-            server-protocol:
-                - HTTPS
-                - HTTP
-    - name: cancel-task-execution
-      description: Stops an DataSync task execution that's in progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-execution-arn=!: The Amazon Resource Name (ARN) of the task execution to stop.
-    - name: create-location-efs
-      description: Creates a transfer *location* for an Amazon EFS file system.
-      flags:
-        --access-point-arn=: Specifies the Amazon Resource Name (ARN) of the access point that DataSync uses to mount your Amazon EFS file system.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --ec2-config=!: Specifies the subnet and security groups DataSync uses to connect to one of your Amazon EFS file system's [mount targets](https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html).
-        --efs-filesystem-arn=!: Specifies the ARN for your Amazon EFS file system.
-        --file-system-access-role-arn=: Specifies an Identity and Access Management (IAM) role that allows DataSync to access your Amazon EFS file system.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --in-transit-encryption=: Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2 encryption when it transfers data to or from your Amazon EFS file system.
-        --subdirectory=: Specifies a mount path for your Amazon EFS file system.
-        --tags=: Specifies the key-value pair that represents a tag that you want to add to the resource.
-      completion:
-        flag:
-            in-transit-encryption:
-                - NONE
-                - TLS1_2
-    - name: describe-location-hdfs
-      description: Provides details about how an DataSync transfer location for a Hadoop Distributed File System (HDFS) is configured.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the HDFS location.
-    - name: list-tags-for-resource
-      description: Returns all the tags associated with an Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specifies how many results that you want in the response.
-        --next-token=: Specifies an opaque string that indicates the position to begin the next list of results in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: Specifies the Amazon Resource Name (ARN) of the resource that you want tag information on.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-task-executions
-      description: Returns a list of executions for an DataSync transfer task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specifies how many results you want in the response.
-        --next-token=: Specifies an opaque string that indicates the position at which to begin the next list of results in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --task-arn=: Specifies the Amazon Resource Name (ARN) of the task that you want execution information about.
-    - name: update-location-hdfs
-      description: Modifies the following configuration parameters of the Hadoop Distributed File System (HDFS) transfer location that you're using with DataSync.
-      flags:
-        --agent-arns=: The Amazon Resource Names (ARNs) of the DataSync agents that can connect to your HDFS cluster.
-        --authentication-type=: The type of authentication used to determine the identity of the user.
-        --block-size=: The size of the data blocks to write into the HDFS cluster.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kerberos-keytab=: The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys.
-        --kerberos-krb5-conf=: The `krb5.conf` file that contains the Kerberos configuration information.
-        --kerberos-principal=: The Kerberos principal with access to the files and folders on the HDFS cluster.
-        --kms-key-provider-uri=: The URI of the HDFS cluster's Key Management Server (KMS).
-        --location-arn=!: The Amazon Resource Name (ARN) of the source HDFS cluster location.
-        --name-nodes=: The NameNode that manages the HDFS namespace.
-        --qop-configuration=: The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS) cluster.
-        --replication-factor=: The number of DataNodes to replicate the data to when writing to the HDFS cluster.
-        --simple-user=: The user name used to identify the client on the host operating system.
-        --subdirectory=: A subdirectory in the HDFS cluster.
-      completion:
-        flag:
-            authentication-type:
-                - SIMPLE
-                - KERBEROS
     - name: update-location-s3
       description: Modifies the following configuration parameters of the Amazon S3 transfer location that you're using with DataSync.
       flags:
@@ -166,30 +46,107 @@ commands:
             authentication-type:
                 - NTLM
                 - KERBEROS
-    - name: create-location-fsx-ontap
-      description: Creates a transfer *location* for an Amazon FSx for NetApp ONTAP file system.
+    - name: create-location-s3
+      description: Creates a transfer *location* for an Amazon S3 bucket.
       flags:
+        --agent-arns=: (Amazon S3 on Outposts only) Specifies the Amazon Resource Name (ARN) of the DataSync agent on your Outpost.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --protocol=!: ""
-        --security-group-arns=!: Specifies the Amazon EC2 security groups that provide access to your file system's preferred subnet.
-        --storage-virtual-machine-arn=!: Specifies the ARN of the storage virtual machine (SVM) in your file system where you want to copy data to or from.
-        --subdirectory=: Specifies a path to the file share in the SVM where you want to transfer data to or from.
+        --s3-bucket-arn=!: Specifies the ARN of the S3 bucket that you want to use as a location.
+        --s3-config=!: ""
+        --s3-storage-class=: Specifies the storage class that you want your objects to use when Amazon S3 is a transfer destination.
+        --subdirectory=: Specifies a prefix in the S3 bucket that DataSync reads from or writes to (depending on whether the bucket is a source or destination location).
         --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
-    - name: create-location-fsx-windows
-      description: Creates a transfer *location* for an Amazon FSx for Windows File Server file system.
+      completion:
+        flag:
+            s3-storage-class:
+                - STANDARD
+                - STANDARD_IA
+                - ONEZONE_IA
+                - INTELLIGENT_TIERING
+                - GLACIER
+                - DEEP_ARCHIVE
+                - OUTPOSTS
+                - GLACIER_INSTANT_RETRIEVAL
+    - name: delete-agent
+      description: Removes an DataSync agent resource from your Amazon Web Services account.
+      flags:
+        --agent-arn=!: The Amazon Resource Name (ARN) of the agent to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-location-fsx-open-zfs
+      description: Provides details about how an DataSync transfer location for an Amazon FSx for OpenZFS file system is configured.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=: Specifies the name of the Windows domain that the FSx for Windows File Server file system belongs to.
-        --fsx-filesystem-arn=!: Specifies the Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --password=!: Specifies the password of the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system.
-        --security-group-arns=!: Specifies the ARNs of the Amazon EC2 security groups that provide access to your file system's preferred subnet.
+        --location-arn=!: The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.
+    - name: describe-location-smb
+      description: Provides details about how an DataSync transfer location for a Server Message Block (SMB) file server is configured.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the SMB location that you want information about.
+    - name: update-location-fsx-open-zfs
+      description: Modifies the following configuration parameters of the Amazon FSx for OpenZFS transfer location that you're using with DataSync.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for OpenZFS transfer location that you're updating.
+        --protocol=: ""
+        --subdirectory=: Specifies a subdirectory in the location's path that must begin with `/fsx`.
+    - name: update-location-fsx-windows
+      description: Modifies the following configuration parameters of the Amazon FSx for Windows File Server transfer location that you're using with DataSync.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=: Specifies the name of the Windows domain that your FSx for Windows File Server file system belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: Specifies the ARN of the FSx for Windows File Server transfer location that you're updating.
+        --password=: Specifies the password of the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system.
         --subdirectory=: Specifies a mount path for your file system using forward slashes.
-        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
-        --user=!: Specifies the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system.
+        --user=: Specifies the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system.
+    - name: update-location-nfs
+      description: Modifies the following configuration parameters of the Network File System (NFS) transfer location that you're using with DataSync.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the NFS transfer location that you want to update.
+        --mount-options=: ""
+        --on-prem-config=: ""
+        --server-hostname=: Specifies the DNS name or IP address (IPv4 or IPv6) of the NFS file server that your DataSync agent connects to.
+        --subdirectory=: Specifies the export path in your NFS file server that you want DataSync to mount.
+    - name: update-task
+      description: Updates the configuration of a *task*, which defines where and how DataSync transfers your data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-watch-log-group-arn=: Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task.
+        --excludes=: Specifies exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --includes=: Specifies include filters define the files, objects, and folders in your source location that you want DataSync to transfer.
+        --manifest-config=: Configures a manifest, which is a list of files or objects that you want DataSync to transfer.
+        --name=: Specifies the name of your task.
+        --options=: ""
+        --schedule=: Specifies a schedule for when you want your task to run.
+        --task-arn=!: Specifies the ARN of the task that you want to update.
+        --task-report-config=: Specifies how you want to configure a task report, which provides detailed information about your DataSync transfer.
+    - name: create-location-fsx-open-zfs
+      description: Creates a transfer *location* for an Amazon FSx for OpenZFS file system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fsx-filesystem-arn=!: The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --protocol=!: The type of protocol that DataSync uses to access your file system.
+        --security-group-arns=!: The ARNs of the security groups that are used to configure the FSx for OpenZFS file system.
+        --subdirectory=: A subdirectory in the location's path that must begin with `/fsx`.
+        --tags=: The key-value pair that represents a tag that you want to add to the resource.
     - name: create-location-smb
       description: Creates a transfer *location* for a Server Message Block (SMB) file server.
       flags:
@@ -214,75 +171,20 @@ commands:
             authentication-type:
                 - NTLM
                 - KERBEROS
-    - name: delete-agent
-      description: Removes an DataSync agent resource from your Amazon Web Services account.
-      flags:
-        --agent-arn=!: The Amazon Resource Name (ARN) of the agent to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-location-fsx-ontap
-      description: Provides details about how an DataSync transfer location for an Amazon FSx for NetApp ONTAP file system is configured.
+    - name: describe-location-azure-blob
+      description: Provides details about how an DataSync transfer location for Microsoft Azure Blob Storage is configured.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file system location that you want information about.
-    - name: update-task
-      description: Updates the configuration of a *task*, which defines where and how DataSync transfers your data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-log-group-arn=: Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task.
-        --excludes=: Specifies exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --includes=: Specifies include filters define the files, objects, and folders in your source location that you want DataSync to transfer.
-        --manifest-config=: Configures a manifest, which is a list of files or objects that you want DataSync to transfer.
-        --name=: Specifies the name of your task.
-        --options=: ""
-        --schedule=: Specifies a schedule for when you want your task to run.
-        --task-arn=!: Specifies the ARN of the task that you want to update.
-        --task-report-config=: Specifies how you want to configure a task report, which provides detailed information about your DataSync transfer.
-    - name: create-location-fsx-lustre
-      description: Creates a transfer *location* for an Amazon FSx for Lustre file system.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fsx-filesystem-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for Lustre file system.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --security-group-arns=!: Specifies the Amazon Resource Names (ARNs) of up to five security groups that provide access to your FSx for Lustre file system.
-        --subdirectory=: Specifies a mount path for your FSx for Lustre file system.
-        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
-    - name: create-task
-      description: Configures a *task*, which defines where and how DataSync transfers your data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-log-group-arn=: Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task.
-        --destination-location-arn=!: Specifies the ARN of your transfer's destination location.
-        --excludes=: Specifies exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --includes=: Specifies include filters that define the files, objects, and folders in your source location that you want DataSync to transfer.
-        --manifest-config=: Configures a manifest, which is a list of files or objects that you want DataSync to transfer.
-        --name=: Specifies the name of your task.
-        --options=: Specifies your task's settings, such as preserving file metadata, verifying data integrity, among other options.
-        --schedule=: Specifies a schedule for when you want your task to run.
-        --source-location-arn=!: Specifies the ARN of your transfer's source location.
-        --tags=: Specifies the tags that you want to apply to your task.
-        --task-mode=: 'Specifies one of the following task modes for your data transfer:'
-        --task-report-config=: Specifies how you want to configure a task report, which provides detailed information about your DataSync transfer.
-      completion:
-        flag:
-            task-mode:
-                - BASIC
-                - ENHANCED
-    - name: describe-task-execution
-      description: Provides information about an execution of your DataSync task.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of your Azure Blob Storage transfer location.
+    - name: describe-location-s3
+      description: Provides details about how an DataSync transfer location for an S3 bucket is configured.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-execution-arn=!: Specifies the Amazon Resource Name (ARN) of the task execution that you want information about.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the Amazon S3 location.
     - name: list-agents
       description: Returns a list of DataSync agents that belong to an Amazon Web Services account in the Amazon Web Services Region specified in the request.
       flags:
@@ -293,6 +195,18 @@ commands:
         --max-results=: Specifies the maximum number of DataSync agents to list in a response.
         --next-token=: Specifies an opaque string that indicates the position to begin the next list of results in the response.
         --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Returns all the tags associated with an Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies how many results that you want in the response.
+        --next-token=: Specifies an opaque string that indicates the position to begin the next list of results in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: Specifies the Amazon Resource Name (ARN) of the resource that you want tag information on.
         --starting-token=: A token to specify where to start paginating.
     - name: list-tasks
       description: Returns a list of the DataSync tasks you created.
@@ -306,44 +220,6 @@ commands:
         --next-token=: An opaque string that indicates the position at which to begin the next list of tasks.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: start-task-execution
-      description: Starts an DataSync transfer task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --excludes=: Specifies a list of filter rules that determines which files to exclude from a task.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --includes=: Specifies a list of filter rules that determines which files to include when running a task.
-        --manifest-config=: Configures a manifest, which is a list of files or objects that you want DataSync to transfer.
-        --override-options=: ""
-        --tags=: Specifies the tags that you want to apply to the Amazon Resource Name (ARN) representing the task execution.
-        --task-arn=!: Specifies the Amazon Resource Name (ARN) of the task that you want to start.
-        --task-report-config=: Specifies how you want to configure a task report, which provides detailed information about your DataSync transfer.
-    - name: update-location-fsx-windows
-      description: Modifies the following configuration parameters of the Amazon FSx for Windows File Server transfer location that you're using with DataSync.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain=: Specifies the name of the Windows domain that your FSx for Windows File Server file system belongs to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the ARN of the FSx for Windows File Server transfer location that you're updating.
-        --password=: Specifies the password of the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system.
-        --subdirectory=: Specifies a mount path for your file system using forward slashes.
-        --user=: Specifies the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system.
-    - name: delete-location
-      description: Deletes a transfer location resource from DataSync.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: The Amazon Resource Name (ARN) of the location to delete.
-    - name: describe-location-smb
-      description: Provides details about how an DataSync transfer location for a Server Message Block (SMB) file server is configured.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the SMB location that you want information about.
     - name: tag-resource
       description: Applies a *tag* to an Amazon Web Services resource.
       flags:
@@ -352,45 +228,23 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: Specifies the Amazon Resource Name (ARN) of the resource to apply the tag to.
         --tags=!: Specifies the tags that you want to apply to the resource.
-    - name: untag-resource
-      description: Removes tags from an Amazon Web Services resource.
+    - name: create-location-fsx-lustre
+      description: Creates a transfer *location* for an Amazon FSx for Lustre file system.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fsx-filesystem-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for Lustre file system.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --keys=!: Specifies the keys in the tags that you want to remove.
-        --resource-arn=!: Specifies the Amazon Resource Name (ARN) of the resource to remove the tags from.
-    - name: update-location-fsx-lustre
-      description: Modifies the following configuration parameters of the Amazon FSx for Lustre transfer location that you're using with DataSync.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for Lustre transfer location that you're updating.
+        --security-group-arns=!: Specifies the Amazon Resource Names (ARNs) of up to five security groups that provide access to your FSx for Lustre file system.
         --subdirectory=: Specifies a mount path for your FSx for Lustre file system.
-    - name: create-location-object-storage
-      description: Creates a transfer *location* for an object storage system.
+        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
+    - name: delete-location
+      description: Deletes a transfer location resource from DataSync.
       flags:
-        --access-key=: Specifies the access key (for example, a user name) if credentials are required to authenticate with the object storage server.
-        --agent-arns=: (Optional) Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can connect with your object storage system.
-        --bucket-name=!: Specifies the name of the object storage bucket involved in the transfer.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cmk-secret-config=: Specifies configuration information for a DataSync-managed secret, which includes the `SecretKey` that DataSync uses to access a specific object storage location, with a customer-managed KMS key.
-        --custom-secret-config=: Specifies configuration information for a customer-managed Secrets Manager secret where the secret key for a specific object storage location is stored in plain text.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --secret-key=: Specifies the secret key (for example, a password) if credentials are required to authenticate with the object storage server.
-        --server-certificate=: Specifies a certificate chain for DataSync to authenticate with your object storage system if the system uses a private or self-signed certificate authority (CA).
-        --server-hostname=!: Specifies the domain name or IP address (IPv4 or IPv6) of the object storage server that your DataSync agent connects to.
-        --server-port=: Specifies the port that your object storage server accepts inbound network traffic on (for example, port 443).
-        --server-protocol=: Specifies the protocol that your object storage server uses to communicate.
-        --subdirectory=: Specifies the object prefix for your object storage server.
-        --tags=: Specifies the key-value pair that represents a tag that you want to add to the resource.
-      completion:
-        flag:
-            server-protocol:
-                - HTTPS
-                - HTTP
+        --location-arn=!: The Amazon Resource Name (ARN) of the location to delete.
     - name: delete-task
       description: Deletes a transfer task resource from DataSync.
       flags:
@@ -398,148 +252,42 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --task-arn=!: Specifies the Amazon Resource Name (ARN) of the task that you want to delete.
-    - name: describe-location-fsx-windows
-      description: Provides details about how an DataSync transfer location for an Amazon FSx for Windows File Server file system is configured.
+    - name: describe-location-fsx-ontap
+      description: Provides details about how an DataSync transfer location for an Amazon FSx for NetApp ONTAP file system is configured.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for Windows File Server location.
-    - name: describe-location-nfs
-      description: Provides details about how an DataSync transfer location for a Network File System (NFS) file server is configured.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP file system location that you want information about.
+    - name: describe-location-object-storage
+      description: Provides details about how an DataSync transfer location for an object storage system is configured.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the NFS location that you want information about.
-    - name: update-location-efs
-      description: Modifies the following configuration parameters of the Amazon EFS transfer location that you're using with DataSync.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the object storage system location.
+    - name: update-location-object-storage
+      description: Modifies the following configuration parameters of the object storage transfer location that you're using with DataSync.
       flags:
-        --access-point-arn=: Specifies the Amazon Resource Name (ARN) of the access point that DataSync uses to mount your Amazon EFS file system.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-system-access-role-arn=: Specifies an Identity and Access Management (IAM) role that allows DataSync to access your Amazon EFS file system.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --in-transit-encryption=: Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2 encryption when it transfers data to or from your Amazon EFS file system.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the Amazon EFS transfer location that you're updating.
-        --subdirectory=: Specifies a mount path for your Amazon EFS file system.
-      completion:
-        flag:
-            in-transit-encryption:
-                - NONE
-                - TLS1_2
-    - name: update-task-execution
-      description: Updates the configuration of a running DataSync task execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=!: ""
-        --task-execution-arn=!: Specifies the Amazon Resource Name (ARN) of the task execution that you're updating.
-    - name: create-agent
-      description: Activates an DataSync agent that you deploy in your storage environment.
-      flags:
-        --activation-key=!: Specifies your DataSync agent's activation key.
-        --agent-name=: Specifies a name for your agent.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --security-group-arns=: Specifies the Amazon Resource Name (ARN) of the security group that allows traffic between your agent and VPC service endpoint.
-        --subnet-arns=: Specifies the ARN of the subnet where your VPC service endpoint is located.
-        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
-        --vpc-endpoint-id=: Specifies the ID of the [VPC service endpoint](https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#datasync-in-vpc) that you're using.
-    - name: create-location-hdfs
-      description: Creates a transfer *location* for a Hadoop Distributed File System (HDFS).
-      flags:
-        --agent-arns=!: The Amazon Resource Names (ARNs) of the DataSync agents that can connect to your HDFS cluster.
-        --authentication-type=!: The type of authentication used to determine the identity of the user.
-        --block-size=: The size of data blocks to write into the HDFS cluster.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kerberos-keytab=: The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys.
-        --kerberos-krb5-conf=: The `krb5.conf` file that contains the Kerberos configuration information.
-        --kerberos-principal=: The Kerberos principal with access to the files and folders on the HDFS cluster.
-        --kms-key-provider-uri=: The URI of the HDFS cluster's Key Management Server (KMS).
-        --name-nodes=!: The NameNode that manages the HDFS namespace.
-        --qop-configuration=: The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer protection settings configured on the Hadoop Distributed File System (HDFS) cluster.
-        --replication-factor=: The number of DataNodes to replicate the data to when writing to the HDFS cluster.
-        --simple-user=: The user name used to identify the client on the host operating system.
-        --subdirectory=: A subdirectory in the HDFS cluster.
-        --tags=: The key-value pair that represents the tag that you want to add to the location.
-      completion:
-        flag:
-            authentication-type:
-                - SIMPLE
-                - KERBEROS
-    - name: create-location-nfs
-      description: Creates a transfer *location* for a Network File System (NFS) file server.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mount-options=: Specifies the options that DataSync can use to mount your NFS file server.
-        --on-prem-config=!: Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect to your NFS file server.
-        --server-hostname=!: Specifies the DNS name or IP address (IPv4 or IPv6) of the NFS file server that your DataSync agent connects to.
-        --subdirectory=!: Specifies the export path in your NFS file server that you want DataSync to mount.
-        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
-    - name: describe-location-efs
-      description: Provides details about how an DataSync transfer location for an Amazon EFS file system is configured.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: The Amazon Resource Name (ARN) of the Amazon EFS file system location that you want information about.
-    - name: describe-location-s3
-      description: Provides details about how an DataSync transfer location for an S3 bucket is configured.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the Amazon S3 location.
-    - name: update-agent
-      description: Updates the name of an DataSync agent.
-      flags:
-        --agent-arn=!: The Amazon Resource Name (ARN) of the agent to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name that you want to use to configure the agent.
-    - name: update-location-azure-blob
-      description: Modifies the following configurations of the Microsoft Azure Blob Storage transfer location that you're using with DataSync.
-      flags:
-        --access-tier=: Specifies the access tier that you want your objects or files transferred into.
-        --agent-arns=: (Optional) Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container.
-        --authentication-type=: Specifies the authentication method DataSync uses to access your Azure Blob Storage.
-        --blob-type=: Specifies the type of blob that you want your objects or files to be when transferring them into Azure Blob Storage.
+        --access-key=: Specifies the access key (for example, a user name) if credentials are required to authenticate with the object storage server.
+        --agent-arns=: (Optional) Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can connect with your object storage system.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cmk-secret-config=: Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed KMS key.
         --custom-secret-config=: Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed KMS key.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the ARN of the Azure Blob Storage transfer location that you're updating.
-        --sas-configuration=: Specifies the SAS configuration that allows DataSync to access your Azure Blob Storage.
-        --subdirectory=: Specifies path segments if you want to limit your transfer to a virtual directory in your container (for example, `/my/images`).
+        --location-arn=!: Specifies the ARN of the object storage system location that you're updating.
+        --secret-key=: Specifies the secret key (for example, a password) if credentials are required to authenticate with the object storage server.
+        --server-certificate=: Specifies a certificate chain for DataSync to authenticate with your object storage system if the system uses a private or self-signed certificate authority (CA).
+        --server-hostname=: Specifies the domain name or IP address (IPv4 or IPv6) of the object storage server that your DataSync agent connects to.
+        --server-port=: Specifies the port that your object storage server accepts inbound network traffic on (for example, port 443).
+        --server-protocol=: Specifies the protocol that your object storage server uses to communicate.
+        --subdirectory=: Specifies the object prefix for your object storage server.
       completion:
         flag:
-            access-tier:
-                - HOT
-                - COOL
-                - ARCHIVE
-            authentication-type:
-                - SAS
-                - NONE
-            blob-type:
-                - BLOCK
-    - name: update-location-fsx-ontap
-      description: Modifies the following configuration parameters of the Amazon FSx for NetApp ONTAP transfer location that you're using with DataSync.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP transfer location that you're updating.
-        --protocol=: Specifies the data transfer protocol that DataSync uses to access your Amazon FSx file system.
-        --subdirectory=: Specifies a path to the file share in the storage virtual machine (SVM) where you want to transfer data to or from.
+            server-protocol:
+                - HTTPS
+                - HTTP
     - name: create-location-azure-blob
       description: Creates a transfer *location* for a Microsoft Azure Blob Storage container.
       flags:
@@ -567,40 +315,257 @@ commands:
                 - NONE
             blob-type:
                 - BLOCK
-    - name: create-location-fsx-open-zfs
-      description: Creates a transfer *location* for an Amazon FSx for OpenZFS file system.
+    - name: create-location-hdfs
+      description: Creates a transfer *location* for a Hadoop Distributed File System (HDFS).
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fsx-filesystem-arn=!: The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --protocol=!: The type of protocol that DataSync uses to access your file system.
-        --security-group-arns=!: The ARNs of the security groups that are used to configure the FSx for OpenZFS file system.
-        --subdirectory=: A subdirectory in the location's path that must begin with `/fsx`.
-        --tags=: The key-value pair that represents a tag that you want to add to the resource.
-    - name: create-location-s3
-      description: Creates a transfer *location* for an Amazon S3 bucket.
-      flags:
-        --agent-arns=: (Amazon S3 on Outposts only) Specifies the Amazon Resource Name (ARN) of the DataSync agent on your Outpost.
+        --agent-arns=!: The Amazon Resource Names (ARNs) of the DataSync agents that can connect to your HDFS cluster.
+        --authentication-type=!: The type of authentication used to determine the identity of the user.
+        --block-size=: The size of data blocks to write into the HDFS cluster.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --s3-bucket-arn=!: Specifies the ARN of the S3 bucket that you want to use as a location.
-        --s3-config=!: ""
-        --s3-storage-class=: Specifies the storage class that you want your objects to use when Amazon S3 is a transfer destination.
-        --subdirectory=: Specifies a prefix in the S3 bucket that DataSync reads from or writes to (depending on whether the bucket is a source or destination location).
-        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
+        --kerberos-keytab=: The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys.
+        --kerberos-krb5-conf=: The `krb5.conf` file that contains the Kerberos configuration information.
+        --kerberos-principal=: The Kerberos principal with access to the files and folders on the HDFS cluster.
+        --kms-key-provider-uri=: The URI of the HDFS cluster's Key Management Server (KMS).
+        --name-nodes=!: The NameNode that manages the HDFS namespace.
+        --qop-configuration=: The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer protection settings configured on the Hadoop Distributed File System (HDFS) cluster.
+        --replication-factor=: The number of DataNodes to replicate the data to when writing to the HDFS cluster.
+        --simple-user=: The user name used to identify the client on the host operating system.
+        --subdirectory=: A subdirectory in the HDFS cluster.
+        --tags=: The key-value pair that represents the tag that you want to add to the location.
       completion:
         flag:
-            s3-storage-class:
-                - STANDARD
-                - STANDARD_IA
-                - ONEZONE_IA
-                - INTELLIGENT_TIERING
-                - GLACIER
-                - DEEP_ARCHIVE
-                - OUTPOSTS
-                - GLACIER_INSTANT_RETRIEVAL
+            authentication-type:
+                - SIMPLE
+                - KERBEROS
+    - name: describe-location-efs
+      description: Provides details about how an DataSync transfer location for an Amazon EFS file system is configured.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: The Amazon Resource Name (ARN) of the Amazon EFS file system location that you want information about.
+    - name: describe-task-execution
+      description: Provides information about an execution of your DataSync task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-execution-arn=!: Specifies the Amazon Resource Name (ARN) of the task execution that you want information about.
+    - name: update-task-execution
+      description: Updates the configuration of a running DataSync task execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --options=!: ""
+        --task-execution-arn=!: Specifies the Amazon Resource Name (ARN) of the task execution that you're updating.
+    - name: cancel-task-execution
+      description: Stops an DataSync task execution that's in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-execution-arn=!: The Amazon Resource Name (ARN) of the task execution to stop.
+    - name: create-location-fsx-ontap
+      description: Creates a transfer *location* for an Amazon FSx for NetApp ONTAP file system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --protocol=!: ""
+        --security-group-arns=!: Specifies the Amazon EC2 security groups that provide access to your file system's preferred subnet.
+        --storage-virtual-machine-arn=!: Specifies the ARN of the storage virtual machine (SVM) in your file system where you want to copy data to or from.
+        --subdirectory=: Specifies a path to the file share in the SVM where you want to transfer data to or from.
+        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
+    - name: create-location-fsx-windows
+      description: Creates a transfer *location* for an Amazon FSx for Windows File Server file system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain=: Specifies the name of the Windows domain that the FSx for Windows File Server file system belongs to.
+        --fsx-filesystem-arn=!: Specifies the Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --password=!: Specifies the password of the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system.
+        --security-group-arns=!: Specifies the ARNs of the Amazon EC2 security groups that provide access to your file system's preferred subnet.
+        --subdirectory=: Specifies a mount path for your file system using forward slashes.
+        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
+        --user=!: Specifies the user with the permissions to mount and access the files, folders, and file metadata in your FSx for Windows File Server file system.
+    - name: describe-location-fsx-windows
+      description: Provides details about how an DataSync transfer location for an Amazon FSx for Windows File Server file system is configured.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for Windows File Server location.
+    - name: create-task
+      description: Configures a *task*, which defines where and how DataSync transfers your data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-watch-log-group-arn=: Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring your task.
+        --destination-location-arn=!: Specifies the ARN of your transfer's destination location.
+        --excludes=: Specifies exclude filters that define the files, objects, and folders in your source location that you don't want DataSync to transfer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --includes=: Specifies include filters that define the files, objects, and folders in your source location that you want DataSync to transfer.
+        --manifest-config=: Configures a manifest, which is a list of files or objects that you want DataSync to transfer.
+        --name=: Specifies the name of your task.
+        --options=: Specifies your task's settings, such as preserving file metadata, verifying data integrity, among other options.
+        --schedule=: Specifies a schedule for when you want your task to run.
+        --source-location-arn=!: Specifies the ARN of your transfer's source location.
+        --tags=: Specifies the tags that you want to apply to your task.
+        --task-mode=: 'Specifies one of the following task modes for your data transfer:'
+        --task-report-config=: Specifies how you want to configure a task report, which provides detailed information about your DataSync transfer.
+      completion:
+        flag:
+            task-mode:
+                - BASIC
+                - ENHANCED
+    - name: describe-location-fsx-lustre
+      description: Provides details about how an DataSync transfer location for an Amazon FSx for Lustre file system is configured.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: The Amazon Resource Name (ARN) of the FSx for Lustre location to describe.
+    - name: describe-location-hdfs
+      description: Provides details about how an DataSync transfer location for a Hadoop Distributed File System (HDFS) is configured.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the HDFS location.
+    - name: describe-location-nfs
+      description: Provides details about how an DataSync transfer location for a Network File System (NFS) file server is configured.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the NFS location that you want information about.
+    - name: list-task-executions
+      description: Returns a list of executions for an DataSync transfer task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies how many results you want in the response.
+        --next-token=: Specifies an opaque string that indicates the position at which to begin the next list of results in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --task-arn=: Specifies the Amazon Resource Name (ARN) of the task that you want execution information about.
+    - name: start-task-execution
+      description: Starts an DataSync transfer task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --excludes=: Specifies a list of filter rules that determines which files to exclude from a task.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --includes=: Specifies a list of filter rules that determines which files to include when running a task.
+        --manifest-config=: Configures a manifest, which is a list of files or objects that you want DataSync to transfer.
+        --override-options=: ""
+        --tags=: Specifies the tags that you want to apply to the Amazon Resource Name (ARN) representing the task execution.
+        --task-arn=!: Specifies the Amazon Resource Name (ARN) of the task that you want to start.
+        --task-report-config=: Specifies how you want to configure a task report, which provides detailed information about your DataSync transfer.
+    - name: untag-resource
+      description: Removes tags from an Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --keys=!: Specifies the keys in the tags that you want to remove.
+        --resource-arn=!: Specifies the Amazon Resource Name (ARN) of the resource to remove the tags from.
+    - name: update-location-azure-blob
+      description: Modifies the following configurations of the Microsoft Azure Blob Storage transfer location that you're using with DataSync.
+      flags:
+        --access-tier=: Specifies the access tier that you want your objects or files transferred into.
+        --agent-arns=: (Optional) Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container.
+        --authentication-type=: Specifies the authentication method DataSync uses to access your Azure Blob Storage.
+        --blob-type=: Specifies the type of blob that you want your objects or files to be when transferring them into Azure Blob Storage.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cmk-secret-config=: Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed KMS key.
+        --custom-secret-config=: Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed KMS key.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-arn=!: Specifies the ARN of the Azure Blob Storage transfer location that you're updating.
+        --sas-configuration=: Specifies the SAS configuration that allows DataSync to access your Azure Blob Storage.
+        --subdirectory=: Specifies path segments if you want to limit your transfer to a virtual directory in your container (for example, `/my/images`).
+      completion:
+        flag:
+            access-tier:
+                - HOT
+                - COOL
+                - ARCHIVE
+            authentication-type:
+                - SAS
+                - NONE
+            blob-type:
+                - BLOCK
+    - name: create-agent
+      description: Activates an DataSync agent that you deploy in your storage environment.
+      flags:
+        --activation-key=!: Specifies your DataSync agent's activation key.
+        --agent-name=: Specifies a name for your agent.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --security-group-arns=: Specifies the Amazon Resource Name (ARN) of the security group that allows traffic between your agent and VPC service endpoint.
+        --subnet-arns=: Specifies the ARN of the subnet where your VPC service endpoint is located.
+        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
+        --vpc-endpoint-id=: Specifies the ID of the [VPC service endpoint](https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#datasync-in-vpc) that you're using.
+    - name: create-location-efs
+      description: Creates a transfer *location* for an Amazon EFS file system.
+      flags:
+        --access-point-arn=: Specifies the Amazon Resource Name (ARN) of the access point that DataSync uses to mount your Amazon EFS file system.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ec2-config=!: Specifies the subnet and security groups DataSync uses to connect to one of your Amazon EFS file system's [mount targets](https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html).
+        --efs-filesystem-arn=!: Specifies the ARN for your Amazon EFS file system.
+        --file-system-access-role-arn=: Specifies an Identity and Access Management (IAM) role that allows DataSync to access your Amazon EFS file system.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --in-transit-encryption=: Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2 encryption when it transfers data to or from your Amazon EFS file system.
+        --subdirectory=: Specifies a mount path for your Amazon EFS file system.
+        --tags=: Specifies the key-value pair that represents a tag that you want to add to the resource.
+      completion:
+        flag:
+            in-transit-encryption:
+                - NONE
+                - TLS1_2
+    - name: create-location-nfs
+      description: Creates a transfer *location* for a Network File System (NFS) file server.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mount-options=: Specifies the options that DataSync can use to mount your NFS file server.
+        --on-prem-config=!: Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect to your NFS file server.
+        --server-hostname=!: Specifies the DNS name or IP address (IPv4 or IPv6) of the NFS file server that your DataSync agent connects to.
+        --subdirectory=!: Specifies the export path in your NFS file server that you want DataSync to mount.
+        --tags=: Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
+    - name: create-location-object-storage
+      description: Creates a transfer *location* for an object storage system.
+      flags:
+        --access-key=: Specifies the access key (for example, a user name) if credentials are required to authenticate with the object storage server.
+        --agent-arns=: (Optional) Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can connect with your object storage system.
+        --bucket-name=!: Specifies the name of the object storage bucket involved in the transfer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cmk-secret-config=: Specifies configuration information for a DataSync-managed secret, which includes the `SecretKey` that DataSync uses to access a specific object storage location, with a customer-managed KMS key.
+        --custom-secret-config=: Specifies configuration information for a customer-managed Secrets Manager secret where the secret key for a specific object storage location is stored in plain text.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --secret-key=: Specifies the secret key (for example, a password) if credentials are required to authenticate with the object storage server.
+        --server-certificate=: Specifies a certificate chain for DataSync to authenticate with your object storage system if the system uses a private or self-signed certificate authority (CA).
+        --server-hostname=!: Specifies the domain name or IP address (IPv4 or IPv6) of the object storage server that your DataSync agent connects to.
+        --server-port=: Specifies the port that your object storage server accepts inbound network traffic on (for example, port 443).
+        --server-protocol=: Specifies the protocol that your object storage server uses to communicate.
+        --subdirectory=: Specifies the object prefix for your object storage server.
+        --tags=: Specifies the key-value pair that represents a tag that you want to add to the resource.
+      completion:
+        flag:
+            server-protocol:
+                - HTTPS
+                - HTTP
     - name: describe-agent
       description: Returns information about an DataSync agent, such as its name, service endpoint type, and status.
       flags:
@@ -608,20 +573,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-location-fsx-open-zfs
-      description: Provides details about how an DataSync transfer location for an Amazon FSx for OpenZFS file system is configured.
+    - name: describe-task
+      description: Provides information about a *task*, which defines where and how DataSync transfers your data.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: The Amazon Resource Name (ARN) of the FSx for OpenZFS location to describe.
-    - name: describe-location-object-storage
-      description: Provides details about how an DataSync transfer location for an object storage system is configured.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the object storage system location.
+        --task-arn=!: Specifies the Amazon Resource Name (ARN) of the transfer task that you want information about.
     - name: list-locations
       description: Returns a list of source and destination locations.
       flags:
@@ -634,26 +592,68 @@ commands:
         --next-token=: An opaque string that indicates the position at which to begin the next list of locations.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-location-fsx-open-zfs
-      description: Modifies the following configuration parameters of the Amazon FSx for OpenZFS transfer location that you're using with DataSync.
+    - name: update-location-fsx-lustre
+      description: Modifies the following configuration parameters of the Amazon FSx for Lustre transfer location that you're using with DataSync.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for OpenZFS transfer location that you're updating.
-        --protocol=: ""
-        --subdirectory=: Specifies a subdirectory in the location's path that must begin with `/fsx`.
-    - name: describe-location-azure-blob
-      description: Provides details about how an DataSync transfer location for Microsoft Azure Blob Storage is configured.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for Lustre transfer location that you're updating.
+        --subdirectory=: Specifies a mount path for your FSx for Lustre file system.
+    - name: update-agent
+      description: Updates the name of an DataSync agent.
+      flags:
+        --agent-arn=!: The Amazon Resource Name (ARN) of the agent to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name that you want to use to configure the agent.
+    - name: update-location-efs
+      description: Modifies the following configuration parameters of the Amazon EFS transfer location that you're using with DataSync.
+      flags:
+        --access-point-arn=: Specifies the Amazon Resource Name (ARN) of the access point that DataSync uses to mount your Amazon EFS file system.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-access-role-arn=: Specifies an Identity and Access Management (IAM) role that allows DataSync to access your Amazon EFS file system.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --in-transit-encryption=: Specifies whether you want DataSync to use Transport Layer Security (TLS) 1.2 encryption when it transfers data to or from your Amazon EFS file system.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the Amazon EFS transfer location that you're updating.
+        --subdirectory=: Specifies a mount path for your Amazon EFS file system.
+      completion:
+        flag:
+            in-transit-encryption:
+                - NONE
+                - TLS1_2
+    - name: update-location-fsx-ontap
+      description: Modifies the following configuration parameters of the Amazon FSx for NetApp ONTAP transfer location that you're using with DataSync.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: Specifies the Amazon Resource Name (ARN) of your Azure Blob Storage transfer location.
-    - name: describe-location-fsx-lustre
-      description: Provides details about how an DataSync transfer location for an Amazon FSx for Lustre file system is configured.
+        --location-arn=!: Specifies the Amazon Resource Name (ARN) of the FSx for ONTAP transfer location that you're updating.
+        --protocol=: Specifies the data transfer protocol that DataSync uses to access your Amazon FSx file system.
+        --subdirectory=: Specifies a path to the file share in the storage virtual machine (SVM) where you want to transfer data to or from.
+    - name: update-location-hdfs
+      description: Modifies the following configuration parameters of the Hadoop Distributed File System (HDFS) transfer location that you're using with DataSync.
       flags:
+        --agent-arns=: The Amazon Resource Names (ARNs) of the DataSync agents that can connect to your HDFS cluster.
+        --authentication-type=: The type of authentication used to determine the identity of the user.
+        --block-size=: The size of the data blocks to write into the HDFS cluster.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-arn=!: The Amazon Resource Name (ARN) of the FSx for Lustre location to describe.
+        --kerberos-keytab=: The Kerberos key table (keytab) that contains mappings between the defined Kerberos principal and the encrypted keys.
+        --kerberos-krb5-conf=: The `krb5.conf` file that contains the Kerberos configuration information.
+        --kerberos-principal=: The Kerberos principal with access to the files and folders on the HDFS cluster.
+        --kms-key-provider-uri=: The URI of the HDFS cluster's Key Management Server (KMS).
+        --location-arn=!: The Amazon Resource Name (ARN) of the source HDFS cluster location.
+        --name-nodes=: The NameNode that manages the HDFS namespace.
+        --qop-configuration=: The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC) and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS) cluster.
+        --replication-factor=: The number of DataNodes to replicate the data to when writing to the HDFS cluster.
+        --simple-user=: The user name used to identify the client on the host operating system.
+        --subdirectory=: A subdirectory in the HDFS cluster.
+      completion:
+        flag:
+            authentication-type:
+                - SIMPLE
+                - KERBEROS

@@ -1,6 +1,52 @@
 name: cloud9
 description: AWS Cloud9
 commands:
+    - name: create-environment-membership
+      description: Adds an environment member to an Cloud9 development environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The ID of the environment that contains the environment member you want to add.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --permissions=!: The type of environment member permissions you want to associate with this environment member.
+        --user-arn=!: The Amazon Resource Name (ARN) of the environment member you want to add.
+      completion:
+        flag:
+            permissions:
+                - read-write
+                - read-only
+    - name: describe-environment-memberships
+      description: Gets information about environment members for an Cloud9 development environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: The ID of the environment to get environment member information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of environment members to get information about.
+        --next-token=: During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a *next token*.
+        --page-size=: The size of each page to get in the AWS service call.
+        --permissions=: The type of environment member permissions to get information about.
+        --starting-token=: A token to specify where to start paginating.
+        --user-arn=: The Amazon Resource Name (ARN) of an individual environment member to get information about.
+    - name: describe-environment-status
+      description: Gets status information for an Cloud9 development environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The ID of the environment to get status information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-environments
+      description: Gets a list of Cloud9 development environment identifiers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of environments to get identifiers for.
+        --next-token=: During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a *next token*.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: tag-resource
       description: Adds tags to an Cloud9 development environment.
       flags:
@@ -9,6 +55,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the Cloud9 development environment to add tags to.
         --tags=!: The list of tags to add to the given Cloud9 development environment.
+    - name: untag-resource
+      description: Removes tags from an Cloud9 development environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Cloud9 development environment to remove tags from.
+        --tag-keys=!: The tag names of the tags to remove from the given Cloud9 development environment.
     - name: update-environment
       description: Changes the settings of an existing Cloud9 development environment.
       flags:
@@ -38,54 +92,6 @@ commands:
             permissions:
                 - read-write
                 - read-only
-    - name: create-environment-membership
-      description: Adds an environment member to an Cloud9 development environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: The ID of the environment that contains the environment member you want to add.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --permissions=!: The type of environment member permissions you want to associate with this environment member.
-        --user-arn=!: The Amazon Resource Name (ARN) of the environment member you want to add.
-      completion:
-        flag:
-            permissions:
-                - read-write
-                - read-only
-    - name: delete-environment-membership
-      description: Deletes an environment member from a development environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: The ID of the environment to delete the environment member from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-arn=!: The Amazon Resource Name (ARN) of the environment member to delete from the environment.
-    - name: describe-environments
-      description: Gets information about Cloud9 development environments.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-ids=!: The IDs of individual environments to get information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-environments
-      description: Gets a list of Cloud9 development environment identifiers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of environments to get identifiers for.
-        --next-token=: During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a *next token*.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes tags from an Cloud9 development environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Cloud9 development environment to remove tags from.
-        --tag-keys=!: The tag names of the tags to remove from the given Cloud9 development environment.
     - name: create-environment-ec2
       description: Creates an Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
       flags:
@@ -116,26 +122,20 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --environment-id=!: The ID of the environment to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-environment-memberships
-      description: Gets information about environment members for an Cloud9 development environment.
+    - name: delete-environment-membership
+      description: Deletes an environment member from a development environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=: The ID of the environment to get environment member information about.
+        --environment-id=!: The ID of the environment to delete the environment member from.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of environment members to get information about.
-        --next-token=: During a previous call, if there are more than 25 items in the list, only the first 25 items are returned, along with a unique string called a *next token*.
-        --page-size=: The size of each page to get in the AWS service call.
-        --permissions=: The type of environment member permissions to get information about.
-        --starting-token=: A token to specify where to start paginating.
-        --user-arn=: The Amazon Resource Name (ARN) of an individual environment member to get information about.
-    - name: describe-environment-status
-      description: Gets status information for an Cloud9 development environment.
+        --user-arn=!: The Amazon Resource Name (ARN) of the environment member to delete from the environment.
+    - name: describe-environments
+      description: Gets information about Cloud9 development environments.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --environment-id=!: The ID of the environment to get status information about.
+        --environment-ids=!: The IDs of individual environments to get information about.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-tags-for-resource
       description: Gets a list of the tags associated with an Cloud9 development environment.

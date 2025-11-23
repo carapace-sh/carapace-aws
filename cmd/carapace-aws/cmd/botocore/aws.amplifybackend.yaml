@@ -1,14 +1,24 @@
 name: amplifybackend
 description: AmplifyBackend
 commands:
-    - name: delete-token
-      description: Deletes the challenge token based on the given appId and sessionId.
+    - name: update-backend-api
+      description: Updates an existing backend API resource.
       flags:
         --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-id=!: The session ID.
+        --resource-config=: Defines the resource configuration for the data model in your Amplify project.
+        --resource-name=!: The name of this resource.
+    - name: create-backend-config
+      description: Creates a config object for a backend.
+      flags:
+        --app-id=!: The app ID.
+        --backend-manager-app-id=: The app ID for the backend manager.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: generate-backend-api-models
       description: Generates a model schema for an existing backend API resource.
       flags:
@@ -18,13 +28,83 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-name=!: The name of this resource.
-    - name: remove-backend-config
-      description: Removes the AWS resources required to access the Amplify Admin UI.
+    - name: get-backend-api
+      description: Gets the details for a backend API.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-config=: Defines the resource configuration for the data model in your Amplify project.
+        --resource-name=!: The name of this resource.
+    - name: import-backend-storage
+      description: Imports an existing backend storage resource.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --bucket-name=: The name of the S3 bucket.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-name=!: The name of the storage service.
+      completion:
+        flag:
+            service-name:
+                - S3
+    - name: update-backend-auth
+      description: Updates an existing backend authentication resource.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-config=!: The resource configuration for this request object.
+        --resource-name=!: The name of this resource.
+    - name: create-backend
+      description: This operation creates a backend for an Amplify app.
+      flags:
+        --app-id=!: The app ID.
+        --app-name=!: The name of the app.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-config=: The resource configuration for creating a backend.
+        --resource-name=: The name of the resource.
+    - name: create-backend-api
+      description: Creates a new backend API resource.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-config=!: The resource configuration for this request.
+        --resource-name=!: The name of this resource.
+    - name: delete-backend-storage
+      description: Removes the specified backend storage resource.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-name=!: The name of the storage resource.
+        --service-name=!: The name of the storage service.
+      completion:
+        flag:
+            service-name:
+                - S3
+    - name: delete-token
+      description: Deletes the challenge token based on the given appId and sessionId.
       flags:
         --app-id=!: The app ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The session ID.
     - name: list-backend-jobs
       description: Lists the jobs for the backend of an Amplify app.
       flags:
@@ -41,189 +121,26 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --status=: Filters the list of response objects to include only those with the specified status.
-    - name: list-s3-buckets
-      description: The list of S3 buckets in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: Reserved for future use.
-    - name: create-backend
-      description: This operation creates a backend for an Amplify app.
+    - name: update-backend-config
+      description: Updates the AWS resources required to access the Amplify Admin UI.
       flags:
         --app-id=!: The app ID.
-        --app-name=!: The name of the app.
-        --backend-environment-name=!: The name of the backend environment.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-config=: The resource configuration for creating a backend.
-        --resource-name=: The name of the resource.
-    - name: create-backend-storage
-      description: Creates a backend storage resource.
+        --login-auth-config=: Describes the Amazon Cognito configuration for Admin UI access.
+    - name: import-backend-auth
+      description: Imports an existing backend authentication resource.
       flags:
         --app-id=!: The app ID.
         --backend-environment-name=!: The name of the backend environment.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-config=!: The resource configuration for creating backend storage.
-        --resource-name=!: The name of the storage resource.
-    - name: delete-backend-storage
-      description: Removes the specified backend storage resource.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-name=!: The name of the storage resource.
-        --service-name=!: The name of the storage service.
-      completion:
-        flag:
-            service-name:
-                - S3
-    - name: get-backend
-      description: Provides project-level details for your Amplify UI project.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-backend-api-models
-      description: Gets a model introspection schema for an existing backend API resource.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-name=!: The name of this resource.
-    - name: get-backend-auth
-      description: Gets a backend auth details.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-name=!: The name of this resource.
-    - name: create-backend-config
-      description: Creates a config object for a backend.
-      flags:
-        --app-id=!: The app ID.
-        --backend-manager-app-id=: The app ID for the backend manager.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-backend
-      description: Removes an existing environment from your Amplify project.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-backend-job
-      description: Returns information about a specific job.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for the job.
-    - name: update-backend-job
-      description: Updates a specific job.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID for the job.
-        --operation=: Filters the list of response objects to include only those with the specified operation name.
-        --status=: Filters the list of response objects to include only those with the specified status.
-    - name: update-backend-auth
-      description: Updates an existing backend authentication resource.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-config=!: The resource configuration for this request object.
-        --resource-name=!: The name of this resource.
-    - name: update-backend-storage
-      description: Updates an existing backend storage resource.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-config=!: The resource configuration for updating backend storage.
-        --resource-name=!: The name of the storage resource.
-    - name: create-backend-api
-      description: Creates a new backend API resource.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-config=!: The resource configuration for this request.
-        --resource-name=!: The name of this resource.
-    - name: remove-all-backends
-      description: Removes all backend environments from your Amplify project.
-      flags:
-        --app-id=!: The app ID.
-        --clean-amplify-app: Cleans up the Amplify Console app if this value is set to true.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-clean-amplify-app: Cleans up the Amplify Console app if this value is set to true.
-    - name: import-backend-storage
-      description: Imports an existing backend storage resource.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --bucket-name=: The name of the S3 bucket.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-name=!: The name of the storage service.
-      completion:
-        flag:
-            service-name:
-                - S3
-    - name: clone-backend
-      description: This operation clones an existing backend.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-environment-name=!: The name of the destination backend environment to be created.
-    - name: create-backend-auth
-      description: Creates a new backend authentication resource.
-      flags:
-        --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-config=!: The resource configuration for this request object.
-        --resource-name=!: The name of this resource.
-    - name: create-token
-      description: Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.
-      flags:
-        --app-id=!: The app ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-pool-id=: The ID of the Amazon Cognito identity pool.
+        --native-client-id=!: The ID of the Amazon Cognito native client.
+        --user-pool-id=!: The ID of the Amazon Cognito user pool.
+        --web-client-id=!: The ID of the Amazon Cognito web client.
     - name: delete-backend-api
       description: Deletes an existing backend API resource.
       flags:
@@ -242,18 +159,42 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --session-id=!: The session ID.
-    - name: import-backend-auth
-      description: Imports an existing backend authentication resource.
+    - name: list-s3-buckets
+      description: The list of S3 buckets in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: Reserved for future use.
+    - name: create-backend-auth
+      description: Creates a new backend authentication resource.
       flags:
         --app-id=!: The app ID.
         --backend-environment-name=!: The name of the backend environment.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-pool-id=: The ID of the Amazon Cognito identity pool.
-        --native-client-id=!: The ID of the Amazon Cognito native client.
-        --user-pool-id=!: The ID of the Amazon Cognito user pool.
-        --web-client-id=!: The ID of the Amazon Cognito web client.
+        --resource-config=!: The resource configuration for this request object.
+        --resource-name=!: The name of this resource.
+    - name: create-backend-storage
+      description: Creates a backend storage resource.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-config=!: The resource configuration for creating backend storage.
+        --resource-name=!: The name of the storage resource.
+    - name: get-backend-api-models
+      description: Gets a model introspection schema for an existing backend API resource.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-name=!: The name of this resource.
     - name: get-backend-storage
       description: Gets details for a backend storage resource.
       flags:
@@ -263,14 +204,60 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-name=!: The name of the storage resource.
-    - name: update-backend-config
-      description: Updates the AWS resources required to access the Amplify Admin UI.
+    - name: update-backend-job
+      description: Updates a specific job.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID for the job.
+        --operation=: Filters the list of response objects to include only those with the specified operation name.
+        --status=: Filters the list of response objects to include only those with the specified status.
+    - name: update-backend-storage
+      description: Updates an existing backend storage resource.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-config=!: The resource configuration for updating backend storage.
+        --resource-name=!: The name of the storage resource.
+    - name: create-token
+      description: Generates a one-time challenge code to authenticate a user into your Amplify Admin UI.
       flags:
         --app-id=!: The app ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --login-auth-config=: Describes the Amazon Cognito configuration for Admin UI access.
+    - name: delete-backend
+      description: Removes an existing environment from your Amplify project.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-backend-auth
+      description: Gets a backend auth details.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-name=!: The name of this resource.
+    - name: clone-backend
+      description: This operation clones an existing backend.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=!: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-environment-name=!: The name of the destination backend environment to be created.
     - name: delete-backend-auth
       description: Deletes an existing backend authentication resource.
       flags:
@@ -280,23 +267,36 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-name=!: The name of this resource.
-    - name: get-backend-api
-      description: Gets the details for a backend API.
+    - name: get-backend
+      description: Provides project-level details for your Amplify UI project.
+      flags:
+        --app-id=!: The app ID.
+        --backend-environment-name=: The name of the backend environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-backend-job
+      description: Returns information about a specific job.
       flags:
         --app-id=!: The app ID.
         --backend-environment-name=!: The name of the backend environment.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-config=: Defines the resource configuration for the data model in your Amplify project.
-        --resource-name=!: The name of this resource.
-    - name: update-backend-api
-      description: Updates an existing backend API resource.
+        --job-id=!: The ID for the job.
+    - name: remove-all-backends
+      description: Removes all backend environments from your Amplify project.
       flags:
         --app-id=!: The app ID.
-        --backend-environment-name=!: The name of the backend environment.
+        --clean-amplify-app: Cleans up the Amplify Console app if this value is set to true.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-config=: Defines the resource configuration for the data model in your Amplify project.
-        --resource-name=!: The name of this resource.
+        --no-clean-amplify-app: Cleans up the Amplify Console app if this value is set to true.
+    - name: remove-backend-config
+      description: Removes the AWS resources required to access the Amplify Admin UI.
+      flags:
+        --app-id=!: The app ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

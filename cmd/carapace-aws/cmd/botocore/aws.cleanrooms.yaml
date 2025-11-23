@@ -1,14 +1,387 @@
 name: cleanrooms
 description: AWS Clean Rooms Service
 commands:
-    - name: batch-get-schema
-      description: Retrieves multiple schemas by their identifiers.
+    - name: delete-id-mapping-table
+      description: Deletes an ID mapping table.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for the collaboration that the schemas belong to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --names=!: The names for the schema objects to retrieve.
+        --id-mapping-table-identifier=!: The unique identifier of the ID mapping table that you want to delete.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table that you want to delete.
+    - name: get-collaboration
+      description: Returns metadata about a collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: The identifier for the collaboration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-collaboration-privacy-budget-template
+      description: Returns details about a specified privacy budget template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: A unique identifier for one of your collaborations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --privacy-budget-template-identifier=!: A unique identifier for one of your privacy budget templates.
+    - name: get-id-mapping-table
+      description: Retrieves an ID mapping table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-mapping-table-identifier=!: The unique identifier of the ID mapping table identifier that you want to retrieve.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table that you want to retrieve.
+    - name: list-privacy-budgets
+      description: Returns detailed information about the privacy budgets in a specified membership.
+      flags:
+        --access-budget-resource-arn=: The Amazon Resource Name (ARN) of the access budget resource to filter privacy budgets by.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --privacy-budget-type=!: The privacy budget type.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            privacy-budget-type:
+                - DIFFERENTIAL_PRIVACY
+                - ACCESS_BUDGET
+    - name: update-membership
+      description: Updates a membership.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-job-result-configuration=: The default job result configuration.
+        --default-result-configuration=: The default protected query result configuration as specified by the member who can receive results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-log-status=: An indicator as to whether job logging has been enabled or disabled for the collaboration.
+        --membership-identifier=!: The unique identifier of the membership.
+        --query-log-status=: An indicator as to whether query logging has been enabled or disabled for the membership.
+      completion:
+        flag:
+            job-log-status:
+                - ENABLED
+                - DISABLED
+            query-log-status:
+                - ENABLED
+                - DISABLED
+    - name: get-privacy-budget-template
+      description: Returns details for a specified privacy budget template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
+        --privacy-budget-template-identifier=!: A unique identifier for your privacy budget template.
+    - name: list-memberships
+      description: Lists all memberships resources within the caller's account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: A filter which will return only memberships in the specified status.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - REMOVED
+                - COLLABORATION_DELETED
+    - name: start-protected-job
+      description: Creates a protected job that is started by Clean Rooms.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-configuration=: The compute configuration for the protected job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-parameters=!: The job parameters.
+        --membership-identifier=!: A unique identifier for the membership to run this job against.
+        --result-configuration=: The details needed to write the job results.
+        --type=!: The type of protected job to start.
+      completion:
+        flag:
+            type:
+                - PYSPARK
+    - name: get-collaboration-id-namespace-association
+      description: Retrieves an ID namespace association from a specific collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: The unique identifier of the collaboration that contains the ID namespace association that you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to retrieve.
+    - name: get-configured-audience-model-association
+      description: Returns information about a configured audience model association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-audience-model-association-identifier=!: A unique identifier for the configured audience model association that you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for the membership that contains the configured audience model association that you want to retrieve.
+    - name: list-collaborations
+      description: Lists collaborations the caller owns, is active in, or has been invited to.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --member-status=: The caller's status in a collaboration.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            member-status:
+                - INVITED
+                - ACTIVE
+    - name: list-schemas
+      description: Lists the schemas for relations within a collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: A unique identifier for the collaboration that the schema belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --schema-type=: If present, filter schemas by schema type.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            schema-type:
+                - TABLE
+                - ID_MAPPING_TABLE
+    - name: start-protected-query
+      description: Creates a protected query that is started by Clean Rooms.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-configuration=: The compute configuration for the protected query.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for the membership to run this query against.
+        --result-configuration=: The details needed to write the query results.
+        --sql-parameters=!: The protected SQL query parameters.
+        --type=!: The type of the protected query to be started.
+      completion:
+        flag:
+            type:
+                - SQL
+    - name: get-configured-table-analysis-rule
+      description: Retrieves a configured table analysis rule.
+      flags:
+        --analysis-rule-type=!: The analysis rule to be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-identifier=!: The unique identifier for the configured table to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            analysis-rule-type:
+                - AGGREGATION
+                - LIST
+                - CUSTOM
+    - name: get-protected-job
+      description: Returns job processing metadata.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: The identifier for a membership in a protected job instance.
+        --protected-job-identifier=!: The identifier for the protected job instance.
+    - name: delete-analysis-template
+      description: Deletes an analysis template.
+      flags:
+        --analysis-template-identifier=!: The identifier for the analysis template resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: The identifier for a membership resource.
+    - name: delete-configured-audience-model-association
+      description: Provides the information necessary to delete a configured audience model association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-audience-model-association-identifier=!: A unique identifier of the configured audience model association that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier of the membership that contains the audience model association that you want to delete.
+    - name: get-membership
+      description: Retrieves a specified membership for an identifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: The identifier for a membership resource.
+    - name: list-configured-table-associations
+      description: Lists configured table associations for a membership.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --membership-identifier=!: A unique identifier for the membership to list configured table associations for.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-configured-tables
+      description: Lists configured tables.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-privacy-budget-template
+      description: Updates the privacy budget template for the specified collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
+        --parameters=: Specifies the epsilon and noise parameters for the privacy budget template.
+        --privacy-budget-template-identifier=!: A unique identifier for your privacy budget template that you want to update.
+        --privacy-budget-type=!: Specifies the type of the privacy budget template.
+      completion:
+        flag:
+            privacy-budget-type:
+                - DIFFERENTIAL_PRIVACY
+                - ACCESS_BUDGET
+    - name: delete-id-namespace-association
+      description: Deletes an ID namespace association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to delete.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to delete.
+    - name: delete-privacy-budget-template
+      description: Deletes a privacy budget template for a specified collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
+        --privacy-budget-template-identifier=!: A unique identifier for your privacy budget template.
+    - name: get-configured-table
+      description: Retrieves a configured table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-identifier=!: The unique ID for the configured table to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-analysis-templates
+      description: Lists analysis templates that the caller owns.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --membership-identifier=!: The identifier for a membership resource.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-configured-audience-model-associations
+      description: Lists information about requested configured audience model associations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --membership-identifier=!: A unique identifier for a membership that contains the configured audience model associations that you want to retrieve.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-members
+      description: Lists all members within a collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: The identifier of the collaboration in which the members are listed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-id-namespace-association
+      description: Provides the details that are necessary to update an ID namespace association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the ID namespace association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-mapping-config=: The configuration settings for the ID mapping table.
+        --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to update.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to update.
+        --name=: A new name for the ID namespace association.
+    - name: create-configured-audience-model-association
+      description: Provides the details necessary to create a configured audience model association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-audience-model-arn=!: A unique identifier for the configured audience model that you want to associate.
+        --configured-audience-model-association-name=!: The name of the configured audience model association.
+        --description=: A description of the configured audience model association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --manage-resource-policies!: When `TRUE`, indicates that the resource policy for the configured audience model resource being associated is configured for Clean Rooms to manage permissions related to the given collaboration.
+        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
+        --no-manage-resource-policies!: When `TRUE`, indicates that the resource policy for the configured audience model resource being associated is configured for Clean Rooms to manage permissions related to the given collaboration.
+        --tags=: An optional label that you can assign to a resource when you create it.
+    - name: create-configured-table-association
+      description: Creates a configured table association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-identifier=!: A unique identifier for the configured table to be associated to.
+        --description=: A description for the configured table association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
+        --name=!: The name of the configured table association.
+        --role-arn=!: The service will assume this role to access catalog metadata and query the table.
+        --tags=: An optional label that you can assign to a resource when you create it.
+    - name: create-id-mapping-table
+      description: Creates an ID mapping table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the ID mapping table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-reference-config=!: The input reference configuration needed to create the ID mapping table.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table.
+        --name=!: A name for the ID mapping table.
+        --tags=: An optional label that you can assign to a resource when you create it.
+    - name: delete-configured-table-association-analysis-rule
+      description: Deletes an analysis rule for a configured table association.
+      flags:
+        --analysis-rule-type=!: The type of the analysis rule that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-association-identifier=!: The identiﬁer for the conﬁgured table association that's related to the analysis rule that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
+      completion:
+        flag:
+            analysis-rule-type:
+                - AGGREGATION
+                - LIST
+                - CUSTOM
     - name: get-collaboration-analysis-template
       description: Retrieves an analysis template within a collaboration.
       flags:
@@ -17,25 +390,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --collaboration-identifier=!: A unique identifier for the collaboration that the analysis templates belong to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-configured-table
-      description: Retrieves a configured table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-identifier=!: The unique ID for the configured table to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-collaboration-analysis-templates
-      description: Lists analysis templates within a collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for the collaboration that the analysis templates belong to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: list-collaboration-privacy-budgets
       description: Returns an array that summarizes each privacy budget in a specified collaboration.
       flags:
@@ -55,6 +409,169 @@ commands:
             privacy-budget-type:
                 - DIFFERENTIAL_PRIVACY
                 - ACCESS_BUDGET
+    - name: list-id-namespace-associations
+      description: Returns a list of ID namespace associations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum size of the results that is returned per call.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to view.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-privacy-budget-templates
+      description: Returns detailed information about the privacy budget templates in a specified membership.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-collaboration-id-namespace-associations
+      description: Returns a list of the ID namespace associations in a collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: The unique identifier of the collaboration that contains the ID namespace associations that you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum size of the results that is returned per call.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-collaboration-privacy-budget-templates
+      description: Returns an array that summarizes each privacy budget template in a specified collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: A unique identifier for one of your collaborations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: batch-get-schema
+      description: Retrieves multiple schemas by their identifiers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: A unique identifier for the collaboration that the schemas belong to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --names=!: The names for the schema objects to retrieve.
+    - name: create-collaboration-change-request
+      description: Creates a new change request to modify an existing collaboration.
+      flags:
+        --changes=!: The list of changes to apply to the collaboration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: The identifier of the collaboration that the change request is made against.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-configured-table
+      description: Creates a new configured table resource.
+      flags:
+        --allowed-columns=!: The columns of the underlying table that can be used by collaborations or analysis rules.
+        --analysis-method=!: The analysis method allowed for the configured tables.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the configured table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the configured table.
+        --selected-analysis-methods=: The analysis methods to enable for the configured table.
+        --table-reference=!: A reference to the table being configured.
+        --tags=: An optional label that you can assign to a resource when you create it.
+      completion:
+        flag:
+            analysis-method:
+                - DIRECT_QUERY
+                - DIRECT_JOB
+                - MULTIPLE
+    - name: create-privacy-budget-template
+      description: Creates a privacy budget template for a specified collaboration.
+      flags:
+        --auto-refresh=: How often the privacy budget refreshes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
+        --parameters=!: Specifies your parameters for the privacy budget template.
+        --privacy-budget-type=!: Specifies the type of the privacy budget template.
+        --tags=: An optional label that you can assign to a resource when you create it.
+      completion:
+        flag:
+            auto-refresh:
+                - CALENDAR_MONTH
+                - NONE
+            privacy-budget-type:
+                - DIFFERENTIAL_PRIVACY
+                - ACCESS_BUDGET
+    - name: delete-collaboration
+      description: Deletes a collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: The identifier for the collaboration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-configured-table-analysis-rule
+      description: Deletes a configured table analysis rule.
+      flags:
+        --analysis-rule-type=!: The analysis rule type to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-identifier=!: The unique identifier for the configured table that the analysis rule applies to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            analysis-rule-type:
+                - AGGREGATION
+                - LIST
+                - CUSTOM
+    - name: create-id-namespace-association
+      description: Creates an ID namespace association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the ID namespace association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-mapping-config=: The configuration settings for the ID mapping table.
+        --input-reference-config=!: The input reference configuration needed to create the ID namespace association.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association.
+        --name=!: The name for the ID namespace association.
+        --tags=: An optional label that you can assign to a resource when you create it.
+    - name: delete-membership
+      description: Deletes a specified membership.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: The identifier for a membership resource.
+    - name: list-collaboration-change-requests
+      description: Lists all change requests for a collaboration with pagination support.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: The identifier of the collaboration that the change request is made against.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: A filter to only return change requests with the specified status.
+      completion:
+        flag:
+            status:
+                - PENDING
+                - APPROVED
+                - CANCELLED
+                - DENIED
+                - COMMITTED
     - name: list-id-mapping-tables
       description: Returns a list of ID mapping tables.
       flags:
@@ -67,71 +584,113 @@ commands:
         --next-token=: The pagination token that's used to fetch the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-schemas
-      description: Lists the schemas for relations within a collaboration.
+    - name: update-collaboration
+      description: Updates collaboration metadata and can only be called by the collaboration owner.
       flags:
+        --analytics-engine=: The analytics engine.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for the collaboration that the schema belongs to.
+        --collaboration-identifier=!: The identifier for the collaboration.
+        --description=: A description of the collaboration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --schema-type=: If present, filter schemas by schema type.
-        --starting-token=: A token to specify where to start paginating.
+        --name=: A human-readable identifier provided by the collaboration owner.
       completion:
         flag:
-            schema-type:
-                - TABLE
-                - ID_MAPPING_TABLE
-    - name: create-configured-audience-model-association
-      description: Provides the details necessary to create a configured audience model association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-audience-model-arn=!: A unique identifier for the configured audience model that you want to associate.
-        --configured-audience-model-association-name=!: The name of the configured audience model association.
-        --description=: A description of the configured audience model association.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --manage-resource-policies!: When `TRUE`, indicates that the resource policy for the configured audience model resource being associated is configured for Clean Rooms to manage permissions related to the given collaboration.
-        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
-        --no-manage-resource-policies!: When `TRUE`, indicates that the resource policy for the configured audience model resource being associated is configured for Clean Rooms to manage permissions related to the given collaboration.
-        --tags=: An optional label that you can assign to a resource when you create it.
-    - name: get-membership
-      description: Retrieves a specified membership for an identifier.
+            analytics-engine:
+                - SPARK
+                - CLEAN_ROOMS_SQL
+    - name: update-protected-query
+      description: Updates the processing of a currently running query.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: The identifier for a membership resource.
-    - name: list-configured-audience-model-associations
-      description: Lists information about requested configured audience model associations.
+        --membership-identifier=!: The identifier for a member of a protected query instance.
+        --protected-query-identifier=!: The identifier for a protected query instance.
+        --target-status=!: The target status of a query.
+      completion:
+        flag:
+            target-status:
+                - CANCELLED
+    - name: create-configured-table-association-analysis-rule
+      description: Creates a new analysis rule for an associated configured table.
+      flags:
+        --analysis-rule-policy=!: The analysis rule policy that was created for the configured table association.
+        --analysis-rule-type=!: The type of analysis rule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-association-identifier=!: The unique ID for the configured table association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
+      completion:
+        flag:
+            analysis-rule-type:
+                - AGGREGATION
+                - LIST
+                - CUSTOM
+    - name: delete-member
+      description: Removes the specified member from a collaboration.
+      flags:
+        --account-id=!: The account ID of the member to remove.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: The unique identifier for the associated collaboration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-collaboration-change-request
+      description: Retrieves detailed information about a specific collaboration change request.
+      flags:
+        --change-request-identifier=!: A unique identifier for the change request to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: The identifier of the collaboration that the change request is made against.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-protected-jobs
+      description: Lists protected jobs, sorted by most recent job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results that are returned for an API request call.
-        --membership-identifier=!: A unique identifier for a membership that contains the configured audience model associations that you want to retrieve.
+        --membership-identifier=!: The identifier for the membership in the collaboration.
         --next-token=: The pagination token that's used to fetch the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists all of the tags that have been added to a resource.
+        --status=: A filter on the status of the protected job.
+      completion:
+        flag:
+            status:
+                - SUBMITTED
+                - STARTED
+                - CANCELLED
+                - CANCELLING
+                - FAILED
+                - SUCCESS
+    - name: populate-id-mapping-table
+      description: Defines the information that's necessary to populate an ID mapping table.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) associated with the resource you want to list tags on.
-    - name: preview-privacy-impact
-      description: An estimate of the number of aggregation functions that the member who can query can run given epsilon and noise parameters.
+        --id-mapping-table-identifier=!: The unique identifier of the ID mapping table that you want to populate.
+        --job-type=: The job type of the rule-based ID mapping job.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table that you want to populate.
+      completion:
+        flag:
+            job-type:
+                - BATCH
+                - INCREMENTAL
+                - DELETE_ONLY
+    - name: update-configured-audience-model-association
+      description: Provides the details necessary to update a configured audience model association.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-audience-model-association-identifier=!: A unique identifier for the configured audience model association that you want to update.
+        --description=: A new description for the configured audience model association.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
-        --parameters=!: Specifies the desired epsilon and noise parameters to preview.
+        --membership-identifier=!: A unique identifier of the membership that contains the configured audience model association that you want to update.
+        --name=: A new name for the configured audience model association.
     - name: update-configured-table-analysis-rule
       description: Updates a configured table analysis rule.
       flags:
@@ -147,213 +706,70 @@ commands:
                 - AGGREGATION
                 - LIST
                 - CUSTOM
-    - name: delete-member
-      description: Removes the specified member from a collaboration.
-      flags:
-        --account-id=!: The account ID of the member to remove.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The unique identifier for the associated collaboration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-membership
-      description: Deletes a specified membership.
+    - name: update-protected-job
+      description: Updates the processing of a currently running job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: The identifier for a membership resource.
-    - name: get-schema-analysis-rule
-      description: Retrieves a schema analysis rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for the collaboration that the schema belongs to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the schema to retrieve the analysis rule for.
-        --type=!: The type of the schema analysis rule to retrieve.
-      completion:
-        flag:
-            type:
-                - AGGREGATION
-                - LIST
-                - CUSTOM
-                - ID_MAPPING_TABLE
-    - name: update-configured-table-association-analysis-rule
-      description: Updates the analysis rule for a configured table association.
-      flags:
-        --analysis-rule-policy=!: The updated analysis rule policy for the conﬁgured table association.
-        --analysis-rule-type=!: The analysis rule type that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-association-identifier=!: The identifier for the configured table association to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
-      completion:
-        flag:
-            analysis-rule-type:
-                - AGGREGATION
-                - LIST
-                - CUSTOM
-    - name: update-id-namespace-association
-      description: Provides the details that are necessary to update an ID namespace association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for the ID namespace association.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-mapping-config=: The configuration settings for the ID mapping table.
-        --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to update.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to update.
-        --name=: A new name for the ID namespace association.
-    - name: update-privacy-budget-template
-      description: Updates the privacy budget template for the specified collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
-        --parameters=: Specifies the epsilon and noise parameters for the privacy budget template.
-        --privacy-budget-template-identifier=!: A unique identifier for your privacy budget template that you want to update.
-        --privacy-budget-type=!: Specifies the type of the privacy budget template.
-      completion:
-        flag:
-            privacy-budget-type:
-                - DIFFERENTIAL_PRIVACY
-                - ACCESS_BUDGET
-    - name: update-protected-query
-      description: Updates the processing of a currently running query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: The identifier for a member of a protected query instance.
-        --protected-query-identifier=!: The identifier for a protected query instance.
-        --target-status=!: The target status of a query.
+        --membership-identifier=!: The identifier for a member of a protected job instance.
+        --protected-job-identifier=!: The identifier of the protected job to update.
+        --target-status=!: The target status of a protected job.
       completion:
         flag:
             target-status:
                 - CANCELLED
-    - name: list-collaboration-privacy-budget-templates
-      description: Returns an array that summarizes each privacy budget template in a specified collaboration.
+    - name: delete-configured-table-association
+      description: Deletes a configured table association.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for one of your collaborations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-configured-table-analysis-rule
-      description: Creates a new analysis rule for a configured table.
-      flags:
-        --analysis-rule-policy=!: The analysis rule policy that was created for the configured table.
-        --analysis-rule-type=!: The type of analysis rule.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-identifier=!: The identifier for the configured table to create the analysis rule for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            analysis-rule-type:
-                - AGGREGATION
-                - LIST
-                - CUSTOM
-    - name: delete-analysis-template
-      description: Deletes an analysis template.
-      flags:
-        --analysis-template-identifier=!: The identifier for the analysis template resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: The identifier for a membership resource.
-    - name: update-configured-audience-model-association
-      description: Provides the details necessary to update a configured audience model association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-audience-model-association-identifier=!: A unique identifier for the configured audience model association that you want to update.
-        --description=: A new description for the configured audience model association.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier of the membership that contains the configured audience model association that you want to update.
-        --name=: A new name for the configured audience model association.
-    - name: batch-get-collaboration-analysis-template
-      description: Retrieves multiple analysis templates within a collaboration by their Amazon Resource Names (ARNs).
-      flags:
-        --analysis-template-arns=!: The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for the collaboration that the analysis templates belong to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-collaboration
-      description: Deletes a collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The identifier for the collaboration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-id-mapping-table
-      description: Deletes an ID mapping table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-mapping-table-identifier=!: The unique identifier of the ID mapping table that you want to delete.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table that you want to delete.
-    - name: get-configured-table-association-analysis-rule
-      description: Retrieves the analysis rule for a configured table association.
-      flags:
-        --analysis-rule-type=!: The type of analysis rule that you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-association-identifier=!: The identiﬁer for the conﬁgured table association that's related to the analysis rule.
+        --configured-table-association-identifier=!: The unique ID for the configured table association to be deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
+    - name: get-protected-query
+      description: Returns query processing metadata.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: The identifier for a membership in a protected query instance.
+        --protected-query-identifier=!: The identifier for a protected query instance.
+    - name: tag-resource
+      description: Tags a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) associated with the resource you want to tag.
+        --tags=!: A map of objects specifying each key name and value.
+    - name: untag-resource
+      description: Removes a tag or list of tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.
+        --tag-keys=!: A list of key names of tags to be removed.
+    - name: update-configured-table
+      description: Updates a configured table.
+      flags:
+        --allowed-columns=: The columns of the underlying table that can be used by collaborations or analysis rules.
+        --analysis-method=: The analysis method for the configured table.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-identifier=!: The identifier for the configured table to update.
+        --description=: A new description for the configured table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: A new name for the configured table.
+        --selected-analysis-methods=: The selected analysis methods for the table configuration update.
+        --table-reference=: ""
       completion:
         flag:
-            analysis-rule-type:
-                - AGGREGATION
-                - LIST
-                - CUSTOM
-    - name: list-collaboration-id-namespace-associations
-      description: Returns a list of the ID namespace associations in a collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The unique identifier of the collaboration that contains the ID namespace associations that you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum size of the results that is returned per call.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-schema
-      description: Retrieves the schema for a relation within a collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for the collaboration that the schema belongs to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the relation to retrieve the schema for.
-    - name: list-memberships
-      description: Lists all memberships resources within the caller's account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status=: A filter which will return only memberships in the specified status.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - REMOVED
-                - COLLABORATION_DELETED
+            analysis-method:
+                - DIRECT_QUERY
+                - DIRECT_JOB
+                - MULTIPLE
     - name: create-collaboration
       description: Creates a new collaboration.
       flags:
@@ -385,18 +801,188 @@ commands:
             query-log-status:
                 - ENABLED
                 - DISABLED
-    - name: create-configured-table-association
-      description: Creates a configured table association.
+    - name: create-configured-table-analysis-rule
+      description: Creates a new analysis rule for a configured table.
+      flags:
+        --analysis-rule-policy=!: The analysis rule policy that was created for the configured table.
+        --analysis-rule-type=!: The type of analysis rule.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-identifier=!: The identifier for the configured table to create the analysis rule for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            analysis-rule-type:
+                - AGGREGATION
+                - LIST
+                - CUSTOM
+    - name: get-collaboration-configured-audience-model-association
+      description: Retrieves a configured audience model association within a collaboration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-identifier=!: A unique identifier for the configured table to be associated to.
-        --description=: A description for the configured table association.
+        --collaboration-identifier=!: A unique identifier for the collaboration that the configured audience model association belongs to.
+        --configured-audience-model-association-identifier=!: A unique identifier for the configured audience model association that you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-configured-table-association-analysis-rule
+      description: Retrieves the analysis rule for a configured table association.
+      flags:
+        --analysis-rule-type=!: The type of analysis rule that you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-association-identifier=!: The identiﬁer for the conﬁgured table association that's related to the analysis rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
+      completion:
+        flag:
+            analysis-rule-type:
+                - AGGREGATION
+                - LIST
+                - CUSTOM
+    - name: get-schema
+      description: Retrieves the schema for a relation within a collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: A unique identifier for the collaboration that the schema belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the relation to retrieve the schema for.
+    - name: get-schema-analysis-rule
+      description: Retrieves a schema analysis rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: A unique identifier for the collaboration that the schema belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the schema to retrieve the analysis rule for.
+        --type=!: The type of the schema analysis rule to retrieve.
+      completion:
+        flag:
+            type:
+                - AGGREGATION
+                - LIST
+                - CUSTOM
+                - ID_MAPPING_TABLE
+    - name: list-collaboration-analysis-templates
+      description: Lists analysis templates within a collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: A unique identifier for the collaboration that the analysis templates belong to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-collaboration-configured-audience-model-associations
+      description: Lists configured audience model associations within a collaboration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: A unique identifier for the collaboration that the configured audience model association belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-analysis-template
+      description: Retrieves an analysis template.
+      flags:
+        --analysis-template-identifier=!: The identifier for the analysis template resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: The identifier for a membership resource.
+    - name: get-id-namespace-association
+      description: Retrieves an ID namespace association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to retrieve.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to retrieve.
+    - name: list-protected-queries
+      description: Lists protected queries, sorted by the most recent query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --membership-identifier=!: The identifier for the membership in the collaboration.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: A filter on the status of the protected query.
+      completion:
+        flag:
+            status:
+                - SUBMITTED
+                - STARTED
+                - CANCELLED
+                - CANCELLING
+                - FAILED
+                - SUCCESS
+                - TIMED_OUT
+    - name: list-tags-for-resource
+      description: Lists all of the tags that have been added to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) associated with the resource you want to list tags on.
+    - name: preview-privacy-impact
+      description: An estimate of the number of aggregation functions that the member who can query can run given epsilon and noise parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
-        --name=!: The name of the configured table association.
-        --role-arn=!: The service will assume this role to access catalog metadata and query the table.
-        --tags=: An optional label that you can assign to a resource when you create it.
+        --parameters=!: Specifies the desired epsilon and noise parameters to preview.
+    - name: update-analysis-template
+      description: Updates the analysis template metadata.
+      flags:
+        --analysis-template-identifier=!: The identifier for the analysis template resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the analysis template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: The identifier for a membership resource.
+    - name: delete-configured-table
+      description: Deletes a configured table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-identifier=!: The unique ID for the configured table to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-configured-table-association
+      description: Retrieves a configured table association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configured-table-association-identifier=!: The unique ID for the configured table association to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
+    - name: update-id-mapping-table
+      description: Provides the details that are necessary to update an ID mapping table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the ID mapping table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id-mapping-table-identifier=!: The unique identifier of the ID mapping table that you want to update.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
+        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table that you want to update.
+    - name: batch-get-collaboration-analysis-template
+      description: Retrieves multiple analysis templates within a collaboration by their Amazon Resource Names (ARNs).
+      flags:
+        --analysis-template-arns=!: The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collaboration-identifier=!: A unique identifier for the collaboration that the analysis templates belong to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-membership
       description: Creates a membership for a specific collaboration identifier and joins the collaboration.
       flags:
@@ -418,27 +1004,6 @@ commands:
             query-log-status:
                 - ENABLED
                 - DISABLED
-    - name: list-collaboration-change-requests
-      description: Lists all change requests for a collaboration with pagination support.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The identifier of the collaboration that the change request is made against.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status=: A filter to only return change requests with the specified status.
-      completion:
-        flag:
-            status:
-                - PENDING
-                - APPROVED
-                - CANCELLED
-                - DENIED
-                - COMMITTED
     - name: update-configured-table-association
       description: Updates a configured table association.
       flags:
@@ -449,41 +1014,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --membership-identifier=!: The unique ID for the membership that the configured table association belongs to.
         --role-arn=: The service will assume this role to access catalog metadata and query the table.
-    - name: update-membership
-      description: Updates a membership.
+    - name: update-configured-table-association-analysis-rule
+      description: Updates the analysis rule for a configured table association.
       flags:
+        --analysis-rule-policy=!: The updated analysis rule policy for the conﬁgured table association.
+        --analysis-rule-type=!: The analysis rule type that you want to update.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-job-result-configuration=: The default job result configuration.
-        --default-result-configuration=: The default protected query result configuration as specified by the member who can receive results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-log-status=: An indicator as to whether job logging has been enabled or disabled for the collaboration.
-        --membership-identifier=!: The unique identifier of the membership.
-        --query-log-status=: An indicator as to whether query logging has been enabled or disabled for the membership.
-      completion:
-        flag:
-            job-log-status:
-                - ENABLED
-                - DISABLED
-            query-log-status:
-                - ENABLED
-                - DISABLED
-    - name: get-analysis-template
-      description: Retrieves an analysis template.
-      flags:
-        --analysis-template-identifier=!: The identifier for the analysis template resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: The identifier for a membership resource.
-    - name: create-configured-table-association-analysis-rule
-      description: Creates a new analysis rule for an associated configured table.
-      flags:
-        --analysis-rule-policy=!: The analysis rule policy that was created for the configured table association.
-        --analysis-rule-type=!: The type of analysis rule.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-association-identifier=!: The unique ID for the configured table association.
+        --configured-table-association-identifier=!: The identifier for the configured table association to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
       completion:
@@ -492,176 +1030,6 @@ commands:
                 - AGGREGATION
                 - LIST
                 - CUSTOM
-    - name: delete-configured-audience-model-association
-      description: Provides the information necessary to delete a configured audience model association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-audience-model-association-identifier=!: A unique identifier of the configured audience model association that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier of the membership that contains the audience model association that you want to delete.
-    - name: delete-configured-table-analysis-rule
-      description: Deletes a configured table analysis rule.
-      flags:
-        --analysis-rule-type=!: The analysis rule type to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-identifier=!: The unique identifier for the configured table that the analysis rule applies to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            analysis-rule-type:
-                - AGGREGATION
-                - LIST
-                - CUSTOM
-    - name: get-collaboration-privacy-budget-template
-      description: Returns details about a specified privacy budget template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for one of your collaborations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --privacy-budget-template-identifier=!: A unique identifier for one of your privacy budget templates.
-    - name: get-configured-audience-model-association
-      description: Returns information about a configured audience model association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-audience-model-association-identifier=!: A unique identifier for the configured audience model association that you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for the membership that contains the configured audience model association that you want to retrieve.
-    - name: start-protected-query
-      description: Creates a protected query that is started by Clean Rooms.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-configuration=: The compute configuration for the protected query.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for the membership to run this query against.
-        --result-configuration=: The details needed to write the query results.
-        --sql-parameters=!: The protected SQL query parameters.
-        --type=!: The type of the protected query to be started.
-      completion:
-        flag:
-            type:
-                - SQL
-    - name: list-analysis-templates
-      description: Lists analysis templates that the caller owns.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --membership-identifier=!: The identifier for a membership resource.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-protected-job
-      description: Creates a protected job that is started by Clean Rooms.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-configuration=: The compute configuration for the protected job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-parameters=!: The job parameters.
-        --membership-identifier=!: A unique identifier for the membership to run this job against.
-        --result-configuration=: The details needed to write the job results.
-        --type=!: The type of protected job to start.
-      completion:
-        flag:
-            type:
-                - PYSPARK
-    - name: update-protected-job
-      description: Updates the processing of a currently running job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: The identifier for a member of a protected job instance.
-        --protected-job-identifier=!: The identifier of the protected job to update.
-        --target-status=!: The target status of a protected job.
-      completion:
-        flag:
-            target-status:
-                - CANCELLED
-    - name: create-id-namespace-association
-      description: Creates an ID namespace association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the ID namespace association.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-mapping-config=: The configuration settings for the ID mapping table.
-        --input-reference-config=!: The input reference configuration needed to create the ID namespace association.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association.
-        --name=!: The name for the ID namespace association.
-        --tags=: An optional label that you can assign to a resource when you create it.
-    - name: delete-configured-table-association
-      description: Deletes a configured table association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-association-identifier=!: The unique ID for the configured table association to be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
-    - name: get-collaboration-change-request
-      description: Retrieves detailed information about a specific collaboration change request.
-      flags:
-        --change-request-identifier=!: A unique identifier for the change request to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The identifier of the collaboration that the change request is made against.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-configured-table
-      description: Updates a configured table.
-      flags:
-        --allowed-columns=: The columns of the underlying table that can be used by collaborations or analysis rules.
-        --analysis-method=: The analysis method for the configured table.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-identifier=!: The identifier for the configured table to update.
-        --description=: A new description for the configured table.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: A new name for the configured table.
-        --selected-analysis-methods=: The selected analysis methods for the table configuration update.
-        --table-reference=: ""
-      completion:
-        flag:
-            analysis-method:
-                - DIRECT_QUERY
-                - DIRECT_JOB
-                - MULTIPLE
-    - name: get-collaboration
-      description: Returns metadata about a collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The identifier for the collaboration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: populate-id-mapping-table
-      description: Defines the information that's necessary to populate an ID mapping table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-mapping-table-identifier=!: The unique identifier of the ID mapping table that you want to populate.
-        --job-type=: The job type of the rule-based ID mapping job.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table that you want to populate.
-      completion:
-        flag:
-            job-type:
-                - BATCH
-                - INCREMENTAL
-                - DELETE_ONLY
-    - name: delete-privacy-budget-template
-      description: Deletes a privacy budget template for a specified collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
-        --privacy-budget-template-identifier=!: A unique identifier for your privacy budget template.
     - name: batch-get-schema-analysis-rule
       description: Retrieves multiple analysis rule schemas.
       flags:
@@ -690,371 +1058,3 @@ commands:
             format:
                 - SQL
                 - PYSPARK_1_0
-    - name: delete-configured-table
-      description: Deletes a configured table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-identifier=!: The unique ID for the configured table to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-configured-table-association-analysis-rule
-      description: Deletes an analysis rule for a configured table association.
-      flags:
-        --analysis-rule-type=!: The type of the analysis rule that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-association-identifier=!: The identiﬁer for the conﬁgured table association that's related to the analysis rule that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
-      completion:
-        flag:
-            analysis-rule-type:
-                - AGGREGATION
-                - LIST
-                - CUSTOM
-    - name: list-collaboration-configured-audience-model-associations
-      description: Lists configured audience model associations within a collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for the collaboration that the configured audience model association belongs to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-analysis-template
-      description: Updates the analysis template metadata.
-      flags:
-        --analysis-template-identifier=!: The identifier for the analysis template resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for the analysis template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: The identifier for a membership resource.
-    - name: list-collaborations
-      description: Lists collaborations the caller owns, is active in, or has been invited to.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --member-status=: The caller's status in a collaboration.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            member-status:
-                - INVITED
-                - ACTIVE
-    - name: create-collaboration-change-request
-      description: Creates a new change request to modify an existing collaboration.
-      flags:
-        --changes=!: The list of changes to apply to the collaboration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The identifier of the collaboration that the change request is made against.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-configured-table
-      description: Creates a new configured table resource.
-      flags:
-        --allowed-columns=!: The columns of the underlying table that can be used by collaborations or analysis rules.
-        --analysis-method=!: The analysis method allowed for the configured tables.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the configured table.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the configured table.
-        --selected-analysis-methods=: The analysis methods to enable for the configured table.
-        --table-reference=!: A reference to the table being configured.
-        --tags=: An optional label that you can assign to a resource when you create it.
-      completion:
-        flag:
-            analysis-method:
-                - DIRECT_QUERY
-                - DIRECT_JOB
-                - MULTIPLE
-    - name: get-collaboration-id-namespace-association
-      description: Retrieves an ID namespace association from a specific collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The unique identifier of the collaboration that contains the ID namespace association that you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to retrieve.
-    - name: list-configured-tables
-      description: Lists configured tables.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-privacy-budgets
-      description: Returns detailed information about the privacy budgets in a specified membership.
-      flags:
-        --access-budget-resource-arn=: The Amazon Resource Name (ARN) of the access budget resource to filter privacy budgets by.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --privacy-budget-type=!: The privacy budget type.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            privacy-budget-type:
-                - DIFFERENTIAL_PRIVACY
-                - ACCESS_BUDGET
-    - name: untag-resource
-      description: Removes a tag or list of tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.
-        --tag-keys=!: A list of key names of tags to be removed.
-    - name: create-privacy-budget-template
-      description: Creates a privacy budget template for a specified collaboration.
-      flags:
-        --auto-refresh=: How often the privacy budget refreshes.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
-        --parameters=!: Specifies your parameters for the privacy budget template.
-        --privacy-budget-type=!: Specifies the type of the privacy budget template.
-        --tags=: An optional label that you can assign to a resource when you create it.
-      completion:
-        flag:
-            auto-refresh:
-                - CALENDAR_MONTH
-                - NONE
-            privacy-budget-type:
-                - DIFFERENTIAL_PRIVACY
-                - ACCESS_BUDGET
-    - name: get-collaboration-configured-audience-model-association
-      description: Retrieves a configured audience model association within a collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: A unique identifier for the collaboration that the configured audience model association belongs to.
-        --configured-audience-model-association-identifier=!: A unique identifier for the configured audience model association that you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-id-mapping-table
-      description: Retrieves an ID mapping table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-mapping-table-identifier=!: The unique identifier of the ID mapping table identifier that you want to retrieve.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table that you want to retrieve.
-    - name: update-collaboration
-      description: Updates collaboration metadata and can only be called by the collaboration owner.
-      flags:
-        --analytics-engine=: The analytics engine.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The identifier for the collaboration.
-        --description=: A description of the collaboration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: A human-readable identifier provided by the collaboration owner.
-      completion:
-        flag:
-            analytics-engine:
-                - SPARK
-                - CLEAN_ROOMS_SQL
-    - name: get-id-namespace-association
-      description: Retrieves an ID namespace association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to retrieve.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to retrieve.
-    - name: get-protected-job
-      description: Returns job processing metadata.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: The identifier for a membership in a protected job instance.
-        --protected-job-identifier=!: The identifier for the protected job instance.
-    - name: get-protected-query
-      description: Returns query processing metadata.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: The identifier for a membership in a protected query instance.
-        --protected-query-identifier=!: The identifier for a protected query instance.
-    - name: list-id-namespace-associations
-      description: Returns a list of ID namespace associations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum size of the results that is returned per call.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to view.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-members
-      description: Lists all members within a collaboration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collaboration-identifier=!: The identifier of the collaboration in which the members are listed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Tags a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) associated with the resource you want to tag.
-        --tags=!: A map of objects specifying each key name and value.
-    - name: update-id-mapping-table
-      description: Provides the details that are necessary to update an ID mapping table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for the ID mapping table.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-mapping-table-identifier=!: The unique identifier of the ID mapping table that you want to update.
-        --kms-key-arn=: The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table that you want to update.
-    - name: create-id-mapping-table
-      description: Creates an ID mapping table.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the ID mapping table.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-reference-config=!: The input reference configuration needed to create the ID mapping table.
-        --kms-key-arn=: The Amazon Resource Name (ARN) of the Amazon Web Services KMS key.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID mapping table.
-        --name=!: A name for the ID mapping table.
-        --tags=: An optional label that you can assign to a resource when you create it.
-    - name: get-configured-table-analysis-rule
-      description: Retrieves a configured table analysis rule.
-      flags:
-        --analysis-rule-type=!: The analysis rule to be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-identifier=!: The unique identifier for the configured table to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            analysis-rule-type:
-                - AGGREGATION
-                - LIST
-                - CUSTOM
-    - name: get-configured-table-association
-      description: Retrieves a configured table association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configured-table-association-identifier=!: The unique ID for the configured table association to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for the membership that the configured table association belongs to.
-    - name: get-privacy-budget-template
-      description: Returns details for a specified privacy budget template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
-        --privacy-budget-template-identifier=!: A unique identifier for your privacy budget template.
-    - name: list-configured-table-associations
-      description: Lists configured table associations for a membership.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --membership-identifier=!: A unique identifier for the membership to list configured table associations for.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-privacy-budget-templates
-      description: Returns detailed information about the privacy budget templates in a specified membership.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-protected-jobs
-      description: Lists protected jobs, sorted by most recent job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --membership-identifier=!: The identifier for the membership in the collaboration.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status=: A filter on the status of the protected job.
-      completion:
-        flag:
-            status:
-                - SUBMITTED
-                - STARTED
-                - CANCELLED
-                - CANCELLING
-                - FAILED
-                - SUCCESS
-    - name: list-protected-queries
-      description: Lists protected queries, sorted by the most recent query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that are returned for an API request call.
-        --membership-identifier=!: The identifier for the membership in the collaboration.
-        --next-token=: The pagination token that's used to fetch the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status=: A filter on the status of the protected query.
-      completion:
-        flag:
-            status:
-                - SUBMITTED
-                - STARTED
-                - CANCELLED
-                - CANCELLING
-                - FAILED
-                - SUCCESS
-                - TIMED_OUT
-    - name: delete-id-namespace-association
-      description: Deletes an ID namespace association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to delete.
-        --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to delete.
